@@ -1,0 +1,9 @@
+{% if latest_character_list %}
+    <ul>
+    {% for character in latest_character_list %}
+        <li><a href="/collector/{{ character.id }}/">{{ character.full_name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No characters are available.</p>
+{% endif %} 

@@ -1,0 +1,15 @@
+<h1>{{ character.full_name }}</h1>
+<h2>Primary Attributes</h2>
+<table>
+<tr><th>STR</th><td>{{character.PA_STR}}</td><th>CON</th><td>{{character.PA_CON}}</td></tr>
+<tr><th>BOD</th><td>{{character.PA_BOD}}</td><th>MOV</th><td>{{character.PA_MOV}}</td></tr>
+</table>
+
+<h2>Secondaries Attributes</h2>
+
+<h2>Skills</h2>
+<ul>
+{% for skill in character.skill_set.all %}
+    <li>{{ skill.skill_ref.reference }} {{ skill.value }}</li>
+{% endfor %}
+</ul>
