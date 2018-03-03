@@ -1,3 +1,26 @@
+<!doctype html>
+<html>
+<head>
+{% load static %}
+<title>Dramatis Personae Collector</title>
+<link rel="stylesheet" type="text/css" href="{% static 'collector/styles.css' %}" />
+</head>
+<body>
+
+<div class='wrapper'>
+<div class='logo'>DP</div>
+<div class='title'>Collector it is !</div>
+
+<div class='menu'>
+	<button class='new'>New</button>
+	<button class='compile'>Compile</button>
+	<button class='stats'>Statistics</button>
+	<button class='check'>Check</button>
+
+</div>
+
+
+<div class='list'>
 {% if latest_character_list %}
     <ul>
     {% for character in latest_character_list %}
@@ -7,3 +30,9 @@
 {% else %}
     <p>No characters are available.</p>
 {% endif %} 
+</div>
+
+<div class='details'></div>
+</div>
+</body>
+</html>
