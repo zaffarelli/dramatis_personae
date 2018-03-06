@@ -1,3 +1,7 @@
+@font-face {
+  font-family: 'ElGoth';
+  /*src:  url('Elementary_Gothic_Bookhand.otf')*/
+  src: url("AWAKENNING Personal Use.ttf"); }
 body .wrapper {
   display: grid;
   width: 100%;
@@ -41,6 +45,32 @@ body .wrapper {
     background: gray;
     border-radius: 5px;
     grid-column: 3 / 10;
-    grid-row: 3 / 10; }
+    grid-row: 3 / 10;
+    padding: 5px;
+    font-family: sans-serif;
+    font-size: 0.93em; }
+    body .wrapper .details table.stats {
+      display: inline-block;
+      border: 1px solid black;
+      border-radius: 6px; }
+    body .wrapper .details H1 {
+      font-family: ElGoth;
+      font-weight: Normal; }
+body .btn {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+  width: 60px;
+  height: 20px;
+  border: 2px solid gray;
+  border-radius: 5px;
+  background: silver;
+  color: black;
+  text-decoration: none;
+  padding: 5px;
+  text-align: center; }
+  body .btn:hover {
+    background: #303030;
+    color: white; }
 
 /*# sourceMappingURL=styles.css.map */

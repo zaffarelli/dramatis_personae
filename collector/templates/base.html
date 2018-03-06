@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{% block title %}{% endblock %}</title>
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'collector/styles.css' %}" />
+    </head>
+    <body>
+        <div class='wrapper'>
+            <div class="logo">
+                {% block logo %}
+                {% endblock %}
+            </div>
+            <div class="title">
+                {% block page_title %}
+                {% endblock %}
+            </div>
+            <div class="menu">
+                {% block menu %}
+                {% endblock %}
+            </div>
+
+            <div class="list">
+                {% block list %}
+                {% endblock %}
+            </div>
+            <div class="details">
+                {% block details %}
+                {% endblock %}
+            </div>
+        </div>
+    </body>
+</html>

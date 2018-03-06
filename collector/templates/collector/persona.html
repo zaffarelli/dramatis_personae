@@ -1,11 +1,30 @@
+{% extends "base.html" %}
+
+
+{% block menu %}
+	<a class="btn" href="/collector/">List</a>
+{% endblock %}
+
+{% block details %}
 <h1>{{ character.full_name }}</h1>
 <h2>Primary Attributes</h2>
-<table>
+<table class="stats" id="phy">
 <tr><th>STR</th><td>{{character.PA_STR}}</td><th>CON</th><td>{{character.PA_CON}}</td></tr>
 <tr><th>BOD</th><td>{{character.PA_BOD}}</td><th>MOV</th><td>{{character.PA_MOV}}</td></tr>
 </table>
 
-<h2>Secondaries Attributes</h2>
+<table class="stats" id="spi">
+<tr><th>INT</th><td>{{character.PA_INT}}</td><th>WIL</th><td>{{character.PA_WIL}}</td></tr>
+<tr><th>TEM</th><td>{{character.PA_TEM}}</td><th>PRE</th><td>{{character.PA_PRE}}</td></tr>
+</table>
+
+<table class="stats" id="com">
+<tr><th>TEC</th><td>{{character.PA_TEC}}</td><th>REF</th><td>{{character.PA_REF}}</td></tr>
+<tr><th>AGI</th><td>{{character.PA_AGI}}</td><th>AWA</th><td>{{character.PA_AWA}}</td></tr>
+</table>
+
+
+<h2>Secondary Attributes</h2>
 
 <h2>Skills</h2>
 <ul>
@@ -13,3 +32,5 @@
     <li>{{ skill.skill_ref.reference }} {{ skill.value }}</li>
 {% endfor %}
 </ul>
+
+{% endblock details %}
