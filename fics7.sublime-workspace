@@ -1,0 +1,506 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"know",
+				"knowledge_bs_path"
+			],
+			[
+				"bs",
+				"knowledge_bs_path"
+			],
+			[
+				"appl",
+				"application_admin"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "collector/models.py",
+			"settings":
+			{
+				"buffer_size": 2067,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Packages/Python/Python.sublime-build",
+					""
+				],
+				[
+					"Packages/Python/Python.sublime-build",
+					"Syntax Check"
+				]
+			],
+			[
+				"Packages/Python/Python.sublime-build",
+				""
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 221.0,
+		"last_filter": "form",
+		"selected_items":
+		[
+			[
+				"form",
+				"Pretty Ruby: Format"
+			],
+			[
+				"p",
+				"Pretty Ruby: Format"
+			],
+			[
+				"for",
+				"Pretty Ruby: Format"
+			],
+			[
+				"key",
+				"Preferences: Key Bindings"
+			],
+			[
+				"s",
+				"SassBeautify"
+			],
+			[
+				"pyth",
+				"Build With: Python - Syntax Check"
+			],
+			[
+				"pac",
+				"Package Control: Install Package"
+			],
+			[
+				"markd",
+				"Set Syntax: Markdown"
+			],
+			[
+				"packa",
+				"Package Control: Install Package"
+			],
+			[
+				"Pac",
+				"Package Control: Install Package"
+			],
+			[
+				"prv",
+				"PackageResourceViewer: Open Resource"
+			],
+			[
+				"select col",
+				"UI: Select Color Scheme"
+			],
+			[
+				"color",
+				"Package Control: Upgrade/Overwrite All Packages"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"remove p",
+				"Package Control: Remove Package"
+			],
+			[
+				"PackageIn",
+				"Package Control: Disable Package"
+			],
+			[
+				"Package ",
+				"Package Control: Install Package"
+			],
+			[
+				"Remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"Remove Package",
+				"Package Control: Remove Package"
+			],
+			[
+				"remve",
+				"Package Control: Remove Package"
+			],
+			[
+				"pack",
+				"Package Control: Remove Package"
+			],
+			[
+				"sublimelinter: sh",
+				"SublimeLinter: Show All Errors"
+			],
+			[
+				"package control: insta",
+				"Package Control: Install Package"
+			],
+			[
+				"package control: ins",
+				"Package Control: Install Package"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"git",
+				"Package Control: Install Package"
+			],
+			[
+				"tall pac",
+				"Package Control: Install Package"
+			],
+			[
+				"ins",
+				"Install Package Control"
+			]
+		],
+		"width": 479.0
+	},
+	"console":
+	{
+		"height": 130.0,
+		"history":
+		[
+			"python3 -m django --version",
+			"prv"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/home/zaffarelli/Projects/fics7",
+		"/home/zaffarelli/Projects/fics7/collector",
+		"/home/zaffarelli/Projects/fics7/collector/migrations",
+		"/home/zaffarelli/Projects/fics7/fics7"
+	],
+	"file_history":
+	[
+		"/home/zaffarelli/Projects/fence/app/views/knowledge_bs/_form.html.erb",
+		"/home/zaffarelli/Projects/fence/app/views/knowledge_bs/update.js.erb",
+		"/home/zaffarelli/Projects/fence/app/assets/stylesheets/domains.scss",
+		"/home/zaffarelli/Projects/fence/app/models/knowledge_b.rb",
+		"/home/zaffarelli/Projects/fence/app/services/impex.rb",
+		"/home/zaffarelli/Projects/fence/app/views/layouts/_modal_ccm.html.erb",
+		"/home/zaffarelli/Projects/fence/config/routes.rb",
+		"/home/zaffarelli/Projects/fence/app/views/knowledge_bs/edit.js.erb",
+		"/home/zaffarelli/Projects/fence/app/views/users/new.js.erb",
+		"/home/zaffarelli/Projects/fence/app/controllers/domains_controller.rb",
+		"/home/zaffarelli/Projects/fence/app/views/users/_form.html.erb",
+		"/home/zaffarelli/Projects/fence/config/locales/en.yml",
+		"/home/zaffarelli/Projects/fence/app/views/knowledge_bs/new.js.erb",
+		"/home/zaffarelli/Projects/fence/app/views/knowledge_bs/import_modal.js.erb",
+		"/home/zaffarelli/Projects/fence/app/views/knowledge_bs/export_modal.js.erb",
+		"/home/zaffarelli/Projects/fence/app/views/users/edit_password.js.erb",
+		"/home/zaffarelli/Projects/fence/app/views/users/edit.js.erb",
+		"/home/zaffarelli/Projects/fence/app/views/users/index.html.erb",
+		"/home/zaffarelli/Projects/fence/app/controllers/projects_controller.rb",
+		"/home/zaffarelli/Projects/fence/app/controllers/pages_controller.rb",
+		"/home/zaffarelli/Projects/fence/app/views/users/show.html.erb",
+		"/home/zaffarelli/Projects/fence/app/assets/stylesheets/modal_ccm.scss",
+		"/home/zaffarelli/Projects/fence/app/assets/stylesheets/application.scss",
+		"/home/zaffarelli/Projects/fence/app/controllers/users_controller.rb",
+		"/home/zaffarelli/Projects/fence/app/models/company.rb",
+		"/home/zaffarelli/Projects/fence/app/views/knowledge_bs/show.html.erb",
+		"/home/zaffarelli/Projects/fence/app/views/projects/_form.html.erb",
+		"/home/zaffarelli/Projects/fence/db/migrate/20180216104358_obliterate_company.rb",
+		"/home/zaffarelli/Projects/fence/db/migrate/20180213151244_remove_company.rb",
+		"/home/zaffarelli/Projects/fence/db/structure.sql",
+		"/home/zaffarelli/Projects/fence/db/seeds.rb",
+		"/home/zaffarelli/Projects/fence/db/migrate/20110603122400_create_companies.rb",
+		"/home/zaffarelli/Projects/fence/app/models/user.rb",
+		"/home/zaffarelli/Projects/fence/app/views/layouts/_header_project.html.erb",
+		"/home/zaffarelli/Projects/fence/app/assets/stylesheets/style.scss",
+		"/home/zaffarelli/Projects/fence/app/helpers/sessions_helper.rb",
+		"/home/zaffarelli/Projects/fence/app/views/users/new.html.erb",
+		"/home/zaffarelli/Projects/fence/app/views/companies/index.html.erb",
+		"/home/zaffarelli/Projects/fence/app/views/domains/new.js.erb",
+		"/home/zaffarelli/Projects/fence/app/views/domains/_form.html.erb",
+		"/home/zaffarelli/Projects/fence/app/views/domains/index.html.erb",
+		"/home/zaffarelli/Projects/fence/app/views/knowledge_bs/index.html.erb",
+		"/home/zaffarelli/Projects/AIRSHIELD/2018/tools/13_ADS/airshield.html",
+		"/home/zaffarelli/Projects/AIRSHIELD/2018/cve-aggregation-rtd/airshield_initial_install_and_config.md",
+		"/home/zaffarelli/Projects/AIRSHIELD/TOOLS/CMarkSink/13/stylesheet.css",
+		"/home/zaffarelli/Projects/AIRSHIELD/2018/cve-aggregation-rtd/airshield_users_management.md",
+		"/home/zaffarelli/Projects/AIRSHIELD/2018/cve-aggregation-rtd/airshield.md",
+		"/home/zaffarelli/Projects/AIRSHIELD/2018/selenium/STS for AirShield/200_AI",
+		"/home/zaffarelli/Projects/AIRSHIELD/2018/selenium/STS for AirShield/666_Report",
+		"/home/zaffarelli/Projects/AIRSHIELD/2018/selenium/STS for AirShield/002_Configuration",
+		"/home/zaffarelli/Projects/AIRSHIELD/2018/tools/cmarksink/cmarksink.py",
+		"/home/zaffarelli/.config/sublime-text-3/Packages/User/alex.sublime-build",
+		"/home/zaffarelli/Projects/AIRSHIELD/2018/tools/cmarksink/cmarksink_renderer.py",
+		"/home/zaffarelli/Projects/AIRSHIELD/2018/tools/cmarksink/cmarksink.yml",
+		"/home/zaffarelli/Projects/AIRSHIELD/2018/cve-aggregation-rtd/airshield_vc_installation.md",
+		"/home/zaffarelli/Projects/fence/rescue/database.alex.yml",
+		"/home/zaffarelli/.config/sublime-text-3/Packages/User/Package Control.sublime-settings",
+		"/home/zaffarelli/Projects/AIRSHIELD/2018/tools/CMarkSink/cmarksink.py",
+		"/home/zaffarelli/.config/sublime-text-3/Packages/User/SublimeLinter/Monokai (SL).tmTheme",
+		"/home/zaffarelli/Projects/fence/spec/spec_helper.rb",
+		"/home/zaffarelli/Projects/fence/spec/selenium/Ruby_RSPEC_Webdriver_Export/selenium_configuration.rb",
+		"/home/zaffarelli/Projects/fence/spec/selenium/Ruby_RSPEC_Webdriver_Export/012_KB.rb",
+		"/home/zaffarelli/.config/sublime-text-3/Packages/Color Scheme - Default/Monokai.tmTheme",
+		"/home/zaffarelli/Projects/fence/spec/selenium/Ruby_RSPEC_Webdriver_Export/020_Domain.rb",
+		"/home/zaffarelli/Projects/fence/spec/selenium/Ruby_RSPEC_Webdriver_Export/202_Identify_PA.rb",
+		"/home/zaffarelli/Projects/fence/spec/selenium/Ruby_RSPEC_Webdriver_Export/015_User.rb",
+		"/home/zaffarelli/Projects/fence/spec/models/generic_threat_spec.rb",
+		"/home/zaffarelli/Projects/fence/spec/selenium/Ruby_RSPEC_Webdriver_Export/selenium_shared_examples.rb",
+		"/home/zaffarelli/Projects/fence/spec/selenium/Ruby_RSPEC_Webdriver_Export/selenium_toolbox.rb",
+		"/home/zaffarelli/Projects/fence/spec/selenium/Ruby_RSPEC_Webdriver_Export/102_Context.rb",
+		"/home/zaffarelli/Projects/fence/spec/selenium/Ruby_RSPEC_Webdriver_Export/000_Configuration.rb",
+		"/home/zaffarelli/.config/sublime-text-3/Packages/User/RuboCop.sublime-settings",
+		"/home/zaffarelli/Projects/fence/selenium/STS FOR FENCE 2.2/RubyExport_RemoteControl/fulltestsuite.rb",
+		"/home/zaffarelli/Projects/fence/selenium/STS FOR FENCE 2.2/RubyExport_RemoteControl/STSFF2.2_spec.rb",
+		"/home/zaffarelli/Projects/fence/selenium/LIB_DESIGN/ParameterizeTestCase",
+		"/home/zaffarelli/Projects/fence/selenium/LIB_DESIGN/LibDesign",
+		"/home/zaffarelli/Projects/fence/selenium/STS FOR FENCE 2.2/RubyExport_RemoteControl/000_Configuration.rb",
+		"/home/zaffarelli/Projects/fence/selenium/STS FOR FENCE 2.2/BUILDER_TEST_SUITE",
+		"/home/zaffarelli/Projects/FENCE/fence/selenium/v2.1C BUILDER SELENIUM TEST SUITE/000_Configuration",
+		"/home/zaffarelli/Projects/FENCE/fence/app/controllers/impact_criteria_controller.rb",
+		"/home/zaffarelli/Projects/FENCE/fence/app/controllers/impact_areas_controller.rb",
+		"/home/zaffarelli/Projects/FENCE/fence/app/datatables/mother_of_all_datatable.rb.orig",
+		"/home/zaffarelli/Projects/FENCE/fence/app/assets/javascripts/impact_criteria.js.coffee",
+		"/home/zaffarelli/Projects/FENCE/fence/app/assets/javascripts/d3.min.js",
+		"/home/zaffarelli/Projects/FENCE/fence/app/assets/javascripts/estimation_likelihood.js",
+		"/home/zaffarelli/Projects/FENCE/fence/app/assets/javascripts/jit-yc.js",
+		"/home/zaffarelli/Projects/FENCE/fence/app/assets/javascripts/modernizr-2.5.3.min.js",
+		"/home/zaffarelli/Projects/Stable/fence 2.1/config/database.yml",
+		"/home/zaffarelli/Projects/FENCE/fence/app/services/airbus_arm_export.rb",
+		"/home/zaffarelli/Projects/FENCE/fence/selenium/v2.1C BUILDER SELENIUM TEST SUITE/BUILDER_TEST_SUITE",
+		"/home/zaffarelli/Projects/FENCE/fence/selenium/v2.1C BUILDER SELENIUM TEST SUITE/001_Resources_PAT",
+		"/home/zaffarelli/Projects/FENCE/fence/app/assets/javascripts/table_component.js.coffee",
+		"/home/zaffarelli/Projects/FENCE/fence/config/database.yml"
+	],
+	"find":
+	{
+		"height": 23.0
+	},
+	"find_in_files":
+	{
+		"height": 102.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "collector/models.py",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 2067,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"git_gutter_is_enabled": true,
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 630.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 23.0
+	},
+	"input":
+	{
+		"height": 36.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 92.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.markdown":
+	{
+		"height": 288.0
+	},
+	"output.mdpopups":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "Packages/Python/Python.sublime-build",
+	"project": "fics7.sublime-project",
+	"replace":
+	{
+		"height": 42.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"impe",
+				"app/services/impex.rb"
+			],
+			[
+				"routes",
+				"config/routes.rb"
+			],
+			[
+				"index",
+				"app/views/knowledge_bs/index.html.erb"
+			],
+			[
+				"style",
+				"app/assets/stylesheets/style.scss"
+			],
+			[
+				"styles.scss",
+				"app/assets/stylesheets/domains.scss"
+			],
+			[
+				"knowledge_b",
+				"app/controllers/knowledge_bs_controller.rb"
+			],
+			[
+				"user_con",
+				"app/controllers/users_controller.rb"
+			],
+			[
+				"",
+				"app/controllers/knowledge_bs_controller.rb"
+			],
+			[
+				"route",
+				"config/routes.rb"
+			],
+			[
+				"user_contro",
+				"app/controllers/users_controller.rb"
+			],
+			[
+				"user",
+				"app/controllers/users_controller.rb"
+			],
+			[
+				"rout",
+				"config/routes.rb"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 392.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 452.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 431.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

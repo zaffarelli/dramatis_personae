@@ -10,6 +10,7 @@ $fics_darker: darken($fics_back, 20%);
 }
 
 body {
+    background: $fics_darker;
     & .wrapper {
         display: grid;
         width: 100%;
