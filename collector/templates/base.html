@@ -8,6 +8,7 @@
         <link rel="stylesheet" type="text/css" href="{% static 'collector/styles.css' %}" />
     </head>
     <body>
+				<header></header>
         <div class='wrapper'>
             <div class="logo">
                 {% block logo %}
@@ -31,5 +32,9 @@
                 {% endblock %}
             </div>
         </div>
+        <footer></footer>
+        <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+				<script src="{% static 'js/app.js' %}"></script>
+				{% block javascript %}{% endblock %}
     </body>
 </html>

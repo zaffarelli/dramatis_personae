@@ -9,19 +9,18 @@ Personae Index
 {% endblock %}
 
 {% block menu %}
-	<button class='new'>New</button>
-	<button class='compile'>Compile</button>
-	<button class='stats'>Statistics</button>
-	<button class='check'>Check</button>                    
+	<a class="btn" href="/">List</a>
+	<a class='btn' href="add/persona/">New</a>
+	<a class='btn' href="edit/persona/{{ character.id }}/">Edit</a>
 {% endblock %}
 
 {% block list %}
 {% if latest_character_list %}
-    <ul>
-    {% for character in latest_character_list %}
-        <li><a href="/collector/{{ character.id }}/">{{ character.full_name }}</a></li>
+    <ol>
+    {% for character in latest_character_list %} 
+        <li><a href="view/persona/{{ character.id }}/">{{ character.full_name }}</a></li>
     {% endfor %}
-    </ul>
+    </ol>
 {% else %}
     <p>No characters are available.</p>
 {% endif %} 

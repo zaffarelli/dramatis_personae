@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+
+{% block menu %}
+	<a class="btn" href="/">List</a>
+	<a class='btn' href="/edit/persona/{{ character.id }}/">Edit</a>	
+{% endblock %}
+
+{% block details %}
+<form method="POST" action="">
+	{% csrf_token %}
+	{{ form }}
+	<input type="submit" values="Save">
+</form>
+
+{% endblock details %}
