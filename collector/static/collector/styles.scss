@@ -4,9 +4,13 @@ $fics_dark: darken($fics_back, 10%);
 $fics_darker: darken($fics_back, 20%);
 
 @font-face {
-  font-family: 'ElGoth';
-  /*src:  url('Elementary_Gothic_Bookhand.otf')*/
-  src:  url('AWAKENNING Personal Use.ttf')
+  font-family: 'Optimus';
+  src:  url('Folks-Black.ttf')
+}
+
+@font-face {
+  font-family: 'Euphory';
+  src:  url('Folks-Light.ttf')
 }
 
 body {
@@ -20,7 +24,7 @@ body {
         grid-gap: 5px;
         background: $fics_darker;
         font-family: sans-serif;
-        font-size: 8pt;
+        font-size: 10pt;
 
         & .logo {
             background: $fics_dark;
@@ -51,6 +55,7 @@ body {
             border-radius: 5px;
             grid-column: 1 / 3;
             grid-row: 3 / 10;
+            overflow: scroll;
 
             & ul, & ol {
                 text-indent: 0;
@@ -74,8 +79,8 @@ body {
             grid-row: 3 / 10;
             padding:5px;
 
-            font-family:sans-serif;
-            font-size:0.93em;
+            font-family:Euphory;
+            font-size:0.97em;
 
             & table.stats{
             	display:inline-block;
@@ -83,8 +88,31 @@ body {
             	border-radius:6px;
             }
 
+            & table.coreblock{
+            	display:inline-block;
+            	border:1px solid black;
+            	border-radius:6px;
+            	& th{
+								width:15ex;
+            	}
+            	& td{
+								width:40ex;
+            	}
+            }
+
+            & .field_wrapper{
+							& label{
+								width:16ex;
+								display:inline-block;
+							}
+							& input[type=number]{
+								width:10ex;
+								
+							}
+            }
+
 			& H1{
-				font-family: ElGoth;
+				font-family: Optimus;
 				font-weight: Normal;
 			}
 

@@ -3,14 +3,143 @@
 
 {% block menu %}
 	<a class="btn" href="/">List</a>
-	<a class='btn' href="/edit/persona/{{ character.id }}/">Edit</a>	
 {% endblock %}
 
 {% block details %}
 <form method="POST" action="">
 	{% csrf_token %}
-	{{ form }}
-	<input type="submit" values="Save">
+	{{ form.non_field_errors}}
+	<div class="field_wrapper">
+		{{ form.full_name.errors}}
+		<label for="">Full name:</label>
+		{{form.full_name}}
+	</div>
+	<br/><input type="submit" values="Save">	
+	<div class="field_wrapper">
+		{{ form.alliance.errors}}
+		<label for="">Alliance:</label>
+		{{form.alliance}}
+	</div>
+	<div class="field_wrapper">
+		{{ form.species.errors}}
+		<label for="">Species/Race:</label>
+		{{form.species}}
+	</div>
+	<div class="field_wrapper">
+		{{ form.birthdate.errors}}
+		<label for="">Birthdate:</label>
+		{{form.birthdate}}
+	</div>
+	<div class="field_wrapper">
+		{{ form.gender.errors}}
+		<label for="">Gender:</label>
+		{{form.gender}}
+	</div>	
+	<div class="field_wrapper">
+		{{ form.height.errors}}
+		<label for="">Height:</label>
+		{{form.height}}
+	</div>
+	<div class="field_wrapper">
+		{{ form.weight.errors}}
+		<label for="">Weight:</label>
+		{{form.weight}}
+	</div>	
+	<div class="field_wrapper">
+		{{ form.rank.errors}}
+		<label for="">Rank:</label>
+		{{form.rank}}
+	</div>
+	<div class="field_wrapper">
+		{{ form.native_fief.errors}}
+		<label for="">Native Fief:</label>
+		{{form.native_fief}}
+	</div>
+	<div class="field_wrapper">
+		{{ form.caste.errors}}
+		<label for="">Caste:</label>
+		{{form.caste}}
+	</div>
+
+
+	<div class="field_wrapper">
+		{{ form.player.errors}}
+		<label for="">Player:</label>
+		{{form.player}}
+	</div>
+	<div class="field_wrapper">
+		{{ form.narrative.errors}}
+		<label for="">Narrative:</label>
+		{{form.narrative}}
+	</div>
+
+
+	
+<h2>Physical</h2>
+	<div class="field_wrapper">
+		{{ form.PA_STR.errors}}
+		<label for="">Strength:</label>
+		{{form.PA_STR}}
+	</div>
+	<div class="field_wrapper">
+		{{ form.PA_CON.errors}}
+		<label for="">Constitution:</label>
+		{{form.PA_CON}}
+	</div>
+	<div class="field_wrapper">
+		{{ form.PA_BOD.errors}}
+		<label for="">Body:</label>
+		{{form.PA_BOD}}
+	</div>
+	<div class="field_wrapper">
+		{{ form.PA_MOV.errors}}
+		<label for="">Movement:</label>
+		{{form.PA_MOV}}
+	</div>
+<h2>Spirit</h2>
+	<div class="field_wrapper">
+		{{ form.PA_INT.errors}}
+		<label for="">Intellect:</label>
+		{{form.PA_INT}}
+	</div>
+	<div class="field_wrapper">
+		{{ form.PA_WIL.errors}}
+		<label for="">Willpower:</label>
+		{{form.PA_WIL}}
+	</div>
+	<div class="field_wrapper">
+		{{ form.PA_TEM.errors}}
+		<label for="">Temper:</label>
+		{{form.PA_TEM}}
+	</div>
+	<div class="field_wrapper">
+		{{ form.PA_PRE.errors}}
+		<label for="">Presence:</label>
+		{{form.PA_PRE}}
+	</div>
+<h2>Combat</h2>
+	<div class="field_wrapper">
+		{{ form.PA_TEC.errors}}
+		<label for="">Tech:</label>
+		{{form.PA_TEC}}
+	</div>
+	<div class="field_wrapper">
+		{{ form.PA_REF.errors}}
+		<label for="">Reflex:</label>
+		{{form.PA_REF}}
+	</div>
+	<div class="field_wrapper">
+		{{ form.PA_AGI.errors}}
+		<label for="">Agility:</label>
+		{{form.PA_AGI}}
+	</div>
+	<div class="field_wrapper">
+		{{ form.PA_AWA.errors}}
+		<label for="">Awareness:</label>
+		{{form.PA_AWA}}
+	</div>
+	
+	<br/><input type="submit" values="Save">
 </form>
 
 {% endblock details %}

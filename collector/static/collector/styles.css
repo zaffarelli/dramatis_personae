@@ -1,7 +1,9 @@
 @font-face {
-  font-family: 'ElGoth';
-  /*src:  url('Elementary_Gothic_Bookhand.otf')*/
-  src: url("AWAKENNING Personal Use.ttf"); }
+  font-family: 'Optimus';
+  src: url("Folks-Black.ttf"); }
+@font-face {
+  font-family: 'Euphory';
+  src: url("Folks-Light.ttf"); }
 body {
   background: #360e36; }
   body .wrapper {
@@ -13,7 +15,7 @@ body {
     grid-gap: 5px;
     background: #360e36;
     font-family: sans-serif;
-    font-size: 8pt; }
+    font-size: 10pt; }
     body .wrapper .logo {
       background: #5f185f;
       color: #FFCCFF;
@@ -36,7 +38,8 @@ body {
       color: #FFCCFF;
       border-radius: 5px;
       grid-column: 1 / 3;
-      grid-row: 3 / 10; }
+      grid-row: 3 / 10;
+      overflow: scroll; }
       body .wrapper .list ul, body .wrapper .list ol {
         text-indent: 0; }
         body .wrapper .list ul li a, body .wrapper .list ol li a {
@@ -49,14 +52,27 @@ body {
       grid-column: 3 / 10;
       grid-row: 3 / 10;
       padding: 5px;
-      font-family: sans-serif;
-      font-size: 0.93em; }
+      font-family: Euphory;
+      font-size: 0.97em; }
       body .wrapper .details table.stats {
         display: inline-block;
         border: 1px solid black;
         border-radius: 6px; }
+      body .wrapper .details table.coreblock {
+        display: inline-block;
+        border: 1px solid black;
+        border-radius: 6px; }
+        body .wrapper .details table.coreblock th {
+          width: 15ex; }
+        body .wrapper .details table.coreblock td {
+          width: 40ex; }
+      body .wrapper .details .field_wrapper label {
+        width: 16ex;
+        display: inline-block; }
+      body .wrapper .details .field_wrapper input[type=number] {
+        width: 10ex; }
       body .wrapper .details H1 {
-        font-family: ElGoth;
+        font-family: Optimus;
         font-weight: Normal; }
   body .btn {
     display: inline-block;

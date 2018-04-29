@@ -9,16 +9,14 @@ Personae Index
 {% endblock %}
 
 {% block menu %}
-	<a class="btn" href="/">List</a>
 	<a class='btn' href="add/persona/">New</a>
-	<a class='btn' href="edit/persona/{{ character.id }}/">Edit</a>
 {% endblock %}
 
 {% block list %}
 {% if latest_character_list %}
     <ol>
     {% for character in latest_character_list %} 
-        <li><a href="view/persona/{{ character.id }}/">{{ character.full_name }}</a></li>
+        <li><a href="view/persona/{{ character.id }}/">{{ character.full_name }} [{{ character.PA_TOTAL }}]</a></li>
     {% endfor %}
     </ol>
 {% else %}

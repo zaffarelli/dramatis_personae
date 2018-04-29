@@ -3,11 +3,25 @@
 
 {% block menu %}
 	<a class="btn" href="/">List</a>
-	<a class='btn' href="/edit/persona/{{ character.id }}/">Edit</a>	
+	
 {% endblock %}
 
 {% block details %}
 <h1>{{ character.full_name }}</h1>
+[<b>RID</b> <tt>{{ character.rid }}</tt> ]<br/>
+
+<table class="coreblock" id="base">
+<tr><th>Alliance</th><td>{{ character.alliance }}</td><th>Birthdate</th><td>{{ character.birthdate }} ({{ character.age }} years old)</td></tr>
+<tr><th>Species/Race</th><td>{{ character.species }}</td><th>Gender</th><td>{{ character.gender }}</td></tr>
+<tr><th>Caste</th><td>{{ character.caste }}</td><th>Height</th><td>{{ character.height }}</td></tr>
+<tr><th>Native Fief</th><td>{{ character.native_fief }}</td><th>Weight</th><td>{{ character.weight }}</td></tr>
+<tr><th>Rank</th><td>{{ character.rank }}</td><th>Player</th><td>{{ character.player }}</td></tr>
+</table>
+
+<br/>Total: {{ character.PA_TOTAL }}
+
+<p>{{ character.narrative }}</p>
+
 <h2>Primary Attributes</h2>
 <table class="stats" id="phy">
 <tr><th>STR</th><td>{{character.PA_STR}}</td><th>CON</th><td>{{character.PA_CON}}</td></tr>
@@ -27,6 +41,18 @@
 
 <h2>Secondary Attributes</h2>
 
+<table class="stats" id="hea">
+<tr><th>REC</th><td>{{character.SA_REC}}</td><th>STA</th><td>{{character.SA_STA}}</td></tr>
+<tr><th>END</th><td>{{character.SA_END}}</td><th>STU</th><td>{{character.SA_STU}}</td></tr>
+<tr><th>RES</th><td>{{character.SA_RES}}</td><th>DMG</th><td>{{character.SA_DMG}}</td></tr>
+</table>
+
+<table class="stats" id="oth">
+<tr><th>TOL</th><td>{{character.SA_TOL}}</td><th>HUM</th><td>{{character.SA_HUM}}</td></tr>
+<tr><th>PAS</th><td>{{character.SA_PAS}}</td><th>WYR</th><td>{{character.SA_WYR}}</td></tr>
+<tr><th>SPD</th><td>{{character.SA_SPD}}</td><th>RUN</th><td>{{character.SA_RUN}}</td></tr>
+</table>
+
 <h2>Skills</h2>
 <ul>
 {% for skill in character.skill_set.all %}
@@ -34,4 +60,5 @@
 {% endfor %}
 </ul>
 
+<a class='btn' href="/edit/persona/{{ character.id }}/">Edit</a>	
 {% endblock details %}
