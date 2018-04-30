@@ -5,53 +5,58 @@
   font-family: 'Euphory';
   src: url("Folks-Light.ttf"); }
 body {
-  background: #360e36; }
+  background: #290e36; }
   body .wrapper {
     display: grid;
     width: 100%;
-    height: 100%;
-    grid-template-columns: repeat(10, 1fr);
-    grid-template-rows: repeat(10, 1fr);
-    grid-gap: 5px;
-    background: #360e36;
+    grid-template-columns: 350px 1fr;
+    grid-template-rows: 80px 50px 1fr;
+    grid-column-gap: 3px;
+    grid-row-gap: 2px;
+    justify-content: center;
+    align-content: stretch;
+    background: #290e36;
     font-family: sans-serif;
     font-size: 10pt; }
     body .wrapper .logo {
-      background: #5f185f;
-      color: #FFCCFF;
-      grid-column: 1;
-      grid-row: 1;
+      background: #47185f url("https://pre00.deviantart.net/3f75/th/pre/i/2009/298/8/6/kafka_library_by_gryphart.jpg");
+      color: #FFFFFF;
+      border-radius: 25px;
+      grid-column: 1 / 1;
+      grid-row: 1 / 3;
       padding: 5px; }
     body .wrapper .title {
-      background: #5f185f;
-      color: #FFCCFF;
-      grid-column: 2 / 10;
+      background: #662288;
+      color: #FFFFFF;
+      grid-column: 2 / 2;
       grid-row: 1;
-      padding: 5px; }
+      padding: 5px;
+      border-radius: 10px; }
     body .wrapper .menu {
-      background: #5f185f;
-      color: #FFCCFF;
-      grid-column: 1 / 10;
-      grid-row: 2 / 2; }
+      background: #47185f;
+      border-radius: 10px;
+      color: #FFFFFF;
+      grid-column: 2 / 3;
+      grid-row: 2/2;
+      justify-self: start;
+      align-self: center; }
     body .wrapper .list {
-      background: #882288;
-      color: #FFCCFF;
-      border-radius: 5px;
-      grid-column: 1 / 3;
-      grid-row: 3 / 10;
-      overflow: scroll; }
+      background: #662288;
+      color: #FFFFFF;
+      border-radius: 15px;
+      grid-column: 1 / 1;
+      grid-row: 3 / 3; }
       body .wrapper .list ul, body .wrapper .list ol {
         text-indent: 0; }
         body .wrapper .list ul li a, body .wrapper .list ol li a {
-          color: #FFCCFF;
+          color: #FFFFFF;
           font-size: 0.93em;
           text-decoration: none; }
     body .wrapper .details {
-      background: gray;
-      border-radius: 5px;
-      grid-column: 3 / 10;
-      grid-row: 3 / 10;
-      padding: 5px;
+      background: silver;
+      grid-column: 2 / 2;
+      grid-row: 3 / 3;
+      padding: 10px;
       font-family: Euphory;
       font-size: 0.97em; }
       body .wrapper .details table.stats {
