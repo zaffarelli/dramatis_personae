@@ -19,6 +19,7 @@ class Character(models.Model):
 	height = models.IntegerField(default=150)
 	weight = models.IntegerField(default=50)
 	narrative = models.TextField(default='',blank=True)
+	entrance = models.CharField(max_length=100,default='',blank=True)
 	PA_STR = models.IntegerField(default=3)
 	PA_CON = models.IntegerField(default=3)
 	PA_BOD = models.IntegerField(default=3)
@@ -63,6 +64,8 @@ class Character(models.Model):
 		self.SA_SPD = math.ceil(self.PA_REF / 2)
 		self.SA_RUN = self.PA_MOV *2
 		self.PA_TOTAL = self.PA_STR + self.PA_CON + self.PA_BOD + self.PA_MOV + self.PA_REF + self.PA_WIL + self.PA_AWA + self.PA_TEM + self.PA_AGI + self.PA_TEC + self.PA_PRE + self.PA_INT
+		if self.birthdate < 1000:
+			self.birthdate = 5017 - self.birthdate
 		self.age = 5017 - self.birthdate
 
 	def __str__(self):

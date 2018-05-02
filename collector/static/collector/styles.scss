@@ -4,36 +4,33 @@ $fics_dark: darken($fics_back, 10%);
 $fics_darker: darken($fics_back, 20%);
 
 @font-face {
-  font-family: 'Optimus';
-  src:  url('Folks-Black.ttf')
+    font-family: 'Optimus';
+    src: url("Folks-Black.ttf");
 }
 
 @font-face {
-  font-family: 'Euphory';
-  src:  url('Folks-Light.ttf')
+    font-family: 'Euphory';
+    src: url("Folks-Light.ttf");
 }
 
 body {
     background: $fics_darker;
 
-    
     & .wrapper {
         display: grid;
-        width: 100%;      
-				grid-template-columns: 400px 1fr;
-				grid-template-rows: 80px 50px 1fr;
-				grid-column-gap: 3px;
-				grid-row-gap: 2px;
-				justify-content:center;
-				align-content:stretch;
-        
+        width: 100%;
+        grid-template-columns: 400px 1fr;
+        grid-template-rows: 80px 50px 1fr;
+        grid-column-gap: 3px;
+        grid-row-gap: 2px;
+        justify-content: center;
+        align-content: stretch;
         background: $fics_darker;
         font-family: sans-serif;
         font-size: 10pt;
-				
-				
+
         & .logo {
-            background: $fics_dark url('https://pre00.deviantart.net/3f75/th/pre/i/2009/298/8/6/kafka_library_by_gryphart.jpg');;
+            background: $fics_dark url("https://pre00.deviantart.net/3f75/th/pre/i/2009/298/8/6/kafka_library_by_gryphart.jpg");
             color: $fics_front;
             border-radius: 25px;
             grid-column: 1 / 1;
@@ -55,59 +52,58 @@ body {
             border-radius: 10px;
             color: $fics_front;
             grid-column: 2 / 3;
-            grid-row: 2 / 2 ;
-            justify-self:start;
-            align-self:center;
-            
+            grid-row: 2 / 2;
+            justify-self: start;
+            align-self: center;
         }
 
         & .list {
-			& .pagination{
-				text-align:center;
-				margin-top:1em;
+            & .pagination {
+                text-align: center;
+                margin-top: 1em;
 
-						& a, strong{
-							margin: 0 0.1em;
-							display:inline-block;
-							padding:0.5em;
-							color:$fics_front;
-							font-size:1em;
-						  background:$fics_dark;
-						  padding:0.5em 0.8em;
-						  border-radius:2px;
-						  text-decoration:none;
-						}
-						}
-							
+                & a, strong {
+                    margin: 0 0.1em;
+                    display: inline-block;
+                    padding: 0.5em;
+                    color: $fics_front;
+                    font-size: 1em;
+                    background: $fics_dark;
+                    padding: 0.5em 0.8em;
+                    border-radius: 2px;
+                    text-decoration: none;
+                }
+            }
 
-						
-						
-        
             background: $fics_back;
             color: $fics_front;
             border-radius: 15px;
             grid-column: 1 / 1;
             grid-row: 3 / 3;
 
-
             & ul, & ol {
                 text-indent: 0;
 
                 & li {
-                    font-size: 0.83em;                
+                    font-size: 0.83em;
+
                     & a {
                         color: $fics_front;
                         text-decoration: none;
 
-                        &:hover { background: orange;}
+                        &:hover {
+                            background: orange;
+                        }
                     }
-                    & small{
-											font-size:0.75em;
-										}                   
-					& em {
-						color:orange;
-						font-weight:bold;
-					}
+
+                    & small {
+                        font-size: 0.75em;
+                    }
+
+                    & em {
+                        color: orange;
+                        font-weight: bold;
+                    }
                 }
             }
         }
@@ -116,74 +112,69 @@ body {
             background: silver;
             grid-column: 2 / 2;
             grid-row: 3 / 3;
-            padding:10px;
+            padding: 10px;
+            font-family: Euphory;
+            font-size: 0.97em;
 
-            font-family:Euphory;
-            font-size:0.97em;
-
-            & table.stats{
-            	display:inline-block;
-            	border:1px solid black;
-            	border-radius:6px;
+            & table.stats {
+                display: inline-block;
+                border: 1px solid black;
+                border-radius: 6px;
             }
 
-            & table.coreblock{
-            	display:inline-block;
-            	border:1px solid black;
-            	border-radius:6px;
-            	& th{
-								width:15ex;
-            	}
-            	& td{
-								width:40ex;
-            	}
+            & table.coreblock {
+                display: inline-block;
+                border: 1px solid black;
+                border-radius: 6px;
+
+                & th {
+                    width: 15ex;
+                }
+
+                & td {
+                    width: 40ex;
+                }
             }
 
-            & .field_wrapper{
-							& label{
-								width:16ex;
-								display:inline-block;
-							}
-							& input[type=number]{
-								width:10ex;
-								
-							}
+            & .field_wrapper {
+                & label {
+                    width: 16ex;
+                    display: inline-block;
+                }
+
+                & input[type=number] {
+                    width: 10ex;
+                }
             }
 
-			& H1{
-				font-family: Optimus;
-				font-weight: Normal;
-			}
+            & H1 {
+                font-family: Optimus;
+                font-weight: Normal;
+            }
 
-			& H2{
+            & H2 {}
 
-			}
-
-			& H3{
-				
-			}
-
-
+            & H3 {}
         }
     }
 
-    & .btn{
-    	display:inline-block;
-    	padding:0;
-    	margin:0;
-    	width:60px;
-    	height:20px;
-    	border:2px solid gray;
-    	border-radius:5px;
-    	background:silver;
-    	color:black;
-    	text-decoration:none;
-    	padding:5px;
-    	text-align:center;
-    	&:hover{
-    		background:#303030;
-    		color:white;
-    	}
-    }
+    & .btn {
+        display: inline-block;
+        padding: 0;
+        margin: 0;
+        width: 60px;
+        height: 20px;
+        border: 2px solid gray;
+        border-radius: 5px;
+        background: silver;
+        color: black;
+        text-decoration: none;
+        padding: 5px;
+        text-align: center;
 
+        &:hover {
+            background: #303030;
+            color: white;
+        }
+    }
 }

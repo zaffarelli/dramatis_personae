@@ -50,7 +50,7 @@ Dramatis Personae
     <ol>
     {% for c in character_items %}   
         <li><em><a href="view/persona/{{ c.id }}/">{{ c.full_name }}</a></em>
-        
+        <br/>{{c.entrance}}
         <br/>{{ c.alliance }} [{{ c.PA_TOTAL }}]
         <br/>
         {% if c.player == 'none' %}

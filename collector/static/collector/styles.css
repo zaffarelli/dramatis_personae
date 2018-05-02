@@ -37,7 +37,7 @@ body {
       border-radius: 10px;
       color: #FFFFFF;
       grid-column: 2 / 3;
-      grid-row: 2/2;
+      grid-row: 2 / 2;
       justify-self: start;
       align-self: center; }
     body .wrapper .list {

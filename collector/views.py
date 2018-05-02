@@ -7,7 +7,7 @@ from django.core.paginator import Paginator
 
 def index(request):
 	character_items = Character.objects.order_by('alliance','full_name')
-	paginator = Paginator(character_items,10)
+	paginator = Paginator(character_items,15)
 	page = request.GET.get('page')
 	character_items = paginator.get_page(page)
 	context = {'character_items': character_items}

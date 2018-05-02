@@ -14,6 +14,12 @@
 		<label for="">Full name:</label>
 		{{form.full_name}}
 	</div>
+
+	<div class="field_wrapper">
+		{{ form.entrance.errors}}
+		<label for="">Entrance:</label>
+		{{form.entrance}}
+	</div>
 	<br/><input type="submit" values="Save">	
 	<div class="field_wrapper">
 		{{ form.alliance.errors}}

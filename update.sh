@@ -7,4 +7,4 @@ python3 manage.py migrate
 echo "Updating CSS from SCSS..."
 sass ./collector/static/collector/styles.scss ./collector/static/collector/styles.css
 echo "Launching server..."
-python3 manage.py runserver
+python3 manage.py runserver 0.0.0.0:8000
