@@ -9,7 +9,7 @@ body {
   body .wrapper {
     display: grid;
     width: 100%;
-    grid-template-columns: 350px 1fr;
+    grid-template-columns: 400px 1fr;
     grid-template-rows: 80px 50px 1fr;
     grid-column-gap: 3px;
     grid-row-gap: 2px;
@@ -46,12 +46,27 @@ body {
       border-radius: 15px;
       grid-column: 1 / 1;
       grid-row: 3 / 3; }
+      body .wrapper .list .pagination {
+        text-align: center;
+        margin-top: 1em; }
+        body .wrapper .list .pagination a, body .wrapper .list .pagination strong {
+          margin: 0 0.1em;
+          display: inline-block;
+          padding: 0.5em;
+          color: #FFFFFF;
+          font-size: 1em;
+          background: #47185f;
+          padding: 0.5em 0.8em;
+          border-radius: 2px;
+          text-decoration: none; }
       body .wrapper .list ul, body .wrapper .list ol {
         text-indent: 0; }
         body .wrapper .list ul li a, body .wrapper .list ol li a {
           color: #FFFFFF;
           font-size: 0.93em;
           text-decoration: none; }
+        body .wrapper .list ul li small, body .wrapper .list ol li small {
+          font-size: 0.75em; }
     body .wrapper .details {
       background: silver;
       grid-column: 2 / 2;

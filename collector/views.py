@@ -1,12 +1,16 @@
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import Http404
-from collector.models import SkillRef, Character, Skill
+from .models import SkillRef, Character, Skill
 from .forms import PersonaForm
+from django.core.paginator import Paginator
 
 def index(request):
-	latest_character_list = Character.objects.order_by('full_name')
-	context = {'latest_character_list': latest_character_list}
+	character_items = Character.objects.order_by('alliance','full_name')
+	paginator = Paginator(character_items,20)
+	page = request.GET.get('page')
+	character_items = paginator.get_page(page)
+	context = {'character_items': character_items}
 	return render(request, 'collector/index.html', context)
 
 
