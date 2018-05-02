@@ -62,10 +62,9 @@ body {
         }
 
         & .list {
-
-						& .pagination{
-							text-align:center;
-							margin-top:1em;
+			& .pagination{
+				text-align:center;
+				margin-top:1em;
 
 						& a, strong{
 							margin: 0 0.1em;
@@ -95,16 +94,20 @@ body {
                 text-indent: 0;
 
                 & li {
+                    font-size: 0.83em;                
                     & a {
                         color: $fics_front;
-                        font-size: 0.93em;
                         text-decoration: none;
 
-                        &:hover {}
+                        &:hover { background: orange;}
                     }
                     & small{
 											font-size:0.75em;
 										}                   
+					& em {
+						color:orange;
+						font-weight:bold;
+					}
                 }
             }
         }

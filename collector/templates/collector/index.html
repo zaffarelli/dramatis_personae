@@ -46,22 +46,18 @@ Dramatis Personae
 	<strong>&nbsp;</strong>
 	<strong>&nbsp;</strong>	
 	{%endif%}
-</div>
-		{%filter=''%}
+</div>	
     <ol>
-    {% for c in character_items %}
-
-				{% if filter != {{c.alliance}} %}
-					:)
-				{% else %}
-					{% filter = {{c.alliance}} %}
-					</ol>
-					<h2>{{c.alliance}}</h2>
-					<ol>
-				{% endif %}
-    
-        <li><a href="view/persona/{{ c.id }}/">{{ c.full_name }} [{{ c.PA_TOTAL }}]</a>
-        <br/><small>RID: {{ c.rid }}</small>
+    {% for c in character_items %}   
+        <li><em><a href="view/persona/{{ c.id }}/">{{ c.full_name }}</a></em>
+        
+        <br/>{{ c.alliance }} [{{ c.PA_TOTAL }}]
+        <br/>
+        {% if c.player == 'none' %}
+			-
+		{% else %}
+		    <em>{{ c.player }}</em>
+        {% endif %}
         </li>
     {% endfor %}
     </ol>

@@ -61,12 +61,18 @@ body {
           text-decoration: none; }
       body .wrapper .list ul, body .wrapper .list ol {
         text-indent: 0; }
-        body .wrapper .list ul li a, body .wrapper .list ol li a {
-          color: #FFFFFF;
-          font-size: 0.93em;
-          text-decoration: none; }
-        body .wrapper .list ul li small, body .wrapper .list ol li small {
-          font-size: 0.75em; }
+        body .wrapper .list ul li, body .wrapper .list ol li {
+          font-size: 0.83em; }
+          body .wrapper .list ul li a, body .wrapper .list ol li a {
+            color: #FFFFFF;
+            text-decoration: none; }
+            body .wrapper .list ul li a:hover, body .wrapper .list ol li a:hover {
+              background: orange; }
+          body .wrapper .list ul li small, body .wrapper .list ol li small {
+            font-size: 0.75em; }
+          body .wrapper .list ul li em, body .wrapper .list ol li em {
+            color: orange;
+            font-weight: bold; }
     body .wrapper .details {
       background: silver;
       grid-column: 2 / 2;
