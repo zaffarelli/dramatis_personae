@@ -6,13 +6,19 @@ from .forms import PersonaForm
 from django.core.paginator import Paginator
 
 def index(request):
-	character_items = Character.objects.order_by('alliance','full_name')
+	character_items = Character.objects.order_by('-alliance','full_name')
 	paginator = Paginator(character_items,15)
 	page = request.GET.get('page')
 	character_items = paginator.get_page(page)
 	context = {'character_items': character_items}
 	return render(request, 'collector/index.html', context)
 
+def recalc(request):
+	character_items = Character.objects.all()
+	for c in character_items:
+		c.rebuild()
+		c.save()
+	return redirect('/')
 
 def refs(request):
 	srs = SkillRef.objects.all()
@@ -32,7 +38,7 @@ def personae(request):
 
 def view_persona(request, id=None):
 	item = get_object_or_404(Character,pk=id)
-	return render(request, 'collector/persona.html', {'character': item})
+	return render(request, 'collector/persona.html', {'c': item})
 
 def add_persona(request):
 	if request.method == "POST":

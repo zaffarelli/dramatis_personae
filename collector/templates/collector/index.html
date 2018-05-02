@@ -9,7 +9,8 @@ Dramatis Personae
 {% endblock %}
 
 {% block menu %}
-	<a class='btn' href="add/persona/">New</a>
+	<a class='btn' href="add/persona/"><i class="fas fa-birthday-cake"></i></a>
+	<a class='btn' href="recalc/"><i class="fas fa-cogs"></i></a>
 {% endblock %}
 
 {% block list %}
@@ -50,6 +51,7 @@ Dramatis Personae
     <ol>
     {% for c in character_items %}   
         <li><em><a href="view/persona/{{ c.id }}/">{{ c.full_name }}</a></em>
+        [ {% if c.gender == "male" %}<i class="fas fa-mars"></i>{% else %}<i class="fas fa-venus"></i>{%endif%} ]
         <br/>{{c.entrance}}
         <br/>{{ c.alliance }} [{{ c.PA_TOTAL }}]
         <br/>

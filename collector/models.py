@@ -48,9 +48,9 @@ class Character(models.Model):
 	PA_TOTAL = models.IntegerField(default=0)
 	age = models.IntegerField(default=0)
 
-	def compute_secondaries(self):
+	def rebuild(self):
 		# Rules revision 166
-		self.rid = hashlib.sha224(bytes(self.full_name,'utf-8')).hexdigest()
+		self.rid = hashlib.sha1(bytes(self.full_name,'utf-8')).hexdigest()
 		self.SA_REC = self.PA_STR + self.PA_CON
 		self.SA_STA = math.ceil(self.PA_BOD / 2) - 1
 		self.SA_END = (self.PA_BOD + self.PA_STR) * 5
@@ -74,7 +74,7 @@ class Character(models.Model):
 
 @receiver(pre_save, sender=Character, dispatch_uid="update_character")
 def update_character(sender, instance, **kwargs):
-	instance.compute_secondaries()
+	instance.rebuild()
 	print("%s --> %s" % (instance.full_name,instance.rid))
 
 
