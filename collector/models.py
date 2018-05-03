@@ -87,5 +87,6 @@ class Skill(models.Model):
 	character = models.ForeignKey(Character, on_delete=models.CASCADE)
 	skill_ref = models.ForeignKey(SkillRef, on_delete=models.CASCADE)
 	value = models.IntegerField(default=0)
+	
 	def __str__(self):
 		return '%s=%s' % (self.character.full_name,self.skill_ref.reference)
