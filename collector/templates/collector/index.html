@@ -50,10 +50,11 @@ Dramatis Personae
 </div>	
     <ol>
     {% for c in character_items %}   
-        <li><em><a href="view/persona/{{ c.id }}/">{{ c.full_name }}</a></em>
+        <li><em><a href="view/persona/{{ c.id }}/">{{ c.full_name }}</a></em> 
         [ {% if c.gender == "male" %}<i class="fas fa-mars"></i>{% else %}<i class="fas fa-venus"></i>{%endif%} ]
+        <br><i class="fas fa-th-large"></i> {{ c.challenge }} 
         <br/>{{c.entrance}}
-        <br/>{{ c.alliance }} [{{ c.PA_TOTAL }}]
+        <br/>{{ c.alliance }} 
         <br/>
         {% if c.player == 'none' %}
 			-

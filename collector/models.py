@@ -48,7 +48,13 @@ class Character(models.Model):
   SA_RUN = models.IntegerField(default=0)
   PA_TOTAL = models.IntegerField(default=0)
   SK_TOTAL = models.IntegerField(default=0)
+  TA_TOTAL = models.IntegerField(default=0)
+  BC_TOTAL = models.IntegerField(default=0)
   age = models.IntegerField(default=0)
+  occult_level = models.PositiveIntegerField(default=0)
+  occult_darkside = models.PositiveIntegerField(default=0)
+  occult = models.CharField(max_length=50, default='', blank=True)
+  challenge = models.TextField(default='',blank=True)
 
   def fix(self):
     # Rules revision 166
@@ -75,12 +81,28 @@ class Character(models.Model):
       self.birthdate = 5017 - self.birthdate
     self.age = 5017 - self.birthdate
 
+    if self.player == 'none':
+      self.player = ''
+
     # Skills total
     self.SK_TOTAL = 0
     skills = self.skill_set.all()
     for s in skills:
       if s.skill_ref.is_root == False:
         self.SK_TOTAL += s.value
+    # With talents
+    self.TA_TOTAL = 0
+    talents = self.talent_set.all()
+    for t in talents:
+      self.TA_TOTAL += t.value
+    # With blessingcurses
+    self.BC_TOTAL = 0
+    blessingcurses = self.blessingcurse_set.all()
+    for bc in blessingcurses:
+      self.BC_TOTAL += bc.value
+
+    self.challenge = self.PA_TOTAL*3 + self.SK_TOTAL + self.TA_TOTAL + self.BC_TOTAL
+      
   def __str__(self):
     return '%s' % self.full_name
 
@@ -95,20 +117,40 @@ def update_character(sender, instance, **kwargs):
 class SkillRef(models.Model):
   reference = models.CharField(max_length=200)
   is_root = models.BooleanField(default=False)
-  is_speciality = models.BooleanField(default=False)  
+  is_speciality = models.BooleanField(default=False)
+  linked_to = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE)
+  ordering = ('reference',)
   def __str__(self):
     return '%s %s %s' % (self.reference,"(R)" if self.is_root else "","(S)" if self.is_speciality else "")
+
+class BlessingCurse(models.Model):
+  character = models.ForeignKey(Character, on_delete=models.CASCADE)
+  name = models.CharField(max_length=64,default='',blank=True)
+  description = models.TextField(max_length=128,default='',blank=True)
+  value = models.IntegerField(default=0)  
+  def __str__(self):
+    return '%s=%s' % (self.character.full_name,self.name)
+
+class Talent(models.Model):
+  character = models.ForeignKey(Character, on_delete=models.CASCADE)
+  name = models.CharField(max_length=64,default='',blank=True)
+  description = models.TextField(max_length=512,default='',blank=True)
+  value = models.IntegerField(default=0)  
+  def __str__(self):
+    return '%s=%s' % (self.character.full_name,self.name)
       
 class Skill(models.Model):
   character = models.ForeignKey(Character, on_delete=models.CASCADE)
   skill_ref = models.ForeignKey(SkillRef, on_delete=models.CASCADE)
   value = models.PositiveIntegerField(default=0)
   ordo = models.CharField(max_length=200, blank=True)
-  ordering = ('ordo',)  
+  ordering = ('skill_ref.reference')  
   def __str__(self):
     return '%s=%s' % (self.character.full_name,self.skill_ref.reference)
   def fix(self):
     self.ordo = self.skill_ref.reference
+
+ 
 
 @receiver(pre_save, sender=Skill, dispatch_uid="update_skill")
 def update_skill(sender, instance, **kwargs):
@@ -117,13 +159,30 @@ def update_skill(sender, instance, **kwargs):
 
 class SkillInline(admin.TabularInline):
   model = Skill
+  extras = 10
   ordering = ('ordo',)
-  
+  exclude = ('ordo',)
+
+class BlessingCurseInline(admin.TabularInline):
+  model = BlessingCurse
+
+class TalentInline(admin.TabularInline):
+  model = Talent
+
+class SkillRefAdmin(admin.ModelAdmin):
+  ordering = ('reference',)
+  #exclude = ('linked_to',)
+
+class SkillAdmin(admin.ModelAdmin):
+  ordering = ('character','skill_ref',)
+
 
 class CharacterAdmin(admin.ModelAdmin):
   inlines = [
     SkillInline,
-  ]
+    BlessingCurseInline,
+    TalentInline
+  ]  
   ordering = ('full_name',)
 
 

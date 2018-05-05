@@ -8,7 +8,10 @@
 
 {% block details %}
 <h1>{{ c.full_name }}</h1>
-<i class="fas fa-certificate"></i> <tt>{{ c.rid }}</tt> - <i class="fas fa-calculator"></i> <tt>{{ c.PA_TOTAL }} + {{ c.SK_TOTAL }}</tt><br/>
+<p>{{ c.entrance }}</p>
+<i class="fas fa-certificate"></i> <tt>{{ c.rid }}</tt>
+<br/><i class="fas fa-th-large"></i>{{ c.PA_TOTAL }} <i class="fas fa-th-list"></i>{{ c.SK_TOTAL }} <i class="fas fa-user-secret"></i>{{ c.TA_TOTAL }} <i class="fas fa-user-md"></i>{{ c.BC_TOTAL }}
+<br/>
 <table class="coreblock" id="base">
 <tr><th>Alliance</th><td>{{ c.alliance }}</td><th>Birthdate</th><td>{{ c.birthdate }} ({{ c.age }} years old)</td></tr>
 <tr><th>Species/Race</th><td>{{ c.species }}</td><th>Gender</th><td>{% if c.gender == "male" %}<i class="fas fa-mars"></i>{% else %}<i class="fas fa-venus"></i>{%endif%}</td></tr>
@@ -53,7 +56,6 @@
 </table>
 
 <h2>Skills</h2>
-
 <ul>
 {% for skill in c.skill_set.all %}
     <li>{% if skill.skill_ref.is_root %}<strong>{% endif %}
@@ -62,6 +64,27 @@
 				{% if skill.skill_ref.is_root %}</strong>{% endif %}			
 			  {{ skill.value }}
 			  {% if skill.skill_ref.is_speciality %}</blockquote>{% endif %}			  
+		</li>
+{% endfor %}
+</ul>
+
+<h2>Blessings/Curses</h2>
+
+<ul>
+{% for bc in c.blessingcurse_set.all %}
+    <li>{{ bc.name }}
+				<br/>{{ bc.description }}
+				<br/>{{ bc.value }}			  
+		</li>
+{% endfor %}
+</ul>
+
+<h2>Talents</h2>
+<ul>
+{% for t in c.talent_set.all %}
+    <li>{{ t.name }}
+				<br/>{{ t.description }}
+				<br/>{{ t.value }}			  
 		</li>
 {% endfor %}
 </ul>

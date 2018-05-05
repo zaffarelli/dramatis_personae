@@ -6,8 +6,8 @@ from .forms import CharacterForm
 from django.core.paginator import Paginator
 
 def index(request):
-	character_items = Character.objects.order_by('player','-alliance','full_name')
-	paginator = Paginator(character_items,15)
+	character_items = Character.objects.order_by('-player','-alliance','-challenge')
+	paginator = Paginator(character_items,25)
 	page = request.GET.get('page')
 	character_items = paginator.get_page(page)
 	context = {'character_items': character_items}
@@ -54,7 +54,7 @@ def add_persona(request):
 			return redirect('/')
 	else:
 		form = CharacterForm()
-	return render(request, 'collector/character_form.html', {'form': form})
+	return render(request, 'collector/persona_form.html', {'form': form})
 
 def edit_persona(request,id=None):
 	character_item = get_object_or_404(Character, id=id)
