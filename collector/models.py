@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib import admin
 from datetime import datetime
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
@@ -7,7 +8,7 @@ import math
 
 class Character(models.Model):
   full_name = models.CharField(max_length=200)
-  rid = models.CharField(max_length=200, default='none')
+  rid = models.CharField(max_length=200, default='')
   alliance = models.CharField(max_length=200, default='none')
   player = models.CharField(max_length=200, default='', blank=True)
   species = models.CharField(max_length=200, default='urthish')
@@ -20,18 +21,18 @@ class Character(models.Model):
   weight = models.IntegerField(default=50)
   narrative = models.TextField(default='',blank=True)
   entrance = models.CharField(max_length=100,default='',blank=True)
-  PA_STR = models.IntegerField(default=3)
-  PA_CON = models.IntegerField(default=3)
-  PA_BOD = models.IntegerField(default=3)
-  PA_MOV = models.IntegerField(default=3)
-  PA_INT = models.IntegerField(default=3)
-  PA_WIL = models.IntegerField(default=3)
-  PA_TEM = models.IntegerField(default=3)
-  PA_PRE = models.IntegerField(default=3)
-  PA_REF = models.IntegerField(default=3)
-  PA_TEC = models.IntegerField(default=3)
-  PA_AGI = models.IntegerField(default=3)
-  PA_AWA = models.IntegerField(default=3)
+  PA_STR = models.PositiveIntegerField(default=3)
+  PA_CON = models.PositiveIntegerField(default=3)
+  PA_BOD = models.PositiveIntegerField(default=3)
+  PA_MOV = models.PositiveIntegerField(default=3)
+  PA_INT = models.PositiveIntegerField(default=3)
+  PA_WIL = models.PositiveIntegerField(default=3)
+  PA_TEM = models.PositiveIntegerField(default=3)
+  PA_PRE = models.PositiveIntegerField(default=3)
+  PA_REF = models.PositiveIntegerField(default=3)
+  PA_TEC = models.PositiveIntegerField(default=3)
+  PA_AGI = models.PositiveIntegerField(default=3)
+  PA_AWA = models.PositiveIntegerField(default=3)
   pub_date = models.DateTimeField('Date published', default=datetime.now)
   SA_REC = models.IntegerField(default=0)
   SA_STA = models.IntegerField(default=0)
@@ -46,9 +47,10 @@ class Character(models.Model):
   SA_SPD = models.IntegerField(default=0)
   SA_RUN = models.IntegerField(default=0)
   PA_TOTAL = models.IntegerField(default=0)
+  SK_TOTAL = models.IntegerField(default=0)
   age = models.IntegerField(default=0)
 
-  def rebuild(self):
+  def fix(self):
     # Rules revision 166
     self.rid = hashlib.sha1(bytes(self.full_name,'utf-8')).hexdigest()
     self.SA_REC = self.PA_STR + self.PA_CON
@@ -73,25 +75,55 @@ class Character(models.Model):
       self.birthdate = 5017 - self.birthdate
     self.age = 5017 - self.birthdate
 
+    # Skills total
+    self.SK_TOTAL = 0
+    skills = self.skill_set.all()
+    for s in skills:
+      if s.skill_ref.is_root == False:
+        self.SK_TOTAL += s.value
   def __str__(self):
     return '%s' % self.full_name
 
 
+
 @receiver(pre_save, sender=Character, dispatch_uid="update_character")
 def update_character(sender, instance, **kwargs):
-  instance.rebuild()
+  instance.fix()
   print("%s --> %s" % (instance.full_name,instance.rid))
 
 
 class SkillRef(models.Model):
   reference = models.CharField(max_length=200)
+  is_root = models.BooleanField(default=False)
+  is_speciality = models.BooleanField(default=False)  
   def __str__(self):
-    return '%s' % self.reference
-
+    return '%s %s %s' % (self.reference,"(R)" if self.is_root else "","(S)" if self.is_speciality else "")
+      
 class Skill(models.Model):
   character = models.ForeignKey(Character, on_delete=models.CASCADE)
   skill_ref = models.ForeignKey(SkillRef, on_delete=models.CASCADE)
-  value = models.IntegerField(default=0)
-
+  value = models.PositiveIntegerField(default=0)
+  ordo = models.CharField(max_length=200, blank=True)
+  ordering = ('ordo',)  
   def __str__(self):
     return '%s=%s' % (self.character.full_name,self.skill_ref.reference)
+  def fix(self):
+    self.ordo = self.skill_ref.reference
+
+@receiver(pre_save, sender=Skill, dispatch_uid="update_skill")
+def update_skill(sender, instance, **kwargs):
+  instance.fix()
+
+
+class SkillInline(admin.TabularInline):
+  model = Skill
+  ordering = ('ordo',)
+  
+
+class CharacterAdmin(admin.ModelAdmin):
+  inlines = [
+    SkillInline,
+  ]
+  ordering = ('full_name',)
+
+

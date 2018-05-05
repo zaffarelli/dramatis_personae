@@ -14,13 +14,102 @@
 		<label for="">Full name:</label>
 		{{form.full_name}}
 	</div>
-
 	<div class="field_wrapper">
 		{{ form.entrance.errors}}
 		<label for="">Entrance:</label>
 		{{form.entrance}}
 	</div>
-	<br/><input type="submit" values="Save">	
+	<br/><input type="submit" values="Save">
+
+<h2>Primary Attributes</h2>
+<table class="stats">
+	<tr><td>
+	<div class="field_wrapper">
+		{{ form.PA_STR.errors}}
+		<label for="">STR</label>
+		{{form.PA_STR}}
+	</div>
+	</td><td>
+	<div class="field_wrapper">
+		{{ form.PA_CON.errors}}
+		<label for="">CON</label>
+		{{form.PA_CON}}
+	</div>
+	</td></tr>
+	<tr><td>
+	<div class="field_wrapper">
+		{{ form.PA_BOD.errors}}
+		<label for="">BOD</label>
+		{{form.PA_BOD}}
+	</div>
+	</td><td>
+	<div class="field_wrapper">
+		{{ form.PA_MOV.errors}}
+		<label for="">MOV</label>
+		{{form.PA_MOV}}
+	</div>
+	</td></tr>
+</table>
+<table class="stats">
+	<tr><td>
+	<div class="field_wrapper">
+		{{ form.PA_INT.errors}}
+		<label for="">INT</label>
+		{{form.PA_INT}}
+	</div>
+	</td><td>
+	<div class="field_wrapper">
+		{{ form.PA_WIL.errors}}
+		<label for="">WIL</label>
+		{{form.PA_WIL}}
+	</div>
+	</td></tr>
+	<tr><td>
+	<div class="field_wrapper">
+		{{ form.PA_TEM.errors}}
+		<label for="">TEM</label>
+		{{form.PA_TEM}}
+	</div>
+	</td><td>
+	<div class="field_wrapper">
+		{{ form.PA_PRE.errors}}
+		<label for="">PRE</label>
+		{{form.PA_PRE}}
+	</div>
+	</td></tr>
+</table>
+<table class="stats">
+	<tr><td>
+	<div class="field_wrapper">
+		{{ form.PA_TEC.errors}}
+		<label for="">TEC</label>
+		{{form.PA_TEC}}
+	</div>
+	</td><td>
+	<div class="field_wrapper">
+		{{ form.PA_REF.errors}}
+		<label for="">REF</label>
+		{{form.PA_REF}}
+	</div>
+	</td></tr>
+	<tr><td>
+	<div class="field_wrapper">
+		{{ form.PA_AGI.errors}}
+		<label for="">AGI</label>
+		{{form.PA_AGI}}
+	</div>
+	</td><td>
+	<div class="field_wrapper">
+		{{ form.PA_AWA.errors}}
+		<label for="">AWA</label>
+		{{form.PA_AWA}}
+	</div>
+	</td></tr>
+</table>	
+
+<h2>Core</h2>
+<table class="coreblock">
+	<tr><td>
 	<div class="field_wrapper">
 		{{ form.alliance.errors}}
 		<label for="">Alliance:</label>
@@ -50,7 +139,9 @@
 		{{ form.weight.errors}}
 		<label for="">Weight:</label>
 		{{form.weight}}
-	</div>	
+	</div>
+
+	</td><td>
 	<div class="field_wrapper">
 		{{ form.rank.errors}}
 		<label for="">Rank:</label>
@@ -66,85 +157,24 @@
 		<label for="">Caste:</label>
 		{{form.caste}}
 	</div>
-
-
 	<div class="field_wrapper">
 		{{ form.player.errors}}
 		<label for="">Player:</label>
 		{{form.player}}
 	</div>
+	</td></tr>
+</table>
 	<div class="field_wrapper">
 		{{ form.narrative.errors}}
 		<label for="">Narrative:</label>
 		{{form.narrative}}
 	</div>
 
+<h2>Skills</h2>
+	<form method="post">
+    {{ formset }}
+	</form>
 
-	
-<h2>Physical</h2>
-	<div class="field_wrapper">
-		{{ form.PA_STR.errors}}
-		<label for="">Strength:</label>
-		{{form.PA_STR}}
-	</div>
-	<div class="field_wrapper">
-		{{ form.PA_CON.errors}}
-		<label for="">Constitution:</label>
-		{{form.PA_CON}}
-	</div>
-	<div class="field_wrapper">
-		{{ form.PA_BOD.errors}}
-		<label for="">Body:</label>
-		{{form.PA_BOD}}
-	</div>
-	<div class="field_wrapper">
-		{{ form.PA_MOV.errors}}
-		<label for="">Movement:</label>
-		{{form.PA_MOV}}
-	</div>
-<h2>Spirit</h2>
-	<div class="field_wrapper">
-		{{ form.PA_INT.errors}}
-		<label for="">Intellect:</label>
-		{{form.PA_INT}}
-	</div>
-	<div class="field_wrapper">
-		{{ form.PA_WIL.errors}}
-		<label for="">Willpower:</label>
-		{{form.PA_WIL}}
-	</div>
-	<div class="field_wrapper">
-		{{ form.PA_TEM.errors}}
-		<label for="">Temper:</label>
-		{{form.PA_TEM}}
-	</div>
-	<div class="field_wrapper">
-		{{ form.PA_PRE.errors}}
-		<label for="">Presence:</label>
-		{{form.PA_PRE}}
-	</div>
-<h2>Combat</h2>
-	<div class="field_wrapper">
-		{{ form.PA_TEC.errors}}
-		<label for="">Tech:</label>
-		{{form.PA_TEC}}
-	</div>
-	<div class="field_wrapper">
-		{{ form.PA_REF.errors}}
-		<label for="">Reflex:</label>
-		{{form.PA_REF}}
-	</div>
-	<div class="field_wrapper">
-		{{ form.PA_AGI.errors}}
-		<label for="">Agility:</label>
-		{{form.PA_AGI}}
-	</div>
-	<div class="field_wrapper">
-		{{ form.PA_AWA.errors}}
-		<label for="">Awareness:</label>
-		{{form.PA_AWA}}
-	</div>
-	
 	<br/><input type="submit" values="Save">
 </form>
 

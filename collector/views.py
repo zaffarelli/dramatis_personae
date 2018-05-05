@@ -2,11 +2,11 @@ from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import Http404
 from .models import SkillRef, Character, Skill
-from .forms import PersonaForm
+from .forms import CharacterForm
 from django.core.paginator import Paginator
 
 def index(request):
-	character_items = Character.objects.order_by('-alliance','full_name')
+	character_items = Character.objects.order_by('player','-alliance','full_name')
 	paginator = Paginator(character_items,15)
 	page = request.GET.get('page')
 	character_items = paginator.get_page(page)
@@ -16,8 +16,13 @@ def index(request):
 def recalc(request):
 	character_items = Character.objects.all()
 	for c in character_items:
-		c.rebuild()
+		c.fix()
 		c.save()
+	skill_items = Skill.objects.all()
+	for s in skill_items:
+		s.fix()
+		s.save()
+
 	return redirect('/')
 
 def refs(request):
@@ -42,19 +47,19 @@ def view_persona(request, id=None):
 
 def add_persona(request):
 	if request.method == "POST":
-		form = PersonaForm(request.POST)
+		form = CharacterForm(request.POST)
 		if form.is_valid():
-			persona_item = form.save(commit=False)
-			persona_item.save()
+			character_item = form.save(commit=False)
+			character_item.save()
 			return redirect('/')
 	else:
-		form = PersonaForm()
-	return render(request, 'collector/persona_form.html', {'form': form})
+		form = CharacterForm()
+	return render(request, 'collector/character_form.html', {'form': form})
 
 def edit_persona(request,id=None):
-	persona_item = get_object_or_404(Character, id=id)
-	form = PersonaForm(request.POST or None, instance = persona_item)
+	character_item = get_object_or_404(Character, id=id)
+	form = CharacterForm(request.POST or None, instance = character_item)
 	if form.is_valid():
 		form.save()
-		return redirect('/view/persona/'+str(persona_item.id)+'/')
+		return redirect('/view/persona/'+str(character_item.id)+'/')
 	return render(request, 'collector/persona_form.html', {'form': form})

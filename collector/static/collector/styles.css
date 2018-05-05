@@ -83,7 +83,15 @@ body {
       body .wrapper .details table.stats {
         display: inline-block;
         border: 1px solid black;
-        border-radius: 6px; }
+        border-radius: 6px;
+        background: orange; }
+        body .wrapper .details table.stats td {
+          height: 2em; }
+        body .wrapper .details table.stats .field_wrapper label {
+          width: 5ex;
+          display: inline-block; }
+        body .wrapper .details table.stats .field_wrapper input[type=number] {
+          width: 5ex; }
       body .wrapper .details table.coreblock {
         display: inline-block;
         border: 1px solid black;
@@ -91,13 +99,19 @@ body {
         body .wrapper .details table.coreblock th {
           width: 15ex; }
         body .wrapper .details table.coreblock td {
-          width: 40ex; }
+          width: 60ex; }
       body .wrapper .details .field_wrapper label {
         width: 16ex;
         display: inline-block; }
       body .wrapper .details .field_wrapper input[type=number] {
         width: 10ex; }
       body .wrapper .details H1 {
+        font-family: Optimus;
+        font-weight: Normal; }
+      body .wrapper .details H2 {
+        font-family: Optimus;
+        font-weight: Normal; }
+      body .wrapper .details H3 {
         font-family: Optimus;
         font-weight: Normal; }
   body .btn {

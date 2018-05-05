@@ -120,6 +120,21 @@ body {
                 display: inline-block;
                 border: 1px solid black;
                 border-radius: 6px;
+                background:orange;
+                & td {
+									height:2em;
+                }
+            & .field_wrapper {
+                & label {
+                    width: 5ex;
+                    display: inline-block;
+                }
+
+                & input[type=number] {
+                    width: 5ex;
+                }
+            }
+                
             }
 
             & table.coreblock {
@@ -132,7 +147,7 @@ body {
                 }
 
                 & td {
-                    width: 40ex;
+                    width: 60ex;
                 }
             }
 
@@ -152,9 +167,15 @@ body {
                 font-weight: Normal;
             }
 
-            & H2 {}
+            & H2 {
+                            font-family: Optimus;
+                font-weight: Normal;
+            }
 
-            & H3 {}
+            & H3 {
+                font-family: Optimus;
+                font-weight: Normal;
+            }
         }
     }
 
