@@ -6,6 +6,7 @@ from django.dispatch import receiver
 import hashlib
 import math
 
+###### Characters
 class Character(models.Model):
   full_name = models.CharField(max_length=200)
   rid = models.CharField(max_length=200, default='')
@@ -55,7 +56,6 @@ class Character(models.Model):
   occult_darkside = models.PositiveIntegerField(default=0)
   occult = models.CharField(max_length=50, default='', blank=True)
   challenge = models.TextField(default='',blank=True)
-
   def fix(self):
     # Rules revision 166
     self.rid = hashlib.sha1(bytes(self.full_name,'utf-8')).hexdigest()
@@ -80,10 +80,8 @@ class Character(models.Model):
     if self.birthdate < 1000:
       self.birthdate = 5017 - self.birthdate
     self.age = 5017 - self.birthdate
-
     if self.player == 'none':
       self.player = ''
-
     # Skills total
     self.SK_TOTAL = 0
     skills = self.skill_set.all()
@@ -100,20 +98,81 @@ class Character(models.Model):
     blessingcurses = self.blessingcurse_set.all()
     for bc in blessingcurses:
       self.BC_TOTAL += bc.value
-
     self.challenge = self.PA_TOTAL*3 + self.SK_TOTAL + self.TA_TOTAL + self.BC_TOTAL
-      
   def __str__(self):
     return '%s' % self.full_name
-
-
 
 @receiver(pre_save, sender=Character, dispatch_uid="update_character")
 def update_character(sender, instance, **kwargs):
   instance.fix()
   print("%s --> %s" % (instance.full_name,instance.rid))
 
+###### Weapons
+class WeaponRef(models.Model):
+  reference = models.CharField(max_length=64,default='',blank=True)
+  category = models.CharField(max_length=16,default='RIF',blank=True)
+  wa = models.IntegerField(default=0,blank=True)
+  conceilable = models.CharField(max_length=16,default='Jacket',blank=True)
+  availability = models.CharField(max_length=16,default='CO',blank=True)
+  damage_class = models.CharField(max_length=16,default='1d6',blank=True)
+  caliber = models.CharField(max_length=16,default='',blank=True)
+  str_min = models.PositiveIntegerField(default=0,blank=True)
+  rof = models.PositiveIntegerField(default=0,blank=True)
+  clip = models.PositiveIntegerField(default=0,blank=True)
+  rng = models.PositiveIntegerField(default=0,blank=True)
+  rel = models.CharField(max_length=64,default='',blank=True)
+  description = models.TextField(max_length=256,default='',blank=True)
+  def __str__(self):
+    return '%s' % (self.reference)
 
+class Weapon(models.Model):
+  character = models.ForeignKey(Character, on_delete=models.CASCADE)
+  weapon_ref = models.ForeignKey(WeaponRef, on_delete=models.CASCADE)
+  ammoes = models.PositiveIntegerField(default=0,blank=True)
+  def __str__(self):
+    return '%s=%s' % (self.character.full_name,self.weapon_ref.reference)
+
+class WeaponRefAdmin(admin.ModelAdmin):
+  ordering = ('reference',)  
+
+class WeaponAdmin(admin.ModelAdmin):
+  ordering = ('character','weapon_ref',)
+
+class WeaponInline(admin.TabularInline):
+  model = Weapon
+
+
+###### Armors
+class ArmorRef(models.Model):
+  reference = models.CharField(max_length=64,default='',blank=True)
+  category = models.CharField(max_length=16,default='SOFT',blank=True)
+  head = models.BooleanField(default=True)
+  torso = models.BooleanField(default=True)
+  left_arm = models.BooleanField(default=True)
+  right_arm = models.BooleanField(default=True)
+  left_leg = models.BooleanField(default=True)
+  right_leg = models.BooleanField(default=True)
+  stopping_power = models.PositiveIntegerField(default=2, blank=True)  
+  def __str__(self):
+    return '%s' % (self.reference)
+
+class Armor(models.Model):
+  character = models.ForeignKey(Character, on_delete=models.CASCADE)
+  armor_ref = models.ForeignKey(ArmorRef, on_delete=models.CASCADE)
+  def __str__(self):
+    return '%s=%s' % (self.character.full_name,self.armor_ref.reference)
+
+class ArmorRefAdmin(admin.ModelAdmin):
+  ordering = ('reference',)  
+
+class ArmorAdmin(admin.ModelAdmin):
+  ordering = ('character','armor_ref',)
+
+class ArmorInline(admin.TabularInline):
+  model = Armor
+
+
+###### Skills
 class SkillRef(models.Model):
   reference = models.CharField(max_length=200)
   is_root = models.BooleanField(default=False)
@@ -123,22 +182,6 @@ class SkillRef(models.Model):
   def __str__(self):
     return '%s %s %s' % (self.reference,"(R)" if self.is_root else "","(S)" if self.is_speciality else "")
 
-class BlessingCurse(models.Model):
-  character = models.ForeignKey(Character, on_delete=models.CASCADE)
-  name = models.CharField(max_length=64,default='',blank=True)
-  description = models.TextField(max_length=128,default='',blank=True)
-  value = models.IntegerField(default=0)  
-  def __str__(self):
-    return '%s=%s' % (self.character.full_name,self.name)
-
-class Talent(models.Model):
-  character = models.ForeignKey(Character, on_delete=models.CASCADE)
-  name = models.CharField(max_length=64,default='',blank=True)
-  description = models.TextField(max_length=512,default='',blank=True)
-  value = models.IntegerField(default=0)  
-  def __str__(self):
-    return '%s=%s' % (self.character.full_name,self.name)
-      
 class Skill(models.Model):
   character = models.ForeignKey(Character, on_delete=models.CASCADE)
   skill_ref = models.ForeignKey(SkillRef, on_delete=models.CASCADE)
@@ -149,25 +192,15 @@ class Skill(models.Model):
     return '%s=%s' % (self.character.full_name,self.skill_ref.reference)
   def fix(self):
     self.ordo = self.skill_ref.reference
-
- 
-
 @receiver(pre_save, sender=Skill, dispatch_uid="update_skill")
 def update_skill(sender, instance, **kwargs):
   instance.fix()
-
 
 class SkillInline(admin.TabularInline):
   model = Skill
   extras = 10
   ordering = ('ordo',)
   exclude = ('ordo',)
-
-class BlessingCurseInline(admin.TabularInline):
-  model = BlessingCurse
-
-class TalentInline(admin.TabularInline):
-  model = Talent
 
 class SkillRefAdmin(admin.ModelAdmin):
   ordering = ('reference',)
@@ -177,11 +210,38 @@ class SkillAdmin(admin.ModelAdmin):
   ordering = ('character','skill_ref',)
 
 
+###### Blessings/Curses
+class BlessingCurse(models.Model):
+  character = models.ForeignKey(Character, on_delete=models.CASCADE)
+  name = models.CharField(max_length=64,default='',blank=True)
+  description = models.TextField(max_length=128,default='',blank=True)
+  value = models.IntegerField(default=0)  
+  def __str__(self):
+    return '%s=%s' % (self.character.full_name,self.name)
+
+class BlessingCurseInline(admin.TabularInline):
+  model = BlessingCurse
+
+###### Talents
+class Talent(models.Model):
+  character = models.ForeignKey(Character, on_delete=models.CASCADE)
+  name = models.CharField(max_length=64,default='',blank=True)
+  description = models.TextField(max_length=512,default='',blank=True)
+  value = models.IntegerField(default=0)  
+  def __str__(self):
+    return '%s=%s' % (self.character.full_name,self.name)
+
+class TalentInline(admin.TabularInline):
+  model = Talent
+
+###### Character Admin
 class CharacterAdmin(admin.ModelAdmin):
   inlines = [
     SkillInline,
     BlessingCurseInline,
-    TalentInline
+    TalentInline,
+    WeaponInline,
+    ArmorInline
   ]  
   ordering = ('full_name',)
 

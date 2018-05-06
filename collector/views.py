@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import Http404
 from .models import SkillRef, Character, Skill
-from .forms import CharacterForm
+from .forms import CharacterForm, SkillFormSet
 from django.core.paginator import Paginator
 
 def index(request):
@@ -59,7 +59,8 @@ def add_persona(request):
 def edit_persona(request,id=None):
 	character_item = get_object_or_404(Character, id=id)
 	form = CharacterForm(request.POST or None, instance = character_item)
+	skillformset = SkillFormSet(request.POST,prefix='skills')
 	if form.is_valid():
 		form.save()
 		return redirect('/view/persona/'+str(character_item.id)+'/')
-	return render(request, 'collector/persona_form.html', {'form': form})
+	return render(request, 'collector/persona_form.html', {'form': form, 'skillformset':skillformset})

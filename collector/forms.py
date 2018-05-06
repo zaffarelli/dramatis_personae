@@ -1,5 +1,6 @@
 from django import forms
 from django.forms import ModelForm
+from django.forms import formset_factory
 from .models import Character, Skill, SkillRef
 
 class CharacterForm(ModelForm):
@@ -14,4 +15,4 @@ class SkillForm(ModelForm):
     fields = '__all__'
     exclude = ('ordo',)
 
-
+SkillFormSet = formset_factory(SkillForm)
