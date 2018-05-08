@@ -89,5 +89,25 @@
 {% endfor %}
 </ul>
 
+<h2>Weapons</h2>
+<ul>
+{% for w in c.weapon_set.all %}
+    <li>{{ t.reference }}
+				<br/>{{ w.description }}
+				<br/>{{ w.value }}			  
+		</li>
+{% endfor %}
+</ul>
+
+<h2>Armors</h2>
+<ul>
+{% for a in c.armor_set.all %}
+    <li>{{ a.reference }}
+				<br/>{{ a.description }}
+				<br/>{{ a.value }}			  
+		</li>
+{% endfor %}
+</ul>
+
 
 {% endblock details %}

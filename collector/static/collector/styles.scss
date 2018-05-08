@@ -2,6 +2,7 @@ $fics_front: #FFFFFF;
 $fics_back: #662288;
 $fics_dark: darken($fics_back, 10%);
 $fics_darker: darken($fics_back, 20%);
+$formset_back: #CFCFCE;
 
 @font-face {
     font-family: 'Optimus';
@@ -101,7 +102,7 @@ body {
                     }
 
                     & em {
-                        color: orange;
+                        
                         font-weight: bold;
                     }
                 }
@@ -109,32 +110,85 @@ body {
         }
 
         & .details {
-            background: silver;
+            & .sub {
+                position: fixed;
+                left: 5px;
+                bottom: 5px;
+            }
+            display: inline-block;
+            vertical-align: baseline;
+            background: white;
             grid-column: 2 / 2;
             grid-row: 3 / 3;
             padding: 10px;
             font-family: Euphory;
             font-size: 0.97em;
 
+            & .sheet{
+              width:100%;
+              
+            }
+            & table.formset {
+                &.inline{
+                  display:inline-block;
+                }
+                padding: 1ex 0.5em;
+                border-radius: 0.5em;
+                border: 1px solid black;
+                background: $formset_back;
+
+                & tr.row1 {
+                    background: lighten($formset_back, 10%);
+                }
+
+                & tr.row2 {
+                    background: lighten($formset_back, 20%);
+                }
+
+                & td{
+                  vertical-align:top;
+                }
+
+                & caption {
+                    font-family: Optimus;
+                    font-size: 1.3em;
+                }
+
+                & .field_wrapper {
+                    & label {
+                      width: 10ex;
+                      display: inline-block;
+                      vertical-align: top;
+                      text-align:right;
+                    }
+                    & input, & textarea, & select{
+                      box-sizing: border-box;
+                      display: inline-block;
+                      font-family: Euphory;
+                      font-size:0.93em;
+                    }
+                    & textarea{
+                      padding:0.5em;
+                      width:50ex;
+                    }
+                    & input[type=number] {
+                        width: 10ex;
+                    }
+                }
+
+                
+            }
+
             & table.stats {
                 display: inline-block;
                 border: 1px solid black;
                 border-radius: 6px;
-                background:orange;
+                background: orange;
+
                 & td {
-									height:2em;
-                }
-            & .field_wrapper {
-                & label {
-                    width: 5ex;
-                    display: inline-block;
+                    height: 2em;
                 }
 
-                & input[type=number] {
-                    width: 5ex;
-                }
-            }
-                
             }
 
             & table.coreblock {
@@ -147,18 +201,7 @@ body {
                 }
 
                 & td {
-                    width: 60ex;
-                }
-            }
-
-            & .field_wrapper {
-                & label {
-                    width: 16ex;
-                    display: inline-block;
-                }
-
-                & input[type=number] {
-                    width: 10ex;
+                    width: 60ex;                    
                 }
             }
 
@@ -167,15 +210,6 @@ body {
                 font-weight: Normal;
             }
 
-            & H2 {
-                            font-family: Optimus;
-                font-weight: Normal;
-            }
-
-            & H3 {
-                font-family: Optimus;
-                font-weight: Normal;
-            }
         }
     }
 

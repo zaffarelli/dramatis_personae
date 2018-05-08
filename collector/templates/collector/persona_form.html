@@ -6,23 +6,119 @@
 {% endblock %}
 
 {% block details %}
+<div class="sheet">
 <form method="POST" action="">
 	{% csrf_token %}
 	{{ form.non_field_errors}}
+	
+	<div class='sub'>
+	<input type="submit" value="Save this character...">
+	</div>
+
+
+<table class="formset">
+	<caption>Core</caption>
+	<tr><td>
 	<div class="field_wrapper">
 		{{ form.full_name.errors}}
-		<label for="">Full name:</label>
+		<label for="">Name</label>
 		{{form.full_name}}
 	</div>
 	<div class="field_wrapper">
 		{{ form.entrance.errors}}
-		<label for="">Entrance:</label>
+		<label for="">Entrance</label>
 		{{form.entrance}}
 	</div>
-	<br/><input type="submit" values="Save">
+		
+	<div class="field_wrapper">
+		{{ form.alliance.errors}}
+		<label for="">Alliance</label>
+		{{form.alliance}}
+	</div>
+	<div class="field_wrapper">
+		{{ form.species.errors}}
+		<label for="">Species/Race</label>
+		{{form.species}}
+	</div>
+	<div class="field_wrapper">
+		{{ form.birthdate.errors}}
+		<label for="">Birthyear</label>
+		{{form.birthdate}}
+	</div>
+	<div class="field_wrapper">
+		{{ form.gender.errors}}
+		<label for="">Gender</label>
+		{{form.gender}}
+	</div>	
+	<div class="field_wrapper">
+		{{ form.height.errors}}
+		<label for="">Height</label>
+		{{form.height}}
+	</div>
+	<div class="field_wrapper">
+		{{ form.weight.errors}}
+		<label for="">Weight</label>
+		{{form.weight}}
+	</div>
 
-<h2>Primary Attributes</h2>
-<table class="stats">
+	</td><td>
+	<div class="field_wrapper">
+		{{ form.rank.errors}}
+		<label for="">Rank</label>
+		{{form.rank}}
+	</div>
+	<div class="field_wrapper">
+		{{ form.native_fief.errors}}
+		<label for="">Native Fief</label>
+		{{form.native_fief}}
+	</div>
+	<div class="field_wrapper">
+		{{ form.caste.errors}}
+		<label for="">Caste:</label>
+		{{form.caste}}
+	</div>
+	<div class="field_wrapper">
+		{{ form.player.errors}}
+		<label for="">Player</label>
+		{{form.player}}
+	</div>
+	</td><td>
+	<div class="field_wrapper">
+		{{ form.occult.errors}}
+		<label for="">Occult</label>
+		{{form.occult}}
+	</div>
+
+	<div class="field_wrapper">
+		{{ form.occult_level.errors}}
+		<label for="">Level</label>
+		{{form.occult_level}}
+	</div>
+
+	<div class="field_wrapper">
+		{{ form.occult_darkside.errors}}
+		<label for="">Darkside</label>
+		{{form.occult_darkside}}
+	</div>
+
+
+
+	<div class="field_wrapper">
+		{{ form.narrative.errors}}
+		<label for="">Narrative</label>
+		{{form.narrative}}
+	</div>
+
+	</td></tr>
+</table>
+
+
+
+<table class="formset ">
+	<caption>Primary Attributes</caption>
+	<tr><td>
+<table class="formset inline">
+	<caption>Physical</caption>
 	<tr><td>
 	<div class="field_wrapper">
 		{{ form.PA_STR.errors}}
@@ -50,7 +146,8 @@
 	</div>
 	</td></tr>
 </table>
-<table class="stats">
+<table class="formset inline">
+	<caption>Spiritual</caption>
 	<tr><td>
 	<div class="field_wrapper">
 		{{ form.PA_INT.errors}}
@@ -78,7 +175,8 @@
 	</div>
 	</td></tr>
 </table>
-<table class="stats">
+<table class="formset inline">
+	<caption>Combat</caption>
 	<tr><td>
 	<div class="field_wrapper">
 		{{ form.PA_TEC.errors}}
@@ -106,76 +204,135 @@
 	</div>
 	</td></tr>
 </table>	
-
-<h2>Core</h2>
-<table class="coreblock">
-	<tr><td>
-	<div class="field_wrapper">
-		{{ form.alliance.errors}}
-		<label for="">Alliance:</label>
-		{{form.alliance}}
-	</div>
-	<div class="field_wrapper">
-		{{ form.species.errors}}
-		<label for="">Species/Race:</label>
-		{{form.species}}
-	</div>
-	<div class="field_wrapper">
-		{{ form.birthdate.errors}}
-		<label for="">Birthdate:</label>
-		{{form.birthdate}}
-	</div>
-	<div class="field_wrapper">
-		{{ form.gender.errors}}
-		<label for="">Gender:</label>
-		{{form.gender}}
-	</div>	
-	<div class="field_wrapper">
-		{{ form.height.errors}}
-		<label for="">Height:</label>
-		{{form.height}}
-	</div>
-	<div class="field_wrapper">
-		{{ form.weight.errors}}
-		<label for="">Weight:</label>
-		{{form.weight}}
-	</div>
-
-	</td><td>
-	<div class="field_wrapper">
-		{{ form.rank.errors}}
-		<label for="">Rank:</label>
-		{{form.rank}}
-	</div>
-	<div class="field_wrapper">
-		{{ form.native_fief.errors}}
-		<label for="">Native Fief:</label>
-		{{form.native_fief}}
-	</div>
-	<div class="field_wrapper">
-		{{ form.caste.errors}}
-		<label for="">Caste:</label>
-		{{form.caste}}
-	</div>
-	<div class="field_wrapper">
-		{{ form.player.errors}}
-		<label for="">Player:</label>
-		{{form.player}}
-	</div>
 	</td></tr>
 </table>
-	<div class="field_wrapper">
-		{{ form.narrative.errors}}
-		<label for="">Narrative:</label>
-		{{form.narrative}}
-	</div>
 
-<h2>Skills</h2>
-	<form method="post">
-		{{formset}}
-	</form>
+	<table class="formset inline">
+	<caption>Skills</caption>
+	{{ skills.management_form }}
+	{% for form in skills.forms %}
+	{% if forloop.first %}
+	<thead>
+		<tr>
+			{% for field in form.visible_fields %}
+			<th>{{ field.label|capfirst }}</th>
+			{% endfor %}
+			</tr>
+			</thead>
+	{% endif %}
+	<tr class="{% cycle 'row1' 'row2' %}">
+	{% for field in form.visible_fields %}
+	<td>
+			{{ field.errors.as_ul }}
+			{{ field }}
+	</td>
+		{% endfor %}
+	</tr>
+	{% endfor %}
+	</table>
 
-	
+
+
+
+
+	<table class="formset inline">
+  <caption>Talents</caption>
+	{{ talents.management_form }}
+	{% for form in talents.forms %}
+	{% if forloop.first %}
+	<thead>
+		<tr>
+			{% for field in form.visible_fields %}
+			<th>{{ field.label|capfirst }}</th>
+			{% endfor %}
+			</tr>
+			</thead>
+	{% endif %}
+	<tr class="{% cycle 'row1' 'row2' %}">
+	{% for field in form.visible_fields %}
+	<td>
+			{{ field.errors.as_ul }}
+			{{ field }}
+	</td>
+		{% endfor %}
+	</tr>
+	{% endfor %}
+	</table>
+
+
+	<table class="formset inline">
+	<caption>Blessings &amp; Curses</caption>
+	{{ blessingcurses.management_form }}
+	{% for form in blessingcurses.forms %}
+	{% if forloop.first %}
+	<thead>
+		<tr>
+			{% for field in form.visible_fields %}
+			<th>{{ field.label|capfirst }}</th>
+			{% endfor %}
+			</tr>
+			</thead>
+	{% endif %}
+	<tr class="{% cycle 'row1' 'row2' %}">
+	{% for field in form.visible_fields %}
+	<td>
+			{{ field.errors.as_ul }}
+			{{ field }}
+	</td>
+		{% endfor %}
+	</tr>
+	{% endfor %}
+	</table>
+
+<table class="formset inline">
+	<caption>Weapons</caption>
+	{{ blessingcurses.management_form }}
+	{% for form in weapons.forms %}
+	{% if forloop.first %}
+	<thead>
+		<tr>
+			{% for field in form.visible_fields %}
+			<th>{{ field.label|capfirst }}</th>
+			{% endfor %}
+			</tr>
+			</thead>
+	{% endif %}
+	<tr class="{% cycle 'row1' 'row2' %}">
+	{% for field in form.visible_fields %}
+	<td>
+			{{ field.errors.as_ul }}
+			{{ field }}
+	</td>
+		{% endfor %}
+	</tr>
+	{% endfor %}
+	</table>
+
+<table class="formset inline">
+	<caption>Armors</caption>
+	{{ armors.management_form }}
+	{% for form in armors.forms %}
+	{% if forloop.first %}
+	<thead>
+		<tr>
+			{% for field in form.visible_fields %}
+			<th>{{ field.label|capfirst }}</th>
+			{% endfor %}
+			</tr>
+			</thead>
+	{% endif %}
+	<tr class="{% cycle 'row1' 'row2' %}">
+	{% for field in form.visible_fields %}
+	<td>
+			{{ field.errors.as_ul }}
+			{{ field }}
+	</td>
+		{% endfor %}
+	</tr>
+	{% endfor %}
+	</table>
+
+
 </form>
-
+</div>
 {% endblock details %}

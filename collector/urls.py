@@ -4,7 +4,7 @@ from . import views
 
 urlpatterns = [
 	path('', views.index, name='index'),
-	re_path('^refs/$', views.refs, name='refs'),
+#	re_path('^refs/$', views.refs, name='refs'),
 	re_path('^personae/$', views.personae, name='personae'),
 	re_path('^recalc/$', views.recalc, name='recalc'),
 	re_path('^add/persona/$', views.add_persona, name='add_persona'),

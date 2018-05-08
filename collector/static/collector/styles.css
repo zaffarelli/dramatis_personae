@@ -71,15 +71,53 @@ body {
           body .wrapper .list ul li small, body .wrapper .list ol li small {
             font-size: 0.75em; }
           body .wrapper .list ul li em, body .wrapper .list ol li em {
-            color: orange;
             font-weight: bold; }
     body .wrapper .details {
-      background: silver;
+      display: inline-block;
+      vertical-align: baseline;
+      background: white;
       grid-column: 2 / 2;
       grid-row: 3 / 3;
       padding: 10px;
       font-family: Euphory;
       font-size: 0.97em; }
+      body .wrapper .details .sub {
+        position: fixed;
+        left: 5px;
+        bottom: 5px; }
+      body .wrapper .details .sheet {
+        width: 100%; }
+      body .wrapper .details table.formset {
+        padding: 1ex 0.5em;
+        border-radius: 0.5em;
+        border: 1px solid black;
+        background: #CFCFCE; }
+        body .wrapper .details table.formset.inline {
+          display: inline-block; }
+        body .wrapper .details table.formset tr.row1 {
+          background: #e8e8e8; }
+        body .wrapper .details table.formset tr.row2 {
+          background: white; }
+        body .wrapper .details table.formset td {
+          vertical-align: top; }
+        body .wrapper .details table.formset caption {
+          font-family: Optimus;
+          font-size: 1.3em; }
+        body .wrapper .details table.formset .field_wrapper label {
+          width: 10ex;
+          display: inline-block;
+          vertical-align: top;
+          text-align: right; }
+        body .wrapper .details table.formset .field_wrapper input, body .wrapper .details table.formset .field_wrapper textarea, body .wrapper .details table.formset .field_wrapper select {
+          box-sizing: border-box;
+          display: inline-block;
+          font-family: Euphory;
+          font-size: 0.93em; }
+        body .wrapper .details table.formset .field_wrapper textarea {
+          padding: 0.5em;
+          width: 50ex; }
+        body .wrapper .details table.formset .field_wrapper input[type=number] {
+          width: 10ex; }
       body .wrapper .details table.stats {
         display: inline-block;
         border: 1px solid black;
@@ -87,11 +125,6 @@ body {
         background: orange; }
         body .wrapper .details table.stats td {
           height: 2em; }
-        body .wrapper .details table.stats .field_wrapper label {
-          width: 5ex;
-          display: inline-block; }
-        body .wrapper .details table.stats .field_wrapper input[type=number] {
-          width: 5ex; }
       body .wrapper .details table.coreblock {
         display: inline-block;
         border: 1px solid black;
@@ -100,18 +133,7 @@ body {
           width: 15ex; }
         body .wrapper .details table.coreblock td {
           width: 60ex; }
-      body .wrapper .details .field_wrapper label {
-        width: 16ex;
-        display: inline-block; }
-      body .wrapper .details .field_wrapper input[type=number] {
-        width: 10ex; }
       body .wrapper .details H1 {
-        font-family: Optimus;
-        font-weight: Normal; }
-      body .wrapper .details H2 {
-        font-family: Optimus;
-        font-weight: Normal; }
-      body .wrapper .details H3 {
         font-family: Optimus;
         font-weight: Normal; }
   body .btn {
