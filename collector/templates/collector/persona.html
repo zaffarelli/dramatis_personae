@@ -7,24 +7,26 @@
 {% endblock %}
 
 {% block details %}
+<div class="classyview">
 <h1>{{ c.full_name }}</h1>
-<p>{{ c.entrance }}</p>
+{{ c.entrance|safe }}</br>
 <i class="fas fa-certificate"></i> <tt>{{ c.rid }}</tt>
 <br/><i class="fas fa-th-large"></i>{{ c.PA_TOTAL }} <i class="fas fa-th-list"></i>{{ c.SK_TOTAL }} <i class="fas fa-user-secret"></i>{{ c.TA_TOTAL }} <i class="fas fa-user-md"></i>{{ c.BC_TOTAL }}
 <br/>
 <table class="coreblock" id="base">
-<tr><th>Alliance</th><td>{{ c.alliance }}</td><th>Birthdate</th><td>{{ c.birthdate }} ({{ c.age }} years old)</td></tr>
-<tr><th>Species/Race</th><td>{{ c.species }}</td><th>Gender</th><td>{% if c.gender == "male" %}<i class="fas fa-mars"></i>{% else %}<i class="fas fa-venus"></i>{%endif%}</td></tr>
+<tr><th>Alliance</th><td>{{ c.alliance|safe }}</td><th>Birthdate</th><td>{{ c.birthdate }} ({{ c.age }} years old)</td></tr>
+<tr><th>Species/Race</th><td>{{ c.species|capfirst }}</td><th>Gender</th><td>{% if c.gender == "male" %}<i class="fas fa-mars"></i>{% else %}<i class="fas fa-venus"></i>{%endif%}</td></tr>
 <tr><th>Caste</th><td>{{ c.caste }}</td><th>Height</th><td>{{ c.height }}</td></tr>
 <tr><th>Native Fief</th><td>{{ c.native_fief }}</td><th>Weight</th><td>{{ c.weight }}</td></tr>
 <tr><th>Rank</th><td>{{ c.rank }}</td><th>Player</th><td>{{ c.player }}</td></tr>
 </table>
 
+<div class='narrative'>
+{{ c.narrative|safe }}
+</div>
 
-
-<p>{{ c.narrative }}</p>
-
-<h2>Primary Attributes</h2>
+<h2>Attributes</h2>
+<div class='attributes'>
 <table class="stats" id="phy">
 <tr><th>STR</th><td>{{c.PA_STR}}</td><th>CON</th><td>{{c.PA_CON}}</td></tr>
 <tr><th>BOD</th><td>{{c.PA_BOD}}</td><th>MOV</th><td>{{c.PA_MOV}}</td></tr>
@@ -40,9 +42,6 @@
 <tr><th>AGI</th><td>{{c.PA_AGI}}</td><th>AWA</th><td>{{c.PA_AWA}}</td></tr>
 </table>
 
-
-<h2>Secondary Attributes</h2>
-
 <table class="stats" id="hea">
 <tr><th>REC</th><td>{{c.SA_REC}}</td><th>STA</th><td>{{c.SA_STA}}</td></tr>
 <tr><th>END</th><td>{{c.SA_END}}</td><th>STU</th><td>{{c.SA_STU}}</td></tr>
@@ -54,60 +53,72 @@
 <tr><th>PAS</th><td>{{c.SA_PAS}}</td><th>WYR</th><td>{{c.SA_WYR}}</td></tr>
 <tr><th>SPD</th><td>{{c.SA_SPD}}</td><th>RUN</th><td>{{c.SA_RUN}}</td></tr>
 </table>
+</div>
 
+{% if c.skill_set.count != 0 %}
 <h2>Skills</h2>
-<ul>
-{% for skill in c.skill_set.all %}
-    <li>{% if skill.skill_ref.is_root %}<strong>{% endif %}
-				{% if skill.skill_ref.is_speciality %}<blockquote>{% endif %}
-			  {{ skill.skill_ref.reference }}
+<div class='skillsview'>
+{% for skill in c.skill_set.all|dictsort:"skill_ref.reference" %}
+<table>
+<tr>
+<td>{% if skill.skill_ref.is_root %}<strong>{% endif %}
+				{% if skill.skill_ref.is_speciality %}&nbsp;&nbsp;&nbsp;{% endif %}
+			  {{ skill.skill_ref.reference|safe }}
 				{% if skill.skill_ref.is_root %}</strong>{% endif %}			
-			  {{ skill.value }}
-			  {% if skill.skill_ref.is_speciality %}</blockquote>{% endif %}			  
-		</li>
+</td>
+<td>{{ skill.value }}</td>
+</tr>
+</table>
 {% endfor %}
-</ul>
+</div>
+{% endif %}
 
+{% if c.blessingcurse_set.count != 0 %}
 <h2>Blessings/Curses</h2>
-
-<ul>
-{% for bc in c.blessingcurse_set.all %}
-    <li>{{ bc.name }}
-				<br/>{{ bc.description }}
-				<br/>{{ bc.value }}			  
-		</li>
+<table>
+{% for bc in c.blessingcurse_set.all|dictsortreversed:"value" %}
+<tr>
+<td>{{ bc.name }}</td>
+<td>{{ bc.value }}</td>
+<td>{{ bc.description }}</td>
+</tr>
 {% endfor %}
-</ul>
+</table>
+{%endif%}
 
+{% if c.talent_set.count != 0 %}
 <h2>Talents</h2>
-<ul>
-{% for t in c.talent_set.all %}
-    <li>{{ t.name }}
-				<br/>{{ t.description }}
-				<br/>{{ t.value }}			  
-		</li>
+<table>
+{% for t in c.talent_set.all|dictsortreversed:"value" %}
+<tr>
+<td>{{ t.name }}</td>
+<td>{{ t.value }}</td>
+<td>{{ t.description }}</td>
+</tr>
 {% endfor %}
-</ul>
+</table>
+{%endif%}
 
+
+{% if c.weapon_set.count != 0 %}
 <h2>Weapons</h2>
-<ul>
-{% for w in c.weapon_set.all %}
-    <li>{{ t.reference }}
-				<br/>{{ w.description }}
-				<br/>{{ w.value }}			  
-		</li>
+<table>{% for w in c.weapon_set.all|dictsort:"weapon_ref.reference" %}
+{% if w.weapon_ref.category == "MELEE" %}
+<tr><td>{{ w.weapon_ref.reference|safe }} &diams; {{w.weapon_ref.category}} &diams; WA:{{ w.weapon_ref.weapon_accuracy }} &diams; {{w.weapon_ref.conceilable}} &diams; {{ w.weapon_ref.availability }} &diams; DC:{{ w.weapon_ref.damage_class|center:"8" }} &diams; STR:{{ w.weapon_ref.str_min }} &diams; RNG:{{ w.weapon_ref.rng }} &diams; {{ w.weapon_ref.rel }} {% if not w.description is empty %}<br/>{{ w.description|safe }}{% endif %}</td></tr>
+{% else %}
+<tr><td>{{ w.weapon_ref.reference|safe }} &diams; {{w.weapon_ref.category}} &diams; WA:{{ w.weapon_ref.weapon_accuracy }} &diams; {{w.weapon_ref.conceilable}} &diams; {{ w.weapon_ref.availability }} &diams; DC:{{ w.weapon_ref.damage_class|center:"8" }} &diams; Cal.{{ w.weapon_ref.caliber }} &diams; RoF:{{ w.weapon_ref.rof }} &diams; Clip:{{ w.weapon_ref.clip }} &diams; RNG:{{ w.weapon_ref.rng }} &diams; {{ w.weapon_ref.rel }} {% if not w.weapon_ref.description is empty %}<br/>{{ w.weapon_ref..description|safe }}{% endif %}</td></tr>
+{% endif %}
 {% endfor %}
-</ul>
-
-<h2>Armors</h2>
-<ul>
-{% for a in c.armor_set.all %}
-    <li>{{ a.reference }}
-				<br/>{{ a.description }}
-				<br/>{{ a.value }}			  
-		</li>
-{% endfor %}
-</ul>
+</table>
+{%endif%}
 
 
+{% if c.weapon_set.count != 0 %}
+<h2>Armor</h2>
+<table>{% for a in c.armor_set.all|dictsort:"armor_ref.stopping_power" %}
+<tr><td>{{ a.armor_ref.reference|safe }} &diams; {{a.armor_ref.category}} &diams; SP:{{ a.armor_ref.stopping_power }} &diams; HE{% if a.armor_ref.head %}<i class='fa fa-plus-circle'></i>{%else%}<i class='fa fa-minus-circle'></i>{%endif%} TO{% if a.armor_ref.torso %}<i class='fa fa-plus-circle'></i>{%else%}<i class='fa fa-minus-circle'></i>{%endif%} LA{%if  a.armor_ref.left_arm %}<i class='fa fa-plus-circle'></i>{%else%}<i class='fa fa-minus-circle'></i>{%endif%} RA{%  if a.armor_ref.right_arm %}<i class='fa fa-plus-circle'></i>{%else%}<i class='fa fa-minus-circle'></i>{%endif%} LL{% if a.armor_ref.left_leg %}<i class='fa fa-plus-circle'></i>{%else%}<i class='fa fa-minus-circle'></i>{%endif%} RL{% if a.armor_ref.right_leg %}<i class='fa fa-plus-circle'></i>{%else%}<i class='fa fa-minus-circle'></i>{%endif%}
+{% if not a.armor_ref.description is empty %}<br/>{{ a.armor_ref.description|safe }}{% endif %}</td></tr>
+{% endfor %}</table>
+{%endif%}
+</div>
 {% endblock details %}

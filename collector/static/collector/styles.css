@@ -5,7 +5,7 @@
   font-family: 'Euphory';
   src: url("Folks-Normal.ttf"); }
 body {
-  background: #290e36; }
+  background: #3a444e url("ambivalence.jpg"); }
   body .wrapper {
     display: grid;
     width: 100%;
@@ -15,25 +15,25 @@ body {
     grid-row-gap: 2px;
     justify-content: center;
     align-content: stretch;
-    background: #290e36;
     font-family: sans-serif;
     font-size: 10pt; }
     body .wrapper .logo {
-      background: #47185f url("https://pre00.deviantart.net/3f75/th/pre/i/2009/298/8/6/kafka_library_by_gryphart.jpg");
+      background: transparent url("FICS_Logo.png") center center no-repeat;
       color: #FFFFFF;
-      border-radius: 25px;
+      border-radius: 25px 5px 10px 5px;
       grid-column: 1 / 1;
       grid-row: 1 / 3;
       padding: 5px; }
     body .wrapper .title {
-      background: #662288;
+      background: #678;
       color: #FFFFFF;
       grid-column: 2 / 2;
       grid-row: 1;
       padding: 5px;
-      border-radius: 10px; }
+      border-radius: 0;
+      opacity: 0.5; }
     body .wrapper .menu {
-      background: #47185f;
+      background: #505e6b;
       border-radius: 10px;
       color: #FFFFFF;
       grid-column: 2 / 3;
@@ -41,9 +41,10 @@ body {
       justify-self: start;
       align-self: center; }
     body .wrapper .list {
-      background: #662288;
+      background: #678;
+      opacity: 0.75;
       color: #FFFFFF;
-      border-radius: 15px;
+      border-radius: 10px;
       grid-column: 1 / 1;
       grid-row: 3 / 3; }
       body .wrapper .list .pagination {
@@ -55,7 +56,7 @@ body {
           padding: 0.5em;
           color: #FFFFFF;
           font-size: 1em;
-          background: #47185f;
+          background: #505e6b;
           padding: 0.5em 0.8em;
           border-radius: 2px;
           text-decoration: none; }
@@ -73,9 +74,10 @@ body {
           body .wrapper .list ul li em, body .wrapper .list ol li em {
             font-weight: bold; }
     body .wrapper .details {
+      border-radius: 10px 0 0 0;
       display: inline-block;
       vertical-align: baseline;
-      background: white;
+      background: #505e6b;
       grid-column: 2 / 2;
       grid-row: 3 / 3;
       padding: 10px;
@@ -87,6 +89,51 @@ body {
         bottom: 5px; }
       body .wrapper .details .sheet {
         width: 100%; }
+      body .wrapper .details .attributes {
+        -moz-column-count: 5;
+        -webkit-column-count: 5;
+        column-count: 5;
+        -moz-column-gap: 5px;
+        -webkit-column-gap: 5px;
+        column-gap: 5px;
+        -moz-column-rule: 0px solid #000;
+        -webkit-column-rule: 0px solid #000;
+        column-rule: 0px solid #000;
+        color: #000000; }
+      body .wrapper .details .skillsview {
+        -moz-column-count: 3;
+        -webkit-column-count: 3;
+        column-count: 3;
+        -moz-column-gap: 5px;
+        -webkit-column-gap: 5px;
+        column-gap: 5px;
+        -moz-column-rule: 1px solid #000;
+        -webkit-column-rule: 1px solid #000;
+        column-rule: 1px dotted #8191a0;
+        color: #000000; }
+      body .wrapper .details .classyview {
+        border: 1px solid black;
+        border-radius: 10px 0 10px 0;
+        padding: 10px;
+        background: white;
+        width: 750px;
+        -moz-column-count: 1;
+        -webkit-column-count: 1;
+        column-count: 1;
+        -moz-column-gap: 10px;
+        -webkit-column-gap: 10px;
+        column-gap: 10px;
+        -moz-column-rule: 1px solid #000;
+        -webkit-column-rule: 1px solid #000;
+        column-rule: 1px dotted #8191a0;
+        color: #000000; }
+      body .wrapper .details .narrative {
+        border: 1px solid black;
+        border-radius: 5px;
+        padding: 5px;
+        column-count: 2;
+        column-gap: 10px;
+        column-rule: 1px dotted #8191a0; }
       body .wrapper .details table.formset {
         padding: 1ex 0.5em;
         border-radius: 0.5em;
@@ -121,21 +168,27 @@ body {
       body .wrapper .details table.stats {
         display: inline-block;
         border: 1px solid black;
-        border-radius: 6px;
-        background: orange; }
+        border-radius: 6px; }
         body .wrapper .details table.stats td {
-          height: 2em; }
+          height: 2em;
+          width: 25ex; }
       body .wrapper .details table.coreblock {
         display: inline-block;
         border: 1px solid black;
-        border-radius: 6px; }
+        border-radius: 6px;
+        margin-top: 0.5em;
+        margin-bottom: 0.5em; }
         body .wrapper .details table.coreblock th {
           width: 15ex; }
         body .wrapper .details table.coreblock td {
           width: 60ex; }
-      body .wrapper .details H1 {
+      body .wrapper .details H1, body .wrapper .details H2 {
         font-family: Optimus;
         font-weight: Normal; }
+      body .wrapper .details H1 {
+        margin: 0; }
+      body .wrapper .details H2 {
+        margin: 0; }
   body .btn {
     display: inline-block;
     padding: 0;

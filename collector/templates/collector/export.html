@@ -1,0 +1,30 @@
+{% for c in characters %}**********************************************
+{{ c.full_name|safe }}
+{{ c.entrance|safe }}
+{{ c.alliance|safe }} {{ c.rank|safe }} [{{ c.caste|safe }} from {{ c.native_fief|safe }}]
+{{ c.species|safe|capfirst }} [ {{ c.gender|safe }} Age:{{ c.age }}(born:{{ c.birthdate }}) {{ c.height }}cm/{{ c.weight }}kg ]{% if c.player != '' %}
+{{ c.player|safe }}{%endif%}
+Primary Attributes:
+STR {{ c.PA_STR|center:"3" }} CON {{ c.PA_CON|center:"3" }}  INT {{ c.PA_INT|center:"3" }} WIL {{ c.PA_WIL|center:"3" }}  TEC {{ c.PA_TEC|center:"3" }} REF {{ c.PA_REF|center:"3" }}
+BOD {{ c.PA_BOD|center:"3" }} MOV {{ c.PA_MOV|center:"3" }}  TEM {{ c.PA_TEM|center:"3" }} PRE {{ c.PA_PRE|center:"3" }}  AGI {{ c.PA_AGI|center:"3" }} AWA {{ c.PA_AWA|center:"3" }}
+Secondary Attributes:
+REC {{ c.SA_REC|center:"3" }} STA {{ c.SA_STA|center:"3" }}  RES {{ c.SA_RES|center:"3" }} DMG {{ c.SA_DMG|center:"3" }}  PAS {{ c.SA_PAS|center:"3" }} WYR {{ c.SA_WYR|center:"3" }}
+END {{ c.SA_END|center:"3" }} STU {{ c.SA_STU|center:"3" }}  TOL {{ c.SA_TOL|center:"3" }} HUM {{ c.SA_HUM|center:"3" }}  SPD {{ c.SA_SPD|center:"3" }} RUN {{ c.SA_RUN|center:"3" }}
+{% if c.occult_level > 0 %}Occult: {{ c.occult }} : Level {{ c.occult_level }} / {{ c.occult_darkside }}
+{% endif %}Skills ({{c.SK_TOTAL}}):
+{% for s in c.skill_set.all|dictsort:"skill_ref.reference" %}{{ s.skill_ref.reference|safe }}:{{ s.value }} {% endfor %}{% if c.talent_set.count != 0 %}
+Talents:
+{% for t in c.talent_set.all %}- {{ t.name|safe }} ({{ t.value }})
+{% if not t.description is empty%}{{ t.description|safe }}{% endif %}{% endfor %}{%endif%}{% if c.blessingcurse_set.count != 0 %}
+Blessings / Curses:{% for bc in c.blessingcurse_set.all %}
+- {{ bc.name|safe }} ({{ bc.value }})
+{% if not bc.description is empty %}{{ bc.description|safe }}{% endif %}{% endfor %}{%endif%}{% if c.weapon_set.count != 0 %}
+Weapons:{% for w in c.weapon_set.all %}
+- {{ w.weapon_ref.reference|safe|ljust:"30" }} {{w.weapon_ref.Category}} CO:{{w.weapon_ref.conceilable}} WA:{{ w.weapon_ref.wa }} DC:{{ w.weapon_ref.damage_class|center:"8" }} STR:{{ w.weapon_ref.str_min }}{% if not w.description is empty %}{{ w.description|safe }}{% endif %}{% endfor %}{%endif%}{% if c.armor_set.count != 0 %}
+Armor:{% for a in c.armor_set.all %}
+- {{ a.name|safe }} ({{ a.value }}){% if not a.description is empty %}
+{{ a.description|safe }}{% endif %}{% endfor %}{%endif%}
+{% if not c.narrative is empty%}{{ c.narrative|safe }}{%endif%}
+Challenge: {{c.challenge}}
+{{ c.rid }}
+{% endfor %}

@@ -1,6 +1,7 @@
 $fics_front: #FFFFFF;
-$fics_back: #662288;
+$fics_back: #678;
 $fics_dark: darken($fics_back, 10%);
+$fics_light: lighten($fics_back, 10%);
 $fics_darker: darken($fics_back, 20%);
 $formset_back: #CFCFCE;
 
@@ -15,7 +16,7 @@ $formset_back: #CFCFCE;
 }
 
 body {
-    background: $fics_darker;
+    background: $fics_darker url("ambivalence.jpg");
 
     & .wrapper {
         display: grid;
@@ -26,17 +27,19 @@ body {
         grid-row-gap: 2px;
         justify-content: center;
         align-content: stretch;
-        background: $fics_darker;
+        //background: $fics_darker;
         font-family: sans-serif;
         font-size: 10pt;
+        
 
         & .logo {
-            background: $fics_dark url("https://pre00.deviantart.net/3f75/th/pre/i/2009/298/8/6/kafka_library_by_gryphart.jpg");
+            background: transparent url("FICS_Logo.png") center center no-repeat;
             color: $fics_front;
-            border-radius: 25px;
+            border-radius: 25px 5px 10px 5px;
             grid-column: 1 / 1;
             grid-row: 1 / 3;
             padding: 5px;
+            
         }
 
         & .title {
@@ -45,7 +48,8 @@ body {
             grid-column: 2 / 2;
             grid-row: 1;
             padding: 5px;
-            border-radius: 10px;
+            border-radius: 0;
+            opacity:0.5;
         }
 
         & .menu {
@@ -77,8 +81,9 @@ body {
             }
 
             background: $fics_back;
+            opacity:0.75;
             color: $fics_front;
-            border-radius: 15px;
+            border-radius: 10px;
             grid-column: 1 / 1;
             grid-row: 3 / 3;
 
@@ -115,19 +120,76 @@ body {
                 left: 5px;
                 bottom: 5px;
             }
+            border-radius:10px 0 0 0;
             display: inline-block;
             vertical-align: baseline;
-            background: white;
+            background: $fics_dark;
             grid-column: 2 / 2;
             grid-row: 3 / 3;
             padding: 10px;
             font-family: Euphory;
             font-size: 0.97em;
-
             & .sheet{
-              width:100%;
+              width:100%;              
+            }
+
+            & .attributes{
+              -moz-column-count: 5;
+              -webkit-column-count:5;
+              column-count:5;
+              -moz-column-gap: 5px;
+              -webkit-column-gap:5px;
+              column-gap:5px;
+              -moz-column-rule: 0px solid #000;
+              -webkit-column-rule:0px solid #000;
+              column-rule:0px solid #000;
+              color:#000000;
+            }
+
+
+            & .skillsview{
+              -moz-column-count: 3;
+              -webkit-column-count:3;
+              column-count:3;
+              -moz-column-gap: 5px;
+              -webkit-column-gap:5px;
+              column-gap:5px;
+              -moz-column-rule: 1px solid #000;
+              -webkit-column-rule:1px solid #000;
+              column-rule:1px dotted $fics_light;
+              color:#000000;
+            }
+            
+            & .classyview{
+              border:1px solid black;
+              border-radius:10px 0 10px 0;
+              padding:10px;
+              background:white;
+              width:750px;
+              
+              -moz-column-count: 1;
+              -webkit-column-count:1;
+              column-count:1;
+              -moz-column-gap: 10px;
+              -webkit-column-gap:10px;
+              column-gap:10px;
+              
+              -moz-column-rule: 1px solid #000;
+              -webkit-column-rule:1px solid #000;
+              column-rule:1px dotted $fics_light;
+              color:#000000;
               
             }
+
+            & .narrative{
+              border:1px solid black;
+              border-radius:5px;
+              padding:5px;
+              column-count:2;
+              column-gap:10px;
+              column-rule:1px dotted $fics_light;
+            } 
+            
             & table.formset {
                 &.inline{
                   display:inline-block;
@@ -183,10 +245,11 @@ body {
                 display: inline-block;
                 border: 1px solid black;
                 border-radius: 6px;
-                background: orange;
+
 
                 & td {
                     height: 2em;
+                    width:25ex;
                 }
 
             }
@@ -195,7 +258,8 @@ body {
                 display: inline-block;
                 border: 1px solid black;
                 border-radius: 6px;
-
+                margin-top:0.5em;
+                margin-bottom:0.5em;
                 & th {
                     width: 15ex;
                 }
@@ -205,9 +269,18 @@ body {
                 }
             }
 
-            & H1 {
+            & H1, & H2 {
                 font-family: Optimus;
                 font-weight: Normal;
+            }
+            & H1{
+              margin:0;
+              
+            }
+
+            & H2{
+              margin:0;
+              
             }
 
         }

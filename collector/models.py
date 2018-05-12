@@ -5,19 +5,21 @@ from django.db.models.signals import pre_save
 from django.dispatch import receiver
 import hashlib
 import math
+from collector import fs_fics7
+
 
 ###### Characters
-class Character(models.Model):
+class Character(models.Model):  
   full_name = models.CharField(max_length=200)
-  rid = models.CharField(max_length=200, default='')
-  alliance = models.CharField(max_length=200, default='none')
+  rid = models.CharField(max_length=200, default='none')
+  alliance = models.CharField(max_length=200, blank=True, default='')
   player = models.CharField(max_length=200, default='', blank=True)
   species = models.CharField(max_length=200, default='urthish')
   birthdate = models.IntegerField(default=0)
-  gender = models.CharField(max_length=30, default='male')
+  gender = models.CharField(max_length=30, default='female')
   native_fief = models.CharField(max_length=200, default='none',blank=True)
   caste = models.CharField(max_length=100, default='Freefolk',blank=True)
-  rank = models.CharField(max_length=100, default='none', blank=True)
+  rank = models.CharField(max_length=100, default='', blank=True)
   height = models.IntegerField(default=150)
   weight = models.IntegerField(default=50)
   narrative = models.TextField(default='',blank=True)
@@ -51,14 +53,15 @@ class Character(models.Model):
   SK_TOTAL = models.IntegerField(default=0)
   TA_TOTAL = models.IntegerField(default=0)
   BC_TOTAL = models.IntegerField(default=0)
+  gm_shortcuts = models.TextField(default='',blank=True)
   age = models.IntegerField(default=0)
   occult_level = models.PositiveIntegerField(default=0)
   occult_darkside = models.PositiveIntegerField(default=0)
   occult = models.CharField(max_length=50, default='', blank=True)
-  challenge = models.TextField(default='',blank=True)
+  challenge = models.TextField(default='',blank=True)  
+  ready_for_export =  models.BooleanField(default=False)
   def fix(self):
-    # Rules revision 166
-    self.rid = hashlib.sha1(bytes(self.full_name,'utf-8')).hexdigest()
+    # Rules revision 166    
     self.SA_REC = self.PA_STR + self.PA_CON
     self.SA_STA = math.ceil(self.PA_BOD / 2) - 1
     self.SA_END = (self.PA_BOD + self.PA_STR) * 5
@@ -84,6 +87,42 @@ class Character(models.Model):
       self.player = ''
     # Skills total
     self.SK_TOTAL = 0
+#    if not self.skill_set.count == 0:
+#      skills = self.skill_set.order_by("-value","skill_ref__reference")
+#      prev = None
+#      for s in skills:
+#        if prev is None:
+#          prev = s
+#          print("%s"%prev.skill_ref.reference)
+#        cur = s
+#        print("%s %s"%(cur,prev))
+#        if cur.skill_ref == prev.skill_ref:
+#          cur.delete()
+#          this_skill = Skill.objects.filter(id=s.id).delete()
+#        else:
+#          prev = cur
+    skills = self.skill_set.all()
+    # Everyman
+    print("%s is a(n) %s"%(self.full_name,self.species))
+    for every in fs_fics7.EVERYMAN[self.species]:
+      every_found = False
+      for s in skills:
+        if s.skill_ref.reference == every:
+          every_found = True
+          if s.value < 2:          
+            print("Value fixed for %s"%s.skill_ref.reference)
+            this_skill = Skill.objects.get(id=s.id)
+            this_skill.value = 2
+            this_skill.save()
+          break
+      if not every_found:
+        print("Not found: %s... Added!"%every)
+        this_skill_ref = SkillRef.objects.get(reference=every)
+        this_skill = Skill()
+        this_skill.character=self
+        this_skill.skill_ref=this_skill_ref
+        this_skill.value = 2
+        this_skill.save()
     skills = self.skill_set.all()
     for s in skills:
       if s.skill_ref.is_root == False:
@@ -99,28 +138,35 @@ class Character(models.Model):
     for bc in blessingcurses:
       self.BC_TOTAL += bc.value
     self.challenge = self.PA_TOTAL*3 + self.SK_TOTAL + self.TA_TOTAL + self.BC_TOTAL
+    self.ready_for_export = False
+    if self.player != '':
+      self.ready_for_export = True
+    if self.SK_TOTAL >= self.PA_TOTAL:
+      self.ready_for_export = True
   def __str__(self):
-    return '%s' % self.full_name
+    return '%s' % self.full_name  
 
 @receiver(pre_save, sender=Character, dispatch_uid="update_character")
 def update_character(sender, instance, **kwargs):
-  instance.fix()
+  if instance.rid != 'none':
+    instance.fix()
+  instance.rid = hashlib.sha1(bytes(instance.full_name,'utf-8')).hexdigest()
   print("%s --> %s" % (instance.full_name,instance.rid))
 
 ###### Weapons
 class WeaponRef(models.Model):
   reference = models.CharField(max_length=64,default='',blank=True)
-  category = models.CharField(max_length=16,default='RIF',blank=True)
-  wa = models.IntegerField(default=0,blank=True)
-  conceilable = models.CharField(max_length=16,default='Jacket',blank=True)
-  availability = models.CharField(max_length=16,default='CO',blank=True)
+  category = models.CharField(max_length=5,choices=(('MELEE',"Melee weapon"),('P',"Pistol/revolver"),('RIF',"Rifle"),('SMG',"Submachinegun"),('SHG',"Shotgun"),('HVY',"Heavy weapon"),('EX',"Exotic weapon")),default='RIF',blank=True)
+  weapon_accuracy = models.IntegerField(default=0,blank=True)
+  conceilable = models.CharField(max_length=1,choices=(('P',"Pocket"),('J',"Jacket"),('L',"Long coat"),('N',"Can't be hidden")),default='J',blank=True)
+  availability = models.CharField(max_length=1,choices=(('E',"Excellent"),('C',"Common"),('P',"Poor"),('R',"Rare")),default='C',blank=True)
   damage_class = models.CharField(max_length=16,default='1d6',blank=True)
   caliber = models.CharField(max_length=16,default='',blank=True)
   str_min = models.PositiveIntegerField(default=0,blank=True)
   rof = models.PositiveIntegerField(default=0,blank=True)
   clip = models.PositiveIntegerField(default=0,blank=True)
   rng = models.PositiveIntegerField(default=0,blank=True)
-  rel = models.CharField(max_length=64,default='',blank=True)
+  rel = models.CharField(max_length=2,choices=(('VR',"Very reliable"),('ST',"Standard"),('UR',"Unreliable")),default='ST',blank=True)
   description = models.TextField(max_length=256,default='',blank=True)
   def __str__(self):
     return '%s' % (self.reference)
@@ -145,14 +191,15 @@ class WeaponInline(admin.TabularInline):
 ###### Armors
 class ArmorRef(models.Model):
   reference = models.CharField(max_length=64,default='',blank=True)
-  category = models.CharField(max_length=16,default='SOFT',blank=True)
-  head = models.BooleanField(default=True)
+  category = models.CharField(max_length=5,choices=(('SOFT',"Soft Armor"),('MEDIUM',"Medium Armor"),('HARD',"Hard Armor")),default='SOFT',blank=True)
+  head = models.BooleanField(default=False)
   torso = models.BooleanField(default=True)
   left_arm = models.BooleanField(default=True)
   right_arm = models.BooleanField(default=True)
-  left_leg = models.BooleanField(default=True)
-  right_leg = models.BooleanField(default=True)
-  stopping_power = models.PositiveIntegerField(default=2, blank=True)  
+  left_leg = models.BooleanField(default=False)
+  right_leg = models.BooleanField(default=False)
+  stopping_power = models.PositiveIntegerField(default=2, blank=True)
+  description = models.TextField(max_length=128,default='', blank=True)
   def __str__(self):
     return '%s' % (self.reference)
 
@@ -186,12 +233,12 @@ class Skill(models.Model):
   character = models.ForeignKey(Character, on_delete=models.CASCADE)
   skill_ref = models.ForeignKey(SkillRef, on_delete=models.CASCADE)
   value = models.PositiveIntegerField(default=0)
-  ordo = models.CharField(max_length=200, blank=True)
+  #ordo = models.CharField(max_length=200, blank=True)
   ordering = ('skill_ref.reference')  
   def __str__(self):
     return '%s=%s' % (self.character.full_name,self.skill_ref.reference)
   def fix(self):
-    self.ordo = self.skill_ref.reference
+    pass
 @receiver(pre_save, sender=Skill, dispatch_uid="update_skill")
 def update_skill(sender, instance, **kwargs):
   instance.fix()
@@ -199,8 +246,8 @@ def update_skill(sender, instance, **kwargs):
 class SkillInline(admin.TabularInline):
   model = Skill
   extras = 10
-  ordering = ('ordo',)
-  exclude = ('ordo',)
+  ordering = ('skill_ref',)
+  #exclude = ('ordo',)
 
 class SkillRefAdmin(admin.ModelAdmin):
   ordering = ('reference',)

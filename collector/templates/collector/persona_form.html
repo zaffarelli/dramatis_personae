@@ -109,6 +109,12 @@
 		{{form.narrative}}
 	</div>
 
+	<div class="field_wrapper">
+		{{ form.ready_for_export.errors}}
+		<label for="">Exportable</label>
+		{{form.ready_for_export}}
+	</div>
+
 	</td></tr>
 </table>
 
@@ -209,53 +215,17 @@
 
 	<table class="formset inline">
 	<caption>Skills</caption>
-	{{ skills.management_form }}
+	{{ skills.management_form }}	
 	{% for form in skills.forms %}
-	{% if forloop.first %}
-	<thead>
-		<tr>
-			{% for field in form.visible_fields %}
-			<th>{{ field.label|capfirst }}</th>
-			{% endfor %}
-			</tr>
-			</thead>
-	{% endif %}
-	<tr class="{% cycle 'row1' 'row2' %}">
-	{% for field in form.visible_fields %}
-	<td>
-			{{ field.errors.as_ul }}
-			{{ field }}
-	</td>
-		{% endfor %}
-	</tr>
+	  {{ form.as_table }}
 	{% endfor %}
 	</table>
-
-
-
-
 
 	<table class="formset inline">
   <caption>Talents</caption>
 	{{ talents.management_form }}
 	{% for form in talents.forms %}
-	{% if forloop.first %}
-	<thead>
-		<tr>
-			{% for field in form.visible_fields %}
-			<th>{{ field.label|capfirst }}</th>
-			{% endfor %}
-			</tr>
-			</thead>
-	{% endif %}
-	<tr class="{% cycle 'row1' 'row2' %}">
-	{% for field in form.visible_fields %}
-	<td>
-			{{ field.errors.as_ul }}
-			{{ field }}
-	</td>
-		{% endfor %}
-	</tr>
+	{{ form.as_table }}
 	{% endfor %}
 	</table>
 
@@ -264,47 +234,15 @@
 	<caption>Blessings &amp; Curses</caption>
 	{{ blessingcurses.management_form }}
 	{% for form in blessingcurses.forms %}
-	{% if forloop.first %}
-	<thead>
-		<tr>
-			{% for field in form.visible_fields %}
-			<th>{{ field.label|capfirst }}</th>
-			{% endfor %}
-			</tr>
-			</thead>
-	{% endif %}
-	<tr class="{% cycle 'row1' 'row2' %}">
-	{% for field in form.visible_fields %}
-	<td>
-			{{ field.errors.as_ul }}
-			{{ field }}
-	</td>
-		{% endfor %}
-	</tr>
+	{{ form.as_table }}
 	{% endfor %}
 	</table>
 
 <table class="formset inline">
 	<caption>Weapons</caption>
-	{{ blessingcurses.management_form }}
+	{{ weapons.management_form }}
 	{% for form in weapons.forms %}
-	{% if forloop.first %}
-	<thead>
-		<tr>
-			{% for field in form.visible_fields %}
-			<th>{{ field.label|capfirst }}</th>
-			{% endfor %}
-			</tr>
-			</thead>
-	{% endif %}
-	<tr class="{% cycle 'row1' 'row2' %}">
-	{% for field in form.visible_fields %}
-	<td>
-			{{ field.errors.as_ul }}
-			{{ field }}
-	</td>
-		{% endfor %}
-	</tr>
+		{{ form.as_table }}
 	{% endfor %}
 	</table>
 
@@ -312,23 +250,7 @@
 	<caption>Armors</caption>
 	{{ armors.management_form }}
 	{% for form in armors.forms %}
-	{% if forloop.first %}
-	<thead>
-		<tr>
-			{% for field in form.visible_fields %}
-			<th>{{ field.label|capfirst }}</th>
-			{% endfor %}
-			</tr>
-			</thead>
-	{% endif %}
-	<tr class="{% cycle 'row1' 'row2' %}">
-	{% for field in form.visible_fields %}
-	<td>
-			{{ field.errors.as_ul }}
-			{{ field }}
-	</td>
-		{% endfor %}
-	</tr>
+		{{ form.as_table }}
 	{% endfor %}
 	</table>
 

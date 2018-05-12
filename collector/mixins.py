@@ -7,7 +7,6 @@ class AjaxFormMixin(object):
             return JsonResponse(form.errors, status=400)
         else:
             return response
-
     def form_valid(self, form):
         response = super(AjaxFormMixin, self).form_valid(form)
         if self.request.is_ajax():
