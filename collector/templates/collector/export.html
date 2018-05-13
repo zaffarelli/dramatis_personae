@@ -22,8 +22,10 @@ Blessings / Curses:{% for bc in c.blessingcurse_set.all %}
 Weapons:{% for w in c.weapon_set.all %}
 - {{ w.weapon_ref.reference|safe|ljust:"30" }} {{w.weapon_ref.Category}} CO:{{w.weapon_ref.conceilable}} WA:{{ w.weapon_ref.wa }} DC:{{ w.weapon_ref.damage_class|center:"8" }} STR:{{ w.weapon_ref.str_min }}{% if not w.description is empty %}{{ w.description|safe }}{% endif %}{% endfor %}{%endif%}{% if c.armor_set.count != 0 %}
 Armor:{% for a in c.armor_set.all %}
-- {{ a.name|safe }} ({{ a.value }}){% if not a.description is empty %}
-{{ a.description|safe }}{% endif %}{% endfor %}{%endif%}
+- {{ a.armor_ref.reference|safe }} ({{ a.value }}){% if not a.description is empty %}
+{{ a.description|safe }}{% endif %}{% endfor %}{%endif%}{% if c.shield_set.count != 0 %}
+Energy Shield:{% for sh in c.shield_set.all %}
+- {{ sh.shield_ref.reference|safe }} ({{ sh.shield_ref.hits }} {{ sh.shield_ref.protection_min }}/{{ sh.shield_ref.protection_max }}){% endfor %}{%endif%}
 {% if not c.narrative is empty%}{{ c.narrative|safe }}{%endif%}
 Challenge: {{c.challenge}}
 {{ c.rid }}

@@ -1,32 +1,33 @@
 {% extends "base.html" %}
 
 
+
+	
 {% block menu %}
-	<a class="btn" href="/">List</a>
+	<a class="btn" href="{% url 'index' %}"><i class="fas fa-users"></i></a>		
 {% endblock %}
 
 {% block details %}
-<div class="sheet">
+<div class="classyview">
 <form method="POST" action="">
 	{% csrf_token %}
 	{{ form.non_field_errors}}
-	
-	<div class='sub'>
-	<input type="submit" value="Save this character...">
-	</div>
 
+<div class='sub'>
+	<button class='btn' type="submit" ><i class='fas fa-user-tag'></i></button>
+	</div>
 
 <table class="formset">
 	<caption>Core</caption>
 	<tr><td>
 	<div class="field_wrapper">
 		{{ form.full_name.errors}}
-		<label for="">Name</label>
+		<label for="full_name">Name</label>
 		{{form.full_name}}
 	</div>
 	<div class="field_wrapper">
 		{{ form.entrance.errors}}
-		<label for="">Entrance</label>
+		<label for="entrance">Entrance</label>
 		{{form.entrance}}
 	</div>
 		
@@ -101,6 +102,11 @@
 		{{form.occult_darkside}}
 	</div>
 
+	<div class="field_wrapper">
+		{{ form.keyword.errors}}
+		<label for="">Keyword</label>
+		{{form.keyword}}
+	</div>
 
 
 	<div class="field_wrapper">
@@ -250,6 +256,14 @@
 	<caption>Armors</caption>
 	{{ armors.management_form }}
 	{% for form in armors.forms %}
+		{{ form.as_table }}
+	{% endfor %}
+	</table>
+
+<table class="formset inline">
+	<caption>Energy Shield</caption>
+	{{ shields.management_form }}
+	{% for form in shields.forms %}
 		{{ form.as_table }}
 	{% endfor %}
 	</table>

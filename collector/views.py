@@ -1,19 +1,44 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.shortcuts import render, get_object_or_404, redirect
-from django.http import Http404
-from .models import SkillRef, Character, Skill
-from .forms import CharacterForm, SkillFormSet, TalentFormSet, BlessingCurseFormSet, WeaponFormSet, ArmorFormSet
+from .models import Character #, Skill, Shield, ShieldRef, Talent, SkillRef, 
+from .forms import CharacterForm, SkillFormSet, TalentFormSet, BlessingCurseFormSet, WeaponFormSet, ArmorFormSet, ShieldFormSet
 from django.core.paginator import Paginator
-from django.views.generic.list import ListView
-
+#from django.views.generic.list import ListView
+#from django.views.generic.edit import DeleteView
+#from django.urls import reverse_lazy
 
 def index(request):
-  character_items = Character.objects.order_by('-player','-alliance','-challenge')
-  paginator = Paginator(character_items,10)
+  character_items = Character.objects.order_by('keyword')
+  paginator = Paginator(character_items,20)
   page = request.GET.get('page')
   character_items = paginator.get_page(page)
   context = {'character_items': character_items}
   return render(request, 'collector/index.html', context)
+
+def by_keyword_personae(request,keyword):
+  character_items = Character.objects.filter(keyword=keyword)
+  paginator = Paginator(character_items,12)
+  page = request.GET.get('page')
+  character_items = paginator.get_page(page)
+  context = {'character_items': character_items}
+  return render(request, 'collector/index.html', context)
+
+def by_alliance_personae(request,alliancehash):
+  character_items = Character.objects.filter(alliancehash=alliancehash)
+  paginator = Paginator(character_items,12)
+  page = request.GET.get('page')
+  character_items = paginator.get_page(page)
+  context = {'character_items': character_items}
+  return render(request, 'collector/index.html', context)
+
+def by_species_personae(request,species):
+  character_items = Character.objects.filter(species=species)
+  paginator = Paginator(character_items,12)
+  page = request.GET.get('page')
+  character_items = paginator.get_page(page)
+  context = {'character_items': character_items}
+  return render(request, 'collector/index.html', context)
+
 
 def recalc(request):
   character_items = Character.objects.all()
@@ -50,25 +75,33 @@ def edit_persona(request,id=None):
     blessingcurses = BlessingCurseFormSet(request.POST, request.FILES, instance=character_item)
     armors = ArmorFormSet(request.POST, request.FILES, instance=character_item)
     weapons = WeaponFormSet(request.POST, request.FILES, instance=character_item)
+    shields = ShieldFormSet(request.POST, request.FILES, instance=character_item)
     skv = skills.is_valid()
     tav = talents.is_valid() 
     bcv = blessingcurses.is_valid()
     arv = armors.is_valid()
     wpv = weapons.is_valid()
-    if skv and tav and bcv and arv and wpv and form.is_valid():
+    shv = shields.is_valid()
+    if skv and tav and bcv and arv and wpv and shv and form.is_valid():
       skills.save()
       talents.save()
       blessingcurses.save()
       armors.save()
       weapons.save()
+      shields.save()
       form.save()
       return redirect('/view/persona/'+str(character_item.id)+'/')
   else:
-    skills = SkillFormSet(instance=character_item, queryset=character_item.skill_set.order_by("-value"))
+    skills = SkillFormSet(instance=character_item, queryset=character_item.skill_set.order_by("skill_ref__reference"))
     talents = TalentFormSet(instance=character_item, queryset=character_item.talent_set.order_by("-value"))
     blessingcurses = BlessingCurseFormSet(instance=character_item)
     armors = ArmorFormSet(instance=character_item)
     weapons = WeaponFormSet(instance=character_item)
-  return render(request, 'collector/persona_form.html', {'form': form, 'skills': skills, 'armors': armors, 'weapons': weapons, 'blessingcurses': blessingcurses, 'talents': talents})
+    shields = ShieldFormSet(instance=character_item)
+  return render(request, 'collector/persona_form.html', {'form': form, 'cid':character_item.id, 'skills': skills, 'armors': armors, 'weapons': weapons, 'blessingcurses': blessingcurses, 'talents': talents, 'shields': shields})
 
+
+#class CharacterDelete(DeleteView):
+#  model = Character
+#  success_url = reverse_lazy('index')
 

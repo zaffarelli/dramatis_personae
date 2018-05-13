@@ -13,6 +13,7 @@ class Character(models.Model):
   full_name = models.CharField(max_length=200)
   rid = models.CharField(max_length=200, default='none')
   alliance = models.CharField(max_length=200, blank=True, default='')
+  alliancehash = models.CharField(max_length=200, blank=True, default='none')
   player = models.CharField(max_length=200, default='', blank=True)
   species = models.CharField(max_length=200, default='urthish')
   birthdate = models.IntegerField(default=0)
@@ -24,6 +25,7 @@ class Character(models.Model):
   weight = models.IntegerField(default=50)
   narrative = models.TextField(default='',blank=True)
   entrance = models.CharField(max_length=100,default='',blank=True)
+  keyword = models.CharField(max_length=32, blank=True, default='')
   PA_STR = models.PositiveIntegerField(default=3)
   PA_CON = models.PositiveIntegerField(default=3)
   PA_BOD = models.PositiveIntegerField(default=3)
@@ -151,6 +153,7 @@ def update_character(sender, instance, **kwargs):
   if instance.rid != 'none':
     instance.fix()
   instance.rid = hashlib.sha1(bytes(instance.full_name,'utf-8')).hexdigest()
+  instance.alliancehash = hashlib.sha1(bytes(instance.alliance,'utf-8')).hexdigest()
   print("%s --> %s" % (instance.full_name,instance.rid))
 
 ###### Weapons
@@ -160,16 +163,17 @@ class WeaponRef(models.Model):
   weapon_accuracy = models.IntegerField(default=0,blank=True)
   conceilable = models.CharField(max_length=1,choices=(('P',"Pocket"),('J',"Jacket"),('L',"Long coat"),('N',"Can't be hidden")),default='J',blank=True)
   availability = models.CharField(max_length=1,choices=(('E',"Excellent"),('C',"Common"),('P',"Poor"),('R',"Rare")),default='C',blank=True)
-  damage_class = models.CharField(max_length=16,default='1d6',blank=True)
+  damage_class = models.CharField(max_length=16,default='',blank=True)
   caliber = models.CharField(max_length=16,default='',blank=True)
   str_min = models.PositiveIntegerField(default=0,blank=True)
   rof = models.PositiveIntegerField(default=0,blank=True)
   clip = models.PositiveIntegerField(default=0,blank=True)
   rng = models.PositiveIntegerField(default=0,blank=True)
   rel = models.CharField(max_length=2,choices=(('VR',"Very reliable"),('ST',"Standard"),('UR',"Unreliable")),default='ST',blank=True)
+  cost = models.PositiveIntegerField(default=0,blank=True)
   description = models.TextField(max_length=256,default='',blank=True)
   def __str__(self):
-    return '%s' % (self.reference)
+    return '%s (%s/%s/%s/%s£)' % (self.reference, self.category, self.damage_class, self.caliber, self.cost)
 
 class Weapon(models.Model):
   character = models.ForeignKey(Character, on_delete=models.CASCADE)
@@ -179,7 +183,7 @@ class Weapon(models.Model):
     return '%s=%s' % (self.character.full_name,self.weapon_ref.reference)
 
 class WeaponRefAdmin(admin.ModelAdmin):
-  ordering = ('reference',)  
+  ordering = ('category','reference',)  
 
 class WeaponAdmin(admin.ModelAdmin):
   ordering = ('character','weapon_ref',)
@@ -217,6 +221,36 @@ class ArmorAdmin(admin.ModelAdmin):
 
 class ArmorInline(admin.TabularInline):
   model = Armor
+
+###### Energy Shield
+class ShieldRef(models.Model):
+  reference = models.CharField(max_length=16,default='',blank=True)
+  protection_min = models.PositiveIntegerField(default=10,blank=True)
+  protection_max = models.PositiveIntegerField(default=20,blank=True)
+  hits = models.PositiveIntegerField(default=10,blank=True)
+  cost = models.PositiveIntegerField(default=500,blank=True)
+  is_compatible_with_medium_armor = models.BooleanField(default=False)
+  is_compatible_with_hard_armor = models.BooleanField(default=False)
+  description = models.TextField(max_length=128,default='', blank=True)
+  def __str__(self):
+    return '%s' % (self.reference)
+
+class Shield(models.Model):
+  character = models.ForeignKey(Character, on_delete=models.CASCADE)
+  shield_ref = models.ForeignKey(ShieldRef, on_delete=models.CASCADE)
+  charges = models.PositiveIntegerField(default=10, blank=True)
+  def __str__(self):
+    return '%s=%s' % (self.character.full_name,self.shield_ref.reference)
+
+class ShieldRefAdmin(admin.ModelAdmin):
+  ordering = ('reference',)  
+
+class ShieldAdmin(admin.ModelAdmin):
+  ordering = ('character','shield_ref',)
+
+class ShieldInline(admin.TabularInline):
+  model = Shield
+
 
 
 ###### Skills

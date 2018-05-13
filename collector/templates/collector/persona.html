@@ -2,17 +2,20 @@
 
 
 {% block menu %}
-	<a class="btn" href="/">List</a>
-	<a class='btn' href="/edit/persona/{{ c.id }}/">Edit</a>		
+	<a class="btn" href="{% url 'index' %}"><i class="fas fa-users"></i></a>
+	<a class='btn' href="{% url 'edit_persona' c.id %}"><i class="fas fa-user-edit"></i></a>
+  <a class='btn' href="{% url 'add_persona' %}"><i class="fas fa-user-plus"></i></a>
+  <a class='btn' href="{% url 'recalc' %}"><i class="fas fa-users-cog"></i></a>
+  <a class='btn' href="{% url 'export' %}"><i class="fas fa-taxi"></i></a>
+  <a class='btn' href="{% url 'by_keyword' c.keyword %}" title="Same Keyword"><i class="fas fa-user-friends"></i></a>
+  <a class='btn' href="{% url 'by_alliance' c.alliancehash %}" title="Same Alliance"><i class="fas fa-user-tie"></i></a>
+  <a class='btn' href="{% url 'by_species' c.species %}  " title="Same Species/Race" ><i class="fas fa-user-ninja"></i></a>
 {% endblock %}
 
 {% block details %}
 <div class="classyview">
 <h1>{{ c.full_name }}</h1>
 {{ c.entrance|safe }}</br>
-<i class="fas fa-certificate"></i> <tt>{{ c.rid }}</tt>
-<br/><i class="fas fa-th-large"></i>{{ c.PA_TOTAL }} <i class="fas fa-th-list"></i>{{ c.SK_TOTAL }} <i class="fas fa-user-secret"></i>{{ c.TA_TOTAL }} <i class="fas fa-user-md"></i>{{ c.BC_TOTAL }}
-<br/>
 <table class="coreblock" id="base">
 <tr><th>Alliance</th><td>{{ c.alliance|safe }}</td><th>Birthdate</th><td>{{ c.birthdate }} ({{ c.age }} years old)</td></tr>
 <tr><th>Species/Race</th><td>{{ c.species|capfirst }}</td><th>Gender</th><td>{% if c.gender == "male" %}<i class="fas fa-mars"></i>{% else %}<i class="fas fa-venus"></i>{%endif%}</td></tr>
@@ -113,12 +116,25 @@
 {%endif%}
 
 
-{% if c.weapon_set.count != 0 %}
+{% if c.armor_set.count != 0 %}
 <h2>Armor</h2>
 <table>{% for a in c.armor_set.all|dictsort:"armor_ref.stopping_power" %}
 <tr><td>{{ a.armor_ref.reference|safe }} &diams; {{a.armor_ref.category}} &diams; SP:{{ a.armor_ref.stopping_power }} &diams; HE{% if a.armor_ref.head %}<i class='fa fa-plus-circle'></i>{%else%}<i class='fa fa-minus-circle'></i>{%endif%} TO{% if a.armor_ref.torso %}<i class='fa fa-plus-circle'></i>{%else%}<i class='fa fa-minus-circle'></i>{%endif%} LA{%if  a.armor_ref.left_arm %}<i class='fa fa-plus-circle'></i>{%else%}<i class='fa fa-minus-circle'></i>{%endif%} RA{%  if a.armor_ref.right_arm %}<i class='fa fa-plus-circle'></i>{%else%}<i class='fa fa-minus-circle'></i>{%endif%} LL{% if a.armor_ref.left_leg %}<i class='fa fa-plus-circle'></i>{%else%}<i class='fa fa-minus-circle'></i>{%endif%} RL{% if a.armor_ref.right_leg %}<i class='fa fa-plus-circle'></i>{%else%}<i class='fa fa-minus-circle'></i>{%endif%}
 {% if not a.armor_ref.description is empty %}<br/>{{ a.armor_ref.description|safe }}{% endif %}</td></tr>
 {% endfor %}</table>
 {%endif%}
+
+{% if c.shield_set.count != 0 %}
+<h2>Energy Shield</h2>
+<table>{% for s in c.shield_set.all|dictsort:"shield_ref.reference" %}
+<tr><td>{{ s.shield_ref.reference|safe }} &diams; {{s.shield_ref.protection_min}}/{{ s.shield_ref.protection_max }} &diams; Hits:{{s.shield_ref.hits}} &diams; w/ MEDIUM?{% if s.shield_ref.is_compatible_with_medium_armor %}<i class='fa fa-plus-circle'></i>{%else%}<i class='fa fa-minus-circle'></i>{%endif%} w/ HARD?{% if s.shield_ref.is_compatible_with_hard_armor %}<i class='fa fa-plus-circle'></i>{%else%}<i class='fa fa-minus-circle'></i>{%endif%} 
+{% if not s.shield_ref.description is empty %}<br/>{{ s.shield_ref.description|safe }}{% endif %}</td></tr>
+{% endfor %}</table>
+{%endif%}
+
+
+<hr/>
+<i class="fas fa-certificate"></i> <tt>{{ c.rid }}</tt>
+<br/><i class="fas fa-th-large"></i>{{ c.PA_TOTAL }} <i class="fas fa-th-list"></i>{{ c.SK_TOTAL }} <i class="fas fa-user-secret"></i>{{ c.TA_TOTAL }} <i class="fas fa-user-md"></i>{{ c.BC_TOTAL }}
 </div>
 {% endblock details %}

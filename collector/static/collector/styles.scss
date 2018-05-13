@@ -1,9 +1,12 @@
 $fics_front: #FFFFFF;
-$fics_back: #678;
+$fics_back: #605070;
 $fics_dark: darken($fics_back, 10%);
 $fics_light: lighten($fics_back, 10%);
 $fics_darker: darken($fics_back, 20%);
+$fics_darkest: darken($fics_darker,50%);
+$fics_font: #E5DECA;
 $formset_back: #CFCFCE;
+$fics_hl: $fics_light;
 
 @font-face {
     font-family: 'Optimus';
@@ -15,123 +18,134 @@ $formset_back: #CFCFCE;
     src: url("Folks-Normal.ttf");
 }
 
-body {
-    background: $fics_darker url("ambivalence.jpg");
 
-    & .wrapper {
-        display: grid;
-        width: 100%;
-        grid-template-columns: 400px 1fr;
-        grid-template-rows: 80px 50px 1fr;
-        grid-column-gap: 3px;
-        grid-row-gap: 2px;
-        justify-content: center;
-        align-content: stretch;
-        //background: $fics_darker;
-        font-family: sans-serif;
-        font-size: 10pt;
-        
+.fixed {
+  position: fixed;
+  top:0; left:0;
+  width: 100%;
+}
 
-        & .logo {
-            background: transparent url("FICS_Logo.png") center center no-repeat;
-            color: $fics_front;
-            border-radius: 25px 5px 10px 5px;
-            grid-column: 1 / 1;
-            grid-row: 1 / 3;
-            padding: 5px;
-            
+.stickyoffset{
+  padding-top:55px;
+}
+
+body {  
+  
+  background: $fics_darkest url("solitary.jpg") -130px 300px ;  
+  background: $fics_darkest url("ambivalence.jpg") -130px 300px;
+  background: $fics_darkest url("planetary_outlook.jpg") -130px 300px;
+  padding:0;
+  margin:0;
+  & .logo {
+    background: $fics_darker url("FICS_Logo.png") center center no-repeat;
+    height:105px;
+    padding:0;
+    opacity:0.75;
+  }
+
+  & .menu {
+    padding:5px;
+    padding-left:30%;
+    padding-right:10%;
+    color: $fics_front;
+    font-size: 0.73em;
+    background: $fics_back;
+    height:50px;
+    z-index:20;
+  }
+
+
+  & .footer{
+    background:$fics_darker;
+    height:50px;
+    padding:5px;
+    color: $fics_front;
+    font-family: sans-serif;
+    font-size: 8pt;
+    text-align:right;
+    padding-top:50px;
+  }
+
+  & .wrapper {
+    z-index:5;
+    margin-left:10%;
+    display:grid;
+    width: 80%;
+    grid-template-columns: 300px 1fr;
+    grid-column-gap: 3px;
+    justify-content: center;
+    align-content: stretch;
+    font-family: sans-serif;
+    font-size: 10pt;
+    & .list {
+      min-height:1200px;
+      background: transparent url("details.png");
+      & .pagination {
+        text-align: center;
+        margin-top: 1em;
+        & a, strong {
+          margin: 0 0.1em;
+          display: inline-block;
+          padding: 0.5em;
+          color: $fics_front;
+          font-size: 1em;
+          background: $fics_dark;
+          padding: 0.5em 0.8em;
+          border-radius: 2px;
+          text-decoration: none;
         }
-
-        & .title {
-            background: $fics_back;
+      }
+      
+      color: $fics_front;
+      border-radius: 10px;
+      grid-column: 1 / 1;
+      & ul, & ol {
+        text-indent: 0;
+        & li {
+          font-size: 0.83em;
+          
+          & a {
             color: $fics_front;
+            text-decoration: none;
+            &:hover {
+               
+               color:$fics_font;
+            }
+          }
+          & small {
+            font-size: 0.75em;
+          }
+          & em {
+            font-weight: bold;
+          }
+        }
+      }
+    }
+    & .details {
+      min-height:1200px;
+      & .sub {        
+        left: 5px;
+        position:fixed;
+        bottom: 5px;
+        margin:auto;
+        padding:auto;
+      }
+      
+      z-index:10;
+      background: transparent url("details.png");
             grid-column: 2 / 2;
-            grid-row: 1;
-            padding: 5px;
-            border-radius: 0;
-            opacity:0.5;
-        }
-
-        & .menu {
-            background: $fics_dark;
-            border-radius: 10px;
-            color: $fics_front;
-            grid-column: 2 / 3;
-            grid-row: 2 / 2;
-            justify-self: start;
-            align-self: center;
-        }
-
-        & .list {
-            & .pagination {
-                text-align: center;
-                margin-top: 1em;
-
-                & a, strong {
-                    margin: 0 0.1em;
-                    display: inline-block;
-                    padding: 0.5em;
-                    color: $fics_front;
-                    font-size: 1em;
-                    background: $fics_dark;
-                    padding: 0.5em 0.8em;
-                    border-radius: 2px;
-                    text-decoration: none;
-                }
-            }
-
-            background: $fics_back;
-            opacity:0.75;
-            color: $fics_front;
-            border-radius: 10px;
-            grid-column: 1 / 1;
-            grid-row: 3 / 3;
-
-            & ul, & ol {
-                text-indent: 0;
-
-                & li {
-                    font-size: 0.83em;
-
-                    & a {
-                        color: $fics_front;
-                        text-decoration: none;
-
-                        &:hover {
-                            background: orange;
-                        }
-                    }
-
-                    & small {
-                        font-size: 0.75em;
-                    }
-
-                    & em {
-                        
-                        font-weight: bold;
-                    }
-                }
-            }
-        }
-
-        & .details {
-            & .sub {
-                position: fixed;
-                left: 5px;
-                bottom: 5px;
-            }
-            border-radius:10px 0 0 0;
-            display: inline-block;
-            vertical-align: baseline;
-            background: $fics_dark;
-            grid-column: 2 / 2;
-            grid-row: 3 / 3;
             padding: 10px;
+            padding-bottom:50px;
             font-family: Euphory;
             font-size: 0.97em;
+            
+            border-left: 1px dashed $fics_font;
+            border-right: 1px dashed $fics_font;
             & .sheet{
-              width:100%;              
+              width:100%;
+              background:white;
             }
+            
 
             & .attributes{
               -moz-column-count: 5;
@@ -192,9 +206,10 @@ body {
             
             & table.formset {
                 &.inline{
-                  display:inline-block;
+                  //display:inline-block;
                 }
                 padding: 1ex 0.5em;
+                width:100%;
                 border-radius: 0.5em;
                 border: 1px solid black;
                 background: $formset_back;
@@ -250,40 +265,27 @@ body {
                 & td {
                     height: 2em;
                     width:25ex;
-                }
-
-            }
-
-            & table.coreblock {
-                display: inline-block;
-                border: 1px solid black;
-                border-radius: 6px;
-                margin-top:0.5em;
-                margin-bottom:0.5em;
-                & th {
-                    width: 15ex;
-                }
-
-                & td {
-                    width: 60ex;                    
-                }
-            }
-
-            & H1, & H2 {
-                font-family: Optimus;
-                font-weight: Normal;
-            }
-            & H1{
-              margin:0;
-              
-            }
-
-            & H2{
-              margin:0;
-              
-            }
-
+          }
         }
+        & table.coreblock {
+          display: inline-block;
+          border: 1px solid black;
+          border-radius: 6px;
+          margin-top:0.5em;
+          margin-bottom:0.5em;
+          & th {
+            width: 15ex;
+          }
+          & td {
+            width: 60ex;                    
+          }
+        }
+        & H1, & H2 {
+          font-family: Optimus;
+          font-weight: Normal;
+          margin:0;
+        }
+      }
     }
 
     & .btn {
@@ -291,18 +293,22 @@ body {
         padding: 0;
         margin: 0;
         width: 60px;
-        height: 20px;
+        height: 40px;
         border: 2px solid gray;
         border-radius: 5px;
-        background: silver;
+        background: #E5DECA;
         color: black;
         text-decoration: none;
         padding: 5px;
         text-align: center;
-
+        font-size:1.25em;
+        line-height:1.5em;
         &:hover {
-            background: #303030;
-            color: white;
+            background: #B8A66F;
+            color: black;
         }
+    }
+    & a.btn{
+        height: 25px;
     }
 }

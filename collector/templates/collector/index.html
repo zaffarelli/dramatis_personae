@@ -3,9 +3,10 @@
 
 
 {% block menu %}
-	<a class='btn' href="add/persona/"><i class="fas fa-birthday-cake"></i></a>
-	<a class='btn' href="recalc/"><i class="fas fa-cogs"></i></a>
-	<a class='btn' href="export/"><i class="fas fa-users"></i></a>
+  <a class='btn' href="{% url 'add_persona' %}"><i class="fas fa-user-plus"></i></a>
+  <a class='btn' href="{% url 'recalc' %}"><i class="fas fa-users-cog"></i></a>
+  <a class='btn' href="{% url 'export' %}"><i class="fas fa-taxi"></i></a>
+ 
 {% endblock %}
 
 {% block list %}
@@ -43,22 +44,18 @@
 	<strong>&nbsp;</strong>	
 	{%endif%}
 </div>	
-    <ol>
+    <ul>
     {% for c in character_items %}   
-        <li><em><a href="view/persona/{{ c.id }}/">{{ c.full_name }}</a></em> 
+        <li><em><a href="{% url 'view_persona' c.id %}">{{ c.full_name }}</a></em> 
         [ {% if c.gender == "male" %}<i class="fas fa-mars"></i>{% else %}<i class="fas fa-venus"></i>{%endif%} ]
-        <br><i class="fas fa-th-large"></i> {{ c.challenge }} 
-        <br/>{{c.entrance}}
-        <br/>{{ c.alliance }} 
+        <br><i class="fas fa-th-large"></i> {{ c.challenge }}
+        <br/>{{ c.alliance|safe }} 
+        <br/>{%if c.entrance != '' %}{{c.entrance|safe}}{%endif%}
+        <br/>{%if c.player != '' %}<em>{{c.player|safe}}</em>{% endif %}
         <br/>
-        {% if c.player == 'none' %}
-			-
-		{% else %}
-		    <em>{{ c.player }}</em>
-        {% endif %}
         </li>
     {% endfor %}
-    </ol>
+    </ul>
 {% else %}
     <p>No characters are available.</p>
 {% endif %} 

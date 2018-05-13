@@ -5,8 +5,12 @@ from . import views
 urlpatterns = [
 	path('', views.index, name='index'),
 	re_path('^recalc/$', views.recalc, name='recalc'),
+	re_path('^by_keyword/persona/(?P<keyword>\w+)/$', views.by_keyword_personae, name='by_keyword'),
+	re_path('^by_alliance/persona/(?P<alliancehash>\w+)/$', views.by_alliance_personae, name='by_alliance'),
+	re_path('^by_species/persona/(?P<species>\w+)/$', views.by_species_personae, name='by_species'),
 	re_path('^export/$', views.export, name='export'),
 	re_path('^add/persona/$', views.add_persona, name='add_persona'),
 	re_path('^edit/persona/(?P<id>\d+)/$', views.edit_persona, name='edit_persona'),
+#	re_path('^drop/persona/(?P<id>\d+)/$', views.CharacterDelete.as_view(), name='drop_persona'),
 	re_path('^view/persona/(?P<id>\d+)/$', views.view_persona, name='view_persona'),
 ]
