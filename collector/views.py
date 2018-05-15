@@ -1,8 +1,11 @@
 from django.http import HttpResponse, Http404
 from django.shortcuts import render, get_object_or_404, redirect
+from django.core.paginator import Paginator
+
 from .models import Character #, Skill, Shield, ShieldRef, Talent, SkillRef, 
 from .forms import CharacterForm, SkillFormSet, TalentFormSet, BlessingCurseFormSet, WeaponFormSet, ArmorFormSet, ShieldFormSet
-from django.core.paginator import Paginator
+from .utils import render_to_pdf
+
 #from django.views.generic.list import ListView
 #from django.views.generic.edit import DeleteView
 #from django.urls import reverse_lazy
@@ -38,6 +41,17 @@ def by_species_personae(request,species):
   character_items = paginator.get_page(page)
   context = {'character_items': character_items}
   return render(request, 'collector/index.html', context)
+
+def persona_as_pdf(request,id=None):
+  #def get(self,request,*args,**kwargs): 
+  item = get_object_or_404(Character,pk=id)
+  print(item.rid)
+  context = {
+    "c":item,
+  }
+  print(context)  
+  pdf = render_to_pdf('collector/persona_pdf.html',context)
+  return pdf
 
 
 def recalc(request):

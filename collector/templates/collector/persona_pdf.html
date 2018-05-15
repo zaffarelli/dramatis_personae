@@ -1,19 +1,6 @@
-{% extends "base.html" %}
+{% extends "pdf.html" %}
 
-
-{% block menu %}
-	<a class="btn" href="{% url 'index' %}"><i class="fas fa-users"></i></a>
-	<a class='btn' href="{% url 'edit_persona' c.id %}"><i class="fas fa-user-edit"></i></a>
-  <a class='btn' href="{% url 'add_persona' %}"><i class="fas fa-user-plus"></i></a>
-  <a class='btn' href="{% url 'recalc' %}"><i class="fas fa-users-cog"></i></a>
-  <a class='btn' href="{% url 'export' %}"><i class="fas fa-taxi"></i></a>
-  <a class='btn' href="{% url 'by_keyword' c.keyword %}" title="Same Keyword"><i class="fas fa-user-friends"></i></a>
-  <a class='btn' href="{% url 'by_alliance' c.alliancehash %}" title="Same Alliance"><i class="fas fa-user-tie"></i></a>
-  <a class='btn' href="{% url 'by_species' c.species %}  " title="Same Species/Race" ><i class="fas fa-user-ninja"></i></a>
-  <a class='btn' href="{% url 'persona_as_pdf' c.id %}  " title="Same PDF" ><i class="fas fa-file-pdf"></i></a>
-{% endblock %}
-
-{% block details %}
+{% block roster %}
 <div class="classyview">
 <h1>{{ c.full_name }}</h1>
 {{ c.entrance|safe }}</br>
@@ -138,4 +125,5 @@
 <i class="fas fa-certificate"></i> <tt>{{ c.rid }}</tt>
 <br/><i class="fas fa-th-large"></i>{{ c.PA_TOTAL }} <i class="fas fa-th-list"></i>{{ c.SK_TOTAL }} <i class="fas fa-user-secret"></i>{{ c.TA_TOTAL }} <i class="fas fa-user-md"></i>{{ c.BC_TOTAL }}
 </div>
-{% endblock details %}
+</div>
+{% endblock roster %}
