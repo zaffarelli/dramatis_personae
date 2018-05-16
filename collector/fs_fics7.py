@@ -91,3 +91,61 @@ RACIAL_ATTRIBUTES = {
   },
   "vuldrok": {},  
 }
+
+SHORTCUTS = {
+    "Observe":{
+      'attribute':"PA_AWA",
+      'label': "AWA + Observe",  
+    },
+    "Empathy":{
+      'attribute':"PA_TEM",
+      'label': "AWA + Empathy",  
+    },
+    "Dodge":{
+      'attribute':"PA_AGI",
+      'label': "AGI + Dodge",  
+    },
+    "Shoot":{
+      'attribute':"PA_REF",
+      'label': "REF + Shoot",  
+    },    
+    "Melee":{
+      'attribute':"PA_REF",
+      'label': "REF + Melee",  
+    },
+    "Persuasion":{
+      'attribute':"PA_PRE",
+      'label': "PRE + Persuasion",  
+    },
+    "Seduction":{
+      'attribute':"PA_PRE",
+      'label': "PRE + Seduction",  
+    },
+    "Leadership":{
+      'attribute':"PA_PRE",
+      'label': "PRE + Leadership",  
+    },
+
+    "Stoic Mind":{
+      'attribute':"PA_WIL",
+      'label': "WIL + Stoic Mind",  
+    },
+    "Focus":{
+      'attribute':"PA_WIL",
+      'label': "WIL + Focus",  
+    },    
+
+  }
+
+def check_gm_shortcuts(ch,sk):
+  """ Check for Gamemaster shortcuts for the character """
+  if sk.skill_ref.reference in SHORTCUTS:
+    #print(sk.skill_ref.reference)
+    #print(SHORTCUTS)
+    #print(SHORTCUTS[sk.skill_ref.reference])
+    score = sk.value + getattr(ch,SHORTCUTS[sk.skill_ref.reference]['attribute'])
+    newshortcut = "%s: <b>%d</b><br/>"%(SHORTCUTS[sk.skill_ref.reference]['label'],score)
+    return newshortcut
+  else:
+    return ""
+

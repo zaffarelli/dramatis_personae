@@ -8,6 +8,7 @@ import math
 from collector import fs_fics7
 
 
+
 ###### Characters
 class Character(models.Model):  
   full_name = models.CharField(max_length=200)
@@ -126,9 +127,11 @@ class Character(models.Model):
         this_skill.value = 2
         this_skill.save()
     skills = self.skill_set.all()
+    gm_shortcuts = ""
     for s in skills:
       if s.skill_ref.is_root == False:
-        self.SK_TOTAL += s.value
+         gm_shortcuts += fs_fics7.check_gm_shortcuts(self,s)
+         self.SK_TOTAL += s.value 
     # With talents
     self.TA_TOTAL = 0
     talents = self.talent_set.all()
@@ -141,6 +144,7 @@ class Character(models.Model):
       self.BC_TOTAL += bc.value
     self.challenge = self.PA_TOTAL*3 + self.SK_TOTAL + self.TA_TOTAL + self.BC_TOTAL
     self.ready_for_export = False
+    self.gm_shortcuts = gm_shortcuts
     if self.player != '':
       self.ready_for_export = True
     if self.SK_TOTAL >= self.PA_TOTAL:
@@ -158,7 +162,7 @@ def update_character(sender, instance, **kwargs):
 
 ###### Weapons
 class WeaponRef(models.Model):
-  reference = models.CharField(max_length=64,default='',blank=True)
+  reference = models.CharField(max_length=64,default='',blank=True, unique=True)
   category = models.CharField(max_length=5,choices=(('MELEE',"Melee weapon"),('P',"Pistol/revolver"),('RIF',"Rifle"),('SMG',"Submachinegun"),('SHG',"Shotgun"),('HVY',"Heavy weapon"),('EX',"Exotic weapon")),default='RIF',blank=True)
   weapon_accuracy = models.IntegerField(default=0,blank=True)
   conceilable = models.CharField(max_length=1,choices=(('P',"Pocket"),('J',"Jacket"),('L',"Long coat"),('N',"Can't be hidden")),default='J',blank=True)
@@ -194,8 +198,8 @@ class WeaponInline(admin.TabularInline):
 
 ###### Armors
 class ArmorRef(models.Model):
-  reference = models.CharField(max_length=64,default='',blank=True)
-  category = models.CharField(max_length=5,choices=(('SOFT',"Soft Armor"),('MEDIUM',"Medium Armor"),('HARD',"Hard Armor")),default='SOFT',blank=True)
+  reference = models.CharField(max_length=64,default='',blank=True, unique=True)
+  category = models.CharField(max_length=6,choices=(('Soft',"Soft Armor"),('Medium',"Medium Armor"),('Hard',"Hard Armor")),default='Soft',blank=True)
   head = models.BooleanField(default=False)
   torso = models.BooleanField(default=True)
   left_arm = models.BooleanField(default=True)
@@ -203,9 +207,11 @@ class ArmorRef(models.Model):
   left_leg = models.BooleanField(default=False)
   right_leg = models.BooleanField(default=False)
   stopping_power = models.PositiveIntegerField(default=2, blank=True)
+  cost = models.PositiveIntegerField(default=2, blank=True)
+  encumbrance = models.PositiveIntegerField(default=0, blank=True)
   description = models.TextField(max_length=128,default='', blank=True)
   def __str__(self):
-    return '%s' % (self.reference)
+    return '%s (%s, SP:%s)' % (self.reference, self.category, self.stopping_power)
 
 class Armor(models.Model):
   character = models.ForeignKey(Character, on_delete=models.CASCADE)
@@ -214,7 +220,7 @@ class Armor(models.Model):
     return '%s=%s' % (self.character.full_name,self.armor_ref.reference)
 
 class ArmorRefAdmin(admin.ModelAdmin):
-  ordering = ('reference',)  
+  ordering = ('category','-stopping_power','reference')  
 
 class ArmorAdmin(admin.ModelAdmin):
   ordering = ('character','armor_ref',)
@@ -224,7 +230,7 @@ class ArmorInline(admin.TabularInline):
 
 ###### Energy Shield
 class ShieldRef(models.Model):
-  reference = models.CharField(max_length=16,default='',blank=True)
+  reference = models.CharField(max_length=16,default='',blank=True, unique=True)
   protection_min = models.PositiveIntegerField(default=10,blank=True)
   protection_max = models.PositiveIntegerField(default=20,blank=True)
   hits = models.PositiveIntegerField(default=10,blank=True)
@@ -255,7 +261,7 @@ class ShieldInline(admin.TabularInline):
 
 ###### Skills
 class SkillRef(models.Model):
-  reference = models.CharField(max_length=200)
+  reference = models.CharField(max_length=200, unique=True)
   is_root = models.BooleanField(default=False)
   is_speciality = models.BooleanField(default=False)
   linked_to = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE)
