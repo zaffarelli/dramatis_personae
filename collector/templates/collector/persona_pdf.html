@@ -1,188 +1,20 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
-<html lang="en">
-  <head>
-		{% load static %}
-    <meta charset="utf-8" />
-    <title>{{c.full_name|safe}}</title>
-    <style>
-		  @font-face {
-        font-family: 'Optimus';
-        src: url("/home/zaffarelli/Projects/github/fics7/collector/static/collector/OptimusPrincepsSemiBold.ttf");
-      }
-			@font-face {
-				font-family: 'Basic';
-				src: url("/home/zaffarelli/Projects/github/fics7/collector/static/collector/FolksNormal.ttf");
-			}      
-			body{
-				font-family: Basic;
-				font-weight:100;
-				font-size: 9px;
-			}
-      @page {
-				size: a4 portrait;
-        @frame f1 {
-          left: 0.5cm;
-          width: 10cm;
-          top: 0.5cm;
-          height:5.00cm;
-          padding:0.125cm;
-          
-          }
-        @frame f2_PA {
-          left: 0.5cm;
-          width: 5cm;
-          top: 5cm;
-          height: 4cm;
-          padding:0.25cm;
-          -pdf-frame-border: 1;
-          }
-
-        @frame f3_SA {
-          left: 5.5cm;
-          width: 5cm;
-          top: 5cm;
-          height:4cm;
-          padding:0.25cm;
-          -pdf-frame-border: 1;
-          }
-        
-        @frame f4_skills{
-          left: 0.5cm;
-          width: 10cm;
-          top: 9.25cm;
-          height:4.5cm;
-          padding:0.25cm;
-          -pdf-frame-border: 1;
-          }
-
-        @frame f5_bc {
-          left: 0.5cm;
-          width: 10cm;
-          /*top: 21.75cm;*/
-          top: 19.75cm;
-          bottom:0.5cm;
-          padding:0.25cm;
-          -pdf-frame-border: 1;
-          }
-
-        @frame f6_gear {
-          left: 0.5cm;
-          width: 10cm;
-          top: 14cm;
-          height:7.5cm;
-          padding:0.25cm;
-          }
-
-        @frame f7_narrative {
-          left: 10.75cm;
-          width: 9.5cm;
-          top: 12.25cm;
-          height:14.25cm;
-          padding:0.25cm;
-          }
-        @frame f8_technical {
-          left: 10.75cm;
-          width: 9.5cm;
-          top: 26.75cm;
-          bottom:0.5cm;
-          padding:0.25cm;
-          }
-
-        @frame f9_sht {
-          left: 10.75cm;
-          width: 9.5cm;
-          top: 5cm;
-          height:7cm;
-          padding:0.25cm;
-          -pdf-frame-border: 1;
-          }
-
-      }
-
-      h1{
-				font-family:Optimus;
-				font-size:16pt;
-				font-weight:600;
-				color:#701060;
-				margin:0;
-			}
-      h2{
-				font-family:Optimus;
-				font-size:10pt;
-				margin:0;
-				padding:0;
-			}
-
-			.stats {
-				padding:0;
-				margin:0;
-      
-
-			}
-		
-		  .stats th {
-				  font-weight:300;
-				  text-align:right;
-	  	    font-size:1.1em;
-	  	    padding-right:1ex;
-        }
-		  .stats td {
-				  font-size:1.1em;
-				  padding-right:1ex;
-      }
-      
-			.core th{
-				  font-weight:500;
-				  text-align:right;
-	  	    
-	  	    padding:0;
-	  	    width:2.75cm;
-	  	    /* background-color:#E0E0E0; */
-		  }
-			.core td{
-				  
-				  padding-left:1ex;
-				  /* background-color:#E0C080; */
-				  width:3.25cm;
-
-		  }
-
-		  p{
-				 padding:0;
-				 margin:0;
-		  }
-
-      .spacer{
-				 
-				 font-size:2px;
-				 border-top: 1px solid #C0C0C0;
-		   }
-		   .narrative{
-				 font-size:1.1em;
-			 }
-		   .gm_shortcuts{
-				 font-family:mono;
-				 font-size:1.2em;
-			 }
-
-    </style>
-  </head>
-  <body>
-
+{% extends "pdf.html" %}
+{% block sheet %}
 
 <h1>{{ c.full_name|safe }}</h1>
 {{ c.entrance|safe }}</br>
+{{c.gender|capfirst}} {{ c.species|capfirst|safe }} {{ c.rank|safe }} of  {{ c.alliance|safe }} from {{ c.native_fief|safe }} {{ c.caste|safe }}.
 <table class='core'>
 <tr><th>Alliance</th><td>{{ c.alliance|safe }}</td><th>Birthdate</th><td>{{ c.birthdate }} ({{ c.age }} yo)</td></tr>
-<tr><th>Species/Race</th><td>{{ c.species|capfirst|safe }}</td><th>Gender</th><td>{% if c.gender == "male" %}M{% else %}F{%endif%}</td></tr>
-<tr><th>Caste</th><td>{{ c.caste|safe }}</td><th>Height</th><td>{{ c.height }}</td></tr>
-<tr><th>Native Fief</th><td>{{ c.native_fief|safe }}</td><th>Weight</th><td>{{ c.weight }}</td></tr>
+<tr><th>Species/Race</th><td>{{ c.species|capfirst|safe }}</td><th>Gender</th><td>{{c.gender|capfirst}}</td></tr>
+<tr><th>Caste</th><td>{{ c.caste|safe }}</td><th>Height</th><td>{{ c.height }} cm</td></tr>
+<tr><th>Native Fief</th><td>{{ c.native_fief|safe }}</td><th>Weight</th><td>{{ c.weight }} kg</td></tr>
 <tr><th>Rank</th><td>{{ c.rank|safe }}</td>{% if c.player != "" %}<th>Player</th><td>{{ c.player|safe }}</td>{%else%}<th></th><td></td>{%endif%}</tr>
 </table>
 
 <pdf:nextframe>
 
-<h2>Primary Attributes</h2>
+<h2>Primary Attributes ({{ c.PA_TOTAL }})</h2>
 
 <table class="stats" id="phy">
 <tr><th>STR</th><td>{{c.PA_STR}}</td><th>CON</th><td>{{c.PA_CON}}</td></tr>
@@ -216,7 +48,7 @@
 <pdf:nextframe>
 
 {% if c.skill_set.count != 0 %}
-<h2>Skills</h2>
+<h2>Skills ({{ c.SK_TOTAL }})</h2>
 <div class='skillsview'>
 {% for skill in c.skill_set.all|dictsort:"skill_ref.reference" %}
 {% if skill.skill_ref.is_root %}<strong>{% endif %}{% if skill.skill_ref.is_speciality %}<em>{% endif %}{{ skill.skill_ref.reference|safe }}{% if skill.skill_ref.is_speciality %}</em>{% endif %}{% if skill.skill_ref.is_root %}</strong>{% endif %}
@@ -229,18 +61,19 @@
 <pdf:nextframe>
 
 {% if c.blessingcurse_set.count != 0 %}
-<h2>Blessings/Curses</h2>
+<h2>Blessings/Curses ({{ c.BC_TOTAL }})</h2>
 {% for bc in c.blessingcurse_set.all|dictsortreversed:"value" %}
 <p><u>{{ bc.name|safe }}</u> ({{ bc.value }}): <br/> {{ bc.description|safe }}</p>
 {% endfor %}
 {%endif%}
 
 {% if c.talent_set.count != 0 %}
-<h2>Talents</h2>
+<h2>Talents ({{ c.TA_TOTAL }})</h2>
+<p>
 {% for t in c.talent_set.all|dictsortreversed:"value" %}
-<p><u>{{ t.name|safe }}</u> ({{ t.value }}):<br/>{{ t.description|safe }}
-</p>
+<u>{{ t.name|safe }}</u> ({{ t.value }}): {{ t.description|safe }}<br/>
 {% endfor %}
+</p>
 {%endif%}
 
 
@@ -252,30 +85,29 @@
 {% if w.weapon_ref.category == "MELEE" %}
 <u>{{ w.weapon_ref.reference|safe }}:</u> <br/> {{w.weapon_ref.category}} &diams; WA:{{ w.weapon_ref.weapon_accuracy }} &diams; {{w.weapon_ref.conceilable}} &diams; {{ w.weapon_ref.availability }} &diams; DC:{{ w.weapon_ref.damage_class|center:"8" }} &diams; STR:{{ w.weapon_ref.str_min }} &diams; RNG:{{ w.weapon_ref.rng }} &diams; {{ w.weapon_ref.rel }} {% if not w.description is empty %}<br/>{{ w.description|safe }}{% endif %}<br/>
 {% else %}
-<u>{{ w.weapon_ref.reference|safe }}:</u> <br/> {{w.weapon_ref.category}} &diams; WA:{{ w.weapon_ref.weapon_accuracy }} &diams; {{w.weapon_ref.conceilable}} &diams; {{ w.weapon_ref.availability }} &diams; DC:{{ w.weapon_ref.damage_class|center:"8" }} &diams; Cal.{{ w.weapon_ref.caliber }} &diams; RoF:{{ w.weapon_ref.rof }} &diams; Clip:{{ w.weapon_ref.clip }} &diams; RNG:{{ w.weapon_ref.rng }} &diams; {{ w.weapon_ref.rel }} {% if not w.weapon_ref.description is empty %}<br/>{{ w.weapon_ref..description|safe }}{% endif %}<br/>
+<u>{{ w.weapon_ref.reference|safe }}:</u> <br/> {{w.weapon_ref.category}} &diams; WA:{{ w.weapon_ref.weapon_accuracy }} &diams; {{w.weapon_ref.conceilable}} &diams; {{ w.weapon_ref.availability }} &diams; DC:{{ w.weapon_ref.damage_class|center:"8" }} &diams; Cal.{{ w.weapon_ref.caliber }} &diams; RoF:{{ w.weapon_ref.rof }} &diams; Clip:{{ w.weapon_ref.clip }} &diams; RNG:{{ w.weapon_ref.rng }} &diams; {{ w.weapon_ref.rel }} {% if not w.weapon_ref.description is empty %} {{ w.weapon_ref..description|safe }}{% endif %}<br/>
 {% endif %}
-{% endfor %}
-</p>
+{% endfor %}</p>
 {%endif%}
-
 
 {% if c.armor_set.count != 0 %}
 <h2>Armor</h2>
-<table>{% for a in c.armor_set.all|dictsort:"armor_ref.stopping_power" %}
-<tr><td>{{ a.armor_ref.reference|safe }} &diams; {{a.armor_ref.category}} &diams; SP:{{ a.armor_ref.stopping_power }} &diams; HE{% if a.armor_ref.head %}<i class='fa fa-plus-circle'></i>{%else%}<i class='fa fa-minus-circle'></i>{%endif%} TO{% if a.armor_ref.torso %}<i class='fa fa-plus-circle'></i>{%else%}<i class='fa fa-minus-circle'></i>{%endif%} LA{%if  a.armor_ref.left_arm %}<i class='fa fa-plus-circle'></i>{%else%}<i class='fa fa-minus-circle'></i>{%endif%} RA{%  if a.armor_ref.right_arm %}<i class='fa fa-plus-circle'></i>{%else%}<i class='fa fa-minus-circle'></i>{%endif%} LL{% if a.armor_ref.left_leg %}<i class='fa fa-plus-circle'></i>{%else%}<i class='fa fa-minus-circle'></i>{%endif%} RL{% if a.armor_ref.right_leg %}<i class='fa fa-plus-circle'></i>{%else%}<i class='fa fa-minus-circle'></i>{%endif%}
-{% if not a.armor_ref.description is empty %}<br/>{{ a.armor_ref.description|safe }}{% endif %}</td></tr>
-{% endfor %}</table>
+<p>{% for a in c.armor_set.all|dictsort:"armor_ref.stopping_power" %}
+<u>{{ a.armor_ref.reference|safe }}</u> &diams; {{a.armor_ref.category}} &diams; SP:{{ a.armor_ref.stopping_power }} &diams; {% if a.armor_ref.head %}(HE){%endif%}{% if a.armor_ref.torso %}(TO){%endif%}{%if a.armor_ref.left_arm %}(LA){%endif%}{% if a.armor_ref.right_arm %}(RA){%endif%}{% if a.armor_ref.left_leg %}(LL){%endif%}{% if a.armor_ref.right_leg %}(RL){%endif%}
+{% if not a.armor_ref.description is empty %}{{ a.armor_ref.description|safe }}{% endif %}</br>
+{% endfor %}</p>
 {%endif%}
 
 {% if c.shield_set.count != 0 %}
 <h2>Energy Shield</h2>
-<table>{% for s in c.shield_set.all|dictsort:"shield_ref.reference" %}
-<tr><td>{{ s.shield_ref.reference|safe }} &diams; {{s.shield_ref.protection_min}}/{{ s.shield_ref.protection_max }} &diams; Hits:{{s.shield_ref.hits}} &diams; w/ MEDIUM?{% if s.shield_ref.is_compatible_with_medium_armor %}<i class='fa fa-plus-circle'></i>{%else%}<i class='fa fa-minus-circle'></i>{%endif%} w/ HARD?{% if s.shield_ref.is_compatible_with_hard_armor %}<i class='fa fa-plus-circle'></i>{%else%}<i class='fa fa-minus-circle'></i>{%endif%} 
-{% if not s.shield_ref.description is empty %}<br/>{{ s.shield_ref.description|safe }}{% endif %}</td></tr>
-{% endfor %}</table>
+<p>{% for s in c.shield_set.all|dictsort:"shield_ref.reference" %}
+<u>{{ s.shield_ref.reference|safe }}</u> &diams; {{s.shield_ref.protection_min}}/{{ s.shield_ref.protection_max }} &diams; Hits:{{s.shield_ref.hits}} &diams; usage:(Soft {% if s.shield_ref.is_compatible_with_medium_armor %}Medium {%else%}- {%endif%}{% if s.shield_ref.is_compatible_with_hard_armor %}Hard {%else%}- {%endif%})
+{% if not s.shield_ref.description is empty %}{{ s.shield_ref.description|safe }}{% endif %}<br/>
+{% endfor %}</p>
 {%endif%}
 
 <pdf:nextframe>
+<h2>Narrative</h2>
 <div class='narrative'>
 {{ c.narrative|linebreaks|safe }}
 </div>
@@ -283,13 +115,15 @@
 <pdf:nextframe>
 <tt>CHALLENGE {{ c.challenge }} | PA {{ c.PA_TOTAL }} SK:{{ c.SK_TOTAL }} TA {{ c.TA_TOTAL }} BC {{ c.BC_TOTAL }}
 <BR/>RID:{{ c.rid }}
-<BR/>{% now "r"  %}
+<BR/>Generated with <b>fics7.collector</b> on {% now "r"  %}
 </tt>
 <pdf:nextframe>
+<h2>Shortcuts</h2>
 <div class='shortcuts'>
 {{ c.gm_shortcuts|safe }}
 </div>
 
+{% endblock sheet %}
 
 </body>
 </html>

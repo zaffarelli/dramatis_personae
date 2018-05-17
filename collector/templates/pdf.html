@@ -1,67 +1,179 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
 <html lang="en">
   <head>
+		{% load static %}
     <meta charset="utf-8" />
-    <title>{% block title %}{% endblock %}</title>
-    <style type='type/css'>
+    <title>{{c.full_name|safe}}</title>
+    <style>
+		  @font-face {
+        font-family: 'Optimus';
+        src: url("/home/zaffarelli/Projects/github/fics7/collector/static/collector/OptimusPrincepsSemiBold.ttf");
+      }
 			@font-face {
-       font-family: 'Optimus';
-       src: url("OptimusPrincepsSemiBold.ttf");
-     }
+				font-family: 'Basic';
+				src: url("/home/zaffarelli/Projects/github/fics7/collector/static/collector/FolksNormal.ttf");
+			}      
+			body{
+				font-family: Basic;
+				font-weight:100;
+				font-size: 9px;
+			}
+      @page {
+				size: a4 portrait;
+        @frame f1 {
+          left: 0.5cm;
+          width: 10cm;
+          top: 0.5cm;
+          height:5.00cm;
+          padding:0.125cm;
+          
+          }
+        @frame f2_PA {
+          left: 0.5cm;
+          width: 5cm;
+          top: 5cm;
+          height: 4cm;
+          padding:0.25cm;
+          -pdf-frame-border: 1;
+          }
 
-     body{
-			 
-		}
+        @frame f3_SA {
+          left: 5.5cm;
+          width: 5cm;
+          top: 5cm;
+          height:4cm;
+          padding:0.25cm;
+          -pdf-frame-border: 1;
+          }
+        
+        @frame f4_skills{
+          left: 0.5cm;
+          width: 10cm;
+          top: 9.25cm;
+          height:3.5cm;
+          padding:0.25cm;
+          -pdf-frame-border: 1;
+          }
 
-			  @page {
-        size: a4 landscape;
-        margin:10pt;
-        @frame col1_frame {             /* Content frame 1 */
-            left: 44pt; width: 245pt; top: 90pt; height: 632pt;
-        }
-    }
-      .roster{
-				
-		  }
-		  .coreblock{
-				  border-left: 1px solid #000000;
-				  border-right: 1px solid #000000;
-				  border-top: 1px solid #000000;
-				  border-bottom: 1px solid #000000;
-				  font-family: Geneva;
-				}
-		  .narrative{
-				border: 1px solid black;
-				
-				}
-		  .attributes{
-				
-				}
-		  .stats{
-				
-				}
-		  .skillsview table{
-				border:1px solid black;
-				width:90ex;
+        @frame f5_bc {
+          left: 0.5cm;
+          width: 10cm;
+          top: 19.75cm;
+          bottom:0.5cm;
+          padding:0.25cm;
+          -pdf-frame-border: 1;
+          }
+
+        @frame f6_gear {
+          left: 0.5cm;
+          width: 10cm;
+          top: 13cm;
+          height:6.5cm;
+          padding:0.25cm;
+          -pdf-frame-border: 1;
+          }
+
+        @frame f7_narrative {
+          left: 10.75cm;
+          width: 9.5cm;
+          top: 12.25cm;
+          height:14.25cm;
+          padding:0.25cm;
+          -pdf-frame-border: 1;
+          }
+        @frame f8_technical {
+          left: 10.75cm;
+          width: 9.5cm;
+          top: 26.75cm;
+          bottom:0.5cm;
+          padding:0.25cm;
+          -pdf-frame-border: 1;
+          }
+
+        @frame f9_sht {
+          left: 10.75cm;
+          width: 9.5cm;
+          top: 5cm;
+          height:7cm;
+          padding:0.25cm;
+          -pdf-frame-border: 1;
+          }
+
+      }
+
+      h1{
+				font-family:Optimus;
+				font-size:16pt;
+				font-weight:600;
+				color:#701060;
 				margin:0;
 			}
-			h1,h2,p{
-				padding:0:
-				margin:0;
-				text-indent:0;
-				
-		  }
-			h2{
+      h2{
 				font-family:Optimus;
-        color: #402040;
+				font-size:9pt;
+				margin:0;
+				color:#701060;
+				padding:0;
+			}
+
+			.stats {
+				padding:0;
+				margin:0;
+      
+
+			}
+		
+		  .stats th {
+				  font-weight:300;
+				  text-align:right;
+	  	    font-size:1.1em;
+	  	    padding-right:1ex;
+        }
+		  .stats td {
+				  font-size:1.1em;
+				  padding-right:1ex;
+      }
+      
+			.core th{
+				  font-weight:500;
+				  text-align:right;
+	  	    
+	  	    padding:0;
+	  	    width:2.75cm;
+	  	    /* background-color:#E0E0E0; */
 		  }
+			.core td{
+				  
+				  padding-left:1ex;
+				  /* background-color:#E0C080; */
+				  width:3.25cm;
+
+		  }
+
+		  p{
+				 padding:0;
+				 margin:0;
+		  }
+
+      .spacer{
+				 
+				 font-size:2px;
+				 border-top: 1px solid #C0C0C0;
+		   }
+		   .narrative{
+				 font-size:1.1em;
+			 }
+		   .gm_shortcuts{
+				 font-family:mono;
+				 font-size:1.2em;
+			 }
     </style>
   </head>
   <body>
 		<img src="FICS_Logo.png">
     <div class="roster">
-      {% block roster %}
-      {% endblock %}
+      {% block sheet %}
+      {% endblock sheet %}
      </div>
   </body>
 </html>
