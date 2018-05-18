@@ -35,7 +35,7 @@ def by_alliance_personae(request,alliancehash):
   return render(request, 'collector/index.html', context)
 
 def by_species_personae(request,species):
-  character_items = Character.objects.filter(species=species)
+  character_items = Character.objects.filter(category=species)
   paginator = Paginator(character_items,12)
   page = request.GET.get('page')
   character_items = paginator.get_page(page)

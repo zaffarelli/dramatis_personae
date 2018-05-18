@@ -9,7 +9,7 @@
   <a class='btn' href="{% url 'export' %}"><i class="fas fa-taxi"></i></a>
   <a class='btn' href="{% url 'by_keyword' c.keyword %}" title="Same Keyword"><i class="fas fa-user-friends"></i></a>
   <a class='btn' href="{% url 'by_alliance' c.alliancehash %}" title="Same Alliance"><i class="fas fa-user-tie"></i></a>
-  <a class='btn' href="{% url 'by_species' c.species %}  " title="Same Species/Race" ><i class="fas fa-user-ninja"></i></a>
+  <a class='btn' href="{% url 'by_species' c.category %}  " title="Same Category" ><i class="fas fa-user-ninja"></i></a>
   <a class='btn' href="{% url 'persona_as_pdf' c.id %}  " title="Same PDF" ><i class="fas fa-file-pdf"></i></a>
 {% endblock %}
 

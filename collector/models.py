@@ -58,6 +58,7 @@ class Character(models.Model):
   BC_TOTAL = models.IntegerField(default=0)
   gm_shortcuts = models.TextField(default='',blank=True)
   age = models.IntegerField(default=0)
+  category = models.CharField(max_length=16,default='none',choices=(('none',"None"),('villain',"Bad guy"),('hero',"Good guy"),('henchman',"Henchman"),('player',"Player")))
   occult_level = models.PositiveIntegerField(default=0)
   occult_darkside = models.PositiveIntegerField(default=0)
   occult = models.CharField(max_length=50, default='', blank=True)
@@ -264,6 +265,7 @@ class SkillRef(models.Model):
   reference = models.CharField(max_length=200, unique=True)
   is_root = models.BooleanField(default=False)
   is_speciality = models.BooleanField(default=False)
+  category = models.CharField(default="un",max_length=2, choices=(('no',"Uncategorized"),('co',"Combat"),('di',"Diplomacy"),('sp',"Spirituality"),('te',"Technical")))
   linked_to = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE)
   ordering = ('reference',)
   def __str__(self):
