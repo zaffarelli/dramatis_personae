@@ -1,2 +1,5 @@
 Closet/
 pdf/
+.sass-cache/
+__py-cache__/
+pdf

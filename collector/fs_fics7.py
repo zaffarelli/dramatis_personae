@@ -178,7 +178,7 @@ def get_ranged_attacks(ch):
   return ranged_attack
 
 def get_rid(s):
-  x = s.replace(' ','_').replace("'",'').replace("é","e").replace("è","e").replace("ë","e").replace("â","a").replace("ô","o").replace('"',"")
+  x = s.replace(' ','_').replace("'",'').replace("é","e").replace("è","e").replace("ë","e").replace("â","a").replace("ô","o").replace('"',"").replace('ï',"i")
   return x.lower()
 
 def minmax_from_dc(sdc):
