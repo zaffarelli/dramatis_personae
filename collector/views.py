@@ -9,14 +9,10 @@ from django.template.loader import get_template
 
 import json
 
-
-#from django.views.generic.list import ListView
-#from django.views.generic.edit import DeleteView
-#from django.urls import reverse_lazy
-
-MAX_CHAR = 10
+MAX_CHAR = 10 # How many avatars per page
 
 def index(request):
+  """ Index page """
   character_items = Character.objects.order_by('keyword')
   paginator = Paginator(character_items,MAX_CHAR)
   page = request.GET.get('page')
@@ -73,6 +69,7 @@ def view_persona(request, id=None):
   return render(request, 'collector/persona.html', {'c': item})
 
 def view_character(request, id=None):
+  """ Ajax view of a character """
   if request.is_ajax():
     item = get_object_or_404(Character,pk=id)
     template = get_template('collector/character.html')
@@ -80,6 +77,57 @@ def view_character(request, id=None):
     return HttpResponse(html, content_type='text/html')
   else:
     raise Http404
+
+def edit_character(request,id=None):
+  """ Ajax edit of a character """
+  if request.is_ajax():
+    character_item = get_object_or_404(Character, id=id)
+    form = CharacterForm(request.POST or None, instance = character_item)
+    if request.method == "POST":
+      skills = SkillFormSet(request.POST, request.FILES, instance=character_item)
+      talents = TalentFormSet(request.POST, request.FILES, instance=character_item)
+      blessingcurses = BlessingCurseFormSet(request.POST, request.FILES, instance=character_item)
+      armors = ArmorFormSet(request.POST, request.FILES, instance=character_item)
+      weapons = WeaponFormSet(request.POST, request.FILES, instance=character_item)
+      shields = ShieldFormSet(request.POST, request.FILES, instance=character_item)
+      skv = skills.is_valid()
+      tav = talents.is_valid() 
+      bcv = blessingcurses.is_valid()
+      arv = armors.is_valid()
+      wpv = weapons.is_valid()
+      shv = shields.is_valid()
+      if skv and tav and bcv and arv and wpv and shv and form.is_valid():
+        skills.save()
+        talents.save()
+        blessingcurses.save()
+        armors.save()
+        weapons.save()
+        shields.save()
+        form.save()
+        return redirect('ajax/view/character/'+str(character_item.id)+'/')
+    else:
+      skills = SkillFormSet(instance=character_item, queryset=character_item.skill_set.order_by("skill_ref__reference"))
+      talents = TalentFormSet(instance=character_item, queryset=character_item.talent_set.order_by("-value"))
+      blessingcurses = BlessingCurseFormSet(instance=character_item)
+      armors = ArmorFormSet(instance=character_item)
+      weapons = WeaponFormSet(instance=character_item)
+      shields = ShieldFormSet(instance=character_item)
+      edit_context = {
+         'form': form,
+         'cid':character_item.id,
+         'skills': skills,
+         'armors': armors,
+         'weapons': weapons,
+         'blessingcurses': blessingcurses,
+         'talents': talents,
+         'shields': shields,
+      }
+      template = get_template('collector/character_form.html')
+      html = template.render(edit_context)
+      return HttpResponse(html, content_type='text/html')
+  else:
+    raise Http404
+
  
   
   #return render(request, 'collector/character.html', {'c': item})

@@ -1,0 +1,269 @@
+<div class="classyview">
+<form class='character_form' =method="POST" action="">
+	{{ form.non_field_errors}}
+
+<div class='sub'>
+	<button class='btn' id='character_submit' type="submit" ><i class='fas fa-user-tag'></i></button>
+	</div>
+
+<table class="formset">
+	<caption>Core</caption>
+	<tr><td>
+	<div class="field_wrapper">
+		{{ form.full_name.errors}}
+		<label for="full_name">Name</label>
+		{{form.full_name}}
+	</div>
+	<div class="field_wrapper">
+		{{ form.entrance.errors}}
+		<label for="entrance">Entrance</label>
+		{{form.entrance}}
+	</div>
+		
+	<div class="field_wrapper">
+		{{ form.alliance.errors}}
+		<label for="">Alliance</label>
+		{{form.alliance}}
+	</div>
+	<div class="field_wrapper">
+		{{ form.species.errors}}
+		<label for="">Species/Race</label>
+		{{form.species}}
+	</div>
+	<div class="field_wrapper">
+		{{ form.birthdate.errors}}
+		<label for="">Birthyear</label>
+		{{form.birthdate}}
+	</div>
+	<div class="field_wrapper">
+		{{ form.gender.errors}}
+		<label for="">Gender</label>
+		{{form.gender}}
+	</div>	
+	<div class="field_wrapper">
+		{{ form.height.errors}}
+		<label for="">Height</label>
+		{{form.height}}
+	</div>
+	<div class="field_wrapper">
+		{{ form.weight.errors}}
+		<label for="">Weight</label>
+		{{form.weight}}
+	</div>
+
+	</td><td>
+	<div class="field_wrapper">
+		{{ form.rank.errors}}
+		<label for="">Rank</label>
+		{{form.rank}}
+	</div>
+	<div class="field_wrapper">
+		{{ form.native_fief.errors}}
+		<label for="">Native Fief</label>
+		{{form.native_fief}}
+	</div>
+	<div class="field_wrapper">
+		{{ form.caste.errors}}
+		<label for="">Caste:</label>
+		{{form.caste}}
+	</div>
+	<div class="field_wrapper">
+		{{ form.player.errors}}
+		<label for="">Player</label>
+		{{form.player}}
+	</div>
+	</td><td>
+	<div class="field_wrapper">
+		{{ form.occult.errors}}
+		<label for="">Occult</label>
+		{{form.occult}}
+	</div>
+
+	<div class="field_wrapper">
+		{{ form.occult_level.errors}}
+		<label for="">Level</label>
+		{{form.occult_level}}
+	</div>
+
+	<div class="field_wrapper">
+		{{ form.occult_darkside.errors}}
+		<label for="">Darkside</label>
+		{{form.occult_darkside}}
+	</div>
+
+	<div class="field_wrapper">
+		{{ form.keyword.errors}}
+		<label for="">Keyword</label>
+		{{form.keyword}}
+	</div>
+
+	<div class="field_wrapper">
+		{{ form.category.errors}}
+		<label for="category">Category</label>
+		{{form.category}}
+	</div>
+
+
+	<div class="field_wrapper">
+		{{ form.narrative.errors}}
+		<label for="">Narrative</label>
+		{{form.narrative}}
+	</div>
+
+	<div class="field_wrapper">
+		{{ form.ready_for_export.errors}}
+		<label for="">Exportable</label>
+		{{form.ready_for_export}}
+	</div>
+
+	</td></tr>
+</table>
+
+
+
+<table class="formset ">
+	<caption>Primary Attributes</caption>
+	<tr><td>
+<table class="formset inline">
+	<caption>Physical</caption>
+	<tr><td>
+	<div class="field_wrapper">
+		{{ form.PA_STR.errors}}
+		<label for="">STR</label>
+		{{form.PA_STR}}
+	</div>
+	</td><td>
+	<div class="field_wrapper">
+		{{ form.PA_CON.errors}}
+		<label for="">CON</label>
+		{{form.PA_CON}}
+	</div>
+	</td></tr>
+	<tr><td>
+	<div class="field_wrapper">
+		{{ form.PA_BOD.errors}}
+		<label for="">BOD</label>
+		{{form.PA_BOD}}
+	</div>
+	</td><td>
+	<div class="field_wrapper">
+		{{ form.PA_MOV.errors}}
+		<label for="">MOV</label>
+		{{form.PA_MOV}}
+	</div>
+	</td></tr>
+</table>
+<table class="formset inline">
+	<caption>Spiritual</caption>
+	<tr><td>
+	<div class="field_wrapper">
+		{{ form.PA_INT.errors}}
+		<label for="">INT</label>
+		{{form.PA_INT}}
+	</div>
+	</td><td>
+	<div class="field_wrapper">
+		{{ form.PA_WIL.errors}}
+		<label for="">WIL</label>
+		{{form.PA_WIL}}
+	</div>
+	</td></tr>
+	<tr><td>
+	<div class="field_wrapper">
+		{{ form.PA_TEM.errors}}
+		<label for="">TEM</label>
+		{{form.PA_TEM}}
+	</div>
+	</td><td>
+	<div class="field_wrapper">
+		{{ form.PA_PRE.errors}}
+		<label for="">PRE</label>
+		{{form.PA_PRE}}
+	</div>
+	</td></tr>
+</table>
+<table class="formset inline">
+	<caption>Combat</caption>
+	<tr><td>
+	<div class="field_wrapper">
+		{{ form.PA_TEC.errors}}
+		<label for="">TEC</label>
+		{{form.PA_TEC}}
+	</div>
+	</td><td>
+	<div class="field_wrapper">
+		{{ form.PA_REF.errors}}
+		<label for="">REF</label>
+		{{form.PA_REF}}
+	</div>
+	</td></tr>
+	<tr><td>
+	<div class="field_wrapper">
+		{{ form.PA_AGI.errors}}
+		<label for="">AGI</label>
+		{{form.PA_AGI}}
+	</div>
+	</td><td>
+	<div class="field_wrapper">
+		{{ form.PA_AWA.errors}}
+		<label for="">AWA</label>
+		{{form.PA_AWA}}
+	</div>
+	</td></tr>
+</table>	
+	</td></tr>
+</table>
+
+	<table class="formset inline">
+	<caption>Skills</caption>
+	{{ skills.management_form }}	
+	{% for form in skills.forms %}
+	  {{ form.as_table }}
+	{% endfor %}
+	</table>
+
+	<table class="formset inline">
+  <caption>Talents</caption>
+	{{ talents.management_form }}
+	{% for form in talents.forms %}
+	{{ form.as_table }}
+	{% endfor %}
+	</table>
+
+
+	<table class="formset inline">
+	<caption>Blessings &amp; Curses</caption>
+	{{ blessingcurses.management_form }}
+	{% for form in blessingcurses.forms %}
+	{{ form.as_table }}
+	{% endfor %}
+	</table>
+
+<table class="formset inline">
+	<caption>Weapons</caption>
+	{{ weapons.management_form }}
+	{% for form in weapons.forms %}
+		{{ form.as_table }}
+	{% endfor %}
+	</table>
+
+<table class="formset inline">
+	<caption>Armors</caption>
+	{{ armors.management_form }}
+	{% for form in armors.forms %}
+		{{ form.as_table }}
+	{% endfor %}
+	</table>
+
+<table class="formset inline">
+	<caption>Energy Shield</caption>
+	{{ shields.management_form }}
+	{% for form in shields.forms %}
+		{{ form.as_table }}
+	{% endfor %}
+	</table>
+
+
+</form>
+</div>
+

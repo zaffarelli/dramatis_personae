@@ -1,5 +1,6 @@
 # Fading Suns
-# Constants for FICS7
+# Fusion Interlock Custom System v7
+# This file contains the core business function of the app
 
 EVERYMAN = {
   "ascorbite": {},
@@ -127,12 +128,12 @@ SHORTCUTS = {
     },
 
     "Stoic Mind":{
-      'attribute':"PA_WIL",
-      'label': "WIL + Stoic Mind",  
+      'attribute':'PA_WIL',
+      'label': 'WIL + Stoic Mind',  
     },
-    "Focus":{
-      'attribute':"PA_WIL",
-      'label': "WIL + Focus",  
+    'Focus':{
+      'attribute':'PA_WIL',
+      'label': 'WIL + Focus',  
     },    
 
   }
@@ -144,7 +145,7 @@ def check_gm_shortcuts(ch,sk):
     #print(SHORTCUTS)
     #print(SHORTCUTS[sk.skill_ref.reference])
     score = sk.value + getattr(ch,SHORTCUTS[sk.skill_ref.reference]['attribute'])
-    newshortcut = "%s: <b>%d</b><br/>"%(SHORTCUTS[sk.skill_ref.reference]['label'],score)
+    newshortcut = '%s: <b>%d</b><br/>'%(SHORTCUTS[sk.skill_ref.reference]['label'],score)
     return newshortcut  
   else:
     return ""
@@ -152,11 +153,19 @@ def check_gm_shortcuts(ch,sk):
     #newshortcut = "%s: <b>%d</b> (-2)<br/>"%(SHORTCUTS[sk.skill_ref.reference]['label'],score)
     #return newshortcut
 
+ATTACK_ROLLS = {
+  'MELEE': {
+    'attribute': 'PA_REF',
+    'skill': 'Melee',
+  },
+}
+
 def get_ranged_attacks(ch):
+  """ Attacks shortcuts depending on the avatar and his/her weapons and skills """
   ranged_attack = '<h2>Weapons</h2>'
   for w in ch.weapon_set.all():
     if w.weapon_ref.category in {'P','RIF','SMG'}:      
-      sk = ch.skill_set.filter(skill_ref__reference="Shoot").first()
+      sk = ch.skill_set.filter(skill_ref__reference='Shoot').first()
       if sk is None:
         sval = 0
       else:
@@ -164,9 +173,9 @@ def get_ranged_attacks(ch):
       score = ch.PA_REF + sval + w.weapon_ref.weapon_accuracy
       dmg = w.weapon_ref.damage_class
       x = minmax_from_dc(dmg)
-      ranged_attack += "%s: Roll:<b>%d+1D12</b> Dmg:<b>%d-%d</b></br>"%(w.weapon_ref.reference,score,x[0],x[1])
+      ranged_attack += '%s: Roll:<b>%d+1D12</b> Dmg:<b>%d-%d</b></br>'%(w.weapon_ref.reference,score,x[0],x[1])
     if w.weapon_ref.category in {'MELEE'}:      
-      sk = ch.skill_set.filter(skill_ref__reference="Melee").first()
+      sk = ch.skill_set.filter(skill_ref__reference='Melee').first()
       if sk is None:
         sval = 0
       else:
@@ -174,11 +183,11 @@ def get_ranged_attacks(ch):
       score = ch.PA_REF + sval + w.weapon_ref.weapon_accuracy
       dmg = w.weapon_ref.damage_class
       x = minmax_from_dc(dmg) 
-      ranged_attack += "%s: Roll:<b>%d+1D12</b> Dmg:<b>%d-%d (+str:%d)</b></br>"%(w.weapon_ref.reference,score,x[0],x[1], ch.SA_DMG)
+      ranged_attack += '%s: Roll:<b>%d+1D12</b> Dmg:<b>%d-%d (+str:%d)</b></br>'%(w.weapon_ref.reference,score,x[0],x[1], ch.SA_DMG)
   return ranged_attack
 
 def get_rid(s):
-  x = s.replace(' ','_').replace("'",'').replace("é","e").replace("è","e").replace("ë","e").replace("â","a").replace("ô","o").replace('"',"").replace('ï',"i")
+  x = s.replace(' ','_').replace("'",'').replace('é','e').replace('è','e').replace('ë','e').replace('â','a').replace('ô','o').replace('"','').replace('ï','i')
   return x.lower()
 
 def minmax_from_dc(sdc):
@@ -187,7 +196,7 @@ def minmax_from_dc(sdc):
   s = sdc.lower()
   dmin,dmax,dbonus = 0,0,0
   split_bonus = s.split('+')
-  split_scope = split_bonus[0].split("d")
+  split_scope = split_bonus[0].split('d')
   if split_bonus.count == 2:
     dbonus = int(split_bonus[1])
   dmin = int(split_scope[0])+dbonus

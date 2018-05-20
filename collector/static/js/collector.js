@@ -14,10 +14,26 @@ $(window).scroll(function(){
 
 $('.view_character').on('click',function(event){  
   event.preventDefault();
+  var mess = $(".log").html();
+  $(".log").html("Fetching persona "+$(this).attr('id')+".");
   $.ajax({
     url: 'ajax/view/character/'+$(this).attr('id')+'/',
     success: function(answer) {
         $(".details").html(answer)
+        $(".log").html(mess);
+      },
+  });
+})
+
+$('.edit_character').on('click',function(event){  
+  event.preventDefault();
+  var mess = $(".log").html();
+  $(".log").html("Fetching persona "+$(this).attr('id')+" for edition.");
+  $.ajax({
+    url: 'ajax/edit/character/'+$(this).attr('id')+'/',
+    success: function(answer) {
+        $(".details").html(answer)
+        $(".log").html(mess);
       },
   });
 })
