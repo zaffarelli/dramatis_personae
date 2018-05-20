@@ -1,6 +1,7 @@
 @font-face {
   font-family: 'Optimus';
-  src: url("OptimusPrincepsSemiBold.ttf"); }
+  /* src: url("OptimusPrincepsSemiBold.ttf"); */
+  src: url("nk57-monospace-sc-bk.ttf"); }
 @font-face {
   font-family: 'Euphory';
   src: url("Folks-Normal.ttf"); }
@@ -72,6 +73,17 @@ body {
           padding: 0.5em 0.8em;
           border-radius: 2px;
           text-decoration: none; }
+      body .wrapper .list .character_actions {
+        display: inline-block;
+        background: #473b52;
+        color: #FFFFFF;
+        padding: 2px;
+        border: 1px solid transparent;
+        border-radius: 2px; }
+        body .wrapper .list .character_actions a {
+          cursor: pointer; }
+          body .wrapper .list .character_actions a:hover {
+            color: #7a658e; }
       body .wrapper .list ul, body .wrapper .list ol {
         text-indent: 0; }
         body .wrapper .list ul li, body .wrapper .list ol li {
@@ -131,8 +143,12 @@ body {
         border: 1px solid black;
         border-radius: 10px 0 10px 0;
         padding: 10px;
-        background: white url(details.png);
+        /*background:white url(details.png);*/
+        background-color: #FCFCFC;
         width: 750px;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
         -moz-column-count: 1;
         -webkit-column-count: 1;
         column-count: 1;

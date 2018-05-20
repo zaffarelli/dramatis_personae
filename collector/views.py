@@ -5,14 +5,20 @@ from django.core.paginator import Paginator
 from .models import Character #, Skill, Shield, ShieldRef, Talent, SkillRef, 
 from .forms import CharacterForm, SkillFormSet, TalentFormSet, BlessingCurseFormSet, WeaponFormSet, ArmorFormSet, ShieldFormSet
 from .utils import render_to_pdf
+from django.template.loader import get_template
+
+import json
+
 
 #from django.views.generic.list import ListView
 #from django.views.generic.edit import DeleteView
 #from django.urls import reverse_lazy
 
+MAX_CHAR = 10
+
 def index(request):
   character_items = Character.objects.order_by('keyword')
-  paginator = Paginator(character_items,20)
+  paginator = Paginator(character_items,MAX_CHAR)
   page = request.GET.get('page')
   character_items = paginator.get_page(page)
   context = {'character_items': character_items}
@@ -20,7 +26,7 @@ def index(request):
 
 def by_keyword_personae(request,keyword):
   character_items = Character.objects.filter(keyword=keyword)
-  paginator = Paginator(character_items,12)
+  paginator = Paginator(character_items,MAX_CHAR)
   page = request.GET.get('page')
   character_items = paginator.get_page(page)
   context = {'character_items': character_items}
@@ -28,7 +34,7 @@ def by_keyword_personae(request,keyword):
 
 def by_alliance_personae(request,alliancehash):
   character_items = Character.objects.filter(alliancehash=alliancehash)
-  paginator = Paginator(character_items,12)
+  paginator = Paginator(character_items,MAX_CHAR)
   page = request.GET.get('page')
   character_items = paginator.get_page(page)
   context = {'character_items': character_items}
@@ -36,20 +42,18 @@ def by_alliance_personae(request,alliancehash):
 
 def by_species_personae(request,species):
   character_items = Character.objects.filter(category=species)
-  paginator = Paginator(character_items,12)
+  paginator = Paginator(character_items,MAX_CHAR)
   page = request.GET.get('page')
   character_items = paginator.get_page(page)
   context = {'character_items': character_items}
   return render(request, 'collector/index.html', context)
 
 def persona_as_pdf(request,id=None):
-  #def get(self,request,*args,**kwargs): 
   item = get_object_or_404(Character,pk=id)
-  print(item.rid)
   context = {
-    "c":item,
+    'c':item,
+    'filename':item.rid,
   }
-  print(context)  
   pdf = render_to_pdf('collector/persona_pdf.html',context)
   return pdf
 
@@ -61,13 +65,24 @@ def recalc(request):
   return redirect('/')
 
 def export(request):
-  items = Character.objects.order_by("full_name").filter(ready_for_export=True)
+  items = Character.objects.order_by('full_name').filter(ready_for_export=True)
   return render(request, 'collector/export.html', {'characters': items}, content_type='text/plain;charset=utf-8' )
 
 def view_persona(request, id=None):
   item = get_object_or_404(Character,pk=id)
-  print(item)
   return render(request, 'collector/persona.html', {'c': item})
+
+def view_character(request, id=None):
+  if request.is_ajax():
+    item = get_object_or_404(Character,pk=id)
+    template = get_template('collector/character.html')
+    html = template.render({'c':item})
+    return HttpResponse(html, content_type='text/html')
+  else:
+    raise Http404
+ 
+  
+  #return render(request, 'collector/character.html', {'c': item})
 
 def add_persona(request):
   if request.method == "POST":

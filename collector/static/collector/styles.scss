@@ -10,7 +10,8 @@ $fics_hl: $fics_light;
 
 @font-face {
     font-family: 'Optimus';
-    src: url("OptimusPrincepsSemiBold.ttf");
+    /* src: url("OptimusPrincepsSemiBold.ttf"); */
+    src: url("nk57-monospace-sc-bk.ttf");
 }
 
 @font-face {
@@ -95,6 +96,20 @@ body {
           text-decoration: none;
         }
       }
+      & .character_actions{
+        display:inline-block;        
+        background: $fics_dark;
+        color: $fics_front;
+        padding:2px;
+        border:1px solid transparent;
+        border-radius:2px;
+        & a{
+          cursor:pointer;
+          &:hover{
+            color:$fics_hl;
+          }
+        }
+      }
       
       color: $fics_front;
       border-radius: 10px;
@@ -130,9 +145,10 @@ body {
         margin:auto;
         padding:auto;
       }
+
       
       z-index:10;
-      background: transparent url("details.png");
+       background: transparent url("details.png"); 
             grid-column: 2 / 2;
             padding: 10px;
             padding-bottom:50px;
@@ -178,8 +194,12 @@ body {
               border:1px solid black;
               border-radius:10px 0 10px 0;
               padding:10px;
-              background:white url(details.png);
+              /*background:white url(details.png);*/
+              background-color:#FCFCFC;
               width:750px;
+              margin-left:auto;
+              margin-right:auto;
+              display:block;
               
               -moz-column-count: 1;
               -webkit-column-count:1;

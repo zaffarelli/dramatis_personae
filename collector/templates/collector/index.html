@@ -46,9 +46,13 @@
 </div>	
     <ul>
     {% for c in character_items %}   
-        <li><em><a href="{% url 'view_persona' c.id %}">{{ c.full_name }}</a></em> 
-        [ {% if c.gender == "male" %}<i class="fas fa-mars"></i>{% else %}<i class="fas fa-venus"></i>{%endif%} ]
-        <br><i class="fas fa-th-large"></i> {{ c.challenge }}
+        <li><em>{{ c.full_name }}</em><br/>
+        <div class="character_actions">
+          <a class="view_character" id="{{c.id}}"><i class="fas fa-user"></i></a>&nbsp;&nbsp;
+          <a class="edit_character" id="{{c.id}}"><i class="fas fa-user-edit"></i></a>&nbsp;&nbsp;
+          <a class="persona_as_pdf" id="{{c.id}}"><i class="fas fa-file-pdf"></i></a>
+        </div>
+        <i class="fas fa-th-large"></i> {{ c.challenge }}
         <br/>{{ c.alliance|safe }} 
         <br/>{%if c.entrance != '' %}{{c.entrance|safe}}{%endif%}
         <br/>{%if c.player != '' %}<em>{{c.player|safe}}</em>{% endif %}

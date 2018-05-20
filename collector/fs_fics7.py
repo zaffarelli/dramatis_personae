@@ -145,7 +145,51 @@ def check_gm_shortcuts(ch,sk):
     #print(SHORTCUTS[sk.skill_ref.reference])
     score = sk.value + getattr(ch,SHORTCUTS[sk.skill_ref.reference]['attribute'])
     newshortcut = "%s: <b>%d</b><br/>"%(SHORTCUTS[sk.skill_ref.reference]['label'],score)
-    return newshortcut
+    return newshortcut  
   else:
     return ""
+    #score = getattr(ch,SHORTCUTS[sk.skill_ref.reference]['attribute']) -2
+    #newshortcut = "%s: <b>%d</b> (-2)<br/>"%(SHORTCUTS[sk.skill_ref.reference]['label'],score)
+    #return newshortcut
 
+def get_ranged_attacks(ch):
+  ranged_attack = '<h2>Weapons</h2>'
+  for w in ch.weapon_set.all():
+    if w.weapon_ref.category in {'P','RIF','SMG'}:      
+      sk = ch.skill_set.filter(skill_ref__reference="Shoot").first()
+      if sk is None:
+        sval = 0
+      else:
+        sval = sk.value
+      score = ch.PA_REF + sval + w.weapon_ref.weapon_accuracy
+      dmg = w.weapon_ref.damage_class
+      x = minmax_from_dc(dmg)
+      ranged_attack += "%s: Roll:<b>%d+1D12</b> Dmg:<b>%d-%d</b></br>"%(w.weapon_ref.reference,score,x[0],x[1])
+    if w.weapon_ref.category in {'MELEE'}:      
+      sk = ch.skill_set.filter(skill_ref__reference="Melee").first()
+      if sk is None:
+        sval = 0
+      else:
+        sval = sk.value
+      score = ch.PA_REF + sval + w.weapon_ref.weapon_accuracy
+      dmg = w.weapon_ref.damage_class
+      x = minmax_from_dc(dmg) 
+      ranged_attack += "%s: Roll:<b>%d+1D12</b> Dmg:<b>%d-%d (+str:%d)</b></br>"%(w.weapon_ref.reference,score,x[0],x[1], ch.SA_DMG)
+  return ranged_attack
+
+def get_rid(s):
+  x = s.replace(' ','_').replace("'",'').replace("é","e").replace("è","e").replace("ë","e").replace("â","a").replace("ô","o").replace('"',"")
+  return x.lower()
+
+def minmax_from_dc(sdc):
+  if sdc == '':
+    return (0,0)
+  s = sdc.lower()
+  dmin,dmax,dbonus = 0,0,0
+  split_bonus = s.split('+')
+  split_scope = split_bonus[0].split("d")
+  if split_bonus.count == 2:
+    dbonus = int(split_bonus[1])
+  dmin = int(split_scope[0])+dbonus
+  dmax = dmin*int(split_scope[1])+dbonus
+  return (dmin,dmax)

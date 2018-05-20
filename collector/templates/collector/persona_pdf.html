@@ -3,10 +3,9 @@
 
 <h1>{{ c.full_name|safe }}</h1>
 {{ c.entrance|safe }}</br>
-{{c.gender|capfirst}} {{ c.species|capfirst|safe }} {{ c.rank|safe }} of  {{ c.alliance|safe }} from {{ c.native_fief|safe }} {{ c.caste|safe }}.
+{{c.gender|capfirst}} {{ c.species|capfirst|safe }} {{ c.rank|safe }} of the {{ c.alliance|safe }} from {{ c.native_fief|safe }} {{ c.caste|safe }}.
 <table class='core'>
 <tr><th>Alliance</th><td>{{ c.alliance|safe }}</td><th>Birthdate</th><td>{{ c.birthdate }} ({{ c.age }} yo)</td></tr>
-<tr><th>Species/Race</th><td>{{ c.species|capfirst|safe }}</td><th>Gender</th><td>{{c.gender|capfirst}}</td></tr>
 <tr><th>Caste</th><td>{{ c.caste|safe }}</td><th>Height</th><td>{{ c.height }} cm</td></tr>
 <tr><th>Native Fief</th><td>{{ c.native_fief|safe }}</td><th>Weight</th><td>{{ c.weight }} kg</td></tr>
 <tr><th>Rank</th><td>{{ c.rank|safe }}</td>{% if c.player != "" %}<th>Player</th><td>{{ c.player|safe }}</td>{%else%}<th></th><td></td>{%endif%}</tr>

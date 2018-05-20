@@ -1,11 +1,12 @@
 from django.db import models
 from django.contrib import admin
 from datetime import datetime
-from django.db.models.signals import pre_save
+from django.db.models.signals import pre_save, post_save
 from django.dispatch import receiver
 import hashlib
 import math
 from collector import fs_fics7
+from .utils import write_pdf
 
 
 
@@ -107,7 +108,7 @@ class Character(models.Model):
 #          prev = cur
     skills = self.skill_set.all()
     # Everyman
-    print("%s is a(n) %s"%(self.full_name,self.species))
+    #print("%s is a(n) %s"%(self.full_name,self.species))
     for every in fs_fics7.EVERYMAN[self.species]:
       every_found = False
       for s in skills:
@@ -145,11 +146,16 @@ class Character(models.Model):
       self.BC_TOTAL += bc.value
     self.challenge = self.PA_TOTAL*3 + self.SK_TOTAL + self.TA_TOTAL + self.BC_TOTAL
     self.ready_for_export = False
+    gm_shortcuts += fs_fics7.get_ranged_attacks(self)
     self.gm_shortcuts = gm_shortcuts
     if self.player != '':
       self.ready_for_export = True
     if self.SK_TOTAL >= self.PA_TOTAL:
       self.ready_for_export = True
+  def backup(self):
+    item = self
+    context = {"c":item,"filename":item.rid,}
+    write_pdf('collector/persona_pdf.html',context)
   def __str__(self):
     return '%s' % self.full_name  
 
@@ -157,9 +163,17 @@ class Character(models.Model):
 def update_character(sender, instance, **kwargs):
   if instance.rid != 'none':
     instance.fix()
-  instance.rid = hashlib.sha1(bytes(instance.full_name,'utf-8')).hexdigest()
+  #instance.rid = hashlib.sha1(bytes(instance.full_name,'utf-8')).hexdigest()
+  instance.rid = fs_fics7.get_rid(instance.full_name)
   instance.alliancehash = hashlib.sha1(bytes(instance.alliance,'utf-8')).hexdigest()
   print("%s --> %s" % (instance.full_name,instance.rid))
+
+@receiver(post_save, sender=Character, dispatch_uid="backup_character")
+def backup_character(sender, instance, **kwargs):
+  if instance.rid != 'none':
+    instance.backup()
+  print("Backup > %s.pdf" % (instance.rid))
+
 
 ###### Weapons
 class WeaponRef(models.Model):
