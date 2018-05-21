@@ -1,11 +1,13 @@
 from django.http import HttpResponse, Http404
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect, render_to_response
 from django.core.paginator import Paginator
 
 from .models import Character #, Skill, Shield, ShieldRef, Talent, SkillRef, 
 from .forms import CharacterForm, SkillFormSet, TalentFormSet, BlessingCurseFormSet, WeaponFormSet, ArmorFormSet, ShieldFormSet
 from .utils import render_to_pdf
-from django.template.loader import get_template
+from django.template.loader import get_template, render_to_string
+from django.template import RequestContext
+
 
 import json
 
@@ -18,7 +20,7 @@ def index(request):
   page = request.GET.get('page')
   character_items = paginator.get_page(page)
   context = {'character_items': character_items}
-  return render(request, 'collector/index.html', context)
+  return render(request,'collector/index.html', context)
 
 def by_keyword_personae(request,keyword):
   character_items = Character.objects.filter(keyword=keyword)
@@ -81,22 +83,30 @@ def view_character(request, id=None):
 def edit_character(request,id=None):
   """ Ajax edit of a character """
   if request.is_ajax():
-    character_item = get_object_or_404(Character, id=id)
-    form = CharacterForm(request.POST or None, instance = character_item)
     if request.method == "POST":
+      #print(request.POST)
+      cid = request.POST.get("cid")
+      print("cid is %s"%cid)
+      character_item = get_object_or_404(Character, id=cid)
+      print("%s request is post "%character_item)
+      form = CharacterForm(request.POST.get('character'), instance = character_item)
       skills = SkillFormSet(request.POST, request.FILES, instance=character_item)
       talents = TalentFormSet(request.POST, request.FILES, instance=character_item)
       blessingcurses = BlessingCurseFormSet(request.POST, request.FILES, instance=character_item)
       armors = ArmorFormSet(request.POST, request.FILES, instance=character_item)
       weapons = WeaponFormSet(request.POST, request.FILES, instance=character_item)
       shields = ShieldFormSet(request.POST, request.FILES, instance=character_item)
-      skv = skills.is_valid()
-      tav = talents.is_valid() 
-      bcv = blessingcurses.is_valid()
-      arv = armors.is_valid()
-      wpv = weapons.is_valid()
-      shv = shields.is_valid()
-      if skv and tav and bcv and arv and wpv and shv and form.is_valid():
+      print("Forms created")
+      #skv = skills.is_valid()
+      #tav = talents.is_valid() 
+      #bcv = blessingcurses.is_valid()
+      #arv = armors.is_valid()
+      #wpv = weapons.is_valid()
+      #shv = shields.is_valid()
+      fv = form.is_valid()
+      print("Forms are valid")      
+      if skv and tav and bcv and arv and wpv and shv and fv:
+        print("%s forms are valid"%character_item)
         skills.save()
         talents.save()
         blessingcurses.save()
@@ -104,8 +114,15 @@ def edit_character(request,id=None):
         weapons.save()
         shields.save()
         form.save()
-        return redirect('ajax/view/character/'+str(character_item.id)+'/')
+        print("%s form saved"%character_item)
+        item = get_object_or_404(Character,pk=id)
+        template = get_template('collector/character.html')
+        html = template.render({'c':item})
+        return HttpResponse(html, content_type='text/html')
+        #return redirect('ajax/view/character/'+str(character_item.id)+'/')
     else:
+      character_item = get_object_or_404(Character, id=id)
+      form = CharacterForm(request.POST or None, instance = character_item)
       skills = SkillFormSet(instance=character_item, queryset=character_item.skill_set.order_by("skill_ref__reference"))
       talents = TalentFormSet(instance=character_item, queryset=character_item.talent_set.order_by("-value"))
       blessingcurses = BlessingCurseFormSet(instance=character_item)
@@ -123,7 +140,7 @@ def edit_character(request,id=None):
          'shields': shields,
       }
       template = get_template('collector/character_form.html')
-      html = template.render(edit_context)
+      html = template.render(edit_context,request)
       return HttpResponse(html, content_type='text/html')
   else:
     raise Http404
