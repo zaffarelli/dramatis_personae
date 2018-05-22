@@ -7,9 +7,8 @@ from .forms import CharacterForm, SkillFormSet, TalentFormSet, BlessingCurseForm
 from .utils import render_to_pdf
 from django.template.loader import get_template, render_to_string
 from django.template import RequestContext
-
-
 import json
+from urllib.parse import parse_qs
 
 MAX_CHAR = 10 # How many avatars per page
 
@@ -84,18 +83,21 @@ def edit_character(request,id=None):
   """ Ajax edit of a character """
   if request.is_ajax():
     if request.method == "POST":
-      #print(request.POST)
+      print(request.POST)
       cid = request.POST.get("cid")
       print("cid is %s"%cid)
       character_item = get_object_or_404(Character, id=cid)
       print("%s request is post "%character_item)
-      form = CharacterForm(request.POST.get('character'), instance = character_item)
-      skills = SkillFormSet(request.POST, request.FILES, instance=character_item)
-      talents = TalentFormSet(request.POST, request.FILES, instance=character_item)
-      blessingcurses = BlessingCurseFormSet(request.POST, request.FILES, instance=character_item)
-      armors = ArmorFormSet(request.POST, request.FILES, instance=character_item)
-      weapons = WeaponFormSet(request.POST, request.FILES, instance=character_item)
-      shields = ShieldFormSet(request.POST, request.FILES, instance=character_item)
+      formdata = json.loads(json.dumps(parse_qs(json.dumps(request.POST["character"])),indent=2))
+      print(formdata)
+      fv = character_item.update_from_json(formdata)
+      #form = CharacterForm(formdata, instance = character_item)
+      #skills = SkillFormSet(request.POST, request.FILES, instance=character_item)
+      #talents = TalentFormSet(request.POST, request.FILES, instance=character_item)
+      #blessingcurses = BlessingCurseFormSet(request.POST, request.FILES, instance=character_item)
+      #armors = ArmorFormSet(request.POST, request.FILES, instance=character_item)
+      #weapons = WeaponFormSet(request.POST, request.FILES, instance=character_item)
+      #shields = ShieldFormSet(request.POST, request.FILES, instance=character_item)
       print("Forms created")
       #skv = skills.is_valid()
       #tav = talents.is_valid() 
@@ -103,19 +105,21 @@ def edit_character(request,id=None):
       #arv = armors.is_valid()
       #wpv = weapons.is_valid()
       #shv = shields.is_valid()
-      fv = form.is_valid()
-      print("Forms are valid")      
-      if skv and tav and bcv and arv and wpv and shv and fv:
+      #fv = form.is_valid()
+      
+      #if skv and tav and bcv and arv and wpv and shv and fv:
+      if fv:
+        print("Forms are valid")      
         print("%s forms are valid"%character_item)
-        skills.save()
-        talents.save()
-        blessingcurses.save()
-        armors.save()
-        weapons.save()
-        shields.save()
-        form.save()
+        #skills.save()
+        #talents.save()
+        #blessingcurses.save()
+        #armors.save()
+        #weapons.save()
+        #shields.save()
+        #form.save()
         print("%s form saved"%character_item)
-        item = get_object_or_404(Character,pk=id)
+        item = get_object_or_404(Character,pk=cid)
         template = get_template('collector/character.html')
         html = template.render({'c':item})
         return HttpResponse(html, content_type='text/html')

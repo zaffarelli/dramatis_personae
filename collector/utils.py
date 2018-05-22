@@ -26,3 +26,4 @@ def write_pdf(template_src, context_dict={}):
   result = open(filename, 'wb')
   pdf = pisa.pisaDocument(BytesIO(html.encode("UTF-8")), result)
   result.close()
+

@@ -36,10 +36,15 @@ $('#go').on('click',function(event){
   $.ajax({    
     url: urlupdate,
     method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
     data: {
       cid: $('.character_form input[name=cid]').val(),
       character: $('.character_form').serialize(),
     },
+    dataType: 'json',
     success: function(answer) {
         $(".details").html(answer);
         

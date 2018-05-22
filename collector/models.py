@@ -158,6 +158,17 @@ class Character(models.Model):
     write_pdf('collector/persona_pdf.html',context)
   def __str__(self):
     return '%s' % self.full_name  
+  def update_field(self, key, value):
+    try:
+      getattr(self, key)       
+    except AttributeError:
+      print("There is no such attribute %s in this model"%key)
+    else:
+      setattr(self, key, value)
+  def update_from_json(self,json_data):
+    for key, value in json_data.items():
+      self.update_field(key, value)
+    return self.save(update_fields=json_data.keys()) 
 
 @receiver(pre_save, sender=Character, dispatch_uid="update_character")
 def update_character(sender, instance, **kwargs):
