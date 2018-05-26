@@ -85,7 +85,7 @@ body {
       & .pagination {
         text-align: center;
         margin-top: 1em;
-        & a, strong {
+        & a, & strong,  & span.nav {
           margin: 0 0.1em;
           display: inline-block;
           padding: 0.5em;
@@ -95,6 +95,7 @@ body {
           padding: 0.5em 0.8em;
           border-radius: 2px;
           text-decoration: none;
+          cursor:pointer;
         }
       }
       & .character_actions{
@@ -104,7 +105,7 @@ body {
         padding:2px;
         border:1px solid transparent;
         border-radius:2px;
-        & a{
+        & a, & span.nav{
           cursor:pointer;
           &:hover{
             color:$fics_hl;
@@ -332,4 +333,13 @@ body {
     & a.btn{
         height: 25px;
     }
+}
+
+
+.pdflink{
+  color:$fics_front;
+  text-decoration:none;
+  background:$fics_dark;
+  display:inline-block;
+  padding:3px;
 }

@@ -15,6 +15,8 @@ urlpatterns = [
   re_path('^ajax/update/character/$', views.edit_character, name='update_character'),
 #	re_path('^drop/persona/(?P<id>\d+)/$', views.CharacterDelete.as_view(), name='drop_persona'),
 	re_path('^view/persona/(?P<id>\d+)/$', views.view_persona, name='view_persona'),
-  re_path('^ajax/view/character/(?P<id>\d+)/$', views.view_character, name='view_character'),	
-	re_path('^pdf/persona/(?P<id>\d+)/$', views.persona_as_pdf, name='persona_as_pdf'),
+  re_path('^ajax/pdf/character/(?P<id>\d+)/$', views.pdf_character, name='pdf_character'),
+  re_path('^ajax/view/character/(?P<id>\d+)/$', views.view_character, name='view_character'),
+  re_path('^ajax/list/(?P<id>\d+)/$', views.get_list, name='get_list'),	
+	#re_path('^pdf/persona/(?P<id>\d+)/$', views.persona_as_pdf, name='persona_as_pdf'),
 ]

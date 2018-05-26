@@ -19,64 +19,98 @@
 				font-size: 9px;
 			}
       @page {
-				size: a4 landscape;
+				size: a4 portrait;
         @frame f1 {
           left: 0.5cm;
-          width: 8.9cm;
+          width: 10cm;
           top: 0.5cm;
-          height:3.00cm;
+          height:5.00cm;
           padding:0.125cm;
           
           }
         @frame f2_PA {
           left: 0.5cm;
-          width: 4.45cm;
-          top: 3.0cm;
-          height: 3.5cm;
-          padding:0.125cm;          
+          width: 5cm;
+          top: 5cm;
+          height: 4cm;
+          padding:0.25cm;
+          -pdf-frame-border: 1;
           }
 
         @frame f3_SA {
-          left: 4.95cm;
-          width: 4.45cm;
-          top: 3.0cm;
-          height:3.5cm;
-          padding:0.125cm;
+          left: 5.5cm;
+          width: 5cm;
+          top: 5cm;
+          height:4cm;
+          padding:0.25cm;
+          -pdf-frame-border: 1;
           }
         
         @frame f4_skills{
           left: 0.5cm;
-          width: 8.9cm;
-          top: 6.00cm;
-          height:14.5cm;
-          padding:0.125cm;
-          
+          width: 10cm;
+          top: 9.25cm;
+          height:3.5cm;
+          padding:0.25cm;
+          -pdf-frame-border: 1;
           }
 
+        @frame f5_bc {
+          left: 0.5cm;
+          width: 10cm;
+          top: 19.75cm;
+          bottom:0.5cm;
+          padding:0.25cm;
+          -pdf-frame-border: 1;
+          }
+
+        @frame f6_gear {
+          left: 0.5cm;
+          width: 10cm;
+          top: 13cm;
+          height:6.5cm;
+          padding:0.25cm;
+          -pdf-frame-border: 1;
+          }
+
+        @frame f7_narrative {
+          left: 10.75cm;
+          width: 9.5cm;
+          top: 12.25cm;
+          height:14.25cm;
+          padding:0.25cm;
+          -pdf-frame-border: 1;
+          }
+        @frame f8_technical {
+          left: 10.75cm;
+          width: 9.5cm;
+          top: 26.75cm;
+          bottom:0.5cm;
+          padding:0.25cm;
+          -pdf-frame-border: 1;
+          }
 
         @frame f9_sht {
-          left: 9.65cm;
-          width: 8.9cm;
-          top: 0.5cm;
-          height:20cm;
-          padding:0.125cm;
-          
+          left: 10.75cm;
+          width: 9.5cm;
+          top: 5cm;
+          height:7cm;
+          padding:0.25cm;
+          -pdf-frame-border: 1;
           }
-
-
 
       }
 
       h1{
 				font-family:Optimus;
-				font-size:12px;
+				font-size:16pt;
 				font-weight:600;
 				color:#701060;
 				margin:0;
 			}
       h2{
 				font-family:Optimus;
-				font-size:9px;
+				font-size:9pt;
 				margin:0;
 				color:#701060;
 				padding:0;
@@ -92,11 +126,11 @@
 		  .stats th {
 				  font-weight:300;
 				  text-align:right;
-	  	    font-size:1.0em;
+	  	    font-size:1.1em;
 	  	    padding-right:1ex;
         }
 		  .stats td {
-				  font-size:1.0em;
+				  font-size:1.1em;
 				  padding-right:1ex;
       }
       
@@ -127,11 +161,11 @@
 				 border-top: 1px solid #C0C0C0;
 		   }
 		   .narrative{
-				 font-size:1.0em;
+				 font-size:1.1em;
 			 }
 		   .gm_shortcuts{
 				 font-family:mono;
-				 font-size:1.0em;
+				 font-size:1.2em;
 			 }
     </style>
   </head>

@@ -1,5 +1,9 @@
 #!/bin/bash
 clear
+echo "Updating Dramatis Personae..."
+collector/makedp.py
+echo "Cleaning PDF..."
+rm -f collector/pdf/*.pdf
 echo "Make migrations..."
 python3 manage.py makemigrations
 echo "Migrate..."

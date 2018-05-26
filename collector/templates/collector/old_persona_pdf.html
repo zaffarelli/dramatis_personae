@@ -1,15 +1,20 @@
 {% extends "pdf.html" %}
 {% block sheet %}
 
-<h1>{{ c.full_name|safe }} {% if c.player != "" %}({{c.player|safe}}){%endif%}</h1>
+<h1>{{ c.full_name|safe }}</h1>
 {{ c.entrance|safe }}</br>
 {{c.gender|capfirst}} {{ c.species|capfirst|safe }} {{ c.rank|safe }} of the {{ c.alliance|safe }} from {{ c.native_fief|safe }} {{ c.caste|safe }}.
-<br/>Born in {{ c.birthdate }} ({{ c.age }} years old)
-<br/>Height: {{c.height}}cm / Weight:{{c.weight}}kg
+<table class='core'>
+<tr><th>Alliance</th><td>{{ c.alliance|safe }}</td><th>Birthdate</th><td>{{ c.birthdate }} ({{ c.age }} yo)</td></tr>
+<tr><th>Caste</th><td>{{ c.caste|safe }}</td><th>Height</th><td>{{ c.height }} cm</td></tr>
+<tr><th>Native Fief</th><td>{{ c.native_fief|safe }}</td><th>Weight</th><td>{{ c.weight }} kg</td></tr>
+<tr><th>Rank</th><td>{{ c.rank|safe }}</td>{% if c.player != "" %}<th>Player</th><td>{{ c.player|safe }}</td>{%else%}<th></th><td></td>{%endif%}</tr>
+</table>
 
 <pdf:nextframe>
 
 <h2>Primary Attributes ({{ c.PA_TOTAL }})</h2>
+
 <table class="stats" id="phy">
 <tr><th>STR</th><td>{{c.PA_STR}}</td><th>CON</th><td>{{c.PA_CON}}</td></tr>
 <tr><th>BOD</th><td>{{c.PA_BOD}}</td><th>MOV</th><td>{{c.PA_MOV}}</td></tr>
@@ -24,6 +29,7 @@
 <tr><th>TEC</th><td>{{c.PA_TEC}}</td><th>REF</th><td>{{c.PA_REF}}</td></tr>
 <tr><th>AGI</th><td>{{c.PA_AGI}}</td><th>AWA</th><td>{{c.PA_AWA}}</td></tr>
 </table>
+
 <pdf:nextframe>
 <h2>Secondary Attributes</h2>
 <table class="stats" id="hea">
@@ -50,34 +56,45 @@
 </div>
 {% endif %}
 
+
+<pdf:nextframe>
+
 {% if c.blessingcurse_set.count != 0 %}
 <h2>Blessings/Curses ({{ c.BC_TOTAL }})</h2>
 {% for bc in c.blessingcurse_set.all|dictsortreversed:"value" %}
 <p><u>{{ bc.name|safe }}</u> ({{ bc.value }}): <br/> {{ bc.description|safe }}</p>
 {% endfor %}
 {%endif%}
+
 {% if c.talent_set.count != 0 %}
 <h2>Talents ({{ c.TA_TOTAL }})</h2>
-<p>{% for t in c.talent_set.all|dictsortreversed:"value" %}
-<u>{{ t.name|safe }}</u> ({{ t.value }}): {{ t.description|safe }}{% if forloop.last %}</p>{% else %}<br/>{% endif %}
+<p>
+{% for t in c.talent_set.all|dictsortreversed:"value" %}
+<u>{{ t.name|safe }}</u> ({{ t.value }}): {{ t.description|safe }}<br/>
 {% endfor %}
+</p>
 {%endif%}
+
+
+<pdf:nextframe>
+
 {% if c.weapon_set.count != 0 %}
 <h2>Weapons</h2>
 <p>{% for w in c.weapon_set.all|dictsort:"weapon_ref.reference" %}
 {% if w.weapon_ref.category == "MELEE" %}
-<u>{{ w.weapon_ref.reference|safe }}:</u> <br/> {{w.weapon_ref.category}} &diams; WA:{{ w.weapon_ref.weapon_accuracy }} &diams; {{w.weapon_ref.conceilable}} &diams; {{ w.weapon_ref.availability }} &diams; DC:{{ w.weapon_ref.damage_class|center:"8" }} &diams; STR:{{ w.weapon_ref.str_min }} &diams; RNG:{{ w.weapon_ref.rng }} &diams; {{ w.weapon_ref.rel }} {% if not w.description is empty %}<br/>{{ w.description|safe }}{% endif %}{% if forloop.last %}</p>{% else %}<br/>{% endif %}
+<u>{{ w.weapon_ref.reference|safe }}:</u> <br/> {{w.weapon_ref.category}} &diams; WA:{{ w.weapon_ref.weapon_accuracy }} &diams; {{w.weapon_ref.conceilable}} &diams; {{ w.weapon_ref.availability }} &diams; DC:{{ w.weapon_ref.damage_class|center:"8" }} &diams; STR:{{ w.weapon_ref.str_min }} &diams; RNG:{{ w.weapon_ref.rng }} &diams; {{ w.weapon_ref.rel }} {% if not w.description is empty %}<br/>{{ w.description|safe }}{% endif %}<br/>
 {% else %}
-<u>{{ w.weapon_ref.reference|safe }}:</u> <br/> {{w.weapon_ref.category}} &diams; WA:{{ w.weapon_ref.weapon_accuracy }} &diams; {{w.weapon_ref.conceilable}} &diams; {{ w.weapon_ref.availability }} &diams; DC:{{ w.weapon_ref.damage_class|center:"8" }} &diams; Cal.{{ w.weapon_ref.caliber }} &diams; RoF:{{ w.weapon_ref.rof }} &diams; Clip:{{ w.weapon_ref.clip }} &diams; RNG:{{ w.weapon_ref.rng }} &diams; {{ w.weapon_ref.rel }} {% if not w.weapon_ref.description is empty %} {{ w.weapon_ref..description|safe }}{% endif %}{% if forloop.last %}</p>{% else %}<br/>{% endif %}
+<u>{{ w.weapon_ref.reference|safe }}:</u> <br/> {{w.weapon_ref.category}} &diams; WA:{{ w.weapon_ref.weapon_accuracy }} &diams; {{w.weapon_ref.conceilable}} &diams; {{ w.weapon_ref.availability }} &diams; DC:{{ w.weapon_ref.damage_class|center:"8" }} &diams; Cal.{{ w.weapon_ref.caliber }} &diams; RoF:{{ w.weapon_ref.rof }} &diams; Clip:{{ w.weapon_ref.clip }} &diams; RNG:{{ w.weapon_ref.rng }} &diams; {{ w.weapon_ref.rel }} {% if not w.weapon_ref.description is empty %} {{ w.weapon_ref..description|safe }}{% endif %}<br/>
 {% endif %}
-{% endfor %}
+{% endfor %}</p>
 {%endif%}
+
 {% if c.armor_set.count != 0 %}
 <h2>Armor</h2>
 <p>{% for a in c.armor_set.all|dictsort:"armor_ref.stopping_power" %}
 <u>{{ a.armor_ref.reference|safe }}</u> &diams; {{a.armor_ref.category}} &diams; SP:{{ a.armor_ref.stopping_power }} &diams; {% if a.armor_ref.head %}(HE){%endif%}{% if a.armor_ref.torso %}(TO){%endif%}{%if a.armor_ref.left_arm %}(LA){%endif%}{% if a.armor_ref.right_arm %}(RA){%endif%}{% if a.armor_ref.left_leg %}(LL){%endif%}{% if a.armor_ref.right_leg %}(RL){%endif%}
-{% if not a.armor_ref.description is empty %}{{ a.armor_ref.description|safe }}{% endif %}{% if forloop.last %}</p>{% else %}<br/>{% endif %}
-{% endfor %}
+{% if not a.armor_ref.description is empty %}{{ a.armor_ref.description|safe }}{% endif %}</br>
+{% endfor %}</p>
 {%endif%}
 
 {% if c.shield_set.count != 0 %}
@@ -94,15 +111,16 @@
 {{ c.narrative|linebreaks|safe }}
 </div>
 
+<pdf:nextframe>
+<tt>CHALLENGE {{ c.challenge }} | PA {{ c.PA_TOTAL }} SK:{{ c.SK_TOTAL }} TA {{ c.TA_TOTAL }} BC {{ c.BC_TOTAL }}
+<BR/>RID:{{ c.rid }}
+<BR/>Generated with <b>fics7.collector</b> on {% now "r"  %}
+</tt>
+<pdf:nextframe>
 <h2>Shortcuts</h2>
 <div class='shortcuts'>
 {{ c.gm_shortcuts|safe }}
 </div>
-<hr/>
-<tt>CHALLENGE {{ c.challenge }} | PA {{ c.PA_TOTAL }} SK:{{ c.SK_TOTAL }} TA {{ c.TA_TOTAL }} BC {{ c.BC_TOTAL }}
-<BR/>RID:{{ c.rid }} - Generated by <b>Dramatis Personae</b> 
-<BR/>{% now "Ymd H:i:s"  %} - <b>{{c.pagenum|stringformat:"03d" }}</b>
-</tt>
 
 {% endblock sheet %}
 

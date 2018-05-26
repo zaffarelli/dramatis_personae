@@ -15,12 +15,29 @@ MAX_CHAR = 10 # How many avatars per page
 
 def index(request):
   """ Index page """
-  character_items = Character.objects.order_by('keyword')
+  character_items = Character.objects.order_by('-player','-ready_for_export','full_name')
   paginator = Paginator(character_items,MAX_CHAR)
   page = request.GET.get('page')
   character_items = paginator.get_page(page)
   context = {'character_items': character_items}
   return render(request,'collector/index.html', context)
+
+def get_list(request,id):
+  """ List update page """
+  if request.is_ajax:
+    character_items = Character.objects.order_by('-player','-ready_for_export','full_name')
+    paginator = Paginator(character_items,MAX_CHAR)
+    page = id
+    character_items = paginator.get_page(page)
+    context = {'character_items': character_items}
+
+    template = get_template('collector/list.html')
+    html = template.render(context)
+    return HttpResponse(html, content_type='text/html')
+    
+    #return render(request,'collector/list.html', context)
+  else:
+    Http404
 
 def by_keyword_personae(request,keyword):
   character_items = Character.objects.filter(keyword=keyword)
@@ -46,20 +63,22 @@ def by_species_personae(request,species):
   context = {'character_items': character_items}
   return render(request, 'collector/index.html', context)
 
-def persona_as_pdf(request,id=None):
+def pdf_character(request,id=None):
   item = get_object_or_404(Character,pk=id)
-  context = {
-    'c':item,
-    'filename':item.rid,
-  }
-  pdf = render_to_pdf('collector/persona_pdf.html',context)
-  return pdf
+  if item.backup() == True:
+    answer = "<a class='pdflink' target='_blank' href='pdf/%s.pdf'>%s</a>"%(item.rid,item.rid)
+  else:
+    answer = "<span class='pdflink'>no character found</span>"
+  return HttpResponse(answer, content_type='text/html')
 
 
 def recalc(request):
-  character_items = Character.objects.all()
+  character_items = Character.objects.order_by('-player','-ready_for_export','full_name')
+  x = 1
   for c in character_items:
+    c.pagenum = x
     c.save()
+    x += 1
   return redirect('/')
 
 def export(request):
@@ -79,6 +98,21 @@ def view_character(request, id=None):
     return HttpResponse(html, content_type='text/html')
   else:
     raise Http404
+
+"""
+def pdf_character(request, id=None):
+
+  if request.is_ajax():
+    item = get_object_or_404(Character,pk=id)
+    context = {
+      'c':item,
+      'filename':item.rid,
+    }
+    pdf = render_to_pdf('collector/persona_pdf.html',context)
+    return pdf
+  else:
+    raise Http404
+"""
 
 def edit_character(request,id=None):
   """ Ajax edit of a character """

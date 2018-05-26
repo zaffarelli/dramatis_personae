@@ -61,7 +61,7 @@ body {
       body .wrapper .list .pagination {
         text-align: center;
         margin-top: 1em; }
-        body .wrapper .list .pagination a, body .wrapper .list .pagination strong {
+        body .wrapper .list .pagination a, body .wrapper .list .pagination strong, body .wrapper .list .pagination span.nav {
           margin: 0 0.1em;
           display: inline-block;
           padding: 0.5em;
@@ -70,7 +70,8 @@ body {
           background: #473b52;
           padding: 0.5em 0.8em;
           border-radius: 2px;
-          text-decoration: none; }
+          text-decoration: none;
+          cursor: pointer; }
       body .wrapper .list .character_actions {
         display: inline-block;
         background: #473b52;
@@ -78,9 +79,9 @@ body {
         padding: 2px;
         border: 1px solid transparent;
         border-radius: 2px; }
-        body .wrapper .list .character_actions a {
+        body .wrapper .list .character_actions a, body .wrapper .list .character_actions span.nav {
           cursor: pointer; }
-          body .wrapper .list .character_actions a:hover {
+          body .wrapper .list .character_actions a:hover, body .wrapper .list .character_actions span.nav:hover {
             color: #7a658e; }
       body .wrapper .list ul, body .wrapper .list ol {
         text-indent: 0; }
@@ -235,5 +236,12 @@ body {
       color: black; }
   body a.btn {
     height: 25px; }
+
+.pdflink {
+  color: #FFFFFF;
+  text-decoration: none;
+  background: #473b52;
+  display: inline-block;
+  padding: 3px; }
 
 /*# sourceMappingURL=styles.css.map */

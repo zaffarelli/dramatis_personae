@@ -51,6 +51,8 @@ EVERYMAN = {
     'Fight':2,
     'Focus':2,
     'Local Expert':2,
+#    'Local Expert (Veneto Province)':1,
+#    'Local Expert (Miret)':1,
     'Observe':2,
     'Persuasion':2,
     'Teaching':2,
@@ -238,7 +240,7 @@ def check_gm_shortcuts(ch,sk):
     #print(SHORTCUTS)
     #print(SHORTCUTS[sk.skill_ref.reference])
     score = sk.value + getattr(ch,SHORTCUTS[sk.skill_ref.reference]['attribute'])
-    newshortcut = '%s: <b>%d</b><br/>'%(SHORTCUTS[sk.skill_ref.reference]['label'],score)
+    newshortcut = '%s: <b>%d</b>'%(SHORTCUTS[sk.skill_ref.reference]['label'],score)
     return newshortcut  
   else:
     return ""
@@ -289,6 +291,8 @@ def check_attacks(ch):
       dmg = w.weapon_ref.damage_class
       x = minmax_from_dc(dmg) 
       ranged_attack += '%s: Roll:<b>%d+1D12</b> Dmg:<b>%d-%d (+str:%d)</b></br>'%(w.weapon_ref.reference,score,x[0],x[1], ch.SA_DMG)
+  tmpstr = filter(None,ranged_attack.split('</br>'))
+  ranged_attack = '<br/>'.join(tmpstr) 
   return ranged_attack
 
 def get_rid(s):

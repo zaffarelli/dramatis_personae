@@ -10,7 +10,8 @@ from random import randint
 
 
 ###### Characters
-class Character(models.Model):  
+class Character(models.Model):
+  pagenum = 0
   full_name = models.CharField(max_length=200)
   rid = models.CharField(max_length=200, default='none')
   alliance = models.CharField(max_length=200, blank=True, default='')
@@ -84,10 +85,14 @@ class Character(models.Model):
     fs_fics7.check_everyman_skills(self, Skill, SkillRef)
     skills = self.skill_set.all()
     gm_shortcuts = ""
+    tmp_shortcuts = []
     for s in skills:
-      if s.skill_ref.is_root == False:
-         gm_shortcuts += fs_fics7.check_gm_shortcuts(self,s)
-         self.SK_TOTAL += s.value 
+      if s.skill_ref.is_root == False:         
+        self.SK_TOTAL += s.value
+      sc = fs_fics7.check_gm_shortcuts(self,s)
+      if sc != '':
+        tmp_shortcuts.append(sc)
+    gm_shortcuts = ", ".join(tmp_shortcuts)
     # With talents
     self.TA_TOTAL = 0
     talents = self.talent_set.all()
@@ -101,7 +106,8 @@ class Character(models.Model):
     self.challenge = self.PA_TOTAL*3 + self.SK_TOTAL + self.TA_TOTAL + self.BC_TOTAL
     self.ready_for_export = False
     gm_shortcuts += fs_fics7.check_attacks(self)
-    gm_shortcuts += fs_fics7.check_nameless_attributes(self)
+    if self.player == None:
+      gm_shortcuts += fs_fics7.check_nameless_attributes(self)
     self.gm_shortcuts = gm_shortcuts
     self.ready_for_export = False
   def check_exportable(self):
@@ -116,9 +122,11 @@ class Character(models.Model):
           if spec.skill_ref.is_speciality:
             if spec.skill_ref.linked_to == root.skill_ref:
               cnt += 1
-        if cnt == root.value:
+        if cnt >= root.value:
           #comment += 'Specialties ok for %s\n'% root.skill_ref.reference
-          pass
+          if cnt > root.value:
+            root.value = cnt
+            print("Fixing root value for %s..."%root.skill_ref.reference)
         else:
           comment += 'Warning: Missing %d specialties for %s\n'% (root.value-cnt,root.skill_ref.reference)
           exportable = False
@@ -137,7 +145,10 @@ class Character(models.Model):
       self.PA_AGI = randint(3,8)
       self.PA_AWA = randint(3,8)
       self.save()
-    print(comment)
+    if self.player != '':
+      comment += "Warning: Players' avatars are always exportable...\n"
+      exportable = True
+    print(comment)  
     if self.ready_for_export != exportable:
       self.ready_for_export = exportable
       self.rid = 'none'
@@ -149,7 +160,7 @@ class Character(models.Model):
     proceed = self.check_exportable()
     if proceed == True:
       item = self
-      context = {'c':item,'filename':item.rid,}
+      context = {'c':item,'filename':"%04d_%s"%(item.pagenum,item.rid),}
       write_pdf('collector/persona_pdf.html',context)
     return proceed      
   def __str__(self):
