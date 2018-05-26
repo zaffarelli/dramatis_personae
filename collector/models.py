@@ -4,10 +4,9 @@ from datetime import datetime
 from django.db.models.signals import pre_save, post_save
 from django.dispatch import receiver
 import hashlib
-import math
 from collector import fs_fics7
 from .utils import write_pdf
-
+from random import randint
 
 
 ###### Characters
@@ -65,20 +64,10 @@ class Character(models.Model):
   occult = models.CharField(max_length=50, default='', blank=True)
   challenge = models.TextField(default='',blank=True)  
   ready_for_export =  models.BooleanField(default=False)
+
   def fix(self):
-    # Rules revision 166    
-    self.SA_REC = self.PA_STR + self.PA_CON
-    self.SA_STA = math.ceil(self.PA_BOD / 2) - 1
-    self.SA_END = (self.PA_BOD + self.PA_STR) * 5
-    self.SA_STU = self.PA_CON + self.PA_BOD
-    self.SA_RES = self.PA_WIL + self.PA_PRE
-    self.SA_DMG = math.ceil(self.PA_STR / 2) - 2
-    self.SA_TOL = self.PA_TEM + self.PA_WIL
-    self.SA_HUM = (self.PA_TEM + self.PA_WIL) * 5
-    self.SA_PAS = self.PA_TEM + self.PA_AWA
-    self.SA_WYR = self.PA_INT + self.PA_REF
-    self.SA_SPD = math.ceil(self.PA_REF / 2)
-    self.SA_RUN = self.PA_MOV *2
+    """ Check / calculate other characteristics """    
+    fs_fics7.check_secondary_attributes(self)
     # Primary attributes total
     self.PA_TOTAL = \
       self.PA_STR + self.PA_CON + self.PA_BOD + self.PA_MOV + \
@@ -92,42 +81,7 @@ class Character(models.Model):
       self.player = ''
     # Skills total
     self.SK_TOTAL = 0
-#    if not self.skill_set.count == 0:
-#      skills = self.skill_set.order_by("-value","skill_ref__reference")
-#      prev = None
-#      for s in skills:
-#        if prev is None:
-#          prev = s
-#          print("%s"%prev.skill_ref.reference)
-#        cur = s
-#        print("%s %s"%(cur,prev))
-#        if cur.skill_ref == prev.skill_ref:
-#          cur.delete()
-#          this_skill = Skill.objects.filter(id=s.id).delete()
-#        else:
-#          prev = cur
-    skills = self.skill_set.all()
-    # Everyman
-    #print("%s is a(n) %s"%(self.full_name,self.species))
-    for every in fs_fics7.EVERYMAN[self.species]:
-      every_found = False
-      for s in skills:
-        if s.skill_ref.reference == every:
-          every_found = True
-          if s.value < 2:          
-            print("Value fixed for %s"%s.skill_ref.reference)
-            this_skill = Skill.objects.get(id=s.id)
-            this_skill.value = 2
-            this_skill.save()
-          break
-      if not every_found:
-        print("Not found: %s... Added!"%every)
-        this_skill_ref = SkillRef.objects.get(reference=every)
-        this_skill = Skill()
-        this_skill.character=self
-        this_skill.skill_ref=this_skill_ref
-        this_skill.value = 2
-        this_skill.save()
+    fs_fics7.check_everyman_skills(self, Skill, SkillRef)
     skills = self.skill_set.all()
     gm_shortcuts = ""
     for s in skills:
@@ -146,29 +100,79 @@ class Character(models.Model):
       self.BC_TOTAL += bc.value
     self.challenge = self.PA_TOTAL*3 + self.SK_TOTAL + self.TA_TOTAL + self.BC_TOTAL
     self.ready_for_export = False
-    gm_shortcuts += fs_fics7.get_ranged_attacks(self)
+    gm_shortcuts += fs_fics7.check_attacks(self)
+    gm_shortcuts += fs_fics7.check_nameless_attributes(self)
     self.gm_shortcuts = gm_shortcuts
-    if self.player != '':
-      self.ready_for_export = True
-    if self.SK_TOTAL >= self.PA_TOTAL:
-      self.ready_for_export = True
+    self.ready_for_export = False
+  def check_exportable(self):
+    """Is that avatar finished?"""
+    exportable = True
+    comment = ''
+    skills = self.skill_set.all()
+    for root in skills:
+      if root.skill_ref.is_root:
+        cnt = 0
+        for spec in skills:
+          if spec.skill_ref.is_speciality:
+            if spec.skill_ref.linked_to == root.skill_ref:
+              cnt += 1
+        if cnt == root.value:
+          #comment += 'Specialties ok for %s\n'% root.skill_ref.reference
+          pass
+        else:
+          comment += 'Warning: Missing %d specialties for %s\n'% (root.value-cnt,root.skill_ref.reference)
+          exportable = False
+    if self.PA_TOTAL < 48 and self.player == '':      
+      comment += 'Error: Primary Attributes too low. Fixing that\n'
+      self.PA_STR = randint(3,8)
+      self.PA_CON = randint(3,8)
+      self.PA_BOD = randint(3,8)
+      self.PA_MOV = randint(3,8)
+      self.PA_INT = randint(3,8)
+      self.PA_WIL = randint(3,8)
+      self.PA_TEM = randint(3,8)
+      self.PA_PRE = randint(3,8)
+      self.PA_TEC = randint(3,8)
+      self.PA_REF = randint(3,8)
+      self.PA_AGI = randint(3,8)
+      self.PA_AWA = randint(3,8)
+      self.save()
+    print(comment)
+    if self.ready_for_export != exportable:
+      self.ready_for_export = exportable
+      self.rid = 'none'
+      self.save()
+    return self.ready_for_export
+    
   def backup(self):
-    item = self
-    context = {"c":item,"filename":item.rid,}
-    write_pdf('collector/persona_pdf.html',context)
+    """ Transform to PDF if exportable"""
+    proceed = self.check_exportable()
+    if proceed == True:
+      item = self
+      context = {'c':item,'filename':item.rid,}
+      write_pdf('collector/persona_pdf.html',context)
+    return proceed      
   def __str__(self):
     return '%s' % self.full_name  
   def update_field(self, key, value):
     try:
-      getattr(self, key)       
+      v = getattr(self, key)
+      val = value[0]
+      if type(v)==type(1):
+        valfix = int(val)+0        
+      elif type(v)==type(False):
+        valfix = bool(val)
+      else:
+        valfix = str(val)
+      if valfix != v:
+        #print("%s --> %s:%s <> %s:%s"%(key,v,type(v),valfix,type(valfix)))
+        setattr(self, key, valfix)
+        return key,valfix
+      else:
+        return False,False
     except AttributeError:
-      print("There is no such attribute %s in this model"%key)
-    else:
-      setattr(self, key, value)
-  def update_from_json(self,json_data):
-    for key, value in json_data.items():
-      self.update_field(key, value)
-    return self.save(update_fields=json_data.keys()) 
+      #print("DP: There is no such attribute %s in this model"%key)
+      return False, False   
 
 @receiver(pre_save, sender=Character, dispatch_uid="update_character")
 def update_character(sender, instance, **kwargs):
@@ -177,13 +181,35 @@ def update_character(sender, instance, **kwargs):
   #instance.rid = hashlib.sha1(bytes(instance.full_name,'utf-8')).hexdigest()
   instance.rid = fs_fics7.get_rid(instance.full_name)
   instance.alliancehash = hashlib.sha1(bytes(instance.alliance,'utf-8')).hexdigest()
-  print("%s --> %s" % (instance.full_name,instance.rid))
+  print("Fix .........: %s" % (instance.full_name))
 
 @receiver(post_save, sender=Character, dispatch_uid="backup_character")
 def backup_character(sender, instance, **kwargs):
   if instance.rid != 'none':
-    instance.backup()
-  print("Backup > %s.pdf" % (instance.rid))
+    if instance.backup() == True:
+      print("PDF .........: %s.pdf" % (instance.rid))
+
+###### Skills
+class SkillRef(models.Model):
+  reference = models.CharField(max_length=200, unique=True)
+  is_root = models.BooleanField(default=False)
+  is_speciality = models.BooleanField(default=False)
+  category = models.CharField(default="un",max_length=2, choices=(('no',"Uncategorized"),('co',"Combat"),('di',"Diplomacy"),('sp',"Spirituality"),('te',"Technical")))
+  linked_to = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE)
+  ordering = ('reference',)
+  def __str__(self):
+    return '%s %s %s [%s]' % (self.reference,"(R)" if self.is_root else "","(S)" if self.is_speciality else "", self.linked_to.reference if self.linked_to else "-"  )
+
+class Skill(models.Model):
+  character = models.ForeignKey(Character, on_delete=models.CASCADE)
+  skill_ref = models.ForeignKey(SkillRef, on_delete=models.CASCADE)
+  value = models.PositiveIntegerField(default=0)
+  #ordo = models.CharField(max_length=200, blank=True)
+  ordering = ('skill_ref.reference')  
+  def __str__(self):
+    return '%s=%s' % (self.character.full_name,self.skill_ref.reference)
+  def fix(self):
+    pass
 
 
 ###### Weapons
@@ -285,27 +311,7 @@ class ShieldInline(admin.TabularInline):
 
 
 
-###### Skills
-class SkillRef(models.Model):
-  reference = models.CharField(max_length=200, unique=True)
-  is_root = models.BooleanField(default=False)
-  is_speciality = models.BooleanField(default=False)
-  category = models.CharField(default="un",max_length=2, choices=(('no',"Uncategorized"),('co',"Combat"),('di',"Diplomacy"),('sp',"Spirituality"),('te',"Technical")))
-  linked_to = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE)
-  ordering = ('reference',)
-  def __str__(self):
-    return '%s %s %s' % (self.reference,"(R)" if self.is_root else "","(S)" if self.is_speciality else "")
 
-class Skill(models.Model):
-  character = models.ForeignKey(Character, on_delete=models.CASCADE)
-  skill_ref = models.ForeignKey(SkillRef, on_delete=models.CASCADE)
-  value = models.PositiveIntegerField(default=0)
-  #ordo = models.CharField(max_length=200, blank=True)
-  ordering = ('skill_ref.reference')  
-  def __str__(self):
-    return '%s=%s' % (self.character.full_name,self.skill_ref.reference)
-  def fix(self):
-    pass
 @receiver(pre_save, sender=Skill, dispatch_uid="update_skill")
 def update_skill(sender, instance, **kwargs):
   instance.fix()

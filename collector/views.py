@@ -9,6 +9,7 @@ from django.template.loader import get_template, render_to_string
 from django.template import RequestContext
 import json
 from urllib.parse import parse_qs
+from collector import fs_fics7
 
 MAX_CHAR = 10 # How many avatars per page
 
@@ -83,14 +84,22 @@ def edit_character(request,id=None):
   """ Ajax edit of a character """
   if request.is_ajax():
     if request.method == "POST":
-      print(request.POST)
+      #print(request.POST)
       cid = request.POST.get("cid")
-      print("cid is %s"%cid)
-      character_item = get_object_or_404(Character, id=cid)
-      print("%s request is post "%character_item)
-      formdata = json.loads(json.dumps(parse_qs(json.dumps(request.POST["character"])),indent=2))
-      print(formdata)
-      fv = character_item.update_from_json(formdata)
+      #print("cid is %s"%cid)
+      #character_item = get_object_or_404(Character, id=cid)
+      character_item = Character.objects.get(pk=cid)
+      #print("%s request is post "%character_item)
+      formdata = json.loads(json.dumps(parse_qs(json.dumps(request.POST["character"])),indent=2))      
+      forms = fs_fics7.sanitize(character_item,formdata)
+      print("------------------------------------------------------------------------------")
+      print(forms)
+      print("------------------------------------------------------------------------------")
+      #fv = character_item.update_from_json(forms)
+      character_item.save()
+      fv = True
+      #fv = False
+      #fv = character_item.save()
       #form = CharacterForm(formdata, instance = character_item)
       #skills = SkillFormSet(request.POST, request.FILES, instance=character_item)
       #talents = TalentFormSet(request.POST, request.FILES, instance=character_item)
@@ -98,7 +107,7 @@ def edit_character(request,id=None):
       #armors = ArmorFormSet(request.POST, request.FILES, instance=character_item)
       #weapons = WeaponFormSet(request.POST, request.FILES, instance=character_item)
       #shields = ShieldFormSet(request.POST, request.FILES, instance=character_item)
-      print("Forms created")
+      #print("Forms created")
       #skv = skills.is_valid()
       #tav = talents.is_valid() 
       #bcv = blessingcurses.is_valid()
