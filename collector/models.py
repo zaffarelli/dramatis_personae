@@ -57,6 +57,8 @@ class Character(models.Model):
   SK_TOTAL = models.IntegerField(default=0)
   TA_TOTAL = models.IntegerField(default=0)
   BC_TOTAL = models.IntegerField(default=0)
+  AP = models.IntegerField(default=0)
+  OP = models.IntegerField(default=0)
   gm_shortcuts = models.TextField(default='',blank=True)
   age = models.IntegerField(default=0)
   category = models.CharField(max_length=16,default='none',choices=(('none',"None"),('villain',"Bad guy"),('hero',"Good guy"),('henchman',"Henchman"),('player',"Player")))
@@ -103,6 +105,8 @@ class Character(models.Model):
     blessingcurses = self.blessingcurse_set.all()
     for bc in blessingcurses:
       self.BC_TOTAL += bc.value
+    self.AP = self.PA_TOTAL
+    self.OP = self.SK_TOTAL + self.TA_TOTAL + self.BC_TOTAL
     self.challenge = self.PA_TOTAL*3 + self.SK_TOTAL + self.TA_TOTAL + self.BC_TOTAL
     self.ready_for_export = False
     gm_shortcuts += fs_fics7.check_attacks(self)
