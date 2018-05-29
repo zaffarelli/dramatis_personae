@@ -59,7 +59,7 @@
 {% if c.talent_set.count != 0 %}
 <h2>Talents ({{ c.TA_TOTAL }})</h2>
 <p>{% for t in c.talent_set.all|dictsortreversed:"value" %}
-<u>{{ t.name|safe }}</u> ({{ t.value }}): {{ t.description|safe }}{% if forloop.last %}</p>{% else %}<br/>{% endif %}
+<u>{{ t.name|safe }}</u> ({{t.AP}}x3+{{t.OP}}={{ t.value }}): {{t.attributes_list}} {{t.skills_list}}{{ t.description|safe }}{% if forloop.last %}</p>{% else %}<br/>{% endif %}
 {% endfor %}
 {%endif%}
 {% if c.weapon_set.count != 0 %}

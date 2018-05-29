@@ -12,7 +12,7 @@ class CharacterForm(ModelForm):
     'gm_shortcuts','alliancehash','OP','AP']
 
 SkillFormSet = inlineformset_factory(Character, Skill, fields='__all__', extra=5)
-TalentFormSet = inlineformset_factory(Character, Talent, fields='__all__', extra=3)
+TalentFormSet = inlineformset_factory(Character, Talent, fields='__all__',extra=3)
 BlessingCurseFormSet = inlineformset_factory(Character, BlessingCurse, fields='__all__', extra=3)
 ArmorFormSet = inlineformset_factory(Character, Armor, fields='__all__', extra=3)
 WeaponFormSet = inlineformset_factory(Character, Weapon, fields='__all__', extra=3)

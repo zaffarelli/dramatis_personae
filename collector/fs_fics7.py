@@ -3,6 +3,18 @@
 # This file contains the core business function of the app
 import math
 
+
+'''
+  (from Fading Suns CoreRulebook p91-92)
+  Base AP..................: 60 AP -> 180 OP
+  Base Skill OP............: 30 OP
+  Everyman Skill OP .......: 20 OP
+  Blessing/Curses..........: 10 OP
+  Extra OP.................: 40 OP
+  TOTAL ...................: 280 OP
+
+'''
+
 EVERYMAN = {
   "ascorbite": {},
   "etyri": {},
