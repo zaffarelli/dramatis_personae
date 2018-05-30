@@ -4,17 +4,24 @@
 		{% load static %}
     <meta charset="utf-8" />
     <title>{{c.full_name|safe}}</title>
+    
     <style>
-		  @font-face {
-        font-family: 'Optimus';
-        src: url("/home/zaffarelli/Projects/github/fics7/collector/static/collector/MonospaceTypewriter.ttf");
-      }
-			@font-face {
-				font-family: 'Basic';
-				src: url("/home/zaffarelli/Projects/github/fics7/collector/static/collector/Folks-Normal.ttf");
-			}      
+
+
+
+
+@font-face {
+  font-family: 'Titre';  
+  src: url('/home/zaffarelli/Projects/github/fics7/collector/static/collector/PatuaOne-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Texte';  
+  src: url('/home/zaffarelli/Projects/github/fics7/collector/static/collector/Signika-Regular.ttf');
+}
+  
 			body{
-				font-family: Basic;
+				font-family: 'Texte';
 				font-size: 9px;
 			}
       @page {
@@ -67,17 +74,15 @@
       }
 
       h1{
-				font-family:Optimus;
+				font-family:'Titre';
 				font-size:12px;
 				font-weight:600;
-				color:#701060;
 				margin:0;
 			}
       h2{
-				font-family:Optimus;
+				font-family:'Titre';
 				font-size:10px;
 				margin:0;
-				color:#701060;
 				padding:0;
 			}
 
@@ -128,8 +133,7 @@
 		   .narrative{
 				 font-size:1.0em;
 			 }
-		   .gm_shortcuts{
-				 font-family:mono;
+		   .gm_shortcuts{				 
 				 font-size:1.0em;
 			 }
     </style>

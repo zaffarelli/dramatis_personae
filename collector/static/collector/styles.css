@@ -1,9 +1,18 @@
 @font-face {
-  font-family: 'Optimus';
-  src: url("MonospaceTypewriter.ttf"); }
+  font-family: 'Patua';
+  src: url("PatuaOne-Regular.ttf"); }
 @font-face {
-  font-family: 'Euphory';
-  src: url("Folks-Normal.ttf"); }
+  font-family: 'Rokkitt';
+  src: url("Rokkit-Regular.ttf"); }
+@font-face {
+  font-family: 'Signika';
+  src: url("Signika-Regular.ttf"); }
+@font-face {
+  font-family: 'Prompt';
+  src: url("Prompt-Regular.ttf"); }
+@font-face {
+  font-family: 'Kanit';
+  src: url("Kanit-Regular.ttf"); }
 .fixed {
   position: fixed;
   top: 0;
@@ -103,7 +112,7 @@ body {
       grid-column: 2 / 2;
       padding: 10px;
       padding-bottom: 50px;
-      font-family: Euphory;
+      font-family: Kanit;
       font-size: 0.97em;
       border-left: 1px dashed #E5DECA;
       border-right: 1px dashed #E5DECA; }
@@ -164,7 +173,8 @@ body {
         padding: 5px;
         column-count: 2;
         column-gap: 10px;
-        column-rule: 1px dotted #7a658e; }
+        column-rule: 1px dotted #7a658e;
+        font-family: Rokkit; }
       body .wrapper .details table.formset {
         padding: 1ex 0.5em;
         width: 100%;
@@ -178,7 +188,7 @@ body {
         body .wrapper .details table.formset td {
           vertical-align: top; }
         body .wrapper .details table.formset caption {
-          font-family: Optimus;
+          font-family: 'Prompt';
           font-size: 1.3em; }
         body .wrapper .details table.formset .field_wrapper label {
           width: 10ex;
@@ -188,7 +198,7 @@ body {
         body .wrapper .details table.formset .field_wrapper input, body .wrapper .details table.formset .field_wrapper textarea, body .wrapper .details table.formset .field_wrapper select {
           box-sizing: border-box;
           display: inline-block;
-          font-family: Euphory;
+          font-family: Kanit;
           font-size: 0.93em; }
         body .wrapper .details table.formset .field_wrapper textarea {
           padding: 0.5em;
@@ -213,7 +223,7 @@ body {
         body .wrapper .details table.coreblock td {
           width: 60ex; }
       body .wrapper .details H1, body .wrapper .details H2 {
-        font-family: Optimus;
+        font-family: 'Prompt';
         font-weight: Normal;
         margin: 0; }
   body .btn {
