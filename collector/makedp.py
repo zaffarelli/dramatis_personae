@@ -5,7 +5,7 @@ from os import listdir
 from os.path import isfile, join
 import datetime
 d = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
-print("Launching makedp... %s")
+print("Launching makedp... at %s"%d)
 mypath = 'collector/pdf/'
 onlyfiles = [f for f in listdir(mypath) if isfile(join(mypath, f))]
 pdfs = onlyfiles
@@ -17,7 +17,7 @@ print(pdfs)
 for pdf in pdfs:
   #print("Opening... %s"%(pdf))
   merger.append(open(mypath+pdf, 'rb'))
-des = 'collector/dp_%s.pdf'%d
+des = 'collector/pdfbooks/dp_%s.pdf'%d
 with open(des, 'wb') as fout:
   merger.write(fout)
   print("Writing... %s"%(des))
