@@ -2,7 +2,7 @@ from django.http import HttpResponse, Http404
 from django.shortcuts import render, get_object_or_404, redirect, render_to_response
 from django.core.paginator import Paginator
 
-from .models import Character #, Skill, Shield, ShieldRef, Talent, SkillRef, 
+from .models import Character, Skill#, Shield, ShieldRef, Talent, SkillRef, 
 from .forms import CharacterForm, SkillFormSet, TalentFormSet, BlessingCurseFormSet, WeaponFormSet, ArmorFormSet, ShieldFormSet
 from .utils import render_to_pdf
 from django.template.loader import get_template, render_to_string
@@ -10,6 +10,7 @@ from django.template import RequestContext
 import json
 from urllib.parse import parse_qs
 from collector import fs_fics7
+from django.views.decorators.csrf import csrf_exempt
 
 MAX_CHAR = 10 # How many avatars per page
 
@@ -118,7 +119,7 @@ def edit_character(request,id=None):
   """ Ajax edit of a character """
   if request.is_ajax():
     if request.method == "POST":
-      #print(request.POST)
+      
       cid = request.POST.get("cid")
       #print("cid is %s"%cid)
       #character_item = get_object_or_404(Character, id=cid)
@@ -135,14 +136,15 @@ def edit_character(request,id=None):
       #fv = False
       #fv = character_item.save()
       #form = CharacterForm(formdata, instance = character_item)
-      #skills = SkillFormSet(request.POST, request.FILES, instance=character_item)
+      print(request.POST)
+      skills = SkillFormSet(request.POST, request.FILES, instance=character_item)
       #talents = TalentFormSet(request.POST, request.FILES, instance=character_item)
       #blessingcurses = BlessingCurseFormSet(request.POST, request.FILES, instance=character_item)
       #armors = ArmorFormSet(request.POST, request.FILES, instance=character_item)
       #weapons = WeaponFormSet(request.POST, request.FILES, instance=character_item)
       #shields = ShieldFormSet(request.POST, request.FILES, instance=character_item)
       #print("Forms created")
-      #skv = skills.is_valid()
+      skv = skills.is_valid()
       #tav = talents.is_valid() 
       #bcv = blessingcurses.is_valid()
       #arv = armors.is_valid()
@@ -154,7 +156,7 @@ def edit_character(request,id=None):
       if fv:
         print("Forms are valid")      
         print("%s forms are valid"%character_item)
-        #skills.save()
+        skills.save()
         #talents.save()
         #blessingcurses.save()
         #armors.save()
@@ -192,10 +194,6 @@ def edit_character(request,id=None):
   else:
     raise Http404
 
- 
-  
-  #return render(request, 'collector/character.html', {'c': item})
-
 def add_persona(request):
   if request.method == "POST":
     form = CharacterForm(request.POST)
@@ -208,6 +206,7 @@ def add_persona(request):
   return render(request, 'collector/persona_form.html', {'form': form})
 
 def edit_persona(request,id=None):
+  """ Old static system for edit"""
   character_item = get_object_or_404(Character, id=id)
   form = CharacterForm(request.POST or None, instance = character_item)
   if request.method == "POST":
@@ -233,16 +232,31 @@ def edit_persona(request,id=None):
       form.save()
       return redirect('/view/persona/'+str(character_item.id)+'/')
   else:
-    skills = SkillFormSet(instance=character_item, queryset=character_item.skill_set.order_by("skill_ref__reference"))
-    talents = TalentFormSet(instance=character_item, queryset=character_item.talent_set.order_by("-value"))
+    skills = SkillFormSet(instance=character_item, queryset=character_item.skill_set.order_by('skill_ref__reference'))
+    talents = TalentFormSet(instance=character_item, queryset=character_item.talent_set.order_by('-value'))
     blessingcurses = BlessingCurseFormSet(instance=character_item)
     armors = ArmorFormSet(instance=character_item)
     weapons = WeaponFormSet(instance=character_item)
     shields = ShieldFormSet(instance=character_item)
   return render(request, 'collector/persona_form.html', {'form': form, 'cid':character_item.id, 'skills': skills, 'armors': armors, 'weapons': weapons, 'blessingcurses': blessingcurses, 'talents': talents, 'shields': shields})
 
+@csrf_exempt
+def skill_touch(request):
+  """ Touching skills to edit them in the view """
+  if request.is_ajax():
+    answer = 'error'
+    if request.method == 'POST':
+      print(request.POST)
+      skill_id = request.POST.get('skill')
+      sid = int(skill_id)
+      fingerval = request.POST.get('finger')
+      finger = int(fingerval)
+      print("%s %s"%(sid,finger))
+      skill_item = get_object_or_404(Skill,id=sid)
+      skill_item.value += int(finger)
+      skill_item.save()
+      answer = skill_item.value
+    return HttpResponse(answer, content_type='text/html')
+  return Http404
 
-#class CharacterDelete(DeleteView):
-#  model = Character
-#  success_url = reverse_lazy('index')
 

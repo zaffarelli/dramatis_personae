@@ -38,7 +38,8 @@
         <li><em>{{ c.full_name }}</em><br/>
         <div class="character_actions">
           <a class="view_character" id="{{c.id}}"><i class="fas fa-user"></i></a>&nbsp;&nbsp;
-          <a class="edit_character" id="{{c.id}}"><i class="fas fa-user-edit"></i></a>
+          <a class="edit_character" id="{{c.id}}"><i class="fas fa-user-tag"></i></a>
+          <a href="{% url 'edit_persona' c.id %}"><i class="fas fa-user-edit"></i></a>
           {% if c.ready_for_export %}
           &nbsp;&nbsp;<a class="pdf_character" id="{{c.id}}"><i class="fas fa-file-pdf"></i></a>
           {% endif %}

@@ -15,83 +15,111 @@ function prepare_ajax(){
 
 
 function rebootlinks(){
- 
-  
   $('.nav').off();
   $('.nav').on('click',function(event){
-  event.preventDefault();
-  $.ajax({
-    url: 'ajax/list/'+$(this).attr('page')+'/',
-    success: function(answer) {
+    event.preventDefault();
+    $.ajax({
+      url: 'ajax/list/'+$(this).attr('page')+'/',
+      success: function(answer) {
         $(".list").html(answer)
         rebootlinks();
       },
+    });
   });
-});
 
-
-$(window).scroll(function(){
-  var sticky = $('.menu'), scroll = $(window).scrollTop(), wrap = $('.wrapper');
-  if (scroll >= 100){
-    sticky.addClass('fixed');
-    wrap.addClass('stickyoffset');
-  }else{
-    sticky.removeClass('fixed');
-    wrap.removeClass('stickyoffset');
-  }
-});
-
-
-$('#go').on('click',function(event){
-  console.log($('.character_form').serialize());
-  console.log($('.character_form input[name=cid]').val());
-  var urlupdate = 'ajax/update/character/';
-  $.ajax({    
-    url: urlupdate,
-    method: 'POST',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/x-www-form-urlencoded'
-    },
-    data: {
-      cid: $('.character_form input[name=cid]').val(),
-      character: $('.character_form').serialize(),
-    },
-    dataType: 'json',
-    success: function(answer) {
-        $(".details").html(answer);
-        
-        
-      },
-    error: function(answer) {
-        $(".details").html(answer);
-        
-      },      
-  });  
-});
-
-
-
-$('.view_character').on('click',function(event){
-  event.preventDefault();
-  $.ajax({
-    url: 'ajax/view/character/'+$(this).attr('id')+'/',
-    success: function(answer) {
-        $(".details").html(answer)
-      },
+  $(window).scroll(function(){
+    var sticky = $('.menu'), scroll = $(window).scrollTop(), wrap = $('.wrapper');
+    if (scroll >= 100){
+      sticky.addClass('fixed');
+      wrap.addClass('stickyoffset');
+    }else{
+      sticky.removeClass('fixed');
+      wrap.removeClass('stickyoffset');
+    }
   });
-});
+
+  $('#go').off();
+  $('#go').on('click',function(event){
+    console.log($('.character_form').serialize());
+    console.log($('.character_form input[name=cid]').val());
+    var urlupdate = 'ajax/update/character/';
+    $.ajax({    
+      url: urlupdate,
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      data: {
+        cid: $('.character_form input[name=cid]').val(),
+        character: $('.character_form').serialize(),
+      },
+      dataType: 'json',
+      success: function(answer) {
+          $('.details').html(answer);
+      },
+      error: function(answer) {
+        $('.details').html(answer);
+      },
+    });  
+  });
+
+  $('.view_character').on('click',function(event){
+    event.preventDefault();
+    $.ajax({
+      url: 'ajax/view/character/'+$(this).attr('id')+'/',
+      success: function(answer) {
+        $('.details').html(answer)
+        rebootlinks();
+      },
+    });
+  });
+
+  // Touching skills
+  $('th.edit span.fa').off();
+  $('th.edit span.fa').on('click',function(event){    
+    block = $(this).parent();
+    sender = block.attr('id').split('_')[1];
+    target = 'val_'+block.attr('id').split('_')[1];
+    fingerval = 0;
+    if ($(this).hasClass('fa-plus-circle')){
+      fingerval = 1;
+    }
+    if ($(this).hasClass('fa-minus-circle')){
+      fingerval = -1;
+    }
+    console.log(sender);
+    console.log(target);
+    $.ajax({
+      url: 'ajax/skill_touch/',
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      dataType:'json',
+      data: {skill:sender,finger:fingerval},      
+      success: function(answer) {
+          console.log(answer);
+          $('th#'+target).html(answer);
+        },
+      error: function(answer){
+          $('th#'+target).html(answer);
+       },
+    });
+  
+  });
 
 $('.pdf_character').on('click',function(event){
   event.preventDefault();
   $.ajax({
     url: 'ajax/pdf/character/'+$(this).attr('id')+'/',
     success: function(answer) {
-        $(".details").html(answer)
+        $('.details').html(answer)
         
       },
     error: function(answer) {
-        $(".details").html(answer)
+        $('.details').html(answer)
       },
       
   });

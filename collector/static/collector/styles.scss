@@ -69,16 +69,34 @@ body {
   }
 
 
-  & .footer{
+  footer{
     background:$fics_darker;
-    height:50px;
-    padding:5px;
+    height:80px;
+    padding:10px;
+    padding-top:0.5em;    
+    margin:0;
     color: $fics_front;
-    font-family: sans-serif;
-    font-size: 8pt;
-    text-align:right;
-    padding-top:50px;
-    padding-right:10%;
+    font-family: Kanit;
+    font-size: 9pt;    
+    
+    overflow-y:hidden;
+    & .footer{
+      padding:5px;
+      padding-top:0;
+      left:10%;
+      width:auto;
+      right:10%;
+      top:0.5em;
+      height:auto;
+      bottom:0.5em;
+      display:grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-column-gap: 5ex;
+      
+      justify-content: center;
+      align-content: center;    
+    }
+    
   }
 
   & .wrapper {
@@ -206,6 +224,22 @@ body {
               -webkit-column-rule:1px solid #000;
               column-rule:1px dotted $fics_light;
               color:#000000;
+              & table{
+                font-size:7pt;
+                width: 100%;
+                & tr{
+                  & td{
+                    width:auto;
+                  }
+                  & th{
+                    background:silver;
+                    width:8ex;
+                    &.edit span:hover{
+                      color:purple;
+                    }
+                  }
+                }
+              }
             }
             
             & .classyview{

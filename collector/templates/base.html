@@ -13,13 +13,6 @@
     </head>
     <body>
 				<header></header>
-
-
-
-    
-
-
-
     <div class="logo">
     {% block logo %}
     {% endblock %}
@@ -40,14 +33,17 @@
                 {% endblock %}
             </div>
         </div>
-
+        <footer>
             <div class="footer">
                 {% block page_footer %}
-                zaffarelli@gmail.com<br>
-                Dramatis Personae v0.2
+                <ul>
+                <li>Welcome to <strong>Dramatis Personae</strong>.</li>
+                <li>Release 0.2</li>
+                <li><a>zaffarelli@gmail.com</a></li>
+                </ul>
                 {% endblock %}
             </div>
-        <footer></footer>
+        </footer>
         <script src="https://code.jquery.com/jquery-3.3.0.js"></script>
         <script src="{% static 'js/collector.js' %}"></script>
         {% block javascript %}
