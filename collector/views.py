@@ -115,6 +115,33 @@ def pdf_character(request, id=None):
     raise Http404
 """
 
+
+def old_extract_formset(rqp,s):
+  res = {'management':{},'data':{}}
+  for k in rqp:
+    if s in k:
+      key = k.split('-')
+      if 'INITIAL_FORMS' in k or 'TOTAL_FORMS' in k or 'MIN_NUM_FORMS' in k or 'MAX_NUM_FORMS' in k:
+        res['management'][key[1]] = rqp[k]        
+      else:
+        num = key[1]
+        att = key[2]
+        val = rqp[k]
+        if not num in res['data']:
+          res['data'][num] = {}
+        res['data'][num][att] = val
+  print(res)
+  return res
+
+def extract_formset(rqp,s):
+  res = {}
+  for k in rqp:
+    if s in k:
+      res[k] = rqp[k]
+  print(s)    
+  print(res)
+  return res
+
 def edit_character(request,id=None):
   """ Ajax edit of a character """
   if request.is_ajax():
@@ -125,44 +152,61 @@ def edit_character(request,id=None):
       #character_item = get_object_or_404(Character, id=cid)
       character_item = Character.objects.get(pk=cid)
       #print("%s request is post "%character_item)
-      formdata = json.loads(json.dumps(parse_qs(json.dumps(request.POST["character"])),indent=2))      
+      formdata = json.loads(json.dumps(parse_qs(json.dumps(request.POST['character'])),indent=2))      
       forms = fs_fics7.sanitize(character_item,formdata)
-      print("------------------------------------------------------------------------------")
-      print(forms)
-      print("------------------------------------------------------------------------------")
-      #fv = character_item.update_from_json(forms)
-      character_item.save()
-      fv = True
-      #fv = False
-      #fv = character_item.save()
-      #form = CharacterForm(formdata, instance = character_item)
-      print(request.POST)
-      skills = SkillFormSet(request.POST, request.FILES, instance=character_item)
-      #talents = TalentFormSet(request.POST, request.FILES, instance=character_item)
-      #blessingcurses = BlessingCurseFormSet(request.POST, request.FILES, instance=character_item)
-      #armors = ArmorFormSet(request.POST, request.FILES, instance=character_item)
-      #weapons = WeaponFormSet(request.POST, request.FILES, instance=character_item)
-      #shields = ShieldFormSet(request.POST, request.FILES, instance=character_item)
-      #print("Forms created")
-      skv = skills.is_valid()
-      #tav = talents.is_valid() 
-      #bcv = blessingcurses.is_valid()
-      #arv = armors.is_valid()
-      #wpv = weapons.is_valid()
-      #shv = shields.is_valid()
-      #fv = form.is_valid()
       
-      #if skv and tav and bcv and arv and wpv and shv and fv:
-      if fv:
+      #print(formdata)
+      
+      #fv = character_item.update_from_json(forms)
+      
+      #fv = True
+      #fv = character_item.save()
+      form = CharacterForm(forms, instance = character_item)      
+      fv = form.is_valid()
+      skill_data = extract_formset(formdata,'skill_set')
+      talent_data = extract_formset(formdata,'talent_set')
+      blessingcurse_data = extract_formset(formdata,'blessingcurse_set')
+      armor_data = extract_formset(formdata,'armor_set')
+      weapon_data = extract_formset(formdata,'weapon_set')
+      shield_data = extract_formset(formdata,'shield_set')
+#      character_item.save()
+#      print(fv)
+      skills = SkillFormSet(skill_data, request.FILES, instance=character_item)
+      for x in skills:
+        print(x.as_p)
+        print("------------------------------------------------------------------------------")
+      skv = skills.is_valid()
+      print(skills.errors)
+      talents = TalentFormSet(talent_data, request.FILES, instance=character_item)
+      tav = talents.is_valid() 
+      blessingcurses = BlessingCurseFormSet(blessingcurse_data, request.FILES, instance=character_item)
+      bcv = blessingcurses.is_valid()
+      armors = ArmorFormSet(armor_data, request.FILES, instance=character_item)
+      arv = armors.is_valid()
+      weapons = WeaponFormSet(weapon_data, request.FILES, instance=character_item)
+      wpv = weapons.is_valid()
+      shields = ShieldFormSet(shield_data, request.FILES, instance=character_item)
+      shv = shields.is_valid()
+      #print("Forms created")
+      
+      
+      
+      
+      
+      
+      
+      
+      if skv and tav and bcv and arv and wpv and shv and fv:
+      #if fv:
         print("Forms are valid")      
         print("%s forms are valid"%character_item)
         skills.save()
-        #talents.save()
-        #blessingcurses.save()
-        #armors.save()
-        #weapons.save()
-        #shields.save()
-        #form.save()
+        talents.save()
+        blessingcurses.save()
+        armors.save()
+        weapons.save()
+        shields.save()
+        form.save()
         print("%s form saved"%character_item)
         item = get_object_or_404(Character,pk=cid)
         template = get_template('collector/character.html')
