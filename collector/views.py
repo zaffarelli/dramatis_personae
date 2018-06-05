@@ -137,9 +137,13 @@ def extract_formset(rqp,s):
   res = {}
   for k in rqp:
     if s in k:
-      res[k] = rqp[k]
-  print(s)    
-  print(res)
+      #key = k.split('-')
+      #sub = key
+      #del(sub[0])
+      #subkey = '-'.join(sub)
+      res[k] = rqp[k][0]
+  #print(s)
+  #print(res)
   return res
 
 def edit_character(request,id=None):
@@ -155,7 +159,7 @@ def edit_character(request,id=None):
       formdata = json.loads(json.dumps(parse_qs(json.dumps(request.POST['character'])),indent=2))      
       forms = fs_fics7.sanitize(character_item,formdata)
       
-      #print(formdata)
+      #print(forms)
       
       #fv = character_item.update_from_json(forms)
       
@@ -164,17 +168,22 @@ def edit_character(request,id=None):
       form = CharacterForm(forms, instance = character_item)      
       fv = form.is_valid()
       skill_data = extract_formset(formdata,'skill_set')
+      #print(skill_data)
       talent_data = extract_formset(formdata,'talent_set')
       blessingcurse_data = extract_formset(formdata,'blessingcurse_set')
       armor_data = extract_formset(formdata,'armor_set')
       weapon_data = extract_formset(formdata,'weapon_set')
       shield_data = extract_formset(formdata,'shield_set')
 #      character_item.save()
-#      print(fv)
-      skills = SkillFormSet(skill_data, request.FILES, instance=character_item)
-      for x in skills:
-        print(x.as_p)
-        print("------------------------------------------------------------------------------")
+      print(skill_data)
+      skills = SkillFormSet(skill_data, instance=character_item)
+      #print(skills)
+      #print("------------------------------------------------------------------------------")
+      #print("------------------------------------------------------------------------------")
+      #for x in skills:
+        #print(x.as_p)
+        #print("------------------------------------------------------------------------------")
+      #skills.clean()
       skv = skills.is_valid()
       print(skills.errors)
       talents = TalentFormSet(talent_data, request.FILES, instance=character_item)
