@@ -159,24 +159,27 @@ def edit_character(request,id=None):
       formdata = json.loads(json.dumps(parse_qs(json.dumps(request.POST['character'])),indent=2))      
       forms = fs_fics7.sanitize(character_item,formdata)
       
-      #print(forms)
-      
-      #fv = character_item.update_from_json(forms)
+      print(forms)
+
+      for k,v in forms:
+        character_item.update_field(k,v)
       
       #fv = True
-      #fv = character_item.save()
-      form = CharacterForm(forms, instance = character_item)      
-      fv = form.is_valid()
+      fv = character_item.save()
+      #form = CharacterForm(forms, instance = character_item)      
+      #fv = form.is_valid()
+      print(fv)
       skill_data = extract_formset(formdata,'skill_set')
       #print(skill_data)
-      talent_data = extract_formset(formdata,'talent_set')
-      blessingcurse_data = extract_formset(formdata,'blessingcurse_set')
-      armor_data = extract_formset(formdata,'armor_set')
-      weapon_data = extract_formset(formdata,'weapon_set')
-      shield_data = extract_formset(formdata,'shield_set')
+      #talent_data = extract_formset(formdata,'talent_set')
+      #blessingcurse_data = extract_formset(formdata,'blessingcurse_set')
+      #armor_data = extract_formset(formdata,'armor_set')
+      #weapon_data = extract_formset(formdata,'weapon_set')
+      #shield_data = extract_formset(formdata,'shield_set')
 #      character_item.save()
       print(skill_data)
       skills = SkillFormSet(skill_data, instance=character_item)
+      #print(skills.errors)
       #print(skills)
       #print("------------------------------------------------------------------------------")
       #print("------------------------------------------------------------------------------")
@@ -185,17 +188,18 @@ def edit_character(request,id=None):
         #print("------------------------------------------------------------------------------")
       #skills.clean()
       skv = skills.is_valid()
-      print(skills.errors)
-      talents = TalentFormSet(talent_data, request.FILES, instance=character_item)
-      tav = talents.is_valid() 
-      blessingcurses = BlessingCurseFormSet(blessingcurse_data, request.FILES, instance=character_item)
-      bcv = blessingcurses.is_valid()
-      armors = ArmorFormSet(armor_data, request.FILES, instance=character_item)
-      arv = armors.is_valid()
-      weapons = WeaponFormSet(weapon_data, request.FILES, instance=character_item)
-      wpv = weapons.is_valid()
-      shields = ShieldFormSet(shield_data, request.FILES, instance=character_item)
-      shv = shields.is_valid()
+      print(skv)
+      #print(skills.errors)
+      #talents = TalentFormSet(talent_data, request.FILES, instance=character_item)
+      #tav = talents.is_valid() 
+      #blessingcurses = BlessingCurseFormSet(blessingcurse_data, request.FILES, instance=character_item)
+      #bcv = blessingcurses.is_valid()
+      #armors = ArmorFormSet(armor_data, request.FILES, instance=character_item)
+      #arv = armors.is_valid()
+      #weapons = WeaponFormSet(weapon_data, request.FILES, instance=character_item)
+      #wpv = weapons.is_valid()
+      #shields = ShieldFormSet(shield_data, request.FILES, instance=character_item)
+      #shv = shields.is_valid()
       #print("Forms created")
       
       
@@ -205,8 +209,8 @@ def edit_character(request,id=None):
       
       
       
-      if skv and tav and bcv and arv and wpv and shv and fv:
-      #if fv:
+      #if skv and tav and bcv and arv and wpv and shv and fv:
+      if fv and skv:
         print("Forms are valid")      
         print("%s forms are valid"%character_item)
         skills.save()
