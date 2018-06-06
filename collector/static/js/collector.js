@@ -54,8 +54,9 @@ function rebootlinks(){
         cid: $('.character_form input[name=cid]').val(),
         character: $('.character_form').serialize(),
       },
-      dataType: 'json',
+      dataType: 'html',
       success: function(answer) {
+          console.log("Ok!!");
           $('.details').html(answer);
       },
       error: function(answer) {
