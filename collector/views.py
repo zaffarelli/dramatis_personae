@@ -8,6 +8,8 @@ from .utils import render_to_pdf
 from django.template.loader import get_template, render_to_string
 from django.template import RequestContext
 import json
+import ast
+from urllib.parse import unquote
 from urllib.parse import parse_qs
 from collector import fs_fics7
 from django.views.decorators.csrf import csrf_exempt
@@ -67,9 +69,9 @@ def by_species_personae(request,species):
 def pdf_character(request,id=None):
   item = get_object_or_404(Character,pk=id)
   if item.backup() == True:
-    answer = "<a class='pdflink' target='_blank' href='pdf/%s.pdf'>%s</a>"%(item.rid,item.rid)
+    answer = '<a class="pdflink" target="_blank" href="pdf/%s.pdf">%s</a>'%(item.rid,item.rid)
   else:
-    answer = "<span class='pdflink'>no character found</span>"
+    answer = '<span class="pdflink">no character found</span>'
   return HttpResponse(answer, content_type='text/html')
 
 
@@ -78,6 +80,7 @@ def recalc(request):
   x = 1
   for c in character_items:
     c.pagenum = x
+    c.rid = 'none'
     c.save()
     x += 1
   return redirect('/')
@@ -100,63 +103,34 @@ def view_character(request, id=None):
   else:
     raise Http404
 
-"""
-def pdf_character(request, id=None):
-
-  if request.is_ajax():
-    item = get_object_or_404(Character,pk=id)
-    context = {
-      'c':item,
-      'filename':item.rid,
-    }
-    pdf = render_to_pdf('collector/persona_pdf.html',context)
-    return pdf
-  else:
-    raise Http404
-"""
-
-
-def old_extract_formset(rqp,s):
-  res = {'management':{},'data':{}}
-  for k in rqp:
-    if s in k:
-      key = k.split('-')
-      if 'INITIAL_FORMS' in k or 'TOTAL_FORMS' in k or 'MIN_NUM_FORMS' in k or 'MAX_NUM_FORMS' in k:
-        res['management'][key[1]] = rqp[k]        
-      else:
-        num = key[1]
-        att = key[2]
-        val = rqp[k]
-        if not num in res['data']:
-          res['data'][num] = {}
-        res['data'][num][att] = val
-  print(res)
-  return res
-
 def extract_formset(rqp,s):
+  """ Get only the fields matching to this formset """
   res = {}
   for k in rqp:
     if s in k:
-      #key = k.split('-')
-      #sub = key
-      #del(sub[0])
-      #subkey = '-'.join(sub)
       res[k] = rqp[k][0]
-  #print(s)
-  #print(res)
   return res
 
 def edit_character(request,id=None):
-  """ Ajax edit of a character """
+  """
+  Ajax edit of a character.
+  WARNING: Beware that with this method, the last formset can grab an " at the end, so put
+  the csrf token for the form after the last formset!!!
+  """
   if request.is_ajax():
-    if request.method == "POST":
-      cid = request.POST.get("cid")
+    if request.method == 'POST':
+      cid = request.POST.get('cid')
       character_item = Character.objects.get(pk=cid)
-      formdata = json.loads(json.dumps(parse_qs(json.dumps(request.POST['character'])),indent=2))      
+      
+      """ FIXME: There is a mistake here that puts " at start and end ...."""
+      formdata = json.loads(json.dumps(parse_qs(json.dumps(request.POST['character'])),indent=2))
+      #formdata = ast.literal_eval(request.POST['character'])
+      print(type(formdata))
+      print(formdata)
       forms = fs_fics7.sanitize(character_item,formdata)
       fv = False
       if forms == None:
-        print("No change for character")
+        print('No change for character...')
       else:
         fv = True
       skill_data = extract_formset(formdata,'skill_set')
@@ -176,28 +150,33 @@ def edit_character(request,id=None):
       bcv = blessingcurses.is_valid()
       arv = armors.is_valid()
       wpv = weapons.is_valid()
-      #shv = shields.is_valid()
-      #print(shield_data)
-      if skv and tav and bcv and arv and wpv and fv:      # and shv
-        print("%s forms are valid"%character_item)
+      shv = shields.is_valid()
+      if skv and tav and bcv and arv and wpv and fv and shv:        
         skills.save()
         talents.save()
         blessingcurses.save()
         armors.save()
         weapons.save()
-        #shields.save()
+        shields.save()
         character_item.save()
-        print("%s form saved"%character_item)
         item = get_object_or_404(Character,pk=cid)
         template = get_template('collector/character.html')
         html = template.render({'c':item})
-        return HttpResponse(html, content_type='text/html')
-        #return redirect('ajax/view/character/'+str(character_item.id)+'/')
+      else:
+        html = '<div class="classyview">'
+        html += '<p>Unable to update this character !!!</p>'
+        html += 'Skills: %s<br/>'%(skills.errors)
+        html += 'Talents: %s<br/>'%(talents.errors)
+        html += 'BlessingCurses: %s<br/>'%(blessingcurses.errors)
+        html += 'Armors: %s<br/>'%(armors.errors)
+        html += 'Weapons: %s<br/>'%(weapons.errors)
+        html += 'Shields: %s<br/>'%(shields.errors)
+        html += '</div>'
     else:
       character_item = get_object_or_404(Character, id=id)
       form = CharacterForm(request.POST or None, instance = character_item)
-      skills = SkillFormSet(instance=character_item, queryset=character_item.skill_set.order_by("skill_ref__reference"))
-      talents = TalentFormSet(instance=character_item, queryset=character_item.talent_set.order_by("-value"))
+      skills = SkillFormSet(instance=character_item, queryset=character_item.skill_set.order_by('skill_ref__reference'))
+      talents = TalentFormSet(instance=character_item, queryset=character_item.talent_set.order_by('-value'))
       blessingcurses = BlessingCurseFormSet(instance=character_item)
       armors = ArmorFormSet(instance=character_item)
       weapons = WeaponFormSet(instance=character_item)
@@ -214,12 +193,14 @@ def edit_character(request,id=None):
       }
       template = get_template('collector/character_form.html')
       html = template.render(edit_context,request)
-      return HttpResponse(html, content_type='text/html')
   else:
-    raise Http404
+    html = '<div class="classyview">'
+    html += 'This is no ajax !!!'
+    html += '</div>'
+  return HttpResponse(html, content_type='text/html')
 
 def add_persona(request):
-  if request.method == "POST":
+  if request.method == 'POST':
     form = CharacterForm(request.POST)
     if form.is_valid():
       character_item = form.save(commit=False)
@@ -233,7 +214,7 @@ def edit_persona(request,id=None):
   """ Old static system for edit"""
   character_item = get_object_or_404(Character, id=id)
   form = CharacterForm(request.POST or None, instance = character_item)
-  if request.method == "POST":
+  if request.method == 'POST':
     skills = SkillFormSet(request.POST, request.FILES, instance=character_item)
     talents = TalentFormSet(request.POST, request.FILES, instance=character_item)
     blessingcurses = BlessingCurseFormSet(request.POST, request.FILES, instance=character_item)
@@ -270,12 +251,12 @@ def skill_touch(request):
   if request.is_ajax():
     answer = 'error'
     if request.method == 'POST':
-      print(request.POST)
+      #print(request.POST)
       skill_id = request.POST.get('skill')
       sid = int(skill_id)
       fingerval = request.POST.get('finger')
       finger = int(fingerval)
-      print("%s %s"%(sid,finger))
+      #print('%s %s'%(sid,finger))
       skill_item = get_object_or_404(Skill,id=sid)
       skill_item.value += int(finger)
       skill_item.save()

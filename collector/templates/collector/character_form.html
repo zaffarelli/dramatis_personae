@@ -3,7 +3,7 @@
 <form class='character_form'>
 	{{ form.non_field_errors}}
   {{ form.management_form }}
-  {% csrf_token %}
+  
 
   <input name='cid' type='hidden' value='{{cid}}'>
 
@@ -264,6 +264,8 @@
 	{% endfor %}
 	</table>
 
+{% csrf_token %}
+  
 
 </form>
 </div>
