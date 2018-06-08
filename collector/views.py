@@ -13,22 +13,24 @@ from urllib.parse import unquote
 from urllib.parse import parse_qs
 from collector import fs_fics7
 from django.views.decorators.csrf import csrf_exempt
+import datetime
 
 MAX_CHAR = 10 # How many avatars per page
 
 def index(request):
   """ Index page """
-  character_items = Character.objects.order_by('-player','-ready_for_export','full_name')
-  paginator = Paginator(character_items,MAX_CHAR)
-  page = request.GET.get('page')
-  character_items = paginator.get_page(page)
-  context = {'character_items': character_items}
+  #character_items = Character.objects.order_by('-player','-ready_for_export','full_name')
+  #paginator = Paginator(character_items,MAX_CHAR)
+  #page = request.GET.get('page')
+  #character_items = paginator.get_page(page)
+  #context = {'character_items': character_items}
+  context = {}
   return render(request,'collector/index.html', context)
 
 def get_list(request,id):
   """ List update page """
   if request.is_ajax:
-    character_items = Character.objects.order_by('-player','-ready_for_export','full_name')
+    character_items = Character.objects.order_by('-player','full_name')
     paginator = Paginator(character_items,MAX_CHAR)
     page = id
     character_items = paginator.get_page(page)
@@ -209,6 +211,14 @@ def add_persona(request):
   else:
     form = CharacterForm()
   return render(request, 'collector/persona_form.html', {'form': form})
+
+def add_character(request):
+  character_item = Character()
+  character_item.full_name = 'Nameless at %s'%(datetime.datetime.now())
+  character_item.save()
+  return redirect('/')
+
+
 
 def edit_persona(request,id=None):
   """ Old static system for edit"""

@@ -9,7 +9,7 @@ urlpatterns = [
 	re_path('^by_alliance/persona/(?P<alliancehash>\w+)/$', views.by_alliance_personae, name='by_alliance'),
 	re_path('^by_species/persona/(?P<species>\w+)/$', views.by_species_personae, name='by_species'),
 	re_path('^export/$', views.export, name='export'),
-	re_path('^add/persona/$', views.add_persona, name='add_persona'),  
+	re_path('^add/persona/$', views.add_persona, name='add_persona'),
 	re_path('^edit/persona/(?P<id>\d+)/$', views.edit_persona, name='edit_persona'),
   re_path('^ajax/edit/character/(?P<id>\d+)/$', views.edit_character, name='edit_character'),
   re_path('^ajax/update/character/$', views.edit_character, name='update_character'),
@@ -19,5 +19,6 @@ urlpatterns = [
   re_path('^ajax/view/character/(?P<id>\d+)/$', views.view_character, name='view_character'),
   re_path('^ajax/list/(?P<id>\d+)/$', views.get_list, name='get_list'),
   re_path('^ajax/skill_touch/$', views.skill_touch, name='skill_touch'),
+  re_path('^ajax/add/character/$', views.add_character, name='add_character'),  
 	#re_path('^pdf/persona/(?P<id>\d+)/$', views.persona_as_pdf, name='persona_as_pdf'),
 ]

@@ -12,6 +12,18 @@ function prepare_ajax(){
   });
   }
 
+function loadajax(){
+    $.ajax({
+      url: 'ajax/list/1/',
+      success: function(answer) {
+        $(".list").html(answer)
+        rebootlinks();
+      },
+    });
+}
+
+
+
 
 
 function rebootlinks(){
@@ -64,6 +76,25 @@ function rebootlinks(){
       },
     });  
   });
+
+  $('#add_character').off();
+  $('#add_character').on('click',function(event){
+    event.preventDefault();
+    $.ajax({
+      url: 'ajax/add/character/',
+      success: function(answer) {
+        $('.details').html('done')
+        rebootlinks();
+      },
+      success: function(answer) {
+        $('.details').html('oops, broken')
+        rebootlinks();
+      },
+
+    });
+  });
+
+
 
   $('.view_character').on('click',function(event){
     event.preventDefault();
