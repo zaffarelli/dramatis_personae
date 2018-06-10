@@ -19,13 +19,7 @@ MAX_CHAR = 10 # How many avatars per page
 
 def index(request):
   """ Index page """
-  #character_items = Character.objects.order_by('-player','-ready_for_export','full_name')
-  #paginator = Paginator(character_items,MAX_CHAR)
-  #page = request.GET.get('page')
-  #character_items = paginator.get_page(page)
-  #context = {'character_items': character_items}
-  context = {}
-  return render(request,'collector/index.html', context)
+  return render(request,'collector/index.html')
 
 def get_list(request,id):
   """ List update page """
@@ -35,12 +29,9 @@ def get_list(request,id):
     page = id
     character_items = paginator.get_page(page)
     context = {'character_items': character_items}
-
     template = get_template('collector/list.html')
     html = template.render(context)
     return HttpResponse(html, content_type='text/html')
-    
-    #return render(request,'collector/list.html', context)
   else:
     Http404
 
