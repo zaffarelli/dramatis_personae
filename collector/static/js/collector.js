@@ -14,9 +14,9 @@ function prepare_ajax(){
 
 function loadajax(){
     $.ajax({
-      url: 'ajax/list/1/',
+      url: 'ajax/list/none/1/',
       success: function(answer) {
-        $(".list").html(answer)
+        $('.list').html(answer)
         rebootlinks();
       },
     });
@@ -30,10 +30,14 @@ function rebootlinks(){
   $('.nav').off();
   $('.nav').on('click',function(event){
     event.preventDefault();
+    key = $('#customize').val(); 
+    if (key == ''){
+      key='none';
+    }
     $.ajax({
-      url: 'ajax/list/'+$(this).attr('page')+'/',
+      url: 'ajax/list/'+key+'/'+$(this).attr('page')+'/',
       success: function(answer) {
-        $(".list").html(answer)
+        $('.list').html(answer)
         rebootlinks();
       },
     });

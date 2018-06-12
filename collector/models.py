@@ -61,7 +61,7 @@ class Character(models.Model):
   OP = models.IntegerField(default=0)
   gm_shortcuts = models.TextField(default='',blank=True)
   age = models.IntegerField(default=0)
-  category = models.CharField(max_length=16,default='none',choices=(('none',"None"),('villain',"Bad guy"),('hero',"Good guy"),('henchman',"Henchman"),('player',"Player")))
+  category = models.CharField(max_length=16,default='none',choices=(('none',"None"),('villain',"Bad guy"),('hero',"Good guy"),('henchman',"Henchman"),('player',"Player"),('support',"Support"),('auto',"Autochton")))
   occult_level = models.PositiveIntegerField(default=0)
   occult_darkside = models.PositiveIntegerField(default=0)
   occult = models.CharField(max_length=50, default='', blank=True)

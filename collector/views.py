@@ -21,10 +21,13 @@ def index(request):
   """ Index page """
   return render(request,'collector/index.html')
 
-def get_list(request,id):
+def get_list(request,id,slug='none'):
   """ List update page """
   if request.is_ajax:
-    character_items = Character.objects.order_by('-player','full_name')
+    if slug=='none':
+      character_items = Character.objects.order_by('-player','full_name')
+    else:
+      character_items = Character.objects.order_by('full_name').filter(keyword=slug)
     paginator = Paginator(character_items,MAX_CHAR)
     page = id
     character_items = paginator.get_page(page)
