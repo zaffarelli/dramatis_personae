@@ -109,6 +109,7 @@ body {
       body .wrapper .list ul, body .wrapper .list ol {
         text-indent: 0; }
         body .wrapper .list ul li, body .wrapper .list ol li {
+          margin-bottom: 1em;
           font-size: 0.83em; }
           body .wrapper .list ul li a, body .wrapper .list ol li a {
             color: #FFFFFF;
@@ -268,7 +269,7 @@ body {
     body .btn:hover {
       background: #B8A66F;
       color: black; }
-  body a.btn {
+  body .btn {
     height: 25px; }
 
 .pdflink {

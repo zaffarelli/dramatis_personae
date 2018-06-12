@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import  Skill, SkillRef, SkillAdmin, SkillRefAdmin, Weapon, WeaponAdmin, WeaponRefAdmin,  WeaponRef, Armor, ArmorAdmin, ArmorRefAdmin,  ArmorRef, Shield, ShieldAdmin, ShieldRefAdmin,  ShieldRef, Character, CharacterAdmin, BeneficeAfflictionRef,  BeneficeAfflictionRefAdmin
+from .models import  Skill, SkillRef, SkillAdmin, SkillRefAdmin, Weapon, WeaponAdmin, WeaponRefAdmin,  WeaponRef, Armor, ArmorAdmin, ArmorRefAdmin,  ArmorRef, Shield, ShieldAdmin, ShieldRefAdmin,  ShieldRef, Character, CharacterAdmin, BeneficeAfflictionRef,  BeneficeAfflictionRefAdmin, Act
 
 
 admin.site.register(SkillRef, SkillRefAdmin)
@@ -14,5 +14,6 @@ admin.site.register(Shield, ShieldAdmin)
 admin.site.register(ShieldRef, ShieldRefAdmin)
 admin.site.register(BeneficeAfflictionRef, BeneficeAfflictionRefAdmin)
 admin.site.register(Character, CharacterAdmin)
+admin.site.register(Act)
 
 

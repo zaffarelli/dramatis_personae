@@ -153,6 +153,7 @@ body {
       & ul, & ol {
         text-indent: 0;
         & li {
+          margin-bottom:1em;
           font-size: 0.83em;
           
           & a {
@@ -381,7 +382,7 @@ body {
             color: black;
         }
     }
-    & a.btn{
+    & .btn{
         height: 25px;
     }
 }

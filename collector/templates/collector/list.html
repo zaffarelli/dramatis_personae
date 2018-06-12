@@ -31,11 +31,11 @@
 	<strong>&nbsp;</strong>
 	<strong>&nbsp;</strong>
 	<strong>&nbsp;</strong>	
-	{%endif%}
+	{%endif%}  
 </div>	
     <ul>
     {% for c in character_items %}   
-        <li><em>{{ c.full_name }}</em><br/>
+        <li><em>{{ c.full_name }}</em> {%if c.player != '' %}({{c.player|safe}}){% endif %}<br/>
         <div class="character_actions">
           <a class="view_character" id="{{c.id}}"><i class="fas fa-user"></i></a>&nbsp;&nbsp;
           <a class="edit_character" id="{{c.id}}"><i class="fas fa-user-tag"></i></a>          
@@ -44,9 +44,7 @@
           {% endif %}
         </div>
         <i class="fas fa-th-large"></i> {{ c.challenge }}
-        <br/>{{ c.alliance|safe }} 
-        <br/>{%if c.entrance != '' %}{{c.entrance|safe}}{%endif%}
-        <br/>{%if c.player != '' %}<em>{{c.player|safe}}</em>{% endif %}
+        <br/>{{ c.alliance|safe }} ({%if c.keyword != '' %}{{c.keyword|safe}}{%endif%})
         <br/>
         </li>
     {% endfor %}

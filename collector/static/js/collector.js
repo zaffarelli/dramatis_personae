@@ -98,7 +98,36 @@ function rebootlinks(){
     });
   });
 
+  $('#seek').off();
+  $('#seek').on('click',function(event){
+    event.preventDefault();
+    key = $('#customize').val(); 
+    $.ajax({
+      url: 'ajax/view/character/'+key+'/',
+      success: function(answer) {
+        $('.details').html(answer)
+        rebootlinks();
+      },
+    });
+  });
 
+
+
+  $('#search').off();
+  $('#search').on('click',function(event){
+    event.preventDefault();
+    key = $('#customize').val(); 
+    if (key == ''){
+      key='none';
+    }
+    $.ajax({
+      url: 'ajax/list/'+key+'/1/',
+      success: function(answer) {
+        $('.list').html(answer)
+        rebootlinks();
+      },
+    });
+  });
 
   $('.view_character').on('click',function(event){
     event.preventDefault();

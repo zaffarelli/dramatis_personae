@@ -25,7 +25,7 @@ def get_list(request,id,slug='none'):
   """ List update page """
   if request.is_ajax:
     if slug=='none':
-      character_items = Character.objects.order_by('-player','full_name')
+      character_items = Character.objects.order_by('full_name')
     else:
       character_items = Character.objects.order_by('full_name').filter(keyword=slug)
     paginator = Paginator(character_items,MAX_CHAR)

@@ -3,11 +3,13 @@
 
 
 {% block menu %}
-  <a class='btn' id='add_character'><i class="fas fa-user-plus"></i></a>
+  <input type='text' id='customize' value='' placeholder='Customizer'></input>
+  <span class='btn' id='search'><i class="fas fa-search"></i></span>
+  <span class='btn' id='seek'><i class="fas fa-address-card"></i></span>  
+  <span class='btn' id='add_character'><i class="fas fa-user-plus"></i></span>
   <a class='btn' href="{% url 'recalc' %}"><i class="fas fa-users-cog"></i></a>
-  <a class='btn' href="{% url 'export' %}"><i class="fas fa-xls"></i></a>
-  <a class='btn' id='go'><i class="fas fa-user-tag"></i></a>
-  <input type='text' class='btn' id='customize' value='' placeholder='Customizer'></input>
+  <a class='btn' href="{% url 'export' %}"><i class="fas fa-file-excel"></i></a>  
+  <span class='btn' id='go'><i class="fas fa-user-edit"></i></span>
 {% endblock menu %}
 
 {% block javascript %}
