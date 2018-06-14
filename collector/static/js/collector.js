@@ -23,9 +23,6 @@ function loadajax(){
 }
 
 
-
-
-
 function rebootlinks(){
   $('.nav').off();
   $('.nav').on('click',function(event){
@@ -40,7 +37,7 @@ function rebootlinks(){
         $('.list').html(answer)
         rebootlinks();
       },
-    });
+    });   
   });
 
   $(window).scroll(function(){
@@ -72,7 +69,7 @@ function rebootlinks(){
       },
       dataType: 'html',
       success: function(answer) {
-          console.log("Ok!!");
+          console.log('Ok!!');
           $('.details').html(answer);
       },
       error: function(answer) {
@@ -196,7 +193,7 @@ $('.edit_character').on('click',function(event){
   $.ajax({
     url: 'ajax/edit/character/'+$(this).attr('id')+'/',
     success: function(answer) {
-        $(".details").html(answer);
+        $('.details').html(answer);
         prepare_ajax();        
     },
     error: function(answer){

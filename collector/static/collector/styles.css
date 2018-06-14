@@ -279,4 +279,7 @@ body {
   display: inline-block;
   padding: 3px; }
 
+.ping {
+  background: orange; }
+
 /*# sourceMappingURL=styles.css.map */

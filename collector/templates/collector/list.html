@@ -42,8 +42,8 @@
           {% if c.ready_for_export %}
           &nbsp;&nbsp;<a class="pdf_character" id="{{c.id}}"><i class="fas fa-file-pdf"></i></a>
           {% endif %}
-        </div>
-        <i class="fas fa-th-large"></i> {{ c.challenge }}
+        </div>        
+        </br><i class="fas fa-th-large"></i> {{ c.AP }} <i class="fas fa-th-list"></i> {{ c.SK_TOTAL }} <i class="fas fa-th"></i> {{ c.TA_TOTAL }} <i class="fas fa-outdent"></i> {{ c.BC_TOTAL }} <i class="fas fa-newspaper"></i> {{ c.OP }}
         <br/>{{ c.alliance|safe }} ({%if c.keyword != '' %}{{c.keyword|safe}}{%endif%})
         <br/>
         </li>
