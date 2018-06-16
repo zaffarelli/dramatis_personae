@@ -60,8 +60,8 @@ class Character(models.Model):
   AP = models.IntegerField(default=0)
   OP = models.IntegerField(default=0)
   gm_shortcuts = models.TextField(default='',blank=True)
-  age = models.IntegerField(default=0)
-  category = models.CharField(max_length=16,default='none',choices=(('none',"None"),('villain',"Bad guy"),('hero',"Good guy"),('henchman',"Henchman"),('player',"Player"),('support',"Support"),('auto',"Autochton")))
+  age = models.IntegerField(default=0)  
+  role = models.CharField(max_length=16,default='standard',choices=fs_fics7.ROLECHOICES)
   occult_level = models.PositiveIntegerField(default=0)
   occult_darkside = models.PositiveIntegerField(default=0)
   occult = models.CharField(max_length=50, default='', blank=True)
@@ -69,102 +69,78 @@ class Character(models.Model):
   ready_for_export =  models.BooleanField(default=False)
 
   def fix(self):
-    """ Check / calculate other characteristics """    
-    fs_fics7.check_secondary_attributes(self)
-    # Primary attributes total
-    self.PA_TOTAL = \
-      self.PA_STR + self.PA_CON + self.PA_BOD + self.PA_MOV + \
-      self.PA_INT + self.PA_WIL + self.PA_TEM + self.PA_PRE + \
-      self.PA_TEC + self.PA_REF + self.PA_AGI + self.PA_AWA
+    """ Check / calculate other characteristics """
+    self.check_exportable()
     # Age completion
     if self.birthdate < 1000:
       self.birthdate = 5017 - self.birthdate
     self.age = 5017 - self.birthdate
+    # NPC fix
     if self.player == 'none':
       self.player = ''
-    # Skills total
-    self.SK_TOTAL = 0
+    # Calculate SA
+    fs_fics7.check_primary_attributes(self)
+    fs_fics7.check_secondary_attributes(self)
+    fs_fics7.check_root_skills(self)
     fs_fics7.check_everyman_skills(self, Skill, SkillRef)
-    skills = self.skill_set.all()
     gm_shortcuts = ""
     tmp_shortcuts = []
     for s in skills:
-      if s.skill_ref.is_root == False:         
-        self.SK_TOTAL += s.value
       sc = fs_fics7.check_gm_shortcuts(self,s)
       if sc != '':
         tmp_shortcuts.append(sc)
     gm_shortcuts = ", ".join(tmp_shortcuts)
-    # With talents
+    gm_shortcuts += fs_fics7.check_attacks(self)
+    if self.player == None:
+      gm_shortcuts += fs_fics7.check_nameless_attributes(self)
+    self.gm_shortcuts = gm_shortcuts
+    self.ready_for_export = self.check_exportable()
+  def check_exportable(self):
+    """
+    Is that avatar finished?
+    We check this with the fics rule for extras:
+      AP: 60 for player
+      SK: 70
+      TA: 20
+      BC: 10 
+    """
+    exportable = True
+    comment = ''   
+    self.PA_TOTAL = \
+      self.PA_STR + self.PA_CON + self.PA_BOD + self.PA_MOV + \
+      self.PA_INT + self.PA_WIL + self.PA_TEM + self.PA_PRE + \
+      self.PA_TEC + self.PA_REF + self.PA_AGI + self.PA_AWA
+    self.SK_TOTAL = 0
     self.TA_TOTAL = 0
+    self.BC_TOTAL = 0
+    skills = self.skill_set.all()
+    for s in skills:
+      if s.skill_ref.is_root == False:         
+        self.SK_TOTAL += s.value
     talents = self.talent_set.all()
     for t in talents:
       self.TA_TOTAL += t.value
-    # With blessingcurses
-    self.BC_TOTAL = 0
     blessingcurses = self.blessingcurse_set.all()
     for bc in blessingcurses:
       self.BC_TOTAL += bc.value
     self.AP = self.PA_TOTAL
     self.OP = self.SK_TOTAL + self.TA_TOTAL + self.BC_TOTAL
     self.challenge = self.PA_TOTAL*3 + self.SK_TOTAL + self.TA_TOTAL + self.BC_TOTAL
-    self.ready_for_export = False
-    gm_shortcuts += fs_fics7.check_attacks(self)
-    if self.player == None:
-      gm_shortcuts += fs_fics7.check_nameless_attributes(self)
-    self.gm_shortcuts = gm_shortcuts
-    self.ready_for_export = False
-  def check_exportable(self):
-    """Is that avatar finished?"""
-    exportable = True
-    comment = ''
-    skills = self.skill_set.all()
-    for root in skills:
-      if root.skill_ref.is_root:
-        cnt = 0
-        for spec in skills:
-          if spec.skill_ref.is_speciality:
-            if spec.skill_ref.linked_to == root.skill_ref:
-              cnt += 1
-        if cnt >= root.value:
-          #comment += 'Specialties ok for %s\n'% root.skill_ref.reference
-          if cnt > root.value:
-            root.value = cnt
-            print("Fixing root value for %s..."%root.skill_ref.reference)
-        else:
-          comment += 'Warning: Missing %d specialties for %s\n'% (root.value-cnt,root.skill_ref.reference)
-          exportable = False
-    if self.PA_TOTAL < 48 and self.player == '':      
-      comment += 'Error: Primary Attributes too low. Fixing that\n'
-      self.PA_STR = randint(3,8)
-      self.PA_CON = randint(3,8)
-      self.PA_BOD = randint(3,8)
-      self.PA_MOV = randint(3,8)
-      self.PA_INT = randint(3,8)
-      self.PA_WIL = randint(3,8)
-      self.PA_TEM = randint(3,8)
-      self.PA_PRE = randint(3,8)
-      self.PA_TEC = randint(3,8)
-      self.PA_REF = randint(3,8)
-      self.PA_AGI = randint(3,8)
-      self.PA_AWA = randint(3,8)
-      self.save()
     if self.player != '':
-      comment += "Warning: Players' avatars are always exportable...\n"
+      comment += 'Warning: Players avatars are always exportable...\n'
       exportable = True
     print(comment)  
     if self.ready_for_export != exportable:
       self.ready_for_export = exportable
       self.rid = 'none'
-      self.save()
     return self.ready_for_export
     
   def backup(self):
     """ Transform to PDF if exportable"""
-    proceed = self.check_exportable()
+    proceed = self.ready_for_export
     if proceed == True:
       item = self
-      context = {'c':item,'filename':"%04d_%s"%(item.pagenum,item.rid),}
+      context = {'c':item,'filename':'%04d_%s'%(item.pagenum,item.rid),}
       write_pdf('collector/persona_pdf.html',context)
     return proceed      
   def __str__(self):
@@ -189,7 +165,7 @@ class Character(models.Model):
       #print("DP: There is no such attribute %s in this model"%key)
       return False, False   
 
-@receiver(pre_save, sender=Character, dispatch_uid="update_character")
+@receiver(pre_save, sender=Character, dispatch_uid='update_character')
 def update_character(sender, instance, **kwargs):
   if instance.rid != 'none':
     instance.fix()

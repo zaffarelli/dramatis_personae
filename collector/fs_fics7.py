@@ -15,6 +15,58 @@ import math
 
 '''
 
+#choices=(('standard',"Standard"),('villain',"Villain"),('player',"Player"),('henchman',"Henchman"),('boss',"Boss"),('support',"Support"),('auto',"Autochton"))
+
+ROLECHOICES = (
+  ('standard',"Standard"),
+  ('villain',"Villain"),
+  ('player',"Player"),
+  ('boss',"Boss"),
+  ('support',"Support"),
+  ('nameless',"Nameless")
+)
+
+ROLES = {
+  'player': {
+    'primaries': 66,
+    'skills': 70,
+    'talents': 20,
+    'bcba': 10,
+  },
+  'villain': {
+    'primaries': 72,
+    'skills': 70,
+    'talents': 20,
+    'bcba': 10,
+  },
+  'standard': {
+    'primaries': 60,
+    'skills': 70,
+    'talents': 20,
+    'bcba': 10,
+  },
+  'support': {
+    'primaries': 60,
+    'skills': 70,
+    'talents': 20,
+    'bcba': 10,
+  },
+
+  'boss': {
+    'primaries': 78,
+    'skills': 90,
+    'talents': 20,
+    'bcba': 10,
+  },  
+  'nameless': {
+    'primaries': 54,
+    'skills': 70,
+    'talents': 20,
+    'bcba': 10,
+  },
+}
+
+
 EVERYMAN = {
   "ascorbite": {},
   "etyri": {},
@@ -266,7 +318,7 @@ def check_nameless_attributes(ch):
   PA_PHY = (ch.PA_STR + ch.PA_CON + ch.PA_BOD + ch.PA_MOV) // 4
   PA_SPI = (ch.PA_INT + ch.PA_WIL + ch.PA_TEM + ch.PA_PRE) // 4
   PA_COM = (ch.PA_TEC + ch.PA_REF + ch.PA_AGI + ch.PA_AWA) // 4
-  res = "<h2>Nameless</h2>Physical:<b>%s</b> Spirit:<b>%s</b> Combat:<b>%s</b>" % (PA_PHY,PA_SPI,PA_COM)
+  res = '<h2>Nameless</h2>Physical:<b>%s</b> Spirit:<b>%s</b> Combat:<b>%s</b>' % (PA_PHY,PA_SPI,PA_COM)
   return res
 
 def check_attacks(ch):
@@ -326,14 +378,48 @@ def minmax_from_dc(sdc):
 
 def sanitize(character,f):
   sane_f = {}
-  print("Sanitizing")
   for key, value in f.items():
     rkey,rvalue = character.update_field(key, value)
     if rkey != False:
-      #z = type(character)._meta.get_field(rkey)
-      print("To update: %s %s"%(rkey,rvalue))
       sane_f[rkey] = rvalue
-  #print(sane_f)
   return sane_f
 
 
+def check_root_skills(ch):
+  exportable = True
+  skills = ch.skill_set.all()
+  for root in skills:
+    if root.skill_ref.is_root:
+      cnt = 0
+      for spec in skills:
+        if spec.skill_ref.is_speciality:
+          if spec.skill_ref.linked_to == root.skill_ref:
+            cnt += 1
+        if cnt >= root.value:
+          if cnt > root.value:
+            root.value = cnt
+            print('Fixing root value for %s...'%root.skill_ref.reference)
+        else:
+          print('Warning: Missing %d specialties for %s\n'% (root.value-cnt,root.skill_ref.reference))
+          exportable = False
+          break
+  return exportable
+
+
+def check_primary_attributes(ch):
+  if ch.PA_TOTAL < 36 and ch.player == '':      
+    print('Error: Primary Attributes too low. Fixing that\n')
+    self.PA_STR = randint(3,8)
+    self.PA_CON = randint(3,8)
+    self.PA_BOD = randint(3,8)
+    self.PA_MOV = randint(3,8)
+    
+    self.PA_INT = randint(3,8)
+    self.PA_WIL = randint(3,8)
+    self.PA_TEM = randint(3,8)
+    self.PA_PRE = randint(3,8)
+    
+    self.PA_TEC = randint(3,8)
+    self.PA_REF = randint(3,8)
+    self.PA_AGI = randint(3,8)
+    self.PA_AWA = randint(3,8)
