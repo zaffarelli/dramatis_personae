@@ -153,6 +153,8 @@ body {
       & ul, & ol {
         text-indent: 0;
         & li {
+          padding: 5px;
+          border: 1px solid transparent;
           margin-bottom:1em;
           font-size: 0.83em;
           
@@ -398,4 +400,20 @@ body {
 
 .ping{
   background: orange;
+}
+
+.selected{
+  border:1px solid yellow;
+  border-radius:5px;  
+  background: $fics_hl;
+  color:black;
+}
+
+.waiting{
+  cursor: progress;
+  opacity:0.95;
+}
+
+.golden{
+  color: #ffcc22;
 }

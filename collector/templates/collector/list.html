@@ -34,19 +34,10 @@
 	{%endif%}  
 </div>	
     <ul>
-    {% for c in character_items %}   
-        <li><em>{{ c.full_name }}</em> {%if c.player != '' %}({{c.player|safe}}){% endif %}<br/>
-        <div class="character_actions">
-          <a class="view_character" id="{{c.id}}"><i class="fas fa-user"></i></a>&nbsp;&nbsp;
-          <a class="edit_character" id="{{c.id}}"><i class="fas fa-user-tag"></i></a>          
-          {% if c.ready_for_export %}
-          &nbsp;&nbsp;<a class="pdf_character" id="{{c.id}}"><i class="fas fa-file-pdf"></i></a>
-          {% endif %}
-        </div>        
-        </br><i class="fas fa-th-large"></i> {{ c.AP }} <i class="fas fa-th-list"></i> {{ c.SK_TOTAL }} <i class="fas fa-th"></i> {{ c.TA_TOTAL }} <i class="fas fa-outdent"></i> {{ c.BC_TOTAL }} <i class="fas fa-newspaper"></i> {{ c.OP }}
-        <br/>{{ c.alliance|safe }} ({%if c.keyword != '' %}{{c.keyword|safe}}{%endif%})
-        <br/>
-        </li>
+    {% for c in character_items %}
+       <li id='{{c.rid}}'>
+       {% include "collector/character_link.html" with c=c %}
+       </li>
     {% endfor %}
     </ul>
 {% else %}

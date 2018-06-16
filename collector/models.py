@@ -6,7 +6,6 @@ from django.dispatch import receiver
 import hashlib
 from collector import fs_fics7
 from .utils import write_pdf
-from random import randint
 
 
 ###### Characters
@@ -28,6 +27,7 @@ class Character(models.Model):
   narrative = models.TextField(default='',blank=True)
   entrance = models.CharField(max_length=100,default='',blank=True)
   keyword = models.CharField(max_length=32, blank=True, default='')
+  stars = models.CharField(max_length=128, blank=True, default='')
   PA_STR = models.PositiveIntegerField(default=3)
   PA_CON = models.PositiveIntegerField(default=3)
   PA_BOD = models.PositiveIntegerField(default=3)
@@ -61,7 +61,8 @@ class Character(models.Model):
   OP = models.IntegerField(default=0)
   gm_shortcuts = models.TextField(default='',blank=True)
   age = models.IntegerField(default=0)  
-  role = models.CharField(max_length=16,default='standard',choices=fs_fics7.ROLECHOICES)
+  role = models.CharField(max_length=16,default='02',choices=fs_fics7.ROLECHOICES)
+  profile = models.CharField(max_length=16,default='standard',choices=fs_fics7.PROFILECHOICES)
   occult_level = models.PositiveIntegerField(default=0)
   occult_darkside = models.PositiveIntegerField(default=0)
   occult = models.CharField(max_length=50, default='', blank=True)
@@ -85,6 +86,7 @@ class Character(models.Model):
     fs_fics7.check_everyman_skills(self, Skill, SkillRef)
     gm_shortcuts = ""
     tmp_shortcuts = []
+    skills = self.skill_set.all()
     for s in skills:
       sc = fs_fics7.check_gm_shortcuts(self,s)
       if sc != '':
@@ -105,7 +107,12 @@ class Character(models.Model):
       BC: 10 
     """
     exportable = True
-    comment = ''   
+    comment = ''
+
+    self.stars = ""
+    for x in range(1,int(self.role)+1):
+      self.stars += '<i class="fas fa-star fa-xs"></i>'
+    
     self.PA_TOTAL = \
       self.PA_STR + self.PA_CON + self.PA_BOD + self.PA_MOV + \
       self.PA_INT + self.PA_WIL + self.PA_TEM + self.PA_PRE + \
@@ -126,10 +133,14 @@ class Character(models.Model):
     self.AP = self.PA_TOTAL
     self.OP = self.SK_TOTAL + self.TA_TOTAL + self.BC_TOTAL
     self.challenge = self.PA_TOTAL*3 + self.SK_TOTAL + self.TA_TOTAL + self.BC_TOTAL
+    roleok = fs_fics7.check_role(self)
+    if roleok == False:
+      exportable = False
     if self.player != '':
       comment += 'Warning: Players avatars are always exportable...\n'
       exportable = True
-    print(comment)  
+    if comment != '':
+      print(comment)  
     if self.ready_for_export != exportable:
       self.ready_for_export = exportable
       self.rid = 'none'
@@ -174,7 +185,7 @@ def update_character(sender, instance, **kwargs):
   instance.alliancehash = hashlib.sha1(bytes(instance.alliance,'utf-8')).hexdigest()
   print("Fix .........: %s" % (instance.full_name))
 
-@receiver(post_save, sender=Character, dispatch_uid="backup_character")
+@receiver(post_save, sender=Character, dispatch_uid='backup_character')
 def backup_character(sender, instance, **kwargs):
   if instance.rid != 'none':
     if instance.backup() == True:
@@ -303,7 +314,7 @@ class ShieldInline(admin.TabularInline):
 
 
 
-@receiver(pre_save, sender=Skill, dispatch_uid="update_skill")
+@receiver(pre_save, sender=Skill, dispatch_uid='update_skill')
 def update_skill(sender, instance, **kwargs):
   instance.fix()
 
@@ -378,7 +389,7 @@ class Talent(models.Model):
     return '%s=%s' % (self.character.full_name,self.name)
   def fix(self):
     self.value = self.AP*3 + self.OP
-@receiver(pre_save, sender=Talent, dispatch_uid="update_talent")
+@receiver(pre_save, sender=Talent, dispatch_uid='update_talent')
 def update_talent(sender, instance, **kwargs):
   instance.fix()
   

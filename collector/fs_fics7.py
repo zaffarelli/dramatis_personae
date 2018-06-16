@@ -2,6 +2,7 @@
 # Fusion Interlock Custom System v7
 # This file contains the core business function of the app
 import math
+from random import randint
 
 
 '''
@@ -18,51 +19,107 @@ import math
 #choices=(('standard',"Standard"),('villain',"Villain"),('player',"Player"),('henchman',"Henchman"),('boss',"Boss"),('support',"Support"),('auto',"Autochton"))
 
 ROLECHOICES = (
-  ('standard',"Standard"),
-  ('villain',"Villain"),
-  ('player',"Player"),
-  ('boss',"Boss"),
-  ('support',"Support"),
-  ('nameless',"Nameless")
+  ('08','Legend'),
+  ('07','Champion'),
+  ('06','Elite'),
+  ('05','Veteran'),
+  ('04','Seasoned'),
+  ('03','Superior'),
+  ('02','Standard'),
+  ('01','Inferior'),
 )
 
-ROLES = {
-  'player': {
-    'primaries': 66,
-    'skills': 70,
-    'talents': 20,
-    'bcba': 10,
-  },
-  'villain': {
-    'primaries': 72,
-    'skills': 70,
-    'talents': 20,
-    'bcba': 10,
-  },
-  'standard': {
-    'primaries': 60,
-    'skills': 70,
-    'talents': 20,
-    'bcba': 10,
-  },
-  'support': {
-    'primaries': 60,
-    'skills': 70,
-    'talents': 20,
-    'bcba': 10,
-  },
+PROFILECHOICES = (
+  ('tech',"Tech"),
+  ('physical',"Physical"),
+  ('spiritual',"Spiritual"),
+  ('standard',"Standard"),
+  ('courtisan',"Courtisan"),
+  ('scholar',"Scholar"),
+  ('guilder',"Guilder")
+)
 
-  'boss': {
-    'primaries': 78,
-    'skills': 90,
-    'talents': 20,
-    'bcba': 10,
+PROFILES = {
+  'physical': {
+    'weights':[2,2,2,2,1,1,1,1,1,1,1,1],
+  },
+  'spiritual': {
+    'weights':[1,1,1,1,2,2,2,2,1,1,1,1],
+  },
+  'tech': {
+    'weights':[1,1,1,1,1,1,1,1,2,2,2,2],
   },  
-  'nameless': {
+  'courtisan': {
+    'weights':[2,2,2,2,2,2,2,2,1,1,1,1],
+  },
+  'scholar': {
+    'weights':[1,1,1,1,2,2,2,2,2,2,2,2],
+  },
+  'guilder': {
+    'weights':[2,2,2,2,1,1,1,1,2,2,2,2],
+  },    
+  'standard': {
+    'weights':[1,1,1,1,1,1,1,1,1,1,1,1],
+  },    
+}
+
+
+ROLES = {
+  '08': {
+    'primaries': 90,
+    'maxi': 11,
+    'skills':110,
+    'talents':40,
+    'bc':20,
+  },
+  '07': {
+    'primaries': 84,
+    'maxi': 10,
+    'skills':100,
+    'talents':30,
+    'bc':15,
+  },  
+  '06': {
+    'primaries': 78,
+    'maxi': 10,
+    'skills':90,
+    'talents':25,
+    'bc':10,
+  },
+  '05': {
+    'primaries': 72,
+    'maxi': 9,
+    'skills':80,
+    'talents':20,
+    'bc':10,
+  },
+  '04': {
+    'primaries': 66,
+    'maxi': 8,
+    'skills':70,
+    'talents':15,
+    'bc':10,
+  },
+  '03': {
+    'primaries': 60,
+    'maxi': 8,
+    'skills':60,
+    'talents':10,
+    'bc':5,
+  },
+  '02': {
     'primaries': 54,
-    'skills': 70,
-    'talents': 20,
-    'bcba': 10,
+    'maxi': 7,
+    'skills':50,
+    'talents':5,
+    'bc':0,
+  },
+  '01': {
+    'primaries': 48,
+    'maxi': 7,
+    'skills':40,
+    'talents':5,
+    'bc':0,
   },
 }
 
@@ -395,31 +452,71 @@ def check_root_skills(ch):
         if spec.skill_ref.is_speciality:
           if spec.skill_ref.linked_to == root.skill_ref:
             cnt += 1
-        if cnt >= root.value:
-          if cnt > root.value:
-            root.value = cnt
-            print('Fixing root value for %s...'%root.skill_ref.reference)
-        else:
-          print('Warning: Missing %d specialties for %s\n'% (root.value-cnt,root.skill_ref.reference))
-          exportable = False
-          break
+      if cnt >= root.value:
+        if cnt > root.value:
+          root.value = cnt
+          print('Fixing root value for %s...'%root.skill_ref.reference)
+        #else:         
+          #print('OK for %s'%root.skill_ref.reference)
+      else:
+        print('Warning: Missing %d specialties for %s\n'% (root.value-cnt,root.skill_ref.reference))
+        exportable = False
   return exportable
 
+def choose_pa(weights):
+  x = randint(1,sum(weights))
+  cum = 0
+  idx = 0
+  while idx < 12:
+    cum += weights[idx]
+    if x < cum:
+      return idx
+    idx += 1
+  return -1
 
 def check_primary_attributes(ch):
-  if ch.PA_TOTAL < 36 and ch.player == '':      
-    print('Error: Primary Attributes too low. Fixing that\n')
-    self.PA_STR = randint(3,8)
-    self.PA_CON = randint(3,8)
-    self.PA_BOD = randint(3,8)
-    self.PA_MOV = randint(3,8)
+  pool = ROLES[ch.role]['primaries']
+  maxi = ROLES[ch.role]['maxi']
+  weights = PROFILES[ch.profile]['weights']
+  #print('%s: %s [ %d / %d ]'%(ch.full_name,ch.role,pool,maxi))  
+  pas = [2,2,2,2,2,2,2,2,2,2,2,2]
+  current =  ch.PA_STR+ch.PA_CON+ch.PA_BOD+ch.PA_MOV+ch.PA_INT+ch.PA_WIL+ch.PA_TEM+ch.PA_PRE+ch.PA_TEC+ch.PA_REF+ch.PA_AGI+ch.PA_AWA
+  #print('Current PA TOTAL: %d'%(current))
+  if (current < pool or ch.keyword =='rebuild') and ch.player == '':
+    pool = pool-24
+    #print('Error: Primary Attributes invalid. Fixing that\n')
+    while pool>0:      
+      chosen_pa = choose_pa(weights)
+      idx = chosen_pa
+      if pas[idx] < maxi:
+        pas[idx] += 1
+        pool -= 1
+      #else:
+        #print('Invalid : already too high!!!')
+    #print(pas)
+    ch.PA_STR = pas[0]
+    ch.PA_CON = pas[1]
+    ch.PA_BOD = pas[2]
+    ch.PA_MOV = pas[3]
     
-    self.PA_INT = randint(3,8)
-    self.PA_WIL = randint(3,8)
-    self.PA_TEM = randint(3,8)
-    self.PA_PRE = randint(3,8)
+    ch.PA_INT = pas[4]
+    ch.PA_WIL = pas[5]
+    ch.PA_TEM = pas[6]
+    ch.PA_PRE = pas[7]
     
-    self.PA_TEC = randint(3,8)
-    self.PA_REF = randint(3,8)
-    self.PA_AGI = randint(3,8)
-    self.PA_AWA = randint(3,8)
+    ch.PA_TEC = pas[8]
+    ch.PA_REF = pas[9]
+    ch.PA_AGI = pas[10]
+    ch.PA_AWA = pas[11]
+    if ch.keyword == 'rebuild':
+      ch.keyword = 'rebuilt'
+
+def check_role(ch):
+  pa_pool = ROLES[ch.role]['primaries']
+  sk_pool = ROLES[ch.role]['skills']
+  ta_pool = ROLES[ch.role]['talents']
+  bc_pool = ROLES[ch.role]['bc']
+  status = True
+  if ch.PA_TOTAL < pa_pool or ch.SK_TOTAL < sk_pool or ch.TA_TOTAL < ta_pool or ch.BC_TOTAL < bc_pool:
+    status = False 
+  return status

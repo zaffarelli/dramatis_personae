@@ -5,7 +5,7 @@
 {{ c.entrance|safe }}</br>
 {{c.gender|capfirst}} {{ c.species|capfirst|safe }} {{ c.rank|safe }} of the {{ c.alliance|safe }} from {{ c.native_fief|safe }} {{ c.caste|safe }}.
 <br/>Born in {{ c.birthdate }} ({{ c.age }} years old)
-<br/>Height: {{c.height}}cm / Weight:{{c.weight}}kg
+<br/>Height: {{c.height}}cm / Weight:{{c.weight}}kg   Role: {{c.role}}  Profile:{{c.profile}}
 
 <pdf:nextframe>
 
@@ -88,7 +88,7 @@
 {% endfor %}</p>
 {%endif%}
 
-<pdf:nextframe>
+
 <h2>Narrative</h2>
 <div class='narrative'>
 {{ c.narrative|linebreaks|safe }}

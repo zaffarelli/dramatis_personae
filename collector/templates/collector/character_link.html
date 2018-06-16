@@ -1,0 +1,17 @@
+
+
+
+  <em>{{ c.full_name }}</em> {%if c.player != '' %}({{c.player|safe}}){% endif %} 
+  <br/>
+  <div class="character_actions">
+    <span class="view_character" id="{{c.id}}"><i class="fas fa-user"></i></span>&nbsp;&nbsp;
+    <span class="edit_character" id="{{c.id}}"><i class="fas fa-user-tag"></i></span>&nbsp;&nbsp;
+    <span class="pdf_character" id="{{c.id}}"><i class="fas fa-file-pdf"></i></span>&nbsp;&nbsp;
+    {% if c.ready_for_export %}
+      <i class="fas fa-share golden"></i> 
+    {% endif %}
+  </div>{{c.stars|safe}}
+  </br><i class="fas fa-th-large"></i> {{ c.AP }} <i class="fas fa-th-list"></i> {{ c.SK_TOTAL }} <i class="fas fa-th"></i> {{ c.TA_TOTAL }} <i class="fas fa-outdent"></i> {{ c.BC_TOTAL }} <i class="fas fa-newspaper"></i> {{ c.OP }}
+  <br/>{{ c.alliance|safe }} ({%if c.keyword != '' %}{{c.keyword|safe}}{%endif%})
+  <br/>
+

@@ -1,4 +1,4 @@
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse, Http404, JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect, render_to_response
 from django.core.paginator import Paginator
 
@@ -25,9 +25,9 @@ def get_list(request,id,slug='none'):
   """ List update page """
   if request.is_ajax:
     if slug=='none':
-      character_items = Character.objects.order_by('full_name')
+      character_items = Character.objects.order_by('ready_for_export','full_name')
     else:
-      character_items = Character.objects.order_by('full_name').filter(keyword=slug)
+      character_items = Character.objects.order_by('ready_for_export','full_name').filter(keyword=slug)
     paginator = Paginator(character_items,MAX_CHAR)
     page = id
     character_items = paginator.get_page(page)
@@ -72,11 +72,17 @@ def pdf_character(request,id=None):
 
 
 def recalc(request):
+  """ Recalc and export to PDF all avatars """
   character_items = Character.objects.order_by('-player','-ready_for_export','full_name')
   x = 1
   for c in character_items:
     c.pagenum = x
-    c.rid = 'none'
+    #c.rid = 'none'
+    #if c.role == 'player':
+    #  c.role = '04'
+    #if c.role == '08' or c.role == 'standard' or c.role == 'brute' or c.role == 'boss' or c.role == 'villain' or c.role == 'grunt' or c.role == 'support' or c.role == 'thug' or c.role == 'nameless':
+    #  c.role = '02'
+      
     c.save()
     x += 1
   return redirect('/')
@@ -113,16 +119,18 @@ def edit_character(request,id=None):
   WARNING: Beware that with this method, the last formset can grab an " at the end, so put
   the csrf token for the form after the last formset!!!
   """
+  crid = ''
+  line = ''
   if request.is_ajax():
     if request.method == 'POST':
       cid = request.POST.get('cid')
       character_item = Character.objects.get(pk=cid)
-      
+      crid = character_item.rid
       """ FIXME: There is a mistake here that puts " at start and end ...."""
       formdata = json.loads(json.dumps(parse_qs(json.dumps(request.POST['character'])),indent=2))
       #formdata = ast.literal_eval(request.POST['character'])
-      print(type(formdata))
-      print(formdata)
+      #print(type(formdata))
+      #print(formdata)
       forms = fs_fics7.sanitize(character_item,formdata)
       fv = False
       if forms == None:
@@ -158,6 +166,8 @@ def edit_character(request,id=None):
         item = get_object_or_404(Character,pk=cid)
         template = get_template('collector/character.html')
         html = template.render({'c':item})
+        templatelink = get_template('collector/character_link.html')
+        line = templatelink.render({'c':character_item},request)
       else:
         html = '<div class="classyview">'
         html += '<p>Unable to update this character !!!</p>'
@@ -168,7 +178,11 @@ def edit_character(request,id=None):
         html += 'Weapons: %s<br/>'%(weapons.errors)
         html += 'Shields: %s<br/>'%(shields.errors)
         html += '</div>'
+        templatelink = get_template('collector/character_link.html')
+        line = templatelink.render({'c':character_item},request)        
     else:
+      print("This is a get request....")
+      print(request)
       character_item = get_object_or_404(Character, id=id)
       form = CharacterForm(request.POST or None, instance = character_item)
       skills = SkillFormSet(instance=character_item, queryset=character_item.skill_set.order_by('skill_ref__reference'))
@@ -189,11 +203,18 @@ def edit_character(request,id=None):
       }
       template = get_template('collector/character_form.html')
       html = template.render(edit_context,request)
+      templatelink = get_template('collector/character_link.html')
+      line = templatelink.render({'c':character_item},request)
   else:
     html = '<div class="classyview">'
     html += 'This is no ajax !!!'
     html += '</div>'
-  return HttpResponse(html, content_type='text/html')
+  context = {
+    'character': html,
+    'rid': crid,
+    'line': line,
+  }
+  return JsonResponse(context)
 
 def add_persona(request):
   if request.method == 'POST':

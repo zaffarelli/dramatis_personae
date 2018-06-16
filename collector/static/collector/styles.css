@@ -109,6 +109,8 @@ body {
       body .wrapper .list ul, body .wrapper .list ol {
         text-indent: 0; }
         body .wrapper .list ul li, body .wrapper .list ol li {
+          padding: 5px;
+          border: 1px solid transparent;
           margin-bottom: 1em;
           font-size: 0.83em; }
           body .wrapper .list ul li a, body .wrapper .list ol li a {
@@ -281,5 +283,18 @@ body {
 
 .ping {
   background: orange; }
+
+.selected {
+  border: 1px solid yellow;
+  border-radius: 5px;
+  background: #7a658e;
+  color: black; }
+
+.waiting {
+  cursor: progress;
+  opacity: 0.95; }
+
+.golden {
+  color: #ffcc22; }
 
 /*# sourceMappingURL=styles.css.map */

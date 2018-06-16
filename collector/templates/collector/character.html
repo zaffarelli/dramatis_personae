@@ -7,7 +7,8 @@
 <tr><th>Caste</th><td>{{ c.caste }}</td><th>Height</th><td>{{ c.height }}</td></tr>
 <tr><th>Native Fief</th><td>{{ c.native_fief }}</td><th>Weight</th><td>{{ c.weight }}</td></tr>
 <tr><th>Rank</th><td>{{ c.rank }}</td><th>Player</th><td>{{ c.player }}</td></tr>
-<tr><th>Category</th><td>{{ c.category }}</td><th>Keyword</th><td>{{ c.keyword }}</td></tr>
+<tr><th>Role</th><td>{{ c.role }}</td><th>Keyword</th><td>{{ c.keyword }}</td></tr>
+<tr><th>Profile</th><td>{{ c.profile }}</td><th>ID</th><td>{{c.id}}</td></tr>
 </table>
 
 <div class='narrative'>
@@ -91,9 +92,9 @@
 <h2>Weapons</h2>
 <table>{% for w in c.weapon_set.all|dictsort:"weapon_ref.reference" %}
 {% if w.weapon_ref.category == "MELEE" %}
-<tr><td>{{ w.weapon_ref.reference|safe }} &diams; {{w.weapon_ref.category}} &diams; WA:{{ w.weapon_ref.weapon_accuracy }} &diams; {{w.weapon_ref.conceilable}} &diams; {{ w.weapon_ref.availability }} &diams; DC:{{ w.weapon_ref.damage_class|center:"8" }} &diams; STR:{{ w.weapon_ref.str_min }} &diams; RNG:{{ w.weapon_ref.rng }} &diams; {{ w.weapon_ref.rel }} {% if not w.description is empty %}<br/>{{ w.description|safe }}{% endif %}</td></tr>
+<tr><td>{{ w.weapon_ref.reference|safe }} <i class='fa fa-caret-up fa-xs'></i> {{w.weapon_ref.category}} <i class='fa fa-caret-up fa-xs'></i> WA:{{ w.weapon_ref.weapon_accuracy }} <i class='fa fa-caret-up fa-xs'></i> {{w.weapon_ref.conceilable}} <i class='fa fa-caret-up fa-xs'></i> {{ w.weapon_ref.availability }} <i class='fa fa-caret-up fa-xs'></i> DC:{{ w.weapon_ref.damage_class|center:"8" }} <i class='fa fa-caret-up fa-xs'></i> STR:{{ w.weapon_ref.str_min }} <i class='fa fa-caret-up fa-xs'></i> RNG:{{ w.weapon_ref.rng }} <i class='fa fa-caret-up fa-xs'></i> {{ w.weapon_ref.rel }} {% if not w.description is empty %}<br/>{{ w.description|safe }}{% endif %}</td></tr>
 {% else %}
-<tr><td>{{ w.weapon_ref.reference|safe }} &diams; {{w.weapon_ref.category}} &diams; WA:{{ w.weapon_ref.weapon_accuracy }} &diams; {{w.weapon_ref.conceilable}} &diams; {{ w.weapon_ref.availability }} &diams; DC:{{ w.weapon_ref.damage_class|center:"8" }} &diams; Cal.{{ w.weapon_ref.caliber }} &diams; RoF:{{ w.weapon_ref.rof }} &diams; Clip:{{ w.weapon_ref.clip }} &diams; RNG:{{ w.weapon_ref.rng }} &diams; {{ w.weapon_ref.rel }} {% if not w.weapon_ref.description is empty %}<br/>{{ w.weapon_ref..description|safe }}{% endif %}</td></tr>
+<tr><td>{{ w.weapon_ref.reference|safe }} <i class='fa fa-caret-up fa-xs'></i> {{w.weapon_ref.category}} <i class='fa fa-caret-up fa-xs'></i> WA:{{ w.weapon_ref.weapon_accuracy }} <i class='fa fa-caret-up fa-xs'></i> {{w.weapon_ref.conceilable}} <i class='fa fa-caret-up fa-xs'></i> {{ w.weapon_ref.availability }} <i class='fa fa-caret-up fa-xs'></i> DC:{{ w.weapon_ref.damage_class|center:"8" }} <i class='fa fa-caret-up fa-xs'></i> Cal.{{ w.weapon_ref.caliber }} <i class='fa fa-caret-up fa-xs'></i> RoF:{{ w.weapon_ref.rof }} <i class='fa fa-caret-up fa-xs'></i> Clip:{{ w.weapon_ref.clip }} <i class='fa fa-caret-up fa-xs'></i> RNG:{{ w.weapon_ref.rng }} <i class='fa fa-caret-up fa-xs'></i> {{ w.weapon_ref.rel }} {% if not w.weapon_ref.description is empty %}<br/>{{ w.weapon_ref..description|safe }}{% endif %}</td></tr>
 {% endif %}
 {% endfor %}
 </table>
@@ -103,15 +104,21 @@
 {% if c.armor_set.count != 0 %}
 <h2>Armor</h2>
 <table>{% for a in c.armor_set.all|dictsort:"armor_ref.stopping_power" %}
-<tr><td>{{ a.armor_ref.reference|safe }} &diams; {{a.armor_ref.category}} &diams; SP:{{ a.armor_ref.stopping_power }} &diams; HE{% if a.armor_ref.head %}<i class='fa fa-plus-circle'></i>{%else%}<i class='fa fa-minus-circle'></i>{%endif%} TO{% if a.armor_ref.torso %}<i class='fa fa-plus-circle'></i>{%else%}<i class='fa fa-minus-circle'></i>{%endif%} LA{%if  a.armor_ref.left_arm %}<i class='fa fa-plus-circle'></i>{%else%}<i class='fa fa-minus-circle'></i>{%endif%} RA{%  if a.armor_ref.right_arm %}<i class='fa fa-plus-circle'></i>{%else%}<i class='fa fa-minus-circle'></i>{%endif%} LL{% if a.armor_ref.left_leg %}<i class='fa fa-plus-circle'></i>{%else%}<i class='fa fa-minus-circle'></i>{%endif%} RL{% if a.armor_ref.right_leg %}<i class='fa fa-plus-circle'></i>{%else%}<i class='fa fa-minus-circle'></i>{%endif%}
-{% if not a.armor_ref.description is empty %}<br/>{{ a.armor_ref.description|safe }}{% endif %}</td></tr>
+<tr><td>{{ a.armor_ref.reference|safe }} <i class='fa fa-caret-up fa-xs'></i> {{a.armor_ref.category}} <i class='fa fa-caret-up fa-xs'></i> SP:{{ a.armor_ref.stopping_power }} <i class='fa fa-caret-up fa-xs'></i> Protection [
+{% if a.armor_ref.head %} Head {%endif%}
+{% if a.armor_ref.torso %} Torso {%endif%}
+{% if  a.armor_ref.left_arm %} LeftArm {%endif%}
+{% if a.armor_ref.right_arm %} RightArm {%endif%}
+{% if a.armor_ref.left_leg %} LeftLeg {%endif%}
+{% if a.armor_ref.right_leg %} RightLeg {%endif%}
+{% if not a.armor_ref.description is empty %}]<br/>{{ a.armor_ref.description|safe }}{% endif %}</td></tr>
 {% endfor %}</table>
 {%endif%}
 
 {% if c.shield_set.count != 0 %}
 <h2>Energy Shield</h2>
 <table>{% for s in c.shield_set.all|dictsort:"shield_ref.reference" %}
-<tr><td>{{ s.shield_ref.reference|safe }} &diams; {{s.shield_ref.protection_min}}/{{ s.shield_ref.protection_max }} &diams; Hits:{{s.shield_ref.hits}} &diams; w/ MEDIUM?{% if s.shield_ref.is_compatible_with_medium_armor %}<i class='fa fa-plus-circle'></i>{%else%}<i class='fa fa-minus-circle'></i>{%endif%} w/ HARD?{% if s.shield_ref.is_compatible_with_hard_armor %}<i class='fa fa-plus-circle'></i>{%else%}<i class='fa fa-minus-circle'></i>{%endif%} 
+<tr><td>{{ s.shield_ref.reference|safe }} <i class='fa fa-caret-up fa-xs'></i> {{s.shield_ref.protection_min}}/{{ s.shield_ref.protection_max }} <i class='fa fa-caret-up fa-xs'></i> Hits:{{s.shield_ref.hits}} <i class='fa fa-caret-up fa-xs'></i> {% if s.shield_ref.is_compatible_with_medium_armor %}(+Medium Armor){%endif%} {% if s.shield_ref.is_compatible_with_hard_armor %}(+Hard Armor){%endif%} 
 {% if not s.shield_ref.description is empty %}<br/>{{ s.shield_ref.description|safe }}{% endif %}</td></tr>
 {% endfor %}</table>
 {%endif%}
@@ -119,5 +126,5 @@
 
 <hr/>
 <i class="fas fa-file-pdf"></i> <tt>{{ c.rid }}</tt>
-<br/><i class="fas fa-th-large"></i>{{ c.AP }} <i class="fas fa-th-list"></i>{{ c.OP }} = {{ c.SK_TOTAL }} + {{ c.TA_TOTAL }} + {{ c.BC_TOTAL }}
+</br><i class="fas fa-th-large"></i> {{ c.AP }} <i class="fas fa-th-list"></i> {{ c.SK_TOTAL }} <i class="fas fa-th"></i> {{ c.TA_TOTAL }} <i class="fas fa-outdent"></i> {{ c.BC_TOTAL }} <i class="fas fa-newspaper"></i> {{ c.OP }}
 </div>

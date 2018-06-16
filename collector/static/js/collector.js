@@ -53,8 +53,8 @@ function rebootlinks(){
 
   $('#go').off();
   $('#go').on('click',function(event){
-    console.log($('.character_form').serialize());
-    console.log($('.character_form input[name=cid]').val());
+    //console.log($('.character_form').serialize());
+    //console.log($('.character_form input[name=cid]').val());
     var urlupdate = 'ajax/update/character/';
     $.ajax({    
       url: urlupdate,
@@ -67,13 +67,15 @@ function rebootlinks(){
         cid: $('.character_form input[name=cid]').val(),
         character: $('.character_form').serialize(),
       },
-      dataType: 'html',
+      dataType: 'json',
       success: function(answer) {
-          console.log('Ok!!');
-          $('.details').html(answer);
+          $('.details').html(answer.character);          
+          $('li#'+answer.rid).html(answer.line);
+          $('li#'+answer.rid).toggleClass('selected');
+          rebootlinks();
       },
       error: function(answer) {
-        $('.details').html(answer);
+        console.log('Error... '+answer);
       },
     });  
   });
@@ -128,10 +130,14 @@ function rebootlinks(){
 
   $('.view_character').on('click',function(event){
     event.preventDefault();
-    $.ajax({
+    event.stopPropagation();
+    var dad = $(this).parents('li');
+    $(dad).toggleClass('selected');
+    $.ajax({      
       url: 'ajax/view/character/'+$(this).attr('id')+'/',
       success: function(answer) {
         $('.details').html(answer)
+        $(dad).toggleClass('selected');
         rebootlinks();
       },
     });
@@ -190,10 +196,15 @@ $('.pdf_character').on('click',function(event){
 
 $('.edit_character').on('click',function(event){
   event.preventDefault();
+  event.stopPropagation();
+  var dad = $(this).parents('li');
+  $(dad).toggleClass('selected');
+  $('body').toggleClass('waiting');
   $.ajax({
     url: 'ajax/edit/character/'+$(this).attr('id')+'/',
     success: function(answer) {
-        $('.details').html(answer);
+        $('.details').html(answer.character);
+        $('body').toggleClass('waiting');
         prepare_ajax();        
     },
     error: function(answer){
