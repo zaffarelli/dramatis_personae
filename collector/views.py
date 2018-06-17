@@ -14,15 +14,16 @@ from urllib.parse import parse_qs
 from collector import fs_fics7
 from django.views.decorators.csrf import csrf_exempt
 import datetime
+from collector.xls_collector import export_to_xls
 
 MAX_CHAR = 10 # How many avatars per page
 
 def index(request):
-  """ Index page """
+  """ The basic page for the application """
   return render(request,'collector/index.html')
 
 def get_list(request,id,slug='none'):
-  """ List update page """
+  """ Update the list of characters on the page """
   if request.is_ajax:
     if slug=='none':
       character_items = Character.objects.order_by('ready_for_export','full_name')
@@ -38,31 +39,32 @@ def get_list(request,id,slug='none'):
   else:
     Http404
 
-def by_keyword_personae(request,keyword):
-  character_items = Character.objects.filter(keyword=keyword)
-  paginator = Paginator(character_items,MAX_CHAR)
-  page = request.GET.get('page')
-  character_items = paginator.get_page(page)
-  context = {'character_items': character_items}
-  return render(request, 'collector/index.html', context)
+# def by_keyword_personae(request,keyword):
+  # character_items = Character.objects.filter(keyword=keyword)
+  # paginator = Paginator(character_items,MAX_CHAR)
+  # page = request.GET.get('page')
+  # character_items = paginator.get_page(page)
+  # context = {'character_items': character_items}
+  # return render(request, 'collector/index.html', context)
 
-def by_alliance_personae(request,alliancehash):
-  character_items = Character.objects.filter(alliancehash=alliancehash)
-  paginator = Paginator(character_items,MAX_CHAR)
-  page = request.GET.get('page')
-  character_items = paginator.get_page(page)
-  context = {'character_items': character_items}
-  return render(request, 'collector/index.html', context)
+# def by_alliance_personae(request,alliancehash):
+  # character_items = Character.objects.filter(alliancehash=alliancehash)
+  # paginator = Paginator(character_items,MAX_CHAR)
+  # page = request.GET.get('page')
+  # character_items = paginator.get_page(page)
+  # context = {'character_items': character_items}
+  # return render(request, 'collector/index.html', context)
 
-def by_species_personae(request,species):
-  character_items = Character.objects.filter(category=species)
-  paginator = Paginator(character_items,MAX_CHAR)
-  page = request.GET.get('page')
-  character_items = paginator.get_page(page)
-  context = {'character_items': character_items}
-  return render(request, 'collector/index.html', context)
+# def by_species_personae(request,species):
+  # character_items = Character.objects.filter(category=species)
+  # paginator = Paginator(character_items,MAX_CHAR)
+  # page = request.GET.get('page')
+  # character_items = paginator.get_page(page)
+  # context = {'character_items': character_items}
+  # return render(request, 'collector/index.html', context)
 
 def pdf_character(request,id=None):
+  """ Create and show a character as PDF """
   item = get_object_or_404(Character,pk=id)
   if item.backup() == True:
     answer = '<a class="pdflink" target="_blank" href="pdf/%s.pdf">%s</a>'%(item.rid,item.rid)
@@ -88,21 +90,24 @@ def recalc(request):
   return redirect('/')
 
 def export(request):
-  items = Character.objects.order_by('full_name').filter(ready_for_export=True)
-  return render(request, 'collector/export.html', {'characters': items}, content_type='text/plain;charset=utf-8' )
+  """ XLS export of the characters """
+  export_to_xls()
+  return redirect('/')
 
-def view_persona(request, id=None):
-  item = get_object_or_404(Character,pk=id)
-  return render(request, 'collector/persona.html', {'c': item})
+#def view_persona(request, id=None):
+#  item = get_object_or_404(Character,pk=id)
+#  return render(request, 'collector/persona.html', {'c': item})
 
 def view_character(request, id=None):
   """ Ajax view of a character """
   if request.is_ajax():
+    print("This is Ajax")
     item = get_object_or_404(Character,pk=id)
     template = get_template('collector/character.html')
     html = template.render({'c':item})
     return HttpResponse(html, content_type='text/html')
   else:
+    print("This is NOT Ajax")
     raise Http404
 
 def extract_formset(rqp,s):
@@ -216,16 +221,16 @@ def edit_character(request,id=None):
   }
   return JsonResponse(context)
 
-def add_persona(request):
-  if request.method == 'POST':
-    form = CharacterForm(request.POST)
-    if form.is_valid():
-      character_item = form.save(commit=False)
-      character_item.save()
-      return redirect('/')
-  else:
-    form = CharacterForm()
-  return render(request, 'collector/persona_form.html', {'form': form})
+# def add_persona(request):
+  # if request.method == 'POST':
+    # form = CharacterForm(request.POST)
+    # if form.is_valid():
+      # character_item = form.save(commit=False)
+      # character_item.save()
+      # return redirect('/')
+  # else:
+    # form = CharacterForm()
+  # return render(request, 'collector/persona_form.html', {'form': form})
 
 def add_character(request):
   character_item = Character()
@@ -235,40 +240,40 @@ def add_character(request):
 
 
 
-def edit_persona(request,id=None):
-  """ Old static system for edit"""
-  character_item = get_object_or_404(Character, id=id)
-  form = CharacterForm(request.POST or None, instance = character_item)
-  if request.method == 'POST':
-    skills = SkillFormSet(request.POST, request.FILES, instance=character_item)
-    talents = TalentFormSet(request.POST, request.FILES, instance=character_item)
-    blessingcurses = BlessingCurseFormSet(request.POST, request.FILES, instance=character_item)
-    armors = ArmorFormSet(request.POST, request.FILES, instance=character_item)
-    weapons = WeaponFormSet(request.POST, request.FILES, instance=character_item)
-    shields = ShieldFormSet(request.POST, request.FILES, instance=character_item)
-    skv = skills.is_valid()
-    tav = talents.is_valid() 
-    bcv = blessingcurses.is_valid()
-    arv = armors.is_valid()
-    wpv = weapons.is_valid()
-    shv = shields.is_valid()
-    if skv and tav and bcv and arv and wpv and shv and form.is_valid():
-      skills.save()
-      talents.save()
-      blessingcurses.save()
-      armors.save()
-      weapons.save()
-      shields.save()
-      form.save()
-      return redirect('/view/persona/'+str(character_item.id)+'/')
-  else:
-    skills = SkillFormSet(instance=character_item, queryset=character_item.skill_set.order_by('skill_ref__reference'))
-    talents = TalentFormSet(instance=character_item, queryset=character_item.talent_set.order_by('-value'))
-    blessingcurses = BlessingCurseFormSet(instance=character_item)
-    armors = ArmorFormSet(instance=character_item)
-    weapons = WeaponFormSet(instance=character_item)
-    shields = ShieldFormSet(instance=character_item)
-  return render(request, 'collector/persona_form.html', {'form': form, 'cid':character_item.id, 'skills': skills, 'armors': armors, 'weapons': weapons, 'blessingcurses': blessingcurses, 'talents': talents, 'shields': shields})
+# def edit_persona(request,id=None):
+  # """ Old static system for edit"""
+  # character_item = get_object_or_404(Character, id=id)
+  # form = CharacterForm(request.POST or None, instance = character_item)
+  # if request.method == 'POST':
+    # skills = SkillFormSet(request.POST, request.FILES, instance=character_item)
+    # talents = TalentFormSet(request.POST, request.FILES, instance=character_item)
+    # blessingcurses = BlessingCurseFormSet(request.POST, request.FILES, instance=character_item)
+    # armors = ArmorFormSet(request.POST, request.FILES, instance=character_item)
+    # weapons = WeaponFormSet(request.POST, request.FILES, instance=character_item)
+    # shields = ShieldFormSet(request.POST, request.FILES, instance=character_item)
+    # skv = skills.is_valid()
+    # tav = talents.is_valid() 
+    # bcv = blessingcurses.is_valid()
+    # arv = armors.is_valid()
+    # wpv = weapons.is_valid()
+    # shv = shields.is_valid()
+    # if skv and tav and bcv and arv and wpv and shv and form.is_valid():
+      # skills.save()
+      # talents.save()
+      # blessingcurses.save()
+      # armors.save()
+      # weapons.save()
+      # shields.save()
+      # form.save()
+      # return redirect('/view/persona/'+str(character_item.id)+'/')
+  # else:
+    # skills = SkillFormSet(instance=character_item, queryset=character_item.skill_set.order_by('skill_ref__reference'))
+    # talents = TalentFormSet(instance=character_item, queryset=character_item.talent_set.order_by('-value'))
+    # blessingcurses = BlessingCurseFormSet(instance=character_item)
+    # armors = ArmorFormSet(instance=character_item)
+    # weapons = WeaponFormSet(instance=character_item)
+    # shields = ShieldFormSet(instance=character_item)
+  # return render(request, 'collector/persona_form.html', {'form': form, 'cid':character_item.id, 'skills': skills, 'armors': armors, 'weapons': weapons, 'blessingcurses': blessingcurses, 'talents': talents, 'shields': shields})
 
 @csrf_exempt
 def skill_touch(request):

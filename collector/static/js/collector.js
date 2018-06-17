@@ -27,6 +27,7 @@ function rebootlinks(){
   $('.nav').off();
   $('.nav').on('click',function(event){
     event.preventDefault();
+    event.stopPropagation();
     key = $('#customize').val(); 
     if (key == ''){
       key='none';
@@ -53,6 +54,8 @@ function rebootlinks(){
 
   $('#go').off();
   $('#go').on('click',function(event){
+    event.preventDefault();
+    event.stopPropagation();
     //console.log($('.character_form').serialize());
     //console.log($('.character_form input[name=cid]').val());
     var urlupdate = 'ajax/update/character/';
@@ -71,7 +74,7 @@ function rebootlinks(){
       success: function(answer) {
           $('.details').html(answer.character);          
           $('li#'+answer.rid).html(answer.line);
-          $('li#'+answer.rid).toggleClass('selected');
+          $('li').removeClass('selected');
           rebootlinks();
       },
       error: function(answer) {
@@ -128,18 +131,24 @@ function rebootlinks(){
     });
   });
 
+  $('.view_character').off();
   $('.view_character').on('click',function(event){
+    console.log('View: '+$(this).attr('id'));
     event.preventDefault();
     event.stopPropagation();
     var dad = $(this).parents('li');
-    $(dad).toggleClass('selected');
+    $('li').removeClass('selected');
+    $(dad).addClass('selected');
     $.ajax({      
       url: 'ajax/view/character/'+$(this).attr('id')+'/',
       success: function(answer) {
         $('.details').html(answer)
-        $(dad).toggleClass('selected');
+        $('li').removeClass('selected');
         rebootlinks();
       },
+      error: function(answer){
+        console.log('Vew error...'+answer);
+      }
     });
   });
 
@@ -178,45 +187,43 @@ function rebootlinks(){
   
   });
 
-$('.pdf_character').on('click',function(event){
-  event.preventDefault();
-  $.ajax({
-    url: 'ajax/pdf/character/'+$(this).attr('id')+'/',
-    success: function(answer) {
-        $('.details').html(answer)
+  $('.pdf_character').off();
+  $('.pdf_character').on('click',function(event){
+    event.preventDefault();
+    $.ajax({
+      url: 'ajax/pdf/character/'+$(this).attr('id')+'/',
+      success: function(answer) {
+          $('.details').html(answer)
+          
+        },
+      error: function(answer) {
+          $('.details').html(answer)
+        },
         
-      },
-    error: function(answer) {
-        $('.details').html(answer)
-      },
-      
+    });
   });
-});
 
-
-$('.edit_character').on('click',function(event){
-  event.preventDefault();
-  event.stopPropagation();
-  var dad = $(this).parents('li');
-  $(dad).toggleClass('selected');
-  $('body').toggleClass('waiting');
-  $.ajax({
-    url: 'ajax/edit/character/'+$(this).attr('id')+'/',
-    success: function(answer) {
-        $('.details').html(answer.character);
-        $('body').toggleClass('waiting');
-        prepare_ajax();        
-    },
-    error: function(answer){
-      console.log('ooops... :(');
-    }
+  $('.edit_character').off();
+  $('.edit_character').on('click',function(event){
+    event.preventDefault();
+    event.stopPropagation();
+    var dad = $(this).parents('li');
+    $('li').removeClass('selected');
+    $(dad).addClass('selected');
+    $('body').toggleClass('waiting');
+    $.ajax({
+      url: 'ajax/edit/character/'+$(this).attr('id')+'/',
+      success: function(answer) {
+          $('.details').html(answer.character);
+          $('body').toggleClass('waiting');         
+          prepare_ajax();
+          rebootlinks();
+      },
+      error: function(answer){
+        console.log('ooops... :(');
+      }
+    });
   });
-});
-
-
-
-
-
 }
 
 rebootlinks();

@@ -132,7 +132,7 @@ class Character(models.Model):
       self.BC_TOTAL += bc.value
     self.AP = self.PA_TOTAL
     self.OP = self.SK_TOTAL + self.TA_TOTAL + self.BC_TOTAL
-    self.challenge = self.PA_TOTAL*3 + self.SK_TOTAL + self.TA_TOTAL + self.BC_TOTAL
+    #self.challenge = self.PA_TOTAL*3 + self.SK_TOTAL + self.TA_TOTAL + self.BC_TOTAL
     roleok = fs_fics7.check_role(self)
     if roleok == False:
       exportable = False
@@ -152,7 +152,7 @@ class Character(models.Model):
     if proceed == True:
       item = self
       context = {'c':item,'filename':'%04d_%s'%(item.pagenum,item.rid),}
-      write_pdf('collector/persona_pdf.html',context)
+      write_pdf('collector/character_pdf.html',context)
     return proceed      
   def __str__(self):
     return '%s' % self.full_name  

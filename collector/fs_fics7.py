@@ -3,7 +3,11 @@
 # This file contains the core business function of the app
 import math
 from random import randint
+import os
 
+
+MAX_CHAR = 10
+RELEASE = 0.4
 
 '''
   (from Fading Suns CoreRulebook p91-92)
@@ -417,7 +421,7 @@ def check_attacks(ch):
   return ranged_attack
 
 def get_rid(s):
-  x = s.replace(' ','_').replace("'",'').replace('é','e').replace('è','e').replace('ë','e').replace('â','a').replace('ô','o').replace('"','').replace('ï','i').replace('à','a')
+  x = s.replace(' ','_').replace("'",'').replace('é','e').replace('è','e').replace('ë','e').replace('â','a').replace('ô','o').replace('"','').replace('ï','i').replace('à','a').replace('-','')
   return x.lower()
 
 def minmax_from_dc(sdc):
@@ -463,8 +467,15 @@ def check_root_skills(ch):
         exportable = False
   return exportable
 
+def roll(maxi):
+  """ A more random 1 to maxi dice roller  """
+  randbyte = int.from_bytes(os.urandom(1),byteorder='big',signed=False)
+  x = int(randbyte / 256 * (maxi-1)) +1
+  return x
+
 def choose_pa(weights):
-  x = randint(1,sum(weights))
+  #x = randint(1,sum(weights))
+  x = roll(sum(weights))
   cum = 0
   idx = 0
   while idx < 12:
@@ -478,6 +489,7 @@ def check_primary_attributes(ch):
   pool = ROLES[ch.role]['primaries']
   maxi = ROLES[ch.role]['maxi']
   weights = PROFILES[ch.profile]['weights']
+  ch.challenge = '(<i class="fas fa-th-large"></i>%02d <i class="fas fa-th-list"></i>%02d <i class="fas fa-th"></i>%02d <i class="fas fa-outdent"></i>%02d)'%(ROLES[ch.role]['primaries'],ROLES[ch.role]['skills'], ROLES[ch.role]['talents'],ROLES[ch.role]['bc'])
   #print('%s: %s [ %d / %d ]'%(ch.full_name,ch.role,pool,maxi))  
   pas = [2,2,2,2,2,2,2,2,2,2,2,2]
   current =  ch.PA_STR+ch.PA_CON+ch.PA_BOD+ch.PA_MOV+ch.PA_INT+ch.PA_WIL+ch.PA_TEM+ch.PA_PRE+ch.PA_TEC+ch.PA_REF+ch.PA_AGI+ch.PA_AWA
@@ -510,6 +522,8 @@ def check_primary_attributes(ch):
     ch.PA_AWA = pas[11]
     if ch.keyword == 'rebuild':
       ch.keyword = 'rebuilt'
+
+
 
 def check_role(ch):
   pa_pool = ROLES[ch.role]['primaries']
