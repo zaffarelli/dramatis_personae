@@ -6,11 +6,15 @@ from datetime import datetime
 from collector.fs_fics7 import minmax_from_dc
 
 
-def export_header(ws,heads,colwidths):
+def export_header(ws,data):
   r = 2
-  for num,h in enumerate(heads,start=0):
-    ws.cell(column=num+1, row=r, value=h)
-    ws.column_dimensions[get_column_letter(num+1)].width = colwidths[num]
+  for num,d in enumerate(data,start=1):
+    ws.cell(column=num, row=r, value=data[d]['title'])
+    ws.column_dimensions[get_column_letter(num)].width = data[d]['width']
+
+def export_row(ws, data, ch, r):
+  for num,d in enumerate(data,start=1):
+    ws.cell(column=num, row=r, value='%s'%(getattr(ch,data[d]['attribute'])))
     
 def export_to_xls(filename='dramatis_personae.xls'):
   """ XLS extraction of the Characters """
@@ -29,100 +33,64 @@ def export_to_xls(filename='dramatis_personae.xls'):
   ws.cell(column=2, row=4, value='%s'%(datetime.now()))
   # Characters
   ws = wb.create_sheet('Characters')
-  h = ['Name','RID','Entrance','Alliance','Rank','Gender','Species/Race','Caste','Birthdate','Height','Weight','STR','CON','BOD','MOV','INT','WIL','TEM','PRE','TEC','REF','AGI','AWA']
-  w = [40,30,30,50,20,20,20,20,20,20,20,10,10,10,10,10,10,10,10,10,10,10,10]
+  h = {
+    '1':{'title':'Name','attribute':'full_name','width':40},
+    '2':{'title':'RID','attribute':'rid','width':30},
+    '3':{'title':'Entrance','attribute':'entrance','width':40},
+    '4':{'title':'Alliance','attribute':'alliance','width':40},
+    '5':{'title':'Rank','attribute':'rank','width':30},
+    '6':{'title':'Gender','attribute':'gender','width':10},
+    '7':{'title':'Species/Race','attribute':'species','width':20},
+    '8':{'title':'Caste','attribute':'caste','width':30},
+    '9':{'title':'Birthdate','attribute':'birthdate','width':10},
+    '10':{'title':'Height','attribute':'height','width':10},
+    '11':{'title':'Weight','attribute':'weight','width':10},
+    '12':{'title':'STR','attribute':'PA_STR','width':10},
+    '13':{'title':'CON','attribute':'PA_CON','width':10},
+    '14':{'title':'BOD','attribute':'PA_BOD','width':10},
+    '15':{'title':'MOV','attribute':'PA_MOV','width':10},
+    '16':{'title':'INT','attribute':'PA_INT','width':10},
+    '17':{'title':'WIL','attribute':'PA_WIL','width':10},
+    '18':{'title':'TEM','attribute':'PA_TEM','width':10},
+    '19':{'title':'PRE','attribute':'PA_PRE','width':10},
+    '20':{'title':'TEC','attribute':'PA_TEC','width':10},
+    '21':{'title':'REF','attribute':'PA_REF','width':10},
+    '22':{'title':'AGI','attribute':'PA_AGI','width':10},
+    '23':{'title':'AWA', 'attribute':'PA_AWA','width':10},
+  }  
   ws.cell(column=1, row=1, value='Dramatis Personae')
   character_items = Character.objects.all().order_by('full_name')
-  export_header(ws,h,w)
+  export_header(ws,h)
   cnt = 3
   for c in character_items:
-    x = 1
-    ws.cell(column=x, row=cnt, value='%s'%(c.full_name))
-    x += 1
-    ws.cell(column=x, row=cnt, value='%s'%(c.rid))
-    x += 1
-    ws.cell(column=x, row=cnt, value='%s'%(c.entrance))
-    x += 1
-    ws.cell(column=x, row=cnt, value='%s'%(c.alliance))
-    x += 1
-    ws.cell(column=x, row=cnt, value='%s'%(c.rank))
-    x += 1
-    ws.cell(column=x, row=cnt, value='%s'%(c.gender))
-    x += 1
-    ws.cell(column=x, row=cnt, value='%s'%(c.species))
-    x += 1
-    ws.cell(column=x, row=cnt, value='%s'%(c.caste))
-    x += 1
-    ws.cell(column=x, row=cnt, value='%s'%(c.birthdate))
-    x += 1
-    ws.cell(column=x, row=cnt, value='%s'%(c.height))
-    x += 1
-    ws.cell(column=x, row=cnt, value='%s'%(c.weight))
-    x += 1
-    ws.cell(column=x, row=cnt, value='%d'%(c.PA_STR))
-    x += 1
-    ws.cell(column=x, row=cnt, value='%d'%(c.PA_CON))
-    x += 1
-    ws.cell(column=x, row=cnt, value='%d'%(c.PA_BOD))
-    x += 1
-    ws.cell(column=x, row=cnt, value='%d'%(c.PA_MOV))
-    x += 1
-    ws.cell(column=x, row=cnt, value='%d'%(c.PA_INT))
-    x += 1
-    ws.cell(column=x, row=cnt, value='%d'%(c.PA_WIL))
-    x += 1
-    ws.cell(column=x, row=cnt, value='%d'%(c.PA_TEM))
-    x += 1
-    ws.cell(column=x, row=cnt, value='%d'%(c.PA_PRE))
-    x += 1
-    ws.cell(column=x, row=cnt, value='%d'%(c.PA_TEC))
-    x += 1
-    ws.cell(column=x, row=cnt, value='%d'%(c.PA_REF))
-    x += 1
-    ws.cell(column=x, row=cnt, value='%d'%(c.PA_AGI))
-    x += 1
-    ws.cell(column=x, row=cnt, value='%d'%(c.PA_AWA))
-    x += 1
+    export_row(ws,h,c,cnt)
     cnt += 1
+
+  # Weapons
   ws = wb.create_sheet('Weapons')
-  h = ['Ref','Cat','WA','CO','AV','DC','cal.','MinMax','Str','RoF','Clip','RNG','RE','Cost','Description']
-  w = [40,10,5,5,5,10,15,15,5,5,5,5,5,8,30]
+  h = {
+    '1':{'title':'Ref','attribute':'reference','width':40},
+    '2':{'title':'Cat','attribute':'category','width':10},
+    '3':{'title':'WA','attribute':'weapon_accuracy','width':5},
+    '4':{'title':'CO','attribute':'conceilable','width':5},
+    '5':{'title':'AV','attribute':'availability','width':5},
+    '6':{'title':'DC','attribute':'damage_class','width':15},
+    '7':{'title':'cal.','attribute':'caliber','width':15},    
+    '8':{'title':'STR','attribute':'str_min','width':5},
+    '9':{'title':'RoF','attribute':'rof','width':5},
+    '10':{'title':'Clip','attribute':'clip','width':5},
+    '11':{'title':'RNG','attribute':'rng','width':5},
+    '12':{'title':'RE','attribute':'rel','width':5},
+    '13':{'title':'Cost','attribute':'cost','width':10},
+    '14':{'title':'Description','attribute':'description','width':40},
+  }
   ws.cell(column=1, row=1, value='Dramatis Personae')
   weaponref_items = WeaponRef.objects.all().order_by('category','damage_class')
-  export_header(ws,h,w)
+  export_header(ws,h)
   cnt = 3
   for c in weaponref_items:
-    x = 1
-    ws.cell(column=x, row=cnt, value='%s'%(c.reference))
-    x += 1
-    ws.cell(column=x, row=cnt, value='%s'%(c.category))
-    x += 1
-    ws.cell(column=x, row=cnt, value='%s'%(c.weapon_accuracy))
-    x += 1
-    ws.cell(column=x, row=cnt, value='%s'%(c.conceilable))
-    x += 1
-    ws.cell(column=x, row=cnt, value='%s'%(c.availability))
-    x += 1
-    ws.cell(column=x, row=cnt, value='%s'%(c.damage_class))
-    x += 1
-    ws.cell(column=x, row=cnt, value='%s'%(c.caliber))
-    x += 1
-    dcmm = minmax_from_dc(c.damage_class)
-    ws.cell(column=x, row=cnt, value='%d-%d (%.02f)'%(dcmm[0],dcmm[1],((dcmm[0]+dcmm[1])/2)))
-    x += 1
-    ws.cell(column=x, row=cnt, value='%s'%(c.str_min))
-    x += 1
-    ws.cell(column=x, row=cnt, value='%s'%(c.rof))
-    x += 1
-    ws.cell(column=x, row=cnt, value='%s'%(c.clip))
-    x += 1
-    ws.cell(column=x, row=cnt, value='%s'%(c.rng))
-    x += 1
-    ws.cell(column=x, row=cnt, value='%s'%(c.rel))
-    x += 1
-    ws.cell(column=x, row=cnt, value='%s'%(c.cost))
-    x += 1
-    ws.cell(column=x, row=cnt, value='%s'%(c.description))
-    x += 1
+    export_row(ws,h,c,cnt)
     cnt += 1
+
+  # And save everything
   wb.save(filename = dest_filename)
