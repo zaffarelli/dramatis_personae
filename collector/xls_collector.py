@@ -1,16 +1,25 @@
 from openpyxl import Workbook
 from openpyxl.compat import range
 from openpyxl.utils import get_column_letter
-from collector.models import Character,WeaponRef
+from collector.models import Character,WeaponRef,SkillRef,ArmorRef,BeneficeAfflictionRef
 from datetime import datetime 
 from collector.fs_fics7 import minmax_from_dc
-
+from openpyxl.styles import PatternFill
+from openpyxl.styles import colors
+from openpyxl.styles import Font, Color
 
 def export_header(ws,data):
-  r = 2
+  num = 1
+  r = 1
+  cell = '%s%d'%(get_column_letter(num),r)
+  ws[cell].font = Font(name='Roboto',color='8040C0', bold=True)
+  r += 1
   for num,d in enumerate(data,start=1):
     ws.cell(column=num, row=r, value=data[d]['title'])
     ws.column_dimensions[get_column_letter(num)].width = data[d]['width']
+    cell = '%s%d'%(get_column_letter(num),r)
+    ws[cell].font = Font(name='Roboto',color='8040C0', bold=True, size=9)
+    ws[cell].fill = PatternFill(fill_type='solid', fgColor='C0C0C0')
 
 def export_row(ws, data, ch, r):
   for num,d in enumerate(data,start=1):
@@ -67,7 +76,7 @@ def export_to_xls(filename='dramatis_personae.xls'):
     cnt += 1
 
   # Weapons
-  ws = wb.create_sheet('Weapons')
+  ws = wb.create_sheet('Weapons_References')
   h = {
     '1':{'title':'Ref','attribute':'reference','width':40},
     '2':{'title':'Cat','attribute':'category','width':10},
@@ -89,6 +98,64 @@ def export_to_xls(filename='dramatis_personae.xls'):
   export_header(ws,h)
   cnt = 3
   for c in weaponref_items:
+    export_row(ws,h,c,cnt)
+    cnt += 1
+
+  # SkillRef
+  ws = wb.create_sheet('Skills_References')
+  h = {
+    '1':{'title':'Ref','attribute':'reference','width':30},
+    '2':{'title':'Root','attribute':'is_root','width':10},
+    '3':{'title':'Speciality','attribute':'is_speciality','width':10},
+    '4':{'title':'Category','attribute':'category','width':10},
+    '5':{'title':'Linked To','attribute':'linked_to','width':20},
+  }
+  ws.cell(column=1, row=1, value='Dramatis Personae')
+  skillref_items = SkillRef.objects.all().order_by('reference','is_root')
+  export_header(ws,h)
+  cnt = 3
+  for c in skillref_items:
+    export_row(ws,h,c,cnt)
+    cnt += 1
+
+  # ArmorRef
+  ws = wb.create_sheet('Armors_References')
+  h = {
+    '1':{'title':'Ref','attribute':'reference','width':30},
+    '2':{'title':'Category','attribute':'category','width':10},    
+    '3':{'title':'Head','attribute':'head','width':5},
+    '4':{'title':'Torso','attribute':'torso','width':5},
+    '5':{'title':'LeftArm','attribute':'left_arm','width':5},
+    '6':{'title':'RightArm','attribute':'right_arm','width':5},
+    '7':{'title':'LeftLeg','attribute':'left_leg','width':5},
+    '8':{'title':'RightLeg','attribute':'right_leg','width':5},
+    '9':{'title':'SP','attribute':'stopping_power','width':5},
+    '10':{'title':'Cost','attribute':'cost','width':10},
+    '11':{'title':'EV','attribute':'encumbrance','width':5},
+    '12':{'title':'Description','attribute':'description','width':30},
+  }
+  ws.cell(column=1, row=1, value='Dramatis Personae')
+  armorref_items = ArmorRef.objects.all().order_by('reference','category')
+  export_header(ws,h)
+  cnt = 3
+  for c in armorref_items:
+    export_row(ws,h,c,cnt)
+    cnt += 1
+
+
+  # BeneficeAfflictionRef
+  ws = wb.create_sheet('Benefices_Afflicitions_References')
+  h = {
+    '1':{'title':'Ref','attribute':'reference','width':30},
+    '2':{'title':'Value','attribute':'value','width':5},    
+    '3':{'title':'Category','attribute':'category','width':10},
+    '4':{'title':'Description','attribute':'description','width':30},
+  }
+  ws.cell(column=1, row=1, value='Dramatis Personae')
+  beneficeafflictionref_items = BeneficeAfflictionRef.objects.all().order_by('-value','category','reference')
+  export_header(ws,h)
+  cnt = 3
+  for c in beneficeafflictionref_items:
     export_row(ws,h,c,cnt)
     cnt += 1
 
