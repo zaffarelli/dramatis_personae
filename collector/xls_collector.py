@@ -9,8 +9,8 @@ from openpyxl.styles import colors
 from openpyxl.styles import Font, Color
 
 def export_header(ws,data):
-  num = 1
-  r = 1
+  """ export the header of a set """
+  num,r = 1,1
   cell = '%s%d'%(get_column_letter(num),r)
   ws[cell].font = Font(name='Roboto',color='8040C0', bold=True)
   r += 1
@@ -22,6 +22,7 @@ def export_header(ws,data):
     ws[cell].fill = PatternFill(fill_type='solid', fgColor='C0C0C0')
 
 def export_row(ws, data, ch, r):
+  """ Export a row from a set """
   for num,d in enumerate(data,start=1):
     ws.cell(column=num, row=r, value='%s'%(getattr(ch,data[d]['attribute'])))
     
@@ -161,3 +162,19 @@ def export_to_xls(filename='dramatis_personae.xls'):
 
   # And save everything
   wb.save(filename = dest_filename)
+
+def update_from_xls(filename='dramatis_personae_update.xls'):
+  """
+    This is not a real 'import', as we only update some refs from the database.
+    No isoprod behavior db <-> xls has to be expected here. THIS IS NO RESTORE !!!
+  """
+  wb = load_workbook(filename)
+  ws = wb['Benefices_Afflicitions_References']
+  if ws != None:
+    h = {
+     '1':{'title':'Ref','attribute':'reference','width':30},
+     '2':{'title':'Value','attribute':'value','width':5},    
+     '3':{'title':'Category','attribute':'category','width':10},
+     '4':{'title':'Description','attribute':'description','width':30},
+    }
+    pass
