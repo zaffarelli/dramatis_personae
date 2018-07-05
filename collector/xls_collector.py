@@ -185,5 +185,5 @@ def update_from_xls(filename='dramatis_personae.xlsx'):
       if ws[cell].value is None:
         break
       else:
-        bar = BeneficeAfflictionRef.objects.get(reference
+        bar = BeneficeAfflictionRef.objects.get(reference)
         cnt += 1
