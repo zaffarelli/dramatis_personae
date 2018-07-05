@@ -9,6 +9,7 @@ urlpatterns = [
 	#re_path('^by_alliance/persona/(?P<alliancehash>\w+)/$', views.by_alliance_personae, name='by_alliance'),
 	#re_path('^by_species/persona/(?P<species>\w+)/$', views.by_species_personae, name='by_species'),
 	re_path('^export/$', views.export, name='export'),
+  re_path('^xls_update/$', views.xls_update, name='xls_update'),
 	#re_path('^add/persona/$', views.add_persona, name='add_persona'),
 	#re_path('^edit/persona/(?P<id>\d+)/$', views.edit_persona, name='edit_persona'),
   re_path('^ajax/edit/character/(?P<id>\d+)/$', views.edit_character, name='edit_character'),

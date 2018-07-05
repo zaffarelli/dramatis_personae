@@ -14,7 +14,7 @@ from urllib.parse import parse_qs
 from collector import fs_fics7
 from django.views.decorators.csrf import csrf_exempt
 import datetime
-from collector.xls_collector import export_to_xls
+from collector.xls_collector import export_to_xls, update_from_xls
 
 MAX_CHAR = 10 # How many avatars per page
 
@@ -92,6 +92,11 @@ def recalc(request):
 def export(request):
   """ XLS export of the characters """
   export_to_xls()
+  return redirect('/')
+
+def xls_update(request):
+  """ XLS import of data """
+  update_from_xls()
   return redirect('/')
 
 #def view_persona(request, id=None):

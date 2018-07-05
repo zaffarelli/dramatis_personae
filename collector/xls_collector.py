@@ -7,6 +7,7 @@ from collector.fs_fics7 import minmax_from_dc
 from openpyxl.styles import PatternFill
 from openpyxl.styles import colors
 from openpyxl.styles import Font, Color
+from openpyxl import load_workbook
 
 def export_header(ws,data):
   """ export the header of a set """
@@ -26,7 +27,7 @@ def export_row(ws, data, ch, r):
   for num,d in enumerate(data,start=1):
     ws.cell(column=num, row=r, value='%s'%(getattr(ch,data[d]['attribute'])))
     
-def export_to_xls(filename='dramatis_personae.xls'):
+def export_to_xls(filename='dramatis_personae.xlsx'):
   """ XLS extraction of the Characters """
   wb = Workbook()
   dest_filename = filename
@@ -163,7 +164,7 @@ def export_to_xls(filename='dramatis_personae.xls'):
   # And save everything
   wb.save(filename = dest_filename)
 
-def update_from_xls(filename='dramatis_personae_update.xls'):
+def update_from_xls(filename='dramatis_personae.xlsx'):
   """
     This is not a real 'import', as we only update some refs from the database.
     No isoprod behavior db <-> xls has to be expected here. THIS IS NO RESTORE !!!
@@ -177,4 +178,12 @@ def update_from_xls(filename='dramatis_personae_update.xls'):
      '3':{'title':'Category','attribute':'category','width':10},
      '4':{'title':'Description','attribute':'description','width':30},
     }
-    pass
+    print(ws['D8'].value)
+    cnt = 3
+    while True:
+      cell = '%s%d'%(get_column_letter(1),cnt)
+      if ws[cell].value is None:
+        break
+      else:
+        bar = BeneficeAfflictionRef.objects.get(reference
+        cnt += 1
