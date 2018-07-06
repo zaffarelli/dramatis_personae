@@ -9,6 +9,9 @@ from openpyxl.styles import colors
 from openpyxl.styles import Font, Color
 from openpyxl import load_workbook
 
+def colrow(c,r):
+  return '%s%d'%(get_column_letter(c),r)
+
 def export_header(ws,data):
   """ export the header of a set """
   num,r = 1,1
@@ -154,7 +157,7 @@ def export_to_xls(filename='dramatis_personae.xlsx'):
     '4':{'title':'Description','attribute':'description','width':30},
   }
   ws.cell(column=1, row=1, value='Dramatis Personae')
-  beneficeafflictionref_items = BeneficeAfflictionRef.objects.all().order_by('-value','category','reference')
+  beneficeafflictionref_items = BeneficeAfflictionRef.objects.all().order_by('reference','-value','category')
   export_header(ws,h)
   cnt = 3
   for c in beneficeafflictionref_items:
@@ -164,7 +167,7 @@ def export_to_xls(filename='dramatis_personae.xlsx'):
   # And save everything
   wb.save(filename = dest_filename)
 
-def update_from_xls(filename='dramatis_personae.xlsx'):
+def update_from_xls(filename='dramatis_personae_update.xlsx'):
   """
     This is not a real 'import', as we only update some refs from the database.
     No isoprod behavior db <-> xls has to be expected here. THIS IS NO RESTORE !!!
@@ -172,18 +175,25 @@ def update_from_xls(filename='dramatis_personae.xlsx'):
   wb = load_workbook(filename)
   ws = wb['Benefices_Afflicitions_References']
   if ws != None:
-    h = {
-     '1':{'title':'Ref','attribute':'reference','width':30},
-     '2':{'title':'Value','attribute':'value','width':5},    
-     '3':{'title':'Category','attribute':'category','width':10},
-     '4':{'title':'Description','attribute':'description','width':30},
-    }
-    print(ws['D8'].value)
     cnt = 3
+    bar = BeneficeAfflictionRef.objects.all().delete()
     while True:
-      cell = '%s%d'%(get_column_letter(1),cnt)
-      if ws[cell].value is None:
+      if ws[colrow(1,cnt)].value is None:
         break
       else:
-        bar = BeneficeAfflictionRef.objects.get(reference)
+        print(ws[colrow(1,cnt)].value)
+        print(ws[colrow(2,cnt)].value)
+        print(ws[colrow(3,cnt)].value)
+        print(ws[colrow(4,cnt)].value)
+        bar = BeneficeAfflictionRef(reference=ws[colrow(1,cnt)].value)
+        bar.value = int(ws[colrow(2,cnt)].value)
+        bar.category = ws[colrow(3,cnt)].value
+        if ws[colrow(4,cnt)].value is None:
+          desc = ""
+        else:
+          desc = ws[colrow(4,cnt)].value 
+        bar.description = desc
+        bar.save()
+        print(bar)
+        print("")
         cnt += 1
