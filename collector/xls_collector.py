@@ -155,6 +155,7 @@ def export_to_xls(filename='dramatis_personae.xlsx'):
     '2':{'title':'Value','attribute':'value','width':5},    
     '3':{'title':'Category','attribute':'category','width':10},
     '4':{'title':'Description','attribute':'description','width':30},
+    '5':{'title':'ID','attribute':'id','width':5},
   }
   ws.cell(column=1, row=1, value='Dramatis Personae')
   beneficeafflictionref_items = BeneficeAfflictionRef.objects.all().order_by('reference','-value','category')
@@ -167,7 +168,7 @@ def export_to_xls(filename='dramatis_personae.xlsx'):
   # And save everything
   wb.save(filename = dest_filename)
 
-def update_from_xls(filename='dramatis_personae_update.xlsx'):
+def update_from_xls(filename='dramatis_personae.xlsx'):
   """
     This is not a real 'import', as we only update some refs from the database.
     No isoprod behavior db <-> xls has to be expected here. THIS IS NO RESTORE !!!
@@ -176,7 +177,7 @@ def update_from_xls(filename='dramatis_personae_update.xlsx'):
   ws = wb['Benefices_Afflicitions_References']
   if ws != None:
     cnt = 3
-    bar = BeneficeAfflictionRef.objects.all().delete()
+    #bar = BeneficeAfflictionRef.objects.all().delete()
     while True:
       if ws[colrow(1,cnt)].value is None:
         break
@@ -185,7 +186,14 @@ def update_from_xls(filename='dramatis_personae_update.xlsx'):
         print(ws[colrow(2,cnt)].value)
         print(ws[colrow(3,cnt)].value)
         print(ws[colrow(4,cnt)].value)
-        bar = BeneficeAfflictionRef(reference=ws[colrow(1,cnt)].value)
+        print(ws[colrow(5,cnt)].value)
+        if int(ws[colrow(5,cnt)].value) == 0:
+          bar = None
+        else:
+          bar = BeneficeAfflictionRef.objects.get(id=int(ws[colrow(5,cnt)].value))
+        if bar is None:
+          bar = BeneficeAfflictionRef(reference=ws[colrow(1,cnt)].value)
+        bar.reference = ws[colrow(1,cnt)].value
         bar.value = int(ws[colrow(2,cnt)].value)
         bar.category = ws[colrow(3,cnt)].value
         if ws[colrow(4,cnt)].value is None:
