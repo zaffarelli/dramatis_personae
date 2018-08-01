@@ -154,8 +154,9 @@ def export_to_xls(filename='dramatis_personae.xlsx'):
     '1':{'title':'Ref','attribute':'reference','width':30},
     '2':{'title':'Value','attribute':'value','width':5},    
     '3':{'title':'Category','attribute':'category','width':10},
-    '4':{'title':'Description','attribute':'description','width':30},
+    '4':{'title':'Description','attribute':'description','width':60},
     '5':{'title':'ID','attribute':'id','width':5},
+    '6':{'title':'Source','attribute':'source','width':20},
   }
   ws.cell(column=1, row=1, value='Dramatis Personae')
   beneficeafflictionref_items = BeneficeAfflictionRef.objects.all().order_by('reference','-value','category')
@@ -187,13 +188,19 @@ def update_from_xls(filename='dramatis_personae.xlsx'):
         print(ws[colrow(3,cnt)].value)
         print(ws[colrow(4,cnt)].value)
         print(ws[colrow(5,cnt)].value)
-        if int(ws[colrow(5,cnt)].value) == 0:
+        print(ws[colrow(6,cnt)].value)
+        sheet_id = int(ws[colrow(5,cnt)].value)
+        if sheet_id == 0:
           bar = None
+          print("not found! %d"%(sheet_id))
         else:
-          bar = BeneficeAfflictionRef.objects.get(id=int(ws[colrow(5,cnt)].value))
+          bar = BeneficeAfflictionRef.objects.get(id=sheet_id)
+          print("found! %d"%(sheet_id))
+        
         if bar is None:
           bar = BeneficeAfflictionRef(reference=ws[colrow(1,cnt)].value)
         bar.reference = ws[colrow(1,cnt)].value
+        bar.source = ws[colrow(6,cnt)].value
         bar.value = int(ws[colrow(2,cnt)].value)
         bar.category = ws[colrow(3,cnt)].value
         if ws[colrow(4,cnt)].value is None:
