@@ -4,3 +4,4 @@ pdf/
 __py-cache__/
 pdf
 pdfbooks/
+__pycache__/
