@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',    
 ]
 
-#TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
