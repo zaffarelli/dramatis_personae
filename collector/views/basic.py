@@ -2,19 +2,20 @@ from django.http import HttpResponse, Http404, JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect, render_to_response
 from django.core.paginator import Paginator
 
-from .models import Character, Skill#, Shield, ShieldRef, Talent, SkillRef, 
-from .forms import CharacterForm, SkillFormSet, TalentFormSet, BlessingCurseFormSet, WeaponFormSet, ArmorFormSet, ShieldFormSet
-from .utils import render_to_pdf
+from collector.models.characters import Character
+from collector.models.skills import Skill
+from collector.forms.basic import CharacterForm, SkillFormSet, TalentFormSet, BlessingCurseFormSet, WeaponFormSet, ArmorFormSet, ShieldFormSet
+from collector.utils.basic import render_to_pdf
 from django.template.loader import get_template, render_to_string
 from django.template import RequestContext
 import json
 import ast
 from urllib.parse import unquote
 from urllib.parse import parse_qs
-from collector import fs_fics7
+from collector.utils import fs_fics7
 from django.views.decorators.csrf import csrf_exempt
 import datetime
-from collector.xls_collector import export_to_xls, update_from_xls
+from collector.utils.xls_collector import export_to_xls, update_from_xls
 
 MAX_CHAR = 10 # How many avatars per page
 

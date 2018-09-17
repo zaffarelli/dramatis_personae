@@ -1,6 +1,12 @@
 from django import forms
 from django.forms import ModelForm, inlineformset_factory
-from .models import Character, Skill, Armor, Weapon, Shield, BlessingCurse, Talent
+from collector.models.characters import Character
+from collector.models.skills import Skill
+from collector.models.armors import Armor
+from collector.models.weapons import Weapon
+from collector.models.shields import Shield
+from collector.models.blessings_curses import BlessingCurse
+from collector.models.talents import Talent
 
 class CharacterForm(ModelForm):
   class Meta:

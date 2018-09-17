@@ -1,7 +1,14 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import  Skill, SkillRef, SkillAdmin, SkillRefAdmin, Weapon, WeaponAdmin, WeaponRefAdmin,  WeaponRef, Armor, ArmorAdmin, ArmorRefAdmin,  ArmorRef, Shield, ShieldAdmin, ShieldRefAdmin,  ShieldRef, Character, CharacterAdmin, BeneficeAfflictionRef,  BeneficeAfflictionRefAdmin, Act
+from collector.models.skills import Skill, SkillRef, SkillAdmin, SkillRefAdmin
+from collector.models.weapons import Weapon, WeaponAdmin, WeaponRefAdmin, WeaponRef
+from collector.models.armors import Armor, ArmorAdmin, ArmorRefAdmin, ArmorRef
+from collector.models.shields import Shield, ShieldAdmin, ShieldRefAdmin, ShieldRef
+from collector.models.characters import Character
+from collector.models.characters_admin import CharacterAdmin
+from collector.models.benefices_afflictions import BeneficeAfflictionRef, BeneficeAfflictionRefAdmin
+from collector.models.acts import Act
 
 
 admin.site.register(SkillRef, SkillRefAdmin)

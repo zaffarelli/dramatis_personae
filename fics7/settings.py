@@ -25,8 +25,7 @@ SECRET_KEY = '6j@b*@a*k0-23vmk4@i%r@_5es5+8uy!23rl2+1^qx491898-b'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["10.0.4.86","127.0.0.1","localhost","192.168.0.130","192.168.0.110","192.168.0.101"]
-
+ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
@@ -37,8 +36,9 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
+    'django.contrib.staticfiles',    
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -55,7 +55,7 @@ ROOT_URLCONF = 'fics7.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'collector/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -119,5 +119,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
-
 STATIC_ROOT = '/fics7/static/'
+
+#STATIC_URL = '/fics7/static/'
+#STATIC_ROOT = '/webapps/fics7_static/'
+
