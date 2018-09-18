@@ -1,9 +1,13 @@
 from openpyxl import Workbook
 from openpyxl.compat import range
 from openpyxl.utils import get_column_letter
-from collector.models import Character,WeaponRef,SkillRef,ArmorRef,BeneficeAfflictionRef
+from collector.models.characters import Character
+from collector.models.weapons import WeaponRef
+from collector.models.skills import SkillRef
+from collector.models.armors import ArmorRef
+from collector.models.benefices_afflictions import BeneficeAfflictionRef
 from datetime import datetime 
-from collector.fs_fics7 import minmax_from_dc
+from collector.utils.fs_fics7 import minmax_from_dc
 from openpyxl.styles import PatternFill
 from openpyxl.styles import colors
 from openpyxl.styles import Font, Color

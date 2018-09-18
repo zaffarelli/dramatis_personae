@@ -31,6 +31,7 @@ ROLECHOICES = (
   ('03','Superior'),
   ('02','Standard'),
   ('01','Inferior'),
+  ('00','Undefined'),
 )
 
 PROFILECHOICES = (
@@ -40,7 +41,8 @@ PROFILECHOICES = (
   ('standard',"Standard"),
   ('courtisan',"Courtisan"),
   ('scholar',"Scholar"),
-  ('guilder',"Guilder")
+  ('guilder',"Guilder"),
+  ('undefined','Undefined'),
 )
 
 PROFILES = {

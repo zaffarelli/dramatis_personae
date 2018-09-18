@@ -7,10 +7,6 @@ import hashlib
 from collector.utils import fs_fics7
 from collector.utils.basic import write_pdf
 
-
-
-
-###### Characters
 class Character(models.Model):
   pagenum = 0
   full_name = models.CharField(max_length=200)
@@ -63,8 +59,8 @@ class Character(models.Model):
   OP = models.IntegerField(default=0)
   gm_shortcuts = models.TextField(default='',blank=True)
   age = models.IntegerField(default=0)  
-  role = models.CharField(max_length=16,default='02',choices=fs_fics7.ROLECHOICES)
-  profile = models.CharField(max_length=16,default='standard',choices=fs_fics7.PROFILECHOICES)
+  role = models.CharField(max_length=16,default='00',choices=fs_fics7.ROLECHOICES)
+  profile = models.CharField(max_length=16,default='undefined',choices=fs_fics7.PROFILECHOICES)
   occult_level = models.PositiveIntegerField(default=0)
   occult_darkside = models.PositiveIntegerField(default=0)
   occult = models.CharField(max_length=50, default='', blank=True)
@@ -110,11 +106,9 @@ class Character(models.Model):
     """
     exportable = True
     comment = ''
-
     self.stars = ""
     for x in range(1,int(self.role)+1):
-      self.stars += '<i class="fas fa-star fa-xs"></i>'
-    
+      self.stars += '<i class="fas fa-star fa-xs"></i>'    
     self.PA_TOTAL = \
       self.PA_STR + self.PA_CON + self.PA_BOD + self.PA_MOV + \
       self.PA_INT + self.PA_WIL + self.PA_TEM + self.PA_PRE + \
@@ -156,8 +150,10 @@ class Character(models.Model):
       context = {'c':item,'filename':'%04d_%s'%(item.pagenum,item.rid),}
       write_pdf('collector/character_pdf.html',context)
     return proceed      
+
   def __str__(self):
     return '%s' % self.full_name  
+
   def update_field(self, key, value):
     try:
       v = getattr(self, key)
@@ -177,7 +173,12 @@ class Character(models.Model):
     except AttributeError:
       #print("DP: There is no such attribute %s in this model"%key)
       return False, False   
-
+  # Auto build character
+  def autobuild(self):
+    if self.role == '00' and self.profile == 'undefined':
+      return False
+    else:
+      return True
 @receiver(pre_save, sender=Character, dispatch_uid='update_character')
 def update_character(sender, instance, **kwargs):
   if instance.rid != 'none':

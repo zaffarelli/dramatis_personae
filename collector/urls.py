@@ -1,10 +1,10 @@
 from django.conf.urls import url
 from django.urls import path, re_path
-from collector.views import basic
+from collector.views.basic import index,recalc,export,xls_update,edit_character,pdf_character,view_character,get_list, skill_touch, add_character
 
 urlpatterns = [
 	path('', index, name='index'),
-	re_path('^recalc/$', views.recalc, name='recalc'),
+	re_path('^recalc/$', recalc, name='recalc'),
 	#re_path('^by_keyword/persona/(?P<keyword>\w+)/$', views.by_keyword_personae, name='by_keyword'),
 	#re_path('^by_alliance/persona/(?P<alliancehash>\w+)/$', views.by_alliance_personae, name='by_alliance'),
 	#re_path('^by_species/persona/(?P<species>\w+)/$', views.by_species_personae, name='by_species'),
