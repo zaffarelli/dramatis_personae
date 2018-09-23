@@ -5,3 +5,4 @@ __py-cache__/
 pdf
 pdfbooks/
 __pycache__/
+.~lock.
