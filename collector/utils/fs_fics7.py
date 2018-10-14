@@ -6,6 +6,8 @@ from random import randint
 import os
 
 
+
+
 MAX_CHAR = 10
 RELEASE = 0.4
 
@@ -335,7 +337,7 @@ def check_secondary_attributes(ch):
   ch.SA_RUN = ch.PA_MOV *2
 
 
-def check_everyman_skills(ch,skill_class,skill_ref_class):
+def check_everyman_skills(ch):  
   skills = ch.skill_set.all()
   for every in EVERYMAN[ch.species]:
     every_found = False
@@ -345,14 +347,14 @@ def check_everyman_skills(ch,skill_class,skill_ref_class):
         val = int(EVERYMAN[ch.species][every])
         if s.value < val:          
           print("Value fixed for %s (%s)"%(s.skill_ref.reference,val))
-          this_skill = skill_class.objects.get(id=s.id)
+          this_skill = Skill.objects.get(id=s.id)
           this_skill.value = value
           this_skill.save()
         break
     if not every_found:
       print("Not found: %s... Added!"%every)
       val = int(EVERYMAN[ch.species][every])
-      this_skill_ref = skill_ref_class.objects.get(reference=every)
+      this_skill_ref = SkillRef.objects.get(reference=every)
       this_skill = skill_class()
       this_skill.character=ch
       this_skill.skill_ref=this_skill_ref
@@ -363,17 +365,11 @@ def check_everyman_skills(ch,skill_class,skill_ref_class):
 def check_gm_shortcuts(ch,sk):
   """ Check for Gamemaster shortcuts for the character """
   if sk.skill_ref.reference in SHORTCUTS:
-    #print(sk.skill_ref.reference)
-    #print(SHORTCUTS)
-    #print(SHORTCUTS[sk.skill_ref.reference])
     score = sk.value + getattr(ch,SHORTCUTS[sk.skill_ref.reference]['attribute'])
     newshortcut = '%s: <b>%d</b>'%(SHORTCUTS[sk.skill_ref.reference]['label'],score)
     return newshortcut  
   else:
     return ""
-    #score = getattr(ch,SHORTCUTS[sk.skill_ref.reference]['attribute']) -2
-    #newshortcut = "%s: <b>%d</b> (-2)<br/>"%(SHORTCUTS[sk.skill_ref.reference]['label'],score)
-    #return newshortcut
 
 
 def check_nameless_attributes(ch):

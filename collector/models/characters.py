@@ -7,6 +7,7 @@ import hashlib
 from collector.utils import fs_fics7
 from collector.utils.basic import write_pdf
 
+
 class Character(models.Model):
   pagenum = 0
   full_name = models.CharField(max_length=200)
@@ -81,7 +82,8 @@ class Character(models.Model):
     fs_fics7.check_primary_attributes(self)
     fs_fics7.check_secondary_attributes(self)
     fs_fics7.check_root_skills(self)
-    fs_fics7.check_everyman_skills(self, Skill, SkillRef)
+#    fs_fics7.check_everyman_skills(self, Skill, SkillRef)
+    fs_fics7.check_everyman_skills(self)
     gm_shortcuts = ""
     tmp_shortcuts = []
     skills = self.skill_set.all()
