@@ -1,6 +1,7 @@
 from django.conf.urls import url
 from django.urls import path, re_path
 from collector.views.basic import index,recalc,export,xls_update,edit_character,pdf_character,view_character,get_list, skill_touch, add_character
+from collector.views.misc_chart import get_chardar
 
 urlpatterns = [
 	path('', index, name='index'),
@@ -20,6 +21,7 @@ urlpatterns = [
   re_path('^ajax/view/character/(?P<id>\d+)/$', view_character, name='view_character'),
   re_path('^ajax/list/(?P<slug>[\w-]+)/(?P<id>\d+)/$', get_list, name='get_list'),
   re_path('^ajax/skill_touch/$', skill_touch, name='skill_touch'),
-  re_path('^ajax/add/character/$', add_character, name='add_character'),  
+  re_path('^ajax/add/character/$', add_character, name='add_character'),
+  re_path('^api/chardar/(?P<id>\d+)/$', get_chardar, name='get_chardar'),  
 	#re_path('^pdf/persona/(?P<id>\d+)/$', views.persona_as_pdf, name='persona_as_pdf'),
 ]
