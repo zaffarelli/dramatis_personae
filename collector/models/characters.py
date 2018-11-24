@@ -5,6 +5,7 @@ from django.db.models.signals import pre_save, post_save
 from django.dispatch import receiver
 import hashlib
 import collector.models.skills
+from collector.models.epics import Epic
 from collector.utils import fs_fics7
 
 from collector.utils.basic import write_pdf
@@ -69,6 +70,7 @@ class Character(models.Model):
   occult = models.CharField(max_length=50, default='', blank=True)
   challenge = models.TextField(default='',blank=True)  
   ready_for_export =  models.BooleanField(default=False)
+  epic = models.ForeignKey(Epic, null=True, on_delete=models.CASCADE)
 
   def fix(self):
     """ Check / calculate other characteristics """
