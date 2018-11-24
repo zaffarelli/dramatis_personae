@@ -9,7 +9,7 @@ from collector.models.skillrefs import SkillRef
 
 
 MAX_CHAR = 10
-RELEASE = 0.6
+RELEASE = 0.7
 
 '''
   (from Fading Suns CoreRulebook p91-92)
