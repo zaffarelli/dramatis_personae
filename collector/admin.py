@@ -1,7 +1,8 @@
 from django.contrib import admin
 
 # Register your models here.
-from collector.models.skills import Skill, SkillRef, SkillAdmin, SkillRefAdmin
+from collector.models.skillrefs import SkillRef, SkillRefAdmin
+from collector.models.skills import Skill, SkillAdmin
 from collector.models.weapons import Weapon, WeaponAdmin, WeaponRefAdmin, WeaponRef
 from collector.models.armors import Armor, ArmorAdmin, ArmorRefAdmin, ArmorRef
 from collector.models.shields import Shield, ShieldAdmin, ShieldRefAdmin, ShieldRef

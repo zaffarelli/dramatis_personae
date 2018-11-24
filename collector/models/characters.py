@@ -4,7 +4,9 @@ from datetime import datetime
 from django.db.models.signals import pre_save, post_save
 from django.dispatch import receiver
 import hashlib
+import collector.models.skills
 from collector.utils import fs_fics7
+
 from collector.utils.basic import write_pdf
 
 
@@ -60,7 +62,7 @@ class Character(models.Model):
   OP = models.IntegerField(default=0)
   gm_shortcuts = models.TextField(default='',blank=True)
   age = models.IntegerField(default=0)  
-  role = models.CharField(max_length=16,default='00',choices=fs_fics7.ROLECHOICES)
+  role = models.CharField(max_length=16,default='00',choices= fs_fics7.ROLECHOICES)
   profile = models.CharField(max_length=16,default='undefined',choices=fs_fics7.PROFILECHOICES)
   occult_level = models.PositiveIntegerField(default=0)
   occult_darkside = models.PositiveIntegerField(default=0)

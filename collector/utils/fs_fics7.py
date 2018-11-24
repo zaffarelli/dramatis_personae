@@ -5,11 +5,11 @@ import math
 from random import randint
 import os
 
-
+from collector.models.skillrefs import SkillRef
 
 
 MAX_CHAR = 10
-RELEASE = 0.4
+RELEASE = 0.6
 
 '''
   (from Fading Suns CoreRulebook p91-92)
@@ -337,7 +337,8 @@ def check_secondary_attributes(ch):
   ch.SA_RUN = ch.PA_MOV *2
 
 
-def check_everyman_skills(ch):  
+def check_everyman_skills(ch):
+  from collector.models.skills import Skill
   skills = ch.skill_set.all()
   for every in EVERYMAN[ch.species]:
     every_found = False
@@ -355,7 +356,7 @@ def check_everyman_skills(ch):
       print("Not found: %s... Added!"%every)
       val = int(EVERYMAN[ch.species][every])
       this_skill_ref = SkillRef.objects.get(reference=every)
-      this_skill = skill_class()
+      this_skill = Skill()
       this_skill.character=ch
       this_skill.skill_ref=this_skill_ref
       this_skill.value = val
