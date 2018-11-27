@@ -1,10 +1,9 @@
+{% load crispy_forms_tags %}
 
 <div class="classyview">
 <form class='character_form'>
 	{{ form.non_field_errors}}
   {{ form.management_form }}
-  
-
   <input name='cid' type='hidden' value='{{cid}}'>
 
 <table class="formset">
@@ -13,7 +12,7 @@
 	<div class="field_wrapper">
 		{{ form.full_name.errors}}
 		<label for="full_name">Name</label>
-		{{form.full_name}}
+		{{form.full_name }}
 	</div>
 	<div class="field_wrapper">
 		{{ form.entrance.errors}}
@@ -110,7 +109,6 @@
 		{{form.profile}}
 	</div>
 
-
 	<div class="field_wrapper">
 		{{ form.narrative.errors}}
 		<label for="">Narrative</label>
@@ -126,6 +124,30 @@
 	</td></tr>
 </table>
 
+<table class='formset form-horizontal'>
+  <caption>Storyline</caption>
+<tr><td>
+  <div class="row">
+    <div class="col-12">
+		{{form.epic|as_crispy_field}}
+    </div>
+	</div>
+</td></tr>
+<tr><td>
+  <div class="row">
+    <div class="col-12">
+		{{form.drama|as_crispy_field}}
+    </div>
+  </div>
+</td></tr>
+<tr><td>
+   <div class="row">
+    <div class="col-12">		
+		{{form.act|as_crispy_field}}
+    </div>
+  </div>
+</td></tr>
+</table>
 
 
 <table class="formset ">
@@ -246,6 +268,15 @@
 	{% endfor %}
 	</table>
 
+	<table class="formset inline">
+	<caption>Benefices &amp; Afflictions</caption>
+	{{ beneficeafflictions.management_form }}
+	{% for form in beneficeafflictions.forms %}
+	{{ form.as_table }}
+	{% endfor %}
+	</table>
+
+
 <table class="formset inline">
 	<caption>Weapons</caption>
 	{{ weapons.management_form }}
@@ -275,4 +306,5 @@
 
 </form>
 </div>
+
 

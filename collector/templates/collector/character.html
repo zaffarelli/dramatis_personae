@@ -1,6 +1,7 @@
 <div class="classyview">
 <h1>{{ c.full_name }}</h1>
 {{ c.entrance|safe }}</br>
+{{ c.epic|safe }} {% if not c.drama is empty %} {{ c.drama|safe }} {%endif%} {% if not c.act is empty %}{{ c.act|safe }}{% endif %}</br>
 <table class="coreblock" id="base">
 <tr><th>Alliance</th><td>{{ c.alliance|safe }}</td><th>Birthdate</th><td>{{ c.birthdate }} ({{ c.age }} years old)</td></tr>
 <tr><th>Species/Race</th><td>{{ c.species|capfirst }}</td><th>Gender</th><td>{% if c.gender == "male" %}<i class="fas fa-mars"></i>{% else %}<i class="fas fa-venus"></i>{%endif%}</td></tr>
@@ -73,6 +74,21 @@
 {% endfor %}
 </table>
 {%endif%}
+
+{% if c.beneficeaffliction_set.count != 0 %}
+<h2>Benefices/Afflictions</h2>
+<table>
+{% for ba in c.beneficeaffliction_set.all|dictsortreversed:"value" %}
+<tr>
+<td>{{ ba.beneficeaffliction_ref.reference|safe }}</td>
+<td>{{ ba.value }}</td>
+<td>{{ ba.description|safe }}</td>
+</tr>
+{% endfor %}
+</table>
+{%endif%}
+
+
 
 {% if c.talent_set.count != 0 %}
 <h2>Talents</h2>

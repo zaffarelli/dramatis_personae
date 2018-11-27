@@ -3,6 +3,8 @@ from collector.models.characters import Character
 from django.contrib import admin
 
 class WeaponRef(models.Model):
+  class Meta:
+    ordering = ['reference']
   reference = models.CharField(max_length=64,default='',blank=True, unique=True)
   category = models.CharField(max_length=5,choices=(('MELEE',"Melee weapon"),('P',"Pistol/revolver"),('RIF',"Rifle"),('SMG',"Submachinegun"),('SHG',"Shotgun"),('HVY',"Heavy weapon"),('EX',"Exotic weapon")),default='RIF',blank=True)
   weapon_accuracy = models.IntegerField(default=0,blank=True)

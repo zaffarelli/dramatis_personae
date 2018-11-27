@@ -1,12 +1,14 @@
-$fics_front: #FFFFFF;
+
 $fics_back: #605070;
 $fics_dark: darken($fics_back, 10%);
 $fics_light: lighten($fics_back, 10%);
 $fics_darker: darken($fics_back, 20%);
 $fics_darkest: darken($fics_darker,50%);
-$fics_font: #E5DECA;
-$formset_back: #CFCFCE;
+$fics_front: #E5DECA;
+$formset_back: $fics_darker;
 $fics_hl: $fics_light;
+$fics_border_color: #FFC080;
+$fics_subborder_color: darken($fics_back,30%);
 
 
 @font-face {
@@ -32,10 +34,6 @@ $fics_hl: $fics_light;
   src: url('Kanit-Regular.ttf');
 }
     
-
-    
-
-
 .fixed {
   position: fixed;
   top:0; left:0;
@@ -163,7 +161,7 @@ body {
             text-decoration: none;
             &:hover {
                
-               color:$fics_font;
+               color:$fics_front;
             }
           }
           & small {
@@ -176,6 +174,9 @@ body {
       }
     }
     & .details {
+
+
+    
       min-height:1200px;
       & .sub {        
         left: 5px;
@@ -187,22 +188,22 @@ body {
 
       
       z-index:10;
-       background: transparent url("details.png"); 
-            grid-column: 2 / 2;
-            padding: 10px;
-            padding-bottom:50px;
-            font-family: Kanit;
-            font-size: 0.97em;
+      background: transparent url('details.png'); 
+      grid-column: 2 / 2;
+      padding: 10px;
+      padding-bottom:50px;
+      font-family: Kanit;
+      font-size: 0.97em;
             
-            border-left: 1px dashed $fics_font;
-            border-right: 1px dashed $fics_font;
+            border-left: 1px dashed $fics_front;
+            border-right: 1px dashed $fics_front;
             & .sheet{
               width:100%;
               background:white;
             }
             
 
-            & .attributes{
+      & .attributes{
               -moz-column-count: 5;
               -webkit-column-count:5;
               column-count:5;
@@ -212,138 +213,127 @@ body {
               -moz-column-rule: 0px solid #000;
               -webkit-column-rule:0px solid #000;
               column-rule:0px solid #000;
-              color:#000000;
-            }
+    //          color:#000000;
+      }
 
 
-            & .skillsview{
-              -moz-column-count: 3;
-              -webkit-column-count:3;
-              column-count:3;
-              -moz-column-gap: 5px;
-              -webkit-column-gap:5px;
-              column-gap:5px;
-              -moz-column-rule: 1px solid #000;
-              -webkit-column-rule:1px solid #000;
-              column-rule:1px dotted $fics_light;
-              color:#000000;
-              & table{
-                font-size:7pt;
-                width: 100%;
-                & tr{
-                  & td{
-                    width:auto;
-                  }
-                  & th{
-                    background:silver;
-                    width:8ex;
-                    &.edit span:hover{
-                      color:purple;
-                    }
-                  }
-                }
-              }
+      & .skillsview{
+        column-count:3;
+        column-gap:5px;
+        column-rule:1px dotted $fics_light;
+        & table{
+        font-size:7pt;
+        width: 100%;
+        & tr{
+          & td{
+            width:auto;
+          }
+          & th{
+            background:$fics_darker;
+            width:8ex;
+            font-size:1.2em;
+            &.edit span:hover{
+              color:purple;
+              font-size:0.8em;
             }
+          }
+        }
+      }
+    }
             
-            & .classyview{
-              border:1px solid black;
-              border-radius:10px 0 10px 0;
-              padding:10px;
+    & .classyview{    
+      border:1px solid $fics_border_color;
+      border-radius:10px 0 10px 0;
+      padding:10px;
               /*background:white url(details.png);*/
-              background-color:#FCFCFC;
-              width:750px;
-              margin-left:auto;
-              margin-right:auto;
-              display:block;
+      background-color:#101010;
+      width:75%;
+      margin-left:auto;
+      margin-right:auto;
+      display:block;
               
-              -moz-column-count: 1;
-              -webkit-column-count:1;
-              column-count:1;
-              -moz-column-gap: 10px;
-              -webkit-column-gap:10px;
-              column-gap:10px;
+      -moz-column-count: 1;
+      -webkit-column-count:1;
+      column-count:1;
+      -moz-column-gap: 10px;
+      -webkit-column-gap:10px;
+      column-gap:10px;
               
-              -moz-column-rule: 1px solid #000;
-              -webkit-column-rule:1px solid #000;
-              column-rule:1px dotted $fics_light;
-              color:#000000;
-              
-            }
+      -moz-column-rule: 1px solid #000;
+      -webkit-column-rule:1px solid #000;
+      column-rule:1px dotted $fics_light;
+      color:#F0F0F0;
+    }
 
-            & .narrative{
-              border:1px solid black;
+
+    & .narrative{
+              border:1px solid $fics_subborder_color;
               border-radius:5px;
               padding:5px;
               column-count:2;
               column-gap:10px;
               column-rule:1px dotted $fics_light;
-              font-family: Rokkit;
-            } 
+              //font-family: Rokkit;
+    } 
             
-            & table.formset {
-                &.inline{
-                  //display:inline-block;
-                }
-                padding: 1ex 0.5em;
-                width:100%;
-                border-radius: 0.5em;
-                border: 1px solid black;
-                background: $formset_back;
+    & table.formset {
+      
+      padding: 1ex 0.5em;
+      width:100%;
+      border-radius: 0.5em;
+      border: 1px solid black;
+      background: $formset_back;
+      & tr.row1 {
+        background: lighten($formset_back, 10%);
+      }
+      & tr.row2 {
+        background: lighten($formset_back, 20%);
+      }
+      & td{
+        vertical-align:top;
+      }
 
-                & tr.row1 {
-                    background: lighten($formset_back, 10%);
-                }
+      & caption {
+        font-family: 'Prompt';
+        font-size: 1.3em;
+        side: top;                
+      }
 
-                & tr.row2 {
-                    background: lighten($formset_back, 20%);
-                }
-
-                & td{
-                  vertical-align:top;
-                }
-
-                & caption {
-                    font-family: 'Prompt';
-                    font-size: 1.3em;
-                }
-
-                & .field_wrapper {
-                    & label {
-                      width: 10ex;
-                      display: inline-block;
-                      vertical-align: top;
-                      text-align:right;
-                    }
-                    & input, & textarea, & select{
-                      box-sizing: border-box;
-                      display: inline-block;
-                      font-family: Kanit;
-                      font-size:0.93em;
-                    }
-                    & textarea{
-                      padding:0.5em;
-                      width:50ex;
-                    }
-                    & input[type=number] {
-                        width: 10ex;
-                    }
-                }
-
-                
-            }
-
-            & table.stats {
-                display: inline-block;
-                border: 1px solid black;
-                border-radius: 6px;
-
-
-                & td {
-                    height: 2em;
-                    width:25ex;
-          }
+      & .field_wrapper {
+        & label {
+          width: 10ex;
+          display: inline-block;
+          vertical-align: top;
+          text-align:right;
         }
-        & table.coreblock {
+        & input, & textarea, & select{
+          box-sizing: border-box;
+          display: inline-block;
+          font-family: Kanit;
+          font-size:0.93em;
+        }
+      & textarea{
+        padding:0.5em;
+        width:50ex;
+      }
+      & input[type=number] {
+        width: 10ex;
+      }
+    }
+
+  }
+
+    & table.stats {
+      display: inline-block;
+      border: 1px solid $fics_subborder_color;
+      border-radius: 6px;
+      & td {
+        height: 2em;
+        width:25ex;
+      }
+    }
+
+    & table.coreblock {
           display: inline-block;
           border: 1px solid black;
           border-radius: 6px;
@@ -356,11 +346,16 @@ body {
             width: 60ex;                    
           }
         }
-        & H1, & H2 {
+        & h1, & h2, & h3 {
           font-family: 'Prompt';
           font-weight: Normal;
           margin:0;
+          color:#848;
+          margin-top:0.5em;
         }
+        & h1{ font-size: 1.6em; color: lighten(#848,10%); }
+        & h2{ font-size: 1.4em; }
+        & h3{ font-size: 1.2em; }
       }
     }
 

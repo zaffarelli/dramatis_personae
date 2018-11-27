@@ -35,7 +35,7 @@ body {
     padding: 5px;
     padding-left: 30%;
     padding-right: 10%;
-    color: #FFFFFF;
+    color: #E5DECA;
     font-size: 0.73em;
     background: #605070;
     height: 50px;
@@ -46,7 +46,7 @@ body {
     padding: 10px;
     padding-top: 0.5em;
     margin: 0;
-    color: #FFFFFF;
+    color: #E5DECA;
     font-family: Kanit;
     font-size: 9pt;
     overflow-y: hidden; }
@@ -78,7 +78,7 @@ body {
     body .wrapper .list {
       min-height: 1200px;
       background: transparent url("details.png");
-      color: #FFFFFF;
+      color: #E5DECA;
       border-radius: 10px;
       grid-column: 1 / 1; }
       body .wrapper .list .pagination {
@@ -88,7 +88,7 @@ body {
           margin: 0 0.1em;
           display: inline-block;
           padding: 0.5em;
-          color: #FFFFFF;
+          color: #E5DECA;
           font-size: 1em;
           background: #473b52;
           padding: 0.5em 0.8em;
@@ -98,7 +98,7 @@ body {
       body .wrapper .list .character_actions {
         display: inline-block;
         background: #473b52;
-        color: #FFFFFF;
+        color: #E5DECA;
         padding: 2px;
         border: 1px solid transparent;
         border-radius: 2px; }
@@ -114,7 +114,7 @@ body {
           margin-bottom: 1em;
           font-size: 0.83em; }
           body .wrapper .list ul li a, body .wrapper .list ol li a {
-            color: #FFFFFF;
+            color: #E5DECA;
             text-decoration: none; }
             body .wrapper .list ul li a:hover, body .wrapper .list ol li a:hover {
               color: #E5DECA; }
@@ -151,36 +151,30 @@ body {
         column-gap: 5px;
         -moz-column-rule: 0px solid #000;
         -webkit-column-rule: 0px solid #000;
-        column-rule: 0px solid #000;
-        color: #000000; }
+        column-rule: 0px solid #000; }
       body .wrapper .details .skillsview {
-        -moz-column-count: 3;
-        -webkit-column-count: 3;
         column-count: 3;
-        -moz-column-gap: 5px;
-        -webkit-column-gap: 5px;
         column-gap: 5px;
-        -moz-column-rule: 1px solid #000;
-        -webkit-column-rule: 1px solid #000;
-        column-rule: 1px dotted #7a658e;
-        color: #000000; }
+        column-rule: 1px dotted #7a658e; }
         body .wrapper .details .skillsview table {
           font-size: 7pt;
           width: 100%; }
           body .wrapper .details .skillsview table tr td {
             width: auto; }
           body .wrapper .details .skillsview table tr th {
-            background: silver;
-            width: 8ex; }
+            background: #2d2635;
+            width: 8ex;
+            font-size: 1.2em; }
             body .wrapper .details .skillsview table tr th.edit span:hover {
-              color: purple; }
+              color: purple;
+              font-size: 0.8em; }
       body .wrapper .details .classyview {
-        border: 1px solid black;
+        border: 1px solid #FFC080;
         border-radius: 10px 0 10px 0;
         padding: 10px;
         /*background:white url(details.png);*/
-        background-color: #FCFCFC;
-        width: 750px;
+        background-color: #101010;
+        width: 75%;
         margin-left: auto;
         margin-right: auto;
         display: block;
@@ -193,30 +187,30 @@ body {
         -moz-column-rule: 1px solid #000;
         -webkit-column-rule: 1px solid #000;
         column-rule: 1px dotted #7a658e;
-        color: #000000; }
+        color: #F0F0F0; }
       body .wrapper .details .narrative {
-        border: 1px solid black;
+        border: 1px solid #141017;
         border-radius: 5px;
         padding: 5px;
         column-count: 2;
         column-gap: 10px;
-        column-rule: 1px dotted #7a658e;
-        font-family: Rokkit; }
+        column-rule: 1px dotted #7a658e; }
       body .wrapper .details table.formset {
         padding: 1ex 0.5em;
         width: 100%;
         border-radius: 0.5em;
         border: 1px solid black;
-        background: #CFCFCE; }
+        background: #2d2635; }
         body .wrapper .details table.formset tr.row1 {
-          background: #e8e8e8; }
+          background: #473b52; }
         body .wrapper .details table.formset tr.row2 {
-          background: white; }
+          background: #605070; }
         body .wrapper .details table.formset td {
           vertical-align: top; }
         body .wrapper .details table.formset caption {
           font-family: 'Prompt';
-          font-size: 1.3em; }
+          font-size: 1.3em;
+          side: top; }
         body .wrapper .details table.formset .field_wrapper label {
           width: 10ex;
           display: inline-block;
@@ -234,7 +228,7 @@ body {
           width: 10ex; }
       body .wrapper .details table.stats {
         display: inline-block;
-        border: 1px solid black;
+        border: 1px solid #141017;
         border-radius: 6px; }
         body .wrapper .details table.stats td {
           height: 2em;
@@ -249,10 +243,19 @@ body {
           width: 15ex; }
         body .wrapper .details table.coreblock td {
           width: 60ex; }
-      body .wrapper .details H1, body .wrapper .details H2 {
+      body .wrapper .details h1, body .wrapper .details h2, body .wrapper .details h3 {
         font-family: 'Prompt';
         font-weight: Normal;
-        margin: 0; }
+        margin: 0;
+        color: #848;
+        margin-top: 0.5em; }
+      body .wrapper .details h1 {
+        font-size: 1.6em;
+        color: #aa55aa; }
+      body .wrapper .details h2 {
+        font-size: 1.4em; }
+      body .wrapper .details h3 {
+        font-size: 1.2em; }
   body .btn {
     display: inline-block;
     padding: 0;
@@ -275,7 +278,7 @@ body {
     height: 25px; }
 
 .pdflink {
-  color: #FFFFFF;
+  color: #E5DECA;
   text-decoration: none;
   background: #473b52;
   display: inline-block;

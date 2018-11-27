@@ -3,6 +3,8 @@ from collector.models.characters import Character
 from django.contrib import admin
 
 class ArmorRef(models.Model):
+  class Meta:
+    ordering = ['reference']
   reference = models.CharField(max_length=64,default='',blank=True, unique=True)
   category = models.CharField(max_length=6,choices=(('Soft',"Soft Armor"),('Medium',"Medium Armor"),('Hard',"Hard Armor")),default='Soft',blank=True)
   head = models.BooleanField(default=False)

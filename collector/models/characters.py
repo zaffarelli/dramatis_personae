@@ -6,6 +6,8 @@ from django.dispatch import receiver
 import hashlib
 import collector.models.skills
 from collector.models.epics import Epic
+from collector.models.dramas import Drama
+from collector.models.acts import Act
 from collector.utils import fs_fics7
 
 from collector.utils.basic import write_pdf
@@ -59,6 +61,7 @@ class Character(models.Model):
   SK_TOTAL = models.IntegerField(default=0)
   TA_TOTAL = models.IntegerField(default=0)
   BC_TOTAL = models.IntegerField(default=0)
+  BA_TOTAL = models.IntegerField(default=0)
   AP = models.IntegerField(default=0)
   OP = models.IntegerField(default=0)
   gm_shortcuts = models.TextField(default='',blank=True)
@@ -70,15 +73,22 @@ class Character(models.Model):
   occult = models.CharField(max_length=50, default='', blank=True)
   challenge = models.TextField(default='',blank=True)  
   ready_for_export =  models.BooleanField(default=False)
-  epic = models.ForeignKey(Epic, null=True, on_delete=models.CASCADE)
+  epic = models.ForeignKey(Epic, null=True, blank=True, on_delete=models.SET_NULL)
+  drama = models.ForeignKey(Drama, null=True, blank=True, on_delete=models.SET_NULL)
+  act = models.ForeignKey(Act, null=True, blank=True, on_delete=models.SET_NULL)
 
-  def fix(self):
+  def fix(self,conf=None):
     """ Check / calculate other characteristics """
     self.check_exportable()
     # Age completion
-    if self.birthdate < 1000:
-      self.birthdate = 5017 - self.birthdate
-    self.age = 5017 - self.birthdate
+    if conf == None:
+      if self.birthdate < 1000:
+        self.birthdate = 5017 - self.birthdate
+      self.age = 5017 - self.birthdate
+    else:
+      if self.birthdate < 1000:
+        self.birthdate = conf.epic.era - self.birthdate
+      self.age = conf.epic.era - self.birthdate      
     # NPC fix
     if self.player == 'none':
       self.player = ''
@@ -101,7 +111,7 @@ class Character(models.Model):
       gm_shortcuts += fs_fics7.check_nameless_attributes(self)
     self.gm_shortcuts = gm_shortcuts
     self.ready_for_export = self.check_exportable()
-  def check_exportable(self):
+  def check_exportable(self,conf=None):
     """
     Is that avatar finished?
     We check this with the fics rule for extras:
@@ -132,8 +142,11 @@ class Character(models.Model):
     blessingcurses = self.blessingcurse_set.all()
     for bc in blessingcurses:
       self.BC_TOTAL += bc.value
+    beneficeafflictions = self.beneficeaffliction_set.all()
+    for ba in beneficeafflictions:
+      self.BA_TOTAL += ba.value
     self.AP = self.PA_TOTAL
-    self.OP = self.SK_TOTAL + self.TA_TOTAL + self.BC_TOTAL
+    self.OP = self.SK_TOTAL + self.TA_TOTAL + self.BC_TOTAL + self.BA_TOTAL
     #self.challenge = self.PA_TOTAL*3 + self.SK_TOTAL + self.TA_TOTAL + self.BC_TOTAL
     roleok = fs_fics7.check_role(self)
     if roleok == False:
@@ -160,24 +173,49 @@ class Character(models.Model):
   def __str__(self):
     return '%s' % self.full_name  
 
+#  def simple(self, key, value):
+#    x = self._meta.get_field(str(key)).get_internal_type()
+#    print("is it a foreignkey? %s"%(x))
+
   def update_field(self, key, value):
+    """ Field individual validation during sanitize """
     try:
       v = getattr(self, key)
       val = value[0]
-      if type(v)==type(1):
-        valfix = int(val)+0        
-      elif type(v)==type(False):
-        valfix = bool(val)
+      valfix = val
+      field_type = self._meta.get_field(str(key)).get_internal_type()
+      if field_type == 'ForeignKey':
+        related_model = str(self._meta.get_field(str(key)).related_model)
+        #print("FOREIGNKEY SITUATION (%s)"%(related_model))
+        if related_model == "<class 'collector.models.epics.Epic'>":        
+          valfix = Epic(pk=val)
+          #print("Foreign key is an Epic")
+        elif related_model == "<class 'collector.models.dramas.Drama'>":
+          valfix = Drama(pk=val)
+          #print("Foreign key is a Drama")
+        elif related_model == "<class 'collector.models.acts.Act'>":
+          valfix = Act(pk=val)
+          #print("Foreign key is an Act")
+        else:
+          pass
+          #print("Foreign key link not found: %s"%(related_model))
       else:
-        valfix = str(val)
+        if type(v)==type(1):
+          valfix = int(val)+0        
+        elif type(v)==type(False):
+          valfix = bool(val)
+        else:
+          valfix = str(val)
+      print(valfix)
       if valfix != v:
         #print("%s --> %s:%s <> %s:%s"%(key,v,type(v),valfix,type(valfix)))
+        #print("%s"%(type(self.key)))
         setattr(self, key, valfix)
         return key,valfix
       else:
         return False,False
     except AttributeError:
-      #print("DP: There is no such attribute %s in this model"%key)
+      #print("DP: There is no such attribute %s in this model"%(key))
       return False, False   
   # Auto build character
   def autobuild(self):
@@ -186,9 +224,9 @@ class Character(models.Model):
     else:
       return True
 @receiver(pre_save, sender=Character, dispatch_uid='update_character')
-def update_character(sender, instance, **kwargs):
+def update_character(sender, instance, conf=None, **kwargs):
   if instance.rid != 'none':
-    instance.fix()
+    instance.fix(conf)
   #instance.rid = hashlib.sha1(bytes(instance.full_name,'utf-8')).hexdigest()
   instance.rid = fs_fics7.get_rid(instance.full_name)
   instance.alliancehash = hashlib.sha1(bytes(instance.alliance,'utf-8')).hexdigest()

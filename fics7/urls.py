@@ -22,9 +22,12 @@ admin.site.site_header = "Dramatis Personae Administration"
 admin.site.site_title = "Dramatis Personae Administration portal"
 admin.site.index_title = "Welcome to Dramatis Personae. Be a good gamemaster."
 
+import debug_toolbar
+
 urlpatterns = [
 	re_path('admin/', admin.site.urls),
 	path('', include('collector.urls')),
+  re_path('__debug__', include(debug_toolbar.urls)),
 ]
 
 

@@ -2,6 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 from collector.models.epics import Epic, EpicAdmin
+from collector.models.dramas import Drama, DramaAdmin
 from collector.models.acts import Act, ActAdmin
 from collector.models.skillrefs import SkillRef, SkillRefAdmin
 from collector.models.skills import Skill, SkillAdmin
@@ -11,7 +12,7 @@ from collector.models.shields import Shield, ShieldAdmin, ShieldRefAdmin, Shield
 from collector.models.characters import Character
 from collector.models.characters_admin import CharacterAdmin
 from collector.models.benefices_afflictions import BeneficeAfflictionRef, BeneficeAfflictionRefAdmin
-
+from collector.models.configs import Config, ConfigAdmin
 
 
 admin.site.register(SkillRef, SkillRefAdmin)
@@ -25,5 +26,7 @@ admin.site.register(ShieldRef, ShieldRefAdmin)
 admin.site.register(BeneficeAfflictionRef, BeneficeAfflictionRefAdmin)
 admin.site.register(Character, CharacterAdmin)
 admin.site.register(Epic, EpicAdmin)
+admin.site.register(Drama, DramaAdmin)
 admin.site.register(Act, ActAdmin)
+admin.site.register(Config, ConfigAdmin)
 

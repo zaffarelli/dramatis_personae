@@ -4,6 +4,8 @@ from django.dispatch import receiver
 from django.db.models.signals import pre_save, post_save
 
 class Talent(models.Model):
+  class Meta:
+    ordering = ['name']
   character = models.ForeignKey(Character, on_delete=models.CASCADE)
   name = models.CharField(max_length=64,default='',blank=True)
   attributes_list = models.CharField(max_length=128,default='',blank=True)
