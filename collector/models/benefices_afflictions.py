@@ -12,7 +12,7 @@ class BeneficeAfflictionRef(models.Model):
   source = models.CharField(max_length=32, default='', null=True, blank=True)
   ordering = ('reference',)
   def __str__(self):
-    return '%s (%d)' % (self.reference,self.value)
+    return '%s (%d) %s' % (self.reference,self.value , self.description)
 
 class BeneficeAfflictionRefAdmin(admin.ModelAdmin):
   ordering = ('reference',)

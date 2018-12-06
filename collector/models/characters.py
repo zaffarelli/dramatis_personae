@@ -62,6 +62,9 @@ class Character(models.Model):
   TA_TOTAL = models.IntegerField(default=0)
   BC_TOTAL = models.IntegerField(default=0)
   BA_TOTAL = models.IntegerField(default=0)
+  weapon_cost = models.IntegerField(default=0)
+  armor_cost = models.IntegerField(default=0)
+  shield_cost = models.IntegerField(default=0)
   AP = models.IntegerField(default=0)
   OP = models.IntegerField(default=0)
   gm_shortcuts = models.TextField(default='',blank=True)
@@ -132,6 +135,10 @@ class Character(models.Model):
     self.SK_TOTAL = 0
     self.TA_TOTAL = 0
     self.BC_TOTAL = 0
+    self.BA_TOTAL = 0
+    self.weapon_cost = 0
+    self.armor_cost = 0
+    self.shield_cost = 0
     skills = self.skill_set.all()
     for s in skills:
       if s.skill_ref.is_root == False:         
@@ -144,11 +151,27 @@ class Character(models.Model):
       self.BC_TOTAL += bc.value
     beneficeafflictions = self.beneficeaffliction_set.all()
     for ba in beneficeafflictions:
-      self.BA_TOTAL += ba.value
+      self.BA_TOTAL += ba.value + ba.beneficeaffliction_ref.value
     self.AP = self.PA_TOTAL
     self.OP = self.SK_TOTAL + self.TA_TOTAL + self.BC_TOTAL + self.BA_TOTAL
     #self.challenge = self.PA_TOTAL*3 + self.SK_TOTAL + self.TA_TOTAL + self.BC_TOTAL
+
+    weapons = self.weapon_set.all()    
+    for w in weapons:
+      self.weapon_cost += w.weapon_ref.cost
+
+    armors = self.armor_set.all()    
+    for a in armors:
+      self.armor_cost += a.armor_ref.cost
+
+    shields = self.shield_set.all()    
+    for s in shields:
+      self.shield_cost += s.shield_ref.cost
+
     roleok = fs_fics7.check_role(self)
+
+    self.challenge = fs_fics7.update_challenge(self)
+    
     if roleok == False:
       exportable = False
     if self.player != '':

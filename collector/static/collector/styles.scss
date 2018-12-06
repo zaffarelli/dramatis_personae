@@ -114,7 +114,7 @@ body {
     & .list {
       min-height:1200px;
       background: transparent url("details.png");
-      & .pagination {
+      & .pagination, & .storyline {
         text-align: center;
         margin-top: 1em;
         & a, & strong,  & span.nav {
@@ -232,6 +232,7 @@ body {
             background:$fics_darker;
             width:8ex;
             font-size:1.2em;
+            line-height:0.8em;
             &.edit span:hover{
               color:purple;
               font-size:0.8em;
@@ -411,4 +412,9 @@ body {
 
 .golden{
   color: #ffcc22;
+}
+
+.blank{
+  color: #300030;
+  opacity: 0.5;
 }

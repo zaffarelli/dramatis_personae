@@ -1,4 +1,4 @@
-from collector.utils import fs_fics7
+from collector.utils import fics_references
 
 def commons(request):
-    return { 'dp_version': fs_fics7.RELEASE }
+    return { 'dp_version': fics_references.RELEASE }

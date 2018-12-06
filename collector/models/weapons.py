@@ -4,7 +4,7 @@ from django.contrib import admin
 
 class WeaponRef(models.Model):
   class Meta:
-    ordering = ['reference']
+    ordering = ['category','damage_class','reference']
   reference = models.CharField(max_length=64,default='',blank=True, unique=True)
   category = models.CharField(max_length=5,choices=(('MELEE',"Melee weapon"),('P',"Pistol/revolver"),('RIF',"Rifle"),('SMG',"Submachinegun"),('SHG',"Shotgun"),('HVY',"Heavy weapon"),('EX',"Exotic weapon")),default='RIF',blank=True)
   weapon_accuracy = models.IntegerField(default=0,blank=True)
@@ -30,7 +30,7 @@ class Weapon(models.Model):
     return '%s=%s' % (self.character.full_name,self.weapon_ref.reference)
 
 class WeaponRefAdmin(admin.ModelAdmin):
-  ordering = ('category','reference',)  
+  ordering = ('category','damage_class','reference',)  
 
 class WeaponAdmin(admin.ModelAdmin):
   ordering = ('character','weapon_ref',)

@@ -11,7 +11,7 @@
       <i class="fas fa-share golden"></i> 
     {% endif %}
   </div>{{c.stars|safe}}
-  </br><i class="fas fa-th-large"></i> {{ c.AP }} <i class="fas fa-th-list"></i> {{ c.SK_TOTAL }} <i class="fas fa-th"></i> {{ c.TA_TOTAL }} <i class="fas fa-outdent"></i> {{ c.BC_TOTAL }} <i class="fas fa-newspaper"></i> {{ c.OP }}
+  <br/>{{ c.challenge|safe }}
   <br/>{{ c.alliance|safe }} ({%if c.keyword != '' %}{{c.keyword|safe}}{%endif%})
   <br/>
 

@@ -81,10 +81,10 @@ body {
       color: #E5DECA;
       border-radius: 10px;
       grid-column: 1 / 1; }
-      body .wrapper .list .pagination {
+      body .wrapper .list .pagination, body .wrapper .list .storyline {
         text-align: center;
         margin-top: 1em; }
-        body .wrapper .list .pagination a, body .wrapper .list .pagination strong, body .wrapper .list .pagination span.nav {
+        body .wrapper .list .pagination a, body .wrapper .list .pagination strong, body .wrapper .list .pagination span.nav, body .wrapper .list .storyline a, body .wrapper .list .storyline strong, body .wrapper .list .storyline span.nav {
           margin: 0 0.1em;
           display: inline-block;
           padding: 0.5em;
@@ -164,7 +164,8 @@ body {
           body .wrapper .details .skillsview table tr th {
             background: #2d2635;
             width: 8ex;
-            font-size: 1.2em; }
+            font-size: 1.2em;
+            line-height: 0.8em; }
             body .wrapper .details .skillsview table tr th.edit span:hover {
               color: purple;
               font-size: 0.8em; }
@@ -299,5 +300,9 @@ body {
 
 .golden {
   color: #ffcc22; }
+
+.blank {
+  color: #300030;
+  opacity: 0.5; }
 
 /*# sourceMappingURL=styles.css.map */

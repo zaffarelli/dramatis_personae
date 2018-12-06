@@ -181,7 +181,8 @@ function rebootlinks(){
           $('th#'+target).html(answer);
         },
       error: function(answer){
-          $('th#'+target).html(answer);
+          console.log(answer);
+          $('th#'+target).html(answer.responseText);
        },
     });
   

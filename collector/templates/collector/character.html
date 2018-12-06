@@ -1,3 +1,4 @@
+{% load fics_filters %}
 <div class="classyview">
 <h1>{{ c.full_name }}</h1>
 {{ c.entrance|safe }}</br>
@@ -16,7 +17,7 @@
 {{ c.narrative|safe }}
 </div>
 
-<h2>Attributes</h2>
+<h2>Attributes ({{c.PA_TOTAL}}x3)</h2>
 <div class='attributes'>
 <table class="stats" id="phy">
 <tr><th>STR</th><td>{{c.PA_STR}}</td><th>CON</th><td>{{c.PA_CON}}</td></tr>
@@ -46,8 +47,10 @@
 </table>
 </div>
 
+
+
 {% if c.skill_set.count != 0 %}
-<h2>Skills</h2>
+<h2>Skills ({{c.SK_TOTAL}})</h2>
 <div class='skillsview'>
 {% for skill in c.skill_set.all|dictsort:"skill_ref.reference" %}
 <table>
@@ -56,14 +59,14 @@
 			  {{ skill.skill_ref.reference|safe }}
 				{% if skill.skill_ref.is_root %}</strong>{% endif %}			
 </td>
-<th id='val_{{skill.id}}'>{{ skill.value }}</th><th class='edit' id='sk_{{skill.id}}'><span class='fa fa-plus-circle'></span><span class='fa fa-minus-circle'></span><span class='fa fa-exclamation-circle'></span></th></tr>
+<th id='val_{{skill.id}}'>{{ skill.value|as_bullets|safe }}</th><th class='edit' id='sk_{{skill.id}}'><span class='fa fa-plus-circle'></span><span class='fa fa-minus-circle'></span><span class='fa fa-exclamation-circle'></span></th></tr>
 </table>
 {% endfor %}
 </div>
 {% endif %}
 
 {% if c.blessingcurse_set.count != 0 %}
-<h2>Blessings/Curses</h2>
+<h2>Blessings/Curses ({{c.BC_TOTAL}})</h2>
 <table>
 {% for bc in c.blessingcurse_set.all|dictsortreversed:"value" %}
 <tr>
@@ -76,13 +79,14 @@
 {%endif%}
 
 {% if c.beneficeaffliction_set.count != 0 %}
-<h2>Benefices/Afflictions</h2>
+<h2>Benefices/Afflictions ({{c.BA_TOTAL}})</h2>
 <table>
 {% for ba in c.beneficeaffliction_set.all|dictsortreversed:"value" %}
 <tr>
 <td>{{ ba.beneficeaffliction_ref.reference|safe }}</td>
+<td>{{ ba.beneficeaffliction_ref.value }}</td>
 <td>{{ ba.value }}</td>
-<td>{{ ba.description|safe }}</td>
+<td>{{ ba.beneficeaffliction_ref.description}}<br/>{{ ba.description|safe }}</td>
 </tr>
 {% endfor %}
 </table>
@@ -91,7 +95,7 @@
 
 
 {% if c.talent_set.count != 0 %}
-<h2>Talents</h2>
+<h2>Talents ({{c.TA_TOTAL}})</h2>
 <table>
 {% for t in c.talent_set.all|dictsortreversed:"value" %}
 <tr>
@@ -105,7 +109,7 @@
 
 
 {% if c.weapon_set.count != 0 %}
-<h2>Weapons</h2>
+<h2>Weapons ({{c.weapon_cost}})</h2>
 <table>{% for w in c.weapon_set.all|dictsort:"weapon_ref.reference" %}
 {% if w.weapon_ref.category == "MELEE" %}
 <tr><td>{{ w.weapon_ref.reference|safe }} <i class='fa fa-caret-up fa-xs'></i> {{w.weapon_ref.category}} <i class='fa fa-caret-up fa-xs'></i> WA:{{ w.weapon_ref.weapon_accuracy }} <i class='fa fa-caret-up fa-xs'></i> {{w.weapon_ref.conceilable}} <i class='fa fa-caret-up fa-xs'></i> {{ w.weapon_ref.availability }} <i class='fa fa-caret-up fa-xs'></i> DC:{{ w.weapon_ref.damage_class|center:"8" }} <i class='fa fa-caret-up fa-xs'></i> STR:{{ w.weapon_ref.str_min }} <i class='fa fa-caret-up fa-xs'></i> RNG:{{ w.weapon_ref.rng }} <i class='fa fa-caret-up fa-xs'></i> {{ w.weapon_ref.rel }} {% if not w.description is empty %}<br/>{{ w.description|safe }}{% endif %}</td></tr>
@@ -118,7 +122,7 @@
 
 
 {% if c.armor_set.count != 0 %}
-<h2>Armor</h2>
+<h2>Armor ({{c.armor_cost}})</h2>
 <table>{% for a in c.armor_set.all|dictsort:"armor_ref.stopping_power" %}
 <tr><td>{{ a.armor_ref.reference|safe }} <i class='fa fa-caret-up fa-xs'></i> {{a.armor_ref.category}} <i class='fa fa-caret-up fa-xs'></i> SP:{{ a.armor_ref.stopping_power }} <i class='fa fa-caret-up fa-xs'></i> Protection [
 {% if a.armor_ref.head %} Head {%endif%}
@@ -132,7 +136,7 @@
 {%endif%}
 
 {% if c.shield_set.count != 0 %}
-<h2>Energy Shield</h2>
+<h2>Energy Shield ({{c.shield_cost}})</h2>
 <table>{% for s in c.shield_set.all|dictsort:"shield_ref.reference" %}
 <tr><td>{{ s.shield_ref.reference|safe }} <i class='fa fa-caret-up fa-xs'></i> {{s.shield_ref.protection_min}}/{{ s.shield_ref.protection_max }} <i class='fa fa-caret-up fa-xs'></i> Hits:{{s.shield_ref.hits}} <i class='fa fa-caret-up fa-xs'></i> {% if s.shield_ref.is_compatible_with_medium_armor %}(+Medium Armor){%endif%} {% if s.shield_ref.is_compatible_with_hard_armor %}(+Hard Armor){%endif%} 
 {% if not s.shield_ref.description is empty %}<br/>{{ s.shield_ref.description|safe }}{% endif %}</td></tr>
@@ -142,6 +146,5 @@
 
 <hr/>
 <i class="fas fa-file-pdf"></i> <tt>{{ c.rid }}</tt>
-<br/><i class="fas fa-th-large"></i> {{ c.AP }} <i class="fas fa-th-list"></i> {{ c.SK_TOTAL }} <i class="fas fa-th"></i> {{ c.TA_TOTAL }} <i class="fas fa-outdent"></i> {{ c.BC_TOTAL }} <i class="fas fa-newspaper"></i> {{ c.OP }}
 <br/>{{c.challenge|safe}}
 </div>
