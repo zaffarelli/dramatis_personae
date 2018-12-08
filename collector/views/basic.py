@@ -38,26 +38,4 @@ def skill_touch(request):
     return HttpResponse(answer, content_type='text/html')
   return Http404
 
-def get_storyline(request,id):
-  if request.is_ajax:
-    if request.method == 'POST':
-      cid = request.POST.get('cid')
-      config_item = Config.objects.get(pk=cid)
-    else:
-      config_item = get_object_or_404(Config, id=id)
-      form = ChangeConfigForm(request.POST or None, instance = config_item)
-      template = get_template('collector/config_select.html')
-      html = template.render({'c':edit_context},request)      
-  else:
-    html = 'oops, not ajax'
-  context = { 'config': html }
-  return JsonResponse(context)
-# <div class='storyline'>
- # <select>
-  # <option value="volvo">Volvo</option>
-  # <option value="saab">Saab</option>
-  # <option value="mercedes">Mercedes</option>
-  # <option value="audi">Audi</option>
-# </select> 
-# </div>    
 

@@ -3,6 +3,7 @@ from django.shortcuts import render, get_object_or_404, redirect, render_to_resp
 from django.core.paginator import Paginator
 
 from collector.models.characters import Character
+from collector.models.configs import Config
 from collector.models.skills import Skill
 from collector.forms.basic import CharacterForm, SkillFormSet, TalentFormSet, BlessingCurseFormSet, BeneficeAfflictionFormSet, WeaponFormSet, ArmorFormSet, ShieldFormSet
 from collector.utils.basic import render_to_pdf
@@ -42,6 +43,23 @@ def get_list(request,id,slug='none'):
     return HttpResponse(html, content_type='text/html')
   else:
     Http404
+
+def get_storyline(request,slug='none'):
+  """ Change current config """
+  if request.is_ajax:
+    config_items = Config.objects.all()
+    if slug != 'none':
+      for c in config_items:
+        c.is_active = (c.smart_code == slug)
+        c.save()
+    template = get_template('collector/conf_select.html')
+    html = template.render({ 'configs': config_items },request)
+    return HttpResponse(html, content_type='text/html')
+  else:
+    http404
+  
+  
+
 
 def view_character(request, id=None):
   """ Ajax view of a character """
@@ -188,3 +206,15 @@ def add_character(request):
   character_item.epic = conf.epic
   character_item.save()
   return redirect('/')
+
+
+def conf_details(request):
+  """ Current config info """
+  if request.is_ajax:
+    conf = get_current_config()
+    context = {'epic':conf.parse_details()}
+    template = get_template('collector/conf_details.html')
+    html = template.render(context,request)
+    return HttpResponse(html, content_type='text/html')
+  else:
+    http404

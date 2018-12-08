@@ -1,0 +1,28 @@
+
+{% load fics_filters %}
+<div class="storyview">
+<h1>{{ epic.title }}</h1>
+<p>{{epic.data.era}}</p>
+<p>{{epic.data.description|parse_avatars|safe}}</p>
+{% for drama in epic.dramas %}
+  <h2>{{ drama.title }}</h2>
+  <p>{{drama.data.date}}</p>
+  <p>{{drama.data.place}}</p>
+  <p>{{drama.data.description|parse_avatars|safe}}</p>
+  {% for act in drama.acts %}   
+    <div class='act'>
+    <h3>{{ act.title }}</h3>
+    <h4>{{act.data.date}}</h4>
+    <h4>{{act.data.place}}</h4>
+    <h4>Friends</h4>
+    <p>{{act.data.friends|parse_avatars|safe}}</p>
+    <h4>Foes</h4>
+    <p>{{act.data.foes|parse_avatars|safe}}</p>
+    <h4>Narrative</h4>
+    <p>{{act.data.narrative|parse_avatars|safe}}</p>
+    <h4>Resolution</h4>
+    <p>{{act.data.resolution|parse_avatars|safe}}</p>
+    </div>
+  {% endfor %}
+{% endfor %}
+</div>

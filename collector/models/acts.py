@@ -11,8 +11,8 @@ class Act(models.Model):
   friends = models.TextField(default='', max_length=128,blank=True)
   drama = models.ForeignKey(Drama, null=True, on_delete=models.CASCADE)
   foes = models.TextField(default='', max_length=128,blank=True)
-  narrative = models.TextField(default='', max_length=512,blank=True)
-  resolution = models.TextField(default='', max_length=512,blank=True)
+  narrative = models.TextField(default='', max_length=640,blank=True)
+  resolution = models.TextField(default='', max_length=640,blank=True)
   def __str__(self):
     return '[%s](%s) %s'%(self.date,self.place,self.title)
 

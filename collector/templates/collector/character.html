@@ -14,7 +14,7 @@
 </table>
 
 <div class='narrative'>
-{{ c.narrative|safe }}
+{{ c.narrative|parse_avatars|safe }}
 </div>
 
 <h2>Attributes ({{c.PA_TOTAL}}x3)</h2>
@@ -86,7 +86,7 @@
 <td>{{ ba.beneficeaffliction_ref.reference|safe }}</td>
 <td>{{ ba.beneficeaffliction_ref.value }}</td>
 <td>{{ ba.value }}</td>
-<td>{{ ba.beneficeaffliction_ref.description}}<br/>{{ ba.description|safe }}</td>
+<td>{{ ba.beneficeaffliction_ref.description}}<br/>{{ ba.description|parse_avatars|safe }}</td>
 </tr>
 {% endfor %}
 </table>
@@ -145,6 +145,6 @@
 
 
 <hr/>
-<i class="fas fa-file-pdf"></i> <tt>{{ c.rid }}</tt>
+<a href='pdf/0001_{{c.rid}}.pdf' target='_blank'><i class="fas fa-file-pdf"></i> <tt>{{ c.rid }}</tt></a>
 <br/>{{c.challenge|safe}}
 </div>

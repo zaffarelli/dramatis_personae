@@ -153,7 +153,7 @@ class Character(models.Model):
     for ba in beneficeafflictions:
       self.BA_TOTAL += ba.value + ba.beneficeaffliction_ref.value
     self.AP = self.PA_TOTAL
-    self.OP = self.SK_TOTAL + self.TA_TOTAL + self.BC_TOTAL + self.BA_TOTAL
+    self.OP = self.PA_TOTAL*3 + self.SK_TOTAL + self.TA_TOTAL + self.BC_TOTAL + self.BA_TOTAL
     #self.challenge = self.PA_TOTAL*3 + self.SK_TOTAL + self.TA_TOTAL + self.BC_TOTAL
 
     weapons = self.weapon_set.all()    

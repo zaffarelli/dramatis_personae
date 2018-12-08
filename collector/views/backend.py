@@ -29,6 +29,7 @@ def pdf_character(request,id=None):
   return HttpResponse(answer, content_type='text/html')
 
 
+
 def recalc(request):
   """ Recalc and export to PDF all avatars """  
   conf = get_current_config()

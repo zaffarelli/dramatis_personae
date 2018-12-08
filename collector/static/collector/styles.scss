@@ -110,7 +110,10 @@ body {
     font-size: 10pt;
 
 
-    
+    & .storyline {
+      background: $fics_dark;
+      text-align: center;
+    }
     & .list {
       min-height:1200px;
       background: transparent url("details.png");
@@ -175,7 +178,10 @@ body {
     }
     & .details {
 
-
+       & a{
+        color: #ffcc22;
+        text-decoration:none;
+       }
     
       min-height:1200px;
       & .sub {        
@@ -264,6 +270,58 @@ body {
       -webkit-column-rule:1px solid #000;
       column-rule:1px dotted $fics_light;
       color:#F0F0F0;
+    }
+
+    & .storyview{    
+      border:1px solid $fics_light;
+      border-radius:10px 0 10px 0;
+      padding:10px;
+      background-color:#101010;
+      width:75%;
+      margin-left:auto;
+      margin-right:auto;
+      display:block;
+              
+      -moz-column-count: 1;
+      -webkit-column-count:1;
+      column-count:1;
+      -moz-column-gap: 10px;
+      -webkit-column-gap:10px;
+      column-gap:10px;
+              
+      -moz-column-rule: 1px solid #000;
+      -webkit-column-rule:1px solid #000;
+      column-rule:1px dotted $fics_light;
+      color:#F0F0F0;
+      & p {
+        padding-left:25ex;
+        padding-right:10ex;
+        line-height:0.8em;
+      }
+      & h1{
+        text-indent: 5ex;
+        color:#CC99CC;
+      }
+      & h2{
+        text-indent: 10ex;
+        color:#CC99CC;
+      }
+      & h3{
+        text-indent: 15ex;
+        color:#909090;
+      }      
+      & h4{
+        text-indent: 20ex;
+        color:#C0C0C0;
+        margin:0;
+        padding:0;
+      }      
+      & .act{
+        background-color:#202020;
+        border: 1px dashed silver;
+        margin-left:25px;
+        margin-top:5px;
+      }
     }
 
 
@@ -418,3 +476,9 @@ body {
   color: #300030;
   opacity: 0.5;
 }
+
+.embedded_link{
+  color: #ffcc22;
+  text-decoration:none;
+}
+

@@ -14,10 +14,16 @@ function prepare_ajax(){
 
 function loadajax(){
     $.ajax({
-      url: 'ajax/list/none/1/',
+      url: 'ajax/storyline/none/',
       success: function(answer) {
-        $('.list').html(answer)
-        rebootlinks();
+        $('.storyline').html(answer)
+          $.ajax({
+          url: 'ajax/list/none/1/',
+          success: function(answer) {
+            $('.list').html(answer)
+            rebootlinks();
+          },
+        });
       },
     });
 }
@@ -39,6 +45,27 @@ function rebootlinks(){
         rebootlinks();
       },
     });   
+  });
+
+  $('#current_storyline').off();
+  $('#current_storyline').on('change',function(event){
+    event.preventDefault();
+    event.stopPropagation();
+    slug = $('#current_storyline').val();
+    console.log(slug);
+    $.ajax({      
+      url: 'ajax/storyline/'+slug+'/',
+      success: function(answer) {
+        $('.storyline').html(answer)
+        $.ajax({
+          url: 'ajax/list/none/1/',
+          success: function(answer) {
+            $('.list').html(answer)
+            rebootlinks();
+          },
+        });
+      },
+    });
   });
 
   $(window).scroll(function(){
@@ -92,7 +119,25 @@ function rebootlinks(){
         $('.details').html('done')
         rebootlinks();
       },
+      error: function(answer) {
+        $('.details').html('oops, broken')
+        rebootlinks();
+      },
+
+    });
+  });
+
+  $('#conf_details').off();
+  $('#conf_details').on('click',function(event){
+    event.preventDefault();
+    $.ajax({
+      url: 'ajax/conf_details/',
       success: function(answer) {
+        console.log(answer);
+        $('.details').html(answer)
+        rebootlinks();
+      },
+      error: function(answer) {
         $('.details').html('oops, broken')
         rebootlinks();
       },
@@ -188,11 +233,12 @@ function rebootlinks(){
   
   });
 
+/*
   $('.pdf_character').off();
   $('.pdf_character').on('click',function(event){
     event.preventDefault();
     $.ajax({
-      url: 'ajax/pdf/character/'+$(this).attr('id')+'/',
+      url: 'ajax/pdf/'+$(this).attr('id')+'/',
       success: function(answer) {
           $('.details').html(answer)
           
@@ -203,7 +249,7 @@ function rebootlinks(){
         
     });
   });
-
+*/
   $('.edit_character').off();
   $('.edit_character').on('click',function(event){
     event.preventDefault();
