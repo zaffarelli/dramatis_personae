@@ -3,10 +3,11 @@ from django.contrib import admin
 
 class Drama(models.Model):
   class Meta:
-    ordering = ['epic','date','title']  
+    ordering = ['epic','chapter','date','title']  
   from collector.models.epics import Epic
-  date = models.CharField(max_length=64)
-  place = models.CharField(max_length=64)
+  date = models.CharField(default='', blank=True, max_length=64)
+  place = models.CharField(default='', blank=True, max_length=64)
+  chapter = models.CharField(default='', blank=True, max_length=64)
   population_count = models.IntegerField(default=0, blank=True)
   title = models.CharField(default='', max_length=128, blank=True, unique=True)
   epic = models.ForeignKey(Epic, null=True, on_delete=models.CASCADE)
@@ -15,10 +16,10 @@ class Drama(models.Model):
   is_public = models.BooleanField(default=True)
   is_editable = models.BooleanField(default=True)
   def __str__(self):
-    return '%s (%s / %s)' % (self.title, self.date, self.place)
+    return '[%s chapter %s] %s (%s / %s)' % (self.epic.title, self.chapter, self.title, self.date, self.place)
 
 class DramaAdmin(admin.ModelAdmin):
-  ordering = ('epic','date','title',)
+  ordering = ('epic','chapter','date','title',)
 
 
 
