@@ -1,0 +1,9 @@
+
+<form method="post">{% csrf_token %}
+<div class='drama'>
+<table>
+    {{ form.as_table }}
+    <input type="submit" value="Update">
+</form>
+</table>
+</div>

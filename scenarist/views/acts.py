@@ -4,8 +4,5 @@
 #  /        \  \__\  ___/|   |  \/ __ \|  | \/  |\___ \  |  |  
 # /_______  /\___  >___  >___|  (____  /__|  |__/____  > |__|  
 #         \/     \/    \/     \/     \/              \/        
-from django.apps import AppConfig
 
 
-class ScenaristConfig(AppConfig):
-    name = 'scenarist'
