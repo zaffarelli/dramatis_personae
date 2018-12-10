@@ -4,7 +4,7 @@ from django.contrib import admin
 class Drama(models.Model):
   class Meta:
     ordering = ['epic','chapter','date','title']  
-  from collector.models.epics import Epic
+  from scenarist.models.epics import Epic
   date = models.CharField(default='', blank=True, max_length=64)
   place = models.CharField(default='', blank=True, max_length=64)
   chapter = models.CharField(default='', blank=True, max_length=64)

@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ["*"]
 
 INSTALLED_APPS = [
     'collector.apps.CollectorConfig',
+    'scenarist.apps.ScenaristConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -54,7 +55,7 @@ MIDDLEWARE = [
     'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
-ROOT_URLCONF = 'fics7.urls'
+ROOT_URLCONF = 'dramatis_personae.urls'
 
 TEMPLATES = [
     {
@@ -74,7 +75,7 @@ TEMPLATES = [
 ]
 
 
-WSGI_APPLICATION = 'fics7.wsgi.application'
+WSGI_APPLICATION = 'dramatis_personae.wsgi.application'
 
 
 # Database
@@ -125,7 +126,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = '/fics7/static/'
+STATIC_ROOT = '/dramatis_personae/static/'
 
 #STATIC_URL = '/fics7/static/'
 #STATIC_ROOT = '/webapps/fics7_static/'

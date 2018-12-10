@@ -2,27 +2,21 @@
 {% load fics_filters %}
 <div class="storyview">
 <h1>{{ epic.title }}</h1>
-<p>{{epic.data.era}}</p>
-<p>{{epic.data.description|parse_avatars|safe}}</p>
-{% for drama in epic.dramas %}
-  <h2>{{ drama.title }}</h2>
-  <p>{{drama.data.date}}</p>
-  <p>{{drama.data.place}}</p>
-  <p>{{drama.data.description|parse_avatars|safe}}</p>
-  {% for act in drama.acts %}   
-    <div class='act'>
-    <h3>{{ act.title }}</h3>
-    <h4>{{act.data.date}}</h4>
-    <h4>{{act.data.place}}</h4>
-    <h4>Friends</h4>
-    <p>{{act.data.friends|parse_avatars|safe}}</p>
-    <h4>Foes</h4>
-    <p>{{act.data.foes|parse_avatars|safe}}</p>
-    <h4>Narrative</h4>
-    <p>{{act.data.narrative|parse_avatars|safe}}</p>
-    <h4>Resolution</h4>
-    <p>{{act.data.resolution|parse_avatars|safe}}</p>
+  <div class='epic'>
+  {% for drama in epic.dramas %}    
+    <h2><tt>{{drama.data.chapter}}.</tt> {{ drama.title }} ({{drama.data.id}})</h2>
+    <div class='drama'>
+    {% for act in drama.acts %}         
+      <h3>{{ act.title }}</h3>
+      <div class='act'>
+      {% for event in act.events %}
+        <h4>{{ event.title }}</h3>
+        <div class='event'>        
+        </div>
+      {% endfor %}
+      </div>    
+    {% endfor %}
     </div>
   {% endfor %}
-{% endfor %}
+  </div>
 </div>

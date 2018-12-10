@@ -4,7 +4,7 @@ from django.contrib import admin
 class Act(models.Model):
   class Meta:
     ordering = ['date','title']
-  from collector.models.dramas import Drama
+  from scenarist.models.dramas import Drama
   title = models.CharField(max_length=128)
   date = models.CharField(max_length=64)
   place = models.CharField(max_length=64)

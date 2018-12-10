@@ -204,39 +204,39 @@ body {
         margin-left: auto;
         margin-right: auto;
         display: block;
-        -moz-column-count: 1;
-        -webkit-column-count: 1;
-        column-count: 1;
-        -moz-column-gap: 10px;
-        -webkit-column-gap: 10px;
-        column-gap: 10px;
-        -moz-column-rule: 1px solid #000;
-        -webkit-column-rule: 1px solid #000;
-        column-rule: 1px dotted #7a658e;
-        color: #F0F0F0; }
+        font-family: 'Rokkitt';
+        font-family: 'Patua';
+        font-family: 'Prompt';
+        font-family: 'Signika';
+        font-family: 'Kanit'; }
         body .wrapper .details .storyview p {
           padding-left: 25ex;
           padding-right: 10ex;
           line-height: 0.8em; }
         body .wrapper .details .storyview h1 {
-          text-indent: 5ex;
-          color: #CC99CC; }
+          text-indent: 5ex; }
         body .wrapper .details .storyview h2 {
-          text-indent: 10ex;
-          color: #CC99CC; }
+          text-indent: 10ex; }
         body .wrapper .details .storyview h3 {
-          text-indent: 15ex;
-          color: #909090; }
+          text-indent: 15ex; }
         body .wrapper .details .storyview h4 {
           text-indent: 20ex;
-          color: #C0C0C0;
           margin: 0;
           padding: 0; }
+        body .wrapper .details .storyview h1, body .wrapper .details .storyview h2, body .wrapper .details .storyview h3, body .wrapper .details .storyview h4 {
+          color: #E5DECA; }
+        body .wrapper .details .storyview .epic {
+          background-color: #202020;
+          border-left: 3px solid #C0C0C0; }
+        body .wrapper .details .storyview .drama {
+          background-color: #202020;
+          border-left: 3px solid #C0C0C0; }
         body .wrapper .details .storyview .act {
           background-color: #202020;
-          border: 1px dashed silver;
-          margin-left: 25px;
-          margin-top: 5px; }
+          border-left: 3px solid #C0C0C0; }
+        body .wrapper .details .storyview .event {
+          background-color: #202020;
+          border-left: 3px solid #C0C0C0; }
       body .wrapper .details .narrative {
         border: 1px solid #141017;
         border-radius: 5px;

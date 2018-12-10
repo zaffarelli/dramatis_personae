@@ -32,7 +32,7 @@ def parse_avatars(value):
   seeker = re.compile('\¤(\w+)\¤')
   changes = []
   res = str(value)
-  iter = seeker.finditer(res)
+  iter = seeker.finditer(res,re.MULTILINE)
   for item in iter:
     rid = ''.join(item.group().split('¤'))
     ch = Character.objects.filter(rid=rid).first()    

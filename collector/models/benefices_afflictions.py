@@ -30,4 +30,6 @@ class BeneficeAffliction(models.Model):
   def __str__(self):
     return '%s=%s' % (self.character.full_name,self.name)
 
-  
+class BeneficeAfflictionInline(admin.TabularInline):
+  model = BeneficeAffliction
+

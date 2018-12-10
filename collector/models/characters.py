@@ -5,9 +5,9 @@ from django.db.models.signals import pre_save, post_save
 from django.dispatch import receiver
 import hashlib
 import collector.models.skills
-from collector.models.epics import Epic
-from collector.models.dramas import Drama
-from collector.models.acts import Act
+from scenarist.models.epics import Epic
+from scenarist.models.dramas import Drama
+from scenarist.models.acts import Act
 from collector.utils import fs_fics7
 
 from collector.utils.basic import write_pdf
@@ -31,7 +31,7 @@ class Character(models.Model):
   narrative = models.TextField(default='',blank=True)
   entrance = models.CharField(max_length=100,default='',blank=True)
   keyword = models.CharField(max_length=32, blank=True, default='')
-  stars = models.CharField(max_length=128, blank=True, default='')
+  stars = models.CharField(max_length=256, blank=True, default='')
   PA_STR = models.PositiveIntegerField(default=3)
   PA_CON = models.PositiveIntegerField(default=3)
   PA_BOD = models.PositiveIntegerField(default=3)
@@ -210,13 +210,13 @@ class Character(models.Model):
       if field_type == 'ForeignKey':
         related_model = str(self._meta.get_field(str(key)).related_model)
         #print("FOREIGNKEY SITUATION (%s)"%(related_model))
-        if related_model == "<class 'collector.models.epics.Epic'>":        
+        if related_model == "<class 'scenarist.models.epics.Epic'>":        
           valfix = Epic(pk=val)
           #print("Foreign key is an Epic")
-        elif related_model == "<class 'collector.models.dramas.Drama'>":
+        elif related_model == "<class 'scenarist.models.dramas.Drama'>":
           valfix = Drama(pk=val)
           #print("Foreign key is a Drama")
-        elif related_model == "<class 'collector.models.acts.Act'>":
+        elif related_model == "<class 'scenarist.models.acts.Act'>":
           valfix = Act(pk=val)
           #print("Foreign key is an Act")
         else:

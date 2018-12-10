@@ -27,6 +27,7 @@ import debug_toolbar
 urlpatterns = [
 	re_path('admin/', admin.site.urls),
 	path('', include('collector.urls')),
+  path('', include('scenarist.urls')),
   re_path('__debug__', include(debug_toolbar.urls)),
 ]
 

@@ -57,10 +57,12 @@
 {% endfor %}
 {%endif%}
 
+{%load fics_filters%}
+
 {% if c.beneficeaffliction_set.count != 0 %}
 <h2>Benefices/Afflictions ({{ c.BA_TOTAL }})</h2>
 {% for ba in c.beneficeaffliction_set.all|dictsortreversed:"value" %}
-<p><u>{{ ba.name|safe }}</u> ({{ ba.beneficeaffliction_ref.value }} / {{ ba.value }}): <br/> {{ ba.beneficeaffliction_ref.description|safe / ba.description|safe }}</p>
+<p><u>{{ ba.name|safe }}</u> ({{ ba.beneficeaffliction_ref.value }} / {{ ba.value }}): <br/> {{ ba.beneficeaffliction_ref.description|safe}} / {{ba.description|parse_avatars|safe }}</p>
 {% endfor %}
 {%endif%}
 
