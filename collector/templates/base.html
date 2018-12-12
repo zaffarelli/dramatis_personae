@@ -26,15 +26,15 @@
             </div>
 
         <div class='wrapper'>
-            <div class='storyline'>
-               {% block storyline %}
-               ...
-               {% endblock storyline %}
-            </div>
-
             <div class="list">
+                <div class='storyline'>
+                {% block storyline %}
+                {% endblock storyline %}
+                </div>
+                <div class='charlist'>
                 {% block list %}
                 {% endblock list %}
+                </div>
             </div>
             <div class="details">
                 {% block details %}

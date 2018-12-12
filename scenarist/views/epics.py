@@ -4,21 +4,19 @@
 #  /        \  \__\  ___/|   |  \/ __ \|  | \/  |\___ \  |  |  
 # /_______  /\___  >___  >___|  (____  /__|  |__/____  > |__|  
 #         \/     \/    \/     \/     \/              \/        
-from django.http import HttpResponseRedirect
-from django.shortcuts import render
-from django.views import View
+from django.views.generic.detail import DetailView
+from django.views.generic.edit import UpdateView
 
 from scenarist.models.epics import Epic
 
-def view_epic(request, id=None):
-  """ Ajax view of an event """
-  if request.is_ajax():
-    item = get_object_or_404(Event,pk=id)
-    template = get_template('scenarist/epic.html')
-    html = template.render({'c':item})
-    return HttpResponse(html, content_type='text/html')
-  else:
-    raise Http404
+class EpicDetailView(DetailView):
+  model = Epic
+  def get_context_data(self, **kwargs):
+    context = super().get_context_data(**kwargs)
+    return context
 
-def edit_epic(request,id):
-  pass
+class EpicUpdate(UpdateView):
+  model = Epic
+  fields = '__all__'
+  template_name_suffix = '_update_form'
+

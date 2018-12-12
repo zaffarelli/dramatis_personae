@@ -1,18 +1,22 @@
-from django.http import HttpResponseRedirect, HttpResponse, Http404, JsonResponse
-from django.shortcuts import render, get_object_or_404, redirect, render_to_response
-from django.template.loader import get_template, render_to_string
-from django.views import View
+#   _________                                .__          __   
+#  /   _____/ ____  ____   ____ _____ _______|__| _______/  |_ 
+#  \_____  \_/ ___\/ __ \ /    \\__  \\_  __ \  |/  ___/\   __\
+#  /        \  \__\  ___/|   |  \/ __ \|  | \/  |\___ \  |  |  
+# /_______  /\___  >___  >___|  (____  /__|  |__/____  > |__|  
+#         \/     \/    \/     \/     \/              \/        
+from django.views.generic.detail import DetailView
+from django.views.generic.edit import UpdateView
+
 from scenarist.models.events import Event
 
-def view_event(request, id=None):
-  """ Ajax view of an event """
-  #if request.is_ajax():
-  item = get_object_or_404(Event,pk=id)
-  template = get_template('scenarist/event.html')
-  html = template.render({'c':item})
-  return HttpResponse(html, content_type='text/html')
-  #else:
-  #  raise Http404
+class EventDetailView(DetailView):
+  model = Event
+  def get_context_data(self, **kwargs):
+    context = super().get_context_data(**kwargs)
+    return context
 
-def edit_event(request,id):
-  pass
+class EventUpdate(UpdateView):
+  model = Event
+  fields = '__all__'
+  template_name_suffix = '_update_form'
+

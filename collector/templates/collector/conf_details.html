@@ -1,22 +1,22 @@
 
 {% load fics_filters %}
 <div class="storyview">
-<h1>{{ epic.title }}</h1>
-  <div class='epic'>
+  <h1>{{ epic.title }}</h1> 
+  <p><button class='epic_event' id='{{epic.data.id}}'>Epic</button><button class='view_epic' id='{{epic.data.id}}'>View</button><button class='edit_epic' id='{{epic.data.id}}'>Edit</button><button class='hide_epic' id='{{epic.data.id}}'>Close</button></p></p>
+  <div class='storyarticle' id='epic_{{epic.data.id}}'></div>
   {% for drama in epic.dramas %}    
-    <h2><tt>{{drama.data.chapter}}.</tt> {{ drama.title }} ({{drama.data.id}})</h2>
-    <div class='drama'>
+    <h2>{{drama.data.chapter}}. {{ drama.title }}</h2>
+    <p><button class='link_drama' id='{{drama.data.id}}'>Drama</button><button class='view_drama' id='{{drama.data.id}}'>View</button><button class='edit_drama' id='{{drama.data.id}}'>Edit</button><button class='hide_drama' id='{{drama.data.id}}'>Close</button></p></p>
+    <div class='storyarticle' id='drama_{{drama.data.id}}'></div>
     {% for act in drama.acts %}         
       <h3>{{ act.title }}</h3>
-      <div class='act'>
+      <p><button class='link_act' id='{{act.data.id}}'>Act</button><button class='view_act' id='{{act.data.id}}'>View</button><button class='edit_act' id='{{act.data.id}}'>Edit</button><button class='hide_act' id='{{act.data.id}}'>Close</button></p></p>
+      <div class='storyarticle' id='act_{{act.data.id}}'></div>
       {% for event in act.events %}
         <h4>{{ event.title }}</h3>
-        <div class='event'>        
-        </div>
-      {% endfor %}
-      </div>    
+        <p><button class='link_event' id='{{event.data.id}}'>Event</button><button class='view_event' id='{{event.data.id}}'>View</button><button class='edit_event' id='{{event.data.id}}'>Edit</button><button class='hide_event' id='{{event.data.id}}'>Close</button></p>
+        <div class='storyarticle' id='event_{{event.data.id}}'></div>
+      {% endfor %}         
     {% endfor %}
-    </div>
   {% endfor %}
-  </div>
 </div>

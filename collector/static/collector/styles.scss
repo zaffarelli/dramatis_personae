@@ -1,5 +1,5 @@
 
-$fics_back: #605070;
+$fics_back: #505070;
 $fics_dark: darken($fics_back, 10%);
 $fics_light: lighten($fics_back, 10%);
 $fics_darker: darken($fics_back, 20%);
@@ -45,7 +45,8 @@ $fics_subborder_color: darken($fics_back,30%);
 }
 
 body {  
-  background: $fics_darkest url("planetary_outlook.jpg") -130px 300px;
+  //background: $fics_darkest url("planetary_outlook.jpg") -130px 300px;
+  background: $fics_darkest url("ambivalence.jpg") -130px 300px;
   padding:0;
   margin:0;
   & .logo {
@@ -108,16 +109,18 @@ body {
     align-content: stretch;
     font-family: sans-serif;
     font-size: 10pt;
-
-
-    & .storyline {
-      background: $fics_dark;
-      text-align: center;
-    }
+     
     & .list {
       min-height:1200px;
       background: transparent url("details.png");
-      & .pagination, & .storyline {
+
+      & .storyline {
+        color:white;
+        text-align: center;
+        margin-top: 1em;
+      }
+
+      & .pagination {
         text-align: center;
         margin-top: 1em;
         & a, & strong,  & span.nav {
@@ -219,7 +222,6 @@ body {
               -moz-column-rule: 0px solid #000;
               -webkit-column-rule:0px solid #000;
               column-rule:0px solid #000;
-    //          color:#000000;
       }
 
 
@@ -273,26 +275,21 @@ body {
     }
 
     & .storyview{    
-      border:1px solid $fics_light;
-      border-radius:10px 0 10px 0;
-      padding:10px;
-      background-color:#101010;
-      width:75%;
-      margin-left:auto;
-      margin-right:auto;
+      
+      
+      background:transparent;
       display:block;
-      font-family: 'Rokkitt';
-
-      font-family: 'Patua';
-      font-family: 'Prompt';
-      font-family: 'Signika';  
       font-family: 'Kanit';
-     
-      & p {
-        padding-left:25ex;
-        padding-right:10ex;
-        line-height:0.8em;
+
+      & button{
+        font-family: 'monospace';
+        font-size:8px;
+        width:16ex;
+        padding:0px;
+        margin:2px;
+        cursor:pointer;
       }
+    
       & h1{
         text-indent: 5ex;
       }
@@ -328,6 +325,10 @@ body {
       & .event{
         background-color:#202020;
         border-left: 3px solid #C0C0C0;
+      }
+
+      & p{
+        padding-left:10ex;
       }
     }
 
@@ -488,4 +489,40 @@ body {
   color: #ffcc22;
   text-decoration:none;
 }
+
+.storyarticle{
+  background:transparent;
+  padding-left:10ex;
+  margin:auto;
+  
+  & table{
+    margin-left:auto;
+    margin-right:0;
+    border:1px solid gray;
+    width:95%;
+    & tr{
+      & th {
+        width:150px;
+        padding:2px;
+        background: black;
+        color:white;
+        border:1px solid silver;
+      }
+      & td {
+        padding:2px;
+        background: silver;
+        color: black;
+        border:1px solid silver;        
+        & .embedded_link{
+          color:purple;
+        }
+        & p{          
+          margin:0;
+          padding:3ex;
+        }
+      }
+    }
+  }
+}
+
 

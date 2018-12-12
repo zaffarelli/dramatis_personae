@@ -12,15 +12,64 @@ function prepare_ajax(){
   });
   }
 
+
+function register_story(x){
+  $('.view_'+x).off();
+  $('.view_'+x).on('click', function(event){
+    event.preventDefault();
+    event.stopPropagation();
+    t_id = $(this).attr('id')
+    $.ajax({
+      url: x+'s/'+t_id+'/view',
+      success: function(answer) {
+        $('#'+x+'_'+t_id).html(answer);        
+        prepare_ajax();
+        rebootlinks();
+      },
+      error: function(answer){
+        console.log('ooops... on view '+x+' :(');
+      }
+    });
+  });
+
+  $('.hide_'+x).off();
+  $('.hide_'+x).on('click', function(event){
+    event.preventDefault();
+    event.stopPropagation();
+    t_id = $(this).attr('id')
+    $('#'+x+'_'+t_id).html('');
+    prepare_ajax();
+    rebootlinks();
+  });
+
+  $('.edit_'+x).off();
+  $('.edit_'+x).on('click', function(event){
+    event.preventDefault();
+    event.stopPropagation();
+    t_id = $(this).attr('id')
+    $.ajax({
+      url: x+'s/'+t_id+'/edit',
+      success: function(answer) {
+        $('#'+x+'_'+t_id).html(answer);        
+        prepare_ajax();
+        rebootlinks();
+      },
+      error: function(answer){
+        console.log('ooops... on edit '+x+':(');
+      }
+    });
+  });
+}
+  
 function loadajax(){
     $.ajax({
       url: 'ajax/storyline/none/',
       success: function(answer) {
         $('.storyline').html(answer)
-          $.ajax({
+        $.ajax({
           url: 'ajax/list/none/1/',
           success: function(answer) {
-            $('.list').html(answer)
+            $('.charlist').html(answer)
             rebootlinks();
           },
         });
@@ -41,7 +90,7 @@ function rebootlinks(){
     $.ajax({
       url: 'ajax/list/'+key+'/'+$(this).attr('page')+'/',
       success: function(answer) {
-        $('.list').html(answer)
+        $('.charlist').html(answer)
         rebootlinks();
       },
     });   
@@ -60,7 +109,7 @@ function rebootlinks(){
         $.ajax({
           url: 'ajax/list/none/1/',
           success: function(answer) {
-            $('.list').html(answer)
+            $('.charlist').html(answer)
             rebootlinks();
           },
         });
@@ -78,6 +127,9 @@ function rebootlinks(){
       wrap.removeClass('stickyoffset');
     }
   });
+
+  
+
 
   $('#go').off();
   $('#go').on('click',function(event){
@@ -271,6 +323,13 @@ function rebootlinks(){
       }
     });
   });
+
+  register_story('epic');
+  register_story('drama');
+  register_story('act');
+  register_story('event');
+
+  
 }
 
 rebootlinks();

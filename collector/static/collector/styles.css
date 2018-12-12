@@ -23,11 +23,11 @@
   padding-top: 55px; }
 
 body {
-  background: black url("planetary_outlook.jpg") -130px 300px;
+  background: black url("ambivalence.jpg") -130px 300px;
   padding: 0;
   margin: 0; }
   body .logo {
-    background: #2d2635 url("FICS_Logo.png") center center no-repeat;
+    background: #262635 url("FICS_Logo.png") center center no-repeat;
     height: 105px;
     padding: 0;
     opacity: 0.75; }
@@ -37,11 +37,11 @@ body {
     padding-right: 10%;
     color: #E5DECA;
     font-size: 0.73em;
-    background: #605070;
+    background: #505070;
     height: 50px;
     z-index: 20; }
   body footer {
-    background: #2d2635;
+    background: #262635;
     height: 80px;
     padding: 10px;
     padding-top: 0.5em;
@@ -75,32 +75,33 @@ body {
     align-content: stretch;
     font-family: sans-serif;
     font-size: 10pt; }
-    body .wrapper .storyline {
-      background: #473b52;
-      text-align: center; }
     body .wrapper .list {
       min-height: 1200px;
       background: transparent url("details.png");
       color: #E5DECA;
       border-radius: 10px;
       grid-column: 1 / 1; }
-      body .wrapper .list .pagination, body .wrapper .list .storyline {
+      body .wrapper .list .storyline {
+        color: white;
         text-align: center;
         margin-top: 1em; }
-        body .wrapper .list .pagination a, body .wrapper .list .pagination strong, body .wrapper .list .pagination span.nav, body .wrapper .list .storyline a, body .wrapper .list .storyline strong, body .wrapper .list .storyline span.nav {
+      body .wrapper .list .pagination {
+        text-align: center;
+        margin-top: 1em; }
+        body .wrapper .list .pagination a, body .wrapper .list .pagination strong, body .wrapper .list .pagination span.nav {
           margin: 0 0.1em;
           display: inline-block;
           padding: 0.5em;
           color: #E5DECA;
           font-size: 1em;
-          background: #473b52;
+          background: #3b3b52;
           padding: 0.5em 0.8em;
           border-radius: 2px;
           text-decoration: none;
           cursor: pointer; }
       body .wrapper .list .character_actions {
         display: inline-block;
-        background: #473b52;
+        background: #3b3b52;
         color: #E5DECA;
         padding: 2px;
         border: 1px solid transparent;
@@ -108,7 +109,7 @@ body {
         body .wrapper .list .character_actions a, body .wrapper .list .character_actions span.nav {
           cursor: pointer; }
           body .wrapper .list .character_actions a:hover, body .wrapper .list .character_actions span.nav:hover {
-            color: #7a658e; }
+            color: #65658e; }
       body .wrapper .list ul, body .wrapper .list ol {
         text-indent: 0; }
         body .wrapper .list ul li, body .wrapper .list ol li {
@@ -161,14 +162,14 @@ body {
       body .wrapper .details .skillsview {
         column-count: 3;
         column-gap: 5px;
-        column-rule: 1px dotted #7a658e; }
+        column-rule: 1px dotted #65658e; }
         body .wrapper .details .skillsview table {
           font-size: 7pt;
           width: 100%; }
           body .wrapper .details .skillsview table tr td {
             width: auto; }
           body .wrapper .details .skillsview table tr th {
-            background: #2d2635;
+            background: #262635;
             width: 8ex;
             font-size: 1.2em;
             line-height: 0.8em; }
@@ -193,26 +194,19 @@ body {
         column-gap: 10px;
         -moz-column-rule: 1px solid #000;
         -webkit-column-rule: 1px solid #000;
-        column-rule: 1px dotted #7a658e;
+        column-rule: 1px dotted #65658e;
         color: #F0F0F0; }
       body .wrapper .details .storyview {
-        border: 1px solid #7a658e;
-        border-radius: 10px 0 10px 0;
-        padding: 10px;
-        background-color: #101010;
-        width: 75%;
-        margin-left: auto;
-        margin-right: auto;
+        background: transparent;
         display: block;
-        font-family: 'Rokkitt';
-        font-family: 'Patua';
-        font-family: 'Prompt';
-        font-family: 'Signika';
         font-family: 'Kanit'; }
-        body .wrapper .details .storyview p {
-          padding-left: 25ex;
-          padding-right: 10ex;
-          line-height: 0.8em; }
+        body .wrapper .details .storyview button {
+          font-family: 'monospace';
+          font-size: 8px;
+          width: 16ex;
+          padding: 0px;
+          margin: 2px;
+          cursor: pointer; }
         body .wrapper .details .storyview h1 {
           text-indent: 5ex; }
         body .wrapper .details .storyview h2 {
@@ -237,23 +231,25 @@ body {
         body .wrapper .details .storyview .event {
           background-color: #202020;
           border-left: 3px solid #C0C0C0; }
+        body .wrapper .details .storyview p {
+          padding-left: 10ex; }
       body .wrapper .details .narrative {
-        border: 1px solid #141017;
+        border: 1px solid #101017;
         border-radius: 5px;
         padding: 5px;
         column-count: 2;
         column-gap: 10px;
-        column-rule: 1px dotted #7a658e; }
+        column-rule: 1px dotted #65658e; }
       body .wrapper .details table.formset {
         padding: 1ex 0.5em;
         width: 100%;
         border-radius: 0.5em;
         border: 1px solid black;
-        background: #2d2635; }
+        background: #262635; }
         body .wrapper .details table.formset tr.row1 {
-          background: #473b52; }
+          background: #3b3b52; }
         body .wrapper .details table.formset tr.row2 {
-          background: #605070; }
+          background: #505070; }
         body .wrapper .details table.formset td {
           vertical-align: top; }
         body .wrapper .details table.formset caption {
@@ -277,7 +273,7 @@ body {
           width: 10ex; }
       body .wrapper .details table.stats {
         display: inline-block;
-        border: 1px solid #141017;
+        border: 1px solid #101017;
         border-radius: 6px; }
         body .wrapper .details table.stats td {
           height: 2em;
@@ -329,7 +325,7 @@ body {
 .pdflink {
   color: #E5DECA;
   text-decoration: none;
-  background: #473b52;
+  background: #3b3b52;
   display: inline-block;
   padding: 3px; }
 
@@ -339,7 +335,7 @@ body {
 .selected {
   border: 1px solid yellow;
   border-radius: 5px;
-  background: #7a658e;
+  background: #65658e;
   color: black; }
 
 .waiting {
@@ -356,5 +352,31 @@ body {
 .embedded_link {
   color: #ffcc22;
   text-decoration: none; }
+
+.storyarticle {
+  background: transparent;
+  padding-left: 10ex;
+  margin: auto; }
+  .storyarticle table {
+    margin-left: auto;
+    margin-right: 0;
+    border: 1px solid gray;
+    width: 95%; }
+    .storyarticle table tr th {
+      width: 150px;
+      padding: 2px;
+      background: black;
+      color: white;
+      border: 1px solid silver; }
+    .storyarticle table tr td {
+      padding: 2px;
+      background: silver;
+      color: black;
+      border: 1px solid silver; }
+      .storyarticle table tr td .embedded_link {
+        color: purple; }
+      .storyarticle table tr td p {
+        margin: 0;
+        padding: 3ex; }
 
 /*# sourceMappingURL=styles.css.map */

@@ -32,7 +32,7 @@
 	<strong>&nbsp;</strong>
 	<strong>&nbsp;</strong>	
 	{%endif%}  
-</div>	
+</div>	    
     <ul>
     {% for c in character_items %}
        <li id='{{c.rid}}'>
@@ -40,6 +40,7 @@
        </li>
     {% endfor %}
     </ul>
+
 {% else %}
     <p>No characters are available.</p>
 {% endif %} 
