@@ -329,6 +329,36 @@ function rebootlinks(){
   register_story('act');
   register_story('event');
 
+  $('#goep').off();
+  $('#goep').on('click',function(event){
+    event.preventDefault();
+    event.stopPropagation();
+    //console.log($('.character_form').serialize());
+    //console.log($('.character_form input[name=cid]').val());
+    var urlupdate = 'ajax/update/character/';
+    $.ajax({    
+      url: urlupdate,
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      data: {
+        cid: $('.character_form input[name=cid]').val(),
+        character: $('.character_form').serialize(),
+      },
+      dataType: 'json',
+      success: function(answer) {
+          $('.details').html(answer.character);          
+          $('li#'+answer.rid).html(answer.line);
+          $('li').removeClass('selected');
+          rebootlinks();
+      },
+      error: function(answer) {
+        console.log('Error... '+answer);
+      },
+    });  
+  });
   
 }
 

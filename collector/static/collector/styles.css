@@ -23,11 +23,11 @@
   padding-top: 55px; }
 
 body {
-  background: black url("ambivalence.jpg") -130px 300px;
+  background: black url("back.jpg") -130px 300px;
   padding: 0;
   margin: 0; }
   body .logo {
-    background: #262635 url("FICS_Logo.png") center center no-repeat;
+    background: black url("FICS_Logo.png") 8% center no-repeat;
     height: 105px;
     padding: 0;
     opacity: 0.75; }
@@ -37,11 +37,11 @@ body {
     padding-right: 10%;
     color: #E5DECA;
     font-size: 0.73em;
-    background: #505070;
+    background: #3b523b;
     height: 50px;
     z-index: 20; }
   body footer {
-    background: #262635;
+    background: #263526;
     height: 80px;
     padding: 10px;
     padding-top: 0.5em;
@@ -66,9 +66,9 @@ body {
       align-content: center; }
   body .wrapper {
     z-index: 5;
-    margin-left: 10%;
+    margin-left: 5%;
     display: grid;
-    width: 80%;
+    width: 90%;
     grid-template-columns: 300px 1fr;
     grid-column-gap: 3px;
     justify-content: center;
@@ -78,6 +78,7 @@ body {
     body .wrapper .list {
       min-height: 1200px;
       background: transparent url("details.png");
+      border-right: 1px solid #3b523b;
       color: #E5DECA;
       border-radius: 10px;
       grid-column: 1 / 1; }
@@ -94,14 +95,14 @@ body {
           padding: 0.5em;
           color: #E5DECA;
           font-size: 1em;
-          background: #3b3b52;
+          background: #3b523b;
           padding: 0.5em 0.8em;
           border-radius: 2px;
           text-decoration: none;
           cursor: pointer; }
       body .wrapper .list .character_actions {
         display: inline-block;
-        background: #3b3b52;
+        background: #3b523b;
         color: #E5DECA;
         padding: 2px;
         border: 1px solid transparent;
@@ -109,7 +110,7 @@ body {
         body .wrapper .list .character_actions a, body .wrapper .list .character_actions span.nav {
           cursor: pointer; }
           body .wrapper .list .character_actions a:hover, body .wrapper .list .character_actions span.nav:hover {
-            color: #65658e; }
+            color: #658e65; }
       body .wrapper .list ul, body .wrapper .list ol {
         text-indent: 0; }
         body .wrapper .list ul li, body .wrapper .list ol li {
@@ -135,8 +136,7 @@ body {
       padding-bottom: 50px;
       font-family: Kanit;
       font-size: 0.97em;
-      border-left: 1px dashed #E5DECA;
-      border-right: 1px dashed #E5DECA; }
+      border-left: 1px solid #3b523b; }
       body .wrapper .details a {
         color: #ffcc22;
         text-decoration: none; }
@@ -150,56 +150,61 @@ body {
         width: 100%;
         background: white; }
       body .wrapper .details .attributes {
-        -moz-column-count: 5;
-        -webkit-column-count: 5;
         column-count: 5;
-        -moz-column-gap: 5px;
-        -webkit-column-gap: 5px;
         column-gap: 5px;
-        -moz-column-rule: 0px solid #000;
-        -webkit-column-rule: 0px solid #000;
         column-rule: 0px solid #000; }
       body .wrapper .details .skillsview {
         column-count: 3;
         column-gap: 5px;
-        column-rule: 1px dotted #65658e; }
+        column-rule: 1px dotted #658e65; }
         body .wrapper .details .skillsview table {
           font-size: 7pt;
           width: 100%; }
           body .wrapper .details .skillsview table tr td {
             width: auto; }
           body .wrapper .details .skillsview table tr th {
-            background: #262635;
+            background: #263526;
             width: 8ex;
             font-size: 1.2em;
             line-height: 0.8em; }
             body .wrapper .details .skillsview table tr th.edit span:hover {
-              color: purple;
+              color: #E5DECA;
               font-size: 0.8em; }
       body .wrapper .details .classyview {
         border: 1px solid #FFC080;
         border-radius: 10px 0 10px 0;
         padding: 10px;
-        /*background:white url(details.png);*/
         background-color: #101010;
         width: 75%;
         margin-left: auto;
         margin-right: auto;
         display: block;
-        -moz-column-count: 1;
-        -webkit-column-count: 1;
         column-count: 1;
-        -moz-column-gap: 10px;
-        -webkit-column-gap: 10px;
         column-gap: 10px;
-        -moz-column-rule: 1px solid #000;
-        -webkit-column-rule: 1px solid #000;
-        column-rule: 1px dotted #65658e;
+        column-rule: 1px dotted #658e65;
         color: #F0F0F0; }
       body .wrapper .details .storyview {
         background: transparent;
         display: block;
-        font-family: 'Kanit'; }
+        font-family: 'Kanit';
+        /*
+        & .epic{
+          background-color:#202020;
+          border-left: 3px solid #C0C0C0;
+        }
+        & .drama{
+          background-color:#202020;
+          border-left: 3px solid #C0C0C0;
+        }
+        & .act{
+          background-color:#202020;
+          border-left: 3px solid #C0C0C0;
+        }
+        & .event{
+          background-color:#202020;
+          border-left: 3px solid #C0C0C0;
+        }
+        */ }
         body .wrapper .details .storyview button {
           font-family: 'monospace';
           font-size: 8px;
@@ -219,37 +224,25 @@ body {
           padding: 0; }
         body .wrapper .details .storyview h1, body .wrapper .details .storyview h2, body .wrapper .details .storyview h3, body .wrapper .details .storyview h4 {
           color: #E5DECA; }
-        body .wrapper .details .storyview .epic {
-          background-color: #202020;
-          border-left: 3px solid #C0C0C0; }
-        body .wrapper .details .storyview .drama {
-          background-color: #202020;
-          border-left: 3px solid #C0C0C0; }
-        body .wrapper .details .storyview .act {
-          background-color: #202020;
-          border-left: 3px solid #C0C0C0; }
-        body .wrapper .details .storyview .event {
-          background-color: #202020;
-          border-left: 3px solid #C0C0C0; }
         body .wrapper .details .storyview p {
           padding-left: 10ex; }
       body .wrapper .details .narrative {
-        border: 1px solid #101017;
+        border: 1px solid #101710;
         border-radius: 5px;
         padding: 5px;
         column-count: 2;
         column-gap: 10px;
-        column-rule: 1px dotted #65658e; }
+        column-rule: 1px dotted #658e65; }
       body .wrapper .details table.formset {
         padding: 1ex 0.5em;
         width: 100%;
         border-radius: 0.5em;
         border: 1px solid black;
-        background: #262635; }
+        background: #263526; }
         body .wrapper .details table.formset tr.row1 {
-          background: #3b3b52; }
+          background: #3b523b; }
         body .wrapper .details table.formset tr.row2 {
-          background: #505070; }
+          background: #507050; }
         body .wrapper .details table.formset td {
           vertical-align: top; }
         body .wrapper .details table.formset caption {
@@ -273,7 +266,7 @@ body {
           width: 10ex; }
       body .wrapper .details table.stats {
         display: inline-block;
-        border: 1px solid #101017;
+        border: 1px solid #101710;
         border-radius: 6px; }
         body .wrapper .details table.stats td {
           height: 2em;
@@ -296,7 +289,7 @@ body {
         margin-top: 0.5em; }
       body .wrapper .details h1 {
         font-size: 1.6em;
-        color: #aa55aa; }
+        color: #E5DECA; }
       body .wrapper .details h2 {
         font-size: 1.4em; }
       body .wrapper .details h3 {
@@ -325,7 +318,7 @@ body {
 .pdflink {
   color: #E5DECA;
   text-decoration: none;
-  background: #3b3b52;
+  background: #3b523b;
   display: inline-block;
   padding: 3px; }
 
@@ -335,7 +328,7 @@ body {
 .selected {
   border: 1px solid yellow;
   border-radius: 5px;
-  background: #65658e;
+  background: #658e65;
   color: black; }
 
 .waiting {

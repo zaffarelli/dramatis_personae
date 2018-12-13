@@ -2,6 +2,7 @@
 <form method="post">{% csrf_token %}
 <table>
     {{ form.as_table }}
-    <input type="submit" value="Update">
+    {{form.id}}
+    <button class="epic_update" id="{{form.id}}" title="Update Epic {{form.id}}">Update</button>
 </form>
 </table>
