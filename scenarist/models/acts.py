@@ -6,6 +6,8 @@
 #         \/     \/    \/     \/     \/              \/        
 from django.db import models
 from django.contrib import admin
+from django.urls import reverse
+import json
 
 class Act(models.Model):
   class Meta:
@@ -19,8 +21,12 @@ class Act(models.Model):
   foes = models.TextField(default='', max_length=640,blank=True)
   description = models.TextField(default='', max_length=1280,blank=True)
   resolution = models.TextField(default='', max_length=640,blank=True)
+  def get_absolute_url(self):
+    return reverse('act-detail', kwargs={'pk': self.pk})
   def __str__(self):
     return '[%s](%s) %s'%(self.date,self.place,self.title)
-
+  def toJSON(self):
+    return json.dumps(self, default=lambda o: o.__dict__,sort_keys=True, indent=4)
+    
 class ActAdmin(admin.ModelAdmin):
   ordering = ('date','title',)

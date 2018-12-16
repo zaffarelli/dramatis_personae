@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'crispy_forms',
-    'debug_toolbar',
+    #'debug_toolbar',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -52,7 +52,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    #'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'scenarist.exceptions.middleware.ExceptionMiddleware',    
 ]
 
 ROOT_URLCONF = 'dramatis_personae.urls'
@@ -131,4 +132,4 @@ STATIC_ROOT = '/dramatis_personae/static/'
 #STATIC_URL = '/fics7/static/'
 #STATIC_ROOT = '/webapps/fics7_static/'
 
-INTERNAL_IPS = ('127.0.0.1',)
+#INTERNAL_IPS = ('127.0.0.1',)

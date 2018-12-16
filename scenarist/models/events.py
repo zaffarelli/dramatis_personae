@@ -6,6 +6,8 @@
 #         \/     \/    \/     \/     \/              \/        
 from django.db import models
 from django.contrib import admin
+from django.urls import reverse
+import json
 
 class Event(models.Model):
   class Meta:
@@ -19,8 +21,12 @@ class Event(models.Model):
   description = models.TextField(default='', max_length=1280,blank=True)
   resolution = models.TextField(default='', max_length=640,blank=True)
   challenge = models.PositiveIntegerField(default=1)
+  def get_absolute_url(self):
+    return reverse('event-detail', kwargs={'pk': self.pk})
   def __str__(self):
     return '%s' % (self.title)
+  def toJSON(self):
+    return json.dumps(self, default=lambda o: o.__dict__,sort_keys=True, indent=4)    
 
 class EventAdmin(admin.ModelAdmin):
   ordering = ('title',)

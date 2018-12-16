@@ -7,6 +7,7 @@
 from django.db import models
 from django.contrib import admin
 from django.urls import reverse
+import json
 
 class Drama(models.Model):
   class Meta:
@@ -27,6 +28,9 @@ class Drama(models.Model):
     return '[%s chapter %s] %s (%s / %s)' % (self.epic.title, self.chapter, self.title, self.date, self.place)
   def get_absolute_url(self):
     return reverse('drama-detail', kwargs={'pk': self.pk})
+  def toJSON(self):
+    return json.dumps(self, default=lambda o: o.__dict__,sort_keys=True, indent=4)
+    
 class DramaAdmin(admin.ModelAdmin):
   ordering = ('epic','chapter','date','title',)
 

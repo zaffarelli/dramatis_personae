@@ -1,12 +1,12 @@
 function prepare_ajax(){
-  console.log("Preparing Ajax Setup");
+  //console.log("Preparing Ajax Setup");
   $.ajaxSetup({
     beforeSend: function(xhr, settings) {
       if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
         var csrf_middlewaretoken = $('input[name=csrfmiddlewaretoken]').val();        
         xhr.setRequestHeader("X-CSRFToken",csrf_middlewaretoken);
         //console.log("Cookie csrf:      "+csrftoken);
-        console.log("Middleware csrf:  "+csrf_middlewaretoken);
+        //console.log("Middleware csrf:  "+csrf_middlewaretoken);
       }
     }
   });
@@ -59,6 +59,38 @@ function register_story(x){
       }
     });
   });
+
+  $('.'+x+'_update').off();
+  $('.'+x+'_update').on('click',function(event){
+    event.preventDefault();
+    event.stopPropagation();
+    var owner = $(this).closest('div.storyarticle').attr('id');
+    var id = $(this).closest('div.storyarticle').attr('id').split('_')[1];
+    var form = $(this).closest('form');
+    formdata = form.serialize();
+    var urlupdate = x+'s/'+id+'/edit';    
+    $.ajax({    
+      url: urlupdate,
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      data: formdata,
+      dataType: 'json',
+      success: function(answer) {
+        console.log('Success... ');
+        $('#'+owner).html(answer);
+        rebootlinks();
+        $('button#'+id+'.view_'+x).click();
+      },
+      error: function(answer) {
+        console.log('Error... ');
+        console.log(answer);
+      },
+    });  
+  });
+  
 }
   
 function loadajax(){
@@ -185,7 +217,7 @@ function rebootlinks(){
     $.ajax({
       url: 'ajax/conf_details/',
       success: function(answer) {
-        console.log(answer);
+        //console.log(answer);
         $('.details').html(answer)
         rebootlinks();
       },
@@ -329,36 +361,7 @@ function rebootlinks(){
   register_story('act');
   register_story('event');
 
-  $('#goep').off();
-  $('#goep').on('click',function(event){
-    event.preventDefault();
-    event.stopPropagation();
-    //console.log($('.character_form').serialize());
-    //console.log($('.character_form input[name=cid]').val());
-    var urlupdate = 'ajax/update/character/';
-    $.ajax({    
-      url: urlupdate,
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      data: {
-        cid: $('.character_form input[name=cid]').val(),
-        character: $('.character_form').serialize(),
-      },
-      dataType: 'json',
-      success: function(answer) {
-          $('.details').html(answer.character);          
-          $('li#'+answer.rid).html(answer.line);
-          $('li').removeClass('selected');
-          rebootlinks();
-      },
-      error: function(answer) {
-        console.log('Error... '+answer);
-      },
-    });  
-  });
+
   
 }
 

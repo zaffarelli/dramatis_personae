@@ -349,7 +349,8 @@ body {
 .storyarticle {
   background: transparent;
   padding-left: 10ex;
-  margin: auto; }
+  margin: auto;
+  color: white; }
   .storyarticle table {
     margin-left: auto;
     margin-right: 0;

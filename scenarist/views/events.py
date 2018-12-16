@@ -6,8 +6,9 @@
 #         \/     \/    \/     \/     \/              \/        
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView
-
+from scenarist.forms.basic import *
 from scenarist.models.events import Event
+from scenarist.mixins.ajaxfromresponse import AjaxFromResponseMixin
 
 class EventDetailView(DetailView):
   model = Event
@@ -15,8 +16,9 @@ class EventDetailView(DetailView):
     context = super().get_context_data(**kwargs)
     return context
 
-class EventUpdate(UpdateView):
+class EventUpdateView(AjaxFromResponseMixin,UpdateView):
   model = Event
-  fields = '__all__'
+  form_class = EventForm
+  context_object_name = 'object'
   template_name_suffix = '_update_form'
 

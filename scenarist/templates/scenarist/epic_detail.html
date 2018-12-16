@@ -1,13 +1,10 @@
 {% load fics_filters %}
 <table>
-  <tr><th>Title</th><td>{{object.title}}</td></tr>
-  <tr><th>Epic</th><td>{{object.epic.title}}</td></tr>
-  <tr><th>Date</th><td>{{object.date}}</td></tr>
-  <tr><th>Place</th><td>{{object.place}}</td></tr>
-  <tr><th>Chapter</th><td>{{object.chapter}}</td></tr>
+  <tr><th>Title</th><td><strong>{{object.title}}</strong></td></tr>
+  <tr><th>Era</th><td>{{object.era}}</td></tr>
   <tr><th>Population</th><td>{{object.population_count}}</td></tr>
-  <tr><th>Players</th><td>{{object.players|linebreaks|parse_avatars|safe}}</td></tr>
   <tr><th>Description</th><td>{{object.description|linebreaks|parse_avatars|safe}}</td></tr>
+  <tr><th>Gamemaster</th><td>{{object.gamemaster|linebreaks|parse_avatars|safe}}</td></tr>
   <tr><th>Public?</th><td>{{object.is_public}}</td></tr>
   <tr><th>Editable?</th><td>{{object.is_editable}}</td></tr>
 </table>

@@ -6,8 +6,9 @@
 #         \/     \/    \/     \/     \/              \/        
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView
-
+from scenarist.forms.basic import *
 from scenarist.models.dramas import Drama
+from scenarist.mixins.ajaxfromresponse import AjaxFromResponseMixin
 
 class DramaDetailView(DetailView):
   model = Drama
@@ -15,7 +16,8 @@ class DramaDetailView(DetailView):
     context = super().get_context_data(**kwargs)
     return context
 
-class DramaUpdate(UpdateView):
+class DramaUpdateView(AjaxFromResponseMixin,UpdateView):
   model = Drama
-  fields = '__all__'
+  form_class = DramaForm
+  context_object_name = 'object'
   template_name_suffix = '_update_form'

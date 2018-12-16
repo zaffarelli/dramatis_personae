@@ -6,6 +6,8 @@
 #         \/     \/    \/     \/     \/              \/        
 from django.db import models
 from django.contrib import admin
+from django.urls import reverse
+import json
 
 class Epic(models.Model):
   class Meta:
@@ -17,8 +19,12 @@ class Epic(models.Model):
   gamemaster = models.CharField(default='zaffarelli@gmail.com', max_length=128, blank=True)
   is_public = models.BooleanField(default=True)
   is_editable = models.BooleanField(default=True)
+  def get_absolute_url(self):
+    return reverse('epic-detail', kwargs={'pk': self.pk})   
   def __str__(self):
     return '%s (%s)' % (self.title, self.era)
+  def toJSON(self):
+    return json.dumps(self, default=lambda o: o.__dict__,sort_keys=True, indent=4)
 
 class EpicAdmin(admin.ModelAdmin):
   ordering = ('era','title',)
