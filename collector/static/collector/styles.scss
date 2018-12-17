@@ -73,7 +73,7 @@ body {
 
   footer{
     background:$fics_darker;
-    height:80px;
+    height:30px;
     padding:10px;
     padding-top:0.5em;    
     margin:0;
@@ -91,12 +91,14 @@ body {
       top:0.5em;
       height:auto;
       bottom:0.5em;
-      display:grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      grid-column-gap: 5ex;
+
       
       justify-content: center;
       align-content: center;    
+    }
+    & a{
+      color:$fics_link;
+      text-decoration:none;
     }
     
   }

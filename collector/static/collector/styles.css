@@ -42,7 +42,7 @@ body {
     z-index: 20; }
   body footer {
     background: #101710;
-    height: 80px;
+    height: 30px;
     padding: 10px;
     padding-top: 0.5em;
     margin: 0;
@@ -59,11 +59,11 @@ body {
       top: 0.5em;
       height: auto;
       bottom: 0.5em;
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      grid-column-gap: 5ex;
       justify-content: center;
       align-content: center; }
+    body footer a {
+      color: #FFCC88;
+      text-decoration: none; }
   body .wrapper {
     z-index: 5;
     margin-left: 5%;

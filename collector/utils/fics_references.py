@@ -9,7 +9,7 @@ import hashlib
 
 
 MAX_CHAR = 9
-RELEASE = 0.8
+RELEASE = 0.9
 
 ROLECHOICES = (
   ('08','Legend'),
