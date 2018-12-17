@@ -8,6 +8,7 @@ from django.db import models
 from django.contrib import admin
 from django.urls import reverse
 import json
+import time
 
 class Drama(models.Model):
   class Meta:

@@ -90,6 +90,33 @@ function register_story(x){
       },
     });  
   });
+
+  $('.add_'+x).off();
+  $('.add_'+x).on('click',function(event){
+    event.preventDefault();
+    event.stopPropagation();
+    var id = $(this).parent('p').prop('className');
+    console.log(id);
+    //var id = $(this).closest('div.storyarticle').attr('id').split('_')[1];
+    //var form = $(this).closest('form');
+    
+    var urlupdate = x+'s/add';    
+    $.ajax({    
+      url: urlupdate,
+      method: 'GET',
+      success: function(answer) {
+        console.log('Success... ');
+        console.log(id);
+        $('#'+id).html(answer);
+        rebootlinks();
+        //$('button#'+id+'.view_'+x).click();
+      },
+      error: function(answer) {
+        console.log('Error... ');
+        console.log(answer);
+      },
+    });  
+  });
   
 }
   

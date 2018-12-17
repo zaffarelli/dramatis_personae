@@ -1,10 +1,11 @@
 {% load fics_filters %}
-<table>
-  <tr><th>Title</th><td>{{object.title}}</td></tr>
-  <tr><th>Epic</th><td>{{object.epic.title}}</td></tr>
+<table class='details'>
+  <tr><th>Chapter</th><td>{{object.chapter}}</td></tr>
+  <tr><th>Title</th><td><strong>{{object.title}}</strong></td></tr>
+  <tr><th>Epic</th><td><em>{{object.epic.title}}</em></td></tr>
   <tr><th>Date</th><td>{{object.date}}</td></tr>
   <tr><th>Place</th><td>{{object.place}}</td></tr>
-  <tr><th>Chapter</th><td>{{object.chapter}}</td></tr>
+  <tr><th>Players</th><td>{{object.players|linebreaks|parse_avatars|safe}}</td></tr>
   <tr><th>Friends</th><td>{{object.friends|linebreaks|parse_avatars|safe}}</td></tr>
   <tr><th>Foes</th><td>{{object.foes|linebreaks|parse_avatars|safe}}</td></tr>
   <tr><th>Description</th><td>{{object.description|linebreaks|parse_avatars|safe}}</td></tr>

@@ -37,11 +37,11 @@ body {
     padding-right: 10%;
     color: #E5DECA;
     font-size: 0.73em;
-    background: #3b523b;
+    background: #263526;
     height: 50px;
     z-index: 20; }
   body footer {
-    background: #263526;
+    background: #101710;
     height: 80px;
     padding: 10px;
     padding-top: 0.5em;
@@ -78,7 +78,7 @@ body {
     body .wrapper .list {
       min-height: 1200px;
       background: transparent url("details.png");
-      border-right: 1px solid #3b523b;
+      border-right: 1px solid #263526;
       color: #E5DECA;
       border-radius: 10px;
       grid-column: 1 / 1; }
@@ -95,14 +95,14 @@ body {
           padding: 0.5em;
           color: #E5DECA;
           font-size: 1em;
-          background: #3b523b;
+          background: #263526;
           padding: 0.5em 0.8em;
           border-radius: 2px;
           text-decoration: none;
           cursor: pointer; }
       body .wrapper .list .character_actions {
         display: inline-block;
-        background: #3b523b;
+        background: #263526;
         color: #E5DECA;
         padding: 2px;
         border: 1px solid transparent;
@@ -136,7 +136,7 @@ body {
       padding-bottom: 50px;
       font-family: Kanit;
       font-size: 0.97em;
-      border-left: 1px solid #3b523b; }
+      border-left: 1px solid #263526; }
       body .wrapper .details a {
         color: #ffcc22;
         text-decoration: none; }
@@ -163,7 +163,7 @@ body {
           body .wrapper .details .skillsview table tr td {
             width: auto; }
           body .wrapper .details .skillsview table tr th {
-            background: #263526;
+            background: #101710;
             width: 8ex;
             font-size: 1.2em;
             line-height: 0.8em; }
@@ -205,27 +205,17 @@ body {
           border-left: 3px solid #C0C0C0;
         }
         */ }
-        body .wrapper .details .storyview button {
-          font-family: 'monospace';
-          font-size: 8px;
-          width: 16ex;
-          padding: 0px;
-          margin: 2px;
-          cursor: pointer; }
         body .wrapper .details .storyview h1 {
           text-indent: 5ex; }
         body .wrapper .details .storyview h2 {
           text-indent: 10ex; }
         body .wrapper .details .storyview h3 {
-          text-indent: 15ex; }
+          text-indent: 15ex;
+          font-variant: small-caps; }
         body .wrapper .details .storyview h4 {
-          text-indent: 20ex;
-          margin: 0;
-          padding: 0; }
+          text-indent: 25ex; }
         body .wrapper .details .storyview h1, body .wrapper .details .storyview h2, body .wrapper .details .storyview h3, body .wrapper .details .storyview h4 {
           color: #E5DECA; }
-        body .wrapper .details .storyview p {
-          padding-left: 10ex; }
       body .wrapper .details .narrative {
         border: 1px solid #101710;
         border-radius: 5px;
@@ -238,11 +228,11 @@ body {
         width: 100%;
         border-radius: 0.5em;
         border: 1px solid black;
-        background: #263526; }
+        background: #101710; }
         body .wrapper .details table.formset tr.row1 {
-          background: #3b523b; }
+          background: #263526; }
         body .wrapper .details table.formset tr.row2 {
-          background: #507050; }
+          background: #3b523b; }
         body .wrapper .details table.formset td {
           vertical-align: top; }
         body .wrapper .details table.formset caption {
@@ -318,7 +308,7 @@ body {
 .pdflink {
   color: #E5DECA;
   text-decoration: none;
-  background: #3b523b;
+  background: #263526;
   display: inline-block;
   padding: 3px; }
 
@@ -348,14 +338,14 @@ body {
 
 .storyarticle {
   background: transparent;
-  padding-left: 10ex;
+  padding: 0;
   margin: auto;
-  color: white; }
+  color: white;
+  width: 70%; }
   .storyarticle table {
-    margin-left: auto;
-    margin-right: 0;
+    background: yellow;
     border: 1px solid gray;
-    width: 95%; }
+    border-radius: 5px; }
     .storyarticle table tr th {
       width: 150px;
       padding: 2px;
@@ -368,9 +358,58 @@ body {
       color: black;
       border: 1px solid silver; }
       .storyarticle table tr td .embedded_link {
-        color: purple; }
+        color: #FFCC88;
+        text-decuration: underline;
+        cursor: pointer; }
       .storyarticle table tr td p {
         margin: 0;
-        padding: 3ex; }
+        padding: 0; }
+    .storyarticle table.details {
+      width: 100%;
+      border: none; }
+      .storyarticle table.details tr th {
+        width: 15%;
+        background: black;
+        color: #658e65;
+        border: none;
+        border-radius: 5px; }
+      .storyarticle table.details tr td {
+        width: auto;
+        background: #101710;
+        color: #E5DECA;
+        border: none;
+        border-radius: 5px; }
+  .storyarticle button {
+    font-family: 'monospace';
+    font-size: 8px;
+    width: 16ex;
+    padding: 0px;
+    margin: 2px;
+    cursor: pointer; }
+
+.storybar {
+  display: inline-block;
+  margin-left: 15%;
+  border: 1px solid #658e65;
+  border-radius: 5px; }
+  .storybar p {
+    padding: 0;
+    text-indent: 0;
+    margin: 0; }
+  .storybar button {
+    font-family: Kanit;
+    font-size: 8pt;
+    width: 16ex;
+    padding: 0px;
+    margin: 2px;
+    cursor: pointer; }
+  .storybar.epic {
+    background-color: #507050; }
+  .storybar.drama {
+    background-color: #263526; }
+  .storybar.act {
+    background-color: #101710; }
+  .storybar.event {
+    background-color: black; }
 
 /*# sourceMappingURL=styles.css.map */

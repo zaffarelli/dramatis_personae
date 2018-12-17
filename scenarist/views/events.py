@@ -6,6 +6,8 @@
 #         \/     \/    \/     \/     \/              \/        
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView
+from django.views.generic.edit import CreateView
+from django.views.generic.edit import DeleteView
 from scenarist.forms.basic import *
 from scenarist.models.events import Event
 from scenarist.mixins.ajaxfromresponse import AjaxFromResponseMixin
@@ -22,3 +24,11 @@ class EventUpdateView(AjaxFromResponseMixin,UpdateView):
   context_object_name = 'object'
   template_name_suffix = '_update_form'
 
+class EventAddView(AjaxFromResponseMixin,CreateView):
+  model = Event
+  form_class = EventForm
+  context_object_name = 'object'
+  template_name_suffix = '_update_form'  
+
+class EventDeleteView(DeleteView):
+  model = Event

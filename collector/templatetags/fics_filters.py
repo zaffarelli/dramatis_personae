@@ -37,7 +37,7 @@ def parse_avatars(value):
     rid = ''.join(item.group().split('¤'))
     ch = Character.objects.filter(rid=rid).first()    
     if not ch is None:
-      repstr = '<span id="%s" class="embedded_link" title="%s">%s</span>'%(ch.rid, ch.rid, ch.full_name)
+      repstr = '<span id="%s" class="embedded_link" title="%s">%s</span>'%(ch.rid, ch.entrance, ch.full_name)
     else:
       repstr = '[%s was not found]'%(rid)
     changes.append({'src':item.group(),'dst':repstr})
