@@ -25,7 +25,7 @@
     </div>
     <div class='storyarticle' id='drama_{{drama.data.id}}'></div>
     {% for act in drama.acts %}         
-      <h3>{{ act.title }}</h3>
+      <h3>{{act.data.chapter}}. {{ act.title }}</h3>
       <div class='storybar act'>
       <p class='act_{{act.data.id}}'>
         <button class='link_act' id='{{act.data.id}}'>Act</button>
@@ -38,7 +38,7 @@
       </div>
       <div class='storyarticle' id='act_{{act.data.id}}'></div>
       {% for event in act.events %}
-        <h4>{{ event.title }}</h4>
+        <h4>{{event.data.chapter}}.{{ event.title }}</h4>
         <div class='storybar event'>
         <p class='event_{{event.data.id}}'>
           <button class='link_event' id='{{event.data.id}}'>Event</button>

@@ -1,9 +1,9 @@
-# _________        .__  .__                 __                
-# \_   ___ \  ____ |  | |  |   ____   _____/  |_  ___________ 
-# /    \  \/ /  _ \|  | |  | _/ __ \_/ ___\   __\/  _ \_  __ \
-# \     \___(  <_> )  |_|  |_\  ___/\  \___|  | (  <_> )  | \/
-#  \______  /\____/|____/____/\___  >\___  >__|  \____/|__|   
-#         \/                      \/     \/                   
+#    ___      _ _           _             
+#   / __\___ | | | ___  ___| |_ ___  _ __ 
+#  / /  / _ \| | |/ _ \/ __| __/ _ \| '__|
+# / /__| (_) | | |  __/ (__| || (_) | |   
+# \____/\___/|_|_|\___|\___|\__\___/|_|   
+#                                        
 from django.http import HttpResponse, Http404, JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect, render_to_response
 from django.core.paginator import Paginator
@@ -31,6 +31,24 @@ from collector.utils.fics_references import MAX_CHAR
 def index(request):
   """ The basic page for the application """
   return render(request,'collector/index.html')
+
+def get_story_casting(request,id,slug='none'):
+  """ Update the list of characters by story casting """
+  conf = get_current_config()
+  if request.is_ajax:
+    if slug=='none':
+      character_items = Character.objects.filter(epic=conf.epic).order_by('ready_for_export','full_name')
+    else:      
+      character_items = Character.objects.order_by('player','-role','full_name').filter(keyword=slug)
+    paginator = Paginator(character_items,MAX_CHAR)
+    page = id
+    character_items = paginator.get_page(page)
+    context = {'character_items': character_items}
+    template = get_template('collector/list.html')
+    html = template.render(context)
+    return HttpResponse(html, content_type='text/html')
+  else:
+    Http404
 
 def get_list(request,id,slug='none'):
   """ Update the list of characters on the page """
