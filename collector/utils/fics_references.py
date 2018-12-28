@@ -8,8 +8,8 @@ import hashlib
 #from .utils import write_pdf
 
 
-MAX_CHAR = 9
-RELEASE = 0.9
+MAX_CHAR = 7
+RELEASE = '0.9.1'
 
 ROLECHOICES = (
   ('08','Legend'),

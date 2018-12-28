@@ -23,6 +23,11 @@ class Epic(StoryModel):
   def __str__(self):
     return '%s (%s)' % (self.title, self.era)
 
+  def get_episodes(self):
+    from scenarist.models.dramas import Drama
+    episodes = Drama.objects.filter(epic=self)
+    return episodes
+
 class EpicAdmin(admin.ModelAdmin):
   ordering = ('era','title',)
 

@@ -103,11 +103,11 @@ function register_story(x){
     var urlupdate = x+'s/add';    
     $.ajax({    
       url: urlupdate,
-      method: 'GET',
+      method: 'POST',
       success: function(answer) {
         console.log('Success... ');
         console.log(id);
-        $('#'+id).html(answer);
+        //$('#'+id).html(answer);
         rebootlinks();
         //$('button#'+id+'.view_'+x).click();
       },
@@ -154,6 +154,22 @@ function rebootlinks(){
       },
     });   
   });
+
+  $('.episode_cast').off();
+  $('.episode_cast').on('click',function(event){
+    event.preventDefault();
+    event.stopPropagation();
+    slug = $(this).attr('id');
+    $('#customize').val(slug); 
+    $.ajax({
+      url: 'ajax/list/'+slug+'/'+$(this).attr('page')+'/',
+      success: function(answer) {
+        $('.charlist').html(answer)
+        rebootlinks();
+      },
+    });   
+  });
+
 
   $('#current_storyline').off();
   $('#current_storyline').on('change',function(event){

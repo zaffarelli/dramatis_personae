@@ -3,7 +3,8 @@
 <div class="storyview">
   <h1>{{ epic.title }}</h1>
   <div class='storybar epic'>
-  <p class='epic_{{epic.data.id}}'><button class='epic_event' id='{{epic.data.id}}'>Epic</button>
+  <p class='epic_{{epic.data.id}}'>
+    <button class='episode_cast' id='c-epic-{{epic.data.id}}' page='1'>Epic</button>
     <button class='view_epic' id='{{epic.data.id}}'>View</button>
     <button class='edit_epic' id='{{epic.data.id}}'>Edit</button>
     <button class='hide_epic' id='{{epic.data.id}}'>Close</button>
@@ -15,7 +16,7 @@
     <h2>{{drama.data.chapter}}. {{ drama.title }}</h2>
     <div class='storybar drama'>
     <p class='drama_{{drama.data.id}}'>
-      <button class='link_drama' id='{{drama.data.id}}'>Drama</button>
+      <button class='episode_cast' id='c-drama-{{drama.data.id}}' page='1'>Drama</button>
       <button class='view_drama' id='{{drama.data.id}}'>View</button>
       <button class='edit_drama' id='{{drama.data.id}}'>Edit</button>
       <button class='hide_drama' id='{{drama.data.id}}'>Close</button>
@@ -28,7 +29,7 @@
       <h3>{{act.data.chapter}}. {{ act.title }}</h3>
       <div class='storybar act'>
       <p class='act_{{act.data.id}}'>
-        <button class='link_act' id='{{act.data.id}}'>Act</button>
+        <button class='episode_cast' id='c-act-{{act.data.id}}' page='1'>Act</button>
         <button class='view_act' id='{{act.data.id}}'>View</button>
         <button class='edit_act' id='{{act.data.id}}'>Edit</button>
         <button class='hide_act' id='{{act.data.id}}'>Close</button>
@@ -38,10 +39,10 @@
       </div>
       <div class='storyarticle' id='act_{{act.data.id}}'></div>
       {% for event in act.events %}
-        <h4>{{event.data.chapter}}.{{ event.title }}</h4>
+        <h4>{{event.data.chapter}}. {{ event.title }}</h4>
         <div class='storybar event'>
         <p class='event_{{event.data.id}}'>
-          <button class='link_event' id='{{event.data.id}}'>Event</button>
+          <button class='episode_cast' id='c-event-{{event.data.id}}' page='1'>Event</button>
           <button class='view_event' id='{{event.data.id}}'>View</button>
           <button class='edit_event' id='{{event.data.id}}'>Edit</button>
           <button class='hide_event' id='{{event.data.id}}'>Close</button>

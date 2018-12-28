@@ -1,6 +1,7 @@
 {% load fics_filters %}
 <table class='details'>
   <tr><th>Title</th><td><strong>{{object.title}}</strong></td></tr>
+  <tr><th>Anchor</th><td><strong>{{object.anchor|linebreaks|parse_avatars|safe}}</strong></td></tr>
   <tr><th>Act</th><td><em>{{object.act.title}}</em></td></tr>
   <tr><th>Date</th><td>{{object.date}}</td></tr>
   <tr><th>Place</th><td>{{object.place}}</td></tr>
@@ -9,5 +10,6 @@
   <tr><th>Description</th><td>{{object.description|linebreaks|parse_avatars|safe}}</td></tr>
   <tr><th>Resolution</th><td>{{object.resolution|linebreaks|parse_avatars|safe}}</td></tr>
   <tr><th>Challenge</th><td><strong>{{object.challenge}}</strong></td></tr>
+  <tr><th>Estimated Gametime</th><td><strong>{{object.estimated_gametime}}</strong></td></tr>
 </table>
 

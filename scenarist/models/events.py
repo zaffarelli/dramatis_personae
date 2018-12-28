@@ -20,6 +20,17 @@ class Event(StoryModel):
   foes = models.TextField(default='', max_length=640,blank=True)
   resolution = models.TextField(default='', max_length=640,blank=True)
   challenge = models.PositiveIntegerField(default=1)
+  anchor = models.CharField(default='', max_length=256, blank=True)
+  estimated_gametime = models.PositiveIntegerField(default=1)
+
+  def get_casting(self):
+    """ Bring all avatars rids from all relevant text fields"""    
+    casting = super().get_casting()
+    casting.append(self.fetch_avatars(self.friends))
+    casting.append(self.fetch_avatars(self.foes))
+    casting.append(self.fetch_avatars(self.resolution))
+    return casting
+
 
   def get_absolute_url(self):
     return reverse('event-detail', kwargs={'pk': self.pk})

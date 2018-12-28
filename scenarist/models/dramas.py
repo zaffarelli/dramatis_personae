@@ -23,7 +23,17 @@ class Drama(StoryModel):
   def get_absolute_url(self):
     return reverse('drama-detail', kwargs={'pk': self.pk})
 
+  def get_casting(self):
+    """ Bring all avatars rids from all relevant text fields"""    
+    casting = super().get_casting()
+    casting.append(self.fetch_avatars(self.players))
+    casting.append(self.fetch_avatars(self.resolution))
+    return casting
 
+  def get_episodes(self):
+    from scenarist.models.acts import Act
+    episodes = Act.objects.filter(drama=self)
+    return episodes
     
 class DramaAdmin(admin.ModelAdmin):
   ordering = ('epic','chapter','date','title',)

@@ -161,6 +161,7 @@ body {
       grid-column: 1 / 1;
       & ul, & ol {
         text-indent: 0;
+        list-style-type: lower-roman;
         & li {
           padding: 5px;
           border: 1px solid transparent;
@@ -267,28 +268,6 @@ body {
         & h1,& h2,& h3,& h4{
         color: $fics_front;
         }
-        /*
-        & .epic{
-          background-color:#202020;
-          border-left: 3px solid #C0C0C0;
-        }
-        & .drama{
-          background-color:#202020;
-          border-left: 3px solid #C0C0C0;
-        }
-        & .act{
-          background-color:#202020;
-          border-left: 3px solid #C0C0C0;
-        }
-        & .event{
-          background-color:#202020;
-          border-left: 3px solid #C0C0C0;
-        }
-        */
-
-        & p{
-          
-        }
       }
       & .narrative{
         border:1px solid $fics_subborder_color;
@@ -365,7 +344,6 @@ body {
           font-family: 'Prompt';
           font-weight: Normal;
           margin:0;
-          color:#848;
           margin-top:0.5em;
         }
         & h1{ font-size: 1.6em; color:$fics_front; }
