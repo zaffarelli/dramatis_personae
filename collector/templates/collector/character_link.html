@@ -13,6 +13,6 @@
     {{c.stars|safe}}
   </div>
   <br/>{{ c.challenge|safe }}
-  <br/>{{ c.alliance|safe }} ({%if c.keyword != '' %}{{c.keyword|safe}}{%endif%})
-  <br/>ID:<span class='golden'>{{c.id}}</span> RID:<span class='golden'>{{c.rid}}</span>
+  <br/>{{ c.alliance|safe }} ({%if c.keyword != '' %}<span class='golden custom_glance' id='{{c.keyword}}'>{{c.keyword|safe}}</span>{%endif%})
+  <br/>ID:<span class='golden custom_show' id='{{c.id}}'>{{c.id}}</span> RID:<span class='golden custom_show' id='{{c.rid}}' >{{c.rid}}</span>
 

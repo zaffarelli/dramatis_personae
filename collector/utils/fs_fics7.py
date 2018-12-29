@@ -42,7 +42,6 @@ def check_secondary_attributes(ch):
 
 
 def check_everyman_skills(ch):
-  
   from collector.models.skills import Skill
   skills = ch.skill_set.all()
   for every in EVERYMAN[ch.species]:
@@ -174,7 +173,8 @@ def check_root_skills(ch):
 def roll(maxi):
   """ A more random 1 to maxi dice roller  """
   randbyte = int.from_bytes(os.urandom(1),byteorder='big',signed=False)
-  x = int(randbyte / 256 * (maxi-1)) +1
+  x = int(randbyte / 256 * (maxi)) +1
+  print("x=%d/%d)"%(x,maxi))
   return x
 
 def choose_pa(weights):
@@ -184,7 +184,7 @@ def choose_pa(weights):
   idx = 0
   while idx < 12:
     cum += weights[idx]
-    if x < cum:
+    if x <= cum:
       return idx
     idx += 1
   return -1
@@ -194,22 +194,23 @@ def check_primary_attributes(ch):
   maxi = ROLES[ch.role]['maxi']
   weights = PROFILES[ch.profile]['weights']
   ch.challenge = '(<i class="fas fa-th-large"></i>%02d <i class="fas fa-th-list"></i>%02d <i class="fas fa-th"></i>%02d <i class="fas fa-outdent"></i>%02d)'%(ROLES[ch.role]['primaries'],ROLES[ch.role]['skills'], ROLES[ch.role]['talents'],ROLES[ch.role]['bc'])
-  #print('%s: %s [ %d / %d ]'%(ch.full_name,ch.role,pool,maxi))  
+  print('%s: %s [ %d / %d ]'%(ch.full_name,ch.role,pool,maxi))  
   pas = [2,2,2,2,2,2,2,2,2,2,2,2]
+  #pas = [0,0,0,0,0,0,0,0,0,0,0,0]
   current =  ch.PA_STR+ch.PA_CON+ch.PA_BOD+ch.PA_MOV+ch.PA_INT+ch.PA_WIL+ch.PA_TEM+ch.PA_PRE+ch.PA_TEC+ch.PA_REF+ch.PA_AGI+ch.PA_AWA
-  #print('Current PA TOTAL: %d'%(current))
+  print('Current PA TOTAL: %d'%(current))
   if (current < pool or ch.keyword =='rebuild') and ch.player == '':
     pool = pool-24
-    #print('Error: Primary Attributes invalid. Fixing that\n')
+    print('Error: Primary Attributes invalid. Fixing that\n')
     while pool>0:      
       chosen_pa = choose_pa(weights)
       idx = chosen_pa
       if pas[idx] < maxi:
         pas[idx] += 1
         pool -= 1
-      #else:
-        #print('Invalid : already too high!!!')
-    #print(pas)
+      else:
+        print('Invalid : already too high: pa[idx]:%d idx:%d maxi:%d pool:%d chosen_pa:%d'%(pas[idx],idx,maxi,pool,chosen_pa))
+    print(pas)
     ch.PA_STR = pas[0]
     ch.PA_CON = pas[1]
     ch.PA_BOD = pas[2]
@@ -227,7 +228,9 @@ def check_primary_attributes(ch):
     if ch.keyword == 'rebuild':
       ch.keyword = 'rebuilt'
 
-
+def check_skills(ch):
+  pool = ROLES[ch.role]['skills']
+  pass
 
 def check_role(ch):
   pa_pool = ROLES[ch.role]['primaries']
@@ -248,3 +251,12 @@ def update_challenge(ch):
   res += '<i class="fas fa-outdent" title="benefice afflictions"></i> %d '%(ch.BA_TOTAL)
   res += '<i class="fas fa-newspaper" title="OP challenge"></i> %d '%(ch.OP)
   return res
+
+def get_keywords():
+  from collector.models.characters import Character
+  everybody = Character.objects.all()
+  keywords = []
+  for someone in everybody:
+    if someone.keyword != '':
+      keywords.append(someone.keyword)
+  return sorted(list(set(keywords)))

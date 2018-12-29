@@ -12,21 +12,17 @@ import json
 
 class Act(StoryModel):
   class Meta:
-    ordering = ['date','title']
+    ordering = ['chapter','title']
 
   from scenarist.models.dramas import Drama
 
   drama = models.ForeignKey(Drama, null=True, on_delete=models.CASCADE)
-  friends = models.TextField(default='', max_length=640,blank=True)
-  foes = models.TextField(default='', max_length=640,blank=True)
   resolution = models.TextField(default='', max_length=640,blank=True)
   reward = models.PositiveIntegerField(default=1)
 
   def get_casting(self):
     """ Bring all avatars rids from all relevant text fields"""    
     casting = super().get_casting()
-    casting.append(self.fetch_avatars(self.friends))
-    casting.append(self.fetch_avatars(self.foes))
     casting.append(self.fetch_avatars(self.resolution))
     return casting
 
@@ -41,4 +37,4 @@ class Act(StoryModel):
 
     
 class ActAdmin(admin.ModelAdmin):
-  ordering = ('date','title',)
+  ordering = ('chapter','title',)

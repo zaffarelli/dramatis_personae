@@ -10,6 +10,7 @@ from django.views.generic.edit import CreateView
 from django.views.generic.edit import DeleteView
 from scenarist.forms.basic import *
 from scenarist.models.acts import Act
+from scenarist.models.dramas import Drama
 from scenarist.mixins.ajaxfromresponse import AjaxFromResponseMixin
 
 class ActDetailView(DetailView):
@@ -24,11 +25,17 @@ class ActUpdateView(AjaxFromResponseMixin,UpdateView):
   context_object_name = 'object'
   template_name_suffix = '_update_form'
 
-class ActAddView(AjaxFromResponseMixin,CreateView):
-  model = Act
-  form_class = ActForm
-  context_object_name = 'object'
-  template_name_suffix = '_update_form'  
+def add_act(request):
+  """ Add a new character to the universe """
+  if request.is_ajax():
+    if request.method == 'POST':
+      id = request.POST.get('id')
+      item = Event()
+      item.drama = get_object(Drama,pk=id)
+      item.save()
+      c[item] = item
+      return JsonResponse(c)
+  return JsonNotFound
 
 class ActDeleteView(DeleteView):
   model = Act

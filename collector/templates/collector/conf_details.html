@@ -1,6 +1,13 @@
 
 {% load fics_filters %}
 <div class="storyview">
+  <div class='floating_keywords'>
+  <ul>
+  {% for keyword in epic.keywords %}
+    <li><span class='golden custom_glance' id='{{keyword}}'>{{keyword}}</span></li>
+  {% endfor %}
+  </ul>
+  </div>
   <h1>{{ epic.title }}</h1>
   <div class='storybar epic'>
   <p class='epic_{{epic.data.id}}'>

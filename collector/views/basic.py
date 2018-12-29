@@ -20,6 +20,7 @@ from urllib.parse import unquote
 from urllib.parse import parse_qs
 from collector.utils import fs_fics7
 from django.views.decorators.csrf import csrf_exempt
+
 import datetime
 from collector.utils.xls_collector import export_to_xls, update_from_xls
 from collector.utils.basic import get_current_config

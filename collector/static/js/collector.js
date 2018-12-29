@@ -96,14 +96,18 @@ function register_story(x){
     event.preventDefault();
     event.stopPropagation();
     var id = $(this).parent('p').prop('className');
-    console.log(id);
-    //var id = $(this).closest('div.storyarticle').attr('id').split('_')[1];
+    console.log(id);    
     //var form = $(this).closest('form');
-    
     var urlupdate = x+'s/add';    
     $.ajax({    
       url: urlupdate,
       method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      data: {'id': id},
+      dataType: 'json',
       success: function(answer) {
         console.log('Success... ');
         console.log(id);
@@ -279,7 +283,8 @@ function rebootlinks(){
     $.ajax({
       url: 'ajax/view/character/'+key+'/',
       success: function(answer) {
-        $('.details').html(answer)
+        $('.details').html(answer);
+        prepare_ajax();
         rebootlinks();
       },
     });
@@ -290,6 +295,7 @@ function rebootlinks(){
   $('#search').off();
   $('#search').on('click',function(event){
     event.preventDefault();
+    event.stopPropagation();
     key = $('#customize').val(); 
     if (key == ''){
       key='none';
@@ -297,11 +303,22 @@ function rebootlinks(){
     $.ajax({
       url: 'ajax/list/'+key+'/1/',
       success: function(answer) {
-        $('.list').html(answer)
-        rebootlinks();
+        $('.charlist').html(answer);
+        prepare_ajax();
+        rebootlinks();        
       },
     });
   });
+
+  $('.custom_glance').off();
+  $('.custom_glance').on('click',function(event){
+    event.preventDefault();
+    event.stopPropagation();
+    $('#customize').val($(this).attr('id'));
+    $('#search').click();
+  });
+
+
 
   $('.view_character').off();
   $('.view_character').on('click',function(event){

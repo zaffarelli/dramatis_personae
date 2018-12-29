@@ -24,11 +24,17 @@ class DramaUpdateView(AjaxFromResponseMixin,UpdateView):
   context_object_name = 'object'
   template_name_suffix = '_update_form'
 
-class DramaAddView(AjaxFromResponseMixin,CreateView):
-  model = Drama
-  form_class = DramaForm
-  context_object_name = 'object'
-  template_name_suffix = '_update_form'  
+def add_drama(request):
+  """ Add a new character to the universe """
+  if request.is_ajax():
+    if request.method == 'POST':
+      id = request.POST.get('id')
+      item = Drama()
+      item.act = get_object(Epic,pk=id)
+      item.save()
+      c[item] = item
+      return JsonResponse(c)
+  return JsonNotFound
 
 class DramaDeleteView(DeleteView):
   model = Drama

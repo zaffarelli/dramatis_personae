@@ -7,6 +7,7 @@
 from django.db import models
 import re
 import string
+import json
 
 class StoryModel(models.Model):
   class Meta:

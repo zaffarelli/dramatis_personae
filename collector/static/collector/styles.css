@@ -76,7 +76,7 @@ body {
     font-family: sans-serif;
     font-size: 10pt; }
     body .wrapper .list {
-      min-height: 1200px;
+      min-height: 1000px;
       background: transparent url("details.png");
       border-right: 1px solid #263526;
       color: #E5DECA;
@@ -113,7 +113,7 @@ body {
             color: #658e65; }
       body .wrapper .list ul, body .wrapper .list ol {
         text-indent: 0;
-        list-style-type: lower-roman; }
+        list-style-type: none; }
         body .wrapper .list ul li, body .wrapper .list ol li {
           padding: 5px;
           border: 1px solid transparent;
@@ -129,7 +129,7 @@ body {
           body .wrapper .list ul li em, body .wrapper .list ol li em {
             font-weight: bold; }
     body .wrapper .details {
-      min-height: 1200px;
+      min-height: 1000px;
       z-index: 10;
       background: transparent url("details.png");
       grid-column: 2 / 2;
@@ -361,6 +361,25 @@ body {
         color: #E5DECA;
         border: none;
         border-radius: 5px; }
+    .storyarticle table.update {
+      background: #263526;
+      width: 100%;
+      border: none; }
+      .storyarticle table.update input, .storyarticle table.update textarea {
+        width: 90%;
+        background: silver; }
+      .storyarticle table.update tr th {
+        width: 15%;
+        background: black;
+        color: #658e65;
+        border: none;
+        border-radius: 5px; }
+      .storyarticle table.update tr td {
+        width: auto;
+        background: #101710;
+        color: #E5DECA;
+        border: none;
+        border-radius: 5px; }
   .storyarticle button {
     font-family: 'monospace';
     font-size: 8px;
@@ -393,5 +412,24 @@ body {
     background-color: #101710; }
   .storybar.event {
     background-color: black; }
+
+.custom_glance {
+  cursor: help; }
+
+.floating_keywords {
+  display: block;
+  float: right;
+  border: 2px solid #E5DECA;
+  border-radius: 3px;
+  background-color: #263526; }
+  .floating_keywords ul {
+    text-indent: 0;
+    padding: 0;
+    margin: 0;
+    list-style-type: none; }
+    .floating_keywords ul li {
+      text-indent: 0;
+      padding: 3px;
+      margin: 0; }
 
 /*# sourceMappingURL=styles.css.map */

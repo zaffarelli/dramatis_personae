@@ -101,6 +101,7 @@ class Character(models.Model):
     fs_fics7.check_root_skills(self)
 #    fs_fics7.check_everyman_skills(self, Skill, SkillRef)
     fs_fics7.check_everyman_skills(self)
+    fs_fics7.check_skills(self)
     gm_shortcuts = ""
     tmp_shortcuts = []
     skills = self.skill_set.all()

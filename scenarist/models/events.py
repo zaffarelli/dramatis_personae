@@ -8,11 +8,10 @@ from django.db import models
 from django.contrib import admin
 from django.urls import reverse
 from scenarist.models.story_models import StoryModel
-import json
 
 class Event(StoryModel):
   class Meta:
-    ordering = ['date','title']
+    ordering = ['chapter','title']
 
   from scenarist.models.acts import Act
   act = models.ForeignKey(Act, null=True, on_delete=models.CASCADE)
@@ -36,7 +35,7 @@ class Event(StoryModel):
     return reverse('event-detail', kwargs={'pk': self.pk})
 
 class EventAdmin(admin.ModelAdmin):
-  ordering = ('title',)
+  ordering = ('chapter','title',)
 
 
 

@@ -22,16 +22,18 @@ class Config(models.Model):
     from scenarist.models.epics import Epic
     from scenarist.models.dramas import Drama
     from scenarist.models.acts import Act
-    from scenarist.models.events import Event    
+    from scenarist.models.events import Event
+    from collector.utils.fs_fics7 import get_keywords
+    
     epic = Epic.objects.get(title = self.epic.title)
-    dramas = Drama.objects.filter(epic = epic).order_by('date')
+    dramas = Drama.objects.filter(epic = epic).order_by('chapter','date')
     context_dramas =[]
     for drama in dramas:
       context_acts = []
-      acts = Act.objects.filter(drama = drama).order_by('date')
+      acts = Act.objects.filter(drama = drama).order_by('chapter','date')
       for act in acts:        
         context_events = []
-        events = Event.objects.filter(act = act).order_by('date')
+        events = Event.objects.filter(act = act).order_by('chapter','date')
         for event in events:
           context_event = {'title':event.title, 'data': event}
           context_events.append(context_event)
@@ -40,6 +42,7 @@ class Config(models.Model):
       context_drama = {'title':drama.title, 'data': drama, 'acts': context_acts}
       context_dramas.append(context_drama)
     context = {'title':epic.title, 'data': epic, 'dramas': context_dramas}
+    context['keywords'] = get_keywords()
     #print(context)
     return context
 

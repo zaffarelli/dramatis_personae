@@ -8,8 +8,8 @@ import hashlib
 #from .utils import write_pdf
 
 
-MAX_CHAR = 7
-RELEASE = '0.9.1'
+MAX_CHAR = 8
+RELEASE = '0.9.2'
 
 ROLECHOICES = (
   ('08','Legend'),
@@ -36,22 +36,22 @@ PROFILECHOICES = (
 
 PROFILES = {
   'physical': {
-    'weights':[2,2,2,2,1,1,1,1,1,1,1,1],
+    'weights':[3,3,3,3,1,1,1,1,1,1,1,1],
   },
   'spiritual': {
-    'weights':[1,1,1,1,2,2,2,2,1,1,1,1],
+    'weights':[1,1,1,1,3,3,3,3,1,1,1,1],
   },
   'tech': {
-    'weights':[1,1,1,1,1,1,1,1,2,2,2,2],
+    'weights':[1,1,1,1,1,1,1,1,3,3,3,3],
   },  
   'courtisan': {
-    'weights':[2,2,2,2,2,2,2,2,1,1,1,1],
+    'weights':[3,3,3,3,3,3,3,3,1,1,1,1],
   },
   'scholar': {
-    'weights':[1,1,1,1,2,2,2,2,2,2,2,2],
+    'weights':[1,1,1,1,3,3,3,3,3,3,3,3],
   },
   'guilder': {
-    'weights':[2,2,2,2,1,1,1,1,2,2,2,2],
+    'weights':[3,3,3,3,1,1,1,1,3,3,3,3],
   },    
   'standard': {
     'weights':[1,1,1,1,1,1,1,1,1,1,1,1],
@@ -61,49 +61,49 @@ PROFILES = {
 
 ROLES = {
   '08': {
-    'primaries': 90,
+    'primaries': 76,
     'maxi': 11,
     'skills':110,
     'talents':40,
     'bc':20,
   },
   '07': {
-    'primaries': 84,
+    'primaries': 72,
     'maxi': 10,
     'skills':100,
     'talents':30,
     'bc':15,
   },  
   '06': {
-    'primaries': 78,
+    'primaries': 68,
     'maxi': 10,
     'skills':90,
     'talents':25,
     'bc':10,
   },
   '05': {
-    'primaries': 72,
+    'primaries': 64,
     'maxi': 9,
     'skills':80,
     'talents':20,
     'bc':10,
   },
   '04': {
-    'primaries': 66,
+    'primaries': 60,
     'maxi': 8,
     'skills':70,
     'talents':15,
     'bc':10,
   },
   '03': {
-    'primaries': 60,
+    'primaries': 56,
     'maxi': 8,
     'skills':60,
     'talents':10,
     'bc':5,
   },
   '02': {
-    'primaries': 54,
+    'primaries': 52,
     'maxi': 7,
     'skills':50,
     'talents':5,
