@@ -7,9 +7,6 @@
     
     <style>
 
-
-
-
 @font-face {
   font-family: 'Titre';  
   src: url('collector/static/collector/Prompt-Regular.ttf');
@@ -20,125 +17,134 @@
   src: url('collector/static/collector/Signika-Regular.ttf');
 }
   
-			body{
-				font-family: 'Texte';
-				font-size: 9px;
-			}
-      @page {
-				size: a4 landscape;
-        @frame f1 {
-          left: 0.5cm;
-          width: 8.9cm;
-          top: 0.5cm;
-          height:3.00cm;
-          padding:0.125cm;
-          
-          }
-        @frame f2_PA {
-          left: 0.5cm;
-          width: 4.45cm;
-          top: 3.0cm;
-          height: 3.5cm;
-          padding:0.125cm;          
-          }
+body{
+  font-family: 'Texte';
+  font-size: 9px;
+}
 
-        @frame f3_SA {
-          left: 4.95cm;
-          width: 4.45cm;
-          top: 3.0cm;
-          height:3.5cm;
-          padding:0.125cm;
-          }
-        
-        @frame f4_skills{
-          left: 0.5cm;
-          width: 8.9cm;
-          top: 6.00cm;
-          height:14.5cm;
-          padding:0.125cm;
-          
-          }
+@page {
+  size: a4 landscape;
+  @frame f1 {
+    left: 0.5cm;
+    width: 8.9cm;
+    top: 0.5cm;
+    height:3.0cm;
+    padding:0.125cm;
+  }
+  @frame f2_PA {
+    left: 0.5cm;
+    width: 4.45cm;
+    top: 3.5cm;
+    height: 3.4cm;
+    padding:0.125cm;
+  }
 
+  @frame f3_SA {
+    left: 4.95cm;
+    width: 4.45cm;
+    top: 3.5cm;
+    height:3.4cm;
+    padding:0.125cm;
+  }
 
-        @frame f9_sht {
-          left: 9.65cm;
-          width: 8.9cm;
-          top: 0.5cm;
-          height:20cm;
-          padding:0.125cm;
-          
-          }
+  @frame f4_skills{
+    left: 0.5cm;
+    width: 8.9cm;
+    top: 7.0cm;
+    height:13.5cm;
+    padding:0.125cm;
+  }
 
+  @frame f9_sht {
+    left: 9.65cm;
+    width: 8.9cm;
+    top: 0.5cm;
+    height:20cm;
+    padding:0.125cm;   
+  }
 
+  @frame f10_sht {
+    left: 18.80cm;
+    width: 8.9cm;
+    top: 0.5cm;
+    height:20cm;
+    padding:0.125cm;
+  }
+  
+}
 
-      }
+h1{
+  font-family:'Titre';
+  font-size:12px;
+  font-weight:600;
+  margin:0;
+  color:#801080;
+}
 
-      h1{
-				font-family:'Titre';
-				font-size:12px;
-				font-weight:600;
-				margin:0;
-        color:#304060;
-			}
-      h2{
-				font-family:'Titre';
-				font-size:10px;
-				margin:0;
-				padding:0;
-        color:#304060;
-			}
+h2{
+  font-family:'Titre';
+  font-size:10px;
+  margin-top:5px;
+  font-weight:bold;
+  padding:0;
+  margin-bottom:0;
+  lineheight:1em;
+  color:#801080;
+}
 
-			.stats {
-				padding:0;
-				margin:0;
+.stats {
+  padding:0;
+  margin:0;
+}
+
+.stats th {
+  font-weight:300;
+  text-align:right;
+  font-size:1.0em;
+  padding-right:1ex;
+}
+
+.stats td {
+  font-size:1.0em;
+  padding-right:1ex;
+}
       
+.core th{
+  font-weight:500;
+  text-align:right;
+  padding:0;
+  width:2.75cm;
+}
 
-			}
-		
-		  .stats th {
-				  font-weight:300;
-				  text-align:right;
-	  	    font-size:1.0em;
-	  	    padding-right:1ex;
-        }
-		  .stats td {
-				  font-size:1.0em;
-				  padding-right:1ex;
-      }
-      
-			.core th{
-				  font-weight:500;
-				  text-align:right;
-	  	    
-	  	    padding:0;
-	  	    width:2.75cm;
-	  	    /* background-color:#E0E0E0; */
-		  }
-			.core td{
-				  
-				  padding-left:1ex;
-				  /* background-color:#E0C080; */
-				  width:3.25cm;
+.core td{
+  padding-left:1ex;
+  width:3.25cm;
+}
 
-		  }
+p{
+  padding:0;
+  margin:0;
+}
 
-		  p{
-				 padding:0;
-				 margin:0;
-		  }
+.spacer{
+  font-size:2px;
+  border-top: 1px solid #C0C0C0;
+}
 
-      .spacer{
-				 
-				 font-size:2px;
-				 border-top: 1px solid #C0C0C0;
-		   }
-		   .narrative{
-				 font-size:1.0em;
-			 }
-		   .gm_shortcuts{				 
-				 font-size:1.0em;
-			 }
-    </style>
+.narrative{
+  font-size:1.0em;
+}
+
+.gm_shortcuts{				 
+  font-size:1.0em;
+}
+
+.embedded_link{
+  text-decoration:underscore;
+  color:#806080;
+}
+
+  </style>
   </head>
   <body>
     <div class="roster">

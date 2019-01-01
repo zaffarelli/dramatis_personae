@@ -7,9 +7,19 @@ import hashlib
 #from collector import fs_fics7
 #from .utils import write_pdf
 
+"""
+  (from Fading Suns CoreRulebook p91-92)
+  Base AP..................: 60 AP -> 180 OP
+  Base Skill OP............: 30 OP
+  Everyman Skill OP .......: 20 OP
+  Blessing/Curses..........: 10 OP
+  Extra OP.................: 40 OP
+  TOTAL ...................: 280 OP
+"""
 
 MAX_CHAR = 8
-RELEASE = '0.9.2'
+RELEASE = '0.9.3'
+DEBUG_ALL = False
 
 ROLECHOICES = (
   ('08','Legend'),
@@ -34,27 +44,57 @@ PROFILECHOICES = (
   ('undefined','Undefined'),
 )
 
+GROUPCHOICES=(
+  ('EDU',"Education"),
+  ('FIG',"Combat"),
+  ('AWA',"Awareness"),
+  ('BOD',"Physical"),
+  ('TIN',"Tinkering"),
+  ('PER',"Performance"),
+  ('SOC',"Social"),
+  ('CON',"Control"),
+)
+
+CATEGORYCHOICES=(
+  ('no',"Uncategorized"),
+  ('co',"Combat"),
+  ('di',"Diplomacy"),
+  ('sp',"Spirituality"),
+  ('te',"Technical"),
+  ('ac',"Action"),
+)
+
+"""
+BOD EDU SOC PER FIG TIN CON SOC 
+"""
 PROFILES = {
   'physical': {
     'weights':[3,3,3,3,1,1,1,1,1,1,1,1],
+    'groups':['FIG','BOD'],
   },
   'spiritual': {
     'weights':[1,1,1,1,3,3,3,3,1,1,1,1],
+    'groups':['SOC','AWA'],
   },
   'tech': {
     'weights':[1,1,1,1,1,1,1,1,3,3,3,3],
+    'groups':['TIN','CON','AWA'],
   },  
   'courtisan': {
     'weights':[3,3,3,3,3,3,3,3,1,1,1,1],
+    'groups':['FIG','SOC','PER'],
   },
   'scholar': {
     'weights':[1,1,1,1,3,3,3,3,3,3,3,3],
+    'groups':['EDU','SOC'],
   },
   'guilder': {
     'weights':[3,3,3,3,1,1,1,1,3,3,3,3],
+    'groups':['FIG','TIN','CON']
   },    
   'standard': {
     'weights':[1,1,1,1,1,1,1,1,1,1,1,1],
+    'groups':[]
   },    
 }
 
@@ -63,60 +103,70 @@ ROLES = {
   '08': {
     'primaries': 76,
     'maxi': 11,
-    'skills':110,
-    'talents':40,
-    'bc':20,
+    'skills':70,
+    'talents':0,
+    'ba':10,
+    'bc':0,
   },
   '07': {
     'primaries': 72,
     'maxi': 10,
-    'skills':100,
-    'talents':30,
-    'bc':15,
+    'skills':60,
+    'talents':0,
+    'ba':10,
+    'bc':0,
   },  
   '06': {
     'primaries': 68,
     'maxi': 10,
-    'skills':90,
-    'talents':25,
-    'bc':10,
+    'skills':55,
+    'talents':0,
+    'ba':10,
+    'bc':0,
   },
   '05': {
     'primaries': 64,
     'maxi': 9,
-    'skills':80,
-    'talents':20,
-    'bc':10,
+    'skills':50,
+    'talents':0,
+    'ba':10,
+    'bc':0,
   },
   '04': {
     'primaries': 60,
     'maxi': 8,
-    'skills':70,
-    'talents':15,
-    'bc':10,
+    'skills':45,
+    'talents':0,
+    'ba':5,
+    'bc':0,
   },
   '03': {
     'primaries': 56,
     'maxi': 8,
-    'skills':60,
-    'talents':10,
-    'bc':5,
+    'skills':40,
+    'talents':0,
+    'ba':5,
+    'bc':0,
   },
   '02': {
     'primaries': 52,
     'maxi': 7,
-    'skills':50,
-    'talents':5,
+    'skills':35,
+    'talents':0,
+    'ba':5,
     'bc':0,
   },
   '01': {
     'primaries': 48,
     'maxi': 7,
-    'skills':40,
-    'talents':5,
+    'skills':30,
+    'talents':0,
+    'ba':0,
     'bc':0,
   },
 }
+
+
 
 
 EVERYMAN = {

@@ -4,29 +4,13 @@
 import math
 from random import randint
 import os
-
 from collector.models.skillrefs import SkillRef
-
 from collector.utils.fics_references import *
-
-
-
-'''
-  (from Fading Suns CoreRulebook p91-92)
-  Base AP..................: 60 AP -> 180 OP
-  Base Skill OP............: 30 OP
-  Everyman Skill OP .......: 20 OP
-  Blessing/Curses..........: 10 OP
-  Extra OP.................: 40 OP
-  TOTAL ...................: 280 OP
-
-'''
-
-
-
-
+from collector.utils.basic import debug_print
 
 def check_secondary_attributes(ch):
+  """ Compute all secondary attributes (we check nothing in fact)
+  """
   ch.SA_REC = ch.PA_STR + ch.PA_CON
   ch.SA_STA = math.ceil(ch.PA_BOD / 2) - 1
   ch.SA_END = (ch.PA_BOD + ch.PA_STR) * 5
@@ -42,6 +26,7 @@ def check_secondary_attributes(ch):
 
 
 def check_everyman_skills(ch):
+  """ Check and fix everyman values for the skills"""
   from collector.models.skills import Skill
   skills = ch.skill_set.all()
   for every in EVERYMAN[ch.species]:
@@ -51,13 +36,13 @@ def check_everyman_skills(ch):
         every_found = True
         val = int(EVERYMAN[ch.species][every])
         if s.value < val:          
-          print("Value fixed for %s (%s)"%(s.skill_ref.reference,val))
+          debug_print('Value fixed for %s (%s)'%(s.skill_ref.reference,val))
           this_skill = Skill.objects.get(id=s.id)
-          this_skill.value = value
+          this_skill.value = val
           this_skill.save()
         break
     if not every_found:
-      print("Not found: %s... Added!"%every)
+      debug_print('Not found: %s... Added!'%every)
       val = int(EVERYMAN[ch.species][every])
       this_skill_ref = SkillRef.objects.get(reference=every)
       this_skill = Skill()
@@ -74,7 +59,7 @@ def check_gm_shortcuts(ch,sk):
     newshortcut = '%s: <b>%d</b>'%(SHORTCUTS[sk.skill_ref.reference]['label'],score)
     return newshortcut  
   else:
-    return ""
+    return ''
 
 
 def check_nameless_attributes(ch):
@@ -87,7 +72,7 @@ def check_nameless_attributes(ch):
 
 def check_attacks(ch):
   """ Attacks shortcuts depending on the avatar and his/her weapons and skills """
-  ranged_attack = '<h2>Weapons</h2>'
+  ranged_attack = '<h2>Attacks</h2>'
   for w in ch.weapon_set.all():
     if w.weapon_ref.category in {'P','RIF','SMG'}:      
       sk = ch.skill_set.filter(skill_ref__reference='Shoot').first()
@@ -150,6 +135,8 @@ def sanitize(character,f):
 
 
 def check_root_skills(ch):
+  """ Checking Root skills and their specialties
+  """
   exportable = True
   skills = ch.skill_set.all()
   for root in skills:
@@ -162,19 +149,19 @@ def check_root_skills(ch):
       if cnt >= root.value:
         if cnt > root.value:
           root.value = cnt
-          print('Fixing root value for %s...'%root.skill_ref.reference)
+          debug_print('Fixing root value for %s...'%root.skill_ref.reference)
         #else:         
           #print('OK for %s'%root.skill_ref.reference)
       else:
-        print('Warning: Missing %d specialties for %s\n'% (root.value-cnt,root.skill_ref.reference))
+        debug_print('Warning: Missing %d specialties for %s\n'% (root.value-cnt,root.skill_ref.reference))
         exportable = False
   return exportable
 
 def roll(maxi):
-  """ A more random 1 to maxi dice roller  """
+  """ A more random '1 to maxi' dice roller  """
   randbyte = int.from_bytes(os.urandom(1),byteorder='big',signed=False)
   x = int(randbyte / 256 * (maxi)) +1
-  print("x=%d/%d)"%(x,maxi))
+  debug_print('x=%d/%d)'%(x,maxi))
   return x
 
 def choose_pa(weights):
@@ -190,18 +177,19 @@ def choose_pa(weights):
   return -1
 
 def check_primary_attributes(ch):
+  """ Fixing primary attributes """
   pool = ROLES[ch.role]['primaries']
   maxi = ROLES[ch.role]['maxi']
   weights = PROFILES[ch.profile]['weights']
   ch.challenge = '(<i class="fas fa-th-large"></i>%02d <i class="fas fa-th-list"></i>%02d <i class="fas fa-th"></i>%02d <i class="fas fa-outdent"></i>%02d)'%(ROLES[ch.role]['primaries'],ROLES[ch.role]['skills'], ROLES[ch.role]['talents'],ROLES[ch.role]['bc'])
-  print('%s: %s [ %d / %d ]'%(ch.full_name,ch.role,pool,maxi))  
+  debug_print('%s: %s [ %d / %d ]'%(ch.full_name,ch.role,pool,maxi))  
   pas = [2,2,2,2,2,2,2,2,2,2,2,2]
   #pas = [0,0,0,0,0,0,0,0,0,0,0,0]
   current =  ch.PA_STR+ch.PA_CON+ch.PA_BOD+ch.PA_MOV+ch.PA_INT+ch.PA_WIL+ch.PA_TEM+ch.PA_PRE+ch.PA_TEC+ch.PA_REF+ch.PA_AGI+ch.PA_AWA
-  print('Current PA TOTAL: %d'%(current))
-  if (current < pool or ch.keyword =='rebuild') and ch.player == '':
+  debug_print('Current PA TOTAL: %d'%(current))
+  if (current < pool or ch.keyword.startswith('rebuild')) and ch.player == '':
     pool = pool-24
-    print('Error: Primary Attributes invalid. Fixing that\n')
+    debug_print('Error: Primary Attributes invalid. Fixing that\n')
     while pool>0:      
       chosen_pa = choose_pa(weights)
       idx = chosen_pa
@@ -209,8 +197,8 @@ def check_primary_attributes(ch):
         pas[idx] += 1
         pool -= 1
       else:
-        print('Invalid : already too high: pa[idx]:%d idx:%d maxi:%d pool:%d chosen_pa:%d'%(pas[idx],idx,maxi,pool,chosen_pa))
-    print(pas)
+        debug_print('Invalid : already too high: pa[idx]:%d idx:%d maxi:%d pool:%d chosen_pa:%d'%(pas[idx],idx,maxi,pool,chosen_pa))
+    debug_print(pas)
     ch.PA_STR = pas[0]
     ch.PA_CON = pas[1]
     ch.PA_BOD = pas[2]
@@ -225,20 +213,91 @@ def check_primary_attributes(ch):
     ch.PA_REF = pas[9]
     ch.PA_AGI = pas[10]
     ch.PA_AWA = pas[11]
-    if ch.keyword == 'rebuild':
+    if ch.keyword == 'rebuild' or ch.keyword == 'rebuild_pa':
       ch.keyword = 'rebuilt'
 
+def get_skills_list(ch,groups):
+  """ Prepare the list of skills without specialties """
+  skills = SkillRef.objects.all().filter(is_speciality=False)
+  master_skills = []
+  for s in skills:
+    weight = 1
+    for g in groups:
+      if s.group == g:
+        weight = 5
+    master_skills.append({'skill':s.reference, 'data':s, 'weight':weight})
+  msl = []
+  for ms in master_skills:
+    debug_print('%s: %d'%(ms['skill'],ms['weight']))
+  return master_skills
+
+def choose_sk(alist,maxweight):
+  x = roll(maxweight)
+  cum = 0
+  idx = 0
+  while idx < len(alist):
+    cum += alist[idx]['weight']
+    if x <= cum:
+      return alist[idx]['data']
+    idx += 1
+  return None
+
 def check_skills(ch):
+  """ Fixing skills """
   pool = ROLES[ch.role]['skills']
-  pass
+  maxi = ROLES[ch.role]['maxi']
+  groups = PROFILES[ch.profile]['groups']
+  current = ch.SK_TOTAL
+  print('Current SK TOTAL: %d (pool is %d)'%(current,pool))
+  master_list = get_skills_list(ch,groups)
+  debug_print(master_list)
+  master_weight = 0
+  for s in master_list:
+    master_weight += s['weight']
+  debug_print(master_weight)
+  print('Keyword : %s'%(ch.keyword))
+  if ch.keyword == 'rebuild_skills':
+    for s in ch.skill_set.all():
+      s.delete()
+    check_everyman_skills(ch)
+    pool -= 16
+    ch.SK_TOTAL = 16
+    print('>>> ch.sk_total: %d'%(ch.SK_TOTAL))
+  if (current < pool or ch.keyword.startswith('rebuild')) and ch.player == '':
+    pool -= ch.SK_TOTAL
+    print('Error: Skills total too weak. Fixing that\n')    
+    while pool>0:
+      chosen_sk = choose_sk(master_list,master_weight)
+      debug_print('%d: %s'%(pool,chosen_sk.reference))
+      ch.add_or_update_skill(chosen_sk)
+      pool -= 1
+  #ch.add_missing_root_skills()
+  if ch.keyword.startswith('rebuild'):
+    ch.keyword = 'rebuilt'
+    
+  
 
 def check_role(ch):
   pa_pool = ROLES[ch.role]['primaries']
   sk_pool = ROLES[ch.role]['skills']
   ta_pool = ROLES[ch.role]['talents']
   bc_pool = ROLES[ch.role]['bc']
+  ba_pool = ROLES[ch.role]['ba']
   status = True
-  if ch.PA_TOTAL < pa_pool or ch.SK_TOTAL < sk_pool or ch.TA_TOTAL < ta_pool or ch.BC_TOTAL < bc_pool:
+  if ch.PA_TOTAL < pa_pool:
+    print('Not enough PA: %d < %d'%(ch.PA_TOTAL,pa_pool))
+    status = False 
+  elif ch.SK_TOTAL < sk_pool:
+    print('Not enough SK: %d < %d'%(ch.SK_TOTAL,sk_pool))
+    status = False 
+  elif ch.BA_TOTAL < ba_pool:
+    print('Not enough BA: %d < %d'%(ch.BA_TOTAL,ba_pool))
+    status = False 
+  elif ch.BC_TOTAL < bc_pool:
+    print('Not enough BC: %d < %d'%(ch.BC_TOTAL,bc_pool))
+    status = False 
+  elif ch.TA_TOTAL < ta_pool:
+    print('Not enough TA: %d < %d'%(ch.TA_TOTAL,ta_pool))
     status = False 
   return status
 

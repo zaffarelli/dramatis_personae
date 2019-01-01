@@ -28,7 +28,7 @@ class BeneficeAffliction(models.Model):
   value = models.IntegerField(default=0)
   description = models.TextField(max_length=256, default='', null=True, blank=True)
   def __str__(self):
-    return '%s=%s' % (self.character.full_name,self.name)
+    return '%s=%s' % (self.character.full_name,self.beneficeaffliction_ref.reference)
 
 class BeneficeAfflictionInline(admin.TabularInline):
   model = BeneficeAffliction

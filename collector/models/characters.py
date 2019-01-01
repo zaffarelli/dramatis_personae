@@ -8,8 +8,8 @@ import collector.models.skills
 from scenarist.models.epics import Epic
 from scenarist.models.dramas import Drama
 from scenarist.models.acts import Act
-from collector.utils import fs_fics7
-
+from collector.utils import fs_fics7, fics_references
+from collector.utils.basic import debug_print
 from collector.utils.basic import write_pdf
 
 
@@ -69,8 +69,8 @@ class Character(models.Model):
   OP = models.IntegerField(default=0)
   gm_shortcuts = models.TextField(default='',blank=True)
   age = models.IntegerField(default=0)  
-  role = models.CharField(max_length=16,default='00',choices= fs_fics7.ROLECHOICES)
-  profile = models.CharField(max_length=16,default='undefined',choices=fs_fics7.PROFILECHOICES)
+  role = models.CharField(max_length=16,default='00',choices= fics_references.ROLECHOICES)
+  profile = models.CharField(max_length=16,default='undefined',choices=fics_references.PROFILECHOICES)
   occult_level = models.PositiveIntegerField(default=0)
   occult_darkside = models.PositiveIntegerField(default=0)
   occult = models.CharField(max_length=50, default='', blank=True)
@@ -102,19 +102,57 @@ class Character(models.Model):
 #    fs_fics7.check_everyman_skills(self, Skill, SkillRef)
     fs_fics7.check_everyman_skills(self)
     fs_fics7.check_skills(self)
-    gm_shortcuts = ""
+    gm_shortcuts = ''
     tmp_shortcuts = []
     skills = self.skill_set.all()
     for s in skills:
       sc = fs_fics7.check_gm_shortcuts(self,s)
       if sc != '':
         tmp_shortcuts.append(sc)
-    gm_shortcuts = ", ".join(tmp_shortcuts)
+    gm_shortcuts = '<br/>'.join(tmp_shortcuts)
     gm_shortcuts += fs_fics7.check_attacks(self)
     if self.player == None:
       gm_shortcuts += fs_fics7.check_nameless_attributes(self)
     self.gm_shortcuts = gm_shortcuts
     self.ready_for_export = self.check_exportable()
+
+
+  def add_or_update_skill(self,askill,modifier=0):
+    from collector.models.skills import Skill    
+    found_skill = self.skill_set.all().filter(skill_ref=askill).first()
+    if found_skill != None:
+      if modifier == 0:
+        found_skill.value += 1
+      else:
+        found_skill.value = modifier
+      found_skill.save()
+      debug_print('updated')
+    else:
+      skill = Skill()
+      skill.character = self
+      skill.skill_ref = askill
+      if modifier == 0:
+        skill.value = 1
+      else:
+        skill.value = modifier
+      skill.save()
+      debug_print('added')
+
+  def add_missing_root_skills(self):
+    from collector.models.skills import Skill
+    from collector.models.skillrefs import SkillRef
+    roots_list = []
+    for skill in self.skill_set.all():
+      if skill.skill_ref.is_speciality:
+        roots_list.append(skill.skill_ref.linked_to)
+    for skill in self.skill_set.all():
+      if skill.skill_ref.is_root:
+        skill.delete()
+    print(roots_list)
+    for skillref in SkillRef.objects.all():
+      if skillref in roots_list:
+        self.add_or_update_skill(skillref, roots_list.count(skillref))
+
   def check_exportable(self,conf=None):
     """
     Is that avatar finished?
@@ -144,6 +182,7 @@ class Character(models.Model):
     for s in skills:
       if s.skill_ref.is_root == False:         
         self.SK_TOTAL += s.value
+    print('sk total for %s is %d'%(self.full_name,self.SK_TOTAL))
     talents = self.talent_set.all()
     for t in talents:
       self.TA_TOTAL += t.value
@@ -156,23 +195,17 @@ class Character(models.Model):
     self.AP = self.PA_TOTAL
     self.OP = self.PA_TOTAL*3 + self.SK_TOTAL + self.TA_TOTAL + self.BC_TOTAL + self.BA_TOTAL
     #self.challenge = self.PA_TOTAL*3 + self.SK_TOTAL + self.TA_TOTAL + self.BC_TOTAL
-
     weapons = self.weapon_set.all()    
     for w in weapons:
       self.weapon_cost += w.weapon_ref.cost
-
     armors = self.armor_set.all()    
     for a in armors:
       self.armor_cost += a.armor_ref.cost
-
     shields = self.shield_set.all()    
     for s in shields:
       self.shield_cost += s.shield_ref.cost
-
     roleok = fs_fics7.check_role(self)
-
     self.challenge = fs_fics7.update_challenge(self)
-    
     if roleok == False:
       exportable = False
     if self.player != '':
@@ -196,10 +229,6 @@ class Character(models.Model):
 
   def __str__(self):
     return '%s' % self.full_name  
-
-#  def simple(self, key, value):
-#    x = self._meta.get_field(str(key)).get_internal_type()
-#    print("is it a foreignkey? %s"%(x))
 
   def update_field(self, key, value):
     """ Field individual validation during sanitize """
@@ -230,7 +259,7 @@ class Character(models.Model):
           valfix = bool(val)
         else:
           valfix = str(val)
-      print(valfix)
+      debug_print(valfix)
       if valfix != v:
         #print("%s --> %s:%s <> %s:%s"%(key,v,type(v),valfix,type(valfix)))
         #print("%s"%(type(self.key)))

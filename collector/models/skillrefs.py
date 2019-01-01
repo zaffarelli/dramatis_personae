@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib import admin
+from collector.utils import fics_references
 
 class SkillRef(models.Model):
   class Meta:
@@ -7,8 +8,8 @@ class SkillRef(models.Model):
   reference = models.CharField(max_length=200, unique=True)
   is_root = models.BooleanField(default=False)
   is_speciality = models.BooleanField(default=False)
-  category = models.CharField(default="un",max_length=2, choices=(('no',"Uncategorized"),('co',"Combat"),('di',"Diplomacy"),('sp',"Spirituality"),('te',"Technical")))
-  group = models.CharField(default="EDU",max_length=3, choices=(('EDU',"Education"),('FIG',"Combat"),('AWA',"Awareness"),('BOD',"Physical"),('TIN',"Tinkering"),('PER',"Performance"),('SOC',"Social"),('CON',"Control")))
+  category = models.CharField(default="un",max_length=2, choices=fics_references.CATEGORYCHOICES)
+  group = models.CharField(default="EDU",max_length=3, choices=fics_references.GROUPCHOICES)
   linked_to = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE)
   
   def __str__(self):
