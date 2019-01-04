@@ -218,13 +218,13 @@ def check_primary_attributes(ch):
 
 def get_skills_list(ch,groups):
   """ Prepare the list of skills without specialties """
-  skills = SkillRef.objects.all().filter(is_speciality=False)
+  skills = SkillRef.objects.all().filter(is_root=False)
   master_skills = []
   for s in skills:
     weight = 1
     for g in groups:
       if s.group == g:
-        weight = 5
+        weight = 20
     master_skills.append({'skill':s.reference, 'data':s, 'weight':weight})
   msl = []
   for ms in master_skills:
@@ -257,21 +257,21 @@ def check_skills(ch):
   debug_print(master_weight)
   print('Keyword : %s'%(ch.keyword))
   if ch.keyword == 'rebuild_skills':
-    for s in ch.skill_set.all():
-      s.delete()
+    ch.purgeSkills()
     check_everyman_skills(ch)
-    pool -= 16
-    ch.SK_TOTAL = 16
+    check_root_skills(ch)
+    ch.SK_TOTAL = 16 #ch.reset_SK_TOTAL()
+    current = ch.SK_TOTAL
     print('>>> ch.sk_total: %d'%(ch.SK_TOTAL))
   if (current < pool or ch.keyword.startswith('rebuild')) and ch.player == '':
     pool -= ch.SK_TOTAL
     print('Error: Skills total too weak. Fixing that\n')    
     while pool>0:
       chosen_sk = choose_sk(master_list,master_weight)
-      debug_print('%d: %s'%(pool,chosen_sk.reference))
+      print('%d: %s'%(pool,chosen_sk.reference))
       ch.add_or_update_skill(chosen_sk)
       pool -= 1
-  #ch.add_missing_root_skills()
+  ch.add_missing_root_skills()
   if ch.keyword.startswith('rebuild'):
     ch.keyword = 'rebuilt'
     

@@ -421,7 +421,14 @@ function rebootlinks(){
   register_story('act');
   register_story('event');
 
-
+  $('.tabber').off();
+  $('.tabber').on('click', function(event){
+    var x = $(this).attr('id');
+    $('.tabs').removeClass('tab_up');
+    var target = '.tabs#'+x+'t';
+    $(target).toggleClass('tab_up');
+    console.log(target);
+  });
   
 }
 

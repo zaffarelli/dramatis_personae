@@ -126,6 +126,7 @@ class Character(models.Model):
       else:
         found_skill.value = modifier
       found_skill.save()
+      print('>>>> New value for %s is %d'%(found_skill.skill_ref.reference,found_skill.value))
       debug_print('updated')
     else:
       skill = Skill()
@@ -136,6 +137,7 @@ class Character(models.Model):
       else:
         skill.value = modifier
       skill.save()
+      print('>>>> New value for %s is %d'%(skill.skill_ref.reference,skill.value))
       debug_print('added')
 
   def add_missing_root_skills(self):
@@ -152,6 +154,19 @@ class Character(models.Model):
     for skillref in SkillRef.objects.all():
       if skillref in roots_list:
         self.add_or_update_skill(skillref, roots_list.count(skillref))
+
+  def purgeSkills(self):
+    for skill in self.skill_set.all():
+      skill.delete()
+    print(self.skill_set.all().count())
+
+  def reset_SK_TOTAL(self):
+    skills = self.skill_set.all()
+    for s in skills:
+      if s.skill_ref.is_root == False:         
+        self.SK_TOTAL += s.value
+    print('SK_TOTAL for %s is %d'%(self.full_name,self.SK_TOTAL))
+    return self.SK_TOTAL
 
   def check_exportable(self,conf=None):
     """
@@ -178,11 +193,7 @@ class Character(models.Model):
     self.weapon_cost = 0
     self.armor_cost = 0
     self.shield_cost = 0
-    skills = self.skill_set.all()
-    for s in skills:
-      if s.skill_ref.is_root == False:         
-        self.SK_TOTAL += s.value
-    print('sk total for %s is %d'%(self.full_name,self.SK_TOTAL))
+    self.reset_SK_TOTAL()
     talents = self.talent_set.all()
     for t in talents:
       self.TA_TOTAL += t.value

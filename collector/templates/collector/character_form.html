@@ -51,7 +51,7 @@
 		{{form.weight}}
 	</div>
 
-	</td><td>
+	
 	<div class="field_wrapper">
 		{{ form.rank.errors}}
 		<label for="">Rank</label>
@@ -72,7 +72,7 @@
 		<label for="">Player</label>
 		{{form.player}}
 	</div>
-	</td><td>
+
 	<div class="field_wrapper">
 		{{ form.occult.errors}}
 		<label for="">Occult</label>
@@ -90,7 +90,7 @@
 		<label for="">Darkside</label>
 		{{form.occult_darkside}}
 	</div>
-
+	</td><td>
 	<div class="field_wrapper">
 		{{ form.keyword.errors}}
 		<label for="">Keyword</label>
@@ -128,21 +128,19 @@
   <caption>Storyline</caption>
 <tr><td>
   <div class="row">
-    <div class="col-12">
+    <div class="col-4">
 		{{form.epic|as_crispy_field}}
     </div>
 	</div>
-</td></tr>
-<tr><td>
+</td><td>
   <div class="row">
-    <div class="col-12">
+    <div class="col-4">
 		{{form.drama|as_crispy_field}}
     </div>
   </div>
-</td></tr>
-<tr><td>
+</td><td>
    <div class="row">
-    <div class="col-12">		
+    <div class="col-4">		
 		{{form.act|as_crispy_field}}
     </div>
   </div>
@@ -153,6 +151,7 @@
 <table class="formset ">
 	<caption>Primary Attributes</caption>
 	<tr><td>
+    
 <table class="formset inline">
 	<caption>Physical</caption>
 	<tr><td>
@@ -182,6 +181,7 @@
 	</div>
 	</td></tr>
 </table>
+</td><td>
 <table class="formset inline">
 	<caption>Spiritual</caption>
 	<tr><td>
@@ -211,6 +211,7 @@
 	</div>
 	</td></tr>
 </table>
+</td><td>
 <table class="formset inline">
 	<caption>Combat</caption>
 	<tr><td>
@@ -243,6 +244,16 @@
 	</td></tr>
 </table>
 
+<div class='tabberbar'>
+  <span id='s' class='tabber btn'>Skills</span>
+  <span id='t' class='tabber btn'>Talents</span>
+  <span id='ba' class='tabber btn'>Benefices/Afflictions</span>
+  <span id='bc' class='tabber btn'>Blessings/Curses</span>
+  <span id='w' class='tabber btn'>Weapons</span>
+  <span id='aes' class='tabber btn'>Armors &amp; Energy Shield</span>
+</div>
+
+<div id='st' class='tabs'>
 	<table class="formset inline">
 	<caption>Skills</caption>
 	{{ skills.management_form }}	
@@ -250,7 +261,8 @@
 	  {{ form.as_table }}
 	{% endfor %}
 	</table>
-
+</div>
+<div id='tt' class='tabs'>
 	<table class="formset inline">
   <caption>Talents</caption>
 	{{ talents.management_form }}
@@ -258,8 +270,8 @@
 	{{ form.as_table }}
 	{% endfor %}
 	</table>
-
-
+</div>
+<div id='bct' class='tabs'>
 	<table class="formset inline">
 	<caption>Blessings &amp; Curses</caption>
 	{{ blessingcurses.management_form }}
@@ -267,7 +279,8 @@
 	{{ form.as_table }}
 	{% endfor %}
 	</table>
-
+</div>
+<div id='bat' class='tabs'>
 	<table class="formset inline">
 	<caption>Benefices &amp; Afflictions</caption>
 	{{ beneficeafflictions.management_form }}
@@ -275,8 +288,9 @@
 	{{ form.as_table }}
 	{% endfor %}
 	</table>
+</div>
 
-
+<div id='wt' class='tabs'>
 <table class="formset inline">
 	<caption>Weapons</caption>
 	{{ weapons.management_form }}
@@ -284,7 +298,9 @@
 		{{ form.as_table }}
 	{% endfor %}
 	</table>
+</div>
 
+<div id='aest' class='tabs'>
 <table class="formset inline">
 	<caption>Armors</caption>
 	{{ armors.management_form }}
@@ -300,6 +316,9 @@
 		{{ form.as_table }}
 	{% endfor %}
 	</table>
+</div>
+
+</div>
 
 {% csrf_token %}
   
