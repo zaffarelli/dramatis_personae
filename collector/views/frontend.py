@@ -144,7 +144,7 @@ def edit_character(request,id=None):
       crid = character_item.rid
       """ FIXME: There is a mistake here that puts " at start and end ...."""
       formdata = json.loads(json.dumps(parse_qs(json.dumps(request.POST['character'])),indent=2))
-      forms = fs_fics7.sanitize(character_item,formdata)
+      forms = character_item.sanitize(formdata)
       fv = False
       if forms == None:
         print('No change for character...')
@@ -183,7 +183,9 @@ def edit_character(request,id=None):
           armors.save()
           weapons.save()
           shields.save()
+          print('Saving character...')
           character_item.save()
+          print('...character saved.')
           item = get_object_or_404(Character,pk=cid)
           template = get_template('collector/character.html')
           html = template.render({'c':item})

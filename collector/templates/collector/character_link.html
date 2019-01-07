@@ -2,14 +2,13 @@
 
 
   <em>{{ c.full_name }}</em> {%if c.player != '' %}({{c.player|safe}}){% endif %} 
-  <br/>
+      {% if c.ready_for_export %}
+      <i class="fas fa-share golden"></i> 
+    {% endif %}<br/>
   <div class="character_actions">
     <span class="view_character" id="{{c.id}}"><i class="fas fa-user"></i></span>&nbsp;&nbsp;
     <span class="edit_character" id="{{c.id}}"><i class="fas fa-user-tag"></i></span>&nbsp;&nbsp;
     <!-- span class="pdf_character" id="{{c.id}}"><i class="fas fa-file-pdf"></i></span>&nbsp;&nbsp;-->
-    {% if c.ready_for_export %}
-      <i class="fas fa-share golden"></i> 
-    {% endif %}
     {{c.stars|safe}}
   </div>
   <br/>{{ c.challenge|safe }}

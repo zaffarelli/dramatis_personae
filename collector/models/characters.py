@@ -118,6 +118,13 @@ class Character(models.Model):
 
 
   def add_or_update_skill(self,askill,modifier=0):
+    """
+        Modifier <> 0:
+        - Adding a skill at <modifier> value,
+        - Updating a skill value to <modifier> value
+        <modifier> is 0
+        - Increment by 1
+    """ 
     from collector.models.skills import Skill    
     found_skill = self.skill_set.all().filter(skill_ref=askill).first()
     if found_skill != None:
@@ -126,8 +133,9 @@ class Character(models.Model):
       else:
         found_skill.value = modifier
       found_skill.save()
-      print('>>>> New value for %s is %d'%(found_skill.skill_ref.reference,found_skill.value))
+      debug_print('> New value for %s is %d'%(found_skill.skill_ref.reference,found_skill.value))
       debug_print('updated')
+      return found_skill
     else:
       skill = Skill()
       skill.character = self
@@ -137,10 +145,12 @@ class Character(models.Model):
       else:
         skill.value = modifier
       skill.save()
-      print('>>>> New value for %s is %d'%(skill.skill_ref.reference,skill.value))
+      debug_print('> New value for %s is %d'%(skill.skill_ref.reference,skill.value))
       debug_print('added')
+      return skill
 
   def add_missing_root_skills(self):
+    """ According to the character specialities, fixing the root skills """
     from collector.models.skills import Skill
     from collector.models.skillrefs import SkillRef
     roots_list = []
@@ -156,36 +166,15 @@ class Character(models.Model):
         self.add_or_update_skill(skillref, roots_list.count(skillref))
 
   def purgeSkills(self):
+    """ Deleting all character skills """
     for skill in self.skill_set.all():
       skill.delete()
     print(self.skill_set.all().count())
 
-  def reset_SK_TOTAL(self):
-    skills = self.skill_set.all()
-    for s in skills:
-      if s.skill_ref.is_root == False:         
-        self.SK_TOTAL += s.value
-    print('SK_TOTAL for %s is %d'%(self.full_name,self.SK_TOTAL))
-    return self.SK_TOTAL
-
-  def check_exportable(self,conf=None):
-    """
-    Is that avatar finished?
-    We check this with the fics rule for extras:
-      AP: 60 for player
-      SK: 70
-      TA: 20
-      BC: 10 
-    """
-    exportable = True
-    comment = ''
-    self.stars = ""
-    for x in range(1,int(self.role)+1):
-      self.stars += '<i class="fas fa-star fa-xs"></i>'    
-    self.PA_TOTAL = \
-      self.PA_STR + self.PA_CON + self.PA_BOD + self.PA_MOV + \
-      self.PA_INT + self.PA_WIL + self.PA_TEM + self.PA_PRE + \
-      self.PA_TEC + self.PA_REF + self.PA_AGI + self.PA_AWA
+    
+  def resetTotal(self):
+    """ Compute all sums for all stats """
+    notes = []
     self.SK_TOTAL = 0
     self.TA_TOTAL = 0
     self.BC_TOTAL = 0
@@ -193,28 +182,62 @@ class Character(models.Model):
     self.weapon_cost = 0
     self.armor_cost = 0
     self.shield_cost = 0
-    self.reset_SK_TOTAL()
+    self.PA_TOTAL = \
+      self.PA_STR + self.PA_CON + self.PA_BOD + self.PA_MOV + \
+      self.PA_INT + self.PA_WIL + self.PA_TEM + self.PA_PRE + \
+      self.PA_TEC + self.PA_REF + self.PA_AGI + self.PA_AWA
+    notes.append('PA_TOTAL: %d'%(self.PA_TOTAL))
+    # skills
+    skills = self.skill_set.all()
+    for s in skills:
+      if s.skill_ref.is_root == False:         
+        self.SK_TOTAL += s.value
+    notes.append('SK_TOTAL: %d'%(self.SK_TOTAL))
+    # talents
     talents = self.talent_set.all()
     for t in talents:
       self.TA_TOTAL += t.value
+    notes.append('TA_TOTAL: %d'%(self.TA_TOTAL))
+    # blessings curses
     blessingcurses = self.blessingcurse_set.all()
     for bc in blessingcurses:
       self.BC_TOTAL += bc.value
-    beneficeafflictions = self.beneficeaffliction_set.all()
+    notes.append('BC_TOTAL: %d'%(self.BC_TOTAL))
+    # benefice afflictions
+    beneficeafflictions = self.beneficeaffliction_set.all()    
     for ba in beneficeafflictions:
       self.BA_TOTAL += ba.value + ba.beneficeaffliction_ref.value
+    notes.append('BA_TOTAL: %d'%(self.BA_TOTAL))
+    # AP    
     self.AP = self.PA_TOTAL
+    # Extras as OP
     self.OP = self.PA_TOTAL*3 + self.SK_TOTAL + self.TA_TOTAL + self.BC_TOTAL + self.BA_TOTAL
-    #self.challenge = self.PA_TOTAL*3 + self.SK_TOTAL + self.TA_TOTAL + self.BC_TOTAL
+    # Weapons firebirds
     weapons = self.weapon_set.all()    
     for w in weapons:
       self.weapon_cost += w.weapon_ref.cost
+    notes.append('weapon_cost: %d'%(self.weapon_cost))
+    # Armors firebirds
     armors = self.armor_set.all()    
     for a in armors:
       self.armor_cost += a.armor_ref.cost
+    notes.append('armor_cost: %d'%(self.armor_cost))
+    # Shields firebirds
     shields = self.shield_set.all()    
     for s in shields:
       self.shield_cost += s.shield_ref.cost
+    notes.append('shield_cost: %d'%(self.shield_cost))
+    return ' / '.join(notes)
+
+
+  def check_exportable(self,conf=None):
+    """ Is that avatar finished according to the role and profile? """
+    exportable = True
+    comment = ''
+    self.stars = ''
+    for x in range(1,int(self.role)+1):
+      self.stars += '<i class="fas fa-star fa-xs"></i>'    
+    comment += self.resetTotal()
     roleok = fs_fics7.check_role(self)
     self.challenge = fs_fics7.update_challenge(self)
     if roleok == False:
@@ -236,6 +259,7 @@ class Character(models.Model):
       item = self
       context = {'c':item,'filename':'%04d_%s'%(item.pagenum,item.rid),}
       write_pdf('collector/character_pdf.html',context)
+      print('PDF .........: %s.pdf' % (self.rid))
     return proceed      
 
   def __str__(self):
@@ -281,26 +305,42 @@ class Character(models.Model):
     except AttributeError:
       #print("DP: There is no such attribute %s in this model"%(key))
       return False, False   
+
+  def sanitize(self,f):
+    sane_f = {}
+    for key, value in f.items():
+      rkey,rvalue = self.update_field(key, value)
+      if rkey != False:
+        sane_f[rkey] = rvalue
+    return sane_f
+
+  def get_rid(self,s):
+    x = s.replace(' ','_').replace("'",'').replace('é','e').replace('è','e').replace('ë','e').replace('â','a').replace('ô','o').replace('"','').replace('ï','i').replace('à','a').replace('-','')
+    self.rid = x.lower()
+
   # Auto build character
   def autobuild(self):
     if self.role == '00' and self.profile == 'undefined':
       return False
     else:
       return True
+
+      
 @receiver(pre_save, sender=Character, dispatch_uid='update_character')
 def update_character(sender, instance, conf=None, **kwargs):
+  """ Before saving, fix() and  get_RID() for the character """
   if instance.rid != 'none':
     instance.fix(conf)
-  #instance.rid = hashlib.sha1(bytes(instance.full_name,'utf-8')).hexdigest()
-  instance.rid = fs_fics7.get_rid(instance.full_name)
+  instance.get_rid(instance.full_name)
   instance.alliancehash = hashlib.sha1(bytes(instance.alliance,'utf-8')).hexdigest()
-  print("Fix .........: %s" % (instance.full_name))
+  print('Fix .........: %s' % (instance.full_name))
 
 @receiver(post_save, sender=Character, dispatch_uid='backup_character')
 def backup_character(sender, instance, **kwargs):
+  """ After saving, create PDF for the character """
   if instance.rid != 'none':
-    if instance.backup() == True:
-      print("PDF .........: %s.pdf" % (instance.rid))
+    instance.backup()
+      
 
 
 

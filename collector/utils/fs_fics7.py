@@ -24,7 +24,14 @@ def check_secondary_attributes(ch):
   ch.SA_SPD = math.ceil(ch.PA_REF / 2)
   ch.SA_RUN = ch.PA_MOV *2
 
-
+def fetch_everyman_sum(ch):
+  """ Get the sum of everyman skills for the character species """  
+  total = 0
+  for every in EVERYMAN[ch.species]:
+    total += int(EVERYMAN[ch.species][every])
+  debug_print('> Everyman total for [%s] as [%s] is [%d].'%(ch.full_name,ch.species,total))
+  return total
+    
 def check_everyman_skills(ch):
   """ Check and fix everyman values for the skills"""
   from collector.models.skills import Skill
@@ -38,7 +45,7 @@ def check_everyman_skills(ch):
         if s.value < val:          
           debug_print('Value fixed for %s (%s)'%(s.skill_ref.reference,val))
           this_skill = Skill.objects.get(id=s.id)
-          this_skill.value = val
+          this_skill.value += val
           this_skill.save()
         break
     if not every_found:
@@ -108,9 +115,7 @@ def check_attacks(ch):
   ranged_attack = '<br/>'.join(tmpstr) 
   return ranged_attack
 
-def get_rid(s):
-  x = s.replace(' ','_').replace("'",'').replace('é','e').replace('è','e').replace('ë','e').replace('â','a').replace('ô','o').replace('"','').replace('ï','i').replace('à','a').replace('-','')
-  return x.lower()
+
 
 def minmax_from_dc(sdc):
   if sdc == '':
@@ -125,14 +130,19 @@ def minmax_from_dc(sdc):
   dmax = dmin*int(split_scope[1])+dbonus
   return (dmin,dmax)
 
-def sanitize(character,f):
-  sane_f = {}
-  for key, value in f.items():
-    rkey,rvalue = character.update_field(key, value)
-    if rkey != False:
-      sane_f[rkey] = rvalue
-  return sane_f
-
+def check_specialties_from_roots(ch):
+  """ Get specialities from root scores """
+  from collector.models.skillrefs import SkillRef
+  ch_root_skills = ch.skill_set.all().filter(skill_ref__is_root=True)
+  for root_skill in ch_root_skills:
+    matching_specialities = SkillRef.objects.filter(is_speciality=True, linked_to=root_skill.skill_ref)
+    maxdie =len(matching_specialities)
+    pool = root_skill.value
+    while pool>0:
+      x = roll(maxdie)
+      ch.add_or_update_skill(matching_specialities[x-1])
+      pool -= 1
+  
 
 def check_root_skills(ch):
   """ Checking Root skills and their specialties
@@ -146,15 +156,9 @@ def check_root_skills(ch):
         if spec.skill_ref.is_speciality:
           if spec.skill_ref.linked_to == root.skill_ref:
             cnt += 1
-      if cnt >= root.value:
-        if cnt > root.value:
-          root.value = cnt
-          debug_print('Fixing root value for %s...'%root.skill_ref.reference)
-        #else:         
-          #print('OK for %s'%root.skill_ref.reference)
-      else:
-        debug_print('Warning: Missing %d specialties for %s\n'% (root.value-cnt,root.skill_ref.reference))
-        exportable = False
+      if cnt != root.value:
+        root.value = cnt
+        debug_print('Fixing root value for %s...'%root.skill_ref.reference)
   return exportable
 
 def roll(maxi):
@@ -178,6 +182,7 @@ def choose_pa(weights):
 
 def check_primary_attributes(ch):
   """ Fixing primary attributes """
+  print('Checking primary attributes...')
   pool = ROLES[ch.role]['primaries']
   maxi = ROLES[ch.role]['maxi']
   weights = PROFILES[ch.profile]['weights']
@@ -186,10 +191,10 @@ def check_primary_attributes(ch):
   pas = [2,2,2,2,2,2,2,2,2,2,2,2]
   #pas = [0,0,0,0,0,0,0,0,0,0,0,0]
   current =  ch.PA_STR+ch.PA_CON+ch.PA_BOD+ch.PA_MOV+ch.PA_INT+ch.PA_WIL+ch.PA_TEM+ch.PA_PRE+ch.PA_TEC+ch.PA_REF+ch.PA_AGI+ch.PA_AWA
-  debug_print('Current PA TOTAL: %d'%(current))
+  debug_print('> Current PA TOTAL: %d'%(current))
   if (current < pool or ch.keyword.startswith('rebuild')) and ch.player == '':
     pool = pool-24
-    debug_print('Error: Primary Attributes invalid. Fixing that\n')
+    debug_print('> Error: Primary Attributes invalid. Fixing that.')
     while pool>0:      
       chosen_pa = choose_pa(weights)
       idx = chosen_pa
@@ -218,15 +223,16 @@ def check_primary_attributes(ch):
 
 def get_skills_list(ch,groups):
   """ Prepare the list of skills without specialties """
-  skills = SkillRef.objects.all().filter(is_root=False)
+  skills = SkillRef.objects.all().filter(is_speciality=False)
   master_skills = []
   for s in skills:
-    weight = 1
+    weight = 5
     for g in groups:
       if s.group == g:
-        weight = 20
+        weight = 15
     master_skills.append({'skill':s.reference, 'data':s, 'weight':weight})
   msl = []
+  debug_print('MASTER LIST')
   for ms in master_skills:
     debug_print('%s: %d'%(ms['skill'],ms['weight']))
   return master_skills
@@ -242,42 +248,45 @@ def choose_sk(alist,maxweight):
     idx += 1
   return None
 
+
+
+
 def check_skills(ch):
   """ Fixing skills """
+  debug_print('Checking skills...')
   pool = ROLES[ch.role]['skills']
   maxi = ROLES[ch.role]['maxi']
   groups = PROFILES[ch.profile]['groups']
   current = ch.SK_TOTAL
-  print('Current SK TOTAL: %d (pool is %d)'%(current,pool))
+  debug_print('> Current SK TOTAL: %d (pool is %d)'%(current,pool))
   master_list = get_skills_list(ch,groups)
-  debug_print(master_list)
   master_weight = 0
   for s in master_list:
     master_weight += s['weight']
-  debug_print(master_weight)
-  print('Keyword : %s'%(ch.keyword))
+  debug_print('> Max weight is %d'%(master_weight))
+  debug_print('> Keyword is %s'%(ch.keyword))
   if ch.keyword == 'rebuild_skills':
     ch.purgeSkills()
-    check_everyman_skills(ch)
-    check_root_skills(ch)
-    ch.SK_TOTAL = 16 #ch.reset_SK_TOTAL()
-    current = ch.SK_TOTAL
-    print('>>> ch.sk_total: %d'%(ch.SK_TOTAL))
+    current = fetch_everyman_sum(ch)
   if (current < pool or ch.keyword.startswith('rebuild')) and ch.player == '':
-    pool -= ch.SK_TOTAL
-    print('Error: Skills total too weak. Fixing that\n')    
+    pool -= current
+    debug_print('> Error: Skills total too weak. Fixing that\n')    
     while pool>0:
       chosen_sk = choose_sk(master_list,master_weight)
-      print('%d: %s'%(pool,chosen_sk.reference))
-      ch.add_or_update_skill(chosen_sk)
+      sk = ch.add_or_update_skill(chosen_sk)
       pool -= 1
-  ch.add_missing_root_skills()
+      debug_print('> Upping %s of 1 (now %d) let pool at %d'%(chosen_sk.reference,sk.value,pool))      
+    check_specialties_from_roots(ch)
+    check_everyman_skills(ch)
+    ch.add_missing_root_skills()
+    check_root_skills(ch)
   if ch.keyword.startswith('rebuild'):
     ch.keyword = 'rebuilt'
     
   
 
 def check_role(ch):
+  print('Checking Role...')
   pa_pool = ROLES[ch.role]['primaries']
   sk_pool = ROLES[ch.role]['skills']
   ta_pool = ROLES[ch.role]['talents']
@@ -285,19 +294,19 @@ def check_role(ch):
   ba_pool = ROLES[ch.role]['ba']
   status = True
   if ch.PA_TOTAL < pa_pool:
-    print('Not enough PA: %d < %d'%(ch.PA_TOTAL,pa_pool))
+    print('> Not enough PA: %d < %d'%(ch.PA_TOTAL,pa_pool))
     status = False 
   elif ch.SK_TOTAL < sk_pool:
-    print('Not enough SK: %d < %d'%(ch.SK_TOTAL,sk_pool))
+    print('> Not enough SK: %d < %d'%(ch.SK_TOTAL,sk_pool))
     status = False 
   elif ch.BA_TOTAL < ba_pool:
-    print('Not enough BA: %d < %d'%(ch.BA_TOTAL,ba_pool))
+    print('> Not enough BA: %d < %d'%(ch.BA_TOTAL,ba_pool))
     status = False 
   elif ch.BC_TOTAL < bc_pool:
-    print('Not enough BC: %d < %d'%(ch.BC_TOTAL,bc_pool))
+    print('> Not enough BC: %d < %d'%(ch.BC_TOTAL,bc_pool))
     status = False 
   elif ch.TA_TOTAL < ta_pool:
-    print('Not enough TA: %d < %d'%(ch.TA_TOTAL,ta_pool))
+    print('> Not enough TA: %d < %d'%(ch.TA_TOTAL,ta_pool))
     status = False 
   return status
 

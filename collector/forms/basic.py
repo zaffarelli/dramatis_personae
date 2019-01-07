@@ -24,4 +24,4 @@ BlessingCurseFormSet = inlineformset_factory(Character, BlessingCurse, fields='_
 BeneficeAfflictionFormSet = inlineformset_factory(Character, BeneficeAffliction, fields='__all__', extra=3)
 ArmorFormSet = inlineformset_factory(Character, Armor, fields='__all__', extra=3)
 WeaponFormSet = inlineformset_factory(Character, Weapon, fields='__all__', extra=3)
-ShieldFormSet = inlineformset_factory(Character, Shield, fields='__all__', extra=1)
+ShieldFormSet = inlineformset_factory(Character, Shield, fields='__all__', extra=3)
