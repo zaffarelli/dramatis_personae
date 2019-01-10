@@ -198,7 +198,7 @@ function rebootlinks(){
 
   $(window).scroll(function(){
     var sticky = $('.menu'), scroll = $(window).scrollTop(), wrap = $('.wrapper');
-    if (scroll >= 100){
+    if (scroll >= 65){
       sticky.addClass('fixed');
       wrap.addClass('stickyoffset');
     }else{

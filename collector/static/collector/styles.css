@@ -20,7 +20,7 @@
   width: 100%; }
 
 .stickyoffset {
-  padding-top: 55px; }
+  padding-top: 20px; }
 
 body {
   background: black url("back.jpg") -130px 300px;
@@ -32,14 +32,19 @@ body {
     padding: 0;
     opacity: 0.75; }
   body .menu {
-    padding: 5px;
-    padding-left: 30%;
-    padding-right: 10%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 1%;
+    padding-right: 1%;
     color: #E5DECA;
     font-size: 0.73em;
     background: #263526;
-    height: 50px;
-    z-index: 20; }
+    height: 10px;
+    z-index: 20;
+    font-family: Kanit; }
+    body .menu .releasenote {
+      background: transparent;
+      text-align: right; }
   body footer {
     background: #101710;
     height: 30px;
@@ -238,7 +243,7 @@ body {
           font-size: 1.3em;
           side: top; }
         body .wrapper .details table.formset .field_wrapper label {
-          width: 10ex;
+          width: 20ex;
           display: inline-block;
           vertical-align: top;
           text-align: right; }

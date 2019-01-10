@@ -45,11 +45,12 @@ $fics_subborder_color: darken($fics_back,30%);
 }
 
 .stickyoffset{
-  padding-top:55px;
+  padding-top:20px;
 }
 
 body {  
   background: $fics_darkest url("back.jpg") -130px 300px;
+  //background: $fics_darkest;
   padding:0;
   margin:0;
   & .logo {
@@ -60,14 +61,20 @@ body {
   }
 
   & .menu {
-    padding:5px;
-    padding-left:30%;
-    padding-right:10%;
+    padding-top:5px;
+    padding-bottom:5px;
+    padding-left:1%;
+    padding-right:1%;
     color: $fics_front;
     font-size: 0.73em;
     background: $fics_dark;
-    height:50px;
+    height:10px;
     z-index:20;
+    font-family: Kanit;
+    & .releasenote{
+      background:transparent;
+      text-align:right;
+    }
   }
 
 
@@ -318,7 +325,7 @@ body {
         }
         & .field_wrapper {
           & label {
-            width: 10ex;
+            width: 20ex;
             display: inline-block;
             vertical-align: top;
             text-align:right;

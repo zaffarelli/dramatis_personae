@@ -109,7 +109,18 @@
         <label for="">Exportable</label>
         {{form.ready_for_export}}
       </div>
-      </td></tr>
+      <div class="field_wrapper">
+        {{ form.onsave_reroll_attributes.errors}}
+        <label for="">OSR Attributes</label>
+        {{form.onsave_reroll_attributes}}
+      </div>
+      <div class="field_wrapper">
+        {{ form.onsave_reroll_skills.errors}}
+        <label for="">OSR Skills</label>
+        {{form.onsave_reroll_skills}}
+      </div>      
+      </td>
+      </tr>
     </table>
 
   <table class='formset form-horizontal'>

@@ -80,6 +80,9 @@ class Character(models.Model):
   drama = models.ForeignKey(Drama, null=True, blank=True, on_delete=models.SET_NULL)
   act = models.ForeignKey(Act, null=True, blank=True, on_delete=models.SET_NULL)
 
+  onsave_reroll_attributes = models.BooleanField(default=False)
+  onsave_reroll_skills = models.BooleanField(default=False)
+
   def fix(self,conf=None):
     """ Check / calculate other characteristics """
     self.check_exportable()
@@ -96,12 +99,19 @@ class Character(models.Model):
     if self.player == 'none':
       self.player = ''
     # Calculate SA
-    fs_fics7.check_primary_attributes(self)
-    fs_fics7.check_secondary_attributes(self)
-    fs_fics7.check_root_skills(self)
-#    fs_fics7.check_everyman_skills(self, Skill, SkillRef)
-    fs_fics7.check_everyman_skills(self)
-    fs_fics7.check_skills(self)
+    self.resetTotal()
+
+    if self.onsave_reroll_attributes:
+      fs_fics7.check_primary_attributes(self)
+      fs_fics7.check_secondary_attributes(self)
+
+    if self.onsave_reroll_skills:
+      fs_fics7.check_root_skills(self)
+      fs_fics7.check_everyman_skills(self)
+      fs_fics7.check_skills(self)
+
+    self.resetTotal()
+    
     gm_shortcuts = ''
     tmp_shortcuts = []
     skills = self.skill_set.all()

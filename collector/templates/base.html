@@ -22,6 +22,9 @@
     </div>
             <div class="menu">
                 {% block menu %}
+                <div class='releasenote'>
+                &middot; <strong>Dramatis Personae</strong> release <b>{{ dp_version }}</b> &middot;
+                </div>          
                 {% endblock menu %}
             </div>
 
@@ -50,9 +53,7 @@
         <footer>
             <div class="footer">
                 {% block page_footer %}
-                <center>
-                &middot; <strong>Dramatis Personae</strong> release <b>{{ dp_version }}</b> &middot;
-                </center>                
+      
                 {% endblock %}
             </div>
         </footer>
