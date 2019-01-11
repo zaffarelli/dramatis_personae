@@ -192,7 +192,7 @@ def check_primary_attributes(ch):
   #pas = [0,0,0,0,0,0,0,0,0,0,0,0]
   current =  ch.PA_STR+ch.PA_CON+ch.PA_BOD+ch.PA_MOV+ch.PA_INT+ch.PA_WIL+ch.PA_TEM+ch.PA_PRE+ch.PA_TEC+ch.PA_REF+ch.PA_AGI+ch.PA_AWA
   debug_print('> Current PA TOTAL: %d'%(current))
-  if (current < pool or ch.keyword.startswith('rebuild')) and ch.player == '':
+  if ch.player == '':
     pool = pool-24
     debug_print('> Error: Primary Attributes invalid. Fixing that.')
     while pool>0:      
@@ -218,8 +218,7 @@ def check_primary_attributes(ch):
     ch.PA_REF = pas[9]
     ch.PA_AGI = pas[10]
     ch.PA_AWA = pas[11]
-    if ch.keyword == 'rebuild' or ch.keyword == 'rebuild_pa':
-      ch.keyword = 'rebuilt'
+  ch.onsave_reroll_attributes = False
 
 def get_skills_list(ch,groups):
   """ Prepare the list of skills without specialties """
@@ -249,8 +248,6 @@ def choose_sk(alist,maxweight):
   return None
 
 
-
-
 def check_skills(ch):
   """ Fixing skills """
   debug_print('Checking skills...')
@@ -265,10 +262,9 @@ def check_skills(ch):
     master_weight += s['weight']
   debug_print('> Max weight is %d'%(master_weight))
   debug_print('> Keyword is %s'%(ch.keyword))
-  if ch.keyword == 'rebuild_skills':
-    ch.purgeSkills()
-    current = fetch_everyman_sum(ch)
-  if (current < pool or ch.keyword.startswith('rebuild')) and ch.player == '':
+  ch.purgeSkills()
+  current = fetch_everyman_sum(ch)
+  if (current < pool) and ch.player == '':
     pool -= current
     debug_print('> Error: Skills total too weak. Fixing that\n')    
     while pool>0:
@@ -280,8 +276,7 @@ def check_skills(ch):
     check_everyman_skills(ch)
     ch.add_missing_root_skills()
     check_root_skills(ch)
-  if ch.keyword.startswith('rebuild'):
-    ch.keyword = 'rebuilt'
+  ch.onsave_reroll_skills = False
     
   
 
