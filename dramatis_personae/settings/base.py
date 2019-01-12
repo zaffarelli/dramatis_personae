@@ -128,7 +128,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
-STATIC_ROOT = '/dramatis_personae/static/'
-MEDIA_ROOT = '/dramatis_personae/media/'
+STATIC_ROOT = 'dramatis_personae/static/'
+MEDIA_ROOT = 'dramatis_personae/media/'
 
 
