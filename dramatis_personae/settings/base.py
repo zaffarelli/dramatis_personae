@@ -127,9 +127,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
 STATIC_ROOT = '/dramatis_personae/static/'
+MEDIA_ROOT = '/dramatis_personae/media/'
 
-#STATIC_URL = '/fics7/static/'
-#STATIC_ROOT = '/webapps/fics7_static/'
 
-#INTERNAL_IPS = ('127.0.0.1',)
