@@ -4,7 +4,12 @@ from io import BytesIO, StringIO
 from django.http import HttpResponse
 from django.template.loader import get_template
 from xhtml2pdf import pisa
-
+from django.conf import settings
+from PyPDF2 import PdfFileMerger
+#from os import listdir
+#from os.path import isfile, join
+import datetime
+import os
 
 
 def render_to_pdf(template_src, context_dict={}):
@@ -15,7 +20,7 @@ def render_to_pdf(template_src, context_dict={}):
   pdf = pisa.pisaDocument(BytesIO(html.encode('utf-8')),result) # ISO-8859-1
   if not pdf.err:
     response = HttpResponse(result.getvalue(), content_type='application/pdf')
-    filename = '%s.pdf' % context_dict['filename']
+    filename = 'avatar_%s.pdf' % context_dict['filename']
     content = "inline; filename='%s'"% filename
     response['content-disposition'] = content
     return response
@@ -24,7 +29,9 @@ def render_to_pdf(template_src, context_dict={}):
 def write_pdf(template_src, context_dict={}):
   template = get_template(template_src)
   html = template.render(context_dict)
-  filename = './static/pdf/%s.pdf' % context_dict['filename']
+  fname = 'avatar_%s.pdf'%(context_dict['filename'])
+  filename = os.path.join(settings.MEDIA_ROOT, 'pdf/' + fname)
+  #filename = './static/pdf/%s.pdf' % context_dict['filename']
   result = open(filename, 'wb')
   pdf = pisa.pisaDocument(BytesIO(html.encode('utf-8')), result)
   result.close()
@@ -39,6 +46,35 @@ def debug_print(str):
   if DEBUG_ALL:
     print(str)
 
+def make_avatar_appendix(conf):
+  """ Creating appendix with the list of avatars from the epic """
+  d = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
+  res = []
+  mypath = os.path.join(settings.MEDIA_ROOT, 'pdf/')
+  res.append('Working in path %s.'%(mypath))
+  onlyfiles = [f for f in os.listdir(mypath) if os.path.isfile(os.path.join(mypath, f))]
+  pdfs = onlyfiles
+  merger = PdfFileMerger()
+  res.append('Opening... header')
+  merger.append(open('%s___header.pdf'%(mypath), 'rb'))
+  pdfs.sort()
+  i = 0
+  for pdf in pdfs:
+    if 'avatar_' in pdf:
+      i += 1
+      merger.append(open(mypath+pdf, 'rb'))
+      res.append('Adding %s'%(mypath+pdf))
+  if i>0:
+    des = '%saa_%s.pdf'%(mypath,conf.epic.shortcut)
+    with open(des, 'wb') as fout:
+      merger.write(fout)
+    res.append('Writing... %d characters in %s'%(i,des))
+  return res
+
 def export_epic(conf):
-  res = {'epic':conf.epic.title}
+  res = {'epic':conf.epic.title}  
+  comments = make_avatar_appendix(conf)
+  print(comments)
+  com = '<br/>'.join(comments)
+  res['comment'] = '<div class="classyview"><p>'+com+'</p></div>'
   return res

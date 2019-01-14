@@ -268,11 +268,6 @@ function rebootlinks(){
         $('.details').html(answer)
         rebootlinks();
       },
-      error: function(answer) {
-        $('.details').html('oops, broken')
-        rebootlinks();
-      },
-
     });
   });
 
@@ -281,16 +276,10 @@ function rebootlinks(){
     event.preventDefault();
     $.ajax({
       url: 'ajax/build_config_pdf/',
-      success: function(answer) {
-        //console.log(answer);
-        $('.details').html(answer)
+    }).done(function(answer) {
+        console.log(answer.comment);
+        $('.details').html(answer.comment);
         rebootlinks();
-      },
-      error: function(answer) {
-        $('.details').html('oops, broken')
-        rebootlinks();
-      },
-
     });
   });
 

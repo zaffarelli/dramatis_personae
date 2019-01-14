@@ -50,8 +50,8 @@ def skill_touch(request):
 
 def pdf_show(request,slug):
   try:
-    fname = '%s.pdf'%(slug)
-    filename = os.path.join(settings.STATIC_ROOT, 'pdf/' + fname)
+    fname = 'avatar_%s.pdf'%(slug)
+    filename = os.path.join(settings.MEDIA_ROOT, 'pdf/' + fname)
     #print(filename)    
     return FileResponse(open(filename, 'rb'), content_type='application/pdf')
   except FileNotFoundError:

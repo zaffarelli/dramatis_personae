@@ -3,7 +3,9 @@
 from PyPDF2 import PdfFileMerger
 from os import listdir
 from os.path import isfile, join
+from django.conf import settings
 import datetime
+
 d = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
 print('Launching makedp... at %s'%d)
 mypath = 'media/pdf/'

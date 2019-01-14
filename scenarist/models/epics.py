@@ -15,6 +15,7 @@ class Epic(StoryModel):
     ordering = ['era','title']
     
   era = models.IntegerField(default=5017, blank=True)
+  shortcut = models.CharField(default='xx', max_length=32, blank=True)
   population_count = models.IntegerField(default=0, blank=True)
 
   def get_absolute_url(self):
