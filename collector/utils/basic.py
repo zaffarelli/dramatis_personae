@@ -24,7 +24,7 @@ def render_to_pdf(template_src, context_dict={}):
 def write_pdf(template_src, context_dict={}):
   template = get_template(template_src)
   html = template.render(context_dict)
-  filename = './collector/pdf/%s.pdf' % context_dict['filename']
+  filename = './static/pdf/%s.pdf' % context_dict['filename']
   result = open(filename, 'wb')
   pdf = pisa.pisaDocument(BytesIO(html.encode('utf-8')), result)
   result.close()
@@ -38,3 +38,7 @@ def debug_print(str):
   from collector.utils.fics_references import DEBUG_ALL
   if DEBUG_ALL:
     print(str)
+
+def export_epic(conf):
+  res = {'epic':conf.epic.title}
+  return res

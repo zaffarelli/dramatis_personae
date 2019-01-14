@@ -6,7 +6,7 @@
 #         \/                      \/     \/                   
 from django.conf.urls import url
 from django.urls import path, re_path
-from collector.views.basic import skill_touch
+from collector.views.basic import skill_touch, pdf_show
 from collector.views.frontend import index,edit_character,view_character,get_list, add_character, get_storyline, conf_details#, get_story_casting
 from collector.views.backend import recalc,export,xls_update,pdf_character
 from collector.views.misc_chart import get_chardar
@@ -28,5 +28,5 @@ urlpatterns = [
   re_path('^ajax/add/character/$', add_character, name='add_character'),
   re_path('^ajax/conf_details/$', conf_details, name='conf_details'),
   re_path('^api/chardar/(?P<id>\d+)/$', get_chardar, name='get_chardar'),
-  
+  re_path('^pdf/(?P<slug>[\w-]+)/$', pdf_show, name='pdf_show'),
 ]

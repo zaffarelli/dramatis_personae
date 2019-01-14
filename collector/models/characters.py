@@ -267,7 +267,7 @@ class Character(models.Model):
     proceed = self.ready_for_export
     if proceed == True:
       item = self
-      context = {'c':item,'filename':'%04d_%s'%(item.pagenum,item.rid),}
+      context = {'c':item,'filename':'%s'%(item.rid),}
       write_pdf('collector/character_pdf.html',context)
       print('PDF .........: %s.pdf' % (self.rid))
     return proceed      

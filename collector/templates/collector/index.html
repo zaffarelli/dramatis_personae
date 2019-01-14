@@ -10,6 +10,7 @@
   <li><a class='btn' href="{% url 'export' %}"><i class="fas fa-download"></i>&nbsp;Export to spreadsheet</a></li>
   <li><a class='btn' href="{% url 'xls_update' %}"><i class="fas fa-upload"></i>&nbsp;Update from spreadsheet</a></li>
   <li><span class='btn' id='conf_details'><i class="fas fa-globe"></i>&nbsp;Configuration Details</span></li>
+  <li><span class='btn' id='build_config_pdf'><i class="fas fa-file-pdf"></i>&nbsp;Build Configuration PDF</span></li>
   
   </ul>
 {% endblock menuright %}
@@ -21,7 +22,7 @@
     </ul>
   </div>
   <div class='releasenote'>
-  &middot; <strong>Dramatis Personae</strong> release <b>{{ dp_version }}</b> &middot;
+  <strong>{{instance_name}}</strong> release <b>{{ dp_version }}</b>
   </div>
 {% endblock menu %}
 

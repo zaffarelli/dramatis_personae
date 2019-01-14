@@ -27,10 +27,10 @@ body {
   padding: 0;
   margin: 0; }
   body .logo {
-    background: black url("FICS_Logo.png") 8% center no-repeat;
+    background: black url("DP_logo.png") 8% center no-repeat;
     height: 105px;
     padding: 0;
-    opacity: 0.75; }
+    opacity: 0.5; }
   body .menu {
     padding-top: 5px;
     padding-bottom: 5px;

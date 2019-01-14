@@ -16,6 +16,7 @@ from django.template.loader import get_template, render_to_string
 from django.template import RequestContext
 import json
 import ast
+import os
 from urllib.parse import unquote
 from urllib.parse import parse_qs
 from collector.utils import fs_fics7
@@ -25,6 +26,8 @@ import datetime
 from collector.utils.xls_collector import export_to_xls, update_from_xls
 from collector.utils.basic import get_current_config
 from collector.templatetags.fics_filters import as_bullets
+from django.http import FileResponse, Http404
+from django.conf import settings
 
 @csrf_exempt
 def skill_touch(request):
@@ -45,4 +48,12 @@ def skill_touch(request):
     return HttpResponse(answer, content_type='text/html')
   return Http404
 
+def pdf_show(request,slug):
+  try:
+    fname = '%s.pdf'%(slug)
+    filename = os.path.join(settings.STATIC_ROOT, 'pdf/' + fname)
+    #print(filename)    
+    return FileResponse(open(filename, 'rb'), content_type='application/pdf')
+  except FileNotFoundError:
+    raise Http404()
 

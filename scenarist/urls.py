@@ -11,6 +11,7 @@ from scenarist.views.epics import EpicDetailView, EpicUpdateView
 from scenarist.views.dramas import DramaDetailView, DramaUpdateView, add_drama, DramaDeleteView
 from scenarist.views.acts import ActDetailView, ActUpdateView,  add_act, ActDeleteView
 from scenarist.views.events import EventDetailView, EventUpdateView,  add_event, EventDeleteView
+from scenarist.views.pdfs import build_config_pdf
 
 urlpatterns = [
   re_path('^epics/(?P<pk>\d+)/view', EpicDetailView.as_view(), name='epic-detail'),
@@ -31,5 +32,6 @@ urlpatterns = [
   re_path('^events/add', add_event, name='event-add'),
   re_path('^events/(?P<pk>\d+)/delete', DramaDeleteView.as_view(), name='event-delete'),
 
+  re_path('^ajax/build_config_pdf/', build_config_pdf, name='build_config_pdf'),
 ]
 

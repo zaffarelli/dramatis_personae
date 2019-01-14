@@ -13,5 +13,5 @@
   </div>
   <br/>{{ c.challenge|safe }}
   <br/>{{ c.alliance|safe }} ({%if c.keyword != '' %}<span class='golden custom_glance' id='{{c.keyword}}'>{{c.keyword|safe}}</span>{%endif%})
-  <br/>ID:<span class='golden custom_show' id='{{c.id}}'>{{c.id}}</span> RID:<span class='golden custom_show' id='{{c.rid}}' >{{c.rid}}</span>
+  <br/>ID:<span class='golden custom_show' id='{{c.id}}'>{{c.id}}</span> RID:<span class='golden custom_show' id='{{c.rid}}' ><a href='pdf/{{c.rid}}/' target='avatar_pdf'>{{c.rid}}</a></span>
 

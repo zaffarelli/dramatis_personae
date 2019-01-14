@@ -276,6 +276,24 @@ function rebootlinks(){
     });
   });
 
+  $('#build_config_pdf').off();
+  $('#build_config_pdf').on('click',function(event){
+    event.preventDefault();
+    $.ajax({
+      url: 'ajax/build_config_pdf/',
+      success: function(answer) {
+        //console.log(answer);
+        $('.details').html(answer)
+        rebootlinks();
+      },
+      error: function(answer) {
+        $('.details').html('oops, broken')
+        rebootlinks();
+      },
+
+    });
+  });
+
   $('#seek').off();
   $('#seek').on('click',function(event){
     event.preventDefault();
