@@ -83,6 +83,8 @@ class Character(models.Model):
   onsave_reroll_attributes = models.BooleanField(default=False)
   onsave_reroll_skills = models.BooleanField(default=False)
 
+  build_log = models.TextField(default='',blank=True)  
+
   def fix(self,conf=None):
     """ Check / calculate other characteristics """
     self.check_exportable()
@@ -143,8 +145,8 @@ class Character(models.Model):
       else:
         found_skill.value = modifier
       found_skill.save()
-      debug_print('> New value for %s is %d'%(found_skill.skill_ref.reference,found_skill.value))
-      debug_print('updated')
+      self.build_log.append('> New value for %s is %d'%(found_skill.skill_ref.reference,found_skill.value))
+      self.build_log.append('updated')
       return found_skill
     else:
       skill = Skill()
@@ -155,8 +157,8 @@ class Character(models.Model):
       else:
         skill.value = modifier
       skill.save()
-      debug_print('> New value for %s is %d'%(skill.skill_ref.reference,skill.value))
-      debug_print('added')
+      self.build_log.append('> New value for %s is %d'%(skill.skill_ref.reference,skill.value))
+      self.build_log.append('added')
       return skill
 
   def add_missing_root_skills(self):
@@ -170,7 +172,7 @@ class Character(models.Model):
     for skill in self.skill_set.all():
       if skill.skill_ref.is_root:
         skill.delete()
-    print(roots_list)
+    self.build_log.append(roots_list)
     for skillref in SkillRef.objects.all():
       if skillref in roots_list:
         self.add_or_update_skill(skillref, roots_list.count(skillref))
@@ -183,8 +185,7 @@ class Character(models.Model):
 
     
   def resetTotal(self):
-    """ Compute all sums for all stats """
-    notes = []
+    """ Compute all sums for all stats """    
     self.SK_TOTAL = 0
     self.TA_TOTAL = 0
     self.BC_TOTAL = 0
@@ -196,28 +197,28 @@ class Character(models.Model):
       self.PA_STR + self.PA_CON + self.PA_BOD + self.PA_MOV + \
       self.PA_INT + self.PA_WIL + self.PA_TEM + self.PA_PRE + \
       self.PA_TEC + self.PA_REF + self.PA_AGI + self.PA_AWA
-    notes.append('PA_TOTAL: %d'%(self.PA_TOTAL))
+    self.build_log += ('PA_TOTAL: %d'%(self.PA_TOTAL))
     # skills
     skills = self.skill_set.all()
     for s in skills:
       if s.skill_ref.is_root == False:         
         self.SK_TOTAL += s.value
-    notes.append('SK_TOTAL: %d'%(self.SK_TOTAL))
+    self.build_log += ('SK_TOTAL: %d'%(self.SK_TOTAL))
     # talents
     talents = self.talent_set.all()
     for t in talents:
       self.TA_TOTAL += t.value
-    notes.append('TA_TOTAL: %d'%(self.TA_TOTAL))
+    self.build_log += ('TA_TOTAL: %d'%(self.TA_TOTAL))
     # blessings curses
     blessingcurses = self.blessingcurse_set.all()
     for bc in blessingcurses:
       self.BC_TOTAL += bc.value
-    notes.append('BC_TOTAL: %d'%(self.BC_TOTAL))
+    self.build_log += ('BC_TOTAL: %d'%(self.BC_TOTAL))
     # benefice afflictions
     beneficeafflictions = self.beneficeaffliction_set.all()    
     for ba in beneficeafflictions:
       self.BA_TOTAL += ba.value + ba.beneficeaffliction_ref.value
-    notes.append('BA_TOTAL: %d'%(self.BA_TOTAL))
+    self.build_log += ('BA_TOTAL: %d'%(self.BA_TOTAL))
     # AP    
     self.AP = self.PA_TOTAL
     # Extras as OP
@@ -226,18 +227,18 @@ class Character(models.Model):
     weapons = self.weapon_set.all()    
     for w in weapons:
       self.weapon_cost += w.weapon_ref.cost
-    notes.append('weapon_cost: %d'%(self.weapon_cost))
+    self.build_log += ('weapon_cost: %d'%(self.weapon_cost))
     # Armors firebirds
     armors = self.armor_set.all()    
     for a in armors:
       self.armor_cost += a.armor_ref.cost
-    notes.append('armor_cost: %d'%(self.armor_cost))
+    self.build_log += ('armor_cost: %d'%(self.armor_cost))
     # Shields firebirds
     shields = self.shield_set.all()    
     for s in shields:
       self.shield_cost += s.shield_ref.cost
-    notes.append('shield_cost: %d'%(self.shield_cost))
-    return ' / '.join(notes)
+    self.build_log += ('shield_cost: %d'%(self.shield_cost))
+    return self.build_log
 
 
   def check_exportable(self,conf=None):
@@ -245,6 +246,7 @@ class Character(models.Model):
     exportable = True
     comment = ''
     self.stars = ''
+    self.build_log = ''
     for x in range(1,int(self.role)+1):
       self.stars += '<i class="fas fa-star fa-xs"></i>'    
     comment += self.resetTotal()
@@ -256,7 +258,7 @@ class Character(models.Model):
       comment += 'Warning: Players avatars are always exportable...\n'
       exportable = True
     if comment != '':
-      print(comment)  
+      self.build_log += comment
     if self.ready_for_export != exportable:
       self.ready_for_export = exportable
       self.rid = 'none'

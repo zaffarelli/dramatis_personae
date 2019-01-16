@@ -65,6 +65,9 @@
 </div>
 {% endif %}
 
+{{c.build_log|linebreaks|safe}}
+
+
 {% if c.blessingcurse_set.count != 0 %}
 <h2>Blessings/Curses ({{c.BC_TOTAL}})</h2>
 <table>

@@ -33,58 +33,21 @@ body{
 
 @page {
   size: a4 portrait;
-  @frame f1 {
-    left: 0.5cm;
-    width: 8.9cm;
+  @frame col_left {
+    left: 0.4cm;
+    width: 10cm;
     top: 2.5cm;
-    height:3.0cm;
+    height:22cm;
     padding:0.125cm;
+    border-right:1px solid #202020;
   }
-  @frame f2_PA {
-    left: 0.5cm;
-    width: 4.45cm;
-    top: 5.5cm;
-    height: 3.4cm;
-    padding:0.125cm;
+  @frame col_right {
+    left: 10.6cm;
+    width: 10cm;
+    top: 2.5cm;
+    height: 22cm;
+    padding:0.125cm;    
   }
-
-  @frame f3_SA {
-    left: 4.95cm;
-    width: 4.45cm;
-    top: 5.5cm;
-    height:3.4cm;
-    padding:0.125cm;
-  }
-
-  @frame f4_skills{
-    left: 0.5cm;
-    width: 9.9cm;
-    top: 9.0cm;
-    height:13.5cm;
-    height:20.0cm;
-    padding:0.125cm;
-    
-  }
-
-  @frame f9_sht {
-    left: 10.5cm;
-    width: 9.9cm;
-    top: 0.5cm;
-    top: 9cm;
-    height:20.0cm;
-    padding:0.125cm;
-    
-  }
-
-  @frame f10_sht {
-    left: 18.80cm;
-    width: 8.9cm;
-    top: 0.5cm;
-    height:20cm;
-    padding:0.125cm;
-    border:1px solid #000000;
-  }
-  
 }
 
 h1{
@@ -104,6 +67,10 @@ h2{
   margin-bottom:0;
   lineheight:1em;
   color:#404040;
+}
+
+h3,h4,h5,h6{
+  font-family:'FiraTitle';
 }
 
 .stats {
@@ -165,10 +132,7 @@ em{
   </style>
   </head>
   <body>
-    <div class="roster">
-      {% block sheet %}
-      {% endblock sheet %}
-     </div>
-     <!-- img src="./collector/static/collector/FICS_Logo.jpg" -->
+    {% block article %}
+    {% endblock article %}
   </body>
 </html>

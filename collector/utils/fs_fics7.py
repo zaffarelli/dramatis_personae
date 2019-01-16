@@ -302,7 +302,10 @@ def check_role(ch):
     status = False 
   elif ch.TA_TOTAL < ta_pool:
     print('> Not enough TA: %d < %d'%(ch.TA_TOTAL,ta_pool))
-    status = False 
+    status = False
+  if ch.BA_TOTAL + ch.BC_TOTAL + ch.TA_TOTAL < ba_pool+bc_pool+ta_pool:
+    print('> Not enough OP: %d < %d'%(ch.BA_TOTAL + ch.BC_TOTAL + ch.TA_TOTAL,ba_pool+bc_pool+ta_pool))
+    result = False 
   return status
 
 def update_challenge(ch):

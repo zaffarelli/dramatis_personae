@@ -17,7 +17,7 @@ class StoryModel(models.Model):
   chapter = models.CharField(default='', blank=True, max_length=64)
   date = models.CharField(max_length=128, default='', blank=True)
   place = models.CharField(max_length=128, default='', blank=True)
-  description = models.TextField(max_length=1280,default='',blank=True)
+  description = models.TextField(max_length=2560,default='',blank=True)
   gamemaster = models.CharField(default='zaffarelli@gmail.com', max_length=128, blank=True)
 
   def __str__(self):

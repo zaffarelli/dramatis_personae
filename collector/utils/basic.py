@@ -58,12 +58,20 @@ def make_avatar_appendix(conf):
   res.append('Opening... header')
   merger.append(open('%s___header.pdf'%(mypath), 'rb'))
   pdfs.sort()
+
+  # getting relevant list
+  ep = conf.epic
+  cast = ep.get_full_cast()
+  
   i = 0
   for pdf in pdfs:
     if 'avatar_' in pdf:
-      i += 1
-      merger.append(open(mypath+pdf, 'rb'))
-      res.append('Adding %s'%(mypath+pdf))
+      x = pdf.split('avatar_')
+      res.append('%s'%(x))
+      if x[1].split('.')[0] in cast:
+        i += 1
+        merger.append(open(mypath+pdf, 'rb'))
+        res.append('Adding %s'%(mypath+pdf))
   if i>0:
     des = '%saa_%s.pdf'%(mypath,conf.epic.shortcut)
     with open(des, 'wb') as fout:
@@ -71,10 +79,24 @@ def make_avatar_appendix(conf):
     res.append('Writing... %d characters in %s'%(i,des))
   return res
 
+def make_epic_corpus(conf):
+  res = []
+  res.append('Building Epic Corpus...')
+  template = get_template('collector/conf_pdf.html')
+  context = {'epic':conf.parse_details()}
+  html = template.render(context)
+  fname = 'corpus_%s.pdf'%(conf.epic.shortcut)
+  filename = os.path.join(settings.MEDIA_ROOT, 'pdf/' + fname)
+  result = open(filename, 'wb')
+  pdf = pisa.pisaDocument(BytesIO(html.encode('utf-8')), result)
+  result.close()
+  return res
+  
 def export_epic(conf):
-  res = {'epic':conf.epic.title}  
-  comments = make_avatar_appendix(conf)
-  print(comments)
+  res = {'epic':conf.epic.title}
+  comments = []
+  comments += make_avatar_appendix(conf)
+  comments += make_epic_corpus(conf)
   com = '<br/>'.join(comments)
   res['comment'] = '<div class="classyview"><p>'+com+'</p></div>'
   return res

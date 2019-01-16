@@ -18,7 +18,7 @@ import hashlib
 """
 
 MAX_CHAR = 8
-RELEASE = '0.9.6'
+RELEASE = '0.9.7'
 DEBUG_ALL = False
 
 ROLECHOICES = (
@@ -105,7 +105,7 @@ ROLES = {
     'maxi': 11,
     'skills':70,
     'talents':0,
-    'ba':10,
+    'ba':15,
     'bc':0,
   },
   '07': {
@@ -129,7 +129,7 @@ ROLES = {
     'maxi': 9,
     'skills':50,
     'talents':0,
-    'ba':10,
+    'ba':7,
     'bc':0,
   },
   '04': {
@@ -145,7 +145,7 @@ ROLES = {
     'maxi': 8,
     'skills':40,
     'talents':0,
-    'ba':5,
+    'ba':2,
     'bc':0,
   },
   '02': {
@@ -153,7 +153,7 @@ ROLES = {
     'maxi': 7,
     'skills':35,
     'talents':0,
-    'ba':5,
+    'ba':0,
     'bc':0,
   },
   '01': {
