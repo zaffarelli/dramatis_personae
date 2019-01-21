@@ -18,7 +18,7 @@ import hashlib
 """
 
 MAX_CHAR = 8
-RELEASE = '0.9.7'
+RELEASE = '0.9.8'
 DEBUG_ALL = False
 
 ROLECHOICES = (

@@ -264,7 +264,7 @@ function rebootlinks(){
     $.ajax({
       url: 'ajax/conf_details/',
       success: function(answer) {
-        //console.log(answer);
+        console.log(answer);
         $('.details').html(answer)
         rebootlinks();
       },
@@ -436,6 +436,13 @@ function rebootlinks(){
     $(target).toggleClass('tab_up');
     console.log(target);
   });
+
+  $('#floatingk').off();
+  $('#floatingk').on('click', function(event){
+    $(this).find('ul').toggleClass('tab_up');
+    console.log('ul.floating_keywords');
+  });
+
   
 }
 

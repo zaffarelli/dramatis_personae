@@ -61,47 +61,63 @@ body {
   }
 
   & .menu {
-    padding-top:5px;
-    padding-bottom:5px;
-    padding-left:1%;
-    padding-right:1%;
+    padding:0;
+    margin:0;
+    padding:0;
+    overflow:show;
     color: $fics_front;
     font-size: 0.73em;
     background: $fics_dark;
     width:100%;
-    height:30px;
+    height:40px;
     z-index:20;
     font-family: Kanit;
-    display:grid;
-    width: 100%;
-    grid-template-columns:5px 250px 1fr 250px 5px;
-    grid-column-gap:3px;
-    justify-content: left;
-    align-content: stretch;
-    & .shortcuts{      
-      margin:auto;
-      padding:auto;      
-      text-align:left;
-      grid-column:3/3;
-      //background:purple;      
+    display:block;
+    
+    & .shortcuts{
+      display:block;
+      margin:0;
+      padding:0;
+      margin-left:280px;
+      width:500px;
+      height:auto;
+      margin-top:5px;      
       & ul{
-        list-style-stype:none;
         margin:0;
-        padding:0;
+        padding:0;        
+        list-style-type:none;
         & li{
           margin:0;
           padding:0;        
           display:inline-block;
+          background-color:$fics_dark;
+          overflow:show;
+          & ul{            
+            display:none;
+            list-style-type: none;
+            & li{
+              display:block;
+              z-index:500;
+            }
+          }
+        }
+
+        & #floatingk{
+          & ul{
+            color:white;
+            border:1px dotted cyan;
+          }
+          
         }
       }
     }
     & .releasenote{
-      grid-column:4/4;
-      padding:auto;
+      display:block;
       margin:auto;
-      background:transparent;
-      text-align:right;
-      //background:red;
+      margin-top:-30px;
+      margin-right:205px;
+      width:150px;
+      background:transparent;      
     }    
   }
 
@@ -569,32 +585,15 @@ body {
   cursor:help;
 }
 
-.floating_keywords{
-  display:block;
-  float:right;
-  border:2px solid $fics_front;
-  border-radius: 3px;
-  background-color:$fics_dark;
-  & ul{
-    text-indent:0;
-    padding:0;
-    margin:0;
-    list-style-type: none;
-    & li{
-      text-indent:0;
-      padding:3px;
-      margin:0;
-    }
-  }
-}
+
 
 
 .btn {
-  display: inline-block;
+  display: block;
   padding: 0;
   margin: 0;
   width: 150px;
-  height: auto;
+  height: 20px;
   border: 2px solid gray;
   border-radius: 5px;
   background: $fics_dark;
@@ -603,7 +602,6 @@ body {
   padding: 5px;
   text-align: left;
   font-size:0.87em;
-  line-height:1.5em;
   &:hover {
     border-color: $fics_hl;
     background: $fics_darker;
@@ -628,3 +626,4 @@ body {
     display:inline-block;
   }
 }
+

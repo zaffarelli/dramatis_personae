@@ -32,35 +32,6 @@ def index(request):
   """ The basic page for the application """
   return render(request,'collector/index.html')
 
-# def get_story_casting(request,id,slug='none'):
-  # """ Update the list of characters by story casting """
-  # from scenarist.models.epics import Epic
-  # from scenarist.models.dramas import Drama
-  # from scenarist.models.acts import Act
-  # from scenarist.models.events import Event
-  # conf = get_current_config()
-  # if request.is_ajax:
-    # if slug=='none':
-      # character_items = Character.objects.filter(epic=conf.epic).order_by('full_name')
-    # else:
-      # ep_class = slug.split('-')[0].capitalize()
-      # ep_id = slug.split('-')[1]
-      # ep = get_object_or_404(eval(ep_class),pk=ep_id)
-      # cast = ep.get_full_cast()
-      # character_items = []
-      # for rid in cast:
-        # character_item = Character.objects.get(rid=rid)
-        # character_items.append(character_item)
-    # paginator = Paginator(character_items,MAX_CHAR)
-    # page = id
-    # character_items = paginator.get_page(page)
-    # context = {'character_items': character_items}
-    # template = get_template('collector/list.html')
-    # html = template.render(context)
-    # return HttpResponse(html, content_type='text/html')
-  # else:
-    # Http404
-
 def get_list(request,id,slug='none'):
   """ Update the list of characters on the page """
   from scenarist.models.epics import Epic

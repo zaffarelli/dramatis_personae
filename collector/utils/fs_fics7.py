@@ -319,6 +319,7 @@ def update_challenge(ch):
   return res
 
 def get_keywords():
+  """ Get all keywords """
   from collector.models.characters import Character
   everybody = Character.objects.all()
   keywords = []

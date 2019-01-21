@@ -19,6 +19,13 @@
   <div class='shortcuts'>
     <ul>
     <li><span class='btn' id='go'><i class="fas fa-user-edit"></i>&nbsp;Action!</span></li>
+    <li id='floatingk'><span class='btn' ><i class="fas fa-key"></i>&nbsp;Keywords</span>
+      <ul>
+        {% for keyword in config_keywords %}
+        <li><span class='golden custom_glance' id='{{keyword}}'>{{keyword}}</span></li>
+        {% endfor %}      
+      </ul>
+    </li>
     </ul>
   </div>
   <div class='releasenote'>
