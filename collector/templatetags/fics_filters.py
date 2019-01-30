@@ -67,4 +67,16 @@ def parse_avatars_pdf(value):
   newres = res
   for change in changes:
     newres = newres.replace(change['src'],change['dst'])
+
+  seeker_italics = re.compile('\µ(\w+)\µ')
+  changes = []
+  res = str(newres)
+  iter = seeker.finditer(res)
+  for item in iter:
+    x = ''.join(item.group().split('µ'))
+    repstr = '<i>%s</i>'%(x)
+    changes.append({'src':item.group(),'dst':repstr})
+  newres = res
+  for change in changes:
+    newres = newres.replace(change['src'],change['dst'])
   return newres

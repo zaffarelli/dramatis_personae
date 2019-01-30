@@ -439,7 +439,7 @@ function rebootlinks(){
 
   $('#floatingk').off();
   $('#floatingk').on('click', function(event){
-    $(this).find('ul').toggleClass('tab_up');
+    $(this).find('ul').css('display','block');
     console.log('ul.floating_keywords');
   });
 

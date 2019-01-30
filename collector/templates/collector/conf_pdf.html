@@ -5,15 +5,17 @@
   <h1>{{ epic.title }}</h1>
   <P>{{ epic.data.era }}</P>
   <P>{{ epic.data.population }}</P>
-  <P>{{ epic.data.description|linebreaks|safe }}</P> 
-  {% for drama in epic.dramas %}    
+  <P>{{ epic.data.description|parse_avatars_pdf|linebreaks|safe }}</P> 
+  {% for drama in epic.dramas %}
+    <pdf:nextframe>
     <h2>{{drama.data.chapter}}. {{ drama.title }}</h2>
     <P>{{ drama.data.date }}</P>
     <P>{{ drama.data.place }}</P>
     <P>{{ drama.data.players|parse_avatars_pdf|safe }}</P>
     <P>{{ drama.data.description|linebreaks|safe }}</P>
     <P>{{ drama.data.resolution|linebreaks|safe }}</P>
-    {% for act in drama.acts %}         
+    {% for act in drama.acts %}
+      <pdf:nextframe>
       <h3>{{act.data.chapter}}. {{ act.title }}</h3>
       <P>{{ act.data.date }}</P>
       <P>{{ act.data.place }}</P>

@@ -145,8 +145,8 @@ class Character(models.Model):
       else:
         found_skill.value = modifier
       found_skill.save()
-      self.build_log.append('> New value for %s is %d'%(found_skill.skill_ref.reference,found_skill.value))
-      self.build_log.append('updated')
+      self.build_log += ('> New value for %s is %d'%(found_skill.skill_ref.reference,found_skill.value))
+      self.build_log += ('updated')
       return found_skill
     else:
       skill = Skill()
@@ -157,8 +157,8 @@ class Character(models.Model):
       else:
         skill.value = modifier
       skill.save()
-      self.build_log.append('> New value for %s is %d'%(skill.skill_ref.reference,skill.value))
-      self.build_log.append('added')
+      self.build_log += ('> New value for %s is %d'%(skill.skill_ref.reference,skill.value))
+      self.build_log += ('added')
       return skill
 
   def add_missing_root_skills(self):
@@ -172,7 +172,7 @@ class Character(models.Model):
     for skill in self.skill_set.all():
       if skill.skill_ref.is_root:
         skill.delete()
-    self.build_log.append(roots_list)
+    #self.build_log += (roots_list)
     for skillref in SkillRef.objects.all():
       if skillref in roots_list:
         self.add_or_update_skill(skillref, roots_list.count(skillref))
@@ -270,7 +270,7 @@ class Character(models.Model):
     if proceed == True:
       item = self
       context = {'c':item,'filename':'%s'%(item.rid),}
-      write_pdf('collector/character_pdf.html',context)
+      write_pdf('collector/character_roster.html',context)
       print('PDF .........: %s.pdf' % (self.rid))
     return proceed      
 

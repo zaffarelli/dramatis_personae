@@ -55,6 +55,10 @@ body {
       body .menu .shortcuts ul {
         margin: 0;
         padding: 0;
+        display: block;
+        background: red;
+        height: 40px;
+        overflow: show;
         list-style-type: none; }
         body .menu .shortcuts ul li {
           margin: 0;
@@ -70,7 +74,8 @@ body {
               z-index: 500; }
         body .menu .shortcuts ul #floatingk ul {
           color: white;
-          border: 1px dotted cyan; }
+          border: 1px dotted cyan;
+          z-index: 900; }
     body .menu .releasenote {
       display: block;
       margin: auto;

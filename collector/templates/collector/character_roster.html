@@ -1,0 +1,89 @@
+{% extends "pdf_doc.html" %}
+{%load fics_filters%}
+{% block article %}
+<h1>{{ c.full_name|safe }} {% if c.player != "" %}({{c.player|safe}}){%endif%}</h1>
+<em>{{ c.entrance|safe }}</em></br>
+{{c.gender|capfirst}} {{ c.species|capfirst|safe }} {{ c.rank|safe }} of the {{ c.alliance|safe }} from {{ c.native_fief|safe }} {{ c.caste|safe }}.
+<br/>Born in {{ c.birthdate }} ({{ c.age }} years old)
+<br/>Height: {{c.height}}cm / Weight:{{c.weight}}kg 
+<h2>Primary Attributes ({{ c.PA_TOTAL }})</h2>
+<br/>STR {{c.PA_STR}} CON {{c.PA_CON}} BOD {{c.PA_BOD}} MOV {{c.PA_MOV}}
+<br/>INT {{c.PA_INT}} WIL {{c.PA_WIL}} TEM {{c.PA_TEM}} PRE {{c.PA_PRE}}
+<br/>TEC {{c.PA_TEC}} REF {{c.PA_REF}} AGI {{c.PA_AGI}} AWA {{c.PA_AWA}}
+<h2>Secondary Attributes</h2>
+<br/>REC {{c.SA_REC}} STA {{c.SA_STA}} END {{c.SA_END}} STU {{c.SA_STU}}
+<br/>RES {{c.SA_RES}} DMG {{c.SA_DMG}} TOL {{c.SA_TOL}} HUM {{c.SA_HUM}}
+<br/>PAS {{c.SA_PAS}} WYR {{c.SA_WYR}} SPD {{c.SA_SPD}} RUN {{c.SA_RUN}}
+
+{% if c.skill_set.count != 0 %}
+<h2>Skills ({{ c.SK_TOTAL }})</h2>
+{% for skill in c.skill_set.all|dictsort:"skill_ref.reference" %}
+{% if skill.skill_ref.is_root %}<strong>{% endif %}{% if skill.skill_ref.is_speciality %}<em>{% endif %}{{ skill.skill_ref.reference|safe }}{% if skill.skill_ref.is_speciality %}</em>{% endif %}{% if skill.skill_ref.is_root %}</strong>{% endif %}
+&nbsp;{{ skill.value }}{% if forloop.last %}. {% else %},{% endif %} 
+{% endfor %}
+{% endif %}
+
+{% if c.blessingcurse_set.count != 0 %}
+<h2>Blessings/Curses ({{ c.BC_TOTAL }})</h2>
+{% for bc in c.blessingcurse_set.all|dictsortreversed:"value" %}
+<p><u>{{ bc.name|safe }}</u> ({{ bc.value }}): <br/> {{ bc.description|safe }}</p>
+{% endfor %}
+{%endif%}
+
+{% if c.beneficeaffliction_set.count != 0 %}
+<h2>Benefices/Afflictions ({{ c.BA_TOTAL }})</h2>
+<p>{% for ba in c.beneficeaffliction_set.all|dictsortreversed:"value" %}
+</p><u>{{ ba.beneficeaffliction_ref.reference|safe }}</u> (Cost:{{ ba.beneficeaffliction_ref.value }}+{{ ba.value }}): {{ ba.beneficeaffliction_ref.description|safe}} {{ba.description|parse_avatars_pdf|safe }}
+{% endfor %}
+</p>
+{%endif%}
+
+{% if c.talent_set.count != 0 %}
+<h2>Talents ({{ c.TA_TOTAL }})</h2>
+<p>{% for t in c.talent_set.all|dictsortreversed:"value" %}
+<u>{{ t.name|safe }}</u> ({{t.AP}}x3+{{t.OP}}={{ t.value }}): {{t.attributes_list}} {{t.skills_list}}{{ t.description|safe }}{% if forloop.last %}</p>{% else %}<br/>{% endif %}
+{% endfor %}
+{%endif%}
+{% if c.weapon_set.count != 0 %}
+
+<h2>Weapons</h2>
+<p>{% for w in c.weapon_set.all|dictsort:"weapon_ref.reference" %}
+{% if w.weapon_ref.category == "MELEE" %}
+<u>{{ w.weapon_ref.reference|safe }}:</u> <br/> {{w.weapon_ref.category}} &diams; WA:{{ w.weapon_ref.weapon_accuracy }} &diams; {{w.weapon_ref.conceilable}} &diams; {{ w.weapon_ref.availability }} &diams; DC:{{ w.weapon_ref.damage_class|center:"8" }} &diams; STR:{{ w.weapon_ref.str_min }} &diams; RNG:{{ w.weapon_ref.rng }} &diams; {{ w.weapon_ref.rel }} {% if not w.description is empty %}<br/>{{ w.description|safe }}{% endif %}{% if forloop.last %}</p>{% else %}<br/>{% endif %}
+{% else %}
+<u>{{ w.weapon_ref.reference|safe }}:</u> <br/> {{w.weapon_ref.category}} &diams; WA:{{ w.weapon_ref.weapon_accuracy }} &diams; {{w.weapon_ref.conceilable}} &diams; {{ w.weapon_ref.availability }} &diams; DC:{{ w.weapon_ref.damage_class|center:"8" }} &diams; Cal.{{ w.weapon_ref.caliber }} &diams; RoF:{{ w.weapon_ref.rof }} &diams; Clip:{{ w.weapon_ref.clip }} &diams; RNG:{{ w.weapon_ref.rng }} &diams; {{ w.weapon_ref.rel }} {% if not w.weapon_ref.description is empty %} {{ w.weapon_ref..description|safe }}{% endif %}{% if forloop.last %}</p>{% else %}<br/>{% endif %}
+{% endif %}
+{% endfor %}
+{%endif%}
+{% if c.armor_set.count != 0 %}
+<h2>Armor</h2>
+<p>{% for a in c.armor_set.all|dictsort:"armor_ref.stopping_power" %}
+<u>{{ a.armor_ref.reference|safe }}</u> &diams; {{a.armor_ref.category}} &diams; SP:{{ a.armor_ref.stopping_power }} &diams; {% if a.armor_ref.head %}(HE){%endif%}{% if a.armor_ref.torso %}(TO){%endif%}{%if a.armor_ref.left_arm %}(LA){%endif%}{% if a.armor_ref.right_arm %}(RA){%endif%}{% if a.armor_ref.left_leg %}(LL){%endif%}{% if a.armor_ref.right_leg %}(RL){%endif%}
+{% if not a.armor_ref.description is empty %}{{ a.armor_ref.description|safe }}{% endif %}{% if forloop.last %}</p>{% else %}<br/>{% endif %}
+{% endfor %}
+{%endif%}
+{% if c.shield_set.count != 0 %}
+<h2>Energy Shield</h2>
+<p>{% for s in c.shield_set.all|dictsort:"shield_ref.reference" %}
+<u>{{ s.shield_ref.reference|safe }}</u> &diams; {{s.shield_ref.protection_min}}/{{ s.shield_ref.protection_max }} &diams; Hits:{{s.shield_ref.hits}} &diams; usage:(Soft {% if s.shield_ref.is_compatible_with_medium_armor %}Medium {%else%}- {%endif%}{% if s.shield_ref.is_compatible_with_hard_armor %}Hard {%else%}- {%endif%})
+{% if not s.shield_ref.description is empty %}{{ s.shield_ref.description|safe }}{% endif %}<br/>
+{% endfor %}</p>
+{%endif%}
+
+<h2>Narrative</h2>
+<p>{{ c.narrative|linebreaks|safe }}</p>
+
+<h2>Shortcuts</h2>
+{{ c.gm_shortcuts|safe }}
+
+<br/>CHALLENGE {{ c.OP }}
+<br/>Role: {{c.role}}
+<br/>Profile: {{c.profile}}
+<BR/>RID:{{ c.rid }}
+<br/>Generated by <b>Dramatis Personae</b> 
+<BR/>{% now "Ymd H:i:s"  %}
+<br/><b>{{c.pagenum|stringformat:"03d" }}</b>
+{% endblock article %}
+
+
+

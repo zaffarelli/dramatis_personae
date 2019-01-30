@@ -84,7 +84,11 @@ body {
       margin-top:5px;      
       & ul{
         margin:0;
-        padding:0;        
+        padding:0;
+        display:block;
+        background:red;
+        height:40px;
+        overflow:show;
         list-style-type:none;
         & li{
           margin:0;
@@ -104,8 +108,10 @@ body {
 
         & #floatingk{
           & ul{
+            
             color:white;
             border:1px dotted cyan;
+            z-index:900;
           }
           
         }
