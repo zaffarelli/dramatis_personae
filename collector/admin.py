@@ -15,6 +15,10 @@ from collector.models.characters import Character
 from collector.models.characters_admin import CharacterAdmin
 from collector.models.benefices_afflictions import BeneficeAfflictionRef, BeneficeAfflictionRefAdmin
 from collector.models.configs import Config, ConfigAdmin
+from collector.models.fics_models import Role, RoleAdmin, Profile, ProfileAdmin
+
+admin.site.register(Role, RoleAdmin)
+admin.site.register(Profile, ProfileAdmin)
 
 admin.site.register(SkillRef, SkillRefAdmin)
 admin.site.register(Skill, SkillAdmin)

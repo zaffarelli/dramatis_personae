@@ -1,5 +1,6 @@
 from django.apps import apps
 from django.core.management.base import BaseCommand
+from collector.models.fics_models import Role, Profile
 
 roles = [         # PA Max Sk TA BA BC
   ['Legend',   8,   76,11, 70,0, 15,0],
@@ -22,7 +23,6 @@ profiles = [  # Weights                   Groups
   ['guilder',  [3,3,3,3,1,1,1,1,3,3,3,3],['FIG','TIN','CON']],
   ['standard', [1,1,1,1,1,1,1,1,1,1,1,1],[]]
 ]
-
 
 class Command(BaseCommand):
   args = 'None'

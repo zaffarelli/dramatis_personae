@@ -2,35 +2,42 @@ from django.db import models
 from collector.models.characters import Character
 from django.contrib import admin
 
-class ArmorRef(models.Model):
+class Role(models.Model):
   class Meta:
     ordering = ['reference']
-  reference = models.CharField(max_length=64,default='',blank=True, unique=True)
-  category = models.CharField(max_length=6,choices=(('Soft',"Soft Armor"),('Medium',"Medium Armor"),('Hard',"Hard Armor")),default='Soft',blank=True)
-  head = models.BooleanField(default=False)
-  torso = models.BooleanField(default=True)
-  left_arm = models.BooleanField(default=True)
-  right_arm = models.BooleanField(default=True)
-  left_leg = models.BooleanField(default=False)
-  right_leg = models.BooleanField(default=False)
-  stopping_power = models.PositiveIntegerField(default=2, blank=True)
-  cost = models.PositiveIntegerField(default=2, blank=True)
-  encumbrance = models.PositiveIntegerField(default=0, blank=True)
-  description = models.TextField(max_length=128,default='', blank=True)
+  reference = models.CharField(max_length=64,default='new_role',blank=True, unique=True)
+  value = models.PositiveIntegerField(default=0)
+  primaries = models.PositiveIntegerField(default=0)
+  maxi = models.PositiveIntegerField(default=10)
+  skills = models.PositiveIntegerField(default=0)
+  talents = models.PositiveIntegerField(default=0)
+  ba = models.PositiveIntegerField(default=0)
+  bc = models.PositiveIntegerField(default=0)
+  
   def __str__(self):
-    return '%s (%s, SP:%s)' % (self.reference, self.category, self.stopping_power)
+    return '%s (%s)' % (self.reference, self.value)
 
-class Armor(models.Model):
-  character = models.ForeignKey(Character, on_delete=models.CASCADE)
-  armor_ref = models.ForeignKey(ArmorRef, on_delete=models.CASCADE)
+class Profile(models.Model):
+  class Meta:
+    ordering = ['reference']
+  reference = models.CharField(max_length=64,default='new_role',blank=True, unique=True)
+  weights = models.CharField(max_length=128, default = '[1,1,1,1,1,1,1,1,1,1,1,1]')
+  groups = models.CharField(max_length=128, default = '[]')
   def __str__(self):
-    return '%s=%s' % (self.character.full_name,self.armor_ref.reference)
+    return '%s (%s)' % (self.reference, self.value)
+  def set_weights(self,data):
+    self.weights = json.dumps(data)
+  def get_weights(self):
+    return json.loads(self.weights)
+  def set_groups(self,data):
+    self.groups = json.dumps(data)
+  def get_groups(self):
+    return json.loads(self.groups)
+    
+class RoleAdmin(admin.ModelAdmin):
+  ordering = ('value',)
 
-class ArmorRefAdmin(admin.ModelAdmin):
-  ordering = ('category','-stopping_power','reference')  
-
-class ArmorAdmin(admin.ModelAdmin):
-  ordering = ('character','armor_ref',)
-
+class ProfileAdmin(admin.ModelAdmin):
+  ordering = ('reference',)
 
 
