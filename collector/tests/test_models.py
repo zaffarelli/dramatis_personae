@@ -2,8 +2,6 @@ from django.test import TestCase
 from collector.models.characters import Character
 from collector.tests.factories import CharacterFactory
 
-
-
 class CharacterTest(TestCase):
   def test_character_creation(self):
     c = CharacterFactory.build()

@@ -6,8 +6,8 @@ from django.dispatch import receiver
 import hashlib
 import collector.models.skills
 from scenarist.models.epics import Epic
-from scenarist.models.dramas import Drama
-from scenarist.models.acts import Act
+#from scenarist.models.dramas import Drama
+#from scenarist.models.acts import Act
 from collector.utils import fs_fics7, fics_references
 from collector.utils.basic import debug_print
 from collector.utils.basic import write_pdf
@@ -77,8 +77,8 @@ class Character(models.Model):
   challenge = models.TextField(default='',blank=True)  
   ready_for_export =  models.BooleanField(default=False)
   epic = models.ForeignKey(Epic, null=True, blank=True, on_delete=models.SET_NULL)
-  drama = models.ForeignKey(Drama, null=True, blank=True, on_delete=models.SET_NULL)
-  act = models.ForeignKey(Act, null=True, blank=True, on_delete=models.SET_NULL)
+  #drama = models.ForeignKey(Drama, null=True, blank=True, on_delete=models.SET_NULL)
+  #//act = models.ForeignKey(Act, null=True, blank=True, on_delete=models.SET_NULL)
 
   onsave_reroll_attributes = models.BooleanField(default=False)
   onsave_reroll_skills = models.BooleanField(default=False)
@@ -290,14 +290,14 @@ class Character(models.Model):
         if related_model == "<class 'scenarist.models.epics.Epic'>":        
           valfix = Epic(pk=val)
           #print("Foreign key is an Epic")
-        elif related_model == "<class 'scenarist.models.dramas.Drama'>":
-          valfix = Drama(pk=val)
+        #elif related_model == "<class 'scenarist.models.dramas.Drama'>":
+        #  valfix = Drama(pk=val)
           #print("Foreign key is a Drama")
-        elif related_model == "<class 'scenarist.models.acts.Act'>":
-          valfix = Act(pk=val)
+        #elif related_model == "<class 'scenarist.models.acts.Act'>":
+        #  valfix = Act(pk=val)
           #print("Foreign key is an Act")
-        else:
-          pass
+        #else:
+        #  pass
           #print("Foreign key link not found: %s"%(related_model))
       else:
         if type(v)==type(1):

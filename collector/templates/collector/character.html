@@ -2,7 +2,7 @@
 <div class="classyview">
 <h1>{{ c.full_name }}</h1>
 {{ c.entrance|safe }}</br>
-{{ c.epic|safe }} {% if not c.drama is empty %} {{ c.drama|safe }} {%endif%} {% if not c.act is empty %}{{ c.act|safe }}{% endif %}</br>
+{{ c.epic|safe }} 
 <table class="coreblock" id="base">
 <tr><th>Alliance</th><td>{{ c.alliance|safe }}</td><th>Birthdate</th><td>{{ c.birthdate }} ({{ c.age }} years old)</td></tr>
 <tr><th>Species/Race</th><td>{{ c.species|capfirst }}</td><th>Gender</th><td>{% if c.gender == "male" %}<i class="fas fa-mars"></i>{% else %}<i class="fas fa-venus"></i>{%endif%}</td></tr>
