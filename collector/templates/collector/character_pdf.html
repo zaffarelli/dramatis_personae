@@ -78,10 +78,7 @@
 {% if c.weapon_set.count != 0 %}
 <h2>Weapons</h2>
 <p>{% for w in c.weapon_set.all|dictsort:"weapon_ref.reference" %}
-{% if w.weapon_ref.category == "MELEE" %}
-<u>{{ w.weapon_ref.reference|safe }}:</u> <br/> {{w.weapon_ref.category}} &diams; WA:{{ w.weapon_ref.weapon_accuracy }} &diams; {{w.weapon_ref.conceilable}} &diams; {{ w.weapon_ref.availability }} &diams; DC:{{ w.weapon_ref.damage_class|center:"8" }} &diams; STR:{{ w.weapon_ref.str_min }} &diams; RNG:{{ w.weapon_ref.rng }} &diams; {{ w.weapon_ref.rel }} {% if not w.description is empty %}<br/>{{ w.description|safe }}{% endif %}{% if forloop.last %}</p>{% else %}<br/>{% endif %}
-{% else %}
-<u>{{ w.weapon_ref.reference|safe }}:</u> <br/> {{w.weapon_ref.category}} &diams; WA:{{ w.weapon_ref.weapon_accuracy }} &diams; {{w.weapon_ref.conceilable}} &diams; {{ w.weapon_ref.availability }} &diams; DC:{{ w.weapon_ref.damage_class|center:"8" }} &diams; Cal.{{ w.weapon_ref.caliber }} &diams; RoF:{{ w.weapon_ref.rof }} &diams; Clip:{{ w.weapon_ref.clip }} &diams; RNG:{{ w.weapon_ref.rng }} &diams; {{ w.weapon_ref.rel }} {% if not w.weapon_ref.description is empty %} {{ w.weapon_ref..description|safe }}{% endif %}{% if forloop.last %}</p>{% else %}<br/>{% endif %}
+{{ w.weapon_ref.stats|safe }}{% if forloop.last %}</p>{% else %}<br/>{% endif %}
 {% endif %}
 {% endfor %}
 {%endif%}

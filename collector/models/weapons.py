@@ -4,7 +4,7 @@ from django.contrib import admin
 
 class WeaponRef(models.Model):
   class Meta:
-    ordering = ['category','damage_class','reference']
+    ordering = ['reference', 'category','damage_class',]
   reference = models.CharField(max_length=64,default='',blank=True, unique=True)
   category = models.CharField(max_length=5,choices=(('MELEE',"Melee weapon"),('P',"Pistol/revolver"),('RIF',"Rifle"),('SMG',"Submachinegun"),('SHG',"Shotgun"),('HVY',"Heavy weapon"),('EX',"Exotic weapon")),default='RIF',blank=True)
   weapon_accuracy = models.IntegerField(default=0,blank=True)
@@ -19,8 +19,30 @@ class WeaponRef(models.Model):
   rel = models.CharField(max_length=2,choices=(('VR',"Very reliable"),('ST',"Standard"),('UR',"Unreliable")),default='ST',blank=True)
   cost = models.PositiveIntegerField(default=0,blank=True)
   description = models.TextField(max_length=256,default='',blank=True)
+  stats = models.CharField(max_length=256,default='',blank=True)
   def __str__(self):
-    return '%s (%s/%s/%s/%s£)' % (self.reference, self.category, self.damage_class, self.caliber, self.cost)
+    return '%s' % (self.stats)
+  def get_stats_line(self):
+    res = []
+    res.append(self.reference)
+    res.append(self.category)
+    res.append('WA:'+str(self.weapon_accuracy))
+    res.append(self.conceilable)
+    res.append(self.availability)
+    res.append('DC:'+self.damage_class)
+    if self.category == 'MELEE':
+      res.append('STR:'+str(self.str_min))
+    else:
+      res.append('Cal:'+self.caliber)
+      res.append('ROF:'+str(self.rof))
+      res.append('Clip:'+str(self.clip))
+    res.append('RNG:'+str(self.rng))    
+    res.append(str(self.rel))
+    res.append('£'+str(self.cost))
+    self.stats = ' ⦁ '.join(res) # ⦁⏺
+    self.save()
+    return self.stats
+
 
 class Weapon(models.Model):
   character = models.ForeignKey(Character, on_delete=models.CASCADE)
@@ -29,8 +51,15 @@ class Weapon(models.Model):
   def __str__(self):
     return '%s=%s' % (self.character.full_name,self.weapon_ref.reference)
 
+def update_stats_lines(modeladmin, request, queryset):
+  selected = request.POST.getlist(admin.ACTION_CHECKBOX_NAME)
+  for w in selected:
+    WeaponRef.objects.get(pk=w).get_stats_line()
+  short_description = "Update stats line"
+
 class WeaponRefAdmin(admin.ModelAdmin):
-  ordering = ('category','damage_class','reference',)  
+  ordering = ('reference','category','damage_class',)
+  actions = [update_stats_lines,]
 
 class WeaponAdmin(admin.ModelAdmin):
   ordering = ('character','weapon_ref',)

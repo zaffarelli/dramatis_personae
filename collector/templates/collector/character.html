@@ -114,11 +114,7 @@
 {% if c.weapon_set.count != 0 %}
 <h2>Weapons ({{c.weapon_cost}})</h2>
 <table>{% for w in c.weapon_set.all|dictsort:"weapon_ref.reference" %}
-{% if w.weapon_ref.category == "MELEE" %}
-<tr><td>{{ w.weapon_ref.reference|safe }} <i class='fa fa-caret-up fa-xs'></i> {{w.weapon_ref.category}} <i class='fa fa-caret-up fa-xs'></i> WA:{{ w.weapon_ref.weapon_accuracy }} <i class='fa fa-caret-up fa-xs'></i> {{w.weapon_ref.conceilable}} <i class='fa fa-caret-up fa-xs'></i> {{ w.weapon_ref.availability }} <i class='fa fa-caret-up fa-xs'></i> DC:{{ w.weapon_ref.damage_class|center:"8" }} <i class='fa fa-caret-up fa-xs'></i> STR:{{ w.weapon_ref.str_min }} <i class='fa fa-caret-up fa-xs'></i> RNG:{{ w.weapon_ref.rng }} <i class='fa fa-caret-up fa-xs'></i> {{ w.weapon_ref.rel }} {% if not w.description is empty %}<br/>{{ w.description|safe }}{% endif %}</td></tr>
-{% else %}
-<tr><td>{{ w.weapon_ref.reference|safe }} <i class='fa fa-caret-up fa-xs'></i> {{w.weapon_ref.category}} <i class='fa fa-caret-up fa-xs'></i> WA:{{ w.weapon_ref.weapon_accuracy }} <i class='fa fa-caret-up fa-xs'></i> {{w.weapon_ref.conceilable}} <i class='fa fa-caret-up fa-xs'></i> {{ w.weapon_ref.availability }} <i class='fa fa-caret-up fa-xs'></i> DC:{{ w.weapon_ref.damage_class|center:"8" }} <i class='fa fa-caret-up fa-xs'></i> Cal.{{ w.weapon_ref.caliber }} <i class='fa fa-caret-up fa-xs'></i> RoF:{{ w.weapon_ref.rof }} <i class='fa fa-caret-up fa-xs'></i> Clip:{{ w.weapon_ref.clip }} <i class='fa fa-caret-up fa-xs'></i> RNG:{{ w.weapon_ref.rng }} <i class='fa fa-caret-up fa-xs'></i> {{ w.weapon_ref.rel }} {% if not w.weapon_ref.description is empty %}<br/>{{ w.weapon_ref..description|safe }}{% endif %}</td></tr>
-{% endif %}
+<tr><td>{{ w.weapon_ref.stats|safe }}</td></tr>
 {% endfor %}
 </table>
 {%endif%}
