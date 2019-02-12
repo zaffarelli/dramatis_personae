@@ -288,7 +288,7 @@ function rebootlinks(){
     event.preventDefault();
     key = $('#customize').val(); 
     $.ajax({
-      url: 'ajax/view/character/'+key+'/',
+      url: 'ajax/view/by_rid/'+key+'/',
       success: function(answer) {
         $('.details').html(answer);
         prepare_ajax();

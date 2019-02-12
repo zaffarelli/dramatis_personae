@@ -90,6 +90,16 @@ def view_character(request, id=None):
   else:
     raise Http404
 
+def view_by_rid(request, slug=None):
+  """ Ajax view of a character """
+  if request.is_ajax():
+    item = get_object_or_404(Character,rid=slug)
+    template = get_template('collector/character.html')
+    html = template.render({'c':item})
+    return HttpResponse(html, content_type='text/html')
+  else:
+    raise Http404
+
 def extract_formset(rqp,s):
   """ Get only the fields matching to this formset """
   res = {}
