@@ -103,6 +103,7 @@ ROLES = {
   '08': {
     'primaries': 76,
     'maxi': 11,
+    'mini': 4,
     'skills':70,
     'talents':0,
     'ba':15,
@@ -111,6 +112,7 @@ ROLES = {
   '07': {
     'primaries': 72,
     'maxi': 10,
+    'mini': 4,
     'skills':60,
     'talents':0,
     'ba':10,
@@ -119,6 +121,7 @@ ROLES = {
   '06': {
     'primaries': 68,
     'maxi': 10,
+    'mini': 4,
     'skills':55,
     'talents':0,
     'ba':10,
@@ -127,6 +130,7 @@ ROLES = {
   '05': {
     'primaries': 64,
     'maxi': 9,
+    'mini': 3,
     'skills':50,
     'talents':0,
     'ba':7,
@@ -135,6 +139,7 @@ ROLES = {
   '04': {
     'primaries': 60,
     'maxi': 8,
+    'mini': 3,
     'skills':45,
     'talents':0,
     'ba':5,
@@ -143,6 +148,7 @@ ROLES = {
   '03': {
     'primaries': 56,
     'maxi': 8,
+    'mini': 3,
     'skills':40,
     'talents':0,
     'ba':2,
@@ -151,6 +157,7 @@ ROLES = {
   '02': {
     'primaries': 52,
     'maxi': 7,
+    'mini': 2,
     'skills':35,
     'talents':0,
     'ba':0,
@@ -159,6 +166,7 @@ ROLES = {
   '01': {
     'primaries': 48,
     'maxi': 7,
+    'mini': 1,
     'skills':20,
     'talents':0,
     'ba':0,

@@ -182,27 +182,39 @@ def choose_pa(weights):
 
 def check_primary_attributes(ch):
   """ Fixing primary attributes """
-  print('Checking primary attributes...')
+  debug_print('Checking primary attributes...')
   pool = ROLES[ch.role]['primaries']
+  total = pool
   maxi = ROLES[ch.role]['maxi']
+  mini = ROLES[ch.role]['mini']
   weights = PROFILES[ch.profile]['weights']
   ch.challenge = '(<i class="fas fa-th-large"></i>%02d <i class="fas fa-th-list"></i>%02d <i class="fas fa-th"></i>%02d <i class="fas fa-outdent"></i>%02d)'%(ROLES[ch.role]['primaries'],ROLES[ch.role]['skills'], ROLES[ch.role]['talents'],ROLES[ch.role]['bc'])
   debug_print('%s: %s [ %d / %d ]'%(ch.full_name,ch.role,pool,maxi))  
-  pas = [2,2,2,2,2,2,2,2,2,2,2,2]
-  #pas = [0,0,0,0,0,0,0,0,0,0,0,0]
+  #pas = [2,2,2,2,2,2,2,2,2,2,2,2]
+  pas = [0,0,0,0,0,0,0,0,0,0,0,0]
   current =  ch.PA_STR+ch.PA_CON+ch.PA_BOD+ch.PA_MOV+ch.PA_INT+ch.PA_WIL+ch.PA_TEM+ch.PA_PRE+ch.PA_TEC+ch.PA_REF+ch.PA_AGI+ch.PA_AWA
   debug_print('> Current PA TOTAL: %d'%(current))
   if ch.player == '':
-    pool = pool-24
-    debug_print('> Error: Primary Attributes invalid. Fixing that.')
-    while pool>0:      
-      chosen_pa = choose_pa(weights)
-      idx = chosen_pa
-      if pas[idx] < maxi:
-        pas[idx] += 1
-        pool -= 1
+    redo = True
+    while redo:
+      pool = pool-sum(pas)
+      debug_print('> Error: Primary Attributes invalid. Fixing that.')
+      while pool>0:      
+        chosen_pa = choose_pa(weights)
+        idx = chosen_pa
+        if pas[idx] < maxi:
+          pas[idx] += 1
+          pool -= 1
+        else:
+          debug_print('Invalid : already too high: pa[idx]:%d idx:%d maxi:%d pool:%d chosen_pa:%d'%(pas[idx],idx,maxi,pool,chosen_pa))
+      if min(pas)>=mini and max(pas)<=maxi and sum(pas)==total:
+        debug_print(':) %s: mini=%d/%d, max=%d/%d, sum=%d/%d'%(ch.rid, min(pas),mini, max(pas),maxi, sum(pas),total ))
+        debug_print('==> [p:%d,s:%d,c:%d] --> [p:%d,s:%d,c:%d]'%(sum(pas[0:4]), sum(pas[4:8]), sum(pas[8:12]), sum(weights[0:4]), sum(weights[4:8]), sum(weights[8:12])))
+        redo = False
       else:
-        debug_print('Invalid : already too high: pa[idx]:%d idx:%d maxi:%d pool:%d chosen_pa:%d'%(pas[idx],idx,maxi,pool,chosen_pa))
+        debug_print(':( %s: mini=%d/%d, max=%d/%d, sum=%d/%d'%(ch.rid, min(pas),mini, max(pas),maxi, sum(pas),total ))
+        pool = total
+        pas = [0,0,0,0,0,0,0,0,0,0,0,0]
     debug_print(pas)
     ch.PA_STR = pas[0]
     ch.PA_CON = pas[1]
@@ -255,23 +267,23 @@ def check_skills(ch):
   maxi = ROLES[ch.role]['maxi']
   groups = PROFILES[ch.profile]['groups']
   current = ch.SK_TOTAL
-  debug_print('> Current SK TOTAL: %d (pool is %d)'%(current,pool))
+  print('> Current SK TOTAL: %d (pool is %d)'%(current,pool))
   master_list = get_skills_list(ch,groups)
   master_weight = 0
   for s in master_list:
     master_weight += s['weight']
-  debug_print('> Max weight is %d'%(master_weight))
-  debug_print('> Keyword is %s'%(ch.keyword))
+  print('> Max weight is %d'%(master_weight))
+  print('> Keyword is %s'%(ch.keyword))
   ch.purgeSkills()
   current = fetch_everyman_sum(ch)
   if (current < pool) and ch.player == '':
     pool -= current
-    debug_print('> Error: Skills total too weak. Fixing that\n')    
+    print('> Error: Skills total too weak. Fixing that\n')    
     while pool>0:
       chosen_sk = choose_sk(master_list,master_weight)
       sk = ch.add_or_update_skill(chosen_sk)
       pool -= 1
-      debug_print('> Upping %s of 1 (now %d) let pool at %d'%(chosen_sk.reference,sk.value,pool))      
+      print('> Upping %s of 1 (now %d) let pool at %d'%(chosen_sk.reference,sk.value,pool))      
     check_specialties_from_roots(ch)
     check_everyman_skills(ch)
     ch.add_missing_root_skills()
