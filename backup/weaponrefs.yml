@@ -1,0 +1,218 @@
+- model: collector.weaponref
+  pk: 1
+  fields: {reference: Knife, category: MELEE, weapon_accuracy: 0, conceilable: P,
+    availability: E, damage_class: 1D6+1, caliber: '', str_min: 1, rof: 0, clip: 0,
+    rng: 0, rel: ST, cost: 2, description: '', stats: "Knife \u2981 MELEE \u2981 WA:0
+      \u2981 P \u2981 E \u2981 DC:1D6+1 \u2981 STR:1 \u2981 RNG:0 \u2981 ST \u2981
+      \xA32"}
+- model: collector.weaponref
+  pk: 2
+  fields: {reference: Mitchau "Penumbra" Shotgun, category: RIF, weapon_accuracy: -1,
+    conceilable: L, availability: P, damage_class: 5d6, caliber: '', str_min: 0, rof: 1,
+    clip: 6, rng: 15, rel: ST, cost: 250, description: '', stats: "Mitchau \"Penumbra\"
+      Shotgun \u2981 RIF \u2981 WA:-1 \u2981 L \u2981 P \u2981 DC:5d6 \u2981 Cal:
+      \u2981 ROF:1 \u2981 Clip:6 \u2981 RNG:15 \u2981 ST \u2981 \xA3250"}
+- model: collector.weaponref
+  pk: 3
+  fields: {reference: Imperial Rifle, category: RIF, weapon_accuracy: 0, conceilable: N,
+    availability: E, damage_class: 6D6+2, caliber: '7.62', str_min: 0, rof: 20, clip: 21,
+    rng: 400, rel: VR, cost: 200, description: "About 200\xA3", stats: "Imperial Rifle
+      \u2981 RIF \u2981 WA:0 \u2981 N \u2981 E \u2981 DC:6D6+2 \u2981 Cal:7.62 \u2981
+      ROF:20 \u2981 Clip:21 \u2981 RNG:400 \u2981 VR \u2981 \xA3200"}
+- model: collector.weaponref
+  pk: 4
+  fields: {reference: Avaneir Medium Blaster, category: P, weapon_accuracy: 0, conceilable: J,
+    availability: P, damage_class: 6d6, caliber: '', str_min: 0, rof: 0, clip: 0,
+    rng: 0, rel: '', cost: 400, description: '', stats: "Avaneir Medium Blaster \u2981
+      P \u2981 WA:0 \u2981 J \u2981 P \u2981 DC:6d6 \u2981 Cal: \u2981 ROF:0 \u2981
+      Clip:0 \u2981 RNG:0 \u2981  \u2981 \xA3400"}
+- model: collector.weaponref
+  pk: 5
+  fields: {reference: De Aragonesque Rapier, category: MELEE, weapon_accuracy: 1,
+    conceilable: L, availability: P, damage_class: 3D6+3, caliber: '', str_min: 3,
+    rof: 0, clip: 0, rng: 1, rel: VR, cost: 50, description: 'The high quality Rolas
+      rapier. Forged on demand, with exclusive decoration designed for the customer.',
+    stats: "De Aragonesque Rapier \u2981 MELEE \u2981 WA:1 \u2981 L \u2981 P \u2981
+      DC:3D6+3 \u2981 STR:3 \u2981 RNG:1 \u2981 VR \u2981 \xA350"}
+- model: collector.weaponref
+  pk: 6
+  fields: {reference: House Hawkwood 1638 UltraHeavy SMG, category: HVY, weapon_accuracy: -2,
+    conceilable: N, availability: P, damage_class: 8D6, caliber: 16mm, str_min: 4,
+    rof: 30, clip: 240, rng: 150, rel: VR, cost: 850, description: '', stats: "House
+      Hawkwood 1638 UltraHeavy SMG \u2981 HVY \u2981 WA:-2 \u2981 N \u2981 P \u2981
+      DC:8D6 \u2981 Cal:16mm \u2981 ROF:30 \u2981 Clip:240 \u2981 RNG:150 \u2981 VR
+      \u2981 \xA3850"}
+- model: collector.weaponref
+  pk: 7
+  fields: {reference: Ukari Krax, category: MELEE, weapon_accuracy: -2, conceilable: J,
+    availability: R, damage_class: 3D6+2, caliber: '', str_min: 3, rof: 0, clip: 0,
+    rng: 2, rel: VR, cost: 5000, description: WA is ignored for an ukari intiate to
+      the Kraxi Quadankar (The Kraxi Dance), stats: "Ukari Krax \u2981 MELEE \u2981
+      WA:-2 \u2981 J \u2981 R \u2981 DC:3D6+2 \u2981 STR:3 \u2981 RNG:2 \u2981 VR
+      \u2981 \xA35000"}
+- model: collector.weaponref
+  pk: 8
+  fields: {reference: Blue Moon Rifle (Seishen Rifle), category: RIF, weapon_accuracy: 0,
+    conceilable: N, availability: C, damage_class: 4D6+1, caliber: 12mm, str_min: 0,
+    rof: 2, clip: 10, rng: 400, rel: UR, cost: 175, description: The typical rifle
+      used by regular Blue Moon disciples., stats: "Blue Moon Rifle (Seishen Rifle)
+      \u2981 RIF \u2981 WA:0 \u2981 N \u2981 C \u2981 DC:4D6+1 \u2981 Cal:12mm \u2981
+      ROF:2 \u2981 Clip:10 \u2981 RNG:400 \u2981 UR \u2981 \xA3175"}
+- model: collector.weaponref
+  pk: 9
+  fields: {reference: Mitchau "Conquest" Assault Rifle, category: RIF, weapon_accuracy: 1,
+    conceilable: N, availability: P, damage_class: 6D6+2, caliber: 7.62mm, str_min: 0,
+    rof: 20, clip: 41, rng: 400, rel: VR, cost: 600, description: '', stats: "Mitchau
+      \"Conquest\" Assault Rifle \u2981 RIF \u2981 WA:1 \u2981 N \u2981 P \u2981 DC:6D6+2
+      \u2981 Cal:7.62mm \u2981 ROF:20 \u2981 Clip:41 \u2981 RNG:400 \u2981 VR \u2981
+      \xA3600"}
+- model: collector.weaponref
+  pk: 10
+  fields: {reference: House Decados "Stanislas" SMG, category: SMG, weapon_accuracy: 0,
+    conceilable: J, availability: P, damage_class: 4D6+1, caliber: '0.47', str_min: 0,
+    rof: 20, clip: 60, rng: 150, rel: VR, cost: 400, description: "Builder: House
+      Decados. Price: 400\xA3.", stats: "House Decados \"Stanislas\" SMG \u2981 SMG
+      \u2981 WA:0 \u2981 J \u2981 P \u2981 DC:4D6+1 \u2981 Cal:0.47 \u2981 ROF:20
+      \u2981 Clip:60 \u2981 RNG:150 \u2981 VR \u2981 \xA3400"}
+- model: collector.weaponref
+  pk: 11
+  fields: {reference: House al-Malik "Diplomat" Palm Laser, category: P, weapon_accuracy: 0,
+    conceilable: P, availability: P, damage_class: 2d6, caliber: 'FSC:2x12', str_min: 0,
+    rof: 2, clip: 7, rng: 100, rel: ST, cost: 200, description: Laser pistol built
+      by House al-Malik. A weapon designed mainly for self-defense., stats: "House
+      al-Malik \"Diplomat\" Palm Laser \u2981 P \u2981 WA:0 \u2981 P \u2981 P \u2981
+      DC:2d6 \u2981 Cal:FSC:2x12 \u2981 ROF:2 \u2981 Clip:7 \u2981 RNG:100 \u2981
+      ST \u2981 \xA3200"}
+- model: collector.weaponref
+  pk: 12
+  fields: {reference: Bachelor Rapier, category: MELEE, weapon_accuracy: 0, conceilable: N,
+    availability: E, damage_class: 3D6, caliber: '', str_min: 3, rof: 0, clip: 0,
+    rng: 1, rel: ST, cost: 10, description: '', stats: "Bachelor Rapier \u2981 MELEE
+      \u2981 WA:0 \u2981 N \u2981 E \u2981 DC:3D6 \u2981 STR:3 \u2981 RNG:1 \u2981
+      ST \u2981 \xA310"}
+- model: collector.weaponref
+  pk: 13
+  fields: {reference: Decados Crescent Dirk, category: MELEE, weapon_accuracy: 1,
+    conceilable: J, availability: P, damage_class: 2D6+3, caliber: '', str_min: 2,
+    rof: 0, clip: 0, rng: 0, rel: ST, cost: 10, description: A really sharp blade
+      easily conceilable., stats: "Decados Crescent Dirk \u2981 MELEE \u2981 WA:1
+      \u2981 J \u2981 P \u2981 DC:2D6+3 \u2981 STR:2 \u2981 RNG:0 \u2981 ST \u2981
+      \xA310"}
+- model: collector.weaponref
+  pk: 14
+  fields: {reference: Zaalen Stinger (Obun Stunner), category: P, weapon_accuracy: 2,
+    conceilable: J, availability: R, damage_class: 3D6, caliber: FSC, str_min: 0,
+    rof: 1, clip: 15, rng: 20, rel: ST, cost: 3000, description: Stun damage only,
+    stats: "Zaalen Stinger (Obun Stunner) \u2981 P \u2981 WA:2 \u2981 J \u2981 R \u2981
+      DC:3D6 \u2981 Cal:FSC \u2981 ROF:1 \u2981 Clip:15 \u2981 RNG:20 \u2981 ST \u2981
+      \xA33000"}
+- model: collector.weaponref
+  pk: 15
+  fields: {reference: Battle Axe, category: MELEE, weapon_accuracy: 0, conceilable: N,
+    availability: C, damage_class: 5D6, caliber: '', str_min: 4, rof: 0, clip: 0,
+    rng: 0, rel: ST, cost: 5, description: '', stats: "Battle Axe \u2981 MELEE \u2981
+      WA:0 \u2981 N \u2981 C \u2981 DC:5D6 \u2981 STR:4 \u2981 RNG:0 \u2981 ST \u2981
+      \xA35"}
+- model: collector.weaponref
+  pk: 16
+  fields: {reference: Avaneir "Guardian Angel" Light Revolver, category: P, weapon_accuracy: 0,
+    conceilable: P, availability: C, damage_class: 1D6+2, caliber: '0.32', str_min: 0,
+    rof: 3, clip: 6, rng: 50, rel: ST, cost: 90, description: '', stats: "Avaneir
+      \"Guardian Angel\" Light Revolver \u2981 P \u2981 WA:0 \u2981 P \u2981 C \u2981
+      DC:1D6+2 \u2981 Cal:0.32 \u2981 ROF:3 \u2981 Clip:6 \u2981 RNG:50 \u2981 ST
+      \u2981 \xA390"}
+- model: collector.weaponref
+  pk: 17
+  fields: {reference: "Ma\xFCer \"Hankerschief\" C-13", category: P, weapon_accuracy: 1,
+    conceilable: P, availability: R, damage_class: 1D6, caliber: 5mm, str_min: 0,
+    rof: 2, clip: 8, rng: 50, rel: ST, cost: 150, description: '', stats: "Ma\xFCer
+      \"Hankerschief\" C-13 \u2981 P \u2981 WA:1 \u2981 P \u2981 R \u2981 DC:1D6 \u2981
+      Cal:5mm \u2981 ROF:2 \u2981 Clip:8 \u2981 RNG:50 \u2981 ST \u2981 \xA3150"}
+- model: collector.weaponref
+  pk: 18
+  fields: {reference: Avaneir B209 "Dragonbreath", category: SMG, weapon_accuracy: 0,
+    conceilable: J, availability: E, damage_class: 2D6+3, caliber: 10mm, str_min: 0,
+    rof: 20, clip: 40, rng: 150, rel: VR, cost: 350, description: "Builder: Royale
+      House Li Halan. Price: 350\xA3", stats: "Avaneir B209 \"Dragonbreath\" \u2981
+      SMG \u2981 WA:0 \u2981 J \u2981 E \u2981 DC:2D6+3 \u2981 Cal:10mm \u2981 ROF:20
+      \u2981 Clip:40 \u2981 RNG:150 \u2981 VR \u2981 \xA3350"}
+- model: collector.weaponref
+  pk: 19
+  fields: {reference: Li Halan RK38, category: RIF, weapon_accuracy: -1, conceilable: N,
+    availability: E, damage_class: 2D6+3, caliber: 10mm, str_min: 0, rof: 1, clip: 4,
+    rng: 400, rel: UR, cost: 80, description: "Builder: Royale House Li Halan. Price:
+      80\xA3.", stats: "Li Halan RK38 \u2981 RIF \u2981 WA:-1 \u2981 N \u2981 E \u2981
+      DC:2D6+3 \u2981 Cal:10mm \u2981 ROF:1 \u2981 Clip:4 \u2981 RNG:400 \u2981 UR
+      \u2981 \xA380"}
+- model: collector.weaponref
+  pk: 20
+  fields: {reference: Derringer, category: P, weapon_accuracy: -1, conceilable: P,
+    availability: E, damage_class: 1D6, caliber: '0.2', str_min: 0, rof: 2, clip: 4,
+    rng: 50, rel: ST, cost: 50, description: "Price: 50\xA3.", stats: "Derringer \u2981
+      P \u2981 WA:-1 \u2981 P \u2981 E \u2981 DC:1D6 \u2981 Cal:0.2 \u2981 ROF:2 \u2981
+      Clip:4 \u2981 RNG:50 \u2981 ST \u2981 \xA350"}
+- model: collector.weaponref
+  pk: 21
+  fields: {reference: Avaneir Blaster Pistol, category: P, weapon_accuracy: 0, conceilable: J,
+    availability: P, damage_class: 5D6, caliber: 'FSC:5x30', str_min: 0, rof: 1, clip: 10,
+    rng: 30, rel: VR, cost: 700, description: 'Ammoes: 10/cell', stats: "Avaneir Blaster
+      Pistol \u2981 P \u2981 WA:0 \u2981 J \u2981 P \u2981 DC:5D6 \u2981 Cal:FSC:5x30
+      \u2981 ROF:1 \u2981 Clip:10 \u2981 RNG:30 \u2981 VR \u2981 \xA3700"}
+- model: collector.weaponref
+  pk: 22
+  fields: {reference: Blaster Rifle, category: RIF, weapon_accuracy: 0, conceilable: N,
+    availability: P, damage_class: 8D6, caliber: 'FSC:8x48', str_min: 0, rof: 1, clip: 8,
+    rng: 30, rel: ST, cost: 1000, description: '', stats: "Blaster Rifle \u2981 RIF
+      \u2981 WA:0 \u2981 N \u2981 P \u2981 DC:8D6 \u2981 Cal:FSC:8x48 \u2981 ROF:1
+      \u2981 Clip:8 \u2981 RNG:30 \u2981 ST \u2981 \xA31000"}
+- model: collector.weaponref
+  pk: 23
+  fields: {reference: Avaneir Blaster Shotgun, category: SHG, weapon_accuracy: 2,
+    conceilable: L, availability: R, damage_class: 8D6, caliber: 'FSC:8x48', str_min: 0,
+    rof: 1, clip: 8, rng: 20, rel: VR, cost: 1200, description: '', stats: "Avaneir
+      Blaster Shotgun \u2981 SHG \u2981 WA:2 \u2981 L \u2981 R \u2981 DC:8D6 \u2981
+      Cal:FSC:8x48 \u2981 ROF:1 \u2981 Clip:8 \u2981 RNG:20 \u2981 VR \u2981 \xA31200"}
+- model: collector.weaponref
+  pk: 24
+  fields: {reference: Dreksel Laser Pistol, category: P, weapon_accuracy: 1, conceilable: P,
+    availability: P, damage_class: 3D6, caliber: 'FSC:3x18x15', str_min: 0, rof: 2,
+    clip: 15, rng: 80, rel: ST, cost: 300, description: '', stats: "Dreksel Laser
+      Pistol \u2981 P \u2981 WA:1 \u2981 P \u2981 P \u2981 DC:3D6 \u2981 Cal:FSC:3x18x15
+      \u2981 ROF:2 \u2981 Clip:15 \u2981 RNG:80 \u2981 ST \u2981 \xA3300"}
+- model: collector.weaponref
+  pk: 25
+  fields: {reference: Dirk, category: MELEE, weapon_accuracy: 0, conceilable: J, availability: E,
+    damage_class: 2D6+1, caliber: '', str_min: 2, rof: 0, clip: 0, rng: 0, rel: ST,
+    cost: 4, description: '', stats: "Dirk \u2981 MELEE \u2981 WA:0 \u2981 J \u2981
+      E \u2981 DC:2D6+1 \u2981 STR:2 \u2981 RNG:0 \u2981 ST \u2981 \xA34"}
+- model: collector.weaponref
+  pk: 26
+  fields: {reference: Two-Handed Sword, category: MELEE, weapon_accuracy: 1, conceilable: N,
+    availability: R, damage_class: 6D6, caliber: '', str_min: 6, rof: 0, clip: 0,
+    rng: 2, rel: ST, cost: 30, description: '', stats: "Two-Handed Sword \u2981 MELEE
+      \u2981 WA:1 \u2981 N \u2981 R \u2981 DC:6D6 \u2981 STR:6 \u2981 RNG:2 \u2981
+      ST \u2981 \xA330"}
+- model: collector.weaponref
+  pk: 27
+  fields: {reference: Decados "Maiden Escort" Palm Blaster, category: P, weapon_accuracy: 2,
+    conceilable: P, availability: R, damage_class: 2D6+3, caliber: '', str_min: 0,
+    rof: 1, clip: 5, rng: 20, rel: VR, cost: 1000, description: 'A very small blaster
+      pistol, true wonder of miniaturization. Developped by House Decados for its
+      under cover agents.', stats: "Decados \"Maiden Escort\" Palm Blaster \u2981
+      P \u2981 WA:2 \u2981 P \u2981 R \u2981 DC:2D6+3 \u2981 Cal: \u2981 ROF:1 \u2981
+      Clip:5 \u2981 RNG:20 \u2981 VR \u2981 \xA31000"}
+- model: collector.weaponref
+  pk: 28
+  fields: {reference: Harmonic Assault Rifle Mark IV, category: RIF, weapon_accuracy: -1,
+    conceilable: L, availability: R, damage_class: 10D6, caliber: 'FSC:8x30', str_min: 0,
+    rof: 1, clip: 12, rng: 20, rel: VR, cost: 10000, description: Special Weapon,
+    stats: "Harmonic Assault Rifle Mark IV \u2981 RIF \u2981 WA:-1 \u2981 L \u2981
+      R \u2981 DC:10D6 \u2981 Cal:FSC:8x30 \u2981 ROF:1 \u2981 Clip:12 \u2981 RNG:20
+      \u2981 VR \u2981 \xA310000"}
+- model: collector.weaponref
+  pk: 29
+  fields: {reference: Staff, category: MELEE, weapon_accuracy: 1, conceilable: N,
+    availability: E, damage_class: 2d6+1, caliber: '', str_min: 3, rof: 0, clip: 0,
+    rng: 1, rel: ST, cost: 4, description: '', stats: "Staff \u2981 MELEE \u2981 WA:1
+      \u2981 N \u2981 E \u2981 DC:2d6+1 \u2981 STR:3 \u2981 RNG:1 \u2981 ST \u2981
+      \xA34"}

@@ -1,7 +1,10 @@
 import os
 
+
 #SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
 #SITE_ROOT = os.path.abspath(os.path.dirname(__name__))
+
+LOGPATH = "dramatis_personae/logs/"
 
 LOGGING = {
     'version': 1,
@@ -16,7 +19,7 @@ LOGGING = {
         'logfile': {
             'level':'DEBUG',
             'class':'logging.handlers.RotatingFileHandler',
-            'filename': "/home/zaffarelli/Projects/github/dramatis_personae/logs/dramatis_personae.log",
+            'filename': LOGPATH+"dramatis_personae.log",
             'maxBytes': 50000000,
             'backupCount': 10,
             'formatter': 'standard',
