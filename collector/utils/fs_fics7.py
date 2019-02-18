@@ -194,8 +194,10 @@ def check_primary_attributes(ch):
   pas = [0,0,0,0,0,0,0,0,0,0,0,0]
   current =  ch.PA_STR+ch.PA_CON+ch.PA_BOD+ch.PA_MOV+ch.PA_INT+ch.PA_WIL+ch.PA_TEM+ch.PA_PRE+ch.PA_TEC+ch.PA_REF+ch.PA_AGI+ch.PA_AWA
   debug_print('> Current PA TOTAL: %d'%(current))
+  cnt = 0
   if ch.player == '':
     redo = True
+    cnt += 1
     while redo:
       pool = pool-sum(pas)
       debug_print('> Error: Primary Attributes invalid. Fixing that.')
@@ -215,6 +217,10 @@ def check_primary_attributes(ch):
         debug_print(':( %s: mini=%d/%d, max=%d/%d, sum=%d/%d'%(ch.rid, min(pas),mini, max(pas),maxi, sum(pas),total ))
         pool = total
         pas = [0,0,0,0,0,0,0,0,0,0,0,0]
+        if cnt > 100:
+          debug_log('Too many redo in PA check !!!','critical');
+          raise ValueError('redo beyond 100 !!!')
+          redo = False
     debug_print(pas)
     ch.PA_STR = pas[0]
     ch.PA_CON = pas[1]
@@ -267,23 +273,23 @@ def check_skills(ch):
   maxi = ROLES[ch.role]['maxi']
   groups = PROFILES[ch.profile]['groups']
   current = ch.SK_TOTAL
-  print('> Current SK TOTAL: %d (pool is %d)'%(current,pool))
+  debug_print('> Current SK TOTAL: %d (pool is %d)'%(current,pool),'info')
   master_list = get_skills_list(ch,groups)
   master_weight = 0
   for s in master_list:
     master_weight += s['weight']
-  print('> Max weight is %d'%(master_weight))
-  print('> Keyword is %s'%(ch.keyword))
+  debug_print('> Max weight is %d'%(master_weight),'info')
+  debug_print('> Keyword is %s'%(ch.keyword),'info')
   ch.purgeSkills()
   current = fetch_everyman_sum(ch)
   if (current < pool) and ch.player == '':
     pool -= current
-    print('> Error: Skills total too weak. Fixing that\n')    
+    debug_print('> Error: Skills total too weak. Fixing that\n','error')    
     while pool>0:
       chosen_sk = choose_sk(master_list,master_weight)
       sk = ch.add_or_update_skill(chosen_sk)
       pool -= 1
-      print('> Upping %s of 1 (now %d) let pool at %d'%(chosen_sk.reference,sk.value,pool))      
+      debug_print('> Upping %s of 1 (now %d) let pool at %d'%(chosen_sk.reference,sk.value,pool))      
     check_specialties_from_roots(ch)
     check_everyman_skills(ch)
     ch.add_missing_root_skills()

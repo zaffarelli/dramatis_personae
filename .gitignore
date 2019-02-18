@@ -6,3 +6,4 @@ pdf
 pdfbooks/
 __pycache__/
 .~lock.
+logs/

@@ -10,7 +10,9 @@ from PyPDF2 import PdfFileMerger
 #from os.path import isfile, join
 import datetime
 import os
+import logging
 
+logger = logging.getLogger(__name__)
 
 def render_to_pdf(template_src, context_dict={}):
   """ Render PDF document """
@@ -41,10 +43,23 @@ def get_current_config():
   item = Config.objects.get(is_active=True)
   return item
 
-def debug_print(str):
+def debug_print(s,level='log'):
   from collector.utils.fics_references import DEBUG_ALL
   if DEBUG_ALL:
-    print(str)
+    print(s)
+  else:
+    if level=='debug':
+      logger.debug(s)
+    elif level=='error':
+      logger.error(s)
+    elif level=='info':
+      logger.info(s)
+    elif level=='warning':
+      logger.warning(s)
+    elif level=='critical':
+      logger.critical(s)
+    else:
+      logger.debug(s)
 
 def make_avatar_appendix(conf):
   """ Creating appendix with the list of avatars from the epic """

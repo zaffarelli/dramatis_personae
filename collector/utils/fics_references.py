@@ -102,7 +102,7 @@ PROFILES = {
 ROLES = {
   '08': {
     'primaries': 76,
-    'maxi': 11,
+    'maxi': 13,
     'mini': 4,
     'skills':70,
     'talents':0,
@@ -111,7 +111,7 @@ ROLES = {
   },
   '07': {
     'primaries': 72,
-    'maxi': 10,
+    'maxi': 12,
     'mini': 4,
     'skills':60,
     'talents':0,
