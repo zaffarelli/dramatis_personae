@@ -42,11 +42,11 @@ def check_everyman_skills(ch):
       if s.skill_ref.reference == every:
         every_found = True
         val = int(EVERYMAN[ch.species][every])
-        if s.value < val:          
-          debug_print('Everyman: Value fixed for %s (%s)'%(s.skill_ref.reference,val))
-          this_skill = Skill.objects.get(id=s.id)
-          this_skill.value += val
-          this_skill.save()
+        #if s.value < val:          
+        debug_print('Everyman: Value fixed for %s (%s)'%(s.skill_ref.reference,val))
+        this_skill = Skill.objects.get(id=s.id)
+        this_skill.value += val
+        this_skill.save()
         break
     if not every_found:
       val = int(EVERYMAN[ch.species][every])
@@ -239,20 +239,25 @@ def check_primary_attributes(ch):
   ch.onsave_reroll_attributes = False
 
 def get_skills_list(ch,groups):
-  """ Prepare the list of skills without roots """
-  skills = SkillRef.objects.all().filter(is_root=False)
+  """ Prepare the list of skills without specialities """
+  skills = SkillRef.objects.all().filter(is_speciality=False)
   master_skills = []
   for s in skills:
-    weight = 5
+    weight = 1
     for g in groups:
       if s.group == g:
-        weight = 15
+        weight = 5
     master_skills.append({'skill':s.reference, 'data':s, 'weight':weight})
   msl = []
   debug_print('MASTER LIST')
   for ms in master_skills:
     debug_print('%s: %d'%(ms['skill'],ms['weight']))
   return master_skills
+
+def pick_a_speciality_for(s):
+  skills = SkillRef.objects.all().filter(is_speciality=True,linked_to=s)
+  x = roll(skills.count())
+  return skills[x-1]
 
 def choose_sk(alist,maxweight):
   x = roll(maxweight)
@@ -261,7 +266,10 @@ def choose_sk(alist,maxweight):
   while idx < len(alist):
     cum += alist[idx]['weight']
     if x <= cum:
-      return alist[idx]['data']
+      if alist[idx]['data'].is_root:
+        return pick_a_speciality_for(alist[idx]['data'])
+      else:
+        return alist[idx]['data']
     idx += 1
   return None
 

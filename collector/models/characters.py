@@ -109,8 +109,8 @@ class Character(models.Model):
       fs_fics7.check_secondary_attributes(self)
 
     if self.onsave_reroll_skills:
-      fs_fics7.check_root_skills(self)
-      fs_fics7.check_everyman_skills(self)
+      #fs_fics7.check_root_skills(self)
+      #fs_fics7.check_everyman_skills(self)
       fs_fics7.check_skills(self)
 
     self.resetTotal()
