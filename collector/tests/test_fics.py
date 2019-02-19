@@ -6,7 +6,7 @@ from collector.tests.factories import CharacterCheckSkillsFactory, CharacterChec
 
 
 class FICSTest(TestCase):
-  fixtures = ['skillrefs.json']
+  fixtures = ['skillrefs.xml']
  
   def test_check_PA_character_creation(self):
     c = CharacterCheckPAFactory.create()
@@ -18,7 +18,7 @@ class FICSTest(TestCase):
     
   def test_check_skills_character_create(self):
     c = CharacterCheckSkillsFactory.create()
-    self.assertEquals(c.rid,'arthur_unskilled')
+    self.assertEquals(c.rid,'arthur'+str(c.role)+'_unskilled')
 
   def test_check_PA_Total(self):
     """ Total PA matching """
@@ -37,12 +37,12 @@ class FICSTest(TestCase):
     check_primary_attributes(c)
     c_pa_list = [ c.PA_STR , c.PA_CON , c.PA_BOD , c.PA_MOV , c.PA_INT , c.PA_WIL , c.PA_TEM , c.PA_PRE , c.PA_TEC , c.PA_REF , c.PA_AGI , c.PA_AWA]
     weights = PROFILES[c.profile]['weights']
-    w_phy = weights[0:5]
-    w_spi = weights[5:9]
-    w_com = weights[9:12]
-    c_phy = c_pa_list[0:5]
-    c_spi = c_pa_list[5:9]
-    c_com = c_pa_list[9:12] 
+    w_phy = weights[0:4]
+    w_spi = weights[4:8]
+    w_com = weights[8:12]
+    c_phy = c_pa_list[0:4]
+    c_spi = c_pa_list[4:8]
+    c_com = c_pa_list[8:12] 
     wt_phy = sum(w_phy)
     wt_spi = sum(w_spi)
     wt_com = sum(w_com)
@@ -76,14 +76,13 @@ class FICSTest(TestCase):
 
   def test_check_skills_Total(self):
     """ Check skills total according to role """
-    
     c = CharacterCheckSkillsFactory.create()
     sk_pool = ROLES[c.role]['skills']    
     check_skills(c)
-    #skill_total = 0
-    #for s in c.skill_set.all():
-    #  if (s.skill_ref.is_root == False):
-    #    skill_total += s.value       
-    self.assertEqual(c.SK_TOTAL,sk_pool)
+    skill_total = 0
+    for s in c.skill_set.all():
+      if (s.skill_ref.is_root == False):
+        skill_total += s.value
+    self.assertEqual(skill_total,sk_pool)
 
 

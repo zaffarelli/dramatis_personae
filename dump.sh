@@ -10,6 +10,8 @@ python3 manage.py dumpdata collector.ArmorRef --format xml --output backup/armor
 python3 manage.py dumpdata collector.ShieldRef --format xml --output backup/shieldrefs.xml
 python3 manage.py dumpdata collector.BeneficeAfflictionRef --format xml --output backup/beneficeafflictionrefs.xml
 
+cp backup/skillrefs.xml collector/fixtures/
+
 echo "Dumping user data..."
 python3 manage.py dumpdata collector.Skill --format xml --output backup/skills.xml
 python3 manage.py dumpdata collector.Talent --format xml --output backup/talents.xml

@@ -15,7 +15,6 @@ from collector.utils.basic import write_pdf
 
 class Character(models.Model):
   pagenum = 0
-  alea = 0
   full_name = models.CharField(max_length=200)
   rid = models.CharField(max_length=200, default='none')
   alliance = models.CharField(max_length=200, blank=True, default='')
@@ -178,12 +177,14 @@ class Character(models.Model):
     for skillref in SkillRef.objects.all():
       if skillref in roots_list:
         self.add_or_update_skill(skillref, roots_list.count(skillref))
+    for item in roots_list:
+      debug_print('ROOT_LIST:%s'%(item.reference))
 
   def purgeSkills(self):
     """ Deleting all character skills """
     for skill in self.skill_set.all():
       skill.delete()
-    print(self.skill_set.all().count())
+    debug_print('PurgeSkill count: %d'%(self.skill_set.all().count()))
 
     
   def resetTotal(self):
@@ -347,7 +348,7 @@ def update_character(sender, instance, conf=None, **kwargs):
     instance.fix(conf)
   instance.get_rid(instance.full_name)
   instance.alliancehash = hashlib.sha1(bytes(instance.alliance,'utf-8')).hexdigest()
-  debug_print('Fix .........: %s' % (instance.full_name),'info')
+  debug_print('Fix .........: %s' % (instance.full_name))
 
 @receiver(post_save, sender=Character, dispatch_uid='backup_character')
 def backup_character(sender, instance, **kwargs):

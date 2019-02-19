@@ -42,8 +42,8 @@ class CharacterCheckPAFactory(factory.django.DjangoModelFactory):
 class CharacterCheckSkillsFactory(factory.django.DjangoModelFactory):
   class Meta:
     model = Character
-  full_name = 'Arthur Unskilled'
-  role = '03'
+  role = '0'+str(roll(8))
+  full_name = 'Arthur'+str(role)+' Unskilled'
   profile = 'physical'
   species = 'urthish'
   onsave_reroll_skills = True
