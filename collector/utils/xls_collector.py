@@ -12,6 +12,7 @@ from openpyxl.styles import PatternFill
 from openpyxl.styles import colors
 from openpyxl.styles import Font, Color
 from openpyxl import load_workbook
+from collector.utils.fics_references import RELEASE
 
 def colrow(c,r):
   return '%s%d'%(get_column_letter(c),r)
@@ -46,7 +47,7 @@ def export_to_xls(filename='dramatis_personae.xlsx'):
   ws.cell(column=1, row=2, value='Source')
   ws.cell(column=2, row=2, value='Dramatis Personae Collector')
   ws.cell(column=1, row=3, value='Version')
-  ws.cell(column=2, row=3, value='0.5')
+  ws.cell(column=2, row=3, value=str(RELEASE))
   ws.cell(column=1, row=4, value='Release date')
   ws.cell(column=2, row=4, value='%s'%(datetime.now()))
   # Characters
@@ -118,9 +119,10 @@ def export_to_xls(filename='dramatis_personae.xlsx'):
     '3':{'title':'Speciality','attribute':'is_speciality','width':10},
     '4':{'title':'Category','attribute':'category','width':10},
     '5':{'title':'Linked To','attribute':'linked_to','width':20},
+    '6':{'title':'Group','attribute':'group','width':10},    
   }
   ws.cell(column=1, row=1, value='Dramatis Personae')
-  skillref_items = SkillRef.objects.all().order_by('reference','is_root')
+  skillref_items = SkillRef.objects.all().order_by('is_speciality','reference')
   export_header(ws,h)
   cnt = 3
   for c in skillref_items:

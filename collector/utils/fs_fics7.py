@@ -238,6 +238,7 @@ def check_primary_attributes(ch):
     ch.PA_AWA = pas[11]
   ch.onsave_reroll_attributes = False
 
+
 def get_skills_list(ch,groups):
   """ Prepare the list of skills without specialities """
   skills = SkillRef.objects.all().filter(is_speciality=False)
@@ -246,12 +247,13 @@ def get_skills_list(ch,groups):
     weight = 1
     for g in groups:
       if s.group == g:
-        weight = 5
+        weight = 10 if s.is_root else 5        
     master_skills.append({'skill':s.reference, 'data':s, 'weight':weight})
   msl = []
-  debug_print('MASTER LIST')
-  for ms in master_skills:
-    debug_print('%s: %d'%(ms['skill'],ms['weight']))
+  print()
+  print('MASTER LIST')
+  for ms in sorted(master_skills,key=lambda ms: ms['skill']):
+    print('%s%s: %d'%('  ' if ms['data'].is_root else '', ms['skill'],ms['weight']))
   return master_skills
 
 def pick_a_speciality_for(s):
@@ -293,19 +295,24 @@ def check_skills(ch):
   x = 0
   if (current < pool) and ch.player == '':
     pool -= current
-    debug_print('> Error: Skills total too weak. Fixing that')    
+    debug_print('> Error: Skills total too weak. Fixing that')
+    repart = {'EDU':0,'AWA':0,'PER':0,'SOC':0,'FIG':0,'TIN':0,'CON':0,'BOD':0}    
     while pool>0:
-      x+=1
+      batch = roll(3) if pool>3 else 1
+      x+=batch
       chosen_sk = choose_sk(master_list,master_weight)
-      sk = ch.add_or_update_skill(chosen_sk)      
-      debug_print('%d> Upping %s of 1 (now %d) let pool at %d'%(x,chosen_sk.reference,sk.value,pool))
-      pool -= 1
+      sk = ch.add_or_update_skill(chosen_sk,batch)      
+      debug_print('%d> Upping %s of %d (now %d) let pool at %d'%(x,chosen_sk.reference,batch,sk.value,pool))
+      pool -= batch
     #check_specialties_from_roots(ch)
     check_everyman_skills(ch)
     ch.add_missing_root_skills()
     #check_root_skills(ch)
   for skill in ch.skill_set.all().order_by('skill_ref__reference'):
     debug_print('%s%s: %d'%('  ' if skill.skill_ref.is_speciality else '',skill.skill_ref.reference,skill.value))
+    repart[skill.skill_ref.group] += skill.value if skill.skill_ref.is_speciality==False else 0
+    
+  print(repart)
   ch.onsave_reroll_skills = False
     
   

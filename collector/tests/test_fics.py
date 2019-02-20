@@ -4,14 +4,9 @@ from collector.utils.fics_references import ROLES, PROFILES, EVERYMAN
 from collector.utils.fs_fics7 import check_skills, check_primary_attributes
 from collector.tests.factories import CharacterCheckSkillsFactory, CharacterCheckPAFactory
 
-
-class FICSTest(TestCase):
+class FICSTestSkills(TestCase):
   fixtures = ['skillrefs.xml']
- 
-  def test_check_PA_character_creation(self):
-    c = CharacterCheckPAFactory.create()
-    self.assertEquals(c.rid,'scholar'+str(c.role)+'_noattributes')
-       
+
   def test_check_skills_character_build(self):
     c = CharacterCheckSkillsFactory.build()
     self.assertEquals(c.autobuild(),True)
@@ -19,6 +14,23 @@ class FICSTest(TestCase):
   def test_check_skills_character_create(self):
     c = CharacterCheckSkillsFactory.create()
     self.assertEquals(c.rid,'arthur'+str(c.role)+'_unskilled')
+
+  def test_check_skills_Total(self):
+    """ Check skills total according to role """
+    c = CharacterCheckSkillsFactory.create()
+    sk_pool = ROLES[c.role]['skills']    
+    check_skills(c)
+    skill_total = 0
+    for s in c.skill_set.all():
+      if (s.skill_ref.is_root == False):
+        skill_total += s.value
+    self.assertEqual(skill_total,sk_pool)
+
+class FICSTestPA(TestCase):
+  def test_check_PA_character_creation(self):
+    c = CharacterCheckPAFactory.create()
+    self.assertEquals(c.rid,'scholar'+str(c.role)+'_noattributes')
+       
 
   def test_check_PA_Total(self):
     """ Total PA matching """
@@ -73,16 +85,4 @@ class FICSTest(TestCase):
     c_pa_list = [ c.PA_STR , c.PA_CON , c.PA_BOD , c.PA_MOV , c.PA_INT , c.PA_WIL , c.PA_TEM , c.PA_PRE , c.PA_TEC , c.PA_REF , c.PA_AGI , c.PA_AWA]
     m = min(c_pa_list)
     self.assertLessEqual(mini,m)
-
-  def test_check_skills_Total(self):
-    """ Check skills total according to role """
-    c = CharacterCheckSkillsFactory.create()
-    sk_pool = ROLES[c.role]['skills']    
-    check_skills(c)
-    skill_total = 0
-    for s in c.skill_set.all():
-      if (s.skill_ref.is_root == False):
-        skill_total += s.value
-    self.assertEqual(skill_total,sk_pool)
-
 

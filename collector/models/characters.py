@@ -144,7 +144,7 @@ class Character(models.Model):
       if modifier == 0:
         found_skill.value += 1
       else:
-        found_skill.value = modifier
+        found_skill.value += modifier
       found_skill.save()
       self.build_log += ('> New value for %s is %d'%(found_skill.skill_ref.reference,found_skill.value))
       self.build_log += ('updated')

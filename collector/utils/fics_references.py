@@ -41,6 +41,7 @@ PROFILECHOICES = (
   ('courtisan',"Courtisan"),
   ('scholar',"Scholar"),
   ('guilder',"Guilder"),
+  ('diplomat',"Diplomat"),
   ('undefined','Undefined'),
 )
 
@@ -64,8 +65,15 @@ CATEGORYCHOICES=(
   ('ac',"Action"),
 )
 
+CUSTOMGROUPS=(
+  ('all','No group at all'),
+  ('pil','Pilot'),
+  ('sci','Science'),
+  ('fig','Fight'),
+)
+
 """
-BOD EDU SOC PER FIG TIN CON SOC 
+Groups: AWA BOD CON EDU FIG PER SOC TIN 
 """
 PROFILES = {
   'physical': {
@@ -95,7 +103,11 @@ PROFILES = {
   'standard': {
     'weights':[1,1,1,1,1,1,1,1,1,1,1,1],
     'groups':[]
-  },    
+  },
+  'diplomat': {
+    'weights':[1,1,1,1,3,3,3,3,1,1,1,1],
+    'groups':['SOC','PER', 'AWA']
+  },      
 }
 
 
@@ -110,7 +122,7 @@ ROLES = {
     'bc':0,
   },
   '07': {
-    'primarieq': 72,
+    'primaries': 72,
     'maxi': 11,
     'mini': 4,
     'skills':130,
