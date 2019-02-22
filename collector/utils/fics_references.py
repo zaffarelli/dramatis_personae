@@ -42,18 +42,22 @@ PROFILECHOICES = (
   ('scholar',"Scholar"),
   ('guilder',"Guilder"),
   ('diplomat',"Diplomat"),
+  ('bully','Bully'),
   ('undefined','Undefined'),
 )
 
 GROUPCHOICES=(
-  ('EDU',"Education"),
-  ('FIG',"Combat"),
   ('AWA',"Awareness"),
   ('BOD',"Physical"),
-  ('TIN',"Tinkering"),
+  ('CON',"Control"),
+  ('DIP',"Diplomacy"),
+  ('EDU',"Education"),
+  ('FIG',"Combat"),
   ('PER',"Performance"),
   ('SOC',"Social"),
-  ('CON',"Control"),
+  ('SPI',"Spirituality"),
+  ('TIN',"Tinkering"),
+  ('UND',"Underworld"),
 )
 
 CATEGORYCHOICES=(
@@ -73,7 +77,9 @@ CUSTOMGROUPS=(
 )
 
 """
-Groups: AWA BOD CON EDU FIG PER SOC TIN 
+Groups: AWA BOD CON EDU FIG PER SOC TIN
+                    SPI         UND
+                    DIP
 """
 PROFILES = {
   'physical': {
@@ -82,23 +88,23 @@ PROFILES = {
   },
   'spiritual': {
     'weights':[1,1,1,1,3,3,3,3,1,1,1,1],
-    'groups':['SOC','AWA'],
+    'groups':['SOC','AWA','SPI'],
   },
   'tech': {
     'weights':[1,1,1,1,1,1,1,1,3,3,3,3],
     'groups':['TIN','CON','AWA'],
   },  
   'courtisan': {
-    'weights':[3,3,3,3,3,3,3,3,1,1,1,1],
-    'groups':['FIG','SOC','PER'],
+    'weights':[2,2,2,2,2,2,2,2,1,1,1,1],
+    'groups':['FIG','SOC','PER','EDU'],
   },
   'scholar': {
     'weights':[1,1,1,1,3,3,3,3,3,3,3,3],
     'groups':['EDU','SOC'],
   },
   'guilder': {
-    'weights':[3,3,3,3,1,1,1,1,3,3,3,3],
-    'groups':['FIG','TIN','CON']
+    'weights':[2,2,2,2,1,1,1,1,2,2,2,2],
+    'groups':['FIG','TIN','CON', 'UND']
   },    
   'standard': {
     'weights':[1,1,1,1,1,1,1,1,1,1,1,1],
@@ -106,8 +112,12 @@ PROFILES = {
   },
   'diplomat': {
     'weights':[1,1,1,1,3,3,3,3,1,1,1,1],
-    'groups':['SOC','PER', 'AWA']
-  },      
+    'groups':['SOC','PER', 'AWA', 'DIP']
+  },
+  'bully': {
+    'weights':[2,2,2,2,1,1,1,1,2,2,2,2],
+    'groups':['UND','FIG', 'AWA', 'CON']
+  },        
 }
 
 

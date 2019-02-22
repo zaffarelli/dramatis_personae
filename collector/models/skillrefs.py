@@ -47,7 +47,19 @@ def change_to_soc(modeladmin, request, queryset):
 def change_to_tin(modeladmin, request, queryset):
   queryset.update(group='TIN')
   short_description = "Change skills to the TIN group"  
-  
+
+def change_to_spi(modeladmin, request, queryset):
+  queryset.update(group='SPI')
+  short_description = "Change skills to the SPI group"  
+
+def change_to_und(modeladmin, request, queryset):
+  queryset.update(group='UND')
+  short_description = "Change skills to the UND group"  
+
+def change_to_dip(modeladmin, request, queryset):
+  queryset.update(group='DIP')
+  short_description = "Change skills to the DIP group"
+    
 class SkillRefAdmin(admin.ModelAdmin):
   ordering = ['reference']
   actions = [change_to_awa, change_to_soc, change_to_edu, change_to_fig, change_to_con, change_to_tin, change_to_per, change_to_bod]

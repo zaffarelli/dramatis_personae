@@ -99,6 +99,7 @@ def view_by_rid(request, slug=None):
     return HttpResponse(html, content_type='text/html')
   else:
     raise Http404
+    return "ejvkejvrjvelveklvelvelvl"
 
 def extract_formset(rqp,s):
   """ Get only the fields matching to this formset """
