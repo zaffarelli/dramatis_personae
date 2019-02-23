@@ -84,27 +84,27 @@ Groups: AWA BOD CON EDU FIG PER SOC TIN
 PROFILES = {
   'physical': {
     'weights':[3,3,3,3,1,1,1,1,1,1,1,1],
-    'groups':['FIG','BOD'],
+    'groups':['FIG','BOD','UND','CON'],
   },
   'spiritual': {
     'weights':[1,1,1,1,3,3,3,3,1,1,1,1],
-    'groups':['SOC','AWA','SPI'],
+    'groups':['SOC','AWA','SPI','PER'],
   },
   'tech': {
     'weights':[1,1,1,1,1,1,1,1,3,3,3,3],
-    'groups':['TIN','CON','AWA'],
+    'groups':['TIN','CON','AWA','EDU'],
   },  
   'courtisan': {
     'weights':[2,2,2,2,2,2,2,2,1,1,1,1],
-    'groups':['FIG','SOC','PER','EDU'],
+    'groups':['FIG','SOC','PER','DIP'],
   },
   'scholar': {
     'weights':[1,1,1,1,3,3,3,3,3,3,3,3],
-    'groups':['EDU','SOC'],
+    'groups':['EDU','SOC','DIP','AWA'],
   },
   'guilder': {
     'weights':[2,2,2,2,1,1,1,1,2,2,2,2],
-    'groups':['FIG','TIN','CON', 'UND']
+    'groups':['FIG','TIN','CON','UND']
   },    
   'standard': {
     'weights':[1,1,1,1,1,1,1,1,1,1,1,1],

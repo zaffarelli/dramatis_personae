@@ -320,13 +320,12 @@ def check_skills(ch):
     check_everyman_skills(ch)
     ch.add_missing_root_skills()
     #check_root_skills(ch)
-  print()
-  print('SKILL LIST')    
+  debug_print('')
+  debug_print('SKILL LIST')    
   for skill in ch.skill_set.all().order_by('skill_ref__reference'):
-    print('%s%s: %d'%('  ' if skill.skill_ref.is_speciality else '',skill.skill_ref.reference,skill.value))
+    debug_print('%s%s: %d'%('  ' if skill.skill_ref.is_speciality else '',skill.skill_ref.reference,skill.value))
     repart[skill.skill_ref.group] += skill.value if skill.skill_ref.is_speciality==False else 0
-    
-  print(repart)
+  debug_print(repart)
   ch.onsave_reroll_skills = False
     
   
