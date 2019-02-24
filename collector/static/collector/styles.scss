@@ -375,10 +375,10 @@ body {
         }
         & .field_wrapper {
           & label {
-            width: 20ex;
+            width: 10ex;
             display: inline-block;
             vertical-align: top;
-            text-align:right;
+            text-align:left;
           }
           & input, & textarea, & select{
             box-sizing: border-box;

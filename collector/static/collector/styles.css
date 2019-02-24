@@ -280,10 +280,10 @@ body {
           font-size: 1.3em;
           side: top; }
         body .wrapper .details table.formset .field_wrapper label {
-          width: 20ex;
+          width: 10ex;
           display: inline-block;
           vertical-align: top;
-          text-align: right; }
+          text-align: left; }
         body .wrapper .details table.formset .field_wrapper input, body .wrapper .details table.formset .field_wrapper textarea, body .wrapper .details table.formset .field_wrapper select {
           box-sizing: border-box;
           display: inline-block;
