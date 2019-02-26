@@ -112,7 +112,8 @@ class Character(models.Model):
       #fs_fics7.check_root_skills(self)
       #fs_fics7.check_everyman_skills(self)
       fs_fics7.check_skills(self)
-
+    else:
+      self.add_missing_root_skills()
     self.resetTotal()
     
     gm_shortcuts = ''
