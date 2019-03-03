@@ -6,7 +6,7 @@ from django.dispatch import receiver
 import hashlib
 import collector.models.skills
 from scenarist.models.epics import Epic
-from collector.models.fics_models import CastRole,CastProfile
+from collector.models.fics_models import CastRole,CastProfile,CastEveryman
 #from scenarist.models.dramas import Drama
 #from scenarist.models.acts import Act
 from collector.utils import fs_fics7, fics_references
@@ -71,6 +71,7 @@ class Character(models.Model):
   gm_shortcuts = models.TextField(default='',blank=True)
   age = models.IntegerField(default=0)  
   #role = models.CharField(max_length=16,default='00',choices= fics_references.ROLECHOICES)
+  castspecies = models.ForeignKey(CastEveryman, null=True, blank=True, on_delete=models.SET_NULL)
   castrole = models.ForeignKey(CastRole, null=True, blank=True, on_delete=models.SET_NULL)
   castprofile = models.ForeignKey(CastProfile, null=True, blank=True, on_delete=models.SET_NULL)
   #profile = models.CharField(max_length=16,default='undefined',choices=fics_references.PROFILECHOICES)
@@ -256,7 +257,7 @@ class Character(models.Model):
     comment = ''
     self.stars = ''
     self.build_log = ''
-    for x in range(1,int(self.role)+1):
+    for x in range(1,int(self.castrole.value)+1):
       self.stars += '<i class="fas fa-star fa-xs"></i>'    
     comment += self.resetTotal()
     roleok = fs_fics7.check_role(self)

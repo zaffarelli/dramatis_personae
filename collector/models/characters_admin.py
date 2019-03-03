@@ -23,8 +23,24 @@ def make_visible(modeladmin, request, queryset):
   queryset.update(visible=True)
   short_description = "Make visible"
 
+def make_teutonic(modeladmin, request, queryset):
+  queryset.update(castspecies=1)
+  short_description = "Make teutonic"
+
+def make_kaanic(modeladmin, request, queryset):
+  queryset.update(castspecies=25)
+  short_description = "Make kaanic"
+
+def make_castillan(modeladmin, request, queryset):
+  queryset.update(castspecies=22)
+  short_description = "Make castillan"
+
+def make_enquist(modeladmin, request, queryset):
+  queryset.update(castspecies=23)
+  short_description = "Make enquist"
+
 class CharacterAdmin(admin.ModelAdmin):
-  list_display = ('full_name','castrole','castprofile','species','alliance','PA_TOTAL','SK_TOTAL','BA_TOTAL','BC_TOTAL','TA_TOTAL','OP','visible','epic')
+  list_display = ('full_name','castspecies','castrole','castprofile','species','alliance','PA_TOTAL','SK_TOTAL','BA_TOTAL','BC_TOTAL','TA_TOTAL','OP','visible','epic')
   inlines = [
     SkillInline,
     BlessingCurseInline,
@@ -35,6 +51,6 @@ class CharacterAdmin(admin.ModelAdmin):
     ShieldInline,
   ]  
   ordering = ['epic','full_name',]
-  actions = [cast_to_blank, cast_to_dem, make_invisible, make_visible]
+  actions = [cast_to_blank, cast_to_dem, make_invisible, make_visible, make_teutonic, make_kaanic, make_castillan, make_enquist]
 
   

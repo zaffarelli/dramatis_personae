@@ -11,6 +11,7 @@ python3 manage.py dumpdata collector.ShieldRef --format xml --output backup/shie
 python3 manage.py dumpdata collector.BeneficeAfflictionRef --format xml --output backup/beneficeafflictionrefs.xml
 python3 manage.py dumpdata collector.CastRole --format xml --output backup/castroles.xml
 python3 manage.py dumpdata collector.CastProfile --format xml --output backup/castprofiles.xml
+python3 manage.py dumpdata collector.CastEveryman --format xml --output backup/casteverymans.xml
 
 echo "Dumping user data..."
 python3 manage.py dumpdata collector.Skill --format xml --output backup/skills.xml
@@ -26,6 +27,7 @@ echo "Moving to fixtures..."
 cp backup/skillrefs.xml collector/fixtures/
 cp backup/castroles.xml collector/fixtures/
 cp backup/castprofiles.xml collector/fixtures/
+cp backup/casteverymans.xml collector/fixtures/
 
 
 echo "...done"

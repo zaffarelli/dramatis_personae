@@ -6,13 +6,15 @@ class Config(models.Model):
   class Meta:
     ordering = ['title', 'epic']  
   from scenarist.models.epics import Epic
+  from scenarist.models.dramas import Drama
   title = models.CharField(default='', max_length=128, blank=True, unique=True)
   epic = models.ForeignKey(Epic, null=True, blank=True, on_delete=models.SET_NULL)
   description = models.TextField(max_length=128,default='',blank=True)
   gamemaster = models.CharField(default='zaffarelli@gmail.com', max_length=128, blank=True)
   is_active = models.BooleanField(default=False)
   smart_code = models.CharField(default='xxxxxx', max_length=6, blank=True)
-
+  current_drama = models.ForeignKey(Drama, null=True, blank=True, on_delete=models.SET_NULL)
+  
   def __str__(self):
     return '%s' % (self.title)
 

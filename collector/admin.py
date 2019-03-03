@@ -15,10 +15,11 @@ from collector.models.characters import Character
 from collector.models.characters_admin import CharacterAdmin
 from collector.models.benefices_afflictions import BeneficeAfflictionRef, BeneficeAfflictionRefAdmin
 from collector.models.configs import Config, ConfigAdmin
-from collector.models.fics_models import CastRole, CastRoleAdmin, CastProfile, CastProfileAdmin
+from collector.models.fics_models import CastRole, CastRoleAdmin, CastProfile, CastProfileAdmin, CastEveryman, CastEverymanAdmin
 
 admin.site.register(CastRole, CastRoleAdmin)
 admin.site.register(CastProfile, CastProfileAdmin)
+admin.site.register(CastEveryman, CastEverymanAdmin)
 
 admin.site.register(SkillRef, SkillRefAdmin)
 admin.site.register(Skill, SkillAdmin)

@@ -18,7 +18,7 @@ import hashlib
 """
 
 MAX_CHAR = 8
-RELEASE = '0.9.9'
+RELEASE = '0.9.10'
 DEBUG_ALL = False
 
 """
@@ -61,7 +61,7 @@ GROUPCHOICES=(
   ('TIN',"Tinkering"),
   ('UND',"Underworld"),
 )
-
+"""
 CATEGORYCHOICES=(
   ('no',"Uncategorized"),
   ('co',"Combat"),
@@ -77,6 +77,7 @@ CUSTOMGROUPS=(
   ('sci','Science'),
   ('fig','Fight'),
 )
+"""
 
 """
 Groups: AWA BOD CON EDU FIG PER SOC TIN

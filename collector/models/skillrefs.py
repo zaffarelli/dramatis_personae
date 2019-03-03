@@ -8,10 +8,10 @@ class SkillRef(models.Model):
   reference = models.CharField(max_length=200, unique=True)
   is_root = models.BooleanField(default=False)
   is_speciality = models.BooleanField(default=False)
-  category = models.CharField(default="un",max_length=2, choices=fics_references.CATEGORYCHOICES)
+  #category = models.CharField(default="un",max_length=2, choices=fics_references.CATEGORYCHOICES)
   group = models.CharField(default="EDU",max_length=3, choices=fics_references.GROUPCHOICES)
   linked_to = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE)
-  custom_group = models.CharField(default="all",max_length=3, choices=fics_references.CUSTOMGROUPS)
+  #custom_group = models.CharField(default="all",max_length=3, choices=fics_references.CUSTOMGROUPS)
   
   def __str__(self):
     return '%s %s %s %s [%s]' % (self.reference,self.group,"(R)" if self.is_root else "","(S)" if self.is_speciality else "", self.linked_to.reference if self.linked_to else "-"  )
