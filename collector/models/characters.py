@@ -6,6 +6,7 @@ from django.dispatch import receiver
 import hashlib
 import collector.models.skills
 from scenarist.models.epics import Epic
+from collector.models.fics_models import CastRole,CastProfile
 #from scenarist.models.dramas import Drama
 #from scenarist.models.acts import Act
 from collector.utils import fs_fics7, fics_references
@@ -69,13 +70,17 @@ class Character(models.Model):
   OP = models.IntegerField(default=0)
   gm_shortcuts = models.TextField(default='',blank=True)
   age = models.IntegerField(default=0)  
-  role = models.CharField(max_length=16,default='00',choices= fics_references.ROLECHOICES)
-  profile = models.CharField(max_length=16,default='undefined',choices=fics_references.PROFILECHOICES)
+  #role = models.CharField(max_length=16,default='00',choices= fics_references.ROLECHOICES)
+  castrole = models.ForeignKey(CastRole, null=True, blank=True, on_delete=models.SET_NULL)
+  castprofile = models.ForeignKey(CastProfile, null=True, blank=True, on_delete=models.SET_NULL)
+  #profile = models.CharField(max_length=16,default='undefined',choices=fics_references.PROFILECHOICES)
   occult_level = models.PositiveIntegerField(default=0)
   occult_darkside = models.PositiveIntegerField(default=0)
   occult = models.CharField(max_length=50, default='', blank=True)
   challenge = models.TextField(default='',blank=True)  
   ready_for_export =  models.BooleanField(default=False)
+  visible =  models.BooleanField(default=True)
+  is_dead =  models.BooleanField(default=False)
   epic = models.ForeignKey(Epic, null=True, blank=True, on_delete=models.SET_NULL)
   
   #drama = models.ForeignKey(Drama, null=True, blank=True, on_delete=models.SET_NULL)
@@ -336,7 +341,7 @@ class Character(models.Model):
 
   # Auto build character
   def autobuild(self):
-    if self.role == '00' and self.profile == 'undefined':
+    if self.castrole.value == 0 and self.castprofile == None:
       return False
     else:
       return True

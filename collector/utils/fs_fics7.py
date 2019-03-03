@@ -183,13 +183,13 @@ def choose_pa(weights):
 def check_primary_attributes(ch):
   """ Fixing primary attributes """
   debug_print('Checking primary attributes... %s'%(ch.rid))
-  pool = ROLES[ch.role]['primaries']
+  pool = ch.castrole.primaries
   total = pool
-  maxi = ROLES[ch.role]['maxi']
-  mini = ROLES[ch.role]['mini']
-  weights = PROFILES[ch.profile]['weights']
-  ch.challenge = '(<i class="fas fa-th-large"></i>%02d <i class="fas fa-th-list"></i>%02d <i class="fas fa-th"></i>%02d <i class="fas fa-outdent"></i>%02d)'%(ROLES[ch.role]['primaries'],ROLES[ch.role]['skills'], ROLES[ch.role]['talents'],ROLES[ch.role]['bc'])
-  debug_print('%s: %s [ %d / %d ]'%(ch.full_name,ch.role,pool,maxi))  
+  maxi = ch.castrole.maxi
+  mini = ch.castrole.mini
+  weights = ch.castprofile.get_weights()
+  ch.challenge = '(<i class="fas fa-th-large"></i>%02d <i class="fas fa-th-list"></i>%02d <i class="fas fa-th"></i>%02d <i class="fas fa-outdent"></i>%02d)'%(ch.castrole.primaries,ch.castrole.skills, ch.castrole.talents,ch.castrole.bc)
+  debug_print('%s: %s [ %d / %d ]'%(ch.full_name,ch.castrole.reference,pool,maxi))  
   #pas = [2,2,2,2,2,2,2,2,2,2,2,2]
   pas = [0,0,0,0,0,0,0,0,0,0,0,0]
   current =  ch.PA_STR+ch.PA_CON+ch.PA_BOD+ch.PA_MOV+ch.PA_INT+ch.PA_WIL+ch.PA_TEM+ch.PA_PRE+ch.PA_TEC+ch.PA_REF+ch.PA_AGI+ch.PA_AWA
@@ -282,9 +282,9 @@ def choose_sk(alist,maxweight):
 def check_skills(ch):
   """ Fixing skills """
   debug_print('Checking skills...%s'%(ch.rid))
-  pool = ROLES[ch.role]['skills']
-  maxi = ROLES[ch.role]['maxi']
-  groups = PROFILES[ch.profile]['groups']
+  pool = ch.castrole.skills
+  maxi = ch.castrole.maxi
+  groups = ch.castprofile.groups
   current = ch.SK_TOTAL
   debug_print('> Current SK TOTAL: %d (pool is %d)'%(current,pool))
   master_list = get_skills_list(ch,groups)
@@ -318,7 +318,7 @@ def check_skills(ch):
       pool -= batch
     #check_specialties_from_roots(ch)
     check_everyman_skills(ch)
-    ch.add_missing_root_skills()
+    ch.add_missing_root_skills()    
     #check_root_skills(ch)
   debug_print('')
   debug_print('SKILL LIST')    
@@ -332,11 +332,11 @@ def check_skills(ch):
 
 def check_role(ch):
   debug_print('Checking Role...')
-  pa_pool = ROLES[ch.role]['primaries']
-  sk_pool = ROLES[ch.role]['skills']
-  ta_pool = ROLES[ch.role]['talents']
-  bc_pool = ROLES[ch.role]['bc']
-  ba_pool = ROLES[ch.role]['ba']
+  pa_pool = ch.castrole.primaries
+  sk_pool = ch.castrole.skills
+  ta_pool = ch.castrole.talents
+  bc_pool = ch.castrole.bc
+  ba_pool = ch.castrole.ba
   status = True
   if ch.PA_TOTAL < pa_pool:
     print('> Not enough PA: %d < %d'%(ch.PA_TOTAL,pa_pool))

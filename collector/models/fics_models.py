@@ -1,14 +1,16 @@
 from django.db import models
-from collector.models.characters import Character
+#from collector.models.characters import Character
 from django.contrib import admin
+import json
 
-class Role(models.Model):
+class CastRole(models.Model):
   class Meta:
     ordering = ['reference']
   reference = models.CharField(max_length=64,default='new_role',blank=True, unique=True)
   value = models.PositiveIntegerField(default=0)
   primaries = models.PositiveIntegerField(default=0)
   maxi = models.PositiveIntegerField(default=10)
+  mini = models.PositiveIntegerField(default=1)
   skills = models.PositiveIntegerField(default=0)
   talents = models.PositiveIntegerField(default=0)
   ba = models.PositiveIntegerField(default=0)
@@ -17,14 +19,14 @@ class Role(models.Model):
   def __str__(self):
     return '%s (%s)' % (self.reference, self.value)
 
-class Profile(models.Model):
+class CastProfile(models.Model):
   class Meta:
     ordering = ['reference']
-  reference = models.CharField(max_length=64,default='new_role',blank=True, unique=True)
+  reference = models.CharField(max_length=64,default='new_profile',blank=True, unique=True)
   weights = models.CharField(max_length=128, default = '[1,1,1,1,1,1,1,1,1,1,1,1]')
   groups = models.CharField(max_length=128, default = '[]')
   def __str__(self):
-    return '%s (%s)' % (self.reference, self.value)
+    return '%s' % (self.reference)
   def set_weights(self,data):
     self.weights = json.dumps(data)
   def get_weights(self):
@@ -34,10 +36,12 @@ class Profile(models.Model):
   def get_groups(self):
     return json.loads(self.groups)
     
-class RoleAdmin(admin.ModelAdmin):
-  ordering = ('value',)
+class CastRoleAdmin(admin.ModelAdmin):
+  ordering = ('-value',)
+  list_display = ('reference','value','primaries','maxi','mini','skills','talents','ba','bc')
 
-class ProfileAdmin(admin.ModelAdmin):
+class CastProfileAdmin(admin.ModelAdmin):
   ordering = ('reference',)
+  list_display = ('reference','weights','groups')
 
 

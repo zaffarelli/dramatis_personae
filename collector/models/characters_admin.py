@@ -15,7 +15,16 @@ def cast_to_blank(modeladmin, request, queryset):
   queryset.update(epic=2)
   short_description = "Cast to no epic."
 
+def make_invisible(modeladmin, request, queryset):
+  queryset.update(visible=False)
+  short_description = "Make invisible"
+
+def make_visible(modeladmin, request, queryset):
+  queryset.update(visible=True)
+  short_description = "Make visible"
+
 class CharacterAdmin(admin.ModelAdmin):
+  list_display = ('full_name','castrole','castprofile','species','alliance','PA_TOTAL','SK_TOTAL','BA_TOTAL','BC_TOTAL','TA_TOTAL','OP','visible','epic')
   inlines = [
     SkillInline,
     BlessingCurseInline,
@@ -26,5 +35,6 @@ class CharacterAdmin(admin.ModelAdmin):
     ShieldInline,
   ]  
   ordering = ['epic','full_name',]
-  actions = [cast_to_blank, cast_to_dem]
+  actions = [cast_to_blank, cast_to_dem, make_invisible, make_visible]
 
+  

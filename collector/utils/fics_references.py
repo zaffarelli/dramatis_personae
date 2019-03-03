@@ -21,6 +21,7 @@ MAX_CHAR = 8
 RELEASE = '0.9.9'
 DEBUG_ALL = False
 
+"""
 ROLECHOICES = (
   ('08','Legend'),
   ('07','Champion'),
@@ -45,6 +46,7 @@ PROFILECHOICES = (
   ('bully','Bully'),
   ('undefined','Undefined'),
 )
+"""
 
 GROUPCHOICES=(
   ('AWA',"Awareness"),
@@ -80,6 +82,8 @@ CUSTOMGROUPS=(
 Groups: AWA BOD CON EDU FIG PER SOC TIN
                     SPI         UND
                     DIP
+"""
+
 """
 PROFILES = {
   'physical': {
@@ -119,8 +123,8 @@ PROFILES = {
     'groups':['UND','FIG', 'AWA', 'CON']
   },        
 }
-
-
+"""
+"""
 ROLES = {
   '08': {
     'primaries': 76,
@@ -195,7 +199,7 @@ ROLES = {
     'bc':0,
   },
 }
-
+"""
 
 
 

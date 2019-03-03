@@ -62,20 +62,35 @@ def export_to_xls(filename='dramatis_personae.xlsx'):
     '7':{'title':'Species/Race','attribute':'species','width':20},
     '8':{'title':'Caste','attribute':'caste','width':30},
     '9':{'title':'Birthdate','attribute':'birthdate','width':10},
-    '10':{'title':'Height','attribute':'height','width':10},
-    '11':{'title':'Weight','attribute':'weight','width':10},
-    '12':{'title':'STR','attribute':'PA_STR','width':10},
-    '13':{'title':'CON','attribute':'PA_CON','width':10},
-    '14':{'title':'BOD','attribute':'PA_BOD','width':10},
-    '15':{'title':'MOV','attribute':'PA_MOV','width':10},
-    '16':{'title':'INT','attribute':'PA_INT','width':10},
-    '17':{'title':'WIL','attribute':'PA_WIL','width':10},
-    '18':{'title':'TEM','attribute':'PA_TEM','width':10},
-    '19':{'title':'PRE','attribute':'PA_PRE','width':10},
-    '20':{'title':'TEC','attribute':'PA_TEC','width':10},
-    '21':{'title':'REF','attribute':'PA_REF','width':10},
-    '22':{'title':'AGI','attribute':'PA_AGI','width':10},
-    '23':{'title':'AWA', 'attribute':'PA_AWA','width':10},
+    '10':{'title':'Age','attribute':'age','width':10},
+    '11':{'title':'Height','attribute':'height','width':10},
+    '12':{'title':'Weight','attribute':'weight','width':10},
+    '13':{'title':'STR','attribute':'PA_STR','width':10},
+    '14':{'title':'CON','attribute':'PA_CON','width':10},
+    '15':{'title':'BOD','attribute':'PA_BOD','width':10},
+    '16':{'title':'MOV','attribute':'PA_MOV','width':10},
+    '17':{'title':'INT','attribute':'PA_INT','width':10},
+    '18':{'title':'WIL','attribute':'PA_WIL','width':10},
+    '19':{'title':'TEM','attribute':'PA_TEM','width':10},
+    '20':{'title':'PRE','attribute':'PA_PRE','width':10},
+    '21':{'title':'TEC','attribute':'PA_TEC','width':10},
+    '22':{'title':'REF','attribute':'PA_REF','width':10},
+    '23':{'title':'AGI','attribute':'PA_AGI','width':10},
+    '24':{'title':'AWA', 'attribute':'PA_AWA','width':10},
+    '25':{'title':'Recovery','attribute':'SA_REC','width':10},
+    '26':{'title':'Stamina','attribute':'SA_STA','width':10},
+    '27':{'title':'Endurance','attribute':'SA_END','width':10},
+    '28':{'title':'Stun Save','attribute':'SA_STU','width':10},
+    '29':{'title':'Resistance','attribute':'SA_RES','width':10},
+    '30':{'title':'Damage','attribute':'SA_DMG','width':10},
+    '31':{'title':'Tolerance','attribute':'SA_TOL','width':10},
+    '32':{'title':'Humanity','attribute':'SA_HUM','width':10},
+    '33':{'title':'Passion','attribute':'SA_PAS','width':10},
+    '34':{'title':'Wyrd','attribute':'SA_WYR','width':10},
+    '35':{'title':'Speed','attribute':'SA_SPD','width':10},
+    '36':{'title':'Run','attribute':'SA_RUN','width':10},
+    '37':{'title':'Visible','attribute':'visible','width':5},
+    '38':{'title':'Ready for export','attribute':'ready_for_export','width':5},
   }  
   ws.cell(column=1, row=1, value='Dramatis Personae')
   character_items = Character.objects.all().order_by('full_name')
@@ -172,6 +187,30 @@ def export_to_xls(filename='dramatis_personae.xlsx'):
     export_row(ws,h,c,cnt)
     cnt += 1
 
+  # Characters ==> For PC
+  ws = wb.create_sheet('Players Characters Catalogue')
+  h = {
+    '1':{'title':'Name','attribute':'full_name','width':40},
+    '2':{'title':'Alliance','attribute':'alliance','width':40},
+    '3':{'title':'Dead','attribute':'is_dead','width':10},
+    '4':{'title':'Player','attribute':'player','width':20},
+    '5':{'title':'Rank','attribute':'rank','width':20},
+    '6':{'title':'Gender','attribute':'gender','width':10},
+    '7':{'title':'Species/Race','attribute':'species','width':20},
+    '8':{'title':'Caste','attribute':'caste','width':10},
+    '9':{'title':'Age','attribute':'age','width':10},
+    '10':{'title':'Entrance','attribute':'entrance','width':40},
+  }  
+  ws.cell(column=1, row=1, value='Dramatis Personae')
+  character_items = Character.objects.all().order_by('full_name').filter(epic=1,visible=True)
+  export_header(ws,h)
+  cnt = 3
+  for c in character_items:
+    export_row(ws,h,c,cnt)
+    cnt += 1
+
+
+
   # And save everything
   wb.save(filename = dest_filename)
 
@@ -218,3 +257,4 @@ def update_from_xls(filename='dramatis_personae.xlsx'):
         print(bar)
         print("")
         cnt += 1
+

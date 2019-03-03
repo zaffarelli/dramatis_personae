@@ -1,6 +1,6 @@
 from django.test import TestCase
 from collector.models.characters import Character
-from collector.utils.fics_references import ROLES, PROFILES, EVERYMAN
+from collector.utils.fics_references import EVERYMAN
 from collector.utils.fs_fics7 import check_skills, check_primary_attributes
 from collector.tests.factories import CharacterCheckSkillsFactory, CharacterCheckPAFactory
 
@@ -13,12 +13,12 @@ class FICSTestSkills(TestCase):
     
   def test_check_skills_character_create(self):
     c = CharacterCheckSkillsFactory.create()
-    self.assertEquals(c.rid,'arthur'+str(c.role)+'_unskilled')
+    self.assertEquals(c.rid,'arthur'+str(c.castrole.value)+'_unskilled')
 
   def test_check_skills_Total(self):
     """ Check skills total according to role """
     c = CharacterCheckSkillsFactory.create()
-    sk_pool = ROLES[c.role]['skills']    
+    sk_pool = c.castrole.skills
     check_skills(c)
     skill_total = 0
     for s in c.skill_set.all():
@@ -29,13 +29,13 @@ class FICSTestSkills(TestCase):
 class FICSTestPA(TestCase):
   def test_check_PA_character_creation(self):
     c = CharacterCheckPAFactory.create()
-    self.assertEquals(c.rid,'scholar'+str(c.role)+'_noattributes')
+    self.assertEquals(c.rid,'scholar'+str(c.castrole.value)+'_noattributes')
        
 
   def test_check_PA_Total(self):
     """ Total PA matching """
     c = CharacterCheckPAFactory.create()
-    total_pa = ROLES[c.role]['primaries']
+    total_pa = c.castrole.primaries
     check_primary_attributes(c)
     c_phy = c.PA_STR + c.PA_CON + c.PA_BOD + c.PA_MOV 
     c_spi = c.PA_INT + c.PA_WIL + c.PA_TEM + c.PA_PRE 
@@ -48,7 +48,7 @@ class FICSTestPA(TestCase):
     c = CharacterCheckPAFactory.create()
     check_primary_attributes(c)
     c_pa_list = [ c.PA_STR , c.PA_CON , c.PA_BOD , c.PA_MOV , c.PA_INT , c.PA_WIL , c.PA_TEM , c.PA_PRE , c.PA_TEC , c.PA_REF , c.PA_AGI , c.PA_AWA]
-    weights = PROFILES[c.profile]['weights']
+    weights = c.castprofile.get_weights()
     w_phy = weights[0:4]
     w_spi = weights[4:8]
     w_com = weights[8:12]
@@ -71,7 +71,7 @@ class FICSTestPA(TestCase):
   def test_check_PA_Max_Value(self):
     """ Max value must be preserved """
     c = CharacterCheckPAFactory.create()
-    maxi = ROLES[c.role]['maxi']    
+    maxi = c.castrole.maxi
     check_primary_attributes(c)
     c_pa_list = [ c.PA_STR , c.PA_CON , c.PA_BOD , c.PA_MOV , c.PA_INT , c.PA_WIL , c.PA_TEM , c.PA_PRE , c.PA_TEC , c.PA_REF , c.PA_AGI , c.PA_AWA]
     m = max(c_pa_list)
@@ -80,7 +80,7 @@ class FICSTestPA(TestCase):
   def test_check_PA_Min_Value(self):
     """ Max value must be preserved """
     c = CharacterCheckPAFactory.create()
-    mini = ROLES[c.role]['mini']
+    mini = c.castrole.mini
     check_primary_attributes(c)
     c_pa_list = [ c.PA_STR , c.PA_CON , c.PA_BOD , c.PA_MOV , c.PA_INT , c.PA_WIL , c.PA_TEM , c.PA_PRE , c.PA_TEC , c.PA_REF , c.PA_AGI , c.PA_AWA]
     m = min(c_pa_list)

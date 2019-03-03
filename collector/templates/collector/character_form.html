@@ -92,12 +92,12 @@
       <div class="field_wrapper">
         {{ form.role.errors}}
         <label for="category">Role</label>
-        {{form.role}}
+        {{form.castrole}}
       </div>
       <div class="field_wrapper">
         {{ form.profile.errors}}
         <label for="profile">Profile</label>
-        {{form.profile}}
+        {{form.castprofile}}
       </div>
       <div class="field_wrapper">
         {{ form.narrative.errors}}
@@ -118,7 +118,18 @@
         {{ form.onsave_reroll_skills.errors}}
         <label for="">OnSave Reroll Skills</label>
         {{form.onsave_reroll_skills}}
-      </div>      
+      </div>
+      <div class="field_wrapper">
+        {{ form.visible.errors}}
+        <label for="">Visible</label>
+        {{form.visible}}
+      </div>            
+      <div class="field_wrapper">
+        {{ form.is_dead.errors}}
+        <label for="">Dead</label>
+        {{form.is_dead}}
+      </div>            
+
       </td>
       </tr>
     </table>

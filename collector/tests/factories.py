@@ -3,6 +3,7 @@ import factory
 import datetime
 from django.utils import timezone
 from collector.utils.fs_fics7 import roll
+from collector.models.fics_models import CastRole, CastProfile
 
 
 class CharacterFactory(factory.django.DjangoModelFactory):
@@ -15,25 +16,24 @@ class VeteranGuilderFactory(factory.django.DjangoModelFactory):
   class Meta:
     model = Character
   full_name = 'Roman Van Dyke'
-  role = '05'
-  profile = 'guilder'
+  castrole = CastRole.objects.filter(value=5).first()
+  castprofile = CastProfile.objects.filter(reference='Guilder').first()
   pub_date = timezone.now()
 
 class UnbuildableCharacterFactory(factory.django.DjangoModelFactory):
   class Meta:
     model = Character
   full_name = 'Rico Unbuildable'
-  role = '00'
-  profile = 'undefined'
+  castrole = CastRole.objects.filter(value=0).first()
+  castprofile = CastProfile.objects.filter(reference='Undefined').first()
   pub_date = timezone.now()
 
 class CharacterCheckPAFactory(factory.django.DjangoModelFactory):
   class Meta:
     model = Character
-  role = '0'+str(roll(8))
-  full_name = 'Scholar'+str(role)+' Noattributes'
-  
-  profile = 'scholar'
+  castrole = CastRole.objects.filter(value=roll(8)).first()
+  full_name = 'Scholar'+str(castrole.value)+' Noattributes'
+  castprofile = CastProfile.objects.filter(reference='Scholar').first()  
   species = 'urthish'
   onsave_reroll_attributes = True
   pub_date = timezone.now()
@@ -42,9 +42,9 @@ class CharacterCheckPAFactory(factory.django.DjangoModelFactory):
 class CharacterCheckSkillsFactory(factory.django.DjangoModelFactory):
   class Meta:
     model = Character
-  role = '0'+str(roll(8))
-  full_name = 'Arthur'+str(role)+' Unskilled'
-  profile = 'physical'
+  castrole = CastRole.objects.filter(value=roll(8)).first()
+  full_name = 'Arthur'+str(castrole.value)+' Unskilled'
+  castprofile = CastProfile.objects.filter(reference='Physical').first()  
   species = 'urthish'
   onsave_reroll_skills = True
   pub_date = timezone.now()
