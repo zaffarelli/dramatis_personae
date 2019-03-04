@@ -6,7 +6,7 @@
 {{ c.visible }} {{ c.is_dead }} 
 <table class="coreblock" id="base">
 <tr><th>Alliance</th><td>{{ c.alliance|safe }}</td><th>Birthdate</th><td>{{ c.birthdate }} ({{ c.age }} years old)</td></tr>
-<tr><th>Species/Race</th><td>{{ c.species|capfirst }}</td><th>Gender</th><td>{% if c.gender == "male" %}<i class="fas fa-mars"></i>{% else %}<i class="fas fa-venus"></i>{%endif%}</td></tr>
+<tr><th>Species/Race</th><td>{{ c.castspecies }}</td><th>Gender</th><td>{% if c.gender == "male" %}<i class="fas fa-mars"></i>{% else %}<i class="fas fa-venus"></i>{%endif%}</td></tr>
 <tr><th>Caste</th><td>{{ c.caste }}</td><th>Height</th><td>{{ c.height }}</td></tr>
 <tr><th>Native Fief</th><td>{{ c.native_fief }}</td><th>Weight</th><td>{{ c.weight }}</td></tr>
 <tr><th>Rank</th><td>{{ c.rank }}</td><th>Player</th><td>{{ c.player }}</td></tr>

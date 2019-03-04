@@ -3,7 +3,7 @@ import factory
 import datetime
 from django.utils import timezone
 from collector.utils.fs_fics7 import roll
-from collector.models.fics_models import CastRole, CastProfile
+from collector.models.fics_models import CastRole, CastProfile, CastEveryman
 
 
 class CharacterFactory(factory.django.DjangoModelFactory):
@@ -34,7 +34,7 @@ class CharacterCheckPAFactory(factory.django.DjangoModelFactory):
   castrole = CastRole.objects.filter(value=roll(8)).first()
   full_name = 'Scholar'+str(castrole.value)+' Noattributes'
   castprofile = CastProfile.objects.filter(reference='Scholar').first()  
-  species = 'urthish'
+  castspecies = CastEveryman.objects.get(pk=1)
   onsave_reroll_attributes = True
   pub_date = timezone.now()
 
@@ -45,6 +45,6 @@ class CharacterCheckSkillsFactory(factory.django.DjangoModelFactory):
   castrole = CastRole.objects.filter(value=roll(8)).first()
   full_name = 'Arthur'+str(castrole.value)+' Unskilled'
   castprofile = CastProfile.objects.filter(reference='Physical').first()  
-  species = 'urthish'
+  castspecies = CastEveryman.objects.get(pk=1)
   onsave_reroll_skills = True
   pub_date = timezone.now()

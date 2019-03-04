@@ -40,7 +40,7 @@ def make_enquist(modeladmin, request, queryset):
   short_description = "Make enquist"
 
 class CharacterAdmin(admin.ModelAdmin):
-  list_display = ('full_name','castspecies','castrole','castprofile','species','alliance','PA_TOTAL','SK_TOTAL','BA_TOTAL','BC_TOTAL','TA_TOTAL','OP','visible','epic')
+  list_display = ('full_name','castspecies','castrole','castprofile','alliance','PA_TOTAL','SK_TOTAL','BA_TOTAL','BC_TOTAL','TA_TOTAL','OP','visible','epic')
   inlines = [
     SkillInline,
     BlessingCurseInline,
@@ -52,5 +52,4 @@ class CharacterAdmin(admin.ModelAdmin):
   ]  
   ordering = ['epic','full_name',]
   actions = [cast_to_blank, cast_to_dem, make_invisible, make_visible, make_teutonic, make_kaanic, make_castillan, make_enquist]
-
-  
+  exclude = ['SA_REC','SA_STA','SA_END','SA_STU','SA_RES','SA_DMG','SA_TOL','SA_HUM','SA_PAS','SA_WYR','SA_SPD','SA_RUN','PA_TOTAL','SK_TOTAL','TA_TOTAL','BC_TOTAL','BA_TOTAL']

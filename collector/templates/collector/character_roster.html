@@ -3,7 +3,7 @@
 {% block article %}
 <h1>{{ c.full_name|safe }} {% if c.player != "" %}({{c.player|safe}}){%endif%}</h1>
 <em>{{ c.entrance|safe }}</em></br>
-{{c.gender|capfirst}} {{ c.species|capfirst|safe }} {{ c.rank|safe }} of {{ c.alliance|safe }} from {{ c.native_fief|safe }} {{ c.caste|safe }}.
+{{c.gender|capfirst}} {{ c.castspecies|capfirst|safe }} {{ c.rank|safe }} of {{ c.alliance|safe }} from {{ c.native_fief|safe }} {{ c.caste|safe }}.
 <br/>Born in {{ c.birthdate }} ({{ c.age }} years old)
 <br/>Height: {{c.height}}cm / Weight:{{c.weight}}kg 
 <h2>Primary Attributes ({{ c.PA_TOTAL }})</h2>

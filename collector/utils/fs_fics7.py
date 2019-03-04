@@ -27,21 +27,23 @@ def check_secondary_attributes(ch):
 def fetch_everyman_sum(ch):
   """ Get the sum of everyman skills for the character species """  
   total = 0
-  for every in EVERYMAN[ch.species]:
-    total += int(EVERYMAN[ch.species][every])
-  debug_print('> Everyman total for [%s] as [%s] is [%d].'%(ch.full_name,ch.species,total))
+  all_every = ch.castspecies.get_racial_skills()
+  for every in all_every:
+    total += all_every[every]
+  debug_print('> Everyman total for [%s] as [%s] is [%d].'%(ch.full_name,ch.castspecies,total))
   return total
     
 def check_everyman_skills(ch):
   """ Check and fix everyman values for the skills"""
   from collector.models.skills import Skill
   skills = ch.skill_set.all()
-  for every in EVERYMAN[ch.species]:
+  all_every = ch.castspecies.get_racial_skills()
+  for every in all_every:
     every_found = False
     for s in skills:
       if s.skill_ref.reference == every:
         every_found = True
-        val = int(EVERYMAN[ch.species][every])
+        val = all_every[every]
         #if s.value < val:          
         debug_print('Everyman: Value fixed for %s (%s)'%(s.skill_ref.reference,val))
         this_skill = Skill.objects.get(id=s.id)
@@ -49,7 +51,7 @@ def check_everyman_skills(ch):
         this_skill.save()
         break
     if not every_found:
-      val = int(EVERYMAN[ch.species][every])
+      val = all_every[every]
       debug_print('Everyman: Not found: %s... Added value %d!'%(every,val))
       this_skill_ref = SkillRef.objects.get(reference=every)
       this_skill = Skill()
