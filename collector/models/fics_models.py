@@ -45,6 +45,7 @@ class CastEveryman(models.Model):
   racial_attr_mod = models.CharField(max_length=128, default = '[0,0,0,0,0,0,0,0,0,0,0,0]')
   racial_skills = models.CharField(max_length=512, default = '[]')
   racial_occult = models.CharField(max_length=128, default = '[]')
+  attr_mod_balance = models.IntegerField(default=0)
   description = models.TextField(max_length=512, default='',blank=True)
   def __str__(self):
     return '%s %s'%(self.species,self.race)
@@ -52,15 +53,21 @@ class CastEveryman(models.Model):
     self.racial_skills = json.dumps(data)
   def get_racial_skills(self):
     return json.loads(self.racial_skills)
-    
   def set_racial_attr_mod(self,data):
     self.racial_attr_mod = json.dumps(data)
   def get_racial_attr_mod(self):
     return json.loads(self.racial_attr_mod)
-    
+  def update_balance(self):
+    attr_mods = self.get_racial_attr_mod()
+    b = 0
+    for am in attr_mods:
+      b += attr_mods[am]
+    self.attr_mod_balance = b
+    print('%s:%d'%(self,b))
+    self.save()
 class CastEverymanAdmin(admin.ModelAdmin):
   ordering = ('species','race')
-  list_display = ('species','race','racial_attr_mod','racial_skills','description','racial_occult')
+  list_display = ('species','race','racial_attr_mod','attr_mod_balance','racial_skills','description','racial_occult')
 
 
 class CastRoleAdmin(admin.ModelAdmin):

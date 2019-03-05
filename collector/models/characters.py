@@ -137,6 +137,11 @@ class Character(models.Model):
     self.gm_shortcuts = gm_shortcuts
     self.ready_for_export = self.check_exportable()
 
+  def apply_racial_pa_mods(self):
+    attr_mods = self.castspecies.get_racial_attr_mod()
+    for am in attr_mods:
+      v = getattr(self,am)
+      setattr(self,am,v+attr_mods[am])
 
   def add_or_update_skill(self,askill,modifier=0):
     """
@@ -301,13 +306,15 @@ class Character(models.Model):
         if related_model == "<class 'scenarist.models.epics.Epic'>":        
           valfix = Epic(pk=val)
           #print("Foreign key is an Epic")
-        #elif related_model == "<class 'scenarist.models.dramas.Drama'>":
-        #  valfix = Drama(pk=val)
+        elif related_model == "<class 'collector.models.fics_models.CastEveryman'>":
+          valfix = CastEveryman(pk=val)
           #print("Foreign key is a Drama")
-        #elif related_model == "<class 'scenarist.models.acts.Act'>":
-        #  valfix = Act(pk=val)
+        elif related_model == "<class 'collector.models.fics_models.CastRole'>":
+          valfix = CastRole(pk=val)
           #print("Foreign key is an Act")
-        #else:
+        elif related_model == "<class 'collector.models.fics_models.CastProfile'>":
+          valfix = CastProfile(pk=val)
+#        else:
         #  pass
           #print("Foreign key link not found: %s"%(related_model))
       else:

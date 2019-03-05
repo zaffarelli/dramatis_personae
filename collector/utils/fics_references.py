@@ -202,7 +202,7 @@ ROLES = {
 }
 """
 
-
+"""
 
 EVERYMAN = {
   "ascorbite": {
@@ -314,7 +314,7 @@ EVERYMAN = {
     'Warfare':2,  
   },  
 }
-
+"""
 RACIAL_ATTRIBUTES = {
   "ascorbite": {},
   "etyri": {},

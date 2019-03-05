@@ -211,7 +211,7 @@ def check_primary_attributes(ch):
           pool -= 1
         else:
           debug_print('Invalid : already too high: pa[idx]:%d idx:%d maxi:%d pool:%d chosen_pa:%d'%(pas[idx],idx,maxi,pool,chosen_pa))
-      if min(pas)>=mini and max(pas)<=maxi and sum(pas)==total:
+      if min(pas)>=mini and max(pas)<=maxi+2 and sum(pas)>=total:
         debug_print(':) %s: mini=%d/%d, max=%d/%d, sum=%d/%d'%(ch.rid, min(pas),mini, max(pas),maxi, sum(pas),total ))
         debug_print('==> [p:%d,s:%d,c:%d] --> [p:%d,s:%d,c:%d]'%(sum(pas[0:4]), sum(pas[4:8]), sum(pas[8:12]), sum(weights[0:4]), sum(weights[4:8]), sum(weights[8:12])))
         redo = False
@@ -238,6 +238,7 @@ def check_primary_attributes(ch):
     ch.PA_REF = pas[9]
     ch.PA_AGI = pas[10]
     ch.PA_AWA = pas[11]
+  ch.apply_racial_pa_mods()
   ch.onsave_reroll_attributes = False
 
 
