@@ -23,7 +23,7 @@ import hashlib
 """
 
 MAX_CHAR = 8
-RELEASE = '0.9.10'
+RELEASE = '0.9.11'
 DEBUG_ALL = False
 
 """

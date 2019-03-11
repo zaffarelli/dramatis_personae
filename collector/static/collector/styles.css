@@ -230,7 +230,7 @@ body {
         border-radius: 10px 0 10px 0;
         padding: 10px;
         background-color: #101010;
-        width: 1000px;
+        width: auto;
         margin-left: auto;
         margin-right: auto;
         display: block;
@@ -486,7 +486,7 @@ body {
   .tabberbar span {
     display: inline-block; }
 
-@media all and (min-width: 1280px) {
+@media all and (min-width: 1024px) {
   body .wrapper {
     z-index: 5;
     margin-left: 15px;
