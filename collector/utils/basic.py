@@ -73,7 +73,7 @@ def make_avatar_appendix(conf):
   onlyfiles = [f for f in os.listdir(mypath) if os.path.isfile(os.path.join(mypath, f))]
   pdfs = onlyfiles
   merger = PdfFileMerger()
-  merger.append(open('%s__aa_header.pdf'%(mypath), 'rb'))
+  merger.append(open('%sresources/__aa_header.pdf'%(mypath), 'rb'))
   pdfs.sort()
   ep = conf.epic
   cast = ep.get_full_cast()  
@@ -97,7 +97,7 @@ def make_epic_corpus(conf):
   res = []
   mypath = os.path.join(settings.MEDIA_ROOT, 'pdf/')
   merger = PdfFileMerger()
-  merger.append(open('%s__es_header.pdf'%(mypath), 'rb'))
+  merger.append(open('%sresources/__es_header.pdf'%(mypath), 'rb'))
   template = get_template('collector/conf_pdf.html')
   context = {'epic':conf.parse_details()}
   html = template.render(context)
