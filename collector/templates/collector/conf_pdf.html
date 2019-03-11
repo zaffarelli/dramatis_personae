@@ -5,30 +5,44 @@
   <h1>{{ epic.title }}</h1>
   <P>{{ epic.data.era }}</P>
   <P>{{ epic.data.population }}</P>
-  <P>{{ epic.data.description|parse_avatars_pdf|linebreaks|safe }}</P> 
+  <h5>Description</h5>
+  <P>{{ epic.data.description|linebreaks|parse_avatars_pdf|safe }}</P> 
   {% for drama in epic.dramas %}
+    {% if drama.data.to_PDF %}
     <pdf:nextframe>
     <h2>{{drama.data.chapter}}. {{ drama.title }}</h2>
     <P>{{ drama.data.date }}</P>
     <P>{{ drama.data.place }}</P>
-    <P>{{ drama.data.players|parse_avatars_pdf|safe }}</P>
-    <P>{{ drama.data.description|linebreaks|safe }}</P>
-    <P>{{ drama.data.resolution|linebreaks|safe }}</P>
+    <h5>Cast</h5>
+    <P>{{ drama.data.players|linebreaks|parse_avatars_pdf|safe }}</P>
+    <P>{{ drama.data.description|linebreaks|parse_avatars_pdf|safe }}</P>
+    <h5>End of the drama</h5>
+    <P>{{ drama.data.resolution|linebreaks|parse_avatars_pdf|safe }}</P>
     {% for act in drama.acts %}
+      {% if act.data.to_PDF %}
       <pdf:nextframe>
-      <h3>{{act.data.chapter}}. {{ act.title }}</h3>
+      <h3>{{drama.data.chapter}}-{{act.data.chapter}}. {{ act.title }}</h3>
       <P>{{ act.data.date }}</P>
       <P>{{ act.data.place }}</P>
-      <P>{{ act.data.description|linebreaks|safe }}</P>
-      <P>{{ act.data.resolution|linebreaks|safe }}</P>
-      {% for event in act.events %}
-        <h4>{{event.data.chapter}}. {{ event.title }}</h4>
+      <h5>Description</h5>
+      <P>{{ act.data.description|linebreaks|parse_avatars_pdf|safe }}</P>
+      <h5>Resolution</h5>
+      <P>{{ act.data.resolution|linebreaks|parse_avatars_pdf|safe }}</P>
+      {% for event in act.events %}        
+        <h4>{{drama.data.chapter}}-{{act.data.chapter}}-{{event.data.chapter}}. {{ event.title }}</h4>
         <P>{{ event.data.date }}</P>
         <P>{{ event.data.place }}</P>
-        <P>{{ event.data.description|linebreaks|safe }}</P>
-        <P>{{ event.data.resolution|linebreaks|safe }}</P>
-      {% endfor %}         
+        <h5>Cast</h5>
+        <P>{{ event.data.friends|linebreaks|parse_avatars_pdf|safe }}</P>
+        <P>{{ event.data.foes|linebreaks|parse_avatars_pdf|safe }}</P>
+        <h5>Description</h5>
+        <P>{{ event.data.description|linebreaks|parse_avatars_pdf|safe }}</P>
+        <h5>Resolution</h5>
+        <P>{{ event.data.resolution|linebreaks|parse_avatars_pdf|safe }}</P>
+      {% endfor %}
+      {% endif %}    
     {% endfor %}
+    {% endif %}
   {% endfor %}
   <P>{{ epic.data.gamemaster }}</P>
 {% endblock article %}

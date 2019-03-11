@@ -1,3 +1,8 @@
+'''
+ ╔╦╗╔═╗  ╔═╗┌─┐┬  ┬  ┌─┐┌─┐┌┬┐┌─┐┬─┐
+  ║║╠═╝  ║  │ ││  │  ├┤ │   │ │ │├┬┘
+ ═╩╝╩    ╚═╝└─┘┴─┘┴─┘└─┘└─┘ ┴ └─┘┴└─
+'''
 from collector.models.characters import Character
 import factory
 import datetime

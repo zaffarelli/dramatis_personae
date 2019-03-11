@@ -1,3 +1,8 @@
+'''
+ ╔╦╗╔═╗  ╔═╗┌─┐┬  ┬  ┌─┐┌─┐┌┬┐┌─┐┬─┐
+  ║║╠═╝  ║  │ ││  │  ├┤ │   │ │ │├┬┘
+ ═╩╝╩    ╚═╝└─┘┴─┘┴─┘└─┘└─┘ ┴ └─┘┴└─
+'''
 from django.db import models
 #from collector.models.characters import Character
 from django.contrib import admin
@@ -40,12 +45,13 @@ class CastEveryman(models.Model):
   class Meta:
     ordering = ['species','race']
     unique_together = (('species', 'race'),)
-  species = models.CharField(max_length=64,default='new_everyman',blank=True)
+  species = models.CharField(max_length=64,default='',blank=True)
   race = models.CharField(max_length=64,default='',blank=True)
-  racial_attr_mod = models.CharField(max_length=128, default = '[0,0,0,0,0,0,0,0,0,0,0,0]')
-  racial_skills = models.CharField(max_length=512, default = '[]')
-  racial_occult = models.CharField(max_length=128, default = '[]')
+  racial_attr_mod = models.CharField(max_length=128, default = '{}')
+  racial_skills = models.CharField(max_length=512, default = '{}')
+  racial_occult = models.CharField(max_length=128, default = '{}')
   attr_mod_balance = models.IntegerField(default=0)
+  skill_balance = models.IntegerField(default=0)
   description = models.TextField(max_length=512, default='',blank=True)
   def __str__(self):
     return '%s %s'%(self.species,self.race)
@@ -63,11 +69,17 @@ class CastEveryman(models.Model):
     for am in attr_mods:
       b += attr_mods[am]
     self.attr_mod_balance = b
-    print('%s:%d'%(self,b))
+    print('PA --> %s:%d'%(self,b))
+    skills_mods = self.get_racial_skills()
+    b = 0
+    for sm in skills_mods:
+      b += skills_mods[sm]
+    self.skill_balance = b
+    print('Skill --> %s:%d'%(self,b))
     self.save()
 class CastEverymanAdmin(admin.ModelAdmin):
   ordering = ('species','race')
-  list_display = ('species','race','racial_attr_mod','attr_mod_balance','racial_skills','description','racial_occult')
+  list_display = ('species','race','racial_attr_mod','attr_mod_balance','racial_skills','skill_balance','description','racial_occult')
 
 
 class CastRoleAdmin(admin.ModelAdmin):

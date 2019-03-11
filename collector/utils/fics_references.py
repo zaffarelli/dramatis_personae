@@ -1,3 +1,8 @@
+'''
+ ╔╦╗╔═╗  ╔═╗┌─┐┬  ┬  ┌─┐┌─┐┌┬┐┌─┐┬─┐
+  ║║╠═╝  ║  │ ││  │  ├┤ │   │ │ │├┬┘
+ ═╩╝╩    ╚═╝└─┘┴─┘┴─┘└─┘└─┘ ┴ └─┘┴└─
+'''
 from django.db import models
 from django.contrib import admin
 from datetime import datetime

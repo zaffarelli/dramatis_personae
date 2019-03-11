@@ -1,3 +1,9 @@
+@charset "UTF-8";
+/*
+ ╔╦╗╔═╗  ╔═╗┌─┐┬  ┬  ┌─┐┌─┐┌┬┐┌─┐┬─┐
+  ║║╠═╝  ║  │ ││  │  ├┤ │   │ │ │├┬┘
+ ═╩╝╩    ╚═╝└─┘┴─┘┴─┘└─┘└─┘ ┴ └─┘┴└─
+*/
 @font-face {
   font-family: 'Patua';
   src: url("PatuaOne-Regular.ttf"); }
@@ -315,6 +321,11 @@ body {
       body .wrapper .details h3 {
         font-size: 1.2em; }
 
+.subsection {
+  font-weight: bold;
+  color: #FFCC88;
+  text-decoration: underline; }
+
 .pdflink {
   color: #E5DECA;
   text-decoration: none;
@@ -343,7 +354,7 @@ body {
   opacity: 0.5; }
 
 .embedded_link {
-  color: #ffcc22;
+  color: #FFCC88;
   text-decoration: none; }
 
 .storyarticle {
@@ -487,5 +498,7 @@ body {
     align-content: stretch; }
   body .details {
     min-height: 1000px; } }
+.noPDF {
+  background: #806010; }
 
 /*# sourceMappingURL=styles.css.map */

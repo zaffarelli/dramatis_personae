@@ -1,3 +1,8 @@
+'''
+╔╦╗╔═╗  ╔═╗┌─┐┌─┐┌┐┌┌─┐┬─┐┬┌─┐┌┬┐
+ ║║╠═╝  ╚═╗│  ├┤ │││├─┤├┬┘│└─┐ │ 
+═╩╝╩    ╚═╝└─┘└─┘┘└┘┴ ┴┴└─┴└─┘ ┴ 
+'''
 import json
 from django.shortcuts import _get_queryset
 from django.http import HttpResponse

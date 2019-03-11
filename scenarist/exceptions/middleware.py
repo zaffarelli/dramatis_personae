@@ -1,3 +1,8 @@
+'''
+╔╦╗╔═╗  ╔═╗┌─┐┌─┐┌┐┌┌─┐┬─┐┬┌─┐┌┬┐
+ ║║╠═╝  ╚═╗│  ├┤ │││├─┤├┬┘│└─┐ │ 
+═╩╝╩    ╚═╝└─┘└─┘┘└┘┴ ┴┴└─┴└─┘ ┴ 
+'''
 from django.utils import timezone
 from django.utils.dateformat import format
 from django.conf import settings

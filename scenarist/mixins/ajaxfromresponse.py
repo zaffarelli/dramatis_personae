@@ -1,3 +1,8 @@
+'''
+╔╦╗╔═╗  ╔═╗┌─┐┌─┐┌┐┌┌─┐┬─┐┬┌─┐┌┬┐
+ ║║╠═╝  ╚═╗│  ├┤ │││├─┤├┬┘│└─┐ │ 
+═╩╝╩    ╚═╝└─┘└─┘┘└┘┴ ┴┴└─┴└─┘ ┴ 
+'''
 from django.http import JsonResponse
 
 class AjaxFromResponseMixin:

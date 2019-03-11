@@ -1,9 +1,8 @@
-# _________        .__  .__                 __                
-# \_   ___ \  ____ |  | |  |   ____   _____/  |_  ___________ 
-# /    \  \/ /  _ \|  | |  | _/ __ \_/ ___\   __\/  _ \_  __ \
-# \     \___(  <_> )  |_|  |_\  ___/\  \___|  | (  <_> )  | \/
-#  \______  /\____/|____/____/\___  >\___  >__|  \____/|__|   
-#         \/                      \/     \/                   
+'''
+ ╔╦╗╔═╗  ╔═╗┌─┐┬  ┬  ┌─┐┌─┐┌┬┐┌─┐┬─┐
+  ║║╠═╝  ║  │ ││  │  ├┤ │   │ │ │├┬┘
+ ═╩╝╩    ╚═╝└─┘┴─┘┴─┘└─┘└─┘ ┴ └─┘┴└─
+'''
 from django.http import HttpResponse, Http404, JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect, render_to_response
 from django.core.paginator import Paginator
@@ -39,9 +38,10 @@ def pdf_character(request,id=None):
 def recalc(request):
   """ Recalc and export to PDF all avatars """  
   conf = get_current_config()
-  character_items = Character.objects.filter(epic=conf.epic).order_by('-player','-ready_for_export','full_name')
+  character_items = Character.objects.filter(epic=conf.epic).order_by('-player','full_name')
   x = 1
   for c in character_items:
+    print('\n>>> %d'%(x))
     c.pagenum = x     
     c.save()
     x += 1

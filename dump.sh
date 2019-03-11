@@ -1,3 +1,6 @@
+# ╔╦╗┬─┐┌─┐┌┬┐┌─┐┌┬┐┬┌─┐  ╔═╗┌─┐┬─┐┌─┐┌─┐┌┐┌┌─┐┌─┐
+#  ║║├┬┘├─┤│││├─┤ │ │└─┐  ╠═╝├┤ ├┬┘└─┐│ ││││├─┤├┤ 
+# ═╩╝┴└─┴ ┴┴ ┴┴ ┴ ┴ ┴└─┘  ╩  └─┘┴└─└─┘└─┘┘└┘┴ ┴└─┘
 #!/bin/bash
 clear
 echo "Dumping All"
@@ -22,6 +25,13 @@ python3 manage.py dumpdata collector.Talent --format xml --output backup/talents
 python3 manage.py dumpdata collector.BlessingCurse --format xml --output backup/blessingcurses.xml
 python3 manage.py dumpdata collector.BeneficeAffliction --format xml --output backup/beneficeafflictions.xml
 python3 manage.py dumpdata collector.Character --format xml --output backup/characters.xml
+
+python3 manage.py dumpdata scenarist.Epic --format xml --output backup/epics.xml
+python3 manage.py dumpdata scenarist.Drama --format xml --output backup/dramas.xml
+python3 manage.py dumpdata scenarist.Act --format xml --output backup/acts.xml
+python3 manage.py dumpdata scenarist.Event --format xml --output backup/events.xml
+
+python3 manage.py dumpdata collector.Config --format xml --output backup/configs.xml
 
 echo "Moving to fixtures..."
 cp backup/skillrefs.xml collector/fixtures/

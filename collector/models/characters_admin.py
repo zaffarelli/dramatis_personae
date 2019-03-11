@@ -1,3 +1,8 @@
+'''
+ ╔╦╗╔═╗  ╔═╗┌─┐┬  ┬  ┌─┐┌─┐┌┬┐┌─┐┬─┐
+  ║║╠═╝  ║  │ ││  │  ├┤ │   │ │ │├┬┘
+ ═╩╝╩    ╚═╝└─┘┴─┘┴─┘└─┘└─┘ ┴ └─┘┴└─
+'''
 from django.contrib import admin
 from collector.models.skillsinline import SkillInline
 from collector.models.blessingcursesinline import BlessingCurseInline

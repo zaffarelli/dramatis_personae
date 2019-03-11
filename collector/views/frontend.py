@@ -1,9 +1,8 @@
-#    ___      _ _           _             
-#   / __\___ | | | ___  ___| |_ ___  _ __ 
-#  / /  / _ \| | |/ _ \/ __| __/ _ \| '__|
-# / /__| (_) | | |  __/ (__| || (_) | |   
-# \____/\___/|_|_|\___|\___|\__\___/|_|   
-#                                        
+'''
+ ╔╦╗╔═╗  ╔═╗┌─┐┬  ┬  ┌─┐┌─┐┌┬┐┌─┐┬─┐
+  ║║╠═╝  ║  │ ││  │  ├┤ │   │ │ │├┬┘
+ ═╩╝╩    ╚═╝└─┘┴─┘┴─┘└─┘└─┘ ┴ └─┘┴└─
+'''
 from django.http import HttpResponse, Http404, JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect, render_to_response
 from django.core.paginator import Paginator

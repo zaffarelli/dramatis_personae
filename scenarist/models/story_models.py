@@ -1,9 +1,8 @@
-#  __                           _     _   
-# / _\ ___ ___ _ __   __ _ _ __(_)___| |_ 
-# \ \ / __/ _ \ '_ \ / _` | '__| / __| __|
-# _\ \ (_|  __/ | | | (_| | |  | \__ \ |_ 
-# \__/\___\___|_| |_|\__,_|_|  |_|___/\__|
-#                                        
+'''
+╔╦╗╔═╗  ╔═╗┌─┐┌─┐┌┐┌┌─┐┬─┐┬┌─┐┌┬┐
+ ║║╠═╝  ╚═╗│  ├┤ │││├─┤├┬┘│└─┐ │ 
+═╩╝╩    ╚═╝└─┘└─┘┘└┘┴ ┴┴└─┴└─┘ ┴ 
+'''
 from django.db import models
 import re
 import string
@@ -19,7 +18,8 @@ class StoryModel(models.Model):
   place = models.CharField(max_length=128, default='', blank=True)
   description = models.TextField(max_length=2560,default='',blank=True)
   gamemaster = models.CharField(default='zaffarelli@gmail.com', max_length=128, blank=True)
-
+  to_PDF = models.BooleanField(default=True)
+  
   def __str__(self):
     """ Standard display """
     return '%s. %s' % (self.chapter, self.title)
@@ -46,7 +46,8 @@ class StoryModel(models.Model):
   def get_casting(self):
     """ Bring all avatars rids from all relevant text fields"""
     casting = []
-    casting.append(self.fetch_avatars(self.description))
+    if (self.to_PDF):
+      casting.append(self.fetch_avatars(self.description))
     return casting
 
   def get_episodes(self):

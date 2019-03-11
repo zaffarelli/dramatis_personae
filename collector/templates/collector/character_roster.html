@@ -1,78 +1,90 @@
 {% extends "pdf_doc.html" %}
 {%load fics_filters%}
 {% block article %}
-<h1>{{ c.full_name|safe }} {% if c.player != "" %}({{c.player|safe}}){%endif%}</h1>
+
+From <b>{{c.epic}}</b>...
+<h3>{{ c.full_name|safe }} {% if c.player != "" %}({{c.player|safe}}){%endif%}</h3>
 <em>{{ c.entrance|safe }}</em></br>
 {{c.gender|capfirst}} {{ c.castspecies|capfirst|safe }} {{ c.rank|safe }} of {{ c.alliance|safe }} from {{ c.native_fief|safe }} {{ c.caste|safe }}.
 <br/>Born in {{ c.birthdate }} ({{ c.age }} years old)
 <br/>Height: {{c.height}}cm / Weight:{{c.weight}}kg 
-<h2>Primary Attributes ({{ c.PA_TOTAL }})</h2>
-STR {{c.PA_STR}} CON {{c.PA_CON}} BOD {{c.PA_BOD}} MOV {{c.PA_MOV}}
-<br/>INT {{c.PA_INT}} WIL {{c.PA_WIL}} TEM {{c.PA_TEM}} PRE {{c.PA_PRE}}
-<br/>TEC {{c.PA_TEC}} REF {{c.PA_REF}} AGI {{c.PA_AGI}} AWA {{c.PA_AWA}}
-<h2>Secondary Attributes</h2>
-REC {{c.SA_REC}} STA {{c.SA_STA}} END {{c.SA_END}} STU {{c.SA_STU}}
-<br/>RES {{c.SA_RES}} DMG {{c.SA_DMG}} TOL {{c.SA_TOL}} HUM {{c.SA_HUM}}
-<br/>PAS {{c.SA_PAS}} WYR {{c.SA_WYR}} SPD {{c.SA_SPD}} RUN {{c.SA_RUN}}
+<h5>Primary Attributes ({{ c.PA_TOTAL }})</h5>
+<table>
+<tr><td>STR</td><td>{{c.PA_STR}}</td><td>CON</td><td>{{c.PA_CON}}</td><td>BOD</td><td>{{c.PA_BOD}}</td><td>MOV</td><td>{{c.PA_MOV}}</td></tr>
+<tr><td>INT</td><td>{{c.PA_INT}}</td><td>WIL</td><td>{{c.PA_WIL}}</td><td>TEM</td><td>{{c.PA_TEM}}</td><td>PRE</td><td>{{c.PA_PRE}}</td></tr>
+<tr><td>TEC</td><td>{{c.PA_TEC}}</td><td>REF</td><td>{{c.PA_REF}}</td><td>AGI</td><td>{{c.PA_AGI}}</td><td>AWA</td><td>{{c.PA_AWA}}</td></tr>
+</table>
+<h5>Secondary Attributes</h5>
+<table>
+<tr><td>REC</td><td>{{c.SA_REC}}</td><td>STA</td><td>{{c.SA_STA}}</td><td>END</td><td>{{c.SA_END}}</td><td>STU</td><td>{{c.SA_STU}}</td></tr>
+<tr><td>RES</td><td>{{c.SA_RES}}</td><td>DMG</td><td>{{c.SA_DMG}}</td><td>TOL</td><td>{{c.SA_TOL}}</td><td>HUM</td><td>{{c.SA_HUM}}</td></tr>
+<tr><td>PAS</td><td>{{c.SA_PAS}}</td><td>WYR</td><td>{{c.SA_WYR}}</td><td>SPD</td><td>{{c.SA_SPD}}</td><td>RUN</td><td>{{c.SA_RUN}}</td></tr>
+</tr>
+</table>
+
+ 
 
 {% if c.skill_set.count != 0 %}
-<h2>Skills ({{ c.SK_TOTAL }})</h2>
+<h5>Skills ({{ c.SK_TOTAL }})</h5>
+<table class='tableskills'><tr><td>
 {% for skill in c.skill_set.all|dictsort:"skill_ref.reference" %}
-{% if skill.skill_ref.is_root %}<strong>{% endif %}{% if skill.skill_ref.is_speciality %}<em>{% endif %}{{ skill.skill_ref.reference|safe }}{% if skill.skill_ref.is_speciality %}</em>{% endif %}{% if skill.skill_ref.is_root %}</strong>{% endif %}
-&nbsp;{{ skill.value }}{% if forloop.last %}. {% else %},{% endif %} 
+  {{ skill.skill_ref.reference|safe }}</td><td class='skillval'>{{ skill.value }}
+  {% if forloop.counter0|modulo:2 == 1 %}
+  </td></tr><tr><td>
+  {% else %}
+  </td><td>
+  {% endif %}
 {% endfor %}
+</td></tr></table>
 {% endif %}
 
 {% if c.blessingcurse_set.count != 0 %}
-<h2>Blessings/Curses ({{ c.BC_TOTAL }})</h2>
+<h5>Blessings/Curses ({{ c.BC_TOTAL }})</h5>
 {% for bc in c.blessingcurse_set.all|dictsortreversed:"value" %}
-<p><u>{{ bc.name|safe }}</u> ({{ bc.value }}): <br/> {{ bc.description|safe }}</p>
+<p>{{ forloop.counter }}) <u>{{ bc.name|safe }}</u> ({{ bc.value }}): <br/> {{ bc.description|safe }}</p>
 {% endfor %}
 {%endif%}
 
 {% if c.beneficeaffliction_set.count != 0 %}
-<h2>Benefices/Afflictions ({{ c.BA_TOTAL }})</h2>
+<h5>Benefices/Afflictions ({{ c.BA_TOTAL }})</h5>
 <p>{% for ba in c.beneficeaffliction_set.all|dictsortreversed:"value" %}
-</p><u>{{ ba.beneficeaffliction_ref.reference|safe }}</u> (Cost:{{ ba.beneficeaffliction_ref.value }}+{{ ba.value }}): {{ ba.beneficeaffliction_ref.description|safe}} {{ba.description|parse_avatars_pdf|safe }}
+</p>{{ forloop.counter }}) <u>{{ ba.beneficeaffliction_ref.reference|safe }}</u> (Cost:{{ ba.beneficeaffliction_ref.value }}+{{ ba.value }}): {{ ba.beneficeaffliction_ref.description|safe}} {{ba.description|parse_avatars_pdf|safe }}
 {% endfor %}
 </p>
 {%endif%}
 
 {% if c.talent_set.count != 0 %}
-<h2>Talents ({{ c.TA_TOTAL }})</h2>
+<h5>Talents ({{ c.TA_TOTAL }})</h5>
 <p>{% for t in c.talent_set.all|dictsortreversed:"value" %}
-<u>{{ t.name|safe }}</u> ({{t.AP}}x3+{{t.OP}}={{ t.value }}): {{t.attributes_list}} {{t.skills_list}}{{ t.description|safe }}{% if forloop.last %}</p>{% else %}<br/>{% endif %}
+{{ forloop.counter }}) <u>{{ t.name|safe }}</u> ({{t.AP}}x3+{{t.OP}}={{ t.value }}): {{t.attributes_list}} {{t.skills_list}}{{ t.description|safe }}{% if forloop.last %}</p>{% else %}<br/>{% endif %}
 {% endfor %}
 {%endif%}
 {% if c.weapon_set.count != 0 %}
 
-<h2>Weapons</h2>
+<h5>Weapons</h5>
 <p>{% for w in c.weapon_set.all|dictsort:"weapon_ref.reference" %}
 {{ w.weapon_ref.stats|safe }}
 {% if forloop.last %}</p>{% else %}<br/>{% endif %}
 {% endfor %}
 {%endif%}
 {% if c.armor_set.count != 0 %}
-<h2>Armor</h2>
+<h5>Armor</h5>
 <p>{% for a in c.armor_set.all|dictsort:"armor_ref.stopping_power" %}
 <u>{{ a.armor_ref.reference|safe }}</u> &diams; {{a.armor_ref.category}} &diams; SP:{{ a.armor_ref.stopping_power }} &diams; {% if a.armor_ref.head %}(HE){%endif%}{% if a.armor_ref.torso %}(TO){%endif%}{%if a.armor_ref.left_arm %}(LA){%endif%}{% if a.armor_ref.right_arm %}(RA){%endif%}{% if a.armor_ref.left_leg %}(LL){%endif%}{% if a.armor_ref.right_leg %}(RL){%endif%}
 {% if not a.armor_ref.description is empty %}{{ a.armor_ref.description|safe }}{% endif %}{% if forloop.last %}</p>{% else %}<br/>{% endif %}
 {% endfor %}
 {%endif%}
 {% if c.shield_set.count != 0 %}
-<h2>Energy Shield</h2>
+<h5>Energy Shield</h5>
 <p>{% for s in c.shield_set.all|dictsort:"shield_ref.reference" %}
 <u>{{ s.shield_ref.reference|safe }}</u> &diams; {{s.shield_ref.protection_min}}/{{ s.shield_ref.protection_max }} &diams; Hits:{{s.shield_ref.hits}} &diams; usage:(Soft {% if s.shield_ref.is_compatible_with_medium_armor %}Medium {%else%}- {%endif%}{% if s.shield_ref.is_compatible_with_hard_armor %}Hard {%else%}- {%endif%})
 {% if not s.shield_ref.description is empty %}{{ s.shield_ref.description|safe }}{% endif %}<br/>
 {% endfor %}</p>
 {%endif%}
-
-<h2>Narrative</h2>
+<h5>Narrative</h5>
 <p>{{ c.narrative|linebreaks|safe }}</p>
-
-<h2>Shortcuts</h2>
+<h5>Shortcuts</h5>
 {{ c.gm_shortcuts|safe }}
-
 {% comment %}
 <br/>CHALLENGE {{ c.OP }}
 <br/>Role: {{c.castrole}}

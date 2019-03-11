@@ -1,6 +1,8 @@
 {% extends "pdf.html" %}
 {% block sheet %}
 
+This is Character PDF
+
 <h1>{{ c.full_name|safe }} {% if c.player != "" %}({{c.player|safe}}){%endif%}</h1>
 <em>{{ c.entrance|safe }}</em></br>
 {{c.gender|capfirst}} {{ c.castspecies|capfirst|safe }} {{ c.rank|safe }} of the {{ c.alliance|safe }} from {{ c.native_fief|safe }} {{ c.caste|safe }}.

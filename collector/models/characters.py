@@ -1,3 +1,8 @@
+'''
+ ╔╦╗╔═╗  ╔═╗┌─┐┬  ┬  ┌─┐┌─┐┌┬┐┌─┐┬─┐
+  ║║╠═╝  ║  │ ││  │  ├┤ │   │ │ │├┬┘
+ ═╩╝╩    ╚═╝└─┘┴─┘┴─┘└─┘└─┘ ┴ └─┘┴└─
+'''
 from django.db import models
 from django.contrib import admin
 from datetime import datetime
@@ -21,10 +26,9 @@ class Character(models.Model):
   alliance = models.CharField(max_length=200, blank=True, default='')
   alliancehash = models.CharField(max_length=200, blank=True, default='none')
   player = models.CharField(max_length=200, default='', blank=True)
-  castspecies = models.ForeignKey(CastEveryman, null=True, blank=True, on_delete=models.SET_NULL)
-  castrole = models.ForeignKey(CastRole, null=True, blank=True, on_delete=models.SET_NULL)
-  castprofile = models.ForeignKey(CastProfile, null=True, blank=True, on_delete=models.SET_NULL)
-  #species = models.CharField(max_length=200, default='urthish')
+  castspecies = models.ForeignKey(CastEveryman, null=True, default='new casteveryman', blank=True, on_delete=models.SET_NULL)
+  castrole = models.ForeignKey(CastRole, null=True, blank=True, default='new castrole', on_delete=models.SET_NULL)
+  castprofile = models.ForeignKey(CastProfile, null=True, default='new castprofile', blank=True, on_delete=models.SET_NULL)  
   birthdate = models.IntegerField(default=0)
   gender = models.CharField(max_length=30, default='female')
   native_fief = models.CharField(max_length=200, default='none',blank=True)
@@ -95,7 +99,8 @@ class Character(models.Model):
 
   def fix(self,conf=None):
     """ Check / calculate other characteristics """
-    self.check_exportable()
+    #self.check_exportable()
+    debug_print(self.full_name)
     # Age completion
     if conf == None:
       if self.birthdate < 1000:
@@ -111,13 +116,15 @@ class Character(models.Model):
     # Calculate SA
     self.resetTotal()
 
+    debug_print('Species:%s Role:%s Profile:%s'%(self.castspecies,self.castrole,self.castprofile))
+
     if self.onsave_reroll_attributes:
       fs_fics7.check_primary_attributes(self)
       fs_fics7.check_secondary_attributes(self)
+    else:
+      pass
 
     if self.onsave_reroll_skills:
-      #fs_fics7.check_root_skills(self)
-      #fs_fics7.check_everyman_skills(self)
       fs_fics7.check_skills(self)
     else:
       self.add_missing_root_skills()
@@ -136,10 +143,14 @@ class Character(models.Model):
       gm_shortcuts += fs_fics7.check_nameless_attributes(self)
     self.gm_shortcuts = gm_shortcuts
     self.ready_for_export = self.check_exportable()
+    debug_print('>>> %s %s'%(self.rid,self.ready_for_export))
 
   def apply_racial_pa_mods(self):
     attr_mods = self.castspecies.get_racial_attr_mod()
+    #print('XXX %s'%(self.castspecies.species))
+    #print(attr_mods)
     for am in attr_mods:
+      #print(am)
       v = getattr(self,am)
       setattr(self,am,v+attr_mods[am])
 
@@ -296,24 +307,25 @@ class Character(models.Model):
   def update_field(self, key, value):
     """ Field individual validation during sanitize """
     try:
-      v = getattr(self, key)
+      v = getattr(self, key)      
       val = value[0]
+      print('%s %s'%(key,str(val)))
       valfix = val
       field_type = self._meta.get_field(str(key)).get_internal_type()
       if field_type == 'ForeignKey':
         related_model = str(self._meta.get_field(str(key)).related_model)
         #print("FOREIGNKEY SITUATION (%s)"%(related_model))
         if related_model == "<class 'scenarist.models.epics.Epic'>":        
-          valfix = Epic(pk=val)
+          valfix = Epic.objects.filter(pk=val).first()
           #print("Foreign key is an Epic")
         elif related_model == "<class 'collector.models.fics_models.CastEveryman'>":
-          valfix = CastEveryman(pk=val)
-          #print("Foreign key is a Drama")
+          valfix = CastEveryman.objects.filter(pk=val).first()
+          print('valfix = %s'%(valfix))
         elif related_model == "<class 'collector.models.fics_models.CastRole'>":
-          valfix = CastRole(pk=val)
+          valfix = CastRole.objects.filter(pk=val).first()
           #print("Foreign key is an Act")
         elif related_model == "<class 'collector.models.fics_models.CastProfile'>":
-          valfix = CastProfile(pk=val)
+          valfix = CastProfile.objects.filter(pk=val).first()
 #        else:
         #  pass
           #print("Foreign key link not found: %s"%(related_model))

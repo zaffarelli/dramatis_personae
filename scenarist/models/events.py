@@ -1,9 +1,8 @@
-#  __                           _     _   
-# / _\ ___ ___ _ __   __ _ _ __(_)___| |_ 
-# \ \ / __/ _ \ '_ \ / _` | '__| / __| __|
-# _\ \ (_|  __/ | | | (_| | |  | \__ \ |_ 
-# \__/\___\___|_| |_|\__,_|_|  |_|___/\__|
-#                                        
+'''
+╔╦╗╔═╗  ╔═╗┌─┐┌─┐┌┐┌┌─┐┬─┐┬┌─┐┌┬┐
+ ║║╠═╝  ╚═╗│  ├┤ │││├─┤├┬┘│└─┐ │ 
+═╩╝╩    ╚═╝└─┘└─┘┘└┘┴ ┴┴└─┴└─┘ ┴ 
+'''
 from django.db import models
 from django.contrib import admin
 from django.urls import reverse
@@ -17,7 +16,7 @@ class Event(StoryModel):
   act = models.ForeignKey(Act, null=True, on_delete=models.CASCADE)
   friends = models.TextField(default='', max_length=640,blank=True)
   foes = models.TextField(default='', max_length=640,blank=True)
-  resolution = models.TextField(default='', max_length=640,blank=True)
+  resolution = models.TextField(default='', max_length=2560,blank=True)
   challenge = models.PositiveIntegerField(default=1)
   anchor = models.CharField(default='', max_length=256, blank=True)
   estimated_gametime = models.PositiveIntegerField(default=1)

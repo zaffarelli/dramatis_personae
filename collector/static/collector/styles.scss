@@ -1,6 +1,8 @@
-
-
-
+/*
+ ╔╦╗╔═╗  ╔═╗┌─┐┬  ┬  ┌─┐┌─┐┌┬┐┌─┐┬─┐
+  ║║╠═╝  ║  │ ││  │  ├┤ │   │ │ │├┬┘
+ ═╩╝╩    ╚═╝└─┘┴─┘┴─┘└─┘└─┘ ┴ └─┘┴└─
+*/
 
 $fics_back: #507050;
 $fics_light: lighten($fics_back, 10%);
@@ -425,6 +427,11 @@ body {
 
 }
 
+.subsection{
+  font-weight:bold;
+  color: $fics_link;
+  text-decoration:underline;
+}
 
 .pdflink{
   color:$fics_front;
@@ -459,8 +466,8 @@ body {
   opacity: 0.5;
 }
 
-.embedded_link{
-  color: #ffcc22;
+.embedded_link{  
+  color: $fics_link;
   text-decoration:none;
 }
 
@@ -649,4 +656,9 @@ body {
   }
 
 
+}
+
+
+.noPDF{
+  background:#806010;
 }

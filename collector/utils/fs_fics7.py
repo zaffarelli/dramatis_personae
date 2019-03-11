@@ -1,6 +1,11 @@
-# Fading Suns
-# Fusion Interlock Custom System v7
-# This file contains the core business function of the app
+'''
+ ╔╦╗╔═╗  ╔═╗┌─┐┬  ┬  ┌─┐┌─┐┌┬┐┌─┐┬─┐
+  ║║╠═╝  ║  │ ││  │  ├┤ │   │ │ │├┬┘
+ ═╩╝╩    ╚═╝└─┘┴─┘┴─┘└─┘└─┘ ┴ └─┘┴└─
+ Fading Suns
+ Fusion Interlock Custom System v7
+ This file contains the core business function of the app
+'''
 import math
 from random import randint
 import os
@@ -81,7 +86,7 @@ def check_nameless_attributes(ch):
 
 def check_attacks(ch):
   """ Attacks shortcuts depending on the avatar and his/her weapons and skills """
-  ranged_attack = '<h2>Attacks</h2>'
+  ranged_attack = '<h5>Attacks</h5>'
   for w in ch.weapon_set.all():
     if w.weapon_ref.category in {'P','RIF','SMG'}:      
       sk = ch.skill_set.filter(skill_ref__reference='Shoot').first()
@@ -184,44 +189,46 @@ def choose_pa(weights):
 
 def check_primary_attributes(ch):
   """ Fixing primary attributes """
-  debug_print('Checking primary attributes... %s'%(ch.rid))
+  print('Checking primary attributes... %s'%(ch.rid))
   pool = ch.castrole.primaries
-  total = pool
+  pas = [0,0,0,0,0,0,0,0,0,0,0,0]
+  total = pool-sum(pas)
   maxi = ch.castrole.maxi
   mini = ch.castrole.mini
   weights = ch.castprofile.get_weights()
+  balance = ch.castspecies.attr_mod_balance
   ch.challenge = '(<i class="fas fa-th-large"></i>%02d <i class="fas fa-th-list"></i>%02d <i class="fas fa-th"></i>%02d <i class="fas fa-outdent"></i>%02d)'%(ch.castrole.primaries,ch.castrole.skills, ch.castrole.talents,ch.castrole.bc)
-  debug_print('%s: %s [ %d / %d ]'%(ch.full_name,ch.castrole.reference,pool,maxi))  
-  #pas = [2,2,2,2,2,2,2,2,2,2,2,2]
-  pas = [0,0,0,0,0,0,0,0,0,0,0,0]
+
   current =  ch.PA_STR+ch.PA_CON+ch.PA_BOD+ch.PA_MOV+ch.PA_INT+ch.PA_WIL+ch.PA_TEM+ch.PA_PRE+ch.PA_TEC+ch.PA_REF+ch.PA_AGI+ch.PA_AWA
-  debug_print('> Current PA TOTAL: %d'%(current))
   cnt = 0
+  debug_print('> CONFIG %s: %s %d [ %d / %d ]'%(ch.full_name,ch.castrole.reference,ch.castrole.primaries,pool,maxi))  
+  debug_print('> Current PA TOTAL: %d'%(current))
   if ch.player == '':
     redo = True
-    cnt += 1
     while redo:
-      pool = pool-sum(pas)
-      debug_print('> Error: Primary Attributes invalid. Fixing that.')
+      cnt += 1
+      #print('> Castrole primaries ... %d %d %d '%(ch.castrole.primaries, pool, cnt))
+      debug_print('> Error: Primary Attributes invalid. Fixing that. --> Pool=%d (%d)'%(pool,sum(pas)))
       while pool>0:      
         chosen_pa = choose_pa(weights)
         idx = chosen_pa
-        if pas[idx] < maxi:
+        if pas[idx] < maxi+2:
           pas[idx] += 1
           pool -= 1
+          #print('> Good : pa[idx]:%d idx:%d maxi:%d mini:%d pool:%d chosen_pa:%d'%(pas[idx],idx,maxi,mini,pool,chosen_pa))
         else:
-          debug_print('Invalid : already too high: pa[idx]:%d idx:%d maxi:%d pool:%d chosen_pa:%d'%(pas[idx],idx,maxi,pool,chosen_pa))
-      if min(pas)>=mini and max(pas)<=maxi+2 and sum(pas)>=total:
-        debug_print(':) %s: mini=%d/%d, max=%d/%d, sum=%d/%d'%(ch.rid, min(pas),mini, max(pas),maxi, sum(pas),total ))
-        debug_print('==> [p:%d,s:%d,c:%d] --> [p:%d,s:%d,c:%d]'%(sum(pas[0:4]), sum(pas[4:8]), sum(pas[8:12]), sum(weights[0:4]), sum(weights[4:8]), sum(weights[8:12])))
+          debug_print('> Invalid : already too high: pa[idx]:%d idx:%d maxi:%d pool:%d chosen_pa:%d'%(pas[idx],idx,maxi,pool,chosen_pa))
+      if min(pas)>=mini and max(pas)<=maxi+5 and sum(pas)==total:
+        debug_print('> :) %s: mini=%d/%d, max=%d/%d, sum=%d/%d'%(ch.rid, min(pas),mini, max(pas),maxi, sum(pas),total ))
+        debug_print('> [p:%d,s:%d,c:%d] --> [p:%d,s:%d,c:%d]'%(sum(pas[0:4]), sum(pas[4:8]), sum(pas[8:12]), sum(weights[0:4]), sum(weights[4:8]), sum(weights[8:12])))
         redo = False
       else:
-        debug_print(':( %s: mini=%d/%d, max=%d/%d, sum=%d/%d'%(ch.rid, min(pas),mini, max(pas),maxi, sum(pas),total ))
+        debug_print('> :( %s: mini=%d/%d, max=%d/%d, sum=%d/%d'%(ch.rid, min(pas),mini, max(pas),maxi, sum(pas),total ))
         pool = total
         pas = [0,0,0,0,0,0,0,0,0,0,0,0]
-        if cnt > 100:
-          debug_log('Too many redo in PA check !!!','critical');
-          raise ValueError('redo beyond 100 !!!')
+        if cnt > 10:
+          debug_print('> Too many redo in PA check () Beyond 10!!!','critical');          
+          raise ValueError('redo beyond 10 !!!')
           redo = False
     #debug_print(pas)
     ch.PA_STR = pas[0]
@@ -289,6 +296,8 @@ def check_skills(ch):
   maxi = ch.castrole.maxi
   groups = ch.castprofile.groups
   current = ch.SK_TOTAL
+  balance = ch.castspecies.skill_balance
+  #repart = {'AWA':0,'BOD':0,'CON':0,'DIP':0,'EDU':0,'FIG':0,'PER':0,'SOC':0,'SPI':0,'TIN':0,'UND':0}    
   debug_print('> Current SK TOTAL: %d (pool is %d)'%(current,pool))
   master_list = get_skills_list(ch,groups)
   master_weight = 0
@@ -299,6 +308,7 @@ def check_skills(ch):
   current = fetch_everyman_sum(ch)
   debug_print('> Everyman total is %d'%(current))
   x = 0
+  pool -= balance
   if (current < pool) and ch.player == '':
     pool -= current
     debug_print('> Error: Skills total too weak. Fixing that')
@@ -334,7 +344,7 @@ def check_skills(ch):
   
 
 def check_role(ch):
-  debug_print('Checking Role...')
+  print('> %s:'%(ch.full_name))
   pa_pool = ch.castrole.primaries
   sk_pool = ch.castrole.skills
   ta_pool = ch.castrole.talents
@@ -342,22 +352,13 @@ def check_role(ch):
   ba_pool = ch.castrole.ba
   status = True
   if ch.PA_TOTAL < pa_pool:
-    print('> Not enough PA: %d < %d'%(ch.PA_TOTAL,pa_pool))
+    print('   Not enough PA: %d (%d)'%(ch.PA_TOTAL,pa_pool))
     status = False 
-  elif ch.SK_TOTAL < sk_pool:
-    print('> Not enough SK: %d < %d'%(ch.SK_TOTAL,sk_pool))
+  elif ch.SK_TOTAL+ch.castspecies.skill_balance < sk_pool:
+    print('   Not enough SK: %d (%d)'%(ch.SK_TOTAL+ch.castspecies.skill_balance,sk_pool))
     status = False 
-  elif ch.BA_TOTAL < ba_pool:
-    print('> Not enough BA: %d < %d'%(ch.BA_TOTAL,ba_pool))
-    status = False 
-  elif ch.BC_TOTAL < bc_pool:
-    print('> Not enough BC: %d < %d'%(ch.BC_TOTAL,bc_pool))
-    status = False 
-  elif ch.TA_TOTAL < ta_pool:
-    print('> Not enough TA: %d < %d'%(ch.TA_TOTAL,ta_pool))
-    status = False
   if ch.BA_TOTAL + ch.BC_TOTAL + ch.TA_TOTAL < ba_pool+bc_pool+ta_pool:
-    print('> Not enough OP: %d < %d'%(ch.BA_TOTAL + ch.BC_TOTAL + ch.TA_TOTAL,ba_pool+bc_pool+ta_pool))
+    print('   Not enough OP (Talents + Benefice/Afflictions + Blessing/Curses): %d (%d)'%(ch.BA_TOTAL + ch.BC_TOTAL + ch.TA_TOTAL,ba_pool+bc_pool+ta_pool))
     result = False 
   return status
 
