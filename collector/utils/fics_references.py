@@ -362,44 +362,54 @@ RACIAL_ATTRIBUTES = {
 SHORTCUTS = {
     "Observe":{
       'attribute':"PA_AWA",
-      'label': "AWA + Observe",  
+      'label': "AWA + Observe",
+      'rationale': "Notice something",
     },
     "Empathy":{
       'attribute':"PA_TEM",
-      'label': "AWA + Empathy",  
+      'label': "AWA + Empathy",
+      'rationale': "Discern emotions",
     },
     "Dodge":{
       'attribute':"PA_AGI",
-      'label': "AGI + Dodge",  
+      'label': "AGI + Dodge",
+      'rationale': "Avoid being hit",
     },
     "Shoot":{
       'attribute':"PA_REF",
-      'label': "REF + Shoot",  
+      'label': "REF + Shoot",
+      'rationale': "Fire a ranged weapon",
     },    
     "Melee":{
       'attribute':"PA_REF",
-      'label': "REF + Melee",  
+      'label': "REF + Melee",
+      'rationale': "Fencing",
     },
     "Persuasion":{
       'attribute':"PA_PRE",
-      'label': "PRE + Persuasion",  
+      'label': "PRE + Persuasion",
+      'rationale': "Convince someone with arguments",
     },
     "Seduction":{
       'attribute':"PA_PRE",
-      'label': "PRE + Seduction",  
+      'label': "PRE + Seduction",
+      'rationale': "Charm others",
     },
     "Leadership":{
       'attribute':"PA_PRE",
-      'label': "PRE + Leadership",  
+      'label': "PRE + Leadership",
+      'rationale': "Give orders to subsidiaries",
     },
 
     "Stoic Mind":{
       'attribute':'PA_WIL',
-      'label': 'WIL + Stoic Mind',  
+      'label': 'WIL + Stoic Mind',
+      'rationale': "Iron will",
     },
-    'Focus':{
+    "Focus":{
       'attribute':'PA_WIL',
-      'label': 'WIL + Focus',  
+      'label': 'WIL + Focus',
+      'rationale': "Keep focused on a task",  
     },    
 
   }

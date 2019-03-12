@@ -25,12 +25,12 @@ def as_bullets(value):
   blank = '<i class="fas fa-circle fa-xs blank" title="%d"></i>'%(value)
   x = 0
   res = ''
-  while x<10:
+  while x<16:
     if x<int(value):
       res += one
     else:
       res += blank
-    if (x+1) % 5 == 0:
+    if (x+1) % 8 == 0:
       res += '<br/>'
     x += 1
   return res
