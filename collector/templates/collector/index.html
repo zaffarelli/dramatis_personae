@@ -11,14 +11,7 @@
   <li><a class='btn' href="{% url 'xls_update' %}"><i class="fas fa-upload"></i>&nbsp;Update from spreadsheet</a></li>
   <li><span class='btn' id='conf_details'><i class="fas fa-globe"></i>&nbsp;Configuration Details</span></li>
   <li><span class='btn' id='build_config_pdf'><i class="fas fa-file-pdf"></i>&nbsp;Build Configuration PDF</span></li>
-  
-  </ul>
-{% endblock menuright %}
-
-{% block menu %}
-  <div class='shortcuts'>
-    <ul>
-    <li><span class='btn' id='go'><i class="fas fa-user-edit"></i>&nbsp;Action!</span></li>
+    
     <li id='floatingk'><span class='btn' ><i class="fas fa-key"></i>&nbsp;Keywords</span>
       <ul>
         {% for keyword in config_keywords %}
@@ -26,10 +19,15 @@
         {% endfor %}      
       </ul>
     </li>
+  <li><i>{{instance_name}} release {{ dp_version }}</i></li>
+  </ul>
+{% endblock menuright %}
+
+{% block menu %}
+  <div class='shortcuts'>
+    <ul>
+      <li><span class='btn' id='go' style='width:auto;'><i class="fas fa-user-edit"></i></span></li>
     </ul>
-  </div>
-  <div class='releasenote'>
-  <strong>{{instance_name}}</strong> release <b>{{ dp_version }}</b>
   </div>
 {% endblock menu %}
 
