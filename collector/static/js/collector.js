@@ -330,7 +330,68 @@ function rebootlinks(){
     $('#search').click();
   });
 
+  $('.recalc_character').off();
+  $('.recalc_character').on('click',function(event){
+    console.log('Recalc: '+$(this).attr('id'));
+    event.preventDefault();
+    event.stopPropagation();
+    var dad = $(this).parents('li');
+    $('li').removeClass('selected');
+    $(dad).addClass('selected');
+    $.ajax({      
+      url: 'ajax/recalc/character/'+$(this).attr('id')+'/',
+      success: function(answer) {
+        $('.details').html(answer)
+        $('li').removeClass('selected');
+        rebootlinks();
+      },
+      error: function(answer){
+        console.log('Recalc error...'+answer);
+      }
+    });
+  });
 
+  $('.recalc_pa_character').off();
+  $('.recalc_pa_character').on('click',function(event){
+    //console.log('Recalc: '+$(this).attr('id'));
+    event.preventDefault();
+    event.stopPropagation();
+    var dad = $(this).parents('li');
+    $('li').removeClass('selected');
+    $(dad).addClass('selected');
+    $.ajax({      
+      url: 'ajax/recalc_pa/character/'+$(this).attr('id')+'/',
+      success: function(answer) {
+        $('.details').html(answer)
+        $('li').removeClass('selected');
+        rebootlinks();
+      },
+      error: function(answer){
+        console.log('Recalc error...'+answer);
+      }
+    });
+  });
+
+  $('.recalc_skills_character').off();
+  $('.recalc_skills_character').on('click',function(event){
+    //console.log('Recalc: '+$(this).attr('id'));
+    event.preventDefault();
+    event.stopPropagation();
+    var dad = $(this).parents('li');
+    $('li').removeClass('selected');
+    $(dad).addClass('selected');
+    $.ajax({      
+      url: 'ajax/recalc_skills/character/'+$(this).attr('id')+'/',
+      success: function(answer) {
+        $('.details').html(answer)
+        $('li').removeClass('selected');
+        rebootlinks();
+      },
+      error: function(answer){
+        console.log('Recalc error...'+answer);
+      }
+    });
+  });  
 
   $('.view_character').off();
   $('.view_character').on('click',function(event){
@@ -442,10 +503,10 @@ function rebootlinks(){
     console.log(target);
   });
 
-  $('#floatingk').off();
-  $('#floatingk').on('click', function(event){
-    $(this).find('ul').css('display','block');
-    console.log('ul.floating_keywords');
+  $('#floatingk').off().on('click', function(event){
+    event.preventDefault();
+    event.stopPropagation();
+    $("ul#keywords").toggleClass("shown");
   });
 
   

@@ -100,7 +100,7 @@ class Character(models.Model):
   def fix(self,conf=None):
     """ Check / calculate other characteristics """
     #self.check_exportable()
-    debug_print(self.full_name)
+    print("FIX:%s"%(self.full_name))
     # Age completion
     if conf == None:
       if self.birthdate < 1000:
@@ -116,16 +116,18 @@ class Character(models.Model):
     # Calculate SA
     self.resetTotal()
 
-    debug_print('Species:%s Role:%s Profile:%s'%(self.castspecies,self.castrole,self.castprofile))
+    
 
     if self.onsave_reroll_attributes:
+      print('Species:%s Role:%s Profile:%s'%(self.castspecies,self.castrole,self.castprofile))
       fs_fics7.check_primary_attributes(self)
       fs_fics7.check_secondary_attributes(self)
     else:
-      pass
+      print("Nothing to do on attributes")
 
     if self.onsave_reroll_skills:
       fs_fics7.check_skills(self)
+      print("Nothing to do on skills (only roots)")
     else:
       self.add_missing_root_skills()
     self.resetTotal()

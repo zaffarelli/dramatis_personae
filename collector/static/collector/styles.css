@@ -67,10 +67,6 @@ body {
             body .menu .shortcuts ul li ul li {
               display: block;
               z-index: 500; }
-        body .menu .shortcuts ul #floatingk ul {
-          color: white;
-          border: 1px dotted cyan;
-          z-index: 900; }
   body footer {
     background: #101710;
     height: 30px;
@@ -93,7 +89,7 @@ body {
       justify-content: center;
       align-content: center; }
     body footer a {
-      color: #FFCC88;
+      color: #DBCA86;
       text-decoration: none; }
   body .wrapper {
     font-family: sans-serif;
@@ -111,6 +107,11 @@ body {
           border: 1px solid transparent;
           margin: 0.3em;
           font-size: 0.83em; }
+      body .wrapper .menuright #floatingk ul#keywords {
+        display: none;
+        color: white;
+        border: 1px dotted cyan;
+        z-index: 900; }
     body .wrapper .list {
       background: transparent url("details.png");
       border-right: 1px solid #263526;
@@ -155,10 +156,10 @@ body {
           margin-bottom: 1em;
           font-size: 0.83em; }
           body .wrapper .list ul li a, body .wrapper .list ol li a {
-            color: #E5DECA;
+            color: #DBCA86;
             text-decoration: none; }
             body .wrapper .list ul li a:hover, body .wrapper .list ol li a:hover {
-              color: #E5DECA; }
+              color: #658e65; }
           body .wrapper .list ul li small, body .wrapper .list ol li small {
             font-size: 0.75em; }
           body .wrapper .list ul li em, body .wrapper .list ol li em {
@@ -302,7 +303,7 @@ body {
 
 .subsection {
   font-weight: bold;
-  color: #FFCC88;
+  color: #DBCA86;
   text-decoration: underline; }
 
 .pdflink {
@@ -329,11 +330,11 @@ body {
   color: #ffcc22; }
 
 .blank {
-  color: #553100;
+  color: #241f0b;
   opacity: 0.5; }
 
 .embedded_link {
-  color: #FFCC88;
+  color: #DBCA86;
   text-decoration: none; }
 
 .storyarticle {
@@ -358,7 +359,7 @@ body {
       color: black;
       border: 1px solid silver; }
       .storyarticle table tr td .embedded_link {
-        color: #FFCC88;
+        color: #DBCA86;
         text-decuration: underline;
         cursor: pointer; }
       .storyarticle table tr td p {
@@ -440,7 +441,7 @@ body {
   margin: 0;
   width: 150px;
   height: 20px;
-  border: 2px solid gray;
+  border: 2px solid #263526;
   border-radius: 5px;
   background: #263526;
   color: #E5DECA;
@@ -449,9 +450,9 @@ body {
   text-align: left;
   font-size: 0.87em; }
   .btn:hover {
-    border-color: #658e65;
+    border-color: #DBCA86;
     background: #101710;
-    color: #FFCC88;
+    color: #DBCA86;
     cursor: pointer; }
 
 .tabs {
@@ -464,6 +465,9 @@ body {
   text-align: center; }
   .tabberbar span {
     display: inline-block; }
+
+.shown {
+  display: block; }
 
 .noPDF {
   background: #806010; }

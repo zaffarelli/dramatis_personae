@@ -77,7 +77,39 @@ def get_storyline(request,slug='none'):
     http404
   
   
+def recalc_character(request, id=None):
+  if request.is_ajax():
+    item = get_object_or_404(Character,pk=id)
+    item.save()    
+    template = get_template('collector/character.html')
+    html = template.render({'c':item})
+    return HttpResponse(html, content_type='text/html')
+  else:
+    raise Http404
 
+def recalc_pa_character(request, id=None):
+  if request.is_ajax():
+    conf = get_current_config()    
+    item = get_object_or_404(Character,pk=id)
+    item.setattr(onsave_reroll_attributes,True)
+    item.save()    
+    template = get_template('collector/character.html')
+    html = template.render({'c':item})
+    return HttpResponse(html, content_type='text/html')
+  else:
+    raise Http404
+
+def recalc_skills_character(request, id=None):
+  if request.is_ajax():
+    conf = get_current_config()
+    item = get_object_or_404(Character,pk=id)
+    item.onsave_reroll_skills = True
+    item.save()    
+    template = get_template('collector/character.html')
+    html = template.render({'c':item})
+    return HttpResponse(html, content_type='text/html')
+  else:
+    raise Http404
 
 def view_character(request, id=None):
   """ Ajax view of a character """

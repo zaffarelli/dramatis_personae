@@ -10,7 +10,7 @@ $fics_dark: darken($fics_back, 20%);
 $fics_darker: darken($fics_back, 30%);
 $fics_darkest: darken($fics_darker,40%);
 $fics_front: #E5DECA;
-$fics_link: #FFCC88;
+$fics_link: #DBCA86;
 $fics_blank: darken($fics_link,60%);
 $formset_back: $fics_darker;
 $fics_hl: $fics_light;
@@ -80,7 +80,6 @@ body {
         margin:0;
         padding:0;
         display:block;
-        //background:red;
         height:40px;
         overflow:show;
         list-style-type:none;
@@ -100,15 +99,7 @@ body {
           }
         }
 
-        & #floatingk{
-          & ul{
-            
-            color:white;
-            border:1px dotted cyan;
-            z-index:900;
-          }
-          
-        }
+        
       }
     }
   }
@@ -168,7 +159,15 @@ body {
       }
       color: $fics_front;
 
-
+      & #floatingk{
+          & ul#keywords{
+            display:none;
+            color:white;
+            border:1px dotted cyan;
+            z-index:900;
+          }
+          
+        }
     }
      
     & .list {
@@ -226,11 +225,10 @@ body {
           font-size: 0.83em;
           
           & a {
-            color: $fics_front;
+            color: $fics_link;
             text-decoration: none;
             &:hover {
-               
-               color:$fics_front;
+               color:$fics_hl;
             }
           }
           & small {
@@ -585,7 +583,7 @@ body {
   margin: 0;
   width: 150px;
   height: 20px;
-  border: 2px solid gray;
+  border: 2px solid $fics_dark;
   border-radius: 5px;
   background: $fics_dark;
   color: $fics_front;
@@ -594,7 +592,7 @@ body {
   text-align: left;
   font-size:0.87em;
   &:hover {
-    border-color: $fics_hl;
+    border-color: $fics_link;
     background: $fics_darker;
     color: $fics_link;
     cursor:pointer
@@ -618,6 +616,9 @@ body {
   }
 }
 
+.shown{
+  display:block;
+}
 
 .noPDF{
   background:#806010;

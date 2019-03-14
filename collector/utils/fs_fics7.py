@@ -226,9 +226,9 @@ def check_primary_attributes(ch):
         debug_print('> :( %s: mini=%d/%d, max=%d/%d, sum=%d/%d'%(ch.rid, min(pas),mini, max(pas),maxi, sum(pas),total ))
         pool = total
         pas = [0,0,0,0,0,0,0,0,0,0,0,0]
-        if cnt > 10:
-          debug_print('> Too many redo in PA check () Beyond 10!!!','critical');          
-          raise ValueError('redo beyond 10 !!!')
+        if cnt > 100:
+          print('> Too many redo in PA check () Beyond 100!!!','critical');          
+          #raise ValueError('redo beyond 10 !!!')
           redo = False
     #debug_print(pas)
     ch.PA_STR = pas[0]
