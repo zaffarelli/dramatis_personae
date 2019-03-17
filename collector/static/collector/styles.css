@@ -5,41 +5,38 @@
  ═╩╝╩    ╚═╝└─┘┴─┘┴─┘└─┘└─┘ ┴ └─┘┴└─
 */
 @font-face {
-  font-family: 'Patua';
-  src: url("PatuaOne-Regular.ttf"); }
+  font-family: 'Titre';
+  src: url("Eczar-ExtraBold.ttf"); }
 @font-face {
-  font-family: 'Rokkitt';
-  src: url("Rokkit-Regular.ttf"); }
+  font-family: 'Texte';
+  src: url("WorkSans-Regular.ttf"); }
 @font-face {
-  font-family: 'Signika';
-  src: url("Signika-Regular.ttf"); }
-@font-face {
-  font-family: 'Prompt';
-  src: url("Prompt-Regular.ttf"); }
-@font-face {
-  font-family: 'Kanit';
-  src: url("Kanit-Regular.ttf"); }
+  font-family: 'Emphase';
+  src: url("Eczar-Regular.ttf"); }
 .fixed {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%; }
 
-.stickyoffset {
-  padding-top: 20px; }
+h1, h2, h3, h4, h5, h6 {
+  font-family: Titre;
+  font-weight: normal; }
 
 body {
-  background: black url("back.jpg") -130px 300px; }
+  font-family: Texte;
+  background: black url("5.jpg") fixed; }
   body .logo {
-    background: black url("FICS_Logo.png") center center no-repeat; }
+    background: transparent url("FICS_Logo_reverse.png") center center no-repeat; }
   body .menu {
     overflow: show;
     color: #E5DECA;
     font-size: 0.73em;
-    background: #263526;
+    background: #1d1d1d;
     z-index: 20;
-    font-family: Kanit;
-    display: block; }
+    font-family: Texte;
+    display: block;
+    padding: 5px 0 5px 0; }
     body .menu .shortcuts {
       display: block;
       margin: 0;
@@ -59,7 +56,7 @@ body {
           margin: 0;
           padding: 0;
           display: inline-block;
-          background-color: #263526;
+          background-color: #1d1d1d;
           overflow: show; }
           body .menu .shortcuts ul li ul {
             display: none;
@@ -68,13 +65,12 @@ body {
               display: block;
               z-index: 500; }
   body footer {
-    background: #101710;
-    height: 30px;
+    background: #040404;
     padding: 10px;
     padding-top: 0.5em;
     margin: 0;
     color: #E5DECA;
-    font-family: Kanit;
+    font-family: Texte;
     font-size: 9pt;
     overflow-y: hidden; }
     body footer .footer {
@@ -92,20 +88,21 @@ body {
       color: #DBCA86;
       text-decoration: none; }
   body .wrapper {
-    font-family: sans-serif;
-    font-size: 10pt; }
+    font-family: Texte;
+    font-size: 9pt;
+    padding: 0; }
     body .wrapper .menuright {
       background: transparent url("details.png");
+      font-family: Texte;
       color: #E5DECA; }
       body .wrapper .menuright ul {
+        width: auto;
+        margin: 5px;
         text-indent: 0;
         padding: 0;
-        margin: 0;
         list-style-type: none; }
         body .wrapper .menuright ul li {
-          padding: 5px;
           border: 1px solid transparent;
-          margin: 0.3em;
           font-size: 0.83em; }
       body .wrapper .menuright #floatingk ul#keywords {
         display: none;
@@ -114,7 +111,6 @@ body {
         z-index: 900; }
     body .wrapper .list {
       background: transparent url("details.png");
-      border-right: 1px solid #263526;
       color: #E5DECA; }
       body .wrapper .list .storyline {
         color: white;
@@ -129,14 +125,14 @@ body {
           padding: 0.5em;
           color: #E5DECA;
           font-size: 0.77em;
-          background: #263526;
+          background: #1d1d1d;
           padding: 0.5em 0.8em;
           border-radius: 2px;
           text-decoration: none;
           cursor: pointer; }
       body .wrapper .list .character_actions {
         display: inline-block;
-        background: #263526;
+        background: #1d1d1d;
         color: #E5DECA;
         padding: 2px;
         border: 1px solid transparent;
@@ -144,34 +140,21 @@ body {
         body .wrapper .list .character_actions a, body .wrapper .list .character_actions span.nav {
           cursor: pointer; }
           body .wrapper .list .character_actions a:hover, body .wrapper .list .character_actions span.nav:hover {
-            color: #658e65; }
+            color: #6a6a6a; }
       body .wrapper .list ul, body .wrapper .list ol {
         text-indent: 0;
         margin-left: 0;
         padding-left: 0;
         list-style-type: none; }
         body .wrapper .list ul li, body .wrapper .list ol li {
-          padding: 5px;
-          border: 1px solid transparent;
-          margin-bottom: 1em;
-          font-size: 0.83em; }
-          body .wrapper .list ul li a, body .wrapper .list ol li a {
-            color: #DBCA86;
-            text-decoration: none; }
-            body .wrapper .list ul li a:hover, body .wrapper .list ol li a:hover {
-              color: #658e65; }
-          body .wrapper .list ul li small, body .wrapper .list ol li small {
-            font-size: 0.75em; }
-          body .wrapper .list ul li em, body .wrapper .list ol li em {
-            font-weight: bold; }
+          margin: 0; }
     body .wrapper .details {
       z-index: 10;
       background: transparent url("details.png");
       padding: 10px;
       padding-bottom: 50px;
-      font-family: Kanit;
-      font-size: 0.97em;
-      border-left: 1px solid #263526; }
+      font-family: Texte;
+      font-size: 0.97em; }
       body .wrapper .details a {
         color: #ffcc22;
         text-decoration: none; }
@@ -187,41 +170,43 @@ body {
       body .wrapper .details .attributes {
         column-count: 5;
         column-gap: 5px;
-        column-rule: 0px solid #000; }
+        column-rule: 0px solid #6a6a6a; }
       body .wrapper .details .skillsview {
         column-count: 3;
         column-gap: 5px;
-        column-rule: 1px dotted #658e65; }
+        column-rule: 1px dotted #6a6a6a; }
         body .wrapper .details .skillsview table {
           font-size: 7pt;
           width: 100%; }
           body .wrapper .details .skillsview table tr td {
             width: auto; }
           body .wrapper .details .skillsview table tr th {
-            background: #101710;
-            width: 16ex;
+            background: #040404;
+            width: 8ex;
             font-size: 1.2em;
             line-height: 0.8em; }
             body .wrapper .details .skillsview table tr th.edit span:hover {
               color: #E5DECA;
               font-size: 0.8em; }
       body .wrapper .details .classyview {
-        border: 1px solid #E5DECA;
-        border-radius: 10px 0 10px 0;
+        border: 1px solid #040404;
+        box-shadow: 2px 2px 8px #040404;
+        border-radius: 5px 5px 5px 5px;
         padding: 10px;
-        background-color: #101010;
-        width: auto;
+        background-color: #1d1d1d;
+        width: 100%;
+        max-width: 800px;
         margin-left: auto;
         margin-right: auto;
         display: block;
         column-count: 1;
         column-gap: 10px;
-        column-rule: 1px dotted #658e65;
+        column-rule: 1px dotted #6a6a6a;
         color: #F0F0F0; }
       body .wrapper .details .storyview {
         background: transparent;
         display: block;
-        font-family: 'Kanit'; }
+        font-family: 'Texte'; }
         body .wrapper .details .storyview h1 {
           text-indent: 5ex; }
         body .wrapper .details .storyview h2 {
@@ -234,46 +219,47 @@ body {
         body .wrapper .details .storyview h1, body .wrapper .details .storyview h2, body .wrapper .details .storyview h3, body .wrapper .details .storyview h4 {
           color: #E5DECA; }
       body .wrapper .details .narrative {
-        border: 1px solid #101710;
+        border: 1px solid #040404;
         border-radius: 5px;
         padding: 5px;
         column-count: 2;
         column-gap: 10px;
-        column-rule: 1px dotted #658e65; }
+        column-rule: 1px dotted #6a6a6a; }
       body .wrapper .details table.formset {
         padding: 1ex 0.5em;
         width: 100%;
         border-radius: 0.5em;
         border: 1px solid black;
-        background: #101710; }
+        background: #040404; }
         body .wrapper .details table.formset tr.row1 {
-          background: #263526; }
+          background: #1d1d1d; }
         body .wrapper .details table.formset tr.row2 {
-          background: #3b523b; }
+          background: black; }
         body .wrapper .details table.formset td {
-          vertical-align: top; }
+          vertical-align: middle; }
         body .wrapper .details table.formset caption {
-          font-family: 'Prompt';
+          font-family: 'Texte';
           font-size: 1.3em;
           side: top; }
         body .wrapper .details table.formset .field_wrapper label {
-          width: 10ex;
+          width: 40%;
           display: inline-block;
           vertical-align: top;
-          text-align: left; }
+          text-align: left;
+          height: 100%; }
         body .wrapper .details table.formset .field_wrapper input, body .wrapper .details table.formset .field_wrapper textarea, body .wrapper .details table.formset .field_wrapper select {
           box-sizing: border-box;
           display: inline-block;
-          font-family: Kanit;
+          font-family: Texte;
           font-size: 0.93em; }
         body .wrapper .details table.formset .field_wrapper textarea {
           padding: 0.5em;
-          width: 50ex; }
+          width: 40%; }
         body .wrapper .details table.formset .field_wrapper input[type=number] {
-          width: 10ex; }
+          width: 8ex; }
       body .wrapper .details table.stats {
         display: inline-block;
-        border: 1px solid #101710;
+        border: 1px solid #040404;
         border-radius: 6px; }
         body .wrapper .details table.stats td {
           height: 2em;
@@ -289,8 +275,6 @@ body {
         body .wrapper .details table.coreblock td {
           width: 60ex; }
       body .wrapper .details h1, body .wrapper .details h2, body .wrapper .details h3 {
-        font-family: 'Prompt';
-        font-weight: Normal;
         margin: 0;
         margin-top: 0.5em; }
       body .wrapper .details h1 {
@@ -309,18 +293,37 @@ body {
 .pdflink {
   color: #E5DECA;
   text-decoration: none;
-  background: #263526;
+  background: #1d1d1d;
   display: inline-block;
   padding: 3px; }
 
 .ping {
   background: orange; }
 
-.selected {
-  border: 1px solid yellow;
+.avatar_link {
+  margin: 0.5em 1ex 0.5em 1ex;
+  box-shadow: 2px 2px 8px #040404;
+  padding: 5px;
+  border: 1px solid black;
+  font-size: 0.83em;
   border-radius: 5px;
-  background: #658e65;
-  color: black; }
+  background: #040404; }
+  .avatar_link a {
+    color: #DBCA86;
+    text-decoration: none; }
+    .avatar_link a:hover {
+      color: #6a6a6a; }
+  .avatar_link small {
+    font-size: 0.75em; }
+  .avatar_link em {
+    font-weight: bold; }
+  .avatar_link.locked {
+    background: #221a00;
+    border-color: #DBCA86; }
+  .avatar_link.selected {
+    border-color: #DBCA86;
+    background: #6a6a6a;
+    color: black; }
 
 .waiting {
   cursor: progress;
@@ -371,17 +374,17 @@ body {
       .storyarticle table.details tr th {
         width: 15%;
         background: black;
-        color: #658e65;
+        color: #6a6a6a;
         border: none;
         border-radius: 5px; }
       .storyarticle table.details tr td {
         width: auto;
-        background: #101710;
+        background: #040404;
         color: #E5DECA;
         border: none;
         border-radius: 5px; }
     .storyarticle table.update {
-      background: #263526;
+      background: #1d1d1d;
       width: 100%;
       border: none; }
       .storyarticle table.update input, .storyarticle table.update textarea {
@@ -390,12 +393,12 @@ body {
       .storyarticle table.update tr th {
         width: 15%;
         background: black;
-        color: #658e65;
+        color: #6a6a6a;
         border: none;
         border-radius: 5px; }
       .storyarticle table.update tr td {
         width: auto;
-        background: #101710;
+        background: #040404;
         color: #E5DECA;
         border: none;
         border-radius: 5px; }
@@ -410,25 +413,25 @@ body {
 .storybar {
   display: inline-block;
   margin-left: 15%;
-  border: 1px solid #658e65;
+  border: 1px solid #6a6a6a;
   border-radius: 5px; }
   .storybar p {
     padding: 0;
     text-indent: 0;
     margin: 0; }
   .storybar button {
-    font-family: Kanit;
+    font-family: Texte;
     font-size: 8pt;
     width: 16ex;
     padding: 0px;
     margin: 2px;
     cursor: pointer; }
   .storybar.epic {
-    background-color: #507050; }
+    background-color: #505050; }
   .storybar.drama {
-    background-color: #263526; }
+    background-color: #1d1d1d; }
   .storybar.act {
-    background-color: #101710; }
+    background-color: #040404; }
   .storybar.event {
     background-color: black; }
 
@@ -441,9 +444,9 @@ body {
   margin: 0;
   width: 150px;
   height: 20px;
-  border: 2px solid #263526;
+  border: 2px solid #1d1d1d;
   border-radius: 5px;
-  background: #263526;
+  background: #1d1d1d;
   color: #E5DECA;
   text-decoration: none;
   padding: 5px;
@@ -451,7 +454,7 @@ body {
   font-size: 0.87em; }
   .btn:hover {
     border-color: #DBCA86;
-    background: #101710;
+    background: #040404;
     color: #DBCA86;
     cursor: pointer; }
 
@@ -469,24 +472,28 @@ body {
 .shown {
   display: block; }
 
-.noPDF {
-  background: #806010; }
+.noPDF:before {
+  content: '(x) '; }
 
-/* Normal */
+/* Normal --------------------------------------------------------------------*/
 @media all and (min-width: 1024px) {
   body {
     margin: 0;
     padding: 0;
-    background-color: #263526; }
+    background-color: #1d1d1d; }
     body .logo {
-      height: 105px; }
+      height: 105px;
+      width: 99%; }
     body .menu {
-      width: 100%;
+      width: 99%;
+      height: 40px; }
+    body footer {
+      width: 98%;
       height: 40px; }
     body .wrapper {
       z-index: 5;
       margin-left: 0;
-      width: 100%;
+      width: 99%;
       min-height: 1000px;
       display: grid;
       grid-template-columns: 0.5% 250px 1fr 200px 0.5%;
@@ -499,11 +506,11 @@ body {
         grid-column: 3 / 3;
         min-height: 1000px; }
       body .wrapper .menuright {
-        grid-column: 4 / 5; } }
+        grid-column: 4 / 6; } }
 /* Small */
 @media all and (max-width: 1024px) {
   body {
-    background: #263526 url("FICS_Logo.png") center 50px no-repeat; }
+    background: #1d1d1d url("FICS_Logo.png") center 50px no-repeat; }
     body .logo {
       display: none; }
     body .menu {

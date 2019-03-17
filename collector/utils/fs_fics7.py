@@ -137,37 +137,6 @@ def minmax_from_dc(sdc):
   dmax = dmin*int(split_scope[1])+dbonus
   return (dmin,dmax)
 
-# def check_specialties_from_roots(ch):
-  # """ Get specialities from root scores """
-  # from collector.models.skillrefs import SkillRef
-  # ch_root_skills = ch.skill_set.all().filter(skill_ref__is_root=True)
-  # for root_skill in ch_root_skills:
-    # matching_specialities = SkillRef.objects.filter(is_speciality=True, linked_to=root_skill.skill_ref)
-    # maxdie =len(matching_specialities)
-    # pool = root_skill.value
-    # while pool>0:
-      # x = roll(maxdie)
-      # ch.add_or_update_skill(matching_specialities[x-1])
-      # pool -= 1
-  
-
-# def check_root_skills(ch):
-  # """ Checking Root skills and their specialties
-  # """
-  # exportable = True
-  # skills = ch.skill_set.all()
-  # for root in skills:
-    # if root.skill_ref.is_root:
-      # cnt = 0
-      # for spec in skills:
-        # if spec.skill_ref.is_speciality:
-          # if spec.skill_ref.linked_to == root.skill_ref:
-            # cnt += 1
-      # if cnt != root.value:
-        # root.value = cnt
-        # debug_print('Fixing root value for %s...'%root.skill_ref.reference)
-  # return exportable
-
 def roll(maxi):
   """ A more random '1 to maxi' dice roller  """
   randbyte = int.from_bytes(os.urandom(1),byteorder='big',signed=False)
@@ -189,7 +158,7 @@ def choose_pa(weights):
 
 def check_primary_attributes(ch):
   """ Fixing primary attributes """
-  print('Checking primary attributes... %s'%(ch.rid))
+  #print('Checking primary attributes... %s'%(ch.rid))
   pool = ch.castrole.primaries
   pas = [0,0,0,0,0,0,0,0,0,0,0,0]
   total = pool-sum(pas)
@@ -344,7 +313,7 @@ def check_skills(ch):
   
 
 def check_role(ch):
-  print('> %s:'%(ch.full_name))
+  #print('> %s:'%(ch.full_name))
   pa_pool = ch.castrole.primaries
   sk_pool = ch.castrole.skills
   ta_pool = ch.castrole.talents
@@ -352,13 +321,13 @@ def check_role(ch):
   ba_pool = ch.castrole.ba
   status = True
   if ch.PA_TOTAL < pa_pool:
-    print('   Not enough PA: %d (%d)'%(ch.PA_TOTAL,pa_pool))
+    debug_print('   Not enough PA: %d (%d)'%(ch.PA_TOTAL,pa_pool))
     status = False 
   elif ch.SK_TOTAL+ch.castspecies.skill_balance < sk_pool:
-    print('   Not enough SK: %d (%d)'%(ch.SK_TOTAL+ch.castspecies.skill_balance,sk_pool))
+    debug_print('   Not enough SK: %d (%d)'%(ch.SK_TOTAL+ch.castspecies.skill_balance,sk_pool))
     status = False 
   if ch.BA_TOTAL + ch.BC_TOTAL + ch.TA_TOTAL < ba_pool+bc_pool+ta_pool:
-    print('   Not enough OP (Talents + Benefice/Afflictions + Blessing/Curses): %d (%d)'%(ch.BA_TOTAL + ch.BC_TOTAL + ch.TA_TOTAL,ba_pool+bc_pool+ta_pool))
+    debug_print('   Not enough OP (Talents + Benefice/Afflictions + Blessing/Curses): %d (%d)'%(ch.BA_TOTAL + ch.BC_TOTAL + ch.TA_TOTAL,ba_pool+bc_pool+ta_pool))
     result = False 
   return status
 

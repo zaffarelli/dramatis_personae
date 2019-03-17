@@ -3,11 +3,8 @@
 {% block menuright %}
   <ul>
 
-  <li><a class='btn' href="{% url 'recalc' %}"><i class="fas fa-users-cog"></i>&nbsp;Recalc all avatars</a></li>
   <li><a class='btn' href="{% url 'export' %}"><i class="fas fa-download"></i>&nbsp;Export to spreadsheet</a></li>
   <li><a class='btn' href="{% url 'xls_update' %}"><i class="fas fa-upload"></i>&nbsp;Update from spreadsheet</a></li>
-  <li><span class='btn' id='conf_details'><i class="fas fa-globe"></i>&nbsp;Configuration Details</span></li>
-  <li><span class='btn' id='build_config_pdf'><i class="fas fa-file-pdf"></i>&nbsp;Build Configuration PDF</span></li>
     
     <li id='floatingk'><span class='btn' ><i class="fas fa-key"></i>&nbsp;Keywords</span>
       <ul id='keywords'>
@@ -23,11 +20,15 @@
 {% block menu %}
   <div class='shortcuts'>
     <ul>
-      <li><span class='btn' id='go' style='width:auto;'><i class="fas fa-user-edit"></i></span></li>
+      
   <li><input type='text' id='customize' value='' placeholder='Customizer'></input></li>
   <li><span class='btn' id='search' style='width:auto;'><i class="fas fa-search"></i></span></li>
   <li><span class='btn' id='seek' style='width:auto;'><i class="fas fa-address-card"></i></span> </li> 
   <li><span class='btn' id='add_character'  style='width:auto;'><i class="fas fa-user-plus"></i></span></li>
+  <li><a class='btn' href="{% url 'recalc' %}"  style='width:auto;'><i class="fas fa-users-cog"></i></a></li>
+  <li><span class='btn' id='conf_details' style='width:auto;'><i class="fas fa-globe"></i></span></li>
+  <li><span class='btn' id='build_config_pdf' style='width:auto;'><i class="fas fa-file-pdf"></i></span></li>
+<li><span class='btn' id='go' style='width:auto;'><i class="fas fa-user-edit"></i></span></li>
     </ul>
   </div>
 {% endblock menu %}

@@ -87,6 +87,7 @@ class Character(models.Model):
   ready_for_export =  models.BooleanField(default=False)
   visible =  models.BooleanField(default=True)
   is_dead =  models.BooleanField(default=False)
+  is_locked = models.BooleanField(default=False) 
   epic = models.ForeignKey(Epic, null=True, blank=True, on_delete=models.SET_NULL)
   
   #drama = models.ForeignKey(Drama, null=True, blank=True, on_delete=models.SET_NULL)
@@ -100,7 +101,9 @@ class Character(models.Model):
   def fix(self,conf=None):
     """ Check / calculate other characteristics """
     #self.check_exportable()
-    print("FIX:%s"%(self.full_name))
+    #print("FIX:%s"%(self.full_name))
+    #print(self.onsave_reroll_attributes)
+    #print(self.onsave_reroll_skills)
     # Age completion
     if conf == None:
       if self.birthdate < 1000:
@@ -119,15 +122,15 @@ class Character(models.Model):
     
 
     if self.onsave_reroll_attributes:
-      print('Species:%s Role:%s Profile:%s'%(self.castspecies,self.castrole,self.castprofile))
+      #print('Species:%s Role:%s Profile:%s'%(self.castspecies,self.castrole,self.castprofile))
       fs_fics7.check_primary_attributes(self)
       fs_fics7.check_secondary_attributes(self)
-    else:
-      print("Nothing to do on attributes")
+    #else:
+      #print("Nothing to do on attributes")
 
     if self.onsave_reroll_skills:
       fs_fics7.check_skills(self)
-      print("Nothing to do on skills (only roots)")
+      #print("Nothing to do on skills (only roots)")
     else:
       self.add_missing_root_skills()
     self.resetTotal()
@@ -322,7 +325,7 @@ class Character(models.Model):
           #print("Foreign key is an Epic")
         elif related_model == "<class 'collector.models.fics_models.CastEveryman'>":
           valfix = CastEveryman.objects.filter(pk=val).first()
-          print('valfix = %s'%(valfix))
+          #print('valfix = %s'%(valfix))
         elif related_model == "<class 'collector.models.fics_models.CastRole'>":
           valfix = CastRole.objects.filter(pk=val).first()
           #print("Foreign key is an Act")

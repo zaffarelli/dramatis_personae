@@ -1,19 +1,17 @@
-
-
-
-  <em>{{ c.full_name }}</em> {%if c.player != '' %}({{c.player|safe}}){% endif %} 
-      {% if c.ready_for_export %}
-      <i class="fas fa-share golden"></i> 
-    {% endif %}<br/>
+<div class='avatar_link {% if c.is_locked %}locked{%endif%}'>
+<em>{{ c.full_name }}</em> {%if c.player != '' %}({{c.player|safe}}){% endif %} 
+{% if c.ready_for_export %}&nbsp;<a href='pdf/{{c.rid}}/' target='avatar_pdf'><i class="fas fa-file-pdf golden"></i></a>{% endif %}<br/>
   <div class="character_actions">
     <span class="view_character" id="{{c.id}}"><i class="fas fa-user"></i></span>&nbsp;&nbsp;
     <span class="edit_character" id="{{c.id}}"><i class="fas fa-user-tag"></i></span>&nbsp;&nbsp;
     <span class="recalc_character" id="{{c.id}}"><i class="fas fa-cog"></i></span>&nbsp;&nbsp;
-    <span class="recalc_character" id="{{c.id}}"><i class="fas fa-hand-paper"></i></span>&nbsp;&nbsp;
-    <span class="recalc_character" id="{{c.id}}"><i class="fas fa-gavel"></i></span>&nbsp;&nbsp;
+    {% if not c.is_locked %}
+    <span class="recalc_pa_character" id="{{c.id}}"><i class="fas fa-hand-paper"></i></span>&nbsp;&nbsp;
+    <span class="recalc_skills_character" id="{{c.id}}"><i class="fas fa-gavel"></i></span>&nbsp;&nbsp;
+    {% endif %}
     {{c.stars|safe}}
   </div>
   <br/>{{ c.challenge|safe }}
   <br/>{{ c.alliance|safe }} ({%if c.keyword != '' %}<span class='golden custom_glance' id='{{c.keyword}}'>{{c.keyword|safe}}</span>{%endif%})
-  <br/>ID:<span class='golden custom_show' id='{{c.id}}'>{{c.id}}</span> <a href='pdf/{{c.rid}}/' class='golden' target='avatar_pdf'><i class="fas fa-file-pdf"></i> {{c.rid}}</a>
-
+  <br/>ID:<span class='golden custom_show' id='{{c.id}}'>{{c.id}}</span> {% if c.is_locked %}<i class="fas fa-lock golden"></i>{% endif %}
+</div>

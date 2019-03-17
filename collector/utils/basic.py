@@ -70,10 +70,11 @@ def make_avatar_appendix(conf):
   d = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
   res = []
   mypath = os.path.join(settings.MEDIA_ROOT, 'pdf/')
+  mystaticpath = os.path.join(settings.STATIC_ROOT, 'pdf/')
   onlyfiles = [f for f in os.listdir(mypath) if os.path.isfile(os.path.join(mypath, f))]
   pdfs = onlyfiles
   merger = PdfFileMerger()
-  merger.append(open('%sresources/__aa_header.pdf'%(mypath), 'rb'))
+  merger.append(open('%sresources/__aa_header.pdf'%(mystaticpath), 'rb'))
   pdfs.sort()
   ep = conf.epic
   cast = ep.get_full_cast()  
@@ -96,8 +97,9 @@ def make_avatar_appendix(conf):
 def make_epic_corpus(conf):
   res = []
   mypath = os.path.join(settings.MEDIA_ROOT, 'pdf/')
+  mystaticpath = os.path.join(settings.STATIC_ROOT, 'pdf/')
   merger = PdfFileMerger()
-  merger.append(open('%sresources/__es_header.pdf'%(mypath), 'rb'))
+  merger.append(open('%sresources/__es_header.pdf'%(mystaticpath), 'rb'))
   template = get_template('collector/conf_pdf.html')
   context = {'epic':conf.parse_details()}
   html = template.render(context)

@@ -41,10 +41,11 @@ def recalc(request):
   character_items = Character.objects.filter(epic=conf.epic).order_by('-player','full_name')
   x = 1
   for c in character_items:
-    print('\n>>> %d'%(x))
+    #print('\n>>> %d'%(x))
     c.pagenum = x     
     c.save()
     x += 1
+  #answer = 'Done'
   return redirect('/')
 
 def export(request):

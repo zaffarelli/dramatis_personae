@@ -9,34 +9,23 @@
 
 @font-face {
   font-family: 'Titre';  
-  src: url('collector/static/collector/Prompt-Regular.ttf');
+  src: url('collector/static/collector/Eczar-ExtraBold.ttf');
 }
-
-
-@font-face {
-  font-family: 'FiraTitle';  
-  src: url('collector/static/collector/FiraSansCondensed-Black.ttf');
-}
-
-@font-face {
-  font-family: 'FiraTitleold';    
-  src: url('collector/static/collector/Prompt-Regular.ttf');
-}
-
-.spare{
-  src: url('FiraSansCondensed-Black.ttf');
-}
-
-
 
 @font-face {
   font-family: 'Texte';  
-  src: url('collector/static/collector/Signika-Regular.ttf');
+  src: url('collector/static/collector/WorkSans-Regular.ttf');
 }
+
+@font-face {
+  font-family: 'Emphase';  
+  src: url('collector/static/collector/Eczar-Regular.ttf');
+}
+
   
 body{
   font-family: 'Texte';
-  font-size: 9pt;
+  font-size: 8pt;
 }
 
 @page {
@@ -60,7 +49,7 @@ body{
 }
 
 h1{
-  font-family:'FiraTitle';
+  font-family:'Titre';
   font-size:24pt;
   font-weight:600;
   margin:0;
@@ -68,7 +57,7 @@ h1{
 }
 
 h2{
-  font-family:'FiraTitle';
+  font-family:'Titre';
   font-size:18pt;
   margin-top:5px;  
   padding:0;
@@ -79,24 +68,14 @@ h2{
 }
 
 h3{
+  font-family:'Titre';
   font-size:16pt;
-  border-bottom:2px dashed #808080;
   margin-top:0.5em;
+  margin-top:0.25em;
 }
 
-
-h6{
-  font-size:10pt;
-}
-
-h2,h3,h4,h5,h6{
-  font-family:'FiraTitle';
-  margin:0;
-  padding:0;
-  margin-bottom:0.5em;
-}
-
-h4{  
+h4{
+  font-family:'Titre';
   font-size:14pt;
   margin:0;
   margin-top:1em;
@@ -104,13 +83,20 @@ h4{
 }
 
 h5{
+  font-family:'Titre';
   font-size:12pt;
-   margin-top:1em;
+  margin-top:1em;
   margin-bottom:0;
   -pdf-keep-with-next: true;
 }
 
-
+h6{
+  font-family:'Titre';
+  font-size:10pt;
+  margin:0;
+  padding:0;
+  -pdf-keep-with-next: true;
+}
 
 .stats {
   padding:0;
@@ -148,8 +134,8 @@ p{
 }
 
 i{
-  color:#808080;
-  font-weight:bold;
+  color#803080;
+  font-family:Emphase;
 }
 
 em{
@@ -177,14 +163,12 @@ em{
 
 .embedded_link{
   text-decoration:underscore;
-  color:#202020;
+  color:#802080;
+  font-family:Emphase;
 }
 
 .attr{
-  color:#303030;
-  width:2cm;
-  border:1px solid black;
-  
+  color:#803080; 
 }
 
 .highskill{

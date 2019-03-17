@@ -129,7 +129,11 @@
         <label for="">Dead</label>
         {{form.is_dead}}
       </div>            
-
+      <div class="field_wrapper">
+        {{ form.is_locked.errors}}
+        <label for="">Locked</label>
+        {{form.is_locked}}
+      </div>            
       </td>
       </tr>
     </table>

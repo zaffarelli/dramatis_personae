@@ -203,7 +203,7 @@ function rebootlinks(){
 
   $(window).scroll(function(){
     var sticky = $('.menu'), scroll = $(window).scrollTop(), wrap = $('.wrapper');
-    if (scroll >= 85){
+    if (scroll >= 105){
       sticky.addClass('fixed');
       wrap.addClass('stickyoffset');
     }else{
@@ -237,7 +237,7 @@ function rebootlinks(){
       success: function(answer) {
           $('.details').html(answer.character);          
           $('li#'+answer.rid).html(answer.line);
-          $('li').removeClass('selected');
+          $('li').find('div.avatar_link').removeClass('selected');
           rebootlinks();
       },
       error: function(answer) {
@@ -332,17 +332,17 @@ function rebootlinks(){
 
   $('.recalc_character').off();
   $('.recalc_character').on('click',function(event){
-    console.log('Recalc: '+$(this).attr('id'));
     event.preventDefault();
     event.stopPropagation();
-    var dad = $(this).parents('li');
-    $('li').removeClass('selected');
+    var dad = $(this).parents('li').find('div.avatar_link');
+    $('li').find('div.avatar_link').removeClass('selected');
     $(dad).addClass('selected');
     $.ajax({      
       url: 'ajax/recalc/character/'+$(this).attr('id')+'/',
       success: function(answer) {
-        $('.details').html(answer)
-        $('li').removeClass('selected');
+        $('.details').html(answer.character);
+        $('li#'+answer.rid).html(answer.link);
+        $('li').find('div.avatar_link').removeClass('selected');
         rebootlinks();
       },
       error: function(answer){
@@ -353,17 +353,17 @@ function rebootlinks(){
 
   $('.recalc_pa_character').off();
   $('.recalc_pa_character').on('click',function(event){
-    //console.log('Recalc: '+$(this).attr('id'));
     event.preventDefault();
     event.stopPropagation();
-    var dad = $(this).parents('li');
-    $('li').removeClass('selected');
+    var dad = $(this).parents('li').find('div.avatar_link');
+    $('li').find('div.avatar_link').removeClass('selected');
     $(dad).addClass('selected');
     $.ajax({      
       url: 'ajax/recalc_pa/character/'+$(this).attr('id')+'/',
       success: function(answer) {
-        $('.details').html(answer)
-        $('li').removeClass('selected');
+        $('.details').html(answer.character);
+        $('li#'+answer.rid).html(answer.link);
+        $('li').find('div.avatar_link').removeClass('selected');
         rebootlinks();
       },
       error: function(answer){
@@ -374,17 +374,17 @@ function rebootlinks(){
 
   $('.recalc_skills_character').off();
   $('.recalc_skills_character').on('click',function(event){
-    //console.log('Recalc: '+$(this).attr('id'));
     event.preventDefault();
     event.stopPropagation();
-    var dad = $(this).parents('li');
-    $('li').removeClass('selected');
+    var dad = $(this).parents('li').find('div.avatar_link');
+    $('li').find('div.avatar_link').removeClass('selected');
     $(dad).addClass('selected');
     $.ajax({      
       url: 'ajax/recalc_skills/character/'+$(this).attr('id')+'/',
       success: function(answer) {
-        $('.details').html(answer)
-        $('li').removeClass('selected');
+        $('.details').html(answer.character);
+        $('li#'+answer.rid).html(answer.link);
+        $('li').find('div.avatar_link').removeClass('selected');
         rebootlinks();
       },
       error: function(answer){
@@ -471,8 +471,8 @@ function rebootlinks(){
   $('.edit_character').on('click',function(event){
     event.preventDefault();
     event.stopPropagation();
-    var dad = $(this).parents('li');
-    $('li').removeClass('selected');
+    var dad = $(this).parents('li').find('div.avatar_link');
+    $('li').find('div.avatar_link').removeClass('selected');
     $(dad).addClass('selected');
     $('body').toggleClass('waiting');
     $.ajax({

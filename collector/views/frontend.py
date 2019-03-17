@@ -40,7 +40,7 @@ def get_list(request,id,slug='none'):
   conf = get_current_config()
   if request.is_ajax:
     if slug=='none':
-      character_items = Character.objects.filter(epic=conf.epic).order_by('full_name')
+      character_items = Character.objects.filter(epic=conf.epic).order_by('is_locked','full_name')
     elif slug.startswith('c-'):
       ep_class = slug.split('-')[1].capitalize()
       ep_id = slug.split('-')[2]
@@ -80,34 +80,56 @@ def get_storyline(request,slug='none'):
 def recalc_character(request, id=None):
   if request.is_ajax():
     item = get_object_or_404(Character,pk=id)
-    item.save()    
+    item.save()
+    crid = item.rid
     template = get_template('collector/character.html')
-    html = template.render({'c':item})
-    return HttpResponse(html, content_type='text/html')
+    character = template.render({'c':item})
+    templatelink = get_template('collector/character_link.html')
+    link = templatelink.render({'c':item},request)
+    context = {
+      'rid': crid,
+      'character': character,
+      'link': link,
+    }    
+    return JsonResponse(context)
   else:
     raise Http404
 
 def recalc_pa_character(request, id=None):
   if request.is_ajax():
-    conf = get_current_config()    
     item = get_object_or_404(Character,pk=id)
-    item.setattr(onsave_reroll_attributes,True)
-    item.save()    
+    item.onsave_reroll_attributes = True
+    item.save()
+    crid = item.rid
     template = get_template('collector/character.html')
-    html = template.render({'c':item})
-    return HttpResponse(html, content_type='text/html')
+    character = template.render({'c':item})
+    templatelink = get_template('collector/character_link.html')
+    link = templatelink.render({'c':item},request)
+    context = {
+      'rid': crid,
+      'character': character,
+      'link': link,
+    }    
+    return JsonResponse(context)
   else:
     raise Http404
-
+    
 def recalc_skills_character(request, id=None):
   if request.is_ajax():
-    conf = get_current_config()
     item = get_object_or_404(Character,pk=id)
     item.onsave_reroll_skills = True
-    item.save()    
+    item.save()
+    crid = item.rid
     template = get_template('collector/character.html')
-    html = template.render({'c':item})
-    return HttpResponse(html, content_type='text/html')
+    character = template.render({'c':item})
+    templatelink = get_template('collector/character_link.html')
+    link = templatelink.render({'c':item},request)
+    context = {
+      'rid': crid,
+      'character': character,
+      'link': link,
+    }    
+    return JsonResponse(context)
   else:
     raise Http404
 
@@ -130,7 +152,6 @@ def view_by_rid(request, slug=None):
     return HttpResponse(html, content_type='text/html')
   else:
     raise Http404
-    return "ejvkejvrjvelveklvelvelvl"
 
 def extract_formset(rqp,s):
   """ Get only the fields matching to this formset """
