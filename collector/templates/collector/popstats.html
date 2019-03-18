@@ -1,0 +1,45 @@
+
+
+<script>
+var popdata = {{chart_data|safe}}
+var ctx = document.getElementById('myChart').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: popdata,
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        },
+        cutoutPercentage: 75,
+    }
+});
+var popdata2 = {{chart_data2|safe}}
+var ctx = document.getElementById('myChart2').getContext('2d');
+var myChart2 = new Chart(ctx, {
+    type: 'polarArea',
+    data: popdata2,
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        },
+        cutoutPercentage: 75,
+    }
+});
+</script>
+
+
+<div class='chart_panel'>
+<canvas id="myChart" width=300 height=300></canvas>
+</div>
+
+<div class='chart_panel'>
+<canvas id="myChart2" width=600 height=600></canvas>
+</div>

@@ -201,6 +201,21 @@ function rebootlinks(){
     });
   });
 
+
+  $('#popstats').off();
+  $('#popstats').on('click',function(event){
+    event.preventDefault();
+    event.stopPropagation();
+    $.ajax({
+      url: 'api/popstats/',
+      success: function(answer) {
+        //console.log(answer.chart1);
+        $('.details').html(answer.chart1)
+        rebootlinks();
+      },
+    });
+  });
+
   $(window).scroll(function(){
     var sticky = $('.menu'), scroll = $(window).scrollTop(), wrap = $('.wrapper');
     if (scroll >= 105){

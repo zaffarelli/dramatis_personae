@@ -5,7 +5,7 @@
 '''
 from django.db import models
 from django.contrib import admin
-
+import random
 
 class Config(models.Model):
   class Meta:
@@ -52,6 +52,83 @@ class Config(models.Model):
     context['keywords'] = get_keywords()
     #print(context)
     return context
+
+  def get_popstats_races(self):
+    from collector.models.characters import Character
+    all = Character.objects.filter(epic=self.epic)
+    inside_labels = []
+    inside_datasets = []
+    dat = []
+    back = []
+    border = []
+    idx = 255
+    arrfetch = {}
+    for c in all:
+      if arrfetch.get(c.castspecies.species) is None:
+        arrfetch[c.castspecies.species] = 1
+      else:
+        arrfetch[c.castspecies.species] += 1
+        
+    for x in arrfetch:
+      inside_labels.append(x)
+      dat.append(arrfetch[x])
+      col = '#'+''.join([random.choice('0123456789ABCDEF') for j in range(6)])+'80'
+      back.append('%s'%(col))
+      border.append('rgba(127, 127, 127, 0.5)')
+      idx -= 32
+  
+    inside_datasets = [{
+      'label': 'Species',
+      'data': dat,
+      'backgroundColor': back,
+      'borderColor': border,
+      'borderWidth': 1
+    }]
+    
+    data = {
+      'labels': inside_labels,
+      'datasets': inside_datasets
+    }
+    return data
+
+  def get_popstats_alliances(self):
+    from collector.models.characters import Character
+    all = Character.objects.filter(epic=self.epic,alliance__icontains='House')
+    inside_labels = []
+    inside_datasets = []
+    dat = []
+    back = []
+    border = []
+    idx = 255
+    arrfetch = {}
+    for c in all:
+      if arrfetch.get(c.alliance) is None:
+        arrfetch[c.alliance] = 1
+      else:
+        arrfetch[c.alliance] += 1
+        
+    for x in arrfetch:
+      inside_labels.append(x)
+      dat.append(arrfetch[x])
+      #color = list(np.random.choice(range(256), size=3))
+      col = '#'+''.join([random.choice('0123456789ABCDEF') for j in range(6)])+'80'
+      back.append('%s'%(col))
+      border.append('rgba(127, 127, 127, 0.5)')
+      idx -= 16
+  
+    inside_datasets = [{
+      'label': 'Alliances',
+      'data': dat,
+      'backgroundColor': back,
+      'borderColor': border,
+      'borderWidth': 1
+    }]
+    
+    data = {
+      'labels': inside_labels,
+      'datasets': inside_datasets
+    }
+    return data
 
 class ConfigAdmin(admin.ModelAdmin):
   ordering = ['title']

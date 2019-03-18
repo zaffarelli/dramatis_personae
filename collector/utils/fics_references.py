@@ -22,8 +22,8 @@ import hashlib
   TOTAL ...................: 280 OP
 """
 
-MAX_CHAR = 8
-RELEASE = '1.0.0'
+MAX_CHAR = 9
+RELEASE = '1.1.0'
 DEBUG_ALL = False
 
 
