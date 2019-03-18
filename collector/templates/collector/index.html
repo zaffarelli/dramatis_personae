@@ -5,7 +5,7 @@
 
   <li><a class='btn' href="{% url 'export' %}"><i class="fas fa-download"></i>&nbsp;Export to spreadsheet</a></li>
   <li><a class='btn' href="{% url 'xls_update' %}"><i class="fas fa-upload"></i>&nbsp;Update from spreadsheet</a></li>
-  <li><a class='btn' id ='popstats' href="{% url 'get_popstats' %}"><i class="fas fa-chart-pie"></i>&nbsp;Population Statistics</a></li>
+  
     
     <li id='floatingk'><span class='btn' ><i class="fas fa-key"></i>&nbsp;Keywords</span>
       <ul id='keywords'>
@@ -21,7 +21,7 @@
 {% block menu %}
   <div class='shortcuts'>
     <ul>
-      
+  <li><a class='btn' id ='popstats' style='width:auto;' href="{% url 'get_popstats' %}"><i class="fas fa-chart-pie"></i></a></li>    
   <li><input type='text' id='customize' value='' placeholder='Customizer'></input></li>
   <li><span class='btn' id='search' style='width:auto;'><i class="fas fa-search"></i></span></li>
   <li><span class='btn' id='seek' style='width:auto;'><i class="fas fa-address-card"></i></span> </li> 
