@@ -7,6 +7,7 @@ var myChart = new Chart(ctx, {
     type: 'doughnut',
     data: popdata,
     options: {
+        responsive: true,
         scales: {
             yAxes: [{
                 ticks: {
@@ -14,15 +15,22 @@ var myChart = new Chart(ctx, {
                 }
             }]
         },
-        cutoutPercentage: 75,
+        title: {
+					display: true,
+					text: 'Species'
+				},
+        circumference: Math.PI,
+        rotation: -Math.PI,        
+        cutoutPercentage: 40,
     }
 });
 var popdata2 = {{chart_data2|safe}}
 var ctx = document.getElementById('myChart2').getContext('2d');
 var myChart2 = new Chart(ctx, {
-    type: 'polarArea',
+    type: 'doughnut',
     data: popdata2,
     options: {
+        responsive: true,
         scales: {
             yAxes: [{
                 ticks: {
@@ -30,16 +38,22 @@ var myChart2 = new Chart(ctx, {
                 }
             }]
         },
-        cutoutPercentage: 75,
+        title: {
+					display: true,
+					text: 'Houses Alliances'
+				},
+        circumference: Math.PI,
+        rotation: -Math.PI,                
+        cutoutPercentage: 40,
     }
 });
 </script>
 
 
 <div class='chart_panel'>
-<canvas id="myChart" width=300 height=300></canvas>
+<canvas id="myChart" width=550 height=550></canvas>
 </div>
 
 <div class='chart_panel'>
-<canvas id="myChart2" width=600 height=600></canvas>
+<canvas id="myChart2" width=550 height=550></canvas>
 </div>

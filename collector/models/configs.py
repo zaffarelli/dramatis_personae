@@ -72,9 +72,9 @@ class Config(models.Model):
     for x in arrfetch:
       inside_labels.append(x)
       dat.append(arrfetch[x])
-      col = '#'+''.join([random.choice('0123456789ABCDEF') for j in range(6)])+'80'
+      col = '#'+''.join([random.choice('0123456789ABCDEF') for j in range(6)])+'C0'
       back.append('%s'%(col))
-      border.append('rgba(127, 127, 127, 0.5)')
+      border.append('#C0C0C0C0')
       idx -= 32
   
     inside_datasets = [{
@@ -82,7 +82,8 @@ class Config(models.Model):
       'data': dat,
       'backgroundColor': back,
       'borderColor': border,
-      'borderWidth': 1
+      'borderWidth': 1,
+      'fill': False
     }]
     
     data = {
@@ -110,18 +111,18 @@ class Config(models.Model):
     for x in arrfetch:
       inside_labels.append(x)
       dat.append(arrfetch[x])
-      #color = list(np.random.choice(range(256), size=3))
-      col = '#'+''.join([random.choice('0123456789ABCDEF') for j in range(6)])+'80'
+      col = '#'+''.join([random.choice('0123456789ABCDEF') for j in range(6)])+'C0'
       back.append('%s'%(col))
-      border.append('rgba(127, 127, 127, 0.5)')
-      idx -= 16
+      border.append('#C0C0C0C0')
+      idx -= 32
   
     inside_datasets = [{
-      'label': 'Alliances',
+      'label': 'Species',
       'data': dat,
       'backgroundColor': back,
       'borderColor': border,
-      'borderWidth': 1
+      'borderWidth': 1,
+      'fill': False
     }]
     
     data = {
