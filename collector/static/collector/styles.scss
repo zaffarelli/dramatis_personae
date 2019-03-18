@@ -286,9 +286,14 @@ body {
         border-radius:5px 5px 5px 5px;
         padding:10px;
         background-color:$fics_dark;
-        width:auto;        
-        display:inline-block;
-        color:$fics_front;        
+        
+        display:block;
+        width:900px;
+        height:900px;
+        color:$fics_front;
+        & canvas{
+          height:auto;
+        }        
       }
 
       & .classyview{    

@@ -94,36 +94,78 @@ class Config(models.Model):
 
   def get_popstats_alliances(self):
     from collector.models.characters import Character
-    all = Character.objects.filter(epic=self.epic,alliance__icontains='House')
+    all_nobles = Character.objects.filter(epic=self.epic,caste__icontains='Nobility')
+    all_church = Character.objects.filter(epic=self.epic,caste__icontains='Church')
+    all_freefolk = Character.objects.filter(epic=self.epic,caste__icontains='Freefolk')
     inside_labels = []
     inside_datasets = []
-    dat = []
-    back = []
-    border = []
-    idx = 255
-    arrfetch = {}
-    for c in all:
-      if arrfetch.get(c.alliance) is None:
-        arrfetch[c.alliance] = 1
+    dat,dat1,dat2 = [], [], []
+    back, back1, back2 = [], [], []
+    border, border1, border2 = [], [], []
+    nobility = {}
+    church = {}
+    freefolk = {}
+    for c in all_nobles:
+      if nobility.get(c.alliance) is None:
+        nobility[c.alliance] = 1
       else:
-        arrfetch[c.alliance] += 1
+        nobility[c.alliance] += 1
+
+    for c in all_church:
+      if church.get(c.alliance) is None:
+        church[c.alliance] = 1
+      else:
+        church[c.alliance] += 1
+
+    for c in all_freefolk:
+      if freefolk.get(c.alliance) is None:
+        freefolk[c.alliance] = 1
+      else:
+        freefolk[c.alliance] += 1
         
-    for x in arrfetch:
+    for x in nobility:
       inside_labels.append(x)
-      dat.append(arrfetch[x])
+      dat.append(nobility[x])
       col = '#'+''.join([random.choice('0123456789ABCDEF') for j in range(6)])+'C0'
       back.append('%s'%(col))
       border.append('#C0C0C0C0')
-      idx -= 32
+
+    for x in church:
+      inside_labels.append(x)
+      dat1.append(church[x])
+      col = '#'+''.join([random.choice('0123456789ABCDEF') for j in range(6)])+'C0'
+      back1.append('%s'%(col))
+      border1.append('#C0C0C0C0')
+
+    for x in freefolk:
+      inside_labels.append(x)
+      dat2.append(freefolk[x])
+      col = '#'+''.join([random.choice('0123456789ABCDEF') for j in range(6)])+'C0'
+      back2.append('%s'%(col))
+      border2.append('#C0C0C0C0')
+
   
-    inside_datasets = [{
-      'label': 'Species',
+    inside_datasets.append({
       'data': dat,
       'backgroundColor': back,
       'borderColor': border,
       'borderWidth': 1,
       'fill': False
-    }]
+    })
+    inside_datasets.append({
+      'data': dat1,
+      'backgroundColor': back1,
+      'borderColor': border1,
+      'borderWidth': 1,
+      'fill': False
+    })
+    inside_datasets.append({
+      'data': dat2,
+      'backgroundColor': back2,
+      'borderColor': border2,
+      'borderWidth': 1,
+      'fill': False
+    })
     
     data = {
       'labels': inside_labels,

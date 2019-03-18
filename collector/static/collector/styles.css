@@ -196,9 +196,12 @@ body {
         border-radius: 5px 5px 5px 5px;
         padding: 10px;
         background-color: #1d1d1d;
-        width: auto;
-        display: inline-block;
+        display: block;
+        width: 900px;
+        height: 900px;
         color: #E5DECA; }
+        body .wrapper .details .chart_panel canvas {
+          height: auto; }
       body .wrapper .details .classyview {
         border: 1px solid #040404;
         box-shadow: 2px 2px 8px #040404;
