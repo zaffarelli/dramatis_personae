@@ -36,8 +36,9 @@ $fics_lock: darken($fics_golden,50%);
 
 .fixed {
   position: fixed;
-  top:0; left:0;
-  width: 100%;
+  top:0;
+  left:0;
+  width: 99%;
 }
 
 .stickyoffset{}
@@ -53,7 +54,7 @@ body {
   background: $fics_darkest url("13.jpg") fixed 50% 50%;
 
   & .logo {
-    background: $fics_dark url("FICS_Logo_reverse.png") 5% center no-repeat;
+    background: $fics_dark url("simple_logo.png") 5% center no-repeat;
     //background: url("details.png");
   }
   & .menu {    
@@ -69,15 +70,14 @@ body {
       display:block;
       margin:0;
       padding:0;
-      margin-left:280px;
-      width:500px;
-      height:auto;
+      margin-left:20%;
+      width:80%;
       margin-top:5px;      
       & ul{
         margin:0;
         padding:0;
         display:block;
-        height:40px;
+        height:50px;
         overflow:show;
         list-style-type:none;
         & li{
@@ -665,7 +665,8 @@ body {
   body{
     margin:0;
     padding:0;
-    overflow-x:hide;
+    overflow-x:hidden;
+    overflow-y:scroll;
     background-color: $fics_dark;
     & .logo{
       height:105px;
@@ -682,7 +683,7 @@ body {
     & .wrapper{
       z-index:5;
       margin-left:0;
-      width: 100%;
+      width: 99%;
       min-height:1000px;
       display:grid;      
       grid-template-columns: 0.5% 250px 1fr 200px 0.5%;
@@ -707,7 +708,7 @@ body {
 /* Small */
 @media all and (max-width: 1024px){
   body{    
-    background: $fics_dark url("FICS_Logo_reverse.png") center 50px no-repeat;
+    background: $fics_dark url("simple_logo.png") center 50px no-repeat;
     & .logo{
       display:none;
     }
