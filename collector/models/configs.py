@@ -53,6 +53,17 @@ class Config(models.Model):
     #print(context)
     return context
 
+  def prepare_color_set(size=16):
+    colorset = []
+    idx = 0
+    vmin, vmax = 0X33, 0xCC           
+    start = [vmax,vmin,vmax]
+    while x < size:
+      angle = 2*Math.pi / size
+      col = '#'+''.join([random.choice('0123456789ABCDEF') for j in range(6)])+'C0'
+      colorset.append(col)
+    return colorset
+
   def get_popstats_races(self):
     from collector.models.characters import Character
     all = Character.objects.filter(epic=self.epic)

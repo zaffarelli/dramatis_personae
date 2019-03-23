@@ -54,7 +54,7 @@ body {
   background: $fics_darkest url("13.jpg") fixed 50% 50%;
 
   & .logo {
-    background: $fics_dark url("simple_logo.png") 5% center no-repeat;
+    background: transparent url("simple_logo_invert.png") center center no-repeat;
     //background: url("details.png");
   }
   & .menu {    
@@ -287,12 +287,11 @@ body {
         padding:10px;
         background-color:$fics_dark;
         
-        display:block;
-        width:900px;
-        height:900px;
+        display:inline-block;
         color:$fics_front;
         & canvas{
-          height:auto;
+          width:500px;
+          height:auto; 
         }        
       }
 

@@ -27,7 +27,7 @@ body {
   font-family: Texte;
   background: black url("13.jpg") fixed 50% 50%; }
   body .logo {
-    background: #1d1d1d url("simple_logo.png") 5% center no-repeat; }
+    background: transparent url("simple_logo_invert.png") center center no-repeat; }
   body .menu {
     overflow: show;
     color: #E5DECA;
@@ -195,11 +195,10 @@ body {
         border-radius: 5px 5px 5px 5px;
         padding: 10px;
         background-color: #1d1d1d;
-        display: block;
-        width: 900px;
-        height: 900px;
+        display: inline-block;
         color: #E5DECA; }
         body .wrapper .details .chart_panel canvas {
+          width: 500px;
           height: auto; }
       body .wrapper .details .classyview {
         border: 1px solid #040404;

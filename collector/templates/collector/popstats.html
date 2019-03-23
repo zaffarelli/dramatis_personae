@@ -7,7 +7,7 @@ var myChart = new Chart(ctx, {
     type: 'doughnut',
     data: popdata,
     options: {
-        responsive: true,
+
         scales: {
             yAxes: [{
                 ticks: {
@@ -19,9 +19,12 @@ var myChart = new Chart(ctx, {
 					display: true,
 					text: 'Species'
 				},
+        legend: {
+          display: false,
+        },        
         circumference: Math.PI,
         rotation: -Math.PI,        
-        cutoutPercentage: 40,
+        cutoutPercentage: 8 0,
     }
 });
 var popdata2 = {{chart_data2|safe}}
@@ -30,7 +33,6 @@ var myChart2 = new Chart(ctx, {
     type: 'doughnut',
     data: popdata2,
     options: {
-        responsive: true,
         scales: {
             yAxes: [{
                 ticks: {
@@ -40,8 +42,11 @@ var myChart2 = new Chart(ctx, {
         },
         title: {
 					display: true,
-					text: 'Alliances'
+					text: 'Alliances N/C/F'
 				},
+        legend: {
+          display: false,
+        },
         circumference: Math.PI,
         rotation: -Math.PI,                
         cutoutPercentage: 40,
@@ -51,7 +56,7 @@ var myChart2 = new Chart(ctx, {
 
 
 <div class='chart_panel'>
-<canvas id="myChart" width=auto height=auto></canvas>
+<canvas id="myChart"></canvas>
 </div>
 
 <div class='chart_panel'>
