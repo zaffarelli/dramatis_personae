@@ -6,6 +6,7 @@
 from django.db import models
 from django.contrib import admin
 import random
+import math
 
 class Config(models.Model):
   class Meta:
@@ -53,136 +54,128 @@ class Config(models.Model):
     #print(context)
     return context
 
-  def prepare_color_set(size=16):
+  def prepare_colorset(self, size = 16):    
     colorset = []
+    hcolorset = []
     idx = 0
-    vmin, vmax = 0X33, 0xCC           
-    start = [vmax,vmin,vmax]
-    while x < size:
-      angle = 2*Math.pi / size
-      col = '#'+''.join([random.choice('0123456789ABCDEF') for j in range(6)])+'C0'
-      colorset.append(col)
-    return colorset
+    circ = 360.0
+    vmin, vmax = 0X33, 0xcc
+    colval = [vmin,vmin,vmin]
+    angle_inc = (circ*math.pi * 2) / size
+    #print('Full circle=%0.4f'%(math.pi * 2))
+    angle_step = (circ*math.pi * 2) / 8
+    #compo_range = (vmax-vmin)/angle_step
+    target_component = [
+      [2,+1],    # 0 0 0   0
+      [1,+1],    # 0 0 1   1
+      [2,-1],    # 0 1 1   3
+      [0,+1],    # 0 1 0   2
+      [2,+1],    # 1 1 0   6
+      [1,-1],    # 1 1 1   7
+      [2,-1],    # 1 0 1   5
+      [0,-1]     # 1 0 0   4
+    ]
+    comp = 0
+    while idx < size:
+      angle = angle_inc * (idx % size)
+      angle_steps_covered = int(angle / angle_step)
+      inc = (vmax-vmin)*6/size #(angle - int(angle_steps_covered)*angle_step)/angle_step * (vmax-vmin)
 
-  def get_popstats_races(self):
+      cv = target_component[comp][0]
+      if target_component[comp][1] > 0:
+        colval[cv] +=  int(inc)
+        if colval[cv]+inc>vmax:
+          comp += 1 
+      else:
+        colval[cv] -=  int(inc)
+        if colval[cv]-inc<vmin:
+          comp += 1
+      comp %= 8
+      col = '#%02X%02X%02X80'%(colval[0]%0xff,colval[1]%0xff,colval[2]%0xff)
+      hcol = '#%02X%02X%02XF0'%(colval[0]%0xff,colval[1]%0xff,colval[2]%0xff)
+      #col = '#%02X80%02X80'%(int((idx/size)*256),int((idx/size)*256))
+      colorset.append(col)
+      hcolorset.append(hcol)
+      #print('%16s (comp:%0.4f inc:%0.4f ASC:%0.4f )'%(col,comp,inc, angle_steps_covered ))
+      #print('%16s'%(col))
+      idx += 1
+    #print('done')
+    return colorset, hcolorset
+
+  def get_chart(self,o,sp,p,ty='bar'):
     from collector.models.characters import Character
-    all = Character.objects.filter(epic=self.epic)
+    all = Character.objects.filter(epic=self.epic,visible=True).order_by(o)
     inside_labels = []
     inside_datasets = []
     dat = []
     back = []
     border = []
-    idx = 255
+    #idx = 255
     arrfetch = {}
+    search_pattern = sp
     for c in all:
-      if arrfetch.get(c.castspecies.species) is None:
-        arrfetch[c.castspecies.species] = 1
+      if p == 'castprofile.reference':
+        par = c.castprofile.reference
+      elif p == 'castrole.reference':
+        par = c.castrole.reference
+      elif p == 'castspecies.species':
+        par = c.castspecies.species
       else:
-        arrfetch[c.castspecies.species] += 1
+        par = c.__dict__[p]
+      
+      if arrfetch.get(par) is None:
+        arrfetch[par] = 1
+      else:
+        arrfetch[par] += 1
         
     for x in arrfetch:
       inside_labels.append(x)
       dat.append(arrfetch[x])
-      col = '#'+''.join([random.choice('0123456789ABCDEF') for j in range(6)])+'C0'
-      back.append('%s'%(col))
       border.append('#C0C0C0C0')
-      idx -= 32
-  
+      #idx -= 32
+
+    
+    colors, hoverColors = self.prepare_colorset(len(border))
     inside_datasets = [{
-      'label': 'Species',
+      #'label': 'Species',
       'data': dat,
-      'backgroundColor': back,
+      'backgroundColor': colors ,
+      'hoverBackgroundColor': hoverColors,
       'borderColor': border,
+      'hoverBorderColor': colors,
       'borderWidth': 1,
-      'fill': False
     }]
     
     data = {
       'labels': inside_labels,
       'datasets': inside_datasets
     }
-    return data
 
-  def get_popstats_alliances(self):
-    from collector.models.characters import Character
-    all_nobles = Character.objects.filter(epic=self.epic,caste__icontains='Nobility')
-    all_church = Character.objects.filter(epic=self.epic,caste__icontains='Church')
-    all_freefolk = Character.objects.filter(epic=self.epic,caste__icontains='Freefolk')
-    inside_labels = []
-    inside_datasets = []
-    dat,dat1,dat2 = [], [], []
-    back, back1, back2 = [], [], []
-    border, border1, border2 = [], [], []
-    nobility = {}
-    church = {}
-    freefolk = {}
-    for c in all_nobles:
-      if nobility.get(c.alliance) is None:
-        nobility[c.alliance] = 1
-      else:
-        nobility[c.alliance] += 1
-
-    for c in all_church:
-      if church.get(c.alliance) is None:
-        church[c.alliance] = 1
-      else:
-        church[c.alliance] += 1
-
-    for c in all_freefolk:
-      if freefolk.get(c.alliance) is None:
-        freefolk[c.alliance] = 1
-      else:
-        freefolk[c.alliance] += 1
-        
-    for x in nobility:
-      inside_labels.append(x)
-      dat.append(nobility[x])
-      col = '#'+''.join([random.choice('0123456789ABCDEF') for j in range(6)])+'C0'
-      back.append('%s'%(col))
-      border.append('#C0C0C0C0')
-
-    for x in church:
-      inside_labels.append(x)
-      dat1.append(church[x])
-      col = '#'+''.join([random.choice('0123456789ABCDEF') for j in range(6)])+'C0'
-      back1.append('%s'%(col))
-      border1.append('#C0C0C0C0')
-
-    for x in freefolk:
-      inside_labels.append(x)
-      dat2.append(freefolk[x])
-      col = '#'+''.join([random.choice('0123456789ABCDEF') for j in range(6)])+'C0'
-      back2.append('%s'%(col))
-      border2.append('#C0C0C0C0')
-
-  
-    inside_datasets.append({
-      'data': dat,
-      'backgroundColor': back,
-      'borderColor': border,
-      'borderWidth': 1,
-      'fill': False
-    })
-    inside_datasets.append({
-      'data': dat1,
-      'backgroundColor': back1,
-      'borderColor': border1,
-      'borderWidth': 1,
-      'fill': False
-    })
-    inside_datasets.append({
-      'data': dat2,
-      'backgroundColor': back2,
-      'borderColor': border2,
-      'borderWidth': 1,
-      'fill': False
-    })
-    
-    data = {
-      'labels': inside_labels,
-      'datasets': inside_datasets
+    full_data = {'name':sp,'data':{
+      'type': ty,
+      'data': data,
+      'options': {
+        'title': {
+          'display': True,
+          'text': search_pattern,
+          'fontColor':'#fff',
+        },
+        'legend': {
+          'display': False,
+          'position':'right',
+          'labels':{
+            'fontColor':'#fff',
+          }
+        },        
+        'circumference': math.pi,
+        'rotation': -math.pi,
+        'cutoutPercentage': 40,
+      }
     }
-    return data
+    }
+    return full_data
+
+
 
 class ConfigAdmin(admin.ModelAdmin):
   ordering = ['title']

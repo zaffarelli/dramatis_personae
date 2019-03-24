@@ -1,64 +1,11 @@
 
-
 <script>
-var popdata = {{chart_data|safe}}
-var ctx = document.getElementById('myChart').getContext('2d');
-var myChart = new Chart(ctx, {
-    type: 'doughnut',
-    data: popdata,
-    options: {
-
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
-        },
-        title: {
-					display: true,
-					text: 'Species'
-				},
-        legend: {
-          display: false,
-        },        
-        circumference: Math.PI,
-        rotation: -Math.PI,        
-        cutoutPercentage: 8 0,
-    }
-});
-var popdata2 = {{chart_data2|safe}}
-var ctx = document.getElementById('myChart2').getContext('2d');
-var myChart2 = new Chart(ctx, {
-    type: 'doughnut',
-    data: popdata2,
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
-        },
-        title: {
-					display: true,
-					text: 'Alliances N/C/F'
-				},
-        legend: {
-          display: false,
-        },
-        circumference: Math.PI,
-        rotation: -Math.PI,                
-        cutoutPercentage: 40,
-    }
-});
+var popdata = {{cdata|safe}}
+var ctx = document.getElementById('{{cname}}').getContext('2d');
+var myChart = new Chart(ctx, popdata);
 </script>
 
-
 <div class='chart_panel'>
-<canvas id="myChart"></canvas>
+<canvas id="{{cname}}"></canvas>
 </div>
 
-<div class='chart_panel'>
-<canvas id="myChart2"></canvas>
-</div>

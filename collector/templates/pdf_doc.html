@@ -46,7 +46,20 @@ body{
     padding:0.125cm;
     border-bottom:1px solid #202020;
   }
+
+  @frame header_frame { 
+    -pdf-frame-content: header_content;
+    
+    right: 0.5cm;
+    width: 0.5cm;
+    top: 0.5cm;
+    height: 1cm;
+    text-align:right;
+  }
+  
 }
+
+
 
 h1{
   font-family:'Titre';
@@ -143,6 +156,13 @@ em{
   color:#808080;
 }
 
+strong{
+  font-family:'Titre';
+  color:#806080;
+}
+
+
+
 .spacer{
   font-size:2px;
   border-top: 1px solid #C0C0C0;
@@ -194,9 +214,12 @@ em{
     text-align:center;
 }
 
+
+
+
   </style>
   </head>
-  <body>
+  <body>    
     {% block article %}
     {% endblock article %}
   </body>

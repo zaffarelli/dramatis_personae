@@ -3,7 +3,6 @@
 <h1>{{ c.full_name }}</h1>
 {{ c.entrance|safe }}</br>
 {{ c.epic|safe }}
-{{ c.visible }} {{ c.is_dead }} 
 <table class="coreblock" id="base">
 <tr><th>Alliance</th><td>{{ c.alliance|safe }}</td><th>Birthdate</th><td>{{ c.birthdate }} ({{ c.age }} years old)</td></tr>
 <tr><th>Species/Race</th><td>{{ c.castspecies }}</td><th>Gender</th><td>{% if c.gender == "male" %}<i class="fas fa-mars"></i>{% else %}<i class="fas fa-venus"></i>{%endif%}</td></tr>
@@ -12,6 +11,7 @@
 <tr><th>Rank</th><td>{{ c.rank }}</td><th>Player</th><td>{{ c.player }}</td></tr>
 <tr><th>Role</th><td>{{ c.castrole }}</td><th>Keyword</th><td>{{ c.keyword }}</td></tr>
 <tr><th>Profile</th><td>{{ c.castprofile }}</td><th>ID</th><td>{{c.id}}</td></tr>
+<tr><th>Dead</th><td>{{ c.is_dead }}</td><th>Visible</th><td>{{c.visible}}</td></tr>
 </table>
 
 <div class='narrative'>

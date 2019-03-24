@@ -44,7 +44,7 @@ class WeaponRef(models.Model):
     res.append('RNG:'+str(self.rng))    
     res.append(str(self.rel))
     res.append('£'+str(self.cost))
-    self.stats = ' ⦁ '.join(res) # ⦁⏺
+    self.stats = ' . '.join(res) # ⦁⏺
     self.save()
     return self.stats
 

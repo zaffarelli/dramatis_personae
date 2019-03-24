@@ -210,7 +210,10 @@ function rebootlinks(){
       url: 'api/popstats/',
       success: function(answer) {
         //console.log(answer.chart1);
-        $('.details').html(answer.chart1)
+        $('.details').html('')
+        answer.charts.forEach(function(elem){
+          $('.details').append(elem);
+        });
         rebootlinks();
       },
     });

@@ -17,13 +17,42 @@ def get_chardar(request, pk):
 
 def get_population_statistics(request, *args, **kwargs):
   conf = get_current_config()
-  data = conf.get_popstats_races()
-  data2 = conf.get_popstats_alliances()
-  da = json.dumps(data)
-  da2 = json.dumps(data2)
+  da = []
+
+  ch = conf.get_chart('castprofile__reference','Profiles','castprofile.reference')
+  da.append(json.dumps(ch['data']))
+
+  ch = conf.get_chart('castrole__reference','Roles','castrole.reference')  
+  da.append(json.dumps(ch['data']))
+
+  ch = conf.get_chart('castspecies__species','Species','castspecies.species')  
+  da.append(json.dumps(ch['data']))
+
+  ch = conf.get_chart('keyword','Keywords','keyword')  
+  da.append(json.dumps(ch['data']))
+
+  ch = conf.get_chart('caste','Caste','caste','doughnut')  
+  da.append(json.dumps(ch['data']))
+
+  ch = conf.get_chart('gender','Gender','gender','pie')  
+  da.append(json.dumps(ch['data']))
+
+  ch = conf.get_chart('native_fief','Native Fief','native_fief','bar')  
+  da.append(json.dumps(ch['data']))
+
+  ch = conf.get_chart('OP','Option Points','OP')  
+  da.append(json.dumps(ch['data']))
+
+  ch = conf.get_chart('is_locked','Locked Avatars','is_locked')  
+  da.append(json.dumps(ch['data']))
+  
+  charts = []
   template = get_template('collector/popstats.html')
-  chart1 = template.render({'chart_data':da, 'chart_data2':da2})
+  idx = 0
+  for x in da:
+    charts.append(template.render({'cname':'chart_%d'%(idx),'cdata':x}))
+    idx += 1
   context = {
-    'chart1': chart1,
+    'charts': charts,
   }
   return JsonResponse(context)

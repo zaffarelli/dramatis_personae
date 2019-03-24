@@ -198,7 +198,7 @@ body {
         display: inline-block;
         color: #E5DECA; }
         body .wrapper .details .chart_panel canvas {
-          width: 500px;
+          width: 600px;
           height: auto; }
       body .wrapper .details .classyview {
         border: 1px solid #040404;
