@@ -122,11 +122,15 @@ class Config(models.Model):
         par = c.castspecies.species
       else:
         par = c.__dict__[p]
-      
-      if arrfetch.get(par) is None:
-        arrfetch[par] = 1
+
+      if p == 'native_fief' and len(par.split(' / ')) > 1:
+        value = par.split(' / ')[0]        
       else:
-        arrfetch[par] += 1
+        value = par
+      if arrfetch.get(value) is None:        
+        arrfetch[value] = 1
+      else:
+        arrfetch[value] += 1
         
     for x in arrfetch:
       inside_labels.append(x)

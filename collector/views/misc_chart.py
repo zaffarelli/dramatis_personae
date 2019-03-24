@@ -37,7 +37,7 @@ def get_population_statistics(request, *args, **kwargs):
   ch = conf.get_chart('gender','Gender','gender','pie')  
   da.append(json.dumps(ch['data']))
 
-  ch = conf.get_chart('native_fief','Native Fief','native_fief','bar')  
+  ch = conf.get_chart('native_fief','Native Fief','native_fief','doughnut')  
   da.append(json.dumps(ch['data']))
 
   ch = conf.get_chart('OP','Option Points','OP')  
