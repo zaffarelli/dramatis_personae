@@ -25,6 +25,7 @@ class WeaponRef(models.Model):
   cost = models.PositiveIntegerField(default=0,blank=True)
   description = models.TextField(max_length=256,default='',blank=True)
   stats = models.CharField(max_length=256,default='',blank=True)
+  origins = models.CharField(max_length=64,default='',blank=True)
   def __str__(self):
     return '%s' % (self.stats)
   def get_stats_line(self):

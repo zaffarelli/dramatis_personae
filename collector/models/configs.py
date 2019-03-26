@@ -61,7 +61,12 @@ class Config(models.Model):
     circ = 360.0
     vmin, vmax = 0X33, 0xcc
     colval = [vmin,vmin,vmin]
-    angle_inc = (circ*math.pi * 2) / size
+    try:
+      angle_inc = (circ*math.pi * 2) / size
+      print('ok')
+    except:
+      print('paf')
+      return [],[]
     #print('Full circle=%0.4f'%(math.pi * 2))
     angle_step = (circ*math.pi * 2) / 8
     #compo_range = (vmax-vmin)/angle_step
@@ -104,7 +109,7 @@ class Config(models.Model):
 
   def get_chart(self,o,sp,p,ty='bar'):
     from collector.models.characters import Character
-    all = Character.objects.filter(epic=self.epic,visible=True).order_by(o)
+    all = Character.objects.filter(epic=self.epic,is_visible=True).order_by(o)
     inside_labels = []
     inside_datasets = []
     dat = []
@@ -138,7 +143,7 @@ class Config(models.Model):
       border.append('#C0C0C0C0')
       #idx -= 32
 
-    
+    print(o)
     colors, hoverColors = self.prepare_colorset(len(border))
     inside_datasets = [{
       #'label': 'Species',

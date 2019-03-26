@@ -1,6 +1,6 @@
 <div class='avatar_link {% if c.is_locked %}locked{%endif%}'>
 <em>{{ c.full_name }}</em> {%if c.player != '' %}({{c.player|safe}}){% endif %} 
-{% if c.ready_for_export %}&nbsp;<a href='pdf/{{c.rid}}/' target='avatar_pdf'><i class="fas fa-file-pdf golden"></i></a>{% endif %}<br/>
+{% if c.is_exportable %}&nbsp;<a href='pdf/{{c.rid}}/' target='avatar_pdf'><i class="fas fa-file-pdf golden"></i></a>{% endif %}<br/>
   <div class="character_actions">
     <span class="view_character" id="{{c.id}}"><i class="fas fa-user"></i></span>&nbsp;&nbsp;
     <span class="edit_character" id="{{c.id}}"><i class="fas fa-user-tag"></i></span>&nbsp;&nbsp;

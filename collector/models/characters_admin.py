@@ -25,7 +25,7 @@ def make_invisible(modeladmin, request, queryset):
   short_description = "Make invisible"
 
 def make_visible(modeladmin, request, queryset):
-  queryset.update(visible=True)
+  queryset.update(is_visible=True)
   short_description = "Make visible"
 
 def make_teutonic(modeladmin, request, queryset):
@@ -45,7 +45,7 @@ def make_enquist(modeladmin, request, queryset):
   short_description = "Make enquist"
 
 class CharacterAdmin(admin.ModelAdmin):
-  list_display = ('full_name','castspecies','castrole','castprofile','alliance','PA_TOTAL','SK_TOTAL','BA_TOTAL','BC_TOTAL','TA_TOTAL','OP','visible','epic')
+  list_display = ('full_name','castspecies','castrole','castprofile','alliance','PA_TOTAL','SK_TOTAL','BA_TOTAL','BC_TOTAL','TA_TOTAL','OP','is_visible','epic')
   inlines = [
     SkillInline,
     BlessingCurseInline,

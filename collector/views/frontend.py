@@ -8,6 +8,7 @@ from django.shortcuts import render, get_object_or_404, redirect, render_to_resp
 from django.core.paginator import Paginator
 
 from collector.models.characters import Character
+from collector.models.fics_models import CastEveryman, CastRole, CastProfile
 from collector.models.configs import Config
 from collector.models.skills import Skill
 from collector.forms.basic import CharacterForm, SkillFormSet, TalentFormSet, BlessingCurseFormSet, BeneficeAfflictionFormSet, WeaponFormSet, ArmorFormSet, ShieldFormSet
@@ -288,6 +289,9 @@ def add_character(request):
   character_item = Character()
   character_item.full_name = '_noname_ %s'%(datetime.datetime.now())
   character_item.epic = conf.epic
+  character_item.castspecies = CastEveryman.objects.first()
+  character_item.castrole = CastRole.objects.first()
+  character_item.castprofile = CastProfile.objects.first()
   character_item.save()
   return redirect('/')
 

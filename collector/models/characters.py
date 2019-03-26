@@ -84,8 +84,8 @@ class Character(models.Model):
   occult_darkside = models.PositiveIntegerField(default=0)
   occult = models.CharField(max_length=50, default='', blank=True)
   challenge = models.TextField(default='',blank=True)  
-  ready_for_export =  models.BooleanField(default=False)
-  visible =  models.BooleanField(default=True)
+  is_exportable =  models.BooleanField(default=False)
+  is_visible =  models.BooleanField(default=True)
   is_dead =  models.BooleanField(default=False)
   is_locked = models.BooleanField(default=False) 
   epic = models.ForeignKey(Epic, null=True, blank=True, on_delete=models.SET_NULL)
@@ -147,8 +147,8 @@ class Character(models.Model):
     if self.player == None:
       gm_shortcuts += fs_fics7.check_nameless_attributes(self)
     self.gm_shortcuts = gm_shortcuts
-    self.ready_for_export = self.check_exportable()
-    debug_print('>>> %s %s'%(self.rid,self.ready_for_export))
+    self.is_exportable = self.check_exportable()
+    debug_print('>>> %s %s'%(self.rid,self.is_exportable))
 
   def apply_racial_pa_mods(self):
     attr_mods = self.castspecies.get_racial_attr_mod()
@@ -291,14 +291,14 @@ class Character(models.Model):
       exportable = True
     if comment != '':
       self.build_log += comment
-    if self.ready_for_export != exportable:
-      self.ready_for_export = exportable
+    if self.is_exportable != exportable:
+      self.is_exportable = exportable
       self.rid = 'none'
-    return self.ready_for_export
+    return self.is_exportable
     
   def backup(self):
     """ Transform to PDF if exportable"""
-    proceed = self.ready_for_export
+    proceed = self.is_exportable
     if proceed == True:
       item = self
       context = {'c':item,'filename':'%s'%(item.rid),}

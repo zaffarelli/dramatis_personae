@@ -94,7 +94,7 @@ def export_to_xls(filename='dramatis_personae.xlsx'):
     '34':{'title':'Wyrd','attribute':'SA_WYR','width':10},
     '35':{'title':'Speed','attribute':'SA_SPD','width':10},
     '36':{'title':'Run','attribute':'SA_RUN','width':10},
-    '37':{'title':'Visible','attribute':'visible','width':5},
+    '37':{'title':'Visible','attribute':'is_visible','width':5},
     '38':{'title':'Ready for export','attribute':'ready_for_export','width':5},
   }  
   ws.cell(column=1, row=1, value='Dramatis Personae')
@@ -207,7 +207,7 @@ def export_to_xls(filename='dramatis_personae.xlsx'):
     '10':{'title':'Entrance','attribute':'entrance','width':40},
   }  
   ws.cell(column=1, row=1, value='Dramatis Personae')
-  character_items = Character.objects.all().order_by('full_name').filter(epic=1,visible=True)
+  character_items = Character.objects.all().order_by('full_name').filter(epic=1,is_visible=True)
   export_header(ws,h)
   cnt = 3
   for c in character_items:
