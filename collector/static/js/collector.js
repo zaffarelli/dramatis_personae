@@ -18,6 +18,13 @@ function prepare_ajax(){
   }
 
 
+ window.chart_3.handleKeywordClick = function (e){
+    //var activeElement = chart.getElementAtEvent(e);
+    //s = chart_config.data.datasets[activeElement[0]._datasetIndex].data[activeElement[0]._index];
+    s = 'Hi, I am a callback'
+    console.log(s)
+}
+
 function register_story(x){
   $('.view_'+x).off();
   $('.view_'+x).on('click', function(event){

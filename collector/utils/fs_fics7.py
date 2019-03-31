@@ -144,17 +144,27 @@ def roll(maxi):
   #debug_print('x=%d/%d)'%(x,maxi))
   return x
 
-def choose_pa(weights):
+def choose_pa(weights,maxi,pa):
   #x = randint(1,sum(weights))
-  x = roll(sum(weights))
-  cum = 0
-  idx = 0
-  while idx < 12:
-    cum += weights[idx]
-    if x <= cum:
-      return idx
-    idx += 1
-  return -1
+  res = -1
+  done = False
+  attempts = 100
+  while not done:
+    x = roll(sum(weights))
+    attempts -= 1
+    cum = 0
+    idx = 0
+    while idx < 12:
+      cum += weights[idx]
+      if x <= cum:
+        res = idx
+        idx = 12
+      idx += 1
+      if pa[res]<maxi:
+        done = True 
+      if attempts == 0:
+        done = True
+  return res
 
 def check_primary_attributes(ch):
   """ Fixing primary attributes """
@@ -179,9 +189,9 @@ def check_primary_attributes(ch):
       #print('> Castrole primaries ... %d %d %d '%(ch.castrole.primaries, pool, cnt))
       debug_print('> Error: Primary Attributes invalid. Fixing that. --> Pool=%d (%d)'%(pool,sum(pas)))
       while pool>0:      
-        chosen_pa = choose_pa(weights)
+        chosen_pa = choose_pa(weights,maxi,pas)
         idx = chosen_pa
-        if pas[idx] < maxi+2:
+        if pas[idx] < maxi:
           pas[idx] += 1
           pool -= 1
           #print('> Good : pa[idx]:%d idx:%d maxi:%d mini:%d pool:%d chosen_pa:%d'%(pas[idx],idx,maxi,mini,pool,chosen_pa))

@@ -495,6 +495,29 @@ body {
 .noPDF:before {
   content: '(x) '; }
 
+.messenger {
+  position: fixed;
+  width: 250px;
+  height: 50px;
+  left: auto;
+  display: block;
+  right: 0px;
+  bottom: 0px;
+  z-index: 9000;
+  background: green;
+  overflow: hidden;
+  font-family: Texte;
+  border-radius: 5px 0 0 0;
+  border: 1px solid darkgreen; }
+  .messenger ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 3px;
+    text-indent: 0; }
+    .messenger ul li {
+      font-size: 8pt;
+      color: black; }
+
 /* Normal --------------------------------------------------------------------*/
 @media all and (min-width: 1024px) {
   body {

@@ -9,7 +9,7 @@ from django.contrib import admin
 
 class WeaponRef(models.Model):
   class Meta:
-    ordering = ['reference', 'category','damage_class',]
+    ordering = ['origins','reference', 'category','damage_class',]
   reference = models.CharField(max_length=64,default='',blank=True, unique=True)
   category = models.CharField(max_length=5,choices=(('MELEE',"Melee weapon"),('P',"Pistol/revolver"),('RIF',"Rifle"),('SMG',"Submachinegun"),('SHG',"Shotgun"),('HVY',"Heavy weapon"),('EX',"Exotic weapon")),default='RIF',blank=True)
   weapon_accuracy = models.IntegerField(default=0,blank=True)
@@ -64,7 +64,8 @@ def update_stats_lines(modeladmin, request, queryset):
   short_description = "Update stats line"
 
 class WeaponRefAdmin(admin.ModelAdmin):
-  ordering = ('reference','category','damage_class',)
+  list_display = ('reference','origins','category','weapon_accuracy','damage_class','availability','cost')
+  ordering = ('origins','reference','category','damage_class',)
   actions = [update_stats_lines,]
 
 class WeaponAdmin(admin.ModelAdmin):

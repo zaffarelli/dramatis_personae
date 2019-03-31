@@ -10,7 +10,7 @@ import json
 
 class CastRole(models.Model):
   class Meta:
-    ordering = ['reference']
+    ordering = ['value','reference']
   reference = models.CharField(max_length=64,default='new_role',blank=True, unique=True)
   value = models.PositiveIntegerField(default=0)
   primaries = models.PositiveIntegerField(default=0)

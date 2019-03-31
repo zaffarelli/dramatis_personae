@@ -21,7 +21,7 @@ def cast_to_blank(modeladmin, request, queryset):
   short_description = "Cast to no epic."
 
 def make_invisible(modeladmin, request, queryset):
-  queryset.update(visible=False)
+  queryset.update(is_visible=False)
   short_description = "Make invisible"
 
 def make_visible(modeladmin, request, queryset):

@@ -62,10 +62,10 @@ class Config(models.Model):
     vmin, vmax = 0X33, 0xcc
     colval = [vmin,vmin,vmin]
     try:
-      angle_inc = (circ*math.pi * 2) / size
-      print('ok')
+      angle_inc = (circ*math.pi * 2) / (size)
+      #print('ok')
     except:
-      print('paf')
+      #print('paf')
       return [],[]
     #print('Full circle=%0.4f'%(math.pi * 2))
     angle_step = (circ*math.pi * 2) / 8
@@ -107,7 +107,7 @@ class Config(models.Model):
     #print('done')
     return colorset, hcolorset
 
-  def get_chart(self,o,sp,p,ty='bar'):
+  def get_chart(self,o,sp,p,clickevent='',ty='bar'):
     from collector.models.characters import Character
     all = Character.objects.filter(epic=self.epic,is_visible=True).order_by(o)
     inside_labels = []
@@ -121,17 +121,16 @@ class Config(models.Model):
     for c in all:
       if p == 'castprofile.reference':
         par = c.castprofile.reference
+        #print(p)
       elif p == 'castrole.reference':
         par = c.castrole.reference
       elif p == 'castspecies.species':
         par = c.castspecies.species
       else:
         par = c.__dict__[p]
-
+      value = par
       if p == 'native_fief' and len(par.split(' / ')) > 1:
         value = par.split(' / ')[0]        
-      else:
-        value = par
       if arrfetch.get(value) is None:        
         arrfetch[value] = 1
       else:
@@ -143,7 +142,7 @@ class Config(models.Model):
       border.append('#C0C0C0C0')
       #idx -= 32
 
-    print(o)
+    #print(o)
     colors, hoverColors = self.prepare_colorset(len(border))
     inside_datasets = [{
       #'label': 'Species',
@@ -160,28 +159,34 @@ class Config(models.Model):
       'datasets': inside_datasets
     }
 
-    full_data = {'name':sp,'data':{
-      'type': ty,
-      'data': data,
-      'options': {
-        'title': {
-          'display': True,
-          'text': search_pattern,
-          'fontColor':'#fff',
-        },
-        'legend': {
-          'display': False,
-          'position':'right',
-          'labels':{
+    full_data = {
+      'name':sp,'data': {
+        'type': ty,
+        'data': data,
+        'options': {
+          'title': {
+            'display': True,
+            'text': search_pattern,
             'fontColor':'#fff',
-          }
-        },        
-        'circumference': math.pi,
-        'rotation': -math.pi,
-        'cutoutPercentage': 40,
+          },
+          'legend': {
+            'display': False,
+            'position':'right',
+            'labels':{
+              'fontColor':'#fff',
+            }
+          },        
+          'circumference': math.pi,
+          'rotation': -math.pi,
+          'cutoutPercentage': 40,          
+        }
       }
     }
-    }
+
+    #if clickevent != '':
+      #full_data['data']['options']['onClick'] = clickevent
+      
+    
     return full_data
 
 

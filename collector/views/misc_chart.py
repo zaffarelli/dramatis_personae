@@ -6,6 +6,7 @@
 
 from django.http import JsonResponse
 from django.template.loader import get_template
+from django.contrib import messages
 from collector.models.characters import Character
 from collector.utils.basic import get_current_config
 import json
@@ -28,16 +29,16 @@ def get_population_statistics(request, *args, **kwargs):
   ch = conf.get_chart('castspecies__species','Species','castspecies.species')  
   da.append(json.dumps(ch['data']))
 
-  ch = conf.get_chart('keyword','Keywords','keyword')  
+  ch = conf.get_chart('keyword','Keywords','keyword','handleKeywordClick')  
   da.append(json.dumps(ch['data']))
 
-  ch = conf.get_chart('caste','Caste','caste','doughnut')  
+  ch = conf.get_chart('caste','Caste','caste','','doughnut')  
   da.append(json.dumps(ch['data']))
 
-  ch = conf.get_chart('gender','Gender','gender','pie')  
+  ch = conf.get_chart('gender','Gender','gender','','doughnut')  
   da.append(json.dumps(ch['data']))
 
-  ch = conf.get_chart('native_fief','Native Fief','native_fief','doughnut')  
+  ch = conf.get_chart('native_fief','Native Fief','native_fief','','doughnut')  
   da.append(json.dumps(ch['data']))
 
   ch = conf.get_chart('OP','Option Points','OP')  
@@ -55,4 +56,5 @@ def get_population_statistics(request, *args, **kwargs):
   context = {
     'charts': charts,
   }
+  messages.add_message(request, messages.INFO, 'Population Statistics updated...')
   return JsonResponse(context)

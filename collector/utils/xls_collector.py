@@ -26,19 +26,35 @@ def export_header(ws,data):
   """ export the header of a set """
   num,r = 1,1
   cell = '%s%d'%(get_column_letter(num),r)
-  ws[cell].font = Font(name='Roboto',color='8040C0', bold=True)
+  ws[cell].font = Font(name='Eczar ExtraBold',color='8040C0', bold=True)
   r += 1
   for num,d in enumerate(data,start=1):
     ws.cell(column=num, row=r, value=data[d]['title'])
     ws.column_dimensions[get_column_letter(num)].width = data[d]['width']
     cell = '%s%d'%(get_column_letter(num),r)
-    ws[cell].font = Font(name='Roboto',color='8040C0', bold=True, size=9)
+    ws[cell].font = Font(name='Work Sans Regular',color='8040C0', bold=True, size=9)
     ws[cell].fill = PatternFill(fill_type='solid', fgColor='C0C0C0')
 
 def export_row(ws, data, ch, r):
   """ Export a row from a set """
-  for num,d in enumerate(data,start=1):
-    ws.cell(column=num, row=r, value='%s'%(getattr(ch,data[d]['attribute'])))
+  for num,dx in enumerate(data,start=1):
+    the_field = data[dx]['attribute']    
+    field_type = ch._meta.get_field(the_field).get_internal_type()
+    val = getattr(ch,the_field)
+    if field_type == 'ForeignKey':
+      related_model = str(self._meta.get_field(the_field).related_model)
+      if related_model == "<class 'collector.models.fics_models.CastEveryman'>":
+        data = CastEveryman.objects.filter(pk=val).first().species
+        import pdb; pdb.set_trace()
+      elif related_model == "<class 'collector.models.fics_models.CastRole'>":
+        data = CastRole.objects.filter(pk=val).first().reference
+      elif related_model == "<class 'collector.models.fics_models.CastProfile'>":
+        data = CastProfile.objects.filter(pk=val).first().reference
+      else:
+        data = 'Unknown'
+    else:
+      data = val
+    ws.cell(column=num, row=r, value='%s'%(data))
     
 def export_to_xls(filename='dramatis_personae.xlsx'):
   """ XLS extraction of the Characters """
@@ -64,7 +80,7 @@ def export_to_xls(filename='dramatis_personae.xlsx'):
     '4':{'title':'Alliance','attribute':'alliance','width':40},
     '5':{'title':'Rank','attribute':'rank','width':30},
     '6':{'title':'Gender','attribute':'gender','width':10},
-    '7':{'title':'Species/Race','attribute':'species','width':20},
+    '7':{'title':'Species/Race','attribute':'castspecies','width':20},
     '8':{'title':'Caste','attribute':'caste','width':30},
     '9':{'title':'Birthdate','attribute':'birthdate','width':10},
     '10':{'title':'Age','attribute':'age','width':10},
@@ -95,7 +111,9 @@ def export_to_xls(filename='dramatis_personae.xlsx'):
     '35':{'title':'Speed','attribute':'SA_SPD','width':10},
     '36':{'title':'Run','attribute':'SA_RUN','width':10},
     '37':{'title':'Visible','attribute':'is_visible','width':5},
-    '38':{'title':'Ready for export','attribute':'ready_for_export','width':5},
+    '38':{'title':'Exportable','attribute':'is_exportable','width':5},
+    '39':{'title':'Dead','attribute':'is_dead','width':5},
+    '40':{'title':'Locked','attribute':'is_locked','width':5},
   }  
   ws.cell(column=1, row=1, value='Dramatis Personae')
   character_items = Character.objects.all().order_by('full_name')
@@ -137,9 +155,8 @@ def export_to_xls(filename='dramatis_personae.xlsx'):
     '1':{'title':'Ref','attribute':'reference','width':30},
     '2':{'title':'Root','attribute':'is_root','width':10},
     '3':{'title':'Speciality','attribute':'is_speciality','width':10},
-    '4':{'title':'Category','attribute':'category','width':10},
-    '5':{'title':'Linked To','attribute':'linked_to','width':20},
-    '6':{'title':'Group','attribute':'group','width':10},    
+    '4':{'title':'Linked To','attribute':'linked_to','width':20},
+    '5':{'title':'Group','attribute':'group','width':10},    
   }
   ws.cell(column=1, row=1, value='Dramatis Personae')
   skillref_items = SkillRef.objects.all().order_by('is_speciality','reference')
@@ -201,7 +218,7 @@ def export_to_xls(filename='dramatis_personae.xlsx'):
     '4':{'title':'Player','attribute':'player','width':20},
     '5':{'title':'Rank','attribute':'rank','width':20},
     '6':{'title':'Gender','attribute':'gender','width':10},
-    '7':{'title':'Species/Race','attribute':'species','width':20},
+    '7':{'title':'Species/Race','attribute':'castspecies','width':20},
     '8':{'title':'Caste','attribute':'caste','width':10},
     '9':{'title':'Age','attribute':'age','width':10},
     '10':{'title':'Entrance','attribute':'entrance','width':40},

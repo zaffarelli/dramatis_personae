@@ -9,7 +9,7 @@ from django.contrib import admin
 
 class ShieldRef(models.Model):
   class Meta:
-    ordering = ['reference']  
+    ordering = ['cost','reference']  
   reference = models.CharField(max_length=16,default='',blank=True, unique=True)
   protection_min = models.PositiveIntegerField(default=10,blank=True)
   protection_max = models.PositiveIntegerField(default=20,blank=True)
