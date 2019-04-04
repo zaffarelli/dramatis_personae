@@ -7,7 +7,7 @@ from django.conf.urls import url
 from django.urls import path, re_path
 from collector.views.basic import skill_touch, pdf_show
 from collector.views.frontend import index,edit_character,view_character, view_by_rid,get_list, add_character, get_storyline, conf_details, recalc_character, recalc_pa_character, recalc_skills_character
-from collector.views.backend import recalc,export,xls_update,pdf_character
+from collector.views.backend import recalc,export,xls_update,pdf_character, gss_update
 from collector.views.misc_chart import get_chardar, get_population_statistics
 
 
@@ -16,6 +16,7 @@ urlpatterns = [
 	re_path('^recalc/$', recalc, name='recalc'),
 	re_path('^export/$', export, name='export'),
   re_path('^xls_update/$', xls_update, name='xls_update'),
+  re_path('^gss_update/$', gss_update, name='gss_update'),
   re_path('^ajax/edit/character/(?P<id>\d+)/$', edit_character, name='edit_character'),
   re_path('^ajax/recalc/character/(?P<id>\d+)/$', recalc_character, name='recalc_character'),
   re_path('^ajax/recalc_pa/character/(?P<id>\d+)/$', recalc_pa_character, name='recalc_pa_character'),

@@ -22,6 +22,7 @@ from django.views.decorators.csrf import csrf_exempt
 import datetime
 from collector.utils.xls_collector import export_to_xls, update_from_xls
 from collector.utils.basic import get_current_config
+from collector.utils.gs_export import update_gss
 
 
 def pdf_character(request,id=None):
@@ -56,4 +57,8 @@ def export(request):
 def xls_update(request):
   """ XLS import of data """
   update_from_xls()
+  return redirect('/')
+
+def gss_update(request):
+  update_gss()
   return redirect('/')

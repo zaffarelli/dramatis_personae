@@ -87,11 +87,12 @@ class Character(models.Model):
   is_exportable =  models.BooleanField(default=False)
   is_visible =  models.BooleanField(default=True)
   is_dead =  models.BooleanField(default=False)
-  is_locked = models.BooleanField(default=False) 
+  is_locked = models.BooleanField(default=False)
+  is_public = models.BooleanField(default=False)
+  is_partial = models.BooleanField(default=True)
   epic = models.ForeignKey(Epic, null=True, blank=True, on_delete=models.SET_NULL)
   
-  #drama = models.ForeignKey(Drama, null=True, blank=True, on_delete=models.SET_NULL)
-  #//act = models.ForeignKey(Act, null=True, blank=True, on_delete=models.SET_NULL)
+
 
   onsave_reroll_attributes = models.BooleanField(default=False)
   onsave_reroll_skills = models.BooleanField(default=False)
