@@ -105,9 +105,9 @@
         {{form.narrative}}
       </div>
       <div class="field_wrapper">
-        {{ form.ready_for_export.errors}}
+        {{ form.is_exportable.errors}}
         <label for="">Exportable</label>
-        {{form.ready_for_export}}
+        {{form.is_exportable}}
       </div>
       <div class="field_wrapper">
         {{ form.onsave_reroll_attributes.errors}}
@@ -133,6 +133,21 @@
         {{ form.is_locked.errors}}
         <label for="">Locked</label>
         {{form.is_locked}}
+      </div>
+      <div class="field_wrapper">
+        {{ form.is_public.errors}}
+        <label for="">Public</label>
+        {{form.is_public}}
+      </div>
+      <div class="field_wrapper">
+        {{ form.is_partial.errors}}
+        <label for="">Partial</label>
+        {{form.is_partial}}
+      </div>
+      <div class="field_wrapper">
+        {{ form.use_only_entrance.errors}}
+        <label for="">Only Entrance</label>
+        {{form.use_only_entrance}}
       </div>            
       </td>
       </tr>

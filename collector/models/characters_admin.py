@@ -28,6 +28,22 @@ def make_visible(modeladmin, request, queryset):
   queryset.update(is_visible=True)
   short_description = "Make visible"
 
+def make_public(modeladmin, request, queryset):
+  queryset.update(is_public=True)
+  short_description = "Make public"
+
+def make_private(modeladmin, request, queryset):
+  queryset.update(is_public=False)
+  short_description = "Make private"
+
+def make_partial(modeladmin, request, queryset):
+  queryset.update(is_partial=True)
+  short_description = "Make partial"
+
+def make_complete(modeladmin, request, queryset):
+  queryset.update(is_partial=False)
+  short_description = "Make complete"
+
 def make_teutonic(modeladmin, request, queryset):
   queryset.update(castspecies=1)
   short_description = "Make teutonic"
@@ -56,5 +72,5 @@ class CharacterAdmin(admin.ModelAdmin):
     ShieldInline,
   ]  
   ordering = ['epic','full_name',]
-  actions = [cast_to_blank, cast_to_dem, make_invisible, make_visible, make_teutonic, make_kaanic, make_castillan, make_enquist]
+  actions = [cast_to_blank, cast_to_dem, make_invisible, make_visible, make_teutonic, make_kaanic, make_castillan, make_enquist, make_public, make_private, make_partial, make_complete]
   exclude = ['SA_REC','SA_STA','SA_END','SA_STU','SA_RES','SA_DMG','SA_TOL','SA_HUM','SA_PAS','SA_WYR','SA_SPD','SA_RUN','PA_TOTAL','SK_TOTAL','TA_TOTAL','BC_TOTAL','BA_TOTAL']

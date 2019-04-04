@@ -90,6 +90,7 @@ class Character(models.Model):
   is_locked = models.BooleanField(default=False)
   is_public = models.BooleanField(default=False)
   is_partial = models.BooleanField(default=True)
+  use_only_entrance = models.BooleanField(default=True)
   epic = models.ForeignKey(Epic, null=True, blank=True, on_delete=models.SET_NULL)
   
 
