@@ -360,3 +360,8 @@ def get_keywords():
     if someone.keyword != '':
       keywords.append(someone.keyword)
   return sorted(list(set(keywords)))
+
+def find_rid(s):
+  x = s.replace(' ','_').replace("'",'').replace('é','e').replace('è','e').replace('ë','e').replace('â','a').replace('ô','o').replace('"','').replace('ï','i').replace('à','a').replace('-','')
+  rid = x.lower()
+  return rid

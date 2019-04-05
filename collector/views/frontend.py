@@ -41,7 +41,7 @@ def get_list(request,id,slug='none'):
   conf = get_current_config()
   if request.is_ajax:
     if slug=='none':
-      character_items = Character.objects.filter(epic=conf.epic).order_by('is_locked','keyword','full_name')
+      character_items = Character.objects.filter(epic=conf.epic).order_by('full_name','keyword','is_locked')
     elif slug.startswith('c-'):
       ep_class = slug.split('-')[1].capitalize()
       ep_id = slug.split('-')[2]

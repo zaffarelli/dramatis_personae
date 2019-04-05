@@ -92,6 +92,8 @@ class Character(models.Model):
   is_partial = models.BooleanField(default=True)
   use_only_entrance = models.BooleanField(default=True)
   epic = models.ForeignKey(Epic, null=True, blank=True, on_delete=models.SET_NULL)
+  picture = models.CharField(max_length=256, blank=True, default='')
+  alliance_picture = models.CharField(max_length=256, blank=True, default='')
   
 
 
@@ -364,8 +366,8 @@ class Character(models.Model):
     return sane_f
 
   def get_rid(self,s):
-    x = s.replace(' ','_').replace("'",'').replace('é','e').replace('è','e').replace('ë','e').replace('â','a').replace('ô','o').replace('"','').replace('ï','i').replace('à','a').replace('-','')
-    self.rid = x.lower()
+    self.rid = fs_fics7.find_rid(s)
+    
 
   # Auto build character
   def autobuild(self):

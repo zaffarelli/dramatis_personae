@@ -9,9 +9,13 @@
     <span class="recalc_pa_character" id="{{c.id}}"><i class="fas fa-hand-paper"></i></span>&nbsp;&nbsp;
     <span class="recalc_skills_character" id="{{c.id}}"><i class="fas fa-gavel"></i></span>&nbsp;&nbsp;
     {% endif %}
-    {{c.stars|safe}}
+    {% if c.is_public %}
+    <span class="public_character" id="{{c.id}}"><i class="fa fa-share-alt golden"></i></span>&nbsp;&nbsp;
+    {% endif %}
+    
   </div>
   <br/>{{ c.challenge|safe }}
   <br/>{{ c.alliance|safe }} ({%if c.keyword != '' %}<span class='golden custom_glance' id='{{c.keyword}}'>{{c.keyword|safe}}</span>{%endif%})
-  <br/>ID:<span class='golden custom_show' id='{{c.id}}'>{{c.id}}</span> {% if c.is_locked %}<i class="fas fa-lock golden"></i>{% endif %}
+  <br/>ID:<span class='golden custom_show' id='{{c.id}}'>{{c.id}}</span> {{c.stars|safe}} {% if c.is_locked %}<i class="fas fa-lock golden"></i>{% endif %}
+  
 </div>
