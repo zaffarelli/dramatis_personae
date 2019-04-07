@@ -142,7 +142,13 @@ body {
     font-size: 9pt;
     padding:0;
     & .menuright {
-      
+      & div#keywords{
+        background:$fics_dark;
+        height:auto;
+        width:auto;
+        border:1px solid $fics_front;
+        border-radius:5px;
+      }
       background: transparent ; //url("details.png");
       font-family: Texte;
       color: $fics_front;    
@@ -295,7 +301,14 @@ body {
         }        
       }
 
-      & .classyview{    
+      & .classyview{
+        & .pic{
+          display:block;
+          float:right;
+          border:1px solid black;
+          width:200px;
+          height:auto;
+        }
         border:1px solid $fics_darker;
         box-shadow: 2px 2px 8px $fics_darker;
         border-radius:5px 5px 5px 5px;
@@ -310,6 +323,12 @@ body {
         column-gap:10px;
         column-rule:1px dotted $fics_light;
         color:#F0F0F0;
+        #base{
+          margin-top:0;
+          vertical-align:top;
+          display:inline-block;
+          width:64%;
+        }
       }
       & .storyview{
         border:1px solid $fics_darker;
@@ -335,12 +354,16 @@ body {
         }
       }
       & .narrative{
+        margin-top:0;
+        vertical-align:top;
+        display:inline-block;
         border:1px solid $fics_subborder_color;
         border-radius:5px;
         padding:5px;
-        column-count:2;
-        column-gap:10px;
-        column-rule:1px dotted $fics_light;
+        width:34%
+        //column-count:2;
+        //column-gap:10px;
+        //column-rule:1px dotted $fics_light;
       } 
       & table.formset {
         padding: 1ex 0.5em;

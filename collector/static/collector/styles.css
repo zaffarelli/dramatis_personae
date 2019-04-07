@@ -96,6 +96,12 @@ body {
       background: transparent;
       font-family: Texte;
       color: #E5DECA; }
+      body .wrapper .menuright div#keywords {
+        background: #1d1d1d;
+        height: auto;
+        width: auto;
+        border: 1px solid #E5DECA;
+        border-radius: 5px; }
       body .wrapper .menuright ul {
         width: auto;
         margin: 5px;
@@ -215,6 +221,17 @@ body {
         column-gap: 10px;
         column-rule: 1px dotted #6a6a6a;
         color: #F0F0F0; }
+        body .wrapper .details .classyview .pic {
+          display: block;
+          float: right;
+          border: 1px solid black;
+          width: 200px;
+          height: auto; }
+        body .wrapper .details .classyview #base {
+          margin-top: 0;
+          vertical-align: top;
+          display: inline-block;
+          width: 64%; }
       body .wrapper .details .storyview {
         border: 1px solid #040404;
         box-shadow: 2px 2px 8px #040404;
@@ -239,12 +256,13 @@ body {
         body .wrapper .details .storyview h1, body .wrapper .details .storyview h2, body .wrapper .details .storyview h3, body .wrapper .details .storyview h4 {
           color: #E5DECA; }
       body .wrapper .details .narrative {
+        margin-top: 0;
+        vertical-align: top;
+        display: inline-block;
         border: 1px solid #040404;
         border-radius: 5px;
         padding: 5px;
-        column-count: 2;
-        column-gap: 10px;
-        column-rule: 1px dotted #6a6a6a; }
+        width: 34%; }
       body .wrapper .details table.formset {
         padding: 1ex 0.5em;
         width: 100%;

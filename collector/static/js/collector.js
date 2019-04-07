@@ -4,26 +4,39 @@
  ═╩╝╩    ╚═╝└─┘┴─┘┴─┘└─┘└─┘ ┴ └─┘┴└─
 */
 function prepare_ajax(){
-  //console.log("Preparing Ajax Setup");
   $.ajaxSetup({
     beforeSend: function(xhr, settings) {
       if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
         var csrf_middlewaretoken = $('input[name=csrfmiddlewaretoken]').val();        
-        xhr.setRequestHeader("X-CSRFToken",csrf_middlewaretoken);
-        //console.log("Cookie csrf:      "+csrftoken);
-        //console.log("Middleware csrf:  "+csrf_middlewaretoken);
+        xhr.setRequestHeader('X-CSRFToken',csrf_middlewaretoken);
       }
     }
   });
-  }
-
-
- window.chart_3.handleKeywordClick = function (e){
-    //var activeElement = chart.getElementAtEvent(e);
-    //s = chart_config.data.datasets[activeElement[0]._datasetIndex].data[activeElement[0]._index];
-    s = 'Hi, I am a callback'
-    console.log(s)
 }
+
+// Chart event handler
+function keywordHandlerClick(evt) {
+    var firstPoint = chart_keywords.getElementAtEvent(evt)[0];
+    if (firstPoint) {
+        var label = chart_keywords.data.labels[firstPoint._index];
+        var value = chart_keywords.data.datasets[firstPoint._datasetIndex].data[firstPoint._index];        
+        $('#customize').val(label);
+        $('#search.btn').click();
+    }
+}
+
+function loadKeywords(){
+  $.ajax({
+    url: 'api/keywords/',
+    success: function(answer) {
+      $('#keywords').html('')
+      $('#keywords').append(answer.chart);
+      rebootlinks();
+    },
+  });
+}
+
+
 
 function register_story(x){
   $('.view_'+x).off();
@@ -71,6 +84,8 @@ function register_story(x){
       }
     });
   });
+
+
 
   $('.'+x+'_update').off();
   $('.'+x+'_update').on('click',function(event){
@@ -133,6 +148,8 @@ function register_story(x){
       },
     });  
   });
+
+
   
 }
   
@@ -224,7 +241,11 @@ function rebootlinks(){
         rebootlinks();
       },
     });
+    rebootlinks();
   });
+
+  
+
 
   $(window).scroll(function(){
     var sticky = $('.menu'), scroll = $(window).scrollTop(), wrap = $('.wrapper');
@@ -264,6 +285,7 @@ function rebootlinks(){
           $('li#'+answer.rid).html(answer.line);
           $('li').find('div.avatar_link').removeClass('selected');
           rebootlinks();
+          loadKeywords();
       },
       error: function(answer) {
         console.log('Error... '+answer);
@@ -534,7 +556,15 @@ function rebootlinks(){
     $("ul#keywords").toggleClass("shown");
   });
 
-  
+/*
+  $('#char_3').off().on('click',function(evt){
+    console.log("Hello");
+    //var activePoints = myLineChart.getElementsAtEvent(evt);
+    
+    //console.log(activePoints);
+    // => activePoints is an array of points on the canvas that are at the same position as the click event.    
+  });
+  */
 }
 
 rebootlinks();

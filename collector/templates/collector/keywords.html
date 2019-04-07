@@ -1,0 +1,12 @@
+<script>
+    var popdata = {{cdata|safe}}
+    popdata.options['onClick'] = keywordHandlerClick
+    var ctx = document.getElementById('{{cname}}').getContext('2d');
+    var {{cname}} = new Chart(ctx, popdata);
+
+    Chart.defaults.global.defaultFontColor = 'white'
+    Chart.defaults.global.defaultFontSize = 10
+    Chart.defaults.global.defaultFontFamily = 'Texte'
+</script>
+<canvas id="{{cname}}" width=180 height=600></canvas>
+

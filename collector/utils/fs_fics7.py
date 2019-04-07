@@ -345,9 +345,9 @@ def update_challenge(ch):
   res = ''
   res += '<i class="fas fa-th-large" title="primary attributes"></i>%d '%(ch.AP)
   res += '<i class="fas fa-th-list" title="skills"></i> %d '%(ch.SK_TOTAL)
-  res += '<i class="fas fa-th" title="talents"></i> %d '%(ch.TA_TOTAL)
-  res += '<i class="fas fa-outdent" title="blessing curses"></i> %d '%(ch.BC_TOTAL)
-  res += '<i class="fas fa-outdent" title="benefice afflictions"></i> %d '%(ch.BA_TOTAL)
+  res += '<i class="fas fa-th" title="talents"></i> %d '%(ch.TA_TOTAL+ch.BC_TOTAL+ch.BA_TOTAL)
+  #res += '<i class="fas fa-outdent" title="blessing curses"></i> %d '%(ch.BC_TOTAL)
+  #res += '<i class="fas fa-outdent" title="benefice afflictions"></i> %d '%(ch.BA_TOTAL)
   res += '<i class="fas fa-newspaper" title="OP challenge"></i> %d '%(ch.OP)
   return res
 

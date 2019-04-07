@@ -20,6 +20,7 @@ from urllib.parse import parse_qs
 from collector.utils import fs_fics7
 from django.views.decorators.csrf import csrf_exempt
 import datetime
+from django.contrib import messages
 from collector.utils.xls_collector import export_to_xls, update_from_xls
 from collector.utils.basic import get_current_config
 from collector.utils.gs_export import update_gss
@@ -32,7 +33,7 @@ def pdf_character(request,id=None):
     answer = '<a class="pdflink" target="_blank" href="pdf/%s.pdf">%s</a>'%(item.rid,item.rid)
   else:
     answer = '<span class="pdflink">no character found</span>'
-  return HttpResponse(answer, content_type='text/html')
+  return HttpResponse(status=204)
 
 
 
@@ -47,18 +48,20 @@ def recalc(request):
     c.save()
     x += 1
   #answer = 'Done'
-  return redirect('/')
+  messages.add_message(request, messages.INFO, 'Complete recalc done...')
+  return HttpResponse(status=204)
 
 def export(request):
   """ XLS export of the characters """
   export_to_xls()
-  return redirect('/')
+  return HttpResponse(status=204)
 
 def xls_update(request):
   """ XLS import of data """
   update_from_xls()
-  return redirect('/')
+  return HttpResponse(status=204)
 
 def gss_update(request):
   update_gss()
-  return redirect('/')
+  messages.add_message(request, messages.INFO, 'Exported to Goodle Spread Sheet...')
+  return HttpResponse(status=204)

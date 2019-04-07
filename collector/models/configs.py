@@ -107,7 +107,7 @@ class Config(models.Model):
     #print('done')
     return colorset, hcolorset
 
-  def get_chart(self,o,sp,p,clickevent='',ty='bar'):
+  def get_chart(self,o,sp,p,ty='bar'):
     from collector.models.characters import Character
     all = Character.objects.filter(epic=self.epic,is_visible=True).order_by(o)
     inside_labels = []
@@ -134,31 +134,24 @@ class Config(models.Model):
       if arrfetch.get(value) is None:        
         arrfetch[value] = 1
       else:
-        arrfetch[value] += 1
-        
+        arrfetch[value] += 1        
     for x in arrfetch:
       inside_labels.append(x)
       dat.append(arrfetch[x])
       border.append('#C0C0C0C0')
-      #idx -= 32
-
-    #print(o)
     colors, hoverColors = self.prepare_colorset(len(border))
     inside_datasets = [{
-      #'label': 'Species',
       'data': dat,
       'backgroundColor': colors ,
       'hoverBackgroundColor': hoverColors,
       'borderColor': border,
       'hoverBorderColor': colors,
-      'borderWidth': 1,
+      'borderWidth': 1
     }]
-    
     data = {
       'labels': inside_labels,
       'datasets': inside_datasets
     }
-
     full_data = {
       'name':sp,'data': {
         'type': ty,
@@ -178,15 +171,10 @@ class Config(models.Model):
           },        
           'circumference': math.pi,
           'rotation': -math.pi,
-          'cutoutPercentage': 40,          
+          'cutoutPercentage': 40,
         }
       }
     }
-
-    #if clickevent != '':
-      #full_data['data']['options']['onClick'] = clickevent
-      
-    
     return full_data
 
 

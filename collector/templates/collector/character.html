@@ -1,8 +1,13 @@
 {% load fics_filters %}
 <div class="classyview">
+{% if c.alliance_picture != "" %}
+<!--div class='pic'><img src="static/collector/portraits/{{ c.rid }}.jpg"></div-->
+{% endif %}
+
 <h1>{{ c.full_name }}</h1>
 {{ c.entrance|safe }}</br>
-{{ c.epic|safe }}
+{{ c.epic|safe }}<br/>
+
 <table class="coreblock" id="base">
 <tr><th>Alliance</th><td>{{ c.alliance|safe }}</td><th>Birthdate</th><td>{{ c.birthdate }} ({{ c.age }} years old)</td></tr>
 <tr><th>Species/Race</th><td>{{ c.castspecies }}</td><th>Gender</th><td>{% if c.gender == "male" %}<i class="fas fa-mars"></i>{% else %}<i class="fas fa-venus"></i>{%endif%}</td></tr>

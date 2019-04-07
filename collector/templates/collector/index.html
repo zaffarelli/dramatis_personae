@@ -6,17 +6,10 @@
   <li><a class='btn' href="{% url 'export' %}"><i class="fas fa-download"></i>&nbsp;Export to spreadsheet</a></li>
   <li><a class='btn' href="{% url 'xls_update' %}"><i class="fas fa-upload"></i>&nbsp;Update from spreadsheet</a></li>
   <li><a class='btn' href="{% url 'gss_update' %}"><i class="fas fa-table"></i>&nbsp;Export to Google spreadsheet</a></li>
-  
-    
-    <li id='floatingk'><span class='btn' ><i class="fas fa-key"></i>&nbsp;Keywords</span>
-      <ul id='keywords'>
-        {% for keyword in config_keywords %}
-        <li><span class='golden custom_glance' id='{{keyword}}'>{{keyword}}</span></li>
-        {% endfor %}      
-      </ul>
-    </li>
-  
   </ul>
+  <div id='keywords'></div>
+
+
 {% endblock menuright %}
 
 {% block menu %}
@@ -37,7 +30,10 @@
 
 {% block javascript %}
 <script>
-  setTimeout(function(){loadajax();},1000);
+  setTimeout(function(){
+    loadajax();
+    loadKeywords();
+    },1000);
 </script>
 {% endblock javascript %}
 

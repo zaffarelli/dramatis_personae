@@ -19,42 +19,43 @@ def get_chardar(request, pk):
 def get_population_statistics(request, *args, **kwargs):
   conf = get_current_config()
   da = []
-
   ch = conf.get_chart('castprofile__reference','Profiles','castprofile.reference')
   da.append(json.dumps(ch['data']))
-
   ch = conf.get_chart('castrole__reference','Roles','castrole.reference')  
   da.append(json.dumps(ch['data']))
-
   ch = conf.get_chart('castspecies__species','Species','castspecies.species')  
   da.append(json.dumps(ch['data']))
-
-  ch = conf.get_chart('keyword','Keywords','keyword','handleKeywordClick')  
+  ch = conf.get_chart('caste','Caste','caste','doughnut')  
   da.append(json.dumps(ch['data']))
-
-  ch = conf.get_chart('caste','Caste','caste','','doughnut')  
+  ch = conf.get_chart('gender','Gender','gender','doughnut')  
   da.append(json.dumps(ch['data']))
-
-  ch = conf.get_chart('gender','Gender','gender','','doughnut')  
+  ch = conf.get_chart('native_fief','Native Fief','native_fief','doughnut')  
   da.append(json.dumps(ch['data']))
-
-  ch = conf.get_chart('native_fief','Native Fief','native_fief','','doughnut')  
-  da.append(json.dumps(ch['data']))
-
   ch = conf.get_chart('OP','Option Points','OP')  
   da.append(json.dumps(ch['data']))
-
   ch = conf.get_chart('is_locked','Locked Avatars','is_locked')  
   da.append(json.dumps(ch['data']))
-  
   charts = []
   template = get_template('collector/popstats.html')
   idx = 0
-  for x in da:
+  for x in da:    
     charts.append(template.render({'cname':'chart_%d'%(idx),'cdata':x}))
     idx += 1
   context = {
     'charts': charts,
   }
   messages.add_message(request, messages.INFO, 'Population Statistics updated...')
+  return JsonResponse(context)
+
+def get_keywords(request, *args, **kwargs):
+  """ Get all the keywords into a chart"""
+  conf = get_current_config()
+  ch = conf.get_chart('keyword','Keywords','keyword','horizontalBar')  
+  da = json.dumps(ch['data'])
+  template = get_template('collector/keywords.html')
+  chart = template.render({'cname':'chart_keywords','cdata':da})
+  context = {
+    'chart': chart,
+  }
+  messages.add_message(request, messages.INFO, 'Loading keywords...')
   return JsonResponse(context)
