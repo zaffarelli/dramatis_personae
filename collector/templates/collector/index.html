@@ -5,7 +5,7 @@
 
   <li><a class='btn' href="{% url 'export' %}"><i class="fas fa-download"></i>&nbsp;Export to spreadsheet</a></li>
   <li><a class='btn' href="{% url 'xls_update' %}"><i class="fas fa-upload"></i>&nbsp;Update from spreadsheet</a></li>
-  <li><a class='btn' href="{% url 'gss_update' %}"><i class="fas fa-table"></i>&nbsp;Export to Google spreadsheet</a></li>
+  
   </ul>
   <div id='keywords'></div>
 
@@ -15,7 +15,8 @@
 {% block menu %}
   <div class='shortcuts'>
     <ul>
-  <li><a class='btn' id ='popstats' style='width:auto;' href="{% url 'get_popstats' %}"><i class="fas fa-chart-pie"></i></a></li>    
+  <li><a class='btn' id ='popstats' style='width:auto;' href="{% url 'get_popstats' %}"><i class="fas fa-chart-pie"></i></a></li>
+  <li><a class='btn' href="{% url 'gss_update' %}" style='width:auto;'><i class="fas fa-table"></i></a></li>
   <li><input type='text' id='customize' value='' placeholder='Customizer'></input></li>
   <li><span class='btn' id='search' style='width:auto;'><i class="fas fa-search"></i></span></li>
   <li><span class='btn' id='seek' style='width:auto;'><i class="fas fa-address-card"></i></span> </li> 
@@ -23,7 +24,7 @@
   <li><a class='btn' href="{% url 'recalc' %}"  style='width:auto;'><i class="fas fa-users-cog"></i></a></li>
   <li><span class='btn' id='conf_details' style='width:auto;'><i class="fas fa-globe"></i></span></li>
   <li><span class='btn' id='build_config_pdf' style='width:auto;'><i class="fas fa-file-pdf"></i></span></li>
-<li><span class='btn' id='go' style='width:auto;'><i class="fas fa-user-edit"></i></span></li>
+  <li><span class='btn' id='go' style='width:auto;'><i class="fas fa-user-edit"></i></span></li>
     </ul>
   </div>
 {% endblock menu %}

@@ -525,7 +525,9 @@ function rebootlinks(){
     $.ajax({
       url: 'ajax/edit/character/'+$(this).attr('id')+'/',
       success: function(answer) {
-          $('.details').html(answer.character);
+        console.log(answer);
+          //$('.details').html(answer.character);
+          $('.details').html(answer);
           $('body').toggleClass('waiting');         
           prepare_ajax();
           rebootlinks();
