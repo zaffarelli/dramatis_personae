@@ -267,28 +267,32 @@ function rebootlinks(){
     event.stopPropagation();
     //console.log($('.character_form').serialize());
     //console.log($('.character_form input[name=cid]').val());
-    var urlupdate = 'ajax/update/character/';
+    var id = $('.character_form input[name=id]').val();
+    var urlupdate = 'ajax/update/character/%d/'%(id);
     $.ajax({    
       url: urlupdate,
       method: 'POST',
       headers: {
-        'Accept': 'application/json',
+        'Accept': 'application/json',          
         'Content-Type': 'application/x-www-form-urlencoded'
       },
       data: {
-        cid: $('.character_form input[name=cid]').val(),
+        id: id,
         character: $('.character_form').serialize(),
       },
       dataType: 'json',
       success: function(answer) {
+          console.log('hello')
           $('.details').html(answer.character);          
           $('li#'+answer.rid).html(answer.line);
           $('li').find('div.avatar_link').removeClass('selected');
           rebootlinks();
+          prepare_ajax();          
           loadKeywords();
       },
       error: function(answer) {
-        console.log('Error... '+answer);
+        console.log('Error');
+        $('.details').html(answer);
       },
     });  
   });
@@ -527,7 +531,7 @@ function rebootlinks(){
       success: function(answer) {
         console.log(answer);
           //$('.details').html(answer.character);
-          $('.details').html(answer);
+          $('.details').html(answer.character);
           $('body').toggleClass('waiting');         
           prepare_ajax();
           rebootlinks();

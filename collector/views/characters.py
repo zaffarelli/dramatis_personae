@@ -5,16 +5,19 @@
 '''
 from django.views.generic.edit import UpdateView
 from django.views.generic.detail import DetailView
+from django.contrib import messages
 from collector.forms.basic import CharacterForm, SkillFormSet, TalentFormSet, BlessingCurseFormSet, BeneficeAfflictionFormSet, ArmorFormSet, WeaponFormSet, ShieldFormSet
 from collector.models.characters import Character
 from scenarist.mixins.ajaxfromresponse import AjaxFromResponseMixin
+from django.views.decorators.csrf import csrf_exempt
 
 class CharacterDetailView(DetailView):
   model = Character
   context_object_name = 'c'  
   def get_context_data(self, **kwargs):
     context = super().get_context_data(**kwargs)
-    return context
+    return context    
+
 
 class CharacterUpdateView(AjaxFromResponseMixin,UpdateView):
   model = Character
@@ -22,7 +25,7 @@ class CharacterUpdateView(AjaxFromResponseMixin,UpdateView):
   context_object_name = 'c'
   template_name_suffix = '_form'
 
-  def get_context_data(self, **kwargs):
+  def get_context_data(self, **kwargs):    
     context = super(CharacterUpdateView, self).get_context_data(**kwargs)
     if self.request.POST:
       context['form'] = CharacterForm(self.request.POST, instance=self.object)
@@ -32,7 +35,8 @@ class CharacterUpdateView(AjaxFromResponseMixin,UpdateView):
       context['beneficeafflictions'] = BeneficeAfflictionFormSet(self.request.POST, instance=self.object)
       context['armors'] = ArmorFormSet(self.request.POST, instance=self.object)
       context['weapons'] = WeaponFormSet(self.request.POST, instance=self.object)
-      context['shields'] = ShieldFormSet(self.request.POST, instance=self.object)      
+      context['shields'] = ShieldFormSet(self.request.POST, instance=self.object)
+      messages.add_message(self.request, messages.INFO, 'Updating character %s'%(context['form']['full_name']['value']))
     else:
       context['form'] = CharacterForm(instance=self.object)
       context['skills'] = SkillFormSet(instance=self.object)
@@ -41,5 +45,6 @@ class CharacterUpdateView(AjaxFromResponseMixin,UpdateView):
       context['beneficeafflictions'] = BeneficeAfflictionFormSet(instance=self.object)
       context['armors'] = ArmorFormSet(instance=self.object)
       context['weapons'] = WeaponFormSet(instance=self.object)
-      context['shields'] = ShieldFormSet(instance=self.object)      
+      context['shields'] = ShieldFormSet(instance=self.object)
+    messages.add_message(self.request, messages.INFO, 'Editing character %s'%(context['form']['full_name'].value()))
     return context

@@ -27,6 +27,7 @@ from collector.utils.basic import get_current_config
 from collector.templatetags.fics_filters import as_bullets
 from django.http import FileResponse, Http404
 from django.conf import settings
+from django.contrib import messages
 
 @csrf_exempt
 def skill_touch(request):

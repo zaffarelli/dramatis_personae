@@ -25,7 +25,7 @@ import datetime
 from collector.utils.xls_collector import export_to_xls, update_from_xls
 from collector.utils.basic import get_current_config
 from collector.utils.fics_references import MAX_CHAR
-
+from django.contrib import messages
 
 
 def index(request):

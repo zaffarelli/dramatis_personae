@@ -685,13 +685,13 @@ body {
 .messenger{
   position:fixed;
   width:250px;
-  height:50px;
+  height:auto;
   left:auto;
   display:block;
-  right: 0px;
+  right: auto;
   bottom:0px;
   z-index:9000;
-  background:green;
+  background:darkgreen url("details.png");
   
   overflow:hidden;
   font-family:Texte;
