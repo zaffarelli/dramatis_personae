@@ -1,11 +1,11 @@
 {% load crispy_forms_tags %}
 
 <div class="classyview">
-  <form class='character_form' style='border: 2px solid pink;'>
+  <form class='character_form'>
     {{ form.non_field_errors}}
     {{ form.management_form }}    
-    {% csrf_token %}    
-    <input name='cid' type='hidden' value='{{c.id}}'>
+    
+    <input name='id' type='hidden' value='{{c.id}}'>
     <input name='rid' type='hidden' value='{{c.rid}}'>
     <table class="formset">
       <caption>Core</caption>
@@ -338,7 +338,7 @@
   </table>
 </div>
 
-<input name='noppe' type='hidden' value='Nope'>
+{% csrf_token %}    
 </form>
 
 

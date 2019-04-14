@@ -9,9 +9,15 @@ function prepare_ajax(){
       if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
         var csrf_middlewaretoken = $('input[name=csrfmiddlewaretoken]').val();        
         xhr.setRequestHeader('X-CSRFToken',csrf_middlewaretoken);
+        console.log(csrf_middlewaretoken);
       }
     }
   });
+  /*
+    
+
+  */
+  
 }
 
 // Chart event handler
@@ -90,7 +96,7 @@ function register_story(x){
   $('.'+x+'_update').off();
   $('.'+x+'_update').on('click',function(event){
     event.preventDefault();
-    event.stopPropagation();
+    event.stopPropagation();    
     var owner = $(this).closest('div.storyarticle').attr('id');
     var id = $(this).closest('div.storyarticle').attr('id').split('_')[1];
     var form = $(this).closest('form');
@@ -258,40 +264,65 @@ function rebootlinks(){
     }
   });
 
-  
-
+  /* Character Edition & Update*/
+  $('.edit_character').off();
+  $('.edit_character').on('click',function(event){
+    event.preventDefault();
+    event.stopPropagation();
+    var dad = $(this).parents('li').find('div.avatar_link');
+    $('li').find('div.avatar_link').removeClass('selected');
+    $(dad).addClass('selected');
+    $('body').toggleClass('waiting');
+    $.ajax({
+      url: 'ajax/edit/character/'+$(this).attr('id')+'/',
+      success: function(answer) {
+        $('.details').html(answer);
+        $('body').toggleClass('waiting');         
+        rebootlinks();
+        prepare_ajax();
+      },
+      error: function(answer){
+        console.log('ooops... :(');
+      }
+    });
+  });
 
   $('#go').off();
   $('#go').on('click',function(event){
     event.preventDefault();
     event.stopPropagation();
-    //console.log($('.character_form').serialize());
-    //console.log($('.character_form input[name=cid]').val());
+    data = $('.character_form').serialize();
+    console.log(data);
     var id = $('.character_form input[name=id]').val();
-    var urlupdate = 'ajax/update/character/%d/'%(id);
+    var urlupdate = 'ajax/edit/character/%d/'%(id);
+    //token = $('input[name=csrfmiddlewaretoken]').val();
     $.ajax({    
       url: urlupdate,
       method: 'POST',
+      /*
       headers: {
         'Accept': 'application/json',          
-        'Content-Type': 'application/x-www-form-urlencoded'
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'X-CSRFToken':token
       },
-      data: {
+      */
+      data: data /*{
         id: id,
         character: $('.character_form').serialize(),
-      },
+      }*/,
       dataType: 'json',
       success: function(answer) {
           console.log('hello')
-          $('.details').html(answer.character);          
+          console.log(answer);
+          $('.details').html(answer);          
           $('li#'+answer.rid).html(answer.line);
           $('li').find('div.avatar_link').removeClass('selected');
           rebootlinks();
-          prepare_ajax();          
+          //prepare_ajax();          
           loadKeywords();
       },
       error: function(answer) {
-        console.log('Error');
+        console.log('Character Update Error');
         $('.details').html(answer);
       },
     });  
@@ -518,29 +549,7 @@ function rebootlinks(){
     });
   });
 */
-  $('.edit_character').off();
-  $('.edit_character').on('click',function(event){
-    event.preventDefault();
-    event.stopPropagation();
-    var dad = $(this).parents('li').find('div.avatar_link');
-    $('li').find('div.avatar_link').removeClass('selected');
-    $(dad).addClass('selected');
-    $('body').toggleClass('waiting');
-    $.ajax({
-      url: 'ajax/edit/character/'+$(this).attr('id')+'/',
-      success: function(answer) {
-        console.log(answer);
-          //$('.details').html(answer.character);
-          $('.details').html(answer.character);
-          $('body').toggleClass('waiting');         
-          prepare_ajax();
-          rebootlinks();
-      },
-      error: function(answer){
-        console.log('ooops... :(');
-      }
-    });
-  });
+  
 
   register_story('epic');
   register_story('drama');

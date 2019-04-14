@@ -4,26 +4,28 @@
  ═╩╝╩    ╚═╝└─┘┴─┘┴─┘└─┘└─┘ ┴ └─┘┴└─
 '''
 from django.views.generic.edit import UpdateView
+from extra_views import UpdateWithInlinesView
 from django.views.generic.detail import DetailView
 from django.contrib import messages
 from collector.forms.basic import CharacterForm, SkillFormSet, TalentFormSet, BlessingCurseFormSet, BeneficeAfflictionFormSet, ArmorFormSet, WeaponFormSet, ShieldFormSet
 from collector.models.characters import Character
 from scenarist.mixins.ajaxfromresponse import AjaxFromResponseMixin
 from django.views.decorators.csrf import csrf_exempt
+from django.urls import reverse_lazy
 
 class CharacterDetailView(DetailView):
   model = Character
   context_object_name = 'c'  
   def get_context_data(self, **kwargs):
     context = super().get_context_data(**kwargs)
-    return context    
-
+    return context
 
 class CharacterUpdateView(AjaxFromResponseMixin,UpdateView):
   model = Character
   form_class = CharacterForm
   context_object_name = 'c'
   template_name_suffix = '_form'
+  success_url = reverse_lazy('collector:view_character')
 
   def get_context_data(self, **kwargs):    
     context = super(CharacterUpdateView, self).get_context_data(**kwargs)
@@ -46,5 +48,5 @@ class CharacterUpdateView(AjaxFromResponseMixin,UpdateView):
       context['armors'] = ArmorFormSet(instance=self.object)
       context['weapons'] = WeaponFormSet(instance=self.object)
       context['shields'] = ShieldFormSet(instance=self.object)
-    messages.add_message(self.request, messages.INFO, 'Editing character %s'%(context['form']['full_name'].value()))
+      messages.add_message(self.request, messages.INFO, 'Editing character %s'%(context['form']['full_name'].value()))
     return context
