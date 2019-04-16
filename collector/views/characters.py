@@ -10,7 +10,6 @@ from django.contrib import messages
 from collector.forms.basic import CharacterForm, SkillFormSet, TalentFormSet, BlessingCurseFormSet, BeneficeAfflictionFormSet, ArmorFormSet, WeaponFormSet, ShieldFormSet
 from collector.models.characters import Character
 from scenarist.mixins.ajaxfromresponse import AjaxFromResponseMixin
-from django.views.decorators.csrf import csrf_exempt
 from django.urls import reverse_lazy
 
 class CharacterDetailView(DetailView):
@@ -24,9 +23,8 @@ class CharacterUpdateView(AjaxFromResponseMixin,UpdateView):
   model = Character
   form_class = CharacterForm
   context_object_name = 'c'
-  template_name_suffix = '_form'
-  success_url = reverse_lazy('collector:view_character')
-
+  template_name_suffix = '_update_form'  
+  
   def get_context_data(self, **kwargs):    
     context = super(CharacterUpdateView, self).get_context_data(**kwargs)
     if self.request.POST:

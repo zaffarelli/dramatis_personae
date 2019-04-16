@@ -274,7 +274,7 @@ function rebootlinks(){
     $(dad).addClass('selected');
     $('body').toggleClass('waiting');
     $.ajax({
-      url: 'ajax/edit/character/'+$(this).attr('id')+'/',
+      url: 'characters/'+$(this).attr('id')+'/edit/',
       success: function(answer) {
         $('.details').html(answer);
         $('body').toggleClass('waiting');         
@@ -291,31 +291,23 @@ function rebootlinks(){
   $('#go').on('click',function(event){
     event.preventDefault();
     event.stopPropagation();
-    data = $('.character_form').serialize();
-    console.log(data);
+    formdata = $('.character_form').serialize();
     var id = $('.character_form input[name=id]').val();
-    var urlupdate = 'ajax/edit/character/%d/'%(id);
-    //token = $('input[name=csrfmiddlewaretoken]').val();
+    var rid = $('.character_form input[name=rid]').val();
     $.ajax({    
-      url: urlupdate,
       method: 'POST',
-      /*
+      url: 'characters/%d/edit/'%(id),
       headers: {
-        'Accept': 'application/json',          
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'X-CSRFToken':token
-      },
-      */
-      data: data /*{
-        id: id,
-        character: $('.character_form').serialize(),
-      }*/,
+        'Accept': 'application/json',
+        'Content-Type': 'application/x-www-form-urlencoded'
+        },
+      data: formdata,
       dataType: 'json',
       success: function(answer) {
           console.log('hello')
           console.log(answer);
           $('.details').html(answer);          
-          $('li#'+answer.rid).html(answer.line);
+          $('li#'+rid).html(answer.line);
           $('li').find('div.avatar_link').removeClass('selected');
           rebootlinks();
           //prepare_ajax();          
@@ -323,7 +315,8 @@ function rebootlinks(){
       },
       error: function(answer) {
         console.log('Character Update Error');
-        $('.details').html(answer);
+        console.log(answer);
+        //$('.details').html(answer);
       },
     });  
   });
@@ -484,7 +477,7 @@ function rebootlinks(){
     $('li').removeClass('selected');
     $(dad).addClass('selected');
     $.ajax({      
-      url: 'ajax/view/character/'+$(this).attr('id')+'/',
+      url: 'characters/'+$(this).attr('id')+'/view/',
       success: function(answer) {
         $('.details').html(answer)
         $('li').removeClass('selected');

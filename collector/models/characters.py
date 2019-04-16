@@ -8,6 +8,7 @@ from django.contrib import admin
 from datetime import datetime
 from django.db.models.signals import pre_save, post_save
 from django.dispatch import receiver
+from django.urls import reverse
 import hashlib
 import collector.models.skills
 from scenarist.models.epics import Epic
@@ -94,13 +95,12 @@ class Character(models.Model):
   epic = models.ForeignKey(Epic, null=True, blank=True, on_delete=models.SET_NULL)
   picture = models.CharField(max_length=256, blank=True, default='')
   alliance_picture = models.CharField(max_length=256, blank=True, default='')
-  
-
-
   onsave_reroll_attributes = models.BooleanField(default=False)
   onsave_reroll_skills = models.BooleanField(default=False)
-
   build_log = models.TextField(default='',blank=True)  
+
+  def get_absolute_url(self):
+    return reverse('view_character', kwargs={'pk': self.pk})
 
   def fix(self,conf=None):
     """ Check / calculate other characteristics """

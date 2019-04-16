@@ -21,7 +21,8 @@ urlpatterns = [
 
   #re_path('^ajax/edit/character/(?P<id>\d+)/$', edit_character, name='edit_character'),
   
-  re_path('^ajax/edit/character/(?P<pk>\d+)/$', CharacterUpdateView.as_view(), name='edit_character'),
+  re_path('^characters/(?P<pk>\d+)/edit/$', CharacterUpdateView.as_view(), name='edit_character'),
+  re_path('^characters/(?P<pk>\d+)/view/$', CharacterDetailView.as_view(), name='view_character'),
   #re_path('^ajax/update/character/(?P<pk>\d+)/$', CharacterUpdateView.as_view(), name='update_character'),
   #re_path('^ajax/edit/character/(?P<id>\d+)', edit_character, name='edit_character'),
   #re_path('^ajax/update/character/(?P<id>\d+)', edit_character, name='update_character'),
@@ -32,7 +33,7 @@ urlpatterns = [
   
   re_path('^ajax/pdf/character/(?P<id>\d+)/$', pdf_character, name='pdf_character'),
   #re_path('^ajax/view/character/(?P<id>\d+)/$', view_character, name='view_character'),
-  re_path('^ajax/view/character/(?P<pk>\d+)/$', CharacterDetailView.as_view(), name='view_character'),
+  
   
   re_path('^ajax/list/(?P<slug>[\w-]+)/(?P<id>\d+)/$', get_list, name='get_list'),
   #re_path('^ajax/cast/(?P<slug>[\w-]+)/(?P<id>\d+)/$', get_story_casting, name='get_story_casting'),
