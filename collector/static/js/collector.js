@@ -9,7 +9,6 @@ function prepare_ajax(){
       if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
         var csrf_middlewaretoken = $('input[name=csrfmiddlewaretoken]').val();        
         xhr.setRequestHeader('X-CSRFToken',csrf_middlewaretoken);
-        console.log(csrf_middlewaretoken);
       }
     }
   });
@@ -277,9 +276,10 @@ function rebootlinks(){
       url: 'characters/'+$(this).attr('id')+'/edit/',
       success: function(answer) {
         $('.details').html(answer);
-        $('body').toggleClass('waiting');         
-        rebootlinks();
+        $('body').toggleClass('waiting');
         prepare_ajax();
+        rebootlinks();
+        
       },
       error: function(answer){
         console.log('ooops... :(');
@@ -291,12 +291,13 @@ function rebootlinks(){
   $('#go').on('click',function(event){
     event.preventDefault();
     event.stopPropagation();
-    formdata = $('.character_form').serialize();
+    var formdata = $('.character_form').serialize();
     var id = $('.character_form input[name=id]').val();
     var rid = $('.character_form input[name=rid]').val();
-    $.ajax({    
-      method: 'POST',
-      url: 'characters/%d/edit/'%(id),
+    //console.log(formdata);
+    $.ajax({
+      url: 'characters/'+id+'/edit/',
+      method: 'POST',      
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/x-www-form-urlencoded'
@@ -304,7 +305,7 @@ function rebootlinks(){
       data: formdata,
       dataType: 'json',
       success: function(answer) {
-          console.log('hello')
+          //console.log('hello')
           console.log(answer);
           $('.details').html(answer);          
           $('li#'+rid).html(answer.line);
@@ -315,7 +316,7 @@ function rebootlinks(){
       },
       error: function(answer) {
         console.log('Character Update Error');
-        console.log(answer);
+        console.log(answer.responseText);
         //$('.details').html(answer);
       },
     });  

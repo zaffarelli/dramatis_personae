@@ -7,7 +7,6 @@ from django.http import JsonResponse
 
 class AjaxFromResponseMixin:
   def form_valid(self, form):
-    import pdb; pdb.set_trace();
     response = super().form_valid(form)
     if self.request.is_ajax():
       data = {
@@ -18,7 +17,6 @@ class AjaxFromResponseMixin:
       return response
 
   def form_invalid(self, form):
-    import pdb; pdb.set_trace();
     response = super().form_invalid(form)
     if self.request.is_ajax():
       return JsonResponse(form.errors, status=400)

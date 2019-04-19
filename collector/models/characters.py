@@ -102,6 +102,7 @@ class Character(models.Model):
   def get_absolute_url(self):
     return reverse('view_character', kwargs={'pk': self.pk})
 
+
   def fix(self,conf=None):
     """ Check / calculate other characteristics """
     #self.check_exportable()
