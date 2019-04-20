@@ -39,7 +39,7 @@ class Character(models.Model):
   weight = models.IntegerField(default=50)
   narrative = models.TextField(default='',blank=True)
   entrance = models.CharField(max_length=100,default='',blank=True)
-  keyword = models.CharField(max_length=32, blank=True, default='')
+  keyword = models.CharField(max_length=32, blank=True, default='other')
   stars = models.CharField(max_length=256, blank=True, default='')
   PA_STR = models.PositiveIntegerField(default=3)
   PA_CON = models.PositiveIntegerField(default=3)
@@ -93,11 +93,11 @@ class Character(models.Model):
   is_partial = models.BooleanField(default=True)
   use_only_entrance = models.BooleanField(default=False)
   epic = models.ForeignKey(Epic, null=True, blank=True, on_delete=models.SET_NULL)
-  picture = models.CharField(max_length=256, blank=True, default='')
-  alliance_picture = models.CharField(max_length=256, blank=True, default='')
+  #picture = models.CharField(max_length=256, blank=True, default='')
+  #alliance_picture = models.CharField(max_length=256, blank=True, default='')
   onsave_reroll_attributes = models.BooleanField(default=False)
   onsave_reroll_skills = models.BooleanField(default=False)
-  build_log = models.TextField(default='',blank=True)  
+  #build_log = models.TextField(default='',blank=True)  
 
   def get_absolute_url(self):
     return reverse('view_character', kwargs={'pk': self.pk})
@@ -180,8 +180,8 @@ class Character(models.Model):
       else:
         found_skill.value += modifier
       found_skill.save()
-      self.build_log += ('> New value for %s is %d'%(found_skill.skill_ref.reference,found_skill.value))
-      self.build_log += ('updated')
+      #self.build_log += ('> New value for %s is %d'%(found_skill.skill_ref.reference,found_skill.value))
+      #self.build_log += ('updated')
       return found_skill
     else:
       skill = Skill()
@@ -192,8 +192,8 @@ class Character(models.Model):
       else:
         skill.value = modifier
       skill.save()
-      self.build_log += ('> New value for %s is %d'%(skill.skill_ref.reference,skill.value))
-      self.build_log += ('added')
+      #self.build_log += ('> New value for %s is %d'%(skill.skill_ref.reference,skill.value))
+      #self.build_log += ('added')
       return skill
 
   def add_missing_root_skills(self):
@@ -234,28 +234,28 @@ class Character(models.Model):
       self.PA_STR + self.PA_CON + self.PA_BOD + self.PA_MOV + \
       self.PA_INT + self.PA_WIL + self.PA_TEM + self.PA_PRE + \
       self.PA_TEC + self.PA_REF + self.PA_AGI + self.PA_AWA
-    self.build_log += ('PA_TOTAL: %d'%(self.PA_TOTAL))
+    #self.build_log += ('PA_TOTAL: %d'%(self.PA_TOTAL))
     # skills
     skills = self.skill_set.all()
     for s in skills:
       if s.skill_ref.is_root == False:         
         self.SK_TOTAL += s.value
-    self.build_log += ('SK_TOTAL: %d'%(self.SK_TOTAL))
+    #self.build_log += ('SK_TOTAL: %d'%(self.SK_TOTAL))
     # talents
     talents = self.talent_set.all()
     for t in talents:
       self.TA_TOTAL += t.value
-    self.build_log += ('TA_TOTAL: %d'%(self.TA_TOTAL))
+    #self.build_log += ('TA_TOTAL: %d'%(self.TA_TOTAL))
     # blessings curses
     blessingcurses = self.blessingcurse_set.all()
     for bc in blessingcurses:
       self.BC_TOTAL += bc.value
-    self.build_log += ('BC_TOTAL: %d'%(self.BC_TOTAL))
+    #self.build_log += ('BC_TOTAL: %d'%(self.BC_TOTAL))
     # benefice afflictions
     beneficeafflictions = self.beneficeaffliction_set.all()    
     for ba in beneficeafflictions:
       self.BA_TOTAL += ba.value + ba.beneficeaffliction_ref.value
-    self.build_log += ('BA_TOTAL: %d'%(self.BA_TOTAL))
+    #self.build_log += ('BA_TOTAL: %d'%(self.BA_TOTAL))
     # AP    
     self.AP = self.PA_TOTAL
     # Extras as OP
@@ -264,18 +264,18 @@ class Character(models.Model):
     weapons = self.weapon_set.all()    
     for w in weapons:
       self.weapon_cost += w.weapon_ref.cost
-    self.build_log += ('weapon_cost: %d'%(self.weapon_cost))
+    #self.build_log += ('weapon_cost: %d'%(self.weapon_cost))
     # Armors firebirds
     armors = self.armor_set.all()    
     for a in armors:
       self.armor_cost += a.armor_ref.cost
-    self.build_log += ('armor_cost: %d'%(self.armor_cost))
+    #self.build_log += ('armor_cost: %d'%(self.armor_cost))
     # Shields firebirds
     shields = self.shield_set.all()    
     for s in shields:
       self.shield_cost += s.shield_ref.cost
-    self.build_log += ('shield_cost: %d'%(self.shield_cost))
-    return self.build_log
+    #self.build_log += ('shield_cost: %d'%(self.shield_cost))
+    return 'ok'#self.build_log
 
 
   def check_exportable(self,conf=None):
@@ -283,7 +283,7 @@ class Character(models.Model):
     exportable = True
     comment = ''
     self.stars = ''
-    self.build_log = ''
+    #self.build_log = ''
     for x in range(1,int(self.castrole.value)+1):
       self.stars += '<i class="fas fa-star fa-xs"></i>'    
     comment += self.resetTotal()
@@ -294,8 +294,8 @@ class Character(models.Model):
     if self.player != '':
       comment += 'Warning: Players avatars are always exportable...\n'
       exportable = True
-    if comment != '':
-      self.build_log += comment
+    #if comment != '':
+    #  self.build_log += comment
     if self.is_exportable != exportable:
       self.is_exportable = exportable
       self.rid = 'none'
@@ -392,6 +392,7 @@ def backup_character(sender, instance, **kwargs):
   """ After saving, create PDF for the character """
   if instance.rid != 'none':
     instance.backup()
+      
       
 
 

@@ -294,7 +294,6 @@ function rebootlinks(){
     var formdata = $('.character_form').serialize();
     var id = $('.character_form input[name=id]').val();
     var rid = $('.character_form input[name=rid]').val();
-    //console.log(formdata);
     $.ajax({
       url: 'characters/'+id+'/edit/',
       method: 'POST',      
@@ -305,19 +304,14 @@ function rebootlinks(){
       data: formdata,
       dataType: 'json',
       success: function(answer) {
-          //console.log('hello')
-          console.log(answer);
-          $('.details').html(answer);          
-          $('li#'+rid).html(answer.line);
           $('li').find('div.avatar_link').removeClass('selected');
+          $('li').find('div.avatar_link').find('#'+id+'.view_character').click();
           rebootlinks();
-          //prepare_ajax();          
+          prepare_ajax();          
           loadKeywords();
       },
       error: function(answer) {
-        console.log('Character Update Error');
         console.log(answer.responseText);
-        //$('.details').html(answer);
       },
     });  
   });
