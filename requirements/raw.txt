@@ -75,7 +75,7 @@ pygpgme==0.3
 pyinotify==0.9.6
 PyIscsi==1.0
 pykickstart==3.12
-pyOpenSSL==17.3.0
+pyOpenSSL>=17.5.0
 pyparsing==2.1.10
 pyparted==3.11.0
 PyPDF2==1.26.0
@@ -110,7 +110,7 @@ SSSDConfig==1.16.3
 systemd-python==234
 text-unidecode==1.2
 uritemplate==3.0.0
-urllib3==1.24.1
+urllib3==1.24.2
 virtualenv==15.1.0
 webencodings==0.5.1
 wrapt==1.10.11

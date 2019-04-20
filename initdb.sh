@@ -4,6 +4,8 @@
 #!/bin/bash
 clear
 
+python3 manage.py flush
+
 echo "Loading reference data..."
 python3 manage.py loaddata backup/weaponrefs.xml
 python3 manage.py loaddata backup/skillrefs.xml
