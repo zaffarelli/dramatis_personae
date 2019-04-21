@@ -1,21 +1,22 @@
 # Dramatis Personae
 
-## Fresh database setup
-
-Rename / replace `db.sqlite3.orig` to `db.sqlite3`.
-
-If you don't want the default data, you can do:
-
+## Database setup
+Set up a blank database (with reference data):
 ```bash
-(dp_dir) $ python3 manage.py flush
-(dp_dir) $ .initdb.sh
-
+(dp_dir) $ scripts/db_load_initial.sh
+```
+...or reload the one previously dumped:
+```bash
+(dp_dir) $ scripts/db_load_custom.sh
 ```
 
-## Access Admin interface
-
-Create an admin superuser
+Create a superuser to access the admin section:
 ```
 (dp_dir) $ python3 manage.py createsuperuser
-
 ```
+
+## Backup custom database
+```bash
+(dp_dir) $ scripts/db_dump.sh
+```
+
