@@ -19,11 +19,11 @@ def get_chardar(request, pk):
 def get_population_statistics(request, *args, **kwargs):
   conf = get_current_config()
   da = []
-  ch = conf.get_chart('castprofile__reference','Profiles','castprofile.reference')
+  ch = conf.get_chart('profile__reference','Profiles','profile.reference')
   da.append(json.dumps(ch['data']))
-  ch = conf.get_chart('castrole__reference','Roles','castrole.reference')  
+  ch = conf.get_chart('role__reference','Roles','role.reference')  
   da.append(json.dumps(ch['data']))
-  ch = conf.get_chart('castspecies__species','Species','castspecies.species')  
+  ch = conf.get_chart('specie__species','Specie','specie.species')  
   da.append(json.dumps(ch['data']))
   ch = conf.get_chart('caste','Caste','caste','doughnut')  
   da.append(json.dumps(ch['data']))

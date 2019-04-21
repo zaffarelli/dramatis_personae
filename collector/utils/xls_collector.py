@@ -43,13 +43,12 @@ def export_row(ws, data, ch, r):
     val = getattr(ch,the_field)
     if field_type == 'ForeignKey':
       related_model = str(self._meta.get_field(the_field).related_model)
-      if related_model == "<class 'collector.models.fics_models.CastEveryman'>":
-        data = CastEveryman.objects.filter(pk=val).first().species
-        import pdb; pdb.set_trace()
-      elif related_model == "<class 'collector.models.fics_models.CastRole'>":
-        data = CastRole.objects.filter(pk=val).first().reference
-      elif related_model == "<class 'collector.models.fics_models.CastProfile'>":
-        data = CastProfile.objects.filter(pk=val).first().reference
+      if related_model == "<class 'collector.models.fics_models.Specie'>":
+        data = Specie.objects.filter(pk=val).first().specie
+      elif related_model == "<class 'collector.models.fics_models.Role'>":
+        data = Role.objects.filter(pk=val).first().reference
+      elif related_model == "<class 'collector.models.fics_models.Profile'>":
+        data = Profile.objects.filter(pk=val).first().reference
       else:
         data = 'Unknown'
     else:
@@ -80,7 +79,7 @@ def export_to_xls(filename='dramatis_personae.xlsx'):
     '4':{'title':'Alliance','attribute':'alliance','width':40},
     '5':{'title':'Rank','attribute':'rank','width':30},
     '6':{'title':'Gender','attribute':'gender','width':10},
-    '7':{'title':'Species/Race','attribute':'castspecies','width':20},
+    '7':{'title':'Specie/Race','attribute':'specie','width':20},
     '8':{'title':'Caste','attribute':'caste','width':30},
     '9':{'title':'Birthdate','attribute':'birthdate','width':10},
     '10':{'title':'Age','attribute':'age','width':10},
@@ -218,7 +217,7 @@ def export_to_xls(filename='dramatis_personae.xlsx'):
     '4':{'title':'Player','attribute':'player','width':20},
     '5':{'title':'Rank','attribute':'rank','width':20},
     '6':{'title':'Gender','attribute':'gender','width':10},
-    '7':{'title':'Species/Race','attribute':'castspecies','width':20},
+    '7':{'title':'Specie/Race','attribute':'specie','width':20},
     '8':{'title':'Caste','attribute':'caste','width':10},
     '9':{'title':'Age','attribute':'age','width':10},
     '10':{'title':'Entrance','attribute':'entrance','width':40},

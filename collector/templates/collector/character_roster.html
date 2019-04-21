@@ -3,14 +3,14 @@
 {%load static%}
 {% block article %}
 <div id="header_content">
-  <img src="{% static 'collector/simple_logo_invert.jpg' %}" style='zoom:20%'>
+  
   <strong>dP</strong>
 </div>
 
 
 <h4 class='avatar_name'>{{ c.full_name|safe }} {% if c.player != "" %}({{c.player|safe}}){%endif%}</h4>
 <em>{{ c.entrance|safe }}</em></br>
-{{c.gender|capfirst}} {{ c.castspecies|capfirst|safe }} {{ c.rank|safe }} of {{ c.alliance|safe }} from {{ c.native_fief|safe }} {{ c.caste|safe }}.
+{{c.gender|capfirst}} {{ c.specie|capfirst|safe }} {{ c.rank|safe }} of {{ c.alliance|safe }} from {{ c.native_fief|safe }} {{ c.caste|safe }}.
 <br/>Born in {{ c.birthdate }} ({{ c.age }} years old)
 <br/>Height: {{c.height}}cm / Weight:{{c.weight}}kg 
 <h5>Primary Attributes ({{ c.PA_TOTAL }})</h5>
@@ -103,8 +103,8 @@
 
 {% comment %}
 <br/>CHALLENGE {{ c.OP }}
-<br/>Role: {{c.castrole}}
-<br/>Profile: {{c.castprofile}}
+<br/>Role: {{c.role}}
+<br/>Profile: {{c.profile}}
 <BR/>RID:{{ c.rid }}
 
 <BR/>{% now "Ymd H:i:s"  %}

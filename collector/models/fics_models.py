@@ -8,10 +8,10 @@ from django.db import models
 from django.contrib import admin
 import json
 
-class CastRole(models.Model):
+class Role(models.Model):
   class Meta:
     ordering = ['value','reference']
-  reference = models.CharField(max_length=64,default='new_role',blank=True, unique=True)
+  reference = models.CharField(max_length=64,default=1,blank=True, unique=True)
   value = models.PositiveIntegerField(default=0)
   primaries = models.PositiveIntegerField(default=0)
   maxi = models.PositiveIntegerField(default=10)
@@ -24,10 +24,10 @@ class CastRole(models.Model):
   def __str__(self):
     return '%s (%s)' % (self.reference, self.value)
 
-class CastProfile(models.Model):
+class Profile(models.Model):
   class Meta:
     ordering = ['reference']
-  reference = models.CharField(max_length=64,default='new_profile',blank=True, unique=True)
+  reference = models.CharField(max_length=64,default=1,blank=True, unique=True)
   weights = models.CharField(max_length=128, default = '[1,1,1,1,1,1,1,1,1,1,1,1]')
   groups = models.CharField(max_length=128, default = '[]')
   def __str__(self):
@@ -41,11 +41,11 @@ class CastProfile(models.Model):
   def get_groups(self):
     return json.loads(self.groups)
 
-class CastEveryman(models.Model):
+class Specie(models.Model):
   class Meta:
     ordering = ['species','race']
     unique_together = (('species', 'race'),)
-  species = models.CharField(max_length=64,default='',blank=True)
+  species = models.CharField(max_length=64,default=1,blank=True)
   race = models.CharField(max_length=64,default='',blank=True)
   racial_attr_mod = models.CharField(max_length=128, default = '{}')
   racial_skills = models.CharField(max_length=512, default = '{}')
@@ -77,16 +77,17 @@ class CastEveryman(models.Model):
     self.skill_balance = b
     print('Skill --> %s:%d'%(self,b))
     self.save()
-class CastEverymanAdmin(admin.ModelAdmin):
+
+class SpecieAdmin(admin.ModelAdmin):
   ordering = ('species','race')
   list_display = ('species','race','racial_attr_mod','attr_mod_balance','racial_skills','skill_balance','description','racial_occult')
 
 
-class CastRoleAdmin(admin.ModelAdmin):
+class RoleAdmin(admin.ModelAdmin):
   ordering = ('-value',)
   list_display = ('reference','value','primaries','maxi','mini','skills','talents','ba','bc')
 
-class CastProfileAdmin(admin.ModelAdmin):
+class ProfileAdmin(admin.ModelAdmin):
   ordering = ('reference',)
   list_display = ('reference','weights','groups')
 

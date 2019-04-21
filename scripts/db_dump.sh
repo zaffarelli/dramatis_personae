@@ -12,9 +12,9 @@ python3 manage.py dumpdata collector.SkillRef --format xml --output backup/refer
 python3 manage.py dumpdata collector.ArmorRef --format xml --output backup/reference/armorrefs.xml
 python3 manage.py dumpdata collector.ShieldRef --format xml --output backup/reference/shieldrefs.xml
 python3 manage.py dumpdata collector.BeneficeAfflictionRef --format xml --output backup/reference/beneficeafflictionrefs.xml
-python3 manage.py dumpdata collector.CastRole --format xml --output backup/reference/castroles.xml
-python3 manage.py dumpdata collector.CastProfile --format xml --output backup/reference/castprofiles.xml
-python3 manage.py dumpdata collector.CastEveryman --format xml --output backup/reference/casteverymans.xml
+python3 manage.py dumpdata collector.Role --format xml --output backup/reference/roles.xml
+python3 manage.py dumpdata collector.Profile --format xml --output backup/reference/profiles.xml
+python3 manage.py dumpdata collector.Specie --format xml --output backup/reference/species.xml
 
 echo "Dumping user data..."
 python3 manage.py dumpdata collector.Skill --format xml --output backup/custom/skills.xml
@@ -31,7 +31,7 @@ python3 manage.py dumpdata scenarist.Drama --format xml --output backup/custom/d
 python3 manage.py dumpdata scenarist.Act --format xml --output backup/custom/acts.xml
 python3 manage.py dumpdata scenarist.Event --format xml --output backup/custom/events.xml
 
-python3 manage.py dumpdata collector.Config --format xml --output backup/configs.xml
+python3 manage.py dumpdata collector.Config --format xml --output backup/custom/configs.xml
 
 echo "Moving to fixtures..."
 cp backup/reference/skillrefs.xml collector/fixtures/

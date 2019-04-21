@@ -12,9 +12,7 @@ from django.urls import reverse
 import hashlib
 import collector.models.skills
 from scenarist.models.epics import Epic
-from collector.models.fics_models import CastRole,CastProfile,CastEveryman
-#from scenarist.models.dramas import Drama
-#from scenarist.models.acts import Act
+from collector.models.fics_models import Role,Profile,Specie
 from collector.utils import fs_fics7, fics_references
 from collector.utils.basic import debug_print
 from collector.utils.basic import write_pdf
@@ -27,9 +25,9 @@ class Character(models.Model):
   alliance = models.CharField(max_length=200, blank=True, default='')
   alliancehash = models.CharField(max_length=200, blank=True, default='none')
   player = models.CharField(max_length=200, default='', blank=True)
-  castspecies = models.ForeignKey(CastEveryman, null=True, default='new casteveryman', blank=True, on_delete=models.SET_NULL)
-  castrole = models.ForeignKey(CastRole, null=True, blank=True, default='new castrole', on_delete=models.SET_NULL)
-  castprofile = models.ForeignKey(CastProfile, null=True, default='new castprofile', blank=True, on_delete=models.SET_NULL)  
+  specie = models.ForeignKey(Specie, null=True, default='new specie', blank=True, on_delete=models.SET_NULL)
+  role = models.ForeignKey(Role, null=True, blank=True, default='new role', on_delete=models.SET_NULL)
+  profile = models.ForeignKey(Profile, null=True, default='new profile', blank=True, on_delete=models.SET_NULL)  
   birthdate = models.IntegerField(default=0)
   gender = models.CharField(max_length=30, default='female')
   native_fief = models.CharField(max_length=200, default='none',blank=True)
@@ -78,9 +76,6 @@ class Character(models.Model):
   OP = models.IntegerField(default=0)
   gm_shortcuts = models.TextField(default='',blank=True)
   age = models.IntegerField(default=0)  
-  #role = models.CharField(max_length=16,default='00',choices= fics_references.ROLECHOICES)
-
-  #profile = models.CharField(max_length=16,default='undefined',choices=fics_references.PROFILECHOICES)
   occult_level = models.PositiveIntegerField(default=0)
   occult_darkside = models.PositiveIntegerField(default=0)
   occult = models.CharField(max_length=50, default='', blank=True)
@@ -93,23 +88,16 @@ class Character(models.Model):
   is_partial = models.BooleanField(default=True)
   use_only_entrance = models.BooleanField(default=False)
   epic = models.ForeignKey(Epic, null=True, blank=True, on_delete=models.SET_NULL)
-  #picture = models.CharField(max_length=256, blank=True, default='')
-  #alliance_picture = models.CharField(max_length=256, blank=True, default='')
+  picture = models.CharField(max_length=256, blank=True, default='')
+  alliance_picture = models.CharField(max_length=256, blank=True, default='')
   onsave_reroll_attributes = models.BooleanField(default=False)
   onsave_reroll_skills = models.BooleanField(default=False)
-  #build_log = models.TextField(default='',blank=True)  
 
   def get_absolute_url(self):
     return reverse('view_character', kwargs={'pk': self.pk})
 
-
   def fix(self,conf=None):
     """ Check / calculate other characteristics """
-    #self.check_exportable()
-    #print("FIX:%s"%(self.full_name))
-    #print(self.onsave_reroll_attributes)
-    #print(self.onsave_reroll_skills)
-    # Age completion
     if conf == None:
       if self.birthdate < 1000:
         self.birthdate = 5017 - self.birthdate
@@ -123,23 +111,14 @@ class Character(models.Model):
       self.player = ''
     # Calculate SA
     self.resetTotal()
-
-    
-
     if self.onsave_reroll_attributes:
-      #print('Species:%s Role:%s Profile:%s'%(self.castspecies,self.castrole,self.castprofile))
       fs_fics7.check_primary_attributes(self)
       fs_fics7.check_secondary_attributes(self)
-    #else:
-      #print("Nothing to do on attributes")
-
     if self.onsave_reroll_skills:
       fs_fics7.check_skills(self)
-      #print("Nothing to do on skills (only roots)")
     else:
       self.add_missing_root_skills()
     self.resetTotal()
-    
     gm_shortcuts = ''
     tmp_shortcuts = []
     skills = self.skill_set.all()
@@ -156,9 +135,7 @@ class Character(models.Model):
     debug_print('>>> %s %s'%(self.rid,self.is_exportable))
 
   def apply_racial_pa_mods(self):
-    attr_mods = self.castspecies.get_racial_attr_mod()
-    #print('XXX %s'%(self.castspecies.species))
-    #print(attr_mods)
+    attr_mods = self.specie.get_racial_attr_mod()
     for am in attr_mods:
       #print(am)
       v = getattr(self,am)
@@ -284,7 +261,7 @@ class Character(models.Model):
     comment = ''
     self.stars = ''
     #self.build_log = ''
-    for x in range(1,int(self.castrole.value)+1):
+    for x in range(1,int(self.role.value)+1):
       self.stars += '<i class="fas fa-star fa-xs"></i>'    
     comment += self.resetTotal()
     roleok = fs_fics7.check_role(self)
@@ -314,57 +291,57 @@ class Character(models.Model):
   def __str__(self):
     return '%s' % self.full_name  
 
-  def update_field(self, key, value):
-    """ Field individual validation during sanitize """
-    try:
-      v = getattr(self, key)      
-      val = value[0]
-      print('%s %s'%(key,str(val)))
-      valfix = val
-      field_type = self._meta.get_field(str(key)).get_internal_type()
-      if field_type == 'ForeignKey':
-        related_model = str(self._meta.get_field(str(key)).related_model)
-        #print("FOREIGNKEY SITUATION (%s)"%(related_model))
-        if related_model == "<class 'scenarist.models.epics.Epic'>":        
-          valfix = Epic.objects.filter(pk=val).first()
-          #print("Foreign key is an Epic")
-        elif related_model == "<class 'collector.models.fics_models.CastEveryman'>":
-          valfix = CastEveryman.objects.filter(pk=val).first()
-          #print('valfix = %s'%(valfix))
-        elif related_model == "<class 'collector.models.fics_models.CastRole'>":
-          valfix = CastRole.objects.filter(pk=val).first()
-          #print("Foreign key is an Act")
-        elif related_model == "<class 'collector.models.fics_models.CastProfile'>":
-          valfix = CastProfile.objects.filter(pk=val).first()
-#        else:
-        #  pass
-          #print("Foreign key link not found: %s"%(related_model))
-      else:
-        if type(v)==type(1):
-          valfix = int(val)+0        
-        elif type(v)==type(False):
-          valfix = bool(val)
-        else:
-          valfix = str(val)
-      debug_print(valfix)
-      if valfix != v:
-        #print("%s --> %s:%s <> %s:%s"%(key,v,type(v),valfix,type(valfix)))
-        #print("%s"%(type(self.key)))
-        setattr(self, key, valfix)
-        return key,valfix
-      else:
-        return False,False
-    except AttributeError:
-      #print("DP: There is no such attribute %s in this model"%(key))
-      return False, False   
+  # def update_field(self, key, value):
+    # """ Field individual validation during sanitize """
+    # try:
+      # v = getattr(self, key)      
+      # val = value[0]
+      # print('%s %s'%(key,str(val)))
+      # valfix = val
+      # field_type = self._meta.get_field(str(key)).get_internal_type()
+      # if field_type == 'ForeignKey':
+        # related_model = str(self._meta.get_field(str(key)).related_model)
+        # #print("FOREIGNKEY SITUATION (%s)"%(related_model))
+        # if related_model == "<class 'scenarist.models.epics.Epic'>":        
+          # valfix = Epic.objects.filter(pk=val).first()
+          # #print("Foreign key is an Epic")
+        # elif related_model == "<class 'collector.models.fics_models.Species'>":
+          # valfix = Everyman.objects.filter(pk=val).first()
+          # #print('valfix = %s'%(valfix))
+        # elif related_model == "<class 'collector.models.fics_models.Role'>":
+          # valfix = Role.objects.filter(pk=val).first()
+          # #print("Foreign key is an Act")
+        # elif related_model == "<class 'collector.models.fics_models.Profile'>":
+          # valfix = Profile.objects.filter(pk=val).first()
+# #        else:
+        # #  pass
+          # #print("Foreign key link not found: %s"%(related_model))
+      # else:
+        # if type(v)==type(1):
+          # valfix = int(val)+0        
+        # elif type(v)==type(False):
+          # valfix = bool(val)
+        # else:
+          # valfix = str(val)
+      # debug_print(valfix)
+      # if valfix != v:
+        # #print("%s --> %s:%s <> %s:%s"%(key,v,type(v),valfix,type(valfix)))
+        # #print("%s"%(type(self.key)))
+        # setattr(self, key, valfix)
+        # return key,valfix
+      # else:
+        # return False,False
+    # except AttributeError:
+      # #print("DP: There is no such attribute %s in this model"%(key))
+      # return False, False   
 
-  def sanitize(self,f):
-    sane_f = {}
-    for key, value in f.items():
-      rkey,rvalue = self.update_field(key, value)
-      if rkey != False:
-        sane_f[rkey] = rvalue
-    return sane_f
+  # def sanitize(self,f):
+    # sane_f = {}
+    # for key, value in f.items():
+      # rkey,rvalue = self.update_field(key, value)
+      # if rkey != False:
+        # sane_f[rkey] = rvalue
+    # return sane_f
 
   def get_rid(self,s):
     self.rid = fs_fics7.find_rid(s)
@@ -372,7 +349,7 @@ class Character(models.Model):
 
   # Auto build character
   def autobuild(self):
-    if self.castrole.value == 0 and self.castprofile == None:
+    if self.role.value == 0 and self.profile == None:
       return False
     else:
       return True

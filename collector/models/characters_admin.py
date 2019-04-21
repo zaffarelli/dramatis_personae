@@ -45,23 +45,23 @@ def make_complete(modeladmin, request, queryset):
   short_description = "Make complete"
 
 def make_teutonic(modeladmin, request, queryset):
-  queryset.update(castspecies=1)
+  queryset.update(specie=1)
   short_description = "Make teutonic"
 
 def make_kaanic(modeladmin, request, queryset):
-  queryset.update(castspecies=25)
+  queryset.update(specie=25)
   short_description = "Make kaanic"
 
 def make_castillan(modeladmin, request, queryset):
-  queryset.update(castspecies=22)
+  queryset.update(specie=22)
   short_description = "Make castillan"
 
 def make_enquist(modeladmin, request, queryset):
-  queryset.update(castspecies=23)
+  queryset.update(specie=23)
   short_description = "Make enquist"
 
 class CharacterAdmin(admin.ModelAdmin):
-  list_display = ('full_name','castspecies','castrole','castprofile','alliance','PA_TOTAL','SK_TOTAL','BA_TOTAL','BC_TOTAL','TA_TOTAL','OP','is_public','is_partial','use_only_entrance','is_visible','epic')
+  list_display = ('full_name','specie','role','profile','alliance','PA_TOTAL','SK_TOTAL','BA_TOTAL','BC_TOTAL','TA_TOTAL','OP','is_public','is_partial','use_only_entrance','is_visible','epic')
   inlines = [
     SkillInline,
     BlessingCurseInline,

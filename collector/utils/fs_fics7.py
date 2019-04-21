@@ -9,6 +9,7 @@
 import math
 from random import randint
 import os
+import yaml
 from collector.models.skillrefs import SkillRef
 from collector.utils.fics_references import *
 from collector.utils.basic import debug_print
@@ -30,19 +31,19 @@ def check_secondary_attributes(ch):
   ch.SA_RUN = ch.PA_MOV *2
 
 def fetch_everyman_sum(ch):
-  """ Get the sum of everyman skills for the character species """  
+  """ Get the sum of everyman skills for the character specie """  
   total = 0
-  all_every = ch.castspecies.get_racial_skills()
+  all_every = ch.specie.get_racial_skills()
   for every in all_every:
     total += all_every[every]
-  debug_print('> Everyman total for [%s] as [%s] is [%d].'%(ch.full_name,ch.castspecies,total))
+  debug_print('> Everyman total for [%s] as [%s] is [%d].'%(ch.full_name,ch.specie,total))
   return total
     
 def check_everyman_skills(ch):
   """ Check and fix everyman values for the skills"""
   from collector.models.skills import Skill
   skills = ch.skill_set.all()
-  all_every = ch.castspecies.get_racial_skills()
+  all_every = ch.specie.get_racial_skills()
   for every in all_every:
     every_found = False
     for s in skills:
@@ -168,25 +169,23 @@ def choose_pa(weights,maxi,pa):
 
 def check_primary_attributes(ch):
   """ Fixing primary attributes """
-  #print('Checking primary attributes... %s'%(ch.rid))
-  pool = ch.castrole.primaries
+  pool = ch.role.primaries
   pas = [0,0,0,0,0,0,0,0,0,0,0,0]
   total = pool-sum(pas)
-  maxi = ch.castrole.maxi
-  mini = ch.castrole.mini
-  weights = ch.castprofile.get_weights()
-  balance = ch.castspecies.attr_mod_balance
-  ch.challenge = '(<i class="fas fa-th-large"></i>%02d <i class="fas fa-th-list"></i>%02d <i class="fas fa-th"></i>%02d <i class="fas fa-outdent"></i>%02d)'%(ch.castrole.primaries,ch.castrole.skills, ch.castrole.talents,ch.castrole.bc)
+  maxi = ch.role.maxi
+  mini = ch.role.mini
+  weights = ch.profile.get_weights()
+  balance = ch.specie.attr_mod_balance
+  ch.challenge = '(<i class="fas fa-th-large"></i>%02d <i class="fas fa-th-list"></i>%02d <i class="fas fa-th"></i>%02d <i class="fas fa-outdent"></i>%02d)'%(ch.role.primaries,ch.role.skills, ch.role.talents,ch.role.bc)
 
   current =  ch.PA_STR+ch.PA_CON+ch.PA_BOD+ch.PA_MOV+ch.PA_INT+ch.PA_WIL+ch.PA_TEM+ch.PA_PRE+ch.PA_TEC+ch.PA_REF+ch.PA_AGI+ch.PA_AWA
   cnt = 0
-  debug_print('> CONFIG %s: %s %d [ %d / %d ]'%(ch.full_name,ch.castrole.reference,ch.castrole.primaries,pool,maxi))  
+  debug_print('> CONFIG %s: %s %d [ %d / %d ]'%(ch.full_name,ch.role.reference,ch.role.primaries,pool,maxi))  
   debug_print('> Current PA TOTAL: %d'%(current))
   if ch.player == '':
     redo = True
     while redo:
       cnt += 1
-      #print('> Castrole primaries ... %d %d %d '%(ch.castrole.primaries, pool, cnt))
       debug_print('> Error: Primary Attributes invalid. Fixing that. --> Pool=%d (%d)'%(pool,sum(pas)))
       while pool>0:      
         chosen_pa = choose_pa(weights,maxi,pas)
@@ -194,7 +193,6 @@ def check_primary_attributes(ch):
         if pas[idx] < maxi:
           pas[idx] += 1
           pool -= 1
-          #print('> Good : pa[idx]:%d idx:%d maxi:%d mini:%d pool:%d chosen_pa:%d'%(pas[idx],idx,maxi,mini,pool,chosen_pa))
         else:
           debug_print('> Invalid : already too high: pa[idx]:%d idx:%d maxi:%d pool:%d chosen_pa:%d'%(pas[idx],idx,maxi,pool,chosen_pa))
       if min(pas)>=mini and max(pas)<=maxi+5 and sum(pas)==total:
@@ -271,12 +269,11 @@ def choose_sk(alist,maxweight):
 def check_skills(ch):
   """ Fixing skills """
   debug_print('Checking skills...%s'%(ch.rid))
-  pool = ch.castrole.skills
-  maxi = ch.castrole.maxi
-  groups = ch.castprofile.groups
+  pool = ch.role.skills
+  maxi = ch.role.maxi
+  groups = ch.profile.groups
   current = ch.SK_TOTAL
-  balance = ch.castspecies.skill_balance
-  #repart = {'AWA':0,'BOD':0,'CON':0,'DIP':0,'EDU':0,'FIG':0,'PER':0,'SOC':0,'SPI':0,'TIN':0,'UND':0}    
+  balance = ch.specie.skill_balance
   debug_print('> Current SK TOTAL: %d (pool is %d)'%(current,pool))
   master_list = get_skills_list(ch,groups)
   master_weight = 0
@@ -324,17 +321,17 @@ def check_skills(ch):
 
 def check_role(ch):
   #print('> %s:'%(ch.full_name))
-  pa_pool = ch.castrole.primaries
-  sk_pool = ch.castrole.skills
-  ta_pool = ch.castrole.talents
-  bc_pool = ch.castrole.bc
-  ba_pool = ch.castrole.ba
+  pa_pool = ch.role.primaries
+  sk_pool = ch.role.skills
+  ta_pool = ch.role.talents
+  bc_pool = ch.role.bc
+  ba_pool = ch.role.ba
   status = True
   if ch.PA_TOTAL < pa_pool:
     debug_print('   Not enough PA: %d (%d)'%(ch.PA_TOTAL,pa_pool))
     status = False 
-  elif ch.SK_TOTAL+ch.castspecies.skill_balance < sk_pool:
-    debug_print('   Not enough SK: %d (%d)'%(ch.SK_TOTAL+ch.castspecies.skill_balance,sk_pool))
+  elif ch.SK_TOTAL+ch.specie.skill_balance < sk_pool:
+    debug_print('   Not enough SK: %d (%d)'%(ch.SK_TOTAL+ch.specie.skill_balance,sk_pool))
     status = False 
   if ch.BA_TOTAL + ch.BC_TOTAL + ch.TA_TOTAL < ba_pool+bc_pool+ta_pool:
     debug_print('   Not enough OP (Talents + Benefice/Afflictions + Blessing/Curses): %d (%d)'%(ch.BA_TOTAL + ch.BC_TOTAL + ch.TA_TOTAL,ba_pool+bc_pool+ta_pool))
@@ -346,22 +343,29 @@ def update_challenge(ch):
   res += '<i class="fas fa-th-large" title="primary attributes"></i>%d '%(ch.AP)
   res += '<i class="fas fa-th-list" title="skills"></i> %d '%(ch.SK_TOTAL)
   res += '<i class="fas fa-th" title="talents"></i> %d '%(ch.TA_TOTAL+ch.BC_TOTAL+ch.BA_TOTAL)
-  #res += '<i class="fas fa-outdent" title="blessing curses"></i> %d '%(ch.BC_TOTAL)
-  #res += '<i class="fas fa-outdent" title="benefice afflictions"></i> %d '%(ch.BA_TOTAL)
   res += '<i class="fas fa-newspaper" title="OP challenge"></i> %d '%(ch.OP)
   return res
 
-def get_keywords():
-  """ Get all keywords """
-  from collector.models.characters import Character
-  everybody = Character.objects.all()
-  keywords = []
-  for someone in everybody:
-    if someone.keyword != '':
-      keywords.append(someone.keyword)
-  return sorted(list(set(keywords)))
+# def get_keywords():
+  # """ Get all keywords """
+  # from collector.models.characters import Character
+  # everybody = Character.objects.all()
+  # keywords = []
+  # for someone in everybody:
+    # if someone.keyword != '':
+      # keywords.append(someone.keyword)
+  # return sorted(list(set(keywords)))
 
 def find_rid(s):
   x = s.replace(' ','_').replace("'",'').replace('é','e').replace('è','e').replace('ë','e').replace('â','a').replace('ô','o').replace('"','').replace('ï','i').replace('à','a').replace('-','')
   rid = x.lower()
   return rid
+
+def get_options():
+  options = None
+  with open('config.yml', 'r') as stream:
+    try:
+      options = yaml.safe_load(stream)
+    except yaml.YAMLError as exc:
+      print(exc)
+  return options

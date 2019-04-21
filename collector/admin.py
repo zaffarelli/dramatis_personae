@@ -10,15 +10,16 @@ from collector.models.skills import Skill, SkillAdmin
 from collector.models.weapons import Weapon, WeaponAdmin, WeaponRefAdmin, WeaponRef
 from collector.models.armors import Armor, ArmorAdmin, ArmorRefAdmin, ArmorRef
 from collector.models.shields import Shield, ShieldAdmin, ShieldRefAdmin, ShieldRef
+from collector.models.fics_models import Role, RoleAdmin, Profile, ProfileAdmin, Specie, SpecieAdmin
 from collector.models.characters import Character
 from collector.models.characters_admin import CharacterAdmin
 from collector.models.benefices_afflictions import BeneficeAfflictionRef, BeneficeAfflictionRefAdmin
 from collector.models.configs import Config, ConfigAdmin
-from collector.models.fics_models import CastRole, CastRoleAdmin, CastProfile, CastProfileAdmin, CastEveryman, CastEverymanAdmin
 
-admin.site.register(CastRole, CastRoleAdmin)
-admin.site.register(CastProfile, CastProfileAdmin)
-admin.site.register(CastEveryman, CastEverymanAdmin)
+
+admin.site.register(Role, RoleAdmin)
+admin.site.register(Profile, ProfileAdmin)
+admin.site.register(Specie, SpecieAdmin)
 
 admin.site.register(SkillRef, SkillRefAdmin)
 admin.site.register(Skill, SkillAdmin)

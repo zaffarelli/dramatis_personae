@@ -2,7 +2,7 @@
 {{ c.full_name|safe }}
 {{ c.entrance|safe }}
 {{ c.alliance|safe }} {{ c.rank|safe }} [{{ c.caste|safe }} from {{ c.native_fief|safe }}]
-{{ c.species|safe|capfirst }} [ {{ c.gender|safe }} Age:{{ c.age }}(born:{{ c.birthdate }}) {{ c.height }}cm/{{ c.weight }}kg ]{% if c.player != '' %}
+{{ c.specie|safe|capfirst }} [ {{ c.gender|safe }} Age:{{ c.age }}(born:{{ c.birthdate }}) {{ c.height }}cm/{{ c.weight }}kg ]{% if c.player != '' %}
 {{ c.player|safe }}{%endif%}
 Primary Attributes:
 STR {{ c.PA_STR|center:"3" }} CON {{ c.PA_CON|center:"3" }}  INT {{ c.PA_INT|center:"3" }} WIL {{ c.PA_WIL|center:"3" }}  TEC {{ c.PA_TEC|center:"3" }} REF {{ c.PA_REF|center:"3" }}

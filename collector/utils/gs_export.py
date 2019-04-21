@@ -11,25 +11,44 @@
 from django.conf import settings
 from collector.models.characters import Character
 from collector.utils import fs_fics7
+from collector.utils.basic import logger
 import gspread
+import yaml
 from oauth2client.service_account import ServiceAccountCredentials
 
-def connect(target):
-  cred_file = settings.STATIC_ROOT+'collector/creds.json'
+def connect(options):
+  cf = options['collector']['export']['google_spread_sheet']['credentials']
+  cred_file = settings.STATIC_ROOT+cf
   scope = ['https://spreadsheets.google.com/feeds','https://www.googleapis.com/auth/drive']
   credentials = ServiceAccountCredentials.from_json_keyfile_name(cred_file, scope) 
   client = gspread.authorize(credentials) 
-  sheet = client.open(target).worksheet('PNJs')
+  return client
+
+def connect_as_source(options):
+  source_name = options['collector']['export']['google_spread_sheet']['source_name']
+  tab = options['collector']['export']['google_spread_sheet']['tab']
+  client = connect(options)
+  sheet = client.open(source_name).worksheet(tab)
   return sheet
 
-def update_gss():  
-    header_line = gss_review('Fading Suns')
-    gss_push('Fading Suns',header_line)
-    print('> update done')
+def connect_as_target(options):
+  target_name = options['collector']['export']['google_spread_sheet']['target_name']
+  tab = options['collector']['export']['google_spread_sheet']['tab']
+  client = connect(options)  
+  sheet = client.open(target_name).worksheet(tab)      
+  return sheet
 
-def gss_review(target):
+def update_gss():
+  options = fs_fics7.get_options()
+  if options:
+    header_line = gss_review(options)
+    gss_push(options,header_line)
+  else:
+    logger.error('Something wrong append with the options file (config.yml)')
+
+def gss_review(options):
   header_line = []
-  sheet = connect(target)
+  sheet = connect_as_source(options)
   matrix = sheet.get_all_values()
   for idx, row in enumerate(matrix):
     if idx>0:
@@ -58,8 +77,8 @@ def gss_review(target):
   print('> Review done')
   return header_line
   
-def gss_push(target,header_line):  
-  sheet = connect(target) 
+def gss_push(options,header_line):  
+  sheet = connect_as_target(options) 
   character_items = Character.objects.all().filter(is_public=True,epic=1,player='').order_by('alliance','full_name')
   matrix = sheet.range('A1:M%d'%(len(character_items)+1))
   for i in range(13):
@@ -95,7 +114,7 @@ def gss_push(target,header_line):
       matrix[idx*13+3].value = c.player
       matrix[idx*13+4].value = c.rank
       matrix[idx*13+5].value = c.gender
-      matrix[idx*13+6].value = c.castspecies.species
+      matrix[idx*13+6].value = c.specie.species
       matrix[idx*13+7].value = c.caste
       matrix[idx*13+8].value = c.age
       matrix[idx*13+9].value = c.entrance
