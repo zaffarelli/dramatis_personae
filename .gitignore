@@ -10,3 +10,4 @@ logs/
 rubish/
 backup/rescue/
 backup/custom/
+collector/static/collector/creds.json

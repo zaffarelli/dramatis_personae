@@ -1,0 +1,13 @@
+# DP Global configuration
+# See config.default.yml for default values
+
+collector:
+  export:
+    google_spread_sheet:
+      # The sheet it will read from in your drive
+      source_name:      "FADING SUNS"
+      # The sheet it will write to in your drive
+      target_name:      "FADING SUNS'
+      credentials:      "collector/static/collector/creds.json"
+
+  
