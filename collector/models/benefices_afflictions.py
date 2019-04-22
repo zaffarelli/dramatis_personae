@@ -9,7 +9,7 @@ from collector.models.characters import Character
 
 class BeneficeAfflictionRef(models.Model):
   class Meta:
-    ordering = ['reference']  
+    ordering = ['category','reference']  
   reference = models.CharField(max_length=64)
   value = models.IntegerField(default=0)
   category = models.CharField(max_length=2, default='ot', choices=(('ba',"Background"),('co',"Community"),('po',"Possessions"),('ri',"Riches"),('st',"Status"),('ot',"Other")))
@@ -20,7 +20,8 @@ class BeneficeAfflictionRef(models.Model):
     return '%s (%d) %s' % (self.reference,self.value , self.description)
 
 class BeneficeAfflictionRefAdmin(admin.ModelAdmin):
-  ordering = ('reference',)
+  ordering = ('category','reference',)
+  list_display = ('category','reference','source','value','description')
 
 class BeneficeAfflictionRefInline(admin.TabularInline):
   model = BeneficeAfflictionRef

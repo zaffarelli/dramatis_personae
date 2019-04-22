@@ -128,6 +128,8 @@ class Character(models.Model):
         tmp_shortcuts.append(sc)
     gm_shortcuts = '<br/>'.join(tmp_shortcuts)
     gm_shortcuts += fs_fics7.check_attacks(self)
+    gm_shortcuts += fs_fics7.check_health(self)
+    gm_shortcuts += fs_fics7.check_defense(self)
     if self.player == None:
       gm_shortcuts += fs_fics7.check_nameless_attributes(self)
     self.gm_shortcuts = gm_shortcuts

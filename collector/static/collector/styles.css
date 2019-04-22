@@ -519,7 +519,7 @@ body {
   height: auto;
   left: auto;
   display: block;
-  right: auto;
+  right: 100px;
   bottom: 0px;
   z-index: 9000;
   background: darkgreen url("details.png");
@@ -534,7 +534,7 @@ body {
     text-indent: 0; }
     .messenger ul li {
       font-size: 8pt;
-      color: black; }
+      color: white; }
 
 /* Normal --------------------------------------------------------------------*/
 @media all and (min-width: 1024px) {

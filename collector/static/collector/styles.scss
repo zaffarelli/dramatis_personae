@@ -688,11 +688,10 @@ body {
   height:auto;
   left:auto;
   display:block;
-  right: auto;
+  right: 100px;
   bottom:0px;
   z-index:9000;
   background:darkgreen url("details.png");
-  
   overflow:hidden;
   font-family:Texte;
   border-radius:5px 0 0 0;
@@ -704,7 +703,7 @@ body {
     text-indent:0;
     & li {
       font-size:8pt;
-      color:black;
+      color:white;
     }
   }
 

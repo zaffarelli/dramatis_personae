@@ -123,7 +123,55 @@ def check_attacks(ch):
   ranged_attack = '<br/>'.join(tmpstr) 
   return ranged_attack
 
+def check_health(ch):
+  health_entries = []
+  
+  return ''.join(health_entries)
 
+
+def stack_defenses(defenses,a):
+  if a:
+    if a.armor_ref.head:
+      defenses['head'] += a.armor_ref.stopping_power
+    if a.armor_ref.right_arm:
+      defenses['right_arm'] = a.armor_ref.stopping_power
+    if a.armor_ref.torso:
+      defenses['torso'] += a.armor_ref.stopping_power
+    if a.armor_ref.left_arm:
+      defenses['left_arm'] += a.armor_ref.stopping_power
+    if a.armor_ref.right_leg:
+      defenses['right_leg'] += a.armor_ref.stopping_power
+    if a.armor_ref.left_leg:
+      defenses['left_leg'] += a.armor_ref.stopping_power
+  return defenses
+
+def check_defense(ch):
+  defenses = {'head':0,'right_arm':0,'torso':0,'left_arm':0,'right_leg':0,'left_leg':0}
+  best_soft = None
+  best_medium = None
+  best_hard = None
+  stack = 'Armors stack: '
+  for a in ch.armor_set.all():
+    if a.armor_ref.category == 'Soft':
+      if best_soft == None or (a.armor_ref.stopping_power > best_soft.armor_ref.stopping_power):
+        best_soft = a
+        stack += best_soft.armor_ref.reference+' '
+    if a.armor_ref.category == 'Medium':
+      if best_medium == None or (a.armor_ref.stopping_power > best_medium.armor_ref.stopping_power):
+        best_medium = a
+        stack += best_medium.armor_ref.reference+' '
+    if a.armor_ref.category == 'Hard':
+      if best_hard == None or (a.armor_ref.stopping_power > best_hard.armor_ref.stopping_power):
+        best_hard = a
+        stack += best_hard.armor_ref.reference+' '
+  a = best_soft
+  defenses = stack_defenses(defenses,a)
+  a = best_medium
+  defenses = stack_defenses(defenses,a)
+  a = best_hard
+  defenses = stack_defenses(defenses,a)
+  defenses['stack']= stack
+  return defenses
 
 def minmax_from_dc(sdc):
   if sdc == '':
@@ -369,3 +417,5 @@ def get_options():
     except yaml.YAMLError as exc:
       print(exc)
   return options
+
+
