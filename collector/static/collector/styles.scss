@@ -274,7 +274,8 @@ body {
             }
             & th{
               background:$fics_darker;
-              width:8ex;
+              background:transparent;
+              width:14ex;
               font-size:1.2em;
               line-height:0.8em;
               &.edit span:hover{

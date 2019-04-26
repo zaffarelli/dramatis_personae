@@ -146,6 +146,7 @@ def stack_defenses(defenses,a):
   return defenses
 
 def check_defense(ch):
+  """ Calculate defense statistics """
   defenses = {'head':0,'right_arm':0,'torso':0,'left_arm':0,'right_leg':0,'left_leg':0}
   best_soft = None
   best_medium = None

@@ -36,6 +36,26 @@ def as_bullets(value):
   return res
 
 
+@register.filter(name='as_bullets_short')
+
+def as_bullets_short(value):
+  """ Change int value to list of bullet (Mark Rein*Hagen like)
+  """
+  one = '<i class="fas fa-circle fa-xs" title="%d"></i>'%(value)
+  blank = '<i class="fas fa-circle fa-xs blank" title="%d"></i>'%(value)
+  x = 0
+  res = ''
+  while x<8:
+    if x<int(value):
+      res += one
+    else:
+      res += blank
+    if (x+1) % 8 == 0:
+      res += '<br/>'
+    x += 1
+  return res
+
+
 @register.filter(name='parse_avatars')
 
 def parse_avatars(value):

@@ -189,7 +189,8 @@ body {
             width: auto; }
           body .wrapper .details .skillsview table tr th {
             background: #040404;
-            width: 8ex;
+            background: transparent;
+            width: 14ex;
             font-size: 1.2em;
             line-height: 0.8em; }
             body .wrapper .details .skillsview table tr th.edit span:hover {
