@@ -21,7 +21,7 @@ def get_population_statistics(request, *args, **kwargs):
   da = []
   ch = conf.get_chart('profile__reference','Profiles','profile.reference')
   da.append(json.dumps(ch['data']))
-  ch = conf.get_chart('role__reference','Roles','role.reference')  
+  ch = conf.get_chart('role__value','Roles','role.reference')  
   da.append(json.dumps(ch['data']))
   ch = conf.get_chart('specie__species','Specie','specie.species')  
   da.append(json.dumps(ch['data']))
@@ -31,7 +31,7 @@ def get_population_statistics(request, *args, **kwargs):
   da.append(json.dumps(ch['data']))
   ch = conf.get_chart('native_fief','Native Fief','native_fief','doughnut')  
   da.append(json.dumps(ch['data']))
-  ch = conf.get_chart('OP','Option Points','OP')  
+  ch = conf.get_chart('OP','Option Points','OP','line')  
   da.append(json.dumps(ch['data']))
   ch = conf.get_chart('is_locked','Locked Avatars','is_locked')  
   da.append(json.dumps(ch['data']))

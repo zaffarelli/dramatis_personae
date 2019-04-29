@@ -176,6 +176,9 @@ function loadajax(){
 
 
 function rebootlinks(){
+
+  
+  
   $('.nav').off();
   $('.nav').on('click',function(event){
     event.preventDefault();
@@ -278,6 +281,7 @@ function rebootlinks(){
         $('.details').html(answer);
         $('body').toggleClass('waiting');
         prepare_ajax();
+        loadKeywords();
         rebootlinks();
         
       },
@@ -323,7 +327,9 @@ function rebootlinks(){
       url: 'ajax/add/character/',
       success: function(answer) {
         $('.details').html('done')
-        rebootlinks();
+          rebootlinks();
+          prepare_ajax();          
+          loadKeywords();
       },
       error: function(answer) {
         $('.details').html('oops, broken')
@@ -475,8 +481,10 @@ function rebootlinks(){
       url: 'characters/'+$(this).attr('id')+'/view/',
       success: function(answer) {
         $('.details').html(answer)
-        $('li').removeClass('selected');
-        rebootlinks();
+        $('li').removeClass('selected');        
+          rebootlinks();
+          prepare_ajax();          
+          loadKeywords();
       },
       error: function(answer){
         console.log('Vew error...'+answer);
@@ -520,25 +528,6 @@ function rebootlinks(){
   
   });
 
-/*
-  $('.pdf_character').off();
-  $('.pdf_character').on('click',function(event){
-    event.preventDefault();
-    $.ajax({
-      url: 'ajax/pdf/'+$(this).attr('id')+'/',
-      success: function(answer) {
-          $('.details').html(answer)
-          
-        },
-      error: function(answer) {
-          $('.details').html(answer)
-        },
-        
-    });
-  });
-*/
-  
-
   register_story('epic');
   register_story('drama');
   register_story('act');
@@ -559,64 +548,6 @@ function rebootlinks(){
     $("ul#keywords").toggleClass("shown");
   });
 
-/*
-  $('#char_3').off().on('click',function(evt){
-    console.log("Hello");
-    //var activePoints = myLineChart.getElementsAtEvent(evt);
-    
-    //console.log(activePoints);
-    // => activePoints is an array of points on the canvas that are at the same position as the click event.    
-  });
-  */
 }
 
 rebootlinks();
-
-
-
-
-
-
-
-
-
-
-/* CSRF code on load */
-
-/*
-  function getCookie(name) {
-    var cookieValue = null;
-    var i = 0;
-    if (document.cookie && document.cookie !== '') {
-      var cookies = document.cookie.split(';');
-      for (i; i < cookies.length; i++) {
-        var cookie = jQuery.trim(cookies[i]);
-        if (cookie.substring(0, name.length + 1) === (name + '=')) {
-          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-          break;
-        }
-      }
-    }
-    return cookieValue;
-  }
-  var csrftoken = getCookie('csrftoken');  
-  function csrfSafeMethod(method) {
-    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-  }
-
-  $.ajaxSetup({
-    crossDomain: false, // obviates need for sameOrigin test
-    beforeSend: function(xhr, settings) {
-      if (!csrfSafeMethod(settings.type)) {
-        xhr.setRequestHeader("X-CSRFToken", csrftoken);
-        console.log("Before send: token is: "+csrftoken);
-      }
-    }
-  });
-*/
-  // https://www.djangoproject.com/weblog/2011/feb/08/security/
-  
-          
-
-
-

@@ -172,7 +172,14 @@ def check_defense(ch):
   a = best_hard
   defenses = stack_defenses(defenses,a)
   defenses['stack']= stack
-  return defenses
+
+  defense_str = '<h5>Defense</h5>'
+  defense_str += '%s'%(stack)
+  defense_str += '<br/>Head:%d'%(defenses['head'])
+  defense_str += '<br/>Right Arm:%d Torso:%d Left_arm:%d'%(defenses['right_arm'],defenses['torso'],defenses['left_arm'])
+  defense_str += '<br/>Right Leg:%d Left_Leg:%d'%(defenses['right_leg'],defenses['left_leg'])
+  
+  return defense_str
 
 def minmax_from_dc(sdc):
   if sdc == '':
@@ -389,10 +396,14 @@ def check_role(ch):
 
 def update_challenge(ch):
   res = ''
+  ch.score = ch.OP / 100
+  res += '%s '%(''.join([ '<i class="fas fa-star fa-xs"></i>' if i<ch.score else '<i class="fas fa-star fa-xs low"></i>' for i in range(6) ]))
   res += '<i class="fas fa-th-large" title="primary attributes"></i>%d '%(ch.AP)
   res += '<i class="fas fa-th-list" title="skills"></i> %d '%(ch.SK_TOTAL)
   res += '<i class="fas fa-th" title="talents"></i> %d '%(ch.TA_TOTAL+ch.BC_TOTAL+ch.BA_TOTAL)
   res += '<i class="fas fa-newspaper" title="OP challenge"></i> %d '%(ch.OP)
+
+  
   return res
 
 # def get_keywords():

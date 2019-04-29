@@ -232,6 +232,50 @@ body {
     
     & .details {
 
+      & .pagination {
+        text-align: center;
+        margin-top: 1em;
+        & a, & strong,  & span.nav {
+          margin: 0 0.1em;
+          display: inline-block;
+          padding: 0.5em;
+          color: $fics_front;
+          font-size: 0.77em;
+          background: $fics_dark;
+          padding: 0.5em 0.8em;
+          border-radius: 2px;
+          text-decoration: none;
+          cursor:pointer;
+        }
+      }
+      & .character_actions{
+        display:inline-block;        
+        background: $fics_dark;
+        color: $fics_front;
+        padding:2px;
+        border:1px solid transparent;
+        border-radius:2px;
+        & a, & span.nav{
+          cursor:pointer;
+          &:hover{
+            color:$fics_hl;
+          }
+        }
+      }
+      & ul, & ol {
+        text-indent: 0;
+        margin-left:0;
+        padding-left:0;
+        list-style-type: none;
+        & li {
+          margin:0;
+          display:inline-block;
+          width:300px;
+          color:$fics_front;
+        }
+      }
+
+
       z-index:10;
       background: transparent url('details.png'); 
 
@@ -505,6 +549,17 @@ body {
   color: $fics_blank;
   opacity: 0.5;
 }
+
+.low{
+  color: lighten($fics_back,30%);
+  opacity: 0.5;
+}
+
+.high{
+  color: lighten($fics_back,50%);
+  opacity: 0.5;
+}
+
 
 .embedded_link{  
   color: $fics_link;

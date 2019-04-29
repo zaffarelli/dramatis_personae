@@ -74,6 +74,7 @@ class Character(models.Model):
   shield_cost = models.IntegerField(default=0)
   AP = models.IntegerField(default=0)
   OP = models.IntegerField(default=0)
+  score = models.IntegerField(default=0)
   gm_shortcuts = models.TextField(default='',blank=True)
   age = models.IntegerField(default=0)  
   occult_level = models.PositiveIntegerField(default=0)

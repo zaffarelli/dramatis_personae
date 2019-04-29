@@ -162,6 +162,41 @@ body {
       padding-bottom: 50px;
       font-family: Texte;
       font-size: 0.97em; }
+      body .wrapper .details .pagination {
+        text-align: center;
+        margin-top: 1em; }
+        body .wrapper .details .pagination a, body .wrapper .details .pagination strong, body .wrapper .details .pagination span.nav {
+          margin: 0 0.1em;
+          display: inline-block;
+          padding: 0.5em;
+          color: #E5DECA;
+          font-size: 0.77em;
+          background: #1d1d1d;
+          padding: 0.5em 0.8em;
+          border-radius: 2px;
+          text-decoration: none;
+          cursor: pointer; }
+      body .wrapper .details .character_actions {
+        display: inline-block;
+        background: #1d1d1d;
+        color: #E5DECA;
+        padding: 2px;
+        border: 1px solid transparent;
+        border-radius: 2px; }
+        body .wrapper .details .character_actions a, body .wrapper .details .character_actions span.nav {
+          cursor: pointer; }
+          body .wrapper .details .character_actions a:hover, body .wrapper .details .character_actions span.nav:hover {
+            color: #6a6a6a; }
+      body .wrapper .details ul, body .wrapper .details ol {
+        text-indent: 0;
+        margin-left: 0;
+        padding-left: 0;
+        list-style-type: none; }
+        body .wrapper .details ul li, body .wrapper .details ol li {
+          margin: 0;
+          display: inline-block;
+          width: 300px;
+          color: #E5DECA; }
       body .wrapper .details a {
         color: #ffcc22;
         text-decoration: none; }
@@ -373,6 +408,14 @@ body {
 
 .blank {
   color: #241f0b;
+  opacity: 0.5; }
+
+.low {
+  color: #9d9d9d;
+  opacity: 0.5; }
+
+.high {
+  color: #d0d0d0;
   opacity: 0.5; }
 
 .embedded_link {

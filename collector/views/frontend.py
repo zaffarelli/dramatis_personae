@@ -41,7 +41,7 @@ def get_list(request,id,slug='none'):
   conf = get_current_config()
   if request.is_ajax:
     if slug=='none':
-      character_items = Character.objects.filter(epic=conf.epic).order_by('full_name','keyword','is_locked')
+      character_items = Character.objects.filter(epic=conf.epic).order_by('OP','full_name','keyword','is_locked')
     elif slug.startswith('c-'):
       ep_class = slug.split('-')[1].capitalize()
       ep_id = slug.split('-')[2]
@@ -83,14 +83,14 @@ def recalc_character(request, id=None):
     item = get_object_or_404(Character,pk=id)
     item.save()
     crid = item.rid
-    template = get_template('collector/character.html')
-    character = template.render({'c':item})
+    template = get_template('collector/character_detail.html')
+    character = template.render({'c':item, 'no_skill_edit':True})
     templatelink = get_template('collector/character_link.html')
     link = templatelink.render({'c':item},request)
     context = {
       'rid': crid,
       'character': character,
-      'link': link,
+      'link': link,      
     }    
     return JsonResponse(context)
   else:

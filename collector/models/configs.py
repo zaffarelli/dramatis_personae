@@ -119,13 +119,13 @@ class Config(models.Model):
     arrfetch = {}
     search_pattern = sp
     for c in all:
-      if p == 'castprofile.reference':
-        par = c.castprofile.reference
+      if p == 'profile.reference':
+        par = c.profile.reference
         #print(p)
-      elif p == 'castrole.reference':
-        par = c.castrole.reference
-      elif p == 'castspecies.species':
-        par = c.castspecies.species
+      elif p == 'role.reference':
+        par = c.role.reference
+      elif p == 'specie.species':
+        par = c.specie.species
       else:
         par = c.__dict__[p]
       value = par

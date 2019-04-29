@@ -21,7 +21,7 @@ class CharacterForm(ModelForm):
     exclude = ['pub_date','PA_TOTAL','rid','SA_REC','SA_STA','SA_END', \
     'SA_STU','SA_RES','SA_DMG','SA_TOL','SA_HUM','SA_PAS','SA_WYR', \
     'SA_SPD','SA_RUN','age','SK_TOTAL','TA_TOTAL','BC_TOTAL','BA_TOTAL','challenge', \
-    'gm_shortcuts','alliancehash','OP','AP','stars','weapon_cost','armor_cost','shield_cost']
+    'gm_shortcuts','alliancehash','OP','AP','stars','weapon_cost','armor_cost','shield_cost','score']
 
 SkillFormSet = inlineformset_factory(Character, Skill, fields='__all__', extra=5, can_delete = True)
 TalentFormSet = inlineformset_factory(Character, Talent, fields='__all__',extra=3, can_delete = True)
