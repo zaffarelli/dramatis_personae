@@ -17,6 +17,7 @@ class Role(models.Model):
   maxi = models.PositiveIntegerField(default=10)
   mini = models.PositiveIntegerField(default=1)
   skills = models.PositiveIntegerField(default=0)
+  skill_roots = models.PositiveIntegerField(default=2)
   talents = models.PositiveIntegerField(default=0)
   ba = models.PositiveIntegerField(default=0)
   bc = models.PositiveIntegerField(default=0)
@@ -85,7 +86,7 @@ class SpecieAdmin(admin.ModelAdmin):
 
 class RoleAdmin(admin.ModelAdmin):
   ordering = ('-value',)
-  list_display = ('reference','value','primaries','maxi','mini','skills','talents','ba','bc')
+  list_display = ('reference','value','primaries','maxi','mini','skill_roots','skills','talents','ba','bc')
 
 class ProfileAdmin(admin.ModelAdmin):
   ordering = ('reference',)

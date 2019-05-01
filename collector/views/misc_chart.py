@@ -31,7 +31,7 @@ def get_population_statistics(request, *args, **kwargs):
   da.append(json.dumps(ch['data']))
   ch = conf.get_chart('native_fief','Native Fief','native_fief','doughnut')  
   da.append(json.dumps(ch['data']))
-  ch = conf.get_chart('OP','Option Points','OP','line')  
+  ch = conf.get_chart('score','Score','score','doughnut')  
   da.append(json.dumps(ch['data']))
   ch = conf.get_chart('is_locked','Locked Avatars','is_locked')  
   da.append(json.dumps(ch['data']))

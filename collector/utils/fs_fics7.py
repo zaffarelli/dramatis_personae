@@ -373,7 +373,26 @@ def check_skills(ch):
   debug_print(repart)
   ch.onsave_reroll_skills = False
     
-  
+
+def calculate_skills(ch):
+  """ New function to properly calculate random skills"""
+  # 1) Prepare everything
+  pool = ch.role.skills
+  root_amount = ch.role.skill_roots
+  maxi = ch.role.maxi
+  groups = ch.profile.groups
+  current = ch.SK_TOTAL
+  balance = ch.specie.skill_balance
+  unit = int(pool / 5)
+  modulo = int(pool % 5)
+  """
+  common_pool = 
+  uncommon_pool =
+  root_pool =
+  """
+  # 2) Calculate Common Skills
+  # 3) Calculate Uncommon skills
+  # 4) Calculate Roots
 
 def check_role(ch):
   #print('> %s:'%(ch.full_name))

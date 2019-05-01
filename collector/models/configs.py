@@ -169,7 +169,7 @@ class Config(models.Model):
               'fontColor':'#fff',
             }
           },        
-          'circumference': math.pi,
+          'circumference': 2*math.pi,
           'rotation': -math.pi,
           'cutoutPercentage': 40,
         }

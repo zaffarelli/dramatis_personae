@@ -13,10 +13,10 @@ class SkillRef(models.Model):
   reference = models.CharField(max_length=200, unique=True)
   is_root = models.BooleanField(default=False)
   is_speciality = models.BooleanField(default=False)
-  #category = models.CharField(default="un",max_length=2, choices=fics_references.CATEGORYCHOICES)
+  is_common = models.BooleanField(default=True)  
   group = models.CharField(default="EDU",max_length=3, choices=fics_references.GROUPCHOICES)
   linked_to = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE)
-  #custom_group = models.CharField(default="all",max_length=3, choices=fics_references.CUSTOMGROUPS)
+  
   
   def __str__(self):
     return '%s %s %s %s [%s]' % (self.reference,self.group,"(R)" if self.is_root else "","(S)" if self.is_speciality else "", self.linked_to.reference if self.linked_to else "-"  )
@@ -64,10 +64,19 @@ def change_to_und(modeladmin, request, queryset):
 def change_to_dip(modeladmin, request, queryset):
   queryset.update(group='DIP')
   short_description = "Change skills to the DIP group"
+
+def set_common(modeladmin, request, queryset):
+  queryset.update(is_common=True)
+  short_description = "Change skills to common"
+
+def set_uncommon(modeladmin, request, queryset):
+  queryset.update(is_common=False)
+  short_description = "Change skills to uncommon"
     
 class SkillRefAdmin(admin.ModelAdmin):
-  ordering = ['reference']
-  actions = [change_to_awa, change_to_soc, change_to_edu, change_to_fig, change_to_con, change_to_tin, change_to_per, change_to_bod]
+  ordering = ['is_speciality','reference']
+  list_display = ('reference','is_root','is_speciality','is_common','group')
+  actions = [change_to_awa, change_to_soc, change_to_edu, change_to_fig, change_to_con, change_to_tin, change_to_per, change_to_bod, set_common, set_uncommon]
 
 
 
