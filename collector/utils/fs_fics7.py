@@ -10,6 +10,7 @@ import math
 from random import randint
 import os
 import yaml
+import json
 from collector.models.skillrefs import SkillRef
 from collector.utils.fics_references import *
 from collector.utils.basic import debug_print
@@ -324,6 +325,8 @@ def choose_sk(alist,maxweight):
 
 def check_skills(ch):
   """ Fixing skills """
+  skills_randomizer(ch)
+  """
   debug_print('Checking skills...%s'%(ch.rid))
   pool = ch.role.skills
   maxi = ch.role.maxi
@@ -372,27 +375,9 @@ def check_skills(ch):
     repart[skill.skill_ref.group] += skill.value if skill.skill_ref.is_speciality==False else 0
   debug_print(repart)
   ch.onsave_reroll_skills = False
-    
+  """
 
-def calculate_skills(ch):
-  """ New function to properly calculate random skills"""
-  # 1) Prepare everything
-  pool = ch.role.skills
-  root_amount = ch.role.skill_roots
-  maxi = ch.role.maxi
-  groups = ch.profile.groups
-  current = ch.SK_TOTAL
-  balance = ch.specie.skill_balance
-  unit = int(pool / 5)
-  modulo = int(pool % 5)
-  """
-  common_pool = 
-  uncommon_pool =
-  root_pool =
-  """
-  # 2) Calculate Common Skills
-  # 3) Calculate Uncommon skills
-  # 4) Calculate Roots
+  
 
 def check_role(ch):
   #print('> %s:'%(ch.full_name))
@@ -420,20 +405,10 @@ def update_challenge(ch):
   res += '<i class="fas fa-th-large" title="primary attributes"></i>%d '%(ch.AP)
   res += '<i class="fas fa-th-list" title="skills"></i> %d '%(ch.SK_TOTAL)
   res += '<i class="fas fa-th" title="talents"></i> %d '%(ch.TA_TOTAL+ch.BC_TOTAL+ch.BA_TOTAL)
-  res += '<i class="fas fa-newspaper" title="OP challenge"></i> %d '%(ch.OP)
-
-  
+  res += '<i class="fas fa-newspaper" title="OP challenge"></i> %d '%(ch.OP)  
   return res
 
-# def get_keywords():
-  # """ Get all keywords """
-  # from collector.models.characters import Character
-  # everybody = Character.objects.all()
-  # keywords = []
-  # for someone in everybody:
-    # if someone.keyword != '':
-      # keywords.append(someone.keyword)
-  # return sorted(list(set(keywords)))
+
 
 def find_rid(s):
   x = s.replace(' ','_').replace("'",'').replace('é','e').replace('è','e').replace('ë','e').replace('â','a').replace('ô','o').replace('"','').replace('ï','i').replace('à','a').replace('-','')
@@ -450,3 +425,151 @@ def get_options():
   return options
 
 
+
+# New version of the skills randomizer 
+
+def list_skills(ch):
+  print("> Skills for %s"%(ch.full_name))
+  pool = ch.role.skills
+  unit = int(pool / 7)
+  modulo = int(pool % 7)
+  pool_c = unit*3+modulo
+  pool_u = unit*1
+  pool_r = unit*2
+  print("> Before (%d): c=%4d u=%4d r=%4d"%(pool,pool_c,pool_u,pool_r))
+  for skill in ch.skill_set.all().order_by('skill_ref__reference'):
+    print("%35s %2d %4s %4s %4s"%(skill.skill_ref.reference,skill.value, '--' if skill.skill_ref.is_common else 'UNCO', 'SPEC' if skill.skill_ref.is_speciality else '--', 'ROOT' if skill.skill_ref.is_root else '--' ))
+    if skill.skill_ref.is_speciality == True:
+      pool_r -= skill.value
+    elif skill.skill_ref.is_common == False:
+      pool_u -= skill.value
+    elif skill.skill_ref.is_root == False:
+      pool_c -= skill.value
+  print("> Pools (%d): c=%4d u=%4d r=%4d"%(pool,pool_c,pool_u,pool_r))
+
+
+def skills_randomizer(ch):
+  """ New function to properly calculate random skills"""
+  if ch.onsave_reroll_skills == True:
+
+    # 1) Prepare everything
+    pool = ch.role.skills
+    root_amount = ch.role.skill_roots
+    maxi = ch.role.maxi
+    groups = ch.profile.get_groups
+    current = ch.SK_TOTAL
+    balance = ch.specie.skill_balance
+    unit = int(pool / 7)
+    modulo = int(pool % 7)
+    pool_c = unit*3+modulo
+    pool_u = unit*1
+    pool_r = unit*2
+    ch.purgeSkills()
+
+    check_everyman_skills(ch)
+    for skill in ch.skill_set.all().order_by('skill_ref__reference'):      
+      if skill.skill_ref.is_speciality == True:
+        pool_r -= skill.value
+      elif skill.skill_ref.is_common == False:
+        pool_u -= skill.value
+      elif skill.skill_ref.is_root == False:
+        pool_c -= skill.value
+
+    # 2) Calculate Common Skills 
+    common_skills = get_skills_list(ch,False,True)
+    common_weight = 0
+    for s in common_skills:
+      common_weight += s['weight']
+    current = pool_c
+    while current>0:
+      batch = 1
+      if current > (pool_c / 2):
+        batch = 3
+      chosen_sk = choose_sk(common_skills,common_weight)
+      sk = ch.add_or_update_skill(chosen_sk,batch)
+      current -= batch
+
+    # 3) Calculate Uncommon skills
+    uncommon_skills = get_skills_list(ch,False,False)
+    uncommon_weight = 0
+    for s in uncommon_skills:
+      uncommon_weight += s['weight']
+    current = pool_u
+    while current>0:
+      batch = 1
+      chosen_sk = choose_sk(uncommon_skills,uncommon_weight)
+      sk = ch.add_or_update_skill(chosen_sk,batch)
+      current -= batch
+    
+    # 4) Calculate Roots
+
+    roots = get_roots_list(ch)
+    root_weight = 0
+    for s in roots:
+      root_weight += s['weight']
+    current = pool_r
+    while current>0:
+      batch = 1
+      chosen_sk = choose_sk(roots,root_weight)
+      sk = ch.add_or_update_skill(chosen_sk,batch)
+      current -= batch
+    chosen_roots = ch.skill_set.all().filter(skill_ref__is_root = True)
+    for root in chosen_roots:
+      local_pool = root.value
+      speciality_skills = get_specilities_list(ch,root.skill_ref)
+      speciality_weight = 0
+      for s in speciality_skills:
+        speciality_weight += s['weight']      
+      while local_pool>0:
+        batch = 1
+        chosen_sk = choose_sk(speciality_skills,speciality_weight)
+        sk = ch.add_or_update_skill(chosen_sk,batch)
+        local_pool -= batch
+      root.value = 0
+      
+    # 5) And we are done :)
+    ch.add_missing_root_skills()
+    list_skills(ch)   
+    ch.onsave_reroll_skills = False
+  else:
+    print("Nothing to do...")
+
+def get_skills_list(ch,root,com):
+  """ Prepare the list of skills without specialities """
+  skills = SkillRef.objects.all().filter(is_speciality=False, is_root = root, is_common = com)
+  groups = ch.profile.get_groups
+  result_skills = []
+  for s in skills:
+    weight = 1
+    for g in groups:
+      if s.group in g:
+        weight = 3
+    result_skills.append({'skill':s.reference, 'data':s, 'weight':weight})
+  return result_skills
+
+def get_roots_list(ch):
+  """ Prepare the list of skills without specialities """
+  groups = ch.profile.get_groups
+  skills = SkillRef.objects.all().filter(is_root = True)  
+  result_skills = []
+  for s in skills:
+    weight = 1
+    for g in groups:
+      if s.group == g:
+        weight = 7
+    if weight > 0:
+      result_skills.append({'skill':s.reference, 'data':s, 'weight':weight})
+  return result_skills
+
+def get_specialities_list(ch,root):
+  """ Prepare the list of skills without specialities """
+  groups = ch.profile.groups.split(',')
+  skills = SkillRef.objects.all().filter(is_speciality = True)  
+  result_skills = []
+  for s in skills:
+    weight = 0
+    if s.linked_to == root:
+      weight = 1
+    if weight > 0:
+      result_skills.append({'skill':s.reference, 'data':s, 'weight':weight})
+  return result_skills

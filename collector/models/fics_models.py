@@ -31,6 +31,7 @@ class Profile(models.Model):
   reference = models.CharField(max_length=64,default=1,blank=True, unique=True)
   weights = models.CharField(max_length=128, default = '[1,1,1,1,1,1,1,1,1,1,1,1]')
   groups = models.CharField(max_length=128, default = '[]')
+  favorites = models.CharField(max_length=640, default = '[]')
   def __str__(self):
     return '%s' % (self.reference)
   def set_weights(self,data):
@@ -41,6 +42,10 @@ class Profile(models.Model):
     self.groups = json.dumps(data)
   def get_groups(self):
     return json.loads(self.groups)
+  def set_favorites(self,data):
+    self.favorites = json.dumps(data)
+  def get_favorites(self):
+    return json.loads(self.favorites)
 
 class Specie(models.Model):
   class Meta:
@@ -90,6 +95,6 @@ class RoleAdmin(admin.ModelAdmin):
 
 class ProfileAdmin(admin.ModelAdmin):
   ordering = ('reference',)
-  list_display = ('reference','weights','groups')
+  list_display = ('reference','weights','groups','favorites')
 
 

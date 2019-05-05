@@ -21,25 +21,25 @@ class VeteranGuilderFactory(factory.django.DjangoModelFactory):
   class Meta:
     model = Character
   full_name = 'Roman Van Dyke'
-  castrole = CastRole.objects.filter(value=5).first()
-  castprofile = CastProfile.objects.filter(reference='Guilder').first()
+  role = Role.objects.filter(value=5).first()
+  profile = Profile.objects.filter(reference='Guilder').first()
   pub_date = timezone.now()
 
 class UnbuildableCharacterFactory(factory.django.DjangoModelFactory):
   class Meta:
     model = Character
   full_name = 'Rico Unbuildable'
-  castrole = CastRole.objects.filter(value=0).first()
-  castprofile = CastProfile.objects.filter(reference='Undefined').first()
+  role = Role.objects.filter(value=0).first()
+  profile = Profile.objects.filter(reference='Undefined').first()
   pub_date = timezone.now()
 
 class CharacterCheckPAFactory(factory.django.DjangoModelFactory):
   class Meta:
     model = Character
-  castrole = CastRole.objects.filter(value=roll(8)).first()
+  castrole = Role.objects.filter(value=roll(8)).first()
   full_name = 'Scholar'+str(castrole.value)+' Noattributes'
-  castprofile = CastProfile.objects.filter(reference='Scholar').first()  
-  castspecies = CastEveryman.objects.get(pk=1)
+  profile = Profile.objects.filter(reference='Scholar').first()  
+  species = Specie.objects.get(pk=1)
   onsave_reroll_attributes = True
   pub_date = timezone.now()
 
