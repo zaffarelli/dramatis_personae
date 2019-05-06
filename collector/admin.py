@@ -7,6 +7,7 @@ from django.contrib import admin
 
 from collector.models.skillrefs import SkillRef, SkillRefAdmin
 from collector.models.skills import Skill, SkillAdmin
+from collector.models.talents import TalentRef, TalentRefAdmin
 from collector.models.weapons import Weapon, WeaponAdmin, WeaponRefAdmin, WeaponRef
 from collector.models.armors import Armor, ArmorAdmin, ArmorRefAdmin, ArmorRef
 from collector.models.shields import Shield, ShieldAdmin, ShieldRefAdmin, ShieldRef
@@ -21,6 +22,7 @@ admin.site.register(Role, RoleAdmin)
 admin.site.register(Profile, ProfileAdmin)
 admin.site.register(Specie, SpecieAdmin)
 
+admin.site.register(TalentRef, TalentRefAdmin)
 admin.site.register(SkillRef, SkillRefAdmin)
 admin.site.register(Skill, SkillAdmin)
 admin.site.register(Weapon, WeaponAdmin)

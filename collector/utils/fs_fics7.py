@@ -456,7 +456,7 @@ def skills_randomizer(ch):
     pool = ch.role.skills
     root_amount = ch.role.skill_roots
     maxi = ch.role.maxi
-    groups = ch.profile.get_groups
+    groups = ch.profile.get_groups()
     current = ch.SK_TOTAL
     balance = ch.specie.skill_balance
     unit = int(pool / 7)
@@ -537,7 +537,7 @@ def skills_randomizer(ch):
 def get_skills_list(ch,root,com):
   """ Prepare the list of skills without specialities """
   skills = SkillRef.objects.all().filter(is_speciality=False, is_root = root, is_common = com)
-  groups = ch.profile.get_groups
+  groups = ch.profile.get_groups()
   result_skills = []
   for s in skills:
     weight = 1
@@ -549,7 +549,7 @@ def get_skills_list(ch,root,com):
 
 def get_roots_list(ch):
   """ Prepare the list of skills without specialities """
-  groups = ch.profile.get_groups
+  groups = ch.profile.get_groups()
   skills = SkillRef.objects.all().filter(is_root = True)  
   result_skills = []
   for s in skills:
@@ -563,7 +563,7 @@ def get_roots_list(ch):
 
 def get_specialities_list(ch,root):
   """ Prepare the list of skills without specialities """
-  groups = ch.profile.groups.split(',')
+  groups = ch.profile.get_groups()
   skills = SkillRef.objects.all().filter(is_speciality = True)  
   result_skills = []
   for s in skills:
