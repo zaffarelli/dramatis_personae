@@ -555,11 +555,20 @@ body {
   opacity: 0.5;
 }
 
-.high{
+.medium{
   color: lighten($fics_back,50%);
-  opacity: 0.5;
+  opacity: 0.6;
 }
 
+.high{
+  color: lighten($fics_back,70%);
+  opacity: 0.7;
+}
+
+.veryhigh{
+  color: lighten($fics_back,90%);
+  opacity: 0.8;
+}
 
 .embedded_link{  
   color: $fics_link;
@@ -738,29 +747,38 @@ body {
   }
 }
 
-.messenger{
+#messenger{
   position:fixed;
   width:250px;
   height:auto;
-  left:auto;
+  left:5px;
   display:block;
-  right: 100px;
-  bottom:0px;
+  right: auto;
+  top:-1px;
   z-index:9000;
-  background:darkgreen url("details.png");
+  background:black url("details.png");
   overflow:hidden;
-  font-family:Texte;
-  border-radius:5px 0 0 0;
-  border:1px solid darkgreen;
-  & ul{
-    list-style-type:none;
-    margin:0;
-    padding:3px;
-    text-indent:0;
-    & li {
-      font-size:8pt;
-      color:white;
+  border-radius:0 0 5px 5px;
+  border:1px solid silver;
+  padding:0;
+  & p{
+    margin:5px;
+    padding:0;
+    color:white;
+    font-family:Texte;
+    font-size:8pt;
+    &.info{
+      color:cyan;
     }
+    &.success{
+      color:lime;
+    }    
+    &.error{
+      color:red;
+    }    
+    &.warning{
+      color:orange;
+    }    
   }
 
   

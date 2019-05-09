@@ -157,6 +157,16 @@ function register_story(x){
 
   
 }
+
+function update_messenger(){
+    $.ajax({
+      url: 'ajax/messenger/',
+      success: function(answer) {
+        $('#messenger').html(answer)
+      },
+    });
+}
+
   
 function loadajax(){
     $.ajax({
@@ -177,6 +187,7 @@ function loadajax(){
 
 function rebootlinks(){
 
+  
   
   
   $('.nav').off();
@@ -247,6 +258,7 @@ function rebootlinks(){
           $('.details').append(elem);
         });
         rebootlinks();
+        update_messenger();
       },
     });
     rebootlinks();
@@ -283,10 +295,11 @@ function rebootlinks(){
         prepare_ajax();
         loadKeywords();
         rebootlinks();
-        
+        update_messenger();
       },
       error: function(answer){
         console.log('ooops... :(');
+        update_messenger();
       }
     });
   });
@@ -313,9 +326,11 @@ function rebootlinks(){
           rebootlinks();
           prepare_ajax();          
           loadKeywords();
+          update_messenger();
       },
       error: function(answer) {
         console.log(answer.responseText);
+        update_messenger();
       },
     });  
   });
@@ -330,10 +345,12 @@ function rebootlinks(){
           rebootlinks();
           prepare_ajax();          
           loadKeywords();
+          update_messenger();
       },
       error: function(answer) {
         $('.details').html('oops, broken')
         rebootlinks();
+        update_messenger();
       },
 
     });
@@ -348,6 +365,7 @@ function rebootlinks(){
         console.log(answer);
         $('.details').html(answer)
         rebootlinks();
+        update_messenger();
       },
     });
   });
@@ -361,6 +379,7 @@ function rebootlinks(){
         console.log(answer.comment);
         $('.details').html(answer.comment);
         rebootlinks();
+        update_messenger();
     });
   });
 
@@ -374,6 +393,7 @@ function rebootlinks(){
         $('.details').html(answer);
         prepare_ajax();
         rebootlinks();
+        update_messenger();
       },
     });
   });
@@ -393,7 +413,8 @@ function rebootlinks(){
       success: function(answer) {
         $('.charlist').html(answer);
         prepare_ajax();
-        rebootlinks();        
+        rebootlinks();
+        update_messenger();   
       },
     });
   });
@@ -420,6 +441,7 @@ function rebootlinks(){
         $('li#'+answer.rid).html(answer.link);
         $('li').find('div.avatar_link').removeClass('selected');
         rebootlinks();
+        update_messenger();
       },
       error: function(answer){
         console.log('Recalc error...'+answer);
@@ -441,6 +463,7 @@ function rebootlinks(){
         $('li#'+answer.rid).html(answer.link);
         $('li').find('div.avatar_link').removeClass('selected');
         rebootlinks();
+        update_messenger();
       },
       error: function(answer){
         console.log('Recalc error...'+answer);
@@ -462,6 +485,7 @@ function rebootlinks(){
         $('li#'+answer.rid).html(answer.link);
         $('li').find('div.avatar_link').removeClass('selected');
         rebootlinks();
+        update_messenger();
       },
       error: function(answer){
         console.log('Recalc error...'+answer);
@@ -485,6 +509,7 @@ function rebootlinks(){
           rebootlinks();
           prepare_ajax();          
           loadKeywords();
+          update_messenger();
       },
       error: function(answer){
         console.log('Vew error...'+answer);

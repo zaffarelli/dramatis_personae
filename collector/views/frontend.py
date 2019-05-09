@@ -91,7 +91,8 @@ def recalc_character(request, id=None):
       'rid': crid,
       'character': character,
       'link': link,      
-    }    
+    }
+    messages.info(request, 'Recalculating avatar %s'%(context['character'].full_name))
     return JsonResponse(context)
   else:
     raise Http404
@@ -110,7 +111,8 @@ def recalc_pa_character(request, id=None):
       'rid': crid,
       'character': character,
       'link': link,
-    }    
+    }
+    messages.info(request, 'Recalculating attributes for %s'%(context['character'].full_name))
     return JsonResponse(context)
   else:
     raise Http404
@@ -129,7 +131,8 @@ def recalc_skills_character(request, id=None):
       'rid': crid,
       'character': character,
       'link': link,
-    }    
+    }
+    messages.info(request, 'Recalculating skills for %s'%(item.full_name))
     return JsonResponse(context)
   else:
     raise Http404
@@ -148,9 +151,10 @@ def view_by_rid(request, slug=None):
   """ Ajax view of a character """
   if request.is_ajax():
     item = get_object_or_404(Character,rid=slug)
-    template = get_template('collector/character.html')
+    template = get_template('collector/character_detail.html')
     html = template.render({'c':item})
     return HttpResponse(html, content_type='text/html')
+    messages.info(self.request, 'Display by RID: %s'%(context['c'].rid))
   else:
     raise Http404
 
@@ -306,3 +310,9 @@ def conf_details(request):
     return HttpResponse(html, content_type='text/html')
   else:
     http404
+
+def update_messenger(request):
+  context = {}
+  template = get_template('collector/messenger.html')
+  html = template.render(context,request)
+  return HttpResponse(html, content_type='text/html')

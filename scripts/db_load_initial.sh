@@ -11,6 +11,7 @@ python3 manage.py loaddata backup/reference/weaponrefs.xml
 python3 manage.py loaddata backup/reference/skillrefs.xml
 python3 manage.py loaddata backup/reference/armorrefs.xml
 python3 manage.py loaddata backup/reference/shieldrefs.xml
+python3 manage.py loaddata backup/reference/talentrefs.xml
 python3 manage.py loaddata backup/reference/beneficeafflictionrefs.xml
 python3 manage.py loaddata backup/reference/roles.xml
 python3 manage.py loaddata backup/reference/profiles.xml

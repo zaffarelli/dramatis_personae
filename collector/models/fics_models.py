@@ -41,6 +41,7 @@ class Profile(models.Model):
   def set_groups(self,data):
     self.groups = json.dumps(data)
   def get_groups(self):
+    #print(self.groups)
     return json.loads(self.groups)
   def set_favorites(self,data):
     self.favorites = json.dumps(data)

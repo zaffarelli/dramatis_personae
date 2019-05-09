@@ -11,6 +11,7 @@ python3 manage.py dumpdata collector.WeaponRef --format xml --output backup/refe
 python3 manage.py dumpdata collector.SkillRef --format xml --output backup/reference/skillrefs.xml
 python3 manage.py dumpdata collector.ArmorRef --format xml --output backup/reference/armorrefs.xml
 python3 manage.py dumpdata collector.ShieldRef --format xml --output backup/reference/shieldrefs.xml
+python3 manage.py dumpdata collector.TalentRef --format xml --output backup/reference/talentrefs.xml
 python3 manage.py dumpdata collector.BeneficeAfflictionRef --format xml --output backup/reference/beneficeafflictionrefs.xml
 python3 manage.py dumpdata collector.Role --format xml --output backup/reference/roles.xml
 python3 manage.py dumpdata collector.Profile --format xml --output backup/reference/profiles.xml
@@ -35,9 +36,10 @@ python3 manage.py dumpdata collector.Config --format xml --output backup/custom/
 
 echo "Moving to fixtures..."
 cp backup/reference/skillrefs.xml collector/fixtures/
-cp backup/reference/castroles.xml collector/fixtures/
-cp backup/reference/castprofiles.xml collector/fixtures/
-cp backup/reference/casteverymans.xml collector/fixtures/
+cp backup/reference/talentrefs.xml collector/fixtures/
+cp backup/reference/roles.xml collector/fixtures/
+cp backup/reference/profiles.xml collector/fixtures/
+cp backup/reference/species.xml collector/fixtures/
 
 
 echo "...done"

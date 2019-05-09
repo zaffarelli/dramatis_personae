@@ -8,4 +8,4 @@ clear
 #echo "Collecting statics"
 #python3 manage.py collectstatic --noinput --clear --link -v 0
 echo "Launching tests..."
-python3 manage.py test
+python3 manage.py test 

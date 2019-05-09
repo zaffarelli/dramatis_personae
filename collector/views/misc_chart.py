@@ -56,6 +56,5 @@ def get_keywords(request, *args, **kwargs):
   chart = template.render({'cname':'chart_keywords','cdata':da})
   context = {
     'chart': chart,
-  }
-  messages.add_message(request, messages.INFO, 'Loading keywords...')
+  }  
   return JsonResponse(context)

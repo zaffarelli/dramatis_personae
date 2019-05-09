@@ -28,15 +28,10 @@
                 {% endblock menu %}
             </div>
 
-            <div class='messenger'>
-                {% if messages %}
-                <ul class="messages">
-                {% for message in messages %}
-                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-                {% endfor %}
-                </ul>
-                {% endif %}
+            
+            <div id='messenger'>
             </div>
+
         <div class='wrapper'>
             <div class="list">
                 <div class='storyline'>

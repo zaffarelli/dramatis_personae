@@ -25,7 +25,7 @@ class Character(models.Model):
   alliance = models.CharField(max_length=200, blank=True, default='')
   alliancehash = models.CharField(max_length=200, blank=True, default='none')
   player = models.CharField(max_length=200, default='', blank=True)
-  specie = models.ForeignKey(Specie, null=True, default=1, blank=True, on_delete=models.SET_NULL)
+  specie = models.ForeignKey(Specie, null=True, default=31, blank=True, on_delete=models.SET_NULL)
   role = models.ForeignKey(Role, null=True, blank=True, default=1, on_delete=models.SET_NULL)
   profile = models.ForeignKey(Profile, null=True, default=1, blank=True, on_delete=models.SET_NULL)  
   birthdate = models.IntegerField(default=0)

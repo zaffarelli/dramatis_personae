@@ -18,6 +18,8 @@ class CharacterDetailView(DetailView):
   def get_context_data(self, **kwargs):
     context = super().get_context_data(**kwargs)
     context['no_skill_edit'] = True
+    print(context['c'].full_name)
+    messages.info(self.request, 'Display avatar %s'%(context['c'].full_name))
     return context
 
 
@@ -76,7 +78,7 @@ class CharacterUpdateView(AjaxFromResponseMixin,UpdateView):
       context['armors'].full_clean()
       context['weapons'].full_clean()
       context['shields'].full_clean()
-      messages.add_message(self.request, messages.INFO, 'Updating character %s'%(context['form']['full_name'].value()))
+      messages.success(self.request, 'Updating character %s'%(context['form']['full_name'].value()))
     else:
       context['form'] = CharacterForm(instance=self.object)
       context['skills'] = SkillFormSet(instance=self.object)
@@ -86,6 +88,6 @@ class CharacterUpdateView(AjaxFromResponseMixin,UpdateView):
       context['armors'] = ArmorFormSet(instance=self.object)
       context['weapons'] = WeaponFormSet(instance=self.object)
       context['shields'] = ShieldFormSet(instance=self.object)
-      messages.add_message(self.request, messages.INFO, 'Editing character %s'%(context['form']['full_name'].value()))    
+      messages.info(self.request, 'Editing character %s'%(context['form']['full_name'].value()))    
     return context
 

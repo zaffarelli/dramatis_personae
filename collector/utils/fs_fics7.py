@@ -45,6 +45,7 @@ def check_everyman_skills(ch):
   from collector.models.skills import Skill
   skills = ch.skill_set.all()
   all_every = ch.specie.get_racial_skills()
+  val_total = 0
   for every in all_every:
     every_found = False
     for s in skills:
@@ -55,6 +56,7 @@ def check_everyman_skills(ch):
         debug_print('Everyman: Value fixed for %s (%s)'%(s.skill_ref.reference,val))
         this_skill = Skill.objects.get(id=s.id)
         this_skill.value += val
+        val_total += val
         this_skill.save()
         break
     if not every_found:
@@ -65,8 +67,9 @@ def check_everyman_skills(ch):
       this_skill.character=ch
       this_skill.skill_ref=this_skill_ref
       this_skill.value = val
+      val_total += val
       this_skill.save()
-
+  return val_total
 
 def check_gm_shortcuts(ch,sk):
   """ Check for Gamemaster shortcuts for the character """
@@ -261,7 +264,7 @@ def check_primary_attributes(ch):
         pool = total
         pas = [0,0,0,0,0,0,0,0,0,0,0,0]
         if cnt > 100:
-          print('> Too many redo in PA check () Beyond 100!!!','critical');          
+          debug_print('> Too many redo in PA check () Beyond 100!!!','critical');          
           #raise ValueError('redo beyond 10 !!!')
           redo = False
     #debug_print(pas)
@@ -431,11 +434,11 @@ def get_options():
 def list_skills(ch):
   print("> Skills for %s"%(ch.full_name))
   pool = ch.role.skills
-  unit = int(pool / 7)
-  modulo = int(pool % 7)
-  pool_c = unit*3+modulo
-  pool_u = unit*1
-  pool_r = unit*2
+  unit = int(pool / 8)
+  modulo = int(pool % 8)
+  pool_c = unit*5+modulo
+  pool_u = unit*2
+  pool_r = unit*1
   print("> Before (%d): c=%4d u=%4d r=%4d"%(pool,pool_c,pool_u,pool_r))
   for skill in ch.skill_set.all().order_by('skill_ref__reference'):
     print("%35s %2d %4s %4s %4s"%(skill.skill_ref.reference,skill.value, '--' if skill.skill_ref.is_common else 'UNCO', 'SPEC' if skill.skill_ref.is_speciality else '--', 'ROOT' if skill.skill_ref.is_root else '--' ))
@@ -456,17 +459,18 @@ def skills_randomizer(ch):
     pool = ch.role.skills
     root_amount = ch.role.skill_roots
     maxi = ch.role.maxi
-    groups = ch.profile.get_groups()
-    current = ch.SK_TOTAL
+    #groups = ch.profile.get_groups()
+    #current = ch.SK_TOTAL
     balance = ch.specie.skill_balance
-    unit = int(pool / 7)
-    modulo = int(pool % 7)
-    pool_c = unit*3+modulo
-    pool_u = unit*1
-    pool_r = unit*2
+    unit = int(pool / 8)
+    modulo = int(pool % 8)
+    pool_c = unit*5+modulo
+    pool_u = unit*2
+    pool_r = unit*1
     ch.purgeSkills()
+       
 
-    check_everyman_skills(ch)
+    everyman_total = check_everyman_skills(ch)
     for skill in ch.skill_set.all().order_by('skill_ref__reference'):      
       if skill.skill_ref.is_speciality == True:
         pool_r -= skill.value
@@ -502,7 +506,6 @@ def skills_randomizer(ch):
       current -= batch
     
     # 4) Calculate Roots
-
     roots = get_roots_list(ch)
     root_weight = 0
     for s in roots:
@@ -526,10 +529,10 @@ def skills_randomizer(ch):
         sk = ch.add_or_update_skill(chosen_sk,batch)
         local_pool -= batch
       root.value = 0
-      
+    
     # 5) And we are done :)
     ch.add_missing_root_skills()
-    list_skills(ch)   
+    #list_skills(ch)   
     ch.onsave_reroll_skills = False
   else:
     print("Nothing to do...")
