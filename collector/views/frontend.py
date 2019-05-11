@@ -80,6 +80,7 @@ def get_storyline(request,slug='none'):
   
 def recalc_character(request, id=None):
   if request.is_ajax():
+    messages.warning(request, 'Recalculating...')
     item = get_object_or_404(Character,pk=id)
     item.save()
     crid = item.rid
@@ -92,7 +93,7 @@ def recalc_character(request, id=None):
       'character': character,
       'link': link,      
     }
-    messages.info(request, 'Recalculating avatar %s'%(context['character'].full_name))
+    messages.info(request, '...%s recalculated'%(item.full_name))
     return JsonResponse(context)
   else:
     raise Http404
@@ -112,7 +113,7 @@ def recalc_pa_character(request, id=None):
       'character': character,
       'link': link,
     }
-    messages.info(request, 'Recalculating attributes for %s'%(context['character'].full_name))
+    messages.info(request, 'Recalculating attributes for %s'%(item.full_name))
     return JsonResponse(context)
   else:
     raise Http404

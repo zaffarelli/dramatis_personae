@@ -209,10 +209,9 @@ def choose_pa(weights,maxi,pa):
   #x = randint(1,sum(weights))
   res = -1
   done = False
-  attempts = 100
+  attempts = 10
   while not done:
     x = roll(sum(weights))
-    attempts -= 1
     cum = 0
     idx = 0
     while idx < 12:
@@ -220,70 +219,88 @@ def choose_pa(weights,maxi,pa):
       if x <= cum:
         res = idx
         idx = 12
-      idx += 1
-      if pa[res]<maxi:
-        done = True 
-      if attempts == 0:
         done = True
+      if pa[res]>=maxi:
+        res = -1
+        idx = 12
+        attempts -= 1
+        done = False
+      if attempts <= 0:
+        idx = 12
+        done = True
+      idx += 1
   return res
+
+
+def list_attributes(ch,pas):
+  if pas == None:
+    print()
+    print('Attributes for %s'%(ch.rid))
+    row =  'STR%2d CON%2d'%(ch.PA_STR,ch.PA_CON)
+    row += '  INT%2d WIL%2d'%(ch.PA_INT,ch.PA_WIL)
+    row += '  TEC%2d REF%2d'%(ch.PA_TEC,ch.PA_REF)
+    print(row)
+    row =  'BOD%2d MOV%2d'%(ch.PA_BOD,ch.PA_MOV)
+    row += '  TEM%2d PRE%2d'%(ch.PA_TEM,ch.PA_PRE)
+    row += '  AGI%2d AWA%2d'%(ch.PA_AGI,ch.PA_AWA)
+    print(row)
+
+    row  = '>> PHY %2d '%(ch.PA_STR+ch.PA_CON+ch.PA_BOD+ch.PA_MOV)
+    row += ' + MEN %2d'%(ch.PA_INT+ch.PA_WIL+ch.PA_TEM+ch.PA_PRE)
+    row += ' + COM %2d'%(ch.PA_TEC+ch.PA_REF+ch.PA_AGI+ch.PA_AWA)
+    row += ' = TOTAL %2d'%(ch.PA_STR+ch.PA_CON+ch.PA_BOD+ch.PA_MOV+ch.PA_INT+ch.PA_WIL+ch.PA_TEM+ch.PA_PRE+ch.PA_TEC+ch.PA_REF+ch.PA_AGI+ch.PA_AWA)
+    print(row)
+  else:
+    print()
+    print('Attributes for %s'%(ch.rid))
+    row =  'STR%2d CON%2d'%(pas[0],pas[1])
+    row += '  INT%2d WIL%2d'%(pas[4],pas[5])
+    row += '  TEC%2d REF%2d'%(pas[8],pas[9])
+    print(row)
+    row =  'BOD%2d MOV%2d'%(pas[2],pas[3])
+    row += '  TEM%2d PRE%2d'%(pas[6],pas[7])
+    row += '  AGI%2d AWA%2d'%(pas[10],pas[11])
+    print(row)
+
+    row  = '>> PHY %2d '%(pas[0]+pas[1]+pas[2]+pas[3])
+    row += ' + MEN %2d'%(pas[4]+pas[5]+pas[6]+pas[7])
+    row += ' + COM %2d'%(pas[8]+pas[9]+pas[10]+pas[11])
+    row += ' = TOTAL %2d'%(sum(pas))
+    print(row)    
 
 def check_primary_attributes(ch):
   """ Fixing primary attributes """
-  pool = ch.role.primaries
-  pas = [0,0,0,0,0,0,0,0,0,0,0,0]
-  total = pool-sum(pas)
-  maxi = ch.role.maxi
-  mini = ch.role.mini
-  weights = ch.profile.get_weights()
-  balance = ch.specie.attr_mod_balance
-  ch.challenge = '(<i class="fas fa-th-large"></i>%02d <i class="fas fa-th-list"></i>%02d <i class="fas fa-th"></i>%02d <i class="fas fa-outdent"></i>%02d)'%(ch.role.primaries,ch.role.skills, ch.role.talents,ch.role.bc)
-
-  current =  ch.PA_STR+ch.PA_CON+ch.PA_BOD+ch.PA_MOV+ch.PA_INT+ch.PA_WIL+ch.PA_TEM+ch.PA_PRE+ch.PA_TEC+ch.PA_REF+ch.PA_AGI+ch.PA_AWA
-  cnt = 0
-  debug_print('> CONFIG %s: %s %d [ %d / %d ]'%(ch.full_name,ch.role.reference,ch.role.primaries,pool,maxi))  
-  debug_print('> Current PA TOTAL: %d'%(current))
-  if ch.player == '':
-    redo = True
-    while redo:
-      cnt += 1
-      debug_print('> Error: Primary Attributes invalid. Fixing that. --> Pool=%d (%d)'%(pool,sum(pas)))
-      while pool>0:      
+  if ch.onsave_reroll_attributes:
+    pool = ch.role.primaries
+    maxi = ch.role.maxi
+    mini = int(ch.role.mini)
+    pas = [ mini for i in range(12) ]
+    pool -= sum(pas)
+    weights = ch.profile.get_weights()
+    balance = ch.specie.attr_mod_balance
+    if ch.player == '':
+      while pool>0:
         chosen_pa = choose_pa(weights,maxi,pas)
         idx = chosen_pa
-        if pas[idx] < maxi:
-          pas[idx] += 1
-          pool -= 1
-        else:
-          debug_print('> Invalid : already too high: pa[idx]:%d idx:%d maxi:%d pool:%d chosen_pa:%d'%(pas[idx],idx,maxi,pool,chosen_pa))
-      if min(pas)>=mini and max(pas)<=maxi+5 and sum(pas)==total:
-        debug_print('> :) %s: mini=%d/%d, max=%d/%d, sum=%d/%d'%(ch.rid, min(pas),mini, max(pas),maxi, sum(pas),total ))
-        debug_print('> [p:%d,s:%d,c:%d] --> [p:%d,s:%d,c:%d]'%(sum(pas[0:4]), sum(pas[4:8]), sum(pas[8:12]), sum(weights[0:4]), sum(weights[4:8]), sum(weights[8:12])))
-        redo = False
-      else:
-        debug_print('> :( %s: mini=%d/%d, max=%d/%d, sum=%d/%d'%(ch.rid, min(pas),mini, max(pas),maxi, sum(pas),total ))
-        pool = total
-        pas = [0,0,0,0,0,0,0,0,0,0,0,0]
-        if cnt > 100:
-          debug_print('> Too many redo in PA check () Beyond 100!!!','critical');          
-          #raise ValueError('redo beyond 10 !!!')
-          redo = False
-    #debug_print(pas)
-    ch.PA_STR = pas[0]
-    ch.PA_CON = pas[1]
-    ch.PA_BOD = pas[2]
-    ch.PA_MOV = pas[3]
+        pas[idx] += 1
+        pool -= 1
+      ch.PA_STR = pas[0]
+      ch.PA_CON = pas[1]
+      ch.PA_BOD = pas[2]
+      ch.PA_MOV = pas[3]
     
-    ch.PA_INT = pas[4]
-    ch.PA_WIL = pas[5]
-    ch.PA_TEM = pas[6]
-    ch.PA_PRE = pas[7]
+      ch.PA_INT = pas[4]
+      ch.PA_WIL = pas[5]
+      ch.PA_TEM = pas[6]
+      ch.PA_PRE = pas[7]
     
-    ch.PA_TEC = pas[8]
-    ch.PA_REF = pas[9]
-    ch.PA_AGI = pas[10]
-    ch.PA_AWA = pas[11]
-  ch.apply_racial_pa_mods()
-  ch.onsave_reroll_attributes = False
+      ch.PA_TEC = pas[8]
+      ch.PA_REF = pas[9]
+      ch.PA_AGI = pas[10]
+      ch.PA_AWA = pas[11] 
+      ch.apply_racial_pa_mods()
+      #list_attributes(ch,None)
+    ch.onsave_reroll_attributes = False
 
 
 def get_skills_list(ch,groups):
@@ -329,58 +346,6 @@ def choose_sk(alist,maxweight):
 def check_skills(ch):
   """ Fixing skills """
   skills_randomizer(ch)
-  """
-  debug_print('Checking skills...%s'%(ch.rid))
-  pool = ch.role.skills
-  maxi = ch.role.maxi
-  groups = ch.profile.groups
-  current = ch.SK_TOTAL
-  balance = ch.specie.skill_balance
-  debug_print('> Current SK TOTAL: %d (pool is %d)'%(current,pool))
-  master_list = get_skills_list(ch,groups)
-  master_weight = 0
-  for s in master_list:
-    master_weight += s['weight']
-  debug_print('> Max weight is %d'%(master_weight))
-  ch.purgeSkills()
-  current = fetch_everyman_sum(ch)
-  debug_print('> Everyman total is %d'%(current))
-  x = 0
-  pool -= balance
-  if (current < pool) and ch.player == '':
-    pool -= current
-    debug_print('> Error: Skills total too weak. Fixing that')
-    repart = {'AWA':0,'BOD':0,'CON':0,'DIP':0,'EDU':0,'FIG':0,'PER':0,'SOC':0,'SPI':0,'TIN':0,'UND':0}    
-    while pool>0:
-      if pool>100:
-        batch = 4
-      elif pool>80:
-        batch = 3
-      elif pool>30:
-        batch = 2
-      elif pool>4:
-        batch = roll(4)
-      else:
-        batch = 1
-      x+=batch
-      chosen_sk = choose_sk(master_list,master_weight)
-      sk = ch.add_or_update_skill(chosen_sk,batch)      
-      debug_print('%d> Upping %s of %d (now %d) let pool at %d'%(x,chosen_sk.reference,batch,sk.value,pool))
-      pool -= batch
-    #check_specialties_from_roots(ch)
-    check_everyman_skills(ch)
-    ch.add_missing_root_skills()    
-    #check_root_skills(ch)
-  debug_print('')
-  debug_print('SKILL LIST')    
-  for skill in ch.skill_set.all().order_by('skill_ref__reference'):
-    debug_print('%s%s: %d'%('  ' if skill.skill_ref.is_speciality else '',skill.skill_ref.reference,skill.value))
-    repart[skill.skill_ref.group] += skill.value if skill.skill_ref.is_speciality==False else 0
-  debug_print(repart)
-  ch.onsave_reroll_skills = False
-  """
-
-  
 
 def check_role(ch):
   #print('> %s:'%(ch.full_name))
@@ -408,7 +373,9 @@ def update_challenge(ch):
   res += '<i class="fas fa-th-large" title="primary attributes"></i>%d '%(ch.AP)
   res += '<i class="fas fa-th-list" title="skills"></i> %d '%(ch.SK_TOTAL)
   res += '<i class="fas fa-th" title="talents"></i> %d '%(ch.TA_TOTAL+ch.BC_TOTAL+ch.BA_TOTAL)
-  res += '<i class="fas fa-newspaper" title="OP challenge"></i> %d '%(ch.OP)  
+  res += '<i class="fas fa-newspaper" title="OP challenge"></i> %d '%(ch.OP)
+
+  
   return res
 
 
@@ -576,3 +543,14 @@ def get_specialities_list(ch,root):
     if weight > 0:
       result_skills.append({'skill':s.reference, 'data':s, 'weight':weight})
   return result_skills
+
+
+def get_keywords():
+  """ Get all keywords """
+  from collector.models.characters import Character
+  everybody = Character.objects.all()
+  keywords = []
+  for someone in everybody:
+    if someone.keyword != '':
+      keywords.append(someone.keyword)
+  return sorted(list(set(keywords)))

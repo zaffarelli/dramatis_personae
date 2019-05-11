@@ -25,7 +25,7 @@ h1, h2, h3, h4, h5, h6 {
 
 body {
   font-family: Texte;
-  background: black url("13.jpg") fixed 50% 50%; }
+  background: black url("back.jpg") fixed 50% 50%; }
   body .logo {
     background: transparent url("simple_logo_invert.png") center center no-repeat; }
   body .menu {
@@ -220,17 +220,26 @@ body {
         body .wrapper .details .skillsview table {
           font-size: 7pt;
           width: 100%; }
-          body .wrapper .details .skillsview table tr td {
-            width: auto; }
-          body .wrapper .details .skillsview table tr th {
-            background: #040404;
-            background: transparent;
-            width: 14ex;
-            font-size: 1.2em;
-            line-height: 0.8em; }
-            body .wrapper .details .skillsview table tr th.edit span:hover {
-              color: #E5DECA;
-              font-size: 0.8em; }
+          body .wrapper .details .skillsview table tr {
+            height: 5px;
+            overflow: hidden; }
+            body .wrapper .details .skillsview table tr td {
+              width: auto;
+              height: 5px;
+              margin: 0;
+              padding: 0; }
+            body .wrapper .details .skillsview table tr th {
+              height: 5px;
+              background: #040404;
+              background: transparent;
+              width: 14ex;
+              font-size: 1.2em;
+              line-height: 0.8em;
+              margin: 0;
+              padding: 0; }
+              body .wrapper .details .skillsview table tr th.edit span:hover {
+                color: #E5DECA;
+                font-size: 0.8em; }
       body .wrapper .details .chart_panel {
         border: 1px solid #040404;
         box-shadow: 2px 2px 8px #040404;
@@ -426,6 +435,10 @@ body {
   color: white;
   opacity: 0.8; }
 
+th.skill_dot {
+  line-height: 0.3em;
+  background: orange; }
+
 .embedded_link {
   color: #DBCA86;
   text-decoration: none; }
@@ -567,32 +580,34 @@ body {
 
 #messenger {
   position: fixed;
-  width: 250px;
+  width: 400px;
   height: auto;
-  left: 5px;
+  left: auto;
   display: block;
-  right: auto;
-  top: 0;
+  right: 5px;
+  top: auto;
+  bottom: -1px;
   z-index: 9000;
-  background: silver url("details.png");
+  background: #1d1d1d;
   overflow: hidden;
-  border-radius: 0 0 5px 5px;
-  border: 1px solid silver;
+  border-radius: 10px 10px 0 0;
+  border: 1px solid #1d1d1d;
+  box-shadow: 0 0 10px;
   padding: 0; }
   #messenger p {
     margin: 5px;
     padding: 0;
     color: white;
-    font-family: Texte;
-    font-size: 9pt; }
+    font-family: monospace;
+    font-size: 8pt; }
     #messenger p.info {
-      color: cyan; }
+      color: #3399ff; }
     #messenger p.success {
       color: lime; }
     #messenger p.error {
       color: red; }
     #messenger p.warning {
-      color: yellow; }
+      color: orange; }
 
 /* Normal --------------------------------------------------------------------*/
 @media all and (min-width: 1024px) {

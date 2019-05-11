@@ -47,8 +47,9 @@ def recalc(request):
     c.pagenum = x     
     c.save()
     x += 1
+    messages.warning(request, 'Recalc... %s'%(c.full_name))
   #answer = 'Done'
-  messages.add_message(request, messages.INFO, 'Complete recalc done...')
+  messages.add_message(request, messages.INFO, 'Recalc done.')
   return HttpResponse(status=204)
 
 def export(request):

@@ -30,7 +30,6 @@ class FICSTestSkills(TestCase):
         skill_total += s.value
     self.assertEqual(skill_total,sk_pool)
   
-"""
 class FICSTestPA(TestCase):
   fixtures = ['skillrefs.xml','species.xml','roles.xml','profiles.xml']
 
@@ -92,5 +91,5 @@ class FICSTestPA(TestCase):
     c_pa_list = [ c.PA_STR , c.PA_CON , c.PA_BOD , c.PA_MOV , c.PA_INT , c.PA_WIL , c.PA_TEM , c.PA_PRE , c.PA_TEC , c.PA_REF , c.PA_AGI , c.PA_AWA]
     m = min(c_pa_list)
     self.assertLessEqual(mini,m)
-"""
+
 

@@ -40,7 +40,7 @@ class Talent(models.Model):
   def __str__(self):
     return '%s=%s' % (self.character.full_name,self.name)
   def fix(self):
-    self.value = self.AP*3 + self.OP + talent_ref.value
+    self.value = self.AP*3 + self.OP + self.talent_ref.value
 @receiver(pre_save, sender=Talent, dispatch_uid='update_talent')
 def update_talent(sender, instance, **kwargs):
   instance.fix()

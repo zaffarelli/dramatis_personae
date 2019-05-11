@@ -63,13 +63,15 @@
 {% for skill in c.skill_set.all|dictsort:"skill_ref.reference" %}
 <table>
 <tr><td>{% if skill.skill_ref.is_root %}<strong>{% endif %}
-				{% if skill.skill_ref.is_speciality %}&nbsp;&nbsp;&nbsp;{% endif %}
+				{% if skill.skill_ref.is_speciality %}- &nbsp;&nbsp;{% endif %}
+        {% if skill.skill_ref.is_common == False %}<em>{% endif %}
 			  {{ skill.skill_ref.reference|safe }}
+        {% if skill.skill_ref.is_common == False %}</em>{% endif %}
 				{% if skill.skill_ref.is_root %}</strong>{% endif %}			
 </td>
 
 
-<th id='val_{{skill.id}}'>{{ skill.value|as_bullets_short|safe }}</th></tr>
+<th id='val_{{skill.id}}' class='skill_dot'>{{ skill.value|as_bullets_short|safe }}</th></tr>
 </table>
 {% endfor %}
 </div>
@@ -149,7 +151,21 @@
 {% if c.weapon_set.count != 0 %}
 <h2>Weapons ({{c.weapon_cost}})</h2>
 <table>{% for w in c.weapon_set.all|dictsort:"weapon_ref.reference" %}
-<tr><td>{{ w.weapon_ref.stats|safe }}</td></tr>
+<tr><td>{{ w.weapon_ref.reference|safe }}</td>
+<td>CA:{{ w.weapon_ref.category }}</td>
+<td>WA:{{ w.weapon_ref.weapon_acccuracy }}</td>
+<td>CO:{{ w.weapon_ref.conceilable }}</td>
+<td>A:{{ w.weapon_ref.availability }}</td>
+<td>DC:{{ w.weapon_ref.damage_class }}</td>
+<td>Cal:{{ w.weapon_ref.caliber|safe }}</td>
+<td>STR:{{ w.weapon_ref.str_min }}</td>
+<td>RoF:{{ w.weapon_ref.rof }}</td>
+<td>Clip:{{ w.weapon_ref.clip }}</td>
+<td>RNG:{{ w.weapon_ref.rng|safe }}</td>
+<td>REL:{{ w.weapon_ref.rel|safe }}</td>
+<td>{{ w.weapon_ref.cost|safe }}£</td>
+<td>{{ w.weapon_ref.origins|safe }}</td>
+</tr>
 {% endfor %}
 </table>
 {%endif%}

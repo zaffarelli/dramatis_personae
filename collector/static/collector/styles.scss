@@ -51,7 +51,7 @@ h1, h2, h3, h4, h5, h6{
 body {
   
   font-family: Texte;
-  background: $fics_darkest url("13.jpg") fixed 50% 50%;
+  background: $fics_darkest url("back.jpg") fixed 50% 50%;
 
   & .logo {
     background: transparent url("simple_logo_invert.png") center center no-repeat;
@@ -313,10 +313,18 @@ body {
           font-size:7pt;
           width: 100%;
           & tr{
+            height:5px;
+            overflow:hidden;
             & td{
               width:auto;
+              height:5px;
+              margin:0;
+              padding:0;
+              
             }
             & th{
+
+              height:5px;
               background:$fics_darker;
               background:transparent;
               width:14ex;
@@ -326,6 +334,8 @@ body {
                 color:$fics_front;
                 font-size:0.8em;
               }
+              margin:0;
+              padding:0;
             }
           }
         }
@@ -570,6 +580,11 @@ body {
   opacity: 0.8;
 }
 
+th.skill_dot{
+  line-height:0.3em;
+  background:orange;
+}
+
 .embedded_link{  
   color: $fics_link;
   text-decoration:none;
@@ -749,26 +764,28 @@ body {
 
 #messenger{
   position:fixed;
-  width:250px;
+  width:400px;
   height:auto;
-  left:5px;
+  left:auto;
   display:block;
-  right: auto;
-  top:-1px;
+  right: 5px;
+  top:auto;
+  bottom:-1px;
   z-index:9000;
-  background:black url("details.png");
+  background:$fics_dark;
   overflow:hidden;
-  border-radius:0 0 5px 5px;
-  border:1px solid silver;
+  border-radius:10px 10px 0 0;
+  border:1px solid $fics_dark;
+  box-shadow: 0 0 10px;
   padding:0;
   & p{
     margin:5px;
     padding:0;
     color:white;
-    font-family:Texte;
+    font-family:monospace;
     font-size:8pt;
     &.info{
-      color:cyan;
+      color:#3399ff;
     }
     &.success{
       color:lime;
