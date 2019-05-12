@@ -33,6 +33,7 @@ def pdf_character(request,id=None):
     answer = '<a class="pdflink" target="_blank" href="pdf/%s.pdf">%s</a>'%(item.rid,item.rid)
   else:
     answer = '<span class="pdflink">no character found</span>'
+  messages.info(request, 'PDF created.')
   return HttpResponse(status=204)
 
 
@@ -42,6 +43,7 @@ def recalc(request):
   conf = get_current_config()
   character_items = Character.objects.filter(epic=conf.epic).order_by('-player','full_name')
   x = 1
+  messages.warning(request, 'Starting Recalc...')
   for c in character_items:
     #print('\n>>> %d'%(x))
     c.pagenum = x     
@@ -49,12 +51,13 @@ def recalc(request):
     x += 1
     messages.warning(request, 'Recalc... %s'%(c.full_name))
   #answer = 'Done'
-  messages.add_message(request, messages.INFO, 'Recalc done.')
+  messages.info(request, 'Recalc done.')
   return HttpResponse(status=204)
 
 def export(request):
   """ XLS export of the characters """
   export_to_xls()
+  messages.info(request, 'Exported to XLS spreadsheet...')
   return HttpResponse(status=204)
 
 def xls_update(request):
@@ -64,5 +67,5 @@ def xls_update(request):
 
 def gss_update(request):
   update_gss()
-  messages.add_message(request, messages.INFO, 'Exported to Goodle Spread Sheet...')
+  messages.info(request, 'Exported to Google spreadsheet...')
   return HttpResponse(status=204)

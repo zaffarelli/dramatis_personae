@@ -214,47 +214,33 @@ class Character(models.Model):
       self.PA_STR + self.PA_CON + self.PA_BOD + self.PA_MOV + \
       self.PA_INT + self.PA_WIL + self.PA_TEM + self.PA_PRE + \
       self.PA_TEC + self.PA_REF + self.PA_AGI + self.PA_AWA
-    #self.build_log += ('PA_TOTAL: %d'%(self.PA_TOTAL))
-    # skills
     skills = self.skill_set.all()
     for s in skills:
       if s.skill_ref.is_root == False:         
         self.SK_TOTAL += s.value
-    #self.build_log += ('SK_TOTAL: %d'%(self.SK_TOTAL))
-    # talents
     talents = self.talent_set.all()
     for t in talents:
       self.TA_TOTAL += t.value
-    #self.build_log += ('TA_TOTAL: %d'%(self.TA_TOTAL))
-    # blessings curses
     blessingcurses = self.blessingcurse_set.all()
     for bc in blessingcurses:
       self.BC_TOTAL += bc.value
-    #self.build_log += ('BC_TOTAL: %d'%(self.BC_TOTAL))
-    # benefice afflictions
     beneficeafflictions = self.beneficeaffliction_set.all()    
     for ba in beneficeafflictions:
       self.BA_TOTAL += ba.value + ba.beneficeaffliction_ref.value
-    #self.build_log += ('BA_TOTAL: %d'%(self.BA_TOTAL))
-    # AP    
     self.AP = self.PA_TOTAL
-    # Extras as OP
     self.OP = self.PA_TOTAL*3 + self.SK_TOTAL + self.TA_TOTAL + self.BC_TOTAL + self.BA_TOTAL
-    # Weapons firebirds
     weapons = self.weapon_set.all()    
     for w in weapons:
       self.weapon_cost += w.weapon_ref.cost
-    #self.build_log += ('weapon_cost: %d'%(self.weapon_cost))
-    # Armors firebirds
+    self.OP += int(self.weapon_cost / 100)
     armors = self.armor_set.all()    
     for a in armors:
       self.armor_cost += a.armor_ref.cost
-    #self.build_log += ('armor_cost: %d'%(self.armor_cost))
-    # Shields firebirds
+    self.OP += int(self.armor_cost / 100)
     shields = self.shield_set.all()    
     for s in shields:
       self.shield_cost += s.shield_ref.cost
-    #self.build_log += ('shield_cost: %d'%(self.shield_cost))
+    self.OP += int(self.shield_cost / 100)      
     return 'ok'#self.build_log
 
 
@@ -288,7 +274,6 @@ class Character(models.Model):
       item = self
       context = {'c':item,'filename':'%s'%(item.rid),}
       write_pdf('collector/character_roster.html',context)
-      print('PDF .........: %s.pdf' % (self.rid))
     return proceed      
 
   def __str__(self):

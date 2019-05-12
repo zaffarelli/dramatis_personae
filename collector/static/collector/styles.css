@@ -25,7 +25,7 @@ h1, h2, h3, h4, h5, h6 {
 
 body {
   font-family: Texte;
-  background: black url("back.jpg") fixed 50% 50%; }
+  background: black url("greynoise.jpg") fixed 50% 50%; }
   body .logo {
     background: transparent url("simple_logo_invert.png") center center no-repeat; }
   body .menu {
