@@ -19,14 +19,16 @@ $fics_subborder_color: darken($fics_back,30%);
 $fics_golden: #ffcc22;
 $fics_lock: darken($fics_golden,50%);
 
+
 @font-face {
   font-family: 'Titre';  
-  src: url('Eczar-ExtraBold.ttf');
+  //src: url('Eczar-ExtraBold.ttf');
+  src: url('fonts/Balthazar-Regular.ttf');
 }
 
 @font-face {
   font-family: 'Texte';  
-  src: url('WorkSans-Regular.ttf');
+  src: url('fonts/Lato-Regular.ttf');
 }
 
 @font-face {

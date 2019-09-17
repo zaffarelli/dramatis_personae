@@ -8,12 +8,6 @@
     <style>
 
 @font-face {
-  font-family: 'Titre';  
-  src: url('collector/static/collector/Prompt-Regular.ttf');
-}
-
-
-@font-face {
   font-family: 'FiraTitle';  
   src: url('collector/static/collector/FiraSansCondensed-Black.ttf');
 }
@@ -22,8 +16,13 @@
 
 
 @font-face {
+  font-family: 'Titre';  
+  src: url('{% static "fonts/Balthasar-Regular.ttf" %}');
+}
+
+@font-face {
   font-family: 'Texte';  
-  src: url('collector/static/collector/Signika-Regular.ttf');
+  src: url('{%  static "fonts/Lato-Regular.ttf" %}');
 }
   
 body{

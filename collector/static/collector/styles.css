@@ -6,10 +6,10 @@
 */
 @font-face {
   font-family: 'Titre';
-  src: url("Eczar-ExtraBold.ttf"); }
+  src: url("fonts/Balthazar-Regular.ttf"); }
 @font-face {
   font-family: 'Texte';
-  src: url("WorkSans-Regular.ttf"); }
+  src: url("fonts/Lato-Regular.ttf"); }
 @font-face {
   font-family: 'Emphase';
   src: url("Eczar-Regular.ttf"); }

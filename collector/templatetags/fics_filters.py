@@ -7,6 +7,7 @@ from django import template
 from collector.models.characters import Character
 import re
 import string
+from django.template.defaultfilters import dictsort
 
 register = template.Library()
 
@@ -168,6 +169,37 @@ def parse_avatars_pdf(value):
     txt = txt.replace(change['src'],change['dst'])
   return txt
 
+@register.filter(name='dictsort_3cols')
+def dictsort_3cols(value,ref):
+  mylist = dictsort(value,ref)
+  count = len(mylist)
+  rowcount = int(count/3)
+  if count%3!=0:
+    rowcount+=1
+  idx = 0
+  cols = [[],[],[]]
+  for x in dictsort(value,ref):
+    c = int(idx/rowcount)
+    cols[c].append(x)
+    idx += 1
+  flat_cols = []
+  for idx in range(rowcount):
+    if len(cols[0])>idx:
+      flat_cols.append(cols[0][idx])
+    if len(cols[1])>idx:
+      flat_cols.append(cols[1][idx])
+    if len(cols[2])>idx:
+      flat_cols.append(cols[2][idx])
+  return flat_cols
 
 
+@register.filter(name='as_root')
+def as_root(value):
+  return "<b>%s</b>"%(value)
 
+@register.filter(name='as_specialty')
+def as_specialty(value):
+  x = value.split('(')[1]
+  val = x.split(')')[0]
+  return "&gt;&nbsp;<i>%s</i>"%(val)
+  

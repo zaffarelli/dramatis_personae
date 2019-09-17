@@ -41,29 +41,12 @@ def write_pdf(template_src, context_dict={}):
   result = open(filename, 'wb')
   pdf = pisa.pisaDocument(BytesIO(html.encode('utf-8')), result)
   result.close()
-
+ 
 def get_current_config():
   from collector.models.configs import Config
   item = Config.objects.get(is_active=True)
   return item
 
-def debug_print(s,level='log'):
-  from collector.utils.fics_references import DEBUG_ALL
-  if DEBUG_ALL:
-    print(s)
-  else:
-    if level=='debug':
-      logger.debug(s)
-    elif level=='error':
-      logger.error(s)
-    elif level=='info':
-      logger.info(s)
-    elif level=='warning':
-      logger.warning(s)
-    elif level=='critical':
-      logger.critical(s)
-    else:
-      logger.debug(s)
 
 def make_avatar_appendix(conf):
   """ Creating appendix with the list of avatars from the epic """

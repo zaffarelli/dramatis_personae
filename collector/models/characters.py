@@ -12,8 +12,10 @@ import hashlib
 from scenarist.models.epics import Epic
 from collector.models.fics_models import Role, Profile, Specie
 from collector.utils import fs_fics7
-from collector.utils.basic import debug_print
 from collector.utils.basic import write_pdf
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class Character(models.Model):
@@ -129,7 +131,7 @@ class Character(models.Model):
             sc = fs_fics7.check_gm_shortcuts(self, s)
             if sc != '':
                     tmp_shortcuts.append(sc)
-        gm_shortcuts = '<br/>'.join(tmp_shortcuts)
+        gm_shortcuts = ''.join(tmp_shortcuts)
         gm_shortcuts += fs_fics7.check_attacks(self)
         gm_shortcuts += fs_fics7.check_health(self)
         gm_shortcuts += fs_fics7.check_defense(self)
@@ -137,7 +139,7 @@ class Character(models.Model):
             gm_shortcuts += fs_fics7.check_nameless_attributes(self)
         self.gm_shortcuts = gm_shortcuts
         self.is_exportable = self.check_exportable()
-        debug_print('>>> %s %s' % (self.rid, self.is_exportable))
+        logger.info('>>> %s %s' % (self.rid, self.is_exportable))
 
     def apply_racial_pa_mods(self):
         attr_mods = self.specie.get_racial_attr_mod()
@@ -182,13 +184,13 @@ class Character(models.Model):
             if skillref in roots_list:
                 self.add_or_update_skill(skillref, roots_list.count(skillref))
         for item in roots_list:
-            debug_print('ROOT_LIST:%s' % (item.reference))
+            logger.debug('ROOT_LIST:%s' % (item.reference))
 
     def purgeSkills(self):
         """ Deleting all character skills """
         for skill in self.skill_set.all():
             skill.delete()
-        debug_print('PurgeSkill count: %d' % (self.skill_set.all().count()))
+        logger.debug('PurgeSkill count: %d' % (self.skill_set.all().count()))
 
     def resetTotal(self):
         """ Compute all sums for all stats """
@@ -287,7 +289,7 @@ def update_character(sender, instance, conf=None, **kwargs):
     instance.alliancehash = hashlib.sha1(
             bytes(instance.alliance, 'utf-8')
             ).hexdigest()
-    debug_print('Fix .........: %s' % (instance.full_name))
+    logger.info('Fix .........: %s' % (instance.full_name))
 
 @receiver(post_save, sender=Character, dispatch_uid='backup_character')
 def backup_character(sender, instance, **kwargs):

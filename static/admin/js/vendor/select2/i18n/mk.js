@@ -1,1 +1,1 @@
-/usr/venv/fics7/lib64/python3.6/site-packages/django/contrib/admin/static/admin/js/vendor/select2/i18n/mk.js
+/usr/venv/dramatis_personae/lib64/python3.7/site-packages/django/contrib/admin/static/admin/js/vendor/select2/i18n/mk.js

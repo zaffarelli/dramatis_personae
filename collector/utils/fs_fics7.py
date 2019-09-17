@@ -13,7 +13,10 @@ import yaml
 import json
 from collector.models.skillrefs import SkillRef
 from collector.utils.fics_references import *
-from collector.utils.basic import debug_print
+import logging
+
+logger = logging.getLogger(__name__)
+
 
 def check_secondary_attributes(ch):
   """ Compute all secondary attributes (we check nothing in fact)
@@ -37,7 +40,7 @@ def fetch_everyman_sum(ch):
   all_every = ch.specie.get_racial_skills()
   for every in all_every:
     total += all_every[every]
-  debug_print('> Everyman total for [%s] as [%s] is [%d].'%(ch.full_name,ch.specie,total))
+  logger.debug('> Everyman total for [%s] as [%s] is [%d].'%(ch.full_name,ch.specie,total))
   return total
     
 def check_everyman_skills(ch):
@@ -53,7 +56,7 @@ def check_everyman_skills(ch):
         every_found = True
         val = all_every[every]
         #if s.value < val:          
-        debug_print('Everyman: Value fixed for %s (%s)'%(s.skill_ref.reference,val))
+        logger.debug('Everyman: Value fixed for %s (%s)'%(s.skill_ref.reference,val))
         this_skill = Skill.objects.get(id=s.id)
         this_skill.value += val
         val_total += val
@@ -61,7 +64,7 @@ def check_everyman_skills(ch):
         break
     if not every_found:
       val = all_every[every]
-      debug_print('Everyman: Not found: %s... Added value %d!'%(every,val))
+      logger.debug('Everyman: Not found: %s... Added value %d!'%(every,val))
       this_skill_ref = SkillRef.objects.get(reference=every)
       this_skill = Skill()
       this_skill.character=ch
@@ -75,7 +78,7 @@ def check_gm_shortcuts(ch,sk):
   """ Check for Gamemaster shortcuts for the character """
   if sk.skill_ref.reference in SHORTCUTS:
     score = sk.value + getattr(ch,SHORTCUTS[sk.skill_ref.reference]['attribute'])
-    newshortcut = '%s (%s): <b>%d</b>'%(SHORTCUTS[sk.skill_ref.reference]['rationale'],SHORTCUTS[sk.skill_ref.reference]['label'],score)
+    newshortcut = '<p>%s (%s): <b>%d</b></p>'%(SHORTCUTS[sk.skill_ref.reference]['rationale'],SHORTCUTS[sk.skill_ref.reference]['label'],score)
     return newshortcut  
   else:
     return ''
@@ -86,12 +89,12 @@ def check_nameless_attributes(ch):
   PA_PHY = (ch.PA_STR + ch.PA_CON + ch.PA_BOD + ch.PA_MOV) // 4
   PA_SPI = (ch.PA_INT + ch.PA_WIL + ch.PA_TEM + ch.PA_PRE) // 4
   PA_COM = (ch.PA_TEC + ch.PA_REF + ch.PA_AGI + ch.PA_AWA) // 4
-  res = '<h2>Nameless</h2>Physical:<b>%s</b> Spirit:<b>%s</b> Combat:<b>%s</b>' % (PA_PHY,PA_SPI,PA_COM)
+  res = '<h6>Nameless</h6>Physical:<b>%s</b> Spirit:<b>%s</b> Combat:<b>%s</b>' % (PA_PHY,PA_SPI,PA_COM)
   return res
 
 def check_attacks(ch):
   """ Attacks shortcuts depending on the avatar and his/her weapons and skills """
-  ranged_attack = '<h5>Attacks</h5>'
+  ranged_attack = '<h6>Attacks</h6>'
   for w in ch.weapon_set.all():
     if w.weapon_ref.category in {'P','RIF','SMG'}:      
       sk = ch.skill_set.filter(skill_ref__reference='Shoot').first()
@@ -102,7 +105,7 @@ def check_attacks(ch):
       score = ch.PA_REF + sval + w.weapon_ref.weapon_accuracy
       dmg = w.weapon_ref.damage_class
       x = minmax_from_dc(dmg)
-      ranged_attack += '%s: Roll:<b>%d+1D12</b> Dmg:<b>%d-%d</b></br>'%(w.weapon_ref.reference,score,x[0],x[1])
+      ranged_attack += '<p>%s: Roll:<b>%d+1D12</b> Dmg:<b>%d-%d</b></p>'%(w.weapon_ref.reference,score,x[0],x[1])
     if w.weapon_ref.category in {'HVY'}:      
       sk = ch.skill_set.filter(skill_ref__reference='Heavy Weapons').first()
       if sk is None:
@@ -112,7 +115,7 @@ def check_attacks(ch):
       score = ch.PA_REF + sval + w.weapon_ref.weapon_accuracy
       dmg = w.weapon_ref.damage_class
       x = minmax_from_dc(dmg)
-      ranged_attack += '%s: Roll:<b>%d+1D12</b> Dmg:<b>%d-%d</b></br>'%(w.weapon_ref.reference,score,x[0],x[1])
+      ranged_attack += '<p>%s: Roll:<b>%d+1D12</b> Dmg:<b>%d-%d</b></p>'%(w.weapon_ref.reference,score,x[0],x[1])
     if w.weapon_ref.category in {'MELEE'}:      
       sk = ch.skill_set.filter(skill_ref__reference='Melee').first()
       if sk is None:
@@ -122,7 +125,7 @@ def check_attacks(ch):
       score = ch.PA_REF + sval + w.weapon_ref.weapon_accuracy
       dmg = w.weapon_ref.damage_class
       x = minmax_from_dc(dmg) 
-      ranged_attack += '%s: Roll:<b>%d+1D12</b> Dmg:<b>%d-%d (+str:%d)</b></br>'%(w.weapon_ref.reference,score,x[0],x[1], ch.SA_DMG)
+      ranged_attack += '<p>%s: Roll:<b>%d+1D12</b> Dmg:<b>%d-%d (+str:%d)</b></p>'%(w.weapon_ref.reference,score,x[0],x[1], ch.SA_DMG)
   tmpstr = filter(None,ranged_attack.split('</br>'))
   ranged_attack = '<br/>'.join(tmpstr) 
   return ranged_attack
@@ -177,11 +180,11 @@ def check_defense(ch):
   defenses = stack_defenses(defenses,a)
   defenses['stack']= stack
 
-  defense_str = '<h5>Defense</h5>'
+  defense_str = '<h6>Defense</h6>'
   defense_str += '%s'%(stack)
-  defense_str += '<br/>Head:%d'%(defenses['head'])
+  defense_str += '<p>Head:%d'%(defenses['head'])
   defense_str += '<br/>Right Arm:%d Torso:%d Left_arm:%d'%(defenses['right_arm'],defenses['torso'],defenses['left_arm'])
-  defense_str += '<br/>Right Leg:%d Left_Leg:%d'%(defenses['right_leg'],defenses['left_leg'])
+  defense_str += '<br/>Right Leg:%d Left_Leg:%d</p>'%(defenses['right_leg'],defenses['left_leg'])
   
   return defense_str
 
@@ -202,7 +205,6 @@ def roll(maxi):
   """ A more random '1 to maxi' dice roller  """
   randbyte = int.from_bytes(os.urandom(1),byteorder='big',signed=False)
   x = int(randbyte / 256 * (maxi)) +1
-  #debug_print('x=%d/%d)'%(x,maxi))
   return x
 
 def choose_pa(weights,maxi,pa):
@@ -317,10 +319,10 @@ def get_skills_list(ch,groups):
         #gweight += 1        
     master_skills.append({'skill':s.reference, 'data':s, 'weight':weight})
   msl = []
-  debug_print('')
-  debug_print('MASTER LIST')
+  
+  logger.debug('MASTER LIST')
   for ms in sorted(master_skills,key=lambda ms: ms['skill']):
-    debug_print('%s%s: %d'%('  ' if ms['data'].is_root else '', ms['skill'],ms['weight']))
+    logger.debug('%s%s: %d'%('  ' if ms['data'].is_root else '', ms['skill'],ms['weight']))
   return master_skills
 
 def pick_a_speciality_for(s):
@@ -356,13 +358,13 @@ def check_role(ch):
   ba_pool = ch.role.ba
   status = True
   if ch.PA_TOTAL < pa_pool:
-    debug_print('   Not enough PA: %d (%d)'%(ch.PA_TOTAL,pa_pool))
+    logger.info('   Not enough PA: %d (%d)'%(ch.PA_TOTAL,pa_pool))
     status = False 
   elif ch.SK_TOTAL+ch.specie.skill_balance < sk_pool:
-    debug_print('   Not enough SK: %d (%d)'%(ch.SK_TOTAL+ch.specie.skill_balance,sk_pool))
+    logger.info('   Not enough SK: %d (%d)'%(ch.SK_TOTAL+ch.specie.skill_balance,sk_pool))
     status = False 
   if ch.BA_TOTAL + ch.BC_TOTAL + ch.TA_TOTAL < ba_pool+bc_pool+ta_pool:
-    debug_print('   Not enough OP (Talents + Benefice/Afflictions + Blessing/Curses): %d (%d)'%(ch.BA_TOTAL + ch.BC_TOTAL + ch.TA_TOTAL,ba_pool+bc_pool+ta_pool))
+    logger.info('   Not enough OP (Talents + Benefice/Afflictions + Blessing/Curses): %d (%d)'%(ch.BA_TOTAL + ch.BC_TOTAL + ch.TA_TOTAL,ba_pool+bc_pool+ta_pool))
     result = False 
   return status
 
