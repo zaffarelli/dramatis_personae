@@ -289,7 +289,7 @@ def update_character(sender, instance, conf=None, **kwargs):
     instance.alliancehash = hashlib.sha1(
             bytes(instance.alliance, 'utf-8')
             ).hexdigest()
-    logger.info('Fix .........: %s' % (instance.full_name))
+    logger.debug('Fix .........: %s' % (instance.full_name))
 
 @receiver(post_save, sender=Character, dispatch_uid='backup_character')
 def backup_character(sender, instance, **kwargs):
