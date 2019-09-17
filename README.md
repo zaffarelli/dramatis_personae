@@ -20,3 +20,8 @@ Create a superuser to access the admin section:
 (dp_dir) $ scripts/db_dump.sh
 ```
 
+
+## Run tests
+```bash
+(dp_dir) $ scripts/test.sh
+```
