@@ -20,6 +20,10 @@ def cast_to_blank(modeladmin, request, queryset):
   queryset.update(epic=2)
   short_description = "Cast to no epic."
 
+def cast_to_antu(modeladmin, request, queryset):
+  queryset.update(epic=3)
+  short_description = "Cast to Abusus Non Tollit Usum"
+
 def make_invisible(modeladmin, request, queryset):
   queryset.update(is_visible=False)
   short_description = "Make invisible"
@@ -72,5 +76,5 @@ class CharacterAdmin(admin.ModelAdmin):
     ShieldInline,
   ]  
   ordering = ['epic','full_name',]
-  actions = [cast_to_blank, cast_to_dem, make_invisible, make_visible, make_teutonic, make_kaanic, make_castillan, make_enquist, make_public, make_private, make_partial, make_complete]
+  actions = [cast_to_blank, cast_to_dem, cast_to_antu, make_invisible, make_visible, make_teutonic, make_kaanic, make_castillan, make_enquist, make_public, make_private, make_partial, make_complete]
   exclude = ['SA_REC','SA_STA','SA_END','SA_STU','SA_RES','SA_DMG','SA_TOL','SA_HUM','SA_PAS','SA_WYR','SA_SPD','SA_RUN','PA_TOTAL','SK_TOTAL','TA_TOTAL','BC_TOTAL','BA_TOTAL']

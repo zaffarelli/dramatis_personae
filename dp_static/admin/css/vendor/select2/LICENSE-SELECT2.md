@@ -1,1 +1,1 @@
-/usr/venv/dramatis_personae/lib64/python3.7/site-packages/django/contrib/admin/static/admin/css/vendor/select2/LICENSE-SELECT2.md
+/home/zaffarelli/Projects/github/dramatis_personae/venv/dramatis_personae/lib64/python3.7/site-packages/django/contrib/admin/static/admin/css/vendor/select2/LICENSE-SELECT2.md

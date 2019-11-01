@@ -1,0 +1,11 @@
+
+module my-chronyhelper 1.0;
+
+require {
+	type chronyd_exec_t;
+	type NetworkManager_t;
+	class file { getattr ioctl };
+}
+
+#============= NetworkManager_t ==============
+allow NetworkManager_t chronyd_exec_t:file { getattr ioctl };

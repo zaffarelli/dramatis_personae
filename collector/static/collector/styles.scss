@@ -21,6 +21,11 @@ $fics_lock: darken($fics_golden,50%);
 
 
 @font-face {
+  font-family: 'NomPerso';  
+  src: url('fonts/BowlbyOneSC-Regular.ttf');
+}
+
+@font-face {
   font-family: 'Titre';  
   //src: url('Eczar-ExtraBold.ttf');
   src: url('fonts/Balthazar-Regular.ttf');
@@ -847,6 +852,11 @@ th.skill_dot{
     }
 
   }
+}
+
+
+.classyview H1{
+  font-family: NomPerso;
 }
 
 /* Small */

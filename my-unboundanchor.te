@@ -1,0 +1,18 @@
+
+module my-unboundanchor 1.0;
+
+require {
+	type named_t;
+	type unlabeled_t;
+	class file { create getattr map open read rename unlink write };
+	class lnk_file read;
+	class dir { add_name remove_name write };
+}
+
+#============= named_t ==============
+allow named_t unlabeled_t:dir { add_name remove_name write };
+
+#!!!! This avc is allowed in the current policy
+allow named_t unlabeled_t:file map;
+allow named_t unlabeled_t:file { create getattr open read rename unlink write };
+allow named_t unlabeled_t:lnk_file read;
