@@ -1,7 +1,10 @@
 #!/bin/bash
-echo "* ╔╦╗╔═╗  Dramatis Personae"
-echo "*  ║║╠═╝  Raspberri PI 3B+"
-echo "* ═╩╝╩    Deployment script"
+echo
+echo
+echo "* ╔╦╗╔═╗  Dramatis Personae *"
+echo "*  ║║╠═╝  Raspberri PI 3B+  *"
+echo "* ═╩╝╩    Deployment script *"
+echo
 echo "Going to install DRAMATIS PERSONAE, an Apache/WSGI server, and all prerequisites for production"
 echo "The Git must have been cloned/copied in /srv/dramatis_personae"
 echo "And the desired commit/branch/tag must have been checked out (before launching this script)"
@@ -13,8 +16,8 @@ yum install -y python3 httpd python3-pip
 echo "Installing Python basics... Done"
 echo 
 echo "Installing Python modules..."
-python3 -m venv /srv/dramatis_personae/venv/dramatis_personae
-source /srv/dramatis_personae/venv/dramatis_personae/bin/activate
+python3 -m venv /srv/dramatis_personae/venv/dp
+source /srv/dramatis_personae/venv/dp/bin/activate
 pip3 install --upgrade pip
 pip3 install -r /srv/dramatis_personae/requirements/prod.txt
 echo "Installing Python modules... Done"

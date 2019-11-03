@@ -18,6 +18,7 @@
     </head>
     <body>
 				<header></header>
+    
     <div class="logo">
     {% block logo %}
     {% endblock %}
@@ -25,7 +26,7 @@
             <div class="menu">
                 {% block menu %}
                 <div class='releasenote'>
-                &middot; <strong>Dramatis Personae</strong> release <b>{{ dp_version }}</b> &middot;
+                &middot; <strong>Dramatis Personae</strong> release <b>{{ dp_version }}</b> &middot;                
                 </div>          
                 {% endblock menu %}
             </div>
@@ -61,6 +62,7 @@
                 {% block page_footer %}
                 <ul>
                   <li><i>{{instance_name}} release {{ dp_version }}</i></li>
+                  <li><i>Python version {{ python_version }}</i></li>
                 </ul>
                 {% endblock %}
             </div>
