@@ -1,111 +1,36 @@
 #!/bin/bash
-
+echo "* ╔╦╗╔═╗  Dramatis Personae"
+echo "*  ║║╠═╝  Raspberri PI 3B+"
+echo "* ═╩╝╩    Deployment script"
 echo "Going to install DRAMATIS PERSONAE, an Apache/WSGI server, and all prerequisites for production"
 echo "The Git must have been cloned/copied in /srv/dramatis_personae"
 echo "And the desired commit/branch/tag must have been checked out (before launching this script)"
 echo
-
-read -p "Confirm that the Git has been cloned/copied into /srv/dramatis_personae ? (y/n) " answer
-if [ "$answer" != "y" ]
-then
-    echo "Exiting"
-    exit 1
-fi
-
-read -p "Confirm the desired commit/branch/tag has been checked out? (y/n) " answer
-if [ "$answer" != "y" ]
-then
-    echo "Exiting"
-    exit 1
-fi
-
-echo "Installing Apache, Postgres, and prerequisites..."
-
-# note: libldap2-dev libsasl2-dev are prereqs of module python-ldap
-dnf udpate && dnf install -y httpd python3-mod-wsgi python3-pip python3-venv 
-
-echo "Installing apache server and prerequisites... Done"
-
+echo "Installing Python basics..."
+yum update -y
+yum install -y https://centos7.iuscommunity.org/ius-release.rpm
+yum install -y python3 httpd python3-pip
+echo "Installing Python basics... Done"
+echo 
 echo "Installing Python modules..."
 python3 -m venv /srv/dramatis_personae/venv/dramatis_personae
 source /srv/dramatis_personae/venv/dramatis_personae/bin/activate
+pip3 install --upgrade pip
 pip3 install -r /srv/dramatis_personae/requirements/prod.txt
 echo "Installing Python modules... Done"
-
-
+echo
 echo "Configuring Apache..."
-a2enmod wsgi
-cp /srv/dramatis_personae/deployment/apache/dramatis_personae_httpd.conf /etc/httpd/conf.d/
-#a2dissite 000-default
-#a2ensite overview
-
-# Make sure Apache support UTF-8
-#sed -i -e "s/export LANG=C/export LANG=C.UTF-8/g" /etc/apache2/envvars
-
-service httpd restart
-
+systemctl stop httpd
+cp /srv/dramatis_personae/deployement/apache/dramatis_personae_httpd.conf /etc/httpd/conf.d/
+systemctl start httpd
+systemctl enable httpd
 echo "Configuring Apache... Done"
-
-
-#read -p "Create database? Do this only for the first install as it will DROP existing database (y/n) " answer
-#if [ "$answer" = "y" ]
-#then
-#    read -p "ANY EXISTING DATABASE IS GOING TO BE COMPLETELY ERASED. Confirm? (y/n) " answer
-#    if [ "$answer" = "y" ]
-#    then
-#        # deep magic for getting Postgres short version; to be later used to find config files
-#        # example: this will return "9.6" for Postgres 9.6.10. That will later be used to find file "/etc/postgresql/9.6/main/pg_hba.conf"
-#        psqlversion=`psql -V | sed -E "s/.*([0-9]+\.[0-9]+)\.[0-9]+/\1/g"`
-        
-#        # test if pg_hba.conf has already been configured
-#        pg_hba_configured=`grep "local overview overview password" /etc/postgresql/$psqlversion/main/pg_hba.conf`
-#        if [ "pg_hba_configured" = "" ]
-#        then
-#            # allow any local connection on Postgres, provided the user has a postgre password (no need to have a system account)
-#            sed -i -e "s/# Put your actual configuration here/# Put your actual configuration here\nlocal overview overview password/g" /etc/postgresql/$psqlversion/main/pg_hba.conf
-#        fi
-        
-#        echo "Backing up database (just in case)..."
-#        sudo -i -u postgres pg_dump -d overview > /srv/overview/database-backup-before-erase.sql
-#        echo "Backing up database... Done"
-        
-#        echo "Creating and initializing database..."
-#        USR="overview"
-#        PWD="overview"
-#        DB="overview"
-        
-#        sudo -i -u postgres psql -c "DROP USER IF EXISTS $USR;"
-#        sudo -i -u postgres psql -c "CREATE USER $USR WITH PASSWORD '$PWD';"
-        
-#        sudo -i -u postgres psql -c "DROP DATABASE IF EXISTS $DB;"
-#        sudo -i -u postgres psql -c "DROP DATABASE IF EXISTS test_$DB;"
-#        sudo -i -u postgres psql -c "CREATE DATABASE $DB OWNER overview;"
-
-#        sudo -i -u postgres psql -c "DROP USER IF EXISTS $USR;"
-#        sudo -i -u postgres psql -c "CREATE USER $USR WITH PASSWORD '$PWD';"
-#        sudo -i -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE $DB TO $USR;"
-#        echo "Creating and initiating database... Done"
-#    fi
-#fi
-
+echo
 echo "Migrating database and static files..."
-
-python3 manage.py makemigrations common_features
-python3 manage.py makemigrations overview_features
+python3 manage.py makemigrations 
 python3 manage.py migrate
 python3 manage.py collectstatic --no-input --clear
-
-#echo "Migrating database and static files... Done"
-
-#read -p "Populate database? Do this only for the first install as it will MERGE DATA with existing database (y/n) " answer
-#if [ "$answer" = "y" ]
-#then
-#    read -p "ANY EXISTING DATABASE IS GOING TO BE ADDED SOME DUMMY DATA. Confirm? (y/n) " answer
-#    if [ "$answer" = "y" ]
-#    then
-#        python3 manage.py populate_prod
-#        mkdir -p /srv/overview/overview/medias
-#        cp -ru /srv/overview/overview/default_medias/* /srv/overview/overview/medias/
-#        chmod -R a+w overview/medias/
-#    fi
-#fi
+echo "Migrating database and static files... Done"
+echo
+deactivate
+echo "* Over *"
