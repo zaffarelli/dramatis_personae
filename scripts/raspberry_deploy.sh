@@ -1,4 +1,5 @@
 #!/bin/bash
+clear
 echo
 echo -e "\e[0;35m"
 echo -e "║ ╔╦╗╔═╗                              ║"
@@ -14,7 +15,6 @@ then
   exit 1  
 fi
 echo
-echo -e "\e[0;35mInstalling system packages...\e[0;m"
 echo -e "\e[0;35mChecking system updates...\e[0;m"
 read -p "Do we need to check for system updates? (y/N) " answer
 if [ "$answer" == "y" ]
@@ -34,6 +34,8 @@ else
   exit 1    
 fi
 echo -e "\e[0;35m...done.\e[0;m"
+echo 
+echo -e "\e[0;35mInstalling Apache...\e[0;m"
 read -p "Do we need to install Apache? (y/N) " answer
 if [ "$answer" == "y" ]
 then
@@ -43,17 +45,18 @@ echo -e "\e[0;35m...done.\e[0;m"
 echo 
 echo -e "\e[0;35mInstalling Python modules and virtual environment...\e[0;m"
 python3 -m venv /srv/dramatis_personae/venv/dp
-echo -e "\e[0;34   --> Venv created\e[0;m"
+echo -e "\e[0;34m   --> Venv created\e[0;m"
 source /srv/dramatis_personae/venv/dp/bin/activate
-echo -e "\e[0;34   --> Venv sourced\e[0;m"
+echo -e "\e[0;34m   --> Venv sourced\e[0;m"
 pip3 install --upgrade pip
-echo -e "\e[0;34   --> Pip upgraded\e[0;m"
+echo -e "\e[0;34m   --> Pip upgraded\e[0;m"
 pip3 install -r requirements/prod.txt
-echo -e "\e[0;34   --> Venv packages installed\e[0;m"
+echo -e "\e[0;34m   --> Venv packages installed\e[0;m"
 mkdir /srv/dramatis_personae/dramatis_personae/logs
-echo -e "\e[0;34   --> Log dir\e[0;m"
+echo -e "\e[0;34m   --> Log dir\e[0;m"
 touch /srv/dramatis_personae/dramatis_personae/logs/dramatis_personae.log
-echo -e "\e[0;34   --> Log file\e[0;m"
+chmod 777 /srv/dramatis_personae/dramatis_personae/logs/dramatis_personae.log
+echo -e "\e[0;34m   --> Log file\e[0;m"
 echo -e "\e[0;35m...done.\e[0;m"
 echo
 echo -e "\e[0;35mConfiguring Apache...\e[0;m"
