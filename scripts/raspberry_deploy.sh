@@ -15,7 +15,7 @@ then
 fi
 echo
 echo -e "\e[0;35mChecking system updates...\e[0;m"
-read -p "Do we need to chck for system updates? (y/N) " answer
+read -p "Do we need to check for system updates? (y/N) " answer
 if [ "$answer" == "y" ]
 then
   sudo yum update -y
@@ -26,7 +26,7 @@ read -p "Do we need to install Python? (y/N) " answer
 if [ "$answer" == "y" ]
 then
   #sudo yum install -y https://centos7.iuscommunity.org/ius-release.rpm
-  yum install -y python3 python3-pip python3-devel gcc-c++ libjpeg libjpeg-devel zlib1g-devel
+  yum install -y python3 python3-pip python3-devel gcc-c++ libjpeg libjpeg-devel #zlib1g-devel
 else
   echo -e "\e[1;31m...cancelled.\e[0;m"
   exit 1    
@@ -44,6 +44,7 @@ python3 -m venv /srv/dramatis_personae/venv/dp
 source /srv/dramatis_personae/venv/dp/bin/activate
 pip3 install --upgrade pip
 pip3 install -r requirements/prod.txt
+touch /srv/dramatis_personae/dramatis_personae/logs/dramatis_personae.log
 echo -e "\e[0;35m...done.\e[0;m"
 echo
 echo -e "\e[0;35mConfiguring Apache...\e[0;m"
