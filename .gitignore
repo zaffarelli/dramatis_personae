@@ -1,6 +1,7 @@
 Closet/
 .sass-cache/
 __py-cache__/
+__py_cache__
 pdfbooks/
 .~lock.
 logs/
