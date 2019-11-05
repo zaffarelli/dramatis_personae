@@ -44,6 +44,7 @@ python3 -m venv /srv/dramatis_personae/venv/dp
 source /srv/dramatis_personae/venv/dp/bin/activate
 pip3 install --upgrade pip
 pip3 install -r requirements/prod.txt
+mkdir /srv/dramatis_personae/dramatis_personae/logs
 touch /srv/dramatis_personae/dramatis_personae/logs/dramatis_personae.log
 echo -e "\e[0;35m...done.\e[0;m"
 echo
