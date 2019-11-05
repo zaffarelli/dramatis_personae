@@ -1,4 +1,4 @@
-#!/home/zaffarelli/Projects/github/dramatis_personae/venv/dp/bin/python3.6
+#!/home/zaffarelli/Projects/github/dramatis_personae/venv/dp/bin/python3
 # EASY-INSTALL-ENTRY-SCRIPT: 'xhtml2pdf==0.2.2','console_scripts','xhtml2pdf'
 __requires__ = 'xhtml2pdf==0.2.2'
 import re

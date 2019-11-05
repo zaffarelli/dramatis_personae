@@ -10,8 +10,6 @@ from django.template.loader import get_template
 from xhtml2pdf import pisa
 from django.conf import settings
 from PyPDF2 import PdfFileMerger
-#from os import listdir
-#from os.path import isfile, join
 import datetime
 import os
 import logging
