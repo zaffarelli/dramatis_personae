@@ -6,8 +6,7 @@ echo -e "║ ╔╦╗╔═╗                              ║"
 echo -e "║  ║║╠═╝  Raspberri PI 3B+ / CentOS 7 ║"
 echo -e "║ ═╩╝╩    Deployment Script           ║"
 echo -e "\e[0;m"
-echo -e "If you're running this script, it is supposed to be from CentOS 7 system on a Raspberry Pi 3B+ in the /srv/dramatis_personae directory where you "
-echo -e "have cloned the github repository and checked it out."
+echo -e "If you're running this script, it is supposed to be from CentOS 7 system on a Raspberry Pi 3B+ in the /srv/dramatis_personae directory where you have cloned the github repository and checked it out."
 read -p "Are you sure you want to continue? (y/N) " answer
 if [ "$answer" != "y" ]
 then
@@ -39,11 +38,12 @@ echo -e "\e[0;35mInstalling Apache...\e[0;m"
 read -p "Do we need to install Apache? (y/N) " answer
 if [ "$answer" == "y" ]
 then
-  sudo yum install -y httpd nmap
+  sudo yum install -y httpd nmap mod_wsgi
 fi
 echo -e "\e[0;35m...done.\e[0;m"
 echo 
 echo -e "\e[0;35mInstalling Python modules and virtual environment...\e[0;m"
+rm -rf venv/dp
 python3 -m venv /srv/dramatis_personae/venv/dp
 echo -e "\e[0;34m   --> Venv created\e[0;m"
 source /srv/dramatis_personae/venv/dp/bin/activate
