@@ -1,13 +1,11 @@
 Closet/
-pdf/
 .sass-cache/
 __py-cache__/
-pdf
 pdfbooks/
-__pycache__/
 .~lock.
 logs/
 rubish/
 backup/rescue/
 backup/custom/
+venv/dp/
 collector/static/collector/creds.json
