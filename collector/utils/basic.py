@@ -34,8 +34,7 @@ def write_pdf(template_src, context_dict={}):
   template = get_template(template_src)
   html = template.render(context_dict)
   fname = 'avatar_%s.pdf'%(context_dict['filename'])
-  filename = os.path.join(settings.MEDIA_ROOT, 'pdf/' + fname)
-  #filename = './static/pdf/%s.pdf' % context_dict['filename']
+  filename = os.path.join(settings.MEDIA_ROOT, 'pdf/results/' + fname)
   result = open(filename, 'wb')
   pdf = pisa.pisaDocument(BytesIO(html.encode('utf-8')), result)
   result.close()
@@ -51,33 +50,34 @@ def make_avatar_appendix(conf):
   d = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
   res = []
   mypath = os.path.join(settings.MEDIA_ROOT, 'pdf/')
+  media_resources = os.path.join(settings.MEDIA_ROOT, 'pdf/resources/')
+  media_results = os.path.join(settings.MEDIA_ROOT, 'pdf/results/')
   mystaticpath = os.path.join(settings.STATIC_ROOT, 'pdf/')
-  onlyfiles = [f for f in os.listdir(mypath) if os.path.isfile(os.path.join(mypath, f))]
+  onlyfiles = [f for f in os.listdir(media_results) if os.path.isfile(os.path.join(media_results, f))]
   pdfs = onlyfiles
   merger = PdfFileMerger()
-  merger.append(open('%sresources/__aa_header.pdf'%(mystaticpath), 'rb'))
+  merger.append(open('%s__aa_header.pdf'%(media_resources), 'rb'))
   pdfs.sort()
   ep = conf.epic
-  cast = ep.get_full_cast()  
+  cast = ep.get_full_cast()
   i = 0
   for pdf in pdfs:
     if 'avatar_' in pdf:
       arid = pdf.split('avatar_')
-      #res.append('%s'%(x))
       if arid[1].split('.')[0] in cast:
         i += 1
-        merger.append(open(mypath+pdf, 'rb'))
-        #res.append('Adding %s'%(mypath+pdf))
+        merger.append(open(media_results+pdf, 'rb'))
   if i>0:
-    des = '%sappendix_%s.pdf'%(mypath,conf.epic.shortcut)
+    des = '%sappendix_%s.pdf'%(media_results,conf.epic.shortcut)
     with open(des, 'wb') as fout:
       merger.write(fout)
-    #res.append('Writing... %d characters in %s'%(i,des))
   return res
 
 def make_epic_corpus(conf):
   res = []
   mypath = os.path.join(settings.MEDIA_ROOT, 'pdf/')
+  media_resources = os.path.join(settings.MEDIA_ROOT, 'pdf/resources/')
+  media_results = os.path.join(settings.MEDIA_ROOT, 'pdf/results/')
   mystaticpath = os.path.join(settings.STATIC_ROOT, 'pdf/')
   merger = PdfFileMerger()
   merger.append(open('%sresources/__es_header.pdf'%(mystaticpath), 'rb'))
@@ -85,12 +85,12 @@ def make_epic_corpus(conf):
   context = {'epic':conf.parse_details()}
   html = template.render(context)
   fname = 'c_%s.pdf'%(conf.epic.shortcut)
-  filename = os.path.join(settings.MEDIA_ROOT, 'pdf/' + fname)
+  filename = os.path.join(settings.MEDIA_ROOT, 'pdf/results/' + fname)
   es_pdf = open(filename, 'wb')
   pdf = pisa.pisaDocument(BytesIO(html.encode('utf-8')), es_pdf)
   es_pdf.close()
   merger.append(open(filename, 'rb'))  
-  des = '%scorpus_%s.pdf'%(mypath,conf.epic.shortcut)
+  des = '%scorpus_%s.pdf'%(media_results,conf.epic.shortcut)
   with open(des, 'wb') as fout:
     merger.write(fout)
   return res
@@ -100,13 +100,13 @@ def export_epic(conf):
   comments = []
   comments += make_avatar_appendix(conf)
   comments += make_epic_corpus(conf)
-  com = '<br/>'.join(comments)
+  com = '<br/>'.join(comments)  
   res['comment'] = '<div class="classyview"><p>'+com+'</p></div>'
-  mypath = os.path.join(settings.MEDIA_ROOT, 'pdf/')
+  media_results = os.path.join(settings.MEDIA_ROOT, 'pdf/results/')
   merger = PdfFileMerger()
-  merger.append(open('%scorpus_%s.pdf'%(mypath,conf.epic.shortcut), 'rb'))
-  merger.append(open('%sappendix_%s.pdf'%(mypath,conf.epic.shortcut), 'rb'))
-  des = '%s%s.pdf'%(mypath,conf.epic.shortcut)
+  merger.append(open('%scorpus_%s.pdf'%(media_results,conf.epic.shortcut), 'rb'))
+  merger.append(open('%sappendix_%s.pdf'%(media_results,conf.epic.shortcut), 'rb'))
+  des = '%s%s.pdf'%(media_results,conf.epic.shortcut)
   with open(des, 'wb') as fout:
     merger.write(fout)
   print('> Epic [%s] exported to PDF: [%s]'%(conf.epic.title,des))

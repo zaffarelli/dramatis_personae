@@ -370,8 +370,8 @@ def check_role(ch):
 
 def update_challenge(ch):
   res = ''
-  ch.score = ch.OP / 100
-  res += '%s '%(''.join([ '<i class="fas fa-star fa-xs"></i>' if i<ch.score else '<i class="fas fa-star fa-xs low"></i>' for i in range(6) ]))
+  #ch.score = ch.OP / 100
+  #res += '%s '%(''.join([ '<i class="fas fa-star fa-xs"></i>' if i<ch.score else '<i class="fas fa-star fa-xs low"></i>' for i in range(6) ]))
   res += '<i class="fas fa-th-large" title="primary attributes"></i>%d '%(ch.AP)
   res += '<i class="fas fa-th-list" title="skills"></i> %d '%(ch.SK_TOTAL)
   res += '<i class="fas fa-th" title="talents"></i> %d '%(ch.TA_TOTAL+ch.BC_TOTAL+ch.BA_TOTAL)

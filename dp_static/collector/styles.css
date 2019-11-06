@@ -406,6 +406,8 @@ body {
   .avatar_link small {
     font-size: 0.75em; }
   .avatar_link em {
+    font-size: 1.25em;
+    font-style: normal;
     font-weight: bold; }
   .avatar_link.locked {
     background: #221a00;
