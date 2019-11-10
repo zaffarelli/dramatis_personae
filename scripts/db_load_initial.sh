@@ -3,9 +3,11 @@
 # ═╩╝┴└─┴ ┴┴ ┴┴ ┴ ┴ ┴└─┘  ╩  └─┘┴└─└─┘└─┘┘└┘┴ ┴└─┘
 #!/bin/bash
 
+echo -e "\e[0;35mFlushing database...\e[0;m"
 python3 manage.py flush
+echo -e "\e[0;35m...done\e[0;m"
 
-echo "Loading reference data..."
+echo -e "\e[0;35mLoading reference data...\e[0;m"
 python3 manage.py loaddata backup/reference/weaponrefs.xml
 python3 manage.py loaddata backup/reference/skillrefs.xml
 python3 manage.py loaddata backup/reference/armorrefs.xml
@@ -19,4 +21,4 @@ python3 manage.py loaddata backup/reference/species.xml
 python3 manage.py loaddata backup/reference/blank_epics.xml
 python3 manage.py loaddata backup/reference/blank_configs.xml
 
-echo "...done"
+echo -e "\e[0;35m...done\e[0;m"

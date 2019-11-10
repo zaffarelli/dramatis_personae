@@ -4,18 +4,11 @@
 #!/bin/bash
 
 
-python3 manage.py flush
+scripts/db_load_initial.sh
 
 echo "Loading reference data..."
-python3 manage.py loaddata backup/reference/weaponrefs.xml
-python3 manage.py loaddata backup/reference/skillrefs.xml
-python3 manage.py loaddata backup/reference/armorrefs.xml
-python3 manage.py loaddata backup/reference/shieldrefs.xml
-python3 manage.py loaddata backup/reference/talentrefs.xml
-python3 manage.py loaddata backup/reference/beneficeafflictionrefs.xml
-python3 manage.py loaddata backup/reference/roles.xml
-python3 manage.py loaddata backup/reference/profiles.xml
-python3 manage.py loaddata backup/reference/species.xml
+
+___
 
 echo "Loading user data..."
 python3 manage.py loaddata backup/custom/epics.xml
