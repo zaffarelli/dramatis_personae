@@ -37,7 +37,7 @@ echo -e "\e[0;35mInstalling Apache...\e[0;m"
 read -p "Do we need to install Apache? (y/N) " answer
 if [ "$answer" == "y" ]
 then
-  sudo yum install -y httpd nmap mod_wsgi
+  sudo yum install -y httpd httpd-devel nmap mod_wsgi
 fi
 echo -e "\e[0;35m...done.\e[0;m"
 echo 
