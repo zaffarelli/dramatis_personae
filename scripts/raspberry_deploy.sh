@@ -43,7 +43,7 @@ echo -e "\e[0;35m...done.\e[0;m"
 echo 
 echo -e "\e[0;35mInstalling Python modules and virtual environment...\e[0;m"
 rm -rf venv/dp
-python3 -m venv --upgrade /srv/dramatis_personae/venv/dp
+python3 -m venv /srv/dramatis_personae/venv/dp
 echo -e "\e[0;34m   --> Venv created\e[0;m"
 source /srv/dramatis_personae/venv/dp/bin/activate
 echo -e "\e[0;34m   --> Venv sourced\e[0;m"
