@@ -47,9 +47,9 @@ python3 -m venv --system-site-packages --upgrade /srv/dramatis_personae/venv/dp
 echo -e "\e[0;34m   --> Venv created\e[0;m"
 source /srv/dramatis_personae/venv/dp/bin/activate
 echo -e "\e[0;34m   --> Venv sourced\e[0;m"
-pip3 install --upgrade pip
+pip3 install --user --upgrade pip
 echo -e "\e[0;34m   --> Pip upgraded\e[0;m"
-pip3 install -r requirements/prod.txt
+pip3 install --user -r requirements/prod.txt
 echo -e "\e[0;34m   --> Venv packages installed\e[0;m"
 mkdir /srv/dramatis_personae/dramatis_personae/logs
 echo -e "\e[0;34m   --> Log dir\e[0;m"
