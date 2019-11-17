@@ -26,7 +26,7 @@ echo -e "\e[0;35mInstalling Python...\e[0;m"
 read -p "Do we need to install Python? (y/N) " answer
 if [ "$answer" == "y" ]
 then  
-  yum reinstall -y python3 python3-pip python3-devel gcc-c++ libjpeg libjpeg-devel #zlib1g-devel
+  yum install -y python3 python3-pip python3-devel gcc-c++ libjpeg libjpeg-devel #zlib1g-devel
 else
   echo -e "\e[1;31m...cancelled.\e[0;m"
   exit 1    
@@ -43,7 +43,7 @@ echo -e "\e[0;35m...done.\e[0;m"
 echo 
 echo -e "\e[0;35mInstalling Python modules and virtual environment...\e[0;m"
 rm -rf venv/dp
-python3 -m venv /srv/dramatis_personae/venv/dp
+python3 -m venv --system-site-packages --upgrade /srv/dramatis_personae/venv/dp
 echo -e "\e[0;34m   --> Venv created\e[0;m"
 source /srv/dramatis_personae/venv/dp/bin/activate
 echo -e "\e[0;34m   --> Venv sourced\e[0;m"
