@@ -25,9 +25,8 @@ echo
 echo -e "\e[0;35mInstalling Python...\e[0;m"
 read -p "Do we need to install Python? (y/N) " answer
 if [ "$answer" == "y" ]
-then
-  #sudo yum install -y https://centos7.iuscommunity.org/ius-release.rpm
-  yum install -y python3 python3-pip python3-devel gcc-c++ libjpeg libjpeg-devel #zlib1g-devel
+then  
+  yum reinstall -y python3 python3-pip python3-devel gcc-c++ libjpeg libjpeg-devel #zlib1g-devel
 else
   echo -e "\e[1;31m...cancelled.\e[0;m"
   exit 1    
@@ -81,5 +80,5 @@ else
 fi
 echo -e "\e[0;35m...done.\e[0;m"
 echo
-/srv/dramatis_personae/venv/dp/bin/deactivate
+
 echo -e "\e[0;35m* * * * *.\e[0;m"
