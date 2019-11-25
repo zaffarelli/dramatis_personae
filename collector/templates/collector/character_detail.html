@@ -99,6 +99,14 @@
 {% endif %}
 
 
+{% if c.tourofduty_set.count != 0 %}
+<h2>Lifepath</h2>
+<table>
+    {% for tod in c.tourofduty_set.all|dictsort:"tour_of_duty_ref.category" %}
+    <tr><th>{{ tod.tour_of_duty_ref.category|as_lifepath }}</th><td>{{tod.tour_of_duty_ref.reference}} </td><td>{{ tod.tour_of_duty_ref.AP}} </td><td> {{ tod.tour_of_duty_ref.OP}}</td></tr>
+    {% endfor %}
+</table>
+{% endif %}
 
 {% comment %}
 {{c.build_log|linebreaks|safe}}
@@ -107,10 +115,10 @@
 {% if c.blessingcurse_set.count != 0 %}
 <h2>Blessings/Curses ({{c.BC_TOTAL}})</h2>
 <table>
-{% for bc in c.blessingcurse_set.all|dictsortreversed:"value" %}
+{% for bc in c.blessingcurse_set.all %}
 <tr>
-<td>{{ bc.name }}</td>
-<td>{{ bc.value }}</td>
+<td>{{ bc.blessing_curse_ref.reference|safe }}</td>
+<td>{{ bc.blessing_curse_ref.value }}</td>
 <td>{{ bc.description }}</td>
 </tr>
 {% endfor %}
@@ -120,12 +128,11 @@
 {% if c.beneficeaffliction_set.count != 0 %}
 <h2>Benefices/Afflictions ({{c.BA_TOTAL}})</h2>
 <table>
-{% for ba in c.beneficeaffliction_set.all|dictsortreversed:"value" %}
+{% for ba in c.beneficeaffliction_set.all %}
 <tr>
-<td>{{ ba.beneficeaffliction_ref.reference|safe }}</td>
-<td>{{ ba.beneficeaffliction_ref.value }}</td>
-<td>{{ ba.value }}</td>
-<td>{{ ba.beneficeaffliction_ref.description}}<br/>{{ ba.description|parse_avatars|safe }}</td>
+<td>{{ ba.benefice_affliction_ref.reference|safe }}</td>
+<td>{{ ba.benefice_affliction_ref.description|safe }}</td>
+<td>{{ ba.benefice_affliction_ref.value }}</td>
 </tr>
 {% endfor %}
 </table>

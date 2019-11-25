@@ -4,7 +4,7 @@
  ═╩╝╩    ╚═╝└─┘┴─┘┴─┘└─┘└─┘ ┴ └─┘┴└─
 '''
 from django import template
-from collector.models.characters import Character
+from collector.models.character import Character
 import re
 import string
 from django.template.defaultfilters import dictsort
@@ -203,3 +203,8 @@ def as_specialty(value):
   val = x.split(')')[0]
   return "&gt;&nbsp;<i>%s</i>"%(val)
   
+
+@register.filter(name='as_lifepath')
+def as_lifepath(value):
+  lp = ['Race','Upbringing','Apprenticeship','Early Career','Tour of Duty','Worldly Benefits']
+  return "%s"%(lp[int(value)])

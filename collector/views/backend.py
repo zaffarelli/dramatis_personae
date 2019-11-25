@@ -7,8 +7,8 @@ from django.http import HttpResponse, Http404, JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect, render_to_response
 from django.core.paginator import Paginator
 
-from collector.models.characters import Character
-from collector.models.skills import Skill
+from collector.models.character import Character
+from collector.models.skill import Skill
 from collector.forms.basic import CharacterForm, SkillFormSet, TalentFormSet, BlessingCurseFormSet, BeneficeAfflictionFormSet, WeaponFormSet, ArmorFormSet, ShieldFormSet
 from collector.utils.basic import render_to_pdf
 from django.template.loader import get_template, render_to_string

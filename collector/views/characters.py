@@ -8,7 +8,7 @@ from extra_views import UpdateWithInlinesView
 from django.views.generic.detail import DetailView
 from django.contrib import messages
 from collector.forms.basic import CharacterForm, SkillFormSet, TalentFormSet, BlessingCurseFormSet, BeneficeAfflictionFormSet, ArmorFormSet, WeaponFormSet, ShieldFormSet
-from collector.models.characters import Character
+from collector.models.character import Character
 from scenarist.mixins.ajaxfromresponse import AjaxFromResponseMixin
 from django.urls import reverse_lazy
 

@@ -40,7 +40,7 @@ def write_pdf(template_src, context_dict={}):
   result.close()
  
 def get_current_config():
-  from collector.models.configs import Config
+  from collector.models.config import Config
   item = Config.objects.get(is_active=True)
   return item
 

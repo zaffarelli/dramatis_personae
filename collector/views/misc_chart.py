@@ -7,7 +7,7 @@
 from django.http import JsonResponse
 from django.template.loader import get_template
 from django.contrib import messages
-from collector.models.characters import Character
+from collector.models.character import Character
 from collector.utils.basic import get_current_config
 import json
 

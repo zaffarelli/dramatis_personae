@@ -11,7 +11,7 @@ from random import randint
 import os
 import yaml
 import json
-from collector.models.skillrefs import SkillRef
+from collector.models.skill_ref import SkillRef
 from collector.utils.fics_references import *
 import logging
 

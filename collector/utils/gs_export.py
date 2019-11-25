@@ -9,7 +9,7 @@
  Share with: dp-98-126@dramatis-personae-236522.iam.gserviceaccount.com
 '''
 from django.conf import settings
-from collector.models.characters import Character
+from collector.models.character import Character
 from collector.utils import fs_fics7
 from collector.utils.basic import logger
 import gspread

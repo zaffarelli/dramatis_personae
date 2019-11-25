@@ -4,7 +4,6 @@
  ═╩╝╩    ╚═╝└─┘┴─┘┴─┘└─┘└─┘ ┴ └─┘┴└─
 '''
 from django.db import models
-#from collector.models.characters import Character
 from django.contrib import admin
 import json
 
