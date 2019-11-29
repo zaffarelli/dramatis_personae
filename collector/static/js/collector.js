@@ -383,6 +383,20 @@ function rebootlinks(){
     });
   });
 
+
+  $('#build_pdf_rules').off();
+  $('#build_pdf_rules').on('click',function(event){
+    event.preventDefault();
+    $.ajax({
+      url: 'ajax/build_pdf_rules/',
+    }).done(function(answer) {
+        console.log(answer.comment);
+        $('.details').html(answer.comment);
+        rebootlinks();
+        update_messenger();
+    });
+  });
+
   $('#seek').off();
   $('#seek').on('click',function(event){
     event.preventDefault();

@@ -22,7 +22,7 @@ from django.views.decorators.csrf import csrf_exempt
 import datetime
 from django.contrib import messages
 from collector.utils.xls_collector import export_to_xls, update_from_xls
-from collector.utils.basic import get_current_config
+from collector.utils.basic import get_current_config, extract_rules
 from collector.utils.gs_export import update_gss
 
 
@@ -68,4 +68,10 @@ def xls_update(request):
 def gss_update(request):
   update_gss()
   messages.info(request, 'Exported to Google spreadsheet...')
+  return HttpResponse(status=204)
+
+
+def pdf_rules(request):
+  """ Create and show a character as PDF """
+  extract_rules()
   return HttpResponse(status=204)

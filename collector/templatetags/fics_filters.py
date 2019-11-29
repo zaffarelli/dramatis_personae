@@ -192,6 +192,10 @@ def dictsort_3cols(value,ref):
       flat_cols.append(cols[2][idx])
   return flat_cols
 
+@register.filter(name='signed')
+def signed(value):
+  return "%+d"%(int(value))
+
 
 @register.filter(name='as_root')
 def as_root(value):

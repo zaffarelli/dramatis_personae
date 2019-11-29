@@ -1,0 +1,62 @@
+{% extends "pdf_doc.html" %}
+{%load fics_filters%}
+{%load static%}
+
+{% block article %}
+
+<h2>Dramatis Personae References</h2>
+<p>This automatically generated document shows the complete content of the database game content, for in game reference.</p>
+
+<h3>Skills</h3>
+
+<h3>Weapons</h3>
+
+<h3>Lifepaths</h3>
+<h4>Racial</h4>
+{% if racial.count  %}
+{% for tod in racial %}
+{% include "collector/tod_pdf.html" with c=tod %}
+{% endfor %}
+{% endif %}
+
+{% for caste in castes %}
+<h4>{{ caste.name }}</h4>
+<h5>Upbringing</h5>
+{% if caste.upbringing.count  %}
+{% for tod in caste.upbringing %}
+{% include "collector/tod_pdf.html" with c=tod %}
+{% endfor %}
+{% endif %}
+
+<h5>Apprenticeship</h5>
+{% if caste.apprenticeship.count  %}
+{% for tod in caste.apprenticeship. %}
+{% include "collector/tod_pdf.html" with c=tod %}
+{% endfor %}
+{% endif %}
+
+<h5>Early Career</h5>
+{% if caste.early_career..count  %}
+{% for tod in caste.early_career %}
+{% include "collector/tod_pdf.html" with c=tod %}
+{% endfor %}
+{% endif %}
+
+{% endfor %}
+
+<h4>Worldly Benefits</h4>
+{% if worldly_benefits.count  %}
+{% for tod in worldly_benefits %}
+{% include "collector/tod_pdf.html" with c=tod %}
+{% endfor %}
+{% endif %}
+
+<h4>Tour of Duty</h4>
+{% if tour_of_duty.count  %}
+{% for tod in tour_of_duty %}
+{% include "collector/tod_pdf.html" with c=tod %}
+{% endfor %}
+{% endif %}
+
+
+{% endblock article %}

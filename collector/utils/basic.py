@@ -13,6 +13,7 @@ from PyPDF2 import PdfFileMerger
 import datetime
 import os
 import logging
+from collector.models.tourofduty_ref import TourOfDutyRef
 
 logger = logging.getLogger(__name__)
 
@@ -111,3 +112,38 @@ def export_epic(conf):
     merger.write(fout)
   print('> Epic [%s] exported to PDF: [%s]'%(conf.epic.title,des))
   return res
+
+
+def extract_rules():
+
+  context = {}
+  racial = TourOfDutyRef.objects.filter(category='0').order_by('-source')
+  context['racial'] = racial 
+  castes = ['Nobility', 'Church', 'Guild', 'Alien']
+  castes_context = []
+  for caste in castes:
+    caste_context = {}
+    caste_context['name'] = caste
+    upbringing = TourOfDutyRef.objects.filter(category='1',caste=caste).order_by('-source')
+    caste_context['upbringing'] = upbringing 
+    apprenticeship = TourOfDutyRef.objects.filter(category='2',caste=caste).order_by('-source')
+    caste_context['apprenticeship'] = apprenticeship
+    early_career = TourOfDutyRef.objects.filter(category='3',caste=caste).order_by('-source')
+    caste_context['early_career'] = early_career
+    castes_context.append(caste_context)
+  context['castes'] = castes_context
+  tour_of_duty = TourOfDutyRef.objects.filter(category='4').order_by('-source')
+  context['tour_of_duty'] = tour_of_duty
+  worldly_benefits = TourOfDutyRef.objects.filter(category='5').order_by('-source')
+  context['worldly_benefits'] = worldly_benefits
+  
+  print(context)
+  template = get_template('collector/references.html')
+  html = template.render(context)
+  fname = 'rules.pdf'
+  filename = os.path.join(settings.MEDIA_ROOT, 'pdf/results/' + fname)
+  es_pdf = open(filename, 'wb')
+  pdf = pisa.pisaDocument(BytesIO(html.encode('utf-8')), es_pdf)
+  es_pdf.close()
+  
+  

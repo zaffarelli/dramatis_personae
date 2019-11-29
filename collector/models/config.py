@@ -51,7 +51,7 @@ class Config(models.Model):
       context_dramas.append(context_drama)
     context = {'title':epic.title, 'data': epic, 'dramas': context_dramas}
     context['keywords'] = get_keywords()
-    #print(context)
+    print(context)
     return context
 
   def prepare_colorset(self, size = 16):    
