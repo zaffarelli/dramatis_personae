@@ -15,6 +15,7 @@ import os
 import logging
 from collector.models.tourofduty_ref import TourOfDutyRef
 
+
 logger = logging.getLogger(__name__)
 
 def render_to_pdf(template_src, context_dict={}):
@@ -115,8 +116,22 @@ def export_epic(conf):
 
 
 def extract_rules():
-
+  from collector.models.weapon import WeaponRef
+  from collector.models.skill_ref import SkillRef
   context = {}
+
+  import datetime
+  context['date'] = datetime.datetime.now()
+
+  skills = SkillRef.objects.all().order_by('reference','is_root','is_speciality')
+  context['skills'] = skills
+
+  melee_weapons = WeaponRef.objects.filter(category='MELEE')
+  context['melee_weapons'] = melee_weapons 
+  ranged_weapons = WeaponRef.objects.exclude(category='MELEE')
+  context['ranged_weapons'] = ranged_weapons 
+
+
   racial = TourOfDutyRef.objects.filter(category='0').order_by('-source')
   context['racial'] = racial 
   castes = ['Nobility', 'Church', 'Guild', 'Alien']
@@ -137,7 +152,7 @@ def extract_rules():
   worldly_benefits = TourOfDutyRef.objects.filter(category='5').order_by('-source')
   context['worldly_benefits'] = worldly_benefits
   
-  print(context)
+  #print(context)
   template = get_template('collector/references.html')
   html = template.render(context)
   fname = 'rules.pdf'

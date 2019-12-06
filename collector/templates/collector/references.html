@@ -5,11 +5,32 @@
 {% block article %}
 
 <h2>Dramatis Personae References</h2>
+<p>Release Date: <em>{{ date }}</em></p>
 <p>This automatically generated document shows the complete content of the database game content, for in game reference.</p>
 
 <h3>Skills</h3>
+{% if skills.count  %}
+{% for s in skills %}
+{% include "collector/skill_pdf.html" with c=s %}
+{% endfor %}
+{% endif %}
+
 
 <h3>Weapons</h3>
+<h4>Melee Weapons</h4>
+{% if melee_weapons.count  %}
+{% for w in melee_weapons %}
+{% include "collector/weapon_pdf.html" with c=w %}
+{% endfor %}
+{% endif %}
+
+<h4>Ranged Weapons</h4>
+{% if ranged_weapons.count  %}
+{% for w in ranged_weapons %}
+{% include "collector/weapon_pdf.html" with c=w %}
+{% endfor %}
+{% endif %}
+
 
 <h3>Lifepaths</h3>
 <h4>Racial</h4>

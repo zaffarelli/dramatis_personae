@@ -22,9 +22,53 @@ import hashlib
   TOTAL ...................: 280 OP
 """
 
-MAX_CHAR = 9
-RELEASE = '1.2.1'
+MAX_CHAR = 20
+RELEASE = '1.3.0'
 DEBUG_ALL = False
+
+LIFEPATH_CATEGORY=(
+  ('0',"Birthright"),
+  ('1',"Upbringing"),
+  ('2',"Apprenticeship"),
+  ('3',"Early Career"),
+  ('4',"Tour of Duty"),
+  ('5',"Worldly Benefits"),
+)
+
+
+LIFEPATH_CATEGORY_SHORT={
+  '0':"BR",
+  '1':"UB",
+  '2':"AP",
+  '3':"EC",
+  '4':"TD",
+  '5':"WB",
+}
+
+LIFEPATH_CATEGORY_VAL={
+  '0':100,
+  '1':15,
+  '2':25,
+  '3':50,
+  '4':20,
+  '5':7,
+}
+
+LIFEPATH_CASTE=(
+  ('Nobility',"Nobility"),
+  ('Church',"Church"),
+  ('Guild',"Guild"),
+  ('Alien',"Alien"),
+  ('Other',"Other"),
+)
+
+LIFEPATH_CASTE_SHORT={
+  'Nobility':"Nob",
+  'Church':  "Chu",
+  'Guild':   "Gui",
+  'Alien':   "Ali",
+  'Other':   "Oth",
+}
 
 
 GROUPCHOICES=(

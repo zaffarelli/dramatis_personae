@@ -33,7 +33,7 @@
 	<strong>&nbsp;</strong>	
 	{%endif%}  
 </div>	    
-    <ul>
+    <ul class='avatars'>
     {% for c in character_items %}
        <li id='{{c.rid}}'>
        {% include "collector/character_link.html" with c=c %}

@@ -4,7 +4,6 @@
  ═╩╝╩    ╚═╝└─┘┴─┘┴─┘└─┘└─┘ ┴ └─┘┴└─
 '''
 from django.db import models
-from collector.models.character import Character
 from django.contrib import admin
 
 class WeaponRef(models.Model):
@@ -52,6 +51,7 @@ class WeaponRef(models.Model):
 
 
 class Weapon(models.Model):
+  from collector.models.character import Character
   character = models.ForeignKey(Character, on_delete=models.CASCADE)
   weapon_ref = models.ForeignKey(WeaponRef, on_delete=models.CASCADE)
   ammoes = models.PositiveIntegerField(default=0,blank=True)

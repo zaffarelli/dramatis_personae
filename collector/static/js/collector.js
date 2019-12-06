@@ -188,7 +188,7 @@ function loadajax(){
 function rebootlinks(){
 
   
-  
+  //$('.character_info').add_Class('hidden');
   
   $('.nav').off();
   $('.nav').on('click',function(event){
@@ -483,6 +483,16 @@ function rebootlinks(){
         console.log('Recalc error...'+answer);
       }
     });
+  });
+
+  $('.character_name').off();
+  $('.character_name').on('click',function(event){
+    event.preventDefault();
+    event.stopPropagation();
+    console.log("TOUCHED character_name");
+    var mine = $(this).parents('div.avatar_link').find('div.character_info');
+    $('div.avatar_link').find('div.character_info').addClass('hidden');    
+    $(mine).toggleClass('hidden');
   });
 
   $('.recalc_skills_character').off();

@@ -1,0 +1,26 @@
+
+{% load fics_filters %}
+
+<p><strong>{{ c.reference }}</strong>
+<br/>{{c.category}}
+<b>&times;</b> WA:{{ c.weapon_accuracy|signed }}
+<b>&times;</b> CO:{{ c.conceilable }}
+<b>&times;</b> AV:{{ c.availability }}
+<b>&times;</b> DC:{{ c.damage_class }}
+{% if not c.category == 'MELEE' %}
+<b>&times;</b> CAL:{{ c.caliber }}
+{% endif %}
+{% if c.category == 'MELEE' %}
+<b>&times;</b> STR:{{ c.str_min }}
+{% endif %}
+{% if not c.category == 'MELEE' %}
+<b>&times;</b> ROF:{{ c.rof }}
+<b>&times;</b> CL:{{ c.clip }}
+<b>&times;</b> RNG:{{ c.rng }}
+{% endif %}
+<b>&times;</b> REL:{{ c.rel }}
+<br/> Cost: £{{ c.cost }}
+</p>
+{%if c.description%}
+<p>{{ c.description }}</p>
+{%endif%}

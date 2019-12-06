@@ -1,0 +1,24 @@
+
+{% load fics_filters %}
+
+<p>
+  {% if c.is_root %}
+  <strong>
+    {{ c.reference }}
+  </strong>
+  {% if c.is_common %} &copy; {% endif %}
+  <b>&times;</b> {{ c.group }}
+  {%elif c.is_speciality %}
+  <blockquote>
+  <em>{{ c.reference }}</em>
+  {% if c.is_common %} &copy; {% endif %}
+  <b>&times;</b> {{ c.group }}
+  </blockquote>
+  {%else%}
+  {{ c.reference }}
+  {% if c.is_common %} &copy; {% endif %}
+  <b>&times;</b> {{ c.group }}
+  {%endif%}
+  
+</p>
+

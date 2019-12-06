@@ -6,14 +6,16 @@
 from django.db import models
 from django.dispatch import receiver
 from django.db.models.signals import pre_save, post_save
+from collector.utils import fics_references
 
 class TourOfDutyRef(models.Model):
   class Meta:
     ordering = ['reference']
     verbose_name = "Tour of Duty Reference"
   reference = models.CharField(max_length=64,default='',blank=True)
-  category = models.CharField(max_length=20,choices=(('0',"Race"),('1',"Upbringing"),('2',"Apprenticeship"),('3',"Early Career"),('4',"Tour of Duty"),('5',"Worldly Benefits")),default='Tour of Duty',blank=True)
-  caste = models.CharField(max_length=20,choices=(('Nobility',"Nobility"),('Church',"Church"),('Guild',"Guild"),('Alien',"Alien"),('Other',"Other")),default='Other',blank=True)
+  category = models.CharField(max_length=20,choices=fics_references.LIFEPATH_CATEGORY,default='Tour of Duty',blank=True)
+  caste = models.CharField(max_length=20,choices=fics_references.LIFEPATH_CASTE,default='Other',blank=True)
+  topic = models.CharField(max_length=64,default="",blank=True)
   source = models.CharField(max_length=32, default='FS2CRB', null=True, blank=True)
   AP = models.IntegerField(default=0)
   OP = models.IntegerField(default=0)
@@ -34,7 +36,7 @@ class TourOfDutyRef(models.Model):
   value = models.IntegerField(default=0)  
   description = models.TextField(max_length=1024,default='',blank=True)  
   def __str__(self):
-    return '%s %s [%d]' % (self.reference,self.category,self.value)
+    return '[%s|%s] %s (%d)' % (fics_references.LIFEPATH_CATEGORY_SHORT[self.category],fics_references.LIFEPATH_CASTE_SHORT[self.caste],self.reference,self.value)
   def fix(self):
     self.AP = self.PA_STR + self.PA_CON + self.PA_BOD + self.PA_MOV + self.PA_INT + self.PA_WIL + self.PA_TEM + self.PA_PRE + self.PA_REF + self.PA_TEC + self.PA_AGI + self.PA_AWA + self.OCC_LVL - self.DRK_LVL
     self.OP = 0

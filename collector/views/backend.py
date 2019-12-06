@@ -74,4 +74,5 @@ def gss_update(request):
 def pdf_rules(request):
   """ Create and show a character as PDF """
   extract_rules()
+  messages.info(request, 'Rebuilding Rules reference...')
   return HttpResponse(status=204)
