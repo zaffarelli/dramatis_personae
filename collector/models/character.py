@@ -186,6 +186,16 @@ class Character(models.Model):
             skill.save()
         return skill
 
+    def remove_or_update_skill(self, askill, modifier=0, stack=False):
+        from collector.models.skill import Skill
+        found_skill = self.skill_set.all().filter(skill_ref=askill).first()
+        if found_skill: # There is no reason not to find the skill...
+            found_skill.value -= modifier
+            found_skill.save()
+            if found_skill.value == 0:
+                found_skill.delete()
+
+
     def add_bc(self, aref):
       from collector.models.blessing_curse import BlessingCurse
       found_bc = self.blessingcurse_set.all().filter(blessing_curse_ref=aref).first()
@@ -197,6 +207,13 @@ class Character(models.Model):
         bc.blessing_curse_ref = aref
         bc.save()
         return bc
+
+    def remove_bc(self, aref):
+      from collector.models.blessing_curse import BlessingCurse
+      found_bc = self.blessingcurse_set.all().filter(blessing_curse_ref=aref).first()
+      if found_bc:
+        found_bc.delete()
+
 
     def add_ba(self, aref):
       from collector.models.benefice_affliction import BeneficeAffliction
@@ -210,6 +227,11 @@ class Character(models.Model):
         ba.save()
         return ba
 
+    def remove_ba(self,aref):
+      from collector.models.benefice_affliction import BeneficeAffliction
+      found_ba = self.beneficeaffliction_set.all().filter(benefice_affliction_ref=aref).first()
+      if found_ba:
+        found_ba.delete()
 
     def add_missing_root_skills(self):
         """ According to the character specialities, fixing the root skills """
