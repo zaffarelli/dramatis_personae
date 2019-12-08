@@ -6,5 +6,5 @@
 from django.contrib import admin
 
 class BeneficeAfflictionRefAdmin(admin.ModelAdmin):
-    ordering = ('category','reference',)
-    list_display = ('category','reference','source','value','description')
+    ordering = ('reference',)
+    list_display = ('reference','description','category','source','value')

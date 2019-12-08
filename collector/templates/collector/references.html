@@ -51,13 +51,13 @@
 
 <h5>Apprenticeship</h5>
 {% if caste.apprenticeship.count  %}
-{% for tod in caste.apprenticeship. %}
+{% for tod in caste.apprenticeship %}
 {% include "collector/tod_pdf.html" with c=tod %}
 {% endfor %}
 {% endif %}
 
 <h5>Early Career</h5>
-{% if caste.early_career..count  %}
+{% if caste.early_career.count  %}
 {% for tod in caste.early_career %}
 {% include "collector/tod_pdf.html" with c=tod %}
 {% endfor %}

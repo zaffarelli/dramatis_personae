@@ -35,14 +35,14 @@ def check_secondary_attributes(ch):
   ch.SA_RUN = ch.PA_MOV *2
 
 def fetch_everyman_sum(ch):
-  """ Get the sum of everyman skills for the character specie """  
+  """ Get the sum of everyman skills for the character specie """
   total = 0
   all_every = ch.specie.get_racial_skills()
   for every in all_every:
     total += all_every[every]
   logger.debug('> Everyman total for [%s] as [%s] is [%d].'%(ch.full_name,ch.specie,total))
   return total
-    
+
 def check_everyman_skills(ch):
   """ Check and fix everyman values for the skills"""
   from collector.models.skills import Skill
@@ -55,7 +55,7 @@ def check_everyman_skills(ch):
       if s.skill_ref.reference == every:
         every_found = True
         val = all_every[every]
-        #if s.value < val:          
+        #if s.value < val:
         logger.debug('Everyman: Value fixed for %s (%s)'%(s.skill_ref.reference,val))
         this_skill = Skill.objects.get(id=s.id)
         this_skill.value += val
@@ -79,7 +79,7 @@ def check_gm_shortcuts(ch,sk):
   if sk.skill_ref.reference in SHORTCUTS:
     score = sk.value + getattr(ch,SHORTCUTS[sk.skill_ref.reference]['attribute'])
     newshortcut = '<p>%s (%s): <b>%d</b></p>'%(SHORTCUTS[sk.skill_ref.reference]['rationale'],SHORTCUTS[sk.skill_ref.reference]['label'],score)
-    return newshortcut  
+    return newshortcut
   else:
     return ''
 
@@ -96,7 +96,7 @@ def check_attacks(ch):
   """ Attacks shortcuts depending on the avatar and his/her weapons and skills """
   ranged_attack = '<h6>Attacks</h6>'
   for w in ch.weapon_set.all():
-    if w.weapon_ref.category in {'P','RIF','SMG'}:      
+    if w.weapon_ref.category in {'P','RIF','SMG'}:
       sk = ch.skill_set.filter(skill_ref__reference='Shoot').first()
       if sk is None:
         sval = 0
@@ -106,7 +106,7 @@ def check_attacks(ch):
       dmg = w.weapon_ref.damage_class
       x = minmax_from_dc(dmg)
       ranged_attack += '<p>%s: Roll:<b>%d+1D12</b> Dmg:<b>%d-%d</b></p>'%(w.weapon_ref.reference,score,x[0],x[1])
-    if w.weapon_ref.category in {'HVY'}:      
+    if w.weapon_ref.category in {'HVY'}:
       sk = ch.skill_set.filter(skill_ref__reference='Heavy Weapons').first()
       if sk is None:
         sval = 0
@@ -116,7 +116,7 @@ def check_attacks(ch):
       dmg = w.weapon_ref.damage_class
       x = minmax_from_dc(dmg)
       ranged_attack += '<p>%s: Roll:<b>%d+1D12</b> Dmg:<b>%d-%d</b></p>'%(w.weapon_ref.reference,score,x[0],x[1])
-    if w.weapon_ref.category in {'MELEE'}:      
+    if w.weapon_ref.category in {'MELEE'}:
       sk = ch.skill_set.filter(skill_ref__reference='Melee').first()
       if sk is None:
         sval = 0
@@ -124,15 +124,15 @@ def check_attacks(ch):
         sval = sk.value
       score = ch.PA_REF + sval + w.weapon_ref.weapon_accuracy
       dmg = w.weapon_ref.damage_class
-      x = minmax_from_dc(dmg) 
+      x = minmax_from_dc(dmg)
       ranged_attack += '<p>%s: Roll:<b>%d+1D12</b> Dmg:<b>%d-%d (+str:%d)</b></p>'%(w.weapon_ref.reference,score,x[0],x[1], ch.SA_DMG)
   tmpstr = filter(None,ranged_attack.split('</br>'))
-  ranged_attack = '<br/>'.join(tmpstr) 
+  ranged_attack = '<br/>'.join(tmpstr)
   return ranged_attack
 
 def check_health(ch):
   health_entries = []
-  
+
   return ''.join(health_entries)
 
 
@@ -185,7 +185,7 @@ def check_defense(ch):
   defense_str += '<p>Head:%d'%(defenses['head'])
   defense_str += '<br/>Right Arm:%d Torso:%d Left_arm:%d'%(defenses['right_arm'],defenses['torso'],defenses['left_arm'])
   defense_str += '<br/>Right Leg:%d Left_Leg:%d</p>'%(defenses['right_leg'],defenses['left_leg'])
-  
+
   return defense_str
 
 def minmax_from_dc(sdc):
@@ -268,7 +268,7 @@ def list_attributes(ch,pas):
     row += ' + MEN %2d'%(pas[4]+pas[5]+pas[6]+pas[7])
     row += ' + COM %2d'%(pas[8]+pas[9]+pas[10]+pas[11])
     row += ' = TOTAL %2d'%(sum(pas))
-    print(row)    
+    print(row)
 
 def check_primary_attributes(ch):
   """ Fixing primary attributes """
@@ -290,16 +290,16 @@ def check_primary_attributes(ch):
       ch.PA_CON = pas[1]
       ch.PA_BOD = pas[2]
       ch.PA_MOV = pas[3]
-    
+
       ch.PA_INT = pas[4]
       ch.PA_WIL = pas[5]
       ch.PA_TEM = pas[6]
       ch.PA_PRE = pas[7]
-    
+
       ch.PA_TEC = pas[8]
       ch.PA_REF = pas[9]
       ch.PA_AGI = pas[10]
-      ch.PA_AWA = pas[11] 
+      ch.PA_AWA = pas[11]
       ch.apply_racial_pa_mods()
       #list_attributes(ch,None)
     ch.onsave_reroll_attributes = False
@@ -316,10 +316,10 @@ def get_skills_list(ch,groups):
       if s.group == g:
         weight = 3 if s.is_root else 2
         #weight += gweight
-        #gweight += 1        
+        #gweight += 1
     master_skills.append({'skill':s.reference, 'data':s, 'weight':weight})
   msl = []
-  
+
   logger.debug('MASTER LIST')
   for ms in sorted(master_skills,key=lambda ms: ms['skill']):
     logger.debug('%s%s: %d'%('  ' if ms['data'].is_root else '', ms['skill'],ms['weight']))
@@ -359,13 +359,13 @@ def check_role(ch):
   status = True
   if ch.PA_TOTAL < pa_pool:
     logger.info('   Not enough PA: %d (%d)'%(ch.PA_TOTAL,pa_pool))
-    status = False 
+    status = False
   elif ch.SK_TOTAL+ch.specie.skill_balance < sk_pool:
     logger.info('   Not enough SK: %d (%d)'%(ch.SK_TOTAL+ch.specie.skill_balance,sk_pool))
-    status = False 
+    status = False
   if ch.BA_TOTAL + ch.BC_TOTAL + ch.TA_TOTAL < ba_pool+bc_pool+ta_pool:
     logger.info('   Not enough OP (Talents + Benefice/Afflictions + Blessing/Curses): %d (%d)'%(ch.BA_TOTAL + ch.BC_TOTAL + ch.TA_TOTAL,ba_pool+bc_pool+ta_pool))
-    result = False 
+    result = False
   return status
 
 def update_challenge(ch):
@@ -375,9 +375,7 @@ def update_challenge(ch):
   res += '<i class="fas fa-th-large" title="primary attributes"></i>%d '%(ch.AP)
   res += '<i class="fas fa-th-list" title="skills"></i> %d '%(ch.SK_TOTAL)
   res += '<i class="fas fa-th" title="talents"></i> %d '%(ch.TA_TOTAL+ch.BC_TOTAL+ch.BA_TOTAL)
-  res += '<i class="fas fa-newspaper" title="OP challenge"></i> %d '%(ch.OP)
-
-  
+  res += '<i class="fas fa-newspaper" title="OP challenge"></i> %d/%d'%(ch.OP,ch.lifepath_total)
   return res
 
 
@@ -398,7 +396,7 @@ def get_options():
 
 
 
-# New version of the skills randomizer 
+# New version of the skills randomizer
 
 def list_skills(ch):
   print("> Skills for %s"%(ch.full_name))
@@ -437,10 +435,10 @@ def skills_randomizer(ch):
     pool_u = unit*2
     pool_r = unit*1
     ch.purgeSkills()
-       
+
 
     everyman_total = check_everyman_skills(ch)
-    for skill in ch.skill_set.all().order_by('skill_ref__reference'):      
+    for skill in ch.skill_set.all().order_by('skill_ref__reference'):
       if skill.skill_ref.is_speciality == True:
         pool_r -= skill.value
       elif skill.skill_ref.is_common == False:
@@ -448,7 +446,7 @@ def skills_randomizer(ch):
       elif skill.skill_ref.is_root == False:
         pool_c -= skill.value
 
-    # 2) Calculate Common Skills 
+    # 2) Calculate Common Skills
     common_skills = get_skills_list(ch,False,True)
     common_weight = 0
     for s in common_skills:
@@ -473,7 +471,7 @@ def skills_randomizer(ch):
       chosen_sk = choose_sk(uncommon_skills,uncommon_weight)
       sk = ch.add_or_update_skill(chosen_sk,batch)
       current -= batch
-    
+
     # 4) Calculate Roots
     roots = get_roots_list(ch)
     root_weight = 0
@@ -491,17 +489,17 @@ def skills_randomizer(ch):
       speciality_skills = get_specilities_list(ch,root.skill_ref)
       speciality_weight = 0
       for s in speciality_skills:
-        speciality_weight += s['weight']      
+        speciality_weight += s['weight']
       while local_pool>0:
         batch = 1
         chosen_sk = choose_sk(speciality_skills,speciality_weight)
         sk = ch.add_or_update_skill(chosen_sk,batch)
         local_pool -= batch
       root.value = 0
-    
+
     # 5) And we are done :)
     ch.add_missing_root_skills()
-    #list_skills(ch)   
+    #list_skills(ch)
     ch.onsave_reroll_skills = False
   else:
     print("Nothing to do...")
@@ -522,7 +520,7 @@ def get_skills_list(ch,root,com):
 def get_roots_list(ch):
   """ Prepare the list of skills without specialities """
   groups = ch.profile.get_groups()
-  skills = SkillRef.objects.all().filter(is_root = True)  
+  skills = SkillRef.objects.all().filter(is_root = True)
   result_skills = []
   for s in skills:
     weight = 1
@@ -536,7 +534,7 @@ def get_roots_list(ch):
 def get_specialities_list(ch,root):
   """ Prepare the list of skills without specialities """
   groups = ch.profile.get_groups()
-  skills = SkillRef.objects.all().filter(is_speciality = True)  
+  skills = SkillRef.objects.all().filter(is_speciality = True)
   result_skills = []
   for s in skills:
     weight = 0

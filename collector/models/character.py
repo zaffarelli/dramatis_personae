@@ -98,6 +98,7 @@ class Character(models.Model):
     alliance_picture = models.CharField(max_length=256, blank=True, default='')
     onsave_reroll_attributes = models.BooleanField(default=False)
     onsave_reroll_skills = models.BooleanField(default=False)
+    lifepath_total = models.IntegerField(default=0)
 
     def get_absolute_url(self):
         return reverse('view_character', kwargs={'pk': self.pk})
@@ -124,7 +125,10 @@ class Character(models.Model):
             tod.push(self)
           fs_fics7.check_secondary_attributes(self)
           self.add_missing_root_skills()
-        else:           
+          self.lifepath_total = 0
+          for tod in self.tourofduty_set.all():
+              self.lifepath_total += tod.tour_of_duty_ref.value
+        else:
           # Freeform Creation
           self.resetTotal()
           if self.onsave_reroll_attributes:

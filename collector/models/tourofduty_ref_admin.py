@@ -49,13 +49,19 @@ def refix(modeladmin, request, queryset):
     tour_of_duty_ref.save()
   short_description = "Do fix"
 
+def duplicate_event(modeladmin, request, queryset):
+    for object in queryset:
+        object.id = None
+        object.save()
+duplicate_event.short_description = "Duplicate selected record"
+
 class TourOfDutyRefAdmin(admin.ModelAdmin):
   ordering = ['topic','category','caste','reference','value']
   list_display = ('reference','category','caste','topic','source','AP','OP','value','description')
-  exclude = ['OP','AP','value','description']
-  actions = [ refix, set_upbringing, set_early_career, set_racial, set_apprenticeship, set_ukari, set_obuni, set_vorox, set_urthish ]
+  exclude = ['value','description']
+  actions = [ refix, duplicate_event, set_upbringing, set_early_career, set_racial, set_apprenticeship, set_ukari, set_obuni, set_vorox, set_urthish ]
   inlines = [
     SkillModificatorInline,
     BlessingCurseModificatorInline,
-    BeneficeAfflictionModificatorInline,    
+    BeneficeAfflictionModificatorInline,
   ]

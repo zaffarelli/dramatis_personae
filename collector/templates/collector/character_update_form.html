@@ -3,12 +3,12 @@
 <div class="classyview">
   <form class='character_form'>
     {{ form.non_field_errors}}
-    {{ form.management_form }}    
-    
+    {{ form.management_form }}
+
     <input name='id' type='hidden' value='{{c.id}}'>
     <input name='rid' type='hidden' value='{{c.rid}}'>
     <table class="formset">
-      <caption>Core</caption>
+      <caption>{{c.rid}}</caption>
       <tr><td>
       <div class="field_wrapper">
         {{ form.full_name.errors}}
@@ -39,7 +39,7 @@
         {{ form.gender.errors}}
         <label for="">Gender</label>
         {{form.gender}}
-      </div>	
+      </div>
       <div class="field_wrapper">
         {{ form.height.errors}}
         <label for="">Height</label>
@@ -102,11 +102,6 @@
         {{form.profile}}
       </div>
       <div class="field_wrapper">
-        {{ form.narrative.errors}}
-        <label for="">Narrative</label>
-        {{form.narrative}}
-      </div>
-      <div class="field_wrapper">
         {{ form.is_exportable.errors}}
         <label for="">Exportable</label>
         {{form.is_exportable}}
@@ -125,12 +120,17 @@
         {{ form.is_visible.errors}}
         <label for="">Visible</label>
         {{form.is_visible}}
-      </div>            
+      </div>
       <div class="field_wrapper">
         {{ form.is_dead.errors}}
         <label for="">Dead</label>
         {{form.is_dead}}
-      </div>            
+      </div>
+      <div class="field_wrapper">
+        {{ form.use_history_creation_errors}}
+        <label for="">Use History Creation</label>
+        {{form.use_history_creation}}
+      </div>
       <div class="field_wrapper">
         {{ form.is_locked.errors}}
         <label for="">Locked</label>
@@ -150,10 +150,12 @@
         {{ form.use_only_entrance.errors}}
         <label for="">Only Entrance</label>
         {{form.use_only_entrance}}
-      </div>            
+      </div>
       </td>
       </tr>
     </table>
+
+
 
   <table class='formset form-horizontal'>
     <caption>Storyline</caption>
@@ -163,7 +165,16 @@
         {{form.epic|as_crispy_field}}
         </div>
       </div>
-    </td></tr>
+    </td>
+    <td>
+        <div class="field_wrapper">
+          {{ form.narrative.errors}}
+          <label for="">Narrative</label>
+          {{form.narrative}}
+        </div>
+    </td>
+    </tr>
+
   </table>
 
   <table class="formset ">
@@ -257,11 +268,12 @@
         {{form.PA_AWA}}
       </div>
       </td></tr>
-    </table>	
+    </table>
       </td></tr>
   </table>
 
 <div class='tabberbar'>
+  <span id='l' class='tabber btn'>Lifepath</span>
   <span id='s' class='tabber btn'>Skills</span>
   <span id='t' class='tabber btn'>Talents</span>
   <span id='ba' class='tabber btn'>Benefices/Afflictions</span>
@@ -270,10 +282,20 @@
   <span id='aes' class='tabber btn'>Armors &amp; Energy Shield</span>
 </div>
 
+<div id='lt' class='tabs'>
+  <table class="formset inline">
+  <caption>Lifepath</caption>
+  {{ tourofdutys.management_form }}
+  {% for form in tourofdutys.forms %}
+    {{ form.as_table }}
+  {% endfor %}
+  </table>
+</div>
+
 <div id='st' class='tabs'>
   <table class="formset inline">
   <caption>Skills</caption>
-  {{ skills.management_form }}	
+  {{ skills.management_form }}
   {% for form in skills.forms %}
     {{ form.as_table }}
   {% endfor %}
@@ -338,10 +360,8 @@
   </table>
 </div>
 
-{% csrf_token %}    
+{% csrf_token %}
 </form>
 
 
 </div>
-
-
