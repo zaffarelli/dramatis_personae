@@ -36,9 +36,10 @@ class FormlessUpdater{
 		let self = this
 		$("#"+prefix+"_add").off("click")
 		$("#"+prefix+"_add").on("click",function(e){
-			var i = $("#"+prefix+"_select :selected");
+			let i = $("#"+prefix+"_select :selected");
+			let slug = self.avatar+"_"+i.val();
    		$.ajax({
-				url: 'ajax/character/'+prefix+"/"+self.avatar+'/',
+				url: 'ajax/character/'+prefix+"/"+slug+'/',
 				success: function(answer) {
 			 		$(prefix+'_block_'+answer.id).html(answer.block);
 					$(prefix+'_block_'+answer.id).html(answer.block);
