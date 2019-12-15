@@ -50,7 +50,7 @@ def get_list(request,id,slug='none'):
       character_items = []
       for rid in cast:
         character_item = Character.objects.get(rid=rid)
-        character_items.append(character_item)      
+        character_items.append(character_item)
     else:
       character_items = Character.objects.order_by('full_name').filter(keyword=slug)
     paginator = Paginator(character_items,MAX_CHAR)
@@ -76,8 +76,8 @@ def get_storyline(request,slug='none'):
     return HttpResponse(html, content_type='text/html')
   else:
     http404
-  
-  
+
+
 def recalc_character(request, id=None):
   if request.is_ajax():
     messages.warning(request, 'Recalculating...')
@@ -85,13 +85,14 @@ def recalc_character(request, id=None):
     item.save()
     crid = item.rid
     template = get_template('collector/character_detail.html')
-    character = template.render({'c':item, 'no_skill_edit':True})
+    character = template.render({'c':item, 'no_skill_edit':False})
     templatelink = get_template('collector/character_link.html')
     link = templatelink.render({'c':item},request)
     context = {
       'rid': crid,
+      'id': id,
       'character': character,
-      'link': link,      
+      'link': link,
     }
     messages.info(request, '...%s recalculated'%(item.full_name))
     return JsonResponse(context)
@@ -117,7 +118,7 @@ def recalc_pa_character(request, id=None):
     return JsonResponse(context)
   else:
     raise Http404
-    
+
 def recalc_skills_character(request, id=None):
   if request.is_ajax():
     item = get_object_or_404(Character,pk=id)
@@ -209,13 +210,13 @@ def extract_formset(rqp,s):
         # weapons = WeaponFormSet(weapon_data, instance=character_item)
         # shields = ShieldFormSet(shield_data, instance=character_item)
         # skv = skills.is_valid()
-        # tav = talents.is_valid() 
+        # tav = talents.is_valid()
         # bcv = blessingcurses.is_valid()
         # bav = beneficeafflictions.is_valid()
         # arv = armors.is_valid()
         # wpv = weapons.is_valid()
         # shv = shields.is_valid()
-        # if skv and tav and bcv and bav and arv and wpv and fv and shv:        
+        # if skv and tav and bcv and bav and arv and wpv and fv and shv:
           # skills.save()
           # talents.save()
           # blessingcurses.save()

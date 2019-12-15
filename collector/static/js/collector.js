@@ -7,16 +7,16 @@ function prepare_ajax(){
   $.ajaxSetup({
     beforeSend: function(xhr, settings) {
       if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
-        var csrf_middlewaretoken = $('input[name=csrfmiddlewaretoken]').val();        
+        var csrf_middlewaretoken = $('input[name=csrfmiddlewaretoken]').val();
         xhr.setRequestHeader('X-CSRFToken',csrf_middlewaretoken);
       }
     }
   });
   /*
-    
+
 
   */
-  
+
 }
 
 // Chart event handler
@@ -24,7 +24,7 @@ function keywordHandlerClick(evt) {
     var firstPoint = chart_keywords.getElementAtEvent(evt)[0];
     if (firstPoint) {
         var label = chart_keywords.data.labels[firstPoint._index];
-        var value = chart_keywords.data.datasets[firstPoint._datasetIndex].data[firstPoint._index];        
+        var value = chart_keywords.data.datasets[firstPoint._datasetIndex].data[firstPoint._index];
         $('#customize').val(label);
         $('#search.btn').click();
     }
@@ -52,7 +52,7 @@ function register_story(x){
     $.ajax({
       url: x+'s/'+t_id+'/view',
       success: function(answer) {
-        $('#'+x+'_'+t_id).html(answer);        
+        $('#'+x+'_'+t_id).html(answer);
         prepare_ajax();
         rebootlinks();
       },
@@ -80,7 +80,7 @@ function register_story(x){
     $.ajax({
       url: x+'s/'+t_id+'/edit',
       success: function(answer) {
-        $('#'+x+'_'+t_id).html(answer);        
+        $('#'+x+'_'+t_id).html(answer);
         prepare_ajax();
         rebootlinks();
       },
@@ -95,13 +95,13 @@ function register_story(x){
   $('.'+x+'_update').off();
   $('.'+x+'_update').on('click',function(event){
     event.preventDefault();
-    event.stopPropagation();    
+    event.stopPropagation();
     var owner = $(this).closest('div.storyarticle').attr('id');
     var id = $(this).closest('div.storyarticle').attr('id').split('_')[1];
     var form = $(this).closest('form');
     formdata = form.serialize();
-    var urlupdate = x+'s/'+id+'/edit';    
-    $.ajax({    
+    var urlupdate = x+'s/'+id+'/edit';
+    $.ajax({
       url: urlupdate,
       method: 'POST',
       headers: {
@@ -120,7 +120,7 @@ function register_story(x){
         console.log('Error... ');
         console.log(answer);
       },
-    });  
+    });
   });
 
   $('.add_'+x).off();
@@ -128,10 +128,10 @@ function register_story(x){
     event.preventDefault();
     event.stopPropagation();
     var id = $(this).parent('p').prop('className');
-    console.log(id);    
+    console.log(id);
     //var form = $(this).closest('form');
-    var urlupdate = x+'s/add';    
-    $.ajax({    
+    var urlupdate = x+'s/add';
+    $.ajax({
       url: urlupdate,
       method: 'POST',
       headers: {
@@ -151,11 +151,11 @@ function register_story(x){
         console.log('Error... ');
         console.log(answer);
       },
-    });  
+    });
   });
 
 
-  
+
 }
 
 function update_messenger(){
@@ -167,7 +167,7 @@ function update_messenger(){
     });
 }
 
-  
+
 function loadajax(){
     $.ajax({
       url: 'ajax/storyline/none/',
@@ -187,14 +187,13 @@ function loadajax(){
 
 function rebootlinks(){
 
-  
-  //$('.character_info').add_Class('hidden');
-  
+  let fu = new FormlessUpdater()
+
   $('.nav').off();
   $('.nav').on('click',function(event){
     event.preventDefault();
     event.stopPropagation();
-    key = $('#customize').val(); 
+    key = $('#customize').val();
     if (key == ''){
       key='none';
     }
@@ -204,7 +203,7 @@ function rebootlinks(){
         $('.charlist').html(answer)
         rebootlinks();
       },
-    });   
+    });
   });
 
   $('.episode_cast').off();
@@ -212,14 +211,14 @@ function rebootlinks(){
     event.preventDefault();
     event.stopPropagation();
     slug = $(this).attr('id');
-    $('#customize').val(slug); 
+    $('#customize').val(slug);
     $.ajax({
       url: 'ajax/list/'+slug+'/'+$(this).attr('page')+'/',
       success: function(answer) {
         $('.charlist').html(answer)
         rebootlinks();
       },
-    });   
+    });
   });
 
 
@@ -229,7 +228,7 @@ function rebootlinks(){
     event.stopPropagation();
     slug = $('#current_storyline').val();
     console.log(slug);
-    $.ajax({      
+    $.ajax({
       url: 'ajax/storyline/'+slug+'/',
       success: function(answer) {
         $('.storyline').html(answer)
@@ -264,7 +263,7 @@ function rebootlinks(){
     rebootlinks();
   });
 
-  
+
 
 
   $(window).scroll(function(){
@@ -313,7 +312,7 @@ function rebootlinks(){
     var rid = $('.character_form input[name=rid]').val();
     $.ajax({
       url: 'characters/'+id+'/edit/',
-      method: 'POST',      
+      method: 'POST',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/x-www-form-urlencoded'
@@ -324,7 +323,7 @@ function rebootlinks(){
           $('li').find('div.avatar_link').removeClass('selected');
           $('li').find('div.avatar_link').find('#'+id+'.view_character').click();
           rebootlinks();
-          prepare_ajax();          
+          prepare_ajax();
           loadKeywords();
           update_messenger();
       },
@@ -332,7 +331,7 @@ function rebootlinks(){
         console.log(answer.responseText);
         update_messenger();
       },
-    });  
+    });
   });
 
   $('#add_character').off();
@@ -343,7 +342,7 @@ function rebootlinks(){
       success: function(answer) {
         $('.details').html('done')
           rebootlinks();
-          prepare_ajax();          
+          prepare_ajax();
           loadKeywords();
           update_messenger();
       },
@@ -400,7 +399,7 @@ function rebootlinks(){
   $('#seek').off();
   $('#seek').on('click',function(event){
     event.preventDefault();
-    key = $('#customize').val(); 
+    key = $('#customize').val();
     $.ajax({
       url: 'ajax/view/by_rid/'+key+'/',
       success: function(answer) {
@@ -418,7 +417,7 @@ function rebootlinks(){
   $('#search').on('click',function(event){
     event.preventDefault();
     event.stopPropagation();
-    key = $('#customize').val(); 
+    key = $('#customize').val();
     if (key == ''){
       key='none';
     }
@@ -428,7 +427,7 @@ function rebootlinks(){
         $('.charlist').html(answer);
         prepare_ajax();
         rebootlinks();
-        update_messenger();   
+        update_messenger();
       },
     });
   });
@@ -448,13 +447,15 @@ function rebootlinks(){
     var dad = $(this).parents('li').find('div.avatar_link');
     $('li').find('div.avatar_link').removeClass('selected');
     $(dad).addClass('selected');
-    $.ajax({      
+    $.ajax({
       url: 'ajax/recalc/character/'+$(this).attr('id')+'/',
       success: function(answer) {
         $('.details').html(answer.character);
         $('li#'+answer.rid).html(answer.link);
         $('li').find('div.avatar_link').removeClass('selected');
         rebootlinks();
+        //console.log(answer);
+        fu.reset(answer.id,"sheet_"+answer.id,"customizer");
         update_messenger();
       },
       error: function(answer){
@@ -470,7 +471,7 @@ function rebootlinks(){
     var dad = $(this).parents('li').find('div.avatar_link');
     $('li').find('div.avatar_link').removeClass('selected');
     $(dad).addClass('selected');
-    $.ajax({      
+    $.ajax({
       url: 'ajax/recalc_pa/character/'+$(this).attr('id')+'/',
       success: function(answer) {
         $('.details').html(answer.character);
@@ -491,7 +492,7 @@ function rebootlinks(){
     event.stopPropagation();
     console.log("TOUCHED character_name");
     var mine = $(this).parents('div.avatar_link').find('div.character_info');
-    $('div.avatar_link').find('div.character_info').addClass('hidden');    
+    $('div.avatar_link').find('div.character_info').addClass('hidden');
     $(mine).toggleClass('hidden');
   });
 
@@ -502,20 +503,21 @@ function rebootlinks(){
     var dad = $(this).parents('li').find('div.avatar_link');
     $('li').find('div.avatar_link').removeClass('selected');
     $(dad).addClass('selected');
-    $.ajax({      
+    $.ajax({
       url: 'ajax/recalc_skills/character/'+$(this).attr('id')+'/',
       success: function(answer) {
         $('.details').html(answer.character);
         $('li#'+answer.rid).html(answer.link);
         $('li').find('div.avatar_link').removeClass('selected');
         rebootlinks();
+        fu.reset($(this).attr('id'),"toto","here")
         update_messenger();
       },
       error: function(answer){
         console.log('Recalc error...'+answer);
       }
     });
-  });  
+  });
 
   $('.view_character').off();
   $('.view_character').on('click',function(event){
@@ -525,13 +527,13 @@ function rebootlinks(){
     var dad = $(this).parents('li');
     $('li').removeClass('selected');
     $(dad).addClass('selected');
-    $.ajax({      
+    $.ajax({
       url: 'characters/'+$(this).attr('id')+'/view/',
       success: function(answer) {
         $('.details').html(answer)
-        $('li').removeClass('selected');        
+        $('li').removeClass('selected');
           rebootlinks();
-          prepare_ajax();          
+          prepare_ajax();
           loadKeywords();
           update_messenger();
       },
@@ -543,7 +545,7 @@ function rebootlinks(){
 
   // Touching skills
   $('th.edit span.fa').off();
-  $('th.edit span.fa').on('click',function(event){    
+  $('th.edit span.fa').on('click',function(event){
     block = $(this).parent();
     sender = block.attr('id').split('_')[1];
     target = 'val_'+block.attr('id').split('_')[1];
@@ -564,7 +566,7 @@ function rebootlinks(){
         'Content-Type': 'application/x-www-form-urlencoded'
       },
       dataType:'json',
-      data: {skill:sender,finger:fingerval},      
+      data: {skill:sender,finger:fingerval},
       success: function(answer) {
           console.log(answer);
           $('th#'+target).html(answer);
@@ -574,7 +576,7 @@ function rebootlinks(){
           $('th#'+target).html(answer.responseText);
        },
     });
-  
+
   });
 
   register_story('epic');
@@ -596,6 +598,8 @@ function rebootlinks(){
     event.stopPropagation();
     $("ul#keywords").toggleClass("shown");
   });
+
+
 
 }
 

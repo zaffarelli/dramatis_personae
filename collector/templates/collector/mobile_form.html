@@ -1,0 +1,38 @@
+<div class='mobile_form' id='customizer'>
+<h2>Avatar Customization</h2>
+<span float='right'>&times;</span>
+<table>
+	<tr>
+		<th colspan=2>Avatar</th><td>{{c.rid}}</td>
+	</tr>
+	<tr>
+		<th><span id='skill_add' class='fa fa-arrow-alt-circle-left'></span></th>
+		<th>Add Skill at 1</th>
+		<td>
+			<select id='skill_select'>
+			{% for s in c.skills_options %}
+				<option value='{{s.id}}' style='width:15ex;'>{{s.reference}}</option>
+			{% endfor %}
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<th><span id='bc_add' class='fa fa-arrow-alt-circle-left'></span></th>
+		<th>Add B/C</th><td>
+			<select id='bc_select'>
+			{% for s in c.bc_options %}
+				<option value='{{s.id}}' style='width:15ex;'>{{s.reference}}</option>
+			{% endfor %}
+			</select>
+	</tr>
+	<tr>
+		<th><span id='ba_add' class='fa fa-arrow-alt-circle-left'></span></th>
+		<th>Add B/A</th><td>
+			<select id='ba_select'>
+			{% for s in c.ba_options %}
+				<option value='{{s.id}}' style='width:15ex;'>{{s.reference}}</option>
+			{% endfor %}
+			</select>
+	</tr>
+</table>
+</div>

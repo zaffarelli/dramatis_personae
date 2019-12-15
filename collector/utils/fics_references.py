@@ -23,7 +23,7 @@ import hashlib
 """
 
 MAX_CHAR = 20
-RELEASE = '1.3.0'
+RELEASE = '1.4.0'
 DEBUG_ALL = False
 
 LIFEPATH_CATEGORY=(
@@ -90,7 +90,7 @@ RACIAL_ATTRIBUTES = {
   "etyri": {},
   "gannok": {},
   "hironem": {},
-  "kurgan": {},  
+  "kurgan": {},
   "obuni": {
     'PA_REF':1,
     'PA_AGI':1,
@@ -109,7 +109,7 @@ RACIAL_ATTRIBUTES = {
     'PA_TEC':1,
     'occult_level':1,
     'occult_darkside':1,
-  },  
+  },
   "urthish": {},
   "symbiot": {},
   "vau": {},
@@ -121,7 +121,7 @@ RACIAL_ATTRIBUTES = {
     'PA_TEC':-2,
     'PA_TEM': 1,
   },
-  "vuldrok": {},  
+  "vuldrok": {},
 }
 
 SHORTCUTS = {
@@ -144,7 +144,7 @@ SHORTCUTS = {
       'attribute':"PA_REF",
       'label': "REF + Shoot",
       'rationale': "Fire a ranged weapon",
-    },    
+    },
     "Melee":{
       'attribute':"PA_REF",
       'label': "REF + Melee",
@@ -174,8 +174,8 @@ SHORTCUTS = {
     "Focus":{
       'attribute':'PA_WIL',
       'label': 'WIL + Focus',
-      'rationale': "Keep focused on a task",  
-    },    
+      'rationale': "Keep focused on a task",
+    },
 
   }
 
@@ -200,5 +200,5 @@ ATTACK_ROLLS = {
   'HVY': {
     'attribute': 'PA_REF',
     'skill': 'Heavy Weapons',
-  },  
+  },
 }

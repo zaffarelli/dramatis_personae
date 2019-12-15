@@ -100,6 +100,10 @@ class Character(models.Model):
     onsave_reroll_skills = models.BooleanField(default=False)
     lifepath_total = models.IntegerField(default=0)
 
+    skills_options = []
+    ba_options = []
+    bc_options = []
+
     def get_absolute_url(self):
         return reverse('view_character', kwargs={'pk': self.pk})
 
@@ -155,12 +159,60 @@ class Character(models.Model):
         self.gm_shortcuts = gm_shortcuts
         self.is_exportable = self.check_exportable()
         logger.info('>>> %s %s' % (self.rid, self.is_exportable))
+        self.refresh_skills_options()
+        self.refresh_ba_options()
+        self.refresh_bc_options()
 
     def apply_racial_pa_mods(self):
         attr_mods = self.specie.get_racial_attr_mod()
         for am in attr_mods:
             v = getattr(self, am)
             setattr(self, am, v+attr_mods[am])
+
+    def refresh_ba_options(self):
+        from collector.models.benefice_affliction_ref import BeneficeAfflictionRef
+        self.ba_options = []
+        ss = self.beneficeaffliction_set.all()
+        bar = []
+        for x in ss:
+            bar.append(x.benefice_affliction_ref)
+        all = BeneficeAfflictionRef.objects.all()
+        for s in all:
+            if s in ss:
+                print("Discarded: "+s.reference)
+            else:
+                self.ba_options.append(s)
+
+
+    def refresh_bc_options(self):
+        from collector.models.blessing_curse_ref import BlessingCurseRef
+        self.bc_options = []
+        ss = self.blessingcurse_set.all()
+        bcr = []
+        for x in ss:
+            bcr.append(x.blessing_curse_ref)
+        all = BlessingCurseRef.objects.all()
+        for s in all:
+            if s in ss:
+                print("Discarded: "+s.reference)
+            else:
+                self.bc_options.append(s)
+
+    def refresh_skills_options(self):
+        from collector.models.skill_ref import SkillRef
+        self.skills_options = []
+        ss = self.skill_set.all()
+        sr = []
+        for x in ss:
+            sr.append(x.skill_ref)
+        all = SkillRef.objects.all().exclude(is_root=True)
+        for s in all:
+            if s in sr:
+                print("Discarded: "+s.reference)
+            else:
+                self.skills_options.append(s)
+                #print(s.reference)
+
 
     def add_or_update_skill(self, askill, modifier=0, stack=False):
         from collector.models.skill import Skill

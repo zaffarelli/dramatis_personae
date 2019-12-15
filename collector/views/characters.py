@@ -96,3 +96,13 @@ class CharacterUpdateView(AjaxFromResponseMixin,UpdateView):
       context['tourofdutys'] = TourOfDutyFormSet(instance=self.object)
       messages.info(self.request, 'Form display for avatar %s'%(context['form']['full_name'].value()))
     return context
+
+
+  def customize_skill(slug):
+    print(slug)
+
+  def customize_bc(slug):
+    print(slug)
+
+  def customize_ba(slug):
+    print(slug)

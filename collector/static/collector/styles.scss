@@ -93,18 +93,47 @@ body {
     font-family: Texte;
     display:block;
     padding:5px 0 5px 0;
-    & .shortcuts{
-      display:block;
+    & .releasenote{
+      display:inline-block;
       margin:0;
-      padding:0;
-      margin-left:20%;
-      width:80%;
-      margin-top:5px;
+      padding:5px;
+      width:30%;
+      float:left;
       & ul{
         margin:0;
         padding:0;
         display:block;
-        height:50px;
+        height:auto;
+        overflow:show;
+        list-style-type:none;
+        & li{
+          margin:0;
+          padding:0;
+          display:block;
+          background-color:$fics_dark;
+          overflow:show;
+          & ul{
+            display:none;
+            list-style-type: none;
+            & li{
+              display:block;
+              z-index:500;
+            }
+          }
+        }
+      }
+    }
+    & .shortcuts{
+      display:inline-block;
+      margin:0;
+      padding:0;
+      width:60%;
+      float:right;
+      & ul{
+        margin:0;
+        padding:5px;
+        display:block;
+        height:auto;
         overflow:show;
         list-style-type:none;
         & li{
@@ -122,13 +151,11 @@ body {
             }
           }
         }
-
-
       }
     }
   }
 
-
+/*
   footer{
     background:$fics_darker;
 
@@ -163,6 +190,7 @@ body {
       list-style-type: none;
     }
   }
+*/
 
   & .wrapper {
     font-family: Texte;
@@ -304,7 +332,7 @@ body {
     }
 
     & .details {
-
+/*
       & .pagination {
         text-align: center;
         margin-top: 1em;
@@ -347,7 +375,7 @@ body {
           color:$fics_front;
         }
       }
-
+*/
 
       z-index:10;
       background: transparent;
@@ -414,7 +442,6 @@ body {
         border:1px solid $fics_subborder_color;
         border-radius:2px;
         & table{
-
           width: 100%;
           & tr{
             height:5px;
@@ -426,23 +453,39 @@ body {
               padding:0;
               background:$fics_dark;
             }
+            & td[colspan="2"]{
+              width:auto;
+              height:8px;
+              margin:2px;
+              padding:1px;
+              background:$fics_light;
+              text-align:center;
+            }
             & th{
-
               height:5px;
-
+              text-align:right;
               background:transparent;
               width:14ex;
               font-size:1.2em;
               line-height:0.8em;
-              &.edit span:hover{
-                color:$fics_front;
-                font-size:0.8em;
-              }
               margin:0;
               padding:0;
             }
+            & th.edit{
+              width:4ex;
+              font-size:1.0em;
+              text-align:center;
+            }
+            & th[colspan="2"]{
+              width:14ex;
+            }
+
           }
         }
+      }
+
+      & .edit{
+        color:$fics_golden;
       }
 
       & .chart_panel{
@@ -902,6 +945,37 @@ th.skill_dot{
 
 }
 
+.mobile_form{
+  position:fixed;
+  display:block;
+  width:300px;
+  height:350px;
+  right:100px;
+  left:auto;
+  top:auto;
+  bottom:150px;
+  background:$fics_dark;
+  z-index:8000;
+  overflow:hidden;
+  border-radius:10px 10px 10px 10px;
+  border:1px solid $fics_dark;
+  box-shadow: 0 0 10px black;
+  color:$fics_light;
+  padding:0;
+  & table{
+    width:100%;
+    & th{
+      color:$fics_front;
+      background:$fics_darkest;
+    }
+    & td{
+      color:$fics_golden;
+      background:$fics_dark;
+    }
+  }
+
+}
+
 
 /* Normal --------------------------------------------------------------------*/
 @media all and (min-width: 1024px){
@@ -919,10 +993,12 @@ th.skill_dot{
       width:100%;
       height:40px;
     }
+/*
     & footer{
       width:99%;
       height:40px;
     }
+*/
     & .wrapper{
       z-index:5;
       margin-left:0;

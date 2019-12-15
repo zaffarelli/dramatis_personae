@@ -6,7 +6,7 @@
     <title>{% block title %}Dramatis Personae{% endblock %}</title>
     {% load static %}
     {% load sass_tags %}
-    <link rel='icon' href='{% static "collector/favicon.ico" %}'>        
+    <link rel='icon' href='{% static "collector/favicon.ico" %}'>
     <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.0.13/css/solid.css' integrity='sha384-Rw5qeepMFvJVEZdSo1nDQD5B6wX0m7c5Z/pLNvjkB14W6Yki1hKbSEQaX9ffUbWe' crossorigin='anonymous'>
     <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.0.13/css/fontawesome.css' integrity='sha384-GVa9GOgVQgOk+TNYXu7S/InPTfSDTtBalSgkgqQ7sCik56N9ztlkoTr2f/T44oKV' crossorigin='anonymous'>
     <script src='https://code.jquery.com/jquery-3.3.0.js'></script>
@@ -14,17 +14,15 @@
     <link rel='stylesheet' type='text/css' href='{% sass_src "collector/styles.scss" %}' />
   </head>
   <body>
-    <header></header>   
+    <header></header>
     <div class='logo'>
       {% block logo %}
       {% endblock %}
     </div>
     <div class='menu'>
       {% block menu %}
-        <div class='releasenote'>
-          &middot; <strong>Dramatis Personae</strong> release <b>{{ dp_version }}</b> &middot;                
-        </div>          
-        {% endblock menu %}
+
+       {% endblock menu %}
     </div>
     <div id='messenger'></div>
     <div class='wrapper'>
@@ -52,13 +50,10 @@
     <footer>
       <div class='footer'>
         {% block page_footer %}
-        <ul>
-          <li><i>{{instance_name}} release {{ dp_version }}</i></li>
-          <li><i>Python version {{ python_version }}</i></li>
-        </ul>
         {% endblock %}
       </div>
     </footer>
+    <script src='{% static "js/formless_updater.js" %}'></script>
     <script src='{% static "js/collector.js" %}'></script>
     {% block javascript %}
     {% endblock %}
