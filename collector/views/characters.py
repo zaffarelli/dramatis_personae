@@ -98,11 +98,11 @@ class CharacterUpdateView(AjaxFromResponseMixin,UpdateView):
     return context
 
 
-  def customize_skill(slug):
-    print(slug)
+def customize_skill(slug):
+  print(slug)
 
-  def customize_bc(slug):
-    print(slug)
+def customize_bc(slug):
+  print(slug)
 
-  def customize_ba(slug):
-    print(slug)
+def customize_ba(slug):
+  print(slug)
