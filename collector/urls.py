@@ -38,7 +38,7 @@ urlpatterns = [
   re_path('^pdf/(?P<slug>[\w-]+)/$', pdf_show, name='pdf_show'),
   re_path('^ajax/view/by_rid/(?P<slug>[\w-]+)/$', view_by_rid, name='view_by_rid'),
 
-  re_path('^ajax/character/ba/(?P<slug>[\w-]+)/$)',customize_ba,name='customize_ba'),
-  re_path('^ajax/character/bc/(?P<slug>[\w-]+)/$)',customize_bc,name='customize_bc'),
-  re_path('^ajax/character/skill/(?P<slug>[\w-]+)/$)',customize_skill,name='customize_skill'),
+  re_path('^ajax/character/ba/(?P<slug>[\w-]+)/$',customize_ba,name='customize_ba'),
+  re_path('^ajax/character/bc/(?P<slug>[\w-]+)/$',customize_bc,name='customize_bc'),
+  re_path('^ajax/character/skill/(?P<slug>[\w-]+)/$',customize_skill,name='customize_skill'),
 ]
