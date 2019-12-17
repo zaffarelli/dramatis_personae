@@ -161,7 +161,7 @@
 <tr><td>
   {% if c.blessingcurse_set.count != 0 %}
   <h2>Blessings/Curses ({{c.BC_TOTAL}})</h2>
-  <table width='100%'>
+  <table id='bc_{{c.id}}' width='100%'>
   <tr>
   {% for bc in c.blessingcurse_set.all %}
   <td>{{ bc.blessing_curse_ref.reference|safe }}</td>
