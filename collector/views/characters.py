@@ -111,17 +111,24 @@ def customize_skill(request,avatar,item):
 @csrf_exempt
 def customize_bc(request,avatar,item):
     from collector.models.blessing_curse_ref import BlessingCurseRef
-    from collector.models.blessing_curse import BlessingCurse
+    from collector.models.character_custo import CharacterCusto
+    from collector.models.blessing_curse_modificator import BlessingCurseModificator
     context = {}
     context["avatar"] = avatar
     context["item"] = item
+    # Create the link blessing curse in the custo
     ch = Character.objects.get(pk=avatar)
+    cu = CharacterCusto.objects.get(character=ch)
     bcr = BlessingCurseRef.objects.get(pk=item)
-    bc = BlessingCurse()
-    bc.character = ch
-    bc.blessing_curse_ref = bcr
-    bc.save()
-
+    bcm = BlessingCurseModificator()
+    bcm.character_custo = cu
+    bcm.blessing_curse_ref = bcr
+    bcm.save()
+    ch = Character.objects.get(pk=avatar)
+    cu = CharacterCusto.objects.get(character=ch)
+    context["c"] = ch
+    context["custo"] = cu
+    messages.info(request, 'Avatar %s customized with B/C %.'%(context['c']['full_name'].value(),bcm.reference))
     return JsonResponse(context)
 
 @csrf_exempt
