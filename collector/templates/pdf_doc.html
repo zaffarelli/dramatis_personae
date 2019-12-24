@@ -4,16 +4,16 @@
 		{% load static %}
     <meta charset="utf-8" />
     <title>{{c.full_name|safe}}</title>
-    
+
     <style>
 
 @font-face {
-  font-family: 'Titre';  
+  font-family: 'Titre';
   src: url('collector/static/collector/fonts/Eczar-Bold.ttf');
 }
 
 @font-face {
-  font-family: 'TitrePerso';  
+  font-family: 'TitrePerso';
   src: url('collector/static/collector/fonts/Cinzel-Bold.ttf');
 }
 
@@ -44,17 +44,17 @@
 
 
 @font-face {
-  font-family: 'Emphase';  
+  font-family: 'Emphase';
   src: url('collector/static/collector/fonts/Eczar-Regular.ttf');
 }
 
 @font-face {
-  font-family: 'NomPerso';  
+  font-family: 'NomPerso';
   src: url('collector/static/collector/fonts/BowlbyOneSC-Regular.ttf');
 }
 
 @font-face {
-  font-family: 'Section';  
+  font-family: 'Section';
   src: url('collector/static/collector/fonts/ProstoOne-Regular.ttf');
 }
 
@@ -77,16 +77,16 @@
     border-bottom:1px solid #202020;
   }
 
-  @frame header_frame { 
+  @frame header_frame {
     -pdf-frame-content: header_content;
-    
+
     right: 0.5cm;
     width: 0.5cm;
     top: 0.5cm;
     height: 1cm;
     text-align:right;
   }
-  
+
 }
 
 
@@ -95,13 +95,13 @@ h1{
   font-family:'NomPerso';
   font-size:24pt;
   font-weight:600;
-  
+
   color:#404040;
 }
 
 h2{
   font-family:'NomPerso';
-  font-size:16pt;  
+  font-size:16pt;
   color:#404040;
   border-bottom:3px double #202020;
 }
@@ -120,6 +120,8 @@ h4{
 h5{
   font-family:'Section';
   font-size:9pt;
+  padding-bottom:0;
+  margin-bottom:0;
   -pdf-keep-with-next: true;
 }
 
@@ -137,7 +139,7 @@ table.stats {
   padding:0;
   margin:0;
   font-family:Texte;
-  font-size:8pt;  
+  font-size:8pt;
 }
 
 p{
@@ -164,7 +166,7 @@ blockquote{
   font-size:1.0em;
 }
 
-.gm_shortcuts{				 
+.gm_shortcuts{
   font-size:1.0em;
 }
 
@@ -199,7 +201,7 @@ blockquote{
 }
 
 .skilltext{
-  vertical-align:top;    
+  vertical-align:top;
 }
 
 .skillval{

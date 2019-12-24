@@ -1,0 +1,18 @@
+{%load fics_filters%}
+{%load static%}
+
+  {% if c.talent_set.count != 0 %}
+  <table class='unbreakable'>
+  <tr><th colspan=4>Talents ({{c.TA_TOTAL}})</th></tr>
+  {% for t in c.talent_set.all|dictsortreversed:"value" %}
+  <tr>
+  <td>{{ t.name }}</td>
+  <td>{{ t.talent_ref.reference }}</td>
+  <td>{{ t.value }}</td>
+  <td>{{ t.description }}</td>
+  </tr>
+  {% endfor %}
+  </table>
+  {%else%}
+  &nbsp;
+  {%endif%}

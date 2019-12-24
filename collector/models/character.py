@@ -13,6 +13,7 @@ from scenarist.models.epics import Epic
 from collector.models.fics_models import Role, Profile, Specie
 from collector.utils import fs_fics7
 from collector.utils.basic import write_pdf
+#from collector.models.character_custo import CharacterCusto
 import logging
 
 logger = logging.getLogger(__name__)
@@ -92,13 +93,16 @@ class Character(models.Model):
     is_partial = models.BooleanField(default=True)
     use_history_creation = models.BooleanField(default=False)
     use_only_entrance = models.BooleanField(default=False)
-    epic = models.ForeignKey(Epic, null=True, blank=True,
-                             on_delete=models.SET_NULL)
+    epic = models.ForeignKey(Epic, null=True, blank=True, on_delete=models.SET_NULL)
     picture = models.CharField(max_length=256, blank=True, default='')
     alliance_picture = models.CharField(max_length=256, blank=True, default='')
     onsave_reroll_attributes = models.BooleanField(default=False)
     onsave_reroll_skills = models.BooleanField(default=False)
     lifepath_total = models.IntegerField(default=0)
+
+    #custo = models.ForeignKey(CharacterCusto, on_delete=models.CASCADE)
+    custo = None
+
 
     skills_options = []
     ba_options = []
@@ -106,6 +110,33 @@ class Character(models.Model):
 
     def get_absolute_url(self):
         return reverse('view_character', kwargs={'pk': self.pk})
+
+    def rebuild_from_lifepath(self):
+        """ Historical Creation """
+        if self.custo:
+            self.custo.comment = self.full_name
+            self.custo.save()
+        self.resetPA()
+        self.purgeSkills()
+        for tod in self.tourofduty_set.all():
+            tod.push(self)
+        fs_fics7.check_secondary_attributes(self)
+        self.add_missing_root_skills()
+        self.lifepath_total = 0
+        for tod in self.tourofduty_set.all():
+            self.lifepath_total += tod.tour_of_duty_ref.value
+
+    def rebuild_free_form(self):
+        """ Freeform Creation """
+        self.resetTotal()
+        if self.onsave_reroll_attributes:
+            fs_fics7.check_primary_attributes(self)
+            fs_fics7.check_secondary_attributes(self)
+        if self.onsave_reroll_skills:
+            fs_fics7.check_skills(self)
+        else:
+            self.add_missing_root_skills()
+            self.resetTotal()
 
     def fix(self, conf=None):
         """ Check / calculate other characteristics """
@@ -122,46 +153,29 @@ class Character(models.Model):
             self.player = ''
 
         if self.use_history_creation:
-          # Historical Creation
-          self.resetPA()
-          self.purgeSkills()
-          for tod in self.tourofduty_set.all():
-            tod.push(self)
-          fs_fics7.check_secondary_attributes(self)
-          self.add_missing_root_skills()
-          self.lifepath_total = 0
-          for tod in self.tourofduty_set.all():
-              self.lifepath_total += tod.tour_of_duty_ref.value
+            self.rebuild_from_lifepath()
         else:
-          # Freeform Creation
-          self.resetTotal()
-          if self.onsave_reroll_attributes:
-              fs_fics7.check_primary_attributes(self)
-              fs_fics7.check_secondary_attributes(self)
-          if self.onsave_reroll_skills:
-              fs_fics7.check_skills(self)
-          else:
-              self.add_missing_root_skills()
-              self.resetTotal()
+            self.rebuild_freeform()
         gm_shortcuts = ''
         tmp_shortcuts = []
         skills = self.skill_set.all()
         for s in skills:
-          sc = fs_fics7.check_gm_shortcuts(self, s)
-          if sc != '':
-            tmp_shortcuts.append(sc)
+            sc = fs_fics7.check_gm_shortcuts(self, s)
+            if sc != '':
+                tmp_shortcuts.append(sc)
         gm_shortcuts = ''.join(tmp_shortcuts)
         gm_shortcuts += fs_fics7.check_attacks(self)
         gm_shortcuts += fs_fics7.check_health(self)
         gm_shortcuts += fs_fics7.check_defense(self)
         if not self.player:
-          gm_shortcuts += fs_fics7.check_nameless_attributes(self)
+            gm_shortcuts += fs_fics7.check_nameless_attributes(self)
         self.gm_shortcuts = gm_shortcuts
         self.is_exportable = self.check_exportable()
         logger.info('>>> %s %s' % (self.rid, self.is_exportable))
         self.refresh_skills_options()
         self.refresh_ba_options()
         self.refresh_bc_options()
+
 
     def apply_racial_pa_mods(self):
         attr_mods = self.specie.get_racial_attr_mod()
@@ -376,6 +390,8 @@ class Character(models.Model):
         if self.is_exportable != exportable:
             self.is_exportable = exportable
             self.rid = 'none'
+        if self.use_history_creation:
+            self.is_exportable = True
         return self.is_exportable
 
     def backup(self):
@@ -399,6 +415,18 @@ class Character(models.Model):
             return False
         else:
             return True
+
+    # Save overrride to create custo
+    def save(self, force_insert=False, force_update=False):
+        from collector.models.character_custo import CharacterCusto
+        is_new = self.id is None
+        super(Character, self).save(force_insert, force_update)
+        if is_new:
+            self.custo = CharacterCusto.objects.create(character=self)
+        else:
+            found_custo = CharacterCusto.objects.filter(character=self).first()
+            if found_custo is None:
+                self.custo = CharacterCusto.objects.create(character=self)
 
 @receiver(pre_save, sender=Character, dispatch_uid='update_character')
 def update_character(sender, instance, conf=None, **kwargs):

@@ -3,14 +3,21 @@
 {%load static%}
 {% block article %}
 <div id="header_content">
-  <strong>dP</strong>
+    <img src='collector/static/collector/glyph.png' width='0.5cm'>
 </div>
 
 <h4 class='avatar_name'>{{ c.full_name|safe }} {% if c.player != "" %}({{c.player|safe}}){%endif%}</h4>
+
 <p><i>{{ c.entrance|safe }}</i></p>
 <p>{{c.gender|capfirst}} {{ c.specie|capfirst|safe }} {{ c.rank|safe }} of {{ c.alliance|safe }} from {{ c.native_fief|safe }} {{ c.caste|safe }}.
 Born in {{ c.birthdate }} ({{ c.age }} years old)
 <br/>Height: {{c.height}}cm / Weight:{{c.weight}}kg </p>
+
+
+{% include "collector/character/character_tod.html" %}
+
+
+
 <h5>Primary Attributes</h5>
 <table class='stats' width='100%'>
 <tr>
@@ -150,8 +157,14 @@ Born in {{ c.birthdate }} ({{ c.age }} years old)
 
 <BR/>{% now "Ymd H:i:s"  %}
 <br/><b>{{c.pagenum|stringformat:"03d" }}</b>
+
+
+{% if c.picture != ''%}
+<img src='{{c.picture}}' width='10cm'>
+{% endif %}
+
 {% endcomment %}
+
+
+
 {% endblock article %}
-
-
-

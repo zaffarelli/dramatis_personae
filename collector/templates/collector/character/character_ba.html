@@ -1,0 +1,17 @@
+{%load fics_filters%}
+{%load static%}
+
+{% if c.beneficeaffliction_set.count != 0 %}
+<table class='unbreakable' width='100%'>
+<tr><th colspan=3>Benefice/Afflictions ({{c.BA_TOTAL}})</th></tr>
+<tr>
+{% for ba in c.beneficeaffliction_set.all %}
+<td>{{ ba.benefice_affliction_ref.reference|safe }}</td>
+<td>{{ ba.benefice_affliction_ref.description|safe }}</td>
+<td>{{ ba.benefice_affliction_ref.value }}</td>
+</tr>
+{% endfor %}
+</table>
+{%else%}
+&nbsp;
+{%endif%}

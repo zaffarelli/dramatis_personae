@@ -40,10 +40,12 @@ from collector.models.tourofduty_ref import TourOfDutyRef
 from collector.models.tourofduty_ref_admin import TourOfDutyRefAdmin
 admin.site.register(TourOfDutyRef, TourOfDutyRefAdmin)
 
+from collector.models.character_custo import CharacterCusto, CharacterCustoAdmin
+admin.site.register(CharacterCusto, CharacterCustoAdmin)
+
 from collector.models.character import Character
 from collector.models.character_admin import CharacterAdmin
 admin.site.register(Character, CharacterAdmin)
 
 from collector.models.config import Config, ConfigAdmin
 admin.site.register(Config, ConfigAdmin)
-

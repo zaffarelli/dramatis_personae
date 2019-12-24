@@ -4,10 +4,16 @@
  ═╩╝╩    ╚═╝└─┘┴─┘┴─┘└─┘└─┘ ┴ └─┘┴└─
 '''
 from django.db import models
-
+from django.contrib import admin
+from collector.models.character import Character
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
 
 class CharacterCusto(models.Model):
-    character = models.ForeignKey(Character, on_delete=models.CASCADE)
+    character = models.OneToOneField(Character,on_delete=models.CASCADE,primary_key=True)
+    value = models.IntegerField(default=0)
+    AP = models.IntegerField(default=0)
+    OP = models.IntegerField(default=0)
     PA_STR = models.PositiveIntegerField(default=0)
     PA_CON = models.PositiveIntegerField(default=0)
     PA_BOD = models.PositiveIntegerField(default=0)
@@ -22,6 +28,15 @@ class CharacterCusto(models.Model):
     PA_AWA = models.PositiveIntegerField(default=0)
     occult_level = models.PositiveIntegerField(default=0)
     occult_darkside = models.PositiveIntegerField(default=0)
+    comment = models.TextField(default="", blank=True, null=True)
+
+    def recalculate(self):
+        self.AP = (self.PA_STR + self.PA_CON + self.PA_BOD+ self.PA_MOV
+                      + self.PA_INT + self.PA_WIL + self.PA_TEM + self.PA_PRE
+                      + self.PA_REF + self.PA_TEC + self.PA_AGI + self.PA_AWA)
+        for s in self.skillcusto_set.all():
+            self.OP += s.value
+        self.value = self.AP*3 + self.OP
 
     def add_or_update_skill(self,skill_ref_id,value):
         ''' Updating customization and avatar '''
@@ -57,3 +72,16 @@ class CharacterCusto(models.Model):
             skill_custo.value = value
             skill_custo.character = self.character
             skill_custo.save()
+
+@receiver(pre_save, sender=CharacterCusto, dispatch_uid='update_character_custo')
+def update_character_custo(sender, instance, conf=None, **kwargs):
+    instance.recalculate()
+
+
+class CharacterCustoAdmin(admin.ModelAdmin):
+    from collector.models.skill_custo_inline import SkillCustoInline
+    list_display = ('character','value','AP','OP',)
+    exclude = ('value','AP','OP')
+    inlines = [
+        SkillCustoInline,
+    ]

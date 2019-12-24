@@ -20,6 +20,29 @@ $fics_subborder_color: darken($fics_back,30%);
 $fics_golden: #ffcc22;
 $fics_lock: darken($fics_golden,50%);
 
+
+@mixin unbreakable{
+    & table.unbreakable{
+        width:100%;
+        overflow:hidden;
+        page-break-after: always;
+        page-break-inside: avoid;
+        & th{
+            background:$fics-darker;
+            &[colspan="3"], &[colspan="4"], &[colspan="12"]{
+                font-family: Titre;
+                font-size:1.25em;
+                font-weight:normal;
+                background:$fics-darker;
+            }
+        }
+        & td{
+        }
+    }
+}
+
+
+
 input[type=text],input[type=number],input[type=checkbox], select, textarea{
   background-color:$fics_dark;
   color:$fics_front;
@@ -415,22 +438,64 @@ body {
           }
         }
       }
-      & .options{
+      & .gear{
+        column-count:3;
+        column-gap:5px;
+        column-rule:1px dotted $fics_light;
         margin-top:3px;
-        width:100%;
-
-        & td{
-          width:30%;
-          vertical-align: top;
-        }
-        & th{
-          width:40%;
-          vertical-align: top;
-          font-weight: normal;
-          text-align:left;
-        }
         border:1px solid $fics_subborder_color;
         border-radius:2px;
+        margin-top:3px;
+        width:100%;
+        @include unbreakable;
+      }
+      & .options{
+        column-count:3;
+        column-gap:5px;
+        column-rule:1px dotted $fics_light;
+        margin-top:3px;
+        border:1px solid $fics_subborder_color;
+        border-radius:2px;
+        margin-top:3px;
+        width:100%;
+        @include unbreakable;
+        border:1px solid $fics_subborder_color;
+        border-radius:2px;
+      }
+
+      & .coreblock{
+        column-count:3;
+        column-gap:5px;
+        column-rule:1px dotted $fics_light;
+        margin-top:3px;
+        border:1px solid $fics_subborder_color;
+        border-radius:2px;
+        margin-top:3px;
+        width:100%;
+        border:1px solid $fics_subborder_color;
+        border-radius:2px;
+        & ul{
+            page-break-after: always;
+            page-break-inside: avoid;
+            padding:0;
+            margin:0;
+            list-style: none;
+            & li{
+                padding:3px;
+                margin:0;
+
+                & b{
+                    width: 20ex;
+                    margin-right:1ex;
+                    display:inline-block;
+                    background:$fics_darker;
+                }
+                width:100%;
+            }
+        }
+        & .pagebreaker{
+            page-break-after: always;
+        }
       }
 
 
@@ -517,7 +582,7 @@ body {
         padding:10px;
         background-color:$fics_dark;
         width:100%;
-        max-width:800px;
+        max-width:900px;
         margin-left:auto;
         margin-right:auto;
         display:block;
@@ -624,6 +689,8 @@ body {
       }
     }
 
+
+    /*
     & table.coreblock {
           display: inline-block;
           border: 1px solid black;
@@ -656,7 +723,8 @@ body {
 
 
         }
-        & h1, & h2, & h3 {
+        */
+    & h1, & h2, & h3 {
           margin:0;
           margin-top:0.5em;
         }
@@ -665,6 +733,7 @@ body {
         & h3{ font-size: 1.2em; }
       }
     }
+
 
 }
 

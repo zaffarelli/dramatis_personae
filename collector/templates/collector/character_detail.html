@@ -1,6 +1,6 @@
 {% load fics_filters %}
 
-{% include "collector/mobile_form.html" with c=c %}
+{% include "collector/mobile_form.html" %}
 
 <div class="classyview" id='sheet_{{c.id}}'>
 {% if c.alliance_picture != "" %}
@@ -8,263 +8,58 @@
 {% endif %}
 
 <h1>{{ c.full_name }}</h1>
-{{ c.entrance|safe }}</br>
+{{ c.entrance|safe }}<br/>
 {{ c.epic|safe }}<br/>
 
-<table class="coreblock" id="base">
-<tr><th>Alliance</th><td>{{ c.alliance|safe }}</td><th>Birthdate</th><td>{{ c.birthdate }} ({{ c.age }} years old)</td>
-<td colspan=2 rowspan=8>
+<div class='coreblock'>
+<ul class='unbreakable'>
+    <li><b>Alliance</b>{{ c.alliance|safe }}</li>
+    <li><b>Birthdate</b>{{ c.birthdate }} ({{ c.age }} years old)</li>
+    <li><b>Caste</b>{{ c.caste }}</li>
+    <li><b>Native Fief</b>{{ c.native_fief }}</li>
+    <li><b>Rank</b>{{ c.rank }}</li>
+    <li><b>Height</b>{{ c.height|as_height }}</li>
+    <li><b>Weight</b>{{ c.weight|as_weight }}</li>
+</ul>
+<span class='pagebreaker'>&nbsp;</span>
+<ul class='unbreakable'>
+    <li><b>Player</b>{{ c.player }}</li>
+    <li><b>Role</b>{{ c.role }}</li>
+    <li><b>Keyword</b>{{ c.keyword }}</li>
+    <li><b>Profile</b>{{ c.profile }}</li>
+    <li><b>ID</b>{{c.id}}</li>
+    <li><b>Dead</b>{{ c.is_dead|prettybool|safe }}</li>
+    <li><b>Visible</b>{{c.is_visible|prettybool|safe}}</li>
+    <li><b>Lifepaths</b>{{c.use_history_creation|prettybool|safe}}</li>
+</ul>
+<span class='pagebreaker'>&nbsp;</span>
 {% if c.tourofduty_set.count != 0 %}
-<h2>Lifepaths</h2>
-{% for tod in c.tourofduty_set.all|dictsort:"tour_of_duty_ref.category" %}
-<div class='lifepath'><b>{{ tod.tour_of_duty_ref.category|as_lifepath }} ({{tod.tour_of_duty_ref.value}})</b> {{tod.tour_of_duty_ref.reference}}</div>
-{% endfor %}
+    <ul class='unbreakable'>
+    {% for tod in c.tourofduty_set.all|dictsort:"tour_of_duty_ref.category" %}
+    <li><b>{{ tod.tour_of_duty_ref.category|as_lifepath }} ({{tod.tour_of_duty_ref.value}})</b> {{tod.tour_of_duty_ref.reference}}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <ul class='unbreakable'></ul>
 {% endif %}
-</td></tr>
-<tr><th>Specie/Race</th><td>{{ c.specie }}</td><th>Gender</th><td>{% if c.gender == "male" %}<i class="fas fa-mars"></i>{% else %}<i class="fas fa-venus"></i>{%endif%}</td></tr>
-<tr><th>Caste</th><td>{{ c.caste }}</td><th>Height</th><td>{{ c.height }}</td></tr>
-<tr><th>Native Fief</th><td>{{ c.native_fief }}</td><th>Weight</th><td>{{ c.weight }}</td></tr>
-<tr><th>Rank</th><td>{{ c.rank }}</td><th>Player</th><td>{{ c.player }}</td></tr>
-<tr><th>Role</th><td>{{ c.role }}</td><th>Keyword</th><td>{{ c.keyword }}</td></tr>
-<tr><th>Profile</th><td>{{ c.profile }}</td><th>ID</th><td>{{c.id}}</td></tr>
-<tr><th>Dead</th><td>{{ c.is_dead }}</td><th>Visible</th><td>{{c.is_visible}}</td></tr>
-</table>
-
+</div>
 
 <h2>Attributes ({{c.PA_TOTAL}}x3)</h2>
 <div class='attributes'>
-{% if no_skill_edit %}
-<table class="stats" id="phy">
-<tr>
-	<th>STR</th><td colspan=2>{{c.PA_STR}}</td>
-	<th>CON</th><td colspan=2>{{c.PA_CON}}</td>
-</tr><tr>
-	<th>BOD</th><td colspan=2>{{c.PA_BOD}}</td>
-	<th>MOV</th><td colspan=2>{{c.PA_MOV}}</td>
-</tr>
-</table>
-
-<table class="stats" id="spi">
-<tr>
-	<th>INT</th><td colspan=2>{{c.PA_INT}}</td>
-	<th>WIL</th><td colspan=2>{{c.PA_WIL}}</td>
-</tr><tr>
-	<th>TEM</th><td colspan=2>{{c.PA_TEM}}</td>
-	<th>PRE</th><td colspan=2>{{c.PA_PRE}}</td>
-</tr>
-</table>
-
-<table class="stats" id="com">
-<tr>
-	<th>TEC</th><td colspan=2>{{c.PA_TEC}}</td>
-	<th>REF</th><td colspan=2>{{c.PA_REF}}</td>
-</tr><tr>
-	<th>AGI</th><td colspan=2>{{c.PA_AGI}}</td>
-	<th>AWA</th><td colspan=2>{{c.PA_AWA}}</td>
-</tr>
-</table>
-
-{%else%}
-<table class="stats" id="phy">
-<tr>
-	<th>STR</th><td>{{c.PA_STR}}</td><td class='edit' id='attr_edit_STR'><span class='fa fa-plus-circle'></span><span class='fa fa-minus-circle'></span></td>
-	<th>CON</th><td>{{c.PA_CON}}</td><td class='edit' id='attr_edit_CON'><span class='fa fa-plus-circle'></span><span class='fa fa-minus-circle'></span></td>
-</tr><tr>
-	<th>BOD</th><td>{{c.PA_BOD}}</td><td class='edit' id='attr_edit_BOD'><span class='fa fa-plus-circle'></span><span class='fa fa-minus-circle'></span></td>
-	<th>MOV</th><td>{{c.PA_MOV}}</td><td class='edit' id='attr_edit_MOV'><span class='fa fa-plus-circle'></span><span class='fa fa-minus-circle'></span></td>
-</tr>
-</table>
-
-<table class="stats" id="spi">
-<tr>
-	<th>INT</th><td>{{c.PA_INT}}</td><td class='edit' id='attr_edit_INT'><span class='fa fa-plus-circle'></span><span class='fa fa-minus-circle'></span></td>
-	<th>WIL</th><td>{{c.PA_WIL}}</td><td class='edit' id='attr_edit_WIL'><span class='fa fa-plus-circle'></span><span class='fa fa-minus-circle'></span></td>
-</tr><tr>
-	<th>TEM</th><td>{{c.PA_TEM}}</td><td class='edit' id='attr_edit_TEM'><span class='fa fa-plus-circle'></span><span class='fa fa-minus-circle'></span></td>
-	<th>PRE</th><td>{{c.PA_PRE}}</td><td class='edit' id='attr_edit_PRE'><span class='fa fa-plus-circle'></span><span class='fa fa-minus-circle'></span></td>
-</tr>
-</table>
-
-<table class="stats" id="com">
-<tr>
-	<th>TEC</th><td>{{c.PA_TEC}}</td><td class='edit' id='attr_edit_TEC'><span class='fa fa-plus-circle'></span><span class='fa fa-minus-circle'></span></td>
-	<th>REF</th><td>{{c.PA_REF}}</td><td class='edit' id='attr_edit_REF'><span class='fa fa-plus-circle'></span><span class='fa fa-minus-circle'></span></td>
-</tr><tr>
-	<th>AGI</th><td>{{c.PA_AGI}}</td><td class='edit' id='attr_edit_AGI'><span class='fa fa-plus-circle'></span><span class='fa fa-minus-circle'></span></td>
-	<th>AWA</th><td>{{c.PA_AWA}}</td><td class='edit' id='attr_edit_AWA'><span class='fa fa-plus-circle'></span><span class='fa fa-minus-circle'></span></td>
-</tr>
-</table>
-
-{%endif%}
-<table class="stats" id="hea">
-<tr><th>REC</th><td>{{c.SA_REC}}</td><th>STA</th><td>{{c.SA_STA}}</td></tr>
-<tr><th>END</th><td>{{c.SA_END}}</td><th>STU</th><td>{{c.SA_STU}}</td></tr>
-<tr><th>RES</th><td>{{c.SA_RES}}</td><th>DMG</th><td>{{c.SA_DMG}}</td></tr>
-</table>
-
-<table class="stats" id="oth">
-<tr><th>TOL</th><td>{{c.SA_TOL}}</td><th>HUM</th><td>{{c.SA_HUM}}</td></tr>
-<tr><th>PAS</th><td>{{c.SA_PAS}}</td><th>WYR</th><td>{{c.SA_WYR}}</td></tr>
-<tr><th>SPD</th><td>{{c.SA_SPD}}</td><th>RUN</th><td>{{c.SA_RUN}}</td></tr>
-</table>
-
+    {% include "collector/character/character_primaries.html" %}
+    {% include "collector/character/character_secondaries.html" %}
 </div>
-
-
-
-{% if no_skill_edit %}
-
-{% if c.skill_set.count != 0 %}
-<h2>Skills ({{c.SK_TOTAL}})</h2>
-<div class='skillsview'>
-{% for skill in c.skill_set.all|dictsort:"skill_ref.reference" %}
-<table>
-<tr><td>{% if skill.skill_ref.is_root %}<strong>{% endif %}
-				{% if skill.skill_ref.is_speciality %}- &nbsp;&nbsp;{% endif %}
-        {% if skill.skill_ref.is_common == False %}<em>{% endif %}
-			  {{ skill.skill_ref.reference|safe }}
-        {% if skill.skill_ref.is_common == False %}</em>{% endif %}
-				{% if skill.skill_ref.is_root %}</strong>{% endif %}
-</td>
-<th id='val_{{skill.id}}' class='skill_dot' colspan=2>{{ skill.value|as_bullets_short|safe }}</th></tr>
-</table>
-{% endfor %}
+{% include "collector/character/character_skills.html" %}
+<div class='options'>
+    {% include "collector/character/character_bc.html" %}
+    {% include "collector/character/character_ba.html" %}
+    {% include "collector/character/character_talents.html" %}
 </div>
-{% endif %}
-
-
-{% else %}
-{% if c.skill_set.count != 0 %}
-<h2>Skills ({{c.SK_TOTAL}})</h2>
-<div class='skillsview'>
-{% for skill in c.skill_set.all|dictsort:"skill_ref.reference" %}
-<table>
-<tr><td>{% if skill.skill_ref.is_root %}<strong>{% endif %}
-				{% if skill.skill_ref.is_speciality %}&nbsp;&nbsp;&nbsp;{% endif %}
-			  {{ skill.skill_ref.reference|safe }}
-				{% if skill.skill_ref.is_root %}</strong>{% endif %}
-</td>
-<th class='edit' id='sk_{{skill.id}}'><span class='fa fa-plus-circle'></span><span class='fa fa-minus-circle'></span></th>
-<th id='val_{{skill.id}}'>{{ skill.value|as_bullets_short|safe }}</th>
-</tr>
-</table>
-{% endfor %}
-<!-- table>
-<tr><td colspan=2 class='edit'><span class='fa fa-minus-circle'>Add Skill</span></td></tr>
-</table -->
+<div class='gear'>
+    {% include "collector/character/character_weapons.html" %}
+    {% include "collector/character/character_armors.html" %}
+    {% include "collector/character/character_shields.html" %}
 </div>
-{% endif %}
-{% endif %}
-
-
-<table class='options'>
-<tr><td>
-  {% if c.blessingcurse_set.count != 0 %}
-  <h2>Blessings/Curses ({{c.BC_TOTAL}})</h2>
-  <table id='bc_{{c.id}}' width='100%'>
-  <tr>
-  {% for bc in c.blessingcurse_set.all %}
-  <td>{{ bc.blessing_curse_ref.reference|safe }}</td>
-  <td>{{ bc.blessing_curse_ref.value }}</td>
-  <td>{{ bc.description }}</td>
-  </tr>
-  {% endfor %}
-  </table>
-  {%else%}
-  &nbsp;
-  {%endif%}
-</td><th>
-  {% if c.beneficeaffliction_set.count != 0 %}
-  <h2>Benefices/Afflictions ({{c.BA_TOTAL}})</h2>
-  <table width='100%'>
-  <tr>
-  {% for ba in c.beneficeaffliction_set.all %}
-  <td>{{ ba.benefice_affliction_ref.reference|safe }}</td>
-  <td>{{ ba.benefice_affliction_ref.description|safe }}</td>
-  <td>{{ ba.benefice_affliction_ref.value }}</td>
-  </tr>
-  {% endfor %}
-  </table>
-  {%else%}
-  &nbsp;
-  {%endif%}
-
-
-
-</th><td>
-  {% if c.talent_set.count != 0 %}
-  <h2>Talents ({{c.TA_TOTAL}})</h2>
-  <table>
-  {% for t in c.talent_set.all|dictsortreversed:"value" %}
-  <tr>
-  <td>{{ t.name }}</td>
-  <td>{{ t.talent_ref.reference }}</td>
-  <td>{{ t.value }}</td>
-  <td>{{ t.description }}</td>
-  </tr>
-  {% endfor %}
-  </table>
-  {%else%}
-
-  &nbsp;
-
-  {%endif%}
-
-</td>
-</tr>
-<table>
-
-
-{% comment %}
-{{c.build_log|linebreaks|safe}}
-{% endcomment %}
-
-
-{% if c.weapon_set.count != 0 %}
-<h2>Weapons ({{c.weapon_cost}})</h2>
-<table>{% for w in c.weapon_set.all|dictsort:"weapon_ref.reference" %}
-<tr><td>{{ w.weapon_ref.reference|safe }}</td>
-<td>CA:{{ w.weapon_ref.category }}</td>
-<td>WA:{{ w.weapon_ref.weapon_acccuracy }}</td>
-<td>CO:{{ w.weapon_ref.conceilable }}</td>
-<td>A:{{ w.weapon_ref.availability }}</td>
-<td>DC:{{ w.weapon_ref.damage_class }}</td>
-<td>Cal:{{ w.weapon_ref.caliber|safe }}</td>
-<td>STR:{{ w.weapon_ref.str_min }}</td>
-<td>RoF:{{ w.weapon_ref.rof }}</td>
-<td>Clip:{{ w.weapon_ref.clip }}</td>
-<td>RNG:{{ w.weapon_ref.rng|safe }}</td>
-<td>REL:{{ w.weapon_ref.rel|safe }}</td>
-<td>{{ w.weapon_ref.cost|safe }}£</td>
-<td>{{ w.weapon_ref.origins|safe }}</td>
-</tr>
-{% endfor %}
-</table>
-{%endif%}
-
-
-{% if c.armor_set.count != 0 %}
-<h2>Armor ({{c.armor_cost}})</h2>
-<table>{% for a in c.armor_set.all|dictsort:"armor_ref.stopping_power" %}
-<tr><td>{{ a.armor_ref.reference|safe }} <i class='fa fa-caret-up fa-xs'></i> {{a.armor_ref.category}} <i class='fa fa-caret-up fa-xs'></i> SP:{{ a.armor_ref.stopping_power }} <i class='fa fa-caret-up fa-xs'></i> Protection [
-{% if a.armor_ref.head %} Head {%endif%}
-{% if a.armor_ref.torso %} Torso {%endif%}
-{% if  a.armor_ref.left_arm %} LeftArm {%endif%}
-{% if a.armor_ref.right_arm %} RightArm {%endif%}
-{% if a.armor_ref.left_leg %} LeftLeg {%endif%}
-{% if a.armor_ref.right_leg %} RightLeg {%endif%}
-{% if not a.armor_ref.description is empty %}]<br/>{{ a.armor_ref.description|safe }}{% endif %}</td></tr>
-{% endfor %}</table>
-{%endif%}
-
-{% if c.shield_set.count != 0 %}
-<h2>Energy Shield ({{c.shield_cost}})</h2>
-<table>{% for s in c.shield_set.all|dictsort:"shield_ref.reference" %}
-<tr><td>{{ s.shield_ref.reference|safe }} <i class='fa fa-caret-up fa-xs'></i> {{s.shield_ref.protection_min}}/{{ s.shield_ref.protection_max }} <i class='fa fa-caret-up fa-xs'></i> Hits:{{s.shield_ref.hits}} <i class='fa fa-caret-up fa-xs'></i> {% if s.shield_ref.is_compatible_with_medium_armor %}(+Medium Armor){%endif%} {% if s.shield_ref.is_compatible_with_hard_armor %}(+Hard Armor){%endif%}
-{% if not s.shield_ref.description is empty %}<br/>{{ s.shield_ref.description|safe }}{% endif %}</td></tr>
-{% endfor %}</table>
-{%endif%}
-
 
 <div class='narrative'>
 {{ c.narrative|parse_avatars|safe }}

@@ -43,7 +43,7 @@ def as_bullets_short(value):
   """ Change int value to list of bullet (Mark Rein*Hagen like)
   """
   one_veryhigh = '<i class="fas fa-circle fa-xs veryhigh" title="%d"></i>'%(value)
-  one_high = '<i class="fas fa-circle fa-xs high" title="%d"></i>'%(value)  
+  one_high = '<i class="fas fa-circle fa-xs high" title="%d"></i>'%(value)
   one_medium = '<i class="fas fa-circle fa-xs medium" title="%d"></i>'%(value)
   one_low = '<i class="fas fa-circle fa-xs low" title="%d"></i>'%(value)
   blank = '<i class="fas fa-circle fa-xs blank" title="%d"></i>'%(value)
@@ -78,7 +78,7 @@ def parse_avatars(value):
   iter = seeker.finditer(res)
   for item in iter:
     rid = ''.join(item.group().split('¤'))
-    ch = Character.objects.filter(rid=rid).first()    
+    ch = Character.objects.filter(rid=rid).first()
     if not ch is None:
       repstr = '<span id="%s" class="embedded_link" title="%s">%s%s</span>'%(ch.rid, ch.entrance, ch.full_name, ' (€)' if ch.is_exportable else '')
     else:
@@ -206,9 +206,32 @@ def as_specialty(value):
   x = value.split('(')[1]
   val = x.split(')')[0]
   return "&gt;&nbsp;<i>%s</i>"%(val)
-  
+
 
 @register.filter(name='as_lifepath')
 def as_lifepath(value):
   lp = ['Race','Upbringing','Apprenticeship','Early Career','Tour of Duty','Worldly Benefits']
   return "%s"%(lp[int(value)])
+
+
+@register.filter(name='prettybool')
+
+def prettybool(value):
+    """ Display a boolean mark"""
+    if value == True:
+        res = '<i class="fas fa-check fa-xs"></i>'
+    else:
+        res = '<i class="fas fa-times fa-xs"></i>'
+    return res
+
+@register.filter(name='as_height')
+def as_height(value):
+    """ Display height in meters """
+    res = "%2.2f m"%(value/100)
+    return res
+
+@register.filter(name='as_weight')
+def as_weight(value):
+    """ Display weight in kilograms """
+    res = "%3d kg"%(value)
+    return res
