@@ -26,6 +26,7 @@ class FormlessUpdater{
 		$("#"+prefix+"_add").off("click").on("click",function(e){
 		    let i = $("#"+prefix+"_select :selected");
             let anurl = 'ajax/character/add/'+prefix+"/"+self.avatar+"/"+i.val()+'/';
+            $("#"+prefix+"_block_"+self.avatar).addClass("working");
             console.log(anurl);
 
    		    $.ajax({
@@ -39,6 +40,7 @@ class FormlessUpdater{
 			    success: function(answer) {
                     $("#"+prefix+"_block_"+answer.c["id"]).html(answer.block);
                     $("#"+prefix+"_custo_block").html(answer.custo_block);
+                    $("#"+prefix+"_block_"+answer.c["id"]).removeClass("working");
                     self.prepareEvents();
                     rebootlinks();
 		 	    },
@@ -53,7 +55,7 @@ class FormlessUpdater{
     		    let i = $("#"+prefix+"_unselect :selected");
                 let anurl = 'ajax/character/del/'+prefix+"/"+self.avatar+"/"+i.val()+'/';
                 console.log(anurl);
-
+                $("#"+prefix+"_block_"+self.avatar).addClass("working");
        		    $.ajax({
                     url: anurl,
                     method: 'POST',
@@ -65,6 +67,7 @@ class FormlessUpdater{
     			    success: function(answer) {
                         $("#"+prefix+"_block_"+answer.c["id"]).html(answer.block);
                         $("#"+prefix+"_custo_block").html(answer.custo_block);
+                        $("#"+prefix+"_block_"+answer.c["id"]).removeClass("working");
                         self.prepareEvents();
                         rebootlinks();
     		 	    },
@@ -75,5 +78,39 @@ class FormlessUpdater{
     	 	    });
     	    });
         }
+        $('span.skill_pick').off().on('click',function(event){
+            block = $(this).parent();
+            idarr = $(this).attr('id').split('_');
+            skill_id = idarr[2]
+            avatar_id = idarr[1]
+            fingerval = 0;
+            if ($(this).hasClass('fa-plus-circle')){
+                fingerval = 1;
+            }
+            if ($(this).hasClass('fa-minus-circle')){
+                fingerval = -1;
+            }
+            $.ajax({
+                url: 'ajax/character/pick/skill/'+avatar_id+'/'+skill_id+'/',
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                dataType:'json',
+                data: {skill:skill_id,finger:fingerval},
+                success: function(answer) {
+                    console.log(answer);
+                    $("#"+prefix+"_block_"+answer.c["id"]).html(answer.block);
+                    $("#"+prefix+"_custo_block").html(answer.custo_block);
+                    $("#"+prefix+"_block_"+answer.c["id"]).removeClass("working");
+                },
+                error: function(answer){
+                    console.log(answer);
+                    $('th#'+target).html(answer.responseText);
+                },
+            });
+        });
+
     }
 }

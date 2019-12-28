@@ -102,13 +102,44 @@ class CharacterUpdateView(AjaxFromResponseMixin,UpdateView):
         return context
 
 @csrf_exempt
+def skill_pick(request, avatar, item, offset):
+    """ Touching skills to edit them in the view """
+    ch = Character.objects.get(pk=avatar)
+    skill_item = get_object_or_404(Skill,id=item)
+    skill_item.value += offset
+    skill_item.save()
+    ch.save()
+    context["c"] = model_to_dict(ch)
+    template = get_template('collector/character/character_skills.html')
+    context["block"] = template.render({'c':ch})
+    template = get_template('collector/custo/skill_custo_block.html')
+    context["custo_block"] = template.render({'c':ch})
+    return JsonResponse(context)
+
+
+
+
+@csrf_exempt
 def customize_skill(request,avatar,item):
+    from collector.models.skill_ref import SkillRef
+    from collector.models.character_custo import CharacterCusto
+    from collector.models.skill_custo import SkillCusto
     context = {}
-    context["avatar"] = avatar
-    context["touched"] = item
-    print(avatar)
-    print(item)
-    return context
+    ch = Character.objects.get(pk=avatar)
+    ref = SkillRef.objects.get(pk=item)
+    new_item = SkillCusto()
+    new_item.character_custo = ch.charactercusto
+    new_item.skill_ref = ref
+    new_item.value = 1
+    new_item.save()
+    ch.save()
+    context["c"] = model_to_dict(ch)
+    template = get_template('collector/character/character_skills.html')
+    context["block"] = template.render({'c':ch})
+    template = get_template('collector/custo/skill_custo_block.html')
+    context["custo_block"] = template.render({'c':ch})
+    messages.info(request, 'Avatar %s customized with skill %s at +1.'%(ch.full_name,new_item.skill_ref.reference))
+    return JsonResponse(context)
 
 @csrf_exempt
 def customize_bc(request,avatar,item):

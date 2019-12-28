@@ -987,6 +987,12 @@ body {
         }
     }
 
+    & .working {
+        & table {
+            background: $fics_hl;
+        }
+    }
+
     & #messenger {
         position: fixed;
         width: 400px;

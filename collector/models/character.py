@@ -176,11 +176,11 @@ class Character(models.Model):
             if sc != '':
                 tmp_shortcuts.append(sc)
         gm_shortcuts = ''.join(tmp_shortcuts)
-        gm_shortcuts += fs_fics7.check_attacks(self)
-        gm_shortcuts += fs_fics7.check_health(self)
-        gm_shortcuts += fs_fics7.check_defense(self)
-        if not self.player:
-            gm_shortcuts += fs_fics7.check_nameless_attributes(self)
+        #gm_shortcuts += fs_fics7.check_attacks(self)
+        #gm_shortcuts += fs_fics7.check_health(self)
+        #gm_shortcuts += fs_fics7.check_defense(self)
+        #if not self.player:
+        #        gm_shortcuts += fs_fics7.check_nameless_attributes(self)
         self.gm_shortcuts = gm_shortcuts
         self.is_exportable = self.check_exportable()
         logger.info('>>> %s %s' % (self.rid, self.is_exportable))
@@ -195,7 +195,7 @@ class Character(models.Model):
         from collector.models.benefice_affliction_ref import BeneficeAfflictionRef
         self.ba_options = []
         self.ba_options_not = []
-        ss = self.beneficeaffliction_set.all()
+        ss = self.charactercusto.beneficeafflictioncusto_set.all()
         bar = []
         for x in ss:
             bar.append(x.benefice_affliction_ref)
@@ -213,7 +213,7 @@ class Character(models.Model):
         from collector.models.blessing_curse_ref import BlessingCurseRef
         self.bc_options = []
         self.bc_options_not = []
-        bcs = self.blessingcurse_set.all()
+        bcs = self.charactercusto.blessingcursecusto_set.all()
         bcr = []
         for x in bcs:
             bcr.append(x.blessing_curse_ref)

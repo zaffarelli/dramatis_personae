@@ -1,0 +1,22 @@
+        <table >
+            <tr>
+                <td>
+                    {% if skill.skill_ref.is_root %}
+                    <strong>
+                    {% endif %}
+                    {% if skill.skill_ref.is_speciality %}
+                    &nbsp;&nbsp;&nbsp;
+                    {% endif %}
+                    {{ skill.skill_ref.reference|safe }}
+                    {% if skill.skill_ref.is_root %}
+                    </strong>
+                    {% endif %}
+                </td>
+                <th class='edit'>
+                    <span id="skill_plus_{{c.id}}_{{skill.id}}" class='edit_icon skill_pick fa fa-plus-circle'></span><span id="skill_minus_{{c.id}}_{{skill.id}}" class='edit_icon skill_pick fa fa-minus-circle'></span>
+                </th>
+                <th id='val_{{skill.id}}'>
+                    {{ skill.value|as_bullets_short|safe }}
+                </th>
+            </tr>
+        </table>

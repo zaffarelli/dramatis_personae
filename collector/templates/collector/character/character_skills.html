@@ -1,47 +1,12 @@
 {%load fics_filters%}
 {%load static%}
-
-
-{% if no_skill_edit %}
-
 {% if c.skill_set.count != 0 %}
 <h2>Skills ({{c.SK_TOTAL}})</h2>
 <div class='skillsview'>
-{% for skill in c.skill_set.all|dictsort:"skill_ref.reference" %}
-<table>
-<tr><td>{% if skill.skill_ref.is_root %}<strong>{% endif %}
-				{% if skill.skill_ref.is_speciality %}- &nbsp;&nbsp;{% endif %}
-        {% if skill.skill_ref.is_common == False %}<em>{% endif %}
-			  {{ skill.skill_ref.reference|safe }}
-        {% if skill.skill_ref.is_common == False %}</em>{% endif %}
-				{% if skill.skill_ref.is_root %}</strong>{% endif %}
-</td>
-<th id='val_{{skill.id}}' class='skill_dot' colspan=2>{{ skill.value|as_bullets_short|safe }}</th></tr>
-</table>
-{% endfor %}
+    {% for skill in c.skill_set.all|dictsort:"skill_ref.reference" %}
+        <span id='sk_{{skill.id}}'>
+            {% include "collector/character/character_skill.html"%}
+        </span>
+    {% endfor %}
 </div>
-{% endif %}
-
-
-{% else %}
-{% if c.skill_set.count != 0 %}
-<h2>Skills ({{c.SK_TOTAL}})</h2>
-<div class='skillsview'>
-{% for skill in c.skill_set.all|dictsort:"skill_ref.reference" %}
-<table>
-<tr><td>{% if skill.skill_ref.is_root %}<strong>{% endif %}
-				{% if skill.skill_ref.is_speciality %}&nbsp;&nbsp;&nbsp;{% endif %}
-			  {{ skill.skill_ref.reference|safe }}
-				{% if skill.skill_ref.is_root %}</strong>{% endif %}
-</td>
-<th class='edit' id='sk_{{skill.id}}'><span class='edit_icon fa fa-plus-circle'></span><span class='edit_icon fa fa-minus-circle'></span></th>
-<th id='val_{{skill.id}}'>{{ skill.value|as_bullets_short|safe }}</th>
-</tr>
-</table>
-{% endfor %}
-<!-- table>
-<tr><td colspan=2 class='edit'><span class='fa fa-minus-circle'>Add Skill</span></td></tr>
-</table -->
-</div>
-{% endif %}
 {% endif %}

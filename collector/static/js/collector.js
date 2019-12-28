@@ -460,6 +460,7 @@ function rebootlinks(){
             }
         });
     });
+    /*
     // Touching skills
     $('th.edit span.fa').off().on('click',function(event){
         block = $(this).parent();
@@ -493,6 +494,7 @@ function rebootlinks(){
             },
         });
     });
+    */
     $('.tabber').off().on('click', function(event){
         var x = $(this).attr('id');
         $('.tabs').removeClass('tab_up');

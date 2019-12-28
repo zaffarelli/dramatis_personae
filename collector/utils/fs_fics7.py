@@ -78,7 +78,7 @@ def check_gm_shortcuts(ch,sk):
   """ Check for Gamemaster shortcuts for the character """
   if sk.skill_ref.reference in SHORTCUTS:
     score = sk.value + getattr(ch,SHORTCUTS[sk.skill_ref.reference]['attribute'])
-    newshortcut = '<p>%s (%s): <b>%d</b></p>'%(SHORTCUTS[sk.skill_ref.reference]['rationale'],SHORTCUTS[sk.skill_ref.reference]['label'],score)
+    newshortcut = '<tr><td>%s</td><td colspan=4>%s</td><td>%d</td></tr>'%(SHORTCUTS[sk.skill_ref.reference]['rationale'],SHORTCUTS[sk.skill_ref.reference]['label'],score)
     return newshortcut
   else:
     return ''

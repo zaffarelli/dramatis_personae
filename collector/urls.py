@@ -6,7 +6,7 @@
 from django.conf.urls import url
 from django.urls import path, re_path
 from collector.views.basic import skill_touch, pdf_show
-from collector.views.characters import CharacterDetailView, CharacterUpdateView, customize_ba, customize_bc, customize_skill, customize_ba_del, customize_bc_del
+from collector.views.characters import CharacterDetailView, CharacterUpdateView, customize_ba, customize_bc, customize_skill, customize_ba_del, customize_bc_del, skill_pick
 from collector.views.frontend import index, view_by_rid,get_list, add_character, get_storyline, conf_details, recalc_character, recalc_pa_character, recalc_skills_character, update_messenger
 from collector.views.backend import recalc,export,xls_update,pdf_character, gss_update, pdf_rules
 from collector.views.misc_chart import get_chardar, get_population_statistics, get_keywords
@@ -28,7 +28,7 @@ urlpatterns = [
   re_path('^ajax/pdf/character/(?P<id>\d+)/$', pdf_character, name='pdf_character'),
   re_path('^ajax/list/(?P<slug>[\w-]+)/(?P<id>\d+)/$', get_list, name='get_list'),
   re_path('^ajax/storyline/(?P<slug>[\w-]+)/$', get_storyline, name='get_storyline'),
-  re_path('^ajax/skill_touch/$', skill_touch, name='skill_touch'),
+  #re_path('^ajax/skill_touch/$', skill_touch, name='skill_touch'),
   re_path('^ajax/add/character/$', add_character, name='add_character'),
   re_path('^ajax/conf_details/$', conf_details, name='conf_details'),
   re_path('^ajax/build_pdf_rules/$', pdf_rules, name='pdf_rules'),
@@ -40,7 +40,7 @@ urlpatterns = [
   re_path('^ajax/character/add/skill/(?P<avatar>[\d]+)/(?P<item>\d+)/$',customize_skill,name='customize_skill'),
   re_path('^ajax/character/add/ba/(?P<avatar>[\d]+)/(?P<item>\d+)/$',customize_ba,name='customize_ba'),
   re_path('^ajax/character/add/bc/(?P<avatar>\d+)/(?P<item>\d+)/$',customize_bc,name='customize_bc'),
-  #re_path('^ajax/character/del/skill/(?P<avatar>[\d]+)/(?P<item>\d+)/$',customize_skill,name='customize_skill'),
   re_path('^ajax/character/del/ba/(?P<avatar>[\d]+)/(?P<item>\d+)/$',customize_ba_del,name='customize_ba_del'),
   re_path('^ajax/character/del/bc/(?P<avatar>\d+)/(?P<item>\d+)/$',customize_bc_del,name='customize_bc_del'),
+  re_path('^ajax/character/pick/skill/(?P<avatar>\d+)/(?P<item>\d+)/$',skill_pick,name='skill_pick'),
 ]

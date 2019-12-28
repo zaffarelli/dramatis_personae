@@ -15,24 +15,24 @@
 <ul class='unbreakable'>
     <li><b>Alliance</b>{{ c.alliance|safe }}</li>
     <li><b>Birthdate</b>{{ c.birthdate }} ({{ c.age }} years old)</li>
+    <li><b>Species</b>{{ c.specie }}</li>
     <li><b>Caste</b>{{ c.caste }}</li>
     <li><b>Native Fief</b>{{ c.native_fief }}</li>
     <li><b>Rank</b>{{ c.rank }}</li>
     <li><b>Height</b>{{ c.height|as_height }}</li>
     <li><b>Weight</b>{{ c.weight|as_weight }}</li>
-    <li><b>Occult Level</b><span class='edit' id='occult_level'><span class='edit_icon fa fa-plus-circle'></span><span class='edit_icon fa fa-minus-circle'></span></span>&nbsp;{{ c.occult_level|as_bullets_short|safe }}</li>
-    <li><b>Occult Darkside</b><span class='edit' id='occult_darkside'><span class='edit_icon fa fa-plus-circle'></span><span class='edit_icon fa fa-minus-circle'></span></span>&nbsp;{{ c.occult_darkside|as_bullets_short|safe }}</li>
 </ul>
 <span class='pagebreaker'>&nbsp;</span>
 <ul class='unbreakable'>
     <li><b>Player</b>{{ c.player }}</li>
-    <li><b>Role</b>{{ c.role }}</li>
     <li><b>Keyword</b>{{ c.keyword }}</li>
-    <li><b>Profile</b>{{ c.profile }}</li>
     <li><b>ID</b>{{c.id}}</li>
     <li><b>Dead</b>{{ c.is_dead|prettybool|safe }}</li>
     <li><b>Visible</b>{{c.is_visible|prettybool|safe}}</li>
     <li><b>Lifepaths</b>{{c.use_history_creation|prettybool|safe}}</li>
+    <li><b>Occult Level</b><span class='edit' id='occult_level'><span class='edit_icon fa fa-plus-circle'></span><span class='edit_icon fa fa-minus-circle'></span></span>&nbsp;{{ c.occult_level|as_bullets_short|safe }}</li>
+    <li><b>Occult Darkside</b><span class='edit' id='occult_darkside'><span class='edit_icon fa fa-plus-circle'></span><span class='edit_icon fa fa-minus-circle'></span></span>&nbsp;{{ c.occult_darkside|as_bullets_short|safe }}</li>
+
 </ul>
 <span class='pagebreaker'>&nbsp;</span>
 {% if c.tourofduty_set.count != 0 %}
@@ -51,7 +51,9 @@
     {% include "collector/character/character_primaries.html" %}
     {% include "collector/character/character_secondaries.html" %}
 </div>
+<span id="skill_block_{{c.id}}">
 {% include "collector/character/character_skills.html" %}
+</span>
 <div class='options'>
     <span id="bc_block_{{c.id}}">
     {% include "collector/character/character_bc.html" %}
@@ -59,7 +61,9 @@
     <span id="ba_block_{{c.id}}">
     {% include "collector/character/character_ba.html" %}
     </span>
-    {% include "collector/character/character_talents.html" %}
+    <span id="shortcuts_block_{{c.id}}">
+    {% include "collector/character/character_shortcuts.html" %}
+    </span>
 </div>
 <div class='gear'>
     {% include "collector/character/character_weapons.html" %}

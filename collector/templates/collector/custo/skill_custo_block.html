@@ -1,0 +1,13 @@
+<table class='expanded'>
+	<tr>
+		<th><span id='skill_add' class='edit_icon fa fa-arrow-alt-circle-left'></span></th>
+		<th>Add Skill at 1</th>
+		<td>
+			<select id='skill_select'>
+			{% for s in c.skills_options %}
+				<option value='{{s.id}}' style='width:15ex;'>{{s.reference}}</option>
+			{% endfor %}
+			</select>
+		</td>
+	</tr>
+</table>

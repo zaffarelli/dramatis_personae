@@ -8,24 +8,17 @@
 		<th>Avatar</th>
         <td>{{c.rid}}</td>
 	</tr>
-	<tr>
-		<th><span id='skill_add' class='edit_icon fa fa-arrow-alt-circle-left'></span></th>
-		<th>Add Skill at 1</th>
-		<td>
-			<select id='skill_select'>
-			{% for s in c.skills_options %}
-				<option value='{{s.id}}' style='width:15ex;'>{{s.reference}}</option>
-			{% endfor %}
-			</select>
-		</td>
-	</tr>
 </table>
-    <span id="bc_custo_block">
+<span id="skill_custo_block">
+    {% include "collector/custo/skill_custo_block.html"%}
+</span>
+
+<span id="bc_custo_block">
     {% include "collector/custo/bc_custo_block.html"%}
-    </span>
-    <span id="ba_custo_block">
+</span>
+<span id="ba_custo_block">
     {% include "collector/custo/ba_custo_block.html"%}
-    </span>
+</span>
 
 <table class='expanded'>
     <tr>
