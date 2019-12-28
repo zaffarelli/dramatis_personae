@@ -36,31 +36,31 @@
 {%else%}
 <table class="stats" id="phy">
 <tr>
-	<th>STR</th><td>{{c.PA_STR}}</td><td class='edit' id='attr_edit_STR'><span class='fa fa-plus-circle'></span><span class='fa fa-minus-circle'></span></td>
-	<th>CON</th><td>{{c.PA_CON}}</td><td class='edit' id='attr_edit_CON'><span class='fa fa-plus-circle'></span><span class='fa fa-minus-circle'></span></td>
+	<th>STR</th><td>{{c.PA_STR|as_bullets_short|safe}}</td><td class='edit' id='attr_edit_STR'><span class='edit_icon fa fa-plus-circle'></span><span class='edit_icon fa fa-minus-circle'></span></td>
+	<th>CON</th><td>{{c.PA_CON|as_bullets_short|safe}}</td><td class='edit' id='attr_edit_CON'><span class='edit_icon fa fa-plus-circle'></span><span class='edit_icon fa fa-minus-circle'></span></td>
 </tr><tr>
-	<th>BOD</th><td>{{c.PA_BOD}}</td><td class='edit' id='attr_edit_BOD'><span class='fa fa-plus-circle'></span><span class='fa fa-minus-circle'></span></td>
-	<th>MOV</th><td>{{c.PA_MOV}}</td><td class='edit' id='attr_edit_MOV'><span class='fa fa-plus-circle'></span><span class='fa fa-minus-circle'></span></td>
+	<th>BOD</th><td>{{c.PA_BOD|as_bullets_short|safe}}</td><td class='edit' id='attr_edit_BOD'><span class='edit_icon fa fa-plus-circle'></span><span class='edit_icon fa fa-minus-circle'></span></td>
+	<th>MOV</th><td>{{c.PA_MOV|as_bullets_short|safe}}</td><td class='edit' id='attr_edit_MOV'><span class='edit_icon fa fa-plus-circle'></span><span class='edit_icon fa fa-minus-circle'></span></td>
 </tr>
 </table>
 
 <table class="stats" id="spi">
 <tr>
-	<th>INT</th><td>{{c.PA_INT}}</td><td class='edit' id='attr_edit_INT'><span class='fa fa-plus-circle'></span><span class='fa fa-minus-circle'></span></td>
-	<th>WIL</th><td>{{c.PA_WIL}}</td><td class='edit' id='attr_edit_WIL'><span class='fa fa-plus-circle'></span><span class='fa fa-minus-circle'></span></td>
+	<th>INT</th><td>{{c.PA_INT|as_bullets_short|safe}}</td><td class='edit' id='attr_edit_INT'><span class='edit_icon fa fa-plus-circle'></span><span class='edit_icon fa fa-minus-circle'></span></td>
+	<th>WIL</th><td>{{c.PA_WIL|as_bullets_short|safe}}</td><td class='edit' id='attr_edit_WIL'><span class='edit_icon fa fa-plus-circle'></span><span class='edit_icon fa fa-minus-circle'></span></td>
 </tr><tr>
-	<th>TEM</th><td>{{c.PA_TEM}}</td><td class='edit' id='attr_edit_TEM'><span class='fa fa-plus-circle'></span><span class='fa fa-minus-circle'></span></td>
-	<th>PRE</th><td>{{c.PA_PRE}}</td><td class='edit' id='attr_edit_PRE'><span class='fa fa-plus-circle'></span><span class='fa fa-minus-circle'></span></td>
+	<th>TEM</th><td>{{c.PA_TEM|as_bullets_short|safe}}</td><td class='edit' id='attr_edit_TEM'><span class='edit_icon fa fa-plus-circle'></span><span class='edit_icon fa fa-minus-circle'></span></td>
+	<th>PRE</th><td>{{c.PA_PRE|as_bullets_short|safe}}</td><td class='edit' id='attr_edit_PRE'><span class='edit_icon fa fa-plus-circle'></span><span class='edit_icon fa fa-minus-circle'></span></td>
 </tr>
 </table>
 
 <table class="stats" id="com">
 <tr>
-	<th>TEC</th><td>{{c.PA_TEC}}</td><td class='edit' id='attr_edit_TEC'><span class='fa fa-plus-circle'></span><span class='fa fa-minus-circle'></span></td>
-	<th>REF</th><td>{{c.PA_REF}}</td><td class='edit' id='attr_edit_REF'><span class='fa fa-plus-circle'></span><span class='fa fa-minus-circle'></span></td>
+	<th>TEC</th><td>{{c.PA_TEC|as_bullets_short|safe}}</td><td class='edit' id='attr_edit_TEC'><span class='edit_icon fa fa-plus-circle'></span><span class='edit_icon fa fa-minus-circle'></span></td>
+	<th>REF</th><td>{{c.PA_REF|as_bullets_short|safe}}</td><td class='edit' id='attr_edit_REF'><span class='edit_icon fa fa-plus-circle'></span><span class='edit_icon fa fa-minus-circle'></span></td>
 </tr><tr>
-	<th>AGI</th><td>{{c.PA_AGI}}</td><td class='edit' id='attr_edit_AGI'><span class='fa fa-plus-circle'></span><span class='fa fa-minus-circle'></span></td>
-	<th>AWA</th><td>{{c.PA_AWA}}</td><td class='edit' id='attr_edit_AWA'><span class='fa fa-plus-circle'></span><span class='fa fa-minus-circle'></span></td>
+	<th>AGI</th><td>{{c.PA_AGI|as_bullets_short|safe}}</td><td class='edit' id='attr_edit_AGI'><span class='edit_icon fa fa-plus-circle'></span><span class='edit_icon fa fa-minus-circle'></span></td>
+	<th>AWA</th><td>{{c.PA_AWA|as_bullets_short|safe}}</td><td class='edit' id='attr_edit_AWA'><span class='edit_icon fa fa-plus-circle'></span><span class='edit_icon fa fa-minus-circle'></span></td>
 </tr>
 </table>
 

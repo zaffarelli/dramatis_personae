@@ -40,31 +40,31 @@ def as_bullets(value):
 @register.filter(name='as_bullets_short')
 
 def as_bullets_short(value):
-  """ Change int value to list of bullet (Mark Rein*Hagen like)
-  """
-  one_veryhigh = '<i class="fas fa-circle fa-xs veryhigh" title="%d"></i>'%(value)
-  one_high = '<i class="fas fa-circle fa-xs high" title="%d"></i>'%(value)
-  one_medium = '<i class="fas fa-circle fa-xs medium" title="%d"></i>'%(value)
-  one_low = '<i class="fas fa-circle fa-xs low" title="%d"></i>'%(value)
-  blank = '<i class="fas fa-circle fa-xs blank" title="%d"></i>'%(value)
-  x = 0
-  res = ''
-  while x<10:
-    if x<int(value):
-      if value>10:
-        res += one_veryhigh
-      elif value>7:
-        res += one_high
-      elif value>4:
-        res += one_medium
-      else:
-        res += one_low
-    else:
-      res += blank
-    if (x+1) % 10 == 0:
-      res += '<br/>'
-    x += 1
-  return res
+    """ Change int value to list of bullet (Mark Rein*Hagen like)
+    """
+    one_veryhigh = '<i class="fas fa-circle fa-xs veryhigh" title="%d"></i>'%(value)
+    one_high = '<i class="fas fa-circle fa-xs high" title="%d"></i>'%(value)
+    one_medium = '<i class="fas fa-circle fa-xs medium" title="%d"></i>'%(value)
+    one_low = '<i class="fas fa-circle fa-xs low" title="%d"></i>'%(value)
+    blank = '<i class="fas fa-circle fa-xs blank" title="%d"></i>'%(value)
+    x = 0
+    res = ''
+    while x<10:
+        if x<int(value):
+            if x>6:
+                res += one_veryhigh
+            elif x>4:
+                res += one_high
+            elif x>1:
+                res += one_medium
+            else:
+                res += one_low
+        else:
+            res += blank
+        if (x+1) % 10 == 0:
+            res += '<br/>'
+        x += 1
+    return res
 
 
 @register.filter(name='parse_avatars')

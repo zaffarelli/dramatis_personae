@@ -13,6 +13,8 @@ from scenarist.mixins.ajaxfromresponse import AjaxFromResponseMixin
 from django.urls import reverse_lazy
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
+from django.forms.models import model_to_dict
+from django.template.loader import get_template
 
 class CharacterDetailView(DetailView):
     model = Character
@@ -112,26 +114,96 @@ def customize_skill(request,avatar,item):
 def customize_bc(request,avatar,item):
     from collector.models.blessing_curse_ref import BlessingCurseRef
     from collector.models.character_custo import CharacterCusto
-    from collector.models.blessing_curse_modificator import BlessingCurseModificator
+    from collector.models.blessing_curse_custo import BlessingCurseCusto
     context = {}
-    context["avatar"] = avatar
-    context["item"] = item
-    # Create the link blessing curse in the custo
     ch = Character.objects.get(pk=avatar)
-    cu = CharacterCusto.objects.get(character=ch)
     bcr = BlessingCurseRef.objects.get(pk=item)
-    bcm = BlessingCurseModificator()
-    bcm.character_custo = cu
-    bcm.blessing_curse_ref = bcr
-    bcm.save()
+    bcc = BlessingCurseCusto()
+    bcc.character_custo = ch.charactercusto
+    bcc.blessing_curse_ref = bcr
+    bcc.save()
+    ch.save()
+    context["c"] = model_to_dict(ch)
+    template = get_template('collector/character/character_bc.html')
+    context["block"] = template.render({'c':ch})
+    template = get_template('collector/custo/bc_custo_block.html')
+    context["custo_block"] = template.render({'c':ch})
+    messages.info(request, 'Avatar %s customized with B/C %s.'%(ch.full_name,bcc.blessing_curse_ref.reference))
+    return JsonResponse(context)
+
+@csrf_exempt
+def customize_bc_del(request,avatar,item):
+    from collector.models.blessing_curse_ref import BlessingCurseRef
+    from collector.models.character_custo import CharacterCusto
+    from collector.models.blessing_curse_custo import BlessingCurseCusto
+    context = {}
     ch = Character.objects.get(pk=avatar)
-    cu = CharacterCusto.objects.get(character=ch)
-    context["c"] = ch
-    context["custo"] = cu
-    messages.info(request, 'Avatar %s customized with B/C %.'%(context['c']['full_name'].value(),bcm.reference))
+    bcr = BlessingCurseRef.objects.get(pk=item)
+    bcca = ch.charactercusto.blessingcursecusto_set.all()
+    bcc = None
+    for x in bcca:
+        if x.blessing_curse_ref == bcr:
+            bcc = x
+    if bcc:
+        txt = bcc.blessing_curse_ref.reference
+        bcc.delete()
+        ch.save()
+        context["c"] = model_to_dict(ch)
+        template = get_template('collector/character/character_bc.html')
+        context["block"] = template.render({'c':ch})
+        template = get_template('collector/custo/bc_custo_block.html')
+        context["custo_block"] = template.render({'c':ch})
+        messages.info(request, 'Avatar %s customized with B/C %s.'%(ch.full_name,txt))
+    else:
+        context["c"] = model_to_dict(ch)
+        messages.info(request, 'B/C not found for %s.'%(ch.full_name))
     return JsonResponse(context)
 
 @csrf_exempt
 def customize_ba(request,avatar,item):
-    print(avatar)
-    print(item)
+    from collector.models.benefice_affliction_ref import BeneficeAfflictionRef
+    from collector.models.character_custo import CharacterCusto
+    from collector.models.benefice_affliction_custo import BeneficeAfflictionCusto
+    context = {}
+    ch = Character.objects.get(pk=avatar)
+    bar = BeneficeAfflictionRef.objects.get(pk=item)
+    bac = BeneficeAfflictionCusto()
+    bac.character_custo = ch.charactercusto
+    bac.benefice_affliction_ref = bar
+    bac.save()
+    ch.save()
+    context["c"] = model_to_dict(ch)
+    template = get_template('collector/character/character_ba.html')
+    context["block"] = template.render({'c':ch})
+    template = get_template('collector/custo/ba_custo_block.html')
+    context["custo_block"] = template.render({'c':ch})
+    messages.info(request, 'Avatar %s customized with B/A %s.'%(ch.full_name,bac.benefice_affliction_ref.reference))
+    return JsonResponse(context)
+
+@csrf_exempt
+def customize_ba_del(request,avatar,item):
+    from collector.models.benefice_affliction_ref import BeneficeAfflictionRef
+    from collector.models.character_custo import CharacterCusto
+    from collector.models.benefice_affliction_custo import BeneficeAfflictionCusto
+    context = {}
+    ch = Character.objects.get(pk=avatar)
+    bcr = BeneficeAfflictionRef.objects.get(pk=item)
+    bcca = ch.charactercusto.beneficeafflictioncusto_set.all()
+    bcc = None
+    for x in bcca:
+        if x.benefice_affliction_ref == bcr:
+            bcc = x
+    if bcc:
+        txt = bcc.benefice_affliction_ref.reference
+        bcc.delete()
+        ch.save()
+        context["c"] = model_to_dict(ch)
+        template = get_template('collector/character/character_ba.html')
+        context["block"] = template.render({'c':ch})
+        template = get_template('collector/custo/ba_custo_block.html')
+        context["custo_block"] = template.render({'c':ch})
+        messages.info(request, 'Avatar %s customized with B/A %s.'%(ch.full_name,txt))
+    else:
+        context["c"] = model_to_dict(ch)
+        messages.info(request, 'B/A not found for %s.'%(ch.full_name))
+    return JsonResponse(context)

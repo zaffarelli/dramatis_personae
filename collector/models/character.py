@@ -99,32 +99,44 @@ class Character(models.Model):
     onsave_reroll_attributes = models.BooleanField(default=False)
     onsave_reroll_skills = models.BooleanField(default=False)
     lifepath_total = models.IntegerField(default=0)
-
-    #custo = models.ForeignKey(CharacterCusto, on_delete=models.CASCADE)
-    custo = None
-
-
     skills_options = []
     ba_options = []
     bc_options = []
+    skills_options_not = []
+    ba_options_not = []
+    bc_options_not = []
+    AP_tod_pool = 0
+    OP_tod_pool = 0
 
     def get_absolute_url(self):
         return reverse('view_character', kwargs={'pk': self.pk})
 
     def rebuild_from_lifepath(self):
         """ Historical Creation """
-        if self.custo:
-            self.custo.comment = self.full_name
-            self.custo.save()
         self.resetPA()
         self.purgeSkills()
+        self.purgeBC()
+        self.purgeBA()
+        self.purgeTalents()
+        self.AP_tod_pool = 0
+        self.OP_tod_pool = 0
         for tod in self.tourofduty_set.all():
-            tod.push(self)
+            AP, OP = tod.push(self)
+            self.AP_tod_pool += AP
+            self.OP_tod_pool += OP
+        if self.charactercusto:
+            self.charactercusto.comment = self.full_name
+            self.charactercusto.push(self)
+            self.charactercusto.save()
         fs_fics7.check_secondary_attributes(self)
         self.add_missing_root_skills()
         self.lifepath_total = 0
         for tod in self.tourofduty_set.all():
             self.lifepath_total += tod.tour_of_duty_ref.value
+        self.refresh_skills_options()
+        self.refresh_ba_options()
+        self.refresh_bc_options()
+        self.charactercusto.save()
 
     def rebuild_free_form(self):
         """ Freeform Creation """
@@ -155,7 +167,7 @@ class Character(models.Model):
         if self.use_history_creation:
             self.rebuild_from_lifepath()
         else:
-            self.rebuild_freeform()
+            self.rebuild_free_form()
         gm_shortcuts = ''
         tmp_shortcuts = []
         skills = self.skill_set.all()
@@ -172,10 +184,6 @@ class Character(models.Model):
         self.gm_shortcuts = gm_shortcuts
         self.is_exportable = self.check_exportable()
         logger.info('>>> %s %s' % (self.rid, self.is_exportable))
-        self.refresh_skills_options()
-        self.refresh_ba_options()
-        self.refresh_bc_options()
-
 
     def apply_racial_pa_mods(self):
         attr_mods = self.specie.get_racial_attr_mod()
@@ -186,35 +194,44 @@ class Character(models.Model):
     def refresh_ba_options(self):
         from collector.models.benefice_affliction_ref import BeneficeAfflictionRef
         self.ba_options = []
+        self.ba_options_not = []
         ss = self.beneficeaffliction_set.all()
         bar = []
         for x in ss:
             bar.append(x.benefice_affliction_ref)
         all = BeneficeAfflictionRef.objects.all()
         for s in all:
-            if s in ss:
-                print("Discarded: "+s.reference)
+            if s in bar:
+                #print("Discarded: "+s.reference)
+                self.ba_options_not.append(s)
             else:
+                #print(s.reference)
                 self.ba_options.append(s)
 
 
     def refresh_bc_options(self):
         from collector.models.blessing_curse_ref import BlessingCurseRef
         self.bc_options = []
-        ss = self.blessingcurse_set.all()
+        self.bc_options_not = []
+        bcs = self.blessingcurse_set.all()
         bcr = []
-        for x in ss:
+        for x in bcs:
             bcr.append(x.blessing_curse_ref)
+        print(bcr)
         all = BlessingCurseRef.objects.all()
-        for s in all:
-            if s in ss:
-                print("Discarded: "+s.reference)
+        print(all)
+        for bc in all:
+            if bc in bcr:
+                #print("BC Options not...... "+bc.reference)
+                self.bc_options_not.append(bc)
             else:
-                self.bc_options.append(s)
+                #print("BC Options.......... "+bc.reference)
+                self.bc_options.append(bc)
 
     def refresh_skills_options(self):
         from collector.models.skill_ref import SkillRef
         self.skills_options = []
+        self.skills_options_not = []
         ss = self.skill_set.all()
         sr = []
         for x in ss:
@@ -222,7 +239,8 @@ class Character(models.Model):
         all = SkillRef.objects.all().exclude(is_root=True)
         for s in all:
             if s in sr:
-                print("Discarded: "+s.reference)
+                #print("Discarded: "+s.reference)
+                self.skills_options_not.append(s)
             else:
                 self.skills_options.append(s)
                 #print(s.reference)
@@ -325,6 +343,24 @@ class Character(models.Model):
         for skill in self.skill_set.all():
             skill.delete()
         logger.debug('PurgeSkill count: %d' % (self.skill_set.all().count()))
+
+    def purgeTalents(self):
+        """ Deleting all character talents """
+        for talent in self.talent_set.all():
+            talent.delete()
+        logger.debug('PurgeTalent count: %d' % (self.talent_set.all().count()))
+
+    def purgeBC(self):
+        """ Deleting all character BC """
+        for bc in self.blessingcurse_set.all():
+            bc.delete()
+        logger.debug('PurgeBC count: %d' % (self.blessingcurse_set.all().count()))
+
+    def purgeBA(self):
+        """ Deleting all character BA """
+        for ba in self.beneficeaffliction_set.all():
+            ba.delete()
+        logger.debug('PurgeBA count: %d' % (self.beneficeaffliction_set.all().count()))
 
     def resetTotal(self):
         """ Compute all sums for all stats """

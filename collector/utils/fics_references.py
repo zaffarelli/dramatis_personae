@@ -22,8 +22,8 @@ import hashlib
   TOTAL ...................: 280 OP
 """
 
-MAX_CHAR = 20
-RELEASE = '1.4.0'
+MAX_CHAR = 12
+RELEASE = '1.5.0'
 DEBUG_ALL = False
 
 LIFEPATH_CATEGORY=(

@@ -547,7 +547,7 @@ def get_specialities_list(ch,root):
 
 def get_keywords():
   """ Get all keywords """
-  from collector.models.characters import Character
+  from collector.models.character import Character
   everybody = Character.objects.all()
   keywords = []
   for someone in everybody:

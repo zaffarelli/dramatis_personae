@@ -17,24 +17,31 @@ class TourOfDuty(models.Model):
 
   def push(self,ch):
     tod = self.tour_of_duty_ref
-    ch.PA_STR += tod.PA_STR
-    ch.PA_CON += tod.PA_CON
-    ch.PA_BOD += tod.PA_BOD
-    ch.PA_MOV += tod.PA_MOV
-    ch.PA_INT += tod.PA_INT
-    ch.PA_WIL += tod.PA_WIL
-    ch.PA_TEM += tod.PA_TEM
-    ch.PA_PRE += tod.PA_PRE
-    ch.PA_REF += tod.PA_REF
-    ch.PA_TEC += tod.PA_TEC
-    ch.PA_AGI += tod.PA_AGI
-    ch.PA_AWA += tod.PA_AWA
-    for sm in tod.skillmodificator_set.all():
-      ch.add_or_update_skill(sm.skill_ref,sm.value,True)
-    for bc in tod.blessingcursemodificator_set.all():
-      ch.add_bc(bc.blessing_curse_ref)
-    for ba in tod.beneficeafflictionmodificator_set.all():
-      ch.add_ba(ba.benefice_affliction_ref)
+    AP = 0
+    OP = 0
+    if tod.is_custom:
+        AP = tod.AP
+        OP = tod.OP
+    else:
+        ch.PA_STR += tod.PA_STR
+        ch.PA_CON += tod.PA_CON
+        ch.PA_BOD += tod.PA_BOD
+        ch.PA_MOV += tod.PA_MOV
+        ch.PA_INT += tod.PA_INT
+        ch.PA_WIL += tod.PA_WIL
+        ch.PA_TEM += tod.PA_TEM
+        ch.PA_PRE += tod.PA_PRE
+        ch.PA_REF += tod.PA_REF
+        ch.PA_TEC += tod.PA_TEC
+        ch.PA_AGI += tod.PA_AGI
+        ch.PA_AWA += tod.PA_AWA
+        for sm in tod.skillmodificator_set.all():
+            ch.add_or_update_skill(sm.skill_ref,sm.value,True)
+        for bc in tod.blessingcursemodificator_set.all():
+            ch.add_bc(bc.blessing_curse_ref)
+        for ba in tod.beneficeafflictionmodificator_set.all():
+            ch.add_ba(ba.benefice_affliction_ref)
+    return AP, OP
 
   def pull(self,ch):
     tod = self.update_tour_of_duty_ref

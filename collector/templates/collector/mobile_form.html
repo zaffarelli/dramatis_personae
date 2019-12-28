@@ -1,11 +1,15 @@
 <div class='mobile_form' id='customizer'>
-<h2 style='text-align:center;'>Avatar Customization</h2>
-<table>
+<table class='collapsed'>
+    <tr><td><span class='mobile_form_toggler action_icon fa fa-arrow-left'></td></tr>
+</table>
+<table class='expanded'>
 	<tr>
-		<th colspan=2>Avatar</th><td>{{c.rid}}</td>
+        <td><span class='mobile_form_toggler action_icon fa fa-arrow-right'></td>
+		<th>Avatar</th>
+        <td>{{c.rid}}</td>
 	</tr>
 	<tr>
-		<th><span id='skill_add' class='fa fa-arrow-alt-circle-left'></span></th>
+		<th><span id='skill_add' class='edit_icon fa fa-arrow-alt-circle-left'></span></th>
 		<th>Add Skill at 1</th>
 		<td>
 			<select id='skill_select'>
@@ -15,23 +19,35 @@
 			</select>
 		</td>
 	</tr>
-	<tr>
-		<th><span id='bc_add' class='fa fa-arrow-alt-circle-left'></span></th>
-		<th>Add B/C</th><td>
-			<select id='bc_select'>
-			{% for s in c.bc_options %}
-				<option value='{{s.id}}' style='width:15ex;'>{{s.reference}}</option>
-			{% endfor %}
-			</select>
-	</tr>
-	<tr>
-		<th><span id='ba_add' class='fa fa-arrow-alt-circle-left'></span></th>
-		<th>Add B/A</th><td>
-			<select id='ba_select'>
-			{% for s in c.ba_options %}
-				<option value='{{s.id}}' style='width:15ex;'>{{s.reference}}</option>
-			{% endfor %}
-			</select>
-	</tr>
+</table>
+    <span id="bc_custo_block">
+    {% include "collector/custo/bc_custo_block.html"%}
+    </span>
+    <span id="ba_custo_block">
+    {% include "collector/custo/ba_custo_block.html"%}
+    </span>
+
+<table class='expanded'>
+    <tr>
+    	<th><span id='ap_tod_pool' class='fa fa-check-circle'></span></th>
+    	<th>AP Tod Pool</th>
+        <th>{{ c.AP_tod_pool}} / {{ c.charactercusto.AP }}</th>
+    </tr>
+    <tr>
+    	<th><span id='ap_tod_pool' class='fa fa-check-circle'></span></th>
+    	<th>OP Tod Pool</th>
+        <th>{{ c.OP_tod_pool}} / {{ c.charactercusto.OP }}</th>
+    </tr>
+    <tr>
+    	<th><span id='current_custo' class='fa fa-check-circle'></span></th>
+    	<th colspan=2>Current Customization</th>
+    </tr>
+    <tr>
+        <th>&nbsp;</th>
+        <td colspan=2>
+            {{ c.charactercusto.summary|safe }}
+    	</td>
+    </tr>
+
 </table>
 </div>

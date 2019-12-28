@@ -1,0 +1,20 @@
+<table class='expanded'>
+	<tr>
+		<th><span id='ba_add' class='edit_icon fa fa-arrow-alt-circle-left'></span></th>
+		<th>Add B/A</th><td>
+			<select id='ba_select'>
+			{% for s in c.ba_options %}
+				<option value='{{s.id}}' style='width:15ex;'>{{s.reference}}</option>
+			{% endfor %}
+			</select>
+	</tr>
+	<tr>
+		<th><span id='ba_del' class='edit_icon fa fa-arrow-alt-circle-right'></span></th>
+		<th>Remove B/A</th><td>
+			<select id='ba_unselect'>
+			{% for s in c.ba_options_not %}
+				<option value='{{s.id}}' style='width:15ex;'>{{s.reference}}</option>
+			{% endfor %}
+			</select>
+	</tr>
+</table>

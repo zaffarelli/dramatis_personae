@@ -20,6 +20,8 @@
     <li><b>Rank</b>{{ c.rank }}</li>
     <li><b>Height</b>{{ c.height|as_height }}</li>
     <li><b>Weight</b>{{ c.weight|as_weight }}</li>
+    <li><b>Occult Level</b><span class='edit' id='occult_level'><span class='edit_icon fa fa-plus-circle'></span><span class='edit_icon fa fa-minus-circle'></span></span>&nbsp;{{ c.occult_level|as_bullets_short|safe }}</li>
+    <li><b>Occult Darkside</b><span class='edit' id='occult_darkside'><span class='edit_icon fa fa-plus-circle'></span><span class='edit_icon fa fa-minus-circle'></span></span>&nbsp;{{ c.occult_darkside|as_bullets_short|safe }}</li>
 </ul>
 <span class='pagebreaker'>&nbsp;</span>
 <ul class='unbreakable'>
@@ -51,8 +53,12 @@
 </div>
 {% include "collector/character/character_skills.html" %}
 <div class='options'>
+    <span id="bc_block_{{c.id}}">
     {% include "collector/character/character_bc.html" %}
+    </span>
+    <span id="ba_block_{{c.id}}">
     {% include "collector/character/character_ba.html" %}
+    </span>
     {% include "collector/character/character_talents.html" %}
 </div>
 <div class='gear'>

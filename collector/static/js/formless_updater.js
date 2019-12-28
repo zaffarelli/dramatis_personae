@@ -16,15 +16,14 @@ class FormlessUpdater{
 	prepareEvents(){
 		console.debug("Preparing Events");
 		let self = this;
-		this.doConnect("ba");
-		this.doConnect("bc");
+		this.doConnect("ba",true);
+		this.doConnect("bc",true);
 		this.doConnect("skill");
 	}
 
-	doConnect(prefix){
+	doConnect(prefix,symetric=false){
 		let self = this;
-		$("#"+prefix+"_add").off("click");
-		$("#"+prefix+"_add").on("click",function(e){
+		$("#"+prefix+"_add").off("click").on("click",function(e){
 		    let i = $("#"+prefix+"_select :selected");
             let anurl = 'ajax/character/add/'+prefix+"/"+self.avatar+"/"+i.val()+'/';
             console.log(anurl);
@@ -38,22 +37,43 @@ class FormlessUpdater{
                 },
                 dataType: 'json',
 			    success: function(answer) {
-                    /*
-			 		$(prefix+'_block_'+answer.id).html(answer.block);
-					$(prefix+'_block_'+answer.id).html(answer.block);
-			 		self.reset(answer.id,"sheet_"+answer.id,"customizer");
-                    */
-
-                    console.log(answer.avatar);
-                    console.log(answer.item);
-			 	    update_messenger();
+                    $("#"+prefix+"_block_"+answer.c["id"]).html(answer.block);
+                    $("#"+prefix+"_custo_block").html(answer.custo_block);
+                    self.prepareEvents();
+                    rebootlinks();
 		 	    },
                 error: function(answer){
-//                    $("#messenger").html(answer.responseText);
                     console.log(answer.responseText);
+                    rebootlinks();
 		 	    }
 	 	    });
 	    });
-        //console.log("  >> Adding "+prefix+" ["+i.text()+" / "+i.val()+"] to avatar "+self.avatar);
+        if (symetric == true){
+            $("#"+prefix+"_del").off("click").on("click",function(e){
+    		    let i = $("#"+prefix+"_unselect :selected");
+                let anurl = 'ajax/character/del/'+prefix+"/"+self.avatar+"/"+i.val()+'/';
+                console.log(anurl);
+
+       		    $.ajax({
+                    url: anurl,
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    dataType: 'json',
+    			    success: function(answer) {
+                        $("#"+prefix+"_block_"+answer.c["id"]).html(answer.block);
+                        $("#"+prefix+"_custo_block").html(answer.custo_block);
+                        self.prepareEvents();
+                        rebootlinks();
+    		 	    },
+                    error: function(answer){
+                        console.log(answer.responseText);
+                        rebootlinks();
+    		 	    }
+    	 	    });
+    	    });
+        }
     }
 }

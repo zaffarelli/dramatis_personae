@@ -34,7 +34,7 @@
 			  {{ skill.skill_ref.reference|safe }}
 				{% if skill.skill_ref.is_root %}</strong>{% endif %}
 </td>
-<th class='edit' id='sk_{{skill.id}}'><span class='fa fa-plus-circle'></span><span class='fa fa-minus-circle'></span></th>
+<th class='edit' id='sk_{{skill.id}}'><span class='edit_icon fa fa-plus-circle'></span><span class='edit_icon fa fa-minus-circle'></span></th>
 <th id='val_{{skill.id}}'>{{ skill.value|as_bullets_short|safe }}</th>
 </tr>
 </table>
