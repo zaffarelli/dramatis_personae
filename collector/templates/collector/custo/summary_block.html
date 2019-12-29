@@ -1,0 +1,23 @@
+<table class='expanded'>
+    <tr>
+    	<th><span id='ap_tod_pool' class='fa fa-check-circle'></span></th>
+    	<th>AP Tod Pool</th>
+        <th>{{ c.AP_tod_pool}} / {{ c.charactercusto.AP }}</th>
+    </tr>
+    <tr>
+    	<th><span id='ap_tod_pool' class='fa fa-check-circle'></span></th>
+    	<th>OP Tod Pool</th>
+        <th>{{ c.OP_tod_pool}} / {{ c.charactercusto.OP }}</th>
+    </tr>
+    <tr>
+    	<th><span id='current_custo' class='fa fa-check-circle'></span></th>
+    	<th colspan=2>Current Customization</th>
+    </tr>
+    <tr>
+        <th>&nbsp;</th>
+        <td colspan=2>
+            {{ c.charactercusto.summary|safe }}
+    	</td>
+    </tr>
+
+</table>

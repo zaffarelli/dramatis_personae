@@ -39,7 +39,11 @@ class CharacterCusto(models.Model):
                       + self.PA_REF + self.PA_TEC + self.PA_AGI + self.PA_AWA)
         self.AP += (self.occult_level - self.occult_darkside)
         for s in self.skillcusto_set.all():
-            self.OP += s.value
+            if s.value == 0:
+                s.delete()
+        for s in self.skillcusto_set.all():
+            if s.skill_ref.is_root == False:
+                self.OP += s.value
         for bc in self.blessingcursecusto_set.all():
             self.OP += bc.blessing_curse_ref.value
         for ba in self.beneficeafflictioncusto_set.all():
@@ -87,7 +91,8 @@ class CharacterCusto(models.Model):
         self.summary += "Skills"
         self.summary += "<ul>"
         for s in self.skillcusto_set.all():
-            self.summary += "<li>%s +%d</li>"%(s.skill_ref.reference,s.value)
+            if s.skill_ref.is_root == False:
+                self.summary += "<li>%s +%d</li>"%(s.skill_ref.reference,s.value)
         self.summary += "</ul>"
         self.summary += "Blessings/Curses"
         self.summary += "<ul>"
@@ -124,36 +129,23 @@ class CharacterCusto(models.Model):
         ''' Updating customization and avatar '''
         from collector.models.skill_custo import SkillCusto
         from collector.models.skill_ref import SkillRef
-        found_in_character = False
         found_in_custo = False
-        found_ch = None
         found_cu = None
-        for found_ch in self.character.skills_set.all():
-            if found_ch.skill_ref == skill_ref.id:
-                found_in_character = True
-                for found_cu in self.skillcusto_set.all():
-                    if found_cu.skill_ref.id == skill_ref.id:
-                        found_in_custo = True
-                        break
+        for found_cu in self.skillcusto_set.all():
+            if found_cu.skill_ref.id == skill_ref_id:
+                found_in_custo = True
                 break
-        if found_ch:
-            found_ch.value += value
-            found_ch.save()
-        else:
-            skill = Skill()
-            skill.character = self.character
-            skill.skill_ref = SkillRef.objects.get(pk=skill_ref.id)
-            skill.value = value
-            skill.save()
         if found_in_custo:
-            found_cu.value += value
+            #if found_cu.value+int(value)>0:
+            found_cu.value += int(value)
             found_cu.save()
         else:
             skill_custo = SkillCusto()
-            skill_custo.skill_ref = SkillRef.objects.get(pk=skill_ref.id)
-            skill_custo.value = value
-            skill_custo.character = self.character
-            skill_custo.save()
+            skill_custo.skill_ref = SkillRef.objects.get(pk=skill_ref_id)
+            if (int(value)>0):
+                skill_custo.value = int(value)
+                skill_custo.character_custo = self
+                skill_custo.save()
 
 @receiver(pre_save, sender=CharacterCusto, dispatch_uid='update_character_custo')
 def update_character_custo(sender, instance, conf=None, **kwargs):

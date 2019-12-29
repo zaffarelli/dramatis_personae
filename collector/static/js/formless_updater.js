@@ -41,6 +41,7 @@ class FormlessUpdater{
                     $("#"+prefix+"_block_"+answer.c["id"]).html(answer.block);
                     $("#"+prefix+"_custo_block").html(answer.custo_block);
                     $("#"+prefix+"_block_"+answer.c["id"]).removeClass("working");
+                    $("#summary_block").html(answer.summary);
                     self.prepareEvents();
                     rebootlinks();
 		 	    },
@@ -68,6 +69,7 @@ class FormlessUpdater{
                         $("#"+prefix+"_block_"+answer.c["id"]).html(answer.block);
                         $("#"+prefix+"_custo_block").html(answer.custo_block);
                         $("#"+prefix+"_block_"+answer.c["id"]).removeClass("working");
+                        $("#summary_block").html(answer.summary);
                         self.prepareEvents();
                         rebootlinks();
     		 	    },
@@ -79,35 +81,41 @@ class FormlessUpdater{
     	    });
         }
         $('span.skill_pick').off().on('click',function(event){
-            block = $(this).parent();
-            idarr = $(this).attr('id').split('_');
-            skill_id = idarr[2]
-            avatar_id = idarr[1]
-            fingerval = 0;
+            let idarr = $(this).attr('id').split('_');
+            console.log($(this).attr('id'))
+            console.log(idarr)
+            let avatar_id = idarr[2]
+            let skill_id = idarr[3]
+            let fingerval = 0;
             if ($(this).hasClass('fa-plus-circle')){
-                fingerval = 1;
+                fingerval = 51;
             }
             if ($(this).hasClass('fa-minus-circle')){
-                fingerval = -1;
+                fingerval = 49;
             }
+            console.log("sk_"+skill_id)
+            $("#sk_"+skill_id).addClass("working");
             $.ajax({
-                url: 'ajax/character/pick/skill/'+avatar_id+'/'+skill_id+'/',
+                url: 'ajax/character/pick/skill/'+avatar_id+'/'+skill_id+'/'+fingerval+'/',
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/x-www-form-urlencoded'
                 },
                 dataType:'json',
-                data: {skill:skill_id,finger:fingerval},
                 success: function(answer) {
                     console.log(answer);
-                    $("#"+prefix+"_block_"+answer.c["id"]).html(answer.block);
-                    $("#"+prefix+"_custo_block").html(answer.custo_block);
-                    $("#"+prefix+"_block_"+answer.c["id"]).removeClass("working");
+                    $("#sk_"+skill_id).removeClass("working");
+                    $("#sk_"+skill_id).html(answer.block);
+                    $("#summary_block").html(answer.summary);
+                    self.prepareEvents();
+                    rebootlinks();
                 },
                 error: function(answer){
                     console.log(answer);
-                    $('th#'+target).html(answer.responseText);
+                    $("#sk_"+skill_id).html(answer.block);
+                    self.prepareEvents();
+                    rebootlinks();
                 },
             });
         });

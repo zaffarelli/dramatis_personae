@@ -42,11 +42,11 @@ def as_bullets(value):
 def as_bullets_short(value):
     """ Change int value to list of bullet (Mark Rein*Hagen like)
     """
-    one_veryhigh = '<i class="fas fa-circle fa-xs veryhigh" title="%d"></i>'%(value)
-    one_high = '<i class="fas fa-circle fa-xs high" title="%d"></i>'%(value)
-    one_medium = '<i class="fas fa-circle fa-xs medium" title="%d"></i>'%(value)
-    one_low = '<i class="fas fa-circle fa-xs low" title="%d"></i>'%(value)
-    blank = '<i class="fas fa-circle fa-xs blank" title="%d"></i>'%(value)
+    one_veryhigh = '<i class="fas fa-circle fa-xs veryhigh" title="%d"></i>'%(int(value))
+    one_high = '<i class="fas fa-circle fa-xs high" title="%d"></i>'%(int(value))
+    one_medium = '<i class="fas fa-circle fa-xs medium" title="%d"></i>'%(int(value))
+    one_low = '<i class="fas fa-circle fa-xs low" title="%d"></i>'%(int(value))
+    blank = '<i class="fas fa-circle fa-xs blank" title="%d"></i>'%(int(value))
     x = 0
     res = ''
     while x<10:

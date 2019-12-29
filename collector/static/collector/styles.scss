@@ -988,7 +988,7 @@ body {
     }
 
     & .working {
-        & table {
+        & table, & table td, & table th {
             background: $fics_hl;
         }
     }

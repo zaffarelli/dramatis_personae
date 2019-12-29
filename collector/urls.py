@@ -5,7 +5,7 @@
 '''
 from django.conf.urls import url
 from django.urls import path, re_path
-from collector.views.basic import skill_touch, pdf_show
+from collector.views.basic import pdf_show
 from collector.views.characters import CharacterDetailView, CharacterUpdateView, customize_ba, customize_bc, customize_skill, customize_ba_del, customize_bc_del, skill_pick
 from collector.views.frontend import index, view_by_rid,get_list, add_character, get_storyline, conf_details, recalc_character, recalc_pa_character, recalc_skills_character, update_messenger
 from collector.views.backend import recalc,export,xls_update,pdf_character, gss_update, pdf_rules
@@ -42,5 +42,5 @@ urlpatterns = [
   re_path('^ajax/character/add/bc/(?P<avatar>\d+)/(?P<item>\d+)/$',customize_bc,name='customize_bc'),
   re_path('^ajax/character/del/ba/(?P<avatar>[\d]+)/(?P<item>\d+)/$',customize_ba_del,name='customize_ba_del'),
   re_path('^ajax/character/del/bc/(?P<avatar>\d+)/(?P<item>\d+)/$',customize_bc_del,name='customize_bc_del'),
-  re_path('^ajax/character/pick/skill/(?P<avatar>\d+)/(?P<item>\d+)/$',skill_pick,name='skill_pick'),
+  re_path('^ajax/character/pick/skill/(?P<avatar>\d+)/(?P<item>\d+)/(?P<offset>\d+)/$',skill_pick,name='skill_pick'),
 ]

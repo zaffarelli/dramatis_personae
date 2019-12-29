@@ -128,15 +128,17 @@ class Character(models.Model):
             self.charactercusto.comment = self.full_name
             self.charactercusto.push(self)
             self.charactercusto.save()
-        fs_fics7.check_secondary_attributes(self)
-        self.add_missing_root_skills()
+
         self.lifepath_total = 0
         for tod in self.tourofduty_set.all():
             self.lifepath_total += tod.tour_of_duty_ref.value
+        fs_fics7.check_secondary_attributes(self)
         self.refresh_skills_options()
         self.refresh_ba_options()
         self.refresh_bc_options()
         self.charactercusto.save()
+        self.add_missing_root_skills()
+        self.resetTotal()
 
     def rebuild_free_form(self):
         """ Freeform Creation """
@@ -379,9 +381,9 @@ class Character(models.Model):
         for s in skills:
             if not s.skill_ref.is_root:
                 self.SK_TOTAL += s.value
-        talents = self.talent_set.all()
-        for t in talents:
-            self.TA_TOTAL += t.value
+        # talents = self.talent_set.all()
+        # for t in talents:
+        #     self.TA_TOTAL += t.value
         blessingcurses = self.blessingcurse_set.all()
         for bc in blessingcurses:
             self.BC_TOTAL += bc.blessing_curse_ref.value
@@ -394,15 +396,15 @@ class Character(models.Model):
         weapons = self.weapon_set.all()
         for w in weapons:
             self.weapon_cost += w.weapon_ref.cost
-        self.OP += int(self.weapon_cost / 100)
+        #self.OP += int(self.weapon_cost / 100)
         armors = self.armor_set.all()
         for a in armors:
             self.armor_cost += a.armor_ref.cost
-        self.OP += int(self.armor_cost / 100)
+        #self.OP += int(self.armor_cost / 100)
         shields = self.shield_set.all()
         for s in shields:
             self.shield_cost += s.shield_ref.cost
-        self.OP += int(self.shield_cost / 100)
+        #self.OP += int(self.shield_cost / 100)
         return 'ok'
 
     def check_exportable(self, conf=None):

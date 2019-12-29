@@ -104,16 +104,19 @@ class CharacterUpdateView(AjaxFromResponseMixin,UpdateView):
 @csrf_exempt
 def skill_pick(request, avatar, item, offset):
     """ Touching skills to edit them in the view """
+    from collector.models.skill_ref import SkillRef
+    context = {}
+    offset = int(offset) -50;
     ch = Character.objects.get(pk=avatar)
-    skill_item = get_object_or_404(Skill,id=item)
-    skill_item.value += offset
-    skill_item.save()
+    skillref = SkillRef.objects.get(pk=item)
+    ch.charactercusto.add_or_update_skill(skillref.id,offset)
     ch.save()
+    skill = ch.skill_set.all().filter(skill_ref__id=item).first()
     context["c"] = model_to_dict(ch)
-    template = get_template('collector/character/character_skills.html')
-    context["block"] = template.render({'c':ch})
-    template = get_template('collector/custo/skill_custo_block.html')
-    context["custo_block"] = template.render({'c':ch})
+    template = get_template('collector/character/character_skill.html')
+    context["block"] = template.render({'c':ch, 'skill': skill})
+    template = get_template('collector/custo/summary_block.html')
+    context["summary"] = template.render({'c':ch})
     return JsonResponse(context)
 
 
@@ -138,6 +141,8 @@ def customize_skill(request,avatar,item):
     context["block"] = template.render({'c':ch})
     template = get_template('collector/custo/skill_custo_block.html')
     context["custo_block"] = template.render({'c':ch})
+    template = get_template('collector/custo/summary_block.html')
+    context["summary"] = template.render({'c':ch})
     messages.info(request, 'Avatar %s customized with skill %s at +1.'%(ch.full_name,new_item.skill_ref.reference))
     return JsonResponse(context)
 
@@ -159,6 +164,8 @@ def customize_bc(request,avatar,item):
     context["block"] = template.render({'c':ch})
     template = get_template('collector/custo/bc_custo_block.html')
     context["custo_block"] = template.render({'c':ch})
+    template = get_template('collector/custo/summary_block.html')
+    context["summary"] = template.render({'c':ch})
     messages.info(request, 'Avatar %s customized with B/C %s.'%(ch.full_name,bcc.blessing_curse_ref.reference))
     return JsonResponse(context)
 
@@ -185,6 +192,8 @@ def customize_bc_del(request,avatar,item):
         template = get_template('collector/custo/bc_custo_block.html')
         context["custo_block"] = template.render({'c':ch})
         messages.info(request, 'Avatar %s customized with B/C %s.'%(ch.full_name,txt))
+        template = get_template('collector/custo/summary_block.html')
+        context["summary"] = template.render({'c':ch})
     else:
         context["c"] = model_to_dict(ch)
         messages.info(request, 'B/C not found for %s.'%(ch.full_name))
@@ -208,6 +217,8 @@ def customize_ba(request,avatar,item):
     context["block"] = template.render({'c':ch})
     template = get_template('collector/custo/ba_custo_block.html')
     context["custo_block"] = template.render({'c':ch})
+    template = get_template('collector/custo/summary_block.html')
+    context["summary"] = template.render({'c':ch})
     messages.info(request, 'Avatar %s customized with B/A %s.'%(ch.full_name,bac.benefice_affliction_ref.reference))
     return JsonResponse(context)
 
@@ -233,6 +244,8 @@ def customize_ba_del(request,avatar,item):
         context["block"] = template.render({'c':ch})
         template = get_template('collector/custo/ba_custo_block.html')
         context["custo_block"] = template.render({'c':ch})
+        template = get_template('collector/custo/summary_block.html')
+        context["summary"] = template.render({'c':ch})
         messages.info(request, 'Avatar %s customized with B/A %s.'%(ch.full_name,txt))
     else:
         context["c"] = model_to_dict(ch)

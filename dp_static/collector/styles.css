@@ -663,7 +663,7 @@ body {
     display: none; }
   body .noPDF:before {
     content: '(x) '; }
-  body .working table {
+  body .working table, body .working table td, body .working table th {
     background: #494c49; }
   body #messenger {
     position: fixed;
