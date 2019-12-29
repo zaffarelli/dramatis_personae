@@ -49,7 +49,7 @@ class CharacterCusto(models.Model):
         for ba in self.beneficeafflictioncusto_set.all():
             self.OP += ba.benefice_affliction_ref.value
         self.value = self.AP*3 + self.OP
-        print("RECALCULATE!")
+        #print("RECALCULATE!")
         self.rebuild_summary()
 
     def rebuild_summary(self):

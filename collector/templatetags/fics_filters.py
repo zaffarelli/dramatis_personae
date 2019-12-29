@@ -235,3 +235,22 @@ def as_weight(value):
     """ Display weight in kilograms """
     res = "%3d kg"%(value)
     return res
+
+@register.filter(name='as_pa_short')
+def as_pa_short(value):
+    """ Display weight in kilograms """
+    PA = {
+          "PA_STR":"STR",
+          "PA_CON":"CON",
+          "PA_BOD":"BOD",
+          "PA_MOV":"MOV",
+          "PA_INT":"INT",
+          "PA_WIL":"WIL",
+          "PA_TEM":"TEM",
+          "PA_PRE":"PRE",
+          "PA_TEC":"TEC",
+          "PA_REF":"REF",
+          "PA_AGI":"AGI",
+          "PA_AWA":"AWA"
+        }
+    return PA[value]

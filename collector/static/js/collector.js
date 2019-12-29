@@ -414,10 +414,10 @@ function rebootlinks(){
     $('.character_name').off().on('click',function(event){
         event.preventDefault();
         event.stopPropagation();
-        console.log("TOUCHED character_name");
         var mine = $(this).parents('div.avatar_link').find('div.character_info');
         $('div.avatar_link').find('div.character_info').addClass('hidden');
         $(mine).toggleClass('hidden');
+        rebootlinks();
     });
     $('.recalc_skills_character').off().on('click',function(event){
         event.preventDefault();

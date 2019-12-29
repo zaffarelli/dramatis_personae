@@ -110,6 +110,7 @@ def skill_pick(request, avatar, item, offset):
     ch = Character.objects.get(pk=avatar)
     skillref = SkillRef.objects.get(pk=item)
     ch.charactercusto.add_or_update_skill(skillref.id,offset)
+    ch.fix()
     ch.save()
     skill = ch.skill_set.all().filter(skill_ref__id=item).first()
     context["c"] = model_to_dict(ch)
@@ -119,6 +120,27 @@ def skill_pick(request, avatar, item, offset):
     context["summary"] = template.render({'c':ch})
     return JsonResponse(context)
 
+@csrf_exempt
+def attr_pick(request, avatar, item, offset):
+    """ Touching skills to edit them in the view """
+    context = {}
+    offset = int(offset) -50;
+    ch = Character.objects.get(pk=avatar)
+    x = getattr(ch.charactercusto,item,-100)
+    if x==-100:
+        setattr(ch.charactercusto,item,offset)
+    else:
+        setattr(ch.charactercusto,item,x+offset)
+    print(item)
+    info = ("info_"+item.split("_")[1]).lower()
+    ch.fix()
+    ch.save()
+    context["c"] = model_to_dict(ch)
+    template = get_template('collector/character/character_pa.html')
+    context["block"] = template.render({'c':getattr(ch,info)})
+    template = get_template('collector/custo/summary_block.html')
+    context["summary"] = template.render({'c':ch})
+    return JsonResponse(context)
 
 
 
@@ -135,6 +157,7 @@ def customize_skill(request,avatar,item):
     new_item.skill_ref = ref
     new_item.value = 1
     new_item.save()
+    ch.fix()
     ch.save()
     context["c"] = model_to_dict(ch)
     template = get_template('collector/character/character_skills.html')
@@ -158,6 +181,7 @@ def customize_bc(request,avatar,item):
     bcc.character_custo = ch.charactercusto
     bcc.blessing_curse_ref = bcr
     bcc.save()
+    ch.fix()
     ch.save()
     context["c"] = model_to_dict(ch)
     template = get_template('collector/character/character_bc.html')
@@ -185,6 +209,7 @@ def customize_bc_del(request,avatar,item):
     if bcc:
         txt = bcc.blessing_curse_ref.reference
         bcc.delete()
+        ch.fix()
         ch.save()
         context["c"] = model_to_dict(ch)
         template = get_template('collector/character/character_bc.html')
@@ -211,6 +236,7 @@ def customize_ba(request,avatar,item):
     bac.character_custo = ch.charactercusto
     bac.benefice_affliction_ref = bar
     bac.save()
+    ch.fix()
     ch.save()
     context["c"] = model_to_dict(ch)
     template = get_template('collector/character/character_ba.html')
@@ -238,6 +264,7 @@ def customize_ba_del(request,avatar,item):
     if bcc:
         txt = bcc.benefice_affliction_ref.reference
         bcc.delete()
+        ch.fix()
         ch.save()
         context["c"] = model_to_dict(ch)
         template = get_template('collector/character/character_ba.html')

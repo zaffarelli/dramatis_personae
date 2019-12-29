@@ -107,12 +107,36 @@ class Character(models.Model):
     bc_options_not = []
     AP_tod_pool = 0
     OP_tod_pool = 0
+    info_str = {}
+    info_con = {}
+    info_bod = {}
+    info_mov = {}
+    info_int = {}
+    info_wil = {}
+    info_tem = {}
+    info_pre = {}
+    info_tec = {}
+    info_ref = {}
+    info_agi = {}
+    info_awa = {}
+
 
     def get_absolute_url(self):
         return reverse('view_character', kwargs={'pk': self.pk})
 
+    def get_pa(self,str):
+        context = {}
+        context["attribute"] = str
+        context["value"] = getattr(self,str)
+        context["id"] = self.id
+        return context
+
     def rebuild_from_lifepath(self):
         """ Historical Creation """
+        from collector.models.character_custo import CharacterCusto
+        found_custo = CharacterCusto.objects.filter(character=self).first()
+        if found_custo is None:
+            self.charactercusto = CharacterCusto.objects.create(character=self)
         self.resetPA()
         self.purgeSkills()
         self.purgeBC()
@@ -154,6 +178,19 @@ class Character(models.Model):
 
     def fix(self, conf=None):
         """ Check / calculate other characteristics """
+        self.info_str = self.get_pa("PA_STR")
+        self.info_con = self.get_pa("PA_CON")
+        self.info_bod = self.get_pa("PA_BOD")
+        self.info_mov = self.get_pa("PA_MOV")
+        self.info_int = self.get_pa("PA_INT")
+        self.info_wil = self.get_pa("PA_WIL")
+        self.info_tem = self.get_pa("PA_TEM")
+        self.info_pre = self.get_pa("PA_PRE")
+        self.info_tec = self.get_pa("PA_TEC")
+        self.info_ref = self.get_pa("PA_REF")
+        self.info_agi = self.get_pa("PA_AGI")
+        self.info_awa = self.get_pa("PA_AWA")
+
         if not conf:
             if self.birthdate < 1000:
                 self.birthdate = 5017 - self.birthdate
@@ -187,11 +224,12 @@ class Character(models.Model):
         self.is_exportable = self.check_exportable()
         logger.info('>>> %s %s' % (self.rid, self.is_exportable))
 
-    def apply_racial_pa_mods(self):
-        attr_mods = self.specie.get_racial_attr_mod()
-        for am in attr_mods:
-            v = getattr(self, am)
-            setattr(self, am, v+attr_mods[am])
+    # def apply_racial_pa_mods(self):
+    #     attr_mods = self.specie.get_racial_attr_mod()
+    #     for am in attr_mods:
+    #         v = getattr(self, am)
+    #         setattr(self, am, v+attr_mods[am])
+
 
     def refresh_ba_options(self):
         from collector.models.benefice_affliction_ref import BeneficeAfflictionRef
@@ -219,9 +257,9 @@ class Character(models.Model):
         bcr = []
         for x in bcs:
             bcr.append(x.blessing_curse_ref)
-        print(bcr)
+        #print(bcr)
         all = BlessingCurseRef.objects.all()
-        print(all)
+        #print(all)
         for bc in all:
             if bc in bcr:
                 #print("BC Options not...... "+bc.reference)
@@ -455,16 +493,16 @@ class Character(models.Model):
             return True
 
     # Save overrride to create custo
-    def save(self, force_insert=False, force_update=False):
-        from collector.models.character_custo import CharacterCusto
-        is_new = self.id is None
-        super(Character, self).save(force_insert, force_update)
-        if is_new:
-            self.custo = CharacterCusto.objects.create(character=self)
-        else:
-            found_custo = CharacterCusto.objects.filter(character=self).first()
-            if found_custo is None:
-                self.custo = CharacterCusto.objects.create(character=self)
+    # def save(self, force_insert=False, force_update=False):
+    #     from collector.models.character_custo import CharacterCusto
+    #     is_new = self.id is None
+    #     super(Character, self).save(force_insert, force_update)
+    #     if is_new:
+    #         self.custo = CharacterCusto.objects.create(character=self)
+    #     else:
+    #         found_custo = CharacterCusto.objects.filter(character=self).first()
+    #         if found_custo is None:
+    #             self.custo = CharacterCusto.objects.create(character=self)
 
 @receiver(pre_save, sender=Character, dispatch_uid='update_character')
 def update_character(sender, instance, conf=None, **kwargs):

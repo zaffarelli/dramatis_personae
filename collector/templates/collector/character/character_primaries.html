@@ -2,66 +2,43 @@
 {%load static%}
 
 
-{% if no_skill_edit %}
-<table class="stats" id="phy">
-<tr>
-	<th>STR</th><td colspan=2>{{c.PA_STR}}</td>
-	<th>CON</th><td colspan=2>{{c.PA_CON}}</td>
-</tr><tr>
-	<th>BOD</th><td colspan=2>{{c.PA_BOD}}</td>
-	<th>MOV</th><td colspan=2>{{c.PA_MOV}}</td>
-</tr>
+<table id="PA_STR_{{c.id}}" class='attrpick primary'>
+    {% include "collector/character/character_pa.html" with c=c.info_str %}
+</table>
+<table id="PA_CON_{{c.id}}" class='attrpick primary'>
+    {% include "collector/character/character_pa.html" with c=c.info_con %}
+</table>
+<table id="PA_BOD_{{c.id}}" class='attrpick primary'>
+    {% include "collector/character/character_pa.html" with c=c.info_bod %}
+</table>
+<table id="PA_MOV_{{c.id}}" class='attrpick primary'>
+    {% include "collector/character/character_pa.html" with c=c.info_mov %}
 </table>
 
-<table class="stats" id="spi">
-<tr>
-	<th>INT</th><td colspan=2>{{c.PA_INT}}</td>
-	<th>WIL</th><td colspan=2>{{c.PA_WIL}}</td>
-</tr><tr>
-	<th>TEM</th><td colspan=2>{{c.PA_TEM}}</td>
-	<th>PRE</th><td colspan=2>{{c.PA_PRE}}</td>
-</tr>
+
+<table id="PA_INT_{{c.id}}" class='attrpick primary'>
+    {% include "collector/character/character_pa.html" with c=c.info_int %}
+</table>
+<table id="PA_WIL_{{c.id}}" class='attrpick primary'>
+    {% include "collector/character/character_pa.html" with c=c.info_wil %}
+</table>
+<table id="PA_TEM_{{c.id}}" class='attrpick primary'>
+    {% include "collector/character/character_pa.html" with c=c.info_tem %}
+</table>
+<table id="PA_PRE_{{c.id}}" class='attrpick primary'>
+    {% include "collector/character/character_pa.html" with c=c.info_pre %}
 </table>
 
-<table class="stats" id="com">
-<tr>
-	<th>TEC</th><td colspan=2>{{c.PA_TEC}}</td>
-	<th>REF</th><td colspan=2>{{c.PA_REF}}</td>
-</tr><tr>
-	<th>AGI</th><td colspan=2>{{c.PA_AGI}}</td>
-	<th>AWA</th><td colspan=2>{{c.PA_AWA}}</td>
-</tr>
-</table>
 
-{%else%}
-<table class="stats" id="phy">
-<tr>
-	<th>STR</th><td>{{c.PA_STR|as_bullets_short|safe}}</td><td class='edit' id='attr_edit_STR'><span class='edit_icon fa fa-plus-circle'></span><span class='edit_icon fa fa-minus-circle'></span></td>
-	<th>CON</th><td>{{c.PA_CON|as_bullets_short|safe}}</td><td class='edit' id='attr_edit_CON'><span class='edit_icon fa fa-plus-circle'></span><span class='edit_icon fa fa-minus-circle'></span></td>
-</tr><tr>
-	<th>BOD</th><td>{{c.PA_BOD|as_bullets_short|safe}}</td><td class='edit' id='attr_edit_BOD'><span class='edit_icon fa fa-plus-circle'></span><span class='edit_icon fa fa-minus-circle'></span></td>
-	<th>MOV</th><td>{{c.PA_MOV|as_bullets_short|safe}}</td><td class='edit' id='attr_edit_MOV'><span class='edit_icon fa fa-plus-circle'></span><span class='edit_icon fa fa-minus-circle'></span></td>
-</tr>
+<table id="PA_TEC_{{c.id}}" class='attrpick primary'>
+    {% include "collector/character/character_pa.html" with c=c.info_tec %}
 </table>
-
-<table class="stats" id="spi">
-<tr>
-	<th>INT</th><td>{{c.PA_INT|as_bullets_short|safe}}</td><td class='edit' id='attr_edit_INT'><span class='edit_icon fa fa-plus-circle'></span><span class='edit_icon fa fa-minus-circle'></span></td>
-	<th>WIL</th><td>{{c.PA_WIL|as_bullets_short|safe}}</td><td class='edit' id='attr_edit_WIL'><span class='edit_icon fa fa-plus-circle'></span><span class='edit_icon fa fa-minus-circle'></span></td>
-</tr><tr>
-	<th>TEM</th><td>{{c.PA_TEM|as_bullets_short|safe}}</td><td class='edit' id='attr_edit_TEM'><span class='edit_icon fa fa-plus-circle'></span><span class='edit_icon fa fa-minus-circle'></span></td>
-	<th>PRE</th><td>{{c.PA_PRE|as_bullets_short|safe}}</td><td class='edit' id='attr_edit_PRE'><span class='edit_icon fa fa-plus-circle'></span><span class='edit_icon fa fa-minus-circle'></span></td>
-</tr>
+<table id="PA_REF_{{c.id}}" class='attrpick primary'>
+    {% include "collector/character/character_pa.html" with c=c.info_ref %}
 </table>
-
-<table class="stats" id="com">
-<tr>
-	<th>TEC</th><td>{{c.PA_TEC|as_bullets_short|safe}}</td><td class='edit' id='attr_edit_TEC'><span class='edit_icon fa fa-plus-circle'></span><span class='edit_icon fa fa-minus-circle'></span></td>
-	<th>REF</th><td>{{c.PA_REF|as_bullets_short|safe}}</td><td class='edit' id='attr_edit_REF'><span class='edit_icon fa fa-plus-circle'></span><span class='edit_icon fa fa-minus-circle'></span></td>
-</tr><tr>
-	<th>AGI</th><td>{{c.PA_AGI|as_bullets_short|safe}}</td><td class='edit' id='attr_edit_AGI'><span class='edit_icon fa fa-plus-circle'></span><span class='edit_icon fa fa-minus-circle'></span></td>
-	<th>AWA</th><td>{{c.PA_AWA|as_bullets_short|safe}}</td><td class='edit' id='attr_edit_AWA'><span class='edit_icon fa fa-plus-circle'></span><span class='edit_icon fa fa-minus-circle'></span></td>
-</tr>
+<table id="PA_AGI_{{c.id}}" class='attrpick primary'>
+    {% include "collector/character/character_pa.html" with c=c.info_agi %}
 </table>
-
-{%endif%}
+<table id="PA_AWA_{{c.id}}" class='attrpick primary'>
+    {% include "collector/character/character_pa.html" with c=c.info_awa %}
+</table>

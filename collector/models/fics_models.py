@@ -20,7 +20,7 @@ class Role(models.Model):
   talents = models.PositiveIntegerField(default=0)
   ba = models.PositiveIntegerField(default=0)
   bc = models.PositiveIntegerField(default=0)
-  
+
   def __str__(self):
     return '%s (%s)' % (self.reference, self.value)
 
@@ -75,13 +75,13 @@ class Specie(models.Model):
     for am in attr_mods:
       b += attr_mods[am]
     self.attr_mod_balance = b
-    print('PA --> %s:%d'%(self,b))
+    #print('PA --> %s:%d'%(self,b))
     skills_mods = self.get_racial_skills()
     b = 0
     for sm in skills_mods:
       b += skills_mods[sm]
     self.skill_balance = b
-    print('Skill --> %s:%d'%(self,b))
+    #print('Skill --> %s:%d'%(self,b))
     self.save()
 
 class SpecieAdmin(admin.ModelAdmin):
@@ -96,5 +96,3 @@ class RoleAdmin(admin.ModelAdmin):
 class ProfileAdmin(admin.ModelAdmin):
   ordering = ('reference',)
   list_display = ('reference','weights','groups','favorites')
-
-

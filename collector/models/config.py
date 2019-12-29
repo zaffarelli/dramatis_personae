@@ -10,7 +10,7 @@ import math
 
 class Config(models.Model):
   class Meta:
-    ordering = ['title', 'epic']  
+    ordering = ['title', 'epic']
   from scenarist.models.epics import Epic
   from scenarist.models.dramas import Drama
   title = models.CharField(default='aaa', max_length=128, blank=True, unique=True)
@@ -20,26 +20,26 @@ class Config(models.Model):
   is_active = models.BooleanField(default=False)
   smart_code = models.CharField(default='xxxxxx', max_length=6, blank=True)
   current_drama = models.ForeignKey(Drama, null=True, blank=True, on_delete=models.SET_NULL)
-  
+
   def __str__(self):
     return '%s' % (self.title)
 
   def parse_details(self):
-    """ Return details from the config epic, dramas and acts    
+    """ Return details from the config epic, dramas and acts
     """
     from scenarist.models.epics import Epic
     from scenarist.models.dramas import Drama
     from scenarist.models.acts import Act
     from scenarist.models.events import Event
     from collector.utils.fs_fics7 import get_keywords
-    
+
     epic = Epic.objects.get(title = self.epic.title)
     dramas = Drama.objects.filter(epic = epic).order_by('chapter','date')
     context_dramas =[]
     for drama in dramas:
       context_acts = []
       acts = Act.objects.filter(drama = drama).order_by('chapter','date')
-      for act in acts:        
+      for act in acts:
         context_events = []
         events = Event.objects.filter(act = act).order_by('chapter','date')
         for event in events:
@@ -50,11 +50,10 @@ class Config(models.Model):
       context_drama = {'title':drama.title, 'data': drama, 'acts': context_acts}
       context_dramas.append(context_drama)
     context = {'title':epic.title, 'data': epic, 'dramas': context_dramas}
-    context['keywords'] = get_keywords()
-    print(context)
+    context['keywords'] = get_keywords()    
     return context
 
-  def prepare_colorset(self, size = 16):    
+  def prepare_colorset(self, size = 16):
     colorset = []
     hcolorset = []
     idx = 0
@@ -90,7 +89,7 @@ class Config(models.Model):
       if target_component[comp][1] > 0:
         colval[cv] +=  int(inc)
         if colval[cv]+inc>vmax:
-          comp += 1 
+          comp += 1
       else:
         colval[cv] -=  int(inc)
         if colval[cv]-inc<vmin:
@@ -130,11 +129,11 @@ class Config(models.Model):
         par = c.__dict__[p]
       value = par
       if p == 'native_fief' and len(par.split(' / ')) > 1:
-        value = par.split(' / ')[0]        
-      if arrfetch.get(value) is None:        
+        value = par.split(' / ')[0]
+      if arrfetch.get(value) is None:
         arrfetch[value] = 1
       else:
-        arrfetch[value] += 1        
+        arrfetch[value] += 1
     for x in arrfetch:
       inside_labels.append(x)
       dat.append(arrfetch[x])
@@ -168,7 +167,7 @@ class Config(models.Model):
             'labels':{
               'fontColor':'#fff',
             }
-          },        
+          },
           'circumference': 2*math.pi,
           'rotation': -math.pi,
           'cutoutPercentage': 40,
@@ -181,5 +180,3 @@ class Config(models.Model):
 
 class ConfigAdmin(admin.ModelAdmin):
   ordering = ['title']
-
-

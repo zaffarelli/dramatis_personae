@@ -300,6 +300,7 @@ body {
                         margin: 5px;
 
                         & .avatar_link {
+                            width: 250px;
                             @include dp_panel;
 
                             & .character_actions, & .character_info {
@@ -388,24 +389,31 @@ body {
             }
 
             & .attributes {
-                column-count: 2;
+                column-count: 5;
                 column-gap: 2px;
                 column-rule: 0 solid $fics_light;
 
-                table.stats {
-                    & th {
+                table {
+                    & th.name {
                         padding-left: 1px;
                         background: $fics_back;
+                        width: 5ex;
                     }
 
                     & td {
                         text-align: center;
-                        font-weight: bold;
+                        font-weight: normal;
+                        width: auto;
 
                         &.edit {
-                            width: 6ex;
+                            width: 5ex;
                         }
                     }
+
+                    &.primary {
+                        border: 1px solid $fics_darker;
+                    }
+                    padding: 0;
                 }
             }
 
@@ -762,19 +770,19 @@ body {
     }
 
     .medium {
-        color: $fics_front;
+        color: yellow;
         /*opacity: .6;*/
         text-shadow: 0 0 3px yellow;
     }
 
     .high {
-        color: $fics_front;
+        color: orange;
         /*opacity: .7;*/
         text-shadow: 0 0 3px orange;
     }
 
     .veryhigh {
-        color: $fics_front;
+        color: #aa2020;
         /*opacity: .8;*/
         text-shadow: 0 0 3px red;
     }
@@ -988,7 +996,7 @@ body {
     }
 
     & .working {
-        & table, & table td, & table th {
+        & table, & table td, & table th, & th, & td {
             background: $fics_hl;
         }
     }

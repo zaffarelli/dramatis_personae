@@ -19,7 +19,7 @@ roles = [         # PA Max Sk TA BA BC
   ['Undefined',0,    0,  0, 0, 0, 0, 0]
 ]
 
-profiles = [  # Weights                   Groups                   
+profiles = [  # Weights                   Groups
   ['physical', [3,3,3,3,1,1,1,1,1,1,1,1],['FIG','BOD']],
   ['spiritual',[1,1,1,1,3,3,3,3,1,1,1,1],['SOC','AWA']],
   ['tech',     [1,1,1,1,1,1,1,1,3,3,3,3],['TIN','CON','AWA']],
@@ -35,7 +35,7 @@ class Command(BaseCommand):
 
   @staticmethod
   def create(modname,data_list):
-    print('Inserting predefined data into the %s model...'%(modname))
+    #print('Inserting predefined data into the %s model...'%(modname))
     model = apps.get_model('collector',modname)
     fields = model._meta.fields
     fields_list = []

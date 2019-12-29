@@ -80,12 +80,10 @@ class FormlessUpdater{
     	 	    });
     	    });
         }
-        $('span.skill_pick').off().on('click',function(event){
+        $('span.skillpick').off().on('click',function(event){
             let idarr = $(this).attr('id').split('_');
-            console.log($(this).attr('id'))
-            console.log(idarr)
-            let avatar_id = idarr[2]
-            let skill_id = idarr[3]
+            let avatar_id = idarr[1]
+            let skill_id = idarr[2]
             let fingerval = 0;
             if ($(this).hasClass('fa-plus-circle')){
                 fingerval = 51;
@@ -119,6 +117,47 @@ class FormlessUpdater{
                 },
             });
         });
+
+        $('span.attrpick').off().on('click',function(event){
+            let idarr = $(this).attr('id').split('_');
+            let avatar_id = idarr[1]
+            let attr_id = idarr[2]+"_"+idarr[3]
+            console.log($(this).attr('id'));
+            let fingerval = 0;
+            if ($(this).hasClass('fa-plus-circle')){
+                fingerval = 51;
+            }
+            if ($(this).hasClass('fa-minus-circle')){
+                fingerval = 49;
+            }
+            $("#"+attr_id+"_"+avatar_id).addClass("working");
+            console.log("#"+attr_id+"_"+avatar_id);
+            $.ajax({
+                url: 'ajax/character/pick/attr/'+avatar_id+'/'+attr_id+'/'+fingerval+'/',
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                dataType:'json',
+                success: function(answer) {
+                    console.log(answer);
+                    $("#"+attr_id+"_"+avatar_id).removeClass("working");
+                    $("#"+attr_id+"_"+avatar_id).html(answer.block);
+                    $("#summary_block").html(answer.summary);
+                    self.prepareEvents();
+                    rebootlinks();
+                },
+                error: function(answer){
+                    console.log(answer);
+                    //$("#sk_"+skill_id).html(answer.block);
+                    self.prepareEvents();
+                    rebootlinks();
+                },
+            });
+        });
+
+
 
     }
 }
