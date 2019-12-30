@@ -30,10 +30,16 @@
     <li><b>Dead</b>{{ c.is_dead|prettybool|safe }}</li>
     <li><b>Visible</b>{{c.is_visible|prettybool|safe}}</li>
     <li><b>Lifepaths</b>{{c.use_history_creation|prettybool|safe}}</li>
-    <li><b>Occult Level</b><span class='edit' id='occult_level'><span class='edit_icon fa fa-plus-circle'></span><span class='edit_icon fa fa-minus-circle'></span></span>&nbsp;{{ c.occult_level|as_bullets_short|safe }}</li>
-    <li><b>Occult Darkside</b><span class='edit' id='occult_darkside'><span class='edit_icon fa fa-plus-circle'></span><span class='edit_icon fa fa-minus-circle'></span></span>&nbsp;{{ c.occult_darkside|as_bullets_short|safe }}</li>
-
 </ul>
+<span class='attributes'>
+    <table id="OCC_LVL_{{c.id}}" class='attrpick occult'>
+        {% include "collector/character/character_pa.html" with c=c.info_lvl %}
+    </table>
+    <table id="OCC_DRK_{{c.id}}" class='attrpick occult'>
+        {% include "collector/character/character_pa.html" with c=c.info_drk %}
+    </table>
+</span>
+
 <span class='pagebreaker'>&nbsp;</span>
 {% if c.tourofduty_set.count != 0 %}
     <ul class='unbreakable'>
@@ -66,9 +72,15 @@
     </span>
 </div>
 <div class='gear'>
-    {% include "collector/character/character_weapons.html" %}
-    {% include "collector/character/character_armors.html" %}
-    {% include "collector/character/character_shields.html" %}
+    <span id="weapon_block_{{c.id}}">
+    {% include "collector/character/character_weapon.html" %}
+    </span>
+    <span id="armor_block_{{c.id}}">
+    {% include "collector/character/character_armor.html" %}
+    </span>
+    <span id="shield_block_{{c.id}}">
+    {% include "collector/character/character_shield.html" %}
+    </span>
 </div>
 
 <div class='narrative'>

@@ -27,8 +27,8 @@ class CharacterCusto(models.Model):
     PA_AGI = models.PositiveIntegerField(default=0)
     PA_AWA = models.PositiveIntegerField(default=0)
     summary = models.TextField(default="", blank=True, null=True)
-    occult_level = models.PositiveIntegerField(default=0)
-    occult_darkside = models.PositiveIntegerField(default=0)
+    OCC_LVL = models.PositiveIntegerField(default=0)
+    OCC_DRK = models.PositiveIntegerField(default=0)
     comment = models.TextField(default="", blank=True, null=True)
 
     def recalculate(self):
@@ -36,8 +36,9 @@ class CharacterCusto(models.Model):
         self.OP = 0
         self.AP += (self.PA_STR + self.PA_CON + self.PA_BOD+ self.PA_MOV
                       + self.PA_INT + self.PA_WIL + self.PA_TEM + self.PA_PRE
-                      + self.PA_REF + self.PA_TEC + self.PA_AGI + self.PA_AWA)
-        self.AP += (self.occult_level - self.occult_darkside)
+                      + self.PA_REF + self.PA_TEC + self.PA_AGI + self.PA_AWA
+                      )
+        self.AP += (self.OCC_LVL - self.OCC_DRK)
         for s in self.skillcusto_set.all():
             if s.value == 0:
                 s.delete()
@@ -83,10 +84,10 @@ class CharacterCusto(models.Model):
         self.summary += "</ul>"
         self.summary += "Occult"
         self.summary += "<ul>"
-        if self.occult_level!=0:
-            self.summary += "<li>Lightside %d</li>"%(self.occult_level)
-        if self.occult_darkside!=0:
-            self.summary += "<li>Darkside  %d</li>"%(self.occult_darkside)
+        if self.OCC_LVL!=0:
+            self.summary += "<li>Lightside %d</li>"%(self.OCC_LVL)
+        if self.OCC_DRK!=0:
+            self.summary += "<li>Darkside  %d</li>"%(self.OCC_DRK)
         self.summary += "</ul>"
         self.summary += "Skills"
         self.summary += "<ul>"
@@ -104,6 +105,22 @@ class CharacterCusto(models.Model):
         for ba in self.beneficeafflictioncusto_set.all():
             self.summary += "<li>%s +%d</li>"%(ba.benefice_affliction_ref.reference,ba.benefice_affliction_ref.value)
         self.summary += "</ul>"
+        self.summary += "Weapons"
+        self.summary += "<ul>"
+        for item in self.weaponcusto_set.all():
+            self.summary += "<li>%s</li>"%(item.weapon_ref.reference)
+        self.summary += "</ul>"
+        self.summary += "Armors"
+        self.summary += "<ul>"
+        for item in self.armorcusto_set.all():
+            self.summary += "<li>%s</li>"%(item.armor_ref.reference)
+        self.summary += "</ul>"
+        self.summary += "Shields"
+        self.summary += "<ul>"
+        for item in self.shieldcusto_set.all():
+            self.summary += "<li>%s</li>"%(item.shield_ref.reference)
+        self.summary += "</ul>"
+
 
     def push(self,ch):
         ch.PA_STR += self.PA_STR
@@ -118,12 +135,20 @@ class CharacterCusto(models.Model):
         ch.PA_TEC += self.PA_TEC
         ch.PA_AGI += self.PA_AGI
         ch.PA_AWA += self.PA_AWA
+        ch.OCC_LVL += self.OCC_LVL
+        ch.OCC_DRK += self.OCC_DRK
         for sm in self.skillcusto_set.all():
             ch.add_or_update_skill(sm.skill_ref,sm.value,True)
         for bc in self.blessingcursecusto_set.all():
             ch.add_bc(bc.blessing_curse_ref)
         for ba in self.beneficeafflictioncusto_set.all():
             ch.add_ba(ba.benefice_affliction_ref)
+        for weapon in self.weaponcusto_set.all():
+            ch.add_weapon(weapon.weapon_ref)
+        for armor in self.armorcusto_set.all():
+            ch.add_armor(armor.armor_ref)
+        for shield in self.shieldcusto_set.all():
+            ch.add_shield(shield.shield_ref)
 
     def add_or_update_skill(self,skill_ref_id,value):
         ''' Updating customization and avatar '''
@@ -156,10 +181,16 @@ class CharacterCustoAdmin(admin.ModelAdmin):
     from collector.models.skill_custo_inline import SkillCustoInline
     from collector.models.blessing_curse_custo_inline import BlessingCurseCustoInline
     from collector.models.benefice_affliction_custo_inline import BeneficeAfflictionCustoInline
+    from collector.models.weapon_custo_inline import WeaponCustoInline
+    from collector.models.armor_custo_inline import ArmorCustoInline
+    from collector.models.shield_custo_inline import ShieldCustoInline
     list_display = ('character','value','AP','OP',)
     exclude = ('value','AP','OP')
     inlines = [
         SkillCustoInline,
         BlessingCurseCustoInline,
         BeneficeAfflictionCustoInline,
+        WeaponCustoInline,
+        ArmorCustoInline,
+        ShieldCustoInline,
     ]

@@ -3,7 +3,7 @@
   ║║╠═╝  ║  │ ││  │  ├┤ │   │ │ │├┬┘
  ═╩╝╩    ╚═╝└─┘┴─┘┴─┘└─┘└─┘ ┴ └─┘┴└─
 '''
-from collector.models.characters import Character
+from collector.models.character import Character
 import factory
 import datetime
 from django.utils import timezone
@@ -43,21 +43,19 @@ class CharacterCheckPAFactory(factory.django.DjangoModelFactory):
     model = Character
   pub_date = timezone.now()
   role = Role.objects.filter(reference='Superior').first()
-  profile = Profile.objects.filter(reference='Scholar').first()  
+  profile = Profile.objects.filter(reference='Scholar').first()
   specie = Specie.objects.filter(species='Urthish',race='Teutonic').first()
   full_name = '%s %s %s %s'%(role.reference,profile.reference,specie.species,specie.race)
   onsave_reroll_attributes = True
-  
+
 
 
 class CharacterCheckSkillsFactory(factory.django.DjangoModelFactory):
   class Meta:
     model = Character
   pub_date = timezone.now()
-  role = Role.objects.filter(reference='Seasoned').first()  
-  profile = Profile.objects.filter(reference='Military').first()  
+  role = Role.objects.filter(reference='Seasoned').first()
+  profile = Profile.objects.filter(reference='Military').first()
   specie = Specie.objects.filter(species='Urthish',race='Kaanic').first()
   full_name = '%s %s %s %s'%(role.reference,profile.reference,specie.species,specie.race)
   onsave_reroll_skills = True
-  
-

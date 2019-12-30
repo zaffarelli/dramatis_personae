@@ -81,8 +81,8 @@ class Character(models.Model):
     score = models.IntegerField(default=0)
     gm_shortcuts = models.TextField(default='', blank=True)
     age = models.IntegerField(default=0)
-    occult_level = models.PositiveIntegerField(default=0)
-    occult_darkside = models.PositiveIntegerField(default=0)
+    OCC_LVL = models.PositiveIntegerField(default=0)
+    OCC_DRK = models.PositiveIntegerField(default=0)
     occult = models.CharField(max_length=50, default='', blank=True)
     challenge = models.TextField(default='', blank=True)
     is_exportable = models.BooleanField(default=False)
@@ -107,6 +107,12 @@ class Character(models.Model):
     bc_options_not = []
     AP_tod_pool = 0
     OP_tod_pool = 0
+    weapon_options = []
+    weapon_options_not = []
+    armor_options = []
+    armor_options_not = []
+    shield_options = []
+    shield_options_not = []
     info_str = {}
     info_con = {}
     info_bod = {}
@@ -119,6 +125,8 @@ class Character(models.Model):
     info_ref = {}
     info_agi = {}
     info_awa = {}
+    info_lvl = {}
+    info_drk = {}
 
 
     def get_absolute_url(self):
@@ -141,6 +149,9 @@ class Character(models.Model):
         self.purgeSkills()
         self.purgeBC()
         self.purgeBA()
+        self.purgeWeapons()
+        self.purgeArmors()
+        self.purgeShields()
         self.purgeTalents()
         self.AP_tod_pool = 0
         self.OP_tod_pool = 0
@@ -160,6 +171,9 @@ class Character(models.Model):
         self.refresh_skills_options()
         self.refresh_ba_options()
         self.refresh_bc_options()
+        self.refresh_weapon_options()
+        self.refresh_shield_options()
+        self.refresh_armor_options()
         self.charactercusto.save()
         self.add_missing_root_skills()
         self.resetTotal()
@@ -190,6 +204,8 @@ class Character(models.Model):
         self.info_ref = self.get_pa("PA_REF")
         self.info_agi = self.get_pa("PA_AGI")
         self.info_awa = self.get_pa("PA_AWA")
+        self.info_lvl = self.get_pa("OCC_LVL")
+        self.info_drk = self.get_pa("OCC_DRK")
 
         if not conf:
             if self.birthdate < 1000:
@@ -230,6 +246,50 @@ class Character(models.Model):
     #         v = getattr(self, am)
     #         setattr(self, am, v+attr_mods[am])
 
+    def refresh_weapon_options(self):
+        from collector.models.weapon import WeaponRef
+        self.weapon_options = []
+        self.weapon_options_not = []
+        custo_items = self.charactercusto.weaponcusto_set.all()
+        custo_ref_items = []
+        for item in custo_items:
+            custo_ref_items.append(item.weapon_ref)
+        all_items = WeaponRef.objects.all()
+        for item in all_items:
+            if item in custo_ref_items:
+                self.weapon_options_not.append(item)
+            else:
+                self.weapon_options.append(item)
+
+    def refresh_shield_options(self):
+        from collector.models.shield import ShieldRef
+        self.shield_options = []
+        self.shield_options_not = []
+        custo_items = self.charactercusto.shieldcusto_set.all()
+        custo_ref_items = []
+        for item in custo_items:
+            custo_ref_items.append(item.shield_ref)
+        all_items = ShieldRef.objects.all()
+        for item in all_items:
+            if item in custo_ref_items:
+                self.shield_options_not.append(item)
+            else:
+                self.shield_options.append(item)
+
+    def refresh_armor_options(self):
+        from collector.models.armor_ref import ArmorRef
+        self.armor_options = []
+        self.armor_options_not = []
+        custo_items = self.charactercusto.armorcusto_set.all()
+        custo_ref_items = []
+        for item in custo_items:
+            custo_ref_items.append(item.armor_ref)
+        all_items = ArmorRef.objects.all()
+        for item in all_items:
+            if item in custo_ref_items:
+                self.armor_options_not.append(item)
+            else:
+                self.armor_options.append(item)
 
     def refresh_ba_options(self):
         from collector.models.benefice_affliction_ref import BeneficeAfflictionRef
@@ -338,6 +398,59 @@ class Character(models.Model):
       if found_bc:
         found_bc.delete()
 
+    def add_weapon(self, aref):
+      from collector.models.weapon import Weapon
+      found_item = self.weapon_set.all().filter(weapon_ref=aref).first()
+      if found_item:
+        return found_item
+      else:
+        item = Weapon()
+        item.character = self
+        item.weapon_ref = aref
+        item.save()
+        return item
+
+    def add_armor(self, aref):
+      from collector.models.armor import Armor
+      found_item = self.armor_set.all().filter(armor_ref=aref).first()
+      if found_item:
+        return found_item
+      else:
+        item = Armor()
+        item.character = self
+        item.armor_ref = aref
+        item.save()
+        return item
+
+    def add_shield(self, aref):
+      from collector.models.shield import Shield
+      found_item = self.shield_set.all().filter(shield_ref=aref).first()
+      if found_item:
+        return found_item
+      else:
+        item = Shield()
+        item.character = self
+        item.shield_ref = aref
+        item.save()
+        return item
+
+    def remove_weapon(self, aref):
+      from collector.models.weapon import Weapon
+      found_item = self.weapon_set.all().filter(weapon_ref=aref).first()
+      if found_item:
+        found_item.delete()
+
+    def remove_armor(self, aref):
+      from collector.models.armor import Armor
+      found_item = self.armor_set.all().filter(armor_ref=aref).first()
+      if found_item:
+        found_item.delete()
+
+    def remove_shield(self, aref):
+      from collector.models.shield import Shield
+      found_item = self.shield_set.all().filter(shield_ref=aref).first()
+      if found_item:
+        found_item.delete()
 
     def add_ba(self, aref):
       from collector.models.benefice_affliction import BeneficeAffliction
@@ -376,7 +489,7 @@ class Character(models.Model):
             logger.debug('ROOT_LIST:%s' % (item.reference))
 
     def resetPA(self):
-        self.PA_STR = self.PA_CON = self.PA_BOD = self.PA_MOV = self.PA_INT = self.PA_WIL = self.PA_TEM = self.PA_PRE = self.PA_TEC = self.PA_REF = self.PA_AGI = self.PA_AWA =0
+        self.PA_STR = self.PA_CON = self.PA_BOD = self.PA_MOV = self.PA_INT = self.PA_WIL = self.PA_TEM = self.PA_PRE = self.PA_TEC = self.PA_REF = self.PA_AGI = self.PA_AWA = self.OCC_LVL = self.OCC_DRK =0
 
     def purgeSkills(self):
         """ Deleting all character skills """
@@ -401,6 +514,25 @@ class Character(models.Model):
         for ba in self.beneficeaffliction_set.all():
             ba.delete()
         logger.debug('PurgeBA count: %d' % (self.beneficeaffliction_set.all().count()))
+
+    def purgeWeapons(self):
+        """ Deleting all character Weapons """
+        for item in self.weapon_set.all():
+            item.delete()
+        logger.debug('PurgeWeapon count: %d' % (self.weapon_set.all().count()))
+
+    def purgeShields(self):
+        """ Deleting all character Shields """
+        for item in self.shield_set.all():
+            item.delete()
+        logger.debug('PurgeShield count: %d' % (self.shield_set.all().count()))
+
+    def purgeArmors(self):
+        """ Deleting all character Weapons """
+        for item in self.armor_set.all():
+            item.delete()
+        logger.debug('PurgeArmor count: %d' % (self.armor_set.all().count()))
+
 
     def resetTotal(self):
         """ Compute all sums for all stats """

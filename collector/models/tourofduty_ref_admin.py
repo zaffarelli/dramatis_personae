@@ -56,9 +56,9 @@ def duplicate_event(modeladmin, request, queryset):
 duplicate_event.short_description = "Duplicate selected record"
 
 class TourOfDutyRefAdmin(admin.ModelAdmin):
-  ordering = ['topic','category','caste','reference','value']
+  ordering = ['category','topic','caste','reference','value']
   list_display = ('reference','category','caste','topic','is_custom','source','AP','OP','value','description')
-  exclude = ['value','description']
+  exclude = ['value']
   actions = [ refix, duplicate_event, set_upbringing, set_early_career, set_racial, set_apprenticeship, set_ukari, set_obuni, set_vorox, set_urthish ]
   inlines = [
     SkillModificatorInline,

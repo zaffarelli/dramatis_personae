@@ -414,6 +414,18 @@ body {
                         border: 1px solid $fics_darker;
                     }
                     padding: 0;
+
+                    &.occult {
+                        & th.name {
+                            width: 12ex;
+                        }
+
+                        & td {
+                            &.edit {
+                                width: 5ex;
+                            }
+                        }
+                    }
                 }
             }
 

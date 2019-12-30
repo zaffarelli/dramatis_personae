@@ -4,12 +4,12 @@
  ═╩╝╩    ╚═╝└─┘┴─┘┴─┘└─┘└─┘ ┴ └─┘┴└─
 '''
 from django.test import TestCase
-from collector.models.characters import Character
+from collector.models.character import Character
 from collector.tests.factories import UnbuildableCharacterFactory, VeteranGuilderFactory
 
 class AutobuildTest(TestCase):
-  fixtures = ['skillrefs.xml','species.xml','roles.xml','profiles.xml']
-  
+  fixtures = ['skill_ref.xml','specie.xml','role.xml','profile.xml']
+
   def test_autobuild_character_creation(self):
     c = VeteranGuilderFactory.build()
     self.assertEquals(c.autobuild(),True)
@@ -17,6 +17,3 @@ class AutobuildTest(TestCase):
   def test_unbuildable_character_creation(self):
     c = UnbuildableCharacterFactory.build()
     self.assertEquals(c.autobuild(),True)
-
-
-

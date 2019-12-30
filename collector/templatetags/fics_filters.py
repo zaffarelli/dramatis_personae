@@ -42,29 +42,32 @@ def as_bullets(value):
 def as_bullets_short(value):
     """ Change int value to list of bullet (Mark Rein*Hagen like)
     """
-    one_veryhigh = '<i class="fas fa-circle fa-xs veryhigh" title="%d"></i>'%(int(value))
-    one_high = '<i class="fas fa-circle fa-xs high" title="%d"></i>'%(int(value))
-    one_medium = '<i class="fas fa-circle fa-xs medium" title="%d"></i>'%(int(value))
-    one_low = '<i class="fas fa-circle fa-xs low" title="%d"></i>'%(int(value))
-    blank = '<i class="fas fa-circle fa-xs blank" title="%d"></i>'%(int(value))
-    x = 0
-    res = ''
-    while x<10:
-        if x<int(value):
-            if x>6:
-                res += one_veryhigh
-            elif x>4:
-                res += one_high
-            elif x>1:
-                res += one_medium
+    if isinstance(value,int):
+        one_veryhigh = '<i class="fas fa-circle fa-xs veryhigh" title="%d"></i>'%(int(value))
+        one_high = '<i class="fas fa-circle fa-xs high" title="%d"></i>'%(int(value))
+        one_medium = '<i class="fas fa-circle fa-xs medium" title="%d"></i>'%(int(value))
+        one_low = '<i class="fas fa-circle fa-xs low" title="%d"></i>'%(int(value))
+        blank = '<i class="fas fa-circle fa-xs blank" title="%d"></i>'%(int(value))
+        x = 0
+        res = ''
+        while x<10:
+            if x<int(value):
+                if x>6:
+                    res += one_veryhigh
+                elif x>4:
+                    res += one_high
+                elif x>1:
+                    res += one_medium
+                else:
+                    res += one_low
             else:
-                res += one_low
-        else:
-            res += blank
-        if (x+1) % 10 == 0:
-            res += '<br/>'
-        x += 1
-    return res
+                res += blank
+            if (x+1) % 10 == 0:
+                res += '<br/>'
+            x += 1
+        return res
+    else:
+        return str(value)
 
 
 @register.filter(name='parse_avatars')
@@ -251,6 +254,8 @@ def as_pa_short(value):
           "PA_TEC":"TEC",
           "PA_REF":"REF",
           "PA_AGI":"AGI",
-          "PA_AWA":"AWA"
+          "PA_AWA":"AWA",
+          "OCC_LVL":"Occult", 
+          "OCC_DRK":"Darkside",
         }
     return PA[value]

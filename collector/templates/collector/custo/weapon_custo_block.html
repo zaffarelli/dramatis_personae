@@ -1,0 +1,20 @@
+<table class='expanded'>
+	<tr>
+		<th><span id='weapon_add' class='edit_icon fa fa-arrow-alt-circle-left'></span></th>
+		<th>Add Weapon</th><td>
+			<select id='weapon_select'>
+			{% for s in c.weapon_options %}
+				<option value='{{s.id}}' style='width:15ex;'>{{s.reference}}</option>
+			{% endfor %}
+			</select>
+	</tr>
+	<tr>
+		<th><span id='weapon_del' class='edit_icon fa fa-arrow-alt-circle-right'></span></th>
+		<th>Remove Weapon</th><td>
+			<select id='weapon_unselect'>
+			{% for s in c.weapon_options_not %}
+				<option value='{{s.id}}' style='width:15ex;'>{{s.reference}}</option>
+			{% endfor %}
+			</select>
+	</tr>
+</table>

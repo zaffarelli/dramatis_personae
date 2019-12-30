@@ -278,3 +278,171 @@ def customize_ba_del(request,avatar,item):
         context["c"] = model_to_dict(ch)
         messages.info(request, 'B/A not found for %s.'%(ch.full_name))
     return JsonResponse(context)
+
+@csrf_exempt
+def customize_weapon(request,avatar,item):
+    from collector.models.weapon import WeaponRef
+    from collector.models.character_custo import CharacterCusto
+    from collector.models.weapon_custo import WeaponCusto
+    context = {}
+    ch = Character.objects.get(pk=avatar)
+    item_ref = WeaponRef.objects.get(pk=item)
+    item_custo = WeaponCusto()
+    item_custo.character_custo = ch.charactercusto
+    item_custo.weapon_ref = item_ref
+    item_custo.save()
+    ch.fix()
+    ch.save()
+    context["c"] = model_to_dict(ch)
+    template = get_template('collector/character/character_weapon.html')
+    context["block"] = template.render({'c':ch})
+    template = get_template('collector/custo/weapon_custo_block.html')
+    context["custo_block"] = template.render({'c':ch})
+    template = get_template('collector/custo/summary_block.html')
+    context["summary"] = template.render({'c':ch})
+    messages.info(request, 'Avatar %s customized with weapon %s.'%(ch.full_name,item_custo.weapon_ref.reference))
+    return JsonResponse(context)
+
+@csrf_exempt
+def customize_weapon_del(request,avatar,item):
+    from collector.models.weapon import WeaponRef
+    from collector.models.character_custo import CharacterCusto
+    from collector.models.weapon_custo import WeaponCusto
+    context = {}
+    ch = Character.objects.get(pk=avatar)
+    item_ref = WeaponRef.objects.get(pk=item)
+    custo_items = ch.charactercusto.weaponcusto_set.all()
+    item_found = None
+    for item in custo_items:
+        if item.weapon_ref == item_ref:
+            item_found = item_ref
+            break
+    if item_found:
+        txt = item_found.weapon_ref.reference
+        item_found.delete()
+        ch.fix()
+        ch.save()
+        context["c"] = model_to_dict(ch)
+        template = get_template('collector/character/character_weapon.html')
+        context["block"] = template.render({'c':ch})
+        template = get_template('collector/custo/weapon_custo_block.html')
+        context["custo_block"] = template.render({'c':ch})
+        template = get_template('collector/custo/summary_block.html')
+        context["summary"] = template.render({'c':ch})
+        messages.info(request, 'Avatar %s customized with weapon %s.'%(ch.full_name,txt))
+    else:
+        context["c"] = model_to_dict(ch)
+        messages.info(request, 'Weapon not found for %s.'%(ch.full_name))
+    return JsonResponse(context)
+
+@csrf_exempt
+def customize_armor(request,avatar,item):
+    from collector.models.armor import ArmorRef
+    from collector.models.character_custo import CharacterCusto
+    from collector.models.armor_custo import ArmorCusto
+    context = {}
+    ch = Character.objects.get(pk=avatar)
+    item_ref = ArmorRef.objects.get(pk=item)
+    item_custo = ArmorCusto()
+    item_custo.character_custo = ch.charactercusto
+    item_custo.armor_ref = item_ref
+    item_custo.save()
+    ch.fix()
+    ch.save()
+    context["c"] = model_to_dict(ch)
+    template = get_template('collector/character/character_armor.html')
+    context["block"] = template.render({'c':ch})
+    template = get_template('collector/custo/armor_custo_block.html')
+    context["custo_block"] = template.render({'c':ch})
+    template = get_template('collector/custo/summary_block.html')
+    context["summary"] = template.render({'c':ch})
+    messages.info(request, 'Avatar %s customized with armor %s.'%(ch.full_name,item_custo.armor_ref.reference))
+    return JsonResponse(context)
+
+@csrf_exempt
+def customize_armor_del(request,avatar,item):
+    from collector.models.armor import ArmorRef
+    from collector.models.character_custo import CharacterCusto
+    from collector.models.armor_custo import ArmorCusto
+    context = {}
+    ch = Character.objects.get(pk=avatar)
+    item_ref = ArmorRef.objects.get(pk=item)
+    custo_items = ch.charactercusto.armorcusto_set.all()
+    item_found = None
+    for item in custo_items:
+        if item.armor_ref == item_ref:
+            item_found = item_ref
+            break
+    if item_found:
+        txt = item_found.armor_ref.reference
+        item_found.delete()
+        ch.fix()
+        ch.save()
+        context["c"] = model_to_dict(ch)
+        template = get_template('collector/character/character_armor.html')
+        context["block"] = template.render({'c':ch})
+        template = get_template('collector/custo/armor_custo_block.html')
+        context["custo_block"] = template.render({'c':ch})
+        template = get_template('collector/custo/summary_block.html')
+        context["summary"] = template.render({'c':ch})
+        messages.info(request, 'Avatar %s customized with armor %s.'%(ch.full_name,txt))
+    else:
+        context["c"] = model_to_dict(ch)
+        messages.info(request, 'Armor not found for %s.'%(ch.full_name))
+    return JsonResponse(context)
+
+@csrf_exempt
+def customize_shield(request,avatar,item):
+    from collector.models.shield import ShieldRef
+    from collector.models.character_custo import CharacterCusto
+    from collector.models.shield_custo import ShieldCusto
+    context = {}
+    ch = Character.objects.get(pk=avatar)
+    item_ref = ShieldRef.objects.get(pk=item)
+    item_custo = ShieldCusto()
+    item_custo.character_custo = ch.charactercusto
+    item_custo.shield_ref = item_ref
+    item_custo.save()
+    ch.fix()
+    ch.save()
+    context["c"] = model_to_dict(ch)
+    template = get_template('collector/character/character_shield.html')
+    context["block"] = template.render({'c':ch})
+    template = get_template('collector/custo/shield_custo_block.html')
+    context["custo_block"] = template.render({'c':ch})
+    template = get_template('collector/custo/summary_block.html')
+    context["summary"] = template.render({'c':ch})
+    messages.info(request, 'Avatar %s customized with shield %s.'%(ch.full_name,item_custo.shield_ref.reference))
+    return JsonResponse(context)
+
+@csrf_exempt
+def customize_shield_del(request,avatar,item):
+    from collector.models.shield import ShieldRef
+    from collector.models.character_custo import CharacterCusto
+    from collector.models.shield_custo import ShieldCusto
+    context = {}
+    ch = Character.objects.get(pk=avatar)
+    item_ref = ShielRef.objects.get(pk=item)
+    custo_items = ch.charactercusto.shieldcusto_set.all()
+    item_found = None
+    for item in custo_items:
+        if item.shield_ref == item_ref:
+            item_found = item_ref
+            break
+    if item_found:
+        txt = item_found.shield_ref.reference
+        item_found.delete()
+        ch.fix()
+        ch.save()
+        context["c"] = model_to_dict(ch)
+        template = get_template('collector/character/character_shield.html')
+        context["block"] = template.render({'c':ch})
+        template = get_template('collector/custo/shield_custo_block.html')
+        context["custo_block"] = template.render({'c':ch})
+        template = get_template('collector/custo/summary_block.html')
+        context["summary"] = template.render({'c':ch})
+        messages.info(request, 'Avatar %s customized with shield %s.'%(ch.full_name,txt))
+    else:
+        context["c"] = model_to_dict(ch)
+        messages.info(request, 'Shield not found for %s.'%(ch.full_name))
+    return JsonResponse(context)

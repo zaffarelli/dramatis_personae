@@ -33,7 +33,7 @@ class TourOfDutyRef(models.Model):
     PA_AGI = models.IntegerField(default=0)
     PA_AWA = models.IntegerField(default=0)
     OCC_LVL = models.IntegerField(default=0)
-    DRK_LVL = models.IntegerField(default=0)
+    OCC_DRK = models.IntegerField(default=0)
     value = models.IntegerField(default=0)
     description = models.TextField(max_length=1024,default='',blank=True)
 
@@ -44,11 +44,11 @@ class TourOfDutyRef(models.Model):
         if self.is_custom:
             self.value = self.AP*3 + self.OP
         else:
-            self.AP = self.PA_STR + self.PA_CON + self.PA_BOD + self.PA_MOV + self.PA_INT + self.PA_WIL + self.PA_TEM + self.PA_PRE + self.PA_REF + self.PA_TEC + self.PA_AGI + self.PA_AWA + self.OCC_LVL - self.DRK_LVL
+            self.AP = self.PA_STR + self.PA_CON + self.PA_BOD + self.PA_MOV + self.PA_INT + self.PA_WIL + self.PA_TEM + self.PA_PRE + self.PA_REF + self.PA_TEC + self.PA_AGI + self.PA_AWA + self.OCC_LVL - self.OCC_DRK
             self.OP = 0
             texts = []
             if self.PA_STR != 0:
-              texts.append("STR %+d"%(self.PA_STR))
+              texts.append("STR %+d"%(self.PA_STR)) 
             if self.PA_CON != 0:
               texts.append("CON %+d"%(self.PA_CON))
             if self.PA_BOD != 0:
@@ -73,8 +73,8 @@ class TourOfDutyRef(models.Model):
               texts.append("AWA %+d"%(self.PA_AWA))
             if self.OCC_LVL != 0:
               texts.append("OCC %+d"%(self.OCC_LVL))
-            if self.DRK_LVL != 0:
-              texts.append("DRK %+d"%(self.DRK_LVL))
+            if self.OCC_DRK != 0:
+              texts.append("DRK %+d"%(self.OCC_DRK))
             for s in self.skillmodificator_set.all():
               texts.append("{%s %+d}"%(s.skill_ref.reference,s.value))
               self.OP += s.value

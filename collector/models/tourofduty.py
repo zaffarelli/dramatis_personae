@@ -24,7 +24,6 @@ class TourOfDuty(models.Model):
         OP = tod.OP
     else:
         ch.PA_STR += tod.PA_STR
-        print("TOD:"+tod.reference+" PA_STR:"+str(ch.PA_STR))
         ch.PA_CON += tod.PA_CON
         ch.PA_BOD += tod.PA_BOD
         ch.PA_MOV += tod.PA_MOV
@@ -36,6 +35,8 @@ class TourOfDuty(models.Model):
         ch.PA_TEC += tod.PA_TEC
         ch.PA_AGI += tod.PA_AGI
         ch.PA_AWA += tod.PA_AWA
+        ch.OCC_LVL += tod.OCC_LVL
+        ch.OCC_DRK += tod.OCC_DRK
         for sm in tod.skillmodificator_set.all():
             ch.add_or_update_skill(sm.skill_ref,sm.value,True)
         for bc in tod.blessingcursemodificator_set.all():
