@@ -1,367 +1,148 @@
 {% load crispy_forms_tags %}
 
 <div class="classyview">
-  <form class='character_form'>
-    {{ form.non_field_errors}}
-    {{ form.management_form }}
-
-    <input name='id' type='hidden' value='{{c.id}}'>
-    <input name='rid' type='hidden' value='{{c.rid}}'>
-    <table class="formset">
-      <caption>{{c.rid}}</caption>
-      <tr><td>
-      <div class="field_wrapper">
-        {{ form.full_name.errors}}
-        <label for="full_name">Name</label>
-        {{form.full_name }}
-      </div>
-      <div class="field_wrapper">
-        {{ form.entrance.errors}}
-        <label for="entrance">Entrance</label>
-        {{form.entrance}}
-      </div>
-      <div class="field_wrapper">
-        {{ form.alliance.errors}}
-        <label for="">Alliance</label>
-        {{form.alliance}}
-      </div>
-      <div class="field_wrapper">
-        {{ form.specie.errors}}
-        <label for="">Species/Race</label>
-        {{form.specie}}
-      </div>
-      <div class="field_wrapper">
-        {{ form.birthdate.errors}}
-        <label for="">Birthyear</label>
-        {{form.birthdate}}
-      </div>
-      <div class="field_wrapper">
-        {{ form.gender.errors}}
-        <label for="">Gender</label>
-        {{form.gender}}
-      </div>
-      <div class="field_wrapper">
-        {{ form.height.errors}}
-        <label for="">Height</label>
-        {{form.height}}
-      </div>
-      <div class="field_wrapper">
-        {{ form.weight.errors}}
-        <label for="">Weight</label>
-        {{form.weight}}
-      </div>
-      <div class="field_wrapper">
-        {{ form.rank.errors}}
-        <label for="">Rank</label>
-        {{form.rank}}
-      </div>
-      <div class="field_wrapper">
-        {{ form.native_fief.errors}}
-        <label for="">Native Fief</label>
-        {{form.native_fief}}
-      </div>
-      <div class="field_wrapper">
-        {{ form.caste.errors}}
-        <label for="">Caste:</label>
-        {{form.caste}}
-      </div>
-      <div class="field_wrapper">
-        {{ form.player.errors}}
-        <label for="">Player</label>
-        {{form.player}}
-      </div>
-      <div class="field_wrapper">
-        {{ form.occult.errors}}
-        <label for="">Occult</label>
-        {{form.occult}}
-      </div>
-      <div class="field_wrapper">
-        {{ form.occult_level.errors}}
-        <label for="">Level</label>
-        {{form.occult_level}}
-      </div>
-      <div class="field_wrapper">
-        {{ form.occult_darkside.errors}}
-        <label for="">Darkside</label>
-        {{form.occult_darkside}}
-      </div>
-      </td><td>
-      <div class="field_wrapper">
-        {{ form.keyword.errors}}
-        <label for="">Keyword</label>
-        {{form.keyword}}
-      </div>
-      <div class="field_wrapper">
-        {{ form.role.errors}}
-        <label for="category">Role</label>
-        {{form.role}}
-      </div>
-      <div class="field_wrapper">
-        {{ form.profile.errors}}
-        <label for="profile">Profile</label>
-        {{form.profile}}
-      </div>
-      <div class="field_wrapper">
-        {{ form.is_exportable.errors}}
-        <label for="">Exportable</label>
-        {{form.is_exportable}}
-      </div>
-      <div class="field_wrapper">
-        {{ form.onsave_reroll_attributes.errors}}
-        <label for="">OnSave Reroll Attributes</label>
-        {{form.onsave_reroll_attributes}}
-      </div>
-      <div class="field_wrapper">
-        {{ form.onsave_reroll_skills.errors}}
-        <label for="">OnSave Reroll Skills</label>
-        {{form.onsave_reroll_skills}}
-      </div>
-      <div class="field_wrapper">
-        {{ form.is_visible.errors}}
-        <label for="">Visible</label>
-        {{form.is_visible}}
-      </div>
-      <div class="field_wrapper">
-        {{ form.is_dead.errors}}
-        <label for="">Dead</label>
-        {{form.is_dead}}
-      </div>
-      <div class="field_wrapper">
-        {{ form.use_history_creation_errors}}
-        <label for="">Use History Creation</label>
-        {{form.use_history_creation}}
-      </div>
-      <div class="field_wrapper">
-        {{ form.is_locked.errors}}
-        <label for="">Locked</label>
-        {{form.is_locked}}
-      </div>
-      <div class="field_wrapper">
-        {{ form.is_public.errors}}
-        <label for="">Public</label>
-        {{form.is_public}}
-      </div>
-      <div class="field_wrapper">
-        {{ form.is_partial.errors}}
-        <label for="">Partial</label>
-        {{form.is_partial}}
-      </div>
-      <div class="field_wrapper">
-        {{ form.use_only_entrance.errors}}
-        <label for="">Only Entrance</label>
-        {{form.use_only_entrance}}
-      </div>
-      </td>
-      </tr>
-    </table>
-
-
-
-  <table class='formset form-horizontal'>
-    <caption>Storyline</caption>
-    <tr><td>
-      <div class="row">
-        <div class="col-4">
-        {{form.epic|as_crispy_field}}
-        </div>
-      </div>
-    </td>
-    <td>
-        <div class="field_wrapper">
-          {{ form.narrative.errors}}
-          <label for="">Narrative</label>
-          {{form.narrative}}
-        </div>
-    </td>
-    </tr>
-
-  </table>
-
-  <table class="formset ">
-    <caption>Primary Attributes</caption>
-    <tr><td>
-    <table class="formset inline">
-      <caption>Physical</caption>
-      <tr><td>
-      <div class="field_wrapper">
-        {{ form.PA_STR.errors}}
-        <label for="">STR</label>
-        {{form.PA_STR}}
-      </div>
-      </td><td>
-      <div class="field_wrapper">
-        {{ form.PA_CON.errors}}
-        <label for="">CON</label>
-        {{form.PA_CON}}
-      </div>
-      </td></tr>
-      <tr><td>
-      <div class="field_wrapper">
-        {{ form.PA_BOD.errors}}
-        <label for="">BOD</label>
-        {{form.PA_BOD}}
-      </div>
-      </td><td>
-      <div class="field_wrapper">
-        {{ form.PA_MOV.errors}}
-        <label for="">MOV</label>
-        {{form.PA_MOV}}
-      </div>
-      </td></tr>
-    </table>
-    </td><td>
-    <table class="formset inline">
-      <caption>Spiritual</caption>
-      <tr><td>
-      <div class="field_wrapper">
-        {{ form.PA_INT.errors}}
-        <label for="">INT</label>
-        {{form.PA_INT}}
-      </div>
-      </td><td>
-      <div class="field_wrapper">
-        {{ form.PA_WIL.errors}}
-        <label for="">WIL</label>
-        {{form.PA_WIL}}
-      </div>
-      </td></tr>
-      <tr><td>
-      <div class="field_wrapper">
-        {{ form.PA_TEM.errors}}
-        <label for="">TEM</label>
-        {{form.PA_TEM}}
-      </div>
-      </td><td>
-      <div class="field_wrapper">
-        {{ form.PA_PRE.errors}}
-        <label for="">PRE</label>
-        {{form.PA_PRE}}
-      </div>
-      </td></tr>
-    </table>
-    </td><td>
-    <table class="formset inline">
-      <caption>Combat</caption>
-      <tr><td>
-      <div class="field_wrapper">
-        {{ form.PA_TEC.errors}}
-        <label for="">TEC</label>
-        {{form.PA_TEC}}
-      </div>
-      </td><td>
-      <div class="field_wrapper">
-        {{ form.PA_REF.errors}}
-        <label for="">REF</label>
-        {{form.PA_REF}}
-      </div>
-      </td></tr>
-      <tr><td>
-      <div class="field_wrapper">
-        {{ form.PA_AGI.errors}}
-        <label for="">AGI</label>
-        {{form.PA_AGI}}
-      </div>
-      </td><td>
-      <div class="field_wrapper">
-        {{ form.PA_AWA.errors}}
-        <label for="">AWA</label>
-        {{form.PA_AWA}}
-      </div>
-      </td></tr>
-    </table>
-      </td></tr>
-  </table>
-
-<div class='tabberbar'>
-  <span id='l' class='tabber btn'>Lifepath</span>
-  <span id='s' class='tabber btn'>Skills</span>
-  <span id='t' class='tabber btn'>Talents</span>
-  <span id='ba' class='tabber btn'>Benefices/Afflictions</span>
-  <span id='bc' class='tabber btn'>Blessings/Curses</span>
-  <span id='w' class='tabber btn'>Weapons</span>
-  <span id='aes' class='tabber btn'>Armors &amp; Energy Shield</span>
-</div>
-
-<div id='lt' class='tabs'>
-  <table class="formset inline">
-  <caption>Lifepath</caption>
-  {{ tourofdutys.management_form }}
-  {% for form in tourofdutys.forms %}
-    {{ form.as_table }}
-  {% endfor %}
-  </table>
-</div>
-
-<div id='st' class='tabs'>
-  <table class="formset inline">
-  <caption>Skills</caption>
-  {{ skills.management_form }}
-  {% for form in skills.forms %}
-    {{ form.as_table }}
-  {% endfor %}
-  </table>
-</div>
-
-<div id='tt' class='tabs'>
-	<table class="formset inline">
-  <caption>Talents</caption>
-  {{ talents.management_form }}
-  {% for form in talents.forms %}
-    {{ form.as_table }}
-  {% endfor %}
-  </table>
-</div>
-
-<div id='bct' class='tabs'>
-  <table class="formset inline">
-  <caption>Blessings &amp; Curses</caption>
-  {{ blessingcurses.management_form }}
-  {% for form in blessingcurses.forms %}
-    {{ form.as_table }}
-  {% endfor %}
-  </table>
-</div>
-
-<div id='bat' class='tabs'>
-  <table class="formset inline">
-  <caption>Benefices &amp; Afflictions</caption>
-  {{ beneficeafflictions.management_form }}
-  {% for form in beneficeafflictions.forms %}
-    {{ form.as_table }}
-  {% endfor %}
-  </table>
-</div>
-
-<div id='wt' class='tabs'>
-  <table class="formset inline">
-  <caption>Weapons</caption>
-  {{ weapons.management_form }}
-  {% for form in weapons.forms %}
-    {{ form.as_table }}
-  {% endfor %}
-  </table>
-</div>
-
-<div id='aest' class='tabs'>
-  <table class="formset inline">
-  <caption>Armors</caption>
-  {{ armors.management_form }}
-  {% for form in armors.forms %}
-    {{ form.as_table }}
-  {% endfor %}
-  </table>
-
-  <table class="formset inline">
-  <caption>Energy Shield</caption>
-  {{ shields.management_form }}
-  {% for form in shields.forms %}
-    {{ form.as_table }}
-  {% endfor %}
-  </table>
-</div>
-
-{% csrf_token %}
-</form>
+    <form class='character_form'>
+        {{ form.non_field_errors}}
+        {{ form.management_form }}
+        <input name='id' type='hidden' value='{{c.id}}'>
+        <input name='rid' type='hidden' value='{{c.rid}}'>
+        <table class="formset">
+            <caption>{{c.rid}}</caption>
+            <tr>
+                <td>
+                    <div class="field_wrapper">
+                        {{ form.full_name.errors}}
+                        <label for="full_name">Name</label>
+                        {{form.full_name }}
+                    </div>
+                    <div class="field_wrapper">
+                        {{ form.entrance.errors}}
+                        <label for="entrance">Entrance</label>
+                        {{form.entrance}}
+                    </div>
+                    <div class="field_wrapper">
+                        {{ form.alliance.errors}}
+                        <label for="">Alliance</label>
+                        {{form.alliance}}
+                    </div>
+                    <div class="field_wrapper">
+                        {{ form.specie.errors}}
+                        <label for="">Species/Race</label>
+                        {{form.specie}}
+                    </div>
+                    <div class="field_wrapper">
+                        {{ form.birthdate.errors}}
+                        <label for="">Birthyear</label>
+                        {{form.birthdate}}
+                    </div>
+                    <div class="field_wrapper">
+                        {{ form.gender.errors}}
+                        <label for="">Gender</label>
+                        {{form.gender}}
+                    </div>
+                    <div class="field_wrapper">
+                        {{ form.height.errors}}
+                        <label for="">Height</label>
+                        {{form.height}}
+                    </div>
+                    <div class="field_wrapper">
+                        {{ form.weight.errors}}
+                        <label for="">Weight</label>
+                        {{form.weight}}
+                    </div>
+                    <div class="field_wrapper">
+                        {{ form.rank.errors}}
+                        <label for="">Rank</label>
+                        {{form.rank}}
+                    </div>
+                    <div class="field_wrapper">
+                        {{ form.native_fief.errors}}
+                        <label for="">Native Fief</label>
+                        {{form.native_fief}}
+                    </div>
+                    <div class="field_wrapper">
+                        {{ form.caste.errors}}
+                        <label for="">Caste:</label>
+                        {{form.caste}}
+                    </div>
+                    <div class="field_wrapper">
+                        {{ form.player.errors}}
+                        <label for="">Player</label>
+                        {{form.player}}
+                    </div>
+                    <div class="field_wrapper">
+                        {{ form.occult.errors}}
+                        <label for="">Occult</label>
+                        {{form.occult}}
+                    </div>
+                    <div class="field_wrapper">
+                        {{ form.keyword.errors}}
+                        <label for="">Keyword</label>
+                        {{form.keyword}}
+                    </div>
+                    <div class="field_wrapper">
+                        {{ form.is_exportable.errors}}
+                        <label for="">Exportable</label>
+                        {{form.is_exportable}}
+                    </div>
+                    <div class="field_wrapper">
+                        {{ form.is_visible.errors}}
+                        <label for="">Visible</label>
+                        {{form.is_visible}}
+                    </div>
+                    <div class="field_wrapper">
+                        {{ form.is_dead.errors}}
+                        <label for="">Dead</label>
+                        {{form.is_dead}}
+                    </div>
+                    <div class="field_wrapper">
+                        {{ form.use_history_creation_errors}}
+                        <label for="">Use History Creation</label>
+                        {{form.use_history_creation}}
+                    </div>
+                    <div class="field_wrapper">
+                        {{ form.is_locked.errors}}
+                        <label for="">Locked</label>
+                        {{form.is_locked}}
+                    </div>
+                    <div class="field_wrapper">
+                        {{ form.is_public.errors}}
+                        <label for="">Public</label>
+                        {{form.is_public}}
+                    </div>
+                    <div class="field_wrapper">
+                        {{ form.is_partial.errors}}
+                        <label for="">Partial</label>
+                        {{form.is_partial}}
+                    </div>
+                    <div class="field_wrapper">
+                        {{ form.use_only_entrance.errors}}
+                        <label for="">Only Entrance</label>
+                        {{form.use_only_entrance}}
+                    </div>
+                    <div class="field_wrapper">
+                        {{ form.epic.errors}}
+                        <label for="">Epic</label>
+                        {{form.epic}}
+                    </div>
+                    <div class="field_wrapper">
+                        {{ form.narrative.errors}}
+                        <label for="">Narrative</label>
+                        {{form.narrative}}
+                    </div>
+                </td><td>
+                      <table class="formset inline">
+                      <caption>Lifepath</caption>
+                      {{ tourofdutys.management_form }}
+                      {% for form in tourofdutys.forms %}
+                        {{ form.as_table }}
+                        {% endfor %}
+                    </table>
+                </td>
+            </tr>
+        </table>
+        {% csrf_token %}
+    </form>
 
 
 </div>

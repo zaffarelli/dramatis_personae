@@ -4,42 +4,61 @@
 {% if c.weapon_set.count != 0 %}
 <table class='unbreakable'>
     <tr>
-        <th colspan=12>Weapons ({{c.weapon_cost}})</th>
+        <th colspan=11>Weapons ({{c.weapon_cost}})</th>
     </tr>
     {% for w in c.weapon_set.all|dictsort:"weapon_ref.reference" %}
     <tr>
-        <th colspan=8>{{ w.weapon_ref.reference|safe }}</th>
-        <th colspan=2>{{ w.weapon_ref.origins|safe }}</th>
+        <th colspan=5>{{ w.weapon_ref.reference|safe }}</th>
+        <th colspan=4>{{ w.weapon_ref.origins|safe }}</th>
         <th colspan=2>{{ w.weapon_ref.cost|safe }}£</th>
     </tr>
+    {% if w.weapon_ref.category == "MELEE" %}
     <tr>
-
+        <td colspan=3>CA</td>
+        <td>WA</td>
+        <td>CO</td>
+        <td>AV</td>
+        <td colspan=2>DC</td>
+        <td>STR</td>
+        <td>RNG</td>
+        <td>REL</td>
+    </tr>
+    <tr>
+        <td colspan=3>{{ w.weapon_ref.category }}</td>
+        <td>{{ w.weapon_ref.weapon_acccuracy }}</td>
+        <td>{{ w.weapon_ref.conceilable }}</td>
+        <td>{{ w.weapon_ref.availability }}</td>
+        <td colspan=2>{{ w.weapon_ref.damage_class }}</td>
+        <td>{{ w.weapon_ref.str_min }}</td>
+        <td>{{ w.weapon_ref.rng|safe }}</td>
+        <td>{{ w.weapon_ref.rel|safe }}</td>
+    </tr>
+    {%else%}
+    <tr>
         <td>CA</td>
         <td>WA</td>
         <td>CO</td>
-        <td>A</td>
+        <td>AV</td>
         <td colspan=2>DC</td>
         <td>Cal</td>
-        <td>STR</td>
         <td>RoF</td>
         <td>Clip</td>
         <td>RNG</td>
         <td>REL</td>
     </tr>
     <tr>
-
         <td>{{ w.weapon_ref.category }}</td>
         <td>{{ w.weapon_ref.weapon_acccuracy }}</td>
         <td>{{ w.weapon_ref.conceilable }}</td>
         <td>{{ w.weapon_ref.availability }}</td>
         <td colspan=2>{{ w.weapon_ref.damage_class }}</td>
         <td>{{ w.weapon_ref.caliber|safe }}</td>
-        <td>{{ w.weapon_ref.str_min }}</td>
         <td>{{ w.weapon_ref.rof }}</td>
         <td>{{ w.weapon_ref.clip }}</td>
         <td>{{ w.weapon_ref.rng|safe }}</td>
         <td>{{ w.weapon_ref.rel|safe }}</td>
     </tr>
+    {%endif%}
 {% endfor %}
 </table>
 {%endif%}

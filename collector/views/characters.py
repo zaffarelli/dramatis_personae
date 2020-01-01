@@ -21,11 +21,13 @@ class CharacterDetailView(DetailView):
     context_object_name = 'c'
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        # id = context['c'].pk
+        # ch = Character.objects.get(pk=id)
+        # ch.save()
+        # context = super().get_context_data(**kwargs)
         context['no_skill_edit'] = True
-        #print(context['c'].full_name)
         messages.info(self.request, 'Display avatar %s'%(context['c'].full_name))
         return context
-
 
 class CharacterUpdateView(AjaxFromResponseMixin,UpdateView):
     model = Character
@@ -36,31 +38,32 @@ class CharacterUpdateView(AjaxFromResponseMixin,UpdateView):
 
     def form_valid(self, form):
         context = self.get_context_data(form=form)
-        skills_formset = context['skills']
-        talents_formset = context['talents']
-        blessingcurses_formset = context['blessingcurses']
-        beneficeafflictions_formset = context['beneficeafflictions']
-        armors_formset = context['armors']
-        weapons_formset = context['weapons']
-        shields_formset = context['shields']
+        # skills_formset = context['skills']
+        # talents_formset = context['talents']
+        # blessingcurses_formset = context['blessingcurses']
+        # beneficeafflictions_formset = context['beneficeafflictions']
+        # armors_formset = context['armors']
+        # weapons_formset = context['weapons']
+        # shields_formset = context['shields']
         tourofdutys_formset = context['tourofdutys']
-        if skills_formset.is_valid() and talents_formset.is_valid() and blessingcurses_formset.is_valid() and beneficeafflictions_formset.is_valid() and armors_formset.is_valid() and weapons_formset.is_valid() and shields_formset.is_valid() and tourofdutys_formset.is_valid():
+        # if skills_formset.is_valid() and talents_formset.is_valid() and blessingcurses_formset.is_valid() and beneficeafflictions_formset.is_valid() and armors_formset.is_valid() and weapons_formset.is_valid() and shields_formset.is_valid() and
+        if tourofdutys_formset.is_valid():
             response = super().form_valid(form)
-            skills_formset.instance = self.object
-            talents_formset.instance = self.object
-            blessingcurses_formset.instance = self.object
-            beneficeafflictions_formset.instance = self.object
-            armors_formset.instance = self.object
-            weapons_formset.instance = self.object
-            shields_formset.instance = self.object
+            # skills_formset.instance = self.object
+            # talents_formset.instance = self.object
+            # blessingcurses_formset.instance = self.object
+            # beneficeafflictions_formset.instance = self.object
+            # armors_formset.instance = self.object
+            # weapons_formset.instance = self.object
+            # shields_formset.instance = self.object
             tourofdutys_formset.instance = self.object
-            skills_formset.save()
-            talents_formset.save()
-            blessingcurses_formset.save()
-            beneficeafflictions_formset.save()
-            armors_formset.save()
-            weapons_formset.save()
-            shields_formset.save()
+            # skills_formset.save()
+            # talents_formset.save()
+            # blessingcurses_formset.save()
+            # beneficeafflictions_formset.save()
+            # armors_formset.save()
+            # weapons_formset.save()
+            # shields_formset.save()
             tourofdutys_formset.save()
             return response
         else:
@@ -71,32 +74,32 @@ class CharacterUpdateView(AjaxFromResponseMixin,UpdateView):
         context = super(CharacterUpdateView, self).get_context_data(**kwargs)
         if self.request.POST:
             context['form'] = CharacterForm(self.request.POST, instance=self.object)
-            context['skills'] = SkillFormSet(self.request.POST, instance=self.object)
-            context['talents'] = TalentFormSet(self.request.POST, instance=self.object)
-            context['blessingcurses'] = BlessingCurseFormSet(self.request.POST, instance=self.object)
-            context['beneficeafflictions'] = BeneficeAfflictionFormSet(self.request.POST, instance=self.object)
-            context['armors'] = ArmorFormSet(self.request.POST, instance=self.object)
-            context['weapons'] = WeaponFormSet(self.request.POST, instance=self.object)
-            context['shields'] = ShieldFormSet(self.request.POST, instance=self.object)
+            # context['skills'] = SkillFormSet(self.request.POST, instance=self.object)
+            # context['talents'] = TalentFormSet(self.request.POST, instance=self.object)
+            # context['blessingcurses'] = BlessingCurseFormSet(self.request.POST, instance=self.object)
+            # context['beneficeafflictions'] = BeneficeAfflictionFormSet(self.request.POST, instance=self.object)
+            # context['armors'] = ArmorFormSet(self.request.POST, instance=self.object)
+            # context['weapons'] = WeaponFormSet(self.request.POST, instance=self.object)
+            # context['shields'] = ShieldFormSet(self.request.POST, instance=self.object)
             context['tourofdutys'] = TourOfDutyFormSet(self.request.POST, instance=self.object)
-            context['skills'].full_clean()
-            context['talents'].full_clean()
-            context['blessingcurses'].full_clean()
-            context['beneficeafflictions'].full_clean()
-            context['armors'].full_clean()
-            context['weapons'].full_clean()
-            context['shields'].full_clean()
+            # context['skills'].full_clean()
+            # context['talents'].full_clean()
+            # context['blessingcurses'].full_clean()
+            # context['beneficeafflictions'].full_clean()
+            # context['armors'].full_clean()
+            # context['weapons'].full_clean()
+            # context['shields'].full_clean()
             context['tourofdutys'].full_clean()
             messages.success(self.request, 'Updating avatar %s'%(context['form']['full_name'].value()))
         else:
             context['form'] = CharacterForm(instance=self.object)
-            context['skills'] = SkillFormSet(instance=self.object)
-            context['talents'] = TalentFormSet(instance=self.object)
-            context['blessingcurses'] = BlessingCurseFormSet(instance=self.object)
-            context['beneficeafflictions'] = BeneficeAfflictionFormSet(instance=self.object)
-            context['armors'] = ArmorFormSet(instance=self.object)
-            context['weapons'] = WeaponFormSet(instance=self.object)
-            context['shields'] = ShieldFormSet(instance=self.object)
+            # context['skills'] = SkillFormSet(instance=self.object)
+            # context['talents'] = TalentFormSet(instance=self.object)
+            # context['blessingcurses'] = BlessingCurseFormSet(instance=self.object)
+            # context['beneficeafflictions'] = BeneficeAfflictionFormSet(instance=self.object)
+            # context['armors'] = ArmorFormSet(instance=self.object)
+            # context['weapons'] = WeaponFormSet(instance=self.object)
+            # context['shields'] = ShieldFormSet(instance=self.object)
             context['tourofdutys'] = TourOfDutyFormSet(instance=self.object)
             messages.info(self.request, 'Form display for avatar %s'%(context['form']['full_name'].value()))
         return context
@@ -315,7 +318,7 @@ def customize_weapon_del(request,avatar,item):
     item_found = None
     for item in custo_items:
         if item.weapon_ref == item_ref:
-            item_found = item_ref
+            item_found = item
             break
     if item_found:
         txt = item_found.weapon_ref.reference
@@ -371,7 +374,7 @@ def customize_armor_del(request,avatar,item):
     item_found = None
     for item in custo_items:
         if item.armor_ref == item_ref:
-            item_found = item_ref
+            item_found = item
             break
     if item_found:
         txt = item_found.armor_ref.reference
@@ -422,12 +425,12 @@ def customize_shield_del(request,avatar,item):
     from collector.models.shield_custo import ShieldCusto
     context = {}
     ch = Character.objects.get(pk=avatar)
-    item_ref = ShielRef.objects.get(pk=item)
+    item_ref = ShieldRef.objects.get(pk=item)
     custo_items = ch.charactercusto.shieldcusto_set.all()
     item_found = None
     for item in custo_items:
         if item.shield_ref == item_ref:
-            item_found = item_ref
+            item_found = item
             break
     if item_found:
         txt = item_found.shield_ref.reference

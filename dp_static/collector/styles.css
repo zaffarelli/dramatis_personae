@@ -249,7 +249,7 @@ body {
           body .wrapper .details .attributes table.occult td.edit {
             width: 5ex; }
       body .wrapper .details .gear {
-        column-count: 3;
+        column-count: 2;
         column-gap: 5px;
         column-rule: 1px dotted #494c49;
         margin-top: 3px;
@@ -434,13 +434,15 @@ body {
         body .wrapper .details .storyview h1, body .wrapper .details .storyview h2, body .wrapper .details .storyview h3, body .wrapper .details .storyview h4 {
           color: #e5deca; }
       body .wrapper .details .narrative {
-        margin-top: 0;
+        margin: 5px;
         vertical-align: top;
-        display: inline-block;
+        display: block;
         border: 1px solid black;
         border-radius: 5px;
         padding: 5px;
-        width: 34%;
+        width: auto;
+        page-break-after: always;
+        page-break-inside: avoid;
         /*column-count:2;*/
         /*column-gap:10px;*/
         /*column-rule:1px dotted $fics_light;*/ }
@@ -750,7 +752,7 @@ body {
   body .mobile_form {
     position: fixed;
     display: block;
-    width: 250px;
+    width: 450px;
     height: auto;
     right: 1px;
     bottom: 1px;
@@ -786,6 +788,14 @@ body {
         display: none; }
       body .mobile_form.collapsed table.collapsed {
         display: block; }
+    body .mobile_form table.expanded tr td[colspan="1"], body .mobile_form table.expanded tr th[colspan="1"] {
+      width: 30px; }
+    body .mobile_form table.expanded tr td[colspan="2"], body .mobile_form table.expanded tr th[colspan="2"] {
+      width: 120px; }
+    body .mobile_form table.expanded tr td[colspan="3"], body .mobile_form table.expanded tr th[colspan="3"] {
+      width: 300px; }
+    body .mobile_form table.expanded ul {
+      margin: 0; }
 
 /* Invalid display */
 @media screen and (max-width: 640px) {

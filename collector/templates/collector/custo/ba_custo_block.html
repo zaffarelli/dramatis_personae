@@ -1,20 +1,24 @@
 <table class='expanded'>
 	<tr>
-		<th><span id='ba_add' class='edit_icon fa fa-arrow-alt-circle-left'></span></th>
-		<th>Add B/A</th><td>
+		<th colspan=1><span id='ba_add' class='edit_icon fa fa-arrow-alt-circle-left'></span></th>
+		<th colspan=2>Add B/A</th>
+        <td colspan=3>
 			<select id='ba_select'>
 			{% for s in c.ba_options %}
-				<option value='{{s.id}}' style='width:15ex;'>{{s.reference}}</option>
+				<option value='{{s.id}}' style='width:15ex;'>{{s.reference}} ({{s.value}})</option>
 			{% endfor %}
 			</select>
+        </td>
 	</tr>
 	<tr>
-		<th><span id='ba_del' class='edit_icon fa fa-arrow-alt-circle-right'></span></th>
-		<th>Remove B/A</th><td>
+		<th colspan=1><span id='ba_del' class='edit_icon fa fa-arrow-alt-circle-right'></span></th>
+		<th colspan=2>Remove B/A</th>
+        <td colspan=3>
 			<select id='ba_unselect'>
 			{% for s in c.ba_options_not %}
-				<option value='{{s.id}}' style='width:15ex;'>{{s.reference}}</option>
+				<option value='{{s.id}}' style='width:15ex;'>{{s.reference}} ({{s.value}})</option>
 			{% endfor %}
 			</select>
+        </td>
 	</tr>
 </table>

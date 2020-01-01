@@ -56,7 +56,7 @@ def as_bullets_short(value):
                     res += one_veryhigh
                 elif x>4:
                     res += one_high
-                elif x>1:
+                elif x>2:
                     res += one_medium
                 else:
                     res += one_low
@@ -67,7 +67,7 @@ def as_bullets_short(value):
             x += 1
         return res
     else:
-        return str(value)
+        return "ERROR!"
 
 
 @register.filter(name='parse_avatars')
@@ -255,7 +255,8 @@ def as_pa_short(value):
           "PA_REF":"REF",
           "PA_AGI":"AGI",
           "PA_AWA":"AWA",
-          "OCC_LVL":"Occult", 
+          "OCC_LVL":"Occult",
           "OCC_DRK":"Darkside",
+          "":"Error!",
         }
     return PA[value]

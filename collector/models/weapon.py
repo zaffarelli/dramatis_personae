@@ -9,8 +9,9 @@ from django.contrib import admin
 class WeaponRef(models.Model):
   class Meta:
     ordering = ['origins','reference', 'category','damage_class',]
-    verbose_name = "Weapon Reference"    
+    verbose_name = "Weapon Reference"
   reference = models.CharField(max_length=64,default='',blank=True, unique=True)
+  meta_type = models.CharField(max_length=64,default='',blank=True, null=True)
   category = models.CharField(max_length=5,choices=(('MELEE',"Melee weapon"),('P',"Pistol/revolver"),('RIF',"Rifle"),('SMG',"Submachinegun"),('SHG',"Shotgun"),('HVY',"Heavy weapon"),('EX',"Exotic weapon")),default='RIF',blank=True)
   weapon_accuracy = models.IntegerField(default=0,blank=True)
   conceilable = models.CharField(max_length=1,choices=(('P',"Pocket"),('J',"Jacket"),('L',"Long coat"),('N',"Can't be hidden")),default='J',blank=True)
@@ -23,7 +24,7 @@ class WeaponRef(models.Model):
   rng = models.PositiveIntegerField(default=0,blank=True)
   rel = models.CharField(max_length=2,choices=(('VR',"Very reliable"),('ST',"Standard"),('UR',"Unreliable")),default='ST',blank=True)
   cost = models.PositiveIntegerField(default=0,blank=True)
-  description = models.TextField(max_length=256,default='',blank=True)
+  description = models.TextField(max_length=1024,default='',blank=True)
   stats = models.CharField(max_length=256,default='',blank=True)
   origins = models.CharField(max_length=64,default='',blank=True)
   def __str__(self):
@@ -42,7 +43,7 @@ class WeaponRef(models.Model):
       res.append('Cal:'+self.caliber)
       res.append('ROF:'+str(self.rof))
       res.append('Clip:'+str(self.clip))
-    res.append('RNG:'+str(self.rng))    
+    res.append('RNG:'+str(self.rng))
     res.append(str(self.rel))
     res.append('£'+str(self.cost))
     self.stats = ' . '.join(res) # ⦁⏺
@@ -65,11 +66,6 @@ def update_stats_lines(modeladmin, request, queryset):
   short_description = "Update stats line"
 
 class WeaponRefAdmin(admin.ModelAdmin):
-  list_display = ('reference','origins','category','weapon_accuracy','damage_class','availability','cost')
-  ordering = ('origins','reference','category','damage_class',)
+  list_display = ('reference','meta_type','origins','category','caliber','weapon_accuracy','damage_class','availability','cost', 'description')
+  ordering = ('category','meta_type','reference','origins','damage_class',)
   actions = [update_stats_lines,]
-
-
-
-
-

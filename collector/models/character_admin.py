@@ -70,7 +70,7 @@ def make_enquist(modeladmin, request, queryset):
   short_description = "Make enquist"
 
 class CharacterAdmin(admin.ModelAdmin):
-  list_display = ('full_name','specie','role','profile','alliance','use_history_creation','PA_TOTAL','SK_TOTAL','BA_TOTAL','BC_TOTAL','TA_TOTAL','OP','is_public','is_partial','use_only_entrance','is_visible','epic')
+  list_display = ('full_name','specie','alliance','use_history_creation','lifepath_total','OP','use_history_creation','is_public','is_partial','use_only_entrance','is_visible','epic')
   inlines = [
     SkillInline,
     BlessingCurseInline,
@@ -80,7 +80,7 @@ class CharacterAdmin(admin.ModelAdmin):
     ArmorInline,
     ShieldInline,
     TourOfDutyInline,
-  ]  
+  ]
   ordering = ['epic','full_name',]
   actions = [cast_to_blank, cast_to_dem, cast_to_antu, make_invisible, make_visible, make_teutonic, make_kaanic, make_castillan, make_enquist, make_public, make_private, make_partial, make_complete]
   exclude = ['SA_REC','SA_STA','SA_END','SA_STU','SA_RES','SA_DMG','SA_TOL','SA_HUM','SA_PAS','SA_WYR','SA_SPD','SA_RUN','PA_TOTAL','SK_TOTAL','TA_TOTAL','BC_TOTAL','BA_TOTAL']

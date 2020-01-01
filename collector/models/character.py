@@ -169,11 +169,17 @@ class Character(models.Model):
             self.lifepath_total += tod.tour_of_duty_ref.value
         fs_fics7.check_secondary_attributes(self)
         self.refresh_skills_options()
-        self.refresh_ba_options()
-        self.refresh_bc_options()
-        self.refresh_weapon_options()
-        self.refresh_shield_options()
-        self.refresh_armor_options()
+        self.refresh_options("ba_options","ba_options_not", self.charactercusto.beneficeafflictioncusto_set.all(), "benefice_affliction_ref", "BeneficeAfflictionRef")
+        self.refresh_options("bc_options","bc_options_not", self.charactercusto.blessingcursecusto_set.all(), "blessing_curse_ref", "BlessingCurseRef")
+        self.refresh_options("weapon_options","weapon_options_not", self.charactercusto.weaponcusto_set.all(), "weapon_ref", "WeaponRef")
+        self.refresh_options("shield_options","shield_options_not", self.charactercusto.shieldcusto_set.all(), "shield_ref", "ShieldRef")
+        self.refresh_options("armor_options","armor_options_not", self.charactercusto.armorcusto_set.all(), "armor_ref", "ArmorRef")
+        # self.refresh_ba_options()
+        # self.refresh_bc_options()
+        # self.refresh_weapon_options()
+        # self.refresh_shield_options()
+        # self.refresh_armor_options()
+
         self.charactercusto.save()
         self.add_missing_root_skills()
         self.resetTotal()
@@ -192,6 +198,7 @@ class Character(models.Model):
 
     def fix(self, conf=None):
         """ Check / calculate other characteristics """
+        logger.info('Fixing ........: %s' % (self.full_name))
         self.info_str = self.get_pa("PA_STR")
         self.info_con = self.get_pa("PA_CON")
         self.info_bod = self.get_pa("PA_BOD")
@@ -231,104 +238,115 @@ class Character(models.Model):
             if sc != '':
                 tmp_shortcuts.append(sc)
         gm_shortcuts = ''.join(tmp_shortcuts)
-        #gm_shortcuts += fs_fics7.check_attacks(self)
-        #gm_shortcuts += fs_fics7.check_health(self)
-        #gm_shortcuts += fs_fics7.check_defense(self)
-        #if not self.player:
-        #        gm_shortcuts += fs_fics7.check_nameless_attributes(self)
         self.gm_shortcuts = gm_shortcuts
         self.is_exportable = self.check_exportable()
-        logger.info('>>> %s %s' % (self.rid, self.is_exportable))
+        logger.info('Done fixing ...: %s' % (self.full_name))
 
-    # def apply_racial_pa_mods(self):
-    #     attr_mods = self.specie.get_racial_attr_mod()
-    #     for am in attr_mods:
-    #         v = getattr(self, am)
-    #         setattr(self, am, v+attr_mods[am])
-
-    def refresh_weapon_options(self):
+    def refresh_options(self, options, options_not, custo_set, ref_type, refclass):
+        """ Refresh options / options_not global engine """
         from collector.models.weapon import WeaponRef
-        self.weapon_options = []
-        self.weapon_options_not = []
-        custo_items = self.charactercusto.weaponcusto_set.all()
-        custo_ref_items = []
-        for item in custo_items:
-            custo_ref_items.append(item.weapon_ref)
-        all_items = WeaponRef.objects.all()
-        for item in all_items:
-            if item in custo_ref_items:
-                self.weapon_options_not.append(item)
-            else:
-                self.weapon_options.append(item)
-
-    def refresh_shield_options(self):
         from collector.models.shield import ShieldRef
-        self.shield_options = []
-        self.shield_options_not = []
-        custo_items = self.charactercusto.shieldcusto_set.all()
-        custo_ref_items = []
-        for item in custo_items:
-            custo_ref_items.append(item.shield_ref)
-        all_items = ShieldRef.objects.all()
-        for item in all_items:
-            if item in custo_ref_items:
-                self.shield_options_not.append(item)
-            else:
-                self.shield_options.append(item)
-
-    def refresh_armor_options(self):
         from collector.models.armor_ref import ArmorRef
-        self.armor_options = []
-        self.armor_options_not = []
-        custo_items = self.charactercusto.armorcusto_set.all()
+        from collector.models.benefice_affliction_ref import BeneficeAfflictionRef
+        from collector.models.blessing_curse_ref import BlessingCurseRef
+        o = []
+        o_n = []
+        custo_items = custo_set
         custo_ref_items = []
         for item in custo_items:
-            custo_ref_items.append(item.armor_ref)
-        all_items = ArmorRef.objects.all()
+            custo_ref_items.append(getattr(item,ref_type))
+        all_items = eval(refclass).objects.all()
         for item in all_items:
             if item in custo_ref_items:
-                self.armor_options_not.append(item)
+                o_n.append(item)
             else:
-                self.armor_options.append(item)
-
-    def refresh_ba_options(self):
-        from collector.models.benefice_affliction_ref import BeneficeAfflictionRef
-        self.ba_options = []
-        self.ba_options_not = []
-        ss = self.charactercusto.beneficeafflictioncusto_set.all()
-        bar = []
-        for x in ss:
-            bar.append(x.benefice_affliction_ref)
-        all = BeneficeAfflictionRef.objects.all()
-        for s in all:
-            if s in bar:
-                #print("Discarded: "+s.reference)
-                self.ba_options_not.append(s)
-            else:
-                #print(s.reference)
-                self.ba_options.append(s)
+                o.append(item)
+        setattr(self,options,o)
+        setattr(self,options_not,o_n)
 
 
-    def refresh_bc_options(self):
-        from collector.models.blessing_curse_ref import BlessingCurseRef
-        self.bc_options = []
-        self.bc_options_not = []
-        bcs = self.charactercusto.blessingcursecusto_set.all()
-        bcr = []
-        for x in bcs:
-            bcr.append(x.blessing_curse_ref)
-        #print(bcr)
-        all = BlessingCurseRef.objects.all()
-        #print(all)
-        for bc in all:
-            if bc in bcr:
-                #print("BC Options not...... "+bc.reference)
-                self.bc_options_not.append(bc)
-            else:
-                #print("BC Options.......... "+bc.reference)
-                self.bc_options.append(bc)
+    # def refresh_weapon_options(self):
+    #     from collector.models.weapon import WeaponRef
+    #     self.weapon_options = []
+    #     self.weapon_options_not = []
+    #     custo_items = self.charactercusto.weaponcusto_set.all()
+    #     custo_ref_items = []
+    #     for item in custo_items:
+    #         custo_ref_items.append(item.weapon_ref)
+    #     all_items = WeaponRef.objects.all()
+    #     for item in all_items:
+    #         if item in custo_ref_items:
+    #             self.weapon_options_not.append(item)
+    #         else:
+    #             self.weapon_options.append(item)
+    #
+    # def refresh_shield_options(self):
+    #     from collector.models.shield import ShieldRef
+    #     self.shield_options = []
+    #     self.shield_options_not = []
+    #     custo_items = self.charactercusto.shieldcusto_set.all()
+    #     custo_ref_items = []
+    #     for item in custo_items:
+    #         custo_ref_items.append(item.shield_ref)
+    #     all_items = ShieldRef.objects.all()
+    #     for item in all_items:
+    #         if item in custo_ref_items:
+    #             self.shield_options_not.append(item)
+    #         else:
+    #             self.shield_options.append(item)
+    #
+    # def refresh_armor_options(self):
+    #     from collector.models.armor_ref import ArmorRef
+    #     self.armor_options = []
+    #     self.armor_options_not = []
+    #     custo_items = self.charactercusto.armorcusto_set.all()
+    #     custo_ref_items = []
+    #     for item in custo_items:
+    #         custo_ref_items.append(item.armor_ref)
+    #     all_items = ArmorRef.objects.all()
+    #     for item in all_items:
+    #         if item in custo_ref_items:
+    #             self.armor_options_not.append(item)
+    #         else:
+    #             self.armor_options.append(item)
+    #
+    #
+    #
+    # def refresh_ba_options(self):
+    #     from collector.models.benefice_affliction_ref import BeneficeAfflictionRef
+    #     self.ba_options = []
+    #     self.ba_options_not = []
+    #     ss = self.charactercusto.beneficeafflictioncusto_set.all()
+    #     bar = []
+    #     for x in ss:
+    #         bar.append(x.benefice_affliction_ref)
+    #     all = BeneficeAfflictionRef.objects.all()
+    #     for s in all:
+    #         if s in bar:
+    #             self.ba_options_not.append(s)
+    #         else:
+    #             self.ba_options.append(s)
+    #
+    #
+    #
+    #
+    # def refresh_bc_options(self):
+    #     from collector.models.blessing_curse_ref import BlessingCurseRef
+    #     self.bc_options = []
+    #     self.bc_options_not = []
+    #     bcs = self.charactercusto.blessingcursecusto_set.all()
+    #     bcr = []
+    #     for x in bcs:
+    #         bcr.append(x.blessing_curse_ref)
+    #     all = BlessingCurseRef.objects.all()
+    #     for bc in all:
+    #         if bc in bcr:
+    #             self.bc_options_not.append(bc)
+    #         else:
+    #             self.bc_options.append(bc)
 
     def refresh_skills_options(self):
+        """ This one is special: it only reflects skills that are not in the character """
         from collector.models.skill_ref import SkillRef
         self.skills_options = []
         self.skills_options_not = []
@@ -339,11 +357,9 @@ class Character(models.Model):
         all = SkillRef.objects.all().exclude(is_root=True)
         for s in all:
             if s in sr:
-                #print("Discarded: "+s.reference)
                 self.skills_options_not.append(s)
             else:
                 self.skills_options.append(s)
-                #print(s.reference)
 
 
     def add_or_update_skill(self, askill, modifier=0, stack=False):
@@ -645,7 +661,6 @@ def update_character(sender, instance, conf=None, **kwargs):
     instance.alliancehash = hashlib.sha1(
             bytes(instance.alliance, 'utf-8')
             ).hexdigest()
-    logger.debug('Fix .........: %s' % (instance.full_name))
 
 @receiver(post_save, sender=Character, dispatch_uid='backup_character')
 def backup_character(sender, instance, **kwargs):

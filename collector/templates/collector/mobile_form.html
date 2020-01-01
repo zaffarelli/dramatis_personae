@@ -4,15 +4,14 @@
 </table>
 <table class='expanded'>
 	<tr>
-        <td><span class='mobile_form_toggler action_icon fa fa-arrow-right'></td>
-		<th>Avatar</th>
-        <td>{{c.rid}}</td>
+        <td colspan=1><span class='mobile_form_toggler action_icon fa fa-arrow-right'></td>
+		<th colspan=2>Avatar</th>
+        <td colspan=3>{{c.rid}}</td>
 	</tr>
 </table>
 <span id="skill_custo_block">
     {% include "collector/custo/skill_custo_block.html"%}
 </span>
-
 <span id="bc_custo_block">
     {% include "collector/custo/bc_custo_block.html"%}
 </span>
@@ -28,9 +27,6 @@
 <span id="shield_custo_block">
     {% include "collector/custo/shield_custo_block.html"%}
 </span>
-
-
-
 <span id="summary_block">
     {% include "collector/custo/summary_block.html" %}
 </span>

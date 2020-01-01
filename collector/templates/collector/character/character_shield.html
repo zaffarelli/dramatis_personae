@@ -4,24 +4,26 @@
 
 {% if c.shield_set.count != 0 %}
 <table class='unbreakable'>
-    <tr><th colspan=3>Energy Shield ({{c.shield_cost}})</th></tr>
+    <tr><th colspan=4>Energy Shield ({{c.shield_cost}})</th></tr>
 {% for s in c.shield_set.all|dictsort:"shield_ref.reference" %}
-<tr><td>{{ s.shield_ref.reference|safe }}
-    <i class='fa fa-caret-up fa-xs'></i> {{s.shield_ref.protection_min}}/{{ s.shield_ref.protection_max }}
-    <i class='fa fa-caret-up fa-xs'></i> Hits:{{s.shield_ref.hits}}
-    </td><td>
-    <i class='fa fa-caret-up fa-xs'></i>
+    <tr>
+        <td>
+            {{ s.shield_ref.reference|safe }}
+        </td><td>
+            {{s.shield_ref.protection_min}}/{{ s.shield_ref.protection_max }}
+        </td><td>
+            {{s.shield_ref.hits}}
+        </td>
+        <td><tt>
         {% if s.shield_ref.is_compatible_with_medium_armor %}
-            (+Medium Armor)
+            (+M)
         {%endif%}
         {% if s.shield_ref.is_compatible_with_hard_armor %}
-            (+Hard Armor)
+            (+H)
         {%endif%}
-    </td></td>
-        {% if not s.shield_ref.description is empty %}
-        {{ s.shield_ref.description|safe }}
-        {% endif %}
-</td></tr>
+        </tt>&nbsp;
+        </td>
+    </tr>
 {% endfor %}
 </table>
 {%endif%}

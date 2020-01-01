@@ -70,6 +70,9 @@
     <span id="shortcuts_block_{{c.id}}">
     {% include "collector/character/character_shortcuts.html" %}
     </span>
+    <span class='narrative'>
+    {{ c.narrative|parse_avatars|safe }}
+    </span>
 </div>
 <div class='gear'>
     <span id="weapon_block_{{c.id}}">
@@ -83,9 +86,8 @@
     </span>
 </div>
 
-<div class='narrative'>
-{{ c.narrative|parse_avatars|safe }}
-</div>
+
+
 
 <hr/>
 <span class='golden custom_show' id='{{c.rid}}' ><a href='pdf/{{c.rid}}/' target='avatar_pdf'><i class="fas fa-file-pdf"></i> {{c.rid}}</a></span>

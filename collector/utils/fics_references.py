@@ -23,7 +23,7 @@ import hashlib
 """
 
 MAX_CHAR = 12
-RELEASE = '1.5.0'
+RELEASE = '1.6.0'
 DEBUG_ALL = False
 
 LIFEPATH_CATEGORY=(
@@ -60,6 +60,7 @@ LIFEPATH_CASTE=(
   ('Guild',"Guild"),
   ('Alien',"Alien"),
   ('Other',"Other"),
+  ('Freefolk',"Freefolk"),
 )
 
 LIFEPATH_CASTE_SHORT={
@@ -68,6 +69,7 @@ LIFEPATH_CASTE_SHORT={
   'Guild':   "Gui",
   'Alien':   "Ali",
   'Other':   "Oth",
+  'Freefolk': "Ffk",
 }
 
 
@@ -176,7 +178,21 @@ SHORTCUTS = {
       'label': 'WIL + Focus',
       'rationale': "Keep focused on a task",
     },
-
+    "Surgery":{
+      'attribute':"PA_INT",
+      'label': "INT + Surgery",
+      'rationale': "Apply surgery on wounded",
+    },
+    "Cybernetics":{
+      'attribute':"PA_TEC",
+      'label': "TEC + Cybernetics",
+      'rationale': "Surgically implant cyber",
+    },
+    "Remedy":{
+      'attribute':"PA_INT",
+      'label': "INT + Remedy",
+      'rationale': "Stabilize wounds",
+    },
   }
 
 

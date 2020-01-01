@@ -1,20 +1,24 @@
 <table class='expanded'>
 	<tr>
-		<th><span id='armor_add' class='edit_icon fa fa-arrow-alt-circle-left'></span></th>
-		<th>Add Armor</th><td>
+		<th colspan=1><span id='armor_add' class='edit_icon fa fa-arrow-alt-circle-left'></span></th>
+		<th colspan=2>Add Armor</th>
+        <td colspan=3>
 			<select id='armor_select'>
 			{% for s in c.armor_options %}
 				<option value='{{s.id}}' style='width:15ex;'>{{s.reference}}</option>
 			{% endfor %}
 			</select>
+        </td>
 	</tr>
 	<tr>
-		<th><span id='armor_del' class='edit_icon fa fa-arrow-alt-circle-right'></span></th>
-		<th>Remove Armor</th><td>
+		<th colspan=1><span id='armor_del' class='edit_icon fa fa-arrow-alt-circle-right'></span></th>
+		<th colspan=2>Remove Armor</th>
+        <td colspan=3>
 			<select id='armor_unselect'>
 			{% for s in c.armor_options_not %}
 				<option value='{{s.id}}' style='width:15ex;'>{{s.reference}}</option>
 			{% endfor %}
 			</select>
+        </td>
 	</tr>
 </table>
