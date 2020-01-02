@@ -38,7 +38,8 @@ class TourOfDuty(models.Model):
         ch.OCC_LVL += tod.OCC_LVL
         ch.OCC_DRK += tod.OCC_DRK
         for sm in tod.skillmodificator_set.all():
-            ch.add_or_update_skill(sm.skill_ref,sm.value,True)
+            if not sm.skill_ref.is_wildcard:
+                ch.add_or_update_skill(sm.skill_ref,sm.value,True)
         for bc in tod.blessingcursemodificator_set.all():
             ch.add_bc(bc.blessing_curse_ref)
         for ba in tod.beneficeafflictionmodificator_set.all():

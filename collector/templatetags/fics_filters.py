@@ -69,6 +69,28 @@ def as_bullets_short(value):
     else:
         return "ERROR!"
 
+@register.filter(name='as_bullets_short_wildcard')
+
+def as_bullets_short_wildcard(value):
+    """ Change int value to list of bullet (Mark Rein*Hagen like)
+    """
+    if isinstance(value,int):
+        one_low = '<i class="fas fa-circle fa-xs wildcard" title="%d"></i>'%(int(value))
+        blank = '<i class="fas fa-circle fa-xs blank" title="%d"></i>'%(int(value))
+        x = 0
+        res = ''
+        while x<10:
+            if x<int(value):
+                res += one_low
+            else:
+                res += blank
+            if (x+1) % 10 == 0:
+                res += '<br/>'
+            x += 1
+        return res
+    else:
+        return "ERROR!"
+
 
 @register.filter(name='parse_avatars')
 

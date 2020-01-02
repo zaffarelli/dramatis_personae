@@ -163,26 +163,27 @@ class Character(models.Model):
             self.charactercusto.comment = self.full_name
             self.charactercusto.push(self)
             self.charactercusto.save()
-
         self.lifepath_total = 0
         for tod in self.tourofduty_set.all():
             self.lifepath_total += tod.tour_of_duty_ref.value
         fs_fics7.check_secondary_attributes(self)
+        self.charactercusto.save()
+        self.prepareDisplay()
+        self.handleWildcards()
+        self.add_missing_root_skills()
+        self.resetTotal()
+
+    def prepareDisplay(self):
         self.refresh_skills_options()
         self.refresh_options("ba_options","ba_options_not", self.charactercusto.beneficeafflictioncusto_set.all(), "benefice_affliction_ref", "BeneficeAfflictionRef")
         self.refresh_options("bc_options","bc_options_not", self.charactercusto.blessingcursecusto_set.all(), "blessing_curse_ref", "BlessingCurseRef")
         self.refresh_options("weapon_options","weapon_options_not", self.charactercusto.weaponcusto_set.all(), "weapon_ref", "WeaponRef")
         self.refresh_options("shield_options","shield_options_not", self.charactercusto.shieldcusto_set.all(), "shield_ref", "ShieldRef")
         self.refresh_options("armor_options","armor_options_not", self.charactercusto.armorcusto_set.all(), "armor_ref", "ArmorRef")
-        # self.refresh_ba_options()
-        # self.refresh_bc_options()
-        # self.refresh_weapon_options()
-        # self.refresh_shield_options()
-        # self.refresh_armor_options()
+        self.preparePADisplay()
 
-        self.charactercusto.save()
-        self.add_missing_root_skills()
-        self.resetTotal()
+    def handleWildcards(self):
+        pass
 
     def rebuild_free_form(self):
         """ Freeform Creation """
@@ -196,9 +197,7 @@ class Character(models.Model):
             self.add_missing_root_skills()
             self.resetTotal()
 
-    def fix(self, conf=None):
-        """ Check / calculate other characteristics """
-        logger.info('Fixing ........: %s' % (self.full_name))
+    def preparePADisplay(self):
         self.info_str = self.get_pa("PA_STR")
         self.info_con = self.get_pa("PA_CON")
         self.info_bod = self.get_pa("PA_BOD")
@@ -213,6 +212,11 @@ class Character(models.Model):
         self.info_awa = self.get_pa("PA_AWA")
         self.info_lvl = self.get_pa("OCC_LVL")
         self.info_drk = self.get_pa("OCC_DRK")
+
+    def fix(self, conf=None):
+        """ Check / calculate other characteristics """
+        logger.info('Fixing ........: %s' % (self.full_name))
+        self.preparePADisplay()
 
         if not conf:
             if self.birthdate < 1000:
@@ -230,17 +234,20 @@ class Character(models.Model):
             self.rebuild_from_lifepath()
         else:
             self.rebuild_free_form()
-        gm_shortcuts = ''
-        tmp_shortcuts = []
+        self.calculateShortcuts()
+        self.is_exportable = self.check_exportable()
+        logger.info('Done fixing ...: %s' % (self.full_name))
+
+    def calculateShortcuts(self):
+        """ Calculate shortcuts for the avatar skills. A shortcut appears if skill.value>0  """
+        shortcuts = []
         skills = self.skill_set.all()
         for s in skills:
             sc = fs_fics7.check_gm_shortcuts(self, s)
             if sc != '':
-                tmp_shortcuts.append(sc)
-        gm_shortcuts = ''.join(tmp_shortcuts)
-        self.gm_shortcuts = gm_shortcuts
-        self.is_exportable = self.check_exportable()
-        logger.info('Done fixing ...: %s' % (self.full_name))
+                shortcuts.append(sc)
+        self.gm_shortcuts = ''.join(shortcuts)
+
 
     def refresh_options(self, options, options_not, custo_set, ref_type, refclass):
         """ Refresh options / options_not global engine """
@@ -263,87 +270,6 @@ class Character(models.Model):
                 o.append(item)
         setattr(self,options,o)
         setattr(self,options_not,o_n)
-
-
-    # def refresh_weapon_options(self):
-    #     from collector.models.weapon import WeaponRef
-    #     self.weapon_options = []
-    #     self.weapon_options_not = []
-    #     custo_items = self.charactercusto.weaponcusto_set.all()
-    #     custo_ref_items = []
-    #     for item in custo_items:
-    #         custo_ref_items.append(item.weapon_ref)
-    #     all_items = WeaponRef.objects.all()
-    #     for item in all_items:
-    #         if item in custo_ref_items:
-    #             self.weapon_options_not.append(item)
-    #         else:
-    #             self.weapon_options.append(item)
-    #
-    # def refresh_shield_options(self):
-    #     from collector.models.shield import ShieldRef
-    #     self.shield_options = []
-    #     self.shield_options_not = []
-    #     custo_items = self.charactercusto.shieldcusto_set.all()
-    #     custo_ref_items = []
-    #     for item in custo_items:
-    #         custo_ref_items.append(item.shield_ref)
-    #     all_items = ShieldRef.objects.all()
-    #     for item in all_items:
-    #         if item in custo_ref_items:
-    #             self.shield_options_not.append(item)
-    #         else:
-    #             self.shield_options.append(item)
-    #
-    # def refresh_armor_options(self):
-    #     from collector.models.armor_ref import ArmorRef
-    #     self.armor_options = []
-    #     self.armor_options_not = []
-    #     custo_items = self.charactercusto.armorcusto_set.all()
-    #     custo_ref_items = []
-    #     for item in custo_items:
-    #         custo_ref_items.append(item.armor_ref)
-    #     all_items = ArmorRef.objects.all()
-    #     for item in all_items:
-    #         if item in custo_ref_items:
-    #             self.armor_options_not.append(item)
-    #         else:
-    #             self.armor_options.append(item)
-    #
-    #
-    #
-    # def refresh_ba_options(self):
-    #     from collector.models.benefice_affliction_ref import BeneficeAfflictionRef
-    #     self.ba_options = []
-    #     self.ba_options_not = []
-    #     ss = self.charactercusto.beneficeafflictioncusto_set.all()
-    #     bar = []
-    #     for x in ss:
-    #         bar.append(x.benefice_affliction_ref)
-    #     all = BeneficeAfflictionRef.objects.all()
-    #     for s in all:
-    #         if s in bar:
-    #             self.ba_options_not.append(s)
-    #         else:
-    #             self.ba_options.append(s)
-    #
-    #
-    #
-    #
-    # def refresh_bc_options(self):
-    #     from collector.models.blessing_curse_ref import BlessingCurseRef
-    #     self.bc_options = []
-    #     self.bc_options_not = []
-    #     bcs = self.charactercusto.blessingcursecusto_set.all()
-    #     bcr = []
-    #     for x in bcs:
-    #         bcr.append(x.blessing_curse_ref)
-    #     all = BlessingCurseRef.objects.all()
-    #     for bc in all:
-    #         if bc in bcr:
-    #             self.bc_options_not.append(bc)
-    #         else:
-    #             self.bc_options.append(bc)
 
     def refresh_skills_options(self):
         """ This one is special: it only reflects skills that are not in the character """
@@ -491,13 +417,16 @@ class Character(models.Model):
         #from collector.models.skills import Skill
         from collector.models.skill_ref import SkillRef
         roots_list = []
+        # Get all roots in the avatar in roots_list
         for skill in self.skill_set.all():
             if skill.skill_ref.is_speciality:
-                roots_list.append(skill.skill_ref.linked_to)
+                if not skill.skill_ref.is_wildcard:
+                    roots_list.append(skill.skill_ref.linked_to)
+        # Delete all roots from the avatar skills
         for skill in self.skill_set.all():
             if skill.skill_ref.is_root:
                 skill.delete()
-        #self.build_log += (roots_list)
+        # Add the roots from the root_list
         for skillref in SkillRef.objects.all():
             if skillref in roots_list:
                 self.add_or_update_skill(skillref, roots_list.count(skillref))
@@ -553,7 +482,6 @@ class Character(models.Model):
     def resetTotal(self):
         """ Compute all sums for all stats """
         self.SK_TOTAL = 0
-        self.TA_TOTAL = 0
         self.BC_TOTAL = 0
         self.BA_TOTAL = 0
         self.weapon_cost = 0
@@ -562,14 +490,12 @@ class Character(models.Model):
         self.PA_TOTAL = \
             self.PA_STR + self.PA_CON + self.PA_BOD + self.PA_MOV + \
             self.PA_INT + self.PA_WIL + self.PA_TEM + self.PA_PRE + \
-            self.PA_TEC + self.PA_REF + self.PA_AGI + self.PA_AWA
+            self.PA_TEC + self.PA_REF + self.PA_AGI + self.PA_AWA + self.OCC_LVL - self.OCC_DRK
         skills = self.skill_set.all()
         for s in skills:
             if not s.skill_ref.is_root:
-                self.SK_TOTAL += s.value
-        # talents = self.talent_set.all()
-        # for t in talents:
-        #     self.TA_TOTAL += t.value
+                if not s.skill_ref.is_wildcard:
+                    self.SK_TOTAL += s.value
         blessingcurses = self.blessingcurse_set.all()
         for bc in blessingcurses:
             self.BC_TOTAL += bc.blessing_curse_ref.value
@@ -577,21 +503,17 @@ class Character(models.Model):
         for ba in beneficeafflictions:
             self.BA_TOTAL += ba.benefice_affliction_ref.value
         self.AP = self.PA_TOTAL
-        self.OP = self.PA_TOTAL*3 + self.SK_TOTAL + self.TA_TOTAL + \
-            self.BC_TOTAL + self.BA_TOTAL
+        self.OP = self.PA_TOTAL*3 + self.SK_TOTAL + self.BC_TOTAL + self.BA_TOTAL
         weapons = self.weapon_set.all()
         for w in weapons:
             self.weapon_cost += w.weapon_ref.cost
-        #self.OP += int(self.weapon_cost / 100)
         armors = self.armor_set.all()
         for a in armors:
             self.armor_cost += a.armor_ref.cost
-        #self.OP += int(self.armor_cost / 100)
         shields = self.shield_set.all()
         for s in shields:
             self.shield_cost += s.shield_ref.cost
-        #self.OP += int(self.shield_cost / 100)
-        return 'ok'
+        return "ok"
 
     def check_exportable(self, conf=None):
         """ Is that avatar finished according to the role and profile? """

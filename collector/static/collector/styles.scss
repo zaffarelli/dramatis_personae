@@ -777,6 +777,11 @@ body {
         text-shadow: 0 0 3px black;
     }
 
+    .wildcard {
+        color: $fics_front;
+        opacity: .5;
+    }
+
     .low {
         color: $fics_front;
         /*opacity: .5;*/

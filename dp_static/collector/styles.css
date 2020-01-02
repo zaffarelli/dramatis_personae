@@ -526,6 +526,9 @@ body {
     color: #3c3f3c;
     opacity: .5;
     text-shadow: 0 0 3px black; }
+  body .wildcard {
+    color: #e5deca;
+    opacity: .5; }
   body .low {
     color: #e5deca;
     /*opacity: .5;*/

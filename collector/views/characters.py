@@ -104,6 +104,16 @@ class CharacterUpdateView(AjaxFromResponseMixin,UpdateView):
             messages.info(self.request, 'Form display for avatar %s'%(context['form']['full_name'].value()))
         return context
 
+def respawnAvatarLink(avatar,context):
+    template = get_template('collector/character_link.html')
+    context["avatar_link"] = template.render({'c':avatar})
+    return context
+
+def respawnSummary(avatar,context):
+    template = get_template('collector/custo/summary_block.html')
+    context["summary"] = template.render({'c':avatar})
+    return context
+
 @csrf_exempt
 def skill_pick(request, avatar, item, offset):
     """ Touching skills to edit them in the view """
@@ -119,8 +129,8 @@ def skill_pick(request, avatar, item, offset):
     context["c"] = model_to_dict(ch)
     template = get_template('collector/character/character_skill.html')
     context["block"] = template.render({'c':ch, 'skill': skill})
-    template = get_template('collector/custo/summary_block.html')
-    context["summary"] = template.render({'c':ch})
+    context = respawnSummary(ch,context)
+    context = respawnAvatarLink(ch,context)
     return JsonResponse(context)
 
 @csrf_exempt
@@ -141,8 +151,8 @@ def attr_pick(request, avatar, item, offset):
     context["c"] = model_to_dict(ch)
     template = get_template('collector/character/character_pa.html')
     context["block"] = template.render({'c':getattr(ch,info)})
-    template = get_template('collector/custo/summary_block.html')
-    context["summary"] = template.render({'c':ch})
+    context = respawnSummary(ch,context)
+    context = respawnAvatarLink(ch,context)
     return JsonResponse(context)
 
 
@@ -167,8 +177,8 @@ def customize_skill(request,avatar,item):
     context["block"] = template.render({'c':ch})
     template = get_template('collector/custo/skill_custo_block.html')
     context["custo_block"] = template.render({'c':ch})
-    template = get_template('collector/custo/summary_block.html')
-    context["summary"] = template.render({'c':ch})
+    context = respawnSummary(ch,context)
+    context = respawnAvatarLink(ch,context)
     messages.info(request, 'Avatar %s customized with skill %s at +1.'%(ch.full_name,new_item.skill_ref.reference))
     return JsonResponse(context)
 
@@ -191,8 +201,8 @@ def customize_bc(request,avatar,item):
     context["block"] = template.render({'c':ch})
     template = get_template('collector/custo/bc_custo_block.html')
     context["custo_block"] = template.render({'c':ch})
-    template = get_template('collector/custo/summary_block.html')
-    context["summary"] = template.render({'c':ch})
+    context = respawnSummary(ch,context)
+    context = respawnAvatarLink(ch,context)
     messages.info(request, 'Avatar %s customized with B/C %s.'%(ch.full_name,bcc.blessing_curse_ref.reference))
     return JsonResponse(context)
 
@@ -219,9 +229,10 @@ def customize_bc_del(request,avatar,item):
         context["block"] = template.render({'c':ch})
         template = get_template('collector/custo/bc_custo_block.html')
         context["custo_block"] = template.render({'c':ch})
+        context = respawnSummary(ch,context)
+        context = respawnAvatarLink(ch,context)
         messages.info(request, 'Avatar %s customized with B/C %s.'%(ch.full_name,txt))
-        template = get_template('collector/custo/summary_block.html')
-        context["summary"] = template.render({'c':ch})
+
     else:
         context["c"] = model_to_dict(ch)
         messages.info(request, 'B/C not found for %s.'%(ch.full_name))
@@ -246,8 +257,8 @@ def customize_ba(request,avatar,item):
     context["block"] = template.render({'c':ch})
     template = get_template('collector/custo/ba_custo_block.html')
     context["custo_block"] = template.render({'c':ch})
-    template = get_template('collector/custo/summary_block.html')
-    context["summary"] = template.render({'c':ch})
+    context = respawnSummary(ch,context)
+    context = respawnAvatarLink(ch,context)
     messages.info(request, 'Avatar %s customized with B/A %s.'%(ch.full_name,bac.benefice_affliction_ref.reference))
     return JsonResponse(context)
 
@@ -274,8 +285,8 @@ def customize_ba_del(request,avatar,item):
         context["block"] = template.render({'c':ch})
         template = get_template('collector/custo/ba_custo_block.html')
         context["custo_block"] = template.render({'c':ch})
-        template = get_template('collector/custo/summary_block.html')
-        context["summary"] = template.render({'c':ch})
+        context = respawnSummary(ch,context)
+        context = respawnAvatarLink(ch,context)
         messages.info(request, 'Avatar %s customized with B/A %s.'%(ch.full_name,txt))
     else:
         context["c"] = model_to_dict(ch)
@@ -301,8 +312,8 @@ def customize_weapon(request,avatar,item):
     context["block"] = template.render({'c':ch})
     template = get_template('collector/custo/weapon_custo_block.html')
     context["custo_block"] = template.render({'c':ch})
-    template = get_template('collector/custo/summary_block.html')
-    context["summary"] = template.render({'c':ch})
+    context = respawnSummary(ch,context)
+    context = respawnAvatarLink(ch,context)
     messages.info(request, 'Avatar %s customized with weapon %s.'%(ch.full_name,item_custo.weapon_ref.reference))
     return JsonResponse(context)
 
@@ -330,8 +341,8 @@ def customize_weapon_del(request,avatar,item):
         context["block"] = template.render({'c':ch})
         template = get_template('collector/custo/weapon_custo_block.html')
         context["custo_block"] = template.render({'c':ch})
-        template = get_template('collector/custo/summary_block.html')
-        context["summary"] = template.render({'c':ch})
+        context = respawnSummary(ch,context)
+        context = respawnAvatarLink(ch,context)
         messages.info(request, 'Avatar %s customized with weapon %s.'%(ch.full_name,txt))
     else:
         context["c"] = model_to_dict(ch)
@@ -357,8 +368,8 @@ def customize_armor(request,avatar,item):
     context["block"] = template.render({'c':ch})
     template = get_template('collector/custo/armor_custo_block.html')
     context["custo_block"] = template.render({'c':ch})
-    template = get_template('collector/custo/summary_block.html')
-    context["summary"] = template.render({'c':ch})
+    context = respawnSummary(ch,context)
+    context = respawnAvatarLink(ch,context)
     messages.info(request, 'Avatar %s customized with armor %s.'%(ch.full_name,item_custo.armor_ref.reference))
     return JsonResponse(context)
 
@@ -386,8 +397,8 @@ def customize_armor_del(request,avatar,item):
         context["block"] = template.render({'c':ch})
         template = get_template('collector/custo/armor_custo_block.html')
         context["custo_block"] = template.render({'c':ch})
-        template = get_template('collector/custo/summary_block.html')
-        context["summary"] = template.render({'c':ch})
+        context = respawnSummary(ch,context)
+        context = respawnAvatarLink(ch,context)
         messages.info(request, 'Avatar %s customized with armor %s.'%(ch.full_name,txt))
     else:
         context["c"] = model_to_dict(ch)
@@ -413,8 +424,8 @@ def customize_shield(request,avatar,item):
     context["block"] = template.render({'c':ch})
     template = get_template('collector/custo/shield_custo_block.html')
     context["custo_block"] = template.render({'c':ch})
-    template = get_template('collector/custo/summary_block.html')
-    context["summary"] = template.render({'c':ch})
+    context = respawnSummary(ch,context)
+    context = respawnAvatarLink(ch,context)
     messages.info(request, 'Avatar %s customized with shield %s.'%(ch.full_name,item_custo.shield_ref.reference))
     return JsonResponse(context)
 
@@ -442,8 +453,8 @@ def customize_shield_del(request,avatar,item):
         context["block"] = template.render({'c':ch})
         template = get_template('collector/custo/shield_custo_block.html')
         context["custo_block"] = template.render({'c':ch})
-        template = get_template('collector/custo/summary_block.html')
-        context["summary"] = template.render({'c':ch})
+        context = respawnSummary(ch,context)
+        context = respawnAvatarLink(ch,context)
         messages.info(request, 'Avatar %s customized with shield %s.'%(ch.full_name,txt))
     else:
         context["c"] = model_to_dict(ch)

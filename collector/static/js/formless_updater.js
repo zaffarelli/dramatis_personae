@@ -45,6 +45,7 @@ class FormlessUpdater{
                     $("#"+prefix+"_custo_block").html(answer.custo_block);
                     $("#"+prefix+"_block_"+answer.c["id"]).removeClass("working");
                     $("#summary_block").html(answer.summary);
+                    $("li#"+answer.c["id"]).html(answer.avatar_link);
                     self.prepareEvents();
                     rebootlinks();
 		 	    },
@@ -73,6 +74,7 @@ class FormlessUpdater{
                         $("#"+prefix+"_custo_block").html(answer.custo_block);
                         $("#"+prefix+"_block_"+answer.c["id"]).removeClass("working");
                         $("#summary_block").html(answer.summary);
+                        $("li#"+answer.c["id"]).html(answer.avatar_link);
                         self.prepareEvents();
                         rebootlinks();
     		 	    },
@@ -109,6 +111,7 @@ class FormlessUpdater{
                     $("#sk_"+skill_id).removeClass("working");
                     $("#sk_"+skill_id).html(answer.block);
                     $("#summary_block").html(answer.summary);
+                    $("li#"+answer.c["id"]).html(answer.avatar_link);
                     self.prepareEvents();
                     rebootlinks();
                 },
@@ -148,6 +151,7 @@ class FormlessUpdater{
                     $("#"+attr_id+"_"+avatar_id).removeClass("working");
                     $("#"+attr_id+"_"+avatar_id).html(answer.block);
                     $("#summary_block").html(answer.summary);
+                    $("li#"+answer.c["id"]).html(answer.avatar_link);
                     self.prepareEvents();
                     rebootlinks();
                 },

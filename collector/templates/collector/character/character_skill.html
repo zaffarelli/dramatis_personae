@@ -1,4 +1,5 @@
 {%load fics_filters%}
+        {% if not skill.skill_ref.is_wildcard %}
         <table >
             <tr>
                 <td>
@@ -16,12 +17,19 @@
                 {% if skill.skill_ref.is_root %}
                     <th></th>
                 {% else %}
-                <th class='edit'>
-                    <span id="skillplus_{{c.id}}_{{skill.skill_ref.id}}" class='edit_icon skillpick fa fa-plus-circle'></span><span id="skillminus_{{c.id}}_{{skill.skill_ref.id}}" class='edit_icon skillpick fa fa-minus-circle'></span>
-                </th>
+                    {% if not skill.skill_ref.is_wildcard %}
+                    <th class='edit'>
+                        <span id="skillplus_{{c.id}}_{{skill.skill_ref.id}}" class='edit_icon skillpick fa fa-plus-circle'></span><span id="skillminus_{{c.id}}_{{skill.skill_ref.id}}" class='edit_icon skillpick fa fa-minus-circle'></span>
+                    </th>
+                    {% endif %}
                 {% endif %}
                 <th id='val_{{skill.id}}'>
+                    {% if skill.skill_ref.is_wildcard %}
+                    {{ skill.value|as_bullets_short_wildcard|safe }}
+                    {% else %}
                     {{ skill.value|as_bullets_short|safe }}
+                    {%endif%}
                 </th>
             </tr>
         </table>
+        {% endif %}

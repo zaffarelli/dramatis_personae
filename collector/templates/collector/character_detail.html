@@ -30,6 +30,7 @@
     <li><b>Dead</b>{{ c.is_dead|prettybool|safe }}</li>
     <li><b>Visible</b>{{c.is_visible|prettybool|safe}}</li>
     <li><b>Lifepaths</b>{{c.use_history_creation|prettybool|safe}}</li>
+    <li><b>Occult</b>{{c.occult}}</li>
 </ul>
 <span class='attributes'>
     <table id="OCC_LVL_{{c.id}}" class='attrpick occult'>
@@ -44,7 +45,7 @@
 {% if c.tourofduty_set.count != 0 %}
     <ul class='unbreakable'>
     {% for tod in c.tourofduty_set.all|dictsort:"tour_of_duty_ref.category" %}
-    <li><b>{{ tod.tour_of_duty_ref.category|as_lifepath }} ({{tod.tour_of_duty_ref.value}})</b> {{tod.tour_of_duty_ref.reference}}</li>
+    <li><b>{{ tod.tour_of_duty_ref.category|as_lifepath }} ({{tod.tour_of_duty_ref.value}})</b> <span title="{{tod.tour_of_duty_ref.description}}">{{tod.tour_of_duty_ref.reference}}</span></li>
     {% endfor %}
     </ul>
 {% else %}
