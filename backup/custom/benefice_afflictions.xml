@@ -1,0 +1,1652 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<django-objects version="1.0">
+  <object model="collector.beneficeaffliction" pk="2">
+    <field name="character" rel="ManyToOneRel" to="collector.character">3</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1537</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">Royale House Decados Grafinya (Countess)</field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="3">
+    <field name="character" rel="ManyToOneRel" to="collector.character">3</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1609</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="4">
+    <field name="character" rel="ManyToOneRel" to="collector.character">3</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1471</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">Filthy Rich (£20,000 monthly income)</field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="5">
+    <field name="character" rel="ManyToOneRel" to="collector.character">3</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1507</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">Life threatening (linked to Royale House al-Malik)</field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="6">
+    <field name="character" rel="ManyToOneRel" to="collector.character">3</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1457</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">House Van Gelder</field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7">
+    <field name="character" rel="ManyToOneRel" to="collector.character">3</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1587</field>
+    <field name="value" type="IntegerField">1</field>
+    <field name="description" type="TextField">¤tugtanok_oj_malak¤ (Ukari bodyguard)(Value higher than expected due to the quality of the servant)</field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="8">
+    <field name="character" rel="ManyToOneRel" to="collector.character">3</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1505</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">(linked to the Musters)</field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="9">
+    <field name="character" rel="ManyToOneRel" to="collector.character">3</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1506</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">Linked to Icon's Li Halans</field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="10">
+    <field name="character" rel="ManyToOneRel" to="collector.character">5</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1550</field>
+    <field name="value" type="IntegerField">-5</field>
+    <field name="description" type="TextField">This oath is exclusively due to Lady ¤Saskia Varnovicz¤.</field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="11">
+    <field name="character" rel="ManyToOneRel" to="collector.character">18</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1475</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">Well off (5000£)</field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="12">
+    <field name="character" rel="ManyToOneRel" to="collector.character">18</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1541</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">Waldgraf of the Black Den</field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="13">
+    <field name="character" rel="ManyToOneRel" to="collector.character">67</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1546</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">Knight of House D'Rouge-Glace</field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="14">
+    <field name="character" rel="ManyToOneRel" to="collector.character">67</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1553</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">¤Sigmeon D'Rouge-Glace¤</field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="15">
+    <field name="character" rel="ManyToOneRel" to="collector.character">18</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1603</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">Most of the Baranof family want him dead</field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="16">
+    <field name="character" rel="ManyToOneRel" to="collector.character">18</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1447</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">Addiction to the Schelsakka root (inhalated)Basic addiction (2)Substance difficult to find (+1)Consumption once per week or -2 TEM</field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="17">
+    <field name="character" rel="ManyToOneRel" to="collector.character">18</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1459</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">Grafina ¤Saskia Varnovicz¤ of House Decados</field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="18">
+    <field name="character" rel="ManyToOneRel" to="collector.character">21</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1556</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="19">
+    <field name="character" rel="ManyToOneRel" to="collector.character">60</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1519</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">With charioteers</field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="24">
+    <field name="character" rel="ManyToOneRel" to="collector.character">121</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1502</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="25">
+    <field name="character" rel="ManyToOneRel" to="collector.character">121</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1494</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="26">
+    <field name="character" rel="ManyToOneRel" to="collector.character">106</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1514</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="27">
+    <field name="character" rel="ManyToOneRel" to="collector.character">106</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1446</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="28">
+    <field name="character" rel="ManyToOneRel" to="collector.character">106</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1517</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="29">
+    <field name="character" rel="ManyToOneRel" to="collector.character">106</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1475</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="30">
+    <field name="character" rel="ManyToOneRel" to="collector.character">106</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1493</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="31">
+    <field name="character" rel="ManyToOneRel" to="collector.character">106</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1456</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="32">
+    <field name="character" rel="ManyToOneRel" to="collector.character">13</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1545</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="33">
+    <field name="character" rel="ManyToOneRel" to="collector.character">13</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1589</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">¤jackard_marlowe¤</field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="34">
+    <field name="character" rel="ManyToOneRel" to="collector.character">13</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1477</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="35">
+    <field name="character" rel="ManyToOneRel" to="collector.character">13</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1456</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">Lord Commander ¤leona_sterling_hawkwood¤</field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="38">
+    <field name="character" rel="ManyToOneRel" to="collector.character">1</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1452</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="42">
+    <field name="character" rel="ManyToOneRel" to="collector.character">149</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1546</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="43">
+    <field name="character" rel="ManyToOneRel" to="collector.character">149</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1522</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="44">
+    <field name="character" rel="ManyToOneRel" to="collector.character">149</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1456</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">Béfroi met ¤larusso_van_gelder¤ during his first party as a newly ointed knight.</field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="45">
+    <field name="character" rel="ManyToOneRel" to="collector.character">149</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1479</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="46">
+    <field name="character" rel="ManyToOneRel" to="collector.character">149</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1596</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="47">
+    <field name="character" rel="ManyToOneRel" to="collector.character">130</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1546</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="48">
+    <field name="character" rel="ManyToOneRel" to="collector.character">130</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1518</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">Li Kalan Fiefs</field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="49">
+    <field name="character" rel="ManyToOneRel" to="collector.character">130</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1594</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">Member of the Psychic Coven allied to the Nikkei Clan.</field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="50">
+    <field name="character" rel="ManyToOneRel" to="collector.character">130</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1588</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">Her bodyguard ¤armand_le_fanu¤</field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="51">
+    <field name="character" rel="ManyToOneRel" to="collector.character">144</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1545</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="52">
+    <field name="character" rel="ManyToOneRel" to="collector.character">144</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1567</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="53">
+    <field name="character" rel="ManyToOneRel" to="collector.character">2</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1539</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="54">
+    <field name="character" rel="ManyToOneRel" to="collector.character">2</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1517</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="55">
+    <field name="character" rel="ManyToOneRel" to="collector.character">2</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1588</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="58">
+    <field name="character" rel="ManyToOneRel" to="collector.character">27</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1522</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="59">
+    <field name="character" rel="ManyToOneRel" to="collector.character">27</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1519</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="60">
+    <field name="character" rel="ManyToOneRel" to="collector.character">27</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1594</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="61">
+    <field name="character" rel="ManyToOneRel" to="collector.character">74</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1500</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="71">
+    <field name="character" rel="ManyToOneRel" to="collector.character">4</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1501</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="72">
+    <field name="character" rel="ManyToOneRel" to="collector.character">154</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1610</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="73">
+    <field name="character" rel="ManyToOneRel" to="collector.character">154</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1503</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="74">
+    <field name="character" rel="ManyToOneRel" to="collector.character">154</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1479</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="75">
+    <field name="character" rel="ManyToOneRel" to="collector.character">156</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1503</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="76">
+    <field name="character" rel="ManyToOneRel" to="collector.character">156</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1494</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="77">
+    <field name="character" rel="ManyToOneRel" to="collector.character">156</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1519</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">Rampart</field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="78">
+    <field name="character" rel="ManyToOneRel" to="collector.character">159</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1545</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="79">
+    <field name="character" rel="ManyToOneRel" to="collector.character">159</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1568</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="80">
+    <field name="character" rel="ManyToOneRel" to="collector.character">159</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1575</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">With Rufus Hadib Red Star Shipyards (Scraver clan from in Igneden)</field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="81">
+    <field name="character" rel="ManyToOneRel" to="collector.character">93</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1545</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="82">
+    <field name="character" rel="ManyToOneRel" to="collector.character">40</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1499</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="89">
+    <field name="character" rel="ManyToOneRel" to="collector.character">167</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1500</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7185">
+    <field name="character" rel="ManyToOneRel" to="collector.character">16</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1502</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7186">
+    <field name="character" rel="ManyToOneRel" to="collector.character">16</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1635</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7187">
+    <field name="character" rel="ManyToOneRel" to="collector.character">16</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1459</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7188">
+    <field name="character" rel="ManyToOneRel" to="collector.character">16</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1495</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7189">
+    <field name="character" rel="ManyToOneRel" to="collector.character">16</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1621</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7190">
+    <field name="character" rel="ManyToOneRel" to="collector.character">29</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1502</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7191">
+    <field name="character" rel="ManyToOneRel" to="collector.character">29</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1459</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7192">
+    <field name="character" rel="ManyToOneRel" to="collector.character">29</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1495</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7193">
+    <field name="character" rel="ManyToOneRel" to="collector.character">29</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1621</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7194">
+    <field name="character" rel="ManyToOneRel" to="collector.character">58</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1523</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7195">
+    <field name="character" rel="ManyToOneRel" to="collector.character">58</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1493</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7196">
+    <field name="character" rel="ManyToOneRel" to="collector.character">58</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1622</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7197">
+    <field name="character" rel="ManyToOneRel" to="collector.character">164</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1502</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7198">
+    <field name="character" rel="ManyToOneRel" to="collector.character">164</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1462</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7199">
+    <field name="character" rel="ManyToOneRel" to="collector.character">164</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1495</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7200">
+    <field name="character" rel="ManyToOneRel" to="collector.character">164</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1504</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7201">
+    <field name="character" rel="ManyToOneRel" to="collector.character">164</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1519</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7202">
+    <field name="character" rel="ManyToOneRel" to="collector.character">164</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1569</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7203">
+    <field name="character" rel="ManyToOneRel" to="collector.character">125</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1522</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7204">
+    <field name="character" rel="ManyToOneRel" to="collector.character">125</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1462</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7205">
+    <field name="character" rel="ManyToOneRel" to="collector.character">125</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1495</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7206">
+    <field name="character" rel="ManyToOneRel" to="collector.character">125</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1504</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7207">
+    <field name="character" rel="ManyToOneRel" to="collector.character">125</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1519</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7208">
+    <field name="character" rel="ManyToOneRel" to="collector.character">125</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1569</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7209">
+    <field name="character" rel="ManyToOneRel" to="collector.character">99</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1545</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7210">
+    <field name="character" rel="ManyToOneRel" to="collector.character">99</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1461</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7211">
+    <field name="character" rel="ManyToOneRel" to="collector.character">99</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1477</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7212">
+    <field name="character" rel="ManyToOneRel" to="collector.character">99</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1519</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7213">
+    <field name="character" rel="ManyToOneRel" to="collector.character">99</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1636</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7214">
+    <field name="character" rel="ManyToOneRel" to="collector.character">28</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1545</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7215">
+    <field name="character" rel="ManyToOneRel" to="collector.character">28</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1610</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7216">
+    <field name="character" rel="ManyToOneRel" to="collector.character">28</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1459</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7217">
+    <field name="character" rel="ManyToOneRel" to="collector.character">28</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1495</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7218">
+    <field name="character" rel="ManyToOneRel" to="collector.character">28</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1621</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7219">
+    <field name="character" rel="ManyToOneRel" to="collector.character">187</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1509</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7220">
+    <field name="character" rel="ManyToOneRel" to="collector.character">187</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1551</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7221">
+    <field name="character" rel="ManyToOneRel" to="collector.character">187</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1559</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7222">
+    <field name="character" rel="ManyToOneRel" to="collector.character">187</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1639</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7223">
+    <field name="character" rel="ManyToOneRel" to="collector.character">187</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1606</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7224">
+    <field name="character" rel="ManyToOneRel" to="collector.character">187</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1493</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7225">
+    <field name="character" rel="ManyToOneRel" to="collector.character">187</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1622</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7226">
+    <field name="character" rel="ManyToOneRel" to="collector.character">178</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1626</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7227">
+    <field name="character" rel="ManyToOneRel" to="collector.character">178</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1620</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7228">
+    <field name="character" rel="ManyToOneRel" to="collector.character">178</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1564</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7229">
+    <field name="character" rel="ManyToOneRel" to="collector.character">178</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1493</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7230">
+    <field name="character" rel="ManyToOneRel" to="collector.character">178</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1622</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7231">
+    <field name="character" rel="ManyToOneRel" to="collector.character">184</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1627</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7232">
+    <field name="character" rel="ManyToOneRel" to="collector.character">184</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1559</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7233">
+    <field name="character" rel="ManyToOneRel" to="collector.character">184</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1628</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7234">
+    <field name="character" rel="ManyToOneRel" to="collector.character">184</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1462</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7235">
+    <field name="character" rel="ManyToOneRel" to="collector.character">184</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1495</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7236">
+    <field name="character" rel="ManyToOneRel" to="collector.character">184</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1504</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7237">
+    <field name="character" rel="ManyToOneRel" to="collector.character">184</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1519</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7238">
+    <field name="character" rel="ManyToOneRel" to="collector.character">184</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1569</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7239">
+    <field name="character" rel="ManyToOneRel" to="collector.character">185</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1559</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7240">
+    <field name="character" rel="ManyToOneRel" to="collector.character">185</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1610</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7241">
+    <field name="character" rel="ManyToOneRel" to="collector.character">185</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1459</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7242">
+    <field name="character" rel="ManyToOneRel" to="collector.character">185</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1495</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7243">
+    <field name="character" rel="ManyToOneRel" to="collector.character">185</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1621</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7244">
+    <field name="character" rel="ManyToOneRel" to="collector.character">98</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1502</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7245">
+    <field name="character" rel="ManyToOneRel" to="collector.character">98</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1588</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7246">
+    <field name="character" rel="ManyToOneRel" to="collector.character">98</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1475</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7247">
+    <field name="character" rel="ManyToOneRel" to="collector.character">98</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1621</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7248">
+    <field name="character" rel="ManyToOneRel" to="collector.character">115</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1629</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7249">
+    <field name="character" rel="ManyToOneRel" to="collector.character">115</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1630</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7250">
+    <field name="character" rel="ManyToOneRel" to="collector.character">115</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1631</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7251">
+    <field name="character" rel="ManyToOneRel" to="collector.character">115</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1634</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7252">
+    <field name="character" rel="ManyToOneRel" to="collector.character">115</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1638</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7253">
+    <field name="character" rel="ManyToOneRel" to="collector.character">115</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1637</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7254">
+    <field name="character" rel="ManyToOneRel" to="collector.character">115</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1610</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7255">
+    <field name="character" rel="ManyToOneRel" to="collector.character">115</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1493</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7256">
+    <field name="character" rel="ManyToOneRel" to="collector.character">115</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1622</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7257">
+    <field name="character" rel="ManyToOneRel" to="collector.character">12</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1495</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7258">
+    <field name="character" rel="ManyToOneRel" to="collector.character">12</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1502</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7259">
+    <field name="character" rel="ManyToOneRel" to="collector.character">12</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1504</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7260">
+    <field name="character" rel="ManyToOneRel" to="collector.character">12</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1519</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7261">
+    <field name="character" rel="ManyToOneRel" to="collector.character">12</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1459</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7262">
+    <field name="character" rel="ManyToOneRel" to="collector.character">12</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1621</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7263">
+    <field name="character" rel="ManyToOneRel" to="collector.character">66</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1502</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7264">
+    <field name="character" rel="ManyToOneRel" to="collector.character">66</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1493</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7265">
+    <field name="character" rel="ManyToOneRel" to="collector.character">66</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1622</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7266">
+    <field name="character" rel="ManyToOneRel" to="collector.character">183</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1545</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7267">
+    <field name="character" rel="ManyToOneRel" to="collector.character">183</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1610</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7268">
+    <field name="character" rel="ManyToOneRel" to="collector.character">183</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1459</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7269">
+    <field name="character" rel="ManyToOneRel" to="collector.character">183</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1495</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7270">
+    <field name="character" rel="ManyToOneRel" to="collector.character">183</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1621</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7271">
+    <field name="character" rel="ManyToOneRel" to="collector.character">181</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1502</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7272">
+    <field name="character" rel="ManyToOneRel" to="collector.character">181</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1497</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7273">
+    <field name="character" rel="ManyToOneRel" to="collector.character">181</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1493</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7274">
+    <field name="character" rel="ManyToOneRel" to="collector.character">181</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1622</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7275">
+    <field name="character" rel="ManyToOneRel" to="collector.character">135</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1502</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7276">
+    <field name="character" rel="ManyToOneRel" to="collector.character">135</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1473</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7277">
+    <field name="character" rel="ManyToOneRel" to="collector.character">135</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1446</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7278">
+    <field name="character" rel="ManyToOneRel" to="collector.character">186</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1626</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7279">
+    <field name="character" rel="ManyToOneRel" to="collector.character">186</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1505</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7280">
+    <field name="character" rel="ManyToOneRel" to="collector.character">186</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1561</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7281">
+    <field name="character" rel="ManyToOneRel" to="collector.character">186</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1625</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7282">
+    <field name="character" rel="ManyToOneRel" to="collector.character">186</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1459</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7283">
+    <field name="character" rel="ManyToOneRel" to="collector.character">186</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1495</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7284">
+    <field name="character" rel="ManyToOneRel" to="collector.character">186</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1621</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7285">
+    <field name="character" rel="ManyToOneRel" to="collector.character">35</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1502</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7286">
+    <field name="character" rel="ManyToOneRel" to="collector.character">35</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1625</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7287">
+    <field name="character" rel="ManyToOneRel" to="collector.character">35</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1475</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7288">
+    <field name="character" rel="ManyToOneRel" to="collector.character">35</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1621</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7289">
+    <field name="character" rel="ManyToOneRel" to="collector.character">35</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1645</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7290">
+    <field name="character" rel="ManyToOneRel" to="collector.character">35</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1506</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7291">
+    <field name="character" rel="ManyToOneRel" to="collector.character">35</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1644</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7292">
+    <field name="character" rel="ManyToOneRel" to="collector.character">91</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1620</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7293">
+    <field name="character" rel="ManyToOneRel" to="collector.character">91</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1545</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7294">
+    <field name="character" rel="ManyToOneRel" to="collector.character">91</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1625</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7295">
+    <field name="character" rel="ManyToOneRel" to="collector.character">91</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1473</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7296">
+    <field name="character" rel="ManyToOneRel" to="collector.character">140</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1545</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7297">
+    <field name="character" rel="ManyToOneRel" to="collector.character">140</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1459</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7298">
+    <field name="character" rel="ManyToOneRel" to="collector.character">140</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1495</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7299">
+    <field name="character" rel="ManyToOneRel" to="collector.character">140</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1621</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7300">
+    <field name="character" rel="ManyToOneRel" to="collector.character">7</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1502</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7301">
+    <field name="character" rel="ManyToOneRel" to="collector.character">7</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1462</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7302">
+    <field name="character" rel="ManyToOneRel" to="collector.character">7</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1495</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7303">
+    <field name="character" rel="ManyToOneRel" to="collector.character">7</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1504</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7304">
+    <field name="character" rel="ManyToOneRel" to="collector.character">7</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1519</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7305">
+    <field name="character" rel="ManyToOneRel" to="collector.character">7</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1569</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7306">
+    <field name="character" rel="ManyToOneRel" to="collector.character">8</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1502</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7307">
+    <field name="character" rel="ManyToOneRel" to="collector.character">8</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1462</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7308">
+    <field name="character" rel="ManyToOneRel" to="collector.character">8</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1495</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7309">
+    <field name="character" rel="ManyToOneRel" to="collector.character">8</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1504</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7310">
+    <field name="character" rel="ManyToOneRel" to="collector.character">8</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1519</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7311">
+    <field name="character" rel="ManyToOneRel" to="collector.character">8</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1569</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7312">
+    <field name="character" rel="ManyToOneRel" to="collector.character">190</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1502</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7313">
+    <field name="character" rel="ManyToOneRel" to="collector.character">190</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1459</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7314">
+    <field name="character" rel="ManyToOneRel" to="collector.character">190</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1495</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7315">
+    <field name="character" rel="ManyToOneRel" to="collector.character">190</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1621</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7316">
+    <field name="character" rel="ManyToOneRel" to="collector.character">87</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1502</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7317">
+    <field name="character" rel="ManyToOneRel" to="collector.character">87</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1459</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7318">
+    <field name="character" rel="ManyToOneRel" to="collector.character">87</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1495</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7319">
+    <field name="character" rel="ManyToOneRel" to="collector.character">87</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1621</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7320">
+    <field name="character" rel="ManyToOneRel" to="collector.character">136</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1502</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7321">
+    <field name="character" rel="ManyToOneRel" to="collector.character">136</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1461</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7322">
+    <field name="character" rel="ManyToOneRel" to="collector.character">136</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1477</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7323">
+    <field name="character" rel="ManyToOneRel" to="collector.character">136</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1519</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7324">
+    <field name="character" rel="ManyToOneRel" to="collector.character">189</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1545</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7325">
+    <field name="character" rel="ManyToOneRel" to="collector.character">189</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1588</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7326">
+    <field name="character" rel="ManyToOneRel" to="collector.character">189</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1493</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7327">
+    <field name="character" rel="ManyToOneRel" to="collector.character">189</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1622</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7328">
+    <field name="character" rel="ManyToOneRel" to="collector.character">189</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1471</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7329">
+    <field name="character" rel="ManyToOneRel" to="collector.character">189</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1507</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7330">
+    <field name="character" rel="ManyToOneRel" to="collector.character">189</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1506</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7331">
+    <field name="character" rel="ManyToOneRel" to="collector.character">189</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1505</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7332">
+    <field name="character" rel="ManyToOneRel" to="collector.character">189</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1640</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7333">
+    <field name="character" rel="ManyToOneRel" to="collector.character">61</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1502</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7334">
+    <field name="character" rel="ManyToOneRel" to="collector.character">61</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1635</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7335">
+    <field name="character" rel="ManyToOneRel" to="collector.character">61</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1461</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7336">
+    <field name="character" rel="ManyToOneRel" to="collector.character">61</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1477</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7337">
+    <field name="character" rel="ManyToOneRel" to="collector.character">61</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1519</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7338">
+    <field name="character" rel="ManyToOneRel" to="collector.character">20</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1545</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7339">
+    <field name="character" rel="ManyToOneRel" to="collector.character">20</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1588</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7340">
+    <field name="character" rel="ManyToOneRel" to="collector.character">20</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1475</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7341">
+    <field name="character" rel="ManyToOneRel" to="collector.character">20</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1621</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7342">
+    <field name="character" rel="ManyToOneRel" to="collector.character">20</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1636</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7343">
+    <field name="character" rel="ManyToOneRel" to="collector.character">180</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1545</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7344">
+    <field name="character" rel="ManyToOneRel" to="collector.character">180</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1588</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7345">
+    <field name="character" rel="ManyToOneRel" to="collector.character">180</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1459</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7346">
+    <field name="character" rel="ManyToOneRel" to="collector.character">180</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1495</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7347">
+    <field name="character" rel="ManyToOneRel" to="collector.character">180</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1621</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7348">
+    <field name="character" rel="ManyToOneRel" to="collector.character">188</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1559</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7349">
+    <field name="character" rel="ManyToOneRel" to="collector.character">188</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1462</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7350">
+    <field name="character" rel="ManyToOneRel" to="collector.character">188</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1495</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7351">
+    <field name="character" rel="ManyToOneRel" to="collector.character">188</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1504</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7352">
+    <field name="character" rel="ManyToOneRel" to="collector.character">188</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1519</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7353">
+    <field name="character" rel="ManyToOneRel" to="collector.character">188</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1569</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7510">
+    <field name="character" rel="ManyToOneRel" to="collector.character">38</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1545</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7511">
+    <field name="character" rel="ManyToOneRel" to="collector.character">38</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1461</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7512">
+    <field name="character" rel="ManyToOneRel" to="collector.character">38</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1477</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7513">
+    <field name="character" rel="ManyToOneRel" to="collector.character">38</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1519</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7598">
+    <field name="character" rel="ManyToOneRel" to="collector.character">39</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1502</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7599">
+    <field name="character" rel="ManyToOneRel" to="collector.character">39</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1461</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7600">
+    <field name="character" rel="ManyToOneRel" to="collector.character">39</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1477</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.beneficeaffliction" pk="7601">
+    <field name="character" rel="ManyToOneRel" to="collector.character">39</field>
+    <field name="benefice_affliction_ref" rel="ManyToOneRel" to="collector.beneficeafflictionref">1519</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+</django-objects>

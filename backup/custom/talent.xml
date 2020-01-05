@@ -1,0 +1,568 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<django-objects version="1.0">
+  <object model="collector.talent" pk="1">
+    <field name="character" rel="ManyToOneRel" to="collector.character">22</field>
+    <field name="name" type="CharField">Psychic Awakening</field>
+    <field name="attributes_list" type="CharField">Psy 3, Urge 0</field>
+    <field name="skills_list" type="CharField">
+    </field>
+    <field name="description" type="TextField">Psyche Path: Intuit (level 1), Emote (Level 2), Mind Sight (Level 3)Stigma: Body temperature goes up or drops by 5 °C (scene).</field>
+    <field name="AP" type="IntegerField">3</field>
+    <field name="OP" type="IntegerField">0</field>
+    <field name="value" type="IntegerField">9</field>
+    <field name="talent_ref" rel="ManyToOneRel" to="collector.talentref">1</field>
+  </object>
+  <object model="collector.talent" pk="2">
+    <field name="character" rel="ManyToOneRel" to="collector.character">23</field>
+    <field name="name" type="CharField">Vorox Staredown Ritual</field>
+    <field name="attributes_list" type="CharField">
+    </field>
+    <field name="skills_list" type="CharField">
+    </field>
+    <field name="description" type="TextField">Has earned friendship with the vorox and a natural knowledge on how to behave with them.</field>
+    <field name="AP" type="IntegerField">0</field>
+    <field name="OP" type="IntegerField">0</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="talent_ref" rel="ManyToOneRel" to="collector.talentref">1</field>
+  </object>
+  <object model="collector.talent" pk="3">
+    <field name="character" rel="ManyToOneRel" to="collector.character">21</field>
+    <field name="name" type="CharField">Theurgic Awakening</field>
+    <field name="attributes_list" type="CharField">
+    </field>
+    <field name="skills_list" type="CharField">
+    </field>
+    <field name="description" type="TextField">Brother Battle clergySoul's vessel (Level 1), Rightfully Guided Hand (Level 2), Armor of the Pancreator (Level 3)Occult Stigma: TBD</field>
+    <field name="AP" type="IntegerField">0</field>
+    <field name="OP" type="IntegerField">0</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="talent_ref" rel="ManyToOneRel" to="collector.talentref">1</field>
+  </object>
+  <object model="collector.talent" pk="4">
+    <field name="character" rel="ManyToOneRel" to="collector.character">21</field>
+    <field name="name" type="CharField">Martial Artist</field>
+    <field name="attributes_list" type="CharField">AGI 1</field>
+    <field name="skills_list" type="CharField">
+    </field>
+    <field name="description" type="TextField">Hand to hand combat specialization: Brother Battle Mantok Level 4 (11 op)</field>
+    <field name="AP" type="IntegerField">0</field>
+    <field name="OP" type="IntegerField">11</field>
+    <field name="value" type="IntegerField">11</field>
+    <field name="talent_ref" rel="ManyToOneRel" to="collector.talentref">1</field>
+  </object>
+  <object model="collector.talent" pk="5">
+    <field name="character" rel="ManyToOneRel" to="collector.character">18</field>
+    <field name="name" type="CharField">Cybernetic Arm</field>
+    <field name="attributes_list" type="CharField">
+    </field>
+    <field name="skills_list" type="CharField">
+    </field>
+    <field name="description" type="TextField">Left Arm (TL6, Inc:3,Cost 1965£):Replacement limb, Synthflesh, Self-powered, Pain Dessensitivity.Options (centurion knife): Incognito, Weaponry.</field>
+    <field name="AP" type="IntegerField">0</field>
+    <field name="OP" type="IntegerField">0</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="talent_ref" rel="ManyToOneRel" to="collector.talentref">1</field>
+  </object>
+  <object model="collector.talent" pk="9">
+    <field name="character" rel="ManyToOneRel" to="collector.character">19</field>
+    <field name="name" type="CharField">Van Dyke Cartel Stakeholder</field>
+    <field name="attributes_list" type="CharField">
+    </field>
+    <field name="skills_list" type="CharField">
+    </field>
+    <field name="description" type="TextField">Monthly income (3)Hydroponic Plant Photocycling Pattern (1200£)Van Dyke Cartel Business (1800£)Rank: Boss (7)</field>
+    <field name="AP" type="IntegerField">0</field>
+    <field name="OP" type="IntegerField">0</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="talent_ref" rel="ManyToOneRel" to="collector.talentref">1</field>
+  </object>
+  <object model="collector.talent" pk="10">
+    <field name="character" rel="ManyToOneRel" to="collector.character">19</field>
+    <field name="name" type="CharField">Scraver Gear</field>
+    <field name="attributes_list" type="CharField">
+    </field>
+    <field name="skills_list" type="CharField">
+    </field>
+    <field name="description" type="TextField">Hung 648 Prospect LanderVision 135 Flat and Holo ComData crystals on Biology, Volt, Maps, Blueprints, Accounting and Deposed Patents.Volt toolbox</field>
+    <field name="AP" type="IntegerField">0</field>
+    <field name="OP" type="IntegerField">0</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="talent_ref" rel="ManyToOneRel" to="collector.talentref">1</field>
+  </object>
+  <object model="collector.talent" pk="13">
+    <field name="character" rel="ManyToOneRel" to="collector.character">52</field>
+    <field name="name" type="CharField">Theurgic Calling</field>
+    <field name="attributes_list" type="CharField">
+    </field>
+    <field name="skills_list" type="CharField">
+    </field>
+    <field name="description" type="TextField">College: AmaltheaRituals: 1 2 3 4 5</field>
+    <field name="AP" type="IntegerField">0</field>
+    <field name="OP" type="IntegerField">0</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="talent_ref" rel="ManyToOneRel" to="collector.talentref">1</field>
+  </object>
+  <object model="collector.talent" pk="14">
+    <field name="character" rel="ManyToOneRel" to="collector.character">5</field>
+    <field name="name" type="CharField">Jox Kai Von Master</field>
+    <field name="attributes_list" type="CharField">
+    </field>
+    <field name="skills_list" type="CharField">
+    </field>
+    <field name="description" type="TextField">Jox Kai Von: 8</field>
+    <field name="AP" type="IntegerField">0</field>
+    <field name="OP" type="IntegerField">0</field>
+    <field name="value" type="IntegerField">20</field>
+    <field name="talent_ref" rel="ManyToOneRel" to="collector.talentref">19</field>
+  </object>
+  <object model="collector.talent" pk="15">
+    <field name="character" rel="ManyToOneRel" to="collector.character">22</field>
+    <field name="name" type="CharField">Cover Agent</field>
+    <field name="attributes_list" type="CharField">
+    </field>
+    <field name="skills_list" type="CharField">
+    </field>
+    <field name="description" type="TextField">For Yves d'Igneden D'Rouge-Glace</field>
+    <field name="AP" type="IntegerField">0</field>
+    <field name="OP" type="IntegerField">0</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="talent_ref" rel="ManyToOneRel" to="collector.talentref">1</field>
+  </object>
+  <object model="collector.talent" pk="16">
+    <field name="character" rel="ManyToOneRel" to="collector.character">17</field>
+    <field name="name" type="CharField">War Veteran</field>
+    <field name="attributes_list" type="CharField">
+    </field>
+    <field name="skills_list" type="CharField">
+    </field>
+    <field name="description" type="TextField">Has fought against Alexius during the EWII when he was young. He was a Stigmata Garrison for 5 years arround 5000. Then he lead most of the Hazat assaults from Vera Cruz to Hira.+4 to all strategy / tectics related checks</field>
+    <field name="AP" type="IntegerField">0</field>
+    <field name="OP" type="IntegerField">0</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="talent_ref" rel="ManyToOneRel" to="collector.talentref">1</field>
+  </object>
+  <object model="collector.talent" pk="17">
+    <field name="character" rel="ManyToOneRel" to="collector.character">18</field>
+    <field name="name" type="CharField">Cybernetic Eye</field>
+    <field name="attributes_list" type="CharField">
+    </field>
+    <field name="skills_list" type="CharField">
+    </field>
+    <field name="description" type="TextField">Left eye (TL6, Inc:9, Cost:3730£: Replacement Eye, Self-powered.Option: Cybersense InfraredOption: Cybersense Magnifier/telescope.Option: Flesh cavity, Think Machine (datalink).</field>
+    <field name="AP" type="IntegerField">0</field>
+    <field name="OP" type="IntegerField">0</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="talent_ref" rel="ManyToOneRel" to="collector.talentref">1</field>
+  </object>
+  <object model="collector.talent" pk="19">
+    <field name="character" rel="ManyToOneRel" to="collector.character">42</field>
+    <field name="name" type="CharField">Manager</field>
+    <field name="attributes_list" type="CharField">
+    </field>
+    <field name="skills_list" type="CharField">
+    </field>
+    <field name="description" type="TextField">
+    </field>
+    <field name="AP" type="IntegerField">0</field>
+    <field name="OP" type="IntegerField">0</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="talent_ref" rel="ManyToOneRel" to="collector.talentref">1</field>
+  </object>
+  <object model="collector.talent" pk="20">
+    <field name="character" rel="ManyToOneRel" to="collector.character">11</field>
+    <field name="name" type="CharField">Decados Crimson</field>
+    <field name="attributes_list" type="CharField">
+    </field>
+    <field name="skills_list" type="CharField">
+    </field>
+    <field name="description" type="TextField">
+    </field>
+    <field name="AP" type="IntegerField">0</field>
+    <field name="OP" type="IntegerField">0</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="talent_ref" rel="ManyToOneRel" to="collector.talentref">1</field>
+  </object>
+  <object model="collector.talent" pk="21">
+    <field name="character" rel="ManyToOneRel" to="collector.character">11</field>
+    <field name="name" type="CharField">Decados Kossack</field>
+    <field name="attributes_list" type="CharField">
+    </field>
+    <field name="skills_list" type="CharField">
+    </field>
+    <field name="description" type="TextField">
+    </field>
+    <field name="AP" type="IntegerField">0</field>
+    <field name="OP" type="IntegerField">0</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="talent_ref" rel="ManyToOneRel" to="collector.talentref">1</field>
+  </object>
+  <object model="collector.talent" pk="22">
+    <field name="character" rel="ManyToOneRel" to="collector.character">95</field>
+    <field name="name" type="CharField">Kurgan Spy</field>
+    <field name="attributes_list" type="CharField">
+    </field>
+    <field name="skills_list" type="CharField">
+    </field>
+    <field name="description" type="TextField">
+    </field>
+    <field name="AP" type="IntegerField">0</field>
+    <field name="OP" type="IntegerField">0</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="talent_ref" rel="ManyToOneRel" to="collector.talentref">1</field>
+  </object>
+  <object model="collector.talent" pk="24">
+    <field name="character" rel="ManyToOneRel" to="collector.character">3</field>
+    <field name="name" type="CharField">Paramours</field>
+    <field name="attributes_list" type="CharField">
+    </field>
+    <field name="skills_list" type="CharField">
+    </field>
+    <field name="description" type="TextField">Saskia has so many paramours that she can easily find someone to help her.</field>
+    <field name="AP" type="IntegerField">0</field>
+    <field name="OP" type="IntegerField">9</field>
+    <field name="value" type="IntegerField">9</field>
+    <field name="talent_ref" rel="ManyToOneRel" to="collector.talentref">1</field>
+  </object>
+  <object model="collector.talent" pk="25">
+    <field name="character" rel="ManyToOneRel" to="collector.character">3</field>
+    <field name="name" type="CharField">Master Diplomat</field>
+    <field name="attributes_list" type="CharField">PA_PRE+1 PA_AWA+1</field>
+    <field name="skills_list" type="CharField">
+    </field>
+    <field name="description" type="TextField">With experience, Saskia has become a master diplomat, using pressure and seduction like a blade.</field>
+    <field name="AP" type="IntegerField">2</field>
+    <field name="OP" type="IntegerField">10</field>
+    <field name="value" type="IntegerField">16</field>
+    <field name="talent_ref" rel="ManyToOneRel" to="collector.talentref">1</field>
+  </object>
+  <object model="collector.talent" pk="26">
+    <field name="character" rel="ManyToOneRel" to="collector.character">89</field>
+    <field name="name" type="CharField">Guild Contract</field>
+    <field name="attributes_list" type="CharField">
+    </field>
+    <field name="skills_list" type="CharField">
+    </field>
+    <field name="description" type="TextField">Sato Ji bears a major alliance with the Metier</field>
+    <field name="AP" type="IntegerField">0</field>
+    <field name="OP" type="IntegerField">10</field>
+    <field name="value" type="IntegerField">10</field>
+    <field name="talent_ref" rel="ManyToOneRel" to="collector.talentref">1</field>
+  </object>
+  <object model="collector.talent" pk="27">
+    <field name="character" rel="ManyToOneRel" to="collector.character">5</field>
+    <field name="name" type="CharField">Kraxi Dance</field>
+    <field name="attributes_list" type="CharField">
+    </field>
+    <field name="skills_list" type="CharField">
+    </field>
+    <field name="description" type="TextField">
+    </field>
+    <field name="AP" type="IntegerField">2</field>
+    <field name="OP" type="IntegerField">8</field>
+    <field name="value" type="IntegerField">50</field>
+    <field name="talent_ref" rel="ManyToOneRel" to="collector.talentref">20</field>
+  </object>
+  <object model="collector.talent" pk="28">
+    <field name="character" rel="ManyToOneRel" to="collector.character">5</field>
+    <field name="name" type="CharField">Native Psychic</field>
+    <field name="attributes_list" type="CharField">
+    </field>
+    <field name="skills_list" type="CharField">
+    </field>
+    <field name="description" type="TextField">Sixth sense</field>
+    <field name="AP" type="IntegerField">3</field>
+    <field name="OP" type="IntegerField">9</field>
+    <field name="value" type="IntegerField">33</field>
+    <field name="talent_ref" rel="ManyToOneRel" to="collector.talentref">10</field>
+  </object>
+  <object model="collector.talent" pk="30">
+    <field name="character" rel="ManyToOneRel" to="collector.character">67</field>
+    <field name="name" type="CharField">High tech Smuggler</field>
+    <field name="attributes_list" type="CharField">
+    </field>
+    <field name="skills_list" type="CharField">
+    </field>
+    <field name="description" type="TextField">
+    </field>
+    <field name="AP" type="IntegerField">2</field>
+    <field name="OP" type="IntegerField">14</field>
+    <field name="value" type="IntegerField">20</field>
+    <field name="talent_ref" rel="ManyToOneRel" to="collector.talentref">1</field>
+  </object>
+  <object model="collector.talent" pk="32">
+    <field name="character" rel="ManyToOneRel" to="collector.character">117</field>
+    <field name="name" type="CharField">Undercover agent</field>
+    <field name="attributes_list" type="CharField">
+    </field>
+    <field name="skills_list" type="CharField">
+    </field>
+    <field name="description" type="TextField">
+    </field>
+    <field name="AP" type="IntegerField">0</field>
+    <field name="OP" type="IntegerField">15</field>
+    <field name="value" type="IntegerField">15</field>
+    <field name="talent_ref" rel="ManyToOneRel" to="collector.talentref">1</field>
+  </object>
+  <object model="collector.talent" pk="33">
+    <field name="character" rel="ManyToOneRel" to="collector.character">118</field>
+    <field name="name" type="CharField">Freelance Operative</field>
+    <field name="attributes_list" type="CharField">
+    </field>
+    <field name="skills_list" type="CharField">
+    </field>
+    <field name="description" type="TextField">
+    </field>
+    <field name="AP" type="IntegerField">0</field>
+    <field name="OP" type="IntegerField">15</field>
+    <field name="value" type="IntegerField">15</field>
+    <field name="talent_ref" rel="ManyToOneRel" to="collector.talentref">1</field>
+  </object>
+  <object model="collector.talent" pk="34">
+    <field name="character" rel="ManyToOneRel" to="collector.character">119</field>
+    <field name="name" type="CharField">Lost Heir</field>
+    <field name="attributes_list" type="CharField">
+    </field>
+    <field name="skills_list" type="CharField">
+    </field>
+    <field name="description" type="TextField">
+    </field>
+    <field name="AP" type="IntegerField">0</field>
+    <field name="OP" type="IntegerField">17</field>
+    <field name="value" type="IntegerField">17</field>
+    <field name="talent_ref" rel="ManyToOneRel" to="collector.talentref">1</field>
+  </object>
+  <object model="collector.talent" pk="35">
+    <field name="character" rel="ManyToOneRel" to="collector.character">116</field>
+    <field name="name" type="CharField">Second Republic Legacy</field>
+    <field name="attributes_list" type="CharField">
+    </field>
+    <field name="skills_list" type="CharField">
+    </field>
+    <field name="description" type="TextField">
+    </field>
+    <field name="AP" type="IntegerField">0</field>
+    <field name="OP" type="IntegerField">15</field>
+    <field name="value" type="IntegerField">15</field>
+    <field name="talent_ref" rel="ManyToOneRel" to="collector.talentref">1</field>
+  </object>
+  <object model="collector.talent" pk="36">
+    <field name="character" rel="ManyToOneRel" to="collector.character">120</field>
+    <field name="name" type="CharField">Scripture Connaisseur</field>
+    <field name="attributes_list" type="CharField">
+    </field>
+    <field name="skills_list" type="CharField">
+    </field>
+    <field name="description" type="TextField">
+    </field>
+    <field name="AP" type="IntegerField">0</field>
+    <field name="OP" type="IntegerField">13</field>
+    <field name="value" type="IntegerField">13</field>
+    <field name="talent_ref" rel="ManyToOneRel" to="collector.talentref">1</field>
+  </object>
+  <object model="collector.talent" pk="37">
+    <field name="character" rel="ManyToOneRel" to="collector.character">123</field>
+    <field name="name" type="CharField">Supernatural Being</field>
+    <field name="attributes_list" type="CharField">
+    </field>
+    <field name="skills_list" type="CharField">
+    </field>
+    <field name="description" type="TextField">Can exist in between worlds for his special mandate. Invisible most of the time, can use his occult powers on his guest.</field>
+    <field name="AP" type="IntegerField">0</field>
+    <field name="OP" type="IntegerField">0</field>
+    <field name="value" type="IntegerField">0</field>
+    <field name="talent_ref" rel="ManyToOneRel" to="collector.talentref">1</field>
+  </object>
+  <object model="collector.talent" pk="38">
+    <field name="character" rel="ManyToOneRel" to="collector.character">123</field>
+    <field name="name" type="CharField">Theurgical Being</field>
+    <field name="attributes_list" type="CharField">
+    </field>
+    <field name="skills_list" type="CharField">
+    </field>
+    <field name="description" type="TextField">Theurgy 10 (10 ap)Stigma: can be detected while using his powers.Pathes: Church powers (1-9), Eskatonic powers (1-9) (90 op)</field>
+    <field name="AP" type="IntegerField">10</field>
+    <field name="OP" type="IntegerField">90</field>
+    <field name="value" type="IntegerField">120</field>
+    <field name="talent_ref" rel="ManyToOneRel" to="collector.talentref">1</field>
+  </object>
+  <object model="collector.talent" pk="39">
+    <field name="character" rel="ManyToOneRel" to="collector.character">1</field>
+    <field name="name" type="CharField">Angelic Ward</field>
+    <field name="attributes_list" type="CharField">
+    </field>
+    <field name="skills_list" type="CharField">
+    </field>
+    <field name="description" type="TextField">
+    </field>
+    <field name="AP" type="IntegerField">0</field>
+    <field name="OP" type="IntegerField">20</field>
+    <field name="value" type="IntegerField">20</field>
+    <field name="talent_ref" rel="ManyToOneRel" to="collector.talentref">1</field>
+  </object>
+  <object model="collector.talent" pk="40">
+    <field name="character" rel="ManyToOneRel" to="collector.character">130</field>
+    <field name="name" type="CharField">Initiate Psychic</field>
+    <field name="attributes_list" type="CharField">
+    </field>
+    <field name="skills_list" type="CharField">
+    </field>
+    <field name="description" type="TextField">Path:Sixth Sense: Sensitivity(1), Dark Sense(2), Subtle Sight(3), Premonition(4). Soma: Toughening(1), Strengthening(2), Quickening(3)</field>
+    <field name="AP" type="IntegerField">5</field>
+    <field name="OP" type="IntegerField">16</field>
+    <field name="value" type="IntegerField">31</field>
+    <field name="talent_ref" rel="ManyToOneRel" to="collector.talentref">1</field>
+  </object>
+  <object model="collector.talent" pk="42">
+    <field name="character" rel="ManyToOneRel" to="collector.character">144</field>
+    <field name="name" type="CharField">Cyber Right Arm</field>
+    <field name="attributes_list" type="CharField">
+    </field>
+    <field name="skills_list" type="CharField">
+    </field>
+    <field name="description" type="TextField">
+    </field>
+    <field name="AP" type="IntegerField">0</field>
+    <field name="OP" type="IntegerField">11</field>
+    <field name="value" type="IntegerField">11</field>
+    <field name="talent_ref" rel="ManyToOneRel" to="collector.talentref">1</field>
+  </object>
+  <object model="collector.talent" pk="50">
+    <field name="character" rel="ManyToOneRel" to="collector.character">162</field>
+    <field name="name" type="CharField">Banshee Lieutenant</field>
+    <field name="attributes_list" type="CharField">
+    </field>
+    <field name="skills_list" type="CharField">
+    </field>
+    <field name="description" type="TextField">
+    </field>
+    <field name="AP" type="IntegerField">6</field>
+    <field name="OP" type="IntegerField">18</field>
+    <field name="value" type="IntegerField">36</field>
+    <field name="talent_ref" rel="ManyToOneRel" to="collector.talentref">1</field>
+  </object>
+  <object model="collector.talent" pk="51">
+    <field name="character" rel="ManyToOneRel" to="collector.character">158</field>
+    <field name="name" type="CharField">Banshee Captain</field>
+    <field name="attributes_list" type="CharField">
+    </field>
+    <field name="skills_list" type="CharField">
+    </field>
+    <field name="description" type="TextField">
+    </field>
+    <field name="AP" type="IntegerField">7</field>
+    <field name="OP" type="IntegerField">21</field>
+    <field name="value" type="IntegerField">42</field>
+    <field name="talent_ref" rel="ManyToOneRel" to="collector.talentref">1</field>
+  </object>
+  <object model="collector.talent" pk="52">
+    <field name="character" rel="ManyToOneRel" to="collector.character">157</field>
+    <field name="name" type="CharField">Banshee</field>
+    <field name="attributes_list" type="CharField">
+    </field>
+    <field name="skills_list" type="CharField">
+    </field>
+    <field name="description" type="TextField">
+    </field>
+    <field name="AP" type="IntegerField">3</field>
+    <field name="OP" type="IntegerField">9</field>
+    <field name="value" type="IntegerField">18</field>
+    <field name="talent_ref" rel="ManyToOneRel" to="collector.talentref">1</field>
+  </object>
+  <object model="collector.talent" pk="53">
+    <field name="character" rel="ManyToOneRel" to="collector.character">161</field>
+    <field name="name" type="CharField">Banshee Lieutenant</field>
+    <field name="attributes_list" type="CharField">
+    </field>
+    <field name="skills_list" type="CharField">
+    </field>
+    <field name="description" type="TextField">
+    </field>
+    <field name="AP" type="IntegerField">6</field>
+    <field name="OP" type="IntegerField">18</field>
+    <field name="value" type="IntegerField">36</field>
+    <field name="talent_ref" rel="ManyToOneRel" to="collector.talentref">1</field>
+  </object>
+  <object model="collector.talent" pk="54">
+    <field name="character" rel="ManyToOneRel" to="collector.character">93</field>
+    <field name="name" type="CharField">Imperial Fencing</field>
+    <field name="attributes_list" type="CharField">
+    </field>
+    <field name="skills_list" type="CharField">
+    </field>
+    <field name="description" type="TextField">
+    </field>
+    <field name="AP" type="IntegerField">0</field>
+    <field name="OP" type="IntegerField">7</field>
+    <field name="value" type="IntegerField">7</field>
+    <field name="talent_ref" rel="ManyToOneRel" to="collector.talentref">1</field>
+  </object>
+  <object model="collector.talent" pk="55">
+    <field name="character" rel="ManyToOneRel" to="collector.character">3</field>
+    <field name="name" type="CharField">Sword play</field>
+    <field name="attributes_list" type="CharField">
+    </field>
+    <field name="skills_list" type="CharField">
+    </field>
+    <field name="description" type="TextField">The lady has limited talent at fencing</field>
+    <field name="AP" type="IntegerField">0</field>
+    <field name="OP" type="IntegerField">0</field>
+    <field name="value" type="IntegerField">12</field>
+    <field name="talent_ref" rel="ManyToOneRel" to="collector.talentref">14</field>
+  </object>
+  <object model="collector.talent" pk="56">
+    <field name="character" rel="ManyToOneRel" to="collector.character">151</field>
+    <field name="name" type="CharField">Swordplay</field>
+    <field name="attributes_list" type="CharField">
+    </field>
+    <field name="skills_list" type="CharField">
+    </field>
+    <field name="description" type="TextField">
+    </field>
+    <field name="AP" type="IntegerField">0</field>
+    <field name="OP" type="IntegerField">0</field>
+    <field name="value" type="IntegerField">36</field>
+    <field name="talent_ref" rel="ManyToOneRel" to="collector.talentref">17</field>
+  </object>
+  <object model="collector.talent" pk="57">
+    <field name="character" rel="ManyToOneRel" to="collector.character">167</field>
+    <field name="name" type="CharField">Cybergear</field>
+    <field name="attributes_list" type="CharField">
+    </field>
+    <field name="skills_list" type="CharField">
+    </field>
+    <field name="description" type="TextField">
+    </field>
+    <field name="AP" type="IntegerField">0</field>
+    <field name="OP" type="IntegerField">0</field>
+    <field name="value" type="IntegerField">12</field>
+    <field name="talent_ref" rel="ManyToOneRel" to="collector.talentref">7</field>
+  </object>
+  <object model="collector.talent" pk="58">
+    <field name="character" rel="ManyToOneRel" to="collector.character">167</field>
+    <field name="name" type="CharField">Occultist</field>
+    <field name="attributes_list" type="CharField">
+    </field>
+    <field name="skills_list" type="CharField">
+    </field>
+    <field name="description" type="TextField">
+    </field>
+    <field name="AP" type="IntegerField">0</field>
+    <field name="OP" type="IntegerField">0</field>
+    <field name="value" type="IntegerField">25</field>
+    <field name="talent_ref" rel="ManyToOneRel" to="collector.talentref">2</field>
+  </object>
+  <object model="collector.talent" pk="59">
+    <field name="character" rel="ManyToOneRel" to="collector.character">103</field>
+    <field name="name" type="CharField">Occultist</field>
+    <field name="attributes_list" type="CharField">
+    </field>
+    <field name="skills_list" type="CharField">
+    </field>
+    <field name="description" type="TextField">
+    </field>
+    <field name="AP" type="IntegerField">0</field>
+    <field name="OP" type="IntegerField">0</field>
+    <field name="value" type="IntegerField">49</field>
+    <field name="talent_ref" rel="ManyToOneRel" to="collector.talentref">13</field>
+  </object>
+</django-objects>

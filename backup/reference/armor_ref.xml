@@ -1,2 +1,414 @@
-<?xml version="1.0" encoding="utf-8"?>
-<django-objects version="1.0"><object model="collector.armorref" pk="1"><field name="reference" type="CharField">Synthsilk</field><field name="category" type="CharField">Soft</field><field name="head" type="BooleanField">False</field><field name="torso" type="BooleanField">True</field><field name="left_arm" type="BooleanField">True</field><field name="right_arm" type="BooleanField">True</field><field name="left_leg" type="BooleanField">True</field><field name="right_leg" type="BooleanField">True</field><field name="stopping_power" type="PositiveIntegerField">3</field><field name="cost" type="PositiveIntegerField">300</field><field name="encumbrance" type="PositiveIntegerField">0</field><field name="tech_level" type="PositiveIntegerField">6</field><field name="description" type="TextField"></field></object><object model="collector.armorref" pk="2"><field name="reference" type="CharField">Leather Armor</field><field name="category" type="CharField">Soft</field><field name="head" type="BooleanField">False</field><field name="torso" type="BooleanField">True</field><field name="left_arm" type="BooleanField">True</field><field name="right_arm" type="BooleanField">True</field><field name="left_leg" type="BooleanField">True</field><field name="right_leg" type="BooleanField">True</field><field name="stopping_power" type="PositiveIntegerField">4</field><field name="cost" type="PositiveIntegerField">10</field><field name="encumbrance" type="PositiveIntegerField">0</field><field name="tech_level" type="PositiveIntegerField">3</field><field name="description" type="TextField"></field></object><object model="collector.armorref" pk="3"><field name="reference" type="CharField">Padded Clothing</field><field name="category" type="CharField">Soft</field><field name="head" type="BooleanField">False</field><field name="torso" type="BooleanField">True</field><field name="left_arm" type="BooleanField">True</field><field name="right_arm" type="BooleanField">True</field><field name="left_leg" type="BooleanField">True</field><field name="right_leg" type="BooleanField">True</field><field name="stopping_power" type="PositiveIntegerField">1</field><field name="cost" type="PositiveIntegerField">0</field><field name="encumbrance" type="PositiveIntegerField">0</field><field name="tech_level" type="PositiveIntegerField">3</field><field name="description" type="TextField"></field></object><object model="collector.armorref" pk="4"><field name="reference" type="CharField">Heavy Clothing</field><field name="category" type="CharField">Soft</field><field name="head" type="BooleanField">False</field><field name="torso" type="BooleanField">True</field><field name="left_arm" type="BooleanField">True</field><field name="right_arm" type="BooleanField">True</field><field name="left_leg" type="BooleanField">False</field><field name="right_leg" type="BooleanField">False</field><field name="stopping_power" type="PositiveIntegerField">2</field><field name="cost" type="PositiveIntegerField">2</field><field name="encumbrance" type="PositiveIntegerField">0</field><field name="tech_level" type="PositiveIntegerField">3</field><field name="description" type="TextField"></field></object><object model="collector.armorref" pk="5"><field name="reference" type="CharField">Polymer Knit</field><field name="category" type="CharField">Medium</field><field name="head" type="BooleanField">False</field><field name="torso" type="BooleanField">True</field><field name="left_arm" type="BooleanField">True</field><field name="right_arm" type="BooleanField">True</field><field name="left_leg" type="BooleanField">False</field><field name="right_leg" type="BooleanField">False</field><field name="stopping_power" type="PositiveIntegerField">6</field><field name="cost" type="PositiveIntegerField">200</field><field name="encumbrance" type="PositiveIntegerField">2</field><field name="tech_level" type="PositiveIntegerField">5</field><field name="description" type="TextField"></field></object><object model="collector.armorref" pk="6"><field name="reference" type="CharField">Spacesuit</field><field name="category" type="CharField">Soft</field><field name="head" type="BooleanField">False</field><field name="torso" type="BooleanField">True</field><field name="left_arm" type="BooleanField">True</field><field name="right_arm" type="BooleanField">True</field><field name="left_leg" type="BooleanField">True</field><field name="right_leg" type="BooleanField">True</field><field name="stopping_power" type="PositiveIntegerField">3</field><field name="cost" type="PositiveIntegerField">100</field><field name="encumbrance" type="PositiveIntegerField">0</field><field name="tech_level" type="PositiveIntegerField">6</field><field name="description" type="TextField"></field></object><object model="collector.armorref" pk="7"><field name="reference" type="CharField">Leather Jerkin</field><field name="category" type="CharField">Soft</field><field name="head" type="BooleanField">False</field><field name="torso" type="BooleanField">True</field><field name="left_arm" type="BooleanField">True</field><field name="right_arm" type="BooleanField">True</field><field name="left_leg" type="BooleanField">False</field><field name="right_leg" type="BooleanField">False</field><field name="stopping_power" type="PositiveIntegerField">4</field><field name="cost" type="PositiveIntegerField">5</field><field name="encumbrance" type="PositiveIntegerField">0</field><field name="tech_level" type="PositiveIntegerField">3</field><field name="description" type="TextField"></field></object><object model="collector.armorref" pk="8"><field name="reference" type="CharField">Studded Leather</field><field name="category" type="CharField">Medium</field><field name="head" type="BooleanField">False</field><field name="torso" type="BooleanField">True</field><field name="left_arm" type="BooleanField">True</field><field name="right_arm" type="BooleanField">True</field><field name="left_leg" type="BooleanField">True</field><field name="right_leg" type="BooleanField">True</field><field name="stopping_power" type="PositiveIntegerField">5</field><field name="cost" type="PositiveIntegerField">8</field><field name="encumbrance" type="PositiveIntegerField">0</field><field name="tech_level" type="PositiveIntegerField">3</field><field name="description" type="TextField"></field></object><object model="collector.armorref" pk="9"><field name="reference" type="CharField">Half Plate</field><field name="category" type="CharField">Hard</field><field name="head" type="BooleanField">False</field><field name="torso" type="BooleanField">True</field><field name="left_arm" type="BooleanField">True</field><field name="right_arm" type="BooleanField">True</field><field name="left_leg" type="BooleanField">False</field><field name="right_leg" type="BooleanField">False</field><field name="stopping_power" type="PositiveIntegerField">6</field><field name="cost" type="PositiveIntegerField">30</field><field name="encumbrance" type="PositiveIntegerField">2</field><field name="tech_level" type="PositiveIntegerField">3</field><field name="description" type="TextField"></field></object><object model="collector.armorref" pk="10"><field name="reference" type="CharField">Half Plastic Plate</field><field name="category" type="CharField">Hard</field><field name="head" type="BooleanField">False</field><field name="torso" type="BooleanField">True</field><field name="left_arm" type="BooleanField">True</field><field name="right_arm" type="BooleanField">True</field><field name="left_leg" type="BooleanField">False</field><field name="right_leg" type="BooleanField">False</field><field name="stopping_power" type="PositiveIntegerField">6</field><field name="cost" type="PositiveIntegerField">60</field><field name="encumbrance" type="PositiveIntegerField">5</field><field name="tech_level" type="PositiveIntegerField">3</field><field name="description" type="TextField"></field></object><object model="collector.armorref" pk="11"><field name="reference" type="CharField">Scale Mail</field><field name="category" type="CharField">Medium</field><field name="head" type="BooleanField">False</field><field name="torso" type="BooleanField">True</field><field name="left_arm" type="BooleanField">True</field><field name="right_arm" type="BooleanField">True</field><field name="left_leg" type="BooleanField">False</field><field name="right_leg" type="BooleanField">False</field><field name="stopping_power" type="PositiveIntegerField">7</field><field name="cost" type="PositiveIntegerField">13</field><field name="encumbrance" type="PositiveIntegerField">1</field><field name="tech_level" type="PositiveIntegerField">3</field><field name="description" type="TextField"></field></object><object model="collector.armorref" pk="12"><field name="reference" type="CharField">Plastic Scale Mail</field><field name="category" type="CharField">Medium</field><field name="head" type="BooleanField">False</field><field name="torso" type="BooleanField">True</field><field name="left_arm" type="BooleanField">True</field><field name="right_arm" type="BooleanField">True</field><field name="left_leg" type="BooleanField">True</field><field name="right_leg" type="BooleanField">True</field><field name="stopping_power" type="PositiveIntegerField">7</field><field name="cost" type="PositiveIntegerField">20</field><field name="encumbrance" type="PositiveIntegerField">1</field><field name="tech_level" type="PositiveIntegerField">5</field><field name="description" type="TextField"></field></object><object model="collector.armorref" pk="13"><field name="reference" type="CharField">Stiffsynth</field><field name="category" type="CharField">Medium</field><field name="head" type="BooleanField">False</field><field name="torso" type="BooleanField">True</field><field name="left_arm" type="BooleanField">True</field><field name="right_arm" type="BooleanField">True</field><field name="left_leg" type="BooleanField">True</field><field name="right_leg" type="BooleanField">True</field><field name="stopping_power" type="PositiveIntegerField">7</field><field name="cost" type="PositiveIntegerField">500</field><field name="encumbrance" type="PositiveIntegerField">1</field><field name="tech_level" type="PositiveIntegerField">6</field><field name="description" type="TextField"></field></object><object model="collector.armorref" pk="14"><field name="reference" type="CharField">Chain Mail</field><field name="category" type="CharField">Medium</field><field name="head" type="BooleanField">False</field><field name="torso" type="BooleanField">True</field><field name="left_arm" type="BooleanField">True</field><field name="right_arm" type="BooleanField">True</field><field name="left_leg" type="BooleanField">False</field><field name="right_leg" type="BooleanField">False</field><field name="stopping_power" type="PositiveIntegerField">8</field><field name="cost" type="PositiveIntegerField">20</field><field name="encumbrance" type="PositiveIntegerField">1</field><field name="tech_level" type="PositiveIntegerField">3</field><field name="description" type="TextField"></field></object><object model="collector.armorref" pk="15"><field name="reference" type="CharField">Plastic Mesh Chain Mail</field><field name="category" type="CharField">Medium</field><field name="head" type="BooleanField">False</field><field name="torso" type="BooleanField">True</field><field name="left_arm" type="BooleanField">True</field><field name="right_arm" type="BooleanField">True</field><field name="left_leg" type="BooleanField">False</field><field name="right_leg" type="BooleanField">False</field><field name="stopping_power" type="PositiveIntegerField">2</field><field name="cost" type="PositiveIntegerField">2</field><field name="encumbrance" type="PositiveIntegerField">0</field><field name="tech_level" type="PositiveIntegerField">5</field><field name="description" type="TextField"></field></object><object model="collector.armorref" pk="16"><field name="reference" type="CharField">Armored Mesh Spacesuit</field><field name="category" type="CharField">Medium</field><field name="head" type="BooleanField">True</field><field name="torso" type="BooleanField">True</field><field name="left_arm" type="BooleanField">True</field><field name="right_arm" type="BooleanField">True</field><field name="left_leg" type="BooleanField">True</field><field name="right_leg" type="BooleanField">True</field><field name="stopping_power" type="PositiveIntegerField">8</field><field name="cost" type="PositiveIntegerField">500</field><field name="encumbrance" type="PositiveIntegerField">2</field><field name="tech_level" type="PositiveIntegerField">6</field><field name="description" type="TextField"></field></object><object model="collector.armorref" pk="17"><field name="reference" type="CharField">Plate</field><field name="category" type="CharField">Hard</field><field name="head" type="BooleanField">True</field><field name="torso" type="BooleanField">True</field><field name="left_arm" type="BooleanField">True</field><field name="right_arm" type="BooleanField">True</field><field name="left_leg" type="BooleanField">True</field><field name="right_leg" type="BooleanField">True</field><field name="stopping_power" type="PositiveIntegerField">10</field><field name="cost" type="PositiveIntegerField">40</field><field name="encumbrance" type="PositiveIntegerField">2</field><field name="tech_level" type="PositiveIntegerField">3</field><field name="description" type="TextField"></field></object><object model="collector.armorref" pk="18"><field name="reference" type="CharField">Plastic Plate</field><field name="category" type="CharField">Hard</field><field name="head" type="BooleanField">True</field><field name="torso" type="BooleanField">True</field><field name="left_arm" type="BooleanField">True</field><field name="right_arm" type="BooleanField">True</field><field name="left_leg" type="BooleanField">True</field><field name="right_leg" type="BooleanField">True</field><field name="stopping_power" type="PositiveIntegerField">10</field><field name="cost" type="PositiveIntegerField">80</field><field name="encumbrance" type="PositiveIntegerField">2</field><field name="tech_level" type="PositiveIntegerField">5</field><field name="description" type="TextField"></field></object><object model="collector.armorref" pk="19"><field name="reference" type="CharField">Ceramsteel Plate</field><field name="category" type="CharField">Hard</field><field name="head" type="BooleanField">True</field><field name="torso" type="BooleanField">True</field><field name="left_arm" type="BooleanField">True</field><field name="right_arm" type="BooleanField">True</field><field name="left_leg" type="BooleanField">True</field><field name="right_leg" type="BooleanField">True</field><field name="stopping_power" type="PositiveIntegerField">14</field><field name="cost" type="PositiveIntegerField">1000</field><field name="encumbrance" type="PositiveIntegerField">5</field><field name="tech_level" type="PositiveIntegerField">6</field><field name="description" type="TextField"></field></object><object model="collector.armorref" pk="20"><field name="reference" type="CharField">Adept Robe Ceramsteel Plate</field><field name="category" type="CharField">Hard</field><field name="head" type="BooleanField">True</field><field name="torso" type="BooleanField">True</field><field name="left_arm" type="BooleanField">True</field><field name="right_arm" type="BooleanField">True</field><field name="left_leg" type="BooleanField">True</field><field name="right_leg" type="BooleanField">True</field><field name="stopping_power" type="PositiveIntegerField">14</field><field name="cost" type="PositiveIntegerField">10000</field><field name="encumbrance" type="PositiveIntegerField">3</field><field name="tech_level" type="PositiveIntegerField">6</field><field name="description" type="TextField">Brother Battle Only. Price is given for black market evaluation. Trading with this kind of gear is frowned upon by imperial and Royale Houses authorities alike. No sane scraver will take the risk to retail or sale this kind of gear.</field></object><object model="collector.armorref" pk="21"><field name="reference" type="CharField">Powered Ceramsteel Plate</field><field name="category" type="CharField">Hard</field><field name="head" type="BooleanField">True</field><field name="torso" type="BooleanField">True</field><field name="left_arm" type="BooleanField">True</field><field name="right_arm" type="BooleanField">True</field><field name="left_leg" type="BooleanField">True</field><field name="right_leg" type="BooleanField">True</field><field name="stopping_power" type="PositiveIntegerField">14</field><field name="cost" type="PositiveIntegerField">2500</field><field name="encumbrance" type="PositiveIntegerField">3</field><field name="tech_level" type="PositiveIntegerField">6</field><field name="description" type="TextField"></field></object><object model="collector.armorref" pk="22"><field name="reference" type="CharField">Studded Leather Jacket</field><field name="category" type="CharField">Medium</field><field name="head" type="BooleanField">False</field><field name="torso" type="BooleanField">True</field><field name="left_arm" type="BooleanField">True</field><field name="right_arm" type="BooleanField">True</field><field name="left_leg" type="BooleanField">False</field><field name="right_leg" type="BooleanField">False</field><field name="stopping_power" type="PositiveIntegerField">5</field><field name="cost" type="PositiveIntegerField">3</field><field name="encumbrance" type="PositiveIntegerField">0</field><field name="tech_level" type="PositiveIntegerField">3</field><field name="description" type="TextField"></field></object><object model="collector.armorref" pk="23"><field name="reference" type="CharField">D'Rouge-Glace Glassfiber Model VI</field><field name="category" type="CharField">Medium</field><field name="head" type="BooleanField">True</field><field name="torso" type="BooleanField">True</field><field name="left_arm" type="BooleanField">True</field><field name="right_arm" type="BooleanField">True</field><field name="left_leg" type="BooleanField">True</field><field name="right_leg" type="BooleanField">True</field><field name="stopping_power" type="PositiveIntegerField">8</field><field name="cost" type="PositiveIntegerField">800</field><field name="encumbrance" type="PositiveIntegerField">0</field><field name="tech_level" type="PositiveIntegerField">7</field><field name="description" type="TextField">This is a complete suit made of flexible glass fiber material. Tech Level 7. All suits are marked with an identification number engraved to the weaving. An industrial secret from Rampart House D'Rouge-Glace, with only a handful of highly selected buyers (Hazat and Decados essentially). Each suit is a powered device needing a FC:10x16E fusion cell to endure damages for 10 years. Not part of a given suit can be used separately.</field></object><object model="collector.armorref" pk="24"><field name="reference" type="CharField">Gyllevhem Suit</field><field name="category" type="CharField">Hard</field><field name="head" type="BooleanField">False</field><field name="torso" type="BooleanField">True</field><field name="left_arm" type="BooleanField">True</field><field name="right_arm" type="BooleanField">True</field><field name="left_leg" type="BooleanField">True</field><field name="right_leg" type="BooleanField">True</field><field name="stopping_power" type="PositiveIntegerField">8</field><field name="cost" type="PositiveIntegerField">10000</field><field name="encumbrance" type="PositiveIntegerField">0</field><field name="tech_level" type="PositiveIntegerField">7</field><field name="description" type="TextField">"Skin of Vhem" Obuni Sacred Armor. Price given for Black Market Evaluation. Reference is Children of the Gods, Obun &amp; Ukar, page 43.</field></object><object model="collector.armorref" pk="25"><field name="reference" type="CharField">Kadak Armor</field><field name="category" type="CharField">Soft</field><field name="head" type="BooleanField">False</field><field name="torso" type="BooleanField">True</field><field name="left_arm" type="BooleanField">True</field><field name="right_arm" type="BooleanField">True</field><field name="left_leg" type="BooleanField">True</field><field name="right_leg" type="BooleanField">True</field><field name="stopping_power" type="PositiveIntegerField">6</field><field name="cost" type="PositiveIntegerField">30</field><field name="encumbrance" type="PositiveIntegerField">0</field><field name="tech_level" type="PositiveIntegerField">3</field><field name="description" type="TextField">Ukari crude armor. Reference "Children of the Gods: Obun &amp; Ukar" page 76.</field></object><object model="collector.armorref" pk="26"><field name="reference" type="CharField">Chapter Flowing Robe</field><field name="category" type="CharField">Soft</field><field name="head" type="BooleanField">False</field><field name="torso" type="BooleanField">True</field><field name="left_arm" type="BooleanField">True</field><field name="right_arm" type="BooleanField">True</field><field name="left_leg" type="BooleanField">True</field><field name="right_leg" type="BooleanField">True</field><field name="stopping_power" type="PositiveIntegerField">6</field><field name="cost" type="PositiveIntegerField">300</field><field name="encumbrance" type="PositiveIntegerField">1</field><field name="tech_level" type="PositiveIntegerField">5</field><field name="description" type="TextField">Typical clothing for the monks of the Aeon Chapter.</field></object></django-objects>
+<?xml version="1.0" encoding="UTF-8"?>
+<django-objects version="1.0">
+  <object model="collector.armorref" pk="1">
+    <field name="reference" type="CharField">Synthsilk</field>
+    <field name="category" type="CharField">Soft</field>
+    <field name="head" type="BooleanField">False</field>
+    <field name="torso" type="BooleanField">True</field>
+    <field name="left_arm" type="BooleanField">True</field>
+    <field name="right_arm" type="BooleanField">True</field>
+    <field name="left_leg" type="BooleanField">True</field>
+    <field name="right_leg" type="BooleanField">True</field>
+    <field name="stopping_power" type="PositiveIntegerField">3</field>
+    <field name="cost" type="PositiveIntegerField">300</field>
+    <field name="encumbrance" type="PositiveIntegerField">0</field>
+    <field name="tech_level" type="PositiveIntegerField">6</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.armorref" pk="2">
+    <field name="reference" type="CharField">Leather Armor</field>
+    <field name="category" type="CharField">Soft</field>
+    <field name="head" type="BooleanField">False</field>
+    <field name="torso" type="BooleanField">True</field>
+    <field name="left_arm" type="BooleanField">True</field>
+    <field name="right_arm" type="BooleanField">True</field>
+    <field name="left_leg" type="BooleanField">True</field>
+    <field name="right_leg" type="BooleanField">True</field>
+    <field name="stopping_power" type="PositiveIntegerField">4</field>
+    <field name="cost" type="PositiveIntegerField">10</field>
+    <field name="encumbrance" type="PositiveIntegerField">0</field>
+    <field name="tech_level" type="PositiveIntegerField">3</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.armorref" pk="3">
+    <field name="reference" type="CharField">Padded Clothing</field>
+    <field name="category" type="CharField">Soft</field>
+    <field name="head" type="BooleanField">False</field>
+    <field name="torso" type="BooleanField">True</field>
+    <field name="left_arm" type="BooleanField">True</field>
+    <field name="right_arm" type="BooleanField">True</field>
+    <field name="left_leg" type="BooleanField">True</field>
+    <field name="right_leg" type="BooleanField">True</field>
+    <field name="stopping_power" type="PositiveIntegerField">1</field>
+    <field name="cost" type="PositiveIntegerField">0</field>
+    <field name="encumbrance" type="PositiveIntegerField">0</field>
+    <field name="tech_level" type="PositiveIntegerField">3</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.armorref" pk="4">
+    <field name="reference" type="CharField">Heavy Clothing</field>
+    <field name="category" type="CharField">Soft</field>
+    <field name="head" type="BooleanField">False</field>
+    <field name="torso" type="BooleanField">True</field>
+    <field name="left_arm" type="BooleanField">True</field>
+    <field name="right_arm" type="BooleanField">True</field>
+    <field name="left_leg" type="BooleanField">False</field>
+    <field name="right_leg" type="BooleanField">False</field>
+    <field name="stopping_power" type="PositiveIntegerField">2</field>
+    <field name="cost" type="PositiveIntegerField">2</field>
+    <field name="encumbrance" type="PositiveIntegerField">0</field>
+    <field name="tech_level" type="PositiveIntegerField">3</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.armorref" pk="5">
+    <field name="reference" type="CharField">Polymer Knit</field>
+    <field name="category" type="CharField">Medium</field>
+    <field name="head" type="BooleanField">False</field>
+    <field name="torso" type="BooleanField">True</field>
+    <field name="left_arm" type="BooleanField">True</field>
+    <field name="right_arm" type="BooleanField">True</field>
+    <field name="left_leg" type="BooleanField">False</field>
+    <field name="right_leg" type="BooleanField">False</field>
+    <field name="stopping_power" type="PositiveIntegerField">6</field>
+    <field name="cost" type="PositiveIntegerField">200</field>
+    <field name="encumbrance" type="PositiveIntegerField">2</field>
+    <field name="tech_level" type="PositiveIntegerField">5</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.armorref" pk="6">
+    <field name="reference" type="CharField">Spacesuit</field>
+    <field name="category" type="CharField">Soft</field>
+    <field name="head" type="BooleanField">False</field>
+    <field name="torso" type="BooleanField">True</field>
+    <field name="left_arm" type="BooleanField">True</field>
+    <field name="right_arm" type="BooleanField">True</field>
+    <field name="left_leg" type="BooleanField">True</field>
+    <field name="right_leg" type="BooleanField">True</field>
+    <field name="stopping_power" type="PositiveIntegerField">3</field>
+    <field name="cost" type="PositiveIntegerField">100</field>
+    <field name="encumbrance" type="PositiveIntegerField">0</field>
+    <field name="tech_level" type="PositiveIntegerField">6</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.armorref" pk="7">
+    <field name="reference" type="CharField">Leather Jerkin</field>
+    <field name="category" type="CharField">Soft</field>
+    <field name="head" type="BooleanField">False</field>
+    <field name="torso" type="BooleanField">True</field>
+    <field name="left_arm" type="BooleanField">True</field>
+    <field name="right_arm" type="BooleanField">True</field>
+    <field name="left_leg" type="BooleanField">False</field>
+    <field name="right_leg" type="BooleanField">False</field>
+    <field name="stopping_power" type="PositiveIntegerField">4</field>
+    <field name="cost" type="PositiveIntegerField">5</field>
+    <field name="encumbrance" type="PositiveIntegerField">0</field>
+    <field name="tech_level" type="PositiveIntegerField">3</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.armorref" pk="8">
+    <field name="reference" type="CharField">Studded Leather</field>
+    <field name="category" type="CharField">Medium</field>
+    <field name="head" type="BooleanField">False</field>
+    <field name="torso" type="BooleanField">True</field>
+    <field name="left_arm" type="BooleanField">True</field>
+    <field name="right_arm" type="BooleanField">True</field>
+    <field name="left_leg" type="BooleanField">True</field>
+    <field name="right_leg" type="BooleanField">True</field>
+    <field name="stopping_power" type="PositiveIntegerField">5</field>
+    <field name="cost" type="PositiveIntegerField">8</field>
+    <field name="encumbrance" type="PositiveIntegerField">0</field>
+    <field name="tech_level" type="PositiveIntegerField">3</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.armorref" pk="9">
+    <field name="reference" type="CharField">Half Plate</field>
+    <field name="category" type="CharField">Hard</field>
+    <field name="head" type="BooleanField">False</field>
+    <field name="torso" type="BooleanField">True</field>
+    <field name="left_arm" type="BooleanField">True</field>
+    <field name="right_arm" type="BooleanField">True</field>
+    <field name="left_leg" type="BooleanField">False</field>
+    <field name="right_leg" type="BooleanField">False</field>
+    <field name="stopping_power" type="PositiveIntegerField">6</field>
+    <field name="cost" type="PositiveIntegerField">30</field>
+    <field name="encumbrance" type="PositiveIntegerField">2</field>
+    <field name="tech_level" type="PositiveIntegerField">3</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.armorref" pk="10">
+    <field name="reference" type="CharField">Half Plastic Plate</field>
+    <field name="category" type="CharField">Hard</field>
+    <field name="head" type="BooleanField">False</field>
+    <field name="torso" type="BooleanField">True</field>
+    <field name="left_arm" type="BooleanField">True</field>
+    <field name="right_arm" type="BooleanField">True</field>
+    <field name="left_leg" type="BooleanField">False</field>
+    <field name="right_leg" type="BooleanField">False</field>
+    <field name="stopping_power" type="PositiveIntegerField">6</field>
+    <field name="cost" type="PositiveIntegerField">60</field>
+    <field name="encumbrance" type="PositiveIntegerField">5</field>
+    <field name="tech_level" type="PositiveIntegerField">3</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.armorref" pk="11">
+    <field name="reference" type="CharField">Scale Mail</field>
+    <field name="category" type="CharField">Medium</field>
+    <field name="head" type="BooleanField">False</field>
+    <field name="torso" type="BooleanField">True</field>
+    <field name="left_arm" type="BooleanField">True</field>
+    <field name="right_arm" type="BooleanField">True</field>
+    <field name="left_leg" type="BooleanField">False</field>
+    <field name="right_leg" type="BooleanField">False</field>
+    <field name="stopping_power" type="PositiveIntegerField">7</field>
+    <field name="cost" type="PositiveIntegerField">13</field>
+    <field name="encumbrance" type="PositiveIntegerField">1</field>
+    <field name="tech_level" type="PositiveIntegerField">3</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.armorref" pk="12">
+    <field name="reference" type="CharField">Plastic Scale Mail</field>
+    <field name="category" type="CharField">Medium</field>
+    <field name="head" type="BooleanField">False</field>
+    <field name="torso" type="BooleanField">True</field>
+    <field name="left_arm" type="BooleanField">True</field>
+    <field name="right_arm" type="BooleanField">True</field>
+    <field name="left_leg" type="BooleanField">True</field>
+    <field name="right_leg" type="BooleanField">True</field>
+    <field name="stopping_power" type="PositiveIntegerField">7</field>
+    <field name="cost" type="PositiveIntegerField">20</field>
+    <field name="encumbrance" type="PositiveIntegerField">1</field>
+    <field name="tech_level" type="PositiveIntegerField">5</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.armorref" pk="13">
+    <field name="reference" type="CharField">Stiffsynth</field>
+    <field name="category" type="CharField">Medium</field>
+    <field name="head" type="BooleanField">False</field>
+    <field name="torso" type="BooleanField">True</field>
+    <field name="left_arm" type="BooleanField">True</field>
+    <field name="right_arm" type="BooleanField">True</field>
+    <field name="left_leg" type="BooleanField">True</field>
+    <field name="right_leg" type="BooleanField">True</field>
+    <field name="stopping_power" type="PositiveIntegerField">7</field>
+    <field name="cost" type="PositiveIntegerField">500</field>
+    <field name="encumbrance" type="PositiveIntegerField">1</field>
+    <field name="tech_level" type="PositiveIntegerField">6</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.armorref" pk="14">
+    <field name="reference" type="CharField">Chain Mail</field>
+    <field name="category" type="CharField">Medium</field>
+    <field name="head" type="BooleanField">False</field>
+    <field name="torso" type="BooleanField">True</field>
+    <field name="left_arm" type="BooleanField">True</field>
+    <field name="right_arm" type="BooleanField">True</field>
+    <field name="left_leg" type="BooleanField">False</field>
+    <field name="right_leg" type="BooleanField">False</field>
+    <field name="stopping_power" type="PositiveIntegerField">8</field>
+    <field name="cost" type="PositiveIntegerField">20</field>
+    <field name="encumbrance" type="PositiveIntegerField">1</field>
+    <field name="tech_level" type="PositiveIntegerField">3</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.armorref" pk="15">
+    <field name="reference" type="CharField">Plastic Mesh Chain Mail</field>
+    <field name="category" type="CharField">Medium</field>
+    <field name="head" type="BooleanField">False</field>
+    <field name="torso" type="BooleanField">True</field>
+    <field name="left_arm" type="BooleanField">True</field>
+    <field name="right_arm" type="BooleanField">True</field>
+    <field name="left_leg" type="BooleanField">False</field>
+    <field name="right_leg" type="BooleanField">False</field>
+    <field name="stopping_power" type="PositiveIntegerField">2</field>
+    <field name="cost" type="PositiveIntegerField">2</field>
+    <field name="encumbrance" type="PositiveIntegerField">0</field>
+    <field name="tech_level" type="PositiveIntegerField">5</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.armorref" pk="16">
+    <field name="reference" type="CharField">Armored Mesh Spacesuit</field>
+    <field name="category" type="CharField">Medium</field>
+    <field name="head" type="BooleanField">True</field>
+    <field name="torso" type="BooleanField">True</field>
+    <field name="left_arm" type="BooleanField">True</field>
+    <field name="right_arm" type="BooleanField">True</field>
+    <field name="left_leg" type="BooleanField">True</field>
+    <field name="right_leg" type="BooleanField">True</field>
+    <field name="stopping_power" type="PositiveIntegerField">8</field>
+    <field name="cost" type="PositiveIntegerField">500</field>
+    <field name="encumbrance" type="PositiveIntegerField">2</field>
+    <field name="tech_level" type="PositiveIntegerField">6</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.armorref" pk="17">
+    <field name="reference" type="CharField">Plate</field>
+    <field name="category" type="CharField">Hard</field>
+    <field name="head" type="BooleanField">True</field>
+    <field name="torso" type="BooleanField">True</field>
+    <field name="left_arm" type="BooleanField">True</field>
+    <field name="right_arm" type="BooleanField">True</field>
+    <field name="left_leg" type="BooleanField">True</field>
+    <field name="right_leg" type="BooleanField">True</field>
+    <field name="stopping_power" type="PositiveIntegerField">10</field>
+    <field name="cost" type="PositiveIntegerField">40</field>
+    <field name="encumbrance" type="PositiveIntegerField">2</field>
+    <field name="tech_level" type="PositiveIntegerField">3</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.armorref" pk="18">
+    <field name="reference" type="CharField">Plastic Plate</field>
+    <field name="category" type="CharField">Hard</field>
+    <field name="head" type="BooleanField">True</field>
+    <field name="torso" type="BooleanField">True</field>
+    <field name="left_arm" type="BooleanField">True</field>
+    <field name="right_arm" type="BooleanField">True</field>
+    <field name="left_leg" type="BooleanField">True</field>
+    <field name="right_leg" type="BooleanField">True</field>
+    <field name="stopping_power" type="PositiveIntegerField">10</field>
+    <field name="cost" type="PositiveIntegerField">80</field>
+    <field name="encumbrance" type="PositiveIntegerField">2</field>
+    <field name="tech_level" type="PositiveIntegerField">5</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.armorref" pk="19">
+    <field name="reference" type="CharField">Ceramsteel Plate</field>
+    <field name="category" type="CharField">Hard</field>
+    <field name="head" type="BooleanField">True</field>
+    <field name="torso" type="BooleanField">True</field>
+    <field name="left_arm" type="BooleanField">True</field>
+    <field name="right_arm" type="BooleanField">True</field>
+    <field name="left_leg" type="BooleanField">True</field>
+    <field name="right_leg" type="BooleanField">True</field>
+    <field name="stopping_power" type="PositiveIntegerField">14</field>
+    <field name="cost" type="PositiveIntegerField">1000</field>
+    <field name="encumbrance" type="PositiveIntegerField">5</field>
+    <field name="tech_level" type="PositiveIntegerField">6</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.armorref" pk="20">
+    <field name="reference" type="CharField">Adept Robe Ceramsteel Plate</field>
+    <field name="category" type="CharField">Hard</field>
+    <field name="head" type="BooleanField">True</field>
+    <field name="torso" type="BooleanField">True</field>
+    <field name="left_arm" type="BooleanField">True</field>
+    <field name="right_arm" type="BooleanField">True</field>
+    <field name="left_leg" type="BooleanField">True</field>
+    <field name="right_leg" type="BooleanField">True</field>
+    <field name="stopping_power" type="PositiveIntegerField">14</field>
+    <field name="cost" type="PositiveIntegerField">10000</field>
+    <field name="encumbrance" type="PositiveIntegerField">3</field>
+    <field name="tech_level" type="PositiveIntegerField">6</field>
+    <field name="description" type="TextField">Brother Battle Only. Price is given for black market evaluation. Trading with this kind of gear is frowned upon by imperial and Royale Houses authorities alike. No sane scraver will take the risk to retail or sale this kind of gear.</field>
+  </object>
+  <object model="collector.armorref" pk="21">
+    <field name="reference" type="CharField">Powered Ceramsteel Plate</field>
+    <field name="category" type="CharField">Hard</field>
+    <field name="head" type="BooleanField">True</field>
+    <field name="torso" type="BooleanField">True</field>
+    <field name="left_arm" type="BooleanField">True</field>
+    <field name="right_arm" type="BooleanField">True</field>
+    <field name="left_leg" type="BooleanField">True</field>
+    <field name="right_leg" type="BooleanField">True</field>
+    <field name="stopping_power" type="PositiveIntegerField">14</field>
+    <field name="cost" type="PositiveIntegerField">2500</field>
+    <field name="encumbrance" type="PositiveIntegerField">3</field>
+    <field name="tech_level" type="PositiveIntegerField">6</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.armorref" pk="22">
+    <field name="reference" type="CharField">Studded Leather Jacket</field>
+    <field name="category" type="CharField">Medium</field>
+    <field name="head" type="BooleanField">False</field>
+    <field name="torso" type="BooleanField">True</field>
+    <field name="left_arm" type="BooleanField">True</field>
+    <field name="right_arm" type="BooleanField">True</field>
+    <field name="left_leg" type="BooleanField">False</field>
+    <field name="right_leg" type="BooleanField">False</field>
+    <field name="stopping_power" type="PositiveIntegerField">5</field>
+    <field name="cost" type="PositiveIntegerField">3</field>
+    <field name="encumbrance" type="PositiveIntegerField">0</field>
+    <field name="tech_level" type="PositiveIntegerField">3</field>
+    <field name="description" type="TextField">
+    </field>
+  </object>
+  <object model="collector.armorref" pk="23">
+    <field name="reference" type="CharField">D'Rouge-Glace Glassfiber Model VI</field>
+    <field name="category" type="CharField">Medium</field>
+    <field name="head" type="BooleanField">True</field>
+    <field name="torso" type="BooleanField">True</field>
+    <field name="left_arm" type="BooleanField">True</field>
+    <field name="right_arm" type="BooleanField">True</field>
+    <field name="left_leg" type="BooleanField">True</field>
+    <field name="right_leg" type="BooleanField">True</field>
+    <field name="stopping_power" type="PositiveIntegerField">8</field>
+    <field name="cost" type="PositiveIntegerField">800</field>
+    <field name="encumbrance" type="PositiveIntegerField">0</field>
+    <field name="tech_level" type="PositiveIntegerField">7</field>
+    <field name="description" type="TextField">This is a complete suit made of flexible glass fiber material. Tech Level 7. All suits are marked with an identification number engraved to the weaving. An industrial secret from Rampart House D'Rouge-Glace, with only a handful of highly selected buyers (Hazat and Decados essentially). Each suit is a powered device needing a FC:10x16E fusion cell to endure damages for 10 years. Not part of a given suit can be used separately.</field>
+  </object>
+  <object model="collector.armorref" pk="24">
+    <field name="reference" type="CharField">Gyllevhem Suit</field>
+    <field name="category" type="CharField">Hard</field>
+    <field name="head" type="BooleanField">False</field>
+    <field name="torso" type="BooleanField">True</field>
+    <field name="left_arm" type="BooleanField">True</field>
+    <field name="right_arm" type="BooleanField">True</field>
+    <field name="left_leg" type="BooleanField">True</field>
+    <field name="right_leg" type="BooleanField">True</field>
+    <field name="stopping_power" type="PositiveIntegerField">8</field>
+    <field name="cost" type="PositiveIntegerField">10000</field>
+    <field name="encumbrance" type="PositiveIntegerField">0</field>
+    <field name="tech_level" type="PositiveIntegerField">7</field>
+    <field name="description" type="TextField">"Skin of Vhem" Obuni Sacred Armor. Price given for Black Market Evaluation. Reference is Children of the Gods, Obun &amp; Ukar, page 43.</field>
+  </object>
+  <object model="collector.armorref" pk="25">
+    <field name="reference" type="CharField">Kadak Armor</field>
+    <field name="category" type="CharField">Soft</field>
+    <field name="head" type="BooleanField">False</field>
+    <field name="torso" type="BooleanField">True</field>
+    <field name="left_arm" type="BooleanField">True</field>
+    <field name="right_arm" type="BooleanField">True</field>
+    <field name="left_leg" type="BooleanField">True</field>
+    <field name="right_leg" type="BooleanField">True</field>
+    <field name="stopping_power" type="PositiveIntegerField">6</field>
+    <field name="cost" type="PositiveIntegerField">30</field>
+    <field name="encumbrance" type="PositiveIntegerField">0</field>
+    <field name="tech_level" type="PositiveIntegerField">3</field>
+    <field name="description" type="TextField">Ukari crude armor. Reference "Children of the Gods: Obun &amp; Ukar" page 76.</field>
+  </object>
+  <object model="collector.armorref" pk="26">
+    <field name="reference" type="CharField">Chapter Flowing Robe</field>
+    <field name="category" type="CharField">Soft</field>
+    <field name="head" type="BooleanField">False</field>
+    <field name="torso" type="BooleanField">True</field>
+    <field name="left_arm" type="BooleanField">True</field>
+    <field name="right_arm" type="BooleanField">True</field>
+    <field name="left_leg" type="BooleanField">True</field>
+    <field name="right_leg" type="BooleanField">True</field>
+    <field name="stopping_power" type="PositiveIntegerField">6</field>
+    <field name="cost" type="PositiveIntegerField">300</field>
+    <field name="encumbrance" type="PositiveIntegerField">1</field>
+    <field name="tech_level" type="PositiveIntegerField">5</field>
+    <field name="description" type="TextField">Typical clothing for the monks of the Aeon Chapter.</field>
+  </object>
+</django-objects>

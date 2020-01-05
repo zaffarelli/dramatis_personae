@@ -10,10 +10,10 @@ $fics_dark: darken($fics_back, 10%);
 $fics_darker: darken($fics_back, 20%);
 $fics_darkest: darken($fics_darker, 30%);
 $fics_front: #e5deca;
-$fics_link: #dbca86;
+$fics_link: #aaa;
 $fics_blank: lighten($fics_back, 5%);
 $formset_back: $fics_darker;
-$fics_hl: $fics_light;
+$fics_hl: darken($fics_link, 40%);
 $fics_border_color: #ffc080;
 $fics_subborder_color: darken($fics_back, 30%);
 $fics_golden: #fc2;
@@ -1102,6 +1102,13 @@ body {
                 & td[colspan="3"], & th[colspan="3"] {
                     width: 300px;
                 }
+
+                & #summary {
+                    height: 250px;
+                    overflow-y: scroll;
+                    border: 1px solid $fics_darkest;
+                    width: 100%;
+                }
             }
 
             & ul {
@@ -1228,4 +1235,8 @@ body {
             }
         }
     }
+}
+
+.selected {
+    background-color: $fics_light;
 }

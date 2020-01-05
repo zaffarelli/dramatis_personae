@@ -1,2 +1,854 @@
-<?xml version="1.0" encoding="utf-8"?>
-<django-objects version="1.0"><object model="collector.weaponref" pk="1"><field name="reference" type="CharField">Knife</field><field name="meta_type" type="CharField">Dirk</field><field name="category" type="CharField">MELEE</field><field name="weapon_accuracy" type="IntegerField">0</field><field name="conceilable" type="CharField">P</field><field name="availability" type="CharField">E</field><field name="damage_class" type="CharField">1D6+1</field><field name="caliber" type="CharField"></field><field name="str_min" type="PositiveIntegerField">1</field><field name="rof" type="PositiveIntegerField">0</field><field name="clip" type="PositiveIntegerField">0</field><field name="rng" type="PositiveIntegerField">0</field><field name="rel" type="CharField">ST</field><field name="cost" type="PositiveIntegerField">2</field><field name="description" type="TextField"></field><field name="stats" type="CharField">Knife . MELEE . WA:0 . P . E . DC:1D6+1 . STR:1 . RNG:0 . ST . £2</field><field name="origins" type="CharField">Empire</field></object><object model="collector.weaponref" pk="2"><field name="reference" type="CharField">Mitchau "Penumbra" Shotgun</field><field name="meta_type" type="CharField">Slugger Shotgun</field><field name="category" type="CharField">SHG</field><field name="weapon_accuracy" type="IntegerField">-1</field><field name="conceilable" type="CharField">L</field><field name="availability" type="CharField">P</field><field name="damage_class" type="CharField">5D6</field><field name="caliber" type="CharField"></field><field name="str_min" type="PositiveIntegerField">0</field><field name="rof" type="PositiveIntegerField">1</field><field name="clip" type="PositiveIntegerField">6</field><field name="rng" type="PositiveIntegerField">15</field><field name="rel" type="CharField">ST</field><field name="cost" type="PositiveIntegerField">250</field><field name="description" type="TextField"></field><field name="stats" type="CharField">Mitchau "Penumbra" Shotgun . RIF . WA:-1 . L . P . DC:5d6 . Cal: . ROF:1 . Clip:6 . RNG:15 . ST . £250</field><field name="origins" type="CharField">Hazat</field></object><object model="collector.weaponref" pk="3"><field name="reference" type="CharField">Imperial Rifle</field><field name="meta_type" type="CharField">Slugger Rifle</field><field name="category" type="CharField">RIF</field><field name="weapon_accuracy" type="IntegerField">0</field><field name="conceilable" type="CharField">N</field><field name="availability" type="CharField">E</field><field name="damage_class" type="CharField">6D6+2</field><field name="caliber" type="CharField">7.62</field><field name="str_min" type="PositiveIntegerField">0</field><field name="rof" type="PositiveIntegerField">20</field><field name="clip" type="PositiveIntegerField">21</field><field name="rng" type="PositiveIntegerField">400</field><field name="rel" type="CharField">VR</field><field name="cost" type="PositiveIntegerField">200</field><field name="description" type="TextField">About 200£</field><field name="stats" type="CharField">Imperial Rifle . RIF . WA:0 . N . E . DC:6D6+2 . Cal:7.62 . ROF:20 . Clip:21 . RNG:400 . VR . £200</field><field name="origins" type="CharField">Empire</field></object><object model="collector.weaponref" pk="4"><field name="reference" type="CharField">Avaneir Medium Blaster</field><field name="meta_type" type="CharField">Medium Blaster</field><field name="category" type="CharField">P</field><field name="weapon_accuracy" type="IntegerField">0</field><field name="conceilable" type="CharField">J</field><field name="availability" type="CharField">P</field><field name="damage_class" type="CharField">6D6</field><field name="caliber" type="CharField">FSC:6x36x6</field><field name="str_min" type="PositiveIntegerField">0</field><field name="rof" type="PositiveIntegerField">0</field><field name="clip" type="PositiveIntegerField">6</field><field name="rng" type="PositiveIntegerField">0</field><field name="rel" type="CharField"></field><field name="cost" type="PositiveIntegerField">400</field><field name="description" type="TextField"></field><field name="stats" type="CharField">Avaneir Medium Blaster . P . WA:0 . J . P . DC:6d6 . Cal: . ROF:0 . Clip:0 . RNG:0 .  . £400</field><field name="origins" type="CharField">Li Halan</field></object><object model="collector.weaponref" pk="5"><field name="reference" type="CharField">De Aragonesque Rapier</field><field name="meta_type" type="CharField">Rapier</field><field name="category" type="CharField">MELEE</field><field name="weapon_accuracy" type="IntegerField">1</field><field name="conceilable" type="CharField">L</field><field name="availability" type="CharField">P</field><field name="damage_class" type="CharField">3D6+3</field><field name="caliber" type="CharField"></field><field name="str_min" type="PositiveIntegerField">3</field><field name="rof" type="PositiveIntegerField">0</field><field name="clip" type="PositiveIntegerField">0</field><field name="rng" type="PositiveIntegerField">1</field><field name="rel" type="CharField">VR</field><field name="cost" type="PositiveIntegerField">50</field><field name="description" type="TextField">The high quality Rolas rapier. Forged on demand, with exclusive decoration designed for the customer.</field><field name="stats" type="CharField">De Aragonesque Rapier . MELEE . WA:1 . L . P . DC:3D6+3 . STR:3 . RNG:1 . VR . £50</field><field name="origins" type="CharField">Hazat</field></object><object model="collector.weaponref" pk="6"><field name="reference" type="CharField">House Hawkwood 1638 UltraHeavy SMG</field><field name="meta_type" type="CharField">Warfare Device</field><field name="category" type="CharField">HVY</field><field name="weapon_accuracy" type="IntegerField">-2</field><field name="conceilable" type="CharField">N</field><field name="availability" type="CharField">P</field><field name="damage_class" type="CharField">8D6</field><field name="caliber" type="CharField">16mm</field><field name="str_min" type="PositiveIntegerField">4</field><field name="rof" type="PositiveIntegerField">30</field><field name="clip" type="PositiveIntegerField">240</field><field name="rng" type="PositiveIntegerField">150</field><field name="rel" type="CharField">VR</field><field name="cost" type="PositiveIntegerField">850</field><field name="description" type="TextField"></field><field name="stats" type="CharField">House Hawkwood 1638 UltraHeavy SMG . HVY . WA:-2 . N . P . DC:8D6 . Cal:16mm . ROF:30 . Clip:240 . RNG:150 . VR . £850</field><field name="origins" type="CharField">Hawkwood</field></object><object model="collector.weaponref" pk="7"><field name="reference" type="CharField">Ukari Krax</field><field name="meta_type" type="CharField">Dirk</field><field name="category" type="CharField">MELEE</field><field name="weapon_accuracy" type="IntegerField">-2</field><field name="conceilable" type="CharField">J</field><field name="availability" type="CharField">R</field><field name="damage_class" type="CharField">3D6+2</field><field name="caliber" type="CharField"></field><field name="str_min" type="PositiveIntegerField">3</field><field name="rof" type="PositiveIntegerField">0</field><field name="clip" type="PositiveIntegerField">0</field><field name="rng" type="PositiveIntegerField">2</field><field name="rel" type="CharField">VR</field><field name="cost" type="PositiveIntegerField">5000</field><field name="description" type="TextField">WA is ignored for an ukari intiate to the Kraxi Quadanqar (The Kraxi Dance). Price given is Black Market price. Do not deal or buy ukari gear on black market.</field><field name="stats" type="CharField">Ukari Krax . MELEE . WA:-2 . J . R . DC:3D6+2 . STR:3 . RNG:2 . VR . £5000</field><field name="origins" type="CharField">Kordeth</field></object><object model="collector.weaponref" pk="8"><field name="reference" type="CharField">Blue Moon Rifle (Seishen Rifle)</field><field name="meta_type" type="CharField">Slugger Rifle</field><field name="category" type="CharField">RIF</field><field name="weapon_accuracy" type="IntegerField">0</field><field name="conceilable" type="CharField">N</field><field name="availability" type="CharField">C</field><field name="damage_class" type="CharField">4D6+1</field><field name="caliber" type="CharField">12mm</field><field name="str_min" type="PositiveIntegerField">0</field><field name="rof" type="PositiveIntegerField">2</field><field name="clip" type="PositiveIntegerField">10</field><field name="rng" type="PositiveIntegerField">400</field><field name="rel" type="CharField">UR</field><field name="cost" type="PositiveIntegerField">175</field><field name="description" type="TextField">The typical rifle used by regular Blue Moon disciples.</field><field name="stats" type="CharField">Blue Moon Rifle (Seishen Rifle) . RIF . WA:0 . N . C . DC:4D6+1 . Cal:12mm . ROF:2 . Clip:10 . RNG:400 . UR . £175</field><field name="origins" type="CharField">Li Halan</field></object><object model="collector.weaponref" pk="9"><field name="reference" type="CharField">Mitchau "Conquest" Assault Rifle</field><field name="meta_type" type="CharField">Slugger Rifle</field><field name="category" type="CharField">RIF</field><field name="weapon_accuracy" type="IntegerField">1</field><field name="conceilable" type="CharField">N</field><field name="availability" type="CharField">P</field><field name="damage_class" type="CharField">6D6+2</field><field name="caliber" type="CharField">7.62mm</field><field name="str_min" type="PositiveIntegerField">0</field><field name="rof" type="PositiveIntegerField">20</field><field name="clip" type="PositiveIntegerField">41</field><field name="rng" type="PositiveIntegerField">400</field><field name="rel" type="CharField">VR</field><field name="cost" type="PositiveIntegerField">600</field><field name="description" type="TextField"></field><field name="stats" type="CharField">Mitchau "Conquest" Assault Rifle . RIF . WA:1 . N . P . DC:6D6+2 . Cal:7.62mm . ROF:20 . Clip:41 . RNG:400 . VR . £600</field><field name="origins" type="CharField">Hazat</field></object><object model="collector.weaponref" pk="10"><field name="reference" type="CharField">House Decados "Stanislas" SMG</field><field name="meta_type" type="CharField">Warfare Device</field><field name="category" type="CharField">SMG</field><field name="weapon_accuracy" type="IntegerField">0</field><field name="conceilable" type="CharField">J</field><field name="availability" type="CharField">P</field><field name="damage_class" type="CharField">4D6+1</field><field name="caliber" type="CharField">0.47</field><field name="str_min" type="PositiveIntegerField">0</field><field name="rof" type="PositiveIntegerField">20</field><field name="clip" type="PositiveIntegerField">60</field><field name="rng" type="PositiveIntegerField">150</field><field name="rel" type="CharField">VR</field><field name="cost" type="PositiveIntegerField">400</field><field name="description" type="TextField">Builder: House Decados. Price: 400£.</field><field name="stats" type="CharField">House Decados "Stanislas" SMG . SMG . WA:0 . J . P . DC:4D6+1 . Cal:0.47 . ROF:20 . Clip:60 . RNG:150 . VR . £400</field><field name="origins" type="CharField">Decados</field></object><object model="collector.weaponref" pk="11"><field name="reference" type="CharField">House al-Malik "Diplomat" Palm Laser</field><field name="meta_type" type="CharField">Light Laser</field><field name="category" type="CharField">P</field><field name="weapon_accuracy" type="IntegerField">0</field><field name="conceilable" type="CharField">P</field><field name="availability" type="CharField">P</field><field name="damage_class" type="CharField">2D6</field><field name="caliber" type="CharField">FSC:14x84</field><field name="str_min" type="PositiveIntegerField">0</field><field name="rof" type="PositiveIntegerField">2</field><field name="clip" type="PositiveIntegerField">7</field><field name="rng" type="PositiveIntegerField">100</field><field name="rel" type="CharField">ST</field><field name="cost" type="PositiveIntegerField">200</field><field name="description" type="TextField">Laser pistol built by House al-Malik. A weapon designed mainly for self-defense.</field><field name="stats" type="CharField">House al-Malik "Diplomat" Palm Laser . P . WA:0 . P . P . DC:2d6 . Cal:FSC:2x12 . ROF:2 . Clip:7 . RNG:100 . ST . £200</field><field name="origins" type="CharField">House al-Malik</field></object><object model="collector.weaponref" pk="12"><field name="reference" type="CharField">Bachelor Rapier</field><field name="meta_type" type="CharField">Rapier</field><field name="category" type="CharField">MELEE</field><field name="weapon_accuracy" type="IntegerField">0</field><field name="conceilable" type="CharField">N</field><field name="availability" type="CharField">E</field><field name="damage_class" type="CharField">3D6</field><field name="caliber" type="CharField"></field><field name="str_min" type="PositiveIntegerField">3</field><field name="rof" type="PositiveIntegerField">0</field><field name="clip" type="PositiveIntegerField">0</field><field name="rng" type="PositiveIntegerField">1</field><field name="rel" type="CharField">ST</field><field name="cost" type="PositiveIntegerField">10</field><field name="description" type="TextField"></field><field name="stats" type="CharField">Bachelor Rapier . MELEE . WA:0 . N . E . DC:3D6 . STR:3 . RNG:1 . ST . £10</field><field name="origins" type="CharField">Empire</field></object><object model="collector.weaponref" pk="13"><field name="reference" type="CharField">Decados Crescent Dirk</field><field name="meta_type" type="CharField">Dirk</field><field name="category" type="CharField">MELEE</field><field name="weapon_accuracy" type="IntegerField">1</field><field name="conceilable" type="CharField">J</field><field name="availability" type="CharField">P</field><field name="damage_class" type="CharField">2D6+3</field><field name="caliber" type="CharField"></field><field name="str_min" type="PositiveIntegerField">2</field><field name="rof" type="PositiveIntegerField">0</field><field name="clip" type="PositiveIntegerField">0</field><field name="rng" type="PositiveIntegerField">0</field><field name="rel" type="CharField">ST</field><field name="cost" type="PositiveIntegerField">10</field><field name="description" type="TextField">A really sharp blade easily conceilable.</field><field name="stats" type="CharField">Decados Crescent Dirk . MELEE . WA:1 . J . P . DC:2D6+3 . STR:2 . RNG:0 . ST . £10</field><field name="origins" type="CharField">Decados</field></object><object model="collector.weaponref" pk="14"><field name="reference" type="CharField">Zaalen Stinger (Obun Stunner)</field><field name="meta_type" type="CharField">Stunner</field><field name="category" type="CharField">EX</field><field name="weapon_accuracy" type="IntegerField">2</field><field name="conceilable" type="CharField">J</field><field name="availability" type="CharField">R</field><field name="damage_class" type="CharField">3D6</field><field name="caliber" type="CharField">FSC</field><field name="str_min" type="PositiveIntegerField">0</field><field name="rof" type="PositiveIntegerField">1</field><field name="clip" type="PositiveIntegerField">15</field><field name="rng" type="PositiveIntegerField">20</field><field name="rel" type="CharField">ST</field><field name="cost" type="PositiveIntegerField">3000</field><field name="description" type="TextField">Stun damage only</field><field name="stats" type="CharField">Zaalen Stinger (Obun Stunner) . P . WA:2 . J . R . DC:3D6 . Cal:FSC . ROF:1 . Clip:15 . RNG:20 . ST . £3000</field><field name="origins" type="CharField">Ur-Obun</field></object><object model="collector.weaponref" pk="15"><field name="reference" type="CharField">Battle Axe</field><field name="meta_type" type="CharField">Axe</field><field name="category" type="CharField">MELEE</field><field name="weapon_accuracy" type="IntegerField">0</field><field name="conceilable" type="CharField">N</field><field name="availability" type="CharField">C</field><field name="damage_class" type="CharField">5D6</field><field name="caliber" type="CharField"></field><field name="str_min" type="PositiveIntegerField">4</field><field name="rof" type="PositiveIntegerField">0</field><field name="clip" type="PositiveIntegerField">0</field><field name="rng" type="PositiveIntegerField">0</field><field name="rel" type="CharField">ST</field><field name="cost" type="PositiveIntegerField">5</field><field name="description" type="TextField"></field><field name="stats" type="CharField">Battle Axe . MELEE . WA:0 . N . C . DC:5D6 . STR:4 . RNG:0 . ST . £5</field><field name="origins" type="CharField">Empire</field></object><object model="collector.weaponref" pk="16"><field name="reference" type="CharField">Avaneir "Guardian Angel" Light Revolver</field><field name="meta_type" type="CharField">Light Slugger</field><field name="category" type="CharField">P</field><field name="weapon_accuracy" type="IntegerField">0</field><field name="conceilable" type="CharField">P</field><field name="availability" type="CharField">C</field><field name="damage_class" type="CharField">1D6+2</field><field name="caliber" type="CharField">0.32</field><field name="str_min" type="PositiveIntegerField">0</field><field name="rof" type="PositiveIntegerField">3</field><field name="clip" type="PositiveIntegerField">6</field><field name="rng" type="PositiveIntegerField">50</field><field name="rel" type="CharField">ST</field><field name="cost" type="PositiveIntegerField">90</field><field name="description" type="TextField"></field><field name="stats" type="CharField">Avaneir "Guardian Angel" Light Revolver . P . WA:0 . P . C . DC:1D6+2 . Cal:0.32 . ROF:3 . Clip:6 . RNG:50 . ST . £90</field><field name="origins" type="CharField">Li Halan</field></object><object model="collector.weaponref" pk="17"><field name="reference" type="CharField">Maüer "Hankerschief" C-13</field><field name="meta_type" type="CharField">Light Slugger</field><field name="category" type="CharField">P</field><field name="weapon_accuracy" type="IntegerField">1</field><field name="conceilable" type="CharField">P</field><field name="availability" type="CharField">R</field><field name="damage_class" type="CharField">1D6</field><field name="caliber" type="CharField">5mm</field><field name="str_min" type="PositiveIntegerField">0</field><field name="rof" type="PositiveIntegerField">2</field><field name="clip" type="PositiveIntegerField">8</field><field name="rng" type="PositiveIntegerField">50</field><field name="rel" type="CharField">ST</field><field name="cost" type="PositiveIntegerField">150</field><field name="description" type="TextField"></field><field name="stats" type="CharField">Maüer "Hankerschief" C-13 . P . WA:1 . P . R . DC:1D6 . Cal:5mm . ROF:2 . Clip:8 . RNG:50 . ST . £150</field><field name="origins" type="CharField">Gesar</field></object><object model="collector.weaponref" pk="18"><field name="reference" type="CharField">Avaneir B209 "Dragonbreath"</field><field name="meta_type" type="CharField">Warfare Device</field><field name="category" type="CharField">SMG</field><field name="weapon_accuracy" type="IntegerField">0</field><field name="conceilable" type="CharField">J</field><field name="availability" type="CharField">E</field><field name="damage_class" type="CharField">2D6+3</field><field name="caliber" type="CharField">10mm</field><field name="str_min" type="PositiveIntegerField">0</field><field name="rof" type="PositiveIntegerField">20</field><field name="clip" type="PositiveIntegerField">40</field><field name="rng" type="PositiveIntegerField">150</field><field name="rel" type="CharField">VR</field><field name="cost" type="PositiveIntegerField">350</field><field name="description" type="TextField">Builder: Royale House Li Halan. Price: 350£</field><field name="stats" type="CharField">Avaneir B209 "Dragonbreath" . SMG . WA:0 . J . E . DC:2D6+3 . Cal:10mm . ROF:20 . Clip:40 . RNG:150 . VR . £350</field><field name="origins" type="CharField">Li Halan</field></object><object model="collector.weaponref" pk="19"><field name="reference" type="CharField">Li Halan RK38</field><field name="meta_type" type="CharField">Slugger Rifle</field><field name="category" type="CharField">RIF</field><field name="weapon_accuracy" type="IntegerField">-1</field><field name="conceilable" type="CharField">N</field><field name="availability" type="CharField">E</field><field name="damage_class" type="CharField">2D6+3</field><field name="caliber" type="CharField">10mm</field><field name="str_min" type="PositiveIntegerField">0</field><field name="rof" type="PositiveIntegerField">1</field><field name="clip" type="PositiveIntegerField">4</field><field name="rng" type="PositiveIntegerField">400</field><field name="rel" type="CharField">UR</field><field name="cost" type="PositiveIntegerField">80</field><field name="description" type="TextField">Builder: Royale House Li Halan. Price: 80£.</field><field name="stats" type="CharField">Li Halan RK38 . RIF . WA:-1 . N . E . DC:2D6+3 . Cal:10mm . ROF:1 . Clip:4 . RNG:400 . UR . £80</field><field name="origins" type="CharField">Li Halan</field></object><object model="collector.weaponref" pk="20"><field name="reference" type="CharField">Derringer</field><field name="meta_type" type="CharField">Light Slugger</field><field name="category" type="CharField">P</field><field name="weapon_accuracy" type="IntegerField">-1</field><field name="conceilable" type="CharField">P</field><field name="availability" type="CharField">E</field><field name="damage_class" type="CharField">1D6</field><field name="caliber" type="CharField">0.2</field><field name="str_min" type="PositiveIntegerField">0</field><field name="rof" type="PositiveIntegerField">2</field><field name="clip" type="PositiveIntegerField">4</field><field name="rng" type="PositiveIntegerField">50</field><field name="rel" type="CharField">ST</field><field name="cost" type="PositiveIntegerField">50</field><field name="description" type="TextField"></field><field name="stats" type="CharField">Derringer . P . WA:-1 . P . E . DC:1D6 . Cal:0.2 . ROF:2 . Clip:4 . RNG:50 . ST . £50</field><field name="origins" type="CharField">Empire</field></object><object model="collector.weaponref" pk="21"><field name="reference" type="CharField">Avaneir Blaster Pistol</field><field name="meta_type" type="CharField">Light Blaster</field><field name="category" type="CharField">P</field><field name="weapon_accuracy" type="IntegerField">0</field><field name="conceilable" type="CharField">J</field><field name="availability" type="CharField">P</field><field name="damage_class" type="CharField">5D6</field><field name="caliber" type="CharField">FSC:50x300</field><field name="str_min" type="PositiveIntegerField">0</field><field name="rof" type="PositiveIntegerField">1</field><field name="clip" type="PositiveIntegerField">10</field><field name="rng" type="PositiveIntegerField">30</field><field name="rel" type="CharField">VR</field><field name="cost" type="PositiveIntegerField">700</field><field name="description" type="TextField">Ammoes: 10/cell</field><field name="stats" type="CharField">Avaneir Blaster Pistol . P . WA:0 . J . P . DC:5D6 . Cal:FSC:5x30 . ROF:1 . Clip:10 . RNG:30 . VR . £700</field><field name="origins" type="CharField">Li Halan</field></object><object model="collector.weaponref" pk="22"><field name="reference" type="CharField">Blaster Rifle</field><field name="meta_type" type="CharField">Blaster Rifle</field><field name="category" type="CharField">RIF</field><field name="weapon_accuracy" type="IntegerField">0</field><field name="conceilable" type="CharField">N</field><field name="availability" type="CharField">P</field><field name="damage_class" type="CharField">8D6</field><field name="caliber" type="CharField">FSC:64x384</field><field name="str_min" type="PositiveIntegerField">0</field><field name="rof" type="PositiveIntegerField">1</field><field name="clip" type="PositiveIntegerField">8</field><field name="rng" type="PositiveIntegerField">30</field><field name="rel" type="CharField">ST</field><field name="cost" type="PositiveIntegerField">1000</field><field name="description" type="TextField"></field><field name="stats" type="CharField">Blaster Rifle . RIF . WA:0 . N . P . DC:8D6 . Cal:FSC:8x48 . ROF:1 . Clip:8 . RNG:30 . ST . £1000</field><field name="origins" type="CharField">Empire</field></object><object model="collector.weaponref" pk="23"><field name="reference" type="CharField">Avaneir Blaster Shotgun</field><field name="meta_type" type="CharField">Blaster Shotgun</field><field name="category" type="CharField">SHG</field><field name="weapon_accuracy" type="IntegerField">2</field><field name="conceilable" type="CharField">L</field><field name="availability" type="CharField">R</field><field name="damage_class" type="CharField">8D6</field><field name="caliber" type="CharField">FSC:64x384</field><field name="str_min" type="PositiveIntegerField">0</field><field name="rof" type="PositiveIntegerField">1</field><field name="clip" type="PositiveIntegerField">8</field><field name="rng" type="PositiveIntegerField">20</field><field name="rel" type="CharField">VR</field><field name="cost" type="PositiveIntegerField">1200</field><field name="description" type="TextField"></field><field name="stats" type="CharField">Avaneir Blaster Shotgun . SHG . WA:2 . L . R . DC:8D6 . Cal:FSC:8x48 . ROF:1 . Clip:8 . RNG:20 . VR . £1200</field><field name="origins" type="CharField">Li Halan</field></object><object model="collector.weaponref" pk="24"><field name="reference" type="CharField">Dreksel Laser Pistol</field><field name="meta_type" type="CharField">Light Laser</field><field name="category" type="CharField">P</field><field name="weapon_accuracy" type="IntegerField">1</field><field name="conceilable" type="CharField">P</field><field name="availability" type="CharField">P</field><field name="damage_class" type="CharField">3D6</field><field name="caliber" type="CharField">FSC:3x18x15</field><field name="str_min" type="PositiveIntegerField">0</field><field name="rof" type="PositiveIntegerField">2</field><field name="clip" type="PositiveIntegerField">15</field><field name="rng" type="PositiveIntegerField">80</field><field name="rel" type="CharField">ST</field><field name="cost" type="PositiveIntegerField">300</field><field name="description" type="TextField"></field><field name="stats" type="CharField">Dreksel Laser Pistol . P . WA:1 . P . P . DC:3D6 . Cal:FSC:3x18x15 . ROF:2 . Clip:15 . RNG:80 . ST . £300</field><field name="origins" type="CharField">Hazat</field></object><object model="collector.weaponref" pk="25"><field name="reference" type="CharField">Dirk</field><field name="meta_type" type="CharField">Dirk</field><field name="category" type="CharField">MELEE</field><field name="weapon_accuracy" type="IntegerField">0</field><field name="conceilable" type="CharField">J</field><field name="availability" type="CharField">E</field><field name="damage_class" type="CharField">2D6+1</field><field name="caliber" type="CharField"></field><field name="str_min" type="PositiveIntegerField">2</field><field name="rof" type="PositiveIntegerField">0</field><field name="clip" type="PositiveIntegerField">0</field><field name="rng" type="PositiveIntegerField">0</field><field name="rel" type="CharField">ST</field><field name="cost" type="PositiveIntegerField">4</field><field name="description" type="TextField"></field><field name="stats" type="CharField">Dirk . MELEE . WA:0 . J . E . DC:2D6+1 . STR:2 . RNG:0 . ST . £4</field><field name="origins" type="CharField">Empire</field></object><object model="collector.weaponref" pk="26"><field name="reference" type="CharField">Two-Handed Sword</field><field name="meta_type" type="CharField">Sword</field><field name="category" type="CharField">MELEE</field><field name="weapon_accuracy" type="IntegerField">1</field><field name="conceilable" type="CharField">N</field><field name="availability" type="CharField">R</field><field name="damage_class" type="CharField">6D6</field><field name="caliber" type="CharField"></field><field name="str_min" type="PositiveIntegerField">6</field><field name="rof" type="PositiveIntegerField">0</field><field name="clip" type="PositiveIntegerField">0</field><field name="rng" type="PositiveIntegerField">2</field><field name="rel" type="CharField">ST</field><field name="cost" type="PositiveIntegerField">30</field><field name="description" type="TextField"></field><field name="stats" type="CharField">Two-Handed Sword . MELEE . WA:1 . N . R . DC:6D6 . STR:6 . RNG:2 . ST . £30</field><field name="origins" type="CharField">Empire</field></object><object model="collector.weaponref" pk="27"><field name="reference" type="CharField">Decados "Maiden Escort" Palm Blaster</field><field name="meta_type" type="CharField">Light Blaster</field><field name="category" type="CharField">P</field><field name="weapon_accuracy" type="IntegerField">2</field><field name="conceilable" type="CharField">P</field><field name="availability" type="CharField">R</field><field name="damage_class" type="CharField">2D6+3</field><field name="caliber" type="CharField">FSC:25x75</field><field name="str_min" type="PositiveIntegerField">0</field><field name="rof" type="PositiveIntegerField">1</field><field name="clip" type="PositiveIntegerField">5</field><field name="rng" type="PositiveIntegerField">20</field><field name="rel" type="CharField">VR</field><field name="cost" type="PositiveIntegerField">1000</field><field name="description" type="TextField">A very small blaster pistol, true wonder of miniaturization. Developped by House Decados for its under cover agents.</field><field name="stats" type="CharField">Decados "Maiden Escort" Palm Blaster . P . WA:2 . P . R . DC:2D6+3 . Cal: . ROF:1 . Clip:5 . RNG:20 . VR . £1000</field><field name="origins" type="CharField">Decados</field></object><object model="collector.weaponref" pk="28"><field name="reference" type="CharField">Harmonic Assault Rifle Mark IV</field><field name="meta_type" type="CharField">Stunner</field><field name="category" type="CharField">EX</field><field name="weapon_accuracy" type="IntegerField">-1</field><field name="conceilable" type="CharField">L</field><field name="availability" type="CharField">R</field><field name="damage_class" type="CharField">10D6</field><field name="caliber" type="CharField">FSC:8x30</field><field name="str_min" type="PositiveIntegerField">0</field><field name="rof" type="PositiveIntegerField">1</field><field name="clip" type="PositiveIntegerField">12</field><field name="rng" type="PositiveIntegerField">20</field><field name="rel" type="CharField">VR</field><field name="cost" type="PositiveIntegerField">10000</field><field name="description" type="TextField">Special Weapon</field><field name="stats" type="CharField">Harmonic Assault Rifle Mark IV . RIF . WA:-1 . L . R . DC:10D6 . Cal:FSC:8x30 . ROF:1 . Clip:12 . RNG:20 . VR . £10000</field><field name="origins" type="CharField">Order of Engineers</field></object><object model="collector.weaponref" pk="29"><field name="reference" type="CharField">Staff</field><field name="meta_type" type="CharField">Blunt weapon</field><field name="category" type="CharField">MELEE</field><field name="weapon_accuracy" type="IntegerField">1</field><field name="conceilable" type="CharField">N</field><field name="availability" type="CharField">E</field><field name="damage_class" type="CharField">2D6+1</field><field name="caliber" type="CharField"></field><field name="str_min" type="PositiveIntegerField">3</field><field name="rof" type="PositiveIntegerField">0</field><field name="clip" type="PositiveIntegerField">0</field><field name="rng" type="PositiveIntegerField">1</field><field name="rel" type="CharField">ST</field><field name="cost" type="PositiveIntegerField">4</field><field name="description" type="TextField"></field><field name="stats" type="CharField">Staff . MELEE . WA:1 . N . E . DC:2d6+1 . STR:3 . RNG:1 . ST . £4</field><field name="origins" type="CharField">Empire</field></object><object model="collector.weaponref" pk="30"><field name="reference" type="CharField">Scravers Medium Revolver</field><field name="meta_type" type="CharField">Medium Slugger</field><field name="category" type="CharField">P</field><field name="weapon_accuracy" type="IntegerField">0</field><field name="conceilable" type="CharField">L</field><field name="availability" type="CharField">C</field><field name="damage_class" type="CharField">2D6+3</field><field name="caliber" type="CharField">.40</field><field name="str_min" type="PositiveIntegerField">0</field><field name="rof" type="PositiveIntegerField">3</field><field name="clip" type="PositiveIntegerField">6</field><field name="rng" type="PositiveIntegerField">50</field><field name="rel" type="CharField">VR</field><field name="cost" type="PositiveIntegerField">230</field><field name="description" type="TextField"></field><field name="stats" type="CharField">Scravers Medium Revolver . P . WA:0 . L . C . DC:2D6+3 . Cal:.40 . ROF:3 . Clip:6 . RNG:50 . VR . £230</field><field name="origins" type="CharField">Scravers</field></object><object model="collector.weaponref" pk="31"><field name="reference" type="CharField">Scravers Light Revolver</field><field name="meta_type" type="CharField">Light Slugger</field><field name="category" type="CharField">P</field><field name="weapon_accuracy" type="IntegerField">0</field><field name="conceilable" type="CharField">J</field><field name="availability" type="CharField">C</field><field name="damage_class" type="CharField">1D6+2</field><field name="caliber" type="CharField">.32</field><field name="str_min" type="PositiveIntegerField">0</field><field name="rof" type="PositiveIntegerField">3</field><field name="clip" type="PositiveIntegerField">6</field><field name="rng" type="PositiveIntegerField">50</field><field name="rel" type="CharField">ST</field><field name="cost" type="PositiveIntegerField">110</field><field name="description" type="TextField"></field><field name="stats" type="CharField">Scravers Light Revolver . P . WA:0 . J . C . DC:1d6+2 . Cal:.32 . ROF:3 . Clip:6 . RNG:50 . ST . £110</field><field name="origins" type="CharField">Scravers</field></object><object model="collector.weaponref" pk="32"><field name="reference" type="CharField">"Firecracker"Heavy Pistol</field><field name="meta_type" type="CharField">Heavy Slugger</field><field name="category" type="CharField">P</field><field name="weapon_accuracy" type="IntegerField">-1</field><field name="conceilable" type="CharField">L</field><field name="availability" type="CharField">C</field><field name="damage_class" type="CharField">4D6+1</field><field name="caliber" type="CharField">.47</field><field name="str_min" type="PositiveIntegerField">4</field><field name="rof" type="PositiveIntegerField">6</field><field name="clip" type="PositiveIntegerField">16</field><field name="rng" type="PositiveIntegerField">60</field><field name="rel" type="CharField">VR</field><field name="cost" type="PositiveIntegerField">350</field><field name="description" type="TextField">Must be handed two handed if less than 4 BOD</field><field name="stats" type="CharField">"Firecracker"Heavy Pistol . P . WA:-1 . L . C . DC:4D6+1 . Cal:.47 . ROF:6 . Clip:16 . RNG:60 . VR . £350</field><field name="origins" type="CharField">Musters</field></object><object model="collector.weaponref" pk="33"><field name="reference" type="CharField">Scimitar</field><field name="meta_type" type="CharField">Sword</field><field name="category" type="CharField">MELEE</field><field name="weapon_accuracy" type="IntegerField">0</field><field name="conceilable" type="CharField">N</field><field name="availability" type="CharField">P</field><field name="damage_class" type="CharField">4D6+1</field><field name="caliber" type="CharField"></field><field name="str_min" type="PositiveIntegerField">3</field><field name="rof" type="PositiveIntegerField">0</field><field name="clip" type="PositiveIntegerField">0</field><field name="rng" type="PositiveIntegerField">1</field><field name="rel" type="CharField">ST</field><field name="cost" type="PositiveIntegerField">20</field><field name="description" type="TextField"></field><field name="stats" type="CharField">Scimitar . MELEE . WA:0 . N . P . DC:4D6+1 . STR:3 . RNG:1 . ST . £20</field><field name="origins" type="CharField">Empire</field></object><object model="collector.weaponref" pk="34"><field name="reference" type="CharField">Banshee SMG</field><field name="meta_type" type="CharField">Warfare Device</field><field name="category" type="CharField">SMG</field><field name="weapon_accuracy" type="IntegerField">1</field><field name="conceilable" type="CharField">L</field><field name="availability" type="CharField">P</field><field name="damage_class" type="CharField">3D6</field><field name="caliber" type="CharField">.40</field><field name="str_min" type="PositiveIntegerField">0</field><field name="rof" type="PositiveIntegerField">3</field><field name="clip" type="PositiveIntegerField">20</field><field name="rng" type="PositiveIntegerField">150</field><field name="rel" type="CharField">ST</field><field name="cost" type="PositiveIntegerField">350</field><field name="description" type="TextField"></field><field name="stats" type="CharField">Banshee SMG . SMG . WA:1 . L . P . DC:3D6 . Cal:.40 . ROF:3 . Clip:20 . RNG:150 . ST . £350</field><field name="origins" type="CharField">Hazat</field></object><object model="collector.weaponref" pk="35"><field name="reference" type="CharField">Westham Blade</field><field name="meta_type" type="CharField">Rapier</field><field name="category" type="CharField">MELEE</field><field name="weapon_accuracy" type="IntegerField">1</field><field name="conceilable" type="CharField">L</field><field name="availability" type="CharField">P</field><field name="damage_class" type="CharField">3D6+1</field><field name="caliber" type="CharField"></field><field name="str_min" type="PositiveIntegerField">3</field><field name="rof" type="PositiveIntegerField">0</field><field name="clip" type="PositiveIntegerField">0</field><field name="rng" type="PositiveIntegerField">1</field><field name="rel" type="CharField">VR</field><field name="cost" type="PositiveIntegerField">150</field><field name="description" type="TextField">House Hawkwood signature rapier</field><field name="stats" type="CharField"></field><field name="origins" type="CharField">House Hawkwood</field></object><object model="collector.weaponref" pk="36"><field name="reference" type="CharField">Segments of Andrealphus</field><field name="meta_type" type="CharField">Blunt weapon</field><field name="category" type="CharField">EX</field><field name="weapon_accuracy" type="IntegerField">3</field><field name="conceilable" type="CharField">J</field><field name="availability" type="CharField">R</field><field name="damage_class" type="CharField">4D6</field><field name="caliber" type="CharField"></field><field name="str_min" type="PositiveIntegerField">4</field><field name="rof" type="PositiveIntegerField">0</field><field name="clip" type="PositiveIntegerField">0</field><field name="rng" type="PositiveIntegerField">3</field><field name="rel" type="CharField">VR</field><field name="cost" type="PositiveIntegerField">100</field><field name="description" type="TextField">This weird seven parts nunchaku is the signature weapon of the Aeon Chapter. Each rod is magnetically linked to the other, and one needs to atone with the full set to be able to use it. If not, it's only a rod of seven parts. The black market value is low due to the lack of people able to use it as a weapon.</field><field name="stats" type="CharField"></field><field name="origins" type="CharField">Aeon Chapter of Artemis</field></object><object model="collector.weaponref" pk="37"><field name="reference" type="CharField">Rapier</field><field name="meta_type" type="CharField">Rapier</field><field name="category" type="CharField">MELEE</field><field name="weapon_accuracy" type="IntegerField">0</field><field name="conceilable" type="CharField">L</field><field name="availability" type="CharField">C</field><field name="damage_class" type="CharField">3D6</field><field name="caliber" type="CharField"></field><field name="str_min" type="PositiveIntegerField">3</field><field name="rof" type="PositiveIntegerField">0</field><field name="clip" type="PositiveIntegerField">0</field><field name="rng" type="PositiveIntegerField">1</field><field name="rel" type="CharField">UR</field><field name="cost" type="PositiveIntegerField">8</field><field name="description" type="TextField"></field><field name="stats" type="CharField"></field><field name="origins" type="CharField">Empire Countryside</field></object><object model="collector.weaponref" pk="38"><field name="reference" type="CharField">Avaneir Rapier</field><field name="meta_type" type="CharField">Rapier</field><field name="category" type="CharField">MELEE</field><field name="weapon_accuracy" type="IntegerField">0</field><field name="conceilable" type="CharField">L</field><field name="availability" type="CharField">C</field><field name="damage_class" type="CharField">3D6</field><field name="caliber" type="CharField"></field><field name="str_min" type="PositiveIntegerField">3</field><field name="rof" type="PositiveIntegerField">0</field><field name="clip" type="PositiveIntegerField">0</field><field name="rng" type="PositiveIntegerField">1</field><field name="rel" type="CharField">ST</field><field name="cost" type="PositiveIntegerField">12</field><field name="description" type="TextField"></field><field name="stats" type="CharField"></field><field name="origins" type="CharField">Li Halan</field></object><object model="collector.weaponref" pk="39"><field name="reference" type="CharField">Cold Forged Imperial Blade</field><field name="meta_type" type="CharField">Rapier</field><field name="category" type="CharField">MELEE</field><field name="weapon_accuracy" type="IntegerField">1</field><field name="conceilable" type="CharField">L</field><field name="availability" type="CharField">R</field><field name="damage_class" type="CharField">3D6</field><field name="caliber" type="CharField"></field><field name="str_min" type="PositiveIntegerField">3</field><field name="rof" type="PositiveIntegerField">0</field><field name="clip" type="PositiveIntegerField">0</field><field name="rng" type="PositiveIntegerField">1</field><field name="rel" type="CharField">VR</field><field name="cost" type="PositiveIntegerField">300</field><field name="description" type="TextField"></field><field name="stats" type="CharField"></field><field name="origins" type="CharField">Byzantium Secundus</field></object><object model="collector.weaponref" pk="40"><field name="reference" type="CharField">Metier Patrol Ordinance</field><field name="meta_type" type="CharField">Medium Slugger</field><field name="category" type="CharField">P</field><field name="weapon_accuracy" type="IntegerField">0</field><field name="conceilable" type="CharField">J</field><field name="availability" type="CharField">C</field><field name="damage_class" type="CharField">2D6+3</field><field name="caliber" type="CharField">.40</field><field name="str_min" type="PositiveIntegerField">0</field><field name="rof" type="PositiveIntegerField">0</field><field name="clip" type="PositiveIntegerField">0</field><field name="rng" type="PositiveIntegerField">0</field><field name="rel" type="CharField">ST</field><field name="cost" type="PositiveIntegerField">190</field><field name="description" type="TextField"></field><field name="stats" type="CharField"></field><field name="origins" type="CharField">Guild</field></object><object model="collector.weaponref" pk="41"><field name="reference" type="CharField">al-Malik "Ambassador" Laser</field><field name="meta_type" type="CharField">Medium Laser</field><field name="category" type="CharField">P</field><field name="weapon_accuracy" type="IntegerField">-1</field><field name="conceilable" type="CharField">J</field><field name="availability" type="CharField">R</field><field name="damage_class" type="CharField">3D6</field><field name="caliber" type="CharField"></field><field name="str_min" type="PositiveIntegerField">0</field><field name="rof" type="PositiveIntegerField">0</field><field name="clip" type="PositiveIntegerField">0</field><field name="rng" type="PositiveIntegerField">0</field><field name="rel" type="CharField">ST</field><field name="cost" type="PositiveIntegerField">0</field><field name="description" type="TextField"></field><field name="stats" type="CharField"></field><field name="origins" type="CharField">House al-Malik</field></object></django-objects>
+<?xml version="1.0" encoding="UTF-8"?>
+<django-objects version="1.0">
+  <object model="collector.weaponref" pk="1">
+    <field name="reference" type="CharField">Knife</field>
+    <field name="meta_type" type="CharField">Dirk</field>
+    <field name="category" type="CharField">MELEE</field>
+    <field name="weapon_accuracy" type="IntegerField">0</field>
+    <field name="conceilable" type="CharField">P</field>
+    <field name="availability" type="CharField">E</field>
+    <field name="damage_class" type="CharField">1D6+1</field>
+    <field name="caliber" type="CharField">
+    </field>
+    <field name="str_min" type="PositiveIntegerField">1</field>
+    <field name="rof" type="PositiveIntegerField">0</field>
+    <field name="clip" type="PositiveIntegerField">0</field>
+    <field name="rng" type="PositiveIntegerField">0</field>
+    <field name="rel" type="CharField">ST</field>
+    <field name="cost" type="PositiveIntegerField">2</field>
+    <field name="description" type="TextField">
+    </field>
+    <field name="stats" type="CharField">Knife . MELEE . WA:0 . P . E . DC:1D6+1 . STR:1 . RNG:0 . ST . £2</field>
+    <field name="origins" type="CharField">Empire</field>
+  </object>
+  <object model="collector.weaponref" pk="2">
+    <field name="reference" type="CharField">Mitchau "Penumbra" Shotgun</field>
+    <field name="meta_type" type="CharField">Slugger Shotgun</field>
+    <field name="category" type="CharField">SHG</field>
+    <field name="weapon_accuracy" type="IntegerField">-1</field>
+    <field name="conceilable" type="CharField">L</field>
+    <field name="availability" type="CharField">P</field>
+    <field name="damage_class" type="CharField">5D6</field>
+    <field name="caliber" type="CharField">
+    </field>
+    <field name="str_min" type="PositiveIntegerField">0</field>
+    <field name="rof" type="PositiveIntegerField">1</field>
+    <field name="clip" type="PositiveIntegerField">6</field>
+    <field name="rng" type="PositiveIntegerField">15</field>
+    <field name="rel" type="CharField">ST</field>
+    <field name="cost" type="PositiveIntegerField">250</field>
+    <field name="description" type="TextField">
+    </field>
+    <field name="stats" type="CharField">Mitchau "Penumbra" Shotgun . RIF . WA:-1 . L . P . DC:5d6 . Cal: . ROF:1 . Clip:6 . RNG:15 . ST . £250</field>
+    <field name="origins" type="CharField">Hazat</field>
+  </object>
+  <object model="collector.weaponref" pk="3">
+    <field name="reference" type="CharField">Imperial Rifle</field>
+    <field name="meta_type" type="CharField">Slugger Rifle</field>
+    <field name="category" type="CharField">RIF</field>
+    <field name="weapon_accuracy" type="IntegerField">0</field>
+    <field name="conceilable" type="CharField">N</field>
+    <field name="availability" type="CharField">E</field>
+    <field name="damage_class" type="CharField">6D6+2</field>
+    <field name="caliber" type="CharField">7.62</field>
+    <field name="str_min" type="PositiveIntegerField">0</field>
+    <field name="rof" type="PositiveIntegerField">20</field>
+    <field name="clip" type="PositiveIntegerField">21</field>
+    <field name="rng" type="PositiveIntegerField">400</field>
+    <field name="rel" type="CharField">VR</field>
+    <field name="cost" type="PositiveIntegerField">200</field>
+    <field name="description" type="TextField">About 200£</field>
+    <field name="stats" type="CharField">Imperial Rifle . RIF . WA:0 . N . E . DC:6D6+2 . Cal:7.62 . ROF:20 . Clip:21 . RNG:400 . VR . £200</field>
+    <field name="origins" type="CharField">Empire</field>
+  </object>
+  <object model="collector.weaponref" pk="4">
+    <field name="reference" type="CharField">Avaneir Medium Blaster</field>
+    <field name="meta_type" type="CharField">Medium Blaster</field>
+    <field name="category" type="CharField">P</field>
+    <field name="weapon_accuracy" type="IntegerField">0</field>
+    <field name="conceilable" type="CharField">J</field>
+    <field name="availability" type="CharField">P</field>
+    <field name="damage_class" type="CharField">6D6</field>
+    <field name="caliber" type="CharField">FSC:6x36x6</field>
+    <field name="str_min" type="PositiveIntegerField">0</field>
+    <field name="rof" type="PositiveIntegerField">0</field>
+    <field name="clip" type="PositiveIntegerField">6</field>
+    <field name="rng" type="PositiveIntegerField">0</field>
+    <field name="rel" type="CharField">
+    </field>
+    <field name="cost" type="PositiveIntegerField">400</field>
+    <field name="description" type="TextField">
+    </field>
+    <field name="stats" type="CharField">Avaneir Medium Blaster . P . WA:0 . J . P . DC:6d6 . Cal: . ROF:0 . Clip:0 . RNG:0 .  . £400</field>
+    <field name="origins" type="CharField">Li Halan</field>
+  </object>
+  <object model="collector.weaponref" pk="5">
+    <field name="reference" type="CharField">De Aragonesque Rapier</field>
+    <field name="meta_type" type="CharField">Rapier</field>
+    <field name="category" type="CharField">MELEE</field>
+    <field name="weapon_accuracy" type="IntegerField">1</field>
+    <field name="conceilable" type="CharField">L</field>
+    <field name="availability" type="CharField">P</field>
+    <field name="damage_class" type="CharField">3D6+3</field>
+    <field name="caliber" type="CharField">
+    </field>
+    <field name="str_min" type="PositiveIntegerField">3</field>
+    <field name="rof" type="PositiveIntegerField">0</field>
+    <field name="clip" type="PositiveIntegerField">0</field>
+    <field name="rng" type="PositiveIntegerField">1</field>
+    <field name="rel" type="CharField">VR</field>
+    <field name="cost" type="PositiveIntegerField">50</field>
+    <field name="description" type="TextField">The high quality Rolas rapier. Forged on demand, with exclusive decoration designed for the customer.</field>
+    <field name="stats" type="CharField">De Aragonesque Rapier . MELEE . WA:1 . L . P . DC:3D6+3 . STR:3 . RNG:1 . VR . £50</field>
+    <field name="origins" type="CharField">Hazat</field>
+  </object>
+  <object model="collector.weaponref" pk="6">
+    <field name="reference" type="CharField">House Hawkwood 1638 UltraHeavy SMG</field>
+    <field name="meta_type" type="CharField">Warfare Device</field>
+    <field name="category" type="CharField">HVY</field>
+    <field name="weapon_accuracy" type="IntegerField">-2</field>
+    <field name="conceilable" type="CharField">N</field>
+    <field name="availability" type="CharField">P</field>
+    <field name="damage_class" type="CharField">8D6</field>
+    <field name="caliber" type="CharField">16mm</field>
+    <field name="str_min" type="PositiveIntegerField">4</field>
+    <field name="rof" type="PositiveIntegerField">30</field>
+    <field name="clip" type="PositiveIntegerField">240</field>
+    <field name="rng" type="PositiveIntegerField">150</field>
+    <field name="rel" type="CharField">VR</field>
+    <field name="cost" type="PositiveIntegerField">850</field>
+    <field name="description" type="TextField">
+    </field>
+    <field name="stats" type="CharField">House Hawkwood 1638 UltraHeavy SMG . HVY . WA:-2 . N . P . DC:8D6 . Cal:16mm . ROF:30 . Clip:240 . RNG:150 . VR . £850</field>
+    <field name="origins" type="CharField">Hawkwood</field>
+  </object>
+  <object model="collector.weaponref" pk="7">
+    <field name="reference" type="CharField">Ukari Krax</field>
+    <field name="meta_type" type="CharField">Dirk</field>
+    <field name="category" type="CharField">MELEE</field>
+    <field name="weapon_accuracy" type="IntegerField">-2</field>
+    <field name="conceilable" type="CharField">J</field>
+    <field name="availability" type="CharField">R</field>
+    <field name="damage_class" type="CharField">3D6+2</field>
+    <field name="caliber" type="CharField">
+    </field>
+    <field name="str_min" type="PositiveIntegerField">3</field>
+    <field name="rof" type="PositiveIntegerField">0</field>
+    <field name="clip" type="PositiveIntegerField">0</field>
+    <field name="rng" type="PositiveIntegerField">2</field>
+    <field name="rel" type="CharField">VR</field>
+    <field name="cost" type="PositiveIntegerField">5000</field>
+    <field name="description" type="TextField">WA is ignored for an ukari intiate to the Kraxi Quadanqar (The Kraxi Dance). Price given is Black Market price. Do not deal or buy ukari gear on black market.</field>
+    <field name="stats" type="CharField">Ukari Krax . MELEE . WA:-2 . J . R . DC:3D6+2 . STR:3 . RNG:2 . VR . £5000</field>
+    <field name="origins" type="CharField">Kordeth</field>
+  </object>
+  <object model="collector.weaponref" pk="8">
+    <field name="reference" type="CharField">Blue Moon Rifle (Seishen Rifle)</field>
+    <field name="meta_type" type="CharField">Slugger Rifle</field>
+    <field name="category" type="CharField">RIF</field>
+    <field name="weapon_accuracy" type="IntegerField">0</field>
+    <field name="conceilable" type="CharField">N</field>
+    <field name="availability" type="CharField">C</field>
+    <field name="damage_class" type="CharField">4D6+1</field>
+    <field name="caliber" type="CharField">12mm</field>
+    <field name="str_min" type="PositiveIntegerField">0</field>
+    <field name="rof" type="PositiveIntegerField">2</field>
+    <field name="clip" type="PositiveIntegerField">10</field>
+    <field name="rng" type="PositiveIntegerField">400</field>
+    <field name="rel" type="CharField">UR</field>
+    <field name="cost" type="PositiveIntegerField">175</field>
+    <field name="description" type="TextField">The typical rifle used by regular Blue Moon disciples.</field>
+    <field name="stats" type="CharField">Blue Moon Rifle (Seishen Rifle) . RIF . WA:0 . N . C . DC:4D6+1 . Cal:12mm . ROF:2 . Clip:10 . RNG:400 . UR . £175</field>
+    <field name="origins" type="CharField">Li Halan</field>
+  </object>
+  <object model="collector.weaponref" pk="9">
+    <field name="reference" type="CharField">Mitchau "Conquest" Assault Rifle</field>
+    <field name="meta_type" type="CharField">Slugger Rifle</field>
+    <field name="category" type="CharField">RIF</field>
+    <field name="weapon_accuracy" type="IntegerField">1</field>
+    <field name="conceilable" type="CharField">N</field>
+    <field name="availability" type="CharField">P</field>
+    <field name="damage_class" type="CharField">6D6+2</field>
+    <field name="caliber" type="CharField">7.62mm</field>
+    <field name="str_min" type="PositiveIntegerField">0</field>
+    <field name="rof" type="PositiveIntegerField">20</field>
+    <field name="clip" type="PositiveIntegerField">41</field>
+    <field name="rng" type="PositiveIntegerField">400</field>
+    <field name="rel" type="CharField">VR</field>
+    <field name="cost" type="PositiveIntegerField">600</field>
+    <field name="description" type="TextField">
+    </field>
+    <field name="stats" type="CharField">Mitchau "Conquest" Assault Rifle . RIF . WA:1 . N . P . DC:6D6+2 . Cal:7.62mm . ROF:20 . Clip:41 . RNG:400 . VR . £600</field>
+    <field name="origins" type="CharField">Hazat</field>
+  </object>
+  <object model="collector.weaponref" pk="10">
+    <field name="reference" type="CharField">House Decados "Stanislas" SMG</field>
+    <field name="meta_type" type="CharField">Warfare Device</field>
+    <field name="category" type="CharField">SMG</field>
+    <field name="weapon_accuracy" type="IntegerField">0</field>
+    <field name="conceilable" type="CharField">J</field>
+    <field name="availability" type="CharField">P</field>
+    <field name="damage_class" type="CharField">4D6+1</field>
+    <field name="caliber" type="CharField">0.47</field>
+    <field name="str_min" type="PositiveIntegerField">0</field>
+    <field name="rof" type="PositiveIntegerField">20</field>
+    <field name="clip" type="PositiveIntegerField">60</field>
+    <field name="rng" type="PositiveIntegerField">150</field>
+    <field name="rel" type="CharField">VR</field>
+    <field name="cost" type="PositiveIntegerField">400</field>
+    <field name="description" type="TextField">Builder: House Decados. Price: 400£.</field>
+    <field name="stats" type="CharField">House Decados "Stanislas" SMG . SMG . WA:0 . J . P . DC:4D6+1 . Cal:0.47 . ROF:20 . Clip:60 . RNG:150 . VR . £400</field>
+    <field name="origins" type="CharField">Decados</field>
+  </object>
+  <object model="collector.weaponref" pk="11">
+    <field name="reference" type="CharField">House al-Malik "Diplomat" Palm Laser</field>
+    <field name="meta_type" type="CharField">Light Laser</field>
+    <field name="category" type="CharField">P</field>
+    <field name="weapon_accuracy" type="IntegerField">0</field>
+    <field name="conceilable" type="CharField">P</field>
+    <field name="availability" type="CharField">P</field>
+    <field name="damage_class" type="CharField">2D6</field>
+    <field name="caliber" type="CharField">FSC:14x84</field>
+    <field name="str_min" type="PositiveIntegerField">0</field>
+    <field name="rof" type="PositiveIntegerField">2</field>
+    <field name="clip" type="PositiveIntegerField">7</field>
+    <field name="rng" type="PositiveIntegerField">100</field>
+    <field name="rel" type="CharField">ST</field>
+    <field name="cost" type="PositiveIntegerField">200</field>
+    <field name="description" type="TextField">Laser pistol built by House al-Malik. A weapon designed mainly for self-defense.</field>
+    <field name="stats" type="CharField">House al-Malik "Diplomat" Palm Laser . P . WA:0 . P . P . DC:2d6 . Cal:FSC:2x12 . ROF:2 . Clip:7 . RNG:100 . ST . £200</field>
+    <field name="origins" type="CharField">House al-Malik</field>
+  </object>
+  <object model="collector.weaponref" pk="12">
+    <field name="reference" type="CharField">Bachelor Rapier</field>
+    <field name="meta_type" type="CharField">Rapier</field>
+    <field name="category" type="CharField">MELEE</field>
+    <field name="weapon_accuracy" type="IntegerField">0</field>
+    <field name="conceilable" type="CharField">N</field>
+    <field name="availability" type="CharField">E</field>
+    <field name="damage_class" type="CharField">3D6</field>
+    <field name="caliber" type="CharField">
+    </field>
+    <field name="str_min" type="PositiveIntegerField">3</field>
+    <field name="rof" type="PositiveIntegerField">0</field>
+    <field name="clip" type="PositiveIntegerField">0</field>
+    <field name="rng" type="PositiveIntegerField">1</field>
+    <field name="rel" type="CharField">ST</field>
+    <field name="cost" type="PositiveIntegerField">10</field>
+    <field name="description" type="TextField">
+    </field>
+    <field name="stats" type="CharField">Bachelor Rapier . MELEE . WA:0 . N . E . DC:3D6 . STR:3 . RNG:1 . ST . £10</field>
+    <field name="origins" type="CharField">Empire</field>
+  </object>
+  <object model="collector.weaponref" pk="13">
+    <field name="reference" type="CharField">Decados Crescent Dirk</field>
+    <field name="meta_type" type="CharField">Dirk</field>
+    <field name="category" type="CharField">MELEE</field>
+    <field name="weapon_accuracy" type="IntegerField">1</field>
+    <field name="conceilable" type="CharField">J</field>
+    <field name="availability" type="CharField">P</field>
+    <field name="damage_class" type="CharField">2D6+3</field>
+    <field name="caliber" type="CharField">
+    </field>
+    <field name="str_min" type="PositiveIntegerField">2</field>
+    <field name="rof" type="PositiveIntegerField">0</field>
+    <field name="clip" type="PositiveIntegerField">0</field>
+    <field name="rng" type="PositiveIntegerField">0</field>
+    <field name="rel" type="CharField">ST</field>
+    <field name="cost" type="PositiveIntegerField">10</field>
+    <field name="description" type="TextField">A really sharp blade easily conceilable.</field>
+    <field name="stats" type="CharField">Decados Crescent Dirk . MELEE . WA:1 . J . P . DC:2D6+3 . STR:2 . RNG:0 . ST . £10</field>
+    <field name="origins" type="CharField">Decados</field>
+  </object>
+  <object model="collector.weaponref" pk="14">
+    <field name="reference" type="CharField">Zaalen Stinger (Obun Stunner)</field>
+    <field name="meta_type" type="CharField">Stunner</field>
+    <field name="category" type="CharField">EX</field>
+    <field name="weapon_accuracy" type="IntegerField">2</field>
+    <field name="conceilable" type="CharField">J</field>
+    <field name="availability" type="CharField">R</field>
+    <field name="damage_class" type="CharField">3D6</field>
+    <field name="caliber" type="CharField">FSC</field>
+    <field name="str_min" type="PositiveIntegerField">0</field>
+    <field name="rof" type="PositiveIntegerField">1</field>
+    <field name="clip" type="PositiveIntegerField">15</field>
+    <field name="rng" type="PositiveIntegerField">20</field>
+    <field name="rel" type="CharField">ST</field>
+    <field name="cost" type="PositiveIntegerField">3000</field>
+    <field name="description" type="TextField">Stun damage only</field>
+    <field name="stats" type="CharField">Zaalen Stinger (Obun Stunner) . P . WA:2 . J . R . DC:3D6 . Cal:FSC . ROF:1 . Clip:15 . RNG:20 . ST . £3000</field>
+    <field name="origins" type="CharField">Ur-Obun</field>
+  </object>
+  <object model="collector.weaponref" pk="15">
+    <field name="reference" type="CharField">Battle Axe</field>
+    <field name="meta_type" type="CharField">Axe</field>
+    <field name="category" type="CharField">MELEE</field>
+    <field name="weapon_accuracy" type="IntegerField">0</field>
+    <field name="conceilable" type="CharField">N</field>
+    <field name="availability" type="CharField">C</field>
+    <field name="damage_class" type="CharField">5D6</field>
+    <field name="caliber" type="CharField">
+    </field>
+    <field name="str_min" type="PositiveIntegerField">4</field>
+    <field name="rof" type="PositiveIntegerField">0</field>
+    <field name="clip" type="PositiveIntegerField">0</field>
+    <field name="rng" type="PositiveIntegerField">0</field>
+    <field name="rel" type="CharField">ST</field>
+    <field name="cost" type="PositiveIntegerField">5</field>
+    <field name="description" type="TextField">
+    </field>
+    <field name="stats" type="CharField">Battle Axe . MELEE . WA:0 . N . C . DC:5D6 . STR:4 . RNG:0 . ST . £5</field>
+    <field name="origins" type="CharField">Empire</field>
+  </object>
+  <object model="collector.weaponref" pk="16">
+    <field name="reference" type="CharField">Avaneir "Guardian Angel" Light Revolver</field>
+    <field name="meta_type" type="CharField">Light Slugger</field>
+    <field name="category" type="CharField">P</field>
+    <field name="weapon_accuracy" type="IntegerField">0</field>
+    <field name="conceilable" type="CharField">P</field>
+    <field name="availability" type="CharField">C</field>
+    <field name="damage_class" type="CharField">1D6+2</field>
+    <field name="caliber" type="CharField">0.32</field>
+    <field name="str_min" type="PositiveIntegerField">0</field>
+    <field name="rof" type="PositiveIntegerField">3</field>
+    <field name="clip" type="PositiveIntegerField">6</field>
+    <field name="rng" type="PositiveIntegerField">50</field>
+    <field name="rel" type="CharField">ST</field>
+    <field name="cost" type="PositiveIntegerField">90</field>
+    <field name="description" type="TextField">
+    </field>
+    <field name="stats" type="CharField">Avaneir "Guardian Angel" Light Revolver . P . WA:0 . P . C . DC:1D6+2 . Cal:0.32 . ROF:3 . Clip:6 . RNG:50 . ST . £90</field>
+    <field name="origins" type="CharField">Li Halan</field>
+  </object>
+  <object model="collector.weaponref" pk="17">
+    <field name="reference" type="CharField">Maüer "Hankerschief" C-13</field>
+    <field name="meta_type" type="CharField">Light Slugger</field>
+    <field name="category" type="CharField">P</field>
+    <field name="weapon_accuracy" type="IntegerField">1</field>
+    <field name="conceilable" type="CharField">P</field>
+    <field name="availability" type="CharField">R</field>
+    <field name="damage_class" type="CharField">1D6</field>
+    <field name="caliber" type="CharField">5mm</field>
+    <field name="str_min" type="PositiveIntegerField">0</field>
+    <field name="rof" type="PositiveIntegerField">2</field>
+    <field name="clip" type="PositiveIntegerField">8</field>
+    <field name="rng" type="PositiveIntegerField">50</field>
+    <field name="rel" type="CharField">ST</field>
+    <field name="cost" type="PositiveIntegerField">150</field>
+    <field name="description" type="TextField">
+    </field>
+    <field name="stats" type="CharField">Maüer "Hankerschief" C-13 . P . WA:1 . P . R . DC:1D6 . Cal:5mm . ROF:2 . Clip:8 . RNG:50 . ST . £150</field>
+    <field name="origins" type="CharField">Gesar</field>
+  </object>
+  <object model="collector.weaponref" pk="18">
+    <field name="reference" type="CharField">Avaneir B209 "Dragonbreath"</field>
+    <field name="meta_type" type="CharField">Warfare Device</field>
+    <field name="category" type="CharField">SMG</field>
+    <field name="weapon_accuracy" type="IntegerField">0</field>
+    <field name="conceilable" type="CharField">J</field>
+    <field name="availability" type="CharField">E</field>
+    <field name="damage_class" type="CharField">2D6+3</field>
+    <field name="caliber" type="CharField">10mm</field>
+    <field name="str_min" type="PositiveIntegerField">0</field>
+    <field name="rof" type="PositiveIntegerField">20</field>
+    <field name="clip" type="PositiveIntegerField">40</field>
+    <field name="rng" type="PositiveIntegerField">150</field>
+    <field name="rel" type="CharField">VR</field>
+    <field name="cost" type="PositiveIntegerField">350</field>
+    <field name="description" type="TextField">Builder: Royale House Li Halan. Price: 350£</field>
+    <field name="stats" type="CharField">Avaneir B209 "Dragonbreath" . SMG . WA:0 . J . E . DC:2D6+3 . Cal:10mm . ROF:20 . Clip:40 . RNG:150 . VR . £350</field>
+    <field name="origins" type="CharField">Li Halan</field>
+  </object>
+  <object model="collector.weaponref" pk="19">
+    <field name="reference" type="CharField">Li Halan RK38</field>
+    <field name="meta_type" type="CharField">Slugger Rifle</field>
+    <field name="category" type="CharField">RIF</field>
+    <field name="weapon_accuracy" type="IntegerField">-1</field>
+    <field name="conceilable" type="CharField">N</field>
+    <field name="availability" type="CharField">E</field>
+    <field name="damage_class" type="CharField">2D6+3</field>
+    <field name="caliber" type="CharField">10mm</field>
+    <field name="str_min" type="PositiveIntegerField">0</field>
+    <field name="rof" type="PositiveIntegerField">1</field>
+    <field name="clip" type="PositiveIntegerField">4</field>
+    <field name="rng" type="PositiveIntegerField">400</field>
+    <field name="rel" type="CharField">UR</field>
+    <field name="cost" type="PositiveIntegerField">80</field>
+    <field name="description" type="TextField">Builder: Royale House Li Halan. Price: 80£.</field>
+    <field name="stats" type="CharField">Li Halan RK38 . RIF . WA:-1 . N . E . DC:2D6+3 . Cal:10mm . ROF:1 . Clip:4 . RNG:400 . UR . £80</field>
+    <field name="origins" type="CharField">Li Halan</field>
+  </object>
+  <object model="collector.weaponref" pk="20">
+    <field name="reference" type="CharField">Derringer</field>
+    <field name="meta_type" type="CharField">Light Slugger</field>
+    <field name="category" type="CharField">P</field>
+    <field name="weapon_accuracy" type="IntegerField">-1</field>
+    <field name="conceilable" type="CharField">P</field>
+    <field name="availability" type="CharField">E</field>
+    <field name="damage_class" type="CharField">1D6</field>
+    <field name="caliber" type="CharField">0.2</field>
+    <field name="str_min" type="PositiveIntegerField">0</field>
+    <field name="rof" type="PositiveIntegerField">2</field>
+    <field name="clip" type="PositiveIntegerField">4</field>
+    <field name="rng" type="PositiveIntegerField">50</field>
+    <field name="rel" type="CharField">ST</field>
+    <field name="cost" type="PositiveIntegerField">50</field>
+    <field name="description" type="TextField">
+    </field>
+    <field name="stats" type="CharField">Derringer . P . WA:-1 . P . E . DC:1D6 . Cal:0.2 . ROF:2 . Clip:4 . RNG:50 . ST . £50</field>
+    <field name="origins" type="CharField">Empire</field>
+  </object>
+  <object model="collector.weaponref" pk="21">
+    <field name="reference" type="CharField">Avaneir Blaster Pistol</field>
+    <field name="meta_type" type="CharField">Light Blaster</field>
+    <field name="category" type="CharField">P</field>
+    <field name="weapon_accuracy" type="IntegerField">0</field>
+    <field name="conceilable" type="CharField">J</field>
+    <field name="availability" type="CharField">P</field>
+    <field name="damage_class" type="CharField">5D6</field>
+    <field name="caliber" type="CharField">FSC:50x300</field>
+    <field name="str_min" type="PositiveIntegerField">0</field>
+    <field name="rof" type="PositiveIntegerField">1</field>
+    <field name="clip" type="PositiveIntegerField">10</field>
+    <field name="rng" type="PositiveIntegerField">30</field>
+    <field name="rel" type="CharField">VR</field>
+    <field name="cost" type="PositiveIntegerField">700</field>
+    <field name="description" type="TextField">Ammoes: 10/cell</field>
+    <field name="stats" type="CharField">Avaneir Blaster Pistol . P . WA:0 . J . P . DC:5D6 . Cal:FSC:5x30 . ROF:1 . Clip:10 . RNG:30 . VR . £700</field>
+    <field name="origins" type="CharField">Li Halan</field>
+  </object>
+  <object model="collector.weaponref" pk="22">
+    <field name="reference" type="CharField">Blaster Rifle</field>
+    <field name="meta_type" type="CharField">Blaster Rifle</field>
+    <field name="category" type="CharField">RIF</field>
+    <field name="weapon_accuracy" type="IntegerField">0</field>
+    <field name="conceilable" type="CharField">N</field>
+    <field name="availability" type="CharField">P</field>
+    <field name="damage_class" type="CharField">8D6</field>
+    <field name="caliber" type="CharField">FSC:64x384</field>
+    <field name="str_min" type="PositiveIntegerField">0</field>
+    <field name="rof" type="PositiveIntegerField">1</field>
+    <field name="clip" type="PositiveIntegerField">8</field>
+    <field name="rng" type="PositiveIntegerField">30</field>
+    <field name="rel" type="CharField">ST</field>
+    <field name="cost" type="PositiveIntegerField">1000</field>
+    <field name="description" type="TextField">
+    </field>
+    <field name="stats" type="CharField">Blaster Rifle . RIF . WA:0 . N . P . DC:8D6 . Cal:FSC:8x48 . ROF:1 . Clip:8 . RNG:30 . ST . £1000</field>
+    <field name="origins" type="CharField">Empire</field>
+  </object>
+  <object model="collector.weaponref" pk="23">
+    <field name="reference" type="CharField">Avaneir Blaster Shotgun</field>
+    <field name="meta_type" type="CharField">Blaster Shotgun</field>
+    <field name="category" type="CharField">SHG</field>
+    <field name="weapon_accuracy" type="IntegerField">2</field>
+    <field name="conceilable" type="CharField">L</field>
+    <field name="availability" type="CharField">R</field>
+    <field name="damage_class" type="CharField">8D6</field>
+    <field name="caliber" type="CharField">FSC:64x384</field>
+    <field name="str_min" type="PositiveIntegerField">0</field>
+    <field name="rof" type="PositiveIntegerField">1</field>
+    <field name="clip" type="PositiveIntegerField">8</field>
+    <field name="rng" type="PositiveIntegerField">20</field>
+    <field name="rel" type="CharField">VR</field>
+    <field name="cost" type="PositiveIntegerField">1200</field>
+    <field name="description" type="TextField">
+    </field>
+    <field name="stats" type="CharField">Avaneir Blaster Shotgun . SHG . WA:2 . L . R . DC:8D6 . Cal:FSC:8x48 . ROF:1 . Clip:8 . RNG:20 . VR . £1200</field>
+    <field name="origins" type="CharField">Li Halan</field>
+  </object>
+  <object model="collector.weaponref" pk="24">
+    <field name="reference" type="CharField">Dreksel Laser Pistol</field>
+    <field name="meta_type" type="CharField">Light Laser</field>
+    <field name="category" type="CharField">P</field>
+    <field name="weapon_accuracy" type="IntegerField">1</field>
+    <field name="conceilable" type="CharField">P</field>
+    <field name="availability" type="CharField">P</field>
+    <field name="damage_class" type="CharField">3D6</field>
+    <field name="caliber" type="CharField">FSC:3x18x15</field>
+    <field name="str_min" type="PositiveIntegerField">0</field>
+    <field name="rof" type="PositiveIntegerField">2</field>
+    <field name="clip" type="PositiveIntegerField">15</field>
+    <field name="rng" type="PositiveIntegerField">80</field>
+    <field name="rel" type="CharField">ST</field>
+    <field name="cost" type="PositiveIntegerField">300</field>
+    <field name="description" type="TextField">
+    </field>
+    <field name="stats" type="CharField">Dreksel Laser Pistol . P . WA:1 . P . P . DC:3D6 . Cal:FSC:3x18x15 . ROF:2 . Clip:15 . RNG:80 . ST . £300</field>
+    <field name="origins" type="CharField">Hazat</field>
+  </object>
+  <object model="collector.weaponref" pk="25">
+    <field name="reference" type="CharField">Dirk</field>
+    <field name="meta_type" type="CharField">Dirk</field>
+    <field name="category" type="CharField">MELEE</field>
+    <field name="weapon_accuracy" type="IntegerField">0</field>
+    <field name="conceilable" type="CharField">J</field>
+    <field name="availability" type="CharField">E</field>
+    <field name="damage_class" type="CharField">2D6+1</field>
+    <field name="caliber" type="CharField">
+    </field>
+    <field name="str_min" type="PositiveIntegerField">2</field>
+    <field name="rof" type="PositiveIntegerField">0</field>
+    <field name="clip" type="PositiveIntegerField">0</field>
+    <field name="rng" type="PositiveIntegerField">0</field>
+    <field name="rel" type="CharField">ST</field>
+    <field name="cost" type="PositiveIntegerField">4</field>
+    <field name="description" type="TextField">
+    </field>
+    <field name="stats" type="CharField">Dirk . MELEE . WA:0 . J . E . DC:2D6+1 . STR:2 . RNG:0 . ST . £4</field>
+    <field name="origins" type="CharField">Empire</field>
+  </object>
+  <object model="collector.weaponref" pk="26">
+    <field name="reference" type="CharField">Two-Handed Sword</field>
+    <field name="meta_type" type="CharField">Sword</field>
+    <field name="category" type="CharField">MELEE</field>
+    <field name="weapon_accuracy" type="IntegerField">1</field>
+    <field name="conceilable" type="CharField">N</field>
+    <field name="availability" type="CharField">R</field>
+    <field name="damage_class" type="CharField">6D6</field>
+    <field name="caliber" type="CharField">
+    </field>
+    <field name="str_min" type="PositiveIntegerField">6</field>
+    <field name="rof" type="PositiveIntegerField">0</field>
+    <field name="clip" type="PositiveIntegerField">0</field>
+    <field name="rng" type="PositiveIntegerField">2</field>
+    <field name="rel" type="CharField">ST</field>
+    <field name="cost" type="PositiveIntegerField">30</field>
+    <field name="description" type="TextField">
+    </field>
+    <field name="stats" type="CharField">Two-Handed Sword . MELEE . WA:1 . N . R . DC:6D6 . STR:6 . RNG:2 . ST . £30</field>
+    <field name="origins" type="CharField">Empire</field>
+  </object>
+  <object model="collector.weaponref" pk="27">
+    <field name="reference" type="CharField">Decados "Maiden Escort" Palm Blaster</field>
+    <field name="meta_type" type="CharField">Light Blaster</field>
+    <field name="category" type="CharField">P</field>
+    <field name="weapon_accuracy" type="IntegerField">2</field>
+    <field name="conceilable" type="CharField">P</field>
+    <field name="availability" type="CharField">R</field>
+    <field name="damage_class" type="CharField">2D6+3</field>
+    <field name="caliber" type="CharField">FSC:25x75</field>
+    <field name="str_min" type="PositiveIntegerField">0</field>
+    <field name="rof" type="PositiveIntegerField">1</field>
+    <field name="clip" type="PositiveIntegerField">5</field>
+    <field name="rng" type="PositiveIntegerField">20</field>
+    <field name="rel" type="CharField">VR</field>
+    <field name="cost" type="PositiveIntegerField">1000</field>
+    <field name="description" type="TextField">A very small blaster pistol, true wonder of miniaturization. Developped by House Decados for its under cover agents.</field>
+    <field name="stats" type="CharField">Decados "Maiden Escort" Palm Blaster . P . WA:2 . P . R . DC:2D6+3 . Cal: . ROF:1 . Clip:5 . RNG:20 . VR . £1000</field>
+    <field name="origins" type="CharField">Decados</field>
+  </object>
+  <object model="collector.weaponref" pk="28">
+    <field name="reference" type="CharField">Harmonic Assault Rifle Mark IV</field>
+    <field name="meta_type" type="CharField">Stunner</field>
+    <field name="category" type="CharField">EX</field>
+    <field name="weapon_accuracy" type="IntegerField">-1</field>
+    <field name="conceilable" type="CharField">L</field>
+    <field name="availability" type="CharField">R</field>
+    <field name="damage_class" type="CharField">10D6</field>
+    <field name="caliber" type="CharField">FSC:8x30</field>
+    <field name="str_min" type="PositiveIntegerField">0</field>
+    <field name="rof" type="PositiveIntegerField">1</field>
+    <field name="clip" type="PositiveIntegerField">12</field>
+    <field name="rng" type="PositiveIntegerField">20</field>
+    <field name="rel" type="CharField">VR</field>
+    <field name="cost" type="PositiveIntegerField">10000</field>
+    <field name="description" type="TextField">Special Weapon</field>
+    <field name="stats" type="CharField">Harmonic Assault Rifle Mark IV . RIF . WA:-1 . L . R . DC:10D6 . Cal:FSC:8x30 . ROF:1 . Clip:12 . RNG:20 . VR . £10000</field>
+    <field name="origins" type="CharField">Order of Engineers</field>
+  </object>
+  <object model="collector.weaponref" pk="29">
+    <field name="reference" type="CharField">Staff</field>
+    <field name="meta_type" type="CharField">Blunt weapon</field>
+    <field name="category" type="CharField">MELEE</field>
+    <field name="weapon_accuracy" type="IntegerField">1</field>
+    <field name="conceilable" type="CharField">N</field>
+    <field name="availability" type="CharField">E</field>
+    <field name="damage_class" type="CharField">2D6+1</field>
+    <field name="caliber" type="CharField">
+    </field>
+    <field name="str_min" type="PositiveIntegerField">3</field>
+    <field name="rof" type="PositiveIntegerField">0</field>
+    <field name="clip" type="PositiveIntegerField">0</field>
+    <field name="rng" type="PositiveIntegerField">1</field>
+    <field name="rel" type="CharField">ST</field>
+    <field name="cost" type="PositiveIntegerField">4</field>
+    <field name="description" type="TextField">
+    </field>
+    <field name="stats" type="CharField">Staff . MELEE . WA:1 . N . E . DC:2d6+1 . STR:3 . RNG:1 . ST . £4</field>
+    <field name="origins" type="CharField">Empire</field>
+  </object>
+  <object model="collector.weaponref" pk="30">
+    <field name="reference" type="CharField">Scravers Medium Revolver</field>
+    <field name="meta_type" type="CharField">Medium Slugger</field>
+    <field name="category" type="CharField">P</field>
+    <field name="weapon_accuracy" type="IntegerField">0</field>
+    <field name="conceilable" type="CharField">L</field>
+    <field name="availability" type="CharField">C</field>
+    <field name="damage_class" type="CharField">2D6+3</field>
+    <field name="caliber" type="CharField">.40</field>
+    <field name="str_min" type="PositiveIntegerField">0</field>
+    <field name="rof" type="PositiveIntegerField">3</field>
+    <field name="clip" type="PositiveIntegerField">6</field>
+    <field name="rng" type="PositiveIntegerField">50</field>
+    <field name="rel" type="CharField">VR</field>
+    <field name="cost" type="PositiveIntegerField">230</field>
+    <field name="description" type="TextField">
+    </field>
+    <field name="stats" type="CharField">Scravers Medium Revolver . P . WA:0 . L . C . DC:2D6+3 . Cal:.40 . ROF:3 . Clip:6 . RNG:50 . VR . £230</field>
+    <field name="origins" type="CharField">Scravers</field>
+  </object>
+  <object model="collector.weaponref" pk="31">
+    <field name="reference" type="CharField">Scravers Light Revolver</field>
+    <field name="meta_type" type="CharField">Light Slugger</field>
+    <field name="category" type="CharField">P</field>
+    <field name="weapon_accuracy" type="IntegerField">0</field>
+    <field name="conceilable" type="CharField">J</field>
+    <field name="availability" type="CharField">C</field>
+    <field name="damage_class" type="CharField">1D6+2</field>
+    <field name="caliber" type="CharField">.32</field>
+    <field name="str_min" type="PositiveIntegerField">0</field>
+    <field name="rof" type="PositiveIntegerField">3</field>
+    <field name="clip" type="PositiveIntegerField">6</field>
+    <field name="rng" type="PositiveIntegerField">50</field>
+    <field name="rel" type="CharField">ST</field>
+    <field name="cost" type="PositiveIntegerField">110</field>
+    <field name="description" type="TextField">
+    </field>
+    <field name="stats" type="CharField">Scravers Light Revolver . P . WA:0 . J . C . DC:1d6+2 . Cal:.32 . ROF:3 . Clip:6 . RNG:50 . ST . £110</field>
+    <field name="origins" type="CharField">Scravers</field>
+  </object>
+  <object model="collector.weaponref" pk="32">
+    <field name="reference" type="CharField">"Firecracker"Heavy Pistol</field>
+    <field name="meta_type" type="CharField">Heavy Slugger</field>
+    <field name="category" type="CharField">P</field>
+    <field name="weapon_accuracy" type="IntegerField">-1</field>
+    <field name="conceilable" type="CharField">L</field>
+    <field name="availability" type="CharField">C</field>
+    <field name="damage_class" type="CharField">4D6+1</field>
+    <field name="caliber" type="CharField">.47</field>
+    <field name="str_min" type="PositiveIntegerField">4</field>
+    <field name="rof" type="PositiveIntegerField">6</field>
+    <field name="clip" type="PositiveIntegerField">16</field>
+    <field name="rng" type="PositiveIntegerField">60</field>
+    <field name="rel" type="CharField">VR</field>
+    <field name="cost" type="PositiveIntegerField">350</field>
+    <field name="description" type="TextField">Must be handed two handed if less than 4 BOD</field>
+    <field name="stats" type="CharField">"Firecracker"Heavy Pistol . P . WA:-1 . L . C . DC:4D6+1 . Cal:.47 . ROF:6 . Clip:16 . RNG:60 . VR . £350</field>
+    <field name="origins" type="CharField">Musters</field>
+  </object>
+  <object model="collector.weaponref" pk="33">
+    <field name="reference" type="CharField">Scimitar</field>
+    <field name="meta_type" type="CharField">Sword</field>
+    <field name="category" type="CharField">MELEE</field>
+    <field name="weapon_accuracy" type="IntegerField">0</field>
+    <field name="conceilable" type="CharField">N</field>
+    <field name="availability" type="CharField">P</field>
+    <field name="damage_class" type="CharField">4D6+1</field>
+    <field name="caliber" type="CharField">
+    </field>
+    <field name="str_min" type="PositiveIntegerField">3</field>
+    <field name="rof" type="PositiveIntegerField">0</field>
+    <field name="clip" type="PositiveIntegerField">0</field>
+    <field name="rng" type="PositiveIntegerField">1</field>
+    <field name="rel" type="CharField">ST</field>
+    <field name="cost" type="PositiveIntegerField">20</field>
+    <field name="description" type="TextField">
+    </field>
+    <field name="stats" type="CharField">Scimitar . MELEE . WA:0 . N . P . DC:4D6+1 . STR:3 . RNG:1 . ST . £20</field>
+    <field name="origins" type="CharField">Empire</field>
+  </object>
+  <object model="collector.weaponref" pk="34">
+    <field name="reference" type="CharField">Banshee SMG</field>
+    <field name="meta_type" type="CharField">Warfare Device</field>
+    <field name="category" type="CharField">SMG</field>
+    <field name="weapon_accuracy" type="IntegerField">1</field>
+    <field name="conceilable" type="CharField">L</field>
+    <field name="availability" type="CharField">P</field>
+    <field name="damage_class" type="CharField">3D6</field>
+    <field name="caliber" type="CharField">.40</field>
+    <field name="str_min" type="PositiveIntegerField">0</field>
+    <field name="rof" type="PositiveIntegerField">3</field>
+    <field name="clip" type="PositiveIntegerField">20</field>
+    <field name="rng" type="PositiveIntegerField">150</field>
+    <field name="rel" type="CharField">ST</field>
+    <field name="cost" type="PositiveIntegerField">350</field>
+    <field name="description" type="TextField">
+    </field>
+    <field name="stats" type="CharField">Banshee SMG . SMG . WA:1 . L . P . DC:3D6 . Cal:.40 . ROF:3 . Clip:20 . RNG:150 . ST . £350</field>
+    <field name="origins" type="CharField">Hazat</field>
+  </object>
+  <object model="collector.weaponref" pk="35">
+    <field name="reference" type="CharField">Westham Blade</field>
+    <field name="meta_type" type="CharField">Rapier</field>
+    <field name="category" type="CharField">MELEE</field>
+    <field name="weapon_accuracy" type="IntegerField">1</field>
+    <field name="conceilable" type="CharField">L</field>
+    <field name="availability" type="CharField">P</field>
+    <field name="damage_class" type="CharField">3D6+1</field>
+    <field name="caliber" type="CharField">
+    </field>
+    <field name="str_min" type="PositiveIntegerField">3</field>
+    <field name="rof" type="PositiveIntegerField">0</field>
+    <field name="clip" type="PositiveIntegerField">0</field>
+    <field name="rng" type="PositiveIntegerField">1</field>
+    <field name="rel" type="CharField">VR</field>
+    <field name="cost" type="PositiveIntegerField">150</field>
+    <field name="description" type="TextField">House Hawkwood signature rapier</field>
+    <field name="stats" type="CharField">
+    </field>
+    <field name="origins" type="CharField">House Hawkwood</field>
+  </object>
+  <object model="collector.weaponref" pk="36">
+    <field name="reference" type="CharField">Segments of Andrealphus</field>
+    <field name="meta_type" type="CharField">Blunt weapon</field>
+    <field name="category" type="CharField">EX</field>
+    <field name="weapon_accuracy" type="IntegerField">3</field>
+    <field name="conceilable" type="CharField">J</field>
+    <field name="availability" type="CharField">R</field>
+    <field name="damage_class" type="CharField">4D6</field>
+    <field name="caliber" type="CharField">
+    </field>
+    <field name="str_min" type="PositiveIntegerField">4</field>
+    <field name="rof" type="PositiveIntegerField">0</field>
+    <field name="clip" type="PositiveIntegerField">0</field>
+    <field name="rng" type="PositiveIntegerField">3</field>
+    <field name="rel" type="CharField">VR</field>
+    <field name="cost" type="PositiveIntegerField">100</field>
+    <field name="description" type="TextField">This weird seven parts nunchaku is the signature weapon of the Aeon Chapter. Each rod is magnetically linked to the other, and one needs to atone with the full set to be able to use it. If not, it's only a rod of seven parts. The black market value is low due to the lack of people able to use it as a weapon.</field>
+    <field name="stats" type="CharField">
+    </field>
+    <field name="origins" type="CharField">Aeon Chapter of Artemis</field>
+  </object>
+  <object model="collector.weaponref" pk="37">
+    <field name="reference" type="CharField">Rapier</field>
+    <field name="meta_type" type="CharField">Rapier</field>
+    <field name="category" type="CharField">MELEE</field>
+    <field name="weapon_accuracy" type="IntegerField">0</field>
+    <field name="conceilable" type="CharField">L</field>
+    <field name="availability" type="CharField">C</field>
+    <field name="damage_class" type="CharField">3D6</field>
+    <field name="caliber" type="CharField">
+    </field>
+    <field name="str_min" type="PositiveIntegerField">3</field>
+    <field name="rof" type="PositiveIntegerField">0</field>
+    <field name="clip" type="PositiveIntegerField">0</field>
+    <field name="rng" type="PositiveIntegerField">1</field>
+    <field name="rel" type="CharField">UR</field>
+    <field name="cost" type="PositiveIntegerField">8</field>
+    <field name="description" type="TextField">
+    </field>
+    <field name="stats" type="CharField">
+    </field>
+    <field name="origins" type="CharField">Empire Countryside</field>
+  </object>
+  <object model="collector.weaponref" pk="38">
+    <field name="reference" type="CharField">Avaneir Rapier</field>
+    <field name="meta_type" type="CharField">Rapier</field>
+    <field name="category" type="CharField">MELEE</field>
+    <field name="weapon_accuracy" type="IntegerField">0</field>
+    <field name="conceilable" type="CharField">L</field>
+    <field name="availability" type="CharField">C</field>
+    <field name="damage_class" type="CharField">3D6</field>
+    <field name="caliber" type="CharField">
+    </field>
+    <field name="str_min" type="PositiveIntegerField">3</field>
+    <field name="rof" type="PositiveIntegerField">0</field>
+    <field name="clip" type="PositiveIntegerField">0</field>
+    <field name="rng" type="PositiveIntegerField">1</field>
+    <field name="rel" type="CharField">ST</field>
+    <field name="cost" type="PositiveIntegerField">12</field>
+    <field name="description" type="TextField">
+    </field>
+    <field name="stats" type="CharField">
+    </field>
+    <field name="origins" type="CharField">Li Halan</field>
+  </object>
+  <object model="collector.weaponref" pk="39">
+    <field name="reference" type="CharField">Cold Forged Imperial Blade</field>
+    <field name="meta_type" type="CharField">Rapier</field>
+    <field name="category" type="CharField">MELEE</field>
+    <field name="weapon_accuracy" type="IntegerField">1</field>
+    <field name="conceilable" type="CharField">L</field>
+    <field name="availability" type="CharField">R</field>
+    <field name="damage_class" type="CharField">3D6</field>
+    <field name="caliber" type="CharField">
+    </field>
+    <field name="str_min" type="PositiveIntegerField">3</field>
+    <field name="rof" type="PositiveIntegerField">0</field>
+    <field name="clip" type="PositiveIntegerField">0</field>
+    <field name="rng" type="PositiveIntegerField">1</field>
+    <field name="rel" type="CharField">VR</field>
+    <field name="cost" type="PositiveIntegerField">300</field>
+    <field name="description" type="TextField">
+    </field>
+    <field name="stats" type="CharField">
+    </field>
+    <field name="origins" type="CharField">Byzantium Secundus</field>
+  </object>
+  <object model="collector.weaponref" pk="40">
+    <field name="reference" type="CharField">Metier Patrol Ordinance</field>
+    <field name="meta_type" type="CharField">Medium Slugger</field>
+    <field name="category" type="CharField">P</field>
+    <field name="weapon_accuracy" type="IntegerField">0</field>
+    <field name="conceilable" type="CharField">J</field>
+    <field name="availability" type="CharField">C</field>
+    <field name="damage_class" type="CharField">2D6+3</field>
+    <field name="caliber" type="CharField">.40</field>
+    <field name="str_min" type="PositiveIntegerField">0</field>
+    <field name="rof" type="PositiveIntegerField">0</field>
+    <field name="clip" type="PositiveIntegerField">0</field>
+    <field name="rng" type="PositiveIntegerField">0</field>
+    <field name="rel" type="CharField">ST</field>
+    <field name="cost" type="PositiveIntegerField">190</field>
+    <field name="description" type="TextField">
+    </field>
+    <field name="stats" type="CharField">
+    </field>
+    <field name="origins" type="CharField">Guild</field>
+  </object>
+  <object model="collector.weaponref" pk="41">
+    <field name="reference" type="CharField">al-Malik "Ambassador" Laser</field>
+    <field name="meta_type" type="CharField">Medium Laser</field>
+    <field name="category" type="CharField">P</field>
+    <field name="weapon_accuracy" type="IntegerField">-1</field>
+    <field name="conceilable" type="CharField">J</field>
+    <field name="availability" type="CharField">R</field>
+    <field name="damage_class" type="CharField">3D6</field>
+    <field name="caliber" type="CharField">
+    </field>
+    <field name="str_min" type="PositiveIntegerField">0</field>
+    <field name="rof" type="PositiveIntegerField">0</field>
+    <field name="clip" type="PositiveIntegerField">0</field>
+    <field name="rng" type="PositiveIntegerField">0</field>
+    <field name="rel" type="CharField">ST</field>
+    <field name="cost" type="PositiveIntegerField">0</field>
+    <field name="description" type="TextField">
+    </field>
+    <field name="stats" type="CharField">
+    </field>
+    <field name="origins" type="CharField">House al-Malik</field>
+  </object>
+  <object model="collector.weaponref" pk="42">
+    <field name="reference" type="CharField">Van Gelder Cutlass</field>
+    <field name="meta_type" type="CharField">Rapier</field>
+    <field name="category" type="CharField">MELEE</field>
+    <field name="weapon_accuracy" type="IntegerField">1</field>
+    <field name="conceilable" type="CharField">L</field>
+    <field name="availability" type="CharField">R</field>
+    <field name="damage_class" type="CharField">3D6</field>
+    <field name="caliber" type="CharField">
+    </field>
+    <field name="str_min" type="PositiveIntegerField">3</field>
+    <field name="rof" type="PositiveIntegerField">0</field>
+    <field name="clip" type="PositiveIntegerField">0</field>
+    <field name="rng" type="PositiveIntegerField">1</field>
+    <field name="rel" type="CharField">VR</field>
+    <field name="cost" type="PositiveIntegerField">80</field>
+    <field name="description" type="TextField">
+    </field>
+    <field name="stats" type="CharField">
+    </field>
+    <field name="origins" type="CharField">House Van Gelder</field>
+  </object>
+</django-objects>

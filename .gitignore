@@ -6,7 +6,5 @@ pdfbooks/
 .~lock.
 logs/
 rubish/
-backup/rescue/
-backup/custom/
 venv/dp/
 collector/static/collector/creds.json

@@ -99,6 +99,7 @@ class Character(models.Model):
     onsave_reroll_attributes = models.BooleanField(default=False)
     onsave_reroll_skills = models.BooleanField(default=False)
     lifepath_total = models.IntegerField(default=0)
+    balanced = models.BooleanField(default=False)
     skills_options = []
     ba_options = []
     bc_options = []
@@ -107,6 +108,7 @@ class Character(models.Model):
     bc_options_not = []
     AP_tod_pool = 0
     OP_tod_pool = 0
+    WP_tod_pool = 0
     weapon_options = []
     weapon_options_not = []
     armor_options = []
@@ -155,10 +157,12 @@ class Character(models.Model):
         self.purgeTalents()
         self.AP_tod_pool = 0
         self.OP_tod_pool = 0
+        self.WP_tod_pool = 0
         for tod in self.tourofduty_set.all():
-            AP, OP = tod.push(self)
+            AP, OP, WP = tod.push(self)
             self.AP_tod_pool += AP
             self.OP_tod_pool += OP
+            self.OP_tod_pool += WP
         if self.charactercusto:
             self.charactercusto.comment = self.full_name
             self.charactercusto.push(self)
@@ -172,6 +176,7 @@ class Character(models.Model):
         self.handleWildcards()
         self.add_missing_root_skills()
         self.resetTotal()
+        self.balanced = self.lifepath_total == self.OP
 
     def prepareDisplay(self):
         self.refresh_skills_options()

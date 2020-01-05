@@ -14,11 +14,15 @@
 		<th colspan=1><span id='bc_del' class='edit_icon fa fa-arrow-alt-circle-right'></span></th>
 		<th colspan=2>Remove B/C</th>
         <td colspan=3>
+            {% if c.bc_options_not.count %}
 			<select id='bc_unselect'>
 			{% for s in c.bc_options_not %}
 				<option value='{{s.id}}' style='width:15ex;'>{{s.reference}} ({{s.value}})</option>
 			{% endfor %}
 			</select>
+            {% else %}
+            Nothing to remove
+            {% endif %}
         </td>
 	</tr>
 </table>

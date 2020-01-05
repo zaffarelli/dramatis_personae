@@ -19,6 +19,7 @@ class TourOfDuty(models.Model):
     tod = self.tour_of_duty_ref
     AP = 0
     OP = 0
+    WP = 0
     if tod.is_custom:
         AP = tod.AP
         OP = tod.OP
@@ -40,11 +41,13 @@ class TourOfDuty(models.Model):
         for sm in tod.skillmodificator_set.all():
             if not sm.skill_ref.is_wildcard:
                 ch.add_or_update_skill(sm.skill_ref,sm.value,True)
+            else:
+                WP += sm.value
         for bc in tod.blessingcursemodificator_set.all():
             ch.add_bc(bc.blessing_curse_ref)
         for ba in tod.beneficeafflictionmodificator_set.all():
             ch.add_ba(ba.benefice_affliction_ref)
-    return AP, OP
+    return AP, OP, WP
 
   # def pull(self,ch):
   #   tod = self.update_tour_of_duty_ref

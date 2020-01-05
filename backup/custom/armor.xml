@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<django-objects version="1.0">
+  <object model="collector.armor" pk="434">
+    <field name="character" rel="ManyToOneRel" to="collector.character">16</field>
+    <field name="armor_ref" rel="ManyToOneRel" to="collector.armorref">1</field>
+  </object>
+  <object model="collector.armor" pk="435">
+    <field name="character" rel="ManyToOneRel" to="collector.character">29</field>
+    <field name="armor_ref" rel="ManyToOneRel" to="collector.armorref">5</field>
+  </object>
+  <object model="collector.armor" pk="436">
+    <field name="character" rel="ManyToOneRel" to="collector.character">58</field>
+    <field name="armor_ref" rel="ManyToOneRel" to="collector.armorref">21</field>
+  </object>
+  <object model="collector.armor" pk="437">
+    <field name="character" rel="ManyToOneRel" to="collector.character">125</field>
+    <field name="armor_ref" rel="ManyToOneRel" to="collector.armorref">4</field>
+  </object>
+  <object model="collector.armor" pk="438">
+    <field name="character" rel="ManyToOneRel" to="collector.character">187</field>
+    <field name="armor_ref" rel="ManyToOneRel" to="collector.armorref">26</field>
+  </object>
+  <object model="collector.armor" pk="439">
+    <field name="character" rel="ManyToOneRel" to="collector.character">185</field>
+    <field name="armor_ref" rel="ManyToOneRel" to="collector.armorref">2</field>
+  </object>
+  <object model="collector.armor" pk="440">
+    <field name="character" rel="ManyToOneRel" to="collector.character">98</field>
+    <field name="armor_ref" rel="ManyToOneRel" to="collector.armorref">1</field>
+  </object>
+  <object model="collector.armor" pk="441">
+    <field name="character" rel="ManyToOneRel" to="collector.character">115</field>
+    <field name="armor_ref" rel="ManyToOneRel" to="collector.armorref">2</field>
+  </object>
+  <object model="collector.armor" pk="442">
+    <field name="character" rel="ManyToOneRel" to="collector.character">183</field>
+    <field name="armor_ref" rel="ManyToOneRel" to="collector.armorref">2</field>
+  </object>
+  <object model="collector.armor" pk="443">
+    <field name="character" rel="ManyToOneRel" to="collector.character">181</field>
+    <field name="armor_ref" rel="ManyToOneRel" to="collector.armorref">1</field>
+  </object>
+  <object model="collector.armor" pk="444">
+    <field name="character" rel="ManyToOneRel" to="collector.character">135</field>
+    <field name="armor_ref" rel="ManyToOneRel" to="collector.armorref">8</field>
+  </object>
+  <object model="collector.armor" pk="445">
+    <field name="character" rel="ManyToOneRel" to="collector.character">35</field>
+    <field name="armor_ref" rel="ManyToOneRel" to="collector.armorref">1</field>
+  </object>
+  <object model="collector.armor" pk="446">
+    <field name="character" rel="ManyToOneRel" to="collector.character">91</field>
+    <field name="armor_ref" rel="ManyToOneRel" to="collector.armorref">8</field>
+  </object>
+  <object model="collector.armor" pk="447">
+    <field name="character" rel="ManyToOneRel" to="collector.character">7</field>
+    <field name="armor_ref" rel="ManyToOneRel" to="collector.armorref">4</field>
+  </object>
+  <object model="collector.armor" pk="448">
+    <field name="character" rel="ManyToOneRel" to="collector.character">8</field>
+    <field name="armor_ref" rel="ManyToOneRel" to="collector.armorref">2</field>
+  </object>
+  <object model="collector.armor" pk="449">
+    <field name="character" rel="ManyToOneRel" to="collector.character">190</field>
+    <field name="armor_ref" rel="ManyToOneRel" to="collector.armorref">12</field>
+  </object>
+  <object model="collector.armor" pk="450">
+    <field name="character" rel="ManyToOneRel" to="collector.character">87</field>
+    <field name="armor_ref" rel="ManyToOneRel" to="collector.armorref">8</field>
+  </object>
+  <object model="collector.armor" pk="451">
+    <field name="character" rel="ManyToOneRel" to="collector.character">136</field>
+    <field name="armor_ref" rel="ManyToOneRel" to="collector.armorref">22</field>
+  </object>
+  <object model="collector.armor" pk="452">
+    <field name="character" rel="ManyToOneRel" to="collector.character">189</field>
+    <field name="armor_ref" rel="ManyToOneRel" to="collector.armorref">1</field>
+  </object>
+  <object model="collector.armor" pk="453">
+    <field name="character" rel="ManyToOneRel" to="collector.character">61</field>
+    <field name="armor_ref" rel="ManyToOneRel" to="collector.armorref">13</field>
+  </object>
+  <object model="collector.armor" pk="454">
+    <field name="character" rel="ManyToOneRel" to="collector.character">20</field>
+    <field name="armor_ref" rel="ManyToOneRel" to="collector.armorref">1</field>
+  </object>
+  <object model="collector.armor" pk="469">
+    <field name="character" rel="ManyToOneRel" to="collector.character">38</field>
+    <field name="armor_ref" rel="ManyToOneRel" to="collector.armorref">4</field>
+  </object>
+  <object model="collector.armor" pk="482">
+    <field name="character" rel="ManyToOneRel" to="collector.character">39</field>
+    <field name="armor_ref" rel="ManyToOneRel" to="collector.armorref">2</field>
+  </object>
+</django-objects>

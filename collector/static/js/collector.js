@@ -374,18 +374,24 @@ function rebootlinks(){
     $('.recalc_character').off().on('click',function(event){
         event.preventDefault();
         event.stopPropagation();
-        var dad = $(this).parents('li').find('div.avatar_link');
-        $('li').find('div.avatar_link').removeClass('selected');
-        $(dad).addClass('selected');
+        console.log("TUTU");
+        var dad = $(this).parents('li');
+
+        //$('li').find('div.avatar_link').find('div.character_info').click();
+        console.log("li#"+dad_id+" div.avatar_link");
+        var dad_id = $(dad).attr("id");
+        $("li#"+dad_id+" .character_info").removeClass('hidden');
         $.ajax({
             url: 'ajax/recalc/character/'+$(this).attr('id')+'/',
             success: function(answer) {
                 $('.details').html(answer.character);
                 $('li#'+answer.rid).html(answer.link);
-                $('li').find('div.avatar_link').removeClass('selected');
+
                 rebootlinks();
                 //console.log(answer);
                 fu.reset(answer.id,"sheet_"+answer.id,"customizer");
+                $("li#"+dad_id+" .character_name").click();
+
             },
             error: function(answer){
                 console.log('Recalc error...'+answer);

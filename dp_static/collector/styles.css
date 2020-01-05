@@ -9,7 +9,7 @@ input[type=text], input[type=number], input[type=checkbox], select, textarea {
   color: #e5deca;
   border-radius: 2px;
   padding: 2px;
-  border: 2px ridge #494c49;
+  border: 2px ridge #444444;
   box-shadow: -2px -2px 5px black; }
 
 @font-face {
@@ -179,7 +179,7 @@ body {
               margin: 0; }
               body .wrapper .list .charlist ul.avatars li .avatar_link .character_actions a, body .wrapper .list .charlist ul.avatars li .avatar_link .character_actions span.nav, body .wrapper .list .charlist ul.avatars li .avatar_link .character_actions .action, body .wrapper .list .charlist ul.avatars li .avatar_link .character_info a, body .wrapper .list .charlist ul.avatars li .avatar_link .character_info span.nav, body .wrapper .list .charlist ul.avatars li .avatar_link .character_info .action {
                 cursor: pointer;
-                color: #494c49; }
+                color: #444444; }
                 body .wrapper .list .charlist ul.avatars li .avatar_link .character_actions a:hover, body .wrapper .list .charlist ul.avatars li .avatar_link .character_actions span.nav:hover, body .wrapper .list .charlist ul.avatars li .avatar_link .character_actions .action:hover, body .wrapper .list .charlist ul.avatars li .avatar_link .character_info a:hover, body .wrapper .list .charlist ul.avatars li .avatar_link .character_info span.nav:hover, body .wrapper .list .charlist ul.avatars li .avatar_link .character_info .action:hover {
                   color: #fc2; }
             body .wrapper .list .charlist ul.avatars li .avatar_link .character_actions {
@@ -199,7 +199,7 @@ body {
                 body .wrapper .list .charlist ul.avatars li .avatar_link .character_name em:hover {
                   color: #fc2; }
             body .wrapper .list .charlist ul.avatars li .avatar_link .character_info {
-              border: 1px solid #494c49;
+              border: 1px solid #444444;
               background: black;
               padding: 2px;
               width: 98%;
@@ -501,13 +501,13 @@ body {
     color: #fc2;
     cursor: pointer; }
   body .action_icon {
-    color: #494c49;
+    color: #444444;
     cursor: pointer; }
     body .action_icon:hover {
       color: #fc2; }
   body .subsection {
     font-weight: bold;
-    color: #dbca86;
+    color: #aaa;
     text-decoration: underline; }
   body .pdflink {
     color: #e5deca;
@@ -549,7 +549,7 @@ body {
     line-height: .3em;
     background: orange; }
   body .embedded_link {
-    color: #dbca86;
+    color: #aaa;
     text-decoration: none; }
   body .storyarticle {
     background: transparent;
@@ -573,7 +573,7 @@ body {
         color: black;
         border: 1px solid silver; }
         body .storyarticle table tr td .embedded_link {
-          color: #dbca86;
+          color: #aaa;
           text-decuration: underline;
           cursor: pointer; }
         body .storyarticle table tr td p {
@@ -661,9 +661,9 @@ body {
     text-align: left;
     font-size: .87em; }
     body .btn:hover {
-      border-color: #dbca86;
+      border-color: #aaa;
       background: black;
-      color: #dbca86;
+      color: #aaa;
       cursor: pointer; }
   body .tabs {
     display: none; }
@@ -680,7 +680,7 @@ body {
   body .noPDF:before {
     content: '(x) '; }
   body .working table, body .working table td, body .working table th, body .working th, body .working td {
-    background: #494c49; }
+    background: #444444; }
   body #messenger {
     position: fixed;
     width: 400px;
@@ -797,6 +797,11 @@ body {
       width: 120px; }
     body .mobile_form table.expanded tr td[colspan="3"], body .mobile_form table.expanded tr th[colspan="3"] {
       width: 300px; }
+    body .mobile_form table.expanded tr #summary {
+      height: 250px;
+      overflow-y: scroll;
+      border: 1px solid black;
+      width: 100%; }
     body .mobile_form table.expanded ul {
       margin: 0; }
 
@@ -879,5 +884,8 @@ body {
         min-height: 1000px; }
       body .wrapper .menuright {
         grid-column: 4 / 6; } }
+
+.selected {
+  background-color: #494c49; }
 
 /*# sourceMappingURL=styles.css.map */

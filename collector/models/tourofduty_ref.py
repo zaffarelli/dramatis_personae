@@ -34,6 +34,7 @@ class TourOfDutyRef(models.Model):
     PA_AWA = models.IntegerField(default=0)
     OCC_LVL = models.IntegerField(default=0)
     OCC_DRK = models.IntegerField(default=0)
+    WP = models.IntegerField(default=0)
     value = models.IntegerField(default=0)
     description = models.TextField(max_length=1024,default='',blank=True)
 
@@ -41,6 +42,7 @@ class TourOfDutyRef(models.Model):
         return '[%s|%s] %s (%d)' % (fics_references.LIFEPATH_CATEGORY_SHORT[self.category],fics_references.LIFEPATH_CASTE_SHORT[self.caste],self.reference,self.value)
 
     def fix(self):
+        self.WP = 0
         if self.is_custom:
             self.value = self.AP*3 + self.OP
         else:
@@ -48,7 +50,7 @@ class TourOfDutyRef(models.Model):
             self.OP = 0
             texts = []
             if self.PA_STR != 0:
-              texts.append("STR %+d"%(self.PA_STR)) 
+              texts.append("STR %+d"%(self.PA_STR))
             if self.PA_CON != 0:
               texts.append("CON %+d"%(self.PA_CON))
             if self.PA_BOD != 0:
@@ -77,6 +79,8 @@ class TourOfDutyRef(models.Model):
               texts.append("DRK %+d"%(self.OCC_DRK))
             for s in self.skillmodificator_set.all():
               texts.append("{%s %+d}"%(s.skill_ref.reference,s.value))
+              if s.skill_ref.is_wildcard:
+                  self.WP += s.value
               self.OP += s.value
             for bc in self.blessingcursemodificator_set.all():
               texts.append("(%s %+d)"%(bc.blessing_curse_ref.reference,bc.blessing_curse_ref.value))

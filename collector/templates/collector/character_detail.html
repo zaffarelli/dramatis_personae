@@ -45,7 +45,10 @@
 {% if c.tourofduty_set.count != 0 %}
     <ul class='unbreakable'>
     {% for tod in c.tourofduty_set.all|dictsort:"tour_of_duty_ref.category" %}
-    <li><b>{{ tod.tour_of_duty_ref.category|as_lifepath }} ({{tod.tour_of_duty_ref.value}})</b> <span title="{{tod.tour_of_duty_ref.description}}">{{tod.tour_of_duty_ref.reference}}</span></li>
+    <li><b>{{ tod.tour_of_duty_ref.category|as_lifepath }} ({{tod.tour_of_duty_ref.value}})</b>
+        <span title="{{tod.tour_of_duty_ref.description}}">{{tod.tour_of_duty_ref.reference}}</span>
+        {%if tod.tour_of_duty_ref.WP%}[{{tod.tour_of_duty_ref.WP}}]{%endif%}
+    </li>
     {% endfor %}
     </ul>
 {% else %}

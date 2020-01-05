@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<django-objects version="1.0">
+  <object model="collector.config" pk="1">
+    <field name="title" type="CharField">Blank</field>
+    <field name="epic" rel="ManyToOneRel" to="scenarist.epic">1</field>
+    <field name="description" type="TextField">The config to get everything</field>
+    <field name="gamemaster" type="CharField">zaffarelli@gmail.com</field>
+    <field name="is_active" type="BooleanField">False</field>
+    <field name="smart_code" type="CharField">BLK</field>
+    <field name="current_drama" rel="ManyToOneRel" to="scenarist.drama">
+      <None>
+      </None>
+    </field>
+  </object>
+  <object model="collector.config" pk="2">
+    <field name="title" type="CharField">Deus Ex Machina</field>
+    <field name="epic" rel="ManyToOneRel" to="scenarist.epic">7</field>
+    <field name="description" type="TextField">
+    </field>
+    <field name="gamemaster" type="CharField">zaffarelli@gmail.com</field>
+    <field name="is_active" type="BooleanField">True</field>
+    <field name="smart_code" type="CharField">DEM</field>
+    <field name="current_drama" rel="ManyToOneRel" to="scenarist.drama">6</field>
+  </object>
+  <object model="collector.config" pk="3">
+    <field name="title" type="CharField">Abusus Non Tollit Usum</field>
+    <field name="epic" rel="ManyToOneRel" to="scenarist.epic">3</field>
+    <field name="description" type="TextField">
+    </field>
+    <field name="gamemaster" type="CharField">zaffarelli@gmail.com</field>
+    <field name="is_active" type="BooleanField">False</field>
+    <field name="smart_code" type="CharField">ANTU</field>
+    <field name="current_drama" rel="ManyToOneRel" to="scenarist.drama">
+      <None>
+      </None>
+    </field>
+  </object>
+</django-objects>

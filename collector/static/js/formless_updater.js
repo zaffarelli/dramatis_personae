@@ -75,6 +75,7 @@ class FormlessUpdater{
                         $("#"+prefix+"_block_"+answer.c["id"]).removeClass("working");
                         $("#summary_block").html(answer.summary);
                         $("li#"+answer.c["id"]).html(answer.avatar_link);
+                        console.log("li#"+answer.c["id"]);
                         self.prepareEvents();
                         rebootlinks();
     		 	    },
@@ -152,6 +153,7 @@ class FormlessUpdater{
                     $("#"+attr_id+"_"+avatar_id).html(answer.block);
                     $("#summary_block").html(answer.summary);
                     $("li#"+answer.c["id"]).html(answer.avatar_link);
+                    console.log("li#"+answer.c["id"]);
                     self.prepareEvents();
                     rebootlinks();
                 },

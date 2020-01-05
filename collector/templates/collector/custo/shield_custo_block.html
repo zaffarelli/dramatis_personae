@@ -14,11 +14,15 @@
 		<th colspan=1><span id='shield_del' class='edit_icon fa fa-arrow-alt-circle-right'></span></th>
 		<th colspan=2>Remove Shield</th>
         <td colspan=3>
+            {% if c.shield_options_not %}
 			<select id='shield_unselect'>
 			{% for s in c.shield_options_not %}
 				<option value='{{s.id}}' style='width:15ex;'>{{s.reference}}</option>
 			{% endfor %}
 			</select>
+            {% else %}
+            Nothing to remove
+            {% endif %}
         </td>
 	</tr>
 </table>

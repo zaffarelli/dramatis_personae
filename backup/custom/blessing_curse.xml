@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<django-objects version="1.0">
+  <object model="collector.blessingcurse" pk="3876">
+    <field name="character" rel="ManyToOneRel" to="collector.character">16</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">9</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3877">
+    <field name="character" rel="ManyToOneRel" to="collector.character">16</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">34</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3878">
+    <field name="character" rel="ManyToOneRel" to="collector.character">29</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">59</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3879">
+    <field name="character" rel="ManyToOneRel" to="collector.character">29</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">36</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3880">
+    <field name="character" rel="ManyToOneRel" to="collector.character">58</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">17</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3881">
+    <field name="character" rel="ManyToOneRel" to="collector.character">58</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">42</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3882">
+    <field name="character" rel="ManyToOneRel" to="collector.character">164</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">12</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3883">
+    <field name="character" rel="ManyToOneRel" to="collector.character">164</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">57</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3884">
+    <field name="character" rel="ManyToOneRel" to="collector.character">125</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">60</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3885">
+    <field name="character" rel="ManyToOneRel" to="collector.character">125</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">14</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3886">
+    <field name="character" rel="ManyToOneRel" to="collector.character">99</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">17</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3887">
+    <field name="character" rel="ManyToOneRel" to="collector.character">99</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">42</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3888">
+    <field name="character" rel="ManyToOneRel" to="collector.character">99</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">45</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3889">
+    <field name="character" rel="ManyToOneRel" to="collector.character">28</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">10</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3890">
+    <field name="character" rel="ManyToOneRel" to="collector.character">28</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">43</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3891">
+    <field name="character" rel="ManyToOneRel" to="collector.character">28</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">50</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3892">
+    <field name="character" rel="ManyToOneRel" to="collector.character">187</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">8</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3893">
+    <field name="character" rel="ManyToOneRel" to="collector.character">187</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">29</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3894">
+    <field name="character" rel="ManyToOneRel" to="collector.character">178</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">52</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3895">
+    <field name="character" rel="ManyToOneRel" to="collector.character">178</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">51</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3896">
+    <field name="character" rel="ManyToOneRel" to="collector.character">184</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">23</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3897">
+    <field name="character" rel="ManyToOneRel" to="collector.character">184</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">10</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3898">
+    <field name="character" rel="ManyToOneRel" to="collector.character">185</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">9</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3899">
+    <field name="character" rel="ManyToOneRel" to="collector.character">185</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">39</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3900">
+    <field name="character" rel="ManyToOneRel" to="collector.character">185</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">50</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3901">
+    <field name="character" rel="ManyToOneRel" to="collector.character">98</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">33</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3902">
+    <field name="character" rel="ManyToOneRel" to="collector.character">98</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">16</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3903">
+    <field name="character" rel="ManyToOneRel" to="collector.character">115</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">54</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3904">
+    <field name="character" rel="ManyToOneRel" to="collector.character">115</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">53</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3905">
+    <field name="character" rel="ManyToOneRel" to="collector.character">115</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">55</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3906">
+    <field name="character" rel="ManyToOneRel" to="collector.character">115</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">41</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3907">
+    <field name="character" rel="ManyToOneRel" to="collector.character">12</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">36</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3908">
+    <field name="character" rel="ManyToOneRel" to="collector.character">12</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">58</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3909">
+    <field name="character" rel="ManyToOneRel" to="collector.character">12</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">11</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3910">
+    <field name="character" rel="ManyToOneRel" to="collector.character">66</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">7</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3911">
+    <field name="character" rel="ManyToOneRel" to="collector.character">66</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">22</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3912">
+    <field name="character" rel="ManyToOneRel" to="collector.character">183</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">10</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3913">
+    <field name="character" rel="ManyToOneRel" to="collector.character">183</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">43</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3914">
+    <field name="character" rel="ManyToOneRel" to="collector.character">183</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">50</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3915">
+    <field name="character" rel="ManyToOneRel" to="collector.character">181</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">9</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3916">
+    <field name="character" rel="ManyToOneRel" to="collector.character">181</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">34</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3917">
+    <field name="character" rel="ManyToOneRel" to="collector.character">135</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">59</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3918">
+    <field name="character" rel="ManyToOneRel" to="collector.character">135</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">36</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3919">
+    <field name="character" rel="ManyToOneRel" to="collector.character">186</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">52</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3920">
+    <field name="character" rel="ManyToOneRel" to="collector.character">186</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">51</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3921">
+    <field name="character" rel="ManyToOneRel" to="collector.character">186</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">53</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3922">
+    <field name="character" rel="ManyToOneRel" to="collector.character">35</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">33</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3923">
+    <field name="character" rel="ManyToOneRel" to="collector.character">35</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">16</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3924">
+    <field name="character" rel="ManyToOneRel" to="collector.character">91</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">14</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3925">
+    <field name="character" rel="ManyToOneRel" to="collector.character">91</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">38</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3926">
+    <field name="character" rel="ManyToOneRel" to="collector.character">140</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">37</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3927">
+    <field name="character" rel="ManyToOneRel" to="collector.character">140</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">18</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3928">
+    <field name="character" rel="ManyToOneRel" to="collector.character">7</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">33</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3929">
+    <field name="character" rel="ManyToOneRel" to="collector.character">7</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">16</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3930">
+    <field name="character" rel="ManyToOneRel" to="collector.character">8</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">59</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3931">
+    <field name="character" rel="ManyToOneRel" to="collector.character">8</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">36</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3932">
+    <field name="character" rel="ManyToOneRel" to="collector.character">190</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">7</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3933">
+    <field name="character" rel="ManyToOneRel" to="collector.character">190</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">22</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3934">
+    <field name="character" rel="ManyToOneRel" to="collector.character">87</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">36</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3935">
+    <field name="character" rel="ManyToOneRel" to="collector.character">87</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">58</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3936">
+    <field name="character" rel="ManyToOneRel" to="collector.character">136</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">59</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3937">
+    <field name="character" rel="ManyToOneRel" to="collector.character">136</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">36</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3938">
+    <field name="character" rel="ManyToOneRel" to="collector.character">136</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">3</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3939">
+    <field name="character" rel="ManyToOneRel" to="collector.character">189</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">17</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3940">
+    <field name="character" rel="ManyToOneRel" to="collector.character">189</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">42</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3941">
+    <field name="character" rel="ManyToOneRel" to="collector.character">61</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">12</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3942">
+    <field name="character" rel="ManyToOneRel" to="collector.character">61</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">57</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3943">
+    <field name="character" rel="ManyToOneRel" to="collector.character">20</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">37</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3944">
+    <field name="character" rel="ManyToOneRel" to="collector.character">20</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">18</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3945">
+    <field name="character" rel="ManyToOneRel" to="collector.character">20</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">2</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3946">
+    <field name="character" rel="ManyToOneRel" to="collector.character">180</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">28</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3947">
+    <field name="character" rel="ManyToOneRel" to="collector.character">180</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">15</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3948">
+    <field name="character" rel="ManyToOneRel" to="collector.character">188</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">8</field>
+  </object>
+  <object model="collector.blessingcurse" pk="3949">
+    <field name="character" rel="ManyToOneRel" to="collector.character">188</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">29</field>
+  </object>
+  <object model="collector.blessingcurse" pk="4028">
+    <field name="character" rel="ManyToOneRel" to="collector.character">38</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">11</field>
+  </object>
+  <object model="collector.blessingcurse" pk="4029">
+    <field name="character" rel="ManyToOneRel" to="collector.character">38</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">31</field>
+  </object>
+  <object model="collector.blessingcurse" pk="4072">
+    <field name="character" rel="ManyToOneRel" to="collector.character">39</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">33</field>
+  </object>
+  <object model="collector.blessingcurse" pk="4073">
+    <field name="character" rel="ManyToOneRel" to="collector.character">39</field>
+    <field name="blessing_curse_ref" rel="ManyToOneRel" to="collector.blessingcurseref">16</field>
+  </object>
+</django-objects>
