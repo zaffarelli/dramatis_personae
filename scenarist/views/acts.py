@@ -1,7 +1,7 @@
 '''
 ╔╦╗╔═╗  ╔═╗┌─┐┌─┐┌┐┌┌─┐┬─┐┬┌─┐┌┬┐
- ║║╠═╝  ╚═╗│  ├┤ │││├─┤├┬┘│└─┐ │ 
-═╩╝╩    ╚═╝└─┘└─┘┘└┘┴ ┴┴└─┴└─┘ ┴ 
+ ║║╠═╝  ╚═╗│  ├┤ │││├─┤├┬┘│└─┐ │
+═╩╝╩    ╚═╝└─┘└─┘┘└┘┴ ┴┴└─┴└─┘ ┴
 '''
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView
@@ -10,6 +10,7 @@ from django.views.generic.edit import DeleteView
 from scenarist.forms.basic import *
 from scenarist.models.acts import Act
 from scenarist.models.dramas import Drama
+from django.shortcuts import get_object_or_404
 from scenarist.mixins.ajaxfromresponse import AjaxFromResponseMixin
 
 class ActDetailView(DetailView):
@@ -30,9 +31,12 @@ def add_act(request):
     if request.method == 'POST':
       id = request.POST.get('id')
       item = Event()
-      item.drama = get_object(Drama,pk=id)
+      item.act = get_object_or_404(Act,pk=id)
+      item.epic = item.act.epic
+      item.name = "new event"
       item.save()
-      c[item] = item
+      #c[item] = item
+      #print("toto")
       return JsonResponse(c)
   return JsonNotFound
 

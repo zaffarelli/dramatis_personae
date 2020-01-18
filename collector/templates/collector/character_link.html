@@ -9,6 +9,8 @@
     {% if c.use_history_creation %}
         {% if c.balanced %}
         <span class="action_icon histo" id="{{c.id}}"><i class="golden fas fa-history"></i></span>&nbsp;&nbsp;
+        {% else %}
+        <span class="action_icon histo" id="{{c.id}}"><i class="fas fa-history"></i></span>&nbsp;&nbsp;
         {% endif %}
     {%else%}
     {% if not c.is_locked %}

@@ -1,0 +1,15 @@
+<table class='info'>
+{% if c.data.place %}
+<tr><th width='2cm'>Place</th><td>{{ c.data.place }}</td></tr>
+{% endif %}
+{% if c.data.date %}
+<tr><th width='2cm'>Date</th><td>{{ c.data.date }}</td></tr>
+{% endif %}
+<tr><th width='2cm'>Challenge</th><td>{{ c.data.challenge }}</td></tr>
+{% if c.data.anchor %}
+<tr><th width='2cm'>Anchor</th><td>{{ c.data.anchor }}</td></tr>
+{% endif %}
+{% if c.data.dramatis_personae %}
+<tr><th width='2cm' colspan=2>Dramatis Personae</th></tr><tr><td colspan=2>{{ epic.data.dramatis_personae|safe }}</td></tr>
+{% endif %}
+</table>

@@ -414,25 +414,90 @@ body {
         border: 1px solid black;
         box-shadow: 2px 2px 8px black;
         border-radius: 5px 5px 5px 5px;
-        padding: 10px;
+        padding: 5px;
+        margin: 0;
         background-color: #171817;
         width: 100%;
-        max-width: 800px;
+        /*max-width: 1000px;*/
         margin-left: auto;
         margin-right: auto;
         display: block;
         font-family: 'Texte'; }
-        body .wrapper .details .storyview h1 {
-          text-indent: 5ex; }
-        body .wrapper .details .storyview h2 {
-          text-indent: 10ex; }
-        body .wrapper .details .storyview h3 {
-          text-indent: 15ex;
-          font-variant: small-caps; }
-        body .wrapper .details .storyview h4 {
-          text-indent: 25ex; }
-        body .wrapper .details .storyview h1, body .wrapper .details .storyview h2, body .wrapper .details .storyview h3, body .wrapper .details .storyview h4 {
-          color: #e5deca; }
+        body .wrapper .details .storyview .title {
+          padding: 0;
+          margin-bottom: 2px;
+          border: 1px solid black;
+          height: 25px; }
+          body .wrapper .details .storyview .title .chapter {
+            display: inline-block;
+            padding: 0;
+            margin: 0;
+            border: 1px solid transparent;
+            width: 50px;
+            color: #e5deca;
+            text-align: right;
+            font-family: NomPersoListe; }
+            body .wrapper .details .storyview .title .chapter.big {
+              font-weight: bold;
+              font-size: 1.2em;
+              color: #fc2;
+              background: black; }
+          body .wrapper .details .storyview .title h1 {
+            font-height: 15px;
+            text-indent: 10px; }
+          body .wrapper .details .storyview .title h2 {
+            font-height: 14px;
+            text-indent: 20px; }
+          body .wrapper .details .storyview .title h3 {
+            font-height: 13px;
+            text-indent: 40px; }
+          body .wrapper .details .storyview .title h4 {
+            font-height: 12px;
+            text-indent: 60px; }
+          body .wrapper .details .storyview .title .storybar {
+            display: inline-block;
+            padding: 0;
+            margin: 0;
+            background: transparent; }
+            body .wrapper .details .storyview .title .storybar p {
+              padding: 0;
+              text-indent: 0;
+              margin: 0;
+              background: transparent; }
+            body .wrapper .details .storyview .title .storybar button.compact {
+              background: #444444;
+              border: 1px solid #e5deca;
+              border-radius: 3px;
+              box-shadow: 0 0 3px black;
+              color: #e5deca;
+              width: 10ex;
+              margin: 2px;
+              font-family: Texte;
+              font-size: 8pt;
+              cursor: pointer; }
+              body .wrapper .details .storyview .title .storybar button.compact:hover {
+                background: #171817;
+                box-shadow: 0 0 3px #aaa; }
+          body .wrapper .details .storyview .title h1, body .wrapper .details .storyview .title h2, body .wrapper .details .storyview .title h3, body .wrapper .details .storyview .title h4 {
+            color: #e5deca;
+            display: inline-block;
+            padding: 0;
+            margin: 0;
+            border-bottom: 1px solid transparent;
+            width: 700px;
+            font-family: NomPersoListe; }
+          body .wrapper .details .storyview .title.noPDF {
+            background: #125; }
+          body .wrapper .details .storyview .title.golden {
+            color: #fc2;
+            /*background: $fics_darkest;*/ }
+        body .wrapper .details .storyview input[type=text], body .wrapper .details .storyview input[type=number], body .wrapper .details .storyview input[type=checkbox], body .wrapper .details .storyview select, body .wrapper .details .storyview textarea {
+          background-color: #171817;
+          color: #e5deca;
+          border-radius: 2px;
+          padding: 2px;
+          border: 2px ridge #444444;
+          box-shadow: -2px -2px 5px black; }
       body .wrapper .details .narrative {
         margin: 5px;
         vertical-align: top;
@@ -549,14 +614,14 @@ body {
     line-height: .3em;
     background: orange; }
   body .embedded_link {
-    color: #aaa;
+    color: #fc2;
     text-decoration: none; }
   body .storyarticle {
     background: transparent;
     padding: 0;
     margin: auto;
     color: white;
-    width: 70%; }
+    width: 100%; }
     body .storyarticle table {
       background: yellow;
       border: 1px solid gray;
@@ -573,9 +638,11 @@ body {
         color: black;
         border: 1px solid silver; }
         body .storyarticle table tr td .embedded_link {
-          color: #aaa;
+          color: #fc2;
           text-decuration: underline;
           cursor: pointer; }
+          body .storyarticle table tr td .embedded_link.broken {
+            background: red; }
         body .storyarticle table tr td p {
           margin: 0;
           padding: 0; }
@@ -590,9 +657,12 @@ body {
           border-radius: 5px; }
         body .storyarticle table.details tr td {
           width: auto;
-          background: black;
+          background: #171817;
           color: #e5deca;
           border: none;
+          font-size: 10pt;
+          font-family: Texte;
+          line-height: 1.2em;
           border-radius: 5px; }
       body .storyarticle table.update {
         background: #171817;
@@ -622,22 +692,6 @@ body {
       cursor: pointer; }
     body .storyarticle .custom_glance {
       cursor: help; }
-  body .storybar {
-    display: inline-block;
-    margin-left: 15%;
-    border: 1px solid #494c49;
-    border-radius: 5px; }
-    body .storybar p {
-      padding: 0;
-      text-indent: 0;
-      margin: 0; }
-    body .storybar button {
-      font-family: Texte;
-      font-size: 8pt;
-      width: 16ex;
-      padding: 0;
-      margin: 2px;
-      cursor: pointer; }
   body .epic {
     background-color: #303230; }
   body .drama {
@@ -677,8 +731,6 @@ body {
     display: block; }
   body .hidden {
     display: none; }
-  body .noPDF:before {
-    content: '(x) '; }
   body .working table, body .working table td, body .working table th, body .working th, body .working td {
     background: #444444; }
   body #messenger {

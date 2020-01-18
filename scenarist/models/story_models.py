@@ -1,7 +1,7 @@
 '''
 ╔╦╗╔═╗  ╔═╗┌─┐┌─┐┌┐┌┌─┐┬─┐┬┌─┐┌┬┐
- ║║╠═╝  ╚═╗│  ├┤ │││├─┤├┬┘│└─┐ │ 
-═╩╝╩    ╚═╝└─┘└─┘┘└┘┴ ┴┴└─┴└─┘ ┴ 
+ ║║╠═╝  ╚═╗│  ├┤ │││├─┤├┬┘│└─┐ │
+═╩╝╩    ╚═╝└─┘└─┘┘└┘┴ ┴┴└─┴└─┘ ┴
 '''
 from django.db import models
 import re
@@ -18,19 +18,20 @@ class StoryModel(models.Model):
   place = models.CharField(max_length=128, default='', blank=True)
   description = models.TextField(max_length=2560,default='',blank=True)
   gamemaster = models.CharField(default='zaffarelli@gmail.com', max_length=128, blank=True)
+  population_count = models.IntegerField(default=0, blank=True)
   to_PDF = models.BooleanField(default=True)
-  
+
   def __str__(self):
     """ Standard display """
     return '%s. %s' % (self.chapter, self.title)
-    
+
   def toJSON(self):
     """ Returns JSON of object """
     return json.dumps(self, default=lambda o: o.__dict__,sort_keys=True, indent=4)
 
   def fetch_avatars(self, value):
     """ Bring all avatars rids from some text"""
-    from collector.models.characters import Character
+    from collector.models.character import Character
     avar = []
     seeker = re.compile('\¤(\w+)\¤')
     changes = []
@@ -38,7 +39,7 @@ class StoryModel(models.Model):
     iter = seeker.finditer(res)
     for item in iter:
       rid = ''.join(item.group().split('¤'))
-      ch = Character.objects.filter(rid=rid).first()    
+      ch = Character.objects.filter(rid=rid).first()
       if not ch is None:
         avar.append(ch.rid)
     return avar
@@ -59,6 +60,5 @@ class StoryModel(models.Model):
     casting = self.get_casting()
     for episode in self.get_episodes():
       casting.append(episode.get_full_cast())
-    flat_cast = [c for subcast in casting for c in subcast]
+    flat_cast = [c for subcast in casting for c in subcast]    
     return sorted(list(set(flat_cast)))
-

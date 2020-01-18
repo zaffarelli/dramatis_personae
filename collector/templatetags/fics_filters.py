@@ -105,9 +105,9 @@ def parse_avatars(value):
     rid = ''.join(item.group().split('¤'))
     ch = Character.objects.filter(rid=rid).first()
     if not ch is None:
-      repstr = '<span id="%s" class="embedded_link" title="%s">%s%s</span>'%(ch.rid, ch.entrance, ch.full_name, ' (€)' if ch.is_exportable else '')
+      repstr = '<span id="%s" class="embedded_link" title="%s">%s%s</span>'%(ch.rid, ch.entrance, ch.full_name,"" if ch.balanced==True else "&dagger;")
     else:
-      repstr = '[%s was not found]'%(rid)
+      repstr = '<span class="embedded_link broken">[%s was not found]</span>'%(rid)
     changes.append({'src':item.group(),'dst':repstr})
   newres = res
   for change in changes:
@@ -146,53 +146,6 @@ def parse_avatars(value):
 
 
 
-@register.filter(name='parse_avatars_pdf')
-
-def parse_avatars_pdf(value):
-  """ Replace avatars rids by html links in a text """
-  sym = '¤'
-  search =  '(\w+)'
-  seeker = re.compile('\%s%s\%s'%(sym,search,sym))
-  changes = []
-  txt = str(value)
-  iter = seeker.finditer(txt)
-  for item in iter:
-    rid = ''.join(item.group().split(sym))
-    ch = Character.objects.filter(rid=rid).first()
-    if ch:
-      repstr = '<span id="%s" class="embedded_link" title="%s">%s</span>'%(ch.rid, ch.entrance, ch.full_name)
-    else:
-      repstr = '<span class="embedded_link">[%s was not found]</span>'%(rid)
-    changes.append({'src':item.group(),'dst':repstr})
-  for change in changes:
-    txt = txt.replace(change['src'],change['dst'])
-  """ Replace µ by subsection titles """
-  sym = 'µ'
-  search =  "[A-Za-z\s\.\'\;]+"
-  myregex = "\%s%s\%s"%(sym,search,sym)
-  seeker = re.compile(myregex)
-  changes = []
-  iter = seeker.finditer(txt)
-  for item in iter:
-    occ = ''.join(item.group().split(sym))
-    repstr = '</p><h6 class="subsection">%s</h6><p>'%(occ)
-    changes.append({'src':item.group(),'dst':repstr})
-  for change in changes:
-    txt = txt.replace(change['src'],change['dst'])
-  """ Replace § by em"""
-  sym = '§'
-  search =  "[A-Za-z\s\.\'\;]+"
-  myregex = "\%s%s\%s"%(sym,search,sym)
-  seeker = re.compile(myregex)
-  changes = []
-  iter = seeker.finditer(txt)
-  for item in iter:
-    occ = ''.join(item.group().split(sym))
-    repstr = '<em>%s</em>'%(occ)
-    changes.append({'src':item.group(),'dst':repstr})
-  for change in changes:
-    txt = txt.replace(change['src'],change['dst'])
-  return txt
 
 @register.filter(name='dictsort_3cols')
 def dictsort_3cols(value,ref):
@@ -282,3 +235,31 @@ def as_pa_short(value):
           "":"Error!",
         }
     return PA[value]
+
+
+@register.filter(name='as_roman')
+def as_roman(value):
+    if isinstance(int(value),int):
+        value = int(value)
+        ROMAN = [
+            (1000, "M"),
+            ( 900, "CM"),
+            ( 500, "D"),
+            ( 400, "CD"),
+            ( 100, "C"),
+            (  90, "XC"),
+            (  50, "L"),
+            (  40, "XL"),
+            (  10, "X"),
+            (   9, "IX"),
+            (   5, "V"),
+            (   4, "IV"),
+            (   1, "I"),
+            ]
+        result = ""
+        for (arabic, roman) in ROMAN:
+            (factor, value) = divmod(value, arabic)
+            result += roman * factor
+    else:
+        result = value
+    return result

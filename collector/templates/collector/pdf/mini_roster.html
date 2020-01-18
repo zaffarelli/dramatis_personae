@@ -1,0 +1,12 @@
+{%load fics_filters%}
+{%load fics_pdf_filters%}
+{%load static%}
+
+
+<code>
+<b>{{ c.full_name|safe }}</b> {% if c.player != "" %}({{c.player|safe}}){%endif%} {% if not c.balanced %}(&dagger;){%endif%}</br>
+{% if c.entrance %}<i>{{ c.entrance|safe }}</i></br>{%endif%}
+{{c.gender|capfirst}} {{ c.specie|capfirst|safe }} {{ c.rank|safe }} of {{ c.alliance|safe }} from {{ c.native_fief|safe }} {{ c.caste|safe }}.</br>
+Born in {{ c.birthdate }} ({{ c.age }} years old) Height: {{c.height}}cm / Weight:{{c.weight}}kg<br/>
+STR:{{c.PA_STR}} CON:{{c.PA_CON}} BOD:{{c.PA_BOD}} MOV:{{c.PA_MOV}} INT:{{c.PA_INT}} WIL:{{c.PA_WIL}} TEM:{{c.PA_TEM}} PRE:{{c.PA_PRE}} TEC:{{c.PA_TEC}} REF:{{c.PA_REF}} AGI:{{c.PA_AGI}} AWA:{{c.PA_AWA}}<br/>
+</code>

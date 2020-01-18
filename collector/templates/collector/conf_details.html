@@ -1,58 +1,20 @@
 {% load fics_filters %}
-
-
 <div class="storyview">
-  <h1>{{ epic.title }}</h1>
-  <div class='storybar epic'>
-  <p class='epic_{{epic.data.id}}'>
-    <button class='episode_cast' id='c-epic-{{epic.data.id}}' page='1'>Epic</button>
-    <button class='view_epic' id='{{epic.data.id}}'>View</button>
-    <button class='edit_epic' id='{{epic.data.id}}'>Edit</button>
-    <button class='hide_epic' id='{{epic.data.id}}'>Close</button>
-    <button class='add_drama' id='{{epic.data.id}}'>Add</button>
-  </p>
-  </div>
-  <div class='storyarticle' id='epic_{{epic.data.id}}'></div>
-  {% for drama in epic.dramas %}    
-    <h2 {% if drama.data.to_PDF == False %}class='noPDF'{% endif %}>{{drama.data.chapter}}. {{ drama.title }}</h2>
-    <div class='storybar drama'>
-    <p class='drama_{{drama.data.id}}'>
-      <button class='episode_cast' id='c-drama-{{drama.data.id}}' page='1'>Drama</button>
-      <button class='view_drama' id='{{drama.data.id}}'>View</button>
-      <button class='edit_drama' id='{{drama.data.id}}'>Edit</button>
-      <button class='hide_drama' id='{{drama.data.id}}'>Close</button>
-      <button class='add_act' id='{{drama.data.id}}'>Add</button>
-      <button class='delete_drama' id='{{drama.data.id}}'>Delete</button>
-    </p>
-    </div>
-    <div class='storyarticle' id='drama_{{drama.data.id}}'></div>
-    {% for act in drama.acts %}         
-      <h3 {% if not act.data.to_PDF %}class='noPDF'{% endif %}>{{act.data.chapter}}. {{ act.title }}</h3>
-      <div class='storybar act'>
-      <p class='act_{{act.data.id}}'>
-        <button class='episode_cast' id='c-act-{{act.data.id}}' page='1'>Act</button>
-        <button class='view_act' id='{{act.data.id}}'>View</button>
-        <button class='edit_act' id='{{act.data.id}}'>Edit</button>
-        <button class='hide_act' id='{{act.data.id}}'>Close</button>
-        <button class='add_event' id='{{act.data.id}}'>Add</button>
-        <button class='delete_act' id='{{act.data.id}}'>Delete</button>
-      </p>
-      </div>
-      <div class='storyarticle' id='act_{{act.data.id}}'></div>
-      {% for event in act.events %}
-        <h4 {% if not event.data.to_PDF %}class='noPDF'{% endif %}>{{event.data.chapter}}. {{ event.title }}</h4>
-        <div class='storybar event'>
-        <p class='event_{{event.data.id}}'>
-          <button class='episode_cast' id='c-event-{{event.data.id}}' page='1'>Event</button>
-          <button class='view_event' id='{{event.data.id}}'>View</button>
-          <button class='edit_event' id='{{event.data.id}}'>Edit</button>
-          <button class='hide_event' id='{{event.data.id}}'>Close</button>
-          <button class='delete_event' id='{{event.data.id}}'>Delete</button>
-        </p>
+    <div class='title'>
+        <div class='chapter'>&nbsp;</div>
+        <h1>{{ epic.title }}</h1>
+        <div class='storybar epic'>
+            <p class='epic_{{epic.data.id}}'>
+                <button class='compact episode_cast' id='c-epic-{{epic.data.id}}' page='1'>Epic</button>
+                <button class='compact view_epic' id='{{epic.data.id}}'>View</button>
+                <button class='compact edit_epic' id='{{epic.data.id}}'>Edit</button>
+                <button class='compact hide_epic' id='{{epic.data.id}}'>Close</button>
+                <button class='compact add_drama' id='{{epic.data.id}}'>Add</button>
+            </p>
         </div>
-        <div class='storyarticle' id='event_{{event.data.id}}'></div>
-      {% endfor %}         
+    </div>
+    <div class='storyarticle' id='epic_{{epic.data.id}}'></div>
+    {% for drama in epic.dramas %}
+        {% include "collector/config/drama_detail.html" with c=drama %}
     {% endfor %}
-  {% endfor %}
 </div>
-

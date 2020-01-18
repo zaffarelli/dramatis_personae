@@ -4,143 +4,157 @@
 		{% load static %}
     <meta charset="utf-8" />
     <title>{{c.full_name|safe}}</title>
-    
+
     <style>
 
 @font-face {
-  font-family: 'FiraTitle';  
-  src: url('collector/static/collector/FiraSansCondensed-Black.ttf');
-}
-
-
-
-
-@font-face {
-  font-family: 'Titre';  
-  src: url('{% static "fonts/Balthasar-Regular.ttf" %}');
+  font-family: 'Titre';
+  src: url('collector/static/collector/fonts/Eczar-Bold.ttf');
 }
 
 @font-face {
-  font-family: 'Texte';  
-  src: url('{%  static "fonts/Lato-Regular.ttf" %}');
+  font-family: 'TitrePerso';
+  src: url('collector/static/collector/fonts/Cinzel-Bold.ttf');
 }
-  
-body{
+
+
+@font-face {
   font-family: 'Texte';
-  font-size: 10pt;
+  src: url('collector/static/collector/fonts/BarlowCondensed-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Texte';
+  font-weight:bold;
+  src: url('collector/static/collector/fonts/BarlowCondensed-SemiBold.ttf');
+}
+
+@font-face {
+  font-family: 'Texte';
+  font-style:italic;
+  src: url('collector/static/collector/fonts/BarlowCondensed-RegularItalic.ttf');
+}
+
+@font-face {
+  font-family: 'Texte';
+  font-style:italic;
+  font-weight:bold;
+  src: url('collector/static/collector/fonts/BarlowCondensed-SemiBoldItalic.ttf');
+}
+
+
+@font-face {
+  font-family: 'Emphase';
+  src: url('collector/static/collector/fonts/Eczar-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'NomPerso';
+  src: url('collector/static/collector/fonts/BowlbyOneSC-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Section';
+  src: url('collector/static/collector/fonts/ProstoOne-Regular.ttf');
 }
 
 @page {
   size: a4 portrait;
-  @frame f1 {
-    left: 0.5cm;
-    width: 8.9cm;
-    top: 2.5cm;
-    height:3.0cm;
+  @frame col_left {
+    left: 0.2cm;
+    width: 10cm;
+    top: 1.5cm;
+    height:28cm;
     padding:0.125cm;
+    border-bottom:1px solid #202020;
   }
-  @frame f2_PA {
-    left: 0.5cm;
-    width: 4.45cm;
-    top: 5.5cm;
-    height: 3.4cm;
+  @frame col_right {
+    left: 10.8cm;
+    width: 10cm;
+    top: 2cm;
+    height: 27.5cm;
     padding:0.125cm;
-  }
-
-  @frame f3_SA {
-    left: 4.95cm;
-    width: 4.45cm;
-    top: 5.5cm;
-    height:3.4cm;
-    padding:0.125cm;
+    border-bottom:1px solid #202020;
   }
 
-  @frame f4_skills{
-    left: 0.5cm;
-    width: 9.9cm;
-    top: 9.0cm;
-    height:13.5cm;
-    height:20.0cm;
-    padding:0.125cm;
-    
-  }
+  @frame header_frame {
+    -pdf-frame-content: header_content;
 
-  @frame f9_sht {
-    left: 10.5cm;
-    width: 9.9cm;
+    right: 0.5cm;
+    width: 0.5cm;
     top: 0.5cm;
-    top: 9cm;
-    height:20.0cm;
-    padding:0.125cm;
-    
+    height: 1cm;
+    text-align:right;
   }
 
-  @frame f10_sht {
-    left: 18.80cm;
-    width: 8.9cm;
-    top: 0.5cm;
-    height:20cm;
-    padding:0.125cm;
-    border:1px solid #000000;
-  }
-  
 }
 
+
+
 h1{
-  font-family:'FiraTitle';
-  font-size:16px;
+  font-family:'NomPerso';
+  font-size:24pt;
   font-weight:600;
-  margin:0;
+
   color:#404040;
 }
 
 h2{
-  font-family:'FiraTitle';
-  font-size:10px;
-  margin-top:5px;
-  font-weight:bold;
-  padding:0;
-  margin-bottom:0;
-  lineheight:1em;
+  font-family:'NomPerso';
+  font-size:16pt;
   color:#404040;
+  border-bottom:3px double #202020;
 }
 
-.stats {
+h3{
+  font-family:'NomPerso';
+  font-size:14pt;
+}
+
+h4{
+  font-family:'NomPerso';
+  font-size:12pt;
+  font-variant: small-caps;
+}
+
+h5{
+  font-family:'Section';
+  font-size:9pt;
+  padding-bottom:0;
+  margin-bottom:0;
+  -pdf-keep-with-next: true;
+}
+
+h6{
+  font-family:'Section';
+  font-size:8pt;
+  margin:0;
+  padding:0;
+  line-height:0.93em;
+  margin-top:0.15em;
+  -pdf-keep-with-next: true;
+}
+
+table.stats {
   padding:0;
   margin:0;
-}
-
-.stats th {
-  font-weight:300;
-  text-align:right;
-  font-size:1.0em;
-  padding-right:1ex;
-}
-
-.stats td {
-  font-size:1.0em;
-  padding-right:1ex;
-}
-      
-.core th{
-  font-weight:500;
-  text-align:right;
-  padding:0;
-  width:2.75cm;
-}
-
-.core td{
-  padding-left:1ex;
-  width:3.25cm;
+  font-family:Texte;
+  font-size:8pt;
 }
 
 p{
+  font-family:Texte;
+  font-size:8pt;
+  text-align:left;
   padding:0;
   margin:0;
+  line-height:0.97em;
 }
 
-em{
-  font-style:italic;
+blockquote{
+  font-family:Texte;
+  font-size:8pt;
+  line-height:0.97em;
 }
 
 .spacer{
@@ -152,22 +166,55 @@ em{
   font-size:1.0em;
 }
 
-.gm_shortcuts{				 
+.gm_shortcuts{
   font-size:1.0em;
+}
+
+.subsection{
+  color:#202030;
+  text-decoration:underline;
 }
 
 .embedded_link{
   text-decoration:underscore;
-  color:#806080;
+  color:#802080;
+  font-family:Texte;
+  font-weight:bold;
+}
+
+
+.highskill{
+  font-weight:600;
+  color:#808;
+}
+
+/*
+.avatar_name{
+  font-variant: small-caps;
+}
+*/
+
+.tableskills{
+  text-align:left;
+  font-family:Texte;
+  font-size:8pt;
+}
+
+.skilltext{
+  vertical-align:top;
+}
+
+.skillval{
+  font-family:Texte;
+  width:4ex;
+  text-align:center;
+  vertical-align:top;
 }
 
   </style>
   </head>
   <body>
-    <div class="roster">
-      {% block sheet %}
-      {% endblock sheet %}
-     </div>
-     <!-- img src="./collector/static/collector/FICS_Logo.jpg" -->
+    {% block article %}
+    {% endblock article %}
   </body>
 </html>

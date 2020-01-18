@@ -1,0 +1,19 @@
+{% load fics_filters %}
+<div class='title  {% if c.data.to_PDF == False %}noPDF{% endif %} golden'>
+    <div class='chapter big'>{{c.data.full_chapter|as_roman}}</div>
+    <h2>{{ c.title }}</h2>
+    <div class='storybar drama'>
+        <p class='drama_{{c.data.id}}'>
+            <button class='compact episode_cast' id='c-drama-{{c.data.id}}' page='1'>Drama</button>
+            <button class='compact view_drama' id='{{c.data.id}}'>View</button>
+            <button class='compact edit_drama' id='{{c.data.id}}'>Edit</button>
+            <button class='compact hide_drama' id='{{c.data.id}}'>Close</button>
+            <button class='compact add_act' id='{{c.data.id}}'>Add</button>
+            <button class='compact delete_drama' id='{{c.data.id}}'>Delete</button>
+        </p>
+    </div>
+</div>
+<div class='storyarticle' id='drama_{{c.data.id}}'></div>
+{% for act in c.acts %}
+    {% include "collector/config/act_detail.html" with c=act %}
+{% endfor %}

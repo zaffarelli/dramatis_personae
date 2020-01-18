@@ -158,17 +158,21 @@ def extract_formset(rqp,s):
       res[k] = rqp[k][0]
   return res
 
-def add_character(request):
-  """ Add a new character to the universe """
-  conf = get_current_config()
-  character_item = Character()
-  character_item.full_name = '_noname_ %s'%(datetime.datetime.now())
-  character_item.epic = conf.epic
-  character_item.specie = Specie.objects.first()
-  character_item.role = Role.objects.first()
-  character_item.profile = Profile.objects.first()
-  character_item.save()
-  return redirect('/')
+def add_character(request, slug=None):
+    """ Add a new character to the universe """
+    conf = get_current_config()
+    character_item = Character()
+    if slug:
+        character_item.full_name = " ".join(slug.split("-"))
+    else:
+        character_item.full_name = '_noname_ %s'%(datetime.datetime.now())
+    character_item.epic = conf.epic
+    character_item.use_history_creation = True
+    character_item.specie = Specie.objects.first()
+    character_item.role = Role.objects.first()
+    character_item.profile = Profile.objects.first()
+    character_item.save()
+    return HttpResponse(status=204)
 
 
 def conf_details(request):

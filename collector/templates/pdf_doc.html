@@ -8,38 +8,27 @@
     <style>
 
 @font-face {
-  font-family: 'Titre';
-  src: url('collector/static/collector/fonts/Eczar-Bold.ttf');
-}
-
-@font-face {
-  font-family: 'TitrePerso';
-  src: url('collector/static/collector/fonts/Cinzel-Bold.ttf');
-}
-
-
-@font-face {
   font-family: 'Texte';
-  src: url('collector/static/collector/fonts/BarlowCondensed-Regular.ttf');
+  src: url('collector/static/collector/fonts/WorkSans-Regular.ttf');
 }
 
 @font-face {
   font-family: 'Texte';
   font-weight:bold;
-  src: url('collector/static/collector/fonts/BarlowCondensed-SemiBold.ttf');
+  src: url('collector/static/collector/fonts/WorkSans-SemiBold.ttf');
 }
 
 @font-face {
   font-family: 'Texte';
   font-style:italic;
-  src: url('collector/static/collector/fonts/BarlowCondensed-RegularItalic.ttf');
+  src: url('collector/static/collector/fonts/WorkSans-RegularItalic.ttf');
 }
 
 @font-face {
   font-family: 'Texte';
   font-style:italic;
   font-weight:bold;
-  src: url('collector/static/collector/fonts/BarlowCondensed-SemiBoldItalic.ttf');
+  src: url('collector/static/collector/fonts/WorkSans-SemiBoldItalic.ttf');
 }
 
 
@@ -49,32 +38,54 @@
 }
 
 @font-face {
-  font-family: 'NomPerso';
-  src: url('collector/static/collector/fonts/BowlbyOneSC-Regular.ttf');
+  font-family: 'roster';
+  src: url('collector/static/collector/fonts/WorkSans-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'roster';
+  font-style:italic;
+  src: url('collector/static/collector/fonts/WorkSans-Light.ttf');
+}
+
+@font-face {
+  font-family: 'roster';
+  font-weight:bold;
+  src: url('collector/static/collector/fonts/WorkSans-SemiBold.ttf');
 }
 
 @font-face {
   font-family: 'Section';
-  src: url('collector/static/collector/fonts/ProstoOne-Regular.ttf');
+  src: url('collector/static/collector/fonts/Eczar-Bold.ttf');
+}
+
+@font-face {
+  font-family: 'Section3';
+  src: url('collector/static/collector/fonts/VastShadow-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Section2';
+  src: url('collector/static/collector/fonts/Eczar-ExtraBold.ttf');
 }
 
 @page {
   size: a4 portrait;
   @frame col_left {
-    left: 0.2cm;
+    left: 0.4cm;
     width: 10cm;
     top: 1.5cm;
-    height:28cm;
+    height:27cm;
     padding:0.125cm;
-    border-bottom:1px solid #202020;
+    border:1px solid #CCC;
   }
   @frame col_right {
-    left: 10.8cm;
+    right: 0.4cm;
     width: 10cm;
-    top: 2cm;
-    height: 27.5cm;
+    top: 1.5cm;
+    height: 27cm;
     padding:0.125cm;
-    border-bottom:1px solid #202020;
+    border:1px solid #CCC;
   }
 
   @frame header_frame {
@@ -87,68 +98,123 @@
     text-align:right;
   }
 
+    @frame footer_frame {
+        -pdf-frame-content: footer_content;
+        left:0.5cm;
+        width:20cm;
+        right:0.5cm;
+        bottom:0.6cm;
+        height: 0.5cm;
+    }
+}
+
+#footer_content{
+    font-family:Texte;
+    font-size:7pt;
+    text-align:center;
+    font-weight: bold;
+}
+
+.info {
+  padding:0;
+  margin:0;
+  font-family:Texte;
+  font-size:8pt;
+  margin-bottom: 0.8em;
+}
+
+.info th{
+    text-align:left;
+    margin-right:1ex;
 }
 
 
+h1, h2, h3, h4, h5, h6{
+    margin:0;
+    padding:0;
+}
 
 h1{
-  font-family:'NomPerso';
-  font-size:24pt;
-  font-weight:600;
-
-  color:#404040;
+    font-family:'Section';
+    font-size:20pt;
+    font-weight:600;
+    color:#404040;
 }
 
 h2{
-  font-family:'NomPerso';
-  font-size:16pt;
-  color:#404040;
-  border-bottom:3px double #202020;
+    font-family:'Section2';
+    font-size:15pt;
+    color:#101010;
+    text-align:center;
+    line-height:0.75em;
+    margin-bottom:1em;
+
 }
 
 h3{
-  font-family:'NomPerso';
-  font-size:14pt;
+    font-family:'Section2';
+    font-size:14pt;
+    margin-top:1em;
+    -pdf-keep-with-next: true;
 }
 
 h4{
-  font-family:'NomPerso';
-  font-size:12pt;
-  font-variant: small-caps;
+    font-family:'Section2';
+    font-size:12pt;
+    font-variant: small-caps;
+    margin-top:0.8em;
+    -pdf-keep-with-next: true;
 }
 
 h5{
-  font-family:'Section';
-  font-size:9pt;
-  padding-bottom:0;
-  margin-bottom:0;
-  -pdf-keep-with-next: true;
+    font-family:'Texte';
+    font-size:8pt;
+    margin:0;
+    padding:0;
+    margin-top:0.8em;
+    color:#202020;
+    font-variant: small-caps;
+
+    -pdf-keep-with-next: true;
 }
 
 h6{
-  font-family:'Section';
-  font-size:8pt;
-  margin:0;
-  padding:0;
-  line-height:0.93em;
-  margin-top:0.15em;
-  -pdf-keep-with-next: true;
+    font-family:'Section';
+    font-size:10pt;
+    margin:0;
+    padding:0;
+    color:#303030;
+    -pdf-keep-with-next: true;
 }
 
-table.stats {
-  padding:0;
-  margin:0;
-  font-family:Texte;
-  font-size:8pt;
+code{
+    font-family:'roster';
+    font-size:7pt;
+    text-indent:0;
+    margin:0;
+    padding:0.05cm;
+    margin-top:0.8em;
+    margin-bottom:0.8em;
+    line-height:0.9em;
+    color:#000;
+    border:1px solid #202020;
+    display:block;
 }
+
 
 p{
-  font-family:Texte;
-  font-size:8pt;
-  text-align:left;
-  padding:0;
-  margin:0;
-  line-height:0.97em;
+    font-family:Texte;
+    font-size:8pt;
+    text-align:justify;
+    padding:0;
+    margin:0;
+    text-indent:3ex;
+    line-height:1.6em;
+}
+
+.small{
+    font-size:0.6em;
+    font-family:'Section3';
 }
 
 blockquote{
@@ -157,59 +223,13 @@ blockquote{
   line-height:0.97em;
 }
 
-.spacer{
-  font-size:2px;
-  border-top: 1px solid #C0C0C0;
-}
-
-.narrative{
-  font-size:1.0em;
-}
-
-.gm_shortcuts{
-  font-size:1.0em;
-}
-
-.subsection{
-  color:#202030;
-  text-decoration:underline;
-}
-
 .embedded_link{
   text-decoration:underscore;
-  color:#802080;
+  color:#402040;
   font-family:Texte;
   font-weight:bold;
 }
 
-
-.highskill{
-  font-weight:600;
-  color:#808;
-}
-
-/*
-.avatar_name{
-  font-variant: small-caps;
-}
-*/
-
-.tableskills{
-  text-align:left;
-  font-family:Texte;
-  font-size:8pt;
-}
-
-.skilltext{
-  vertical-align:top;
-}
-
-.skillval{
-  font-family:Texte;
-  width:4ex;
-  text-align:center;
-  vertical-align:top;
-}
 
   </style>
   </head>

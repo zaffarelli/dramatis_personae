@@ -1,7 +1,7 @@
 '''
 ╔╦╗╔═╗  ╔═╗┌─┐┌─┐┌┐┌┌─┐┬─┐┬┌─┐┌┬┐
- ║║╠═╝  ╚═╗│  ├┤ │││├─┤├┬┘│└─┐ │ 
-═╩╝╩    ╚═╝└─┘└─┘┘└┘┴ ┴┴└─┴└─┘ ┴ 
+ ║║╠═╝  ╚═╗│  ├┤ │││├─┤├┬┘│└─┐ │
+═╩╝╩    ╚═╝└─┘└─┘┘└┘┴ ┴┴└─┴└─┘ ┴
 '''
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView
@@ -38,9 +38,7 @@ def add_event(request):
   if request.is_ajax():
     if request.method == 'POST':
       id_ = request.POST.get('id')
-      print(id_)
       id = id_.split('_')[1]
-      print(id)
       item = Event()
       item.title = datetime.datetime.now()
       item.act = get_object_or_404(Act,pk=id)

@@ -115,21 +115,62 @@ class Character(models.Model):
     armor_options_not = []
     shield_options = []
     shield_options_not = []
-    info_str = {}
-    info_con = {}
-    info_bod = {}
-    info_mov = {}
-    info_int = {}
-    info_wil = {}
-    info_tem = {}
-    info_pre = {}
-    info_tec = {}
-    info_ref = {}
-    info_agi = {}
-    info_awa = {}
-    info_lvl = {}
-    info_drk = {}
 
+    @property
+    def info_str(self):
+        return self.get_pa("PA_STR")
+
+    @property
+    def info_con(self):
+        return self.get_pa("PA_CON")
+
+    @property
+    def info_bod(self):
+        return self.get_pa("PA_BOD")
+
+    @property
+    def info_mov(self):
+        return self.get_pa("PA_MOV")
+
+    @property
+    def info_int(self):
+        return self.get_pa("PA_INT")
+
+    @property
+    def info_wil(self):
+        return self.get_pa("PA_WIL")
+
+    @property
+    def info_tem(self):
+        return self.get_pa("PA_TEM")
+
+    @property
+    def info_pre(self):
+        return self.get_pa("PA_PRE")
+
+    @property
+    def info_tec(self):
+        return self.get_pa("PA_TEC")
+
+    @property
+    def info_ref(self):
+        return self.get_pa("PA_REF")
+
+    @property
+    def info_agi(self):
+        return self.get_pa("PA_AGI")
+
+    @property
+    def info_awa(self):
+        return self.get_pa("PA_AWA")
+
+    @property
+    def info_lvl(self):
+        return self.get_pa("OCC_LVL")
+
+    @property
+    def info_drk(self):
+        return self.get_pa("OCC_DRK")
 
     def get_absolute_url(self):
         return reverse('view_character', kwargs={'pk': self.pk})
@@ -176,7 +217,7 @@ class Character(models.Model):
         self.handleWildcards()
         self.add_missing_root_skills()
         self.resetTotal()
-        self.balanced = self.lifepath_total == self.OP
+        self.balanced = (self.lifepath_total == self.OP) and (self.OP > 0)
 
     def prepareDisplay(self):
         self.refresh_skills_options()
@@ -185,7 +226,7 @@ class Character(models.Model):
         self.refresh_options("weapon_options","weapon_options_not", self.charactercusto.weaponcusto_set.all(), "weapon_ref", "WeaponRef")
         self.refresh_options("shield_options","shield_options_not", self.charactercusto.shieldcusto_set.all(), "shield_ref", "ShieldRef")
         self.refresh_options("armor_options","armor_options_not", self.charactercusto.armorcusto_set.all(), "armor_ref", "ArmorRef")
-        self.preparePADisplay()
+        # self.preparePADisplay()
 
     def handleWildcards(self):
         pass
@@ -202,26 +243,26 @@ class Character(models.Model):
             self.add_missing_root_skills()
             self.resetTotal()
 
-    def preparePADisplay(self):
-        self.info_str = self.get_pa("PA_STR")
-        self.info_con = self.get_pa("PA_CON")
-        self.info_bod = self.get_pa("PA_BOD")
-        self.info_mov = self.get_pa("PA_MOV")
-        self.info_int = self.get_pa("PA_INT")
-        self.info_wil = self.get_pa("PA_WIL")
-        self.info_tem = self.get_pa("PA_TEM")
-        self.info_pre = self.get_pa("PA_PRE")
-        self.info_tec = self.get_pa("PA_TEC")
-        self.info_ref = self.get_pa("PA_REF")
-        self.info_agi = self.get_pa("PA_AGI")
-        self.info_awa = self.get_pa("PA_AWA")
-        self.info_lvl = self.get_pa("OCC_LVL")
-        self.info_drk = self.get_pa("OCC_DRK")
+    # def preparePADisplay(self):
+    #     self.info_str = self.get_pa("PA_STR")
+    #     self.info_con = self.get_pa("PA_CON")
+    #     self.info_bod = self.get_pa("PA_BOD")
+    #     self.info_mov = self.get_pa("PA_MOV")
+    #     self.info_int = self.get_pa("PA_INT")
+    #     self.info_wil = self.get_pa("PA_WIL")
+    #     self.info_tem = self.get_pa("PA_TEM")
+    #     self.info_pre = self.get_pa("PA_PRE")
+    #     self.info_tec = self.get_pa("PA_TEC")
+    #     self.info_ref = self.get_pa("PA_REF")
+    #     self.info_agi = self.get_pa("PA_AGI")
+    #     self.info_awa = self.get_pa("PA_AWA")
+    #     self.info_lvl = self.get_pa("OCC_LVL")
+    #     self.info_drk = self.get_pa("OCC_DRK")
 
     def fix(self, conf=None):
         """ Check / calculate other characteristics """
         logger.info('Fixing ........: %s' % (self.full_name))
-        self.preparePADisplay()
+        # self.preparePADisplay()
 
         if not conf:
             if self.birthdate < 1000:

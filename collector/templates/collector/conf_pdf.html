@@ -1,48 +1,54 @@
 {% extends "pdf_doc.html" %}
-{% block article %}
-
 {% load fics_filters %}
-  <h1>{{ epic.title }}</h1>
-  <P>{{ epic.data.era }}</P>
-  <P>{{ epic.data.population }}</P>
-  <h5>Description</h5>
-  <P>{{ epic.data.description|linebreaks|parse_avatars_pdf|safe }}</P> 
-  {% for drama in epic.dramas %}
-    {% if drama.data.to_PDF %}
-    <pdf:nextframe>
-    <h2>{{drama.data.chapter}}. {{ drama.title }}</h2>
-    <P>{{ drama.data.date }}</P>
-    <P>{{ drama.data.place }}</P>
-    <h5>Cast</h5>
-    <P>{{ drama.data.players|linebreaks|parse_avatars_pdf|safe }}</P>
-    <P>{{ drama.data.description|linebreaks|parse_avatars_pdf|safe }}</P>
-    <h5>End of the drama</h5>
-    <P>{{ drama.data.resolution|linebreaks|parse_avatars_pdf|safe }}</P>
-    {% for act in drama.acts %}
-      {% if act.data.to_PDF %}
-      <pdf:nextframe>
-      <h3>{{drama.data.chapter}}-{{act.data.chapter}}. {{ act.title }}</h3>
-      <P>{{ act.data.date }}</P>
-      <P>{{ act.data.place }}</P>
-      <h5>Description</h5>
-      <P>{{ act.data.description|linebreaks|parse_avatars_pdf|safe }}</P>
-      <h5>Resolution</h5>
-      <P>{{ act.data.resolution|linebreaks|parse_avatars_pdf|safe }}</P>
-      {% for event in act.events %}        
-        <h4>{{drama.data.chapter}}-{{act.data.chapter}}-{{event.data.chapter}}. {{ event.title }}</h4>
-        <P>{{ event.data.date }}</P>
-        <P>{{ event.data.place }}</P>
-        <h5>Cast</h5>
-        <P>{{ event.data.friends|linebreaks|parse_avatars_pdf|safe }}</P>
-        <P>{{ event.data.foes|linebreaks|parse_avatars_pdf|safe }}</P>
-        <h5>Description</h5>
-        <P>{{ event.data.description|linebreaks|parse_avatars_pdf|safe }}</P>
-        <h5>Resolution</h5>
-        <P>{{ event.data.resolution|linebreaks|parse_avatars_pdf|safe }}</P>
-      {% endfor %}
-      {% endif %}    
+{% load fics_pdf_filters %}
+{% block article %}
+    <div id="header_content">
+        <img src='collector/static/collector/glyph.png' width='0.5cm'>
+    </div>
+    <div id="footer_content">
+        [{{epic.data.printtime}}] <pdf:pagenumber> / <pdf:pagecount>
+    </div>
+    {%if epic.data.image %}
+    <img src='collector/static/collector/{{epic.data.image}}.png' width='12cm'>
+    {%else%}
+    <h1>{{ epic.title }}</h1>
+    {%endif%}
+    {% include 'collector/pdf/article_info.html' with c=epic%}
+    <!-- h5>Description</h5 -->
+    <P>{{ epic.data.description|linebreaks|parse_avatars_pdf|safe }}</P>
+    <div class='toc'>
+    </div>
+    {% for drama in epic.dramas %}
+        {% if drama.data.to_PDF %}
+        <pdf:nextframe>
+        <h2>Chapter {{drama.data.chapter|as_roman}} - {{ drama.title }}</h2>
+        {% include 'collector/pdf/article_info.html' with c=drama%}
+        <!-- h5>Presentation</h5 -->
+        <P>{{ drama.data.description|linebreaks|parse_avatars_pdf|safe }}</P>
+        <!-- h5>Resolution</h5 -->
+        <P>{{ drama.data.resolution|linebreaks|parse_avatars_pdf|safe }}</P>
+        {% for act in drama.acts %}
+            {% if act.data.to_PDF %}
+            <h3><span class='small'>{{act.data.full_chapter}}&nbsp;</span> {{ act.title }}</h3>
+            {% include 'collector/pdf/article_info.html' with c=act%}
+            <!-- h5>Presentation</h5 -->
+            <P>{{ act.data.description|linebreaks|parse_avatars_pdf|safe }}</P>
+            <!-- h5>Resolution</h5 -->
+            <P>{{ act.data.resolution|linebreaks|parse_avatars_pdf|safe }}</P>
+            {% for event in act.events %}
+                <h4><span class='small'>{{event.data.full_chapter}}&nbsp;</span> {{ event.title }}</h4>
+                {% include 'collector/pdf/article_info.html' with c=event%}
+                <!-- h5>Presentation</h5 -->
+                <P>{{ event.data.description|linebreaks|parse_avatars_pdf|safe }}</P>
+                <!-- h5>Resolution</h5 -->
+                <P>{{ event.data.resolution|linebreaks|parse_avatars_pdf|safe }}</P>
+                {% for ch in event.data.minis %}
+                    {% include 'collector/pdf/mini_roster.html' with c=ch %}
+                {% endfor %}
+            {% endfor %}
+            {% endif %}
+        {% endfor %}
+        {% endif %}
     {% endfor %}
-    {% endif %}
-  {% endfor %}
   <P>{{ epic.data.gamemaster }}</P>
 {% endblock article %}
