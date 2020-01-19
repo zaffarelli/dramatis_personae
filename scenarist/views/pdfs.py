@@ -17,4 +17,3 @@ def build_config_pdf(request):
   state = export_epic(conf)
   messages.info(request, 'Epic %s exported to PDF.'%(conf.epic.title))
   return HttpResponse(status=204)
-  #return JsonResponse(state)

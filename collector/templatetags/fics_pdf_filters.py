@@ -25,7 +25,7 @@ def parse_avatars_pdf(value):
     rid = ''.join(item.group().split(sym))
     ch = Character.objects.filter(rid=rid).first()
     if ch:
-      repstr = '<span class="embedded_link">%s%s</span>'%(ch.full_name,"" if ch.balanced==True else "*")
+      repstr = '<span class="embedded_link">%s%s</span>'%(ch.full_name,"" if ch.balanced==True else "&dagger;")
     else:
       repstr = '<span class="embedded_link broken">[%s was not found]</span>'%(rid)
     changes.append({'src':item.group(),'dst':repstr})

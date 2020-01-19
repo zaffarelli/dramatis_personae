@@ -38,7 +38,8 @@ class Event(StoryModel):
         for c in flat_cast:
             ch = Character.objects.filter(rid=c).first()
             if ch.player == "":
-                list.append(ch)
+                if not ch in list:
+                    list.append(ch)
         return list
 
     def get_absolute_url(self):

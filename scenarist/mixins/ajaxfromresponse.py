@@ -12,8 +12,8 @@ class AjaxFromResponseMixin:
             data = {
             'pk': self.object.pk,
             }
-            from scenarist.views.pdfs import build_config_pdf
-            build_config_pdf(self.request)
+            # from scenarist.views.pdfs import build_config_pdf
+            # build_config_pdf(self.request)
             return JsonResponse(data)
         else:
             return response

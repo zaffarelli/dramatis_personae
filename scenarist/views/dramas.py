@@ -11,6 +11,7 @@ from scenarist.forms.basic import *
 from scenarist.models.dramas import Drama
 from django.shortcuts import get_object_or_404
 from scenarist.mixins.ajaxfromresponse import AjaxFromResponseMixin
+from django.http import HttpResponse
 
 class DramaDetailView(DetailView):
     model = Drama
@@ -34,7 +35,7 @@ def add_drama(request):
             item.save()
             c[item] = item
             return JsonResponse(c)
-    return JsonNotFound
+    return HttpResponse(status=204)
 
 class DramaDeleteView(DeleteView):
   model = Drama

@@ -39,18 +39,16 @@ def pdf_character(request,id=None):
 
 
 def recalc(request):
-  """ Recalc and export to PDF all avatars """  
+  """ Recalc and export to PDF all avatars """
   conf = get_current_config()
   character_items = Character.objects.filter(epic=conf.epic).order_by('-player','full_name')
   x = 1
   messages.warning(request, 'Starting Recalc...')
   for c in character_items:
-    #print('\n>>> %d'%(x))
-    c.pagenum = x     
+    c.pagenum = x
     c.save()
     x += 1
     messages.warning(request, 'Recalc... %s'%(c.full_name))
-  #answer = 'Done'
   messages.info(request, 'Recalc done.')
   return HttpResponse(status=204)
 

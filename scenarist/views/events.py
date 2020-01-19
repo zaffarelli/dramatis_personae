@@ -14,6 +14,7 @@ import datetime
 from scenarist.forms.basic import *
 from scenarist.models.events import Event
 from scenarist.mixins.ajaxfromresponse import AjaxFromResponseMixin
+from django.http import HttpResponse
 
 
 class EventDetailView(DetailView):
@@ -44,4 +45,4 @@ def add_event(request):
       item.act = get_object_or_404(Act,pk=id)
       item.save()
       return JsonResponse(item.toJSON())
-  return JsonNotFound
+  return HttpResponse(status=204)

@@ -1,13 +1,14 @@
 '''
 ╔╦╗╔═╗  ╔═╗┌─┐┌─┐┌┐┌┌─┐┬─┐┬┌─┐┌┬┐
- ║║╠═╝  ╚═╗│  ├┤ │││├─┤├┬┘│└─┐ │ 
-═╩╝╩    ╚═╝└─┘└─┘┘└┘┴ ┴┴└─┴└─┘ ┴ 
+ ║║╠═╝  ╚═╗│  ├┤ │││├─┤├┬┘│└─┐ │
+═╩╝╩    ╚═╝└─┘└─┘┘└┘┴ ┴┴└─┴└─┘ ┴
 '''
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView
 from scenarist.forms.basic import *
 from scenarist.models.epics import Epic
 from scenarist.mixins.ajaxfromresponse import AjaxFromResponseMixin
+
 
 class EpicDetailView(DetailView):
   model = Epic
@@ -20,4 +21,3 @@ class EpicUpdateView(AjaxFromResponseMixin,UpdateView):
   form_class = EpicForm
   context_object_name = 'object'
   template_name_suffix = '_update_form'
-

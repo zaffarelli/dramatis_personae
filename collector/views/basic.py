@@ -29,30 +29,10 @@ from django.http import FileResponse, Http404
 from django.conf import settings
 from django.contrib import messages
 
-# @csrf_exempt
-# def skill_touch(request):
-#   """ Touching skills to edit them in the view """
-#   if request.is_ajax():
-#     answer = 'error'
-#     if request.method == 'POST':
-#       #print(request.POST)
-#       skill_id = request.POST.get('skill')
-#       sid = int(skill_id)
-#       fingerval = request.POST.get('finger')
-#       finger = int(fingerval)
-#       #print('%s %s'%(sid,finger))
-#       skill_item = get_object_or_404(Skill,id=sid)
-#       skill_item.value += int(finger)
-#       skill_item.save()
-#       answer = as_bullets(skill_item.value)
-#     return HttpResponse(answer, content_type='text/html')
-#   return Http404
-
 def pdf_show(request,slug):
   try:
     fname = 'avatar_%s.pdf'%(slug)
     filename = os.path.join(settings.MEDIA_ROOT, 'pdf/results/' + fname)
-    #print(filename)
     return FileResponse(open(filename, 'rb'), content_type='application/pdf')
   except FileNotFoundError:
     raise Http404()

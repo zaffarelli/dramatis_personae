@@ -79,9 +79,10 @@ def check_gm_shortcuts(ch,sk):
   if sk.skill_ref.reference in SHORTCUTS:
     score = sk.value + getattr(ch,SHORTCUTS[sk.skill_ref.reference]['attribute'])
     newshortcut = '<tr><td>%s</td><td colspan=4>%s</td><td>%d</td></tr>'%(SHORTCUTS[sk.skill_ref.reference]['rationale'],SHORTCUTS[sk.skill_ref.reference]['label'],score)
-    return newshortcut
+    pdf_short = {'rationale':SHORTCUTS[sk.skill_ref.reference]['rationale'],'label':SHORTCUTS[sk.skill_ref.reference]['label'],'score':score}
+    return newshortcut, pdf_short
   else:
-    return ''
+    return '',''
 
 
 def check_nameless_attributes(ch):
@@ -351,22 +352,23 @@ def check_skills(ch):
 
 def check_role(ch):
   #print('> %s:'%(ch.full_name))
-  pa_pool = ch.role.primaries
-  sk_pool = ch.role.skills
-  ta_pool = ch.role.talents
-  bc_pool = ch.role.bc
-  ba_pool = ch.role.ba
-  status = True
-  if ch.PA_TOTAL < pa_pool:
-    logger.info('   Not enough PA: %d (%d)'%(ch.PA_TOTAL,pa_pool))
-    status = False
-  elif ch.SK_TOTAL+ch.specie.skill_balance < sk_pool:
-    logger.info('   Not enough SK: %d (%d)'%(ch.SK_TOTAL+ch.specie.skill_balance,sk_pool))
-    status = False
-  if ch.BA_TOTAL + ch.BC_TOTAL + ch.TA_TOTAL < ba_pool+bc_pool+ta_pool:
-    logger.info('   Not enough OP (Talents + Benefice/Afflictions + Blessing/Curses): %d (%d)'%(ch.BA_TOTAL + ch.BC_TOTAL + ch.TA_TOTAL,ba_pool+bc_pool+ta_pool))
-    result = False
-  return status
+  # pa_pool = ch.role.primaries
+  # sk_pool = ch.role.skills
+  # ta_pool = ch.role.talents
+  # bc_pool = ch.role.bc
+  # ba_pool = ch.role.ba
+  # status = True
+  # if ch.PA_TOTAL < pa_pool:
+  #   logger.info('   Not enough PA: %d (%d)'%(ch.PA_TOTAL,pa_pool))
+  #   status = False
+  # elif ch.SK_TOTAL+ch.specie.skill_balance < sk_pool:
+  #   logger.info('   Not enough SK: %d (%d)'%(ch.SK_TOTAL+ch.specie.skill_balance,sk_pool))
+  #   status = False
+  # if ch.BA_TOTAL + ch.BC_TOTAL + ch.TA_TOTAL < ba_pool+bc_pool+ta_pool:
+  #   logger.info('   Not enough OP (Talents + Benefice/Afflictions + Blessing/Curses): %d (%d)'%(ch.BA_TOTAL + ch.BC_TOTAL + ch.TA_TOTAL,ba_pool+bc_pool+ta_pool))
+  #   result = False
+  # return status
+  return True
 
 def update_challenge(ch):
   res = ''

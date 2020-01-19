@@ -41,7 +41,7 @@ def get_list(request,id,slug='none'):
   conf = get_current_config()
   if request.is_ajax:
     if slug=='none':
-      character_items = Character.objects.filter(epic=conf.epic).order_by('full_name')
+      character_items = Character.objects.filter(epic=conf.epic).order_by('balanced','full_name')
     elif slug.startswith('c-'):
       ep_class = slug.split('-')[1].capitalize()
       ep_id = slug.split('-')[2]
@@ -52,7 +52,7 @@ def get_list(request,id,slug='none'):
         character_item = Character.objects.get(rid=rid)
         character_items.append(character_item)
     else:
-      character_items = Character.objects.order_by('full_name').filter(keyword=slug)
+      character_items = Character.objects.order_by('full_name').filter(keyword=slug).order_by('balanced')
     paginator = Paginator(character_items,MAX_CHAR)
     page = id
     character_items = paginator.get_page(page)
@@ -99,45 +99,45 @@ def recalc_character(request, id=None):
   else:
     raise Http404
 
-def recalc_pa_character(request, id=None):
-  if request.is_ajax():
-    item = get_object_or_404(Character,pk=id)
-    item.onsave_reroll_attributes = True
-    item.save()
-    crid = item.rid
-    template = get_template('collector/character_detail.html')
-    character = template.render({'c':item, 'no_skill_edit':True})
-    templatelink = get_template('collector/character_link.html')
-    link = templatelink.render({'c':item},request)
-    context = {
-      'rid': crid,
-      'character': character,
-      'link': link,
-    }
-    messages.info(request, 'Recalculating attributes for %s'%(item.full_name))
-    return JsonResponse(context)
-  else:
-    raise Http404
-
-def recalc_skills_character(request, id=None):
-  if request.is_ajax():
-    item = get_object_or_404(Character,pk=id)
-    item.onsave_reroll_skills = True
-    item.save()
-    crid = item.rid
-    template = get_template('collector/character_detail.html')
-    character = template.render({'c':item, 'no_skill_edit':True})
-    templatelink = get_template('collector/character_link.html')
-    link = templatelink.render({'c':item},request)
-    context = {
-      'rid': crid,
-      'character': character,
-      'link': link,
-    }
-    messages.info(request, 'Recalculating skills for %s'%(item.full_name))
-    return JsonResponse(context)
-  else:
-    raise Http404
+# def recalc_pa_character(request, id=None):
+#   if request.is_ajax():
+#     item = get_object_or_404(Character,pk=id)
+#     item.onsave_reroll_attributes = True
+#     item.save()
+#     crid = item.rid
+#     template = get_template('collector/character_detail.html')
+#     character = template.render({'c':item, 'no_skill_edit':True})
+#     templatelink = get_template('collector/character_link.html')
+#     link = templatelink.render({'c':item},request)
+#     context = {
+#       'rid': crid,
+#       'character': character,
+#       'link': link,
+#     }
+#     messages.info(request, 'Recalculating attributes for %s'%(item.full_name))
+#     return JsonResponse(context)
+#   else:
+#     raise Http404
+#
+# def recalc_skills_character(request, id=None):
+#   if request.is_ajax():
+#     item = get_object_or_404(Character,pk=id)
+#     item.onsave_reroll_skills = True
+#     item.save()
+#     crid = item.rid
+#     template = get_template('collector/character_detail.html')
+#     character = template.render({'c':item, 'no_skill_edit':True})
+#     templatelink = get_template('collector/character_link.html')
+#     link = templatelink.render({'c':item},request)
+#     context = {
+#       'rid': crid,
+#       'character': character,
+#       'link': link,
+#     }
+#     messages.info(request, 'Recalculating skills for %s'%(item.full_name))
+#     return JsonResponse(context)
+#   else:
+#     raise Http404
 
 def view_by_rid(request, slug=None):
   """ Ajax view of a character """

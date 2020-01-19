@@ -50,7 +50,7 @@ class Config(models.Model):
       context_drama = {'title':drama.title, 'data': drama, 'acts': context_acts}
       context_dramas.append(context_drama)
     context = {'title':epic.title, 'data': epic, 'dramas': context_dramas}
-    context['keywords'] = get_keywords()    
+    context['keywords'] = get_keywords()
     return context
 
   def prepare_colorset(self, size = 16):
@@ -106,9 +106,12 @@ class Config(models.Model):
     #print('done')
     return colorset, hcolorset
 
-  def get_chart(self,o,sp,p,ty='bar'):
+  def get_chart(self,o,filter='',pattern='',type='bar'):
     from collector.models.character import Character
-    all = Character.objects.filter(epic=self.epic,is_visible=True).order_by(o)
+    if pattern:
+        all = Character.objects.filter(epic=self.epic,is_visible=True).filter(**{filter:pattern}).order_by(o)
+    else:
+        all = Character.objects.filter(epic=self.epic,is_visible=True).order_by(o)
     inside_labels = []
     inside_datasets = []
     dat = []
@@ -116,25 +119,28 @@ class Config(models.Model):
     border = []
     #idx = 255
     arrfetch = {}
-    search_pattern = sp
+    # search_pattern = o
     for c in all:
-      if p == 'profile.reference':
-        par = c.profile.reference
-        #print(p)
-      elif p == 'role.reference':
-        par = c.role.reference
-      elif p == 'specie.species':
-        par = c.specie.species
-      else:
-        par = c.__dict__[p]
-      value = par
-      if p == 'native_fief' and len(par.split(' / ')) > 1:
-        value = par.split(' / ')[0]
-      if arrfetch.get(value) is None:
-        arrfetch[value] = 1
-      else:
-        arrfetch[value] += 1
+    #   if filter == 'profile.reference':
+    #     par = c.profile.reference
+    #     #print(p)
+    #   elif filter == 'role.reference':
+    #     par = c.role.reference
+    #   elif filter == 'specie.species':
+    #     par = c.specie.species
+    #   else:
+    #     par = c.__dict__[filter]
+    #   value = par
+    #   if p == 'native_fief' and len(par.split(' / ')) > 1:
+    #     value = par.split(' / ')[0]
+       value = c.__dict__[o]
+       if arrfetch.get(value) is None:
+           arrfetch[value] = 1
+       else:
+           arrfetch[value] += 1
     for x in arrfetch:
+
+
       inside_labels.append(x)
       dat.append(arrfetch[x])
       border.append('#C0C0C0C0')
@@ -152,13 +158,13 @@ class Config(models.Model):
       'datasets': inside_datasets
     }
     full_data = {
-      'name':sp,'data': {
-        'type': ty,
+      'name':o,'data': {
+        'type': type,
         'data': data,
         'options': {
           'title': {
             'display': True,
-            'text': search_pattern,
+            'text': o,
             'fontColor':'#fff',
           },
           'legend': {

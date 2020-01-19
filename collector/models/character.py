@@ -80,6 +80,7 @@ class Character(models.Model):
     OP = models.IntegerField(default=0)
     score = models.IntegerField(default=0)
     gm_shortcuts = models.TextField(default='', blank=True)
+    gm_shortcuts_pdf = models.TextField(default='', blank=True)
     age = models.IntegerField(default=0)
     OCC_LVL = models.PositiveIntegerField(default=0)
     OCC_DRK = models.PositiveIntegerField(default=0)
@@ -243,25 +244,9 @@ class Character(models.Model):
             self.add_missing_root_skills()
             self.resetTotal()
 
-    # def preparePADisplay(self):
-    #     self.info_str = self.get_pa("PA_STR")
-    #     self.info_con = self.get_pa("PA_CON")
-    #     self.info_bod = self.get_pa("PA_BOD")
-    #     self.info_mov = self.get_pa("PA_MOV")
-    #     self.info_int = self.get_pa("PA_INT")
-    #     self.info_wil = self.get_pa("PA_WIL")
-    #     self.info_tem = self.get_pa("PA_TEM")
-    #     self.info_pre = self.get_pa("PA_PRE")
-    #     self.info_tec = self.get_pa("PA_TEC")
-    #     self.info_ref = self.get_pa("PA_REF")
-    #     self.info_agi = self.get_pa("PA_AGI")
-    #     self.info_awa = self.get_pa("PA_AWA")
-    #     self.info_lvl = self.get_pa("OCC_LVL")
-    #     self.info_drk = self.get_pa("OCC_DRK")
-
     def fix(self, conf=None):
         """ Check / calculate other characteristics """
-        logger.info('Fixing ........: %s' % (self.full_name))
+        logger.debug('Fixing ........: %s' % (self.full_name))
         # self.preparePADisplay()
 
         if not conf:
@@ -282,17 +267,20 @@ class Character(models.Model):
             self.rebuild_free_form()
         self.calculateShortcuts()
         self.is_exportable = self.check_exportable()
-        logger.info('Done fixing ...: %s' % (self.full_name))
+        logger.debug('Done fixing ...: %s' % (self.full_name))
 
     def calculateShortcuts(self):
         """ Calculate shortcuts for the avatar skills. A shortcut appears if skill.value>0  """
         shortcuts = []
+        shortcuts_pdf = []
         skills = self.skill_set.all()
         for s in skills:
-            sc = fs_fics7.check_gm_shortcuts(self, s)
+            sc, pdf = fs_fics7.check_gm_shortcuts(self, s)
             if sc != '':
                 shortcuts.append(sc)
+                shortcuts_pdf.append("{:s}:{:s} ({:d})".format(pdf['rationale'],pdf['label'],pdf['score']))
         self.gm_shortcuts = ''.join(shortcuts)
+        self.gm_shortcuts_pdf = ', '.join(shortcuts_pdf)
 
 
     def refresh_options(self, options, options_not, custo_set, ref_type, refclass):
