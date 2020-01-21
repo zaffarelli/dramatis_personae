@@ -38,7 +38,7 @@ read -p "Do we need to install NGINX? (y/N) " answer
 if [ "$answer" == "y" ]
 then
   #sudo yum install -y httpd httpd-devel nmap mod_wsgi
-    sudo dnf install epel-release nginx -y
+    sudo yum install epel-release nginx -y
 fi
 echo -e "\e[0;35m...done.\e[0;m"
 echo
