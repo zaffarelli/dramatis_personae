@@ -81,8 +81,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
-STATIC_ROOT = 'dp_static/'
-MEDIA_ROOT = 'dp_media/'
+STATIC_ROOT = os.path.join(BASE_DIR,'dp_static/')
+MEDIA_ROOT = os.path.join(BASE_DIR,'dp_media/')
 
 
 ALLOWED_HOSTS = ['*']

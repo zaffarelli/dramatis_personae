@@ -5,8 +5,6 @@ Django==2.2.7
 django-appconf==1.0.3
 django-compressor==2.3
 django-crispy-forms==1.7.2
-django-debug-panel==0.8.3
-django-debug-toolbar==1.10.1
 django-extra-views==0.12.0
 django-nose==1.4.5
 django-sass==0.2.0
