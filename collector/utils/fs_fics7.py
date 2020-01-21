@@ -235,41 +235,41 @@ def choose_pa(weights,maxi,pa):
   return res
 
 
-def list_attributes(ch,pas):
-  if pas == None:
-    print()
-    print('Attributes for %s'%(ch.rid))
-    row =  'STR%2d CON%2d'%(ch.PA_STR,ch.PA_CON)
-    row += '  INT%2d WIL%2d'%(ch.PA_INT,ch.PA_WIL)
-    row += '  TEC%2d REF%2d'%(ch.PA_TEC,ch.PA_REF)
-    print(row)
-    row =  'BOD%2d MOV%2d'%(ch.PA_BOD,ch.PA_MOV)
-    row += '  TEM%2d PRE%2d'%(ch.PA_TEM,ch.PA_PRE)
-    row += '  AGI%2d AWA%2d'%(ch.PA_AGI,ch.PA_AWA)
-    print(row)
-
-    row  = '>> PHY %2d '%(ch.PA_STR+ch.PA_CON+ch.PA_BOD+ch.PA_MOV)
-    row += ' + MEN %2d'%(ch.PA_INT+ch.PA_WIL+ch.PA_TEM+ch.PA_PRE)
-    row += ' + COM %2d'%(ch.PA_TEC+ch.PA_REF+ch.PA_AGI+ch.PA_AWA)
-    row += ' = TOTAL %2d'%(ch.PA_STR+ch.PA_CON+ch.PA_BOD+ch.PA_MOV+ch.PA_INT+ch.PA_WIL+ch.PA_TEM+ch.PA_PRE+ch.PA_TEC+ch.PA_REF+ch.PA_AGI+ch.PA_AWA)
-    print(row)
-  else:
-    print()
-    print('Attributes for %s'%(ch.rid))
-    row =  'STR%2d CON%2d'%(pas[0],pas[1])
-    row += '  INT%2d WIL%2d'%(pas[4],pas[5])
-    row += '  TEC%2d REF%2d'%(pas[8],pas[9])
-    print(row)
-    row =  'BOD%2d MOV%2d'%(pas[2],pas[3])
-    row += '  TEM%2d PRE%2d'%(pas[6],pas[7])
-    row += '  AGI%2d AWA%2d'%(pas[10],pas[11])
-    print(row)
-
-    row  = '>> PHY %2d '%(pas[0]+pas[1]+pas[2]+pas[3])
-    row += ' + MEN %2d'%(pas[4]+pas[5]+pas[6]+pas[7])
-    row += ' + COM %2d'%(pas[8]+pas[9]+pas[10]+pas[11])
-    row += ' = TOTAL %2d'%(sum(pas))
-    print(row)
+# def list_attributes(ch,pas):
+#   if pas == None:
+#     print()
+#     print('Attributes for %s'%(ch.rid))
+#     row =  'STR%2d CON%2d'%(ch.PA_STR,ch.PA_CON)
+#     row += '  INT%2d WIL%2d'%(ch.PA_INT,ch.PA_WIL)
+#     row += '  TEC%2d REF%2d'%(ch.PA_TEC,ch.PA_REF)
+#     print(row)
+#     row =  'BOD%2d MOV%2d'%(ch.PA_BOD,ch.PA_MOV)
+#     row += '  TEM%2d PRE%2d'%(ch.PA_TEM,ch.PA_PRE)
+#     row += '  AGI%2d AWA%2d'%(ch.PA_AGI,ch.PA_AWA)
+#     print(row)
+#
+#     row  = '>> PHY %2d '%(ch.PA_STR+ch.PA_CON+ch.PA_BOD+ch.PA_MOV)
+#     row += ' + MEN %2d'%(ch.PA_INT+ch.PA_WIL+ch.PA_TEM+ch.PA_PRE)
+#     row += ' + COM %2d'%(ch.PA_TEC+ch.PA_REF+ch.PA_AGI+ch.PA_AWA)
+#     row += ' = TOTAL %2d'%(ch.PA_STR+ch.PA_CON+ch.PA_BOD+ch.PA_MOV+ch.PA_INT+ch.PA_WIL+ch.PA_TEM+ch.PA_PRE+ch.PA_TEC+ch.PA_REF+ch.PA_AGI+ch.PA_AWA)
+#     print(row)
+#   else:
+#     print()
+#     print('Attributes for %s'%(ch.rid))
+#     row =  'STR%2d CON%2d'%(pas[0],pas[1])
+#     row += '  INT%2d WIL%2d'%(pas[4],pas[5])
+#     row += '  TEC%2d REF%2d'%(pas[8],pas[9])
+#     print(row)
+#     row =  'BOD%2d MOV%2d'%(pas[2],pas[3])
+#     row += '  TEM%2d PRE%2d'%(pas[6],pas[7])
+#     row += '  AGI%2d AWA%2d'%(pas[10],pas[11])
+#     print(row)
+#
+#     row  = '>> PHY %2d '%(pas[0]+pas[1]+pas[2]+pas[3])
+#     row += ' + MEN %2d'%(pas[4]+pas[5]+pas[6]+pas[7])
+#     row += ' + COM %2d'%(pas[8]+pas[9]+pas[10]+pas[11])
+#     row += ' = TOTAL %2d'%(sum(pas))
+#     print(row)
 
 def check_primary_attributes(ch):
   """ Fixing primary attributes """

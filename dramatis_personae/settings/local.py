@@ -1,9 +1,14 @@
 '''
  ╔╦╗┬─┐┌─┐┌┬┐┌─┐┌┬┐┬┌─┐  ╔═╗┌─┐┬─┐┌─┐┌─┐┌┐┌┌─┐┌─┐
-  ║║├┬┘├─┤│││├─┤ │ │└─┐  ╠═╝├┤ ├┬┘└─┐│ ││││├─┤├┤ 
+  ║║├┬┘├─┤│││├─┤ │ │└─┐  ╠═╝├┤ ├┬┘└─┐│ ││││├─┤├┤
  ═╩╝┴└─┴ ┴┴ ┴┴ ┴ ┴ ┴└─┘  ╩  └─┘┴└─└─┘└─┘┘└┘┴ ┴└─┘
 '''
-import os
+from .base import *
+
+SECRET_KEY = '6j@b*@a*k0-23vmk4@i%r@_5es5+8uy!23rl2+1^qx491898-b'
+DEBUG = True
+INSTANCE_NAME = 'GALLIARD DEV'
+
 LOGPATH = "dramatis_personae/logs/"
 LOGGING = {
     'version': 1,
@@ -47,6 +52,13 @@ LOGGING = {
         'scenarist': {
             'handlers': ['console', 'logfile'],
             'level': 'DEBUG',
-        },        
+        },
+    }
+}
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }

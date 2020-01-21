@@ -13,11 +13,9 @@ from scenarist.models.epics import Epic
 from collector.models.fics_models import Role, Profile, Specie
 from collector.utils import fs_fics7
 from collector.utils.basic import write_pdf
-#from collector.models.character_custo import CharacterCusto
+
 import logging
-
 logger = logging.getLogger(__name__)
-
 
 class Character(models.Model):
     pagenum = 0

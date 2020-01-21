@@ -11,7 +11,7 @@ read -p "Are you sure you want to continue? (y/N) " answer
 if [ "$answer" != "y" ]
 then
   echo -e "\e[1;31m...cancelled.\e[0;m"
-  exit 1  
+  exit 1
 fi
 echo
 echo -e "\e[0;35mChecking system updates...\e[0;m"
@@ -21,18 +21,18 @@ then
   sudo yum update -y
 fi
 echo -e "\e[0;35m...done.\e[0;m"
-echo 
+echo
 echo -e "\e[0;35mInstalling Python...\e[0;m"
 read -p "Do we need to install Python? (y/N) " answer
 if [ "$answer" == "y" ]
-then  
+then
   yum install -y python3 python3-pip python3-devel gcc-c++ libjpeg libjpeg-devel #zlib1g-devel
 else
   echo -e "\e[1;31m...cancelled.\e[0;m"
-  exit 1    
+  exit 1
 fi
 echo -e "\e[0;35m...done.\e[0;m"
-echo 
+echo
 echo -e "\e[0;35mInstalling Apache...\e[0;m"
 read -p "Do we need to install Apache? (y/N) " answer
 if [ "$answer" == "y" ]
@@ -40,7 +40,7 @@ then
   sudo yum install -y httpd httpd-devel nmap mod_wsgi
 fi
 echo -e "\e[0;35m...done.\e[0;m"
-echo 
+echo
 echo -e "\e[0;35mInstalling Python modules and virtual environment...\e[0;m"
 rm -rf venv/dp
 python3 -m venv /srv/dramatis_personae/venv/dp
@@ -58,6 +58,13 @@ chmod 777 /srv/dramatis_personae/dramatis_personae/logs/dramatis_personae.log
 echo -e "\e[0;34m   --> Log file\e[0;m"
 echo -e "\e[0;35m...done.\e[0;m"
 echo
+
+export DJANGO_SETTINGS_MODULE=dramatis_personae.settings.prod
+
+#uwsgi --module=dramatis_personae.wsgi:application --env=DJANGO_SETTINGS_MODULE=dramatis_personae.settings.prod --master --pidfile=/tmp/project-master.pid --http=0.0.0.0:8088 --uid=1000 --virtualenv=/home/zaffarelli/Projects/github/dramatis_personae/venv/dp
+
+
+
 echo -e "\e[0;35mConfiguring Apache...\e[0;m"
 systemctl stop httpd
 cp /srv/dramatis_personae/scripts/deploy/httpd_dp.conf /etc/httpd/conf.d/
@@ -66,7 +73,7 @@ systemctl enable httpd
 echo -e "\e[0;35m...done.\e[0;m"
 echo
 echo -e "\e[0;35mDatabase setup...\e[0;m"
-python3 manage.py makemigrations 
+python3 manage.py makemigrations
 python3 manage.py migrate
 python3 manage.py collectstatic --no-input --clear
 read -p "Do we use a blank database? (y/N) " answer
