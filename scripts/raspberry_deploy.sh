@@ -38,7 +38,7 @@ read -p "Do we need to install NGINX? (y/N) " answer
 if [ "$answer" == "y" ]
 then
   #sudo yum install -y httpd httpd-devel nmap mod_wsgi
-  sudo yum install -y nginx
+    sudo dnf install epel-release nginx -y
 fi
 echo -e "\e[0;35m...done.\e[0;m"
 echo
@@ -73,7 +73,7 @@ echo -e "\e[0;35mConfiguring NGINX...\e[0;m"
 # systemctl enable httpd
 sudo ln -s /srv/dramatis_personae/config/nginx.conf /etc/nginx/conf.d/dramatis_personae.conf
 uwsgi --ini config/uwsgi.ini
-sudo service nginx restart
+sudo systemctl restart nginx
 echo -e "\e[0;35m...done.\e[0;m"
 echo
 echo -e "\e[0;35mDatabase setup...\e[0;m"
