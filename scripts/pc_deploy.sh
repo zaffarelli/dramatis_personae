@@ -67,10 +67,10 @@ echo
 
 
 echo -e "\e[0;35mConfiguring NGINX...\e[0;m"
-systemctl stop httpd
-cp /srv/dramatis_personae/scripts/deploy/httpd_dp.conf /etc/httpd/conf.d/
-systemctl start httpd
-systemctl enable httpd
+sudo systemctl stop httpd
+sudo cp /srv/dramatis_personae/scripts/deploy/httpd_dp.conf /etc/httpd/conf.d/
+sudo systemctl start httpd
+sudo systemctl enable httpd
 #sudo ln -s /srv/dramatis_personae/config/nginx.conf /etc/nginx/conf.d/dramatis_personae.conf
 #uwsgi --ini config/uwsgi.ini
 sudo systemctl restart nginx
