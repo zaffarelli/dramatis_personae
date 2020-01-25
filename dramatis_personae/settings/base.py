@@ -62,7 +62,7 @@ STATICFILES_FINDERS = [
     'sass_processor.finders.CssFinder',
 ]
 
-LOGPATH = "dramatis_personae/logs/"
+LOGPATH = "/var/log/dramatis_personae/"
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': True,

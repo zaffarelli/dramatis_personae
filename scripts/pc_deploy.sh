@@ -87,6 +87,8 @@ python manage.py collectstatic --no-input --clear
 sudo chown -R apache: /srv/dramatis_personae/dramatis_personae/dp_static/
 sudo chmod -R 755 /srv/dramatis_personae/dramatis_personae/dp_static/
 
+sudo systemctl restart httpd
+
 read -p "Do we use a blank database? (y/N) " answer
 if [ "$answer" == "y" ]
 then
@@ -95,6 +97,7 @@ then
 else
   #scripts/db_load_custom.sh
   #scripts/test.sh
+  echo
 fi
 echo -e "\e[0;35m...done.\e[0;m"
 echo
