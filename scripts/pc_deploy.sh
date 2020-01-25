@@ -33,24 +33,24 @@ else
 fi
 echo -e "\e[0;35m...done.\e[0;m"
 echo
-echo -e "\e[0;35mInstalling NGINX...\e[0;m"
-read -p "Do we need to install NGINX? (y/N) " answer
+echo -e "\e[0;35mInstalling apache...\e[0;m"
+read -p "Do we need to install apache? (y/N) " answer
 if [ "$answer" == "y" ]
 then
-  #sudo yum install -y httpd httpd-devel nmap mod_wsgi
-    sudo yum install epel-release nginx -y
+  sudo yum install -y httpd httpd-devel nmap mod_wsgi
+  #sudo yum install epel-release nginx -y
 fi
 echo -e "\e[0;35m...done.\e[0;m"
 echo
 echo -e "\e[0;35mInstalling Python modules and virtual environment...\e[0;m"
 rm -rf venv/dp
-python3 -m venv /srv/dramatis_personae/venv/dp
+python3 -m venv /srv/dramatis_personae/venv/prod
 echo -e "\e[0;34m   --> Venv created\e[0;m"
-source /srv/dramatis_personae/venv/dp/bin/activate
+source /srv/dramatis_personae/venv/prod/bin/activate
 echo -e "\e[0;34m   --> Venv sourced\e[0;m"
 pip3 install --user --upgrade pip
 echo -e "\e[0;34m   --> Pip upgraded\e[0;m"
-pip3 install --user -r requirements/prod.txt
+pip3 install --user -r requirements/local_prod.txt
 echo -e "\e[0;34m   --> Venv packages installed\e[0;m"
 mkdir /srv/dramatis_personae/dramatis_personae/logs
 echo -e "\e[0;34m   --> Log dir\e[0;m"
