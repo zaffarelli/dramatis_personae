@@ -3,7 +3,7 @@ clear
 echo
 echo -e "\e[0;35m"
 echo -e "║ ╔╦╗╔═╗                              ║"
-echo -e "║  ║║╠═╝  Raspberri PI 3B+ / CentOS 7 ║"
+echo -e "║  ║║╠═╝  PC / Fedora 31              ║"
 echo -e "║ ═╩╝╩    Deployment Script           ║"
 echo -e "\e[0;m"
 echo -e "If you're running this script, it is supposed to be from CentOS 7 system on a Raspberry Pi 3B+ in the /srv/dramatis_personae directory where you have cloned the github repository and checked it out."
@@ -43,7 +43,7 @@ fi
 echo -e "\e[0;35m...done.\e[0;m"
 echo
 echo -e "\e[0;35mInstalling Python modules and virtual environment...\e[0;m"
-rm -rf venv/dp
+rm -rf venv/prod
 python3 -m venv /srv/dramatis_personae/venv/prod
 echo -e "\e[0;34m   --> Venv created\e[0;m"
 source /srv/dramatis_personae/venv/prod/bin/activate
@@ -67,12 +67,12 @@ echo
 
 
 echo -e "\e[0;35mConfiguring NGINX...\e[0;m"
-# systemctl stop httpd
-# cp /srv/dramatis_personae/scripts/deploy/httpd_dp.conf /etc/httpd/conf.d/
-# systemctl start httpd
-# systemctl enable httpd
-sudo ln -s /srv/dramatis_personae/config/nginx.conf /etc/nginx/conf.d/dramatis_personae.conf
-uwsgi --ini config/uwsgi.ini
+systemctl stop httpd
+cp /srv/dramatis_personae/scripts/deploy/httpd_dp.conf /etc/httpd/conf.d/
+systemctl start httpd
+systemctl enable httpd
+#sudo ln -s /srv/dramatis_personae/config/nginx.conf /etc/nginx/conf.d/dramatis_personae.conf
+#uwsgi --ini config/uwsgi.ini
 sudo systemctl restart nginx
 echo -e "\e[0;35m...done.\e[0;m"
 echo
