@@ -49,7 +49,6 @@ echo -e "\e[0;34m   --> Venv created\e[0;m"
 source /srv/dramatis_personae/venv/prod/bin/activate
 echo -e "\e[0;34m   --> Venv sourced\e[0;m"
 pip install --upgrade pip
-pip install --user --upgrade pip
 echo -e "\e[0;34m   --> Pip upgraded\e[0;m"
 pip install -r requirements/local_prod.txt
 echo -e "\e[0;34m   --> Venv packages installed\e[0;m"
