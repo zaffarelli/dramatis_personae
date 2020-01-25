@@ -52,13 +52,16 @@ pip install --upgrade pip
 echo -e "\e[0;34m   --> Pip upgraded\e[0;m"
 pip install -r requirements/local_prod.txt
 echo -e "\e[0;34m   --> Venv packages installed\e[0;m"
-sudo mkdir /srv/dramatis_personae/dramatis_personae/logs
+sudo mkdir /var/log/dramatis_personae/
 echo -e "\e[0;34m   --> Log dir\e[0;m"
-touch /srv/dramatis_personae/dramatis_personae/logs/dramatis_personae.log
-sudo chmod 777 /srv/dramatis_personae/dramatis_personae/logs/dramatis_personae.log
+sudo touch /var/log/dramatis_personae/dramatis_personae.log
+sudo chown -R apache: /var/log/dramatis_personae/dramatis_personae.log
+sudo chmod -R 755 /srv/dramatis_personae/dramatis_personae/logs
 echo -e "\e[0;34m   --> Log file\e[0;m"
 echo -e "\e[0;35m...done.\e[0;m"
 echo
+
+
 
 #export DJANGO_SETTINGS_MODULE=dramatis_personae.settings.prod
 
@@ -80,14 +83,18 @@ echo -e "\e[0;35mDatabase setup...\e[0;m"
 python manage.py makemigrations
 python manage.py migrate
 python manage.py collectstatic --no-input --clear
+
+sudo chown -R apache: /srv/dramatis_personae/dramatis_personae/dp_static/
+sudo chmod -R 755 /srv/dramatis_personae/dramatis_personae/dp_static/
+
 read -p "Do we use a blank database? (y/N) " answer
 if [ "$answer" == "y" ]
 then
   scripts/db_load_initial.sh
   scripts/test.sh
 else
-  scripts/db_load_custom.sh
-  scripts/test.sh
+  #scripts/db_load_custom.sh
+  #scripts/test.sh
 fi
 echo -e "\e[0;35m...done.\e[0;m"
 echo
