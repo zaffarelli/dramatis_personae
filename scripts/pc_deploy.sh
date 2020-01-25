@@ -44,18 +44,18 @@ echo -e "\e[0;35m...done.\e[0;m"
 echo
 echo -e "\e[0;35mInstalling Python modules and virtual environment...\e[0;m"
 rm -rf venv/prod
-python3 -m venv /srv/dramatis_personae/venv/prod
+python -m venv /srv/dramatis_personae/venv/prod
 echo -e "\e[0;34m   --> Venv created\e[0;m"
 source /srv/dramatis_personae/venv/prod/bin/activate
 echo -e "\e[0;34m   --> Venv sourced\e[0;m"
-pip3 install --user --upgrade pip
+pip install --user --upgrade pip
 echo -e "\e[0;34m   --> Pip upgraded\e[0;m"
-pip3 install --user -r requirements/local_prod.txt
+pip install --user -r requirements/local_prod.txt
 echo -e "\e[0;34m   --> Venv packages installed\e[0;m"
-mkdir /srv/dramatis_personae/dramatis_personae/logs
+sudo mkdir /srv/dramatis_personae/dramatis_personae/logs
 echo -e "\e[0;34m   --> Log dir\e[0;m"
 touch /srv/dramatis_personae/dramatis_personae/logs/dramatis_personae.log
-chmod 777 /srv/dramatis_personae/dramatis_personae/logs/dramatis_personae.log
+sudo chmod 777 /srv/dramatis_personae/dramatis_personae/logs/dramatis_personae.log
 echo -e "\e[0;34m   --> Log file\e[0;m"
 echo -e "\e[0;35m...done.\e[0;m"
 echo
@@ -66,20 +66,20 @@ echo
 
 
 
-echo -e "\e[0;35mConfiguring NGINX...\e[0;m"
+echo -e "\e[0;35mConfiguring Apache...\e[0;m"
 sudo systemctl stop httpd
 sudo cp /srv/dramatis_personae/scripts/deploy/httpd_dp.conf /etc/httpd/conf.d/
 sudo systemctl start httpd
 sudo systemctl enable httpd
 #sudo ln -s /srv/dramatis_personae/config/nginx.conf /etc/nginx/conf.d/dramatis_personae.conf
 #uwsgi --ini config/uwsgi.ini
-sudo systemctl restart nginx
+#sudo systemctl restart nginx
 echo -e "\e[0;35m...done.\e[0;m"
 echo
 echo -e "\e[0;35mDatabase setup...\e[0;m"
-python3 manage.py makemigrations
-python3 manage.py migrate
-python3 manage.py collectstatic --no-input --clear
+python manage.py makemigrations
+python manage.py migrate
+python manage.py collectstatic --no-input --clear
 read -p "Do we use a blank database? (y/N) " answer
 if [ "$answer" == "y" ]
 then
