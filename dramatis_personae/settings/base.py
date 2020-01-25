@@ -5,7 +5,8 @@
 '''
 import os
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(os.path.join(__file__,os.pardir))))
+#BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(os.path.join(__file__,os.pardir))))
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 INSTALLED_APPS = [
     'scenarist.apps.ScenaristConfig',

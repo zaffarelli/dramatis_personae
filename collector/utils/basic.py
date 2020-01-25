@@ -40,10 +40,11 @@ def write_pdf(template_src, context_dict={}):
   result = open(filename, 'wb')
   pdf = pisa.pisaDocument(BytesIO(html.encode('utf-8')), result)
   result.close()
- 
+
 def get_current_config():
   from collector.models.config import Config
   item = Config.objects.get(is_active=True)
+  print(item)
   return item
 
 
@@ -91,18 +92,18 @@ def make_epic_corpus(conf):
   es_pdf = open(filename, 'wb')
   pdf = pisa.pisaDocument(BytesIO(html.encode('utf-8')), es_pdf)
   es_pdf.close()
-  merger.append(open(filename, 'rb'))  
+  merger.append(open(filename, 'rb'))
   des = '%scorpus_%s.pdf'%(media_results,conf.epic.shortcut)
   with open(des, 'wb') as fout:
     merger.write(fout)
   return res
-  
+
 def export_epic(conf):
   res = {'epic':conf.epic.title}
   comments = []
   comments += make_avatar_appendix(conf)
   comments += make_epic_corpus(conf)
-  com = '<br/>'.join(comments)  
+  com = '<br/>'.join(comments)
   res['comment'] = '<div class="classyview"><p>'+com+'</p></div>'
   media_results = os.path.join(settings.MEDIA_ROOT, 'pdf/results/')
   merger = PdfFileMerger()
@@ -127,20 +128,20 @@ def extract_rules():
   context['skills'] = skills
 
   melee_weapons = WeaponRef.objects.filter(category='MELEE')
-  context['melee_weapons'] = melee_weapons 
+  context['melee_weapons'] = melee_weapons
   ranged_weapons = WeaponRef.objects.exclude(category='MELEE')
-  context['ranged_weapons'] = ranged_weapons 
+  context['ranged_weapons'] = ranged_weapons
 
 
   racial = TourOfDutyRef.objects.filter(category='0').order_by('-source')
-  context['racial'] = racial 
+  context['racial'] = racial
   castes = ['Nobility', 'Church', 'Guild', 'Alien']
   castes_context = []
   for caste in castes:
     caste_context = {}
     caste_context['name'] = caste
     upbringing = TourOfDutyRef.objects.filter(category='1',caste=caste).order_by('-source')
-    caste_context['upbringing'] = upbringing 
+    caste_context['upbringing'] = upbringing
     apprenticeship = TourOfDutyRef.objects.filter(category='2',caste=caste).order_by('-source')
     caste_context['apprenticeship'] = apprenticeship
     early_career = TourOfDutyRef.objects.filter(category='3',caste=caste).order_by('-source')
@@ -151,7 +152,7 @@ def extract_rules():
   context['tour_of_duty'] = tour_of_duty
   worldly_benefits = TourOfDutyRef.objects.filter(category='5').order_by('-source')
   context['worldly_benefits'] = worldly_benefits
-  
+
   #print(context)
   template = get_template('collector/references.html')
   html = template.render(context)
@@ -160,5 +161,3 @@ def extract_rules():
   es_pdf = open(filename, 'wb')
   pdf = pisa.pisaDocument(BytesIO(html.encode('utf-8')), es_pdf)
   es_pdf.close()
-  
-  

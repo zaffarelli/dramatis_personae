@@ -39,7 +39,7 @@ def get_population_statistics(request, *args, **kwargs):
     messages.add_message(request, messages.INFO, 'Population Statistics updated...')
     return JsonResponse(context)
 
-def get_keywords(request, *args, **kwargs):
+def get_keywords(request, *args, **kwargs):  
   """ Get all the keywords into a chart"""
   conf = get_current_config()
   ch = conf.get_chart('keyword',filter='keyword',type='horizontalBar')
