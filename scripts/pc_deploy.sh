@@ -55,8 +55,8 @@ echo -e "\e[0;34m   --> Venv packages installed\e[0;m"
 sudo mkdir /var/log/dramatis_personae/
 echo -e "\e[0;34m   --> Log dir\e[0;m"
 sudo touch /var/log/dramatis_personae/dramatis_personae.log
-sudo chown -R apache: /var/log/dramatis_personae/dramatis_personae.log
-sudo chmod -R 755 /srv/dramatis_personae/dramatis_personae/logs
+sudo chown -R apache: /var/log/dramatis_personae/
+sudo chmod -R 755 /var/log/dramatis_personae/
 echo -e "\e[0;34m   --> Log file\e[0;m"
 echo -e "\e[0;35m...done.\e[0;m"
 echo
@@ -64,6 +64,7 @@ echo
 
 
 #export DJANGO_SETTINGS_MODULE=dramatis_personae.settings.prod
+#export DJANGO_SETTINGS_MODULE=dramatis_personae.settings.local
 
 #uwsgi --module=dramatis_personae.wsgi:application --env=DJANGO_SETTINGS_MODULE=dramatis_personae.settings.prod --master --pidfile=/tmp/project-master.pid --http=0.0.0.0:8088 --uid=1000 --virtualenv=/home/zaffarelli/Projects/github/dramatis_personae/venv/dp
 
