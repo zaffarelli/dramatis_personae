@@ -18,7 +18,7 @@ echo -e "\e[0;35mChecking system updates...\e[0;m"
 read -p "Do we need to check for system updates? (y/N) " answer
 if [ "$answer" == "y" ]
 then
-  sudo yum update -y
+  sudo dnf update -y
 fi
 echo -e "\e[0;35m...done.\e[0;m"
 echo
@@ -26,7 +26,7 @@ echo -e "\e[0;35mInstalling Python...\e[0;m"
 read -p "Do we need to install Python? (y/N) " answer
 if [ "$answer" == "y" ]
 then
-  yum install -y python3 python3-pip python3-devel gcc-c++ libjpeg libjpeg-devel #zlib1g-devel
+  sudo dnf install -y python3 python3-pip python3-devel gcc-c++ libjpeg libjpeg-devel #zlib1g-devel
 else
   echo -e "\e[1;31m...cancelled.\e[0;m"
   exit 1
@@ -37,7 +37,7 @@ echo -e "\e[0;35mInstalling apache...\e[0;m"
 read -p "Do we need to install apache? (y/N) " answer
 if [ "$answer" == "y" ]
 then
-  sudo yum install -y httpd httpd-devel nmap mod_wsgi
+  sudo dnf install -y httpd httpd-devel nmap mod_wsgi
   #sudo yum install epel-release nginx -y
 fi
 echo -e "\e[0;35m...done.\e[0;m"
