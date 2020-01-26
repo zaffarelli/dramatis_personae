@@ -8,5 +8,5 @@ logs/
 rubish/
 venv/
 collector/static/collector/creds.json
-dp_static/
-dp_media/
+/dp_static/
+/dp_media/
