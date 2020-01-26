@@ -34,9 +34,11 @@ echo -e "\e[0;34m   --> Pip upgraded\e[0;m"
 echo -e "\e[0;34m   --> Venv packages installed\e[0;m"
     sudo mkdir /var/log/dramatis_personae/
 echo -e "\e[0;34m   --> Log dir\e[0;m"
+    sudo systemctl stop httpd
     sudo touch /var/log/dramatis_personae/dramatis_personae.log
     sudo chown -R apache: /var/log/dramatis_personae/
     sudo chmod -R 755 /var/log/dramatis_personae/
+    sudo systemctl start httpd
 echo -e "\e[0;34m   --> Log file\e[0;m"
 echo -e "\e[0;35m...done.\e[0;m"
 echo
@@ -48,12 +50,13 @@ echo -e "\e[0;35mConfiguring Apache...\e[0;m"
 echo -e "\e[0;35m...done.\e[0;m"
 echo
 echo -e "\e[0;35mDatabase setup...\e[0;m"
+    sudo systemctl stop httpd
     python manage.py makemigrations
     python manage.py migrate
     python manage.py collectstatic --no-input --clear
     sudo chown -R apache: /srv/dramatis_personae/dramatis_personae/dp_static/
     sudo chmod -R 755 /srv/dramatis_personae/dramatis_personae/dp_static/
-    sudo systemctl restart httpd
+    sudo systemctl start httpd
 echo -e "\e[0;35mDo we use... \e[0;m"
 echo -e "\e[0;35m a) ...the current database?\e[0;m"
 echo -e "\e[0;35m b) ...a blank database? \e[0;m"
