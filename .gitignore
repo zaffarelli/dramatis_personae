@@ -8,7 +8,4 @@ logs/
 rubish/
 venv/
 collector/static/collector/creds.json
-/dp_static/
-/dp_media/
-dramatis_personae/dp_media/results/
 __init__.pyc

@@ -5,8 +5,8 @@
 '''
 import os
 
-#BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(os.path.join(__file__,os.pardir))))
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(os.path.join(__file__,os.pardir))))
+#BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 INSTALLED_APPS = [
     'scenarist.apps.ScenaristConfig',
@@ -62,7 +62,7 @@ STATICFILES_FINDERS = [
     'sass_processor.finders.CssFinder',
 ]
 
-LOGPATH = "/var/log/dramatis_personae/"
+LOGPATH = os.path.join(BASE_DIR,'logs/')
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': True,
