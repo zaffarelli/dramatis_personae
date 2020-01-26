@@ -6,7 +6,7 @@ echo -e "║ ╔╦╗╔═╗                              ║"
 echo -e "║  ║║╠═╝  PC / Fedora 31              ║"
 echo -e "║ ═╩╝╩    Deployment Script           ║"
 echo -e "\e[0;m"
-echo -e "If you're running this script, it is supposed to be from CentOS 7 system on a Raspberry Pi 3B+ in the /srv/dramatis_personae directory where you have cloned the github repository and checked it out."
+echo -e "If you're running this script, it is supposed to be from Fedora 30+ system on the dev system in the /srv/dramatis_personae directory where you have cloned the github repository and checked it out."
 read -p "Are you sure you want to continue? (y/N) " answer
 if [ "$answer" != "y" ]
 then
@@ -14,93 +14,64 @@ then
   exit 1
 fi
 echo
-echo -e "\e[0;35mChecking system updates...\e[0;m"
-read -p "Do we need to check for system updates? (y/N) " answer
-if [ "$answer" == "y" ]
-then
-  sudo dnf update -y
-fi
+echo -e "\e[0;35mChecking Python...\e[0;m"
+  sudo dnf install -y python3 python3-pip python3-devel gcc-c++ libjpeg libjpeg-devel
 echo -e "\e[0;35m...done.\e[0;m"
 echo
-echo -e "\e[0;35mInstalling Python...\e[0;m"
-read -p "Do we need to install Python? (y/N) " answer
-if [ "$answer" == "y" ]
-then
-  sudo dnf install -y python3 python3-pip python3-devel gcc-c++ libjpeg libjpeg-devel #zlib1g-devel
-else
-  echo -e "\e[1;31m...cancelled.\e[0;m"
-  exit 1
-fi
-echo -e "\e[0;35m...done.\e[0;m"
-echo
-echo -e "\e[0;35mInstalling apache...\e[0;m"
-read -p "Do we need to install apache? (y/N) " answer
-if [ "$answer" == "y" ]
-then
+echo -e "\e[0;35mChecking apache...\e[0;m"
   sudo dnf install -y httpd httpd-devel nmap mod_wsgi
-  #sudo yum install epel-release nginx -y
-fi
 echo -e "\e[0;35m...done.\e[0;m"
 echo
 echo -e "\e[0;35mInstalling Python modules and virtual environment...\e[0;m"
-rm -rf venv/prod
-python -m venv /srv/dramatis_personae/venv/prod
+    rm -rf venv/prod
+    python -m venv /srv/dramatis_personae/venv/prod
 echo -e "\e[0;34m   --> Venv created\e[0;m"
-source /srv/dramatis_personae/venv/prod/bin/activate
+    source /srv/dramatis_personae/venv/prod/bin/activate
 echo -e "\e[0;34m   --> Venv sourced\e[0;m"
-pip install --upgrade pip
+    pip install --upgrade pip
 echo -e "\e[0;34m   --> Pip upgraded\e[0;m"
-pip install -r requirements/local_prod.txt
+    pip install -r requirements/local_prod.txt
 echo -e "\e[0;34m   --> Venv packages installed\e[0;m"
-sudo mkdir /var/log/dramatis_personae/
+    sudo mkdir /var/log/dramatis_personae/
 echo -e "\e[0;34m   --> Log dir\e[0;m"
-sudo touch /var/log/dramatis_personae/dramatis_personae.log
-sudo chown -R apache: /var/log/dramatis_personae/
-sudo chmod -R 755 /var/log/dramatis_personae/
+    sudo touch /var/log/dramatis_personae/dramatis_personae.log
+    sudo chown -R apache: /var/log/dramatis_personae/
+    sudo chmod -R 755 /var/log/dramatis_personae/
 echo -e "\e[0;34m   --> Log file\e[0;m"
 echo -e "\e[0;35m...done.\e[0;m"
 echo
-
-
-
-#export DJANGO_SETTINGS_MODULE=dramatis_personae.settings.prod
-#export DJANGO_SETTINGS_MODULE=dramatis_personae.settings.local
-
-#uwsgi --module=dramatis_personae.wsgi:application --env=DJANGO_SETTINGS_MODULE=dramatis_personae.settings.prod --master --pidfile=/tmp/project-master.pid --http=0.0.0.0:8088 --uid=1000 --virtualenv=/home/zaffarelli/Projects/github/dramatis_personae/venv/dp
-
-
-
 echo -e "\e[0;35mConfiguring Apache...\e[0;m"
-sudo systemctl stop httpd
-sudo cp /srv/dramatis_personae/scripts/deploy/httpd_dp.conf /etc/httpd/conf.d/
-sudo systemctl start httpd
-sudo systemctl enable httpd
-#sudo ln -s /srv/dramatis_personae/config/nginx.conf /etc/nginx/conf.d/dramatis_personae.conf
-#uwsgi --ini config/uwsgi.ini
-#sudo systemctl restart nginx
+    sudo systemctl stop httpd
+    sudo cp /srv/dramatis_personae/scripts/deploy/httpd_dp.conf /etc/httpd/conf.d/
+    sudo systemctl start httpd
+    sudo systemctl enable httpd
 echo -e "\e[0;35m...done.\e[0;m"
 echo
 echo -e "\e[0;35mDatabase setup...\e[0;m"
-python manage.py makemigrations
-python manage.py migrate
-python manage.py collectstatic --no-input --clear
-
-sudo chown -R apache: /srv/dramatis_personae/dramatis_personae/dp_static/
-sudo chmod -R 755 /srv/dramatis_personae/dramatis_personae/dp_static/
-
-sudo systemctl restart httpd
-
-read -p "Do we use a blank database? (y/N) " answer
-if [ "$answer" == "y" ]
+    python manage.py makemigrations
+    python manage.py migrate
+    python manage.py collectstatic --no-input --clear
+    sudo chown -R apache: /srv/dramatis_personae/dramatis_personae/dp_static/
+    sudo chmod -R 755 /srv/dramatis_personae/dramatis_personae/dp_static/
+    sudo systemctl restart httpd
+echo -e "\e[0;35mDo we use... \e[0;m"
+echo -e "\e[0;35m a) ...the current database?\e[0;m"
+echo -e "\e[0;35m b) ...a blank database? \e[0;m"
+echo -e "\e[0;35m c) ...a rebuilt database? \e[0;m"
+read -p "...? (A/b/c) " answer
+if [ "$answer" == "b" ]
 then
-  scripts/db_load_initial.sh
-  scripts/test.sh
+    scripts/db_load_initial.sh
+    scripts/test.sh
 else
-  #scripts/db_load_custom.sh
-  #scripts/test.sh
-  echo
+    if [ "$answer" == "c" ]
+    then
+        scripts/db_load_custom.sh
+        scripts/test.sh
+    else
+      echo -e "\e[0;35mUsing db in its current state.\e[0;m"
+    fi
 fi
 echo -e "\e[0;35m...done.\e[0;m"
 echo
-
-echo -e "\e[0;35m* * * * *.\e[0;m"
+echo -e "\e[0;35m* * * * * OK!!! .\e[0;m"
