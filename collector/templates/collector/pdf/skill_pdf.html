@@ -1,0 +1,8 @@
+
+{% load fics_filters %}
+
+<p>
+    {%if c.is_speciality %}&nbsp;-&nbsp;{%endif%}
+    <em>{{ c.reference }}</em>
+    <tt>[{%if c.is_root %}R{%endif%}{%if c.is_speciality %}S{%endif%}{% if c.is_common %}C{% endif %}{% if c.is_wildcard %}W{% endif %}({{ c.group }}) #{{c.id}}]</tt>
+</p>

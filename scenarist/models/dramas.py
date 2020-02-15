@@ -65,6 +65,8 @@ class Drama(StoryModel):
         episodes = Act.objects.filter(drama=self)
         return episodes
 
+
+
 class DramaAdmin(admin.ModelAdmin):
   ordering = ('epic','chapter','date','title',)
   list_display = ('title','epic')

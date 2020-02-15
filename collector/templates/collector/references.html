@@ -3,10 +3,13 @@
 {%load static%}
 
 {% block article %}
+    <div id="header_content">
+        <img src='collector/static/collector/glyph.png' width='0.5cm'>
+    </div>
+    <div id="footer_content">
+        <pdf:pagenumber> / <pdf:pagecount>
+    </div>
 
-<div id="header_content">
-    <img src='{% static "glyph.png" %}' width='0.5cm'>
-</div>
 
 <h2>Dramatis Personae References</h2>
 <p>Release Date: <em>{{ date }}</em></p>
@@ -14,25 +17,39 @@
 
 <h3>Skills</h3>
 {% if skills.count  %}
-{% for s in skills %}
-{% include "collector/skill_pdf.html" with c=s %}
-{% endfor %}
+    {% for s in skills %}
+    {% include "collector/pdf/skill_pdf.html" with c=s %}
+    {% endfor %}
 {% endif %}
 
+
+<h3>Benefices/Afflictions</h3>
+{% if benefice_afflictions.count  %}
+    {% for ba in benefice_afflictions %}
+        {% include "collector/pdf/benefice_affliction_pdf.html" with c=ba %}
+    {% endfor %}
+{% endif %}
+
+<h3>Blessings/Curses</h3>
+{% if blessing_curses.count  %}
+    {% for bc in blessing_curses %}
+        {% include "collector/pdf/blessing_curse_pdf.html" with c=bc %}
+    {% endfor %}
+{% endif %}
 
 <h3>Weapons</h3>
 <h4>Melee Weapons</h4>
 {% if melee_weapons.count  %}
-{% for w in melee_weapons %}
-{% include "collector/weapon_pdf.html" with c=w %}
-{% endfor %}
+    {% for w in melee_weapons %}
+        {% include "collector/weapon_pdf.html" with c=w %}
+    {% endfor %}
 {% endif %}
 
 <h4>Ranged Weapons</h4>
 {% if ranged_weapons.count  %}
-{% for w in ranged_weapons %}
-{% include "collector/weapon_pdf.html" with c=w %}
-{% endfor %}
+    {% for w in ranged_weapons %}
+        {% include "collector/weapon_pdf.html" with c=w %}
+    {% endfor %}
 {% endif %}
 
 
@@ -46,21 +63,21 @@
 
 {% for caste in castes %}
 <h4>{{ caste.name }}</h4>
-<h5>Upbringing</h5>
+<h6>Upbringing</h6>
 {% if caste.upbringing.count  %}
 {% for tod in caste.upbringing %}
 {% include "collector/tod_pdf.html" with c=tod %}
 {% endfor %}
 {% endif %}
 
-<h5>Apprenticeship</h5>
+<h6>Apprenticeship</h6>
 {% if caste.apprenticeship.count  %}
 {% for tod in caste.apprenticeship %}
 {% include "collector/tod_pdf.html" with c=tod %}
 {% endfor %}
 {% endif %}
 
-<h5>Early Career</h5>
+<h6>Early Career</h6>
 {% if caste.early_career.count  %}
 {% for tod in caste.early_career %}
 {% include "collector/tod_pdf.html" with c=tod %}

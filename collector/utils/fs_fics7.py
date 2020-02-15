@@ -202,6 +202,22 @@ def minmax_from_dc(sdc):
   dmax = dmin*int(split_scope[1])+dbonus
   return (dmin,dmax)
 
+def roll_dc(sdc):
+  if sdc == '':
+    return 0
+  s = sdc.lower()
+  total,dbonus = 0,0
+  split_bonus = s.split('+')
+  split_scope = split_bonus[0].split('d')
+  if split_bonus.count == 2:
+    dbonus = int(split_bonus[1])
+  d = 0
+  while d < int(split_scope[0]):
+      total += roll(int(split_scope[1]))
+      d += 1
+  total += dbonus
+  return total
+
 def roll(maxi):
   """ A more random '1 to maxi' dice roller  """
   randbyte = int.from_bytes(os.urandom(1),byteorder='big',signed=False)

@@ -12,7 +12,7 @@
         </p>
     </div>
 </div>
-<div class='storyarticle' id='act_{{c.data.id}}'></div>
-{% for event in c.events %}
-    {% include "collector/config/event_detail.html" with c=event %}
-{% endfor %}
+    <div class='storyarticle act' id='act_{{c.data.id}}'></div>
+    {% for event in c.events %}
+        {% include "collector/config/event_detail.html" with c=event %}
+    {% endfor %}

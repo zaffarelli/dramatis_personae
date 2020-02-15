@@ -1,0 +1,13 @@
+
+
+<div class='classyview duel'>
+Date: {{duel_data.pub_date}}
+
+{% for r in duel_data.rounds %}
+<h2>Round #{{r.number}}</h2>
+<br/>
+    <div class='round_data attacker'>{% include "optimizer/character_round_data.html" with c=r.attacker %}</div>
+<br/>
+    <div class='round_data defender'>{% include "optimizer/character_round_data.html" with c=r.defender %}</div>
+{% endfor %}
+</div>

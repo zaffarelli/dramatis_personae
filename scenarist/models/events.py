@@ -28,19 +28,6 @@ class Event(StoryModel):
         casting.append(self.fetch_avatars(self.resolution))
         return casting
 
-    @property
-    def minis(self):
-        from collector.models.character import Character
-        casting = self.get_casting()
-        flat_cast = [c for subcast in casting for c in subcast]
-        #print(flat_cast)
-        list = []
-        for c in flat_cast:
-            ch = Character.objects.filter(rid=c).first()
-            if ch.player == "":
-                if not ch in list:
-                    list.append(ch)
-        return list
 
     def get_absolute_url(self):
         return reverse('event-detail', kwargs={'pk': self.pk})

@@ -9,6 +9,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(os.path.join(__file__
 #BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 INSTALLED_APPS = [
+    'optimizer.apps.OptimizerConfig',
     'scenarist.apps.ScenaristConfig',
     'collector.apps.CollectorConfig',
     'django.contrib.admin',
@@ -108,7 +109,6 @@ LOGGING = {
         },
     }
 }
-
 
 AUTH_PASSWORD_VALIDATORS = [{
     'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',

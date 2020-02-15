@@ -1,11 +1,18 @@
 {% load fics_filters %}
 <table  class='details'>
-  <tr><th>Title</th><td><strong>{{object.title}}</strong></td></tr>
-  <tr><th>Drama</th><td><em>{{object.drama.title}}</em></td></tr>
-  <tr><th>Date</th><td>{{object.date}}</td></tr>
-  <tr><th>PDF</th><td>{{object.to_PDF}}</td></tr>
-  <tr><th>Place</th><td>{{object.place}}</td></tr>
-  <tr><th>Description</th><td>{{object.description|parse_avatars|safe}}</td></tr>
-  <tr><th>Resolution</th><td>{{object.resolution|parse_avatars|safe}}</td></tr>
-</table>
+  <tr>
+      <th>Title</th><th><strong>{{object.title}}</strong></th>
+      <th rowspan=3>Description</th><td class='desc' rowspan=3>{{object.description|parse_avatars|safe}}</td>
+  </tr>
+  <tr>
+      <th>Drama</th><th><em>{{object.drama.title}}</em></th>
+  </tr>
+  <tr><th>Date</th><th>{{object.date}}</th></tr>
+  <tr>
+      <th>PDF</th><th>{{object.to_PDF}}</th>
+      <th rowspan=2>Resolution</th><td class='desc' rowspan=2>{{object.resolution|parse_avatars|safe}}</td>
+  </tr>
+  <tr><th>Place</th><th>{{object.place}}</th></tr>
 
+
+</table>

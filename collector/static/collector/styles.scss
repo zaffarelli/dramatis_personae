@@ -114,6 +114,11 @@ input[type=text], input[type=number], input[type=checkbox], select, textarea {
 }
 
 @font-face {
+    font-family: 'TextDesc';
+    src: url('fonts/WorkSans-Light.ttf');
+}
+
+@font-face {
     font-family: 'NomPersoListe';
     src: url('fonts/Cinzel-Regular.ttf');
 }
@@ -629,8 +634,7 @@ body {
                         &.big {
                             font-weight: bold;
                             font-size: 1.2em;
-                            color: $fics_golden;
-                            background: $fics_darkest;
+                            /*color: $fics_golden;*//*background: $fics_darkest;*/
                         }
                     }
 
@@ -692,17 +696,167 @@ body {
                         padding: 0;
                         margin: 0;
                         border-bottom: 1px solid transparent;
-                        width: 700px;
+                        width: 25%;
                         font-family: NomPersoListe;
                     }
 
                     &.noPDF {
-                        background: #125;
+                        background: $fics_darker;
+
+                        & .chapter, & h4, & h3 {
+                            color: $fics_golden;
+                        }
                     }
 
                     &.golden {
                         color: $fics_golden;
                         /*background: $fics_darkest;*/
+                    }
+                }
+
+                .storyarticle {
+                    background: transparent;
+                    padding: 0;
+                    margin: auto;
+                    color: white;
+                    width: 100%;
+
+                    & table {
+                        /*background: yellow;*/
+                        border: 1px solid gray;
+                        border-radius: 5px;
+
+                        & tr {
+                            & th {
+                                width: 150px;
+                                padding: 2px;
+                                background: black;
+                                color: white;
+                                border: 1px solid silver;
+                            }
+
+                            & td {
+                                padding: 2px;
+                                background: silver;
+                                color: black;
+                                border: 1px solid silver;
+
+                                & .embedded_link {
+                                    color: $fics_golden;
+                                    /*text-decoration: underline;*/
+                                    cursor: pointer;
+
+                                    &.broken {
+                                        background: red;
+                                    }
+                                }
+
+                                & p {
+                                    margin: 0;
+                                    padding: 0;
+                                }
+                            }
+                        }
+
+                        &.details {
+                            width: 100%;
+                            border: none;
+
+                            & tr {
+                                & th {
+                                    width: 15%;
+                                    background: $fics_darkest;
+                                    color: $fics_light;
+                                    border: none;
+                                    border-radius: 5px;
+                                }
+
+                                & td {
+                                    width: auto;
+                                    background: $fics_dark;
+                                    color: $fics_front;
+                                    border: none;
+                                    font-size: 10pt;
+                                    font-family: TextDesc;
+                                    border-radius: 5px;
+
+                                    &.desc {
+                                        line-height: 2em;
+                                    }
+                                }
+                            }
+
+                            & em {
+                                color: #f0d070;
+                                font-weight: bold;
+                                font-style: normal;
+                            }
+
+                            & .embedded_link {
+                                color: #c0c0c0;
+                                font-weight: 600;
+                                border-bottom: 1px ridge #808080;
+                            }
+
+                            & strong {
+                                color: #c0c0c0;
+                                font-weight: 600;
+                                font-style: normal;
+                                border-top: 1px groove #808080;
+                            }
+                        }
+
+                        &.update {
+                            background: $fics_dark;
+                            width: 50%;
+                            border: none;
+
+                            & input, & textarea {
+                                width: 90%;
+                                background: silver;
+                            }
+
+                            & tr {
+                                & th {
+                                    width: 15%;
+                                    background: $fics_darkest;
+                                    color: $fics_light;
+                                    border: none;
+                                    border-radius: 5px;
+                                }
+
+                                & td {
+                                    width: auto;
+                                    background: $fics_darker;
+                                    color: $fics_front;
+                                    border: none;
+                                    border-radius: 5px;
+                                }
+                            }
+
+                            & input[type=text], & input[type=number],
+                            & input[type=checkbox], & select, & textarea {
+                                background-color: $fics_dark;
+                                color: $fics_front;
+                                border-radius: 2px;
+                                padding: 2px;
+                                border: 2px ridge $fics_hl;
+                                box-shadow: -2px -2px 5px $fics_darker;
+                            }
+                        }
+                    }
+
+                    & button {
+                        font-family: 'monospace';
+                        font-size: 8px;
+                        width: 16ex;
+                        padding: 0;
+                        margin: 2px;
+                        cursor: pointer;
+                    }
+
+                    .custom_glance {
+                        cursor: help;
                     }
                 }
 
@@ -901,120 +1055,6 @@ body {
     .embedded_link {
         color: $fics_golden;
         text-decoration: none;
-    }
-
-    .storyarticle {
-        background: transparent;
-        padding: 0;
-        margin: auto;
-        color: white;
-        width: 100%;
-
-        & table {
-            background: yellow;
-            border: 1px solid gray;
-            border-radius: 5px;
-
-            & tr {
-                & th {
-                    width: 300px;
-                    padding: 2px;
-                    background: black;
-                    color: white;
-                    border: 1px solid silver;
-                }
-
-                & td {
-                    padding: 2px;
-                    background: silver;
-                    color: black;
-                    border: 1px solid silver;
-
-                    & .embedded_link {
-                        color: $fics_golden;
-                        text-decuration: underline;
-                        cursor: pointer;
-
-                        &.broken {
-                            background: red;
-                        }
-                    }
-
-                    & p {
-                        margin: 0;
-                        padding: 0;
-                    }
-                }
-            }
-
-            &.details {
-                width: 100%;
-                border: none;
-
-                & tr {
-                    & th {
-                        width: 15%;
-                        background: $fics_darkest;
-                        color: $fics_light;
-                        border: none;
-                        border-radius: 5px;
-                    }
-
-                    & td {
-                        width: auto;
-                        background: $fics_dark;
-                        color: $fics_front;
-                        border: none;
-                        font-size: 10pt;
-                        font-family: Texte;
-                        line-height: 1.2em;
-                        border-radius: 5px;
-                    }
-                }
-            }
-
-            &.update {
-                background: $fics_dark;
-                width: 100%;
-                border: none;
-
-                & input, & textarea {
-                    width: 90%;
-                    background: silver;
-                }
-
-                & tr {
-                    & th {
-                        width: 15%;
-                        background: $fics_darkest;
-                        color: $fics_light;
-                        border: none;
-                        border-radius: 5px;
-                    }
-
-                    & td {
-                        width: auto;
-                        background: $fics_darker;
-                        color: $fics_front;
-                        border: none;
-                        border-radius: 5px;
-                    }
-                }
-            }
-        }
-
-        & button {
-            font-family: 'monospace';
-            font-size: 8px;
-            width: 16ex;
-            padding: 0;
-            margin: 2px;
-            cursor: pointer;
-        }
-
-        .custom_glance {
-            cursor: help;
-        }
     }
 
     & .epic {
@@ -1305,4 +1345,26 @@ body {
 
 .selected {
     background-color: $fics_light;
+}
+
+.duel {
+    & .round_data {
+        background: blue;
+        display: block;
+        margin: auto;
+        width: 600px;
+        border: 1px solid black;
+        padding: 3px;
+        color: black;
+
+        &.attacker {
+            background: orange;
+            margin-left: 0;
+        }
+
+        &.defender {
+            background: green;
+            margin-right: 0;
+        }
+    }
 }

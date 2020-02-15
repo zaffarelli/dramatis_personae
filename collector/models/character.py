@@ -114,6 +114,7 @@ class Character(models.Model):
     armor_options_not = []
     shield_options = []
     shield_options_not = []
+    round_data = {}
 
     @property
     def info_str(self):
@@ -278,6 +279,7 @@ class Character(models.Model):
                 shortcuts.append(sc)
                 shortcuts_pdf.append("{:s}:{:s} ({:d})".format(pdf['rationale'],pdf['label'],pdf['score']))
         self.gm_shortcuts = ''.join(shortcuts)
+        #print(shortcuts_pdf)
         self.gm_shortcuts_pdf = ', '.join(shortcuts_pdf)
 
 
@@ -312,7 +314,7 @@ class Character(models.Model):
         sr = []
         for x in ss:
             sr.append(x.skill_ref)
-        all = SkillRef.objects.all().exclude(is_root=True)
+        all = SkillRef.objects.all().exclude(is_root=True).order_by('is_speciality','is_wildcard','reference')
         for s in all:
             if s in sr:
                 self.skills_options_not.append(s)
@@ -594,17 +596,69 @@ class Character(models.Model):
         else:
             return True
 
-    # Save overrride to create custo
-    # def save(self, force_insert=False, force_update=False):
-    #     from collector.models.character_custo import CharacterCusto
-    #     is_new = self.id is None
-    #     super(Character, self).save(force_insert, force_update)
-    #     if is_new:
-    #         self.custo = CharacterCusto.objects.create(character=self)
-    #     else:
-    #         found_custo = CharacterCusto.objects.filter(character=self).first()
-    #         if found_custo is None:
-    #             self.custo = CharacterCusto.objects.create(character=self)
+    # OPTIMIZER COMBAT METHODS -------------------------------------------------
+
+    hit_points = 0
+
+    @property
+    def d12(self):
+        return fs_fics7.roll(12)
+
+
+
+    def choose_attack(self):
+        self.round_data = {}
+        self.round_data['name'] = self.full_name
+        self.round_data['rid'] = self.rid
+        self.round_data['id'] = self.id
+        self.round_data['Number_of_attacks'] = 1
+        w = self.weapon_set.first()
+        self.round_data['Weapon'] = {'id':w.id,'name':w.weapon_ref.reference,'DC':w.weapon_ref.damage_class}
+        a = self.armor_set.first()
+        self.round_data['Armor'] = {'id':a.id,'name':a.armor_ref.reference,'SP':a.armor_ref.stopping_power}
+        self.round_data['Attribute'] = {'name':'PA_REF','score':self.PA_REF}
+        self.round_data['Defense_Attribute'] = {'name':'PA_AGI','score':self.PA_AGI}
+        sk = self.skill_set.all().filter(skill_ref__reference='Melee').first()
+        self.round_data['Skill'] = {'name':sk.skill_ref.reference,'score':sk.value}
+        sk = self.skill_set.all().filter(skill_ref__reference='Dodge').first()
+        if (sk==None):
+            self.round_data['Dodge'] = {'name':'Dodge','score':0}
+        else:
+            self.round_data['Dodge'] = {'name':sk.skill_ref.reference,'score':sk.value}
+
+        return self.round_data
+
+    def initiative_roll(self):
+        if self.round_data['Number_of_attacks'] == 1:
+            self.round_data['Initiative'] = self.round_data['Skill']['score']+self.d12
+        return self.round_data
+
+    def roll_attack(self,target):
+        self.round_data['attack_roll'] = self.round_data['Attribute']['score']+self.round_data['Skill']['score']+self.d12
+        self.round_data['defender_dodge_roll'] = target.round_data['Defense_Attribute']['score']+target.round_data['Dodge']['score']+self.d12
+        if self.round_data['attack_roll']>self.round_data['defender_dodge_roll']:
+            self.round_data['text'] = "HIT!!!"
+            self.round_data['damage'] = fs_fics7.roll_dc(self.round_data['Weapon']['DC'])
+        else:
+            self.round_data['text'] = "Missed..."
+            self.round_data['damage'] = 0
+        return self.round_data
+
+    def absorb_punishment(self,damage):
+        true_damage = 0
+        if damage>0:
+            true_damage = damage - self.SA_STA - self.round_data['Armor']['SP']
+        if true_damage < 0:
+            true_damage = 1
+        self.hit_points -= true_damage
+        return self.round_data
+
+    def check_death(self):
+        return self.hit_points<0
+
+
+
+    # -------------------------------------------------------------------------
 
 @receiver(pre_save, sender=Character, dispatch_uid='update_character')
 def update_character(sender, instance, conf=None, **kwargs):

@@ -1,5 +1,6 @@
 {% extends "pdf.html" %}
 {%load fics_filters%}
+{%load fics_pdf_filters%}
 {%load static%}
 {% block article %}
 <div id="header_content">
@@ -15,8 +16,6 @@ Born in {{ c.birthdate }} ({{ c.age }} years old)
 
 
 {% include "collector/character/character_tod.html" %}
-
-
 
 <h5>Primary Attributes</h5>
 <table class='stats' width='100%'>
@@ -115,9 +114,8 @@ Born in {{ c.birthdate }} ({{ c.age }} years old)
 <p><u>{{ t.name|safe }}</u> ({{t.AP}}x3+{{t.OP}}={{ t.value }}): {{t.attributes_list}} {{t.skills_list}}{{ t.description|safe }}{% if forloop.last %}{% else %}{% endif %}</p>
 {% endfor %}
 {%endif%}
-<h5>Gear</h5>
 {% if c.weapon_set.count != 0 %}
-<h6>Weapons</h6>
+<h5>Weapons</h5>
 <p>{% for w in c.weapon_set.all|dictsort:"weapon_ref.reference" %}
 {{ w.weapon_ref.stats|safe }}
 {% if forloop.last %}</p>{% else %}<br/>{% endif %}
@@ -125,7 +123,7 @@ Born in {{ c.birthdate }} ({{ c.age }} years old)
 {%endif%}
 
 {% if c.armor_set.count != 0 %}
-<h6>Armor</h6>
+<h5>Armor</h5>
 <table class='stats' width='100%'>
 {% for a in c.armor_set.all|dictsort:"armor_ref.stopping_power" %}
 <tr><td width='30%'><u>{{ a.armor_ref.reference|safe }}</u> </td><td width='20%'> {{a.armor_ref.category}} </td><td width='10%'> SP:{{ a.armor_ref.stopping_power }} </td><td width='40%'> {% if a.armor_ref.head %}(HE){%endif%}{% if a.armor_ref.torso %}(TO){%endif%}{%if a.armor_ref.left_arm %}(LA){%endif%}{% if a.armor_ref.right_arm %}(RA){%endif%}{% if a.armor_ref.left_leg %}(LL){%endif%}{% if a.armor_ref.right_leg %}(RL){%endif%}
@@ -134,7 +132,7 @@ Born in {{ c.birthdate }} ({{ c.age }} years old)
 </table>
 {%endif%}
 {% if c.shield_set.count != 0 %}
-<h6>Energy Shield</h6>
+<h5>Energy Shield</h5>
 <table class='stats' width='100%'>
 {% for s in c.shield_set.all|dictsort:"shield_ref.reference" %}
 <tr><td width='20%'><u>{{ s.shield_ref.reference|safe }}</u> </td><td width='15%'> {{s.shield_ref.protection_min}}/{{ s.shield_ref.protection_max }} </td><td width='15%'> Hits:{{s.shield_ref.hits}} </td><td width='50%'> usage:(Soft {% if s.shield_ref.is_compatible_with_medium_armor %}Medium {%else%}- {%endif%}{% if s.shield_ref.is_compatible_with_hard_armor %}Hard {%else%}- {%endif%})
@@ -142,10 +140,14 @@ Born in {{ c.birthdate }} ({{ c.age }} years old)
 {% endfor %}
 </table>
 {%endif%}
+
+
+
+
 <h5>Shortcuts</h5>
-{{ c.gm_shortcuts|safe }}
+<p>{{ c.gm_shortcuts_pdf|safe }}</p>
 <h5>Narrative</h5>
-<p>{{ c.narrative|linebreaks|safe }}</p>
+<p>{{ c.narrative|parse_avatars_pdf|safe }}</p>
 <hr>
 <em>Generated with <b>Dramatis Personae</b></em>
 

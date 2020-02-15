@@ -105,7 +105,7 @@ def parse_avatars(value):
     rid = ''.join(item.group().split('¤'))
     ch = Character.objects.filter(rid=rid).first()
     if not ch is None:
-      repstr = '<span id="%s" class="embedded_link" title="%s">%s%s</span>'%(ch.rid, ch.entrance, ch.full_name,"" if ch.balanced==True else "&dagger;")
+      repstr = '<span id="%d" class="character_link embedded_link" title="%s">%s%s</span>'%(ch.id, ch.entrance, ch.full_name,"" if ch.balanced==True else "*")
     else:
       repstr = '<span class="embedded_link broken">[%s was not found]</span>'%(rid)
     changes.append({'src':item.group(),'dst':repstr})
@@ -114,7 +114,8 @@ def parse_avatars(value):
     newres = newres.replace(change['src'],change['dst'])
 
   sym = 'µ'
-  search =  "[A-Za-z\s\.\'\;]+"
+  #search =  "[A-Za-z\s\.\'\;]+"
+  search = "[A-Za-z0-9\é\è\ô\ö\à\s\.\'\;\-\(\)\&\:\,]+"
   myregex = "\%s%s\%s"%(sym,search,sym)
   seeker = re.compile(myregex)
   changes = []
@@ -129,14 +130,14 @@ def parse_avatars(value):
 
   """ Replace § by em"""
   sym = '§'
-  search =  "[A-Za-z\s\.\'\;]+"
+  search = "[A-Za-z0-9\é\è\ô\ö\à\s\.\'\;\-\(\)\&\:\,]+"
   myregex = "\%s%s\%s"%(sym,search,sym)
   seeker = re.compile(myregex)
   changes = []
   iter = seeker.finditer(txt)
   for item in iter:
     occ = ''.join(item.group().split(sym))
-    repstr = '<em>%s</em>'%(occ)
+    repstr = '<strong>%s</strong>'%(occ)
     changes.append({'src':item.group(),'dst':repstr})
   for change in changes:
     txt = txt.replace(change['src'],change['dst'])

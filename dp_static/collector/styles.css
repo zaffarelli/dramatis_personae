@@ -17,6 +17,10 @@ input[type=text], input[type=number], input[type=checkbox], select, textarea {
   src: url("fonts/Cinzel-Black.ttf"); }
 
 @font-face {
+  font-family: 'TextDesc';
+  src: url("fonts/WorkSans-Light.ttf"); }
+
+@font-face {
   font-family: 'NomPersoListe';
   src: url("fonts/Cinzel-Regular.ttf"); }
 
@@ -440,8 +444,8 @@ body {
             body .wrapper .details .storyview .title .chapter.big {
               font-weight: bold;
               font-size: 1.2em;
-              color: #fc2;
-              background: black; }
+              /*color: $fics_golden;*/
+              /*background: $fics_darkest;*/ }
           body .wrapper .details .storyview .title h1 {
             font-height: 15px;
             text-indent: 10px; }
@@ -484,13 +488,112 @@ body {
             padding: 0;
             margin: 0;
             border-bottom: 1px solid transparent;
-            width: 700px;
+            width: 25%;
             font-family: NomPersoListe; }
           body .wrapper .details .storyview .title.noPDF {
-            background: #125; }
+            background: black; }
+            body .wrapper .details .storyview .title.noPDF .chapter, body .wrapper .details .storyview .title.noPDF h4, body .wrapper .details .storyview .title.noPDF h3 {
+              color: #fc2; }
           body .wrapper .details .storyview .title.golden {
             color: #fc2;
             /*background: $fics_darkest;*/ }
+        body .wrapper .details .storyview .storyarticle {
+          background: transparent;
+          padding: 0;
+          margin: auto;
+          color: white;
+          width: 100%; }
+          body .wrapper .details .storyview .storyarticle table {
+            /*background: yellow;*/
+            border: 1px solid gray;
+            border-radius: 5px; }
+            body .wrapper .details .storyview .storyarticle table tr th {
+              width: 150px;
+              padding: 2px;
+              background: black;
+              color: white;
+              border: 1px solid silver; }
+            body .wrapper .details .storyview .storyarticle table tr td {
+              padding: 2px;
+              background: silver;
+              color: black;
+              border: 1px solid silver; }
+              body .wrapper .details .storyview .storyarticle table tr td .embedded_link {
+                color: #fc2;
+                /*text-decoration: underline;*/
+                cursor: pointer; }
+                body .wrapper .details .storyview .storyarticle table tr td .embedded_link.broken {
+                  background: red; }
+              body .wrapper .details .storyview .storyarticle table tr td p {
+                margin: 0;
+                padding: 0; }
+            body .wrapper .details .storyview .storyarticle table.details {
+              width: 100%;
+              border: none; }
+              body .wrapper .details .storyview .storyarticle table.details tr th {
+                width: 15%;
+                background: black;
+                color: #494c49;
+                border: none;
+                border-radius: 5px; }
+              body .wrapper .details .storyview .storyarticle table.details tr td {
+                width: auto;
+                background: #171817;
+                color: #e5deca;
+                border: none;
+                font-size: 10pt;
+                font-family: TextDesc;
+                border-radius: 5px; }
+                body .wrapper .details .storyview .storyarticle table.details tr td.desc {
+                  line-height: 2em; }
+              body .wrapper .details .storyview .storyarticle table.details em {
+                color: #f0d070;
+                font-weight: bold;
+                font-style: normal; }
+              body .wrapper .details .storyview .storyarticle table.details .embedded_link {
+                color: #c0c0c0;
+                font-weight: 600;
+                border-bottom: 1px ridge #808080; }
+              body .wrapper .details .storyview .storyarticle table.details strong {
+                color: #c0c0c0;
+                font-weight: 600;
+                font-style: normal;
+                border-top: 1px groove #808080; }
+            body .wrapper .details .storyview .storyarticle table.update {
+              background: #171817;
+              width: 50%;
+              border: none; }
+              body .wrapper .details .storyview .storyarticle table.update input, body .wrapper .details .storyview .storyarticle table.update textarea {
+                width: 90%;
+                background: silver; }
+              body .wrapper .details .storyview .storyarticle table.update tr th {
+                width: 15%;
+                background: black;
+                color: #494c49;
+                border: none;
+                border-radius: 5px; }
+              body .wrapper .details .storyview .storyarticle table.update tr td {
+                width: auto;
+                background: black;
+                color: #e5deca;
+                border: none;
+                border-radius: 5px; }
+              body .wrapper .details .storyview .storyarticle table.update input[type=text], body .wrapper .details .storyview .storyarticle table.update input[type=number], body .wrapper .details .storyview .storyarticle table.update input[type=checkbox], body .wrapper .details .storyview .storyarticle table.update select, body .wrapper .details .storyview .storyarticle table.update textarea {
+                background-color: #171817;
+                color: #e5deca;
+                border-radius: 2px;
+                padding: 2px;
+                border: 2px ridge #444444;
+                box-shadow: -2px -2px 5px black; }
+          body .wrapper .details .storyview .storyarticle button {
+            font-family: 'monospace';
+            font-size: 8px;
+            width: 16ex;
+            padding: 0;
+            margin: 2px;
+            cursor: pointer; }
+          body .wrapper .details .storyview .storyarticle .custom_glance {
+            cursor: help; }
         body .wrapper .details .storyview input[type=text], body .wrapper .details .storyview input[type=number], body .wrapper .details .storyview input[type=checkbox], body .wrapper .details .storyview select, body .wrapper .details .storyview textarea {
           background-color: #171817;
           color: #e5deca;
@@ -616,82 +719,6 @@ body {
   body .embedded_link {
     color: #fc2;
     text-decoration: none; }
-  body .storyarticle {
-    background: transparent;
-    padding: 0;
-    margin: auto;
-    color: white;
-    width: 100%; }
-    body .storyarticle table {
-      background: yellow;
-      border: 1px solid gray;
-      border-radius: 5px; }
-      body .storyarticle table tr th {
-        width: 300px;
-        padding: 2px;
-        background: black;
-        color: white;
-        border: 1px solid silver; }
-      body .storyarticle table tr td {
-        padding: 2px;
-        background: silver;
-        color: black;
-        border: 1px solid silver; }
-        body .storyarticle table tr td .embedded_link {
-          color: #fc2;
-          text-decuration: underline;
-          cursor: pointer; }
-          body .storyarticle table tr td .embedded_link.broken {
-            background: red; }
-        body .storyarticle table tr td p {
-          margin: 0;
-          padding: 0; }
-      body .storyarticle table.details {
-        width: 100%;
-        border: none; }
-        body .storyarticle table.details tr th {
-          width: 15%;
-          background: black;
-          color: #494c49;
-          border: none;
-          border-radius: 5px; }
-        body .storyarticle table.details tr td {
-          width: auto;
-          background: #171817;
-          color: #e5deca;
-          border: none;
-          font-size: 10pt;
-          font-family: Texte;
-          line-height: 1.2em;
-          border-radius: 5px; }
-      body .storyarticle table.update {
-        background: #171817;
-        width: 100%;
-        border: none; }
-        body .storyarticle table.update input, body .storyarticle table.update textarea {
-          width: 90%;
-          background: silver; }
-        body .storyarticle table.update tr th {
-          width: 15%;
-          background: black;
-          color: #494c49;
-          border: none;
-          border-radius: 5px; }
-        body .storyarticle table.update tr td {
-          width: auto;
-          background: black;
-          color: #e5deca;
-          border: none;
-          border-radius: 5px; }
-    body .storyarticle button {
-      font-family: 'monospace';
-      font-size: 8px;
-      width: 16ex;
-      padding: 0;
-      margin: 2px;
-      cursor: pointer; }
-    body .storyarticle .custom_glance {
-      cursor: help; }
   body .epic {
     background-color: #303230; }
   body .drama {
@@ -939,5 +966,20 @@ body {
 
 .selected {
   background-color: #494c49; }
+
+.duel .round_data {
+  background: blue;
+  display: block;
+  margin: auto;
+  width: 600px;
+  border: 1px solid black;
+  padding: 3px;
+  color: black; }
+  .duel .round_data.attacker {
+    background: orange;
+    margin-left: 0; }
+  .duel .round_data.defender {
+    background: green;
+    margin-right: 0; }
 
 /*# sourceMappingURL=styles.css.map */

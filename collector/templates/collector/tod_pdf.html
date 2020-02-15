@@ -1,8 +1,8 @@
 
 {% load fics_filters %}
 
-<h6>{{ c.reference }}</h6>
-<p>Source: {{ c.source}}, Attributes Points: {{c.AP}}, Options Points: {{c.OP}} Value: <span class='highskill'>{{c.value|signed}}</span>.</p>
+<h5>{{ c.reference }} ({{c.category}}#{{c.id}})</h5>
+<p>Source: {{ c.source}}, Attributes Points: {{c.AP}}, Options Points: {{c.OP}} Value: <strong>{{c.value|signed}}</strong>.</p>
 <p>
 <i>Attributes</i>&nbsp;&mdash;
  {% if c.PA_STR %} STR{{c.PA_STR|signed}}{% endif %}
@@ -21,34 +21,31 @@
 <i>Skills</i>&nbsp;&mdash;
   {% if not c.skillmodificator_set.count %}
   <i>none</i>.
-  
+
   {% else %}
   {% for s in c.skillmodificator_set.all %}
-  {{ s.skill_ref.reference}} {{s.value|signed}}{% if forloop.last %}.{%else%}, {%endif%} 
+  {{ s.skill_ref.reference}} {{s.value|signed}}{% if forloop.last %}.{%else%}, {%endif%}
   {% endfor %}
   {% endif %}
 
 <i>Benefices/Afflictions</i>&nbsp;&mdash;
   {% if not c.beneficeafflictionmodificator_set.count %}
   <i>none</i>.
-  
+
   {% else %}
   {% for ba in c.beneficeafflictionmodificator_set.all %}
-  {{ ba.benefice_affliction_ref.reference}} {{ba.benefice_affliction_ref.value|signed}}{% if forloop.last %}.{%else%}, {%endif%} 
+  {{ ba.benefice_affliction_ref.reference}} {{ba.benefice_affliction_ref.value|signed}}{% if forloop.last %}.{%else%}, {%endif%}
   {% endfor %}
   {% endif %}
 
 <i>Blessings/Curses</i>&nbsp;&mdash;
   {% if not c.blessingcursemodificator_set.count %}
   <i>none</i>.
-  
+
   {% else %}
   {% for bc in c.blessingcursemodificator_set.all %}
-  {{ bc.blessing_curse_ref.reference}} {{bc.blessing_curse_ref.value|signed}}{% if forloop.last %}.{%else%}, {%endif%} 
+  {{ bc.blessing_curse_ref.reference}} {{bc.blessing_curse_ref.value|signed}}{% if forloop.last %}.{%else%}, {%endif%}
   {% endfor %}
   {% endif %}
 
 </p>
-
-
-

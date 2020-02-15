@@ -42,11 +42,11 @@
                 <P>{{ event.data.description|linebreaks|parse_avatars_pdf|safe }}</P>
                 <!-- h5>Resolution</h5 -->
                 <P>{{ event.data.resolution|linebreaks|parse_avatars_pdf|safe }}</P>
-                {% for ch in event.data.minis %}
-                    {% include 'collector/pdf/mini_roster.html' with c=ch %}
-                {% endfor %}
             {% endfor %}
             {% endif %}
+        {% endfor %}
+        {% for ch in drama.data.minis %}
+            {% include 'collector/pdf/mini_roster.html' with c=ch %}
         {% endfor %}
         {% endif %}
     {% endfor %}
