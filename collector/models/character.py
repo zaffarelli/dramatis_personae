@@ -99,6 +99,7 @@ class Character(models.Model):
     onsave_reroll_skills = models.BooleanField(default=False)
     lifepath_total = models.IntegerField(default=0)
     balanced = models.BooleanField(default=False)
+    color = models.CharField(max_length=20,blank=True,default='#CCCCCC')
     skills_options = []
     ba_options = []
     bc_options = []
@@ -114,7 +115,7 @@ class Character(models.Model):
     armor_options_not = []
     shield_options = []
     shield_options_not = []
-    round_data = {}
+
 
     @property
     def info_str(self):
@@ -218,6 +219,10 @@ class Character(models.Model):
         self.add_missing_root_skills()
         self.resetTotal()
         self.balanced = (self.lifepath_total == self.OP) and (self.OP > 0)
+        if self.color == '#CCCCCC':
+            d = lambda x: fs_fics7.roll(x)-1
+            self.color = '#%01X%01X%01X%01X%01X%01X' % (d(8)+4,d(16),d(8)+4,d(16),d(8)+4,d(16))
+
 
     def prepareDisplay(self):
         self.refresh_skills_options()
@@ -597,25 +602,122 @@ class Character(models.Model):
             return True
 
     # OPTIMIZER COMBAT METHODS -------------------------------------------------
+    def __init__(self, *args, **kwargs):
+        super(Character,self).__init__(*args,**kwargs)
+        self.round_data = {}
 
-    hit_points = 0
+    def prepare_for_battle(self):
+        self.round_data = {}
+        self.round_data['Initiative'] = 0
+
+        self.round_data['circumstance_modifiers'] = 0
+        #self.round_data['color'] = self.color
+        self.round_data['Narrative'] = []
+        self.round_data['Narrative'].append('%s prepares for battle...'%(self.full_name))
+        self.round_data['health_template'] = {
+                'HEAD':{'SP':0, 'Wounds':{'Light':0,'Medium':0,'Severe':0}},
+                'TORSO':{'SP':0, 'Wounds':{'Light':0,'Medium':0,'Severe':0}},
+                'LEFT_ARM':{'SP':0, 'Wounds':{'Light':0,'Medium':0,'Severe':0}},
+                'RIGHT_ARM':{'SP':0, 'Wounds':{'Light':0,'Medium':0,'Severe':0}},
+                'LEFT_LEG':{'SP':0, 'Wounds':{'Light':0,'Medium':0,'Severe':0}},
+                'RIGHT_LEG':{'SP':0, 'Wounds':{'Light':0,'Medium':0,'Severe':0}},
+                'hit_points':40,
+                'who':self.id,
+                'color':self.color,
+                'status':'OK'
+        }
+        a = self.armor_set.first()
+        self.round_data['Armor'] = {'id':a.id,'name':a.armor_ref.reference,'SP':a.armor_ref.stopping_power}
+        if a.armor_ref.torso:
+            self.round_data['health_template']['TORSO']['SP'] = a.armor_ref.stopping_power + self.SA_STA
+        else:
+            self.round_data['health_template']['TORSO']['SP'] = self.SA_STA
+        if a.armor_ref.head:
+            self.round_data['health_template']['HEAD']['SP'] = a.armor_ref.stopping_power + self.SA_STA
+        else:
+            self.round_data['health_template']['HEAD']['SP'] = self.SA_STA
+        if a.armor_ref.left_arm:
+            self.round_data['health_template']['LEFT_ARM']['SP'] = a.armor_ref.stopping_power + self.SA_STA
+        else:
+            self.round_data['health_template']['LEFT_ARM']['SP'] = self.SA_STA
+        if a.armor_ref.right_arm:
+            self.round_data['health_template']['RIGHT_ARM']['SP'] = a.armor_ref.stopping_power + self.SA_STA
+        else:
+            self.round_data['health_template']['RIGHT_ARM']['SP'] = self.SA_STA
+        if a.armor_ref.left_leg:
+            self.round_data['health_template']['LEFT_LEG']['SP'] = a.armor_ref.stopping_power + self.SA_STA
+        else:
+            self.round_data['health_template']['LEFT_LEG']['SP'] = self.SA_STA
+        if a.armor_ref.right_leg:
+            self.round_data['health_template']['RIGHT_LEG']['SP'] = a.armor_ref.stopping_power + self.SA_STA
+        else:
+            self.round_data['health_template']['RIGHT_LEG']['SP'] = self.SA_STA
+        s = self.shield_set.first()
+        if s!=None:
+            self.round_data['shield'] = {'id':s.id,'name':s.shield_ref.reference,'min':s.shield_ref.protection_min,'max':s.shield_ref.protection_max}
+        else:
+            self.round_data['shield'] = None
+        return self.round_data
+
 
     @property
     def d12(self):
         return fs_fics7.roll(12)
 
+    @property
+    def open_d12(self):
+        total = 0
+        details = ""
+        x = fs_fics7.roll(12)
+        total = x
+        if (x==1):
+            details = "Fumble!!! : 1"
+            y = fs_fics7.roll(12)
+            total -= y
+            details += " + %d "%(y)
+            while y==12:
+                y = fs_fics7.roll(12)
+                total -= y
+                details += " + %d "%(y)
+        elif (x==12):
+            details = "Critical! : 12"
+            y = fs_fics7.roll(12)
+            total += y
+            details += " + %d "%(y)
+            while y==12:
+                y = fs_fics7.roll(12)
+                total += y
+                details += " + %d "%(y)
+        else:
+            details = str(x)
+        return total, details
+
+    def localize_melee_attack(self,x):
+        loc = {
+            1: 'RIGHT_LEG',
+            2: 'LEFT_LEG',
+            3: 'RIGHT_ARM',
+            4: 'RIGHT_ARM',
+            5: 'LEFT_ARM',
+            6: 'LEFT_ARM',
+            7: 'TORSO',
+            8: 'TORSO',
+            9: 'TORSO',
+            10: 'TORSO',
+            11: 'HEAD',
+            12: 'HEAD'
+            }
+        return loc[x]
+
 
 
     def choose_attack(self):
-        self.round_data = {}
         self.round_data['name'] = self.full_name
         self.round_data['rid'] = self.rid
         self.round_data['id'] = self.id
         self.round_data['Number_of_attacks'] = 1
-        w = self.weapon_set.first()
-        self.round_data['Weapon'] = {'id':w.id,'name':w.weapon_ref.reference,'DC':w.weapon_ref.damage_class}
-        a = self.armor_set.first()
-        self.round_data['Armor'] = {'id':a.id,'name':a.armor_ref.reference,'SP':a.armor_ref.stopping_power}
+        w = self.weapon_set.filter(weapon_ref__category='MELEE').first()
+        self.round_data['Weapon'] = {'id':w.id,'name':w.weapon_ref.reference,'DC':w.weapon_ref.damage_class,'WA':w.weapon_ref.weapon_accuracy}
         self.round_data['Attribute'] = {'name':'PA_REF','score':self.PA_REF}
         self.round_data['Defense_Attribute'] = {'name':'PA_AGI','score':self.PA_AGI}
         sk = self.skill_set.all().filter(skill_ref__reference='Melee').first()
@@ -625,36 +727,108 @@ class Character(models.Model):
             self.round_data['Dodge'] = {'name':'Dodge','score':0}
         else:
             self.round_data['Dodge'] = {'name':sk.skill_ref.reference,'score':sk.value}
+        self.round_data['Narrative'].append('%s uses his/her <b>%s</b>...'%(self.full_name,self.round_data['Weapon']['name']))
 
-        return self.round_data
+
 
     def initiative_roll(self):
         if self.round_data['Number_of_attacks'] == 1:
-            self.round_data['Initiative'] = self.round_data['Skill']['score']+self.d12
-        return self.round_data
+            die, _ = self.open_d12
+            self.round_data['Initiative'] = self.round_data['Skill']['score']+die
+            self.round_data['Narrative'].append('%s rolls initiative for %d...'%(self.full_name,self.round_data['Initiative']))
 
     def roll_attack(self,target):
-        self.round_data['attack_roll'] = self.round_data['Attribute']['score']+self.round_data['Skill']['score']+self.d12
-        self.round_data['defender_dodge_roll'] = target.round_data['Defense_Attribute']['score']+target.round_data['Dodge']['score']+self.d12
+        overrun_bonus = 0
+        die, detdie = self.open_d12
+        die += self.round_data['Weapon']['WA']
+        die -= self.round_data['circumstance_modifiers']
+        self.round_data['attack_roll'] = self.round_data['Attribute']['score']+self.round_data['Skill']['score']+die
+        self.round_data['attack_sequence'] = str(self.round_data['Attribute']['score'])+" + "+str(self.round_data['Skill']['score'])+" + "+detdie+" + "+str(self.round_data['Weapon']['WA'])+" - "+str(self.round_data['circumstance_modifiers'])+" = "+str(self.round_data['attack_roll'])
+        self.round_data['defender_dodge_roll'] = target.roll_dodge()
+        overrun = self.round_data['attack_roll'] - self.round_data['defender_dodge_roll']
+        if overrun>0:
+            overrun_bonus = int(overrun / 5)
+
         if self.round_data['attack_roll']>self.round_data['defender_dodge_roll']:
-            self.round_data['text'] = "HIT!!!"
-            self.round_data['damage'] = fs_fics7.roll_dc(self.round_data['Weapon']['DC'])
+            self.round_data['damage'] = fs_fics7.roll_dc(self.round_data['Weapon']['DC'])+self.SA_DMG+overrun_bonus
+            target.round_data['Narrative'].append('%s is hit by %s for <b>%d</b> hit points...'%(target.full_name,self.full_name,self.round_data['damage']))
+            self.round_data['Narrative'].append('%s hits %s for <b>%d</b> hit points...'%(self.full_name,target.full_name,self.round_data['damage']))
         else:
             self.round_data['text'] = "Missed..."
             self.round_data['damage'] = 0
-        return self.round_data
+            self.round_data['Narrative'].append('%s misses...'%(self.full_name))
+            target.round_data['Narrative'].append('...')
 
-    def absorb_punishment(self,damage):
+    def absorb_punishment(self,source):
+        where = self.localize_melee_attack(self.d12)
+        damage = source.round_data['damage']
         true_damage = 0
         if damage>0:
-            true_damage = damage - self.SA_STA - self.round_data['Armor']['SP']
+            if self.round_data['shield']!=None:
+                true_damage = damage
+                if true_damage >= self.round_data['shield']['min']:
+                    if true_damage <= self.round_data['shield']['max']:
+                        true_damage = 0
+                        self.round_data['Narrative'].append('%s attack is <b>blocked</b> by an energy shield...'%(source.full_name))
+                        source.round_data['Narrative'].append('...')
+                    else:
+                        true_damage = true_damage - self.round_data['shield']['max']
+                        self.round_data['Narrative'].append('%s attack is <b>partially blocked</b> by an energy shield...'%(source.full_name))
+                        true_damage = true_damage - self.SA_STA - self.round_data['health_template'][where]['SP']
+
+                        source.round_data['Narrative'].append('...')
+            else:
+                true_damage = damage - self.SA_STA - self.round_data['health_template'][where]['SP']
+            if true_damage > 0:
+                self.round_data['Narrative'].append('%s attack lands on the <b>%s</b> of %s...'%(source.full_name,where,self.full_name))
+                source.round_data['Narrative'].append('...')
+                if (where == 'HEAD'):
+                    true_damage *= 2
+                    self.round_data['Narrative'].append("It's a HEAD attack, damage are doubled!")
+                    source.round_data['Narrative'].append('...')
+
+
         if true_damage < 0:
             true_damage = 1
-        self.hit_points -= true_damage
-        return self.round_data
+        self.round_data['health_template']['hit_points'] -= true_damage
+        if true_damage>10:
+            self.round_data['health_template'][where]['Wounds']['Severe'] += 1
+            self.round_data['Narrative'].append('%s suffers a new <i>severe wound</i> on the <b>%s</b>.'%(self.full_name,where))
+            source.round_data['Narrative'].append('...')
+            self.round_data['circumstance_modifiers'] -= 1
+        elif true_damage>5:
+            self.round_data['health_template'][where]['Wounds']['Medium'] += 1
+            self.round_data['Narrative'].append('%s suffers a new <i>medium wound</i> on the <b>%s</b>.'%(self.full_name,where))
+            source.round_data['Narrative'].append('...')
+            self.round_data['circumstance_modifiers'] -= 2
+            die, _ = self.open_d12
+            if die+self.SA_STU-self.round_data['circumstance_modifiers']<15:
+                self.round_data['health_template']['status'] = 'S'
+                self.round_data['circumstance_modifiers'] -= 10
+        elif true_damage>0:
+            self.round_data['health_template'][where]['Wounds']['Light'] += 1
+            self.round_data['Narrative'].append('%s suffers a new <i>light wound</i> on the <b>%s</b>.'%(self.full_name,where))
+            source.round_data['Narrative'].append('...')
+            self.round_data['circumstance_modifiers'] -= 4
+            die, _ = self.open_d12
+            if die+self.SA_STU-self.round_data['circumstance_modifiers']<15:
+                self.round_data['health_template']['status'] = 'D'
+                self.round_data['circumstance_modifiers'] -= 20
+        if true_damage>0:
+            self.round_data['Narrative'].append('After protection checks, %s loses only <b>%s</b> hp...'%(self.full_name,true_damage))
+            source.round_data['Narrative'].append('...')
+
+    def roll_dodge(self):
+        die, detdie = self.open_d12
+        die -= self.round_data['circumstance_modifiers']
+        dodge = self.round_data['Defense_Attribute']['score']+self.round_data['Dodge']['score']+die
+        return dodge
 
     def check_death(self):
-        return self.hit_points<0
+        check = self.round_data['health_template']['hit_points']<=0 or self.round_data['health_template']['status'] == 'D'
+        if check:
+            self.round_data['Narrative'].append('<b>%s is dead !!!</b>'%(self.full_name))
+        return check
 
 
 

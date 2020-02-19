@@ -202,6 +202,10 @@ def minmax_from_dc(sdc):
   dmax = dmin*int(split_scope[1])+dbonus
   return (dmin,dmax)
 
+
+
+
+
 def roll_dc(sdc):
   if sdc == '':
     return 0

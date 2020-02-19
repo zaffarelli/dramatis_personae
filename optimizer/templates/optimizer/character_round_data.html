@@ -1,21 +1,23 @@
-<h3>Protagonist: {{c.name|safe}}</h3>
-<ul>
-    <li>RID: {{c.rid|safe}}</li>
-    <li>ID: {{c.id}}</li>
-</ul><ul>
+<h3>{{c.name|safe}}</h3>
+<!--ul>
     <li>Number_of_attacks: {{c.Number_of_attacks}}</li>
     <li>Weapon: {{c.Weapon}}</li>
     <li>Armor: {{c.Armor}}</li>
+    <li>Energy Shield: {{c.shield}}</li>
     <li>Attribute: {{c.Attribute}}</li>
     <li>Skill: {{c.Skill}}</li>
     <li>Initiative: {{c.Initiative}}</li>
     <li>Attack Roll: {{c.attack_roll}}</li>
+    <li>Attack Sequence: {{c.attack_sequence|safe}}</li>
     <li>Defender Dodge Roll: {{c.defender_dodge_roll}}</li>
     <li>Damage: {{c.damage}}</li>
-</ul><ul>
     <li>Defense Attribute: {{c.Defense_Attribute}}</li>
     <li>Dodge: {{c.Dodge}}</li>
-</ul><ul>
     <li>Comment: {{c.text}}</li>
-    <li>Hit points: {{c.hit_points}}</li>
-</ul>
+</ul-->
+{% include "optimizer/health_template.html" with c=c.health_template%}
+<ol>
+{% for n in c.Narrative %}
+    <li>{{n|safe}}</li>
+{% endfor %}
+</ol>

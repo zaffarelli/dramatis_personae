@@ -967,19 +967,44 @@ body {
 .selected {
   background-color: #494c49; }
 
+.duel h2, .duel h3 {
+  font-family: NomPersoListe;
+  font-weight: bold;
+  text-align: center;
+  font-variant: small-caps; }
+
 .duel .round_data {
-  background: blue;
-  display: block;
+  display: inline-block;
   margin: auto;
-  width: 600px;
+  width: 420px;
   border: 1px solid black;
   padding: 3px;
-  color: black; }
+  color: white; }
   .duel .round_data.attacker {
-    background: orange;
-    margin-left: 0; }
+    /*background: #402010;*/ }
   .duel .round_data.defender {
-    background: green;
-    margin-right: 0; }
+    /*background: #204010;*/ }
+
+.duel table.wounds {
+  border-collapse: separate; }
+  .duel table.wounds td {
+    background: #171817;
+    border: 2px solid black;
+    width: 25px;
+    height: 25px;
+    text-align: center; }
+    .duel table.wounds td .large {
+      font-size: 1.5em;
+      font-weight: bold; }
+  .duel table.wounds th {
+    background: transparent;
+    border: 2px solid transparent;
+    width: 25px;
+    height: 25px; }
+
+.duelol {
+  margin: 0; }
+  .duelol li {
+    margin: 0; }
 
 /*# sourceMappingURL=styles.css.map */
