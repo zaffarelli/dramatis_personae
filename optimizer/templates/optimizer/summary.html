@@ -1,0 +1,17 @@
+<center>
+<table class='match_score'>
+<tr>
+    {%for c in summary%}
+        <th style='background-color:{{c.color}}; font-size:1.5em;'>{{ forloop.counter }}</th>
+    {%endfor%}
+</tr><tr>
+    {%for c in summary%}
+        <th style='background-color:{{c.color}};'>{{c.name}}</th>
+    {%endfor%}
+</tr><tr>
+    {%for c in summary%}
+        <td style='border-color:{{c.color}};'>{{c.victories}}</td>
+    {%endfor%}
+</tr>
+</table>
+</center>

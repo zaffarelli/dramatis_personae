@@ -24,6 +24,25 @@ def cast_to_blank(modeladmin, request, queryset):
   queryset.update(epic=e)
   short_description = "Cast to no epic."
 
+def no_importance(modeladmin, request, queryset):
+  queryset.update(importance=0)
+  short_description = "Importance to 0 (no gs export)"
+
+def importance_up(modeladmin, request, queryset):
+  #queryset.update(importance=importance+1)
+  for character in queryset:
+    character.importance = character.importance +1
+    character.save()
+  short_description = "Importance ++"
+
+def importance_down(modeladmin, request, queryset):
+  #queryset.update(importance=importance+1)
+  for character in queryset:
+    character.importance = character.importance -1
+    character.save()
+  short_description = "Importance --"
+
+
 def cast_to_antu(modeladmin, request, queryset):
   e = Epic.objects.filter(shortcut="ANTU").first()
   queryset.update(epic=e)
@@ -69,8 +88,16 @@ def make_enquist(modeladmin, request, queryset):
   queryset.update(specie=23)
   short_description = "Make enquist"
 
+def enter_fencing_league(modeladmin, request, queryset):
+  queryset.update(fencing_league=True)
+  short_description = "Enter fencing league"
+
+def exit_fencing_league(modeladmin, request, queryset):
+  queryset.update(fencing_league=False)
+  short_description = "Exit fencing league"
+
 class CharacterAdmin(admin.ModelAdmin):
-  list_display = ('full_name','specie','alliance','use_history_creation','lifepath_total','OP','use_history_creation','is_public','is_partial','use_only_entrance','is_visible','epic')
+  list_display = ('full_name','importance','entrance','specie','alliance','is_dead','lifepath_total','OP','use_history_creation','is_public','is_partial','use_only_entrance','is_visible','epic')
   inlines = [
     SkillInline,
     BlessingCurseInline,
@@ -81,6 +108,6 @@ class CharacterAdmin(admin.ModelAdmin):
     ShieldInline,
     TourOfDutyInline,
   ]
-  ordering = ['epic','full_name',]
-  actions = [cast_to_blank, cast_to_dem, cast_to_antu, make_invisible, make_visible, make_teutonic, make_kaanic, make_castillan, make_enquist, make_public, make_private, make_partial, make_complete]
+  ordering = ['-importance','epic','full_name',]
+  actions = [no_importance, importance_up, importance_down, cast_to_blank, cast_to_dem, cast_to_antu, make_invisible, make_visible, make_teutonic, make_kaanic, make_castillan, make_enquist, make_public, make_private, make_partial, make_complete, enter_fencing_league, exit_fencing_league]
   exclude = ['SA_REC','SA_STA','SA_END','SA_STU','SA_RES','SA_DMG','SA_TOL','SA_HUM','SA_PAS','SA_WYR','SA_SPD','SA_RUN','PA_TOTAL','SK_TOTAL','TA_TOTAL','BC_TOTAL','BA_TOTAL']

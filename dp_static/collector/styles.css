@@ -381,7 +381,7 @@ body {
         display: inline-block;
         color: #e5deca; }
         body .wrapper .details .chart_panel canvas {
-          width: 400px;
+          width: 1000px;
           height: auto; }
       body .wrapper .details .classyview {
         width: 100%;
@@ -408,6 +408,36 @@ body {
         body .wrapper .details .classyview h1 {
           font-family: NomPerso; }
         body .wrapper .details .classyview h2 {
+          font-family: Titre;
+          font-weight: normal;
+          background: black;
+          color: #e5deca;
+          font-size: 1.25em;
+          text-align: center; }
+      body .wrapper .details .tournamentview {
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+        column-count: 1;
+        column-gap: 10px;
+        column-rule: 1px dotted #494c49;
+        padding: 5px;
+        background: #171817;
+        color: #e5deca;
+        border: 1px solid #494c49;
+        box-shadow: 3px 3px 5px black;
+        border-radius: 5px;
+        opacity: .9; }
+        body .wrapper .details .tournamentview .pic {
+          display: block;
+          float: right;
+          border: 1px solid black;
+          width: 200px;
+          height: auto; }
+        body .wrapper .details .tournamentview h1 {
+          font-family: NomPerso; }
+        body .wrapper .details .tournamentview h2 {
           font-family: Titre;
           font-weight: normal;
           background: black;
@@ -1006,5 +1036,37 @@ body {
   margin: 0; }
   .duelol li {
     margin: 0; }
+
+table.duels {
+  display: inline-block; }
+  table.duels th {
+    width: 100px;
+    height: 90px;
+    font-size: 2em; }
+  table.duels td {
+    width: 100px;
+    height: 90px;
+    font-size: 3em; }
+
+table.match_score {
+  display: inline-block;
+  background: #444;
+  border: 1px solid #444;
+  margin: 0;
+  padding: 0; }
+  table.match_score td {
+    background-color: #171817;
+    color: #e5deca;
+    font-size: .95em;
+    width: auto;
+    height: 30px;
+    text-align: center;
+    border: 2px solid transparent; }
+  table.match_score th {
+    background-color: #303030;
+    font-size: .95em;
+    width: 60px;
+    height: 40px;
+    border: 2px solid transparent; }
 
 /*# sourceMappingURL=styles.css.map */

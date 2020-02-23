@@ -569,7 +569,7 @@ body {
                 color: $fics_front;
 
                 & canvas {
-                    width: 400px;
+                    width: 1000px;
                     height: auto;
                 }
             }
@@ -584,6 +584,32 @@ body {
                 }
                 width: 100%;
                 max-width: 900px;
+                margin-left: auto;
+                margin-right: auto;
+                display: block;
+                column-count: 1;
+                column-gap: 10px;
+                column-rule: 1px dotted $fics_light;
+                @include dp_panel;
+
+                & h1 {
+                    font-family: NomPerso;
+                }
+
+                & h2 {
+                    @include section_block;
+                }
+            }
+
+            & .tournamentview {
+                & .pic {
+                    display: block;
+                    float: right;
+                    border: 1px solid black;
+                    width: 200px;
+                    height: auto;
+                }
+                width: 100%;
                 margin-left: auto;
                 margin-right: auto;
                 display: block;
@@ -1403,5 +1429,47 @@ $block_size: 25px;
         & li {
             margin: 0;
         }
+    }
+}
+
+table.duels {
+    display: inline-block;
+
+    & th {
+        width: 100px;
+        height: 90px;
+        font-size: 2em;
+    }
+
+    & td {
+        width: 100px;
+        height: 90px;
+        font-size: 3em;
+    }
+}
+
+table.match_score {
+    display: inline-block;
+    background: #444;
+    border: 1px solid #444;
+    margin: 0;
+    padding: 0;
+
+    & td {
+        background-color: $fics_dark;
+        color: $fics_front;
+        font-size: .95em;
+        width: auto;
+        height: 30px;
+        text-align: center;
+        border: 2px solid transparent;
+    }
+
+    & th {
+        background-color: #303030;
+        font-size: .95em;
+        width: 60px;
+        height: 40px;
+        border: 2px solid transparent;
     }
 }

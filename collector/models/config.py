@@ -106,7 +106,7 @@ class Config(models.Model):
     #print('done')
     return colorset, hcolorset
 
-  def get_chart(self,o,filter='',pattern='',type='bar'):
+  def get_chart(self,o,filter='',pattern='',type='bar',bar_property=''):
     from collector.models.character import Character
     if pattern:
         all = Character.objects.filter(epic=self.epic,is_visible=True).filter(**{filter:pattern}).order_by(o)
@@ -117,30 +117,19 @@ class Config(models.Model):
     dat = []
     back = []
     border = []
-    #idx = 255
     arrfetch = {}
-    # search_pattern = o
     for c in all:
-    #   if filter == 'profile.reference':
-    #     par = c.profile.reference
-    #     #print(p)
-    #   elif filter == 'role.reference':
-    #     par = c.role.reference
-    #   elif filter == 'specie.species':
-    #     par = c.specie.species
-    #   else:
-    #     par = c.__dict__[filter]
-    #   value = par
-    #   if p == 'native_fief' and len(par.split(' / ')) > 1:
-    #     value = par.split(' / ')[0]
-       value = c.__dict__[o]
-       if arrfetch.get(value) is None:
-           arrfetch[value] = 1
-       else:
-           arrfetch[value] += 1
+        value = c.__dict__[o]
+        if bar_property=='':
+           if arrfetch.get(value) is None:
+               arrfetch[value] = 1
+           else:
+               arrfetch[value] += 1
+        else:
+           if arrfetch.get(value) is None:
+               arrfetch[value] = c.__dict__[bar_property]
+    print(arrfetch)
     for x in arrfetch:
-
-
       inside_labels.append(x)
       dat.append(arrfetch[x])
       border.append('#C0C0C0C0')

@@ -17,9 +17,9 @@ def get_chardar(request, pk):
 def get_population_statistics(request, *args, **kwargs):
     conf = get_current_config()
     da = []
-    ch = conf.get_chart('OCC_LVL',filter='OCC_LVL__gte',pattern="1",type='doughnut')
+    ch = conf.get_chart('full_name',filter='fencing_league',pattern=True,type='horizontalBar',bar_property='victory_rating')
     da.append(json.dumps(ch['data']))
-    ch = conf.get_chart('OP',filter='OP__gte',pattern="220",type='bar')
+    ch = conf.get_chart('full_name',filter='fights__gt',pattern="0",type='horizontalBar',bar_property='fights')
     da.append(json.dumps(ch['data']))
     ch = conf.get_chart('caste',filter='caste')
     da.append(json.dumps(ch['data']))
@@ -39,7 +39,7 @@ def get_population_statistics(request, *args, **kwargs):
     messages.add_message(request, messages.INFO, 'Population Statistics updated...')
     return JsonResponse(context)
 
-def get_keywords(request, *args, **kwargs):  
+def get_keywords(request, *args, **kwargs):
   """ Get all the keywords into a chart"""
   conf = get_current_config()
   ch = conf.get_chart('keyword',filter='keyword',type='horizontalBar')

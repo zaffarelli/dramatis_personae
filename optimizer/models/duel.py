@@ -17,11 +17,27 @@ class Duel:
         self.tori.prepare_for_battle()
         self.uke.prepare_for_battle()
 
+    @property
+    def winner(self):
+        tori_dead = self.tori.check_death()
+        uke_dead = self.uke.check_death()
+        if (tori_dead and not uke_dead):
+            winner = self.uke
+        elif (uke_dead and not tori_dead):
+            winner = self.tori
+        else:
+            if self.tori.round_data["Initiative"]>self.uke.round_data["Initiative"]:
+                winner = self.tori
+            elif self.tori.round_data["Initiative"]<self.uke.round_data["Initiative"]:
+                winner = self.uke
+            else:
+                winner = None
+        return winner
 
     @property
     def not_finished(self):
         someone_dead = (self.tori.check_death()) or (self.uke.check_death())
-        return (self.rnd < 100) and not (someone_dead)
+        return (self.rnd < 500) and not (someone_dead)
 
     def run(self):
         sequences = []
@@ -34,8 +50,22 @@ class Duel:
             sequences.append(round.round_summary)
             round.flush()
             del round
-        res = {'pub_date':self.pub_date,'rounds':sequences}
+        res = {'pub_date':self.pub_date,'winner':self.winner,'rounds':sequences}
         return res
+
+    def validate(self):
+        pass
+        # self.tori.fights += 1
+        # self.uke.fights += 1
+        # if self.winner == self.tori:
+        #     self.tori.victories += 1
+        # elif self.winner == self.uke:
+        #     self.uke.victories += 1
+        # self.tori.victory_rating = int((self.tori.victories / self.tori.fights) * 100)
+        # self.uke.victory_rating = int((self.uke.victories / self.uke.fights) * 100)
+        #self.tori.save()
+        #self.uke.save()
+        # print("Validate ==> %-25s:%02d  | %-25s:%02d"%(self.tori.full_name,self.tori.victories, self.uke.full_name, self.uke.victories ))
 
 class CombatRound:
     def __init__(self,duel):

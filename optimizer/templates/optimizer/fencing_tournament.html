@@ -1,0 +1,8 @@
+<div class='tournamentview'>
+    {% include "optimizer/summary.html" with c=summary %}
+    <center>
+    {% for s in tournament_data %}
+      {% include "optimizer/match_score.html" with c=s%}
+    {%endfor%}
+    </center>
+</div>

@@ -26,5 +26,6 @@ class BeneficeAfflictionRef(models.Model):
     description = models.TextField(max_length=256, default='', null=True, blank=True)
     source = models.CharField(max_length=32, default='FS2CRB', null=True, blank=True)
     emphasis = models.CharField(max_length=64, default='', null=True, blank=True)
+    watermark = models.CharField(max_length=64, default='', null=True, blank=True)
     def __str__(self):
         return '%s %s (%d)' % (self.reference,self.emphasis,self.value)
