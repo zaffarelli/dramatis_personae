@@ -3,25 +3,24 @@
   <em title='{{ c.full_name }}'=>{{ c.full_name }}</em>
   </div>
   <div class='character_actions'>
-    <span class="action_icon view_character" id="{{c.id}}"><i class="fas fa-user"></i></span>&nbsp;&nbsp;
     <span class="action_icon edit_character" id="{{c.id}}"><i class="fas fa-user-tag"></i></span>&nbsp;&nbsp;
     <span class="action_icon recalc_character" id="{{c.id}}"><i class="fas fa-cog"></i></span>&nbsp;&nbsp;
     {% if c.use_history_creation %}
         {% if c.balanced %}
-        <span class="action_icon histo" id="{{c.id}}"><i class="golden fas fa-history"></i></span>&nbsp;&nbsp;
+        <span class="action_icon histo" id="{{c.id}}"><i class="golden fas fa-balance-scale"></i></span>&nbsp;&nbsp;
         {% else %}
-        <span class="action_icon histo" id="{{c.id}}"><i class="fas fa-history"></i></span>&nbsp;&nbsp;
+        <span class="action_icon histo" id="{{c.id}}"><i class="fas fa-balance-scale-right"></i></span>&nbsp;&nbsp;
         {% endif %}
+    {% endif %}
+    {% if c.is_public %}
+        <span class='action toggle_public' id="{{c.id}}"><i class='golden fas fa-universal-access'></i></span>
     {%else%}
-    {% if not c.is_locked %}
-    <span class="action_icon recalc_pa_character" id="{{c.id}}"><i class="fas fa-hand-paper"></i></span>&nbsp;&nbsp;
-    <span class="action_icon recalc_skills_character" id="{{c.id}}"><i class="fas fa-gavel"></i></span>&nbsp;&nbsp;
+        <span class='action toggle_public' id="{{c.id}}"><i class='fas fa-ban'></i></span>
     {% endif %}
-    {% endif %}
-    {% if c.is_exportable %}&nbsp;<a class='action' href='pdf/{{c.rid}}/' target='avatar_pdf'><i class='fas fa-file-pdf'></i></a>{% endif %}
   </div>
   <div class='character_info hidden'>
     {{ c.entrance|safe }}<br/>
+    {% if c.fencing_league %}Proud member of the Fencing League.<br/>{%endif%}
     {{ c.challenge|safe }} | ID:<span class='action_icon custom_show' id='{{c.id}}'>{{c.id}}</span> {{c.stars|safe}} {% if c.is_locked %}<i class="fas fa-lock golden"></i>{% endif %}
     <br/> ({%if c.keyword != '' %}<span class='action custom_glance' id='{{c.keyword}}'>{{c.keyword|safe}}</span>{%endif%})
   </div>

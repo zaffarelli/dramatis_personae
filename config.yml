@@ -7,8 +7,9 @@ collector:
       # The sheet it will read from in your drive
       source_name:  "Fading Suns"
       # The sheet it will write to in your drive
-      target_name:  "Fading Suns Tests"
+      target_name:  "Fading Suns Crashtest"
       # Your google service credential file (do not forget to share the spreadsheets source_name and TARGET_NAME with the email address...)
       credentials:  "collector/creds.json"
       # The tab used in the spreadsheet
       tab:          "Characters"
+      tab_abstract: "Abstract"

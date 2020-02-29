@@ -26,6 +26,7 @@ from collector.utils.xls_collector import export_to_xls, update_from_xls
 from collector.utils.basic import get_current_config
 from collector.utils.fics_references import MAX_CHAR
 from django.contrib import messages
+from collector.views.characters import respawnAvatarLink
 
 
 def index(request):
@@ -41,7 +42,7 @@ def get_list(request,id,slug='none'):
   conf = get_current_config()
   if request.is_ajax:
     if slug=='none':
-      character_items = Character.objects.filter(epic=conf.epic).order_by('balanced','full_name')
+      character_items = Character.objects.filter(epic=conf.epic).order_by('-is_public','balanced','full_name')
     elif slug.startswith('c-'):
       ep_class = slug.split('-')[1].capitalize()
       ep_id = slug.split('-')[2]
@@ -173,6 +174,16 @@ def add_character(request, slug=None):
     character_item.profile = Profile.objects.first()
     character_item.save()
     return HttpResponse(status=204)
+
+def toggle_public(request, id=None):
+    conf = get_current_config()
+    context = {}
+    character_item = Character.objects.get(pk=id)
+    if (character_item != None):
+        character_item.is_public = not character_item.is_public
+        character_item.save()
+    context = respawnAvatarLink(character_item,context)
+    return JsonResponse(context)
 
 
 def conf_details(request):

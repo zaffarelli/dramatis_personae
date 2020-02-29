@@ -1,4 +1,8 @@
-
+'''
+╔╦╗╔═╗  ╔═╗┌─┐┌┬┐┬┌┬┐┬┌─┐┌─┐┬─┐
+ ║║╠═╝  ║ ║├─┘ │ │││││┌─┘├┤ ├┬┘
+═╩╝╩    ╚═╝┴   ┴ ┴┴ ┴┴└─┘└─┘┴└─
+'''
 from optimizer.models.duel import Duel
 from collector.models.character import Character
 from django.shortcuts import get_object_or_404, render

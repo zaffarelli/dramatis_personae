@@ -19,13 +19,11 @@ def get_population_statistics(request, *args, **kwargs):
     da = []
     ch = conf.get_chart('full_name',filter='fencing_league',pattern=True,type='horizontalBar',bar_property='victory_rating')
     da.append(json.dumps(ch['data']))
-    ch = conf.get_chart('full_name',filter='fights__gt',pattern="0",type='horizontalBar',bar_property='fights')
+    ch = conf.get_chart('picture',filter='is_public',pattern=True,type='doughnut')
     da.append(json.dumps(ch['data']))
-    ch = conf.get_chart('caste',filter='caste')
+    ch = conf.get_chart('caste',filter='is_public',pattern=True)
     da.append(json.dumps(ch['data']))
-    ch = conf.get_chart('balanced',filter='balanced')
-    da.append(json.dumps(ch['data']))
-    ch = conf.get_chart('alliance',filter='alliance')
+    ch = conf.get_chart('alliance',filter='is_public',pattern=True)
     da.append(json.dumps(ch['data']))
     charts = []
     template = get_template('collector/popstats.html')

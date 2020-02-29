@@ -210,6 +210,35 @@ function rebootlinks(){
             },
         });
     });
+
+    $('.toggle_public').off().on('click',function(event){
+        event.preventDefault();
+        let dad = $(this).parents('li');
+        let dad_id = $(dad).attr("id");
+        $("li#"+dad_id+" .character_info").removeClass('hidden');
+        $("li#"+dad_id+" .avatar_link").css('border-color','red');
+        $.ajax({
+            url: 'toggle/'+$(this).attr("id")+'/public',
+            success: function(answer) {
+                console.log(answer)
+                $('li#'+dad_id).html(answer.avatar_link);
+                rebootlinks();
+                //prepare_ajax();
+                //loadKeywords();
+            },
+            error: function(answer) {
+                console.warn('Error on toggle...');
+            },
+        });
+    });
+
+
+
+
+
+
+
+
     $('#conf_details').off().on('click',function(event){
         event.preventDefault();
         $.ajax({
