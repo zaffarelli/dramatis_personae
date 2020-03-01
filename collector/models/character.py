@@ -20,7 +20,7 @@ logger = logging.getLogger(__name__)
 
 class Character(Combattant):
     pagenum = 0
-    
+    full_name = models.CharField(max_length=200)
     rid = models.CharField(max_length=200, default='none')
     alliance = models.CharField(max_length=200, blank=True, default='')
     faction = models.CharField(max_length=200, blank=True, default='')
@@ -253,7 +253,7 @@ class Character(Combattant):
 
     def fix(self, conf=None):
         """ Check / calculate other characteristics """
-        logger.debug('Fixing ........: %s' % (self.full_name))
+        logger.info('Fixing ........: %s' % (self.full_name))
         # self.preparePADisplay()
 
         if not conf:

@@ -1,68 +1,111 @@
 <center>
+{%load fics_filters%}
 <table class='wounds'>
     <tr>
-    <td>{{c.status}}</td>
-    <th>&nbsp;</th>
-    <td>{{c.HEAD.Wounds.Light}}</td>
-    <td>sp:{{c.HEAD.SP}}</td>
-    <th>&nbsp;</th>
-    <th>&nbsp;</th>
-    <th>&nbsp;</th>
-    <td style='background-color:{{c.color}};'>{{c.who}}</td>
+        <td>{{c.status}}</td>
+        <td class='stats'>+{{c.expertise}}</td>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+        <td class='armor'>{{c.HEAD.SP}}</td>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+        <td style='background-color:{{c.color}}; color:black;'>{{c.who}}</td>
     </tr>
     <tr>
-    <td>{{c.LEFT_ARM.Wounds.Light}}</td>
-    <td>sp:{{c.LEFT_ARM.SP}}</td>
-    <td>{{c.HEAD.Wounds.Medium}}</td>
-    <td>{{c.HEAD.Wounds.Severe}}</td>
-    <td>{{c.RIGHT_ARM.Wounds.Light}}</td>
-    <td>sp:{{c.RIGHT_ARM.SP}}</td>
-    <th>&nbsp;</th>
-    <th>&nbsp;</th>
-    </tr>
-    <tr>
-    <td>{{c.LEFT_ARM.Wounds.Medium}}</td>
-    <td>{{c.LEFT_ARM.Wounds.Severe}}</td>
-    <th>&nbsp;</th>
-    <th>&nbsp;</th>
-    <td>{{c.RIGHT_ARM.Wounds.Medium}}</td>
-    <td>{{c.RIGHT_ARM.Wounds.Severe}}</td>
-    <th>&nbsp;</th>
-    <th>&nbsp;</th>
-    </tr>
-    <tr>
-    <th>&nbsp;</th>
-    <th>&nbsp;</th>
-    <td>{{c.TORSO.Wounds.Light}}</td>
-    <td>sp:{{c.TORSO.SP}}</td>
-    <th>&nbsp;</th>
-    <th>&nbsp;</th>
-    <td colspan=2 rowspan=2><span class='large'>{{c.hit_points}}</span> hp</td>
-
-
+        <td class='stats neg' title='Penalties'>-{{c.circumstance_modifiers}}</td>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+        <td class="wnd">{{c.HEAD.Wounds.Medium|wound|safe}}</td>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
     </tr>
 
     <tr>
-    <td>{{c.LEFT_LEG.Wounds.Light}}</td>
-    <td>sp:{{c.LEFT_LEG.SP}}</td>
-    <td>{{c.TORSO.Wounds.Medium}}</td>
-    <td>{{c.TORSO.Wounds.Severe}}</td>
-    <td>{{c.RIGHT_LEG.Wounds.Light}}</td>
-    <td>sp:{{c.RIGHT_LEG.SP}}</td>
+        <td class='armor disabled'>&nbsp;</td>
+        <th>&nbsp;</th>
+        <td class='armor'>{{c.LEFT_ARM.SP}}</td>
+        <th>&nbsp;</th>
+        <td class="wnd">{{c.HEAD.Wounds.Severe|wound|safe}}</td>
+        <th>&nbsp;</th>
+        <td class='armor'>{{c.RIGHT_ARM.SP}}</td>
+        <th>&nbsp;</th>
+        <td class='armor disabled'>&nbsp;</td>
+    </tr>
+
+    <tr>
+        <td class='wnd disabled'>&nbsp;</td>
+        <th>&nbsp;</th>
+        <td class='wnd'>{{c.LEFT_ARM.Wounds.Medium|wound|safe}}</td>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+        <td class='wnd'>{{c.RIGHT_ARM.Wounds.Medium|wound|safe}}</td>
+        <th>&nbsp;</th>
+        <td class='wnd disabled'>&nbsp;</td>
+    </tr>
+
+    <tr>
+        <td class='wnd disabled'>&nbsp;</td>
+        <th>&nbsp;</th>
+        <td class='wnd'>{{c.LEFT_ARM.Wounds.Severe|wound|safe}}</td>
+        <th>&nbsp;</th>
+        <td class='armor'>{{c.TORSO.SP}}</td>
+        <th>&nbsp;</th>
+        <td class='wnd'>{{c.RIGHT_ARM.Wounds.Severe|wound|safe}}</td>
+        <th>&nbsp;</th>
+        <td class='wnd disabled'>&nbsp;</td>
+    </tr>
+
+    <tr>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+        <td class='wnd'>{{c.TORSO.Wounds.Medium|wound|safe}}</td>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+    </tr>
+
+    <tr>
+        <td class='shield'>{{c.shield.max}}</td>
+        <th>&nbsp;</th>
+        <td class='armor'>{{c.LEFT_LEG.SP}}</td>
+        <th>&nbsp;</th>
+        <td class='wnd'>{{c.TORSO.Wounds.Severe|wound|safe}}</td>
+        <th>&nbsp;</th>
+        <td class='armor'>{{c.RIGHT_LEG.SP}}</td>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+    </tr>
+
+    <tr>
+        <td class='shield'>{{c.shield.charges}}</td>
+        <th>&nbsp;</th>
+        <td class='wnd'>{{c.LEFT_LEG.Wounds.Medium|wound|safe}}</td>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+        <td class='wnd'>{{c.RIGHT_LEG.Wounds.Medium|wound|safe}}</td>
+        <td colspan=2 rowspan=2 class='hp'><span class='large'>{{c.hit_points}}</span> /{{c.hp_max}} hp</td>
 
     </tr>
 
     <tr>
-    <td>{{c.LEFT_LEG.Wounds.Medium}}</td>
-    <td>{{c.LEFT_LEG.Wounds.Severe}}</td>
-    <th>&nbsp;</th>
-    <th>&nbsp;</th>
-    <td>{{c.RIGHT_LEG.Wounds.Medium}}</td>
-    <td>{{c.RIGHT_LEG.Wounds.Severe}}</td>
-    <td colspan=2>{{c.shield.charges}}</td>
-
-
+        <td class='shield'>{{c.shield.min}}</td>
+        <th>&nbsp;</th>
+        <td class='wnd'>{{c.LEFT_LEG.Wounds.Severe|wound|safe}}</td>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+        <td class='wnd'>{{c.RIGHT_LEG.Wounds.Severe|wound|safe}}</td>
     </tr>
+
 
 </table>
 </center>

@@ -7,6 +7,7 @@ from django.db import models
 from datetime import datetime
 from collector.utils import fs_fics7
 import json
+import math
 
 import logging
 logger = logging.getLogger(__name__)
@@ -14,8 +15,6 @@ logger = logging.getLogger(__name__)
 class Combattant(models.Model):
     class Meta:
         abstract = True
-
-    full_name = models.CharField(max_length=200)
 
     fights = models.PositiveIntegerField(default=0)
     victories = models.PositiveIntegerField(default=0)
@@ -30,9 +29,6 @@ class Combattant(models.Model):
     def prepare_for_battle(self):
         self.round_data = {}
         self.round_data['Initiative'] = 0
-
-        self.round_data['circumstance_modifiers'] = 0
-        #self.round_data['color'] = self.color
         self.round_data['Narrative'] = []
         self.round_data['Narrative'].append('%s prepares for battle...'%(self.full_name))
         self.round_data['health_template'] = {
@@ -43,7 +39,8 @@ class Combattant(models.Model):
                 'LEFT_LEG':{'SP':0, 'Wounds':{'Light':0,'Medium':0,'Severe':0}},
                 'RIGHT_LEG':{'SP':0, 'Wounds':{'Light':0,'Medium':0,'Severe':0}},
                 'shield':{},
-                'hit_points':40,
+                'hit_points':self.SA_END,
+                'hp_max':self.SA_END,
                 'who':self.id,
                 'color':self.color,
                 'status':'OK'
@@ -74,15 +71,23 @@ class Combattant(models.Model):
             self.round_data['health_template']['RIGHT_LEG']['SP'] = a.armor_ref.stopping_power + self.SA_STA
         else:
             self.round_data['health_template']['RIGHT_LEG']['SP'] = self.SA_STA
+        self.round_data['health_template']['circumstance_modifiers'] = 0
+
         penalty = self.round_data['Armor']['ENC']
         self.penalize(penalty)
         s = self.shield_set.first()
         if s!=None:
             self.round_data['shield'] = {'id':s.id,'name':s.shield_ref.reference,'min':s.shield_ref.protection_min,'max':s.shield_ref.protection_max}
             self.round_data['health_template']['shield']['charges'] = s.shield_ref.hits
+            self.round_data['health_template']['shield']['min'] = s.shield_ref.protection_min
+            self.round_data['health_template']['shield']['max'] = s.shield_ref.protection_max
         else:
             self.round_data['shield'] = None
             self.round_data['health_template']['shield']['charges'] = 0
+            self.round_data['health_template']['shield']['min'] = 0
+            self.round_data['health_template']['shield']['max'] = 0
+        self.round_data['health_template']['expertise'] = 0
+        self.check_expertise()
         return self.round_data
 
     def get_rd(self,txt):
@@ -183,12 +188,29 @@ class Combattant(models.Model):
             return ar.first()
         return None
 
+    def check_highest_bonus(self):
+        b = 0
+        x = self.round_data['health_template']['expertise_pool']
+        s = math.floor(math.sqrt(x*2))
+        if s*(s+1)/2 == x:
+            b = s
+        elif (s+1)*(s+2)/2 == x:
+            b = s+1
+        self.round_data['health_template']['expertise_pool'] -= b
+        return b
 
     def choose_attack(self):
         self.round_data['name'] = self.full_name
         self.round_data['rid'] = self.rid
         self.round_data['id'] = self.id
-        self.round_data['Number_of_attacks'] = 1
+        bon = self.check_highest_bonus()
+        if bon > 5:
+            natk = 3
+        elif bon > 2:
+            natk = 2
+        natk = 1
+        self.round_data['expertise_bonus'] = bon
+        self.round_data['Number_of_attacks'] = natk
         w = self.get_weapon('MELEE')
         self.round_data['Weapon'] = {'id':w.id,'name':w.weapon_ref.reference,'DC':w.weapon_ref.damage_class,'WA':w.weapon_ref.weapon_accuracy}
         self.round_data['Attribute'] = {'name':'PA_REF','score':self.PA_REF}
@@ -205,22 +227,31 @@ class Combattant(models.Model):
             self.round_data['Dodge'] = {'name':sk.skill_ref.reference,'score':sk.value}
         self.round_data['Narrative'].append('%s uses his/her <b>%s</b>...'%(self.full_name,self.round_data['Weapon']['name']))
 
-
+    def check_expertise(self):
+        expertise = 0
+        manoeuvres_sets = self.beneficeaffliction_set.all().filter(benefice_affliction_ref__watermark__contains='melee_manoeuvres')
+        for maneouvres_set in manoeuvres_sets:
+            expertise += maneouvres_set.benefice_affliction_ref.value
+        self.round_data['health_template']['expertise_pool'] = expertise
+        self.round_data['health_template']['expertise'] = expertise
 
     def initiative_roll(self):
         if self.round_data['Number_of_attacks'] == 1:
             die, _ = self.open_d12
             self.round_data['Initiative'] = self.round_data['Skill']['score']+die
             self.round_data['Narrative'].append('%s rolls initiative for %d...'%(self.full_name,self.round_data['Initiative']))
+            self.round_data['Narrative'].append('%s will have 1 action this round.'%(self.full_name))
+
 
     def roll_attack(self,target):
         overrun_bonus = 0
         die, detdie = self.open_d12
-        self.round_data['attack_roll'] = self.round_data['Attribute']['score']+self.round_data['Skill']['score']+self.round_data['Weapon']['WA']-self.round_data['circumstance_modifiers']+die
-        self.round_data['attack_sequence'] = "Attacking: REF+Melee+WA-P+d12 --> "+str(self.round_data['Attribute']['score'])+"+"+str(self.round_data['Skill']['score'])+"+"+str(self.round_data['Weapon']['WA'])+"-"+str(self.round_data['circumstance_modifiers'])+"+"+detdie+"=<b>"+str(self.round_data['attack_roll'])+"</b>"
+        die += self.round_data['expertise_bonus']
+        self.round_data['attack_roll'] = self.round_data['Attribute']['score']+self.round_data['Skill']['score']+self.round_data['Weapon']['WA']-self.round_data['health_template']['circumstance_modifiers']+die
+        self.round_data['attack_sequence'] = "Attacking: REF+Melee+WA-P+d12 --> "+str(self.round_data['Attribute']['score'])+"+"+str(self.round_data['Skill']['score'])+"+"+str(self.round_data['Weapon']['WA'])+"-"+str(self.round_data['health_template']['circumstance_modifiers'])+"+"+detdie+"=<b>"+str(self.round_data['attack_roll'])+"</b>"
         target.round_data['defender_dodge_roll'] = target.roll_dodge()
         self.round_data['Narrative'].append(self.round_data['attack_sequence'])
-        target.round_data['Narrative'].append('Dodging %d'%(target.roll_dodge()))
+        target.round_data['Narrative'].append('Dodging %d'%(target.round_data['defender_dodge_roll']))
         overrun = self.round_data['attack_roll'] - target.round_data['defender_dodge_roll']
         if overrun>0:
             overrun_bonus = int(overrun / 3)
@@ -234,82 +265,156 @@ class Combattant(models.Model):
             self.round_data['Narrative'].append('%s misses...'%(self.full_name))
             target.round_data['Narrative'].append('...')
 
+
+    def shield_deflect(self,damage,source):
+        true_damage = damage
+        full_block = False
+        effect_self = ''
+        effect_source = ''
+        if self.round_data['shield']==None:
+            effect_self = 'No shield'
+            effect_source = '...'
+        else:
+            if true_damage >= self.round_data['shield']['min']:
+                if self.round_data['health_template']['shield']['charges']>0:
+                    if true_damage <= self.round_data['shield']['max']:
+                        true_damage = 0
+                        full_block = True
+                        effect_self = '%s attack is <b>blocked</b> by an energy shield...'%(source.full_name)
+                        effect_source = 'Upcomming damage is %d'%(true_damage)
+                        self.round_data['health_template']['shield']['charges'] -= 1
+                    else:
+                        true_damage = true_damage - self.round_data['shield']['max']
+                        effect_self = '%s attack is <b>partially blocked</b> by an energy shield...'%(source.full_name)
+                        effect_source = 'Upcomming damage is %d'%(true_damage)
+                        self.round_data['health_template']['shield']['charges'] -= 1
+                else:
+                    true_damage = damage
+                    effect_self = '%s attack is unblocked...'%(source.full_name)
+                    effect_source = 'Upcomming damage is %d'%(true_damage)
+        self.round_data['Narrative'].append(effect_self)
+        source.round_data['Narrative'].append(effect_source)
+        return true_damage, full_block
+
+    def armor_deflect(self,damage,source,where):
+        true_damage = damage
+        effect_self = ''
+        effect_source = ''
+        true_damage = true_damage - self.round_data['health_template'][where]['SP']
+        effect_self = '%s armor blocks %d damage...'%(self.full_name,self.round_data['health_template'][where]['SP'])
+        effect_source = 'Upcomming damage is %d'%(true_damage)
+        self.round_data['Narrative'].append(effect_self)
+        source.round_data['Narrative'].append(effect_source)
+        return true_damage
+
+    def localize_damage(self,damage,source,where):
+        true_damage = damage
+        effect_self = ''
+        effect_source = ''
+        if (where == 'HEAD'):
+            true_damage *= 2
+            effect_self = '%s attack lands on the <b>%s</b> of %s for double damage!'%(source.full_name,where,self.full_name)
+            effect_source = 'Upcomming damage is %d'%(true_damage)
+        else:
+            effect_self = '%s attack lands on the <b>%s</b> of %s...'%(source.full_name,where,self.full_name)
+            effect_source = 'Upcomming damage is %d'%(true_damage)
+        self.round_data['Narrative'].append(effect_self)
+        source.round_data['Narrative'].append(effect_source)
+        return true_damage
+
+    def check_wounds(self,damage,where,source):
+        had_a_light_wound = False
+        had_a_medium_wound = False
+        had_a_severe_wound = False
+        effect_self = ''
+        effect_source = ''
+        if damage> self.SA_REC:
+            self.round_data['health_template'][where]['Wounds']['Severe'] += 1
+            effect_self = '%s suffers a new <i>severe wound</i> on the <b>%s</b>.'%(self.full_name,where)
+            effect_source = '...'
+            had_a_severe_wound = True
+            self.penalize(4)
+        elif damage> math.ceil(self.SA_REC/2):
+            self.round_data['health_template'][where]['Wounds']['Medium'] += 1
+            effect_self = '%s suffers a new <i>medium wound</i> on the <b>%s</b>.'%(self.full_name,where)
+            effect_source = '...'
+            had_a_medium_wound = True
+            self.penalize(2)
+        elif damage>0:
+            self.round_data['health_template'][where]['Wounds']['Light'] += 1
+            effect_self = '%s suffers a new <i>light wound</i> on the <b>%s</b>.'%(self.full_name,where)
+            effect_source = '...'
+            had_a_light_wound = True
+        self.round_data['Narrative'].append(effect_self)
+        source.round_data['Narrative'].append(effect_source)
+        return had_a_light_wound, had_a_medium_wound, had_a_severe_wound
+
+    def check_deathsave(self,source):
+        is_dead = False
+        effect_self = ''
+        effect_source = ''
+        die, detdie = self.open_d12
+        score = die+self.SA_STU-self.round_data['health_template']['circumstance_modifiers']
+        if score<10:
+            self.round_data['health_template']['status'] = 'D'
+            effect_self = 'Death check at DV 10 : %d  !'%(score)
+            effect_source = 'Victory!!!'
+        else:
+            effect_self = 'Death check at passed (%d)  !'%(score)
+            effect_source = '...'
+        self.round_data['Narrative'].append(effect_self)
+        source.round_data['Narrative'].append(effect_source)
+        return is_dead
+
+
+    def check_stun(self,source):
+        is_stunned = False
+        effect_self = ''
+        effect_source = ''
+        die, detdie = self.open_d12
+        score = die+self.SA_STU-self.round_data['health_template']['circumstance_modifiers']
+        if score<10:
+            self.round_data['health_template']['status'] = 'S'
+            self.penalize(10)
+            effect_self = 'Stun check at DV 10 : %d  !'%(score)
+            effect_source = 'Enemy is stunned!'
+        else:
+            effect_self = 'Stun check at DV 10 passed (%d)  !'%(score)
+            effect_source = '...'
+        self.round_data['Narrative'].append(effect_self)
+        source.round_data['Narrative'].append(effect_source)
+        return is_stunned
+
+
     def absorb_punishment(self,source):
         where = self.localize_melee_attack(self.d12)
         damage = source.round_data['damage']
         true_damage = 0
         if damage>0:
-            if self.round_data['shield']!=None:
-                true_damage = damage
-                if true_damage >= self.round_data['shield']['min']:
-                    if true_damage <= self.round_data['shield']['max']:
-                        if self.round_data['health_template']['shield']['charges']>0:
-                            true_damage = 0
-                            self.round_data['Narrative'].append('%s attack is <b>blocked</b> by an energy shield...'%(source.full_name))
-                            source.round_data['Narrative'].append('...')
-                            self.round_data['health_template']['shield']['charges'] -= 1
-                    else:
-                        if self.round_data['health_template']['shield']['charges']>0:
-                            true_damage = true_damage - self.round_data['shield']['max']
-                            self.round_data['Narrative'].append('%s attack is <b>partially blocked</b> by an energy shield...'%(source.full_name))
-                            true_damage = true_damage - self.SA_STA - self.round_data['health_template'][where]['SP']
-                            source.round_data['Narrative'].append('...')
-                            self.round_data['health_template']['shield']['charges'] -= 1
-            else:
-                true_damage = damage - self.SA_STA - self.round_data['health_template'][where]['SP']
-            if true_damage > 0:
-                self.round_data['Narrative'].append('%s attack lands on the <b>%s</b> of %s...'%(source.full_name,where,self.full_name))
+            true_damage = damage
+            true_damage, full_block = self.shield_deflect(true_damage,source)
+            if not full_block:
+                true_damage = self.localize_damage(true_damage,source,where)
+                true_damage = self.armor_deflect(true_damage,source,where)
+            if true_damage < 0:
+                true_damage = 1
+            self.round_data['health_template']['hit_points'] -= true_damage
+            l, m, s = self.check_wounds(true_damage,where,source)
+            if m or s:
+                self.check_stun(source)
+            if s:
+                self.check_deathsave(source)
+            if true_damage>0:
+                self.round_data['Narrative'].append('After protection checks, %s loses only <b>%s</b> hp...'%(self.full_name,true_damage))
                 source.round_data['Narrative'].append('...')
-                if (where == 'HEAD'):
-                    true_damage *= 2
-                    self.round_data['Narrative'].append("It's a HEAD attack, damage are doubled!")
-                    source.round_data['Narrative'].append('...')
-        if true_damage < 0:
-            true_damage = 1
-        self.round_data['health_template']['hit_points'] -= true_damage
-        if true_damage>10:
-            self.round_data['health_template'][where]['Wounds']['Severe'] += 1
-            self.round_data['Narrative'].append('%s suffers a new <i>severe wound</i> on the <b>%s</b>.'%(self.full_name,where))
-            source.round_data['Narrative'].append('...')
-            self.penalize(4)
-            die, _ = self.open_d12
-            if die+self.SA_STU-self.round_data['circumstance_modifiers']<10:
-                self.round_data['health_template']['status'] = 'D'
-                source.round_data['Narrative'].append('...')
-                self.round_data['Narrative'].append('Death check at DV 10 : %d  !'%(die+self.SA_STU-self.round_data['circumstance_modifiers']))
-            die, _ = self.open_d12
-            if die+self.SA_STU-self.round_data['circumstance_modifiers']<15:
-                self.round_data['health_template']['status'] = 'S'
-                self.penalize(10)
-                source.round_data['Narrative'].append('...')
-                self.round_data['Narrative'].append('Stun check at DV 15 : %d  !'%(die+self.SA_STU-self.round_data['circumstance_modifiers']))
-        elif true_damage>5:
-            self.round_data['health_template'][where]['Wounds']['Medium'] += 1
-            self.round_data['Narrative'].append('%s suffers a new <i>medium wound</i> on the <b>%s</b>.'%(self.full_name,where))
-            source.round_data['Narrative'].append('...')
-            self.penalize(2)
-            die, _ = self.open_d12
-            if die+self.SA_STU-self.round_data['circumstance_modifiers']<10:
-                self.round_data['health_template']['status'] = 'S'
-                self.penalize(10)
-                source.round_data['Narrative'].append('...')
-                self.round_data['Narrative'].append('Stun check at DV 10 : %d  !'%(die+self.SA_STU-self.round_data['circumstance_modifiers']))
-        elif true_damage>0:
-            self.round_data['health_template'][where]['Wounds']['Light'] += 1
-            self.round_data['Narrative'].append('%s suffers a new <i>light wound</i> on the <b>%s</b>.'%(self.full_name,where))
-            source.round_data['Narrative'].append('...')
-            self.penalize(1)
-        if true_damage>0:
-            self.round_data['Narrative'].append('After protection checks, %s loses only <b>%s</b> hp...'%(self.full_name,true_damage))
-            source.round_data['Narrative'].append('...')
 
     def penalize(self,x):
-        self.round_data['circumstance_modifiers'] += x
-        print("%s %d"%(self.full_name,self.round_data['circumstance_modifiers']))
+        self.round_data['health_template']['circumstance_modifiers'] += x
+        #print("%s %d"%(self.full_name,self.round_data['health_template']['circumstance_modifiers']))
 
     def roll_dodge(self):
         die, detdie = self.open_d12
-        die -= self.round_data['circumstance_modifiers']
+        die -= self.round_data['health_template']['circumstance_modifiers']
         dodge = self.round_data['Defense_Attribute']['score']+self.round_data['Dodge']['score']+die
         return dodge
 

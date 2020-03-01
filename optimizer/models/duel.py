@@ -53,8 +53,8 @@ class Duel:
         res = {'pub_date':self.pub_date,'winner':self.winner,'rounds':sequences}
         return res
 
-    def validate(self):
-        pass
+    # def validate(self):
+    #     pass
         # self.tori.fights += 1
         # self.uke.fights += 1
         # if self.winner == self.tori:

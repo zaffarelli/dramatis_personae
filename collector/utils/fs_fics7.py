@@ -23,7 +23,7 @@ def check_secondary_attributes(ch):
   """
   ch.SA_REC = ch.PA_STR + ch.PA_CON
   ch.SA_STA = math.ceil(ch.PA_BOD / 2) - 1
-  ch.SA_END = (ch.PA_BOD + ch.PA_STR) * 5
+  ch.SA_END = (ch.PA_BOD + ch.PA_CON) * 5
   ch.SA_STU = ch.PA_CON + ch.PA_BOD
   ch.SA_RES = ch.PA_WIL + ch.PA_PRE
   ch.SA_DMG = math.ceil(ch.PA_STR / 2) - 2
@@ -413,7 +413,7 @@ def get_options():
     try:
       options = yaml.safe_load(stream)
     except yaml.YAMLError as exc:
-      print(exc)
+      logger.error(exc)
   return options
 
 

@@ -21,17 +21,17 @@ from oauth2client.service_account import ServiceAccountCredentials
 COLS_AMOUNT = 12
 
 def connect(options):
-    print("> Connecting")
+    logger.info("> Connecting")
     cf = options['collector']['export']['google_spread_sheet']['credentials']
     cred_file = settings.STATIC_ROOT+cf
     scope = ['https://spreadsheets.google.com/feeds','https://www.googleapis.com/auth/drive']
-    print("> Sending Credentials")
+    logger.info("> Sending Credentials")
     credentials = ServiceAccountCredentials.from_json_keyfile_name(cred_file, scope)
     client = gspread.authorize(credentials)
     return client
 
 def connect_as_source(options):
-    print("> Connecting source")
+    logger.info("> Connecting source")
     source_name = options['collector']['export']['google_spread_sheet']['source_name']
     tab = options['collector']['export']['google_spread_sheet']['tab']
     client = connect(options)
@@ -39,7 +39,7 @@ def connect_as_source(options):
     return sheet
 
 def connect_as_target(options):
-    print("> Connecting target")
+    logger.info("> Connecting target")
     target_name = options['collector']['export']['google_spread_sheet']['target_name']
     tab = options['collector']['export']['google_spread_sheet']['tab']
     client = connect(options)
@@ -47,7 +47,7 @@ def connect_as_target(options):
     return sheet
 
 def update_abstract(options):
-    print('> Writting Abstract')
+    logger.info('> Writting Abstract')
     target_name = options['collector']['export']['google_spread_sheet']['target_name']
     tab = options['collector']['export']['google_spread_sheet']['tab_abstract']
     client = connect(options)
@@ -77,7 +77,7 @@ def gss_review(options):
     matrix = sheet.get_all_values()
     for idx, row in enumerate(matrix):
         if idx>0:
-            print('> %s '%(row[0]))
+            logger.info('> %s '%(row[0]))
             rid = fs_fics7.find_rid(row[0])
             try:
                 c = Character.objects.get(rid=rid)
@@ -96,16 +96,16 @@ def gss_review(options):
         else:
             for i in range(COLS_AMOUNT):
                 header_line.append(row[i])
-    print('> Review done')
+    logger.info('> Review done')
     return header_line
 
 def gss_push(options,header_line):
     update_abstract(options)
     sheet = connect_as_target(options)
     character_items = Character.objects.all().filter(epic__shortcut='DEM',is_public=True,importance__gt=0).order_by('alliance','full_name')
-    print("There will be %d characters"%(len(character_items)))
+    logger.info("There will be %d characters"%(len(character_items)))
     matrix = sheet.range('A1:L%d'%(len(character_items)+1))
-    print(header_line)
+    #logger.info(header_line)
     for i in range(COLS_AMOUNT):
         matrix[i].value = header_line[i]
     u = 1
@@ -144,4 +144,4 @@ def gss_push(options,header_line):
         idx += 1
     sheet.clear()
     sheet.update_cells(matrix)
-    print('> Push Done')
+    logger.info('> Push Done')

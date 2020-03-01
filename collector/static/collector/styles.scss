@@ -10,6 +10,8 @@ $fics_dark: darken($fics_back, 10%);
 $fics_darker: darken($fics_back, 20%);
 $fics_darkest: darken($fics_darker, 30%);
 $fics_front: #e5deca;
+$fics_fronter: lighten($fics_front, 10%);
+$fics_frontest: lighten($fics_front, 20%);
 $fics_link: #aaa;
 $fics_blank: lighten($fics_back, 5%);
 $formset_back: $fics_darker;
@@ -1004,6 +1006,7 @@ body {
 
     & .action_icon {
         color: $fics_hl;
+        color: $fics_fronter;
         cursor: pointer;
 
         &:hover {
@@ -1108,11 +1111,11 @@ body {
         border: 2px solid $fics_dark;
         border-radius: 5px;
         background: $fics_dark;
-        color: $fics_front;
+        color: $fics_frontest;
         text-decoration: none;
         padding: 5px;
         text-align: left;
-        font-size: .87em;
+        font-size: 1.6em; /* 0.87em*/
 
         &:hover {
             border-color: $fics_link;
@@ -1372,7 +1375,8 @@ body {
 .selected {
     background-color: $fics_light;
 }
-$block_size: 25px;
+$block_hsize: 1.3em;
+$block_wsize: 4ex;
 
 .duel {
     & h2, & h3 {
@@ -1404,22 +1408,56 @@ $block_size: 25px;
 
         & td {
             background: $fics_dark;
-            border: 2px solid black;
-            width: $block_size;
-            height: $block_size;
+            border: 2px solid #222;
+            width: $block_wsize;
+            height: $block_hsize;
             text-align: center;
 
             & .large {
                 font-size: 1.5em;
                 font-weight: bold;
             }
+
+            &.shield {
+                border-color: purple;
+            }
+
+            &.stats {
+                border-color: green;
+
+                &.neg {
+                    border-color: yellow;
+                }
+            }
+
+            &.armor {
+                border-color: #36a;
+                font-weight: bold;
+                font-size: 1em;
+            }
+
+            &.hp {
+                border-color: #a22;
+            }
+
+            &.wnd {
+                border-color: #ddd;
+            }
+
+            &.disabled {
+                opacity: .1;
+            }
+
+            & .wounded {
+                color: #a22;
+            }
         }
 
         & th {
             background: transparent;
-            border: 2px solid transparent;
-            width: $block_size;
-            height: $block_size;
+            border: 2px dotted #222;
+            width: $block_wsize;
+            height: $block_hsize;
         }
     }
 
@@ -1445,6 +1483,11 @@ table.duels {
         width: 100px;
         height: 90px;
         font-size: 3em;
+        border: 1px solid white;
+    }
+
+    & .round_data {
+        height: 650px;
     }
 }
 

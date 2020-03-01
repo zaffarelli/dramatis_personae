@@ -23,7 +23,7 @@ import hashlib
 """
 
 MAX_CHAR = 12
-RELEASE = '1.8.0'
+RELEASE = '1.8.3'
 DEBUG_ALL = False
 
 LIFEPATH_CATEGORY=(

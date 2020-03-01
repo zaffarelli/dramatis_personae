@@ -128,7 +128,7 @@ class Config(models.Model):
         else:
            if arrfetch.get(value) is None:
                arrfetch[value] = c.__dict__[bar_property]
-    print(arrfetch)
+    #print(arrfetch)
     for x in arrfetch:
       inside_labels.append(x)
       dat.append(arrfetch[x])

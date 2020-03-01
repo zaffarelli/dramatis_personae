@@ -19,7 +19,7 @@ def get_population_statistics(request, *args, **kwargs):
     da = []
     ch = conf.get_chart('full_name',filter='fencing_league',pattern=True,type='horizontalBar',bar_property='victory_rating')
     da.append(json.dumps(ch['data']))
-    ch = conf.get_chart('picture',filter='is_public',pattern=True,type='doughnut')
+    ch = conf.get_chart('SA_END',filter='is_public',pattern=True,type='horizontalBar')
     da.append(json.dumps(ch['data']))
     ch = conf.get_chart('caste',filter='is_public',pattern=True)
     da.append(json.dumps(ch['data']))
