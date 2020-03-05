@@ -269,7 +269,9 @@ def as_roman(value):
 @register.filter(name='wound')
 
 def wound(value):
-  res = value
-  if value>0:
+  if value=='':
+    value=0
+  res = int(value)
+  if res>0:
       res = "<span class='wounded'>%d</span>"%(value)
   return res

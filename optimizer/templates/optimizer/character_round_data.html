@@ -1,7 +1,2 @@
 <h3>{{c.name|safe}}</h3>
 {% include "optimizer/health_template.html" with c=c.health_template%}
-<ol>
-{% for n in c.Narrative %}
-    <li>{{n|safe}}</li>
-{% endfor %}
-</ol>

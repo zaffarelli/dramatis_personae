@@ -1006,7 +1006,7 @@ body {
 
     & .action_icon {
         color: $fics_hl;
-        color: $fics_fronter;
+        /*color: $fics_fronter;*/
         cursor: pointer;
 
         &:hover {
@@ -1361,13 +1361,9 @@ body {
             }
 
             & .details {
-                grid-column: 3 / 3;
+                grid-column: 3 / 6;
                 min-height: 1000px;
-            }
-
-            & .menuright {
-                grid-column: 4 / 6;
-            }
+            }/* & .menuright {*//*     grid-column: 4 / 6;*//* }*/
         }
     }
 }
@@ -1389,6 +1385,8 @@ $block_wsize: 4ex;
     & .round_data {
         display: inline-block;
         margin: auto;
+        margin-top: 0;
+        vertical-align: top;
         width: 420px;
         border: 1px solid black;
         padding: 3px;
@@ -1396,6 +1394,14 @@ $block_wsize: 4ex;
 
         &.attacker {
             /*background: #402010;*/
+
+            & ol {
+                /*direction: rtl;*/
+
+                & li {
+                    text-align: right;
+                }
+            }
         }
 
         &.defender {
@@ -1419,29 +1425,29 @@ $block_wsize: 4ex;
             }
 
             &.shield {
-                border-color: purple;
+                border-color: #223;
             }
 
             &.stats {
-                border-color: green;
+                border-color: #332;
 
                 &.neg {
-                    border-color: yellow;
+                    border-color: #223;
                 }
             }
 
             &.armor {
-                border-color: #36a;
+                border-color: #343;
                 font-weight: bold;
                 font-size: 1em;
             }
 
             &.hp {
-                border-color: #a22;
+                border-color: #322;
             }
 
             &.wnd {
-                border-color: #ddd;
+                border-color: #433;
             }
 
             &.disabled {
@@ -1449,7 +1455,7 @@ $block_wsize: 4ex;
             }
 
             & .wounded {
-                color: #a22;
+                color: #323;
             }
         }
 
@@ -1510,9 +1516,86 @@ table.match_score {
 
     & th {
         background-color: #303030;
-        font-size: .95em;
-        width: 60px;
+        font-size: .85em;
+        width: 50px;
         height: 40px;
         border: 2px solid transparent;
+    }
+}
+
+table.match_score_flat {
+    display: inline-block;
+    background: #444;
+    border: 1px solid #111;
+    margin: 0;
+    padding: 0;
+
+    & td {
+        background-color: $fics_dark;
+        color: $fics_front;
+        font-size: .95em;
+        width: 3ex;
+        height: 1.2em;
+        text-align: center;
+        border: 1px solid transparent;
+    }
+
+    & th {
+        background-color: #303030;
+        color: $fics_frontest;
+        font-size: .85em;
+        width: 25ex;
+        height: 1.2em;
+        border: 1px solid transparent;
+    }
+}
+
+table.combat_narrative {
+    border: 1px solid $fics_front;
+    width: auto;
+
+    & tr {
+        &.even {
+            background: #232;
+        }
+
+        &.odd {
+            background: #323;
+        }
+
+        & th {
+            width: 50px;
+            font-size: 1.2em;
+            background: transparent;
+            text-align: center;
+        }
+
+        & td {
+            width: 350px;
+            padding: 5px;
+            background: transparent;
+
+            &.a {
+                text-align: right;
+            }
+
+            &.d {
+                text-align: left;
+            }
+
+            & b {
+                font-weight: bold;
+                color: #fea;
+            }
+
+            & i {
+                color: #fea;
+            }
+
+            & u {
+                color: #fea;
+                text-decoration: none;
+            }
+        }
     }
 }

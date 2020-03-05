@@ -16,8 +16,8 @@ class Optimizer{
             let who = $('#customize').val();
             $('#customize').val("");
             console.log(who);
-            let a = 151;
-            let b = 91;
+            let a = 11;
+            let b = 11;
             if (who != ''){
                 let x = who.split(" ");
                 a = parseInt(x[0]);
@@ -42,8 +42,8 @@ class Optimizer{
             let who = $('#customize').val();
             $('#customize').val("");
             console.log(who);
-            let a = 151;
-            let b = 91;
+            let a = 11;
+            let b = 11;
             if (who != ''){
                 let x = who.split(" ");
                 a = parseInt(x[0]);

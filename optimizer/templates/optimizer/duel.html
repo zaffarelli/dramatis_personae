@@ -1,13 +1,28 @@
 
 
 <div class='classyview duel'>
+    <h1>
 Winner: {{duel_data.winner}}
 <br/>Date: {{duel_data.pub_date}}
+<br/>Rounds: {{duel_data.amount}}
+</h1>
 
 {% for r in duel_data.rounds %}
-<h2>Round #{{r.number}}</h2>
+    <h2>Round #{{r.number}}</h2>
     <div class='round_data attacker'>{% include "optimizer/character_round_data.html" with c=r.attacker %}</div>
     <div class='round_data defender'>{% include "optimizer/character_round_data.html" with c=r.defender %}</div>
-<br/>
+    <br/>
+    <center>
+    <table class='combat_narrative'>
+        {% for n in r.joined_narrative %}
+        <tr class="{% cycle 'odd' 'even'%}">
+            <td class='a'>{{n.attacker|safe}}</td>
+            <th>{{forloop.counter}}</th>
+            <td class='d'>{{n.defender|safe}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    </center>
 {% endfor %}
+
 </div>
