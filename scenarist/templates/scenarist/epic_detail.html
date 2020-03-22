@@ -1,9 +1,14 @@
 {% load fics_filters %}
 <table class='details'>
-  <tr><th>Title</th><td><strong>{{object.title}}</strong></td></tr>
-  <tr><th>Era</th><td>{{object.era}}</td></tr>
-  <tr><th>Era</th><td>{{object.system}}</td></tr>
-  <tr><th>Population</th><td>{{object.population_count}}</td></tr>
-  <tr><th>Description</th><td class='desc'>{{object.description|parse_avatars|safe}}</td></tr>
-  <tr><th>Gamemaster</th><td>{{object.gamemaster|parse_avatars|safe}}</td></tr>
+  <tr>
+      <th>Epic</th><th><em>{{object.title}}</em></th>
+      <th>Era</th><th>{{object.era}}</th>
+      <th>System</th><th>{{object.system}}</th>
+      <th>Gamemaster</th><th>{{object.gamemaster|parse_avatars|safe}}</th>
+  </tr><tr>
+  <th>Description</th><td colspan=7><div class='desc'>{{object.description|parse_avatars|safe}}</div></td>
+  </tr>
+
+
+
 </table>

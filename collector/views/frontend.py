@@ -27,6 +27,7 @@ from collector.utils.basic import get_current_config
 from collector.utils.fics_references import MAX_CHAR
 from django.contrib import messages
 from collector.views.characters import respawnAvatarLink
+from collector.views.characters import CharacterUpdateView
 
 
 def index(request):
@@ -42,7 +43,7 @@ def get_list(request,id,slug='none'):
   conf = get_current_config()
   if request.is_ajax:
     if slug=='none':
-      character_items = Character.objects.filter(epic=conf.epic).order_by('-is_public','balanced','full_name')
+      character_items = Character.objects.filter(epic=conf.epic).order_by('full_name')
     elif slug.startswith('c-'):
       ep_class = slug.split('-')[1].capitalize()
       ep_id = slug.split('-')[2]
@@ -53,7 +54,7 @@ def get_list(request,id,slug='none'):
         character_item = Character.objects.get(rid=rid)
         character_items.append(character_item)
     else:
-      character_items = Character.objects.order_by('full_name').filter(keyword=slug).order_by('balanced')
+      character_items = Character.objects.filter(keyword=slug).order_by('full_name')
     paginator = Paginator(character_items,MAX_CHAR)
     page = id
     character_items = paginator.get_page(page)
@@ -100,46 +101,6 @@ def recalc_character(request, id=None):
   else:
     raise Http404
 
-# def recalc_pa_character(request, id=None):
-#   if request.is_ajax():
-#     item = get_object_or_404(Character,pk=id)
-#     item.onsave_reroll_attributes = True
-#     item.save()
-#     crid = item.rid
-#     template = get_template('collector/character_detail.html')
-#     character = template.render({'c':item, 'no_skill_edit':True})
-#     templatelink = get_template('collector/character_link.html')
-#     link = templatelink.render({'c':item},request)
-#     context = {
-#       'rid': crid,
-#       'character': character,
-#       'link': link,
-#     }
-#     messages.info(request, 'Recalculating attributes for %s'%(item.full_name))
-#     return JsonResponse(context)
-#   else:
-#     raise Http404
-#
-# def recalc_skills_character(request, id=None):
-#   if request.is_ajax():
-#     item = get_object_or_404(Character,pk=id)
-#     item.onsave_reroll_skills = True
-#     item.save()
-#     crid = item.rid
-#     template = get_template('collector/character_detail.html')
-#     character = template.render({'c':item, 'no_skill_edit':True})
-#     templatelink = get_template('collector/character_link.html')
-#     link = templatelink.render({'c':item},request)
-#     context = {
-#       'rid': crid,
-#       'character': character,
-#       'link': link,
-#     }
-#     messages.info(request, 'Recalculating skills for %s'%(item.full_name))
-#     return JsonResponse(context)
-#   else:
-#     raise Http404
-
 def view_by_rid(request, slug=None):
   """ Ajax view of a character """
   if request.is_ajax():
@@ -162,18 +123,30 @@ def extract_formset(rqp,s):
 def add_character(request, slug=None):
     """ Add a new character to the universe """
     conf = get_current_config()
-    character_item = Character()
+    item = Character()
     if slug:
-        character_item.full_name = " ".join(slug.split("-"))
+        item.full_name = " ".join(slug.split("-"))
     else:
-        character_item.full_name = '_noname_ %s'%(datetime.datetime.now())
-    character_item.epic = conf.epic
-    character_item.use_history_creation = True
-    character_item.specie = Specie.objects.first()
-    character_item.role = Role.objects.first()
-    character_item.profile = Profile.objects.first()
-    character_item.save()
-    return HttpResponse(status=204)
+        item.full_name = '_noname_ %s'%(datetime.datetime.now())
+    item.epic = conf.epic
+    item.use_history_creation = True
+    item.specie = Specie.objects.filter(species='Urthish').first()
+    item.role = Role.objects.first()
+    item.profile = Profile.objects.first()
+    item.save()
+    character_item = get_object_or_404(Character,pk=item.id)
+    template = get_template('collector/character_detail.html')
+    character = template.render({'c':character_item, 'no_skill_edit':False})
+    templatelink = get_template('collector/character_link.html')
+    link = templatelink.render({'c':character_item},request)
+    context = {
+      'rid': character_item.rid,
+      'id': character_item.id,
+      'character': character,
+      'link': link,
+    }
+    messages.info(request, '...%s added'%(character_item.full_name))
+    return JsonResponse(context)
 
 def toggle_public(request, id=None):
     conf = get_current_config()
@@ -184,6 +157,17 @@ def toggle_public(request, id=None):
         character_item.save()
     context = respawnAvatarLink(character_item,context)
     return JsonResponse(context)
+
+def show_jumpweb(request):
+  """ Current config info """
+  if request.is_ajax:
+    conf = get_current_config()
+    context = {}
+    template = get_template('collector/jumpweb.html')
+    html = template.render(context,request)
+    return HttpResponse(html, content_type='text/html')
+  else:
+    http404
 
 
 def conf_details(request):

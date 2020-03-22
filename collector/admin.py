@@ -47,5 +47,8 @@ from collector.models.character import Character
 from collector.models.character_admin import CharacterAdmin
 admin.site.register(Character, CharacterAdmin)
 
+from collector.models.loot import Loot, LootAdmin
+admin.site.register(Loot, LootAdmin)
+
 from collector.models.config import Config, ConfigAdmin
 admin.site.register(Config, ConfigAdmin)

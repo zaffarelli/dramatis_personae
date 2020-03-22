@@ -41,7 +41,7 @@ class Character(Combattant):
     weight = models.IntegerField(default=50)
     narrative = models.TextField(default='', blank=True)
     entrance = models.CharField(max_length=100, default='', blank=True)
-    keyword = models.CharField(max_length=32, blank=True, default='other')
+    keyword = models.CharField(max_length=32, blank=True, default='new')
     stars = models.CharField(max_length=256, blank=True, default='')
     importance = models.PositiveIntegerField(default=1)
     PA_STR = models.PositiveIntegerField(default=1)
@@ -222,6 +222,8 @@ class Character(Combattant):
         self.add_missing_root_skills()
         self.resetTotal()
         self.balanced = (self.lifepath_total == self.OP) and (self.OP > 0)
+        if self.player != '':
+            self.balanced = True
         if self.color == '#CCCCCC':
             d = lambda x: fs_fics7.roll(x)-1
             self.color = '#%01X%01X%01X%01X%01X%01X' % (d(8)+4,d(16),d(8)+4,d(16),d(8)+4,d(16))
@@ -264,6 +266,10 @@ class Character(Combattant):
             if self.birthdate < 1000:
                 self.birthdate = conf.epic.era - self.birthdate
                 self.age = conf.epic.era - self.birthdate
+
+
+
+
         # NPC fix
         if self.player == 'none':
             self.player = ''
@@ -273,6 +279,18 @@ class Character(Combattant):
         else:
             self.rebuild_free_form()
         self.calculateShortcuts()
+
+
+        if self.PA_BOD != 0:
+            if "urthish" in self.specie.species.lower():
+                self.height = 145+2.39473*(self.PA_BOD/2+self.PA_STR/2+self.PA_CON+2)
+                if self.gender == 'male':
+                    self.weight = self.height/(2.98-0.0336*(self.PA_BOD+self.PA_CON))
+                else:
+                    self.weight = self.height/(3.09-0.02975*(self.PA_BOD+self.PA_CON))
+                if self.PA_MOV!=self.PA_CON:
+                    self.weight *= 1+(self.PA_CON-self.PA_MOV)*0.1
+                logger.info("Height/Weight Experiment 1: %s --> %0.2f %0.2f BODY:%d CONSTITUTION:%d"%(self.full_name,self.height,self.weight,self.PA_BOD, self.PA_CON))
         self.is_exportable = self.check_exportable()
         logger.debug('Done fixing ...: %s' % (self.full_name))
 

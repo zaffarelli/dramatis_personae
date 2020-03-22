@@ -386,7 +386,7 @@ body {
       body .wrapper .details .classyview {
         width: 100%;
         max-width: 900px;
-        margin-left: auto;
+        margin-left: 0;
         margin-right: auto;
         display: block;
         column-count: 1;
@@ -561,7 +561,6 @@ body {
               width: 100%;
               border: none; }
               body .wrapper .details .storyview .storyarticle table.details tr th {
-                width: 15%;
                 background: black;
                 color: #494c49;
                 border: none;
@@ -571,24 +570,46 @@ body {
                 background: #171817;
                 color: #e5deca;
                 border: none;
-                font-size: 10pt;
+                font-size: 9pt;
                 font-family: TextDesc;
                 border-radius: 5px; }
-                body .wrapper .details .storyview .storyarticle table.details tr td.desc {
-                  line-height: 2em; }
+                body .wrapper .details .storyview .storyarticle table.details tr td .desc {
+                  column-count: 3;
+                  column-width: auto;
+                  column-gap: 20px;
+                  column-rule-style: dotted;
+                  column-rule-width: 1px;
+                  column-rule-color: #a61;
+                  line-height: 1.4em;
+                  min-height: 150px; }
+                  body .wrapper .details .storyview .storyarticle table.details tr td .desc .loot {
+                    /*border: 1px dotted #888;*/
+                    /*color: #fcf;*/
+                    padding: 0;
+                    margin: 0;
+                    margin-bottom: 1em;
+                    font-family: TextDesc; }
+                    body .wrapper .details .storyview .storyarticle table.details tr td .desc .loot ul {
+                      margin: 0; }
+                      body .wrapper .details .storyview .storyarticle table.details tr td .desc .loot ul li {
+                        margin: 0;
+                        padding: 0; }
               body .wrapper .details .storyview .storyarticle table.details em {
-                color: #f0d070;
+                font-family: Titre;
+                color: #fd8;
                 font-weight: bold;
-                font-style: normal; }
-              body .wrapper .details .storyview .storyarticle table.details .embedded_link {
-                color: #c0c0c0;
-                font-weight: 600;
-                border-bottom: 1px ridge #808080; }
-              body .wrapper .details .storyview .storyarticle table.details strong {
-                color: #c0c0c0;
-                font-weight: 600;
                 font-style: normal;
-                border-top: 1px groove #808080; }
+                font-size: 1.3em;
+                /*border-bottom: 3px dotted red;*/ }
+              body .wrapper .details .storyview .storyarticle table.details .embedded_link {
+                color: #fc4;
+                font-weight: 600;
+                /*border-bottom: 3px dotted yellow;*/ }
+              body .wrapper .details .storyview .storyarticle table.details strong {
+                color: #ea6;
+                font-weight: 900;
+                font-style: normal;
+                border-bottom: 1px dotted #ea6; }
             body .wrapper .details .storyview .storyarticle table.update {
               background: #171817;
               width: 50%;
@@ -706,8 +727,9 @@ body {
       color: #fc2; }
   body .subsection {
     font-weight: bold;
-    color: #aaa;
-    text-decoration: underline; }
+    color: #c4c;
+    text-decoration: none;
+    margin: 0; }
   body .pdflink {
     color: #e5deca;
     text-decoration: none;

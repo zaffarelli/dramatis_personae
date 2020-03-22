@@ -1,0 +1,1586 @@
+{
+    "nodes": [
+        {
+            "id": 0,
+            "name": "Byzantium Secundus",
+            "group": 1,
+            "color": "#DA4",
+            "alliance": "Imperial Territory",
+            "x": 0,
+            "y": 0,
+            "jump": 0
+        },
+        {
+            "id": 1,
+            "name": "Tethys",
+            "group": 1,
+            "color": "#DA4",
+            "alliance": "Imperial Territory",
+            "x": 0,
+            "y": -3,
+            "jump": 1
+        },
+        {
+            "id": 2,
+            "name": "Stigmata",
+            "group": 1,
+            "color": "#DA4",
+            "alliance": "Imperial Territory",
+            "x": -10,
+            "y": -7,
+            "jump": 3
+        },
+        {
+            "id": 3,
+            "name": "Nowhere",
+            "group": 1,
+            "color": "#DA4",
+            "alliance": "Imperial Territory",
+            "x": -14,
+            "y": -6,
+            "jump": 4
+        },
+        {
+            "id": 4,
+            "name": "Madoc",
+            "group": 2,
+            "color": "#39D",
+            "alliance": "League",
+            "x": 2,
+            "y": 2,
+            "jump": 1
+        },
+        {
+            "id": 5,
+            "name": "Leagueheim",
+            "group": 2,
+            "color": "#39D",
+            "alliance": "League",
+            "x": 7,
+            "y": 3,
+            "jump": 2
+        },
+        {
+            "id": 6,
+            "name": "Bannockburn",
+            "group": 2,
+            "color": "#39D",
+            "alliance": "League",
+            "x": -7,
+            "y": -7,
+            "jump": 3
+        },
+        {
+            "id": 7,
+            "name": "Pyre",
+            "group": 3,
+            "color": "#3D6",
+            "alliance": "Church (Temple Avesti)",
+            "x": 0,
+            "y": 3,
+            "jump": 1
+        },
+        {
+            "id": 8,
+            "name": "Pentateuch",
+            "group": 3,
+            "color": "#3D6",
+            "alliance": "Church (Eskatonic Order)",
+            "x": 2,
+            "y": -2,
+            "jump": 1
+        },
+        {
+            "id": 9,
+            "name": "Holy Terra",
+            "group": 3,
+            "color": "#3D6",
+            "alliance": "Church (Orthodoxy)",
+            "x": 5,
+            "y": -4,
+            "jump": 2
+        },
+        {
+            "id": 10,
+            "name": "Artemis",
+            "group": 3,
+            "color": "#3D6",
+            "alliance": "Church (Sanctuary Aeon)",
+            "x": 6,
+            "y": -6,
+            "jump": 3
+        },
+        {
+            "id": 11,
+            "name": "De Moley",
+            "group": 3,
+            "color": "#3D6",
+            "alliance": "Church (Brother Battle)",
+            "x": -12,
+            "y": 4,
+            "jump": 3
+        },
+        {
+            "id": 12,
+            "name": "Criticorum",
+            "group": 4,
+            "color": "#F8C",
+            "alliance": "Royale House al-Malik",
+            "x": -7,
+            "y": 1,
+            "jump": 1
+        },
+        {
+            "id": 13,
+            "name": "Shaprut",
+            "group": 4,
+            "color": "#F8C",
+            "alliance": "Royale House al-Malik",
+            "x": -8,
+            "y": -3,
+            "jump": 2
+        },
+        {
+            "id": 14,
+            "name": "Istakhr",
+            "group": 4,
+            "color": "#F8C",
+            "alliance": "Royale House al-Malik",
+            "x": -11,
+            "y": -2,
+            "jump": 3
+        },
+        {
+            "id": 15,
+            "name": "Aylon",
+            "group": 4,
+            "color": "#F8C",
+            "alliance": "Royale House al-Malik",
+            "x": -12,
+            "y": 1,
+            "jump": 2
+        },
+        {
+            "id": 16,
+            "name": "Kordeth",
+            "group": 4,
+            "color": "#F8C",
+            "alliance": "Occupied System",
+            "x": -9,
+            "y": -1,
+            "jump": 2
+        },
+        {
+            "id": 17,
+            "name": "Ravenna",
+            "group": 5,
+            "color": "#80A0F0",
+            "alliance": "Royale House Hawkwood",
+            "x": -5,
+            "y": -5,
+            "jump": 2
+        },
+        {
+            "id": 18,
+            "name": "Delphi",
+            "group": 5,
+            "color": "#80A0F0",
+            "alliance": "Royale House Hawkwood",
+            "x": -1,
+            "y": -6,
+            "jump": 2
+        },
+        {
+            "id": 19,
+            "name": "Gwynneth",
+            "group": 5,
+            "color": "#80A0F0",
+            "alliance": "Royale House Hawkwood",
+            "x": -6,
+            "y": -3,
+            "jump": 2
+        },
+        {
+            "id": 20,
+            "name": "Leminkainen",
+            "group": 5,
+            "color": "#80A0F0",
+            "alliance": "Royale House Hawkwood",
+            "x": -3,
+            "y": -1,
+            "jump": 1
+        },
+        {
+            "id": 21,
+            "name": "Velisimil",
+            "group": 5,
+            "color": "#80A0F0",
+            "alliance": "Hawkwood Dominion",
+            "x": -3,
+            "y": -4,
+            "jump": 1
+        },
+        {
+            "id": 22,
+            "name": "Sutek",
+            "group": 6,
+            "color": "#A88",
+            "alliance": "Royale House Hazat",
+            "x": 4,
+            "y": -1,
+            "jump": 1,
+            "garrison": "6",
+            "tech": "5",
+            "population":1270000000
+
+        },
+        {
+            "id": 23,
+            "name": "Aragon",
+            "group": 6,
+            "color": "#A88",
+            "alliance": "Royale House Hazat",
+            "x": 4,
+            "y": 1,
+            "jump": 1,
+            "garrison": "7",
+            "tech": "5",
+            "population":1160000000
+        },
+        {
+            "id": 24,
+            "name": "Vera Cruz",
+            "group": 6,
+            "color": "#A88",
+            "alliance": "Royale House Hazat",
+            "x": 6,
+            "y": 0,
+            "jump": 2,
+            "garrison": "6",
+            "tech": "5",
+            "population":750000000
+        },
+        {
+            "id": 25,
+            "name": "Midian",
+            "group": 7,
+            "color": "#A080A0",
+            "alliance": "Royale House Li Halan",
+            "x": 6,
+            "y": 6,
+            "jump": 3,
+            "dtj":33.4,
+            "garrison": "7",
+            "tech": "4",
+            "population":670000000
+        },
+        {
+            "id": 26,
+            "name": "Icon",
+            "group": 7,
+            "color": "#A080A0",
+            "alliance": "Royale House Li Halan",
+            "x": 1,
+            "y": 5,
+            "jump": 3,
+            "dtj":72.3,
+            "garrison": "5",
+            "tech": "4",
+            "population":512000000
+        },
+        {
+            "id": 27,
+            "name": "Kish",
+            "group": 7,
+            "color": "#A080A0",
+            "alliance": "Royale House Li Halan",
+            "x": -1,
+            "y": 7,
+            "jump": 2,
+            "dtj":42.5,
+            "garrison": "9",
+            "tech": "6 (4 rural)",
+            "population":149000000
+        },
+        {
+            "id": 28,
+            "name": "Rampart",
+            "group": 7,
+            "color": "#A080A0",
+            "alliance": "Royale House Li Halan",
+            "x": 3,
+            "y": 8,
+            "jump": 3,
+            "dtj":62.3,
+            "garrison": "8",
+            "tech": "7",
+            "population":423000000
+        },
+        {
+            "id": 29,
+            "name": "Ungavorox",
+            "group": 7,
+            "color": "#A080A0",
+            "alliance": "Li Halan Colony",
+            "x": 3,
+            "y": 4,
+            "jump": 4,
+            "dtj":47.0
+        },
+        {
+            "id": 30,
+            "name": "Severus",
+            "group": 8,
+            "color": "#80C080",
+            "alliance": "Royale House Decados",
+            "x": -11,
+            "y": 8,
+            "jump": 3
+        },
+        {
+            "id": 31,
+            "name": "Cadiz",
+            "group": 8,
+            "color": "#80C080",
+            "alliance": "Royale House Decados",
+            "x": -9,
+            "y": 10,
+            "jump": 4
+        },
+        {
+            "id": 32,
+            "name": "Malignatus",
+            "group": 8,
+            "color": "#80C080",
+            "alliance": "Royale House Decados",
+            "x": -6,
+            "y": 9,
+            "jump": 3
+        },
+        {
+            "id": 33,
+            "name": "Cadavus",
+            "group": 8,
+            "color": "#80C080",
+            "alliance": "Royale House Decados",
+            "x": -9,
+            "y": 7,
+            "jump": 2
+        },
+        {
+            "id": 34,
+            "name": "Pandemonium",
+            "group": 8,
+            "color": "#80C080",
+            "alliance": "Royale House Decados",
+            "x": 7,
+            "y": 9,
+            "jump": 4
+        },
+        {
+            "id": 35,
+            "name": "Grail",
+            "group": 9,
+            "color": "#88A",
+            "alliance": "House Keddah",
+            "x": -2,
+            "y": 5,
+            "jump": 2
+        },
+        {
+            "id": 36,
+            "name": "Apshai",
+            "group": 100,
+            "color": "#BAC",
+            "alliance": "Vau Hegemony",
+            "x": 0,
+            "y": 14,
+            "jump": 4,
+            "discovered": true
+        },
+        {
+            "id": 37,
+            "name": "Vril Ya",
+            "group": 100,
+            "color": "#BAC",
+            "alliance": "Vau Hegemony",
+            "x": -12,
+            "y": 12,
+            "jump": 5,
+            "discovered": true
+        },
+        {
+            "id": 38,
+            "name": "Vau",
+            "group": 100,
+            "color": "#BAC",
+            "alliance": "Vau Hegemony",
+            "x": -10,
+            "y": 14,
+            "jump": 6,
+            "discovered": true
+        },
+        {
+            "id": 39,
+            "name": "Manitou",
+            "group": 100,
+            "color": "#BAC",
+            "alliance": "Vau Hegemony",
+            "x": -8,
+            "y": 15,
+            "jump": 5,
+            "discovered": true
+        },
+        {
+            "id": 40,
+            "name": "Absolution",
+            "group": 101,
+            "color": "#A95",
+            "alliance": "Symbiot Sector",
+            "x": -13,
+            "y": -10,
+            "jump": 4,
+            "discovered": true
+        },
+        {
+            "id": 41,
+            "name": "Chernobog",
+            "group": 101,
+            "color": "#A95",
+            "alliance": "Symbiot Sector",
+            "x": -13,
+            "y": -8,
+            "jump": 4,
+            "discovered": true
+        },
+        {
+            "id": 42,
+            "name": "Daishan",
+            "group": 101,
+            "color": "#A95",
+            "alliance": "Symbiot Sector",
+            "x": -10,
+            "y": -9,
+            "jump": 4,
+            "discovered": true
+        },
+        {
+            "id": 43,
+            "name": "Hira",
+            "group": 102,
+            "color": "#B4D",
+            "alliance": "Kurga Caliphate",
+            "x": 12,
+            "y": 0,
+            "jump": 3,
+            "discovered": true
+        },
+        {
+            "id": 44,
+            "name": "Khayyam",
+            "group": 102,
+            "color": "#B4D",
+            "alliance": "Kurga Caliphate",
+            "x": 14,
+            "y": -2,
+            "jump": 4
+        },
+        {
+            "id": 45,
+            "name": "Al Fashir",
+            "group": 102,
+            "color": "#B4D",
+            "alliance": "Kurga Caliphate",
+            "x": 15,
+            "y": -4,
+            "jump": 5
+        },
+        {
+            "id": 46,
+            "name": "Beliah",
+            "group": 102,
+            "color": "#B4D",
+            "alliance": "Kurga Caliphate",
+            "x": 14,
+            "y": -6,
+            "jump": 6
+        },
+        {
+            "id": 47,
+            "name": "Irem",
+            "group": 102,
+            "color": "#B4D",
+            "alliance": "Kurga Caliphate",
+            "x": 13,
+            "y": -9,
+            "jump": 7
+        },
+        {
+            "id": 48,
+            "name": "Rukh",
+            "group": 102,
+            "color": "#B4D",
+            "alliance": "Kurga Caliphate",
+            "x": 11,
+            "y": -8,
+            "jump": 8
+        },
+        {
+            "id": 49,
+            "name": "Tsuma",
+            "group": 102,
+            "color": "#B4D",
+            "alliance": "Kurga Caliphate",
+            "x": 15,
+            "y": -10,
+            "jump": 8
+        },
+        {
+            "id": 50,
+            "name": "Collier's Landing",
+            "group": 104,
+            "color": "#e8e",
+            "alliance": "Lost World",
+            "x": 10,
+            "y": 7,
+            "jump": 3,
+            "discovered": true
+        },
+        {
+            "id": 51,
+            "name": "Eridol",
+            "group": 104,
+            "color": "#e8e",
+            "alliance": "Lost World",
+            "x": 9,
+            "y": -2,
+            "jump": 4
+        },
+        {
+            "id": 57,
+            "name": "Khotan",
+            "group": 104,
+            "color": "#e8e",
+            "alliance": "Lost World",
+            "x": -2,
+            "y": -8,
+            "jump": 3
+        },
+        {
+            "id": 58,
+            "name": "Lamorak",
+            "group": 104,
+            "color": "#e8e",
+            "alliance": "Lost World",
+            "x": 5,
+            "y": -7,
+            "jump": 6
+        },
+        {
+            "id": 59,
+            "name": "Novgorod",
+            "group": 104,
+            "color": "#e8e",
+            "alliance": "Lost World",
+            "x": 4,
+            "y": -14,
+            "jump": 7
+        },
+        {
+            "id": 60,
+            "name": "Epyphany",
+            "group": 104,
+            "color": "#e8e",
+            "alliance": "Lost World",
+            "x": 7,
+            "y": -13,
+            "jump": 7
+        },
+        {
+            "id": 61,
+            "name": "Sky Tear",
+            "group": 104,
+            "color": "#e8e",
+            "alliance": "Lost World",
+            "x": 12,
+            "y": -12,
+            "jump": 8
+        },
+        {
+            "id": 62,
+            "name": "Egg",
+            "group": 104,
+            "color": "#e8e",
+            "alliance": "Lost World",
+            "x": 9,
+            "y": -7,
+            "jump": 9
+        },
+        {
+            "id": 63,
+            "name": "Antioch",
+            "group": 104,
+            "color": "#e8e",
+            "alliance": "Lost World",
+            "x": 13,
+            "y": -14,
+            "jump": 8
+        },
+        {
+            "id": 64,
+            "name": "Aspiration",
+            "group": 104,
+            "color": "#e8e",
+            "alliance": "Lost World",
+            "x": 12,
+            "y": -7,
+            "jump": 7
+        },
+        {
+            "id": 65,
+            "name": "Heaven's Ridge",
+            "group": 104,
+            "color": "#e8e",
+            "alliance": "Lost World",
+            "x": 12,
+            "y": -3,
+            "jump": 4
+        },
+        {
+            "id": 66,
+            "name": "Twighlight",
+            "group": 104,
+            "color": "#e8e",
+            "alliance": "Lost World",
+            "x": 10,
+            "y": -14,
+            "jump": 9
+        },
+        {
+            "id": 67,
+            "name": "Gizeh",
+            "group": 104,
+            "color": "#e8e",
+            "alliance": "Lost World",
+            "x": -5,
+            "y": -8,
+            "jump": 3
+        },
+        {
+            "id": 68,
+            "name": "Kun Lun",
+            "group": 104,
+            "color": "#e8e",
+            "alliance": "Lost World",
+            "x": 2,
+            "y": -6,
+            "jump": 2
+        },
+        {
+            "id": 69,
+            "name": "Pandora",
+            "group": 104,
+            "color": "#e8e",
+            "alliance": "Lost World",
+            "x": 7,
+            "y": -3,
+            "jump": 2
+        },
+        {
+            "id": 52,
+            "name": "Wolf's Lament",
+            "group": 105,
+            "color": "#8CF",
+            "alliance": "Vuldrok Star Nations",
+            "x": 7,
+            "y": -9,
+            "jump": 5
+        },
+        {
+            "id": 53,
+            "name": "Raven",
+            "group": 105,
+            "color": "#8CF",
+            "alliance": "Vuldrok Star Nations",
+            "x": 4,
+            "y": -11,
+            "jump": 6
+        },
+        {
+            "id": 54,
+            "name": "Fingisvold",
+            "group": 105,
+            "color": "#8CF",
+            "alliance": "Vuldrok Star Nations",
+            "x": 6,
+            "y": -11,
+            "jump": 6
+        },
+        {
+            "id": 55,
+            "name": "Frost",
+            "group": 105,
+            "color": "#8CF",
+            "alliance": "Vuldrok Star Nations",
+            "x": 2,
+            "y": -10,
+            "jump": 4
+        },
+        {
+            "id": 56,
+            "name": "Hargard",
+            "group": 105,
+            "color": "#8CF",
+            "alliance": "Vuldrok Star Nations",
+            "x": 1,
+            "y": -7,
+            "jump": 2,
+            "discovered": true
+        },
+        {
+            "id": 70,
+            "name": "Paradize",
+            "group": 10,
+            "color": "#0CF",
+            "alliance": "House Justinian",
+            "x": 3,
+            "y": -8,
+            "jump": 3,
+            "discovered": true
+        },
+        {
+            "id": 71,
+            "name": "Tempest",
+            "group": 10,
+            "color": "#0CF",
+            "alliance": "House Justinian",
+            "x": -2,
+            "y": -11,
+            "jump": 4
+        },
+        {
+            "id": 72,
+            "name": "Kah Laar",
+            "group": 105,
+            "color": "#eee",
+            "alliance": "Legendary",
+            "x": -13,
+            "y": -13,
+            "jump": "?"
+        },
+        {
+            "id": 73,
+            "name": "Tarlan-IV",
+            "group": 105,
+            "color": "#eee",
+            "alliance": "Legendary",
+            "x": -8,
+            "y": -11,
+            "jump": "?"
+        },
+        {
+            "id": 74,
+            "name": "Exilgür",
+            "group": 120,
+            "color": "#cac",
+            "alliance": "Legendary",
+            "x": -7,
+            "y": -13,
+            "jump": "?"
+        }
+    ],
+    "links": [
+        {
+            "source": 0,
+            "target": 1,
+            "weight": 3,
+            "strong": 2,
+            "shadow": false,
+            "jump": 1
+        },
+        {
+            "source": 0,
+            "target": 4,
+            "weight": 3,
+            "strong": 2,
+            "shadow": false,
+            "jump": 1
+        },
+        {
+            "source": 0,
+            "target": 7,
+            "weight": 3,
+            "strong": 2,
+            "shadow": false,
+            "jump": 1
+        },
+        {
+            "source": 0,
+            "target": 8,
+            "weight": 3,
+            "strong": 2,
+            "shadow": false,
+            "jump": 1
+        },
+        {
+            "source": 0,
+            "target": 12,
+            "weight": 3,
+            "strong": 2,
+            "shadow": false,
+            "jump": 1
+        },
+        {
+            "source": 0,
+            "target": 21,
+            "weight": 3,
+            "strong": 2,
+            "shadow": false,
+            "jump": 1
+        },
+        {
+            "source": 0,
+            "target": 20,
+            "weight": 3,
+            "strong": 2,
+            "shadow": false,
+            "jump": 1
+        },
+        {
+            "source": 0,
+            "target": 22,
+            "weight": 3,
+            "strong": 2,
+            "shadow": false,
+            "jump": 1
+        },
+        {
+            "source": 0,
+            "target": 23,
+            "weight": 3,
+            "strong": 2,
+            "shadow": false,
+            "jump": 1
+        },
+        {
+            "source": 1,
+            "target": 18,
+            "weight": 1,
+            "strong": 0,
+            "shadow": false,
+            "jump": 2
+        },
+        {
+            "source": 2,
+            "target": 3,
+            "weight": 3,
+            "strong": 0,
+            "shadow": false,
+            "jump": 10
+        },
+        {
+            "source": 2,
+            "target": 6,
+            "weight": 1,
+            "strong": 0,
+            "shadow": false,
+            "jump": 10
+        },
+        {
+            "source": 2,
+            "target": 13,
+            "weight": 1,
+            "strong": 0,
+            "shadow": false,
+            "jump": 10
+        },
+        {
+            "source": 2,
+            "target": 14,
+            "weight": 1,
+            "strong": 0,
+            "shadow": false,
+            "jump": 10
+        },
+        {
+            "source": 2,
+            "target": 40,
+            "weight": 1,
+            "strong": 0,
+            "shadow": false,
+            "jump": 10
+        },
+        {
+            "source": 2,
+            "target": 41,
+            "weight": 1,
+            "strong": 0,
+            "shadow": false,
+            "jump": 10
+        },
+        {
+            "source": 2,
+            "target": 42,
+            "weight": 1,
+            "strong": 0,
+            "shadow": false,
+            "jump": 10
+        },
+        {
+            "source": 4,
+            "target": 5,
+            "weight": 3,
+            "strong": 0,
+            "shadow": false,
+            "jump": 2
+        },
+        {
+            "source": 5,
+            "target": 25,
+            "weight": 1,
+            "strong": 0,
+            "shadow": false,
+            "jump": 10
+        },
+        {
+            "source": 5,
+            "target": 23,
+            "weight": 1,
+            "strong": 0,
+            "shadow": false,
+            "jump": 10
+        },
+        {
+            "source": 6,
+            "target": 19,
+            "weight": 1,
+            "strong": 0,
+            "shadow": false,
+            "jump": 10
+        },
+        {
+            "source": 7,
+            "target": 35,
+            "weight": 1,
+            "strong": 0,
+            "shadow": false,
+            "jump": 10
+        },
+        {
+            "source": 7,
+            "target": 12,
+            "weight": 1,
+            "strong": 0,
+            "shadow": false,
+            "jump": 10
+        },
+        {
+            "source": 8,
+            "target": 18,
+            "weight": 1,
+            "strong": 0,
+            "shadow": false,
+            "jump": 10
+        },
+        {
+            "source": 9,
+            "target": 8,
+            "weight": 3,
+            "strong": 0,
+            "shadow": false,
+            "jump": 10
+        },
+        {
+            "source": 9,
+            "target": 10,
+            "weight": 3,
+            "strong": 0,
+            "shadow": false,
+            "jump": 10
+        },
+        {
+            "source": 9,
+            "target": 22,
+            "weight": 1,
+            "strong": 0,
+            "shadow": false,
+            "jump": 10
+        },
+        {
+            "source": 11,
+            "target": 15,
+            "weight": 1,
+            "strong": 0,
+            "shadow": false,
+            "jump": 10
+        },
+        {
+            "source": 11,
+            "target": 30,
+            "weight": 1,
+            "strong": 0,
+            "shadow": false,
+            "jump": 10
+        },
+        {
+            "source": 12,
+            "target": 13,
+            "weight": 3,
+            "strong": 1,
+            "shadow": false,
+            "jump": 2
+        },
+        {
+            "source": 12,
+            "target": 19,
+            "weight": 1,
+            "strong": 0,
+            "shadow": false,
+            "jump": 2
+        },
+        {
+            "source": 12,
+            "target": 16,
+            "weight": 3,
+            "strong": 1,
+            "shadow": false,
+            "jump": 2
+        },
+        {
+            "source": 12,
+            "target": 27,
+            "weight": 1,
+            "strong": 0,
+            "shadow": false,
+            "jump": 2
+        },
+        {
+            "source": 12,
+            "target": 33,
+            "weight": 1,
+            "strong": 0,
+            "shadow": false,
+            "jump": 2
+        },
+        {
+            "source": 13,
+            "target": 16,
+            "weight": 3,
+            "strong": 1,
+            "shadow": false,
+            "jump": 3
+        },
+        {
+            "source": 14,
+            "target": 15,
+            "weight": 3,
+            "strong": 1,
+            "shadow": false,
+            "jump": 3
+        },
+        {
+            "source": 14,
+            "target": 32,
+            "weight": 1,
+            "strong": 0,
+            "shadow": false,
+            "jump": 10
+        },
+        {
+            "source": 15,
+            "target": 16,
+            "weight": 3,
+            "strong": 1,
+            "shadow": false,
+            "jump": 3
+        },
+        {
+            "source": 15,
+            "target": 20,
+            "weight": 1,
+            "strong": 0,
+            "shadow": false,
+            "jump": 10
+        },
+        {
+            "source": 17,
+            "target": 18,
+            "weight": 3,
+            "strong": 1,
+            "shadow": false,
+            "jump": 10
+        },
+        {
+            "source": 17,
+            "target": 19,
+            "weight": 3,
+            "strong": 1,
+            "shadow": false,
+            "jump": 10
+        },
+        {
+            "source": 17,
+            "target": 20,
+            "weight": 3,
+            "strong": 1,
+            "shadow": false,
+            "jump": 10
+        },
+        {
+            "source": 17,
+            "target": 21,
+            "weight": 3,
+            "strong": 1,
+            "shadow": false,
+            "jump": 10
+        },
+        {
+            "source": 22,
+            "target": 24,
+            "weight": 3,
+            "strong": 1,
+            "shadow": false,
+            "jump": 2
+        },
+        {
+            "source": 23,
+            "target": 24,
+            "weight": 3,
+            "strong": 1,
+            "shadow": false,
+            "jump": 2
+        },
+        {
+            "source": 25,
+            "target": 26,
+            "weight": 3,
+            "strong": 1,
+            "shadow": false,
+            "jump": 10
+        },
+        {
+            "source": 25,
+            "target": 36,
+            "weight": 1,
+            "strong": 0,
+            "shadow": false,
+            "jump": 10
+        },
+        {
+            "source": 26,
+            "target": 29,
+            "weight": 3,
+            "strong": 1,
+            "shadow": false,
+            "jump": 10
+        },
+        {
+            "source": 26,
+            "target": 27,
+            "weight": 3,
+            "strong": 1,
+            "shadow": false,
+            "jump": 10
+        },
+        {
+            "source": 27,
+            "target": 32,
+            "weight": 1,
+            "strong": 0,
+            "shadow": false,
+            "jump": 10
+        },
+        {
+            "source": 28,
+            "target": 34,
+            "weight": 1,
+            "strong": 0,
+            "shadow": false,
+            "jump": 10
+        },
+        {
+            "source": 28,
+            "target": 36,
+            "weight": 1,
+            "strong": 0,
+            "shadow": false,
+            "jump": 10
+        },
+        {
+            "source": 28,
+            "target": 27,
+            "weight": 3,
+            "strong": 1,
+            "shadow": false,
+            "jump": 10
+        },
+        {
+            "source": 28,
+            "target": 35,
+            "weight": 1,
+            "strong": 0,
+            "shadow": false,
+            "jump": 10
+        },
+        {
+            "source": 30,
+            "target": 33,
+            "weight": 3,
+            "strong": 1,
+            "shadow": false,
+            "jump": 10
+        },
+        {
+            "source": 30,
+            "target": 31,
+            "weight": 3,
+            "strong": 1,
+            "shadow": false,
+            "jump": 10
+        },
+        {
+            "source": 31,
+            "target": 39,
+            "weight": 1,
+            "strong": 0,
+            "shadow": false,
+            "jump": 10
+        },
+        {
+            "source": 31,
+            "target": 37,
+            "weight": 1,
+            "strong": 0,
+            "shadow": false,
+            "jump": 10
+        },
+        {
+            "source": 31,
+            "target": 32,
+            "weight": 3,
+            "strong": 1,
+            "shadow": false,
+            "jump": 10
+        },
+        {
+            "source": 32,
+            "target": 33,
+            "weight": 3,
+            "strong": 1,
+            "shadow": false,
+            "jump": 10
+        },
+        {
+            "source": 34,
+            "target": 36,
+            "weight": 1,
+            "strong": 0,
+            "shadow": false,
+            "jump": 10
+        },
+        {
+            "source": 36,
+            "target": 39,
+            "weight": 1,
+            "strong": 1,
+            "shadow": false,
+            "jump": 10
+        },
+        {
+            "source": 37,
+            "target": 38,
+            "weight": 1,
+            "strong": 1,
+            "shadow": false,
+            "jump": 10
+        },
+        {
+            "source": 38,
+            "target": 39,
+            "weight": 1,
+            "strong": 1,
+            "shadow": false,
+            "jump": 10
+        },
+        {
+            "source": 40,
+            "target": 41,
+            "weight": 3,
+            "strong": 1,
+            "shadow": false,
+            "jump": 10
+        },
+        {
+            "source": 40,
+            "target": 42,
+            "weight": 3,
+            "strong": 1,
+            "shadow": false,
+            "jump": 10
+        },
+        {
+            "source": 41,
+            "target": 42,
+            "weight": 3,
+            "strong": 1,
+            "shadow": false,
+            "jump": 10
+        },
+        {
+            "source": 43,
+            "target": 24,
+            "weight": 1,
+            "strong": 0,
+            "shadow": false,
+            "jump": 10
+        },
+        {
+            "source": 43,
+            "target": 44,
+            "weight": 1,
+            "strong": 1,
+            "shadow": false,
+            "jump": 10
+        },
+        {
+            "source": 44,
+            "target": 45,
+            "weight": 1,
+            "strong": 1,
+            "shadow": false,
+            "jump": 10
+        },
+        {
+            "source": 45,
+            "target": 46,
+            "weight": 1,
+            "strong": 1,
+            "shadow": false,
+            "jump": 10
+        },
+        {
+            "source": 46,
+            "target": 47,
+            "weight": 1,
+            "strong": 1,
+            "shadow": false,
+            "jump": 10
+        },
+        {
+            "source": 47,
+            "target": 48,
+            "weight": 1,
+            "strong": 1,
+            "shadow": false,
+            "jump": 10
+        },
+        {
+            "source": 47,
+            "target": 49,
+            "weight": 1,
+            "strong": 1,
+            "shadow": false,
+            "jump": 10
+        },
+        {
+            "source": 50,
+            "target": 24,
+            "weight": 1,
+            "strong": 0,
+            "shadow": false,
+            "jump": 10
+        },
+        {
+            "source": 50,
+            "target": 28,
+            "weight": 1,
+            "strong": 0,
+            "shadow": true,
+            "jump": 10
+        },
+        {
+            "source": 50,
+            "target": 51,
+            "weight": 1,
+            "strong": 0,
+            "shadow": true,
+            "jump": 10
+        },
+        {
+            "source": 51,
+            "target": 52,
+            "weight": 1,
+            "strong": 0,
+            "shadow": true,
+            "jump": 10
+        },
+        {
+            "source": 52,
+            "target": 53,
+            "weight": 1,
+            "strong": 0,
+            "shadow": true,
+            "jump": 10
+        },
+        {
+            "source": 52,
+            "target": 54,
+            "weight": 1,
+            "strong": 0,
+            "shadow": true,
+            "jump": 10
+        },
+        {
+            "source": 52,
+            "target": 55,
+            "weight": 1,
+            "strong": 0,
+            "shadow": true,
+            "jump": 10
+        },
+        {
+            "source": 56,
+            "target": 20,
+            "weight": 1,
+            "strong": 0,
+            "shadow": true,
+            "jump": 10
+        },
+        {
+            "source": 56,
+            "target": 57,
+            "weight": 1,
+            "strong": 0,
+            "shadow": true,
+            "jump": 10
+        },
+        {
+            "source": 57,
+            "target": 55,
+            "weight": 1,
+            "strong": 0,
+            "shadow": true,
+            "jump": 10
+        },
+        {
+            "source": 22,
+            "target": 69,
+            "weight": 1,
+            "strong": 0,
+            "shadow": true,
+            "jump": 10
+        },
+        {
+            "source": 18,
+            "target": 67,
+            "weight": 1,
+            "strong": 0,
+            "shadow": true,
+            "jump": 10
+        },
+        {
+            "source": 47,
+            "target": 63,
+            "weight": 1,
+            "strong": 0,
+            "shadow": true,
+            "jump": 10
+        },
+        {
+            "source": 63,
+            "target": 66,
+            "weight": 1,
+            "strong": 0,
+            "shadow": true,
+            "jump": 10
+        },
+        {
+            "source": 48,
+            "target": 62,
+            "weight": 1,
+            "strong": 0,
+            "shadow": true,
+            "jump": 10
+        },
+        {
+            "source": 48,
+            "target": 61,
+            "weight": 1,
+            "strong": 0,
+            "shadow": true,
+            "jump": 10
+        },
+        {
+            "source": 61,
+            "target": 60,
+            "weight": 1,
+            "strong": 0,
+            "shadow": true,
+            "jump": 10
+        },
+        {
+            "source": 54,
+            "target": 60,
+            "weight": 1,
+            "strong": 0,
+            "shadow": true,
+            "jump": 10
+        },
+        {
+            "source": 54,
+            "target": 59,
+            "weight": 1,
+            "strong": 0,
+            "shadow": true,
+            "jump": 10
+        },
+        {
+            "source": 52,
+            "target": 58,
+            "weight": 1,
+            "strong": 0,
+            "shadow": true,
+            "jump": 10
+        },
+        {
+            "source": 20,
+            "target": 68,
+            "weight": 1,
+            "strong": 0,
+            "shadow": true,
+            "jump": 10
+        },
+        {
+            "source": 64,
+            "target": 46,
+            "weight": 1,
+            "strong": 0,
+            "shadow": true,
+            "jump": 10
+        },
+        {
+            "source": 65,
+            "target": 43,
+            "weight": 1,
+            "strong": 0,
+            "shadow": true,
+            "jump": 10
+        },
+        {
+            "source": 70,
+            "target": 9,
+            "weight": 1,
+            "strong": 0,
+            "shadow": true,
+            "jump": 10
+        },
+        {
+            "source": 70,
+            "target": 71,
+            "weight": 1,
+            "strong": 0,
+            "shadow": true,
+            "jump": 10
+        }
+    ]
+}

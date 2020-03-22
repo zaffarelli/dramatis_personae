@@ -1,4 +1,5 @@
 {% load fics_filters %}
+{% if c.data.visible %}
 <div class='title  {% if c.data.to_PDF == False %}noPDF{% endif %} golden'>
     <div class='chapter big'>{{c.data.full_chapter|as_roman}}</div>
     <h2>{{ c.title }}</h2>
@@ -17,3 +18,4 @@
     {% for act in c.acts %}
         {% include "collector/config/act_detail.html" with c=act %}
     {% endfor %}
+{% endif %}

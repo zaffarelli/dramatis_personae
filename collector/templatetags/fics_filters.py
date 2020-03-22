@@ -5,6 +5,7 @@
 '''
 from django import template
 from collector.models.character import Character
+from collector.models.loot import Loot
 import re
 import string
 from django.template.defaultfilters import dictsort
@@ -97,6 +98,8 @@ def as_bullets_short_wildcard(value):
 def parse_avatars(value):
   """ Replace avatars rids by html links in a text
   """
+  value = "<br/>".join(value.split("\n"))
+  """ Auto """
   seeker = re.compile('\¤(\w+)\¤')
   changes = []
   res = str(value)
@@ -112,7 +115,7 @@ def parse_avatars(value):
   newres = res
   for change in changes:
     newres = newres.replace(change['src'],change['dst'])
-
+  """ Replace µ by subsection"""
   sym = 'µ'
   #search =  "[A-Za-z\s\.\'\;]+"
   search = "[A-Za-z0-9\é\è\ô\ö\à\s\.\'\;\-\(\)\&\:\,]+"
@@ -123,7 +126,7 @@ def parse_avatars(value):
   iter = seeker.finditer(txt)
   for item in iter:
     occ = ''.join(item.group().split(sym))
-    repstr = '<div class="subsection">%s</div>'%(occ)
+    repstr = '<br/><em>%s</em><br/>'%(occ)
     changes.append({'src':item.group(),'dst':repstr})
   for change in changes:
     txt = txt.replace(change['src'],change['dst'])
@@ -138,6 +141,42 @@ def parse_avatars(value):
   for item in iter:
     occ = ''.join(item.group().split(sym))
     repstr = '<strong>%s</strong>'%(occ)
+    changes.append({'src':item.group(),'dst':repstr})
+  for change in changes:
+    txt = txt.replace(change['src'],change['dst'])
+  """ Replace ° by custom data"""
+  sym = '°'
+  search = "[A-Za-z0-9\é\è\ô\ö\à\s\.\'\;\-\(\)\&\:\,\_]+"
+  myregex = "\%s%s\%s"%(sym,search,sym)
+  seeker = re.compile(myregex)
+  changes = []
+  iter = seeker.finditer(txt)
+  for item in iter:
+    occ = ''.join(item.group().split(sym))
+    loot = Loot.objects.filter(code=occ).first()
+    repstr = "<div class='loot'>"
+    repstr += "<strong>%s (%d)</strong><ul>"%(loot.name,loot.id)
+    repstr += "<ul>"
+    repstr += "<li>Response DV: <em>%d</em></li>"%(10+loot.sleeves_fame*loot.sleeves_gossip)
+    repstr += "<li>Number of people participating to the auction: %d</li>"%(loot.sleeves_authenticity*loot.sleeves_fame)
+    repstr += "<li>Highest auction: <em>£%d</em></li>"%(loot.sleeves_gossip*loot.sleeves_fame*loot.sleeves_minimum_increment+loot.price+loot.sleeves_auction*3)
+    repstr += "<li>Group: %s</li>"%(loot.group)
+    repstr += "<li>Estimated value: <em>£%d</em></li>"%(loot.price)
+    repstr += "</ul><ul>"
+    repstr += "<li>Fame: %d</li>"%(loot.sleeves_fame)
+    repstr += "<li>Gossip: %d</li>"%(loot.sleeves_gossip)
+    repstr += "<li>Authenticity: %d</li>"%(loot.sleeves_authenticity)
+    repstr += "<li>Base auction: <em>£%d</em></li>"%(loot.sleeves_auction)
+    repstr += "<li>Step: +£%d</li>"%(loot.sleeves_minimum_increment)
+    repstr += "</ul>"
+    repstr += "<p><strong>Procurrer:</strong> %s of %s</p>"%(loot.owner.full_name,loot.owner.alliance)
+    if loot.description:
+        repstr += "<strong>Description:</strong>"
+        repstr += "<p>%s</p>"%(loot.description)
+    if loot.secret:
+        repstr += "<strong>Notes:</strong>"
+        repstr += "<p>%s</p>"%(loot.secret)
+    repstr += "</div>"
     changes.append({'src':item.group(),'dst':repstr})
   for change in changes:
     txt = txt.replace(change['src'],change['dst'])

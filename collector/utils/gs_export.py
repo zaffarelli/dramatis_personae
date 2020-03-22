@@ -139,7 +139,7 @@ def gss_push(options,header_line):
             matrix[idx*COLS_AMOUNT+7].value = c.age
             matrix[idx*COLS_AMOUNT+8].value = c.entrance
             matrix[idx*COLS_AMOUNT+9].value = c.picture
-            matrix[idx*COLS_AMOUNT+10].value = ''
+            matrix[idx*COLS_AMOUNT+10].value = c.faction
             matrix[idx*COLS_AMOUNT+11].value = c.rid
         idx += 1
     sheet.clear()

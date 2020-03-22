@@ -19,6 +19,7 @@ class StoryModel(models.Model):
     description = models.TextField(max_length=2560,default='',blank=True)
     gamemaster = models.CharField(default='zaffarelli@gmail.com', max_length=128, blank=True)
     population_count = models.IntegerField(default=0, blank=True)
+    visible = models.BooleanField(default=False)
     to_PDF = models.BooleanField(default=True)
 
     def __str__(self):

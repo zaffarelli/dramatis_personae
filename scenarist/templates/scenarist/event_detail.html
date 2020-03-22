@@ -1,17 +1,26 @@
 {% load fics_filters %}
 <table class='details'>
   <tr>
-      <th>Title</th><th><strong>{{object.title}}</strong></th>
-      <th rowspan=4>Description</th><td class='desc'>{{object.description|parse_avatars|safe}}</td>
+      <th>Event</th>
+        <th><em>{{object.title}}</em></th>
+      <th>Anchor</th>
+        <th><strong>{{object.anchor|linebreaks|parse_avatars|safe}}</strong></th>
+      <th>Act</th>
+        <th><em>{{object.act.title}}</em></th>
+      <th>PDF</th>
+        <th>{{object.to_PDF}}</th>
+  </tr><tr>
+      <th>Date</th>
+        <th>{{object.date}}</th>
+      <th>Place</th>
+        <th>{{object.place}}</th>
+      <th>Challenge</th>
+        <th><strong>{{object.challenge}}</strong></th>
+      <th>&nbsp;</th>
+        <th>&nbsp;</th>
+  </tr><tr>
+  <th>Description</th><td colspan=7><div class='desc'>{{object.description|parse_avatars|safe}}</div></td>
+  </tr><tr>
+  <th>Resolution</th><td  colspan=7><div  class='desc'>{{object.resolution|parse_avatars|safe}}</div></td>
   </tr>
-  <tr><th>Anchor</th><th><strong>{{object.anchor|linebreaks|parse_avatars|safe}}</strong></th></tr>
-  <tr><th>Act</th><th><em>{{object.act.title}}</em></th></tr>
-  <tr><th>PDF</th><th>{{object.to_PDF}}</th></tr>
-  <tr>
-      <th>Date</th><th>{{object.date}}</th>
-      <th rowspan=3>Resolution</th><td class='desc' rowspan=3>{{object.resolution|parse_avatars|safe}}</td>
-  </tr>
-  <tr><th>Place</th><th>{{object.place}}</th></tr>
-  <tr><th>Challenge</th><th><strong>{{object.challenge}}</strong></th></tr>
-
 </table>
