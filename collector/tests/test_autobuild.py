@@ -8,7 +8,7 @@ from collector.models.character import Character
 from collector.tests.factories import UnbuildableCharacterFactory, VeteranGuilderFactory
 
 class AutobuildTest(TestCase):
-  fixtures = ['skill_ref.xml','specie.xml','role.xml','profile.xml']
+  fixtures = ['skill_ref.xml','specie.xml']
 
   def test_autobuild_character_creation(self):
     c = VeteranGuilderFactory.build()

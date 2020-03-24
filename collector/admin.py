@@ -13,9 +13,10 @@ from collector.models.blessing_curse_ref import BlessingCurseRef
 from collector.models.blessing_curse_ref_admin import BlessingCurseRefAdmin
 admin.site.register(BlessingCurseRef, BlessingCurseRefAdmin)
 
-from collector.models.fics_models import Role, RoleAdmin, Profile, ProfileAdmin, Specie, SpecieAdmin
-admin.site.register(Role, RoleAdmin)
-admin.site.register(Profile, ProfileAdmin)
+from collector.models.fics_models import Specie, SpecieAdmin
+#from collector.models.fics_models import Role, RoleAdmin, Profile, ProfileAdmin, Specie, SpecieAdmin
+# admin.site.register(Role, RoleAdmin)
+# admin.site.register(Profile, ProfileAdmin)
 admin.site.register(Specie, SpecieAdmin)
 
 from collector.models.armor_ref_admin import ArmorRefAdmin

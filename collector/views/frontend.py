@@ -8,7 +8,7 @@ from django.shortcuts import render, get_object_or_404, redirect, render_to_resp
 from django.core.paginator import Paginator
 
 from collector.models.character import Character
-from collector.models.fics_models import Specie, Role, Profile
+from collector.models.fics_models import Specie
 from collector.models.config import Config
 from collector.models.skill import Skill
 from collector.forms.basic import CharacterForm, SkillFormSet, TalentFormSet, BlessingCurseFormSet, BeneficeAfflictionFormSet, WeaponFormSet, ArmorFormSet, ShieldFormSet
@@ -112,6 +112,27 @@ def view_by_rid(request, slug=None):
   else:
     raise Http404
 
+def show_todo(request):
+  """ variant of get_list """
+  from scenarist.models.epics import Epic
+  from scenarist.models.dramas import Drama
+  from scenarist.models.acts import Act
+  from scenarist.models.events import Event
+  conf = get_current_config()
+  if request.is_ajax:
+    character_items = Character.objects.filter(epic=conf.epic, balanced=False).order_by('full_name')
+    paginator = Paginator(character_items,MAX_CHAR)
+    page = id
+    character_items = paginator.get_page(page)
+    context = {'character_items': character_items}
+    template = get_template('collector/list.html')
+    html = template.render(context)
+    return HttpResponse(html, content_type='text/html')
+  else:
+    Http404
+
+
+
 def extract_formset(rqp,s):
   """ Get only the fields matching to this formset """
   res = {}
@@ -131,8 +152,8 @@ def add_character(request, slug=None):
     item.epic = conf.epic
     item.use_history_creation = True
     item.specie = Specie.objects.filter(species='Urthish').first()
-    item.role = Role.objects.first()
-    item.profile = Profile.objects.first()
+    # item.role = Role.objects.first()
+    # item.profile = Profile.objects.first()
     item.save()
     character_item = get_object_or_404(Character,pk=item.id)
     template = get_template('collector/character_detail.html')

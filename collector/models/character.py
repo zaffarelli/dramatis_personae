@@ -10,7 +10,7 @@ from django.dispatch import receiver
 from django.urls import reverse
 import hashlib
 from scenarist.models.epics import Epic
-from collector.models.fics_models import Role, Profile, Specie
+from collector.models.fics_models import Specie
 from collector.models.combattant import Combattant
 from collector.utils import fs_fics7
 from collector.utils.basic import write_pdf
@@ -28,10 +28,10 @@ class Character(Combattant):
     player = models.CharField(max_length=200, default='', blank=True)
     specie = models.ForeignKey(Specie, null=True, default=31, blank=True,
                                on_delete=models.SET_NULL)
-    role = models.ForeignKey(Role, null=True, blank=True, default=1,
-                             on_delete=models.SET_NULL)
-    profile = models.ForeignKey(Profile, null=True, default=1, blank=True,
-                                on_delete=models.SET_NULL)
+    # role = models.ForeignKey(Role, null=True, blank=True, default=1,
+    #                          on_delete=models.SET_NULL)
+    # profile = models.ForeignKey(Profile, null=True, default=1, blank=True,
+    #                             on_delete=models.SET_NULL)
     birthdate = models.IntegerField(default=0)
     gender = models.CharField(max_length=30, default='female')
     native_fief = models.CharField(max_length=200, default='none', blank=True)
@@ -87,7 +87,7 @@ class Character(Combattant):
     OCC_DRK = models.PositiveIntegerField(default=0)
     occult = models.CharField(max_length=50, default='', blank=True)
     challenge = models.TextField(default='', blank=True)
-    is_exportable = models.BooleanField(default=False)
+    #is_exportable = models.BooleanField(default=False)
     is_visible = models.BooleanField(default=True)
     is_dead = models.BooleanField(default=False)
     is_locked = models.BooleanField(default=False)
@@ -203,18 +203,18 @@ class Character(Combattant):
         self.AP_tod_pool = 0
         self.OP_tod_pool = 0
         self.WP_tod_pool = 0
+        self.lifepath_total = 0
         for tod in self.tourofduty_set.all():
             AP, OP, WP = tod.push(self)
             self.AP_tod_pool += AP
             self.OP_tod_pool += OP
             self.OP_tod_pool += WP
+            self.WP_tod_pool += WP
+            self.lifepath_total += tod.tour_of_duty_ref.value
         if self.charactercusto:
             self.charactercusto.comment = self.full_name
             self.charactercusto.push(self)
             self.charactercusto.save()
-        self.lifepath_total = 0
-        for tod in self.tourofduty_set.all():
-            self.lifepath_total += tod.tour_of_duty_ref.value
         fs_fics7.check_secondary_attributes(self)
         self.charactercusto.save()
         self.prepareDisplay()
@@ -256,8 +256,6 @@ class Character(Combattant):
     def fix(self, conf=None):
         """ Check / calculate other characteristics """
         logger.info('Fixing ........: %s' % (self.full_name))
-        # self.preparePADisplay()
-
         if not conf:
             if self.birthdate < 1000:
                 self.birthdate = 5017 - self.birthdate
@@ -266,33 +264,38 @@ class Character(Combattant):
             if self.birthdate < 1000:
                 self.birthdate = conf.epic.era - self.birthdate
                 self.age = conf.epic.era - self.birthdate
-
-
-
-
         # NPC fix
         if self.player == 'none':
             self.player = ''
-
         if self.use_history_creation:
             self.rebuild_from_lifepath()
         else:
             self.rebuild_free_form()
         self.calculateShortcuts()
-
-
         if self.PA_BOD != 0:
-            if "urthish" in self.specie.species.lower():
-                self.height = 145+2.39473*(self.PA_BOD/2+self.PA_STR/2+self.PA_CON+2)
-                if self.gender == 'male':
-                    self.weight = self.height/(2.98-0.0336*(self.PA_BOD+self.PA_CON))
-                else:
-                    self.weight = self.height/(3.09-0.02975*(self.PA_BOD+self.PA_CON))
-                if self.PA_MOV!=self.PA_CON:
-                    self.weight *= 1+(self.PA_CON-self.PA_MOV)*0.1
-                logger.info("Height/Weight Experiment 1: %s --> %0.2f %0.2f BODY:%d CONSTITUTION:%d"%(self.full_name,self.height,self.weight,self.PA_BOD, self.PA_CON))
-        self.is_exportable = self.check_exportable()
+            if self.height == 0:
+                if "urthish" in self.specie.species.lower():
+                    self.height = 145+2.39473*(self.PA_BOD/2+self.PA_STR/2+self.PA_CON+2)
+                    if self.gender == 'male':
+                        self.weight = self.height/(2.98-0.0336*(self.PA_BOD+self.PA_CON))
+                    else:
+                        self.weight = self.height/(3.09-0.02975*(self.PA_BOD+self.PA_CON))
+                    if self.PA_MOV!=self.PA_CON:
+                        self.weight *= 1+(self.PA_CON-self.PA_MOV)*0.1
+                    logger.info("Height/Weight Experiment 1: %s --> %0.2f %0.2f BODY:%d CONSTITUTION:%d"%(self.full_name,self.height,self.weight,self.PA_BOD, self.PA_CON))
+        #self.is_exportable = True #self.check_exportable()
+        self.update_challenge()
         logger.debug('Done fixing ...: %s' % (self.full_name))
+
+    def update_challenge(self):
+        res = ''
+        res += '<i class="fas fa-th-large" title="primary attributes"></i>%d '%(self.AP)
+        res += '<i class="fas fa-th-list" title="skills"></i> %d '%(self.SK_TOTAL)
+        res += '<i class="fas fa-th" title="talents"></i> %d '%(self.TA_TOTAL+self.BC_TOTAL+self.BA_TOTAL)
+        res += '<i class="fas fa-star" title="wildcards"></i> %d '%(self.WP_tod_pool)
+        res += '<i class="fas fa-newspaper" title="OP challenge"></i> %d/%d'%(self.OP,self.lifepath_total)
+        self.challenge = res
+
 
     def calculateShortcuts(self):
         """ Calculate shortcuts for the avatar skills. A shortcut appears if skill.value>0  """
@@ -575,38 +578,15 @@ class Character(Combattant):
             self.shield_cost += s.shield_ref.cost
         return "ok"
 
-    def check_exportable(self, conf=None):
-        """ Is that avatar finished according to the role and profile? """
-        exportable = True
-        comment = ''
-        self.stars = ''
-        #self.build_log = ''
-        for x in range(1, int(self.role.value)+1):
-            self.stars += '<i class="fas fa-star fa-xs"></i>'
-        comment += self.resetTotal()
-        roleok = fs_fics7.check_role(self)
-        self.challenge = fs_fics7.update_challenge(self)
-        if not roleok:
-            exportable = False
-        if self.player != '':
-            comment += 'Warning: Players avatars are always exportable...\n'
-            exportable = True
-        #if comment != '':
-        #  self.build_log += comment
-        if self.is_exportable != exportable:
-            self.is_exportable = exportable
-            self.rid = 'none'
-        if self.use_history_creation:
-            self.is_exportable = True
-        return self.is_exportable
-
     def backup(self):
         """ Transform to PDF if exportable"""
-        proceed = self.is_exportable
-        if proceed:
+        proceed = True
+        try:
             item = self
             context = {'c': item, 'filename': '%s' % (item.rid)}
             write_pdf('collector/character_roster.html', context)
+        except:
+            proceed = False
         return proceed
 
     def __str__(self):
@@ -617,10 +597,10 @@ class Character(Combattant):
 
     # Auto build character
     def autobuild(self):
-        if self.role.value == 0 and not self.profile:
-            return False
-        else:
-            return True
+        # if self.role.value == 0 and not self.profile:
+        #     return False
+        # else:
+        return True
 
 
 @receiver(pre_save, sender=Character, dispatch_uid='update_character')

@@ -553,6 +553,10 @@ body {
                         & th[colspan="2"] {
                             width: 14ex;
                         }
+
+                        & th.skill_score_bar {
+                            width: 16ex;
+                        }
                     }
                 }
             }
@@ -585,7 +589,7 @@ body {
                     height: auto;
                 }
                 width: 100%;
-                max-width: 900px;
+                max-width: 1000px;
                 margin-left: 0;
                 margin-right: auto;
                 display: block;

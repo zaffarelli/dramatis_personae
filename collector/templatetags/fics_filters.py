@@ -228,8 +228,8 @@ def as_specialty(value):
 
 @register.filter(name='as_lifepath')
 def as_lifepath(value):
-  lp = ['Race','Upbringing','Apprenticeship','Early Career','Tour of Duty','Worldly Benefits']
-  return "%s"%(lp[int(value)])
+  lp = {'0':'Race','5':'Race Balance','10':'Upbringing','20':'Apprenticeship','30':'Early Career','40':'Tour of Duty','50':'Worldly Benefits'}
+  return "%s"%(lp[value])
 
 
 @register.filter(name='prettybool')

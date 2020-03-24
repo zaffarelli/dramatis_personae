@@ -157,6 +157,22 @@ function rebootlinks() {
     });
   });
 
+  $('#todo').off().on('click', function(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    $.ajax({
+      url: 'todo/show',
+      success: function(answer) {
+        $('.charlist').html(answer)
+        prepare_ajax();
+        rebootlinks();
+      },
+      error: function(answer) {
+        console.error('ooops... on show jumpweb...');
+      }
+    });
+  });
+
 
   /* Character Edition & Update*/
   $('.edit_character').off().on('click', function(event) {
@@ -241,21 +257,12 @@ function rebootlinks() {
         console.log(answer)
         $('li#' + dad_id).html(answer.avatar_link);
         rebootlinks();
-        //prepare_ajax();
-        //loadKeywords();
       },
       error: function(answer) {
         console.warn('Error on toggle...');
       },
     });
   });
-
-
-
-
-
-
-
 
   $('#conf_details').off().on('click', function(event) {
     event.preventDefault();
@@ -334,12 +341,9 @@ function rebootlinks() {
       success: function(answer) {
         $('.details').html(answer.character);
         $('li#' + answer.rid).html(answer.link);
-
         rebootlinks();
-        //console.log(answer);
         ac.reset(answer.id, "sheet_" + answer.id, "customizer");
         $("li#" + dad_id + " .character_name").click();
-
       },
       error: function(answer) {
         console.log('Recalc error...' + answer);
@@ -354,13 +358,8 @@ function rebootlinks() {
       url: 'ajax/recalc/character/' + $(this).attr('id') + '/',
       success: function(answer) {
         $('.details').html(answer.character);
-        //$('li#'+answer.rid).html(answer.link);
-
         rebootlinks();
-        //console.log(answer);
         ac.reset(answer.id, "sheet_" + answer.id, "customizer");
-        //$("li#"+dad_id+" .character_name").click();
-
       },
       error: function(answer) {
         console.log('Recalc error...' + answer);
@@ -368,26 +367,6 @@ function rebootlinks() {
     });
   });
 
-
-  // $('.recalc_pa_character').off().on('click',function(event){
-  //     event.preventDefault();
-  //     event.stopPropagation();
-  //     var dad = $(this).parents('li').find('div.avatar_link');
-  //     $('li').find('div.avatar_link').removeClass('selected');
-  //     $(dad).addClass('selected');
-  //     $.ajax({
-  //         url: 'ajax/recalc_pa/character/'+$(this).attr('id')+'/',
-  //         success: function(answer) {
-  //             $('.details').html(answer.character);
-  //             $('li#'+answer.rid).html(answer.link);
-  //             $('li').find('div.avatar_link').removeClass('selected');
-  //             rebootlinks();
-  //         },
-  //         error: function(answer){
-  //             console.log('Recalc error...'+answer);
-  //         }
-  //     });
-  // });
   $('.character_name').off().on('click', function(event) {
     event.preventDefault();
     event.stopPropagation();
@@ -396,26 +375,7 @@ function rebootlinks() {
     $(mine).toggleClass('hidden');
     rebootlinks();
   });
-  // $('.recalc_skills_character').off().on('click',function(event){
-  //     event.preventDefault();
-  //     event.stopPropagation();
-  //     var dad = $(this).parents('li').find('div.avatar_link');
-  //     $('li').find('div.avatar_link').removeClass('selected');
-  //     $(dad).addClass('selected');
-  //     $.ajax({
-  //         url: 'ajax/recalc_skills/character/'+$(this).attr('id')+'/',
-  //         success: function(answer) {
-  //             $('.details').html(answer.character);
-  //             $('li#'+answer.rid).html(answer.link);
-  //             $('li').find('div.avatar_link').removeClass('selected');
-  //             rebootlinks();
-  //             ac.reset($(this).attr('id'),"toto","here")
-  //         },
-  //         error: function(answer){
-  //             console.log('Recalc error...'+answer);
-  //         }
-  //     });
-  // });
+
   $('.view_character').off().on('click', function(event) {
     console.log('View: ' + $(this).attr('id'));
     event.preventDefault();
@@ -437,48 +397,7 @@ function rebootlinks() {
       }
     });
   });
-  /*
-  // Touching skills
-  $('th.edit span.fa').off().on('click',function(event){
-      block = $(this).parent();
-      sender = block.attr('id').split('_')[1];
-      target = 'val_'+block.attr('id').split('_')[1];
-      fingerval = 0;
-      if ($(this).hasClass('fa-plus-circle')){
-          fingerval = 1;
-      }
-      if ($(this).hasClass('fa-minus-circle')){
-          fingerval = -1;
-      }
-      console.log(sender);
-      console.log(target);
-      $.ajax({
-          url: 'ajax/skill_touch/',
-          method: 'POST',
-          headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/x-www-form-urlencoded'
-          },
-          dataType:'json',
-          data: {skill:sender,finger:fingerval},
-          success: function(answer) {
-              console.log(answer);
-              $('th#'+target).html(answer);
-          },
-          error: function(answer){
-              console.log(answer);
-              $('th#'+target).html(answer.responseText);
-          },
-      });
-  });
-  */
-  // $('.tabber').off().on('click', function(event){
-  //     var x = $(this).attr('id');
-  //     $('.tabs').removeClass('tab_up');
-  //     var target = '.tabs#'+x+'t';
-  //     $(target).toggleClass('tab_up');
-  //     console.log(target);
-  // });
+
 
   sc.doConnect();
   op.doConnect();

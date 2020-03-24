@@ -370,6 +370,8 @@ body {
               text-align: center; }
             body .wrapper .details .skillsview table tr th[colspan="2"] {
               width: 14ex; }
+            body .wrapper .details .skillsview table tr th.skill_score_bar {
+              width: 16ex; }
       body .wrapper .details .edit {
         color: #fc2; }
       body .wrapper .details .chart_panel {
@@ -385,7 +387,7 @@ body {
           height: auto; }
       body .wrapper .details .classyview {
         width: 100%;
-        max-width: 900px;
+        max-width: 1000px;
         margin-left: 0;
         margin-right: auto;
         display: block;

@@ -30,7 +30,7 @@ class CharacterForm(ModelForm):
                'armor_cost','shield_cost','score', 'lifepath_total', 'OCC_LVL',
                'OCC_DRK', 'PA_STR','PA_BOD', 'PA_CON', 'PA_MOV', 'PA_INT',
                'PA_WIL', 'PA_TEM', 'PA_PRE', 'PA_TEC', 'PA_REF', 'PA_AGI',
-               'PA_AWA', 'OCC_LVL', 'OCC_DRK', 'role', 'profile',
+               'PA_AWA', 'OCC_LVL', 'OCC_DRK',
                'onsave_reroll_attributes', 'onsave_reroll_skills', 'importance', 'fights', 'victories', 'victory_rating', 'fencing_league' ]
 
 class TourOfDutyRefForm(ModelForm):
@@ -47,7 +47,7 @@ BeneficeAfflictionFormSet = inlineformset_factory(Character, BeneficeAffliction,
 ArmorFormSet = inlineformset_factory(Character, Armor, fields='__all__', extra=3, can_delete = True)
 WeaponFormSet = inlineformset_factory(Character, Weapon, fields='__all__', extra=3, can_delete = True)
 ShieldFormSet = inlineformset_factory(Character, Shield, fields='__all__', extra=3, can_delete = True)
-TourOfDutyFormSet = inlineformset_factory(Character,TourOfDuty, fields='__all__', extra=8, can_delete = True)
+TourOfDutyFormSet = inlineformset_factory(Character,TourOfDuty, fields='__all__', extra=9, can_delete = True)
 
 # Tour of duty
 SkillModificatorFormSet = inlineformset_factory(TourOfDutyRef, SkillModificator, fields='__all__', extra=5, can_delete = True)

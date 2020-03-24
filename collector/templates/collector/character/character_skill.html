@@ -23,7 +23,7 @@
                     </th>
                     {% endif %}
                 {% endif %}
-                <th id='val_{{skill.id}}'>
+                <th class='skill_score_bar' id='val_{{skill.id}}'>
                     {% if skill.skill_ref.is_wildcard %}
                     {{ skill.value|as_bullets_short_wildcard|safe }}
                     {% else %}

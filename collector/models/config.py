@@ -56,54 +56,15 @@ class Config(models.Model):
   def prepare_colorset(self, size = 16):
     colorset = []
     hcolorset = []
+    colval = '456789AB'
     idx = 0
-    circ = 360.0
-    vmin, vmax = 0X33, 0xcc
-    colval = [vmin,vmin,vmin]
-    try:
-      angle_inc = (circ*math.pi * 2) / (size)
-      #print('ok')
-    except:
-      #print('paf')
-      return [],[]
-    #print('Full circle=%0.4f'%(math.pi * 2))
-    angle_step = (circ*math.pi * 2) / 8
-    #compo_range = (vmax-vmin)/angle_step
-    target_component = [
-      [2,+1],    # 0 0 0   0
-      [1,+1],    # 0 0 1   1
-      [2,-1],    # 0 1 1   3
-      [0,+1],    # 0 1 0   2
-      [2,+1],    # 1 1 0   6
-      [1,-1],    # 1 1 1   7
-      [2,-1],    # 1 0 1   5
-      [0,-1]     # 1 0 0   4
-    ]
-    comp = 0
     while idx < size:
-      angle = angle_inc * (idx % size)
-      angle_steps_covered = int(angle / angle_step)
-      inc = (vmax-vmin)*6/size #(angle - int(angle_steps_covered)*angle_step)/angle_step * (vmax-vmin)
-
-      cv = target_component[comp][0]
-      if target_component[comp][1] > 0:
-        colval[cv] +=  int(inc)
-        if colval[cv]+inc>vmax:
-          comp += 1
-      else:
-        colval[cv] -=  int(inc)
-        if colval[cv]-inc<vmin:
-          comp += 1
-      comp %= 8
-      col = '#%02X%02X%02X80'%(colval[0]%0xff,colval[1]%0xff,colval[2]%0xff)
-      hcol = '#%02X%02X%02XF0'%(colval[0]%0xff,colval[1]%0xff,colval[2]%0xff)
-      #col = '#%02X80%02X80'%(int((idx/size)*256),int((idx/size)*256))
+      com = '%s%s%s%s%s%s'%(random.sample(colval,1)[0],random.sample(colval,1)[0],random.sample(colval,1)[0],random.sample(colval,1)[0],random.sample(colval,1)[0],random.sample(colval,1)[0])
+      col = '#'+com+'88'
+      hcol = '#'+com+'FF'
       colorset.append(col)
       hcolorset.append(hcol)
-      #print('%16s (comp:%0.4f inc:%0.4f ASC:%0.4f )'%(col,comp,inc, angle_steps_covered ))
-      #print('%16s'%(col))
       idx += 1
-    #print('done')
     return colorset, hcolorset
 
   def get_chart(self,o,filter='',pattern='',type='bar',bar_property=''):
@@ -128,7 +89,6 @@ class Config(models.Model):
         else:
            if arrfetch.get(value) is None:
                arrfetch[value] = c.__dict__[bar_property]
-    #print(arrfetch)
     for x in arrfetch:
       inside_labels.append(x)
       dat.append(arrfetch[x])
@@ -153,7 +113,7 @@ class Config(models.Model):
         'options': {
           'title': {
             'display': True,
-            'text': o,
+            'text': o.upper(),
             'fontColor':'#fff',
           },
           'legend': {

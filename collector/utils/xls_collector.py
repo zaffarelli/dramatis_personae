@@ -11,7 +11,7 @@ from collector.models.weapon import WeaponRef
 from collector.models.skill import SkillRef
 from collector.models.armor import ArmorRef
 from collector.models.benefice_affliction import BeneficeAfflictionRef
-from datetime import datetime 
+from datetime import datetime
 from collector.utils.fs_fics7 import minmax_from_dc
 from openpyxl.styles import PatternFill
 from openpyxl.styles import colors
@@ -38,23 +38,23 @@ def export_header(ws,data):
 def export_row(ws, data, ch, r):
   """ Export a row from a set """
   for num,dx in enumerate(data,start=1):
-    the_field = data[dx]['attribute']    
+    the_field = data[dx]['attribute']
     field_type = ch._meta.get_field(the_field).get_internal_type()
     val = getattr(ch,the_field)
     if field_type == 'ForeignKey':
       related_model = str(self._meta.get_field(the_field).related_model)
       if related_model == "<class 'collector.models.fics_models.Specie'>":
         data = Specie.objects.filter(pk=val).first().specie
-      elif related_model == "<class 'collector.models.fics_models.Role'>":
-        data = Role.objects.filter(pk=val).first().reference
-      elif related_model == "<class 'collector.models.fics_models.Profile'>":
-        data = Profile.objects.filter(pk=val).first().reference
+      # elif related_model == "<class 'collector.models.fics_models.Role'>":
+      #   data = Role.objects.filter(pk=val).first().reference
+      # elif related_model == "<class 'collector.models.fics_models.Profile'>":
+      #   data = Profile.objects.filter(pk=val).first().reference
       else:
         data = 'Unknown'
     else:
       data = val
     ws.cell(column=num, row=r, value='%s'%(data))
-    
+
 def export_to_xls(filename='dramatis_personae.xlsx'):
   """ XLS extraction of the Characters """
   wb = Workbook()
@@ -113,7 +113,7 @@ def export_to_xls(filename='dramatis_personae.xlsx'):
     '38':{'title':'Exportable','attribute':'is_exportable','width':5},
     '39':{'title':'Dead','attribute':'is_dead','width':5},
     '40':{'title':'Locked','attribute':'is_locked','width':5},
-  }  
+  }
   ws.cell(column=1, row=1, value='Dramatis Personae')
   character_items = Character.objects.all().order_by('full_name')
   export_header(ws,h)
@@ -131,7 +131,7 @@ def export_to_xls(filename='dramatis_personae.xlsx'):
     '4':{'title':'CO','attribute':'conceilable','width':5},
     '5':{'title':'AV','attribute':'availability','width':5},
     '6':{'title':'DC','attribute':'damage_class','width':15},
-    '7':{'title':'cal.','attribute':'caliber','width':15},    
+    '7':{'title':'cal.','attribute':'caliber','width':15},
     '8':{'title':'STR','attribute':'str_min','width':5},
     '9':{'title':'RoF','attribute':'rof','width':5},
     '10':{'title':'Clip','attribute':'clip','width':5},
@@ -155,7 +155,7 @@ def export_to_xls(filename='dramatis_personae.xlsx'):
     '2':{'title':'Root','attribute':'is_root','width':10},
     '3':{'title':'Speciality','attribute':'is_speciality','width':10},
     '4':{'title':'Linked To','attribute':'linked_to','width':20},
-    '5':{'title':'Group','attribute':'group','width':10},    
+    '5':{'title':'Group','attribute':'group','width':10},
   }
   ws.cell(column=1, row=1, value='Dramatis Personae')
   skillref_items = SkillRef.objects.all().order_by('is_speciality','reference')
@@ -169,7 +169,7 @@ def export_to_xls(filename='dramatis_personae.xlsx'):
   ws = wb.create_sheet('Armors_References')
   h = {
     '1':{'title':'Ref','attribute':'reference','width':30},
-    '2':{'title':'Category','attribute':'category','width':10},    
+    '2':{'title':'Category','attribute':'category','width':10},
     '3':{'title':'Head','attribute':'head','width':5},
     '4':{'title':'Torso','attribute':'torso','width':5},
     '5':{'title':'LeftArm','attribute':'left_arm','width':5},
@@ -194,7 +194,7 @@ def export_to_xls(filename='dramatis_personae.xlsx'):
   ws = wb.create_sheet('Benefices_Afflicitions_References')
   h = {
     '1':{'title':'Ref','attribute':'reference','width':30},
-    '2':{'title':'Value','attribute':'value','width':5},    
+    '2':{'title':'Value','attribute':'value','width':5},
     '3':{'title':'Category','attribute':'category','width':10},
     '4':{'title':'Description','attribute':'description','width':60},
     '5':{'title':'ID','attribute':'id','width':5},
@@ -221,7 +221,7 @@ def export_to_xls(filename='dramatis_personae.xlsx'):
     '8':{'title':'Caste','attribute':'caste','width':10},
     '9':{'title':'Age','attribute':'age','width':10},
     '10':{'title':'Entrance','attribute':'entrance','width':40},
-  }  
+  }
   ws.cell(column=1, row=1, value='Dramatis Personae')
   character_items = Character.objects.all().order_by('full_name').filter(epic=1,is_visible=True)
   export_header(ws,h)
@@ -262,7 +262,7 @@ def update_from_xls(filename='dramatis_personae.xlsx'):
         else:
           bar = BeneficeAfflictionRef.objects.get(id=sheet_id)
           print("found! %d"%(sheet_id))
-        
+
         if bar is None:
           bar = BeneficeAfflictionRef(reference=ws[colrow(1,cnt)].value)
         bar.reference = ws[colrow(1,cnt)].value
@@ -272,10 +272,9 @@ def update_from_xls(filename='dramatis_personae.xlsx'):
         if ws[colrow(4,cnt)].value is None:
           desc = ""
         else:
-          desc = ws[colrow(4,cnt)].value 
+          desc = ws[colrow(4,cnt)].value
         bar.description = desc
         bar.save()
         print(bar)
         print("")
         cnt += 1
-

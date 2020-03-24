@@ -21,7 +21,8 @@
   <div class='character_info hidden'>
     {{ c.entrance|safe }}<br/>
     {% if c.fencing_league %}Proud member of the Fencing League.<br/>{%endif%}
-    {{ c.challenge|safe }} | ID:<span class='action_icon custom_show' id='{{c.id}}'>{{c.id}}</span> {{c.stars|safe}} {% if c.is_locked %}<i class="fas fa-lock golden"></i>{% endif %}
-    <br/> ({%if c.keyword != '' %}<span class='action custom_glance' id='{{c.keyword}}'>{{c.keyword|safe}}</span>{%endif%})
+    {{ c.challenge|safe }}
+    <br/> ID:<span class='action_icon custom_show' id='{{c.id}}'>{{c.id}}</span> {{c.rid}}
+    <br/>({%if c.keyword != '' %}<span class='action custom_glance' id='{{c.keyword}}'>{{c.keyword|safe}}</span>{%endif%})
   </div>
 </div>

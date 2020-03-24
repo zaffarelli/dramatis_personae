@@ -7,7 +7,7 @@ from django.conf.urls import url
 from django.urls import path, re_path
 from collector.views.basic import pdf_show
 from collector.views.characters import CharacterDetailView, CharacterUpdateView, customize_ba, customize_bc, customize_skill, customize_ba_del, customize_bc_del, skill_pick, attr_pick, customize_weapon, customize_weapon_del, customize_armor, customize_armor_del, customize_shield, customize_shield_del
-from collector.views.frontend import index, view_by_rid, toggle_public, get_list, add_character, get_storyline, conf_details, recalc_character, update_messenger, show_jumpweb #, recalc_pa_character, recalc_skills_character
+from collector.views.frontend import index, view_by_rid, toggle_public, get_list, add_character, get_storyline, conf_details, recalc_character, update_messenger, show_jumpweb, show_todo #, recalc_pa_character, recalc_skills_character
 from collector.views.backend import recalc,export,xls_update,pdf_character, gss_update, pdf_rules
 from collector.views.misc_chart import get_chardar, get_population_statistics, get_keywords
 
@@ -32,6 +32,7 @@ urlpatterns = [
     re_path('^ajax/add/character/(?P<slug>[\w-]+)/$', add_character, name='add_character'),
     re_path('^ajax/conf_details/$', conf_details, name='conf_details'),
     re_path('^jumpweb/show$', show_jumpweb, name='show_jumpweb'),
+    re_path('^todo/show$', show_todo, name='show_todo'),
     re_path('^ajax/build_pdf_rules/$', pdf_rules, name='pdf_rules'),
     re_path('^api/chardar/(?P<id>\d+)/$', get_chardar, name='get_chardar'),
     re_path('^api/popstats/$', get_population_statistics, name='get_popstats'),

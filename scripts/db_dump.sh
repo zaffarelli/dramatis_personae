@@ -1,5 +1,5 @@
 # ╔╦╗┬─┐┌─┐┌┬┐┌─┐┌┬┐┬┌─┐  ╔═╗┌─┐┬─┐┌─┐┌─┐┌┐┌┌─┐┌─┐
-#  ║║├┬┘├─┤│││├─┤ │ │└─┐  ╠═╝├┤ ├┬┘└─┐│ ││││├─┤├┤ 
+#  ║║├┬┘├─┤│││├─┤ │ │└─┐  ╠═╝├┤ ├┬┘└─┐│ ││││├─┤├┤
 # ═╩╝┴└─┴ ┴┴ ┴┴ ┴ ┴ ┴└─┘  ╩  └─┘┴└─└─┘└─┘┘└┘┴ ┴└─┘
 #!/bin/bash
 clear
@@ -10,8 +10,8 @@ python3 manage.py dumpdata collector.SkillRef --format xml --output backup/refer
 python3 manage.py dumpdata collector.ArmorRef --format xml --output backup/reference/armor_ref.xml
 python3 manage.py dumpdata collector.ShieldRef --format xml --output backup/reference/shield_ref.xml
 python3 manage.py dumpdata collector.TalentRef --format xml --output backup/reference/talent_ref.xml
-python3 manage.py dumpdata collector.Role --format xml --output backup/reference/role.xml
-python3 manage.py dumpdata collector.Profile --format xml --output backup/reference/profile.xml
+# python3 manage.py dumpdata collector.Role --format xml --output backup/reference/role.xml
+# python3 manage.py dumpdata collector.Profile --format xml --output backup/reference/profile.xml
 python3 manage.py dumpdata collector.Specie --format xml --output backup/reference/specie.xml
 python3 manage.py dumpdata collector.BlessingCurseRef --format xml --output backup/reference/blessing_curse_ref.xml
 python3 manage.py dumpdata collector.BeneficeAfflictionRef --format xml --output backup/reference/benefice_affliction_ref.xml
@@ -26,6 +26,7 @@ python3 manage.py dumpdata collector.Weapon --format xml --output backup/custom/
 python3 manage.py dumpdata collector.Armor --format xml --output backup/custom/armor.xml
 python3 manage.py dumpdata collector.Shield --format xml --output backup/custom/shield.xml
 python3 manage.py dumpdata collector.Talent --format xml --output backup/custom/talent.xml
+python3 manage.py dumpdata collector.Loot --format xml --output backup/custom/loot.xml
 python3 manage.py dumpdata collector.BlessingCurse --format xml --output backup/custom/blessing_curse.xml
 python3 manage.py dumpdata collector.BeneficeAffliction --format xml --output backup/custom/benefice_afflictions.xml
 python3 manage.py dumpdata collector.TourOfDuty --format xml --output backup/custom/tour_of_duty.xml
@@ -41,8 +42,6 @@ python3 manage.py dumpdata collector.Config --format xml --output backup/custom/
 echo -e "\e[0;35mMoving to fixtures...\e[0;m"
 cp backup/reference/skill_ref.xml collector/fixtures/
 cp backup/reference/talent_ref.xml collector/fixtures/
-cp backup/reference/role.xml collector/fixtures/
-cp backup/reference/profile.xml collector/fixtures/
 cp backup/reference/specie.xml collector/fixtures/
 cp backup/reference/benefice_affliction_ref.xml collector/fixtures/
 cp backup/reference/benefice_affliction_modificator.xml collector/fixtures/

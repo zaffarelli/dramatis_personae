@@ -10,7 +10,7 @@ from collector.utils import fics_references
 
 class TourOfDutyRef(models.Model):
     class Meta:
-        ordering = ['category','caste','topic','reference']
+        ordering = ['category','reference']
         verbose_name = "Tour of Duty Reference"
     reference = models.CharField(max_length=64,default='',blank=True)
     category = models.CharField(max_length=20,choices=fics_references.LIFEPATH_CATEGORY,default='Tour of Duty',blank=True)
@@ -39,7 +39,7 @@ class TourOfDutyRef(models.Model):
     description = models.TextField(max_length=1024,default='',blank=True)
 
     def __str__(self):
-        return '[%s|%s] %s (%d)' % (fics_references.LIFEPATH_CATEGORY_SHORT[self.category],fics_references.LIFEPATH_CASTE_SHORT[self.caste],self.reference,self.value)
+        return '[%s] %s (%s)(%d)' % (fics_references.LIFEPATH_CATEGORY_SHORT[self.category], self.reference,fics_references.LIFEPATH_CASTE_SHORT[self.caste],self.value)
 
     def fix(self):
         self.WP = 0

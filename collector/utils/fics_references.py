@@ -22,36 +22,40 @@ import hashlib
   TOTAL ...................: 280 OP
 """
 
-MAX_CHAR = 12
-RELEASE = '1.8.3'
+MAX_CHAR = 18
+RELEASE = '1.8.4'
 DEBUG_ALL = False
 
 LIFEPATH_CATEGORY=(
   ('0',"Birthright"),
-  ('1',"Upbringing"),
-  ('2',"Apprenticeship"),
-  ('3',"Early Career"),
-  ('4',"Tour of Duty"),
-  ('5',"Worldly Benefits"),
+  ('5',"Balance"),
+  ('10',"Upbringing"),
+  ('20',"Apprenticeship"),
+  ('30',"Early Career"),
+  ('40',"Tour of Duty"),
+  ('50',"Worldly Benefits"),
 )
 
+  #('6',"Birthright balance"),
 
 LIFEPATH_CATEGORY_SHORT={
   '0':"BR",
-  '1':"UB",
-  '2':"AP",
-  '3':"EC",
-  '4':"TD",
-  '5':"WB",
+  '5':"BA",
+  '10':"UB",
+  '20':"AP",
+  '30':"EC",
+  '40':"TD",
+  '50':"WB",
 }
 
 LIFEPATH_CATEGORY_VAL={
   '0':100,
-  '1':15,
-  '2':25,
-  '3':50,
-  '4':20,
-  '5':7,
+  '5':100,
+  '10':15,
+  '20':25,
+  '30':50,
+  '40':20,
+  '50':7,
 }
 
 LIFEPATH_CASTE=(

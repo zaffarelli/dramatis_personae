@@ -19,16 +19,6 @@ class FICSTestSkills(TestCase):
     c = CharacterCheckSkillsFactory.create()
     self.assertEquals(c.rid,'seasoned_military_urthish_kaanic')
 
-  def test_check_skills_Total(self):
-    # Check skills total according to role
-    c = CharacterCheckSkillsFactory.create()
-    sk_pool = c.role.skills
-    check_skills(c)
-    skill_total = 0
-    for s in c.skill_set.all():
-      if (s.skill_ref.is_root == False):
-        skill_total += s.value
-    self.assertEqual(skill_total,sk_pool)
 
 class FICSTestPA(TestCase):
   fixtures = ['skillrefs.xml','species.xml','roles.xml','profiles.xml']
