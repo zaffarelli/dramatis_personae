@@ -30,7 +30,7 @@ cupshelpers==1.0
 dbus-python==1.2.8
 decorator==4.2.1
 distro==1.4.0
-Django==2.2.7
+Django==2.2.10
 django-appconf==1.0.3
 django-compressor==2.3
 django-crispy-forms==1.7.2
