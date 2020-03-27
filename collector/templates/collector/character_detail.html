@@ -22,10 +22,10 @@
     <li><b>Rank</b>{{ c.rank }}</li>
     <li><b>Height</b>{{ c.height|as_height }}</li>
     <li><b>Weight</b>{{ c.weight|as_weight }}</li>
+    <li><b>Player</b>{{ c.player }}</li>
 </ul>
 <span class='pagebreaker'>&nbsp;</span>
 <ul class='unbreakable'>
-    <li><b>Player</b>{{ c.player }}</li>
     <li><b>Keyword</b>{{ c.keyword }}</li>
     <li><b>ID</b>{{c.id}}</li>
     <li><b>Dead</b>{{ c.is_dead|prettybool|safe }}</li>
@@ -33,15 +33,6 @@
     <li><b>Lifepaths</b>{{c.use_history_creation|prettybool|safe}}</li>
     <li><b>Occult</b>{{c.occult}}</li>
 </ul>
-<span class='attributes'>
-    <table id="OCC_LVL_{{c.id}}" class='attrpick occult'>
-        {% include "collector/character/character_pa.html" with c=c.info_lvl %}
-    </table>
-    <table id="OCC_DRK_{{c.id}}" class='attrpick occult'>
-        {% include "collector/character/character_pa.html" with c=c.info_drk %}
-    </table>
-</span>
-
 <span class='pagebreaker'>&nbsp;</span>
 {% if c.tourofduty_set.count != 0 %}
     <ul class='unbreakable'>
@@ -55,6 +46,16 @@
 {% else %}
     <ul class='unbreakable'></ul>
 {% endif %}
+
+<span class='attributes'>
+    <table id="OCC_LVL_{{c.id}}" class='attrpick occult'>
+        {% include "collector/character/character_pa.html" with c=c.info_lvl %}
+    </table>
+    <table id="OCC_DRK_{{c.id}}" class='attrpick occult'>
+        {% include "collector/character/character_pa.html" with c=c.info_drk %}
+    </table>
+</span>
+
 </div>
 
 <h2>Attributes ({{c.PA_TOTAL}}x3)</h2>

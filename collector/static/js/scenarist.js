@@ -12,11 +12,19 @@ class Scenarist{
         $('.view_'+x).off().on('click', function(event){
             event.preventDefault();
             event.stopPropagation();
-            var t_id = $(this).attr('id')
+            let t_id = $(this).attr('id')
+            let id = t_id.split("_")[t_id.split("_").length-1]
+            let children = $(this).parent("p").attr('children');
             $.ajax({
-                url: x+'s/'+t_id+'/view',
+                url: x+'s/'+id+'/view',
                 success: function(answer) {
-                    $('#'+x+'_'+t_id).html(answer);
+                    $('#'+x+'_'+id).html(answer);
+                    if (children != undefined){
+                      let ch = children.split(";")
+                      _.forEach(ch,function(d){
+                        $("#view_"+d).click();
+                      })
+                    }
                     prepare_ajax();
                     rebootlinks();
                 },
@@ -28,15 +36,25 @@ class Scenarist{
         $('.hide_'+x).off().on('click', function(event){
             event.preventDefault();
             event.stopPropagation();
-            var t_id = $(this).attr('id')
-            $('#'+x+'_'+t_id).html('');
+            let t_id = $(this).attr('id')
+            let id = t_id.split("_")[t_id.split("_").length-1]
+            let children = $(this).parent("p").attr('children');
+            $('#'+x+'_'+id).html('');
+            if (children != undefined){
+              let ch = children.split(";")
+              _.forEach(ch,function(d){
+                $("#hide_"+d).click();
+              })
+            }
             prepare_ajax();
             rebootlinks();
         });
         $('.edit_'+x).off().on('click', function(event){
             event.preventDefault();
             event.stopPropagation();
-            var t_id = $(this).attr('id')
+            let t_id = $(this).attr('id')
+            let id = t_id.split("_")[t_id.split("_").length-1]
+            let children = $(this).parent("p").attr('children');
             $.ajax({
                 url: x+'s/'+t_id+'/edit',
                 success: function(answer) {

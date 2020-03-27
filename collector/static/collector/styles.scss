@@ -470,7 +470,6 @@ body {
                 margin-top: 3px;
                 border: 1px solid $fics_subborder_color;
                 border-radius: 2px;
-                margin-top: 3px;
                 width: 100%;
                 border: 1px solid $fics_subborder_color;
                 border-radius: 2px;
@@ -481,6 +480,7 @@ body {
                     padding: 0;
                     margin: 0;
                     list-style: none;
+                    min-height: 16em;
 
                     & li {
                         padding: 3px;

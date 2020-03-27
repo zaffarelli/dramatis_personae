@@ -28,7 +28,7 @@ class WeaponRef(models.Model):
   stats = models.CharField(max_length=256,default='',blank=True)
   origins = models.CharField(max_length=64,default='',blank=True)
   def __str__(self):
-    return '%s' % (self.stats)
+    return '[%s/%s] %s' % (self.reference,self.meta_type/self.category)
   def get_stats_line(self):
     res = []
     res.append(self.reference)
@@ -67,5 +67,5 @@ def update_stats_lines(modeladmin, request, queryset):
 
 class WeaponRefAdmin(admin.ModelAdmin):
   list_display = ('reference','meta_type','origins','category','caliber','weapon_accuracy','damage_class','availability','cost', 'description')
-  ordering = ('category','meta_type','reference','origins','damage_class',)
+  ordering = ('-category','meta_type','reference','origins','damage_class',)
   actions = [update_stats_lines,]

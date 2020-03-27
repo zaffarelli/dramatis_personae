@@ -4,13 +4,13 @@
     <div class='chapter big'>{{c.data.full_chapter|as_roman}}</div>
     <h2>{{ c.title }}</h2>
     <div class='storybar drama'>
-        <p class='drama_{{c.data.id}}'>
+        <p class='drama_{{c.data.id}}' children='{{c.data.children}}'>
             <button class='compact episode_cast' id='c-drama-{{c.data.id}}' page='1'>Drama</button>
-            <button class='compact view_drama' id='{{c.data.id}}'>View</button>
-            <button class='compact edit_drama' id='{{c.data.id}}'>Edit</button>
-            <button class='compact hide_drama' id='{{c.data.id}}'>Close</button>
-            <button class='compact add_act' id='{{c.data.id}}'>Add</button>
-            <button class='compact delete_drama' id='{{c.data.id}}'>Delete</button>
+            <button class='compact view_drama' id='view_drama_{{c.data.id}}'>View</button>
+            <button class='compact edit_drama' id='edit_drama_{{c.data.id}}'>Edit</button>
+            <button class='compact hide_drama' id='hide_drama_{{c.data.id}}'>Close</button>
+            <button class='compact add_act' id='add_drama_{{c.data.id}}'>Add</button>
+            <button class='compact delete_drama' id='delete_drama_{{c.data.id}}'>Delete</button>
         </p>
     </div>
 </div>

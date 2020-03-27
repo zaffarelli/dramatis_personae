@@ -309,7 +309,6 @@ body {
         margin-top: 3px;
         border: 1px solid black;
         border-radius: 2px;
-        margin-top: 3px;
         width: 100%;
         border: 1px solid black;
         border-radius: 2px; }
@@ -318,7 +317,8 @@ body {
           page-break-inside: avoid;
           padding: 0;
           margin: 0;
-          list-style: none; }
+          list-style: none;
+          min-height: 16em; }
           body .wrapper .details .coreblock ul li {
             padding: 3px;
             margin: 0;

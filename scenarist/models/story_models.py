@@ -18,7 +18,7 @@ class StoryModel(models.Model):
     place = models.CharField(max_length=128, default='', blank=True)
     description = models.TextField(max_length=2560,default='',blank=True)
     gamemaster = models.CharField(default='zaffarelli@gmail.com', max_length=128, blank=True)
-    population_count = models.IntegerField(default=0, blank=True)
+    #population_count = models.IntegerField(default=0, blank=True)
     visible = models.BooleanField(default=False)
     to_PDF = models.BooleanField(default=True)
 
@@ -43,6 +43,15 @@ class StoryModel(models.Model):
     def toJSON(self):
         """ Returns JSON of object """
         return json.dumps(self, default=lambda o: o.__dict__,sort_keys=True, indent=4)
+
+    @property
+    def children(self):
+        arr = []
+        for episode in self.get_episodes():
+            arr.append("%s_%d"%(type(episode).__name__.lower(),episode.id))
+        return ";".join(arr)
+
+
 
     def fetch_avatars(self, value):
         """ Bring all avatars rids from some text"""

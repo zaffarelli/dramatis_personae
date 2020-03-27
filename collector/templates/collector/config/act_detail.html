@@ -2,13 +2,13 @@
     <div class='chapter'>{{c.data.full_chapter}}</div>
     <h3>{{ c.title }}</h3>
     <div class='storybar act'>
-        <p class='act_{{c.data.id}}'>
+        <p class='act_{{c.data.id}}' children='{{c.data.children}}'>
             <button class='compact episode_cast' id='c-act-{{c.data.id}}' page='1'>Act</button>
-            <button class='compact view_act' id='{{c.data.id}}'>View</button>
-            <button class='compact edit_act' id='{{c.data.id}}'>Edit</button>
-            <button class='compact hide_act' id='{{c.data.id}}'>Close</button>
-            <button class='compact add_event' id='{{c.data.id}}'>Add</button>
-            <button class='compact delete_act' id='{{c.data.id}}'>Delete</button>
+            <button class='compact view_act' id='view_act_{{c.data.id}}'>View</button>
+            <button class='compact edit_act' id='edit_act_{{c.data.id}}'>Edit</button>
+            <button class='compact hide_act' id='hide_act_{{c.data.id}}'>Close</button>
+            <button class='compact add_event' id='add_act_{{c.data.id}}'>Add</button>
+            <button class='compact delete_act' id='delete_act_{{c.data.id}}'>Delete</button>
         </p>
     </div>
 </div>
