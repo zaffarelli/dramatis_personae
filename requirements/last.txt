@@ -119,7 +119,7 @@ pep8==1.7.1
 pexpect==4.7.0
 pickleshare==0.7.4
 pid==2.2.3
-Pillow==6.2.0
+Pillow==6.2.2
 pluggy==0.12.0
 ply==3.11
 productmd==1.23
