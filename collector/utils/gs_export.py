@@ -18,7 +18,26 @@ from collector.utils.fics_references import RELEASE
 import yaml
 from oauth2client.service_account import ServiceAccountCredentials
 
-COLS_AMOUNT = 12
+from cryptography.fernet import Fernet
+
+
+
+COLS_AMOUNT = 13
+
+ # key = Fernet.generate_key() #this is your "password"
+KEY = b'WAXSue9RLeTPqgdvbfrj2e60Xk6PrRgx6jo-KV8JOIw='
+
+def encrypt(str):
+    cipher_suite = Fernet(KEY)
+    encoded_text = cipher_suite.encrypt(str.encode('UTF-8'))
+    return encoded_text
+
+
+
+def decrypt(str):
+    cipher_suite = Fernet(KEY)
+    decoded_text = cipher_suite.decrypt(str.encode('UTF-8'))
+    return decoded_text
 
 def connect(options):
     logger.info("> Connecting")
@@ -78,15 +97,31 @@ def gss_review(options):
     for idx, row in enumerate(matrix):
         if idx>0:
             logger.info('> %s '%(row[0]))
-            rid = fs_fics7.find_rid(row[0])
+            #rid = fs_fics7.find_rid(row[0])
+            rid = decrypt(row[12]).decode('UTF-8')
+            logger.info('> %s '%(rid))
             try:
                 c = Character.objects.get(rid=rid)
             except:
                 c = None
             if c:
                 change = False
-                if row[9] != c.picture:
-                    c.picture = row[9]
+                if row[2] == 'TRUE':
+                    row[2] = True
+                else:
+                    row[2] = c.spotlight
+                if row[3] == 'TRUE':
+                    row[3] = True
+                else:
+                    row[3] = c.is_dead
+                if row[2] != c.spotlight:
+                    c.spotlight = row[2]
+                    change = True
+                if row[3] != c.is_dead:
+                    c.is_dead = row[3]
+                    change = True
+                if row[10] != c.picture:
+                    c.picture = row[10]
                     change = True
                 if change:
                     c.save()
@@ -102,9 +137,9 @@ def gss_review(options):
 def gss_push(options,header_line):
     update_abstract(options)
     sheet = connect_as_target(options)
-    character_items = Character.objects.all().filter(epic__shortcut='DEM',is_public=True,importance__gt=0).order_by('alliance','full_name')
+    character_items = Character.objects.all().filter(epic__shortcut='DEM',is_public=True).order_by('alliance','full_name')
     logger.info("There will be %d characters"%(len(character_items)))
-    matrix = sheet.range('A1:L%d'%(len(character_items)+1))
+    matrix = sheet.range('A1:M%d'%(len(character_items)+1))
     #logger.info(header_line)
     for i in range(COLS_AMOUNT):
         matrix[i].value = header_line[i]
@@ -118,29 +153,31 @@ def gss_push(options,header_line):
             else:
                 matrix[idx*COLS_AMOUNT+0].value = c.full_name
             matrix[idx*COLS_AMOUNT+1].value = '?'
-            matrix[idx*COLS_AMOUNT+2].value = ''
-            matrix[idx*COLS_AMOUNT+3].value = ''
+            matrix[idx*COLS_AMOUNT+2].value = c.spotlight
+            matrix[idx*COLS_AMOUNT+3].value = c.is_dead
             matrix[idx*COLS_AMOUNT+4].value = ''
-            matrix[idx*COLS_AMOUNT+5].value = c.gender
-            matrix[idx*COLS_AMOUNT+6].value = ''
+            matrix[idx*COLS_AMOUNT+5].value = ''
+            matrix[idx*COLS_AMOUNT+6].value = c.gender
             matrix[idx*COLS_AMOUNT+7].value = ''
-            matrix[idx*COLS_AMOUNT+8].value = c.entrance
-            matrix[idx*COLS_AMOUNT+9].value = c.picture
-            matrix[idx*COLS_AMOUNT+10].value = ''
-            matrix[idx*COLS_AMOUNT+11].value = c.rid
+            matrix[idx*COLS_AMOUNT+8].value = ''
+            matrix[idx*COLS_AMOUNT+9].value = c.entrance
+            matrix[idx*COLS_AMOUNT+10].value = c.picture
+            matrix[idx*COLS_AMOUNT+11].value = ''
+            matrix[idx*COLS_AMOUNT+12].value = encrypt(c.rid).decode('UTF-8')
         else:
             matrix[idx*COLS_AMOUNT+0].value = c.full_name
             matrix[idx*COLS_AMOUNT+1].value = c.alliance
-            matrix[idx*COLS_AMOUNT+2].value = 'X' if c.is_dead else ''
-            matrix[idx*COLS_AMOUNT+3].value = c.player
-            matrix[idx*COLS_AMOUNT+4].value = c.rank
-            matrix[idx*COLS_AMOUNT+5].value = c.gender
-            matrix[idx*COLS_AMOUNT+6].value = c.specie.species
-            matrix[idx*COLS_AMOUNT+7].value = c.age
-            matrix[idx*COLS_AMOUNT+8].value = c.entrance
-            matrix[idx*COLS_AMOUNT+9].value = c.picture
-            matrix[idx*COLS_AMOUNT+10].value = c.faction
-            matrix[idx*COLS_AMOUNT+11].value = c.rid
+            matrix[idx*COLS_AMOUNT+2].value = c.spotlight
+            matrix[idx*COLS_AMOUNT+3].value = c.is_dead
+            matrix[idx*COLS_AMOUNT+4].value = c.player
+            matrix[idx*COLS_AMOUNT+5].value = c.rank
+            matrix[idx*COLS_AMOUNT+6].value = c.gender
+            matrix[idx*COLS_AMOUNT+7].value = c.specie.species
+            matrix[idx*COLS_AMOUNT+8].value = c.age
+            matrix[idx*COLS_AMOUNT+9].value = c.entrance
+            matrix[idx*COLS_AMOUNT+10].value = c.picture
+            matrix[idx*COLS_AMOUNT+11].value = c.faction
+            matrix[idx*COLS_AMOUNT+12].value = encrypt(c.rid).decode('UTF-8')
         idx += 1
     sheet.clear()
     sheet.update_cells(matrix)

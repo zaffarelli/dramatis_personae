@@ -33,4 +33,5 @@ class Event(StoryModel):
         return reverse('event-detail', kwargs={'pk': self.pk})
 
 class EventAdmin(admin.ModelAdmin):
-  ordering = ('chapter','title',)
+  ordering = ('act','chapter','title',)
+  list_display = ('title','act','chapter','date','place','description')

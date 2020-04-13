@@ -1361,9 +1361,9 @@ body {
     body {
         margin: 0;
         padding: 0;
-        overflow-x: hidden;
+        overflow-x: none;
         overflow-y: scroll;
-        background: $fics_back url('74.jpg'); /* 74*/
+        background: $fics_back url('back.jpg'); /* 74*/
 
         & .logo {
             height: 105px;
@@ -1630,3 +1630,13 @@ table.combat_narrative {
         }
     }
 }
+
+svg {
+    overflow: scroll;
+}
+
+/*     background: #333;*/
+
+/*     opacity: .5;*/
+
+/* }*/

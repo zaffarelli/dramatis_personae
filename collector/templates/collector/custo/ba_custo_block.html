@@ -14,7 +14,7 @@
 		<th colspan=1><span id='ba_del' class='edit_icon fa fa-arrow-alt-circle-right'></span></th>
 		<th colspan=2>Remove B/A</th>
         <td colspan=3>
-            {% if c.ba_options_not.count %}
+            {% if c.ba_options_not %}
 			<select id='ba_unselect'>
 			{% for s in c.ba_options_not %}
 				<option value='{{s.id}}' style='width:15ex;'>{{s.reference}} ({{s.value}})</option>

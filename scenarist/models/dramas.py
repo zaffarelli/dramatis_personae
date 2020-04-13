@@ -69,4 +69,4 @@ class Drama(StoryModel):
 
 class DramaAdmin(admin.ModelAdmin):
   ordering = ('epic','chapter','date','title',)
-  list_display = ('title','epic')
+  list_display = ('title','epic','chapter','date','place','description')

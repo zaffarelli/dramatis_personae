@@ -28,7 +28,7 @@ class WeaponRef(models.Model):
   stats = models.CharField(max_length=256,default='',blank=True)
   origins = models.CharField(max_length=64,default='',blank=True)
   def __str__(self):
-    return '[%s/%s] %s' % (self.reference,self.meta_type/self.category)
+    return '[%s/%s] %s' % (self.reference,self.meta_type,self.category)
   def get_stats_line(self):
     res = []
     res.append(self.reference)

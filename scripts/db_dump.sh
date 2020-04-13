@@ -10,6 +10,8 @@ python3 manage.py dumpdata collector.SkillRef --format xml --output backup/refer
 python3 manage.py dumpdata collector.ArmorRef --format xml --output backup/reference/armor_ref.xml
 python3 manage.py dumpdata collector.ShieldRef --format xml --output backup/reference/shield_ref.xml
 python3 manage.py dumpdata collector.TalentRef --format xml --output backup/reference/talent_ref.xml
+python3 manage.py dumpdata collector.Loot --format xml --output backup/reference/loot.xml
+python3 manage.py dumpdata collector.System --format xml --output backup/reference/system.xml
 # python3 manage.py dumpdata collector.Role --format xml --output backup/reference/role.xml
 # python3 manage.py dumpdata collector.Profile --format xml --output backup/reference/profile.xml
 python3 manage.py dumpdata collector.Specie --format xml --output backup/reference/specie.xml
@@ -42,6 +44,8 @@ python3 manage.py dumpdata collector.Config --format xml --output backup/custom/
 echo -e "\e[0;35mMoving to fixtures...\e[0;m"
 cp backup/reference/skill_ref.xml collector/fixtures/
 cp backup/reference/talent_ref.xml collector/fixtures/
+cp backup/reference/loot.xml collector/fixtures/
+cp backup/reference/system.xml collector/fixtures/
 cp backup/reference/specie.xml collector/fixtures/
 cp backup/reference/benefice_affliction_ref.xml collector/fixtures/
 cp backup/reference/benefice_affliction_modificator.xml collector/fixtures/

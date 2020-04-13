@@ -98,12 +98,12 @@ class CharacterCusto(models.Model):
         self.summary += "Blessings/Curses"
         self.summary += "<ul>"
         for bc in self.blessingcursecusto_set.all():
-            self.summary += "<li>%s +%d</li>"%(bc.blessing_curse_ref.reference,bc.blessing_curse_ref.value)
+            self.summary += "<li>%s %+d</li>"%(bc.blessing_curse_ref.reference,bc.blessing_curse_ref.value)
         self.summary += "</ul>"
         self.summary += "Benefices/Afflictions"
         self.summary += "<ul>"
         for ba in self.beneficeafflictioncusto_set.all():
-            self.summary += "<li>%s +%d</li>"%(ba.benefice_affliction_ref.reference,ba.benefice_affliction_ref.value)
+            self.summary += "<li>%s %+d</li>"%(ba.benefice_affliction_ref.reference,ba.benefice_affliction_ref.value)
         self.summary += "</ul>"
         self.summary += "Weapons"
         self.summary += "<ul>"

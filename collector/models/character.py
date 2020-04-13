@@ -87,16 +87,18 @@ class Character(Combattant):
     OCC_DRK = models.PositiveIntegerField(default=0)
     occult = models.CharField(max_length=50, default='', blank=True)
     challenge = models.TextField(default='', blank=True)
+    todo_list = models.TextField(default='', blank=True)
     #is_exportable = models.BooleanField(default=False)
     is_visible = models.BooleanField(default=True)
     is_dead = models.BooleanField(default=False)
     is_locked = models.BooleanField(default=False)
     is_public = models.BooleanField(default=False)
     is_partial = models.BooleanField(default=True)
+    spotlight = models.BooleanField(default=False)
     use_history_creation = models.BooleanField(default=False)
     use_only_entrance = models.BooleanField(default=False)
     epic = models.ForeignKey(Epic, null=True, blank=True, on_delete=models.SET_NULL)
-    picture = models.CharField(max_length=256, blank=True, default='https://vignette.wikia.nocookie.net/criminal-case-grimsborough/images/2/26/Unknown_Character.png/revision/latest?cb=20141106142941')
+    picture = models.CharField(max_length=256, blank=True, default='https://drive.google.com/open?id=15hdubdMt1t_deSXkbg9dsAjWi5tZwMU0')
     alliance_picture = models.CharField(max_length=256, blank=True, default='')
     onsave_reroll_attributes = models.BooleanField(default=False)
     onsave_reroll_skills = models.BooleanField(default=False)
@@ -285,7 +287,17 @@ class Character(Combattant):
                     logger.info("Height/Weight Experiment 1: %s --> %0.2f %0.2f BODY:%d CONSTITUTION:%d"%(self.full_name,self.height,self.weight,self.PA_BOD, self.PA_CON))
         #self.is_exportable = True #self.check_exportable()
         self.update_challenge()
+        self.check_todo_list()
         logger.debug('Done fixing ...: %s' % (self.full_name))
+
+    def check_todo_list(self):
+        pass
+        # self.todo_list = ""
+        # tsk = []
+        # if self.use_history_creation:
+        #     for tod in self.tourofduty_set.all():
+        #         tsk = "%s - %s"%()
+        # self.todo_list = "\n".join(tsk)
 
     def update_challenge(self):
         res = ''
@@ -331,8 +343,10 @@ class Character(Combattant):
                 o_n.append(item)
             else:
                 o.append(item)
+
         setattr(self,options,o)
         setattr(self,options_not,o_n)
+
 
     def refresh_skills_options(self):
         """ This one is special: it only reflects skills that are not in the character """

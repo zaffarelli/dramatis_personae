@@ -53,3 +53,6 @@ admin.site.register(Loot, LootAdmin)
 
 from collector.models.config import Config, ConfigAdmin
 admin.site.register(Config, ConfigAdmin)
+
+from collector.models.system import System, SystemAdmin
+admin.site.register(System, SystemAdmin)

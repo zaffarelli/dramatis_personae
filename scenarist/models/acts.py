@@ -50,4 +50,5 @@ class Act(StoryModel):
 
 
 class ActAdmin(admin.ModelAdmin):
-  ordering = ('chapter','title',)
+  ordering = ('drama','chapter','title',)
+  list_display = ('title','drama','chapter','date','place','description')

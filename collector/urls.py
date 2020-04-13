@@ -7,7 +7,7 @@ from django.conf.urls import url
 from django.urls import path, re_path
 from collector.views.basic import pdf_show
 from collector.views.characters import CharacterDetailView, CharacterUpdateView, customize_ba, customize_bc, customize_skill, customize_ba_del, customize_bc_del, skill_pick, attr_pick, customize_weapon, customize_weapon_del, customize_armor, customize_armor_del, customize_shield, customize_shield_del
-from collector.views.frontend import index, view_by_rid, toggle_public, get_list, add_character, get_storyline, conf_details, recalc_character, update_messenger, show_jumpweb, show_todo #, recalc_pa_character, recalc_skills_character
+from collector.views.frontend import index, view_by_rid, toggle_public, toggle_spotlight, get_list, add_character, get_storyline, conf_details, recalc_character, update_messenger, show_jumpweb, show_todo #, recalc_pa_character, recalc_skills_character
 from collector.views.backend import recalc,export,xls_update,pdf_character, gss_update, pdf_rules
 from collector.views.misc_chart import get_chardar, get_population_statistics, get_keywords
 
@@ -39,6 +39,7 @@ urlpatterns = [
     re_path('^api/keywords/$', get_keywords, name='get_keywords'),
     re_path('^pdf/(?P<slug>[\w-]+)/$', pdf_show, name='pdf_show'),
     re_path('^toggle/(?P<id>\d+)/public$', toggle_public, name='toggle_public'),
+    re_path('^toggle/(?P<id>\d+)/spotlight$', toggle_spotlight, name='toggle_spotlight'),
     re_path('^ajax/view/by_rid/(?P<slug>[\w-]+)/$', view_by_rid, name='view_by_rid'),
     re_path('^ajax/character/add/skill/(?P<avatar>[\d]+)/(?P<item>\d+)/$',customize_skill,name='customize_skill'),
     re_path('^ajax/character/add/ba/(?P<avatar>[\d]+)/(?P<item>\d+)/$',customize_ba,name='customize_ba'),

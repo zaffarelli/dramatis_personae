@@ -104,11 +104,24 @@ def recalc_character(request, id=None):
 def view_by_rid(request, slug=None):
   """ Ajax view of a character """
   if request.is_ajax():
-    item = get_object_or_404(Character,rid=slug)
-    template = get_template('collector/character_detail.html')
-    html = template.render({'c':item})
-    return HttpResponse(html, content_type='text/html')
-    messages.info(self.request, 'Display by RID: %s'%(context['c'].rid))
+    items = Character.objects.filter(full_name__contains=slug).order_by('full_name')
+    if items.count():
+        item = items.first()
+        context = {}
+        template = get_template('collector/character_detail.html')
+        character = template.render({'c':item, 'no_skill_edit':False})
+        templatelink = get_template('collector/character_link.html')
+        links = []
+        for i in items:
+            links.append({'rid':i.rid,'data':templatelink.render({'c':i})})
+        context = {
+            'rid': item.rid,
+            'id': item.id,
+            'character': character,
+            'links': links,
+        }
+        messages.info(request, 'Found: %s'%(item.rid))
+        return JsonResponse(context)
   else:
     raise Http404
 
@@ -179,13 +192,55 @@ def toggle_public(request, id=None):
     context = respawnAvatarLink(character_item,context)
     return JsonResponse(context)
 
+def toggle_spotlight(request, id=None):
+    conf = get_current_config()
+    context = {}
+    character_item = Character.objects.get(pk=id)
+    if (character_item != None):
+        character_item.spotlight = not character_item.spotlight
+        character_item.save()
+    context = respawnAvatarLink(character_item,context)
+    return JsonResponse(context)
+
 def show_jumpweb(request):
   """ Current config info """
   if request.is_ajax:
+    from collector.models.system import System
     conf = get_current_config()
     context = {}
+    context['data'] = {}
+    context['data']['nodes'] = []
+    context['data']['links'] = []
+    for s in System.objects.all():
+        system = {}
+        system['id'] = s.id
+        system['name'] = s.name
+        system['alliance'] = s.alliance
+        system['sector'] = s.sector
+        #system['jumproads'] = s.jumproads
+        system['x'] = s.x
+        system['y'] = s.y
+        system['jump'] = s.jump
+        system['group'] = s.group
+        system['color'] = s.color
+        system['discovery'] = s.discovery
+        system['dtj'] = s.dtj
+        system['garrison'] = s.garrison
+        system['tech'] = s.tech
+        system['symbol'] = s.symbol
+        system['population'] = s.population
+        context['data']['nodes'].append(system)
+        for j in s.jumproads.all():
+            lnk = {}
+            if j.id > s.id:
+                lnk['source'] = s.id
+                lnk['target'] = j.id
+            else:
+                lnk['source'] = j.id
+                lnk['target'] = s.id
+            context['data']['links'].append(lnk)
     template = get_template('collector/jumpweb.html')
-    html = template.render(context,request)
+    html = template.render(context)
     return HttpResponse(html, content_type='text/html')
   else:
     http404

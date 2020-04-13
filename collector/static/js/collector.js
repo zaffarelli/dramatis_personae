@@ -147,6 +147,8 @@ function rebootlinks() {
     $.ajax({
       url: 'jumpweb/show',
       success: function(answer) {
+
+        console.log(answer);
         $('.details').html(answer);
         prepare_ajax();
         rebootlinks();
@@ -264,6 +266,25 @@ function rebootlinks() {
     });
   });
 
+  $('.toggle_spotlight').off().on('click', function(event) {
+    event.preventDefault();
+    let dad = $(this).parents('li');
+    let dad_id = $(dad).attr("id");
+    $("li#" + dad_id + " .character_info").removeClass('hidden');
+    $("li#" + dad_id + " .avatar_link").css('border-color', 'red');
+    $.ajax({
+      url: 'toggle/' + $(this).attr("id") + '/spotlight',
+      success: function(answer) {
+        console.log(answer)
+        $('li#' + dad_id).html(answer.avatar_link);
+        rebootlinks();
+      },
+      error: function(answer) {
+        console.warn('Error on toggle...');
+      },
+    });
+  });
+
   $('#conf_details').off().on('click', function(event) {
     event.preventDefault();
     $.ajax({
@@ -295,18 +316,49 @@ function rebootlinks() {
       rebootlinks();
     });
   });
+  // $('#seek').off().on('click', function(event) {
+  //   event.preventDefault();
+  //   key = $('#customize').val();
+  //   $.ajax({
+  //     url: 'ajax/view/by_rid/' + key + '/',
+  //     success: function(answer) {
+  //       $('.details').html(answer);
+  //       prepare_ajax();
+  //       rebootlinks();
+  //     },
+  //   });
+  // });
+
   $('#seek').off().on('click', function(event) {
     event.preventDefault();
-    key = $('#customize').val();
+    event.stopPropagation();
+    let key = $('#customize').val();
+    //let dad = $(this).parents('li');
+    //let dad_id = $(dad).attr("id");
+    //$("li#" + dad_id + " .character_info").removeClass('hidden');
     $.ajax({
       url: 'ajax/view/by_rid/' + key + '/',
       success: function(answer) {
-        $('.details').html(answer);
+        $('.details').html(answer.character);
+        $('.avatars').html("");
+        _.forEach(answer.links,function(e){
+          $('.avatars').append("<li id='"+e.rid + "'>" + e.data + "</li>");  
+        })
+
+        //$('li#' + answer.rid).html(answer.link);
         prepare_ajax();
         rebootlinks();
+        // ac.reset(answer.id, "sheet_" + answer.id, "customizer");
+        // $("li#" + dad_id + " .character_name").click();
       },
+      error: function(answer) {
+        console.log('Seek error...');
+        console.log(answer.character);
+      }
     });
   });
+
+
   $('#search').off().on('click', function(event) {
     event.preventDefault();
     event.stopPropagation();
@@ -397,6 +449,10 @@ function rebootlinks() {
       }
     });
   });
+
+
+
+
 
 
   sc.doConnect();

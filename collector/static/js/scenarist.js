@@ -56,9 +56,9 @@ class Scenarist{
             let id = t_id.split("_")[t_id.split("_").length-1]
             let children = $(this).parent("p").attr('children');
             $.ajax({
-                url: x+'s/'+t_id+'/edit',
+                url: x+'s/'+id+'/edit',
                 success: function(answer) {
-                    $('#'+x+'_'+t_id).html(answer);
+                    $('#'+x+'_'+id).html(answer);
                     prepare_ajax();
                     rebootlinks();
                 },

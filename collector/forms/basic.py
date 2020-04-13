@@ -30,7 +30,7 @@ class CharacterForm(ModelForm):
                'armor_cost','shield_cost','score', 'lifepath_total', 'OCC_LVL',
                'OCC_DRK', 'PA_STR','PA_BOD', 'PA_CON', 'PA_MOV', 'PA_INT',
                'PA_WIL', 'PA_TEM', 'PA_PRE', 'PA_TEC', 'PA_REF', 'PA_AGI',
-               'PA_AWA', 'OCC_LVL', 'OCC_DRK',
+               'PA_AWA', 'OCC_LVL', 'OCC_DRK','spotlight',
                'onsave_reroll_attributes', 'onsave_reroll_skills', 'importance', 'fights', 'victories', 'victory_rating', 'fencing_league' ]
 
 class TourOfDutyRefForm(ModelForm):
