@@ -244,7 +244,34 @@ He knew he won't escape Eva-Lise, so he put into motion a way to achieve a long 
 
 
 
-----</field><field name="gamemaster" type="CharField">zaffarelli@gmail.com</field><field name="visible" type="BooleanField">False</field><field name="to_PDF" type="BooleanField">True</field><field name="act" rel="ManyToOneRel" to="scenarist.act">16</field><field name="resolution" type="TextField">The arrangement +4400£ for ¤floyd_carnau¤ per monthly income.</field><field name="challenge" type="PositiveIntegerField">1</field><field name="anchor" type="CharField"></field></object><object model="scenarist.event" pk="35"><field name="title" type="CharField">Aeon Chapter Prisonners</field><field name="chapter" type="CharField">1</field><field name="date" type="CharField"></field><field name="place" type="CharField"></field><field name="description" type="TextField"></field><field name="gamemaster" type="CharField">zaffarelli@gmail.com</field><field name="visible" type="BooleanField">False</field><field name="to_PDF" type="BooleanField">True</field><field name="act" rel="ManyToOneRel" to="scenarist.act">11</field><field name="resolution" type="TextField"></field><field name="challenge" type="PositiveIntegerField">1</field><field name="anchor" type="CharField"></field></object><object model="scenarist.event" pk="36"><field name="title" type="CharField">Scattered Empire</field><field name="chapter" type="CharField">2</field><field name="date" type="CharField">LiRA-5018-06-11</field><field name="place" type="CharField">Rampart / Avaneir / Villevielle</field><field name="description" type="TextField">An extraordinary counsel will take place in Rampart capital in an attempt to handle the Kurgan issue.</field><field name="gamemaster" type="CharField">zaffarelli@gmail.com</field><field name="visible" type="BooleanField">False</field><field name="to_PDF" type="BooleanField">True</field><field name="act" rel="ManyToOneRel" to="scenarist.act">11</field><field name="resolution" type="TextField">The intrusion in Icon system ...
+----</field><field name="gamemaster" type="CharField">zaffarelli@gmail.com</field><field name="visible" type="BooleanField">False</field><field name="to_PDF" type="BooleanField">True</field><field name="act" rel="ManyToOneRel" to="scenarist.act">16</field><field name="resolution" type="TextField">The arrangement +4400£ for ¤floyd_carnau¤ per monthly income.</field><field name="challenge" type="PositiveIntegerField">1</field><field name="anchor" type="CharField"></field></object><object model="scenarist.event" pk="35"><field name="title" type="CharField">Aeon Chapter Envoys</field><field name="chapter" type="CharField">1</field><field name="date" type="CharField"></field><field name="place" type="CharField"></field><field name="description" type="TextField">¤claudias_fangor¤ and ¤alaric_sirquies¤ from the Aeon Chapter are looking for a gifted in Miret. They don't know it yet as they are starting their investigation, but the young serf they are looking for is ¤pita_malnic¤, a young mute girl serving Lord ¤josef_baranof¤ in the Den.
+
+They will probably run into ¤arlan_secato¤ and his dogs.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----</field><field name="gamemaster" type="CharField">zaffarelli@gmail.com</field><field name="visible" type="BooleanField">False</field><field name="to_PDF" type="BooleanField">True</field><field name="act" rel="ManyToOneRel" to="scenarist.act">11</field><field name="resolution" type="TextField"></field><field name="challenge" type="PositiveIntegerField">1</field><field name="anchor" type="CharField"></field></object><object model="scenarist.event" pk="36"><field name="title" type="CharField">Scattered Empire</field><field name="chapter" type="CharField">2</field><field name="date" type="CharField">LiRA-5018-06-11</field><field name="place" type="CharField">Rampart / Avaneir / Villevielle</field><field name="description" type="TextField">An extraordinary counsel will take place in Rampart capital in an attempt to handle the Kurgan issue.</field><field name="gamemaster" type="CharField">zaffarelli@gmail.com</field><field name="visible" type="BooleanField">False</field><field name="to_PDF" type="BooleanField">True</field><field name="act" rel="ManyToOneRel" to="scenarist.act">11</field><field name="resolution" type="TextField">The intrusion in Icon system ...
 
 Introducing... 
 - Imperial Lord Commander ¤dionatar_hawkwood¤

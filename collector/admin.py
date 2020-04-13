@@ -54,5 +54,8 @@ admin.site.register(Loot, LootAdmin)
 from collector.models.config import Config, ConfigAdmin
 admin.site.register(Config, ConfigAdmin)
 
+from collector.models.spacecraft import Spacecraft, SpacecraftAdmin
+admin.site.register(Spacecraft, SpacecraftAdmin)
+
 from collector.models.system import System, SystemAdmin
 admin.site.register(System, SystemAdmin)

@@ -12,9 +12,20 @@ DEBUG = True
 INSTANCE_NAME = 'PHASMA DEV'
 
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'dramatis_personae',
+        'USER': 'dp',
+        'PASSWORD': 'dp',
+        'HOST': '',
+        'PORT': '',
+        },
 }
