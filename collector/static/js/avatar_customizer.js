@@ -24,9 +24,9 @@ class AvatarCustomizer{
 		this.doConnect("ba",true);
 		this.doConnect("bc",true);
 		this.doConnect("skill");
-        this.doConnect("weapon",true);
-        this.doConnect("armor",true);
-        this.doConnect("shield",true);
+    this.doConnect("weapon",true);
+    this.doConnect("armor",true);
+    this.doConnect("shield",true);
 	}
 
 	doConnect(prefix,symetric=false){

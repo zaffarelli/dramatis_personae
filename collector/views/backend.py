@@ -74,3 +74,27 @@ def pdf_rules(request):
   extract_rules()
   messages.info(request, 'Rebuilding Rules reference...')
   return HttpResponse(status=204)
+
+
+def roll_dice(request,slug):
+  context = {}
+  contstant = 0
+  formula = slug.replace("i","!").replace("_"," ").replace("x","+")
+  print(formula)
+  actions = formula.split("+")
+  dice = formula[0].split("d")
+  if len(actions)>1:
+      constant = int(actions[1])
+  print(dice[0])
+  total = 0
+  for x in range(1,int(dice[0])):
+      r,d = fs_fics7.d12x()
+      total += r
+  print(r)
+  print(d)
+  context = {
+    'rolls': d,
+    'mods': constant,
+    'total': total,
+  }
+  return JsonResponse(context)

@@ -144,162 +144,9 @@ title="jumpweb_' + me.mode + '_' + now + '.svg"> \
 
   }
 
-  draw_known_worlds() {
+
+  draw_node(node) {
     let me = this;
-    let link = me.svg.selectAll(".link")
-      .data(me.data.links)
-      .enter()
-      .append("line")
-      .attr("class", function(d) {
-        let k = "link"
-        d.out = false
-        d.off = false
-
-        let source = _.find(me.data.nodes, {
-          id: d.source
-        })
-        let target = _.find(me.data.nodes, {
-          id: d.target
-        })
-        if (source.group != target.group) {
-          d.out = true
-        }
-        let source_emp = (source.group < 100);
-        let target_emp = (target.group < 100);
-        if (source_emp !== target_emp) {
-          d.off = true
-        }
-        d.unknown = false
-        //if (source_emp && target_emp) {
-
-        if ((source.discovery > me.era) || (target.discovery > me.era)) {
-          d.unknown = true
-        }
-        //}
-
-        return k;
-      })
-      .attr('id', function(d) {
-        return "link_" + d.source + "_" + d.target;
-      })
-      .attr("x1", function(l) {
-        let source = _.find(me.data.nodes, {
-          id: l.source
-        })
-        return (source.x + me.ox) * me.step_x;
-      })
-      .attr("y1", function(l) {
-        let source = _.find(me.data.nodes, {
-          id: l.source
-        })
-        return (source.y + me.oy) * me.step_y;
-      })
-      .attr("x2", function(l) {
-        let target = _.find(me.data.nodes, {
-          id: l.target
-        })
-        return (target.x + me.ox) * me.step_x;
-      })
-      .attr("y2", function(l) {
-        let target = _.find(me.data.nodes, {
-          id: l.target
-        })
-        return (target.y + me.oy) * me.step_y;
-      })
-      .style('stroke', function(d) {
-        let res = (d.off ? "#A22" : "#A82");
-        return res;
-      })
-      .style('stroke-width', function(d) {
-        let res = (d.out ? "1pt" : (d.off ? "1pt" : (d.unknown ? "2pt" : "1pt")));
-        return res;
-      })
-      .style('stroke-dasharray', function(d) {
-        let res = (d.out ? "7 5" : "none");
-        return res;
-      })
-      .style("opacity", function(d) {
-        if (me.mj == false) {
-          return (d.unknown ? 0.0 : 0.5);
-        } else {
-          return 0.5
-        }
-      })
-      .on("mouseover", function(d) {
-        d3.selectAll("#link_" + d.source + "_" + d.target).style("stroke-width", "5pt")
-      })
-      .on("mouseout", function(d) {
-        d3.selectAll(".link").style('stroke-width', function(d) {
-          let res = (d.out ? "1pt" : (d.off ? "1pt" : (d.unknown ? "2pt" : "1pt")));
-          return res;
-        })
-      });
-
-
-    let node = me.svg.selectAll(".node")
-      .data(me.data.nodes)
-      .enter().append("g")
-      .attr("class", function(d) {
-        let k = 'node'
-        d.unknown = (d.group >= 100);
-        if (d.discovery <= me.era) {
-          d.unknown = false
-        }
-        return k;
-      })
-      .attr("transform", function(d) {
-        let x = (d.x + me.ox) * me.step_x;
-        let y = (d.y + me.oy) * me.step_y;
-        return "translate(" + x + "," + y + ")";
-      })
-      .on("mouseover", function(d) {
-        d3.event.preventDefault()
-        d3.event.stopPropagation()
-
-        d3.selectAll(".nodetext_" + d.id)
-          .transition()
-          .delay(0)
-          .duration(250)
-          .ease(d3.easeSin)
-          .style("opacity", 0.0);
-        d3.select("#aura_" + d.id)
-          .transition()
-          .delay(0)
-          .duration(250)
-          .ease(d3.easeSin)
-          .style("opacity", 0.9)
-          .bringElementAsTopLayer();
-      })
-      .on("mouseout", function(d) {
-
-        d3.selectAll(".aura")
-          .transition()
-          .delay(0)
-          .duration(250)
-          .ease(d3.easeSin)
-          .style("opacity", 0.0)
-          .pushElementAsBackLayer();
-        d3.selectAll(".nodetext_" + d.id)
-          .transition()
-          .delay(0)
-          .duration(250)
-          .ease(d3.easeSin)
-          .style("opacity", 1.0);
-      })
-      .style("opacity", function(d) {
-        if (me.mj == false) {
-          return (d.unknown ? 0.0 : 1.0);
-        } else {
-          return 1.0
-        }
-      });
-    let panel = node.append("g")
-      .attr("class", "aura")
-      .attr("id", function(d) {
-        return "aura_" + d.id;
-      })
-      .style("opacity", 0.0);
-
     node.append("circle")
       .attr("class", "frame circle")
       .attr("r", "16")
@@ -424,6 +271,9 @@ title="jumpweb_' + me.mode + '_' + now + '.svg"> \
 
     if (me.mj) {
       node.append("text")
+        .attr("class", function(d) {
+          return "nodetext_" + d.id;
+        })
         .attr("dx", 0)
         .attr("dy", -24)
         .style("font-family", "Lato")
@@ -439,9 +289,9 @@ title="jumpweb_' + me.mode + '_' + now + '.svg"> \
     }
 
     node.append("text")
-    .attr("class", function(d) {
-      return "nodetext_" + d.id;
-    })
+      .attr("class", function(d) {
+        return "nodetext_" + d.id;
+      })
       .attr("dx", -24)
       .attr("dy", -8)
       .style("font-family", "Lato")
@@ -454,17 +304,176 @@ title="jumpweb_' + me.mode + '_' + now + '.svg"> \
       .text(function(d) {
         return d.jump;
       });
+    return node;
+  }
+
+  draw_known_worlds() {
+    let me = this;
+    let link = me.svg.selectAll(".link")
+      .data(me.data.links)
+      .enter()
+      .append("line")
+      .attr("class", function(d) {
+        let k = "link"
+        d.out = false
+        d.off = false
+
+        let source = _.find(me.data.nodes, {
+          id: d.source
+        })
+        let target = _.find(me.data.nodes, {
+          id: d.target
+        })
+        if (source.group != target.group) {
+          d.out = true
+        }
+        let source_emp = (source.group < 100);
+        let target_emp = (target.group < 100);
+        if (source_emp !== target_emp) {
+          d.off = true
+        }
+        d.unknown = false
+        //if (source_emp && target_emp) {
+
+        if ((source.discovery > me.era) || (target.discovery > me.era)) {
+          d.unknown = true
+        }
+        //}
+
+        return k;
+      })
+      .attr('id', function(d) {
+        return "link_" + d.source + "_" + d.target;
+      })
+      .attr("x1", function(l) {
+        let source = _.find(me.data.nodes, {
+          id: l.source
+        })
+        return (source.x + me.ox) * me.step_x;
+      })
+      .attr("y1", function(l) {
+        let source = _.find(me.data.nodes, {
+          id: l.source
+        })
+        return (source.y + me.oy) * me.step_y;
+      })
+      .attr("x2", function(l) {
+        let target = _.find(me.data.nodes, {
+          id: l.target
+        })
+        return (target.x + me.ox) * me.step_x;
+      })
+      .attr("y2", function(l) {
+        let target = _.find(me.data.nodes, {
+          id: l.target
+        })
+        return (target.y + me.oy) * me.step_y;
+      })
+      .style('stroke', function(d) {
+        let res = (d.off ? "#A22" : "#A82");
+        return res;
+      })
+      .style('stroke-width', function(d) {
+        let res = (d.out ? "1pt" : (d.off ? "1pt" : (d.unknown ? "2pt" : "1pt")));
+        return res;
+      })
+      .style('stroke-dasharray', function(d) {
+        let res = (d.out ? "7 5" : "none");
+        return res;
+      })
+      .style("opacity", function(d) {
+        if (me.mj == false) {
+          return (d.unknown ? 0.0 : 0.5);
+        } else {
+          return 0.5
+        }
+      })
+      .on("mouseover", function(d) {
+        d3.selectAll("#link_" + d.source + "_" + d.target).style("stroke-width", "5pt")
+      })
+      .on("mouseout", function(d) {
+        d3.selectAll(".link").style('stroke-width', function(d) {
+          let res = (d.out ? "1pt" : (d.off ? "1pt" : (d.unknown ? "2pt" : "1pt")));
+          return res;
+        })
+      });
+
+
+    let node = me.svg.selectAll(".node")
+      .data(me.data.nodes)
+      .enter().append("g")
+      .attr("class", function(d) {
+        let k = 'node'
+        d.unknown = (d.group >= 100);
+        if (d.discovery <= me.era) {
+          d.unknown = false
+        }
+        return k;
+      })
+      .attr("transform", function(d) {
+        let x = (d.x + me.ox) * me.step_x;
+        let y = (d.y + me.oy) * me.step_y;
+        return "translate(" + x + "," + y + ")";
+      })
+      .on("mouseover", function(d) {
+        d3.event.preventDefault()
+        d3.event.stopPropagation()
+
+        d3.selectAll(".nodetext_" + d.id)
+          .transition()
+          .delay(0)
+          .duration(250)
+          .ease(d3.easeSin)
+          .style("opacity", 0.0);
+        d3.select("#aura_" + d.id)
+          .transition()
+          .delay(0)
+          .duration(250)
+          .ease(d3.easeSin)
+          .style("opacity", 0.9)
+        //.bringElementAsTopLayer();
+      })
+      .on("mouseout", function(d) {
+
+        d3.selectAll(".aura")
+          .transition()
+          .delay(0)
+          .duration(250)
+          .ease(d3.easeSin)
+          .style("opacity", 0.0)
+        //.pushElementAsBackLayer();
+        d3.selectAll(".nodetext_" + d.id)
+          .transition()
+          .delay(0)
+          .duration(250)
+          .ease(d3.easeSin)
+          .style("opacity", 1.0);
+      })
+      .style("opacity", function(d) {
+        if (me.mj == false) {
+          return (d.unknown ? 0.0 : 1.0);
+        } else {
+          return 1.0
+        }
+      });
+
+    node = me.draw_node(node);
 
 
 
+    let panel = node.append("g")
+      .attr("class", "aura")
+      .attr("id", function(d) {
+        return "aura_" + d.id;
+      })
+      .style("opacity", 0.0);
     panel.append("circle")
-      .attr("r", me.step_y*0.85)
+      .attr("r", me.step_y * 0.85)
       .style("stroke-width", "1pt")
       .style("fill", "none")
       .style("stroke", "#FC4")
       .style("stroke-width", "3pt")
-      .style("stroke-dasharray", "5 3")
-      ;
+      .style("stroke-dasharray", "5 3");
 
     //
     // panel.append("rect")

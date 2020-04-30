@@ -108,6 +108,6 @@ class CharacterAdmin(admin.ModelAdmin):
     ShieldInline,
     TourOfDutyInline,
   ]
-  ordering = ['-importance','epic','full_name',]
+  ordering = ['full_name',]
   actions = [no_importance, importance_up, importance_down, cast_to_blank, cast_to_dem, cast_to_antu, make_invisible, make_visible, make_teutonic, make_kaanic, make_castillan, make_enquist, make_public, make_private, make_partial, make_complete, enter_fencing_league, exit_fencing_league]
   exclude = ['SA_REC','SA_STA','SA_END','SA_STU','SA_RES','SA_DMG','SA_TOL','SA_HUM','SA_PAS','SA_WYR','SA_SPD','SA_RUN','PA_TOTAL','SK_TOTAL','TA_TOTAL','BC_TOTAL','BA_TOTAL']

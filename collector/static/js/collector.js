@@ -177,29 +177,7 @@ function rebootlinks() {
 
 
   /* Character Edition & Update*/
-  $('.edit_character').off().on('click', function(event) {
-    event.preventDefault();
-    event.stopPropagation();
-    var dad = $(this).parents('li').find('div.avatar_link');
-    $('li').find('div.avatar_link').removeClass('selected');
-    $(dad).addClass('selected');
-    $('body').toggleClass('waiting');
-    $.ajax({
-      url: 'characters/' + $(this).attr('id') + '/edit/',
-      success: function(answer) {
-        $('.details').html(answer);
-        $('body').toggleClass('waiting');
-        prepare_ajax();
-        loadKeywords();
-        rebootlinks();
-        update_messenger();
-      },
-      error: function(answer) {
-        console.log('ooops... :(');
-        update_messenger();
-      }
-    });
-  });
+
   $('#go').off().on('click', function(event) {
     event.preventDefault();
     event.stopPropagation();
@@ -342,7 +320,7 @@ function rebootlinks() {
         $('.details').html(answer.character);
         $('.avatars').html("");
         _.forEach(answer.links,function(e){
-          $('.avatars').append("<li id='"+e.rid + "'>" + e.data + "</li>");  
+          $('.avatars').append("<li id='"+e.rid + "'>" + e.data + "</li>");
         })
 
         //$('li#' + answer.rid).html(answer.link);
@@ -382,26 +360,6 @@ function rebootlinks() {
     $('#search').click();
   });
 
-  $('.recalc_character').off().on('click', function(event) {
-    event.preventDefault();
-    event.stopPropagation();
-    let dad = $(this).parents('li');
-    let dad_id = $(dad).attr("id");
-    $("li#" + dad_id + " .character_info").removeClass('hidden');
-    $.ajax({
-      url: 'ajax/recalc/character/' + $(this).attr('id') + '/',
-      success: function(answer) {
-        $('.details').html(answer.character);
-        $('li#' + answer.rid).html(answer.link);
-        rebootlinks();
-        ac.reset(answer.id, "sheet_" + answer.id, "customizer");
-        $("li#" + dad_id + " .character_name").click();
-      },
-      error: function(answer) {
-        console.log('Recalc error...' + answer);
-      }
-    });
-  });
 
   $('.character_link').off().on('click', function(event) {
     event.preventDefault();
@@ -428,29 +386,114 @@ function rebootlinks() {
     rebootlinks();
   });
 
-  $('.view_character').off().on('click', function(event) {
-    console.log('View: ' + $(this).attr('id'));
+  $('.recalc_character').off().on('click', function(event) {
     event.preventDefault();
     event.stopPropagation();
-    var dad = $(this).parents('li');
-    $('li').removeClass('selected');
-    $(dad).addClass('selected');
+    let dad = $(this).parents('li');
+    let dad_id = $(dad).attr("id");
+    let that_id = $(this).attr('id').split("_")[0];
+    $("li#" + dad_id + " .character_info").removeClass('hidden');
     $.ajax({
-      url: 'characters/' + $(this).attr('id') + '/view/',
+      url: 'ajax/recalc/character/' + that_id + '/',
       success: function(answer) {
-        $('.details').html(answer)
-        $('li').removeClass('selected');
+        $('.details').html(answer.character);
+        $('li#' + answer.rid).html(answer.link);
+
+        $('#customizer').html(answer.mobile_form);
+        ac.reset(answer.id, "sheet_" + answer.id, "customizer");
+        $("li#" + dad_id + " .character_name").click();
         rebootlinks();
-        prepare_ajax();
-        loadKeywords();
+        update_messenger();
       },
       error: function(answer) {
-        console.log('Vew error...' + answer);
+        console.log('Recalc error...' + answer);
+      }
+    });
+  });
+
+  $('.edit_character').off().on('click', function(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    let dad = $(this).parents('li');
+    let dad_id = $(dad).attr("id");
+    let that_id = $(this).attr('id').split("_")[0];
+    $("li#" + dad_id + " .character_info").removeClass('hidden');
+    $.ajax({
+      url: 'characters/' + that_id + '/edit/',
+      success: function(answer) {
+        $('.details').html(answer);
+        $('li#' + answer.rid).html(answer.link);
+        rebootlinks();
+        ac.reset(answer.id, "sheet_" + answer.id, "customizer");
+        $("li#" + dad_id + " .character_name").click();
+        update_messenger();
+      },
+      error: function(answer) {
+        console.log('ooops... :(');
+        update_messenger();
       }
     });
   });
 
 
+  $('.roll_dice').off().on('keypress', function(event) {
+    if (event.which == 13){
+      event.preventDefault();
+      event.stopPropagation();
+      console.log("enter key pressed")
+      let formula = $(this).val().toLowerCase().replace(" ","_").replace("+","x").replace("!","i")
+      console.log(formula)
+      $.ajax({
+        url: 'ajax/roll_dice/' + formula + '/',
+        success: function(answer) {
+          $('.rolls').html(answer.rolls);
+          $('.mods').html(answer.mods);
+          $('.total').html(answer.total);
+          rebootlinks();
+          update_messenger();
+        },
+        error: function(answer) {
+          console.log('Broken dice... :(');
+          update_messenger();
+        }
+      });
+    }
+  });
+
+
+  // $('.view_character').off().on('click', function(event) {
+  //   console.log('View: ' + $(this).attr('id'));
+  //   event.preventDefault();
+  //   event.stopPropagation();
+  //   let dad = $(this).parents('li');
+  //   let dad_id = $(dad).attr("id");
+  //   let that_id = $(this).attr('id').split("_")[0];
+  //   $("li#" + dad_id + " .character_info").removeClass('hidden');
+  //   $.ajax({
+  //     url: 'characters/' + that_id + '/view/',
+  //     success: function(answer) {
+  //       $('.details').html(answer)
+  //       //$('li#' + answer.rid).html(answer.link);
+  //       rebootlinks();
+  //       ac.reset(answer.id, "sheet_" + answer.id, "customizer");
+  //       $("li#" + dad_id + " .character_name").click();
+  //     },
+  //     error: function(answer) {
+  //       console.log('View error...' + answer);
+  //     }
+  //   });
+  // });
+
+  $('.dice_roll').off().on('click', function(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    let arr = $(this).attr("id").split("-")
+    console.log(arr)
+    $("#set").val("1d12+"+arr[1]);
+    //$("#throw").fireEvent('mouseup');
+    $t.raise_event($t.id('throw'), 'mouseup');
+    rebootlinks();
+  });
 
 
 
@@ -459,7 +502,11 @@ function rebootlinks() {
   op.doConnect();
   set_toggler('.mobile_form_toggler', 'collapsed', "#customizer");
   set_toggler('.menu_right_toggler', 'collapsed', ".menuright");
+  set_toggler('.list_toggler', 'collapsed', ".list");
   set_toggler('#menu_right_toggler', 'collapsed', ".menuright");
+  set_toggler('#list_toggler', 'collapsed', ".list");
+  set_toggler('.dicer_toggler', 'collapsed', ".dicer");
+  set_toggler('#dicer_toggler', 'collapsed', ".dicer");
   update_messenger();
 }
 

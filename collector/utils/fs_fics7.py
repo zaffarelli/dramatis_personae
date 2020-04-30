@@ -34,56 +34,90 @@ def check_secondary_attributes(ch):
   ch.SA_SPD = math.ceil(ch.PA_REF / 2)
   ch.SA_RUN = ch.PA_MOV *2
 
-def fetch_everyman_sum(ch):
-  """ Get the sum of everyman skills for the character specie """
-  total = 0
-  all_every = ch.specie.get_racial_skills()
-  for every in all_every:
-    total += all_every[every]
-  logger.debug('> Everyman total for [%s] as [%s] is [%d].'%(ch.full_name,ch.specie,total))
-  return total
+# def fetch_everyman_sum(ch):
+#   """ Get the sum of everyman skills for the character specie """
+#   total = 0
+#   all_every = ch.specie.get_racial_skills()
+#   for every in all_every:
+#     total += all_every[every]
+#   logger.debug('> Everyman total for [%s] as [%s] is [%d].'%(ch.full_name,ch.specie,total))
+#   return total
 
-def check_everyman_skills(ch):
-  """ Check and fix everyman values for the skills"""
-  from collector.models.skills import Skill
-  skills = ch.skill_set.all()
-  all_every = ch.specie.get_racial_skills()
-  val_total = 0
-  for every in all_every:
-    every_found = False
-    for s in skills:
-      if s.skill_ref.reference == every:
-        every_found = True
-        val = all_every[every]
-        #if s.value < val:
-        logger.debug('Everyman: Value fixed for %s (%s)'%(s.skill_ref.reference,val))
-        this_skill = Skill.objects.get(id=s.id)
-        this_skill.value += val
-        val_total += val
-        this_skill.save()
-        break
-    if not every_found:
-      val = all_every[every]
-      logger.debug('Everyman: Not found: %s... Added value %d!'%(every,val))
-      this_skill_ref = SkillRef.objects.get(reference=every)
-      this_skill = Skill()
-      this_skill.character=ch
-      this_skill.skill_ref=this_skill_ref
-      this_skill.value = val
-      val_total += val
-      this_skill.save()
-  return val_total
+# def check_everyman_skills(ch):
+#   """ Check and fix everyman values for the skills"""
+#   from collector.models.skills import Skill
+#   skills = ch.skill_set.all()
+#   all_every = ch.specie.get_racial_skills()
+#   val_total = 0
+#   for every in all_every:
+#     every_found = False
+#     for s in skills:
+#       if s.skill_ref.reference == every:
+#         every_found = True
+#         val = all_every[every]
+#         #if s.value < val:
+#         logger.debug('Everyman: Value fixed for %s (%s)'%(s.skill_ref.reference,val))
+#         this_skill = Skill.objects.get(id=s.id)
+#         this_skill.value += val
+#         val_total += val
+#         this_skill.save()
+#         break
+#     if not every_found:
+#       val = all_every[every]
+#       logger.debug('Everyman: Not found: %s... Added value %d!'%(every,val))
+#       this_skill_ref = SkillRef.objects.get(reference=every)
+#       this_skill = Skill()
+#       this_skill.character=ch
+#       this_skill.skill_ref=this_skill_ref
+#       this_skill.value = val
+#       val_total += val
+#       this_skill.save()
+#   return val_total
 
 def check_gm_shortcuts(ch,sk):
   """ Check for Gamemaster shortcuts for the character """
   if sk.skill_ref.reference in SHORTCUTS:
     score = sk.value + getattr(ch,SHORTCUTS[sk.skill_ref.reference]['attribute'])
-    newshortcut = '<tr><td>%s</td><td colspan=4>%s</td><td>%d</td></tr>'%(SHORTCUTS[sk.skill_ref.reference]['rationale'],SHORTCUTS[sk.skill_ref.reference]['label'],score)
+    id = ch.rid+"-"+str(score)
+    newshortcut = '<tr><td>%s</td><td colspan=4>%s</td><td>%d</td><td><i id="%s" class="action_icon dice_roll fa fa-dice"></i></td></tr>'%(SHORTCUTS[sk.skill_ref.reference]['rationale'],SHORTCUTS[sk.skill_ref.reference]['label'],score,id)
     pdf_short = {'rationale':SHORTCUTS[sk.skill_ref.reference]['rationale'],'label':SHORTCUTS[sk.skill_ref.reference]['label'],'score':score}
     return newshortcut, pdf_short
   else:
     return '',''
 
+
+def d12x():
+    rolls = []
+    total = 0
+    details = ""
+    x = roll(12)
+    rolls.append(x)
+    total = x
+    if (x==1):
+        details = "[1!]"
+        y = roll(12)
+        rolls.append(y)
+        total -= y
+        details += " + (%d!) "%(y)
+        while y==12:
+            y = roll(12)
+            rolls.append(y)
+            total -= y
+            details += " + (%d!) "%(y)
+    elif (x==12):
+        details = "[12!]"
+        y = roll(12)
+        rolls.append(y)
+        total += y
+        details += " + (%d!) "%(y)
+        while y==12:
+            y = roll(12)
+            rolls.append(y)
+            total += y
+            details += " + (%d!) "%(y)
+    else:
+        details = "["+str(x)+"!]"
+    return total, details
 
 def check_nameless_attributes(ch):
   res = ''
@@ -291,39 +325,39 @@ def choose_pa(weights,maxi,pa):
 #     row += ' = TOTAL %2d'%(sum(pas))
 #     print(row)
 
-def check_primary_attributes(ch):
-  """ Fixing primary attributes """
-  if ch.onsave_reroll_attributes:
-    pool = ch.role.primaries
-    maxi = ch.role.maxi
-    mini = int(ch.role.mini)
-    pas = [ mini for i in range(12) ]
-    pool -= sum(pas)
-    weights = ch.profile.get_weights()
-    balance = ch.specie.attr_mod_balance
-    if ch.player == '':
-      while pool>0:
-        chosen_pa = choose_pa(weights,maxi,pas)
-        idx = chosen_pa
-        pas[idx] += 1
-        pool -= 1
-      ch.PA_STR = pas[0]
-      ch.PA_CON = pas[1]
-      ch.PA_BOD = pas[2]
-      ch.PA_MOV = pas[3]
-
-      ch.PA_INT = pas[4]
-      ch.PA_WIL = pas[5]
-      ch.PA_TEM = pas[6]
-      ch.PA_PRE = pas[7]
-
-      ch.PA_TEC = pas[8]
-      ch.PA_REF = pas[9]
-      ch.PA_AGI = pas[10]
-      ch.PA_AWA = pas[11]
-      ch.apply_racial_pa_mods()
-      #list_attributes(ch,None)
-    ch.onsave_reroll_attributes = False
+# def check_primary_attributes(ch):
+#   """ Fixing primary attributes """
+#   if ch.onsave_reroll_attributes:
+#     pool = ch.role.primaries
+#     maxi = ch.role.maxi
+#     mini = int(ch.role.mini)
+#     pas = [ mini for i in range(12) ]
+#     pool -= sum(pas)
+#     weights = ch.profile.get_weights()
+#     balance = ch.specie.attr_mod_balance
+#     if ch.player == '':
+#       while pool>0:
+#         chosen_pa = choose_pa(weights,maxi,pas)
+#         idx = chosen_pa
+#         pas[idx] += 1
+#         pool -= 1
+#       ch.PA_STR = pas[0]
+#       ch.PA_CON = pas[1]
+#       ch.PA_BOD = pas[2]
+#       ch.PA_MOV = pas[3]
+#
+#       ch.PA_INT = pas[4]
+#       ch.PA_WIL = pas[5]
+#       ch.PA_TEM = pas[6]
+#       ch.PA_PRE = pas[7]
+#
+#       ch.PA_TEC = pas[8]
+#       ch.PA_REF = pas[9]
+#       ch.PA_AGI = pas[10]
+#       ch.PA_AWA = pas[11]
+#       ch.apply_racial_pa_mods()
+#       #list_attributes(ch,None)
+#     ch.onsave_reroll_attributes = False
 
 
 def get_skills_list(ch,groups):
@@ -366,11 +400,11 @@ def choose_sk(alist,maxweight):
   return None
 
 
-def check_skills(ch):
-  """ Fixing skills """
-  skills_randomizer(ch)
+# def check_skills(ch):
+#   """ Fixing skills """
+#   skills_randomizer(ch)
 
-def check_role(ch):
+# def check_role(ch):
   #print('> %s:'%(ch.full_name))
   # pa_pool = ch.role.primaries
   # sk_pool = ch.role.skills
@@ -388,7 +422,7 @@ def check_role(ch):
   #   logger.info('   Not enough OP (Talents + Benefice/Afflictions + Blessing/Curses): %d (%d)'%(ch.BA_TOTAL + ch.BC_TOTAL + ch.TA_TOTAL,ba_pool+bc_pool+ta_pool))
   #   result = False
   # return status
-  return True
+  # return True
 
 
 
@@ -431,91 +465,91 @@ def list_skills(ch):
   print("> Pools (%d): c=%4d u=%4d r=%4d"%(pool,pool_c,pool_u,pool_r))
 
 
-def skills_randomizer(ch):
-  """ New function to properly calculate random skills"""
-  if ch.onsave_reroll_skills == True:
+# def skills_randomizer(ch):
+#   """ New function to properly calculate random skills"""
+#   if ch.onsave_reroll_skills == True:
+#
+#     # 1) Prepare everything
+#     pool = ch.role.skills
+#     root_amount = ch.role.skill_roots
+#     maxi = ch.role.maxi
+#     #groups = ch.profile.get_groups()
+#     #current = ch.SK_TOTAL
+#     balance = ch.specie.skill_balance
+#     unit = int(pool / 8)
+#     modulo = int(pool % 8)
+#     pool_c = unit*5+modulo
+#     pool_u = unit*2
+#     pool_r = unit*1
+#     ch.purgeSkills()
 
-    # 1) Prepare everything
-    pool = ch.role.skills
-    root_amount = ch.role.skill_roots
-    maxi = ch.role.maxi
-    #groups = ch.profile.get_groups()
-    #current = ch.SK_TOTAL
-    balance = ch.specie.skill_balance
-    unit = int(pool / 8)
-    modulo = int(pool % 8)
-    pool_c = unit*5+modulo
-    pool_u = unit*2
-    pool_r = unit*1
-    ch.purgeSkills()
 
-
-    everyman_total = check_everyman_skills(ch)
-    for skill in ch.skill_set.all().order_by('skill_ref__reference'):
-      if skill.skill_ref.is_speciality == True:
-        pool_r -= skill.value
-      elif skill.skill_ref.is_common == False:
-        pool_u -= skill.value
-      elif skill.skill_ref.is_root == False:
-        pool_c -= skill.value
-
-    # 2) Calculate Common Skills
-    common_skills = get_skills_list(ch,False,True)
-    common_weight = 0
-    for s in common_skills:
-      common_weight += s['weight']
-    current = pool_c
-    while current>0:
-      batch = 1
-      if current > (pool_c / 2):
-        batch = 3
-      chosen_sk = choose_sk(common_skills,common_weight)
-      sk = ch.add_or_update_skill(chosen_sk,batch)
-      current -= batch
-
-    # 3) Calculate Uncommon skills
-    uncommon_skills = get_skills_list(ch,False,False)
-    uncommon_weight = 0
-    for s in uncommon_skills:
-      uncommon_weight += s['weight']
-    current = pool_u
-    while current>0:
-      batch = 1
-      chosen_sk = choose_sk(uncommon_skills,uncommon_weight)
-      sk = ch.add_or_update_skill(chosen_sk,batch)
-      current -= batch
-
-    # 4) Calculate Roots
-    roots = get_roots_list(ch)
-    root_weight = 0
-    for s in roots:
-      root_weight += s['weight']
-    current = pool_r
-    while current>0:
-      batch = 1
-      chosen_sk = choose_sk(roots,root_weight)
-      sk = ch.add_or_update_skill(chosen_sk,batch)
-      current -= batch
-    chosen_roots = ch.skill_set.all().filter(skill_ref__is_root = True)
-    for root in chosen_roots:
-      local_pool = root.value
-      speciality_skills = get_specilities_list(ch,root.skill_ref)
-      speciality_weight = 0
-      for s in speciality_skills:
-        speciality_weight += s['weight']
-      while local_pool>0:
-        batch = 1
-        chosen_sk = choose_sk(speciality_skills,speciality_weight)
-        sk = ch.add_or_update_skill(chosen_sk,batch)
-        local_pool -= batch
-      root.value = 0
-
-    # 5) And we are done :)
-    ch.add_missing_root_skills()
-    #list_skills(ch)
-    ch.onsave_reroll_skills = False
-  else:
-    print("Nothing to do...")
+  #   everyman_total = check_everyman_skills(ch)
+  #   for skill in ch.skill_set.all().order_by('skill_ref__reference'):
+  #     if skill.skill_ref.is_speciality == True:
+  #       pool_r -= skill.value
+  #     elif skill.skill_ref.is_common == False:
+  #       pool_u -= skill.value
+  #     elif skill.skill_ref.is_root == False:
+  #       pool_c -= skill.value
+  #
+  #   # 2) Calculate Common Skills
+  #   common_skills = get_skills_list(ch,False,True)
+  #   common_weight = 0
+  #   for s in common_skills:
+  #     common_weight += s['weight']
+  #   current = pool_c
+  #   while current>0:
+  #     batch = 1
+  #     if current > (pool_c / 2):
+  #       batch = 3
+  #     chosen_sk = choose_sk(common_skills,common_weight)
+  #     sk = ch.add_or_update_skill(chosen_sk,batch)
+  #     current -= batch
+  #
+  #   # 3) Calculate Uncommon skills
+  #   uncommon_skills = get_skills_list(ch,False,False)
+  #   uncommon_weight = 0
+  #   for s in uncommon_skills:
+  #     uncommon_weight += s['weight']
+  #   current = pool_u
+  #   while current>0:
+  #     batch = 1
+  #     chosen_sk = choose_sk(uncommon_skills,uncommon_weight)
+  #     sk = ch.add_or_update_skill(chosen_sk,batch)
+  #     current -= batch
+  #
+  #   # 4) Calculate Roots
+  #   roots = get_roots_list(ch)
+  #   root_weight = 0
+  #   for s in roots:
+  #     root_weight += s['weight']
+  #   current = pool_r
+  #   while current>0:
+  #     batch = 1
+  #     chosen_sk = choose_sk(roots,root_weight)
+  #     sk = ch.add_or_update_skill(chosen_sk,batch)
+  #     current -= batch
+  #   chosen_roots = ch.skill_set.all().filter(skill_ref__is_root = True)
+  #   for root in chosen_roots:
+  #     local_pool = root.value
+  #     speciality_skills = get_specilities_list(ch,root.skill_ref)
+  #     speciality_weight = 0
+  #     for s in speciality_skills:
+  #       speciality_weight += s['weight']
+  #     while local_pool>0:
+  #       batch = 1
+  #       chosen_sk = choose_sk(speciality_skills,speciality_weight)
+  #       sk = ch.add_or_update_skill(chosen_sk,batch)
+  #       local_pool -= batch
+  #     root.value = 0
+  #
+  #   # 5) And we are done :)
+  #   ch.add_missing_root_skills()
+  #   #list_skills(ch)
+  #   ch.onsave_reroll_skills = False
+  # else:
+  #   print("Nothing to do...")
 
 def get_skills_list(ch,root,com):
   """ Prepare the list of skills without specialities """

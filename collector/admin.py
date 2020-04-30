@@ -59,3 +59,11 @@ admin.site.register(Spacecraft, SpacecraftAdmin)
 
 from collector.models.system import System, SystemAdmin
 admin.site.register(System, SystemAdmin)
+
+from collector.models.ritual_ref import RitualRef, RitualRefAdmin
+admin.site.register(RitualRef, RitualRefAdmin)
+
+from collector.models.cyberware import CyberwareRef, CyberwareRefAdmin, Cyberware, CyberwareAdmin, Cyberfeature, CyberfeatureAdmin
+admin.site.register(Cyberfeature, CyberfeatureAdmin)
+admin.site.register(CyberwareRef, CyberwareRefAdmin)
+admin.site.register(Cyberware, CyberwareAdmin)

@@ -43,7 +43,7 @@ def get_list(request,id,slug='none'):
   conf = get_current_config()
   if request.is_ajax:
     if slug=='none':
-      character_items = Character.objects.filter(epic=conf.epic).order_by('full_name')
+      character_items = Character.objects.filter(epic=conf.epic).order_by('balanced','-OP','-is_public','full_name')
     elif slug.startswith('c-'):
       ep_class = slug.split('-')[1].capitalize()
       ep_id = slug.split('-')[2]
@@ -90,11 +90,14 @@ def recalc_character(request, id=None):
     character = template.render({'c':item, 'no_skill_edit':False})
     templatelink = get_template('collector/character_link.html')
     link = templatelink.render({'c':item},request)
+    mobileform = get_template('collector/mobile_form.html')
+    mf = mobileform.render({'c':item},request)
     context = {
       'rid': crid,
       'id': id,
       'character': character,
       'link': link,
+      'mobile_form': mf,
     }
     messages.info(request, '...%s recalculated'%(item.full_name))
     return JsonResponse(context)

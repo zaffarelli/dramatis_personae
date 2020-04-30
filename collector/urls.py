@@ -8,7 +8,7 @@ from django.urls import path, re_path
 from collector.views.basic import pdf_show
 from collector.views.characters import CharacterDetailView, CharacterUpdateView, customize_ba, customize_bc, customize_skill, customize_ba_del, customize_bc_del, skill_pick, attr_pick, customize_weapon, customize_weapon_del, customize_armor, customize_armor_del, customize_shield, customize_shield_del
 from collector.views.frontend import index, view_by_rid, toggle_public, toggle_spotlight, get_list, add_character, get_storyline, conf_details, recalc_character, update_messenger, show_jumpweb, show_todo #, recalc_pa_character, recalc_skills_character
-from collector.views.backend import recalc,export,xls_update,pdf_character, gss_update, pdf_rules
+from collector.views.backend import recalc,export,xls_update,pdf_character, gss_update, pdf_rules, roll_dice
 from collector.views.misc_chart import get_chardar, get_population_statistics, get_keywords
 
 
@@ -21,6 +21,8 @@ urlpatterns = [
     re_path('^ajax/messenger/$', update_messenger, name='update_messenger'),
     re_path('^characters/(?P<pk>\d+)/edit/$', CharacterUpdateView.as_view(), name='edit_character'),
     re_path('^characters/(?P<pk>\d+)/view/$', CharacterDetailView.as_view(), name='view_character'),
+
+    re_path('^ajax/roll_dice/(?P<slug>[\w-]+)/$',roll_dice, name='roll_dice'),
 
     re_path('^ajax/recalc/character/(?P<id>\d+)/$', recalc_character, name='recalc_character'),
     # re_path('^ajax/recalc_pa/character/(?P<id>\d+)/$', recalc_pa_character, name='recalc_pa_character'),

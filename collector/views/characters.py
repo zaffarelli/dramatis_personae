@@ -31,6 +31,7 @@ class CharacterUpdateView(AjaxFromResponseMixin,UpdateView):
     context_object_name = 'c'
     template_name_suffix = '_update_form'
 
+
     def form_valid(self, form):
         context = self.get_context_data(form=form)
         tourofdutys_formset = context['tourofdutys']

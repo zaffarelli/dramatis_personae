@@ -19,6 +19,8 @@ import logging
 logger = logging.getLogger(__name__)
 
 class Character(Combattant):
+    class Meta:
+        ordering = ['full_name']
     pagenum = 0
     full_name = models.CharField(max_length=200)
     rid = models.CharField(max_length=200, default='none')
@@ -40,6 +42,7 @@ class Character(Combattant):
     height = models.IntegerField(default=150)
     weight = models.IntegerField(default=50)
     narrative = models.TextField(default='', blank=True)
+    buildlog = models.TextField(default='', blank=True)
     entrance = models.CharField(max_length=100, default='', blank=True)
     keyword = models.CharField(max_length=32, blank=True, default='new')
     stars = models.CharField(max_length=256, blank=True, default='')
@@ -104,6 +107,8 @@ class Character(Combattant):
     onsave_reroll_skills = models.BooleanField(default=False)
     lifepath_total = models.IntegerField(default=0)
     balanced = models.BooleanField(default=False)
+    historical_figure = models.BooleanField(default=False)
+    nameless = models.BooleanField(default=False)
     color = models.CharField(max_length=20,blank=True,default='#CCCCCC')
     skills_options = []
     ba_options = []
@@ -190,6 +195,7 @@ class Character(Combattant):
 
     def rebuild_from_lifepath(self):
         """ Historical Creation """
+        self.buildlog = ''
         from collector.models.character_custo import CharacterCusto
         found_custo = CharacterCusto.objects.filter(character=self).first()
         if found_custo is None:
@@ -206,6 +212,15 @@ class Character(Combattant):
         self.OP_tod_pool = 0
         self.WP_tod_pool = 0
         self.lifepath_total = 0
+        bl = []
+        TOD_REP = {
+            'RA':0,
+            'UP':0,
+            'AP':0,
+            'EC':0,
+            'TO':0,
+            'WB':0,
+        }
         for tod in self.tourofduty_set.all():
             AP, OP, WP = tod.push(self)
             self.AP_tod_pool += AP
@@ -213,10 +228,42 @@ class Character(Combattant):
             self.OP_tod_pool += WP
             self.WP_tod_pool += WP
             self.lifepath_total += tod.tour_of_duty_ref.value
+            if (tod.tour_of_duty_ref.category == '0' or tod.tour_of_duty_ref.category == '5'):
+                TOD_REP['RA'] += tod.tour_of_duty_ref.value
+            elif (tod.tour_of_duty_ref.category == '10'):
+                TOD_REP['UP'] += tod.tour_of_duty_ref.value
+            elif (tod.tour_of_duty_ref.category == '20'):
+                TOD_REP['AP'] += tod.tour_of_duty_ref.value
+            elif (tod.tour_of_duty_ref.category == '30'):
+                TOD_REP['EC'] += tod.tour_of_duty_ref.value
+            elif (tod.tour_of_duty_ref.category == '40'):
+                TOD_REP['TO'] += tod.tour_of_duty_ref.value
+            elif (tod.tour_of_duty_ref.category == '50'):
+                TOD_REP['WB'] += tod.tour_of_duty_ref.value
         if self.charactercusto:
             self.charactercusto.comment = self.full_name
             self.charactercusto.push(self)
             self.charactercusto.save()
+
+        PA_TOTAL = self.sumPA
+        PO_TOTAL = 0
+        for s in self.skill_set.all():
+            if s.skill_ref.is_root == False:
+                PO_TOTAL += s.value
+        BA_TOTAL = 0
+        for ba in self.beneficeaffliction_set.all():
+            BA_TOTAL += ba.benefice_affliction_ref.value
+        BC_TOTAL = 0
+        for bc in self.blessingcurse_set.all():
+            BC_TOTAL += bc.blessing_curse_ref.value
+
+        bl.append("")
+        bl.append("Tour Summary:")
+        bl.append("- APx3+OP+BA+BC... "+str(PA_TOTAL*3+PO_TOTAL+BA_TOTAL+BC_TOTAL))
+        bl.append("- WP.............. "+str(self.WP_tod_pool))
+        bl.append("- Value........... "+str(self.charactercusto.value))
+        bl.append("- Lifepath ....... "+str(self.lifepath_total))
+        bl.append("- Repartition .... "+str(TOD_REP))
         fs_fics7.check_secondary_attributes(self)
         self.charactercusto.save()
         self.prepareDisplay()
@@ -224,6 +271,7 @@ class Character(Combattant):
         self.add_missing_root_skills()
         self.resetTotal()
         self.balanced = (self.lifepath_total == self.OP) and (self.OP > 0)
+        self.buildlog = "\n".join(bl)
         if self.player != '':
             self.balanced = True
         if self.color == '#CCCCCC':
@@ -245,15 +293,15 @@ class Character(Combattant):
 
     def rebuild_free_form(self):
         """ Freeform Creation """
+        # self.resetTotal()
+        # if self.onsave_reroll_attributes:
+        #     fs_fics7.check_primary_attributes(self)
+        #     fs_fics7.check_secondary_attributes(self)
+        # if self.onsave_reroll_skills:
+        #     fs_fics7.check_skills(self)
+        # else:
+        self.add_missing_root_skills()
         self.resetTotal()
-        if self.onsave_reroll_attributes:
-            fs_fics7.check_primary_attributes(self)
-            fs_fics7.check_secondary_attributes(self)
-        if self.onsave_reroll_skills:
-            fs_fics7.check_skills(self)
-        else:
-            self.add_missing_root_skills()
-            self.resetTotal()
 
     def fix(self, conf=None):
         """ Check / calculate other characteristics """
@@ -512,6 +560,10 @@ class Character(Combattant):
 
     def resetPA(self):
         self.PA_STR = self.PA_CON = self.PA_BOD = self.PA_MOV = self.PA_INT = self.PA_WIL = self.PA_TEM = self.PA_PRE = self.PA_TEC = self.PA_REF = self.PA_AGI = self.PA_AWA = self.OCC_LVL = self.OCC_DRK =0
+
+    @property
+    def sumPA(self):
+        return self.PA_STR + self.PA_CON + self.PA_BOD + self.PA_MOV + self.PA_INT + self.PA_WIL + self.PA_TEM + self.PA_PRE + self.PA_TEC + self.PA_REF + self.PA_AGI + self.PA_AWA + self.OCC_LVL - self.OCC_DRK
 
     def purgeSkills(self):
         """ Deleting all character skills """

@@ -18,11 +18,14 @@ def get_population_statistics(request, *args, **kwargs):
     conf = get_current_config()
     da = []
 
+    # List of balanced / unbalanced characters
+    ch = conf.get_chart('balanced',filter='balanced',type='doughnut')
+    da.append(json.dumps(ch['data']))
+
 
     ch = conf.get_chart('alliance',filter='is_public',pattern=True,type='doughnut')
     da.append(json.dumps(ch['data']))
-    ch = conf.get_chart('balanced',filter='balanced',type='doughnut')
-    da.append(json.dumps(ch['data']))
+
     ch = conf.get_chart('is_public',filter='balanced',pattern=True,type='doughnut')
     da.append(json.dumps(ch['data']))
     ch = conf.get_chart('full_name',filter='fencing_league',pattern=True,type='horizontalBar',bar_property='victory_rating')

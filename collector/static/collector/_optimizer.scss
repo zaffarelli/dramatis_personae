@@ -1,0 +1,232 @@
+@import 'base';
+@import 'fonts';
+
+.duel {
+    & h2, & h3 {
+        font-family: NomPersoListe;
+        font-weight: bold;
+        text-align: center;
+        font-variant: small-caps;
+    }
+
+    & .round_data {
+        display: inline-block;
+        margin: auto;
+        margin-top: 0;
+        vertical-align: top;
+        width: 420px;
+        border: 1px solid black;
+        padding: 3px;
+        color: white;
+
+        &.attacker {
+            /*background: #402010;*/
+
+            & ol {
+                /*direction: rtl;*/
+
+                & li {
+                    text-align: right;
+                }
+            }
+        }
+
+        &.defender {
+            /*background: #204010;*/
+        }
+    }
+
+    & table.wounds {
+        border-collapse: separate;
+
+        & td {
+            background: $fics_dark;
+            border: 2px solid #222;
+            width: $block_wsize;
+            height: $block_hsize;
+            text-align: center;
+
+            & .large {
+                font-size: 1.5em;
+                font-weight: bold;
+            }
+
+            &.shield {
+                border-color: #223;
+            }
+
+            &.stats {
+                border-color: #332;
+
+                &.neg {
+                    border-color: #223;
+                }
+            }
+
+            &.armor {
+                border-color: #343;
+                font-weight: bold;
+                font-size: 1em;
+            }
+
+            &.hp {
+                border-color: #322;
+            }
+
+            &.wnd {
+                border-color: #433;
+            }
+
+            &.disabled {
+                opacity: .1;
+            }
+
+            & .wounded {
+                color: #323;
+            }
+        }
+
+        & th {
+            background: transparent;
+            border: 2px dotted #222;
+            width: $block_wsize;
+            height: $block_hsize;
+        }
+    }
+
+    &ol {
+        margin: 0;
+
+        & li {
+            margin: 0;
+        }
+    }
+}
+
+table.duels {
+    display: inline-block;
+
+    & th {
+        width: 100px;
+        height: 90px;
+        font-size: 2em;
+    }
+
+    & td {
+        width: 100px;
+        height: 90px;
+        font-size: 3em;
+        border: 1px solid white;
+    }
+
+    & .round_data {
+        height: 650px;
+    }
+}
+
+table.match_score {
+    display: inline-block;
+    background: #444;
+    border: 1px solid #444;
+    margin: 0;
+    padding: 0;
+
+    & td {
+        background-color: $fics_dark;
+        color: $fics_front;
+        font-size: .95em;
+        width: auto;
+        height: 30px;
+        text-align: center;
+        border: 2px solid transparent;
+    }
+
+    & th {
+        background-color: #303030;
+        font-size: .85em;
+        width: 50px;
+        height: 40px;
+        border: 2px solid transparent;
+    }
+}
+
+table.match_score_flat {
+    display: inline-block;
+    background: #444;
+    border: 1px solid #111;
+    margin: 0;
+    padding: 0;
+
+    & td {
+        background-color: $fics_dark;
+        color: $fics_front;
+        font-size: .95em;
+        width: 3ex;
+        height: 1.2em;
+        text-align: center;
+        border: 1px solid transparent;
+    }
+
+    & th {
+        background-color: #303030;
+        color: $fics_frontest;
+        font-size: .85em;
+        width: 25ex;
+        height: 1.2em;
+        border: 1px solid transparent;
+    }
+}
+
+table.combat_narrative {
+    border: 1px solid $fics_front;
+    width: auto;
+
+    & tr {
+        &.even {
+            background: #232;
+        }
+
+        &.odd {
+            background: #323;
+        }
+
+        & th {
+            width: 50px;
+            font-size: 1.2em;
+            background: transparent;
+            text-align: center;
+        }
+
+        & td {
+            width: 350px;
+            padding: 5px;
+            background: transparent;
+
+            &.a {
+                text-align: right;
+            }
+
+            &.d {
+                text-align: left;
+            }
+
+            & b {
+                font-weight: bold;
+                color: #fea;
+            }
+
+            & i {
+                color: #fea;
+            }
+
+            & u {
+                color: #fea;
+                text-decoration: none;
+            }
+        }
+    }
+}
+
+svg {
+    overflow: scroll;
+}

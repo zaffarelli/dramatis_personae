@@ -228,7 +228,7 @@ def as_specialty(value):
 
 @register.filter(name='as_lifepath')
 def as_lifepath(value):
-  lp = {'0':'Race','5':'Race Balance','10':'Upbringing','20':'Apprenticeship','30':'Early Career','40':'Tour of Duty','50':'Worldly Benefits'}
+  lp = {'0':'Race','5':'Race Balance','10':'Upbringing','20':'Apprenticeship','30':'Early Career','40':'Tour of Duty','50':'Worldly Benefits','60':'Nameless Kit'}
   return "%s"%(lp[value])
 
 

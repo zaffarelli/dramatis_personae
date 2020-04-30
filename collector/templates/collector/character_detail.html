@@ -1,7 +1,7 @@
+
+
+{% block details %}
 {% load fics_filters %}
-
-{% include "collector/mobile_form.html" %}
-
 <div class="classyview" id='sheet_{{c.id}}'>
 {% if c.alliance_picture != "" %}
 <!--div class='pic'><img src="static/collector/portraits/{{ c.rid }}.jpg"></div-->
@@ -16,22 +16,23 @@
     <li><b>Alliance</b>{{ c.alliance|safe }}</li>
     <li><b>Faction</b>{{ c.faction|safe }}</li>
     <li><b>Birthdate</b>{{ c.birthdate }} ({{ c.age }} years old)</li>
-    <li><b>Species</b>{{ c.specie }}</li>
-    <li><b>Caste</b>{{ c.caste }}</li>
-    <li><b>Native Fief</b>{{ c.native_fief }}</li>
-    <li><b>Rank</b>{{ c.rank }}</li>
-    <li><b>Height</b>{{ c.height|as_height }}</li>
-    <li><b>Weight</b>{{ c.weight|as_weight }}</li>
+    <li><b>Fief/Species</b>{{ c.native_fief }} / {{ c.specie }}</li>
+    <li><b>Caste/Rank</b>{{ c.caste }} / {{ c.rank }}</li>
+    <li><b>Height/Weight</b>{{ c.height|as_height }} / {{ c.weight|as_weight }}</li>
     <li><b>Player</b>{{ c.player }}</li>
+    <li><b>Keyword</b>{{ c.keyword }}</li>
+    <li><b>Occult</b>{{c.occult}}</li>
+    <li><b>ID</b>{{c.id}}</li>
+    <li>Dead {{ c.is_dead|prettybool|safe }} |
+    Vis {{c.is_visible|prettybool|safe}} |
+    LP {{c.use_history_creation|prettybool|safe}} |
+    HF {{c.historical_figure|prettybool|safe}} |
+    Ns {{c.nameless|prettybool|safe}} |
+    Pu {{c.is_public|prettybool|safe}}</li>
 </ul>
 <span class='pagebreaker'>&nbsp;</span>
 <ul class='unbreakable'>
-    <li><b>Keyword</b>{{ c.keyword }}</li>
-    <li><b>ID</b>{{c.id}}</li>
-    <li><b>Dead</b>{{ c.is_dead|prettybool|safe }}</li>
-    <li><b>Visible</b>{{c.is_visible|prettybool|safe}}</li>
-    <li><b>Lifepaths</b>{{c.use_history_creation|prettybool|safe}}</li>
-    <li><b>Occult</b>{{c.occult}}</li>
+  <li><b>Build Log</b>{{ c.buildlog|parse_avatars|safe }}</li>
 </ul>
 <span class='pagebreaker'>&nbsp;</span>
 {% if c.tourofduty_set.count != 0 %}
@@ -92,10 +93,8 @@
     </span>
 </div>
 
-
-
-
 <hr/>
 <span class='golden custom_show' id='{{c.rid}}' ><a href='pdf/{{c.rid}}/' target='avatar_pdf'><i class="fas fa-file-pdf"></i> {{c.rid}}</a></span>
 <br/>{{c.challenge|safe}}
 </div>
+{% endblock details %}

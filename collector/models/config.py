@@ -69,8 +69,9 @@ class Config(models.Model):
 
   def get_chart(self,o,filter='',pattern='',type='bar',bar_property=''):
     from collector.models.character import Character
+    from django.db.models import Count
     if pattern:
-        all = Character.objects.filter(epic=self.epic,is_visible=True).filter(**{filter:pattern}).order_by(o)
+        all = Character.objects.filter(**{filter:pattern}).order_by(o) # .values('epic').annotate(dcount=Count('epic'))
     else:
         all = Character.objects.filter(epic=self.epic,is_visible=True).order_by(o)
     inside_labels = []

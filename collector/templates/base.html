@@ -14,52 +14,76 @@
         <script src="https://d3js.org/d3.v4.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js"></script>
-        <link rel='stylesheet' type='text/css' href='{% sass_src "collector/styles.scss" %}' />
+        <link rel='stylesheet' type='text/css' href='{% sass_src "collector/all.scss" %}' />
     </head>
     <body>
         <header>
         </header>
-        <div class='logo'>
+        <!-- <div class='logo'>
             {% block logo %}
             {% endblock %}
-        </div>
+        </div> -->
         <div class='menu'>
             {% block menu %}
             {% endblock menu %}
         </div>
+
         <div class='wrapper'>
-            <div class='list'>
-                <div class='storyline'>
-                    {% block storyline %}
-                    {% endblock storyline %}
-                </div>
-                <div class='charlist'>
-                    {% block list %}
-                    {% endblock list %}
-                </div>
+            <div class="port">
+              <div class='list'>
+                <span class='list_toggler action_icon fa fa-window-restore toggler'><u>Avatars List</u></span>
+                  <div class='storyline'>
+                      {% block storyline %}
+                      {% endblock storyline %}
+                  </div>
+                  <div class='charlist'>
+                      {% block list %}
+                      {% endblock list %}
+                  </div>
+              </div>
+
             </div>
             <div class='details'>
                 {% block details %}
                 {% endblock details%}
             </div>
+            <div class="starport">
+              <div class='collapsed dicer'>
+                {% block dicer %}
+                {% endblock dicer %}
+              </div>
+
+              <div class='collapsed mobile_form' id='customizer'>
+                {% block mobile_form %}
+                {% endblock mobile_form %}
+              </div>
+
+              <div class='collapsed menuright'>
+                {% block menuright %}
+                {% endblock menuright %}
+              </div>
+            </div>
         </div>
-        <div class='collapsed menuright'>
-            {% block menuright %}
-            {% endblock menuright %}
-        </div>
+
+
+
         <div id='messenger' class="hidden">
-        </div>
+
         <footer>
             <div class='footer'>
                 {% block page_footer %}
                 {% endblock %}
             </div>
         </footer>
+
+
+
         <script src='{% static "js/avatar_customizer.js" %}'></script>
         <script src='{% static "js/scenarist.js" %}'></script>
         <script src='{% static "js/optimizer.js" %}'></script>
         <script src='{% static "js/collector.js" %}'></script>
         <script src='{% static "js/jumpweb.js" %}'></script>
+
         {% block javascript %}
         {% endblock %}
     </body>

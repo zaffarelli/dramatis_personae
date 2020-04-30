@@ -26,6 +26,9 @@ MAX_CHAR = 18
 RELEASE = '1.9.0'
 DEBUG_ALL = False
 
+
+
+
 LIFEPATH_CATEGORY=(
   ('0',"Birthright"),
   ('5',"Balance"),
@@ -34,6 +37,7 @@ LIFEPATH_CATEGORY=(
   ('30',"Early Career"),
   ('40',"Tour of Duty"),
   ('50',"Worldly Benefits"),
+  ('60',"Nameless Kit"),
 )
 
   #('6',"Birthright balance"),
@@ -46,6 +50,7 @@ LIFEPATH_CATEGORY_SHORT={
   '30':"EC",
   '40':"TD",
   '50':"WB",
+  '60':"NK",
 }
 
 LIFEPATH_CATEGORY_VAL={
@@ -56,6 +61,7 @@ LIFEPATH_CATEGORY_VAL={
   '30':50,
   '40':20,
   '50':7,
+  '60':70,
 }
 
 LIFEPATH_CASTE=(
@@ -187,7 +193,7 @@ SHORTCUTS = {
       'label': "INT + Surgery",
       'rationale': "Apply surgery on wounded",
     },
-    "Cybernetics":{
+    "Science (Cybernetics)":{
       'attribute':"PA_TEC",
       'label': "TEC + Cybernetics",
       'rationale': "Surgically implant cyber",

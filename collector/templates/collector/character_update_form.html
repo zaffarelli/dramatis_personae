@@ -121,6 +121,16 @@
                         {{form.use_only_entrance}}
                     </div>
                     <div class="field_wrapper">
+                        {{ form.historical_figure.errors}}
+                        <label for="">Historical Figure</label>
+                        {{form.historical_figure}}
+                    </div>
+                    <div class="field_wrapper">
+                        {{ form.nameless.errors}}
+                        <label for="">Nameless</label>
+                        {{form.nameless}}
+                    </div>
+                    <div class="field_wrapper">
                         {{ form.epic.errors}}
                         <label for="">Epic</label>
                         {{form.epic}}
