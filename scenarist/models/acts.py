@@ -52,3 +52,5 @@ class Act(StoryModel):
 class ActAdmin(admin.ModelAdmin):
   ordering = ('drama','chapter','title',)
   list_display = ('title','drama','chapter','date','place','description')
+  list_filter = ('drama',)
+  search_fields = ('title','description')

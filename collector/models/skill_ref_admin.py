@@ -65,3 +65,4 @@ class SkillRefAdmin(admin.ModelAdmin):
   ordering = ['is_speciality','is_wildcard','reference']
   list_display = ('reference','is_root','is_speciality','is_wildcard','is_common','group')
   actions = [change_to_awa, change_to_soc, change_to_edu, change_to_fig, change_to_con, change_to_tin, change_to_per, change_to_bod, set_common, set_uncommon]
+  list_filter = ('is_root','is_speciality','is_wildcard','is_common')

@@ -91,6 +91,8 @@ class Cyberware(models.Model):
     def __str__(self):
         return '%s (%s: %s)' % (self.character.full_name,self.replacement_for,self.cyberware_ref.reference)
 
+# ADMIN
+
 class CyberfeatureAdmin(admin.ModelAdmin):
     ordering = ('category','reference',)
     list_display = ['reference','category','complexity','tech_level','incompatibility','value','value_ratio','description']

@@ -35,3 +35,5 @@ class Event(StoryModel):
 class EventAdmin(admin.ModelAdmin):
   ordering = ('act','chapter','title',)
   list_display = ('title','act','chapter','date','place','description')
+  list_filter = ('act',)
+  search_fields = ('description','title','resolution')

@@ -13,7 +13,7 @@ from PyPDF2 import PdfFileMerger
 import datetime
 import os
 import logging
-from collector.models.tourofduty_ref import TourOfDutyRef
+from collector.models.tourofduty import TourOfDutyRef
 
 logger = logging.getLogger(__name__)
 
@@ -118,8 +118,8 @@ def export_epic(conf):
 def extract_rules():
     from collector.models.weapon import WeaponRef
     from collector.models.skill_ref import SkillRef
-    from collector.models.benefice_affliction_ref import BeneficeAfflictionRef
-    from collector.models.blessing_curse_ref import BlessingCurseRef
+    from collector.models.benefice_affliction import BeneficeAfflictionRef
+    from collector.models.blessing_curse import BlessingCurseRef
     context = {}
     import datetime
     context['date'] = datetime.datetime.now()

@@ -19,10 +19,19 @@ from collector.utils.basic import write_pdf
 import logging
 logger = logging.getLogger(__name__)
 
+
+ORBITAL_ITEMS = (
+    ("0","Sun"),
+    ("1","Gas Giant"),
+    ("2","Telluric"),
+    ("3","Asteroids Belt"),
+    ("4","Space Station"),
+    ("5","Jumpgate"),
+)
+
 class System(models.Model):
     class Meta:
         ordering = ['name']
-
     name = models.CharField(max_length=200, unique=True)
     alliance = models.CharField(max_length=200)
     sector = models.CharField(max_length=200, default="Empire")
@@ -39,7 +48,6 @@ class System(models.Model):
     #discovered = models.BooleanField(default=False)
     discovery = models.IntegerField(default=6000)
     symbol = models.CharField(max_length=1,default="9")
-
     def __str__(self):
         return "%s"%(self.name)
 
@@ -47,6 +55,41 @@ class System(models.Model):
     def routes(self):
         return self.jumproads.all().count()
 
+    @property
+    def orbital_map(self):
+        all = []
+        for o in self.orbitalitem_set.all():
+            all.append("%s (%.2f AU)"%(o.name, o.distance))
+        return ", ".join(all)
+
+
+class OrbitalItem(models.Model):
+    class Meta:
+        ordering = ['distance']
+    name = models.CharField(max_length=200)
+    system = models.ForeignKey(System,on_delete=models.CASCADE, blank=True)
+    category = models.CharField(max_length=20,choices=ORBITAL_ITEMS,default="Telluric")
+    distance = models.FloatField(default=0.0)
+    tilt = models.FloatField(default=0.0)
+    size = models.PositiveIntegerField(default=10)
+    qualifier = models.CharField(max_length=64,default='',blank=True,null=True)
+    moon = models.TextField(max_length=1024,blank=True,null=True,default='')
+    description = models.TextField(max_length=1024,blank=True,null=True,default='')
+    def __str__(self):
+        return "%s (%s)"%(self.name,self.system.name)
+
+class OrbitalItemInline(admin.TabularInline):
+    model = OrbitalItem
+    ordering = ('distance',)
+
+
 class SystemAdmin(admin.ModelAdmin):
-  ordering = ['discovery','name','alliance']
-  list_display = ('name', 'alliance', 'discovery', 'sector', 'routes', 'group', 'color', 'x', 'y')
+    ordering = ['discovery','name','alliance']
+    list_display = ('name', 'alliance', 'discovery', 'sector', 'orbital_map', 'routes', 'group', 'color', 'x', 'y')
+    inlines = [ OrbitalItemInline ]
+
+class OrbitalItemAdmin(admin.ModelAdmin):
+    ordering = ['distance','name']
+    list_display = ('name', 'category', 'system', 'distance', 'tilt', 'size', 'qualifier')
+    list_filter = ('system',)
+    search_fields = ('name','qualifier','system')

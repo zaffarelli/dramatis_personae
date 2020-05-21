@@ -7,7 +7,7 @@
 <tr>
 {% for ba in c.beneficeaffliction_set.all %}
 <td>{{ ba.benefice_affliction_ref.reference|safe }}</td>
-<td>{{ ba.benefice_affliction_ref.description|safe }}</td>
+<td>{{ ba.benefice_affliction_ref.description|safe }} [{{ ba.description|safe }}]</td>
 <td>{{ ba.benefice_affliction_ref.value }}</td>
 </tr>
 {% endfor %}

@@ -13,6 +13,13 @@ python3 manage.py dumpdata collector.ShieldRef --format xml --output backup/refe
 python3 manage.py dumpdata collector.TalentRef --format xml --output backup/reference/talent_ref.xml
 python3 manage.py dumpdata collector.Specie --format xml --output backup/reference/specie.xml
 
+
+python3 manage.py dumpdata collector.Cyberfeature --format xml --output backup/reference/cyberfeature.xml
+python3 manage.py dumpdata collector.CyberwareRef --format xml --output backup/reference/cyberwareref.xml
+
+python3 manage.py dumpdata collector.RitualRef --format xml --output backup/reference/ritualref.xml
+
+
 echo -e "\e[1;35mDumping custom data...\e[0;m"
 echo -e "\e[0;35m- Tours of Duty Reference...\e[0;m"
 python3 manage.py dumpdata collector.BlessingCurseRef --format xml --output backup/reference/blessing_curse_ref.xml

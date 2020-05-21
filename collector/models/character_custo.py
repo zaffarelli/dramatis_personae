@@ -4,12 +4,13 @@
  ═╩╝╩    ╚═╝└─┘┴─┘┴─┘└─┘└─┘ ┴ └─┘┴└─
 '''
 from django.db import models
-from django.contrib import admin
-from collector.models.character import Character
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
 
 class CharacterCusto(models.Model):
+    from collector.models.character import Character
+    class Meta:
+        verbose_name = "Character Customization"
     character = models.OneToOneField(Character,on_delete=models.CASCADE,primary_key=True)
     value = models.IntegerField(default=0)
     AP = models.IntegerField(default=0)
@@ -175,22 +176,3 @@ class CharacterCusto(models.Model):
 @receiver(pre_save, sender=CharacterCusto, dispatch_uid='update_character_custo')
 def update_character_custo(sender, instance, conf=None, **kwargs):
     instance.recalculate()
-
-
-class CharacterCustoAdmin(admin.ModelAdmin):
-    from collector.models.skill_custo_inline import SkillCustoInline
-    from collector.models.blessing_curse_custo_inline import BlessingCurseCustoInline
-    from collector.models.benefice_affliction_custo_inline import BeneficeAfflictionCustoInline
-    from collector.models.weapon_custo_inline import WeaponCustoInline
-    from collector.models.armor_custo_inline import ArmorCustoInline
-    from collector.models.shield_custo_inline import ShieldCustoInline
-    list_display = ('character','value','AP','OP',)
-    exclude = ('value','AP','OP')
-    inlines = [
-        SkillCustoInline,
-        BlessingCurseCustoInline,
-        BeneficeAfflictionCustoInline,
-        WeaponCustoInline,
-        ArmorCustoInline,
-        ShieldCustoInline,
-    ]

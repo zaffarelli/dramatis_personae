@@ -5,6 +5,7 @@
 '''
 from django import template
 from collector.models.character import Character
+from collector.models.spacecraft import Spaceship
 from collector.models.loot import Loot
 import re
 import string
@@ -96,60 +97,77 @@ def as_bullets_short_wildcard(value):
 @register.filter(name='parse_avatars')
 
 def parse_avatars(value):
-  """ Replace avatars rids by html links in a text
-  """
+
+  """ Replace avatars rids by html links in a text """
   value = "<br/>".join(value.split("\n"))
-  """ Auto """
+  res = str(value)
+  txt = res
+  """ Characters """
   seeker = re.compile('\¤(\w+)\¤')
   changes = []
-  res = str(value)
+
   iter = seeker.finditer(res)
   for item in iter:
     rid = ''.join(item.group().split('¤'))
-    ch = Character.objects.filter(rid=rid).first()
-    if not ch is None:
-      repstr = '<span id="%d" class="character_link embedded_link" title="%s">%s%s</span>'%(ch.id, ch.entrance, ch.full_name,"" if ch.balanced==True else "*")
+    try:
+        ch = Character.objects.get(rid=rid)
+    except Character.DoesNotExist:
+        ch = None
+    if ch is not None:
+      repstr = '<span id="%d" class="character_link embedded_link" title="%s:\n%s">%s %s</span>'%(ch.id, ch.full_name,ch.entrance, ch.full_name," " if ch.balanced==True else "&plusmn;")
+    else:
+      repstr = '<span class="embedded_link broken">[%s&dagger;]</span>'%(rid)
+    changes.append({'src':item.group(),'dst':repstr})
+    print(repstr)
+
+  """ Ships """
+  sym = '^'
+  seeker = re.compile('\^(\w+)\^')
+  res = str(value)
+  iter = seeker.finditer(res)
+  for item in iter:
+    rid = ''.join(item.group().split('^'))
+    try:
+        ch = Spaceship.objects.get(full_name=rid)
+    except Spaceship.DoesNotExist:
+        ch = None
+    if ch is not None:
+      repstr = '<span id="%d" class="character_link embedded_link" title="%s">%s %s</span>'%(ch.id, ch.ship_ref, ch.full_name,"ok" if ch.ship_ref.ship_status=="combat_ready" else "&dagger;")
     else:
       repstr = '<span class="embedded_link broken">[%s was not found]</span>'%(rid)
     changes.append({'src':item.group(),'dst':repstr})
-  newres = res
-  for change in changes:
-    newres = newres.replace(change['src'],change['dst'])
+
   """ Replace µ by subsection"""
   sym = 'µ'
   #search =  "[A-Za-z\s\.\'\;]+"
   search = "[A-Za-z0-9\é\è\ô\ö\à\s\.\'\;\-\(\)\&\:\,]+"
   myregex = "\%s%s\%s"%(sym,search,sym)
   seeker = re.compile(myregex)
-  changes = []
-  txt = newres
+
   iter = seeker.finditer(txt)
   for item in iter:
     occ = ''.join(item.group().split(sym))
     repstr = '<br/><em>%s</em><br/>'%(occ)
     changes.append({'src':item.group(),'dst':repstr})
-  for change in changes:
-    txt = txt.replace(change['src'],change['dst'])
 
   """ Replace § by em"""
   sym = '§'
   search = "[A-Za-z0-9\é\è\ô\ö\à\s\.\'\;\-\(\)\&\:\,]+"
   myregex = "\%s%s\%s"%(sym,search,sym)
   seeker = re.compile(myregex)
-  changes = []
+
   iter = seeker.finditer(txt)
   for item in iter:
     occ = ''.join(item.group().split(sym))
     repstr = '<strong>%s</strong>'%(occ)
     changes.append({'src':item.group(),'dst':repstr})
-  for change in changes:
-    txt = txt.replace(change['src'],change['dst'])
+
   """ Replace ° by custom data"""
   sym = '°'
   search = "[A-Za-z0-9\é\è\ô\ö\à\s\.\'\;\-\(\)\&\:\,\_]+"
   myregex = "\%s%s\%s"%(sym,search,sym)
   seeker = re.compile(myregex)
-  changes = []
+
   iter = seeker.finditer(txt)
   for item in iter:
     occ = ''.join(item.group().split(sym))
@@ -178,6 +196,7 @@ def parse_avatars(value):
         repstr += "<p>%s</p>"%(loot.secret)
     repstr += "</div>"
     changes.append({'src':item.group(),'dst':repstr})
+
   for change in changes:
     txt = txt.replace(change['src'],change['dst'])
   return txt

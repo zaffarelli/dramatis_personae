@@ -16,6 +16,11 @@
                         {{form.full_name }}
                     </div>
                     <div class="field_wrapper">
+                        {{ form.alias.errors}}
+                        <label for="alias">Alias</label>
+                        {{form.alias}}
+                    </div>
+                    <div class="field_wrapper">
                         {{ form.entrance.errors}}
                         <label for="entrance">Entrance</label>
                         {{form.entrance}}

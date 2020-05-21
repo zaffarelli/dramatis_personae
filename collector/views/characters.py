@@ -137,9 +137,8 @@ def customize_skill(request,avatar,item):
 
 @csrf_exempt
 def customize_bc(request,avatar,item):
-    from collector.models.blessing_curse_ref import BlessingCurseRef
+    from collector.models.blessing_curse import BlessingCurseRef,BlessingCurseCusto
     from collector.models.character_custo import CharacterCusto
-    from collector.models.blessing_curse_custo import BlessingCurseCusto
     context = {}
     ch = Character.objects.get(pk=avatar)
     bcr = BlessingCurseRef.objects.get(pk=item)
@@ -161,9 +160,8 @@ def customize_bc(request,avatar,item):
 
 @csrf_exempt
 def customize_bc_del(request,avatar,item):
-    from collector.models.blessing_curse_ref import BlessingCurseRef
+    from collector.models.blessing_curse import BlessingCurseRef, BlessingCurseCusto
     from collector.models.character_custo import CharacterCusto
-    from collector.models.blessing_curse_custo import BlessingCurseCusto
     context = {}
     ch = Character.objects.get(pk=avatar)
     bcr = BlessingCurseRef.objects.get(pk=item)
@@ -193,9 +191,9 @@ def customize_bc_del(request,avatar,item):
 
 @csrf_exempt
 def customize_ba(request,avatar,item):
-    from collector.models.benefice_affliction_ref import BeneficeAfflictionRef
+    from collector.models.benefice_affliction import BeneficeAfflictionRef
     from collector.models.character_custo import CharacterCusto
-    from collector.models.benefice_affliction_custo import BeneficeAfflictionCusto
+    from collector.models.benefice_affliction import BeneficeAfflictionCusto
     context = {}
     ch = Character.objects.get(pk=avatar)
     bar = BeneficeAfflictionRef.objects.get(pk=item)
@@ -217,9 +215,9 @@ def customize_ba(request,avatar,item):
 
 @csrf_exempt
 def customize_ba_del(request,avatar,item):
-    from collector.models.benefice_affliction_ref import BeneficeAfflictionRef
+    from collector.models.benefice_affliction import BeneficeAfflictionRef
     from collector.models.character_custo import CharacterCusto
-    from collector.models.benefice_affliction_custo import BeneficeAfflictionCusto
+    from collector.models.benefice_affliction import BeneficeAfflictionCusto
     context = {}
     ch = Character.objects.get(pk=avatar)
     bcr = BeneficeAfflictionRef.objects.get(pk=item)
@@ -248,9 +246,8 @@ def customize_ba_del(request,avatar,item):
 
 @csrf_exempt
 def customize_weapon(request,avatar,item):
-    from collector.models.weapon import WeaponRef
+    from collector.models.weapon import WeaponRef, WeaponCusto
     from collector.models.character_custo import CharacterCusto
-    from collector.models.weapon_custo import WeaponCusto
     context = {}
     ch = Character.objects.get(pk=avatar)
     item_ref = WeaponRef.objects.get(pk=item)
@@ -272,9 +269,8 @@ def customize_weapon(request,avatar,item):
 
 @csrf_exempt
 def customize_weapon_del(request,avatar,item):
-    from collector.models.weapon import WeaponRef
+    from collector.models.weapon import WeaponRef, WeaponCusto
     from collector.models.character_custo import CharacterCusto
-    from collector.models.weapon_custo import WeaponCusto
     context = {}
     ch = Character.objects.get(pk=avatar)
     item_ref = WeaponRef.objects.get(pk=item)
@@ -306,7 +302,7 @@ def customize_weapon_del(request,avatar,item):
 def customize_armor(request,avatar,item):
     from collector.models.armor import ArmorRef
     from collector.models.character_custo import CharacterCusto
-    from collector.models.armor_custo import ArmorCusto
+    from collector.models.armor import ArmorCusto
     context = {}
     ch = Character.objects.get(pk=avatar)
     item_ref = ArmorRef.objects.get(pk=item)
@@ -330,7 +326,7 @@ def customize_armor(request,avatar,item):
 def customize_armor_del(request,avatar,item):
     from collector.models.armor import ArmorRef
     from collector.models.character_custo import CharacterCusto
-    from collector.models.armor_custo import ArmorCusto
+    from collector.models.armor import ArmorCusto
     context = {}
     ch = Character.objects.get(pk=avatar)
     item_ref = ArmorRef.objects.get(pk=item)
@@ -362,7 +358,7 @@ def customize_armor_del(request,avatar,item):
 def customize_shield(request,avatar,item):
     from collector.models.shield import ShieldRef
     from collector.models.character_custo import CharacterCusto
-    from collector.models.shield_custo import ShieldCusto
+    from collector.models.shield import ShieldCusto
     context = {}
     ch = Character.objects.get(pk=avatar)
     item_ref = ShieldRef.objects.get(pk=item)
@@ -386,7 +382,7 @@ def customize_shield(request,avatar,item):
 def customize_shield_del(request,avatar,item):
     from collector.models.shield import ShieldRef
     from collector.models.character_custo import CharacterCusto
-    from collector.models.shield_custo import ShieldCusto
+    from collector.models.shield import ShieldCusto
     context = {}
     ch = Character.objects.get(pk=avatar)
     item_ref = ShieldRef.objects.get(pk=item)

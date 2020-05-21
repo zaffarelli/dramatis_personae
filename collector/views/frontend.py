@@ -43,7 +43,7 @@ def get_list(request,id,slug='none'):
   conf = get_current_config()
   if request.is_ajax:
     if slug=='none':
-      character_items = Character.objects.filter(epic=conf.epic).order_by('balanced','-OP','-is_public','full_name')
+      character_items = Character.objects.order_by('balanced','-OP','-is_public','full_name')
     elif slug.startswith('c-'):
       ep_class = slug.split('-')[1].capitalize()
       ep_id = slug.split('-')[2]
@@ -136,7 +136,7 @@ def show_todo(request):
   from scenarist.models.events import Event
   conf = get_current_config()
   if request.is_ajax:
-    character_items = Character.objects.filter(epic=conf.epic, balanced=False).order_by('full_name')
+    character_items = Character.objects.filter(balanced=False).order_by('full_name')
     paginator = Paginator(character_items,MAX_CHAR)
     page = id
     character_items = paginator.get_page(page)

@@ -13,7 +13,7 @@ from scenarist.models.epics import Epic
 from collector.models.fics_models import Specie
 from collector.models.combattant import Combattant
 from collector.utils import fs_fics7
-from collector.utils.basic import write_pdf
+
 
 import logging
 logger = logging.getLogger(__name__)
@@ -23,6 +23,7 @@ class Character(Combattant):
         ordering = ['full_name']
     pagenum = 0
     full_name = models.CharField(max_length=200)
+    alias = models.CharField(max_length=200, blank=True, null=True, default='')
     rid = models.CharField(max_length=200, default='none')
     alliance = models.CharField(max_length=200, blank=True, default='')
     faction = models.CharField(max_length=200, blank=True, default='')
@@ -30,10 +31,6 @@ class Character(Combattant):
     player = models.CharField(max_length=200, default='', blank=True)
     specie = models.ForeignKey(Specie, null=True, default=31, blank=True,
                                on_delete=models.SET_NULL)
-    # role = models.ForeignKey(Role, null=True, blank=True, default=1,
-    #                          on_delete=models.SET_NULL)
-    # profile = models.ForeignKey(Profile, null=True, default=1, blank=True,
-    #                             on_delete=models.SET_NULL)
     birthdate = models.IntegerField(default=0)
     gender = models.CharField(max_length=30, default='female')
     native_fief = models.CharField(max_length=200, default='none', blank=True)
@@ -125,7 +122,6 @@ class Character(Combattant):
     armor_options_not = []
     shield_options = []
     shield_options_not = []
-
 
     @property
     def info_str(self):
@@ -376,9 +372,9 @@ class Character(Combattant):
         """ Refresh options / options_not global engine """
         from collector.models.weapon import WeaponRef
         from collector.models.shield import ShieldRef
-        from collector.models.armor_ref import ArmorRef
-        from collector.models.benefice_affliction_ref import BeneficeAfflictionRef
-        from collector.models.blessing_curse_ref import BlessingCurseRef
+        from collector.models.armor import ArmorRef
+        from collector.models.benefice_affliction import BeneficeAfflictionRef
+        from collector.models.blessing_curse import BlessingCurseRef
         o = []
         o_n = []
         custo_items = custo_set
@@ -519,7 +515,7 @@ class Character(Combattant):
       if found_item:
         found_item.delete()
 
-    def add_ba(self, aref):
+    def add_ba(self, aref, adesc=''):
       from collector.models.benefice_affliction import BeneficeAffliction
       found_ba = self.beneficeaffliction_set.all().filter(benefice_affliction_ref=aref).first()
       if found_ba:
@@ -528,6 +524,7 @@ class Character(Combattant):
         ba = BeneficeAffliction()
         ba.character = self
         ba.benefice_affliction_ref = aref
+        ba.decription = adesc
         ba.save()
         return ba
 
@@ -646,6 +643,7 @@ class Character(Combattant):
 
     def backup(self):
         """ Transform to PDF if exportable"""
+        from collector.utils.basic import write_pdf
         proceed = True
         try:
             item = self
@@ -656,17 +654,20 @@ class Character(Combattant):
         return proceed
 
     def __str__(self):
-        return '%s' % self.full_name
+        if self.alias:
+            return '%s' %(self.alias)
+        else:
+            return '%s' %(self.full_name)
 
     def get_rid(self, s):
         self.rid = fs_fics7.find_rid(s)
 
     # Auto build character
-    def autobuild(self):
-        # if self.role.value == 0 and not self.profile:
-        #     return False
-        # else:
-        return True
+    # def autobuild(self):
+    #     # if self.role.value == 0 and not self.profile:
+    #     #     return False
+    #     # else:
+    #     return True
 
 
 @receiver(pre_save, sender=Character, dispatch_uid='update_character')

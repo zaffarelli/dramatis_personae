@@ -6,11 +6,11 @@
 from django.db import models
 from django.contrib import admin
 from collector.models.skill_ref import SkillRef
-from collector.models.tourofduty_ref import TourOfDutyRef
+from collector.models.tourofduty import TourOfDutyRef
 from django.dispatch import receiver
 from django.db.models.signals import pre_save, post_save
 
-class SkillModificator(models.Model): 
+class SkillModificator(models.Model):
   class Meta:
     ordering = ['skill_ref']
   tour_of_duty_ref = models.ForeignKey(TourOfDutyRef, on_delete=models.CASCADE)
