@@ -24,7 +24,7 @@ CYBERFEATURE_CATEGORIES = (
 
 class Cyberfeature(models.Model):
     class Meta:
-        verbose_name = "Cyberfeature"
+        verbose_name = "References: Cyberfeature"
     reference = models.CharField(max_length=64)
     value = models.IntegerField(default=1)
     complexity = models.IntegerField(default=1)
@@ -39,7 +39,7 @@ class Cyberfeature(models.Model):
 
 class CyberwareRef(models.Model):
     class Meta:
-        verbose_name = "Cyberware Reference"
+        verbose_name = "References: Cyberware"
     reference = models.CharField(max_length=64)
     cyberfeatures = models.ManyToManyField(Cyberfeature, blank=True)
     complexity = models.IntegerField(default=0)
@@ -101,6 +101,6 @@ class CyberwareRefAdmin(admin.ModelAdmin):
     ordering = ('reference',)
     list_display = ['reference','tech_level','value','incompatibility','features','description']
 
-class CyberwareAdmin(admin.ModelAdmin):
-    ordering = ('character','replacement_for','cyberware_ref')
-    list_display = ['character','replacement_for','cyberware_ref']
+# class CyberwareAdmin(admin.ModelAdmin):
+#     ordering = ('character','replacement_for','cyberware_ref')
+#     list_display = ['character','replacement_for','cyberware_ref']

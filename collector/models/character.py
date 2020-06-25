@@ -203,6 +203,7 @@ class Character(Combattant):
         self.purgeWeapons()
         self.purgeArmors()
         self.purgeShields()
+        self.purgeRituals()
         self.purgeTalents()
         self.AP_tod_pool = 0
         self.OP_tod_pool = 0
@@ -282,6 +283,7 @@ class Character(Combattant):
         self.refresh_options("weapon_options","weapon_options_not", self.charactercusto.weaponcusto_set.all(), "weapon_ref", "WeaponRef")
         self.refresh_options("shield_options","shield_options_not", self.charactercusto.shieldcusto_set.all(), "shield_ref", "ShieldRef")
         self.refresh_options("armor_options","armor_options_not", self.charactercusto.armorcusto_set.all(), "armor_ref", "ArmorRef")
+        self.refresh_options("ritual_options","ritual_options_not", self.charactercusto.ritualcusto_set.all(), "ritual_ref", "RitualRef")
         # self.preparePADisplay()
 
     def handleWildcards(self):
@@ -375,6 +377,7 @@ class Character(Combattant):
         from collector.models.armor import ArmorRef
         from collector.models.benefice_affliction import BeneficeAfflictionRef
         from collector.models.blessing_curse import BlessingCurseRef
+        from collector.models.ritual import RitualRef
         o = []
         o_n = []
         custo_items = custo_set
@@ -394,7 +397,7 @@ class Character(Combattant):
 
     def refresh_skills_options(self):
         """ This one is special: it only reflects skills that are not in the character """
-        from collector.models.skill_ref import SkillRef
+        from collector.models.skill import SkillRef
         self.skills_options = []
         self.skills_options_not = []
         ss = self.skill_set.all()
@@ -473,6 +476,18 @@ class Character(Combattant):
         item.save()
         return item
 
+    def add_ritual(self, aref):
+      from collector.models.ritual import Ritual
+      found_item = self.ritual_set.all().filter(ritual_ref=aref).first()
+      if found_item:
+        return found_item
+      else:
+        item = Ritual()
+        item.character = self
+        item.ritual_ref = aref
+        item.save()
+        return item
+
     def add_armor(self, aref):
       from collector.models.armor import Armor
       found_item = self.armor_set.all().filter(armor_ref=aref).first()
@@ -503,6 +518,12 @@ class Character(Combattant):
       if found_item:
         found_item.delete()
 
+    def remove_ritual(self, aref):
+      from collector.models.ritual import Ritual
+      found_item = self.ritual_set.all().filter(ritual_ref=aref).first()
+      if found_item:
+        found_item.delete()
+
     def remove_armor(self, aref):
       from collector.models.armor import Armor
       found_item = self.armor_set.all().filter(armor_ref=aref).first()
@@ -517,15 +538,17 @@ class Character(Combattant):
 
     def add_ba(self, aref, adesc=''):
       from collector.models.benefice_affliction import BeneficeAffliction
-      found_ba = self.beneficeaffliction_set.all().filter(benefice_affliction_ref=aref).first()
-      if found_ba:
-        return found_ba
+      ba = self.beneficeaffliction_set.all().filter(benefice_affliction_ref=aref,description=adesc).first()
+      if ba:
+        return ba
       else:
         ba = BeneficeAffliction()
         ba.character = self
         ba.benefice_affliction_ref = aref
-        ba.decription = adesc
+        print("ADD_BA "+adesc)
+        ba.description = adesc
         ba.save()
+        print("ADD_BA (after) "+ba.description)
         return ba
 
     def remove_ba(self,aref):
@@ -537,7 +560,7 @@ class Character(Combattant):
     def add_missing_root_skills(self):
         """ According to the character specialities, fixing the root skills """
         #from collector.models.skills import Skill
-        from collector.models.skill_ref import SkillRef
+        from collector.models.skill import SkillRef
         roots_list = []
         # Get all roots in the avatar in roots_list
         for skill in self.skill_set.all():
@@ -603,6 +626,12 @@ class Character(Combattant):
         for item in self.armor_set.all():
             item.delete()
         logger.debug('PurgeArmor count: %d' % (self.armor_set.all().count()))
+
+    def purgeRituals(self):
+        """ Deleting all character Rituals """
+        for item in self.ritual_set.all():
+            item.delete()
+        logger.debug('PurgeRitual count: %d' % (self.ritual_set.all().count()))
 
 
     def resetTotal(self):

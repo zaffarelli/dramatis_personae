@@ -1,10 +1,11 @@
 
 {% load fics_filters %}
 
-<h5>{{ c.reference }} ({{c.category}}#{{c.id}})</h5>
+<h6>{{ c.reference }} ({{c.category}}#{{c.id}}) {%if c.topic%}[{{c.topic}}]{%endif%}</h6>
+{% if c.value %}
 <p>Source: {{ c.source}}, Attributes Points: {{c.AP}}, Options Points: {{c.OP}} Value: <strong>{{c.value|signed}}</strong>.</p>
 <p>
-<i>Attributes</i>&nbsp;&mdash;
+<u>Attributes</u>&nbsp;&mdash;
  {% if c.PA_STR %} STR{{c.PA_STR|signed}}{% endif %}
  {% if c.PA_CON %} CON{{c.PA_CON|signed}}{% endif %}
  {% if c.PA_BOD %} BOD{{c.PA_BOD|signed}}{% endif %}
@@ -18,7 +19,8 @@
  {% if c.PA_AGI %} AGI{{c.PA_AGI|signed}}{% endif %}
  {% if c.PA_AWA %} AWA{{c.PA_AWA|signed}}{% endif %}
  {% if not c.AP %}<i>none</i>.{%endif%}
-<i>Skills</i>&nbsp;&mdash;
+</p><p>
+<u>Skills</u>&nbsp;&mdash;
   {% if not c.skillmodificator_set.count %}
   <i>none</i>.
 
@@ -27,8 +29,8 @@
   {{ s.skill_ref.reference}} {{s.value|signed}}{% if forloop.last %}.{%else%}, {%endif%}
   {% endfor %}
   {% endif %}
-
-<i>Benefices/Afflictions</i>&nbsp;&mdash;
+</p><p>
+<u>Benefices/Afflictions</u>&nbsp;&mdash;
   {% if not c.beneficeafflictionmodificator_set.count %}
   <i>none</i>.
 
@@ -37,8 +39,8 @@
   {{ ba.benefice_affliction_ref.reference}} {{ba.benefice_affliction_ref.value|signed}}{% if forloop.last %}.{%else%}, {%endif%}
   {% endfor %}
   {% endif %}
-
-<i>Blessings/Curses</i>&nbsp;&mdash;
+</p><p>
+<u>Blessings/Curses</u>&nbsp;&mdash;
   {% if not c.blessingcursemodificator_set.count %}
   <i>none</i>.
 
@@ -47,5 +49,7 @@
   {{ bc.blessing_curse_ref.reference}} {{bc.blessing_curse_ref.value|signed}}{% if forloop.last %}.{%else%}, {%endif%}
   {% endfor %}
   {% endif %}
-
 </p>
+{%else%}
+<p>Uncomplete Lifepath</p>
+{%endif%}

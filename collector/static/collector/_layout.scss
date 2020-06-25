@@ -27,7 +27,7 @@
 
 /* Small - 14 inches Elitebook display */
 
-@media screen and (min-width: 641px) and (max-width: 1366px) {
+@media screen and (min-width: 641px) and (max-width: 1024px) {
     body {
         margin: 0;
         padding: 0;
@@ -70,7 +70,7 @@
 
 /* Normal - 21/22 inches screen */
 
-@media screen and (min-width: 1367px) {
+@media screen and (min-width: 1025px) {
     body {
         margin: 0;
         padding: 0;

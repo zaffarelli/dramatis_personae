@@ -27,6 +27,7 @@ class AvatarCustomizer{
     this.doConnect("weapon",true);
     this.doConnect("armor",true);
     this.doConnect("shield",true);
+    this.doConnect("ritual",true);
 	}
 
 	doConnect(prefix,symetric=false){
@@ -34,8 +35,10 @@ class AvatarCustomizer{
 		$("#"+prefix+"_add").off("click").on("click",function(e){
 		    let i = $("#"+prefix+"_select :selected");
             let anurl = 'ajax/character/add/'+prefix+"/"+self.avatar+"/"+i.val()+'/';
+            let ff = $("#freefield").val();
             $("#"+prefix+"_block_"+self.avatar).addClass("working");
             console.log(anurl);
+            console.log(ff);
 
    		    $.ajax({
                 url: anurl,
@@ -45,6 +48,7 @@ class AvatarCustomizer{
                     'Content-Type': 'application/x-www-form-urlencoded'
                 },
                 dataType: 'json',
+                data:{'freefield':ff},
 			    success: function(answer) {
                     $("#"+prefix+"_block_"+answer.c["id"]).html(answer.block);
                     $("#"+prefix+"_custo_block").html(answer.custo_block);

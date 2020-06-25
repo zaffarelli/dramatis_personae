@@ -70,7 +70,7 @@ def respawnSummary(avatar,context):
 @csrf_exempt
 def skill_pick(request, avatar, item, offset):
     """ Touching skills to edit them in the view """
-    from collector.models.skill_ref import SkillRef
+    from collector.models.skill import SkillRef
     context = {}
     offset = int(offset) -50;
     ch = Character.objects.get(pk=avatar)
@@ -112,9 +112,8 @@ def attr_pick(request, avatar, item, offset):
 
 @csrf_exempt
 def customize_skill(request,avatar,item):
-    from collector.models.skill_ref import SkillRef
+    from collector.models.skill import SkillRef, SkillCusto
     from collector.models.character_custo import CharacterCusto
-    from collector.models.skill_custo import SkillCusto
     context = {}
     ch = Character.objects.get(pk=avatar)
     ref = SkillRef.objects.get(pk=item)
@@ -200,6 +199,7 @@ def customize_ba(request,avatar,item):
     bac = BeneficeAfflictionCusto()
     bac.character_custo = ch.charactercusto
     bac.benefice_affliction_ref = bar
+    bac.description = request.POST["freefield"]
     bac.save()
     ch.fix()
     ch.save()
@@ -408,4 +408,59 @@ def customize_shield_del(request,avatar,item):
     else:
         context["c"] = model_to_dict(ch)
         messages.info(request, 'Shield not found for %s.'%(ch.full_name))
+    return JsonResponse(context)
+
+
+@csrf_exempt
+def customize_ritual(request,avatar,item):
+    from collector.models.ritual import RitualRef, RitualCusto
+    from collector.models.character_custo import CharacterCusto
+    context = {}
+    ch = Character.objects.get(pk=avatar)
+    item_ref = RitualRef.objects.get(pk=item)
+    item_custo = RitualCusto()
+    item_custo.character_custo = ch.charactercusto
+    item_custo.ritual_ref = item_ref
+    item_custo.save()
+    ch.fix()
+    ch.save()
+    context["c"] = model_to_dict(ch)
+    template = get_template('collector/character/character_ritual.html')
+    context["block"] = template.render({'c':ch})
+    template = get_template('collector/custo/ritual_custo_block.html')
+    context["custo_block"] = template.render({'c':ch})
+    context = respawnSummary(ch,context)
+    context = respawnAvatarLink(ch,context)
+    messages.info(request, 'Avatar %s customized with weapon %s.'%(ch.full_name,item_custo.ritual_ref.reference))
+    return JsonResponse(context)
+
+@csrf_exempt
+def customize_ritual_del(request,avatar,item):
+    from collector.models.ritual import RitualRef, WeaponCusto
+    from collector.models.character_custo import CharacterCusto
+    context = {}
+    ch = Character.objects.get(pk=avatar)
+    item_ref = RitualRef.objects.get(pk=item)
+    custo_items = ch.charactercusto.ritualcusto_set.all()
+    item_found = None
+    for item in custo_items:
+        if item.ritual_ref == item_ref:
+            item_found = item
+            break
+    if item_found:
+        txt = item_found.ritual_ref.reference
+        item_found.delete()
+        ch.fix()
+        ch.save()
+        context["c"] = model_to_dict(ch)
+        template = get_template('collector/character/character_ritual.html')
+        context["block"] = template.render({'c':ch})
+        template = get_template('collector/custo/ritual_custo_block.html')
+        context["custo_block"] = template.render({'c':ch})
+        context = respawnSummary(ch,context)
+        context = respawnAvatarLink(ch,context)
+        messages.info(request, 'Avatar %s customized with weapon %s.'%(ch.full_name,txt))
+    else:
+        context["c"] = model_to_dict(ch)
+        messages.info(request, 'Ritual not found for %s.'%(ch.full_name))
     return JsonResponse(context)

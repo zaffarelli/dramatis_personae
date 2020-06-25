@@ -114,7 +114,7 @@ def parse_avatars(value):
     except Character.DoesNotExist:
         ch = None
     if ch is not None:
-      repstr = '<span id="%d" class="character_link embedded_link" title="%s:\n%s">%s %s</span>'%(ch.id, ch.full_name,ch.entrance, ch.full_name," " if ch.balanced==True else "&plusmn;")
+      repstr = '<span id="%d" class="character_link embedded_link" title="%s:\n%s">%s %s</span>'%(ch.id, ch.full_name,ch.entrance, ch.full_name,"<i class='fa fa-angle-double-up'></i>" if ch.balanced==True else "<i class='fa fa-angle-double-down'></i>")
     else:
       repstr = '<span class="embedded_link broken">[%s&dagger;]</span>'%(rid)
     changes.append({'src':item.group(),'dst':repstr})
@@ -134,7 +134,7 @@ def parse_avatars(value):
     if ch is not None:
       repstr = '<span id="%d" class="character_link embedded_link" title="%s">%s %s</span>'%(ch.id, ch.ship_ref, ch.full_name,"ok" if ch.ship_ref.ship_status=="combat_ready" else "&dagger;")
     else:
-      repstr = '<span class="embedded_link broken">[%s was not found]</span>'%(rid)
+      repstr = '<span class="embedded_link broken">[%s&dagger;]</span>'%(rid)
     changes.append({'src':item.group(),'dst':repstr})
 
   """ Replace µ by subsection"""

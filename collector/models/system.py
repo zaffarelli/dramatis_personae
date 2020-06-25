@@ -32,6 +32,7 @@ ORBITAL_ITEMS = (
 class System(models.Model):
     class Meta:
         ordering = ['name']
+        verbose_name = "Jumpweb: System"
     name = models.CharField(max_length=200, unique=True)
     alliance = models.CharField(max_length=200)
     sector = models.CharField(max_length=200, default="Empire")
@@ -66,6 +67,7 @@ class System(models.Model):
 class OrbitalItem(models.Model):
     class Meta:
         ordering = ['distance']
+        verbose_name = "Jumpweb: Orbital Item"
     name = models.CharField(max_length=200)
     system = models.ForeignKey(System,on_delete=models.CASCADE, blank=True)
     category = models.CharField(max_length=20,choices=ORBITAL_ITEMS,default="Telluric")

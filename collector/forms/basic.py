@@ -7,8 +7,7 @@ from django import forms
 from django.forms import ModelForm, inlineformset_factory
 from collector.models.character import Character
 from collector.models.tourofduty import TourOfDutyRef, TourOfDuty
-from collector.models.skill import Skill
-from collector.models.skill_modificator import SkillModificator
+from collector.models.skill import Skill, SkillModificator
 from collector.models.armor import Armor
 from collector.models.weapon import Weapon
 from collector.models.shield import Shield
@@ -17,6 +16,7 @@ from collector.models.benefice_affliction import BeneficeAffliction, BeneficeAff
 from collector.models.talent import Talent
 from collector.models.spacecraft import ShipRef,ShipSection, ShipSystemSlot
 from collector.models.system import System, OrbitalItem
+from collector.models.bloke import Bloke
 
 class CharacterForm(ModelForm):
     class Meta:
@@ -55,6 +55,7 @@ ArmorFormSet = inlineformset_factory(Character, Armor, fields='__all__', extra=3
 WeaponFormSet = inlineformset_factory(Character, Weapon, fields='__all__', extra=3, can_delete = True)
 ShieldFormSet = inlineformset_factory(Character, Shield, fields='__all__', extra=3, can_delete = True)
 TourOfDutyFormSet = inlineformset_factory(Character,TourOfDuty, fields='__all__', extra=9, can_delete = True)
+BlokeFormSet = inlineformset_factory(Character,Bloke, fk_name='player', fields='__all__', extra=3, can_delete = True)
 
 # Tour of duty
 SkillModificatorFormSet = inlineformset_factory(TourOfDutyRef, SkillModificator, fields='__all__', extra=5, can_delete = True)

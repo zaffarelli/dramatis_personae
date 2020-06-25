@@ -51,6 +51,7 @@ def get_list(request,id,slug='none'):
       cast = ep.get_full_cast()
       character_items = []
       for rid in cast:
+        print(rid)
         character_item = Character.objects.get(rid=rid)
         character_items.append(character_item)
     else:
@@ -146,8 +147,6 @@ def show_todo(request):
     return HttpResponse(html, content_type='text/html')
   else:
     Http404
-
-
 
 def extract_formset(rqp,s):
   """ Get only the fields matching to this formset """

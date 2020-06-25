@@ -11,7 +11,7 @@ from random import randint
 import os
 import yaml
 import json
-from collector.models.skill_ref import SkillRef
+
 from collector.utils.fics_references import *
 import logging
 
@@ -362,6 +362,7 @@ def choose_pa(weights,maxi,pa):
 
 def get_skills_list(ch,groups):
   """ Prepare the list of skills without specialities """
+  from collector.models.skill import SkillRef
   skills = SkillRef.objects.all().filter(is_speciality=False)
   master_skills = []
   #gweight = 1
@@ -381,6 +382,7 @@ def get_skills_list(ch,groups):
   return master_skills
 
 def pick_a_speciality_for(s):
+  from collector.models.skill import SkillRef
   skills = SkillRef.objects.all().filter(is_speciality=True,linked_to=s)
   x = roll(skills.count())
   return skills[x-1]
@@ -553,6 +555,7 @@ def list_skills(ch):
 
 def get_skills_list(ch,root,com):
   """ Prepare the list of skills without specialities """
+  from collector.models.skill import SkillRef
   skills = SkillRef.objects.all().filter(is_speciality=False, is_root = root, is_common = com)
   groups = ch.profile.get_groups()
   result_skills = []
@@ -566,6 +569,7 @@ def get_skills_list(ch,root,com):
 
 def get_roots_list(ch):
   """ Prepare the list of skills without specialities """
+  from collector.models.skill import SkillRef
   groups = ch.profile.get_groups()
   skills = SkillRef.objects.all().filter(is_root = True)
   result_skills = []
@@ -580,6 +584,7 @@ def get_roots_list(ch):
 
 def get_specialities_list(ch,root):
   """ Prepare the list of skills without specialities """
+  from collector.models.skill import SkillRef
   groups = ch.profile.get_groups()
   skills = SkillRef.objects.all().filter(is_speciality = True)
   result_skills = []

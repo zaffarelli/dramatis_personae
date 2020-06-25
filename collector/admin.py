@@ -5,17 +5,13 @@
 '''
 from django.contrib import admin
 
-from collector.models.skill_ref import SkillRef
-from collector.models.skill_ref_admin import SkillRefAdmin
+from collector.models.skill import SkillRef, SkillRefAdmin
 admin.site.register(SkillRef, SkillRefAdmin)
 
 from collector.models.blessing_curse import BlessingCurseRef, BlessingCurseRefAdmin
 admin.site.register(BlessingCurseRef, BlessingCurseRefAdmin)
 
 from collector.models.fics_models import Specie, SpecieAdmin
-#from collector.models.fics_models import Role, RoleAdmin, Profile, ProfileAdmin, Specie, SpecieAdmin
-# admin.site.register(Role, RoleAdmin)
-# admin.site.register(Profile, ProfileAdmin)
 admin.site.register(Specie, SpecieAdmin)
 
 from collector.models.armor import ArmorRef, ArmorRefAdmin
@@ -23,7 +19,6 @@ admin.site.register(ArmorRef, ArmorRefAdmin)
 
 from collector.models.talent import TalentRef, TalentRefAdmin
 admin.site.register(TalentRef, TalentRefAdmin)
-
 
 from collector.models.weapon import WeaponRef, WeaponRefAdmin
 admin.site.register(WeaponRef, WeaponRefAdmin)
@@ -34,7 +29,8 @@ admin.site.register(ShieldRef, ShieldRefAdmin)
 from collector.models.benefice_affliction import BeneficeAfflictionRef, BeneficeAfflictionRefAdmin
 admin.site.register(BeneficeAfflictionRef, BeneficeAfflictionRefAdmin)
 
-from collector.models.tourofduty import TourOfDutyRef, TourOfDutyRefAdmin
+from collector.models.tourofduty import TourOfDutyRef
+from collector.models.tourofduty_admin import TourOfDutyRefAdmin
 admin.site.register(TourOfDutyRef, TourOfDutyRefAdmin)
 
 from collector.models.character_custo import CharacterCusto
@@ -47,6 +43,9 @@ admin.site.register(Character, CharacterAdmin)
 
 from collector.models.loot import Loot, LootAdmin
 admin.site.register(Loot, LootAdmin)
+
+from collector.models.gear import Gear, GearAdmin
+admin.site.register(Gear, GearAdmin)
 
 from collector.models.config import Config, ConfigAdmin
 admin.site.register(Config, ConfigAdmin)
@@ -70,10 +69,9 @@ from collector.models.system import System, SystemAdmin, OrbitalItem, OrbitalIte
 admin.site.register(System, SystemAdmin)
 admin.site.register(OrbitalItem, OrbitalItemAdmin)
 
-from collector.models.ritual_ref import RitualRef, RitualRefAdmin
+from collector.models.ritual import RitualRef, RitualRefAdmin
 admin.site.register(RitualRef, RitualRefAdmin)
 
-from collector.models.cyberware import CyberwareRef, CyberwareRefAdmin, Cyberware, CyberwareAdmin, Cyberfeature, CyberfeatureAdmin
+from collector.models.cyberware import CyberwareRef, CyberwareRefAdmin, Cyberfeature, CyberfeatureAdmin
 admin.site.register(Cyberfeature, CyberfeatureAdmin)
 admin.site.register(CyberwareRef, CyberwareRefAdmin)
-admin.site.register(Cyberware, CyberwareAdmin)

@@ -1,7 +1,10 @@
 <span class='mobile_form_toggler action_icon fa fa-window-restore toggler'><u>Avatar Customizer</u></span>
 <table class='expanded'>
-  <tr>
-		<td colspan=1></td><th colspan=2>Avatar</th><td colspan=3>{{c.rid}}</td>
+    <tr>
+        <td colspan=1></td><th colspan=2>Avatar</th><td colspan=3>{{c.rid}}</td>
+	</tr>
+    <tr>
+        <td colspan=1></td><th colspan=2>Freefield</th><td colspan=3><input type='text' id='freefield' placeholder='freefield' value=''></input></td>
 	</tr>
 </table>
 <span id="skill_custo_block">
@@ -12,6 +15,9 @@
 </span>
 <span id="ba_custo_block">
     {% include "collector/custo/ba_custo_block.html"%}
+</span>
+<span id="ritual_custo_block">
+    {% include "collector/custo/ritual_custo_block.html"%}
 </span>
 <span id="weapon_custo_block">
     {% include "collector/custo/weapon_custo_block.html"%}

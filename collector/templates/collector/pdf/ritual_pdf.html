@@ -1,0 +1,21 @@
+{% load fics_pdf_filters %}
+<h6>{{c.category|as_ritual_category}}: {{ c.reference }} [{{c.path}} level {{c.level}}]</h6>
+<p>
+  Roll: {{c.attribute}} + {{c.skill}}
+</p>
+{% if c.description %}
+<p>
+  <u>Description:</u> {{c.description}}
+</p>
+{%endif%}
+{% if c.modus_operandi %}
+<p>
+  <u>Modus Operandi:</u> {{c.modus_operandi}}
+</p>
+{%endif%}
+{% if c.drawbacks %}
+<p>
+  <u>Drawbacks:</u> {{c.drawbacks|safe}}
+</p>
+{%endif%}
+  [<tt> #{{c.id}}</tt>]

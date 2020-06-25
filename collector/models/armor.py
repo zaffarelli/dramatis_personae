@@ -10,6 +10,7 @@ from django.contrib import admin
 class ArmorRef(models.Model):
     class Meta:
         ordering = ['reference']
+        verbose_name = "References: Armor"
     reference = models.CharField(max_length=64,default='',blank=True, unique=True)
     category = models.CharField(max_length=6,choices=(('Soft',"Soft Armor"),('Medium',"Medium Armor"),('Hard',"Hard Armor")),default='Soft',blank=True)
     head = models.BooleanField(default=False)
@@ -40,8 +41,10 @@ class ArmorCusto(models.Model):
     armor_ref = models.ForeignKey(ArmorRef, on_delete=models.CASCADE)
 
 class ArmorRefAdmin(admin.ModelAdmin):
-    ordering = ('category','-cost','reference','-stopping_power')
-    list_display = ['reference','category','stopping_power','tech_level','encumbrance','head','torso','right_arm','left_arm','right_leg','left_leg','cost','description']
+    ordering = ('-stopping_power','encumbrance','reference')
+    list_display = ['reference','category','stopping_power','encumbrance','head','torso','right_arm','left_arm','right_leg','left_leg','cost','description','tech_level']
+    list_filter = ('category',)
+    search_fields = ('category',)
 
 class ArmorInline(admin.TabularInline):
     model = Armor

@@ -14,6 +14,7 @@ from collector.models.character_custo import CharacterCusto
 class BlessingCurseRef(models.Model):
   class Meta:
     ordering = ['reference']
+    verbose_name = "References: Blessing/Curse"
   reference = models.CharField(max_length=64,default='',blank=True)
   value = models.IntegerField(default=0)
   description = models.TextField(max_length=256,default='',blank=True)
@@ -60,6 +61,7 @@ class BlessingCurseCustoInline(admin.TabularInline):
 # Admin
 class BlessingCurseRefAdmin(admin.ModelAdmin):
   ordering = ('reference',)
+  search_fields = ('reference','description')
 
 class BlessingCurseModificatorAdmin(admin.ModelAdmin):
   ordering = ('blessing_curse_ref',)

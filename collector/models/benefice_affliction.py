@@ -10,7 +10,8 @@ from django.contrib import admin
 
 class BeneficeAfflictionRef(models.Model):
     class Meta:
-      ordering = ['reference','value',]
+        verbose_name = "References: Benefice/Affliction"
+        ordering = ['reference','value',]
     reference = models.CharField(max_length=64)
     value = models.IntegerField(default=0)
     category = models.CharField(max_length=2, default='ot', choices=(
@@ -35,7 +36,7 @@ class BeneficeAffliction(models.Model):
         ordering = ['benefice_affliction_ref']
     character = models.ForeignKey(Character, on_delete=models.CASCADE)
     benefice_affliction_ref = models.ForeignKey(BeneficeAfflictionRef, on_delete=models.CASCADE)
-    value = models.IntegerField(default=0)
+    #value = models.IntegerField(default=0)
     description = models.TextField(max_length=256, default='', null=True, blank=True)
     def __str__(self):
         return '%s=%s' % (self.character.full_name,self.benefice_affliction_ref.reference)
@@ -63,13 +64,17 @@ def make_riches(modeladmin, request, queryset):
 class BeneficeAfflictionRefAdmin(admin.ModelAdmin):
     ordering = ('category','reference','-value')
     list_display = ('reference','emphasis','value','category','description','source')
+    search_fields = ('reference','description','emphasis','watermark')
+    list_filter = ('source','watermark','category')
     actions = [make_occult, make_combat, make_talent, make_riches, make_possession]
+
 
 class BeneficeAfflictionModificator(models.Model):
     class Meta:
         ordering = ['benefice_affliction_ref']
     tour_of_duty_ref = models.ForeignKey(TourOfDutyRef, on_delete=models.CASCADE)
     benefice_affliction_ref = models.ForeignKey(BeneficeAfflictionRef, on_delete=models.CASCADE)
+    description = models.TextField(max_length=256, default='', null=True, blank=True)
     def __str__(self):
         return '%s=%s' % (self.tour_of_duty_ref.reference,self.benefice_affliction_ref.reference)
 
@@ -81,14 +86,17 @@ class BeneficeAfflictionCusto(models.Model):
     benefice_affliction_ref = models.ForeignKey(BeneficeAfflictionRef, on_delete=models.CASCADE)
     description = models.TextField(max_length=256, default='', null=True, blank=True)
 
-class BeneficeAfflictionModificatorInline(admin.TabularInline):
-    model = BeneficeAfflictionModificator
+# Inlines
+class BeneficeAfflictionCustoInline(admin.TabularInline):
+    model = BeneficeAfflictionCusto
+
+
 
 class BeneficeAfflictionInline(admin.TabularInline):
     model = BeneficeAffliction
 
-class BeneficeAfflictionCustoInline(admin.TabularInline):
-    model = BeneficeAfflictionCusto
+class BeneficeAfflictionModificatorInline(admin.TabularInline):
+    model = BeneficeAfflictionModificator
 
 class BeneficeAfflictionRefInline(admin.TabularInline):
     model = BeneficeAfflictionRef

@@ -1,8 +1,6 @@
-
-{% load fics_filters %}
-
-<p><strong>{{ c.reference }}</strong>
-<br/>{{c.category}}
+{% load fics_pdf_filters %}
+<h6>{{ c.reference }}</h6>
+<p>{{c.category}}
 <b>&times;</b> WA:{{ c.weapon_accuracy|signed }}
 <b>&times;</b> CO:{{ c.conceilable }}
 <b>&times;</b> AV:{{ c.availability }}

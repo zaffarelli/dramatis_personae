@@ -51,6 +51,7 @@ class Specie(models.Model):
   class Meta:
     ordering = ['species','race']
     unique_together = (('species', 'race'),)
+    verbose_name = "References: Specie"
   species = models.CharField(max_length=64,default=1,blank=True)
   race = models.CharField(max_length=64,default='',blank=True)
   racial_attr_mod = models.CharField(max_length=128, default = '{}')
@@ -88,11 +89,11 @@ class SpecieAdmin(admin.ModelAdmin):
   ordering = ('species','race')
   list_display = ('species','race','racial_attr_mod','attr_mod_balance','racial_skills','skill_balance','description','racial_occult')
 
-
-class RoleAdmin(admin.ModelAdmin):
-  ordering = ('-value',)
-  list_display = ('reference','value','primaries','maxi','mini','skill_roots','skills','talents','ba','bc')
-
-class ProfileAdmin(admin.ModelAdmin):
-  ordering = ('reference',)
-  list_display = ('reference','weights','groups','favorites')
+#
+# class RoleAdmin(admin.ModelAdmin):
+#   ordering = ('-value',)
+#   list_display = ('reference','value','primaries','maxi','mini','skill_roots','skills','talents','ba','bc')
+#
+# class ProfileAdmin(admin.ModelAdmin):
+#   ordering = ('reference',)
+#   list_display = ('reference','weights','groups','favorites')

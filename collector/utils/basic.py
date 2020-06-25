@@ -117,9 +117,11 @@ def export_epic(conf):
 
 def extract_rules():
     from collector.models.weapon import WeaponRef
-    from collector.models.skill_ref import SkillRef
+    from collector.models.skill import SkillRef
     from collector.models.benefice_affliction import BeneficeAfflictionRef
     from collector.models.blessing_curse import BlessingCurseRef
+    from collector.models.ritual import RitualRef
+    from collector.models.gear import Gear
     context = {}
     import datetime
     context['date'] = datetime.datetime.now()
@@ -133,6 +135,8 @@ def extract_rules():
     context['melee_weapons'] = melee_weapons
     ranged_weapons = WeaponRef.objects.exclude(category='MELEE')
     context['ranged_weapons'] = ranged_weapons
+    rituals = RitualRef.objects.order_by('category','path','level')
+    context['rituals'] = rituals
     racial = TourOfDutyRef.objects.filter(category='0').order_by('-source')
     context['racial'] = racial
     castes = ['Nobility', 'Freefolk', 'Church', 'Guild', 'Alien']
@@ -140,22 +144,30 @@ def extract_rules():
     for caste in castes:
         caste_context = {}
         caste_context['name'] = caste
-        upbringing = TourOfDutyRef.objects.filter(category='1',caste=caste).order_by('-source')
+        upbringing = TourOfDutyRef.objects.filter(category='10',caste=caste).order_by('-source')
         caste_context['upbringing'] = upbringing
-        apprenticeship = TourOfDutyRef.objects.filter(category='2',caste=caste).order_by('-source')
+        apprenticeship = TourOfDutyRef.objects.filter(category='20',caste=caste).order_by('-source')
         caste_context['apprenticeship'] = apprenticeship
-        early_career = TourOfDutyRef.objects.filter(category='3',caste=caste).order_by('-source')
+        early_career = TourOfDutyRef.objects.filter(category='30',caste=caste).order_by('-source')
         caste_context['early_career'] = early_career
         castes_context.append(caste_context)
     context['castes'] = castes_context
-    tour_of_duty = TourOfDutyRef.objects.filter(category='4').order_by('-source')
+    tour_of_duty = TourOfDutyRef.objects.filter(category='40').order_by('-source')
     context['tour_of_duty'] = tour_of_duty
-    worldly_benefits = TourOfDutyRef.objects.filter(category='5').order_by('-source')
+    worldly_benefits = TourOfDutyRef.objects.filter(category='50').order_by('-source')
     context['worldly_benefits'] = worldly_benefits
+
+    gears = Gear.objects.order_by('category','-reference','name','variant')
+    context['gears'] = gears
+
+
     template = get_template('collector/references.html')
     html = template.render(context)
     fname = 'rules.pdf'
     filename = os.path.join(settings.MEDIA_ROOT, 'pdf/results/' + fname)
     es_pdf = open(filename, 'wb')
     pdf = pisa.pisaDocument(BytesIO(html.encode('utf-8')), es_pdf)
-    es_pdf.close()
+    if not pdf.err:
+        es_pdf.close()
+    else:
+        print(pdf.err)

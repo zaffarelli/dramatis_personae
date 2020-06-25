@@ -1,0 +1,14 @@
+{% load fics_pdf_filters %}
+<h6>{{c.name}}: {{c.variant}}</h6>
+Availability: {{c.get_availability_display}} / {{c.get_magna_carta_entry_display}}
+<br>Category: {{c.get_category_display}}
+<br>Reference: {{c.get_reference_display }}
+<br>Quality: {{c.get_quality_display}}
+<br>£{{c.price}} per {{c.quantity}} {{c.get_unit_display}}
+<br>Price: FB:{{c.firebird_price}} CR:{{c.crest_price}} WG:{{c.wing_price}} TA:{{c.talon_price}}
+
+
+<p>
+  <u>Description:</u> {{c.description}}
+</p>
+{%endif%}

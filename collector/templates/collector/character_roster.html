@@ -103,7 +103,7 @@ Born in {{ c.birthdate }} ({{ c.age }} years old)
 {% if c.beneficeaffliction_set.count != 0 %}
 <h5>Benefices/Afflictions</h5>
 {% for ba in c.beneficeaffliction_set.all%}
-<p><u>{{ ba.benefice_affliction_ref.reference|safe }}</u> (Cost:{{ ba.benefice_affliction_ref.value }}): {{ ba.benefice_affliction_ref.description|safe}} </p>
+<p><u>{{ ba.benefice_affliction_ref.reference|safe }}</u> (Cost:{{ ba.benefice_affliction_ref.value }}): {{ ba.benefice_affliction_ref.description|safe}} {{ ba.description|safe}}</p>
 {% endfor %}
 
 {%endif%}

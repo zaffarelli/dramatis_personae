@@ -1,10 +1,7 @@
-{% load fics_filters %}
+{% load fics_pdf_filters %}
+<h6>{{ c.reference }}</h6>
 <p>
-  <em>
-    {{ c.reference }}
-  </em>
-  {{c.value}}
+  {{c.value}} {{c.source}}
   {{c.description}}
-  {{c.source}}
   [ <tt>#{{c.id}}</tt> ]
 </p>

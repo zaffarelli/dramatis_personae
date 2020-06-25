@@ -10,6 +10,8 @@ from django.db.models.signals import pre_save, post_save
 from django.dispatch import receiver
 
 class Loot(models.Model):
+    class Meta:
+        verbose_name = "References: Loot"    
     name = models.CharField(max_length=128)
     group = models.CharField(max_length=128,default='',blank=True,null=True)
     price = models.PositiveIntegerField(default=0)

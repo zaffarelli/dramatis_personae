@@ -25,7 +25,7 @@ class Jumpweb {
     me.size = 40;
     me.width = me.size * 80;
     me.height = me.size * 60;
-    me.mj = false;
+    me.mj = true;
     me.era = (me.mj ? 0 : 5018);
     me.data = data;
     me.ox = me.width / me.size / 2;

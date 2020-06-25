@@ -50,6 +50,8 @@ class CharacterCusto(models.Model):
             self.OP += bc.blessing_curse_ref.value
         for ba in self.beneficeafflictioncusto_set.all():
             self.OP += ba.benefice_affliction_ref.value
+        #for ritual in self.ritualcusto_set.all():
+        #    self.OP += ritual.ritual_ref.value
         self.value = self.AP*3 + self.OP
         #print("RECALCULATE!")
         self.rebuild_summary()
@@ -121,6 +123,11 @@ class CharacterCusto(models.Model):
         for item in self.shieldcusto_set.all():
             self.summary += "<li>%s</li>"%(item.shield_ref.reference)
         self.summary += "</ul>"
+        self.summary += "Rituals"
+        self.summary += "<ul>"
+        for item in self.ritualcusto_set.all():
+            self.summary += "<li>%s</li>"%(item.ritual_ref.reference)
+        self.summary += "</ul>"
 
 
     def push(self,ch):
@@ -143,18 +150,21 @@ class CharacterCusto(models.Model):
         for bc in self.blessingcursecusto_set.all():
             ch.add_bc(bc.blessing_curse_ref)
         for ba in self.beneficeafflictioncusto_set.all():
-            ch.add_ba(ba.benefice_affliction_ref)
+            print("Custoprepush "+ba.description)
+            x = ch.add_ba(ba.benefice_affliction_ref,ba.description)
+            print("Custopush "+x.description)
         for weapon in self.weaponcusto_set.all():
             ch.add_weapon(weapon.weapon_ref)
         for armor in self.armorcusto_set.all():
             ch.add_armor(armor.armor_ref)
         for shield in self.shieldcusto_set.all():
             ch.add_shield(shield.shield_ref)
+        for ritual in self.ritualcusto_set.all():
+            ch.add_ritual(ritual.ritual_ref)
 
     def add_or_update_skill(self,skill_ref_id,value):
         ''' Updating customization and avatar '''
-        from collector.models.skill_custo import SkillCusto
-        from collector.models.skill_ref import SkillRef
+        from collector.models.skill import SkillCusto,SkillRef
         found_in_custo = False
         found_cu = None
         for found_cu in self.skillcusto_set.all():

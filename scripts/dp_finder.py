@@ -26,7 +26,7 @@ class DPFinder:
 
     def skill_search(self):
         from collector.models.character import Character
-        from collector.models.skill_ref import SkillRef
+        from collector.models.skill import SkillRef
         skill_name = input('  Type the skill you want to search: ')
         x = SkillRef.objects.filter(reference=skill_name).first()
         if x:

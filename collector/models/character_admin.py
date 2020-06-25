@@ -4,7 +4,7 @@
  ═╩╝╩    ╚═╝└─┘┴─┘┴─┘└─┘└─┘ ┴ └─┘┴└─
 '''
 from django.contrib import admin
-from collector.models.skill_inline import SkillInline
+from collector.models.skill import SkillInline
 from collector.models.tourofduty import TourOfDutyInline
 from collector.models.blessing_curse import BlessingCurseInline
 from collector.models.benefice_affliction import BeneficeAfflictionInline
@@ -12,6 +12,8 @@ from collector.models.talent_inline import TalentInline
 from collector.models.weapon import WeaponInline
 from collector.models.armor import ArmorInline
 from collector.models.shield import ShieldInline
+from collector.models.bloke import BlokeInline
+from collector.models.ritual import RitualInline
 from scenarist.models.epics import Epic
 
 def cast_to_dem(modeladmin, request, queryset):
@@ -104,6 +106,8 @@ class CharacterAdmin(admin.ModelAdmin):
         ArmorInline,
         ShieldInline,
         TourOfDutyInline,
+        BlokeInline,
+        RitualInline,
     ]
     ordering = ['full_name',]
     actions = [no_importance, importance_up, importance_down, cast_to_blank, cast_to_dem, cast_to_antu, make_invisible, make_visible, make_teutonic, make_kaanic, make_castillan, make_enquist, make_public, make_private, make_partial, make_complete, enter_fencing_league, exit_fencing_league]

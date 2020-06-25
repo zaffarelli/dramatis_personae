@@ -5,6 +5,7 @@
 '''
 from django import template
 from collector.models.character import Character
+from collector.models.spacecraft import Spaceship
 from collector.models.loot import Loot
 import re
 import string
@@ -30,14 +31,33 @@ def parse_avatars_pdf(value):
     else:
       repstr = '<span class="embedded_link broken">[%s was not found]</span>'%(rid)
     changes.append({'src':item.group(),'dst':repstr})
-  for change in changes:
-    txt = txt.replace(change['src'],change['dst'])
+
+
+  """ Ships """
+
+  sym = '^'
+  seeker = re.compile('\^(\w+)\^')
+  res = str(value)
+  iter = seeker.finditer(res)
+  for item in iter:
+    rid = ''.join(item.group().split('^'))
+    try:
+        ch = Spaceship.objects.get(full_name=rid)
+    except Spaceship.DoesNotExist:
+        ch = None
+    if ch is not None:
+      repstr = '<span id="%d" class="character_link embedded_link" title="%s">%s [%s | %s] %s</span>'%(ch.id, ch.ship_ref, ch.full_name,ch.flag,ch.ship_ref.ship_class,"" if ch.ship_ref.ship_status=="combat_ready" else "&dagger;")
+    else:
+      repstr = '<span class="embedded_link broken">[%s was not found]</span>'%(rid)
+    changes.append({'src':item.group(),'dst':repstr})
+
+
   """ Replace µ by subsection titles """
   sym = 'µ'
   search = "[A-Za-z0-9\é\è\ô\ö\à\s\.\'\;\-\(\)\&\:\,]+"
   myregex = "\%s%s\%s"%(sym,search,sym)
   seeker = re.compile(myregex)
-  changes = []
+  #changes = []
   iter = seeker.finditer(txt)
   for item in iter:
     occ = ''.join(item.group().split(sym))
@@ -102,3 +122,23 @@ def high_skill_check_pdf(value):
     if value >= 5:
         res = "<em>%d</em>"%(value)
     return value
+
+@register.filter(name='as_ritual_category')
+def as_ritual_category(value):
+    cat = ['Psi','Theurgy','Symbiosis','Runecasting']
+    return cat[int(value)]
+
+@register.filter(name='signed')
+def signed(value):
+  return "%+d"%(int(value))
+
+
+@register.filter(name='as_root')
+def as_root(value):
+  return "<b>%s</b>"%(value)
+
+@register.filter(name='as_specialty')
+def as_specialty(value):
+  x = value.split('(')[1]
+  val = x.split(')')[0]
+  return "&gt;&nbsp;<i>%s</i>"%(val)

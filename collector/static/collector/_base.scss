@@ -130,7 +130,7 @@ body {
         margin: 0;
         padding: 5px;
         margin-right: 10px;
-        width: 40%;
+        width: 15%;
         float: right;
 
         & ul {
@@ -166,7 +166,7 @@ body {
         display: inline-block;
         margin: 0;
         padding: 0;
-        width: 50%;
+        width: 80%;
         float: left;
 
         & .pic {
@@ -611,7 +611,7 @@ body {
                 padding: 0;
                 margin-bottom: 2px;
                 border: 1px solid $fics_darker;
-                height: 25px;
+                height: 50px;
 
                 & .chapter {
                     display: inline-block;
@@ -632,22 +632,22 @@ body {
 
                 & h1 {
                     font-height: 15px;
-                    text-indent: 10px;
+                    text-align: center;
                 }
 
                 & h2 {
                     font-height: 14px;
-                    text-indent: 20px;
+                    text-align: center;
                 }
 
                 & h3 {
                     font-height: 13px;
-                    text-indent: 40px;
+                    text-align: center;
                 }
 
                 & h4 {
                     font-height: 12px;
-                    text-indent: 60px;
+                    text-align: center;
                 }
 
                 & .storybar {
@@ -802,12 +802,12 @@ body {
                         }
 
                         & em {
-                            font-family: Titre;
-                            color: #fd8;
+                            font-family: TextDesc;
+                            color: #a61;
                             font-weight: bold;
                             font-style: normal;
-                            font-size: 1.3em;
-                            /*border-bottom: 3px dotted red;*/
+                            font-size: 1.2em;
+                            border-bottom: 1px dotted #a61;
                         }
 
                         & .embedded_link {

@@ -1,0 +1,17 @@
+{%load fics_filters%}
+{%load static%}
+
+{% if c.ritual_set.count != 0 %}
+<table  class='unbreakable' id='ritual_{{c.id}}' width='100%'>
+<tr><th colspan=3>Rituals</th></tr>
+<tr>
+{% for r in c.ritual_set.all %}
+<td>{{ r.ritual_ref.reference|safe }}</td>
+<td>{{ r.ritual_ref.level }}</td>
+<td>{{ r.ritual_ref.path }}</td>
+</tr>
+{% endfor %}
+</table>
+{%else%}
+&nbsp;
+{%endif%}
