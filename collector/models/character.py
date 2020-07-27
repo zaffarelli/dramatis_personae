@@ -1,8 +1,8 @@
-'''
+"""
  ╔╦╗╔═╗  ╔═╗┌─┐┬  ┬  ┌─┐┌─┐┌┬┐┌─┐┬─┐
   ║║╠═╝  ║  │ ││  │  ├┤ │   │ │ │├┬┘
  ═╩╝╩    ╚═╝└─┘┴─┘┴─┘└─┘└─┘ ┴ └─┘┴└─
-'''
+"""
 from django.db import models
 from datetime import datetime
 from django.db.models.signals import pre_save, post_save
@@ -14,13 +14,15 @@ from collector.models.fics_models import Specie
 from collector.models.combattant import Combattant
 from collector.utils import fs_fics7
 
-
 import logging
+
 logger = logging.getLogger(__name__)
+
 
 class Character(Combattant):
     class Meta:
         ordering = ['full_name']
+
     pagenum = 0
     full_name = models.CharField(max_length=200)
     alias = models.CharField(max_length=200, blank=True, null=True, default='')
@@ -88,7 +90,7 @@ class Character(Combattant):
     occult = models.CharField(max_length=50, default='', blank=True)
     challenge = models.TextField(default='', blank=True)
     todo_list = models.TextField(default='', blank=True)
-    #is_exportable = models.BooleanField(default=False)
+    # is_exportable = models.BooleanField(default=False)
     is_visible = models.BooleanField(default=True)
     is_dead = models.BooleanField(default=False)
     is_locked = models.BooleanField(default=False)
@@ -98,7 +100,8 @@ class Character(Combattant):
     use_history_creation = models.BooleanField(default=False)
     use_only_entrance = models.BooleanField(default=False)
     epic = models.ForeignKey(Epic, null=True, blank=True, on_delete=models.SET_NULL)
-    picture = models.CharField(max_length=256, blank=True, default='https://drive.google.com/open?id=15hdubdMt1t_deSXkbg9dsAjWi5tZwMU0')
+    picture = models.CharField(max_length=512, blank=True,
+                               default='https://drive.google.com/open?id=15hdubdMt1t_deSXkbg9dsAjWi5tZwMU0')
     alliance_picture = models.CharField(max_length=256, blank=True, default='')
     onsave_reroll_attributes = models.BooleanField(default=False)
     onsave_reroll_skills = models.BooleanField(default=False)
@@ -106,7 +109,7 @@ class Character(Combattant):
     balanced = models.BooleanField(default=False)
     historical_figure = models.BooleanField(default=False)
     nameless = models.BooleanField(default=False)
-    color = models.CharField(max_length=20,blank=True,default='#CCCCCC')
+    color = models.CharField(max_length=20, blank=True, default='#CCCCCC')
     skills_options = []
     ba_options = []
     bc_options = []
@@ -182,10 +185,10 @@ class Character(Combattant):
     def get_absolute_url(self):
         return reverse('view_character', kwargs={'pk': self.pk})
 
-    def get_pa(self,str):
+    def get_pa(self, str):
         context = {}
         context["attribute"] = str
-        context["value"] = getattr(self,str)
+        context["value"] = getattr(self, str)
         context["id"] = self.id
         return context
 
@@ -211,12 +214,12 @@ class Character(Combattant):
         self.lifepath_total = 0
         bl = []
         TOD_REP = {
-            'RA':0,
-            'UP':0,
-            'AP':0,
-            'EC':0,
-            'TO':0,
-            'WB':0,
+            'RA': 0,
+            'UP': 0,
+            'AP': 0,
+            'EC': 0,
+            'TO': 0,
+            'WB': 0,
         }
         for tod in self.tourofduty_set.all():
             AP, OP, WP = tod.push(self)
@@ -256,11 +259,11 @@ class Character(Combattant):
 
         bl.append("")
         bl.append("Tour Summary:")
-        bl.append("- APx3+OP+BA+BC... "+str(PA_TOTAL*3+PO_TOTAL+BA_TOTAL+BC_TOTAL))
-        bl.append("- WP.............. "+str(self.WP_tod_pool))
-        bl.append("- Value........... "+str(self.charactercusto.value))
-        bl.append("- Lifepath ....... "+str(self.lifepath_total))
-        bl.append("- Repartition .... "+str(TOD_REP))
+        bl.append("- APx3+OP+BA+BC... " + str(PA_TOTAL * 3 + PO_TOTAL + BA_TOTAL + BC_TOTAL))
+        bl.append("- WP.............. " + str(self.WP_tod_pool))
+        bl.append("- Value........... " + str(self.charactercusto.value))
+        bl.append("- Lifepath ....... " + str(self.lifepath_total))
+        bl.append("- Repartition .... " + str(TOD_REP))
         fs_fics7.check_secondary_attributes(self)
         self.charactercusto.save()
         self.prepareDisplay()
@@ -272,18 +275,23 @@ class Character(Combattant):
         if self.player != '':
             self.balanced = True
         if self.color == '#CCCCCC':
-            d = lambda x: fs_fics7.roll(x)-1
-            self.color = '#%01X%01X%01X%01X%01X%01X' % (d(8)+4,d(16),d(8)+4,d(16),d(8)+4,d(16))
-
+            d = lambda x: fs_fics7.roll(x) - 1
+            self.color = '#%01X%01X%01X%01X%01X%01X' % (d(8) + 4, d(16), d(8) + 4, d(16), d(8) + 4, d(16))
 
     def prepareDisplay(self):
         self.refresh_skills_options()
-        self.refresh_options("ba_options","ba_options_not", self.charactercusto.beneficeafflictioncusto_set.all(), "benefice_affliction_ref", "BeneficeAfflictionRef")
-        self.refresh_options("bc_options","bc_options_not", self.charactercusto.blessingcursecusto_set.all(), "blessing_curse_ref", "BlessingCurseRef")
-        self.refresh_options("weapon_options","weapon_options_not", self.charactercusto.weaponcusto_set.all(), "weapon_ref", "WeaponRef")
-        self.refresh_options("shield_options","shield_options_not", self.charactercusto.shieldcusto_set.all(), "shield_ref", "ShieldRef")
-        self.refresh_options("armor_options","armor_options_not", self.charactercusto.armorcusto_set.all(), "armor_ref", "ArmorRef")
-        self.refresh_options("ritual_options","ritual_options_not", self.charactercusto.ritualcusto_set.all(), "ritual_ref", "RitualRef")
+        self.refresh_options("ba_options", "ba_options_not", self.charactercusto.beneficeafflictioncusto_set.all(),
+                             "benefice_affliction_ref", "BeneficeAfflictionRef")
+        self.refresh_options("bc_options", "bc_options_not", self.charactercusto.blessingcursecusto_set.all(),
+                             "blessing_curse_ref", "BlessingCurseRef")
+        self.refresh_options("weapon_options", "weapon_options_not", self.charactercusto.weaponcusto_set.all(),
+                             "weapon_ref", "WeaponRef")
+        self.refresh_options("shield_options", "shield_options_not", self.charactercusto.shieldcusto_set.all(),
+                             "shield_ref", "ShieldRef")
+        self.refresh_options("armor_options", "armor_options_not", self.charactercusto.armorcusto_set.all(),
+                             "armor_ref", "ArmorRef")
+        self.refresh_options("ritual_options", "ritual_options_not", self.charactercusto.ritualcusto_set.all(),
+                             "ritual_ref", "RitualRef")
         # self.preparePADisplay()
 
     def handleWildcards(self):
@@ -323,15 +331,16 @@ class Character(Combattant):
         if self.PA_BOD != 0:
             if self.height == 0:
                 if "urthish" in self.specie.species.lower():
-                    self.height = 145+2.39473*(self.PA_BOD/2+self.PA_STR/2+self.PA_CON+2)
+                    self.height = 145 + 2.39473 * (self.PA_BOD / 2 + self.PA_STR / 2 + self.PA_CON + 2)
                     if self.gender == 'male':
-                        self.weight = self.height/(2.98-0.0336*(self.PA_BOD+self.PA_CON))
+                        self.weight = self.height / (2.98 - 0.0336 * (self.PA_BOD + self.PA_CON))
                     else:
-                        self.weight = self.height/(3.09-0.02975*(self.PA_BOD+self.PA_CON))
-                    if self.PA_MOV!=self.PA_CON:
-                        self.weight *= 1+(self.PA_CON-self.PA_MOV)*0.1
-                    logger.info("Height/Weight Experiment 1: %s --> %0.2f %0.2f BODY:%d CONSTITUTION:%d"%(self.full_name,self.height,self.weight,self.PA_BOD, self.PA_CON))
-        #self.is_exportable = True #self.check_exportable()
+                        self.weight = self.height / (3.09 - 0.02975 * (self.PA_BOD + self.PA_CON))
+                    if self.PA_MOV != self.PA_CON:
+                        self.weight *= 1 + (self.PA_CON - self.PA_MOV) * 0.1
+                    logger.info("Height/Weight Experiment 1: %s --> %0.2f %0.2f BODY:%d CONSTITUTION:%d" % (
+                        self.full_name, self.height, self.weight, self.PA_BOD, self.PA_CON))
+        # self.is_exportable = True #self.check_exportable()
         self.update_challenge()
         self.check_todo_list()
         logger.debug('Done fixing ...: %s' % (self.full_name))
@@ -347,13 +356,12 @@ class Character(Combattant):
 
     def update_challenge(self):
         res = ''
-        res += '<i class="fas fa-th-large" title="primary attributes"></i>%d '%(self.AP)
-        res += '<i class="fas fa-th-list" title="skills"></i> %d '%(self.SK_TOTAL)
-        res += '<i class="fas fa-th" title="talents"></i> %d '%(self.TA_TOTAL+self.BC_TOTAL+self.BA_TOTAL)
-        res += '<i class="fas fa-star" title="wildcards"></i> %d '%(self.WP_tod_pool)
-        res += '<i class="fas fa-newspaper" title="OP challenge"></i> %d/%d'%(self.OP,self.lifepath_total)
+        res += '<i class="fas fa-th-large" title="primary attributes"></i>%d ' % (self.AP)
+        res += '<i class="fas fa-th-list" title="skills"></i> %d ' % (self.SK_TOTAL)
+        res += '<i class="fas fa-th" title="talents"></i> %d ' % (self.TA_TOTAL + self.BC_TOTAL + self.BA_TOTAL)
+        res += '<i class="fas fa-star" title="wildcards"></i> %d ' % (self.WP_tod_pool)
+        res += '<i class="fas fa-newspaper" title="OP challenge"></i> %d/%d' % (self.OP, self.lifepath_total)
         self.challenge = res
-
 
     def calculateShortcuts(self):
         """ Calculate shortcuts for the avatar skills. A shortcut appears if skill.value>0  """
@@ -364,26 +372,25 @@ class Character(Combattant):
             sc, pdf = fs_fics7.check_gm_shortcuts(self, s)
             if sc != '':
                 shortcuts.append(sc)
-                shortcuts_pdf.append("{:s}:{:s} ({:d})".format(pdf['rationale'],pdf['label'],pdf['score']))
+                shortcuts_pdf.append("{:s}:{:s} ({:d})".format(pdf['rationale'], pdf['label'], pdf['score']))
         self.gm_shortcuts = ''.join(shortcuts)
-        #print(shortcuts_pdf)
+        # print(shortcuts_pdf)
         self.gm_shortcuts_pdf = ', '.join(shortcuts_pdf)
-
 
     def refresh_options(self, options, options_not, custo_set, ref_type, refclass):
         """ Refresh options / options_not global engine """
-        from collector.models.weapon import WeaponRef
-        from collector.models.shield import ShieldRef
-        from collector.models.armor import ArmorRef
-        from collector.models.benefice_affliction import BeneficeAfflictionRef
-        from collector.models.blessing_curse import BlessingCurseRef
-        from collector.models.ritual import RitualRef
+        # from collector.models.weapon import WeaponRef
+        # from collector.models.shield import ShieldRef
+        # from collector.models.armor import ArmorRef
+        # from collector.models.benefice_affliction import BeneficeAfflictionRef
+        # from collector.models.blessing_curse import BlessingCurseRef
+        # from collector.models.ritual import RitualRef
         o = []
         o_n = []
         custo_items = custo_set
         custo_ref_items = []
         for item in custo_items:
-            custo_ref_items.append(getattr(item,ref_type))
+            custo_ref_items.append(getattr(item, ref_type))
         all_items = eval(refclass).objects.all()
         for item in all_items:
             if item in custo_ref_items:
@@ -391,9 +398,8 @@ class Character(Combattant):
             else:
                 o.append(item)
 
-        setattr(self,options,o)
-        setattr(self,options_not,o_n)
-
+        setattr(self, options, o)
+        setattr(self, options_not, o_n)
 
     def refresh_skills_options(self):
         """ This one is special: it only reflects skills that are not in the character """
@@ -404,13 +410,12 @@ class Character(Combattant):
         sr = []
         for x in ss:
             sr.append(x.skill_ref)
-        all = SkillRef.objects.all().exclude(is_root=True).order_by('is_speciality','is_wildcard','reference')
+        all = SkillRef.objects.all().exclude(is_root=True).order_by('is_speciality', 'is_wildcard', 'reference')
         for s in all:
             if s in sr:
                 self.skills_options_not.append(s)
             else:
                 self.skills_options.append(s)
-
 
     def add_or_update_skill(self, askill, modifier=0, stack=False):
         from collector.models.skill import Skill
@@ -430,136 +435,135 @@ class Character(Combattant):
                 skill.value = 1
             else:
                 if stack:
-                  skill.value += modifier
+                    skill.value += modifier
                 else:
-                  skill.value = modifier
+                    skill.value = modifier
             skill.save()
         return skill
 
     def remove_or_update_skill(self, askill, modifier=0, stack=False):
-        from collector.models.skill import Skill
+        # from collector.models.skill import Skill
         found_skill = self.skill_set.all().filter(skill_ref=askill).first()
-        if found_skill: # There is no reason not to find the skill...
+        if found_skill:  # There is no reason not to find the skill...
             found_skill.value -= modifier
             found_skill.save()
             if found_skill.value == 0:
                 found_skill.delete()
 
-
     def add_bc(self, aref):
-      from collector.models.blessing_curse import BlessingCurse
-      found_bc = self.blessingcurse_set.all().filter(blessing_curse_ref=aref).first()
-      if found_bc:
-        return found_bc
-      else:
-        bc = BlessingCurse()
-        bc.character = self
-        bc.blessing_curse_ref = aref
-        bc.save()
-        return bc
+        from collector.models.blessing_curse import BlessingCurse
+        found_bc = self.blessingcurse_set.all().filter(blessing_curse_ref=aref).first()
+        if found_bc:
+            return found_bc
+        else:
+            bc = BlessingCurse()
+            bc.character = self
+            bc.blessing_curse_ref = aref
+            bc.save()
+            return bc
 
     def remove_bc(self, aref):
-      from collector.models.blessing_curse import BlessingCurse
-      found_bc = self.blessingcurse_set.all().filter(blessing_curse_ref=aref).first()
-      if found_bc:
-        found_bc.delete()
+        # from collector.models.blessing_curse import BlessingCurse
+        found_bc = self.blessingcurse_set.all().filter(blessing_curse_ref=aref).first()
+        if found_bc:
+            found_bc.delete()
 
     def add_weapon(self, aref):
-      from collector.models.weapon import Weapon
-      found_item = self.weapon_set.all().filter(weapon_ref=aref).first()
-      if found_item:
-        return found_item
-      else:
-        item = Weapon()
-        item.character = self
-        item.weapon_ref = aref
-        item.save()
-        return item
+        from collector.models.weapon import Weapon
+        found_item = self.weapon_set.all().filter(weapon_ref=aref).first()
+        if found_item:
+            return found_item
+        else:
+            item = Weapon()
+            item.character = self
+            item.weapon_ref = aref
+            item.save()
+            return item
 
     def add_ritual(self, aref):
-      from collector.models.ritual import Ritual
-      found_item = self.ritual_set.all().filter(ritual_ref=aref).first()
-      if found_item:
-        return found_item
-      else:
-        item = Ritual()
-        item.character = self
-        item.ritual_ref = aref
-        item.save()
-        return item
+        from collector.models.ritual import Ritual
+        found_item = self.ritual_set.all().filter(ritual_ref=aref).first()
+        if found_item:
+            return found_item
+        else:
+            item = Ritual()
+            item.character = self
+            item.ritual_ref = aref
+            item.save()
+            return item
 
     def add_armor(self, aref):
-      from collector.models.armor import Armor
-      found_item = self.armor_set.all().filter(armor_ref=aref).first()
-      if found_item:
-        return found_item
-      else:
-        item = Armor()
-        item.character = self
-        item.armor_ref = aref
-        item.save()
-        return item
+        from collector.models.armor import Armor
+        found_item = self.armor_set.all().filter(armor_ref=aref).first()
+        if found_item:
+            return found_item
+        else:
+            item = Armor()
+            item.character = self
+            item.armor_ref = aref
+            item.save()
+            return item
 
     def add_shield(self, aref):
-      from collector.models.shield import Shield
-      found_item = self.shield_set.all().filter(shield_ref=aref).first()
-      if found_item:
-        return found_item
-      else:
-        item = Shield()
-        item.character = self
-        item.shield_ref = aref
-        item.save()
-        return item
+        from collector.models.shield import Shield
+        found_item = self.shield_set.all().filter(shield_ref=aref).first()
+        if found_item:
+            return found_item
+        else:
+            item = Shield()
+            item.character = self
+            item.shield_ref = aref
+            item.save()
+            return item
 
     def remove_weapon(self, aref):
-      from collector.models.weapon import Weapon
-      found_item = self.weapon_set.all().filter(weapon_ref=aref).first()
-      if found_item:
-        found_item.delete()
+        from collector.models.weapon import Weapon
+        found_item = self.weapon_set.all().filter(weapon_ref=aref).first()
+        if found_item:
+            found_item.delete()
 
     def remove_ritual(self, aref):
-      from collector.models.ritual import Ritual
-      found_item = self.ritual_set.all().filter(ritual_ref=aref).first()
-      if found_item:
-        found_item.delete()
+        from collector.models.ritual import Ritual
+        found_item = self.ritual_set.all().filter(ritual_ref=aref).first()
+        if found_item:
+            found_item.delete()
 
     def remove_armor(self, aref):
-      from collector.models.armor import Armor
-      found_item = self.armor_set.all().filter(armor_ref=aref).first()
-      if found_item:
-        found_item.delete()
+        from collector.models.armor import Armor
+        found_item = self.armor_set.all().filter(armor_ref=aref).first()
+        if found_item:
+            found_item.delete()
 
     def remove_shield(self, aref):
-      from collector.models.shield import Shield
-      found_item = self.shield_set.all().filter(shield_ref=aref).first()
-      if found_item:
-        found_item.delete()
+        from collector.models.shield import Shield
+        found_item = self.shield_set.all().filter(shield_ref=aref).first()
+        if found_item:
+            found_item.delete()
 
     def add_ba(self, aref, adesc=''):
-      from collector.models.benefice_affliction import BeneficeAffliction
-      ba = self.beneficeaffliction_set.all().filter(benefice_affliction_ref=aref,description=adesc).first()
-      if ba:
-        return ba
-      else:
-        ba = BeneficeAffliction()
-        ba.character = self
-        ba.benefice_affliction_ref = aref
-        print("ADD_BA "+adesc)
-        ba.description = adesc
-        ba.save()
-        print("ADD_BA (after) "+ba.description)
-        return ba
+        from collector.models.benefice_affliction import BeneficeAffliction
+        ba = self.beneficeaffliction_set.all().filter(benefice_affliction_ref=aref, description=adesc).first()
+        if ba:
+            return ba
+        else:
+            ba = BeneficeAffliction()
+            ba.character = self
+            ba.benefice_affliction_ref = aref
+            print("ADD_BA " + adesc)
+            ba.description = adesc
+            ba.save()
+            print("ADD_BA (after) " + ba.description)
+            return ba
 
-    def remove_ba(self,aref):
-      from collector.models.benefice_affliction import BeneficeAffliction
-      found_ba = self.beneficeaffliction_set.all().filter(benefice_affliction_ref=aref).first()
-      if found_ba:
-        found_ba.delete()
+    def remove_ba(self, aref):
+        from collector.models.benefice_affliction import BeneficeAffliction
+        found_ba = self.beneficeaffliction_set.all().filter(benefice_affliction_ref=aref).first()
+        if found_ba:
+            found_ba.delete()
 
     def add_missing_root_skills(self):
         """ According to the character specialities, fixing the root skills """
-        #from collector.models.skills import Skill
+        # from collector.models.skills import Skill
         from collector.models.skill import SkillRef
         roots_list = []
         # Get all roots in the avatar in roots_list
@@ -579,7 +583,7 @@ class Character(Combattant):
             logger.debug('ROOT_LIST:%s' % (item.reference))
 
     def resetPA(self):
-        self.PA_STR = self.PA_CON = self.PA_BOD = self.PA_MOV = self.PA_INT = self.PA_WIL = self.PA_TEM = self.PA_PRE = self.PA_TEC = self.PA_REF = self.PA_AGI = self.PA_AWA = self.OCC_LVL = self.OCC_DRK =0
+        self.PA_STR = self.PA_CON = self.PA_BOD = self.PA_MOV = self.PA_INT = self.PA_WIL = self.PA_TEM = self.PA_PRE = self.PA_TEC = self.PA_REF = self.PA_AGI = self.PA_AWA = self.OCC_LVL = self.OCC_DRK = 0
 
     @property
     def sumPA(self):
@@ -633,7 +637,6 @@ class Character(Combattant):
             item.delete()
         logger.debug('PurgeRitual count: %d' % (self.ritual_set.all().count()))
 
-
     def resetTotal(self):
         """ Compute all sums for all stats """
         self.SK_TOTAL = 0
@@ -658,7 +661,7 @@ class Character(Combattant):
         for ba in beneficeafflictions:
             self.BA_TOTAL += ba.benefice_affliction_ref.value
         self.AP = self.PA_TOTAL
-        self.OP = self.PA_TOTAL*3 + self.SK_TOTAL + self.BC_TOTAL + self.BA_TOTAL
+        self.OP = self.PA_TOTAL * 3 + self.SK_TOTAL + self.BC_TOTAL + self.BA_TOTAL
         weapons = self.weapon_set.all()
         for w in weapons:
             self.weapon_cost += w.weapon_ref.cost
@@ -684,9 +687,9 @@ class Character(Combattant):
 
     def __str__(self):
         if self.alias:
-            return '%s' %(self.alias)
+            return '%s' % (self.alias)
         else:
-            return '%s' %(self.full_name)
+            return '%s' % (self.full_name)
 
     def get_rid(self, s):
         self.rid = fs_fics7.find_rid(s)
@@ -706,8 +709,9 @@ def update_character(sender, instance, conf=None, **kwargs):
         instance.fix(conf)
     instance.get_rid(instance.full_name)
     instance.alliancehash = hashlib.sha1(
-            bytes(instance.alliance, 'utf-8')
-            ).hexdigest()
+        bytes(instance.alliance, 'utf-8')
+    ).hexdigest()
+
 
 @receiver(post_save, sender=Character, dispatch_uid='backup_character')
 def backup_character(sender, instance, **kwargs):

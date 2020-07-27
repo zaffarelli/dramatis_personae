@@ -100,7 +100,7 @@
 {% endfor %}
 {% endif %}
 
-
+<pdf:nextframe>
 <h3>Rituals</h3>
 {% if rituals.count  %}
     {% for r in rituals %}
@@ -108,11 +108,6 @@
     {% endfor %}
 {% endif %}
 
-<h3>Equipment</h3>
-{% if gears.count  %}
-    {% for g in gears %}
-        {% include "collector/pdf/gear_pdf.html" with c=g %}
-    {% endfor %}
-{% endif %}
+
 
 {% endblock article %}

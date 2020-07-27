@@ -2,32 +2,33 @@
   <div class='character_name'>
   <em title='{{ c.full_name }}'=>{{ c.full_name }}</em>
   </div>
-  <div class='character_actions'>
-    <span class="action_icon edit_character" id="{{c.id}}_edit"><i class="fas fa-user-tag"></i></span>&nbsp;&nbsp;
-    <span class="action_icon recalc_character" id="{{c.id}}_recalc"><i class="fas fa-cog"></i></span>&nbsp;&nbsp;
+  <div class='character_actions' id="link_{{c.id}}">
+    <span class="action_icon edit_character"><i class="fas fa-user-tag"></i></span>&nbsp;&nbsp;
+    <span class="action_icon recalc_character"><i class="fas fa-cog"></i></span>&nbsp;&nbsp;
     {% if c.use_history_creation %}
         {% if c.balanced %}
-        <span class="action_icon histo" id="{{c.id}}_histo"><i class="golden fas fa-balance-scale"></i></span>
+        <span class="action_icon histo"><i class="golden fas fa-balance-scale"></i></span>
         {% else %}
-        <span class="action_icon histo" id="{{c.id}}_unhisto"><i class="fas fa-balance-scale-right"></i></span>
+        <span class="action_icon histo"><i class="fas fa-balance-scale-right"></i></span>
         {% endif %}
     {% endif %}
     &nbsp;&nbsp;
     {% if c.is_public %}
-        <span class='action toggle_public' id="{{c.id}}_toggle_public"><i class='golden fas fa-universal-access'></i></span>
+        <span class='action toggle_public'><i class='golden fas fa-universal-access'></i></span>
     {%else%}
-        <span class='action toggle_public' id="{{c.id}}_untoggle_public"><i class='fas fa-ban'></i></span>
+        <span class='action toggle_public'><i class='fas fa-ban'></i></span>
     {% endif %}
     &nbsp;&nbsp;
     {% if c.spotlight %}
-        <span class='action toggle_spotlight' id="{{c.id}}_toggle_spotlight"><i class='golden fas fa-lightbulb'></i></span>
+        <span class='action toggle_spotlight'"><i class='golden fas fa-lightbulb'></i></span>
     {%else%}
-        <span class='action toggle_spotlight' id="{{c.id}}_untoggle_spotlight"><i class='fas fa-lightbulb'></i></span>
+        <span class='action toggle_spotlight'"><i class='fas fa-lightbulb'></i></span>
     {% endif %}
     &nbsp;&nbsp;
   </div>
   <div class='character_info hidden'>
     {{ c.entrance|safe }}<br/>
+    {{ c.alliance|safe }}<br/>
     {% if c.fencing_league %}Proud member of the Fencing League.<br/>{%endif%}
     {{ c.challenge|safe }}
     <br/> ID:<span class='action_icon custom_show' id='{{c.id}}'>{{c.id}}</span> {{c.rid}}

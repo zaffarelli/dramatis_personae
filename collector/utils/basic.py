@@ -157,13 +157,82 @@ def extract_rules():
     worldly_benefits = TourOfDutyRef.objects.filter(category='50').order_by('-source')
     context['worldly_benefits'] = worldly_benefits
 
-    gears = Gear.objects.order_by('category','-reference','name','variant')
-    context['gears'] = gears
-
-
     template = get_template('collector/references.html')
     html = template.render(context)
     fname = 'rules.pdf'
+    filename = os.path.join(settings.MEDIA_ROOT, 'pdf/results/' + fname)
+    es_pdf = open(filename, 'wb')
+    pdf = pisa.pisaDocument(BytesIO(html.encode('utf-8')), es_pdf)
+    if not pdf.err:
+        es_pdf.close()
+    else:
+        print(pdf.err)
+    extract_equipment()
+
+
+def extract_equipment():
+    from collector.models.gear import Gear
+    from collector.models.weapon import WeaponRef
+    from collector.models.armor import ArmorRef
+    context = {}
+    import datetime
+    context['date'] = datetime.datetime.now()
+    # Categorizing gear
+    gears = Gear.objects.order_by('category','-reference','name','variant')
+    cat = ''
+    context['gears'] = []
+    current = { 'name':'', 'data':[] }
+    for g in gears:
+        if g.get_category_display() != cat:
+            if cat:
+                context['gears'].append(current)
+            current = { 'name':'', 'data':[] }
+            current['name'] = g.get_category_display()
+            current['data'] = []
+            cat = g.get_category_display()
+        current['data'].append(g)
+    if cat:
+        context['gears'].append(current)
+
+    # Weapons
+    weapons = WeaponRef.objects.filter(hidden=False).order_by('meta_type','cost')
+    cat = ''
+    context['weapons'] = []
+    current = { 'name':'', 'data':[] }
+    for w in weapons:
+        if w.meta_type != cat:
+            if cat:
+                context['weapons'].append(current)
+            current = { 'name':'', 'data':[] }
+            current['name'] = w.meta_type
+            current['data'] = []
+            cat = w.meta_type
+        current['data'].append(w)
+    if cat:
+        context['weapons'].append(current)
+
+    # Armors
+    armors = ArmorRef.objects.order_by('category','cost')
+    cat = ''
+    context['armors'] = []
+    current = { 'name':'', 'data':[] }
+    for a in armors:
+        if a.get_category_display() != cat:
+            if cat:
+                context['armors'].append(current)
+            current = { 'name':'', 'data':[] }
+            current['name'] = a.get_category_display()
+            current['data'] = []
+            cat = a.get_category_display()
+        current['data'].append(a)
+    if cat:
+        context['armors'].append(current)
+
+    # Energy Shields
+
+    template = get_template('collector/equipment.html')
+    html = template.render(context)
+    fname = 'fading_suns_shopping_guide.pdf'
     filename = os.path.join(settings.MEDIA_ROOT, 'pdf/results/' + fname)
     es_pdf = open(filename, 'wb')
     pdf = pisa.pisaDocument(BytesIO(html.encode('utf-8')), es_pdf)

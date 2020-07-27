@@ -22,19 +22,26 @@ class Jumpweb {
 
   init() {
     let me = this;
-    me.size = 40;
+    me.size = 70;
     me.width = me.size * 80;
     me.height = me.size * 60;
-    me.mj = true;
+    me.mj = false;
     me.era = (me.mj ? 0 : 5018);
     me.data = data;
     me.ox = me.width / me.size / 2;
     me.oy = me.height / me.size / 2;
-    me.step_x = me.size, //me.width / 80;
-      me.step_y = me.size, //me.width / 40;
-      me.svg = d3.select(".details").append('svg')
-      .attr("width", me.width)
-      .attr("height", me.height);
+    me.step_x = me.size,
+    me.step_y = me.size,
+    me.svg = d3.select(".details").append('div').attr("class", "jumpweb")
+      .append('svg')
+      .attr("width", me.width*1.5)
+      .attr("height", me.height*2)
+      .style("background","#101010")
+      .call(d3.zoom().on("zoom", function () {
+          me.svg.attr("transform", d3.event.transform)
+      }))
+      .append('g')
+      ;
     me.gate_stroke = "#111"
     me.gate_fill = "#666"
     me.panel_stroke = "#111"

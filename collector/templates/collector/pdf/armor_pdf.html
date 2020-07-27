@@ -1,0 +1,17 @@
+{% load fics_pdf_filters %}
+<h6>{{c.reference}}: £{{c.cost}}</h6>
+<p>
+    <u>Category:</u> {{c.get_category_display}}
+    <br><u>Tech Level:</u> {{c.tech_level}}
+    <br><u>SP:</u> {{c.stopping_power}} <u>ENC:</u> {{c.encumbrance}}
+    <br><u>Protects:</u> HE:{{c.head}} TO:{{c.torso}} WA:{{c.left_arm}} SA:{{c.right_arm}} WL:{{c.left_leg}} SL:{{c.right_leg}}
+    {% if c.origin%}
+        <br><u>Origin:</u> {{c.origin}}
+    {% endif %}
+</p>
+
+{% if c.description %}
+<p>
+    <u>Description:</u> {{c.description}}
+</p>
+{%endif%}

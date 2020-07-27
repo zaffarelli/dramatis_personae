@@ -9,7 +9,8 @@ from django.core.paginator import Paginator
 
 from collector.models.character import Character
 from collector.models.skill import Skill
-from collector.forms.basic import CharacterForm, SkillFormSet, TalentFormSet, BlessingCurseFormSet, BeneficeAfflictionFormSet, WeaponFormSet, ArmorFormSet, ShieldFormSet
+from collector.forms.basic import CharacterForm, SkillFormSet, TalentFormSet, BlessingCurseFormSet, \
+    BeneficeAfflictionFormSet, WeaponFormSet, ArmorFormSet, ShieldFormSet
 from collector.utils.basic import render_to_pdf
 from django.template.loader import get_template, render_to_string
 from django.template import RequestContext
@@ -29,10 +30,11 @@ from django.http import FileResponse, Http404
 from django.conf import settings
 from django.contrib import messages
 
-def pdf_show(request,slug):
-  try:
-    fname = 'avatar_%s.pdf'%(slug)
-    filename = os.path.join(settings.MEDIA_ROOT, 'pdf/results/' + fname)
-    return FileResponse(open(filename, 'rb'), content_type='application/pdf')
-  except FileNotFoundError:
-    raise Http404()
+
+def pdf_show(request, slug):
+    try:
+        fname = 'avatar_%s.pdf' % (slug)
+        filename = os.path.join(settings.MEDIA_ROOT, 'pdf/results/' + fname)
+        return FileResponse(open(filename, 'rb'), content_type='application/pdf')
+    except FileNotFoundError:
+        raise Http404()

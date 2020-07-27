@@ -1,0 +1,35 @@
+{% load fics_pdf_filters %}
+<h6>{{c.reference}}: £{{c.cost}}</h6>
+<p>
+    {{c.category}} *
+{% if c.category|is_melee %}
+    WA:{{c.weapon_accuracy}} *
+    DC:{{c.damage_class}} *
+    STR:{{c.str_min}} *
+    RNG:{{c.rng}} *
+    Rel:{{c.rel}}
+{%else%}
+    WA:{{c.weapon_accuracy}} *
+    DC:{{c.damage_class}} *
+    Cal:{{c.caliber}} *
+    Clip:{{c.clip}} *
+    STR:{{c.str_min}} *
+    RNG:{{c.rng}} *
+    RoF:{{c.rof}} *
+    Rel:{{c.rel}}
+{%endif%}
+    <br><u>Category:</u> {{c.get_category_display}}
+    <br><u>Tech Level:</u> {{c.tech_level}}
+    <br><u>Availability:</u> {{c.get_availability_display}}
+    <br><u>Conceilable:</u> {{c.get_conceilable_display}}
+    <br><u>Reliability:</u> {{c.get_rel_display}}
+    {% if c.origin%}
+        <br><u>Origin:</u> {{c.origin}}
+    {% endif %}
+</p>
+
+{% if c.description %}
+<p>
+    <u>Description:</u> {{c.description}}
+</p>
+{%endif%}

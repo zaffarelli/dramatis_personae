@@ -12,56 +12,68 @@ from collector.models.character_custo import CharacterCusto
 
 
 class BlessingCurseRef(models.Model):
-  class Meta:
-    ordering = ['reference']
-    verbose_name = "References: Blessing/Curse"
-  reference = models.CharField(max_length=64,default='',blank=True)
-  value = models.IntegerField(default=0)
-  description = models.TextField(max_length=256,default='',blank=True)
-  source = models.CharField(max_length=32, default='FS2CRB', null=True, blank=True)
-  def __str__(self):
-    return '%s (%+d)' % (self.reference,self.value)
+    class Meta:
+        ordering = ['reference']
+        verbose_name = "References: Blessing/Curse"
+
+    reference = models.CharField(max_length=64, default='', blank=True)
+    value = models.IntegerField(default=0)
+    description = models.TextField(max_length=256, default='', blank=True)
+    source = models.CharField(max_length=32, default='FS2CRB', null=True, blank=True)
+
+    def __str__(self):
+        return '%s (%+d)' % (self.reference, self.value)
+
 
 class BlessingCurse(models.Model):
-  class Meta:
-    ordering = ['character','blessing_curse_ref']
-  character = models.ForeignKey(Character, on_delete=models.CASCADE)
-  blessing_curse_ref = models.ForeignKey(BlessingCurseRef, on_delete=models.CASCADE)
-  def __str__(self):
-    return '%s (%s)' % (self.character.full_name,self.blessing_curse_ref.reference)
+    class Meta:
+        ordering = ['character', 'blessing_curse_ref']
+
+    character = models.ForeignKey(Character, on_delete=models.CASCADE)
+    blessing_curse_ref = models.ForeignKey(BlessingCurseRef, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return '%s (%s)' % (self.character.full_name, self.blessing_curse_ref.reference)
+
 
 class BlessingCurseCusto(models.Model):
-  class Meta:
-    ordering = ['character_custo','blessing_curse_ref']
-  character_custo = models.ForeignKey(CharacterCusto, on_delete=models.CASCADE)
-  blessing_curse_ref = models.ForeignKey(BlessingCurseRef, on_delete=models.CASCADE)
+    class Meta:
+        ordering = ['character_custo', 'blessing_curse_ref']
+
+    character_custo = models.ForeignKey(CharacterCusto, on_delete=models.CASCADE)
+    blessing_curse_ref = models.ForeignKey(BlessingCurseRef, on_delete=models.CASCADE)
 
 
 class BlessingCurseModificator(models.Model):
-  class Meta:
-    ordering = ['tour_of_duty_ref','blessing_curse_ref']
-  from collector.models.tourofduty import TourOfDutyRef
-  tour_of_duty_ref = models.ForeignKey(TourOfDutyRef, on_delete=models.CASCADE)
-  blessing_curse_ref = models.ForeignKey(BlessingCurseRef, on_delete=models.CASCADE)
-  def __str__(self):
-    return '%s (%s)' % (self.tour_of_duty_ref.reference,self.blessing_curse_ref.reference)
+    class Meta:
+        ordering = ['tour_of_duty_ref', 'blessing_curse_ref']
+
+    from collector.models.tourofduty import TourOfDutyRef
+    tour_of_duty_ref = models.ForeignKey(TourOfDutyRef, on_delete=models.CASCADE)
+    blessing_curse_ref = models.ForeignKey(BlessingCurseRef, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return '%s (%s)' % (self.tour_of_duty_ref.reference, self.blessing_curse_ref.reference)
 
 
 # Inlines
 class BlessingCurseModificatorInline(admin.TabularInline):
-  model = BlessingCurseModificator
+    model = BlessingCurseModificator
 
 
 class BlessingCurseInline(admin.TabularInline):
-  model = BlessingCurse
+    model = BlessingCurse
+
 
 class BlessingCurseCustoInline(admin.TabularInline):
-  model = BlessingCurseCusto
+    model = BlessingCurseCusto
+
 
 # Admin
 class BlessingCurseRefAdmin(admin.ModelAdmin):
-  ordering = ('reference',)
-  search_fields = ('reference','description')
+    ordering = ('reference',)
+    search_fields = ('reference', 'description')
+
 
 class BlessingCurseModificatorAdmin(admin.ModelAdmin):
-  ordering = ('blessing_curse_ref',)
+    ordering = ('blessing_curse_ref',)

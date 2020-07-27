@@ -1,13 +1,22 @@
 {% load fics_pdf_filters %}
 <h6>{{c.name}}: {{c.variant}}</h6>
-Availability: {{c.get_availability_display}} / {{c.get_magna_carta_entry_display}}
-<br>Category: {{c.get_category_display}}
-<br>Reference: {{c.get_reference_display }}
-<br>Quality: {{c.get_quality_display}}
-<br>£{{c.price}} per {{c.quantity}} {{c.get_unit_display}}
-<br>Price: FB:{{c.firebird_price}} CR:{{c.crest_price}} WG:{{c.wing_price}} TA:{{c.talon_price}}
-
-
+<p>
+  <b>
+  {%if c.firebird_price%}£{{c.firebird_price}} {%endif%}
+  {%if c.crest_price%}{{c.crest_price}} crest(s) {%endif%}
+  {%if c.wing_price%}{{c.wing_price}} wing(s) {%endif%}
+  {%if c.talon_price%}{{c.talon_price}} talon(s) {%endif%}
+  per {{c.quantity}} {{c.get_unit_display}}
+  </b> (£{{c.price}})
+<br><u>Availability:</u> {{c.get_availability_display}} / {{c.get_magna_carta_entry_display}}
+<br><u>Reference:</u> {{c.get_reference_display }}
+<br><u>Quality:</u> {{c.get_quality_display}}
+{% if c.origin%}
+<br><u>Origin:</u> {{c.origin}}
+{% endif %}
+<br><u>Tech Level:</u> {{c.tech_level}}
+</p>
+{% if c.description %}
 <p>
   <u>Description:</u> {{c.description}}
 </p>

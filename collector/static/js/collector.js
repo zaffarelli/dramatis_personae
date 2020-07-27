@@ -228,11 +228,12 @@ function rebootlinks() {
   $('.toggle_public').off().on('click', function(event) {
     event.preventDefault();
     let dad = $(this).parents('li');
+    let x = $(this).parents('div').attr("id").split("_")[1];
     let dad_id = $(dad).attr("id");
     $("li#" + dad_id + " .character_info").removeClass('hidden');
     $("li#" + dad_id + " .avatar_link").css('border-color', 'red');
     $.ajax({
-      url: 'toggle/' + $(this).attr("id") + '/public',
+      url: 'toggle/' + x + '/public',
       success: function(answer) {
         console.log(answer)
         $('li#' + dad_id).html(answer.avatar_link);
@@ -247,11 +248,13 @@ function rebootlinks() {
   $('.toggle_spotlight').off().on('click', function(event) {
     event.preventDefault();
     let dad = $(this).parents('li');
+    let x = $(this).parents('div').attr("id").split("_")[1];
     let dad_id = $(dad).attr("id");
     $("li#" + dad_id + " .character_info").removeClass('hidden');
     $("li#" + dad_id + " .avatar_link").css('border-color', 'red');
+    console.log(x);
     $.ajax({
-      url: 'toggle/' + $(this).attr("id") + '/spotlight',
+      url: 'toggle/' + x + '/spotlight',
       success: function(answer) {
         console.log(answer)
         $('li#' + dad_id).html(answer.avatar_link);
@@ -390,17 +393,18 @@ function rebootlinks() {
     event.preventDefault();
     event.stopPropagation();
     let dad = $(this).parents('li');
+    let x = $(this).parents('div').attr("id").split("_")[1];
     let dad_id = $(dad).attr("id");
-    let that_id = $(this).attr('id').split("_")[0];
+    //let that_id = $(this).attr('id').split("_")[0];
     $("li#" + dad_id + " .character_info").removeClass('hidden');
     $.ajax({
-      url: 'ajax/recalc/character/' + that_id + '/',
+      url: 'ajax/recalc/character/' + x + '/',
       success: function(answer) {
         $('.details').html(answer.character);
         $('li#' + answer.rid).html(answer.link);
 
         $('#customizer').html(answer.mobile_form);
-        ac.reset(answer.id, "sheet_" + answer.id, "customizer");
+        ac.reset(x, "sheet_" + x, "customizer");
         $("li#" + dad_id + " .character_name").click();
         rebootlinks();
         update_messenger();
@@ -416,15 +420,17 @@ function rebootlinks() {
     event.stopPropagation();
     let dad = $(this).parents('li');
     let dad_id = $(dad).attr("id");
-    let that_id = $(this).attr('id').split("_")[0];
+    let x = $(this).parents('div').attr("id").split("_")[1];
+    console.log(x);
+    //let that_id = $(this).attr('id').split("_")[0];
     $("li#" + dad_id + " .character_info").removeClass('hidden');
     $.ajax({
-      url: 'characters/' + that_id + '/edit/',
+      url: 'characters/' + x + '/edit/',
       success: function(answer) {
         $('.details').html(answer);
         $('li#' + answer.rid).html(answer.link);
         rebootlinks();
-        ac.reset(answer.id, "sheet_" + answer.id, "customizer");
+        ac.reset(x, "sheet_" + x, "customizer");
         $("li#" + dad_id + " .character_name").click();
         update_messenger();
       },

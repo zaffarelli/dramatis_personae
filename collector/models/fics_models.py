@@ -6,6 +6,8 @@
 from django.db import models
 from django.contrib import admin
 import json
+
+
 #
 # class Role(models.Model):
 #   class Meta:
@@ -48,46 +50,56 @@ import json
 #     return json.loads(self.favorites)
 
 class Specie(models.Model):
-  class Meta:
-    ordering = ['species','race']
-    unique_together = (('species', 'race'),)
-    verbose_name = "References: Specie"
-  species = models.CharField(max_length=64,default=1,blank=True)
-  race = models.CharField(max_length=64,default='',blank=True)
-  racial_attr_mod = models.CharField(max_length=128, default = '{}')
-  racial_skills = models.CharField(max_length=512, default = '{}')
-  racial_occult = models.CharField(max_length=128, default = '{}')
-  attr_mod_balance = models.IntegerField(default=0)
-  skill_balance = models.IntegerField(default=0)
-  description = models.TextField(max_length=512, default='',blank=True)
-  def __str__(self):
-    return '%s %s'%(self.species,self.race)
-  def set_racial_skills(self,data):
-    self.racial_skills = json.dumps(data)
-  def get_racial_skills(self):
-    return json.loads(self.racial_skills)
-  def set_racial_attr_mod(self,data):
-    self.racial_attr_mod = json.dumps(data)
-  def get_racial_attr_mod(self):
-    return json.loads(self.racial_attr_mod)
-  def update_balance(self):
-    attr_mods = self.get_racial_attr_mod()
-    b = 0
-    for am in attr_mods:
-      b += attr_mods[am]
-    self.attr_mod_balance = b
-    #print('PA --> %s:%d'%(self,b))
-    skills_mods = self.get_racial_skills()
-    b = 0
-    for sm in skills_mods:
-      b += skills_mods[sm]
-    self.skill_balance = b
-    #print('Skill --> %s:%d'%(self,b))
-    self.save()
+    class Meta:
+        ordering = ['species', 'race']
+        unique_together = (('species', 'race'),)
+        verbose_name = "References: Specie"
+
+    species = models.CharField(max_length=64, default=1, blank=True)
+    race = models.CharField(max_length=64, default='', blank=True)
+    racial_attr_mod = models.CharField(max_length=128, default='{}')
+    racial_skills = models.CharField(max_length=512, default='{}')
+    racial_occult = models.CharField(max_length=128, default='{}')
+    attr_mod_balance = models.IntegerField(default=0)
+    skill_balance = models.IntegerField(default=0)
+    description = models.TextField(max_length=512, default='', blank=True)
+
+    def __str__(self):
+        return '%s %s' % (self.species, self.race)
+
+    def set_racial_skills(self, data):
+        self.racial_skills = json.dumps(data)
+
+    def get_racial_skills(self):
+        return json.loads(self.racial_skills)
+
+    def set_racial_attr_mod(self, data):
+        self.racial_attr_mod = json.dumps(data)
+
+    def get_racial_attr_mod(self):
+        return json.loads(self.racial_attr_mod)
+
+    def update_balance(self):
+        attr_mods = self.get_racial_attr_mod()
+        b = 0
+        for am in attr_mods:
+            b += attr_mods[am]
+        self.attr_mod_balance = b
+        # print('PA --> %s:%d'%(self,b))
+        skills_mods = self.get_racial_skills()
+        b = 0
+        for sm in skills_mods:
+            b += skills_mods[sm]
+        self.skill_balance = b
+        # print('Skill --> %s:%d'%(self,b))
+        self.save()
+
 
 class SpecieAdmin(admin.ModelAdmin):
-  ordering = ('species','race')
-  list_display = ('species','race','racial_attr_mod','attr_mod_balance','racial_skills','skill_balance','description','racial_occult')
+    ordering = ('species', 'race')
+    list_display = (
+    'species', 'race', 'racial_attr_mod', 'attr_mod_balance', 'racial_skills', 'skill_balance', 'description',
+    'racial_occult')
 
 #
 # class RoleAdmin(admin.ModelAdmin):
