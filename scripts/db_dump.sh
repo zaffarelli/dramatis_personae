@@ -12,13 +12,7 @@ python3 manage.py dumpdata collector.ArmorRef --format xml --output backup/refer
 python3 manage.py dumpdata collector.ShieldRef --format xml --output backup/reference/shield_ref.xml
 python3 manage.py dumpdata collector.TalentRef --format xml --output backup/reference/talent_ref.xml
 python3 manage.py dumpdata collector.Specie --format xml --output backup/reference/specie.xml
-
-
-python3 manage.py dumpdata collector.Cyberfeature --format xml --output backup/reference/cyberfeature.xml
-python3 manage.py dumpdata collector.CyberwareRef --format xml --output backup/reference/cyberwareref.xml
-
 python3 manage.py dumpdata collector.RitualRef --format xml --output backup/reference/ritualref.xml
-
 
 echo -e "\e[1;35mDumping custom data...\e[0;m"
 echo -e "\e[0;35m- Tours of Duty Reference...\e[0;m"
@@ -28,6 +22,10 @@ python3 manage.py dumpdata collector.BlessingCurseModificator --format xml --out
 python3 manage.py dumpdata collector.BeneficeAfflictionModificator --format xml --output backup/reference/benefice_affliction_modificator.xml
 python3 manage.py dumpdata collector.SkillModificator --format xml --output backup/reference/skill_modificator.xml
 python3 manage.py dumpdata collector.TourOfDutyRef --format xml --output backup/reference/tour_of_duty_ref.xml
+
+python3 manage.py dumpdata collector.ShipSystem --format xml --output backup/custom/ship_system.xml
+python3 manage.py dumpdata collector.ShipSection --format xml --output backup/custom/ship_section.xml
+python3 manage.py dumpdata collector.ShipRef --format xml --output backup/custom/ship_ref.xml
 
 echo -e "\e[0;35m- Main data...\e[0;m"
 python3 manage.py dumpdata collector.Skill --format xml --output backup/custom/skill.xml
@@ -52,7 +50,13 @@ echo -e "\e[0;35m- Collector Main Data...\e[0;m"
 python3 manage.py dumpdata collector.Character --format xml --output backup/custom/character.xml
 python3 manage.py dumpdata collector.Loot --format xml --output backup/custom/loot.xml
 python3 manage.py dumpdata collector.System --format xml --output backup/custom/system.xml
-python3 manage.py dumpdata collector.Spacecraft --format xml --output backup/custom/spacecraft.xml
+python3 manage.py dumpdata collector.OrbitalItem --format xml --output backup/custom/orbital_item.xml
+
+python3 manage.py dumpdata collector.Spaceship --format xml --output backup/custom/spaceship.xml
+python3 manage.py dumpdata collector.Cyberfeature --format xml --output backup/custom/cyberfeature.xml
+python3 manage.py dumpdata collector.CyberwareRef --format xml --output backup/custom/cyberware_ref.xml
+python3 manage.py dumpdata collector.Cyberware --format xml --output backup/custom/cyberware.xml
+
 
 echo -e "\e[0;35m- Scenarist Main Data...\e[0;m"
 python3 manage.py dumpdata scenarist.Epic --format xml --output backup/custom/epic.xml

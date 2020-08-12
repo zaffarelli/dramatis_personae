@@ -146,4 +146,181 @@ Place an auction: PRE+Oratory against the response DV to get the voice.
 
 
 
----</field><field name="gamemaster" type="CharField">zaffarelli@gmail.com</field><field name="visible" type="BooleanField">False</field><field name="to_PDF" type="BooleanField">True</field><field name="drama" rel="ManyToOneRel" to="scenarist.drama">7</field><field name="resolution" type="TextField"></field></object></django-objects>
+---</field><field name="gamemaster" type="CharField">zaffarelli@gmail.com</field><field name="visible" type="BooleanField">False</field><field name="to_PDF" type="BooleanField">True</field><field name="drama" rel="ManyToOneRel" to="scenarist.drama">7</field><field name="resolution" type="TextField"></field></object><object model="scenarist.act" pk="23"><field name="title" type="CharField">Al raa'ad yiildiz</field><field name="chapter" type="CharField">3</field><field name="date" type="CharField"></field><field name="place" type="CharField"></field><field name="description" type="TextField">µBad Guysµ The Kurgan al raa'ad yiildiz are the elite troops based on Verona.
+Commander ¤taashik_al_kalibann¤ is an honorable officer. Highly respected by his men and ennemies alike.
+Prophetess ¤zarosinia_al_shazaar¤
+
+µHeroes from the Resistanceµ- Capitano ¤lorenzo_carucci¤
+- Capitano ¤juliana_zino¤
+- Capitano ¤tonino_vanini¤
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---
+
+
+
+
+
+
+---</field><field name="gamemaster" type="CharField">zaffarelli@gmail.com</field><field name="visible" type="BooleanField">True</field><field name="to_PDF" type="BooleanField">True</field><field name="drama" rel="ManyToOneRel" to="scenarist.drama">11</field><field name="resolution" type="TextField"></field></object><object model="scenarist.act" pk="24"><field name="title" type="CharField">Lurk on Rimpoche</field><field name="chapter" type="CharField">3</field><field name="date" type="CharField"></field><field name="place" type="CharField"></field><field name="description" type="TextField">§The Last Masseri§
+- ¤arno_sforza¤
+- ¤kristof_ivanovicz¤
+
+
+
+
+
+
+
+
+
+
+
+
+----</field><field name="gamemaster" type="CharField">zaffarelli@gmail.com</field><field name="visible" type="BooleanField">True</field><field name="to_PDF" type="BooleanField">True</field><field name="drama" rel="ManyToOneRel" to="scenarist.drama">10</field><field name="resolution" type="TextField">¤romeric_juandaastas¤</field></object><object model="scenarist.act" pk="25"><field name="title" type="CharField">Imperial Mandat</field><field name="chapter" type="CharField">2</field><field name="date" type="CharField"></field><field name="place" type="CharField"></field><field name="description" type="TextField">µOther Protagonistsµ- ¤leona_sterling_hawkwood¤ (IQK)
+- ¤leester_stenton¤ (Imperial Cohort)
+- ¤gail_hardin¤ (Imperial Cohort)
+
+
+- ¤magnus_isaac¤
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---</field><field name="gamemaster" type="CharField">zaffarelli@gmail.com</field><field name="visible" type="BooleanField">True</field><field name="to_PDF" type="BooleanField">True</field><field name="drama" rel="ManyToOneRel" to="scenarist.drama">10</field><field name="resolution" type="TextField"></field></object><object model="scenarist.act" pk="26"><field name="title" type="CharField">Night Road</field><field name="chapter" type="CharField">4</field><field name="date" type="CharField">5018-09-01</field><field name="place" type="CharField">Around Grail Jumpgate</field><field name="description" type="TextField">µNew horizonsµ Now it's time to test the §jumpkey§ the players have acquired.
+
+
+¤saskia_varnovicz¤
+
+
+
+
+
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---</field><field name="gamemaster" type="CharField">zaffarelli@gmail.com</field><field name="visible" type="BooleanField">True</field><field name="to_PDF" type="BooleanField">True</field><field name="drama" rel="ManyToOneRel" to="scenarist.drama">10</field><field name="resolution" type="TextField"></field></object><object model="scenarist.act" pk="27"><field name="title" type="CharField">Verona Space</field><field name="chapter" type="CharField">1</field><field name="date" type="CharField"></field><field name="place" type="CharField"></field><field name="description" type="TextField"></field><field name="gamemaster" type="CharField">zaffarelli@gmail.com</field><field name="visible" type="BooleanField">True</field><field name="to_PDF" type="BooleanField">True</field><field name="drama" rel="ManyToOneRel" to="scenarist.drama">11</field><field name="resolution" type="TextField"></field></object><object model="scenarist.act" pk="28"><field name="title" type="CharField">Emptiness &amp; Loneliness</field><field name="chapter" type="CharField">4</field><field name="date" type="CharField"></field><field name="place" type="CharField"></field><field name="description" type="TextField">µWorld without WaterµThis episode is the discovery of Verona in its current state, with the dysfunctioning terraforming engine.
+µJoin the Resistanceµ
+µThe Kurgan Armyµ
+
+
+
+
+----
+
+
+
+
+
+
+
+
+
+
+
+---</field><field name="gamemaster" type="CharField">zaffarelli@gmail.com</field><field name="visible" type="BooleanField">True</field><field name="to_PDF" type="BooleanField">True</field><field name="drama" rel="ManyToOneRel" to="scenarist.drama">11</field><field name="resolution" type="TextField"></field></object><object model="scenarist.act" pk="29"><field name="title" type="CharField">Crack Pilot</field><field name="chapter" type="CharField">2</field><field name="date" type="CharField"></field><field name="place" type="CharField"></field><field name="description" type="TextField"></field><field name="gamemaster" type="CharField">zaffarelli@gmail.com</field><field name="visible" type="BooleanField">True</field><field name="to_PDF" type="BooleanField">True</field><field name="drama" rel="ManyToOneRel" to="scenarist.drama">11</field><field name="resolution" type="TextField"></field></object><object model="scenarist.act" pk="30"><field name="title" type="CharField">Expanding the Colony</field><field name="chapter" type="CharField">2</field><field name="date" type="CharField"></field><field name="place" type="CharField"></field><field name="description" type="TextField"></field><field name="gamemaster" type="CharField">zaffarelli@gmail.com</field><field name="visible" type="BooleanField">True</field><field name="to_PDF" type="BooleanField">True</field><field name="drama" rel="ManyToOneRel" to="scenarist.drama">12</field><field name="resolution" type="TextField"></field></object><object model="scenarist.act" pk="31"><field name="title" type="CharField">Another Keddah Fief</field><field name="chapter" type="CharField">1</field><field name="date" type="CharField"></field><field name="place" type="CharField">Rimpoche</field><field name="description" type="TextField">§Keddah Men§
+- ¤jasmina_keddah¤: The sheik cousin is in charge for everything Rimpoche.
+- ¤ezil_solomniac¤: This eskatonic priest is responsible for the well being and behavior of the outpost.
+- ¤mohammad_kuhnar¤: This serf has made a mission to track all changes concerning the position of the Beast of Rimpoche.
+- ¤egon_storken¤: Captain of the Keddah troops, he has about 40 men under his command.
+- ¤rimpoche_keddah_soldiers¤: Those are better soldier than the ones found usually on Grail.
+
+
+§Imperial Forces§
+- ¤timon_skaard¤: Lord-commander of the outpost
+- ¤lucius_gazarel¤: Representative of the Charioteers
+- ¤moira_mckean¤: Assistant of lucius, she's an excellent pilot.
+- ¤imperial_troopers¤: The standard forces for colonial settlements. About 30 soldiers control the imperial outpost.
+
+
+
+
+
+
+
+
+
+
+
+
+
+---</field><field name="gamemaster" type="CharField">zaffarelli@gmail.com</field><field name="visible" type="BooleanField">True</field><field name="to_PDF" type="BooleanField">True</field><field name="drama" rel="ManyToOneRel" to="scenarist.drama">12</field><field name="resolution" type="TextField">The trick here is to avoid getting to close to the charioteers, because of the key the players have. Gazarel is an intelligent and open-minded man most of the time. 
+
+But his second, the treacherous McKean will do everything in her power to satisfy the vengeful and power hungry Killroy leaders of Grail.
+
+
+
+
+
+
+
+
+---</field></object><object model="scenarist.act" pk="32"><field name="title" type="CharField">Uncharted</field><field name="chapter" type="CharField">1</field><field name="date" type="CharField"></field><field name="place" type="CharField"></field><field name="description" type="TextField">---</field><field name="gamemaster" type="CharField">zaffarelli@gmail.com</field><field name="visible" type="BooleanField">True</field><field name="to_PDF" type="BooleanField">True</field><field name="drama" rel="ManyToOneRel" to="scenarist.drama">10</field><field name="resolution" type="TextField"></field></object></django-objects>

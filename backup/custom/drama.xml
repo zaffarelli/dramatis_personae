@@ -17,4 +17,86 @@ An alliance is possible if they properly understand the motives of these peculia
 
 
 
-...</field><field name="gamemaster" type="CharField">zaffarelli@gmail.com</field><field name="visible" type="BooleanField">True</field><field name="to_PDF" type="BooleanField">True</field><field name="epic" rel="ManyToOneRel" to="scenarist.epic">7</field><field name="resolution" type="TextField"></field></object><object model="scenarist.drama" pk="8"><field name="title" type="CharField">Blood Ice</field><field name="chapter" type="CharField">9</field><field name="date" type="CharField">LIRA-5018-06</field><field name="place" type="CharField">Rampart</field><field name="description" type="TextField">Kurgan at the gates of the Empire !!</field><field name="gamemaster" type="CharField">zaffarelli@gmail.com</field><field name="visible" type="BooleanField">True</field><field name="to_PDF" type="BooleanField">True</field><field name="epic" rel="ManyToOneRel" to="scenarist.epic">7</field><field name="resolution" type="TextField"></field></object><object model="scenarist.drama" pk="9"><field name="title" type="CharField">Land of the Fathers</field><field name="chapter" type="CharField">6</field><field name="date" type="CharField">LiRA 5018-04</field><field name="place" type="CharField">Rampart / Veneto / Miret &amp; Rampart / Royale Province / Avaneir</field><field name="description" type="TextField">This adventure starts in Miret, in the Veneto Province, on Rampart (Garden Worlds). The date is LiRA 5017, close to Lux Splendor festival, and the adventurers are recovering after the last events that have changed the policical scene of the city.</field><field name="gamemaster" type="CharField">zaffarelli@gmail.com</field><field name="visible" type="BooleanField">False</field><field name="to_PDF" type="BooleanField">False</field><field name="epic" rel="ManyToOneRel" to="scenarist.epic">7</field><field name="resolution" type="TextField"></field></object></django-objects>
+...</field><field name="gamemaster" type="CharField">zaffarelli@gmail.com</field><field name="visible" type="BooleanField">True</field><field name="to_PDF" type="BooleanField">True</field><field name="epic" rel="ManyToOneRel" to="scenarist.epic">7</field><field name="resolution" type="TextField"></field></object><object model="scenarist.drama" pk="8"><field name="title" type="CharField">Blood Ice</field><field name="chapter" type="CharField">9</field><field name="date" type="CharField">LIRA-5018-06</field><field name="place" type="CharField">Rampart</field><field name="description" type="TextField">Kurgan at the gates of the Empire !!</field><field name="gamemaster" type="CharField">zaffarelli@gmail.com</field><field name="visible" type="BooleanField">True</field><field name="to_PDF" type="BooleanField">True</field><field name="epic" rel="ManyToOneRel" to="scenarist.epic">7</field><field name="resolution" type="TextField"></field></object><object model="scenarist.drama" pk="9"><field name="title" type="CharField">Land of the Fathers</field><field name="chapter" type="CharField">6</field><field name="date" type="CharField">LiRA 5018-04</field><field name="place" type="CharField">Rampart / Veneto / Miret &amp; Rampart / Royale Province / Avaneir</field><field name="description" type="TextField">This adventure starts in Miret, in the Veneto Province, on Rampart (Garden Worlds). The date is LiRA 5017, close to Lux Splendor festival, and the adventurers are recovering after the last events that have changed the policical scene of the city.</field><field name="gamemaster" type="CharField">zaffarelli@gmail.com</field><field name="visible" type="BooleanField">False</field><field name="to_PDF" type="BooleanField">False</field><field name="epic" rel="ManyToOneRel" to="scenarist.epic">7</field><field name="resolution" type="TextField"></field></object><object model="scenarist.drama" pk="10"><field name="title" type="CharField">Grail</field><field name="chapter" type="CharField">1</field><field name="date" type="CharField"></field><field name="place" type="CharField">Grail / Sangreal</field><field name="description" type="TextField">µGathering of the Masseriµ The first objective is to find ¤arno_sforza¤. ¤nina_masseri¤ is actually on his tracks, but has difficulties approaching her wild parent.
+µPirate Activitiesµ At the entrance of the system squat an imperial squadron lead by the ^Vanguard^ galliot. It guards the jumpgate of pirate incursions, going in and out, knowing that a few ships (2 li halan escorters and a hawkwood frigate have made it in a few days ago).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---</field><field name="gamemaster" type="CharField">zaffarelli@gmail.com</field><field name="visible" type="BooleanField">True</field><field name="to_PDF" type="BooleanField">True</field><field name="epic" rel="ManyToOneRel" to="scenarist.epic">3</field><field name="resolution" type="TextField">µAntagonistsµ - ¤kristof_ivanovicz¤ the angry Decados
+- ¤kiera_kursovna¤ the passive/agressive lover
+- ¤markam_vornicz¤ the challenger
+µThe Imperial Forces at the gateµ - ^Vanguard^
+- ^Emerald^
+- ^Ruby^
+And searching in the system: 
+- ^Mercy^
+
+
+
+
+
+---</field></object><object model="scenarist.drama" pk="11"><field name="title" type="CharField">Lost World: Verona</field><field name="chapter" type="CharField">3</field><field name="date" type="CharField"></field><field name="place" type="CharField"></field><field name="description" type="TextField">µIn The Hands of House Masseriµ The Masseri arrived on Verona from Grail in 2715 AD
+µThe Ukar Fraud (3305 AD)µ
+µClockwork: Third World (3834 AD)µ
+µShelter from the Storm (3917 AD)µ
+µPerpetual Lock Down (4133 AD)µ
+µLast fief of the House (4974 AD)µ
+µEnnemy at the Gate (4998 AD)µ
+µAssault (5000 AD)µ Kurgans manage to go through the gate once more thanks to the treason of ¤giaccomo_kellerman¤.
+µBreaking the cog (5004 AD)µ 
+In 5004 AD, an incident happened on Verona terraforming engine. The failure caused all water to be removed from the low atmosphere, creating in the same move the deep thick steam cloak  that now surrounds §Verona§ and make it look like a tiny gas giant from a distance.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---</field><field name="gamemaster" type="CharField">zaffarelli@gmail.com</field><field name="visible" type="BooleanField">True</field><field name="to_PDF" type="BooleanField">True</field><field name="epic" rel="ManyToOneRel" to="scenarist.epic">3</field><field name="resolution" type="TextField"></field></object><object model="scenarist.drama" pk="12"><field name="title" type="CharField">Lost World: Rimpoche</field><field name="chapter" type="CharField">2</field><field name="date" type="CharField"></field><field name="place" type="CharField">Rimpoche System</field><field name="description" type="TextField">The discovery of Rimpoche is something unespected as only six keys exist in the Empire (and beyond probably). Only a few people actually live on the system.
+
+
+
+
+
+
+
+
+
+---</field><field name="gamemaster" type="CharField">zaffarelli@gmail.com</field><field name="visible" type="BooleanField">True</field><field name="to_PDF" type="BooleanField">True</field><field name="epic" rel="ManyToOneRel" to="scenarist.epic">3</field><field name="resolution" type="TextField"></field></object></django-objects>

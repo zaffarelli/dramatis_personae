@@ -154,3 +154,7 @@ def as_specialty(value):
 @register.filter(name='is_melee')
 def is_melee(value):
     return value == 'MELEE'
+
+@register.filter(name='six_digit')
+def six_digit(value):
+    return "%06d" % value

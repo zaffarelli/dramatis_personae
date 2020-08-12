@@ -100,7 +100,7 @@ class Character(Combattant):
     use_history_creation = models.BooleanField(default=False)
     use_only_entrance = models.BooleanField(default=False)
     epic = models.ForeignKey(Epic, null=True, blank=True, on_delete=models.SET_NULL)
-    picture = models.CharField(max_length=512, blank=True,
+    picture = models.CharField(max_length=1024, blank=True,
                                default='https://drive.google.com/open?id=15hdubdMt1t_deSXkbg9dsAjWi5tZwMU0')
     alliance_picture = models.CharField(max_length=256, blank=True, default='')
     onsave_reroll_attributes = models.BooleanField(default=False)
@@ -379,12 +379,12 @@ class Character(Combattant):
 
     def refresh_options(self, options, options_not, custo_set, ref_type, refclass):
         """ Refresh options / options_not global engine """
-        # from collector.models.weapon import WeaponRef
-        # from collector.models.shield import ShieldRef
-        # from collector.models.armor import ArmorRef
-        # from collector.models.benefice_affliction import BeneficeAfflictionRef
-        # from collector.models.blessing_curse import BlessingCurseRef
-        # from collector.models.ritual import RitualRef
+        from collector.models.weapon import WeaponRef
+        from collector.models.shield import ShieldRef
+        from collector.models.armor import ArmorRef
+        from collector.models.benefice_affliction import BeneficeAfflictionRef
+        from collector.models.blessing_curse import BlessingCurseRef
+        from collector.models.ritual import RitualRef
         o = []
         o_n = []
         custo_items = custo_set
@@ -694,12 +694,24 @@ class Character(Combattant):
     def get_rid(self, s):
         self.rid = fs_fics7.find_rid(s)
 
+    @property
+    def na_phy(self):
+        return round((self.PA_STR + self.PA_CON + self.PA_BOD + self.PA_MOV) / 4)
+
+    @property
+    def na_men(self):
+        return round((self.PA_INT + self.PA_WIL + self.PA_TEM + self.PA_PRE) / 4)
+
+    @property
+    def na_com(self):
+        return round((self.PA_TEC + self.PA_AGI + self.PA_REF + self.PA_AWA) / 4)
+
     # Auto build character
-    # def autobuild(self):
-    #     # if self.role.value == 0 and not self.profile:
-    #     #     return False
-    #     # else:
-    #     return True
+    def autobuild(self):
+        # if self.role.value == 0 and not self.profile:
+        #     return False
+        # else:
+        return True
 
 
 @receiver(pre_save, sender=Character, dispatch_uid='update_character')

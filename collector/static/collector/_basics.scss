@@ -1,8 +1,3 @@
-/*
- ╔╦╗╔═╗  ╔═╗┌─┐┬  ┬  ┌─┐┌─┐┌┬┐┌─┐┬─┐
-  ║║╠═╝  ║  │ ││  │  ├┤ │   │ │ │├┬┘
- ═╩╝╩    ╚═╝└─┘┴─┘┴─┘└─┘└─┘ ┴ └─┘┴└─
-*/
 $fics_back: #303230;
 $fics_lighter: lighten($fics_back, 20%);
 $fics_light: lighten($fics_back, 10%);
@@ -607,6 +602,10 @@ body {
             display: block;
             font-family: 'Texte';
 
+            & .drama_wrap{
+                border:3px solid $fics_darkest;
+                margin:2px;
+            }
             & .title {
                 padding: 0;
                 margin-bottom: 2px;
@@ -619,35 +618,45 @@ body {
                     margin: 0;
                     border: 1px solid transparent;
                     width: 50px;
-                    color: $fics_front;
-                    text-align: right;
-                    font-family: NomPersoListe;
-
+                    color: $fics_frontest;
+                    text-align: center;
+                    font-family: NomPerso;
+                    font-size: 1.1em;
                     &.big {
                         font-weight: bold;
-                        font-size: 1.2em;
+                        font-size: 1.3em;
                         /*color: $fics_golden;*//*background: $fics_darkest;*/
                     }
                 }
 
                 & h1 {
                     font-height: 15px;
-                    text-align: center;
+                    text-align: left;
+                    font-family: NomPerso;
+                    font-weight: 800;
+                    color: $fics_frontest;
                 }
 
                 & h2 {
                     font-height: 14px;
-                    text-align: center;
+                    text-align: left;
+                    font-family: NomPerso;
+                    font-weight: bold;
+                    color: $fics_fronter;
+                    text-indent:20px;
                 }
 
                 & h3 {
                     font-height: 13px;
-                    text-align: center;
+                    text-align: left;
+                    text-decoration: underline;
+                    text-indent:30px;
                 }
 
                 & h4 {
                     font-height: 12px;
-                    text-align: center;
+                    text-align: left;
+                    text-indent:40px;
                 }
 
                 & .storybar {

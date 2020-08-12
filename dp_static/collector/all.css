@@ -1,0 +1,5032 @@
+input[type=text], input[type=number], input[type=checkbox], select, textarea {
+  background-color: #171817;
+  color: #e5deca;
+  border-radius: 2px;
+  padding: 2px;
+  border: 2px ridge #444444;
+  box-shadow: -2px -2px 5px black; }
+
+.fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 99%; }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: Titre;
+  font-weight: normal; }
+
+body {
+  font-family: Texte;
+  background: black url("greynoise.jpg") fixed 50% 50%; }
+
+.logo {
+  display: none;
+  background: transparent url("simple_logo_invert.png") center center no-repeat;
+  /*background: url("details.png");*/ }
+
+.menu {
+  position: fixed;
+  overflow: show;
+  color: #e5deca;
+  font-size: .73em;
+  background: #171817;
+  z-index: 20;
+  font-family: Texte;
+  display: block;
+  padding: 5px 0 5px 0;
+  padding: 5px;
+  background: #171817;
+  color: #e5deca;
+  border: 1px solid #494c49;
+  box-shadow: 3px 3px 5px black;
+  border-radius: 5px;
+  opacity: .9;
+  width: 300px;
+  margin-bottom: 3px; }
+  .menu .releasenote {
+    display: inline-block;
+    margin: 0;
+    padding: 5px;
+    margin-right: 10px;
+    width: 15%;
+    float: right; }
+    .menu .releasenote ul {
+      margin: 0;
+      padding: 0;
+      display: block;
+      height: auto;
+      overflow: show;
+      list-style-type: none;
+      text-align: right; }
+      .menu .releasenote ul li {
+        margin: 0;
+        padding: 0;
+        display: block;
+        background-color: #171817;
+        overflow: show; }
+        .menu .releasenote ul li ul {
+          display: none;
+          list-style-type: none; }
+          .menu .releasenote ul li ul li {
+            display: block;
+            z-index: 500; }
+  .menu .shortcuts {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    width: 80%;
+    float: left; }
+    .menu .shortcuts .pic {
+      display: inline-block;
+      margin-left: 5px; }
+    .menu .shortcuts ul {
+      margin: 0;
+      padding: 5px;
+      display: inline-block;
+      height: auto;
+      overflow: show;
+      list-style-type: none; }
+      .menu .shortcuts ul li {
+        margin: 0;
+        padding: 0;
+        display: inline-block;
+        background-color: #171817;
+        overflow: show; }
+        .menu .shortcuts ul li ul {
+          display: none;
+          list-style-type: none; }
+          .menu .shortcuts ul li ul li {
+            display: block;
+            z-index: 500; }
+
+.list {
+  color: #e5deca;
+  background: transparent;
+  transition: width .5s;
+  transition: height .5s;
+  padding: 5px;
+  background: #171817;
+  color: #e5deca;
+  border: 1px solid #494c49;
+  box-shadow: 3px 3px 5px black;
+  border-radius: 5px;
+  opacity: .9;
+  width: 300px;
+  margin-bottom: 3px;
+  height: auto; }
+  .list.collapsed {
+    height: 18px;
+    overflow: hidden;
+    background: black;
+    padding: 1px;
+    /* & span.toggler {*/
+    /*     display: none;*/
+    /* }*/ }
+  .list .storyline {
+    display: block;
+    color: white;
+    text-align: center;
+    margin-top: 1em; }
+  .list .charlist .pagination {
+    text-align: center;
+    margin-top: 1em; }
+    .list .charlist .pagination a, .list .charlist .pagination strong, .list .charlist .pagination span.nav {
+      margin: 0 .1em;
+      display: inline-block;
+      padding: .5em;
+      color: #e5deca;
+      font-size: .77em;
+      background: #171817;
+      padding: .5em .8em;
+      border-radius: 2px;
+      text-decoration: none;
+      cursor: pointer;
+      border: 1px solid #494c49;
+      box-shadow: 3px 3px 5px black;
+      border-radius: 3px; }
+  .list .charlist ul.avatars {
+    text-indent: 0;
+    margin-left: 0;
+    padding-left: 0;
+    list-style-type: none;
+    font-size: 8pt; }
+    .list .charlist ul.avatars li {
+      margin: 5px; }
+      .list .charlist ul.avatars li .avatar_link {
+        width: 280px;
+        padding: 5px;
+        background: #171817;
+        color: #e5deca;
+        border: 1px solid #494c49;
+        box-shadow: 3px 3px 5px black;
+        border-radius: 5px;
+        opacity: .9; }
+        .list .charlist ul.avatars li .avatar_link .character_actions, .list .charlist ul.avatars li .avatar_link .character_info {
+          border: 1px solid transparent;
+          display: inline-block;
+          border-radius: 2px;
+          padding: 0;
+          margin: 0; }
+          .list .charlist ul.avatars li .avatar_link .character_actions a, .list .charlist ul.avatars li .avatar_link .character_actions span.nav, .list .charlist ul.avatars li .avatar_link .character_actions .action, .list .charlist ul.avatars li .avatar_link .character_info a, .list .charlist ul.avatars li .avatar_link .character_info span.nav, .list .charlist ul.avatars li .avatar_link .character_info .action {
+            cursor: pointer;
+            color: #444444; }
+            .list .charlist ul.avatars li .avatar_link .character_actions a:hover, .list .charlist ul.avatars li .avatar_link .character_actions span.nav:hover, .list .charlist ul.avatars li .avatar_link .character_actions .action:hover, .list .charlist ul.avatars li .avatar_link .character_info a:hover, .list .charlist ul.avatars li .avatar_link .character_info span.nav:hover, .list .charlist ul.avatars li .avatar_link .character_info .action:hover {
+              color: #fc2; }
+        .list .charlist ul.avatars li .avatar_link .character_actions {
+          float: right;
+          color: #e5deca; }
+        .list .charlist ul.avatars li .avatar_link .character_name {
+          display: inline-block;
+          font-family: "NomPersoListe";
+          width: 20ex;
+          height: 2.3em;
+          cursor: help;
+          overflow-y: visible; }
+          .list .charlist ul.avatars li .avatar_link .character_name em {
+            font-style: normal;
+            font-weight: bold;
+            text-shadow: 0 0 3px black; }
+            .list .charlist ul.avatars li .avatar_link .character_name em:hover {
+              color: #fc2; }
+        .list .charlist ul.avatars li .avatar_link .character_info {
+          border: 1px solid #444444;
+          background: black;
+          padding: 2px;
+          width: 98%;
+          height: 6em; }
+          .list .charlist ul.avatars li .avatar_link .character_info.hidden {
+            display: none; }
+
+.wrapper {
+  font-family: Texte;
+  font-size: 9pt;
+  padding: 0;
+  padding-top: 60px; }
+  .wrapper .details {
+    z-index: 10;
+    background: transparent;
+    padding: 10px;
+    padding-bottom: 50px;
+    font-family: Texte;
+    font-size: .97em;
+    /*border-left: 1px solid $fics_dark;*/ }
+    .wrapper .details a {
+      color: #fc2;
+      text-decoration: none; }
+    .wrapper .details .sub {
+      left: 5px;
+      position: fixed;
+      bottom: 5px;
+      margin: auto;
+      padding: auto; }
+    .wrapper .details .sheet {
+      width: 100%;
+      background: white; }
+    .wrapper .details .attributes {
+      column-count: 5;
+      column-gap: 2px;
+      column-rule: 0 solid #494c49; }
+      .wrapper .details .attributes table {
+        padding: 0; }
+        .wrapper .details .attributes table th.name {
+          padding-left: 1px;
+          background: #303230;
+          width: 5ex; }
+        .wrapper .details .attributes table td {
+          text-align: center;
+          font-weight: normal;
+          width: auto; }
+          .wrapper .details .attributes table td.edit {
+            width: 5ex; }
+        .wrapper .details .attributes table.primary {
+          border: 1px solid black; }
+        .wrapper .details .attributes table.occult th.name {
+          width: 12ex; }
+        .wrapper .details .attributes table.occult td.edit {
+          width: 5ex; }
+    .wrapper .details .gear {
+      column-count: 2;
+      column-gap: 5px;
+      column-rule: 1px dotted #494c49;
+      margin-top: 3px;
+      border: 1px solid black;
+      border-radius: 2px;
+      margin-top: 3px;
+      width: 100%; }
+      .wrapper .details .gear table.unbreakable {
+        width: 100%;
+        overflow: hidden;
+        page-break-after: always;
+        page-break-inside: avoid;
+        font-size: 1em; }
+        .wrapper .details .gear table.unbreakable th {
+          background: black; }
+          .wrapper .details .gear table.unbreakable th[colspan="3"], .wrapper .details .gear table.unbreakable th[colspan="4"], .wrapper .details .gear table.unbreakable th[colspan="12"] {
+            font-family: Titre;
+            font-weight: normal;
+            background: black;
+            color: #e5deca;
+            font-size: 1.25em;
+            text-align: center; }
+    .wrapper .details .options {
+      column-count: 3;
+      column-gap: 5px;
+      column-rule: 1px dotted #494c49;
+      margin-top: 3px;
+      border: 1px solid black;
+      border-radius: 2px;
+      margin-top: 3px;
+      width: 100%;
+      border: 1px solid black;
+      border-radius: 2px; }
+      .wrapper .details .options table.unbreakable {
+        width: 100%;
+        overflow: hidden;
+        page-break-after: always;
+        page-break-inside: avoid;
+        font-size: 1em; }
+        .wrapper .details .options table.unbreakable th {
+          background: black; }
+          .wrapper .details .options table.unbreakable th[colspan="3"], .wrapper .details .options table.unbreakable th[colspan="4"], .wrapper .details .options table.unbreakable th[colspan="12"] {
+            font-family: Titre;
+            font-weight: normal;
+            background: black;
+            color: #e5deca;
+            font-size: 1.25em;
+            text-align: center; }
+    .wrapper .details .coreblock {
+      column-count: 3;
+      column-gap: 5px;
+      column-rule: 1px dotted #494c49;
+      margin-top: 3px;
+      border: 1px solid black;
+      border-radius: 2px;
+      width: 100%;
+      border: 1px solid black;
+      border-radius: 2px; }
+      .wrapper .details .coreblock ul {
+        page-break-after: always;
+        page-break-inside: avoid;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        min-height: 16em; }
+        .wrapper .details .coreblock ul li {
+          padding: 3px;
+          margin: 0;
+          width: 100%; }
+          .wrapper .details .coreblock ul li b {
+            width: 20ex;
+            margin-right: 1ex;
+            display: inline-block;
+            background: black; }
+      .wrapper .details .coreblock .pagebreaker {
+        page-break-after: always; }
+    .wrapper .details .skillsview {
+      column-count: 3;
+      column-gap: 5px;
+      column-rule: 1px dotted #494c49;
+      margin-top: 3px;
+      border: 1px solid black;
+      border-radius: 2px; }
+      .wrapper .details .skillsview table {
+        width: 100%; }
+        .wrapper .details .skillsview table tr {
+          height: 5px;
+          overflow: hidden; }
+          .wrapper .details .skillsview table tr td {
+            width: auto;
+            height: 5px;
+            margin: 0;
+            padding: 0;
+            background: #171817; }
+          .wrapper .details .skillsview table tr td[colspan="2"] {
+            width: auto;
+            height: 8px;
+            margin: 2px;
+            padding: 1px;
+            background: #494c49;
+            text-align: center; }
+          .wrapper .details .skillsview table tr th {
+            height: 5px;
+            text-align: right;
+            background: transparent;
+            width: 14ex;
+            font-size: 1em;
+            line-height: .8em;
+            margin: 0;
+            padding: 0; }
+          .wrapper .details .skillsview table tr th.edit {
+            width: 4ex;
+            font-size: 1em;
+            text-align: center; }
+          .wrapper .details .skillsview table tr th[colspan="2"] {
+            width: 14ex; }
+          .wrapper .details .skillsview table tr th.skill_score_bar {
+            width: 16ex; }
+    .wrapper .details .edit {
+      color: #fc2; }
+    .wrapper .details .chart_panel {
+      border: 1px solid black;
+      box-shadow: 2px 2px 8px black;
+      border-radius: 5px 5px 5px 5px;
+      padding: 10px;
+      background-color: #171817;
+      display: inline-block;
+      color: #e5deca; }
+      .wrapper .details .chart_panel canvas {
+        width: 1000px;
+        height: auto; }
+    .wrapper .details .classyview {
+      width: 100%;
+      max-width: 1000px;
+      margin-left: 0;
+      margin-right: auto;
+      display: block;
+      column-count: 1;
+      column-gap: 10px;
+      column-rule: 1px dotted #494c49;
+      padding: 5px;
+      background: #171817;
+      color: #e5deca;
+      border: 1px solid #494c49;
+      box-shadow: 3px 3px 5px black;
+      border-radius: 5px;
+      opacity: .9; }
+      .wrapper .details .classyview .pic {
+        display: block;
+        float: right;
+        border: 1px solid black;
+        width: 200px;
+        height: auto; }
+      .wrapper .details .classyview h1 {
+        font-family: NomPerso; }
+      .wrapper .details .classyview h2 {
+        font-family: Titre;
+        font-weight: normal;
+        background: black;
+        color: #e5deca;
+        font-size: 1.25em;
+        text-align: center; }
+    .wrapper .details .tournamentview {
+      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
+      column-count: 1;
+      column-gap: 10px;
+      column-rule: 1px dotted #494c49;
+      padding: 5px;
+      background: #171817;
+      color: #e5deca;
+      border: 1px solid #494c49;
+      box-shadow: 3px 3px 5px black;
+      border-radius: 5px;
+      opacity: .9;
+      width: 300px;
+      margin-bottom: 3px; }
+      .wrapper .details .tournamentview .pic {
+        display: block;
+        float: right;
+        border: 1px solid black;
+        width: 200px;
+        height: auto; }
+      .wrapper .details .tournamentview h1 {
+        font-family: NomPerso; }
+      .wrapper .details .tournamentview h2 {
+        font-family: Titre;
+        font-weight: normal;
+        background: black;
+        color: #e5deca;
+        font-size: 1.25em;
+        text-align: center; }
+    .wrapper .details .storyview {
+      border: 1px solid black;
+      box-shadow: 2px 2px 8px black;
+      border-radius: 5px 5px 5px 5px;
+      padding: 5px;
+      margin: 0;
+      background-color: #171817;
+      width: 100%;
+      /*max-width: 1000px;*/
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
+      font-family: 'Texte'; }
+      .wrapper .details .storyview .drama_wrap {
+        border: 3px solid black;
+        margin: 2px; }
+      .wrapper .details .storyview .title {
+        padding: 0;
+        margin-bottom: 2px;
+        border: 1px solid black;
+        height: 50px; }
+        .wrapper .details .storyview .title .chapter {
+          display: inline-block;
+          padding: 0;
+          margin: 0;
+          border: 1px solid transparent;
+          width: 50px;
+          color: white;
+          text-align: center;
+          font-family: NomPerso;
+          font-size: 1.1em; }
+          .wrapper .details .storyview .title .chapter.big {
+            font-weight: bold;
+            font-size: 1.3em;
+            /*color: $fics_golden;*/
+            /*background: $fics_darkest;*/ }
+        .wrapper .details .storyview .title h1 {
+          font-height: 15px;
+          text-align: left;
+          font-family: NomPerso;
+          font-weight: 800;
+          color: white; }
+        .wrapper .details .storyview .title h2 {
+          font-height: 14px;
+          text-align: left;
+          font-family: NomPerso;
+          font-weight: bold;
+          color: #f6f3ec;
+          text-indent: 20px; }
+        .wrapper .details .storyview .title h3 {
+          font-height: 13px;
+          text-align: left;
+          text-decoration: underline;
+          text-indent: 30px; }
+        .wrapper .details .storyview .title h4 {
+          font-height: 12px;
+          text-align: left;
+          text-indent: 40px; }
+        .wrapper .details .storyview .title .storybar {
+          display: inline-block;
+          padding: 0;
+          margin: 0;
+          background: transparent; }
+          .wrapper .details .storyview .title .storybar p {
+            padding: 0;
+            text-indent: 0;
+            margin: 0;
+            background: transparent; }
+          .wrapper .details .storyview .title .storybar button.compact {
+            background: #444444;
+            border: 1px solid #e5deca;
+            border-radius: 3px;
+            box-shadow: 0 0 3px black;
+            color: #e5deca;
+            width: 10ex;
+            margin: 2px;
+            font-family: Texte;
+            font-size: 8pt;
+            cursor: pointer; }
+            .wrapper .details .storyview .title .storybar button.compact:hover {
+              background: #171817;
+              box-shadow: 0 0 3px #aaa; }
+        .wrapper .details .storyview .title h1, .wrapper .details .storyview .title h2, .wrapper .details .storyview .title h3, .wrapper .details .storyview .title h4 {
+          color: #e5deca;
+          display: inline-block;
+          padding: 0;
+          margin: 0;
+          border-bottom: 1px solid transparent;
+          width: 25%;
+          font-family: NomPersoListe; }
+        .wrapper .details .storyview .title.noPDF {
+          background: black; }
+          .wrapper .details .storyview .title.noPDF .chapter, .wrapper .details .storyview .title.noPDF h4, .wrapper .details .storyview .title.noPDF h3 {
+            color: #fc2; }
+        .wrapper .details .storyview .title.golden {
+          color: #fc2;
+          /*background: $fics_darkest;*/ }
+      .wrapper .details .storyview .storyarticle {
+        background: transparent;
+        padding: 0;
+        margin: auto;
+        color: white;
+        width: 100%; }
+        .wrapper .details .storyview .storyarticle table {
+          /*background: yellow;*/
+          border: 1px solid gray;
+          border-radius: 5px; }
+          .wrapper .details .storyview .storyarticle table tr th {
+            width: 150px;
+            padding: 2px;
+            background: black;
+            color: white;
+            border: 1px solid silver; }
+          .wrapper .details .storyview .storyarticle table tr td {
+            padding: 2px;
+            background: silver;
+            color: black;
+            border: 1px solid silver; }
+            .wrapper .details .storyview .storyarticle table tr td .embedded_link {
+              color: #fc2;
+              /*text-decoration: underline;*/
+              cursor: pointer; }
+              .wrapper .details .storyview .storyarticle table tr td .embedded_link.broken {
+                background: red; }
+            .wrapper .details .storyview .storyarticle table tr td p {
+              margin: 0;
+              padding: 0; }
+          .wrapper .details .storyview .storyarticle table.details {
+            width: 100%;
+            border: none; }
+            .wrapper .details .storyview .storyarticle table.details tr th {
+              background: black;
+              color: #494c49;
+              border: none;
+              border-radius: 5px; }
+            .wrapper .details .storyview .storyarticle table.details tr td {
+              width: auto;
+              background: #171817;
+              color: #e5deca;
+              border: none;
+              font-size: 9pt;
+              font-family: TextDesc;
+              border-radius: 5px; }
+              .wrapper .details .storyview .storyarticle table.details tr td .desc {
+                column-count: 3;
+                column-width: auto;
+                column-gap: 20px;
+                column-rule-style: dotted;
+                column-rule-width: 1px;
+                column-rule-color: #a61;
+                line-height: 1.4em;
+                min-height: 150px; }
+                .wrapper .details .storyview .storyarticle table.details tr td .desc .loot {
+                  /*border: 1px dotted #888;*/
+                  /*color: #fcf;*/
+                  padding: 0;
+                  margin: 0;
+                  margin-bottom: 1em;
+                  font-family: TextDesc; }
+                  .wrapper .details .storyview .storyarticle table.details tr td .desc .loot ul {
+                    margin: 0; }
+                    .wrapper .details .storyview .storyarticle table.details tr td .desc .loot ul li {
+                      margin: 0;
+                      padding: 0; }
+            .wrapper .details .storyview .storyarticle table.details em {
+              font-family: TextDesc;
+              color: #a61;
+              font-weight: bold;
+              font-style: normal;
+              font-size: 1.2em;
+              border-bottom: 1px dotted #a61; }
+            .wrapper .details .storyview .storyarticle table.details .embedded_link {
+              color: #fc4;
+              font-weight: 600;
+              /*border-bottom: 3px dotted yellow;*/ }
+            .wrapper .details .storyview .storyarticle table.details strong {
+              color: #ea6;
+              font-weight: 900;
+              font-style: normal;
+              border-bottom: 1px dotted #ea6; }
+          .wrapper .details .storyview .storyarticle table.update {
+            background: #171817;
+            width: 50%;
+            border: none; }
+            .wrapper .details .storyview .storyarticle table.update input, .wrapper .details .storyview .storyarticle table.update textarea {
+              width: 90%;
+              background: silver; }
+            .wrapper .details .storyview .storyarticle table.update tr th {
+              width: 15%;
+              background: black;
+              color: #494c49;
+              border: none;
+              border-radius: 5px; }
+            .wrapper .details .storyview .storyarticle table.update tr td {
+              width: auto;
+              background: black;
+              color: #e5deca;
+              border: none;
+              border-radius: 5px; }
+            .wrapper .details .storyview .storyarticle table.update input[type=text], .wrapper .details .storyview .storyarticle table.update input[type=number], .wrapper .details .storyview .storyarticle table.update input[type=checkbox], .wrapper .details .storyview .storyarticle table.update select, .wrapper .details .storyview .storyarticle table.update textarea {
+              background-color: #171817;
+              color: #e5deca;
+              border-radius: 2px;
+              padding: 2px;
+              border: 2px ridge #444444;
+              box-shadow: -2px -2px 5px black; }
+        .wrapper .details .storyview .storyarticle button {
+          font-family: 'monospace';
+          font-size: 8px;
+          width: 16ex;
+          padding: 0;
+          margin: 2px;
+          cursor: pointer; }
+        .wrapper .details .storyview .storyarticle .custom_glance {
+          cursor: help; }
+      .wrapper .details .storyview input[type=text], .wrapper .details .storyview input[type=number], .wrapper .details .storyview input[type=checkbox], .wrapper .details .storyview select, .wrapper .details .storyview textarea {
+        background-color: #171817;
+        color: #e5deca;
+        border-radius: 2px;
+        padding: 2px;
+        border: 2px ridge #444444;
+        box-shadow: -2px -2px 5px black; }
+    .wrapper .details .narrative {
+      margin: 5px;
+      vertical-align: top;
+      display: block;
+      border: 1px solid black;
+      border-radius: 5px;
+      padding: 5px;
+      width: auto;
+      page-break-after: always;
+      page-break-inside: avoid;
+      /*column-count:2;*/
+      /*column-gap:10px;*/
+      /*column-rule:1px dotted $fics_light;*/ }
+    .wrapper .details table.formset {
+      padding: 1ex .5em;
+      width: 100%;
+      border-radius: .5em;
+      border: 1px solid black;
+      background: black; }
+      .wrapper .details table.formset tr.row1 {
+        background: #191a19; }
+      .wrapper .details table.formset tr.row2 {
+        background: black; }
+      .wrapper .details table.formset td {
+        vertical-align: middle; }
+      .wrapper .details table.formset caption {
+        font-family: 'Texte';
+        font-size: 1.3em;
+        side: top; }
+      .wrapper .details table.formset .field_wrapper label {
+        width: 40%;
+        display: inline-block;
+        vertical-align: top;
+        text-align: left;
+        height: 100%; }
+      .wrapper .details table.formset .field_wrapper input, .wrapper .details table.formset .field_wrapper textarea, .wrapper .details table.formset .field_wrapper select {
+        box-sizing: border-box;
+        display: inline-block;
+        font-family: Texte;
+        font-size: .93em; }
+      .wrapper .details table.formset .field_wrapper textarea {
+        padding: .5em;
+        width: 40%; }
+      .wrapper .details table.formset .field_wrapper input[type=number] {
+        width: 8ex; }
+    .wrapper .details table.stats {
+      display: inline-block;
+      border: 1px solid black;
+      border-radius: 6px; }
+      .wrapper .details table.stats th {
+        width: 12ex; }
+      .wrapper .details table.stats td {
+        height: 2em;
+        width: 25ex; }
+    .wrapper .details h1, .wrapper .details h2, .wrapper .details h3 {
+      margin: 0;
+      margin-top: .5em; }
+    .wrapper .details h1 {
+      font-size: 1.6em;
+      color: #e5deca; }
+    .wrapper .details h2 {
+      font-size: 1.4em; }
+    .wrapper .details h3 {
+      font-size: 1.2em; }
+
+.edit_icon {
+  color: #fc2;
+  cursor: pointer; }
+
+.action_icon {
+  color: #444444;
+  /*color: $fics_fronter;*/
+  cursor: pointer; }
+  .action_icon:hover {
+    color: #fc2; }
+
+.subsection {
+  font-weight: bold;
+  color: #c4c;
+  text-decoration: none;
+  margin: 0; }
+
+.pdflink {
+  color: #e5deca;
+  text-decoration: none;
+  background: #171817;
+  display: inline-block;
+  padding: 3px; }
+
+.ping {
+  background: orange; }
+
+.waiting {
+  cursor: progress;
+  opacity: .95; }
+
+.golden {
+  color: #fc2; }
+
+.blank {
+  color: #3c3f3c;
+  opacity: .5;
+  text-shadow: 0 0 3px black; }
+
+.wildcard {
+  color: #e5deca;
+  opacity: .5; }
+
+.low {
+  color: #e5deca;
+  /*opacity: .5;*/
+  text-shadow: 0 0 3px lime; }
+
+.medium {
+  color: yellow;
+  /*opacity: .6;*/
+  text-shadow: 0 0 3px yellow; }
+
+.high {
+  color: orange;
+  /*opacity: .7;*/
+  text-shadow: 0 0 3px orange; }
+
+.veryhigh {
+  color: #aa2020;
+  /*opacity: .8;*/
+  text-shadow: 0 0 3px red; }
+
+th.skill_dot {
+  line-height: .3em;
+  background: orange; }
+
+.embedded_link {
+  color: #fc2;
+  text-decoration: none; }
+
+.epic {
+  background-color: #303230; }
+
+.drama {
+  background-color: #171817; }
+
+.act {
+  background-color: black; }
+
+.event {
+  background-color: black; }
+
+.btn {
+  display: block;
+  padding: 0;
+  margin: 0;
+  width: 150px;
+  height: 20px;
+  border: 2px solid #171817;
+  border-radius: 5px;
+  background: #171817;
+  color: white;
+  text-decoration: none;
+  padding: 5px;
+  text-align: left;
+  font-size: 1.6em;
+  /* 0.87em*/ }
+  .btn:hover {
+    border-color: #aaa;
+    background: black;
+    color: #aaa;
+    cursor: pointer; }
+
+.tabs {
+  display: none; }
+
+.tab_up {
+  display: block; }
+
+.tabberbar {
+  text-align: center; }
+  .tabberbar span {
+    display: inline-block; }
+
+.shown {
+  display: block; }
+
+.hidden {
+  display: none; }
+
+.working table, .working table td, .working table th, .working th, .working td {
+  background: #444444; }
+
+.menuright {
+  position: relative;
+  display: inline-block;
+  width: 300px;
+  height: auto;
+  padding: 5px;
+  background: #171817;
+  color: #e5deca;
+  border: 1px solid #494c49;
+  box-shadow: 3px 3px 5px black;
+  border-radius: 5px;
+  opacity: .9;
+  width: 300px;
+  margin-bottom: 3px;
+  transition: width .5s;
+  transition: height .5s; }
+  .menuright #keywords {
+    width: 250px;
+    margin-right: 5px;
+    height: auto; }
+  .menuright.collapsed {
+    height: 18px;
+    overflow: hidden;
+    background: black;
+    padding: 1px;
+    /* & span.toggler {*/
+    /*     display: none;*/
+    /* }*/ }
+
+.dicer {
+  position: relative;
+  display: inline-block;
+  right: 0;
+  padding: 5px;
+  background: #171817;
+  color: #e5deca;
+  border: 1px solid #494c49;
+  box-shadow: 3px 3px 5px black;
+  border-radius: 5px;
+  opacity: .9;
+  width: 300px;
+  margin-bottom: 3px;
+  transition: width .5s;
+  transition: height .5s; }
+  .dicer .roll_dice, .dicer .rolls, .dicer .mods, .dicer .total {
+    width: 15ex; }
+  .dicer input#set {
+    width: 50px;
+    font-weight: bold; }
+  .dicer.collapsed {
+    height: 18px;
+    overflow: hidden;
+    background: black;
+    padding: 1px;
+    /* & span.toggler {*/
+    /*     display: none;*/
+    /* }*/ }
+
+/*     background: #333;*/
+/*     opacity: .5;*/
+/* }*/
+@font-face {
+  font-family: 'NomPerso';
+  src: url("fonts/Cinzel-Black.ttf"); }
+
+@font-face {
+  font-family: 'TextDesc';
+  src: url("fonts/WorkSans-Light.ttf"); }
+
+@font-face {
+  font-family: 'NomPersoListe';
+  src: url("fonts/Cinzel-Regular.ttf"); }
+
+@font-face {
+  font-family: 'Titre';
+  /*src: url('Eczar-ExtraBold.ttf');*/
+  src: url("fonts/Balthazar-Regular.ttf"); }
+
+@font-face {
+  font-family: 'Texte';
+  src: url("fonts/Lato-Regular.ttf"); }
+
+@font-face {
+  font-family: 'Emphase';
+  src: url("Eczar-Regular.ttf"); }
+
+input[type=text], input[type=number], input[type=checkbox], select, textarea {
+  background-color: #171817;
+  color: #e5deca;
+  border-radius: 2px;
+  padding: 2px;
+  border: 2px ridge #444444;
+  box-shadow: -2px -2px 5px black; }
+
+.fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 99%; }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: Titre;
+  font-weight: normal; }
+
+body {
+  font-family: Texte;
+  background: black url("greynoise.jpg") fixed 50% 50%; }
+
+.logo {
+  display: none;
+  background: transparent url("simple_logo_invert.png") center center no-repeat;
+  /*background: url("details.png");*/ }
+
+.menu {
+  position: fixed;
+  overflow: show;
+  color: #e5deca;
+  font-size: .73em;
+  background: #171817;
+  z-index: 20;
+  font-family: Texte;
+  display: block;
+  padding: 5px 0 5px 0;
+  padding: 5px;
+  background: #171817;
+  color: #e5deca;
+  border: 1px solid #494c49;
+  box-shadow: 3px 3px 5px black;
+  border-radius: 5px;
+  opacity: .9;
+  width: 300px;
+  margin-bottom: 3px; }
+  .menu .releasenote {
+    display: inline-block;
+    margin: 0;
+    padding: 5px;
+    margin-right: 10px;
+    width: 15%;
+    float: right; }
+    .menu .releasenote ul {
+      margin: 0;
+      padding: 0;
+      display: block;
+      height: auto;
+      overflow: show;
+      list-style-type: none;
+      text-align: right; }
+      .menu .releasenote ul li {
+        margin: 0;
+        padding: 0;
+        display: block;
+        background-color: #171817;
+        overflow: show; }
+        .menu .releasenote ul li ul {
+          display: none;
+          list-style-type: none; }
+          .menu .releasenote ul li ul li {
+            display: block;
+            z-index: 500; }
+  .menu .shortcuts {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    width: 80%;
+    float: left; }
+    .menu .shortcuts .pic {
+      display: inline-block;
+      margin-left: 5px; }
+    .menu .shortcuts ul {
+      margin: 0;
+      padding: 5px;
+      display: inline-block;
+      height: auto;
+      overflow: show;
+      list-style-type: none; }
+      .menu .shortcuts ul li {
+        margin: 0;
+        padding: 0;
+        display: inline-block;
+        background-color: #171817;
+        overflow: show; }
+        .menu .shortcuts ul li ul {
+          display: none;
+          list-style-type: none; }
+          .menu .shortcuts ul li ul li {
+            display: block;
+            z-index: 500; }
+
+.list {
+  color: #e5deca;
+  background: transparent;
+  transition: width .5s;
+  transition: height .5s;
+  padding: 5px;
+  background: #171817;
+  color: #e5deca;
+  border: 1px solid #494c49;
+  box-shadow: 3px 3px 5px black;
+  border-radius: 5px;
+  opacity: .9;
+  width: 300px;
+  margin-bottom: 3px;
+  height: auto; }
+  .list.collapsed {
+    height: 18px;
+    overflow: hidden;
+    background: black;
+    padding: 1px;
+    /* & span.toggler {*/
+    /*     display: none;*/
+    /* }*/ }
+  .list .storyline {
+    display: block;
+    color: white;
+    text-align: center;
+    margin-top: 1em; }
+  .list .charlist .pagination {
+    text-align: center;
+    margin-top: 1em; }
+    .list .charlist .pagination a, .list .charlist .pagination strong, .list .charlist .pagination span.nav {
+      margin: 0 .1em;
+      display: inline-block;
+      padding: .5em;
+      color: #e5deca;
+      font-size: .77em;
+      background: #171817;
+      padding: .5em .8em;
+      border-radius: 2px;
+      text-decoration: none;
+      cursor: pointer;
+      border: 1px solid #494c49;
+      box-shadow: 3px 3px 5px black;
+      border-radius: 3px; }
+  .list .charlist ul.avatars {
+    text-indent: 0;
+    margin-left: 0;
+    padding-left: 0;
+    list-style-type: none;
+    font-size: 8pt; }
+    .list .charlist ul.avatars li {
+      margin: 5px; }
+      .list .charlist ul.avatars li .avatar_link {
+        width: 280px;
+        padding: 5px;
+        background: #171817;
+        color: #e5deca;
+        border: 1px solid #494c49;
+        box-shadow: 3px 3px 5px black;
+        border-radius: 5px;
+        opacity: .9; }
+        .list .charlist ul.avatars li .avatar_link .character_actions, .list .charlist ul.avatars li .avatar_link .character_info {
+          border: 1px solid transparent;
+          display: inline-block;
+          border-radius: 2px;
+          padding: 0;
+          margin: 0; }
+          .list .charlist ul.avatars li .avatar_link .character_actions a, .list .charlist ul.avatars li .avatar_link .character_actions span.nav, .list .charlist ul.avatars li .avatar_link .character_actions .action, .list .charlist ul.avatars li .avatar_link .character_info a, .list .charlist ul.avatars li .avatar_link .character_info span.nav, .list .charlist ul.avatars li .avatar_link .character_info .action {
+            cursor: pointer;
+            color: #444444; }
+            .list .charlist ul.avatars li .avatar_link .character_actions a:hover, .list .charlist ul.avatars li .avatar_link .character_actions span.nav:hover, .list .charlist ul.avatars li .avatar_link .character_actions .action:hover, .list .charlist ul.avatars li .avatar_link .character_info a:hover, .list .charlist ul.avatars li .avatar_link .character_info span.nav:hover, .list .charlist ul.avatars li .avatar_link .character_info .action:hover {
+              color: #fc2; }
+        .list .charlist ul.avatars li .avatar_link .character_actions {
+          float: right;
+          color: #e5deca; }
+        .list .charlist ul.avatars li .avatar_link .character_name {
+          display: inline-block;
+          font-family: "NomPersoListe";
+          width: 20ex;
+          height: 2.3em;
+          cursor: help;
+          overflow-y: visible; }
+          .list .charlist ul.avatars li .avatar_link .character_name em {
+            font-style: normal;
+            font-weight: bold;
+            text-shadow: 0 0 3px black; }
+            .list .charlist ul.avatars li .avatar_link .character_name em:hover {
+              color: #fc2; }
+        .list .charlist ul.avatars li .avatar_link .character_info {
+          border: 1px solid #444444;
+          background: black;
+          padding: 2px;
+          width: 98%;
+          height: 6em; }
+          .list .charlist ul.avatars li .avatar_link .character_info.hidden {
+            display: none; }
+
+.wrapper {
+  font-family: Texte;
+  font-size: 9pt;
+  padding: 0;
+  padding-top: 60px; }
+  .wrapper .details {
+    z-index: 10;
+    background: transparent;
+    padding: 10px;
+    padding-bottom: 50px;
+    font-family: Texte;
+    font-size: .97em;
+    /*border-left: 1px solid $fics_dark;*/ }
+    .wrapper .details a {
+      color: #fc2;
+      text-decoration: none; }
+    .wrapper .details .sub {
+      left: 5px;
+      position: fixed;
+      bottom: 5px;
+      margin: auto;
+      padding: auto; }
+    .wrapper .details .sheet {
+      width: 100%;
+      background: white; }
+    .wrapper .details .attributes {
+      column-count: 5;
+      column-gap: 2px;
+      column-rule: 0 solid #494c49; }
+      .wrapper .details .attributes table {
+        padding: 0; }
+        .wrapper .details .attributes table th.name {
+          padding-left: 1px;
+          background: #303230;
+          width: 5ex; }
+        .wrapper .details .attributes table td {
+          text-align: center;
+          font-weight: normal;
+          width: auto; }
+          .wrapper .details .attributes table td.edit {
+            width: 5ex; }
+        .wrapper .details .attributes table.primary {
+          border: 1px solid black; }
+        .wrapper .details .attributes table.occult th.name {
+          width: 12ex; }
+        .wrapper .details .attributes table.occult td.edit {
+          width: 5ex; }
+    .wrapper .details .gear {
+      column-count: 2;
+      column-gap: 5px;
+      column-rule: 1px dotted #494c49;
+      margin-top: 3px;
+      border: 1px solid black;
+      border-radius: 2px;
+      margin-top: 3px;
+      width: 100%; }
+      .wrapper .details .gear table.unbreakable {
+        width: 100%;
+        overflow: hidden;
+        page-break-after: always;
+        page-break-inside: avoid;
+        font-size: 1em; }
+        .wrapper .details .gear table.unbreakable th {
+          background: black; }
+          .wrapper .details .gear table.unbreakable th[colspan="3"], .wrapper .details .gear table.unbreakable th[colspan="4"], .wrapper .details .gear table.unbreakable th[colspan="12"] {
+            font-family: Titre;
+            font-weight: normal;
+            background: black;
+            color: #e5deca;
+            font-size: 1.25em;
+            text-align: center; }
+    .wrapper .details .options {
+      column-count: 3;
+      column-gap: 5px;
+      column-rule: 1px dotted #494c49;
+      margin-top: 3px;
+      border: 1px solid black;
+      border-radius: 2px;
+      margin-top: 3px;
+      width: 100%;
+      border: 1px solid black;
+      border-radius: 2px; }
+      .wrapper .details .options table.unbreakable {
+        width: 100%;
+        overflow: hidden;
+        page-break-after: always;
+        page-break-inside: avoid;
+        font-size: 1em; }
+        .wrapper .details .options table.unbreakable th {
+          background: black; }
+          .wrapper .details .options table.unbreakable th[colspan="3"], .wrapper .details .options table.unbreakable th[colspan="4"], .wrapper .details .options table.unbreakable th[colspan="12"] {
+            font-family: Titre;
+            font-weight: normal;
+            background: black;
+            color: #e5deca;
+            font-size: 1.25em;
+            text-align: center; }
+    .wrapper .details .coreblock {
+      column-count: 3;
+      column-gap: 5px;
+      column-rule: 1px dotted #494c49;
+      margin-top: 3px;
+      border: 1px solid black;
+      border-radius: 2px;
+      width: 100%;
+      border: 1px solid black;
+      border-radius: 2px; }
+      .wrapper .details .coreblock ul {
+        page-break-after: always;
+        page-break-inside: avoid;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        min-height: 16em; }
+        .wrapper .details .coreblock ul li {
+          padding: 3px;
+          margin: 0;
+          width: 100%; }
+          .wrapper .details .coreblock ul li b {
+            width: 20ex;
+            margin-right: 1ex;
+            display: inline-block;
+            background: black; }
+      .wrapper .details .coreblock .pagebreaker {
+        page-break-after: always; }
+    .wrapper .details .skillsview {
+      column-count: 3;
+      column-gap: 5px;
+      column-rule: 1px dotted #494c49;
+      margin-top: 3px;
+      border: 1px solid black;
+      border-radius: 2px; }
+      .wrapper .details .skillsview table {
+        width: 100%; }
+        .wrapper .details .skillsview table tr {
+          height: 5px;
+          overflow: hidden; }
+          .wrapper .details .skillsview table tr td {
+            width: auto;
+            height: 5px;
+            margin: 0;
+            padding: 0;
+            background: #171817; }
+          .wrapper .details .skillsview table tr td[colspan="2"] {
+            width: auto;
+            height: 8px;
+            margin: 2px;
+            padding: 1px;
+            background: #494c49;
+            text-align: center; }
+          .wrapper .details .skillsview table tr th {
+            height: 5px;
+            text-align: right;
+            background: transparent;
+            width: 14ex;
+            font-size: 1em;
+            line-height: .8em;
+            margin: 0;
+            padding: 0; }
+          .wrapper .details .skillsview table tr th.edit {
+            width: 4ex;
+            font-size: 1em;
+            text-align: center; }
+          .wrapper .details .skillsview table tr th[colspan="2"] {
+            width: 14ex; }
+          .wrapper .details .skillsview table tr th.skill_score_bar {
+            width: 16ex; }
+    .wrapper .details .edit {
+      color: #fc2; }
+    .wrapper .details .chart_panel {
+      border: 1px solid black;
+      box-shadow: 2px 2px 8px black;
+      border-radius: 5px 5px 5px 5px;
+      padding: 10px;
+      background-color: #171817;
+      display: inline-block;
+      color: #e5deca; }
+      .wrapper .details .chart_panel canvas {
+        width: 1000px;
+        height: auto; }
+    .wrapper .details .classyview {
+      width: 100%;
+      max-width: 1000px;
+      margin-left: 0;
+      margin-right: auto;
+      display: block;
+      column-count: 1;
+      column-gap: 10px;
+      column-rule: 1px dotted #494c49;
+      padding: 5px;
+      background: #171817;
+      color: #e5deca;
+      border: 1px solid #494c49;
+      box-shadow: 3px 3px 5px black;
+      border-radius: 5px;
+      opacity: .9; }
+      .wrapper .details .classyview .pic {
+        display: block;
+        float: right;
+        border: 1px solid black;
+        width: 200px;
+        height: auto; }
+      .wrapper .details .classyview h1 {
+        font-family: NomPerso; }
+      .wrapper .details .classyview h2 {
+        font-family: Titre;
+        font-weight: normal;
+        background: black;
+        color: #e5deca;
+        font-size: 1.25em;
+        text-align: center; }
+    .wrapper .details .tournamentview {
+      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
+      column-count: 1;
+      column-gap: 10px;
+      column-rule: 1px dotted #494c49;
+      padding: 5px;
+      background: #171817;
+      color: #e5deca;
+      border: 1px solid #494c49;
+      box-shadow: 3px 3px 5px black;
+      border-radius: 5px;
+      opacity: .9;
+      width: 300px;
+      margin-bottom: 3px; }
+      .wrapper .details .tournamentview .pic {
+        display: block;
+        float: right;
+        border: 1px solid black;
+        width: 200px;
+        height: auto; }
+      .wrapper .details .tournamentview h1 {
+        font-family: NomPerso; }
+      .wrapper .details .tournamentview h2 {
+        font-family: Titre;
+        font-weight: normal;
+        background: black;
+        color: #e5deca;
+        font-size: 1.25em;
+        text-align: center; }
+    .wrapper .details .storyview {
+      border: 1px solid black;
+      box-shadow: 2px 2px 8px black;
+      border-radius: 5px 5px 5px 5px;
+      padding: 5px;
+      margin: 0;
+      background-color: #171817;
+      width: 100%;
+      /*max-width: 1000px;*/
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
+      font-family: 'Texte'; }
+      .wrapper .details .storyview .drama_wrap {
+        border: 3px solid black;
+        margin: 2px; }
+      .wrapper .details .storyview .title {
+        padding: 0;
+        margin-bottom: 2px;
+        border: 1px solid black;
+        height: 50px; }
+        .wrapper .details .storyview .title .chapter {
+          display: inline-block;
+          padding: 0;
+          margin: 0;
+          border: 1px solid transparent;
+          width: 50px;
+          color: white;
+          text-align: center;
+          font-family: NomPerso;
+          font-size: 1.1em; }
+          .wrapper .details .storyview .title .chapter.big {
+            font-weight: bold;
+            font-size: 1.3em;
+            /*color: $fics_golden;*/
+            /*background: $fics_darkest;*/ }
+        .wrapper .details .storyview .title h1 {
+          font-height: 15px;
+          text-align: left;
+          font-family: NomPerso;
+          font-weight: 800;
+          color: white; }
+        .wrapper .details .storyview .title h2 {
+          font-height: 14px;
+          text-align: left;
+          font-family: NomPerso;
+          font-weight: bold;
+          color: #f6f3ec;
+          text-indent: 20px; }
+        .wrapper .details .storyview .title h3 {
+          font-height: 13px;
+          text-align: left;
+          text-decoration: underline;
+          text-indent: 30px; }
+        .wrapper .details .storyview .title h4 {
+          font-height: 12px;
+          text-align: left;
+          text-indent: 40px; }
+        .wrapper .details .storyview .title .storybar {
+          display: inline-block;
+          padding: 0;
+          margin: 0;
+          background: transparent; }
+          .wrapper .details .storyview .title .storybar p {
+            padding: 0;
+            text-indent: 0;
+            margin: 0;
+            background: transparent; }
+          .wrapper .details .storyview .title .storybar button.compact {
+            background: #444444;
+            border: 1px solid #e5deca;
+            border-radius: 3px;
+            box-shadow: 0 0 3px black;
+            color: #e5deca;
+            width: 10ex;
+            margin: 2px;
+            font-family: Texte;
+            font-size: 8pt;
+            cursor: pointer; }
+            .wrapper .details .storyview .title .storybar button.compact:hover {
+              background: #171817;
+              box-shadow: 0 0 3px #aaa; }
+        .wrapper .details .storyview .title h1, .wrapper .details .storyview .title h2, .wrapper .details .storyview .title h3, .wrapper .details .storyview .title h4 {
+          color: #e5deca;
+          display: inline-block;
+          padding: 0;
+          margin: 0;
+          border-bottom: 1px solid transparent;
+          width: 25%;
+          font-family: NomPersoListe; }
+        .wrapper .details .storyview .title.noPDF {
+          background: black; }
+          .wrapper .details .storyview .title.noPDF .chapter, .wrapper .details .storyview .title.noPDF h4, .wrapper .details .storyview .title.noPDF h3 {
+            color: #fc2; }
+        .wrapper .details .storyview .title.golden {
+          color: #fc2;
+          /*background: $fics_darkest;*/ }
+      .wrapper .details .storyview .storyarticle {
+        background: transparent;
+        padding: 0;
+        margin: auto;
+        color: white;
+        width: 100%; }
+        .wrapper .details .storyview .storyarticle table {
+          /*background: yellow;*/
+          border: 1px solid gray;
+          border-radius: 5px; }
+          .wrapper .details .storyview .storyarticle table tr th {
+            width: 150px;
+            padding: 2px;
+            background: black;
+            color: white;
+            border: 1px solid silver; }
+          .wrapper .details .storyview .storyarticle table tr td {
+            padding: 2px;
+            background: silver;
+            color: black;
+            border: 1px solid silver; }
+            .wrapper .details .storyview .storyarticle table tr td .embedded_link {
+              color: #fc2;
+              /*text-decoration: underline;*/
+              cursor: pointer; }
+              .wrapper .details .storyview .storyarticle table tr td .embedded_link.broken {
+                background: red; }
+            .wrapper .details .storyview .storyarticle table tr td p {
+              margin: 0;
+              padding: 0; }
+          .wrapper .details .storyview .storyarticle table.details {
+            width: 100%;
+            border: none; }
+            .wrapper .details .storyview .storyarticle table.details tr th {
+              background: black;
+              color: #494c49;
+              border: none;
+              border-radius: 5px; }
+            .wrapper .details .storyview .storyarticle table.details tr td {
+              width: auto;
+              background: #171817;
+              color: #e5deca;
+              border: none;
+              font-size: 9pt;
+              font-family: TextDesc;
+              border-radius: 5px; }
+              .wrapper .details .storyview .storyarticle table.details tr td .desc {
+                column-count: 3;
+                column-width: auto;
+                column-gap: 20px;
+                column-rule-style: dotted;
+                column-rule-width: 1px;
+                column-rule-color: #a61;
+                line-height: 1.4em;
+                min-height: 150px; }
+                .wrapper .details .storyview .storyarticle table.details tr td .desc .loot {
+                  /*border: 1px dotted #888;*/
+                  /*color: #fcf;*/
+                  padding: 0;
+                  margin: 0;
+                  margin-bottom: 1em;
+                  font-family: TextDesc; }
+                  .wrapper .details .storyview .storyarticle table.details tr td .desc .loot ul {
+                    margin: 0; }
+                    .wrapper .details .storyview .storyarticle table.details tr td .desc .loot ul li {
+                      margin: 0;
+                      padding: 0; }
+            .wrapper .details .storyview .storyarticle table.details em {
+              font-family: TextDesc;
+              color: #a61;
+              font-weight: bold;
+              font-style: normal;
+              font-size: 1.2em;
+              border-bottom: 1px dotted #a61; }
+            .wrapper .details .storyview .storyarticle table.details .embedded_link {
+              color: #fc4;
+              font-weight: 600;
+              /*border-bottom: 3px dotted yellow;*/ }
+            .wrapper .details .storyview .storyarticle table.details strong {
+              color: #ea6;
+              font-weight: 900;
+              font-style: normal;
+              border-bottom: 1px dotted #ea6; }
+          .wrapper .details .storyview .storyarticle table.update {
+            background: #171817;
+            width: 50%;
+            border: none; }
+            .wrapper .details .storyview .storyarticle table.update input, .wrapper .details .storyview .storyarticle table.update textarea {
+              width: 90%;
+              background: silver; }
+            .wrapper .details .storyview .storyarticle table.update tr th {
+              width: 15%;
+              background: black;
+              color: #494c49;
+              border: none;
+              border-radius: 5px; }
+            .wrapper .details .storyview .storyarticle table.update tr td {
+              width: auto;
+              background: black;
+              color: #e5deca;
+              border: none;
+              border-radius: 5px; }
+            .wrapper .details .storyview .storyarticle table.update input[type=text], .wrapper .details .storyview .storyarticle table.update input[type=number], .wrapper .details .storyview .storyarticle table.update input[type=checkbox], .wrapper .details .storyview .storyarticle table.update select, .wrapper .details .storyview .storyarticle table.update textarea {
+              background-color: #171817;
+              color: #e5deca;
+              border-radius: 2px;
+              padding: 2px;
+              border: 2px ridge #444444;
+              box-shadow: -2px -2px 5px black; }
+        .wrapper .details .storyview .storyarticle button {
+          font-family: 'monospace';
+          font-size: 8px;
+          width: 16ex;
+          padding: 0;
+          margin: 2px;
+          cursor: pointer; }
+        .wrapper .details .storyview .storyarticle .custom_glance {
+          cursor: help; }
+      .wrapper .details .storyview input[type=text], .wrapper .details .storyview input[type=number], .wrapper .details .storyview input[type=checkbox], .wrapper .details .storyview select, .wrapper .details .storyview textarea {
+        background-color: #171817;
+        color: #e5deca;
+        border-radius: 2px;
+        padding: 2px;
+        border: 2px ridge #444444;
+        box-shadow: -2px -2px 5px black; }
+    .wrapper .details .narrative {
+      margin: 5px;
+      vertical-align: top;
+      display: block;
+      border: 1px solid black;
+      border-radius: 5px;
+      padding: 5px;
+      width: auto;
+      page-break-after: always;
+      page-break-inside: avoid;
+      /*column-count:2;*/
+      /*column-gap:10px;*/
+      /*column-rule:1px dotted $fics_light;*/ }
+    .wrapper .details table.formset {
+      padding: 1ex .5em;
+      width: 100%;
+      border-radius: .5em;
+      border: 1px solid black;
+      background: black; }
+      .wrapper .details table.formset tr.row1 {
+        background: #191a19; }
+      .wrapper .details table.formset tr.row2 {
+        background: black; }
+      .wrapper .details table.formset td {
+        vertical-align: middle; }
+      .wrapper .details table.formset caption {
+        font-family: 'Texte';
+        font-size: 1.3em;
+        side: top; }
+      .wrapper .details table.formset .field_wrapper label {
+        width: 40%;
+        display: inline-block;
+        vertical-align: top;
+        text-align: left;
+        height: 100%; }
+      .wrapper .details table.formset .field_wrapper input, .wrapper .details table.formset .field_wrapper textarea, .wrapper .details table.formset .field_wrapper select {
+        box-sizing: border-box;
+        display: inline-block;
+        font-family: Texte;
+        font-size: .93em; }
+      .wrapper .details table.formset .field_wrapper textarea {
+        padding: .5em;
+        width: 40%; }
+      .wrapper .details table.formset .field_wrapper input[type=number] {
+        width: 8ex; }
+    .wrapper .details table.stats {
+      display: inline-block;
+      border: 1px solid black;
+      border-radius: 6px; }
+      .wrapper .details table.stats th {
+        width: 12ex; }
+      .wrapper .details table.stats td {
+        height: 2em;
+        width: 25ex; }
+    .wrapper .details h1, .wrapper .details h2, .wrapper .details h3 {
+      margin: 0;
+      margin-top: .5em; }
+    .wrapper .details h1 {
+      font-size: 1.6em;
+      color: #e5deca; }
+    .wrapper .details h2 {
+      font-size: 1.4em; }
+    .wrapper .details h3 {
+      font-size: 1.2em; }
+
+.edit_icon {
+  color: #fc2;
+  cursor: pointer; }
+
+.action_icon {
+  color: #444444;
+  /*color: $fics_fronter;*/
+  cursor: pointer; }
+  .action_icon:hover {
+    color: #fc2; }
+
+.subsection {
+  font-weight: bold;
+  color: #c4c;
+  text-decoration: none;
+  margin: 0; }
+
+.pdflink {
+  color: #e5deca;
+  text-decoration: none;
+  background: #171817;
+  display: inline-block;
+  padding: 3px; }
+
+.ping {
+  background: orange; }
+
+.waiting {
+  cursor: progress;
+  opacity: .95; }
+
+.golden {
+  color: #fc2; }
+
+.blank {
+  color: #3c3f3c;
+  opacity: .5;
+  text-shadow: 0 0 3px black; }
+
+.wildcard {
+  color: #e5deca;
+  opacity: .5; }
+
+.low {
+  color: #e5deca;
+  /*opacity: .5;*/
+  text-shadow: 0 0 3px lime; }
+
+.medium {
+  color: yellow;
+  /*opacity: .6;*/
+  text-shadow: 0 0 3px yellow; }
+
+.high {
+  color: orange;
+  /*opacity: .7;*/
+  text-shadow: 0 0 3px orange; }
+
+.veryhigh {
+  color: #aa2020;
+  /*opacity: .8;*/
+  text-shadow: 0 0 3px red; }
+
+th.skill_dot {
+  line-height: .3em;
+  background: orange; }
+
+.embedded_link {
+  color: #fc2;
+  text-decoration: none; }
+
+.epic {
+  background-color: #303230; }
+
+.drama {
+  background-color: #171817; }
+
+.act {
+  background-color: black; }
+
+.event {
+  background-color: black; }
+
+.btn {
+  display: block;
+  padding: 0;
+  margin: 0;
+  width: 150px;
+  height: 20px;
+  border: 2px solid #171817;
+  border-radius: 5px;
+  background: #171817;
+  color: white;
+  text-decoration: none;
+  padding: 5px;
+  text-align: left;
+  font-size: 1.6em;
+  /* 0.87em*/ }
+  .btn:hover {
+    border-color: #aaa;
+    background: black;
+    color: #aaa;
+    cursor: pointer; }
+
+.tabs {
+  display: none; }
+
+.tab_up {
+  display: block; }
+
+.tabberbar {
+  text-align: center; }
+  .tabberbar span {
+    display: inline-block; }
+
+.shown {
+  display: block; }
+
+.hidden {
+  display: none; }
+
+.working table, .working table td, .working table th, .working th, .working td {
+  background: #444444; }
+
+.menuright {
+  position: relative;
+  display: inline-block;
+  width: 300px;
+  height: auto;
+  padding: 5px;
+  background: #171817;
+  color: #e5deca;
+  border: 1px solid #494c49;
+  box-shadow: 3px 3px 5px black;
+  border-radius: 5px;
+  opacity: .9;
+  width: 300px;
+  margin-bottom: 3px;
+  transition: width .5s;
+  transition: height .5s; }
+  .menuright #keywords {
+    width: 250px;
+    margin-right: 5px;
+    height: auto; }
+  .menuright.collapsed {
+    height: 18px;
+    overflow: hidden;
+    background: black;
+    padding: 1px;
+    /* & span.toggler {*/
+    /*     display: none;*/
+    /* }*/ }
+
+.dicer {
+  position: relative;
+  display: inline-block;
+  right: 0;
+  padding: 5px;
+  background: #171817;
+  color: #e5deca;
+  border: 1px solid #494c49;
+  box-shadow: 3px 3px 5px black;
+  border-radius: 5px;
+  opacity: .9;
+  width: 300px;
+  margin-bottom: 3px;
+  transition: width .5s;
+  transition: height .5s; }
+  .dicer .roll_dice, .dicer .rolls, .dicer .mods, .dicer .total {
+    width: 15ex; }
+  .dicer input#set {
+    width: 50px;
+    font-weight: bold; }
+  .dicer.collapsed {
+    height: 18px;
+    overflow: hidden;
+    background: black;
+    padding: 1px;
+    /* & span.toggler {*/
+    /*     display: none;*/
+    /* }*/ }
+
+/*     background: #333;*/
+/*     opacity: .5;*/
+/* }*/
+@font-face {
+  font-family: 'NomPerso';
+  src: url("fonts/Cinzel-Black.ttf"); }
+
+@font-face {
+  font-family: 'TextDesc';
+  src: url("fonts/WorkSans-Light.ttf"); }
+
+@font-face {
+  font-family: 'NomPersoListe';
+  src: url("fonts/Cinzel-Regular.ttf"); }
+
+@font-face {
+  font-family: 'Titre';
+  /*src: url('Eczar-ExtraBold.ttf');*/
+  src: url("fonts/Balthazar-Regular.ttf"); }
+
+@font-face {
+  font-family: 'Texte';
+  src: url("fonts/Lato-Regular.ttf"); }
+
+@font-face {
+  font-family: 'Emphase';
+  src: url("Eczar-Regular.ttf"); }
+
+.duel h2, .duel h3 {
+  font-family: NomPersoListe;
+  font-weight: bold;
+  text-align: center;
+  font-variant: small-caps; }
+
+.duel .round_data {
+  display: inline-block;
+  margin: auto;
+  margin-top: 0;
+  vertical-align: top;
+  width: 420px;
+  border: 1px solid black;
+  padding: 3px;
+  color: white; }
+  .duel .round_data.attacker {
+    /*background: #402010;*/ }
+    .duel .round_data.attacker ol {
+      /*direction: rtl;*/ }
+      .duel .round_data.attacker ol li {
+        text-align: right; }
+  .duel .round_data.defender {
+    /*background: #204010;*/ }
+
+.duel table.wounds {
+  border-collapse: separate; }
+  .duel table.wounds td {
+    background: #171817;
+    border: 2px solid #222;
+    width: 4ex;
+    height: 1.3em;
+    text-align: center; }
+    .duel table.wounds td .large {
+      font-size: 1.5em;
+      font-weight: bold; }
+    .duel table.wounds td.shield {
+      border-color: #223; }
+    .duel table.wounds td.stats {
+      border-color: #332; }
+      .duel table.wounds td.stats.neg {
+        border-color: #223; }
+    .duel table.wounds td.armor {
+      border-color: #343;
+      font-weight: bold;
+      font-size: 1em; }
+    .duel table.wounds td.hp {
+      border-color: #322; }
+    .duel table.wounds td.wnd {
+      border-color: #433; }
+    .duel table.wounds td.disabled {
+      opacity: .1; }
+    .duel table.wounds td .wounded {
+      color: #323; }
+  .duel table.wounds th {
+    background: transparent;
+    border: 2px dotted #222;
+    width: 4ex;
+    height: 1.3em; }
+
+.duelol {
+  margin: 0; }
+  .duelol li {
+    margin: 0; }
+
+table.duels {
+  display: inline-block; }
+  table.duels th {
+    width: 100px;
+    height: 90px;
+    font-size: 2em; }
+  table.duels td {
+    width: 100px;
+    height: 90px;
+    font-size: 3em;
+    border: 1px solid white; }
+  table.duels .round_data {
+    height: 650px; }
+
+table.match_score {
+  display: inline-block;
+  background: #444;
+  border: 1px solid #444;
+  margin: 0;
+  padding: 0; }
+  table.match_score td {
+    background-color: #171817;
+    color: #e5deca;
+    font-size: .95em;
+    width: auto;
+    height: 30px;
+    text-align: center;
+    border: 2px solid transparent; }
+  table.match_score th {
+    background-color: #303030;
+    font-size: .85em;
+    width: 50px;
+    height: 40px;
+    border: 2px solid transparent; }
+
+table.match_score_flat {
+  display: inline-block;
+  background: #444;
+  border: 1px solid #111;
+  margin: 0;
+  padding: 0; }
+  table.match_score_flat td {
+    background-color: #171817;
+    color: #e5deca;
+    font-size: .95em;
+    width: 3ex;
+    height: 1.2em;
+    text-align: center;
+    border: 1px solid transparent; }
+  table.match_score_flat th {
+    background-color: #303030;
+    color: white;
+    font-size: .85em;
+    width: 25ex;
+    height: 1.2em;
+    border: 1px solid transparent; }
+
+table.combat_narrative {
+  border: 1px solid #e5deca;
+  width: auto; }
+  table.combat_narrative tr.even {
+    background: #232; }
+  table.combat_narrative tr.odd {
+    background: #323; }
+  table.combat_narrative tr th {
+    width: 50px;
+    font-size: 1.2em;
+    background: transparent;
+    text-align: center; }
+  table.combat_narrative tr td {
+    width: 350px;
+    padding: 5px;
+    background: transparent; }
+    table.combat_narrative tr td.a {
+      text-align: right; }
+    table.combat_narrative tr td.d {
+      text-align: left; }
+    table.combat_narrative tr td b {
+      font-weight: bold;
+      color: #fea; }
+    table.combat_narrative tr td i {
+      color: #fea; }
+    table.combat_narrative tr td u {
+      color: #fea;
+      text-decoration: none; }
+
+div.jumpweb {
+  width: 1200px;
+  height: 900px;
+  border: 1px solid #e5deca;
+  overflow: hidden; }
+
+input[type=text], input[type=number], input[type=checkbox], select, textarea {
+  background-color: #171817;
+  color: #e5deca;
+  border-radius: 2px;
+  padding: 2px;
+  border: 2px ridge #444444;
+  box-shadow: -2px -2px 5px black; }
+
+.fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 99%; }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: Titre;
+  font-weight: normal; }
+
+body {
+  font-family: Texte;
+  background: black url("greynoise.jpg") fixed 50% 50%; }
+
+.logo {
+  display: none;
+  background: transparent url("simple_logo_invert.png") center center no-repeat;
+  /*background: url("details.png");*/ }
+
+.menu {
+  position: fixed;
+  overflow: show;
+  color: #e5deca;
+  font-size: .73em;
+  background: #171817;
+  z-index: 20;
+  font-family: Texte;
+  display: block;
+  padding: 5px 0 5px 0;
+  padding: 5px;
+  background: #171817;
+  color: #e5deca;
+  border: 1px solid #494c49;
+  box-shadow: 3px 3px 5px black;
+  border-radius: 5px;
+  opacity: .9;
+  width: 300px;
+  margin-bottom: 3px; }
+  .menu .releasenote {
+    display: inline-block;
+    margin: 0;
+    padding: 5px;
+    margin-right: 10px;
+    width: 15%;
+    float: right; }
+    .menu .releasenote ul {
+      margin: 0;
+      padding: 0;
+      display: block;
+      height: auto;
+      overflow: show;
+      list-style-type: none;
+      text-align: right; }
+      .menu .releasenote ul li {
+        margin: 0;
+        padding: 0;
+        display: block;
+        background-color: #171817;
+        overflow: show; }
+        .menu .releasenote ul li ul {
+          display: none;
+          list-style-type: none; }
+          .menu .releasenote ul li ul li {
+            display: block;
+            z-index: 500; }
+  .menu .shortcuts {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    width: 80%;
+    float: left; }
+    .menu .shortcuts .pic {
+      display: inline-block;
+      margin-left: 5px; }
+    .menu .shortcuts ul {
+      margin: 0;
+      padding: 5px;
+      display: inline-block;
+      height: auto;
+      overflow: show;
+      list-style-type: none; }
+      .menu .shortcuts ul li {
+        margin: 0;
+        padding: 0;
+        display: inline-block;
+        background-color: #171817;
+        overflow: show; }
+        .menu .shortcuts ul li ul {
+          display: none;
+          list-style-type: none; }
+          .menu .shortcuts ul li ul li {
+            display: block;
+            z-index: 500; }
+
+.list {
+  color: #e5deca;
+  background: transparent;
+  transition: width .5s;
+  transition: height .5s;
+  padding: 5px;
+  background: #171817;
+  color: #e5deca;
+  border: 1px solid #494c49;
+  box-shadow: 3px 3px 5px black;
+  border-radius: 5px;
+  opacity: .9;
+  width: 300px;
+  margin-bottom: 3px;
+  height: auto; }
+  .list.collapsed {
+    height: 18px;
+    overflow: hidden;
+    background: black;
+    padding: 1px;
+    /* & span.toggler {*/
+    /*     display: none;*/
+    /* }*/ }
+  .list .storyline {
+    display: block;
+    color: white;
+    text-align: center;
+    margin-top: 1em; }
+  .list .charlist .pagination {
+    text-align: center;
+    margin-top: 1em; }
+    .list .charlist .pagination a, .list .charlist .pagination strong, .list .charlist .pagination span.nav {
+      margin: 0 .1em;
+      display: inline-block;
+      padding: .5em;
+      color: #e5deca;
+      font-size: .77em;
+      background: #171817;
+      padding: .5em .8em;
+      border-radius: 2px;
+      text-decoration: none;
+      cursor: pointer;
+      border: 1px solid #494c49;
+      box-shadow: 3px 3px 5px black;
+      border-radius: 3px; }
+  .list .charlist ul.avatars {
+    text-indent: 0;
+    margin-left: 0;
+    padding-left: 0;
+    list-style-type: none;
+    font-size: 8pt; }
+    .list .charlist ul.avatars li {
+      margin: 5px; }
+      .list .charlist ul.avatars li .avatar_link {
+        width: 280px;
+        padding: 5px;
+        background: #171817;
+        color: #e5deca;
+        border: 1px solid #494c49;
+        box-shadow: 3px 3px 5px black;
+        border-radius: 5px;
+        opacity: .9; }
+        .list .charlist ul.avatars li .avatar_link .character_actions, .list .charlist ul.avatars li .avatar_link .character_info {
+          border: 1px solid transparent;
+          display: inline-block;
+          border-radius: 2px;
+          padding: 0;
+          margin: 0; }
+          .list .charlist ul.avatars li .avatar_link .character_actions a, .list .charlist ul.avatars li .avatar_link .character_actions span.nav, .list .charlist ul.avatars li .avatar_link .character_actions .action, .list .charlist ul.avatars li .avatar_link .character_info a, .list .charlist ul.avatars li .avatar_link .character_info span.nav, .list .charlist ul.avatars li .avatar_link .character_info .action {
+            cursor: pointer;
+            color: #444444; }
+            .list .charlist ul.avatars li .avatar_link .character_actions a:hover, .list .charlist ul.avatars li .avatar_link .character_actions span.nav:hover, .list .charlist ul.avatars li .avatar_link .character_actions .action:hover, .list .charlist ul.avatars li .avatar_link .character_info a:hover, .list .charlist ul.avatars li .avatar_link .character_info span.nav:hover, .list .charlist ul.avatars li .avatar_link .character_info .action:hover {
+              color: #fc2; }
+        .list .charlist ul.avatars li .avatar_link .character_actions {
+          float: right;
+          color: #e5deca; }
+        .list .charlist ul.avatars li .avatar_link .character_name {
+          display: inline-block;
+          font-family: "NomPersoListe";
+          width: 20ex;
+          height: 2.3em;
+          cursor: help;
+          overflow-y: visible; }
+          .list .charlist ul.avatars li .avatar_link .character_name em {
+            font-style: normal;
+            font-weight: bold;
+            text-shadow: 0 0 3px black; }
+            .list .charlist ul.avatars li .avatar_link .character_name em:hover {
+              color: #fc2; }
+        .list .charlist ul.avatars li .avatar_link .character_info {
+          border: 1px solid #444444;
+          background: black;
+          padding: 2px;
+          width: 98%;
+          height: 6em; }
+          .list .charlist ul.avatars li .avatar_link .character_info.hidden {
+            display: none; }
+
+.wrapper {
+  font-family: Texte;
+  font-size: 9pt;
+  padding: 0;
+  padding-top: 60px; }
+  .wrapper .details {
+    z-index: 10;
+    background: transparent;
+    padding: 10px;
+    padding-bottom: 50px;
+    font-family: Texte;
+    font-size: .97em;
+    /*border-left: 1px solid $fics_dark;*/ }
+    .wrapper .details a {
+      color: #fc2;
+      text-decoration: none; }
+    .wrapper .details .sub {
+      left: 5px;
+      position: fixed;
+      bottom: 5px;
+      margin: auto;
+      padding: auto; }
+    .wrapper .details .sheet {
+      width: 100%;
+      background: white; }
+    .wrapper .details .attributes {
+      column-count: 5;
+      column-gap: 2px;
+      column-rule: 0 solid #494c49; }
+      .wrapper .details .attributes table {
+        padding: 0; }
+        .wrapper .details .attributes table th.name {
+          padding-left: 1px;
+          background: #303230;
+          width: 5ex; }
+        .wrapper .details .attributes table td {
+          text-align: center;
+          font-weight: normal;
+          width: auto; }
+          .wrapper .details .attributes table td.edit {
+            width: 5ex; }
+        .wrapper .details .attributes table.primary {
+          border: 1px solid black; }
+        .wrapper .details .attributes table.occult th.name {
+          width: 12ex; }
+        .wrapper .details .attributes table.occult td.edit {
+          width: 5ex; }
+    .wrapper .details .gear {
+      column-count: 2;
+      column-gap: 5px;
+      column-rule: 1px dotted #494c49;
+      margin-top: 3px;
+      border: 1px solid black;
+      border-radius: 2px;
+      margin-top: 3px;
+      width: 100%; }
+      .wrapper .details .gear table.unbreakable {
+        width: 100%;
+        overflow: hidden;
+        page-break-after: always;
+        page-break-inside: avoid;
+        font-size: 1em; }
+        .wrapper .details .gear table.unbreakable th {
+          background: black; }
+          .wrapper .details .gear table.unbreakable th[colspan="3"], .wrapper .details .gear table.unbreakable th[colspan="4"], .wrapper .details .gear table.unbreakable th[colspan="12"] {
+            font-family: Titre;
+            font-weight: normal;
+            background: black;
+            color: #e5deca;
+            font-size: 1.25em;
+            text-align: center; }
+    .wrapper .details .options {
+      column-count: 3;
+      column-gap: 5px;
+      column-rule: 1px dotted #494c49;
+      margin-top: 3px;
+      border: 1px solid black;
+      border-radius: 2px;
+      margin-top: 3px;
+      width: 100%;
+      border: 1px solid black;
+      border-radius: 2px; }
+      .wrapper .details .options table.unbreakable {
+        width: 100%;
+        overflow: hidden;
+        page-break-after: always;
+        page-break-inside: avoid;
+        font-size: 1em; }
+        .wrapper .details .options table.unbreakable th {
+          background: black; }
+          .wrapper .details .options table.unbreakable th[colspan="3"], .wrapper .details .options table.unbreakable th[colspan="4"], .wrapper .details .options table.unbreakable th[colspan="12"] {
+            font-family: Titre;
+            font-weight: normal;
+            background: black;
+            color: #e5deca;
+            font-size: 1.25em;
+            text-align: center; }
+    .wrapper .details .coreblock {
+      column-count: 3;
+      column-gap: 5px;
+      column-rule: 1px dotted #494c49;
+      margin-top: 3px;
+      border: 1px solid black;
+      border-radius: 2px;
+      width: 100%;
+      border: 1px solid black;
+      border-radius: 2px; }
+      .wrapper .details .coreblock ul {
+        page-break-after: always;
+        page-break-inside: avoid;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        min-height: 16em; }
+        .wrapper .details .coreblock ul li {
+          padding: 3px;
+          margin: 0;
+          width: 100%; }
+          .wrapper .details .coreblock ul li b {
+            width: 20ex;
+            margin-right: 1ex;
+            display: inline-block;
+            background: black; }
+      .wrapper .details .coreblock .pagebreaker {
+        page-break-after: always; }
+    .wrapper .details .skillsview {
+      column-count: 3;
+      column-gap: 5px;
+      column-rule: 1px dotted #494c49;
+      margin-top: 3px;
+      border: 1px solid black;
+      border-radius: 2px; }
+      .wrapper .details .skillsview table {
+        width: 100%; }
+        .wrapper .details .skillsview table tr {
+          height: 5px;
+          overflow: hidden; }
+          .wrapper .details .skillsview table tr td {
+            width: auto;
+            height: 5px;
+            margin: 0;
+            padding: 0;
+            background: #171817; }
+          .wrapper .details .skillsview table tr td[colspan="2"] {
+            width: auto;
+            height: 8px;
+            margin: 2px;
+            padding: 1px;
+            background: #494c49;
+            text-align: center; }
+          .wrapper .details .skillsview table tr th {
+            height: 5px;
+            text-align: right;
+            background: transparent;
+            width: 14ex;
+            font-size: 1em;
+            line-height: .8em;
+            margin: 0;
+            padding: 0; }
+          .wrapper .details .skillsview table tr th.edit {
+            width: 4ex;
+            font-size: 1em;
+            text-align: center; }
+          .wrapper .details .skillsview table tr th[colspan="2"] {
+            width: 14ex; }
+          .wrapper .details .skillsview table tr th.skill_score_bar {
+            width: 16ex; }
+    .wrapper .details .edit {
+      color: #fc2; }
+    .wrapper .details .chart_panel {
+      border: 1px solid black;
+      box-shadow: 2px 2px 8px black;
+      border-radius: 5px 5px 5px 5px;
+      padding: 10px;
+      background-color: #171817;
+      display: inline-block;
+      color: #e5deca; }
+      .wrapper .details .chart_panel canvas {
+        width: 1000px;
+        height: auto; }
+    .wrapper .details .classyview {
+      width: 100%;
+      max-width: 1000px;
+      margin-left: 0;
+      margin-right: auto;
+      display: block;
+      column-count: 1;
+      column-gap: 10px;
+      column-rule: 1px dotted #494c49;
+      padding: 5px;
+      background: #171817;
+      color: #e5deca;
+      border: 1px solid #494c49;
+      box-shadow: 3px 3px 5px black;
+      border-radius: 5px;
+      opacity: .9; }
+      .wrapper .details .classyview .pic {
+        display: block;
+        float: right;
+        border: 1px solid black;
+        width: 200px;
+        height: auto; }
+      .wrapper .details .classyview h1 {
+        font-family: NomPerso; }
+      .wrapper .details .classyview h2 {
+        font-family: Titre;
+        font-weight: normal;
+        background: black;
+        color: #e5deca;
+        font-size: 1.25em;
+        text-align: center; }
+    .wrapper .details .tournamentview {
+      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
+      column-count: 1;
+      column-gap: 10px;
+      column-rule: 1px dotted #494c49;
+      padding: 5px;
+      background: #171817;
+      color: #e5deca;
+      border: 1px solid #494c49;
+      box-shadow: 3px 3px 5px black;
+      border-radius: 5px;
+      opacity: .9;
+      width: 300px;
+      margin-bottom: 3px; }
+      .wrapper .details .tournamentview .pic {
+        display: block;
+        float: right;
+        border: 1px solid black;
+        width: 200px;
+        height: auto; }
+      .wrapper .details .tournamentview h1 {
+        font-family: NomPerso; }
+      .wrapper .details .tournamentview h2 {
+        font-family: Titre;
+        font-weight: normal;
+        background: black;
+        color: #e5deca;
+        font-size: 1.25em;
+        text-align: center; }
+    .wrapper .details .storyview {
+      border: 1px solid black;
+      box-shadow: 2px 2px 8px black;
+      border-radius: 5px 5px 5px 5px;
+      padding: 5px;
+      margin: 0;
+      background-color: #171817;
+      width: 100%;
+      /*max-width: 1000px;*/
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
+      font-family: 'Texte'; }
+      .wrapper .details .storyview .drama_wrap {
+        border: 3px solid black;
+        margin: 2px; }
+      .wrapper .details .storyview .title {
+        padding: 0;
+        margin-bottom: 2px;
+        border: 1px solid black;
+        height: 50px; }
+        .wrapper .details .storyview .title .chapter {
+          display: inline-block;
+          padding: 0;
+          margin: 0;
+          border: 1px solid transparent;
+          width: 50px;
+          color: white;
+          text-align: center;
+          font-family: NomPerso;
+          font-size: 1.1em; }
+          .wrapper .details .storyview .title .chapter.big {
+            font-weight: bold;
+            font-size: 1.3em;
+            /*color: $fics_golden;*/
+            /*background: $fics_darkest;*/ }
+        .wrapper .details .storyview .title h1 {
+          font-height: 15px;
+          text-align: left;
+          font-family: NomPerso;
+          font-weight: 800;
+          color: white; }
+        .wrapper .details .storyview .title h2 {
+          font-height: 14px;
+          text-align: left;
+          font-family: NomPerso;
+          font-weight: bold;
+          color: #f6f3ec;
+          text-indent: 20px; }
+        .wrapper .details .storyview .title h3 {
+          font-height: 13px;
+          text-align: left;
+          text-decoration: underline;
+          text-indent: 30px; }
+        .wrapper .details .storyview .title h4 {
+          font-height: 12px;
+          text-align: left;
+          text-indent: 40px; }
+        .wrapper .details .storyview .title .storybar {
+          display: inline-block;
+          padding: 0;
+          margin: 0;
+          background: transparent; }
+          .wrapper .details .storyview .title .storybar p {
+            padding: 0;
+            text-indent: 0;
+            margin: 0;
+            background: transparent; }
+          .wrapper .details .storyview .title .storybar button.compact {
+            background: #444444;
+            border: 1px solid #e5deca;
+            border-radius: 3px;
+            box-shadow: 0 0 3px black;
+            color: #e5deca;
+            width: 10ex;
+            margin: 2px;
+            font-family: Texte;
+            font-size: 8pt;
+            cursor: pointer; }
+            .wrapper .details .storyview .title .storybar button.compact:hover {
+              background: #171817;
+              box-shadow: 0 0 3px #aaa; }
+        .wrapper .details .storyview .title h1, .wrapper .details .storyview .title h2, .wrapper .details .storyview .title h3, .wrapper .details .storyview .title h4 {
+          color: #e5deca;
+          display: inline-block;
+          padding: 0;
+          margin: 0;
+          border-bottom: 1px solid transparent;
+          width: 25%;
+          font-family: NomPersoListe; }
+        .wrapper .details .storyview .title.noPDF {
+          background: black; }
+          .wrapper .details .storyview .title.noPDF .chapter, .wrapper .details .storyview .title.noPDF h4, .wrapper .details .storyview .title.noPDF h3 {
+            color: #fc2; }
+        .wrapper .details .storyview .title.golden {
+          color: #fc2;
+          /*background: $fics_darkest;*/ }
+      .wrapper .details .storyview .storyarticle {
+        background: transparent;
+        padding: 0;
+        margin: auto;
+        color: white;
+        width: 100%; }
+        .wrapper .details .storyview .storyarticle table {
+          /*background: yellow;*/
+          border: 1px solid gray;
+          border-radius: 5px; }
+          .wrapper .details .storyview .storyarticle table tr th {
+            width: 150px;
+            padding: 2px;
+            background: black;
+            color: white;
+            border: 1px solid silver; }
+          .wrapper .details .storyview .storyarticle table tr td {
+            padding: 2px;
+            background: silver;
+            color: black;
+            border: 1px solid silver; }
+            .wrapper .details .storyview .storyarticle table tr td .embedded_link {
+              color: #fc2;
+              /*text-decoration: underline;*/
+              cursor: pointer; }
+              .wrapper .details .storyview .storyarticle table tr td .embedded_link.broken {
+                background: red; }
+            .wrapper .details .storyview .storyarticle table tr td p {
+              margin: 0;
+              padding: 0; }
+          .wrapper .details .storyview .storyarticle table.details {
+            width: 100%;
+            border: none; }
+            .wrapper .details .storyview .storyarticle table.details tr th {
+              background: black;
+              color: #494c49;
+              border: none;
+              border-radius: 5px; }
+            .wrapper .details .storyview .storyarticle table.details tr td {
+              width: auto;
+              background: #171817;
+              color: #e5deca;
+              border: none;
+              font-size: 9pt;
+              font-family: TextDesc;
+              border-radius: 5px; }
+              .wrapper .details .storyview .storyarticle table.details tr td .desc {
+                column-count: 3;
+                column-width: auto;
+                column-gap: 20px;
+                column-rule-style: dotted;
+                column-rule-width: 1px;
+                column-rule-color: #a61;
+                line-height: 1.4em;
+                min-height: 150px; }
+                .wrapper .details .storyview .storyarticle table.details tr td .desc .loot {
+                  /*border: 1px dotted #888;*/
+                  /*color: #fcf;*/
+                  padding: 0;
+                  margin: 0;
+                  margin-bottom: 1em;
+                  font-family: TextDesc; }
+                  .wrapper .details .storyview .storyarticle table.details tr td .desc .loot ul {
+                    margin: 0; }
+                    .wrapper .details .storyview .storyarticle table.details tr td .desc .loot ul li {
+                      margin: 0;
+                      padding: 0; }
+            .wrapper .details .storyview .storyarticle table.details em {
+              font-family: TextDesc;
+              color: #a61;
+              font-weight: bold;
+              font-style: normal;
+              font-size: 1.2em;
+              border-bottom: 1px dotted #a61; }
+            .wrapper .details .storyview .storyarticle table.details .embedded_link {
+              color: #fc4;
+              font-weight: 600;
+              /*border-bottom: 3px dotted yellow;*/ }
+            .wrapper .details .storyview .storyarticle table.details strong {
+              color: #ea6;
+              font-weight: 900;
+              font-style: normal;
+              border-bottom: 1px dotted #ea6; }
+          .wrapper .details .storyview .storyarticle table.update {
+            background: #171817;
+            width: 50%;
+            border: none; }
+            .wrapper .details .storyview .storyarticle table.update input, .wrapper .details .storyview .storyarticle table.update textarea {
+              width: 90%;
+              background: silver; }
+            .wrapper .details .storyview .storyarticle table.update tr th {
+              width: 15%;
+              background: black;
+              color: #494c49;
+              border: none;
+              border-radius: 5px; }
+            .wrapper .details .storyview .storyarticle table.update tr td {
+              width: auto;
+              background: black;
+              color: #e5deca;
+              border: none;
+              border-radius: 5px; }
+            .wrapper .details .storyview .storyarticle table.update input[type=text], .wrapper .details .storyview .storyarticle table.update input[type=number], .wrapper .details .storyview .storyarticle table.update input[type=checkbox], .wrapper .details .storyview .storyarticle table.update select, .wrapper .details .storyview .storyarticle table.update textarea {
+              background-color: #171817;
+              color: #e5deca;
+              border-radius: 2px;
+              padding: 2px;
+              border: 2px ridge #444444;
+              box-shadow: -2px -2px 5px black; }
+        .wrapper .details .storyview .storyarticle button {
+          font-family: 'monospace';
+          font-size: 8px;
+          width: 16ex;
+          padding: 0;
+          margin: 2px;
+          cursor: pointer; }
+        .wrapper .details .storyview .storyarticle .custom_glance {
+          cursor: help; }
+      .wrapper .details .storyview input[type=text], .wrapper .details .storyview input[type=number], .wrapper .details .storyview input[type=checkbox], .wrapper .details .storyview select, .wrapper .details .storyview textarea {
+        background-color: #171817;
+        color: #e5deca;
+        border-radius: 2px;
+        padding: 2px;
+        border: 2px ridge #444444;
+        box-shadow: -2px -2px 5px black; }
+    .wrapper .details .narrative {
+      margin: 5px;
+      vertical-align: top;
+      display: block;
+      border: 1px solid black;
+      border-radius: 5px;
+      padding: 5px;
+      width: auto;
+      page-break-after: always;
+      page-break-inside: avoid;
+      /*column-count:2;*/
+      /*column-gap:10px;*/
+      /*column-rule:1px dotted $fics_light;*/ }
+    .wrapper .details table.formset {
+      padding: 1ex .5em;
+      width: 100%;
+      border-radius: .5em;
+      border: 1px solid black;
+      background: black; }
+      .wrapper .details table.formset tr.row1 {
+        background: #191a19; }
+      .wrapper .details table.formset tr.row2 {
+        background: black; }
+      .wrapper .details table.formset td {
+        vertical-align: middle; }
+      .wrapper .details table.formset caption {
+        font-family: 'Texte';
+        font-size: 1.3em;
+        side: top; }
+      .wrapper .details table.formset .field_wrapper label {
+        width: 40%;
+        display: inline-block;
+        vertical-align: top;
+        text-align: left;
+        height: 100%; }
+      .wrapper .details table.formset .field_wrapper input, .wrapper .details table.formset .field_wrapper textarea, .wrapper .details table.formset .field_wrapper select {
+        box-sizing: border-box;
+        display: inline-block;
+        font-family: Texte;
+        font-size: .93em; }
+      .wrapper .details table.formset .field_wrapper textarea {
+        padding: .5em;
+        width: 40%; }
+      .wrapper .details table.formset .field_wrapper input[type=number] {
+        width: 8ex; }
+    .wrapper .details table.stats {
+      display: inline-block;
+      border: 1px solid black;
+      border-radius: 6px; }
+      .wrapper .details table.stats th {
+        width: 12ex; }
+      .wrapper .details table.stats td {
+        height: 2em;
+        width: 25ex; }
+    .wrapper .details h1, .wrapper .details h2, .wrapper .details h3 {
+      margin: 0;
+      margin-top: .5em; }
+    .wrapper .details h1 {
+      font-size: 1.6em;
+      color: #e5deca; }
+    .wrapper .details h2 {
+      font-size: 1.4em; }
+    .wrapper .details h3 {
+      font-size: 1.2em; }
+
+.edit_icon {
+  color: #fc2;
+  cursor: pointer; }
+
+.action_icon {
+  color: #444444;
+  /*color: $fics_fronter;*/
+  cursor: pointer; }
+  .action_icon:hover {
+    color: #fc2; }
+
+.subsection {
+  font-weight: bold;
+  color: #c4c;
+  text-decoration: none;
+  margin: 0; }
+
+.pdflink {
+  color: #e5deca;
+  text-decoration: none;
+  background: #171817;
+  display: inline-block;
+  padding: 3px; }
+
+.ping {
+  background: orange; }
+
+.waiting {
+  cursor: progress;
+  opacity: .95; }
+
+.golden {
+  color: #fc2; }
+
+.blank {
+  color: #3c3f3c;
+  opacity: .5;
+  text-shadow: 0 0 3px black; }
+
+.wildcard {
+  color: #e5deca;
+  opacity: .5; }
+
+.low {
+  color: #e5deca;
+  /*opacity: .5;*/
+  text-shadow: 0 0 3px lime; }
+
+.medium {
+  color: yellow;
+  /*opacity: .6;*/
+  text-shadow: 0 0 3px yellow; }
+
+.high {
+  color: orange;
+  /*opacity: .7;*/
+  text-shadow: 0 0 3px orange; }
+
+.veryhigh {
+  color: #aa2020;
+  /*opacity: .8;*/
+  text-shadow: 0 0 3px red; }
+
+th.skill_dot {
+  line-height: .3em;
+  background: orange; }
+
+.embedded_link {
+  color: #fc2;
+  text-decoration: none; }
+
+.epic {
+  background-color: #303230; }
+
+.drama {
+  background-color: #171817; }
+
+.act {
+  background-color: black; }
+
+.event {
+  background-color: black; }
+
+.btn {
+  display: block;
+  padding: 0;
+  margin: 0;
+  width: 150px;
+  height: 20px;
+  border: 2px solid #171817;
+  border-radius: 5px;
+  background: #171817;
+  color: white;
+  text-decoration: none;
+  padding: 5px;
+  text-align: left;
+  font-size: 1.6em;
+  /* 0.87em*/ }
+  .btn:hover {
+    border-color: #aaa;
+    background: black;
+    color: #aaa;
+    cursor: pointer; }
+
+.tabs {
+  display: none; }
+
+.tab_up {
+  display: block; }
+
+.tabberbar {
+  text-align: center; }
+  .tabberbar span {
+    display: inline-block; }
+
+.shown {
+  display: block; }
+
+.hidden {
+  display: none; }
+
+.working table, .working table td, .working table th, .working th, .working td {
+  background: #444444; }
+
+.menuright {
+  position: relative;
+  display: inline-block;
+  width: 300px;
+  height: auto;
+  padding: 5px;
+  background: #171817;
+  color: #e5deca;
+  border: 1px solid #494c49;
+  box-shadow: 3px 3px 5px black;
+  border-radius: 5px;
+  opacity: .9;
+  width: 300px;
+  margin-bottom: 3px;
+  transition: width .5s;
+  transition: height .5s; }
+  .menuright #keywords {
+    width: 250px;
+    margin-right: 5px;
+    height: auto; }
+  .menuright.collapsed {
+    height: 18px;
+    overflow: hidden;
+    background: black;
+    padding: 1px;
+    /* & span.toggler {*/
+    /*     display: none;*/
+    /* }*/ }
+
+.dicer {
+  position: relative;
+  display: inline-block;
+  right: 0;
+  padding: 5px;
+  background: #171817;
+  color: #e5deca;
+  border: 1px solid #494c49;
+  box-shadow: 3px 3px 5px black;
+  border-radius: 5px;
+  opacity: .9;
+  width: 300px;
+  margin-bottom: 3px;
+  transition: width .5s;
+  transition: height .5s; }
+  .dicer .roll_dice, .dicer .rolls, .dicer .mods, .dicer .total {
+    width: 15ex; }
+  .dicer input#set {
+    width: 50px;
+    font-weight: bold; }
+  .dicer.collapsed {
+    height: 18px;
+    overflow: hidden;
+    background: black;
+    padding: 1px;
+    /* & span.toggler {*/
+    /*     display: none;*/
+    /* }*/ }
+
+/*     background: #333;*/
+/*     opacity: .5;*/
+/* }*/
+@font-face {
+  font-family: 'NomPerso';
+  src: url("fonts/Cinzel-Black.ttf"); }
+
+@font-face {
+  font-family: 'TextDesc';
+  src: url("fonts/WorkSans-Light.ttf"); }
+
+@font-face {
+  font-family: 'NomPersoListe';
+  src: url("fonts/Cinzel-Regular.ttf"); }
+
+@font-face {
+  font-family: 'Titre';
+  /*src: url('Eczar-ExtraBold.ttf');*/
+  src: url("fonts/Balthazar-Regular.ttf"); }
+
+@font-face {
+  font-family: 'Texte';
+  src: url("fonts/Lato-Regular.ttf"); }
+
+@font-face {
+  font-family: 'Emphase';
+  src: url("Eczar-Regular.ttf"); }
+
+input[type=text], input[type=number], input[type=checkbox], select, textarea {
+  background-color: #171817;
+  color: #e5deca;
+  border-radius: 2px;
+  padding: 2px;
+  border: 2px ridge #444444;
+  box-shadow: -2px -2px 5px black; }
+
+.fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 99%; }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: Titre;
+  font-weight: normal; }
+
+body {
+  font-family: Texte;
+  background: black url("greynoise.jpg") fixed 50% 50%; }
+
+.logo {
+  display: none;
+  background: transparent url("simple_logo_invert.png") center center no-repeat;
+  /*background: url("details.png");*/ }
+
+.menu {
+  position: fixed;
+  overflow: show;
+  color: #e5deca;
+  font-size: .73em;
+  background: #171817;
+  z-index: 20;
+  font-family: Texte;
+  display: block;
+  padding: 5px 0 5px 0;
+  padding: 5px;
+  background: #171817;
+  color: #e5deca;
+  border: 1px solid #494c49;
+  box-shadow: 3px 3px 5px black;
+  border-radius: 5px;
+  opacity: .9;
+  width: 300px;
+  margin-bottom: 3px; }
+  .menu .releasenote {
+    display: inline-block;
+    margin: 0;
+    padding: 5px;
+    margin-right: 10px;
+    width: 15%;
+    float: right; }
+    .menu .releasenote ul {
+      margin: 0;
+      padding: 0;
+      display: block;
+      height: auto;
+      overflow: show;
+      list-style-type: none;
+      text-align: right; }
+      .menu .releasenote ul li {
+        margin: 0;
+        padding: 0;
+        display: block;
+        background-color: #171817;
+        overflow: show; }
+        .menu .releasenote ul li ul {
+          display: none;
+          list-style-type: none; }
+          .menu .releasenote ul li ul li {
+            display: block;
+            z-index: 500; }
+  .menu .shortcuts {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    width: 80%;
+    float: left; }
+    .menu .shortcuts .pic {
+      display: inline-block;
+      margin-left: 5px; }
+    .menu .shortcuts ul {
+      margin: 0;
+      padding: 5px;
+      display: inline-block;
+      height: auto;
+      overflow: show;
+      list-style-type: none; }
+      .menu .shortcuts ul li {
+        margin: 0;
+        padding: 0;
+        display: inline-block;
+        background-color: #171817;
+        overflow: show; }
+        .menu .shortcuts ul li ul {
+          display: none;
+          list-style-type: none; }
+          .menu .shortcuts ul li ul li {
+            display: block;
+            z-index: 500; }
+
+.list {
+  color: #e5deca;
+  background: transparent;
+  transition: width .5s;
+  transition: height .5s;
+  padding: 5px;
+  background: #171817;
+  color: #e5deca;
+  border: 1px solid #494c49;
+  box-shadow: 3px 3px 5px black;
+  border-radius: 5px;
+  opacity: .9;
+  width: 300px;
+  margin-bottom: 3px;
+  height: auto; }
+  .list.collapsed {
+    height: 18px;
+    overflow: hidden;
+    background: black;
+    padding: 1px;
+    /* & span.toggler {*/
+    /*     display: none;*/
+    /* }*/ }
+  .list .storyline {
+    display: block;
+    color: white;
+    text-align: center;
+    margin-top: 1em; }
+  .list .charlist .pagination {
+    text-align: center;
+    margin-top: 1em; }
+    .list .charlist .pagination a, .list .charlist .pagination strong, .list .charlist .pagination span.nav {
+      margin: 0 .1em;
+      display: inline-block;
+      padding: .5em;
+      color: #e5deca;
+      font-size: .77em;
+      background: #171817;
+      padding: .5em .8em;
+      border-radius: 2px;
+      text-decoration: none;
+      cursor: pointer;
+      border: 1px solid #494c49;
+      box-shadow: 3px 3px 5px black;
+      border-radius: 3px; }
+  .list .charlist ul.avatars {
+    text-indent: 0;
+    margin-left: 0;
+    padding-left: 0;
+    list-style-type: none;
+    font-size: 8pt; }
+    .list .charlist ul.avatars li {
+      margin: 5px; }
+      .list .charlist ul.avatars li .avatar_link {
+        width: 280px;
+        padding: 5px;
+        background: #171817;
+        color: #e5deca;
+        border: 1px solid #494c49;
+        box-shadow: 3px 3px 5px black;
+        border-radius: 5px;
+        opacity: .9; }
+        .list .charlist ul.avatars li .avatar_link .character_actions, .list .charlist ul.avatars li .avatar_link .character_info {
+          border: 1px solid transparent;
+          display: inline-block;
+          border-radius: 2px;
+          padding: 0;
+          margin: 0; }
+          .list .charlist ul.avatars li .avatar_link .character_actions a, .list .charlist ul.avatars li .avatar_link .character_actions span.nav, .list .charlist ul.avatars li .avatar_link .character_actions .action, .list .charlist ul.avatars li .avatar_link .character_info a, .list .charlist ul.avatars li .avatar_link .character_info span.nav, .list .charlist ul.avatars li .avatar_link .character_info .action {
+            cursor: pointer;
+            color: #444444; }
+            .list .charlist ul.avatars li .avatar_link .character_actions a:hover, .list .charlist ul.avatars li .avatar_link .character_actions span.nav:hover, .list .charlist ul.avatars li .avatar_link .character_actions .action:hover, .list .charlist ul.avatars li .avatar_link .character_info a:hover, .list .charlist ul.avatars li .avatar_link .character_info span.nav:hover, .list .charlist ul.avatars li .avatar_link .character_info .action:hover {
+              color: #fc2; }
+        .list .charlist ul.avatars li .avatar_link .character_actions {
+          float: right;
+          color: #e5deca; }
+        .list .charlist ul.avatars li .avatar_link .character_name {
+          display: inline-block;
+          font-family: "NomPersoListe";
+          width: 20ex;
+          height: 2.3em;
+          cursor: help;
+          overflow-y: visible; }
+          .list .charlist ul.avatars li .avatar_link .character_name em {
+            font-style: normal;
+            font-weight: bold;
+            text-shadow: 0 0 3px black; }
+            .list .charlist ul.avatars li .avatar_link .character_name em:hover {
+              color: #fc2; }
+        .list .charlist ul.avatars li .avatar_link .character_info {
+          border: 1px solid #444444;
+          background: black;
+          padding: 2px;
+          width: 98%;
+          height: 6em; }
+          .list .charlist ul.avatars li .avatar_link .character_info.hidden {
+            display: none; }
+
+.wrapper {
+  font-family: Texte;
+  font-size: 9pt;
+  padding: 0;
+  padding-top: 60px; }
+  .wrapper .details {
+    z-index: 10;
+    background: transparent;
+    padding: 10px;
+    padding-bottom: 50px;
+    font-family: Texte;
+    font-size: .97em;
+    /*border-left: 1px solid $fics_dark;*/ }
+    .wrapper .details a {
+      color: #fc2;
+      text-decoration: none; }
+    .wrapper .details .sub {
+      left: 5px;
+      position: fixed;
+      bottom: 5px;
+      margin: auto;
+      padding: auto; }
+    .wrapper .details .sheet {
+      width: 100%;
+      background: white; }
+    .wrapper .details .attributes {
+      column-count: 5;
+      column-gap: 2px;
+      column-rule: 0 solid #494c49; }
+      .wrapper .details .attributes table {
+        padding: 0; }
+        .wrapper .details .attributes table th.name {
+          padding-left: 1px;
+          background: #303230;
+          width: 5ex; }
+        .wrapper .details .attributes table td {
+          text-align: center;
+          font-weight: normal;
+          width: auto; }
+          .wrapper .details .attributes table td.edit {
+            width: 5ex; }
+        .wrapper .details .attributes table.primary {
+          border: 1px solid black; }
+        .wrapper .details .attributes table.occult th.name {
+          width: 12ex; }
+        .wrapper .details .attributes table.occult td.edit {
+          width: 5ex; }
+    .wrapper .details .gear {
+      column-count: 2;
+      column-gap: 5px;
+      column-rule: 1px dotted #494c49;
+      margin-top: 3px;
+      border: 1px solid black;
+      border-radius: 2px;
+      margin-top: 3px;
+      width: 100%; }
+      .wrapper .details .gear table.unbreakable {
+        width: 100%;
+        overflow: hidden;
+        page-break-after: always;
+        page-break-inside: avoid;
+        font-size: 1em; }
+        .wrapper .details .gear table.unbreakable th {
+          background: black; }
+          .wrapper .details .gear table.unbreakable th[colspan="3"], .wrapper .details .gear table.unbreakable th[colspan="4"], .wrapper .details .gear table.unbreakable th[colspan="12"] {
+            font-family: Titre;
+            font-weight: normal;
+            background: black;
+            color: #e5deca;
+            font-size: 1.25em;
+            text-align: center; }
+    .wrapper .details .options {
+      column-count: 3;
+      column-gap: 5px;
+      column-rule: 1px dotted #494c49;
+      margin-top: 3px;
+      border: 1px solid black;
+      border-radius: 2px;
+      margin-top: 3px;
+      width: 100%;
+      border: 1px solid black;
+      border-radius: 2px; }
+      .wrapper .details .options table.unbreakable {
+        width: 100%;
+        overflow: hidden;
+        page-break-after: always;
+        page-break-inside: avoid;
+        font-size: 1em; }
+        .wrapper .details .options table.unbreakable th {
+          background: black; }
+          .wrapper .details .options table.unbreakable th[colspan="3"], .wrapper .details .options table.unbreakable th[colspan="4"], .wrapper .details .options table.unbreakable th[colspan="12"] {
+            font-family: Titre;
+            font-weight: normal;
+            background: black;
+            color: #e5deca;
+            font-size: 1.25em;
+            text-align: center; }
+    .wrapper .details .coreblock {
+      column-count: 3;
+      column-gap: 5px;
+      column-rule: 1px dotted #494c49;
+      margin-top: 3px;
+      border: 1px solid black;
+      border-radius: 2px;
+      width: 100%;
+      border: 1px solid black;
+      border-radius: 2px; }
+      .wrapper .details .coreblock ul {
+        page-break-after: always;
+        page-break-inside: avoid;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        min-height: 16em; }
+        .wrapper .details .coreblock ul li {
+          padding: 3px;
+          margin: 0;
+          width: 100%; }
+          .wrapper .details .coreblock ul li b {
+            width: 20ex;
+            margin-right: 1ex;
+            display: inline-block;
+            background: black; }
+      .wrapper .details .coreblock .pagebreaker {
+        page-break-after: always; }
+    .wrapper .details .skillsview {
+      column-count: 3;
+      column-gap: 5px;
+      column-rule: 1px dotted #494c49;
+      margin-top: 3px;
+      border: 1px solid black;
+      border-radius: 2px; }
+      .wrapper .details .skillsview table {
+        width: 100%; }
+        .wrapper .details .skillsview table tr {
+          height: 5px;
+          overflow: hidden; }
+          .wrapper .details .skillsview table tr td {
+            width: auto;
+            height: 5px;
+            margin: 0;
+            padding: 0;
+            background: #171817; }
+          .wrapper .details .skillsview table tr td[colspan="2"] {
+            width: auto;
+            height: 8px;
+            margin: 2px;
+            padding: 1px;
+            background: #494c49;
+            text-align: center; }
+          .wrapper .details .skillsview table tr th {
+            height: 5px;
+            text-align: right;
+            background: transparent;
+            width: 14ex;
+            font-size: 1em;
+            line-height: .8em;
+            margin: 0;
+            padding: 0; }
+          .wrapper .details .skillsview table tr th.edit {
+            width: 4ex;
+            font-size: 1em;
+            text-align: center; }
+          .wrapper .details .skillsview table tr th[colspan="2"] {
+            width: 14ex; }
+          .wrapper .details .skillsview table tr th.skill_score_bar {
+            width: 16ex; }
+    .wrapper .details .edit {
+      color: #fc2; }
+    .wrapper .details .chart_panel {
+      border: 1px solid black;
+      box-shadow: 2px 2px 8px black;
+      border-radius: 5px 5px 5px 5px;
+      padding: 10px;
+      background-color: #171817;
+      display: inline-block;
+      color: #e5deca; }
+      .wrapper .details .chart_panel canvas {
+        width: 1000px;
+        height: auto; }
+    .wrapper .details .classyview {
+      width: 100%;
+      max-width: 1000px;
+      margin-left: 0;
+      margin-right: auto;
+      display: block;
+      column-count: 1;
+      column-gap: 10px;
+      column-rule: 1px dotted #494c49;
+      padding: 5px;
+      background: #171817;
+      color: #e5deca;
+      border: 1px solid #494c49;
+      box-shadow: 3px 3px 5px black;
+      border-radius: 5px;
+      opacity: .9; }
+      .wrapper .details .classyview .pic {
+        display: block;
+        float: right;
+        border: 1px solid black;
+        width: 200px;
+        height: auto; }
+      .wrapper .details .classyview h1 {
+        font-family: NomPerso; }
+      .wrapper .details .classyview h2 {
+        font-family: Titre;
+        font-weight: normal;
+        background: black;
+        color: #e5deca;
+        font-size: 1.25em;
+        text-align: center; }
+    .wrapper .details .tournamentview {
+      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
+      column-count: 1;
+      column-gap: 10px;
+      column-rule: 1px dotted #494c49;
+      padding: 5px;
+      background: #171817;
+      color: #e5deca;
+      border: 1px solid #494c49;
+      box-shadow: 3px 3px 5px black;
+      border-radius: 5px;
+      opacity: .9;
+      width: 300px;
+      margin-bottom: 3px; }
+      .wrapper .details .tournamentview .pic {
+        display: block;
+        float: right;
+        border: 1px solid black;
+        width: 200px;
+        height: auto; }
+      .wrapper .details .tournamentview h1 {
+        font-family: NomPerso; }
+      .wrapper .details .tournamentview h2 {
+        font-family: Titre;
+        font-weight: normal;
+        background: black;
+        color: #e5deca;
+        font-size: 1.25em;
+        text-align: center; }
+    .wrapper .details .storyview {
+      border: 1px solid black;
+      box-shadow: 2px 2px 8px black;
+      border-radius: 5px 5px 5px 5px;
+      padding: 5px;
+      margin: 0;
+      background-color: #171817;
+      width: 100%;
+      /*max-width: 1000px;*/
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
+      font-family: 'Texte'; }
+      .wrapper .details .storyview .drama_wrap {
+        border: 3px solid black;
+        margin: 2px; }
+      .wrapper .details .storyview .title {
+        padding: 0;
+        margin-bottom: 2px;
+        border: 1px solid black;
+        height: 50px; }
+        .wrapper .details .storyview .title .chapter {
+          display: inline-block;
+          padding: 0;
+          margin: 0;
+          border: 1px solid transparent;
+          width: 50px;
+          color: white;
+          text-align: center;
+          font-family: NomPerso;
+          font-size: 1.1em; }
+          .wrapper .details .storyview .title .chapter.big {
+            font-weight: bold;
+            font-size: 1.3em;
+            /*color: $fics_golden;*/
+            /*background: $fics_darkest;*/ }
+        .wrapper .details .storyview .title h1 {
+          font-height: 15px;
+          text-align: left;
+          font-family: NomPerso;
+          font-weight: 800;
+          color: white; }
+        .wrapper .details .storyview .title h2 {
+          font-height: 14px;
+          text-align: left;
+          font-family: NomPerso;
+          font-weight: bold;
+          color: #f6f3ec;
+          text-indent: 20px; }
+        .wrapper .details .storyview .title h3 {
+          font-height: 13px;
+          text-align: left;
+          text-decoration: underline;
+          text-indent: 30px; }
+        .wrapper .details .storyview .title h4 {
+          font-height: 12px;
+          text-align: left;
+          text-indent: 40px; }
+        .wrapper .details .storyview .title .storybar {
+          display: inline-block;
+          padding: 0;
+          margin: 0;
+          background: transparent; }
+          .wrapper .details .storyview .title .storybar p {
+            padding: 0;
+            text-indent: 0;
+            margin: 0;
+            background: transparent; }
+          .wrapper .details .storyview .title .storybar button.compact {
+            background: #444444;
+            border: 1px solid #e5deca;
+            border-radius: 3px;
+            box-shadow: 0 0 3px black;
+            color: #e5deca;
+            width: 10ex;
+            margin: 2px;
+            font-family: Texte;
+            font-size: 8pt;
+            cursor: pointer; }
+            .wrapper .details .storyview .title .storybar button.compact:hover {
+              background: #171817;
+              box-shadow: 0 0 3px #aaa; }
+        .wrapper .details .storyview .title h1, .wrapper .details .storyview .title h2, .wrapper .details .storyview .title h3, .wrapper .details .storyview .title h4 {
+          color: #e5deca;
+          display: inline-block;
+          padding: 0;
+          margin: 0;
+          border-bottom: 1px solid transparent;
+          width: 25%;
+          font-family: NomPersoListe; }
+        .wrapper .details .storyview .title.noPDF {
+          background: black; }
+          .wrapper .details .storyview .title.noPDF .chapter, .wrapper .details .storyview .title.noPDF h4, .wrapper .details .storyview .title.noPDF h3 {
+            color: #fc2; }
+        .wrapper .details .storyview .title.golden {
+          color: #fc2;
+          /*background: $fics_darkest;*/ }
+      .wrapper .details .storyview .storyarticle {
+        background: transparent;
+        padding: 0;
+        margin: auto;
+        color: white;
+        width: 100%; }
+        .wrapper .details .storyview .storyarticle table {
+          /*background: yellow;*/
+          border: 1px solid gray;
+          border-radius: 5px; }
+          .wrapper .details .storyview .storyarticle table tr th {
+            width: 150px;
+            padding: 2px;
+            background: black;
+            color: white;
+            border: 1px solid silver; }
+          .wrapper .details .storyview .storyarticle table tr td {
+            padding: 2px;
+            background: silver;
+            color: black;
+            border: 1px solid silver; }
+            .wrapper .details .storyview .storyarticle table tr td .embedded_link {
+              color: #fc2;
+              /*text-decoration: underline;*/
+              cursor: pointer; }
+              .wrapper .details .storyview .storyarticle table tr td .embedded_link.broken {
+                background: red; }
+            .wrapper .details .storyview .storyarticle table tr td p {
+              margin: 0;
+              padding: 0; }
+          .wrapper .details .storyview .storyarticle table.details {
+            width: 100%;
+            border: none; }
+            .wrapper .details .storyview .storyarticle table.details tr th {
+              background: black;
+              color: #494c49;
+              border: none;
+              border-radius: 5px; }
+            .wrapper .details .storyview .storyarticle table.details tr td {
+              width: auto;
+              background: #171817;
+              color: #e5deca;
+              border: none;
+              font-size: 9pt;
+              font-family: TextDesc;
+              border-radius: 5px; }
+              .wrapper .details .storyview .storyarticle table.details tr td .desc {
+                column-count: 3;
+                column-width: auto;
+                column-gap: 20px;
+                column-rule-style: dotted;
+                column-rule-width: 1px;
+                column-rule-color: #a61;
+                line-height: 1.4em;
+                min-height: 150px; }
+                .wrapper .details .storyview .storyarticle table.details tr td .desc .loot {
+                  /*border: 1px dotted #888;*/
+                  /*color: #fcf;*/
+                  padding: 0;
+                  margin: 0;
+                  margin-bottom: 1em;
+                  font-family: TextDesc; }
+                  .wrapper .details .storyview .storyarticle table.details tr td .desc .loot ul {
+                    margin: 0; }
+                    .wrapper .details .storyview .storyarticle table.details tr td .desc .loot ul li {
+                      margin: 0;
+                      padding: 0; }
+            .wrapper .details .storyview .storyarticle table.details em {
+              font-family: TextDesc;
+              color: #a61;
+              font-weight: bold;
+              font-style: normal;
+              font-size: 1.2em;
+              border-bottom: 1px dotted #a61; }
+            .wrapper .details .storyview .storyarticle table.details .embedded_link {
+              color: #fc4;
+              font-weight: 600;
+              /*border-bottom: 3px dotted yellow;*/ }
+            .wrapper .details .storyview .storyarticle table.details strong {
+              color: #ea6;
+              font-weight: 900;
+              font-style: normal;
+              border-bottom: 1px dotted #ea6; }
+          .wrapper .details .storyview .storyarticle table.update {
+            background: #171817;
+            width: 50%;
+            border: none; }
+            .wrapper .details .storyview .storyarticle table.update input, .wrapper .details .storyview .storyarticle table.update textarea {
+              width: 90%;
+              background: silver; }
+            .wrapper .details .storyview .storyarticle table.update tr th {
+              width: 15%;
+              background: black;
+              color: #494c49;
+              border: none;
+              border-radius: 5px; }
+            .wrapper .details .storyview .storyarticle table.update tr td {
+              width: auto;
+              background: black;
+              color: #e5deca;
+              border: none;
+              border-radius: 5px; }
+            .wrapper .details .storyview .storyarticle table.update input[type=text], .wrapper .details .storyview .storyarticle table.update input[type=number], .wrapper .details .storyview .storyarticle table.update input[type=checkbox], .wrapper .details .storyview .storyarticle table.update select, .wrapper .details .storyview .storyarticle table.update textarea {
+              background-color: #171817;
+              color: #e5deca;
+              border-radius: 2px;
+              padding: 2px;
+              border: 2px ridge #444444;
+              box-shadow: -2px -2px 5px black; }
+        .wrapper .details .storyview .storyarticle button {
+          font-family: 'monospace';
+          font-size: 8px;
+          width: 16ex;
+          padding: 0;
+          margin: 2px;
+          cursor: pointer; }
+        .wrapper .details .storyview .storyarticle .custom_glance {
+          cursor: help; }
+      .wrapper .details .storyview input[type=text], .wrapper .details .storyview input[type=number], .wrapper .details .storyview input[type=checkbox], .wrapper .details .storyview select, .wrapper .details .storyview textarea {
+        background-color: #171817;
+        color: #e5deca;
+        border-radius: 2px;
+        padding: 2px;
+        border: 2px ridge #444444;
+        box-shadow: -2px -2px 5px black; }
+    .wrapper .details .narrative {
+      margin: 5px;
+      vertical-align: top;
+      display: block;
+      border: 1px solid black;
+      border-radius: 5px;
+      padding: 5px;
+      width: auto;
+      page-break-after: always;
+      page-break-inside: avoid;
+      /*column-count:2;*/
+      /*column-gap:10px;*/
+      /*column-rule:1px dotted $fics_light;*/ }
+    .wrapper .details table.formset {
+      padding: 1ex .5em;
+      width: 100%;
+      border-radius: .5em;
+      border: 1px solid black;
+      background: black; }
+      .wrapper .details table.formset tr.row1 {
+        background: #191a19; }
+      .wrapper .details table.formset tr.row2 {
+        background: black; }
+      .wrapper .details table.formset td {
+        vertical-align: middle; }
+      .wrapper .details table.formset caption {
+        font-family: 'Texte';
+        font-size: 1.3em;
+        side: top; }
+      .wrapper .details table.formset .field_wrapper label {
+        width: 40%;
+        display: inline-block;
+        vertical-align: top;
+        text-align: left;
+        height: 100%; }
+      .wrapper .details table.formset .field_wrapper input, .wrapper .details table.formset .field_wrapper textarea, .wrapper .details table.formset .field_wrapper select {
+        box-sizing: border-box;
+        display: inline-block;
+        font-family: Texte;
+        font-size: .93em; }
+      .wrapper .details table.formset .field_wrapper textarea {
+        padding: .5em;
+        width: 40%; }
+      .wrapper .details table.formset .field_wrapper input[type=number] {
+        width: 8ex; }
+    .wrapper .details table.stats {
+      display: inline-block;
+      border: 1px solid black;
+      border-radius: 6px; }
+      .wrapper .details table.stats th {
+        width: 12ex; }
+      .wrapper .details table.stats td {
+        height: 2em;
+        width: 25ex; }
+    .wrapper .details h1, .wrapper .details h2, .wrapper .details h3 {
+      margin: 0;
+      margin-top: .5em; }
+    .wrapper .details h1 {
+      font-size: 1.6em;
+      color: #e5deca; }
+    .wrapper .details h2 {
+      font-size: 1.4em; }
+    .wrapper .details h3 {
+      font-size: 1.2em; }
+
+.edit_icon {
+  color: #fc2;
+  cursor: pointer; }
+
+.action_icon {
+  color: #444444;
+  /*color: $fics_fronter;*/
+  cursor: pointer; }
+  .action_icon:hover {
+    color: #fc2; }
+
+.subsection {
+  font-weight: bold;
+  color: #c4c;
+  text-decoration: none;
+  margin: 0; }
+
+.pdflink {
+  color: #e5deca;
+  text-decoration: none;
+  background: #171817;
+  display: inline-block;
+  padding: 3px; }
+
+.ping {
+  background: orange; }
+
+.waiting {
+  cursor: progress;
+  opacity: .95; }
+
+.golden {
+  color: #fc2; }
+
+.blank {
+  color: #3c3f3c;
+  opacity: .5;
+  text-shadow: 0 0 3px black; }
+
+.wildcard {
+  color: #e5deca;
+  opacity: .5; }
+
+.low {
+  color: #e5deca;
+  /*opacity: .5;*/
+  text-shadow: 0 0 3px lime; }
+
+.medium {
+  color: yellow;
+  /*opacity: .6;*/
+  text-shadow: 0 0 3px yellow; }
+
+.high {
+  color: orange;
+  /*opacity: .7;*/
+  text-shadow: 0 0 3px orange; }
+
+.veryhigh {
+  color: #aa2020;
+  /*opacity: .8;*/
+  text-shadow: 0 0 3px red; }
+
+th.skill_dot {
+  line-height: .3em;
+  background: orange; }
+
+.embedded_link {
+  color: #fc2;
+  text-decoration: none; }
+
+.epic {
+  background-color: #303230; }
+
+.drama {
+  background-color: #171817; }
+
+.act {
+  background-color: black; }
+
+.event {
+  background-color: black; }
+
+.btn {
+  display: block;
+  padding: 0;
+  margin: 0;
+  width: 150px;
+  height: 20px;
+  border: 2px solid #171817;
+  border-radius: 5px;
+  background: #171817;
+  color: white;
+  text-decoration: none;
+  padding: 5px;
+  text-align: left;
+  font-size: 1.6em;
+  /* 0.87em*/ }
+  .btn:hover {
+    border-color: #aaa;
+    background: black;
+    color: #aaa;
+    cursor: pointer; }
+
+.tabs {
+  display: none; }
+
+.tab_up {
+  display: block; }
+
+.tabberbar {
+  text-align: center; }
+  .tabberbar span {
+    display: inline-block; }
+
+.shown {
+  display: block; }
+
+.hidden {
+  display: none; }
+
+.working table, .working table td, .working table th, .working th, .working td {
+  background: #444444; }
+
+.menuright {
+  position: relative;
+  display: inline-block;
+  width: 300px;
+  height: auto;
+  padding: 5px;
+  background: #171817;
+  color: #e5deca;
+  border: 1px solid #494c49;
+  box-shadow: 3px 3px 5px black;
+  border-radius: 5px;
+  opacity: .9;
+  width: 300px;
+  margin-bottom: 3px;
+  transition: width .5s;
+  transition: height .5s; }
+  .menuright #keywords {
+    width: 250px;
+    margin-right: 5px;
+    height: auto; }
+  .menuright.collapsed {
+    height: 18px;
+    overflow: hidden;
+    background: black;
+    padding: 1px;
+    /* & span.toggler {*/
+    /*     display: none;*/
+    /* }*/ }
+
+.dicer {
+  position: relative;
+  display: inline-block;
+  right: 0;
+  padding: 5px;
+  background: #171817;
+  color: #e5deca;
+  border: 1px solid #494c49;
+  box-shadow: 3px 3px 5px black;
+  border-radius: 5px;
+  opacity: .9;
+  width: 300px;
+  margin-bottom: 3px;
+  transition: width .5s;
+  transition: height .5s; }
+  .dicer .roll_dice, .dicer .rolls, .dicer .mods, .dicer .total {
+    width: 15ex; }
+  .dicer input#set {
+    width: 50px;
+    font-weight: bold; }
+  .dicer.collapsed {
+    height: 18px;
+    overflow: hidden;
+    background: black;
+    padding: 1px;
+    /* & span.toggler {*/
+    /*     display: none;*/
+    /* }*/ }
+
+/*     background: #333;*/
+/*     opacity: .5;*/
+/* }*/
+@font-face {
+  font-family: 'NomPerso';
+  src: url("fonts/Cinzel-Black.ttf"); }
+
+@font-face {
+  font-family: 'TextDesc';
+  src: url("fonts/WorkSans-Light.ttf"); }
+
+@font-face {
+  font-family: 'NomPersoListe';
+  src: url("fonts/Cinzel-Regular.ttf"); }
+
+@font-face {
+  font-family: 'Titre';
+  /*src: url('Eczar-ExtraBold.ttf');*/
+  src: url("fonts/Balthazar-Regular.ttf"); }
+
+@font-face {
+  font-family: 'Texte';
+  src: url("fonts/Lato-Regular.ttf"); }
+
+@font-face {
+  font-family: 'Emphase';
+  src: url("Eczar-Regular.ttf"); }
+
+span.toggler {
+  text-align: left;
+  vertical-align: middle;
+  padding: 3px; }
+  span.toggler u {
+    font-family: Lato;
+    text-decoration: none;
+    color: white; }
+    span.toggler u:before {
+      content: "  "; }
+
+#messenger {
+  width: 100%;
+  height: auto;
+  top: auto;
+  bottom: 5px;
+  left: 5px;
+  right: auto;
+  z-index: 9000;
+  padding: 5px;
+  background: #171817;
+  color: #e5deca;
+  border: 1px solid #494c49;
+  box-shadow: 3px 3px 5px black;
+  border-radius: 5px;
+  opacity: .9;
+  width: 300px;
+  margin-bottom: 3px;
+  transition: display .5s; }
+  #messenger p {
+    margin: 5px;
+    padding: 0;
+    color: white;
+    font-family: monospace;
+    font-size: 8pt; }
+    #messenger p.info {
+      color: cyan; }
+    #messenger p.success {
+      color: lime; }
+    #messenger p.error {
+      color: red; }
+    #messenger p.warning {
+      color: orange; }
+
+.mobile_form {
+  position: relative;
+  display: inline-block;
+  height: auto;
+  right: 1px;
+  bottom: 1px;
+  z-index: 8000;
+  overflow: hidden;
+  padding: 5px;
+  background: #171817;
+  color: #e5deca;
+  border: 1px solid #494c49;
+  box-shadow: 3px 3px 5px black;
+  border-radius: 5px;
+  opacity: .9;
+  width: 290px;
+  transition: width .5s;
+  transition: height .5s; }
+  .mobile_form.collapsed {
+    height: 18px;
+    overflow: hidden;
+    background: black;
+    padding: 1px;
+    /* & span.toggler {*/
+    /*     display: none;*/
+    /* }*/ }
+  .mobile_form table.expanded tr td[colspan="1"], .mobile_form table.expanded tr th[colspan="1"] {
+    width: 30px; }
+  .mobile_form table.expanded tr td[colspan="2"], .mobile_form table.expanded tr th[colspan="2"] {
+    width: 80px; }
+  .mobile_form table.expanded tr td[colspan="3"], .mobile_form table.expanded tr th[colspan="3"] {
+    width: 130px; }
+  .mobile_form table.expanded tr #summary {
+    height: 250px;
+    overflow-y: scroll;
+    border: 1px solid black;
+    width: 100%; }
+  .mobile_form table.expanded tr select, .mobile_form table.expanded troption {
+    width: 26ex; }
+  .mobile_form table.expanded ul {
+    margin: 0; }
+
+.selected {
+  background-color: #494c49; }
+
+input[type=text], input[type=number], input[type=checkbox], select, textarea {
+  background-color: #171817;
+  color: #e5deca;
+  border-radius: 2px;
+  padding: 2px;
+  border: 2px ridge #444444;
+  box-shadow: -2px -2px 5px black; }
+
+.fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 99%; }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: Titre;
+  font-weight: normal; }
+
+body {
+  font-family: Texte;
+  background: black url("greynoise.jpg") fixed 50% 50%; }
+
+.logo {
+  display: none;
+  background: transparent url("simple_logo_invert.png") center center no-repeat;
+  /*background: url("details.png");*/ }
+
+.menu {
+  position: fixed;
+  overflow: show;
+  color: #e5deca;
+  font-size: .73em;
+  background: #171817;
+  z-index: 20;
+  font-family: Texte;
+  display: block;
+  padding: 5px 0 5px 0;
+  padding: 5px;
+  background: #171817;
+  color: #e5deca;
+  border: 1px solid #494c49;
+  box-shadow: 3px 3px 5px black;
+  border-radius: 5px;
+  opacity: .9;
+  width: 300px;
+  margin-bottom: 3px; }
+  .menu .releasenote {
+    display: inline-block;
+    margin: 0;
+    padding: 5px;
+    margin-right: 10px;
+    width: 15%;
+    float: right; }
+    .menu .releasenote ul {
+      margin: 0;
+      padding: 0;
+      display: block;
+      height: auto;
+      overflow: show;
+      list-style-type: none;
+      text-align: right; }
+      .menu .releasenote ul li {
+        margin: 0;
+        padding: 0;
+        display: block;
+        background-color: #171817;
+        overflow: show; }
+        .menu .releasenote ul li ul {
+          display: none;
+          list-style-type: none; }
+          .menu .releasenote ul li ul li {
+            display: block;
+            z-index: 500; }
+  .menu .shortcuts {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    width: 80%;
+    float: left; }
+    .menu .shortcuts .pic {
+      display: inline-block;
+      margin-left: 5px; }
+    .menu .shortcuts ul {
+      margin: 0;
+      padding: 5px;
+      display: inline-block;
+      height: auto;
+      overflow: show;
+      list-style-type: none; }
+      .menu .shortcuts ul li {
+        margin: 0;
+        padding: 0;
+        display: inline-block;
+        background-color: #171817;
+        overflow: show; }
+        .menu .shortcuts ul li ul {
+          display: none;
+          list-style-type: none; }
+          .menu .shortcuts ul li ul li {
+            display: block;
+            z-index: 500; }
+
+.list {
+  color: #e5deca;
+  background: transparent;
+  transition: width .5s;
+  transition: height .5s;
+  padding: 5px;
+  background: #171817;
+  color: #e5deca;
+  border: 1px solid #494c49;
+  box-shadow: 3px 3px 5px black;
+  border-radius: 5px;
+  opacity: .9;
+  width: 300px;
+  margin-bottom: 3px;
+  height: auto; }
+  .list.collapsed {
+    height: 18px;
+    overflow: hidden;
+    background: black;
+    padding: 1px;
+    /* & span.toggler {*/
+    /*     display: none;*/
+    /* }*/ }
+  .list .storyline {
+    display: block;
+    color: white;
+    text-align: center;
+    margin-top: 1em; }
+  .list .charlist .pagination {
+    text-align: center;
+    margin-top: 1em; }
+    .list .charlist .pagination a, .list .charlist .pagination strong, .list .charlist .pagination span.nav {
+      margin: 0 .1em;
+      display: inline-block;
+      padding: .5em;
+      color: #e5deca;
+      font-size: .77em;
+      background: #171817;
+      padding: .5em .8em;
+      border-radius: 2px;
+      text-decoration: none;
+      cursor: pointer;
+      border: 1px solid #494c49;
+      box-shadow: 3px 3px 5px black;
+      border-radius: 3px; }
+  .list .charlist ul.avatars {
+    text-indent: 0;
+    margin-left: 0;
+    padding-left: 0;
+    list-style-type: none;
+    font-size: 8pt; }
+    .list .charlist ul.avatars li {
+      margin: 5px; }
+      .list .charlist ul.avatars li .avatar_link {
+        width: 280px;
+        padding: 5px;
+        background: #171817;
+        color: #e5deca;
+        border: 1px solid #494c49;
+        box-shadow: 3px 3px 5px black;
+        border-radius: 5px;
+        opacity: .9; }
+        .list .charlist ul.avatars li .avatar_link .character_actions, .list .charlist ul.avatars li .avatar_link .character_info {
+          border: 1px solid transparent;
+          display: inline-block;
+          border-radius: 2px;
+          padding: 0;
+          margin: 0; }
+          .list .charlist ul.avatars li .avatar_link .character_actions a, .list .charlist ul.avatars li .avatar_link .character_actions span.nav, .list .charlist ul.avatars li .avatar_link .character_actions .action, .list .charlist ul.avatars li .avatar_link .character_info a, .list .charlist ul.avatars li .avatar_link .character_info span.nav, .list .charlist ul.avatars li .avatar_link .character_info .action {
+            cursor: pointer;
+            color: #444444; }
+            .list .charlist ul.avatars li .avatar_link .character_actions a:hover, .list .charlist ul.avatars li .avatar_link .character_actions span.nav:hover, .list .charlist ul.avatars li .avatar_link .character_actions .action:hover, .list .charlist ul.avatars li .avatar_link .character_info a:hover, .list .charlist ul.avatars li .avatar_link .character_info span.nav:hover, .list .charlist ul.avatars li .avatar_link .character_info .action:hover {
+              color: #fc2; }
+        .list .charlist ul.avatars li .avatar_link .character_actions {
+          float: right;
+          color: #e5deca; }
+        .list .charlist ul.avatars li .avatar_link .character_name {
+          display: inline-block;
+          font-family: "NomPersoListe";
+          width: 20ex;
+          height: 2.3em;
+          cursor: help;
+          overflow-y: visible; }
+          .list .charlist ul.avatars li .avatar_link .character_name em {
+            font-style: normal;
+            font-weight: bold;
+            text-shadow: 0 0 3px black; }
+            .list .charlist ul.avatars li .avatar_link .character_name em:hover {
+              color: #fc2; }
+        .list .charlist ul.avatars li .avatar_link .character_info {
+          border: 1px solid #444444;
+          background: black;
+          padding: 2px;
+          width: 98%;
+          height: 6em; }
+          .list .charlist ul.avatars li .avatar_link .character_info.hidden {
+            display: none; }
+
+.wrapper {
+  font-family: Texte;
+  font-size: 9pt;
+  padding: 0;
+  padding-top: 60px; }
+  .wrapper .details {
+    z-index: 10;
+    background: transparent;
+    padding: 10px;
+    padding-bottom: 50px;
+    font-family: Texte;
+    font-size: .97em;
+    /*border-left: 1px solid $fics_dark;*/ }
+    .wrapper .details a {
+      color: #fc2;
+      text-decoration: none; }
+    .wrapper .details .sub {
+      left: 5px;
+      position: fixed;
+      bottom: 5px;
+      margin: auto;
+      padding: auto; }
+    .wrapper .details .sheet {
+      width: 100%;
+      background: white; }
+    .wrapper .details .attributes {
+      column-count: 5;
+      column-gap: 2px;
+      column-rule: 0 solid #494c49; }
+      .wrapper .details .attributes table {
+        padding: 0; }
+        .wrapper .details .attributes table th.name {
+          padding-left: 1px;
+          background: #303230;
+          width: 5ex; }
+        .wrapper .details .attributes table td {
+          text-align: center;
+          font-weight: normal;
+          width: auto; }
+          .wrapper .details .attributes table td.edit {
+            width: 5ex; }
+        .wrapper .details .attributes table.primary {
+          border: 1px solid black; }
+        .wrapper .details .attributes table.occult th.name {
+          width: 12ex; }
+        .wrapper .details .attributes table.occult td.edit {
+          width: 5ex; }
+    .wrapper .details .gear {
+      column-count: 2;
+      column-gap: 5px;
+      column-rule: 1px dotted #494c49;
+      margin-top: 3px;
+      border: 1px solid black;
+      border-radius: 2px;
+      margin-top: 3px;
+      width: 100%; }
+      .wrapper .details .gear table.unbreakable {
+        width: 100%;
+        overflow: hidden;
+        page-break-after: always;
+        page-break-inside: avoid;
+        font-size: 1em; }
+        .wrapper .details .gear table.unbreakable th {
+          background: black; }
+          .wrapper .details .gear table.unbreakable th[colspan="3"], .wrapper .details .gear table.unbreakable th[colspan="4"], .wrapper .details .gear table.unbreakable th[colspan="12"] {
+            font-family: Titre;
+            font-weight: normal;
+            background: black;
+            color: #e5deca;
+            font-size: 1.25em;
+            text-align: center; }
+    .wrapper .details .options {
+      column-count: 3;
+      column-gap: 5px;
+      column-rule: 1px dotted #494c49;
+      margin-top: 3px;
+      border: 1px solid black;
+      border-radius: 2px;
+      margin-top: 3px;
+      width: 100%;
+      border: 1px solid black;
+      border-radius: 2px; }
+      .wrapper .details .options table.unbreakable {
+        width: 100%;
+        overflow: hidden;
+        page-break-after: always;
+        page-break-inside: avoid;
+        font-size: 1em; }
+        .wrapper .details .options table.unbreakable th {
+          background: black; }
+          .wrapper .details .options table.unbreakable th[colspan="3"], .wrapper .details .options table.unbreakable th[colspan="4"], .wrapper .details .options table.unbreakable th[colspan="12"] {
+            font-family: Titre;
+            font-weight: normal;
+            background: black;
+            color: #e5deca;
+            font-size: 1.25em;
+            text-align: center; }
+    .wrapper .details .coreblock {
+      column-count: 3;
+      column-gap: 5px;
+      column-rule: 1px dotted #494c49;
+      margin-top: 3px;
+      border: 1px solid black;
+      border-radius: 2px;
+      width: 100%;
+      border: 1px solid black;
+      border-radius: 2px; }
+      .wrapper .details .coreblock ul {
+        page-break-after: always;
+        page-break-inside: avoid;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        min-height: 16em; }
+        .wrapper .details .coreblock ul li {
+          padding: 3px;
+          margin: 0;
+          width: 100%; }
+          .wrapper .details .coreblock ul li b {
+            width: 20ex;
+            margin-right: 1ex;
+            display: inline-block;
+            background: black; }
+      .wrapper .details .coreblock .pagebreaker {
+        page-break-after: always; }
+    .wrapper .details .skillsview {
+      column-count: 3;
+      column-gap: 5px;
+      column-rule: 1px dotted #494c49;
+      margin-top: 3px;
+      border: 1px solid black;
+      border-radius: 2px; }
+      .wrapper .details .skillsview table {
+        width: 100%; }
+        .wrapper .details .skillsview table tr {
+          height: 5px;
+          overflow: hidden; }
+          .wrapper .details .skillsview table tr td {
+            width: auto;
+            height: 5px;
+            margin: 0;
+            padding: 0;
+            background: #171817; }
+          .wrapper .details .skillsview table tr td[colspan="2"] {
+            width: auto;
+            height: 8px;
+            margin: 2px;
+            padding: 1px;
+            background: #494c49;
+            text-align: center; }
+          .wrapper .details .skillsview table tr th {
+            height: 5px;
+            text-align: right;
+            background: transparent;
+            width: 14ex;
+            font-size: 1em;
+            line-height: .8em;
+            margin: 0;
+            padding: 0; }
+          .wrapper .details .skillsview table tr th.edit {
+            width: 4ex;
+            font-size: 1em;
+            text-align: center; }
+          .wrapper .details .skillsview table tr th[colspan="2"] {
+            width: 14ex; }
+          .wrapper .details .skillsview table tr th.skill_score_bar {
+            width: 16ex; }
+    .wrapper .details .edit {
+      color: #fc2; }
+    .wrapper .details .chart_panel {
+      border: 1px solid black;
+      box-shadow: 2px 2px 8px black;
+      border-radius: 5px 5px 5px 5px;
+      padding: 10px;
+      background-color: #171817;
+      display: inline-block;
+      color: #e5deca; }
+      .wrapper .details .chart_panel canvas {
+        width: 1000px;
+        height: auto; }
+    .wrapper .details .classyview {
+      width: 100%;
+      max-width: 1000px;
+      margin-left: 0;
+      margin-right: auto;
+      display: block;
+      column-count: 1;
+      column-gap: 10px;
+      column-rule: 1px dotted #494c49;
+      padding: 5px;
+      background: #171817;
+      color: #e5deca;
+      border: 1px solid #494c49;
+      box-shadow: 3px 3px 5px black;
+      border-radius: 5px;
+      opacity: .9; }
+      .wrapper .details .classyview .pic {
+        display: block;
+        float: right;
+        border: 1px solid black;
+        width: 200px;
+        height: auto; }
+      .wrapper .details .classyview h1 {
+        font-family: NomPerso; }
+      .wrapper .details .classyview h2 {
+        font-family: Titre;
+        font-weight: normal;
+        background: black;
+        color: #e5deca;
+        font-size: 1.25em;
+        text-align: center; }
+    .wrapper .details .tournamentview {
+      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
+      column-count: 1;
+      column-gap: 10px;
+      column-rule: 1px dotted #494c49;
+      padding: 5px;
+      background: #171817;
+      color: #e5deca;
+      border: 1px solid #494c49;
+      box-shadow: 3px 3px 5px black;
+      border-radius: 5px;
+      opacity: .9;
+      width: 300px;
+      margin-bottom: 3px; }
+      .wrapper .details .tournamentview .pic {
+        display: block;
+        float: right;
+        border: 1px solid black;
+        width: 200px;
+        height: auto; }
+      .wrapper .details .tournamentview h1 {
+        font-family: NomPerso; }
+      .wrapper .details .tournamentview h2 {
+        font-family: Titre;
+        font-weight: normal;
+        background: black;
+        color: #e5deca;
+        font-size: 1.25em;
+        text-align: center; }
+    .wrapper .details .storyview {
+      border: 1px solid black;
+      box-shadow: 2px 2px 8px black;
+      border-radius: 5px 5px 5px 5px;
+      padding: 5px;
+      margin: 0;
+      background-color: #171817;
+      width: 100%;
+      /*max-width: 1000px;*/
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
+      font-family: 'Texte'; }
+      .wrapper .details .storyview .drama_wrap {
+        border: 3px solid black;
+        margin: 2px; }
+      .wrapper .details .storyview .title {
+        padding: 0;
+        margin-bottom: 2px;
+        border: 1px solid black;
+        height: 50px; }
+        .wrapper .details .storyview .title .chapter {
+          display: inline-block;
+          padding: 0;
+          margin: 0;
+          border: 1px solid transparent;
+          width: 50px;
+          color: white;
+          text-align: center;
+          font-family: NomPerso;
+          font-size: 1.1em; }
+          .wrapper .details .storyview .title .chapter.big {
+            font-weight: bold;
+            font-size: 1.3em;
+            /*color: $fics_golden;*/
+            /*background: $fics_darkest;*/ }
+        .wrapper .details .storyview .title h1 {
+          font-height: 15px;
+          text-align: left;
+          font-family: NomPerso;
+          font-weight: 800;
+          color: white; }
+        .wrapper .details .storyview .title h2 {
+          font-height: 14px;
+          text-align: left;
+          font-family: NomPerso;
+          font-weight: bold;
+          color: #f6f3ec;
+          text-indent: 20px; }
+        .wrapper .details .storyview .title h3 {
+          font-height: 13px;
+          text-align: left;
+          text-decoration: underline;
+          text-indent: 30px; }
+        .wrapper .details .storyview .title h4 {
+          font-height: 12px;
+          text-align: left;
+          text-indent: 40px; }
+        .wrapper .details .storyview .title .storybar {
+          display: inline-block;
+          padding: 0;
+          margin: 0;
+          background: transparent; }
+          .wrapper .details .storyview .title .storybar p {
+            padding: 0;
+            text-indent: 0;
+            margin: 0;
+            background: transparent; }
+          .wrapper .details .storyview .title .storybar button.compact {
+            background: #444444;
+            border: 1px solid #e5deca;
+            border-radius: 3px;
+            box-shadow: 0 0 3px black;
+            color: #e5deca;
+            width: 10ex;
+            margin: 2px;
+            font-family: Texte;
+            font-size: 8pt;
+            cursor: pointer; }
+            .wrapper .details .storyview .title .storybar button.compact:hover {
+              background: #171817;
+              box-shadow: 0 0 3px #aaa; }
+        .wrapper .details .storyview .title h1, .wrapper .details .storyview .title h2, .wrapper .details .storyview .title h3, .wrapper .details .storyview .title h4 {
+          color: #e5deca;
+          display: inline-block;
+          padding: 0;
+          margin: 0;
+          border-bottom: 1px solid transparent;
+          width: 25%;
+          font-family: NomPersoListe; }
+        .wrapper .details .storyview .title.noPDF {
+          background: black; }
+          .wrapper .details .storyview .title.noPDF .chapter, .wrapper .details .storyview .title.noPDF h4, .wrapper .details .storyview .title.noPDF h3 {
+            color: #fc2; }
+        .wrapper .details .storyview .title.golden {
+          color: #fc2;
+          /*background: $fics_darkest;*/ }
+      .wrapper .details .storyview .storyarticle {
+        background: transparent;
+        padding: 0;
+        margin: auto;
+        color: white;
+        width: 100%; }
+        .wrapper .details .storyview .storyarticle table {
+          /*background: yellow;*/
+          border: 1px solid gray;
+          border-radius: 5px; }
+          .wrapper .details .storyview .storyarticle table tr th {
+            width: 150px;
+            padding: 2px;
+            background: black;
+            color: white;
+            border: 1px solid silver; }
+          .wrapper .details .storyview .storyarticle table tr td {
+            padding: 2px;
+            background: silver;
+            color: black;
+            border: 1px solid silver; }
+            .wrapper .details .storyview .storyarticle table tr td .embedded_link {
+              color: #fc2;
+              /*text-decoration: underline;*/
+              cursor: pointer; }
+              .wrapper .details .storyview .storyarticle table tr td .embedded_link.broken {
+                background: red; }
+            .wrapper .details .storyview .storyarticle table tr td p {
+              margin: 0;
+              padding: 0; }
+          .wrapper .details .storyview .storyarticle table.details {
+            width: 100%;
+            border: none; }
+            .wrapper .details .storyview .storyarticle table.details tr th {
+              background: black;
+              color: #494c49;
+              border: none;
+              border-radius: 5px; }
+            .wrapper .details .storyview .storyarticle table.details tr td {
+              width: auto;
+              background: #171817;
+              color: #e5deca;
+              border: none;
+              font-size: 9pt;
+              font-family: TextDesc;
+              border-radius: 5px; }
+              .wrapper .details .storyview .storyarticle table.details tr td .desc {
+                column-count: 3;
+                column-width: auto;
+                column-gap: 20px;
+                column-rule-style: dotted;
+                column-rule-width: 1px;
+                column-rule-color: #a61;
+                line-height: 1.4em;
+                min-height: 150px; }
+                .wrapper .details .storyview .storyarticle table.details tr td .desc .loot {
+                  /*border: 1px dotted #888;*/
+                  /*color: #fcf;*/
+                  padding: 0;
+                  margin: 0;
+                  margin-bottom: 1em;
+                  font-family: TextDesc; }
+                  .wrapper .details .storyview .storyarticle table.details tr td .desc .loot ul {
+                    margin: 0; }
+                    .wrapper .details .storyview .storyarticle table.details tr td .desc .loot ul li {
+                      margin: 0;
+                      padding: 0; }
+            .wrapper .details .storyview .storyarticle table.details em {
+              font-family: TextDesc;
+              color: #a61;
+              font-weight: bold;
+              font-style: normal;
+              font-size: 1.2em;
+              border-bottom: 1px dotted #a61; }
+            .wrapper .details .storyview .storyarticle table.details .embedded_link {
+              color: #fc4;
+              font-weight: 600;
+              /*border-bottom: 3px dotted yellow;*/ }
+            .wrapper .details .storyview .storyarticle table.details strong {
+              color: #ea6;
+              font-weight: 900;
+              font-style: normal;
+              border-bottom: 1px dotted #ea6; }
+          .wrapper .details .storyview .storyarticle table.update {
+            background: #171817;
+            width: 50%;
+            border: none; }
+            .wrapper .details .storyview .storyarticle table.update input, .wrapper .details .storyview .storyarticle table.update textarea {
+              width: 90%;
+              background: silver; }
+            .wrapper .details .storyview .storyarticle table.update tr th {
+              width: 15%;
+              background: black;
+              color: #494c49;
+              border: none;
+              border-radius: 5px; }
+            .wrapper .details .storyview .storyarticle table.update tr td {
+              width: auto;
+              background: black;
+              color: #e5deca;
+              border: none;
+              border-radius: 5px; }
+            .wrapper .details .storyview .storyarticle table.update input[type=text], .wrapper .details .storyview .storyarticle table.update input[type=number], .wrapper .details .storyview .storyarticle table.update input[type=checkbox], .wrapper .details .storyview .storyarticle table.update select, .wrapper .details .storyview .storyarticle table.update textarea {
+              background-color: #171817;
+              color: #e5deca;
+              border-radius: 2px;
+              padding: 2px;
+              border: 2px ridge #444444;
+              box-shadow: -2px -2px 5px black; }
+        .wrapper .details .storyview .storyarticle button {
+          font-family: 'monospace';
+          font-size: 8px;
+          width: 16ex;
+          padding: 0;
+          margin: 2px;
+          cursor: pointer; }
+        .wrapper .details .storyview .storyarticle .custom_glance {
+          cursor: help; }
+      .wrapper .details .storyview input[type=text], .wrapper .details .storyview input[type=number], .wrapper .details .storyview input[type=checkbox], .wrapper .details .storyview select, .wrapper .details .storyview textarea {
+        background-color: #171817;
+        color: #e5deca;
+        border-radius: 2px;
+        padding: 2px;
+        border: 2px ridge #444444;
+        box-shadow: -2px -2px 5px black; }
+    .wrapper .details .narrative {
+      margin: 5px;
+      vertical-align: top;
+      display: block;
+      border: 1px solid black;
+      border-radius: 5px;
+      padding: 5px;
+      width: auto;
+      page-break-after: always;
+      page-break-inside: avoid;
+      /*column-count:2;*/
+      /*column-gap:10px;*/
+      /*column-rule:1px dotted $fics_light;*/ }
+    .wrapper .details table.formset {
+      padding: 1ex .5em;
+      width: 100%;
+      border-radius: .5em;
+      border: 1px solid black;
+      background: black; }
+      .wrapper .details table.formset tr.row1 {
+        background: #191a19; }
+      .wrapper .details table.formset tr.row2 {
+        background: black; }
+      .wrapper .details table.formset td {
+        vertical-align: middle; }
+      .wrapper .details table.formset caption {
+        font-family: 'Texte';
+        font-size: 1.3em;
+        side: top; }
+      .wrapper .details table.formset .field_wrapper label {
+        width: 40%;
+        display: inline-block;
+        vertical-align: top;
+        text-align: left;
+        height: 100%; }
+      .wrapper .details table.formset .field_wrapper input, .wrapper .details table.formset .field_wrapper textarea, .wrapper .details table.formset .field_wrapper select {
+        box-sizing: border-box;
+        display: inline-block;
+        font-family: Texte;
+        font-size: .93em; }
+      .wrapper .details table.formset .field_wrapper textarea {
+        padding: .5em;
+        width: 40%; }
+      .wrapper .details table.formset .field_wrapper input[type=number] {
+        width: 8ex; }
+    .wrapper .details table.stats {
+      display: inline-block;
+      border: 1px solid black;
+      border-radius: 6px; }
+      .wrapper .details table.stats th {
+        width: 12ex; }
+      .wrapper .details table.stats td {
+        height: 2em;
+        width: 25ex; }
+    .wrapper .details h1, .wrapper .details h2, .wrapper .details h3 {
+      margin: 0;
+      margin-top: .5em; }
+    .wrapper .details h1 {
+      font-size: 1.6em;
+      color: #e5deca; }
+    .wrapper .details h2 {
+      font-size: 1.4em; }
+    .wrapper .details h3 {
+      font-size: 1.2em; }
+
+.edit_icon {
+  color: #fc2;
+  cursor: pointer; }
+
+.action_icon {
+  color: #444444;
+  /*color: $fics_fronter;*/
+  cursor: pointer; }
+  .action_icon:hover {
+    color: #fc2; }
+
+.subsection {
+  font-weight: bold;
+  color: #c4c;
+  text-decoration: none;
+  margin: 0; }
+
+.pdflink {
+  color: #e5deca;
+  text-decoration: none;
+  background: #171817;
+  display: inline-block;
+  padding: 3px; }
+
+.ping {
+  background: orange; }
+
+.waiting {
+  cursor: progress;
+  opacity: .95; }
+
+.golden {
+  color: #fc2; }
+
+.blank {
+  color: #3c3f3c;
+  opacity: .5;
+  text-shadow: 0 0 3px black; }
+
+.wildcard {
+  color: #e5deca;
+  opacity: .5; }
+
+.low {
+  color: #e5deca;
+  /*opacity: .5;*/
+  text-shadow: 0 0 3px lime; }
+
+.medium {
+  color: yellow;
+  /*opacity: .6;*/
+  text-shadow: 0 0 3px yellow; }
+
+.high {
+  color: orange;
+  /*opacity: .7;*/
+  text-shadow: 0 0 3px orange; }
+
+.veryhigh {
+  color: #aa2020;
+  /*opacity: .8;*/
+  text-shadow: 0 0 3px red; }
+
+th.skill_dot {
+  line-height: .3em;
+  background: orange; }
+
+.embedded_link {
+  color: #fc2;
+  text-decoration: none; }
+
+.epic {
+  background-color: #303230; }
+
+.drama {
+  background-color: #171817; }
+
+.act {
+  background-color: black; }
+
+.event {
+  background-color: black; }
+
+.btn {
+  display: block;
+  padding: 0;
+  margin: 0;
+  width: 150px;
+  height: 20px;
+  border: 2px solid #171817;
+  border-radius: 5px;
+  background: #171817;
+  color: white;
+  text-decoration: none;
+  padding: 5px;
+  text-align: left;
+  font-size: 1.6em;
+  /* 0.87em*/ }
+  .btn:hover {
+    border-color: #aaa;
+    background: black;
+    color: #aaa;
+    cursor: pointer; }
+
+.tabs {
+  display: none; }
+
+.tab_up {
+  display: block; }
+
+.tabberbar {
+  text-align: center; }
+  .tabberbar span {
+    display: inline-block; }
+
+.shown {
+  display: block; }
+
+.hidden {
+  display: none; }
+
+.working table, .working table td, .working table th, .working th, .working td {
+  background: #444444; }
+
+.menuright {
+  position: relative;
+  display: inline-block;
+  width: 300px;
+  height: auto;
+  padding: 5px;
+  background: #171817;
+  color: #e5deca;
+  border: 1px solid #494c49;
+  box-shadow: 3px 3px 5px black;
+  border-radius: 5px;
+  opacity: .9;
+  width: 300px;
+  margin-bottom: 3px;
+  transition: width .5s;
+  transition: height .5s; }
+  .menuright #keywords {
+    width: 250px;
+    margin-right: 5px;
+    height: auto; }
+  .menuright.collapsed {
+    height: 18px;
+    overflow: hidden;
+    background: black;
+    padding: 1px;
+    /* & span.toggler {*/
+    /*     display: none;*/
+    /* }*/ }
+
+.dicer {
+  position: relative;
+  display: inline-block;
+  right: 0;
+  padding: 5px;
+  background: #171817;
+  color: #e5deca;
+  border: 1px solid #494c49;
+  box-shadow: 3px 3px 5px black;
+  border-radius: 5px;
+  opacity: .9;
+  width: 300px;
+  margin-bottom: 3px;
+  transition: width .5s;
+  transition: height .5s; }
+  .dicer .roll_dice, .dicer .rolls, .dicer .mods, .dicer .total {
+    width: 15ex; }
+  .dicer input#set {
+    width: 50px;
+    font-weight: bold; }
+  .dicer.collapsed {
+    height: 18px;
+    overflow: hidden;
+    background: black;
+    padding: 1px;
+    /* & span.toggler {*/
+    /*     display: none;*/
+    /* }*/ }
+
+/*     background: #333;*/
+/*     opacity: .5;*/
+/* }*/
+@font-face {
+  font-family: 'NomPerso';
+  src: url("fonts/Cinzel-Black.ttf"); }
+
+@font-face {
+  font-family: 'TextDesc';
+  src: url("fonts/WorkSans-Light.ttf"); }
+
+@font-face {
+  font-family: 'NomPersoListe';
+  src: url("fonts/Cinzel-Regular.ttf"); }
+
+@font-face {
+  font-family: 'Titre';
+  /*src: url('Eczar-ExtraBold.ttf');*/
+  src: url("fonts/Balthazar-Regular.ttf"); }
+
+@font-face {
+  font-family: 'Texte';
+  src: url("fonts/Lato-Regular.ttf"); }
+
+@font-face {
+  font-family: 'Emphase';
+  src: url("Eczar-Regular.ttf"); }
+
+/* Invalid display */
+@media screen and (max-width: 640px) {
+  body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    background: #303230 url("back.jpg"); }
+    body .logo {
+      display: none; }
+    body .menu {
+      display: none; }
+    body .wrapper {
+      display: none; } }
+
+/* Small - 14 inches Elitebook display */
+@media screen and (min-width: 641px) and (max-width: 1024px) {
+  body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    background: #303230 url("71.jpg"); }
+    body .logo {
+      height: 105px;
+      width: 100%; }
+    body .menu {
+      width: 100%;
+      height: 40px; }
+    body .wrapper {
+      z-index: 1;
+      margin-left: 0;
+      width: 99%;
+      min-height: 1000px;
+      background: transparent url("simple_logo_invert.png") center center no-repeat;
+      display: grid;
+      grid-template-columns: .5% 275px 1fr 200px .5%;
+      grid-column-gap: 5px;
+      justify-content: center;
+      align-content: stretch; }
+      body .wrapper .details {
+        grid-column: 3 / 6; }
+      body .wrapper .menuright {
+        display: none; } }
+
+/* Normal - 21/22 inches screen */
+@media screen and (min-width: 1025px) {
+  body {
+    margin: 0;
+    padding: 0;
+    overflow-x: none;
+    overflow-y: scroll;
+    background: #303230 url("back.jpg");
+    /* 74*/ }
+    body .logo {
+      height: 105px;
+      width: 100%; }
+    body .menu {
+      width: 100%;
+      height: 40px;
+      z-index: 8000; }
+    body .wrapper {
+      z-index: 5;
+      margin-left: 0;
+      width: 99%;
+      min-height: 1000px;
+      background: transparent url("simple_logo.png") center center no-repeat;
+      display: grid;
+      grid-template-columns: .5% 300px 1fr 300px .5%;
+      grid-column-gap: 3px;
+      justify-content: center;
+      align-content: center;
+      /* & .menuright {*/
+      /*     grid-column: 4 / 6;*/
+      /* }*/ }
+      body .wrapper .port {
+        background: transparent;
+        grid-column: 1 / 3; }
+      body .wrapper .details {
+        grid-column: 3 / 4;
+        min-height: 1000px;
+        background: transparent; }
+      body .wrapper .starport {
+        background: transparent;
+        grid-column: 4 / 6; } }
+
+/*# sourceMappingURL=all.css.map */

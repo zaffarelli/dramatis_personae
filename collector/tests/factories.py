@@ -10,7 +10,7 @@ from django.utils import timezone
 from collector.utils.fs_fics7 import roll
 from collector.models.fics_models import Specie
 
-
+# Basic Character
 class CharacterFactory(factory.django.DjangoModelFactory):
   class Meta:
     model = Character
