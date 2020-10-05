@@ -7,10 +7,11 @@ from django.conf.urls import url
 from django.urls import path, re_path
 from collector.views.basic import pdf_show
 from collector.views.characters import CharacterDetailView, CharacterUpdateView, customize_ba, customize_bc, customize_skill, customize_ba_del, customize_bc_del, skill_pick, attr_pick, customize_weapon, customize_weapon_del, customize_armor, customize_armor_del, customize_shield, customize_shield_del, customize_ritual, customize_ritual_del
-from collector.views.frontend import index, view_by_rid, toggle_public, toggle_spotlight, get_list, add_character, get_storyline, conf_details, recalc_character, update_messenger, show_jumpweb, show_todo #, recalc_pa_character, recalc_skills_character
+from collector.views.frontend import index, view_by_rid, toggle_public, toggle_spotlight, get_list, add_character, get_storyline, conf_details, recalc_character, heartbeat, show_jumpweb, show_todo #, recalc_pa_character, recalc_skills_character
 from collector.views.backend import recalc,export,xls_update,pdf_character, gss_update, pdf_rules, roll_dice
 from collector.views.misc_chart import get_chardar, get_population_statistics, get_keywords
-
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
 	path('', index, name='index'),
@@ -18,7 +19,7 @@ urlpatterns = [
 	re_path('^export/$', export, name='export'),
     re_path('^xls_update/$', xls_update, name='xls_update'),
     re_path('^gss_update/$', gss_update, name='gss_update'),
-    re_path('^ajax/messenger/$', update_messenger, name='update_messenger'),
+    re_path('^api/heartbeat/$', heartbeat, name='heartbeat'),
     re_path('^characters/(?P<pk>\d+)/edit/$', CharacterUpdateView.as_view(), name='edit_character'),
     re_path('^characters/(?P<pk>\d+)/view/$', CharacterDetailView.as_view(), name='view_character'),
 
@@ -58,4 +59,4 @@ urlpatterns = [
     re_path('^ajax/character/del/armor/(?P<avatar>[\d]+)/(?P<item>\d+)/$',customize_armor_del,name='customize_armor_del'),
     re_path('^ajax/character/del/shield/(?P<avatar>[\d]+)/(?P<item>\d+)/$',customize_shield_del,name='customize_shield_del'),
     re_path('^ajax/character/del/ritual/(?P<avatar>[\d]+)/(?P<item>\d+)/$',customize_ritual_del,name='customize_ritual_del'),
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

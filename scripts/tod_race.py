@@ -1,4 +1,4 @@
-from collector.models.characters import Character
+from collector.models.character import Character
 from collector.models.tourofduty import TourOfDuty
 
 all = Character.objects.filter(epic__shortcut="DEM")

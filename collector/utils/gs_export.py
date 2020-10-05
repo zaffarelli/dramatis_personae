@@ -18,6 +18,9 @@ from collector.utils.fics_references import RELEASE
 from oauth2client.service_account import ServiceAccountCredentials
 
 from cryptography.fernet import Fernet
+import requests  # to get image from the web
+import shutil  # to save it locally
+import os
 
 COLS_AMOUNT = 13
 
@@ -132,17 +135,60 @@ def gss_review(options):
                     change = True
                 if row[10] != c.picture:
                     c.picture = row[10]
+                    logger.info('> Picture is [%s]' % c.picture)
+                    download_image(c.picture, rid)
                     change = True
+                else:
+                    logger.info('> Unchanged picture: [%s]' % c.picture)
                 if change:
                     c.save()
                     change = False
             else:
                 logger.error('> %s does not exists (%s)' % (row[0], rid))
+
         else:
             for i in range(COLS_AMOUNT):
                 header_line.append(row[i])
     logger.info('> Review done')
+
     return header_line
+
+
+def download_image(link,rid):
+    image_url = link
+    fname = image_url.split("/")[-1]
+    ext = os.path.splitext(fname)
+    if len(ext) > 1:
+        myext = '.png'
+    else:
+        myext = ext[1]
+    fullext = myext.split('?')
+    if len(fullext) > 1:
+        myext = fullext[0]
+    filename = os.path.join(settings.MEDIA_ROOT, 'portraits/b_' + rid + myext)
+    outfile = os.path.join(settings.MEDIA_ROOT, 'portraits/' + rid + myext)
+    r = requests.get(image_url, stream=True)
+    if r.status_code == 200:
+        r.raw.decode_content = True
+        with open(filename, 'wb') as f:
+            shutil.copyfileobj(r.raw, f)
+        from PIL import Image
+        from PIL.ImageFilter import (
+            ModeFilter
+        )
+        maxsize = (300, 400)
+        try:
+            with Image.open(filename) as im:
+                im = im.convert("RGB")
+                im = im.filter(ModeFilter(size=5))
+                im = im.convert("L")
+                im.save(outfile, "PNG")
+                logger.info("> Image format %s" % im.format)
+        except:
+            logger.warning('> Oops... filter broke for %s' % filename)
+        logger.info('Image successfully downloaded: %s' % filename)
+    else:
+        logger.error("Image couldn't be retrieved")
 
 
 def gss_push(options, header_line):

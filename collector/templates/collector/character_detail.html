@@ -31,8 +31,8 @@
     Pu {{c.is_public|prettybool|safe}}</li>
 </ul>
 <span class='pagebreaker'>&nbsp;</span>
-<ul class='unbreakable'>
-  <li><b>Build Log</b>{{ c.buildlog|parse_avatars|safe }}</li>
+<ul class='unbreakable' style="font-family: monospace;">
+  <li><b>Build Log</b>{{ c.build_log|parse_avatars|safe }}</li>
 </ul>
 <span class='pagebreaker'>&nbsp;</span>
 {% if c.tourofduty_set.count != 0 %}

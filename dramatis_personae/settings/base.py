@@ -18,12 +18,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-#    'crispy_forms',
     'extra_views',
     'sass_processor',
 ]
 
-#CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
 
 MIDDLEWARE = [
   'django.middleware.security.SecurityMiddleware',
@@ -76,7 +75,7 @@ LOGGING = {
     },
     'handlers': {
         'logfile': {
-            'level':'DEBUG',
+            'level':'INFO',
             'class':'logging.handlers.RotatingFileHandler',
             'filename': LOGPATH+"dramatis_personae.log",
             'maxBytes': 1000000000,
@@ -132,3 +131,4 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'dp_static/')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'dp_media/')
+

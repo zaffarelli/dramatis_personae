@@ -25,7 +25,7 @@ class CharacterDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['no_skill_edit'] = True
-        messages.info(self.request, 'Display avatar %s' % (context['c'].full_name))
+        messages.success(self.request, 'Display avatar %s' % (context['c'].full_name))
         return context
 
 
@@ -44,7 +44,7 @@ class CharacterUpdateView(AjaxFromResponseMixin, UpdateView):
             tourofdutys_formset.save()
             return response
         else:
-            messages.info(self.request, 'Avatar %s has errors. unable to save.' % (context['c'].full_name))
+            messages.error(self.request, 'Avatar %s has errors. unable to save.' % (context['c'].full_name))
             return super().form_invalid(form)
 
     def get_context_data(self, **kwargs):
@@ -53,11 +53,11 @@ class CharacterUpdateView(AjaxFromResponseMixin, UpdateView):
             context['form'] = CharacterForm(self.request.POST, instance=self.object)
             context['tourofdutys'] = TourOfDutyFormSet(self.request.POST, instance=self.object)
             context['tourofdutys'].full_clean()
-            messages.success(self.request, 'Updating avatar %s' % (context['form']['full_name'].value()))
+            messages.success(self.request, 'Avatar updated: %s' % (context['form']['full_name'].value()))
         else:
             context['form'] = CharacterForm(instance=self.object)
             context['tourofdutys'] = TourOfDutyFormSet(instance=self.object)
-            messages.info(self.request, 'Form display for avatar %s' % (context['form']['full_name'].value()))
+            messages.info(self.request, 'Avatar displayed: %s' % (context['form']['full_name'].value()))
         return context
 
 

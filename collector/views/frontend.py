@@ -270,7 +270,7 @@ def conf_details(request):
         http404
 
 
-def update_messenger(request):
+def heartbeat(request):
     context = {}
     template = get_template('collector/messenger.html')
     html = template.render(context, request)

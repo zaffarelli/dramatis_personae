@@ -26,12 +26,12 @@ class CharacterForm(ModelForm):
         exclude = ['pub_date', 'PA_TOTAL', 'rid', 'SA_REC', 'SA_STA', 'SA_END', 'SA_STU',
                    'SA_RES', 'SA_DMG', 'SA_TOL', 'SA_HUM', 'SA_PAS', 'SA_WYR', 'SA_SPD',
                    'SA_RUN', 'age', 'SK_TOTAL', 'TA_TOTAL', 'BC_TOTAL', 'BA_TOTAL', 'challenge',
-                   'gm_shortcuts', 'alliancehash', 'OP', 'AP', 'stars', 'weapon_cost',
-                   'armor_cost', 'shield_cost', 'score', 'lifepath_total', 'OCC_LVL',
+                   'gm_shortcuts', 'alliance_hash', 'OP', 'AP', 'stars', 'weapon_cost',
+                   'armor_cost', 'shield_cost', 'score', 'life_path_total', 'OCC_LVL',
                    'OCC_DRK', 'PA_STR', 'PA_BOD', 'PA_CON', 'PA_MOV', 'PA_INT',
                    'PA_WIL', 'PA_TEM', 'PA_PRE', 'PA_TEC', 'PA_REF', 'PA_AGI',
-                   'PA_AWA', 'OCC_LVL', 'OCC_DRK', 'spotlight',
-                   'onsave_reroll_attributes', 'onsave_reroll_skills', 'importance', 'fights', 'victories',
+                   'PA_AWA', 'OCC_LVL', 'OCC_DRK', 'spotlight', 'challenge_value', 'stories_count',
+                   'on_save_reroll_attributes', 'on_save_reroll_skills', 'importance', 'fights', 'victories',
                    'victory_rating', 'fencing_league']
 
 

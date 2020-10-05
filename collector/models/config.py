@@ -7,7 +7,9 @@ from django.db import models
 from django.contrib import admin
 import random
 import math
+import logging
 
+logger = logging.getLogger(__name__)
 
 class Config(models.Model):
     class Meta:
@@ -71,23 +73,39 @@ class Config(models.Model):
             idx += 1
         return colorset, hcolorset
 
-    def get_chart(self, o, filter='', pattern='', type='bar', bar_property=''):
+    def get_chart(self, field='', filter='', pattern='', type='bar', bar_property='full_name', order_by='', legend_display=False, limit=10):
+        """ Makes the data dictionary ChartJS needs to build the relevant chart. Note that those charts
+            are all built from the Character model; that justifies the choice for default values
+            that might not be relevant to other model tables.
+            Among the important parameters:
+                - "field" is the main parameter used to sort the data.
+                - "filter" is a model compliant filter, like "name__contains"
+                - "pattern" is the value that we put on the other side of the filter after the equal sign, like "joe".
+                    It can be of any type as long as it fits the content of "filter".
+                - "type" is the type of chart in among the ChartJS options.
+                - "bar_property" is the field that is supposed to be displayed on the left hand on the char.
+                - "order_by" is the sort criteria. Set to the characters "full_name" by default.
+        """
         from collector.models.character import Character
-        from django.db.models import Count
-        if pattern:
-            all = Character.objects.filter(**{filter: pattern}).order_by(
-                o)  # .values('epic').annotate(dcount=Count('epic'))
+        # from django.db.models import Count
+        if pattern == '':
+            all = Character.objects.order_by(order_by + bar_property)
         else:
-            all = Character.objects.filter(epic=self.epic, is_visible=True).order_by(o)
+            all = Character.objects.filter(**{filter: pattern}).order_by(order_by + bar_property)[:20]
+
+        # if limit:
+        #     all = all[:limit]
+            # .values('epic').annotate(dcount=Count('epic'))
+        # else:
+        #     all = Character.objects.filter(epic=self.epic, is_visible=True).order_by(order_by)[:10]
         inside_labels = []
-        inside_datasets = []
         dat = []
-        back = []
         border = []
         arrfetch = {}
         for c in all:
-            value = c.__dict__[o]
-            if bar_property == '':
+            value = c.__dict__[field]
+
+            if pattern == '':
                 if arrfetch.get(value) is None:
                     arrfetch[value] = 1
                 else:
@@ -95,17 +113,21 @@ class Config(models.Model):
             else:
                 if arrfetch.get(value) is None:
                     arrfetch[value] = c.__dict__[bar_property]
-        for x in arrfetch:
-            inside_labels.append(x)
-            dat.append(arrfetch[x])
+
+
+
+        for item in arrfetch:
+            inside_labels.append(item)
+            dat.append(arrfetch[item])
             border.append('#C0C0C0C0')
+
         colors, hoverColors = self.prepare_colorset(len(border))
         inside_datasets = [{
             'data': dat,
             'backgroundColor': colors,
             'hoverBackgroundColor': hoverColors,
             'borderColor': border,
-            'hoverBorderColor': colors,
+            'hoverBorderColor': hoverColors,
             'borderWidth': 1
         }]
         data = {
@@ -113,21 +135,30 @@ class Config(models.Model):
             'datasets': inside_datasets
         }
         full_data = {
-            'name': o, 'data': {
+            'name': field,
+            'data': {
                 'type': type,
                 'data': data,
                 'options': {
                     'title': {
                         'display': True,
-                        'text': o.upper(),
+                        'text': bar_property.upper(),
                         'fontColor': '#fff',
                     },
                     'legend': {
-                        'display': False,
+                        'display': legend_display,
                         'position': 'right',
                         'labels': {
                             'fontColor': '#fff',
                         }
+                    },
+                    'scales': {
+                        'yAxes': [
+                            {
+                                'ticks': {'mirror': True},
+                                #'afterFit': 'function(scaleInstance){scaleInstance.width = 200;}'
+                            }
+                        ]
                     },
                     'circumference': 2 * math.pi,
                     'rotation': -math.pi,

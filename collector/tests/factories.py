@@ -17,6 +17,13 @@ class CharacterFactory(factory.django.DjangoModelFactory):
   full_name = 'Tastus Fabulus'
   pub_date = timezone.now()
 
+class CharacterHistoryFactory(factory.django.DjangoModelFactory):
+  class Meta:
+    model = Character
+  full_name = 'Tastus Fabulus'
+  use_history_creation = True
+  pub_date = timezone.now()
+
 
 class VeteranGuilderFactory(factory.django.DjangoModelFactory):
   class Meta:
@@ -44,7 +51,7 @@ class CharacterCheckPAFactory(factory.django.DjangoModelFactory):
   pub_date = timezone.now()
   # role = Role.objects.filter(reference='Superior').first()
   # profile = Profile.objects.filter(reference='Scholar').first()
-  specie = Specie.objects.filter(species='Urthish',race='Teutonic').first()
+  specie = Specie.objects.filter(species='Urthish', race='Teutonic').first()
   full_name = '%s %s'%(specie.species,specie.race)
   onsave_reroll_attributes = True
 

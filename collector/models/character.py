@@ -1,4 +1,4 @@
-"""
+f"""
  ╔╦╗╔═╗  ╔═╗┌─┐┬  ┬  ┌─┐┌─┐┌┬┐┌─┐┬─┐
   ║║╠═╝  ║  │ ││  │  ├┤ │   │ │ │├┬┘
  ═╩╝╩    ╚═╝└─┘┴─┘┴─┘└─┘└─┘ ┴ └─┘┴└─
@@ -23,13 +23,13 @@ class Character(Combattant):
     class Meta:
         ordering = ['full_name']
 
-    pagenum = 0
+    #page_num = 0
     full_name = models.CharField(max_length=200)
     alias = models.CharField(max_length=200, blank=True, null=True, default='')
     rid = models.CharField(max_length=200, default='none')
     alliance = models.CharField(max_length=200, blank=True, default='')
     faction = models.CharField(max_length=200, blank=True, default='')
-    alliancehash = models.CharField(max_length=200, blank=True, default='none')
+    alliance_hash = models.CharField(max_length=200, blank=True, default='none')
     player = models.CharField(max_length=200, default='', blank=True)
     specie = models.ForeignKey(Specie, null=True, default=31, blank=True,
                                on_delete=models.SET_NULL)
@@ -41,7 +41,7 @@ class Character(Combattant):
     height = models.IntegerField(default=150)
     weight = models.IntegerField(default=50)
     narrative = models.TextField(default='', blank=True)
-    buildlog = models.TextField(default='', blank=True)
+    build_log = models.TextField(default='', blank=True)
     entrance = models.CharField(max_length=100, default='', blank=True)
     keyword = models.CharField(max_length=32, blank=True, default='new')
     stars = models.CharField(max_length=256, blank=True, default='')
@@ -89,6 +89,7 @@ class Character(Combattant):
     OCC_DRK = models.PositiveIntegerField(default=0)
     occult = models.CharField(max_length=50, default='', blank=True)
     challenge = models.TextField(default='', blank=True)
+    challenge_value = models.IntegerField(default=0)
     todo_list = models.TextField(default='', blank=True)
     # is_exportable = models.BooleanField(default=False)
     is_visible = models.BooleanField(default=True)
@@ -103,12 +104,14 @@ class Character(Combattant):
     picture = models.CharField(max_length=1024, blank=True,
                                default='https://drive.google.com/open?id=15hdubdMt1t_deSXkbg9dsAjWi5tZwMU0')
     alliance_picture = models.CharField(max_length=256, blank=True, default='')
-    onsave_reroll_attributes = models.BooleanField(default=False)
-    onsave_reroll_skills = models.BooleanField(default=False)
-    lifepath_total = models.IntegerField(default=0)
+    on_save_re_roll_attributes = models.BooleanField(default=False)
+    on_save_re_roll_skills = models.BooleanField(default=False)
+    life_path_total = models.IntegerField(default=0)
+    stories_count = models.PositiveIntegerField(default=0)
     balanced = models.BooleanField(default=False)
     historical_figure = models.BooleanField(default=False)
     nameless = models.BooleanField(default=False)
+    error = models.BooleanField(default=False)
     color = models.CharField(max_length=20, blank=True, default='#CCCCCC')
     skills_options = []
     ba_options = []
@@ -186,15 +189,12 @@ class Character(Combattant):
         return reverse('view_character', kwargs={'pk': self.pk})
 
     def get_pa(self, str):
-        context = {}
-        context["attribute"] = str
-        context["value"] = getattr(self, str)
-        context["id"] = self.id
+        context = {"attribute": str, "value": getattr(self, str), "id": self.id}
         return context
 
     def rebuild_from_lifepath(self):
         """ Historical Creation """
-        self.buildlog = ''
+        self.build_log = ''
         from collector.models.character_custo import CharacterCusto
         found_custo = CharacterCusto.objects.filter(character=self).first()
         if found_custo is None:
@@ -211,9 +211,9 @@ class Character(Combattant):
         self.AP_tod_pool = 0
         self.OP_tod_pool = 0
         self.WP_tod_pool = 0
-        self.lifepath_total = 0
+        self.life_path_total = 0
         bl = []
-        TOD_REP = {
+        tod_rep = {
             'RA': 0,
             'UP': 0,
             'AP': 0,
@@ -227,58 +227,58 @@ class Character(Combattant):
             self.OP_tod_pool += OP
             self.OP_tod_pool += WP
             self.WP_tod_pool += WP
-            self.lifepath_total += tod.tour_of_duty_ref.value
-            if (tod.tour_of_duty_ref.category == '0' or tod.tour_of_duty_ref.category == '5'):
-                TOD_REP['RA'] += tod.tour_of_duty_ref.value
-            elif (tod.tour_of_duty_ref.category == '10'):
-                TOD_REP['UP'] += tod.tour_of_duty_ref.value
-            elif (tod.tour_of_duty_ref.category == '20'):
-                TOD_REP['AP'] += tod.tour_of_duty_ref.value
-            elif (tod.tour_of_duty_ref.category == '30'):
-                TOD_REP['EC'] += tod.tour_of_duty_ref.value
-            elif (tod.tour_of_duty_ref.category == '40'):
-                TOD_REP['TO'] += tod.tour_of_duty_ref.value
-            elif (tod.tour_of_duty_ref.category == '50'):
-                TOD_REP['WB'] += tod.tour_of_duty_ref.value
+            self.life_path_total += tod.tour_of_duty_ref.value
+            if tod.tour_of_duty_ref.category == '0' or tod.tour_of_duty_ref.category == '5':
+                tod_rep['RA'] += tod.tour_of_duty_ref.value
+            elif tod.tour_of_duty_ref.category == '10':
+                tod_rep['UP'] += tod.tour_of_duty_ref.value
+            elif tod.tour_of_duty_ref.category == '20':
+                tod_rep['AP'] += tod.tour_of_duty_ref.value
+            elif tod.tour_of_duty_ref.category == '30':
+                tod_rep['EC'] += tod.tour_of_duty_ref.value
+            elif tod.tour_of_duty_ref.category == '40':
+                tod_rep['TO'] += tod.tour_of_duty_ref.value
+            elif tod.tour_of_duty_ref.category == '50':
+                tod_rep['WB'] += tod.tour_of_duty_ref.value
         if self.charactercusto:
             self.charactercusto.comment = self.full_name
             self.charactercusto.push(self)
             self.charactercusto.save()
 
-        PA_TOTAL = self.sumPA
-        PO_TOTAL = 0
+        pa_total = self.sumPA
+        po_total = 0
         for s in self.skill_set.all():
-            if s.skill_ref.is_root == False:
-                PO_TOTAL += s.value
-        BA_TOTAL = 0
+            if not s.skill_ref.is_root:
+                po_total += s.value
+        ba_total = 0
         for ba in self.beneficeaffliction_set.all():
-            BA_TOTAL += ba.benefice_affliction_ref.value
-        BC_TOTAL = 0
+            ba_total += ba.benefice_affliction_ref.value
+        bc_total = 0
         for bc in self.blessingcurse_set.all():
-            BC_TOTAL += bc.blessing_curse_ref.value
+            bc_total += bc.blessing_curse_ref.value
 
         bl.append("")
         bl.append("Tour Summary:")
-        bl.append("- APx3+OP+BA+BC... " + str(PA_TOTAL * 3 + PO_TOTAL + BA_TOTAL + BC_TOTAL))
+        bl.append("- APx3+OP+BA+BC... " + str(pa_total * 3 + po_total + ba_total + bc_total))
         bl.append("- WP.............. " + str(self.WP_tod_pool))
         bl.append("- Value........... " + str(self.charactercusto.value))
-        bl.append("- Lifepath ....... " + str(self.lifepath_total))
-        bl.append("- Repartition .... " + str(TOD_REP))
+        bl.append("- Lifepath ....... " + str(self.life_path_total))
+        bl.append("- Repartition .... " + str(tod_rep))
         fs_fics7.check_secondary_attributes(self)
         self.charactercusto.save()
-        self.prepareDisplay()
-        self.handleWildcards()
+        self.prepare_display()
+        self.handle_wildcards()
         self.add_missing_root_skills()
         self.resetTotal()
-        self.balanced = (self.lifepath_total == self.OP) and (self.OP > 0)
-        self.buildlog = "\n".join(bl)
+        self.balanced = (self.life_path_total == self.OP) and (self.OP > 0)
+        self.build_log = "\n".join(bl)
         if self.player != '':
             self.balanced = True
         if self.color == '#CCCCCC':
             d = lambda x: fs_fics7.roll(x) - 1
             self.color = '#%01X%01X%01X%01X%01X%01X' % (d(8) + 4, d(16), d(8) + 4, d(16), d(8) + 4, d(16))
 
-    def prepareDisplay(self):
+    def prepare_display(self):
         self.refresh_skills_options()
         self.refresh_options("ba_options", "ba_options_not", self.charactercusto.beneficeafflictioncusto_set.all(),
                              "benefice_affliction_ref", "BeneficeAfflictionRef")
@@ -294,7 +294,7 @@ class Character(Combattant):
                              "ritual_ref", "RitualRef")
         # self.preparePADisplay()
 
-    def handleWildcards(self):
+    def handle_wildcards(self):
         pass
 
     def rebuild_free_form(self):
@@ -343,7 +343,8 @@ class Character(Combattant):
         # self.is_exportable = True #self.check_exportable()
         self.update_challenge()
         self.check_todo_list()
-        logger.debug('Done fixing ...: %s' % (self.full_name))
+        self.update_stories_count()
+        logger.info('    => Done fixing ...: %s' % (self.full_name))
 
     def check_todo_list(self):
         pass
@@ -360,7 +361,8 @@ class Character(Combattant):
         res += '<i class="fas fa-th-list" title="skills"></i> %d ' % (self.SK_TOTAL)
         res += '<i class="fas fa-th" title="talents"></i> %d ' % (self.TA_TOTAL + self.BC_TOTAL + self.BA_TOTAL)
         res += '<i class="fas fa-star" title="wildcards"></i> %d ' % (self.WP_tod_pool)
-        res += '<i class="fas fa-newspaper" title="OP challenge"></i> %d/%d' % (self.OP, self.lifepath_total)
+        res += '<i class="fas fa-newspaper" title="OP challenge"></i> %d/%d' % (self.OP, self.life_path_total)
+        self.challenge_value = self.AP*3 + self.SK_TOTAL + self.BC_TOTAL + self.BA_TOTAL
         self.challenge = res
 
     def calculateShortcuts(self):
@@ -549,10 +551,10 @@ class Character(Combattant):
             ba = BeneficeAffliction()
             ba.character = self
             ba.benefice_affliction_ref = aref
-            print("ADD_BA " + adesc)
+            #print("ADD_BA " + adesc)
             ba.description = adesc
             ba.save()
-            print("ADD_BA (after) " + ba.description)
+            #print("ADD_BA (after) " + ba.description)
             return ba
 
     def remove_ba(self, aref):
@@ -713,6 +715,30 @@ class Character(Combattant):
         # else:
         return True
 
+    def count_cast(self, all):
+        result = 0
+        for story in all:
+            if story.got(self.rid):
+                result += 1
+        return result
+
+    def update_stories_count(self):
+        self.stories_count = 0
+        from scenarist.models.events import Event
+        from scenarist.models.acts import Act
+        from scenarist.models.dramas import Drama
+        from scenarist.models.epics import Epic
+        events = Event.objects.all()
+        acts = Act.objects.all()
+        dramas = Drama.objects.all()
+        epics = Epic.objects.all()
+        self.stories_count += self.count_cast(events)
+        self.stories_count += self.count_cast(acts)
+        self.stories_count += self.count_cast(dramas)
+        self.stories_count += self.count_cast(epics)
+        logger.info('    => Updated stories count...: %d' % (self.stories_count))
+        return self.stories_count
+
 
 @receiver(pre_save, sender=Character, dispatch_uid='update_character')
 def update_character(sender, instance, conf=None, **kwargs):
@@ -720,7 +746,7 @@ def update_character(sender, instance, conf=None, **kwargs):
     if instance.rid != 'none':
         instance.fix(conf)
     instance.get_rid(instance.full_name)
-    instance.alliancehash = hashlib.sha1(
+    instance.alliance_hash = hashlib.sha1(
         bytes(instance.alliance, 'utf-8')
     ).hexdigest()
 

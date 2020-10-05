@@ -45,7 +45,7 @@ def recalc(request):
     x = 1
     messages.warning(request, 'Starting Recalc...')
     for c in character_items:
-        c.pagenum = x
+        c.page_num = x
         c.save()
         x += 1
         messages.warning(request, 'Recalc... %s' % (c.full_name))

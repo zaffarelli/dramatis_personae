@@ -62,6 +62,19 @@ class StoryModel(models.Model):
                 avar.append(ch.rid)
         return avar
 
+    def got(self, rid):
+        list = self.fetch_avatars(self.description)
+        try:
+            list += self.fetch_avatars(self.resolution)
+        except:
+            pass
+        try:
+            _ = list.index(rid)
+        except ValueError:
+            return False
+        else:
+            return True
+
     def get_casting(self):
         """ Bring all avatars rids from all relevant text fields"""
         casting = []

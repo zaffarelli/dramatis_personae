@@ -21,21 +21,35 @@ def get_population_statistics(request, *args, **kwargs):
     da = []
 
     # List of balanced / unbalanced characters
-    ch = conf.get_chart('balanced', filter='balanced', type='doughnut')
+    ch = conf.get_chart(field='full_name',
+                        filter='stories_count__gt',
+                        pattern=0,
+                        type='horizontalBar',
+                        bar_property='stories_count',
+                        order_by='-')
     da.append(json.dumps(ch['data']))
 
-    ch = conf.get_chart('alliance', filter='is_public', pattern=True, type='doughnut')
+
+
+
+    #
+    ch = conf.get_chart(field='full_name', filter='life_path_total__gt', pattern=0, bar_property="life_path_total", type='horizontalBar', order_by='-')
     da.append(json.dumps(ch['data']))
 
-    ch = conf.get_chart('is_public', filter='balanced', pattern=True, type='doughnut')
+    ch = conf.get_chart(field='balanced', bar_property='balanced', type='doughnut', legend_display=True)
     da.append(json.dumps(ch['data']))
-    ch = conf.get_chart('full_name', filter='fencing_league', pattern=True, type='horizontalBar',
-                        bar_property='victory_rating')
+
+    ch = conf.get_chart(field='alliance', bar_property='alliance', type='doughnut', legend_display=True)
     da.append(json.dumps(ch['data']))
-    ch = conf.get_chart('caste', type='doughnut')
+
+
+    ch = conf.get_chart(field='full_name', filter='fencing_league', pattern=True, type='horizontalBar',
+                         bar_property='victory_rating', legend_display=True)
     da.append(json.dumps(ch['data']))
-    ch = conf.get_chart('alliance', type='doughnut')
+    ch = conf.get_chart(bar_property='caste', field='caste', type='bar', legend_display=True)
     da.append(json.dumps(ch['data']))
+
+
     charts = []
     template = get_template('collector/popstats.html')
     idx = 0
@@ -51,8 +65,9 @@ def get_population_statistics(request, *args, **kwargs):
 
 def get_keywords(request, *args, **kwargs):
     """ Get all the keywords into a chart"""
+    #context = {}
     conf = get_current_config()
-    ch = conf.get_chart('keyword', filter='keyword', type='horizontalBar')
+    ch = conf.get_chart(field='keyword', bar_property='keyword', type='horizontalBar', legend_display=False)
     da = json.dumps(ch['data'])
     template = get_template('collector/keywords.html')
     chart = template.render({'cname': 'chart_keywords', 'cdata': da})

@@ -106,3 +106,30 @@ span.toggler {
 .selected {
     background-color: $fics_light;
 }
+
+.plate{
+    display: inline-block;
+    background: $fics_darker;
+    color: $fics_front;
+    border:1px solid $fics_dark;
+    width: 25em;
+    height: 1.4em;
+    margin:0;
+    padding:0;
+    text-align:left;
+    &.right{
+        text-align:right;
+    }
+    &.center{
+        text-align:center;
+    }
+    &.double{
+        height: 2.8em;
+    }
+    &.portrait{
+        height:120px;
+        width:auto;
+        background: $fics_darker;
+        border:2px solid $fics_light;
+    }
+}

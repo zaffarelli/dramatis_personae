@@ -4,7 +4,9 @@
  ═╩╝╩    ╚═╝└─┘┴─┘┴─┘└─┘└─┘ ┴ └─┘┴└─
 */
 
-let messenger_tick = null;
+
+
+let heartbeat = 0;
 
 function prepare_ajax() {
   $.ajaxSetup({
@@ -16,6 +18,20 @@ function prepare_ajax() {
     }
   });
 }
+
+function runHeartbeat(){
+    clearTimeout(heartbeat);
+    $.ajax({
+        url: 'api/heartbeat/',
+        success: function(answer) {
+            $('#messenger_block').html(answer)
+            rebootlinks();
+        },
+    });
+    heartbeat = setTimeout("runHeartbeat()", 1000);
+}
+
+
 
 // Chart event handler
 function keywordHandlerClick(evt) {
@@ -48,13 +64,13 @@ function set_toggler(tag, klass, item) {
 }
 
 
-
+/*
 function closeMessenger() {
   console.log("Closing messenger...")
   $("#messenger").addClass("hidden");
 }
 
-/* Handling messenger */
+
 function update_messenger() {
   $.ajax({
     url: 'ajax/messenger/',
@@ -71,11 +87,14 @@ function update_messenger() {
   });
 }
 
+*/
+
 /* On start... */
 function rebootlinks() {
   let ac = new AvatarCustomizer();
   let sc = new Scenarist();
   let op = new Optimizer();
+  heartbeat = setTimeout("runHeartbeat()", 1000);
   $('.nav').off();
   $('.nav').on('click', function(event) {
     event.preventDefault();
@@ -407,7 +426,7 @@ function rebootlinks() {
         ac.reset(x, "sheet_" + x, "customizer");
         $("li#" + dad_id + " .character_name").click();
         rebootlinks();
-        update_messenger();
+        //update_messenger();
       },
       error: function(answer) {
         console.log('Recalc error...' + answer);
@@ -432,11 +451,11 @@ function rebootlinks() {
         rebootlinks();
         ac.reset(x, "sheet_" + x, "customizer");
         $("li#" + dad_id + " .character_name").click();
-        update_messenger();
+        //update_messenger();
       },
       error: function(answer) {
         console.log('ooops... :(');
-        update_messenger();
+        //update_messenger();
       }
     });
   });
@@ -456,11 +475,11 @@ function rebootlinks() {
           $('.mods').html(answer.mods);
           $('.total').html(answer.total);
           rebootlinks();
-          update_messenger();
+          //pdate_messenger();
         },
         error: function(answer) {
           console.log('Broken dice... :(');
-          update_messenger();
+          //update_messenger();
         }
       });
     }
@@ -513,7 +532,7 @@ function rebootlinks() {
   set_toggler('#list_toggler', 'collapsed', ".list");
   set_toggler('.dicer_toggler', 'collapsed', ".dicer");
   set_toggler('#dicer_toggler', 'collapsed', ".dicer");
-  update_messenger();
+//  update_messenger();
 }
 
 /* Startup function for events */

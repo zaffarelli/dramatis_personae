@@ -254,14 +254,14 @@ body {
                     border-radius: 5px;
                     opacity: .9;
 
-                    & .character_actions, & .character_info {
+                    & .character_info {
                         border: 1px solid transparent;
                         display: inline-block;
                         border-radius: 2px;
                         padding: 0;
                         margin: 0;
 
-                        & a, & span.nav, , & .action {
+                        & a, & span.nav, & .action {
                             cursor: pointer;
                             color: $fics_hl;
 
@@ -269,12 +269,18 @@ body {
                                 color: $fics_golden;
                             }
                         }
+                        border: 1px solid $fics_hl;
+                        background: $fics_darker;
+                        padding: 2px;
+                        width: 98%;
+                        height: auto;
+
+                        &.hidden {
+                            display: none;
+                        }
                     }
 
-                    & .character_actions {
-                        float: right;
-                        color: $fics_front;
-                    }
+
 
                     & .character_name {
                         display: inline-block;
@@ -295,22 +301,20 @@ body {
                         }
                     }
 
-                    & .character_info {
-                        border: 1px solid $fics_hl;
-                        background: $fics_darker;
-                        padding: 2px;
-                        width: 98%;
-                        height: 6em;
-
-                        &.hidden {
-                            display: none;
-                        }
-                    }
                 }
             }
         }
     }
 }
+
+                    .character_actions {
+
+
+                        float: right;
+                        color: $fics_front;
+                    }
+
+
 
 .wrapper {
     font-family: Texte;
@@ -1005,9 +1009,7 @@ body {
 
 .action_icon {
     color: $fics_hl;
-    /*color: $fics_fronter;*/
     cursor: pointer;
-
     &:hover {
         color: $fics_golden;
     }
@@ -1192,3 +1194,4 @@ th.skill_dot {
 /*     opacity: .5;*/
 
 /* }*/
+

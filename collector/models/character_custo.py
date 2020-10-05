@@ -151,9 +151,9 @@ class CharacterCusto(models.Model):
         for bc in self.blessingcursecusto_set.all():
             ch.add_bc(bc.blessing_curse_ref)
         for ba in self.beneficeafflictioncusto_set.all():
-            print("Custoprepush " + ba.description)
+            #print("Custoprepush " + ba.description)
             x = ch.add_ba(ba.benefice_affliction_ref, ba.description)
-            print("Custopush " + x.description)
+            #print("Custopush " + x.description)
         for weapon in self.weaponcusto_set.all():
             ch.add_weapon(weapon.weapon_ref)
         for armor in self.armorcusto_set.all():

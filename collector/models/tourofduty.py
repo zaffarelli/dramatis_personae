@@ -44,6 +44,7 @@ class TourOfDutyRef(models.Model):
     WP = models.IntegerField(default=0)
     value = models.IntegerField(default=0)
     description = models.TextField(max_length=1024, default='', blank=True)
+    valid = models.BooleanField(default=False)
 
     def __str__(self):
         return '[%s] %s (%s)(%d)' % (fics_references.LIFEPATH_CATEGORY_SHORT[self.category], self.reference,
@@ -98,7 +99,15 @@ class TourOfDutyRef(models.Model):
                 self.OP += ba.benefice_affliction_ref.value
             self.description = " ".join(texts)
             self.value = self.AP * 3 + self.OP
+            self.check_value()
 
+    def check_value(self):
+        from collector.utils.fics_references import LIFEPATH_CATEGORY_VAL
+        valid = True
+        if self.value not in LIFEPATH_CATEGORY_VAL[self.category]:
+            valid = False
+        if valid != self.valid:
+            self.valid = valid
 
 @receiver(pre_save, sender=TourOfDutyRef, dispatch_uid='update_tour_of_duty_ref')
 def update_tour_of_duty_ref(sender, instance, **kwargs):

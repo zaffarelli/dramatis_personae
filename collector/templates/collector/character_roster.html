@@ -157,7 +157,7 @@ Born in {{ c.birthdate }} ({{ c.age }} years old)
 <BR/>RID:{{ c.rid }}
 
 <BR/>{% now "Ymd H:i:s"  %}
-<br/><b>{{c.pagenum|stringformat:"03d" }}</b>
+<br/><b>{{c.page_num|stringformat:"03d" }}</b>
 
 
 {% if c.picture != ''%}

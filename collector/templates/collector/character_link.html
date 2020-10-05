@@ -1,37 +1,52 @@
 <div class='avatar_link {% if c.is_locked %}locked{%endif%}'>
-  <div class='character_name'>
-  <em title='{{ c.full_name }}'=>{{ c.full_name }}</em>
-  </div>
-  <div class='character_actions' id="link_{{c.id}}">
-    <span class="action_icon edit_character"><i class="fas fa-user-tag"></i></span>&nbsp;&nbsp;
-    <span class="action_icon recalc_character"><i class="fas fa-cog"></i></span>&nbsp;&nbsp;
-    {% if c.use_history_creation %}
-        {% if c.balanced %}
-        <span class="action_icon histo"><i class="golden fas fa-balance-scale"></i></span>
+    <div class='character_name'>
+        <em title='{{ c.full_name }}'> {{ c.full_name }}</em>
+    </div>
+    <div class='character_actions' id="link_{{c.id}}">
+        <span class="action_icon edit_character"><i class="fas fa-user-tag"></i></span>
+        &nbsp;
+        <span class="action_icon recalc_character"><i class="fas fa-cog"></i></span>
+        &nbsp;
+        {% if c.use_history_creation %}
+            {% if c.balanced %}
+            <span class="action_icon histo"><i class="golden fas fa-balance-scale"></i></span>
+            {% else %}
+            <span class="action_icon histo"><i class="fas fa-balance-scale-right"></i></span>
+            {% endif %}
+             &nbsp;
+        {% endif %}&nbsp;&nbsp;
+        {% if c.is_public %}
+            <span class='action_icon toggle_public'><i class='golden fas fa-universal-access'></i></span>
         {% else %}
-        <span class="action_icon histo"><i class="fas fa-balance-scale-right"></i></span>
+            <span class='action_icon toggle_public'><i class='fas fa-ban'></i></span>
         {% endif %}
-    {% endif %}
-    &nbsp;&nbsp;
-    {% if c.is_public %}
-        <span class='action toggle_public'><i class='golden fas fa-universal-access'></i></span>
-    {%else%}
-        <span class='action toggle_public'><i class='fas fa-ban'></i></span>
-    {% endif %}
-    &nbsp;&nbsp;
-    {% if c.spotlight %}
-        <span class='action toggle_spotlight'"><i class='golden fas fa-lightbulb'></i></span>
-    {%else%}
-        <span class='action toggle_spotlight'"><i class='fas fa-lightbulb'></i></span>
-    {% endif %}
-    &nbsp;&nbsp;
+        &nbsp;
+        {% if c.spotlight %}
+            <span class='action_icon toggle_spotlight'><i class='golden fas fa-lightbulb'></i></span>
+        {% else %}
+            <span class='action_icon toggle_spotlight'><i class='fas fa-lightbulb'></i></span>
+        {% endif %}
+        &nbsp;
+        {% if c.error %}
+            <span class='action_icon'><i class='golden fas fa-bug'></i></span>
+        {% else %}
+            <span class='action_icon'><i class='fas fa-times'></i></span>
+        {% endif %}
   </div>
   <div class='character_info hidden'>
-    {{ c.entrance|safe }}<br/>
-    {{ c.alliance|safe }}<br/>
-    {% if c.fencing_league %}Proud member of the Fencing League.<br/>{%endif%}
-    {{ c.challenge|safe }}
-    <br/> ID:<span class='action_icon custom_show' id='{{c.id}}'>{{c.id}}</span> {{c.rid}}
-    <br/>({%if c.keyword != '' %}<span class='action custom_glance' id='{{c.keyword}}'>{{c.keyword|safe}}</span>{%endif%})
+        <img class="plate portrait" src="media/portraits/{{ c.rid }}.png"/>
+        <span class="plate double">{{ c.entrance|safe }}</span>
+        <span class="plate">{{ c.alliance|safe }}</span>
+        {% if c.fencing_league %}
+            <span class="plate">Proud member of the Fencing League.</span>
+        {% endif %}
+        <span class="plate">ID/RID: {{c.id}} / {{c.rid}}</span>
+        {% if c.keyword != '' %}
+            <span class="plate">{{c.keyword|safe}}</span>
+        {% endif %}
+        {% if c.stories_count %}
+        <span class="plate"> Casted {{ c.stories_count }} times.</span>
+        {% endif %}
+        <span class="plate right">{{ c.challenge|safe }}</span>
   </div>
 </div>
