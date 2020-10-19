@@ -257,9 +257,9 @@ def as_lifepath(value):
 def prettybool(value):
     """ Display a boolean mark"""
     if value == True:
-        res = '<i class="fas fa-check fa-xs"></i>'
+        res = '<i class="fas fa-check"></i>'
     else:
-        res = '<i class="fas fa-times fa-xs"></i>'
+        res = '<i class="fas fa-times"></i>'
     return res
 
 

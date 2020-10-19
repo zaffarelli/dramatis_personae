@@ -34,19 +34,26 @@
         {% endif %}
   </div>
   <div class='character_info hidden'>
+        <div class="main_plate">
+
+        </div>
+        <div class="support_plate">
+
+        </div>
+
         <img class="plate portrait" src="media/portraits/{{ c.rid }}.png"/>
-        <span class="plate double">{{ c.entrance|safe }}</span>
-        <span class="plate">{{ c.alliance|safe }}</span>
+        <div class="plate double">{{ c.entrance|safe }}</div>
+        <div class="plate">{{ c.alliance|safe }}</div>
         {% if c.fencing_league %}
-            <span class="plate">Proud member of the Fencing League.</span>
+            <div class="plate">Proud member of the Fencing League.</div>
         {% endif %}
-        <span class="plate">ID/RID: {{c.id}} / {{c.rid}}</span>
+        <div class="plate">ID/RID: {{c.id}} / {{c.rid}}</div>
         {% if c.keyword != '' %}
-            <span class="plate">{{c.keyword|safe}}</span>
+            <div class="plate">{{c.keyword|safe}}</div>
         {% endif %}
         {% if c.stories_count %}
-        <span class="plate"> Casted {{ c.stories_count }} times.</span>
+        <div class="plate"> Casted {{ c.stories_count }} times.</div>
         {% endif %}
-        <span class="plate right">{{ c.challenge|safe }}</span>
+        <div class="plate right">{{ c.challenge|safe }}</div>
   </div>
 </div>

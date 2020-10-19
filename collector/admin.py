@@ -75,3 +75,6 @@ admin.site.register(RitualRef, RitualRefAdmin)
 from collector.models.cyberware import CyberwareRef, CyberwareRefAdmin, Cyberfeature, CyberfeatureAdmin
 admin.site.register(Cyberfeature, CyberfeatureAdmin)
 admin.site.register(CyberwareRef, CyberwareRefAdmin)
+
+from collector.models.user import Profile, ProfileAdmin
+admin.site.register(Profile, ProfileAdmin)

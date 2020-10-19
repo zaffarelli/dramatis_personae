@@ -23,7 +23,7 @@ class Character(Combattant):
     class Meta:
         ordering = ['full_name']
 
-    #page_num = 0
+    page_num = 0
     full_name = models.CharField(max_length=200)
     alias = models.CharField(max_length=200, blank=True, null=True, default='')
     rid = models.CharField(max_length=200, default='none')
@@ -112,6 +112,7 @@ class Character(Combattant):
     historical_figure = models.BooleanField(default=False)
     nameless = models.BooleanField(default=False)
     error = models.BooleanField(default=False)
+    need_pdf = models.BooleanField(default=False)
     color = models.CharField(max_length=20, blank=True, default='#CCCCCC')
     skills_options = []
     ba_options = []
@@ -194,6 +195,7 @@ class Character(Combattant):
 
     def rebuild_from_lifepath(self):
         """ Historical Creation """
+        old_op = self.OP
         self.build_log = ''
         from collector.models.character_custo import CharacterCusto
         found_custo = CharacterCusto.objects.filter(character=self).first()
@@ -277,6 +279,7 @@ class Character(Combattant):
         if self.color == '#CCCCCC':
             d = lambda x: fs_fics7.roll(x) - 1
             self.color = '#%01X%01X%01X%01X%01X%01X' % (d(8) + 4, d(16), d(8) + 4, d(16), d(8) + 4, d(16))
+        self.need_pdf = old_op != self.OP
 
     def prepare_display(self):
         self.refresh_skills_options()
@@ -344,7 +347,8 @@ class Character(Combattant):
         self.update_challenge()
         self.check_todo_list()
         self.update_stories_count()
-        logger.info('    => Done fixing ...: %s' % (self.full_name))
+        logger.warning(f'    => Done fixing ...: {self.rid}' )
+
 
     def check_todo_list(self):
         pass
@@ -362,7 +366,7 @@ class Character(Combattant):
         res += '<i class="fas fa-th" title="talents"></i> %d ' % (self.TA_TOTAL + self.BC_TOTAL + self.BA_TOTAL)
         res += '<i class="fas fa-star" title="wildcards"></i> %d ' % (self.WP_tod_pool)
         res += '<i class="fas fa-newspaper" title="OP challenge"></i> %d/%d' % (self.OP, self.life_path_total)
-        self.challenge_value = self.AP*3 + self.SK_TOTAL + self.BC_TOTAL + self.BA_TOTAL
+        self.challenge_value = self.AP * 3 + self.SK_TOTAL + self.BC_TOTAL + self.BA_TOTAL
         self.challenge = res
 
     def calculateShortcuts(self):
@@ -551,10 +555,10 @@ class Character(Combattant):
             ba = BeneficeAffliction()
             ba.character = self
             ba.benefice_affliction_ref = aref
-            #print("ADD_BA " + adesc)
+            # print("ADD_BA " + adesc)
             ba.description = adesc
             ba.save()
-            #print("ADD_BA (after) " + ba.description)
+            # print("ADD_BA (after) " + ba.description)
             return ba
 
     def remove_ba(self, aref):
@@ -677,14 +681,19 @@ class Character(Combattant):
 
     def backup(self):
         """ Transform to PDF if exportable"""
-        from collector.utils.basic import write_pdf
-        proceed = True
-        try:
-            item = self
-            context = {'c': item, 'filename': '%s' % (item.rid)}
-            write_pdf('collector/character_roster.html', context)
-        except:
-            proceed = False
+        proceed = False
+        if self.need_pdf:
+            from collector.utils.basic import write_pdf
+            try:
+                context = dict(c=self, filename=f'{self.rid}', now=datetime.now())
+                write_pdf('collector/character_roster.html', context)
+                logger.warning(f'    => PDF created ...: {self.rid}')
+                proceed = True
+                self.need_pdf = False
+            except:
+                logger.error(f'    => PDF creation error !!! {self.rid}')
+        else:
+            logger.warning(f'    => PDF export not required for {self.rid}.')
         return proceed
 
     def __str__(self):
@@ -754,5 +763,9 @@ def update_character(sender, instance, conf=None, **kwargs):
 @receiver(post_save, sender=Character, dispatch_uid='backup_character')
 def backup_character(sender, instance, **kwargs):
     """ After saving, create PDF for the character """
-    if instance.rid != 'none':
-        instance.backup()
+    # if instance.rid != 'none':
+    #     from collector.tasks import build_pdf
+    #     build_pdf.delay(instance.rid)
+    # if instance.rid != 'none':
+    #     instance.backup()
+    pass

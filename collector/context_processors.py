@@ -10,5 +10,6 @@ import socket
 
 
 def commons(request):
-    return {'dp_version': fics_references.RELEASE, 'instance_name': settings.INSTANCE_NAME,
-            'python_version': sys.version, 'hostname': socket.gethostname().upper()}
+    current_user = request.user
+    return dict(dp_version=fics_references.RELEASE, instance_name=settings.INSTANCE_NAME,
+            python_version=sys.version, hostname=socket.gethostname().upper(), current_user=current_user)

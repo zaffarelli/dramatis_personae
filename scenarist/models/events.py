@@ -1,17 +1,17 @@
-'''
+"""
 ╔╦╗╔═╗  ╔═╗┌─┐┌─┐┌┐┌┌─┐┬─┐┬┌─┐┌┬┐
  ║║╠═╝  ╚═╗│  ├┤ │││├─┤├┬┘│└─┐ │
 ═╩╝╩    ╚═╝└─┘└─┘┘└┘┴ ┴┴└─┴└─┘ ┴
-'''
+"""
 from django.db import models
 from django.contrib import admin
 from django.urls import reverse
 from scenarist.models.story_models import StoryModel
 
+
 class Event(StoryModel):
     class Meta:
         ordering = ['chapter','title']
-
     from scenarist.models.acts import Act
     act = models.ForeignKey(Act, null=True, on_delete=models.CASCADE)
     resolution = models.TextField(default='', max_length=2560,blank=True)
@@ -28,12 +28,12 @@ class Event(StoryModel):
         casting.append(self.fetch_avatars(self.resolution))
         return casting
 
-
     def get_absolute_url(self):
         return reverse('event-detail', kwargs={'pk': self.pk})
 
+
 class EventAdmin(admin.ModelAdmin):
-  ordering = ('act','chapter','title',)
-  list_display = ('title','act','chapter','date','place','description')
-  list_filter = ('act',)
-  search_fields = ('description','title','resolution')
+    ordering = ('act', 'chapter', 'title',)
+    list_display = ('title', 'act', 'chapter', 'date', 'place', 'description')
+    list_filter = ('act',)
+    search_fields = ('description', 'title', 'resolution')

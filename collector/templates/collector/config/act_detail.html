@@ -1,18 +1,20 @@
-<div class='title {% if not c.data.to_PDF %}noPDF{% endif %}'>
-    <div class='chapter'>{{c.data.full_chapter}}</div>
-    <h3>{{ c.title }}</h3>
-    <div class='storybar act'>
-        <p class='act_{{c.data.id}}' children='{{c.data.children}}'>
-            <button class='compact episode_cast' id='c-act-{{c.data.id}}' page='1'>Act</button>
-            <button class='compact view_act' id='view_act_{{c.data.id}}'>View</button>
-            <button class='compact edit_act' id='edit_act_{{c.data.id}}'>Edit</button>
-            <button class='compact hide_act' id='hide_act_{{c.data.id}}'>Close</button>
-            <button class='compact add_event' id='add_act_{{c.data.id}}'>Add</button>
-            <button class='compact delete_act' id='delete_act_{{c.data.id}}'>Delete</button>
-        </p>
+<div class="act_wrap">
+    <div class='title {% if not c.data.to_PDF %}noPDF{% endif %}'>
+        <div class='chapter'>{{c.data.full_chapter}}</div>
+        <h3>{{ c.title }}</h3>
+        <div class='storybar act'>
+            <p class='act_{{c.data.id}}' children='{{c.data.children}}'>
+                <button class='compact episode_cast' id='c-act-{{c.data.id}}' page='1'>Act</button>
+                <button class='compact view_act' id='view_act_{{c.data.id}}'>View</button>
+                <button class='compact edit_act' id='edit_act_{{c.data.id}}'>Edit</button>
+                <button class='compact hide_act' id='hide_act_{{c.data.id}}'>Close</button>
+                <button class='compact add_event' id='add_act_{{c.data.id}}'>Add</button>
+                <button class='compact delete_act' id='delete_act_{{c.data.id}}'>Delete</button>
+            </p>
+        </div>
     </div>
-</div>
     <div class='storyarticle act' id='act_{{c.data.id}}'></div>
     {% for event in c.events %}
         {% include "collector/config/event_detail.html" with c=event %}
     {% endfor %}
+</div>

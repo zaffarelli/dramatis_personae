@@ -92,10 +92,10 @@ def recalc_character(request, id=None):
         crid = item.rid
         template = get_template('collector/character_detail.html')
         character = template.render({'c': item, 'no_skill_edit': False})
-        templatelink = get_template('collector/character_link.html')
-        link = templatelink.render({'c': item}, request)
-        mobileform = get_template('collector/mobile_form.html')
-        mf = mobileform.render({'c': item}, request)
+        template_link = get_template('collector/character_link.html')
+        link = template_link.render({'c': item}, request)
+        mobile_form = get_template('collector/mobile_form.html')
+        mf = mobile_form.render({'c': item}, request)
         context = {
             'rid': crid,
             'id': id,
@@ -103,7 +103,7 @@ def recalc_character(request, id=None):
             'link': link,
             'mobile_form': mf,
         }
-        messages.info(request, '...%s recalculated' % (item.full_name))
+        messages.info(request, '...%s recalculated' % item.full_name)
         return JsonResponse(context)
     else:
         raise Http404

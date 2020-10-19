@@ -7,7 +7,7 @@ class Scenarist{
     constructor(){
     }
 
-    register_story(x){
+    registerStory(x){
         /* Register all the actions for the scenarist items */
         $('.view_'+x).off().on('click', function(event){
             event.preventDefault();
@@ -16,7 +16,7 @@ class Scenarist{
             let id = t_id.split("_")[t_id.split("_").length-1]
             let children = $(this).parent("p").attr('children');
             $.ajax({
-                url: x+'s/'+id+'/view',
+                url: x+'s/'+id+'/view/',
                 success: function(answer) {
                     $('#'+x+'_'+id).html(answer);
                     if (children != undefined){
@@ -25,8 +25,8 @@ class Scenarist{
                         $("#view_"+d).click();
                       })
                     }
-                    prepare_ajax();
-                    rebootlinks();
+                    prepareAjax();
+                    rebootLinks();
                 },
                 error: function(answer){
                     console.log('ooops... on view '+x+' :(');
@@ -46,8 +46,8 @@ class Scenarist{
                 $("#hide_"+d).click();
               })
             }
-            prepare_ajax();
-            rebootlinks();
+            prepareAjax();
+            rebootLinks();
         });
         $('.edit_'+x).off().on('click', function(event){
             event.preventDefault();
@@ -56,11 +56,11 @@ class Scenarist{
             let id = t_id.split("_")[t_id.split("_").length-1]
             let children = $(this).parent("p").attr('children');
             $.ajax({
-                url: x+'s/'+id+'/edit',
+                url: x+'s/'+id+'/edit/',
                 success: function(answer) {
                     $('#'+x+'_'+id).html(answer);
-                    prepare_ajax();
-                    rebootlinks();
+                    prepareAjax();
+                    rebootLinks();
                 },
                 error: function(answer){
                     console.log('ooops... on edit '+x+':(');
@@ -70,12 +70,12 @@ class Scenarist{
         $('.'+x+'_update').off().on('click',function(event){
             event.preventDefault();
             event.stopPropagation();
-            console.log("update");
-            var owner = $(this).closest('div.storyarticle').attr('id');
-            var id = $(this).closest('div.storyarticle').attr('id').split('_')[1];
-            var form = $(this).closest('form');
-            var formdata = form.serialize();
-            var urlupdate = x+'s/'+id+'/edit';
+            let owner = $(this).closest('div.storyarticle').attr('id');
+            let id = owner.split('_')[1];
+            let form = $(this).closest('form');
+            let formdata = form.serialize();
+            let urlupdate = x+'s/'+id+'/edit/';
+            console.log(urlupdate);
             $.ajax({
                 url: urlupdate,
                 method: 'POST',
@@ -88,7 +88,7 @@ class Scenarist{
                 success: function(answer) {
                     console.log('Success... ');
                     $('#'+owner).html(answer);
-                    rebootlinks();
+                    rebootLinks();
                     $('button#'+id+'.view_'+x).click();
                 },
                 error: function(answer) {
@@ -103,7 +103,7 @@ class Scenarist{
             var id = $(this).parent('p').prop('className');
             console.log(id);
             //var form = $(this).closest('form');
-            var urlupdate = x+'s/add';
+            var urlupdate = x+'s/add/';
             $.ajax({
                 url: urlupdate,
                 method: 'POST',
@@ -117,7 +117,7 @@ class Scenarist{
                     console.log('Success... ');
                     console.log(id);
                     //$('#'+id).html(answer);
-                    rebootlinks();
+                    rebootLinks();
                     //$('button#'+id+'.view_'+x).click();
                 },
                 error: function(answer) {
@@ -129,9 +129,9 @@ class Scenarist{
     }
 
     doConnect(){
-        this.register_story('epic');
-        this.register_story('drama');
-        this.register_story('act');
-        this.register_story('event');
+        this.registerStory('epic');
+        this.registerStory('drama');
+        this.registerStory('act');
+        this.registerStory('event');
     }
 }

@@ -1,26 +1,36 @@
 {% load fics_filters %}
-<table  class='details'>
-    <tr>
-        <th>Act</th>
-          <th><em>{{object.title}}</em></th>
-        <th>Anchor</th>
-          <th><strong>{{object.anchor|linebreaks|parse_avatars|safe}}</strong></th>
-        <th>Act</th>
-          <th><em>{{object.act.title}}</em></th>
-        <th>PDF</th>
-          <th>{{object.to_PDF}}</th>
-    </tr><tr>
-        <th>Date</th>
-          <th>{{object.date}}</th>
-        <th>Place</th>
-          <th>{{object.place}}</th>
-        <th>Challenge</th>
-          <th><strong>{{object.challenge}}</strong></th>
-        <th>&nbsp;</th>
-          <th>&nbsp;</th>
-    </tr><tr>
-    <th>Description</th><td colspan=7><div class='desc'>{{object.description|parse_avatars|safe}}</div></td>
-    </tr><tr>
-    <th>Resolution</th><td  colspan=7><div  class='desc'>{{object.resolution|parse_avatars|safe}}</div></td>
-    </tr>
-</table>
+
+<div class="storydetails act">
+    <div class="topic">
+        <div class="subject">Act</div>
+        <div class="entry">{{object.drama.title}}&nbsp;<i class="fa fa-arrow-right"></i>&nbsp;{{object.title}}</div>
+    </div>
+    <div class="topic {%if object.anchor %}{%else%}hidden{%endif%}">
+        <div class="subject">Anchor</div>
+        <div class="entry"><strong>{{object.anchor|linebreaks|parse_avatars|safe}}</strong></div>
+    </div>
+    <div class="topic">
+        <div class="subject">PDF</div>
+        <div class="entry">{{object.to_PDF | prettybool | safe }}</div>
+    </div>
+    <div class="topic {%if object.date %}{%else%}hidden{%endif%}">
+        <div class="subject">Date</div>
+        <div class="entry">{{object.date}}</div>
+    </div>
+    <div class="topic {%if object.anchor %}{%else%}hidden{%endif%}">
+        <div class="subject">Place</div>
+        <div class="entry">{{object.place}}</div>
+    </div>
+    <div class="topic">
+        <div class="subject">Challenge</div>
+        <div class="entry"><strong>{{object.challenge}}</strong></div>
+    </div>
+    <div class="topic">
+        <div class="subject">Description</div>
+        <div class='entry desc'>{{object.description|parse_avatars|safe}}</div>
+    </div>
+    <div class="topic">
+        <div class="subject">Resolution</div>
+        <div class="entry desc">{{object.resolution|parse_avatars|safe}}</div>
+    </div>
+</div>

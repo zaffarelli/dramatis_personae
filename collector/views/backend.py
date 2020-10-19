@@ -31,7 +31,7 @@ def pdf_character(request, id=None):
     """ Create and show a character as PDF """
     item = get_object_or_404(Character, pk=id)
     if item.backup() == True:
-        answer = '<a class="pdflink" target="_blank" href="pdf/%s.pdf">%s</a>' % (item.rid, item.rid)
+        answer = '<a class="pdflink" target="_blank" href="pdf/results/avatars/%s.pdf">%s</a>' % (item.rid, item.rid)
     else:
         answer = '<span class="pdflink">no character found</span>'
     messages.info(request, 'PDF created.')
@@ -40,16 +40,16 @@ def pdf_character(request, id=None):
 
 def recalc(request):
     """ Recalc and export to PDF all avatars """
+    from collector.tasks import recalc_avatar
     conf = get_current_config()
     character_items = Character.objects.filter(epic=conf.epic).order_by('-player', 'full_name')
     x = 1
-    messages.warning(request, 'Starting Recalc...')
+    messages.info(request, 'Starting recalculation tasks...')
     for c in character_items:
-        c.page_num = x
-        c.save()
+        recalc_avatar.delay(c.rid, x)
         x += 1
-        messages.warning(request, 'Recalc... %s' % (c.full_name))
-    messages.info(request, 'Recalc done.')
+        messages.info(request, f'Recalculating {c.full_name}')
+    messages.info(request, 'Recalculation tasks started.')
     return HttpResponse(status=204)
 
 

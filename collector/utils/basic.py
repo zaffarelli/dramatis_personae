@@ -34,46 +34,46 @@ def render_to_pdf(template_src, context_dict={}):
 def write_pdf(template_src, context_dict={}):
     template = get_template(template_src)
     html = template.render(context_dict)
-    fname = 'avatar_%s.pdf'%(context_dict['filename'])
-    filename = os.path.join(settings.MEDIA_ROOT, 'pdf/results/' + fname)
+    fname = '%s.pdf'%(context_dict['filename'])
+    filename = os.path.join(settings.MEDIA_ROOT, 'pdf/results/avatars/' + fname)
     result = open(filename, 'wb')
     pdf = pisa.pisaDocument(BytesIO(html.encode('utf-8')), result)
     result.close()
 
+
 def get_current_config():
     from collector.models.config import Config
     item = Config.objects.get(is_active=True)
-    #print(item)
     return item
 
 
 def make_avatar_appendix(conf):
     """ Creating appendix with the list of avatars from the epic """
-    d = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
     res = []
-    mypath = os.path.join(settings.MEDIA_ROOT, 'pdf/')
     media_resources = os.path.join(settings.MEDIA_ROOT, 'pdf/resources/')
     media_results = os.path.join(settings.MEDIA_ROOT, 'pdf/results/')
-    mystaticpath = os.path.join(settings.STATIC_ROOT, 'pdf/')
-    onlyfiles = [f for f in os.listdir(media_results) if os.path.isfile(os.path.join(media_results, f))]
+    media_avatars = os.path.join(settings.MEDIA_ROOT, 'pdf/results/avatars/')
+    onlyfiles = [f for f in os.listdir(media_avatars) if os.path.isfile(os.path.join(media_avatars, f))]
     pdfs = onlyfiles
     merger = PdfFileMerger()
-    merger.append(open('%s__aa_header.pdf'%(media_resources), 'rb'))
+    # merger.append(open('%s__aa_header.pdf'%(media_resources), 'rb'))
     pdfs.sort()
     ep = conf.epic
     cast = ep.get_full_cast()
     i = 0
     for pdf in pdfs:
-        if 'avatar_' in pdf:
-            arid = pdf.split('avatar_')
-            if arid[1].split('.')[0] in cast:
-                i += 1
-                merger.append(open(media_results+pdf, 'rb'))
+        # if 'avatar_' in pdf:
+        #     arid = pdf.split('avatar_')
+        #     if arid[1].split('.')[0] in cast:
+        if pdf.split('.')[0] in cast:
+            i += 1
+            merger.append(open(media_avatars+pdf, 'rb'))
     if i>0:
-        des = '%sappendix_%s.pdf'%(media_results,conf.epic.shortcut)
+        des = '%sappendix_%s.pdf'%(media_results, conf.epic.shortcut)
         with open(des, 'wb') as fout:
             merger.write(fout)
     return res
+
 
 def make_epic_corpus(conf):
     res = []
@@ -82,7 +82,7 @@ def make_epic_corpus(conf):
     media_results = os.path.join(settings.MEDIA_ROOT, 'pdf/results/')
     mystaticpath = os.path.join(settings.STATIC_ROOT, 'pdf/')
     merger = PdfFileMerger()
-    merger.append(open('%sresources/__es_header.pdf'%(mystaticpath), 'rb'))
+    # merger.append(open('%sresources/__es_header.pdf'%(mystaticpath), 'rb'))
     template = get_template('collector/conf_pdf.html')
     context = {'epic':conf.parse_details()}
     html = template.render(context)
@@ -125,7 +125,7 @@ def extract_rules():
     context = {}
     import datetime
     context['date'] = datetime.datetime.now()
-    skills = SkillRef.objects.all().order_by('reference','is_root','is_speciality')
+    skills = SkillRef.objects.all().order_by('reference', 'is_root', 'is_speciality')
     context['skills'] = skills
     benefice_afflictions = BeneficeAfflictionRef.objects.order_by('-source')
     context['benefice_afflictions'] = benefice_afflictions
@@ -135,7 +135,7 @@ def extract_rules():
     context['melee_weapons'] = melee_weapons
     ranged_weapons = WeaponRef.objects.exclude(category='MELEE')
     context['ranged_weapons'] = ranged_weapons
-    rituals = RitualRef.objects.order_by('category','path','level')
+    rituals = RitualRef.objects.order_by('category', 'path', 'level')
     context['rituals'] = rituals
     racial = TourOfDutyRef.objects.filter(category='0').order_by('-source')
     context['racial'] = racial
@@ -178,17 +178,15 @@ def extract_equipment():
     import datetime
     context['date'] = datetime.datetime.now()
     # Categorizing gear
-    gears = Gear.objects.order_by('category','-reference','name','variant')
+    gears = Gear.objects.order_by('category', '-reference', 'name', 'variant')
     cat = ''
     context['gears'] = []
-    current = { 'name':'', 'data':[] }
+    current = dict(name='', data=[])
     for g in gears:
         if g.get_category_display() != cat:
             if cat:
                 context['gears'].append(current)
-            current = { 'name':'', 'data':[] }
-            current['name'] = g.get_category_display()
-            current['data'] = []
+            current = dict(name=g.get_category_display(), data=[])
             cat = g.get_category_display()
         current['data'].append(g)
     if cat:

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang='en'>
+<html>
+<head>
+    <style rel="stylesheet">
+
+        .container{
+            border:3px solid cyan;
+            background:blue;
+            display: flex;
+            flex-direction: row;
+            flex-wrap:wrap;
+        }
+        .item{
+            border:3px solid brown;
+            background:orange;
+            color:white;
+            width:150px;
+            height:150px;
+            flex-basis: auto;
+            flex-shrink:0;
+        }
+
+        #A{ order: 1; flex-grow: 1;}
+        #B{ order: 2; flex-grow: 3;}
+        #C{ order: 3; flex-grow: 1;}
+        #D{ order: 4; flex-grow: 5;}
+        #E{ order: 5; flex-grow: 5;}
+        #F{
+            order: 6;
+            flex-grow: 5;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="item" id="A">
+            A
+        </div>
+        <div class="item" id="B">
+            B
+        </div>
+        <div class="item" id="C">
+            C
+        </div>
+        <div class="item" id="D">
+            D
+        </div>
+        <div class="item" id="E">
+            E
+        </div>
+        <div class="item" id="F">
+            F
+        </div>
+
+    </div>
+</body>
+
+</html>

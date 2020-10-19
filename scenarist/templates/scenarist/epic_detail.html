@@ -1,14 +1,24 @@
 {% load fics_filters %}
-<table class='details'>
-  <tr>
-      <th>Epic</th><th><em>{{object.title}}</em></th>
-      <th>Era</th><th>{{object.era}}</th>
-      <th>System</th><th>{{object.system}}</th>
-      <th>Gamemaster</th><th>{{object.gamemaster|parse_avatars|safe}}</th>
-  </tr><tr>
-  <th>Description</th><td colspan=7><div class='desc'>{{object.description|parse_avatars|safe}}</div></td>
-  </tr>
 
-
-
-</table>
+<div class='storydetails epic'>
+    <div class="topic">
+        <div class="subject">Epic</div>
+        <div class="entry">{{object.title}}</div>
+    </div>
+    <div class="topic">
+        <div class="subject">Era</div>
+        <div class="entry">{{object.era}}</div>
+    </div>
+    <div class="topic">
+        <div class="subject">System</div>
+        <div class="entry">{{object.system}}</div>
+    </div>
+    <div class="topic">
+        <div class="subject">Gamemaster</div>
+        <div class="entry desc">{{object.gamemaster|parse_avatars|safe}}</div>
+    </div>
+   <div class="topic">
+        <div class="subject">Description</div>
+        <div class="entry desc">{{object.description|parse_avatars|safe}}</div>
+  </div>
+</div>

@@ -1,23 +1,21 @@
-'''
+"""
 ╔╦╗╔═╗  ╔═╗┌─┐┌─┐┌┐┌┌─┐┬─┐┬┌─┐┌┬┐
  ║║╠═╝  ╚═╗│  ├┤ │││├─┤├┬┘│└─┐ │
 ═╩╝╩    ╚═╝└─┘└─┘┘└┘┴ ┴┴└─┴└─┘ ┴
-'''
+"""
 from django.db import models
 from django.contrib import admin
 from django.urls import reverse
 import datetime as dt
 from scenarist.models.story_models import StoryModel
-import json
+
 
 class Epic(StoryModel):
     class Meta:
         ordering = ['era','title']
-
     era = models.IntegerField(default=5017, blank=True)
     shortcut = models.CharField(default='xx', max_length=32, blank=True)
     image = models.CharField(default='', max_length=64, blank=True)
-
     system = models.CharField(default='', max_length=128, blank=True, null=True)
 
     @property
@@ -52,7 +50,6 @@ class Epic(StoryModel):
 
         return ", ".join(ok)+"<hr/>"+", ".join(nok)
 
-
     def get_absolute_url(self):
         return reverse('epic-detail', kwargs={'pk': self.pk})
 
@@ -64,5 +61,6 @@ class Epic(StoryModel):
         episodes = Drama.objects.filter(epic=self)
         return episodes
 
+
 class EpicAdmin(admin.ModelAdmin):
-  ordering = ('era','title',)
+    ordering = ('era', 'title',)

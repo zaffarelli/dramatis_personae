@@ -141,31 +141,11 @@ Born in {{ c.birthdate }} ({{ c.age }} years old)
 </table>
 {%endif%}
 
-
-
-
 <h5>Shortcuts</h5>
 <p>{{ c.gm_shortcuts_pdf|safe }}</p>
 <h5>Narrative</h5>
 <p>{{ c.narrative|parse_avatars_pdf|safe }}</p>
 <hr>
 <em>Generated with <b>Dramatis Personae</b></em>
-
-{% comment %}
-<br/>CHALLENGE {{ c.OP }}
-
-<BR/>RID:{{ c.rid }}
-
-<BR/>{% now "Ymd H:i:s"  %}
-<br/><b>{{c.page_num|stringformat:"03d" }}</b>
-
-
-{% if c.picture != ''%}
-<img src='{{c.picture}}' width='10cm'>
-{% endif %}
-
-{% endcomment %}
-
-
-
+<p/><em>{{now}} </em></p>
 {% endblock article %}

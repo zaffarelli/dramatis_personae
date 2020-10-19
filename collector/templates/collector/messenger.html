@@ -1,34 +1,23 @@
-
 <script type=text/javascript>
-toastr.options = {
-  "closeButton": false,
-  "debug": false,
-  "newestOnTop": true,
-  "progressBar": true,
-  "positionClass": "toast-bottom-right",
-  "preventDuplicates": true,
-  "showDuration": "300",
-  "hideDuration": "1000",
-  "timeOut": "5000",
-  "extendedTimeOut": "1000",
-  "showEasing": "swing",
-  "hideEasing": "linear",
-  "showMethod": "fadeIn",
-  "hideMethod": "fadeOut"
-}
+    toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": true,
+        "progressBar": true,
+        "positionClass": "toast-bottom-right",
+        "preventDuplicates": false,
+        "showDuration": "100",
+        "hideDuration": "500",
+        "timeOut": "8000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
 </script>
-    {% if messages %}
-            {% for message in messages %}
-                {% if message.tags == 'success'%}
-                    <script type=text/javascript>toastr.{{ message.tags }}("{{ message }}")</script>
-                {% elif message.tags == 'info' %}
-                    <script type=text/javascript>toastr.{{ message.tags }}("{{ message }}")</script>
-                {% elif message.tags == 'debug' %}
-                    <script type=text/javascript>toastr.{{ message.tags }}("{{ message }}")</script>
-                {% elif message.tags == 'warning' %}
-                    <script type=text/javascript>toastr.{{ message.tags }}("{{ message }}")</script>
-                {% elif message.tags == 'error' %}
-                    <script type=text/javascript>toastr.{{ message.tags }}("{{ message }}")</script>
-                {% endif %}
-            {% endfor %}
-    {% endif %}
+{% if messages %}
+    {% for message in messages %}
+        <script type=text/javascript>toastr.{{ message.tags }}("{{ message }}")</script>
+    {% endfor %}
+{% endif %}
