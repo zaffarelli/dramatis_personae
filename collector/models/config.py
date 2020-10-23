@@ -73,7 +73,7 @@ class Config(models.Model):
             idx += 1
         return colorset, hcolorset
 
-    def get_chart(self, field='', filter='', pattern='', type='bar', bar_property='full_name', order_by='', legend_display=False, limit=10):
+    def get_chart(self, field='', filter='', pattern='', type='bar', bar_property='full_name', order_by='', legend_display=False, limit=10, ticks=True):
         """ Makes the data dictionary ChartJS needs to build the relevant chart. Note that those charts
             are all built from the Character model; that justifies the choice for default values
             that might not be relevant to other model tables.
@@ -104,7 +104,6 @@ class Config(models.Model):
         arrfetch = {}
         for c in all:
             value = c.__dict__[field]
-
             if pattern == '':
                 if arrfetch.get(value) is None:
                     arrfetch[value] = 1
@@ -113,14 +112,10 @@ class Config(models.Model):
             else:
                 if arrfetch.get(value) is None:
                     arrfetch[value] = c.__dict__[bar_property]
-
-
-
         for item in arrfetch:
             inside_labels.append(item)
             dat.append(arrfetch[item])
             border.append('#C0C0C0C0')
-
         colors, hoverColors = self.prepare_colorset(len(border))
         inside_datasets = [{
             'data': dat,
@@ -128,7 +123,8 @@ class Config(models.Model):
             'hoverBackgroundColor': hoverColors,
             'borderColor': border,
             'hoverBorderColor': hoverColors,
-            'borderWidth': 1
+            'borderWidth': 1,
+            'minBarLength': 30
         }]
         data = {
             'labels': inside_labels,
@@ -155,8 +151,9 @@ class Config(models.Model):
                     'scales': {
                         'yAxes': [
                             {
-                                'ticks': {'mirror': True},
-                                #'afterFit': 'function(scaleInstance){scaleInstance.width = 200;}'
+                                'ticks': {'mirror': ticks},
+                                'afterFit': 'function(scaleInstance){scaleInstance.width = 400;}',
+                                'fontStyle': 'bold'
                             }
                         ]
                     },

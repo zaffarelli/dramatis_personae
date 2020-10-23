@@ -4,12 +4,12 @@
  ═╩╝╩    ╚═╝└─┘┴─┘┴─┘└─┘└─┘ ┴ └─┘┴└─
 '''
 from collector.utils import fics_references, fs_fics7
+from collector.models.user import Profile
 from django.conf import settings
 import sys
 import socket
 
 
 def commons(request):
-    current_user = request.user
     return dict(dp_version=fics_references.RELEASE, instance_name=settings.INSTANCE_NAME,
-            python_version=sys.version, hostname=socket.gethostname().upper(), current_user=current_user)
+            python_version=sys.version, hostname=socket.gethostname().upper())

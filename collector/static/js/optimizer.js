@@ -27,8 +27,8 @@ class Optimizer{
                 url: 'duel/'+a+'/'+b+'/run',
                 success: function(answer) {
                     $('.details').html(answer);
-                    prepare_ajax();
-                    rebootlinks();
+                    me.co.prepareAjax();
+                    me.co.rebootLinks();
                 },
                 error: function(answer){
                     console.log('ooops... on run duel ');
@@ -53,8 +53,8 @@ class Optimizer{
                 url: 'duels/'+a+'/'+b+'/run',
                 success: function(answer) {
                     $('.details').html(answer);
-                    prepare_ajax();
-                    rebootlinks();
+                    me.co.prepareAjax();
+                    me.co.rebootLinks();
                 },
                 error: function(answer){
                     console.log('ooops... on run duel ');
@@ -68,8 +68,8 @@ class Optimizer{
                 url: 'tournament/run',
                 success: function(answer) {
                     $('.details').html(answer);
-                    prepare_ajax();
-                    rebootlinks();
+                    me.co.prepareAjax();
+                    me.co.rebootLinks();
                 },
                 error: function(answer){
                     console.error('ooops... on fencing tournament...');
@@ -78,7 +78,8 @@ class Optimizer{
         });
     }
 
-    doConnect(){
+    doConnect(co){
+        this.co = co;
         this.register_duel();
     }
 }

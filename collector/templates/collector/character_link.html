@@ -1,6 +1,6 @@
 <div class='avatar_link {% if c.is_locked %}locked{%endif%}'>
     <div class='character_name'>
-        <em title='{{ c.full_name }}'> {{ c.full_name }}</em>
+        <em title='{{ c.entrance }}'> {{ c.full_name }}</em>
     </div>
     <div class='character_actions' id="link_{{c.id}}">
         <span class="action_icon edit_character"><i class="fas fa-user-tag"></i></span>
@@ -41,7 +41,7 @@
 
         </div>
 
-        <img class="plate portrait" src="media/portraits/{{ c.rid }}.png"/>
+<!--        <img class="plate portrait" src="media/portraits/{{ c.rid }}.png"/>-->
         <div class="plate double">{{ c.entrance|safe }}</div>
         <div class="plate">{{ c.alliance|safe }}</div>
         {% if c.fencing_league %}

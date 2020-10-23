@@ -1,17 +1,14 @@
-'''
+"""
  ╔╦╗╔═╗  ╔═╗┌─┐┬  ┬  ┌─┐┌─┐┌┬┐┌─┐┬─┐
   ║║╠═╝  ║  │ ││  │  ├┤ │   │ │ │├┬┘
  ═╩╝╩    ╚═╝└─┘┴─┘┴─┘└─┘└─┘ ┴ └─┘┴└─
-'''
+"""
 from django.views.generic.edit import UpdateView
-from extra_views import UpdateWithInlinesView
 from django.views.generic.detail import DetailView
 from django.contrib import messages
-from collector.forms.basic import CharacterForm, SkillFormSet, TalentFormSet, BlessingCurseFormSet, \
-    BeneficeAfflictionFormSet, ArmorFormSet, WeaponFormSet, ShieldFormSet, TourOfDutyFormSet
+from collector.forms.basic import CharacterForm, TourOfDutyFormSet
 from collector.models.character import Character
 from scenarist.mixins.ajaxfromresponse import AjaxFromResponseMixin
-from django.urls import reverse_lazy
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from django.forms.models import model_to_dict
@@ -61,15 +58,15 @@ class CharacterUpdateView(AjaxFromResponseMixin, UpdateView):
         return context
 
 
-def respawnAvatarLink(avatar, context):
+def respawn_avatar_link(avatar, context, request):
     template = get_template('collector/character_link.html')
-    context["avatar_link"] = template.render({'c': avatar})
+    context["avatar_link"] = template.render({'c': avatar}, request)
     return context
 
 
-def respawnSummary(avatar, context):
+def respawn_summary(avatar, context, request):
     template = get_template('collector/custo/summary_block.html')
-    context["summary"] = template.render({'c': avatar})
+    context["summary"] = template.render({'c': avatar}, request)
     return context
 
 

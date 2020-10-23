@@ -13,6 +13,7 @@ from scenarist.models.epics import Epic
 from collector.models.fics_models import Specie
 from collector.models.combattant import Combattant
 from collector.utils import fs_fics7
+from django.utils.timezone import get_current_timezone
 
 import logging
 
@@ -113,6 +114,7 @@ class Character(Combattant):
     nameless = models.BooleanField(default=False)
     error = models.BooleanField(default=False)
     need_pdf = models.BooleanField(default=False)
+    need_fix = models.BooleanField(default=False)
     color = models.CharField(max_length=20, blank=True, default='#CCCCCC')
     skills_options = []
     ba_options = []
@@ -201,15 +203,16 @@ class Character(Combattant):
         found_custo = CharacterCusto.objects.filter(character=self).first()
         if found_custo is None:
             self.charactercusto = CharacterCusto.objects.create(character=self)
+        logger.info('Purging...')
         self.resetPA()
-        self.purgeSkills()
-        self.purgeBC()
-        self.purgeBA()
-        self.purgeWeapons()
-        self.purgeArmors()
-        self.purgeShields()
-        self.purgeRituals()
-        self.purgeTalents()
+        self.purge_skills()
+        self.purge_bc()
+        self.purge_ba()
+        self.purge_weapons()
+        self.purge_armors()
+        self.purge_shields()
+        self.purge_rituals()
+        self.purge_talents()
         self.AP_tod_pool = 0
         self.OP_tod_pool = 0
         self.WP_tod_pool = 0
@@ -223,6 +226,7 @@ class Character(Combattant):
             'TO': 0,
             'WB': 0,
         }
+        logger.info('Applying ToDs...')
         for tod in self.tourofduty_set.all():
             AP, OP, WP = tod.push(self)
             self.AP_tod_pool += AP
@@ -246,7 +250,7 @@ class Character(Combattant):
             self.charactercusto.comment = self.full_name
             self.charactercusto.push(self)
             self.charactercusto.save()
-
+        logger.info('Applying Customization...')
         pa_total = self.sumPA
         po_total = 0
         for s in self.skill_set.all():
@@ -258,24 +262,28 @@ class Character(Combattant):
         bc_total = 0
         for bc in self.blessingcurse_set.all():
             bc_total += bc.blessing_curse_ref.value
-
+        logger.info('Calculating points...')
         bl.append("")
-        bl.append("Tour Summary:")
-        bl.append("- APx3+OP+BA+BC... " + str(pa_total * 3 + po_total + ba_total + bc_total))
-        bl.append("- WP.............. " + str(self.WP_tod_pool))
-        bl.append("- Value........... " + str(self.charactercusto.value))
-        bl.append("- Lifepath ....... " + str(self.life_path_total))
-        bl.append("- Repartition .... " + str(tod_rep))
+        # bl.append("Tour Summary:")
+        # bl.append("- APx3+OP+BA+BC... " + str(pa_total * 3 + po_total + ba_total + bc_total))
+        # bl.append("- WP.............. " + str(self.WP_tod_pool))
+        # bl.append("- Value........... " + str(self.charactercusto.value))
+        # bl.append("- Lifepath ....... " + str(self.life_path_total))
+        # bl.append("- Repartition .... " + str(tod_rep))
         fs_fics7.check_secondary_attributes(self)
         self.charactercusto.save()
         self.prepare_display()
         self.handle_wildcards()
         self.add_missing_root_skills()
-        self.resetTotal()
+        self.reset_total()
         self.balanced = (self.life_path_total == self.OP) and (self.OP > 0)
         self.build_log = "\n".join(bl)
         if self.player != '':
             self.balanced = True
+        if self.balanced:
+            logger.info(f'Current option Points: {self.OP}')
+        else:
+            logger.error(f'{self.full_name} is not properly balanced: {self.OP} vs {self.life_path_total}!')
         if self.color == '#CCCCCC':
             d = lambda x: fs_fics7.roll(x) - 1
             self.color = '#%01X%01X%01X%01X%01X%01X' % (d(8) + 4, d(16), d(8) + 4, d(16), d(8) + 4, d(16))
@@ -295,14 +303,13 @@ class Character(Combattant):
                              "armor_ref", "ArmorRef")
         self.refresh_options("ritual_options", "ritual_options_not", self.charactercusto.ritualcusto_set.all(),
                              "ritual_ref", "RitualRef")
-        # self.preparePADisplay()
 
     def handle_wildcards(self):
         pass
 
     def rebuild_free_form(self):
         """ Freeform Creation """
-        # self.resetTotal()
+        # self.reset_total()
         # if self.onsave_reroll_attributes:
         #     fs_fics7.check_primary_attributes(self)
         #     fs_fics7.check_secondary_attributes(self)
@@ -310,11 +317,11 @@ class Character(Combattant):
         #     fs_fics7.check_skills(self)
         # else:
         self.add_missing_root_skills()
-        self.resetTotal()
+        self.reset_total()
 
     def fix(self, conf=None):
         """ Check / calculate other characteristics """
-        logger.info('Fixing ........: %s' % (self.full_name))
+        logger.warning(f'Fixing ........: {self.full_name}')
         if not conf:
             if self.birthdate < 1000:
                 self.birthdate = 5017 - self.birthdate
@@ -330,7 +337,7 @@ class Character(Combattant):
             self.rebuild_from_lifepath()
         else:
             self.rebuild_free_form()
-        self.calculateShortcuts()
+        self.calculate_shortcuts()
         if self.PA_BOD != 0:
             if self.height == 0:
                 if "urthish" in self.specie.species.lower():
@@ -345,19 +352,29 @@ class Character(Combattant):
                         self.full_name, self.height, self.weight, self.PA_BOD, self.PA_CON))
         # self.is_exportable = True #self.check_exportable()
         self.update_challenge()
-        self.check_todo_list()
         self.update_stories_count()
-        logger.warning(f'    => Done fixing ...: {self.rid}' )
-
+        logger.info(f'Challenge and Stories count')
+        if self.use_history_creation:
+            self.check_todo_list()
+        self.need_fix = False
+        logger.warning(f'    => Done fixing ...: {self.full_name} NeedFIX:{self.need_fix}')
 
     def check_todo_list(self):
-        pass
-        # self.todo_list = ""
-        # tsk = []
-        # if self.use_history_creation:
-        #     for tod in self.tourofduty_set.all():
-        #         tsk = "%s - %s"%()
-        # self.todo_list = "\n".join(tsk)
+        """ Check for invalid tours of duty for the character
+        """
+        self.todo_list = ""
+        logger.info('Checking todo list')
+        tsk = []
+        if self.use_history_creation:
+            logger.info('Hello')
+            for tod in self.tourofduty_set.all():
+                if not tod.tour_of_duty_ref.valid:
+                    logger.info(f'{tod.tour_of_duty_ref.reference}')
+                    tsk = f'{tod.tour_of_duty_ref.reference} is not a valid Tour of Duty.'
+            logger.info('Bye')
+        self.todo_list = "\n".join(tsk)
+        if self.todo_list:
+            logger.warning(self.todo_list)
 
     def update_challenge(self):
         res = ''
@@ -369,7 +386,7 @@ class Character(Combattant):
         self.challenge_value = self.AP * 3 + self.SK_TOTAL + self.BC_TOTAL + self.BA_TOTAL
         self.challenge = res
 
-    def calculateShortcuts(self):
+    def calculate_shortcuts(self):
         """ Calculate shortcuts for the avatar skills. A shortcut appears if skill.value>0  """
         shortcuts = []
         shortcuts_pdf = []
@@ -380,16 +397,18 @@ class Character(Combattant):
                 shortcuts.append(sc)
                 shortcuts_pdf.append("{:s}:{:s} ({:d})".format(pdf['rationale'], pdf['label'], pdf['score']))
         self.gm_shortcuts = ''.join(shortcuts)
-        # print(shortcuts_pdf)
         self.gm_shortcuts_pdf = ', '.join(shortcuts_pdf)
 
-    def refresh_options(self, options, options_not, custo_set, ref_type, refclass):
-        """ Refresh options / options_not global engine """
-        from collector.models.weapon import WeaponRef
-        from collector.models.shield import ShieldRef
-        from collector.models.armor import ArmorRef
+    def refresh_options(self, options, options_not, custo_set, ref_type, ref_class):
+        """ Refresh options / options_not global engine
+            Warning: Keep the model imports right here. PyCharm will not see that we are actually using these models
+            as we are using string to model to handle all of this.
+        """
         from collector.models.benefice_affliction import BeneficeAfflictionRef
         from collector.models.blessing_curse import BlessingCurseRef
+        from collector.models.weapon import WeaponRef
+        from collector.models.armor import ArmorRef
+        from collector.models.shield import ShieldRef
         from collector.models.ritual import RitualRef
         o = []
         o_n = []
@@ -397,13 +416,13 @@ class Character(Combattant):
         custo_ref_items = []
         for item in custo_items:
             custo_ref_items.append(getattr(item, ref_type))
-        all_items = eval(refclass).objects.all()
+            logger.info(item)
+        all_items = eval(ref_class).objects.all()
         for item in all_items:
             if item in custo_ref_items:
                 o_n.append(item)
             else:
                 o.append(item)
-
         setattr(self, options, o)
         setattr(self, options_not, o_n)
 
@@ -568,7 +587,9 @@ class Character(Combattant):
             found_ba.delete()
 
     def add_missing_root_skills(self):
-        """ According to the character specialities, fixing the root skills """
+        """ According to the character specialities, fixing the root skills by recalculating their values
+            from scratch.
+        """
         # from collector.models.skills import Skill
         from collector.models.skill import SkillRef
         roots_list = []
@@ -582,11 +603,11 @@ class Character(Combattant):
             if skill.skill_ref.is_root:
                 skill.delete()
         # Add the roots from the root_list
-        for skillref in SkillRef.objects.all():
-            if skillref in roots_list:
-                self.add_or_update_skill(skillref, roots_list.count(skillref))
-        for item in roots_list:
-            logger.debug('ROOT_LIST:%s' % (item.reference))
+        for skill_ref in SkillRef.objects.all():
+            if skill_ref in roots_list:
+                self.add_or_update_skill(skill_ref, roots_list.count(skill_ref))
+        # for item in roots_list:
+        #     logger.debug('ROOT_LIST:%s' % (item.reference))
 
     def resetPA(self):
         self.PA_STR = self.PA_CON = self.PA_BOD = self.PA_MOV = self.PA_INT = self.PA_WIL = self.PA_TEM = self.PA_PRE = self.PA_TEC = self.PA_REF = self.PA_AGI = self.PA_AWA = self.OCC_LVL = self.OCC_DRK = 0
@@ -595,55 +616,55 @@ class Character(Combattant):
     def sumPA(self):
         return self.PA_STR + self.PA_CON + self.PA_BOD + self.PA_MOV + self.PA_INT + self.PA_WIL + self.PA_TEM + self.PA_PRE + self.PA_TEC + self.PA_REF + self.PA_AGI + self.PA_AWA + self.OCC_LVL - self.OCC_DRK
 
-    def purgeSkills(self):
+    def purge_skills(self):
         """ Deleting all character skills """
         for skill in self.skill_set.all():
             skill.delete()
-        logger.debug('PurgeSkill count: %d' % (self.skill_set.all().count()))
+        # logger.debug('PurgeSkill count: %d' % (self.skill_set.all().count()))
 
-    def purgeTalents(self):
+    def purge_talents(self):
         """ Deleting all character talents """
         for talent in self.talent_set.all():
             talent.delete()
-        logger.debug('PurgeTalent count: %d' % (self.talent_set.all().count()))
+        # logger.debug('PurgeTalent count: %d' % (self.talent_set.all().count()))
 
-    def purgeBC(self):
+    def purge_bc(self):
         """ Deleting all character BC """
         for bc in self.blessingcurse_set.all():
             bc.delete()
-        logger.debug('PurgeBC count: %d' % (self.blessingcurse_set.all().count()))
+        # logger.debug('purge_bc count: %d' % (self.blessingcurse_set.all().count()))
 
-    def purgeBA(self):
+    def purge_ba(self):
         """ Deleting all character BA """
         for ba in self.beneficeaffliction_set.all():
             ba.delete()
-        logger.debug('PurgeBA count: %d' % (self.beneficeaffliction_set.all().count()))
+        # logger.debug('purge_ba count: %d' % (self.beneficeaffliction_set.all().count()))
 
-    def purgeWeapons(self):
+    def purge_weapons(self):
         """ Deleting all character Weapons """
         for item in self.weapon_set.all():
             item.delete()
-        logger.debug('PurgeWeapon count: %d' % (self.weapon_set.all().count()))
+        # logger.debug('PurgeWeapon count: %d' % (self.weapon_set.all().count()))
 
-    def purgeShields(self):
+    def purge_shields(self):
         """ Deleting all character Shields """
         for item in self.shield_set.all():
             item.delete()
-        logger.debug('PurgeShield count: %d' % (self.shield_set.all().count()))
+        # logger.debug('PurgeShield count: %d' % (self.shield_set.all().count()))
 
-    def purgeArmors(self):
+    def purge_armors(self):
         """ Deleting all character Weapons """
         for item in self.armor_set.all():
             item.delete()
-        logger.debug('PurgeArmor count: %d' % (self.armor_set.all().count()))
+        # logger.debug('PurgeArmor count: %d' % (self.armor_set.all().count()))
 
-    def purgeRituals(self):
+    def purge_rituals(self):
         """ Deleting all character Rituals """
         for item in self.ritual_set.all():
             item.delete()
-        logger.debug('PurgeRitual count: %d' % (self.ritual_set.all().count()))
+        # logger.debug('PurgeRitual count: %d' % (self.ritual_set.all().count()))
 
-    def resetTotal(self):
+    def reset_total(self):
         """ Compute all sums for all stats """
         self.SK_TOTAL = 0
         self.BC_TOTAL = 0
@@ -685,11 +706,12 @@ class Character(Combattant):
         if self.need_pdf:
             from collector.utils.basic import write_pdf
             try:
-                context = dict(c=self, filename=f'{self.rid}', now=datetime.now())
+                context = dict(c=self, filename=f'{self.rid}', now=datetime.now(tz=get_current_timezone()))
                 write_pdf('collector/character_roster.html', context)
                 logger.warning(f'    => PDF created ...: {self.rid}')
                 proceed = True
                 self.need_pdf = False
+                self.save()
             except:
                 logger.error(f'    => PDF creation error !!! {self.rid}')
         else:
@@ -698,9 +720,9 @@ class Character(Combattant):
 
     def __str__(self):
         if self.alias:
-            return '%s' % (self.alias)
+            return f'{self.alias}'
         else:
-            return '%s' % (self.full_name)
+            return f'{self.full_name}'
 
     def get_rid(self, s):
         self.rid = fs_fics7.find_rid(s)
@@ -752,20 +774,17 @@ class Character(Combattant):
 @receiver(pre_save, sender=Character, dispatch_uid='update_character')
 def update_character(sender, instance, conf=None, **kwargs):
     """ Before saving, fix() and  get_RID() for the character """
-    if instance.rid != 'none':
-        instance.fix(conf)
     instance.get_rid(instance.full_name)
-    instance.alliance_hash = hashlib.sha1(
-        bytes(instance.alliance, 'utf-8')
-    ).hexdigest()
+    instance.alliance_hash = hashlib.sha1(bytes(instance.alliance, 'utf-8')).hexdigest()
+    instance.pub_date = datetime.now(tz=get_current_timezone())
 
 
-@receiver(post_save, sender=Character, dispatch_uid='backup_character')
-def backup_character(sender, instance, **kwargs):
-    """ After saving, create PDF for the character """
-    # if instance.rid != 'none':
-    #     from collector.tasks import build_pdf
-    #     build_pdf.delay(instance.rid)
-    # if instance.rid != 'none':
-    #     instance.backup()
-    pass
+# @receiver(post_save, sender=Character, dispatch_uid='backup_character')
+# def backup_character(sender, instance, **kwargs):
+#     """ After saving, create PDF for the character """
+#     # if instance.rid != 'none':
+#     #     from collector.tasks import build_pdf
+#     #     build_pdf.delay(instance.rid)
+#     # if instance.rid != 'none':
+#     #     instance.backup()
+#     pass

@@ -25,14 +25,14 @@ class Jumpweb {
     me.init(data);
   }
 
-  init() {
+  init(data) {
     let me = this;
     me.size = 70;
     me.width = me.size * 80;
     me.height = me.size * 60;
-    me.mj = false;
-    me.era = (me.mj ? 0 : 5018);
     me.data = data;
+    me.era = (me.data.mj ? 0 : 5018);
+
     me.ox = me.width / me.size / 2;
     me.oy = me.height / me.size / 2;
     me.step_x = me.size,
@@ -57,7 +57,7 @@ class Jumpweb {
 
   formatXml(xml) {
     var formatted = '';
-    var reg = /(>)(<)(\/*)/g;
+    let reg = /(>)(<)(\/*)/g;
     xml = xml.replace(reg, '$1\r\n$2$3');
     var pad = 0;
     jQuery.each(xml.split('\r\n'), function(index, node) {
@@ -281,7 +281,7 @@ title="jumpweb_' + me.mode + '_' + now + '.svg"> \
         return d.symbol;
       });
 
-    if (me.mj) {
+    if (me.data.mj) {
       node.append("text")
         .attr("class", function(d) {
           return "nodetext_" + d.id;
@@ -394,7 +394,7 @@ title="jumpweb_' + me.mode + '_' + now + '.svg"> \
         return res;
       })
       .style("opacity", function(d) {
-        if (me.mj == false) {
+        if (me.data.mj == false) {
           return (d.unknown ? 0.0 : 0.5);
         } else {
           return 0.5
@@ -462,7 +462,7 @@ title="jumpweb_' + me.mode + '_' + now + '.svg"> \
           .style("opacity", 1.0);
       })
       .style("opacity", function(d) {
-        if (me.mj == false) {
+        if (me.data.mj == false) {
           return (d.unknown ? 0.0 : 1.0);
         } else {
           return 1.0

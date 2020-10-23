@@ -13,7 +13,7 @@
 """
 
 MAX_CHAR = 16
-RELEASE = '1.9.7'
+RELEASE = '2.0.0'
 DEBUG_ALL = False
 
 LIFEPATH_CATEGORY = (

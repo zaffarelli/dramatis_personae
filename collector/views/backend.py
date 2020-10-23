@@ -40,16 +40,15 @@ def pdf_character(request, id=None):
 
 def recalc(request):
     """ Recalc and export to PDF all avatars """
-    from collector.tasks import recalc_avatar
+
     conf = get_current_config()
-    character_items = Character.objects.filter(epic=conf.epic).order_by('-player', 'full_name')
+    character_items = Character.objects.order_by('-player', 'full_name')
     x = 1
-    messages.info(request, 'Starting recalculation tasks...')
     for c in character_items:
-        recalc_avatar.delay(c.rid, x)
+        c.need_fix = True
         x += 1
         messages.info(request, f'Recalculating {c.full_name}')
-    messages.info(request, 'Recalculation tasks started.')
+        c.save()
     return HttpResponse(status=204)
 
 

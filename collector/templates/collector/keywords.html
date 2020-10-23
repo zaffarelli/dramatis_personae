@@ -1,6 +1,6 @@
 <script>
     var popdata = {{cdata|safe}}
-    popdata.options['onClick'] = keywordHandlerClick
+    popdata.options['onClick'] = co.keywordHandlerClick
     var ctx = document.getElementById('{{cname}}').getContext('2d');
     var {{cname}} = new Chart(ctx, popdata);
 
@@ -8,4 +8,4 @@
     Chart.defaults.global.defaultFontSize = 10
     Chart.defaults.global.defaultFontFamily = 'Texte'
 </script>
-<canvas id="{{cname}}" width=300 height=600></canvas>
+<canvas id="{{cname}}" width=250 height=750></canvas>

@@ -24,27 +24,39 @@
     <div class='menu_block'>
         <div class="menu-logo">
             <div class="img_block"><img src="{% static 'collector/simple_logo.png' %}" class="Epic" width="37px" alt='dp'/></div>
+            {% if user.is_authenticated %}
             <input type="text" id="customize" value="" placeholder="Free Text Here...">
-            <span id="menu_go"><i class="action_icon fas fa-bolt"></i></span>
+            {% endif %}
+            <span id="menu_go"><i class="action_icon fas fa-bolt" style="font-size:24px;"></i></span>
         </div>
+
         <ul class="level-1">
+            {% if user.is_authenticated %}
             <li><span class="pull-down">Avatars</span>
                 <ul class="level-2 Avatars">
+                    {% if user_profile.is_gamemaster %}
                     <li><span class="menu-item" id="menu_search"><i class="action_icon fas fa-search"></i> Keyword Search</span></li>
                     <li><span class="menu-item" id="menu_seek"><i class="action_icon fas fa-address-card"></i> Seek RID</span> </li>
                     <li><span class="menu-item" id="menu_add_character"><i class="action_icon fas fa-user-plus"></i> Add character</span></li>
                     <li><span class="menu-item" id="menu_recalc"><i class="action_icon fas fa-users-cog"></i> Recalculate All</span></li>
+                    {% else %}
+                    <li><span class="menu-item" id="menu_buddies"><i class="action_icon fas fa-users"></i> See buddies</span></li>
+                    {% endif %}
                 </ul>
             </li>
+
             <li><span class="pull-down">Epic</span>
                 <ul class="level-2 Epic">
+                    {% if user.profile.is_gamemaster %}
                     <li><span class="menu-item" id="menu_popstats"><i class="fas fa-chart-pie"></i> Statistics</span></li>
                     <li><span class="menu-item" id="menu_gss_update"><i class="fas fa-table"></i> Google spreadsheet</span></li>
                     <li><span class="menu-item" id="menu_conf_details"><i class="action_icon fas fa-globe"></i> Current Epic</span></li>
                     <li><span class="menu-item" id="menu_build_config_pdf"><i class="action_icon fas fa-file-pdf"></i> Build Epic PDF</span></li>
+                    {% endif %}
                     <li><span class="menu-item" id="menu_jumpweb"><i class="action_icon fas fa-draw-polygon"></i> Show Jumpgate</span></li>
                 </ul>
             </li>
+            {% if user.profile.is_gamemaster %}
             <li><span class="pull-down">Rules</span>
                 <ul class="level-2 Rules">
                     <li><span class="menu-item" id="menu_build_pdf_rules"><i class="action_icon fas fa-book"></i> Build Rules PDF</span></li>
@@ -60,20 +72,25 @@
                     <li><span class="menu-item" id='todo' style='width:auto;' title='todo'><i class="action_icon fas fa-tools"></i> Show Todo</span></li>
                 </ul>
             </li>
-            {% if current_user.is_authenticated %}
-            <li><span class="pull-down">Logged as {{ current_user.username | title }}</span>
-                <ul class="level-2 user">
-                    <li><span class="menu-item" id='logout'><i class="action_icon fas fa-key"></i> Log out</span></li>
-                    <li><span class="menu-item" id='profile'><i class="action_icon fas fa-user"></i> Profile</span></li>
-                    {% if current_user.is_superuser %}
-                        <li><span class="menu-item" id='admin'><i class="action_icon fas fa-user"></i> Admin</span></li>
+            {% endif %}
+            {% endif %}
+            {% if user.is_authenticated %}
+            <li><span class="pull-down">{{ user.username | title }} {% if user.profile.is_gamemaster %}<i class="action_icon fas fa-crown"></i>{% endif %}</span>
+                <ul class="level-2 user" id="login_block">
+                    {% csrf_token %}
+                    <li><span class="menu-item" id='menu_logout'><i class="action_icon fas fa-key"></i> Log out</span></li>
+                    <li><span class="menu-item" id='menu_profile'><i class="action_icon fas fa-user"></i> Profile</span></li>
+                    {% if user.is_superuser %}
+                        <li><span class="menu-item" id='menu_admin'><i class="action_icon fas fa-user"></i> Admin</span></li>
                     {% endif %}
+
                 </ul>
             </li>
             {% else %}
             <li><span class="pull-down">Anonymous User</span>
-                <ul class="level-2 user">
-                    <li><span class="menu-item" id='login'><i class="action_icon fas fa-key"></i> Login</span></li>
+                <ul class="level-2 user" id="login_block">
+                    {% csrf_token %}
+                    <li><span class="menu-item" id='menu_login'><i class="action_icon fas fa-key"></i> Login</span></li>
                 </ul>
             </li>
 
@@ -86,11 +103,12 @@
 {% endblock menu %}
 {% block javascript %}
 <script>
-    _.defer(function(){
-        loadajax();
-        loadKeywords();
-        //dice_initialize(document.body,400);
-      });
+
+        let ac = new AvatarCustomizer();
+        let sc = new Scenarist();
+        let op = new Optimizer();
+        let co = new Collector(ac,op,sc)
+
 </script>
 {% endblock javascript %}
 

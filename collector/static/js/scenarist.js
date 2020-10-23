@@ -5,9 +5,11 @@
 */
 class Scenarist{
     constructor(){
+        console.log("Scenarist launched !!!")
     }
 
     registerStory(x){
+        let me = this;
         /* Register all the actions for the scenarist items */
         $('.view_'+x).off().on('click', function(event){
             event.preventDefault();
@@ -15,6 +17,7 @@ class Scenarist{
             let t_id = $(this).attr('id')
             let id = t_id.split("_")[t_id.split("_").length-1]
             let children = $(this).parent("p").attr('children');
+            //$(this).css('border-color','red');
             $.ajax({
                 url: x+'s/'+id+'/view/',
                 success: function(answer) {
@@ -25,8 +28,8 @@ class Scenarist{
                         $("#view_"+d).click();
                       })
                     }
-                    prepareAjax();
-                    rebootLinks();
+                    me.co.prepareAjax();
+                    me.co.rebootLinks();
                 },
                 error: function(answer){
                     console.log('ooops... on view '+x+' :(');
@@ -46,8 +49,8 @@ class Scenarist{
                 $("#hide_"+d).click();
               })
             }
-            prepareAjax();
-            rebootLinks();
+            me.co.prepareAjax();
+            me.co.rebootLinks();
         });
         $('.edit_'+x).off().on('click', function(event){
             event.preventDefault();
@@ -59,8 +62,8 @@ class Scenarist{
                 url: x+'s/'+id+'/edit/',
                 success: function(answer) {
                     $('#'+x+'_'+id).html(answer);
-                    prepareAjax();
-                    rebootLinks();
+                    me.co.prepareAjax();
+                    me.co.rebootLinks();
                 },
                 error: function(answer){
                     console.log('ooops... on edit '+x+':(');
@@ -88,7 +91,7 @@ class Scenarist{
                 success: function(answer) {
                     console.log('Success... ');
                     $('#'+owner).html(answer);
-                    rebootLinks();
+                    me.co.rebootLinks();
                     $('button#'+id+'.view_'+x).click();
                 },
                 error: function(answer) {
@@ -117,7 +120,7 @@ class Scenarist{
                     console.log('Success... ');
                     console.log(id);
                     //$('#'+id).html(answer);
-                    rebootLinks();
+                    me.co.rebootLinks();
                     //$('button#'+id+'.view_'+x).click();
                 },
                 error: function(answer) {
@@ -128,7 +131,8 @@ class Scenarist{
         });
     }
 
-    doConnect(){
+    doConnect(co){
+        this.co = co;
         this.registerStory('epic');
         this.registerStory('drama');
         this.registerStory('act');

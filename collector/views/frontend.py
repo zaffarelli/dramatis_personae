@@ -1,51 +1,36 @@
-'''
+"""
  ╔╦╗╔═╗  ╔═╗┌─┐┬  ┬  ┌─┐┌─┐┌┬┐┌─┐┬─┐
   ║║╠═╝  ║  │ ││  │  ├┤ │   │ │ │├┬┘
  ═╩╝╩    ╚═╝└─┘┴─┘┴─┘└─┘└─┘ ┴ └─┘┴└─
-'''
+"""
 from django.http import HttpResponse, Http404, JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect, render_to_response
 from django.core.paginator import Paginator
-
 from collector.models.character import Character
 from collector.models.fics_models import Specie
 from collector.models.config import Config
-from collector.models.skill import Skill
-from collector.forms.basic import CharacterForm, SkillFormSet, TalentFormSet, BlessingCurseFormSet, \
-    BeneficeAfflictionFormSet, WeaponFormSet, ArmorFormSet, ShieldFormSet
-from collector.utils.basic import render_to_pdf
 from django.template.loader import get_template, render_to_string
-from django.template import RequestContext
-import json
-import ast
-from urllib.parse import unquote
-from urllib.parse import parse_qs
-from collector.utils import fs_fics7
-from django.views.decorators.csrf import csrf_exempt
 import datetime
-from collector.utils.xls_collector import export_to_xls, update_from_xls
 from collector.utils.basic import get_current_config
 from collector.utils.fics_references import MAX_CHAR
 from django.contrib import messages
-from collector.views.characters import respawnAvatarLink
-from collector.views.characters import CharacterUpdateView
+from collector.views.characters import respawn_avatar_link
 
+from django.contrib import messages
 
 def index(request):
-    """ The basic page for the application """
+    """ The basic page for the application
+    """
     return render(request, 'collector/index.html')
 
 
 def get_list(request, id, slug='none'):
-    """ Update the list of characters on the page """
-    from scenarist.models.epics import Epic
-    from scenarist.models.dramas import Drama
-    from scenarist.models.acts import Act
-    from scenarist.models.events import Event
+    """ Update the list of characters on the page
+    """
     conf = get_current_config()
     if request.is_ajax:
         if slug == 'none':
-            character_items = Character.objects.order_by('balanced', '-OP', '-is_public', 'full_name')
+            character_items = Character.objects.order_by('full_name')
         elif slug.startswith('c-'):
             ep_class = slug.split('-')[1].capitalize()
             ep_id = slug.split('-')[2]
@@ -53,24 +38,27 @@ def get_list(request, id, slug='none'):
             cast = ep.get_full_cast()
             character_items = []
             for rid in cast:
-                print(rid)
                 character_item = Character.objects.get(rid=rid)
                 character_items.append(character_item)
+            messages.info(request,f'New list filter applied: {slug}')
         else:
             character_items = Character.objects.filter(keyword=slug).order_by('full_name')
+            messages.info(request,f'New list filter applied: {slug}')
         paginator = Paginator(character_items, MAX_CHAR)
         page = id
         character_items = paginator.get_page(page)
         context = {'character_items': character_items}
         template = get_template('collector/list.html')
-        html = template.render(context)
+        html = template.render(context,request)
+
         return HttpResponse(html, content_type='text/html')
     else:
-        Http404
+        return Http404
 
 
 def get_storyline(request, slug='none'):
-    """ Change current config """
+    """ Change current config
+    """
     if request.is_ajax:
         config_items = Config.objects.all()
         if slug != 'none':
@@ -81,13 +69,17 @@ def get_storyline(request, slug='none'):
         html = template.render({'configs': config_items}, request)
         return HttpResponse(html, content_type='text/html')
     else:
-        http404
+        return Http404
 
 
 def recalc_character(request, id=None):
+    """ Re-calculate one single character. To be use in the frontend
+    """
     if request.is_ajax():
         messages.warning(request, 'Recalculating...')
         item = get_object_or_404(Character, pk=id)
+        item.need_fix = True
+        item.fix()
         item.save()
         crid = item.rid
         template = get_template('collector/character_detail.html')
@@ -110,7 +102,9 @@ def recalc_character(request, id=None):
 
 
 def view_by_rid(request, slug=None):
-    """ Ajax view of a character """
+    """ Ajax view of a character, with a part of the full name
+        passed to the customizer input field.
+    """
     if request.is_ajax():
         items = Character.objects.filter(full_name__contains=slug).order_by('full_name')
         if items.count():
@@ -135,11 +129,8 @@ def view_by_rid(request, slug=None):
 
 
 def show_todo(request):
-    """ variant of get_list """
-    from scenarist.models.epics import Epic
-    from scenarist.models.dramas import Drama
-    from scenarist.models.acts import Act
-    from scenarist.models.events import Event
+    """ variant of get_list. Might show the toto characters, actually showing the unbalanced ones
+    """
     conf = get_current_config()
     if request.is_ajax:
         character_items = Character.objects.filter(balanced=False).order_by('full_name')
@@ -151,20 +142,13 @@ def show_todo(request):
         html = template.render(context)
         return HttpResponse(html, content_type='text/html')
     else:
-        Http404
-
-
-def extract_formset(rqp, s):
-    """ Get only the fields matching to this formset """
-    res = {}
-    for k in rqp:
-        if s in k:
-            res[k] = rqp[k][0]
-    return res
+        return Http404
 
 
 def add_character(request, slug=None):
-    """ Add a new character to the universe """
+    """ Add a new character to the universe
+        The slug is supposed to be its real fullname.
+    """
     conf = get_current_config()
     item = Character()
     if slug:
@@ -173,9 +157,10 @@ def add_character(request, slug=None):
         item.full_name = '_noname_ %s' % (datetime.datetime.now())
     item.epic = conf.epic
     item.use_history_creation = True
+    item.save()
     item.specie = Specie.objects.filter(species='Urthish').first()
-    # item.role = Role.objects.first()
-    # item.profile = Profile.objects.first()
+    item.get_rid(item.full_name)
+    item.fix()
     item.save()
     character_item = get_object_or_404(Character, pk=item.id)
     template = get_template('collector/character_detail.html')
@@ -193,34 +178,41 @@ def add_character(request, slug=None):
 
 
 def toggle_public(request, id=None):
+    """ Toggle the character public/private flag
+    """
     conf = get_current_config()
     context = {}
     character_item = Character.objects.get(pk=id)
     if (character_item != None):
         character_item.is_public = not character_item.is_public
         character_item.save()
-    context = respawnAvatarLink(character_item, context)
+    context = respawn_avatar_link(character_item, context, request)
     return JsonResponse(context)
 
 
 def toggle_spotlight(request, id=None):
+    """ Toggle the character spotlight flag
+    """
     conf = get_current_config()
     context = {}
     character_item = Character.objects.get(pk=id)
-    if (character_item != None):
+    if character_item is not None:
         character_item.spotlight = not character_item.spotlight
         character_item.save()
-    context = respawnAvatarLink(character_item, context)
+    context = respawn_avatar_link(character_item, context, request)
     return JsonResponse(context)
 
 
 def show_jumpweb(request):
-    """ Current config info """
+    """ Display the full jumpweb.
+        Todo: adapt this to the user actually logged.
+    """
     if request.is_ajax:
         from collector.models.system import System
         conf = get_current_config()
         context = {}
         context['data'] = {}
+        context['data']['mj'] = 1 if request.user.profile.is_gamemaster else 0
         context['data']['nodes'] = []
         context['data']['links'] = []
         for s in System.objects.all():
@@ -255,11 +247,14 @@ def show_jumpweb(request):
         html = template.render(context)
         return HttpResponse(html, content_type='text/html')
     else:
-        http404
+        return Http404
 
 
 def conf_details(request):
-    """ Current config info """
+    """ Current config info
+        Todo: the list of the characters for a given Epic should not be retrieved by
+                their epic info, but through the story casting functions.
+    """
     if request.is_ajax:
         conf = get_current_config()
         context = {'epic': conf.parse_details()}
@@ -267,11 +262,23 @@ def conf_details(request):
         html = template.render(context, request)
         return HttpResponse(html, content_type='text/html')
     else:
-        http404
+        return Http404
 
 
 def heartbeat(request):
+    """ Global heartbeat to raise messages in the messenger toaster.
+        Todo: the actual system can certainly be enhanced
+    """
     context = {}
     template = get_template('collector/messenger.html')
     html = template.render(context, request)
     return HttpResponse(html, content_type='text/html')
+
+
+def pdf_show(request, slug):
+    try:
+        name = f'avatar_{slug}.pdf'
+        filename = os.path.join(settings.MEDIA_ROOT, 'pdf/results/' + name)
+        return FileResponse(open(filename, 'rb'), content_type='application/pdf')
+    except FileNotFoundError:
+        raise Http404()
