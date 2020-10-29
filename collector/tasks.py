@@ -12,12 +12,12 @@ logger = logging.getLogger(__name__)
 
 
 @shared_task
-def todo(request):
+def todo():
     from collector.models.character import Character
     to_be_fixed = Character.objects.filter(need_fix=True)
     to_be_pdfed = Character.objects.filter(need_pdf=True)
-    answer = f'Work TODO... To be fixed:{len(to_be_fixed)} Ready for PDF:{len(to_be_pdfed)}'
-    logger.error(answer)
+    answer = f'Incoming list... To be fixed:{len(to_be_fixed)} Ready for PDF:{len(to_be_pdfed)}'
+    logger.warning(answer)
     return answer
 
 

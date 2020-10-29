@@ -48,6 +48,13 @@ $block_wsize: 4ex;
         & td {
         }
     }
+    & ul.unbreakable{
+        page-break-after: always;
+        page-break-inside: avoid;
+        display:block;
+        border:1px solid purple;
+    }
+
 }
 
 @mixin dp_panel {
@@ -105,8 +112,8 @@ body {
 }
 
 .logo {
-    display: none;
-   // background: transparent url("simple_logo_invert.png") center center no-repeat;
+
+    background: transparent url("antu_logo.png") center center no-repeat;
     /*background: url("details.png");*/
 }
 

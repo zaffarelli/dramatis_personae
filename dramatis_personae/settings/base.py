@@ -6,7 +6,6 @@
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(os.path.join(__file__,os.pardir))))
-#BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 INSTALLED_APPS = [
     'optimizer.apps.OptimizerConfig',
@@ -22,40 +21,36 @@ INSTALLED_APPS = [
     'sass_processor',
 ]
 
-
-
 MIDDLEWARE = [
-  'django.middleware.security.SecurityMiddleware',
-  'django.middleware.csrf.CsrfViewMiddleware',
-  'django.contrib.sessions.middleware.SessionMiddleware',
-  'django.middleware.common.CommonMiddleware',
-  'django.contrib.auth.middleware.AuthenticationMiddleware',
-  'django.contrib.messages.middleware.MessageMiddleware',
-  'django.contrib.auth.middleware.RemoteUserMiddleware',
-  'django.middleware.clickjacking.XFrameOptionsMiddleware',
-  'scenarist.exceptions.middleware.ExceptionMiddleware',
+    'django.middleware.security.SecurityMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.contrib.auth.middleware.RemoteUserMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'scenarist.exceptions.middleware.ExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'dramatis_personae.urls'
 
 TEMPLATES = [{
-  'BACKEND': 'django.template.backends.django.DjangoTemplates',
-  'DIRS': [os.path.join(BASE_DIR, 'collector/templates')],
-  'APP_DIRS': True,
-  'OPTIONS': {
-    'context_processors': [
-      'django.template.context_processors.debug',
-      'django.template.context_processors.request',
-      'django.contrib.auth.context_processors.auth',
-      'django.contrib.messages.context_processors.messages',
-      'collector.context_processors.commons',
-    ],
-  },
-},]
+    'BACKEND': 'django.template.backends.django.DjangoTemplates',
+    'DIRS': [os.path.join(BASE_DIR, 'collector/templates')],
+    'APP_DIRS': True,
+    'OPTIONS': {
+        'context_processors': [
+            'django.template.context_processors.debug',
+            'django.template.context_processors.request',
+            'django.contrib.auth.context_processors.auth',
+            'django.contrib.messages.context_processors.messages',
+            'collector.context_processors.commons',
+        ],
+    },
+}]
 
 WSGI_APPLICATION = 'dramatis_personae.wsgi.application'
-
-
 
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
@@ -75,16 +70,16 @@ LOGGING = {
     },
     'handlers': {
         'logfile': {
-            'level':'INFO',
-            'class':'logging.handlers.RotatingFileHandler',
+            'level': 'INFO',
+            'class': 'logging.handlers.RotatingFileHandler',
             'filename': LOGPATH+"dramatis_personae.log",
             'maxBytes': 1000000000,
             'backupCount': 3,
             'formatter': 'standard',
         },
-        'console':{
-            'level':'INFO',
-            'class':'logging.StreamHandler',
+        'console': {
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
             'formatter': 'standard'
         },
     },

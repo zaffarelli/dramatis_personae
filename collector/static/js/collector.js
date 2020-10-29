@@ -115,10 +115,10 @@ class Collector{
 
         me.heartbeat = setTimeout("co.runHeartbeat()", 300);
         /* MENU SHORTCUTS */
-        $('#menu_current_storyline').off().on('change', function(event) {
+        $('#current_storyline').off('change').on('change', function(event) {
             event.preventDefault();
             event.stopPropagation();
-            slug = $('#current_storyline').val();
+            let slug = $('#current_storyline').val();
             console.log(slug);
             $.ajax({
                 url: 'ajax/storyline/' + slug + '/',
@@ -391,6 +391,27 @@ class Collector{
                 }
             });
         });
+        $('.wa_export_character').off().on('click', function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            let dad = $(this).parents('li');
+            let x = $(this).parents('div').attr("id").split("_")[1];
+            let dad_id = $(dad).attr("id");
+            //let that_id = $(this).attr('id').split("_")[0];
+            $("li#" + dad_id + " .character_info").removeClass('hidden');
+            $.ajax({
+                url: 'ajax/wa_export/character/' + x + '/',
+                success: function(answer) {
+                    $('.details').html(answer.character);
+                    me.rebootLinks();
+
+                },
+                error: function(answer) {
+                    console.log('Recalc error...' + answer);
+                }
+            });
+        });
+
         $('.toggle_public').off().on('click', function(event) {
             event.preventDefault();
             let dad = $(this).parents('li');

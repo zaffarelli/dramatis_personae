@@ -12,7 +12,7 @@ from scenarist.models.story_models import StoryModel
 
 class Drama(StoryModel):
     class Meta:
-        ordering = ['epic','chapter','date','title']
+        ordering = ['epic', 'chapter','date','title']
     from scenarist.models.epics import Epic
     epic = models.ForeignKey(Epic, null=True, on_delete=models.CASCADE)
     resolution = models.TextField(default='', max_length=2560,blank=True)

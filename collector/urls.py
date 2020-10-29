@@ -11,7 +11,7 @@ from collector.views.characters import CharacterDetailView, CharacterUpdateView,
     customize_armor, customize_armor_del, customize_shield, customize_shield_del, customize_ritual, customize_ritual_del
 from collector.views.frontend import index, view_by_rid, toggle_public, toggle_spotlight, get_list, add_character, \
     get_storyline, conf_details, recalc_character, heartbeat, show_jumpweb, \
-    show_todo, pdf_show
+    show_todo, pdf_show, wa_export_character
 from collector.views.backend import recalc, export, xls_update, pdf_character, gss_update, pdf_rules, roll_dice
 from collector.views.misc_chart import get_chardar, get_population_statistics, get_keywords
 from django.conf import settings
@@ -33,8 +33,7 @@ urlpatterns = [
     re_path('^ajax/roll_dice/(?P<slug>[\w-]+)/$', roll_dice, name='roll_dice'),
 
     re_path('^ajax/recalc/character/(?P<id>\d+)/$', recalc_character, name='recalc_character'),
-                  # re_path('^ajax/recalc_pa/character/(?P<id>\d+)/$', recalc_pa_character, name='recalc_pa_character'),
-                  # re_path('^ajax/recalc_skills/character/(?P<id>\d+)/$', recalc_skills_character, name='recalc_skills_character'),
+    re_path('^ajax/wa_export/character/(?P<id>\d+)/$', wa_export_character, name='wa_export_character'),
     re_path('^ajax/pdf/character/(?P<id>\d+)/$', pdf_character, name='pdf_character'),
     re_path('^ajax/list/(?P<slug>[\w-]+)/(?P<id>\d+)/$', get_list, name='get_list'),
     re_path('^ajax/storyline/(?P<slug>[\w-]+)/$', get_storyline, name='get_storyline'),

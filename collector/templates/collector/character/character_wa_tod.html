@@ -1,0 +1,2 @@
+{%load fics_filters%}{%load static%}{% if  c.tourofduty_set.count != 0 %}[b]Lifepaths[/b]
+{% for tod in c.tourofduty_set.all %}[b]{{ tod.tour_of_duty_ref.category|as_lifepath}}[/b] {{ tod.tour_of_duty_ref.reference|safe }}({{ tod.tour_of_duty_ref.value }}){%if forloop.last %}.{%else%}, {%endif%}{% endfor %}{% endif %}

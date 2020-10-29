@@ -22,14 +22,15 @@ class Scenarist{
                 url: x+'s/'+id+'/view/',
                 success: function(answer) {
                     $('#'+x+'_'+id).html(answer);
-                    if (children != undefined){
-                      let ch = children.split(";")
-                      _.forEach(ch,function(d){
-                        $("#view_"+d).click();
-                      })
-                    }
+//                    if (children != undefined){
+//                      let ch = children.split(";")
+//                      _.forEach(ch,function(d){
+//                        $("#view_"+d).click();
+//                      })
+//                    }
                     me.co.prepareAjax();
                     me.co.rebootLinks();
+                    me.registerQuizz();
                 },
                 error: function(answer){
                     console.log('ooops... on view '+x+' :(');
@@ -51,6 +52,7 @@ class Scenarist{
             }
             me.co.prepareAjax();
             me.co.rebootLinks();
+            me.registerQuizz();
         });
         $('.edit_'+x).off().on('click', function(event){
             event.preventDefault();
@@ -93,6 +95,7 @@ class Scenarist{
                     $('#'+owner).html(answer);
                     me.co.rebootLinks();
                     $('button#'+id+'.view_'+x).click();
+                    me.registerQuizz();
                 },
                 error: function(answer) {
                     console.log('Error... ');
@@ -131,11 +134,36 @@ class Scenarist{
         });
     }
 
+    registerQuizz(){
+        console.log("Reqisterring Quizzes!!!");
+        let me = this;
+        $('.quizz').off('click').on('click',function(event){
+            let id = $(this).attr('id')
+            let arr_id = id.split("_")
+            let quizz_id = (arr_id[0].split('x'))[1]
+            let question_num = (arr_id[1].split('x'))[1]
+            let answer_id = (arr_id[2].split('x'))[1]
+            let tag = arr_id[3]
+            $.ajax({
+                url: '/ajax/quizz/'+quizz_id+'/question/'+question_num+'/tag/'+tag+'/reroll/',
+                method: 'POST',
+                success: function(answer){
+                    console.log('Reroll!! '+id+" "+answer)
+                },
+                error: function(answer){
+                    console.log('Something happended with '+id)
+                }
+            })
+        });
+    }
+
     doConnect(co){
         this.co = co;
         this.registerStory('epic');
         this.registerStory('drama');
         this.registerStory('act');
         this.registerStory('event');
+        this.registerQuizz()
     }
+
 }

@@ -12,7 +12,7 @@ from scenarist.models.story_models import StoryModel
 
 class Epic(StoryModel):
     class Meta:
-        ordering = ['era','title']
+        ordering = ['era', 'title']
     era = models.IntegerField(default=5017, blank=True)
     shortcut = models.CharField(default='xx', max_length=32, blank=True)
     image = models.CharField(default='', max_length=64, blank=True)

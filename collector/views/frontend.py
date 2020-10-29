@@ -101,6 +101,22 @@ def recalc_character(request, id=None):
         raise Http404
 
 
+def wa_export_character(request, id=None):
+    """ Preparing statsblock export for World Anvil
+    """
+    if request.is_ajax():
+        item = get_object_or_404(Character, pk=id)
+        template = get_template('collector/character_wa_statblock.html')
+        character = template.render({'c': item}, request)
+        context = {
+            'character': character,
+        }
+        messages.info(request, '...%s exported for WorldAnvil' % item.full_name)
+        return JsonResponse(context)
+    else:
+        raise Http404
+
+
 def view_by_rid(request, slug=None):
     """ Ajax view of a character, with a part of the full name
         passed to the customizer input field.

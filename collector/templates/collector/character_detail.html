@@ -31,22 +31,19 @@
     Pu {{c.is_public|prettybool|safe}}</li>
 </ul>
 <span class='pagebreaker'>&nbsp;</span>
-<ul class='unbreakable' style="font-family: monospace;">
-  <li><b>Build Log</b>{{ c.build_log|parse_avatars|safe }}</li>
-</ul>
-<span class='pagebreaker'>&nbsp;</span>
-{% if c.tourofduty_set.count != 0 %}
     <ul class='unbreakable'>
+{% if c.tourofduty_set.count != 0 %}
+
     {% for tod in c.tourofduty_set.all|dictsort:"tour_of_duty_ref.category" %}
     <li><b>{{ tod.tour_of_duty_ref.category|as_lifepath }} ({{tod.tour_of_duty_ref.value}})</b>
         <span title="{{tod.tour_of_duty_ref.description}}">{{tod.tour_of_duty_ref.reference}}</span>
         {%if tod.tour_of_duty_ref.WP%}[{{tod.tour_of_duty_ref.WP}}]{%endif%}
     </li>
     {% endfor %}
-    </ul>
-{% else %}
-    <ul class='unbreakable'></ul>
 {% endif %}
+    </ul>
+<span class='pagebreaker'>&nbsp;</span>
+<ul class='unbreakable'>
 
 <span class='attributes'>
     <table id="OCC_LVL_{{c.id}}" class='attrpick occult'>
@@ -56,6 +53,11 @@
         {% include "collector/character/character_pa.html" with c=c.info_drk %}
     </table>
 </span>
+
+
+</ul>
+
+
 
 </div>
 

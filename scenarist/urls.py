@@ -9,6 +9,7 @@ from scenarist.views.dramas import DramaDetailView, DramaUpdateView, add_drama, 
 from scenarist.views.acts import ActDetailView, ActUpdateView,  add_act, ActDeleteView
 from scenarist.views.events import EventDetailView, EventUpdateView,  add_event, EventDeleteView
 from scenarist.views.pdfs import build_config_pdf
+from scenarist.views.quizz import quizz_reroll
 
 urlpatterns = [
     re_path('^epics/(?P<pk>\d+)/view/$', EpicDetailView.as_view(), name='epic-detail'),
@@ -30,4 +31,7 @@ urlpatterns = [
     re_path('^events/(?P<pk>\d+)/delete/$', EventDeleteView.as_view(), name='event-delete'),
 
     re_path('^ajax/build_config_pdf/$', build_config_pdf, name='build_config_pdf'),
+
+    re_path('^ajax/quizz/(?P<quizz_id>\d+)/question/(?P<question_num>\d+)/tag/(?P<tag>\w+)/reroll/$',quizz_reroll,name='quizz_reroll'),
+
 ]

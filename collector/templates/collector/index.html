@@ -34,7 +34,7 @@
             {% if user.is_authenticated %}
             <li><span class="pull-down">Avatars</span>
                 <ul class="level-2 Avatars">
-                    {% if user_profile.is_gamemaster %}
+                    {% if user.profile.is_gamemaster  %}
                     <li><span class="menu-item" id="menu_search"><i class="action_icon fas fa-search"></i> Keyword Search</span></li>
                     <li><span class="menu-item" id="menu_seek"><i class="action_icon fas fa-address-card"></i> Seek RID</span> </li>
                     <li><span class="menu-item" id="menu_add_character"><i class="action_icon fas fa-user-plus"></i> Add character</span></li>

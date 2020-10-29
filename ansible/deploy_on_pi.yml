@@ -1,0 +1,66 @@
+# Launch this with :
+#   ansible-playbook -i hosts deploy_on_pi.yml --verbose
+---
+- name: DRAMATIS PERSONAE DEPLOYMENT ON RASPBERRY PI
+  hosts: all
+  remote_user: root
+  become: yes
+  vars:
+    user: dp
+
+  tasks:
+    - name: Add EPEL repository for armhfp
+      yum_repository:
+        name: EPEL ARMHFP
+        description: Epel release for armhfp
+        baseurl: https://armv7.dev.centos.org/repodir/epel-pass-1/
+        enabled: yes
+        gpgcheck: no
+        state: present
+    - name: Installing all packages
+      yum:
+        name:
+          - vim
+          - git
+          - zsh
+          - httpd
+          - yum-utils
+          - mod_wsgi
+          - postgresql
+          - postgresql-contrib
+          - postgresql-server
+          - postgresql-libs
+          - python-psycopg2
+        state: present
+        update_cache: yes
+    - name: Create SRV directory if it does not exist
+      file:
+        path: /opt/srv/dp/
+        state: directory
+        mode: '0755'
+        recurse: yes
+    - name: Checkout DP repo
+      git:
+        repo: 'https://github.com/zaffarelli/dramatis_personae.git'
+        dest: /opt/srv/dp/
+        clone: yes
+        update: no
+#    - name: Initialize postgresql database
+#      command: "postgresql-setup initdb"
+    - name: Start postgresql
+      service:
+        name: postgresql
+        state: started
+        enabled: yes
+    - name: Write the apache config file
+      file:
+        src: /opt/srv/dp/scripts/deploy/httpd_dp.conf
+        dest: /etc/httpd/conf.d/httpd_dp.conf
+        state: hard
+    - name: Start httpd
+      service:
+        name: httpd
+        state: restarted
+        enabled: yes
+
+...
