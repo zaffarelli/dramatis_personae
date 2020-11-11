@@ -61,6 +61,12 @@ class Epic(StoryModel):
         episodes = Drama.objects.filter(epic=self)
         return episodes
 
+    @property
+    def get_full_id(self):
+        """ Return subchapters """
+        return self.shortcut
+
 
 class EpicAdmin(admin.ModelAdmin):
     ordering = ('era', 'title',)
+    list_display = ['shortcut','era','full_id','title']

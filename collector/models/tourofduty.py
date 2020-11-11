@@ -1,8 +1,8 @@
-'''
+"""
  ╔╦╗╔═╗  ╔═╗┌─┐┬  ┬  ┌─┐┌─┐┌┬┐┌─┐┬─┐
   ║║╠═╝  ║  │ ││  │  ├┤ │   │ │ │├┬┘
  ═╩╝╩    ╚═╝└─┘┴─┘┴─┘└─┘└─┘ ┴ └─┘┴└─
-'''
+"""
 from django.db import models
 from collector.utils import fics_references
 from django.dispatch import receiver
@@ -11,13 +11,10 @@ from django.contrib import admin
 from collector.models.character import Character
 
 
-# from collector.models.modificator_inlines import SkillInline, BeneficeAfflictionInline, BlessingCurseInline
-
 class TourOfDutyRef(models.Model):
     class Meta:
         ordering = ['category', 'reference']
         verbose_name = "References: ToD"
-
     reference = models.CharField(max_length=64, default='', blank=True)
     category = models.CharField(max_length=20, choices=fics_references.LIFEPATH_CATEGORY, default='Tour of Duty',
                                 blank=True)
@@ -109,6 +106,7 @@ class TourOfDutyRef(models.Model):
         if valid != self.valid:
             self.valid = valid
 
+
 @receiver(pre_save, sender=TourOfDutyRef, dispatch_uid='update_tour_of_duty_ref')
 def update_tour_of_duty_ref(sender, instance, **kwargs):
     instance.fix()
@@ -129,6 +127,7 @@ class TourOfDuty(models.Model):
         AP = 0
         OP = 0
         WP = 0
+        wp_roots = []
         if tod.is_custom:
             AP = tod.AP
             OP = tod.OP
@@ -152,38 +151,17 @@ class TourOfDuty(models.Model):
                     ch.add_or_update_skill(sm.skill_ref, sm.value, True)
                 else:
                     WP += sm.value
+                    wp_roots.append(sm.skill_ref.linked_to.reference)
             for bc in tod.blessingcursemodificator_set.all():
                 ch.add_bc(bc.blessing_curse_ref)
             for ba in tod.beneficeafflictionmodificator_set.all():
                 ch.add_ba(ba.benefice_affliction_ref)
-        return AP, OP, WP
-
-    # def pull(self,ch):
-    #   tod = self.update_tour_of_duty_ref
-    #   ch.PA_STR -= tod.PA_STR
-    #   ch.PA_CON -= tod.PA_CON
-    #   ch.PA_BOD -= tod.PA_BOD
-    #   ch.PA_MOV -= tod.PA_MOV
-    #   ch.PA_INT -= tod.PA_INT
-    #   ch.PA_WIL -= tod.PA_WIL
-    #   ch.PA_TEM -= tod.PA_TEM
-    #   ch.PA_PRE -= tod.PA_PRE
-    #   ch.PA_REF -= tod.PA_REF
-    #   ch.PA_TEC -= tod.PA_TEC
-    #   ch.PA_AGI -= tod.PA_AGI
-    #   ch.PA_AWA -= tod.PA_AWA
-    #   for sm in tod.skillmodificator_set.all():
-    #     ch.remove_update_skill(sm.skill_ref,sm.value,True)
-    #   for bc in tod.blessingcursemodificator_set.all():
-    #     ch.remove_bc(bc.blessing_curse_ref)
-    #   for ba in tod.beneficeafflictionmodificator_set.all():
-    #     ch.remove_ba(ba.benefice_affliction_ref)
+        return AP, OP, WP, wp_roots
 
 
-# inlines
 class TourOfDutyInline(admin.TabularInline):
     model = TourOfDuty
     extras = 3
-    ordering = ('tour_of_duty_ref',)
+    ordering = ['tour_of_duty_ref']
 
-# admin
+

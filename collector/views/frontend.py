@@ -18,6 +18,7 @@ from collector.views.characters import respawn_avatar_link
 
 from django.contrib import messages
 
+
 def index(request):
     """ The basic page for the application
     """
@@ -26,8 +27,13 @@ def index(request):
 
 def get_list(request, id, slug='none'):
     """ Update the list of characters on the page
+        They will be sorted by full name only !
     """
     conf = get_current_config()
+    from scenarist.models.epics import Epic
+    from scenarist.models.dramas import Drama
+    from scenarist.models.acts import Act
+    from scenarist.models.events import Event
     if request.is_ajax:
         if slug == 'none':
             character_items = Character.objects.order_by('full_name')
@@ -40,10 +46,10 @@ def get_list(request, id, slug='none'):
             for rid in cast:
                 character_item = Character.objects.get(rid=rid)
                 character_items.append(character_item)
-            messages.info(request,f'New list filter applied: {slug}')
+            messages.info(request, f'New list filter applied: {slug}')
         else:
             character_items = Character.objects.filter(keyword=slug).order_by('full_name')
-            messages.info(request,f'New list filter applied: {slug}')
+            messages.info(request, f'New list filter applied: {slug}')
         paginator = Paginator(character_items, MAX_CHAR)
         page = id
         character_items = paginator.get_page(page)
@@ -122,7 +128,7 @@ def view_by_rid(request, slug=None):
         passed to the customizer input field.
     """
     if request.is_ajax():
-        items = Character.objects.filter(full_name__contains=slug).order_by('full_name')
+        items = Character.objects.filter(rid__contains=slug.lower()).order_by('full_name')
         if items.count():
             item = items.first()
             context = {}
@@ -140,8 +146,9 @@ def view_by_rid(request, slug=None):
             }
             messages.info(request, 'Found: %s' % (item.rid))
             return JsonResponse(context)
-    else:
-        raise Http404
+        else:
+            messages.error(request, f'The term "{slug}" was not found in characters RID.')
+    return HttpResponse(status=204)
 
 
 def show_todo(request):
@@ -225,10 +232,14 @@ def show_jumpweb(request):
     """
     if request.is_ajax:
         from collector.models.system import System
+        from collector.utils.fics_references import NEW_ROUTES, NEW_SYSTEMS
+
         conf = get_current_config()
         context = {}
         context['data'] = {}
-        context['data']['mj'] = 1 if request.user.profile.is_gamemaster else 0
+        context['data']['mj'] = 0 if request.user.profile.is_gamemaster else 0
+        context['data']['new_routes'] = "|".join(NEW_ROUTES)
+        context['data']['new_systems'] = "|".join(NEW_SYSTEMS)
         context['data']['nodes'] = []
         context['data']['links'] = []
         for s in System.objects.all():
@@ -243,6 +254,7 @@ def show_jumpweb(request):
             system['jump'] = s.jump
             system['group'] = s.group
             system['color'] = s.color
+            system['orbital_map'] = 1 if s.orbital_map != '' else 0
             system['discovery'] = s.discovery
             system['dtj'] = s.dtj
             system['garrison'] = s.garrison
@@ -264,6 +276,59 @@ def show_jumpweb(request):
         return HttpResponse(html, content_type='text/html')
     else:
         return Http404
+
+
+def show_orbital_map(request):
+    """ Display the full jumpweb.
+        Todo: adapt this to the user actually logged.
+    """
+    if request.is_ajax:
+        from collector.models.system import System
+        from collector.utils.fics_reference import NEW_ROUTES
+        conf = get_current_config()
+        context = {}
+        context['data'] = {}
+        context['data']['mj'] = 0#1 if request.user.profile.is_gamemaster else 0
+
+        context['data']['new_routes'] = ",".join(NEW_ROUTES)
+        context['data']['new_systems'] = ",".join(NEW_SYSTEMS)
+        context['data']['nodes'] = []
+        context['data']['links'] = []
+        for s in System.objects.all():
+            system = {}
+            system['id'] = s.id
+            system['name'] = s.name
+            system['alliance'] = s.alliance
+            system['sector'] = s.sector
+            # system['jumproads'] = s.jumproads
+            system['x'] = s.x
+            system['y'] = s.y
+            system['jump'] = s.jump
+            system['group'] = s.group
+            system['color'] = s.color
+            system['orbital_map'] = 1 if s.orbital_map != '' else 0
+            system['discovery'] = s.discovery
+            system['dtj'] = s.dtj
+            system['garrison'] = s.garrison
+            system['tech'] = s.tech
+            system['symbol'] = s.symbol
+            system['population'] = s.population
+            context['data']['nodes'].append(system)
+            for j in s.jumproads.all():
+                lnk = {}
+                if j.id > s.id:
+                    lnk['source'] = s.id
+                    lnk['target'] = j.id
+                else:
+                    lnk['source'] = j.id
+                    lnk['target'] = s.id
+                context['data']['links'].append(lnk)
+        template = get_template('collector/jumpweb.html')
+        html = template.render(context)
+        return HttpResponse(html, content_type='text/html')
+    else:
+        return Http404
+
 
 
 def conf_details(request):

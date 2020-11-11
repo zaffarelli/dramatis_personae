@@ -18,16 +18,25 @@ BLOKE_LEVELS = (
 
 class Bloke(models.Model):
     class Meta:
-        ordering = ('player', 'level', 'reference')
+        ordering = ['character', 'level', 'npc']
 
-    player = models.ForeignKey(Character, on_delete=models.CASCADE, related_name='pc')
-    reference = models.ForeignKey(Character, on_delete=models.CASCADE, null=True, blank=True, related_name='npc')
+    character = models.ForeignKey(Character, on_delete=models.CASCADE, related_name='character', blank=True, null=True)
+    npc = models.ForeignKey(Character, on_delete=models.CASCADE, null=True, blank=True, related_name='npc')
     level = models.IntegerField(choices=BLOKE_LEVELS, default=0)
+    description = models.TextField(default='', blank=True, null=True, max_length=1024)
 
     def __str__(self):
-        return "%d > %s" % (self.level, self.reference.rid)
+        return f'{self.character.rid} > ({self.level}) > {self.npc.rid}'
 
 
 class BlokeInline(admin.TabularInline):
     model = Bloke
-    fk_name = 'player'
+    fk_name = 'character'
+
+
+class BlokeAdmin(admin.ModelAdmin):
+    list_display = ['character', 'level', 'npc', 'description']
+    ordering = ['character', '-level', 'npc']
+    search_fields = ['character', 'npc']
+    list_filter = ['character', 'npc', 'level']
+

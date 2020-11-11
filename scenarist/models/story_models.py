@@ -12,13 +12,14 @@ class StoryModel(models.Model):
     class Meta:
         abstract = True
     title = models.CharField(default='', max_length=256, blank=True, unique=True)
-    chapter = models.CharField(default='', blank=True, max_length=64)
+    chapter = models.CharField(default='0', blank=True, max_length=64)
     date = models.CharField(max_length=128, default='', blank=True)
     place = models.CharField(max_length=128, default='', blank=True)
     description = models.TextField(max_length=2560,default='',blank=True)
     gamemaster = models.CharField(default='zaffarelli@gmail.com', max_length=128, blank=True)
     visible = models.BooleanField(default=False)
     to_PDF = models.BooleanField(default=True)
+    full_id = models.CharField(max_length=64, blank=True, default='')
 
     def __str__(self):
         """ Standard display """
@@ -58,7 +59,7 @@ class StoryModel(models.Model):
         for item in iter:
             rid = ''.join(item.group().split('¤'))
             ch = Character.objects.filter(rid=rid).first()
-            if not ch is None:
+            if ch is not None:
                 avar.append(ch.rid)
         return avar
 
@@ -93,3 +94,8 @@ class StoryModel(models.Model):
             casting.append(episode.get_full_cast())
         flat_cast = [c for subcast in casting for c in subcast]
         return sorted(list(set(flat_cast)))
+
+    @property
+    def get_full_id(self):
+        """ Return subchapters """
+        return f'{self.id}'

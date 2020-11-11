@@ -1,5 +1,19 @@
+{% extends "blank.html" %}
+{% load static %}
+
+
+{% block title %}
+Jumpweb - Dramatis Personae
+{% endblock %}
+
+{% block legend %}
+<div class="legend">Abusus Non Tollit Usum - Jumpweb</div>
+{% endblock legend %}
+
+{% block javascript %}
 <script>
   let data = {{data|safe}}
   jumpweb = new Jumpweb(data);
   jumpweb.perform();
 </script>
+{% endblock javascript %}

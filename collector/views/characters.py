@@ -9,11 +9,11 @@ from django.contrib import messages
 from collector.forms.basic import CharacterForm, TourOfDutyFormSet
 from collector.models.character import Character
 from scenarist.mixins.ajaxfromresponse import AjaxFromResponseMixin
-from django.views.decorators.csrf import csrf_exempt
+#from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from django.forms.models import model_to_dict
 from django.template.loader import get_template
-
+from django.shortcuts import redirect
 
 class CharacterDetailView(DetailView):
     model = Character
@@ -44,6 +44,9 @@ class CharacterUpdateView(AjaxFromResponseMixin, UpdateView):
             messages.error(self.request, 'Avatar %s has errors. unable to save.' % (context['c'].full_name))
             return super().form_invalid(form)
 
+    def get_success_url(self):
+        return f'ajax/recalc/character/{self.object.id}/'
+
     def get_context_data(self, **kwargs):
         context = super(CharacterUpdateView, self).get_context_data(**kwargs)
         if self.request.POST:
@@ -70,7 +73,6 @@ def respawn_summary(avatar, context, request):
     return context
 
 
-@csrf_exempt
 def skill_pick(request, avatar, item, offset):
     """ Touching skills to edit them in the view """
     from collector.models.skill import SkillRef
@@ -85,12 +87,11 @@ def skill_pick(request, avatar, item, offset):
     context["c"] = model_to_dict(ch)
     template = get_template('collector/character/character_skill.html')
     context["block"] = template.render({'c': ch, 'skill': skill})
-    context = respawnSummary(ch, context)
-    context = respawnAvatarLink(ch, context)
+    context = respawn_summary(ch, context, request)
+    context = respawn_avatar_link(ch, context, request)
     return JsonResponse(context)
 
 
-@csrf_exempt
 def attr_pick(request, avatar, item, offset):
     """ Touching skills to edit them in the view """
     context = {}
@@ -108,12 +109,12 @@ def attr_pick(request, avatar, item, offset):
     context["c"] = model_to_dict(ch)
     template = get_template('collector/character/character_pa.html')
     context["block"] = template.render({'c': getattr(ch, info)})
-    context = respawnSummary(ch, context)
-    context = respawnAvatarLink(ch, context)
+    context = respawn_summary(ch, context, request)
+    context = respawn_avatar_link(ch, context, request)
     return JsonResponse(context)
 
 
-@csrf_exempt
+
 def customize_skill(request, avatar, item):
     from collector.models.skill import SkillRef, SkillCusto
     from collector.models.character_custo import CharacterCusto
@@ -132,13 +133,13 @@ def customize_skill(request, avatar, item):
     context["block"] = template.render({'c': ch})
     template = get_template('collector/custo/skill_custo_block.html')
     context["custo_block"] = template.render({'c': ch})
-    context = respawnSummary(ch, context)
-    context = respawnAvatarLink(ch, context)
+    context = respawn_summary(ch, context, request)
+    context = respawn_avatar_link(ch, context, request)
     messages.info(request, 'Avatar %s customized with skill %s at +1.' % (ch.full_name, new_item.skill_ref.reference))
     return JsonResponse(context)
 
 
-@csrf_exempt
+
 def customize_bc(request, avatar, item):
     from collector.models.blessing_curse import BlessingCurseRef, BlessingCurseCusto
     from collector.models.character_custo import CharacterCusto
@@ -156,13 +157,13 @@ def customize_bc(request, avatar, item):
     context["block"] = template.render({'c': ch})
     template = get_template('collector/custo/bc_custo_block.html')
     context["custo_block"] = template.render({'c': ch})
-    context = respawnSummary(ch, context)
-    context = respawnAvatarLink(ch, context)
+    context = respawn_summary(ch, context, request)
+    context = respawn_avatar_link(ch, context, request)
     messages.info(request, 'Avatar %s customized with B/C %s.' % (ch.full_name, bcc.blessing_curse_ref.reference))
     return JsonResponse(context)
 
 
-@csrf_exempt
+
 def customize_bc_del(request, avatar, item):
     from collector.models.blessing_curse import BlessingCurseRef, BlessingCurseCusto
     from collector.models.character_custo import CharacterCusto
@@ -184,8 +185,8 @@ def customize_bc_del(request, avatar, item):
         context["block"] = template.render({'c': ch})
         template = get_template('collector/custo/bc_custo_block.html')
         context["custo_block"] = template.render({'c': ch})
-        context = respawnSummary(ch, context)
-        context = respawnAvatarLink(ch, context)
+        context = respawn_summary(ch, context, request)
+        context = respawn_avatar_link(ch, context, request)
         messages.info(request, 'Avatar %s customized with B/C %s.' % (ch.full_name, txt))
 
     else:
@@ -194,7 +195,7 @@ def customize_bc_del(request, avatar, item):
     return JsonResponse(context)
 
 
-@csrf_exempt
+
 def customize_ba(request, avatar, item):
     from collector.models.benefice_affliction import BeneficeAfflictionRef
     from collector.models.character_custo import CharacterCusto
@@ -214,13 +215,13 @@ def customize_ba(request, avatar, item):
     context["block"] = template.render({'c': ch})
     template = get_template('collector/custo/ba_custo_block.html')
     context["custo_block"] = template.render({'c': ch})
-    context = respawnSummary(ch, context)
-    context = respawnAvatarLink(ch, context)
+    context = respawn_summary(ch, context, request)
+    context = respawn_avatar_link(ch, context, request)
     messages.info(request, 'Avatar %s customized with B/A %s.' % (ch.full_name, bac.benefice_affliction_ref.reference))
     return JsonResponse(context)
 
 
-@csrf_exempt
+
 def customize_ba_del(request, avatar, item):
     from collector.models.benefice_affliction import BeneficeAfflictionRef
     from collector.models.character_custo import CharacterCusto
@@ -243,8 +244,8 @@ def customize_ba_del(request, avatar, item):
         context["block"] = template.render({'c': ch})
         template = get_template('collector/custo/ba_custo_block.html')
         context["custo_block"] = template.render({'c': ch})
-        context = respawnSummary(ch, context)
-        context = respawnAvatarLink(ch, context)
+        context = respawn_summary(ch, context, request)
+        context = respawn_avatar_link(ch, context, request)
         messages.info(request, 'Avatar %s customized with B/A %s.' % (ch.full_name, txt))
     else:
         context["c"] = model_to_dict(ch)
@@ -252,7 +253,7 @@ def customize_ba_del(request, avatar, item):
     return JsonResponse(context)
 
 
-@csrf_exempt
+
 def customize_weapon(request, avatar, item):
     from collector.models.weapon import WeaponRef, WeaponCusto
     from collector.models.character_custo import CharacterCusto
@@ -270,13 +271,13 @@ def customize_weapon(request, avatar, item):
     context["block"] = template.render({'c': ch})
     template = get_template('collector/custo/weapon_custo_block.html')
     context["custo_block"] = template.render({'c': ch})
-    context = respawnSummary(ch, context)
-    context = respawnAvatarLink(ch, context)
+    context = respawn_summary(ch, context, request)
+    context = respawn_avatar_link(ch, context, request)
     messages.info(request, 'Avatar %s customized with weapon %s.' % (ch.full_name, item_custo.weapon_ref.reference))
     return JsonResponse(context)
 
 
-@csrf_exempt
+
 def customize_weapon_del(request, avatar, item):
     from collector.models.weapon import WeaponRef, WeaponCusto
     from collector.models.character_custo import CharacterCusto
@@ -299,8 +300,8 @@ def customize_weapon_del(request, avatar, item):
         context["block"] = template.render({'c': ch})
         template = get_template('collector/custo/weapon_custo_block.html')
         context["custo_block"] = template.render({'c': ch})
-        context = respawnSummary(ch, context)
-        context = respawnAvatarLink(ch, context)
+        context = respawn_summary(ch, context, request)
+        context = respawn_avatar_link(ch, context, request)
         messages.info(request, 'Avatar %s customized with weapon %s.' % (ch.full_name, txt))
     else:
         context["c"] = model_to_dict(ch)
@@ -308,7 +309,6 @@ def customize_weapon_del(request, avatar, item):
     return JsonResponse(context)
 
 
-@csrf_exempt
 def customize_armor(request, avatar, item):
     from collector.models.armor import ArmorRef
     from collector.models.character_custo import CharacterCusto
@@ -327,13 +327,13 @@ def customize_armor(request, avatar, item):
     context["block"] = template.render({'c': ch})
     template = get_template('collector/custo/armor_custo_block.html')
     context["custo_block"] = template.render({'c': ch})
-    context = respawnSummary(ch, context)
-    context = respawnAvatarLink(ch, context)
+    context = respawn_summary(ch, context, request)
+    context = respawn_avatar_link(ch, context, request)
     messages.info(request, 'Avatar %s customized with armor %s.' % (ch.full_name, item_custo.armor_ref.reference))
     return JsonResponse(context)
 
 
-@csrf_exempt
+
 def customize_armor_del(request, avatar, item):
     from collector.models.armor import ArmorRef
     from collector.models.character_custo import CharacterCusto
@@ -357,8 +357,8 @@ def customize_armor_del(request, avatar, item):
         context["block"] = template.render({'c': ch})
         template = get_template('collector/custo/armor_custo_block.html')
         context["custo_block"] = template.render({'c': ch})
-        context = respawnSummary(ch, context)
-        context = respawnAvatarLink(ch, context)
+        context = respawn_summary(ch, context, request)
+        context = respawn_avatar_link(ch, context, request)
         messages.info(request, 'Avatar %s customized with armor %s.' % (ch.full_name, txt))
     else:
         context["c"] = model_to_dict(ch)
@@ -366,7 +366,7 @@ def customize_armor_del(request, avatar, item):
     return JsonResponse(context)
 
 
-@csrf_exempt
+
 def customize_shield(request, avatar, item):
     from collector.models.shield import ShieldRef
     from collector.models.character_custo import CharacterCusto
@@ -385,13 +385,12 @@ def customize_shield(request, avatar, item):
     context["block"] = template.render({'c': ch})
     template = get_template('collector/custo/shield_custo_block.html')
     context["custo_block"] = template.render({'c': ch})
-    context = respawnSummary(ch, context)
-    context = respawnAvatarLink(ch, context)
+    context = respawn_summary(ch, context, request)
+    context = respawn_avatar_link(ch, context, request)
     messages.info(request, 'Avatar %s customized with shield %s.' % (ch.full_name, item_custo.shield_ref.reference))
     return JsonResponse(context)
 
 
-@csrf_exempt
 def customize_shield_del(request, avatar, item):
     from collector.models.shield import ShieldRef
     from collector.models.character_custo import CharacterCusto
@@ -415,8 +414,8 @@ def customize_shield_del(request, avatar, item):
         context["block"] = template.render({'c': ch})
         template = get_template('collector/custo/shield_custo_block.html')
         context["custo_block"] = template.render({'c': ch})
-        context = respawnSummary(ch, context)
-        context = respawnAvatarLink(ch, context)
+        context = respawn_summary(ch, context, request)
+        context = respawn_avatar_link(ch, context, request)
         messages.info(request, 'Avatar %s customized with shield %s.' % (ch.full_name, txt))
     else:
         context["c"] = model_to_dict(ch)
@@ -424,7 +423,7 @@ def customize_shield_del(request, avatar, item):
     return JsonResponse(context)
 
 
-@csrf_exempt
+
 def customize_ritual(request, avatar, item):
     from collector.models.ritual import RitualRef, RitualCusto
     from collector.models.character_custo import CharacterCusto
@@ -442,13 +441,13 @@ def customize_ritual(request, avatar, item):
     context["block"] = template.render({'c': ch})
     template = get_template('collector/custo/ritual_custo_block.html')
     context["custo_block"] = template.render({'c': ch})
-    context = respawnSummary(ch, context)
-    context = respawnAvatarLink(ch, context)
+    context = respawn_summary(ch, context, request)
+    context = respawn_avatar_link(ch, context, request)
     messages.info(request, 'Avatar %s customized with weapon %s.' % (ch.full_name, item_custo.ritual_ref.reference))
     return JsonResponse(context)
 
 
-@csrf_exempt
+
 def customize_ritual_del(request, avatar, item):
     from collector.models.ritual import RitualRef, WeaponCusto
     from collector.models.character_custo import CharacterCusto
@@ -471,8 +470,8 @@ def customize_ritual_del(request, avatar, item):
         context["block"] = template.render({'c': ch})
         template = get_template('collector/custo/ritual_custo_block.html')
         context["custo_block"] = template.render({'c': ch})
-        context = respawnSummary(ch, context)
-        context = respawnAvatarLink(ch, context)
+        context = respawn_summary(ch, context, request)
+        context = respawn_avatar_link(ch, context, request)
         messages.info(request, 'Avatar %s customized with weapon %s.' % (ch.full_name, txt))
     else:
         context["c"] = model_to_dict(ch)

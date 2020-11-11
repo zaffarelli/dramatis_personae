@@ -68,7 +68,9 @@ span.toggler {
     color: $fics_front;
     border:1px solid $fics_dark;
     width: 25em;
-    height: 1.4em;
+    min-height: 1.4em;
+    height:auto;
+    white-space: wrap;
     margin:0;
     padding:0;
     text-align:left;

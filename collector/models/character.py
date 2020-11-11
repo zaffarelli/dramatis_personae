@@ -14,7 +14,7 @@ from collector.models.fics_models import Specie
 from collector.models.combattant import Combattant
 from collector.utils import fs_fics7
 from django.utils.timezone import get_current_timezone
-
+import itertools
 import logging
 
 logger = logging.getLogger(__name__)
@@ -34,6 +34,7 @@ class Character(Combattant):
     player = models.CharField(max_length=200, default='', blank=True)
     specie = models.ForeignKey(Specie, null=True, default=31, blank=True,
                                on_delete=models.SET_NULL)
+    race = models.TextField(max_length=256, default='', blank=True, null=True)
     birthdate = models.IntegerField(default=0)
     gender = models.CharField(max_length=30, default='female')
     native_fief = models.CharField(max_length=200, default='none', blank=True)
@@ -109,6 +110,7 @@ class Character(Combattant):
     on_save_re_roll_skills = models.BooleanField(default=False)
     life_path_total = models.IntegerField(default=0)
     stories_count = models.PositiveIntegerField(default=0)
+    stories = models.TextField(max_length=1024, default='', blank=True)
     balanced = models.BooleanField(default=False)
     historical_figure = models.BooleanField(default=False)
     nameless = models.BooleanField(default=False)
@@ -217,6 +219,7 @@ class Character(Combattant):
         self.OP_tod_pool = 0
         self.WP_tod_pool = 0
         self.life_path_total = 0
+        self.race = self.specie.species
         bl = []
         tod_rep = {
             'RA': 0,
@@ -227,8 +230,10 @@ class Character(Combattant):
             'WB': 0,
         }
         logger.info('Applying ToDs...')
+        all_tod_wp_roots = []
         for tod in self.tourofduty_set.all():
-            AP, OP, WP = tod.push(self)
+            AP, OP, WP, tod_wp_roots = tod.push(self)
+            all_tod_wp_roots.append(tod_wp_roots)
             self.AP_tod_pool += AP
             self.OP_tod_pool += OP
             self.OP_tod_pool += WP
@@ -246,6 +251,10 @@ class Character(Combattant):
                 tod_rep['TO'] += tod.tour_of_duty_ref.value
             elif tod.tour_of_duty_ref.category == '50':
                 tod_rep['WB'] += tod.tour_of_duty_ref.value
+        # Flatten
+        doubles_all_wp_roots = list(itertools.chain(*all_tod_wp_roots))
+        # Remove multi
+        all_wp_roots = list(dict.fromkeys(doubles_all_wp_roots))
         if self.charactercusto:
             self.charactercusto.comment = self.full_name
             self.charactercusto.push(self)
@@ -271,9 +280,10 @@ class Character(Combattant):
         # bl.append("- Lifepath ....... " + str(self.life_path_total))
         # bl.append("- Repartition .... " + str(tod_rep))
         fs_fics7.check_secondary_attributes(self)
+        self.handle_wildcards(all_wp_roots)
         self.charactercusto.save()
         self.prepare_display()
-        self.handle_wildcards()
+
         self.add_missing_root_skills()
         self.reset_total()
         self.balanced = (self.life_path_total == self.OP) and (self.OP > 0)
@@ -304,8 +314,13 @@ class Character(Combattant):
         self.refresh_options("ritual_options", "ritual_options_not", self.charactercusto.ritualcusto_set.all(),
                              "ritual_ref", "RitualRef")
 
-    def handle_wildcards(self):
-        pass
+    def handle_wildcards(self, root_list):
+        """ Calculate wildcard amount from the ToDs (ToD_WC), and check if the amount is satisfied with skills
+            matching the wildcards roots in the custo (C_WC).
+        """
+        #print(root_list)
+        self.charactercusto.watch_roots = "_".join(root_list)
+
 
     def rebuild_free_form(self):
         """ Freeform Creation """
@@ -751,10 +766,12 @@ class Character(Combattant):
         for story in all:
             if story.got(self.rid):
                 result += 1
+                self.stories += f'{story.get_full_id}_{story.title}#'
         return result
 
     def update_stories_count(self):
         self.stories_count = 0
+        self.stories = ''
         from scenarist.models.events import Event
         from scenarist.models.acts import Act
         from scenarist.models.dramas import Drama

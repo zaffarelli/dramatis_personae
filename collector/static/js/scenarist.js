@@ -22,12 +22,12 @@ class Scenarist{
                 url: x+'s/'+id+'/view/',
                 success: function(answer) {
                     $('#'+x+'_'+id).html(answer);
-//                    if (children != undefined){
-//                      let ch = children.split(";")
-//                      _.forEach(ch,function(d){
-//                        $("#view_"+d).click();
-//                      })
-//                    }
+                    if (children != undefined){
+                      let ch = children.split(";")
+                      _.forEach(ch,function(d){
+                        $("#view_"+d).click();
+                      })
+                    }
                     me.co.prepareAjax();
                     me.co.rebootLinks();
                     me.registerQuizz();

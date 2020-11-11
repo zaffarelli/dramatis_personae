@@ -63,7 +63,7 @@ class RitualRef(models.Model):
     prayer = models.BooleanField(default=False)
 
     def __str__(self):
-        return "%s [%d](%s)" % (self.reference, self.level, self.path)
+        return f'{self.reference} ({self.path} {self.level})'
 
 
 class RitualCusto(models.Model):
@@ -71,11 +71,17 @@ class RitualCusto(models.Model):
     character_custo = models.ForeignKey(CharacterCusto, on_delete=models.CASCADE)
     ritual_ref = models.ForeignKey(RitualRef, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return f'{self.ritual_ref.reference} ({self.ritual_ref.path} {self.ritual_ref.level})'
+
 
 class Ritual(models.Model):
     from collector.models.character import Character
     character = models.ForeignKey(Character, on_delete=models.CASCADE)
     ritual_ref = models.ForeignKey(RitualRef, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.character.rid} > {self.ritual_ref.reference} ({self.ritual_ref.path} {self.ritual_ref.level})'
 
 
 class RitualInline(admin.TabularInline):

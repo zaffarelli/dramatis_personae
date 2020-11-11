@@ -46,7 +46,7 @@ def add_event(request):
         id_ = request.POST.get('id')
         id = id_.split('_')[1]
         item = Event()
-        item.title = datetime.datetime.now()
+        item.title = str(datetime.datetime.now())
         item.act = get_object_or_404(Act, pk=id)
         item.save()
         return JsonResponse(item.toJSON())

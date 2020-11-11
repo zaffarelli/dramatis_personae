@@ -28,7 +28,7 @@ class Collector{
             me.setToggler('.menu_right_toggler', 'collapsed', ".menuright");
             me.setToggler('.list_toggler', 'collapsed', ".list");
             me.setToggler('#menu_right_toggler', 'collapsed', ".menuright");
-            me.setToggler('#list_toggler', 'collapsed', ".list");
+            me.setToggler('#listtoggler', 'collapsed', ".list");
             me.setToggler('.dicer_toggler', 'collapsed', ".dicer");
             me.setToggler('#dicer_toggler', 'collapsed', ".dicer");
         });
@@ -64,14 +64,14 @@ class Collector{
         });
     }
 
-    runHeartbeat(x=2500){
+    runHeartbeat(x=5000){
         let me = this;
         clearTimeout(me.heartbeat);
         $.ajax({
             url: 'api/heartbeat/',
             success: function(answer) {
                 $('#messenger_block').html(answer)
-                me.heartbeat = setTimeout("co.runHeartbeat()", 3000);
+                me.heartbeat = setTimeout("co.runHeartbeat()", x);
             },
         });
     }
@@ -111,9 +111,10 @@ class Collector{
         let me = this;
         me.sc.doConnect(me);
         me.op.doConnect(me);
+        me.ac.prepareEvents(me);
         console.log('Reboot links')
 
-        me.heartbeat = setTimeout("co.runHeartbeat()", 300);
+        me.heartbeat = setTimeout("co.runHeartbeat()", 500);
         /* MENU SHORTCUTS */
         $('#current_storyline').off('change').on('change', function(event) {
             event.preventDefault();
@@ -155,15 +156,16 @@ class Collector{
             $.ajax({
                 url: 'api/recalc/',
                 success: function(answer) {
-                    me.runHeartbeat(2500);
+                    me.runHeartbeat();
                     me.rebootLinks();
                 },
                 error: function(answer){
                     console.error("Ooops");
                     console.log(answer);
+                    me.runHeartbeat();
+                    me.rebootLinks();
                 }
             });
-            me.rebootLinks();
         });
         $('#menu_jumpweb').off().on('click', function(event) {
             event.preventDefault();
@@ -172,8 +174,15 @@ class Collector{
                 url: 'jumpweb/show',
                 success: function(answer) {
                     $('.details').html(answer);
+                    let tab = window.open(null,'graphics');
+                    tab.document.write(answer)
+
                     me.prepareAjax();
                     me.rebootLinks();
+//                    let html = "<!DOCTYPE html><html>yo</html>";
+//                    //let spacecharts = window.open("data:text/html," + encodeURIComponent(html),"Spacecharts");
+//                    let spacecharts = window.open("about:blank","spacecharts");
+//                    spacecharts.focus();
                 },
                 error: function(answer) {
                     console.error('ooops... on show jumpweb...');

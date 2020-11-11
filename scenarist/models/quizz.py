@@ -13,7 +13,7 @@ import random
 logger = logging.getLogger(__name__)
 
 ADVENTURE_CATEGORIES = dict(planetary=1, spatial=2, other=0)
-QUESTION_TAGS = ['goal', 'goal', 'goal', 'villain', 'ally', 'patron', 'twist', 'complication', 'side_story', 'introduction', 'climax', 'framing_event']
+QUESTION_TAGS = ['goal', 'goal', 'goal', 'villain', 'ally', 'patron', 'twist', 'complication', 'sidequest', 'introduction', 'climax', 'framingevent']
 
 
 class QuizzQuestion(models.Model):
@@ -55,17 +55,17 @@ class Quizz(models.Model):
     patron = models.ForeignKey(QuizzAnswer, on_delete=models.SET_NULL, blank=True, null=True, related_name='patron')
     twist = models.ForeignKey(QuizzAnswer, on_delete=models.SET_NULL, blank=True, null=True, related_name='twist')
     complication = models.ForeignKey(QuizzAnswer, on_delete=models.SET_NULL, blank=True, null=True, related_name='complication')
-    side_story = models.ForeignKey(QuizzAnswer, on_delete=models.SET_NULL, blank=True, null=True, related_name='side_story')
+    sidequest = models.ForeignKey(QuizzAnswer, on_delete=models.SET_NULL, blank=True, null=True, related_name='side_quest')
     introduction = models.ForeignKey(QuizzAnswer, on_delete=models.SET_NULL, blank=True, null=True, related_name='introduction')
     climax = models.ForeignKey(QuizzAnswer, on_delete=models.SET_NULL, blank=True, null=True, related_name='climax')
-    framing_event = models.ForeignKey(QuizzAnswer, on_delete=models.SET_NULL, blank=True, null=True, related_name='framing_event')
+    framingevent = models.ForeignKey(QuizzAnswer, on_delete=models.SET_NULL, blank=True, null=True, related_name='framing_event')
 
     def __str__(self):
         s = str(self.id)
         if self.drama:
-            s = f'{self.drama.title} quizz'
+            s = f'{self.drama.full_id} quizz'
         if self.act:
-            s = f'{self.act.title} quizz'
+            s = f'{self.act.full_id} quizz'
         return s
 
     def roll_answer(self, q_num):
@@ -80,16 +80,16 @@ class Quizz(models.Model):
         print(f'{qo.text} --> {answer.text}')
         return answer
 
-    def check_qna(self, pk_q, pk_a):
-        answer = True
-        qo = QuizzQuestion.objects.get(pk=pk_q)
-        ao = QuizzAnswer.objects.get(pk=pk_a)
-        if ao.question != qo:
-            answer = False
-        return answer
+    # def check_qna(self, pk_q, pk_a):
+    #     answer = True
+    #     qo = QuizzQuestion.objects.get(pk=pk_q)
+    #     ao = QuizzAnswer.objects.get(pk=pk_a)
+    #     if ao.question != qo:
+    #         answer = False
+    #     return answer
 
     def randomize(self):
-        r_category = random.randint(0, 1)+1
+        r_category = 1 #random.randint(0, 1)+1
         self.category = r_category
         self.goal = self.roll_answer(self.category)
         self.villain = self.roll_answer(3)
@@ -97,10 +97,10 @@ class Quizz(models.Model):
         self.patron = self.roll_answer(5)
         self.twist = self.roll_answer(6)
         self.complication = self.roll_answer(7)
-        self.side_story = self.roll_answer(8)
+        self.sidequest = self.roll_answer(8)
         self.introduction = self.roll_answer(9)
         self.climax = self.roll_answer(10)
-        self.framing_event = self.roll_answer(11)
+        self.framingevent = self.roll_answer(11)
 
     def verbose_qa(self, q, a):
         t = []
@@ -121,12 +121,20 @@ class Quizz(models.Model):
         answer.append(self.verbose_qa(5, self.patron))
         answer.append(self.verbose_qa(6, self.twist))
         answer.append(self.verbose_qa(7, self.complication))
-        answer.append(self.verbose_qa(8, self.side_story))
+        answer.append(self.verbose_qa(8, self.sidequest))
         answer.append(self.verbose_qa(9, self.introduction))
         answer.append(self.verbose_qa(10, self.climax))
-        answer.append(self.verbose_qa(11, self.framing_event))
+        answer.append(self.verbose_qa(11, self.framingevent))
         return "<br/>".join(answer)
 
+    @property
+    def ref_id(self):
+        s = ""
+        if self.drama is not None:
+            s = self.drama.full_id
+        if self.act is not None:
+            s = self.act.full_id
+        return s
 
 class QuizzQuestionAdmin(admin.ModelAdmin):
     list_display = ['text', 'subject', 'name', 'num', 'size']
@@ -142,4 +150,4 @@ class QuizzAnswerAdmin(admin.ModelAdmin):
 
 
 class QuizzAdmin(admin.ModelAdmin):
-    list_display = ['id', 'drama', 'act', 'category', 'goal', 'villain', 'ally', 'patron', 'twist']
+    list_display = ['__str__','ref_id', 'drama', 'act', 'category', 'goal', 'villain', 'ally', 'patron', 'twist']

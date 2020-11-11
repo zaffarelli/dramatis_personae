@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <meta charset='utf-8' />
+        <meta name='viewport' content='width=device-width, initial-scale=1' />
+        <title>{% block title %}Dramatis Personae{% endblock %}</title>
+        {% load static %}
+        {% load sass_tags %}
+        <link rel='icon' href='{% static "collector/dp.ico" %}'>
+        <link rel='stylesheet' href='{% static "font-awesome/css/all.css"%}'>
+        <script src='{% static "thirdparties/Chart.bundle.js" %}'></script>
+        <script src="https://d3js.org/d3.v4.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" media="all">
+        <link rel='stylesheet' type='text/css' href='{% sass_src "collector/all.scss" %}' />
+    </head>
+    <body>
+        {% block legend %}
+        {% endblock legend %}
+        <div class="jumpweb"></div>
+
+
+
+        <script src='{% static "js/avatar_customizer.js" %}'></script>
+        <script src='{% static "js/scenarist.js" %}'></script>
+        <script src='{% static "js/optimizer.js" %}'></script>
+        <script src='{% static "js/collector.js" %}'></script>
+        <script src='{% static "js/jumpweb.js" %}'></script>
+
+        {% block javascript %}
+        {% endblock %}
+    </body>
+</html>

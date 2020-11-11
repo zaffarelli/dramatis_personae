@@ -1,6 +1,12 @@
 <div class='avatar_link {% if c.is_locked %}locked{%endif%}'>
     <div class='character_name'>
+        {% if c.is_dead %}
+        <strike>
+        {% endif %}
         <em title='{{ c.entrance }}'> {{ c.full_name }}</em>
+        {% if c.is_dead %}
+        </strike>
+        {% endif %}
     </div>
     <div class='character_actions' id="link_{{c.id}}">
         <span class="action_icon edit_character"><i class="fas fa-user-tag"></i></span>&nbsp
@@ -51,7 +57,7 @@
             <div class="plate">{{c.keyword|safe}}</div>
         {% endif %}
         {% if c.stories_count %}
-        <div class="plate"> Casted {{ c.stories_count }} times.</div>
+        <div class="plate"> Casted {{ c.stories_count }} time(s).</div>
         {% endif %}
         <div class="plate right">{{ c.challenge|safe }}</div>
   </div>

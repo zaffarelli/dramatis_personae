@@ -1478,10 +1478,33 @@ table.combat_narrative {
       color: #fea;
       text-decoration: none; }
 
-div.jumpweb {
-  width: 900px;
-  height: 900px;
-  border: 1px solid #e5deca;
+.legend {
+  position: absolute;
+  z-index: 45;
+  font-family: NomPersoListe;
+  font-size: 24pt;
+  font-weight: 900;
+  bottom: 5px;
+  right: 5px;
+  color: #f6f3ec;
+  background: #222;
+  height: 50px;
+  width: auto;
+  padding: 5px;
+  opacity: 0.8;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #000; }
+
+.jumpweb {
+  position: absolute;
+  z-index: 35;
+  top: 10px;
+  bottom: 10px;
+  left: 10px;
+  right: 10px;
+  width: auto;
+  height: auto;
+  border: 1px solid #171817;
   overflow: hidden; }
 
 input[type=text], input[type=number], input[type=checkbox], select, textarea {
@@ -2206,7 +2229,9 @@ span.toggler {
   color: #e5deca;
   border: 1px solid #171817;
   width: 25em;
-  height: 1.4em;
+  min-height: 1.4em;
+  height: auto;
+  white-space: wrap;
   margin: 0;
   padding: 0;
   text-align: left; }
@@ -4108,7 +4133,7 @@ th.skill_dot {
           font-family: TextDesc;
           border-radius: 5px; }
           .storyview .storyarticle table.storydetails tr td .desc {
-            column-count: 3;
+            column-count: 2;
             column-width: auto;
             column-gap: 20px;
             column-rule-style: dotted;
@@ -4221,7 +4246,8 @@ th.skill_dot {
       padding: 3px;
       font-size: 1.1em; }
       .storydetails .topic .entry.desc {
-        columns: 200px 3; }
+        columns: 200px 2;
+        border: 1px solid black; }
     .storydetails .topic.hidden {
       display: none; }
     .storydetails .topic.last {

@@ -11,3 +11,4 @@ class ScenaristConfig(AppConfig):
 
     def ready(self):
         import scenarist.signals.quizz
+        import scenarist.signals.story_model

@@ -1,18 +1,18 @@
-'''
+"""
  ╔╦╗╔═╗  ╔═╗┌─┐┬  ┬  ┌─┐┌─┐┌┬┐┌─┐┬─┐
   ║║╠═╝  ║  │ ││  │  ├┤ │   │ │ │├┬┘
  ═╩╝╩    ╚═╝└─┘┴─┘┴─┘└─┘└─┘ ┴ └─┘┴└─
-'''
+"""
 from django.db import models
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
 
 
 class CharacterCusto(models.Model):
-    from collector.models.character import Character
     class Meta:
         verbose_name = "Character Customization"
 
+    from collector.models.character import Character
     character = models.OneToOneField(Character, on_delete=models.CASCADE, primary_key=True)
     value = models.IntegerField(default=0)
     AP = models.IntegerField(default=0)
@@ -33,10 +33,14 @@ class CharacterCusto(models.Model):
     OCC_LVL = models.PositiveIntegerField(default=0)
     OCC_DRK = models.PositiveIntegerField(default=0)
     comment = models.TextField(default="", blank=True, null=True)
+    watch_roots = models.TextField(default="", blank=True, null=True)
+    wp_used = models.PositiveIntegerField(default=0)
 
     def recalculate(self):
         self.AP = 0
         self.OP = 0
+        self.wp_used = 0
+        wp_roots = self.watch_roots.split("_")
         self.AP += (self.PA_STR + self.PA_CON + self.PA_BOD + self.PA_MOV
                     + self.PA_INT + self.PA_WIL + self.PA_TEM + self.PA_PRE
                     + self.PA_REF + self.PA_TEC + self.PA_AGI + self.PA_AWA
@@ -46,16 +50,17 @@ class CharacterCusto(models.Model):
             if s.value == 0:
                 s.delete()
         for s in self.skillcusto_set.all():
-            if s.skill_ref.is_root == False:
+            if not s.skill_ref.is_root:
                 self.OP += s.value
+                if s.skill_ref.is_speciality:
+                    if s.skill_ref.linked_to.reference in wp_roots:
+                        self.wp_used += s.value
+                        #print(s.skill_ref.reference)
         for bc in self.blessingcursecusto_set.all():
             self.OP += bc.blessing_curse_ref.value
         for ba in self.beneficeafflictioncusto_set.all():
             self.OP += ba.benefice_affliction_ref.value
-        # for ritual in self.ritualcusto_set.all():
-        #    self.OP += ritual.ritual_ref.value
         self.value = self.AP * 3 + self.OP
-        # print("RECALCULATE!")
         self.rebuild_summary()
 
     def rebuild_summary(self):
@@ -93,6 +98,12 @@ class CharacterCusto(models.Model):
             self.summary += "<li>Lightside %d</li>" % (self.OCC_LVL)
         if self.OCC_DRK != 0:
             self.summary += "<li>Darkside  %d</li>" % (self.OCC_DRK)
+        self.summary += "</ul>"
+        self.summary += "Wildcards"
+        self.summary += "<ul>"
+        self.summary += f'<li>WP used: {self.wp_used}</li>'
+        self.summary += f'<li>ToD WP: {self.character.WP_tod_pool}</li>'
+        self.summary += f'<li>WP roots: {self.watch_roots}</li>'
         self.summary += "</ul>"
         self.summary += "Skills"
         self.summary += "<ul>"
@@ -151,9 +162,7 @@ class CharacterCusto(models.Model):
         for bc in self.blessingcursecusto_set.all():
             ch.add_bc(bc.blessing_curse_ref)
         for ba in self.beneficeafflictioncusto_set.all():
-            #print("Custoprepush " + ba.description)
-            x = ch.add_ba(ba.benefice_affliction_ref, ba.description)
-            #print("Custopush " + x.description)
+            ch.add_ba(ba.benefice_affliction_ref, ba.description)
         for weapon in self.weaponcusto_set.all():
             ch.add_weapon(weapon.weapon_ref)
         for armor in self.armorcusto_set.all():
@@ -173,7 +182,6 @@ class CharacterCusto(models.Model):
                 found_in_custo = True
                 break
         if found_in_custo:
-            # if found_cu.value+int(value)>0:
             found_cu.value += int(value)
             found_cu.save()
         else:

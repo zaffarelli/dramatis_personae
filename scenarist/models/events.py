@@ -31,9 +31,13 @@ class Event(StoryModel):
     def get_absolute_url(self):
         return reverse('event-detail', kwargs={'pk': self.pk})
 
+    @property
+    def get_full_id(self):
+        return f'{self.act.get_full_id}:{int(self.chapter):02}'
+
 
 class EventAdmin(admin.ModelAdmin):
     ordering = ('act', 'chapter', 'title',)
-    list_display = ('title', 'act', 'chapter', 'date', 'place', 'description')
+    list_display = ('title','full_id','act', 'chapter', 'date', 'place', 'description')
     list_filter = ('act',)
     search_fields = ('description', 'title', 'resolution')

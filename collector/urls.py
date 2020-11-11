@@ -11,7 +11,7 @@ from collector.views.characters import CharacterDetailView, CharacterUpdateView,
     customize_armor, customize_armor_del, customize_shield, customize_shield_del, customize_ritual, customize_ritual_del
 from collector.views.frontend import index, view_by_rid, toggle_public, toggle_spotlight, get_list, add_character, \
     get_storyline, conf_details, recalc_character, heartbeat, show_jumpweb, \
-    show_todo, pdf_show, wa_export_character
+    show_todo, pdf_show, wa_export_character, show_orbital_map
 from collector.views.backend import recalc, export, xls_update, pdf_character, gss_update, pdf_rules, roll_dice
 from collector.views.misc_chart import get_chardar, get_population_statistics, get_keywords
 from django.conf import settings
@@ -41,6 +41,7 @@ urlpatterns = [
     re_path('^ajax/add/character/(?P<slug>[\w-]+)/$', add_character, name='add_character'),
     re_path('^ajax/conf_details/$', conf_details, name='conf_details'),
     re_path('^jumpweb/show$', show_jumpweb, name='show_jumpweb'),
+    re_path('^orbital_map/show$', show_orbital_map, name='show_orbital_map'),
     re_path('^todo/show$', show_todo, name='show_todo'),
     re_path('^ajax/build_pdf_rules/$', pdf_rules, name='pdf_rules'),
     re_path('^api/chardar/(?P<id>\d+)/$', get_chardar, name='get_chardar'),

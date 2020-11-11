@@ -43,9 +43,13 @@ class Act(StoryModel):
         episodes = Event.objects.filter(act=self)
         return episodes
 
+    @property
+    def get_full_id(self):
+        return f'{self.drama.get_full_id}:{int(self.chapter):02}'
+
 
 class ActAdmin(admin.ModelAdmin):
     ordering = ('drama', 'chapter', 'title',)
-    list_display = ('title', 'drama', 'chapter', 'date', 'place', 'description')
+    list_display = ('title','full_id', 'drama', 'chapter', 'date', 'place', 'description')
     list_filter = ('drama',)
     search_fields = ('title', 'description')

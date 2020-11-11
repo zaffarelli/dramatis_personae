@@ -60,6 +60,14 @@ class System(models.Model):
         return self.jumproads.all().count()
 
     @property
+    def routes_list(self):
+        all = []
+        for r in self.jumproads.all():
+            all.append(f'{self.name}_{r.name} ')
+        return ", ".join(all)
+
+
+    @property
     def orbital_map(self):
         all = []
         for o in self.orbitalitem_set.all():
@@ -72,8 +80,8 @@ class OrbitalItem(models.Model):
         ordering = ['system', 'distance']
         verbose_name = "Jumpweb: Orbital Item"
 
-    name = models.CharField(max_length=200)
-    system = models.ForeignKey(System, on_delete=models.CASCADE, blank=True)
+    name = models.CharField(max_length=200, default="", blank=True)
+    system = models.ForeignKey(System, on_delete=models.CASCADE, blank=True, null=True)
     category = models.CharField(max_length=20, choices=ORBITAL_ITEMS, default="Telluric")
     distance = models.FloatField(default=0.0)
     tilt = models.FloatField(default=0.0)
@@ -110,10 +118,9 @@ class OrbitalItemInline(admin.TabularInline):
 
 class SystemAdmin(admin.ModelAdmin):
     ordering = ['name', 'alliance']
-    list_display = (
-    'name', 'alliance', 'discovery', 'sector', 'orbital_map', 'dtj', 'routes', 'group', 'color', 'x', 'y')
+    list_display = ['name', 'alliance', 'discovery', 'sector', 'orbital_map', 'dtj', 'routes', 'routes_list', 'group', 'color', 'x', 'y']
     inlines = [OrbitalItemInline]
-    list_filter = ('alliance', 'sector')
+    list_filter = ['group', 'alliance', 'sector']
 
 
 class OrbitalItemAdmin(admin.ModelAdmin):

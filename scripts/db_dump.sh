@@ -13,6 +13,7 @@ python3 manage.py dumpdata collector.ShieldRef --format xml --output backup/refe
 python3 manage.py dumpdata collector.TalentRef --format xml --output backup/reference/talent_ref.xml
 python3 manage.py dumpdata collector.Specie --format xml --output backup/reference/specie.xml
 python3 manage.py dumpdata collector.RitualRef --format xml --output backup/reference/ritualref.xml
+python3 manage.py dumpdata collector.Gear --format xml --output backup/reference/gear.xml
 
 echo -e "\e[1;35mDumping custom data...\e[0;m"
 echo -e "\e[0;35m- Tours of Duty Reference...\e[0;m"
@@ -23,6 +24,7 @@ python3 manage.py dumpdata collector.BeneficeAfflictionModificator --format xml 
 python3 manage.py dumpdata collector.SkillModificator --format xml --output backup/reference/skill_modificator.xml
 python3 manage.py dumpdata collector.TourOfDutyRef --format xml --output backup/reference/tour_of_duty_ref.xml
 
+echo -e "\e[0;35m- Starship Reference...\e[0;m"
 python3 manage.py dumpdata collector.ShipSystem --format xml --output backup/custom/ship_system.xml
 python3 manage.py dumpdata collector.ShipSection --format xml --output backup/custom/ship_section.xml
 python3 manage.py dumpdata collector.ShipRef --format xml --output backup/custom/ship_ref.xml
@@ -48,6 +50,7 @@ python3 manage.py dumpdata collector.SkillCusto --format xml --output backup/cus
 
 echo -e "\e[0;35m- Collector Main Data...\e[0;m"
 python3 manage.py dumpdata collector.Character --format xml --output backup/custom/character.xml
+python3 manage.py dumpdata collector.Bloke --format xml --output backup/custom/bloke.xml
 python3 manage.py dumpdata collector.Loot --format xml --output backup/custom/loot.xml
 python3 manage.py dumpdata collector.System --format xml --output backup/custom/system.xml
 python3 manage.py dumpdata collector.OrbitalItem --format xml --output backup/custom/orbital_item.xml
@@ -59,6 +62,9 @@ python3 manage.py dumpdata collector.Cyberware --format xml --output backup/cust
 
 
 echo -e "\e[0;35m- Scenarist Main Data...\e[0;m"
+python3 manage.py dumpdata scenarist.QuizzQuestion --format xml --output backup/custom/quizzquestion.xml
+python3 manage.py dumpdata scenarist.QuizzAnswer --format xml --output backup/custom/quizzanswer.xml
+python3 manage.py dumpdata scenarist.Quizz --format xml --output backup/custom/quizz.xml
 python3 manage.py dumpdata scenarist.Epic --format xml --output backup/custom/epic.xml
 python3 manage.py dumpdata scenarist.Drama --format xml --output backup/custom/drama.xml
 python3 manage.py dumpdata scenarist.Act --format xml --output backup/custom/act.xml

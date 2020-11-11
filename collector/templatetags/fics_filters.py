@@ -336,3 +336,17 @@ def wound(value):
     if res > 0:
         res = "<span class='wounded'>%d</span>" % (value)
     return res
+
+
+@register.filter(name='parse_stories')
+def parse_stories(value):
+    txt = "<ul><li>"
+    arr = value.split('#')
+    lst = list(filter(None, arr))
+    new_lst=[]
+    for item in lst:
+        x = item.split('_')
+        new_lst.append(f'{x[0]} <em>{x[1]}</em>')
+    txt += "</li><li>".join(new_lst)
+    txt += "</li></ul>"
+    return txt

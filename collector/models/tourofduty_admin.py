@@ -74,8 +74,8 @@ class TourOfDutyRefAdmin(admin.ModelAdmin):
     from collector.models.benefice_affliction import BeneficeAfflictionModificatorInline
     from collector.models.blessing_curse import BlessingCurseModificatorInline
     ordering = ['category', 'topic', 'reference', 'caste', 'value']
-    list_display = (
-    'reference', 'category', 'caste', 'valid', 'topic', 'is_custom', 'source', 'AP', 'OP', 'value', 'description')
+    list_display = ['reference', 'category', 'caste', 'valid', 'topic', 'is_custom', 'source', 'AP', 'OP', 'value',
+                    'description']
     exclude = ['value']
     actions = [refix, duplicate_event, set_upbringing, set_early_career, set_racial, set_apprenticeship, set_ukari,
                set_obuni, set_vorox, set_urthish]
@@ -84,5 +84,5 @@ class TourOfDutyRefAdmin(admin.ModelAdmin):
         BeneficeAfflictionModificatorInline,
         BlessingCurseModificatorInline
     ]
-    list_filter = ('category', 'valid', 'value', )
-    search_fields = ('reference',)
+    list_filter = ['category', 'valid', 'caste', 'topic']
+    search_fields = ['reference']

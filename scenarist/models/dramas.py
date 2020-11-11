@@ -61,9 +61,17 @@ class Drama(StoryModel):
         episodes = Act.objects.filter(drama=self)
         return episodes
 
+    @property
+    def is_visible(self):
+        return self.visible
+
+    @property
+    def get_full_id(self):
+        return f'{self.epic.get_full_id}:{int(self.chapter):02}'
+
 
 class DramaAdmin(admin.ModelAdmin):
     ordering = ('epic', 'chapter', 'date', 'title',)
-    list_display = ('title', 'epic', 'chapter', 'date', 'place', 'description')
+    list_display = ('title', 'full_id', 'epic', 'chapter', 'date', 'place', 'is_visible', 'description')
     list_filter = ('epic',)
     search_fields = ('title', 'description')

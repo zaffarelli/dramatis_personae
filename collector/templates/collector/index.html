@@ -53,7 +53,8 @@
                     <li><span class="menu-item" id="menu_conf_details"><i class="action_icon fas fa-globe"></i> Current Epic</span></li>
                     <li><span class="menu-item" id="menu_build_config_pdf"><i class="action_icon fas fa-file-pdf"></i> Build Epic PDF</span></li>
                     {% endif %}
-                    <li><span class="menu-item" id="menu_jumpweb"><i class="action_icon fas fa-draw-polygon"></i> Show Jumpgate</span></li>
+<!--                    <li><span class="menu-item" id="menu_jumpweb"><i class="action_icon fas fa-draw-polygon"></i> Show Jumpgate</span></li>-->
+                    <li><a class="menu-item" target="spacecharts" href="{% url 'show_jumpweb' %}"><i class="action_icon fas fa-draw-polygon"></i> Jumpweb</a></li>
                 </ul>
             </li>
             {% if user.profile.is_gamemaster %}
