@@ -40,8 +40,8 @@ urlpatterns = [
 
     re_path('^ajax/add/character/(?P<slug>[\w-]+)/$', add_character, name='add_character'),
     re_path('^ajax/conf_details/$', conf_details, name='conf_details'),
-    re_path('^jumpweb/show$', show_jumpweb, name='show_jumpweb'),
-    re_path('^orbital_map/show$', show_orbital_map, name='show_orbital_map'),
+
+
     re_path('^todo/show$', show_todo, name='show_todo'),
     re_path('^ajax/build_pdf_rules/$', pdf_rules, name='pdf_rules'),
     re_path('^api/chardar/(?P<id>\d+)/$', get_chardar, name='get_chardar'),
@@ -79,4 +79,7 @@ urlpatterns = [
     re_path('^ajax/character/del/ritual/(?P<avatar>[\d]+)/(?P<item>\d+)/$', customize_ritual_del, name='customize_ritual_del'),
     re_path('^ajax/login/$', login, name="login"),
     re_path('^ajax/logout/$', LogoutView.as_view(), name="logout"),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    re_path('^jumpweb/show$', show_jumpweb, name='show_jumpweb'),
+    re_path('^orbital_map/show/(?P<id>[\d]+)/$', show_orbital_map, name='show_orbital_map'),
+
+              ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

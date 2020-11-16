@@ -16,7 +16,7 @@ CELERY_BEAT_SCHEDULE = {
     },
     'fix_schedule': {
         'task': 'collector.tasks.fix_check',
-        'schedule': 10,
+        'schedule': 5,
         'args': (),
     },
     'todo_schedule': {

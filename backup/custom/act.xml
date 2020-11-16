@@ -231,7 +231,29 @@ Prophetess ¤zarosinia_al_shazaar¤
 
 
 
----</field><field name="gamemaster" type="CharField">zaffarelli@gmail.com</field><field name="visible" type="BooleanField">True</field><field name="to_PDF" type="BooleanField">True</field><field name="full_id" type="CharField">ANTU:01:04</field><field name="drama" rel="ManyToOneRel" to="scenarist.drama">10</field><field name="resolution" type="TextField"></field></object><object model="scenarist.act" pk="27"><field name="title" type="CharField">Verona Space</field><field name="chapter" type="CharField">1</field><field name="date" type="CharField"></field><field name="place" type="CharField"></field><field name="description" type="TextField"></field><field name="gamemaster" type="CharField">zaffarelli@gmail.com</field><field name="visible" type="BooleanField">True</field><field name="to_PDF" type="BooleanField">True</field><field name="full_id" type="CharField">ANTU:03:01</field><field name="drama" rel="ManyToOneRel" to="scenarist.drama">11</field><field name="resolution" type="TextField"></field></object><object model="scenarist.act" pk="28"><field name="title" type="CharField">Emptiness &amp; Loneliness</field><field name="chapter" type="CharField">4</field><field name="date" type="CharField"></field><field name="place" type="CharField"></field><field name="description" type="TextField">µWorld without WaterµThis episode is the discovery of Verona in its current state, with the dysfunctioning terraforming engine.
+---</field><field name="gamemaster" type="CharField">zaffarelli@gmail.com</field><field name="visible" type="BooleanField">True</field><field name="to_PDF" type="BooleanField">True</field><field name="full_id" type="CharField">ANTU:01:04</field><field name="drama" rel="ManyToOneRel" to="scenarist.drama">10</field><field name="resolution" type="TextField"></field></object><object model="scenarist.act" pk="27"><field name="title" type="CharField">Remini Space Station</field><field name="chapter" type="CharField">1</field><field name="date" type="CharField"></field><field name="place" type="CharField"></field><field name="description" type="TextField">Meeting with the leaders of the Resistance Forces:
+
+
+And the expedition:
+- ¤clara_masseri¤
+- ¤fenton_hardin¤ 
+- ¤arno_sforza¤
+- ¤gail_hardin¤
+- ¤francesco_masseri¤
+- ¤annabella_masseri¤
+- ¤lucia_masseri¤
+- ¤alina_lecci¤
+
+Others non Masseri
+- ¤jacob_tramel¤
+- ¤syark_sir_sic¤
+- ¤ravi_lobahura¤</field><field name="gamemaster" type="CharField">zaffarelli@gmail.com</field><field name="visible" type="BooleanField">True</field><field name="to_PDF" type="BooleanField">True</field><field name="full_id" type="CharField">ANTU:03:01</field><field name="drama" rel="ManyToOneRel" to="scenarist.drama">11</field><field name="resolution" type="TextField">Rimini station: crew 56,  marines 24, marauders 9
+
+§Crew§
+
+§Marines§
+
+§Marauders§</field></object><object model="scenarist.act" pk="28"><field name="title" type="CharField">Emptiness &amp; Loneliness</field><field name="chapter" type="CharField">4</field><field name="date" type="CharField"></field><field name="place" type="CharField"></field><field name="description" type="TextField">µWorld without WaterµThis episode is the discovery of Verona in its current state, with the dysfunctioning terraforming engine.
 µJoin the Resistanceµ
 µThe Kurgan Armyµ
 

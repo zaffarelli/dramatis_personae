@@ -205,7 +205,6 @@ class Character(Combattant):
         found_custo = CharacterCusto.objects.filter(character=self).first()
         if found_custo is None:
             self.charactercusto = CharacterCusto.objects.create(character=self)
-        logger.info('Purging...')
         self.resetPA()
         self.purge_skills()
         self.purge_bc()
@@ -229,7 +228,6 @@ class Character(Combattant):
             'TO': 0,
             'WB': 0,
         }
-        logger.info('Applying ToDs...')
         all_tod_wp_roots = []
         for tod in self.tourofduty_set.all():
             AP, OP, WP, tod_wp_roots = tod.push(self)
@@ -259,7 +257,6 @@ class Character(Combattant):
             self.charactercusto.comment = self.full_name
             self.charactercusto.push(self)
             self.charactercusto.save()
-        logger.info('Applying Customization...')
         pa_total = self.sumPA
         po_total = 0
         for s in self.skill_set.all():
@@ -271,7 +268,6 @@ class Character(Combattant):
         bc_total = 0
         for bc in self.blessingcurse_set.all():
             bc_total += bc.blessing_curse_ref.value
-        logger.info('Calculating points...')
         bl.append("")
         # bl.append("Tour Summary:")
         # bl.append("- APx3+OP+BA+BC... " + str(pa_total * 3 + po_total + ba_total + bc_total))
@@ -289,6 +285,8 @@ class Character(Combattant):
         self.balanced = (self.life_path_total == self.OP) and (self.OP > 0)
         self.build_log = "\n".join(bl)
         if self.player != '':
+            self.balanced = True
+        if self.historical_figure:
             self.balanced = True
         if self.balanced:
             logger.info(f'Current option Points: {self.OP}')
@@ -368,28 +366,22 @@ class Character(Combattant):
         # self.is_exportable = True #self.check_exportable()
         self.update_challenge()
         self.update_stories_count()
-        logger.info(f'Challenge and Stories count')
         if self.use_history_creation:
             self.check_todo_list()
         self.need_fix = False
-        logger.warning(f'    => Done fixing ...: {self.full_name} NeedFIX:{self.need_fix}')
+        logger.info(f'    => Done fixing ...: {self.full_name} NeedFIX:{self.need_fix}')
 
     def check_todo_list(self):
         """ Check for invalid tours of duty for the character
         """
         self.todo_list = ""
-        logger.info('Checking todo list')
         tsk = []
         if self.use_history_creation:
-            logger.info('Hello')
             for tod in self.tourofduty_set.all():
                 if not tod.tour_of_duty_ref.valid:
-                    logger.info(f'{tod.tour_of_duty_ref.reference}')
-                    tsk = f'{tod.tour_of_duty_ref.reference} is not a valid Tour of Duty.'
-            logger.info('Bye')
-        self.todo_list = "\n".join(tsk)
-        if self.todo_list:
-            logger.warning(self.todo_list)
+                    tsk = f'--> {tod.tour_of_duty_ref.reference} is not a valid Tour of Duty.'
+                    logger.error(tsk)
+        # self.todo_list = "\n".join(tsk)
 
     def update_challenge(self):
         res = ''
@@ -431,7 +423,6 @@ class Character(Combattant):
         custo_ref_items = []
         for item in custo_items:
             custo_ref_items.append(getattr(item, ref_type))
-            logger.info(item)
         all_items = eval(ref_class).objects.all()
         for item in all_items:
             if item in custo_ref_items:
@@ -723,14 +714,12 @@ class Character(Combattant):
             try:
                 context = dict(c=self, filename=f'{self.rid}', now=datetime.now(tz=get_current_timezone()))
                 write_pdf('collector/character_roster.html', context)
-                logger.warning(f'    => PDF created ...: {self.rid}')
+                logger.info(f'    => PDF created ...: {self.rid}')
                 proceed = True
                 self.need_pdf = False
                 self.save()
             except:
                 logger.error(f'    => PDF creation error !!! {self.rid}')
-        else:
-            logger.warning(f'    => PDF export not required for {self.rid}.')
         return proceed
 
     def __str__(self):
@@ -784,7 +773,6 @@ class Character(Combattant):
         self.stories_count += self.count_cast(acts)
         self.stories_count += self.count_cast(dramas)
         self.stories_count += self.count_cast(epics)
-        logger.info('    => Updated stories count...: %d' % (self.stories_count))
         return self.stories_count
 
 

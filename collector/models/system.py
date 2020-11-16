@@ -27,6 +27,8 @@ ORBITAL_ITEMS = (
     ("3", "Asteroids Belt"),
     ("4", "Space Station"),
     ("5", "Jumpgate"),
+    ("6", "Allied Forces"),
+    ("7", "Hostiles"),
 )
 
 
@@ -51,6 +53,8 @@ class System(models.Model):
     # discovered = models.BooleanField(default=False)
     discovery = models.IntegerField(default=6000)
     symbol = models.CharField(max_length=1, default="9")
+    zoom_val = models.IntegerField(null=True, blank=True, default=0)
+    zoom_factor = models.IntegerField(null=True, blank=True, default=0)
 
     def __str__(self):
         return "%s" % (self.name)
@@ -83,28 +87,48 @@ class OrbitalItem(models.Model):
     name = models.CharField(max_length=200, default="", blank=True)
     system = models.ForeignKey(System, on_delete=models.CASCADE, blank=True, null=True)
     category = models.CharField(max_length=20, choices=ORBITAL_ITEMS, default="Telluric")
+    color = models.CharField(max_length=20, default="#FFF")
+    speed = models.FloatField(default=1.0)
+    azimut = models.FloatField(default=0)
     distance = models.FloatField(default=0.0)
     tilt = models.FloatField(default=0.0)
     size = models.PositiveIntegerField(default=10)
     qualifier = models.CharField(max_length=64, default='', blank=True, null=True)
     moon = models.TextField(max_length=1024, blank=True, null=True, default='')
     description = models.TextField(max_length=1024, blank=True, null=True, default='')
+    rings = models.TextField(max_length=1024, blank=True, null=True, default='')
 
     def __str__(self):
         return "%s (%s)" % (self.name, self.system.name)
 
+    @property
+    def nameid(self):
+        return f'Item > {self.name}'
+
     def fix(self):
+        logger.info(f'Object {self.name} saved.')
+
+    def prepare(self):
         from django.core.exceptions import ObjectDoesNotExist
         """ After saving, update relevant System DTJ """
         try:
             relevant_system = System.objects.get(name=self.system)
             main_world = OrbitalItem.objects.get(name=self.system)
-            jumpgate = OrbitalItem.objects.get(system=self.system, category="5")
-            relevant_system.dtj = jumpgate.distance - main_world.distance
-            relevant_system.save()
+            jumpgate = OrbitalItem.objects.filter(system=self.system, category="5").first()
+            if self.azimut == 0:
+                import random
+                self.azimut = random.randint(0, 999) / 1000
+            if jumpgate and main_world:
+                relevant_system.dtj = jumpgate.distance - main_world.distance
+                relevant_system.save()
         except ObjectDoesNotExist:
             logger.warning("[%s] Unable to fix system due to missing system and/or orbital items." % (self.system))
 
+
+
+@receiver(pre_save, sender=OrbitalItem, dispatch_uid='prepare_orbital_data')
+def prepare_orbital_data(sender, instance, **kwargs):
+    instance.prepare()
 
 @receiver(post_save, sender=OrbitalItem, dispatch_uid='propagate_orbital_data')
 def propagate_orbital_data(sender, instance, **kwargs):
@@ -125,6 +149,6 @@ class SystemAdmin(admin.ModelAdmin):
 
 class OrbitalItemAdmin(admin.ModelAdmin):
     ordering = ['system', 'distance', 'name']
-    list_display = ('name', 'category', 'system', 'distance', 'tilt', 'size', 'qualifier')
-    list_filter = ('system',)
-    search_fields = ('name', 'qualifier', 'system')
+    list_display = ['nameid', 'name', 'category', 'system', 'distance', 'speed', 'tilt', 'size', 'qualifier']
+    list_filter = ['category','system','distance','tilt']
+    search_fields = ['name', 'qualifier', 'system']

@@ -110,4 +110,16 @@ Twist:
 Complication:
 Side Quest:
 introduction
-Climax</field></object></django-objects>
+Climax</field></object><object model="scenarist.drama" pk="14"><field name="title" type="CharField">The Wolf of Ferenghis Falls</field><field name="chapter" type="CharField">1</field><field name="date" type="CharField">5018-09-27</field><field name="place" type="CharField">Rampart / Carmoren</field><field name="description" type="TextField">§Synopsis§
+A team is supposed to go to Ferenghis to catch a noble that has been required to join his family on a starship.
+
+§Team§
+- ¤flink_redmaar¤
+- ¤sebastiano_orfinde¤
+- ¤tik_reynart¤</field><field name="gamemaster" type="CharField">zaffarelli@gmail.com</field><field name="visible" type="BooleanField">True</field><field name="to_PDF" type="BooleanField">True</field><field name="full_id" type="CharField">WETA:01</field><field name="epic" rel="ManyToOneRel" to="scenarist.epic">10</field><field name="resolution" type="TextField">The Wolf of Ferenghis Falls is a legend about a ghost or supernatural creature dwelling near Ferenghis Falls, a place close to the City of Carmoren on Rampart. The wolf would be looking for his mate.
+£another£
+test
+µalwaysµ
+a test
+§The Event§
+¤antonietta_lefu_drougeglace¤ is the noble to be served. Her uncle ¤cosmo_lefu_drougeglace¤ has asked her to join the forces of ¤yves_digneden¤ to fight against the Caliphate.</field></object><object model="scenarist.drama" pk="15"><field name="title" type="CharField">Braminski</field><field name="chapter" type="CharField">2</field><field name="date" type="CharField"></field><field name="place" type="CharField"></field><field name="description" type="TextField"></field><field name="gamemaster" type="CharField">zaffarelli@gmail.com</field><field name="visible" type="BooleanField">True</field><field name="to_PDF" type="BooleanField">True</field><field name="full_id" type="CharField">WETA:02</field><field name="epic" rel="ManyToOneRel" to="scenarist.epic">10</field><field name="resolution" type="TextField"></field></object><object model="scenarist.drama" pk="16"><field name="title" type="CharField">Alone</field><field name="chapter" type="CharField">3</field><field name="date" type="CharField"></field><field name="place" type="CharField"></field><field name="description" type="TextField"></field><field name="gamemaster" type="CharField">zaffarelli@gmail.com</field><field name="visible" type="BooleanField">True</field><field name="to_PDF" type="BooleanField">True</field><field name="full_id" type="CharField">WETA:03</field><field name="epic" rel="ManyToOneRel" to="scenarist.epic">10</field><field name="resolution" type="TextField"></field></object></django-objects>

@@ -5,9 +5,12 @@
         <div class="entry">{{object.epic.title}}&nbsp;<i class="fa fa-arrow-right"></i>&nbsp;{{object.title}}</div>
     </div>
 
+
+    {% if drama.showquizz %}
             {% if drama.quizz_set %}
                 {{drama.quizz_set.first.verbose | safe }}
             {% endif %}
+    {% endif %}
 
 
     <div class="topic {%if object.anchor %}{%else%}hidden{%endif%}">

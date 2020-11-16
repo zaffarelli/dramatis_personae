@@ -32,49 +32,51 @@
 
         <ul class="level-1">
             {% if user.is_authenticated %}
-            <li><span class="pull-down">Avatars</span>
+            <li><span class="pull-down">Collector</span>
                 <ul class="level-2 Avatars">
                     {% if user.profile.is_gamemaster  %}
                     <li><span class="menu-item" id="menu_search"><i class="action_icon fas fa-search"></i> Keyword Search</span></li>
                     <li><span class="menu-item" id="menu_seek"><i class="action_icon fas fa-address-card"></i> Seek RID</span> </li>
                     <li><span class="menu-item" id="menu_add_character"><i class="action_icon fas fa-user-plus"></i> Add character</span></li>
                     <li><span class="menu-item" id="menu_recalc"><i class="action_icon fas fa-users-cog"></i> Recalculate All</span></li>
+                    <li><span class="menu-item" id='menu_todo' style='width:auto;' title='todo'><i class="action_icon fas fa-tools"></i> Show Todo</span></li>
                     {% else %}
                     <li><span class="menu-item" id="menu_buddies"><i class="action_icon fas fa-users"></i> See buddies</span></li>
                     {% endif %}
                 </ul>
             </li>
-
-            <li><span class="pull-down">Epic</span>
+            {% if user.profile.is_gamemaster %}
+            <li><span class="pull-down">Scenarist</span>
                 <ul class="level-2 Epic">
-                    {% if user.profile.is_gamemaster %}
                     <li><span class="menu-item" id="menu_popstats"><i class="fas fa-chart-pie"></i> Statistics</span></li>
                     <li><span class="menu-item" id="menu_gss_update"><i class="fas fa-table"></i> Google spreadsheet</span></li>
                     <li><span class="menu-item" id="menu_conf_details"><i class="action_icon fas fa-globe"></i> Current Epic</span></li>
                     <li><span class="menu-item" id="menu_build_config_pdf"><i class="action_icon fas fa-file-pdf"></i> Build Epic PDF</span></li>
-                    {% endif %}
-<!--                    <li><span class="menu-item" id="menu_jumpweb"><i class="action_icon fas fa-draw-polygon"></i> Show Jumpgate</span></li>-->
-                    <li><a class="menu-item" target="spacecharts" href="{% url 'show_jumpweb' %}"><i class="action_icon fas fa-draw-polygon"></i> Jumpweb</a></li>
+
                 </ul>
             </li>
+            {% endif %}
             {% if user.profile.is_gamemaster %}
-            <li><span class="pull-down">Rules</span>
+            <li><span class="pull-down">Optimizer</span>
                 <ul class="level-2 Rules">
                     <li><span class="menu-item" id="menu_build_pdf_rules"><i class="action_icon fas fa-book"></i> Build Rules PDF</span></li>
                     <li><span class="menu-item" id="menu_xls_export"><i class="fas fa-download"></i> Export to Speadsheet</span></li>
                     <li><span class="menu-item" id="menu_xls_update"><i class="fas fa-upload"></i> Import to Spreadsheet</span></li>
-                </ul>
-            </li>
-            <li><span class="pull-down">Generic</span>
-                <ul class="level-2 Generic">
                     <li><span class="menu-item" id='run_duel' style='width:auto;' title='RUN DUEL'><i class="action_icon fas fa-chess-pawn"></i> Run Duel</span></li>
                     <li><span class="menu-item" id='run_100_duels' style='width:auto;' title='RUN x100 DUELS'><i class="action_icon fas fa-chess-knight"></i> Run 100 duels</span></li>
                     <li><span class="menu-item" id='run_fencing_tournament' style='width:auto;' title='RUN FENCING TOURNAMENT'><i class="action_icon fas fa-chess-rook"></i> Run Fencing Tournament</span></li>
-                    <li><span class="menu-item" id='todo' style='width:auto;' title='todo'><i class="action_icon fas fa-tools"></i> Show Todo</span></li>
                 </ul>
             </li>
             {% endif %}
+            <li><span class="pull-down">Cartograph</span>
+                <ul class="level-2 Cartograph">
+                    <li><a class="menu-item" target="spacecharts" href="{% url 'show_jumpweb' %}"><i class="action_icon fas fa-draw-polygon"></i> Jumpweb</a></li>
+                </ul>
+            </li>
             {% endif %}
+
+
+
             {% if user.is_authenticated %}
             <li><span class="pull-down">{{ user.username | title }} {% if user.profile.is_gamemaster %}<i class="action_icon fas fa-crown"></i>{% endif %}</span>
                 <ul class="level-2 user" id="login_block">
@@ -94,7 +96,6 @@
                     <li><span class="menu-item" id='menu_login'><i class="action_icon fas fa-key"></i> Login</span></li>
                 </ul>
             </li>
-
             {% endif %}
             <li>{{hostname}}</li>
             <li>Release {{ dp_version }}</li>

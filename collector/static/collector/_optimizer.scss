@@ -254,7 +254,7 @@ table.combat_narrative {
     right:10px;
     width: auto;
     height: auto;
-
+    background: transparent url('darkback.jpg'); // url("greynoise.jpg")
     border: 1px solid $fics_dark;
     overflow: hidden;
 }

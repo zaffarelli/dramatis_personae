@@ -327,7 +327,47 @@ title="jumpweb_' + me.mode + '_' + now + '.svg"> \
             .style("stroke-width", "0.25pt")
             .style("text-anchor", "middle")
             .text(function(d) {
-                return d.jump;
+                return "J "+d.jump;
+            });
+        node.append("text")
+            .attr("class", function(d) {
+                return "nodetext_" + d.id;
+            })
+            .attr("dx", -me.mark*8)
+            .attr("dy", me.mark)
+            .style("font-family", "Lato")
+            .style("font-size", "9pt")
+            .style("font-weight", "bold")
+            .style("fill", "#DDD")
+            .style("stroke", "#111")
+            .style("stroke-width", "0.25pt")
+            .style("text-anchor", "middle")
+            .text(function(d) {
+                let res = ''
+                if (d.dtj != 69){
+                    res = "D "+d.dtj;
+                }
+                return res;
+            });
+        node.append("text")
+            .attr("class", function(d) {
+                return "nodetext_" + d.id;
+            })
+            .attr("dx", -me.mark*8)
+            .attr("dy", 4*me.mark)
+            .style("font-family", "Lato")
+            .style("font-size", "9pt")
+            .style("font-weight", "bold")
+            .style("fill", "#DDD")
+            .style("stroke", "#111")
+            .style("stroke-width", "0.25pt")
+            .style("text-anchor", "middle")
+            .text(function(d) {
+                let res = ''
+                if (d.orbital_map == 1){
+                    res = "ORBITAL";
+                }
+                return res;
             });
         return node;
     }
@@ -552,6 +592,7 @@ title="jumpweb_' + me.mode + '_' + now + '.svg"> \
             .on("click", function(d) {
                 if (d.orbital_map) {
                     console.log("Launch orbital map for " + d.name);
+                    window.location = "/orbital_map/show/"+d.id+"/";
                 }
             })
 
@@ -569,7 +610,7 @@ title="jumpweb_' + me.mode + '_' + now + '.svg"> \
                     .delay(100)
                     .duration(250)
                     .ease(d3.easeSin)
-                    .style("fill","#A8A");
+                    .style("fill","#B8B");
                 d3.selectAll(".g" + d.group+".ray")
                     .transition()
                     .delay(250)
@@ -625,22 +666,16 @@ title="jumpweb_' + me.mode + '_' + now + '.svg"> \
             .style("stroke-width", "1pt")
             .style("fill", "none")
             .style("stroke-width", "2pt")
-            .style("stroke-dasharray", "5 3 8 19 4")
+            .style("stroke-dasharray", function(d) {
+                return (d.orbital_map == 1 ? "1" : "1 5");
+            })
             .style("stroke", function(d) {
-                return (d.orbital_map == 1 ? "#F8F" : "#CCC");
+                return (d.orbital_map == 1 ? "#FFF" : "#888");
             });
     }
 
     perform() {
         let me = this;
-
-
-
-//        me.svg.attr("transform",function(d){
-//            let x = ((me.ox * me.step_x)-me.svg.attr("width"))/2;
-//            let y = ((me.oy * me.step_y)-me.svg.attr("height"))/2;
-//            return "translate("+x+","+y+")"
-//            });
         me.draw_layout()
         me.draw_known_worlds()
     }

@@ -56,7 +56,25 @@ def get_list(request, id, slug='none'):
         context = {'character_items': character_items}
         template = get_template('collector/list.html')
         html = template.render(context,request)
+        messages.info(request, f'{paginator.count} characters found.')
+        return HttpResponse(html, content_type='text/html')
+    else:
+        return Http404
 
+
+def show_todo(request):
+    """ variant of get_list. Might show the toto characters, actually showing the unbalanced ones
+    """
+    conf = get_current_config()
+    if request.is_ajax:
+        character_items = Character.objects.filter(balanced=False).order_by('full_name')
+        paginator = Paginator(character_items, MAX_CHAR)
+        page = id
+        character_items = paginator.get_page(page)
+        context = {'character_items': character_items}
+        template = get_template('collector/list.html')
+        html = template.render(context, request)
+        messages.info(request, f'{paginator.count} characters found.')
         return HttpResponse(html, content_type='text/html')
     else:
         return Http404
@@ -151,23 +169,6 @@ def view_by_rid(request, slug=None):
     return HttpResponse(status=204)
 
 
-def show_todo(request):
-    """ variant of get_list. Might show the toto characters, actually showing the unbalanced ones
-    """
-    conf = get_current_config()
-    if request.is_ajax:
-        character_items = Character.objects.filter(balanced=False).order_by('full_name')
-        paginator = Paginator(character_items, MAX_CHAR)
-        page = id
-        character_items = paginator.get_page(page)
-        context = {'character_items': character_items}
-        template = get_template('collector/list.html')
-        html = template.render(context)
-        return HttpResponse(html, content_type='text/html')
-    else:
-        return Http404
-
-
 def add_character(request, slug=None):
     """ Add a new character to the universe
         The slug is supposed to be its real fullname.
@@ -228,7 +229,6 @@ def toggle_spotlight(request, id=None):
 
 def show_jumpweb(request):
     """ Display the full jumpweb.
-        Todo: adapt this to the user actually logged.
     """
     if request.is_ajax:
         from collector.models.system import System
@@ -237,7 +237,7 @@ def show_jumpweb(request):
         conf = get_current_config()
         context = {}
         context['data'] = {}
-        context['data']['mj'] = 0 if request.user.profile.is_gamemaster else 0
+        context['data']['mj'] = 1 if request.user.profile.is_gamemaster else 0
         context['data']['new_routes'] = "|".join(NEW_ROUTES)
         context['data']['new_systems'] = "|".join(NEW_SYSTEMS)
         context['data']['nodes'] = []
@@ -278,57 +278,31 @@ def show_jumpweb(request):
         return Http404
 
 
-def show_orbital_map(request):
+def show_orbital_map(request, id):
     """ Display the full jumpweb.
         Todo: adapt this to the user actually logged.
     """
     if request.is_ajax:
-        from collector.models.system import System
-        from collector.utils.fics_reference import NEW_ROUTES
-        conf = get_current_config()
-        context = {}
-        context['data'] = {}
-        context['data']['mj'] = 0#1 if request.user.profile.is_gamemaster else 0
+        from collector.models.system import System, OrbitalItem
+        system = get_object_or_404(System, pk=id)
+        context = {'data': {}}
+        context['data']['mj'] = 1 if request.user.profile.is_gamemaster else 0
+        context['data']['title'] = f'{system.name}'
+        context['data']['alliance'] = f'{system.alliance}'
+        context['data']['symbol'] = f'{system.symbol}'
+        context['data']['planets'] = []
 
-        context['data']['new_routes'] = ",".join(NEW_ROUTES)
-        context['data']['new_systems'] = ",".join(NEW_SYSTEMS)
-        context['data']['nodes'] = []
-        context['data']['links'] = []
-        for s in System.objects.all():
-            system = {}
-            system['id'] = s.id
-            system['name'] = s.name
-            system['alliance'] = s.alliance
-            system['sector'] = s.sector
-            # system['jumproads'] = s.jumproads
-            system['x'] = s.x
-            system['y'] = s.y
-            system['jump'] = s.jump
-            system['group'] = s.group
-            system['color'] = s.color
-            system['orbital_map'] = 1 if s.orbital_map != '' else 0
-            system['discovery'] = s.discovery
-            system['dtj'] = s.dtj
-            system['garrison'] = s.garrison
-            system['tech'] = s.tech
-            system['symbol'] = s.symbol
-            system['population'] = s.population
-            context['data']['nodes'].append(system)
-            for j in s.jumproads.all():
-                lnk = {}
-                if j.id > s.id:
-                    lnk['source'] = s.id
-                    lnk['target'] = j.id
-                else:
-                    lnk['source'] = j.id
-                    lnk['target'] = s.id
-                context['data']['links'].append(lnk)
-        template = get_template('collector/jumpweb.html')
+        context['data']['zoom_val'] = system.zoom_val if system.zoom_val else 0
+        context['data']['zoom_factor'] = system.zoom_factor if system.zoom_factor else 0
+        for oi in system.orbitalitem_set.all():
+            orbital_item = {'name': oi.name, 'AU': oi.distance, 'tilt': oi.tilt, 'speed': oi.speed, 'tone': oi.color,
+                            'type': oi.get_category_display(), 'azimut': oi.azimut, 'size': oi.size, 'moon': oi.moon, 'description':oi.description, 'rings': oi.rings}
+            context['data']['planets'].append(orbital_item)
+        template = get_template('collector/orbital_map.html')
         html = template.render(context)
         return HttpResponse(html, content_type='text/html')
     else:
         return Http404
-
 
 
 def conf_details(request):

@@ -41,7 +41,7 @@ def fix_check():
     all = Character.objects.filter(need_fix=True).order_by('-pub_date')
     if len(all):
         c = all.first()
-        answer = f'Task: Fixing avatar {c.rid}'
+        answer = f'Task: Fixing avatar {c.rid}. {len(all)} remaining.'
         c.fix()
         c.save()
     logger.warning(answer)

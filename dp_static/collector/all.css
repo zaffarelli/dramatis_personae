@@ -1504,6 +1504,7 @@ table.combat_narrative {
   right: 10px;
   width: auto;
   height: auto;
+  background: transparent url("darkback.jpg");
   border: 1px solid #171817;
   overflow: hidden; }
 

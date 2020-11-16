@@ -5,9 +5,11 @@
         <div class="subject">Act</div>
         <div class="entry">{{object.drama.title}}&nbsp;<i class="fa fa-arrow-right"></i>&nbsp;{{object.title}}</div>
     </div>
-   {% if act.quizz_set %}
-        {{act.quizz_set.first.verbose | safe }}
-   {% endif %}
+    {% if act.showquizz %}
+        {% if act.quizz_set %}
+            {{act.quizz_set.first.verbose | safe }}
+        {% endif %}
+    {% endif %}
 
     <div class="topic {%if object.anchor %}{%else%}hidden{%endif%}">
         <div class="subject">Anchor</div>

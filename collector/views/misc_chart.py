@@ -20,8 +20,8 @@ def get_population_statistics(request, *args, **kwargs):
     conf = get_current_config()
     da = []
     # List of balanced / unbalanced characters
-    ch = conf.get_chart(field='full_name', filter='entrance__isnull', pattern=True, bar_property='full_name', type='doughnut', legend_display=False)
-    da.append(json.dumps(ch['data']))
+    # ch = conf.get_chart(field='full_name', filter='entrance__isnull', pattern=True, bar_property='full_name', type='doughnut', legend_display=False)
+    # da.append(json.dumps(ch['data']))
     ch = conf.get_chart(field='full_name',
                         filter='stories_count__gt',
                         pattern=0,

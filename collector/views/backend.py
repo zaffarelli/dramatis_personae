@@ -42,7 +42,12 @@ def recalc(request):
     """ Recalc and export to PDF all avatars """
 
     conf = get_current_config()
-    character_items = Character.objects.order_by('-player', 'full_name')
+    cast = conf.epic.get_full_cast()
+    character_items = []
+    for rid in cast:
+        character_item = Character.objects.get(rid=rid)
+        character_items.append(character_item)
+    # character_items = Character.objects.order_by('-player', 'full_name')
     x = 1
     for c in character_items:
         c.need_fix = True
