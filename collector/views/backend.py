@@ -47,10 +47,11 @@ def recalc(request):
     for rid in cast:
         character_item = Character.objects.get(rid=rid)
         character_items.append(character_item)
-    # character_items = Character.objects.order_by('-player', 'full_name')
+    #character_items = Character.objects.order_by('-player', 'full_name')
     x = 1
     for c in character_items:
         c.need_fix = True
+        c.need_pdf = True
         x += 1
         messages.info(request, f'Recalculating {c.full_name}')
         c.save()

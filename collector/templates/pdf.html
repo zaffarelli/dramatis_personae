@@ -11,42 +11,43 @@
 
 @font-face {
   font-family: 'Texte';
-  src: url('collector/static/collector/fonts/BarlowCondensed-Regular.ttf');
-}
-
-@font-face {
-  font-family: 'Texte';
-  font-weight:bold;
-  src: url('collector/static/collector/fonts/BarlowCondensed-SemiBold.ttf');
+  src: url('collector/static/collector/fonts/Alegreya/Alegreya-Regular.ttf');
 }
 
 @font-face {
   font-family: 'Texte';
   font-style:italic;
-  src: url('collector/static/collector/fonts/BarlowCondensed-RegularItalic.ttf');
+  src: url('collector/static/collector/fonts/Alegreya/Alegreya-Italic.ttf');
+}
+
+@font-face {
+  font-family: 'Texte';
+  font-weight:bold;
+  src: url('collector/static/collector/fonts/Alegreya/Alegreya-Bold.ttf');
 }
 
 @font-face {
   font-family: 'Texte';
   font-style:italic;
   font-weight:bold;
-  src: url('collector/static/collector/fonts/BarlowCondensed-SemiBoldItalic.ttf');
+  src: url('collector/static/collector/fonts/Alegreya/Alegreya-BoldItalic.ttf');
 }
+
 
 
 @font-face {
   font-family: 'Emphase';
-  src: url('collector/static/collector/fonts/BarlowCondensed-SemiBold.ttf');
+  src: url('collector/static/collector/fonts/Cousine-Regular.ttf');
 }
 
 @font-face {
   font-family: 'NomPerso';
-  src: url('collector/static/collector/fonts/BarlowCondensed-ExtraBold.ttf');
+  src: url('collector/static/collector/fonts/Alegreya/Alegreya-Black.ttf');
 }
 
 @font-face {
   font-family: 'Section';
-  src: url('collector/static/collector/fonts/BarlowCondensed-Medium.ttf');
+  src: url('collector/static/collector/fonts/Oswald-SemiBold.ttf');
 }
 
 @page {
@@ -87,9 +88,9 @@ h1,h2,h3,h4,h5,h6{
 
 h1{
   font-family:'NomPerso';
-  font-size:24pt;
-  font-weight:600;
-  color:#404040;
+  font-size:32pt;
+  font-weight:800;
+  color:#646;
 }
 
 h2{
@@ -113,8 +114,10 @@ h4{
 h5{
   font-family:'Section';
   font-size:9pt;
-  padding-bottom:0;
-  margin-bottom:0;
+  padding:0;
+  margin:0;
+  color:#868;
+  line-height:1em;
   -pdf-keep-with-next: true;
 }
 
@@ -124,7 +127,9 @@ h6{
   margin:0;
   padding:0;
   line-height:0.93em;
-  margin-top:0.15em;
+
+
+  color:blue;
   -pdf-keep-with-next: true;
 }
 

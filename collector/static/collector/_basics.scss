@@ -82,7 +82,7 @@ $block_wsize: 4ex;
     transition: flex-basis .5s, width .5s;
 }
 
-input[type=text], input[type=number], input[type=checkbox], select, textarea {
+input[type=text], input[type=password], input[type=number], input[type=checkbox], select, textarea {
     background-color: $fics_dark;
     color: $fics_front;
     border-radius: 2px;

@@ -12,9 +12,8 @@
   TOTAL ...................: 280 OP
 """
 
-MAX_CHAR = 16
-RELEASE = '2.0.1'
-DEBUG_ALL = False
+MAX_CHAR = 10
+RELEASE = '2.0.3'
 
 LIFEPATH_CATEGORY = (
     ('0', "Birthright"),
@@ -43,7 +42,7 @@ LIFEPATH_CATEGORY_SHORT = {
 LIFEPATH_CATEGORY_VAL = {
     '0': (118, 120,  124, 131, 136, 160, 240, 300, 390, ),
     '5': (0, 4, 9, 16, 20, 22, ),
-    '10': (20,5,15, ),
+    '10': (20, 5, 15, ),
     '20': (25, ),
     '30': (48, ),
     '40': (10, 20, 30, 40, 240, 300, ),
@@ -69,6 +68,7 @@ LIFEPATH_CASTE_SHORT = {
     'Freefolk': "Ffk",
 }
 
+
 GROUPCHOICES = (
     ('AWA', "Awareness"),
     ('BOD', "Physical"),
@@ -82,51 +82,61 @@ GROUPCHOICES = (
     ('TIN', "Tinkering"),
     ('UND', "Underworld"),
 )
-
-RACIAL_ATTRIBUTES = {
-    "ascorbite": {},
-    "etyri": {},
-    "gannok": {},
-    "hironem": {},
-    "kurgan": {},
-    "obuni": {
-        'PA_REF': 1,
-        'PA_AGI': 1,
-        'PA_STR': -1,
-        'PA_BOD': -1,
-        'PA_CON': -1,
-        'occult_level': 1
-    },
-    "oro'ym": {},
-    "ukari": {
-        'PA_REF': 1,
-        'PA_AGI': 1,
-        'PA_STR': -1,
-        'PA_BOD': -1,
-        'PA_CON': -1,
-        'PA_TEC': 1,
-        'occult_level': 1,
-        'occult_darkside': 1,
-    },
-    "urthish": {},
-    "symbiot": {},
-    "vau": {},
-    "vorox": {
-        'PA_STR': 2,
-        'PA_CON': 2,
-        'PA_BOD': 4,
-        'PA_INT': -1,
-        'PA_TEC': -2,
-        'PA_TEM': 1,
-    },
-    "vuldrok": {},
-}
+#
+# RACIAL_ATTRIBUTES = {
+#     "ascorbite": {},
+#     "etyri": {},
+#     "gannok": {},
+#     "hironem": {},
+#     "kurgan": {},
+#     "obuni": {
+#         'PA_REF': 1,
+#         'PA_AGI': 1,
+#         'PA_STR': -1,
+#         'PA_BOD': -1,
+#         'PA_CON': -1,
+#         'occult_level': 1
+#     },
+#     "oro'ym": {},
+#     "ukari": {
+#         'PA_REF': 1,
+#         'PA_AGI': 1,
+#         'PA_STR': -1,
+#         'PA_BOD': -1,
+#         'PA_CON': -1,
+#         'PA_TEC': 1,
+#         'occult_level': 1,
+#         'occult_darkside': 1,
+#     },
+#     "urthish": {},
+#     "symbiot": {},
+#     "vau": {},
+#     "vorox": {
+#         'PA_STR': 2,
+#         'PA_CON': 2,
+#         'PA_BOD': 4,
+#         'PA_INT': -1,
+#         'PA_TEC': -2,
+#         'PA_TEM': 1,
+#     },
+#     "vuldrok": {},
+# }
 
 SHORTCUTS = {
     "Observe": {
         'attribute': "PA_AWA",
         'label': "AWA + Observe",
         'rationale': "Notice something",
+    },
+    "Search": {
+        'attribute': "PA_AWA",
+        'label': "AWA + Search",
+        'rationale': "Search a place",
+    },
+    "Inquiry": {
+        'attribute': "PA_INT",
+        'label': "INT + Inquiry",
+        'rationale': "Deduce from data",
     },
     "Empathy": {
         'attribute': "PA_TEM",
@@ -189,6 +199,12 @@ SHORTCUTS = {
         'label': "INT + Remedy",
         'rationale': "Stabilize wounds",
     },
+    "Heavy Weapons": {
+        'attribute': "PA_REF",
+        'label': "REF + Heavy Weapons",
+        'rationale': "Heavy weapon fire",
+    },
+
 }
 
 ATTACK_ROLLS = {

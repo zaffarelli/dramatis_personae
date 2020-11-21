@@ -15,7 +15,9 @@ from collector.utils.basic import get_current_config
 from collector.utils.fics_references import MAX_CHAR
 from django.contrib import messages
 from collector.views.characters import respawn_avatar_link
-
+import os
+from django.conf import settings
+from django.http import FileResponse
 from django.contrib import messages
 
 
@@ -67,7 +69,7 @@ def show_todo(request):
     """
     conf = get_current_config()
     if request.is_ajax:
-        character_items = Character.objects.filter(balanced=False).order_by('full_name')
+        character_items = Character.objects.filter(priority=True).order_by('full_name')
         paginator = Paginator(character_items, MAX_CHAR)
         page = id
         character_items = paginator.get_page(page)
@@ -105,6 +107,8 @@ def recalc_character(request, id=None):
         item.need_fix = True
         item.fix()
         item.save()
+        item.need_pdf = True
+        item.backup()
         crid = item.rid
         template = get_template('collector/character_detail.html')
         character = template.render({'c': item, 'no_skill_edit': False})
@@ -332,8 +336,8 @@ def heartbeat(request):
 
 def pdf_show(request, slug):
     try:
-        name = f'avatar_{slug}.pdf'
-        filename = os.path.join(settings.MEDIA_ROOT, 'pdf/results/' + name)
+        name = f'{slug}.pdf'
+        filename = os.path.join(settings.MEDIA_ROOT, 'pdf/results/avatars/' + name)
         return FileResponse(open(filename, 'rb'), content_type='application/pdf')
     except FileNotFoundError:
         raise Http404()

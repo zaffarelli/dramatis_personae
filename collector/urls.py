@@ -17,7 +17,7 @@ from collector.views.misc_chart import get_chardar, get_population_statistics, g
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth.views import LogoutView
-from collector.views.user import login
+from collector.views.user import do_login, do_profile
 
 
 urlpatterns = [
@@ -77,7 +77,8 @@ urlpatterns = [
     re_path('^ajax/character/del/armor/(?P<avatar>[\d]+)/(?P<item>\d+)/$', customize_armor_del,name='customize_armor_del'),
     re_path('^ajax/character/del/shield/(?P<avatar>[\d]+)/(?P<item>\d+)/$', customize_shield_del, name='customize_shield_del'),
     re_path('^ajax/character/del/ritual/(?P<avatar>[\d]+)/(?P<item>\d+)/$', customize_ritual_del, name='customize_ritual_del'),
-    re_path('^ajax/login/$', login, name="login"),
+    re_path('^ajax/login/$', do_login, name="login"),
+    re_path('^ajax/profile/$', do_profile, name="profile"),
     re_path('^ajax/logout/$', LogoutView.as_view(), name="logout"),
     re_path('^jumpweb/show$', show_jumpweb, name='show_jumpweb'),
     re_path('^orbital_map/show/(?P<id>[\d]+)/$', show_orbital_map, name='show_orbital_map'),

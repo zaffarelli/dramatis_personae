@@ -15,27 +15,29 @@ Born in {{ c.birthdate }} ({{ c.age }} years old)
 <br/>Height: {{c.height}}cm / Weight:{{c.weight}}kg </p>
 
 
-{% include "collector/character/character_tod.html" %}
+
 
 <h5>Primary Attributes</h5>
 <table class='stats' width='100%'>
 <tr>
-  <td>Strength</td><td style='width:0.8cm;'>{{c.PA_STR}}</td>
-  <td>Constitution</td><td style='width:0.8cm;'>{{c.PA_CON}}</td>
-  <td>Body</td><td style='width:0.8cm;'>{{c.PA_BOD}}</td>
-  <td>Movement</td><td style='width:0.8cm;'>{{c.PA_MOV}}</td>
+  <td>Strength</td><td style='width:1.5cm;'>{{c.PA_STR | dotted_pdf | safe }}</td>
+  <td>Intellect</td><td style='width:1.5cm;'>{{c.PA_INT| dotted_pdf | safe}}</td>
+  <td>Tech</td><td style='width:1.5cm;'>{{c.PA_TEC| dotted_pdf | safe}}</td>
 </tr>
 <tr>
-  <td>Intellect</td><td style='width:0.8cm;'>{{c.PA_INT}}</td>
-  <td>Willpower</td><td style='width:0.8cm;'>{{c.PA_WIL}}</td>
-  <td>Temper</td><td style='width:0.8cm;'>{{c.PA_TEM}}</td>
-  <td>Presence</td><td style='width:0.8cm;'>{{c.PA_PRE}}</td>
+  <td>Constitution</td><td style='width:1.5cm;'>{{c.PA_CON| dotted_pdf | safe}}</td>
+  <td>Willpower</td><td style='width:1.5cm;'>{{c.PA_WIL| dotted_pdf | safe}}</td>
+  <td>Reflexes</td><td style='width:1.5cm;'>{{c.PA_REF| dotted_pdf | safe}}</td>
 </tr>
 <tr>
-  <td>Tech</td><td style='width:0.8cm;'>{{c.PA_TEC}}</td>
-  <td>Reflexes</td><td style='width:0.8cm;'>{{c.PA_REF}}</td>
-  <td>Agility</td><td style='width:0.8cm;'>{{c.PA_AGI}}</td>
-  <td>Awareness</td><td style='width:0.8cm;'>{{c.PA_AWA}}</td>
+  <td>Body</td><td style='width:1.5cm;'>{{c.PA_BOD| dotted_pdf | safe}}</td>
+  <td>Temper</td><td style='width:1.5cm;'>{{c.PA_TEM| dotted_pdf | safe}}</td>
+  <td>Agility</td><td style='width:1.5cm;'>{{c.PA_AGI| dotted_pdf | safe}}</td>
+</tr>
+<tr>
+  <td>Movement</td><td style='width:1.5cm;'>{{c.PA_MOV| dotted_pdf | safe}}</td>
+  <td>Presence</td><td style='width:1.5cm;'>{{c.PA_PRE| dotted_pdf | safe}}</td>
+  <td>Awareness</td><td style='width:1.5cm;'>{{c.PA_AWA| dotted_pdf | safe}}</td>
 </tr>
 </table>
 <h5>Secondary Attributes</h5>
@@ -95,16 +97,22 @@ Born in {{ c.birthdate }} ({{ c.age }} years old)
 
 {% if c.blessingcurse_set.count != 0 %}
 <h5>Blessings/Curses</h5>
+<p>
 {% for bc in c.blessingcurse_set.all %}
-<p><u>{{ bc.blessing_curse_ref.reference|safe }}</u> ({{ bc.blessing_curse_ref.value }}): {{ bc.description|safe }}</p>
+{{ bc.blessing_curse_ref.reference|safe }} ({{ bc.blessing_curse_ref.value }})
+{% if forloop.last%}.{%else%}, {%endif%}
 {% endfor %}
+</p>
 {%endif%}
 
 {% if c.beneficeaffliction_set.count != 0 %}
 <h5>Benefices/Afflictions</h5>
+<p>
 {% for ba in c.beneficeaffliction_set.all%}
-<p><u>{{ ba.benefice_affliction_ref.reference|safe }}</u> (Cost:{{ ba.benefice_affliction_ref.value }}): {{ ba.benefice_affliction_ref.description|safe}} {{ ba.description|safe}}</p>
+{{ ba.benefice_affliction_ref.reference|safe }} (Cost:{{ ba.benefice_affliction_ref.value }} {{ ba.benefice_affliction_ref.description|safe}} {{ ba.description|safe}})
+{% if forloop.last%}.{%else%}, {%endif%}
 {% endfor %}
+</p>
 
 {%endif%}
 
@@ -117,8 +125,8 @@ Born in {{ c.birthdate }} ({{ c.age }} years old)
 {% if c.weapon_set.count != 0 %}
 <h5>Weapons</h5>
 <p>{% for w in c.weapon_set.all|dictsort:"weapon_ref.reference" %}
-{{ w.weapon_ref.stats|safe }}
-{% if forloop.last %}</p>{% else %}<br/>{% endif %}
+      {{forloop.counter}} {{ w.weapon_ref.stats|safe }}
+      {% if forloop.last %}</p>{% else %}<br/>{% endif %}
 {% endfor %}
 {%endif%}
 
@@ -141,11 +149,15 @@ Born in {{ c.birthdate }} ({{ c.age }} years old)
 </table>
 {%endif%}
 
+
 <h5>Shortcuts</h5>
 <p>{{ c.gm_shortcuts_pdf|safe }}</p>
+
+{% include "collector/character/character_tod.html" %}
+
 <h5>Narrative</h5>
 <p>{{ c.narrative|parse_avatars_pdf|safe }}</p>
 <hr>
-<em>Generated with <b>Dramatis Personae</b></em>
-<p/><em>{{now}} </em></p>
+<p/><em>Generated with <b>Dramatis Personae</b></em><br/>
+<em>{{now}} </em></p>
 {% endblock article %}

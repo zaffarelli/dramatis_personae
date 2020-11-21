@@ -19,6 +19,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'extra_views',
     'sass_processor',
+    'channels',
 ]
 
 MIDDLEWARE = [
@@ -46,11 +47,22 @@ TEMPLATES = [{
             'django.contrib.auth.context_processors.auth',
             'django.contrib.messages.context_processors.messages',
             'collector.context_processors.commons',
+            'collector.context_processors.users',
         ],
     },
 }]
 
 WSGI_APPLICATION = 'dramatis_personae.wsgi.application'
+ASGI_APPLICATION = 'dramatis_personae.routing.application'
+
+CHANNEL_LAYERS = {
+    'default':{
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            'hosts': ['127.0.0.1', '6379']
+        },
+    },
+}
 
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',

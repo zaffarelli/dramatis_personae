@@ -35,6 +35,18 @@ def pdf_check():
 
 
 @shared_task
+def skills_check():
+    answer = 'skills check task is idle'
+    return answer
+
+
+@shared_task
+def tod_check():
+    answer = 'tod check task is idle'
+    return answer
+
+
+@shared_task
 def fix_check():
     answer = 'fix_check task is idle'
     from collector.models.character import Character

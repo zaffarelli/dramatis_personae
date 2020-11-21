@@ -57,6 +57,7 @@ psycopg2-binary = "*"
 coverage = "*"
 pytest = "*"
 celery = "==4.4.7"
+channels = "*"
 
 [requires]
 python_version = "3.8"

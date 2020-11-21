@@ -1,0 +1,20 @@
+{% block details %}
+{% load static %}
+{% load fics_filters %}
+
+
+    <table class="stats" style="color:white; background:black; width:100%;">
+    <tr>
+        <th>Player</th><td>{{current_user.username.capitalize | safe }}</td>
+    </tr>
+    <tr>
+        <th>Avatars</th><td>
+    {% for ci in character_items %}
+        {% include "collector/character_xs.html" with c=ci %}
+    {% endfor %}
+        </td>
+    </tr>
+    </table>
+
+
+{% endblock details %}

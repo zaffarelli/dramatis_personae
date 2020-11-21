@@ -1,8 +1,8 @@
-'''
+"""
  ╔╦╗╔═╗  ╔═╗┌─┐┬  ┬  ┌─┐┌─┐┌┬┐┌─┐┬─┐
   ║║╠═╝  ║  │ ││  │  ├┤ │   │ │ │├┬┘
  ═╩╝╩    ╚═╝└─┘┴─┘┴─┘└─┘└─┘ ┴ └─┘┴└─
-'''
+"""
 from django import forms
 from django.forms import ModelForm, inlineformset_factory
 from collector.models.character import Character
@@ -19,6 +19,7 @@ from collector.models.system import System, OrbitalItem
 from collector.models.bloke import Bloke
 
 
+
 class CharacterForm(ModelForm):
     class Meta:
         model = Character
@@ -32,7 +33,7 @@ class CharacterForm(ModelForm):
                    'PA_WIL', 'PA_TEM', 'PA_PRE', 'PA_TEC', 'PA_REF', 'PA_AGI',
                    'PA_AWA', 'OCC_LVL', 'OCC_DRK', 'spotlight', 'challenge_value', 'stories_count',
                    'on_save_reroll_attributes', 'on_save_reroll_skills', 'importance', 'fights', 'victories',
-                   'victory_rating', 'fencing_league', 'need_pdf']
+                   'victory_rating', 'fencing_league', 'need_pdf', 'overhead', 'priority']
 
 
 class TourOfDutyRefForm(ModelForm):

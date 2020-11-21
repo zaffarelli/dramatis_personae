@@ -100,6 +100,7 @@ class Character(Combattant):
     is_public = models.BooleanField(default=False)
     is_partial = models.BooleanField(default=True)
     spotlight = models.BooleanField(default=False)
+    priority = models.BooleanField(default=False)
     use_history_creation = models.BooleanField(default=False)
     use_only_entrance = models.BooleanField(default=False)
     epic = models.ForeignKey(Epic, null=True, blank=True, on_delete=models.SET_NULL)
@@ -109,6 +110,7 @@ class Character(Combattant):
     on_save_re_roll_attributes = models.BooleanField(default=False)
     on_save_re_roll_skills = models.BooleanField(default=False)
     life_path_total = models.IntegerField(default=0)
+    overhead = models.IntegerField(default=0)
     stories_count = models.PositiveIntegerField(default=0)
     stories = models.TextField(max_length=1024, default='', blank=True)
     balanced = models.BooleanField(default=False)
@@ -282,7 +284,9 @@ class Character(Combattant):
 
         self.add_missing_root_skills()
         self.reset_total()
+        self.checkOverhead()
         self.balanced = (self.life_path_total == self.OP) and (self.OP > 0)
+        self.priority = (abs(self.life_path_total - self.OP) < 8) and (self.OP > 0) and (abs(self.life_path_total - self.OP) > 0)
         self.build_log = "\n".join(bl)
         if self.player != '':
             self.balanced = True
@@ -296,6 +300,38 @@ class Character(Combattant):
             d = lambda x: fs_fics7.roll(x) - 1
             self.color = '#%01X%01X%01X%01X%01X%01X' % (d(8) + 4, d(16), d(8) + 4, d(16), d(8) + 4, d(16))
         self.need_pdf = old_op != self.OP
+
+    def checkOverhead(self):
+        overhead = 0
+        if self.PA_STR > 10:
+            overhead += 10 - self.PA_STR
+        if self.PA_CON > 10:
+            overhead += 10 - self.PA_CON
+        if self.PA_BOD > 10:
+            overhead += 10 - self.PA_BOD
+        if self.PA_MOV > 10:
+            overhead += 10 - self.PA_MOV
+        if self.PA_INT > 10:
+            overhead += 10 - self.PA_INT
+        if self.PA_WIL > 10:
+            overhead += 10 - self.PA_WIL
+        if self.PA_TEM > 10:
+            overhead += 10 - self.PA_TEM
+        if self.PA_PRE > 10:
+            overhead += 10 - self.PA_PRE
+        if self.PA_REF > 10:
+            overhead += 10 - self.PA_REF
+        if self.PA_AGI > 10:
+            overhead += 10 - self.PA_AGI
+        if self.PA_AWA > 10:
+            overhead += 10 - self.PA_AWA
+        if self.PA_TEC > 10:
+            overhead += 10 - self.PA_TEC
+        self.overhead = overhead
+        if overhead > 0:
+            logger.error(f'>>> Overhead found: {overhead}')
+        else:
+            logger.info(f'>>> No Overhead.')
 
     def prepare_display(self):
         self.refresh_skills_options()

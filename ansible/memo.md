@@ -111,3 +111,28 @@ Get the list of all available images
 ```
 lxc-create -t download -n NULL -- --list
 ```
+
+## SSH 
+### Login without password
+Here are the commands to allow a@A to login without prompt has b@B.
+#### Generate a key pair on A
+```
+a@A> ssh-keygen -t rsa
+```
+
+#### Create directory on B
+```
+a@A> ssh b@B mkdir -p .ssh
+```
+
+#### Append the public key from A on B
+```
+a@A> cat ~/.ssh/id_rsa.pub | ssh b@B 'cat >> .ssh/authorized_keys'
+```
+
+#### And ok:
+```
+a@A> ssh b@B
+```
+
+

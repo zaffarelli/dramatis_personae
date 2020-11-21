@@ -148,13 +148,22 @@ def as_root(value):
 def as_specialty(value):
     x = value.split('(')[1]
     val = x.split(')')[0]
-    return "&gt;&nbsp;<i>%s</i>" % (val)
+    return "&#9632;&nbsp; <i style='font-height:0.73em;'>%s</i>" % (val)
 
 
 @register.filter(name='is_melee')
 def is_melee(value):
     return value == 'MELEE'
 
+
 @register.filter(name='six_digit')
 def six_digit(value):
     return "%06d" % value
+
+
+@register.filter(name='dotted_pdf')
+def dotted_pdf(value):
+    answer = f"{value}"
+    if value>5:
+        answer = f"<b>{value}</b>"
+    return answer

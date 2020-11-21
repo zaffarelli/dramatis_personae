@@ -1,10 +1,11 @@
 
 
 
-<div class="statblock xs">
-    <strong>{{ c.full_name | safe }}</strong>
-    <b>Entrance</b>{{ c.entrance|safe }}
-    <b>Alliance</b>{{ c.alliance|safe }}
-    <b>Birthdate</b>{{ c.birthdate|safe }}
-    <b>Challenge</b>{{ c.OP }}
-</div>
+<table class="statblock xs" style="display:inline-block; min-width:40ex; height:auto; border-radius:5px; border:1px solid #FC4; padding:5px;">
+    <tr><th style="width:16ex;">Name</th><td>{{ c.full_name.upper }}</td></tr>
+    <tr><th>Entrance</th><td>{{ c.entrance|safe }}</td></tr>
+    <tr><th>Alliance</th><td>{{ c.alliance|safe }}</td></tr>
+    <tr><th>Birthdate</th><td>{{ c.birthdate|safe }}</td></tr>
+    <tr><th>Challenge</th><td>{{ c.OP }}</td></tr>
+    <tr><th>Shortcuts</th><td>{{ c.gm_shortcuts | safe}}</td></tr>
+</table>

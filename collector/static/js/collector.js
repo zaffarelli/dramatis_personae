@@ -271,13 +271,30 @@ class Collector{
         });
         $("#menu_login").off().on('click', function(event) {
             event.preventDefault();
-            console.log("login")
+            $.ajax({
+                type:"GET",
+                url: '/ajax/login/',
+                data: $('#login_form').serialize(),
+                success: function(answer){
+                    $('#login_block').html(answer);
+                    me.rebootLinks();
+                },
+                error: function(answer) {
+                    $('.details').html(answer);
+                    me.rebootLinks();
+                }
+            });
+        });
+        $("#login_button").off().on('click', function(event) {
+            event.preventDefault();
+            console.log("Login post !!!")
             $.ajax({
                 type:"POST",
                 url: '/ajax/login/',
                 data: $('#login_form').serialize(),
                 success: function(answer){
-                    $('#login_block').html(answer);
+                    $('.user_block').html(answer);
+                    window.location = '/';
                 },
                 error: function(answer) {
                     $('.details').html(answer);
@@ -290,9 +307,9 @@ class Collector{
             $.ajax({
                 type:"POST",
                 url: '/ajax/logout/',
-                success: function(response){
+                success: function(answer){
                     $('.user_block').html(answer);
-                    me.rebootLinks();
+                    window.location = '/';
                 },
                 error: function(answer) {
                     $('.user_block').html(answer);
@@ -300,6 +317,25 @@ class Collector{
                 }
             });
         });
+
+        $("#menu_profile").off().on('click', function(event) {
+            event.preventDefault();
+            $.ajax({
+                type:"POST",
+                url: '/ajax/profile/',
+                success: function(answer){
+                    $('.details').html(answer);
+                    console.log('profile ok')
+                    me.rebootLinks();
+                },
+                error: function(answer) {
+                    console.log('Error!!!')
+                    $('.details').html(answer);
+                    me.rebootLinks();
+                }
+            });
+        });
+
 
         $('#menu_build_pdf_rules').off().on('click', function(event) {
             event.preventDefault();
