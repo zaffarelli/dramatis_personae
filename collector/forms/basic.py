@@ -13,7 +13,7 @@ from collector.models.weapon import Weapon
 from collector.models.shield import Shield
 from collector.models.blessing_curse import BlessingCurse, BlessingCurseModificator
 from collector.models.benefice_affliction import BeneficeAffliction, BeneficeAfflictionModificator
-from collector.models.talent import Talent
+#from collector.models.talent import Talent
 from collector.models.spacecraft import ShipRef, ShipSection, ShipSystemSlot
 from collector.models.system import System, OrbitalItem
 from collector.models.bloke import Bloke
@@ -57,7 +57,7 @@ class ShipRefForm(ModelForm):
 
 # Character
 SkillFormSet = inlineformset_factory(Character, Skill, fields='__all__', extra=10, can_delete=True)
-TalentFormSet = inlineformset_factory(Character, Talent, fields='__all__', extra=3, can_delete=True)
+#TalentFormSet = inlineformset_factory(Character, Talent, fields='__all__', extra=3, can_delete=True)
 BlessingCurseFormSet = inlineformset_factory(Character, BlessingCurse, fields='__all__', extra=3, can_delete=True)
 BeneficeAfflictionFormSet = inlineformset_factory(Character, BeneficeAffliction, fields='__all__', extra=3,
                                                   can_delete=True)

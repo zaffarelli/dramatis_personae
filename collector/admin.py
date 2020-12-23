@@ -17,8 +17,8 @@ admin.site.register(Specie, SpecieAdmin)
 from collector.models.armor import ArmorRef, ArmorRefAdmin
 admin.site.register(ArmorRef, ArmorRefAdmin)
 
-from collector.models.talent import TalentRef, TalentRefAdmin
-admin.site.register(TalentRef, TalentRefAdmin)
+# from collector.models.talent import TalentRef, TalentRefAdmin
+# admin.site.register(TalentRef, TalentRefAdmin)
 
 from collector.models.weapon import WeaponRef, WeaponRefAdmin
 admin.site.register(WeaponRef, WeaponRefAdmin)

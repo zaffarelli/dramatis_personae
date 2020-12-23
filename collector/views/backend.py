@@ -9,7 +9,7 @@ from django.core.paginator import Paginator
 
 from collector.models.character import Character
 from collector.models.skill import Skill
-from collector.forms.basic import CharacterForm, SkillFormSet, TalentFormSet, BlessingCurseFormSet, \
+from collector.forms.basic import CharacterForm, SkillFormSet, BlessingCurseFormSet, \
     BeneficeAfflictionFormSet, WeaponFormSet, ArmorFormSet, ShieldFormSet
 from collector.utils.basic import render_to_pdf
 from django.template.loader import get_template, render_to_string

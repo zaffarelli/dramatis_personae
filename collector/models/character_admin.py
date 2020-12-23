@@ -8,7 +8,7 @@ from collector.models.skill import SkillInline
 from collector.models.tourofduty import TourOfDutyInline
 from collector.models.blessing_curse import BlessingCurseInline
 from collector.models.benefice_affliction import BeneficeAfflictionInline
-from collector.models.talent_inline import TalentInline
+# from collector.models.talent_inline import TalentInline
 from collector.models.weapon import WeaponInline
 from collector.models.armor import ArmorInline
 from collector.models.shield import ShieldInline
@@ -122,7 +122,7 @@ class CharacterAdmin(admin.ModelAdmin):
         SkillInline,
         BlessingCurseInline,
         BeneficeAfflictionInline,
-        TalentInline,
+        # TalentInline,
         WeaponInline,
         ArmorInline,
         ShieldInline,
