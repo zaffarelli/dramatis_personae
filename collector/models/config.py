@@ -11,6 +11,17 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+RPG_SYSTEMS = (
+    ('0', 'Undefined'),
+    ('1', 'Fading Suns 2nd Edition'),
+    ('2', 'Fading Suns FICS'),
+    ('3', 'Pathfinder'),
+    ('4', 'World of Darkness'),
+    ('5', 'Call of Cthulhu 7E'),
+    ('6', 'Polaris'),
+)
+
+
 class Config(models.Model):
     class Meta:
         ordering = ['title', 'epic']
@@ -24,6 +35,7 @@ class Config(models.Model):
     is_active = models.BooleanField(default=False)
     smart_code = models.CharField(default='xxxxxx', max_length=6, blank=True)
     current_drama = models.ForeignKey(Drama, null=True, blank=True, on_delete=models.SET_NULL)
+    rpg_system = models.CharField(max_length=32, choices=RPG_SYSTEMS, default="2")
 
     def __str__(self):
         return '%s' % (self.title)
@@ -168,3 +180,4 @@ class Config(models.Model):
 
 class ConfigAdmin(admin.ModelAdmin):
     ordering = ['title']
+    list_display = ['title', 'epic', 'is_active', 'smart_code', 'rpg_system', 'gamemaster']

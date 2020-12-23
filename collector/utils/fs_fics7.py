@@ -10,7 +10,9 @@ import math
 import os
 import yaml
 from collector.utils.fics_references import *
+from collector.utils.rpg import *
 import logging
+
 
 logger = logging.getLogger(__name__)
 
@@ -222,11 +224,7 @@ def roll_dc(sdc):
     return total
 
 
-def roll(maxi):
-    """ A more random '1 to maxi' dice roller  """
-    randbyte = int.from_bytes(os.urandom(1), byteorder='big', signed=False)
-    x = int(randbyte / 256 * (maxi)) + 1
-    return x
+
 
 
 def choose_pa(weights, maxi, pa):

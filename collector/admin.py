@@ -81,3 +81,6 @@ admin.site.register(Profile, ProfileAdmin)
 
 from collector.models.bloke import Bloke, BlokeAdmin
 admin.site.register(Bloke, BlokeAdmin)
+
+from collector.models.investigator import Investigator, InvestigatorAdmin
+admin.site.register(Investigator, InvestigatorAdmin)

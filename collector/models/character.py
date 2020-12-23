@@ -1,4 +1,4 @@
-f"""
+"""
  ╔╦╗╔═╗  ╔═╗┌─┐┬  ┬  ┌─┐┌─┐┌┬┐┌─┐┬─┐
   ║║╠═╝  ║  │ ││  │  ├┤ │   │ │ │├┬┘
  ═╩╝╩    ╚═╝└─┘┴─┘┴─┘└─┘└─┘ ┴ └─┘┴└─
@@ -25,18 +25,16 @@ class Character(Combattant):
         ordering = ['full_name']
 
     page_num = 0
-    full_name = models.CharField(max_length=200)
+
     alias = models.CharField(max_length=200, blank=True, null=True, default='')
-    rid = models.CharField(max_length=200, default='none')
     alliance = models.CharField(max_length=200, blank=True, default='')
     faction = models.CharField(max_length=200, blank=True, default='')
     alliance_hash = models.CharField(max_length=200, blank=True, default='none')
-    player = models.CharField(max_length=200, default='', blank=True)
+
     specie = models.ForeignKey(Specie, null=True, default=31, blank=True,
                                on_delete=models.SET_NULL)
     race = models.TextField(max_length=256, default='', blank=True, null=True)
-    birthdate = models.IntegerField(default=0)
-    gender = models.CharField(max_length=30, default='female')
+
     native_fief = models.CharField(max_length=200, default='none', blank=True)
     caste = models.CharField(max_length=100, default='Freefolk', blank=True)
     rank = models.CharField(max_length=100, default='', blank=True)
@@ -60,7 +58,7 @@ class Character(Combattant):
     PA_TEC = models.PositiveIntegerField(default=1)
     PA_AGI = models.PositiveIntegerField(default=1)
     PA_AWA = models.PositiveIntegerField(default=1)
-    pub_date = models.DateTimeField('Date published', default=datetime.now)
+
     SA_REC = models.IntegerField(default=0)
     SA_STA = models.IntegerField(default=0)
     SA_END = models.IntegerField(default=0)
@@ -86,7 +84,7 @@ class Character(Combattant):
     score = models.IntegerField(default=0)
     gm_shortcuts = models.TextField(default='', blank=True)
     gm_shortcuts_pdf = models.TextField(default='', blank=True)
-    age = models.IntegerField(default=0)
+
     OCC_LVL = models.PositiveIntegerField(default=0)
     OCC_DRK = models.PositiveIntegerField(default=0)
     occult = models.CharField(max_length=50, default='', blank=True)
@@ -369,8 +367,9 @@ class Character(Combattant):
         self.reset_total()
 
     def fix(self, conf=None):
+        super().fix(conf)
         """ Check / calculate other characteristics """
-        logger.warning(f'Fixing ........: {self.full_name}')
+
         if not conf:
             if self.birthdate < 1000:
                 self.birthdate = 5017 - self.birthdate
@@ -380,8 +379,6 @@ class Character(Combattant):
                 self.birthdate = conf.epic.era - self.birthdate
                 self.age = conf.epic.era - self.birthdate
         # NPC fix
-        if self.player == 'none':
-            self.player = ''
         if self.use_history_creation:
             self.rebuild_from_lifepath()
         else:
@@ -764,8 +761,9 @@ class Character(Combattant):
         else:
             return f'{self.full_name}'
 
-    def get_rid(self, s):
-        self.rid = fs_fics7.find_rid(s)
+    # def get_rid(self, s):
+    #     #self.rid = fs_fics7.find_rid(s)
+    #     super().get_rid(s)
 
     @property
     def na_phy(self):

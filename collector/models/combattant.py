@@ -1,11 +1,12 @@
-'''
+"""
  ╔╦╗╔═╗  ╔═╗┌─┐┬  ┬  ┌─┐┌─┐┌┬┐┌─┐┬─┐
   ║║╠═╝  ║  │ ││  │  ├┤ │   │ │ │├┬┘
  ═╩╝╩    ╚═╝└─┘┴─┘┴─┘└─┘└─┘ ┴ └─┘┴└─
-'''
+"""
 from django.db import models
 from datetime import datetime
 from collector.utils import fs_fics7
+from collector.models.avatar import Avatar
 import json
 import math
 
@@ -14,7 +15,8 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-class Combattant(models.Model):
+
+class Combattant(Avatar):
     class Meta:
         abstract = True
 
@@ -511,3 +513,6 @@ class Combattant(models.Model):
             12: 'HEAD'
         }
         return loc[x]
+
+    def fix(self, conf=None):
+        super().fix(conf)

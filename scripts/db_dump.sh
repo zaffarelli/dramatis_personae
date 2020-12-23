@@ -16,6 +16,8 @@ python manage.py dumpdata collector.TalentRef --format xml --output backup/refer
 python manage.py dumpdata collector.Specie --format xml --output backup/reference/specie.xml
 python manage.py dumpdata collector.RitualRef --format xml --output backup/reference/ritualref.xml
 python manage.py dumpdata collector.Gear --format xml --output backup/reference/gear.xml
+python manage.py dumpdata collector.Cyberfeature --format xml --output backup/reference/cyberfeature.xml
+python manage.py dumpdata collector.CyberwareRef --format xml --output backup/reference/cyberware_ref.xml
 
 echo -e "\e[1;35mDumping custom data...\e[0;m"
 python manage.py dumpdata collector.BlessingCurseRef --format xml --output backup/reference/blessing_curse_ref.xml
@@ -56,9 +58,9 @@ python manage.py dumpdata collector.Loot --format xml --output backup/custom/loo
 python manage.py dumpdata collector.System --format xml --output backup/custom/system.xml
 python manage.py dumpdata collector.OrbitalItem --format xml --output backup/custom/orbital_item.xml
 
+python manage.py dumpdata collector.Investigator --format xml --output backup/custom/investigator.xml
+
 python manage.py dumpdata collector.Spaceship --format xml --output backup/custom/spaceship.xml
-python manage.py dumpdata collector.Cyberfeature --format xml --output backup/custom/cyberfeature.xml
-python manage.py dumpdata collector.CyberwareRef --format xml --output backup/custom/cyberware_ref.xml
 python manage.py dumpdata collector.Cyberware --format xml --output backup/custom/cyberware.xml
 
 echo -e "\e[0;35m- Scenarist Main Data...\e[0;m"

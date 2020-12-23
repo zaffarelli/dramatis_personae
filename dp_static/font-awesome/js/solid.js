@@ -1,1 +1,1 @@
-/mnt/storage1/Projects/github/dramatis_personae/collector/static/font-awesome/js/solid.js
+/home/zaffarelli/Projects/github/dramatis_personae/collector/static/font-awesome/js/solid.js

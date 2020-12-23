@@ -1,1 +1,1 @@
-/mnt/storage1/Projects/github/dramatis_personae/collector/static/js/scenarist.js
+/home/zaffarelli/Projects/github/dramatis_personae/collector/static/js/scenarist.js
