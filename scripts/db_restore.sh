@@ -4,6 +4,10 @@
 #!/bin/bash
 clear
 
+echo -e "\e[0;34mFlushing database...\e[0;m"
+python3 manage.py flush
+
+
 echo -e "\e[1;35mSCENARIST...\e[0;m"
 echo -e "\e[0;35m- Restoring Main Data...\e[0;m"
 python manage.py loaddata backup/custom/quizzquestion.xml
