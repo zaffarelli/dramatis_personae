@@ -65,6 +65,8 @@ python manage.py dumpdata collector.Investigator --format xml --output backup/cu
 python manage.py dumpdata collector.Spaceship --format xml --output backup/custom/spaceship.xml
 python manage.py dumpdata collector.Cyberware --format xml --output backup/custom/cyberware.xml
 
+python manage.py dumpdata collector.Profile --format xml --output backup/custom/profile.xml
+
 
 echo -e "\e[1;35mMoving to fixtures...\e[0;m"
 cp backup/reference/blessing_curse_modificator.xml collector/fixtures/
