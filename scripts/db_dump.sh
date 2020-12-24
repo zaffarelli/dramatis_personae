@@ -13,7 +13,7 @@ python manage.py dumpdata scenarist.Epic --format xml --output backup/custom/epi
 python manage.py dumpdata scenarist.Drama --format xml --output backup/custom/drama.xml
 python manage.py dumpdata scenarist.Act --format xml --output backup/custom/act.xml
 python manage.py dumpdata scenarist.Event --format xml --output backup/custom/event.xml
-python manage.py dumpdata collector.Config --format xml --output backup/custom/config.xml
+
 
 echo -e "\e[1;35mCOLLECTOR...\e[0;m"
 echo -e "\e[0;35m- Collector References\e[0;m"
@@ -48,6 +48,7 @@ python manage.py dumpdata collector.BeneficeAfflictionCusto --format xml --outpu
 python manage.py dumpdata collector.SkillCusto --format xml --output backup/custom/skill_custo.xml
 
 echo -e "\e[0;35m- Dumping Main Data... (Resulting from miscellaneous pushes)\e[0;m"
+python manage.py dumpdata collector.Config --format xml --output backup/custom/config.xml
 python manage.py dumpdata collector.Skill --format xml --output backup/custom/skill.xml
 python manage.py dumpdata collector.Weapon --format xml --output backup/custom/weapon.xml
 python manage.py dumpdata collector.Armor --format xml --output backup/custom/armor.xml
