@@ -10,13 +10,16 @@ python3 manage.py flush
 
 echo -e "\e[1;35mSCENARIST...\e[0;m"
 echo -e "\e[0;35m- Restoring Main Data...\e[0;m"
-python manage.py loaddata backup/custom/quizzquestion.xml
-python manage.py loaddata backup/custom/quizzanswer.xml
-python manage.py loaddata backup/custom/quizz.xml
 python manage.py loaddata backup/custom/epic.xml
 python manage.py loaddata backup/custom/drama.xml
 python manage.py loaddata backup/custom/act.xml
 python manage.py loaddata backup/custom/event.xml
+
+
+python manage.py loaddata backup/custom/quizzquestion.xml
+python manage.py loaddata backup/custom/quizzanswer.xml
+python manage.py loaddata backup/custom/quizz.xml
+
 
 
 echo -e "\e[1;35mCOLLECTOR...\e[0;m"
@@ -27,20 +30,26 @@ python manage.py loaddata backup/reference/blessing_curse_ref.xml
 python manage.py loaddata backup/reference/cyberfeature.xml
 python manage.py loaddata backup/reference/cyberware_ref.xml
 python manage.py loaddata backup/reference/gear.xml
-python manage.py loaddata backup/reference/ritualref.xml
+
 python manage.py loaddata backup/reference/skill_ref.xml
+python manage.py loaddata backup/reference/ritualref.xml
 python manage.py loaddata backup/reference/shield_ref.xml
+python manage.py loaddata backup/reference/ship_ref.xml
 python manage.py loaddata backup/reference/ship_section.xml
 python manage.py loaddata backup/reference/ship_system.xml
-python manage.py loaddata backup/reference/ship_ref.xml
+
 python manage.py loaddata backup/reference/specie.xml
 python manage.py loaddata backup/reference/tour_of_duty_ref.xml
 python manage.py loaddata backup/reference/weapon_ref.xml
+
+
 
 echo -e "\e[0;35m- Restoring modificator data (pushed from history creation)...\e[0;m"
 python manage.py loaddata backup/reference/blessing_curse_modificator.xml
 python manage.py loaddata backup/reference/benefice_affliction_modificator.xml
 python manage.py loaddata backup/reference/skill_modificator.xml
+
+python manage.py loaddata backup/custom/character.xml
 
 echo -e "\e[0;35m- Restoring Main Data... (Resulting from miscellaneous pushes)\e[0;m"
 python manage.py loaddata backup/custom/config.xml
@@ -51,7 +60,7 @@ python manage.py loaddata backup/custom/shield.xml
 python manage.py loaddata backup/custom/blessing_curse.xml
 python manage.py loaddata backup/custom/benefice_affliction.xml
 python manage.py loaddata backup/custom/tour_of_duty.xml
-python manage.py loaddata backup/custom/character.xml
+
 python manage.py loaddata backup/custom/bloke.xml
 python manage.py loaddata backup/custom/loot.xml
 python manage.py loaddata backup/custom/system.xml
