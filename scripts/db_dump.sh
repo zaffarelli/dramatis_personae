@@ -65,6 +65,8 @@ python manage.py dumpdata collector.Investigator --format xml --output backup/cu
 python manage.py dumpdata collector.Spaceship --format xml --output backup/custom/spaceship.xml
 python manage.py dumpdata collector.Cyberware --format xml --output backup/custom/cyberware.xml
 
+python manage.py dumpdata auth.User --format xml --output backup/custom/user.xml
+python manage.py dumpdata auth.Group --format xml --output backup/custom/group.xml
 python manage.py dumpdata collector.Profile --format xml --output backup/custom/profile.xml
 
 
