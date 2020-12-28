@@ -69,6 +69,9 @@ python manage.py loaddata backup/custom/investigator.xml
 python manage.py loaddata backup/custom/spaceship.xml
 python manage.py loaddata backup/custom/cyberware.xml
 
+
+python manage.py loaddata backup/custom/group.xml
+python manage.py loaddata backup/custom/user.xml
 python manage.py loaddata backup/custom/profile.xml
 
 echo -e "\e[0;35m- Restoring custo data... (pushed from customizer) \e[0;m"

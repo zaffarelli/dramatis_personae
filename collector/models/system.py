@@ -122,7 +122,7 @@ class OrbitalItem(models.Model):
                 relevant_system.dtj = jumpgate.distance - main_world.distance
                 relevant_system.save()
         except ObjectDoesNotExist:
-            logger.warning("[%s] Unable to fix system due to missing system and/or orbital items." % (self.system))
+            logger.info("[%s] Unable to fix system due to missing system and/or orbital items." % (self.system))
 
 
 
