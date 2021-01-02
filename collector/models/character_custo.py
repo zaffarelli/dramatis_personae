@@ -10,7 +10,7 @@ from django.dispatch import receiver
 
 class CharacterCusto(models.Model):
     class Meta:
-        verbose_name = "Character Customization"
+        verbose_name = "FICS: Character Customization"
 
     from collector.models.character import Character
     character = models.OneToOneField(Character, on_delete=models.CASCADE, primary_key=True)

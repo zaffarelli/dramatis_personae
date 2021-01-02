@@ -1,11 +1,12 @@
-'''
+"""
  ╔╦╗╔═╗  ╔═╗┌─┐┬  ┬  ┌─┐┌─┐┌┬┐┌─┐┬─┐
   ║║╠═╝  ║  │ ││  │  ├┤ │   │ │ │├┬┘
  ═╩╝╩    ╚═╝└─┘┴─┘┴─┘└─┘└─┘ ┴ └─┘┴└─
-'''
+"""
 from collector.utils import fics_references, fs_fics7
-from collector.models.user import Profile
+from collector.models.profile import Profile
 from django.conf import settings
+from collector.utils.basic import get_current_config
 import sys
 import socket
 
@@ -19,5 +20,6 @@ def users(request):
 
 
 def commons(request):
+    campaign = get_current_config()
     return dict(dp_version=fics_references.RELEASE, instance_name=settings.INSTANCE_NAME,
-            python_version=sys.version, hostname=socket.gethostname().upper())
+            python_version=sys.version, hostname=socket.gethostname().upper(), campaign=campaign)

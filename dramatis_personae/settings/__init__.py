@@ -4,4 +4,5 @@ include(
     'base.py',
     'local.py',
     'celery.py',
+    'galliard.py',
 )

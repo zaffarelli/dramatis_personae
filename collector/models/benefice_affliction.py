@@ -11,7 +11,7 @@ from django.contrib import admin
 
 class BeneficeAfflictionRef(models.Model):
     class Meta:
-        verbose_name = "References: Benefice/Affliction"
+        verbose_name = "FICS: Benefice/Affliction"
         ordering = ['reference', 'value', ]
 
     reference = models.CharField(max_length=64)

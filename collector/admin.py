@@ -47,8 +47,8 @@ admin.site.register(Loot, LootAdmin)
 from collector.models.gear import Gear, GearAdmin
 admin.site.register(Gear, GearAdmin)
 
-from collector.models.config import Config, ConfigAdmin
-admin.site.register(Config, ConfigAdmin)
+from collector.models.campaign import Campaign, CampaignAdmin
+admin.site.register(Campaign, CampaignAdmin)
 
 from collector.models.spacecraft import ShipSystem, ShipSystemAdmin
 admin.site.register(ShipSystem, ShipSystemAdmin)
@@ -76,7 +76,7 @@ from collector.models.cyberware import CyberwareRef, CyberwareRefAdmin, Cyberfea
 admin.site.register(Cyberfeature, CyberfeatureAdmin)
 admin.site.register(CyberwareRef, CyberwareRefAdmin)
 
-from collector.models.user import Profile, ProfileAdmin
+from collector.models.profile import Profile, ProfileAdmin
 admin.site.register(Profile, ProfileAdmin)
 
 from collector.models.bloke import Bloke, BlokeAdmin
@@ -84,3 +84,6 @@ admin.site.register(Bloke, BlokeAdmin)
 
 from collector.models.investigator import Investigator, InvestigatorAdmin
 admin.site.register(Investigator, InvestigatorAdmin)
+
+from collector.models.rpg_system import RpgSystem, RpgSystemAdmin
+admin.site.register(RpgSystem, RpgSystemAdmin)

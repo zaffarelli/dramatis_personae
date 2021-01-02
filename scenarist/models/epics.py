@@ -24,6 +24,12 @@ class Epic(StoryModel):
         return x
 
     @property
+    def campaign(self):
+        from collector.models.campaign import Campaign
+        campaign = Campaign.objects.filter(epic=self)
+        return campaign
+
+    @property
     def challenge(self):
         from scenarist.models.dramas import Drama
         episodes = Drama.objects.filter(epic=self)
@@ -38,8 +44,12 @@ class Epic(StoryModel):
         nok = []
         ok = []
         from collector.models.character import Character
+        from collector.models.investigator import Investigator
         for x in list:
-            ch = Character.objects.filter(rid=x).first()
+            if self.campaign.is_coc7:
+                ch = Investigator.objects.filter(rid=x).first()
+            else:
+                ch = Character.objects.filter(rid=x).first()
             it = ch.full_name
             if ch.is_dead:
                 it += "(&dagger;)"

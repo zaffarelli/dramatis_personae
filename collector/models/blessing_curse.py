@@ -14,7 +14,7 @@ from collector.models.character_custo import CharacterCusto
 class BlessingCurseRef(models.Model):
     class Meta:
         ordering = ['reference']
-        verbose_name = "References: Blessing/Curse"
+        verbose_name = "FICS: Blessing/Curse"
 
     reference = models.CharField(max_length=64, default='', blank=True)
     value = models.IntegerField(default=0)

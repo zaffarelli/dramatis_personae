@@ -88,7 +88,7 @@ MAGNA_CARTA_ENTRIES = (
 
 class Gear(models.Model):
     class Meta:
-        verbose_name = "References: Gear"
+        verbose_name = "FICS: Gear"
 
     name = models.CharField(max_length=128)
     variant = models.CharField(max_length=128, blank=True, null=True)

@@ -53,7 +53,7 @@ TEMPLATES = [{
 }]
 
 WSGI_APPLICATION = 'dramatis_personae.wsgi.application'
-ASGI_APPLICATION = 'dramatis_personae.routing.application'
+#ASGI_APPLICATION = 'dramatis_personae.routing.application'
 
 CHANNEL_LAYERS = {
     'default':{

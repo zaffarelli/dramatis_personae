@@ -7,8 +7,9 @@ from django.http import HttpResponse, Http404, JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect, render_to_response
 from django.core.paginator import Paginator
 from collector.models.character import Character
+from collector.models.investigator import Investigator
 from collector.models.fics_models import Specie
-from collector.models.config import Config
+from collector.models.campaign import Campaign
 from django.template.loader import get_template, render_to_string
 import datetime
 from collector.utils.basic import get_current_config
@@ -31,45 +32,44 @@ def get_list(request, id, slug='none'):
     """ Update the list of characters on the page
         They will be sorted by full name only !
     """
-    conf = get_current_config()
     from scenarist.models.epics import Epic
     from scenarist.models.dramas import Drama
     from scenarist.models.acts import Act
     from scenarist.models.events import Event
-    if request.is_ajax:
-        if slug == 'none':
-            character_items = Character.objects.order_by('full_name')
-        elif slug.startswith('c-'):
-            ep_class = slug.split('-')[1].capitalize()
-            ep_id = slug.split('-')[2]
-            ep = get_object_or_404(eval(ep_class), pk=ep_id)
-            cast = ep.get_full_cast()
-            character_items = []
-            for rid in cast:
-                character_item = Character.objects.get(rid=rid)
-                character_items.append(character_item)
-            messages.info(request, f'New list filter applied: {slug}')
-        else:
-            character_items = Character.objects.filter(keyword=slug).order_by('full_name')
-            messages.info(request, f'New list filter applied: {slug}')
-        paginator = Paginator(character_items, MAX_CHAR)
-        page = id
-        character_items = paginator.get_page(page)
-        context = {'character_items': character_items}
-        template = get_template('collector/list.html')
-        html = template.render(context,request)
-        messages.info(request, f'{paginator.count} characters found.')
-        return HttpResponse(html, content_type='text/html')
+    from collector.utils.basic import get_current_config
+    campaign = get_current_config()
+    if slug == 'none':
+        character_items = campaign.avatars.order_by('full_name')
+    elif slug.startswith('c-'):
+        ep_class = slug.split('-')[1].capitalize()
+        ep_id = slug.split('-')[2]
+        ep = get_object_or_404(eval(ep_class), pk=ep_id)
+        cast = ep.get_full_cast()
+        character_items = []
+        for rid in cast:
+            character_item = campaign.avatars.get(rid=rid)
+            character_items.append(character_item)
+        messages.info(request, f'New list filter applied: {slug}')
     else:
-        return Http404
+        character_items = campaign.avatars.filter(keyword=slug).order_by('full_name')
+        messages.info(request, f'New list filter applied: {slug}')
+    paginator = Paginator(character_items, MAX_CHAR)
+    page = id
+    character_items = paginator.get_page(page)
+    context = {'character_items': character_items}
+    template = get_template('collector/list.html')
+    html = template.render(context,request)
+    messages.info(request, f'{paginator.count} characters found.')
+    return HttpResponse(html, content_type='text/html')
+
 
 
 def show_todo(request):
     """ variant of get_list. Might show the toto characters, actually showing the unbalanced ones
     """
-    conf = get_current_config()
+    campaign = get_current_config()
     if request.is_ajax:
-        character_items = Character.objects.filter(priority=True).order_by('full_name')
+        character_items = campaign.avatars.filter(priority=True).order_by('full_name')
         paginator = Paginator(character_items, MAX_CHAR)
         page = id
         character_items = paginator.get_page(page)
@@ -86,7 +86,7 @@ def get_storyline(request, slug='none'):
     """ Change current config
     """
     if request.is_ajax:
-        config_items = Config.objects.all()
+        config_items = Campaign.objects.filter(hidden=False)
         if slug != 'none':
             for c in config_items:
                 c.is_active = (c.smart_code == slug)
@@ -101,9 +101,10 @@ def get_storyline(request, slug='none'):
 def recalc_character(request, id=None):
     """ Re-calculate one single character. To be use in the frontend
     """
+    campaign = get_current_config()
     if request.is_ajax():
         messages.warning(request, 'Recalculating...')
-        item = get_object_or_404(Character, pk=id)
+        item = campaign.avatars.get(pk=id)
         item.need_fix = True
         item.fix()
         item.save()
@@ -132,8 +133,9 @@ def recalc_character(request, id=None):
 def wa_export_character(request, id=None):
     """ Preparing statsblock export for World Anvil
     """
+    campaign = get_current_config()
     if request.is_ajax():
-        item = get_object_or_404(Character, pk=id)
+        item = campaign.avatars.get(pk=id)
         template = get_template('collector/character_wa_statblock.html')
         character = template.render({'c': item}, request)
         context = {
@@ -149,8 +151,9 @@ def view_by_rid(request, slug=None):
     """ Ajax view of a character, with a part of the full name
         passed to the customizer input field.
     """
+    campaign = get_current_config()
     if request.is_ajax():
-        items = Character.objects.filter(rid__contains=slug.lower()).order_by('full_name')
+        items = campaign.avatars.filter(rid__contains=slug.lower()).order_by('full_name')
         if items.count():
             item = items.first()
             context = {}
@@ -177,23 +180,33 @@ def add_character(request, slug=None):
     """ Add a new character to the universe
         The slug is supposed to be its real fullname.
     """
-    conf = get_current_config()
-    item = Character()
+    campaign = get_current_config()
+    if campaign.is_coc7:
+        item = Investigator()
+    elif campaign.is_fics:
+        item = Character()
     if slug:
         item.full_name = " ".join(slug.split("-"))
     else:
         item.full_name = '_noname_ %s' % (datetime.datetime.now())
-    item.epic = conf.epic
-    item.use_history_creation = True
-    item.save()
-    item.specie = Specie.objects.filter(species='Urthish').first()
+    item.epic = campaign.epic
+    if campaign.is_fics:
+        item.use_history_creation = True
+        item.save()
+        item.specie = Specie.objects.filter(species='Urthish').first()
     item.get_rid(item.full_name)
     item.fix()
     item.save()
-    character_item = get_object_or_404(Character, pk=item.id)
-    template = get_template('collector/character_detail.html')
+    character_item = campaign.avatars.get(pk=item.id)
+    if campaign.is_fics:
+        template = get_template('collector/character_detail.html')
+    elif campaign.is_coc7:
+        template = get_template('collector/character_detail_coc7.html')
     character = template.render({'c': character_item, 'no_skill_edit': False})
-    templatelink = get_template('collector/character_link.html')
+    if campaign.is_fics:
+        templatelink = get_template('collector/character_link.html')
+    elif campaign.is_coc7:
+        templatelink = get_template('collector/character_link_coc7.html')
     link = templatelink.render({'c': character_item}, request)
     context = {
         'rid': character_item.rid,
@@ -201,17 +214,16 @@ def add_character(request, slug=None):
         'character': character,
         'link': link,
     }
-    messages.info(request, '...%s added' % (character_item.full_name))
+    messages.info(request, f'...{character_item.full_name} added ({campaign.rpgsystem})')
     return JsonResponse(context)
 
 
 def toggle_public(request, id=None):
     """ Toggle the character public/private flag
     """
-    conf = get_current_config()
     context = {}
     character_item = Character.objects.get(pk=id)
-    if (character_item != None):
+    if character_item is not None:
         character_item.is_public = not character_item.is_public
         character_item.save()
     context = respawn_avatar_link(character_item, context, request)
@@ -221,7 +233,6 @@ def toggle_public(request, id=None):
 def toggle_spotlight(request, id=None):
     """ Toggle the character spotlight flag
     """
-    conf = get_current_config()
     context = {}
     character_item = Character.objects.get(pk=id)
     if character_item is not None:
@@ -237,8 +248,6 @@ def show_jumpweb(request):
     if request.is_ajax:
         from collector.models.system import System
         from collector.utils.fics_references import NEW_ROUTES, NEW_SYSTEMS
-
-        conf = get_current_config()
         context = {}
         context['data'] = {}
         context['data']['mj'] = 1 if request.user.profile.is_gamemaster else 0
@@ -315,8 +324,9 @@ def conf_details(request):
                 their epic info, but through the story casting functions.
     """
     if request.is_ajax:
-        conf = get_current_config()
-        context = {'epic': conf.parse_details()}
+        from collector.models.campaign import Campaign
+        campaign = get_current_config()
+        context = {'epic': campaign.parse_details()}
         template = get_template('collector/conf_details.html')
         html = template.render(context, request)
         return HttpResponse(html, content_type='text/html')

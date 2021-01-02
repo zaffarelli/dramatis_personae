@@ -69,6 +69,6 @@ python manage.py loaddata backup/custom/epic.xml
 python manage.py loaddata backup/custom/drama.xml
 python manage.py loaddata backup/custom/act.xml
 python manage.py loaddata backup/custom/event.xml
-python manage.py loaddata backup/custom/config.xml
+python manage.py loaddata backup/custom/campaign.xml
 
 echo -e "\e[0;36mDone\e[0;m"

@@ -10,7 +10,7 @@ from django.contrib import admin
 class WeaponRef(models.Model):
     class Meta:
         ordering = ['origins', 'reference', 'category', 'damage_class', ]
-        verbose_name = "References: Weapon"
+        verbose_name = "FICS: Weapon"
 
     reference = models.CharField(max_length=64, default='', blank=True, unique=True)
     meta_type = models.CharField(max_length=64, default='', blank=True, null=True)

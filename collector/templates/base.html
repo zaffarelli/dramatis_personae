@@ -14,7 +14,19 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js"></script>
         <script src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
         <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" media="all">
-        <link rel='stylesheet' type='text/css' href='{% sass_src "collector/all.scss" %}' />
+        {% if campaign.is_fics %}
+        <link rel='stylesheet' type='text/css' href='{% sass_src "collector/scss/fics.scss" %}' />
+        {% endif %}
+        {% if campaign.is_coc7 %}
+        <link rel='stylesheet' type='text/css' href='{% sass_src "collector/scss/coc7.scss" %}' />
+        {% endif %}
+        {% if campaign.is_wawwod %}
+        <link rel='stylesheet' type='text/css' href='{% sass_src "collector/scss/wawwod.scss" %}' />
+        {% endif %}
+        {% if campaign.is_prpg %}
+        <link rel='stylesheet' type='text/css' href='{% sass_src "collector/scss/prpg.scss" %}' />
+        {% endif %}
+
     </head>
     <body>
         <header>
@@ -60,6 +72,7 @@
               </div>
             </div>
         </div>
+
 
 
         <div id="messenger_block"></div>

@@ -116,8 +116,8 @@ def exit_fencing_league(modeladmin, request, queryset):
 
 class CharacterAdmin(admin.ModelAdmin):
     list_display = (
-    'full_name', 'alias', 'rid', 'importance', 'entrance', 'specie', 'alliance', 'is_dead', 'life_path_total', 'OP',
-    'use_history_creation', 'is_public', 'is_partial', 'use_only_entrance', 'is_visible', 'epic')
+    'full_name', 'rid', 'importance', 'entrance', 'specie', 'alliance', 'is_dead', 'life_path_total', 'OP',
+    'use_history_creation', 'is_public', 'is_partial', 'use_only_entrance', 'is_visible', 'epic',)
     inlines = [
         SkillInline,
         BlessingCurseInline,

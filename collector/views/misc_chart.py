@@ -17,12 +17,12 @@ def get_chardar(request, pk):
 
 
 def get_population_statistics(request, *args, **kwargs):
-    conf = get_current_config()
+
     da = []
     # List of balanced / unbalanced characters
     # ch = conf.get_chart(field='full_name', filter='entrance__isnull', pattern=True, bar_property='full_name', type='doughnut', legend_display=False)
     # da.append(json.dumps(ch['data']))
-    ch = conf.get_chart(field='full_name',
+    ch = campaign.get_chart(field='full_name',
                         filter='stories_count__gt',
                         pattern=0,
                         type='horizontalBar',
@@ -56,8 +56,8 @@ def get_population_statistics(request, *args, **kwargs):
 def get_keywords(request, *args, **kwargs):
     """ Get all the keywords into a chart"""
     #context = {}
-    conf = get_current_config()
-    ch = conf.get_chart(field='keyword', bar_property='keyword', type='horizontalBar', legend_display=False, ticks=False)
+    camp = get_current_config()
+    ch = camp.get_chart(field='keyword', bar_property='keyword', type='horizontalBar', legend_display=False, ticks=False)
     da = json.dumps(ch['data'])
     template = get_template('collector/keywords.html')
     chart = template.render({'cname': 'chart_keywords', 'cdata': da})

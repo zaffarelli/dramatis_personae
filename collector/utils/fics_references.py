@@ -13,7 +13,7 @@
 """
 
 MAX_CHAR = 10
-RELEASE = '2.0.3'
+RELEASE = '2.1.0'
 
 LIFEPATH_CATEGORY = (
     ('0', "Birthright"),

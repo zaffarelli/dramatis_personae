@@ -5,7 +5,7 @@
 """
 from .base import *
 
-ALLOWED_HOSTS = ['localhost', '192.168.0.70', '192.168.0.60', 'phasma']
+ALLOWED_HOSTS = ['localhost', '192.168.0.70', '192.168.0.60', 'phasma', 'galliard']
 
 SECRET_KEY = '6j@b*@a*k0-23vmk4@i%r@_5es5+8uy!23rl2+1^qx491898-b'
 DEBUG = True

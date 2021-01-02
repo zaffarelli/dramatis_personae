@@ -19,6 +19,21 @@ class Avatar(models.Model):
     gender = models.CharField(max_length=30, default='female')
     age = models.IntegerField(default=0)
     player = models.CharField(max_length=200, default='', blank=True)
+    height = models.IntegerField(default=150)
+    weight = models.IntegerField(default=50)
+    narrative = models.TextField(default='', blank=True)
+    entrance = models.CharField(max_length=100, default='', blank=True)
+    keyword = models.CharField(max_length=32, blank=True, default='new')
+    stars = models.CharField(max_length=256, blank=True, default='')
+    importance = models.PositiveIntegerField(default=1)
+    is_visible = models.BooleanField(default=True)
+    is_dead = models.BooleanField(default=False)
+    is_locked = models.BooleanField(default=False)
+    is_public = models.BooleanField(default=False)
+    is_partial = models.BooleanField(default=True)
+    spotlight = models.BooleanField(default=False)
+    priority = models.BooleanField(default=False)
+
 
     pub_date = models.DateTimeField('Date published', default=datetime.now)
 

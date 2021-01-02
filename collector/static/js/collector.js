@@ -45,6 +45,7 @@ class Collector{
                     success: function(answer) {
                         $('.charlist').html(answer)
                         me.rebootLinks();
+
                     },
                 });
             },
@@ -128,8 +129,9 @@ class Collector{
                     $.ajax({
                         url: 'ajax/list/none/1/',
                         success: function(answer) {
-                            $('.charlist').html(answer)
-                            me.rebootLinks();
+                            //$('.charlist').html(answer)
+                            //me.rebootLinks();
+                            window.location = '/';
                         },
                     });
                 },

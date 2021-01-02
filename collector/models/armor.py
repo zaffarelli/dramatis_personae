@@ -11,7 +11,7 @@ from django.contrib import admin
 class ArmorRef(models.Model):
     class Meta:
         ordering = ['reference']
-        verbose_name = "References: Armor"
+        verbose_name = "FICS: Armor"
 
     reference = models.CharField(max_length=64, default='', blank=True, unique=True)
     category = models.CharField(max_length=6,

@@ -1,0 +1,114 @@
+
+
+{% block details %}
+{% load fics_filters %}
+<div class="classyview" id='sheet_{{c.id}}'>
+{% if c.alliance_picture != "" %}
+<!--div class='pic'><img src="static/collector/portraits/{{ c.rid }}.jpg"></div-->
+{% endif %}
+<h1>{{ c.full_name }}</h1>
+{{ c.entrance|safe }}<br/>
+{{ c.epic|safe }}<br/>
+<div class='coreblock'>
+<ul class='unbreakable'>
+    <li><b>Alliance</b>{{ c.alliance|safe }}</li>
+    <li><b>Faction</b>{{ c.faction|safe }}</li>
+    <li><b>Birthdate</b>{{ c.birthdate }} ({{ c.age }} years old)</li>
+    <li><b>Fief/Species</b>{{ c.native_fief }} / {{ c.race }}</li>
+    <li><b>Caste/Rank</b>{{ c.caste }} / {{ c.rank }}</li>
+    <li><b>Height/Weight</b>{{ c.height|as_height }} / {{ c.weight|as_weight }}</li>
+    <li><b>Player</b>{{ c.player }}</li>
+    <li><b>Keyword</b>{{ c.keyword }}</li>
+    <li><b>Occult</b>{{c.occult}}</li>
+    <li><b>ID</b>{{c.id}}</li>
+    <li>Dead {{ c.is_dead|prettybool|safe }} |
+    Vis {{c.is_visible|prettybool|safe}} |
+    LP {{c.use_history_creation|prettybool|safe}} |
+    HF {{c.historical_figure|prettybool|safe}} |
+    Ns {{c.nameless|prettybool|safe}} |
+    Pu {{c.is_public|prettybool|safe}}</li>
+</ul>
+<span class='pagebreaker'>&nbsp;</span>
+    <ul class='unbreakable'>
+{% if c.tourofduty_set.count != 0 %}
+
+    {% for tod in c.tourofduty_set.all|dictsort:"tour_of_duty_ref.category" %}
+    <li><b>{{ tod.tour_of_duty_ref.category|as_lifepath }} ({{tod.tour_of_duty_ref.value}})</b>
+        <span title="{{tod.tour_of_duty_ref.description}}">{{tod.tour_of_duty_ref.reference}}</span>
+        {%if tod.tour_of_duty_ref.WP%}[{{tod.tour_of_duty_ref.WP}}]{%endif%}
+    </li>
+    {% endfor %}
+{% endif %}
+    </ul>
+<span class='pagebreaker'>&nbsp;</span>
+<ul class='unbreakable'>
+
+<span class='attributes'>
+    <table id="OCC_LVL_{{c.id}}" class='attrpick occult'>
+        {% include "collector/character/character_pa.html" with c=c.info_lvl %}
+    </table>
+    <table id="OCC_DRK_{{c.id}}" class='attrpick occult'>
+        {% include "collector/character/character_pa.html" with c=c.info_drk %}
+    </table>
+</span>
+
+
+</ul>
+
+
+
+</div>
+
+<h2>Attributes ({{c.PA_TOTAL}}x3)</h2>
+<div class='attributes'>
+    {% include "collector/character/character_primaries.html" %}
+    {% include "collector/character/character_secondaries.html" %}
+</div>
+<span id="skill_block_{{c.id}}">
+{% include "collector/character/character_skills.html" %}
+</span>
+<div class='options'>
+    <span id="bc_block_{{c.id}}">
+    {% include "collector/character/character_bc.html" %}
+    </span>
+    <span id="ba_block_{{c.id}}">
+    {% include "collector/character/character_ba.html" %}
+    </span>
+    <span id="ritual_block_{{c.id}}">
+    {% include "collector/character/character_ritual.html" %}
+    </span>
+    <span id="shortcuts_block_{{c.id}}">
+    {% include "collector/character/character_shortcuts.html" %}
+    </span>
+    <span class='narrative'>
+    {{ c.narrative|parse_avatars|safe }}
+    </span>
+</div>
+<div class='gear'>
+    <span id="weapon_block_{{c.id}}">
+    {% include "collector/character/character_weapon.html" %}
+    </span>
+    <span id="armor_block_{{c.id}}">
+    {% include "collector/character/character_armor.html" %}
+    </span>
+    <span id="shield_block_{{c.id}}">
+    {% include "collector/character/character_shield.html" %}
+    </span>
+</div>
+
+<hr/>
+<span class='golden custom_show' id='{{c.rid}}' ><a href='pdf/{{c.rid}}/' target='avatar_pdf'><i class="fas fa-file-pdf"></i> {{c.rid}}</a></span>
+<br/>{{c.challenge|safe}}
+<hr/>
+    Blokeset: {{c.blokes_set.all }}
+    {% for x in c.bloke_set.all %}
+        dmgkmd
+        <br/>{% include "collector/character_xs.html" with c=x.npc %}
+    {% endfor %}
+<hr/>
+    {% if c.stories_count %}
+    {{c.stories | parse_stories | safe}}
+    {% endif%}
+
+</div>
+{% endblock details %}

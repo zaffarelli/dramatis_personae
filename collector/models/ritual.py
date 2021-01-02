@@ -44,7 +44,7 @@ OCCULT_ARTS = (
 class RitualRef(models.Model):
     class Meta:
         ordering = ['category', 'path', 'level', 'reference']
-        verbose_name = "References: Ritual"
+        verbose_name = "FICS: Ritual"
 
     reference = models.CharField(max_length=200, unique=True)
     category = models.CharField(max_length=32, choices=OCCULT_ARTS)

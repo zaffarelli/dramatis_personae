@@ -84,8 +84,8 @@ def update_abstract(options):
     matrix[5].value = datetime.now().strftime("%Y-%m-%d %H:%M")
     matrix[6].value = "Sourced from storyboard of"
     from collector.utils.basic import get_current_config
-    conf = get_current_config()
-    matrix[7].value = "%s" % (conf.epic.title)
+
+    matrix[7].value = f'{campaign.epic.title}'
     sheet.clear()
     sheet.update_cells(matrix)
 
@@ -194,9 +194,9 @@ def download_image(link,rid):
 def gss_push(options, header_line):
     update_abstract(options)
     sheet = connect_as_target(options)
-    from collector.utils.basic import get_current_config
-    conf = get_current_config()
-    cast = conf.epic.get_full_cast()
+
+
+    cast = campaign.epic.get_full_cast()
     # print(cast)
     # character_items = Character.objects.all().filter(epic__shortcut=conf.epic.shortcut,is_public=True).order_by('alliance','full_name')
     character_items = Character.objects.all().filter(rid__in=cast, is_public=True).order_by('alias', '-player',

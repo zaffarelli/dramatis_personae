@@ -13,7 +13,7 @@ from django.contrib import messages
 from django.http import HttpResponse
 
 def build_config_pdf(request):
-  conf = get_current_config()
+  #conf = get_current_config()
   state = export_epic(conf)
   messages.info(request, 'Epic %s exported to PDF.'%(conf.epic.title))
   return HttpResponse(status=204)

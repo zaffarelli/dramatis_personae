@@ -1,0 +1,158 @@
+{% load static %}
+
+<style rel='stylesheet'>
+    body{
+        background-color: {{campaign.color_back}};
+        background-image: url("static/collector/campaigns/{{campaign.rpgsystem}}/back.jpg");
+        color: {{campaign.color_front}};
+    }
+    body .wrapper{
+
+        background-image: url("static/collector/campaigns/{{campaign.rpgsystem}}/logo.png");
+
+    }
+
+    body .wrapper .menu_block{
+        background-color: {{campaign.color_back}};
+
+        border:1px solid {{campaign.color_front}};
+    }
+
+    div.skillsview,
+    div.coreblock,
+    div.attributes table{
+        background-color: {{campaign.color_counterback}};
+    }
+
+    .menu_block ul.level-1{
+        background-color: {{campaign.color_back}};
+        border: 5px solid transparent;
+
+
+    }
+
+    body .wrapper .menu_block ul.level-1 ul.level-2{
+        background-color: {{campaign.color_counterback}};
+        border-color: {{campaign.color_front}};
+    }
+
+    body .wrapper .menu_block ul.level-1 li,
+    body .wrapper .menu_block ul.level-1 ul.level-2 li{
+        background-color: transparent;
+        border-color: transparent;
+
+    }
+
+    .menu_block span.pull-down{
+        background-color: {{campaign.color_linkdown}};
+        border-color: {{campaign.color_front}};
+        color: {{campaign.color_front}};
+    }
+
+    body .wrapper span i{
+        color: {{campaign.color_front}};
+    }
+
+    body .wrapper .menu_block span.menu-item{
+        background-color: {{campaign.color_back }};
+        color: {{campaign.color_front }};
+    }
+
+    .embedded_link{
+        color:{{campaign.color_linkup}};
+    }
+
+    .broken{
+        color:{{campaign.color_linkdown}};
+    }
+
+    .golden{
+        color:{{campaign.color_linkup}};
+    }
+
+
+    #scheme{
+        right:350px;
+        left:auto;
+        top:auto;
+        bottom:0;
+        width:auto;
+        height:auto;
+        border:1px solid #CCC;
+        background:black;
+        display:block;
+        position:fixed;
+        padding:2px;
+        margin:2px;
+    }
+
+    #scheme .box{
+        padding:2px;
+        margin:2px;
+        width:10px;
+        height:10px;
+        display:inline-block;
+        border:3px solid #CCC;
+    }
+    #scheme .box.front{
+            background-color: {{ campaign.color_front}};
+    }
+    #scheme .box.back{
+            background-color: {{ campaign.color_back}};
+    }
+    #scheme .box.linkup{
+            background-color: {{ campaign.color_linkup}};
+    }
+    #scheme .box.linkdown{
+            background-color: {{ campaign.color_linkdown}};
+    }
+    #scheme .box.counterback{
+            background-color: {{ campaign.color_counterback}};
+    }
+
+    div.starport div.dicer, div.starport div.mobile_form, div.starport div.menuright,
+    div.list{
+        background-color: {{ campaign.color_back}};
+        color: {{ campaign.color_front}};
+    }
+
+    span.action_icon u{
+        color: {{ campaign.color_front}};
+    }
+
+    .action_icon:hover{
+        color: {{ campaign.color_linkup}};
+    }
+
+    ul.avatars{
+
+    }
+
+    ul.avatars li{
+        background-color: transparent;
+
+        margin-bottom:5px;
+        padding-bottom:5px;
+    }
+
+
+    div.charlist ul.avatars li div.avatar_link div.character_actions{
+        background: transparent;
+        color: {{ campaign.color_linkup}};
+    }
+
+
+    div.charlist ul.avatars li div.avatar_link{
+        background-color: {{ campaign.color_linkdown}};
+        color:{{ campaign.color_front}};
+    }
+
+    div.charlist ul.avatars li div.avatar_link:hover{
+        background-color: {{ campaign.color_linkup}};
+    }
+
+    div.charlist ul.avatars li div.avatar_link div.character_name em{
+        text-shadow: 0 0 3px white;
+    }
+
+</style>

@@ -16,7 +16,7 @@ from collector.models.tourofduty import TourOfDutyRef
 class SkillRef(models.Model):
     class Meta:
         ordering = ['is_speciality', 'is_wildcard', 'reference']
-        verbose_name = "References: Skill"
+        verbose_name = "FICS: Skill"
 
     reference = models.CharField(max_length=200, unique=True)
     is_root = models.BooleanField(default=False)

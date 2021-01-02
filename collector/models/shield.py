@@ -11,7 +11,7 @@ from collector.models.character import Character
 class ShieldRef(models.Model):
     class Meta:
         ordering = ['cost', 'reference']
-        verbose_name = "References: Shield"
+        verbose_name = "FICS: Shield"
 
     reference = models.CharField(max_length=16, default='', blank=True, unique=True)
     protection_min = models.PositiveIntegerField(default=10, blank=True)

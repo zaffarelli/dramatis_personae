@@ -1,0 +1,114 @@
+@import 'basics';
+@import 'fonts';
+
+/* Invalid display */
+
+@media screen and (max-width: 640px) {
+    body {
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        background: $fics_back url($back);
+
+        & .logo {
+            display: none;
+        }
+
+        & .menu {
+            display: none;
+        }
+
+        & .wrapper {
+            display: none;
+        }
+    }
+}
+
+/* Small - 14 inches Elitebook display */
+
+@media screen and (min-width: 641px) and (max-width: 1024px) {
+    body {
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        background: $fics_back url($back);
+
+        & .logo {
+            height: 105px;
+            width: 100%;
+        }
+
+        & .menu {
+            width: 100%;
+            height: 40px;
+        }
+
+        & .wrapper {
+            z-index: 1;
+            margin-left: 0;
+            width: 99%;
+            min-height: 1000px;
+            //background: transparent url("simple_logo_invert.png") center center no-repeat;
+            display: grid;
+            grid-template-columns: .5% 275px 1fr 200px .5%;
+            grid-column-gap: 5px;
+            justify-content: center;
+            align-content: stretch;
+
+            & .details {
+                grid-column: 3 / 6;
+            }
+
+            & .menuright {
+                display: none;
+            }
+        }
+    }
+}
+
+/* Normal - 21/22 inches screen */
+
+@media screen and (min-width: 1025px) {
+    body {
+        margin: 0;
+        padding: 0;
+        overflow-x: none;
+        overflow-y: scroll;
+        background: $fics_back url($back);
+        background-attachment:  fixed;
+        & .wrapper {
+            z-index: 5;
+            margin-left: 0;
+            width: 99%;
+            min-height: 99%;
+            display:flex;
+            flex-direction: row;
+            flex-wrap:nowrap;
+            justify-content:flex-start;
+            align-items:flex-start;
+            align-content:flex-start;
+            background: transparent url($logo) 100% 100% no-repeat;
+            & .menu_block {
+            }
+            & .port {
+                flex-basis:300px;
+                order:1;
+            }
+            & .details {
+                flex-grow:1;
+                order:2;
+            }
+            & .starport {
+                // Flex Item
+                flex-basis:300px;
+                order:3;
+                // Flex Container
+                display: flex;
+                flex-direction:column;
+                justify-content:flex-start;
+            }
+        }
+    }
+}

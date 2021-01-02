@@ -10,6 +10,8 @@ from collector.utils.rpg import *
 
 
 class Investigator(Avatar):
+    class Meta:
+        verbose_name = "EDGE_7E: Investigator"
     nationality = models.CharField(max_length=64, default="American")
 
     C_FOR = models.IntegerField(default=0)

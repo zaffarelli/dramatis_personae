@@ -23,6 +23,7 @@ logger = logging.getLogger(__name__)
 class Character(Combattant):
     class Meta:
         ordering = ['full_name']
+        verbose_name = "FICS: Character"
 
     page_num = 0
 
@@ -38,14 +39,8 @@ class Character(Combattant):
     native_fief = models.CharField(max_length=200, default='none', blank=True)
     caste = models.CharField(max_length=100, default='Freefolk', blank=True)
     rank = models.CharField(max_length=100, default='', blank=True)
-    height = models.IntegerField(default=150)
-    weight = models.IntegerField(default=50)
-    narrative = models.TextField(default='', blank=True)
+
     build_log = models.TextField(default='', blank=True)
-    entrance = models.CharField(max_length=100, default='', blank=True)
-    keyword = models.CharField(max_length=32, blank=True, default='new')
-    stars = models.CharField(max_length=256, blank=True, default='')
-    importance = models.PositiveIntegerField(default=1)
     PA_STR = models.PositiveIntegerField(default=1)
     PA_CON = models.PositiveIntegerField(default=1)
     PA_BOD = models.PositiveIntegerField(default=1)
@@ -92,13 +87,6 @@ class Character(Combattant):
     challenge_value = models.IntegerField(default=0)
     todo_list = models.TextField(default='', blank=True)
     # is_exportable = models.BooleanField(default=False)
-    is_visible = models.BooleanField(default=True)
-    is_dead = models.BooleanField(default=False)
-    is_locked = models.BooleanField(default=False)
-    is_public = models.BooleanField(default=False)
-    is_partial = models.BooleanField(default=True)
-    spotlight = models.BooleanField(default=False)
-    priority = models.BooleanField(default=False)
     use_history_creation = models.BooleanField(default=False)
     use_only_entrance = models.BooleanField(default=False)
     epic = models.ForeignKey(Epic, null=True, blank=True, on_delete=models.SET_NULL)
@@ -213,7 +201,7 @@ class Character(Combattant):
         self.purge_armors()
         self.purge_shields()
         self.purge_rituals()
-        self.purge_talents()
+        # self.purge_talents()
         self.AP_tod_pool = 0
         self.OP_tod_pool = 0
         self.WP_tod_pool = 0
@@ -661,11 +649,11 @@ class Character(Combattant):
             skill.delete()
         # logger.debug('PurgeSkill count: %d' % (self.skill_set.all().count()))
 
-    def purge_talents(self):
-        """ Deleting all character talents """
-        for talent in self.talent_set.all():
-            talent.delete()
-        # logger.debug('PurgeTalent count: %d' % (self.talent_set.all().count()))
+    # def purge_talents(self):
+    #     """ Deleting all character talents """
+    #     for talent in self.talent_set.all():
+    #         talent.delete()
+    #     # logger.debug('PurgeTalent count: %d' % (self.talent_set.all().count()))
 
     def purge_bc(self):
         """ Deleting all character BC """

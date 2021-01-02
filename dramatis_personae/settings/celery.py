@@ -5,7 +5,8 @@
 """
 from celery.schedules import crontab
 
-CELERY_BROKER_URL = 'amqp://guest@phasma//'
+#CELERY_BROKER_URL = 'amqp://guest@phasma//'
+CELERY_BROKER_URL = 'amqp://guest@galliard//'
 
 
 CELERY_BEAT_SCHEDULE = {

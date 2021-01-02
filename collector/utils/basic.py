@@ -42,9 +42,13 @@ def write_pdf(template_src, context_dict={}):
 
 
 def get_current_config():
-    from collector.models.config import Config
-    item = Config.objects.get(is_active=True)
+    from collector.models.campaign import Campaign
+    item = Campaign.objects.get(is_active=True)
+    if item is None:
+        item = Campaign.objects.first()
     return item
+
+#campaign = get_current_config()
 
 
 def make_avatar_appendix(conf):

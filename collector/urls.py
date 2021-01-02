@@ -12,7 +12,7 @@ from collector.views.characters import CharacterDetailView, CharacterUpdateView,
 from collector.views.frontend import index, view_by_rid, toggle_public, toggle_spotlight, get_list, add_character, \
     get_storyline, conf_details, recalc_character, heartbeat, show_jumpweb, \
     show_todo, pdf_show, wa_export_character, show_orbital_map
-from collector.views.backend import recalc, export, xls_update, pdf_character, gss_update, pdf_rules, roll_dice
+from collector.views.backend import recalc, export, xls_update, pdf_character, gss_update, pdf_rules, roll_dice, campaign_css
 from collector.views.misc_chart import get_chardar, get_population_statistics, get_keywords
 from django.conf import settings
 from django.conf.urls.static import static
@@ -83,4 +83,5 @@ urlpatterns = [
     re_path('^jumpweb/show$', show_jumpweb, name='show_jumpweb'),
     re_path('^orbital_map/show/(?P<id>[\d]+)/$', show_orbital_map, name='show_orbital_map'),
 
-              ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    re_path('^collector/campaign.css$', campaign_css, name='campaign_css'),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

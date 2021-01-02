@@ -1,6 +1,6 @@
 
   <select id='current_storyline'>
   {% for c in configs %}
-   <option value='{{c.smart_code}}' {% if c.is_active %}selected{% endif %}>{{c.title|safe}}</option>
+   <option value='{{c.smart_code}}' {% if c.is_active %}selected{% endif %}>{{c.title|safe}} [{{c.rpgsystem}}]</option>
   {% endfor %}
  </select>

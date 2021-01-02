@@ -12,7 +12,7 @@ from django.dispatch import receiver
 
 class Loot(models.Model):
     class Meta:
-        verbose_name = "References: Loot"
+        verbose_name = "FICS: Loot"
 
     name = models.CharField(max_length=128)
     group = models.CharField(max_length=128, default='', blank=True, null=True)

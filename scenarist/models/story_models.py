@@ -17,7 +17,7 @@ class StoryModel(models.Model):
     place = models.CharField(max_length=128, default='', blank=True)
     description = models.TextField(max_length=2560,default='',blank=True)
     gamemaster = models.CharField(default='zaffarelli@gmail.com', max_length=128, blank=True)
-    visible = models.BooleanField(default=False)
+    visible = models.BooleanField(default=True)
     to_PDF = models.BooleanField(default=True)
     full_id = models.CharField(max_length=64, blank=True, default='')
 

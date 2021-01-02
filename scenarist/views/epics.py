@@ -1,8 +1,8 @@
-'''
+"""
 ╔╦╗╔═╗  ╔═╗┌─┐┌─┐┌┐┌┌─┐┬─┐┬┌─┐┌┬┐
  ║║╠═╝  ╚═╗│  ├┤ │││├─┤├┬┘│└─┐ │
 ═╩╝╩    ╚═╝└─┘└─┘┘└┘┴ ┴┴└─┴└─┘ ┴
-'''
+"""
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView
 from scenarist.forms.basic import *

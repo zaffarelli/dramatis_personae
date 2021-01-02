@@ -41,8 +41,8 @@ def pdf_character(request, id=None):
 def recalc(request):
     """ Recalc and export to PDF all avatars """
 
-    conf = get_current_config()
-    cast = conf.epic.get_full_cast()
+
+    cast = campaign.get_full_cast()
     character_items = []
     for rid in cast:
         character_item = Character.objects.get(rid=rid)
@@ -106,3 +106,10 @@ def roll_dice(request, slug):
         'total': total,
     }
     return JsonResponse(context)
+
+
+def campaign_css(request):
+    from collector.utils.basic import get_current_config
+    camp = get_current_config()
+    return render_to_response('campaign.css', { 'campaign': camp })
+

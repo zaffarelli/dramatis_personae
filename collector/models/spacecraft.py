@@ -164,7 +164,7 @@ SHIP_DATA = (
 
 class ShipSystem(models.Model):
     class Meta:
-        verbose_name = "Spacecraft: Ship System"
+        verbose_name = "FICS: Ship System"
 
     reference = models.CharField(max_length=64)
     category = models.CharField(max_length=20, choices=SHIPSYSTEM_CATEGORIES, default='Miscellaneous', blank=True)

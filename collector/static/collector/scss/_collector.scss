@@ -1,0 +1,118 @@
+@import 'basics';
+@import 'fonts';
+
+span.toggler {
+    text-align: left;
+    vertical-align: middle;
+    padding: 3px;
+
+    & u {
+        font-family: Texte;
+        text-decoration: none;
+        color: $fics_frontest;
+        font-weight:none;
+        &:before {
+            content: "  ";
+        }
+    }
+}
+
+#messenger {
+    width: 100%;
+    height: auto;
+    top: auto;
+    bottom: 5px;
+    left: 5px;
+    right: auto;
+    z-index: 9000;
+    @include dp_panel;
+    transition: display .5s;
+
+    & p {
+        margin: 5px;
+        padding: 0;
+        color: white;
+        font-family: monospace;
+        font-size: 8pt;
+
+        &.info {
+            color: cyan;
+        }
+
+        &.success {
+            color: lime;
+        }
+
+        &.error {
+            color: red;
+        }
+
+        &.warning {
+            color: orange;
+        }
+    }
+}
+
+.selected {
+    background-color: $fics_light;
+}
+
+.character_info{
+    display: inline-flex;
+    flex-direction: column;
+}
+
+.plate{
+    display: inline-block;
+    background: $fics_darker;
+    color: $fics_front;
+    border:1px solid $fics_dark;
+    width: 25em;
+    min-height: 1.4em;
+    height:auto;
+    white-space: wrap;
+    margin:0;
+    padding:0;
+    text-align:left;
+    &.right{
+        text-align:right;
+    }
+    &.center{
+        text-align:center;
+    }
+    &.double{
+        height: 2.8em;
+    }
+    &.portrait{
+        height:120px;
+        width:auto;
+        background: $fics_darker;
+        border:2px solid $fics_light;
+    }
+}
+
+
+#toast-container{
+    font-height: 8px;
+}
+
+
+#user_block{
+    border:3px solid red;
+    background:$fics_dark;
+    border-radius:10px;
+    position:fixed;
+    display:flex;
+    left:5px;
+    right:auto;
+    top:auto;
+    bottom:15px;
+    width:150px;
+    min-height:50px;
+    height:auto;
+
+}
+
+span.info{
+    color: $fics_front;
+}

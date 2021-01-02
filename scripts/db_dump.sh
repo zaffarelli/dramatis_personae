@@ -14,6 +14,8 @@ python manage.py dumpdata scenarist.Drama --format xml --output backup/custom/dr
 python manage.py dumpdata scenarist.Act --format xml --output backup/custom/act.xml
 python manage.py dumpdata scenarist.Event --format xml --output backup/custom/event.xml
 
+python manage.py dumpdata collector.RpgSystem --format xml --output backup/custom/rpg_system.xml
+
 
 echo -e "\e[1;35mCOLLECTOR...\e[0;m"
 echo -e "\e[0;35m- Collector References\e[0;m"

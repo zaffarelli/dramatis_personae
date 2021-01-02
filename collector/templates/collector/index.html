@@ -21,9 +21,20 @@
 {% endblock dicer %}
 
 {% block menu %}
+        <div id="scheme">
+            <div class="box front"></div>
+            <div class="box back"></div>
+            <div class="box linkup"></div>
+            <div class="box linkdown"></div>
+            <div class="box counterback"></div>
+        </div>
     <div class='menu_block'>
         <div class="menu-logo">
+            {% if campaign.black_text %}
+            <div class="img_block"><img src="{% static 'collector/simple_logo_invert.png' %}" class="Epic" width="37px" alt='dp'/></div>
+            {% else %}
             <div class="img_block"><img src="{% static 'collector/simple_logo.png' %}" class="Epic" width="37px" alt='dp'/></div>
+            {% endif %}
             {% if user.is_authenticated %}
             <input type="text" id="customize" value="" placeholder="Free Text Here...">
             {% endif %}
@@ -97,8 +108,8 @@
                 </ul>
             </li>
             {% endif %}
-            <li>{{hostname}}</li>
-            <li>Release {{ dp_version }}</li>
+            <li><span class="info">{{hostname}}</span></li>
+            <li><span class="info">Release {{ dp_version }}</span></li>
 
         </ul>
     </div>

@@ -25,7 +25,7 @@ CYBERFEATURE_CATEGORIES = (
 
 class Cyberfeature(models.Model):
     class Meta:
-        verbose_name = "References: Cyberfeature"
+        verbose_name = "FICS: Cyberfeature"
 
     reference = models.CharField(max_length=64)
     value = models.IntegerField(default=1)
@@ -43,7 +43,7 @@ class Cyberfeature(models.Model):
 
 class CyberwareRef(models.Model):
     class Meta:
-        verbose_name = "References: Cyberware"
+        verbose_name = "FICS: Cyberware"
 
     reference = models.CharField(max_length=64)
     cyberfeatures = models.ManyToManyField(Cyberfeature, blank=True)

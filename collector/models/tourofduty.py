@@ -14,7 +14,7 @@ from collector.models.character import Character
 class TourOfDutyRef(models.Model):
     class Meta:
         ordering = ['category', 'reference']
-        verbose_name = "References: ToD"
+        verbose_name = "FICS: ToD"
     reference = models.CharField(max_length=64, default='', blank=True)
     category = models.CharField(max_length=20, choices=fics_references.LIFEPATH_CATEGORY, default='Tour of Duty',
                                 blank=True)
