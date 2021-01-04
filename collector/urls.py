@@ -6,9 +6,10 @@
 from django.conf.urls import url
 from django.urls import path, re_path
 
-from collector.views.characters import CharacterDetailView, CharacterUpdateView, customize_ba, customize_bc, \
+from collector.views.characters import CharacterUpdateView, customize_ba, customize_bc, \
     customize_skill, customize_ba_del, customize_bc_del, skill_pick, attr_pick, customize_weapon, customize_weapon_del, \
     customize_armor, customize_armor_del, customize_shield, customize_shield_del, customize_ritual, customize_ritual_del
+from collector.views.investigators import InvestigatorUpdateView
 from collector.views.frontend import index, view_by_rid, toggle_public, toggle_spotlight, get_list, add_character, \
     get_storyline, conf_details, recalc_character, heartbeat, show_jumpweb, \
     show_todo, pdf_show, wa_export_character, show_orbital_map
@@ -27,8 +28,11 @@ urlpatterns = [
     re_path('^xls_update/$', xls_update, name='xls_update'),
     re_path('^gss_update/$', gss_update, name='gss_update'),
     re_path('^api/heartbeat/$', heartbeat, name='heartbeat'),
+    re_path('^investigators/(?P<pk>\d+)/edit/$', InvestigatorUpdateView.as_view(), name='edit_investigator'),
+    # re_path('^investigators/(?P<pk>\d+)/view/$', InvestigatorDetailView.as_view(), name='view_investigator'),
+
     re_path('^characters/(?P<pk>\d+)/edit/$', CharacterUpdateView.as_view(), name='edit_character'),
-    re_path('^characters/(?P<pk>\d+)/view/$', CharacterDetailView.as_view(), name='view_character'),
+    # re_path('^characters/(?P<pk>\d+)/view/$', CharacterDetailView.as_view(), name='view_character'),
 
     re_path('^ajax/roll_dice/(?P<slug>[\w-]+)/$', roll_dice, name='roll_dice'),
 

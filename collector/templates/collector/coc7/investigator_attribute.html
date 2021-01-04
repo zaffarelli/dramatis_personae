@@ -1,0 +1,12 @@
+{%load coc7_filters%}
+<tr>
+	<th class='name'>
+        {{ c.attribute|as_pa_short|safe }}
+    </th>
+    <td class='value'>
+        {{ c.value|as_percent_short|safe }}
+    </td>
+    <td class='edit'>
+        <span id='attrplus_{{c.id}}_{{c.attribute}}' class='edit_icon attrpick fa fa-plus-circle'></span><span id='attrminus_{{c.id}}_{{c.attribute}}' class='edit_icon attrpick fa fa-minus-circle'></span>
+    </td>
+</tr>

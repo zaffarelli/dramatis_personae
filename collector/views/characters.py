@@ -22,7 +22,7 @@ class CharacterDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['no_skill_edit'] = True
-        messages.success(self.request, 'Display avatar %s' % (context['c'].full_name))
+        messages.success(self.request, 'Display character %s' % (context['c'].full_name))
         return context
 
 

@@ -87,3 +87,10 @@ admin.site.register(Investigator, InvestigatorAdmin)
 
 from collector.models.rpg_system import RpgSystem, RpgSystemAdmin
 admin.site.register(RpgSystem, RpgSystemAdmin)
+
+from collector.models.coc7_skill import Coc7SkillRef, Coc7SkillRefAdmin
+admin.site.register(Coc7SkillRef, Coc7SkillRefAdmin)
+
+from collector.models.coc7_occupation import Coc7Occupation
+from collector.models.coc7_occupation_admin import Coc7OccupationAdmin
+admin.site.register(Coc7Occupation, Coc7OccupationAdmin)

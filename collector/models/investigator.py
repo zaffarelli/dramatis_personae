@@ -11,7 +11,7 @@ from collector.utils.rpg import *
 
 class Investigator(Avatar):
     class Meta:
-        verbose_name = "EDGE_7E: Investigator"
+        verbose_name = "COC7: Investigator"
     nationality = models.CharField(max_length=64, default="American")
 
     C_FOR = models.IntegerField(default=0)
@@ -138,6 +138,57 @@ class Investigator(Avatar):
         self.roll_age()
         self.bound()
 
+    def backup(self):
+        """ Transform to PDF if exportable"""
+        proceed = False
+        # if self.need_pdf:
+        #     from collector.utils.basic import write_pdf
+        #     try:
+        #         context = dict(c=self, filename=f'{self.rid}', now=datetime.now(tz=get_current_timezone()))
+        #         write_pdf('collector/investigator_roster.html', context)
+        #         logger.info(f'    => PDF created ...: {self.rid}')
+        #         proceed = True
+        #         self.need_pdf = False
+        #         self.save()
+        #     except:
+        #         logger.error(f'    => PDF creation error !!! {self.rid}')
+        return proceed
+
+    @property
+    def info_for(self):
+        return self.get_attribute('C_FOR')
+
+    @property
+    def info_dex(self):
+        return self.get_attribute('C_DEX')
+
+    @property
+    def info_tai(self):
+        return self.get_attribute('C_TAI')
+
+    @property
+    def info_app(self):
+        return self.get_attribute('C_APP')
+
+    @property
+    def info_con(self):
+        return self.get_attribute('C_CON')
+
+    @property
+    def info_edu(self):
+        return self.get_attribute('C_EDU')
+
+    @property
+    def info_pou(self):
+        return self.get_attribute('C_POU')
+
+    @property
+    def info_int(self):
+        return self.get_attribute('C_INT')
+
+    def get_attribute(self, str):
+        context = {"attribute": str, "value": getattr(self, str), "id": self.id}
+        return context
 
 def roll_investigator(modeladmin, request, queryset):
     for investigator in queryset:

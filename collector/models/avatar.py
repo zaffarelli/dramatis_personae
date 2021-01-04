@@ -5,6 +5,7 @@
 """
 from django.db import models
 from datetime import datetime
+from scenarist.models.epics import Epic
 import logging
 
 logger = logging.getLogger(__name__)
@@ -33,8 +34,9 @@ class Avatar(models.Model):
     is_partial = models.BooleanField(default=True)
     spotlight = models.BooleanField(default=False)
     priority = models.BooleanField(default=False)
-
-
+    need_pdf = models.BooleanField(default=False)
+    need_fix = models.BooleanField(default=False)
+    epic = models.ForeignKey(Epic, null=True, blank=True, on_delete=models.SET_NULL)
     pub_date = models.DateTimeField('Date published', default=datetime.now)
 
     def fix(self, conf=None):
@@ -43,6 +45,9 @@ class Avatar(models.Model):
             self.get_rid(self.full_name)
         if self.player == 'none':
             self.player = ''
+        if self.birthdate < 1000:
+            self.birthdate = conf.epic.era - self.birthdate
+            self.age = conf.epic.era - self.birthdate
 
     def get_rid(self, s):
         self.rid = Avatar.find_rid(s)

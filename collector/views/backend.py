@@ -41,11 +41,11 @@ def pdf_character(request, id=None):
 def recalc(request):
     """ Recalc and export to PDF all avatars """
 
-
+    campaign = get_current_config()
     cast = campaign.get_full_cast()
     character_items = []
     for rid in cast:
-        character_item = Character.objects.get(rid=rid)
+        character_item = campaign.avatars.get(rid=rid)
         character_items.append(character_item)
     #character_items = Character.objects.order_by('-player', 'full_name')
     x = 1

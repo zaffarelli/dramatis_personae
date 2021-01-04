@@ -217,11 +217,12 @@
     }
 }
 
-.menu-item{
+span.menu-item,a.menu-item{
     display:block;
     background:transparent;
     color:$fics_front;
     text-align:left;
+    text-decoration: none;
     padding: 0.2em 1ex 0.2em 1ex;
     border:1px solid $fics_dark;
     border-radius:5px;

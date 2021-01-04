@@ -106,14 +106,18 @@ def recalc_character(request, id=None):
         messages.warning(request, 'Recalculating...')
         item = campaign.avatars.get(pk=id)
         item.need_fix = True
-        item.fix()
+        item.fix(campaign)
         item.save()
         item.need_pdf = True
         item.backup()
         crid = item.rid
-        template = get_template('collector/character_detail.html')
+        if campaign.is_fics:
+            template = get_template('collector/character_detail.html')
+            template_link = get_template('collector/character_link.html')
+        if campaign.is_coc7:
+            template = get_template('collector/investigator_detail.html')
+            template_link = get_template('collector/investigator_link.html')
         character = template.render({'c': item, 'no_skill_edit': False})
-        template_link = get_template('collector/character_link.html')
         link = template_link.render({'c': item}, request)
         mobile_form = get_template('collector/mobile_form.html')
         mf = mobile_form.render({'c': item}, request)
@@ -201,12 +205,12 @@ def add_character(request, slug=None):
     if campaign.is_fics:
         template = get_template('collector/character_detail.html')
     elif campaign.is_coc7:
-        template = get_template('collector/character_detail_coc7.html')
+        template = get_template('collector/investigator_detail.html')
     character = template.render({'c': character_item, 'no_skill_edit': False})
     if campaign.is_fics:
         templatelink = get_template('collector/character_link.html')
     elif campaign.is_coc7:
-        templatelink = get_template('collector/character_link_coc7.html')
+        templatelink = get_template('collector/investigator_link.html')
     link = templatelink.render({'c': character_item}, request)
     context = {
         'rid': character_item.rid,

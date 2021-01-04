@@ -36,7 +36,7 @@
   {% for c in character_items %}
   <li id='{{c.rid}}'>
     {% if campaign.is_coc7 %}
-    {% include "collector/character_link_coc7.html" with c=c %}
+    {% include "collector/investigator_link.html" with c=c %}
     {% else %}
     {% include "collector/character_link.html" with c=c %}
     {% endif %}

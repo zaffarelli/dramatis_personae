@@ -59,8 +59,10 @@
             {% if user.profile.is_gamemaster %}
             <li><span class="pull-down">Scenarist</span>
                 <ul class="level-2 Epic">
+                    {% if campaign.is_fics %}
                     <li><span class="menu-item" id="menu_popstats"><i class="fas fa-chart-pie"></i> Statistics</span></li>
                     <li><span class="menu-item" id="menu_gss_update"><i class="fas fa-table"></i> Google spreadsheet</span></li>
+                    {% endif %}
                     <li><span class="menu-item" id="menu_conf_details"><i class="action_icon fas fa-globe"></i> Current Epic</span></li>
                     <li><span class="menu-item" id="menu_build_config_pdf"><i class="action_icon fas fa-file-pdf"></i> Build Epic PDF</span></li>
 
@@ -71,17 +73,21 @@
             <li><span class="pull-down">Optimizer</span>
                 <ul class="level-2 Rules">
                     <li><span class="menu-item" id="menu_build_pdf_rules"><i class="action_icon fas fa-book"></i> Build Rules PDF</span></li>
+                    {% if campaign.is_fics %}
                     <li><span class="menu-item" id="menu_xls_export"><i class="fas fa-download"></i> Export to Speadsheet</span></li>
                     <li><span class="menu-item" id="menu_xls_update"><i class="fas fa-upload"></i> Import to Spreadsheet</span></li>
                     <li><span class="menu-item" id='run_duel' style='width:auto;' title='RUN DUEL'><i class="action_icon fas fa-chess-pawn"></i> Run Duel</span></li>
                     <li><span class="menu-item" id='run_100_duels' style='width:auto;' title='RUN x100 DUELS'><i class="action_icon fas fa-chess-knight"></i> Run 100 duels</span></li>
                     <li><span class="menu-item" id='run_fencing_tournament' style='width:auto;' title='RUN FENCING TOURNAMENT'><i class="action_icon fas fa-chess-rook"></i> Run Fencing Tournament</span></li>
+                    {% endif %}
                 </ul>
             </li>
             {% endif %}
             <li><span class="pull-down">Cartograph</span>
                 <ul class="level-2 Cartograph">
+                    {% if campaign.is_fics %}
                     <li><a class="menu-item" target="spacecharts" href="{% url 'show_jumpweb' %}"><i class="action_icon fas fa-draw-polygon"></i> Jumpweb</a></li>
+                    {% endif %}
                 </ul>
             </li>
             {% endif %}

@@ -89,7 +89,7 @@ class Character(Combattant):
     # is_exportable = models.BooleanField(default=False)
     use_history_creation = models.BooleanField(default=False)
     use_only_entrance = models.BooleanField(default=False)
-    epic = models.ForeignKey(Epic, null=True, blank=True, on_delete=models.SET_NULL)
+
     picture = models.CharField(max_length=1024, blank=True,
                                default='https://drive.google.com/open?id=15hdubdMt1t_deSXkbg9dsAjWi5tZwMU0')
     alliance_picture = models.CharField(max_length=256, blank=True, default='')
@@ -103,8 +103,7 @@ class Character(Combattant):
     historical_figure = models.BooleanField(default=False)
     nameless = models.BooleanField(default=False)
     error = models.BooleanField(default=False)
-    need_pdf = models.BooleanField(default=False)
-    need_fix = models.BooleanField(default=False)
+
     color = models.CharField(max_length=20, blank=True, default='#CCCCCC')
     skills_options = []
     ba_options = []

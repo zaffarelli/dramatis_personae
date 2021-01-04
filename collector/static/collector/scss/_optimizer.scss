@@ -245,7 +245,7 @@ table.combat_narrative {
     box-shadow: 0 0 5px #000;
 }
 
-.jumpweb {
+div.jumpweb {
     position:absolute;
     z-index: 35;
     top:10px;
@@ -254,7 +254,7 @@ table.combat_narrative {
     right:10px;
     width: auto;
     height: auto;
-    background: $fics_back url($back);
+    background: $fics_back url($simple_back);
     background-attachment:  fixed;
     border: 1px solid $fics_dark;
     overflow: hidden;

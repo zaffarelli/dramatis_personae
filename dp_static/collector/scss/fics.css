@@ -1,6 +1,6 @@
 input[type=text], input[type=password], input[type=number], input[type=checkbox], select, textarea {
   background-color: #242524;
-  color: #e5deca;
+  color: #cfcdcf;
   border-radius: 2px;
   padding: 2px;
   border: 2px ridge #444444;
@@ -27,7 +27,7 @@ body {
 .menu {
   position: fixed;
   overflow: show;
-  color: #e5deca;
+  color: #cfcdcf;
   font-size: .73em;
   background: #242524;
   z-index: 20;
@@ -36,7 +36,7 @@ body {
   padding: 5px 0 5px 0;
   padding: 5px;
   background: #242524;
-  color: #e5deca;
+  color: #cfcdcf;
   border: 1px solid #3c3f3c;
   box-shadow: 3px 3px 5px #171817;
   border-radius: 5px;
@@ -100,12 +100,12 @@ body {
             z-index: 500; }
 
 .list {
-  color: #e5deca;
+  color: #cfcdcf;
   background: transparent;
   transition: flex-basis .5s, width .5s;
   padding: 5px;
   background: #242524;
-  color: #e5deca;
+  color: #cfcdcf;
   border: 1px solid #3c3f3c;
   box-shadow: 3px 3px 5px #171817;
   border-radius: 5px;
@@ -137,7 +137,7 @@ body {
       margin: 0 .1em;
       display: inline-block;
       padding: .5em;
-      color: #e5deca;
+      color: #cfcdcf;
       font-size: .77em;
       background: #242524;
       padding: .5em .8em;
@@ -193,7 +193,7 @@ body {
 
 .character_actions {
   float: right;
-  color: #e5deca; }
+  color: #cfcdcf; }
 
 .wrapper {
   font-family: Texte;
@@ -263,7 +263,7 @@ body {
             font-family: Titre;
             font-weight: normal;
             background: #171817;
-            color: #e5deca;
+            color: #cfcdcf;
             font-size: 1.25em;
             text-align: center; }
       .wrapper .details .gear ul.unbreakable {
@@ -294,7 +294,7 @@ body {
             font-family: Titre;
             font-weight: normal;
             background: #171817;
-            color: #e5deca;
+            color: #cfcdcf;
             font-size: 1.25em;
             text-align: center; }
       .wrapper .details .options ul.unbreakable {
@@ -381,7 +381,7 @@ body {
       padding: 10px;
       background-color: #242524;
       display: inline-block;
-      color: #e5deca; }
+      color: #cfcdcf; }
       .wrapper .details .chart_panel canvas {
         width: 1000px;
         height: auto; }
@@ -396,7 +396,7 @@ body {
       column-rule: 1px dotted #3c3f3c;
       padding: 5px;
       background: #242524;
-      color: #e5deca;
+      color: #cfcdcf;
       border: 1px solid #3c3f3c;
       box-shadow: 3px 3px 5px #171817;
       border-radius: 5px;
@@ -413,7 +413,7 @@ body {
         font-family: Titre;
         font-weight: normal;
         background: #171817;
-        color: #e5deca;
+        color: #cfcdcf;
         font-size: 1.25em;
         text-align: center; }
     .wrapper .details .tournamentview {
@@ -426,7 +426,7 @@ body {
       column-rule: 1px dotted #3c3f3c;
       padding: 5px;
       background: #242524;
-      color: #e5deca;
+      color: #cfcdcf;
       border: 1px solid #3c3f3c;
       box-shadow: 3px 3px 5px #171817;
       border-radius: 5px;
@@ -445,7 +445,7 @@ body {
         font-family: Titre;
         font-weight: normal;
         background: #171817;
-        color: #e5deca;
+        color: #cfcdcf;
         font-size: 1.25em;
         text-align: center; }
     .wrapper .details .narrative {
@@ -507,7 +507,7 @@ body {
       margin-top: .5em; }
     .wrapper .details h1 {
       font-size: 1.6em;
-      color: #e5deca; }
+      color: #cfcdcf; }
     .wrapper .details h2 {
       font-size: 1.4em; }
     .wrapper .details h3 {
@@ -530,7 +530,7 @@ body {
   margin: 0; }
 
 .pdflink {
-  color: #e5deca;
+  color: #cfcdcf;
   text-decoration: none;
   background: #242524;
   display: inline-block;
@@ -552,11 +552,11 @@ body {
   text-shadow: 0 0 3px black; }
 
 .wildcard {
-  color: #e5deca;
+  color: #cfcdcf;
   opacity: .5; }
 
 .low {
-  color: #e5deca;
+  color: #cfcdcf;
   /*opacity: .5;*/
   text-shadow: 0 0 3px lime; }
 
@@ -604,7 +604,7 @@ th.skill_dot {
   border: 2px solid #242524;
   border-radius: 5px;
   background: #242524;
-  color: #f6f3ec;
+  color: #e8e7e8;
   text-decoration: none;
   padding: 5px;
   text-align: left;
@@ -663,7 +663,7 @@ th.skill_dot {
 
 input[type=text], input[type=password], input[type=number], input[type=checkbox], select, textarea {
   background-color: #242524;
-  color: #e5deca;
+  color: #cfcdcf;
   border-radius: 2px;
   padding: 2px;
   border: 2px ridge #444444;
@@ -690,7 +690,7 @@ body {
 .menu {
   position: fixed;
   overflow: show;
-  color: #e5deca;
+  color: #cfcdcf;
   font-size: .73em;
   background: #242524;
   z-index: 20;
@@ -699,7 +699,7 @@ body {
   padding: 5px 0 5px 0;
   padding: 5px;
   background: #242524;
-  color: #e5deca;
+  color: #cfcdcf;
   border: 1px solid #3c3f3c;
   box-shadow: 3px 3px 5px #171817;
   border-radius: 5px;
@@ -763,12 +763,12 @@ body {
             z-index: 500; }
 
 .list {
-  color: #e5deca;
+  color: #cfcdcf;
   background: transparent;
   transition: flex-basis .5s, width .5s;
   padding: 5px;
   background: #242524;
-  color: #e5deca;
+  color: #cfcdcf;
   border: 1px solid #3c3f3c;
   box-shadow: 3px 3px 5px #171817;
   border-radius: 5px;
@@ -800,7 +800,7 @@ body {
       margin: 0 .1em;
       display: inline-block;
       padding: .5em;
-      color: #e5deca;
+      color: #cfcdcf;
       font-size: .77em;
       background: #242524;
       padding: .5em .8em;
@@ -856,7 +856,7 @@ body {
 
 .character_actions {
   float: right;
-  color: #e5deca; }
+  color: #cfcdcf; }
 
 .wrapper {
   font-family: Texte;
@@ -926,7 +926,7 @@ body {
             font-family: Titre;
             font-weight: normal;
             background: #171817;
-            color: #e5deca;
+            color: #cfcdcf;
             font-size: 1.25em;
             text-align: center; }
       .wrapper .details .gear ul.unbreakable {
@@ -957,7 +957,7 @@ body {
             font-family: Titre;
             font-weight: normal;
             background: #171817;
-            color: #e5deca;
+            color: #cfcdcf;
             font-size: 1.25em;
             text-align: center; }
       .wrapper .details .options ul.unbreakable {
@@ -1044,7 +1044,7 @@ body {
       padding: 10px;
       background-color: #242524;
       display: inline-block;
-      color: #e5deca; }
+      color: #cfcdcf; }
       .wrapper .details .chart_panel canvas {
         width: 1000px;
         height: auto; }
@@ -1059,7 +1059,7 @@ body {
       column-rule: 1px dotted #3c3f3c;
       padding: 5px;
       background: #242524;
-      color: #e5deca;
+      color: #cfcdcf;
       border: 1px solid #3c3f3c;
       box-shadow: 3px 3px 5px #171817;
       border-radius: 5px;
@@ -1076,7 +1076,7 @@ body {
         font-family: Titre;
         font-weight: normal;
         background: #171817;
-        color: #e5deca;
+        color: #cfcdcf;
         font-size: 1.25em;
         text-align: center; }
     .wrapper .details .tournamentview {
@@ -1089,7 +1089,7 @@ body {
       column-rule: 1px dotted #3c3f3c;
       padding: 5px;
       background: #242524;
-      color: #e5deca;
+      color: #cfcdcf;
       border: 1px solid #3c3f3c;
       box-shadow: 3px 3px 5px #171817;
       border-radius: 5px;
@@ -1108,7 +1108,7 @@ body {
         font-family: Titre;
         font-weight: normal;
         background: #171817;
-        color: #e5deca;
+        color: #cfcdcf;
         font-size: 1.25em;
         text-align: center; }
     .wrapper .details .narrative {
@@ -1170,7 +1170,7 @@ body {
       margin-top: .5em; }
     .wrapper .details h1 {
       font-size: 1.6em;
-      color: #e5deca; }
+      color: #cfcdcf; }
     .wrapper .details h2 {
       font-size: 1.4em; }
     .wrapper .details h3 {
@@ -1193,7 +1193,7 @@ body {
   margin: 0; }
 
 .pdflink {
-  color: #e5deca;
+  color: #cfcdcf;
   text-decoration: none;
   background: #242524;
   display: inline-block;
@@ -1215,11 +1215,11 @@ body {
   text-shadow: 0 0 3px black; }
 
 .wildcard {
-  color: #e5deca;
+  color: #cfcdcf;
   opacity: .5; }
 
 .low {
-  color: #e5deca;
+  color: #cfcdcf;
   /*opacity: .5;*/
   text-shadow: 0 0 3px lime; }
 
@@ -1267,7 +1267,7 @@ th.skill_dot {
   border: 2px solid #242524;
   border-radius: 5px;
   background: #242524;
-  color: #f6f3ec;
+  color: #e8e7e8;
   text-decoration: none;
   padding: 5px;
   text-align: left;
@@ -1410,7 +1410,7 @@ table.match_score {
   padding: 0; }
   table.match_score td {
     background-color: #242524;
-    color: #e5deca;
+    color: #cfcdcf;
     font-size: .95em;
     width: auto;
     height: 30px;
@@ -1431,7 +1431,7 @@ table.match_score_flat {
   padding: 0; }
   table.match_score_flat td {
     background-color: #242524;
-    color: #e5deca;
+    color: #cfcdcf;
     font-size: .95em;
     width: 3ex;
     height: 1.2em;
@@ -1439,14 +1439,14 @@ table.match_score_flat {
     border: 1px solid transparent; }
   table.match_score_flat th {
     background-color: #303030;
-    color: #f6f3ec;
+    color: #e8e7e8;
     font-size: .85em;
     width: 25ex;
     height: 1.2em;
     border: 1px solid transparent; }
 
 table.combat_narrative {
-  border: 1px solid #e5deca;
+  border: 1px solid #cfcdcf;
   width: auto; }
   table.combat_narrative tr.even {
     background: #232; }
@@ -1482,7 +1482,7 @@ table.combat_narrative {
   font-weight: 900;
   bottom: 5px;
   right: 5px;
-  color: #ede9db;
+  color: #dbdadb;
   background: #222;
   height: 50px;
   width: auto;
@@ -1491,7 +1491,7 @@ table.combat_narrative {
   border-radius: 5px;
   box-shadow: 0 0 5px #000; }
 
-.jumpweb {
+div.jumpweb {
   position: absolute;
   z-index: 35;
   top: 10px;
@@ -1500,14 +1500,14 @@ table.combat_narrative {
   right: 10px;
   width: auto;
   height: auto;
-  background: #303230 url("../campaigns/FICS/back.jpg");
+  background: #303230 url("../campaigns/FICS/darkback.jpg");
   background-attachment: fixed;
   border: 1px solid #242524;
   overflow: hidden; }
 
 input[type=text], input[type=password], input[type=number], input[type=checkbox], select, textarea {
   background-color: #242524;
-  color: #e5deca;
+  color: #cfcdcf;
   border-radius: 2px;
   padding: 2px;
   border: 2px ridge #444444;
@@ -1534,7 +1534,7 @@ body {
 .menu {
   position: fixed;
   overflow: show;
-  color: #e5deca;
+  color: #cfcdcf;
   font-size: .73em;
   background: #242524;
   z-index: 20;
@@ -1543,7 +1543,7 @@ body {
   padding: 5px 0 5px 0;
   padding: 5px;
   background: #242524;
-  color: #e5deca;
+  color: #cfcdcf;
   border: 1px solid #3c3f3c;
   box-shadow: 3px 3px 5px #171817;
   border-radius: 5px;
@@ -1607,12 +1607,12 @@ body {
             z-index: 500; }
 
 .list {
-  color: #e5deca;
+  color: #cfcdcf;
   background: transparent;
   transition: flex-basis .5s, width .5s;
   padding: 5px;
   background: #242524;
-  color: #e5deca;
+  color: #cfcdcf;
   border: 1px solid #3c3f3c;
   box-shadow: 3px 3px 5px #171817;
   border-radius: 5px;
@@ -1644,7 +1644,7 @@ body {
       margin: 0 .1em;
       display: inline-block;
       padding: .5em;
-      color: #e5deca;
+      color: #cfcdcf;
       font-size: .77em;
       background: #242524;
       padding: .5em .8em;
@@ -1700,7 +1700,7 @@ body {
 
 .character_actions {
   float: right;
-  color: #e5deca; }
+  color: #cfcdcf; }
 
 .wrapper {
   font-family: Texte;
@@ -1770,7 +1770,7 @@ body {
             font-family: Titre;
             font-weight: normal;
             background: #171817;
-            color: #e5deca;
+            color: #cfcdcf;
             font-size: 1.25em;
             text-align: center; }
       .wrapper .details .gear ul.unbreakable {
@@ -1801,7 +1801,7 @@ body {
             font-family: Titre;
             font-weight: normal;
             background: #171817;
-            color: #e5deca;
+            color: #cfcdcf;
             font-size: 1.25em;
             text-align: center; }
       .wrapper .details .options ul.unbreakable {
@@ -1888,7 +1888,7 @@ body {
       padding: 10px;
       background-color: #242524;
       display: inline-block;
-      color: #e5deca; }
+      color: #cfcdcf; }
       .wrapper .details .chart_panel canvas {
         width: 1000px;
         height: auto; }
@@ -1903,7 +1903,7 @@ body {
       column-rule: 1px dotted #3c3f3c;
       padding: 5px;
       background: #242524;
-      color: #e5deca;
+      color: #cfcdcf;
       border: 1px solid #3c3f3c;
       box-shadow: 3px 3px 5px #171817;
       border-radius: 5px;
@@ -1920,7 +1920,7 @@ body {
         font-family: Titre;
         font-weight: normal;
         background: #171817;
-        color: #e5deca;
+        color: #cfcdcf;
         font-size: 1.25em;
         text-align: center; }
     .wrapper .details .tournamentview {
@@ -1933,7 +1933,7 @@ body {
       column-rule: 1px dotted #3c3f3c;
       padding: 5px;
       background: #242524;
-      color: #e5deca;
+      color: #cfcdcf;
       border: 1px solid #3c3f3c;
       box-shadow: 3px 3px 5px #171817;
       border-radius: 5px;
@@ -1952,7 +1952,7 @@ body {
         font-family: Titre;
         font-weight: normal;
         background: #171817;
-        color: #e5deca;
+        color: #cfcdcf;
         font-size: 1.25em;
         text-align: center; }
     .wrapper .details .narrative {
@@ -2014,7 +2014,7 @@ body {
       margin-top: .5em; }
     .wrapper .details h1 {
       font-size: 1.6em;
-      color: #e5deca; }
+      color: #cfcdcf; }
     .wrapper .details h2 {
       font-size: 1.4em; }
     .wrapper .details h3 {
@@ -2037,7 +2037,7 @@ body {
   margin: 0; }
 
 .pdflink {
-  color: #e5deca;
+  color: #cfcdcf;
   text-decoration: none;
   background: #242524;
   display: inline-block;
@@ -2059,11 +2059,11 @@ body {
   text-shadow: 0 0 3px black; }
 
 .wildcard {
-  color: #e5deca;
+  color: #cfcdcf;
   opacity: .5; }
 
 .low {
-  color: #e5deca;
+  color: #cfcdcf;
   /*opacity: .5;*/
   text-shadow: 0 0 3px lime; }
 
@@ -2111,7 +2111,7 @@ th.skill_dot {
   border: 2px solid #242524;
   border-radius: 5px;
   background: #242524;
-  color: #f6f3ec;
+  color: #e8e7e8;
   text-decoration: none;
   padding: 5px;
   text-align: left;
@@ -2175,7 +2175,7 @@ span.toggler {
   span.toggler u {
     font-family: Texte;
     text-decoration: none;
-    color: #f6f3ec;
+    color: #e8e7e8;
     font-weight: none; }
     span.toggler u:before {
       content: "  "; }
@@ -2190,7 +2190,7 @@ span.toggler {
   z-index: 9000;
   padding: 5px;
   background: #242524;
-  color: #e5deca;
+  color: #cfcdcf;
   border: 1px solid #3c3f3c;
   box-shadow: 3px 3px 5px #171817;
   border-radius: 5px;
@@ -2223,7 +2223,7 @@ span.toggler {
 .plate {
   display: inline-block;
   background: #171817;
-  color: #e5deca;
+  color: #cfcdcf;
   border: 1px solid #242524;
   width: 25em;
   min-height: 1.4em;
@@ -2262,11 +2262,11 @@ span.toggler {
   height: auto; }
 
 span.info {
-  color: #e5deca; }
+  color: #cfcdcf; }
 
 input[type=text], input[type=password], input[type=number], input[type=checkbox], select, textarea {
   background-color: #242524;
-  color: #e5deca;
+  color: #cfcdcf;
   border-radius: 2px;
   padding: 2px;
   border: 2px ridge #444444;
@@ -2293,7 +2293,7 @@ body {
 .menu {
   position: fixed;
   overflow: show;
-  color: #e5deca;
+  color: #cfcdcf;
   font-size: .73em;
   background: #242524;
   z-index: 20;
@@ -2302,7 +2302,7 @@ body {
   padding: 5px 0 5px 0;
   padding: 5px;
   background: #242524;
-  color: #e5deca;
+  color: #cfcdcf;
   border: 1px solid #3c3f3c;
   box-shadow: 3px 3px 5px #171817;
   border-radius: 5px;
@@ -2366,12 +2366,12 @@ body {
             z-index: 500; }
 
 .list {
-  color: #e5deca;
+  color: #cfcdcf;
   background: transparent;
   transition: flex-basis .5s, width .5s;
   padding: 5px;
   background: #242524;
-  color: #e5deca;
+  color: #cfcdcf;
   border: 1px solid #3c3f3c;
   box-shadow: 3px 3px 5px #171817;
   border-radius: 5px;
@@ -2403,7 +2403,7 @@ body {
       margin: 0 .1em;
       display: inline-block;
       padding: .5em;
-      color: #e5deca;
+      color: #cfcdcf;
       font-size: .77em;
       background: #242524;
       padding: .5em .8em;
@@ -2459,7 +2459,7 @@ body {
 
 .character_actions {
   float: right;
-  color: #e5deca; }
+  color: #cfcdcf; }
 
 .wrapper {
   font-family: Texte;
@@ -2529,7 +2529,7 @@ body {
             font-family: Titre;
             font-weight: normal;
             background: #171817;
-            color: #e5deca;
+            color: #cfcdcf;
             font-size: 1.25em;
             text-align: center; }
       .wrapper .details .gear ul.unbreakable {
@@ -2560,7 +2560,7 @@ body {
             font-family: Titre;
             font-weight: normal;
             background: #171817;
-            color: #e5deca;
+            color: #cfcdcf;
             font-size: 1.25em;
             text-align: center; }
       .wrapper .details .options ul.unbreakable {
@@ -2647,7 +2647,7 @@ body {
       padding: 10px;
       background-color: #242524;
       display: inline-block;
-      color: #e5deca; }
+      color: #cfcdcf; }
       .wrapper .details .chart_panel canvas {
         width: 1000px;
         height: auto; }
@@ -2662,7 +2662,7 @@ body {
       column-rule: 1px dotted #3c3f3c;
       padding: 5px;
       background: #242524;
-      color: #e5deca;
+      color: #cfcdcf;
       border: 1px solid #3c3f3c;
       box-shadow: 3px 3px 5px #171817;
       border-radius: 5px;
@@ -2679,7 +2679,7 @@ body {
         font-family: Titre;
         font-weight: normal;
         background: #171817;
-        color: #e5deca;
+        color: #cfcdcf;
         font-size: 1.25em;
         text-align: center; }
     .wrapper .details .tournamentview {
@@ -2692,7 +2692,7 @@ body {
       column-rule: 1px dotted #3c3f3c;
       padding: 5px;
       background: #242524;
-      color: #e5deca;
+      color: #cfcdcf;
       border: 1px solid #3c3f3c;
       box-shadow: 3px 3px 5px #171817;
       border-radius: 5px;
@@ -2711,7 +2711,7 @@ body {
         font-family: Titre;
         font-weight: normal;
         background: #171817;
-        color: #e5deca;
+        color: #cfcdcf;
         font-size: 1.25em;
         text-align: center; }
     .wrapper .details .narrative {
@@ -2773,7 +2773,7 @@ body {
       margin-top: .5em; }
     .wrapper .details h1 {
       font-size: 1.6em;
-      color: #e5deca; }
+      color: #cfcdcf; }
     .wrapper .details h2 {
       font-size: 1.4em; }
     .wrapper .details h3 {
@@ -2796,7 +2796,7 @@ body {
   margin: 0; }
 
 .pdflink {
-  color: #e5deca;
+  color: #cfcdcf;
   text-decoration: none;
   background: #242524;
   display: inline-block;
@@ -2818,11 +2818,11 @@ body {
   text-shadow: 0 0 3px black; }
 
 .wildcard {
-  color: #e5deca;
+  color: #cfcdcf;
   opacity: .5; }
 
 .low {
-  color: #e5deca;
+  color: #cfcdcf;
   /*opacity: .5;*/
   text-shadow: 0 0 3px lime; }
 
@@ -2870,7 +2870,7 @@ th.skill_dot {
   border: 2px solid #242524;
   border-radius: 5px;
   background: #242524;
-  color: #f6f3ec;
+  color: #e8e7e8;
   text-decoration: none;
   padding: 5px;
   text-align: left;
@@ -2919,7 +2919,7 @@ th.skill_dot {
   overflow: hidden;
   padding: 5px;
   background: #242524;
-  color: #e5deca;
+  color: #cfcdcf;
   border: 1px solid #3c3f3c;
   box-shadow: 3px 3px 5px #171817;
   border-radius: 5px;
@@ -2957,7 +2957,7 @@ th.skill_dot {
   width: 300px;
   padding: 5px;
   background: #242524;
-  color: #e5deca;
+  color: #cfcdcf;
   border: 1px solid #3c3f3c;
   box-shadow: 3px 3px 5px #171817;
   border-radius: 5px;
@@ -2986,7 +2986,7 @@ th.skill_dot {
   width: 300px;
   padding: 5px;
   background: #242524;
-  color: #e5deca;
+  color: #cfcdcf;
   border: 1px solid #3c3f3c;
   box-shadow: 3px 3px 5px #171817;
   border-radius: 5px;
@@ -3048,14 +3048,14 @@ th.skill_dot {
       .menu_block ul.level-1 li ul.level-2 {
         display: none;
         display: inline-block;
-        color: #e5deca;
+        color: #cfcdcf;
         margin: 0;
         padding: 0;
         text-indent: 0;
         border-radius: 5px;
         width: 28ex; }
         .menu_block ul.level-1 li ul.level-2 li {
-          color: #e5deca;
+          color: #cfcdcf;
           background: #242524;
           padding: 0.2em 1ex 0.2em 1ex;
           text-align: center;
@@ -3065,7 +3065,7 @@ th.skill_dot {
         display: inline-block; }
 
 .pull-down {
-  color: #e5deca;
+  color: #cfcdcf;
   weight: bold;
   text-align: center;
   display: inline-block;
@@ -3092,23 +3092,24 @@ th.skill_dot {
     width: 100%;
     height: 20px; }
 
-.menu-item {
+span.menu-item, a.menu-item {
   display: block;
   background: transparent;
-  color: #e5deca;
+  color: #cfcdcf;
   text-align: left;
+  text-decoration: none;
   padding: 0.2em 1ex 0.2em 1ex;
   border: 1px solid #242524;
   border-radius: 5px;
   width: 24ex;
   cursor: pointer; }
-  .menu-item A {
-    color: #e5deca; }
-    .menu-item A:visited, .menu-item A:hover, .menu-item A:link, .menu-item A:active {
-      color: #e5deca; }
-    .menu-item A i.fas {
-      color: #e5deca; }
-  .menu-item:hover {
+  span.menu-item A, a.menu-item A {
+    color: #cfcdcf; }
+    span.menu-item A:visited, span.menu-item A:hover, span.menu-item A:link, span.menu-item A:active, a.menu-item A:visited, a.menu-item A:hover, a.menu-item A:link, a.menu-item A:active {
+      color: #cfcdcf; }
+    span.menu-item A i.fas, a.menu-item A i.fas {
+      color: #cfcdcf; }
+  span.menu-item:hover, a.menu-item:hover {
     background: #fc2;
     color: #242524; }
 
@@ -3334,7 +3335,7 @@ button.toast-close-button {
 
 input[type=text], input[type=password], input[type=number], input[type=checkbox], select, textarea {
   background-color: #242524;
-  color: #e5deca;
+  color: #cfcdcf;
   border-radius: 2px;
   padding: 2px;
   border: 2px ridge #444444;
@@ -3361,7 +3362,7 @@ body {
 .menu {
   position: fixed;
   overflow: show;
-  color: #e5deca;
+  color: #cfcdcf;
   font-size: .73em;
   background: #242524;
   z-index: 20;
@@ -3370,7 +3371,7 @@ body {
   padding: 5px 0 5px 0;
   padding: 5px;
   background: #242524;
-  color: #e5deca;
+  color: #cfcdcf;
   border: 1px solid #3c3f3c;
   box-shadow: 3px 3px 5px #171817;
   border-radius: 5px;
@@ -3434,12 +3435,12 @@ body {
             z-index: 500; }
 
 .list {
-  color: #e5deca;
+  color: #cfcdcf;
   background: transparent;
   transition: flex-basis .5s, width .5s;
   padding: 5px;
   background: #242524;
-  color: #e5deca;
+  color: #cfcdcf;
   border: 1px solid #3c3f3c;
   box-shadow: 3px 3px 5px #171817;
   border-radius: 5px;
@@ -3471,7 +3472,7 @@ body {
       margin: 0 .1em;
       display: inline-block;
       padding: .5em;
-      color: #e5deca;
+      color: #cfcdcf;
       font-size: .77em;
       background: #242524;
       padding: .5em .8em;
@@ -3527,7 +3528,7 @@ body {
 
 .character_actions {
   float: right;
-  color: #e5deca; }
+  color: #cfcdcf; }
 
 .wrapper {
   font-family: Texte;
@@ -3597,7 +3598,7 @@ body {
             font-family: Titre;
             font-weight: normal;
             background: #171817;
-            color: #e5deca;
+            color: #cfcdcf;
             font-size: 1.25em;
             text-align: center; }
       .wrapper .details .gear ul.unbreakable {
@@ -3628,7 +3629,7 @@ body {
             font-family: Titre;
             font-weight: normal;
             background: #171817;
-            color: #e5deca;
+            color: #cfcdcf;
             font-size: 1.25em;
             text-align: center; }
       .wrapper .details .options ul.unbreakable {
@@ -3715,7 +3716,7 @@ body {
       padding: 10px;
       background-color: #242524;
       display: inline-block;
-      color: #e5deca; }
+      color: #cfcdcf; }
       .wrapper .details .chart_panel canvas {
         width: 1000px;
         height: auto; }
@@ -3730,7 +3731,7 @@ body {
       column-rule: 1px dotted #3c3f3c;
       padding: 5px;
       background: #242524;
-      color: #e5deca;
+      color: #cfcdcf;
       border: 1px solid #3c3f3c;
       box-shadow: 3px 3px 5px #171817;
       border-radius: 5px;
@@ -3747,7 +3748,7 @@ body {
         font-family: Titre;
         font-weight: normal;
         background: #171817;
-        color: #e5deca;
+        color: #cfcdcf;
         font-size: 1.25em;
         text-align: center; }
     .wrapper .details .tournamentview {
@@ -3760,7 +3761,7 @@ body {
       column-rule: 1px dotted #3c3f3c;
       padding: 5px;
       background: #242524;
-      color: #e5deca;
+      color: #cfcdcf;
       border: 1px solid #3c3f3c;
       box-shadow: 3px 3px 5px #171817;
       border-radius: 5px;
@@ -3779,7 +3780,7 @@ body {
         font-family: Titre;
         font-weight: normal;
         background: #171817;
-        color: #e5deca;
+        color: #cfcdcf;
         font-size: 1.25em;
         text-align: center; }
     .wrapper .details .narrative {
@@ -3841,7 +3842,7 @@ body {
       margin-top: .5em; }
     .wrapper .details h1 {
       font-size: 1.6em;
-      color: #e5deca; }
+      color: #cfcdcf; }
     .wrapper .details h2 {
       font-size: 1.4em; }
     .wrapper .details h3 {
@@ -3864,7 +3865,7 @@ body {
   margin: 0; }
 
 .pdflink {
-  color: #e5deca;
+  color: #cfcdcf;
   text-decoration: none;
   background: #242524;
   display: inline-block;
@@ -3886,11 +3887,11 @@ body {
   text-shadow: 0 0 3px black; }
 
 .wildcard {
-  color: #e5deca;
+  color: #cfcdcf;
   opacity: .5; }
 
 .low {
-  color: #e5deca;
+  color: #cfcdcf;
   /*opacity: .5;*/
   text-shadow: 0 0 3px lime; }
 
@@ -3938,7 +3939,7 @@ th.skill_dot {
   border: 2px solid #242524;
   border-radius: 5px;
   background: #242524;
-  color: #f6f3ec;
+  color: #e8e7e8;
   text-decoration: none;
   padding: 5px;
   text-align: left;
@@ -4001,7 +4002,7 @@ th.skill_dot {
   border-radius: 5px 5px 5px 5px;
   background-color: black;
   font-family: 'Texte';
-  color: #e5deca; }
+  color: #cfcdcf; }
   .storyview .drama_wrap, .storyview .epic_wrap, .storyview .event_wrap, .storyview .act_wrap {
     border: 3px solid #242524;
     margin: 2px;
@@ -4019,7 +4020,7 @@ th.skill_dot {
     .storyview .title .chapter {
       display: inline-block;
       border: 1px solid transparent;
-      color: #f6f3ec;
+      color: #e8e7e8;
       text-align: center;
       font-family: NomPerso;
       font-size: 1.1em;
@@ -4043,7 +4044,7 @@ th.skill_dot {
       display: inline-block;
       font-family: NomPerso;
       flex: 0 0 250px;
-      color: #f6f3ec; }
+      color: #e8e7e8; }
     .storyview .title .storybar {
       display: flex;
       flex-flow: row-reverse wrap;
@@ -4059,10 +4060,10 @@ th.skill_dot {
         background: transparent; }
       .storyview .title .storybar button.compact {
         background: #444444;
-        border: 1px solid #e5deca;
+        border: 1px solid #cfcdcf;
         border-radius: 3px;
         box-shadow: 0 0 3px black;
-        color: #e5deca;
+        color: #cfcdcf;
         flex-basis: 10ex;
         margin: 2px;
         font-family: Texte;
@@ -4072,7 +4073,7 @@ th.skill_dot {
           background: #242524;
           box-shadow: 0 0 3px #aaa; }
     .storyview .title h1, .storyview .title h2, .storyview .title h3, .storyview .title h4 {
-      color: #e5deca;
+      color: #cfcdcf;
       display: inline-block;
       padding: 0;
       margin: 0;
@@ -4089,22 +4090,22 @@ th.skill_dot {
     background: transparent;
     padding: 0;
     margin: auto;
-    color: #f6f3ec;
+    color: #e8e7e8;
     width: 100%; }
     .storyview .storyarticle table {
-      border: 1px solid #e5deca;
+      border: 1px solid #cfcdcf;
       border-radius: 5px; }
       .storyview .storyarticle table tr th {
         width: 150px;
         padding: 2px;
         background: #303230;
-        color: #e5deca;
+        color: #cfcdcf;
         border: 1px solid silver; }
       .storyview .storyarticle table tr td {
         padding: 2px;
         background: #303230;
-        color: #e5deca;
-        border: 1px solid #e5deca; }
+        color: #cfcdcf;
+        border: 1px solid #cfcdcf; }
         .storyview .storyarticle table tr td .embedded_link {
           color: #fc2;
           cursor: pointer; }
@@ -4124,7 +4125,7 @@ th.skill_dot {
         .storyview .storyarticle table.storydetails tr td {
           width: auto;
           background: #242524;
-          color: #e5deca;
+          color: #cfcdcf;
           border: none;
           font-size: 9pt;
           font-family: TextDesc;
@@ -4135,7 +4136,7 @@ th.skill_dot {
             column-gap: 20px;
             column-rule-style: dotted;
             column-rule-width: 1px;
-            column-rule-color: #e5deca;
+            column-rule-color: #cfcdcf;
             line-height: 1.4em;
             min-height: 150px; }
             .storyview .storyarticle table.storydetails tr td .desc .loot {
@@ -4159,7 +4160,7 @@ th.skill_dot {
           color: #fc2;
           font-weight: 600; }
         .storyview .storyarticle table.storydetails strong {
-          color: #e5deca;
+          color: #cfcdcf;
           font-weight: 900;
           font-style: normal;
           border-bottom: 1px dotted #ea6; }
@@ -4179,12 +4180,12 @@ th.skill_dot {
         .storyview .storyarticle table.update tr td {
           width: auto;
           background: #171817;
-          color: #e5deca;
+          color: #cfcdcf;
           border: none;
           border-radius: 5px; }
         .storyview .storyarticle table.update input[type=text], .storyview .storyarticle table.update input[type=number], .storyview .storyarticle table.update input[type=checkbox], .storyview .storyarticle table.update select, .storyview .storyarticle table.update textarea {
           background-color: #242524;
-          color: #e5deca;
+          color: #cfcdcf;
           border-radius: 2px;
           padding: 2px;
           border: 2px ridge #444444;
@@ -4200,7 +4201,7 @@ th.skill_dot {
       cursor: help; }
   .storyview input[type=text], .storyview input[type=number], .storyview input[type=checkbox], .storyview select, .storyview textarea {
     background-color: #242524;
-    color: #e5deca;
+    color: #cfcdcf;
     border-radius: 2px;
     padding: 2px;
     border: 2px ridge #444444;
@@ -4228,7 +4229,7 @@ th.skill_dot {
       flex: 0 0 150px;
       background: #303230;
       border-radius: 5px;
-      color: #e5deca;
+      color: #cfcdcf;
       margin: 2px;
       padding: 3px;
       font-size: 1.1em;
@@ -4238,7 +4239,7 @@ th.skill_dot {
       flex-grow: 4;
       border-radius: 5px;
       border: 1px solid #242524;
-      color: #e5deca;
+      color: #cfcdcf;
       margin: 2px;
       padding: 3px;
       font-size: 1.1em; }
@@ -4270,7 +4271,7 @@ th.skill_dot {
 
 input[type=text], input[type=password], input[type=number], input[type=checkbox], select, textarea {
   background-color: #242524;
-  color: #e5deca;
+  color: #cfcdcf;
   border-radius: 2px;
   padding: 2px;
   border: 2px ridge #444444;
@@ -4297,7 +4298,7 @@ body {
 .menu {
   position: fixed;
   overflow: show;
-  color: #e5deca;
+  color: #cfcdcf;
   font-size: .73em;
   background: #242524;
   z-index: 20;
@@ -4306,7 +4307,7 @@ body {
   padding: 5px 0 5px 0;
   padding: 5px;
   background: #242524;
-  color: #e5deca;
+  color: #cfcdcf;
   border: 1px solid #3c3f3c;
   box-shadow: 3px 3px 5px #171817;
   border-radius: 5px;
@@ -4370,12 +4371,12 @@ body {
             z-index: 500; }
 
 .list {
-  color: #e5deca;
+  color: #cfcdcf;
   background: transparent;
   transition: flex-basis .5s, width .5s;
   padding: 5px;
   background: #242524;
-  color: #e5deca;
+  color: #cfcdcf;
   border: 1px solid #3c3f3c;
   box-shadow: 3px 3px 5px #171817;
   border-radius: 5px;
@@ -4407,7 +4408,7 @@ body {
       margin: 0 .1em;
       display: inline-block;
       padding: .5em;
-      color: #e5deca;
+      color: #cfcdcf;
       font-size: .77em;
       background: #242524;
       padding: .5em .8em;
@@ -4463,7 +4464,7 @@ body {
 
 .character_actions {
   float: right;
-  color: #e5deca; }
+  color: #cfcdcf; }
 
 .wrapper {
   font-family: Texte;
@@ -4533,7 +4534,7 @@ body {
             font-family: Titre;
             font-weight: normal;
             background: #171817;
-            color: #e5deca;
+            color: #cfcdcf;
             font-size: 1.25em;
             text-align: center; }
       .wrapper .details .gear ul.unbreakable {
@@ -4564,7 +4565,7 @@ body {
             font-family: Titre;
             font-weight: normal;
             background: #171817;
-            color: #e5deca;
+            color: #cfcdcf;
             font-size: 1.25em;
             text-align: center; }
       .wrapper .details .options ul.unbreakable {
@@ -4651,7 +4652,7 @@ body {
       padding: 10px;
       background-color: #242524;
       display: inline-block;
-      color: #e5deca; }
+      color: #cfcdcf; }
       .wrapper .details .chart_panel canvas {
         width: 1000px;
         height: auto; }
@@ -4666,7 +4667,7 @@ body {
       column-rule: 1px dotted #3c3f3c;
       padding: 5px;
       background: #242524;
-      color: #e5deca;
+      color: #cfcdcf;
       border: 1px solid #3c3f3c;
       box-shadow: 3px 3px 5px #171817;
       border-radius: 5px;
@@ -4683,7 +4684,7 @@ body {
         font-family: Titre;
         font-weight: normal;
         background: #171817;
-        color: #e5deca;
+        color: #cfcdcf;
         font-size: 1.25em;
         text-align: center; }
     .wrapper .details .tournamentview {
@@ -4696,7 +4697,7 @@ body {
       column-rule: 1px dotted #3c3f3c;
       padding: 5px;
       background: #242524;
-      color: #e5deca;
+      color: #cfcdcf;
       border: 1px solid #3c3f3c;
       box-shadow: 3px 3px 5px #171817;
       border-radius: 5px;
@@ -4715,7 +4716,7 @@ body {
         font-family: Titre;
         font-weight: normal;
         background: #171817;
-        color: #e5deca;
+        color: #cfcdcf;
         font-size: 1.25em;
         text-align: center; }
     .wrapper .details .narrative {
@@ -4777,7 +4778,7 @@ body {
       margin-top: .5em; }
     .wrapper .details h1 {
       font-size: 1.6em;
-      color: #e5deca; }
+      color: #cfcdcf; }
     .wrapper .details h2 {
       font-size: 1.4em; }
     .wrapper .details h3 {
@@ -4800,7 +4801,7 @@ body {
   margin: 0; }
 
 .pdflink {
-  color: #e5deca;
+  color: #cfcdcf;
   text-decoration: none;
   background: #242524;
   display: inline-block;
@@ -4822,11 +4823,11 @@ body {
   text-shadow: 0 0 3px black; }
 
 .wildcard {
-  color: #e5deca;
+  color: #cfcdcf;
   opacity: .5; }
 
 .low {
-  color: #e5deca;
+  color: #cfcdcf;
   /*opacity: .5;*/
   text-shadow: 0 0 3px lime; }
 
@@ -4874,7 +4875,7 @@ th.skill_dot {
   border: 2px solid #242524;
   border-radius: 5px;
   background: #242524;
-  color: #f6f3ec;
+  color: #e8e7e8;
   text-decoration: none;
   padding: 5px;
   text-align: left;
