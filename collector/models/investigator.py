@@ -28,6 +28,10 @@ class Investigator(Avatar):
 
     C_TOTAL = models.IntegerField(default=0)
 
+    from collector.models.coc7_occupation import Coc7Occupation
+    occupation = models.ForeignKey(Coc7Occupation,on_delete=models.SET_NULL,blank=True, null=True)
+
+
     def fix(self, conf=None):
         super().fix(conf)
 

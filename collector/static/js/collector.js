@@ -209,11 +209,15 @@ class Collector{
         $('#menu_go').off().on('click', function(event) {
             event.preventDefault();
             event.stopPropagation();
+
             let formdata = $('.character_form').serialize();
             let id = $('.character_form input[name=id]').val();
             let rid = $('.character_form input[name=rid]').val();
+
+            let tgt = $('.character_form').attr('form-target');
+
             $.ajax({
-                url: 'characters/' + id + '/edit/',
+                url: tgt+'s/' + id + '/edit/',
                 type: 'POST',
                 headers: {
                     'Accept': 'application/json',
@@ -223,7 +227,7 @@ class Collector{
                 dataType: 'json',
                 success: function(answer) {
                     $('li').find('div.avatar_link').removeClass('selected');
-                    $('li').find('div.avatar_link').find('#' + id + '.view_character').click();
+                    //$('li').find('div.avatar_link').find('#' + id + '.view_character').click();
                     me.rebootLinks();
                     me.prepareAjax();
                     me.loadKeywords();
@@ -233,13 +237,13 @@ class Collector{
                 },
             });
         });
-        $('#menu_add_character').off().on('click', function(event) {
+        $('#menu_add_avatar').off().on('click', function(event) {
             event.preventDefault();
             let name = $("#customize").val();
             $("#customize").val("");
             name = name.split(" ").join("-");
             $.ajax({
-                url: 'ajax/add/character/' + name + '/',
+                url: 'ajax/add/avatar/' + name + '/',
                 success: function(answer) {
                     $('.details').html(answer.character)
                     me.rebootLinks();
@@ -414,7 +418,7 @@ class Collector{
             $(mine).toggleClass('hidden');
             me.rebootLinks();
         });
-        $('.recalc_character').off().on('click', function(event) {
+        $('.recalc_avatar').off().on('click', function(event) {
             event.preventDefault();
             event.stopPropagation();
             let dad = $(this).parents('li');
@@ -423,7 +427,7 @@ class Collector{
             //let that_id = $(this).attr('id').split("_")[0];
             $("li#" + dad_id + " .character_info").removeClass('hidden');
             $.ajax({
-                url: 'ajax/recalc/character/' + x + '/',
+                url: 'ajax/recalc/avatar/' + x + '/',
                 success: function(answer) {
                     $('.details').html(answer.character);
                     $('li#' + answer.rid).html(answer.link);
@@ -553,6 +557,35 @@ class Collector{
                 }
             });
         });
+
+        $('.edit_investigator').off().on('click', function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            let dad = $(this).parents('li');
+            let dad_id = $(dad).attr("id");
+            let x = $(this).parents('div').attr("id").split("_")[1];
+            console.log(x);
+            //let that_id = $(this).attr('id').split("_")[0];
+            $("li#" + dad_id + " .character_info").removeClass('hidden');
+            $.ajax({
+                url: 'investigators/' + x + '/edit/',
+                success: function(answer) {
+                    $('.details').html(answer);
+                    $('li#' + answer.rid).html(answer.link);
+                    me.rebootLinks();
+                    ac.reset(x, "sheet_" + x, "customizer");
+                    $("li#" + dad_id + " .character_name").click();
+                    //update_messenger();
+                },
+                error: function(answer) {
+                    console.log('ooops... :(');
+                    //update_messenger();
+                }
+            });
+        });
+
+
+
         $('.roll_dice').off().on('keypress', function(event) {
             if (event.which == 13){
                 event.preventDefault();

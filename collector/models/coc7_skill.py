@@ -45,7 +45,7 @@ class Coc7SkillRef(models.Model):
         self.smart_code = smart_code(self.reference)
 
     def __str__(self):
-        return f'{self.smart_code}'
+        return f'{self.reference}'
 
 
 class Coc7Skill(models.Model):

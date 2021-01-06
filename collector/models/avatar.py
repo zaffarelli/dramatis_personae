@@ -40,6 +40,9 @@ class Avatar(models.Model):
     pub_date = models.DateTimeField('Date published', default=datetime.now)
 
     def fix(self, conf=None):
+        if conf is None:
+            from collector.utils.basic import get_current_config
+            conf = get_current_config()
         logger.warning(f'Fixing ........: {self.full_name}')
         if self.rid == 'none':
             self.get_rid(self.full_name)

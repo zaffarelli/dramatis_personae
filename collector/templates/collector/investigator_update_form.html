@@ -1,7 +1,7 @@
 
 
 <div class="classyview">
-    <form class='character_form' form-target='character'>
+    <form class='character_form' form-target='investigator'>
         {{ form.non_field_errors}}
         {{ form.management_form }}
         <input name='id' type='hidden' value='{{c.id}}'>
@@ -16,6 +16,11 @@
                         {{form.full_name }}
                     </div>
                     <div class="field_wrapper">
+                        {{ form.occupation.errors}}
+                        <label for="occupation">Occupation</label>
+                        {{form.occupation}}
+                    </div>
+                    <div class="field_wrapper">
                         {{ form.alias.errors}}
                         <label for="alias">Alias</label>
                         {{form.alias}}
@@ -24,21 +29,6 @@
                         {{ form.entrance.errors}}
                         <label for="entrance">Entrance</label>
                         {{form.entrance}}
-                    </div>
-                    <div class="field_wrapper">
-                        {{ form.alliance.errors}}
-                        <label for="">Alliance</label>
-                        {{form.alliance}}
-                    </div>
-                    <div class="field_wrapper">
-                        {{ form.faction.errors}}
-                        <label for="">Faction</label>
-                        {{form.faction}}
-                    </div>
-                    <div class="field_wrapper">
-                        {{ form.specie.errors}}
-                        <label for="">Species/Race</label>
-                        {{form.specie}}
                     </div>
                     <div class="field_wrapper">
                         {{ form.birthdate.errors}}
@@ -61,29 +51,9 @@
                         {{form.weight}}
                     </div>
                     <div class="field_wrapper">
-                        {{ form.rank.errors}}
-                        <label for="">Rank</label>
-                        {{form.rank}}
-                    </div>
-                    <div class="field_wrapper">
-                        {{ form.native_fief.errors}}
-                        <label for="">Native Fief</label>
-                        {{form.native_fief}}
-                    </div>
-                    <div class="field_wrapper">
-                        {{ form.caste.errors}}
-                        <label for="">Caste:</label>
-                        {{form.caste}}
-                    </div>
-                    <div class="field_wrapper">
                         {{ form.player.errors}}
                         <label for="">Player</label>
                         {{form.player}}
-                    </div>
-                    <div class="field_wrapper">
-                        {{ form.occult.errors}}
-                        <label for="">Occult</label>
-                        {{form.occult}}
                     </div>
                     <div class="field_wrapper">
                         {{ form.keyword.errors}}
@@ -101,11 +71,6 @@
                         {{form.is_dead}}
                     </div>
                     <div class="field_wrapper">
-                        {{ form.use_history_creation_errors}}
-                        <label for="">Use History Creation</label>
-                        {{form.use_history_creation}}
-                    </div>
-                    <div class="field_wrapper">
                         {{ form.is_locked.errors}}
                         <label for="">Locked</label>
                         {{form.is_locked}}
@@ -121,21 +86,6 @@
                         {{form.is_partial}}
                     </div>
                     <div class="field_wrapper">
-                        {{ form.use_only_entrance.errors}}
-                        <label for="">Only Entrance</label>
-                        {{form.use_only_entrance}}
-                    </div>
-                    <div class="field_wrapper">
-                        {{ form.historical_figure.errors}}
-                        <label for="">Historical Figure</label>
-                        {{form.historical_figure}}
-                    </div>
-                    <div class="field_wrapper">
-                        {{ form.nameless.errors}}
-                        <label for="">Nameless</label>
-                        {{form.nameless}}
-                    </div>
-                    <div class="field_wrapper">
                         {{ form.epic.errors}}
                         <label for="">Epic</label>
                         {{form.epic}}
@@ -145,14 +95,6 @@
                         <label for="">Narrative</label>
                         {{form.narrative}}
                     </div>
-                </td><td>
-                      <table class="formset inline">
-                      <caption>Lifepath</caption>
-                      {{ tourofdutys.management_form }}
-                      {% for form in tourofdutys.forms %}
-                        {{ form.as_table }}
-                        {% endfor %}
-                    </table>
                 </td>
             </tr>
         </table>

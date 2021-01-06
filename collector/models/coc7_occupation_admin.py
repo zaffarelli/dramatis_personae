@@ -16,7 +16,7 @@ def refix(modeladmin, request, queryset):
 
 class Coc7OccupationAdmin(admin.ModelAdmin):
     list_display = ['reference', 'smart_code', 'is_classic', 'is_lovecraftian', 'credit_min', 'credit_max',
-                    'occupation_points']
+                    'occupation_points', 'competences']
     list_filter = ['is_classic', 'is_lovecraftian', 'occupation_points', ]
     actions = [refix]
     inlines = [Coc7SkillModificatorInline]

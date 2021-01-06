@@ -32,37 +32,34 @@ class InvestigatorUpdateView(AjaxFromResponseMixin, UpdateView):
     context_object_name = 'c'
     template_name_suffix = '_update_form'
 
-    def form_valid(self, form):
-        context = self.get_context_data(form=form)
-        tourofdutys_formset = context['tourofdutys']
-        if tourofdutys_formset.is_valid():
-            response = super().form_valid(form)
-            tourofdutys_formset.instance = self.object
-            tourofdutys_formset.save()
-            return response
-        else:
-            messages.error(self.request, 'Avatar %s has errors. unable to save.' % (context['c'].full_name))
-            return super().form_invalid(form)
+    # def form_valid(self, form):
+    #     context = self.get_context_data(form=form)
+    #     tourofdutys_formset = context['tourofdutys']
+    #     if tourofdutys_formset.is_valid():
+    #         response = super().form_valid(form)
+    #         tourofdutys_formset.instance = self.object
+    #         tourofdutys_formset.save()
+    #         return response
+    #     else:
+    #         messages.error(self.request, 'Avatar %s has errors. unable to save.' % (context['c'].full_name))
+    #         return super().form_invalid(form)
 
     def get_success_url(self):
-        return f'ajax/recalc/character/{self.object.id}/'
+        return f'ajax/recalc/investigator/{self.object.id}/'
 
     def get_context_data(self, **kwargs):
-        context = super(CharacterUpdateView, self).get_context_data(**kwargs)
+        context = super(InvestigatorUpdateView, self).get_context_data(**kwargs)
         if self.request.POST:
-            context['form'] = CharacterForm(self.request.POST, instance=self.object)
-            context['tourofdutys'] = TourOfDutyFormSet(self.request.POST, instance=self.object)
-            context['tourofdutys'].full_clean()
-            messages.success(self.request, 'Avatar updated: %s' % (context['form']['full_name'].value()))
+            context['form'] = InvestigatorForm(self.request.POST, instance=self.object)
+            messages.success(self.request, 'Investigator updated: %s' % (context['form']['full_name'].value()))
         else:
-            context['form'] = CharacterForm(instance=self.object)
-            context['tourofdutys'] = TourOfDutyFormSet(instance=self.object)
-            messages.info(self.request, 'Avatar displayed: %s' % (context['form']['full_name'].value()))
+            context['form'] = InvestigatorForm(instance=self.object)
+            messages.info(self.request, 'Investigator displayed: %s' % (context['form']['full_name'].value()))
         return context
 
 
 def respawn_avatar_link(avatar, context, request):
-    template = get_template('collector/character_link.html')
+    template = get_template('collector/investigator_link.html')
     context["avatar_link"] = template.render({'c': avatar}, request)
     return context
 

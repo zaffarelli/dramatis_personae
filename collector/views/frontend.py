@@ -98,8 +98,9 @@ def get_storyline(request, slug='none'):
         return Http404
 
 
-def recalc_character(request, id=None):
+def recalc_avatar(request, id=None):
     """ Re-calculate one single character. To be use in the frontend
+        This function must be compliant to all campaigns (actually fics and coc7)
     """
     campaign = get_current_config()
     if request.is_ajax():
@@ -180,9 +181,10 @@ def view_by_rid(request, slug=None):
     return HttpResponse(status=204)
 
 
-def add_character(request, slug=None):
+def add_avatar(request, slug=None):
     """ Add a new character to the universe
         The slug is supposed to be its real fullname.
+        Campaign compliant
     """
     campaign = get_current_config()
     if campaign.is_coc7:
@@ -204,13 +206,13 @@ def add_character(request, slug=None):
     character_item = campaign.avatars.get(pk=item.id)
     if campaign.is_fics:
         template = get_template('collector/character_detail.html')
-    elif campaign.is_coc7:
-        template = get_template('collector/investigator_detail.html')
-    character = template.render({'c': character_item, 'no_skill_edit': False})
-    if campaign.is_fics:
         templatelink = get_template('collector/character_link.html')
     elif campaign.is_coc7:
+        template = get_template('collector/investigator_detail.html')
         templatelink = get_template('collector/investigator_link.html')
+    else:
+        messages.warning(request, f'TODO for this campaign !!!')
+    character = template.render({'c': character_item, 'no_skill_edit': False})
     link = templatelink.render({'c': character_item}, request)
     context = {
         'rid': character_item.rid,

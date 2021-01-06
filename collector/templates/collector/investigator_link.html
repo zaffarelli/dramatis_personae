@@ -11,7 +11,7 @@
     </div>
     <div class='character_actions' id="link_{{c.id}}">
         <span class="action_icon edit_investigator"><i class="fas fa-user-tag"></i></span>&nbsp
-        <span class="action_icon recalc_character"><i class="fas fa-cog"></i></span>&nbsp;
+        <span class="action_icon recalc_avatar"><i class="fas fa-cog"></i></span>&nbsp;
         <span class="action_icon wa_export_character"><i class="fas fa-arrow-down"></i></span>&nbsp;
         {% if c.use_history_creation %}
             {% if c.balanced %}
@@ -41,7 +41,7 @@
   </div>
   <div class='character_info hidden'>
         <div class="main_plate">
-
+            {{ c.occupation | safe}}
         </div>
         <div class="support_plate">
 

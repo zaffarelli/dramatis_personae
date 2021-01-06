@@ -5,7 +5,7 @@
 """
 from django.db import models
 from django.contrib import admin
-from collector.models.investigator import Investigator
+# from collector.models.investigator import Investigator
 
 
 OCCUPATION_POINTS_METHODS = (
@@ -35,7 +35,12 @@ class Coc7Occupation(models.Model):
     credit_max = models.PositiveIntegerField(default='99')
 
     def __str__(self):
-        return f'{self.smart_code}'
+        c = l = ''
+        if self.is_classic:
+            c = '[C]'
+        if self.is_lovecraftian:
+            l = '[L]'
+        return f'{self.reference}{c}{l}'
 
     def fix(self):
         from collector.utils.rpg import smart_code
@@ -43,4 +48,11 @@ class Coc7Occupation(models.Model):
         creds = self.credit_range.split(';')
         self.credit_min = int(creds[0])
         self.credit_max = int(creds[1])
+
+    @property
+    def competences(self):
+        list = []
+        for x in self.coc7skillmodificator_set.all():
+            list.append(x.skill_ref.reference)
+        return ", ".join(list)
 
