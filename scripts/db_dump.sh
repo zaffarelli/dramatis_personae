@@ -50,7 +50,7 @@ python manage.py dumpdata collector.BeneficeAfflictionCusto --format xml --outpu
 python manage.py dumpdata collector.SkillCusto --format xml --output backup/custom/skill_custo.xml
 
 echo -e "\e[0;35m- Dumping Main Data... (Resulting from miscellaneous pushes)\e[0;m"
-python manage.py dumpdata collector.Config --format xml --output backup/custom/config.xml
+python manage.py dumpdata collector.Campaign --format xml --output backup/custom/campaign.xml
 python manage.py dumpdata collector.Skill --format xml --output backup/custom/skill.xml
 python manage.py dumpdata collector.Weapon --format xml --output backup/custom/weapon.xml
 python manage.py dumpdata collector.Armor --format xml --output backup/custom/armor.xml
@@ -73,23 +73,6 @@ python manage.py dumpdata collector.Profile --format xml --output backup/custom/
 
 
 echo -e "\e[1;35mMoving to fixtures...\e[0;m"
-cp backup/reference/blessing_curse_modificator.xml collector/fixtures/
-cp backup/reference/benefice_affliction_modificator.xml collector/fixtures/
-cp backup/reference/skill_modificator.xml collector/fixtures/
-cp backup/reference/armor_ref.xml collector/fixtures/
-cp backup/reference/benefice_affliction_ref.xml collector/fixtures/
-cp backup/reference/blessing_curse_ref.xml collector/fixtures/
-cp backup/reference/cyberfeature.xml collector/fixtures/
-cp backup/reference/cyberware_ref.xml collector/fixtures/
-cp backup/reference/gear.xml collector/fixtures/
-cp backup/reference/ritualref.xml collector/fixtures/
-cp backup/reference/skill_ref.xml collector/fixtures/
-cp backup/reference/shield_ref.xml collector/fixtures/
-cp backup/reference/ship_section.xml collector/fixtures/
-cp backup/reference/ship_system.xml collector/fixtures/
-cp backup/reference/ship_ref.xml collector/fixtures/
-cp backup/reference/specie.xml collector/fixtures/
-cp backup/reference/tour_of_duty_ref.xml collector/fixtures/
-cp backup/reference/weapon_ref.xml collector/fixtures/
+cp backup/reference/* collector/fixtures/
 
 echo -e "\e[1;35m...done\e[0;m"

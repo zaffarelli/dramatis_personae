@@ -54,7 +54,7 @@ python manage.py loaddata backup/reference/skill_modificator.xml
 python manage.py loaddata backup/custom/character.xml
 
 echo -e "\e[0;35m- Restoring Main Data... (Resulting from miscellaneous pushes)\e[0;m"
-python manage.py loaddata backup/custom/config.xml
+python manage.py loaddata backup/custom/campaign.xml
 python manage.py loaddata backup/custom/skill.xml
 python manage.py loaddata backup/custom/weapon.xml
 python manage.py loaddata backup/custom/armor.xml
