@@ -27,20 +27,19 @@ class Character(Combattant):
 
     page_num = 0
 
-    alias = models.CharField(max_length=200, blank=True, null=True, default='')
-    alliance = models.CharField(max_length=200, blank=True, default='')
-    faction = models.CharField(max_length=200, blank=True, default='')
-    alliance_hash = models.CharField(max_length=200, blank=True, default='none')
+    alias = models.CharField(max_length=200, default='')
+    alliance = models.CharField(max_length=200,  default='')
+    faction = models.CharField(max_length=200, default='')
+    alliance_hash = models.CharField(max_length=200, default='none')
 
-    specie = models.ForeignKey(Specie, null=True, default=31, blank=True,
-                               on_delete=models.SET_NULL)
-    race = models.TextField(max_length=256, default='', blank=True, null=True)
+    specie = models.ForeignKey(Specie, default=31, blank=True, null=True, on_delete=models.SET_NULL)
+    race = models.TextField(max_length=256, default='')
 
-    native_fief = models.CharField(max_length=200, default='none', blank=True)
-    caste = models.CharField(max_length=100, default='Freefolk', blank=True)
-    rank = models.CharField(max_length=100, default='', blank=True)
+    native_fief = models.CharField(max_length=200, default='none')
+    caste = models.CharField(max_length=100, default='Freefolk')
+    rank = models.CharField(max_length=100, default='')
 
-    build_log = models.TextField(default='', blank=True)
+    build_log = models.TextField(default='')
     PA_STR = models.PositiveIntegerField(default=1)
     PA_CON = models.PositiveIntegerField(default=1)
     PA_BOD = models.PositiveIntegerField(default=1)
@@ -78,33 +77,31 @@ class Character(Combattant):
     OP = models.IntegerField(default=0)
     score = models.IntegerField(default=0)
     gm_shortcuts = models.TextField(default='', blank=True)
-    gm_shortcuts_pdf = models.TextField(default='', blank=True)
+    gm_shortcuts_pdf = models.TextField(default='')
 
     OCC_LVL = models.PositiveIntegerField(default=0)
     OCC_DRK = models.PositiveIntegerField(default=0)
-    occult = models.CharField(max_length=50, default='', blank=True)
-    challenge = models.TextField(default='', blank=True)
+    occult = models.CharField(max_length=50, default='')
+    challenge = models.TextField(default='')
     challenge_value = models.IntegerField(default=0)
-    todo_list = models.TextField(default='', blank=True)
+    todo_list = models.TextField(default='')
     # is_exportable = models.BooleanField(default=False)
     use_history_creation = models.BooleanField(default=False)
     use_only_entrance = models.BooleanField(default=False)
-
-    picture = models.CharField(max_length=1024, blank=True,
-                               default='https://drive.google.com/open?id=15hdubdMt1t_deSXkbg9dsAjWi5tZwMU0')
-    alliance_picture = models.CharField(max_length=256, blank=True, default='')
+    picture = models.CharField(max_length=1024, default='https://drive.google.com/open?id=15hdubdMt1t_deSXkbg9dsAjWi5tZwMU0')
+    alliance_picture = models.CharField(max_length=256, default='')
     on_save_re_roll_attributes = models.BooleanField(default=False)
     on_save_re_roll_skills = models.BooleanField(default=False)
     life_path_total = models.IntegerField(default=0)
     overhead = models.IntegerField(default=0)
     stories_count = models.PositiveIntegerField(default=0)
-    stories = models.TextField(max_length=1024, default='', blank=True)
+    stories = models.TextField(max_length=1024, default='')
     balanced = models.BooleanField(default=False)
     historical_figure = models.BooleanField(default=False)
     nameless = models.BooleanField(default=False)
     error = models.BooleanField(default=False)
 
-    color = models.CharField(max_length=20, blank=True, default='#CCCCCC')
+    color = models.CharField(max_length=20, default='#CCCCCC')
     skills_options = []
     ba_options = []
     bc_options = []

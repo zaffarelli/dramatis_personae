@@ -105,7 +105,7 @@ class Gear(models.Model):
     wing_price = models.PositiveIntegerField(default=0)
     crest_price = models.PositiveIntegerField(default=0)
     talon_price = models.PositiveIntegerField(default=0)
-    description = models.TextField(default='', blank=True, max_length=2048)
+    description = models.TextField(default='', max_length=2048)
     reference = models.CharField(choices=REFERENCES, default='MotJ', max_length=32, blank=True, null=True)
 
     def __str__(self):

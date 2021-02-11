@@ -15,12 +15,11 @@ class TourOfDutyRef(models.Model):
     class Meta:
         ordering = ['category', 'reference']
         verbose_name = "FICS: ToD"
-    reference = models.CharField(max_length=64, default='', blank=True)
-    category = models.CharField(max_length=20, choices=fics_references.LIFEPATH_CATEGORY, default='Tour of Duty',
-                                blank=True)
-    caste = models.CharField(max_length=20, choices=fics_references.LIFEPATH_CASTE, default='Other', blank=True)
-    topic = models.CharField(max_length=64, default="", blank=True)
-    source = models.CharField(max_length=32, default='FS2CRB', null=True, blank=True)
+    reference = models.CharField(max_length=64, default='')
+    category = models.CharField(max_length=20, choices=fics_references.LIFEPATH_CATEGORY, default='Tour of Duty')
+    caste = models.CharField(max_length=20, choices=fics_references.LIFEPATH_CASTE, default='Other')
+    topic = models.CharField(max_length=64, default='')
+    source = models.CharField(max_length=32, default='FS2CRB')
     is_custom = models.BooleanField(default=False)
     AP = models.IntegerField(default=0)
     OP = models.IntegerField(default=0)

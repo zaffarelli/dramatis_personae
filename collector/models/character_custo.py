@@ -29,11 +29,11 @@ class CharacterCusto(models.Model):
     PA_TEC = models.PositiveIntegerField(default=0)
     PA_AGI = models.PositiveIntegerField(default=0)
     PA_AWA = models.PositiveIntegerField(default=0)
-    summary = models.TextField(default="", blank=True, null=True)
+    summary = models.TextField(default='')
     OCC_LVL = models.PositiveIntegerField(default=0)
     OCC_DRK = models.PositiveIntegerField(default=0)
-    comment = models.TextField(default="", blank=True, null=True)
-    watch_roots = models.TextField(default="", blank=True, null=True)
+    comment = models.TextField(default="")
+    watch_roots = models.TextField(default="")
     wp_used = models.PositiveIntegerField(default=0)
 
     def recalculate(self):

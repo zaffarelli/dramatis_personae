@@ -4,8 +4,8 @@
 #!/bin/bash
 clear
 
-rm -rf backup/custom/
-rm -rf backup/reference/
+rm -f backup/custom/*
+rm -f backup/reference/*
 
 
 echo -e "\e[1;35mSCENARIST...\e[0;m"

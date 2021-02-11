@@ -23,7 +23,7 @@ class Bloke(models.Model):
     character = models.ForeignKey(Character, on_delete=models.CASCADE, related_name='character', blank=True, null=True)
     npc = models.ForeignKey(Character, on_delete=models.CASCADE, null=True, blank=True, related_name='npc')
     level = models.IntegerField(choices=BLOKE_LEVELS, default=0)
-    description = models.TextField(default='', blank=True, null=True, max_length=1024)
+    description = models.TextField(default='', max_length=1024)
 
     def __str__(self):
         return f'{self.character.rid} > ({self.level}) > {self.npc.rid}'

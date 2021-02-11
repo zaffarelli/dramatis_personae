@@ -26,10 +26,10 @@ class BeneficeAfflictionRef(models.Model):
         ('oc', 'Occult'),
         ('ta', 'Talent'),
         ('ot', 'Other')))
-    description = models.TextField(max_length=256, default='', null=True, blank=True)
-    source = models.CharField(max_length=32, default='FS2CRB', null=True, blank=True)
-    emphasis = models.CharField(max_length=64, default='', null=True, blank=True)
-    watermark = models.CharField(max_length=64, default='', null=True, blank=True)
+    description = models.TextField(max_length=256, default='')
+    source = models.CharField(max_length=32, default='FS2CRB')
+    emphasis = models.CharField(max_length=64, default='')
+    watermark = models.CharField(max_length=64, default='')
 
     def __str__(self):
         return '%s %s (%d)' % (self.reference, self.emphasis, self.value)
@@ -42,7 +42,7 @@ class BeneficeAffliction(models.Model):
     character = models.ForeignKey(Character, on_delete=models.CASCADE)
     benefice_affliction_ref = models.ForeignKey(BeneficeAfflictionRef, on_delete=models.CASCADE)
     # value = models.IntegerField(default=0)
-    description = models.TextField(max_length=256, default='', null=True, blank=True)
+    description = models.TextField(max_length=256, default='')
 
     def __str__(self):
         return '%s=%s' % (self.character.full_name, self.benefice_affliction_ref.reference)
@@ -87,7 +87,7 @@ class BeneficeAfflictionModificator(models.Model):
 
     tour_of_duty_ref = models.ForeignKey(TourOfDutyRef, on_delete=models.CASCADE)
     benefice_affliction_ref = models.ForeignKey(BeneficeAfflictionRef, on_delete=models.CASCADE)
-    description = models.TextField(max_length=256, default='', null=True, blank=True)
+    description = models.TextField(max_length=256, default='')
 
     def __str__(self):
         return '%s=%s' % (self.tour_of_duty_ref.reference, self.benefice_affliction_ref.reference)
@@ -100,7 +100,7 @@ class BeneficeAfflictionCusto(models.Model):
     from collector.models.character_custo import CharacterCusto
     character_custo = models.ForeignKey(CharacterCusto, on_delete=models.CASCADE)
     benefice_affliction_ref = models.ForeignKey(BeneficeAfflictionRef, on_delete=models.CASCADE)
-    description = models.TextField(max_length=256, default='', null=True, blank=True)
+    description = models.TextField(max_length=256, default='')
 
 
 # Inlines

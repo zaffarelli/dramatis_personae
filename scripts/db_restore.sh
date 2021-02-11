@@ -8,10 +8,9 @@ echo -e "\e[0;34mFlushing database...\e[0;m"
 python3 manage.py flush
 
 
-
-python manage.py loaddata backup/custom/campaign.xml
 python manage.py loaddata backup/custom/user.xml
 python manage.py loaddata backup/custom/group.xml
+python manage.py loaddata backup/custom/campaign.xml
 python manage.py loaddata backup/custom/profile.xml
 
 

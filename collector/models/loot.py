@@ -15,11 +15,11 @@ class Loot(models.Model):
         verbose_name = "FICS: Loot"
 
     name = models.CharField(max_length=128)
-    group = models.CharField(max_length=128, default='', blank=True, null=True)
+    group = models.CharField(max_length=128, default='')
     price = models.PositiveIntegerField(default=0)
     session = models.PositiveIntegerField(default=0)
-    description = models.TextField(default='', blank=True, max_length=2048)
-    secret = models.TextField(default='', blank=True, max_length=2048)
+    description = models.TextField(default='', max_length=2048)
+    secret = models.TextField(default='', max_length=2048)
     sleeves_authenticity = models.PositiveIntegerField(default=0)
     sleeves_gossip = models.PositiveIntegerField(default=0)
     sleeves_fame = models.PositiveIntegerField(default=0)
@@ -27,7 +27,7 @@ class Loot(models.Model):
     sleeves_minimum_increment = models.PositiveIntegerField(default=100)
     index = models.PositiveIntegerField(default=0)
     owner = models.ForeignKey(Character, on_delete=models.SET_NULL, null=True, blank=True)
-    code = models.CharField(max_length=128, default='', blank=True, null=True)
+    code = models.CharField(max_length=128, default='')
 
     def set_code(self):
         str = "".join(self.name.lower().split(":")[0])

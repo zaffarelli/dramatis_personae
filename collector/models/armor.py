@@ -13,21 +13,21 @@ class ArmorRef(models.Model):
         ordering = ['reference']
         verbose_name = "FICS: Armor"
 
-    reference = models.CharField(max_length=64, default='', blank=True, unique=True)
+    reference = models.CharField(max_length=64, default='', unique=True)
     category = models.CharField(max_length=6,
                                 choices=(('Soft', "Soft Armor"), ('Medium', "Medium Armor"), ('Hard', "Hard Armor")),
-                                default='Soft', blank=True)
+                                default='Soft')
     head = models.BooleanField(default=False)
     torso = models.BooleanField(default=True)
     left_arm = models.BooleanField(default=True)
     right_arm = models.BooleanField(default=True)
     left_leg = models.BooleanField(default=False)
     right_leg = models.BooleanField(default=False)
-    stopping_power = models.PositiveIntegerField(default=2, blank=True)
-    cost = models.PositiveIntegerField(default=2, blank=True)
-    encumbrance = models.PositiveIntegerField(default=0, blank=True)
-    tech_level = models.PositiveIntegerField(default=3, blank=True)
-    description = models.TextField(max_length=1024, default='', blank=True)
+    stopping_power = models.PositiveIntegerField(default=2)
+    cost = models.PositiveIntegerField(default=2)
+    encumbrance = models.PositiveIntegerField(default=0)
+    tech_level = models.PositiveIntegerField(default=3)
+    description = models.TextField(max_length=1024, default='')
 
     def __str__(self):
         return '%s (%s, SP:%s)' % (self.reference, self.category, self.stopping_power)

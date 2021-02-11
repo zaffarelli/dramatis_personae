@@ -12,30 +12,30 @@ class WeaponRef(models.Model):
         ordering = ['origins', 'reference', 'category', 'damage_class', ]
         verbose_name = "FICS: Weapon"
 
-    reference = models.CharField(max_length=64, default='', blank=True, unique=True)
-    meta_type = models.CharField(max_length=64, default='', blank=True, null=True)
+    reference = models.CharField(max_length=64, default='')
+    meta_type = models.CharField(max_length=64, default='')
     category = models.CharField(max_length=5, choices=(
     ('MELEE', "Melee weapon"), ('P', "Pistol/revolver"), ('RIF', "Rifle"), ('SMG', "Submachinegun"), ('SHG', "Shotgun"),
-    ('HVY', "Heavy weapon"), ('EX', "Exotic weapon"), ('SP', 'Special')), default='RIF', blank=True)
-    weapon_accuracy = models.IntegerField(default=0, blank=True)
+    ('HVY', "Heavy weapon"), ('EX', "Exotic weapon"), ('SP', 'Special')), default='RIF')
+    weapon_accuracy = models.IntegerField(default=0)
     conceilable = models.CharField(max_length=1, choices=(
-    ('P', "Pocket"), ('J', "Jacket"), ('L', "Long coat"), ('N', "Can't be hidden")), default='J', blank=True)
+    ('P', "Pocket"), ('J', "Jacket"), ('L', "Long coat"), ('N', "Can't be hidden")), default='J')
     availability = models.CharField(max_length=1,
                                     choices=(('E', "Excellent"), ('C', "Common"), ('P', "Poor"), ('R', "Rare")),
-                                    default='C', blank=True)
-    damage_class = models.CharField(max_length=16, default='', blank=True)
-    caliber = models.CharField(max_length=16, default='', blank=True)
-    str_min = models.PositiveIntegerField(default=0, blank=True)
-    rof = models.PositiveIntegerField(default=0, blank=True)
-    clip = models.PositiveIntegerField(default=0, blank=True)
-    tech_level = models.PositiveIntegerField(default=5, blank=True)
-    rng = models.PositiveIntegerField(default=0, blank=True)
+                                    default='C')
+    damage_class = models.CharField(max_length=16, default='')
+    caliber = models.CharField(max_length=16, default='')
+    str_min = models.PositiveIntegerField(default=0)
+    rof = models.PositiveIntegerField(default=0)
+    clip = models.PositiveIntegerField(default=0)
+    tech_level = models.PositiveIntegerField(default=5)
+    rng = models.PositiveIntegerField(default=0)
     rel = models.CharField(max_length=2, choices=(('VR', "Very reliable"), ('ST', "Standard"), ('UR', "Unreliable")),
-                           default='ST', blank=True)
-    cost = models.PositiveIntegerField(default=0, blank=True)
-    description = models.TextField(max_length=1024, default='', blank=True)
-    stats = models.CharField(max_length=256, default='', blank=True)
-    origins = models.CharField(max_length=64, default='', blank=True)
+                           default='ST')
+    cost = models.PositiveIntegerField(default=0)
+    description = models.TextField(max_length=1024, default='')
+    stats = models.CharField(max_length=256, default='')
+    origins = models.CharField(max_length=64, default='')
     hidden = models.BooleanField(default=False)
 
     def __str__(self):
@@ -67,7 +67,7 @@ class Weapon(models.Model):
     from collector.models.character import Character
     character = models.ForeignKey(Character, on_delete=models.CASCADE)
     weapon_ref = models.ForeignKey(WeaponRef, on_delete=models.CASCADE)
-    ammoes = models.PositiveIntegerField(default=0, blank=True)
+    ammoes = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return '%s=%s' % (self.character.full_name, self.weapon_ref.reference)

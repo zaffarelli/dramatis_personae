@@ -13,14 +13,14 @@ class Specie(models.Model):
         unique_together = (('species', 'race'),)
         verbose_name = "FICS: Specie"
 
-    species = models.CharField(max_length=64, default=1, blank=True)
-    race = models.CharField(max_length=64, default='', blank=True)
+    species = models.CharField(max_length=64, default=1)
+    race = models.CharField(max_length=64, default='')
     racial_attr_mod = models.CharField(max_length=128, default='{}')
     racial_skills = models.CharField(max_length=512, default='{}')
     racial_occult = models.CharField(max_length=128, default='{}')
     attr_mod_balance = models.IntegerField(default=0)
     skill_balance = models.IntegerField(default=0)
-    description = models.TextField(max_length=512, default='', blank=True)
+    description = models.TextField(max_length=512, default='')
 
     def __str__(self):
         return '%s %s' % (self.species, self.race)

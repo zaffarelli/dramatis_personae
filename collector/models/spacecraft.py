@@ -295,7 +295,7 @@ class ShipSection(models.Model):
         verbose_name = "Spacecraft: Ship Section"
 
     section = models.CharField(max_length=30, choices=SHIP_SECTIONS, blank=True, default='0', null=True)
-    ship_ref = models.ForeignKey(ShipRef, on_delete=models.CASCADE, blank=True)
+    ship_ref = models.ForeignKey(ShipRef, on_delete=models.CASCADE)
     slot = models.CharField(max_length=30, choices=SHIP_SLOTS, blank=True, default='1', null=True)
     structure_points = models.PositiveIntegerField(default=1)
     boarding_party_limit = models.PositiveIntegerField(default=1)

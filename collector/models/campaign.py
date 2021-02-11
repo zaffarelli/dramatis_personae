@@ -31,14 +31,14 @@ class Campaign(models.Model):
     from scenarist.models.dramas import Drama
     from django.contrib.auth.models import User
     from collector.models.rpg_system import RpgSystem
-    title = models.CharField(default='aaa', max_length=128, blank=True, unique=True)
+    title = models.CharField(default='aaa', max_length=128, )
     epic = models.ForeignKey(Epic, null=True, blank=True, on_delete=models.SET_NULL)
-    description = models.TextField(max_length=128, default='', blank=True)
+    description = models.TextField(max_length=128, default='')
     #gamemaster = models.CharField(default='zaffarelli@gmail.com', max_length=128, blank=True)
     gm = models.ForeignKey(User, null=True, blank=True, on_delete=models.SET_NULL)
     rpgsystem = models.ForeignKey(RpgSystem, null=True, blank=True, on_delete=models.SET_NULL)
     is_active = models.BooleanField(default=False)
-    smart_code = models.CharField(default='xxxxxx', max_length=6, blank=True)
+    smart_code = models.CharField(default='xxxxxx', max_length=6)
     current_drama = models.ForeignKey(Drama, null=True, blank=True, on_delete=models.SET_NULL)
     #rpg_system = models.CharField(max_length=32, choices=RPG_SYSTEMS, default="2")
     color_front = models.CharField(max_length=9, default='#00F0F0F0')
