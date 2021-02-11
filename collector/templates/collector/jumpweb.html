@@ -10,6 +10,10 @@ Jumpweb - Dramatis Personae
 <div class="legend">Abusus Non Tollit Usum - Jumpweb</div>
 {% endblock legend %}
 
+{% block map %}
+<div class="jumpweb"></div>
+{% endblock map %}
+
 {% block javascript %}
 <script>
   let data = {{data|safe}}

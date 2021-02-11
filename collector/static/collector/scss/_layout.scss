@@ -78,6 +78,10 @@
         overflow-y: scroll;
         background: $fics_back url($back);
         background-attachment:  fixed;
+
+        background: linear-gradient(45deg,#0D324D,#7F5A83);
+
+
         & .wrapper {
             z-index: 5;
             margin-left: 0;

@@ -25,6 +25,8 @@ from django.contrib import messages
 def index(request):
     """ The basic page for the application
     """
+    if not request.user.is_authenticated:
+        return redirect('accounts/login/')
     return render(request, 'collector/index.html')
 
 

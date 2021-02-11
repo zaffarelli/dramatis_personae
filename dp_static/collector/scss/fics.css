@@ -3333,6 +3333,35 @@ button.toast-close-button {
   #toast-container > div.rtl {
     padding: 15px 50px 15px 15px; } }
 
+div.login_form {
+  display: block;
+  margin: auto;
+  background: #242524;
+  color: #cfcdcf;
+  padding: 1ex 0.5em 1ex 0.5em;
+  width: 32ex;
+  min-height: 24ex;
+  border: 1px solid #242524;
+  font-size: 12pt;
+  margin-top: 5em;
+  border-radius: 5px;
+  box-shadow: 5px 5px 8px black; }
+  div.login_form h2 {
+    font-family: "NomPerso";
+    font-size: 1.2em; }
+  div.login_form ul, div.login_form p {
+    font-family: "TextDesc";
+    font-size: 0.8em; }
+    div.login_form ul label, div.login_form p label {
+      display: inline-block;
+      width: 15ex; }
+    div.login_form ul input, div.login_form p input {
+      display: inline-block;
+      width: 20ex; }
+  div.login_form button {
+    margin-right: 0;
+    margin-left: auto; }
+
 input[type=text], input[type=password], input[type=number], input[type=checkbox], select, textarea {
   background-color: #242524;
   color: #cfcdcf;
@@ -4984,7 +5013,8 @@ th.skill_dot {
     overflow-x: none;
     overflow-y: scroll;
     background: #303230 url("../campaigns/FICS/back.jpg");
-    background-attachment: fixed; }
+    background-attachment: fixed;
+    background: linear-gradient(45deg, #0D324D, #7F5A83); }
     body .wrapper {
       z-index: 5;
       margin-left: 0;

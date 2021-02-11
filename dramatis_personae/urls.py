@@ -16,5 +16,6 @@ urlpatterns = [
     path('', include('collector.urls')),
     path('', include('scenarist.urls')),
     path('', include('optimizer.urls')),
+    path('accounts/', include('django.contrib.auth.urls')), # new
   #re_path('__debug__', include(debug_toolbar.urls)),
 ]

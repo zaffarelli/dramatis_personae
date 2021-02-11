@@ -108,8 +108,8 @@ def roll_dice(request, slug):
     return JsonResponse(context)
 
 
-def campaign_css(request):
-    from collector.utils.basic import get_current_config
-    camp = get_current_config()
-    return render_to_response('campaign.css', { 'campaign': camp })
-
+# def campaign_css(request):
+#     from collector.utils.basic import get_current_config
+#     camp = get_current_config()
+#     return render_to_response('campaign.css', { 'campaign': camp })
+#

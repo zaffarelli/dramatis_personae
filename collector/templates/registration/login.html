@@ -1,0 +1,15 @@
+{% extends "blank.html" %}
+{% load static %}
+
+{% block login%}
+<div class="login_form">
+<center><img src="{% static 'collector/simple_logo.png' %}" alt="dp logo" width="46px">
+  </center>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <center><button type="submit">Log In</button>
+    </center>
+</form>
+</div>
+{% endblock login%}

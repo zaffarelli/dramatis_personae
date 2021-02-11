@@ -140,3 +140,4 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'dp_static/')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'dp_media/')
 
 
+LOGIN_REDIRECT_URL = '/'

@@ -29,10 +29,14 @@
 
     </head>
     <body>
+        {% block login %}
+        {% endblock login %}
         {% block legend %}
         {% endblock legend %}
-        <div class="jumpweb"></div>
 
+
+        {% block map %}
+        {% endblock map %}
 
 
         <script src='{% static "js/avatar_customizer.js" %}'></script>

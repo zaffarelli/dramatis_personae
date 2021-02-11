@@ -478,3 +478,40 @@ button.toast-close-button {
         padding: 15px 50px 15px 15px;
     }
 }
+
+
+div.login_form{
+    display:block;
+    margin:auto;
+    background: $fics_dark;
+    color: $fics_front;
+    padding:1ex 0.5em 1ex 0.5em;
+    width:32ex;
+    min-height:24ex;
+    border:1px solid $fics_dark;
+    font-size:12pt;
+    margin-top:5em;
+    border-radius:5px;
+    box-shadow:5px 5px 8px $fics_darkest;
+    & h2{
+        font-family:"NomPerso";
+        font-size:1.2em;
+    }
+    & ul, & p{
+        font-family:"TextDesc";
+        font-size:0.8em;
+        & label{
+            display:inline-block;
+            width:15ex;
+        }
+        & input{
+            display:inline-block;
+            width:20ex;
+        }
+    }
+
+    & button{
+        margin-right:0;
+        margin-left:auto;
+    }
+}

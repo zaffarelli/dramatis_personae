@@ -6,7 +6,7 @@ from collector.models.profile import Profile
 
 @receiver(pre_save, sender=User, dispatch_uid='create_user_profile')
 def create_user_profile(sender, instance, **kwargs):
-    all_profiles = Profile.objects.get(user=instance)
+    all_profiles = Profile.objects.filter(user=instance)
     if len(all_profiles) == 0:
         p = Profile()
         p.user = instance
