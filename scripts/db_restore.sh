@@ -9,7 +9,7 @@ python3 manage.py flush
 
 python manage.py loaddata backup/custom/group.xml
 python manage.py loaddata backup/custom/user.xml
-python manage.py loaddata backup/custom/campaign.xml
+
 
 
 
@@ -19,6 +19,9 @@ echo -e "\e[1;35mSCENARIST...\e[0;m"
 echo -e "\e[0;35m- Restoring Main Data...\e[0;m"
 python manage.py loaddata backup/custom/epic.xml
 python manage.py loaddata backup/custom/drama.xml
+
+python manage.py loaddata backup/custom/campaign.xml
+
 python manage.py loaddata backup/custom/act.xml
 python manage.py loaddata backup/custom/event.xml
 
