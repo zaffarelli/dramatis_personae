@@ -7,11 +7,10 @@ clear
 echo -e "\e[0;34mFlushing database...\e[0;m"
 python3 manage.py flush
 
-
-python manage.py loaddata backup/custom/user.xml
 python manage.py loaddata backup/custom/group.xml
+python manage.py loaddata backup/custom/user.xml
 python manage.py loaddata backup/custom/campaign.xml
-python manage.py loaddata backup/custom/profile.xml
+
 
 
 python manage.py loaddata backup/custom/rpg_system.xml
@@ -77,6 +76,8 @@ python manage.py loaddata backup/custom/investigator.xml
 python manage.py loaddata backup/custom/spaceship.xml
 python manage.py loaddata backup/custom/cyberware.xml
 
+
+python manage.py loaddata backup/custom/profile.xml
 
 
 echo -e "\e[0;35m- Restoring custo data... (pushed from customizer) \e[0;m"
