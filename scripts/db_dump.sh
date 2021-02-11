@@ -4,6 +4,10 @@
 #!/bin/bash
 clear
 
+rm -rf backup/custom/
+rm -rf backup/reference/
+
+
 echo -e "\e[1;35mSCENARIST...\e[0;m"
 echo -e "\e[0;35m- Dumping Main Data...\e[0;m"
 python manage.py dumpdata scenarist.QuizzQuestion --format xml --output backup/custom/quizzquestion.xml
