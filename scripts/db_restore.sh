@@ -70,7 +70,7 @@ python manage.py loaddata backup/custom/system.xml
 python manage.py loaddata backup/custom/orbital_item.xml
 
 echo -e "\e[0;35m- Restoring Coc7 data\e[0;m"
-python manage.py loaddata backup/custom/coc7_occupation.xml
+python manage.py loaddata backup/reference/coc7_occupation.xml
 python manage.py loaddata backup/custom/investigator.xml
 
 echo -e "\e[0;35m- Restoring User Profiles\e[0;m"
