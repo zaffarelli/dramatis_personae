@@ -254,10 +254,14 @@ def show_jumpweb(request):
     """ Display the full jumpweb.
     """
     if request.is_ajax:
+
         from collector.models.system import System
         from collector.utils.fics_references import NEW_ROUTES, NEW_SYSTEMS
+        from collector.utils.basic import get_current_config
+        campaign = get_current_config()
         context = {}
         context['data'] = {}
+        context['campaign'] = campaign
         context['data']['mj'] = 1 if request.user.profile.is_gamemaster else 0
         context['data']['new_routes'] = "|".join(NEW_ROUTES)
         context['data']['new_systems'] = "|".join(NEW_SYSTEMS)
@@ -305,8 +309,11 @@ def show_orbital_map(request, id):
     """
     if request.is_ajax:
         from collector.models.system import System, OrbitalItem
+        from collector.utils.basic import get_current_config
+        campaign = get_current_config()
         system = get_object_or_404(System, pk=id)
         context = {'data': {}}
+        context['campaign'] = campaign
         context['data']['mj'] = 1 if request.user.profile.is_gamemaster else 0
         context['data']['title'] = f'{system.name}'
         context['data']['alliance'] = f'{system.alliance}'

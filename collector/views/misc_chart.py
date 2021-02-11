@@ -17,7 +17,7 @@ def get_chardar(request, pk):
 
 
 def get_population_statistics(request, *args, **kwargs):
-
+    campaign = get_current_config()
     da = []
     # List of balanced / unbalanced characters
     # ch = conf.get_chart(field='full_name', filter='entrance__isnull', pattern=True, bar_property='full_name', type='doughnut', legend_display=False)
@@ -29,16 +29,16 @@ def get_population_statistics(request, *args, **kwargs):
                         bar_property='stories_count',
                         order_by='-')
     da.append(json.dumps(ch['data']))
-    ch = conf.get_chart(field='full_name', filter='life_path_total__gt', pattern=0, bar_property="life_path_total", type='horizontalBar', order_by='-')
+    ch = campaign.get_chart(field='full_name', filter='life_path_total__gt', pattern=0, bar_property="life_path_total", type='horizontalBar', order_by='-')
     da.append(json.dumps(ch['data']))
-    ch = conf.get_chart(field='balanced', bar_property='balanced', type='doughnut', legend_display=True)
+    ch = campaign.get_chart(field='balanced', bar_property='balanced', type='doughnut', legend_display=True)
     da.append(json.dumps(ch['data']))
-    ch = conf.get_chart(field='alliance', bar_property='alliance', type='doughnut', legend_display=True)
+    ch = campaign.get_chart(field='alliance', bar_property='alliance', type='doughnut', legend_display=True)
     da.append(json.dumps(ch['data']))
-    ch = conf.get_chart(field='full_name', filter='fencing_league', pattern=True, type='horizontalBar',
+    ch = campaign.get_chart(field='full_name', filter='fencing_league', pattern=True, type='horizontalBar',
                          bar_property='victory_rating', legend_display=True)
     da.append(json.dumps(ch['data']))
-    ch = conf.get_chart(bar_property='caste', field='caste', type='bar', legend_display=True)
+    ch = campaign.get_chart(bar_property='caste', field='caste', type='bar', legend_display=True)
     da.append(json.dumps(ch['data']))
     charts = []
     template = get_template('collector/popstats.html')

@@ -10,7 +10,13 @@ Orbital Map - Dramatis Personae
 <div class="legend">Abusus Non Tollit Usum - Orbital Map</div>
 {% endblock legend %}
 
+{% block map %}
+<div class="jumpweb"></div>
+{% endblock map %}
+
+
 {% block javascript %}
+<script src='{% static "js/orbital_map.js" %}'></script>
 <script>
   let data = {{data|safe}}
   orbitalmap = new OrbitalMap(data);

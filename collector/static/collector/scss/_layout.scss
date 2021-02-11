@@ -79,7 +79,7 @@
         background: $fics_back url($back);
         background-attachment:  fixed;
 
-        background: linear-gradient(45deg,#0D324D,#7F5A83);
+        //background: linear-gradient(45deg,#0D324D,#7F5A83);
 
 
         & .wrapper {
@@ -93,7 +93,7 @@
             justify-content:flex-start;
             align-items:flex-start;
             align-content:flex-start;
-            background: transparent url($logo) 100% 100% no-repeat;
+            //background: transparent url($logo) 100% 100% no-repeat;
             & .menu_block {
             }
             & .port {

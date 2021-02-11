@@ -1,1 +1,1 @@
-/mnt/storage1/Projects/github/dramatis_personae/collector/static/font-awesome/js/regular.js
+/home/zaffarelli/Perso/github/dramatis_personae/collector/static/font-awesome/js/regular.js
