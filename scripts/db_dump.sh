@@ -38,6 +38,7 @@ python manage.py dumpdata collector.ShipRef --format xml --output backup/referen
 python manage.py dumpdata collector.Specie --format xml --output backup/reference/specie.xml
 python manage.py dumpdata collector.TourOfDutyRef --format xml --output backup/reference/tour_of_duty_ref.xml
 python manage.py dumpdata collector.WeaponRef --format xml --output backup/reference/weapon_ref.xml
+python manage.py dumpdata collector.Coc7Occupation --format xml --output backup/reference/coc7_occupation.xml
 
 echo -e "\e[0;35m- Dumping modificator data (pushed from history creation)...\e[0;m"
 python manage.py dumpdata collector.BlessingCurseModificator --format xml --output backup/reference/blessing_curse_modificator.xml
