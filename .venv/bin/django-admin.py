@@ -1,4 +1,4 @@
-#!/mnt/storage1/Projects/github/dramatis_personae/.venv/bin/python3.6m
+#!/home/zaffarelli/Perso/github/dramatis_personae/.venv/bin/python
 from django.core import management
 
 if __name__ == "__main__":

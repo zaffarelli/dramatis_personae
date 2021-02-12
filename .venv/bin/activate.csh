@@ -10,15 +10,15 @@ alias deactivate 'test $?_OLD_VIRTUAL_PATH != 0 && setenv PATH "$_OLD_VIRTUAL_PA
 # Unset irrelevant variables.
 deactivate nondestructive
 
-setenv VIRTUAL_ENV "/mnt/storage1/Projects/github/dramatis_personae/.venv"
+setenv VIRTUAL_ENV '/home/zaffarelli/Perso/github/dramatis_personae/.venv'
 
 set _OLD_VIRTUAL_PATH="$PATH:q"
 setenv PATH "$VIRTUAL_ENV:q/bin:$PATH:q"
 
 
 
-if ("(dramatis_personae) " != "") then
-    set env_name = "(dramatis_personae) "
+if ('(dramatis_personae) ' != "") then
+    set env_name = '(dramatis_personae) '
 else
     set env_name = '('"$VIRTUAL_ENV:t:q"') '
 endif

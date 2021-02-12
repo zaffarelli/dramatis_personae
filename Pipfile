@@ -57,6 +57,7 @@ psycopg2-binary = "*"
 coverage = "*"
 pytest = "*"
 celery = "==4.4.7"
+django-colorfield = "==0.4.1"
 
 
 

@@ -12,8 +12,8 @@
   TOTAL ...................: 280 OP
 """
 
-MAX_CHAR = 10
-RELEASE = '2.1.0'
+MAX_CHAR = 20
+RELEASE = '2.2.0'
 
 LIFEPATH_CATEGORY = (
     ('0', "Birthright"),

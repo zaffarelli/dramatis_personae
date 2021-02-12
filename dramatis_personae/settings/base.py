@@ -19,7 +19,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'extra_views',
     'sass_processor',
-    #'channels',
+    'colorfield',
 ]
 
 MIDDLEWARE = [

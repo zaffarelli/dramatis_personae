@@ -1,1 +1,1 @@
-/home/zaffarelli/Perso/github/dramatis_personae/.venv/lib64/python3.6/site-packages/django/contrib/admin/static/admin/js/autocomplete.js
+/home/zaffarelli/Perso/github/dramatis_personae/.venv/lib/python3.6/site-packages/django/contrib/admin/static/admin/js/autocomplete.js

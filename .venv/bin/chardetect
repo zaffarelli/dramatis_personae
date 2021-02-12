@@ -1,4 +1,4 @@
-#!/mnt/storage1/Projects/github/dramatis_personae/.venv/bin/python3.6m
+#!/home/zaffarelli/Perso/github/dramatis_personae/.venv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys

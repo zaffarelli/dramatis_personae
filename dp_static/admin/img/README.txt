@@ -1,1 +1,1 @@
-/home/zaffarelli/Perso/github/dramatis_personae/.venv/lib64/python3.6/site-packages/django/contrib/admin/static/admin/img/README.txt
+/home/zaffarelli/Perso/github/dramatis_personae/.venv/lib/python3.6/site-packages/django/contrib/admin/static/admin/img/README.txt
