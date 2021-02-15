@@ -33,8 +33,12 @@ def get_population_statistics(request, *args, **kwargs):
     da.append(json.dumps(ch['data']))
     ch = campaign.get_chart(field='balanced', bar_property='balanced', type='doughnut', legend_display=True)
     da.append(json.dumps(ch['data']))
+
     ch = campaign.get_chart(field='alliance', bar_property='alliance', type='doughnut', legend_display=True)
     da.append(json.dumps(ch['data']))
+
+
+
     ch = campaign.get_chart(field='full_name', filter='fencing_league', pattern=True, type='horizontalBar',
                          bar_property='victory_rating', legend_display=True)
     da.append(json.dumps(ch['data']))

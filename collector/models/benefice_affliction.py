@@ -26,10 +26,10 @@ class BeneficeAfflictionRef(models.Model):
         ('oc', 'Occult'),
         ('ta', 'Talent'),
         ('ot', 'Other')))
-    description = models.TextField(max_length=256, default='')
+    description = models.TextField(max_length=256, default='',blank=True)
     source = models.CharField(max_length=32, default='FS2CRB')
-    emphasis = models.CharField(max_length=64, default='')
-    watermark = models.CharField(max_length=64, default='')
+    emphasis = models.CharField(max_length=64, default='',blank=True)
+    watermark = models.CharField(max_length=64, default='',blank=True)
 
     def __str__(self):
         return '%s %s (%d)' % (self.reference, self.emphasis, self.value)
@@ -42,7 +42,7 @@ class BeneficeAffliction(models.Model):
     character = models.ForeignKey(Character, on_delete=models.CASCADE)
     benefice_affliction_ref = models.ForeignKey(BeneficeAfflictionRef, on_delete=models.CASCADE)
     # value = models.IntegerField(default=0)
-    description = models.TextField(max_length=256, default='')
+    description = models.TextField(max_length=256, default='',blank=True)
 
     def __str__(self):
         return '%s=%s' % (self.character.full_name, self.benefice_affliction_ref.reference)

@@ -10,5 +10,8 @@ echo "Migrate..."
     python3 manage.py migrate
 echo "Collecting statics"
     python3 manage.py collectstatic --noinput --clear --link -v 0
+
+python manage.py shell < scripts/update_alliances.py
+
 echo "Launching server..."
     python3 manage.py runserver 0.0.0.0:8088

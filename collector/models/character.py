@@ -12,12 +12,23 @@ import hashlib
 from scenarist.models.epics import Epic
 from collector.models.fics_models import Specie
 from collector.models.combattant import Combattant
+from collector.models.alliance_ref import AllianceRef
 from collector.utils import fs_fics7
 from django.utils.timezone import get_current_timezone
 import itertools
 import logging
+import json
+
 
 logger = logging.getLogger(__name__)
+
+def json_default(value):
+    import datetime
+    if isinstance(value, datetime.date):
+        return dict(year=value.year, month=value.month, day=value.day)
+    else:
+        return value.__dict__
+
 
 
 class Character(Combattant):
@@ -27,19 +38,21 @@ class Character(Combattant):
 
     page_num = 0
 
-    alias = models.CharField(max_length=200, default='')
-    alliance = models.CharField(max_length=200,  default='')
-    faction = models.CharField(max_length=200, default='')
+    alias = models.CharField(max_length=200, default='',blank=True)
+    alliance = models.CharField(max_length=200,  default='',blank=True)
+    faction = models.CharField(max_length=200, default='',blank=True)
     alliance_hash = models.CharField(max_length=200, default='none')
+
+    alliance_ref = models.ForeignKey(AllianceRef, blank=True, null=True, on_delete=models.SET_NULL)
 
     specie = models.ForeignKey(Specie, default=31, blank=True, null=True, on_delete=models.SET_NULL)
     race = models.TextField(max_length=256, default='')
 
     native_fief = models.CharField(max_length=200, default='none')
     caste = models.CharField(max_length=100, default='Freefolk')
-    rank = models.CharField(max_length=100, default='')
+    rank = models.CharField(max_length=100, default='',blank=True)
 
-    build_log = models.TextField(default='')
+    build_log = models.TextField(default='',blank=True)
     PA_STR = models.PositiveIntegerField(default=1)
     PA_CON = models.PositiveIntegerField(default=1)
     PA_BOD = models.PositiveIntegerField(default=1)
@@ -77,29 +90,30 @@ class Character(Combattant):
     OP = models.IntegerField(default=0)
     score = models.IntegerField(default=0)
     gm_shortcuts = models.TextField(default='', blank=True)
-    gm_shortcuts_pdf = models.TextField(default='')
+    gm_shortcuts_pdf = models.TextField(default='', blank=True)
 
     OCC_LVL = models.PositiveIntegerField(default=0)
     OCC_DRK = models.PositiveIntegerField(default=0)
-    occult = models.CharField(max_length=50, default='')
+    occult = models.CharField(max_length=50, default='',blank=True)
     challenge = models.TextField(default='')
     challenge_value = models.IntegerField(default=0)
-    todo_list = models.TextField(default='')
+    todo_list = models.TextField(default='',blank=True)
     # is_exportable = models.BooleanField(default=False)
     use_history_creation = models.BooleanField(default=False)
     use_only_entrance = models.BooleanField(default=False)
-    picture = models.CharField(max_length=1024, default='https://drive.google.com/open?id=15hdubdMt1t_deSXkbg9dsAjWi5tZwMU0')
-    alliance_picture = models.CharField(max_length=256, default='')
+    picture = models.CharField(max_length=1024, default='https://drive.google.com/open?id=15hdubdMt1t_deSXkbg9dsAjWi5tZwMU0',blank=True)
+    alliance_picture = models.CharField(max_length=256, default='',blank=True)
     on_save_re_roll_attributes = models.BooleanField(default=False)
     on_save_re_roll_skills = models.BooleanField(default=False)
     life_path_total = models.IntegerField(default=0)
     overhead = models.IntegerField(default=0)
     stories_count = models.PositiveIntegerField(default=0)
-    stories = models.TextField(max_length=1024, default='')
+    stories = models.TextField(max_length=1024, default='', blank=True)
     balanced = models.BooleanField(default=False)
     historical_figure = models.BooleanField(default=False)
     nameless = models.BooleanField(default=False)
     error = models.BooleanField(default=False)
+
 
     color = models.CharField(max_length=20, default='#CCCCCC')
     skills_options = []
@@ -180,6 +194,12 @@ class Character(Combattant):
     def get_pa(self, str):
         context = {"attribute": str, "value": getattr(self, str), "id": self.id}
         return context
+
+
+
+    def toJSON(self):
+        """ Returns JSON of object """
+        return json.dumps(self, default=json_default,sort_keys=True, indent=4)
 
     def rebuild_from_lifepath(self):
         """ Historical Creation """
@@ -368,6 +388,8 @@ class Character(Combattant):
         else:
             self.rebuild_free_form()
         self.calculate_shortcuts()
+        self.race = self.specie.species
+
         if self.PA_BOD != 0:
             if self.height == 0:
                 if "urthish" in self.specie.species.lower():
@@ -383,6 +405,7 @@ class Character(Combattant):
         # self.is_exportable = True #self.check_exportable()
         self.update_challenge()
         self.update_stories_count()
+        self.race = self.specie.species
         if self.use_history_creation:
             self.check_todo_list()
         self.need_fix = False
@@ -396,7 +419,7 @@ class Character(Combattant):
         if self.use_history_creation:
             for tod in self.tourofduty_set.all():
                 if not tod.tour_of_duty_ref.valid:
-                    tsk = f'--> {tod.tour_of_duty_ref.reference} is not a valid Tour of Duty.'
+                    tsk = f'--> *{tod.tour_of_duty_ref.reference}* is not a valid Tour of Duty.'
                     logger.error(tsk)
         # self.todo_list = "\n".join(tsk)
 

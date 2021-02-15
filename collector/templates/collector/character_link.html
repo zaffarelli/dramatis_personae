@@ -8,8 +8,11 @@
         {% if c.is_dead %}
         </strike>
         {% endif %}
+
     </div>
+
     <div class='character_actions' id="link_{{c.id}}">
+
         <span class="action_icon edit_character"><i class="fas fa-user-tag"></i></span>&nbsp
         <span class="action_icon recalc_avatar"><i class="fas fa-cog"></i></span>&nbsp;
         <span class="action_icon wa_export_character"><i class="fas fa-arrow-down"></i></span>&nbsp;
@@ -32,7 +35,7 @@
         {% else %}
             <span class='action_icon toggle_spotlight'><i class='fas fa-lightbulb'></i></span>
         {% endif %}
-        &nbsp;
+
         {% if c.error %}
             <span class='action_icon'><i class='golden fas fa-bug'></i></span>
         {% else %}
@@ -41,7 +44,7 @@
   </div>
   <div class='character_info hidden'>
         <div class="main_plate">
-
+            <a href="{% url 'show_ghostmark' rid=c.rid %}">Ghostmark</a>        &nbsp;
         </div>
         <div class="support_plate">
 

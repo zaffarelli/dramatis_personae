@@ -45,6 +45,7 @@ python manage.py loaddata backup/reference/ship_system.xml
 python manage.py loaddata backup/reference/specie.xml
 python manage.py loaddata backup/reference/tour_of_duty_ref.xml
 python manage.py loaddata backup/reference/weapon_ref.xml
+python manage.py loaddata backup/reference/alliance_ref.xml
 
 echo -e "\e[0;35m- Restoring modificator data (pushed from history creation)...\e[0;m"
 python manage.py loaddata backup/reference/blessing_curse_modificator.xml

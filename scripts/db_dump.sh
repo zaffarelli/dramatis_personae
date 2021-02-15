@@ -18,6 +18,7 @@ python manage.py dumpdata scenarist.Drama --format xml --output backup/custom/dr
 python manage.py dumpdata scenarist.Act --format xml --output backup/custom/act.xml
 python manage.py dumpdata scenarist.Event --format xml --output backup/custom/event.xml
 
+
 python manage.py dumpdata collector.RpgSystem --format xml --output backup/custom/rpg_system.xml
 
 
@@ -39,6 +40,7 @@ python manage.py dumpdata collector.Specie --format xml --output backup/referenc
 python manage.py dumpdata collector.TourOfDutyRef --format xml --output backup/reference/tour_of_duty_ref.xml
 python manage.py dumpdata collector.WeaponRef --format xml --output backup/reference/weapon_ref.xml
 python manage.py dumpdata collector.Coc7Occupation --format xml --output backup/reference/coc7_occupation.xml
+python manage.py dumpdata collector.AllianceRef --format xml --output backup/reference/alliance_ref.xml
 
 echo -e "\e[0;35m- Dumping modificator data (pushed from history creation)...\e[0;m"
 python manage.py dumpdata collector.BlessingCurseModificator --format xml --output backup/reference/blessing_curse_modificator.xml

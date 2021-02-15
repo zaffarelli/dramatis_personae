@@ -20,6 +20,7 @@ import os
 from django.conf import settings
 from django.http import FileResponse
 from django.contrib import messages
+import json
 
 
 def index(request):
@@ -366,3 +367,21 @@ def pdf_show(request, slug):
         return FileResponse(open(filename, 'rb'), content_type='application/pdf')
     except FileNotFoundError:
         raise Http404()
+
+def show_ghostmark(request,rid=None):
+    if request.is_ajax:
+        from collector.models.character import Character
+        from collector.models.alliance_ref import AllianceRef
+        from django.core import serializers
+        context = {'data':{'character':{}, 'alliance':{}}}
+        c = Character.objects.filter(rid=rid)
+        if len(c)>0:
+            context['data']['character'] = c.first().toJSON()
+            if c.first().alliance_ref:
+                a = AllianceRef.objects.filter(id=c.first().alliance_ref.id)
+                context['data']['alliance'] = a.first().toJSON()
+        template = get_template('collector/ghostmark.html')
+        html = template.render(context)
+        return HttpResponse(html, content_type='text/html')
+    else:
+        return Http404
