@@ -41,11 +41,14 @@
         {% else %}
             <span class='action_icon'><i class='fas fa-times'></i></span>
         {% endif %}
+
   </div>
-  <div class='character_info hidden'>
+  <div class='character_info '>
         <div class="main_plate">
-            <a href="{% url 'show_ghostmark' rid=c.rid %}">Ghostmark</a>        &nbsp;
+            {% include 'collector/ghostmark.html' with data=c.ghostmark_data %}
         </div>
+
+
         <div class="support_plate">
 
         </div>

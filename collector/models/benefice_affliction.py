@@ -87,7 +87,7 @@ class BeneficeAfflictionModificator(models.Model):
 
     tour_of_duty_ref = models.ForeignKey(TourOfDutyRef, on_delete=models.CASCADE)
     benefice_affliction_ref = models.ForeignKey(BeneficeAfflictionRef, on_delete=models.CASCADE)
-    description = models.TextField(max_length=256, default='')
+    description = models.TextField(max_length=256, default='', blank=True)
 
     def __str__(self):
         return '%s=%s' % (self.tour_of_duty_ref.reference, self.benefice_affliction_ref.reference)
@@ -100,7 +100,7 @@ class BeneficeAfflictionCusto(models.Model):
     from collector.models.character_custo import CharacterCusto
     character_custo = models.ForeignKey(CharacterCusto, on_delete=models.CASCADE)
     benefice_affliction_ref = models.ForeignKey(BeneficeAfflictionRef, on_delete=models.CASCADE)
-    description = models.TextField(max_length=256, default='')
+    description = models.TextField(max_length=256, default='', blank=True)
 
 
 # Inlines

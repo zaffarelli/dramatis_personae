@@ -1,5 +1,8 @@
-
-
+/*
+ ╔╦╗╔═╗  ╔═╗┌─┐┬  ┬  ┌─┐┌─┐┌┬┐┌─┐┬─┐
+  ║║╠═╝  ║  │ ││  │  ├┤ │   │ │ │├┬┘
+ ═╩╝╩    ╚═╝└─┘┴─┘┴─┘└─┘└─┘ ┴ └─┘┴└─
+*/
 class Ghostmark {
     constructor(data) {
         let me = this;
@@ -9,19 +12,22 @@ class Ghostmark {
     init(data) {
         let me = this;
         me.size = 20;
-        me.width = me.size * 4;
-        me.height = me.size * 9;
+        me.width = me.size * 6;
+        me.height = me.size * 6;
         me.data = data;
         me.character = JSON.parse(data['character'])
         me.alliance = JSON.parse(data['alliance'])
-        me.svg = d3.select("div.jumpweb")
+        me.svg = d3.select('#ghostmark_'+me.character['id'])
             .append('svg')
-            .attr("width", me.size*20)
-            .attr("height", me.size*10)
-            .style("background", "black")
+            .attr('id',me.character['rid'])
+            .attr("width", me.width)
+            .attr("height", me.height)
+            .style("background", "transparent")
             .append('g');
         me.panel_stroke = "#888"
         me.panel_fill = "#CCC"
+        me.ox = me.size*3;
+        me.oy = me.size*3;
         me.mark = me.size;
         console.log(me.data)
     }
@@ -30,150 +36,172 @@ class Ghostmark {
         let me = this;
         me.layout = me.svg.append('g')
             .attr('transform', function(d){
-                return "translate("+(me.width)+",10)";
+                let t = 'translate('+me.ox+','+me.oy+')';
+                return t;
             })
-
         ;
         me.circ1 = me.layout.append('circle')
-                .attr('cx',me.size*2)
-                .attr('cy',me.size*2)
+                .attr('cx',0)
+                .attr('cy',0)
                 .attr('r',me.size*2)
                 .style('stroke',me.panel_stroke)
-                .style('stroke-width',(me.size/8)+'pt')
+                .style('stroke-width',(me.size/32)+'pt')
+                .style('fill','#333')
+        me.circ2 = me.layout.append('circle')
+                .attr('cx',0)
+                .attr('cy',0)
+                .attr('r',me.size*2.5)
+                .style('stroke',me.panel_stroke)
+                .style('stroke-width',(me.size/16)+'pt')
                 .style('fill','transparent')
-        me.rect2 = me.layout.append('rect')
-                .attr('x',0)
-                .attr('y',0)
+
+        me.rect1 = me.layout.append('rect')
+                .attr('x',-2*me.size)
+                .attr('y',-2*me.size)
                 .attr('width',me.size*4)
                 .attr('height',me.size*4)
                 .style('stroke',me.panel_stroke)
                 .style('stroke-width','0.5pt')
                 .style('fill','transparent')
         ;
-        me.ghostmark = me.layout.append('g')
+
+        me.rect2 = me.layout.append('rect')
+                .attr('x',-2*me.size)
+                .attr('y',-2*me.size)
+                .attr('width',me.size*4)
+                .attr('height',me.size*4)
+                .style('stroke',me.panel_stroke)
+                .style('stroke-width','0.5pt')
+                .style('fill','transparent')
+                .attr('transform',function(x){
+                        let t = '';
+                        t += 'rotate(45)';
+                        return t;
+                    })
+        ;
+
     }
 
     createGhostMark(){
         let me = this;
+        me.ghostmark = me.svg.append('g')
+            .attr('transform', function(d){
+                let t = 'translate('+me.ox+','+me.oy+')';
+                return t;
+            })
+        ;
         me.front = me.ghostmark.append('path')
                 .attr("d", function(){
                     let x = me.size;
                     let path_str = '';
-                    path_str += ' M '+( 2.20*x)+','+( 0.50*x);
-                    path_str += ' l '+( 1.5 *x)+" "+( 0.25*x);
+                    path_str += ' M '+( -2.00*x)+','+( -2.50*x);
+                    path_str += ' l '+( 1.0 *x)+" "+( 0.25*x);
                     path_str += ' c ';
-                    path_str += ( 0.00*x)+' '+( 2.00*x)+',';
-                    path_str += (-1.00*x)+' '+( 3.00*x)+',';
-                    path_str += (-1.50*x)+' '+( 3.00*x);
+                    path_str += ( 0.00*x)+' '+( 1.50*x)+',';
+                    path_str += (-1.00*x)+' '+( 2.00*x)+',';
+                    path_str += (-1.00*x)+' '+( 2.00*x);
                     path_str += ' Z ';
                     return(path_str);
                 })
                 .style('stroke',me.panel_stroke)
-                .style('stroke-width','2.0pt')
+                .style('stroke-width','0.5pt')
+                .style('opacity','0.9')
                 .style('fill',me.alliance['color_front'])
         ;
         me.back = me.ghostmark.append('path')
                 .attr("d", function(){
                     let x = me.size;
                     let path_str = '';
-                    path_str += ' M '+( 1.80*x)+','+( 0.50*x);
-                    path_str += ' l '+(-1.50*x)+' '+( 0.25*x) ;
+                    path_str += ' M '+(-2.00*x)+','+( -2.50*x);
+                    path_str += ' l '+(-1.0*x)+' '+( 0.25*x) ;
                     path_str += ' c ';
-                    path_str += ( 0.00*x)+' '+(+2.00*x)+',';
-                    path_str += ( 1.00*x)+' '+( 3.00*x)+',';
-                    path_str += (+1.50*x)+' '+( 3.00*x);
+                    path_str += ( 0.00*x)+' '+(+1.50*x)+',';
+                    path_str += ( 1.00*x)+' '+( 2.00*x)+',';
+                    path_str += (+1.00*x)+' '+( 2.00*x);
 
                     path_str += ' Z ';
                     return(path_str);
                 })
                 .style('stroke',me.panel_stroke)
-                .style('stroke-width','2.0pt')
+                .style('stroke-width','0.5pt')
+                .style('opacity','0.9')
                 .style('fill',me.alliance['color_back'])
         ;
+
+        me.icon_simple = me.ghostmark.append('text')
+            .attr("x", -2*me.size)
+            .attr("y", -me.size)
+            .text(function(){
+                let t  = ''
+                if (me.alliance['icon_simple'] != ''){
+                    t = me.alliance['icon_simple'];
+                }
+                return(t)
+            })
+            .style("font-family", "FadingSunsIcons")
+            .style("font-size", (me.size*1.25)+"pt")
+            .style("text-anchor", "middle")
+            .style("fill", me.alliance['color_icon_fill'])
+            .style("stroke", me.alliance['color_icon_stroke'])
+            .style("stroke-width", "0.5pt")
+            .style('opacity','0.9')
+          ;
+
+
+        me.acronym = me.ghostmark.append('text')
+            .attr("x", 0)
+            .attr("y", -0.5*me.size)
+            .text(function(){
+                let t  = ''
+                let words = me.character["full_name"].split(" ");
+                _.each(words,function(e,i){
+                    t += e[0];
+                })
+                return(t)
+            })
+            .style("font-family", "Lato")
+            .style("font-size", (me.size*0.5)+"pt")
+            .style("text-anchor", "middle")
+            .style("fill", me.panel_fill)
+            .style("stroke", me.panel_stroke)
+            .style("stroke-width", "0.5pt")
+            .style('opacity','0.9')
+          ;
+
         me.sex = me.ghostmark.append('path')
                 .attr("d", function(){
                     let x = me.size;
                     let path_str = '';
                     if (me.character['gender'] == 'male'){
-                        path_str += ' M '+(+2.00*x)+','+(+0.25*x);
-                        path_str += ' l ';
-                        path_str += ( 0.50*x)+' '+(+0.50*x)+',';
-                        path_str += (-1.00*x)+' '+(-0.00*x)+',';
-                        path_str += ( 0.50*x)+' '+(-0.50*x);
+                        path_str += me.drawSticks(-0.5,1,'0.5,-0.5 0.5,0.5');
                     }else{
-                        path_str += ' M '+(+2.00*x)+','+(+0.75  *x);
-                        path_str += ' l ';
-                        path_str += ( 0.50*x)+' '+(-0.50*x)+',';
-                        path_str += (-1.00*x)+' '+(-0.00*x)+',';
-                        path_str += ( 0.50*x)+' '+(+0.50*x);
-
+                        path_str += me.drawSticks(-0.5,1,'0.5,0.5 0.5,-0.5');
                     }
                     path_str += '  ';
                     return(path_str);
                 })
                 .style('stroke',me.panel_stroke)
-                .style('stroke-width','1.0pt')
-                .style('fill',me.panel_fill)
+                .style('stroke-width','3pt')
+                .style('fill','transparent')
         ;
         me.race_sym = me.ghostmark.append('path')
                 .attr("d", function(){
                     let x = me.size;
                     let path_str = '';
-                        path_str += ' M '+(+2.00*x)+','+(+1.00*x);
-                        path_str += ' h '+(+0.25*x);
-                        path_str += ' v '+(+2.00*x);
-                        path_str += ' h '+(-0.50*x);
-                        path_str += ' v '+(-2.00*x);
-                        path_str += ' h '+(+0.25*x);
-                        path_str += ' Z ';
-
-                        path_str += ' M '+(+2.00*x)+','+(+1.00*x);
-                        path_str += ' m '+(1.50*x)+' '+(-0.50*x);
-                        path_str += ' l '+(-0.75*x)+' '+(+0.75*x);
-                        path_str += ' , '+(+0.25*x)+' '+(+0.25*x);
-                        path_str += ' , '+(+0.75*x)+' '+(-0.75*x);
-                        path_str += ' , '+(-0.25*x)+' '+(-0.25*x);
-                        path_str += ' Z ';
-
-                        path_str += ' M '+(2.00*x)+','+(+1.00*x);
-                        path_str += ' m '+(-1.50*x)+' '+(-0.50*x);
-                        path_str += ' l '+(+0.75*x)+' '+(+0.75*x);
-                        path_str += ' , '+(-0.25*x)+' '+(+0.25*x);
-                        path_str += ' , '+(-0.75*x)+' '+(-0.75*x);
-                        path_str += ' , '+(+0.25*x)+' '+(-0.25*x);
-                        path_str += ' Z ';
-
-                    if (me.character['race'] == 'Vorox'){
-                        path_str += ' M '+(+2.00*x)+','+(+1.00*x);
-                        path_str += ' m '+(0.75*x)+' '+(+1.00*x);
-                        path_str += ' l '+(+0.75*x)+' '+(+0.75*x);
-                        path_str += ' , '+(-0.25*x)+' '+(+0.25*x);
-                        path_str += ' , '+(-0.75*x)+' '+(-0.75*x);
-                        path_str += ' , '+(+0.25*x)+' '+(-0.25*x);
-                        path_str += ' Z ';
-
-                        path_str += ' M '+(2.00*x)+','+(+1.00*x);
-                        path_str += ' m '+(-0.75*x)+' '+(+1.00*x);
-                        path_str += ' l '+(-0.75*x)+' '+(+0.75*x);
-                        path_str += ' , '+(+0.25*x)+' '+(+0.25*x);
-                        path_str += ' , '+(+0.75*x)+' '+(-0.75*x);
-                        path_str += ' , '+(-0.25*x)+' '+(-0.25*x);
-                        path_str += ' Z ';
-
-
+                    console.log(me.character['race']);
+                    if (me.character['race'] == 'Urthish'){
+                        path_str += me.drawSticks(-1,1,'1,-1 1,1');
+                    }
+                    if (me.character['race'] == 'Ur-Ukar'){
+                        path_str += me.drawSticks(-1,0,'1,1 1,-1');
+                    }
+                    if (me.character['race'] == 'Ur-Obun'){
+                        path_str += me.drawSticks(-1,1,'0,-1 1,1 1,-1 0,1');
                     }
 
-                    if (me.character['race'] == 'Ur-Ukar'){
-                        path_str += ' M '+(+1.00*x)+','+(+3.25*x);
-                        path_str += ' m '+(0.50*x)+' '+(+0.00*x);
-                        path_str += ' l '+(+1.00*x)+' '+(+0.00*x);
-                        path_str += ' , '+(+0.00*x)+' '+(+0.25*x);
-                        path_str += ' , '+(-1.00*x)+' '+(-0.00*x);
-                        path_str += ' , '+(+0.00*x)+' '+(-0.25*x);
-                        path_str += ' Z ';
-
-
-
+                    if (me.character['race'] == 'Vorox'){
+                        path_str += me.drawSticks(-1,1,'1,-1 1,1');
+                        path_str += me.drawSticks(-1,0,'1,1 1,-1');
 
                     }
 
@@ -181,20 +209,91 @@ class Ghostmark {
                     return(path_str);
                 })
                 .style('stroke',me.panel_stroke)
-                .style('stroke-width','1.0pt')
-                .style('fill',me.panel_fill)
+                .style('stroke-width','3pt')
+                .style('fill',"transparent")
+        ;
+        me.magic = me.ghostmark.append('path')
+                .attr("d", function(){
+                    let x = me.size;
+                    let path_str = '';
+                    if (me.character['OCC_LVL'] > 0){
+
+                        if (me.character['OCC_DRK'] > 0){
+                            path_str += me.drawSticks(-1.5,-0.25,'-0.33,0.33');
+                        }else{
+                            path_str += me.drawSticks(-1.5,-0.25,'0.33,0.33');
+                        }
+                        if (me.character['occult'] == 'Theurgy'){
+                            path_str += me.drawSticks(-1.5,0.25,'0.33,0.33');
+                        }else{
+                            path_str += me.drawSticks(-1.5,0.25,'-0.33,0.33');
+                        }
+                        if (me.character['OCC_LVL'] > 4){
+                          path_str += me.drawSticks(-1.5,-0.75,'0,0.5');
+                        }
+                    }
+                    path_str += '  ';
+                    return(path_str);
+                })
+                .style('stroke',me.panel_stroke)
+                .style('stroke-width','3pt')
+                .style('fill','transparent')
+        ;
+
+        me.cyber = me.ghostmark.append('path')
+                .attr("d", function(){
+                    let x = me.size;
+                    let path_str = '';
+                    if (me.character['OCC_LVL'] > 0){
+
+                        if (me.character['OCC_DRK'] > 0){
+                            path_str += me.drawSticks(-1.5,-0.25,'-0.33,0.33');
+                        }else{
+                            path_str += me.drawSticks(-1.5,-0.25,'0.33,0.33');
+                        }
+                        if (me.character['occult'] == 'Theurgy'){
+                            path_str += me.drawSticks(-1.5,0.25,'0.33,0.33');
+                        }else{
+                            path_str += me.drawSticks(-1.5,0.25,'-0.33,0.33');
+                        }
+                        if (me.character['OCC_LVL'] > 4){
+                          path_str += me.drawSticks(-1.5,-0.75,'0,0.5');
+                        }
+                    }
+                    path_str += '  ';
+                    return(path_str);
+                })
+                .style('stroke',me.panel_stroke)
+                .style('stroke-width','3pt')
+                .style('fill','transparent')
         ;
 
 
-        me.strength = me.addText(me.character['OP'],4.2,0.5);
-        me.name = me.addText(me.character['full_name'],4.2,1.5);
-        me.race = me.addText(me.character['race'],4.2,2.5);
-        me.alliance = me.addText(me.alliance['reference'],4.2,3.5);
-        me.alliance = me.addText(me.character['species_name'],4.2,4.5);
+//        me.strength = me.addText(me.character['OP'],4.2,0.5);
+//        me.name = me.addText(me.character['full_name'],4.2,1.5);
+//        me.race = me.addText(me.character['race'],4.2,2.5);
+//        me.alliance = me.addText(me.alliance['reference'],4.2,3.5);
+//        me.alliance = me.addText(me.character['species_name'],4.2,4.5);
 
     }
 
     drawSticks(ox,oy,str){
+        let me = this;
+        let pts = str.split(' ');
+        let p = '';
+        let s = me.size;
+        let sep = ' l '
+        p += ' M '+(ox*s)+','+(oy*s);
+        _.forEach(pts, function(e, i) {
+            let coords = e.split(',');
+            p += sep+(coords[0]*s)+' '+(coords[1]*s);
+            if (sep == ' l '){
+                sep = ',';
+            }
+
+        })
+        p += '  ';
+        return(p);
     }
 
     addText(t,x,y){

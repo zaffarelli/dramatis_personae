@@ -1,15 +1,5 @@
-{% extends "blank.html" %}
 {% load static %}
-
-{% block map %}
-<div class="jumpweb"></div>
-{% endblock map %}
-
-{% block javascript %}
-<script src='{% static "js/ghostmark.js" %}'></script>
+<div id='ghostmark_{{data.id}}'></div>
 <script>
-  let data = {{data|safe}}
-  ghostmark = new Ghostmark(data);
-  ghostmark.perform();
+  (new Ghostmark({{data|safe}})).perform();
 </script>
-{% endblock %}

@@ -46,7 +46,7 @@ class Character(Combattant):
     alliance_ref = models.ForeignKey(AllianceRef, blank=True, null=True, on_delete=models.SET_NULL)
 
     specie = models.ForeignKey(Specie, default=31, blank=True, null=True, on_delete=models.SET_NULL)
-    race = models.TextField(max_length=256, default='')
+    race = models.TextField(max_length=256, default='', blank=True)
 
     native_fief = models.CharField(max_length=200, default='none')
     caste = models.CharField(max_length=100, default='Freefolk')
@@ -115,7 +115,7 @@ class Character(Combattant):
     error = models.BooleanField(default=False)
 
 
-    color = models.CharField(max_length=20, default='#CCCCCC')
+    color = models.CharField(max_length=20, default='#CCCCCC', blank=True)
     skills_options = []
     ba_options = []
     bc_options = []
@@ -131,6 +131,17 @@ class Character(Combattant):
     armor_options_not = []
     shield_options = []
     shield_options_not = []
+
+    @property
+    def ghostmark_data(self):
+        data = {
+            'rid':self.rid,
+            'id': self.id,
+            'character':self.toJSON(),
+            'alliance':self.alliance_ref.toJSON()
+        }
+        return data
+
 
     @property
     def info_str(self):

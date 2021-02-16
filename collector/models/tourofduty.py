@@ -18,7 +18,7 @@ class TourOfDutyRef(models.Model):
     reference = models.CharField(max_length=64, default='')
     category = models.CharField(max_length=20, choices=fics_references.LIFEPATH_CATEGORY, default='Tour of Duty')
     caste = models.CharField(max_length=20, choices=fics_references.LIFEPATH_CASTE, default='Other')
-    topic = models.CharField(max_length=64, default='')
+    topic = models.CharField(max_length=64, default='', blank=True)
     source = models.CharField(max_length=32, default='FS2CRB')
     is_custom = models.BooleanField(default=False)
     AP = models.IntegerField(default=0)

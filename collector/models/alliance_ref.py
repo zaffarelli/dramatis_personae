@@ -40,6 +40,8 @@ class AllianceRef(models.Model):
     faction = models.CharField(max_length=128, default='', blank=True)
     icon_simple = models.CharField(max_length=3, default='', blank=True)
     icon_complex = models.CharField(max_length=258, default='', blank=True)
+    color_icon_stroke = ColorField(default='#888888')
+    color_icon_fill = ColorField(default='#333333')
 
 
     def __str__(self):

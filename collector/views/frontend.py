@@ -382,6 +382,6 @@ def show_ghostmark(request,rid=None):
                 context['data']['alliance'] = a.first().toJSON()
         template = get_template('collector/ghostmark.html')
         html = template.render(context)
-        return HttpResponse(html, content_type='text/html')
+        return HttpResponse(html, content_type='image/svg+xml')
     else:
         return Http404
