@@ -3,7 +3,7 @@ clear
 echo
 echo -e "\e[0;35m"
 echo -e "║ ╔╦╗╔═╗                              ║"
-echo -e "║  ║║╠═╝  PC / Fedora 31              ║"
+echo -e "║  ║║╠═╝  PC / CentOS 7               ║"
 echo -e "║ ═╩╝╩    Deployment Script           ║"
 echo -e "\e[0;m"
 echo -e "If you're running this script, it is supposed to be from Fedora 30+ system on the dev system in the /srv/dramatis_personae directory where you have cloned the github repository and checked it out."

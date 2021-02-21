@@ -1,12 +1,13 @@
 # -- DEPLOY_ON_PI.yml playbook --
 # To use postgresql plugins, do not forget to install community general with the line:
 #   ansible-galaxy collection install community.general
+#   ansible-galaxy collection install community.postgresql
 # Launch this playbook with :
 #   ansible-playbook -i hosts deploy_on_pi.yml --verbose
 #
 ---
 - name: Deployment on Raspberry PI 3B+
-  hosts: all
+  hosts: pi
   gather_facts: no
   remote_user: root
   become: yes
@@ -20,111 +21,69 @@
         gpgcheck: no
         state: present
 
-    - name: Create Container directory if it does not exist
-      file:
-        path: /opt/lxc/containers/
-        state: directory
-        mode: '0755'
-        recurse: yes
-
     - name: Installing all packages
       yum:
         name:
           - vim
           - git
           - zsh
-          - python-lxc
-          - lxc
-          - lxc-templates
-          - libcap-devel
-          - libcgroup
           - wget
-          - bridge-utils
-          - lxc-extra
-          - debootstrap
-          - libvirt
-          - perl
-          - gpg
+          - libffi-devel
+          - httpd
+          - ntp
+          - python36
+          - python3-pip
+          - postgresql
+          - postgresql-devel
+          - mod_wsgi
+          - python-psycopg2
+          - python3-devel
+          - gcc-c++
+          - libjpeg
+          - libjpeg-devel
         state: present
         update_cache: yes
+    - name: Clone DP repo
+      git:
+        repo: 'https://github.com/zaffarelli/dramatis_personae.git'
+        dest: /opt/srv/dp/
+        clone: yes
+        update: no
+    - name: Checkout DP repo
+      git:
+        repo: 'https://github.com/zaffarelli/dramatis_personae.git'
+        dest: /opt/srv/dp/
+        version: master
+        update: no
 
-    - name: Prepare virtualisation service
-      systemd:
-        name: libvirtd
+    - name: Start Apache
+      service:
+        name: httpd
+        state: started
         enabled: yes
-        state: started
 
-    - name: Prepare LXC service
-      systemd:
-        name: lxc
+    - name: Initialize postgresql database
+      command: "service postgresql initdb"
+
+    - name: Start postgresql
+      service:
+        name: postgresql
+        state: started
         enabled: yes
-        state: started
-
-    - name: Destroy existing LXC container
-      community.general.lxc_container:
-        name: dp_container
-        state: absent
-
-    - name: Create and Start LXC container
-      community.general.lxc_container:
-        name: dp_container
-        backing_store: dir
-        container_log: true
-        template: centos
-        template_options: --release=7
-        state: started
-#        archive: true
-#        archive_compression: none
-#        archive_path: /opt/lxc/containers/
-
-    - name: Install basic packages inside the container
-      community.general.lxc_container:
-        name: dp_container
-        container_command: |
-          yum -y update
-          yum -y install vim git zsh httpd yum-utils mod_wsgi openssh-server postgresql postgresql-contrib postgresql-server postgresql-libs python-psycopg2
-
-    - name: Create SRV directory inside the container
-      community.general.lxc_container:
-        name: dp_container
-        container_command: |
-          mkdir -p /opt/srv/dp/
-          chmod -R 0755 /opt/srv/dp/
-
-
-#    - name: Clone DP repo
-#      git:
-#        repo: 'https://github.com/zaffarelli/dramatis_personae.git'
-#        dest: /opt/srv/dp/
-#        clone: yes
-#        update: no
-#    - name: Checkout DP repo
-#      git:
-#        repo: 'https://github.com/zaffarelli/dramatis_personae.git'
-#        dest: /opt/srv/dp/
-#        version: master
-#        update: no
-##    - name: Initialize postgresql database
-##      command: "postgresql-setup initdb"
-#    - name: Start postgresql
-#      service:
-#        name: postgresql
-#        state: started
-#        enabled: yes
-#
 #    - name: Create postgresql user dp
 #      community.general.postgresql_user:
 #        name: dp
 #        password: dp
 #        encrypted: yes
-#    - name: Create postgresql database dpdb
+#
+#    - name: Create postgresql database dramatis_personae
 #      community.general.postgresql_db:
-#        name: dpdb
+#        name: dramatis_personae
 #        owner: dp
 #
 #    - name: Write the apache config file
 #      file:
-#        src: /opt/srv/dp/scripts/deploy/httpd_dp.conf
+#        src: /srv/dramatis_personae/scripts/deploy/httpd_dp.conf
 #        dest: /etc/httpd/conf.d/httpd_dp.conf
 #        state: hard
 #    - name: Start httpd

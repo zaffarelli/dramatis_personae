@@ -1,0 +1,17 @@
+README.md
+setup.py
+dramatis_personae/__init__.py
+dramatis_personae/__init__.pyc
+dramatis_personae/celery.py
+dramatis_personae/urls.py
+dramatis_personae/wsgi.py
+dramatis_personae.egg-info/PKG-INFO
+dramatis_personae.egg-info/SOURCES.txt
+dramatis_personae.egg-info/dependency_links.txt
+dramatis_personae.egg-info/requires.txt
+dramatis_personae.egg-info/top_level.txt
+dramatis_personae/settings/__init__.py
+dramatis_personae/settings/base.py
+dramatis_personae/settings/celery.py
+dramatis_personae/settings/local.py
+dramatis_personae/settings/prod.py
