@@ -50,9 +50,11 @@ $block_wsize: 4ex;
     }
     & ul.unbreakable{
         page-break-after: always;
+        page-break-before: always;
         page-break-inside: avoid;
         display:block;
         border:1px solid purple;
+
     }
 
 }
@@ -362,7 +364,7 @@ body {
         }
 
         & .attributes {
-            column-count: 5;
+            column-count: 3;
             column-gap: 2px;
             column-rule: 0 solid $fics_light;
 
@@ -415,7 +417,7 @@ body {
         }
 
         & .options {
-            column-count: 3;
+            column-count: 2;
             column-gap: 5px;
             column-rule: 1px dotted $fics_light;
             margin-top: 3px;
@@ -429,15 +431,15 @@ body {
         }
 
         & .coreblock {
-            column-count: 3;
-            column-gap: 5px;
+            column-count: 2;
+            column-gap: 1ex;
             column-rule: 1px dotted $fics_light;
             margin-top: 3px;
             border: 1px solid $fics_subborder_color;
-            border-radius: 2px;
+            border-radius: 3px;
             width: 100%;
             border: 1px solid $fics_subborder_color;
-            border-radius: 2px;
+            border-radius: 3px;
 
             & ul {
                 page-break-after: always;
@@ -448,16 +450,34 @@ body {
                 min-height: 16em;
 
                 & li {
-                    padding: 3px;
+                    display:flex;
+                    padding: 0.5ex;
                     margin: 0;
+                    width:100%;
+                    flex-flow: row nowrap;
+                    justify-content:flex-start;
+                    align-items: flex-start;
 
                     & b {
-                        width: 20ex;
-                        margin-right: 1ex;
                         display: inline-block;
+                        order:1;
+                        flex-grow:0;
+                        flex-basis: 20ex;
                         background: $fics_darker;
                     }
-                    width: 100%;
+
+                    & u{
+
+                       display: inline-block;
+                       order:2;
+                       flex-grow:2;
+                       flex-basis:auto;
+                       text-decoration:none;
+                       width: 24ex;
+                       height:auto;
+                       border:1px dotted $fics_darkest;
+                       margin-left: 0.5ex;
+                    }
                 }
             }
 
@@ -467,7 +487,7 @@ body {
         }
 
         & .skillsview {
-            column-count: 3;
+            column-count: 2;
             column-gap: 5px;
             column-rule: 1px dotted $fics_light;
             margin-top: 3px;
@@ -554,7 +574,7 @@ body {
                 height: auto;
             }
             width: 100%;
-            max-width: 1000px;
+            max-width: 600px;
             margin-left: 0;
             margin-right: auto;
             display: block;

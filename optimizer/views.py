@@ -17,14 +17,17 @@ logger = logging.getLogger(__name__)
 
 def run_duel(request,pka=None,pkb=None):
     if pka==pkb:
-        fencers = Character.objects.filter(fencing_league=True)
-        x = roll(fencers.count())-1
-        pka = fencers[x].id
-        fencers2 = Character.objects.filter(fencing_league=True).exclude(id=pka)
-        y = roll(fencers2.count())-1
-        pkb = fencers2[y].id
-    tori = Character.objects.get(pk=pka)
-    uke  = Character.objects.get(pk=pkb)
+        attackers = Character.objects.filter(fencing_league=True)
+        a = roll(attackers.count())-1
+        attacker = attackers[a].id
+        print(f'Attacker: {pka}')
+        defenders = Character.objects.filter(fencing_league=True).exclude(id=attacker)
+        d = roll(defenders.count())-1
+        defender = defenders[d].id
+        print(f'Defender: {defender}')
+
+    tori = Character.objects.get(pk=attacker)
+    uke  = Character.objects.get(pk=defender)
     duel = Duel(tori,uke)
     duel_data = duel.run()
     tori.save()

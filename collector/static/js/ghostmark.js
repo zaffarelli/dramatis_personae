@@ -15,9 +15,9 @@ class Ghostmark {
         me.width = me.size * 6;
         me.height = me.size * 6;
         me.data = data;
-        me.character = JSON.parse(data['character'])
-        me.alliance = JSON.parse(data['alliance'])
-        me.svg = d3.select('#ghostmark_'+me.character['id'])
+        me.character = data['character'];
+        me.alliance = data['alliance'];
+        me.svg = d3.select('.mark #ghostmark_'+me.character['id'])
             .append('svg')
             .attr('id',me.character['rid'])
             .attr("width", me.width)
@@ -29,7 +29,7 @@ class Ghostmark {
         me.ox = me.size*3;
         me.oy = me.size*3;
         me.mark = me.size;
-        console.log(me.data)
+        //console.log(me.data)
     }
 
     createLayout(){
@@ -90,7 +90,7 @@ class Ghostmark {
                 return t;
             })
         ;
-        me.front = me.ghostmark.append('path')
+        me.back = me.ghostmark.append('path')
                 .attr("d", function(){
                     let x = me.size;
                     let path_str = '';
@@ -105,10 +105,10 @@ class Ghostmark {
                 })
                 .style('stroke',me.panel_stroke)
                 .style('stroke-width','0.5pt')
-                .style('opacity','0.9')
-                .style('fill',me.alliance['color_front'])
+                .style('opacity','0.85')
+                .style('fill',me.alliance['color_back'])
         ;
-        me.back = me.ghostmark.append('path')
+        me.front = me.ghostmark.append('path')
                 .attr("d", function(){
                     let x = me.size;
                     let path_str = '';
@@ -124,8 +124,8 @@ class Ghostmark {
                 })
                 .style('stroke',me.panel_stroke)
                 .style('stroke-width','0.5pt')
-                .style('opacity','0.9')
-                .style('fill',me.alliance['color_back'])
+                .style('opacity','1.0')
+                .style('fill',me.alliance['color_front'])
         ;
 
         me.icon_simple = me.ghostmark.append('text')
@@ -144,7 +144,7 @@ class Ghostmark {
             .style("fill", me.alliance['color_icon_fill'])
             .style("stroke", me.alliance['color_icon_stroke'])
             .style("stroke-width", "0.5pt")
-            .style('opacity','0.9')
+            .style('opacity','1.0')
           ;
 
 
@@ -157,9 +157,10 @@ class Ghostmark {
                 _.each(words,function(e,i){
                     t += e[0];
                 })
+                //t += ' '+me.character["ranking"]
                 return(t)
             })
-            .style("font-family", "Lato")
+            .style("font-family", "Lato-Regular")
             .style("font-size", (me.size*0.5)+"pt")
             .style("text-anchor", "middle")
             .style("fill", me.panel_fill)
@@ -188,20 +189,25 @@ class Ghostmark {
                 .attr("d", function(){
                     let x = me.size;
                     let path_str = '';
-                    console.log(me.character['race']);
-                    if (me.character['race'] == 'Urthish'){
+                    let race = me.character['race'].split(' ')
+                    if (race[0] == 'Urthish'){
                         path_str += me.drawSticks(-1,1,'1,-1 1,1');
                     }
-                    if (me.character['race'] == 'Ur-Ukar'){
+                    if (race[0] == 'Ur-Ukar'){
                         path_str += me.drawSticks(-1,0,'1,1 1,-1');
                     }
-                    if (me.character['race'] == 'Ur-Obun'){
+                    if (race[0] == 'Ur-Obun'){
                         path_str += me.drawSticks(-1,1,'0,-1 1,1 1,-1 0,1');
                     }
 
-                    if (me.character['race'] == 'Vorox'){
+                    if (race[0] == 'Vorox'){
                         path_str += me.drawSticks(-1,1,'1,-1 1,1');
                         path_str += me.drawSticks(-1,0,'1,1 1,-1');
+
+                    }
+                    if (race[0] == 'Kurgan'){
+                        path_str += me.drawSticks(-1,1,'1,-1 1,1');
+                        path_str += me.drawSticks(0,0,'0,1');
 
                     }
 
@@ -240,25 +246,18 @@ class Ghostmark {
                 .style('fill','transparent')
         ;
 
-        me.cyber = me.ghostmark.append('path')
+        me.ranking = me.ghostmark.append('path')
                 .attr("d", function(){
                     let x = me.size;
                     let path_str = '';
-                    if (me.character['OCC_LVL'] > 0){
-
-                        if (me.character['OCC_DRK'] > 0){
-                            path_str += me.drawSticks(-1.5,-0.25,'-0.33,0.33');
-                        }else{
-                            path_str += me.drawSticks(-1.5,-0.25,'0.33,0.33');
-                        }
-                        if (me.character['occult'] == 'Theurgy'){
-                            path_str += me.drawSticks(-1.5,0.25,'0.33,0.33');
-                        }else{
-                            path_str += me.drawSticks(-1.5,0.25,'-0.33,0.33');
-                        }
-                        if (me.character['OCC_LVL'] > 4){
-                          path_str += me.drawSticks(-1.5,-0.75,'0,0.5');
-                        }
+                    if (me.character['ranking'] > 3){
+                        path_str += me.drawSticks(1.5,-0.0,'0,0.50');
+                    }
+                    if (me.character['ranking'] > 5){
+                        path_str += me.drawSticks(2.0,-0.0,'0,0.50');
+                    }
+                    if (me.character['ranking'] > 7){
+                        path_str += me.drawSticks(2.5,-0.0,'0,0.50');
                     }
                     path_str += '  ';
                     return(path_str);
@@ -267,13 +266,6 @@ class Ghostmark {
                 .style('stroke-width','3pt')
                 .style('fill','transparent')
         ;
-
-
-//        me.strength = me.addText(me.character['OP'],4.2,0.5);
-//        me.name = me.addText(me.character['full_name'],4.2,1.5);
-//        me.race = me.addText(me.character['race'],4.2,2.5);
-//        me.alliance = me.addText(me.alliance['reference'],4.2,3.5);
-//        me.alliance = me.addText(me.character['species_name'],4.2,4.5);
 
     }
 
@@ -304,7 +296,7 @@ class Ghostmark {
             .text(function(){
                 return(t)
             })
-            .style("font-family", "Lato")
+            .style("font-family", "Lato-Regular")
             .style("font-size", (me.size/2)+"pt")
             .style("text-anchor", "start")
             .style("fill", me.panel_fill)
@@ -313,11 +305,11 @@ class Ghostmark {
         return(n);
     }
 
-
-
     perform(){
         let me = this;
-        me.createLayout()
-        me.createGhostMark()
+        me.createLayout();
+        console.log('Layout done');
+        me.createGhostMark();
+        console.log('Ghostmark');
     }
 }

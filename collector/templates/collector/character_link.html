@@ -8,11 +8,8 @@
         {% if c.is_dead %}
         </strike>
         {% endif %}
-
     </div>
-
     <div class='character_actions' id="link_{{c.id}}">
-
         <span class="action_icon edit_character"><i class="fas fa-user-tag"></i></span>&nbsp
         <span class="action_icon recalc_avatar"><i class="fas fa-cog"></i></span>&nbsp;
         <span class="action_icon wa_export_character"><i class="fas fa-arrow-down"></i></span>&nbsp;
@@ -41,19 +38,10 @@
         {% else %}
             <span class='action_icon'><i class='fas fa-times'></i></span>
         {% endif %}
-
-  </div>
-  <div class='character_info '>
-        <div class="main_plate">
-            {% include 'collector/ghostmark.html' with data=c.ghostmark_data %}
-        </div>
-
-
-        <div class="support_plate">
-
-        </div>
-
-<!--        <img class="plate portrait" src="media/portraits/{{ c.rid }}.png"/>-->
+    </div>
+    <div class='character_info '>
+        <div class="main_plate"></div>
+        <div class="support_plate"></div>
         <div class="plate double">{{ c.entrance|safe }}</div>
         <div class="plate">{{ c.alliance|safe }}</div>
         {% if c.fencing_league %}
@@ -67,5 +55,5 @@
         <div class="plate"> Casted {{ c.stories_count }} time(s).</div>
         {% endif %}
         <div class="plate right">{{ c.challenge|safe }}</div>
-  </div>
+    </div>
 </div>

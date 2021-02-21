@@ -19,16 +19,15 @@ import itertools
 import logging
 import json
 
-
 logger = logging.getLogger(__name__)
 
-def json_default(value):
-    import datetime
-    if isinstance(value, datetime.date):
-        return dict(year=value.year, month=value.month, day=value.day)
-    else:
-        return value.__dict__
 
+# def json_default(value):
+#     import datetime
+#     if isinstance(value, datetime.date):
+#         return dict(year=value.year, month=value.month, day=value.day)
+#     else:
+#     return value.__dict__
 
 
 class Character(Combattant):
@@ -38,9 +37,9 @@ class Character(Combattant):
 
     page_num = 0
 
-    alias = models.CharField(max_length=200, default='',blank=True)
-    alliance = models.CharField(max_length=200,  default='',blank=True)
-    faction = models.CharField(max_length=200, default='',blank=True)
+    alias = models.CharField(max_length=200, default='', blank=True)
+    alliance = models.CharField(max_length=200, default='', blank=True)
+    faction = models.CharField(max_length=200, default='', blank=True)
     alliance_hash = models.CharField(max_length=200, default='none')
 
     alliance_ref = models.ForeignKey(AllianceRef, blank=True, null=True, on_delete=models.SET_NULL)
@@ -50,9 +49,9 @@ class Character(Combattant):
 
     native_fief = models.CharField(max_length=200, default='none')
     caste = models.CharField(max_length=100, default='Freefolk')
-    rank = models.CharField(max_length=100, default='',blank=True)
+    rank = models.CharField(max_length=100, default='', blank=True)
 
-    build_log = models.TextField(default='',blank=True)
+    build_log = models.TextField(default='', blank=True)
     PA_STR = models.PositiveIntegerField(default=1)
     PA_CON = models.PositiveIntegerField(default=1)
     PA_BOD = models.PositiveIntegerField(default=1)
@@ -94,15 +93,16 @@ class Character(Combattant):
 
     OCC_LVL = models.PositiveIntegerField(default=0)
     OCC_DRK = models.PositiveIntegerField(default=0)
-    occult = models.CharField(max_length=50, default='',blank=True)
+    occult = models.CharField(max_length=50, default='', blank=True)
     challenge = models.TextField(default='')
     challenge_value = models.IntegerField(default=0)
-    todo_list = models.TextField(default='',blank=True)
+    todo_list = models.TextField(default='', blank=True)
     # is_exportable = models.BooleanField(default=False)
     use_history_creation = models.BooleanField(default=False)
     use_only_entrance = models.BooleanField(default=False)
-    picture = models.CharField(max_length=1024, default='https://drive.google.com/open?id=15hdubdMt1t_deSXkbg9dsAjWi5tZwMU0',blank=True)
-    alliance_picture = models.CharField(max_length=256, default='',blank=True)
+    picture = models.CharField(max_length=1024,
+                               default='https://drive.google.com/open?id=15hdubdMt1t_deSXkbg9dsAjWi5tZwMU0', blank=True)
+    alliance_picture = models.CharField(max_length=256, default='', blank=True)
     on_save_re_roll_attributes = models.BooleanField(default=False)
     on_save_re_roll_skills = models.BooleanField(default=False)
     life_path_total = models.IntegerField(default=0)
@@ -113,7 +113,7 @@ class Character(Combattant):
     historical_figure = models.BooleanField(default=False)
     nameless = models.BooleanField(default=False)
     error = models.BooleanField(default=False)
-
+    ranking = models.PositiveIntegerField(default=0, blank=True)
 
     color = models.CharField(max_length=20, default='#CCCCCC', blank=True)
     skills_options = []
@@ -134,14 +134,44 @@ class Character(Combattant):
 
     @property
     def ghostmark_data(self):
-        data = {
-            'rid':self.rid,
-            'id': self.id,
-            'character':self.toJSON(),
-            'alliance':self.alliance_ref.toJSON()
-        }
-        return data
+        if self.alliance_ref:
+            alliance_ref = AllianceRef.objects.get(reference=self.alliance_ref.reference)
+        else:
+            alliance_ref = AllianceRef.objects.get(reference='None')
+        x = self.id
 
+        data = {
+            'id': x,
+            'character': {
+                'rid': self.rid,
+                'id': x,
+                'full_name': self.full_name,
+                'gender': self.gender,
+                'race': self.race,
+                'OCC_LVL': self.OCC_LVL,
+                'OCC_DRK': self.OCC_DRK,
+                'occult': self.occult,
+                'ranking': self.ranking,
+            },
+            'alliance': {
+                'reference': alliance_ref.reference,
+                'color_front': alliance_ref.color_front,
+                'color_back': alliance_ref.color_back,
+                'color_highlight': alliance_ref.color_highlight,
+                'icon_simple': alliance_ref.icon_simple,
+                'color_icon_fill': alliance_ref.color_icon_fill,
+                'color_icon_stroke': alliance_ref.color_icon_stroke,
+                'category': alliance_ref.category,
+                'faction': alliance_ref.faction,
+            }
+
+        }
+
+        jdata = json.dumps(data, sort_keys=True, indent=4)
+        # import pdb;
+        # pdb.set_trace()
+        return jdata
+        # return json.dumps(data,default=lambda o: o.__dict__(),skipkeys=True)
 
     @property
     def info_str(self):
@@ -206,11 +236,9 @@ class Character(Combattant):
         context = {"attribute": str, "value": getattr(self, str), "id": self.id}
         return context
 
-
-
-    def toJSON(self):
-        """ Returns JSON of object """
-        return json.dumps(self, default=json_default,sort_keys=True, indent=4)
+    # def toJSON(self):
+    #     """ Returns JSON of object """
+    #     return json.dumps(self, default=json_default,sort_keys=True, indent=4)
 
     def rebuild_from_lifepath(self):
         """ Historical Creation """
@@ -299,7 +327,8 @@ class Character(Combattant):
         self.reset_total()
         self.checkOverhead()
         self.balanced = (self.life_path_total == self.OP) and (self.OP > 0)
-        self.priority = (abs(self.life_path_total - self.OP) < 8) and (self.OP > 0) and (abs(self.life_path_total - self.OP) > 0)
+        self.priority = (abs(self.life_path_total - self.OP) < 8) and (self.OP > 0) and (
+                abs(self.life_path_total - self.OP) > 0)
         self.build_log = "\n".join(bl)
         if self.player != '':
             self.balanced = True
@@ -365,9 +394,8 @@ class Character(Combattant):
         """ Calculate wildcard amount from the ToDs (ToD_WC), and check if the amount is satisfied with skills
             matching the wildcards roots in the custo (C_WC).
         """
-        #print(root_list)
+        # print(root_list)
         self.charactercusto.watch_roots = "_".join(root_list)
-
 
     def rebuild_free_form(self):
         """ Freeform Creation """
@@ -399,6 +427,8 @@ class Character(Combattant):
         else:
             self.rebuild_free_form()
         self.calculate_shortcuts()
+
+        self.update_ranking()
         self.race = self.specie.species
 
         if self.PA_BOD != 0:
@@ -622,6 +652,15 @@ class Character(Combattant):
         if found_item:
             found_item.delete()
 
+    def update_ranking(self):
+        from collector.models.benefice_affliction import BeneficeAffliction
+        all = self.beneficeaffliction_set.all()
+        self.ranking = 0
+        for ba in all:
+            if ba.benefice_affliction_ref.ranking:
+                self.ranking += ba.benefice_affliction_ref.value
+
+
     def add_ba(self, aref, adesc=''):
         from collector.models.benefice_affliction import BeneficeAffliction
         ba = self.beneficeaffliction_set.all().filter(benefice_affliction_ref=aref, description=adesc).first()
@@ -834,7 +873,6 @@ def update_character(sender, instance, conf=None, **kwargs):
     instance.get_rid(instance.full_name)
     instance.alliance_hash = hashlib.sha1(bytes(instance.alliance, 'utf-8')).hexdigest()
     instance.pub_date = datetime.now(tz=get_current_timezone())
-
 
 # @receiver(post_save, sender=Character, dispatch_uid='backup_character')
 # def backup_character(sender, instance, **kwargs):

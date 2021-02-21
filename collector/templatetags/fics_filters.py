@@ -350,3 +350,26 @@ def parse_stories(value):
     txt += "</li><li>".join(new_lst)
     txt += "</li></ul>"
     return txt
+
+
+
+@register.filter(name='extract_id')
+def extract_id(value):
+    import json
+    x = json.load(value)
+
+    return x[id]
+
+@register.filter(name='as_media_image')
+def as_media_image(value):
+    str = f'images/f_{value}.jpg'
+    from django.core.files.storage import default_storage
+    if default_storage.exists(str):
+        str = f'media/images/f_{value}.jpg'
+    else:
+        str = 'media/images/f_blank.jpg'
+    return str
+
+@register.filter(name='is_not_blank')
+def is_not_blank(value):
+    return (value!='')

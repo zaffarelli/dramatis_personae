@@ -122,6 +122,7 @@ class TourOfDuty(models.Model):
         return '%s=%s' % (self.character.full_name, self.tour_of_duty_ref.reference)
 
     def push(self, ch):
+        ranking = 0
         tod = self.tour_of_duty_ref
         AP = 0
         OP = 0

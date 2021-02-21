@@ -4,12 +4,14 @@
  ═╩╝┴└─┴ ┴┴ ┴┴ ┴ ┴ ┴└─┘  ╩  └─┘┴└─└─┘└─┘┘└┘┴ ┴└─┘
 """
 from .base import *
+from .celery import *
 
-ALLOWED_HOSTS = ['localhost', '192.168.0.70', '192.168.0.60', '192.168.0.61', '192.168.0.90', 'phasma', 'galliard', 'zotzgi']
-
-SECRET_KEY = '6j@b*@a*k0-23vmk4@i%r@_5es5+8uy!23rl2+1^qx491898-b'
 DEBUG = True
-INSTANCE_NAME = 'PHASMA DEV'
+ALLOWED_HOSTS = ['localhost', '192.168.0.70', '192.168.0.60', '192.168.0.61', '192.168.0.90', 'phasma', 'galliard', 'zotzgi', '192.168.0.23']
+CELERY_BROKER_URL = 'amqp://guest@zotzgi//'
+SECRET_KEY = 'yhx#rfagghedua&l_5d+@&f!kf)%s%2^*ztun25n+xuokjkfw!'
+
+INSTANCE_NAME = 'ZOTZGI DEV'
 
 DATABASES = {
     'default': {
@@ -21,4 +23,6 @@ DATABASES = {
         'PORT': '',
         },
 }
+
+
 

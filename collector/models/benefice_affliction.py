@@ -7,9 +7,10 @@ from django.db import models
 from collector.models.character import Character
 from collector.models.tourofduty import TourOfDutyRef
 from django.contrib import admin
+from collector.mixins.uuid_class import UUIDClass
 
 
-class BeneficeAfflictionRef(models.Model):
+class BeneficeAfflictionRef(UUIDClass):
     class Meta:
         verbose_name = "FICS: Benefice/Affliction"
         ordering = ['reference', 'value', ]
@@ -29,10 +30,14 @@ class BeneficeAfflictionRef(models.Model):
     description = models.TextField(max_length=256, default='',blank=True)
     source = models.CharField(max_length=32, default='FS2CRB')
     emphasis = models.CharField(max_length=64, default='',blank=True)
+    ranking = models.BooleanField(default=False)
     watermark = models.CharField(max_length=64, default='',blank=True)
 
     def __str__(self):
         return '%s %s (%d)' % (self.reference, self.emphasis, self.value)
+
+    def fix(self):
+        super().fix()
 
 
 class BeneficeAffliction(models.Model):
@@ -72,13 +77,18 @@ def make_riches(modeladmin, request, queryset):
     queryset.update(category="ri")
     short_description = "Make riches"
 
+def refix(modeladmin, request, queryset):
+    for benefixe_affliction_ref in queryset:
+        benefixe_affliction_ref.save()
+    short_description = "Do fix"
+
 
 class BeneficeAfflictionRefAdmin(admin.ModelAdmin):
-    ordering = ('category', 'reference', '-value')
-    list_display = ('reference', 'emphasis', 'value', 'category', 'description', 'source')
+    ordering = ('category', 'reference', 'value', 'ranking')
+    list_display = ('reference', 'uuid', 'emphasis', 'value','ranking', 'category', 'description', 'source')
     search_fields = ('reference', 'description', 'emphasis', 'watermark')
-    list_filter = ('source', 'watermark', 'category')
-    actions = [make_occult, make_combat, make_talent, make_riches, make_possession]
+    list_filter = ('ranking','source', 'watermark', 'category')
+    actions = [refix,make_occult, make_combat, make_talent, make_riches, make_possession]
 
 
 class BeneficeAfflictionModificator(models.Model):

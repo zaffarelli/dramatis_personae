@@ -47,9 +47,9 @@ class AllianceRef(models.Model):
     def __str__(self):
         return f'{self.reference} ({self.get_category_display()})'
 
-    def toJSON(self):
-        """ Returns JSON of object """
-        return json.dumps(self, default=json_default,sort_keys=True, indent=4)
+    # def toJSON(self):
+    #     """ Returns JSON of object """
+    #     return json.dumps(self, default=json_default,sort_keys=True, indent=4)
 
 class AllianceRefAdmin(admin.ModelAdmin):
     ordering = ['category', 'reference']

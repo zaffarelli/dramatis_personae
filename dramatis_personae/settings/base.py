@@ -6,7 +6,6 @@
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(os.path.join(__file__,os.pardir))))
-
 INSTALLED_APPS = [
     'optimizer.apps.OptimizerConfig',
     'scenarist.apps.ScenaristConfig',
@@ -138,6 +137,5 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'dp_static/')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'dp_media/')
-
 
 LOGIN_REDIRECT_URL = '/'

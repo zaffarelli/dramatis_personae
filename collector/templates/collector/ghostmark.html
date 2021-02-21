@@ -1,5 +1,6 @@
 {% load static %}
-<div id='ghostmark_{{data.id}}'></div>
+{% load fics_filters %}
+<div id='ghostmark_{{c.id}}'></div>
 <script>
   (new Ghostmark({{data|safe}})).perform();
 </script>

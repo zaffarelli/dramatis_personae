@@ -165,6 +165,11 @@ class CharacterCusto(models.Model):
             ch.add_ba(ba.benefice_affliction_ref, ba.description)
         for weapon in self.weaponcusto_set.all():
             ch.add_weapon(weapon.weapon_ref)
+        if ch.fencing_league:
+            if len(self.weaponcusto_set.all())==0:
+                from collector.models.weapon import WeaponRef
+                dirk = WeaponRef.objects.get(reference='Dirk')
+                ch.add_weapon(dirk)
         for armor in self.armorcusto_set.all():
             ch.add_armor(armor.armor_ref)
         for shield in self.shieldcusto_set.all():

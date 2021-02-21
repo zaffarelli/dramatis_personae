@@ -13,6 +13,7 @@ class Duel:
         self.tori = tori
         self.uke = uke
         self.rnd = 0
+        print(f'New duel is : {tori.full_name} vs {uke.full_name}')
         self.pub_date = datetime.now()
         self.tori.prepare_for_battle()
         self.uke.prepare_for_battle()

@@ -11,9 +11,10 @@ from django.db.models.signals import pre_save, post_save
 from collector.utils import fics_references
 from collector.models.character_custo import CharacterCusto
 from collector.models.tourofduty import TourOfDutyRef
+from collector.mixins.uuid_class import UUIDClass
 
 
-class SkillRef(models.Model):
+class SkillRef(UUIDClass):
     class Meta:
         ordering = ['is_speciality', 'is_wildcard', 'reference']
         verbose_name = "FICS: Skill"
@@ -30,6 +31,9 @@ class SkillRef(models.Model):
         return '%s %s %s %s [%s]' % (
         self.reference, self.group, "(R)" if self.is_root else "", "(S)" if self.is_speciality else "",
         self.linked_to.reference if self.linked_to else "-")
+
+    def fix(self):
+        super().fix()
 
 
 class Skill(models.Model):
@@ -48,9 +52,6 @@ class Skill(models.Model):
         pass
 
 
-@receiver(pre_save, sender=Skill, dispatch_uid='update_skill')
-def update_skill(sender, instance, **kwargs):
-    instance.fix()
 
 
 # Inlines
@@ -75,9 +76,7 @@ class SkillModificator(models.Model):
         pass
 
 
-@receiver(pre_save, sender=SkillModificator, dispatch_uid='update_skill_modificator')
-def update_skill_modificator(sender, instance, **kwargs):
-    instance.fix()
+
 
 
 class SkillCusto(models.Model):
@@ -169,11 +168,16 @@ def set_uncommon(modeladmin, request, queryset):
     queryset.update(is_common=False)
     short_description = "Change skills to uncommon"
 
+def refix(modeladmin, request, queryset):
+    for skill_ref in queryset:
+        skill_ref.save()
+    short_description = "Do fix"
+
 
 class SkillRefAdmin(admin.ModelAdmin):
     ordering = ['is_speciality', 'is_wildcard', 'reference']
-    list_display = ['reference', 'is_root', 'is_speciality', 'is_wildcard', 'is_common', 'group', 'linked_to']
-    actions = [change_to_awa, change_to_soc, change_to_edu, change_to_fig, change_to_con, change_to_tin, change_to_per,
+    list_display = ['reference','uuid', 'is_root', 'is_speciality', 'is_wildcard', 'is_common', 'group', 'linked_to']
+    actions = [refix,change_to_awa, change_to_soc, change_to_edu, change_to_fig, change_to_con, change_to_tin, change_to_per,
                change_to_bod, set_common, set_uncommon]
     list_filter = ['is_root', 'is_speciality', 'is_wildcard', 'is_common', 'linked_to']
     search_fields = ('reference',)
