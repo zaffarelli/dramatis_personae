@@ -2,7 +2,19 @@
 {% load fics_filters %}
 
 <p>
-    {%if c.is_speciality %}&nbsp;-&nbsp;{%endif%}
-    <em>{{ c.reference }}</em>
-    <tt>[{%if c.is_root %}R{%endif%}{%if c.is_speciality %}S{%endif%}{% if c.is_common %}C{% endif %}{% if c.is_wildcard %}W{% endif %}({{ c.group }}) #{{c.id}}]</tt>
+    {%if c.is_speciality %}
+    <h6>{{ c.reference }}</h6>
+    {% else %}
+    <h5>{{ c.reference }} {%if c.is_root %}*{%endif%}</h5>
+    {%endif%}
+    <blockquote>
+    {% if c.is_common %}Common Skill<br/>{% endif %}
+    {% if c.attributes %}Attributes: {{c.attributes}}<br/>{% endif %}
+    {%if c.is_speciality %}{%else%}
+    Group: {{ c.group }}</br>{%endif%}
+    {% if c.grouping %}Type: {{c.grouping}}<br/>{% endif %}
+    UUID: {{c.uuid}}
+    </blockquote>
 </p>
+{% if c.description %}<p>{{c.description|safe}}</p>{% endif %}
+

@@ -348,7 +348,7 @@ class Collector{
             $.ajax({
                 url: 'ajax/build_pdf_rules/',
             }).done(function(answer) {
-                $('.details').html(answer.comment);
+                //$('.details').html(answer);
                 me.rebootLinks();
             });
         });

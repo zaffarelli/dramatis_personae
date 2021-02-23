@@ -8,6 +8,7 @@ from datetime import datetime
 from django.db.models.signals import pre_save, post_save
 from django.dispatch import receiver
 from django.urls import reverse
+from django.shortcuts import redirect
 import hashlib
 from scenarist.models.epics import Epic
 from collector.models.fics_models import Specie
@@ -18,6 +19,7 @@ from django.utils.timezone import get_current_timezone
 import itertools
 import logging
 import json
+from colorfield.fields import ColorField
 
 logger = logging.getLogger(__name__)
 
@@ -28,6 +30,21 @@ logger = logging.getLogger(__name__)
 #         return dict(year=value.year, month=value.month, day=value.day)
 #     else:
 #     return value.__dict__
+
+
+DRAMA_SEATS = (
+    ('foe','Foe'),
+    ('enemy','Enemy'),
+    ('lackey','Lackey'),
+    ('antagonist','Antagonist'),
+    ('opponent', 'Opponent'),
+    ('neutral', 'Neutral'),
+    ('partisan', 'Partisan'),
+    ('protagonist','Protagonist'),
+    ('servant','Servant'),
+    ('ally','Ally'),
+    ('friend','Friend'),
+)
 
 
 class Character(Combattant):
@@ -91,12 +108,15 @@ class Character(Combattant):
     gm_shortcuts = models.TextField(default='', blank=True)
     gm_shortcuts_pdf = models.TextField(default='', blank=True)
 
+    team = models.CharField(max_length=128,choices=DRAMA_SEATS,default='neutral',blank=True)
+
     OCC_LVL = models.PositiveIntegerField(default=0)
     OCC_DRK = models.PositiveIntegerField(default=0)
     occult = models.CharField(max_length=50, default='', blank=True)
     challenge = models.TextField(default='')
     challenge_value = models.IntegerField(default=0)
     todo_list = models.TextField(default='', blank=True)
+    path = models.CharField(max_length=256,default='', blank=True)
     # is_exportable = models.BooleanField(default=False)
     use_history_creation = models.BooleanField(default=False)
     use_only_entrance = models.BooleanField(default=False)
@@ -115,7 +135,8 @@ class Character(Combattant):
     error = models.BooleanField(default=False)
     ranking = models.PositiveIntegerField(default=0, blank=True)
 
-    color = models.CharField(max_length=20, default='#CCCCCC', blank=True)
+    group_color = ColorField(default='#888888', blank=True)
+    color = ColorField(default='#CCCCCC', blank=True)
     skills_options = []
     ba_options = []
     bc_options = []
@@ -230,7 +251,7 @@ class Character(Combattant):
         return self.get_pa("OCC_DRK")
 
     def get_absolute_url(self):
-        return reverse('view_character', kwargs={'pk': self.pk})
+        return reverse('recalc_avatar', kwargs={'id': self.id})
 
     def get_pa(self, str):
         context = {"attribute": str, "value": getattr(self, str), "id": self.id}

@@ -129,7 +129,7 @@ def extract_rules():
     context = {}
     import datetime
     context['date'] = datetime.datetime.now()
-    skills = SkillRef.objects.all().order_by('reference', 'is_root', 'is_speciality')
+    skills = SkillRef.objects.all().filter(is_wildcard=False).order_by('reference', 'is_root', 'is_speciality')
     context['skills'] = skills
     benefice_afflictions = BeneficeAfflictionRef.objects.order_by('-source')
     context['benefice_afflictions'] = benefice_afflictions

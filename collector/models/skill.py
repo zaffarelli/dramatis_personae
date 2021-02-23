@@ -26,6 +26,9 @@ class SkillRef(UUIDClass):
     is_wildcard = models.BooleanField(default=False)
     group = models.CharField(default="EDU", max_length=3, choices=fics_references.GROUPCHOICES)
     linked_to = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE)
+    description = models.TextField(max_length=1024, default='', blank=True)
+    attributes = models.TextField(max_length=64, default='', blank=True)
+    grouping = models.CharField(max_length=64, default='', blank=True)
 
     def __str__(self):
         return '%s %s %s %s [%s]' % (
@@ -173,11 +176,26 @@ def refix(modeladmin, request, queryset):
         skill_ref.save()
     short_description = "Do fix"
 
+def grouping_as_house(modeladmin, request, queryset):
+    queryset.update(grouping='House')
+    short_description = "Change skills grouping as House"
+
+def grouping_as_guild(modeladmin, request, queryset):
+    queryset.update(grouping='Guild')
+    short_description = "Change skills grouping as Guild"
+
+def grouping_as_system(modeladmin, request, queryset):
+    queryset.update(grouping='System')
+    short_description = "Change skills grouping as System"
+
+def grouping_as_sect(modeladmin, request, queryset):
+    queryset.update(grouping='Sect')
+    short_description = "Change skills grouping as Sect"
 
 class SkillRefAdmin(admin.ModelAdmin):
-    ordering = ['is_speciality', 'is_wildcard', 'reference']
-    list_display = ['reference','uuid', 'is_root', 'is_speciality', 'is_wildcard', 'is_common', 'group', 'linked_to']
-    actions = [refix,change_to_awa, change_to_soc, change_to_edu, change_to_fig, change_to_con, change_to_tin, change_to_per,
+    ordering = ['is_speciality', 'is_wildcard', 'reference','grouping']
+    list_display = ['reference','uuid', 'grouping','is_root', 'is_speciality', 'is_wildcard', 'is_common', 'group', 'linked_to']
+    actions = [refix,grouping_as_house,grouping_as_guild,grouping_as_system,grouping_as_sect,change_to_awa, change_to_soc, change_to_edu, change_to_fig, change_to_con, change_to_tin, change_to_per,
                change_to_bod, set_common, set_uncommon]
-    list_filter = ['is_root', 'is_speciality', 'is_wildcard', 'is_common', 'linked_to']
-    search_fields = ('reference',)
+    list_filter = ['is_root', 'is_speciality', 'is_wildcard', 'is_common', 'grouping', 'linked_to']
+    search_fields = ['reference','grouping']

@@ -296,3 +296,45 @@ div.character_sheet {
         page-break-inside: avoid;
     }
 }
+
+div.character_update_view {
+    width: 100%;
+    max-width: 600px;
+    margin-left: 0;
+    margin-right: auto;
+    display: block;
+    column-count: 1;
+    column-gap: 10px;
+    column-rule: 1px dotted $fics_light;
+    padding: 5px;
+    background: $fics_dark;
+    color: $fics_front;
+    border: 1px solid $fics_light;
+    box-shadow: 3px 3px 5px $fics_darkest;
+    border-radius: 5px;
+    opacity: 0.9;
+    & .formset{
+        display:flex;
+        flex-flow:column nowrap;
+
+    }
+
+    & .field_wrapper{
+        display:flex;
+        flex-flow:row nowrap;
+        justify-content:flex-start;
+        align-items:stretch;
+        align-content:space-around;
+        & label{
+            order:1;
+            flex-basis:20ex;
+            padding:2px;
+        }
+        & input,select,textarea{
+            order:2;
+            flex-basis:40ex;
+            padding:2px;
+        }
+    }
+
+  }

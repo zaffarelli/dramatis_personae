@@ -1,19 +1,19 @@
-"""
+'''
  ╔╦╗╔═╗  ╔═╗┌─┐┬  ┬  ┌─┐┌─┐┌┬┐┌─┐┬─┐
   ║║╠═╝  ║  │ ││  │  ├┤ │   │ │ │├┬┘
  ═╩╝╩    ╚═╝└─┘┴─┘┴─┘└─┘└─┘ ┴ └─┘┴└─
-"""
+'''
 from django.views.generic.edit import UpdateView
 from django.views.generic.detail import DetailView
 from django.contrib import messages
 from collector.forms.basic import CharacterForm, TourOfDutyFormSet
 from collector.models.character import Character
 from scenarist.mixins.ajaxfromresponse import AjaxFromResponseMixin
-#from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from django.forms.models import model_to_dict
 from django.template.loader import get_template
-from django.shortcuts import redirect
+from django.shortcuts import redirect,reverse
+from collector.models.bloke import Bloke
 
 class CharacterDetailView(DetailView):
     model = Character
@@ -22,6 +22,8 @@ class CharacterDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['no_skill_edit'] = True
+        # blokes = Bloke.objects.filter(character__full_name=context['c'].full_name)
+        context['blokes'] = BlokesFormSet(instance=self.object)
         messages.success(self.request, 'Display character %s' % (context['c'].full_name))
         return context
 
@@ -31,6 +33,7 @@ class CharacterUpdateView(AjaxFromResponseMixin, UpdateView):
     form_class = CharacterForm
     context_object_name = 'c'
     template_name_suffix = '_update_form'
+    success_url = 'recalc_avatar'
 
     def form_valid(self, form):
         context = self.get_context_data(form=form)
@@ -44,8 +47,10 @@ class CharacterUpdateView(AjaxFromResponseMixin, UpdateView):
             messages.error(self.request, 'Avatar %s has errors. unable to save.' % (context['c'].full_name))
             return super().form_invalid(form)
 
-    def get_success_url(self):
-        return f'ajax/recalc/character/{self.object.id}/'
+    # def get_success_url(self):
+    #     messages.success(self.request, f'Redirecting {self.object.full_name}')
+    #     #return f'ajax/recalc/avatar/{self.object.id}/'
+    #     return '/'
 
     def get_context_data(self, **kwargs):
         context = super(CharacterUpdateView, self).get_context_data(**kwargs)

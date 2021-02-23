@@ -1,7 +1,6 @@
 {% load fics_filters %}
 {% block details %}
 <div class="character_sheet" id='sheet_{{c.id}}'>
-
     <div class="infoblock">
         <div class="data">
             <h1>{{ c.full_name }}</h1>
@@ -112,11 +111,13 @@
     {% if c.player|is_not_blank %}
     <hr/>
     [{{ c.player }}]
-    Blokeset: {{c.blokes_set.all }}
-    {% for x in c.bloke_set.all %}
-        dmgkmd
-        <br/>{% include "collector/character_xs.html" with c=x.npc %}
-    {% endfor %}
+    Blokes:
+
+    <ul>
+        {% for x in blokes.all %}
+            <li/>{% include "collector/character_xs.html" with c=x.npc %}</li>
+        {% endfor %}
+    </ul>
     {% endif %}
 
     {% if c.stories_count %}

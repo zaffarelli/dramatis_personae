@@ -12,7 +12,7 @@ echo "Migrate..."
 echo "Collecting statics"
     python3 manage.py collectstatic --noinput --clear --link -v 0
 
-#python manage.py shell < scripts/update_alliances.py
+#python manage.py shell < scripts/update_lores.py
 
 #echo "Starting Celery..."
 #kill -9 $(cat celeryd.pid)

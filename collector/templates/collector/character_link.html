@@ -4,6 +4,7 @@
         {% if c.is_dead %}
         <strike>
         {% endif %}
+        <i class='fas fa-square' style="color:{{c.group_color}};"></i>
         <em title='{{ c.entrance }}'> {{ c.full_name }}</em>
         {% if c.is_dead %}
         </strike>
@@ -39,7 +40,7 @@
             <span class='action_icon'><i class='fas fa-times'></i></span>
         {% endif %}
     </div>
-    <div class='character_info '>
+    <div class='character_info hidden'>
         <div class="main_plate"></div>
         <div class="support_plate"></div>
         <div class="plate double">{{ c.entrance|safe }}</div>

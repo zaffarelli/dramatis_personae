@@ -1,12 +1,10 @@
-
-
-<div class="classyview">
+<div class="character_update_view">
     <form class='character_form' form-target='character'>
         {{ form.non_field_errors}}
         {{ form.management_form }}
         <input name='id' type='hidden' value='{{c.id}}'>
         <input name='rid' type='hidden' value='{{c.rid}}'>
-        <table class="formset">
+        <div class="formset">
             <caption>{{c.rid}}</caption>
             <tr>
                 <td>
@@ -91,6 +89,11 @@
                         {{form.occult}}
                     </div>
                     <div class="field_wrapper">
+                        {{ form.path.errors}}
+                        <label for="">Path</label>
+                        {{form.path}}
+                    </div>
+                    <div class="field_wrapper">
                         {{ form.keyword.errors}}
                         <label for="">Keyword</label>
                         {{form.keyword}}
@@ -150,17 +153,18 @@
                         <label for="">Narrative</label>
                         {{form.narrative}}
                     </div>
-                </td><td>
-                      <table class="formset inline">
-                      <caption>Lifepath</caption>
-                      {{ tourofdutys.management_form }}
-                      {% for form in tourofdutys.forms %}
+                </td>
+                <td>
+                    <table class="formset inline">
+                        <caption>Lifepath</caption>
+                        {{ tourofdutys.management_form }}
+                        {% for form in tourofdutys.forms %}
                         {{ form.as_table }}
                         {% endfor %}
                     </table>
                 </td>
             </tr>
-        </table>
+        </div>
         {% csrf_token %}
     </form>
 
