@@ -9,6 +9,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(os.path.join(__file__
 INSTALLED_APPS = [
     'optimizer.apps.OptimizerConfig',
     'scenarist.apps.ScenaristConfig',
+    'cartograph.apps.CartographConfig',
     'collector.apps.CollectorConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -52,7 +53,6 @@ TEMPLATES = [{
 }]
 
 WSGI_APPLICATION = 'dramatis_personae.wsgi.application'
-#ASGI_APPLICATION = 'dramatis_personae.routing.application'
 
 CHANNEL_LAYERS = {
     'default':{
@@ -109,6 +109,15 @@ LOGGING = {
             'handlers': ['console', 'logfile'],
             'level': 'DEBUG',
         },
+        'cartograph': {
+            'handlers': ['console', 'logfile'],
+            'level': 'DEBUG',
+        },
+        'optimizer': {
+            'handlers': ['console', 'logfile'],
+            'level': 'DEBUG',
+        },
+
         'scenarist': {
             'handlers': ['console', 'logfile'],
             'level': 'DEBUG',

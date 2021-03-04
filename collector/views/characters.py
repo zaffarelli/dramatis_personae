@@ -47,11 +47,6 @@ class CharacterUpdateView(AjaxFromResponseMixin, UpdateView):
             messages.error(self.request, 'Avatar %s has errors. unable to save.' % (context['c'].full_name))
             return super().form_invalid(form)
 
-    # def get_success_url(self):
-    #     messages.success(self.request, f'Redirecting {self.object.full_name}')
-    #     #return f'ajax/recalc/avatar/{self.object.id}/'
-    #     return '/'
-
     def get_context_data(self, **kwargs):
         context = super(CharacterUpdateView, self).get_context_data(**kwargs)
         if self.request.POST:

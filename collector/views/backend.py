@@ -109,7 +109,7 @@ def roll_dice(request, slug):
 
 
 # def campaign_css(request):
-#     from collector.utils.basic import get_current_config
+#     from cartograph.utils.basic import get_current_config
 #     camp = get_current_config()
 #     return render_to_response('campaign.css', { 'campaign': camp })
 #

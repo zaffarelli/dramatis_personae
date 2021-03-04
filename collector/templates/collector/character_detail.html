@@ -16,7 +16,7 @@
         <div class="mark">
             {% include 'collector/ghostmark.html' with data=c.ghostmark_data %}
         </div>
-
+        <div class="tile_back" id="tile_back_{{c.id}}"><i class="action_icon golden fa fa-times-circle"></i></div>
     </div>
     <div class='coreblock'>
         <ul>
@@ -29,6 +29,7 @@
             <li><b>Birthdate</b><u>{{ c.birthdate }} ({{ c.age }} years old)</u></li>
             {% endif %}
             <li><b>Fief/Species</b><u>{{ c.native_fief }} / {{ c.race }}</u></li>
+            <li><b>Base Fief/ Current Species</b><u>{{ c.fief }} / {{ c.current_fief }}</u></li>
             <li><b>Caste/Rank</b><u>{{ c.caste }} / {{ c.rank }}</u></li>
             <li><b>Height/Weight</b><u>{{ c.height|as_height }} / {{ c.weight|as_weight }}</u></li>
             {% if not c.nameless %}

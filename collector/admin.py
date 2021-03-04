@@ -17,7 +17,7 @@ admin.site.register(Specie, SpecieAdmin)
 from collector.models.armor import ArmorRef, ArmorRefAdmin
 admin.site.register(ArmorRef, ArmorRefAdmin)
 
-# from collector.models.talent import TalentRef, TalentRefAdmin
+# from cartograph.models.talent import TalentRef, TalentRefAdmin
 # admin.site.register(TalentRef, TalentRefAdmin)
 
 from collector.models.weapon import WeaponRef, WeaponRefAdmin
@@ -65,9 +65,7 @@ admin.site.register(ShipSystemSlot, ShipSystemSlotAdmin)
 from collector.models.spacecraft import ShipSection, ShipSectionAdmin
 admin.site.register(ShipSection, ShipSectionAdmin)
 
-from collector.models.system import System, SystemAdmin, OrbitalItem, OrbitalItemAdmin
-admin.site.register(System, SystemAdmin)
-admin.site.register(OrbitalItem, OrbitalItemAdmin)
+
 
 from collector.models.ritual import RitualRef, RitualRefAdmin
 admin.site.register(RitualRef, RitualRefAdmin)

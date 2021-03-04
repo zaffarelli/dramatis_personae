@@ -42,7 +42,7 @@ def decrypt(str):
 
 def connect(options):
     logger.info("> Connecting")
-    cf = options['collector']['export']['google_spread_sheet']['credentials']
+    cf = options['cartograph']['export']['google_spread_sheet']['credentials']
     cred_file = settings.STATIC_ROOT + cf
     scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
     logger.info("> Sending Credentials")
@@ -53,8 +53,8 @@ def connect(options):
 
 def connect_as_source(options):
     logger.info("> Connecting source")
-    source_name = options['collector']['export']['google_spread_sheet']['source_name']
-    tab = options['collector']['export']['google_spread_sheet']['tab']
+    source_name = options['cartograph']['export']['google_spread_sheet']['source_name']
+    tab = options['cartograph']['export']['google_spread_sheet']['tab']
     client = connect(options)
     sheet = client.open(source_name).worksheet(tab)
     return sheet
@@ -62,8 +62,8 @@ def connect_as_source(options):
 
 def connect_as_target(options):
     logger.info("> Connecting target")
-    target_name = options['collector']['export']['google_spread_sheet']['target_name']
-    tab = options['collector']['export']['google_spread_sheet']['tab']
+    target_name = options['cartograph']['export']['google_spread_sheet']['target_name']
+    tab = options['cartograph']['export']['google_spread_sheet']['tab']
     client = connect(options)
     sheet = client.open(target_name).worksheet(tab)
     return sheet
@@ -71,8 +71,8 @@ def connect_as_target(options):
 
 def update_abstract(options):
     logger.info('> Writting Abstract')
-    target_name = options['collector']['export']['google_spread_sheet']['target_name']
-    tab = options['collector']['export']['google_spread_sheet']['tab_abstract']
+    target_name = options['cartograph']['export']['google_spread_sheet']['target_name']
+    tab = options['cartograph']['export']['google_spread_sheet']['tab_abstract']
     client = connect(options)
     sheet = client.open(target_name).worksheet(tab)
     matrix = sheet.range('A1:B5')

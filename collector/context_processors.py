@@ -20,6 +20,11 @@ def users(request):
 
 
 def commons(request):
+    try:
+        from collector.models.campaign import Campaing
+        configs = Campaign.objects.all()
+    except:
+        configs = []
     campaign = get_current_config()
     return dict(dp_version=fics_references.RELEASE, instance_name=settings.INSTANCE_NAME,
-            python_version=sys.version, hostname=socket.gethostname().upper(), campaign=campaign)
+            python_version=sys.version, hostname=socket.gethostname().upper(), campaign=campaign, configs=configs)

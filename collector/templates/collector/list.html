@@ -1,48 +1,55 @@
-{% if character_items %}
-<div class='pagination'>
-  {% if character_items.has_previous %}
-  <span class='nav' page="1">
-    <i class="fas fa-angle-double-left"></i>
-  </span>
-  <span class='nav' page="{{ character_items.previous_page_number }}">
-    <i class="fas fa-angle-left"></i>
-  </span>
-  {%else%}
-  <strong>&nbsp;</strong>
-  <strong>&nbsp;</strong>
-  <strong>&nbsp;</strong>
-  {% endif %}
-  {% for num in character_items.paginator.page_range %}
-  {% if character_items.number == num %}
-  <strong>{{ num }}</strong>
-  {% elif num > character_items.number|add:'-2' and num < character_items.number|add:'2' %}
-  <span class='nav' page="{{num}}">{{num}}</span>
-  {% endif %}
-  {% endfor %}
-  {% if character_items.has_next %}
-  <span class='nav' page="{{ character_items.next_page_number }}">
-    <i class="fas fa-angle-right"></i>
-  </span>
-  <span class='nav' page="{{ character_items.paginator.num_pages }}">
-    <i class="fas fa-angle-double-right"></i>
-  </span>
-  {%else%}
-  <strong>&nbsp;</strong>
-  <strong>&nbsp;</strong>
-  <strong>&nbsp;</strong>
-  {%endif%}
-</div>
-<ul class='avatars'>
-  {% for c in character_items %}
-  <li id='{{c.rid}}'>
-    {% if campaign.is_coc7 %}
-    {% include "collector/investigator_link.html" with c=c %}
-    {% else %}
-    {% include "collector/character_link.html" with c=c %}
+{% load fics_filters %}
+
+<div class='tile' id='pag'>
+  {% if character_items %}
+  <div class='pagination'>
+    {% if character_items.has_previous %}
+      <span class='nav' page="1">
+        <i class="fas fa-angle-double-left"></i>
+      </span>
+      <span class='nav' page="{{ character_items.previous_page_number }}">
+        <i class="fas fa-angle-left"></i>
+      </span>
+    {%else%}
+      <strong>&nbsp;</strong>
+      <strong>&nbsp;</strong>
+      <strong>&nbsp;</strong>
     {% endif %}
-  </li>
-  {% endfor %}
-</ul>
-{% else %}
-<p>No characters are available.</p>
-{% endif %}
+    {% for num in character_items.paginator.page_range %}
+      {% if character_items.number == num %}
+        <strong>{{ num }}</strong>
+      {% elif num > character_items.number|add:'-2' and num < character_items.number|add:'2' %}
+        <span class='nav' page="{{num}}">{{num}}</span>
+      {% endif %}
+    {% endfor %}
+    {% if character_items.has_next %}
+    <span class='nav' page="{{ character_items.next_page_number }}">
+      <i class="fas fa-angle-right"></i>
+    </span>
+    <span class='nav' page="{{ character_items.paginator.num_pages }}">
+      <i class="fas fa-angle-double-right"></i>
+    </span>
+    {%else%}
+      <strong>&nbsp;</strong>
+      <strong>&nbsp;</strong>
+      <strong>&nbsp;</strong>
+    {%endif%}
+  {% else %}
+    No Characters to display
+  {% endif %}
+  </div>
+</div>
+
+
+{% for k in character_items %}
+  <div class='tile team_{{k.team}}' id='tile_{{k.id}}'>
+    {% include "collector/character_tile.html" with c=k %}
+  </div>
+{% endfor %}
+
+
+
+
+
+
+

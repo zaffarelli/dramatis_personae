@@ -5,7 +5,7 @@
 """
 from django.db import models
 from django.contrib import admin
-# from collector.models.investigator import Investigator
+# from cartograph.models.investigator import Investigator
 
 
 OCCUPATION_POINTS_METHODS = (

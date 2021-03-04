@@ -4,15 +4,17 @@
         {% if c.is_dead %}
         <strike>
         {% endif %}
-        <i class='fas fa-square' style="color:{{c.group_color}};"></i>
-        <em title='{{ c.entrance }}'> {{ c.full_name }}</em>
+        <em> {{ c.full_name }}</em>
+        <br/>{{ c.entrance|safe }}
         {% if c.is_dead %}
+        <i class='fas fa-square' style="color:{{c.group_color}};"></i>
         </strike>
         {% endif %}
     </div>
+
     <div class='character_actions' id="link_{{c.id}}">
-        <span class="action_icon edit_character"><i class="fas fa-user-tag"></i></span>&nbsp
-        <span class="action_icon recalc_avatar"><i class="fas fa-cog"></i></span>&nbsp;
+        <span class="action_icon edit_character" id="edit_{{c.id}}"><i class="fas fa-user-tag"></i></span>&nbsp
+        <span class="action_icon recalc_avatar" id="recalc_{{c.id}}"><i class="fas fa-cog"></i></span>&nbsp;
         <span class="action_icon wa_export_character"><i class="fas fa-arrow-down"></i></span>&nbsp;
         {% if c.use_history_creation %}
             {% if c.balanced %}
@@ -20,20 +22,17 @@
             {% else %}
             <span class="action_icon histo"><i class="fas fa-balance-scale-right"></i></span>
             {% endif %}
-             &nbsp;
         {% endif %}&nbsp;&nbsp;
         {% if c.is_public %}
             <span class='action_icon toggle_public'><i class='golden fas fa-universal-access'></i></span>
         {% else %}
             <span class='action_icon toggle_public'><i class='fas fa-ban'></i></span>
         {% endif %}
-        &nbsp;
         {% if c.spotlight %}
             <span class='action_icon toggle_spotlight'><i class='golden fas fa-lightbulb'></i></span>
         {% else %}
             <span class='action_icon toggle_spotlight'><i class='fas fa-lightbulb'></i></span>
         {% endif %}
-
         {% if c.error %}
             <span class='action_icon'><i class='golden fas fa-bug'></i></span>
         {% else %}

@@ -68,8 +68,20 @@ class Campaign(models.Model):
             avatars = Investigator.objects
         else:
             from collector.models.character import Character
+            avatars = Character.objects.filter(epic=self.epic)
+        return avatars
+
+    @property
+    def open_avatars(self):
+        avatars = []
+        if self.is_coc7:
+            from collector.models.investigator import Investigator
+            avatars = Investigator.objects
+        else:
+            from collector.models.character import Character
             avatars = Character.objects
         return avatars
+
     @property
     def is_coc7(self):
         return self.rpgsystem.smart_code == "COC7"
@@ -148,10 +160,9 @@ class Campaign(models.Model):
         from collector.models.character import Character
         # from django.db.models import Count
         if pattern == '':
-            all = Character.objects.order_by(order_by + bar_property)
+            all = Character.objects.order_by(order_by + bar_property).filter(epic=self.epic)
         else:
             all = Character.objects.filter(**{filter: pattern}).order_by(order_by + bar_property)[:20]
-
         # if limit:
         #     all = all[:limit]
             # .values('epic').annotate(dcount=Count('epic'))

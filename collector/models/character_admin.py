@@ -8,7 +8,7 @@ from collector.models.skill import SkillInline
 from collector.models.tourofduty import TourOfDutyInline
 from collector.models.blessing_curse import BlessingCurseInline
 from collector.models.benefice_affliction import BeneficeAfflictionInline
-# from collector.models.talent_inline import TalentInline
+# from cartograph.models.talent_inline import TalentInline
 from collector.models.weapon import WeaponInline
 from collector.models.armor import ArmorInline
 from collector.models.shield import ShieldInline
@@ -116,7 +116,7 @@ def exit_fencing_league(modeladmin, request, queryset):
 
 class CharacterAdmin(admin.ModelAdmin):
     list_display = (
-    'full_name', 'rid', "id", 'importance', 'entrance', 'specie', 'alliance_ref','alliance', 'is_dead', 'life_path_total', 'OP',
+    'full_name', 'rid', "ranking", "id", 'importance', 'entrance', 'specie', 'alliance_ref','alliance', 'is_dead', 'life_path_total', 'OP',
     'use_history_creation', 'is_public', 'is_partial', 'use_only_entrance', 'is_visible', 'epic',)
     inlines = [
         SkillInline,

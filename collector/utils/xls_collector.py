@@ -46,11 +46,11 @@ def export_row(ws, data, ch, r):
         val = getattr(ch, the_field)
         if field_type == 'ForeignKey':
             related_model = str(self._meta.get_field(the_field).related_model)
-            if related_model == "<class 'collector.models.fics_models.Specie'>":
+            if related_model == "<class 'cartograph.models.fics_models.Specie'>":
                 data = Specie.objects.filter(pk=val).first().specie
-            # elif related_model == "<class 'collector.models.fics_models.Role'>":
+            # elif related_model == "<class 'cartograph.models.fics_models.Role'>":
             #   data = Role.objects.filter(pk=val).first().reference
-            # elif related_model == "<class 'collector.models.fics_models.Profile'>":
+            # elif related_model == "<class 'cartograph.models.fics_models.Profile'>":
             #   data = Profile.objects.filter(pk=val).first().reference
             else:
                 data = 'Unknown'

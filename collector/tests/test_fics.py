@@ -4,8 +4,8 @@
  ═╩╝╩    ╚═╝└─┘┴─┘┴─┘└─┘└─┘ ┴ └─┘┴└─
 '''
 from django.test import TestCase
-#from collector.models.character import Character
-#from collector.utils.fs_fics7 import check_primary_attributes
+#from cartograph.models.character import Character
+#from cartograph.utils.fs_fics7 import check_primary_attributes
 from collector.tests.factories import CharacterCheckSkillsFactory, CharacterCheckPAFactory
 
 class FICSTestSkills(TestCase):

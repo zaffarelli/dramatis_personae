@@ -68,11 +68,12 @@ python manage.py dumpdata collector.TourOfDuty --format xml --output backup/cust
 python manage.py dumpdata collector.Character --format xml --output backup/custom/character.xml
 python manage.py dumpdata collector.Bloke --format xml --output backup/custom/bloke.xml
 python manage.py dumpdata collector.Loot --format xml --output backup/custom/loot.xml
-python manage.py dumpdata collector.System --format xml --output backup/custom/system.xml
-python manage.py dumpdata collector.OrbitalItem --format xml --output backup/custom/orbital_item.xml
 python manage.py dumpdata collector.Investigator --format xml --output backup/custom/investigator.xml
 python manage.py dumpdata collector.Spaceship --format xml --output backup/custom/spaceship.xml
 python manage.py dumpdata collector.Cyberware --format xml --output backup/custom/cyberware.xml
+
+python manage.py dumpdata cartograph.System --format xml --output backup/custom/system.xml
+python manage.py dumpdata cartograph.OrbitalItem --format xml --output backup/custom/orbital_item.xml
 
 python manage.py dumpdata auth.User --format xml --output backup/custom/user.xml
 python manage.py dumpdata auth.Group --format xml --output backup/custom/group.xml

@@ -1,1 +1,0 @@
-/home/zaffarelli/Perso/github/dramatis_personae/collector/static/js/avatar_customizer.js

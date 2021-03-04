@@ -3,7 +3,6 @@
   ║║╠═╝  ║  │ ││  │  ├┤ │   │ │ │├┬┘
  ═╩╝╩    ╚═╝└─┘┴─┘┴─┘└─┘└─┘ ┴ └─┘┴└─
 """
-from django import forms
 from django.forms import ModelForm, inlineformset_factory
 from collector.models.character import Character
 from collector.models.tourofduty import TourOfDutyRef, TourOfDuty
@@ -13,9 +12,9 @@ from collector.models.weapon import Weapon
 from collector.models.shield import Shield
 from collector.models.blessing_curse import BlessingCurse, BlessingCurseModificator
 from collector.models.benefice_affliction import BeneficeAffliction, BeneficeAfflictionModificator
-#from collector.models.talent import Talent
+#from cartograph.models.talent import Talent
 from collector.models.spacecraft import ShipRef, ShipSection, ShipSystemSlot
-from collector.models.system import System, OrbitalItem
+from cartograph.models.system import System, OrbitalItem
 from collector.models.bloke import Bloke
 
 

@@ -87,7 +87,7 @@ def make_epic_corpus(conf):
     mystaticpath = os.path.join(settings.STATIC_ROOT, 'pdf/')
     merger = PdfFileMerger()
     # merger.append(open('%sresources/__es_header.pdf'%(mystaticpath), 'rb'))
-    template = get_template('collector/conf_pdf.html')
+    template = get_template('cartograph/conf_pdf.html')
     context = {'epic':conf.parse_details()}
     html = template.render(context)
     fname = 'c_%s.pdf'%(conf.epic.shortcut)
@@ -161,7 +161,7 @@ def extract_rules():
     worldly_benefits = TourOfDutyRef.objects.filter(category='50').order_by('-source')
     context['worldly_benefits'] = worldly_benefits
 
-    template = get_template('collector/references.html')
+    template = get_template('cartograph/references.html')
     html = template.render(context)
     fname = 'rules.pdf'
     filename = os.path.join(settings.MEDIA_ROOT, 'pdf/results/' + fname)
@@ -232,7 +232,7 @@ def extract_equipment():
 
     # Energy Shields
 
-    template = get_template('collector/equipment.html')
+    template = get_template('cartograph/equipment.html')
     html = template.render(context)
     fname = 'fading_suns_shopping_guide.pdf'
     filename = os.path.join(settings.MEDIA_ROOT, 'pdf/results/' + fname)

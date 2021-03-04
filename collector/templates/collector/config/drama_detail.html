@@ -15,7 +15,8 @@
             </p>
         </div>
     </div>
-    <div class='storyarticle drama' id='drama_{{c.data.id}}'></div>
+    <div class='storyarticle drama' id='drama_{{c.data.id}}'>
+    </div>
     {% for act in c.acts %}
         {% include "collector/config/act_detail.html" with c=act %}
     {% endfor %}

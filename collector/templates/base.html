@@ -55,6 +55,10 @@
                 {% block details %}
                 {% endblock details%}
             </div>
+            <div class='mosaic'>
+                {% block mosaic %}
+                {% endblock mosaic %}
+            </div>
             <div class="starport">
               <div class='collapsed dicer'>
                 {% block dicer %}
@@ -85,11 +89,11 @@
             </div>
         </footer>
 
-        <script src='{% static "js/avatar_customizer.js" %}'></script>
-        <script src='{% static "js/scenarist.js" %}'></script>
-        <script src='{% static "js/optimizer.js" %}'></script>
-        <script src='{% static "js/collector.js" %}'></script>
-        <script src='{% static "js/jumpweb.js" %}'></script>
+        <script src='{% static "js/avatar_customizer.es6" %}'></script>
+        <script src='{% static "js/scenarist.es6" %}'></script>
+        <script src='{% static "js/optimizer.es6" %}'></script>
+        <script src='{% static "js/collector.es6" %}'></script>
+        <script src='{% static "js/jumpweb.es6" %}'></script>
 
         {% block javascript %}
         {% endblock %}

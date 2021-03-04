@@ -1,24 +1,23 @@
 {% load fics_filters %}
 
 <div class='storydetails epic'>
-    <div class="topic">
-        <div class="subject">Epic</div>
-        <div class="entry">{{object.title}}</div>
+    <div class="wall">
+        <div class="brick">
+            <em>Era</em><strong>{{object.era}}</strong>
+        </div>
+        {% if object.system %}
+        <div class="brick">
+            <em>Date</em>{{object.system}}
+        </div>
+        {% endif %}
+        {% if object.gamamaster %}
+        <div class="brick">
+            <em>Place</em>{{object.gamemaster}}
+        </div>
+        {% endif %}
     </div>
-    <div class="topic">
-        <div class="subject">Era</div>
-        <div class="entry">{{object.era}}</div>
+    <div class="pitch">
+        {{object.description|parse_avatars|safe}}
+
     </div>
-    <div class="topic">
-        <div class="subject">System</div>
-        <div class="entry">{{object.system}}</div>
-    </div>
-    <div class="topic">
-        <div class="subject">Gamemaster</div>
-        <div class="entry desc">{{object.gamemaster|parse_avatars|safe}}</div>
-    </div>
-   <div class="topic">
-        <div class="subject">Description</div>
-        <div class="entry desc">{{object.description|parse_avatars|safe}}</div>
-  </div>
 </div>

@@ -5,7 +5,7 @@
 # '''
 # from django.apps import apps
 # from django.core.management.base import BaseCommand
-#from collector.models.fics_models import Role, Profile
+#from cartograph.models.fics_models import Role, Profile
 
 # roles = [         # PA Max Sk TA BA BC
 #   ['Legend',   8,   76,11, 70,0, 15,0],
@@ -36,7 +36,7 @@
 #   @staticmethod
 #   def create(modname,data_list):
 #     #print('Inserting predefined data into the %s model...'%(modname))
-#     model = apps.get_model('collector',modname)
+#     model = apps.get_model('cartograph',modname)
 #     fields = model._meta.fields
 #     fields_list = []
 #     for f in fields:

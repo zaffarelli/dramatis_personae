@@ -1,6 +1,6 @@
 {% load fics_filters %}
 {% csrf_token %}
-<div class="storyview">
+<div class="tile storyview">
     <div class="epic_wrap">
         <div class='title'>
             <div class='chapter'>&nbsp;</div>
@@ -15,7 +15,9 @@
                 </p>
             </div>
         </div>
-        <div class='storyarticle epic' id='epic_{{epic.data.id}}'></div>
+        <div class='storyarticle epic' id='epic_{{epic.data.id}}'>
+
+        </div>
         {% for drama in epic.dramas %}
             {% include "collector/config/drama_detail.html" with c=drama %}
         {% endfor %}

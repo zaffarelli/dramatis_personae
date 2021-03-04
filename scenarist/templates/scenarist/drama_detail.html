@@ -1,44 +1,42 @@
 {% load fics_filters %}
 <div class='storydetails drama'>
-    <div class="topic">
-        <div class="subject">Drama</div>
-        <div class="entry">{{object.epic.title}}&nbsp;<i class="fa fa-arrow-right"></i>&nbsp;{{object.title}}</div>
-    </div>
-
-
     {% if drama.showquizz %}
             {% if drama.quizz_set %}
                 {{drama.quizz_set.first.verbose | safe }}
             {% endif %}
     {% endif %}
-
-
-    <div class="topic {%if object.anchor %}{%else%}hidden{%endif%}">
-        <div class="subject">Anchor</div>
-        <div class="entry"><strong>{{object.anchor|linebreaks|parse_avatars|safe}}</strong></div>
-    </div>
-    <div class="topic">
-        <div class="subject">PDF</div>
-        <div class="entry">{{object.to_PDF | prettybool | safe }}</div>
+    <div class="wall">
+        <div class="brick">
+            {{object.epic.title}}&nbsp;<i class="fa fa-arrow-right"></i>&nbsp;{{object.title}}
         </div>
-    <div class="topic {%if object.date %}{%else%}hidden{%endif%}">
-        <div class="subject">Date</div>
-        <div class="entry">{{object.date}}</div>
+        {% if object.anchor %}
+        <div class="brick">
+            <em>Anchor</em><strong>{{object.anchor|linebreaks|parse_avatars|safe}}</strong>
+        </div>
+        {% endif %}
+        <div class="brick">
+            <em>PDF</em>{{object.to_PDF | prettybool | safe }}
+        </div>
+        {% if object.date %}
+        <div class="brick">
+            <em>Date</em>{{object.date}}
+        </div>
+        {% endif %}
+        {% if object.place %}
+        <div class="brick">
+            <em>Place</em>{{object.place}}
+        </div>
+        {% endif %}
+        {% if object.challenge %}
+        <div class="brick">
+            <em>Challenge</em> <strong>{{object.challenge}}</strong>
+        </div>
+        {% endif %}
     </div>
-    <div class="topic {%if object.place %}{%else%}hidden{%endif%}">
-        <div class="subject">Place</div>
-        <div class="entry">{{object.place}}</div>
+    <div class="pitch">
+        {{object.description|parse_avatars|safe}}
+        <hr/>
+        {{object.resolution|parse_avatars|safe}}
     </div>
-    <div class="topic">
-        <div class="subject">Challenge</div>
-        <div class="entry"><strong>{{object.challenge}}</strong></div>
-    </div>
-    <div class="topic {%if object.description %}{%else%}hidden{%endif%}">
-        <div class="subject">Description</div>
-        <div class="entry desc">{{object.description|parse_avatars|safe}}</div>
-    </div>
-    <div class="topic {%if object.resolution %}{%else%}hidden{%endif%}">
-        <div class="subject">Resolution</div>
-        <div class="entry desc">{{object.resolution|parse_avatars|safe}}</div>
-    </div>
+
 </div>

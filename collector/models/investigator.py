@@ -146,10 +146,10 @@ class Investigator(Avatar):
         """ Transform to PDF if exportable"""
         proceed = False
         # if self.need_pdf:
-        #     from collector.utils.basic import write_pdf
+        #     from cartograph.utils.basic import write_pdf
         #     try:
         #         context = dict(c=self, filename=f'{self.rid}', now=datetime.now(tz=get_current_timezone()))
-        #         write_pdf('collector/investigator_roster.html', context)
+        #         write_pdf('cartograph/investigator_roster.html', context)
         #         logger.info(f'    => PDF created ...: {self.rid}')
         #         proceed = True
         #         self.need_pdf = False

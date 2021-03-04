@@ -4,23 +4,21 @@
  ═╩╝╩    ╚═╝└─┘┴─┘┴─┘└─┘└─┘ ┴ └─┘┴└─
 """
 from django.http import HttpResponse, Http404, JsonResponse
-from django.shortcuts import render, get_object_or_404, redirect, render_to_response
+from django.shortcuts import render, redirect
 from django.core.paginator import Paginator
 from collector.models.character import Character
 from collector.models.investigator import Investigator
 from collector.models.fics_models import Specie
 from collector.models.campaign import Campaign
-from django.template.loader import get_template, render_to_string
+from django.template.loader import get_template
 import datetime
 from collector.utils.basic import get_current_config
 from collector.utils.fics_references import MAX_CHAR
-from django.contrib import messages
 from collector.views.characters import respawn_avatar_link
 import os
 from django.conf import settings
 from django.http import FileResponse
 from django.contrib import messages
-import json
 
 
 def index(request):
@@ -35,34 +33,53 @@ def get_list(request, id, slug='none'):
     """ Update the list of characters on the page
         They will be sorted by full name only !
     """
-    from scenarist.models.epics import Epic
-    from scenarist.models.dramas import Drama
-    from scenarist.models.acts import Act
-    from scenarist.models.events import Event
     from collector.utils.basic import get_current_config
     campaign = get_current_config()
     if slug == 'none':
-        character_items = campaign.avatars.order_by('full_name')
+        character_items = campaign.avatars.order_by('team','-ranking','full_name').filter(is_dead=False)
     elif slug.startswith('c-'):
-        ep_class = slug.split('-')[1].capitalize()
-        ep_id = slug.split('-')[2]
-        ep = get_object_or_404(eval(ep_class), pk=ep_id)
-        cast = ep.get_full_cast()
+        elements =  slug.split('-')
+        ep_class = elements[1].capitalize()
+        ep_id = 1
+        if len(elements)>2:
+            ep_id = elements[2]
+        if ep_class == 'Epic':
+            from scenarist.models.epics import Epic
+            epic = Epic.objects.get(pk=ep_id)
+            cast = epic.get_full_cast()
+        elif ep_class == 'Drama':
+            from scenarist.models.dramas import Drama
+            drama = Drama.objects.get(pk=ep_id)
+            cast = drama.get_full_cast()
+        elif ep_class == 'Act':
+            from scenarist.models.acts import Act
+            act = Act.objects.get(pk=ep_id)
+            cast = act.get_full_cast()
+        elif ep_class == 'Event':
+            from scenarist.models.events import Event
+            event = Event.objects.get(pk=ep_id)
+            cast = event.get_full_cast()
+        else:
+            cast = []
         character_items = []
-        for rid in cast:
-            character_item = campaign.avatars.get(rid=rid)
-            character_items.append(character_item)
+        if len(cast )>0:
+            for rid in cast:
+                character_item = campaign.avatars.get(rid=rid)
+                character_items.append(character_item)
         messages.info(request, f'New list filter applied: {slug}')
     else:
-        character_items = campaign.avatars.filter(keyword=slug).order_by('full_name')
+        character_items = campaign.avatars.filter(keyword=slug).order_by('team','-ranking','full_name')
         messages.info(request, f'New list filter applied: {slug}')
+        if len(character_items)==0:
+            character_items = campaign.open_avatars.filter(rid__contains=slug.lower()).order_by('full_name')
+            messages.info(request, f'Searching {slug} among rids')
     paginator = Paginator(character_items, MAX_CHAR)
     page = id
     character_items = paginator.get_page(page)
+    messages.info(request, f'{paginator.count} characters found.')
     context = {'character_items': character_items}
     template = get_template('collector/list.html')
     html = template.render(context,request)
-    messages.info(request, f'{paginator.count} characters found.')
     return HttpResponse(html, content_type='text/html')
 
 
@@ -83,6 +100,15 @@ def show_todo(request):
         return HttpResponse(html, content_type='text/html')
     else:
         return Http404
+
+def tile_avatar(request, pk=None):
+    if request.is_ajax:
+        character_item = Character.objects.get(pk=pk)
+    context = { 'c': character_item }
+    template = get_template('collector/character_tile.html')
+    html = template.render(context,request)
+    return HttpResponse(html, content_type='text/html')
+
 
 
 def get_storyline(request, slug='none'):
@@ -154,41 +180,7 @@ def wa_export_character(request, id=None):
     else:
         raise Http404
 
-
-def view_by_rid(request, slug=None):
-    """ Ajax view of a character, with a part of the full name
-        passed to the customizer input field.
-    """
-    campaign = get_current_config()
-    if request.is_ajax():
-        items = campaign.avatars.filter(rid__contains=slug.lower()).order_by('full_name')
-        if items.count():
-            item = items.first()
-            context = {}
-            template = get_template('collector/character_detail.html')
-            character = template.render({'c': item, 'no_skill_edit': False})
-            templatelink = get_template('collector/character_link.html')
-            links = []
-            for i in items:
-                links.append({'rid': i.rid, 'data': templatelink.render({'c': i})})
-            context = {
-                'rid': item.rid,
-                'id': item.id,
-                'character': character,
-                'links': links,
-            }
-            messages.info(request, 'Found: %s' % (item.rid))
-            return JsonResponse(context)
-        else:
-            messages.error(request, f'The term "{slug}" was not found in characters RID.')
-    return HttpResponse(status=204)
-
-
 def add_avatar(request, slug=None):
-    """ Add a new character to the universe
-        The slug is supposed to be its real fullname.
-        Campaign compliant
-    """
     campaign = get_current_config()
     if campaign.is_coc7:
         item = Investigator()
@@ -204,25 +196,9 @@ def add_avatar(request, slug=None):
         item.save()
         item.specie = Specie.objects.filter(species='Urthish').first()
     item.get_rid(item.full_name)
-    item.fix()
     item.save()
     character_item = campaign.avatars.get(pk=item.id)
-    if campaign.is_fics:
-        template = get_template('collector/character_detail.html')
-        templatelink = get_template('collector/character_link.html')
-    elif campaign.is_coc7:
-        template = get_template('collector/investigator_detail.html')
-        templatelink = get_template('collector/investigator_link.html')
-    else:
-        messages.warning(request, f'TODO for this campaign !!!')
-    character = template.render({'c': character_item, 'no_skill_edit': False})
-    link = templatelink.render({'c': character_item}, request)
-    context = {
-        'rid': character_item.rid,
-        'id': character_item.id,
-        'character': character,
-        'link': link,
-    }
+    context = {'rid':character_item.rid }
     messages.info(request, f'...{character_item.full_name} added ({campaign.rpgsystem})')
     return JsonResponse(context)
 
@@ -251,87 +227,6 @@ def toggle_spotlight(request, id=None):
     return JsonResponse(context)
 
 
-def show_jumpweb(request):
-    """ Display the full jumpweb.
-    """
-    if request.is_ajax:
-
-        from collector.models.system import System
-        from collector.utils.fics_references import NEW_ROUTES, NEW_SYSTEMS
-        from collector.utils.basic import get_current_config
-        campaign = get_current_config()
-        context = {}
-        context['data'] = {}
-        context['campaign'] = campaign
-        context['data']['mj'] = 1 if request.user.profile.is_gamemaster else 0
-        context['data']['new_routes'] = "|".join(NEW_ROUTES)
-        context['data']['new_systems'] = "|".join(NEW_SYSTEMS)
-        context['data']['nodes'] = []
-        context['data']['links'] = []
-        for s in System.objects.all():
-            system = {}
-            system['id'] = s.id
-            system['name'] = s.name
-            system['alliance'] = s.alliance
-            system['sector'] = s.sector
-            # system['jumproads'] = s.jumproads
-            system['x'] = s.x
-            system['y'] = s.y
-            system['jump'] = s.jump
-            system['group'] = s.group
-            system['color'] = s.color
-            system['orbital_map'] = 1 if s.orbital_map != '' else 0
-            system['discovery'] = s.discovery
-            system['dtj'] = s.dtj
-            system['garrison'] = s.garrison
-            system['tech'] = s.tech
-            system['symbol'] = s.symbol
-            system['population'] = s.population
-            context['data']['nodes'].append(system)
-            for j in s.jumproads.all():
-                lnk = {}
-                if j.id > s.id:
-                    lnk['source'] = s.id
-                    lnk['target'] = j.id
-                else:
-                    lnk['source'] = j.id
-                    lnk['target'] = s.id
-                context['data']['links'].append(lnk)
-        template = get_template('collector/jumpweb.html')
-        html = template.render(context)
-        return HttpResponse(html, content_type='text/html')
-    else:
-        return Http404
-
-
-def show_orbital_map(request, id):
-    """ Display the full jumpweb.
-        Todo: adapt this to the user actually logged.
-    """
-    if request.is_ajax:
-        from collector.models.system import System, OrbitalItem
-        from collector.utils.basic import get_current_config
-        campaign = get_current_config()
-        system = get_object_or_404(System, pk=id)
-        context = {'data': {}}
-        context['campaign'] = campaign
-        context['data']['mj'] = 1 if request.user.profile.is_gamemaster else 0
-        context['data']['title'] = f'{system.name}'
-        context['data']['alliance'] = f'{system.alliance}'
-        context['data']['symbol'] = f'{system.symbol}'
-        context['data']['planets'] = []
-
-        context['data']['zoom_val'] = system.zoom_val if system.zoom_val else 0
-        context['data']['zoom_factor'] = system.zoom_factor if system.zoom_factor else 0
-        for oi in system.orbitalitem_set.all():
-            orbital_item = {'name': oi.name, 'AU': oi.distance, 'tilt': oi.tilt, 'speed': oi.speed, 'tone': oi.color,
-                            'type': oi.get_category_display(), 'azimut': oi.azimut, 'size': oi.size, 'moon': oi.moon, 'description':oi.description, 'rings': oi.rings}
-            context['data']['planets'].append(orbital_item)
-        template = get_template('collector/orbital_map.html')
-        html = template.render(context)
-        return HttpResponse(html, content_type='text/html')
-    else:
-        return Http404
 
 
 def conf_details(request):
@@ -368,20 +263,10 @@ def pdf_show(request, slug):
     except FileNotFoundError:
         raise Http404()
 
-# def show_ghostmark(request,rid=None):
-#     if request.is_ajax:
-#         from collector.models.character import Character
-#         from collector.models.alliance_ref import AllianceRef
-#         from django.core import serializers
-#         context = {'data':{'character':{}, 'alliance':{}}}
-#         c = Character.objects.filter(rid=rid)
-#         if len(c)>0:
-#             context['data']['character'] = c.first().toJSON()
-#             if c.first().alliance_ref:
-#                 a = AllianceRef.objects.filter(id=c.first().alliance_ref.id)
-#                 context['data']['alliance'] = a.first().toJSON()
-#         template = get_template('collector/ghostmark.html')
-#         html = template.render(context)
-#         return HttpResponse(html, content_type='image/svg+xml')
-#     else:
-#         return Http404
+def ghostmark_test(request, id=None):
+    from collector.models.character import Character
+    character_item = Character.objects.get(id=id)
+    context = { 'c': character_item }
+    template = get_template('collector/ghostmark_test.html')
+    html = template.render(context, request)
+    return HttpResponse(html, content_type='text/html')

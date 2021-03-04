@@ -1,0 +1,8 @@
+{% load fics_filters %}
+<div class="mark">
+    {% include 'collector/ghostmark.html' with data=c.ghostmark_data c=c %}
+</div>
+<div class="portrait">
+    <img src="{{c.rid|as_media_image}}">
+</div>
+{% include "collector/character_link.html" with c=c %}

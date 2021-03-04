@@ -1,5 +1,5 @@
 from collector.models.skill import SkillRef
-from collector.models.system import System
+from cartograph.models.system import System
 
 all = System.objects.all()
 

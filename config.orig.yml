@@ -8,7 +8,7 @@ collector:
       source_name:   "FADING SUNS"
       # The sheet it will write to in your drive
       target_name:  "FADING SUNS TESTS"
-      credentials:  "collector/creds.json"
+      credentials:  "cartograph/creds.json"
       tab:          "PNJs"
 
   

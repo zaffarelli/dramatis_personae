@@ -1334,6 +1334,10 @@ th.skill_dot {
   src: url("../fonts/Eczar-Regular.ttf"); }
 
 @font-face {
+  font-family: 'FatName';
+  src: url("../fonts/AlegreyaSansSC-Black.ttf"); }
+
+@font-face {
   font-family: 'FadingSunsIcons';
   src: url("../fonts/FadingSunsIcons.ttf"); }
 
@@ -1380,7 +1384,7 @@ div.character_sheet {
       display: inline-block;
       flex-basis: 100%; }
       div.character_sheet div.infoblock .data h1 {
-        font-family: NomPerso;
+        font-family: FatName;
         font-size: 20pt;
         text-align: center; }
       div.character_sheet div.infoblock .data strong {
@@ -1651,6 +1655,10 @@ div.character_update_view {
 @font-face {
   font-family: 'Emphase';
   src: url("../fonts/Eczar-Regular.ttf"); }
+
+@font-face {
+  font-family: 'FatName';
+  src: url("../fonts/AlegreyaSansSC-Black.ttf"); }
 
 @font-face {
   font-family: 'FadingSunsIcons';
@@ -2335,6 +2343,10 @@ th.skill_dot {
 @font-face {
   font-family: 'Emphase';
   src: url("../fonts/Eczar-Regular.ttf"); }
+
+@font-face {
+  font-family: 'FatName';
+  src: url("../fonts/AlegreyaSansSC-Black.ttf"); }
 
 @font-face {
   font-family: 'FadingSunsIcons';
@@ -3200,6 +3212,10 @@ th.skill_dot {
 @font-face {
   font-family: 'Emphase';
   src: url("../fonts/Eczar-Regular.ttf"); }
+
+@font-face {
+  font-family: 'FatName';
+  src: url("../fonts/AlegreyaSansSC-Black.ttf"); }
 
 @font-face {
   font-family: 'FadingSunsIcons';
@@ -5097,6 +5113,10 @@ th.skill_dot {
   src: url("../fonts/Eczar-Regular.ttf"); }
 
 @font-face {
+  font-family: 'FatName';
+  src: url("../fonts/AlegreyaSansSC-Black.ttf"); }
+
+@font-face {
   font-family: 'FadingSunsIcons';
   src: url("../fonts/FadingSunsIcons.ttf"); }
 
@@ -6054,6 +6074,10 @@ th.skill_dot {
   src: url("../fonts/Eczar-Regular.ttf"); }
 
 @font-face {
+  font-family: 'FatName';
+  src: url("../fonts/AlegreyaSansSC-Black.ttf"); }
+
+@font-face {
   font-family: 'FadingSunsIcons';
   src: url("../fonts/FadingSunsIcons.ttf"); }
 
@@ -6120,11 +6144,23 @@ th.skill_dot {
       flex-wrap: nowrap;
       justify-content: flex-start;
       align-items: flex-start;
-      align-content: flex-start; }
+      align-content: flex-start;
+      /*
+             & .port {
+                 flex-basis:300px;
+                 order:1;
+             }
+*/ }
       body .wrapper .port {
-        flex-basis: 300px;
-        order: 1; }
+        display: none; }
       body .wrapper .details {
+        /*
+                flex-grow:1;
+                order:2;
+                flex-shrink:1;
+*/
+        display: none; }
+      body .wrapper .mosaic {
         flex-grow: 1;
         order: 2; }
       body .wrapper .starport {
@@ -6133,5 +6169,238 @@ th.skill_dot {
         display: flex;
         flex-direction: column;
         justify-content: flex-start; } }
+
+.mosaic {
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  align-content: flex-start; }
+  .mosaic .tile {
+    padding: 5px;
+    margin: 5px;
+    width: 200px;
+    height: 200px;
+    background: #242524;
+    color: #cfcdcf;
+    box-shadow: 5px 5px 8px black;
+    border: 1px solid #3c3f3c;
+    border-radius: 5px;
+    /* Flex as item */
+    flex-grow: 0;
+    flex-shrink: 1;
+    /* Flex as container */
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    align-content: space-between;
+    border-width: 5px;
+    border-style: solid;
+    order: 3; }
+    .mosaic .tile.team_00-players {
+      border-color: #888;
+      border-style: ridge; }
+    .mosaic .tile.team_01-friend {
+      border-color: #124;
+      border-style: ridge; }
+    .mosaic .tile.team_02-ally {
+      border-color: #248;
+      border-style: ridge; }
+    .mosaic .tile.team_03-servant {
+      border-color: #36C;
+      border-style: ridge; }
+    .mosaic .tile.team_04-partisan {
+      border-style: ridge; }
+    .mosaic .tile.team_05-protagonist {
+      border-style: ridge; }
+    .mosaic .tile.team_07-antagonist {
+      border-style: groove; }
+    .mosaic .tile.team_08-opponent {
+      border-style: groove; }
+    .mosaic .tile.team_09-lackey {
+      border-color: #842;
+      border-style: groove; }
+    .mosaic .tile.team_10-enemy {
+      border-color: #421;
+      border-style: groove; }
+    .mosaic .tile.team_11-foe {
+      border-color: #888;
+      border-style: groove; }
+    .mosaic .tile .pagination strong, .mosaic .tile .pagination span.nav {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      box-shadow: 5px 5px 8px black;
+      border: 1px solid #3c3f3c;
+      border-radius: 5px;
+      text-align: center;
+      padding: 2px; }
+    .mosaic .tile .pagination span.nav {
+      background: #171817; }
+    .mosaic .tile .pagination strong {
+      background: #3c3f3c; }
+    .mosaic .tile#pag {
+      order: 1; }
+    .mosaic .tile.sheet_tile {
+      order: 2;
+      flex-grow: 3;
+      flex-shrink: 0;
+      height: auto;
+      width: auto; }
+      .mosaic .tile.sheet_tile .character_update_view form.character_form {
+        border: 1px solid black;
+        width: 110ex; }
+        .mosaic .tile.sheet_tile .character_update_view form.character_form div.formset {
+          display: flex;
+          flex-flow: column nowrap; }
+          .mosaic .tile.sheet_tile .character_update_view form.character_form div.formset .field_wrapper {
+            flex-grow: 1;
+            flex-shrink: 0;
+            padding: 3px;
+            border: 1px solid black;
+            width: auto; }
+            .mosaic .tile.sheet_tile .character_update_view form.character_form div.formset .field_wrapper label {
+              width: 60ex;
+              margin-right: 5px;
+              border: 1px solid black; }
+            .mosaic .tile.sheet_tile .character_update_view form.character_form div.formset .field_wrapper input, .mosaic .tile.sheet_tile .character_update_view form.character_form div.formset .field_wrapper select, .mosaic .tile.sheet_tile .character_update_view form.character_form div.formset .field_wrapper textarea {
+              width: auto;
+              border: 1px solid black; }
+          .mosaic .tile.sheet_tile .character_update_view form.character_form div.formset table.formset.inline.tods_formset {
+            background: purple; }
+            .mosaic .tile.sheet_tile .character_update_view form.character_form div.formset table.formset.inline.tods_formset caption {
+              font-family: FatName; }
+            .mosaic .tile.sheet_tile .character_update_view form.character_form div.formset table.formset.inline.tods_formset tr td {
+              border: 1px solid black; }
+              .mosaic .tile.sheet_tile .character_update_view form.character_form div.formset table.formset.inline.tods_formset tr td label {
+                width: 60ex;
+                margin-right: 5px;
+                border: 1px solid black; }
+              .mosaic .tile.sheet_tile .character_update_view form.character_form div.formset table.formset.inline.tods_formset tr td input, .mosaic .tile.sheet_tile .character_update_view form.character_form div.formset table.formset.inline.tods_formset tr td select, .mosaic .tile.sheet_tile .character_update_view form.character_form div.formset table.formset.inline.tods_formset tr td textarea {
+                width: auto;
+                border: 1px solid black; }
+    .mosaic .tile .character-sheet {
+      flex-grow: 3;
+      width: 600px;
+      padding: 0;
+      margin: 0; }
+    .mosaic .tile .mark {
+      flex-grow: 1;
+      width: 100px;
+      text-align: center; }
+    .mosaic .tile .portrait {
+      flex-grow: 1;
+      width: 90px;
+      text-align: center; }
+      .mosaic .tile .portrait img {
+        margin-top: 5px;
+        width: 80px;
+        box-shadow: 5px 5px 8px black;
+        border: 1px solid #3c3f3c;
+        border-radius: 5px; }
+    .mosaic .tile .avatar_link {
+      flex-grow: 2;
+      width: 200px; }
+      .mosaic .tile .avatar_link .character_name {
+        text-align: center;
+        width: 100%;
+        font-family: Text;
+        font-size: 8pt;
+        line-height: 1.1em;
+        height: 50px;
+        background: #171817; }
+        .mosaic .tile .avatar_link .character_name em {
+          font-style: normal;
+          text-decoration: none;
+          font-family: FatName;
+          line-height: 0.9em;
+          font-size: 10pt; }
+      .mosaic .tile .avatar_link .character_actions {
+        text-align: left;
+        width: 100%; }
+        .mosaic .tile .avatar_link .character_actions .action_icon {
+          display: inline-block;
+          text-align: center;
+          height: 16px;
+          width: 20px;
+          padding: 1px;
+          box-shadow: 2px 2px 5px black;
+          border: 1px solid #3c3f3c;
+          border-radius: 5px; }
+    .mosaic .tile.chart_panel {
+      flex-grow: 5;
+      flex-shrink: 0;
+      width: 500px;
+      height: auto; }
+    .mosaic .tile.storyview {
+      flex-grow: 5;
+      flex-shrink: 0;
+      width: 500px;
+      height: auto; }
+      .mosaic .tile.storyview .epic_wrap {
+        width: 100%; }
+      .mosaic .tile.storyview .storydetails {
+        display: flex;
+        flex-flow: row nowrap;
+        padding: 6px;
+        text-align: justify; }
+        .mosaic .tile.storyview .storydetails.epic {
+          border-left: 5px solid purple;
+          background: transparent; }
+        .mosaic .tile.storyview .storydetails.drama {
+          border-left: 5px solid red;
+          background: transparent; }
+        .mosaic .tile.storyview .storydetails.act {
+          border-left: 5px solid orange;
+          background: transparent; }
+        .mosaic .tile.storyview .storydetails.event {
+          border-left: 5px solid yellow;
+          background: transparent; }
+        .mosaic .tile.storyview .storydetails .brick {
+          display: inline-block;
+          flex-order: 1;
+          flex-grow: 1;
+          padding: 5px;
+          width: auto;
+          height: auto;
+          min-height: 1.3em;
+          min-width: 16ex;
+          max-width: 48ex;
+          font-family: Texte;
+          background: #242524;
+          color: #cfcdcf;
+          margin: 3px;
+          border-radius: 5px;
+          border: 1px solid #494c49;
+          box-shadow: 5px 5px 5px black; }
+          .mosaic .tile.storyview .storydetails .brick em {
+            display: inline-block;
+            width: 24ex;
+            background: black;
+            text-align: left;
+            font-variant: small-caps;
+            font-style: normal;
+            margin-right: 5px;
+            padding: 0.2ex; }
+        .mosaic .tile.storyview .storydetails .wall {
+          flex-order: 1;
+          width: 400px;
+          display: flex;
+          flex-flow: row wrap;
+          justify-items: flex-start;
+          align-items: flex-start;
+          align-content: flex-start;
+          padding: 5px; }
+        .mosaic .tile.storyview .storydetails .pitch {
+          display: block;
+          flex-order: 2;
+          flex-grow: 5;
+          columns: 2;
+          column-gap: 10px;
+          column-rule: 3px double #3c3f3c;
+          width: 500px;
+          padding: 5px; }
 
 /*# sourceMappingURL=fics.css.map */
