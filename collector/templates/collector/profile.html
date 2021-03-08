@@ -1,20 +1,29 @@
-{% block details %}
+
 {% load static %}
 {% load fics_filters %}
 
+<div class="fresque top">
+    <div class="tile info">
+        <div class="plank"><strong>Player</strong><em>{{current_user.username.capitalize | safe }}</em></div>
+        <div class="plank"><strong>Email</strong><em>{{current_user.email | safe }}</em></div>
+    </div>
 
-    <table class="stats" style="color:white; background:black; width:100%;">
-    <tr>
-        <th>Player</th><td>{{current_user.username.capitalize | safe }}</td>
-    </tr>
-    <tr>
-        <th>Avatars</th><td>
-    {% for ci in character_items %}
-        {% include "collector/character_xs.html" with c=ci %}
+    {% for mc in main_characters %}
+        <div class="tile" id="tilebloke_{{mc.id}}">
+            {% include "collector/character_tile.html" with c=mc %}
+        </div>
     {% endfor %}
-        </td>
-    </tr>
-    </table>
+</div>
+{% for key,value in blokes.items %}
+<div class="fresque middle">
+    <div class="tile info">
+        <div class="plank">{{key}}</div>
+    </div>
 
-
-{% endblock details %}
+    {% for b in value %}
+        <div class="tile team_{{b.team}}" id="tilebloke_{{b.id}}">
+        {% include "collector/character_tile.html" with c=b %}
+        </div>
+    {% endfor %}
+</div>
+{% endfor %}

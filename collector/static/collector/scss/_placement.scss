@@ -4,28 +4,27 @@
 }
 
 
-
-.port{
-    order:2;
+.port {
+    order: 2;
 }
 
 
-.details{
-    order:3;
+.details {
+    order: 3;
 }
 
 
-.starport{
-    order:4;
+.starport {
+    order: 4;
 }
 
 
 .mobile_form {
     // Flex item
-    order:1;
-    flex-grow:1;
+    order: 1;
+    flex-grow: 1;
     width: 300px;
-
+    
     z-index: 8000;
     overflow: hidden;
     padding: 5px;
@@ -35,35 +34,35 @@
     box-shadow: 3px 3px 5px $fics_darker;
     border-radius: 5px;
     opacity: .9;
-//     width: 290px;
+    //     width: 290px;
     @include collapsible;
-
+    
     & table.expanded {
         & tr {
             & td[colspan="1"], & th[colspan="1"] {
                 width: 30px;
             }
-
+            
             & td[colspan="2"], & th[colspan="2"] {
                 width: 80px;
             }
-
+            
             & td[colspan="3"], & th[colspan="3"] {
                 width: 130px;
             }
-
+            
             & #summary {
                 height: 250px;
                 overflow-y: scroll;
                 border: 1px solid $fics_darkest;
                 width: 100%;
             }
-
+            
             & select, &option {
                 width: 26ex;
             }
         }
-
+        
         & ul {
             margin: 0;
         }
@@ -73,34 +72,35 @@
 
 .menuright {
     // Flex Item
-    order:4;
-    flex-grow:1;
+    order: 4;
+    flex-grow: 1;
     width: 300px;
-
-    & #keywords {
-        width: 250px;
-        margin-right: 5px;
-        height: auto;
-    }
+    
+    //     & #keywords {
+    //         width: 250px;
+    //         margin-right: 5px;
+    //         height: auto;
+    //     }
     @include dp_panel;
     @include collapsible;
 }
 
 .dicer {
     // Flex Item
-    order:3;
-    flex-grow:1;
+    order: 3;
+    flex-grow: 1;
     width: 300px;
-
-
+    
+    
     & .roll_dice, & .rolls, & .mods, & .total {
         width: 30ex;
     }
-
+    
     & input#set {
         width: 50px;
         font-weight: bold;
     }
+    
     @include dp_panel;
     @include collapsible;
 }
@@ -108,143 +108,155 @@
 
 // Menus
 
-#customize{
-    width:20ex;
+#customize {
+    width: 20ex;
 }
 
 
-.menu_block{
-    & i.fa{
-        color:white;
+.menu_block {
+    & i.fa {
+        color: white;
     }
-    order:1;
-    flex-grow:0;
+    
+    order: 1;
+    flex-grow: 0;
     flex-basis: 24ex;
-    text-align:center;
-    padding:10px 0 10px 0;
-
-    display:inline-block;
-    width:auto;
-    height:auto;
-    background:$fics_dark;
-    border:1px solid $fics_light;
-    border-radius:5px;
-
-
-    & ul.level-1{
-        background:$fics_darker;
-        border-radius:5px;
-        margin:2px;
-        padding:5px;
-        text-indent:0;
-        text-align:center;
-        width:30ex;
-        & li{
-            display:block;
-            background:$fics_light;
-            border:1px solid $fics_darker;
-            border-radius:3px;
-            padding:3px 0 3px 0;
-            margin:3px 0 3px 0;
-            width:28ex;
-
-            text-align:center;
-            background:$fics_darker;
-            & ul.level-2{
-                display:none;
-                display:inline-block;
-                color:$fics_front;
-                margin:0;
-                padding:0;
-                text-indent:0;
+    text-align: center;
+    padding: 10px 0 10px 0;
+    
+    display: inline-block;
+    width: auto;
+    height: auto;
+    background: $fics_dark;
+    border: 1px solid $fics_light;
+    border-radius: 5px;
+    
+    
+    & ul.level-1 {
+        background: $fics_darker;
+        border-radius: 5px;
+        margin: 2px;
+        padding: 5px;
+        text-indent: 0;
+        text-align: center;
+        width: 30ex;
+        
+        & li {
+            display: block;
+            background: $fics_light;
+            border: 1px solid $fics_darker;
+            border-radius: 3px;
+            padding: 3px 0 3px 0;
+            margin: 3px 0 3px 0;
+            width: 28ex;
+            
+            text-align: center;
+            background: $fics_darker;
+            
+            & ul.level-2 {
+                display: none;
+                display: inline-block;
+                color: $fics_front;
+                margin: 0;
+                padding: 0;
+                text-indent: 0;
                 border-radius: 5px;
-                width:28ex;
-                & li{
-                    color:$fics_front;
-                    background:$fics_dark;
+                width: 28ex;
+                
+                & li {
+                    color: $fics_front;
+                    background: $fics_dark;
                     padding: 0.2em 1ex 0.2em 1ex;
-                    text-align:center;
-                    width:26ex;
-                    overflow:hidden;
+                    text-align: center;
+                    width: 26ex;
+                    overflow: hidden;
                 }
             }
-            &:hover{
-                & ul.level-2{
+            
+            &:hover {
+                & ul.level-2 {
                     //transform: skew(5deg,5deg);
-                    display:inline-block;
-
+                    display: inline-block;
+                    
                 }
             }
-
+            
         }
     }
 }
 
-.pull-down{
-    color:$fics_front;
-    weight:bold;
-    text-align:center;
-    display:inline-block;
-    background:transparent;
-    border-radius:3px;
-    border:1px solid $fics_light;
+.pull-down {
+    color: $fics_front;
+    weight: bold;
+    text-align: center;
+    display: inline-block;
+    background: transparent;
+    border-radius: 3px;
+    border: 1px solid $fics_light;
     padding: 1ex 0 1ex 0;
-    margin:2px;
-    width:24ex;
+    margin: 2px;
+    width: 24ex;
     cursor: pointer;
+    
     &:hover {
         //background: $fics_hl;
         //color:black;
     }
 }
 
-.menu-logo{
-    text-align:center;
-    & .img_block{
-        display:block;
-        width:100%;
-        margin:0.5em 0 0.5em 0;
-        padding:0.5em 0 0.5em 0;
+.menu-logo {
+    text-align: center;
+    
+    & .img_block {
+        display: block;
+        width: 100%;
+        margin: 0.5em 0 0.5em 0;
+        padding: 0.5em 0 0.5em 0;
     }
-    & input{
-        margin:0.5em 0 0.5em 0;
-        padding:0.5em 0 0.5em 0;
+    
+    & input {
+        margin: 0.5em 0 0.5em 0;
+        padding: 0.5em 0 0.5em 0;
     }
-    & span{
-        display:block;
-        width:100%;
-        height:20px;
+    
+    & span {
+        display: block;
+        width: 100%;
+        height: 20px;
     }
 }
 
-span.menu-item,a.menu-item{
-    display:block;
-    background:transparent;
-    color:$fics_front;
-    text-align:left;
+span.menu-item, a.menu-item {
+    display: block;
+    background: transparent;
+    color: $fics_front;
+    text-align: left;
     text-decoration: none;
     padding: 0.2em 1ex 0.2em 1ex;
-    border:1px solid $fics_dark;
-    border-radius:5px;
-    & A{
-        color:$fics_front;
-        &:visited, &:hover, &:link, &:active{
-            color:$fics_front;
+    border: 1px solid $fics_dark;
+    border-radius: 5px;
+    
+    & A {
+        color: $fics_front;
+        
+        &:visited, &:hover, &:link, &:active {
+            color: $fics_front;
         }
-        & i.fas{
-            color:$fics_front;
+        
+        & i.fas {
+            color: $fics_front;
         }
     }
+    
     &:hover {
-        background:$fics_golden;
-        color:$fics_dark;
+        background: $fics_golden;
+        color: $fics_dark;
     }
-    width:24ex;
+    
+    width: 24ex;
     cursor: pointer;
-
+    
 }
-
-
 
 
 /*
@@ -256,18 +268,22 @@ span.menu-item,a.menu-item{
     font-weight: 700;
     font-family: Texte;
 }
+
 .toast-message {
     -ms-word-wrap: break-word;
     word-wrap: break-word;
 }
+
 .toast-message a,
 .toast-message label {
     color: #fff;
 }
+
 .toast-message a:hover {
     color: #ccc;
     text-decoration: none;
 }
+
 .toast-close-button {
     position: relative;
     right: -0.3em;
@@ -283,6 +299,7 @@ span.menu-item,a.menu-item{
     filter: alpha(opacity=80);
     line-height: 1;
 }
+
 .toast-close-button:focus,
 .toast-close-button:hover {
     color: #000;
@@ -292,11 +309,13 @@ span.menu-item,a.menu-item{
     -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=40);
     filter: alpha(opacity=40);
 }
+
 .rtl .toast-close-button {
     left: -0.3em;
     float: left;
     right: 0.3em;
 }
+
 button.toast-close-button {
     padding: 0;
     cursor: pointer;
@@ -304,52 +323,63 @@ button.toast-close-button {
     border: 0;
     -webkit-appearance: none;
 }
+
 .toast-top-center {
     top: 0;
     right: 0;
     width: 100%;
 }
+
 .toast-bottom-center {
     bottom: 0;
     right: 0;
     width: 100%;
 }
+
 .toast-top-full-width {
     top: 0;
     right: 0;
     width: 100%;
 }
+
 .toast-bottom-full-width {
     bottom: 0;
     right: 0;
     width: 100%;
 }
+
 .toast-top-left {
     top: 12px;
     left: 12px;
 }
+
 .toast-top-right {
     top: 12px;
     right: 12px;
 }
+
 .toast-bottom-right {
     right: 12px;
     bottom: 12px;
 }
+
 .toast-bottom-left {
     bottom: 12px;
     left: 12px;
 }
+
 #toast-container {
     position: fixed;
     z-index: 999999;
     pointer-events: none;
 }
+
 #toast-container * {
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
 }
+
 #toast-container > div {
     position: relative;
     pointer-events: auto;
@@ -365,17 +395,19 @@ button.toast-close-button {
     -moz-box-shadow: 0 0 12px #999;
     -webkit-box-shadow: 0 0 12px #999;
     box-shadow: 0 0 12px #999;
-    font-size:0.8em;
-    font-family:Texte;
+    font-size: 0.8em;
+    font-family: Texte;
     opacity: 0.8;
     -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80);
     filter: alpha(opacity=80);
 }
+
 #toast-container > div.rtl {
     direction: rtl;
     padding: 15px 50px 15px 15px;
     background-position: right 15px center;
 }
+
 #toast-container > div:hover {
     -moz-box-shadow: 0 0 12px #000;
     -webkit-box-shadow: 0 0 12px #000;
@@ -385,46 +417,58 @@ button.toast-close-button {
     filter: alpha(opacity=100);
     cursor: pointer;
 }
+
 #toast-container > .toast-info {
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGwSURBVEhLtZa9SgNBEMc9sUxxRcoUKSzSWIhXpFMhhYWFhaBg4yPYiWCXZxBLERsLRS3EQkEfwCKdjWJAwSKCgoKCcudv4O5YLrt7EzgXhiU3/4+b2ckmwVjJSpKkQ6wAi4gwhT+z3wRBcEz0yjSseUTrcRyfsHsXmD0AmbHOC9Ii8VImnuXBPglHpQ5wwSVM7sNnTG7Za4JwDdCjxyAiH3nyA2mtaTJufiDZ5dCaqlItILh1NHatfN5skvjx9Z38m69CgzuXmZgVrPIGE763Jx9qKsRozWYw6xOHdER+nn2KkO+Bb+UV5CBN6WC6QtBgbRVozrahAbmm6HtUsgtPC19tFdxXZYBOfkbmFJ1VaHA1VAHjd0pp70oTZzvR+EVrx2Ygfdsq6eu55BHYR8hlcki+n+kERUFG8BrA0BwjeAv2M8WLQBtcy+SD6fNsmnB3AlBLrgTtVW1c2QN4bVWLATaIS60J2Du5y1TiJgjSBvFVZgTmwCU+dAZFoPxGEEs8nyHC9Bwe2GvEJv2WXZb0vjdyFT4Cxk3e/kIqlOGoVLwwPevpYHT+00T+hWwXDf4AJAOUqWcDhbwAAAAASUVORK5CYII=) !important;
 }
+
 #toast-container > .toast-error {
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAHOSURBVEhLrZa/SgNBEMZzh0WKCClSCKaIYOED+AAKeQQLG8HWztLCImBrYadgIdY+gIKNYkBFSwu7CAoqCgkkoGBI/E28PdbLZmeDLgzZzcx83/zZ2SSXC1j9fr+I1Hq93g2yxH4iwM1vkoBWAdxCmpzTxfkN2RcyZNaHFIkSo10+8kgxkXIURV5HGxTmFuc75B2RfQkpxHG8aAgaAFa0tAHqYFfQ7Iwe2yhODk8+J4C7yAoRTWI3w/4klGRgR4lO7Rpn9+gvMyWp+uxFh8+H+ARlgN1nJuJuQAYvNkEnwGFck18Er4q3egEc/oO+mhLdKgRyhdNFiacC0rlOCbhNVz4H9FnAYgDBvU3QIioZlJFLJtsoHYRDfiZoUyIxqCtRpVlANq0EU4dApjrtgezPFad5S19Wgjkc0hNVnuF4HjVA6C7QrSIbylB+oZe3aHgBsqlNqKYH48jXyJKMuAbiyVJ8KzaB3eRc0pg9VwQ4niFryI68qiOi3AbjwdsfnAtk0bCjTLJKr6mrD9g8iq/S/B81hguOMlQTnVyG40wAcjnmgsCNESDrjme7wfftP4P7SP4N3CJZdvzoNyGq2c/HWOXJGsvVg+RA/k2MC/wN6I2YA2Pt8GkAAAAASUVORK5CYII=) !important;
 }
+
 #toast-container > .toast-success {
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADsSURBVEhLY2AYBfQMgf///3P8+/evAIgvA/FsIF+BavYDDWMBGroaSMMBiE8VC7AZDrIFaMFnii3AZTjUgsUUWUDA8OdAH6iQbQEhw4HyGsPEcKBXBIC4ARhex4G4BsjmweU1soIFaGg/WtoFZRIZdEvIMhxkCCjXIVsATV6gFGACs4Rsw0EGgIIH3QJYJgHSARQZDrWAB+jawzgs+Q2UO49D7jnRSRGoEFRILcdmEMWGI0cm0JJ2QpYA1RDvcmzJEWhABhD/pqrL0S0CWuABKgnRki9lLseS7g2AlqwHWQSKH4oKLrILpRGhEQCw2LiRUIa4lwAAAABJRU5ErkJggg==) !important;
 }
+
 #toast-container > .toast-warning {
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGYSURBVEhL5ZSvTsNQFMbXZGICMYGYmJhAQIJAICYQPAACiSDB8AiICQQJT4CqQEwgJvYASAQCiZiYmJhAIBATCARJy+9rTsldd8sKu1M0+dLb057v6/lbq/2rK0mS/TRNj9cWNAKPYIJII7gIxCcQ51cvqID+GIEX8ASG4B1bK5gIZFeQfoJdEXOfgX4QAQg7kH2A65yQ87lyxb27sggkAzAuFhbbg1K2kgCkB1bVwyIR9m2L7PRPIhDUIXgGtyKw575yz3lTNs6X4JXnjV+LKM/m3MydnTbtOKIjtz6VhCBq4vSm3ncdrD2lk0VgUXSVKjVDJXJzijW1RQdsU7F77He8u68koNZTz8Oz5yGa6J3H3lZ0xYgXBK2QymlWWA+RWnYhskLBv2vmE+hBMCtbA7KX5drWyRT/2JsqZ2IvfB9Y4bWDNMFbJRFmC9E74SoS0CqulwjkC0+5bpcV1CZ8NMej4pjy0U+doDQsGyo1hzVJttIjhQ7GnBtRFN1UarUlH8F3xict+HY07rEzoUGPlWcjRFRr4/gChZgc3ZL2d8oAAAAASUVORK5CYII=) !important;
 }
+
 #toast-container.toast-bottom-center > div,
 #toast-container.toast-top-center > div {
     width: 300px;
     margin-left: auto;
     margin-right: auto;
 }
+
 #toast-container.toast-bottom-full-width > div,
 #toast-container.toast-top-full-width > div {
     width: 96%;
     margin-left: auto;
     margin-right: auto;
 }
+
 .toast {
     background-color: #030303;
 }
+
 .toast-success {
     background-color: #51a351;
 }
+
 .toast-error {
     background-color: #bd362f;
 }
+
 .toast-info {
     background-color: #2f96b4;
-
+    
 }
+
 .toast-warning {
     background-color: #f89406;
 }
+
 .toast-progress {
     position: absolute;
     left: 0;
@@ -435,6 +479,7 @@ button.toast-close-button {
     -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=40);
     filter: alpha(opacity=40);
 }
+
 @media all and (max-width: 240px) {
     #toast-container > div {
         padding: 8px 8px 8px 50px;
@@ -452,6 +497,7 @@ button.toast-close-button {
         right: 0.2em;
     }
 }
+
 @media all and (min-width: 241px) and (max-width: 480px) {
     #toast-container > div {
         padding: 8px 8px 8px 50px;
@@ -469,6 +515,7 @@ button.toast-close-button {
         right: 0.2em;
     }
 }
+
 @media all and (min-width: 481px) and (max-width: 768px) {
     #toast-container > div {
         padding: 15px 15px 15px 50px;
@@ -480,38 +527,111 @@ button.toast-close-button {
 }
 
 
-div.login_form{
-    display:block;
-    margin:auto;
+div.login_form {
+    display: block;
+    margin: auto;
     background: $fics_dark;
     color: $fics_front;
-    padding:1ex 0.5em 1ex 0.5em;
-    width:32ex;
-    min-height:24ex;
-    border:1px solid $fics_dark;
-    font-size:12pt;
-    margin-top:5em;
-    border-radius:5px;
-    box-shadow:5px 5px 8px $fics_darkest;
-    & h2{
-        font-family:"NomPerso";
-        font-size:1.2em;
+    padding: 1ex 0.5em 1ex 0.5em;
+    width: 32ex;
+    min-height: 24ex;
+    border: 1px solid $fics_dark;
+    font-size: 12pt;
+    margin-top: 5em;
+    border-radius: 5px;
+    box-shadow: 5px 5px 8px $fics_darkest;
+    
+    & h2 {
+        font-family: "NomPerso";
+        font-size: 1.2em;
     }
-    & ul, & p{
-        font-family:"TextDesc";
-        font-size:0.8em;
-        & label{
-            display:inline-block;
-            width:15ex;
+    
+    & ul, & p {
+        font-family: "TextDesc";
+        font-size: 0.8em;
+        
+        & label {
+            display: inline-block;
+            width: 15ex;
         }
-        & input{
-            display:inline-block;
-            width:20ex;
+        
+        & input {
+            display: inline-block;
+            width: 20ex;
         }
     }
+    
+    & button {
+        margin-right: 0;
+        margin-left: auto;
+    }
+}
 
-    & button{
-        margin-right:0;
-        margin-left:auto;
+
+div#keywords {
+    display: block;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    
+    & div.keywords_stack {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: flex-start;
+        align-content: flex-start;
+        align-items: flex-start;
+        width: 100%;
+        height: auto;
+        
+        & .keyword_tag {
+            cursor:pointer;
+            display: flex;
+            flex-flow: row-reverse nowrap;
+            justify-content: space-between;
+            align-content: space-between;
+            align-items: space-between;
+            flex-order: 1;
+            flex-grow: 1;
+            flex-shrink: 1;
+            padding: 3px;
+            background: $fics_hl;
+            color: $fics_front;
+            border-radius: 3px;
+            margin: 5px;
+            box-shadow: 0 0 3px $fics_darkest;
+            
+            & strong {
+                display: inline-block;
+                text-decoration: none;
+                font-style: normal;
+                font-weight: bold;
+                order: 2;
+                min-width: 10ex;
+            }
+            
+            & em {
+                display: inline-block;
+                order: 1;
+                text-decoration: none;
+                font-style: normal;
+                font-weight: normal;
+                width: 5ex;
+                background: $fics_dark;
+                text-align: center;
+            }
+
+            &.drama{
+                background:#313;
+                flex-flow: row nowrap;
+                & em{
+                    width: 12ex;
+                    text-align: left;
+                }
+                & strong{
+                    text-align: right;
+
+                }
+            }
+        }
     }
 }

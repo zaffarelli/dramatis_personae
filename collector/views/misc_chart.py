@@ -58,13 +58,25 @@ def get_population_statistics(request, *args, **kwargs):
 
 
 def get_keywords(request, *args, **kwargs):
-    """ Get all the keywords into a chart"""
-    #context = {}
-    camp = get_current_config()
-    ch = camp.get_chart(field='keyword', bar_property='keyword', type='horizontalBar', legend_display=False, ticks=False)
-    da = json.dumps(ch['data'])
+    campaign = get_current_config()
+    all = campaign.avatars.order_by('keyword')
+    data = {'keywords':[]}
+    edata = {'dramas': []}
+    keyword = ''
+    count = 0
+    for x in all:
+        if x.keyword != keyword:
+            if keyword != '':
+                data['keywords'].append({'name':keyword,'count':count})
+            count = 0
+            keyword = x.keyword
+        count += 1
+    for d in campaign.epic.drama_set.all():
+        edata['dramas'].append({'drama':d.title,'code':f'c-drama-{d.id}','chapter':d.get_full_id})
+    # ch = campaign.get_chart(field='keyword', bar_property='keyword', type='horizontalBar', legend_display=False, ticks=False)
+    # da = json.dumps(ch['data'])
     template = get_template('collector/keywords.html')
-    chart = template.render({'cname': 'chart_keywords', 'cdata': da})
+    chart = template.render({'cdata': data, 'edata':edata})
     context = {
         'chart': chart,
     }

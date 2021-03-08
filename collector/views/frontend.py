@@ -22,21 +22,16 @@ from django.contrib import messages
 
 
 def index(request):
-    """ The basic page for the application
-    """
     if not request.user.is_authenticated:
         return redirect('accounts/login/')
     return render(request, 'collector/index.html')
 
 
 def get_list(request, id, slug='none'):
-    """ Update the list of characters on the page
-        They will be sorted by full name only !
-    """
     from collector.utils.basic import get_current_config
     campaign = get_current_config()
     if slug == 'none':
-        character_items = campaign.avatars.order_by('team','-ranking','full_name').filter(is_dead=False)
+        character_items = campaign.avatars.order_by('-ranking','full_name').filter(is_dead=False)
     elif slug.startswith('c-'):
         elements =  slug.split('-')
         ep_class = elements[1].capitalize()
@@ -62,9 +57,10 @@ def get_list(request, id, slug='none'):
         else:
             cast = []
         character_items = []
-        if len(cast )>0:
+        if len(cast)>0:
             for rid in cast:
-                character_item = campaign.avatars.get(rid=rid)
+                print(rid)
+                character_item = campaign.open_avatars.get(rid=rid)
                 character_items.append(character_item)
         messages.info(request, f'New list filter applied: {slug}')
     else:
@@ -83,10 +79,7 @@ def get_list(request, id, slug='none'):
     return HttpResponse(html, content_type='text/html')
 
 
-
 def show_todo(request):
-    """ variant of get_list. Might show the toto characters, actually showing the unbalanced ones
-    """
     campaign = get_current_config()
     if request.is_ajax:
         character_items = campaign.avatars.filter(priority=True).order_by('full_name')
@@ -101,6 +94,7 @@ def show_todo(request):
     else:
         return Http404
 
+
 def tile_avatar(request, pk=None):
     if request.is_ajax:
         character_item = Character.objects.get(pk=pk)
@@ -110,10 +104,7 @@ def tile_avatar(request, pk=None):
     return HttpResponse(html, content_type='text/html')
 
 
-
 def get_storyline(request, slug='none'):
-    """ Change current config
-    """
     if request.is_ajax:
         config_items = Campaign.objects.filter(hidden=False)
         if slug != 'none':
@@ -128,9 +119,6 @@ def get_storyline(request, slug='none'):
 
 
 def recalc_avatar(request, id=None):
-    """ Re-calculate one single character. To be use in the frontend
-        This function must be compliant to all campaigns (actually fics and coc7)
-    """
     campaign = get_current_config()
     if request.is_ajax():
         messages.warning(request, 'Recalculating...')
@@ -165,8 +153,6 @@ def recalc_avatar(request, id=None):
 
 
 def wa_export_character(request, id=None):
-    """ Preparing statsblock export for World Anvil
-    """
     campaign = get_current_config()
     if request.is_ajax():
         item = campaign.avatars.get(pk=id)
@@ -179,6 +165,7 @@ def wa_export_character(request, id=None):
         return JsonResponse(context)
     else:
         raise Http404
+
 
 def add_avatar(request, slug=None):
     campaign = get_current_config()
@@ -204,8 +191,6 @@ def add_avatar(request, slug=None):
 
 
 def toggle_public(request, id=None):
-    """ Toggle the character public/private flag
-    """
     context = {}
     character_item = Character.objects.get(pk=id)
     if character_item is not None:
@@ -216,8 +201,6 @@ def toggle_public(request, id=None):
 
 
 def toggle_spotlight(request, id=None):
-    """ Toggle the character spotlight flag
-    """
     context = {}
     character_item = Character.objects.get(pk=id)
     if character_item is not None:
@@ -227,13 +210,7 @@ def toggle_spotlight(request, id=None):
     return JsonResponse(context)
 
 
-
-
 def conf_details(request):
-    """ Current config info
-        Todo: the list of the characters for a given Epic should not be retrieved by
-                their epic info, but through the story casting functions.
-    """
     if request.is_ajax:
         from collector.models.campaign import Campaign
         campaign = get_current_config()
@@ -246,9 +223,6 @@ def conf_details(request):
 
 
 def heartbeat(request):
-    """ Global heartbeat to raise messages in the messenger toaster.
-        Todo: the actual system can certainly be enhanced
-    """
     context = {}
     template = get_template('collector/messenger.html')
     html = template.render(context, request)

@@ -1,24 +1,23 @@
-'''
+"""
  ╔╦╗╔═╗  ╔═╗┌─┐┬  ┬  ┌─┐┌─┐┌┬┐┌─┐┬─┐
   ║║╠═╝  ║  │ ││  │  ├┤ │   │ │ │├┬┘
  ═╩╝╩    ╚═╝└─┘┴─┘┴─┘└─┘└─┘ ┴ └─┘┴└─
-'''
-# utils.py
-from io import BytesIO, StringIO
+"""
+from io import BytesIO
 from django.http import HttpResponse
 from django.template.loader import get_template
 from xhtml2pdf import pisa
 from django.conf import settings
 from PyPDF2 import PdfFileMerger
-import datetime
 import os
 import logging
 from collector.models.tourofduty import TourOfDutyRef
+from django.contrib import messages
 
 logger = logging.getLogger(__name__)
 
+
 def render_to_pdf(template_src, context_dict={}):
-    """ Render PDF document """
     template = get_template(template_src)
     html = template.render(context_dict)
     result = BytesIO()
@@ -31,11 +30,12 @@ def render_to_pdf(template_src, context_dict={}):
         return response
     return HttpResponse(pdf.err, content_type='text/plain')
 
+
 def write_pdf(template_src, context_dict={}):
     template = get_template(template_src)
     html = template.render(context_dict)
-    fname = '%s.pdf'%(context_dict['filename'])
-    filename = os.path.join(settings.MEDIA_ROOT, 'pdf/results/avatars/' + fname)
+    uri = '%s.pdf'%(context_dict['filename'])
+    filename = os.path.join(settings.MEDIA_ROOT, 'pdf/results/avatars/' + uri)
     result = open(filename, 'wb')
     pdf = pisa.pisaDocument(BytesIO(html.encode('utf-8')), dest=result, encoding='utf-8')
     result.close()
@@ -48,11 +48,8 @@ def get_current_config():
         item = Campaign.objects.first()
     return item
 
-#campaign = get_current_config()
 
-
-def make_avatar_appendix(conf):
-    """ Creating appendix with the list of avatars from the epic """
+def make_avatar_appendix(campaign):
     res = []
     media_resources = os.path.join(settings.MEDIA_ROOT, 'pdf/resources/')
     media_results = os.path.join(settings.MEDIA_ROOT, 'pdf/results/')
@@ -62,7 +59,7 @@ def make_avatar_appendix(conf):
     merger = PdfFileMerger()
     # merger.append(open('%s__aa_header.pdf'%(media_resources), 'rb'))
     pdfs.sort()
-    ep = conf.epic
+    ep = campaign.epic
     cast = ep.get_full_cast()
     i = 0
     for pdf in pdfs:
@@ -73,13 +70,13 @@ def make_avatar_appendix(conf):
             i += 1
             merger.append(open(media_avatars+pdf, 'rb'))
     if i>0:
-        des = '%sappendix_%s.pdf'%(media_results, conf.epic.shortcut)
+        des = '%sappendix_%s.pdf'%(media_results, campaign.epic.shortcut)
         with open(des, 'wb') as fout:
             merger.write(fout)
     return res
 
 
-def make_epic_corpus(conf):
+def make_epic_corpus(campaign):
     res = []
     mypath = os.path.join(settings.MEDIA_ROOT, 'pdf/')
     media_resources = os.path.join(settings.MEDIA_ROOT, 'pdf/resources/')
@@ -87,35 +84,37 @@ def make_epic_corpus(conf):
     mystaticpath = os.path.join(settings.STATIC_ROOT, 'pdf/')
     merger = PdfFileMerger()
     # merger.append(open('%sresources/__es_header.pdf'%(mystaticpath), 'rb'))
-    template = get_template('cartograph/conf_pdf.html')
-    context = {'epic':conf.parse_details()}
+    template = get_template('collector/conf_pdf.html')
+    context = {'epic':campaign.parse_details()}
     html = template.render(context)
-    fname = 'c_%s.pdf'%(conf.epic.shortcut)
-    filename = os.path.join(settings.MEDIA_ROOT, 'pdf/results/' + fname)
+    uri = 'c_%s.pdf'%(campaign.epic.shortcut)
+    filename = os.path.join(settings.MEDIA_ROOT, 'pdf/results/' + uri)
     es_pdf = open(filename, 'wb')
     pdf = pisa.pisaDocument(BytesIO(html.encode('utf-8')), es_pdf)
+    print(pdf)
     es_pdf.close()
     merger.append(open(filename, 'rb'))
-    des = '%scorpus_%s.pdf'%(media_results,conf.epic.shortcut)
+    des = '%scorpus_%s.pdf'%(media_results,campaign.epic.shortcut)
     with open(des, 'wb') as fout:
       merger.write(fout)
     return res
 
-def export_epic(conf):
-    res = {'epic':conf.epic.title}
+
+def export_epic(request,campaign):
+    res = {'epic':campaign.epic.title}
     comments = []
-    comments += make_avatar_appendix(conf)
-    comments += make_epic_corpus(conf)
+    comments += make_avatar_appendix(campaign)
+    comments += make_epic_corpus(campaign)
     com = '<br/>'.join(comments)
     res['comment'] = '<div class="classyview"><p>'+com+'</p></div>'
     media_results = os.path.join(settings.MEDIA_ROOT, 'pdf/results/')
     merger = PdfFileMerger()
-    merger.append(open('%scorpus_%s.pdf'%(media_results,conf.epic.shortcut), 'rb'))
-    merger.append(open('%sappendix_%s.pdf'%(media_results,conf.epic.shortcut), 'rb'))
-    des = '%s%s.pdf'%(media_results,conf.epic.shortcut)
+    merger.append(open('%scorpus_%s.pdf'%(media_results,campaign.epic.shortcut), 'rb'))
+    merger.append(open('%sappendix_%s.pdf'%(media_results,campaign.epic.shortcut), 'rb'))
+    des = '%s%s.pdf'%(media_results,campaign.epic.shortcut)
     with open(des, 'wb') as fout:
         merger.write(fout)
-    print('> Epic [%s] exported to PDF: [%s]'%(conf.epic.title,des))
+    messages.info(request,'Epic [%s] exported to PDF: [%s]'%(campaign.epic.title,des))
     return res
 
 
@@ -160,8 +159,7 @@ def extract_rules():
     context['tour_of_duty'] = tour_of_duty
     worldly_benefits = TourOfDutyRef.objects.filter(category='50').order_by('-source')
     context['worldly_benefits'] = worldly_benefits
-
-    template = get_template('cartograph/references.html')
+    template = get_template('collector/references.html')
     html = template.render(context)
     fname = 'rules.pdf'
     filename = os.path.join(settings.MEDIA_ROOT, 'pdf/results/' + fname)
@@ -195,7 +193,6 @@ def extract_equipment():
         current['data'].append(g)
     if cat:
         context['gears'].append(current)
-
     # Weapons
     weapons = WeaponRef.objects.filter(hidden=False).order_by('meta_type','cost')
     cat = ''
@@ -212,7 +209,6 @@ def extract_equipment():
         current['data'].append(w)
     if cat:
         context['weapons'].append(current)
-
     # Armors
     armors = ArmorRef.objects.order_by('category','cost')
     cat = ''
@@ -229,10 +225,8 @@ def extract_equipment():
         current['data'].append(a)
     if cat:
         context['armors'].append(current)
-
     # Energy Shields
-
-    template = get_template('cartograph/equipment.html')
+    template = get_template('collector/equipment.html')
     html = template.render(context)
     fname = 'fading_suns_shopping_guide.pdf'
     filename = os.path.join(settings.MEDIA_ROOT, 'pdf/results/' + fname)

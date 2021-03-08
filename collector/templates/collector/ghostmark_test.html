@@ -23,11 +23,10 @@
 <div class="wrapper" style="color:white;">
     {% load fics_filters %}
     <center>
-    <h1>{{ c.full_name }}</h1>
     <div id='ghostmark_{{c.id}}' style="width:auto; height:auto; border:1px solid #303; margin:10px;"></div>
     </center>
     <script>
-        let oversize=4;
+        let oversize=8;
         (new Ghostmark({{c.ghostmark_data|safe}},oversize)).perform();
     </script>
 </div>

@@ -600,18 +600,6 @@ th.skill_dot {
   color: #fc2;
   text-decoration: none; }
 
-.epic {
-  background-color: #303230; }
-
-.drama {
-  background-color: #242524; }
-
-.act {
-  background-color: #171817; }
-
-.event {
-  background-color: black; }
-
 .btn {
   display: block;
   padding: 0;
@@ -1254,18 +1242,6 @@ th.skill_dot {
 .embedded_link {
   color: #fc2;
   text-decoration: none; }
-
-.epic {
-  background-color: #303230; }
-
-.drama {
-  background-color: #242524; }
-
-.act {
-  background-color: #171817; }
-
-.event {
-  background-color: black; }
 
 .btn {
   display: block;
@@ -2266,18 +2242,6 @@ th.skill_dot {
   color: #fc2;
   text-decoration: none; }
 
-.epic {
-  background-color: #303230; }
-
-.drama {
-  background-color: #242524; }
-
-.act {
-  background-color: #171817; }
-
-.event {
-  background-color: black; }
-
 .btn {
   display: block;
   padding: 0;
@@ -3135,18 +3099,6 @@ th.skill_dot {
   color: #fc2;
   text-decoration: none; }
 
-.epic {
-  background-color: #303230; }
-
-.drama {
-  background-color: #242524; }
-
-.act {
-  background-color: #171817; }
-
-.event {
-  background-color: black; }
-
 .btn {
   display: block;
   padding: 0;
@@ -3919,18 +3871,6 @@ th.skill_dot {
   color: #fc2;
   text-decoration: none; }
 
-.epic {
-  background-color: #303230; }
-
-.drama {
-  background-color: #242524; }
-
-.act {
-  background-color: #171817; }
-
-.event {
-  background-color: black; }
-
 .btn {
   display: block;
   padding: 0;
@@ -4035,10 +3975,6 @@ th.skill_dot {
   width: 300px;
   margin-bottom: 3px;
   transition: flex-basis .5s, width .5s; }
-  .menuright #keywords {
-    width: 250px;
-    margin-right: 5px;
-    height: auto; }
   .menuright.collapsed {
     height: 18px;
     overflow: hidden;
@@ -4431,6 +4367,60 @@ div.login_form {
   div.login_form button {
     margin-right: 0;
     margin-left: auto; }
+
+div#keywords {
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin: 0; }
+  div#keywords div.keywords_stack {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
+    height: auto; }
+    div#keywords div.keywords_stack .keyword_tag {
+      cursor: pointer;
+      display: flex;
+      flex-flow: row-reverse nowrap;
+      justify-content: space-between;
+      align-content: space-between;
+      align-items: space-between;
+      flex-order: 1;
+      flex-grow: 1;
+      flex-shrink: 1;
+      padding: 3px;
+      background: #444444;
+      color: #cfcdcf;
+      border-radius: 3px;
+      margin: 5px;
+      box-shadow: 0 0 3px black; }
+      div#keywords div.keywords_stack .keyword_tag strong {
+        display: inline-block;
+        text-decoration: none;
+        font-style: normal;
+        font-weight: bold;
+        order: 2;
+        min-width: 10ex; }
+      div#keywords div.keywords_stack .keyword_tag em {
+        display: inline-block;
+        order: 1;
+        text-decoration: none;
+        font-style: normal;
+        font-weight: normal;
+        width: 5ex;
+        background: #242524;
+        text-align: center; }
+      div#keywords div.keywords_stack .keyword_tag.drama {
+        background: #313;
+        flex-flow: row nowrap; }
+        div#keywords div.keywords_stack .keyword_tag.drama em {
+          width: 12ex;
+          text-align: left; }
+        div#keywords div.keywords_stack .keyword_tag.drama strong {
+          text-align: right; }
 
 input[type=text], input[type=password], input[type=number], input[type=checkbox], select, textarea {
   background-color: #242524;
@@ -5034,18 +5024,6 @@ th.skill_dot {
   color: #fc2;
   text-decoration: none; }
 
-.epic {
-  background-color: #303230; }
-
-.drama {
-  background-color: #242524; }
-
-.act {
-  background-color: #171817; }
-
-.event {
-  background-color: black; }
-
 .btn {
   display: block;
   padding: 0;
@@ -5136,7 +5114,7 @@ th.skill_dot {
     padding-left: 20px;
     background: transparent; }
   .storyview .title {
-    border: 1px solid #171817;
+    border: 1px solid transparent;
     flex: 0 0 auto;
     flex-flow: row nowrap;
     justify-content: flex-start;
@@ -5147,7 +5125,8 @@ th.skill_dot {
       color: #e8e7e8;
       text-align: center;
       font-family: NomPerso;
-      font-size: 1.1em;
+      font-size: 1.25em;
+      width: 5ex;
       flex: 0 0 150px; }
       .storyview .title .chapter.big {
         font-weight: bold;
@@ -5258,9 +5237,9 @@ th.skill_dot {
             column-count: 2;
             column-width: auto;
             column-gap: 20px;
-            column-rule-style: dotted;
+            column-rule-style: solid;
             column-rule-width: 1px;
-            column-rule-color: #cfcdcf;
+            column-rule-color: #171817;
             line-height: 1.4em;
             min-height: 150px; }
             .storyview .storyarticle table.storydetails tr td .desc .loot {
@@ -5375,6 +5354,46 @@ th.skill_dot {
     .storydetails .topic.last {
       align-self: flex-end;
       flex-grow: 10; }
+
+.storyview h2 {
+  font-size: 2.0em;
+  margin: 0;
+  font-weight: bold;
+  font-variant: small-caps; }
+
+.storyview h3 {
+  font-size: 1.8em;
+  margin: 0;
+  font-weight: bold;
+  font-variant: small-caps; }
+
+.storyview h4 {
+  font-size: 1.8em;
+  margin: 0;
+  font-weight: bold;
+  font-variant: small-caps; }
+
+.storyview h5 {
+  font-size: 1.6em;
+  margin-top: 0.8em;
+  font-weight: bold;
+  font-variant: small-caps; }
+
+.storyview h6 {
+  font-size: 1.4em;
+  margin: 0; }
+
+.storyview h1, .storyview h2, .storyview h3, .storyview h4, .storyview h5, .storyview h6 {
+  display: inline-block;
+  width: 100%;
+  margin: 0;
+  color: #fd6; }
+
+.storyview em {
+  color: #fe8; }
+
+.storyview strong {
+  color: #fe8; }
 
 .storyview .epic_wrap {
   display: flex;
@@ -5995,18 +6014,6 @@ th.skill_dot {
   color: #fc2;
   text-decoration: none; }
 
-.epic {
-  background-color: #303230; }
-
-.drama {
-  background-color: #242524; }
-
-.act {
-  background-color: #171817; }
-
-.event {
-  background-color: black; }
-
 .btn {
   display: block;
   padding: 0;
@@ -6144,21 +6151,10 @@ th.skill_dot {
       flex-wrap: nowrap;
       justify-content: flex-start;
       align-items: flex-start;
-      align-content: flex-start;
-      /*
-             & .port {
-                 flex-basis:300px;
-                 order:1;
-             }
-*/ }
+      align-content: flex-start; }
       body .wrapper .port {
         display: none; }
       body .wrapper .details {
-        /*
-                flex-grow:1;
-                order:2;
-                flex-shrink:1;
-*/
         display: none; }
       body .wrapper .mosaic {
         flex-grow: 1;
@@ -6173,7 +6169,7 @@ th.skill_dot {
 .mosaic {
   width: 100%;
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: column wrap;
   justify-content: flex-start;
   align-items: flex-start;
   align-content: flex-start; }
@@ -6203,13 +6199,13 @@ th.skill_dot {
       border-color: #888;
       border-style: ridge; }
     .mosaic .tile.team_01-friend {
-      border-color: #124;
+      border-color: #36C;
       border-style: ridge; }
     .mosaic .tile.team_02-ally {
       border-color: #248;
       border-style: ridge; }
     .mosaic .tile.team_03-servant {
-      border-color: #36C;
+      border-color: #124;
       border-style: ridge; }
     .mosaic .tile.team_04-partisan {
       border-style: ridge; }
@@ -6347,16 +6343,16 @@ th.skill_dot {
         padding: 6px;
         text-align: justify; }
         .mosaic .tile.storyview .storydetails.epic {
-          border-left: 5px solid purple;
+          border-left: 5px solid #848;
           background: transparent; }
         .mosaic .tile.storyview .storydetails.drama {
-          border-left: 5px solid red;
+          border-left: 5px solid #737;
           background: transparent; }
         .mosaic .tile.storyview .storydetails.act {
-          border-left: 5px solid orange;
+          border-left: 5px solid #626;
           background: transparent; }
         .mosaic .tile.storyview .storydetails.event {
-          border-left: 5px solid yellow;
+          border-left: 5px solid #515;
           background: transparent; }
         .mosaic .tile.storyview .storydetails .brick {
           display: inline-block;
@@ -6385,7 +6381,7 @@ th.skill_dot {
             margin-right: 5px;
             padding: 0.2ex; }
         .mosaic .tile.storyview .storydetails .wall {
-          flex-order: 1;
+          order: 2;
           width: 400px;
           display: flex;
           flex-flow: row wrap;
@@ -6395,12 +6391,61 @@ th.skill_dot {
           padding: 5px; }
         .mosaic .tile.storyview .storydetails .pitch {
           display: block;
-          flex-order: 2;
+          order: 1;
           flex-grow: 5;
           columns: 2;
-          column-gap: 10px;
-          column-rule: 3px double #3c3f3c;
+          column-gap: 40px;
+          column-rule: 1px solid #171817;
           width: 500px;
           padding: 5px; }
+  .mosaic .fresque {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    background: #171817;
+    margin: 5px;
+    border-radius: 8px;
+    flex-grow: 1;
+    flex-shrink: 1;
+    width: 100%;
+    border: 1px solid #3c3f3c;
+    box-shadow: 0 0 5px black; }
+    .mosaic .fresque.top {
+      order: 1; }
+    .mosaic .fresque.middle {
+      order: 2; }
+    .mosaic .fresque.bottom {
+      order: 3; }
+    .mosaic .fresque .tile.info {
+      display: flex;
+      flex-flow: column nowrap;
+      justify-content: flex-start;
+      align-items: flex-start;
+      align-content: flex-start;
+      color: #cfcdcf; }
+      .mosaic .fresque .tile.info .plank {
+        flex-flow: row-reverse nowrap;
+        justify-content: flex-end;
+        align-items: flex-end;
+        align-content: flex-end;
+        padding: 3px;
+        border-radius: 3px;
+        border: 1px solid #494c49;
+        margin: 2px;
+        background: #171817;
+        width: 95%; }
+        .mosaic .fresque .tile.info .plank strong {
+          order: 1;
+          background: #171817;
+          color: #cfcdcf;
+          margin: 0 4px;
+          min-width: 20ex; }
+        .mosaic .fresque .tile.info .plank em {
+          order: 2;
+          width: 5em;
+          background: #171817;
+          color: #fc2;
+          text-align: center;
+          font-style: normal; }
 
 /*# sourceMappingURL=fics.css.map */

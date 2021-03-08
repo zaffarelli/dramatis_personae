@@ -73,7 +73,7 @@ class Collector{
         });
     }
 
-    keywordHandlerClick(event) {
+    oldkeywordHandlerClick(event) {
         let me = this;
         let firstPoint = chart_keywords.getElementAtEvent(event)[0];
         if (firstPoint) {
@@ -96,6 +96,9 @@ class Collector{
         });
     }
 
+
+
+
     setToggler(tag, klass, item) {
         let me = this;
         $(tag).off().on('click', function(event) {
@@ -104,12 +107,14 @@ class Collector{
         });
     }
 
+
+
     shootList(tag,key,page=1){
         let me = this;
         $.ajax({
             url: 'ajax/list/' + key + '/' + page + '/',
             success: function(answer) {
-                $('.mosaic').html(answer)
+                $('.mosaic').html(answer);
                 me.prepareAjax();
                 me.rebootLinks();
             },
@@ -132,6 +137,16 @@ class Collector{
         me.heartbeat = setTimeout("co.runHeartbeat()", 500);
 
         /* List based actions (Those rebuild the list everytime) */
+
+
+        $('.keyword_tag').off().on('click',function(event){
+            event.preventDefault();
+            event.stopPropagation();
+            let label = $(this).attr('code');
+            $('#customize').val(label);
+            $('#menu_search').click();
+        });
+
 
         $('.nav').off().on('click', function(event) {
             event.preventDefault();
@@ -352,13 +367,13 @@ class Collector{
                 type:"POST",
                 url: '/ajax/profile/',
                 success: function(answer){
-                    $('.details').html(answer);
+                    $('.mosaic').html(answer);
                     console.log('profile ok')
                     me.rebootLinks();
                 },
                 error: function(answer) {
                     console.log('Error!!!')
-                    $('.details').html(answer);
+                    $('.mosaic').html(answer);
                     me.rebootLinks();
                 }
             });
@@ -588,11 +603,12 @@ class Collector{
             $.ajax({
                 url: 'ajax/tile/avatar/' + id + '/',
                 success: function(answer) {
-                    console.log(answer);
                     $('#tile_'+id).html(answer);
+                    me.rebootLinks();
                 },
                 error: function(answer) {
                     console.error(answer);
+                    me.rebootLinks();
                 },
             });
         });

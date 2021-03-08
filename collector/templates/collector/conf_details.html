@@ -1,25 +1,27 @@
 {% load fics_filters %}
 {% csrf_token %}
-<div class="tile storyview">
-    <div class="epic_wrap">
-        <div class='title'>
-            <div class='chapter'>&nbsp;</div>
-            <h1>{{ epic.title }}</h1>
-            <div class='storybar epic'>
-                <p class='epic_{{epic.data.id}}'>
-                    <button class='compact episode_cast' id='c-epic-{{epic.data.id}}' page='1'>Epic</button>
-                    <button class='compact view_epic' id='{{epic.data.id}}'>View</button>
-                    <button class='compact edit_epic' id='{{epic.data.id}}'>Edit</button>
-                    <button class='compact hide_epic' id='{{epic.data.id}}'>Close</button>
-                    <button class='compact add_drama' id='{{epic.data.id}}'>Add</button>
-                </p>
+<div class="fresque">
+    <div class="tile storyview">
+        <div class="epic_wrap">
+            <div class='title'>
+                <div class='chapter'>&nbsp;</div>
+                <h1>{{ epic.title }}</h1>
+                <div class='storybar epic'>
+                    <p class='epic_{{epic.data.id}}'>
+                        <button class='compact episode_cast' id='c-epic-{{epic.data.id}}' page='1'>Epic</button>
+                        <button class='compact view_epic' id='{{epic.data.id}}'>View</button>
+                        <button class='compact edit_epic' id='{{epic.data.id}}'>Edit</button>
+                        <button class='compact hide_epic' id='{{epic.data.id}}'>Close</button>
+                        <button class='compact add_drama' id='{{epic.data.id}}'>Add</button>
+                    </p>
+                </div>
             </div>
-        </div>
-        <div class='storyarticle epic' id='epic_{{epic.data.id}}'>
+            <div class='storyarticle epic' id='epic_{{epic.data.id}}'>
 
-        </div>
-        {% for drama in epic.dramas %}
+            </div>
+            {% for drama in epic.dramas %}
             {% include "collector/config/drama_detail.html" with c=drama %}
-        {% endfor %}
+            {% endfor %}
+        </div>
     </div>
 </div>

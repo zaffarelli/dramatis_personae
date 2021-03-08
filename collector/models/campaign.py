@@ -26,7 +26,6 @@ class Campaign(models.Model):
     class Meta:
         ordering = ['title', 'epic']
         verbose_name = "References: Campaign Config"
-
     from scenarist.models.epics import Epic
     from scenarist.models.dramas import Drama
     from django.contrib.auth.models import User

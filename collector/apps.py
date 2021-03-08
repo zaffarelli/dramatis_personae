@@ -13,3 +13,4 @@ class CollectorConfig(AppConfig):
         import collector.signals.coc7
         import collector.signals.skill
         import collector.signals.benefice_affliction
+        import collector.signals.character

@@ -94,17 +94,36 @@ def as_bullets_short_wildcard(value):
         return "ERROR!"
 
 
+def char_to_tag(sym,tag,src_txt,changes,prefix='',paragraph=False):
+    search = "[A-Za-z0-9\é\è\ô\ö\à\s\.\'\;\-\(\)\&\:\,]+"
+    pattern = f'\{sym}{search}\{sym}'
+    seeker = re.compile(pattern)
+    iter = seeker.finditer(src_txt)
+    for item in iter:
+        occ = ''.join(item.group().split(sym))
+        if paragraph:
+            replacement_str = f'</p><{tag}>{prefix}{occ}</{tag}><p>'
+        else:
+            replacement_str = f'<{tag}>{prefix}{occ}</{tag}>'
+        changes.append({'src': item.group(), 'dst': replacement_str})
+        #print(f'(C2T:{sym}) --> {replacement_str}')
+    return
+
+
 @register.filter(name='parse_avatars')
 def parse_avatars(value):
     """ Replace avatars rids by html links in a text """
     value = "<br/>".join(value.split("\n"))
-    res = str(value)
-    txt = res
-    """ Characters """
-    seeker = re.compile('\¤(\w+)\¤')
+    txt = str(value)
     changes = []
-
-    iter = seeker.finditer(res)
+    # Simple replacements
+    char_to_tag('§','strong', txt, changes)
+    char_to_tag('£','em', txt, changes)
+    char_to_tag('=','h5', txt, changes,prefix='<i class="fa fa-square"></i> ')
+    char_to_tag('µ','h6', txt, changes,prefix='<i class="fa fa-minus"></i> ')
+    # Characters
+    seeker = re.compile('\¤(\w+)\¤')
+    iter = seeker.finditer(txt)
     for item in iter:
         rid = ''.join(item.group().split('¤'))
         try:
@@ -112,19 +131,17 @@ def parse_avatars(value):
         except Character.DoesNotExist:
             ch = None
         if ch is not None:
-            repstr = '<span id="%d" class="character_link embedded_link" title="%s:\n%s">%s %s</span>' % (
+            replacement_string = '<span id="%d" class="character_link embedded_link" title="%s:\n%s">%s %s</span>' % (
                 ch.id, ch.full_name, ch.entrance, ch.full_name,
                 "<i class='fa fa-angle-double-up'></i>" if ch.balanced == True else "<i class='fa fa-angle-double-down'></i>")
         else:
-            repstr = '<span class="embedded_link broken">[%s&dagger;]</span>' % (rid)
-        changes.append({'src': item.group(), 'dst': repstr})
-        print(repstr)
-
-    """ Ships """
+            replacement_string = '<span class="embedded_link broken">[%s&dagger;]</span>' % (rid)
+        changes.append({'src': item.group(), 'dst': replacement_string})
+        print(replacement_string)
+    # Ships
     sym = '^'
-    seeker = re.compile('\^(\w+)\^')
-    res = str(value)
-    iter = seeker.finditer(res)
+    seeker = re.compile(f'\^(\w+)\^')
+    iter = seeker.finditer(txt)
     for item in iter:
         rid = ''.join(item.group().split('^'))
         try:
@@ -132,43 +149,17 @@ def parse_avatars(value):
         except Spaceship.DoesNotExist:
             ch = None
         if ch is not None:
-            repstr = '<span id="%d" class="character_link embedded_link" title="%s">%s %s</span>' % (
+            replacement_string = '<span id="%d" class="character_link embedded_link" title="%s">%s %s</span>' % (
                 ch.id, ch.ship_ref, ch.full_name, "ok" if ch.ship_ref.ship_status == "combat_ready" else "&dagger;")
         else:
-            repstr = '<span class="embedded_link broken">[%s&dagger;]</span>' % (rid)
-        changes.append({'src': item.group(), 'dst': repstr})
+            replacement_string = '<span class="embedded_link broken">[%s&dagger;]</span>' % (rid)
+        changes.append({'src': item.group(), 'dst': replacement_string})
 
-    """ Replace µ by subsection"""
-    sym = 'µ'
-    # search =  "[A-Za-z\s\.\'\;]+"
-    search = "[A-Za-z0-9\é\è\ô\ö\à\s\.\'\;\-\(\)\&\:\,]+"
-    myregex = "\%s%s\%s" % (sym, search, sym)
-    seeker = re.compile(myregex)
-
-    iter = seeker.finditer(txt)
-    for item in iter:
-        occ = ''.join(item.group().split(sym))
-        repstr = '<br/><em>%s</em><br/>' % (occ)
-        changes.append({'src': item.group(), 'dst': repstr})
-
-    """ Replace § by em"""
-    sym = '§'
-    search = "[A-Za-z0-9\é\è\ô\ö\à\s\.\'\;\-\(\)\&\:\,]+"
-    myregex = "\%s%s\%s" % (sym, search, sym)
-    seeker = re.compile(myregex)
-
-    iter = seeker.finditer(txt)
-    for item in iter:
-        occ = ''.join(item.group().split(sym))
-        repstr = '<strong>%s</strong>' % (occ)
-        changes.append({'src': item.group(), 'dst': repstr})
-
-    """ Replace ° by custom data"""
+    # Sleeve article
     sym = '°'
     search = "[A-Za-z0-9\é\è\ô\ö\à\s\.\'\;\-\(\)\&\:\,\_]+"
-    myregex = "\%s%s\%s" % (sym, search, sym)
-    seeker = re.compile(myregex)
-
+    pattern = "\%s%s\%s" % (sym, search, sym)
+    seeker = re.compile(pattern)
     iter = seeker.finditer(txt)
     for item in iter:
         occ = ''.join(item.group().split(sym))
@@ -199,7 +190,7 @@ def parse_avatars(value):
             repstr += "<p>%s</p>" % (loot.secret)
         repstr += "</div>"
         changes.append({'src': item.group(), 'dst': repstr})
-
+    # Apply all changes
     for change in changes:
         txt = txt.replace(change['src'], change['dst'])
     return txt

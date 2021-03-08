@@ -2,11 +2,8 @@
 {% load fics_filters %}
 {% load fics_pdf_filters %}
 {% block article %}
-    <div id="header_content">
-        <img src='collector/static/collector/glyph.png' width='0.5cm'>
-    </div>
     <div id="footer_content">
-        [{{epic.data.printtime}}] <pdf:pagenumber> / <pdf:pagecount>
+        [{{epic.data.printtime}}] <pdf:pagenumber/> / <pdf:pagecount/>
     </div>
     {%if epic.data.image %}
     <img src='collector/static/collector/{{epic.data.image}}.png' width='12cm'>
@@ -14,33 +11,27 @@
     <h1>{{ epic.title }}</h1>
     {%endif%}
     {% include 'collector/pdf/article_info.html' with c=epic%}
-    <!-- h5>Description</h5 -->
     <P>{{ epic.data.description|linebreaks|parse_avatars_pdf|safe }}</P>
     <div class='toc'>
+        <pdf:toc />
     </div>
     {% for drama in epic.dramas %}
         {% if drama.data.to_PDF %}
-        <pdf:nextframe>
+        <pdf:nextframe />
         <h2>Chapter {{drama.data.chapter|as_roman}} - {{ drama.title }}</h2>
         {% include 'collector/pdf/article_info.html' with c=drama%}
-        <!-- h5>Presentation</h5 -->
         <P>{{ drama.data.description|linebreaks|parse_avatars_pdf|safe }}</P>
-        <!-- h5>Resolution</h5 -->
         <P>{{ drama.data.resolution|linebreaks|parse_avatars_pdf|safe }}</P>
         {% for act in drama.acts %}
             {% if act.data.to_PDF %}
             <h3><span class='small'>{{act.data.full_chapter}}&nbsp;</span> {{ act.title }}</h3>
             {% include 'collector/pdf/article_info.html' with c=act%}
-            <!-- h5>Presentation</h5 -->
             <P>{{ act.data.description|linebreaks|parse_avatars_pdf|safe }}</P>
-            <!-- h5>Resolution</h5 -->
             <P>{{ act.data.resolution|linebreaks|parse_avatars_pdf|safe }}</P>
             {% for event in act.events %}
                 <h4><span class='small'>{{event.data.full_chapter}}&nbsp;</span> {{ event.title }}</h4>
                 {% include 'collector/pdf/article_info.html' with c=event%}
-                <!-- h5>Presentation</h5 -->
                 <P>{{ event.data.description|linebreaks|parse_avatars_pdf|safe }}</P>
-                <!-- h5>Resolution</h5 -->
                 <P>{{ event.data.resolution|linebreaks|parse_avatars_pdf|safe }}</P>
             {% endfor %}
             {% endif %}

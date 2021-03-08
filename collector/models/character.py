@@ -5,10 +5,7 @@
 """
 from django.db import models
 from datetime import datetime
-from django.db.models.signals import pre_save
-from django.dispatch import receiver
 from django.urls import reverse
-import hashlib
 from collector.models.fics_models import Specie
 from collector.models.combattant import Combattant
 from collector.models.alliance_ref import AllianceRef
@@ -21,14 +18,6 @@ import json
 from colorfield.fields import ColorField
 
 logger = logging.getLogger(__name__)
-
-
-# def json_default(value):
-#     import datetime
-#     if isinstance(value, datetime.date):
-#         return dict(year=value.year, month=value.month, day=value.day)
-#     else:
-#     return value.__dict__
 
 
 DRAMA_SEATS = (
@@ -51,28 +40,19 @@ class Character(Combattant):
     class Meta:
         ordering = ['full_name']
         verbose_name = "FICS: Character"
-
     page_num = 0
-
     alias = models.CharField(max_length=200, default='', blank=True)
     alliance = models.CharField(max_length=200, default='', blank=True)
     faction = models.CharField(max_length=200, default='', blank=True)
     alliance_hash = models.CharField(max_length=200, default='none')
-
     alliance_ref = models.ForeignKey(AllianceRef, blank=True, null=True, on_delete=models.SET_NULL)
-
     specie = models.ForeignKey(Specie, default=31, blank=True, null=True, on_delete=models.SET_NULL)
     race = models.TextField(max_length=256, default='', blank=True)
-
     native_fief = models.CharField(max_length=200, default='none')
-
     fief = models.ForeignKey(System, blank=True, null=True, on_delete=models.SET_NULL, related_name= 'fief')
     current_fief = models.ForeignKey(System, blank=True, null=True, on_delete=models.SET_NULL, related_name= 'current_fief')
-
-
     caste = models.CharField(max_length=100, default='Freefolk')
     rank = models.CharField(max_length=100, default='', blank=True)
-
     build_log = models.TextField(default='', blank=True)
     PA_STR = models.PositiveIntegerField(default=1)
     PA_CON = models.PositiveIntegerField(default=1)
@@ -86,7 +66,6 @@ class Character(Combattant):
     PA_TEC = models.PositiveIntegerField(default=1)
     PA_AGI = models.PositiveIntegerField(default=1)
     PA_AWA = models.PositiveIntegerField(default=1)
-
     SA_REC = models.IntegerField(default=0)
     SA_STA = models.IntegerField(default=0)
     SA_END = models.IntegerField(default=0)
@@ -112,9 +91,7 @@ class Character(Combattant):
     score = models.IntegerField(default=0)
     gm_shortcuts = models.TextField(default='', blank=True)
     gm_shortcuts_pdf = models.TextField(default='', blank=True)
-
     team = models.CharField(max_length=128,choices=DRAMA_SEATS,default='06-neutral',blank=True)
-
     OCC_LVL = models.PositiveIntegerField(default=0)
     OCC_DRK = models.PositiveIntegerField(default=0)
     occult = models.CharField(max_length=50, default='', blank=True)
@@ -139,7 +116,6 @@ class Character(Combattant):
     nameless = models.BooleanField(default=False)
     error = models.BooleanField(default=False)
     ranking = models.IntegerField(default=0, blank=True)
-
     group_color = ColorField(default='#888888', blank=True)
     color = ColorField(default='#CCCCCC', blank=True)
     skills_options = []
@@ -519,6 +495,12 @@ class Character(Combattant):
             Warning: Keep the model imports right here. PyCharm will not see that we are actually using these models
             as we are using string to model to handle all of this.
         """
+        from collector.models.benefice_affliction import BeneficeAfflictionRef
+        from collector.models.blessing_curse import BlessingCurseRef
+        from collector.models.weapon import WeaponRef
+        from collector.models.armor import ArmorRef
+        from collector.models.shield import ShieldRef
+        from collector.models.ritual import RitualRef
         o = []
         o_n = []
         custo_items = custo_set
@@ -575,7 +557,6 @@ class Character(Combattant):
         return skill
 
     def remove_or_update_skill(self, askill, modifier=0, stack=False):
-        # from cartograph.models.skill import Skill
         found_skill = self.skill_set.all().filter(skill_ref=askill).first()
         if found_skill:  # There is no reason not to find the skill...
             found_skill.value -= modifier
@@ -596,7 +577,6 @@ class Character(Combattant):
             return bc
 
     def remove_bc(self, aref):
-        # from cartograph.models.blessing_curse import BlessingCurse
         found_bc = self.blessingcurse_set.all().filter(blessing_curse_ref=aref).first()
         if found_bc:
             found_bc.delete()
@@ -693,10 +673,8 @@ class Character(Combattant):
             ba = BeneficeAffliction()
             ba.character = self
             ba.benefice_affliction_ref = aref
-            # print("ADD_BA " + adesc)
             ba.description = adesc
             ba.save()
-            # print("ADD_BA (after) " + ba.description)
             return ba
 
     def remove_ba(self, aref):
@@ -889,19 +867,3 @@ class Character(Combattant):
         return self.stories_count
 
 
-@receiver(pre_save, sender=Character, dispatch_uid='update_character')
-def update_character(sender, instance, conf=None, **kwargs):
-    """ Before saving, fix() and  get_RID() for the character """
-    instance.get_rid(instance.full_name)
-    instance.alliance_hash = hashlib.sha1(bytes(instance.alliance, 'utf-8')).hexdigest()
-    instance.pub_date = datetime.now(tz=get_current_timezone())
-
-# @receiver(post_save, sender=Character, dispatch_uid='backup_character')
-# def backup_character(sender, instance, **kwargs):
-#     """ After saving, create PDF for the character """
-#     # if instance.rid != 'none':
-#     #     from cartograph.tasks import build_pdf
-#     #     build_pdf.delay(instance.rid)
-#     # if instance.rid != 'none':
-#     #     instance.backup()
-#     pass

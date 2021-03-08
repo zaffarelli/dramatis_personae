@@ -1,11 +1,12 @@
-<script>
-    var popdata = {{cdata|safe}}
-    popdata.options['onClick'] = co.keywordHandlerClick
-    var ctx = document.getElementById('{{cname}}').getContext('2d');
-    var {{cname}} = new Chart(ctx, popdata);
-
-    Chart.defaults.global.defaultFontColor = 'white'
-    Chart.defaults.global.defaultFontSize = 10
-    Chart.defaults.global.defaultFontFamily = 'Texte'
-</script>
-<canvas id="{{cname}}" width=250 height=750></canvas>
+<div class="keywords_stack">
+    {% for k in cdata.keywords %}
+    <div class="keyword_tag" code="{{k.name}}">
+        <strong>{{k.name}}</strong><em>{{k.count}}</em>
+    </div>
+    {% endfor %}
+    {% for k in edata.dramas %}
+    <div class="keyword_tag drama" code="{{k.code}}">
+        <em>{{k.chapter}}</em><strong>{{k.drama}}</strong>
+    </div>
+    {% endfor %}
+</div>

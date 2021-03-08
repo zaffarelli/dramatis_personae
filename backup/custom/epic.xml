@@ -2,9 +2,8 @@
 <django-objects version="1.0"><object model="scenarist.epic" pk="1"><field name="title" type="CharField">Default Epic</field><field name="chapter" type="CharField"></field><field name="date" type="CharField"></field><field name="place" type="CharField"></field><field name="description" type="TextField">A blank epic to which everything will belong to.</field><field name="gamemaster" type="CharField">you@here.com</field><field name="visible" type="BooleanField">True</field><field name="to_PDF" type="BooleanField">True</field><field name="full_id" type="CharField">blank_epic</field><field name="era" type="IntegerField">5019</field><field name="shortcut" type="CharField">blank_epic</field><field name="image" type="CharField"></field><field name="system" type="CharField"></field></object><object model="scenarist.epic" pk="2"><field name="title" type="CharField">Doramos Ab Irato</field><field name="chapter" type="CharField"></field><field name="date" type="CharField"></field><field name="place" type="CharField"></field><field name="description" type="TextField">"Doramos, full with anger..."
 -- Omega Gospels, Book 37, folio 6.</field><field name="gamemaster" type="CharField">zaffarelli@gmail.com</field><field name="visible" type="BooleanField">True</field><field name="to_PDF" type="BooleanField">True</field><field name="full_id" type="CharField">doramos_ab_irato</field><field name="era" type="IntegerField">5005</field><field name="shortcut" type="CharField">doramos_ab_irato</field><field name="image" type="CharField"></field><field name="system" type="CharField"></field></object><object model="scenarist.epic" pk="3"><field name="title" type="CharField">Abusus Non Tollit Usum</field><field name="chapter" type="CharField">2</field><field name="date" type="CharField">5018</field><field name="place" type="CharField">Grail</field><field name="description" type="TextField">"Abuse do not forbid usage."
 -- The Stellar Apocryphon, Book 59, folio 5 (proscribed by the Church)
-
-µImperial Crewµ
-§Typhoon crew§
+=Imperial Crew=
+µTyphoon crewµ
 - ¤calistre_digneden¤ (captain) (imperial cohort)
 - ¤floyd_carnau¤ (pilot)
 - ¤hans_zdravos¤ (engineer)
@@ -13,22 +12,19 @@
 - ¤ashoka_sensuki¤ (gunner)
 - ¤alia_croft¤
 - ¤fiona_denguerrand¤
-
-§Winterbreeze Escort crew§
+µWinterbreeze Escort crewµ
 - ¤andrea_masseri¤ (captain)
 - ¤lucia_masseri¤ (pilot)
 - ¤gail_hardin¤ (engineer)
 - ¤fenton_hardin¤ (gunner)
 - ¤annabella_masseri¤ (gunner)
-
-§Frigate the Hurrinace crew§
+µFrigate the Hurrinace crewµ
 - ¤syark_sir_sic¤ (Etyri pilot)
 - ¤clara_masseri¤ (Imperial Questing Knight)
 - ¤francesco_masseri¤ (Amalthean Missionary)
 - ¤ravi_lobahura¤ (Eskatonic Deacon)
 - ¤enzo_contura¤
 - ¤nina_masseri¤
-
 µSpaceshipsµ
 ^Aeolus^
 ^Typhoon^

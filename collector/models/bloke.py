@@ -26,7 +26,11 @@ class Bloke(models.Model):
     description = models.TextField(default='', max_length=1024, blank=True, null=True)
 
     def __str__(self):
-        return f'{self.character.rid} > ({self.level}) > {self.npc.rid}'
+        try:
+            src = self.character.rid
+        except:
+            src= 'blank'
+        return f'{src} > ({self.level}) > {self.npc.rid}'
 
 
 class BlokeInline(admin.TabularInline):

@@ -20,7 +20,7 @@
     }
 
     & .title {
-        border: 1px solid $fics_darker;
+        border: 1px solid transparent;
 
         flex:0 0 auto;
         flex-flow: row nowrap;
@@ -33,7 +33,8 @@
             color: $fics_frontest;
             text-align: center;
             font-family: NomPerso;
-            font-size: 1.1em;
+            font-size: 1.25em;
+            width:5ex;
             flex: 0 0 150px;
 
             &.big {
@@ -51,10 +52,10 @@
             font-height: 24px;
             text-align: left;
 
+
         }
 
         & h3 {
-
             font-height: 20px;
             text-align: left;
         }
@@ -196,9 +197,9 @@
                             column-count: 2;
                             column-width: auto;
                             column-gap: 20px;
-                            column-rule-style: dotted;
+                            column-rule-style: solid;
                             column-rule-width: 1px;
-                            column-rule-color: $fics_front;
+                            column-rule-color: $fics_darker;
                             line-height: 1.4em;
                             min-height: 150px;
 
@@ -370,6 +371,51 @@
 
 
 .storyview {
+    & h2{
+        font-size: 2.0em;
+        margin:0;
+        font-weight:bold;
+        font-variant:small-caps;
+    }
+
+    & h3{
+        font-size: 1.8em;
+        margin:0;
+        font-weight:bold;
+        font-variant:small-caps;
+    }
+    & h4{
+        font-size: 1.8em;
+        margin:0;
+        font-weight:bold;
+        font-variant:small-caps;
+    }
+
+    & h5{
+        font-size: 1.6em;
+        margin-top:0.8em;
+        font-weight:bold;
+        font-variant:small-caps;
+    }
+    & h6{
+        font-size: 1.4em;
+        margin:0;
+    }
+    & h1, & h2, & h3, & h4, & h5, & h6{
+        display:inline-block;
+        width:100%;
+        margin:0;
+        color: #fd6;
+    }
+
+    & em{
+        color: #fe8;
+    }
+
+    & strong{
+        color: #fe8;
+    }
+
     & .epic_wrap {
         display: flex;
         flex-flow: column nowrap;

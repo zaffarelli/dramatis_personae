@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from collector.models.character import Character
 from scenarist.models.epics import Epic
+from collector.models.campaign import Campaign
 from django.contrib import admin
 
 

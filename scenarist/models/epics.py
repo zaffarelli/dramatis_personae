@@ -45,11 +45,11 @@ class Epic(StoryModel):
         ok = []
         from collector.models.character import Character
         from collector.models.investigator import Investigator
-        for x in list:
-            if self.campaign.is_coc7:
-                ch = Investigator.objects.filter(rid=x).first()
-            else:
-                ch = Character.objects.filter(rid=x).first()
+        for rid in list:
+            # if self.campaign.is_coc7:
+            #     ch = Investigator.objects.filter(rid=rid).first()
+            # else:
+            ch = Character.objects.filter(rid=rid).first()
             it = ch.full_name
             if ch.is_dead:
                 it += "(&dagger;)"
@@ -57,7 +57,6 @@ class Epic(StoryModel):
                 ok.append(it)
             else:
                 nok.append(it)
-
         return ", ".join(ok)+"<hr/>"+", ".join(nok)
 
     def get_absolute_url(self):

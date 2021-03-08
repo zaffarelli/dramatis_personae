@@ -96,21 +96,10 @@
             //background: transparent url($logo) 100% 100% no-repeat;
             & .menu_block {
             }
-/*
-             & .port {
-                 flex-basis:300px;
-                 order:1;
-             }
-*/
         & .port{
             display: none;
         }
             & .details {
-/*
-                flex-grow:1;
-                order:2;
-                flex-shrink:1;
-*/
                 display: none;
             }
             & .mosaic {
@@ -142,7 +131,7 @@
 .mosaic{
     width:100%;
     display:flex;
-    flex-flow: row wrap;
+    flex-flow:column wrap;
     justify-content:flex-start;
     align-items:flex-start;
     align-content:flex-start;
@@ -175,7 +164,7 @@
         }
 
         &.team_01-friend{
-            border-color:#124;
+            border-color:#36C;
             border-style:ridge;
         }
 
@@ -185,7 +174,7 @@
         }
 
         &.team_03-servant{
-            border-color:#36C;
+            border-color:#124;
             border-style:ridge;
         }
 
@@ -399,20 +388,20 @@
                 text-align:justify;
 
                 &.epic{
-                    border-left:5px solid purple;
+                    border-left:5px solid #848;
                     background:transparent;
                 }
                 &.drama{
-                    border-left:5px solid red;
+                    border-left:5px solid #737;
                     background:transparent;
                 }
 
                 &.act{
-                    border-left:5px solid orange;
+                    border-left:5px solid #626;
                     background:transparent;
                 }
                 &.event{
-                    border-left:5px solid yellow;
+                    border-left:5px solid #515;
                     background:transparent;
                 }
 
@@ -447,7 +436,7 @@
                 }
 
                 & .wall{
-                    flex-order:1;
+                    order:2;
                     width:400px;
                     display:flex;
                     flex-flow:row wrap;
@@ -460,17 +449,78 @@
 
                 & .pitch{
                     display:block;
-                    flex-order:2;
+                    order:1;
                     flex-grow:5;
                     columns:2;
-                    column-gap:10px;
-                    column-rule:3px double $fics_light;
+                    column-gap:40px;
+                    column-rule:1px solid $fics_darker;
                     width:500px;
                     padding:5px;
                 }
             }
         }
 
+    }
+
+
+    & .fresque{
+        display:flex;
+        flex-flow:row wrap;
+        justify-content: flex-start;
+        background:$fics_darker;
+        margin:5px;
+        border-radius:8px;
+        flex-grow:1;
+        flex-shrink:1;
+        width:100%;
+        border: 1px solid $fics_light;
+        box-shadow:0 0 5px $fics_darkest;
+        &.top{
+            order:1;
+        }
+        &.middle{
+            order:2;
+        }
+        &.bottom{
+            order:3;
+        }
+        & .tile.info{
+            display: flex;
+            flex-flow: column nowrap;
+            justify-content: flex-start;
+            align-items: flex-start;
+            align-content: flex-start;
+            color:$fics_front;
+
+            & .plank{
+                flex-flow: row-reverse nowrap;
+                justify-content: flex-end;
+                align-items: flex-end;
+                align-content: flex-end;
+                padding:3px;
+                border-radius: 3px;
+                border: 1px solid $fics_lighter;
+                margin:2px;
+                background:$fics_darker;
+                width:95%;
+                & strong{
+                    order:1;
+                    background: $fics_darker;
+                    color:$fics_front;
+                    margin:0 4px;
+                    min-width:20ex;
+                }
+
+                & em{
+                    order:2;
+                    width: 5em;
+                    background: $fics_darker;
+                    color:$fics_golden;
+                    text-align:center;
+                    font-style:normal;
+                }
+            }
+        }
     }
  }
 

@@ -146,7 +146,7 @@ Place an auction: PRE+Oratory against the response DV to get the voice.
 
 
 
----</field><field name="gamemaster" type="CharField">zaffarelli@gmail.com</field><field name="visible" type="BooleanField">True</field><field name="to_PDF" type="BooleanField">True</field><field name="full_id" type="CharField">DEM:07:03</field><field name="drama" rel="ManyToOneRel" to="scenarist.drama">7</field><field name="resolution" type="TextField"></field></object><object model="scenarist.act" pk="23"><field name="title" type="CharField">Al raa'ad yiildiz</field><field name="chapter" type="CharField">3</field><field name="date" type="CharField"></field><field name="place" type="CharField"></field><field name="description" type="TextField">µBad Guysµ The Kurgan al raa'ad yiildiz are the elite troops based on Verona.
+---</field><field name="gamemaster" type="CharField">zaffarelli@gmail.com</field><field name="visible" type="BooleanField">True</field><field name="to_PDF" type="BooleanField">True</field><field name="full_id" type="CharField">DEM:07:03</field><field name="drama" rel="ManyToOneRel" to="scenarist.drama">7</field><field name="resolution" type="TextField"></field></object><object model="scenarist.act" pk="23"><field name="title" type="CharField">Alra'ad yiildiz</field><field name="chapter" type="CharField">3</field><field name="date" type="CharField"></field><field name="place" type="CharField"></field><field name="description" type="TextField">µBad Guysµ The Kurgan al raa'ad yiildiz are the elite troops based on Verona.
 Commander ¤taashik_al_kalibann¤ is an honorable officer. Highly respected by his men and ennemies alike.
 Prophetess ¤zarosinia_al_shazaar¤
 
@@ -154,7 +154,7 @@ Prophetess ¤zarosinia_al_shazaar¤
 - Capitano ¤juliana_zino¤
 - Capitano ¤tonino_vanini¤
 
----</field><field name="gamemaster" type="CharField">zaffarelli@gmail.com</field><field name="visible" type="BooleanField">True</field><field name="to_PDF" type="BooleanField">True</field><field name="full_id" type="CharField">ANTU:03:03</field><field name="drama" rel="ManyToOneRel" to="scenarist.drama">11</field><field name="resolution" type="TextField"></field></object><object model="scenarist.act" pk="24"><field name="title" type="CharField">Lurk on Rimpoche</field><field name="chapter" type="CharField">3</field><field name="date" type="CharField"></field><field name="place" type="CharField"></field><field name="description" type="TextField">§The Last Masseri§
+---</field><field name="gamemaster" type="CharField">zaffarelli@gmail.com</field><field name="visible" type="BooleanField">True</field><field name="to_PDF" type="BooleanField">True</field><field name="full_id" type="CharField">ANTU:03:03</field><field name="drama" rel="ManyToOneRel" to="scenarist.drama">11</field><field name="resolution" type="TextField"></field></object><object model="scenarist.act" pk="24"><field name="title" type="CharField">Lurk on Rimpoche</field><field name="chapter" type="CharField">3</field><field name="date" type="CharField"></field><field name="place" type="CharField"></field><field name="description" type="TextField">µThe Last Masseriµ
 - ¤arno_sforza¤
 - ¤kristof_ivanovicz¤
 
@@ -175,46 +175,13 @@ Prophetess ¤zarosinia_al_shazaar¤
 
 
 - ¤magnus_isaac¤</field><field name="gamemaster" type="CharField">zaffarelli@gmail.com</field><field name="visible" type="BooleanField">True</field><field name="to_PDF" type="BooleanField">True</field><field name="full_id" type="CharField">ANTU:01:02</field><field name="drama" rel="ManyToOneRel" to="scenarist.drama">10</field><field name="resolution" type="TextField"></field></object><object model="scenarist.act" pk="26"><field name="title" type="CharField">Night Road</field><field name="chapter" type="CharField">4</field><field name="date" type="CharField">5018-09-01</field><field name="place" type="CharField">Around Grail Jumpgate</field><field name="description" type="TextField">µNew horizonsµ Now it's time to test the §jumpkey§ the players have acquired.
-
-
-¤saskia_varnovicz¤
-
-
-
-
-
-
----
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
----</field><field name="gamemaster" type="CharField">zaffarelli@gmail.com</field><field name="visible" type="BooleanField">True</field><field name="to_PDF" type="BooleanField">True</field><field name="full_id" type="CharField">ANTU:01:04</field><field name="drama" rel="ManyToOneRel" to="scenarist.drama">10</field><field name="resolution" type="TextField"></field></object><object model="scenarist.act" pk="27"><field name="title" type="CharField">Remini Space Station</field><field name="chapter" type="CharField">1</field><field name="date" type="CharField"></field><field name="place" type="CharField"></field><field name="description" type="TextField">Meeting with the leaders of the Resistance Forces:
+¤saskia_varnovicz¤</field><field name="gamemaster" type="CharField">zaffarelli@gmail.com</field><field name="visible" type="BooleanField">True</field><field name="to_PDF" type="BooleanField">True</field><field name="full_id" type="CharField">ANTU:01:04</field><field name="drama" rel="ManyToOneRel" to="scenarist.drama">10</field><field name="resolution" type="TextField"></field></object><object model="scenarist.act" pk="27"><field name="title" type="CharField">Remini Space Station</field><field name="chapter" type="CharField">1</field><field name="date" type="CharField"></field><field name="place" type="CharField"></field><field name="description" type="TextField">=Command Center &amp; Control of the Gate=
+Meeting with the leaders of the offworld refugees:
 
 
 And the expedition:
 - ¤clara_masseri¤
-- ¤fenton_hardin¤ 
+- ¤fenton_hardin_masseri¤ 
 - ¤arno_sforza¤
 - ¤gail_hardin¤
 - ¤francesco_masseri¤
@@ -225,13 +192,15 @@ And the expedition:
 Others non Masseri
 - ¤jacob_tramel¤
 - ¤syark_sir_sic¤
-- ¤ravi_lobahura¤</field><field name="gamemaster" type="CharField">zaffarelli@gmail.com</field><field name="visible" type="BooleanField">True</field><field name="to_PDF" type="BooleanField">True</field><field name="full_id" type="CharField">ANTU:03:01</field><field name="drama" rel="ManyToOneRel" to="scenarist.drama">11</field><field name="resolution" type="TextField">Rimini station: crew 56,  marines 24, marauders 9
+- ¤ravi_lobahura¤</field><field name="gamemaster" type="CharField">zaffarelli@gmail.com</field><field name="visible" type="BooleanField">True</field><field name="to_PDF" type="BooleanField">True</field><field name="full_id" type="CharField">ANTU:03:01</field><field name="drama" rel="ManyToOneRel" to="scenarist.drama">11</field><field name="resolution" type="TextField">=Population=
+µReminiµ
+- crew 56
+- marines 24
+- marauders 9
+- starfighter pilots 16
+- Sons of Sathra 16
 
-§Crew§
-
-§Marines§
-
-§Marauders§</field></object><object model="scenarist.act" pk="28"><field name="title" type="CharField">Emptiness &amp; Loneliness</field><field name="chapter" type="CharField">4</field><field name="date" type="CharField"></field><field name="place" type="CharField"></field><field name="description" type="TextField">µWorld without WaterµThis episode is the discovery of Verona in its current state, with the dysfunctioning terraforming engine.
+The station can support 150 persons.</field></object><object model="scenarist.act" pk="28"><field name="title" type="CharField">Emptiness &amp; Loneliness</field><field name="chapter" type="CharField">4</field><field name="date" type="CharField"></field><field name="place" type="CharField"></field><field name="description" type="TextField">µWorld without WaterµThis episode is the discovery of Verona in its current state, with the dysfunctioning terraforming engine.
 µJoin the Resistanceµ
 µThe Kurgan Armyµ
 
@@ -250,7 +219,8 @@ Others non Masseri
 
 
 
----</field><field name="gamemaster" type="CharField">zaffarelli@gmail.com</field><field name="visible" type="BooleanField">True</field><field name="to_PDF" type="BooleanField">True</field><field name="full_id" type="CharField">ANTU:03:04</field><field name="drama" rel="ManyToOneRel" to="scenarist.drama">11</field><field name="resolution" type="TextField"></field></object><object model="scenarist.act" pk="29"><field name="title" type="CharField">Crack Pilot</field><field name="chapter" type="CharField">2</field><field name="date" type="CharField"></field><field name="place" type="CharField"></field><field name="description" type="TextField"></field><field name="gamemaster" type="CharField">zaffarelli@gmail.com</field><field name="visible" type="BooleanField">True</field><field name="to_PDF" type="BooleanField">True</field><field name="full_id" type="CharField">ANTU:03:02</field><field name="drama" rel="ManyToOneRel" to="scenarist.drama">11</field><field name="resolution" type="TextField"></field></object><object model="scenarist.act" pk="30"><field name="title" type="CharField">Expanding the Colony</field><field name="chapter" type="CharField">2</field><field name="date" type="CharField"></field><field name="place" type="CharField"></field><field name="description" type="TextField"></field><field name="gamemaster" type="CharField">zaffarelli@gmail.com</field><field name="visible" type="BooleanField">True</field><field name="to_PDF" type="BooleanField">True</field><field name="full_id" type="CharField">ANTU:02:02</field><field name="drama" rel="ManyToOneRel" to="scenarist.drama">12</field><field name="resolution" type="TextField"></field></object><object model="scenarist.act" pk="31"><field name="title" type="CharField">Another Keddah Fief</field><field name="chapter" type="CharField">1</field><field name="date" type="CharField"></field><field name="place" type="CharField">Rimpoche</field><field name="description" type="TextField">§Keddah Men§
+---</field><field name="gamemaster" type="CharField">zaffarelli@gmail.com</field><field name="visible" type="BooleanField">True</field><field name="to_PDF" type="BooleanField">True</field><field name="full_id" type="CharField">ANTU:03:04</field><field name="drama" rel="ManyToOneRel" to="scenarist.drama">11</field><field name="resolution" type="TextField"></field></object><object model="scenarist.act" pk="29"><field name="title" type="CharField">Crack Pilot</field><field name="chapter" type="CharField">2</field><field name="date" type="CharField"></field><field name="place" type="CharField"></field><field name="description" type="TextField">The conclusions from the flight test should be obvious: it takes an ace to bring a lander down the ground. More than this, it can be really hazardous to find a place to land properly due to the global ground condition.</field><field name="gamemaster" type="CharField">zaffarelli@gmail.com</field><field name="visible" type="BooleanField">True</field><field name="to_PDF" type="BooleanField">True</field><field name="full_id" type="CharField">ANTU:03:02</field><field name="drama" rel="ManyToOneRel" to="scenarist.drama">11</field><field name="resolution" type="TextField">=Numbers=
+&lt;tt&gt;TEC+Driving(Celestial Ship) DV 30&lt;/tt&gt;</field></object><object model="scenarist.act" pk="30"><field name="title" type="CharField">Expanding the Colony</field><field name="chapter" type="CharField">2</field><field name="date" type="CharField"></field><field name="place" type="CharField"></field><field name="description" type="TextField"></field><field name="gamemaster" type="CharField">zaffarelli@gmail.com</field><field name="visible" type="BooleanField">True</field><field name="to_PDF" type="BooleanField">True</field><field name="full_id" type="CharField">ANTU:02:02</field><field name="drama" rel="ManyToOneRel" to="scenarist.drama">12</field><field name="resolution" type="TextField"></field></object><object model="scenarist.act" pk="31"><field name="title" type="CharField">Another Keddah Fief</field><field name="chapter" type="CharField">1</field><field name="date" type="CharField"></field><field name="place" type="CharField">Rimpoche</field><field name="description" type="TextField">§Keddah Men§
 - ¤jasmina_keddah¤: The sheik cousin is in charge for everything Rimpoche.
 - ¤ezil_solomniac¤: This eskatonic priest is responsible for the well being and behavior of the outpost.
 - ¤mohammad_kuhnar¤: This serf has made a mission to track all changes concerning the position of the Beast of Rimpoche.
@@ -287,8 +257,14 @@ But his second, the treacherous McKean will do everything in her power to satisf
 
 
 
----</field></object><object model="scenarist.act" pk="32"><field name="title" type="CharField">Uncharted</field><field name="chapter" type="CharField">1</field><field name="date" type="CharField"></field><field name="place" type="CharField"></field><field name="description" type="TextField">¤tobias_frosth¤
----</field><field name="gamemaster" type="CharField">zaffarelli@gmail.com</field><field name="visible" type="BooleanField">True</field><field name="to_PDF" type="BooleanField">True</field><field name="full_id" type="CharField">ANTU:01:01</field><field name="drama" rel="ManyToOneRel" to="scenarist.drama">10</field><field name="resolution" type="TextField"></field></object><object model="scenarist.act" pk="35"><field name="title" type="CharField">Stellar Romance</field><field name="chapter" type="CharField">2</field><field name="date" type="CharField"></field><field name="place" type="CharField"></field><field name="description" type="TextField">Commander ¤helena_nordwick_hawkwood¤ and Captain 
+---</field></object><object model="scenarist.act" pk="32"><field name="title" type="CharField">Uncharted</field><field name="chapter" type="CharField">1</field><field name="date" type="CharField"></field><field name="place" type="CharField">Grail</field><field name="description" type="TextField">=Expanded domains=
+Two uncharted worlds are actually reachable through the Grail gate. Those worlds are Rimpoche, a dead world owned by ¤jasmina_keddah¤ on behalf of House Keddah and Verona, the mythic Masseri world lost a thousand years ago. 
+
+µRimpocheµ
+The death of the world is link to lockdown of an annunaki leaving on the planet.
+
+µVeronaµ
+Some contacts have actually been made with Verona since about ten years, has a few Masseri still have the key to the system. However, this is not through common processes that they go through the gate. Some of them, among the Sathraist have special means to reach the §Sons of Sathra§ dwelling on the the other side.</field><field name="gamemaster" type="CharField">zaffarelli@gmail.com</field><field name="visible" type="BooleanField">True</field><field name="to_PDF" type="BooleanField">True</field><field name="full_id" type="CharField">ANTU:01:01</field><field name="drama" rel="ManyToOneRel" to="scenarist.drama">10</field><field name="resolution" type="TextField"></field></object><object model="scenarist.act" pk="35"><field name="title" type="CharField">Stellar Romance</field><field name="chapter" type="CharField">2</field><field name="date" type="CharField"></field><field name="place" type="CharField"></field><field name="description" type="TextField">Commander ¤helena_nordwick_hawkwood¤ and Captain 
 ¤markus_van_delph¤
 
 

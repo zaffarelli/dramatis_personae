@@ -1,5 +1,5 @@
 {% load fics_filters %}
-
+<div class="fresque top">
 <div class='tile' id='pag'>
   {% if character_items %}
   <div class='pagination'>
@@ -39,14 +39,14 @@
   {% endif %}
   </div>
 </div>
-
-
+</div>
+<div class="fresque middle">
 {% for k in character_items %}
   <div class='tile team_{{k.team}}' id='tile_{{k.id}}'>
     {% include "collector/character_tile.html" with c=k %}
   </div>
 {% endfor %}
-
+</div>
 
 
 

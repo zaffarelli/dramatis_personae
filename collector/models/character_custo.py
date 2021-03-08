@@ -198,6 +198,4 @@ class CharacterCusto(models.Model):
                 skill_custo.save()
 
 
-@receiver(pre_save, sender=CharacterCusto, dispatch_uid='update_character_custo')
-def update_character_custo(sender, instance, conf=None, **kwargs):
-    instance.recalculate()
+

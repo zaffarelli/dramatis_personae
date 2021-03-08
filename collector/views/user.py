@@ -6,6 +6,7 @@ from django.shortcuts import render
 from collector.forms.user import LoginForm
 from django.contrib import messages
 from collector.models.character import Character
+from collector.models.bloke import Bloke
 from django.template.loader import get_template
 
 
@@ -33,11 +34,29 @@ def do_login(request):
         return render(request, 'collector/login.html', {'form': form})
 
 
+
 def do_profile(request):
     if request.method == "POST":
-
-        character_items = Character.objects.filter(player=request.user.username.capitalize())
-        context = {'character_items': character_items}
+        from collector.models.character import DRAMA_SEATS
+        main_characters = Character.objects.filter(player=request.user.username.capitalize())
+        blokes = Bloke.objects.filter(character__in=main_characters)
+        blokes_characters = []
+        for b in blokes:
+            b.npc.intimacy = b.level
+            blokes_characters.append(b.npc)
+        full_lists = {}
+        for team in reversed(DRAMA_SEATS):
+            full_lists[team[1]] = []
+        for b in blokes_characters:
+            try:
+                x = b.get_team_display()
+                full_lists[x].append(b)
+            except:
+                pass
+        for team in reversed(DRAMA_SEATS):
+            if len(full_lists[team[1]]) == 0:
+                full_lists.pop(team[1])
+        context = {'main_characters':main_characters,'blokes': full_lists}
         template = get_template('collector/profile.html')
         html = template.render(context, request)
         messages.info(request, f'Display {request.user.username.capitalize()} profile.')

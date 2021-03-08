@@ -1,54 +1,48 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
 <html lang="en">
   <head>
-		{% load static %}
+    {% load static %}
     <meta charset="utf-8" />
     <title>{{c.full_name|safe}}</title>
-
     <style>
-
 @font-face {
-  font-family: 'Texte';
-  src: url('collector/static/collector/fonts/RobotoCondensed-Regular.ttf');
-}
-
-
-
-@font-face {
-  font-family: 'Texte';
-  font-weight:bold;
-  src: url('collector/static/collector/fonts/RobotoCondensed-Regular.ttf');
+  font-family: 'Text';
+  src: url('collector/static/collector/fonts/BarlowCondensed-Regular.ttf');
 }
 
 @font-face {
-  font-family: 'Texte';
-  font-style:italic;
+  font-family: 'Text';
+  font-style: italic;
+  src: url('collector/static/collector/fonts/BarlowCondensed-RegularItalic.ttf');
+}
+
+@font-face {
+  font-family: 'Text';
+  font-weight: bold;
+  font-style: italic;
+  src: url('collector/static/collector/fonts/BarlowCondensed-BoldItalic.ttf');
+}
+
+@font-face {
+  font-family: 'Text';
+  font-weight: bold;
+   src: url('collector/static/collector/fonts/BarlowCondensed-Bold.ttf');
+}
+
+@font-face {
+  font-family: 'Title';
+  src: url('collector/static/collector/fonts/Eczar-SemiBold.ttf');
+}
+
+@font-face {
+  font-family: 'Roster';
   src: url('collector/static/collector/fonts/Dosis-Regular.ttf');
 }
 
 @font-face {
-  font-family: 'Texte';
-  font-style:italic;
-  font-weight:bold;
-  src: url('collector/static/collector/fonts/Dosis-Bold.ttf');
-}
-
-
-@font-face {
-  font-family: 'Emphase';
-  src: url('collector/static/collector/fonts/Oswald-Regular.ttf');
-}
-
-@font-face {
-  font-family: 'Roster';
-  src: url('collector/static/collector/fonts/RobotoCondensed-Regular.ttf');
-
-}
-
-@font-face {
   font-family: 'Roster';
   font-style:italic;
-  src: url('http://www.fontsaddict.com/fontface/roboto-condensed-italic.ttf');
+  src: url('http://www.fontsaddict.com/fontface/Dosis-Italic.ttf');
 }
 
 @font-face {
@@ -58,19 +52,14 @@
 }
 
 @font-face {
-  font-family: 'Section';
-  src: url('collector/static/collector/fonts/Oswald-Bold.ttf');
+  font-family: 'Roster';
+  font-weight:bold;
+  font-style:italic;
+  src: url('collector/static/collector/fonts/Dosis-BoldItalic.ttf');
 }
 
-@font-face {
-  font-family: 'Section3';
-  src: url('collector/static/collector/fonts/Oswald-SemiBold.ttf');
-}
 
-@font-face {
-  font-family: 'Section2';
-  src: url('collector/static/collector/fonts/Oswald-Medium.ttf');
-}
+
 
 @page {
   size: a4 portrait;
@@ -80,116 +69,99 @@
     top: 1.5cm;
     height:27cm;
     padding:0.125cm;
-    border:1px solid #EEE;
-  }
 
+  }
   @frame col_right {
     right: 0.4cm;
     width: 10cm;
     top: 1.5cm;
     height: 27cm;
     padding:0.125cm;
-    border:1px solid #EEE;
-  }
 
+  }
   @frame header_frame {
     -pdf-frame-content: header_content;
-
-    right: 0.5cm;
+    right: 1cm;
     width: 0.5cm;
-    top: 0.5cm;
+    top: 1cm;
     height: 1cm;
     text-align:right;
+
+  }
+  @frame footer_frame {
+    -pdf-frame-content: footer_content;
+    left:0.5cm;
+    width:20cm;
+    right:0.5cm;
+    bottom:0.6cm;
+    height: 0.5cm;
   }
 
-    @frame footer_frame {
-        -pdf-frame-content: footer_content;
-        left:0.5cm;
-        width:20cm;
-        right:0.5cm;
-        bottom:0.6cm;
-        height: 0.5cm;
-    }
 }
 
 #footer_content{
-    font-family:Texte;
     font-size:7pt;
     text-align:center;
     font-weight: bold;
+    font-family: Text;
 }
 
 .info {
   padding:0;
   margin:0;
-  font-family:Texte;
   font-size:8pt;
   margin-bottom: 0.8em;
+  font-family: Text;
 }
 
 .info th{
     text-align:left;
     margin-right:1ex;
+    font-family: Text;
 }
 
-
 h1, h2, h3, h4, h5, h6{
+    display: inline-block;
+    font-family:Title;
+    width:100%;
     margin:0;
     padding:0;
+    border-left: 3px solid #A02020;
 }
 
 h1{
-    font-family:'Section';
     font-size:20pt;
-    font-weight:600;
-    color:#404040;
+    font-weight:bold;
 }
 
 h2{
-    font-family:'Section2';
-    font-size:15pt;
-    color:#101010;
+    font-size:18pt;
     text-align:center;
-    line-height:0.75em;
-    margin-bottom:1em;
-
 }
 
 h3{
-    font-family:'Section2';
-    font-size:14pt;
-    margin-top:1em;
-    -pdf-keep-with-next: true;
-}
+    font-size:16pt;
+ }
 
 h4{
-    font-family:'Section2';
-    font-size:12pt;
-    font-variant: small-caps;
-    margin-top:0.8em;
-    -pdf-keep-with-next: true;
+    font-size:14pt;
+
 }
 
 h5{
-    font-family:'Section';
+    font-size:12pt;
+    margin:0;
+    padding:0;
+ }
+
+
+
+
+h6{
     font-size:10pt;
     margin:0;
     padding:0;
-    margin-top:0.5em;
-    color:#202020;
-    font-variant: small-caps;
-
-    -pdf-keep-with-next: true;
-}
-
-h6{
-    font-family:'Section';
-    font-size:8pt;
-    margin:0;
-    margin-top:0.5em;
-    padding:0;
-    color:#303030;
-    -pdf-keep-with-next: true;
+   -pdf-keep-with-next: true;
 }
 
 code{
@@ -201,51 +173,52 @@ code{
     margin-top:0.8em;
     margin-bottom:0.8em;
     line-height:0.9em;
-    color:#000;
-    border:1px solid #CCC;
     display:block;
 }
 
 code b{
     font-variant: small-caps;
-    color:#880088;
 }
 
 p{
-    font-family:'Texte';
-    font-size:8pt;
-    text-align:left;
+    font-family: Text;
+    font-size:9pt;
+    text-align:justify;
     padding:0;
     margin:0;
-    text-indent:0ex;
-    line-height:1.1em;
-    margin-top:0.5em;
-    margin-bottom:0.5em;
+    text-indent:5ex;
+    line-height:1.0em;
 }
 
+em{
+    font-family: Text;
+}
 
-
+strong{
+    font-family: Text;
+ }
 
 .small{
     font-size:0.6em;
-    font-family:'Section3';
+    font-family: Text;
 }
 
 blockquote{
-  font-family:Texte;
-  font-size:8pt;
+  font-family:Text;
+  font-size:9pt;
   line-height:0.97em;
 }
 
 .embedded_link{
-  text-decoration:underscore;
-  color:#402040;
-  font-family:Texte;
-  font-weight:bold;
+    font-family: Text;
+    font-size:9pt;
+    text-decoration:underscore;
+    font-weight:bold;
 }
 
 ul, li{
-  font-family:'Texte';
+    font-family:Text;
+    font-size:9pt;
 }
 
   </style>
