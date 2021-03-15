@@ -8,17 +8,19 @@ from django.contrib import admin
 from collector.models.character import Character
 
 BLOKE_LEVELS = (
-    (-2, "Minimal"),  # Work colleagues
-    (-1, "Light"),  # Usual coworker
-    (0, "Mild"),  # Typical friend
-    (1, "Strong"),  # Good friend
-    (2, "Maximal"),  # Family / Lover
+    (-2, "Minimal"),  # Work colleagues      XS
+    (-1, "Light"),  # Usual coworker         S
+    (0,  "Mild"),  # Typical friend          M
+    (1,  "Important"),  # Good friend        L
+    (2,  "Strong"),  # Family / Lover        XL
+    (3,  "Maximal"),  # Family / Lover       XXL
 )
 
 
 class Bloke(models.Model):
     class Meta:
         ordering = ['character', 'level', 'npc']
+        verbose_name = "FICS: Bloke"
 
     character = models.ForeignKey(Character, on_delete=models.CASCADE, related_name='character', blank=True, null=True)
     npc = models.ForeignKey(Character, on_delete=models.CASCADE, null=True, blank=True, related_name='npc')

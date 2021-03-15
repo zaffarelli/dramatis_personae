@@ -1,0 +1,15 @@
+{% load static %}
+{% load fics_filters %}
+{% for key,value in blokes.items %}
+<div class="fresque middle">
+    <div class="tile info">
+        <div class="plank">{{key}}</div>
+    </div>
+
+    {% for b in value %}
+        <div class="tile team_{{b.team}}" id="tilebloke_{{b.id}}">
+        {% include "collector/character_tile.html" with c=b %}
+        </div>
+    {% endfor %}
+</div>
+{% endfor %}

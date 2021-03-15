@@ -13,7 +13,7 @@
     {% include 'collector/pdf/article_info.html' with c=epic%}
     <P>{{ epic.data.description|linebreaks|parse_avatars_pdf|safe }}</P>
     <div class='toc'>
-        <pdf:toc />
+
     </div>
     {% for drama in epic.dramas %}
         {% if drama.data.to_PDF %}

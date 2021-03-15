@@ -9,7 +9,7 @@ from django.contrib import admin
 class Profile(models.Model):
     class Meta:
         ordering = ['main_epic', '-main_character' ]
-        verbose_name = "References: User Profiles"
+        verbose_name = "References: User Profile"
     user = models.OneToOneField(User, on_delete=models.CASCADE, unique=True)
     main_character = models.ForeignKey(Character, on_delete=models.SET_NULL, null=True, blank=True)
     main_epic = models.ForeignKey(Epic, on_delete=models.SET_NULL, null=True, blank=True)

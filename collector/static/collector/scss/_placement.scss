@@ -526,21 +526,58 @@ button.toast-close-button {
     }
 }
 
-
+div.login_wrapper{
+    width:100%;
+    height:100%;
+    margin:0;
+    padding:0;
+    position:fixed;
+    display:flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
 div.login_form {
-    display: block;
-    margin: auto;
-    background: $fics_dark;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    align-content: flex-start;
+
+    background: $fics_darker;
     color: $fics_front;
     padding: 1ex 0.5em 1ex 0.5em;
-    width: 32ex;
-    min-height: 24ex;
-    border: 1px solid $fics_dark;
+    width: 400px;
+
+    border: 1px solid $fics_lighter;
     font-size: 12pt;
-    margin-top: 5em;
-    border-radius: 5px;
+
+
+
+    border-radius: 5px 5px 10px 5px;
     box-shadow: 5px 5px 8px $fics_darkest;
-    
+
+    & .svglogo{
+        order:1;
+        width:100px;
+        margin:5px;
+    }
+
+    & .authent{
+        order:2;
+        width:300px;
+        margin:5px;
+        text-align:center;
+        & .server{
+            font-size:9pt;
+            font-family:FatName;
+            text-align:center;
+            color:$fics_lighter;
+            margin-top:2em;
+        }
+        font-weight: normal;
+    }
+
     & h2 {
         font-family: "NomPerso";
         font-size: 1.2em;
@@ -557,7 +594,7 @@ div.login_form {
         
         & input {
             display: inline-block;
-            width: 20ex;
+            width: 32ex;
         }
     }
     
@@ -566,7 +603,7 @@ div.login_form {
         margin-left: auto;
     }
 }
-
+}
 
 div#keywords {
     display: block;

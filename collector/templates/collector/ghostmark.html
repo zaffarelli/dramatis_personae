@@ -2,5 +2,5 @@
 {% load fics_filters %}
 <div id='ghostmark_{{c.id}}'></div>
 <script>
-  (new Ghostmark({{data|safe}})).perform();
+  (new Ghostmark({{data|safe}},3,0 )).perform();
 </script>

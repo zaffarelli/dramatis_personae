@@ -1,127 +1,136 @@
 {% extends "base.html" %}
 {% load static %}
 {% block menuright %}
-    <span id='menu_right_toggler' class='menu_right_toggler action_icon fa fa-window-restore toggler'><u>Keywords</u></span>
-    <div id='keywords'></div>
+<span id='menu_right_toggler' class='menu_right_toggler action_icon fa fa-window-restore toggler'><u>Keywords</u></span>
+<div id='keywords'></div>
 {% endblock menuright %}
 
 {% block dicer %}
-  <span class='dicer_toggler action_icon fa fa-window-restore toggler'><u>Dice Roller</u></span>
-  <table>
+<span class='dicer_toggler action_icon fa fa-window-restore toggler'><u>Dice Roller</u></span>
+<table>
     <tr>
         <td colspan=3><input type="text" class="roll_dice" value="1d12"></input></td>
-    </tr><tr>
+    </tr>
+    <tr>
         <td><span class="rolls">12 12 5</span></td>
-    </tr><tr>
+    </tr>
+    <tr>
         <td><span class="mods">+5</span></td>
-    </tr><tr>
+    </tr>
+    <tr>
         <td><span class="total">30</span></td>
     </tr>
-  </table>
+</table>
 {% endblock dicer %}
 
 {% block menu %}
-        <div id="scheme">
-            <div class="box front"></div>
-            <div class="box back"></div>
-            <div class="box linkup"></div>
-            <div class="box linkdown"></div>
-            <div class="box counterback"></div>
-        </div>
-    <div class='menu_block'>
-        <div class="menu-logo">
-            {% if campaign.black_text %}
-            <div class="img_block"><img src="{% static 'collector/simple_logo_invert.png' %}" class="Epic" width="37px" alt='dp'/></div>
-            {% else %}
-            <div class="img_block"><img src="{% static 'collector/simple_logo.png' %}" class="Epic" width="37px" alt='dp'/></div>
-            {% endif %}
-            {% if user.is_authenticated %}
-            <input type="text" id="customize" value="" placeholder="Free Text Here...">
-            {% endif %}
-            <span id="menu_go"><i class="action_icon fas fa-caret-square-right" style="font-size:24px;"></i></span>
-        </div>
-
-        <ul class="level-1">
-            {% if user.is_authenticated %}
-            <li><span class="pull-down">Collector</span>
-                <ul class="level-2 Avatars">
-                    {% if user.profile.is_gamemaster  %}
-                    <li><span class="menu-item" id="menu_search"><i class="action_icon fas fa-search"></i> Search</span></li>
-<!--                    <li><span class="menu-item" id="menu_seek"><i class="action_icon fas fa-address-card"></i> Seek RID</span> </li>-->
-                    <li><span class="menu-item" id="menu_add_avatar"><i class="action_icon fas fa-user-plus"></i> Add avatar</span></li>
-                    <li><span class="menu-item" id="menu_recalc"><i class="action_icon fas fa-users-cog"></i> Recalculate All</span></li>
-                    <li><span class="menu-item" id='menu_todo' style='width:auto;' title='todo'><i class="action_icon fas fa-tools"></i> Show Todo</span></li>
-                    {% else %}
-                    <li><span class="menu-item" id="menu_buddies"><i class="action_icon fas fa-users"></i> Friends &amp; Foes</span></li>
-                    {% endif %}
-                </ul>
-            </li>
-            {% if user.profile.is_gamemaster %}
-            <li><span class="pull-down">Scenarist</span>
-                <ul class="level-2 Epic">
-                    <li>
-                        {% include "collector/conf_select.html" with c=campaign %}
-                    </li>
-                    <li><span class="menu-item" id="menu_conf_details"><i class="action_icon fas fa-globe"></i> Current Epic</span></li>
-                    <li><span class="menu-item" id="menu_build_config_pdf"><i class="action_icon fas fa-file-pdf"></i> Build Epic PDF</span></li>
-                    {% if campaign.is_fics %}
-                    <li><span class="menu-item" id="menu_popstats"><i class="fas fa-chart-pie"></i> Statistics</span></li>
-                    <li><span class="menu-item" id="menu_gss_update"><i class="fas fa-table"></i> Google spreadsheet</span></li>
-                    {% endif %}
-
-                </ul>
-            </li>
-            {% endif %}
-            {% if user.profile.is_gamemaster %}
-            <li><span class="pull-down">Optimizer</span>
-                <ul class="level-2 Rules">
-                    <li><span class="menu-item" id="menu_build_pdf_rules"><i class="action_icon fas fa-book"></i> Build Rules PDF</span></li>
-                    {% if campaign.is_fics %}
-<!--                    <li><span class="menu-item" id="menu_xls_export"><i class="fas fa-download"></i> Export to Speadsheet</span></li>-->
-<!--                    <li><span class="menu-item" id="menu_xls_update"><i class="fas fa-upload"></i> Import to Spreadsheet</span></li>-->
-                    <li><span class="menu-item" id='run_duel' style='width:auto;' title='RUN DUEL'><i class="action_icon fas fa-chess-pawn"></i> Run Duel</span></li>
-                    <li><span class="menu-item" id='run_100_duels' style='width:auto;' title='RUN x100 DUELS'><i class="action_icon fas fa-chess-knight"></i> Run 100 duels</span></li>
-                    <li><span class="menu-item" id='run_fencing_tournament' style='width:auto;' title='RUN FENCING TOURNAMENT'><i class="action_icon fas fa-chess-rook"></i> Run Fencing Tournament</span></li>
-                    {% endif %}
-                </ul>
-            </li>
-            {% endif %}
-            <li><span class="pull-down">Cartograph</span>
-                <ul class="level-2 Cartograph">
-                    {% if campaign.is_fics %}
-                    <li><a class="menu-item" target="spacecharts" href="{% url 'go_jumpweb' %}"><i class="action_icon fas fa-draw-polygon"></i> Jumpweb</a></li>
-                    {% endif %}
-                </ul>
-            </li>
-            {% endif %}
-
-
-
-            {% if user.is_authenticated %}
-            <li><span class="pull-down">{{ user.username | title }} {% if user.profile.is_gamemaster %}<i class="action_icon fas fa-crown"></i>{% endif %}</span>
-                <ul class="level-2 user" id="login_block">
-                    {% csrf_token %}
-                    <li><span class="menu-item" id='menu_logout'><i class="action_icon fas fa-key"></i> Log out</span></li>
-                    <li><span class="menu-item" id='menu_profile'><i class="action_icon fas fa-user"></i> Profile</span></li>
-                    {% if user.is_superuser %}
-                        <li><span class="menu-item" id='menu_admin'><i class="action_icon fas fa-user"></i> Admin</span></li>
-                    {% endif %}
-
-                </ul>
-            </li>
-            {% else %}
-            <li><span class="pull-down">Anonymous User</span>
-                <ul class="level-2 user" id="login_block">
-                    {% csrf_token %}
-                    <li><span class="menu-item" id='menu_login'><i class="action_icon fas fa-key"></i> Login</span></li>
-                </ul>
-            </li>
-            {% endif %}
-            <li><span class="info">{{hostname}}</span></li>
-            <li><span class="info">Release {{ dp_version }}</span></li>
-
-        </ul>
+<div class='menu_block'>
+    <div class="menu-logo">
+        <div class="img_block"></div>
+        {% if user.profile.is_gamemaster %}
+        <input type="text" id="customize" value="" placeholder="Free Text Here...">
+        <span id="menu_go"><i class="action_icon fas fa-caret-square-right" style="font-size:24px;"></i></span>
+        {% endif %}
     </div>
+    <ul class="level-1">
+        {% if user.is_authenticated %}
+        <li><span class="pull-down" title="Everything about characters that you can access...">Imperial Census</span>
+            <ul class="level-2 Avatars">
+                {% if user.profile.is_gamemaster %}
+                <li><span class="menu-item" id="menu_search"><i class="action_icon fas fa-search"></i> Search</span>
+                </li>
+                <li><span class="menu-item" id="menu_add_avatar"><i class="action_icon fas fa-user-plus"></i> Add avatar</span>
+                </li>
+                <li><span class="menu-item" id="menu_blokes"><i class="action_icon fas fa-users"></i> Blokes</span>
+                <li><span class="menu-item" id="menu_recalc"><i class="action_icon fas fa-users-cog"></i> Recalculate All</span></li>
+                <li><span class="menu-item" id='menu_todo' style='width:auto;' title='todo'><i
+                        class="action_icon fas fa-tools"></i> Show Todo</span></li>
+                {% else %}
+                <li><span class="menu-item" id="menu_friends"><i class="action_icon fas fa-users"></i> Friends</span>
+                </li>
+                <li><span class="menu-item" id="menu_foes"><i class="action_icon fas fa-users"></i> Foes</span></li>
+                <li><span class="menu-item" id="menu_others"><i class="action_icon fas fa-users"></i> Others</span></li>
+                <li><span class="menu-item" id="menu_persystem"><i class="action_icon fas fa-users"></i> Census per system</span>
+                </li>
+                {% endif %}
+            </ul>
+        </li>
+        {% if user.profile.is_gamemaster %}
+        <li><span class="pull-down">Adventures</span>
+            <ul class="level-2 Epic">
+                <li><span class="menu-item" id="menu_conf_details"><i class="action_icon fas fa-globe"></i> Current Epic</span>
+                </li>
+                <li><span class="menu-item" id="menu_build_config_pdf"><i class="action_icon fas fa-file-pdf"></i> Build Epic PDF</span>
+                </li>
+                {% if campaign.is_fics %}
+                <li><span class="menu-item" id="menu_popstats"><i class="fas fa-chart-pie"></i> Statistics</span></li>
+                <li><span class="menu-item" id="menu_gss_update"><i class="fas fa-table"></i> Google spreadsheet</span>
+                </li>
+                {% endif %}
+
+            </ul>
+        </li>
+        {% else %}
+        <li><span class="pull-down">Universe</span>
+            <ul class="level-2 Epic">
+                <li><span class="menu-item" id="menu_gss_update"><i class="action_icon fas fa-book"></i> Clues</span>
+                </li>
+            </ul>
+        </li>
+        {% endif %}
+        {% if user.profile.is_gamemaster %}
+        <li><span class="pull-down">Optimizer</span>
+            <ul class="level-2 Rules">
+                <li><span class="menu-item" id="menu_build_pdf_rules"><i class="action_icon fas fa-book"></i> Build Rules PDF</span>
+                </li>
+                {% if campaign.is_fics %}
+                <li><span class="menu-item" id='run_duel' style='width:auto;' title='RUN DUEL'><i
+                        class="action_icon fas fa-chess-pawn"></i> Run Duel</span></li>
+                <li><span class="menu-item" id='run_100_duels' style='width:auto;' title='RUN x100 DUELS'><i
+                        class="action_icon fas fa-chess-knight"></i> Run 100 duels</span></li>
+                <li><span class="menu-item" id='run_fencing_tournament' style='width:auto;'
+                          title='RUN FENCING TOURNAMENT'><i class="action_icon fas fa-chess-rook"></i> Run Fencing Tournament</span>
+                </li>
+                {% endif %}
+            </ul>
+        </li>
+        {% endif %}
+        <li><span class="pull-down" title="Everything about systems, jumpweb and jumpkeys...">Imperial Cartograph</span>
+            <ul class="level-2 Cartograph">
+                {% if campaign.is_fics %}
+                <li><a class="menu-item" target="spacecharts" href="{% url 'go_jumpweb' %}"><i
+                        class="action_icon fas fa-globe"></i> Map of the Empire</a></li>
+                <li><a class="menu-item" target="spacecharts" href="{% url 'go_jumpweb' %}"><i
+                        class="action_icon fas fa-star"></i> Owned Jumpkeys</a></li>
+                {% endif %}
+            </ul>
+        </li>
+        {% endif %}
+        {% if user.is_authenticated %}
+        <li><span class="pull-down">{{ user.username | title }} {% if user.profile.is_gamemaster %}<i
+                class="action_icon fas fa-crown"></i>{% endif %}</span>
+            <ul class="level-2 user" id="login_block">
+                {% csrf_token %}
+                <li><span class="menu-item" id='menu_logout'><i class="action_icon fas fa-key"></i> Log out</span></li>
+                <li><span class="menu-item" id='menu_profile'><i class="action_icon fas fa-user"></i> Profile</span>
+                </li>
+                {% if user.is_superuser %}
+                <li><span class="menu-item" id='menu_admin'><i class="action_icon fas fa-user"></i> Admin</span></li>
+                {% endif %}
+            </ul>
+        </li>
+        {% else %}
+        <li><span class="pull-down">Anonymous User</span>
+            <ul class="level-2 user" id="login_block">
+                {% csrf_token %}
+                <li><span class="menu-item" id='menu_login'><i class="action_icon fas fa-key"></i> Login</span></li>
+            </ul>
+        </li>
+        {% endif %}
+        <li><span class="info">{{hostname}}</span></li>
+        <li><span class="info">Release {{ dp_version }}</span></li>
+    </ul>
+</div>
 {% endblock menu %}
 
 {% block mobile_form %}
@@ -134,7 +143,8 @@
     let sc = new Scenarist();
     let op = new Optimizer();
     let co = new Collector(ac,op,sc);
+    let lg = (new Logo('.img_block',6, 0));
+    lg.perform();
+    co.perform();
 </script>
-<script src='{% static "js/ghostmark.es6" %}'></script>
 {% endblock javascript %}
-

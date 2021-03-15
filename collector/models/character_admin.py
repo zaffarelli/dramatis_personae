@@ -17,17 +17,17 @@ from collector.models.ritual import RitualInline
 from scenarist.models.epics import Epic
 
 
-def cast_to_dem(modeladmin, request, queryset):
-    e = Epic.objects.filter(shortcut="DEM").first()
-    queryset.update(epic=e)
-    short_description = "Cast to the Deus Ex Machina epic."
-
-
-def cast_to_blank(modeladmin, request, queryset):
-    e = Epic.objects.filter(shortcut="BLK").first()
-    queryset.update(epic=e)
-    short_description = "Cast to no epic."
-
+# def cast_to_dem(modeladmin, request, queryset):
+#     e = Epic.objects.filter(shortcut="DEM").first()
+#     queryset.update(epic=e)
+#     short_description = "Cast to the Deus Ex Machina epic."
+#
+#
+# def cast_to_blank(modeladmin, request, queryset):
+#     e = Epic.objects.filter(shortcut="BLK").first()
+#     queryset.update(epic=e)
+#     short_description = "Cast to no epic."
+#
 
 def no_importance(modeladmin, request, queryset):
     queryset.update(importance=0)
@@ -48,11 +48,11 @@ def importance_down(modeladmin, request, queryset):
         short_description = "Importance --"
 
 
-def cast_to_antu(modeladmin, request, queryset):
-    e = Epic.objects.filter(shortcut="ANTU").first()
-    queryset.update(epic=e)
-    short_description = "Cast to Abusus Non Tollit Usum"
-
+# def cast_to_antu(modeladmin, request, queryset):
+#     e = Epic.objects.filter(shortcut="ANTU").first()
+#     queryset.update(epic=e)
+#     short_description = "Cast to Abusus Non Tollit Usum"
+#
 
 def make_invisible(modeladmin, request, queryset):
     queryset.update(is_visible=False)
@@ -115,9 +115,9 @@ def exit_fencing_league(modeladmin, request, queryset):
 
 
 class CharacterAdmin(admin.ModelAdmin):
-    list_display = (
-    'full_name', 'rid', "ranking", "id", 'importance', 'entrance', 'specie', 'alliance_ref','alliance', 'is_dead', 'life_path_total', 'OP',
-    'use_history_creation', 'is_public', 'is_partial', 'use_only_entrance', 'is_visible', 'epic',)
+    list_display = ['full_name', 'rid', "ranking", "id", 'importance', 'entrance', 'specie', 'alliance_ref', 'alliance',
+                    'is_dead', 'life_path_total', 'OP',
+                    'use_history_creation', 'is_public', 'is_partial', 'use_only_entrance', 'is_visible']
     inlines = [
         SkillInline,
         BlessingCurseInline,
@@ -131,10 +131,10 @@ class CharacterAdmin(admin.ModelAdmin):
         RitualInline,
     ]
     ordering = ['full_name', ]
-    actions = [no_importance, importance_up, importance_down, cast_to_blank, cast_to_dem, cast_to_antu, make_invisible,
+    actions = [no_importance, importance_up, importance_down, make_invisible,
                make_visible, make_teutonic, make_kaanic, make_castillan, make_enquist, make_public, make_private,
                make_partial, make_complete, enter_fencing_league, exit_fencing_league]
     exclude = ['SA_REC', 'SA_STA', 'SA_END', 'SA_STU', 'SA_RES', 'SA_DMG', 'SA_TOL', 'SA_HUM', 'SA_PAS', 'SA_WYR',
                'SA_SPD', 'SA_RUN', 'PA_TOTAL', 'SK_TOTAL', 'TA_TOTAL', 'BC_TOTAL', 'BA_TOTAL']
-    list_filter = ('fencing_league','team','alliance', 'keyword', 'epic', 'specie')
-    search_fields = ('full_name', 'alias', 'alliance', 'keyword', 'rid')
+    list_filter = ['fencing_league', 'team', 'alliance', 'keyword', 'specie']
+    search_fields = ['full_name', 'alias', 'alliance', 'keyword', 'rid']

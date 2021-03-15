@@ -16,9 +16,13 @@ class Collector{
 
     init(){
         let me = this;
+    }
+
+    perform(){
+        let me = this;
         _.defer(function(){
-            me.rebootLinks();
             me.prepareAjax();
+            me.rebootLinks();
             me.loadAjax();
             me.loadKeywords();
         });
@@ -26,19 +30,19 @@ class Collector{
 
     loadAjax() {
         let me = this;
-        $.ajax({
-            url: 'ajax/storyline/none/',
-            success: function(answer) {
-                $('.storyline').html(answer)
-                $.ajax({
-                    url: 'ajax/list/none/1/',
-                    success: function(answer) {
-                        $('.mosaic').html(answer)
-                        me.rebootLinks();
-                    },
-                });
-            },
-        });
+//         $.ajax({
+//             url: 'ajax/storyline/none/',
+//             success: function(answer) {
+//                 $('.storyline').html(answer)
+//                 $.ajax({
+//                     url: 'ajax/list/none/1/',
+//                     success: function(answer) {
+//                         $('.mosaic').html(answer)
+//                         me.rebootLinks();
+//                     },
+//                 });
+//             },
+//         });
         me.setToggler('.mobile_form_toggler', 'collapsed', "#customizer");
         me.setToggler('.menu_right_toggler', 'collapsed', ".menuright");
         me.setToggler('.list_toggler', 'collapsed', ".list");
@@ -73,16 +77,16 @@ class Collector{
         });
     }
 
-    oldkeywordHandlerClick(event) {
-        let me = this;
-        let firstPoint = chart_keywords.getElementAtEvent(event)[0];
-        if (firstPoint) {
-            let label = chart_keywords.data.labels[firstPoint._index];
-            let value = chart_keywords.data.datasets[firstPoint._datasetIndex].data[firstPoint._index];
-            $('#customize').val(label);
-            $('#menu_search').click();
-        }
-    }
+//     oldkeywordHandlerClick(event) {
+//         let me = this;
+//         let firstPoint = chart_keywords.getElementAtEvent(event)[0];
+//         if (firstPoint) {
+//             let label = chart_keywords.data.labels[firstPoint._index];
+//             let value = chart_keywords.data.datasets[firstPoint._datasetIndex].data[firstPoint._index];
+//             $('#customize').val(label);
+//             $('#menu_search').click();
+//         }
+//     }
 
     loadKeywords() {
         let me = this;
@@ -97,6 +101,27 @@ class Collector{
     }
 
 
+    setUserLink(src) {
+        let me = this;
+        let words = src.split('_');
+        let link = 'user_'+words[1];
+        console.log('Registered for '+link+' / '+src);
+        $(src).off().on('click', function(event) {
+            $('.mosaic').html('');
+            $.ajax({
+                url: 'ajax/'+link+'/',
+                success: function(answer) {
+                    console.log('click on '+link);
+                    $('.mosaic').html(answer);
+                    me.rebootLinks();
+                },
+                error: function(answer) {
+                    console.error(answer);
+                    me.rebootLinks();
+                }
+            });
+        });
+    }
 
 
     setToggler(tag, klass, item) {
@@ -135,6 +160,13 @@ class Collector{
 
 
         me.heartbeat = setTimeout("co.runHeartbeat()", 500);
+
+
+        me.setUserLink("#menu_friends");
+        me.setUserLink("#menu_foes");
+        me.setUserLink("#menu_others");
+        me.setUserLink("#menu_persystem");
+        me.setUserLink("#menu_blokes");
 
         /* List based actions (Those rebuild the list everytime) */
 

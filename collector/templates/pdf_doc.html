@@ -5,226 +5,212 @@
     <meta charset="utf-8" />
     <title>{{c.full_name|safe}}</title>
     <style>
-@font-face {
-  font-family: 'Text';
-  src: url('collector/static/collector/fonts/BarlowCondensed-Regular.ttf');
-}
+      @font-face {
+        font-family: 'Text';
+        src: url('collector/static/collector/fonts/BarlowCondensed-Regular.ttf');
+      }
 
-@font-face {
-  font-family: 'Text';
-  font-style: italic;
-  src: url('collector/static/collector/fonts/BarlowCondensed-RegularItalic.ttf');
-}
+      @font-face {
+        font-family: 'Text';
+        font-style: italic;
+        src: url('collector/static/collector/fonts/BarlowCondensed-RegularItalic.ttf');
+      }
 
-@font-face {
-  font-family: 'Text';
-  font-weight: bold;
-  font-style: italic;
-  src: url('collector/static/collector/fonts/BarlowCondensed-BoldItalic.ttf');
-}
+      @font-face {
+        font-family: 'Text';
+        font-weight: bold;
+        font-style: italic;
+        src: url('collector/static/collector/fonts/BarlowCondensed-BoldItalic.ttf');
+      }
 
-@font-face {
-  font-family: 'Text';
-  font-weight: bold;
-   src: url('collector/static/collector/fonts/BarlowCondensed-Bold.ttf');
-}
+      @font-face {
+        font-family: 'Text';
+        font-weight: bold;
+        src: url('collector/static/collector/fonts/BarlowCondensed-Bold.ttf');
+      }
 
-@font-face {
-  font-family: 'Title';
-  src: url('collector/static/collector/fonts/Eczar-SemiBold.ttf');
-}
+      @font-face {
+        font-family: 'Title';
+        src: url('collector/static/collector/fonts/Eczar-SemiBold.ttf');
+      }
 
-@font-face {
-  font-family: 'Roster';
-  src: url('collector/static/collector/fonts/Dosis-Regular.ttf');
-}
+      @font-face {
+        font-family: 'Roster';
+        src: url('collector/static/collector/fonts/Dosis-Regular.ttf');
+      }
 
-@font-face {
-  font-family: 'Roster';
-  font-style:italic;
-  src: url('http://www.fontsaddict.com/fontface/Dosis-Italic.ttf');
-}
+      @font-face {
+        font-family: 'Roster';
+        font-style:italic;
+        src: url('http://www.fontsaddict.com/fontface/Dosis-Italic.ttf');
+      }
 
-@font-face {
-  font-family: 'Roster';
-  font-weight:bold;
-  src: url('collector/static/collector/fonts/Dosis-Bold.ttf');
-}
+      @font-face {
+        font-family: 'Roster';
+        font-weight:bold;
+        src: url('collector/static/collector/fonts/Dosis-Bold.ttf');
+      }
 
-@font-face {
-  font-family: 'Roster';
-  font-weight:bold;
-  font-style:italic;
-  src: url('collector/static/collector/fonts/Dosis-BoldItalic.ttf');
-}
+      @font-face {
+        font-family: 'Roster';
+        font-weight:bold;
+        font-style:italic;
+        src: url('collector/static/collector/fonts/Dosis-BoldItalic.ttf');
+      }
 
+      @page {
+        size: a4 portrait;
+        @frame col_left {
+          left: 0.4cm;
+          width: 10cm;
+          top: 1.5cm;
+          height:27cm;
+          padding:0.125cm;
+        }
+        @frame col_right {
+          right: 0.4cm;
+          width: 10cm;
+          top: 1.5cm;
+          height: 27cm;
+          padding:0.125cm;
+        }
+        @frame header_frame {
+          -pdf-frame-content: header_content;
+          right: 1cm;
+          width: 0.5cm;
+          top: 1cm;
+          height: 1cm;
+          text-align:right;
+        }
+        @frame footer_frame {
+          -pdf-frame-content: footer_content;
+          left:0.5cm;
+          width:20cm;
+          right:0.5cm;
+          bottom:0.6cm;
+          height: 0.5cm;
+        }
+      }
 
+      #footer_content{
+        font-size:7pt;
+        text-align:center;
+        font-weight: bold;
+        font-family: Text;
+      }
 
+      .info {
+        padding:0;
+        margin:0;
+        font-size:8pt;
+        margin-bottom: 0.8em;
+        font-family: Text;
+      }
 
-@page {
-  size: a4 portrait;
-  @frame col_left {
-    left: 0.4cm;
-    width: 10cm;
-    top: 1.5cm;
-    height:27cm;
-    padding:0.125cm;
+      .info th{
+        text-align:left;
+        margin-right:1ex;
+        font-family: Text;
+      }
 
-  }
-  @frame col_right {
-    right: 0.4cm;
-    width: 10cm;
-    top: 1.5cm;
-    height: 27cm;
-    padding:0.125cm;
+      h1, h2, h3, h4, h5, h6{
+        display: inline-block;
+        font-family:Title;
+        width:100%;
+        margin:0;
+        padding:0;
+      }
 
-  }
-  @frame header_frame {
-    -pdf-frame-content: header_content;
-    right: 1cm;
-    width: 0.5cm;
-    top: 1cm;
-    height: 1cm;
-    text-align:right;
+      h1{
+        font-size:20pt;
+        font-weight:bold;
+      }
 
-  }
-  @frame footer_frame {
-    -pdf-frame-content: footer_content;
-    left:0.5cm;
-    width:20cm;
-    right:0.5cm;
-    bottom:0.6cm;
-    height: 0.5cm;
-  }
+      h2{
+        font-size:18pt;
+        text-align:center;
+      }
 
-}
+      h3{
+        font-size:16pt;
+      }
 
-#footer_content{
-    font-size:7pt;
-    text-align:center;
-    font-weight: bold;
-    font-family: Text;
-}
+      h4{
+        font-size:14pt;
+      }
 
-.info {
-  padding:0;
-  margin:0;
-  font-size:8pt;
-  margin-bottom: 0.8em;
-  font-family: Text;
-}
+      h5{
+        font-size:12pt;
+        margin:0;
+        padding:0;
+      }
 
-.info th{
-    text-align:left;
-    margin-right:1ex;
-    font-family: Text;
-}
+      h6{
+        font-size:10pt;
+        margin:0;
+        padding:0;
+        -pdf-keep-with-next: true;
+      }
 
-h1, h2, h3, h4, h5, h6{
-    display: inline-block;
-    font-family:Title;
-    width:100%;
-    margin:0;
-    padding:0;
-    border-left: 3px solid #A02020;
-}
+      code{
+        font-family:'Roster';
+        font-size:8pt;
+        text-indent:0;
+        margin:0;
+        padding:0.05cm;
+        margin-top:0.8em;
+        margin-bottom:0.8em;
+        line-height:0.9em;
+        display:block;
+      }
 
-h1{
-    font-size:20pt;
-    font-weight:bold;
-}
+      code b{
+        font-variant: small-caps;
+      }
 
-h2{
-    font-size:18pt;
-    text-align:center;
-}
+      p{
+        font-family: Text;
+        font-size:9pt;
+        text-align:justify;
+        padding:0;
+        margin:0;
+        text-indent:5ex;
+        line-height:1.0em;
+      }
 
-h3{
-    font-size:16pt;
- }
+      em{
+        font-family: Text;
+      }
 
-h4{
-    font-size:14pt;
+      strong{
+        font-family: Text;
+      }
 
-}
+      .small{
+        font-size:0.6em;
+        font-family: Text;
+      }
 
-h5{
-    font-size:12pt;
-    margin:0;
-    padding:0;
- }
+      blockquote{
+        font-family:Text;
+        font-size:9pt;
+        line-height:0.97em;
+      }
 
+      .embedded_link{
+        font-family: Text;
+        font-size:9pt;
+        font-weight:bold;
+      }
 
-
-
-h6{
-    font-size:10pt;
-    margin:0;
-    padding:0;
-   -pdf-keep-with-next: true;
-}
-
-code{
-    font-family:'Roster';
-    font-size:8pt;
-    text-indent:0;
-    margin:0;
-    padding:0.05cm;
-    margin-top:0.8em;
-    margin-bottom:0.8em;
-    line-height:0.9em;
-    display:block;
-}
-
-code b{
-    font-variant: small-caps;
-}
-
-p{
-    font-family: Text;
-    font-size:9pt;
-    text-align:justify;
-    padding:0;
-    margin:0;
-    text-indent:5ex;
-    line-height:1.0em;
-}
-
-em{
-    font-family: Text;
-}
-
-strong{
-    font-family: Text;
- }
-
-.small{
-    font-size:0.6em;
-    font-family: Text;
-}
-
-blockquote{
-  font-family:Text;
-  font-size:9pt;
-  line-height:0.97em;
-}
-
-.embedded_link{
-    font-family: Text;
-    font-size:9pt;
-    text-decoration:underscore;
-    font-weight:bold;
-}
-
-ul, li{
-    font-family:Text;
-    font-size:9pt;
-}
-
-  </style>
-  </head>
-  <body>
-    {% block article %}
-    {% endblock article %}
-  </body>
+      ul, li{
+        font-family:Text;
+        font-size:9pt;
+      }
+     </style>
+    </head>
+    <body>
+      {% block article %}
+      {% endblock article %}
+    </body>
 </html>

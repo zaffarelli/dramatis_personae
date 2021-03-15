@@ -36,7 +36,7 @@ class Avatar(models.Model):
     priority = models.BooleanField(default=False)
     need_pdf = models.BooleanField(default=False)
     need_fix = models.BooleanField(default=False)
-    epic = models.ForeignKey(Epic, null=True, blank=True, on_delete=models.SET_NULL)
+    # epic = models.ForeignKey(Epic, null=True, blank=True, on_delete=models.SET_NULL)
     pub_date = models.DateTimeField('Date published', default=datetime.now)
 
     def fix(self, conf=None):

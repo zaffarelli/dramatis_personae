@@ -11,10 +11,10 @@ from collector.views.investigators import InvestigatorUpdateView
 from collector.views.frontend import index, toggle_public, toggle_spotlight, get_list, add_avatar, \
     get_storyline, conf_details, recalc_avatar, heartbeat, \
     show_todo, pdf_show, wa_export_character, tile_avatar, ghostmark_test
-from collector.views.backend import recalc, export, xls_update, pdf_character, gss_update, pdf_rules, roll_dice
+from collector.views.backend import recalc, export, xls_update, pdf_character, gss_update, pdf_rules, roll_dice, bloke_selector
 from collector.views.misc_chart import get_chardar, get_population_statistics, get_keywords
 from django.contrib.auth.views import LogoutView
-from collector.views.user import do_login, do_profile
+from collector.views.user import do_login, do_profile, user_friends, user_foes, user_others, user_persystem
 
 urlpatterns = [
     re_path('^$', index, name='index'),
@@ -61,4 +61,10 @@ urlpatterns = [
     re_path('^ajax/profile/$', do_profile, name="profile"),
     re_path('^ajax/logout/$', LogoutView.as_view(), name="logout"),
     re_path('^ghostmark/(?P<id>\d+)/$', ghostmark_test, name='ghostmark_test'),
+    re_path('^ajax/user_friends/$', user_friends, name="user_friends"),
+    re_path('^ajax/user_foes/$', user_foes, name="user_foes"),
+    re_path('^ajax/user_others/$', user_others, name="user_others"),
+    re_path('^ajax/user_persystem/$', user_persystem, name="user_persystem"),
+    re_path('^ajax/user_blokes/$', bloke_selector, name="bloke_selector"),
+
 ]

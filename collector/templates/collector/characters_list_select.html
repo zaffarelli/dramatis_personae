@@ -1,0 +1,34 @@
+{% if blokes %}
+{% for b in blokes %}
+<div class="fresque middle compact" id="selectorfor_{{b.player}}">
+    <div class="tile mini" style="background:#313; color:yellow;">Update <b>{{b.player}}</b> blokes</div>
+    {% for c in b.blokes %}
+        {% if c.intimacy == "none" %}
+        <div class="tile mini">
+        {% else %}
+        <div class="tile mini checked">
+        {% endif %}
+        <label for="select_{{b.player}}_{{c.id}}">{{c.full_name}}</label>
+        <br/>
+        <select id="select_{{b.player}}_{{c.id}}">
+            {% if bl.value == "none" %}
+                <option value="none" selected="selected">
+            {% else %}
+                <option value="none">
+            {% endif %}
+            none</option>
+            {% for bl in choices %}
+                {% if bl.value == c.intimacy %}
+                    <option value="{{bl.value}}" selected="selected">
+                {% else %}
+                    <option value="{{bl.value}}">
+                {% endif %}
+                {{bl.text}}
+                </option>
+            {% endfor %}
+        </select>
+        </div>
+    {% endfor %}
+</div>
+{% endfor %}
+{% endif %}

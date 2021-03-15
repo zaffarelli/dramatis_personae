@@ -33,20 +33,16 @@ class Campaign(models.Model):
     title = models.CharField(default='aaa', max_length=128, )
     epic = models.ForeignKey(Epic, null=True, blank=True, on_delete=models.SET_NULL)
     description = models.TextField(max_length=128, default='')
-    #gamemaster = models.CharField(default='zaffarelli@gmail.com', max_length=128, blank=True)
     gm = models.ForeignKey(User, null=True, blank=True, on_delete=models.SET_NULL)
     rpgsystem = models.ForeignKey(RpgSystem, null=True, blank=True, on_delete=models.SET_NULL)
     is_active = models.BooleanField(default=False)
     smart_code = models.CharField(default='xxxxxx', max_length=6)
     current_drama = models.ForeignKey(Drama, null=True, blank=True, on_delete=models.SET_NULL)
-    #rpg_system = models.CharField(max_length=32, choices=RPG_SYSTEMS, default="2")
     color_front = models.CharField(max_length=9, default='#00F0F0F0')
     color_back = models.CharField(max_length=9, default='#00101010')
     color_linkup = models.CharField(max_length=9, default='#00801080')
     color_linkdown = models.CharField(max_length=9, default='#00401040')
     color_counterback = models.CharField(max_length=9, default='#00404040')
-    #logo = models.CharField(max_length=128, default='nologo.png')
-    #back = models.CharField(max_length=128, default='back.png')
     black_text = models.BooleanField(default=True)
     hidden = models.BooleanField(default=False)
 
@@ -67,7 +63,7 @@ class Campaign(models.Model):
             avatars = Investigator.objects
         else:
             from collector.models.character import Character
-            avatars = Character.objects.filter(epic=self.epic)
+            avatars = Character.objects
         return avatars
 
     @property
@@ -127,20 +123,50 @@ class Campaign(models.Model):
         context['keywords'] = get_keywords()
         return context
 
-    def prepare_colorset(self, size=16):
+    def prepare_colorset(self, size=16, color_scale=False):
         colorset = []
         hcolorset = []
-        colval = '456789AB'
+        colval = '1234567894ABCDE'
         idx = 0
-        while idx < size:
-            com = '%s%s%s%s%s%s' % (
-            random.sample(colval, 1)[0], random.sample(colval, 1)[0], random.sample(colval, 1)[0],
-            random.sample(colval, 1)[0], random.sample(colval, 1)[0], random.sample(colval, 1)[0])
-            col = '#' + com + '88'
-            hcol = '#' + com + 'FF'
-            colorset.append(col)
-            hcolorset.append(hcol)
-            idx += 1
+        if color_scale:
+            colval = 'ABCDE'
+            prev_com_arr = []
+            while idx < size:
+                if idx==0:
+                    com_arr = []
+                    com_arr.append(random.sample(colval, 1)[0])
+                    com_arr.append(random.sample(colval, 1)[0])
+                    com_arr.append(random.sample(colval, 1)[0])
+                    com_arr.append(random.sample(colval, 1)[0])
+                    prev_com_arr = com_arr
+                    com = '%s%s%s%s' % (com_arr[0],com_arr[1],com_arr[2],com_arr[3])
+                else:
+                    com_arr = prev_com_arr
+                    red = f'0x{com_arr[0]}{com_arr[1]}'
+                    green = f'0x{com_arr[2]}{com_arr[3]}'
+                    new_red = f'{hex(int(red,16) - 17)}'
+                    new_green = f'{hex(int(green, 16) - 9)}'
+                    com_arr[0] = new_red[2]
+                    com_arr[1] = new_red[3]
+                    com_arr[2] = new_green[2]
+                    com_arr[3] = new_green[3]
+                    com = '%s%s%s%s' % (com_arr[0], com_arr[1], com_arr[2], com_arr[3])
+                    prev_com_arr = com_arr
+                col = '#' + com + 'A0'
+                hcol = '#' + com + 'C0'
+                colorset.append(col)
+                hcolorset.append(hcol)
+                idx += 1
+        else:
+            while idx < size:
+                com = '%s%s%s%s' % (
+                    random.sample(colval, 1)[0],
+                    random.sample(colval, 1)[0], random.sample(colval, 1)[0], random.sample(colval, 1)[0])
+                col = '#' + com + 'A0'
+                hcol = '#' + com + 'C0'
+                colorset.append(col)
+                hcolorset.append(hcol)
+                idx += 1
         return colorset, hcolorset
 
     def get_chart(self, field='', filter='', pattern='', type='bar', bar_property='full_name', order_by='', legend_display=False, limit=10, ticks=True):
@@ -157,9 +183,10 @@ class Campaign(models.Model):
                 - "order_by" is the sort criteria. Set to the characters "full_name" by default.
         """
         from collector.models.character import Character
+        from cartograph.models.system import System
         # from django.db.models import Count
         if pattern == '':
-            all = Character.objects.order_by(order_by + bar_property).filter(epic=self.epic)
+            all = Character.objects.order_by(order_by + bar_property) #.filter(epic=self.epic)
         else:
             all = Character.objects.filter(**{filter: pattern}).order_by(order_by + bar_property)[:20]
         # if limit:
@@ -233,6 +260,129 @@ class Campaign(models.Model):
             }
         }
         return full_data
+
+
+    def get_specific_chart(self, name=''):
+        from collector.models.character import Character
+        color_scale = False
+        skip_zero = False
+        if name== 'population_per_current_system':
+            title = 'Population per current fief'
+            bar_property = 'current_fief'
+            ref = 'name'
+            type = 'horizontalBar'
+            legend_display = False
+        elif name== 'population_per_native_system':
+            title = 'Population per native fief'
+            bar_property = 'fief'
+            ref = 'name'
+            type = 'horizontalBar'
+            legend_display = False
+        elif name== 'population_per_alliance':
+            title = 'Population per Alliance'
+            bar_property = 'alliance_ref'
+            ref = 'reference'
+            type = 'horizontalBar'
+            legend_display = False
+        elif name== 'population_per_team':
+            title = 'Population per Team'
+            bar_property = 'team'
+            ref = ''
+            type = 'horizontalBar'
+            legend_display = False
+            color_scale = True
+        elif name== 'population_per_occult':
+            title = 'Population with Occult powers'
+            bar_property = 'OCC_LVL'
+            ref = ''
+            type = 'polarArea'
+            legend_display = True
+            color_scale = True
+            skip_zero = True
+        elif name== 'population_per_ranking':
+            title = 'Population per Rank'
+            bar_property = 'ranking'
+            ref = ''
+            type = 'polarArea'
+            legend_display = True
+            color_scale = True
+            skip_zero = True
+
+        ticks = False
+        all = Character.objects.order_by(bar_property)
+        inside_labels = []
+        final_data = []
+        border = []
+        data_stack = {}
+        for c in all:
+            value = getattr(c,bar_property)
+            if skip_zero and value == 0:
+                pass
+            else:
+                if not value is None:
+                    if ref == '':
+                        if data_stack.get(value) is None:
+                            data_stack[value] = 1
+                        else:
+                            data_stack[value] += 1
+                    else:
+                        if data_stack.get(getattr(value,ref)) is None:
+                            data_stack[getattr(value,ref)] = 1
+                        else:
+                            data_stack[getattr(value,ref)] += 1
+        for item in data_stack:
+            inside_labels.append(item)
+            final_data.append(data_stack[item])
+            border.append('#222')
+        colors, hoverColors = self.prepare_colorset(len(border),color_scale=color_scale)
+        inside_datasets = [{
+            'data': final_data,
+            'backgroundColor': colors,
+            'hoverBackgroundColor': hoverColors,
+            'borderColor': border,
+            'hoverBorderColor': hoverColors,
+            'borderWidth': 1,
+            'minBarLength': 10
+        }]
+        data = {
+            'labels': inside_labels,
+            'datasets': inside_datasets
+        }
+        full_data = {
+            'name': name,
+            'data': {
+                'type': type,
+                'data': data,
+                'options': {
+                    'title': {
+                        'display': True,
+                        'text': title.upper(),
+                        'fontColor': '#fff',
+                    },
+                    'legend': {
+                        'display': legend_display,
+                        'position': 'right',
+                        'labels': {
+                            'fontColor': '#fff',
+                        }
+                    },
+                    'scales': {
+                        'yAxes': [
+                            {
+                                'ticks': {'mirror': ticks},
+                                'afterFit': 'function(scaleInstance){scaleInstance.width = 100;}',
+                                'fontStyle': 'bold'
+                            }
+                        ]
+                    },
+                    'circumference': 2 * math.pi,
+                    'rotation': -math.pi,
+                    'cutoutPercentage': 40,
+                }
+            }
+        }
+        return full_data
+
 
 
 class CampaignAdmin(admin.ModelAdmin):

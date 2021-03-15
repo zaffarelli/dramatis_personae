@@ -19,27 +19,33 @@ from colorfield.fields import ColorField
 
 logger = logging.getLogger(__name__)
 
-
 DRAMA_SEATS = (
-    ('11-foe','Foe'),
-    ('10-enemy','Enemy'),
-    ('09-lackey','Lackey'),
-    ('08-antagonist','Antagonist'),
+    ('11-foe', 'Foe'),
+    ('10-enemy', 'Enemy'),
+    ('09-lackey', 'Lackey'),
+    ('08-antagonist', 'Antagonist'),
     ('07-opponent', 'Opponent'),
     ('06-neutral', 'Neutral'),
     ('05-partisan', 'Partisan'),
-    ('04-protagonist','Protagonist'),
-    ('03-servant','Servant'),
-    ('02-ally','Ally'),
-    ('01-friend','Friend'),
-    ('00-players','Players'),
+    ('04-protagonist', 'Protagonist'),
+    ('03-servant', 'Servant'),
+    ('02-ally', 'Ally'),
+    ('01-friend', 'Friend'),
+    ('00-players', 'Players'),
 )
+
+BLOKES = {
+    'allies': ['05-partisan', '04-protagonist', '03-servant', '02-ally', '01-friend'],
+    'foes': ['11-foe', '10-enemy', '09-lackey', '08-antagonist', '07-opponent'],
+    'others': ['06-neutral']
+}
 
 
 class Character(Combattant):
     class Meta:
         ordering = ['full_name']
         verbose_name = "FICS: Character"
+
     page_num = 0
     alias = models.CharField(max_length=200, default='', blank=True)
     alliance = models.CharField(max_length=200, default='', blank=True)
@@ -49,8 +55,9 @@ class Character(Combattant):
     specie = models.ForeignKey(Specie, default=31, blank=True, null=True, on_delete=models.SET_NULL)
     race = models.TextField(max_length=256, default='', blank=True)
     native_fief = models.CharField(max_length=200, default='none')
-    fief = models.ForeignKey(System, blank=True, null=True, on_delete=models.SET_NULL, related_name= 'fief')
-    current_fief = models.ForeignKey(System, blank=True, null=True, on_delete=models.SET_NULL, related_name= 'current_fief')
+    fief = models.ForeignKey(System, blank=True, null=True, on_delete=models.SET_NULL, related_name='fief')
+    current_fief = models.ForeignKey(System, blank=True, null=True, on_delete=models.SET_NULL,
+                                     related_name='current_fief')
     caste = models.CharField(max_length=100, default='Freefolk')
     rank = models.CharField(max_length=100, default='', blank=True)
     build_log = models.TextField(default='', blank=True)
@@ -91,14 +98,14 @@ class Character(Combattant):
     score = models.IntegerField(default=0)
     gm_shortcuts = models.TextField(default='', blank=True)
     gm_shortcuts_pdf = models.TextField(default='', blank=True)
-    team = models.CharField(max_length=128,choices=DRAMA_SEATS,default='06-neutral',blank=True)
+    team = models.CharField(max_length=128, choices=DRAMA_SEATS, default='06-neutral', blank=True)
     OCC_LVL = models.PositiveIntegerField(default=0)
     OCC_DRK = models.PositiveIntegerField(default=0)
     occult = models.CharField(max_length=50, default='', blank=True)
     challenge = models.TextField(default='')
     challenge_value = models.IntegerField(default=0)
     todo_list = models.TextField(default='', blank=True)
-    path = models.CharField(max_length=256,default='', blank=True)
+    path = models.CharField(max_length=256, default='', blank=True)
     # is_exportable = models.BooleanField(default=False)
     use_history_creation = models.BooleanField(default=False)
     use_only_entrance = models.BooleanField(default=False)
@@ -167,14 +174,9 @@ class Character(Combattant):
                 'category': alliance_ref.category,
                 'faction': alliance_ref.faction,
             }
-
         }
-
         jdata = json.dumps(data, sort_keys=True, indent=4)
-        # import pdb;
-        # pdb.set_trace()
         return jdata
-        # return json.dumps(data,default=lambda o: o.__dict__(),skipkeys=True)
 
     @property
     def info_str(self):
@@ -663,7 +665,6 @@ class Character(Combattant):
                             rankraise = ba.benefice_affliction_ref.value
         self.ranking += rankraise
 
-
     def add_ba(self, aref, adesc=''):
         from collector.models.benefice_affliction import BeneficeAffliction
         ba = self.beneficeaffliction_set.all().filter(benefice_affliction_ref=aref, description=adesc).first()
@@ -683,27 +684,18 @@ class Character(Combattant):
             found_ba.delete()
 
     def add_missing_root_skills(self):
-        """ According to the character specialities, fixing the root skills by recalculating their values
-            from scratch.
-        """
-        # from cartograph.models.skills import Skill
         from collector.models.skill import SkillRef
         roots_list = []
-        # Get all roots in the avatar in roots_list
         for skill in self.skill_set.all():
             if skill.skill_ref.is_speciality:
                 if not skill.skill_ref.is_wildcard:
                     roots_list.append(skill.skill_ref.linked_to)
-        # Delete all roots from the avatar skills
         for skill in self.skill_set.all():
             if skill.skill_ref.is_root:
                 skill.delete()
-        # Add the roots from the root_list
         for skill_ref in SkillRef.objects.all():
             if skill_ref in roots_list:
                 self.add_or_update_skill(skill_ref, roots_list.count(skill_ref))
-        # for item in roots_list:
-        #     logger.debug('ROOT_LIST:%s' % (item.reference))
 
     def resetPA(self):
         self.PA_STR = self.PA_CON = self.PA_BOD = self.PA_MOV = self.PA_INT = self.PA_WIL = self.PA_TEM = self.PA_PRE = self.PA_TEC = self.PA_REF = self.PA_AGI = self.PA_AWA = self.OCC_LVL = self.OCC_DRK = 0
@@ -713,55 +705,34 @@ class Character(Combattant):
         return self.PA_STR + self.PA_CON + self.PA_BOD + self.PA_MOV + self.PA_INT + self.PA_WIL + self.PA_TEM + self.PA_PRE + self.PA_TEC + self.PA_REF + self.PA_AGI + self.PA_AWA + self.OCC_LVL - self.OCC_DRK
 
     def purge_skills(self):
-        """ Deleting all character skills """
         for skill in self.skill_set.all():
             skill.delete()
-        # logger.debug('PurgeSkill count: %d' % (self.skill_set.all().count()))
-
-    # def purge_talents(self):
-    #     """ Deleting all character talents """
-    #     for talent in self.talent_set.all():
-    #         talent.delete()
-    #     # logger.debug('PurgeTalent count: %d' % (self.talent_set.all().count()))
 
     def purge_bc(self):
-        """ Deleting all character BC """
         for bc in self.blessingcurse_set.all():
             bc.delete()
-        # logger.debug('purge_bc count: %d' % (self.blessingcurse_set.all().count()))
 
     def purge_ba(self):
-        """ Deleting all character BA """
         for ba in self.beneficeaffliction_set.all():
             ba.delete()
-        # logger.debug('purge_ba count: %d' % (self.beneficeaffliction_set.all().count()))
 
     def purge_weapons(self):
-        """ Deleting all character Weapons """
         for item in self.weapon_set.all():
             item.delete()
-        # logger.debug('PurgeWeapon count: %d' % (self.weapon_set.all().count()))
 
     def purge_shields(self):
-        """ Deleting all character Shields """
         for item in self.shield_set.all():
             item.delete()
-        # logger.debug('PurgeShield count: %d' % (self.shield_set.all().count()))
 
     def purge_armors(self):
-        """ Deleting all character Weapons """
         for item in self.armor_set.all():
             item.delete()
-        # logger.debug('PurgeArmor count: %d' % (self.armor_set.all().count()))
 
     def purge_rituals(self):
-        """ Deleting all character Rituals """
         for item in self.ritual_set.all():
             item.delete()
-        # logger.debug('PurgeRitual count: %d' % (self.ritual_set.all().count()))
 
     def reset_total(self):
-        """ Compute all sums for all stats """
         self.SK_TOTAL = 0
         self.BC_TOTAL = 0
         self.BA_TOTAL = 0
@@ -797,13 +768,12 @@ class Character(Combattant):
         return "ok"
 
     def backup(self):
-        """ Transform to PDF if exportable"""
         proceed = False
         if self.need_pdf:
             from collector.utils.basic import write_pdf
             try:
                 context = dict(c=self, filename=f'{self.rid}', now=datetime.now(tz=get_current_timezone()))
-                write_pdf('cartograph/character_roster.html', context)
+                write_pdf('collector/character_roster.html', context)
                 logger.info(f'    => PDF created ...: {self.rid}')
                 proceed = True
                 self.need_pdf = False
@@ -817,10 +787,6 @@ class Character(Combattant):
             return f'{self.alias}'
         else:
             return f'{self.full_name}'
-
-    # def get_rid(self, s):
-    #     #self.rid = fs_fics7.find_rid(s)
-    #     super().get_rid(s)
 
     @property
     def na_phy(self):
@@ -865,5 +831,3 @@ class Character(Combattant):
         self.stories_count += self.count_cast(dramas)
         self.stories_count += self.count_cast(epics)
         return self.stories_count
-
-

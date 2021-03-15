@@ -459,6 +459,27 @@
                 }
             }
         }
+        &.mini{
+            order:1;
+            flex-grow:1;
+            height:auto;
+            width: auto;
+            max-width:40ex;
+            margin:2px;
+            border-width:1px;
+            align-self: flex-start;
+            & input[type=checkbox]{
+                border-color: lime;
+                height: auto;
+                padding:5px;
+            }
+            & label{
+
+            }
+        }
+        &.checked{
+            background: #626;
+        }
 
     }
 
@@ -520,6 +541,11 @@
                     font-style:normal;
                 }
             }
+        }
+        &.compact{
+            border:1px solid green;
+            justify-content:flex-start;
+            align-items: flex-start;
         }
     }
  }

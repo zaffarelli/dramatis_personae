@@ -108,8 +108,31 @@ def roll_dice(request, slug):
     return JsonResponse(context)
 
 
-# def campaign_css(request):
-#     from cartograph.utils.basic import get_current_config
-#     camp = get_current_config()
-#     return render_to_response('campaign.css', { 'campaign': camp })
-#
+def bloke_selector(request):
+    if request.method == "POST":
+        return HttpResponse(status=204)
+    else:
+        from collector.models.bloke import Bloke, BLOKE_LEVELS
+        levels = []
+        for x in BLOKE_LEVELS:
+            levels.append({'value':x[0],'text':x[1]})
+        other_characters = []
+        players = ['Delphine','Chninkel','Marie','Lustus','Taz']
+        for player in players:
+            main_characters = Character.objects.filter(player=player)
+            blokes = Bloke.objects.filter(character__in=main_characters)
+            active_blokes = []
+            for b in blokes:
+                active_blokes.append({'character':b.npc,'intimacy':b.level})
+            npc = Character.objects.filter(player='')
+            for c in npc:
+                c.intimacy = 'none'
+                for a in active_blokes:
+                    if c.rid == a['character'].rid:
+                        c.intimacy = a['intimacy']
+            other_characters.append({'player':player,'blokes':npc})
+        context = {'blokes': other_characters, 'choices':levels}
+        template = get_template('collector/blokes.html')
+        html = template.render(context, request)
+        messages.info(request, f'Blokes selector loaded.')
+        return HttpResponse(html, content_type='text/html')

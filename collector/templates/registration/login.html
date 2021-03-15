@@ -2,14 +2,25 @@
 {% load static %}
 
 {% block login%}
+<div class="login_wrapper">
+
 <div class="login_form">
-<center><img src="{% static 'collector/simple_logo.png' %}" alt="dp logo" width="46px">
-  </center>
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <center><button type="submit">Log In</button>
-    </center>
-</form>
+    <div class="svglogo" style="width: auto; height:auto;"></div>
+    <div class="authent">
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Log In</button>
+            <div class="server">{{hostname}} server version {{dp_version}}</div>
+        </form>
+    </div>
 </div>
+</div>
+<script src='{% static "js/dp_tools.es6" %}'></script>
+<script>
+    (new Logo('.svglogo',10, 1)).perform();
+
+</script>
 {% endblock login%}
+
+

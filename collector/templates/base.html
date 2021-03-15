@@ -13,6 +13,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js"></script>
         <script src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+        <script src='{% static "js/dp_tools.es6" %}'></script>
         <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" media="all">
         {% if campaign.is_fics %}
         <link rel='stylesheet' type='text/css' href='{% sass_src "collector/scss/fics.scss" %}' />
@@ -26,7 +27,6 @@
         {% if campaign.is_prpg %}
         <link rel='stylesheet' type='text/css' href='{% sass_src "collector/scss/prpg.scss" %}' />
         {% endif %}
-
     </head>
     <body>
         <header>

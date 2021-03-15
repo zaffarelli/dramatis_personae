@@ -4,11 +4,11 @@
  ═╩╝╩    ╚═╝└─┘┴─┘┴─┘└─┘└─┘ ┴ └─┘┴└─
 */
 class Ghostmark {
-    constructor(data,oversize=0) {
+    constructor(data,oversize=3, intimacy=0) {
         let me = this;
-
+        me.intimacy = intimacy;
         me.oversize = 3;
-        if (oversize !== 0){
+        if (oversize !== 3){
             me.oversize = oversize;
         }
         me.init(data);
@@ -174,6 +174,7 @@ class Ghostmark {
                 .style('fill','#333')
             ;
 
+        if (me.intimacy > 0){
         me.sex = me.ghostmark.append('path')
             .attr("d", function(){
                 let x = me.size;
@@ -314,6 +315,25 @@ class Ghostmark {
             .style('stroke-width',1)
             .style('fill',me.panel_stroke)
         ;
+        }else{
+            me.erzatz = me.ghostmark.append('circle')
+                .attr("cx",0)
+                .attr("cy",0)
+                .attr("r",me.size)
+                .style('stroke',me.panel_fill)
+                .style('stroke-width',2)
+                .style('fill',me.panel_stroke)
+                ;
+            me.erzatz_c = me.ghostmark.append('circle')
+                .attr("cx",0)
+                .attr("cy",0)
+                .attr("r",me.size*0.8)
+                .style('stroke',me.panel_fill)
+                .style('stroke-width',2)
+                .style('fill','#333')
+                ;
+
+        }
     }
 
     polarToCartesian(centerX, centerY, radius, angleInDegrees) {
@@ -414,5 +434,142 @@ class Ghostmark {
         me.createLayout();
         me.createGhostMark();
         me.createName();
+    }
+}
+
+
+class Logo {
+    constructor(tgt,oversize=0,text) {
+        let me = this;
+        me.text = text;
+        me.size = 5;
+        if (oversize !== 0){
+            me.size = me.size*oversize;
+        }
+        me.width = me.size * 3;
+        me.height = me.size * 4;
+        me.dot_stroke = "#333";
+        me.dot_fill = "#FC4";
+        me.line_stroke = "#999";
+        me.line_fill = "#333";
+        me.ox = me.size/4;
+        me.oy = 3*me.size/4;
+        me.init(tgt);
+    }
+    init(tgt) {
+        let me = this;
+        me.data = [
+            {id:0,x:0,y:0},{id:1,x:me.size,y:0},{id:2,x:me.size*1.5,y:0},{id:3,x:me.size*2.5,y:0},
+            {id:4,x:0,y:me.size},{id:5,x:me.size,y:me.size},{id:6,x:me.size*1.5,y:me.size},{id:7,x:me.size*2.5,y:me.size},
+            {id:8,x:0,y:me.size*1.5},{id:9,x:me.size,y:me.size*1.5},{id:10,x:me.size*1.5,y:me.size*1.5},{id:11,x:me.size*2.5,y:me.size*1.5},
+            {id:12,x:0,y:me.size*2.5},{id:13,x:me.size,y:me.size*2.5},{id:14,x:me.size*1.5,y:me.size*2.5},{id:15,x:me.size*2.5,y:me.size*2.5}
+            ];
+        me.links = [
+            {a:5,b:13},{a:12,b:8},{a:3,b:11},{a:14,b:2},  // verticals
+            {a:13,b:12},{a:8,b:11},{a:2,b:3},  // horizontals
+            {a:0,b:0},{a:1,b:1},{a:4,b:4},{a:15,b:15}     // dots
+            ];
+        me.svg = d3.select(tgt)
+            .append('svg')
+            .attr("width", me.width)
+            .attr("height", me.height)
+            .style("background", "transparent")
+            //.style("background", "red")
+            .append('g');
+    }
+
+    drawBack(){
+        let me = this;
+        me.links = me.svg.append('g')
+            .selectAll('link')
+            .data(me.links)
+            .enter()
+                .append('line')
+                .attr('class','link')
+                .attr('x1',function(d){
+                    let c = me.data.find(x => x.id === d.a)
+                    return c.x+me.ox;
+                })
+                .attr('y1',function(d){
+                    let c = me.data.find(x => x.id === d.a)
+                    return c.y+me.oy;
+                })
+                .attr('x2',function(d){
+                    let c = me.data.find(x => x.id === d.b)
+                    return c.x+me.ox;
+                })
+                .attr('y2',function(d){
+                    let c = me.data.find(x => x.id === d.b)
+                    return c.y+me.oy;
+                })
+                .attr('r',me.size/10)
+                .style('fill',me.line_fill)
+                .style('stroke',me.line_stroke)
+                .style('stroke-linecap','round')
+                .style('stroke-width',(me.size/4)+'pt')
+                .style('opacity','0.9')
+                .on('mouseover', function(d){
+                    d3.select(this).style("stroke", "#777");
+                })
+                .on('mouseout', function(d){
+                    d3.select(this).style("stroke", me.line_stroke);
+                })
+            ;
+        me.dots = me.svg.append('g')
+            .selectAll('dot')
+            .data(me.data)
+            .enter()
+                .append('circle')
+                .attr('class','dot')
+                .attr('cx',function(d){
+                    return d.x+me.ox;
+                })
+                .attr('cy',function(d){
+                    return d.y+me.oy;
+                })
+                .attr('r',me.size/7.5)
+                .style('fill',me.dot_fill)
+                .style('stroke',me.dot_stroke)
+                .style('stroke-width','1pt')
+                .style('opacity','0.9')
+//                 .on('mouseover', function(d){
+//                     d3.select(this).style("fill", "#333");
+//                 })
+//                 .on('mouseout', function(d){
+//                     d3.select(this).style("fill", me.dot_fill);
+//                 })
+            ;
+    }
+    drawText(){
+        let me = this;
+        if (me.text == 1){
+            me.svg.append('text')
+                .attr('x',me.ox+me.size*1.25)
+                .attr('y',me.oy+me.size*(-0.25))
+                .attr('font-family','FatName')
+                .attr('text-anchor','middle')
+                .style('font-size',(me.size/2.5)+'pt')
+                .style('fill',me.line_stroke)
+                .style('stroke',me.line_fill)
+                .style('stroke-width','1pt')
+                .text("Fading Suns")
+                ;
+            me.svg.append('text')
+                .attr('x',me.ox+me.size*1.25)
+                .attr('y',me.oy+me.size*2.95)
+                .attr('font-family','FatName')
+                .attr('text-anchor','middle')
+                .style('font-size',(me.size/4)+'pt')
+                .style('fill',me.line_stroke)
+                .style('stroke',me.line_fill)
+                .style('stroke-width','1pt')
+                .text("Dramatis Personae")
+                ;
+            }
+        }
+    perform(){
+        let me = this;
+        me.drawBack();
+        me.drawText();
     }
 }
