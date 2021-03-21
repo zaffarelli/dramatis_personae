@@ -69,6 +69,14 @@ class Drama(StoryModel):
     def get_full_id(self):
         return f'{self.epic.get_full_id}:{int(self.chapter):02}'
 
+    def set_pdf(self, value=True):
+        self.to_PDF = value
+        from scenarist.models.acts import Act
+        all = Act.objects.filter(drama=self)
+        for a in all:
+            a.set_pdf(value)
+            a.save()
+        self.save()
 
 class DramaAdmin(admin.ModelAdmin):
     ordering = ('epic', 'chapter', 'date', 'title',)

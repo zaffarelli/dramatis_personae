@@ -1,11 +1,11 @@
 <div class="keywords_stack">
     {% for k in cdata.keywords %}
-    <div class="keyword_tag" code="{{k.name}}">
+    <div class="slug-page-item keyword_tag" action='search' code="{{k.name}}" page="1">
         <strong>{{k.name}}</strong><em>{{k.count}}</em>
     </div>
     {% endfor %}
     {% for k in edata.dramas %}
-    <div class="keyword_tag drama" code="{{k.code}}">
+    <div class="slug-page-item keyword_tag drama" action='search' code="{{k.code}}" page="1">
         <em>{{k.chapter}}</em><strong>{{k.drama}}</strong>
     </div>
     {% endfor %}

@@ -35,6 +35,9 @@ class Event(StoryModel):
     def get_full_id(self):
         return f'{self.act.get_full_id}:{int(self.chapter):02}'
 
+    def set_pdf(self, value=True):
+        self.to_PDF = value
+
 
 class EventAdmin(admin.ModelAdmin):
     ordering = ('act', 'chapter', 'title',)

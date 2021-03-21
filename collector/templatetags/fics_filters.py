@@ -23,7 +23,7 @@ def modulo(num, val):
 def as_bullets(value):
     """ Change int value to list of bullet (in the "Mark Rein*Hagen" style)
     """
-    one = '<i class="fas fa-circle fa-xs" title="%d"></i>' % (value)
+    one = '<i class="fas fa-circle fa-xs" title="%d toto"></i>' % (value)
     blank = '<i class="fas fa-circle fa-xs blank" title="%d"></i>' % (value)
     x = 0
     res = ''
@@ -45,14 +45,15 @@ def as_bullets_short(value):
         Do it with a width limit of 10
     """
     if isinstance(value, int):
-        one_very_high = '<i class="fas fa-circle fa-xs veryhigh" title="%d"></i>' % (int(value))
-        one_high = '<i class="fas fa-circle fa-xs high" title="%d"></i>' % (int(value))
-        one_medium = '<i class="fas fa-circle fa-xs medium" title="%d"></i>' % (int(value))
-        one_low = '<i class="fas fa-circle fa-xs low" title="%d"></i>' % (int(value))
-        blank = '<i class="fas fa-circle fa-xs blank" title="%d"></i>' % (int(value))
+        one_very_high = '<i class="fas fa-circle fa-xs veryhigh" title="%d bullet_short"></i>' % (int(value))
+        one_high = '<i class="fas fa-circle fa-xs high" title="%d bullet_short"></i>' % (int(value))
+        one_medium = '<i class="fas fa-circle fa-xs medium" title="%d bullet_short"></i>' % (int(value))
+        one_low = '<i class="fas fa-circle fa-xs low" title="%d bullet_short"></i>' % (int(value))
+        blank = '<i class="fas fa-circle fa-xs blank" title="%d bullet_short"></i>' % (int(value))
+        special_blank = '<i class="fas fa-circle fa-xs special_blank" title="%d bullet_short"></i>' % (int(value))
         x = 0
         res = ''
-        while x < 10:
+        while x < 20:
             if x < int(value):
                 if x > 6:
                     res += one_very_high
@@ -63,7 +64,10 @@ def as_bullets_short(value):
                 else:
                     res += one_low
             else:
-                res += blank
+                if (x+1) % 5 == 0:
+                    res += special_blank
+                else:
+                    res += blank
             if (x + 1) % 10 == 0:
                 res += '<br/>'
             x += 1
@@ -77,8 +81,8 @@ def as_bullets_short_wildcard(value):
     """ Change int value to list of bullet (Mark Rein*Hagen like)
     """
     if isinstance(value, int):
-        one_low = '<i class="fas fa-circle fa-xs wildcard" title="%d"></i>' % (int(value))
-        blank = '<i class="fas fa-circle fa-xs blank" title="%d"></i>' % (int(value))
+        one_low = '<i class="fas fa-circle fa-xs wildcard" title="%d" name="bullet_short_wildcard"></i>' % (int(value))
+        blank = '<i class="fas fa-circle fa-xs blank" title="%d" name="bullet_short_wildcard"></i>' % (int(value))
         x = 0
         res = ''
         while x < 10:
@@ -121,6 +125,21 @@ def parse_avatars(value):
     char_to_tag('£','em', txt, changes)
     char_to_tag('=','h5', txt, changes,prefix='<i class="fa fa-square"></i> ')
     char_to_tag('µ','h6', txt, changes,prefix='<i class="fa fa-minus"></i> ')
+    # RollCheck
+    sym = '%'
+    search = "[A-Za-z0-9\é\è\ô\ö\à\s\.\'\;\-\(\)\&\:\,\_]+"
+    pattern = "\%s%s\%s" % (sym, search, sym)
+    seeker = re.compile(pattern)
+    iter = seeker.finditer(txt)
+    for item in iter:
+        occ = ''.join(item.group().split(sym))
+        from optimizer.utils.gaming import rollcheck
+        txt, title = rollcheck(occ)
+        replacement_string = f'<div class="embedded_link" title="{title}">{txt}</div>'
+        print(replacement_string)
+        changes.append({'src': item.group(), 'dst': replacement_string})
+
+
     # Characters
     seeker = re.compile('\¤(\w+)\¤')
     iter = seeker.finditer(txt)
@@ -137,7 +156,7 @@ def parse_avatars(value):
         else:
             replacement_string = '<span class="embedded_link broken">[%s&dagger;]</span>' % (rid)
         changes.append({'src': item.group(), 'dst': replacement_string})
-        print(replacement_string)
+        #print(replacement_string)
     # Ships
     sym = '^'
     seeker = re.compile(f'\^(\w+)\^')

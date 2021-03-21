@@ -226,9 +226,9 @@
     }
 }
 
-span.menu-item, a.menu-item {
+.menu-item, .slug-item, .slug-page-item {
     display: block;
-    background: transparent;
+    //background: transparent;
     color: $fics_front;
     text-align: left;
     text-decoration: none;

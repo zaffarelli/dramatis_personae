@@ -12,9 +12,10 @@ from collector.models.fics_models import Specie
 from collector.models.campaign import Campaign
 from django.template.loader import get_template
 import datetime
-from collector.utils.basic import get_current_config
+from collector.utils.basic import get_current_config, export_epic
 from collector.utils.fics_references import MAX_CHAR
 from collector.views.characters import respawn_avatar_link
+
 import os
 from django.conf import settings
 from django.http import FileResponse
@@ -76,7 +77,10 @@ def get_list(request, id, slug='none'):
     context = {'character_items': character_items}
     template = get_template('collector/list.html')
     html = template.render(context,request)
-    return HttpResponse(html, content_type='text/html')
+    response = {
+        'mosaic': html,
+    }
+    return JsonResponse(response)
 
 
 def show_todo(request):
@@ -113,7 +117,8 @@ def get_storyline(request, slug='none'):
                 c.save()
         template = get_template('collector/conf_select.html')
         html = template.render({'configs': config_items}, request)
-        return HttpResponse(html, content_type='text/html')
+        response = {'mosaic':html}
+        return JsonResponse(response)
     else:
         return Http404
 
@@ -185,7 +190,7 @@ def add_avatar(request, slug=None):
     item.get_rid(item.full_name)
     item.save()
     character_item = campaign.avatars.get(pk=item.id)
-    context = {'rid':character_item.rid }
+    context = {'mosaic':{'rid':character_item.rid} }
     messages.info(request, f'...{character_item.full_name} added ({campaign.rpgsystem})')
     return JsonResponse(context)
 
@@ -214,10 +219,12 @@ def conf_details(request):
     if request.is_ajax:
         from collector.models.campaign import Campaign
         campaign = get_current_config()
+        _ = export_epic(request, campaign)
         context = {'epic': campaign.parse_details()}
         template = get_template('collector/conf_details.html')
         html = template.render(context, request)
-        return HttpResponse(html, content_type='text/html')
+        response = {'mosaic': html}
+        return JsonResponse(response)
     else:
         return Http404
 

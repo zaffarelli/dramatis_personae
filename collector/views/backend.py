@@ -135,4 +135,5 @@ def bloke_selector(request):
         template = get_template('collector/blokes.html')
         html = template.render(context, request)
         messages.info(request, f'Blokes selector loaded.')
-        return HttpResponse(html, content_type='text/html')
+        response = { 'mosaic': html}
+        return JsonResponse(response)

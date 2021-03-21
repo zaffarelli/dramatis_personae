@@ -48,6 +48,16 @@ class Act(StoryModel):
         return f'{self.drama.get_full_id}:{int(self.chapter):02}'
 
 
+    def set_pdf(self, value=True):
+        self.to_PDF = value
+        from scenarist.models.events import Event
+        all = Event.objects.filter(act=self)
+        for e in all:
+            e.set_pdf(value)
+            e.save()
+        self.save()
+
+
 class ActAdmin(admin.ModelAdmin):
     ordering = ('drama', 'chapter', 'title',)
     list_display = ('title','full_id', 'drama', 'chapter', 'date', 'place', 'description')

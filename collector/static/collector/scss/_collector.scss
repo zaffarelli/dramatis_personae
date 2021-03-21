@@ -92,9 +92,7 @@ span.toggler {
 }
 
 
-#toast-container{
-    font-height: 8px;
-}
+
 
 
 #user_block{
@@ -116,3 +114,15 @@ span.toggler {
 span.info{
     color: $fics_front;
 }
+
+
+#toast-container{
+    font-height: 8px;
+}
+
+.highlighted, .highlighted2, .highlighted3{
+    background: #808;
+    cursor:pointer;
+    text-align:left;
+}
+

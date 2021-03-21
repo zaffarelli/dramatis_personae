@@ -152,8 +152,8 @@ class Campaign(models.Model):
                     com_arr[3] = new_green[3]
                     com = '%s%s%s%s' % (com_arr[0], com_arr[1], com_arr[2], com_arr[3])
                     prev_com_arr = com_arr
-                col = '#' + com + 'A0'
-                hcol = '#' + com + 'C0'
+                col = '#A0' + com
+                hcol = '#C0' + com
                 colorset.append(col)
                 hcolorset.append(hcol)
                 idx += 1

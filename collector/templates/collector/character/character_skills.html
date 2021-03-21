@@ -2,7 +2,7 @@
 <h2>Skills ({{c.SK_TOTAL}})</h2>
 <div class='skillsview'>
     {% for skill in c.skill_set.all|dictsort:"skill_ref.reference" %}
-        <span id='sk_{{skill.skill_ref.id}}'>
+        <span class='character_skill' id='sk_{{skill.skill_ref.id}}'>
             {% include "collector/character/character_skill.html"%}
         </span>
     {% endfor %}

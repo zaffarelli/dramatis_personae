@@ -75,6 +75,14 @@ class Epic(StoryModel):
         """ Return subchapters """
         return self.shortcut
 
+    def set_pdf(self, value=True):
+        self.to_PDF = value
+        from scenarist.models.dramas import Drama
+        all = Drama.objects.filter(epic=self)
+        for d in all:
+            d.set_pdf(value)
+            d.save()
+        self.save()
 
 class EpicAdmin(admin.ModelAdmin):
     ordering = ('era', 'title',)

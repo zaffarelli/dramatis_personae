@@ -12,6 +12,7 @@ $fics_dark: darken($fics_back, 5%);
 $fics_darker: darken($fics_back, 10%);
 $fics_darkest: darken($fics_darker, 15%);
 $fics_blank: lighten($fics_back, 5%);
+$fics_special_blank: lighten($fics_back, 10%);
 $formset_back: $fics_darker;
 $fics_hl: darken($fics_link, 40%);
 $fics_ghost: darken($fics_front, 15%);
@@ -383,6 +384,10 @@ body {
                     &.edit {
                         width: 5ex;
                     }
+
+                    &.value{
+                        box-shadow: 0 0 3px $fics_darkest;
+                    }
                 }
 
                 &.primary {
@@ -507,6 +512,9 @@ body {
                         margin: 0;
                         padding: 0;
                         background: $fics_dark;
+                        &.value{
+                            box-shadow: 0 0 3px $fics_darkest;
+                        }
                     }
 
                     & td[colspan="2"] {
@@ -770,6 +778,12 @@ body {
     color: $fics_blank;
     opacity: .5;
     text-shadow: 0 0 3px black;
+}
+
+.special_blank {
+    color: $fics_blank;
+    opacity: .5;
+    text-shadow: 0 0 3px white;
 }
 
 .wildcard {

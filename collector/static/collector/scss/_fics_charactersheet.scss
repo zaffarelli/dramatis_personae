@@ -99,6 +99,9 @@ div.character_sheet {
                 &.edit {
                     width: 5ex;
                 }
+                &.value{
+                    box-shadow: 0 0 3px $fics_darkest;
+                }
             }
             
             &.primary {

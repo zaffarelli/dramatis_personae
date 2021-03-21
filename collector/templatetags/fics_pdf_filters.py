@@ -17,7 +17,7 @@ register = template.Library()
 
 @register.filter(name='parse_avatars_pdf')
 def parse_avatars_pdf(value):
-    value = "<br/>".join(value.split("\n"))
+    value = "<br/>".join(value.split("\n\n"))
     changes = []
     txt = str(value)
     """ Replace avatars rids by html links in a text """
