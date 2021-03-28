@@ -11,7 +11,7 @@ admin.site.register(SkillRef, SkillRefAdmin)
 from collector.models.blessing_curse import BlessingCurseRef, BlessingCurseRefAdmin
 admin.site.register(BlessingCurseRef, BlessingCurseRefAdmin)
 
-from collector.models.fics_models import Specie, SpecieAdmin
+from collector.models.specie import Specie, SpecieAdmin
 admin.site.register(Specie, SpecieAdmin)
 
 from collector.models.armor import ArmorRef, ArmorRefAdmin

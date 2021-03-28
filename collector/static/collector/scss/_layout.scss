@@ -245,9 +245,8 @@
             flex-shrink:0;
             height:auto;
             width:auto;
-
-
-
+            background:transparent;
+            border-color:transparent;
             & .character_update_view{
                 & form.character_form{
                     border:1px solid $fics_darkest;

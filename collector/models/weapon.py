@@ -24,7 +24,7 @@ class WeaponRef(models.Model):
                                     choices=(('E', "Excellent"), ('C', "Common"), ('P', "Poor"), ('R', "Rare")),
                                     default='C')
     damage_class = models.CharField(max_length=16, default='')
-    caliber = models.CharField(max_length=16, default='')
+    caliber = models.CharField(max_length=16, default='', blank=True)
     str_min = models.PositiveIntegerField(default=0)
     rof = models.PositiveIntegerField(default=0)
     clip = models.PositiveIntegerField(default=0)
@@ -33,9 +33,9 @@ class WeaponRef(models.Model):
     rel = models.CharField(max_length=2, choices=(('VR', "Very reliable"), ('ST', "Standard"), ('UR', "Unreliable")),
                            default='ST')
     cost = models.PositiveIntegerField(default=0)
-    description = models.TextField(max_length=1024, default='')
-    stats = models.CharField(max_length=256, default='')
-    origins = models.CharField(max_length=64, default='')
+    description = models.TextField(max_length=1024, default='', blank=True)
+    stats = models.CharField(max_length=256, default='', blank=True)
+    origins = models.CharField(max_length=64, default='', blank=True)
     hidden = models.BooleanField(default=False)
 
     def __str__(self):

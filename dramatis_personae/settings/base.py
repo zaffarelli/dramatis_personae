@@ -69,13 +69,14 @@ STATICFILES_FINDERS = [
     'sass_processor.finders.CssFinder',
 ]
 
-LOGPATH = os.path.join(BASE_DIR,'logs/')
+#LOGPATH = os.path.join(BASE_DIR,'logs/')
+LOGPATH = '/var/log/dramatis_personae/'
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': True,
     'formatters': {
         'standard': {
-            'format' : "[%(asctime)s|%(levelname)s] %(message)s",  # [%(name)s:%(lineno)s
+            'format' : "[%(asctime)s|%(levelname)8s] %(message)s",  # [%(name)s:%(lineno)s
             'datefmt' : "%Y%m%d%H%M%S"
         },
     },
@@ -84,12 +85,12 @@ LOGGING = {
             'level': 'INFO',
             'class': 'logging.handlers.RotatingFileHandler',
             'filename': LOGPATH+"dramatis_personae.log",
-            'maxBytes': 1000000000,
-            'backupCount': 3,
+            'maxBytes': 1000000,
+            'backupCount': 9,
             'formatter': 'standard',
         },
         'console': {
-            'level': 'INFO',
+            'level': 'ERROR',
             'class': 'logging.StreamHandler',
             'formatter': 'standard'
         },

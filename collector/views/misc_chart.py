@@ -15,6 +15,9 @@ import json
 def get_population_statistics(request, *args, **kwargs):
     campaign = get_current_config()
     da = []
+    ch = campaign.get_specific_chart(name='population_per_species')
+    da.append(json.dumps(ch['data']))
+
     ch = campaign.get_specific_chart(name='population_per_ranking')
     da.append(json.dumps(ch['data']))
     ch = campaign.get_specific_chart(name='population_per_current_system')

@@ -9,6 +9,68 @@ from django.dispatch import receiver
 from django.db.models.signals import pre_save
 from django.contrib import admin
 from collector.models.character import Character
+from datetime import datetime
+
+LIFEPATH_CATEGORY = (
+    ('0', "Birthright"),
+    ('5', "Balance"),
+    ('10', "Upbringing"),
+    ('20', "Apprenticeship"),
+    ('30', "Early Career"),
+    ('40', "Tour of Duty"),
+    ('50', "Worldly Benefits"),
+    ('60', "Nameless Kit"),
+    ('70', "Build"),
+    ('80', "Custom"),
+)
+
+# ('6',"Birthright balance"),
+
+LIFEPATH_CATEGORY_SHORT = {
+    '0': "BR",
+    '5': "BA",
+    '10': "UB",
+    '20': "AP",
+    '30': "EC",
+    '40': "TD",
+    '50': "WB",
+    '60': "NK",
+    '70': "BU",
+    '80': "CU",
+}
+
+LIFEPATH_CATEGORY_VAL = {
+    '0': 0,
+    '5': 0,
+    '10': (20, 5, 15, ),
+    '20': (25, ),
+    '30': (48, ),
+    '40': (10, 20, 30, 40, ),
+    '50': (7, ),
+    '60': 0,
+    '70': 0,
+    '80': 0,
+}
+
+LIFEPATH_CASTE = (
+    ('Nobility', "Nobility"),
+    ('Church', "Church"),
+    ('Guild', "Guild"),
+    ('Alien', "Alien"),
+    ('Other', "Other"),
+    ('Freefolk', "Freefolk"),
+    ('Think Machine', "Think Machine"),
+)
+
+LIFEPATH_CASTE_SHORT = {
+    'Nobility': "NOB",
+    'Church': "CHU",
+    'Guild': "GUI",
+    'Alien': "ALI",
+    'Other': "OTH",
+    'Freefolk': "FFK",
+    'Think Machine': "THM",
+}
 
 
 class TourOfDutyRef(models.Model):
@@ -16,11 +78,12 @@ class TourOfDutyRef(models.Model):
         ordering = ['category', 'reference']
         verbose_name = "FICS: ToD"
     reference = models.CharField(max_length=64, default='')
-    category = models.CharField(max_length=20, choices=fics_references.LIFEPATH_CATEGORY, default='Tour of Duty')
-    caste = models.CharField(max_length=20, choices=fics_references.LIFEPATH_CASTE, default='Other')
+    category = models.CharField(max_length=20, choices=LIFEPATH_CATEGORY, default='Tour of Duty')
+    caste = models.CharField(max_length=20, choices=LIFEPATH_CASTE, default='Other')
     topic = models.CharField(max_length=64, default='', blank=True)
-    source = models.CharField(max_length=32, default='FS2CRB')
+    source = models.CharField(max_length=32, default='FS2CRB', choices=fics_references.SOURCE_REFERENCES)
     is_custom = models.BooleanField(default=False)
+    need_fix = models.BooleanField(default=False, blank=True)
     AP = models.IntegerField(default=0)
     OP = models.IntegerField(default=0)
     PA_STR = models.IntegerField(default=0)
@@ -41,10 +104,11 @@ class TourOfDutyRef(models.Model):
     value = models.IntegerField(default=0)
     description = models.TextField(max_length=1024, default='', blank=True)
     valid = models.BooleanField(default=False)
+    pub_date = models.DateTimeField('Date published', default=datetime.now)
 
     def __str__(self):
-        return '[%s] %s (%s)(%d)' % (fics_references.LIFEPATH_CATEGORY_SHORT[self.category], self.reference,
-                                     fics_references.LIFEPATH_CASTE_SHORT[self.caste], self.value)
+        return '[%s] %s (%s)(%d)' % (LIFEPATH_CATEGORY_SHORT[self.category], self.reference,
+                                     LIFEPATH_CASTE_SHORT[self.caste], self.value)
 
     def fix(self):
         self.WP = 0
@@ -96,19 +160,17 @@ class TourOfDutyRef(models.Model):
             self.description = " ".join(texts)
             self.value = self.AP * 3 + self.OP
             self.check_value()
+        self.need_fix = False
 
     def check_value(self):
-        from collector.utils.fics_references import LIFEPATH_CATEGORY_VAL
         valid = True
-        if self.value not in LIFEPATH_CATEGORY_VAL[self.category]:
-            valid = False
+        if LIFEPATH_CATEGORY_VAL[self.category] != 0:
+            if self.value not in LIFEPATH_CATEGORY_VAL[self.category]:
+                valid = False
         if valid != self.valid:
             self.valid = valid
 
 
-@receiver(pre_save, sender=TourOfDutyRef, dispatch_uid='update_tour_of_duty_ref')
-def update_tour_of_duty_ref(sender, instance, **kwargs):
-    instance.fix()
 
 
 class TourOfDuty(models.Model):

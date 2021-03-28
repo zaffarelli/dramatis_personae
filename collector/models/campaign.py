@@ -303,8 +303,16 @@ class Campaign(models.Model):
             title = 'Population per Rank'
             bar_property = 'ranking'
             ref = ''
-            type = 'polarArea'
-            legend_display = True
+            type = 'horizontalBar'
+            legend_display = False
+            color_scale = True
+            skip_zero = True
+        elif name== 'population_per_species':
+            title = 'Population per Species'
+            bar_property = 'specie'
+            ref = 'species'
+            type = 'horizontalBar'
+            legend_display = False
             color_scale = True
             skip_zero = True
 

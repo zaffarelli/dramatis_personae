@@ -8,7 +8,7 @@ from django.shortcuts import render, redirect
 from django.core.paginator import Paginator
 from collector.models.character import Character
 from collector.models.investigator import Investigator
-from collector.models.fics_models import Specie
+from collector.models.specie import Specie
 from collector.models.campaign import Campaign
 from django.template.loader import get_template
 import datetime
@@ -70,6 +70,9 @@ def get_list(request, id, slug='none'):
         if len(character_items)==0:
             character_items = campaign.open_avatars.filter(rid__contains=slug.lower()).order_by('full_name')
             messages.info(request, f'Searching {slug} among rids')
+    # for c in character_items:
+    #     c.need_fix = True
+    #     c.save()
     paginator = Paginator(character_items, MAX_CHAR)
     page = id
     character_items = paginator.get_page(page)

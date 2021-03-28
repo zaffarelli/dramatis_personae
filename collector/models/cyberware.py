@@ -8,6 +8,7 @@ from collector.models.character import Character
 from django.dispatch import receiver
 from django.db.models.signals import pre_save
 from django.contrib import admin
+from datetime import datetime
 import logging
 
 logger = logging.getLogger(__name__)
@@ -22,11 +23,9 @@ CYBERFEATURE_CATEGORIES = (
     ('6', "Technology"),
 )
 
-
 class Cyberfeature(models.Model):
     class Meta:
         verbose_name = "FICS: Cyberfeature"
-
     reference = models.CharField(max_length=64)
     value = models.IntegerField(default=1)
     complexity = models.IntegerField(default=1)
@@ -44,7 +43,6 @@ class Cyberfeature(models.Model):
 class CyberwareRef(models.Model):
     class Meta:
         verbose_name = "FICS: Cyberware"
-
     reference = models.CharField(max_length=64)
     cyberfeatures = models.ManyToManyField(Cyberfeature, blank=True)
     complexity = models.IntegerField(default=0)
@@ -53,6 +51,8 @@ class CyberwareRef(models.Model):
     incompatibility = models.IntegerField(default=0)
     tech_level = models.IntegerField(default=0)
     description = models.TextField(default='', blank=True, max_length=1024)
+    pub_date = models.DateTimeField('Date published', default=datetime.now)
+    need_fix = models.BooleanField(default=False, blank=True)
 
     @property
     def features(self):
@@ -82,13 +82,13 @@ class CyberwareRef(models.Model):
                 self.complexity += f.complexity
             self.value += self.complexity * 10
             self.value *= 1.0 + global_ratio
+            from django.utils.timezone import get_current_timezone
+            self.pub_date = datetime.now(tz=get_current_timezone())
+            self.need_fix = False
         except:
             logger.info("Device [%s] not yet fixable... Next save will do." % (self.reference))
 
 
-@receiver(pre_save, sender=CyberwareRef, dispatch_uid='update_cyberware_ref')
-def update_cyberware_ref(sender, instance, **kwargs):
-    instance.fix()
 
 
 class Cyberware(models.Model):

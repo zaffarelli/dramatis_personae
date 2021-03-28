@@ -22,6 +22,12 @@
                 {{form.entrance}}
             </div>
             <div class="field_wrapper">
+                {{ form.storytelling_note.errors}}
+                <label for="storytelling_note">Storytelling Note</label>
+                {{form.storytelling_note}}
+            </div>
+
+            <div class="field_wrapper">
                 {{ form.alliance_ref.errors}}
                 <label for="alliance_ref">AllianceRef</label>
                 {{form.alliance_ref}}
@@ -84,7 +90,7 @@
 
             <div class="field_wrapper">
                 {{ form.caste.errors}}
-                <label for="caste">Caste:</label>
+                <label for="caste">Caste</label>
                 {{form.caste}}
             </div>
             <div class="field_wrapper">

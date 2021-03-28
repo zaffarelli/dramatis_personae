@@ -191,38 +191,130 @@ class Ghostmark {
             .style('stroke-width',1)
             .style('fill',me.panel_stroke)
         ;
+
+        me.traits_line_mark = me.ghostmark.append('line')
+            .attr("x1", -10)
+            .attr("y1", -24)
+            .attr("x2", 10)
+            .attr("y2", -24 )
+            .style('stroke',"#888")
+            .style('fill',  "#eee")
+            .style('stroke-width',1)
+        ;
+
+
+        me.physical_mark = me.ghostmark.append('circle')
+            .attr("cx", -10)
+            .attr("cy", -24)
+            .attr("r", 4)
+            .style('stroke',function(d){
+                return (me.character['physical']>=7 ? "#888":'transparent');
+                })
+            .style('fill',  function(d){
+                return (me.character['physical']>=7 ? "#eee":'transparent');
+                })
+            .style('stroke-width',1)
+        ;
+
+        me.mental_mark = me.ghostmark.append('circle')
+            .attr("cx", 0)
+            .attr("cy", -24)
+            .attr("r", 4)
+            .style('stroke',function(d){
+                return (me.character['mental']>=7 ? "#888":'transparent');
+                })
+            .style('fill',function(d){
+                return (me.character['mental']>=7 ? "#eee":'transparent');
+                })
+            .style('stroke-width',1)
+        ;
+
+        me.combat_mark = me.ghostmark.append('circle')
+            .attr("cx", 10)
+            .attr("cy", -24)
+            .attr("r", 4)
+            .style('stroke',function(d){
+                return (me.character['combat']>=7) ? "#888":'transparent';
+                })
+            .style('fill',function(d){
+                return (me.character['combat']>=7) ? "#eee":'transparent';
+                })
+            .style('stroke-width',1)
+        ;
+
+        me.balanced_mark = me.ghostmark.append('circle')
+            .attr("cx", 0)
+            .attr("cy", -12)
+            .attr("r", 3)
+            .style('stroke','#888')
+            .style('fill',function(d){
+                return (me.character['balanced']) ? "#fc4":'transparent';
+                })
+            .style('stroke-width',1)
+        ;
+
+
+        me.tod_mark = me.ghostmark.append('text')
+            .attr("x", 30)
+            .attr("y", -30)
+            .style('font-family',"FatName")
+            .style('font-size',"10pt")
+            .style('text-anchor',"middle")
+            .style('stroke',"#111")
+            .style('fill',"#eee")
+            .style('stroke-width',"0.5pt")
+            .text(function(d){
+                return me.character['tod_count'];
+            })
+        ;
+
+
+
         me.race_sym = me.ghostmark.append('path')
                 .attr("d", function(){
                     let x = me.size;
                     let path_str = '';
-                    let race = me.character['race'].split(' ')
-                    if (race[0] == 'Urthish'){
+                    let race = me.character['race'].trim().split(' ')
+                    let local_race = race[0]
+                    console.warn(me.character['race']);
+                    if (local_race == 'Urthish'){
                         path_str += me.drawSticks(0,0,'1,1 0,0.1 -1,-1 -1,1 0,-0.1 1,-1');
                     }
-                    if (race[0] == 'Ur-Ukar'){
+                    if (local_race == 'Ur-Ukar'){
                         let ukar_str = '0.8,-0.8 ';
                         ukar_str +=    '-0.3,-0.3 0,0.1 0.2,0.2 ';
                         ukar_str +=    '-0.7,0.7 -0.7,-0.7 ';
                         ukar_str +=    '0.2,-0.2 0,-0.1 -0.3,0.3 ';
                         ukar_str +=    '0.8,0.8';
-                        path_str += me.drawSticks(0,1,ukar_str);
+                        path_str += me.drawSticks(0,0.5,ukar_str);
                     }
-                    if (race[0] == 'Ur-Obun'){
+                    if (local_race == 'Ur-Obun'){
                         let obun_str = '0.8,-0.8 ';
                         obun_str +=    '0.3,0.3 0,-0.1 -0.3,-0.3 ';
                         obun_str +=    '-0.8,0.8 -0.8,-0.8 ';
                         obun_str +=    '-0.3,0.3 0,0.1 0.3,-0.3 ';
                         obun_str +=    '0.8,0.8';
-                        path_str += me.drawSticks(0,1,obun_str);
+                        path_str += me.drawSticks(0,0.5,obun_str);
                     }
 
-                    if (race[0] == 'Vorox'){
-                        path_str += me.drawSticks(-1,1,'1,-1 1,1');
-                        path_str += me.drawSticks(-1,0,'1,1 1,-1');
+                    if (local_race == 'Vorox'){
+                        let st = '0,-0.05 ';
+                        st += '0.5,-0.5 0.25,0.25 0.25,-0.25 0.25,0.25 0.25,-0.25 0.5,0.5 ';
+                        st += '0,0.05 ';
+                        st += '-0.5,-0.5 -0.25,0.25 -0.25,-0.25 -0.25,0.25 -0.25,-0.25 -0.5,0.5 ';
+                        path_str += me.drawSticks(-1,0.8,st);
+
 
                     }
-                    if (race[0] == 'Kurgan'){
-                        path_str += me.drawSticks(0,0,'0.6,0.6 0,0.1 -0.6,-0.6 -0.6,0.6 0,-0.1 0.6,-0.6');
+                    if (local_race == 'Kurgan'){
+                        let st = '';
+                        st += '0,-0.05 ';
+                        st += '0.6,-0.6 0.2,0.2 -0.2,0.2 -0.4,-0.4 0.4,-0.4 0.4,0.4 ';
+                        st += '0.4,-0.4 0.4,0.4 -0.4,0.4 -0.2,-0.2 0.2,-0.2 0.6,0.6 ';
+                        st += '0,0.05 ';
+                        st += '-0.6,-0.6 -0.2,0.2 0.2,0.2 0.4,-0.4 -0.4,-0.4 -0.4,0.4 ';
+                        st += '-0.4,-0.4 -0.4,0.4 0.4,0.4 0.2,-0.2 -0.2,-0.2 -0.6,0.6 ';
+                        path_str += me.drawSticks(-1,0.5,st,20);
                     }
 
                     path_str += '  ';
@@ -248,7 +340,7 @@ class Ghostmark {
                     }
                     // Occult category icon
                     if (me.character['occult'] == 'Theurgy'){
-                        path_str += me.drawSticks(-2,0,'-0.1,0 0,0.2 -0.2,0 0,0.2 0.2,0 0,1 0.2,0 0,-1 0.2,0 0,-0.2 -0.2,0 0,-0.2 -0.1,0');
+                        path_str += me.drawSticks(-2,0,'-0.1,0 0,0.2 -0.2,0 0,0.2 0.2,0 0,1 0.2,0 0,-1 0.2,0 0,-0.2 -0.2,0 0,-0.2 -0.1,0 ');
                     }else{
                         let str = ''
                         str += '-0.1,0 0,0.6 '

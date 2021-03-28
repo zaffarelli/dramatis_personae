@@ -15,7 +15,7 @@ def update_character_custo(sender, instance, conf=None, **kwargs):
 def update_character(sender, instance, conf=None, **kwargs):
     """ Before saving, fix() and  get_RID() for the character """
     instance.get_rid(instance.full_name)
-    instance.alliance_hash = hashlib.sha1(bytes(instance.alliance, 'utf-8')).hexdigest()
+    # instance.alliance_hash = hashlib.sha1(bytes(instance.alliance, 'utf-8')).hexdigest()
     instance.pub_date = datetime.now(tz=get_current_timezone())
 
 # @receiver(post_save, sender=Character, dispatch_uid='backup_character')

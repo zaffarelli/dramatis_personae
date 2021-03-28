@@ -13,45 +13,17 @@ class Collector{
         me.sc = sc
         me.init();
     }
-
     init(){
         let me = this;
+        me.loadKeywords();
     }
-
     perform(){
         let me = this;
         _.defer(function(){
             me.prepareAjax();
             me.rebootLinks();
-            me.loadAjax();
-            me.loadKeywords();
         });
     }
-
-    loadAjax() {
-        let me = this;
-//         $.ajax({
-//             url: 'ajax/storyline/none/',
-//             success: function(answer) {
-//                 $('.storyline').html(answer)
-//                 $.ajax({
-//                     url: 'ajax/list/none/1/',
-//                     success: function(answer) {
-//                         $('.mosaic').html(answer)
-//                         me.rebootLinks();
-//                     },
-//                 });
-//             },
-//         });
-        me.setToggler('.mobile_form_toggler', 'collapsed', "#customizer");
-        me.setToggler('.menu_right_toggler', 'collapsed', ".menuright");
-        me.setToggler('.list_toggler', 'collapsed', ".list");
-        me.setToggler('#menu_right_toggler', 'collapsed', ".menuright");
-        me.setToggler('#listtoggler', 'collapsed', ".list");
-        me.setToggler('.dicer_toggler', 'collapsed', ".dicer");
-        me.setToggler('#dicer_toggler', 'collapsed', ".dicer");
-    }
-
     prepareAjax() {
         let me = this;
         $.ajaxSetup({
@@ -64,7 +36,6 @@ class Collector{
             }
         });
     }
-
     runHeartbeat(x=5000){
         let me = this;
         clearTimeout(me.heartbeat);
@@ -76,18 +47,6 @@ class Collector{
             },
         });
     }
-
-//     oldkeywordHandlerClick(event) {
-//         let me = this;
-//         let firstPoint = chart_keywords.getElementAtEvent(event)[0];
-//         if (firstPoint) {
-//             let label = chart_keywords.data.labels[firstPoint._index];
-//             let value = chart_keywords.data.datasets[firstPoint._datasetIndex].data[firstPoint._index];
-//             $('#customize').val(label);
-//             $('#menu_search').click();
-//         }
-//     }
-
     loadKeywords() {
         let me = this;
         $.ajax({
@@ -99,31 +58,6 @@ class Collector{
             }
         });
     }
-
-
-//     setUserLink(src) {
-//         let me = this;
-//         let words = src.split('_');
-//         let link = 'user_'+words[1];
-//         console.log('Registered for '+link+' / '+src);
-//         $(src).off().on('click', function(event) {
-//             $('.mosaic').html('');
-//             $.ajax({
-//                 url: 'ajax/'+link+'/',
-//                 success: function(answer) {
-//                     console.log('click on '+link);
-//                     $('.mosaic').html(answer);
-//                     me.rebootLinks();
-//                 },
-//                 error: function(answer) {
-//                     console.error(answer);
-//                     me.rebootLinks();
-//                 }
-//             });
-//         });
-//     }
-
-
     setToggler(tag, klass, item) {
         let me = this;
         $(tag).off().on('click', function(event) {
@@ -131,7 +65,6 @@ class Collector{
             me.rebootLinks();
         });
     }
-
     shootList(tag,key,page=1){
         let me = this;
         $.ajax({
@@ -147,7 +80,6 @@ class Collector{
             }
         });
     }
-
     // Auto registering by class
     registerMenuItems(){
         let me = this;
@@ -173,7 +105,6 @@ class Collector{
             });
         });
     }
-
     registerSlugItems(){
         let me = this;
         /* Change all menu-items to ajax/<id> */
@@ -200,7 +131,6 @@ class Collector{
             });
         });
     }
-
     registerSlugPageItems(){
         let me = this;
         /* Change all menu-items to ajax/<id> */
@@ -233,119 +163,32 @@ class Collector{
             });
         });
     }
-
     markButtons(){
         $('.menu-item').addClass('highlighted');
         $('.slug-item').addClass('highlighted');
         $('.slug-page-item').addClass('highlighted');
     }
-
     rebootLinks() {
         let me = this;
         me.sc.doConnect(me);
         me.op.doConnect(me);
         me.ac.prepareEvents(me);
+        /* Starting Heartbeat */
         me.heartbeat = setTimeout("co.runHeartbeat()", 500);
 
         /* Automatic ajax pipelining */
         me.registerMenuItems();
         me.registerSlugItems();
         me.registerSlugPageItems();
-        //me.markButtons();
-
-        /* List based actions (Those rebuild the list everytime) */
-
-
-//         $('.keyword_tag').off().on('click',function(event){
-//             event.preventDefault();
-//             event.stopPropagation();
-//             let label = $(this).attr('code');
-//             $('#customize').val(label);
-//             $('#menu_search').click();
-//         });
-
-
-//         $('.nav').off().on('click', function(event) {
-//             event.preventDefault();
-//             event.stopPropagation();
-//             let tag = "nav";
-//             let key = $('#customize').val();
-//             let page = $(this).attr('page');
-//             if (key == '') {
-//                 key = 'none';
-//             }
-//             me.shootList(tag,key,page);
-//         });
-//         $('.episode_cast').off().on('click', function(event) {
-//             event.preventDefault();
-//             event.stopPropagation();
-//             let tag = "episode_cast";
-//             let key = $(this).attr('id');
-//             let page = $(this).attr('page');
-//             $('#customize').val(key);
-//             me.shootList(tag,key,page);
-//         });
-//         $("#menu_search").off().on('click', function(event) {
-//             event.preventDefault();
-//             event.stopPropagation();
-//             let tag = "menu_search";
-//             let key = $('#customize').val();
-//             let page = $(this).attr('page');
-//             if (key == '') {
-//                 key = 'none';
-//             }
-//             me.shootList(tag,key,page);
-//         });
-
-//        $("#menu_seek").off().on('click', function(event) {
-//            event.preventDefault();
-//            event.stopPropagation();
-//            let tag = "RID seek";
-//            let key = $('#customize').val();
-//            if (key == '') {
-//                key = 'none';
-//            }
-//            let page = $(this).attr('page');
-//            me.shootList(tag,key,page);
-////            $.ajax({
-////                url: 'ajax/view/by_rid/' + key + '/',
-////                success: function(answer) {
-////                    $('.details').html(answer.character);
-////                    $('.avatars').html("");
-////                    _.forEach(answer.links,function(e){
-////                        $('.avatars').append("<li id='"+e.rid + "'>" + e.data + "</li>");
-////                    })
-////                    me.prepareAjax();
-////                    me.rebootLinks();
-////                },
-////                error: function(answer) {
-////                    console.error('Seek error...');
-////                    console.error(answer.character);
-////                }
-////            });
-//        });
-
-//         $('.custom_glance').off().on('click', function(event) {
-//             event.preventDefault();
-//             event.stopPropagation();
-//             $('#customize').val($(this).attr('id'));
-//             $('#search').click();
-//         });
-//        $('.character_link').off().on('click', function(event) {
-//            event.preventDefault();
-//            event.stopPropagation();
-//            $.ajax({
-//                url: 'ajax/recalc/character/' + $(this).attr('id') + '/',
-//                success: function(answer) {
-//                    $('.details').html(answer.character);
-//                    me.rebootLinks();
-//                    ac.reset(answer.id, "sheet_" + answer.id, "customizer");
-//                },
-//                error: function(answer) {
-//                    console.log('Recalc error...' + answer);
-//                }
-//            });
-//        });
+        /* Togglers */
+        me.setToggler('.mobile_form_toggler', 'collapsed', "#customizer");
+        me.setToggler('.menu_right_toggler', 'collapsed', ".menuright");
+        me.setToggler('.list_toggler', 'collapsed', ".list");
+        me.setToggler('#menu_right_toggler', 'collapsed', ".menuright");
+        me.setToggler('#listtoggler', 'collapsed', ".list");
+        me.setToggler('.dicer_toggler', 'collapsed', ".dicer");
+        me.setToggler('#dicer_toggler', 'collapsed', ".dicer");
+//         me.markButtons();
         $('.character_name').off().on('click', function(event) {
             event.preventDefault();
             event.stopPropagation();
@@ -380,15 +223,12 @@ class Collector{
                 }
             });
         });
-
         $('.edit_character').off().on('click', function(event) {
             event.preventDefault();
             event.stopPropagation();
             let dad = $(this).parents('li');
             let dad_id = $(dad).attr("id");
             let x = $(this).parents('div').attr("id").split("_")[1];
-//            console.log(x);
-            //let that_id = $(this).attr('id').split("_")[0];
             $("li#" + dad_id + " .character_info").removeClass('hidden');
             $.ajax({
                 url: 'ajax/edit/avatar/' + x + '/',
@@ -400,35 +240,13 @@ class Collector{
                     me.rebootLinks();
                     ac.reset(x, "sheet_" + x, "customizer");
                     $("li#" + dad_id + " .character_name").click();
-                    //update_messenger();
                 },
                 error: function(answer) {
                     console.log('Error on editing '+x);
                     me.rebootLinks();
-                    //update_messenger();
                 }
             });
         });
-
-//         $("#menu_conf_details").off().on('click', function(event) {
-//             event.preventDefault();
-//             $.ajax({
-//                 url: 'ajax/conf_details/',
-//                 success: function(answer) {
-//                     $('.mosaic').html(answer)
-//                     me.rebootLinks();
-//                 },
-//             });
-//         });
-//         $("#menu_build_config_pdf").off().on('click', function(event) {
-//             event.preventDefault();
-//             $.ajax({
-//                 url: 'ajax/build_config_pdf/',
-//             }).done(function(answer) {
-//                 $('.details').html(answer.comment);
-//                 me.rebootLinks();
-//             });
-//         });
         $("#menu_login").off().on('click', function(event) {
             event.preventDefault();
             $.ajax({
@@ -477,58 +295,24 @@ class Collector{
                 }
             });
         });
-
-//         $("#menu_profile").off().on('click', function(event) {
-//             event.preventDefault();
-//             $.ajax({
-//                 type:"POST",
-//                 url: '/ajax/profile/',
-//                 success: function(answer){
-//                     $('.mosaic').html(answer);
-//                     console.log('profile ok')
-//                     me.rebootLinks();
-//                 },
-//                 error: function(answer) {
-//                     console.log('Error!!!')
-//                     $('.mosaic').html(answer);
-//                     me.rebootLinks();
-//                 }
-//             });
-//         });
-
         $('.wa_export_character').off().on('click', function(event) {
             event.preventDefault();
             event.stopPropagation();
             let dad = $(this).parents('li');
             let x = $(this).parents('div').attr("id").split("_")[1];
             let dad_id = $(dad).attr("id");
-            //let that_id = $(this).attr('id').split("_")[0];
             $("li#" + dad_id + " .character_info").removeClass('hidden');
             $.ajax({
                 url: 'ajax/wa_export/character/' + x + '/',
                 success: function(answer) {
                     $('.details').html(answer.character);
                     me.rebootLinks();
-
                 },
                 error: function(answer) {
                     console.log('Recalc error...' + answer);
                 }
             });
         });
-
-
-//         $('#menu_build_pdf_rules').off().on('click', function(event) {
-//             event.preventDefault();
-//             $.ajax({
-//                 url: 'ajax/build_pdf_rules/',
-//             }).done(function(answer) {
-//                 //$('.details').html(answer);
-//                 me.rebootLinks();
-//             });
-//         });
-
-
         $('.toggle_public').off().on('click', function(event) {
             event.preventDefault();
             let dad = $(this).parents('li');
@@ -568,43 +352,6 @@ class Collector{
                 },
             });
         });
-//         $('#current_storyline').off('change').on('change', function(event) {
-//             event.preventDefault();
-//             event.stopPropagation();
-//             let slug = $('#current_storyline').val();
-//             console.log(slug);
-//             $.ajax({
-//                 url: 'ajax/storyline/' + slug + '/',
-//                 success: function(answer) {
-//                     $('.storyline').html(answer)
-//                     $.ajax({
-//                         url: 'ajax/list/none/1/',
-//                         success: function(answer) {
-//                             //$('.charlist').html(answer)
-//
-//                             $('.mosaic').html(answer)
-//                             //me.rebootLinks();
-//                             window.location = '/';
-//                         },
-//                     });
-//                 },
-//             });
-//         });
-//         $("#menu_popstats").off().on('click', function(event) {
-//             event.preventDefault();
-//             event.stopPropagation();
-//             $.ajax({
-//                 url: 'api/popstats/',
-//                 success: function(answer) {
-//                     $('.mosaic').html('')
-//                     answer.charts.forEach(function(elem) {
-//                         $('.mosaic').append(elem);
-//                     });
-//                     me.rebootLinks();
-//                 },
-//             });
-//             me.rebootLinks();
-//         });
         $("#menu_recalc").off().on('click', function(event) {
             event.preventDefault();
             event.stopPropagation();
@@ -622,28 +369,6 @@ class Collector{
                 }
             });
         });
-//         $('#menu_jumpweb').off().on('click', function(event) {
-//             event.preventDefault();
-//             event.stopPropagation();
-//             $.ajax({
-//                 url: 'show_jumpweb  ',
-//                 success: function(answer) {
-//                     $('.details').html(answer);
-//                     let tab = window.open(null,'graphics');
-//                     tab.document.write(answer)
-//
-//                     me.prepareAjax();
-//                     me.rebootLinks();
-// //                    let html = "<!DOCTYPE html><html>yo</html>";
-// //                    //let spacecharts = window.open("data:text/html," + encodeURIComponent(html),"Spacecharts");
-// //                    let spacecharts = window.open("about:blank","spacecharts");
-// //                    spacecharts.focus();
-//                 },
-//                 error: function(answer) {
-//                     console.error('ooops... on show jumpweb...');
-//                 }
-//             });
-//         });
         $('#menu_todo').off().on('click', function(event) {
             event.preventDefault();
             event.stopPropagation();
@@ -680,8 +405,6 @@ class Collector{
                 data: formdata,
                 dataType: 'json',
                 success: function(answer) {
-                    //$('li').find('div.avatar_link').removeClass('selected');
-                    //$('li').find('div.avatar_link').find('#' + id + '.view_character').click();
                     $('#tile_back_'+id).click();
                     me.rebootLinks();
                     me.prepareAjax();
@@ -692,25 +415,6 @@ class Collector{
                 },
             });
         });
-//         $('#menu_add_avatar').off().on('click', function(event) {
-//             event.preventDefault();
-//             let name = $("#customize").val();
-//             $("#customize").val("");
-//             name = name.split(" ").join("-");
-//             $.ajax({
-//                 url: 'ajax/add/avatar/' + name + '/',
-//                 success: function(answer) {
-//                     console.log(answer);
-//                     me.shootList('add_avatar',answer.rid,1);
-//                 },
-//                 error: function(answer) {
-//                     console.log(answer);
-//                     console.log('Error on adding')
-//                     me.rebootLinks();
-//                 },
-//             });
-//         });
-
         $('.tile_back').off().on('click', function(event) {
             event.preventDefault();
             let full_id = $(this).attr('id');
@@ -729,8 +433,6 @@ class Collector{
                 },
             });
         });
-
-
         /* Other links */
         $('.edit_investigator').off().on('click', function(event) {
             event.preventDefault();
@@ -757,9 +459,6 @@ class Collector{
                 }
             });
         });
-
-
-
         $('.roll_dice').off().on('keypress', function(event) {
             if (event.which == 13){
                 event.preventDefault();

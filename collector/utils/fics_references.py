@@ -12,61 +12,14 @@
   TOTAL ...................: 280 OP
 """
 
-MAX_CHAR = 25
-RELEASE = '0.2.33'
+MAX_CHAR = 20
+RELEASE = '0.2.43'
 
-LIFEPATH_CATEGORY = (
-    ('0', "Birthright"),
-    ('5', "Balance"),
-    ('10', "Upbringing"),
-    ('20', "Apprenticeship"),
-    ('30', "Early Career"),
-    ('40', "Tour of Duty"),
-    ('50', "Worldly Benefits"),
-    ('60', "Nameless Kit"),
+SOURCE_REFERENCES = (
+    ('FS2CRB', "HDi Fading Suns Official"),
+    ('FICS', "Zaffarelli Fading Suns"),
 )
 
-# ('6',"Birthright balance"),
-
-LIFEPATH_CATEGORY_SHORT = {
-    '0': "BR",
-    '5': "BA",
-    '10': "UB",
-    '20': "AP",
-    '30': "EC",
-    '40': "TD",
-    '50': "WB",
-    '60': "NK",
-}
-
-LIFEPATH_CATEGORY_VAL = {
-    '0': (118, 120,  124, 131, 136, 160, 240, 300, 390, ),
-    '5': (0, 4, 9, 16, 20, 22, ),
-    '10': (20, 5, 15, ),
-    '20': (25, ),
-    '30': (48, ),
-    '40': (10, 20, 30, 40, 240, 300, ),
-    '50': (7, ),
-    '60': (70, ),
-}
-
-LIFEPATH_CASTE = (
-    ('Nobility', "Nobility"),
-    ('Church', "Church"),
-    ('Guild', "Guild"),
-    ('Alien', "Alien"),
-    ('Other', "Other"),
-    ('Freefolk', "Freefolk"),
-)
-
-LIFEPATH_CASTE_SHORT = {
-    'Nobility': "Nob",
-    'Church': "Chu",
-    'Guild': "Gui",
-    'Alien': "Ali",
-    'Other': "Oth",
-    'Freefolk': "Ffk",
-}
 
 
 GROUPCHOICES = (
@@ -82,45 +35,6 @@ GROUPCHOICES = (
     ('TIN', "Tinkering"),
     ('UND', "Underworld"),
 )
-#
-# RACIAL_ATTRIBUTES = {
-#     "ascorbite": {},
-#     "etyri": {},
-#     "gannok": {},
-#     "hironem": {},
-#     "kurgan": {},
-#     "obuni": {
-#         'PA_REF': 1,
-#         'PA_AGI': 1,
-#         'PA_STR': -1,
-#         'PA_BOD': -1,
-#         'PA_CON': -1,
-#         'occult_level': 1
-#     },
-#     "oro'ym": {},
-#     "ukari": {
-#         'PA_REF': 1,
-#         'PA_AGI': 1,
-#         'PA_STR': -1,
-#         'PA_BOD': -1,
-#         'PA_CON': -1,
-#         'PA_TEC': 1,
-#         'occult_level': 1,
-#         'occult_darkside': 1,
-#     },
-#     "urthish": {},
-#     "symbiot": {},
-#     "vau": {},
-#     "vorox": {
-#         'PA_STR': 2,
-#         'PA_CON': 2,
-#         'PA_BOD': 4,
-#         'PA_INT': -1,
-#         'PA_TEC': -2,
-#         'PA_TEM': 1,
-#     },
-#     "vuldrok": {},
-# }
 
 SHORTCUTS = {
     "Observe": {
