@@ -1,12 +1,16 @@
 from __future__ import absolute_import, unicode_literals
 
 from celery import shared_task
+from django.utils import timezone
 
 from django.contrib import messages
 
 # from celery import Celery
 # from celery.schedules import crontab
+
+from optimizer.models.policy import Policy
 import logging
+from datetime import datetime, timedelta
 
 logger = logging.getLogger(__name__)
 
@@ -31,9 +35,9 @@ def todo():
 
 @shared_task
 def pdf_check():
-    answer = 'Pdf_check task is idle'
+    answer = '/!\\ Pdf_check task is idle'
     from collector.models.character import Character
-    all = Character.objects.filter(need_pdf=True).order_by('-pub_date')
+    all = Character.objects.filter(need_pdf=True)
     if len(all):
         c = all.first()
         answer = f'Task: Building PDF for {c.rid}'
@@ -45,49 +49,80 @@ def pdf_check():
 
 @shared_task
 def skills_check():
-    answer = 'Skills_check task is idle'
+    answer = '/!\\ Skills_check task is idle.'
     logger.info(answer)
     return answer
 
 
 @shared_task
 def tod_check():
-    answer = 'Tod_check task is idle.'
+    answer = '/!\\ Tod_check task is idle.'
     from collector.models.tourofduty import TourOfDutyRef
     tbf = TourOfDutyRef.objects.filter(need_fix=True)
     if len(tbf):
         tod = tbf.first()
         tod.fix()
         tod.save()
+        answer = f'Tod_check: Fixing [{tod.reference}] tod.'
     else:
-        fives = TourOfDutyRef.objects.order_by('pub_date').first(5)
-        for t in fives:
-            t.need_fix = True
-            t.save()
-        answer = f'Task: Putting older ToD on the fix list...'
+        recent_ones = TourOfDutyRef.objects.filter(valid=False)
+        if len(recent_ones):
+            for t in recent_ones:
+                t.need_fix = True
+                t.save()
+            answer = f'Tod_check: Putting older ToD on the fix list...'
     logger.info(answer)
     return answer
 
 
 @shared_task
 def fix_check():
-    answer = 'Fix_check task is idle.'
+    answer = '/!\\ Fix_check task is idle.'
     from collector.models.character import Character
-    all = Character.objects.filter(need_fix=True).order_by('-pub_date')
+    all = Character.objects.filter(need_fix=True)
     if len(all):
         c = all.first()
         answer = f'Task: Fixing avatar {c.rid}. {len(all)} remaining.'
         c.fix()
         c.save()
     else:
-        fives = Character.objects.order_by('pub_date').first(5)
-        for c in fives:
+        oldest = Character.objects.filter(pub_date__lte = timezone.now() - timedelta(days=14))
+        for c in oldest:
             c.need_fix = True
+            logger.debug(f"To be fixed : [{c.full_name}]")
             c.save()
-        answer = f'Task: Putting older avatars on the fix list...'
+        if len(oldest):
+            answer = f'Fix_check: Putting older avatars on the fix list...'
 
     logger.info(answer)
     return answer
 
+@shared_task
+def policies_check():
+    answer = f'/!\\ Policies_check task is idle.'
+    all = Policy.objects.filter(is_applied=False)
+    logger.debug(f'Found {len(all)} policies.')
+    if len(all):
+        p = all.first()
+        logger.debug(f'Handling {p.name}.')
+        x = p.perform()
+        answer = f'-----------> Performing [{p.name}]: {x}'
+        p.save()
+    else:
+        from collector.models.character import Character
+        characters = Character.objects.order_by('pub_date')[:5]
+        for c in characters:
+            if not len(Policy.objects.filter(character=c)):
+                p = Policy()
+                p.character = c
+                p.is_applied = False
+                p.fix()
+                p.save()
+                logger.info(f'Added policy for [{c.full_name}]')
+        for p in Policy.objects.all():
+            logger.debug(f'{p.name} --> {p.is_applied}')
+
+    logger.info(answer)
+    return answer
 
 

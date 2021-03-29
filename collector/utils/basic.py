@@ -128,7 +128,8 @@ def extract_rules():
     from collector.models.gear import Gear
     context = {}
     import datetime
-    context['date'] = datetime.datetime.now()
+    from django.utils import timezone
+    context['date'] = timezone.datetime.now()
     skills = SkillRef.objects.all().filter(is_wildcard=False).order_by('reference', 'is_root', 'is_speciality')
     context['skills'] = skills
     benefice_afflictions = BeneficeAfflictionRef.objects.order_by('-source')

@@ -45,12 +45,10 @@ class Character(Combattant):
     class Meta:
         ordering = ['full_name']
         verbose_name = "FICS: Character"
-
     page_num = 0
     alias = models.CharField(max_length=200, default='', blank=True)
     alliance = models.CharField(max_length=200, default='', blank=True)
     faction = models.CharField(max_length=200, default='', blank=True)
-    # alliance_hash = models.CharField(max_length=200, default='none')
     alliance_ref = models.ForeignKey(AllianceRef, blank=True, null=True, on_delete=models.SET_NULL)
     specie = models.ForeignKey(Specie, default=31, blank=True, null=True, on_delete=models.SET_NULL)
     race = models.TextField(max_length=256, default='', blank=True)
@@ -90,12 +88,10 @@ class Character(Combattant):
     TA_TOTAL = models.IntegerField(default=0)
     BC_TOTAL = models.IntegerField(default=0)
     BA_TOTAL = models.IntegerField(default=0)
-
     physical = models.IntegerField(default=0, blank=True)
     mental = models.IntegerField(default=0, blank=True)
     combat = models.IntegerField(default=0, blank=True)
     tod_count = models.IntegerField(default=0, blank=True)
-
     weapon_cost = models.IntegerField(default=0)
     armor_cost = models.IntegerField(default=0)
     shield_cost = models.IntegerField(default=0)
@@ -112,7 +108,6 @@ class Character(Combattant):
     challenge_value = models.IntegerField(default=0)
     todo_list = models.TextField(default='', blank=True)
     path = models.CharField(max_length=256, default='', blank=True)
-    # is_exportable = models.BooleanField(default=False)
     use_history_creation = models.BooleanField(default=False)
     use_only_entrance = models.BooleanField(default=False)
     picture = models.CharField(max_length=1024,
@@ -131,9 +126,7 @@ class Character(Combattant):
     ranking = models.IntegerField(default=0, blank=True)
     group_color = ColorField(default='#888888', blank=True)
     color = ColorField(default='#CCCCCC', blank=True)
-
     storytelling_note = models.TextField(default='', blank=True)
-
     skills_options = []
     ba_options = []
     bc_options = []
@@ -474,30 +467,9 @@ class Character(Combattant):
 
     def check_todo_list(self):
         """ Check for invalid tours of duty for the character
+            This is now part of the policy
         """
-        self.todo_list = ""
-        tsk = []
-        histories = {'10':0,'20':0, '30':0, '40':0, '50':0}
-        if self.use_history_creation:
-            for tod in self.tourofduty_set.all():
-                if not tod.tour_of_duty_ref.valid:
-                    tsk.append(f'--> *{tod.tour_of_duty_ref.reference}* is not a valid Tour of Duty.')
-                    logger.error(tsk)
-            if not self.nameless:
-                for tod in self.tourofduty_set.all():
-                    # logger.debug(tod.tour_of_duty_ref.category)
-                    if tod.tour_of_duty_ref.category in ['10','20','30', '40', '50']:
-                        histories[tod.tour_of_duty_ref.category] += tod.tour_of_duty_ref.value
-                x = f'--> {histories}'
-                logger.debug(x)
-                if (histories['10'] == 20) and (histories['20'] == 25) and (histories['30'] == 48) and (histories['50'] == 7):
-                    logger.info('Basic histories balanced')
-                else:
-                    tsk.append(x)
-                logger.debug(f' Number of ToDS: {histories["40"]/10}')
-                self.tod_count = histories["40"]/10
-
-        self.todo_list = "\n".join(tsk)
+        pass
 
     def update_challenge(self):
         res = ''
@@ -869,28 +841,28 @@ class Character(Combattant):
         # Check for racial tods
         from collector.models.tourofduty import TourOfDutyRef, TourOfDuty
         ra_tod = None
-        br_tod = None
+        # br_tod = None
         if self.specie.ra_tod_name:
             ra_tod = TourOfDutyRef.objects.get(reference=self.specie.ra_tod_name)
-        if self.specie.br_tod_name:
-            br_tod = TourOfDutyRef.objects.get(reference=self.specie.br_tod_name)
+        # if self.specie.br_tod_name:
+        #     br_tod = TourOfDutyRef.objects.get(reference=self.specie.br_tod_name)
         for tod in self.tourofduty_set.all():
             if ra_tod != None:
                 if ra_tod.reference == tod.tour_of_duty_ref.reference:
                     ra_tod = None
-            if br_tod != None:
-                if br_tod.reference == tod.tour_of_duty_ref.reference:
-                    br_tod = None
+            # if br_tod != None:
+            #     if br_tod.reference == tod.tour_of_duty_ref.reference:
+            #         br_tod = None
         if ra_tod != None:
             t = TourOfDuty()
             t.character = self
             t.tour_of_duty_ref = ra_tod
             t.save()
             logger.info(f'    => Added ToD {t} to {self.rid}')
-        if br_tod != None:
-            t = TourOfDuty()
-            t.character = self
-            t.tour_of_duty_ref = br_tod
-            t.save()
-            logger.info(f'    => Added ToD {t} to {self.rid}')
+        # if br_tod != None:
+        #     t = TourOfDuty()
+        #     t.character = self
+        #     t.tour_of_duty_ref = br_tod
+        #     t.save()
+        #     logger.info(f'    => Added ToD {t} to {self.rid}')
         logger.debug(f'    => Updating Game parameters... ({self.specie.species}, {self.specie.race})')

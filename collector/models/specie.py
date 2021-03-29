@@ -22,7 +22,7 @@ class Specie(models.Model):
     # skill_balance = models.IntegerField(default=0)
     description = models.TextField(max_length=512, default='', blank=True)
     ra_tod_name = models.CharField(max_length=64, default='', blank=True)
-    br_tod_name = models.CharField(max_length=64, default='', blank=True)
+    # br_tod_name = models.CharField(max_length=64, default='', blank=True)
 
 
     def __str__(self):
@@ -58,7 +58,7 @@ class Specie(models.Model):
 
 class SpecieAdmin(admin.ModelAdmin):
     ordering = ['species', 'race']
-    list_display = [ 'species', 'race', 'ra_tod_name','br_tod_name','description']
-    search_fields = ['species', 'race', 'ra_tod_name','br_tod_name']
-    list_filter = ['species', 'ra_tod_name','br_tod_name']
+    list_display = [ 'species', 'race', 'ra_tod_name','description']
+    search_fields = ['species', 'race', 'ra_tod_name']
+    list_filter = ['species', 'ra_tod_name']
 

@@ -5,15 +5,12 @@
 """
 from django.db import models
 from collector.utils import fics_references
-from django.dispatch import receiver
-from django.db.models.signals import pre_save
 from django.contrib import admin
 from collector.models.character import Character
 from datetime import datetime
 
 LIFEPATH_CATEGORY = (
     ('0', "Birthright"),
-    ('5', "Balance"),
     ('10', "Upbringing"),
     ('20', "Apprenticeship"),
     ('30', "Early Career"),
@@ -21,36 +18,8 @@ LIFEPATH_CATEGORY = (
     ('50', "Worldly Benefits"),
     ('60', "Nameless Kit"),
     ('70', "Build"),
-    ('80', "Custom"),
+    ('80', "Special"),
 )
-
-# ('6',"Birthright balance"),
-
-LIFEPATH_CATEGORY_SHORT = {
-    '0': "BR",
-    '5': "BA",
-    '10': "UB",
-    '20': "AP",
-    '30': "EC",
-    '40': "TD",
-    '50': "WB",
-    '60': "NK",
-    '70': "BU",
-    '80': "CU",
-}
-
-LIFEPATH_CATEGORY_VAL = {
-    '0': 0,
-    '5': 0,
-    '10': (20, 5, 15, ),
-    '20': (25, ),
-    '30': (48, ),
-    '40': (10, 20, 30, 40, ),
-    '50': (7, ),
-    '60': 0,
-    '70': 0,
-    '80': 0,
-}
 
 LIFEPATH_CASTE = (
     ('Nobility', "Nobility"),
@@ -60,23 +29,20 @@ LIFEPATH_CASTE = (
     ('Other', "Other"),
     ('Freefolk', "Freefolk"),
     ('Think Machine', "Think Machine"),
+    ('Caliphate (PO)', "Kurgan (Planetary Origin)"),
+    ('Caliphate (E)', "Kurgan (Environment)"),
+    ('Caliphate (U)', "Kurgan (Usun)"),
+    ('Barbarian', "Barbarian"),
+    ('Empire', "Empire"),
+    ('Supernatural', "Supernatural"),
 )
-
-LIFEPATH_CASTE_SHORT = {
-    'Nobility': "NOB",
-    'Church': "CHU",
-    'Guild': "GUI",
-    'Alien': "ALI",
-    'Other': "OTH",
-    'Freefolk': "FFK",
-    'Think Machine': "THM",
-}
 
 
 class TourOfDutyRef(models.Model):
     class Meta:
         ordering = ['category', 'reference']
         verbose_name = "FICS: ToD"
+
     reference = models.CharField(max_length=64, default='')
     category = models.CharField(max_length=20, choices=LIFEPATH_CATEGORY, default='Tour of Duty')
     caste = models.CharField(max_length=20, choices=LIFEPATH_CASTE, default='Other')
@@ -86,6 +52,7 @@ class TourOfDutyRef(models.Model):
     need_fix = models.BooleanField(default=False, blank=True)
     AP = models.IntegerField(default=0)
     OP = models.IntegerField(default=0)
+    balance = models.IntegerField(default=0)
     PA_STR = models.IntegerField(default=0)
     PA_CON = models.IntegerField(default=0)
     PA_BOD = models.IntegerField(default=0)
@@ -107,8 +74,7 @@ class TourOfDutyRef(models.Model):
     pub_date = models.DateTimeField('Date published', default=datetime.now)
 
     def __str__(self):
-        return '[%s] %s (%s)(%d)' % (LIFEPATH_CATEGORY_SHORT[self.category], self.reference,
-                                     LIFEPATH_CASTE_SHORT[self.caste], self.value)
+        return f'{self.reference} ({self.get_category_display()}, {self.get_caste_display()}, {self.value})'
 
     def fix(self):
         self.WP = 0
@@ -163,14 +129,40 @@ class TourOfDutyRef(models.Model):
         self.need_fix = False
 
     def check_value(self):
-        valid = True
-        if LIFEPATH_CATEGORY_VAL[self.category] != 0:
-            if self.value not in LIFEPATH_CATEGORY_VAL[self.category]:
-                valid = False
-        if valid != self.valid:
-            self.valid = valid
-
-
+        self.valid = False
+        if self.category == '0':  # Birthright
+            self.balance = 200 - self.value
+            self.valid = True
+        elif self.category == '5':  # Balance
+            self.valid = True
+        elif self.category == '10':  # Upbringing
+            if self.caste == 'Caliphate (PO)':
+                self.valid = self.value == 3
+                self.topic = ''
+            elif self.caste == 'Caliphate (E)':
+                self.valid = self.value == 8
+                self.topic = ''
+            elif self.caste == 'Caliphate (U)':
+                self.valid = self.value == 9
+                self.topic = ''
+            else:
+                self.valid = self.value in [5, 15, 20]
+        elif self.category == '20':  # Apprenticeship
+            self.valid = self.value == 25
+        elif self.category == '30':  # Early Career
+            self.valid = self.value == 48
+        elif self.category == '40':  # Tour of Duty
+            self.valid = (self.value % 10 == 0)
+        elif self.category == '50':  # Worldly Benefits
+            self.valid = (self.value == 7)
+        elif self.category == '60':  # Nameless kit
+            self.valid = True
+        elif self.category == '70':  # Build
+            self.valid = True
+        elif self.category == '80':  # Custom
+            self.valid = True
+        else:
+            self.valid = False
 
 
 class TourOfDuty(models.Model):
@@ -225,5 +217,3 @@ class TourOfDutyInline(admin.TabularInline):
     model = TourOfDuty
     extras = 3
     ordering = ['tour_of_duty_ref']
-
-

@@ -46,7 +46,8 @@ def add_event(request):
         id_ = request.POST.get('id')
         id = id_.split('_')[1]
         item = Event()
-        item.title = str(datetime.datetime.now())
+        from django.utils import timezone
+        item.title = str(timezone.now())
         item.act = get_object_or_404(Act, pk=id)
         item.save()
         return JsonResponse(item.toJSON())
