@@ -32,7 +32,7 @@ def get_list(request, id, slug='none'):
     from collector.utils.basic import get_current_config
     campaign = get_current_config()
     if slug == 'none':
-        character_items = campaign.avatars.order_by('-ranking','full_name').filter(is_dead=False)
+        character_items = campaign.avatars.order_by('-ranking','full_name').filter(balanced=False, is_dead=False, nameless=False, player='').order_by('-OCC_LVL','-tod_count')
     elif slug.startswith('c-'):
         elements =  slug.split('-')
         ep_class = elements[1].capitalize()
@@ -77,7 +77,7 @@ def get_list(request, id, slug='none'):
     page = id
     character_items = paginator.get_page(page)
     messages.info(request, f'{paginator.count} characters found.')
-    context = {'character_items': character_items}
+    context = {'character_items': character_items, 'default_ghost_tgt':"list_ghostmark" }
     template = get_template('collector/list.html')
     html = template.render(context,request)
     response = {

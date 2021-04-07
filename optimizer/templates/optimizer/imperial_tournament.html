@@ -1,0 +1,18 @@
+<div class="fresque fencers">
+{% for k in character_items %}
+    {% include 'collector/ghostmark.html' with data=k.ghostmark_data c=k tgt=base_mark %}
+{% endfor %}
+</div>
+<div class='fresque duel'>
+    {% for c in tournament_data %}
+        <div class="tile imperial">
+            {% for d in c.duels %}
+            <div class="match" id="{{d.duel_id}}" title="{{d.scores}}">
+                {% include 'collector/ghostmark.html' with data=d.tori.ghostmark_data c=d.tori tgt=d.duel_id winner=d.winner %}
+                {% include 'collector/ghostmark.html' with data=d.uke.ghostmark_data c=d.uke tgt=d.duel_id winner=d.winner %}
+            </div>
+            {% endfor %}
+        </div>
+    {%endfor%}
+
+</div>

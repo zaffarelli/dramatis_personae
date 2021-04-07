@@ -13,7 +13,7 @@ CELERY_BEAT_SCHEDULE = {
     },
     'fix_schedule': {
         'task': 'collector.tasks.fix_check',
-        'schedule': 30,
+        'schedule': 5,
         'args': (),
     },
     'todo_schedule': {
@@ -28,12 +28,12 @@ CELERY_BEAT_SCHEDULE = {
     },
     'tod_schedule': {
         'task': 'collector.tasks.tod_check',
-        'schedule': 5,
+        'schedule': crontab(hour='*/5'),
         'args': (),
     },
     'policies_schedule': {
         'task': 'collector.tasks.policies_check',
-        'schedule': 15,
+        'schedule': crontab(minute='*/20'),
         'args': (),
     },
 

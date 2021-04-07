@@ -13,10 +13,12 @@ class Duel:
         self.tori = tori
         self.uke = uke
         self.rnd = 0
-        print(f'New duel is : {tori.full_name} vs {uke.full_name}')
+        # print(f'New duel is : {tori.full_name} vs {uke.full_name}')
         self.pub_date = datetime.now()
         self.tori.prepare_for_battle()
         self.uke.prepare_for_battle()
+        self.initial_tori = copy.deepcopy(self.tori.round_data)
+        self.initial_uke = copy.deepcopy(self.uke.round_data)
 
     @property
     def winner(self):
@@ -42,6 +44,7 @@ class Duel:
 
     def run(self):
         sequences = []
+
         while self.not_finished:
             self.rnd += 1
             round = CombatRound(self)
@@ -49,7 +52,7 @@ class Duel:
             sequences.append(round.round_summary)
             round.flush()
             del round
-        res = {'pub_date':self.pub_date,'winner':self.winner,'rounds':sequences, 'amount':len(sequences)}
+        res = {'pub_date':self.pub_date,'winner':self.winner,'rounds':sequences, 'amount':len(sequences), 'tori':self.initial_tori, 'uke':self.initial_uke}
         return res
 
 class CombatRound:

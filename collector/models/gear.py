@@ -74,6 +74,7 @@ CATEGORIES = (
     ("13", "Resources"),
     ("14", "Services"),
     ("15", "Military Devices"),
+    ("16", "Power Sources"),
 
 )
 
@@ -105,8 +106,10 @@ class Gear(models.Model):
     wing_price = models.PositiveIntegerField(default=0)
     crest_price = models.PositiveIntegerField(default=0)
     talon_price = models.PositiveIntegerField(default=0)
-    description = models.TextField(default='', max_length=2048)
+    description = models.TextField(default='', max_length=2048, blank=True)
     reference = models.CharField(choices=REFERENCES, default='MotJ', max_length=32, blank=True, null=True)
+    power_storage = models.PositiveIntegerField(default=0)
+    power_consumption = models.IntegerField(default=0)
 
     def __str__(self):
         return "%s (%s)" % (self.name, self.variant)
@@ -122,7 +125,7 @@ def update_gear(sender, instance, conf=None, **kwargs):
 
 class GearAdmin(admin.ModelAdmin):
     ordering = ('category', 'name', 'variant', 'price')
-    list_display = ['name', 'variant', 'category', 'quality', 'availability', 'tech_level', 'price',
+    list_display = ['name', 'variant', 'category', 'power_storage','power_consumption','quality', 'availability', 'tech_level', 'price',
                     'magna_carta_entry', 'reference']
     search_fields = ('name', 'variant', 'description')
     list_filter = ('tech_level', 'category', 'magna_carta_entry', 'origin', 'quality', 'reference')

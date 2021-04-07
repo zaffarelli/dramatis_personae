@@ -1,30 +1,49 @@
-'''
+"""
  ╔╦╗╔═╗  ╔═╗┌─┐┬  ┬  ┌─┐┌─┐┌┬┐┌─┐┬─┐
   ║║╠═╝  ║  │ ││  │  ├┤ │   │ │ │├┬┘
  ═╩╝╩    ╚═╝└─┘┴─┘┴─┘└─┘└─┘ ┴ └─┘┴└─
-'''
+"""
 from django.db import models
 from django.contrib import admin
+
+CALIBERS = (
+    ('n/a', 'n/a'),
+    ('0.172', '0.172/4mm'),
+    ('0.20', '0.20/5mm'),
+    ('0.23', '0.23/6mm'),
+    ('0.284', '0.284/7mm'),
+    ('0.32', '0.32/8mm'),
+    ('0.35', '0.35/9mm'),
+    ('0.40', '0.40/10mm'),
+    ('0.44', '0.44/11mm'),
+    ('0.47', '0.47/12mm'),
+    ('0.51', '0.51/13    mm'),
+    ('0.21', '0.21/5.56mm'),
+    ('0.30', '0.30/7.62mm'),
+    ('0.78', '0.78/20mm'),
+)
 
 
 class WeaponRef(models.Model):
     class Meta:
-        ordering = ['origins', 'reference', 'category', 'damage_class', ]
+        ordering = ['meta_type', 'category', 'reference', 'origins', 'damage_class', ]
         verbose_name = "FICS: Weapon"
 
     reference = models.CharField(max_length=64, default='')
     meta_type = models.CharField(max_length=64, default='')
     category = models.CharField(max_length=5, choices=(
-    ('MELEE', "Melee weapon"), ('P', "Pistol/revolver"), ('RIF', "Rifle"), ('SMG', "Submachinegun"), ('SHG', "Shotgun"),
-    ('HVY', "Heavy weapon"), ('EX', "Exotic weapon"), ('SP', 'Special')), default='RIF')
+        ('MELEE', "Melee weapon"), ('P', "Pistol/revolver"), ('RIF', "Rifle"), ('SMG', "Submachinegun"),
+        ('SHG', "Shotgun"),
+        ('HVY', "Heavy weapon"), ('EX', "Exotic weapon"), ('SP', 'Special')), default='RIF')
     weapon_accuracy = models.IntegerField(default=0)
     conceilable = models.CharField(max_length=1, choices=(
-    ('P', "Pocket"), ('J', "Jacket"), ('L', "Long coat"), ('N', "Can't be hidden")), default='J')
+        ('P', "Pocket"), ('J', "Jacket"), ('L', "Long coat"), ('N', "Can't be hidden")), default='J')
     availability = models.CharField(max_length=1,
                                     choices=(('E', "Excellent"), ('C', "Common"), ('P', "Poor"), ('R', "Rare")),
                                     default='C')
-    damage_class = models.CharField(max_length=16, default='')
-    caliber = models.CharField(max_length=16, default='', blank=True)
+    damage_class = models.CharField(max_length=16, default='1D6')
+    caliber = models.CharField(max_length=16, default='n/a', blank=True)
+    fusion_cell = models.CharField(max_length=64, default='', blank=True)
     str_min = models.PositiveIntegerField(default=0)
     rof = models.PositiveIntegerField(default=0)
     clip = models.PositiveIntegerField(default=0)
@@ -39,7 +58,76 @@ class WeaponRef(models.Model):
     hidden = models.BooleanField(default=False)
 
     def __str__(self):
-        return '[%s/%s] %s' % (self.reference, self.meta_type, self.category)
+        return f'{self.reference} {self.meta_type} {self.category}'
+
+    @property
+    def get_damage_stats(self):
+        min = 0
+        max = 0
+        bonus = 0
+        if self.damage_class:
+            plus_split = self.damage_class.split('+')
+            if len(plus_split) == 2:
+                bonus = int(plus_split[1])
+            d_split = plus_split[0].split('D')
+            min = int(d_split[0]) + bonus
+            max = 6 * int(d_split[0]) + bonus
+        return min, max
+
+    def fix(self):
+        self.damage_class = self.damage_class.upper()
+
+        if self.meta_type.endswith(' Blaster'):
+            self.caliber = 'n/a'
+            min, max = self.get_damage_stats
+            self.fusion_cell = f'{self.clip * min * max} trigs (FSC:{self.clip}^{min}x{max})'
+            self.rof = 1
+            self.tech_level = 7
+            self.cost = 100 + (int(self.clip * min * max) / 100) * (10 + self.weapon_accuracy)
+            self.rng = 30
+        if self.meta_type.endswith(' Laser'):
+            self.caliber = 'n/a'
+            min, max = self.get_damage_stats
+            self.fusion_cell = f'{self.clip * min * (max+2)} trigs (FSC:{self.clip}^{min}x{max + 2})'
+            self.rof = 1
+            self.cost = 80 + (int(self.clip * min * (max+2)) / 100) * (10 + self.weapon_accuracy)
+            self.tech_level = 6
+            self.rng = 30
+        if self.meta_type.startswith('Medium '):
+            self.rng *= 1.25
+        elif self.meta_type.startswith('Heavy '):
+            self.rng *= 1.5
+        elif self.meta_type.startswith('Rifle '):
+            self.rng *= 3
+        elif self.meta_type.startswith('Shotgun '):
+            self.rng *= 0.5
+        if self.category == 'MELEE':
+            self.tech_level = 4
+            self.caliber = 'n/a'
+            self.fusion_cell = 'n/a'
+        if self.tech_level == 6:
+            self.cost *= 2
+        elif self.tech_level == 7:
+            self.cost *= 3
+        elif self.tech_level == 8:
+            self.cost *= 10
+        if self.meta_type == 'Rapier':
+            self.conceilable = 'L'
+        coeff = 1
+        if self.rel == 'VR':
+            coeff += 0.2
+        elif self.rel == 'UR':
+            coeff -= 0.2
+        if self.availability == 'E':
+            coeff -= 0.1
+        elif self.availability == 'P':
+            coeff += 0.2
+        elif self.availability == 'R':
+            coeff += 0.4
+        if self.category != 'MELEE':
+            self.cost = int(self.cost * coeff / 10) * 10
+
+        self.get_stats_line()
 
     def get_stats_line(self):
         res = []
@@ -59,7 +147,6 @@ class WeaponRef(models.Model):
         res.append(str(self.rel))
         res.append('£' + str(self.cost))
         self.stats = ' . '.join(res)  # ⦁⏺
-        self.save()
         return self.stats
 
 
@@ -68,25 +155,28 @@ class Weapon(models.Model):
     character = models.ForeignKey(Character, on_delete=models.CASCADE)
     weapon_ref = models.ForeignKey(WeaponRef, on_delete=models.CASCADE)
     ammoes = models.PositiveIntegerField(default=0)
+    weapon_of_choice = models.BooleanField(default=False, blank=True)
 
     def __str__(self):
         return '%s=%s' % (self.character.full_name, self.weapon_ref.reference)
 
 
-def update_stats_lines(modeladmin, request, queryset):
+def refix(modeladmin, request, queryset):
     selected = request.POST.getlist(admin.ACTION_CHECKBOX_NAME)
     for w in selected:
-        WeaponRef.objects.get(pk=w).get_stats_line()
-    short_description = "Update stats line"
+        WeaponRef.objects.get(pk=w).save()
+    short_description = "Refix"
 
 
 class WeaponRefAdmin(admin.ModelAdmin):
     list_display = (
-    'reference', 'meta_type', 'origins', 'category', 'caliber', 'clip', 'weapon_accuracy', 'damage_class',
-    'availability', 'cost', 'description')
+        'reference', 'meta_type', 'origins', 'category', 'fusion_cell', 'caliber', 'clip', 'rng', 'weapon_accuracy',
+        'damage_class',
+        'availability', 'cost', 'description')
     ordering = ('-category', 'meta_type', 'reference', 'origins', 'damage_class',)
-    actions = [update_stats_lines, ]
-    list_filter = ['category', 'hidden']
+    actions = [refix]
+    list_filter = ['category', 'hidden', 'caliber', 'meta_type', 'origins', 'availability']
+    search_fields = ['reference', 'origins', 'meta_type']
 
 
 class WeaponCusto(models.Model):
@@ -96,6 +186,8 @@ class WeaponCusto(models.Model):
     from collector.models.character_custo import CharacterCusto
     character_custo = models.ForeignKey(CharacterCusto, on_delete=models.CASCADE)
     weapon_ref = models.ForeignKey(WeaponRef, on_delete=models.CASCADE)
+    ammoes = models.PositiveIntegerField(default=0)
+    weapon_of_choice = models.BooleanField(default=False, blank=True)
 
 
 class WeaponInline(admin.TabularInline):

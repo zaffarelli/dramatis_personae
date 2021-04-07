@@ -71,16 +71,20 @@
         {% if user.profile.is_gamemaster %}
         <li><span class="pull-down">Optimizer</span>
             <ul class="level-2 Rules">
-                <li><span class="menu-item" id="build_pdf_rules"><i class="action_icon fas fa-book"></i> Build Rules PDF</span>
+                <li><span class="menu-item" action="build_pdf_rules"><i class="action_icon fas fa-book"></i> Build Rules PDF</span>
                 </li>
                 {% if campaign.is_fics %}
-                <li><span class="menu-item" id='run_duel' style='width:auto;' title='RUN DUEL'><i
+                <li><span class="slug-item" action='run_duel' title='You can tag two IDs (sperataed with an underscore) to see two specific avatars fight, i.e. 22_93 for Calistre -vs- Lucrecia.' style='width:auto;' title='RUN DUEL'><i
                         class="action_icon fas fa-chess-pawn"></i> Run Duel</span></li>
-                <li><span class="menu-item" id='run_100_duels' style='width:auto;' title='RUN x100 DUELS'><i
-                        class="action_icon fas fa-chess-knight"></i> Run 100 duels</span></li>
-                <li><span class="menu-item" id='run_fencing_tournament' style='width:auto;'
-                          title='RUN FENCING TOURNAMENT'><i class="action_icon fas fa-chess-rook"></i> Run Fencing Tournament</span>
+                <li><span class="slug-item" action='run_100_duels' style='width:auto;' title='RUN x100 DUELS'><i
+                        class="action_icon fas fa-chess-knight"></i> Run same duel x100</span></li>
+                <li><span class="menu-item" action='fencing_tournament' style='width:auto;'
+                          title='RUN FENCING TOURNAMENT'><i class="action_icon fas fa-chess-rook"></i> Fencing Tournament</span>
                 </li>
+                <li><span class="menu-item" action='imperial_tournament' style='width:auto;'
+                          title='Run Imperial Tournament'><i class="action_icon fas fa-chess-king"></i> Imperial Tournament</span>
+                </li>
+
                 {% endif %}
             </ul>
         </li>

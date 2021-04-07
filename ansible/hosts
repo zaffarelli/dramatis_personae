@@ -1,2 +1,2 @@
 [pi]
-RASPIPINK ansible_host=10.42.0.192
+RASPIPINK ansible_host=10.42.0.192 ansible_gateway=192.168.0.254 ansible_python_interpreter=/usr/bin/python2

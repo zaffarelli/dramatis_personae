@@ -1,261 +1,344 @@
 @import 'basics';
 @import 'fonts';
 
-.duel {
-    & h2, & h3 {
-        font-family: NomPersoListe;
-        font-weight: bold;
-        text-align: center;
-        font-variant: small-caps;
-    }
+.fresque.duel {
+  height: auto;
 
-    & .round_data {
-        display: inline-block;
-        margin: auto;
-        margin-top: 0;
-        vertical-align: top;
-        width: 420px;
-        border: 1px solid black;
-        padding: 3px;
-        color: white;
 
-        &.attacker {
-            /*background: #402010;*/
+  & .tile {
+    font-family: NomPersoListe;
+    font-weight: bold;
+    text-align: center;
+    height: auto;
 
-            & ol {
-                /*direction: rtl;*/
+    &.imperial{
+        display:flex;
+        height:auto;
+        width:auto;
+        flex-flow:column nowrap;
+        justify-content: space-evenly;
+        align-items:center;
+        & .match{
+            display:flex;
+            flex-flow: row nowrap;
+            justify-content: space-between;
+            align-items:center;
+            flex-grow:1;
+            flex-shrink:1;
+            height:100px;
+            width:auto;
+            border:1px solid $fics_darker;
+            background: $fics_darker;
+            border-radius: 5px;
+            padding:5px;
 
-                & li {
-                    text-align: right;
-                }
+            & .ghostmark{
+                flex-grow:1;
+                flex-shrink:1;
             }
         }
-
-        &.defender {
-            /*background: #204010;*/
-        }
     }
 
-    & table.wounds {
-        border-collapse: separate;
 
-        & td {
-            background: $fics_dark;
-            border: 2px solid #222;
-            width: $block_wsize;
-            height: $block_hsize;
-            text-align: center;
+    &.narrative {
+      display: flex;
+      flex-flow: column nowrap;
+      justify-content: flex-start;
+      font-variant:none;
+      flex-grow: 2;
+      width: 500px;
+      height: auto;
+      border: 1px solid $fics_dark;
 
-            & .large {
-                font-size: 1.5em;
-                font-weight: bold;
-            }
-
-            &.shield {
-                border-color: #223;
-            }
-
-            &.stats {
-                border-color: #332;
-
-                &.neg {
-                    border-color: #223;
-                }
-            }
-
-            &.armor {
-                border-color: #343;
-                font-weight: bold;
-                font-size: 1em;
-            }
-
-            &.hp {
-                border-color: #322;
-            }
-
-            &.wnd {
-                border-color: #433;
-            }
-
-            &.disabled {
-                opacity: .1;
-            }
-
-            & .wounded {
-                color: #323;
-            }
-        }
-
-        & th {
-            background: transparent;
-            border: 2px dotted #222;
-            width: $block_wsize;
-            height: $block_hsize;
-        }
-    }
-
-    &ol {
-        margin: 0;
-
-        & li {
-            margin: 0;
-        }
-    }
-}
-
-table.duels {
-    display: inline-block;
-
-    & th {
-        width: 100px;
-        height: 90px;
-        font-size: 2em;
-    }
-
-    & td {
-        width: 100px;
-        height: 90px;
-        font-size: 3em;
-        border: 1px solid white;
-    }
-
-    & .round_data {
-        height: 650px;
-    }
-}
-
-table.match_score {
-    display: inline-block;
-    background: #444;
-    border: 1px solid #444;
-    margin: 0;
-    padding: 0;
-
-    & td {
-        background-color: $fics_dark;
-        color: $fics_front;
-        font-size: .95em;
-        width: auto;
-        height: 30px;
-        text-align: center;
-        border: 2px solid transparent;
-    }
-
-    & th {
-        background-color: #303030;
-        font-size: .85em;
-        width: 50px;
-        height: 40px;
-        border: 2px solid transparent;
-    }
-}
-
-table.match_score_flat {
-    display: inline-block;
-    background: #444;
-    border: 1px solid #111;
-    margin: 0;
-    padding: 0;
-
-    & td {
-        background-color: $fics_dark;
-        color: $fics_front;
-        font-size: .95em;
-        width: 3ex;
-        height: 1.2em;
-        text-align: center;
-        border: 1px solid transparent;
-    }
-
-    & th {
-        background-color: #303030;
-        color: $fics_frontest;
-        font-size: .85em;
-        width: 25ex;
-        height: 1.2em;
-        border: 1px solid transparent;
-    }
-}
-
-table.combat_narrative {
-    border: 1px solid $fics_front;
-    width: auto;
-
-    & tr {
+      & .pan {
+        display: flex;
+        width: 100%;
+        flex-flow: row nowrap;
+        flex-grow: 1;
+        flex-shrink: 1;
+        justify-content: flex-start;
+        border: 1px solid $fics_back;
         &.even {
-            background: #232;
+          background: #232;
         }
 
         &.odd {
-            background: #323;
+          background: #323;
         }
 
-        & th {
+        & .marble {
+          width: 200px;
+          padding: 5px;
+          flex-grow: 2;
+          flex-shrink: 1;
+          font-family:Text;
+          font-variant:normal;
+          font-weight:normal;
+          background: transparent;
+
+          &.r {
             width: 50px;
             font-size: 1.2em;
+            flex-grow: 1;
+            flex-shrink: 1;
+
             background: transparent;
             text-align: center;
+            order: 2;
+          }
+
+
+          &.a {
+            text-align: right;
+            order: 1;
+          }
+
+          &.d {
+            text-align: left;
+            order: 3;
+          }
+
+          & b {
+            font-weight: bold;
+            color: #fea;
+          }
+
+          & i {
+            color: #fea;
+          }
+
+          & u {
+            color: #fea;
+            text-decoration: none;
+          }
         }
-
-        & td {
-            width: 350px;
-            padding: 5px;
-            background: transparent;
-
-            &.a {
-                text-align: right;
-            }
-
-            &.d {
-                text-align: left;
-            }
-
-            & b {
-                font-weight: bold;
-                color: #fea;
-            }
-
-            & i {
-                color: #fea;
-            }
-
-            & u {
-                color: #fea;
-                text-decoration: none;
-            }
-        }
+      }
     }
+
+
+    &.round_data {
+       & h3{
+            text-align:center;
+            font-variant:small-caps;
+            font-family: NomFat ;
+       }
+
+      font-family: NomPersoListe;
+      font-weight: normal;
+      text-align: justify;
+      font-variant:none;
+      font-size: 8pt;
+      height: auto;
+
+      display: inline-block;
+      margin: auto;
+      margin-top: 0;
+      vertical-align: top;
+      width: 220px;
+      height: auto;
+      border: 1px solid black;
+      padding: 3px;
+      color: white;
+
+      &.attacker {
+
+
+        & ol {
+          /*direction: rtl;*/
+
+          & li {
+            text-align: right;
+          }
+        }
+      }
+
+      &.defender {
+
+      }
+    }
+
+    & table.wounds {
+      border-collapse: separate;
+
+      & td {
+        background: $fics_dark;
+        border: 2px solid #222;
+        width: $block_wsize;
+        height: $block_hsize;
+        text-align: center;
+
+        & .large {
+          font-size: 1.5em;
+          font-weight: bold;
+        }
+
+        &.shield {
+          border-color: #223;
+        }
+
+        &.stats {
+          border-color: #332;
+
+          &.neg {
+            border-color: #223;
+          }
+        }
+
+        &.armor {
+          border-color: #343;
+          font-weight: bold;
+          font-size: 1em;
+        }
+
+        &.hp {
+          border-color: #322;
+        }
+
+        &.wnd {
+
+          color: #A22;
+          font-weight:bold;
+        }
+
+        &.disabled {
+          opacity: .1;
+        }
+
+        & .wounded {
+          border-color: #B11;
+          background-color: #A22;
+          color: #FFF;
+          padding:5px;
+          border-radius:5px;
+          display:inline-block;
+        }
+      }
+
+      & th {
+        background: transparent;
+        border: 2px dotted #222;
+        width: $block_wsize;
+        height: $block_hsize;
+      }
+    }
+
+    &ol {
+      margin: 0;
+
+      & li {
+        margin: 0;
+      }
+    }
+  }
+
+
 }
 
-.legend{
-    position:absolute;
-    z-index: 45;
-    font-family: NomPersoListe;
-    font-size:24pt;
-    font-weight:900;
-    bottom:5px;
-    right:5px;
-    color:$fics_fronter;
-    background:#222;
-    height:50px;
-    width:auto;
-    padding:5px;
-    opacity:0.8;
-    border-radius:5px;
-    box-shadow: 0 0 5px #000;
-}
+// table.duels {
+//     display: inline-block;
+//
+//     & th {
+//         width: 100px;
+//         height: 90px;
+//         font-size: 2em;
+//     }
+//
+//     & td {
+//         width: 100px;
+//         height: 90px;
+//         font-size: 3em;
+//         border: 1px solid white;
+//     }
+//
+//     & .round_data {
+//         height: 650px;
+//     }
+// }
 
-div.jumpweb {
-    position:absolute;
-    z-index: 35;
-    top:10px;
-    bottom:10px;
-    left:10px;
-    right:10px;
+table.match_score {
+  display: inline-block;
+  background: #444;
+  border: 1px solid #444;
+  margin: 0;
+  padding: 0;
+
+  & td {
+    background-color: $fics_dark;
+    color: $fics_front;
+    font-size: .95em;
     width: auto;
-    height: auto;
-    background: $fics_back url($simple_back);
-    background-attachment:  fixed;
-    border: 1px solid $fics_dark;
-    overflow: hidden;
+    height: 30px;
+    text-align: center;
+    border: 2px solid transparent;
+  }
+
+  & th {
+    background-color: #303030;
+    font-size: .85em;
+    width: 50px;
+    height: 40px;
+    border: 2px solid transparent;
+  }
 }
+
+table.match_score_flat {
+  display: inline-block;
+  background: #444;
+  border: 1px solid #111;
+  margin: 0;
+  padding: 0;
+
+  & td {
+    background-color: $fics_dark;
+    color: $fics_front;
+    font-size: .95em;
+    width: 3ex;
+    height: 1.2em;
+    text-align: center;
+    border: 1px solid transparent;
+  }
+
+  & th {
+    background-color: #303030;
+    color: $fics_frontest;
+    font-size: .85em;
+    width: 25ex;
+    height: 1.2em;
+    border: 1px solid transparent;
+  }
+}
+
+
+//
+// .legend{
+//     position:absolute;
+//     z-index: 45;
+//     font-family: NomPersoListe;
+//     font-size:24pt;
+//     font-weight:900;
+//     bottom:5px;
+//     right:5px;
+//     color:$fics_fronter;
+//     background:#222;
+//     height:50px;
+//     width:auto;
+//     padding:5px;
+//     opacity:0.8;
+//     border-radius:5px;
+//     box-shadow: 0 0 5px #000;
+// }
+//
+// div.jumpweb {
+//     position:absolute;
+//     z-index: 35;
+//     top:10px;
+//     bottom:10px;
+//     left:10px;
+//     right:10px;
+//     width: auto;
+//     height: auto;
+//     background: $fics_back url($simple_back);
+//     background-attachment:  fixed;
+//     border: 1px solid $fics_dark;
+//     overflow: hidden;
+// }

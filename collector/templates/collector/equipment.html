@@ -1,52 +1,59 @@
-{% extends "pdf_doc.html" %}
+{% extends "pdf_gear.html" %}
 {%load fics_filters%}
 {%load static%}
 
 {% block article %}
-    <div id="header_content">
-        <img src='collector/static/collector/glyph.png' width='0.5cm'>
-    </div>
-    <div id="footer_content">
-        <pdf:pagenumber> / <pdf:pagecount>
-    </div>
+
+<div id="header_content">
+    <img src='collector/static/collector/glyph.png' width='0.5cm'/>
+</div>
+<div id="footer_content">
+    <pdf:pagenumber/> / <pdf:pagecount/>
+</div>
 
 <h1>Fading Suns Shopping Guide</h1>
 <p>Release Date: <em>{{ date }}</em></p>
 <p>Complete equipment list from Dramatis Personae</p>
 <p>Be aware, subject of the Emperor, about His firebird: <em>£1 = 2 crests = 4 wings = 8 talons</em></p>
 
-<h3>Equipment List</h3>
+<h2>Equipment List</h2>
+
+<ul>
+
 {% for ca in gears %}
-    <h6>{{ca.name}}</h6>
+    <li><b>{{ca.name}}</b>
     <ul>
     {% for g in ca.data %}
-        <li>{{g.name}} ({{g.variant}}): £{{g.price}}</li>
+        <li>{{g.name}} ({{g.variant}}): <b>£{{g.price}}</b></li>
     {% endfor %}
     </ul>
+    </li>
 {% endfor %}
 
-<h3>Weapons</h3>
+
 
 {% for ca in weapons %}
-    <h6>{{ca.name}}</h6>
+    <li><b>Weapons: {{ca.name}}</b>
     <ul>
     {% for w in ca.data %}
-        <li>{{w.reference}} ({{w.get_category_display}}): £{{w.cost}}</li>
+        <li>{{w.reference}} ({{w.get_category_display}}): <b>£{{w.cost}}</b></li>
     {% endfor %}
     </ul>
+    </li>
 {% endfor %}
 
-<h3>Armors</h3>
+
 {% for ca in armors %}
-    <h4>{{ca.name}}</h4>
+    <li><b>Armors: {{ca.name}}</b>
     <ul>
     {% for a in ca.data %}
-        <li>{{a.reference}} ({{a.get_category_display}}): £{{a.cost}}</li>
+        <li>{{a.reference}} ({{a.get_category_display}}): <b>£{{a.cost}}</b></li>
     {% endfor %}
     </ul>
+    </li>
 {% endfor %}
 
-
+</ul>
 
 <pdf:nextframe>
 <h3>Equipment References</h3>

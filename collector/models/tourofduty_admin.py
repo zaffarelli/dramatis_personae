@@ -18,7 +18,7 @@ class TourOfDutyRefAdmin(admin.ModelAdmin):
     from collector.models.benefice_affliction import BeneficeAfflictionModificatorInline
     from collector.models.blessing_curse import BlessingCurseModificatorInline
     ordering = ['category', 'topic', 'reference', 'caste', 'value']
-    list_display = ['reference', 'category', 'caste', 'valid', 'balance', 'topic', 'is_custom', 'source', 'AP', 'OP',
+    list_display = ['reference', 'category', 'caste', 'valid', 'balance', 'topic', 'is_custom', 'source', 'AP', 'OP','balance_AP', 'balance_OP',
                     'value',
                     'description']
     exclude = ['value']

@@ -19,6 +19,7 @@ class Policy(models.Model):
     character = models.ForeignKey(Character, on_delete=models.CASCADE)
     is_armored = models.BooleanField(default=False, blank=True)
     is_armed = models.BooleanField(default=False, blank=True)
+    is_balanced = models.BooleanField(default=False, blank=True)
     has_species_lifepath = models.BooleanField(default=False)
     has_standard_lifepath = models.BooleanField(default=False)
     has_tods_lifepath = models.BooleanField(default=False)
@@ -33,8 +34,8 @@ class Policy(models.Model):
         self.name = f'{self.character.full_name} policy'
 
     def perform(self):
-        self.has_standard_lifepath = self.checkToDs()
-        self.is_applied = True
+        self.character.save()
+        self.is_applied = self.checkToDs()
         return self.last_comment
 
     def checkToDs(self):
@@ -44,21 +45,28 @@ class Policy(models.Model):
         tsk = []
         histories = {'10':0,'20':0, '30':0, '40':0, '50':0}
         if self.character.use_history_creation:
-            for tod in self.character.tourofduty_set.all():
-                if not tod.tour_of_duty_ref.valid:
-                    tsk.append(f'--> *{tod.tour_of_duty_ref.reference}* is not a valid Tour of Duty.')
-                    answer = False
+            # for tod in self.character.tourofduty_set.all():
+            #     if not tod.tour_of_duty_ref.valid:
+            #         tsk.append(f'--> *{tod.tour_of_duty_ref.reference}* is not a valid Tour of Duty.')
+            #         answer = False
             if not self.character.nameless:
                 for tod in self.character.tourofduty_set.all():
                     if tod.tour_of_duty_ref.category in ['10','20','30', '40', '50']:
                         histories[tod.tour_of_duty_ref.category] += tod.tour_of_duty_ref.value
                 if (histories['10'] == 20) and (histories['20'] == 25) and (histories['30'] == 48) and (histories['50'] == 7):
-                    tsk.append('Basic lifepath balanced')
+                    tsk.append('Basic lifepath is ok.')
                 else:
-                    tsk.append(f'--> {histories}')
+                    tsk.append(f'Broken lifepath --> {histories}')
                     answer = False
-                tsk.append(f' Number of ToDS: {histories["40"]/10}')
-                self.character.tod_count = histories["40"]/10
+                #tsk.append(f' Number of ToDS: {histories["40"]/10}')
+                #self.character.tod_count = histories["40"]/10
+                self.has_standard_lifepath = answer
+        if answer:
+            if self.character.life_path_total == self.character.OP:
+                tsk.append(f'Character balance is ok.')
+            else:
+                tsk.append(f'Unbalanced character !')
+            self.is_balanced = answer
         self.last_comment = "\n".join(tsk)
         logger.info(self.last_comment)
         return answer

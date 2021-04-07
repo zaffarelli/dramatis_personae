@@ -144,8 +144,8 @@ class Campaign(models.Model):
                     com_arr = prev_com_arr
                     red = f'0x{com_arr[0]}{com_arr[1]}'
                     green = f'0x{com_arr[2]}{com_arr[3]}'
-                    new_red = f'{hex(int(red,16) - 17)}'
-                    new_green = f'{hex(int(green, 16) - 9)}'
+                    new_red = f'{hex(int(red,16) - 4)}'
+                    new_green = f'{hex(int(green, 16) - 4)}'
                     com_arr[0] = new_red[2]
                     com_arr[1] = new_red[3]
                     com_arr[2] = new_green[2]
@@ -272,18 +272,21 @@ class Campaign(models.Model):
             ref = 'name'
             type = 'horizontalBar'
             legend_display = False
+            skip_zero = True
         elif name== 'population_per_native_system':
             title = 'Population per native fief'
             bar_property = 'fief'
             ref = 'name'
             type = 'horizontalBar'
             legend_display = False
+            skip_zero = True
         elif name== 'population_per_alliance':
             title = 'Population per Alliance'
             bar_property = 'alliance_ref'
             ref = 'reference'
             type = 'horizontalBar'
             legend_display = False
+            skip_zero = True
         elif name== 'population_per_team':
             title = 'Population per Team'
             bar_property = 'team'
@@ -314,7 +317,7 @@ class Campaign(models.Model):
             type = 'horizontalBar'
             legend_display = False
             color_scale = True
-            skip_zero = True
+
 
         ticks = False
         all = Character.objects.order_by(bar_property)

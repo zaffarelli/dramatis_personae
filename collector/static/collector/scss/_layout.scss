@@ -541,6 +541,9 @@
                 }
             }
         }
+        &.tile.duel{
+            width: 800px;
+        }
         &.compact{
             border:1px solid green;
             justify-content:flex-start;

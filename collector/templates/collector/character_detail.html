@@ -40,6 +40,7 @@
             {% if not c.nameless %}
             <li><b>Occult</b><u>{{c.occult}}</u></li>
             <li><b>Path</b><u>{{c.path}}</u></li>
+            <li><b>Occult Fire power</b><u>{{c.occult_fire_power}}</u></li>
             {% endif %}
         </ul>
         <ul>
@@ -74,8 +75,15 @@
     <h2>Attributes ({{c.PA_TOTAL}}x3)</h2>
     <div class='attributes'>
         {% include "collector/character/character_primaries.html" %}
+    </div>
+    <div class='attributes'>
         {% include "collector/character/character_secondaries.html" %}
     </div>
+
+    <div class='healthbar'>
+        {% include "collector/character/character_healthbar.html" %}
+    </div>
+
 
     <span id="skill_block_{{c.id}}">
         {% include "collector/character/character_skills.html" %}
@@ -127,7 +135,7 @@
     {{c.stories | parse_stories | safe}}
     {% endif%}
     <hr/>
-    <span class='golden custom_show' id='{{c.rid}}' ><a href='pdf/{{c.rid}}/' target='avatar_pdf'><i class="fas fa-file-pdf"></i> {{c.rid}}</a></span>
-    <br/>{{c.challenge|safe}}
+    <span class='golden custom_show' id='{{c.rid}}' ><a href='pdf/{{c.rid}}/' target='avatar_pdf' class="golden"><i class="fas fa-file-pdf"></i> {{c.rid}}</a></span>
+    <div class="challenge" id="challenge_{{c.id}}">{{c.challenge|safe}}</div>
 </div>
 {% endblock details %}

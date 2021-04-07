@@ -27,3 +27,4 @@ class CharacterCustoAdmin(admin.ModelAdmin):
         RitualCustoInline,
     ]
     ordering = ['character__full_name', ]
+    search_fields = ['character__full_name']

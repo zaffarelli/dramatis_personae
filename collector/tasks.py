@@ -108,17 +108,21 @@ def policies_check():
         x = p.perform()
         answer = f'-----------> Performing [{p.name}]: {x}'
         p.save()
-    else:
+    if len(all)<5:
         from collector.models.character import Character
-        characters = Character.objects.order_by('pub_date')[:5]
+        characters = Character.objects.order_by('pub_date')[:10]
         for c in characters:
             if not len(Policy.objects.filter(character=c)):
                 p = Policy()
                 p.character = c
-                p.is_applied = False
-                p.fix()
-                p.save()
                 logger.info(f'Added policy for [{c.full_name}]')
+            else:
+                p = Policy.objects.filter(character=c)
+                logger.info(f'Updated policy for [{c.full_name}]')
+            p.is_applied = False
+            p.fix()
+            p.save()
+
         for p in Policy.objects.all():
             logger.debug(f'{p.name} --> {p.is_applied}')
 

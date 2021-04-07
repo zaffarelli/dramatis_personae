@@ -207,7 +207,35 @@ div.character_sheet {
             page-break-after: always;
         }
     }
-    
+
+    & .healthbar{
+
+        & table{
+            font-size:8pt;
+            & tr{
+                height:20px;
+            }
+            & th{
+                background:transparent;
+                border:1px dotted $fics_back;
+                border-radius:3px;
+                width:20px;
+            }
+            & td{
+                background:$fics_back;
+                border:1px solid $fics_front;
+                border-radius:3px;
+                width:20px;
+                &.label{
+                    color:#FFCC44;
+                    text-align:center;
+                }
+            }
+
+        }
+    }
+
+
     & .skillsview {
         column-count: 2;
         column-gap: 5px;
@@ -271,6 +299,27 @@ div.character_sheet {
     & .edit {
         color: $fics_golden;
     }
+
+    & table.stats{
+        &.other{
+            & tr{
+                width:100%;
+                background:$fics_darkest;
+            }
+            & th{
+                width:20%;
+                background:$fics_back;
+                border:1px solid $fics_darkest;
+            }
+            & td{
+                width:30%;
+                background:$fics_back;
+                padding:2px;
+                text-align:left;
+                border:1px solid $fics_darkest;
+            }
+        }
+    }
     
     & .chart_panel {
         border: 1px solid $fics_darker;
@@ -280,7 +329,7 @@ div.character_sheet {
         background-color: $fics_dark;
         display: inline-block;
         color: $fics_front;
-        
+        background: pink;
         & canvas {
             width: 1000px;
             height: auto;

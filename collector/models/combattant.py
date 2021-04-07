@@ -34,47 +34,51 @@ class Combattant(Avatar):
         a = self.get_armor()
         s = self.shield_set.first()
         w = self.get_weapon('MELEE')
-        self.round_data = {
-            'name': self.full_name,
-            'rid': self.rid,
-            'id': self.id,
-            'initiative': 0,
-            'multiattack_malus': 0,
-            'number_of_attacks': 1,
-            'max_attacks': 0,
-            'narrative': [],
-            'health_template': {
-                'HEAD': {'SP': self.SA_STA, 'wounds': {'light': 0, 'medium': 0, 'severe': 0}},
-                'TORSO': {'SP': self.SA_STA, 'wounds': {'light': 0, 'medium': 0, 'severe': 0}},
-                'LEFT_ARM': {'SP': self.SA_STA, 'wounds': {'light': 0, 'medium': 0, 'severe': 0}},
-                'RIGHT_ARM': {'SP': self.SA_STA, 'wounds': {'light': 0, 'medium': 0, 'severe': 0}},
-                'LEFT_LEG': {'SP': self.SA_STA, 'wounds': {'light': 0, 'medium': 0, 'severe': 0}},
-                'RIGHT_LEG': {'SP': self.SA_STA, 'wounds': {'light': 0, 'medium': 0, 'severe': 0}},
-                'shield': {'charges': 0, 'min': 0, 'max': 0},
-                'hit_points': self.SA_END,
-                'hp_max': self.SA_END,
-                'who': self.id,
-                'color': self.color,
-                'status': 'OK',
-                'circumstance_modifiers': 0,
-                'expertise': 0,
-                'expertise_pool': 0,
-                'expertise_bonus': 0,
-            },
-            'armor': {
-                'id': a.id,
-                'name': a.armor_ref.reference,
-                'SP': a.armor_ref.stopping_power,
-                'ENC': a.armor_ref.encumbrance,
-            },
-            'shield': {'id': 0, 'name': 'no shield', 'min': 0, 'max': 0, 'charges': 0},
-            'weapon': {'id': w.id, 'name': w.weapon_ref.reference, 'DC': w.weapon_ref.damage_class,
-                       'WA': w.weapon_ref.weapon_accuracy},
-            'REF': 0,
-            'AGI': 0,
-            'melee': 0,
-            'dodge': 0,
-        }
+        try:
+            self.round_data = {
+                'name': self.full_name,
+                'rid': self.rid,
+                'id': self.id,
+                'initiative': 0,
+                'multiattack_malus': 0,
+                'number_of_attacks': 1,
+                'max_attacks': 0,
+                'narrative': [],
+                'health_template': {
+                    'HEAD': {'SP': self.SA_STA, 'wounds': {'light': 0, 'medium': 0, 'severe': 0}},
+                    'TORSO': {'SP': self.SA_STA, 'wounds': {'light': 0, 'medium': 0, 'severe': 0}},
+                    'LEFT_ARM': {'SP': self.SA_STA, 'wounds': {'light': 0, 'medium': 0, 'severe': 0}},
+                    'RIGHT_ARM': {'SP': self.SA_STA, 'wounds': {'light': 0, 'medium': 0, 'severe': 0}},
+                    'LEFT_LEG': {'SP': self.SA_STA, 'wounds': {'light': 0, 'medium': 0, 'severe': 0}},
+                    'RIGHT_LEG': {'SP': self.SA_STA, 'wounds': {'light': 0, 'medium': 0, 'severe': 0}},
+                    'shield': {'charges': 0, 'min': 0, 'max': 0},
+                    'hit_points': self.SA_END,
+                    'hp_max': self.SA_END,
+                    'who': self.id,
+                    'color': self.color,
+                    'status': 'OK',
+                    'circumstance_modifiers': 0,
+                    'expertise': 0,
+                    'expertise_pool': 0,
+                    'expertise_bonus': 0,
+                },
+                'armor': {
+                    'id': a.id,
+                    'name': a.armor_ref.reference,
+                    'SP': a.armor_ref.stopping_power,
+                    'ENC': a.armor_ref.encumbrance,
+                },
+                'shield': {'id': 0, 'name': 'no shield', 'min': 0, 'max': 0, 'charges': 0},
+                'weapon': {'id': w.id, 'name': w.weapon_ref.reference, 'DC': w.weapon_ref.damage_class,
+                           'WA': w.weapon_ref.weapon_accuracy},
+                'REF': 0,
+                'AGI': 0,
+                'melee': 0,
+                'dodge': 0,
+            }
+        except:
+            logger.error(f'{self.full_name} is not ready for Tournament...')
+            return self.round_data
         self.poke('REF', self.PA_REF)
         self.poke('AGI', self.PA_AGI)
         sk = self.skill_set.all().filter(skill_ref__reference='Melee').first()
@@ -138,7 +142,7 @@ class Combattant(Avatar):
         return None
 
     def get_weapon(self, name):
-        we = self.weapon_set.all().filter(weapon_ref__category=name).order_by('-weapon_ref__damage_class')
+        we = self.weapon_set.all().filter(weapon_ref__category=name).order_by('weapon_ref__damage_class')
         if we.count == 0:
             return None
         else:
@@ -217,7 +221,7 @@ class Combattant(Avatar):
                 target.tell("")
             self.poke('health_template.expertise_bonus', bon)
             overrun_bonus = 0
-            self.poke('multiattack_malus', (self.peek('max_attacks') - 1) * 3)
+            self.poke('multiattack_malus', -(3-self.peek('max_attacks')) * 3)
             die, detdie = self.open_d12
             self.poke('attack_roll', self.peek('REF') + self.peek('melee') + self.peek('weapon.WA') - self.peek(
                 'health_template.circumstance_modifiers') - self.peek('multiattack_malus') + self.peek(
@@ -415,7 +419,7 @@ class Combattant(Avatar):
 
     def penalize(self, x):
         self.round_data['health_template']['circumstance_modifiers'] += x
-        # print("%s %d"%(self.full_name,self.round_data['health_template']['circumstance_modifiers']))
+        # print("%s has a new penalty of %d"%(self.full_name,x))
 
     def roll_dodge(self):
         die, detdie = self.open_d12
@@ -424,12 +428,12 @@ class Combattant(Avatar):
         return dodge
 
     def roll_parry(self):
-        if self.peek('max_attacks') == 1:
-            self.poke('multiattack_malus', 8)
-        else:
-            self.poke('multiattack_malus', (self.peek('max_attacks') - 1) * 3)
+        # if self.peek('max_attacks') == 1:
+        #     self.poke('multiattack_malus', 0)
+        # else:
+        self.poke('multiattack_malus', -(3-self.peek('max_attacks')) * 3)
         die, detdie = self.open_d12
-        die += 2
+        die += 3
         die -= self.peek('multiattack_malus')
         die -= self.peek('health_template.circumstance_modifiers')
         parry = self.peek('REF') + self.peek('melee') + die

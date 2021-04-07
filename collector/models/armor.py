@@ -26,8 +26,9 @@ class ArmorRef(models.Model):
     stopping_power = models.PositiveIntegerField(default=2)
     cost = models.PositiveIntegerField(default=2)
     encumbrance = models.PositiveIntegerField(default=0)
+    meta_type = models.CharField(max_length=64, default='')
     tech_level = models.PositiveIntegerField(default=3)
-    description = models.TextField(max_length=1024, default='')
+    description = models.TextField(max_length=1024, default='', blank=True)
 
     def __str__(self):
         return '%s (%s, SP:%s)' % (self.reference, self.category, self.stopping_power)
@@ -51,11 +52,11 @@ class ArmorCusto(models.Model):
 
 
 class ArmorRefAdmin(admin.ModelAdmin):
-    ordering = ('-stopping_power', 'encumbrance', 'reference')
+    ordering = ['-category','-stopping_power', 'encumbrance', 'reference']
     list_display = ['reference', 'category', 'stopping_power', 'encumbrance', 'head', 'torso', 'right_arm', 'left_arm',
                     'right_leg', 'left_leg', 'cost', 'description', 'tech_level']
-    list_filter = ('category',)
-    search_fields = ('category',)
+    list_filter = ['category', 'meta_type']
+    search_fields = ['reference','meta_type','category',]
 
 
 class ArmorInline(admin.TabularInline):

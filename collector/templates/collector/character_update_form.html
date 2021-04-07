@@ -119,6 +119,12 @@
                 {{form.is_visible}}
             </div>
             <div class="field_wrapper">
+                {{ form.fencing_league.errors}}
+                <label for="fencing_league">Fencing League</label>
+                {{form.fencing_league}}
+            </div>
+
+            <div class="field_wrapper">
                 {{ form.is_dead.errors}}
                 <label for="is_dead">Dead</label>
                 {{form.is_dead}}

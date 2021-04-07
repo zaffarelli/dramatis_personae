@@ -103,6 +103,7 @@ class Character(Combattant):
     team = models.CharField(max_length=128, choices=DRAMA_SEATS, default='06-neutral', blank=True)
     OCC_LVL = models.PositiveIntegerField(default=0)
     OCC_DRK = models.PositiveIntegerField(default=0)
+    occult_fire_power  = models.PositiveIntegerField(default=0, blank=True)
     occult = models.CharField(max_length=50, default='', blank=True)
     challenge = models.TextField(default='')
     challenge_value = models.IntegerField(default=0)
@@ -150,7 +151,11 @@ class Character(Combattant):
         else:
             alliance_ref = AllianceRef.objects.get(reference='None')
         x = self.id
-
+        from collector.templatetags.fics_filters import as_roman
+        if self.tod_count>0:
+            roman_tod_count = as_roman(self.tod_count)
+        else:
+            roman_tod_count = '-'
         data = {
             'id': x,
             'character': {
@@ -166,7 +171,8 @@ class Character(Combattant):
                 'physical': self.physical,
                 'mental': self.mental,
                 'combat': self.combat,
-                'tod_count': self.tod_count,
+                'tod_count': roman_tod_count,
+                'fencing_league': self.fencing_league,
                 'balanced': self.balanced,
             },
             'alliance': {
@@ -433,6 +439,8 @@ class Character(Combattant):
             if self.birthdate < 1000:
                 self.birthdate = conf.epic.era - self.birthdate
                 self.age = conf.epic.era - self.birthdate
+        self.update_game_parameters()
+        self.fencing_league_special()
         # NPC fix
         if self.use_history_creation:
             self.rebuild_from_lifepath()
@@ -459,17 +467,9 @@ class Character(Combattant):
         self.update_challenge()
         self.update_stories_count()
         self.race = self.specie.species
-        if self.use_history_creation:
-            self.check_todo_list()
-        self.need_fix = False
-        self.update_game_parameters()
-        logger.info(f'    => Done fixing ...: {self.full_name} NeedFIX:{self.need_fix}')
 
-    def check_todo_list(self):
-        """ Check for invalid tours of duty for the character
-            This is now part of the policy
-        """
-        pass
+        self.need_fix = False
+        logger.info(f'    => Done fixing ...: {self.full_name} NeedFIX:{self.need_fix}')
 
     def update_challenge(self):
         res = ''
@@ -606,6 +606,7 @@ class Character(Combattant):
             item = Ritual()
             item.character = self
             item.ritual_ref = aref
+            item.fix()
             item.save()
             return item
 
@@ -776,7 +777,7 @@ class Character(Combattant):
             try:
                 context = dict(c=self, filename=f'{self.rid}', now=datetime.now(tz=get_current_timezone()))
                 write_pdf('collector/character_roster.html', context)
-                logger.info(f'    => PDF created ...: {self.rid}')
+                logger.info(f'=> PDF created ...: {self.rid}')
                 proceed = True
                 self.need_pdf = False
                 self.save()
@@ -835,34 +836,83 @@ class Character(Combattant):
         return self.stories_count
 
     def update_game_parameters(self):
-        self.physical = (self.PA_STR + self.PA_BOD + self.PA_MOV + self.PA_CON)/4
-        self.mental = (self.PA_INT + self.PA_WIL + self.PA_TEM + self.PA_PRE)/4
-        self.combat = (self.PA_TEC + self.PA_REF + self.PA_AGI + self.PA_AWA)/4
+        # Nameless attributes
+        self.physical = self.na_phy
+        self.mental = self.na_men
+        self.combat = self.na_com
         # Check for racial tods
-        from collector.models.tourofduty import TourOfDutyRef, TourOfDuty
-        ra_tod = None
-        # br_tod = None
-        if self.specie.ra_tod_name:
-            ra_tod = TourOfDutyRef.objects.get(reference=self.specie.ra_tod_name)
-        # if self.specie.br_tod_name:
-        #     br_tod = TourOfDutyRef.objects.get(reference=self.specie.br_tod_name)
-        for tod in self.tourofduty_set.all():
+        if (self.player == None) and (self.is_locked==False):
+            from collector.models.tourofduty import TourOfDutyRef, TourOfDuty
+            ra_tod = None
+            if self.specie.ra_tod_name:
+                ra_tod = TourOfDutyRef.objects.get(reference=self.specie.ra_tod_name)
+            for tod in self.tourofduty_set.all():
+                if ra_tod != None:
+                    if ra_tod.reference == tod.tour_of_duty_ref.reference:
+                        ra_tod = None
             if ra_tod != None:
-                if ra_tod.reference == tod.tour_of_duty_ref.reference:
-                    ra_tod = None
-            # if br_tod != None:
-            #     if br_tod.reference == tod.tour_of_duty_ref.reference:
-            #         br_tod = None
-        if ra_tod != None:
-            t = TourOfDuty()
-            t.character = self
-            t.tour_of_duty_ref = ra_tod
-            t.save()
-            logger.info(f'    => Added ToD {t} to {self.rid}')
-        # if br_tod != None:
-        #     t = TourOfDuty()
-        #     t.character = self
-        #     t.tour_of_duty_ref = br_tod
-        #     t.save()
-        #     logger.info(f'    => Added ToD {t} to {self.rid}')
-        logger.debug(f'    => Updating Game parameters... ({self.specie.species}, {self.specie.race})')
+                t = TourOfDuty()
+                t.character = self
+                t.tour_of_duty_ref = ra_tod
+                t.save()
+                logger.info(f'    => Added ToD {t} to {self.rid}')
+            logger.debug(f'    => Updating Game parameters... ({self.specie.species}, {self.specie.race})')
+
+        self.tod_count = int((self.OP-240)/10)+1
+        if self.tod_count<0:
+            self.tod_count = 0
+
+        # Armor stopping power
+        SP_grid = { "HE": 0,"TO":0,"LA":0,"RA":0,"LL":0,"RL":0,"LW":0,"RW":0,"enc":0}
+        for a in self.armor_set.all():
+            if a.armor_ref.head:
+                SP_grid["HE"] += a.armor_ref.stopping_power
+            if a.armor_ref.torso:
+                SP_grid["TO"] += a.armor_ref.stopping_power
+            if a.armor_ref.left_leg:
+                SP_grid["LL"] += a.armor_ref.stopping_power
+            if a.armor_ref.right_leg:
+                SP_grid["RL"] += a.armor_ref.stopping_power
+            if a.armor_ref.left_arm:
+                SP_grid["LA"] += a.armor_ref.stopping_power
+            if a.armor_ref.right_arm:
+                SP_grid["RA"] += a.armor_ref.stopping_power
+            SP_grid["enc"] += a.armor_ref.encumbrance
+        logger.info(SP_grid)
+
+    def fencing_league_special(self):
+        if self.fencing_league:
+            found_rapier = None
+            from collector.models.character_custo import CharacterCusto
+            found_custo = CharacterCusto.objects.get(character=self)
+            for w in found_custo.weaponcusto_set.filter(weapon_ref__category='MELEE'):
+                if w.weapon_ref.meta_type == 'Rapier':
+                    found_rapier = w
+            if not found_rapier:
+                from collector.models.weapon import WeaponCusto, WeaponRef
+                found_rapier = WeaponCusto()
+                found_rapier.character_custo = found_custo
+                found_rapier.weapon_ref = WeaponRef.objects.get(reference='Rapier')
+                found_rapier.save()
+            found_rapier.weapon_of_choice = True
+            found_rapier.save()
+
+            from collector.models.character_custo import CharacterCusto
+            found_custo = CharacterCusto.objects.get(character=self)
+            armors = found_custo.armorcusto_set.all()
+            if len(armors)==0:
+                from collector.models.armor import ArmorCusto, ArmorRef
+                found_armor = ArmorCusto()
+                found_armor.character_custo = found_custo
+                found_armor.armor_ref = ArmorRef.objects.get(reference='Leather Jerkin')
+                found_armor.save()
+
+        if self.OCC_LVL>0:
+            pathes = []
+            total_ritual_levels = 0
+            for r in self.ritual_set.all().order_by('ritual_ref__path'):
+                if not r.ritual_ref.path in pathes:
+                    pathes.append(r.ritual_ref.path)
+                total_ritual_levels += r.ritual_ref.level
+            self.path = ", ".join(pathes)
+            self.occult_fire_power = total_ritual_levels

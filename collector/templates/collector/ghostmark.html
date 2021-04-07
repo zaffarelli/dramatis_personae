@@ -1,6 +1,17 @@
 {% load static %}
 {% load fics_filters %}
-<div id='ghostmark_{{c.id}}'></div>
+<div id="{{tgt}}_{{c.id}}" class="ghostmark"></div>
 <script>
-  (new Ghostmark({{data|safe}},3,9 )).perform();
+  {% if winner %}
+    console.log({{winner.id}}+" "+{{c.id}});
+    {% if winner.id == c.id %}
+        console.log("Loser: "+{{c.id}});
+        (new Ghostmark({{data|safe}},3,9,'{{tgt}}')).perform();
+    {% else %}
+        console.log("Loser: "+{{c.id}});
+        (new Ghostmark({{data|safe}},3,9,'{{tgt}}')).performShadow();
+    {% endif %}
+  {% else %}
+    (new Ghostmark({{data|safe}},3,9,'{{tgt}}')).perform();
+  {% endif %}
 </script>

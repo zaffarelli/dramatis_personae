@@ -40,7 +40,7 @@ LIFEPATH_CASTE = (
 
 class TourOfDutyRef(models.Model):
     class Meta:
-        ordering = ['category', 'reference']
+        ordering = ['category', 'caste','reference']
         verbose_name = "FICS: ToD"
 
     reference = models.CharField(max_length=64, default='')
@@ -52,6 +52,8 @@ class TourOfDutyRef(models.Model):
     need_fix = models.BooleanField(default=False, blank=True)
     AP = models.IntegerField(default=0)
     OP = models.IntegerField(default=0)
+    balance_AP = models.IntegerField(default=0)
+    balance_OP = models.IntegerField(default=0)
     balance = models.IntegerField(default=0)
     PA_STR = models.IntegerField(default=0)
     PA_CON = models.IntegerField(default=0)
@@ -74,7 +76,7 @@ class TourOfDutyRef(models.Model):
     pub_date = models.DateTimeField('Date published', default=datetime.now)
 
     def __str__(self):
-        return f'{self.reference} ({self.get_category_display()}, {self.get_caste_display()}, {self.value})'
+        return f'[{self.value}] {self.reference} ({self.get_category_display()}, {self.get_caste_display()})'
 
     def fix(self):
         self.WP = 0
@@ -124,7 +126,7 @@ class TourOfDutyRef(models.Model):
                 texts.append("(%s %+d)" % (ba.benefice_affliction_ref.reference, ba.benefice_affliction_ref.value))
                 self.OP += ba.benefice_affliction_ref.value
             self.description = " ".join(texts)
-            self.value = self.AP * 3 + self.OP
+            self.value = (self.AP+self.balance_AP) * 3 + (self.OP+self.balance_OP)
             self.check_value()
         self.need_fix = False
 
@@ -210,6 +212,8 @@ class TourOfDuty(models.Model):
                 ch.add_bc(bc.blessing_curse_ref)
             for ba in tod.beneficeafflictionmodificator_set.all():
                 ch.add_ba(ba.benefice_affliction_ref)
+        AP += tod.balance_AP
+        OP += tod.balance_OP
         return AP, OP, WP, wp_roots
 
 

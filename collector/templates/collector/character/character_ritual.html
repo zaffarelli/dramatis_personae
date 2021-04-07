@@ -9,6 +9,7 @@
 <td>{{ r.ritual_ref.reference|safe }}</td>
 <td>{{ r.ritual_ref.level }}</td>
 <td>{{ r.ritual_ref.path }}</td>
+<td title="{{r.ritual_ref.attribute}}+{{r.ritual_ref.skill.reference}}">{{ r.value }}</td>
 </tr>
 {% endfor %}
 </table>

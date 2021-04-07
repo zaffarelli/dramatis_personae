@@ -178,7 +178,6 @@ class CharacterCusto(models.Model):
             ch.add_ritual(ritual.ritual_ref)
 
     def add_or_update_skill(self, skill_ref_id, value):
-        ''' Updating customization and avatar '''
         from collector.models.skill import SkillCusto, SkillRef
         found_in_custo = False
         found_cu = None

@@ -27,4 +27,4 @@ def commons(request):
         configs = []
     campaign = get_current_config()
     return dict(dp_version=fics_references.RELEASE, instance_name=settings.INSTANCE_NAME,
-            python_version=sys.version, hostname=socket.gethostname().upper(), campaign=campaign, configs=configs)
+            python_version=sys.version, hostname=socket.gethostname().upper(), campaign=campaign, configs=configs, ghostmark='ghostmark')

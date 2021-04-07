@@ -113,6 +113,15 @@ def exit_fencing_league(modeladmin, request, queryset):
     queryset.update(fencing_league=False)
     short_description = "Exit fencing league"
 
+def needs_fix(modeladmin, request, queryset):
+    queryset.update(need_fix=True)
+    short_description = "Need fix"
+
+def needs_pdf(modeladmin, request, queryset):
+    queryset.update(need_pdf=True)
+    short_description = "Need PDF"
+
+
 
 class CharacterAdmin(admin.ModelAdmin):
     list_display = ['full_name', 'rid', "ranking", "id", 'importance', 'entrance', 'specie', 'alliance_ref', 'alliance',
@@ -131,7 +140,7 @@ class CharacterAdmin(admin.ModelAdmin):
         RitualInline,
     ]
     ordering = ['full_name', ]
-    actions = [no_importance, importance_up, importance_down, make_invisible,
+    actions = [needs_fix, needs_pdf,no_importance, importance_up, importance_down, make_invisible,
                make_visible, make_teutonic, make_kaanic, make_castillan, make_enquist, make_public, make_private,
                make_partial, make_complete, enter_fencing_league, exit_fencing_league]
     exclude = ['SA_REC', 'SA_STA', 'SA_END', 'SA_STU', 'SA_RES', 'SA_DMG', 'SA_TOL', 'SA_HUM', 'SA_PAS', 'SA_WYR',

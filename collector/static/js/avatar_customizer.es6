@@ -17,7 +17,7 @@ class AvatarCustomizer{
 		this.customizer = customizer;
 		this.co = co
 		this.prepareEvents()
-		console.log("RESET: "+this.form+" "+this.avatar+" "+this.customizer);
+		//console.log("RESET: "+this.form+" "+this.avatar+" "+this.customizer);
 	}
 
 	prepareEvents(co=null){
@@ -29,20 +29,20 @@ class AvatarCustomizer{
 		me.doConnect("bc",true);
 		me.doConnect("skill");
         me.doConnect("weapon",true);
-        me.doConnect("armor",true);
+        me.doConnect("armor",true,true);
         me.doConnect("shield",true);
         me.doConnect("ritual",true);
 	}
 
-	doConnect(prefix,symetric=false){
+	doConnect(prefix,symetric=false,trace=false){
 		let me = this;
 		$("#"+prefix+"_add").off("click").on("click",function(e){
 		    let i = $("#"+prefix+"_select :selected");
             let anurl = 'ajax/character/add/'+prefix+"/"+me.avatar+"/"+i.val()+'/';
             let ff = $("#freefield").val();
             $("#"+prefix+"_block_"+me.avatar).addClass("working");
-            console.log(anurl);
-            console.log(ff);
+            //console.log(anurl);
+            //console.log(ff);
 
    		    $.ajax({
                 url: anurl,
@@ -63,7 +63,7 @@ class AvatarCustomizer{
                     me.co.rebootLinks();
 		 	    },
                 error: function(answer){
-                    console.log(answer.responseText);
+                    console.error(answer.responseText);
                     me.co.rebootLinks();
 		 	    }
 	 	    });
@@ -72,7 +72,9 @@ class AvatarCustomizer{
             $("#"+prefix+"_del").off("click").on("click",function(e){
     		    let i = $("#"+prefix+"_unselect :selected");
                 let anurl = 'ajax/character/del/'+prefix+"/"+me.avatar+"/"+i.val()+'/';
-                console.log(anurl);
+                if (trace){
+                    console.log(anurl);
+                }
                 $("#"+prefix+"_block_"+me.avatar).addClass("working");
        		    $.ajax({
                     url: anurl,
@@ -88,12 +90,12 @@ class AvatarCustomizer{
                         $("#"+prefix+"_block_"+answer.c["id"]).removeClass("working");
                         $("#summary_block").html(answer.summary);
                         $("li#"+answer.c["id"]).html(answer.avatar_link);
-                        console.log("li#"+answer.c["id"]);
+                        //console.log("li#"+answer.c["id"]);
                         me.prepareEvents();
                         me.co.rebootLinks();
     		 	    },
                     error: function(answer){
-                        console.log(answer.responseText);
+                        console.error(answer.responseText);
                         me.co.rebootLinks();
     		 	    }
     	 	    });
@@ -121,16 +123,17 @@ class AvatarCustomizer{
                 },
                 dataType:'json',
                 success: function(answer) {
-                    console.log(answer);
+                    //console.log(answer);
                     $("#sk_"+skill_id).removeClass("working");
                     $("#sk_"+skill_id).html(answer.block);
                     $("#summary_block").html(answer.summary);
                     $("li#"+answer.c["id"]).html(answer.avatar_link);
+                    $("#challenge_"+answer.c["id"]).html(answer.challenge);
                     me.prepareEvents();
                     me.co.rebootLinks();
                 },
                 error: function(answer){
-                    console.log(answer);
+                    console.error(answer);
                     $("#sk_"+skill_id).html(answer.block);
                     me.prepareEvents();
                     me.co.rebootLinks();
@@ -151,7 +154,7 @@ class AvatarCustomizer{
                 fingerval = 49;
             }
             $("#"+attr_id+"_"+avatar_id).addClass("working");
-            console.log("#"+attr_id+"_"+avatar_id);
+            //console.log("#"+attr_id+"_"+avatar_id);
             $.ajax({
                 url: 'ajax/character/pick/attr/'+avatar_id+'/'+attr_id+'/'+fingerval+'/',
                 method: 'POST',
@@ -161,17 +164,18 @@ class AvatarCustomizer{
                 },
                 dataType:'json',
                 success: function(answer) {
-                    console.log(answer);
+                    //console.log(answer);
                     $("#"+attr_id+"_"+avatar_id).removeClass("working");
                     $("#"+attr_id+"_"+avatar_id).html(answer.block);
                     $("#summary_block").html(answer.summary);
                     $("li#"+answer.c["id"]).html(answer.avatar_link);
-                    console.log("li#"+answer.c["id"]);
+                    $("#challenge_"+answer.c["id"]).html(answer.challenge);
+                    //console.log("li#"+answer.c["id"]);
                     me.prepareEvents();
                     me.co.rebootLinks();
                 },
                 error: function(answer){
-                    console.log(answer);
+                    console.error(answer);
                     //$("#sk_"+skill_id).html(answer.block);
                     me.prepareEvents();
                     me.co.rebootLinks();
