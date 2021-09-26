@@ -5,7 +5,7 @@
         <td colspan=3>
 			<select id='weapon_select'>
 			{% for s in c.weapon_options %}
-				<option value='{{s.id}}' style='width:15ex;'>{{s.reference}}</option>
+				<option value='{{s.id}}' style='width:15ex;'>{{s.reference}} [{{s.meta_type}} ({{s.get_category_display}})]</option>
 			{% endfor %}
 			</select>
         </td>
@@ -17,7 +17,7 @@
             {% if c.weapon_options_not %}
 			<select id='weapon_unselect'>
 			{% for s in c.weapon_options_not %}
-				<option value='{{s.id}}' style='width:15ex;'>{{s.reference}}</option>
+				<option value='{{s.id}}' style='width:15ex;'>{{s.reference}} [{{s.meta_type}} ({{s.get_category_display}})]</option>
 			{% endfor %}
 			</select>
             {% else %}

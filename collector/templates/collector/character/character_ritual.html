@@ -3,13 +3,13 @@
 
 {% if c.ritual_set.count != 0 %}
 <table  class='unbreakable' id='ritual_{{c.id}}' width='100%'>
-<tr><th colspan=3>Rituals</th></tr>
+<tr><th colspan=4>{{c.occult}} Powers (ofp:{{c.occult_fire_power}})</th></tr>
 <tr>
 {% for r in c.ritual_set.all %}
-<td>{{ r.ritual_ref.reference|safe }}</td>
+<td title="{{r.ritual_ref.attribute|as_pa_short}} ({{r.attribute_value}})+{{r.ritual_ref.skill.reference}}({{r.skill_value}})">({{ r.ritual_ref.path }}) {{ r.ritual_ref.reference|safe }}</td>
 <td>{{ r.ritual_ref.level }}</td>
-<td>{{ r.ritual_ref.path }}</td>
-<td title="{{r.ritual_ref.attribute}}+{{r.ritual_ref.skill.reference}}">{{ r.value }}</td>
+<td></td>
+<td>{{ r.value }}</td>
 </tr>
 {% endfor %}
 </table>

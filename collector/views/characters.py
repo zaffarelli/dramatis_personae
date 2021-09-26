@@ -477,7 +477,7 @@ def customize_ritual(request, avatar, item):
 
 
 def customize_ritual_del(request, avatar, item):
-    from collector.models.ritual import RitualRef, WeaponCusto
+    from collector.models.ritual import RitualRef, RitualCusto
     from collector.models.character_custo import CharacterCusto
     context = {}
     ch = Character.objects.get(pk=avatar)

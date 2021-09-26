@@ -5,7 +5,7 @@
         <td colspan=3>
 			<select id='ritual_select'>
 			{% for s in c.ritual_options %}
-				<option value='{{s.id}}' style='width:15ex;'>{{s.reference}} ({{s.level}})</option>
+				<option value='{{s.id}}' style='width:15ex;'>[{{s.path}}] {{s.reference}} ({{s.level}})</option>
 			{% endfor %}
 			</select>
         </td>
@@ -17,7 +17,7 @@
             {% if c.ritual_options_not %}
 			<select id='ritual_unselect'>
 			{% for s in c.ritual_options_not %}
-				<option value='{{s.id}}' style='width:15ex;'>{{s.reference}} ({{s.level}})</option>
+				<option value='{{s.id}}' style='width:15ex;'>[{{s.path}}] {{s.reference}} ({{s.level}})</option>
 			{% endfor %}
 			</select>
             {% else %}

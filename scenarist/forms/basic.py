@@ -1,8 +1,3 @@
-'''
-╔╦╗╔═╗  ╔═╗┌─┐┌─┐┌┐┌┌─┐┬─┐┬┌─┐┌┬┐
- ║║╠═╝  ╚═╗│  ├┤ │││├─┤├┬┘│└─┐ │ 
-═╩╝╩    ╚═╝└─┘└─┘┘└┘┴ ┴┴└─┴└─┘ ┴ 
-'''
 from django import forms
 from django.forms import ModelForm
 
@@ -17,15 +12,18 @@ class EpicForm(ModelForm):
     model = Epic
     fields = '__all__'
 
+
 class DramaForm(ModelForm):
   class Meta:
     model = Drama
     fields = '__all__'
 
+
 class ActForm(ModelForm):
   class Meta:
     model = Act
     fields = '__all__'
+
 
 class EventForm(ModelForm):
   class Meta:

@@ -515,6 +515,7 @@ class Character(Combattant):
         for item in all_items:
             if item in custo_ref_items:
                 o_n.append(item)
+                print(item)
             else:
                 o.append(item)
         setattr(self, options, o)
@@ -910,9 +911,30 @@ class Character(Combattant):
         if self.OCC_LVL>0:
             pathes = []
             total_ritual_levels = 0
-            for r in self.ritual_set.all().order_by('ritual_ref__path'):
+            rituals_per_path = self.ritual_set.all().order_by('ritual_ref__path')
+
+            if self.caste == 'Church':
+                if not len(rituals_per_path):
+                    self.occult = "Theurgy"
+            else:
+                if not len(rituals_per_path):
+                    self.occult = "Psi"
+                    common_psi_pathes = ['FarHand','Psyche','Soma','Sixth Sense','Vis Craft']
+                    import random
+                    from collector.models.ritual import RitualCusto, RitualRef
+                    from collector.models.character_custo import CharacterCusto
+                    main_path = random.choice(common_psi_pathes)
+                    found_custo = CharacterCusto.objects.get(character=self)
+                    for x in range(self.OCC_LVL):
+                        new_power = RitualCusto()
+                        new_power.character_custo = found_custo
+                        new_power.ritual_ref = RitualRef.objects.filter(path=main_path,level=x+1).first()
+                        new_power.save()
+
+            for r in rituals_per_path:
                 if not r.ritual_ref.path in pathes:
                     pathes.append(r.ritual_ref.path)
                 total_ritual_levels += r.ritual_ref.level
             self.path = ", ".join(pathes)
             self.occult_fire_power = total_ritual_levels
+

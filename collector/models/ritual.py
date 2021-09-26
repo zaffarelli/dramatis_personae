@@ -81,16 +81,17 @@ class Ritual(models.Model):
     character = models.ForeignKey(Character, on_delete=models.CASCADE)
     ritual_ref = models.ForeignKey(RitualRef, on_delete=models.CASCADE)
     attribute_value = models.PositiveIntegerField(default=0)
-    skill_value = models.PositiveIntegerField(default=0)
-    value = models.PositiveIntegerField(default=0)
+    skill_value = models.IntegerField(default=0)
+    value = models.IntegerField(default=0)
 
     def fix(self):
         self.attribute_value = getattr(self.character,self.ritual_ref.attribute)
-        find_skill = self.character.skill_set.all().filter(skill_ref=self.ritual_ref.skill)
-        if len(find_skill)==1:
-            self.skill_value = find_skill.first().value
-        else:
+        found_skills = self.character.skill_set.filter(skill_ref=self.ritual_ref.skill)
+        if not len(found_skills):
             self.skill_value = -2
+        else:
+            self.skill_value = found_skills.first().value
+
         self.value = self.attribute_value + self.skill_value
 
 

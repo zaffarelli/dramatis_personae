@@ -26,6 +26,7 @@ class Campaign(models.Model):
     class Meta:
         ordering = ['title', 'epic']
         verbose_name = "References: Campaign Config"
+
     from scenarist.models.epics import Epic
     from scenarist.models.dramas import Drama
     from django.contrib.auth.models import User
@@ -93,7 +94,6 @@ class Campaign(models.Model):
     def is_prpg(self):
         return self.rpgsystem.smart_code == "PRPG"
 
-
     def parse_details(self):
         """ Return details from the config epic, dramas and acts
         """
@@ -132,19 +132,19 @@ class Campaign(models.Model):
             colval = 'ABCDE'
             prev_com_arr = []
             while idx < size:
-                if idx==0:
+                if idx == 0:
                     com_arr = []
                     com_arr.append(random.sample(colval, 1)[0])
                     com_arr.append(random.sample(colval, 1)[0])
                     com_arr.append(random.sample(colval, 1)[0])
                     com_arr.append(random.sample(colval, 1)[0])
                     prev_com_arr = com_arr
-                    com = '%s%s%s%s' % (com_arr[0],com_arr[1],com_arr[2],com_arr[3])
+                    com = '%s%s%s%s' % (com_arr[0], com_arr[1], com_arr[2], com_arr[3])
                 else:
                     com_arr = prev_com_arr
                     red = f'0x{com_arr[0]}{com_arr[1]}'
                     green = f'0x{com_arr[2]}{com_arr[3]}'
-                    new_red = f'{hex(int(red,16) - 4)}'
+                    new_red = f'{hex(int(red, 16) - 4)}'
                     new_green = f'{hex(int(green, 16) - 4)}'
                     com_arr[0] = new_red[2]
                     com_arr[1] = new_red[3]
@@ -169,7 +169,8 @@ class Campaign(models.Model):
                 idx += 1
         return colorset, hcolorset
 
-    def get_chart(self, field='', filter='', pattern='', type='bar', bar_property='full_name', order_by='', legend_display=False, limit=10, ticks=True):
+    def get_chart(self, field='', filter='', pattern='', type='bar', bar_property='full_name', order_by='',
+                  legend_display=False, limit=10, ticks=True):
         """ Makes the data dictionary ChartJS needs to build the relevant chart. Note that those charts
             are all built from the Character model; that justifies the choice for default values
             that might not be relevant to other model tables.
@@ -186,12 +187,12 @@ class Campaign(models.Model):
         from cartograph.models.system import System
         # from django.db.models import Count
         if pattern == '':
-            all = Character.objects.order_by(order_by + bar_property) #.filter(epic=self.epic)
+            all = Character.objects.order_by(order_by + bar_property)  # .filter(epic=self.epic)
         else:
             all = Character.objects.filter(**{filter: pattern}).order_by(order_by + bar_property)[:20]
         # if limit:
         #     all = all[:limit]
-            # .values('epic').annotate(dcount=Count('epic'))
+        # .values('epic').annotate(dcount=Count('epic'))
         # else:
         #     all = Character.objects.filter(epic=self.epic, is_visible=True).order_by(order_by)[:10]
         inside_labels = []
@@ -261,48 +262,40 @@ class Campaign(models.Model):
         }
         return full_data
 
-
     def get_specific_chart(self, name=''):
         from collector.models.character import Character
         color_scale = False
         skip_zero = False
-        if name== 'population_per_current_system':
+        per_item = False
+        if name == 'population_per_current_system':
             title = 'Population per current fief'
             bar_property = 'current_fief'
             ref = 'name'
             type = 'horizontalBar'
             legend_display = False
             skip_zero = True
-        elif name== 'population_per_native_system':
+        elif name == 'population_per_native_system':
             title = 'Population per native fief'
             bar_property = 'fief'
             ref = 'name'
             type = 'horizontalBar'
             legend_display = False
             skip_zero = True
-        elif name== 'population_per_alliance':
+        elif name == 'population_per_alliance':
             title = 'Population per Alliance'
             bar_property = 'alliance_ref'
             ref = 'reference'
             type = 'horizontalBar'
             legend_display = False
             skip_zero = True
-        elif name== 'population_per_team':
+        elif name == 'population_per_team':
             title = 'Population per Team'
             bar_property = 'team'
             ref = ''
             type = 'horizontalBar'
             legend_display = False
             color_scale = True
-        elif name== 'population_per_occult':
-            title = 'Population with Occult powers'
-            bar_property = 'OCC_LVL'
-            ref = ''
-            type = 'polarArea'
-            legend_display = True
-            color_scale = True
-            skip_zero = True
-        elif name== 'population_per_ranking':
+        elif name == 'population_per_ranking':
             title = 'Population per Rank'
             bar_property = 'ranking'
             ref = ''
@@ -310,23 +303,24 @@ class Campaign(models.Model):
             legend_display = False
             color_scale = True
             skip_zero = True
-        elif name== 'population_per_species':
+        elif name == 'population_per_species':
             title = 'Population per Species'
             bar_property = 'specie'
             ref = 'species'
             type = 'horizontalBar'
             legend_display = False
             color_scale = True
-
-
         ticks = False
-        all = Character.objects.order_by(bar_property)
+        if not per_item:
+            all = Character.objects.order_by(bar_property)
+        else:
+            all = Character.objects.filter(occult_fire_power__gt=0)
         inside_labels = []
         final_data = []
         border = []
         data_stack = {}
         for c in all:
-            value = getattr(c,bar_property)
+            value = getattr(c, bar_property)
             if skip_zero and value == 0:
                 pass
             else:
@@ -337,15 +331,15 @@ class Campaign(models.Model):
                         else:
                             data_stack[value] += 1
                     else:
-                        if data_stack.get(getattr(value,ref)) is None:
-                            data_stack[getattr(value,ref)] = 1
+                        if data_stack.get(getattr(value, ref)) is None:
+                            data_stack[getattr(value, ref)] = 1
                         else:
-                            data_stack[getattr(value,ref)] += 1
+                            data_stack[getattr(value, ref)] += 1
         for item in data_stack:
             inside_labels.append(item)
             final_data.append(data_stack[item])
             border.append('#222')
-        colors, hoverColors = self.prepare_colorset(len(border),color_scale=color_scale)
+        colors, hoverColors = self.prepare_colorset(len(border), color_scale=color_scale)
         inside_datasets = [{
             'data': final_data,
             'backgroundColor': colors,
@@ -353,7 +347,7 @@ class Campaign(models.Model):
             'borderColor': border,
             'hoverBorderColor': hoverColors,
             'borderWidth': 1,
-            'minBarLength': 10
+            'minBarLength': 10,
         }]
         data = {
             'labels': inside_labels,
@@ -392,10 +386,118 @@ class Campaign(models.Model):
                 }
             }
         }
+        # if name == 'population_per_occult':
+        #     print(full_data)
         return full_data
 
+    def get_occult_chart(self,occult='Psi'):
+        from collector.models.character import Character
+        title = 'Population with Occult powers'
+        type = 'radar'
+        legend_display = True
+        all = Character.objects.filter(OCC_LVL__gt=0).filter(is_dead=False,occult=occult)
+        inside_labels = []
+        border = []
+        firepowers = []
+        darksides = []
+        levels = []
+        for c in all:
+            inside_labels.append(getattr(c, 'full_name'))
+            firepowers.append(getattr(c, 'occult_fire_power')/2)
+            levels.append(getattr(c, 'OCC_LVL'))
+            darksides.append(getattr(c, 'OCC_DRK')*2)
+            border.append('#CCC')
+        inside_datasets = [{
+            'label': 'Occult Level',
+            'data': levels,
+            'borderWidth': 2,
+            'fill': False,
+            'backgroundColor': '#60F0F0',
+            'borderColor': '#60F0F0',
+            'tension': 0.15,
+
+            'pointRadius': 4,
+            'pointHoverRadius': 16,
+            'spanGaps': False,
+        }, {
+            'label': 'Darkside Level',
+            'data': darksides,
+            'borderWidth': 2,
+            'fill': False,
+            'backgroundColor': '#F01010',
+            'borderColor': '#F01010',
+            'tension': 0.10,
+            'pointStyle': 'Cross',
+            'pointRadius': 6,
+            'pointHoverRadius': 15,
+            'spanGaps': False,
+        }
+            , {
+            'label': 'Occult firepower',
+            'data': firepowers,
+            'borderWidth': 2,
+            'fill': False,
+            'backgroundColor': '#8060F060',
+            'borderColor': '#8060F060',
+            'tension': 0.25,
+            'pointRadius': 3,
+            'pointHoverRadius': 12,
+            'spanGaps': False,
+            'clip': -5
+        }
+        ]
+        data = {
+            'labels': inside_labels,
+            'datasets': inside_datasets
+        }
+        full_data = {
+            'name': 'Occult Arts',
+            'data': {
+                'type': type,
+                'data': data,
+                'options': {
+                    'title': {
+                        'display': True,
+                        'text': title.upper(),
+                        'fontColor': '#fff',
+                    },
+                    'legend': {
+                        'display': legend_display,
+                        'position': 'right',
+                        'labels': {
+                            'fontColor': '#fff',
+                        }
+                    },
+                    'scales': {
+                        'r': {
+                            'angleLines': {
+                                'display': True,
+                                'color': '#333'
+                            },
+                            'grid': {
+                                'display': True,
+                                'color': '#333'
+                            },
+                            'ticks': {
+                                'display': False
+
+                            },
+                            'pointLabels': {
+                                'display': True,
+                                'color': '#FFF',
+
+                            },
+
+                            'suggestedMin': -1,
+                            'suggestedMax': 11
+                        }
+                    }
+                }
+            }
+        }
+        return full_data
 
 
 class CampaignAdmin(admin.ModelAdmin):
     ordering = ['title']
-    list_display = ['__str__','title', 'epic', 'is_active', 'smart_code', 'rpgsystem', 'hidden', 'gm']
+    list_display = ['__str__', 'title', 'epic', 'is_active', 'smart_code', 'rpgsystem', 'hidden', 'gm']
