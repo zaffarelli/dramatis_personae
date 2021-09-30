@@ -105,7 +105,7 @@ class Character(Combattant):
     OCC_DRK = models.PositiveIntegerField(default=0)
     occult_fire_power  = models.PositiveIntegerField(default=0, blank=True)
     occult = models.CharField(max_length=50, default='', blank=True)
-    challenge = models.TextField(default='')
+    challenge = models.TextField(default='', blank=True)
     challenge_value = models.IntegerField(default=0)
     todo_list = models.TextField(default='', blank=True)
     path = models.CharField(max_length=256, default='', blank=True)

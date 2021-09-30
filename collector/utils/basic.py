@@ -43,8 +43,11 @@ def write_pdf(template_src, context_dict={}):
 
 def get_current_config():
     from collector.models.campaign import Campaign
-    item = Campaign.objects.get(is_active=True)
-    if item is None:
+    item = Campaign.objects.get(smart_code='bin')
+    items = Campaign.objects.filter(is_active=True)
+    if len(items) == 1:
+        item = items.first()
+    if len(items) > 1:
         item = Campaign.objects.first()
     return item
 

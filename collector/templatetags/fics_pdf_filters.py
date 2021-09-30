@@ -89,10 +89,10 @@ def parse_avatars_pdf(value):
         changes.append({'src': item.group(), 'dst': repstr})
 
     # Simple replacements
-    char_to_tag('§', 'strong', txt, changes,'')
-    char_to_tag('£', 'em', txt, changes,'')
-    char_to_tag('=', 'h5', txt, changes,'',paragraph=True)
-    char_to_tag('µ', 'h6', txt, changes,'',paragraph=True)
+    char_to_tag('§', 'strong', txt, changes, '')
+    char_to_tag('£', 'em', txt, changes, '')
+    char_to_tag('=', 'h5', txt, changes, '', paragraph=True)
+    char_to_tag('µ', 'h6', txt, changes, '', paragraph=True)
 
     for change in changes:
         txt = txt.replace(change['src'], change['dst'])
@@ -143,6 +143,6 @@ def six_digit(value):
 @register.filter(name='dotted_pdf')
 def dotted_pdf(value):
     answer = f"{value}"
-    if value>5:
+    if value > 5:
         answer = f"<b>{value}</b>"
     return answer
