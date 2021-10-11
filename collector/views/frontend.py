@@ -15,11 +15,11 @@ import datetime
 from collector.utils.basic import get_current_config, export_epic
 from collector.utils.fics_references import MAX_CHAR
 from collector.views.characters import respawn_avatar_link
-
 import os
 from django.conf import settings
 from django.http import FileResponse
 from django.contrib import messages
+import json
 
 
 def index(request):
@@ -32,12 +32,14 @@ def get_list(request, id, slug='none'):
     from collector.utils.basic import get_current_config
     campaign = get_current_config()
     if slug == 'none':
-        character_items = campaign.avatars.order_by('-ranking','full_name').filter(balanced=False, is_dead=False, nameless=False, player='').order_by('-OCC_LVL','-tod_count')
+        character_items = campaign.avatars.order_by('-ranking', 'full_name').filter(balanced=False, is_dead=False,
+                                                                                    nameless=False, player='').order_by(
+            '-OCC_LVL', '-tod_count')
     elif slug.startswith('c-'):
-        elements =  slug.split('-')
+        elements = slug.split('-')
         ep_class = elements[1].capitalize()
         ep_id = 1
-        if len(elements)>2:
+        if len(elements) > 2:
             ep_id = elements[2]
         if ep_class == 'Epic':
             from scenarist.models.epics import Epic
@@ -58,16 +60,16 @@ def get_list(request, id, slug='none'):
         else:
             cast = []
         character_items = []
-        if len(cast)>0:
+        if len(cast) > 0:
             for rid in cast:
                 print(rid)
                 character_item = campaign.open_avatars.get(rid=rid)
                 character_items.append(character_item)
         messages.info(request, f'New list filter applied: {slug}')
     else:
-        character_items = campaign.avatars.filter(keyword=slug).order_by('team','-ranking','full_name')
+        character_items = campaign.avatars.filter(keyword=slug).order_by('team', '-ranking', 'full_name')
         messages.info(request, f'New list filter applied: {slug}')
-        if len(character_items)==0:
+        if len(character_items) == 0:
             character_items = campaign.open_avatars.filter(rid__contains=slug.lower()).order_by('full_name')
             messages.info(request, f'Searching {slug} among rids')
     # for c in character_items:
@@ -77,9 +79,9 @@ def get_list(request, id, slug='none'):
     page = id
     character_items = paginator.get_page(page)
     messages.info(request, f'{paginator.count} characters found.')
-    context = {'character_items': character_items, 'default_ghost_tgt':"list_ghostmark" }
+    context = {'character_items': character_items, 'default_ghost_tgt': "list_ghostmark"}
     template = get_template('collector/list.html')
-    html = template.render(context,request)
+    html = template.render(context, request)
     response = {
         'mosaic': html,
     }
@@ -105,9 +107,9 @@ def show_todo(request):
 def tile_avatar(request, pk=None):
     if request.is_ajax:
         character_item = Character.objects.get(pk=pk)
-    context = { 'c': character_item }
+    context = {'c': character_item}
     template = get_template('collector/character_tile.html')
-    html = template.render(context,request)
+    html = template.render(context, request)
     return HttpResponse(html, content_type='text/html')
 
 
@@ -120,7 +122,7 @@ def get_storyline(request, slug='none'):
                 c.save()
         template = get_template('collector/conf_select.html')
         html = template.render({'configs': config_items}, request)
-        response = {'mosaic':html}
+        response = {'mosaic': html}
         return JsonResponse(response)
     else:
         return Http404
@@ -193,7 +195,7 @@ def add_avatar(request, slug=None):
     item.get_rid(item.full_name)
     item.save()
     character_item = campaign.avatars.get(pk=item.id)
-    context = {'mosaic':{'rid':character_item.rid} }
+    context = {'mosaic': {'rid': character_item.rid}}
     messages.info(request, f'...{character_item.full_name} added ({campaign.rpgsystem})')
     return JsonResponse(context)
 
@@ -247,10 +249,40 @@ def pdf_show(request, slug):
     except FileNotFoundError:
         raise Http404()
 
+
 def ghostmark_test(request, id=None):
     from collector.models.character import Character
     character_item = Character.objects.get(id=id)
-    context = { 'c': character_item }
+    context = {'c': character_item}
     template = get_template('collector/dp_logo_test.html')
     html = template.render(context, request)
     return HttpResponse(html, content_type='text/html')
+
+
+def display_fics_sheet(request, slug=None):
+    if request.is_ajax:
+        chronicle = get_current_chronicle()
+        if slug is None:
+            slug = 'saskia_varnovicz'
+        c = Character.objects.get(rid=slug)
+
+        if chronicle.acronym == 'BAV':
+            scenario = "Bayerische Nächte"
+            pre_title = 'Munich'
+            post_title = "Oktoberfest, 2019"
+        else:
+            pre_title = 'World of Darkness'
+            scenario = "NEW YORK CITY"
+            post_title = "feat. Julius Von Blow"
+        spe = c.get_specialities()
+        shc = c.get_shortcuts()
+        j = c.toJSON()
+
+        k = json.loads(j)
+        k["sire_name"] = c.sire_name
+        j = json.dumps(k)
+        settings = {'version': 1.0, 'labels': STATS_NAMES[c.creature], 'pre_title': pre_title, 'scenario': scenario,
+                    'post_title': post_title, 'fontset': FONTSET, 'specialities': spe, 'shortcuts': shc}
+        fics_sheet_context = {'settings': json.dumps(settings, sort_keys=True, indent=4), 'data': j}
+
+        return JsonResponse(fics_sheet_context)

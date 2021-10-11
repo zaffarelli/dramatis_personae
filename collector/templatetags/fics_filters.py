@@ -64,7 +64,7 @@ def as_bullets_short(value):
                 else:
                     res += one_low
             else:
-                if (x+1) % 5 == 0:
+                if (x + 1) % 5 == 0:
                     res += special_blank
                 else:
                     res += blank
@@ -98,7 +98,7 @@ def as_bullets_short_wildcard(value):
         return "ERROR!"
 
 
-def char_to_tag(sym,tag,src_txt,changes,prefix='',paragraph=False):
+def char_to_tag(sym, tag, src_txt, changes, prefix='', paragraph=False):
     search = "[A-Za-z0-9\é\è\ô\ö\à\s\.\'\;\-\(\)\&\:\,]+"
     pattern = f'\{sym}{search}\{sym}'
     seeker = re.compile(pattern)
@@ -110,7 +110,7 @@ def char_to_tag(sym,tag,src_txt,changes,prefix='',paragraph=False):
         else:
             replacement_str = f'<{tag}>{prefix}{occ}</{tag}>'
         changes.append({'src': item.group(), 'dst': replacement_str})
-        #print(f'(C2T:{sym}) --> {replacement_str}')
+        # print(f'(C2T:{sym}) --> {replacement_str}')
     return
 
 
@@ -121,10 +121,10 @@ def parse_avatars(value):
     txt = str(value)
     changes = []
     # Simple replacements
-    char_to_tag('§','strong', txt, changes)
-    char_to_tag('£','em', txt, changes)
-    char_to_tag('=','h5', txt, changes,prefix='<i class="fa fa-square"></i> ')
-    char_to_tag('µ','h6', txt, changes,prefix='<i class="fa fa-minus"></i> ')
+    char_to_tag('§', 'strong', txt, changes)
+    char_to_tag('£', 'em', txt, changes)
+    char_to_tag('=', 'h5', txt, changes, prefix='<i class="fa fa-square"></i> ')
+    char_to_tag('µ', 'h6', txt, changes, prefix='<i class="fa fa-minus"></i> ')
     # RollCheck
     sym = '%'
     search = "[A-Za-z0-9\é\è\ô\ö\à\s\.\'\;\-\(\)\&\:\,\_]+"
@@ -138,7 +138,6 @@ def parse_avatars(value):
         replacement_string = f'<div class="embedded_link" title="{title}">{txt}</div>'
         print(replacement_string)
         changes.append({'src': item.group(), 'dst': replacement_string})
-
 
     # Characters
     seeker = re.compile('\¤(\w+)\¤')
@@ -156,7 +155,7 @@ def parse_avatars(value):
         else:
             replacement_string = '<span class="embedded_link broken">[%s&dagger;]</span>' % (rid)
         changes.append({'src': item.group(), 'dst': replacement_string})
-        #print(replacement_string)
+        # print(replacement_string)
     # Ships
     sym = '^'
     seeker = re.compile(f'\^(\w+)\^')
@@ -353,7 +352,7 @@ def parse_stories(value):
     txt = "<ul><li>"
     arr = value.split('#')
     lst = list(filter(None, arr))
-    new_lst=[]
+    new_lst = []
     for item in lst:
         x = item.split('_')
         new_lst.append(f'{x[0]} <em>{x[1]}</em>')
@@ -362,13 +361,13 @@ def parse_stories(value):
     return txt
 
 
-
 @register.filter(name='extract_id')
 def extract_id(value):
     import json
     x = json.load(value)
 
     return x[id]
+
 
 @register.filter(name='as_media_image')
 def as_media_image(value):
@@ -380,6 +379,7 @@ def as_media_image(value):
         str = 'media/images/f_blank.jpg'
     return str
 
+
 @register.filter(name='is_not_blank')
 def is_not_blank(value):
-    return (value!='')
+    return (value != '')

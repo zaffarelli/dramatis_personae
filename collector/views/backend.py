@@ -116,25 +116,25 @@ def bloke_selector(request):
         from collector.models.bloke import Bloke, BLOKE_LEVELS
         levels = []
         for x in BLOKE_LEVELS:
-            levels.append({'value':x[0],'text':x[1]})
+            levels.append({'value': x[0], 'text': x[1]})
         other_characters = []
-        players = ['Delphine','Chninkel','Marie','Lustus','Taz']
+        players = ['Delphine', 'Chninkel', 'Marie', 'Lustus', 'Taz']
         for player in players:
             main_characters = Character.objects.filter(player=player)
             blokes = Bloke.objects.filter(character__in=main_characters)
             active_blokes = []
             for b in blokes:
-                active_blokes.append({'character':b.npc,'intimacy':b.level})
+                active_blokes.append({'character': b.npc, 'intimacy': b.level})
             npc = Character.objects.filter(player='')
             for c in npc:
                 c.intimacy = 'none'
                 for a in active_blokes:
                     if c.rid == a['character'].rid:
                         c.intimacy = a['intimacy']
-            other_characters.append({'player':player,'blokes':npc})
-        context = {'blokes': other_characters, 'choices':levels}
+            other_characters.append({'player': player, 'blokes': npc})
+        context = {'blokes': other_characters, 'choices': levels}
         template = get_template('collector/blokes.html')
         html = template.render(context, request)
         messages.info(request, f'Blokes selector loaded.')
-        response = { 'mosaic': html}
+        response = {'mosaic': html}
         return JsonResponse(response)

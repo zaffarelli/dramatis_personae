@@ -1,0 +1,10 @@
+{% load static %}
+<script>
+    let data = {{data|safe}};
+    let settings = {{settings|safe}};
+    cos = new FICSSheet(settings);
+    cos.perform(data);
+</script>
+
+
+
