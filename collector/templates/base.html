@@ -12,11 +12,15 @@
         <link rel='stylesheet' href='{% static "font-awesome/css/all.css"%}'>
         <!-- script src='{% static "thirdparties/Chart.bundle.js" %}'></script -->
         <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
-        <script src="https://d3js.org/d3.v4.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/d3/7.0.0/d3.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js"></script>
         <script src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
         <script src='{% static "js/dp_tools.es6" %}'></script>
+        <script src='{% static "js/fics_sheet.es6" %}'></script>
+        {% for font in fontset %}
+        <link rel='stylesheet' href="https://fonts.googleapis.com/css2?family={{font}}">
+        {% endfor %}
         <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" media="all">
         {% if campaign.is_fics %}
         <link rel='stylesheet' type='text/css' href='{% sass_src "collector/scss/fics.scss" %}' />
@@ -78,6 +82,7 @@
                 {% endblock menuright %}
               </div>
             </div>
+            <div id='d3area'></div>
         </div>
 
 

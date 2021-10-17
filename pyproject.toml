@@ -59,6 +59,7 @@ celery = "==4.4.7"
 django-colorfield = "==0.4.1"
 certifi = "^2021.10.8"
 cffi = "1.14.6"
+psycopg2 = "2.8.6"
 
 [tool.poetry.dev-dependencies]
 

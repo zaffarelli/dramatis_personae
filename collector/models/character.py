@@ -11,11 +11,13 @@ from collector.models.combattant import Combattant
 from collector.models.alliance_ref import AllianceRef
 from cartograph.models.system import System
 from collector.utils import fs_fics7
+#from collector.utils.basic import json_default
 from django.utils.timezone import get_current_timezone
 import itertools
 import logging
 import json
 from colorfield.fields import ColorField
+
 
 logger = logging.getLogger(__name__)
 
@@ -39,6 +41,16 @@ BLOKES = {
     'foes': ['11-foe', '10-enemy', '09-lackey', '08-antagonist', '07-opponent'],
     'others': ['06-neutral']
 }
+
+
+def json_default(value):
+    import datetime
+    if isinstance(value, datetime.datetime):
+        return dict(year=value.year, month=value.month, day=value.day, hour=value.hour, minute=value.minute)
+    elif isinstance(value, datetime.date):
+        return dict(year=value.year, month=value.month, day=value.day)
+    else:
+        return value.__dict__
 
 
 class Character(Combattant):
@@ -938,3 +950,13 @@ class Character(Combattant):
             self.path = ", ".join(pathes)
             self.occult_fire_power = total_ritual_levels
 
+    def get_specialities(self):
+        return []
+
+    def get_shortcuts(self):
+        return []
+
+    def toJSON(self):
+        #self.guideline = self.stats_template
+        jstr = json.dumps(self, default=json_default, sort_keys=True, indent=4)
+        return jstr

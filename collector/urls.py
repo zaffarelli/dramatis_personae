@@ -10,7 +10,7 @@ from collector.views.characters import CharacterUpdateView, customize_ba, custom
 from collector.views.investigators import InvestigatorUpdateView
 from collector.views.frontend import index, toggle_public, toggle_spotlight, get_list, add_avatar, \
     get_storyline, conf_details, recalc_avatar, heartbeat, \
-    show_todo, pdf_show, wa_export_character, tile_avatar, ghostmark_test
+    show_todo, pdf_show, wa_export_character, tile_avatar, ghostmark_test, display_sheet
 from collector.views.backend import recalc, export, xls_update, pdf_character, gss_update, pdf_rules, roll_dice, bloke_selector
 from collector.views.misc_chart import get_population_statistics, get_keywords
 from django.contrib.auth.views import LogoutView
@@ -25,6 +25,7 @@ urlpatterns = [
 
     re_path('^investigators/(?P<pk>\d+)/edit/$', InvestigatorUpdateView.as_view(), name='edit_investigator'),
     re_path('^ajax/edit/avatar/(?P<pk>\d+)/$', CharacterUpdateView.as_view(), name='edit_character'),
+    re_path('^ajax/sheet/avatar/(?P<pk>\d+)/$', display_sheet, name='display_sheet'),
     re_path('^ajax/tile/avatar/(?P<pk>\d+)/$', tile_avatar, name='tile_avatar'),
     re_path('^ajax/recalc/avatar/(?P<id>\d+)/$', recalc_avatar, name='recalc_avatar'),
     re_path('^ajax/add_avatar/(?P<slug>[\w+]+)/$', add_avatar, name='add_avatar'),

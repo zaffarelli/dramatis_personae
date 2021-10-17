@@ -13,7 +13,7 @@ from collector.models.campaign import Campaign
 from django.template.loader import get_template
 import datetime
 from collector.utils.basic import get_current_config, export_epic
-from collector.utils.fics_references import MAX_CHAR
+from collector.utils.fics_references import MAX_CHAR, FONTSET
 from collector.views.characters import respawn_avatar_link
 import os
 from django.conf import settings
@@ -25,7 +25,8 @@ import json
 def index(request):
     if not request.user.is_authenticated:
         return redirect('accounts/login/')
-    return render(request, 'collector/index.html')
+    context = {'fontset': FONTSET}
+    return render(request, 'collector/index.html', context=context)
 
 
 def get_list(request, id, slug='none'):
@@ -259,29 +260,23 @@ def ghostmark_test(request, id=None):
     return HttpResponse(html, content_type='text/html')
 
 
-def display_fics_sheet(request, slug=None):
+def display_sheet(request, pk=None):
     if request.is_ajax:
-        chronicle = get_current_chronicle()
-        if slug is None:
-            slug = 'saskia_varnovicz'
-        c = Character.objects.get(rid=slug)
+        if pk is None:
+            pk = 22
+        c = Character.objects.get(id=pk)
 
-        if chronicle.acronym == 'BAV':
-            scenario = "Bayerische Nächte"
-            pre_title = 'Munich'
-            post_title = "Oktoberfest, 2019"
-        else:
-            pre_title = 'World of Darkness'
-            scenario = "NEW YORK CITY"
-            post_title = "feat. Julius Von Blow"
+        scenario = "Stella Incognita"
+        pre_title = 'Outer Belt'
+        post_title = "Lux Splendor, 5021 A.D"
         spe = c.get_specialities()
         shc = c.get_shortcuts()
         j = c.toJSON()
 
         k = json.loads(j)
-        k["sire_name"] = c.sire_name
+        k["creature"] = "mortal"
         j = json.dumps(k)
-        settings = {'version': 1.0, 'labels': STATS_NAMES[c.creature], 'pre_title': pre_title, 'scenario': scenario,
+        settings = {'version': 1.0, 'labels':{}, 'pre_title': pre_title, 'scenario': scenario,
                     'post_title': post_title, 'fontset': FONTSET, 'specialities': spe, 'shortcuts': shc}
         fics_sheet_context = {'settings': json.dumps(settings, sort_keys=True, indent=4), 'data': j}
 

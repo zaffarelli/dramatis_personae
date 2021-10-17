@@ -7,6 +7,7 @@
 class Collector{
     constructor(ac,op,sc){
         let me = this;
+        me.d3 = undefined;
         me.heartbeat = 0;
         me.ac = ac
         me.op = op
@@ -85,8 +86,8 @@ class Collector{
         let me = this;
         /* Change all menu-items to ajax/<id> */
         $(".menu-item").off().on("click", function(e){
-            event.preventDefault();
-            event.stopPropagation();
+            e.preventDefault();
+            e.stopPropagation();
             let action_tag = $(this).attr("action");
             console.debug(action_tag+" has been clicked...");
             $.ajax({
@@ -135,8 +136,8 @@ class Collector{
         let me = this;
         /* Change all menu-items to ajax/<id> */
         $(".slug-page-item").off().on("click", function(e){
-            event.preventDefault();
-            event.stopPropagation();
+            e.preventDefault();
+            e.stopPropagation();
             let action_tag = $(this).attr("action");
             let page = $(this).attr("page");
             let slug = $('#customize').val().trim();
@@ -223,6 +224,43 @@ class Collector{
                 }
             });
         });
+        $('.sheet').off().on('click', function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            console.log('here we are!!');
+            let dad = $(this).parents('li');
+            let x = $(this).parents('div').attr("id").split("_")[1];
+            let dad_id = $(dad).attr("id");
+            //let that_id = $(this).attr('id').split("_")[0];
+            $("li#" + dad_id + " .character_info").removeClass('hidden');
+            console.log('sheet!!!');
+            $.ajax({
+                url: 'ajax/sheet/avatar/' + x + '/',
+                success: function(answer) {
+                    $('.tile').removeClass("sheet_tile");
+                    $('#tile_'+x).addClass("sheet_tile");
+                    $('#tile_'+x).html(answer.character);
+
+                    console.log('And we are back!!!');
+                    let s = JSON.parse(answer.settings);
+                    let d = JSON.parse(answer.data);
+                    me.d3 = new FICSSheet(s, "#d3area", me);
+                    me.d3.perform(d);
+
+                    $('li#' + answer.rid).html(answer.link);
+
+                    $('#customizer').html(answer.mobile_form);
+                    ac.reset(x, "sheet_" + x, "customizer");
+                    $("li#" + dad_id + " .character_name").click();
+                    me.rebootLinks();
+                    //update_messenger();
+                },
+                error: function(answer) {
+                    console.log('Sheet display error...' + answer);
+                }
+            });
+        });
+
         $('.edit_character').off().on('click', function(event) {
             event.preventDefault();
             event.stopPropagation();

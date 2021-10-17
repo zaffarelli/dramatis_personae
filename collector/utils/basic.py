@@ -241,3 +241,5 @@ def extract_equipment():
         es_pdf.close()
     else:
         print(pdf.err)
+
+

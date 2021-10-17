@@ -15,5 +15,6 @@ def d(number, faces):
         total += roll(faces)
     return total
 
+
 def smart_code(str):
     return str.replace(' ','').replace(')','').replace('(','_').replace('é','e').replace('&','et').replace('ç','c').replace('è','e').replace('ê','e').replace('"','').replace("'",'').replace('à','a').replace('â','a').replace('-','').lower()

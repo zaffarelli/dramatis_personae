@@ -141,3 +141,6 @@ ATTACK_ROLLS = {
         'skill': 'Heavy Weapons',
     },
 }
+
+FONTSET = ['Cinzel', 'Trade+Winds', 'Imprima', 'Roboto', 'Philosopher', 'Ruda', 'Khand', 'Allura', 'Gochi+Hand',
+           'Reggae+One', 'Syne+Mono', 'Zilla+Slab', 'Spartan']

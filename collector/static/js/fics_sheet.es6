@@ -217,7 +217,7 @@ class FICSSheet{
         me.midline(23);
         me.midline(30);
         // Title
-        let txt = me.sheet_type(me.data['creature']).toUpperCase();
+        let txt = 'Fading Suns'.toUpperCase();
         me.decorationText(12,2.75,0,'middle',me.title_font,me.fat_font_size*2,'#FFF','#FFF',10,txt,me.back,1);
         me.decorationText(12,1.8,0,'middle',me.logo_font,me.fat_font_size,"#fff","#fff",5,me.scenario,me.back,0.75);
 
@@ -226,10 +226,10 @@ class FICSSheet{
 
         //me.decorationText(12,1.8,0,'middle',me.logo_font,me.fat_font_size,"transparent",me.draw_stroke,0.5,me.scenario,me.back,0.5);
 
-        me.decorationText(1.5,35.8,-16,'start',me.base_font,me.medium_font_size,me.draw_fill,me.draw_stroke,0.5,me.guideline,me.back);
-        me.decorationText(22.5,35.8,-16,'end',me.base_font,me.small_font_size,me.draw_fill,me.draw_stroke,0.5,"WaWWoD Cross+Over Sheet ©2021, Pentex Inc.",me.back);
-        me.decorationText(2.5,1.75,0,'middle',me.title_font,me.medium_font_size,me.draw_fill,me.draw_stroke,0.5,"What a Wonderful",me.back);
-        me.decorationText(2.5,2.25,0,'middle',me.title_font,me.medium_font_size,me.draw_fill,me.draw_stroke,0.5,"World of Darkness",me.back);
+        me.decorationText(1.5,35.8,-16,'start',me.base_font,me.medium_font_size,me.draw_fill,me.draw_stroke,0.5,"Pancreator Vobiscum Sit",me.back);
+        me.decorationText(22.5,35.8,-16,'end',me.base_font,me.small_font_size,me.draw_fill,me.draw_stroke,0.5,"Fading Suns FICS Sheet 2021, Zaffarelli, created with DP",me.back);
+        me.decorationText(2.5,1.75,0,'middle',me.title_font,me.medium_font_size,me.draw_fill,me.draw_stroke,0.5,"FuZion Interlock",me.back);
+        me.decorationText(2.5,2.25,0,'middle',me.title_font,me.medium_font_size,me.draw_fill,me.draw_stroke,0.5,"Custom System",me.back);
         me.decorationText(21.5,1.75,0,'middle',me.title_font,me.medium_font_size,me.draw_fill,me.draw_stroke,0.5,me.pre_title,me.back);
         me.decorationText(21.5,2.25,0,'middle',me.title_font,me.medium_font_size,me.draw_fill,me.draw_stroke,0.5,me.post_title,me.back);
         me.decorationText(22.5,34.8,0,'end',me.base_font,me.small_font_size,me.draw_fill,me.draw_stroke,0.5,'Challenge:'+me.data['freebies'],me.back);
@@ -339,6 +339,7 @@ class FICSSheet{
 
     powerStat(name,ox,oy,type,statcode,source){
         let me = this;
+        name = 'a (5)'
         if (name==''){
             me.reinHagenStat('   ',0,ox,oy,type,statcode,source)
         }else{
@@ -597,7 +598,8 @@ class FICSSheet{
         [0,1,2,3,4,5,6,7,8].forEach(function(d) {
               let x = ox + me.stepx*7*((Math.round((d+2)/3))-1) ;
               let y = oy + 0.5*me.stepy*((d+3)%3);
-              me.reinHagenStat(me.config['labels'][stat+'s'][d],me.data[stat+d],x,y,stat,stat+d,me.character);
+              //me.reinHagenStat(me.config['labels'][stat+'s'][d],me.data[stat+d],x,y,stat,stat+d,me.character);
+              me.reinHagenStat("a stat",me.data[stat+d],x,y,stat,stat+d,me.character);
         });
 
     }
@@ -617,19 +619,22 @@ class FICSSheet{
         [0,1,2,3,4,5,6,7,8,9].forEach(function(d) {
               let x = ox + me.stepx*2;
               let y = oy + 0.5*me.stepy*(d);
-              me.reinHagenStat(me.config['labels'][stat+'s'][d],me.data[stat+d],x,y,stat,stat+d,me.character);
+              //me.reinHagenStat(me.config['labels'][stat+'s'][d],me.data[stat+d],x,y,stat,stat+d,me.character);
+              me.reinHagenStat("bbb",me.data[stat+d],x,y,stat,stat+d,me.character);
         });
         stat = 'skill';
         [0,1,2,3,4,5,6,7,8,9].forEach(function(d) {
               let x = ox + me.stepx*9;
               let y = oy + 0.5*me.stepy*(d);
-              me.reinHagenStat(me.config['labels'][stat+'s'][d],me.data[stat+d],x,y,stat,stat+d,me.character);
+              //me.reinHagenStat(me.config['labels'][stat+'s'][d],me.data[stat+d],x,y,stat,stat+d,me.character);
+              me.reinHagenStat("ccc",me.data[stat+d],x,y,stat,stat+d,me.character);
         });
         stat = 'knowledge';
         [0,1,2,3,4,5,6,7,8,9].forEach(function(d) {
               let x = ox + me.stepx*16;
               let y = oy + 0.5*me.stepy*(d);
-              me.reinHagenStat(me.config['labels'][stat+'s'][d],me.data[stat+d],x,y,stat,stat+d,me.character);
+              //me.reinHagenStat(me.config['labels'][stat+'s'][d],me.data[stat+d],x,y,stat,stat+d,me.character);
+              me.reinHagenStat("ddd",me.data[stat+d],x,y,stat,stat+d,me.character);
         });
     }
 
@@ -659,14 +664,16 @@ class FICSSheet{
         [0,1,2,3,4,5,6,7,8,9].forEach(function(d) {
               let x = ox+me.stepx*2;
               let y = oy + 0.5*me.stepy*(d);
-              me.reinHagenStat(me.config['labels'][stat+'s'][d],me.data[stat+d],x,y,stat,stat+d,me.character);
+              //me.reinHagenStat(me.config['labels'][stat+'s'][d],me.data[stat+d],x,y,stat,stat+d,me.character);
+              me.reinHagenStat("eee",me.data[stat+d],x,y,stat,stat+d,me.character);
         });
 
         stat = 'trait';
         [0,1,2,3,4,5,6,7,8,9].forEach(function(d) {
               let x = ox+me.stepx*9;
               let y = oy + 0.5*me.stepy*(d);
-              me.powerStat(me.data[stat+d],x,y,stat,stat+d,me.character);
+              //me.powerStat(me.data[stat+d],x,y,stat,stat+d,me.character);
+              me.powerStat("fff",x,y,stat,stat+d,me.character);
         });
 
         stat = 'virtue';
@@ -1035,7 +1042,7 @@ class FICSSheet{
     saveSVG(){
         let me = this;
         me.svg.selectAll('.do_not_print').attr('opacity',0);
-        let base_svg = d3.select("svg").html();
+        let base_svg = d3.select("#d3area svg").html();
         let flist = '<style>';
         //console.log(me.config['fontset']);
         for (let f of me.config['fontset']){
@@ -1059,15 +1066,17 @@ xmlns:xlink="http://www.w3.org/1999/xlink"> \
 
     perform(character_data){
         let me = this;
+        console.log('FICSSheet starting perform...')
         me.data = character_data;
         me.guideline = me.data['guideline']
+        $(me.parent).css('display','block');
         me.drawWatermark();
         if (me.data['condition'] == "DEAD"){
 
             me.decorationText(12,16,0,'middle',me.logo_font,me.fat_font_size*3,me.shadow_fill,me.shadow_stroke,0.5,"DEAD",me.back,0.25);
         }
 
-        me.fillCharacter();
+        //me.fillCharacter();
         me.drawButtons();
     }
 
