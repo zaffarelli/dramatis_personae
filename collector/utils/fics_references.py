@@ -143,4 +143,4 @@ ATTACK_ROLLS = {
 }
 
 FONTSET = ['Cinzel', 'Trade+Winds', 'Imprima', 'Roboto', 'Philosopher', 'Ruda', 'Khand', 'Allura', 'Gochi+Hand',
-           'Reggae+One', 'Syne+Mono', 'Zilla+Slab', 'Spartan']
+           'Reggae+One', 'Syne+Mono', 'Zilla+Slab', 'Spartan', 'News+Cycle', 'Archivo', 'Francois+One', 'Caveat', 'Gruppo', 'Voltaire', "Fredericka+the+Great", 'Esteban', 'Pompiere']

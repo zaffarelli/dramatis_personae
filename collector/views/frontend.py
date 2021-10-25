@@ -262,19 +262,41 @@ def ghostmark_test(request, id=None):
 
 def display_sheet(request, pk=None):
     if request.is_ajax:
+        from collector.models.skill import SkillRef
+        from operator import itemgetter
         if pk is None:
             pk = 22
         c = Character.objects.get(id=pk)
 
-        scenario = "Stella Incognita"
-        pre_title = 'Outer Belt'
+        scenario = "PANCREATOR VOBISCUM SIT"
+        pre_title = 'Outer Belt Sector'
         post_title = "Lux Splendor, 5021 A.D"
         spe = c.get_specialities()
         shc = c.get_shortcuts()
         j = c.toJSON()
 
+        idx1 = 0
+        idx2 = 0
+
+        skills_list = []
+        for skill in c.skill_set.order_by('skill_ref'):
+            skills_list.append({'skill': skill.skill_ref.reference, 'value': skill.value, 'is_root': skill.skill_ref.is_root, 'is_speciality': skill.skill_ref.is_speciality, 'idx1': 0, 'idx2': 0})
+        for skill in SkillRef.objects.all().order_by('reference'):
+            if skill.reference not in [value for elem in skills_list for value in elem.values()]:
+                if not skill.is_speciality:
+                    skills_list.append({'skill': skill.reference, 'value': '-', 'is_root': skill.is_root, 'is_speciality': skill.is_speciality, 'idx1': 0, 'idx2': 0})
+        skills_list = sorted(skills_list, key=itemgetter('skill'))
+        for d in skills_list:
+            if d['is_speciality']:
+                d['idx2'] = idx2
+                idx2 += 1
+            else:
+                d['idx1'] = idx1
+                idx1 += 1
         k = json.loads(j)
         k["creature"] = "mortal"
+        k["alliance"] = c.alliance_ref.reference
+        k["skills_list"] = skills_list
         j = json.dumps(k)
         settings = {'version': 1.0, 'labels':{}, 'pre_title': pre_title, 'scenario': scenario,
                     'post_title': post_title, 'fontset': FONTSET, 'specialities': spe, 'shortcuts': shc}

@@ -241,7 +241,12 @@ class Collector{
                     $('#tile_'+x).addClass("sheet_tile");
                     $('#tile_'+x).html(answer.character);
 
+                    $("#d3area").css('display','block');
+
                     console.log('And we are back!!!');
+
+                    console.log(answer.data)
+
                     let s = JSON.parse(answer.settings);
                     let d = JSON.parse(answer.data);
                     me.d3 = new FICSSheet(s, "#d3area", me);

@@ -127,9 +127,14 @@ span.info{
 }
 
 #d3area{
-    background:transparent;
+    z-index:9999999;
+    top:0;
+    left:0;
+    position:absolute;
+    background:black;
     border:white;
     display:none;
-    width:1200px;
-    height:1600px;
+    width:100%;
+    height:100%;
+    opacity:1;
 }
