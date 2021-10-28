@@ -227,32 +227,32 @@ class Collector{
         $('.sheet').off().on('click', function(event) {
             event.preventDefault();
             event.stopPropagation();
-            console.log('here we are!!');
+
             let dad = $(this).parents('li');
             let x = $(this).parents('div').attr("id").split("_")[1];
             let dad_id = $(dad).attr("id");
             //let that_id = $(this).attr('id').split("_")[0];
             $("li#" + dad_id + " .character_info").removeClass('hidden');
-            console.log('sheet!!!');
+
             $.ajax({
                 url: 'ajax/sheet/avatar/' + x + '/',
                 success: function(answer) {
                     $('.tile').removeClass("sheet_tile");
                     $('#tile_'+x).addClass("sheet_tile");
-                    $('#tile_'+x).html(answer.character);
+                    // $('#tile_'+x).html(answer.character);
 
                     $("#d3area").css('display','block');
 
                     console.log('And we are back!!!');
 
-                    console.log(answer.data)
+
 
                     let s = JSON.parse(answer.settings);
                     let d = JSON.parse(answer.data);
                     me.d3 = new FICSSheet(s, "#d3area", me);
                     me.d3.perform(d);
 
-                    $('li#' + answer.rid).html(answer.link);
+                    // $('li#' + answer.rid).html(answer.link);
 
                     $('#customizer').html(answer.mobile_form);
                     ac.reset(x, "sheet_" + x, "customizer");
@@ -261,7 +261,7 @@ class Collector{
                     //update_messenger();
                 },
                 error: function(answer) {
-                    console.log('Sheet display error...' + answer);
+                    console.error('Sheet display error...' + answer);
                 }
             });
         });

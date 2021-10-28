@@ -1,15 +1,16 @@
-'''
+"""
 ╔╦╗╔═╗  ╔═╗┌─┐┌┬┐┬┌┬┐┬┌─┐┌─┐┬─┐
  ║║╠═╝  ║ ║├─┘ │ │││││┌─┘├┤ ├┬┘
 ═╩╝╩    ╚═╝┴   ┴ ┴┴ ┴┴└─┘└─┘┴└─
-'''
+"""
 from django.db import models
 from collector.models.character import Character
 from datetime import datetime
 import copy
 
+
 class Duel:
-    def __init__(self,tori,uke):
+    def __init__(self, tori, uke):
         self.tori = tori
         self.uke = uke
         self.rnd = 0
@@ -54,6 +55,7 @@ class Duel:
             del round
         res = {'pub_date':self.pub_date,'winner':self.winner,'rounds':sequences, 'amount':len(sequences), 'tori':self.initial_tori, 'uke':self.initial_uke}
         return res
+
 
 class CombatRound:
     def __init__(self,duel):

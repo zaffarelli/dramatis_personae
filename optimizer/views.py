@@ -149,9 +149,10 @@ def run_fencing_tournament(request):
     c = { 'mosaic': html}
     return JsonResponse(c)
 
+
 def run_imperial_tournament(request):
     import math, random, copy
-    fights = 3
+    fights = 1
     logger.info("Starting Fencing tournament")
     contestants = Character.objects.filter(fencing_league=True)
     duel_victories = {}

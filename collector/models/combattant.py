@@ -15,7 +15,6 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-
 class Combattant(Avatar):
     class Meta:
         abstract = True
@@ -123,7 +122,7 @@ class Combattant(Avatar):
         self.check_expertise()
         self.tell(
             '<u>%s</u> uses his/her <b>%s</b>, granting himself/herself an accuracy bonus of <b>%d</b>, for a damage class of <b>%s</b>.' % (
-            self.full_name, self.peek('weapon.name'), self.peek('weapon.WA'), self.peek('weapon.DC')))
+                self.full_name, self.peek('weapon.name'), self.peek('weapon.WA'), self.peek('weapon.DC')))
         return self.round_data
 
     def check_stunrecover(self, target):
@@ -221,7 +220,7 @@ class Combattant(Avatar):
                 target.tell("")
             self.poke('health_template.expertise_bonus', bon)
             overrun_bonus = 0
-            self.poke('multiattack_malus', -(3-self.peek('max_attacks')) * 3)
+            self.poke('multiattack_malus', -(3 - self.peek('max_attacks')) * 3)
             die, detdie = self.open_d12
             self.poke('attack_roll', self.peek('REF') + self.peek('melee') + self.peek('weapon.WA') - self.peek(
                 'health_template.circumstance_modifiers') - self.peek('multiattack_malus') + self.peek(
@@ -252,9 +251,9 @@ class Combattant(Avatar):
                 self.poke('damage', fs_fics7.roll_dc(self.peek('weapon.DC')) + self.SA_DMG + fs_fics7.roll_dc(
                     "%dD6" % (overrun_bonus)))
                 target.tell('<u>%s</u> is hit by %s for <b>%d</b> hit points...' % (
-                target.full_name, self.full_name, self.peek('damage')))
+                    target.full_name, self.full_name, self.peek('damage')))
                 self.tell('<u>%s</u> rolls for damage: %s + %d + %dD6 = <b>%d</b> hit points...' % (
-                self.full_name, self.peek('weapon.DC'), self.SA_DMG, overrun_bonus, self.peek('damage')))
+                    self.full_name, self.peek('weapon.DC'), self.SA_DMG, overrun_bonus, self.peek('damage')))
             else:
                 self.poke('damage', 0)
                 if tgt_parry:
@@ -309,7 +308,7 @@ class Combattant(Avatar):
         effect_source = ''
         true_damage = true_damage - self.peek('health_template.' + where + '.SP')
         effect_self = '<u>%s</u> armor blocks %d damage...' % (
-        self.full_name, self.peek('health_template.' + where + '.SP'))
+            self.full_name, self.peek('health_template.' + where + '.SP'))
         effect_source = 'After armor block, upcomming damage is %d' % (true_damage)
         self.tell(effect_self)
         source.tell(effect_source)
@@ -322,11 +321,11 @@ class Combattant(Avatar):
         if (where == 'HEAD'):
             true_damage *= 2
             effect_self = '<u>%s</u> attack lands on the <b>%s</b> of <u>%s</u> for double damage!' % (
-            source.full_name, where, self.full_name)
+                source.full_name, where, self.full_name)
             effect_source = 'After localisation check, upcomming damage is %d' % (true_damage)
         else:
             effect_self = '<u>%s</u> attack lands on the <b>%s</b> of <u>%s</u>...' % (
-            source.full_name, where, self.full_name)
+                source.full_name, where, self.full_name)
             effect_source = 'After localisation check, upcomming damage is %d' % (true_damage)
         self.tell(effect_self)
         source.tell(effect_source)
@@ -431,7 +430,7 @@ class Combattant(Avatar):
         # if self.peek('max_attacks') == 1:
         #     self.poke('multiattack_malus', 0)
         # else:
-        self.poke('multiattack_malus', -(3-self.peek('max_attacks')) * 3)
+        self.poke('multiattack_malus', -(3 - self.peek('max_attacks')) * 3)
         die, detdie = self.open_d12
         die += 3
         die -= self.peek('multiattack_malus')

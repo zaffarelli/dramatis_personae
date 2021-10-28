@@ -295,11 +295,13 @@ def display_sheet(request, pk=None):
                 idx1 += 1
         k = json.loads(j)
         k["creature"] = "mortal"
+
+        k["date"] = datetime.datetime.now().strftime('%Y%m%d')
         k["alliance"] = c.alliance_ref.reference
         k["skills_list"] = skills_list
         j = json.dumps(k)
         settings = {'version': 1.0, 'labels':{}, 'pre_title': pre_title, 'scenario': scenario,
                     'post_title': post_title, 'fontset': FONTSET, 'specialities': spe, 'shortcuts': shc}
         fics_sheet_context = {'settings': json.dumps(settings, sort_keys=True, indent=4), 'data': j}
-
+        print(j)
         return JsonResponse(fics_sheet_context)
