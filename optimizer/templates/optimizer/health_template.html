@@ -3,9 +3,9 @@
 <table class='wounds'>
     <tr>
         <td>{{c.status}}</td>
-        <td class='stats'>+{{c.expertise}}</td>
-        <th>&nbsp;</th>
-        <th>&nbsp;</th>
+        <td class='stats'>EP</td>
+        <td class='stats'>EX</td>
+        <td class='stats'>EB</td>
         <td class='armor'>{{c.HEAD.SP}}</td>
         <th>&nbsp;</th>
         <th>&nbsp;</th>
@@ -14,9 +14,9 @@
     </tr>
     <tr>
         <td class='stats neg' title='Penalties'>-{{c.circumstance_modifiers}}</td>
-        <th>&nbsp;</th>
-        <th>&nbsp;</th>
-        <th>&nbsp;</th>
+        <td class='stats'>{{c.expertise_pool}}</td>
+        <td class='stats'>{{c.expertise}}</td>
+        <td class='stats'>{{c.expertise_bonus}}</td>
         <td class="wnd">{{c.HEAD.wounds.medium|wound|safe}}</td>
         <th>&nbsp;</th>
         <th>&nbsp;</th>

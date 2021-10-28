@@ -164,7 +164,8 @@ class Combattant(Avatar):
             b = s
         elif (s + 1) * (s + 2) / 2 == x:
             b = s + 1
-        self.poke_inc('health_template.expertise_pool', -b)
+        # print(f"Expertise of {self.full_name} is {x}, so bonus is {b} ({s})")
+        self.poke_inc('health_template.expertise_bonus', b)
         return b
 
     def choose_attack(self, target):
