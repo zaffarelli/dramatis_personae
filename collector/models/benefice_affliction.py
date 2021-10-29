@@ -39,6 +39,13 @@ class BeneficeAfflictionRef(UUIDClass):
     def fix(self):
         super().fix()
 
+    def toJSON(self):
+        from collector.utils.basic import json_default
+        import json
+        jstr = json.dumps(self, default=json_default, sort_keys=True, indent=4)
+        return jstr
+
+
 
 class BeneficeAffliction(models.Model):
     class Meta:

@@ -43,14 +43,14 @@ BLOKES = {
 }
 
 
-def json_default(value):
-    import datetime
-    if isinstance(value, datetime.datetime):
-        return dict(year=value.year, month=value.month, day=value.day, hour=value.hour, minute=value.minute)
-    elif isinstance(value, datetime.date):
-        return dict(year=value.year, month=value.month, day=value.day)
-    else:
-        return value.__dict__
+# def json_default(value):
+#     import datetime
+#     if isinstance(value, datetime.datetime):
+#         return dict(year=value.year, month=value.month, day=value.day, hour=value.hour, minute=value.minute)
+#     elif isinstance(value, datetime.date):
+#         return dict(year=value.year, month=value.month, day=value.day)
+#     else:
+#         return value.__dict__
 
 
 class Character(Combattant):
@@ -957,6 +957,62 @@ class Character(Combattant):
         return []
 
     def toJSON(self):
+        from collector.utils.basic import json_default
         #self.guideline = self.stats_template
         jstr = json.dumps(self, default=json_default, sort_keys=True, indent=4)
         return jstr
+
+    def toJSONFICS(self):
+        from collector.models.skill import SkillRef
+        from operator import itemgetter
+        import datetime
+        j = self.toJSON()
+        idx1 = 0
+        idx2 = 0
+        skills_list = []
+        for skill in self.skill_set.order_by('skill_ref'):
+            skills_list.append(
+                {'skill': skill.skill_ref.reference, 'value': skill.value, 'is_root': skill.skill_ref.is_root,
+                 'is_speciality': skill.skill_ref.is_speciality, 'idx1': 0, 'idx2': 0})
+        for skill in SkillRef.objects.all().order_by('reference'):
+            if skill.reference not in [value for elem in skills_list for value in elem.values()]:
+                if not skill.is_speciality:
+                    skills_list.append({'skill': skill.reference, 'value': '-', 'is_root': skill.is_root,
+                                        'is_speciality': skill.is_speciality, 'idx1': 0, 'idx2': 0})
+        skills_list = sorted(skills_list, key=itemgetter('skill'))
+        for d in skills_list:
+            if d['is_speciality']:
+                d['idx2'] = idx2
+                idx2 += 1
+            else:
+                d['idx1'] = idx1
+                idx1 += 1
+
+        weapons = []
+        for weapon in self.weapon_set.all():
+            weapons.append(weapon.weapon_ref.toJSON())
+        armors = []
+        for armor in self.armor_set.all():
+            armors.append(armor.armor_ref.toJSON())
+        tods = []
+        for tod in self.tourofduty_set.all():
+            tods.append(tod.tour_of_duty_ref.toJSON())
+        bcs = []
+        for bc in self.blessingcurse_set.all():
+            bcs.append(bc.blessing_curse_ref.toJSON())
+        bas = []
+        for ba in self.beneficeaffliction_set.all():
+            bas.append(ba.benefice_affliction_ref.toJSON())
+
+        k = json.loads(j)
+        k["creature"] = "mortal"
+        k["date"] = datetime.datetime.now().strftime('%Y%m%d')
+        k["alliance"] = self.alliance_ref.reference
+        k["skills_list"] = skills_list
+        k["armors"] = armors
+        k["weapons"] = weapons
+        k["tods"] = tods
+        k["BC"] = bcs
+        k["BA"] = bas
+        j = json.dumps(k)
+        return j

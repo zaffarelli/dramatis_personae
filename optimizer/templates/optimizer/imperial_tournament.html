@@ -7,12 +7,22 @@
     {% for c in tournament_data %}
         <div class="tile imperial">
             {% for d in c.duels %}
+
             <div class="match" id="{{d.duel_id}}" title="{{d.scores}}">
+                {{d.tori.id}}
+                <span id='sheet_{{d.tori.id}}' class="action_icon sheet">
                 {% include 'collector/ghostmark.html' with data=d.tori.ghostmark_data c=d.tori tgt=d.duel_id winner=d.winner %}
+                </span>
+                {{d.uke.id}}
+                <span id='sheet_{{d.uke.id}}' class="action_icon sheet">
                 {% include 'collector/ghostmark.html' with data=d.uke.ghostmark_data c=d.uke tgt=d.duel_id winner=d.winner %}
+                </span>
             </div>
             {% endfor %}
         </div>
     {%endfor%}
 
 </div>
+<script>
+    // this.co.rebootLinks();
+</script>

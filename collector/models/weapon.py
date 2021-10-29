@@ -5,6 +5,8 @@
 """
 from django.db import models
 from django.contrib import admin
+import json
+
 
 CALIBERS = (
     ('n/a', 'n/a'),
@@ -148,6 +150,12 @@ class WeaponRef(models.Model):
         res.append('£' + str(self.cost))
         self.stats = ' . '.join(res)  # ⦁⏺
         return self.stats
+
+    def toJSON(self):
+        from collector.utils.basic import json_default
+        jstr = json.dumps(self, default=json_default, sort_keys=True, indent=4)
+        return jstr
+
 
 
 class Weapon(models.Model):

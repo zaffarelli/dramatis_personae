@@ -9,6 +9,7 @@ from django.contrib import admin
 from collector.models.character import Character
 from datetime import datetime
 
+
 LIFEPATH_CATEGORY = (
     ('0', "Birthright"),
     ('10', "Upbringing"),
@@ -166,6 +167,11 @@ class TourOfDutyRef(models.Model):
         else:
             self.valid = False
 
+    def toJSON(self):
+        from collector.utils.basic import json_default
+        import json
+        jstr = json.dumps(self, default=json_default, sort_keys=True, indent=4)
+        return jstr
 
 class TourOfDuty(models.Model):
     class Meta:

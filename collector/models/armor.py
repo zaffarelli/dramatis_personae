@@ -1,11 +1,12 @@
-'''
+"""
  ╔╦╗╔═╗  ╔═╗┌─┐┬  ┬  ┌─┐┌─┐┌┬┐┌─┐┬─┐
   ║║╠═╝  ║  │ ││  │  ├┤ │   │ │ │├┬┘
  ═╩╝╩    ╚═╝└─┘┴─┘┴─┘└─┘└─┘ ┴ └─┘┴└─
-'''
+"""
 from django.db import models
 from collector.models.character import Character
 from django.contrib import admin
+import json
 
 
 class ArmorRef(models.Model):
@@ -33,6 +34,10 @@ class ArmorRef(models.Model):
     def __str__(self):
         return '%s (%s, SP:%s)' % (self.reference, self.category, self.stopping_power)
 
+    def toJSON(self):
+        from collector.utils.basic import json_default
+        jstr = json.dumps(self, default=json_default, sort_keys=True, indent=4)
+        return jstr
 
 class Armor(models.Model):
     character = models.ForeignKey(Character, on_delete=models.CASCADE)

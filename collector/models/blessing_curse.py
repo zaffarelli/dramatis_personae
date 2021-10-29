@@ -24,6 +24,12 @@ class BlessingCurseRef(models.Model):
     def __str__(self):
         return '%s (%+d)' % (self.reference, self.value)
 
+    def toJSON(self):
+        from collector.utils.basic import json_default
+        import json
+        jstr = json.dumps(self, default=json_default, sort_keys=True, indent=4)
+        return jstr
+
 
 class BlessingCurse(models.Model):
     class Meta:
