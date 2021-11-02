@@ -2,16 +2,16 @@ from cartograph.models.system import System
 from cartograph.utils.fics_references import NEW_ROUTES, NEW_SYSTEMS
 from collector.utils.basic import get_current_config
 from django.shortcuts import get_object_or_404
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse, Http404, JsonResponse
 from django.template.loader import get_template
-
+import json
 
 def show_jumpweb(request):
     if request.is_ajax:
         campaign = get_current_config()
         context = {}
         context['data'] = {}
-        context['campaign'] = campaign
+        # context['campaign'] = campaign.toJSON()
         context['data']['mj'] = 1 if request.user.profile.is_gamemaster else 0
         context['data']['new_routes'] = "|".join(NEW_ROUTES)
         context['data']['new_systems'] = "|".join(NEW_SYSTEMS)
@@ -23,7 +23,6 @@ def show_jumpweb(request):
             system['name'] = s.name
             system['alliance'] = s.alliance
             system['sector'] = s.sector
-            # system['jumproads'] = s.jumproads
             system['x'] = s.x
             system['y'] = s.y
             system['jump'] = s.jump
@@ -46,9 +45,9 @@ def show_jumpweb(request):
                     lnk['source'] = j.id
                     lnk['target'] = s.id
                 context['data']['links'].append(lnk)
-        template = get_template('cartograph/jumpweb.html')
-        html = template.render(context)
-        return HttpResponse(html, content_type='text/html')
+        c = json.dumps(context, sort_keys=True, indent=4)
+        # print(c)
+        return JsonResponse(context)
     else:
         return Http404
 

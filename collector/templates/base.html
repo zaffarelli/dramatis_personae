@@ -17,7 +17,6 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js"></script>
         <script src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
         <script src='{% static "js/dp_tools.es6" %}'></script>
-        <script src='{% static "js/fics_sheet.es6" %}'></script>
         {% for font in fontset %}
         <link rel='stylesheet' href="https://fonts.googleapis.com/css2?family={{font}}">
         {% endfor %}
@@ -100,6 +99,7 @@
         <script src='{% static "js/optimizer.es6" %}'></script>
         <script src='{% static "js/collector.es6" %}'></script>
         <script src='{% static "js/jumpweb.es6" %}'></script>
+        <script src='{% static "js/fics_sheet.es6" %}'></script>
 
         {% block javascript %}
         {% endblock %}

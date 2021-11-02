@@ -34,7 +34,7 @@ def get_list(request, id, slug='none'):
     campaign = get_current_config()
     if slug == 'none':
         character_items = campaign.avatars.order_by('-ranking', 'full_name').filter(balanced=False, is_dead=False,
-                                                                                    nameless=False, player='').order_by(
+                                                                                    nameless=False, player='', archive_level='NON').order_by(
             '-OCC_LVL', '-tod_count')
     elif slug.startswith('c-'):
         elements = slug.split('-')

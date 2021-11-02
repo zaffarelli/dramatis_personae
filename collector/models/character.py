@@ -11,13 +11,12 @@ from collector.models.combattant import Combattant
 from collector.models.alliance_ref import AllianceRef
 from cartograph.models.system import System
 from collector.utils import fs_fics7
-#from collector.utils.basic import json_default
+# from collector.utils.basic import json_default
 from django.utils.timezone import get_current_timezone
 import itertools
 import logging
 import json
 from colorfield.fields import ColorField
-
 
 logger = logging.getLogger(__name__)
 
@@ -42,6 +41,12 @@ BLOKES = {
     'others': ['06-neutral']
 }
 
+ARCHIVE_LEVEL = {
+    ('NON', 'None'),
+    ('WKS', 'Workshop'),
+    ('ARK', 'Archive'),
+}
+
 
 # def json_default(value):
 #     import datetime
@@ -57,6 +62,7 @@ class Character(Combattant):
     class Meta:
         ordering = ['full_name']
         verbose_name = "FICS: Character"
+
     page_num = 0
     alias = models.CharField(max_length=200, default='', blank=True)
     alliance = models.CharField(max_length=200, default='', blank=True)
@@ -113,9 +119,10 @@ class Character(Combattant):
     gm_shortcuts = models.TextField(default='', blank=True)
     gm_shortcuts_pdf = models.TextField(default='', blank=True)
     team = models.CharField(max_length=128, choices=DRAMA_SEATS, default='06-neutral', blank=True)
+    archive_level = models.CharField(max_length=5, choices=ARCHIVE_LEVEL, default='NON', blank=True)
     OCC_LVL = models.PositiveIntegerField(default=0)
     OCC_DRK = models.PositiveIntegerField(default=0)
-    occult_fire_power  = models.PositiveIntegerField(default=0, blank=True)
+    occult_fire_power = models.PositiveIntegerField(default=0, blank=True)
     occult = models.CharField(max_length=50, default='', blank=True)
     challenge = models.TextField(default='', blank=True)
     challenge_value = models.IntegerField(default=0)
@@ -164,7 +171,7 @@ class Character(Combattant):
             alliance_ref = AllianceRef.objects.get(reference='None')
         x = self.id
         from collector.templatetags.fics_filters import as_roman
-        if self.tod_count>0:
+        if self.tod_count > 0:
             roman_tod_count = as_roman(self.tod_count)
         else:
             roman_tod_count = '-'
@@ -322,6 +329,8 @@ class Character(Combattant):
                 tod_rep['TO'] += tod.tour_of_duty_ref.value
             elif tod.tour_of_duty_ref.category == '50':
                 tod_rep['WB'] += tod.tour_of_duty_ref.value
+        if self.life_path_total < 200:
+            self.archive_level = 'WKS'
         # Flatten
         doubles_all_wp_roots = list(itertools.chain(*all_tod_wp_roots))
         # Remove multi
@@ -854,7 +863,7 @@ class Character(Combattant):
         self.mental = self.na_men
         self.combat = self.na_com
         # Check for racial tods
-        if (self.player == None) and (self.is_locked==False):
+        if (self.player == None) and (self.is_locked == False):
             from collector.models.tourofduty import TourOfDutyRef, TourOfDuty
             ra_tod = None
             if self.specie.ra_tod_name:
@@ -871,12 +880,12 @@ class Character(Combattant):
                 logger.info(f'    => Added ToD {t} to {self.rid}')
             logger.debug(f'    => Updating Game parameters... ({self.specie.species}, {self.specie.race})')
 
-        self.tod_count = int((self.OP-240)/10)+1
-        if self.tod_count<0:
+        self.tod_count = int((self.OP - 240) / 10) + 1
+        if self.tod_count < 0:
             self.tod_count = 0
 
         # Armor stopping power
-        SP_grid = { "HE": 0,"TO":0,"LA":0,"RA":0,"LL":0,"RL":0,"LW":0,"RW":0,"enc":0}
+        SP_grid = {"HE": 0, "TO": 0, "LA": 0, "RA": 0, "LL": 0, "RL": 0, "LW": 0, "RW": 0, "enc": 0}
         for a in self.armor_set.all():
             if a.armor_ref.head:
                 SP_grid["HE"] += a.armor_ref.stopping_power
@@ -913,14 +922,14 @@ class Character(Combattant):
             from collector.models.character_custo import CharacterCusto
             found_custo = CharacterCusto.objects.get(character=self)
             armors = found_custo.armorcusto_set.all()
-            if len(armors)==0:
+            if len(armors) == 0:
                 from collector.models.armor import ArmorCusto, ArmorRef
                 found_armor = ArmorCusto()
                 found_armor.character_custo = found_custo
                 found_armor.armor_ref = ArmorRef.objects.get(reference='Leather Jerkin')
                 found_armor.save()
 
-        if self.OCC_LVL>0:
+        if self.OCC_LVL > 0:
             pathes = []
             total_ritual_levels = 0
             rituals_per_path = self.ritual_set.all().order_by('ritual_ref__path')
@@ -931,7 +940,7 @@ class Character(Combattant):
             else:
                 if not len(rituals_per_path):
                     self.occult = "Psi"
-                    common_psi_pathes = ['FarHand','Psyche','Soma','Sixth Sense','Vis Craft']
+                    common_psi_pathes = ['FarHand', 'Psyche', 'Soma', 'Sixth Sense', 'Vis Craft']
                     import random
                     from collector.models.ritual import RitualCusto, RitualRef
                     from collector.models.character_custo import CharacterCusto
@@ -940,7 +949,7 @@ class Character(Combattant):
                     for x in range(self.OCC_LVL):
                         new_power = RitualCusto()
                         new_power.character_custo = found_custo
-                        new_power.ritual_ref = RitualRef.objects.filter(path=main_path,level=x+1).first()
+                        new_power.ritual_ref = RitualRef.objects.filter(path=main_path, level=x + 1).first()
                         new_power.save()
 
             for r in rituals_per_path:
@@ -958,7 +967,7 @@ class Character(Combattant):
 
     def toJSON(self):
         from collector.utils.basic import json_default
-        #self.guideline = self.stats_template
+        # self.guideline = self.stats_template
         jstr = json.dumps(self, default=json_default, sort_keys=True, indent=4)
         return jstr
 

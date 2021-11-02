@@ -19,8 +19,9 @@ d3.selection.prototype.pushElementAsBackLayer = function() {
 }
 
 class Jumpweb {
-    constructor(data) {
+    constructor(data, parent) {
         let me = this;
+        this.parent = parent;
         me.init(data);
     }
 
@@ -29,6 +30,8 @@ class Jumpweb {
         me.size = 110;
         me.width = me.size * 80;
         me.height = me.size * 60;
+        me.w = 1600;
+        me.h = 1200;
         me.data = data;
         me.era = (me.data.mj ? 0 : 5018);
         //me.new_routes = me.data.new_routes
@@ -36,19 +39,36 @@ class Jumpweb {
         me.oy = me.height / me.size / 2;
         me.step_x = me.size;
         me.step_y = me.size;
-        me.svg = d3.select("div.jumpweb")
-            .append('svg')
+        // me.svg = d3.select("#d3area")
+        //     .append('svg')
+        //     .attr("width", me.width * 1.5)
+        //     .attr("height", me.height * 2 )
+        //     .style("background", "transparent")
+        //     .call(d3.zoom().on("zoom", function() {
+        //         me.svg.attr("transform", d3.event.transform)
+        //     }))
+        //     .attr('transform', function(d){
+        //         return "translate("+ (-5.5*me.width/16)+","+ (-3*me.height/8)+")";
+        //     })
+        //     .append('g');
 
-            .attr("width", me.width * 1.5)
-            .attr("height", me.height * 2 )
-            .style("background", "transparent")
-            .call(d3.zoom().on("zoom", function() {
-                me.svg.attr("transform", d3.event.transform)
-            }))
+
+
+        d3.select(me.parent).selectAll("svg").remove();
+        me.vis = d3.select(me.parent).append("svg")
+            .attr("viewBox", "0 0 " + me.w + " " + me.h)
+            .attr("width", me.w)
+            .attr("height", me.h)
+        ;
+        me.svg = me.vis.append("g")
+            .attr("class", "all")
+            .style("fill", "#331133")
             .attr('transform', function(d){
-                return "translate("+ (-5.5*me.width/16)+","+ (-3*me.height/8)+")";
-            })
+                 return "translate("+ (-5.5*me.width/16)+","+ (-3*me.height/8)+")";
+             })
             .append('g');
+        ;
+
 
         me.gate_stroke = "#333"
         me.gate_fill = "#999"
@@ -61,13 +81,13 @@ class Jumpweb {
     }
 
     formatXml(xml) {
-        var formatted = '';
+        let formatted = '';
         let reg = /(>)(<)(\/*)/g;
         // */
         xml = xml.replace(reg, '$1\r\n$2$3');
-        var pad = 0;
+        let pad = 0;
         jQuery.each(xml.split('\r\n'), function(index, node) {
-            var indent = 0;
+            let indent = 0;
             if (node.match(/.+<\/\w[^>]*>$/)) {
                 indent = 0;
             } else if (node.match(/^<\/\w/)) {
@@ -133,7 +153,7 @@ class Jumpweb {
             .attr('y', me.step_y * 20)
 //            .text("The Known Worlds - circa " + me.era + " AD")
             .on('click', function(d) {
-                console.log("exporting")
+                // console.log("exporting")
                 let now = new Date()
                     .toISOString()
                     .replace(/[^0-9]/g, "");
@@ -511,7 +531,7 @@ title="jumpweb_' + me.mode + '_' + now + '.svg"> \
                 return (d.unknown ? 0.0 : 0.8);
             })
             .on("mouseover", function(d) {
-                d3.selectAll("#link_" + d.source + "_" + d.target)
+                me.svg.select("#link_" + d.source + "_" + d.target)
                     .style("stroke-width", function(d) {
 
                         if (d.discovery) {
@@ -521,7 +541,7 @@ title="jumpweb_' + me.mode + '_' + now + '.svg"> \
                     })
             })
             .on("mouseout", function(d) {
-                d3.selectAll(".link").style('stroke-width', function(d) {
+                me.svg.select(".link").style('stroke-width', function(d) {
                     let res = (d.out ? "1pt" : (d.off ? "1pt" : (d.unknown ? "2pt" : "1pt")));
                     if (d.discovery) {
                         res = '4pt';
@@ -561,7 +581,7 @@ title="jumpweb_' + me.mode + '_' + now + '.svg"> \
             .style("text-anchor", "middle")
             .text(function(d) {
                 if (d.source.name == "Rimpoche"){
-                    console.log(d);
+                    // console.log(d);
                 }
                 return d.discovery;
             });
@@ -591,27 +611,27 @@ title="jumpweb_' + me.mode + '_' + now + '.svg"> \
             })
             .on("click", function(d) {
                 if (d.orbital_map) {
-                    console.log("Launch orbital map for " + d.name);
+                    // console.log("Launch orbital map for " + d.name);
                     window.location = "/orbital_map/show/"+d.id+"/";
                 }
             })
 
             .on("mouseover", function(d) {
-                d3.event.preventDefault();
-                d3.event.stopPropagation();
-                d3.select("#aura_" + d.id)
+                // d3.event.preventDefault();
+                // d3.event.stopPropagation();
+                me.svg.select("#aura_" + d.id)
                     .transition()
                     .delay(0)
                     .duration(250)
                     .ease(d3.easeSin)
                     .style("opacity", 0.9)
-                d3.selectAll(".g" + d.group+" .bullet")
+                me.svg.selectAll(".g" + d.group+" .bullet")
                     .transition()
                     .delay(100)
                     .duration(250)
                     .ease(d3.easeSin)
                     .style("fill","#B8B");
-                d3.selectAll(".g" + d.group+".ray")
+                me.svg.selectAll(".g" + d.group+".ray")
                     .transition()
                     .delay(250)
                     .duration(250)
@@ -621,26 +641,26 @@ title="jumpweb_' + me.mode + '_' + now + '.svg"> \
 
             .on("mouseout", function(d) {
 
-                d3.selectAll(".aura")
+                me.svg.selectAll(".aura")
                     .transition()
                     .delay(0)
                     .duration(250)
                     .ease(d3.easeSin)
                     .style("opacity", 0.0)
-                d3.selectAll(".g" + d.group+" .bullet")
+                me.svg.selectAll(".g" + d.group+" .bullet")
                     .transition()
                     .delay(250)
                     .duration(250)
                     .ease(d3.easeSin)
                     .style("fill","none");
-                d3.selectAll(".g" + d.group+".ray")
+                me.svg.selectAll(".g" + d.group+".ray")
                     .transition()
                     .delay(100)
                     .duration(250)
                     .ease(d3.easeSin)
                     .style("stroke-width","4pt");
                 //.pushElementAsBackLayer();
-                d3.selectAll(".nodetext_" + d.id)
+                me.svg.selectAll(".nodetext_" + d.id)
                     .transition()
                     .delay(0)
                     .duration(250)
@@ -674,9 +694,20 @@ title="jumpweb_' + me.mode + '_' + now + '.svg"> \
             });
     }
 
+    zoomActivate() {
+        let me = this;
+        me.zoom = d3.zoom()
+            .scaleExtent([0.25, 4])
+            .on('zoom', function (event) {
+                me.svg.attr('transform', event.transform)
+            });
+        me.vis.call(me.zoom);
+    }
+
     perform() {
         let me = this;
-        me.draw_layout()
-        me.draw_known_worlds()
+        me.draw_layout();
+        me.draw_known_worlds();
+        me.zoomActivate();
     }
 }

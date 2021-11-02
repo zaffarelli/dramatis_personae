@@ -86,4 +86,4 @@ class Epic(StoryModel):
 
 class EpicAdmin(admin.ModelAdmin):
     ordering = ('era', 'title',)
-    list_display = ['shortcut','era','full_id','title']
+    list_display = ['shortcut', 'era', 'full_id', 'chapter', 'title']

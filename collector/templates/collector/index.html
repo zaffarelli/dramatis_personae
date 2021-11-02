@@ -92,8 +92,7 @@
         <li><span class="pull-down" title="Everything about systems, jumpweb and jumpkeys...">Imperial Cartograph</span>
             <ul class="level-2 Cartograph">
                 {% if campaign.is_fics %}
-                <li><a class="menu-item" target="spacecharts" href="{% url 'go_jumpweb' %}"><i
-                        class="action_icon fas fa-globe"></i> Map of the Empire</a></li>
+                <li><span class="menu-item jumpweb" action="jumpweb"><i class="action_icon fas fa-globe"></i> Map of the Empire</span></li>
                 <li><a class="menu-item" target="spacecharts" href="{% url 'go_jumpweb' %}"><i
                         class="action_icon fas fa-star"></i> Owned Jumpkeys</a></li>
                 {% endif %}
