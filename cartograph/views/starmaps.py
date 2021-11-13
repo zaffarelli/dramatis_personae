@@ -1,14 +1,15 @@
 from cartograph.models.system import System
 from cartograph.utils.fics_references import NEW_ROUTES, NEW_SYSTEMS
-from collector.utils.basic import get_current_config
+from collector.utils.basic import get_current_config, slug_decode
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponse, Http404, JsonResponse
 from django.template.loader import get_template
 import json
 
+
 def show_jumpweb(request):
     if request.is_ajax:
-        campaign = get_current_config()
+        campaign = get_current_config(request)
         context = {}
         context['data'] = {}
         # context['campaign'] = campaign.toJSON()
@@ -52,12 +53,16 @@ def show_jumpweb(request):
         return Http404
 
 
-def show_orbital_map(request, id):
+def show_orbital_map(request, slug=None):
     if request.is_ajax:
-        campaign = get_current_config()
-        system = get_object_or_404(System, pk=id)
+
+        campaign = get_current_config(request)
+        slug = slug_decode(slug)
+        if slug is None:
+            slug = 'Delphi'
+        system = System.objects.get(name=slug)
         context = {'data': {}}
-        context['campaign'] = campaign
+        context['campaign'] = campaign.toJSON()
         context['data']['mj'] = 1 if request.user.profile.is_gamemaster else 0
         context['data']['title'] = f'{system.name}'
         context['data']['alliance'] = f'{system.alliance}'
@@ -71,8 +76,8 @@ def show_orbital_map(request, id):
                             'type': oi.get_category_display(), 'azimut': oi.azimut, 'size': oi.size, 'moon': oi.moon,
                             'description': oi.description, 'rings': oi.rings}
             context['data']['planets'].append(orbital_item)
-        template = get_template('cartograph/orbital_map.html')
-        html = template.render(context)
-        return HttpResponse(html, content_type='text/html')
+        # template = get_template('cartograph/orbital_map.html')
+        # html = template.render(context)
+        return JsonResponse(context)
     else:
-        return Http404
+        return HttpResponse(status=204)

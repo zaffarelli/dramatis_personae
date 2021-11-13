@@ -884,15 +884,13 @@ th.skill_dot {
     display: block;
 }
 
-.hidden {
-    display: none;
-}
 
 .working {
     & table, & table td, & table th, & th, & td {
         background: $fics_hl;
     }
 }
+
 
 
 

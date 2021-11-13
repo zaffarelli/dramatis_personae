@@ -26,7 +26,7 @@ span.toggler {
     right: auto;
     z-index: 9000;
     @include dp_panel;
-    transition: display .5s;
+    transition: display .5s ease;
 
     & p {
         margin: 5px;
@@ -128,14 +128,37 @@ span.info{
 
 #d3area{
     z-index:9999999;
-    top:0;
-    left:0;
-    position:absolute;
+    top:5px;
+    left:5px;
+    bottom:5px;
+    right:5px;
+    position:fixed;
     background:black;
-    border:white;
+    border:1px solid silver;
+    border-radius:5px;
     display:none;
-    width:100%;
+    width:auto;
     height:auto;
     opacity:1;
-    padding:10px 250px;
+    //padding:10px 250px;
+    text-align:center;
+    vertical-align:middle;
 }
+
+
+//span.slug-item{
+//    border-color:red;
+//}
+//
+//span.menu-item{
+//    border-color:green;
+//}
+//
+//span.slug-page-item{
+//    border-color:cyan;
+//}
+
+//span.menu-button{
+//    border-style: dashed;
+//}
+

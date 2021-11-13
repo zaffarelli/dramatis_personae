@@ -12,13 +12,16 @@ import copy
 import math
 from collector.utils.fs_fics7 import roll
 from django.http import JsonResponse
-
+from collector.utils.basic import slug_decode
 import logging
 
 logger = logging.getLogger(__name__)
 
 
+
+
 def run_duel(request, slug=None):
+    slug = slug_decode(slug)
     try:
         pks = slug.split('_')
         attacker = pks[0]
@@ -52,6 +55,7 @@ def run_duel(request, slug=None):
 
 
 def run_100_duels(request, slug=None):
+    slug = slug_decode(slug)
     try:
         pks = slug.split('_')
         attacker = pks[0]

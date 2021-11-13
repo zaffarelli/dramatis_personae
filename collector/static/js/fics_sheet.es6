@@ -33,8 +33,8 @@ class FICSSheet {
         me.jumpgate_stroke = "#B8B8B8";
         me.draw_stroke = '#111';
         me.draw_fill = '#222';
-        me.user_stroke = '#911';
-        me.user_fill = '#A22';
+        me.user_stroke = '#919';
+        me.user_fill = '#A2A';
         me.user_font = 'Caveat';
         me.mono_font = 'Syne Mono';
         me.title_font = 'Pompiere';
@@ -460,8 +460,8 @@ xmlns:xlink="http://www.w3.org/1999/xlink"> \
                 me.decorationText(1.5, 35.8, -16, 'start', me.base_font, me.small_font_size, me.draw_fill, me.draw_stroke, 0.5, "[" + me.data['date'] + "]" + me.data['rid'] + '.svg.pdf (Recto) [' + me.data['id'] + ']', me.back);
             }
             me.decorationText(4.0, 2.25, 0, 'middle', me.base_font, me.medium_font_size, me.draw_fill, me.draw_stroke, 0.5, "FuZion Interlock Custom System v7.3", me.back);
-            me.decorationText(21, 1.75, 0, 'middle', me.base_font, me.medium_font_size, me.draw_fill, me.draw_stroke, 0.5, me.pre_title, me.back);
-            me.decorationText(21, 2.25, 0, 'middle', me.base_font, me.medium_font_size, me.draw_fill, me.draw_stroke, 0.5, me.post_title, me.back);
+            // me.decorationText(21, 1.75, 0, 'middle', me.base_font, me.medium_font_size, me.draw_fill, me.draw_stroke, 0.5, me.pre_title, me.back);
+            me.decorationText(20, 2.25, 0, 'middle', me.base_font, me.small_font_size, me.draw_fill, me.draw_stroke, 0.5, me.pre_title, me.back);
             //me.decorationText(22.5, 34.8, 0, 'end', me.base_font, me.small_font_size, me.draw_fill, me.draw_stroke, 0.5, 'Challenge:' + me.data['freebies'], me.back);
             me.decorationText(22.5, 35.8, -16, 'end', me.base_font, me.small_font_size, me.draw_fill, me.draw_stroke, 0.5, "fics_Sheet v" + me.version + ", 2021, Zaffarelli, generated with DP", me.back);
         } else {

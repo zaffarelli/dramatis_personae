@@ -96,12 +96,29 @@ class Collector {
             e.preventDefault();
             e.stopPropagation();
             let action_tag = $(this).attr("action");
-            console.debug(action_tag + " has been clicked...");
+            let mode_tag = $(this).attr("mode");
+            console.debug("menu-item " + action_tag + " has been clicked...");
             $.ajax({
                 url: 'ajax/' + action_tag + '/',
                 success: function (answer) {
-                    $('.mosaic').html(answer.mosaic);
-                    console.log(answer.mosaic);
+                    if (mode_tag == 'overlay') {
+                        $("#d3area").css('display', 'block');
+                        let starmap = new Jumpweb(answer.data, '#d3area');
+                        starmap.perform();
+                        me.rebootLinks();
+                    } else if (mode_tag == 'direct') {
+                        let new_tag = action_tag.replace("_","/")
+                        console.log(new_tag)
+                        let w = window.open(action_tag,'_blank');
+                        w.focus();
+                    } else if (mode_tag == 'index') {
+                        let w = window.location.href = "/";
+                        // w.focus();
+                    } else if (mode_tag == 'main') {
+                        $('.mosaic').html(answer.html);
+                    } else {
+                        $('.mosaic').html(answer.mosaic);
+                    }
                     me.rebootLinks();
                     //ac.reset(x, "sheet_" + answer.id, "customizer");
                 },
@@ -118,18 +135,28 @@ class Collector {
         let me = this;
         /* Change all menu-items to ajax/<id> */
         $(".slug-item").off().on("click", function (e) {
-            event.preventDefault();
-            event.stopPropagation();
+            e.preventDefault();
+            e.stopPropagation();
             let action_tag = $(this).attr("action");
+            let mode_tag = $(this).attr("mode");
             let slug = $('#customize').val();
             if (slug == '') {
                 slug = 'none';
             }
+            let x = me.btoasafe(slug)
+            console.log('-->' + x + " (" + slug + ")")
             console.debug(action_tag + " has been clicked...");
             $.ajax({
-                url: 'ajax/' + action_tag + '/' + slug + '/',
+                url: 'ajax/' + action_tag + '/' + x + '/',
                 success: function (answer) {
-                    $('.mosaic').html(answer.mosaic);
+                    if (mode_tag == 'overlay') {
+                        $("#d3area").css('display', 'block');
+                        let starmap = new OrbitalMap(answer.data, '#d3area');
+                        starmap.perform();
+                        me.rebootLinks();
+                    } else {
+                        $('.mosaic').html(answer.mosaic);
+                    }
                     me.rebootLinks();
                 },
                 error: function (answer) {
@@ -138,6 +165,31 @@ class Collector {
                     me.rebootLinks();
                 }
             });
+        });
+    }
+
+    btoasafe(str) {
+        let enc = btoa(str);
+        let safe = enc.replace(/=/g, '_');
+        // let safe = enc.replace(/-/g, '+').replace(/_/g, '/')
+        // let pad = safe.length % 4;
+        // if(pad) {
+        //   if(pad === 1) {
+        //     throw new Error('InvalidLengthError: Input base64url string is the wrong length to determine padding');
+        //   }
+        //   safe += new Array(5-pad).join('=');
+        // }
+        return (safe);
+    }
+
+    registerPullDowns(){
+        $(".pull-down").off().on("click", function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log("toggle hidden")
+            let dad = $(this).parents("li");
+            let sub = $(dad).find("ul.level-2");
+            $(sub).toggleClass("off");
         });
     }
 
@@ -158,9 +210,11 @@ class Collector {
             if (slug == '') {
                 slug = 'none';
             }
-            console.debug(action_tag + " has been clicked... (" + slug + " / " + code + " / " + page + ")");
+            let x = me.btoasafe(slug)
+            let aurl = 'ajax/' + action_tag + '/' + x + '/' + page + '/';
+            console.debug(action_tag + " has been clicked... (" + aurl + ")");
             $.ajax({
-                url: 'ajax/' + action_tag + '/' + slug + '/' + page + '/',
+                url: aurl,
                 success: function (answer) {
                     $('.mosaic').html(answer.mosaic);
                     me.rebootLinks();
@@ -192,6 +246,7 @@ class Collector {
         me.registerMenuItems();
         me.registerSlugItems();
         me.registerSlugPageItems();
+        me.registerPullDowns();
         /* Togglers */
         me.setToggler('.mobile_form_toggler', 'collapsed', "#customizer");
         me.setToggler('.menu_right_toggler', 'collapsed', ".menuright");
@@ -209,6 +264,11 @@ class Collector {
             $(mine).toggleClass('hidden');
             me.rebootLinks();
         });
+
+        $('#area_close').off().on('click', function (event) {
+            $("#d3area").css('display', 'none');
+        })
+
         $('.recalc_avatar').off().on('click', function (event) {
             event.preventDefault();
             event.stopPropagation();
@@ -271,16 +331,35 @@ class Collector {
                     // console.log('Data received !!!');
                     // console.log(answer.data);
                     //let d = JSON.parse(answer.data);
-                    let starmap = new Jumpweb(answer.data,'#d3area');
+                    let starmap = new Jumpweb(answer.data, '#d3area');
                     starmap.perform();
                     me.rebootLinks();
                 },
                 error: function (answer) {
                     console.error('Jumpweb display error...');
-                    // console.log(answer);
+                    console.error(answer);
                 }
             });
         });
+
+        $('.orbital').off().on('click', function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+            $.ajax({
+                url: 'ajax/jumpweb/',
+                success: function (answer) {
+                    $("#d3area").css('display', 'block');
+                    let orbital = new OrbitalMap(answer.data, '#d3area');
+                    orbital.perform();
+                    me.rebootLinks();
+                },
+                error: function (answer) {
+                    console.error('Orbital Map display error...');
+                    console.error(answer);
+                }
+            });
+        });
+
 
         $('.edit_character').off()
             .on('click', function (event) {

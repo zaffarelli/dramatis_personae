@@ -6,6 +6,9 @@
     <div class="tile info">
         <div class="plank"><strong>Player</strong><em>{{current_user.username.capitalize | safe }}</em></div>
         <div class="plank"><strong>Email</strong><em>{{current_user.email | safe }}</em></div>
+        <div class="plank"><strong>Masterize</strong><em>{{user_profile.masterize | safe }}</em></div>
+        <div class="plank"><strong>Main Epic</strong><em>{{user_profile.main_epic | safe }}</em></div>
+        <div class="plank"><strong>Main Character</strong><em>{{user_profile.main_character | safe }}</em></div>
     </div>
 
     {% for mc in main_characters %}

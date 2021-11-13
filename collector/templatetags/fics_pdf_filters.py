@@ -94,8 +94,14 @@ def parse_avatars_pdf(value):
     char_to_tag('=', 'h5', txt, changes, '', paragraph=True)
     char_to_tag('µ', 'h6', txt, changes, '', paragraph=True)
 
+
     for change in changes:
         txt = txt.replace(change['src'], change['dst'])
+
+    txt = txt.replace("<p></p>", "")
+    txt = txt.replace("<p><br>", "")
+    txt = txt.replace("<p><br/>", "")
+    print(txt)
     return txt
 
 

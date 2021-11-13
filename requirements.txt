@@ -20,8 +20,8 @@ django-sass==0.2.0
 django-sass-processor==0.7.3
 django-split-settings==0.3.0
 django-test==0.4030
-#-e git+git@github.com:zaffarelli/dramatis_personae.git@25070c49af7841670a78a39c413c974b69c555a0#egg=dramatis_personae
-#et-xmlfile==1.0.1
+-e git+git@github.com:zaffarelli/dramatis_personae.git@10e82d52efdb6d6ff823e579b8c688cc52b551ff#egg=dramatis_personae
+et-xmlfile==1.0.1
 factory-boy==2.12.0
 Faker==2.0.3
 google-auth @ file:///home/zaffarelli/.cache/pypoetry/artifacts/8c/c9/cf/e756009933c6833cd7ed06751319929e2584b7cde12473e06224502503/google_auth-2.3.0-py2.py3-none-any.whl
@@ -43,6 +43,7 @@ openpyxl==2.5.5
 packaging @ file:///home/zaffarelli/.cache/pypoetry/artifacts/90/db/f6/80dd3be4a19cf43b511550b619790b652efd9898624799bc6729b57ed6/packaging-21.0-py3-none-any.whl
 Pillow==6.2.2
 pluggy @ file:///home/zaffarelli/.cache/pypoetry/artifacts/51/46/1f/8631e50dc9744d942c7a1b2f850c8dc4ffeb650fce0ac9c044187641be/pluggy-1.0.0-py2.py3-none-any.whl
+psycopg2 @ file:///home/zaffarelli/.cache/pypoetry/artifacts/24/e0/2a/67b7afae8a4768f1dc78a1dcbce75f9c7198ae57a91ad55efdd5ff0b5b/psycopg2-2.8.6.tar.gz
 psycopg2-binary @ file:///home/zaffarelli/.cache/pypoetry/artifacts/53/57/92/9001f8a47289a9d705eca4920210cfe4eeec4662ab146c87dbfe458921/psycopg2_binary-2.9.1-cp36-cp36m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
 py==1.10.0
 pyasn1==0.4.7

@@ -13,7 +13,7 @@
 """
 
 MAX_CHAR = 20
-RELEASE = '0.5.0'
+RELEASE = '0.6.2'
 
 SOURCE_REFERENCES = (
     ('FS2CRB', "HDi Fading Suns Official"),

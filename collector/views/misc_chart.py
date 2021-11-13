@@ -13,7 +13,7 @@ import json
 
 
 def get_population_statistics(request, *args, **kwargs):
-    campaign = get_current_config()
+    campaign = get_current_config(request)
     da = []
     ch = campaign.get_occult_chart(occult='Psi')
     da.append(json.dumps(ch['data']))
@@ -49,7 +49,9 @@ def get_population_statistics(request, *args, **kwargs):
 
 
 def get_keywords(request, *args, **kwargs):
-    campaign = get_current_config()
+    user_profile = request.user.profile
+    print(user_profile)
+    campaign = get_current_config(request)
     all = campaign.avatars.order_by('keyword')
     data = {'keywords':[]}
     edata = {'dramas': []}

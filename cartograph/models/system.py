@@ -8,6 +8,7 @@ from django.contrib import admin
 # from datetime import datetime
 from django.db.models.signals import pre_save, post_save
 from django.dispatch import receiver
+from colorfield.fields import ColorField
 # from django.urls import reverse
 # import hashlib
 # from scenarist.models.epics import Epic
@@ -44,7 +45,7 @@ class System(models.Model):
     y = models.IntegerField(default=0)
     jump = models.IntegerField(default=0)
     group = models.IntegerField(default=0)
-    color = models.CharField(max_length=16, default="#CCC")
+    color = ColorField(default="#CCC")
     dtj = models.FloatField(default=69)
     garrison = models.IntegerField(default=1)
     tech = models.IntegerField(default=3)
@@ -85,7 +86,7 @@ class OrbitalItem(models.Model):
     name = models.CharField(max_length=200, default="", blank=True)
     system = models.ForeignKey(System, on_delete=models.CASCADE, blank=True, null=True)
     category = models.CharField(max_length=20, choices=ORBITAL_ITEMS, default="Telluric")
-    color = models.CharField(max_length=20, default="#FFF")
+    color = ColorField(default="#FFF")
     speed = models.FloatField(default=1.0)
     azimut = models.FloatField(default=0)
     distance = models.FloatField(default=0.0)
@@ -147,6 +148,6 @@ class SystemAdmin(admin.ModelAdmin):
 
 class OrbitalItemAdmin(admin.ModelAdmin):
     ordering = ['system', 'distance', 'name']
-    list_display = ['nameid', 'name', 'category', 'system', 'distance', 'speed', 'tilt', 'size', 'qualifier']
+    list_display = ['nameid', 'name', 'category', 'color', 'distance', 'speed', 'tilt', 'size', 'qualifier','rings']
     list_filter = ['category','system','distance','tilt']
     search_fields = ['name', 'qualifier', 'system']

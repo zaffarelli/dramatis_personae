@@ -2,6 +2,9 @@
 {% load fics_filters %}
 {% load fics_pdf_filters %}
 {% block article %}
+    <div id="header_content">
+        <img src='collector/static/collector/glyph.png' width='1.0cm'>
+    </div>
     <div id="footer_content">
         [{{epic.data.printtime}}] <pdf:pagenumber/> / <pdf:pagecount/>
     </div>

@@ -6,6 +6,7 @@
 from django.db import models
 from django.contrib import admin
 from collector.models.character import Character
+from collector.models.campaign import Campaign
 
 
 class Team(models.Model):
@@ -15,6 +16,7 @@ class Team(models.Model):
         ordering = ['name']
     name = models.CharField(max_length=256, unique=True)
     public = models.BooleanField(default=True)
+    campaign = models.ForeignKey(Campaign, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return "%s (%d)"%(self.name,self.population)
@@ -49,5 +51,5 @@ class TeamMateInline(admin.TabularInline):
 class TeamAdmin(admin.ModelAdmin):
     model = Team
     inlines = [ TeamMateInline ]
-    list_display = ['name', 'public', 'population', 'members']
+    list_display = ['name', 'public', 'population', 'members', 'campaign']
     list_filter = ['public']

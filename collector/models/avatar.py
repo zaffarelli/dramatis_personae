@@ -10,6 +10,12 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+ARCHIVE_LEVEL = (
+    ('NON', 'None'),
+    ('WKS', 'Workshop'),
+    ('ARK', 'Archive'),
+)
+
 
 class Avatar(models.Model):
     class Meta:
@@ -36,13 +42,14 @@ class Avatar(models.Model):
     priority = models.BooleanField(default=False)
     need_pdf = models.BooleanField(default=False)
     need_fix = models.BooleanField(default=False)
+    archive_level = models.CharField(max_length=5, choices=ARCHIVE_LEVEL, default='NON', blank=True)
     # epic = models.ForeignKey(Epic, null=True, blank=True, on_delete=models.SET_NULL)
     pub_date = models.DateTimeField('Date published', default=datetime.now)
 
     def fix(self, conf=None):
         if conf is None:
             from collector.utils.basic import get_current_config
-            conf = get_current_config()
+            conf = get_current_config(request)
         logger.warning(f'Fixing ........: {self.full_name}')
         if self.rid == 'none':
             self.get_rid(self.full_name)

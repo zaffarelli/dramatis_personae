@@ -10,7 +10,7 @@ from scenarist.forms.basic import *
 from scenarist.models.dramas import Drama
 from django.shortcuts import get_object_or_404
 from scenarist.mixins.ajaxfromresponse import AjaxFromResponseMixin
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.contrib import messages
 
 
@@ -32,12 +32,17 @@ class DramaUpdateView(AjaxFromResponseMixin,UpdateView):
 
 def add_drama(request):
     """ Add a new character to the universe """
+    import datetime
     if request.is_ajax():
         if request.method == 'POST':
-            id = request.POST.get('id')
+            full_id = request.POST.get('id')
+            print(full_id)
+            id = int(full_id.split("_")[1])
             item = Drama()
-            item.act = get_object_or_404(Epic,pk=id)
+            item.title = datetime.datetime.now()
+            item.epic = Epic.objects.get(pk=id)
             item.save()
+            c = {}
             c[item] = item
             return JsonResponse(c)
     return HttpResponse(status=204)

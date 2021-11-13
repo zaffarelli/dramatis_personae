@@ -1,8 +1,3 @@
-/*
- ╔╦╗╔═╗  ╔═╗┌─┐┬  ┬  ┌─┐┌─┐┌┬┐┌─┐┬─┐
-  ║║╠═╝  ║  │ ││  │  ├┤ │   │ │ │├┬┘
- ═╩╝╩    ╚═╝└─┘┴─┘┴─┘└─┘└─┘ ┴ └─┘┴└─
-*/
 d3.selection.prototype.bringElementAsTopLayer = function() {
     return this.each(function() {
         this.parentNode.appendChild(this);
@@ -11,7 +6,7 @@ d3.selection.prototype.bringElementAsTopLayer = function() {
 
 d3.selection.prototype.pushElementAsBackLayer = function() {
     return this.each(function() {
-        var firstChild = this.parentNode.firstChild;
+        let firstChild = this.parentNode.firstChild;
         if (firstChild) {
             this.parentNode.insertBefore(this, firstChild);
         }
@@ -30,8 +25,8 @@ class Jumpweb {
         me.size = 110;
         me.width = me.size * 80;
         me.height = me.size * 60;
-        me.w = 1600;
-        me.h = 1200;
+        me.w = $(me.parent).css('width');
+        me.h = $(me.parent).css('height');
         me.data = data;
         me.era = (me.data.mj ? 0 : 5018);
         //me.new_routes = me.data.new_routes
@@ -39,27 +34,11 @@ class Jumpweb {
         me.oy = me.height / me.size / 2;
         me.step_x = me.size;
         me.step_y = me.size;
-        // me.svg = d3.select("#d3area")
-        //     .append('svg')
-        //     .attr("width", me.width * 1.5)
-        //     .attr("height", me.height * 2 )
-        //     .style("background", "transparent")
-        //     .call(d3.zoom().on("zoom", function() {
-        //         me.svg.attr("transform", d3.event.transform)
-        //     }))
-        //     .attr('transform', function(d){
-        //         return "translate("+ (-5.5*me.width/16)+","+ (-3*me.height/8)+")";
-        //     })
-        //     .append('g');
-
-
-
         d3.select(me.parent).selectAll("svg").remove();
         me.vis = d3.select(me.parent).append("svg")
             .attr("viewBox", "0 0 " + me.w + " " + me.h)
             .attr("width", me.w)
-            .attr("height", me.h)
-        ;
+            .attr("height", me.h);
         me.svg = me.vis.append("g")
             .attr("class", "all")
             .style("fill", "#331133")
@@ -67,9 +46,6 @@ class Jumpweb {
                  return "translate("+ (-5.5*me.width/16)+","+ (-3*me.height/8)+")";
              })
             .append('g');
-        ;
-
-
         me.gate_stroke = "#333"
         me.gate_fill = "#999"
         me.panel_stroke = "#111"
@@ -530,7 +506,7 @@ title="jumpweb_' + me.mode + '_' + now + '.svg"> \
             .style("opacity", function(d) {
                 return (d.unknown ? 0.0 : 0.8);
             })
-            .on("mouseover", function(d) {
+            .on("mouseover", function(e,d) {
                 me.svg.select("#link_" + d.source + "_" + d.target)
                     .style("stroke-width", function(d) {
 
@@ -540,7 +516,7 @@ title="jumpweb_' + me.mode + '_' + now + '.svg"> \
                         return "5pt";
                     })
             })
-            .on("mouseout", function(d) {
+            .on("mouseout", function(e,d) {
                 me.svg.select(".link").style('stroke-width', function(d) {
                     let res = (d.out ? "1pt" : (d.off ? "1pt" : (d.unknown ? "2pt" : "1pt")));
                     if (d.discovery) {
@@ -639,7 +615,7 @@ title="jumpweb_' + me.mode + '_' + now + '.svg"> \
                     .style("stroke-width","20pt");
                })
 
-            .on("mouseout", function(d) {
+            .on("mouseout", function(e,d) {
 
                 me.svg.selectAll(".aura")
                     .transition()
@@ -706,6 +682,7 @@ title="jumpweb_' + me.mode + '_' + now + '.svg"> \
 
     perform() {
         let me = this;
+        $(me.parent).css("padding",0);
         me.draw_layout();
         me.draw_known_worlds();
         me.zoomActivate();

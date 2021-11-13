@@ -41,13 +41,23 @@ def write_pdf(template_src, context_dict={}):
     result.close()
 
 
-def get_current_config():
+def get_current_config(request):
     from collector.models.campaign import Campaign
-    item = Campaign.objects.get(smart_code='bin')
-    items = Campaign.objects.filter(is_active=True)
-    if len(items) == 1:
-        item = items.first()
-    if len(items) > 1:
+
+    if request.user.is_authenticated:
+        if request.user.profile.is_gamemaster:
+            item = Campaign.objects.get(smart_code='bin')
+            items = Campaign.objects.filter(is_active=True)
+            if len(items) == 1:
+                item = items.first()
+            if len(items) > 1:
+                item = Campaign.objects.first()
+        else:
+            if request.user.profile.main_epic:
+                item = Campaign.objects.get(epic__shortcut=request.user.profile.main_epic.shortcut)
+            else:
+                item = Campaign.objects.first()
+    else:
         item = Campaign.objects.first()
     return item
 
@@ -114,7 +124,10 @@ def export_epic(request,campaign):
     media_results = os.path.join(settings.MEDIA_ROOT, 'pdf/results/')
     merger = PdfFileMerger()
     merger.append(open('%scorpus_%s.pdf'%(media_results,campaign.epic.shortcut), 'rb'))
-    merger.append(open('%sappendix_%s.pdf'%(media_results,campaign.epic.shortcut), 'rb'))
+    try:
+        merger.append(open('%sappendix_%s.pdf'%(media_results,campaign.epic.shortcut), 'rb'))
+    except FileNotFoundError:
+        messages.info(request, "No characters appendix found yet...")
     des = '%s%s.pdf'%(media_results,campaign.epic.shortcut)
     with open(des, 'wb') as fout:
         merger.write(fout)
@@ -251,3 +264,10 @@ def json_default(value):
         return dict(year=value.year, month=value.month, day=value.day)
     else:
         return value.__dict__
+
+
+def slug_decode(slug):
+    import base64
+    s = slug.replace('_', '=')
+    dex = str(base64.b64decode(s), "utf-8")
+    return dex

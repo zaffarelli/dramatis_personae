@@ -104,7 +104,7 @@ def attr_pick(request, avatar, item, offset):
         setattr(ch.charactercusto, item, offset)
     else:
         setattr(ch.charactercusto, item, x + offset)
-    print(item)
+    # print(item)
     info = ("info_" + item.split("_")[1]).lower()
     ch.fix()
     ch.save()

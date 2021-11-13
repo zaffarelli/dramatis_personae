@@ -1,242 +1,243 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
 <html lang="en">
-  <head>
+<head>
     {% load static %}
-    <meta charset="utf-8" />
-    <title>{{c.full_name|safe}}</title>
+    <meta charset="utf-8"/>
+    <title>{{ c.full_name|safe }}</title>
     <style>
-      @font-face {
-        font-family: 'Text';
-        src: url('collector/static/collector/fonts/BarlowCondensed-Regular.ttf');
-      }
+        @font-face {
+            font-family: 'Text';
+            src: url('collector/static/collector/fonts/Dosis-Regular.ttf');
+        }
 
-      @font-face {
-        font-family: 'Text';
-        font-style: italic;
-        src: url('collector/static/collector/fonts/BarlowCondensed-RegularItalic.ttf');
-      }
+        @font-face {
+            font-family: 'Text';
+            font-style: italic;
+            src: url('collector/static/collector/fonts/BarlowCondensed-RegularItalic.ttf');
+        }
 
-      @font-face {
-        font-family: 'Text';
-        font-weight: bold;
-        font-style: italic;
-        src: url('collector/static/collector/fonts/BarlowCondensed-BoldItalic.ttf');
-      }
+        @font-face {
+            font-family: 'Text';
+            font-weight: bold;
+            font-style: italic;
+            src: url('collector/static/collector/fonts/BarlowCondensed-BoldItalic.ttf');
+        }
 
-      @font-face {
-        font-family: 'Text';
-        font-weight: bold;
-        src: url('collector/static/collector/fonts/BarlowCondensed-Bold.ttf');
-      }
+        @font-face {
+            font-family: 'Text';
+            font-weight: bold;
+            src: url('collector/static/collector/fonts/BarlowCondensed-Bold.ttf');
+        }
 
-      @font-face {
-        font-family: 'Title';
-        src: url('collector/static/collector/fonts/Eczar-SemiBold.ttf');
-      }
+        @font-face {
+            font-family: 'Title';
+            src: url('collector/static/collector/fonts/Eczar-SemiBold.ttf');
+        }
 
-      @font-face {
-        font-family: 'Roster';
-        src: url('collector/static/collector/fonts/Dosis-Regular.ttf');
-      }
+        @font-face {
+            font-family: 'Roster';
+            src: url('collector/static/collector/fonts/Dosis-Regular.ttf');
+        }
 
-      @font-face {
-        font-family: 'Roster';
-        font-style:italic;
-        src: url('http://www.fontsaddict.com/fontface/Dosis-Italic.ttf');
-      }
+        @font-face {
+            font-family: 'Roster';
+            font-style: italic;
+            src: url('http://www.fontsaddict.com/fontface/Dosis-Italic.ttf');
+        }
 
-      @font-face {
-        font-family: 'Roster';
-        font-weight:bold;
-        src: url('collector/static/collector/fonts/Dosis-Bold.ttf');
-      }
+        @font-face {
+            font-family: 'Roster';
+            font-weight: bold;
+            src: url('collector/static/collector/fonts/Dosis-Bold.ttf');
+        }
 
-      @font-face {
-        font-family: 'Roster';
-        font-weight:bold;
-        font-style:italic;
-        src: url('collector/static/collector/fonts/Dosis-BoldItalic.ttf');
-      }
+        @font-face {
+            font-family: 'Roster';
+            font-weight: bold;
+            font-style: italic;
+            src: url('collector/static/collector/fonts/Dosis-BoldItalic.ttf');
+        }
 
-      @page {
-        size: a4 portrait;
-        @frame col_left {
-          left: 0.4cm;
-          width: 10cm;
-          top: 1.5cm;
-          height:27cm;
-          padding:0.125cm;
-          border:1px dotted silver;
+        @page {
+            size: a4 portrait;
+            @frame col_left {
+            left: 0.4cm;
+            width: 10cm;
+            top: 1.5cm;
+            height: 27cm;
+            padding: 0.125cm;
+        {#border:1px dotted silver;#}
         }
         @frame col_right {
-          right: 0.4cm;
-          width: 10cm;
-          top: 1.5cm;
-          height: 27cm;
-          padding:0.125cm;
-          border:1px dotted silver;
+        right: 0.4cm;
+        width: 10cm;
+        top: 1.5cm;
+        height: 27cm;
+        padding:0.125cm;
+        {#border:1px dotted silver;#}
         }
         @frame header_frame {
-          -pdf-frame-content: header_content;
-          right: 0.4cm;
-          width: 1cm;
-          top: 0.5cm;
-          height: 1cm;
-          text-align:right;
-          border:1px dotted silver;
+        -pdf-frame-content:header_content;
+        right: 0.4cm;
+        width: 1cm;
+        top: 0.5cm;
+        height: 1cm;
+        text-align:right;
+
         }
         @frame footer_frame {
-          -pdf-frame-content: footer_content;
-          left:0.4cm;
-          width:20cm;
-          right:0.4cm;
-          bottom:0.6cm;
-          height: 0.5cm;
+        -pdf-frame-content:footer_content;
+        left:0.4cm;
+        width:20cm;
+        right:0.4cm;
+        bottom:0.6cm;
+        height: 0.5cm;
         }
 
 
-      }
+        }
 
-      body{
-        padding:0;
-        margin:0;
-        line-height: 0.9em;
-        font-family: Text;
-        font-height:9pt;
-      }
+        body {
+            padding: 0;
+            margin: 0;
+            line-height: 0.9em;
+            font-family: Text;
+            font-height: 10pt;
+        }
 
-      #footer_content{
-        font-size:9pt;
-        text-align:center;
-        font-weight: bold;
-        font-family: Text;
-      }
+        #footer_content {
+            font-size: 9pt;
+            text-align: center;
+            font-weight: bold;
+            font-family: Text;
+        }
 
-      .info {
-        padding:0;
-        margin:0;
-        font-size:9pt;
-        margin-bottom: 0.8em;
-        font-family: Text;
-      }
+        .info {
+            padding: 0;
+            margin: 0;
+            font-size: 9pt;
+            margin-bottom: 0.8em;
+            font-family: Text;
+        }
 
-      .info th{
-        text-align:left;
-        margin-right:1ex;
-        font-family: Text;
-      }
+        .info th {
+            text-align: left;
+            margin-right: 1ex;
+            font-family: Text;
+        }
 
-      h1, h2, h3, h4, h5, h6{
-        font-family:Title;
-      }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: Title;
+            margin:0;
+            padding:0
+        }
 
-      h1{
-        font-size:20pt;
-      }
+        h1 {
+            font-size: 28pt;
 
-      h2{
-        font-size:18pt;
-        text-align:center;
+        }
 
-      }
+        h2 {
+            font-size: 24pt;
+            text-align: left;
 
-      h3{
-        font-size:16pt;
-        margin:0;
-        padding:0;
-      }
+        }
 
-      h4{
-        font-size:14pt;
-        margin:0;
-        padding:0;
-      }
+        h3 {
+            font-size: 18pt;
+            margin: 0;
+            padding: 0;
+        }
 
-      h5{
-        display:inline-block;
-        width:100%;
+        h4 {
+            font-size: 16pt;
+            color: #204030;
+            margin: 0;
+            padding: 0;
+        }
 
-        font-size:12pt;
-        color:#806080;
-        padding:0;
-        margin:0;
-        border-bottom:1px solid silver;
-      }
-
-      h6{
-        display:inline-block;
-        width:100%;
-
-        font-size:10pt;
-        color:#806080;
-        padding:0;
-        margin:0;
-      }
+        h5 {
+            font-size: 14pt;
+            color: #203040;
+            padding:0;
+            margin:0;
+        }
 
 
-      code{
-        font-family:'Roster';
-        font-size:9pt;
-        text-indent:0;
-        margin:0;
-        padding:0.05cm;
-        margin-top:0.8em;
-        margin-bottom:0.8em;
-        line-height:0.9em;
-        display:block;
-      }
+        h6 {
+            font-size: 12pt;
+            color: #304020;
+            padding:0;
+            margin:0;
+            line-height:0.5em;
+        }
 
-      code b{
-        font-variant: small-caps;
-      }
 
-      p{
-        font-family: Text;
-        font-size:9pt;
-        text-align:justify;
-        padding:0;
-        margin:0;
-        display:inline-block;
-        width:100%;
-        border:1px dotted #C030C0;
-      }
+        code {
+            font-family: 'Roster';
+            font-size: 9pt;
+            text-indent: 0;
+            margin: 0cm;
+            padding: 0.05cm;
+            margin-top: 0.8em;
+            margin-bottom: 0.8em;
+            line-height: 0.9em;
+            display: block;
+        }
 
-      .small{
-        font-size:12pt;
-        font-family: Text;
-      }
+        code b {
+            font-variant: small-caps;
+        }
 
-      blockquote{
-        font-family:Text;
-        font-size:9pt;
-        line-height:0.97em;
-      }
-
-      .embedded_link{
-        font-family: Text;
-        font-weight:200;
-        color:#601060;
-      }
-
-      /*strong{*/
-      /*  color:#802080;*/
-      /*}*/
-
-      /*em{*/
-      /*  color:#804080;*/
-      /*}*/
-
-      ul, li{
-        font-family:Text;
-        font-size:9pt;
-      }
+        p {
+            font-family: Text;
+            font-size: 10pt;
+            text-align: justify;
+            padding: 0;
+            margin: 0;
 
 
 
-     </style>
-    </head>
-    <body>
-      {% block article %}
-      {% endblock article %}
-    </body>
+            {#border: 1px dashed #CCC;#}
+            {#border-radius:3px;#}
+
+        }
+
+        .small {
+            font-size: 0.8em;
+            font-family: Text;
+        }
+
+        blockquote {
+            font-family: Text;
+            font-size: 9pt;
+            line-height: 0.97em;
+        }
+
+        .embedded_link {
+            font-family: Text;
+            font-weight: 200;
+            color: #601060;
+        }
+
+        /*strong{*/
+        /*  color:#802080;*/
+        /*}*/
+
+        /*em{*/
+        /*  color:#804080;*/
+        /*}*/
+
+        ul, li {
+            font-family: Text;
+            font-size: 10pt;
+        }
+
+
+    </style>
+</head>
+<body>
+{% block article %}
+{% endblock article %}
+</body>
 </html>

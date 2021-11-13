@@ -41,11 +41,6 @@ BLOKES = {
     'others': ['06-neutral']
 }
 
-ARCHIVE_LEVEL = {
-    ('NON', 'None'),
-    ('WKS', 'Workshop'),
-    ('ARK', 'Archive'),
-}
 
 
 # def json_default(value):
@@ -119,7 +114,7 @@ class Character(Combattant):
     gm_shortcuts = models.TextField(default='', blank=True)
     gm_shortcuts_pdf = models.TextField(default='', blank=True)
     team = models.CharField(max_length=128, choices=DRAMA_SEATS, default='06-neutral', blank=True)
-    archive_level = models.CharField(max_length=5, choices=ARCHIVE_LEVEL, default='NON', blank=True)
+
     OCC_LVL = models.PositiveIntegerField(default=0)
     OCC_DRK = models.PositiveIntegerField(default=0)
     occult_fire_power = models.PositiveIntegerField(default=0, blank=True)
@@ -450,9 +445,12 @@ class Character(Combattant):
 
     def fix(self, conf=None):
         super().fix(conf)
-        """ Check / calculate other characteristics """
-
-        if not conf:
+        from collector.models.profile import Profile
+        profiles = Profile.objects.all()
+        for p in profiles:
+            if p.main_character == self:
+                self.player = p.user.username
+        if conf is None:
             if self.birthdate < 1000:
                 self.birthdate = 5017 - self.birthdate
                 self.age = 5017 - self.birthdate

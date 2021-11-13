@@ -14,9 +14,9 @@ class Profile(models.Model):
     main_character = models.ForeignKey(Character, on_delete=models.SET_NULL, null=True, blank=True)
     main_epic = models.ForeignKey(Epic, on_delete=models.SET_NULL, null=True, blank=True)
 
+
     @property
     def masterize(self):
-
         all = Campaign.objects.filter(gm=self.user)
         list = []
         for x in all:
@@ -25,12 +25,8 @@ class Profile(models.Model):
 
     @property
     def is_gamemaster(self):
-        from collector.utils.basic import get_current_config
-        campaign = get_current_config()
-        is_gm = False
-        is_gm = campaign.gm == self.user
-        return is_gm
-
+        campaigns = Campaign.objects.filter(gm=self.user)
+        return len(campaigns)>0
 
     def __str__(self):
         return f'{self.user.username.title()} Profile'
@@ -41,6 +37,6 @@ class Profile(models.Model):
 
 
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ['name', 'user', 'masterize', 'main_character', 'main_epic']
+    list_display = ['name', 'user', 'is_gamemaster', 'masterize', 'main_character', 'main_epic']
     order_by = ['main_epic', '-main_character']
     list_filter = ['main_epic']

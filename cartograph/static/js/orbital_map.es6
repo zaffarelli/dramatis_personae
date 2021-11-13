@@ -1,18 +1,7 @@
-/*
- ╔╦╗╔═╗  ╔═╗┌─┐┬  ┬  ┌─┐┌─┐┌┬┐┌─┐┬─┐
-  ║║╠═╝  ║  │ ││  │  ├┤ │   │ │ │├┬┘
- ═╩╝╩    ╚═╝└─┘┴─┘┴─┘└─┘└─┘ ┴ └─┘┴└─
-*/
-
-// let d3.selection.prototype.bringElementAsTopLayer = function() {
-//     return this.each(function() {
-//         this.parentNode.appendChild(this);
-//     });
-// };
-
 class OrbitalMap {
-    constructor(data) {
+    constructor(data, parent) {
         let me = this;
+        this.parent = parent;
         me.init(data);
     }
 
@@ -36,7 +25,7 @@ class OrbitalMap {
         me.flatten_factor = 5;
         me.zoom_val = (me.data.zoom_val > 0 ? me.data.zoom_val : 8);
         me.zoom_factor = (me.data.zoom_factor > 0 ? me.data.zoom_factor : 10);
-        me.zoom_color = "#FC8"
+        me.zoom_color = "#545"
         me.design = {
             "size": {
                 "Sun": 5,
@@ -83,8 +72,10 @@ class OrbitalMap {
         me.size = 60;
         me.width = me.size * 30;
         me.height = me.size * 20;
+        me.h = 1200;
+        me.w = 1900;
         me.radius = 3 * me.width / 4;
-        me.era = 5018;
+        me.era = 5021;
         me.ox = me.width / me.size / 2;
         me.oy = me.height / me.size / 2;
         me.step_x = me.size;
@@ -99,33 +90,27 @@ class OrbitalMap {
         me.radiused = d3.scaleLinear()
             .domain([0, 100])
             .range([0, me.radius]);
-        me.translateAlong = function() {
-            return function(d, i, a) {
-                return function(t) {
-                    let t_real = t;
-                    if (t >= d.azimut){
-                        t_real = + d.azimut;
-                    }
+        me.translateAlong = function (path) {
 
-                    let t_angle = (2 * Math.PI) * t_real ;//* d.speed;
+            return function (d, i, a) {
+                return function (t) {
+                    let t_real = t;
+                    if (t >= d.azimut) {
+                        t_real = d.azimut;
+                    }
+                    let t_angle = (2 * Math.PI) * t_real * d.speed;
                     let t_x = (me.zoom_check(d.AU) ? me.apply_zoom(d.AU) : d.AU) * Math.cos(t_angle);
                     let t_y = (me.zoom_check(d.AU) ? me.apply_zoom(d.AU) : d.AU) * Math.sin(t_angle);
                     return "translate(" + me.radiused(t_x) + "," + me.radiused(t_y) / me.flatten_factor + ")";
                 }
             }
         }
-        _.forEach(me.data.planets, function(e, i) {
+        _.forEach(me.data.planets, function (e, i) {
             e.id = i;
         })
-
-
-
-
-
-
     }
 
-    buildGradients(){
+    buildGradients() {
         let me = this;
         me.gasGiantGradient = me.svg.append("svg:defs")
             .append("svg:linearGradient")
@@ -200,7 +185,7 @@ class OrbitalMap {
         let me = this;
 
 
-        me.layout.append('line')
+        me.svg.append('line')
             .attr('x1', 0)
             .attr('x2', 0)
             .attr('y1', -me.step_y * 5)
@@ -211,26 +196,26 @@ class OrbitalMap {
             .style("stroke-dasharray", "7 5")
             .style("opacity", 0.5);
 
-        me.layout.append('ellipse')
+        me.svg.append('ellipse')
             .attr("cx", 0)
             .attr("cy", 0)
-            .attr("rx", function(d) {
+            .attr("rx", function (d) {
                 return me.radiused(me.zoom_val);
             })
-            .attr("ry", function(d) {
+            .attr("ry", function (d) {
                 return me.radiused(me.zoom_val) / me.flatten_factor;
             })
-            .style("fill", "#333    ")
+            .style("fill", "#4CF")
             .style("stroke", me.zoom_color)
-            .style("opacity", 0.5);
+            .style("opacity", 0.2);
 
-        me.layout.append('ellipse')
+        me.svg.append('ellipse')
             .attr("cx", 0)
             .attr("cy", 0)
-            .attr("rx", function(d) {
+            .attr("rx", function (d) {
                 return me.radiused(50);
             })
-            .attr("ry", function(d) {
+            .attr("ry", function (d) {
                 return me.radiused(50) / me.flatten_factor;
             })
             .style("fill", "none")
@@ -241,20 +226,20 @@ class OrbitalMap {
     }
 
 
-    drawOrbits(){
+    drawOrbits() {
         let me = this;
         // Planetary orbit
         me.orbital_group.append('ellipse')
             .attr("cx", 0)
             .attr("cy", 0)
-            .attr("rx", function(d) {
+            .attr("rx", function (d) {
                 return me.radiused((me.zoom_check(d.AU) ? me.apply_zoom(d.AU) : d.AU));
             })
-            .attr("ry", function(d) {
+            .attr("ry", function (d) {
                 return me.radiused((me.zoom_check(d.AU) ? me.apply_zoom(d.AU) : d.AU)) / me.flatten_factor;
             })
-            .style("stroke", function(d) {
-                let stroke = "#FEF"
+            .style("stroke", function (d) {
+                let stroke = "#444"
                 if (me.zoom_check(d.AU)) {
                     stroke = me.zoom_color;
                 }
@@ -263,20 +248,20 @@ class OrbitalMap {
                 }
                 return stroke;
             })
-            .style("stroke-width", function(d) {
+            .style("stroke-width", function (d) {
                 if (d.type == 'Asteroids Belt') {
-                    return d.size+"pt";
+                    return d.size + "pt";
                 }
                 return "0.5pt";
             })
-            .style("stroke-dasharray", function(d) {
+            .style("stroke-dasharray", function (d) {
                 if (d.type == 'Asteroids Belt') {
                     return "8 1";
                 }
                 return "8 1";
             })
             .style("fill", "none")
-            .style("opacity", function(d) {
+            .style("opacity", function (d) {
                 if (d.type == 'Asteroids Belt') {
                     return 0.5;
                 }
@@ -291,11 +276,11 @@ class OrbitalMap {
         let me = this;
         // planet drawing
         me.item = me.orbital_group.append('g')
-            .attr('id', function(d) {
+            .attr('id', function (d) {
                 return "planet_" + d.id
             })
             .attr('class', "planetball")
-            .attr("transform", function(d) {
+            .attr("transform", function (d) {
                 let t = "";
                 t += " translate(" + me.radiused((me.zoom_check(d.AU) ? me.apply_zoom(d.AU) : d.AU)) + ",0)"
                 return t;
@@ -303,7 +288,7 @@ class OrbitalMap {
 
         // Draw sun shards
         me.item.append("path")
-            .attr("d", function(d) {
+            .attr("d", function (d) {
                 let s = 16 * 5;
                 let m = s / 10;
                 let x = m * 4;
@@ -326,16 +311,16 @@ class OrbitalMap {
                 str += " Z"
                 return str;
             })
-            .style("fill", function(d) {
+            .style("fill", function (d) {
                 let tone = d.tone;
                 return tone;
             })
             .style("stroke-width", "1pt")
-            .style("stroke", function(d) {
+            .style("stroke", function (d) {
                 let s = d.tone;
                 return s;
             })
-            .attr("opacity", function(d) {
+            .attr("opacity", function (d) {
                 if (d.type == "Sun") {
                     return 0.15;
                 }
@@ -345,41 +330,42 @@ class OrbitalMap {
 
         // Rings
         me.item.append("ellipse")
-            .attr("transform", function(d) {
+            .attr("transform", function (d) {
                 let t = "";
                 let tilt = d.tilt;
-                if (d.rings){
-                    tilt -= d.rings.split("_")[0]*3;
+                if (d.rings) {
+                    tilt -= d.rings.split("_")[0] * 3;
                 }
                 t += " rotate(" + tilt + ")"
                 return t;
             })
             .attr("cx", 0)
             .attr("cy", 0)
-            .attr("rx", function(d) {
+            .attr("rx", function (d) {
                 let rx = 0;
-                if (d.rings){
-                    rx = d.rings.split("_")[1]*5;
+                if (d.rings) {
+                    rx = d.rings.split("_")[1] * 5;
                 }
                 return rx;
             })
-            .attr("ry", function(d) {
-                let ry =0;
-                if (d.rings){
-                    ry = ((d.rings.split("_")[1]*4))/(me.flatten_factor*1.5);
+            .attr("ry", function (d) {
+                let ry = 0;
+                if (d.rings) {
+                    ry = ((d.rings.split("_")[1] * 4)) / (me.flatten_factor * 1.5);
                 }
                 return ry;
             })
             .style("stroke", d => d.tone)
-            .style("stroke-width",function(d){
-                if (d.rings){
-                    return "0."+d.rings.split("_")[2]+"pt";
+            .style("stroke-width", function (d) {
+                if (d.rings) {
+                    console.log(((d.rings.split("_")[2]) / 10) + "pt")
+                    return ((d.rings.split("_")[2]) / 10) + "pt";
                 }
                 return 0;
             })
             .style("fill", "none")
-            .attr('opacity', function(d){
-                if (d.rings){
+            .attr('opacity', function (d) {
+                if (d.rings) {
                     return 0.90;
                 }
                 return 0;
@@ -388,14 +374,14 @@ class OrbitalMap {
 
         // Draw planet ellipse or circle
         me.item.append("ellipse")
-            .attr("transform", function(d) {
+            .attr("transform", function (d) {
                 let t = "";
                 t += " rotate(" + d.tilt + ")"
                 return t;
             })
             .attr("cx", 0)
             .attr("cy", 0)
-            .attr("rx", function(d) {
+            .attr("rx", function (d) {
                 let rx = d.size;
                 if (d.type == 'Jumpgate') {
                     rx = 6;
@@ -403,14 +389,14 @@ class OrbitalMap {
 
                 return rx;
             })
-            .attr("ry", function(d) {
+            .attr("ry", function (d) {
                 let ry = d.size;
                 if (d.type == 'Jumpgate') {
                     ry = 9;
                 }
                 return ry;
             })
-            .style("fill", function(d) {
+            .style("fill", function (d) {
                 let tone = d.tone;
                 if (d.type == 'Jumpgate') {
                     tone = 'None';
@@ -427,18 +413,18 @@ class OrbitalMap {
 
                 return tone;
             })
-            .style("stroke-width", function(d) {
+            .style("stroke-width", function (d) {
                 let sw = "1pt";
                 if (d.type == 'Jumpgate') {
                     sw = '3pt';
                 }
                 return sw;
             })
-            .style("stroke", function(d) {
+            .style("stroke", function (d) {
                 let stroke = me.design.stroke[d.type];
                 return stroke;
             })
-            .attr("opacity", function(d) {
+            .attr("opacity", function (d) {
                 if ((d.type == "Space Station") | (d.type == "Asteroids Belt") | (d.type == "Allied Forces")) {
                     return 0.0;
                 }
@@ -449,21 +435,20 @@ class OrbitalMap {
             });
 
 
-
         // Draw icon or ships
         me.item.append("path")
-            .attr("transform", function(d) {
+            .attr("transform", function (d) {
                 let t = "";
                 t += " rotate(" + d.tilt + ")"
                 return t;
             })
 
-            .attr("d", function(d) {
+            .attr("d", function (d) {
                 let s = 7;
                 let str = "M -" + s + " 0 L 0 " + s + ", " + s + " 0, 0 -" + s + ", -" + s + " 0  Z"
                 return str;
             })
-            .style("fill", function(d) {
+            .style("fill", function (d) {
                 let tone = d.tone;
                 if (d.type == 'Jumpgate') {
                     tone = 'None';
@@ -473,18 +458,18 @@ class OrbitalMap {
                 }
                 return tone;
             })
-            .style("stroke-width", function(d) {
+            .style("stroke-width", function (d) {
                 let sw = "1pt";
                 if (d.type == 'Jumpgate') {
                     sw = '3pt';
                 }
                 return sw;
             })
-            .style("stroke", function(d) {
+            .style("stroke", function (d) {
                 let s = me.design.stroke[d.type];
                 return s;
             })
-            .attr("opacity", function(d) {
+            .attr("opacity", function (d) {
                 if (d.type == "Space Station") {
                     return 1;
                 }
@@ -493,22 +478,22 @@ class OrbitalMap {
 
         // Flag
         me.item.append("path")
-            .attr("transform", function(d) {
+            .attr("transform", function (d) {
                 let t = "";
                 t += " rotate(" + d.tilt + ")"
                 return t;
             })
-            .attr("d", function(d) {
+            .attr("d", function (d) {
                 let str = "M -16 -16 h 12 v 9 h -12 Z"
                 return str;
             })
-            .style("fill", function(d) {
+            .style("fill", function (d) {
                 let tone = d.tone;
                 return tone;
             })
             .style("stroke-width", "0.25pt")
             .style("stroke", "#FFF")
-            .attr("opacity", function(d) {
+            .attr("opacity", function (d) {
                 if ((d.type == "Space Station") | (d.type == "Allied Forces")) {
                     return 1;
                 }
@@ -517,7 +502,7 @@ class OrbitalMap {
 
         // Army
         me.item.append("path")
-            .attr("d", function(d) {
+            .attr("d", function (d) {
                 let ship = "m 4 0 l 2 1, -1 2, -3 2, 1 -2 h -1 v -1 l -2 1, 2 -2, 2 -1 "
                 let str = "M 0 0 " + ship;
                 str += "M 0 6 " + ship;
@@ -536,20 +521,28 @@ class OrbitalMap {
             .style("fill", "#DDD")
             .style("stroke-width", "0.1pt")
             .style("stroke", "#C8C")
-            .attr("opacity", function(d) {
+            .attr("opacity", function (d) {
                 if (d.type == "Allied Forces") {
                     return 0.75;
                 }
                 return 0.0;
             });
 
-        me.item.transition()
-            .duration(5000)
-            .ease(d3.easeLinear)
-            .attrTween("transform", me.translateAlong());
+        me.transition();
 
 
     }
+
+    transition() {
+        let me = this
+        me.item.transition()
+            .duration(20000)
+            .ease(d3.easeLinear)
+            .attrTween("transform", me.translateAlong())
+            // .each("end", this.transition)
+        ;
+    }
+
 
     drawLegend() {
         let me = this;
@@ -590,31 +583,31 @@ class OrbitalMap {
         // Square links for interaction
         me.links = me.planets
             .append("g")
-            .on("mouseover", function(d) {
+            .on("mouseover", function (e, d) {
                 d3.selectAll(".planet_text_" + d.id).style("opacity", 1.0)
                 d3.selectAll(".planet_panel_" + d.id).style("opacity", 1.0)
             })
-            .on("mouseout", function(d) {
+            .on("mouseout", function (e, d) {
                 d3.selectAll(".planet_text_" + d.id).style("opacity", 0.0)
                 d3.selectAll(".planet_panel_" + d.id).style("opacity", 0)
             });
 
         me.links.append("rect")
-            .attr("x", function(d) {
+            .attr("x", function (d) {
                 return d.id * 26 - 13 * me.step_x;
             })
             .attr("y", -2.5 * me.step_y)
             .attr("width", 20)
             .attr("height", 20)
             .style("stroke", "#888")
-            .style("fill", function(d) {
+            .style("fill", function (d) {
                 return d.tone
             })
             .attr("opacity", 0.8);
         me.links.append("text")
-            .attr("dx","1ex")
-            .attr("dy","1em")
-            .attr("x", function(d) {
+            .attr("dx", "1ex")
+            .attr("dy", "1em")
+            .attr("x", function (d) {
                 return d.id * 26 - 13 * me.step_x;
             })
             .attr("y", -2.15 * me.step_y)
@@ -624,22 +617,22 @@ class OrbitalMap {
             .style("font-size", "8pt")
             .style("font-family", "VL Gothic")
             .style("text-anchor", "start")
-            .text(function(d) {
+            .text(function (d) {
                 return d.type[0].toUpperCase();
             })
     }
 
-    drawPanels(){
+    drawPanels() {
         let me = this;
         // Display panel
         me.item.append("path")
-            .attr("transform", function(d) {
+            .attr("transform", function (d) {
                 return "rotate(" + d.tilt + ")"
             })
-            .attr('class', function(d) {
+            .attr('class', function (d) {
                 return "planet_panel_" + d.id;
             })
-            .attr("d", function(d) {
+            .attr("d", function (d) {
                 let str = "M -5 -10 l -20 -15 h -180 v -80 h 180 v 55 v 15  Z"
                 return str;
             })
@@ -649,12 +642,12 @@ class OrbitalMap {
             .attr("opacity", 0);
 
         me.labels = me.item.append('g')
-            .attr("transform", function(d) {
+            .attr("transform", function (d) {
                 return "rotate(" + (d.tilt) + ")";
             });
 
         me.labels.append('text')
-            .attr('class', function(d) {
+            .attr('class', function (d) {
                 return "planet_text_" + d.id
             })
             .attr("dx", -30)
@@ -665,11 +658,11 @@ class OrbitalMap {
             .style("font-size", "10pt")
             .style("font-family", "VL Gothic")
             .style("text-anchor", "end")
-            .text(function(d) {
+            .text(function (d) {
                 return d.name;
             })
         me.labels.append('text')
-            .attr('class', function(d) {
+            .attr('class', function (d) {
                 return "planet_text_" + d.id
             })
             .attr("dx", -30)
@@ -680,11 +673,11 @@ class OrbitalMap {
             .style("font-size", "10pt")
             .style("font-family", "VL Gothic")
             .style("text-anchor", "end")
-            .text(function(d) {
+            .text(function (d) {
                 return d.AU + " AU (" + d.type + ")";
             })
         me.labels.append('text')
-            .attr('class', function(d) {
+            .attr('class', function (d) {
                 return "planet_text_" + d.id
             })
             .attr("dx", -30)
@@ -695,14 +688,14 @@ class OrbitalMap {
             .style("font-size", "10pt")
             .style("font-family", "VL Gothic")
             .style("text-anchor", "end")
-            .text(function(d) {
-                if (d.type=="Sun"){
-                    return "Zoom (Factor:"+me.data.zoom_factor +" Value:"+ me.data.zoom_val+")";
+            .text(function (d) {
+                if (d.type == "Sun") {
+                    return "Zoom (Factor:" + me.data.zoom_factor + " Value:" + me.data.zoom_val + ")";
                 }
                 return d.moon;
             })
         me.labels.append('text')
-            .attr('class', function(d) {
+            .attr('class', function (d) {
                 return "planet_text_" + d.id
             })
             .attr("dx", -30)
@@ -713,7 +706,7 @@ class OrbitalMap {
             .style("font-size", "10pt")
             .style("font-family", "VL Gothic")
             .style("text-anchor", "end")
-            .text(function(d) {
+            .text(function (d) {
                 return d.description;
             })
 
@@ -723,50 +716,69 @@ class OrbitalMap {
     perform() {
         let me = this;
         // Prepare SVG Layout
-        me.svg = d3.select("div.jumpweb")
-            .append('svg')
-            .attr("width", me.width * 1.5)
-            .attr("height", me.height * 2)
-            .style("background", "transparent")
-            .call(d3.zoom().on("zoom", function() {
-                me.svg.attr("transform", d3.event.transform)
-            }))
+        $(me.parent).css("padding", 0);
+        d3.select(me.parent).selectAll("svg").remove();
+        me.vis = d3.select(me.parent).append("svg")
+            .attr("viewBox", "0 0 " + me.w + " " + me.h)
+            .attr("width", me.w)
+            .attr("height", me.h)
+        ;
+        me.svg = me.vis.append("g")
+            .attr("class", "all")
+            .attr('transform', function (d) {
+                return "translate(" + (8 * me.width / 16) + "," + (4 * me.height / 8) + ")";
+            })
             .append('g');
+        ;
+
 
         me.buildGradients();
 
-        me.layout = me.svg.append('g')
-            .attr('class', 'suns')
-            .attr("transform", function(d) {
-                let trans = "translate("
-                trans += me.ox * me.step_x;
-                trans += ","
-                trans += me.oy * me.step_y;
-                trans += ")"
-                return trans;
-            });
+        me.svg.append('rect')
+            .attr('x', -me.w / 2)
+            .attr('y', -me.h / 2)
+            .attr('width', me.w)
+            .attr('height', me.h)
+            .style("fill", "#110011")
+            .style("fill-stroke", 1)
+            .style("opacity", 0.5);
+
 
         // Planets parsing
-        me.planets = me.layout.append('g')
+        me.planets = me.svg.append('g')
             .attr("class", "planet")
             .selectAll("planet")
             .data(me.data.planets).enter();
 
         me.orbital_group = me.planets
             .append('g')
-            .attr("transform", function(d) {
+            .attr("transform", function (d) {
                 let t = "";
                 t += "translate(0," + (me.zoom_check(d.AU) ? -me.step_y * 5 : 0) + ") "
                 t += "rotate(" + -d.tilt + ")"
                 return t;
             });
 
-        me.legend = me.layout.append('g');
+        me.legend = me.svg.append('g');
         me.drawLayout();
         me.drawOrbits();
         me.drawPlanets();
         me.drawLegend();
-        me.drawPanels();
+
         me.planets.exit().remove();
+        me.drawPanels();
+        me.zoomActivate();
     }
+
+    zoomActivate() {
+        let me = this;
+        me.zoom = d3.zoom()
+            .scaleExtent([0.25, 4])
+            .on('zoom', function (event) {
+                me.svg.attr('transform', event.transform)
+            });
+        me.vis.call(me.zoom);
+    }
+
+
 }

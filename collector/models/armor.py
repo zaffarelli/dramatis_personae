@@ -39,6 +39,7 @@ class ArmorRef(models.Model):
         jstr = json.dumps(self, default=json_default, sort_keys=True, indent=4)
         return jstr
 
+
 class Armor(models.Model):
     character = models.ForeignKey(Character, on_delete=models.CASCADE)
     armor_ref = models.ForeignKey(ArmorRef, on_delete=models.CASCADE)

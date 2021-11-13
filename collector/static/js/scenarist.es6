@@ -5,7 +5,6 @@
 */
 class Scenarist{
     constructor(){
-
     }
 
     registerStory(x){
@@ -25,7 +24,7 @@ class Scenarist{
                     if (children != undefined){
                       let ch = children.split(";")
                       _.forEach(ch,function(d){
-                        $("#view_"+d).click();
+                          $("#view_"+d).click();
                       })
                     }
                     me.co.prepareAjax();
@@ -33,7 +32,7 @@ class Scenarist{
                     me.registerQuizz();
                 },
                 error: function(answer){
-                    console.log('ooops... on view '+x+' :(');
+                    console.error('ooops... on view '+x+' :(');
                 }
             });
         });
@@ -80,7 +79,7 @@ class Scenarist{
             let form = $(this).closest('form');
             let formdata = form.serialize();
             let urlupdate = x+'s/'+id+'/edit/';
-            console.log(urlupdate);
+            // console.log(urlupdate);
             $.ajax({
                 url: urlupdate,
                 method: 'POST',

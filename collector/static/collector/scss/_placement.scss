@@ -149,12 +149,11 @@
             padding: 3px 0 3px 0;
             margin: 3px 0 3px 0;
             width: 28ex;
-            
             text-align: center;
             background: $fics_darker;
-            
+
+
             & ul.level-2 {
-                display: none;
                 display: inline-block;
                 color: $fics_front;
                 margin: 0;
@@ -162,24 +161,29 @@
                 text-indent: 0;
                 border-radius: 5px;
                 width: 28ex;
+                transition: max-height 8s ease;
+                overflow:hidden;
+                //max-height:1000px;
+
                 
                 & li {
                     color: $fics_front;
                     background: $fics_dark;
-                    padding: 0.2em 1ex 0.2em 1ex;
+                    padding: 0.1em 1ex 0.1em 1ex;
                     text-align: center;
-                    width: 26ex;
+                    width:auto;
                     overflow: hidden;
+                    margin:2px;
                 }
             }
             
-            &:hover {
-                & ul.level-2 {
-                    //transform: skew(5deg,5deg);
-                    display: inline-block;
-                    
-                }
-            }
+            //&:hover {
+            //    & ul.level-2 {
+            //        //transform: skew(5deg,5deg);
+            //        display: inline-block;
+            //
+            //    }
+            //}
             
         }
     }
@@ -193,7 +197,7 @@
     background: transparent;
     border-radius: 3px;
     border: 1px solid $fics_light;
-    padding: 1ex 0 1ex 0;
+    padding: 0.5ex 0 0.5ex 0;
     margin: 2px;
     width: 24ex;
     cursor: pointer;
@@ -226,7 +230,7 @@
     }
 }
 
-.menu-item, .slug-item, .slug-page-item {
+.menu-button{
     display: block;
     //background: transparent;
     color: $fics_front;
@@ -671,4 +675,22 @@ div#keywords {
             }
         }
     }
+}
+
+div#area_close{
+    width:1.2em;
+    height:1.2em;
+    position:fixed;
+    color:#eee;
+    right:5px;
+    top:5px;
+    bottom:auto;
+    left:auto;
+    z-index:1000000;
+    border:1px solid #ccc;
+    background:#111;
+    font-size:20pt;
+    cursor:pointer;
+    text-align:center;
+    border-radius:3px;
 }

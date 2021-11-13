@@ -1,7 +1,7 @@
 import json
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from collector.forms.user import LoginForm
 from django.contrib import messages
@@ -35,7 +35,8 @@ def do_login(request):
 
 
 def do_profile(request):
-    if request.method == "POST":
+    if request.method == "GET":
+        print('profile')
         main_characters = Character.objects.filter(player=request.user.username.capitalize())
         blokes = Bloke.objects.filter(character__in=main_characters)
         active_blokes = []
@@ -43,15 +44,16 @@ def do_profile(request):
             active_blokes.append(b.npc.rid)
         other_characters = Character.objects.filter(player='')
         for c in other_characters:
-            if  c.rid in active_blokes:
+            if c.rid in active_blokes:
                 c.checked = True
             else:
                 c.checked = False
-        context = {'main_characters':main_characters,'blokes': other_characters, 'code':'test'}
+        context = {'main_characters': main_characters, 'blokes': other_characters, 'code': 'test'}
         template = get_template('collector/profile.html')
         html = template.render(context, request)
         messages.info(request, f'Display {request.user.username.capitalize()} profile.')
-        return HttpResponse(html, content_type='text/html')
+        c2 = {'html': html}
+        return JsonResponse(c2)
     return HttpResponse(status=204)
 
 
@@ -87,13 +89,16 @@ def user_blokes(request, team_type='others'):
 
 
 def user_friends(request):
-    return user_blokes(request,'allies')
+    return user_blokes(request, 'allies')
+
 
 def user_foes(request):
-    return user_blokes(request,'foes')
+    return user_blokes(request, 'foes')
+
 
 def user_others(request):
-    return user_blokes(request,'others')
+    return user_blokes(request, 'others')
+
 
 def user_persystem(request):
     pass

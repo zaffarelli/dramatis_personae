@@ -84,6 +84,7 @@ class Epic(StoryModel):
             d.save()
         self.save()
 
+
 class EpicAdmin(admin.ModelAdmin):
     ordering = ('era', 'title',)
     list_display = ['shortcut', 'era', 'full_id', 'chapter', 'title']
