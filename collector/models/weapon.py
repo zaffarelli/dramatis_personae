@@ -157,7 +157,6 @@ class WeaponRef(models.Model):
         return jstr
 
 
-
 class Weapon(models.Model):
     from collector.models.character import Character
     character = models.ForeignKey(Character, on_delete=models.CASCADE)
@@ -183,7 +182,7 @@ class WeaponRefAdmin(admin.ModelAdmin):
         'availability', 'cost', 'description')
     ordering = ('-category', 'meta_type', 'reference', 'origins', 'damage_class',)
     actions = [refix]
-    list_filter = ['category', 'hidden', 'caliber', 'meta_type', 'origins', 'availability']
+    list_filter = ['category', 'hidden', 'origins', 'caliber', 'meta_type', 'availability']
     search_fields = ['reference', 'origins', 'meta_type']
 
 

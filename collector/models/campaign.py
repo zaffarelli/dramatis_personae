@@ -390,12 +390,12 @@ class Campaign(models.Model):
         #     print(full_data)
         return full_data
 
-    def get_occult_chart(self,occult='Psi'):
+    def get_occult_chart(self, occult='Psi'):
         from collector.models.character import Character
         title = 'Population with Occult powers'
         type = 'radar'
         legend_display = True
-        all = Character.objects.filter(OCC_LVL__gt=0).filter(is_dead=False,occult=occult)
+        all = self.dramatis_personae.filter(OCC_LVL__gt=0).filter(is_dead=False, occult=occult)
         inside_labels = []
         border = []
         firepowers = []
@@ -503,8 +503,23 @@ class Campaign(models.Model):
         jstr = json.dumps(self, default=json_default, sort_keys=True, indent=4)
         return jstr
 
+    @property
+    def dramatis_personae(self):
+        result = []
+        if self.epic:
+            rids = self.epic.get_full_cast()
+            result = self.avatars.filter(rid__in=rids)
+        return result
+
+    @property
+    def population(self):
+        result = 0
+        if self.epic:
+            rids = self.epic.get_full_cast()
+            result = len(rids)
+        return result
 
 
 class CampaignAdmin(admin.ModelAdmin):
     ordering = ['title']
-    list_display = ['__str__', 'title', 'epic', 'is_active', 'smart_code', 'rpgsystem', 'hidden', 'gm']
+    list_display = ['__str__', 'title', 'epic', 'is_active', 'smart_code', 'rpgsystem', 'hidden', 'gm', 'population']

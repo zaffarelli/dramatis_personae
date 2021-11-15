@@ -34,13 +34,14 @@ def index(request):
 def get_list(request, id, slug='none'):
     from collector.utils.basic import get_current_config
     campaign = get_current_config(request)
+    # print(campaign.dramatis_personae)
     if slug == 'none':
         slug = base64.b64encode(slug.encode("utf-8"))
     # print(f'[{slug}]')
     slug = slug.replace('_', '=')
     decs = str(base64.b64decode(slug), "utf-8")
     if decs == 'none':
-        character_items = campaign.avatars.order_by('-ranking', 'full_name').filter(balanced=False, is_dead=False,
+        character_items = campaign.dramatis_personae.order_by('-ranking', 'full_name').filter(balanced=False, is_dead=False,
                                                                                     nameless=False, player='',
                                                                                     archive_level='NON').order_by(
             '-OCC_LVL', '-tod_count')
@@ -76,7 +77,7 @@ def get_list(request, id, slug='none'):
                 character_items.append(character_item)
         messages.info(request, f'New list filter applied: {decs}')
     else:
-        character_items = campaign.avatars.filter(keyword=decs).order_by('team', '-ranking', 'full_name')
+        character_items = campaign.avatars.filter(keyword=decs).order_by('full_name')
         messages.info(request, f'New list filter applied: {decs}')
         if len(character_items) == 0:
             character_items = campaign.open_avatars.filter(rid__contains=decs.lower()).order_by('full_name')

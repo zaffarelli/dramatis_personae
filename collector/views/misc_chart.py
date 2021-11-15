@@ -52,7 +52,7 @@ def get_keywords(request, *args, **kwargs):
     user_profile = request.user.profile
     print(user_profile)
     campaign = get_current_config(request)
-    all = campaign.avatars.order_by('keyword')
+    all = campaign.dramatis_personae.order_by('keyword')
     data = {'keywords':[]}
     edata = {'dramas': []}
     keyword = ''

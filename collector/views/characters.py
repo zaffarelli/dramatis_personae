@@ -76,12 +76,14 @@ def respawn_summary(avatar, context, request):
 def skill_pick(request, avatar, item, offset):
     """ Touching skills to edit them in the view """
     from collector.models.skill import SkillRef
+    from collector.utils.basic import get_current_config
+    campaign = get_current_config(request)
     context = {}
     offset = int(offset) - 50;
     ch = Character.objects.get(pk=avatar)
     skillref = SkillRef.objects.get(pk=item)
     ch.charactercusto.add_or_update_skill(skillref.id, offset)
-    ch.fix()
+    ch.fix(campaign)
     ch.save()
     skill = ch.skill_set.all().filter(skill_ref__id=item).first()
     context["c"] = model_to_dict(ch)
@@ -96,6 +98,8 @@ def skill_pick(request, avatar, item, offset):
 
 def attr_pick(request, avatar, item, offset):
     """ Touching skills to edit them in the view """
+    from collector.utils.basic import get_current_config
+    campaign = get_current_config(request)
     context = {}
     offset = int(offset) - 50;
     ch = Character.objects.get(pk=avatar)
@@ -106,7 +110,7 @@ def attr_pick(request, avatar, item, offset):
         setattr(ch.charactercusto, item, x + offset)
     # print(item)
     info = ("info_" + item.split("_")[1]).lower()
-    ch.fix()
+    ch.fix(campaign)
     ch.save()
     context["c"] = model_to_dict(ch)
     template = get_template('collector/character/character_pa.html')
@@ -122,6 +126,8 @@ def attr_pick(request, avatar, item, offset):
 def customize_skill(request, avatar, item):
     from collector.models.skill import SkillRef, SkillCusto
     from collector.models.character_custo import CharacterCusto
+    from collector.utils.basic import get_current_config
+    campaign = get_current_config(request)
     context = {}
     ch = Character.objects.get(pk=avatar)
     ref = SkillRef.objects.get(pk=item)
@@ -130,7 +136,7 @@ def customize_skill(request, avatar, item):
     new_item.skill_ref = ref
     new_item.value = 1
     new_item.save()
-    ch.fix()
+    ch.fix(campaign)
     ch.save()
     context["c"] = model_to_dict(ch)
     template = get_template('collector/character/character_skills.html')
@@ -149,6 +155,8 @@ def customize_skill(request, avatar, item):
 def customize_bc(request, avatar, item):
     from collector.models.blessing_curse import BlessingCurseRef, BlessingCurseCusto
     from collector.models.character_custo import CharacterCusto
+    from collector.utils.basic import get_current_config
+    campaign = get_current_config(request)
     context = {}
     ch = Character.objects.get(pk=avatar)
     bcr = BlessingCurseRef.objects.get(pk=item)
@@ -156,7 +164,7 @@ def customize_bc(request, avatar, item):
     bcc.character_custo = ch.charactercusto
     bcc.blessing_curse_ref = bcr
     bcc.save()
-    ch.fix()
+    ch.fix(campaign)
     ch.save()
     context["c"] = model_to_dict(ch)
     template = get_template('collector/character/character_bc.html')
@@ -175,6 +183,8 @@ def customize_bc(request, avatar, item):
 def customize_bc_del(request, avatar, item):
     from collector.models.blessing_curse import BlessingCurseRef, BlessingCurseCusto
     from collector.models.character_custo import CharacterCusto
+    from collector.utils.basic import get_current_config
+    campaign = get_current_config(request)
     context = {}
     ch = Character.objects.get(pk=avatar)
     bcr = BlessingCurseRef.objects.get(pk=item)
@@ -186,7 +196,7 @@ def customize_bc_del(request, avatar, item):
     if bcc:
         txt = bcc.blessing_curse_ref.reference
         bcc.delete()
-        ch.fix()
+        ch.fix(campaign)
         ch.save()
         context["c"] = model_to_dict(ch)
         template = get_template('collector/character/character_bc.html')
@@ -210,6 +220,8 @@ def customize_ba(request, avatar, item):
     from collector.models.benefice_affliction import BeneficeAfflictionRef
     from collector.models.character_custo import CharacterCusto
     from collector.models.benefice_affliction import BeneficeAfflictionCusto
+    from collector.utils.basic import get_current_config
+    campaign = get_current_config(request)
     context = {}
     ch = Character.objects.get(pk=avatar)
     bar = BeneficeAfflictionRef.objects.get(pk=item)
@@ -218,7 +230,7 @@ def customize_ba(request, avatar, item):
     bac.benefice_affliction_ref = bar
     bac.description = request.POST["freefield"]
     bac.save()
-    ch.fix()
+    ch.fix(campaign)
     ch.save()
     context["c"] = model_to_dict(ch)
     template = get_template('collector/character/character_ba.html')
@@ -238,6 +250,8 @@ def customize_ba_del(request, avatar, item):
     from collector.models.benefice_affliction import BeneficeAfflictionRef
     from collector.models.character_custo import CharacterCusto
     from collector.models.benefice_affliction import BeneficeAfflictionCusto
+    from collector.utils.basic import get_current_config
+    campaign = get_current_config(request)
     context = {}
     ch = Character.objects.get(pk=avatar)
     bcr = BeneficeAfflictionRef.objects.get(pk=item)
@@ -249,7 +263,7 @@ def customize_ba_del(request, avatar, item):
     if bcc:
         txt = bcc.benefice_affliction_ref.reference
         bcc.delete()
-        ch.fix()
+        ch.fix(campaign)
         ch.save()
         context["c"] = model_to_dict(ch)
         template = get_template('collector/character/character_ba.html')
@@ -271,6 +285,8 @@ def customize_ba_del(request, avatar, item):
 def customize_weapon(request, avatar, item):
     from collector.models.weapon import WeaponRef, WeaponCusto
     from collector.models.character_custo import CharacterCusto
+    from collector.utils.basic import get_current_config
+    campaign = get_current_config(request)
     context = {}
     ch = Character.objects.get(pk=avatar)
     item_ref = WeaponRef.objects.get(pk=item)
@@ -278,7 +294,7 @@ def customize_weapon(request, avatar, item):
     item_custo.character_custo = ch.charactercusto
     item_custo.weapon_ref = item_ref
     item_custo.save()
-    ch.fix()
+    ch.fix(campaign)
     ch.save()
     context["c"] = model_to_dict(ch)
     template = get_template('collector/character/character_weapon.html')
@@ -297,6 +313,8 @@ def customize_weapon(request, avatar, item):
 def customize_weapon_del(request, avatar, item):
     from collector.models.weapon import WeaponRef, WeaponCusto
     from collector.models.character_custo import CharacterCusto
+    from collector.utils.basic import get_current_config
+    campaign = get_current_config(request)
     context = {}
     ch = Character.objects.get(pk=avatar)
     item_ref = WeaponRef.objects.get(pk=item)
@@ -309,7 +327,7 @@ def customize_weapon_del(request, avatar, item):
     if item_found:
         txt = item_found.weapon_ref.reference
         item_found.delete()
-        ch.fix()
+        ch.fix(campaign)
         ch.save()
         context["c"] = model_to_dict(ch)
         template = get_template('collector/character/character_weapon.html')
@@ -330,6 +348,8 @@ def customize_weapon_del(request, avatar, item):
 def customize_armor(request, avatar, item):
     from collector.models.armor import ArmorRef
     from collector.models.character_custo import CharacterCusto
+    from collector.utils.basic import get_current_config
+    campaign = get_current_config(request)
     from collector.models.armor import ArmorCusto
     context = {}
     ch = Character.objects.get(pk=avatar)
@@ -338,7 +358,7 @@ def customize_armor(request, avatar, item):
     item_custo.character_custo = ch.charactercusto
     item_custo.armor_ref = item_ref
     item_custo.save()
-    ch.fix()
+    ch.fix(campaign)
     ch.save()
     context["c"] = model_to_dict(ch)
     template = get_template('collector/character/character_armor.html')
@@ -358,6 +378,8 @@ def customize_armor_del(request, avatar, item):
     from collector.models.armor import ArmorRef
     from collector.models.character_custo import CharacterCusto
     from collector.models.armor import ArmorCusto
+    from collector.utils.basic import get_current_config
+    campaign = get_current_config(request)
     context = {}
     ch = Character.objects.get(pk=avatar)
     item_ref = ArmorRef.objects.get(pk=item)
@@ -370,7 +392,7 @@ def customize_armor_del(request, avatar, item):
     if item_found:
         txt = item_found.armor_ref.reference
         item_found.delete()
-        ch.fix()
+        ch.fix(campaign)
         ch.save()
         context["c"] = model_to_dict(ch)
         template = get_template('collector/character/character_armor.html')
@@ -393,6 +415,8 @@ def customize_shield(request, avatar, item):
     from collector.models.shield import ShieldRef
     from collector.models.character_custo import CharacterCusto
     from collector.models.shield import ShieldCusto
+    from collector.utils.basic import get_current_config
+    campaign = get_current_config(request)
     context = {}
     ch = Character.objects.get(pk=avatar)
     item_ref = ShieldRef.objects.get(pk=item)
@@ -400,7 +424,7 @@ def customize_shield(request, avatar, item):
     item_custo.character_custo = ch.charactercusto
     item_custo.shield_ref = item_ref
     item_custo.save()
-    ch.fix()
+    ch.fix(campaign)
     ch.save()
     context["c"] = model_to_dict(ch)
     template = get_template('collector/character/character_shield.html')
@@ -419,6 +443,8 @@ def customize_shield_del(request, avatar, item):
     from collector.models.shield import ShieldRef
     from collector.models.character_custo import CharacterCusto
     from collector.models.shield import ShieldCusto
+    from collector.utils.basic import get_current_config
+    campaign = get_current_config(request)
     context = {}
     ch = Character.objects.get(pk=avatar)
     item_ref = ShieldRef.objects.get(pk=item)
@@ -431,7 +457,7 @@ def customize_shield_del(request, avatar, item):
     if item_found:
         txt = item_found.shield_ref.reference
         item_found.delete()
-        ch.fix()
+        ch.fix(campaign)
         ch.save()
         context["c"] = model_to_dict(ch)
         template = get_template('collector/character/character_shield.html')
@@ -453,6 +479,8 @@ def customize_shield_del(request, avatar, item):
 def customize_ritual(request, avatar, item):
     from collector.models.ritual import RitualRef, RitualCusto
     from collector.models.character_custo import CharacterCusto
+    from collector.utils.basic import get_current_config
+    campaign = get_current_config(request)
     context = {}
     ch = Character.objects.get(pk=avatar)
     item_ref = RitualRef.objects.get(pk=item)
@@ -460,7 +488,7 @@ def customize_ritual(request, avatar, item):
     item_custo.character_custo = ch.charactercusto
     item_custo.ritual_ref = item_ref
     item_custo.save()
-    ch.fix()
+    ch.fix(campaign)
     ch.save()
     context["c"] = model_to_dict(ch)
     template = get_template('collector/character/character_ritual.html')
@@ -479,6 +507,8 @@ def customize_ritual(request, avatar, item):
 def customize_ritual_del(request, avatar, item):
     from collector.models.ritual import RitualRef, RitualCusto
     from collector.models.character_custo import CharacterCusto
+    from collector.utils.basic import get_current_config
+    campaign = get_current_config(request)
     context = {}
     ch = Character.objects.get(pk=avatar)
     item_ref = RitualRef.objects.get(pk=item)
@@ -491,7 +521,7 @@ def customize_ritual_del(request, avatar, item):
     if item_found:
         txt = item_found.ritual_ref.reference
         item_found.delete()
-        ch.fix()
+        ch.fix(campaign)
         ch.save()
         context["c"] = model_to_dict(ch)
         template = get_template('collector/character/character_ritual.html')

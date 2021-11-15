@@ -1,8 +1,8 @@
-'''
+"""
  ╔╦╗╔═╗  ╔═╗┌─┐┬  ┬  ┌─┐┌─┐┌┬┐┌─┐┬─┐
   ║║╠═╝  ║  │ ││  │  ├┤ │   │ │ │├┬┘
  ═╩╝╩    ╚═╝└─┘┴─┘┴─┘└─┘└─┘ ┴ └─┘┴└─
-'''
+"""
 from colorfield.fields import ColorField
 from django.db import models
 from django.contrib import admin
@@ -21,12 +21,12 @@ ALLIANCE_CATEGORIES = (
     ('other',"Other"),
 )
 
-def json_default(value):
-    import datetime
-    if isinstance(value, datetime.date):
-        return dict(year=value.year, month=value.month, day=value.day)
-    else:
-        return value.__dict__
+# def json_default(value):
+#     import datetime
+#     if isinstance(value, datetime.date):
+#         return dict(year=value.year, month=value.month, day=value.day)
+#     else:
+#         return value.__dict__
 
 class AllianceRef(models.Model):
     class Meta:
@@ -42,7 +42,7 @@ class AllianceRef(models.Model):
     icon_complex = models.CharField(max_length=258, default='', blank=True)
     color_icon_stroke = ColorField(default='#888888')
     color_icon_fill = ColorField(default='#333333')
-
+    common_occult_pathes = models.CharField(max_length=256, default='', blank=True)
 
     def __str__(self):
         return f'{self.reference} ({self.get_category_display()})'
@@ -53,6 +53,6 @@ class AllianceRef(models.Model):
 
 class AllianceRefAdmin(admin.ModelAdmin):
     ordering = ['category', 'reference']
-    list_display = ['reference', 'faction','category', 'color_front', 'color_back','color_highlight']
+    list_display = ['reference', 'faction', 'category', 'common_occult_pathes', 'color_front', 'color_back','color_highlight']
     list_filter = ['category']
     search_fields = ['category']

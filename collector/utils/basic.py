@@ -41,24 +41,26 @@ def write_pdf(template_src, context_dict={}):
     result.close()
 
 
-def get_current_config(request):
+def get_current_config(request=None):
     from collector.models.campaign import Campaign
-
-    if request.user.is_authenticated:
-        if request.user.profile.is_gamemaster:
-            item = Campaign.objects.get(smart_code='bin')
-            items = Campaign.objects.filter(is_active=True)
-            if len(items) == 1:
-                item = items.first()
-            if len(items) > 1:
-                item = Campaign.objects.first()
-        else:
-            if request.user.profile.main_epic:
-                item = Campaign.objects.get(epic__shortcut=request.user.profile.main_epic.shortcut)
-            else:
-                item = Campaign.objects.first()
+    if request is None:
+        item = Campaign.objects.filter(is_active=True).first()
     else:
-        item = Campaign.objects.first()
+        if request.user.is_authenticated:
+            if request.user.profile.is_gamemaster:
+                item = Campaign.objects.get(smart_code='bin')
+                items = Campaign.objects.filter(is_active=True)
+                if len(items) == 1:
+                    item = items.first()
+                if len(items) > 1:
+                    item = Campaign.objects.first()
+            else:
+                if request.user.profile.main_epic:
+                    item = Campaign.objects.get(epic__shortcut=request.user.profile.main_epic.shortcut)
+                else:
+                    item = Campaign.objects.first()
+        else:
+            item = Campaign.objects.first()
     return item
 
 

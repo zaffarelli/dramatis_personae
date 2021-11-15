@@ -11,6 +11,7 @@ from django.contrib import messages
 from optimizer.models.policy import Policy
 import logging
 from datetime import datetime, timedelta
+from collector.utils.basic import get_current_config
 
 logger = logging.getLogger(__name__)
 
@@ -19,17 +20,19 @@ logger = logging.getLogger(__name__)
 def todo():
     from collector.models.character import Character
     from collector.models.tourofduty import TourOfDutyRef
-    to_be_fixed = Character.objects.filter(need_fix=True)
-    to_be_pdfed = Character.objects.filter(need_pdf=True)
-    balanced = Character.objects.filter(balanced=True)
-    all = Character.objects.all()
-    tod_to_be_fixed = TourOfDutyRef.objects.filter(need_fix=True)
-    logger.info(f'Incoming TODO list...')
-    logger.info(f' - Characters to be fixed ..... {len(to_be_fixed)}')
-    logger.info(f' - Characters ready for PDF ... {len(to_be_pdfed)}')
-    logger.info(f' - Characters balanced ........ {len(balanced)}  / {len(all)}')
-    logger.info(f' - ToDs to be fixed ........... {len(tod_to_be_fixed)}')
-    answer = 'Todo'
+    campaign = get_current_config()
+    if campaign:
+        to_be_fixed = campaign.dramatis_personae.filter(need_fix=True)
+        to_be_pdfed = campaign.dramatis_personae.filter(need_pdf=True)
+        balanced = campaign.dramatis_personae.filter(balanced=True)
+        all = campaign.dramatis_personae.all()
+        tod_to_be_fixed = TourOfDutyRef.objects.filter(need_fix=True)
+        logger.info(f'Incoming TODO list... ({campaign.epic})')
+        logger.info(f' - Characters to be fixed ..... {len(to_be_fixed)}')
+        logger.info(f' - Characters ready for PDF ... {len(to_be_pdfed)}')
+        logger.info(f' - Characters balanced ........ {len(balanced)}  / {len(all)}')
+        logger.info(f' - ToDs to be fixed ........... {len(tod_to_be_fixed)}')
+        answer = 'Todo'
     return answer
 
 
@@ -37,7 +40,8 @@ def todo():
 def pdf_check():
     answer = '/!\\ Pdf_check task is idle'
     from collector.models.character import Character
-    all = Character.objects.filter(need_pdf=True)
+    campaign = get_current_config()
+    all = campaign.dramatis_personae.filter(need_pdf=True)
     if len(all):
         c = all.first()
         answer = f'Task: Building PDF for {c.rid}'
@@ -77,16 +81,18 @@ def tod_check():
 
 @shared_task
 def fix_check():
+    campaign = get_current_config()
     answer = '/!\\ Fix_check task is idle.'
     from collector.models.character import Character
-    all = Character.objects.filter(need_fix=True)
+    campaign = get_current_config()
+    all = campaign.dramatis_personae.filter(need_fix=True)
     if len(all):
         c = all.first()
         answer = f'Task: Fixing avatar {c.rid}. {len(all)} remaining.'
         c.fix()
         c.save()
     else:
-        oldest = Character.objects.filter(pub_date__lte = timezone.now() - timedelta(days=14))
+        oldest = campaign.dramatis_personae.filter(pub_date__lte = timezone.now() - timedelta(days=14))
         for c in oldest:
             c.need_fix = True
             logger.debug(f"To be fixed : [{c.full_name}]")

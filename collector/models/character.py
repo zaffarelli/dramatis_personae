@@ -460,6 +460,7 @@ class Character(Combattant):
                 self.age = conf.epic.era - self.birthdate
         self.update_game_parameters()
         self.fencing_league_special()
+        self.occult_special()
         # NPC fix
         if self.use_history_creation:
             self.rebuild_from_lifepath()
@@ -927,28 +928,29 @@ class Character(Combattant):
                 found_armor.armor_ref = ArmorRef.objects.get(reference='Leather Jerkin')
                 found_armor.save()
 
+    def occult_special(self):
         if self.OCC_LVL > 0:
+            from collector.models.ritual import RitualCusto, RitualRef
+            from collector.models.character_custo import CharacterCusto
             pathes = []
             total_ritual_levels = 0
             rituals_per_path = self.ritual_set.all().order_by('ritual_ref__path')
 
-            if self.caste == 'Church':
-                if not len(rituals_per_path):
+            if not len(rituals_per_path):
+                if self.caste == 'Church':
                     self.occult = "Theurgy"
-            else:
-                if not len(rituals_per_path):
+                    main_path = self.alliance_ref.common_occult_pathes.split(', ').first()
+                else:
                     self.occult = "Psi"
                     common_psi_pathes = ['FarHand', 'Psyche', 'Soma', 'Sixth Sense', 'Vis Craft']
-                    import random
-                    from collector.models.ritual import RitualCusto, RitualRef
-                    from collector.models.character_custo import CharacterCusto
-                    main_path = random.choice(common_psi_pathes)
-                    found_custo = CharacterCusto.objects.get(character=self)
-                    for x in range(self.OCC_LVL):
-                        new_power = RitualCusto()
-                        new_power.character_custo = found_custo
-                        new_power.ritual_ref = RitualRef.objects.filter(path=main_path, level=x + 1).first()
-                        new_power.save()
+                import random
+                main_path = random.choice(common_psi_pathes)
+                found_custo = CharacterCusto.objects.get(character=self)
+                for x in range(self.OCC_LVL):
+                    new_power = RitualCusto()
+                    new_power.character_custo = found_custo
+                    new_power.ritual_ref = RitualRef.objects.filter(path=main_path, level=x + 1).first()
+                    new_power.save()
 
             for r in rituals_per_path:
                 if not r.ritual_ref.path in pathes:

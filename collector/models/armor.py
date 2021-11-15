@@ -27,7 +27,7 @@ class ArmorRef(models.Model):
     stopping_power = models.PositiveIntegerField(default=2)
     cost = models.PositiveIntegerField(default=2)
     encumbrance = models.PositiveIntegerField(default=0)
-    meta_type = models.CharField(max_length=64, default='')
+    meta_type = models.CharField(max_length=64, default='', blank=True)
     tech_level = models.PositiveIntegerField(default=3)
     description = models.TextField(max_length=1024, default='', blank=True)
 
