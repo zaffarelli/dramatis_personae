@@ -1,7 +1,5 @@
-{% load fics_pdf_filters %}
-<h6>{{ c.reference }}</h6>
-<p>
-  {{c.value}} {{c.source}}
-  {{c.description}}
-  [ <tt>#{{c.id}}</tt> ]
-</p>
+{% load fics_filters %}
+<h6>{{ c.reference }} [{{ c.value }}]</h6>
+<strong>Category:</strong> {{ c.get_category_display }}<BR/>
+{%  if c.description %}<strong>Description:</strong><p>{{ c.description }}</p><BR/>{% endif %}
+{{ c.source }} [#{{ c.id }}]<BR/>

@@ -3,6 +3,7 @@
 {%load static%}
 
 {% block article %}
+<div class="default">
     <div id="header_content">
         <img src='collector/static/collector/glyph.png' width='0.5cm'>
     </div>
@@ -11,7 +12,11 @@
     </div>
 
 
-<h2>Dramatis Personae References</h2>
+<h1>Dramatis Personae Rules</h1>
+
+<pdf:toc/>
+
+    <h2>References</h2>
 <p>Release Date: <em>{{ date }}</em></p>
 <p>This automatically generated document shows the complete content of the database game content, for in game reference.</p>
 
@@ -37,16 +42,18 @@
     {% endfor %}
 {% endif %}
 
+
+{% if xmelee_weapons.count  %}
 <h3>Weapons</h3>
 <h4>Melee Weapons</h4>
-{% if melee_weapons.count  %}
     {% for w in melee_weapons %}
         {% include "collector/weapon_pdf.html" with c=w %}
     {% endfor %}
 {% endif %}
 
+
+{% if xranged_weapons.count  %}
 <h4>Ranged Weapons</h4>
-{% if ranged_weapons.count  %}
     {% for w in ranged_weapons %}
         {% include "collector/weapon_pdf.html" with c=w %}
     {% endfor %}
@@ -54,7 +61,17 @@
 
 
 <h3>Lifepaths</h3>
-<h4>Racial Lifepath</h4>
+<p>All characters are build in dP around an historical approach: each step gives the characters a certain number of attributes, skills and other points. A few of them are custom steps that allow customization.</p>
+<p>The standard construction of a character is:</p>
+<ul>
+    <li>One Birthright matching to her species (140pts)</li>
+    <li>Upbringing (20pts or in two parts with 15 + 5 pts)</li>
+    <li>Apprenticeship (25 pts)</li>
+    <li>Early Career (48 pts)</li>
+    <li>Some Tours of duty (20 pts each, a begining PC has two of them)</li>
+    <li>Worldly Benefits (7 pts)</li>
+</ul>
+<h4>Racial Lifepath (Birthrights)</h4>
 {% if racial.count  %}
 {% for tod in racial %}
 {% include "collector/tod_pdf.html" with c=tod %}
@@ -100,14 +117,15 @@
 {% endfor %}
 {% endif %}
 
+
+{% if xrituals.count  %}
 <pdf:nextframe>
 <h3>Rituals</h3>
-{% if rituals.count  %}
     {% for r in rituals %}
         {% include "collector/pdf/ritual_pdf.html" with c=r %}
     {% endfor %}
 {% endif %}
 
 
-
+</div>
 {% endblock article %}

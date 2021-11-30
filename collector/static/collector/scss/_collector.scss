@@ -137,8 +137,8 @@ span.info{
     border:1px solid silver;
     border-radius:5px;
     display:none;
-    width:auto;
-    height:auto;
+    width:calc(100% - 10px);
+    height:calc(100% - 10px);
     opacity:1;
     //padding:10px 250px;
     text-align:center;

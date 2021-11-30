@@ -32,6 +32,7 @@ ORBITAL_ITEMS = (
     ('7', 'Hostiles'),
 )
 
+
 class System(models.Model):
     class Meta:
         ordering = ['name']
@@ -68,7 +69,6 @@ class System(models.Model):
         for r in self.jumproads.all():
             all.append(f'{self.name}_{r.name} ')
         return ", ".join(all)
-
 
     @property
     def orbital_map(self):
@@ -124,10 +124,10 @@ class OrbitalItem(models.Model):
             logger.info("[%s] Unable to fix system due to missing system and/or orbital items." % (self.system))
 
 
-
 @receiver(pre_save, sender=OrbitalItem, dispatch_uid='prepare_orbital_data')
 def prepare_orbital_data(sender, instance, **kwargs):
     instance.prepare()
+
 
 @receiver(post_save, sender=OrbitalItem, dispatch_uid='propagate_orbital_data')
 def propagate_orbital_data(sender, instance, **kwargs):
@@ -141,13 +141,14 @@ class OrbitalItemInline(admin.TabularInline):
 
 class SystemAdmin(admin.ModelAdmin):
     ordering = ['name', 'alliance']
-    list_display = ['name', 'alliance', 'discovery', 'sector', 'orbital_map', 'dtj', 'routes', 'routes_list', 'group', 'color', 'x', 'y']
+    list_display = ['name', 'alliance', 'discovery', 'sector', 'orbital_map', 'dtj', 'routes', 'routes_list', 'group',
+                    'color', 'x', 'y']
     inlines = [OrbitalItemInline]
     list_filter = ['group', 'alliance', 'sector']
 
 
 class OrbitalItemAdmin(admin.ModelAdmin):
     ordering = ['system', 'distance', 'name']
-    list_display = ['nameid', 'name', 'category', 'color', 'distance', 'speed', 'tilt', 'size', 'qualifier','rings']
-    list_filter = ['category','system','distance','tilt']
+    list_display = ['nameid', 'name', 'category', 'color', 'distance', 'speed', 'tilt', 'size', 'qualifier', 'rings']
+    list_filter = ['category', 'system', 'distance', 'tilt']
     search_fields = ['name', 'qualifier', 'system']

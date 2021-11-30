@@ -9,44 +9,43 @@ from django.contrib import admin
 from collector.models.character import Character
 from datetime import datetime
 
-
-LIFEPATH_CATEGORY = (
-    ('0', "Birthright"),
-    ('10', "Upbringing"),
-    ('20', "Apprenticeship"),
-    ('30', "Early Career"),
-    ('40', "Tour of Duty"),
-    ('50', "Worldly Benefits"),
-    ('60', "Nameless Kit"),
-    ('70', "Build"),
-    ('80', "Special"),
-)
-
-LIFEPATH_CASTE = (
-    ('Nobility', "Nobility"),
-    ('Church', "Church"),
-    ('Guild', "Guild"),
-    ('Alien', "Alien"),
-    ('Other', "Other"),
-    ('Freefolk', "Freefolk"),
-    ('Think Machine', "Think Machine"),
-    ('Caliphate (PO)', "Kurgan (Planetary Origin)"),
-    ('Caliphate (E)', "Kurgan (Environment)"),
-    ('Caliphate (U)', "Kurgan (Usun)"),
-    ('Barbarian', "Barbarian"),
-    ('Empire', "Empire"),
-    ('Supernatural', "Supernatural"),
-)
+# LIFEPATH_CATEGORY = (
+#     ('0', "Birthright"),
+#     ('10', "Upbringing"),
+#     ('20', "Apprenticeship"),
+#     ('30', "Early Career"),
+#     ('40', "Tour of Duty"),
+#     ('50', "Worldly Benefits"),
+#     ('60', "Nameless Kit"),
+#     ('70', "Build"),
+#     ('80', "Special"),
+# )
+#
+# LIFEPATH_CASTE = (
+#     ('Nobility', "Nobility"),
+#     ('Church', "Church"),
+#     ('Guild', "Guild"),
+#     ('Alien', "Alien"),
+#     ('Other', "Other"),
+#     ('Freefolk', "Freefolk"),
+#     ('Think Machine', "Think Machine"),
+#     ('Caliphate (PO)', "Kurgan (Planetary Origin)"),
+#     ('Caliphate (E)', "Kurgan (Environment)"),
+#     ('Caliphate (U)', "Kurgan (Usun)"),
+#     ('Barbarian', "Barbarian"),
+#     ('Empire', "Empire"),
+#     ('Supernatural', "Supernatural"),
+# )
 
 
 class TourOfDutyRef(models.Model):
     class Meta:
-        ordering = ['category', 'caste','reference']
+        ordering = ['category', 'caste', 'reference']
         verbose_name = "FICS: ToD"
 
     reference = models.CharField(max_length=64, default='')
-    category = models.CharField(max_length=20, choices=LIFEPATH_CATEGORY, default='Tour of Duty')
-    caste = models.CharField(max_length=20, choices=LIFEPATH_CASTE, default='Other')
+    category = models.CharField(max_length=20, choices=fics_references.LIFEPATH_CATEGORY, default='Tour of Duty')
+    caste = models.CharField(max_length=20, choices=fics_references.LIFEPATH_CASTE, default='Other')
     topic = models.CharField(max_length=64, default='', blank=True)
     source = models.CharField(max_length=32, default='FS2CRB', choices=fics_references.SOURCE_REFERENCES)
     is_custom = models.BooleanField(default=False)
@@ -77,7 +76,7 @@ class TourOfDutyRef(models.Model):
     pub_date = models.DateTimeField('Date published', default=datetime.now)
 
     def __str__(self):
-        return f'[{self.value}] {self.reference} ({self.get_category_display()}, {self.get_caste_display()})'
+        return f'[{self.get_category_display()}][{self.value}]  {self.reference} ({self.get_caste_display()})'
 
     def fix(self):
         self.WP = 0
@@ -127,7 +126,7 @@ class TourOfDutyRef(models.Model):
                 texts.append("(%s %+d)" % (ba.benefice_affliction_ref.reference, ba.benefice_affliction_ref.value))
                 self.OP += ba.benefice_affliction_ref.value
             self.description = " ".join(texts)
-            self.value = (self.AP+self.balance_AP) * 3 + (self.OP+self.balance_OP)
+            self.value = (self.AP + self.balance_AP) * 3 + (self.OP + self.balance_OP)
             self.check_value()
         self.need_fix = False
 
@@ -170,8 +169,9 @@ class TourOfDutyRef(models.Model):
     def toJSON(self):
         from collector.utils.basic import json_default
         import json
-        jstr = json.dumps(self, default=json_default, sort_keys=True, indent=4)
+        jstr = json.loads(json.dumps(self, default=json_default, sort_keys=True, indent=4))
         return jstr
+
 
 class TourOfDuty(models.Model):
     class Meta:

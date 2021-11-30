@@ -109,6 +109,11 @@
                 {{form.path}}
             </div>
             <div class="field_wrapper">
+                {{ form.stigma.errors}}
+                <label for="path">Stigma</label>
+                {{form.stigma}}
+            </div>
+            <div class="field_wrapper">
                 {{ form.keyword.errors}}
                 <label for="keyword">Keyword</label>
                 {{form.keyword}}

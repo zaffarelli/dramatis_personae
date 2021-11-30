@@ -1,8 +1,8 @@
-'''
+"""
  ╔╦╗╔═╗  ╔═╗┌─┐┬  ┬  ┌─┐┌─┐┌┬┐┌─┐┬─┐
   ║║╠═╝  ║  │ ││  │  ├┤ │   │ │ │├┬┘
  ═╩╝╩    ╚═╝└─┘┴─┘┴─┘└─┘└─┘ ┴ └─┘┴└─
-'''
+"""
 from django.db import models
 from django.contrib import admin
 from collector.models.character import Character
@@ -25,6 +25,11 @@ class ShieldRef(models.Model):
     def __str__(self):
         return '%s' % (self.reference)
 
+    def toJSON(self):
+        from collector.utils.basic import json_default
+        import json
+        jstr = json.loads(json.dumps(self, default=json_default, sort_keys=True, indent=4))
+        return jstr
 
 class Shield(models.Model):
     character = models.ForeignKey(Character, on_delete=models.CASCADE)

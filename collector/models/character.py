@@ -17,6 +17,7 @@ import itertools
 import logging
 import json
 from colorfield.fields import ColorField
+from operator import itemgetter
 
 logger = logging.getLogger(__name__)
 
@@ -40,7 +41,6 @@ BLOKES = {
     'foes': ['11-foe', '10-enemy', '09-lackey', '08-antagonist', '07-opponent'],
     'others': ['06-neutral']
 }
-
 
 
 # def json_default(value):
@@ -113,6 +113,7 @@ class Character(Combattant):
     score = models.IntegerField(default=0)
     gm_shortcuts = models.TextField(default='', blank=True)
     gm_shortcuts_pdf = models.TextField(default='', blank=True)
+
     team = models.CharField(max_length=128, choices=DRAMA_SEATS, default='06-neutral', blank=True)
 
     OCC_LVL = models.PositiveIntegerField(default=0)
@@ -123,6 +124,7 @@ class Character(Combattant):
     challenge_value = models.IntegerField(default=0)
     todo_list = models.TextField(default='', blank=True)
     path = models.CharField(max_length=256, default='', blank=True)
+    stigma = models.CharField(max_length=256, default='', blank=True)
     use_history_creation = models.BooleanField(default=False)
     use_only_entrance = models.BooleanField(default=False)
     picture = models.CharField(max_length=1024,
@@ -467,14 +469,13 @@ class Character(Combattant):
         else:
             self.rebuild_free_form()
         self.calculate_shortcuts()
-
         self.update_ranking()
         self.race = self.specie.species
 
         if self.PA_BOD != 0:
             if self.height == 0:
                 if "urthish" in self.specie.species.lower():
-                    self.height = 145 + 2.39473 * (self.PA_BOD / 2 + self.PA_STR / 2 + self.PA_CON + 2)
+                    self.height = 150 + 2.39473 * (self.PA_BOD / 2 + self.PA_STR / 2 + self.PA_CON + 2)  # 145
                     if self.gender == 'male':
                         self.weight = self.height / (2.98 - 0.0336 * (self.PA_BOD + self.PA_CON))
                     else:
@@ -505,14 +506,25 @@ class Character(Combattant):
         """ Calculate shortcuts for the avatar skills. A shortcut appears if skill.value>0  """
         shortcuts = []
         shortcuts_pdf = []
+        shortcuts_json = []
+        best_shortcuts_pdf = []
         skills = self.skill_set.all()
         for s in skills:
             sc, pdf = fs_fics7.check_gm_shortcuts(self, s)
             if sc != '':
                 shortcuts.append(sc)
-                shortcuts_pdf.append("{:s}:{:s} ({:d})".format(pdf['rationale'], pdf['label'], pdf['score']))
+                shortcuts_pdf.append(
+                    "{:03d}|{:s} ({:s} = {:d})".format(pdf['score'], pdf['rationale'], pdf['label'], pdf['score']))
+                shortcuts_json.append({'score': pdf['score'], 'rationale': pdf['rationale'], 'label': pdf['label']})
         self.gm_shortcuts = ''.join(shortcuts)
-        self.gm_shortcuts_pdf = ', '.join(shortcuts_pdf)
+        shortcuts_pdf.sort(reverse=True)
+        shortcuts_pdf_clean = []
+        for s in shortcuts_pdf:
+            shortcuts_pdf_clean.append(s.split("|")[1])
+        self.gm_shortcuts_pdf = ', '.join(shortcuts_pdf_clean)
+        logger.warning(self.gm_shortcuts_pdf)
+        result = sorted(shortcuts_json, key=itemgetter('score'), reverse=True)
+        return result
 
     def refresh_options(self, options, options_not, custo_set, ref_type, ref_class):
         """ Refresh options / options_not global engine
@@ -973,7 +985,6 @@ class Character(Combattant):
 
     def toJSONFICS(self):
         from collector.models.skill import SkillRef
-        from operator import itemgetter
         import datetime
         j = self.toJSON()
         idx1 = 0
@@ -996,13 +1007,15 @@ class Character(Combattant):
             else:
                 d['idx1'] = idx1
                 idx1 += 1
-
         weapons = []
         for weapon in self.weapon_set.all():
             weapons.append(weapon.weapon_ref.toJSON())
         armors = []
         for armor in self.armor_set.all():
             armors.append(armor.armor_ref.toJSON())
+        shields = []
+        for shield in self.shield_set.all():
+            shields.append(shield.shield_ref.toJSON())
         tods = []
         for tod in self.tourofduty_set.all():
             tods.append(tod.tour_of_duty_ref.toJSON())
@@ -1011,17 +1024,29 @@ class Character(Combattant):
             bcs.append(bc.blessing_curse_ref.toJSON())
         bas = []
         for ba in self.beneficeaffliction_set.all():
-            bas.append(ba.benefice_affliction_ref.toJSON())
-
+            bas.append(ba.toJSON())
+        rituals = []
+        for ritual in self.ritual_set.all().order_by('ritual_ref__path', 'ritual_ref__level'):
+            rituals.append(ritual.ritual_ref.toJSON())
         k = json.loads(j)
         k["creature"] = "mortal"
         k["date"] = datetime.datetime.now().strftime('%Y%m%d')
         k["alliance"] = self.alliance_ref.reference
         k["skills_list"] = skills_list
         k["armors"] = armors
+        k["shields"] = shields
         k["weapons"] = weapons
-        k["tods"] = tods
+        k["rituals"] = rituals
+        k["tods"] = sorted(tods, key=itemgetter('category'))
         k["BC"] = bcs
         k["BA"] = bas
+        k["shortcuts"] = self.calculate_shortcuts()
         j = json.dumps(k)
         return j
+
+    @property
+    def tod_list_str(self):
+        list = []
+        for tod in self.tourofduty_set.all().order_by('tour_of_duty_ref__category'):
+            list.append(tod.tour_of_duty_ref.reference)
+        return ", ".join(list)

@@ -24,7 +24,7 @@ import datetime
 from django.contrib import messages
 from collector.utils.xls_collector import export_to_xls, update_from_xls
 from collector.utils.basic import get_current_config, extract_rules
-from collector.utils.gs_export import update_gss
+from collector.utils.gs_export import update_gss, summary_gss
 
 
 def pdf_character(request, id=None):
@@ -77,11 +77,16 @@ def gss_update(request):
     messages.info(request, 'Exported to Google spreadsheet...')
     return HttpResponse(status=204)
 
+def gss_summary(request):
+    summary_gss()
+    messages.info(request, 'Extracting PCs to Google spreadsheet...')
+    return HttpResponse(status=204)
 
 def pdf_rules(request):
     """ Create and show a character as PDF """
-    extract_rules()
     messages.info(request, 'Rebuilding Rules reference...')
+    extract_rules()
+    messages.info(request, 'Done!')
     return HttpResponse(status=204)
 
 

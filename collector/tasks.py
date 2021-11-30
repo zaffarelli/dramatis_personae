@@ -85,6 +85,7 @@ def fix_check():
     answer = '/!\\ Fix_check task is idle.'
     from collector.models.character import Character
     campaign = get_current_config()
+    logger.info("FIX CHECK")
     all = campaign.dramatis_personae.filter(need_fix=True)
     if len(all):
         c = all.first()
@@ -99,7 +100,6 @@ def fix_check():
             c.save()
         if len(oldest):
             answer = f'Fix_check: Putting older avatars on the fix list...'
-
     logger.info(answer)
     return answer
 

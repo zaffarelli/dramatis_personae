@@ -148,7 +148,7 @@ def extract_rules():
     import datetime
     from django.utils import timezone
     context['date'] = timezone.datetime.now()
-    skills = SkillRef.objects.all().filter(is_wildcard=False).order_by('reference', 'is_root', 'is_speciality')
+    skills = SkillRef.objects.all().filter(is_speciality=False).order_by('reference', 'is_root')
     context['skills'] = skills
     benefice_afflictions = BeneficeAfflictionRef.objects.order_by('-source')
     context['benefice_afflictions'] = benefice_afflictions

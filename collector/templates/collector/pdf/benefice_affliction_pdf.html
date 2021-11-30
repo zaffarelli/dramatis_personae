@@ -1,11 +1,7 @@
 {% load fics_filters %}
-<p>
-  <em>
-    {{ c.reference }} {% if c.emphasis %} ({{ c.emphasis }}){%endif%}
-  </em>
-  {{c.category}}
-  {{c.value}}
-  {{c.description}}
-  {{c.source}}
-  [<tt> #{{c.id}}</tt>]
-</p>
+<h6>{{ c.reference }} [{{ c.value }}]</h6>
+{% if c.emphasis %}<strong>Emphasis:</strong> {{ c.emphasis }}<BR/>{% endif %}
+<strong>Category:</strong> {{ c.get_category_display }}<BR/>
+{%  if c.description %}<strong>Description:</strong><p>{{ c.description }}</p><BR/>{% endif %}
+{{ c.source }} [#{{ c.id }}]<BR/>
+

@@ -5,7 +5,7 @@
 {% if c.value %}
 <p>Source: {{ c.source}}, Attributes Points: {{c.AP}}, Options Points: {{c.OP}} Value: <strong>{{c.value|signed}}</strong>.</p>
 <p>
-<u>Attributes</u>&nbsp;&mdash;
+<strong>Attributes</strong>&nbsp;&mdash;
  {% if c.PA_STR %} STR{{c.PA_STR|signed}}{% endif %}
  {% if c.PA_CON %} CON{{c.PA_CON|signed}}{% endif %}
  {% if c.PA_BOD %} BOD{{c.PA_BOD|signed}}{% endif %}
@@ -20,7 +20,7 @@
  {% if c.PA_AWA %} AWA{{c.PA_AWA|signed}}{% endif %}
  {% if not c.AP %}<i>none</i>.{%endif%}
 </p><p>
-<u>Skills</u>&nbsp;&mdash;
+<strong>Skills</strong>&nbsp;&mdash;
   {% if not c.skillmodificator_set.count %}
   <i>none</i>.
 
@@ -30,7 +30,7 @@
   {% endfor %}
   {% endif %}
 </p><p>
-<u>Benefices/Afflictions</u>&nbsp;&mdash;
+<strong>Benefices/Afflictions</strong>&nbsp;&mdash;
   {% if not c.beneficeafflictionmodificator_set.count %}
   <i>none</i>.
 
@@ -40,7 +40,7 @@
   {% endfor %}
   {% endif %}
 </p><p>
-<u>Blessings/Curses</u>&nbsp;&mdash;
+<strong>Blessings/Curses</strong>&nbsp;&mdash;
   {% if not c.blessingcursemodificator_set.count %}
   <i>none</i>.
 

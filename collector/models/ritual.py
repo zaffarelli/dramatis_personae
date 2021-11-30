@@ -1,45 +1,14 @@
-'''
+"""
  ╔╦╗╔═╗  ╔═╗┌─┐┬  ┬  ┌─┐┌─┐┌┬┐┌─┐┬─┐
   ║║╠═╝  ║  │ ││  │  ├┤ │   │ │ │├┬┘
  ═╩╝╩    ╚═╝└─┘┴─┘┴─┘└─┘└─┘ ┴ └─┘┴└─
-'''
+"""
 from django.db import models
 from django.contrib import admin
-from datetime import datetime
-from django.db.models.signals import pre_save, post_save
-from django.dispatch import receiver
-from django.urls import reverse
-import hashlib
-
 from collector.models.skill import SkillRef
-from collector.utils import fs_fics7
-from collector.utils.basic import write_pdf
-
+from collector.utils import fics_references
 import logging
-
 logger = logging.getLogger(__name__)
-
-RANGE = (
-    ("0", "Touch"),
-    ("1", "Sight"),
-    ("2", "Sensory"),
-    ("3", "Distance"),
-    ("4", "Self"),
-)
-
-DURATION = (
-    ("0", "Instant"),
-    ("1", "Temporary"),
-    ("2", "Prolonged"),
-    ("3", "Perpetual"),
-)
-
-OCCULT_ARTS = (
-    ("0", "Psi"),
-    ("1", "Theurgy"),
-    ("2", "Symbiosis"),
-    ("3", "Runecasting"),
-)
 
 
 class RitualRef(models.Model):
@@ -48,12 +17,12 @@ class RitualRef(models.Model):
         verbose_name = "FICS: Ritual"
 
     reference = models.CharField(max_length=200, unique=True)
-    category = models.CharField(max_length=32, choices=OCCULT_ARTS)
+    category = models.CharField(max_length=32, choices=fics_references.OCCULT_ARTS)
     level = models.IntegerField(default=1)
     attribute = models.CharField(max_length=6, default='PA_TEM')
     skill = models.ForeignKey(SkillRef, on_delete=models.SET_NULL, null=True, blank=True)
-    range = models.CharField(max_length=32, choices=RANGE, default='tou')
-    duration = models.CharField(max_length=32, choices=DURATION, default='ins')
+    range = models.CharField(max_length=32, choices=fics_references.RANGE, default='tou')
+    duration = models.CharField(max_length=32, choices=fics_references.DURATION, default='ins')
     path = models.CharField(default="", max_length=64)
     wyrd_cost = models.IntegerField(default=1)
     description = models.TextField(null=True, max_length=2048, blank=True)
@@ -66,6 +35,11 @@ class RitualRef(models.Model):
     def __str__(self):
         return f'{self.reference} ({self.path}, {self.level})'
 
+    def toJSON(self):
+        from collector.utils.basic import json_default
+        import json
+        jstr = json.loads(json.dumps(self, default=json_default, sort_keys=True, indent=4))
+        return jstr
 
 class RitualCusto(models.Model):
     from collector.models.character_custo import CharacterCusto

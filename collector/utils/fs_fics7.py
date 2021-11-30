@@ -44,8 +44,7 @@ def check_gm_shortcuts(ch, sk):
         pdf_short = {'rationale': SHORTCUTS[sk.skill_ref.reference]['rationale'],
                      'label': SHORTCUTS[sk.skill_ref.reference]['label'], 'score': score}
         return newshortcut, pdf_short
-    else:
-        return '', ''
+    return '', ''
 
 
 def d12x():
@@ -222,9 +221,6 @@ def roll_dc(sdc):
         d += 1
     total += dbonus
     return total
-
-
-
 
 
 def choose_pa(weights, maxi, pa):

@@ -25,16 +25,17 @@ class Jumpweb {
         me.size = 110;
         me.width = me.size * 80;
         me.height = me.size * 60;
-        me.w = $(me.parent).css('width');
-        me.h = $(me.parent).css('height');
+        me.w = parseInt($(me.parent).css('width'));
+        me.h = parseInt($(me.parent).css('height'));
         me.data = data;
-        me.era = (me.data.mj ? 0 : 5018);
+        me.era = (me.data.mj ? 0 : 5022);
         //me.new_routes = me.data.new_routes
         me.ox = me.width / me.size / 2;
         me.oy = me.height / me.size / 2;
         me.step_x = me.size;
         me.step_y = me.size;
         d3.select(me.parent).selectAll("svg").remove();
+        // console.log(parseInt(me.w)+"/"+parseInt(me.h));
         me.vis = d3.select(me.parent).append("svg")
             .attr("viewBox", "0 0 " + me.w + " " + me.h)
             .attr("width", me.w)
@@ -76,8 +77,8 @@ class Jumpweb {
                 indent = 0;
             }
 
-            var padding = '';
-            for (var i = 0; i < pad; i++) {
+            let padding = '';
+            for (let i = 0; i < pad; i++) {
                 padding += '  ';
             }
 
@@ -127,7 +128,7 @@ class Jumpweb {
             .style("strike", "#111")
             .style("strike-width", "0.1pt")
             .attr('y', me.step_y * 20)
-//            .text("The Known Worlds - circa " + me.era + " AD")
+            .text("The Known Worlds - circa " + me.era + " AD")
             .on('click', function(d) {
                 // console.log("exporting")
                 let now = new Date()
@@ -271,7 +272,11 @@ title="jumpweb_' + me.mode + '_' + now + '.svg"> \
             .style("stroke-width", "0.25pt")
             .style("font-variant", "small-caps")
             .text(function(d) {
-                return d.name;
+                let n = d.name;
+                if (d.focus){
+
+                }
+                return n;
             });
 
         node.append("text")
@@ -452,6 +457,11 @@ title="jumpweb_' + me.mode + '_' + now + '.svg"> \
                     d.unknown = me.isNoNewRoute(source.name, target.name);
                 }
                 d.discovery = me.isDiscovery(source.name, target.name)
+                if (source.focus & target.focus){
+                    d.focus = true;
+                } else{
+                    d.focus = false;
+                }
                 if (source.group == target.group){
                     k += " g"+source.group;
                 }
@@ -504,7 +514,8 @@ title="jumpweb_' + me.mode + '_' + now + '.svg"> \
             })
 
             .style("opacity", function(d) {
-                return (d.unknown ? 0.0 : 0.8);
+                return (d.focus ? 1.0 : 0.05);
+                // return (d.unknown ? 0.0 : 0.8);
             })
             .on("mouseover", function(e,d) {
                 me.svg.select("#link_" + d.source + "_" + d.target)
@@ -644,11 +655,10 @@ title="jumpweb_' + me.mode + '_' + now + '.svg"> \
                     .style("opacity", 1.0);
             })
             .style("opacity", function(d) {
-                //if (me.data.mj == false) {
-                return (d.unknown ? 0.0 : 1.0);
-                //} else {
-                //    return 1.0
-                //}
+
+                // return (d.unknown ? 0.0 : 1.0);
+                return (d.focus ? 1.0 : 0.05);
+
             });
         node = me.draw_node(node);
         let panel = node.append("g")

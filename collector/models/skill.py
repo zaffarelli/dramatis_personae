@@ -30,6 +30,24 @@ class SkillRef(UUIDClass):
     attributes = models.TextField(max_length=64, default='', blank=True)
     grouping = models.CharField(max_length=64, default='', blank=True)
 
+    @property
+    def common_specialities(self):
+        list = []
+        specialities = SkillRef.objects.filter(is_speciality=True, linked_to=self, is_wildcard=False)
+        for s in specialities:
+            words = s.reference.split('(')
+            words2 = words[1].split(')')
+            name = words2[0]
+            name_parts = name.split(' ')
+            if name_parts[-1] != 'System':
+                if s.description:
+                    str = f'<em>{name}</em>: {s.description}'
+                else:
+                    str = f'<em>{name}</em>'
+                list.append(f'<li>{str}</li>')
+        res = "\n".join(list)
+        return res
+
     def __str__(self):
         return '%s %s %s %s [%s]' % (
         self.reference, self.group, "(R)" if self.is_root else "", "(S)" if self.is_speciality else "",

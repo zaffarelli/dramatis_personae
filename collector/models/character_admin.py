@@ -54,6 +54,16 @@ def importance_down(modeladmin, request, queryset):
 #     short_description = "Cast to Abusus Non Tollit Usum"
 #
 
+def recalc_height(modeladmin, request, queryset):
+    for c in queryset:
+        if "urthish" in c.specie.species.lower():
+            c.height = 0
+            c.need_fix = True
+            c.fix()
+            c.save()
+    short_description = "Recalculate urthish height/weight"
+
+
 def make_invisible(modeladmin, request, queryset):
     queryset.update(is_visible=False)
     short_description = "Make invisible"
@@ -142,8 +152,8 @@ class CharacterAdmin(admin.ModelAdmin):
     ordering = ['full_name', ]
     actions = [needs_fix, needs_pdf,no_importance, importance_up, importance_down, make_invisible,
                make_visible, make_teutonic, make_kaanic, make_castillan, make_enquist, make_public, make_private,
-               make_partial, make_complete, enter_fencing_league, exit_fencing_league]
+               make_partial, make_complete, enter_fencing_league, exit_fencing_league, recalc_height]
     exclude = ['SA_REC', 'SA_STA', 'SA_END', 'SA_STU', 'SA_RES', 'SA_DMG', 'SA_TOL', 'SA_HUM', 'SA_PAS', 'SA_WYR',
                'SA_SPD', 'SA_RUN', 'PA_TOTAL', 'SK_TOTAL', 'TA_TOTAL', 'BC_TOTAL', 'BA_TOTAL']
     list_filter = ['fencing_league', 'team', 'occult', 'alliance', 'keyword', 'specie']
-    search_fields = ['full_name', 'alias', 'alliance', 'keyword', 'rid']
+    search_fields = ['full_name', 'alias', 'alliance', 'keyword', 'rid', 'player']

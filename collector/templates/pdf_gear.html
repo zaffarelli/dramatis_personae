@@ -1,193 +1,189 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
 <html lang="en">
-  <head>
+<head>
     {% load static %}
-    <meta charset="utf-8" />
-    <title>{{c.full_name|safe}}</title>
+    <meta charset="utf-8"/>
+    <title>{{ c.full_name|safe }}</title>
     <style>
-      @font-face {
-        font-family: 'Text';
-        src: url('collector/static/collector/fonts/RobotoCondensed-Regular.ttf');
-      }
+        @font-face {
+            font-family: 'Text';
+            font-weight: bold;
+            font-style: italic;
+            src: url('collector/static/collector/fonts/RobotoCondensed-BoldItalic.ttf');
+        }
 
-      @font-face {
-        font-family: 'Text';
-        font-style: italic;
-        src: url('collector/static/collector/fonts/RobotoCondensed-RegularItalic.ttf');
-      }
+        @font-face {
+            font-family: 'Text';
+            src: url('collector/static/collector/fonts/RobotoCondensed-Regular.ttf');
+        }
 
-      @font-face {
-        font-family: 'Text';
-        font-weight: bold;
-        font-style: italic;
-        src: url('collector/static/collector/fonts/RobotoCondensed-BoldItalic.ttf');
-      }
+        @font-face {
+            font-family: 'Text';
+            font-style: italic;
+            src: url('collector/static/collector/fonts/RobotoCondensed-Italic.ttf');
+        }
 
-      @font-face {
-        font-family: 'Text';
-        font-weight: bold;
-        src: url('collector/static/collector/fonts/RobotoCondensed-Bold.ttf');
-      }
 
-      @font-face {
-        font-family: 'Title';
-        src: url('collector/static/collector/fonts/Eczar-SemiBold.ttf');
-      }
+        @font-face {
+            font-family: 'Text';
+            font-weight: bold;
+            src: url('collector/static/collector/fonts/RobotoCondensed-Bold.ttf');
+        }
 
-      @page {
-        size: a4 portrait;
-        @frame col_left {
-          left: 0.4cm;
-          width: 10cm;
-          top: 1.5cm;
-          height:27cm;
-          padding:0.125cm;
+        @font-face {
+            font-family: 'Title';
+            src: url('collector/static/collector/fonts/Eczar-SemiBold.ttf');
+        }
+
+        @page {
+            size: a4 portrait;
+            @frame col_left {
+            left: 0.4cm;
+            width: 10cm;
+            top: 1.5cm;
+            height: 27cm;
+            padding: 0.125cm;
 
         }
         @frame col_right {
-          right: 0.4cm;
-          width: 10cm;
-          top: 1.5cm;
-          height: 27cm;
-          padding:0.125cm;
+        right: 0.4cm;
+        width: 10cm;
+        top: 1.5cm;
+        height: 27cm;
+        padding:0.125cm;
 
         }
         @frame header_frame {
-          -pdf-frame-content: header_content;
-          right: 0.4cm;
-          width: 1cm;
-          top: 0.5cm;
-          height: 1cm;
-          text-align:right;
+        -pdf-frame-content:header_content;
+        right: 0.4cm;
+        width: 1cm;
+        top: 0.5cm;
+        height: 1cm;
+        text-align:right;
 
         }
         @frame footer_frame {
-          -pdf-frame-content: footer_content;
-          left:0.4cm;
-          width:20cm;
-          right:0.4cm;
-          bottom:0.6cm;
-          height: 0.5cm;
+        -pdf-frame-content:footer_content;
+        left:0.4cm;
+        width:20cm;
+        right:0.4cm;
+        bottom:0.6cm;
+        height: 0.5cm;
         }
 
 
-      }
+        }
 
-      body{
-        padding:0;
-        margin:0;
-        line-height: 0.9em;
-        font-family: Text;
-        font-height:9pt;
-      }
+        p, blockquote, .default, ul, li {
+            font-family: Text;
+            font-size: 9pt;
+            line-height: 0.9em;
+            margin:0;
+            padding:0;
+        }
 
-      #footer_content{
-        font-size:9pt;
-        text-align:center;
-        font-weight: bold;
-        font-family: Text;
-      }
-
-      .info {
-        padding:0;
-        margin:0;
-        font-size:9pt;
-        margin-bottom: 0.8em;
-        font-family: Text;
-      }
-
-      .info th{
-        text-align:left;
-        margin-right:1ex;
-        font-family: Text;
-      }
-
-      h1, h2, h3, h4, h5, h6{
-        font-family:Title;
-      }
-
-      h1{
-        font-size:20pt;
-      }
-
-      h2{
-        font-size:18pt;
-        line-height:1em;
-        margin:0;
-        margin-top:1em;
-        padding:0;
-        color: #424;
-
-      }
-
-      h3{
-        font-size:16pt;
-        line-height:1em;
-        margin:0;
-        padding:0;
+        .default{
+            padding: 0;
+            margin: 0;
+            font-height: 9pt;
+            line-height: 1.1em;
+            font-family: Text;
+        }
 
 
-      }
+        #footer_content {
+            font-size: 9pt;
+            text-align: center;
+            font-weight: bold;
+            font-family: Text;
+        }
 
-      h4{
-        font-size:14pt;
-        line-height:1em;
-        margin:0;
-        padding:0;
+        .info {
+            padding: 0;
+            margin: 0;
+            font-size: 9pt;
+            margin-bottom: 0.8em;
+            font-family: Text;
+        }
 
-      }
+        em {
+            font-style: italic;
+        }
 
-      h5{
-        font-size:12pt;
-        line-height:1em;
-        margin:0;
-        padding:0;
+        strong {
+            font-weight: bold;
+        }
 
-      }
+        .info th {
+            text-align: left;
+            margin-right: 1ex;
+            font-family: Text;
+        }
 
-      h6{
-        background: red;
-        font-size:10pt;
-        line-height:1em;
-        margin:0;
-        margin-top:1.0em;
-        padding:0;
-      }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: Title;
+        }
 
-      p{
-        font-family: Text;
-        font-size:9pt;
-        text-align:justify;
-        padding:0;
-        margin:0;
-        display:inline-block;
-      }
+        h1 {
+            font-size: 28pt;
+            margin: 0;
+            padding: 0;
+            text-align:center;
+            line-height:0.5cm;
+        }
 
-      .small{
-        font-size:12pt;
-        font-family: Text;
-      }
+        h2 {
+            font-size: 18pt;
+            line-height: 1em;
+            margin: 0;
+            padding: 0;
+            text-align:center;
 
-      blockquote{
-        font-family:Text;
-        font-size:9pt;
-        line-height:0.97em;
-      }
+        }
 
-      .embedded_link{
-        font-family: Text;
-        font-weight:200;
-        color:#AA2020;
-      }
+        h3 {
+            font-size: 14pt;
+            line-height: 1em;
+            margin: 0;
+            padding: 0;
 
-      ul, li{
-        font-family:Text;
-        font-size:9pt;
-      }
-     </style>
-    </head>
-    <body>
-      {% block article %}
-      {% endblock article %}
-    </body>
+
+        }
+
+        h4 {
+            font-size: 12pt;
+            line-height: 1em;
+            margin: 0;
+            padding: 0;
+            text-decoration:underline;
+        }
+
+        h5 {
+            font-size: 11pt;
+            line-height: 1em;
+            margin: 0;
+            padding: 0;
+
+        }
+
+        h6 {
+            font-size: 10pt;
+            line-height: 0.9em;
+            margin:0;
+            padding:0;
+            text-indent:0;
+            margin-top:0.3em;
+            -pdf-keep-with-next: true;
+        }
+        blockquote{
+            padding-left:1cm;
+        }
+
+
+    </style>
+</head>
+<body>
+{% block article %}
+{% endblock article %}
+</body>
 </html>

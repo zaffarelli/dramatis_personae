@@ -14,12 +14,18 @@ def show_jumpweb(request):
         context['data'] = {}
         # context['campaign'] = campaign.toJSON()
         context['data']['mj'] = 1 if request.user.profile.is_gamemaster else 0
-        context['data']['new_routes'] = "|".join(NEW_ROUTES)
-        context['data']['new_systems'] = "|".join(NEW_SYSTEMS)
+        context['data']['new_routes'] = ""#"|".join(NEW_ROUTES)
+        context['data']['new_systems'] = ""#"|".join(NEW_SYSTEMS)
+        context['data']['epic_systems'] = campaign.known_systems
         context['data']['nodes'] = []
         context['data']['links'] = []
+        known_worlds = context['data']['epic_systems'].split('|')
         for s in System.objects.all():
             system = {}
+            system['focus'] = False
+            if s.name in known_worlds:
+                system['focus'] = True
+            system['discovery'] = s.discovery
             system['id'] = s.id
             system['name'] = s.name
             system['alliance'] = s.alliance
@@ -30,7 +36,7 @@ def show_jumpweb(request):
             system['group'] = s.group
             system['color'] = s.color
             system['orbital_map'] = 1 if s.orbital_map != '' else 0
-            system['discovery'] = s.discovery
+
             system['dtj'] = s.dtj
             system['garrison'] = s.garrison
             system['tech'] = s.tech

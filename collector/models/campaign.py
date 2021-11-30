@@ -46,6 +46,7 @@ class Campaign(models.Model):
     color_counterback = models.CharField(max_length=9, default='#00404040')
     black_text = models.BooleanField(default=True)
     hidden = models.BooleanField(default=False)
+    known_systems = models.TextField(max_length=1024, default='')
 
     def __str__(self):
         return f'{self.title} [{self.rpgsystem}]'

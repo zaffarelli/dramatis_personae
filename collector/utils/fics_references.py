@@ -13,7 +13,7 @@
 """
 
 MAX_CHAR = 20
-RELEASE = '0.6.2'
+RELEASE = '0.6.4'
 
 SOURCE_REFERENCES = (
     ('FS2CRB', "HDi Fading Suns Official"),
@@ -68,7 +68,22 @@ SHORTCUTS = {
     "Melee": {
         'attribute': "PA_REF",
         'label': "REF + Melee",
-        'rationale': "Fencing",
+        'rationale': "Melee",
+    },
+    "Driving (Skycraft Piloting)": {
+        'attribute': "PA_REF",
+        'label': "REF + Driving (Skycraft Piloting)",
+        'rationale': "Fly an aircraft",
+    },
+    "Driving (Celestial Sailing)": {
+        'attribute': "PA_TEC",
+        'label': "TEC + Driving (Celestial Sailing)",
+        'rationale': "Sailing a spaceship",
+    },
+    "Fight": {
+        'attribute': "PA_REF",
+        'label': "REF + Fight",
+        'rationale': "Fight/Martial Arts",
     },
     "Persuasion": {
         'attribute': "PA_PRE",
@@ -85,7 +100,21 @@ SHORTCUTS = {
         'label': "PRE + Leadership",
         'rationale': "Give orders to subsidiaries",
     },
-
+    "Athletics": {
+        'attribute': "PA_BOD",
+        'label': "BOD + Athletics",
+        'rationale': "Swimming",
+    },
+    "Acrobatics": {
+        'attribute': "PA_MOV",
+        'label': "MOV + Acrobatics",
+        'rationale': "Roll to cover",
+    },
+    "Bureaucracy": {
+        'attribute': "PA_INT",
+        'label': "INT + Bureaucracy",
+        'rationale': "Fill shipment border transit documents",
+    },
     "Stoic Mind": {
         'attribute': 'PA_WIL',
         'label': 'WIL + Stoic Mind',
@@ -116,7 +145,26 @@ SHORTCUTS = {
         'label': "REF + Heavy Weapons",
         'rationale': "Heavy weapon fire",
     },
-
+    "Knavery": {
+        'attribute': "PA_PRE",
+        'label': "PRE + Knavery",
+        'rationale': "Convince someone with bullshit",
+    },
+    "Magna Carta": {
+        'attribute': "PA_INT",
+        'label': "INT + Magna Carta",
+        'rationale': "Prepare a legal case",
+    },
+    "Redemption (Forbidden Lore)": {
+        'attribute': "PA_TEC",
+        'label': "TEC + Redemption (Forbidden Lore)",
+        'rationale': "Fix Proscribed Technology",
+    },
+    "Science (Engineering)": {
+        'attribute': "PA_TEC",
+        'label': "TEC + Science (Engineering)",
+        'rationale': "Maintain celestial ship propelers thrust",
+    },
 }
 
 ATTACK_ROLLS = {
@@ -144,3 +192,54 @@ ATTACK_ROLLS = {
 
 FONTSET = ['Cinzel', 'Trade+Winds', 'Imprima', 'Roboto', 'Philosopher', 'Ruda', 'Khand', 'Allura', 'Gochi+Hand',
            'Reggae+One', 'Syne+Mono', 'Zilla+Slab', 'Spartan', 'News+Cycle', 'Archivo', 'Francois+One', 'Caveat', 'Gruppo', 'Voltaire', "Fredericka+the+Great", 'Esteban', 'Pompiere']
+
+
+LIFEPATH_CATEGORY = (
+    ('0', "Birthright"),
+    ('10', "Upbringing"),
+    ('20', "Apprenticeship"),
+    ('30', "Early Career"),
+    ('40', "Tour of Duty"),
+    ('50', "Worldly Benefits"),
+    ('60', "Nameless Kit"),
+    ('70', "Build"),
+    ('80', "Special"),
+)
+
+LIFEPATH_CASTE = (
+    ('Nobility', "Nobility"),
+    ('Church', "Church"),
+    ('Guild', "Guild"),
+    ('Alien', "Alien"),
+    ('Other', "Other"),
+    ('Freefolk', "Freefolk"),
+    ('Think Machine', "Think Machine"),
+    ('Caliphate (PO)', "Kurgan (Planetary Origin)"),
+    ('Caliphate (E)', "Kurgan (Environment)"),
+    ('Caliphate (U)', "Kurgan (Usun)"),
+    ('Barbarian', "Barbarian"),
+    ('Empire', "Empire"),
+    ('Supernatural', "Supernatural"),
+)
+
+RANGE = (
+    ("0", "Touch"),
+    ("1", "Sight"),
+    ("2", "Sensory"),
+    ("3", "Distance"),
+    ("4", "Self"),
+)
+
+DURATION = (
+    ("0", "Instant"),
+    ("1", "Temporary"),
+    ("2", "Prolonged"),
+    ("3", "Perpetual"),
+)
+
+OCCULT_ARTS = (
+    ("0", "Psi"),
+    ("1", "Theurgy"),
+    ("2", "Symbiosis"),
+    ("3", "Runecasting"),
+)

@@ -11,7 +11,7 @@ from collector.views.investigators import InvestigatorUpdateView
 from collector.views.frontend import index, toggle_public, toggle_spotlight, get_list, add_avatar, \
     get_storyline, conf_details, recalc_avatar, heartbeat, \
     show_todo, pdf_show, wa_export_character, tile_avatar, ghostmark_test, display_sheet, switch_epic
-from collector.views.backend import recalc, export, xls_update, pdf_character, gss_update, pdf_rules, roll_dice, bloke_selector
+from collector.views.backend import recalc, export, xls_update, pdf_character, gss_update, gss_summary, pdf_rules, roll_dice, bloke_selector
 from collector.views.misc_chart import get_population_statistics, get_keywords
 from django.contrib.auth.views import LogoutView
 from collector.views.user import do_login, do_profile, user_friends, user_foes, user_others, user_persystem
@@ -22,6 +22,7 @@ urlpatterns = [
     re_path('^ajax/export/$', export, name='export'),
     re_path('^ajax/xls_update/$', xls_update, name='xls_update'),
     re_path('^ajax/gss_update/$', gss_update, name='gss_update'),
+    re_path('^ajax/gss_summary/$', gss_summary, name='gss_summary'),
 
     re_path('^investigators/(?P<pk>\d+)/edit/$', InvestigatorUpdateView.as_view(), name='edit_investigator'),
     re_path('^ajax/edit/avatar/(?P<pk>\d+)/$', CharacterUpdateView.as_view(), name='edit_character'),

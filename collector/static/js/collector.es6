@@ -40,7 +40,7 @@ class Collector {
         });
     }
 
-    runHeartbeat(x = 500) {
+    runHeartbeat(x = 2500) {
         let me = this;
         clearTimeout(me.heartbeat);
         $.ajax({
@@ -240,7 +240,7 @@ class Collector {
         me.op.doConnect(me);
         me.ac.prepareEvents(me);
         /* Starting Heartbeat */
-        me.heartbeat = setTimeout("co.runHeartbeat()", 3000);
+        me.heartbeat = setTimeout("co.runHeartbeat()", 2500);
 
         /* Automatic ajax pipelining */
         me.registerMenuItems();

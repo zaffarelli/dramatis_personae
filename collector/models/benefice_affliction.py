@@ -42,9 +42,8 @@ class BeneficeAfflictionRef(UUIDClass):
     def toJSON(self):
         from collector.utils.basic import json_default
         import json
-        jstr = json.dumps(self, default=json_default, sort_keys=True, indent=4)
+        jstr = json.loads(json.dumps(self, default=json_default, sort_keys=True, indent=4))
         return jstr
-
 
 
 class BeneficeAffliction(models.Model):
@@ -58,6 +57,14 @@ class BeneficeAffliction(models.Model):
 
     def __str__(self):
         return '%s=%s' % (self.character.full_name, self.benefice_affliction_ref.reference)
+
+    def toJSON(self):
+        from collector.utils.basic import json_default
+        import json
+        jstr = json.loads(json.dumps(self, default=json_default, sort_keys=True, indent=4))
+        jstr['benefice_affliction_ref'] = self.benefice_affliction_ref.toJSON()
+        return jstr
+
 
 
 def make_occult(modeladmin, request, queryset):
@@ -91,10 +98,10 @@ def refix(modeladmin, request, queryset):
 
 
 class BeneficeAfflictionRefAdmin(admin.ModelAdmin):
-    ordering = ('category', 'reference', 'value', 'ranking')
-    list_display = ('reference', 'uuid', 'emphasis', 'value','ranking', 'category', 'description', 'source')
+    ordering = ('category', 'reference', 'watermark', '-value', 'ranking')
+    list_display = ('reference', 'uuid', 'emphasis', 'value', 'ranking', 'watermark', 'category', 'description', 'source')
     search_fields = ('reference', 'description', 'emphasis', 'watermark')
-    list_filter = ('ranking','source', 'watermark', 'category')
+    list_filter = ('ranking', 'source', 'watermark', 'category')
     actions = [refix,make_occult, make_combat, make_talent, make_riches, make_possession]
 
 

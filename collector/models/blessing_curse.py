@@ -27,7 +27,7 @@ class BlessingCurseRef(models.Model):
     def toJSON(self):
         from collector.utils.basic import json_default
         import json
-        jstr = json.dumps(self, default=json_default, sort_keys=True, indent=4)
+        jstr = json.loads(json.dumps(self, default=json_default, sort_keys=True, indent=4))
         return jstr
 
 

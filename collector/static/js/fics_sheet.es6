@@ -12,15 +12,16 @@ class FICSSheet {
         console.log('FICS_SHEET: Initialize');
         me.debug = false;
         me.blank = false;
-        me.version = 0.8;
+        me.version = 0.9;
         me.width = parseInt($(me.parent).css("width"), 10) * 0.75;
         me.height = me.width * 1.4;
-        me.w = 1.25 * me.width;
-        me.h = 1.25 * me.height;
+        me.w = parseInt($(me.parent).css('width'));
+        me.h = parseInt($(me.parent).css('height'));
         me.stepx = me.width / 24;
         me.stepy = me.height / 36;
-        me.small_font_size = 1.5 * me.stepy / 5;
-        me.medium_font_size = 2 * me.stepy / 5;
+        me.small_font_size = 0.25 * me.stepy;
+        me.small_inter = 0.5;
+        me.medium_font_size = 0.30 * me.stepy;
         me.large_font_size = 3 * me.stepy / 5;
         me.big_font_size = 2.5 * me.stepy / 5;
         me.fat_font_size = 8 * me.stepy / 5;
@@ -33,8 +34,10 @@ class FICSSheet {
         me.jumpgate_stroke = "#B8B8B8";
         me.draw_stroke = '#111';
         me.draw_fill = '#222';
-        me.user_stroke = '#919';
-        me.user_fill = '#A2A';
+        me.debug_stroke = '#FC4';
+        me.debug_fill = '#FC8';
+        me.user_stroke = '#141';
+        me.user_fill = '#181';
         me.user_font = 'Caveat';
         me.mono_font = 'Syne Mono';
         me.title_font = 'Pompiere';
@@ -64,16 +67,16 @@ class FICSSheet {
 
     // TOOLS ===========================================================================================================
     formatXml(xml) {
-        var formatted = '';
+        let formatted = '';
         xml = xml.replace(/[\u00A0-\u2666]/g, function (c) {
             return '&#' + c.charCodeAt(0) + ';';
         })
-        var reg = /(>)(<)(\/*)/g;
+        let reg = /(>)(<)(\/*)/g;
         /**/
         xml = xml.replace(reg, '$1\r\n$2$3');
-        var pad = 0;
+        let pad = 0;
         jQuery.each(xml.split('\r\n'), function (index, node) {
-            var indent = 0;
+            let indent = 0;
             if (node.match(/.+<\/\w[^>]*>$/)) {
                 indent = 0;
             } else if (node.match(/^<\/\w/)) {
@@ -86,8 +89,8 @@ class FICSSheet {
                 indent = 0;
             }
 
-            var padding = '';
-            for (var i = 0; i < pad; i++) {
+            let padding = '';
+            for (let i = 0; i < pad; i++) {
                 padding += '  ';
             }
 
@@ -125,10 +128,8 @@ class FICSSheet {
                 if (num == 0) {
                     me.saveSVG();
                 } else if (num == 1) {
-                    console.log('Recto');
                     me.perform(null, 0);
                 } else if (num == 2) {
-                    console.log('Verso');
                     me.perform(null, 1);
                 } else if (num == 3) {
                     $("#d3area").css("display", "none");
@@ -141,11 +142,11 @@ class FICSSheet {
             .attr('dy', 5)
             .style('font-family', me.base_font)
             .style('text-anchor', 'middle')
-            .style("font-size", me.medium_font_size + 'px')
+            .style("font-size", me.medium_font_size + 'pt')
             .style('fill', '#000')
             .style('cursor', 'pointer')
             .style('stroke', '#333')
-            .style('stroke-width', '0.5pt')
+            .style('stroke-width', '0.05pt')
             .attr('opacity', 1.0)
             .text(txt)
             .on('mouseover', function (d) {
@@ -175,7 +176,7 @@ class FICSSheet {
         me.addButton(0, 'Save SVG');
         me.addButton(1, 'Recto');
         me.addButton(2, 'Verso');
-        me.addButton(3, 'Close');
+        // me.addButton(3, 'Close');
     }
 
     saveSVG() {
@@ -278,7 +279,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink"> \
                 .attr('y', me.stepy * y)
                 .style('fill', fill)
                 .style('stroke', stroke)
-                .style('stroke-width', '0.5pt')
+                .style('stroke-width', '0.05pt')
                 .style("text-anchor", position)
                 .style("font-size", size + 'pt')
                 .style("font-family", f)
@@ -360,9 +361,13 @@ xmlns:xlink="http://www.w3.org/1999/xlink"> \
         let me = this;
         me.page = page;
         d3.select(me.parent).selectAll("svg").remove();
-        me.svg = d3.select(me.parent).append("svg")
-            .attr("id", me.data['rid'])
+        me.vis = d3.select(me.parent).append("svg")
             .attr("viewBox", "0 0 " + me.w + " " + me.h)
+            .attr("width", me.w)
+            .attr("height", me.h);
+        me.svg = me.vis.append('g')
+            .attr("id", me.data['rid'])
+            // .attr("viewBox", "0 0 " + me.w + " " + me.h)
             .attr("width", me.width)
             .attr("height", me.height)
             .append("svg:g")
@@ -449,7 +454,10 @@ xmlns:xlink="http://www.w3.org/1999/xlink"> \
             me.drawLine(0.8, 23.2, 2.5, 2.5, me.draw_fill, me.draw_stroke, 6, me.strokedebris);
             me.drawLine(0.8, 23.2, 35, 35, me.draw_fill, me.draw_stroke, 6, me.strokedebris);
             me.drawLine(1, 23, 12.25, 12.25, me.draw_fill, me.draw_stroke, 6, me.strokedebris);
+            me.drawLine(1, 23, 19.4, 19.4, me.draw_fill, me.draw_stroke, 3, me.strokedebris);
+
             me.drawLine(1, 23, 22, 22, me.draw_fill, me.draw_stroke, 3, me.strokedebris);
+
             me.drawLine(1, 23, 25, 25, me.draw_fill, me.draw_stroke, 6, me.strokedebris);
             let title_text = 'Fading Suns'.toUpperCase();
             me.decorationText(12, 3.82, 0, 'middle', me.title_font, me.fat_font_size * 1.35, '#FFF', '#FFF', 25, title_text, me.back, 1.0);
@@ -467,14 +475,19 @@ xmlns:xlink="http://www.w3.org/1999/xlink"> \
         } else {
             me.lines = me.back.append('g');
             me.daddy = me.lines;
+            // External lines
             me.drawLine(1, 1, 2.3, 35.2, me.draw_fill, me.draw_stroke, 6, me.strokedebris);
             me.drawLine(23, 23, 2.3, 35.2, me.draw_fill, me.draw_stroke, 6, me.strokedebris);
             me.drawLine(0.8, 23.2, 2.5, 2.5, me.draw_fill, me.draw_stroke, 6, me.strokedebris);
             me.drawLine(0.8, 23.2, 35, 35, me.draw_fill, me.draw_stroke, 6, me.strokedebris);
-            me.drawLine(1, 17, 5, 5, me.draw_fill, me.draw_stroke, 3, me.strokedebris);
-            me.drawLine(1, 23, 10, 10, me.draw_fill, me.draw_stroke, 3, me.strokedebris);
 
-            me.drawLine(17, 17, 2.5, 10, me.draw_fill, me.draw_stroke, 3, me.strokedebris);
+
+            me.drawLine(1, 17, 5, 5, me.draw_fill, me.draw_stroke, 3, me.strokedebris); // Weapons/Armors separator
+            me.drawLine(1, 17, 10, 10, me.draw_fill, me.draw_stroke, 3, me.strokedebris); // Below weapons
+            me.drawLine(17, 23, 8, 8, me.draw_fill, me.draw_stroke, 3, me.strokedebris); // Below tods
+            me.drawLine(12, 12, 10, 35, me.draw_fill, me.draw_stroke, 3); // East BA/BC
+            me.drawLine(1, 12, 29, 29, me.draw_fill, me.draw_stroke, 3); // Below shortcuts
+            me.drawLine(17, 17, 2.5, 13, me.draw_fill, me.draw_stroke, 3, me.strokedebris); // Right Armor/weapons
 
             me.drawLine(1, 23, 13, 13, me.draw_fill, me.draw_stroke, 3, me.strokedebris);
             me.drawLine(1, 23, 20, 20, me.draw_fill, me.draw_stroke, 3, me.strokedebris);
@@ -483,6 +496,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink"> \
             }
             me.decorationText(4.0, 2.25, 0, 'middle', me.base_font, me.medium_font_size, me.draw_fill, me.draw_stroke, 0.5, "FuZion Interlock Custom System v7.3", me.back);
             me.decorationText(22.5, 35.8, -16, 'end', me.base_font, me.small_font_size, me.draw_fill, me.draw_stroke, 0.5, "fics_Sheet v" + me.version + ", 2021, Zaffarelli, generated with DP", me.back);
+
         }
         // Sheet content
         me.character = me.back.append('g')
@@ -546,7 +560,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink"> \
             .attr("dy", me.stepy * 0.6)
             .style("text-anchor", 'start')
             .style("font-family", me.base_font)
-            .style("font-size", me.small_font_size + 'px')
+            .style("font-size", me.small_font_size + 'pt')
             .style("fill", me.draw_fill)
             .style("stroke", me.shadow_stroke)
             .style("stroke-width", '0.5pt')
@@ -565,15 +579,15 @@ xmlns:xlink="http://www.w3.org/1999/xlink"> \
             })
             .attr("y", oy)
             .attr("dx", -10)
-            .attr("dy", me.medium_font_size * 1.2)
+            .attr("dy", me.medium_font_size * 1.5)
             .style("text-anchor", 'end')
             .style("font-family", function (d) {
                 return me.user_font;
             })
             .style("font-size", function (d) {
-                let res = me.small_font_size * 1.1 + 'pt'
+                let res = me.medium_font_size * 1.0 + 'pt'
                 if (fat) {
-                    res = me.small_font_size * 1.25 + 'pt';
+                    res = me.medium_font_size * 1.1 + 'pt';
                 }
                 return res;
             })
@@ -661,7 +675,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink"> \
                     return ox + 2 * me.stepx;
                 }
             })
-            .attr("y", oy + me.stepy * 0.4)
+            .attr("y", oy + me.stepy * 0.2)
             .style("text-anchor", function (d) {
                 if (pos == 2) {
                     return "start"
@@ -670,7 +684,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink"> \
                 }
             })
             .style("font-family", me.base_font)
-            .style("font-size", me.small_font_size * 1.2 + 'px')
+            .style("font-size", me.small_font_size  + 'pt')
             .style("fill", me.draw_fill)
             .style("stroke", me.draw_stroke)
             .style("stroke-width", '0.75pt')
@@ -710,7 +724,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink"> \
                     return ox + me.stepx * 2.5 - 0.08 * me.stepx;
                 }
             })
-            .attr("y", oy + 0.60 * me.stepy)
+            .attr("y", oy + 0.50 * me.stepy)
             .attr("dy", '4pt')
             .style("text-anchor", 'middle')
             .style("font-family", function (d) {
@@ -718,7 +732,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink"> \
             })
             // .style("font-size", (me.medium_font_size * 1.4) + 'px')
             .style("font-size", function () {
-                let s = me.medium_font_size;
+                let s = me.medium_font_size*1.2;
                 if (scale === 10) {
                     s = me.medium_font_size * (1 + Math.floor(value / 2) * 0.08);
                 }
@@ -777,8 +791,8 @@ xmlns:xlink="http://www.w3.org/1999/xlink"> \
             .style("stroke-dasharray", me.strokedebris)
             .style("stroke-width", '1pt')
         ;
-        me.drawAttribute("REC", "str+con", me.data["SA_REC"], bx, oy, me.character, 1, 20)
-        me.drawAttribute("STA", "bod/2-1", me.data["SA_STA"], bx, oy, me.character, 2, 5)
+        me.drawAttribute("REC", "STR+CON", me.data["SA_REC"], bx, oy, me.character, 1, 20)
+        me.drawAttribute("STA", "BOD/2-1", me.data["SA_STA"], bx, oy, me.character, 2, 5)
         me.drawAttribute("END", "(BOD+CON)x5", me.data["SA_END"], bx, oy + 1 * me.stepy, me.character, 1, 100)
         me.drawAttribute("STU", "BOD+CON", me.data["SA_STU"], bx, oy + 1 * me.stepy, me.character, 2, 20)
 
@@ -941,7 +955,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink"> \
         me.drawText(basex + 1.75, basey + 2.25, me.draw_fill, me.shadow_stroke, me.small_font_size, "start", "Experience Pool");
 
         if (me.blank == false) {
-            me.wrap(me.data['entrance'], basex + 5, basey + 0.25, 6, me.user_font);
+            me.wrap(me.data['entrance'], basex + 5, basey + 0.5, 6, me.user_font);
         }
 
 
@@ -966,7 +980,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink"> \
             .style("font-size", me.small_font_size + 'pt')
             .style("fill", me.user_fill)
             .style("stroke", me.user_stroke)
-            .style("stroke-width", '0.5pt');
+            .style("stroke-width", '0.05pt');
         let words = text.text().split(/\s+/).reverse(),
             word,
             line = [],
@@ -988,17 +1002,19 @@ xmlns:xlink="http://www.w3.org/1999/xlink"> \
                     .attr("x", x)
                     .attr("y", y)
                     .attr("dy", ++lineNumber * lineHeight)
+                    .style("font-size", me.small_font_size + 'pt')
+                    .style("stroke-width", '0.05pt')
                     .text(word);
             }
         }
-        return(lineNumber);
+        return (lineNumber);
     }
 
     fillSkills(basey) {
         let me = this;
         me.spe_col_max = 4;
         let oy = basey;
-        let oy_spe = basey + 9.5 * me.stepy;
+        let oy_spe = basey + 7 * me.stepy;
         let ox = 1.5 * me.stepx;
         let skills = me.character.append('g').selectAll('g')
             .data(me.data["skills_list"]);
@@ -1025,18 +1041,18 @@ xmlns:xlink="http://www.w3.org/1999/xlink"> \
             .attr('y1', function (d) {
                 let y = 0;
                 if (!d['is_speciality']) {
-                    y = oy + (d.idx1 % 13) * (me.stepy * 0.7) - 1;
+                    y = oy + (d.idx1 % 13) * (me.stepy * me.small_inter) - 1;
                 } else {
-                    y = oy_spe + (d.idx2 % me.spe_col_max) * (me.stepy * 0.7) - 1;
+                    y = oy_spe + (d.idx2 % me.spe_col_max) * (me.stepy * me.small_inter) - 1;
                 }
                 return y;
             })
             .attr('y2', function (d) {
                 let y = 0;
                 if (!d['is_speciality']) {
-                    y = oy + (d.idx1 % 13) * (me.stepy * 0.7) - 1;
+                    y = oy + (d.idx1 % 13) * (me.stepy * me.small_inter) - 1;
                 } else {
-                    y = oy_spe + (d.idx2 % me.spe_col_max) * (me.stepy * 0.7) - 1;
+                    y = oy_spe + (d.idx2 % me.spe_col_max) * (me.stepy * me.small_inter) - 1;
                 }
                 return y;
             })
@@ -1059,9 +1075,9 @@ xmlns:xlink="http://www.w3.org/1999/xlink"> \
             .attr('y', function (d, i) {
                 let y = 0;
                 if (!d['is_speciality']) {
-                    y = oy + (d.idx1 % 13) * (me.stepy * 0.7);
+                    y = oy + (d.idx1 % 13) * (me.stepy * me.small_inter);
                 } else {
-                    y = oy_spe + (d.idx2 % me.spe_col_max) * (me.stepy * 0.7);
+                    y = oy_spe + (d.idx2 % me.spe_col_max) * (me.stepy * me.small_inter);
                 }
                 return y;
             })
@@ -1072,7 +1088,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink"> \
             .style("font-family", me.base_font)
             .style("font-size", function (d) {
                 if (d['is_speciality']) {
-                    return me.small_font_size + 'px';
+                    return me.medium_font_size + 'px';
                 } else {
                     return me.medium_font_size + 'px';
                 }
@@ -1114,9 +1130,9 @@ xmlns:xlink="http://www.w3.org/1999/xlink"> \
             .attr('y', function (d) {
                     let y = 0;
                     if (!d['is_speciality']) {
-                        y = oy + (d.idx1 % 13) * (me.stepy * 0.7);
+                        y = oy + (d.idx1 % 13) * (me.stepy * me.small_inter);
                     } else {
-                        y = oy_spe + (d.idx2 % me.spe_col_max) * (me.stepy * 0.7);
+                        y = oy_spe + (d.idx2 % me.spe_col_max) * (me.stepy * me.small_inter);
                     }
                     return y;
                 }
@@ -1139,6 +1155,44 @@ xmlns:xlink="http://www.w3.org/1999/xlink"> \
                 }
             );
         skills.exit().remove();
+        me.daddy = me.character;
+
+        let rollstable = [
+            "Standard Roll: 1D12 + Skill + Attribute /vs/ DV",
+            "Margin = Roll - DV",
+            "Margin > DV => Critical Success ",
+            "Margin < 0 => Failure ",
+            "Roll < 0 => Critical Failure ",
+            "12 on D12 => Roll += another D12, etc",
+            "1 on D12 => Roll -= another D12, etc"
+            ]
+
+        let dvtable = [
+            "NAME .............. DV ",
+            "Very Hard ......... 30 ",
+            "Hard .............. 25 ",
+            "Challenging ....... 20 ",
+            "Moderate .......... 15 ",
+            "Easy .............. 10 ",
+            "Piece of Cake ..... 5"
+        ];
+        let accenttable = [
+            "Optimistic Accent Roll: min(2D12) + Attribute + Skill (1W) => margin = margin x 2",
+            "Pessimistic Accent Roll: max(2D12) + Attribute + Skill (2W)  => margin = margin / 2",
+            "Melee/Fight additional damage = ((margin div 3)+DMG) x D6 ",
+
+        ];
+
+        _.forEach(dvtable, function (v, k) {
+            me.drawText(1.5, 22.35 + 0.35 * k, me.draw_fill, me.shadow_stroke, me.small_font_size - 4, "start", v, 1.0, me.mono_font);
+        });
+        _.forEach(rollstable, function (v, k) {
+            me.drawText(5.5, 22.35 + 0.35 * k, me.draw_fill, me.shadow_stroke, me.small_font_size - 4, "start", v, 1.0, me.mono_font);
+        });
+        _.forEach(accenttable, function (v, k) {
+            me.drawText(12.5, 22.35 + 0.35 * k, me.draw_fill, me.shadow_stroke, me.small_font_size - 4, "start", v, 1.0, me.mono_font);
+        });
+
     }
 
 
@@ -1194,7 +1248,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink"> \
         //     "Strong Leg .... 3-4 ",
         //     "Weak Leg ...... 1-2 "];
         _.forEach(locstring, function (v, k) {
-            me.drawText(ox + 1.75, oy + 8.0 + 0.35 * k, me.draw_fill, me.shadow_stroke, me.small_font_size - 4, "left", v, 1.0, me.mono_font);
+            me.drawText(ox + 2.0, oy + 8.0 + 0.35 * k, me.draw_fill, me.shadow_stroke, me.small_font_size - 4, "left", v, 1.0, me.mono_font);
         });
         // _.forEach(locstringcoc,function(v,k){
         //     me.drawText(ox + 1.75, oy + 8.15+0.35*k, me.draw_fill, me.shadow_stroke, me.small_font_size-4, "left", v, 1.0, me.mono_font);
@@ -1227,7 +1281,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink"> \
         me.drawRect(ox + 0.5, oy + 4.75, 1, 1, "transparent", me.shadow_stroke, 1);
         if (me.blank === false) {
             me.drawText(ox + 1, oy + 1.25, me.user_fill, me.user_stroke, me.medium_font_size, "middle", me.data["SA_HUM"], 1.0, me.user_font);
-            me.wrap(me.data['narrative'], ox + 6.25, basey + 5.25, 8.5, me.user_font);
+            me.wrap(me.data['narrative'], ox + 6.25, basey + 5.5, 8.5, me.user_font);
         }
 
 
@@ -1252,196 +1306,143 @@ xmlns:xlink="http://www.w3.org/1999/xlink"> \
 
     }
 
-    fillArmors(basey) {
-        let me = this;
-        let oy = basey + 0.6;
-        let ox = 1.5;
-        me.daddy = me.character;
-        // console.log(me.data);
-        me.drawText(ox + 0, basey, me.draw_fill, me.draw_stroke, me.small_font_size, "start", "Armor");
-        me.drawText(ox + 4.75, basey, me.draw_fill, me.draw_stroke, me.small_font_size, "start", "CAT");
-        me.drawText(ox + 6, basey, me.draw_fill, me.draw_stroke, me.small_font_size, "start", 'HE');
-        me.drawText(ox + 7, basey, me.draw_fill, me.draw_stroke, me.small_font_size, "start", 'TO');
-        me.drawText(ox + 8, basey, me.draw_fill, me.draw_stroke, me.small_font_size, "start", 'SA');
-        me.drawText(ox + 9, basey, me.draw_fill, me.draw_stroke, me.small_font_size, "start", 'WA');
-        me.drawText(ox + 10, basey, me.draw_fill, me.draw_stroke, me.small_font_size, "start", 'SL');
-        me.drawText(ox + 11, basey, me.draw_fill, me.draw_stroke, me.small_font_size, "start", 'WL');
-        me.drawText(ox + 12, basey, me.draw_fill, me.draw_stroke, me.small_font_size, "start", "ENC");
-        me.drawText(ox + 13, basey, me.draw_fill, me.draw_stroke, me.small_font_size, "start", "TECH LVL");
-        _.forEach(me.data["armors"], function (e, i) {
-            let o = JSON.parse(e);
-            let offset = i * 0.6;
-            // console.log(o)
-            me.drawText(ox + 0, oy + offset, me.user_fill, me.user_stroke, me.small_font_size, "start", o.reference, 1.0, me.user_font);
-            me.drawText(ox + 4.75, oy + offset, me.user_fill, me.user_stroke, me.small_font_size, "start", o.category, 1.0, me.user_font);
-            me.drawText(ox + 6, oy + offset, me.user_fill, me.user_stroke, me.small_font_size, "start", (o.head ? o.stopping_power : 0), 1.0, me.user_font);
-            me.drawText(ox + 7, oy + offset, me.user_fill, me.user_stroke, me.small_font_size, "start", (o.torso ? o.stopping_power : 0), 1.0, me.user_font);
-            me.drawText(ox + 8, oy + offset, me.user_fill, me.user_stroke, me.small_font_size, "start", (o.right_arm ? o.stopping_power : 0), 1.0, me.user_font);
-            me.drawText(ox + 9, oy + offset, me.user_fill, me.user_stroke, me.small_font_size, "start", (o.left_arm ? o.stopping_power : 0), 1.0, me.user_font);
-            me.drawText(ox + 10, oy + offset, me.user_fill, me.user_stroke, me.small_font_size, "start", (o.right_leg ? o.stopping_power : 0), 1.0, me.user_font);
-            me.drawText(ox + 11, oy + offset, me.user_fill, me.user_stroke, me.small_font_size, "start", (o.left_leg ? o.stopping_power : 0), 1.0, me.user_font);
-            me.drawText(ox + 12, oy + offset, me.user_fill, me.user_stroke, me.small_font_size, "start", o.encumbrance, 1.0, me.user_font);
-            me.drawText(ox + 13, oy + offset, me.user_fill, me.user_stroke, me.small_font_size, "start", o.tech_level, 1.0, me.user_font);
-        });
-    }
-
-    fillWeapons(basey) {
-        let me = this;
-        let oy = basey + 0.6;
-        let ox = 1.5;
-        me.drawText(ox + 0, basey, me.draw_fill, me.draw_stroke, me.small_font_size, "start", "Weapon");
-        me.drawText(ox + 4.75, basey, me.draw_fill, me.draw_stroke, me.small_font_size, "start", "Cat.");
-        me.drawText(ox + 6, basey, me.draw_fill, me.draw_stroke, me.small_font_size, "start", "Cal.");
-        me.drawText(ox + 7, basey, me.draw_fill, me.draw_stroke, me.small_font_size, "start", "WA");
-        me.drawText(ox + 8, basey, me.draw_fill, me.draw_stroke, me.small_font_size, "start", "DC");
-        me.drawText(ox + 10, basey, me.draw_fill, me.draw_stroke, me.small_font_size, "start", "RE");
-        me.drawText(ox + 11, basey, me.draw_fill, me.draw_stroke, me.small_font_size, "start", "CO");
-        me.drawText(ox + 12, basey, me.draw_fill, me.draw_stroke, me.small_font_size, "start", "Clip");
-        me.drawText(ox + 13, basey, me.draw_fill, me.draw_stroke, me.small_font_size, "start", "RoF");
-        me.drawText(ox + 14, basey, me.draw_fill, me.draw_stroke, me.small_font_size, "start", "RNG");
-        me.daddy = me.character;
-        _.forEach(me.data["weapons"], function (e, i) {
-            let o = JSON.parse(e);
-            let offset = i * 0.6;
-            let meta = "";
-            // console.log(o)
-            if (o.meta_type) {
-                meta = "(" + o.meta_type + ")"
-            }
-            me.drawText(ox + 0, oy + offset, me.user_fill, me.user_stroke, me.small_font_size, "start", o.reference + ' ' + meta, 1.0, me.user_font);
-            me.drawText(ox + 4.75, oy + offset, me.user_fill, me.user_stroke, me.small_font_size, "start", o.category, 1.0, me.user_font);
-            me.drawText(ox + 6, oy + offset, me.user_fill, me.user_stroke, me.small_font_size, "start", o.caliber, 1.0, me.user_font);
-            me.drawText(ox + 7, oy + offset, me.user_fill, me.user_stroke, me.small_font_size, "left", o.weapon_accuracy, 1.0, me.user_font);
-            me.drawText(ox + 8, oy + offset, me.user_fill, me.user_stroke, me.small_font_size, "left", o.damage_class, 1.0, me.user_font);
-            me.drawText(ox + 10, oy + offset, me.user_fill, me.user_stroke, me.small_font_size, "left", o.rel, 1.0, me.user_font);
-            me.drawText(ox + 11, oy + offset, me.user_fill, me.user_stroke, me.small_font_size, "left", o.conceilable, 1.0, me.user_font);
-            me.drawText(ox + 12, oy + offset, me.user_fill, me.user_stroke, me.small_font_size, "left", o.clip, 1.0, me.user_font);
-            me.drawText(ox + 13, oy + offset, me.user_fill, me.user_stroke, me.small_font_size, "left", o.rof, 1.0, me.user_font);
-            me.drawText(ox + 14, oy + offset, me.user_fill, me.user_stroke, me.small_font_size, "left", o.rng, 1.0, me.user_font);
-        });
-
-
-    }
-
-    fillBC(basey) {
-        let me = this;
-        let oy = basey + 0.6;
-        let ox = 1.5;
-        me.drawText(ox + 0, basey, me.draw_fill, me.draw_stroke, me.small_font_size, "start", "Blessing/Curse");
-        me.drawText(ox + 4.5, basey, me.draw_fill, me.draw_stroke, me.small_font_size, "start", "Value");
-        me.drawText(ox + 6, basey, me.draw_fill, me.draw_stroke, me.small_font_size, "start", "Description");
-
-        me.daddy = me.character;
-        _.forEach(me.data["BC"], function (e, i) {
-            let o = JSON.parse(e);
-            let offset = i * 0.6;
-            let meta = "";
-            // console.log(o)
-            if (o.meta_type) {
-                meta = "(" + o.meta_type + ")"
-            }
-            me.drawText(ox + 0, oy + offset, me.user_fill, me.user_stroke, me.small_font_size, "start", o.reference + ' ' + meta, 1.0, me.user_font);
-            me.drawText(ox + 4.5, oy + offset, me.user_fill, me.user_stroke, me.small_font_size, "start", o.value, 1.0, me.user_font);
-            me.drawText(ox + 6, oy + offset, me.user_fill, me.user_stroke, me.small_font_size, "start", o.description, 1.0, me.user_font);
-        });
-
-
-    }
-
-
-    fillList(basex = 0, basey = 0, datasource = "ba", styles = {}) {
-        let me = this;
-        let ox = basex, oy = basey+0.6, lines = 1, offset = 0;
-        me.daddy = me.character.append("g").attr('class', datasource + 's');
-        // Labels
-        _.forEach(styles['labels'], function (e, i) {
-            me.drawText(ox + styles["lefts"][i], basey, me.draw_fill, me.draw_stroke, me.small_font_size, "start", e);
-        });
-
-        // Data
-        _.forEach(me.data["BA"], function (e, i) {
-            let o = JSON.parse(e);
-            let meta = "";
-            let stroke = me.user_stroke,
-                fill = me.user_fill,
-                font = me.user_font,
-                size = me.small_font_size,
-                opac = 1.0;
-            offset = (i * 0.6)*lines;
-            oy = basey + offset
-            _.forEach(styles["properties"], function (x, j) {
-                if (styles["aligns"][j] == "multiline") {
-                    lines = me.wrap(o[x],ox +styles["lefts"][j],oy,styles["widths"][j],font) +1 ;
-                    console.log("Lines "+ x+" --> "+lines)
-                }
-            });
-            _.forEach(styles["properties"], function (x, j) {
-                if (styles["aligns"][j] != "multiline") {
-                    me.drawText(ox + styles["lefts"][j], oy, fill, stroke, size, styles["aligns"][j], o[x]+" "+i+"/"+j, opac, font);
-                }
-            });
-
-
-        });
-    }
-
-    fillBA(basey) {
+    fillArmors(basex = 0, basey = 0) {
         let me = this;
         let styles = {}
-        styles["labels"] = ["Benefice/Affliction", "Value", "Description"]
-        styles["properties"] = ["reference", "value", "description"]
-        styles["aligns"] = ["start", "start", "multiline"]
-        styles["widths"] = [0, 0, 8]
-        styles["lefts"] = [0, 4.5, 6]
-        me.fillList(1.5, basey, "BA", styles);
+        styles["labels"] = ["Armor", "Cat", "HE", 'TO', 'SA', 'WA', 'SL', 'WL', 'Enc', 'TL']
+        styles["properties"] = ["reference", "category", "head", 'torso', 'right_arm', 'left_arm', 'right_leg', 'left_leg', 'encumbrance', 'tech_level']
+        styles["aligns"] = ["start", "start", "start", "start", "start", "start", "start", "start", "start"]
+        styles["widths"] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        styles["lefts"] = [0, 4, 6, 7, 8, 9, 10, 11, 12, 13]
+        me.fillList(basex, basey, "armors", styles);
     }
 
-    fillToDs(basey) {
+    fillWeapons(basex = 0, basey = 0) {
         let me = this;
-        let oy = basey + 0.6;
-        let ox = 17.5;
-        me.drawText(ox + 0, basey, me.draw_fill, me.draw_stroke, me.small_font_size, "start", "Tour Of Duty");
-        me.drawText(ox + 4.5, basey, me.draw_fill, me.draw_stroke, me.small_font_size, "start", "Cat.");
+        let styles = {}
+        styles["labels"] = ["Weapon", "Cat", "Caliber", 'WA', 'DC', 'RE', 'CO', 'Clip', 'ROF', 'RNG']
+        styles["properties"] = ["reference", "category", "caliber", 'weapon_accuracy', 'damage_class', 'rel', 'conceilable', 'clip', 'rof', 'rng']
+        styles["aligns"] = ["start", "start", "start", "start", "start", "start", "start", "start", "start", "start"]
+        styles["widths"] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        styles["lefts"] = [0, 4, 5, 6, 7, 9, 10, 11, 12, 13]
+        me.fillList(basex, basey, "weapons", styles);
+    }
 
-        me.daddy = me.character;
-        _.forEach(me.data["tods"], function (e, i) {
-            let o = JSON.parse(e);
-            let offset = i * 0.6;
-            let meta = "";
-            // console.log(o)
-            if (o.meta_type) {
-                meta = "(" + o.meta_type + ")"
-            }
-            me.drawText(ox + 0, oy + offset, me.user_fill, me.user_stroke, me.small_font_size, "start", o.reference + ' ' + meta, 1.0, me.user_font);
-            me.drawText(ox + 4.5, oy + offset, me.user_fill, me.user_stroke, me.small_font_size, "start", o.category, 1.0, me.user_font);
-        });
+    fillBC(basex = 0, basey = 0) {
+        let me = this;
+        let styles = {}
+        styles["labels"] = ["Blessing/Curse", "Value", "Description"]
+        styles["properties"] = ["reference", "value", "description"]
+        styles["aligns"] = ["multiline", "start", "multiline"]
+        styles["widths"] = [2, 0, 6.5]
+        styles["lefts"] = [0, 2.5, 3.5]
+        me.fillList(basex, basey, "BC", styles);
+    }
 
+    fillBA(basex = 0, basey = 0) {
+        let me = this;
+        let styles = {}
+        styles["labels"] = ["Benefice/Affliction", "Value", "Description","Note"]
+        styles["properties"] = ["benefice_affliction_ref__reference", "benefice_affliction_ref__value", "benefice_affliction_ref__description", "description"]
+        styles["aligns"] = ["multiline", "start", "multiline", "multiline"]
+        styles["widths"] = [2, 0, 4.5, 3]
+        styles["lefts"] = [0, 2.5, 3.5, 8]
+        me.fillList(basex, basey, "BA", styles);
+    }
+
+    fillToDs(basex = 0, basey = 0) {
+        let me = this;
+        let styles = {}
+        styles["labels"] = ["Cat", "Tour of Duty", "Pts"]
+        styles["properties"] = ["category", "reference", "value"]
+        styles["aligns"] = ["start", "multiline", "start"]
+        styles["widths"] = [0, 5, 0]
+        styles["lefts"] = [0, 0.5, 5]
+        me.fillList(basex, basey, "tods", styles);
+    }
+
+    fillOccult(basex = 0, basey = 0) {
+        let me = this;
+        me.drawRect(basex+9.75, basey-0.25, 0.75,0.75,"transparent", me.draw_stroke, 2,"",1,5);
+        me.drawRect(basex+9.75, basey+0.75, 0.75,0.75,"transparent", me.draw_stroke, 2,"",1,5);
+        me.drawText(basex, basey, me.draw_fill, me.draw_stroke, me.medium_font_size, "start", "Occult Arts", 1.0, me.base_font);
+        me.drawText(basex, basey+0.60, me.draw_fill, me.draw_stroke, me.small_font_size, "start", "Stigma:", 1.0, me.base_font);
+        me.drawText(basex, basey+1.10, me.draw_fill, me.draw_stroke, me.small_font_size, "start", "Pathes:", 1.0, me.base_font);
+        me.drawText(basex+9.00, basey+0.25, me.draw_fill, me.draw_stroke, me.medium_font_size, "start", "LVL", 1.0, me.base_font);
+        me.drawText(basex+9.00, basey+1.25, me.draw_fill, me.draw_stroke, me.medium_font_size, "start", "DRK", 1.0, me.base_font);
+        if (!me.blank) {
+            me.drawText(basex + 2.0, basey + 0.60, me.user_fill, me.user_stroke, me.small_font_size, "start", me.data['stigma'], 1.0, me.user_font);
+            me.drawText(basex + 2.0, basey + 1.10, me.user_fill, me.user_stroke, me.small_font_size, "start", me.data['path'], 1.0, me.user_font);
+            me.drawText(basex + 9.9, basey + 0.30, me.user_fill, me.user_stroke, me.large_font_size, "start", me.data['OCC_LVL'], 1.0, me.user_font);
+            me.drawText(basex + 9.9, basey + 1.30, me.user_fill, me.user_stroke, me.large_font_size, "start", me.data['OCC_DRK'], 1.0, me.user_font);
+        }
+        let styles = {}
+        styles["labels"] = ["Lvl", "Path", "Ritual", "G", "L", "P","W"]
+        styles["properties"] = ["level", "path", "reference", "gesture", "liturgy", "prayer","wyrd_cost"]
+        styles["aligns"] = ["start", "start", "multiline","start","start","start","start"]
+        styles["widths"] = [0, 0,   3.5, 0,   0,   0, 0]
+        styles["lefts"] =  [0, 0.5, 2.5, 6.5, 7.1, 7.7, 8.3]
+        me.fillList(basex, basey + 2.0, "rituals", styles);
+    }
+
+    fillWallet(basex = 0, basey = 0) {
+        let me = this;
+        me.drawText(basex, basey, me.draw_fill, me.draw_stroke, me.medium_font_size, "start", "Assets & Money", 1.0, me.base_font);
+        me.drawText(basex, basey+0.60, me.draw_fill, me.draw_stroke, me.small_font_size, "start", "Wallet Money:", 1.0, me.base_font);
+        me.drawText(basex, basey+1.10, me.draw_fill, me.draw_stroke, me.small_font_size, "start", "Bank Accounts:", 1.0, me.base_font);
+
+        if (!me.blank) {
+            // me.drawText(basex + 2.0, basey + 0.60, me.user_fill, me.user_stroke, me.small_font_size, "start", me.data['stigma'], 1.0, me.user_font);
+            // me.drawText(basex + 2.0, basey + 1.10, me.user_fill, me.user_stroke, me.small_font_size, "start", me.data['path'], 1.0, me.user_font);
+            // me.drawText(basex + 9.9, basey + 0.30, me.user_fill, me.user_stroke, me.large_font_size, "start", me.data['OCC_LVL'], 1.0, me.user_font);
+            // me.drawText(basex + 9.9, basey + 1.30, me.user_fill, me.user_stroke, me.large_font_size, "start", me.data['OCC_DRK'], 1.0, me.user_font);
+        }
 
     }
 
-    fillMore(basey) {
+    fillGear(basex = 0, basey = 0) {
+        let me = this;
+        me.drawText(basex, basey, me.draw_fill, me.draw_stroke, me.medium_font_size, "start", "Possessions, Gear & Equipment", 1.0, me.base_font);
+    }
+
+    fillShortcuts(basex = 0, basey = 0) {
+        let me = this;
+        let styles = {}
+        styles["labels"] = ["Shortcut", "Label", "Score"]
+        styles["properties"] = ["rationale", "label", "score"]
+        styles["aligns"] = ["multiline", "multiline", "start"]
+        styles["widths"] = [5, 4, 0]
+        styles["lefts"] = [0, 5.5, 9.5]
+        me.fillList(basex, basey, "shortcuts", styles);
+    }
+
+    fillShield(basex = 0, basey = 0) {
+        let me = this;
+        let styles = {}
+        me.drawText(basex, basey, me.draw_fill, me.draw_stroke, me.medium_font_size, "start", "Energy Shields", 1.0, me.base_font);
+        styles["labels"] = ["Shield", "min", "MAX", "Hits"]
+        styles["properties"] = ["reference", "protection_min", "protection_max", "hits"]
+        styles["aligns"] = ["start", "start", "start"]
+        styles["widths"] = [0, 0, 0, 0]
+        styles["lefts"] = [0, 2.25, 2.85, 3.5]
+        me.fillList(basex, basey+me.small_inter, "shields", styles);
+    }
+
+
+    fillPicture(basex, basey) {
         let me = this;
         let imglnk = 'media/images/f_' + me.data["rid"] + ".jpg";
-        //imglnk  = "http://zotzgi:8088/media/images/f_cassandra_varnovicz.jpg"
-        // console.log(imglnk);
         me.daddy = me.character;
         me.daddy.append("svg:image")
             .attr("xlink:href", function (d) {
                 return imglnk;
             })
-            .attr("x", 16 * me.stepx)
-            .attr("y", 26 * me.stepy)
-            .attr("width", 6 * me.stepx)
-            .attr("height", 8 * me.stepx)
+            .attr("x", basex * me.stepx)
+            .attr("y", basey * me.stepy)
+            .attr("width", 3.5 * me.stepx)
+            .attr("height", 5 * me.stepx)
         ;
-        me.drawLine(15, 15, 10, 35, me.draw_fill, me.draw_stroke, 3);
-        me.drawLine(15, 23, 25.5, 25.5, me.draw_fill, me.draw_stroke, 3);
-
-        me.drawText(16.5, 10.5, me.draw_fill, me.draw_stroke, me.small_font_size, "start", "Cybernetics", 1.0, me.base_font);
-        me.drawText(16.5, 13.5, me.draw_fill, me.draw_stroke, me.small_font_size, "start", "Occult", 1.0, me.base_font);
-
     }
-
 
     fillCharacter(page = 0) {
         let me = this;
@@ -1451,13 +1452,92 @@ xmlns:xlink="http://www.w3.org/1999/xlink"> \
             me.fillSkills(13 * me.stepy);
             me.fillExtras(25);
         } else {
-            me.fillArmors(3);
-            me.fillWeapons(5.5);
-            me.fillToDs(3);
-            me.fillBC(10.5);
-            me.fillBA(13.5);
-            me.fillMore(16)
+            me.fillArmors(1.25, 3);
+            me.fillWeapons(1.25, 5.5);
+            me.fillToDs(17.25, 3);
+            me.fillBC(1.25, 10.5);
+            me.fillBA(1.25, 13.5);
+            me.fillOccult(12.25, 13.5)
+            me.fillShortcuts(1.25, 20.5)
+            me.fillShield(12.25, 10.5)
+            me.fillWallet(17.25, 8.5)
+            me.fillGear(12.25, 20.5)
+            me.fillPicture(1.25, 29.5)
         }
+    }
+
+    fillList(basex = 0, basey = 0, datasource = "ba", styles = {}) {
+        let me = this;
+        let ox = basex, oy = basey, lines = 1, offset = 0;
+        let w = 0, l = 1;
+        _.forEach(styles['lefts'], function (e, i) {
+            if (e > w) {
+                w = e;
+            }
+        });
+        me.daddy = me.character.append("g").attr('class', datasource + 's');
+
+        // Labels
+        _.forEach(styles['labels'], function (e, i) {
+            me.drawText(ox + styles["lefts"][i], oy, me.draw_fill, me.draw_stroke, me.small_font_size, "start", e);
+        });
+        _.forEach(me.data[datasource], function (e, i) {
+            // let o = JSON.parse(e);
+            let meta = "";
+            let stroke = me.user_stroke,
+                fill = me.user_fill,
+                font = me.user_font,
+                size = me.small_font_size,
+                opac = 1.0, biggest=0;
+            if (!me.blank) {
+                l = 0;
+                offset = (i+biggest) * me.small_inter;
+                oy = basey + me.small_inter + offset;
+                biggest = 0;
+                _.forEach(styles["properties"], function (x, j) {
+                    if (styles["aligns"][j] == "multiline") {
+                        let data = undefined;
+                        let property_components = x.split('__');
+                        if (property_components.length <2 ){
+                            data = e[x]
+                        }else{
+                            data = e[property_components[0]][property_components[1]]
+                        }
+                        lines = me.wrap(data, ox + styles["lefts"][j], oy, styles["widths"][j], font) + 1;
+                    }else{
+                        lines = 0;
+                    }
+                    if (lines>biggest){
+                        biggest = lines;
+                    }
+                });
+                _.forEach(styles["properties"], function (x, j) {
+                    if (styles["aligns"][j] != "multiline") {
+                        let data = undefined;
+                        let property_components = x.split('__');
+                        if (property_components.length <2 ){
+                            data = e[x]
+                        }else{
+                            data = e[property_components[0]][property_components[1]]
+                        }
+                        me.drawText(ox + styles["lefts"][j], oy, fill, stroke, size, styles["aligns"][j], data, opac, font);
+                    }
+                });
+            }
+        });
+        if (me.debug) {
+            me.drawRect(basex, basey+0.25, w+0.5  +styles["widths"][styles["widths"].length-1], oy-basey, "transparent", '#A22')
+        }
+    }
+
+    zoomActivate() {
+        let me = this;
+        me.zoom = d3.zoom()
+            .scaleExtent([0.25, 4])
+            .on('zoom', function (event) {
+                me.svg.attr('transform', event.transform)
+            });
+        me.vis.call(me.zoom);
     }
 
     perform(character_data = null, page = 0) {
@@ -1465,6 +1545,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink"> \
         console.log('FICS_SHEET: Performing...');
         if (character_data) {
             me.data = character_data;
+            console.debug(me.data);
         }
         me.guideline = me.data['guideline'];
         $(me.parent).css('display', 'block');
@@ -1474,6 +1555,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink"> \
         }
         me.fillCharacter(page);
         me.drawButtons();
+        me.zoomActivate();
     }
 }
 
