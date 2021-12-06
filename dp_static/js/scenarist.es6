@@ -1,1 +1,1 @@
-/home/zaffarelli/Perso/github/dramatis_personae/collector/static/js/scenarist.es6
+/home/zaffarelli/Perso/github/dramatis_personae/scenarist/static/js/scenarist.es6

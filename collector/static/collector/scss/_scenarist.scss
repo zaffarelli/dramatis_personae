@@ -80,6 +80,8 @@
             width:auto;
             flex: 10 1 auto;
             align-self:flex-end;
+            border:1px dotted orange;
+            background:$fics_darkest;
             & p {
                 padding: 0;
                 text-indent: 0;

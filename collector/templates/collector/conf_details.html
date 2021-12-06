@@ -7,7 +7,8 @@
                 <div class='chapter'>&nbsp;</div>
                 <h1>{{ epic.title }}</h1>
                 <div class='storybar epic'>
-                    <p class='epic_{{epic.data.id}}'>
+                    <p class='epic_{{epic.data.id}}'  children='{{epic.data.children}}'>
+                        <button class='compact rebuild_pdf' id='{{epic.data.id}}'>PDF</button>
                         <button class='compact episode_cast' id='c-epic-{{epic.data.id}}' page='1'>Epic</button>
                         <button class='compact view_epic' id='{{epic.data.id}}'>View</button>
                         <button class='compact edit_epic' id='{{epic.data.id}}'>Edit</button>

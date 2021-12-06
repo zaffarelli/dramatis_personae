@@ -1,7 +1,6 @@
 {% load fics_filters %}
 
 <div class="storydetails act">
-
     {% if act.showquizz %}
         {% if act.quizz_set %}
             {{act.quizz_set.first.verbose | safe }}

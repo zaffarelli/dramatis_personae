@@ -1,8 +1,8 @@
-'''
+"""
 ╔╦╗╔═╗  ╔═╗┌─┐┌─┐┌┐┌┌─┐┬─┐┬┌─┐┌┬┐
  ║║╠═╝  ╚═╗│  ├┤ │││├─┤├┬┘│└─┐ │
 ═╩╝╩    ╚═╝└─┘└─┘┘└┘┴ ┴┴└─┴└─┘ ┴
-'''
+"""
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView
 from django.views.generic.edit import CreateView
@@ -40,7 +40,6 @@ class EventDeleteView(DeleteView):
 
 @csrf_exempt
 def add_event(request):
-    """ Add a new character to the universe """
     if request.is_ajax():
       if request.method == 'POST':
         id_ = request.POST.get('id')

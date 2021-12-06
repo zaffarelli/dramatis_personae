@@ -1,8 +1,8 @@
-'''
+"""
 ╔╦╗╔═╗  ╔═╗┌─┐┌─┐┌┐┌┌─┐┬─┐┬┌─┐┌┬┐
  ║║╠═╝  ╚═╗│  ├┤ │││├─┤├┬┘│└─┐ │
 ═╩╝╩    ╚═╝└─┘└─┘┘└┘┴ ┴┴└─┴└─┘ ┴
-'''
+"""
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView
 from django.views.generic.edit import DeleteView
@@ -31,7 +31,6 @@ class DramaUpdateView(AjaxFromResponseMixin,UpdateView):
 
 
 def add_drama(request):
-    """ Add a new character to the universe """
     import datetime
     if request.is_ajax():
         if request.method == 'POST':

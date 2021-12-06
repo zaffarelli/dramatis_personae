@@ -5303,7 +5303,9 @@ th.skill_dot {
       margin: 0;
       width: auto;
       flex: 10 1 auto;
-      align-self: flex-end; }
+      align-self: flex-end;
+      border: 1px dotted orange;
+      background: black; }
       .storyview .title .storybar p {
         padding: 0;
         text-indent: 0;
@@ -6501,16 +6503,19 @@ th.skill_dot {
         text-align: justify; }
         .mosaic .tile.storyview .storydetails.epic {
           border-left: 5px solid #848;
-          background: transparent; }
+          background: #111; }
         .mosaic .tile.storyview .storydetails.drama {
           border-left: 5px solid #737;
-          background: transparent; }
+          background: transparent;
+          background: #222; }
         .mosaic .tile.storyview .storydetails.act {
           border-left: 5px solid #626;
-          background: transparent; }
+          background: transparent;
+          background: #333; }
         .mosaic .tile.storyview .storydetails.event {
           border-left: 5px solid #515;
-          background: transparent; }
+          background: transparent;
+          background: #444; }
         .mosaic .tile.storyview .storydetails .brick {
           display: inline-block;
           flex-order: 1;

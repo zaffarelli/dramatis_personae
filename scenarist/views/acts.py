@@ -1,8 +1,8 @@
-'''
+"""
 ╔╦╗╔═╗  ╔═╗┌─┐┌─┐┌┐┌┌─┐┬─┐┬┌─┐┌┬┐
  ║║╠═╝  ╚═╗│  ├┤ │││├─┤├┬┘│└─┐ │
 ═╩╝╩    ╚═╝└─┘└─┘┘└┘┴ ┴┴└─┴└─┘ ┴
-'''
+"""
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView
 from django.views.generic.edit import DeleteView
@@ -32,7 +32,6 @@ class ActUpdateView(AjaxFromResponseMixin,UpdateView):
 
 
 def add_act(request):
-    """ Add a new character to the universe """
     if request.is_ajax():
         if request.method == 'POST':
             full_id = request.POST.get('id')

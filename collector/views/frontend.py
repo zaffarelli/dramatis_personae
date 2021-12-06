@@ -280,7 +280,7 @@ def display_sheet(request, pk=None):
             pk = 22
         c = Character.objects.get(id=pk)
         scenario = campaign.epic.title.upper()
-        pre_title = campaign.epic.place + ' ' + campaign.epic.date;
+        pre_title = campaign.epic.place + ' - ' + campaign.epic.date;
         post_title = ""
         spe = c.get_specialities()
         shc = c.get_shortcuts()
