@@ -5,7 +5,7 @@
         <div class="epic_wrap">
             <div class='title'>
                 <div class='chapter'>&nbsp;</div>
-                <h1>{{ epic.title }}</h1>
+                <h1>{{ epic.title|upper }}</h1>
                 <div class='storybar epic'>
                     <p class='epic_{{epic.data.id}}'  children='{{epic.data.children}}'>
                         <button class='compact rebuild_pdf' id='{{epic.data.id}}'>PDF</button>

@@ -272,7 +272,7 @@ class ShipRef(models.Model):
                 for section in self.shipsection_set.all():
                     if section.section != "9":
                         self.cost += section.structure_points
-            except:
+            except Exception as e:
                 logger.info("Spaceship [%s] not yet fixable... Next save will do." % (self.reference))
                 import sys
                 print(sys.exc_info()[0])

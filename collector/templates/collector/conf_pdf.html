@@ -11,27 +11,25 @@
     {%if epic.data.image %}
     <img src='collector/static/collector/{{epic.data.image}}.png' width='12cm'>
     {%else%}
-    <h1>{{ epic.title }}</h1>
+    <h1>{{ epic.title|upper }}</h1>
     {%endif%}
-    <p>
     {% include 'collector/pdf/article_info.html' with c=epic%}
     {{ epic.data.description|linebreaks|parse_avatars_pdf|safe }}
+    <pdf:nextpage />
     {% for drama in epic.dramas %}
         {% if drama.data.to_PDF %}
-        <pdf:nextframe />
-        <h2>Chapter {{drama.data.chapter|as_roman}} - {{ drama.title }}</h2>
-        <hr/>
+        <h2>{{drama.data.chapter|as_roman}} - {{ drama.title|upper }}</h2>
         {% include 'collector/pdf/article_info.html' with c=drama %}
         {{ drama.data.description|linebreaks|parse_avatars_pdf|safe }}<br/>
         {{ drama.data.resolution|linebreaks|parse_avatars_pdf|safe }}
         {% for act in drama.acts %}
             {% if act.data.to_PDF %}
-            <h3><span class='small'>{{act.data.full_chapter}}&nbsp;</span> {{ act.title }}</h3>
+            <h3><span>{{act.data.full_chapter}}&nbsp;</span> {{ act.title|upper }}</h3>
             {% include 'collector/pdf/article_info.html' with c=act%}
             {{ act.data.description|linebreaks|parse_avatars_pdf|safe }}<br/>
             {{ act.data.resolution|linebreaks|parse_avatars_pdf|safe }}
             {% for event in act.events %}
-                <h4><span class='small'>{{event.data.full_chapter}}&nbsp;</span> {{ event.title }}</h4>
+                <h4><span>{{event.data.full_chapter}}&nbsp;</span> {{ event.title }}</h4>
                 {% include 'collector/pdf/article_info.html' with c=event%}
                 {{ event.data.description|linebreaks|parse_avatars_pdf|safe }}<br/>
                 {{ event.data.resolution|linebreaks|parse_avatars_pdf|safe }}

@@ -7,31 +7,31 @@
     <style>
         @font-face {
             font-family: 'Text';
-            src: url('collector/static/collector/fonts/Dosis-Regular.ttf');
+            src: url('collector/static/collector/fonts/RobotoCondensed-Light.ttf');
         }
 
         @font-face {
             font-family: 'Text';
             font-style: italic;
-            src: url('collector/static/collector/fonts/BarlowCondensed-RegularItalic.ttf');
+            src: url('collector/static/collector/fonts/RobotoCondensed-Italic.ttf');
         }
 
         @font-face {
             font-family: 'Text';
             font-weight: bold;
             font-style: italic;
-            src: url('collector/static/collector/fonts/BarlowCondensed-BoldItalic.ttf');
+            src: url('collector/static/collector/fonts/RobotoCondensed-BoldItalic.ttf');
         }
 
         @font-face {
             font-family: 'Text';
             font-weight: bold;
-            src: url('collector/static/collector/fonts/BarlowCondensed-Bold.ttf');
+            src: url('collector/static/collector/fonts/RobotoCondensed-Bold.ttf');
         }
 
         @font-face {
-            font-family: 'Title';
-            src: url('collector/static/collector/fonts/Eczar-SemiBold.ttf');
+            font-family: 'MaxTitle';
+            src: url('collector/static/collector/fonts/Metamorphous-Regular.ttf');
         }
 
         @font-face {
@@ -98,17 +98,14 @@
         }
 
         body {
-            padding: 0;
-            margin: 0;
-            line-height: 0.9em;
             font-family: Text;
             font-height: 10pt;
+            line-height: 1.1em;
         }
 
         #footer_content {
             font-size: 9pt;
             text-align: center;
-            font-weight: bold;
             font-family: Text;
         }
 
@@ -127,46 +124,48 @@
         }
 
         h1, h2, h3, h4, h5, h6 {
-            font-family: Title;
+            font-family: MaxTitle;
             margin:0;
             padding:0
         }
 
         h1 {
             font-size: 28pt;
-
+            text-align:center;
         }
 
         h2 {
-            font-size: 24pt;
+            font-size: 18pt;
             text-align: left;
+            font-weight:bold;
 
+            margin-top:1em;
         }
 
         h3 {
-            font-size: 18pt;
-            margin: 0;
-            padding: 0;
+            font-size: 16pt;
+
+            margin-top:1em;
         }
 
         h4 {
-            font-size: 16pt;
-            color: #204030;
-            margin: 0;
-            padding: 0;
+            font-size: 14pt;
+
+            font-weight:bold;
+            margin-top:1em;
         }
 
         h5 {
-            font-size: 14pt;
-            color: #203040;
+            font-size: 12pt;
+
             padding:0;
             margin:0;
         }
 
 
         h6 {
-            font-size: 12pt;
-            color: #304020;
+            font-size: 9pt;
+
             padding:0;
             margin:0;
             line-height:0.5em;
@@ -183,18 +182,25 @@
             margin-bottom: 0.8em;
             line-height: 0.9em;
             display: block;
+            border-left:10px solid silver;
         }
 
         code b {
             font-variant: small-caps;
+        }
+        code i{
+            font-style: italic;
+            font-weight: normal;
+            color:#903030;
         }
 
         p {
             font-family: Text;
             font-size: 10pt;
             text-align: justify;
-            padding: 0;
-            margin: 0;
+            margin:0;
+            padding:0.1em;
+
 
 
 
@@ -203,9 +209,9 @@
 
         }
 
-        .small {
-            font-size: 0.8em;
+        h4 span.small {
             font-family: Text;
+            font-size: 0.8em;
         }
 
         blockquote {
@@ -216,22 +222,19 @@
 
         .embedded_link {
             font-family: Text;
-            font-weight: 200;
-            color: #601060;
+            font-weight: bold;
+            color: #802020;
         }
 
-        /*strong{*/
-        /*  color:#802080;*/
-        /*}*/
-
-        /*em{*/
-        /*  color:#804080;*/
-        /*}*/
-
-        ul, li {
-            font-family: Text;
-            font-size: 10pt;
+        strong{
+          color: #802020;
         }
+
+        em{
+            color: #802020;
+        }
+
+
 
 
     </style>

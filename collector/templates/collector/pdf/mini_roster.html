@@ -3,23 +3,22 @@
 {%load static%}
 
 <code>
-    <b>{{ c.full_name|safe }}</b> {% if c.player != "" %}({{c.player|safe}}){%endif%} {% if not c.balanced %}(&dagger;){%endif%} </br>
+    <b>{{ c.title }}{{ c.full_name|upper|safe }}</b> {% if c.player != "" %}({{c.player|safe}}){%endif%} {% if not c.balanced %}(&dagger;){%endif%} </br>
     {% if c.balanced %}
     {% if c.entrance %}<i>{{ c.entrance|safe }}</i></br>{%endif%}
     {{c.gender|capfirst}} {{ c.specie|capfirst|safe }} {{ c.rank|safe }} of {{ c.alliance|safe }} from {{ c.native_fief|safe }} {{ c.caste|safe }}.</br>
-    Born in {{ c.birthdate }} ({{ c.age }} years old) Height: {{c.height}}cm / Weight:{{c.weight}}kg<br/>
+    Born in {{ c.birthdate }} ({{ c.age }} years old) Height: {{c.height}}cm / Weight:{{c.weight}}kg
     {% if c.nameless %}
-    <br/>PHY:{{c.na_phy}} MEN:{{c.na_men}} COM:{{c.na_com}} <br/>
+    <br/>PHY:{{c.na_phy}} MEN:{{c.na_men}} COM:{{c.na_com}}
     {% else %}
-    <br/>STR:{{c.PA_STR}} CON:{{c.PA_CON}} BOD:{{c.PA_BOD}} MOV:{{c.PA_MOV}} INT:{{c.PA_INT}} WIL:{{c.PA_WIL}} TEM:{{c.PA_TEM}} PRE:{{c.PA_PRE}} TEC:{{c.PA_TEC}} REF:{{c.PA_REF}} AGI:{{c.PA_AGI}} AWA:{{c.PA_AWA}}<br/>
+        <br/><i>STR:{{c.PA_STR}} CON:{{c.PA_CON}} BOD:{{c.PA_BOD}} MOV:{{c.PA_MOV}} INT:{{c.PA_INT}} WIL:{{c.PA_WIL}} TEM:{{c.PA_TEM}} PRE:{{c.PA_PRE}} TEC:{{c.PA_TEC}} REF:{{c.PA_REF}} AGI:{{c.PA_AGI}} AWA:{{c.PA_AWA}}</i><br/>
     {% endif %}
-    <i>REC:{{c.SA_REC}} STA:{{c.SA_STA}} END:{{c.SA_END}} STU:{{c.SA_STU}} RES:{{c.SA_RES}} DMG:{{c.SA_DMG}} TOL:{{c.SA_TOL}} HUM:{{c.SA_HUM}} PAS:{{c.SA_PAS}} WYR:{{c.SA_WYR}} SPD:{{c.SA_SPD}} RUN:{{c.SA_RUN}}</i><br/>
-    <br/><b>Skills:</b>
+    REC:{{c.SA_REC}} STA:{{c.SA_STA}} END:{{c.SA_END}} STU:{{c.SA_STU}} RES:{{c.SA_RES}} DMG:{{c.SA_DMG}}<br/>TOL:{{c.SA_TOL}} HUM:{{c.SA_HUM}} PAS:{{c.SA_PAS}} WYR:{{c.SA_WYR}} SPD:{{c.SA_SPD}} RUN:{{c.SA_RUN}}
+    <br/><b>Skills: </b>
     {% for s in c.skill_set.all %}
     {{s.skill_ref.reference}}[{{s.value|high_skill_check_pdf|safe}}]{% if forloop.last %}.{%else%}, {%endif%}
     {% endfor %}
-    <br/>
-    <br/><b>Shortcuts:</b>{{c.gm_shortcuts_pdf|safe}}<br/>
-    <br/>[{{c.id|six_digit}} / {{c.rid}}]
+    <br/><b>Shortcuts: </b>{{c.gm_shortcuts_pdf|safe}}
+        <br/><i>[{{c.id|six_digit}} / {{c.rid}}]</i>
     {% endif %}
 </code>

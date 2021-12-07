@@ -106,7 +106,7 @@ def char_to_tag(sym, tag, src_txt, changes, prefix='', paragraph=False):
     for item in iter:
         occ = ''.join(item.group().split(sym))
         if paragraph:
-            replacement_str = f'</p><{tag}>{prefix}{occ}</{tag}><p>'
+            replacement_str = f'<{tag}>{prefix}{occ}</{tag}>'
         else:
             replacement_str = f'<{tag}>{prefix}{occ}</{tag}>'
         changes.append({'src': item.group(), 'dst': replacement_str})

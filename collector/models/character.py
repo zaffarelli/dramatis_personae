@@ -121,6 +121,7 @@ class Character(Combattant):
     occult_fire_power = models.PositiveIntegerField(default=0, blank=True)
     occult = models.CharField(max_length=50, default='', blank=True)
     challenge = models.TextField(default='', blank=True)
+    custo_descs = models.TextField(default='', blank=True)
     challenge_value = models.IntegerField(default=0)
     todo_list = models.TextField(default='', blank=True)
     path = models.CharField(max_length=256, default='', blank=True)
@@ -547,7 +548,7 @@ class Character(Combattant):
         for item in all_items:
             if item in custo_ref_items:
                 o_n.append(item)
-                print(item)
+                # print(item)
             else:
                 o.append(item)
         setattr(self, options, o)
@@ -707,10 +708,17 @@ class Character(Combattant):
         if ba:
             return ba
         else:
+            desc_list = self.custo_descs.split(';')
             ba = BeneficeAffliction()
             ba.character = self
             ba.benefice_affliction_ref = aref
-            ba.description = adesc
+            desc = adesc
+            for d in desc_list:
+                if desc == '':
+                    w = d.split(':')
+                    if str(aref) == w[0]:
+                        desc = w[1]
+            ba.description = desc
             ba.save()
             return ba
 

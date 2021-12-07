@@ -216,6 +216,7 @@ class TourOfDuty(models.Model):
                     wp_roots.append(sm.skill_ref.linked_to.reference)
             for bc in tod.blessingcursemodificator_set.all():
                 ch.add_bc(bc.blessing_curse_ref)
+            # print(tod)
             for ba in tod.beneficeafflictionmodificator_set.all():
                 ch.add_ba(ba.benefice_affliction_ref)
         AP += tod.balance_AP

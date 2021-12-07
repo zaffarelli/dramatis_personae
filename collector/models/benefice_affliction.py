@@ -34,7 +34,7 @@ class BeneficeAfflictionRef(UUIDClass):
     watermark = models.CharField(max_length=64, default='',blank=True)
 
     def __str__(self):
-        return '%s %s (%d)' % (self.reference, self.emphasis, self.value)
+        return '%s %s(%d)' % (self.reference, self.emphasis, self.value)
 
     def fix(self):
         super().fix()

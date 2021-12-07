@@ -11,8 +11,8 @@ class FICSSheet {
         let me = this;
         console.log('FICS_SHEET: Initialize');
         me.debug = false;
-        me.blank = false;
-        me.version = "0.9.1";
+        me.blank = true;
+        me.version = "0.9.2";
         me.width = parseInt($(me.parent).css("width"), 10) * 0.75;
         me.height = me.width * 1.4;
         me.w = parseInt($(me.parent).css('width'));
@@ -1271,9 +1271,14 @@ xmlns:xlink="http://www.w3.org/1999/xlink"> \
         let oy = basey;
         let ox = basex;
         me.daddy = me.character;
-        me.drawRect(ox + 1, oy + 1, 0.8, 0.8, "transparent", me.draw_stroke, 4);
-        me.drawRect(ox + 1, oy + 2, 0.8, 0.8, "transparent", me.draw_stroke, 2,);
-        me.drawRect(ox + 1, oy + 3, 0.8, 0.8, "transparent", me.draw_stroke, 2, "5 3");
+        me.drawRect(ox + 1, oy + 1, 0.8, 0.8, "transparent", me.draw_stroke, 2);
+        me.drawRect(ox + 1, oy + 2, 0.8, 0.8, "transparent", me.draw_stroke, 2, "5 3");
+        me.drawRect(ox + 1, oy + 3, 0.8, 0.8, "transparent", me.draw_stroke, 4);
+
+        me.drawText(ox + 1.7, oy + 1.7,me.shadow_fill, me.shadow_stroke, me.small_font_size-4, "end", "SP", 1.0);
+        me.drawText(ox + 1.7, oy + 2.7,me.shadow_fill, me.shadow_stroke, me.small_font_size-4, "end", "MW", 1.0);
+        me.drawText(ox + 1.7, oy + 3.7,me.shadow_fill, me.shadow_stroke, me.small_font_size-4, "end", "SW", 1.0);
+
     }
 
     fillExtras(basey) {
@@ -1321,6 +1326,8 @@ xmlns:xlink="http://www.w3.org/1999/xlink"> \
         });
 
 
+
+
         ox = 5;
         me.drawText(ox + 0.4, oy + 1.75, me.draw_fill, me.draw_stroke, me.small_font_size, "middle", "WA", 1.0);
         me.drawText(ox + 1.4, oy + 0.75, me.draw_fill, me.draw_stroke, me.small_font_size, "middle", "Head", 1.0);
@@ -1328,6 +1335,32 @@ xmlns:xlink="http://www.w3.org/1999/xlink"> \
         me.limbColumn(ox - 1, oy + 1);
         me.limbColumn(ox, oy);
         me.limbColumn(ox + 1, oy + 1);
+
+        if (!me.blank){
+            if (me.data["armors"].length>0) {
+                let armor = me.data["armors"][0]
+                if (armor.left_arm) {
+                    me.drawText(ox + 0.4, oy + 2.50, me.user_fill, me.user_stroke, me.medium_font_size, "middle", armor.stopping_power, 1.0, me.user_font);
+                }
+                if (armor.head) {
+                    me.drawText(ox + 1.4, oy + 1.50, me.user_fill, me.user_stroke, me.medium_font_size, "middle", armor.stopping_power, 1.0, me.user_font);
+                }
+                if (armor.right_arm) {
+                    me.drawText(ox + 2.4, oy + 2.50, me.user_fill, me.user_stroke, me.medium_font_size, "middle", armor.stopping_power, 1.0, me.user_font);
+                }
+                if (armor.left_leg) {
+                    me.drawText(ox + 0.4, oy + 6.50, me.user_fill, me.user_stroke, me.medium_font_size, "middle", armor.stopping_power, 1.0, me.user_font);
+                }
+                if (armor.torso) {
+                    me.drawText(ox + 1.4, oy + 5.50, me.user_fill, me.user_stroke, me.medium_font_size, "middle", armor.stopping_power, 1.0, me.user_font);
+                }
+                if (armor.right_leg) {
+                    me.drawText(ox + 2.4, oy + 6.50, me.user_fill, me.user_stroke, me.medium_font_size, "middle", armor.stopping_power, 1.0, me.user_font);
+                }
+            }
+        }
+
+
         oy += 4;
         me.drawText(ox + 0.4, oy + 1.75, me.draw_fill, me.draw_stroke, me.small_font_size, "middle", "WL", 1.0);
         me.drawText(ox + 1.4, oy + 0.75, me.draw_fill, me.draw_stroke, me.small_font_size, "middle", "Torso", 1.0);
@@ -1338,6 +1371,29 @@ xmlns:xlink="http://www.w3.org/1999/xlink"> \
         me.fillSanity(8.5, 25);
         me.fillGlamour(8.5, 28.5);
         me.fillKarma(8.5, 33);
+
+
+        let constitution = 5;
+        let body = 5;
+        let wstep = 0.14;
+
+        if (me.blank === false){
+            constitution = me.data['PA_CON'];
+            body = me.data['PA_BOD'];
+        }
+
+        me.drawRect(5.0 , oy + 5.5, wstep*body, 0.15, me.shadow_fill, me.shadow_stroke, 1);
+        me.drawRect(5.0+wstep*body , oy + 5.5, wstep*(constitution), 0.15, me.shadow_fill, me.draw_stroke, 1, "5 3");
+        me.drawRect(5.0+wstep*(body+constitution) , oy + 5.5, wstep*(20-constitution-body), 0.15, me.shadow_fill, me.draw_stroke, 2);
+
+        me.drawText(5.0+wstep*body, oy + 5.35, me.draw_fill, me.draw_stroke, me.small_font_size-4, "middle", body, 1.0);
+        me.drawText(5.0+wstep*(body+constitution), oy + 5.35, me.draw_fill, me.draw_stroke, me.small_font_size-4, "middle", (body+constitution), 1.0);
+
+
+        me.drawText(5.0+wstep*(body/2), oy + 5.95, me.draw_fill, me.draw_stroke, me.small_font_size-4, "middle", "ok", 1.0);
+        me.drawText(5.0+wstep*(body+constitution/2), oy + 5.95, me.draw_fill, me.draw_stroke, me.small_font_size-4, "middle", "MW", 1.0);
+        me.drawText(5.0+wstep*((body+constitution)+(20-constitution-body)/2), oy + 5.95, me.draw_fill, me.draw_stroke, me.small_font_size-4, "middle", "SW", 1.0);
+
 
         if (me.blank === false) {
             me.wrap(me.data['narrative'], 14, 25.5, 9, me.user_font);
