@@ -134,9 +134,9 @@ def needs_pdf(modeladmin, request, queryset):
 
 
 class CharacterAdmin(admin.ModelAdmin):
-    list_display = ['full_name', 'player', 'rid', "ranking", "id", 'importance', 'entrance', 'specie', 'alliance_ref', 'alliance',
+    list_display = ['full_name', 'player', "ranking", "id", 'importance', 'entrance', 'specie', 'alliance_ref',
                     'is_dead', 'life_path_total', 'OP',
-                    'use_history_creation', 'is_public', 'is_partial', 'use_only_entrance', 'is_visible']
+                    'audit', 'is_visible']
     inlines = [
         SkillInline,
         BlessingCurseInline,

@@ -11,7 +11,7 @@ class FICSSheet {
         let me = this;
         console.log('FICS_SHEET: Initialize');
         me.debug = false;
-        me.blank = true;
+        me.blank = false;
         me.version = "0.9.2";
         me.width = parseInt($(me.parent).css("width"), 10) * 0.75;
         me.height = me.width * 1.4;

@@ -13,6 +13,8 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, unique=True)
     main_character = models.ForeignKey(Character, on_delete=models.SET_NULL, null=True, blank=True)
     main_epic = models.ForeignKey(Epic, on_delete=models.SET_NULL, null=True, blank=True)
+    option_display_as_list = models.BooleanField(default=False)
+    option_display_count = models.PositiveIntegerField(default=10)
 
 
     @property

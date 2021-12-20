@@ -558,20 +558,6 @@ body {
             color: $fics_golden;
         }
 
-        & .chart_panel {
-            border: 1px solid $fics_darker;
-            box-shadow: 2px 2px 8px $fics_darker;
-            border-radius: 5px 5px 5px 5px;
-            padding: 10px;
-            background-color: $fics_dark;
-            display: inline-block;
-            color: $fics_front;
-
-            & canvas {
-                width: 1000px;
-                height: auto;
-            }
-        }
 
         & .classyview {
             & .pic {

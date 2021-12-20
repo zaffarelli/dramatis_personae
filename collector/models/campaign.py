@@ -127,47 +127,52 @@ class Campaign(models.Model):
     def prepare_colorset(self, size=16, color_scale=False):
         colorset = []
         hcolorset = []
-        colval = '1234567894ABCDE'
+        # colval = '1234567894ABCDE'
+        colval = '0123456677888999AAABBCCDEF'
         idx = 0
         if color_scale:
-            colval = 'ABCDE'
-            prev_com_arr = []
             while idx < size:
                 if idx == 0:
-                    com_arr = []
-                    com_arr.append(random.sample(colval, 1)[0])
-                    com_arr.append(random.sample(colval, 1)[0])
-                    com_arr.append(random.sample(colval, 1)[0])
-                    com_arr.append(random.sample(colval, 1)[0])
-                    prev_com_arr = com_arr
-                    com = '%s%s%s%s' % (com_arr[0], com_arr[1], com_arr[2], com_arr[3])
+                    com = '%s%s%s%sFF' % (
+                        random.sample(colval, 1)[0],
+                        random.sample(colval, 1)[0],
+                        random.sample(colval, 1)[0],
+                        random.sample(colval, 1)[0]
+                    )
+                    prev_com = com
                 else:
-                    com_arr = prev_com_arr
-                    red = f'0x{com_arr[0]}{com_arr[1]}'
-                    green = f'0x{com_arr[2]}{com_arr[3]}'
-                    new_red = f'{hex(int(red, 16) - 4)}'
-                    new_green = f'{hex(int(green, 16) - 4)}'
-                    com_arr[0] = new_red[2]
-                    com_arr[1] = new_red[3]
-                    com_arr[2] = new_green[2]
-                    com_arr[3] = new_green[3]
-                    com = '%s%s%s%s' % (com_arr[0], com_arr[1], com_arr[2], com_arr[3])
-                    prev_com_arr = com_arr
-                col = '#A0' + com
-                hcol = '#C0' + com
+                    com = str(hex(int(prev_com, 16) - 0x00003c))[2:]
+                    print(com)
+                    prev_com = com
+                hh = str(hex(int(com, 16) + 0x00000C))[2:]
+                col = f'#{com:0>6}'
+
+                hcol = f'#{hh:0>6}'
                 colorset.append(col)
                 hcolorset.append(hcol)
                 idx += 1
+            print(colorset,hcolorset)
         else:
             while idx < size:
-                com = '%s%s%s%s' % (
+                com = '0xE%s%s%s%s%s' % (
                     random.sample(colval, 1)[0],
-                    random.sample(colval, 1)[0], random.sample(colval, 1)[0], random.sample(colval, 1)[0])
-                col = '#' + com + 'A0'
-                hcol = '#' + com + 'C0'
+                    random.sample(colval, 1)[0],
+                    random.sample(colval, 1)[0],
+                    random.sample(colval, 1)[0],
+                    random.sample(colval, 1)[0]
+                )
+
+                # com = hex(int(start, 16) ^ idx)
+                hh = str(hex(int(com, 16) | 0x030303))[2:]
+                # start = com
+                col = f'#{com[2:]:0>6}'
+                hcol = f'#{hh:0>6}'
+                # print(f'{idx:0>2}) ', col, hcol)
                 colorset.append(col)
                 hcolorset.append(hcol)
                 idx += 1
+        colorset.sort()
+        hcolorset.sort()
         return colorset, hcolorset
 
     def get_chart(self, field='', filter='', pattern='', type='bar', bar_property='full_name', order_by='',
@@ -234,30 +239,33 @@ class Campaign(models.Model):
                 'type': type,
                 'data': data,
                 'options': {
-                    'title': {
-                        'display': True,
-                        'text': bar_property.upper(),
-                        'fontColor': '#fff',
-                    },
-                    'legend': {
-                        'display': legend_display,
-                        'position': 'right',
-                        'labels': {
+                    'plugins': {
+                        'title': {
+                            'display': True,
+                            'text': bar_property.upper(),
                             'fontColor': '#fff',
-                        }
-                    },
-                    'scales': {
-                        'yAxes': [
-                            {
-                                'ticks': {'mirror': ticks},
-                                'afterFit': 'function(scaleInstance){scaleInstance.width = 400;}',
-                                'fontStyle': 'bold'
+                        },
+                        'legend': {
+                            'display': True,
+                            'position': 'bottom',
+                            'labels': {
+                                'fontColor': '#fff',
                             }
-                        ]
+                        },
+                        'scales': {
+                            'yAxes': [
+                                {
+                                    'ticks': {'mirror': ticks},
+                                    'afterFit': 'function(scaleInstance){scaleInstance.width = 400;}',
+                                    'fontStyle': 'bold'
+                                }
+                            ]
+                        },
                     },
-                    'circumference': 2 * math.pi,
-                    'rotation': -math.pi,
-                    'cutoutPercentage': 40,
+
+                    # 'circumference': 2 * math.pi,
+                    # 'rotation': -math.pi,
+                    # 'cutoutPercentage': 40,
                 }
             }
         }
@@ -272,50 +280,53 @@ class Campaign(models.Model):
             title = 'Population per current fief'
             bar_property = 'current_fief'
             ref = 'name'
-            type = 'horizontalBar'
+            type = 'doughnut'
+            title = "Population per current System"
             legend_display = False
-            skip_zero = True
+            skip_zero = False
         elif name == 'population_per_native_system':
             title = 'Population per native fief'
             bar_property = 'fief'
             ref = 'name'
-            type = 'horizontalBar'
+            type = 'doughnut'
             legend_display = False
-            skip_zero = True
+            skip_zero = False
+            title = "Population per native System"
         elif name == 'population_per_alliance':
             title = 'Population per Alliance'
             bar_property = 'alliance_ref'
             ref = 'reference'
-            type = 'horizontalBar'
+            type = 'doughnut'
             legend_display = False
             skip_zero = True
         elif name == 'population_per_team':
             title = 'Population per Team'
             bar_property = 'team'
             ref = ''
-            type = 'horizontalBar'
+            type = 'doughnut'
             legend_display = False
+            skip_zero = False
             color_scale = True
         elif name == 'population_per_ranking':
             title = 'Population per Rank'
             bar_property = 'ranking'
             ref = ''
-            type = 'horizontalBar'
+            type = 'doughnut'
             legend_display = False
-            color_scale = True
+            # color_scale = True
             skip_zero = True
         elif name == 'population_per_species':
             title = 'Population per Species'
             bar_property = 'specie'
             ref = 'species'
-            type = 'horizontalBar'
+            type = 'doughnut'
             legend_display = False
-            color_scale = True
+            # color_scale = True
         ticks = False
         if not per_item:
-            all = Character.objects.order_by(bar_property)
+            all = self.dramatis_personae.order_by(bar_property)
         else:
-            all = Character.objects.filter(occult_fire_power__gt=0)
+            all = self.dramatis_personae.filter(occult_fire_power__gt=0)
         inside_labels = []
         final_data = []
         border = []
@@ -360,30 +371,33 @@ class Campaign(models.Model):
                 'type': type,
                 'data': data,
                 'options': {
-                    'title': {
-                        'display': True,
-                        'text': title.upper(),
-                        'fontColor': '#fff',
-                    },
-                    'legend': {
-                        'display': legend_display,
-                        'position': 'right',
-                        'labels': {
+                    'responsive': True,
+                    'plugins': {
+                        'title': {
+                            'display': True,
+                            'text': title,
                             'fontColor': '#fff',
-                        }
-                    },
-                    'scales': {
-                        'yAxes': [
-                            {
-                                'ticks': {'mirror': ticks},
-                                'afterFit': 'function(scaleInstance){scaleInstance.width = 100;}',
-                                'fontStyle': 'bold'
+                        },
+                        'legend': {
+                            'display': legend_display,
+                            'position': 'top',
+                            'labels': {
+                                'fontColor': '#FFFFFF',
                             }
-                        ]
-                    },
-                    'circumference': 2 * math.pi,
-                    'rotation': -math.pi,
-                    'cutoutPercentage': 40,
+                        }
+                        # 'scales': {
+                        #     'yAxes': [
+                        #         {
+                        #             'ticks': {'mirror': ticks},
+                        #             'afterFit': 'function(scaleInstance){scaleInstance.width = 50;}',
+                        #             'fontStyle': 'bold'
+                        #         }
+                        #     ]
+                        # }
+                        # 'circumference': 2 * math.pi,
+                        # 'rotation': -math.pi,
+                        # 'cutoutPercentage': 40,
+                    }
                 }
             }
         }
@@ -404,9 +418,9 @@ class Campaign(models.Model):
         levels = []
         for c in all:
             inside_labels.append(getattr(c, 'full_name'))
-            firepowers.append(getattr(c, 'occult_fire_power')/2)
+            firepowers.append(getattr(c, 'occult_fire_power') / 2)
             levels.append(getattr(c, 'OCC_LVL'))
-            darksides.append(getattr(c, 'OCC_DRK')*2)
+            darksides.append(getattr(c, 'OCC_DRK') * 2)
             border.append('#CCC')
         inside_datasets = [{
             'label': 'Occult Level',
@@ -434,18 +448,18 @@ class Campaign(models.Model):
             'spanGaps': False,
         }
             , {
-            'label': 'Occult firepower',
-            'data': firepowers,
-            'borderWidth': 2,
-            'fill': False,
-            'backgroundColor': '#8060F060',
-            'borderColor': '#8060F060',
-            'tension': 0.25,
-            'pointRadius': 3,
-            'pointHoverRadius': 12,
-            'spanGaps': False,
-            'clip': -5
-        }
+                'label': 'Occult firepower',
+                'data': firepowers,
+                'borderWidth': 2,
+                'fill': False,
+                'backgroundColor': '#8060F060',
+                'borderColor': '#8060F060',
+                'tension': 0.25,
+                'pointRadius': 3,
+                'pointHoverRadius': 12,
+                'spanGaps': False,
+                'clip': -5
+            }
         ]
         data = {
             'labels': inside_labels,
@@ -457,40 +471,41 @@ class Campaign(models.Model):
                 'type': type,
                 'data': data,
                 'options': {
-                    'title': {
-                        'display': True,
-                        'text': title.upper(),
-                        'fontColor': '#fff',
-                    },
-                    'legend': {
-                        'display': legend_display,
-                        'position': 'right',
-                        'labels': {
+                    'plugins': {
+                        'title': {
+                            'display': True,
+                            'text': title.upper(),
                             'fontColor': '#fff',
-                        }
-                    },
-                    'scales': {
-                        'r': {
-                            'angleLines': {
-                                'display': True,
-                                'color': '#333'
-                            },
-                            'grid': {
-                                'display': True,
-                                'color': '#333'
-                            },
-                            'ticks': {
-                                'display': False
+                        },
+                        'legend': {
+                            'display': legend_display,
+                            'position': 'bottom',
+                            'labels': {
+                                'fontColor': '#fff',
+                            }
+                        },
+                        'scales': {
+                            'r': {
+                                'angleLines': {
+                                    'display': True,
+                                    'color': '#888'
+                                },
+                                'grid': {
+                                    'display': True,
+                                    'color': '#EEE'
+                                },
+                                'ticks': {
+                                    'display': True
 
-                            },
-                            'pointLabels': {
-                                'display': True,
-                                'color': '#FFF',
+                                },
+                                'pointLabels': {
+                                    'display': True,
+                                    'color': '#FFF',
 
-                            },
-
-                            'suggestedMin': -1,
-                            'suggestedMax': 11
+                                },
+                                'suggestedMin': 0,
+                                'suggestedMax': 11
+                            }
                         }
                     }
                 }
@@ -509,7 +524,9 @@ class Campaign(models.Model):
         result = []
         if self.epic:
             rids = self.epic.get_full_cast()
-            result = self.avatars.filter(rid__in=rids)
+            all_cast = self.avatars.filter(rid__in=rids)
+            all_sup = self.avatars.filter(keyword=self.epic.shortcut)
+            result = all_cast | all_sup
         return result
 
     @property

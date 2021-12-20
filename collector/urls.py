@@ -11,14 +11,14 @@ from collector.views.investigators import InvestigatorUpdateView
 from collector.views.frontend import index, toggle_public, toggle_spotlight, get_list, add_avatar, \
     get_storyline, conf_details, recalc_avatar, heartbeat, \
     show_todo, pdf_show, wa_export_character, tile_avatar, ghostmark_test, display_sheet, switch_epic
-from collector.views.backend import recalc, export, xls_update, pdf_character, gss_update, gss_summary, pdf_rules, roll_dice, bloke_selector
+from collector.views.backend import export, xls_update, pdf_character, gss_update, gss_summary, pdf_rules, roll_dice, bloke_selector, run_audit
 from collector.views.misc_chart import get_population_statistics, get_keywords
 from django.contrib.auth.views import LogoutView
 from collector.views.user import do_login, do_profile, user_friends, user_foes, user_others, user_persystem
 
 urlpatterns = [
     re_path('^$', index, name='index'),
-    re_path('^ajax/recalc/$', recalc, name='recalc'),
+    # re_path('^ajax/recalc/$', recalc, name='recalc'),
     re_path('^ajax/export/$', export, name='export'),
     re_path('^ajax/xls_update/$', xls_update, name='xls_update'),
     re_path('^ajax/gss_update/$', gss_update, name='gss_update'),
@@ -72,5 +72,6 @@ urlpatterns = [
     re_path('^ajax/others/$', user_others, name="user_others"),
     re_path('^ajax/persystem/$', user_persystem, name="user_persystem"),
     re_path('^ajax/blokes/$', bloke_selector, name="bloke_selector"),
+    re_path('^ajax/audit/$', run_audit, name="run_audit"),
 
 ]

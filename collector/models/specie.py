@@ -7,6 +7,7 @@ from django.db import models
 from django.contrib import admin
 import json
 
+
 class Specie(models.Model):
     class Meta:
         ordering = ['species', 'race']
@@ -22,8 +23,9 @@ class Specie(models.Model):
     # skill_balance = models.IntegerField(default=0)
     description = models.TextField(max_length=512, default='', blank=True)
     ra_tod_name = models.CharField(max_length=64, default='', blank=True)
+    hidden = models.BooleanField(default=False)
     # br_tod_name = models.CharField(max_length=64, default='', blank=True)
-
+    vernacular = models.CharField(max_length=64, default='', blank=True)
 
     def __str__(self):
         return '%s %s' % (self.species, self.race)
@@ -58,7 +60,7 @@ class Specie(models.Model):
 
 class SpecieAdmin(admin.ModelAdmin):
     ordering = ['species', 'race']
-    list_display = [ 'species', 'race', 'ra_tod_name','description']
+    list_display = [ 'species', 'race', 'ra_tod_name','description', 'vernacular', 'hidden']
     search_fields = ['species', 'race', 'ra_tod_name']
-    list_filter = ['species', 'ra_tod_name']
+    list_filter = ['species', 'ra_tod_name', 'hidden']
 

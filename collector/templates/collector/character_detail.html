@@ -16,13 +16,12 @@
         <div class="mark">
             {% include 'collector/ghostmark.html' with data=c.ghostmark_data %}
         </div>
-        <div class="tile_back" id="tile_back_{{c.id}}"><i class="action_icon golden fa fa-times-circle"></i></div>
+{#        <div class="tile_back" id="tile_back_{{c.id}}"><i class="action_icon golden fa fa-times-circle"></i></div>#}
     </div>
     <div class='coreblock'>
         <ul>
-            <!-- <li><b>Alliance</b><u>{{ c.alliance|safe }}</u></li> -->
             {% if c.alliance_ref %}
-            <li><b>AllianceRef</b><u>{{ c.alliance_ref|safe }}</u></li>
+            <li><b>Alliance</b><u>{{ c.alliance_ref|safe }}</u></li>
             {% endif %}
             <li><b>Faction</b><u>{{ c.faction|safe }}</u></li>
             {% if not c.nameless %}
@@ -42,6 +41,13 @@
             <li><b>Path</b><u>{{c.path}}</u></li>
             <li><b>Occult Fire power</b><u>{{c.occult_fire_power}}</u></li>
             {% endif %}
+        <li>Dead {{ c.is_dead|prettybool|safe }} |
+            Vis {{c.is_visible|prettybool|safe}} |
+            LP {{c.use_history_creation|prettybool|safe}} |
+            HF {{c.historical_figure|prettybool|safe}} |
+            Ns {{c.nameless|prettybool|safe}} |
+            Pu {{c.is_public|prettybool|safe}}</li>
+
         </ul>
         <ul>
         {% if c.tourofduty_set.count != 0 %}
@@ -55,34 +61,26 @@
             <li></li>
             <li></li>
         {% endif %}
-        <span class='attributes'>
-            <table id="OCC_LVL_{{c.id}}" class='attrpick occult'>
-                {% include "collector/character/character_pa.html" with c=c.info_lvl %}
-            </table>
-            <table id="OCC_DRK_{{c.id}}" class='attrpick occult'>
-                {% include "collector/character/character_pa.html" with c=c.info_drk %}
-            </table>
-        </span>
-        <li>Dead {{ c.is_dead|prettybool|safe }} |
-            Vis {{c.is_visible|prettybool|safe}} |
-            LP {{c.use_history_creation|prettybool|safe}} |
-            HF {{c.historical_figure|prettybool|safe}} |
-            Ns {{c.nameless|prettybool|safe}} |
-            Pu {{c.is_public|prettybool|safe}}</li>
         </ul>
     </div>
 
     <h2>Attributes ({{c.PA_TOTAL}}x3)</h2>
     <div class='attributes'>
         {% include "collector/character/character_primaries.html" %}
+
+            <table id="OCC_LVL_{{c.id}}" class='attrpick occult'>
+                {% include "collector/character/character_pa.html" with c=c.info_lvl %}
+            </table>
+            <table id="OCC_DRK_{{c.id}}" class='attrpick occult'>
+                {% include "collector/character/character_pa.html" with c=c.info_drk %}
+            </table>
+
+
     </div>
     <div class='attributes'>
         {% include "collector/character/character_secondaries.html" %}
     </div>
 
-    <div class='healthbar'>
-        {% include "collector/character/character_healthbar.html" %}
-    </div>
 
 
     <span id="skill_block_{{c.id}}">
@@ -116,6 +114,9 @@
         </span>
     </div>
 
+    <div class='healthbar'>
+        {#% include "collector/character/character_healthbar.html" %#}
+    </div>
 
     {% if c.player|is_not_blank %}
     <hr/>

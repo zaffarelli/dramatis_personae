@@ -264,12 +264,20 @@ def as_lifepath(value):
 
 @register.filter(name='prettybool')
 def prettybool(value):
-    """ Display a boolean mark"""
     if value == True:
-        res = '<i class="fas fa-check"></i>'
+        res = '<i class="fas fa-check" style="color:green;"></i>'
     else:
-        res = '<i class="fas fa-times"></i>'
+        res = '<i class="fas fa-times" style="color:red;"></i>'
     return res
+
+@register.filter(name='prettyhistory')
+def prettyhistory(value):
+    if value == True:
+        res = '<i class="fas fa-monument" style="color:yellow;"></i>'
+    else:
+        res = '<i class="fas fa-times" style="color:red;"></i>'
+    return res
+
 
 
 @register.filter(name='as_height')
@@ -383,3 +391,17 @@ def as_media_image(value):
 @register.filter(name='is_not_blank')
 def is_not_blank(value):
     return (value != '')
+
+@register.filter(name='colorteam')
+def colorteam(value):
+    from collector.utils.fics_references import DRAMA_SEATS_COLORS
+    color = DRAMA_SEATS_COLORS[value]
+    return "<span style='color:%s;'>%s</span>" % (color, value)
+
+
+
+@register.filter(name='parseclean')
+def parseclean(value):
+    res = value.replace("\n", "<br/>")
+    return res
+

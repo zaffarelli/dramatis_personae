@@ -1,0 +1,31 @@
+{% extends "pdf_gear.html" %}
+{%load fics_filters%}
+{%load static%}
+
+{% block article %}
+<div class="default">
+    <div id="header_content">
+        <img src='collector/static/collector/glyph.png' width='0.5cm'>
+    </div>
+    <div id="footer_content">
+        <pdf:pagenumber> / <pdf:pagecount>
+    </div>
+
+
+<h1>DP Audit</h1>
+<p>Release Date: <em>{{ date }}</em></p>
+<p>This the Audit Report</p>
+
+<h2>Characters</h2>
+
+
+{% if characters  %}
+    {% for x in characters %}
+        <h3>{{ x.rid|safe }}</h3>
+        <P>{{ x.audit|parseclean|safe }}</P>
+    {% endfor %}
+{% endif %}
+
+
+</div>
+{% endblock article %}

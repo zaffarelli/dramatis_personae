@@ -145,6 +145,7 @@ class Character(Combattant):
     group_color = ColorField(default='#888888', blank=True)
     color = ColorField(default='#CCCCCC', blank=True)
     storytelling_note = models.TextField(default='', blank=True)
+    audit = models.TextField(max_length=2048, default='', blank=True)
     skills_options = []
     ba_options = []
     bc_options = []
@@ -329,6 +330,7 @@ class Character(Combattant):
                 tod_rep['WB'] += tod.tour_of_duty_ref.value
         if self.life_path_total < 200:
             self.archive_level = 'WKS'
+            self.audit += "Archive level is WKS\n"
         # Flatten
         doubles_all_wp_roots = list(itertools.chain(*all_tod_wp_roots))
         # Remove multi
@@ -349,12 +351,13 @@ class Character(Combattant):
         for bc in self.blessingcurse_set.all():
             bc_total += bc.blessing_curse_ref.value
         bl.append("")
-        # bl.append("Tour Summary:")
-        # bl.append("- APx3+OP+BA+BC... " + str(pa_total * 3 + po_total + ba_total + bc_total))
-        # bl.append("- WP.............. " + str(self.WP_tod_pool))
-        # bl.append("- Value........... " + str(self.charactercusto.value))
-        # bl.append("- Lifepath ....... " + str(self.life_path_total))
-        # bl.append("- Repartition .... " + str(tod_rep))
+        if not self.balanced:
+            self.audit += "Tour Summary:\n"
+            self.audit += "- APx3+OP+BA+BC... " + str(pa_total * 3 + po_total + ba_total + bc_total) + "\n"
+            self.audit += "- WP.............. " + str(self.WP_tod_pool)+ "\n"
+            self.audit += "- Value........... " + str(self.charactercusto.value)+ "\n"
+            self.audit += "- Lifepath ....... " + str(self.life_path_total)+ "\n"
+            self.audit += "- Repartition .... " + str(tod_rep)+ "\n"
         fs_fics7.check_secondary_attributes(self)
         self.handle_wildcards(all_wp_roots)
         self.charactercusto.save()
@@ -375,6 +378,7 @@ class Character(Combattant):
             logger.info(f'Current option Points: {self.OP}')
         else:
             logger.error(f'{self.full_name} is not properly balanced: {self.OP} vs {self.life_path_total}!')
+            self.audit += f'{self.full_name} is not properly balanced: {self.OP} vs {self.life_path_total}!\n'
         if self.color == '#CCCCCC':
             d = lambda x: fs_fics7.roll(x) - 1
             self.color = '#%01X%01X%01X%01X%01X%01X' % (d(8) + 4, d(16), d(8) + 4, d(16), d(8) + 4, d(16))
@@ -448,6 +452,7 @@ class Character(Combattant):
 
     def fix(self, conf=None):
         super().fix(conf)
+        # self.audit = ""
         from collector.models.profile import Profile
         profiles = Profile.objects.all()
         for p in profiles:
@@ -492,6 +497,7 @@ class Character(Combattant):
 
         self.need_fix = False
         logger.info(f'    => Done fixing ...: {self.full_name} NeedFIX:{self.need_fix}')
+        # logger.info(self.audit)
 
     def update_challenge(self):
         res = ''
@@ -874,6 +880,8 @@ class Character(Combattant):
         self.stories_count += self.count_cast(acts)
         self.stories_count += self.count_cast(dramas)
         self.stories_count += self.count_cast(epics)
+        if self.stories_count == 0:
+            self.audit += 'Warning: character appears in no cast...\n'
         return self.stories_count
 
     def update_game_parameters(self):
@@ -920,6 +928,11 @@ class Character(Combattant):
                 SP_grid["RA"] += a.armor_ref.stopping_power
             SP_grid["enc"] += a.armor_ref.encumbrance
         logger.info(SP_grid)
+
+        if len(self.armor_set.all()):
+            self.audit += "Warning: character has no armor\n"
+        if len(self.weapon_set.all()):
+            self.audit += "Warning: character has no weapon\n"
 
     def fencing_league_special(self):
         if self.fencing_league:

@@ -23,7 +23,7 @@ from django.views.decorators.csrf import csrf_exempt
 import datetime
 from django.contrib import messages
 from collector.utils.xls_collector import export_to_xls, update_from_xls
-from collector.utils.basic import get_current_config, extract_rules
+from collector.utils.basic import get_current_config, extract_rules, make_audit_report
 from collector.utils.gs_export import update_gss, summary_gss
 
 
@@ -38,20 +38,14 @@ def pdf_character(request, id=None):
     return HttpResponse(status=204)
 
 
-def recalc(request):
-    """ Recalc and export to PDF all avatars """
-
-    # campaign = get_current_config(request)
-    # cast = campaign.get_full_cast()
-    # character_items = []
-    # for rid in cast:
-    #     character_item = campaign.avatars.get(rid=rid)
-    #     character_items.append(character_item)
-    character_items = Character.objects.all()
+def run_audit(request):
+    campaign = get_current_config(request)
+    make_audit_report(campaign)
+    character_items = campaign.dramatis_personae.all()
+    # print(campaign.epic.shortcut, len(character_items))
     x = 1
     for c in character_items:
         c.need_fix = True
-        c.need_pdf = True
         x += 1
         messages.info(request, f'Recalculating {c.full_name}')
         c.save()
@@ -81,6 +75,7 @@ def gss_summary(request):
     summary_gss()
     messages.info(request, 'Extracting PCs to Google spreadsheet...')
     return HttpResponse(status=204)
+
 
 def pdf_rules(request):
     """ Create and show a character as PDF """

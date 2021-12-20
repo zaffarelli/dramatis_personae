@@ -116,7 +116,7 @@ def make_epic_corpus(campaign):
     return res
 
 
-def export_epic(request,campaign):
+def export_epic(request, campaign):
     res = {'epic':campaign.epic.title}
     comments = []
     comments += make_avatar_appendix(campaign)
@@ -143,11 +143,15 @@ def extract_rules():
     from collector.models.benefice_affliction import BeneficeAfflictionRef
     from collector.models.blessing_curse import BlessingCurseRef
     from collector.models.ritual import RitualRef
+    from collector.models.specie import Specie
     from collector.models.gear import Gear
     context = {}
     import datetime
     from django.utils import timezone
     context['date'] = timezone.datetime.now()
+    species = Specie.objects.all().filter(hidden=False).order_by('species')
+    context['species'] = species
+
     skills = SkillRef.objects.all().filter(is_speciality=False).order_by('reference', 'is_root')
     context['skills'] = skills
     benefice_afflictions = BeneficeAfflictionRef.objects.order_by('-source')
@@ -248,7 +252,7 @@ def extract_equipment():
     # Energy Shields
     template = get_template('collector/equipment.html')
     html = template.render(context)
-    fname = 'fading_suns_shopping_guide.pdf'
+    fname = 'equipment.pdf'
     filename = os.path.join(settings.MEDIA_ROOT, 'pdf/results/' + fname)
     es_pdf = open(filename, 'wb')
     pdf = pisa.pisaDocument(BytesIO(html.encode('utf-8')), es_pdf)
@@ -273,3 +277,27 @@ def slug_decode(slug):
     s = slug.replace('_', '=')
     dex = str(base64.b64decode(s), "utf-8")
     return dex
+
+
+def make_audit_report(campaign):
+    from django.utils import timezone
+    context = {}
+    context['date'] = timezone.datetime.now()
+    context['characters'] = []
+    # print(campaign.epic.shortcut)
+    for c in campaign.dramatis_personae.all():
+        # print(c.rid)
+        current = {'rid': c.rid, 'audit': c.audit}
+        context['characters'].append(current)
+    # print(context)
+    template = get_template('collector/audit.html')
+    html = template.render(context)
+    fname = 'audit.pdf'
+    filename = os.path.join(settings.MEDIA_ROOT, 'pdf/results/' + fname)
+    es_pdf = open(filename, 'wb')
+    pdf = pisa.pisaDocument(BytesIO(html.encode('utf-8')), es_pdf)
+    if not pdf.err:
+        es_pdf.close()
+    else:
+        print(pdf.err)
+

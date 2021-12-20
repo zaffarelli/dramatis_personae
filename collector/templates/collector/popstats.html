@@ -1,13 +1,6 @@
-qqdqsdq
 <script>
-var popdata = {{cdata|safe}}
-var ctx = document.getElementById('{{cname}}').getContext('2d');
-var {{cname}} = new Chart(ctx, popdata);
+    var popdata = {{cdata|safe}}
+    var ctx = document.getElementById('{{cname}}').getContext('2d')
+    var {{cname}} = new Chart(ctx, popdata)
 </script>
-<div class='fresque'>
-<div class='tile chart_panel'>
-<canvas id="{{cname}}"></canvas>
-</div>
-</div>
-
-
+<div class='plaque tile'><canvas id="{{ cname }}"></canvas></div>

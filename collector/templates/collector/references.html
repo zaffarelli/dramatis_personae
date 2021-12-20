@@ -12,13 +12,23 @@
     </div>
 
 
-<h1>Dramatis Personae Rules</h1>
+<h1>FICS Rules</h1>
 
 <pdf:toc/>
 
-    <h2>References</h2>
+<h2>References</h2>
 <p>Release Date: <em>{{ date }}</em></p>
 <p>This automatically generated document shows the complete content of the database game content, for in game reference.</p>
+
+<h3>Species/Races</h3>
+{% if species.count  %}
+    {% for s in species %}
+    {% include "collector/pdf/specie_pdf.html" with c=s %}
+    {% endfor %}
+{% endif %}
+
+
+
 
 <h3>Skills</h3>
 {% if skills.count  %}

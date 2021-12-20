@@ -34,17 +34,15 @@ def index(request):
 def get_list(request, id, slug='none'):
     from collector.utils.basic import get_current_config
     campaign = get_current_config(request)
-    # print(campaign.dramatis_personae)
     if slug == 'none':
         slug = base64.b64encode(slug.encode("utf-8"))
     # print(f'[{slug}]')
     slug = slug.replace('_', '=')
     decs = str(base64.b64decode(slug), "utf-8")
     if decs == 'none':
-        character_items = campaign.dramatis_personae.order_by('-ranking', 'full_name').filter(balanced=False, is_dead=False,
-                                                                                    nameless=False, player='',
-                                                                                    archive_level='NON').order_by(
-            '-OCC_LVL', '-tod_count')
+        character_items = campaign.dramatis_personae\
+            .order_by('historical_figure','-team','full_name')\
+            .filter(is_dead=False, keyword__startswith=campaign.epic.shortcut)
     elif decs.startswith('c-'):
         elements = decs.split('-')
         ep_class = elements[1].capitalize()
@@ -85,7 +83,10 @@ def get_list(request, id, slug='none'):
     # for c in character_items:
     #     c.need_fix = True
     #     c.save()
-    paginator = Paginator(character_items, MAX_CHAR)
+    if request.user.is_authenticated:
+        paginator = Paginator(character_items, request.user.profile.option_display_count)
+    else:
+        paginator = Paginator(character_items, MAX_CHAR)
     page = id
     character_items = paginator.get_page(page)
     messages.info(request, f'{paginator.count} characters found.')
@@ -102,7 +103,10 @@ def show_todo(request):
     campaign = get_current_config(request)
     if request.is_ajax:
         character_items = campaign.avatars.filter(priority=True).order_by('full_name')
-        paginator = Paginator(character_items, MAX_CHAR)
+        if request.user.is_authenticated:
+            paginator = Paginator(character_items, request.user.profile.option_display_count)
+        else:
+            paginator = Paginator(character_items, MAX_CHAR)
         page = id
         character_items = paginator.get_page(page)
         context = {'character_items': character_items}

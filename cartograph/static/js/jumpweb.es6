@@ -514,7 +514,7 @@ title="jumpweb_' + me.mode + '_' + now + '.svg"> \
             })
 
             .style("opacity", function(d) {
-                return (d.focus ? 1.0 : 0.05);
+                return (d.focus ? 1.0 : 1.00);
                 // return (d.unknown ? 0.0 : 0.8);
             })
             .on("mouseover", function(e,d) {
@@ -657,7 +657,7 @@ title="jumpweb_' + me.mode + '_' + now + '.svg"> \
             .style("opacity", function(d) {
 
                 // return (d.unknown ? 0.0 : 1.0);
-                return (d.focus ? 1.0 : 0.05);
+                return (d.focus ? 1.0 : 1.0);
 
             });
         node = me.draw_node(node);

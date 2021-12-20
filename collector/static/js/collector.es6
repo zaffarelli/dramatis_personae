@@ -97,25 +97,32 @@ class Collector {
             e.stopPropagation();
             let action_tag = $(this).attr("action");
             let mode_tag = $(this).attr("mode");
+            let new_tag = action_tag.replaceAll("_","/").replaceAll("-PDF",".pdf")
+            let url = 'ajax/' + action_tag + '/';
+            if (mode_tag == 'direct'){
+                url = new_tag;
+                let w = window.open(url,'_blank');
+                w.focus();
+            }
             console.debug("menu-item " + action_tag + " has been clicked...");
             $.ajax({
-                url: 'ajax/' + action_tag + '/',
+                url: url,
                 success: function (answer) {
                     if (mode_tag == 'overlay') {
                         $("#d3area").css('display', 'block');
                         let starmap = new Jumpweb(answer.data, '#d3area');
                         starmap.perform();
                         me.rebootLinks();
-                    } else if (mode_tag == 'direct') {
-                        let new_tag = action_tag.replace("_","/")
-                        console.log(new_tag)
-                        let w = window.open(action_tag,'_blank');
-                        w.focus();
                     } else if (mode_tag == 'index') {
                         let w = window.location.href = "/";
                         // w.focus();
                     } else if (mode_tag == 'main') {
                         $('.mosaic').html(answer.html);
+                    } else if (action_tag == 'statistics') {
+                        let pre = "<div class='fresque'><div class='tile chart_panel'>";
+                        let post = "</div></div>";
+                        console.log(answer.mosaic);
+                        $('.mosaic').html(pre+answer.mosaic+post);
                     } else {
                         $('.mosaic').html(answer.mosaic);
                     }
@@ -269,6 +276,11 @@ class Collector {
             $("#d3area").css('display', 'none');
         })
 
+        $('#board_area_close').off().on('click', function (event) {
+            $("#board").css('display', 'none');
+            $("#board").html('');
+        })
+
         $('.recalc_avatar').off().on('click', function (event) {
             event.preventDefault();
             event.stopPropagation();
@@ -280,9 +292,15 @@ class Collector {
             $.ajax({
                 url: 'ajax/recalc/avatar/' + x + '/',
                 success: function (answer) {
-                    $('.tile').removeClass("sheet_tile");
-                    $('#tile_' + x).addClass("sheet_tile");
-                    $('#tile_' + x).html(answer.character);
+                    $('#board').html('<div id="the_tile"></div><div id="board_area_close"><i class="golden fa fa-times-circle"></i></div>');
+                    // $('.tile').removeClass("sheet_tile");
+                    $('#the_tile').addClass("sheet_tile");
+                    $('#the_tile').html(answer.character);
+                    // $('.character_row').removeClass("sheet_tile");
+                    // $('#row_' + x).addClass("sheet_tile");
+                    // $('#row_' + x).html(answer.character);
+                    $('#board').css('display', 'block');
+
                     $('li#' + answer.rid).html(answer.link);
                     $('#customizer').html(answer.mobile_form);
                     ac.reset(x, "sheet_" + x, "customizer");
@@ -372,10 +390,10 @@ class Collector {
                 $.ajax({
                     url: 'ajax/edit/avatar/' + x + '/',
                     success: function (answer) {
-                        $('.tile').removeClass("sheet_tile");
-                        $('#tile_' + x).addClass("sheet_tile");
-                        $('#tile_' + x).html(answer);
-                        $('li#' + answer.rid).html(answer.link);
+                        $('#board').html('<div id="the_tile"></div><div id="board_area_close"><i class="golden fa fa-times-circle"></i></div><div id="board_area_valid"><i id="menu_go" class="golden fa fa-play-circle"></i></div>');
+                        $('#the_tile').addClass("sheet_tile");
+                        $('#the_tile').html(answer);
+                        $('#board').css('display', 'block');
                         me.rebootLinks();
                         ac.reset(x, "sheet_" + x, "customizer");
                         $("li#" + dad_id + " .character_name").click();

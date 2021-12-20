@@ -1,0 +1,5 @@
+{% load static %}
+{% load fics_filters %}
+<div class='character_row team_{{ k.team }}' id='row_{{ k.id }}'>
+    {% include "collector/character_link_row.html" with c=c %}
+</div>

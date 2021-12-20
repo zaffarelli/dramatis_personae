@@ -13,7 +13,7 @@
 """
 
 MAX_CHAR = 20
-RELEASE = '0.6.5'
+RELEASE = '0.6.8'
 
 SOURCE_REFERENCES = (
     ('FS2CRB', "HDi Fading Suns Official"),
@@ -243,3 +243,33 @@ OCCULT_ARTS = (
     ("2", "Symbiosis"),
     ("3", "Runecasting"),
 )
+
+DRAMA_SEATS = (
+    ('11-foe', 'Foe'),
+    ('10-enemy', 'Enemy'),
+    ('09-lackey', 'Lackey'),
+    ('08-antagonist', 'Antagonist'),
+    ('07-opponent', 'Opponent'),
+    ('06-neutral', 'Neutral'),
+    ('05-partisan', 'Partisan'),
+    ('04-protagonist', 'Protagonist'),
+    ('03-servant', 'Servant'),
+    ('02-ally', 'Ally'),
+    ('01-friend', 'Friend'),
+    ('00-players', 'Players'),
+)
+
+DRAMA_SEATS_COLORS = {
+    '11-foe': "#D08030",
+    '10-enemy': "#C08040",
+    '09-lackey': "#B08050",
+    '08-antagonist': "#A08060",
+    '07-opponent': "#908070",
+    '06-neutral': "#808080",
+    '05-partisan': "#708090",
+    '04-protagonist': "#6080A0",
+    '03-servant': "#5080B0",
+    '02-ally': "#4080C0",
+    '01-friend': "#3080D0",
+    '00-players': "#D080D0"
+}

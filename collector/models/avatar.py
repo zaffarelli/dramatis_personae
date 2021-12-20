@@ -20,6 +20,7 @@ ARCHIVE_LEVEL = (
 class Avatar(models.Model):
     class Meta:
         abstract = True
+
     full_name = models.CharField(max_length=200)
     rid = models.CharField(max_length=200, default='none')
     birthdate = models.IntegerField(default=0)
@@ -58,6 +59,7 @@ class Avatar(models.Model):
         if self.birthdate < 1000:
             self.birthdate = conf.epic.era - self.birthdate
             self.age = conf.epic.era - self.birthdate
+        self.audit = ""
 
     def get_rid(self, s):
         self.rid = Avatar.find_rid(s)
@@ -67,7 +69,8 @@ class Avatar(models.Model):
         x = s.replace(' ', '_').replace("'", '').replace('é', 'e') \
             .replace('è', 'e').replace('ë', 'e').replace('â', 'a') \
             .replace('ô', 'o').replace('"', '').replace('ï', 'i') \
-            .replace('à', 'a').replace('-', '')
+            .replace('à', 'a').replace('-', '').replace('ü', 'u') \
+            .replace('û', 'u').replace('ô', 'o').replace('ß', 'ss')
         rid = x.lower()
         return rid
 

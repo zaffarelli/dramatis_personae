@@ -3,7 +3,7 @@
 
 div.character_sheet {
     width: 100%;
-    max-width: 600px;
+    max-width: 900px;
     margin-left: 0;
     margin-right: auto;
     display: block;
@@ -17,6 +17,7 @@ div.character_sheet {
     box-shadow: 3px 3px 5px $fics_darkest;
     border-radius: 5px;
     opacity: 0.9;
+    //border:1px solid yellow;
 
     & div.infoblock{
         display:flex;
@@ -24,7 +25,6 @@ div.character_sheet {
         justify-content:space-between;
         align-items:stretch;
         align-content:stretch;
-
         & .portrait{
             order:3;
             display:inline-block;
@@ -38,15 +38,11 @@ div.character_sheet {
             }
             text-align:center;
             flex-basis:120px;
-
-
         }
-
         & .mark{
             order:1;
             display:inline-block;
             flex-basis:120px;
-
         }
 
         & .data{
@@ -63,7 +59,6 @@ div.character_sheet {
                 font-weight: bold;
                 color: #FC4;
             }
-
         }
     }
     
@@ -71,18 +66,19 @@ div.character_sheet {
         @include section_block;
     }
     
-    & .pic {
-        display: block;
-        float: right;
-        border: 1px solid black;
-        width: 200px;
-        height: auto;
-    }
+    //& .pic {
+    //    display: block;
+    //    float: right;
+    //    border: 1px solid black;
+    //    width: 200px;
+    //    height: auto;
+    //}
     
     & .attributes {
-        column-count: 3;
+        column-count: 4;
         column-gap: 2px;
         column-rule: 0 solid $fics_light;
+        //border: 1px solid lime;
         
         table {
             & th.name {
@@ -154,7 +150,7 @@ div.character_sheet {
     }
     
     & .coreblock {
-        column-count: 2;
+        column-count: 3;
         column-gap: 1ex;
         column-rule: 1px dotted $fics_light;
         margin-top: 3px;
@@ -163,6 +159,7 @@ div.character_sheet {
         width: 100%;
         border: 1px solid $fics_subborder_color;
         border-radius: 3px;
+        //border-color:red;
         
         & ul {
             page-break-after: always;
@@ -237,13 +234,13 @@ div.character_sheet {
 
 
     & .skillsview {
-        column-count: 2;
+        column-count: 3;
         column-gap: 5px;
         column-rule: 1px dotted $fics_light;
         margin-top: 3px;
         border: 1px solid $fics_subborder_color;
         border-radius: 2px;
-        
+        //border-color: purple;
         & table {
             width: 100%;
             
@@ -256,7 +253,10 @@ div.character_sheet {
                     height: 5px;
                     margin: 0;
                     padding: 0;
-                    background: $fics_dark;
+                    padding-left:1ex;
+                    background: transparent;//$fics_dark;
+                    //border:1px solid orange;
+                    text-align: left;
                 }
                 
                 & td[colspan="2"] {
@@ -321,20 +321,7 @@ div.character_sheet {
         }
     }
     
-    & .chart_panel {
-        border: 1px solid $fics_darker;
-        box-shadow: 2px 2px 8px $fics_darker;
-        border-radius: 5px 5px 5px 5px;
-        padding: 10px;
-        background-color: $fics_dark;
-        display: inline-block;
-        color: $fics_front;
-        background: pink;
-        & canvas {
-            width: 1000px;
-            height: auto;
-        }
-    }
+
     
     & .narrative {
         margin: 5px;
@@ -364,7 +351,7 @@ div.character_update_view {
     border: 1px solid $fics_light;
     box-shadow: 3px 3px 5px $fics_darkest;
     border-radius: 5px;
-    opacity: 0.9;
+    opacity: 1.0;
     & .formset{
         display:flex;
         flex-flow:column nowrap;

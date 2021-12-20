@@ -30,7 +30,7 @@
         <span class="info">Epic: {{campaign.epic.title}}</span>
         {% if user.profile.is_gamemaster %}
         <input type="text" id="customize" value="" placeholder="Free Text Here...">
-        <span id="menu_go"><i class="action_icon fas fa-caret-square-right" style="font-size:24px;"></i></span>
+{#        <span id="menu_go"><i class="action_icon fas fa-caret-square-right" style="font-size:24px;"></i></span>#}
         {% endif %}
     </div>
     <ul class="level-1">
@@ -40,8 +40,8 @@
                 {% if user.profile.is_gamemaster %}
                     <li><span class="menu-button slug-page-item" mode="standard" action="search" page="1"><i class="action_icon fas fa-search"></i> Search</span></li>
                     <li><span class="menu-button slug-item" mode="standard" action="add_avatar"><i class="action_icon fas fa-user-plus"></i> Add avatar</span></li>
-                    <li><span class="menu-button menu-item" mode="standard" action="blokes"><i class="action_icon fas fa-users"></i> Blokes</span>
-
+{#                    <li><span class="menu-button menu-item" mode="standard" action="blokes"><i class="action_icon fas fa-users"></i> Blokes</span>#}
+                    <li><span class="menu-button menu-item" mode="standard" action="audit"><i class="action_icon fas fa-star"></i> Audit</span>
 
 
                 {% else %}
@@ -63,7 +63,7 @@
                 <li><span class="menu-button slug-item" mode="standard" action="epic"><i class="action_icon fas fa-dice"></i> Switch Epic</span>
                 {% if campaign.is_fics %}
                 <li><span class="menu-button menu-item" action="statistics"><i class="fas fa-chart-pie"></i> Statistics</span></li>
-                <li><span class="menu-button menu-item" action="gss_update"><i class="fas fa-table"></i> GS Export</span></li>
+{#                <li><span class="menu-button menu-item" action="gss_update"><i class="fas fa-table"></i> GS Export</span></li>#}
                 <li><span class="menu-button menu-item" action="gss_summary"><i class="fas fa-table"></i> GS PC Summary</span></li>
                 {% endif %}
 
@@ -79,8 +79,7 @@
         {% if user.profile.is_gamemaster %}
         <li><span class="pull-down">Optimizer</span>
             <ul class="level-2 Rules off">
-                <li><span class="menu-button menu-item" mode="standard" action="build_pdf_rules"><i class="action_icon fas fa-book"></i> Build Rules PDF</span>
-                </li>
+                <li><span class="menu-button menu-item" mode="standard" action="build_pdf_rules"><i class="action_icon fas fa-book"></i> Rebuild PDFs</span></li>
                 {% if campaign.is_fics %}
                 <li><span class="menu-button slug-item" action='run_duel' mode="standard" title='You can tag two IDs (sperataed with an underscore) to see two specific avatars fight, i.e. 22_93 for Calistre -vs- Lucrecia.'><i
                         class="action_icon fas fa-chess-pawn"></i> Run Duel</span></li>
@@ -100,6 +99,17 @@
             </ul>
         </li>
         {% endif %}
+
+        <li><span class="pull-down" title="PDF Resources...">PDF Goodies</span>
+            <ul class="level-2 Documents off">
+                {% if campaign.is_fics %}
+                <li><span class="menu-button menu-item" mode="direct" action="media_pdf_results_rules-PDF"><i class="action_icon fas fa-file-pdf"></i> FICS Rules</span></li>
+                <li><span class="menu-button menu-item" mode="direct" action="media_pdf_results_equipment-PDF"><i class="action_icon fas fa-file-pdf"></i> FICS Equipment</span></li>
+                <li><span class="menu-button menu-item" mode="direct" action="media_pdf_results_audit-PDF"><i class="action_icon fas fa-file-pdf"></i> Audit Report</span></li>
+                {% endif %}
+            </ul>
+        </li>
+
         {% if user.is_authenticated %}
         <li><span class="pull-down">{{ user.username | title }} {% if user.profile.is_gamemaster %}<i
                 class="action_icon fas fa-crown"></i>{% endif %}</span>

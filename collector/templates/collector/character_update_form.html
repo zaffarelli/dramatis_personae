@@ -4,7 +4,6 @@
         {{ form.management_form }}
         <input name='id' type='hidden' value='{{c.id}}'>
         <input name='rid' type='hidden' value='{{c.rid}}'>
-        <div class="tile_back" id="tile_back_{{c.id}}"><i class="action_icon golden fa fa-times-circle"></i></div>
         <div class="formset">
             <div class="field_wrapper">
                 {{ form.full_name.errors}}
@@ -140,6 +139,11 @@
                 {{form.is_dead}}
             </div>
             <div class="field_wrapper">
+                {{ form.need_fix.errors}}
+                <label for="need_fix">Need Fix</label>
+                {{form.need_fix}}
+            </div>
+            <div class="field_wrapper">
                 {{ form.use_history_creation_errors}}
                 <label for="use_history_creation">Use History Creation</label>
                 {{form.use_history_creation}}
@@ -186,16 +190,14 @@
             </div>
 
             {{ tourofdutys.management_form }}
-            <table class="formset inline tods_formset">
-                <caption>Lifepath</caption>
+
+
                 {% for form in tourofdutys.forms %}
-                <tr>
-                    <td>
+                    <div class="field_wrapper">
                         {{ form.as_p }}
-                    </td>
-                </tr>
+                    </div>
                 {% endfor %}
-            </table>
+
         </div>
         {% csrf_token %}
     </form>

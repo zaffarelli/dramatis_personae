@@ -1,7 +1,7 @@
 FROM python:3.6-alpine
 
 ENV PATH="/scripts:${PATH}"
-
+ENV PYTHONBUFFERED 1
 
 RUN apk add --update --no-cache --virtual .tmp gcc libc-dev libffi-dev linux-headers
 RUN apk del .tmp
