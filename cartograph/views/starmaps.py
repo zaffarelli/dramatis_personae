@@ -52,7 +52,7 @@ def show_jumpweb(request):
                     lnk['source'] = j.id
                     lnk['target'] = s.id
                 context['data']['links'].append(lnk)
-        c = json.dumps(context, sort_keys=True, indent=4)
+        # c = json.dumps(context, sort_keys=True, indent=4)
         # print(c)
         return JsonResponse(context)
     else:
@@ -74,16 +74,21 @@ def show_orbital_map(request, slug=None):
         context['data']['alliance'] = f'{system.alliance}'
         context['data']['symbol'] = f'{system.symbol}'
         context['data']['planets'] = []
+        context['data']['belts'] = []
 
         context['data']['zoom_val'] = system.zoom_val if system.zoom_val else 0
         context['data']['zoom_factor'] = system.zoom_factor if system.zoom_factor else 0
         for oi in system.orbitalitem_set.all():
-            orbital_item = {'name': oi.name, 'AU': oi.distance, 'tilt': oi.tilt, 'speed': oi.speed, 'tone': oi.color,
+            orbital_item = {'name': oi.name, 'AU': oi.distance, 'tilt': oi.tilt, 'tone': oi.color,
                             'type': oi.get_category_display(), 'azimut': oi.azimut, 'size': oi.size, 'moon': oi.moon,
                             'description': oi.description, 'rings': oi.rings}
-            context['data']['planets'].append(orbital_item)
-        # template = get_template('cartograph/orbital_map.html')
-        # html = template.render(context)
+            if oi.category == "3":
+                orbital_item['roids'] = []
+                context['data']['belts'].append(orbital_item)
+            else:
+                context['data']['planets'].append(orbital_item)
+        # c = json.dumps(context, sort_keys=True, indent=4)
+        # print(c)
         return JsonResponse(context)
     else:
         return HttpResponse(status=204)

@@ -87,7 +87,7 @@ class OrbitalItem(models.Model):
     system = models.ForeignKey(System, on_delete=models.CASCADE, blank=True, null=True)
     category = models.CharField(max_length=20, choices=ORBITAL_ITEMS, default="Telluric")
     color = ColorField(default="#FFF")
-    speed = models.FloatField(default=1.0)
+    # speed = models.FloatField(default=1.0)
     azimut = models.FloatField(default=0)
     distance = models.FloatField(default=0.0)
     tilt = models.FloatField(default=0.0)
@@ -149,6 +149,6 @@ class SystemAdmin(admin.ModelAdmin):
 
 class OrbitalItemAdmin(admin.ModelAdmin):
     ordering = ['system', 'distance', 'name']
-    list_display = ['nameid', 'name', 'category', 'color', 'distance', 'speed', 'tilt', 'size', 'qualifier', 'rings']
+    list_display = ['nameid', 'name', 'category', 'color', 'azimut', 'distance', 'tilt', 'size', 'qualifier', 'rings']
     list_filter = ['category', 'system', 'distance', 'tilt']
     search_fields = ['name', 'qualifier', 'system']

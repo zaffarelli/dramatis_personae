@@ -5,27 +5,33 @@ class OrbitalMap {
         me.init(data);
     }
 
+    rand(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
     zoom_check(x) {
         return x < this.zoom_val;
     }
 
     apply_zoom(x) {
-        return x * this.zoom_factor;
+
+        return x == 0 ? 0 : (x + 0.5) * this.zoom_factor;
     }
 
     setConstants() {
         let me = this;
-        me.gate_stroke = "#111";
+        me.gate_stroke = "#070707";
         me.gate_fill = "#666";
         me.panel_stroke = "#111";
         me.panel_fill = "#222";
         me.text_stroke = "#888";
         me.text_fill = "#DDD";
-        me.radius = 0;
-        me.flatten_factor = 5;
-        me.zoom_val = (me.data.zoom_val > 0 ? me.data.zoom_val : 8);
-        me.zoom_factor = (me.data.zoom_factor > 0 ? me.data.zoom_factor : 10);
-        me.zoom_color = "#545"
+        me.orbit_color = "#636";
+
+        me.flatten_factor = 3;
+        me.zoom_val = 5;
+        me.zoom_factor = 10;
+        me.zoom_color = "#888"
         me.design = {
             "size": {
                 "Sun": 5,
@@ -49,7 +55,7 @@ class OrbitalMap {
                 "Asteroids Belt": "#666",
                 "Telluric": "#333",
                 "Gas Giant": "none",
-                "Jumpgate": "#868",
+                "Jumpgate": "#888",
                 "Space Station": "#CCC"
             },
             "label": {
@@ -74,13 +80,18 @@ class OrbitalMap {
         me.height = me.size * 20;
         me.h = 1200;
         me.w = 1900;
-        me.radius = 3 * me.width / 4;
+        me.offset = 150;
+        me.radius = 2 * me.width / 5
         me.era = 5021;
-        me.ox = me.width / me.size / 2;
-        me.oy = me.height / me.size / 2;
+        me.ox = (me.width / me.size) / 2;
+        me.oy = (me.height / me.size) / 2;
         me.step_x = me.size;
         me.step_y = me.size;
+        me.y_offset = -me.step_y * 9;
         me.scaler = 10;
+        me.shadow_stroke = '#CCCCCC';
+        me.shadow_fill = '#222222';
+        me.layout_opacity = 0.9;
     }
 
     init(data) {
@@ -90,15 +101,10 @@ class OrbitalMap {
         me.radiused = d3.scaleLinear()
             .domain([0, 100])
             .range([0, me.radius]);
-        me.translateAlong = function (path) {
-
+        me.translateAlong = function () {
             return function (d, i, a) {
                 return function (t) {
-                    let t_real = t;
-                    if (t >= d.azimut) {
-                        t_real = d.azimut;
-                    }
-                    let t_angle = (2 * Math.PI) * t_real * d.speed;
+                    let t_angle = (2 * Math.PI) * t * (d.azimut+1);
                     let t_x = (me.zoom_check(d.AU) ? me.apply_zoom(d.AU) : d.AU) * Math.cos(t_angle);
                     let t_y = (me.zoom_check(d.AU) ? me.apply_zoom(d.AU) : d.AU) * Math.sin(t_angle);
                     return "translate(" + me.radiused(t_x) + "," + me.radiused(t_y) / me.flatten_factor + ")";
@@ -107,7 +113,22 @@ class OrbitalMap {
         }
         _.forEach(me.data.planets, function (e, i) {
             e.id = i;
-        })
+        });
+
+        _.forEach(me.data.belts, function (e, i) {
+            e.id = i;
+            let angle, size = [1, 30], data, dispersion = 3;
+            data = d3.range(500).map(function () {
+                angle = Math.random() * Math.PI * 2;
+                let c = e.AU + me.rand(-e.size, e.size) / 50;
+                return {
+                    cx: Math.cos(angle) * me.radiused((me.zoom_check(c) ? me.apply_zoom(c) : c)),
+                    cy: Math.sin(angle) * me.radiused((me.zoom_check(c) ? me.apply_zoom(c) : c)) / me.flatten_factor,
+                    r: me.rand(size[0], size[1]) / 10
+                };
+            });
+            e.roids = data
+        });
     }
 
     buildGradients() {
@@ -136,7 +157,7 @@ class OrbitalMap {
             .attr("stop-opacity", 1);
         me.gasGiantGradient.append("svg:stop")
             .attr("offset", "100%")
-            .attr("stop-color", "#80E020")
+            .attr("stop-color", "#A0E070")
             .attr("stop-opacity", 1);
 
         me.telluricGradient = me.svg.append("svg:defs")
@@ -180,51 +201,139 @@ class OrbitalMap {
             .attr("stop-opacity", 1);
     }
 
-
     drawLayout() {
         let me = this;
-
-
+        // Inner sector center reference
         me.svg.append('line')
             .attr('x1', 0)
             .attr('x2', 0)
-            .attr('y1', -me.step_y * 5)
-            .attr('y2', 0)
+            .attr('y1', me.y_offset + me.offset)
+            .attr('y2', me.offset)
             .style("fill", "transparent")
             .style("stroke", me.zoom_color)
-            .style("stroke-width", "2pt")
-            .style("stroke-dasharray", "7 5")
-            .style("opacity", 0.5);
-
+            .style("stroke-width", "0.5pt")
+            .style("stroke-dasharray", "5 1")
+            .style("opacity", me.layout_opacity);
+        // Inner sector center reference
+        me.svg.append('line')
+            .attr('x1', me.radiused(me.apply_zoom(me.zoom_val)))
+            .attr('x2', me.radiused(me.zoom_val))
+            .attr('y1', me.y_offset + me.offset)
+            .attr('y2', me.offset)
+            .style("fill", "transparent")
+            .style("stroke", me.zoom_color)
+            .style("stroke-width", "0.5pt")
+            .style("opacity", me.layout_opacity);
+        me.svg.append('line')
+            .attr('x1', -me.radiused(me.apply_zoom(me.zoom_val)))
+            .attr('x2', -me.radiused(me.zoom_val))
+            .attr('y1', me.y_offset + me.offset)
+            .attr('y2', me.offset)
+            .style("fill", "transparent")
+            .style("stroke", me.zoom_color)
+            .style("stroke-width", "0.5pt")
+            .style("opacity", me.layout_opacity);
+        // Inner sector ellipse zoomed
+        me.innerlines = me.svg.append('g')
+            .attr('class', 'inner_lines')
+            .selectAll("inner_lines")
+            .data([1, 2, 3, 4, 5]).enter();
+        me.innerlines.append('ellipse')
+            .attr("cx", 0)
+            .attr("cy", me.y_offset + me.offset)
+            .attr("rx", function (d) {
+                return me.radiused(me.apply_zoom(d));
+            })
+            .attr("ry", function (d) {
+                return me.radiused(me.apply_zoom(d)) / me.flatten_factor;
+            })
+            .style("stroke-width", function (d) {
+                if (d == 5) {
+                    return "0.5pt";
+                }
+                return "0.25pt";
+            })
+            .style("fill", "none")
+            .style("stroke-dasharray", function (d) {
+                if (d == 5) {
+                    return "";
+                }
+                return "2 5";
+            })
+            .style("stroke", me.zoom_color)
+            .style("opacity", me.layout_opacity);
+        me.innerlines.append('text')
+            .attr("x", function (d) {
+                return me.radiused(me.apply_zoom(d))
+            })
+            .attr("dx", 5)
+            .attr("y", me.offset + me.y_offset)
+            .style("opacity", 1.0)
+            .style("fill", "#DDD")
+            .style("stroke", "#444")
+            .style("font-size", "7pt")
+            .style("font-family", "Mono")
+            .style("text-anchor", "start")
+            .text(function (d) {
+                return d + " AU";
+            })
+        ;
+        // Inner sector ellipse
         me.svg.append('ellipse')
             .attr("cx", 0)
-            .attr("cy", 0)
+            .attr("cy", me.offset)
             .attr("rx", function (d) {
                 return me.radiused(me.zoom_val);
             })
             .attr("ry", function (d) {
                 return me.radiused(me.zoom_val) / me.flatten_factor;
             })
-            .style("fill", "#4CF")
-            .style("stroke", me.zoom_color)
-            .style("opacity", 0.2);
-
-        me.svg.append('ellipse')
+            .style("stroke-width", "0.5pt")
+            .style("fill", me.shadow_fill)
+            .style("stroke", "transparent")
+            .style("opacity", me.layout_opacity / 2);
+        // 50 AU Outer ellipse
+        me.outerlines = me.svg.append('g')
+            .attr('class', 'outer_lines')
+            .selectAll("outer_lines")
+            .data([10, 20, 30, 40, 50, 60, 70, 80, 90, 100])
+            .enter();
+        me.outerlines.append('ellipse')
             .attr("cx", 0)
-            .attr("cy", 0)
+            .attr("cy", me.offset)
             .attr("rx", function (d) {
-                return me.radiused(50);
+                return me.radiused(d);
             })
             .attr("ry", function (d) {
-                return me.radiused(50) / me.flatten_factor;
+                return me.radiused(d) / me.flatten_factor;
+            })
+            .style("stroke-width", function (d) {
+                return d == 50 ? "0.5pt" : "0.25pt";
             })
             .style("fill", "none")
-            .style("stroke", "#EEE")
-            .style("stroke-dasharray", "1 4 7 4")
-            .style("opacity", 0.5);
-
+            .style("stroke-dasharray", function (d) {
+                return d == 50 ? '' : "3 6";
+            })
+            .style("stroke", me.zoom_color)
+            .style("opacity", me.layout_opacity)
+        ;
+        me.outerlines.append('text')
+            .attr("x", function (d) {
+                return me.radiused(d)
+            })
+            .attr("dx", 5)
+            .attr("y", me.offset)
+            .style("opacity", 1.0)
+            .style("fill", "#DDD")
+            .style("stroke", "#444")
+            .style("font-size", "7pt")
+            .style("font-family", "Mono")
+            .style("text-anchor", "start")
+            .text(function (d) {
+                return d + " AU";
+            })
+        ;
     }
-
 
     drawOrbits() {
         let me = this;
@@ -239,9 +348,9 @@ class OrbitalMap {
                 return me.radiused((me.zoom_check(d.AU) ? me.apply_zoom(d.AU) : d.AU)) / me.flatten_factor;
             })
             .style("stroke", function (d) {
-                let stroke = "#444"
+                let stroke = me.orbit_color;
                 if (me.zoom_check(d.AU)) {
-                    stroke = me.zoom_color;
+                    stroke = me.orbit_color;
                 }
                 if (d.type == 'Asteroids Belt') {
                     stroke = "#645";
@@ -250,7 +359,7 @@ class OrbitalMap {
             })
             .style("stroke-width", function (d) {
                 if (d.type == 'Asteroids Belt') {
-                    return d.size + "pt";
+                    return 3 + "pt"; // d.size
                 }
                 return "0.5pt";
             })
@@ -258,15 +367,40 @@ class OrbitalMap {
                 if (d.type == 'Asteroids Belt') {
                     return "8 1";
                 }
-                return "8 1";
+                return "8 4";
             })
             .style("fill", "none")
             .style("opacity", function (d) {
                 if (d.type == 'Asteroids Belt') {
-                    return 0.5;
+                    return 0;
                 }
                 return 0.75;
             });
+    }
+
+
+    drawAsteroidBelt() {
+        let me = this;
+        let roids;
+        let asteroids = me.asteroids_belts.append('g')
+            .attr('class',function(d){
+                roids = d.roids;
+                return 'ab_'+d.id;
+            });
+
+        let particles = asteroids.selectAll('circle')
+            .data(roids)
+            .enter();
+        particles.append("circle")
+            .attr('r', function (k) {
+                return k.r
+            })
+            .attr('cx', function (k) {return k.cx})
+            .attr('cy', function (k) {return k.cy})
+            .attr('fill', function (k, i) {return "#EEE"})
+            .attr('stroke', function (k, i) {return "#888"})
+            .attr('opacity', 0.75)
+        ;
 
 
     }
@@ -281,8 +415,8 @@ class OrbitalMap {
             })
             .attr('class', "planetball")
             .attr("transform", function (d) {
-                let t = "";
-                t += " translate(" + me.radiused((me.zoom_check(d.AU) ? me.apply_zoom(d.AU) : d.AU)) + ",0)"
+                let t = "", x = d3.select(this).attr('distance');
+                t += " translate(" + me.radiused((me.zoom_check(x) ? me.apply_zoom(x) : x)) + ",0)"
                 return t;
             })
 
@@ -327,6 +461,50 @@ class OrbitalMap {
                 return 0.0;
             });
 
+        // Jumpgate
+        me.item.append("path")
+            .attr("d", function (d) {
+                let s = 3 * 4;
+                let m = s / 5;
+                let x = m * 4;
+                let str = "M -" + s + " 0";
+                str += " L -" + m + " -" + m + ",";
+                str += " -" + x + " -" + x + ", ";
+                str += " -" + m + " -" + m + ", ";
+                str += " 0 -" + s + ", ";
+                str += " " + m + " -" + m + ", ";
+                str += " " + x + " -" + x + ", ";
+                str += " " + m + " -" + m + ", ";
+                str += " " + s + " 0, ";
+                str += " " + m + " " + m + ", ";
+                str += " " + x + " " + x + ", ";
+                str += " " + m + " " + m + ", ";
+                str += " 0 " + s + ", ";
+                str += " -" + m + " " + m + " ";
+                str += " -" + x + " " + x + ", ";
+                str += " -" + m + " " + m + ", ";
+                str += " Z"
+                return str;
+            })
+            .style("fill", function (d) {
+                let tone = me.design.stroke[d.type];
+                return tone;
+            })
+            .style("stroke-width", "1pt")
+            .style("stroke", function (d) {
+                let s = "#434";
+                return s;
+            })
+            .attr("opacity", function (d) {
+                if (d.type == "Jumpgate") {
+                    return 0.75;
+                }
+                if (d.type == "Asteroids Belt") {
+
+                }
+                return 0.0;
+            });
+
 
         // Rings
         me.item.append("ellipse")
@@ -358,7 +536,7 @@ class OrbitalMap {
             .style("stroke", d => d.tone)
             .style("stroke-width", function (d) {
                 if (d.rings) {
-                    console.log(((d.rings.split("_")[2]) / 10) + "pt")
+                    // console.log(((d.rings.split("_")[2]) / 10) + "pt")
                     return ((d.rings.split("_")[2]) / 10) + "pt";
                 }
                 return 0;
@@ -366,7 +544,7 @@ class OrbitalMap {
             .style("fill", "none")
             .attr('opacity', function (d) {
                 if (d.rings) {
-                    return 0.90;
+                    return 0.75;
                 }
                 return 0;
             })
@@ -382,7 +560,7 @@ class OrbitalMap {
             .attr("cx", 0)
             .attr("cy", 0)
             .attr("rx", function (d) {
-                let rx = d.size;
+                let rx = d.size/2;
                 if (d.type == 'Jumpgate') {
                     rx = 6;
                 }
@@ -390,7 +568,7 @@ class OrbitalMap {
                 return rx;
             })
             .attr("ry", function (d) {
-                let ry = d.size;
+                let ry = d.size/2;
                 if (d.type == 'Jumpgate') {
                     ry = 9;
                 }
@@ -399,7 +577,7 @@ class OrbitalMap {
             .style("fill", function (d) {
                 let tone = d.tone;
                 if (d.type == 'Jumpgate') {
-                    tone = 'None';
+                    tone = '#331133';
                 }
                 if (d.type == 'Gas Giant') {
                     tone = 'url(#gas_giant_gradient)';
@@ -416,12 +594,15 @@ class OrbitalMap {
             .style("stroke-width", function (d) {
                 let sw = "1pt";
                 if (d.type == 'Jumpgate') {
-                    sw = '3pt';
+                    sw = '2pt';
                 }
                 return sw;
             })
             .style("stroke", function (d) {
-                let stroke = me.design.stroke[d.type];
+                let stroke = d.tone;
+                if (d.type == 'Jumpgate') {
+                    stroke = '#626';
+                }
                 return stroke;
             })
             .attr("opacity", function (d) {
@@ -431,7 +612,7 @@ class OrbitalMap {
                 if (d.type == "Sun") {
                     return 1.0;
                 }
-                return 1;
+                return 0.9;
             });
 
 
@@ -536,10 +717,10 @@ class OrbitalMap {
     transition() {
         let me = this
         me.item.transition()
-            .duration(20000)
-            .ease(d3.easeLinear)
+            .duration(2000)
+            .ease(d3.easePolyOut)
             .attrTween("transform", me.translateAlong())
-            // .each("end", this.transition)
+        // .each("end", this.transition)
         ;
     }
 
@@ -553,7 +734,7 @@ class OrbitalMap {
             .style("fill", "#FFF")
             .style("stroke", "#444")
             .style("font-size", "20pt")
-            .style("font-family", "VL Gothic")
+            .style("font-family", "Mono")
             .style("text-anchor", "start")
             .text(me.data.title.toUpperCase())
 
@@ -575,7 +756,7 @@ class OrbitalMap {
             .style("fill", "#FFF")
             .style("stroke", "#777")
             .style("font-size", "16pt")
-            .style("font-family", "VL Gothic")
+            .style("font-family", "Mono")
             .style("text-anchor", "start")
             .text(me.data.alliance.toUpperCase())
 
@@ -615,7 +796,7 @@ class OrbitalMap {
             .style("stroke", "#444")
             .style("stroke-width", "#0.25pt")
             .style("font-size", "8pt")
-            .style("font-family", "VL Gothic")
+            .style("font-family", "Mono")
             .style("text-anchor", "start")
             .text(function (d) {
                 return d.type[0].toUpperCase();
@@ -656,7 +837,7 @@ class OrbitalMap {
             .style("fill", "#FFF")
             .style("stroke", "#777")
             .style("font-size", "10pt")
-            .style("font-family", "VL Gothic")
+            .style("font-family", "Mono")
             .style("text-anchor", "end")
             .text(function (d) {
                 return d.name;
@@ -671,7 +852,7 @@ class OrbitalMap {
             .style("fill", "#FFF")
             .style("stroke", "#333")
             .style("font-size", "10pt")
-            .style("font-family", "VL Gothic")
+            .style("font-family", "Mono")
             .style("text-anchor", "end")
             .text(function (d) {
                 return d.AU + " AU (" + d.type + ")";
@@ -686,7 +867,7 @@ class OrbitalMap {
             .style("fill", "#FFF")
             .style("stroke", "#777")
             .style("font-size", "10pt")
-            .style("font-family", "VL Gothic")
+            .style("font-family", "Mono")
             .style("text-anchor", "end")
             .text(function (d) {
                 if (d.type == "Sun") {
@@ -704,7 +885,7 @@ class OrbitalMap {
             .style("fill", "#FFF")
             .style("stroke", "#333")
             .style("font-size", "10pt")
-            .style("font-family", "VL Gothic")
+            .style("font-family", "Mono")
             .style("text-anchor", "end")
             .text(function (d) {
                 return d.description;
@@ -728,7 +909,7 @@ class OrbitalMap {
             .attr('transform', function (d) {
                 return "translate(" + (8 * me.width / 16) + "," + (4 * me.height / 8) + ")";
             })
-            .append('g');
+        ;
         ;
 
 
@@ -739,31 +920,67 @@ class OrbitalMap {
             .attr('y', -me.h / 2)
             .attr('width', me.w)
             .attr('height', me.h)
-            .style("fill", "#110011")
+            .style("fill", "#111111")
             .style("fill-stroke", 1)
             .style("opacity", 0.5);
 
 
         // Planets parsing
         me.planets = me.svg.append('g')
-            .attr("class", "planet")
-            .selectAll("planet")
+            .attr("class", "system")
+            .selectAll("system")
             .data(me.data.planets).enter();
 
         me.orbital_group = me.planets
             .append('g')
+            .attr("class", function (d) {
+                return "standard_orbit";
+            })
+            .attr("distance", function (d) {
+                return d.AU;
+            })
+            .attr("id", function (d) {
+                return "og_" + d.id;
+            })
             .attr("transform", function (d) {
                 let t = "";
-                t += "translate(0," + (me.zoom_check(d.AU) ? -me.step_y * 5 : 0) + ") "
+                t += "translate(0," + (me.zoom_check(d.AU) ? me.y_offset + me.offset : me.offset) + ") "
                 t += "rotate(" + -d.tilt + ")"
                 return t;
             });
 
-        me.legend = me.svg.append('g');
+        console.log(me.data)
+        me.belts = me.svg.append('g')
+            .attr("class", "belts")
+            .selectAll("belts")
+            .data(me.data.belts).enter();
+        me.asteroids_belts = me.belts
+            .append('g')
+            .attr("class", function (d) {
+                return "asteroid_belt";
+            })
+            .attr("distance", function (d) {
+                return d.AU;
+            })
+            .attr("id", function (d) {
+                return "be_" + d.id;
+            })
+            .attr("transform", function (d) {
+                let t = "";
+                t += "translate(0," + (me.zoom_check(d.AU) ? me.y_offset + me.offset : me.offset) + ") "
+                t += "rotate(" + -d.tilt + ")"
+                return t;
+            });
+
+
+        me.legend = me.svg.append('g').attr('class', 'legend');
         me.drawLayout();
         me.drawOrbits();
+        me.drawAsteroidBelt()
+
         me.drawPlanets();
         me.drawLegend();
+
 
         me.planets.exit().remove();
         me.drawPanels();

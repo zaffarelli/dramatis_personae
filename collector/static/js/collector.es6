@@ -367,6 +367,7 @@ class Collector {
                 url: 'ajax/jumpweb/',
                 success: function (answer) {
                     $("#d3area").css('display', 'block');
+                    console.log(answer)
                     let orbital = new OrbitalMap(answer.data, '#d3area');
                     orbital.perform();
                     me.rebootLinks();
