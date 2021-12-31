@@ -1,8 +1,8 @@
-'''
+"""
  ╔╦╗╔═╗  ╔═╗┌─┐┬  ┬  ┌─┐┌─┐┌┬┐┌─┐┬─┐
   ║║╠═╝  ║  │ ││  │  ├┤ │   │ │ │├┬┘
  ═╩╝╩    ╚═╝└─┘┴─┘┴─┘└─┘└─┘ ┴ └─┘┴└─
-'''
+"""
 from django.db import models
 from collector.models.character import Character
 from collector.models.tourofduty import TourOfDutyRef
@@ -31,6 +31,7 @@ class BeneficeAfflictionRef(UUIDClass):
     source = models.CharField(max_length=32, default='FS2CRB')
     emphasis = models.CharField(max_length=64, default='',blank=True)
     ranking = models.BooleanField(default=False)
+    cash_value = models.BooleanField(default=False)
     watermark = models.CharField(max_length=64, default='',blank=True)
 
     def __str__(self):
@@ -39,7 +40,7 @@ class BeneficeAfflictionRef(UUIDClass):
     def fix(self):
         super().fix()
 
-    def toJSON(self):
+    def to_json(self):
         from collector.utils.basic import json_default
         import json
         jstr = json.loads(json.dumps(self, default=json_default, sort_keys=True, indent=4))
@@ -58,13 +59,12 @@ class BeneficeAffliction(models.Model):
     def __str__(self):
         return '%s=%s' % (self.character.full_name, self.benefice_affliction_ref.reference)
 
-    def toJSON(self):
+    def to_json(self):
         from collector.utils.basic import json_default
         import json
         jstr = json.loads(json.dumps(self, default=json_default, sort_keys=True, indent=4))
-        jstr['benefice_affliction_ref'] = self.benefice_affliction_ref.toJSON()
+        jstr['benefice_affliction_ref'] = self.benefice_affliction_ref.to_json()
         return jstr
-
 
 
 def make_occult(modeladmin, request, queryset):
@@ -99,9 +99,9 @@ def refix(modeladmin, request, queryset):
 
 class BeneficeAfflictionRefAdmin(admin.ModelAdmin):
     ordering = ('category', 'reference', 'watermark', '-value', 'ranking')
-    list_display = ('reference', 'uuid', 'emphasis', 'value', 'ranking', 'watermark', 'category', 'description', 'source')
+    list_display = ('reference', 'uuid', 'emphasis', 'value', 'watermark', 'category','ranking', 'cash_value', 'description', 'source')
     search_fields = ('reference', 'description', 'emphasis', 'watermark')
-    list_filter = ('ranking', 'source', 'watermark', 'category')
+    list_filter = ('ranking', 'source', 'watermark', 'category', 'emphasis')
     actions = [refix,make_occult, make_combat, make_talent, make_riches, make_possession]
 
 

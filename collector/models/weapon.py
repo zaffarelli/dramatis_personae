@@ -60,7 +60,7 @@ class WeaponRef(models.Model):
     hidden = models.BooleanField(default=False)
 
     def __str__(self):
-        return f'{self.reference} {self.meta_type} {self.category}'
+        return f'[{self.category}]{self.meta_type} {self.reference} '
 
     @property
     def get_damage_stats(self):
@@ -151,7 +151,7 @@ class WeaponRef(models.Model):
         self.stats = ' . '.join(res)  # ⦁⏺
         return self.stats
 
-    def toJSON(self):
+    def to_json(self):
         from collector.utils.basic import json_default
         jstr = json.loads(json.dumps(self, default=json_default, sort_keys=True, indent=4))
         return jstr

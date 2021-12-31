@@ -1,8 +1,8 @@
-'''
+"""
 ╔╦╗╔═╗  ╔═╗┌─┐┌─┐┌┐┌┌─┐┬─┐┬┌─┐┌┬┐
  ║║╠═╝  ╚═╗│  ├┤ │││├─┤├┬┘│└─┐ │
 ═╩╝╩    ╚═╝└─┘└─┘┘└┘┴ ┴┴└─┴└─┘ ┴
-'''
+"""
 from django.db import models
 import re
 import string
@@ -15,11 +15,18 @@ class StoryModel(models.Model):
     chapter = models.CharField(default='0', blank=True, max_length=64)
     date = models.CharField(max_length=128, default='', blank=True)
     place = models.CharField(max_length=128, default='', blank=True)
-    description = models.TextField(max_length=6000,default='',blank=True)
     gamemaster = models.CharField(default='zaffarelli@gmail.com', max_length=128, blank=True)
     visible = models.BooleanField(default=True)
+    battle_scene = models.BooleanField(default=False)
+    chase_scene = models.BooleanField(default=False)
+    action_scene = models.BooleanField(default=False)
+    technical_scene = models.BooleanField(default=False)
+    spiritual_scene = models.BooleanField(default=False)
+    political_scene = models.BooleanField(default=False)
+    downtime_scene = models.BooleanField(default=False)
     to_PDF = models.BooleanField(default=True)
     full_id = models.CharField(max_length=64, blank=True, default='')
+    description = models.TextField(max_length=6000,default='',blank=True)
     rewards = models.TextField(max_length=1024, default='', blank=True)
 
     def __str__(self):
@@ -38,7 +45,7 @@ class StoryModel(models.Model):
                     list.append(ch)
         return list
 
-    def toJSON(self):
+    def to_json(self):
         """ Returns JSON of object """
         return json.dumps(self, default=lambda o: o.__dict__,sort_keys=True, indent=4)
 

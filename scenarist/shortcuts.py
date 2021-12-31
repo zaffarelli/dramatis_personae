@@ -25,7 +25,7 @@ def render_to_json_response(context, **response_kwargs):
   print("render_to_json_response")
   print(context)
   new_context = context.copy()
-  new_context['object'] = context['object'].toJSON()
+  new_context['object'] = context['object'].to_json()
   response_kwargs['content_type'] = 'application/json'
   return HttpResponse(convert_context_to_json(new_context), **response_kwargs)
 
@@ -41,7 +41,7 @@ def convert_context_to_json(context):
   #print(context)
   #for key,item in context:
   #  try:
-  #    json_item = item.toJSON()
+  #    json_item = item.to_json()
   #    new_context[key] = json_item
   #  except:
   #    new_context[key] = item 

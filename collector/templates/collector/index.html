@@ -28,7 +28,7 @@
     <div class="menu-logo">
         <div class="img_block"></div>
         <span class="info">Epic: {{campaign.epic.title}}</span>
-        {% if user.profile.is_gamemaster %}
+        {% if user.is_authenticated %}
         <input type="text" id="customize" value="" placeholder="Free Text Here...">
 {#        <span id="menu_go"><i class="action_icon fas fa-caret-square-right" style="font-size:24px;"></i></span>#}
         {% endif %}
@@ -94,7 +94,7 @@
             <ul class="level-2 Cartograph off">
                 {% if campaign.is_fics %}
                 <li><span class="menu-button menu-item" action="jumpweb" mode='overlay' title="Display the Jumpweb"><i class="action_icon fas fa-globe"></i> Map of the Empire</span></li>
-                <li><span class="menu-button slug-item" action="orbital" mode='overlay' title="Display the Orbital map of the given system if available."><i class="action_icon fas fa-globe"></i> Orbital Map</span></li>
+                <li><span class="menu-button slug-item" id="orbital_map" action="orbital" mode='overlay' title="Display the Orbital map of the given system if available."><i class="action_icon fas fa-globe"></i> Orbital Map</span></li>
                 {% endif %}
             </ul>
         </li>
@@ -106,6 +106,7 @@
                 <li><span class="menu-button menu-item" mode="direct" action="media_pdf_results_rules-PDF"><i class="action_icon fas fa-file-pdf"></i> FICS Rules</span></li>
                 <li><span class="menu-button menu-item" mode="direct" action="media_pdf_results_equipment-PDF"><i class="action_icon fas fa-file-pdf"></i> FICS Equipment</span></li>
                 <li><span class="menu-button menu-item" mode="direct" action="media_pdf_results_audit-PDF"><i class="action_icon fas fa-file-pdf"></i> Audit Report</span></li>
+                <li><span class="menu-button menu-item" mode="direct" action="media_pdf_results_{{ campaign.epic.shortcut }}-PDF"><i class="action_icon fas fa-file-pdf"></i> Epic export</span></li>
                 {% endif %}
             </ul>
         </li>

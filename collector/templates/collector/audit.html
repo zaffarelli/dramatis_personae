@@ -21,8 +21,10 @@
 
 {% if characters  %}
     {% for x in characters %}
+        {% if x.audit %}
         <h3>{{ x.rid|safe }}</h3>
         <P>{{ x.audit|parseclean|safe }}</P>
+        {% endif %}
     {% endfor %}
 {% endif %}
 

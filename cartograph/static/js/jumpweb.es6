@@ -30,8 +30,8 @@ class Jumpweb {
         me.data = data;
         me.era = (me.data.mj ? 0 : 5022);
         //me.new_routes = me.data.new_routes
-        me.ox = me.width / me.size / 2;
-        me.oy = me.height / me.size / 2;
+        me.ox = 40;
+        me.oy = 30;
         me.step_x = me.size;
         me.step_y = me.size;
         d3.select(me.parent).selectAll("svg").remove();
@@ -44,7 +44,7 @@ class Jumpweb {
             .attr("class", "all")
             .style("fill", "#331133")
             .attr('transform', function(d){
-                 return "translate("+ (-5.5*me.width/16)+","+ (-3*me.height/8)+")";
+                 return "translate("+ (-4*me.ox*me.size/5)+","+ (-6*me.oy*me.size/7)+")";
              })
             .append('g');
         me.gate_stroke = "#333"
@@ -156,7 +156,6 @@ title="jumpweb_' + me.mode + '_' + now + '.svg"> \
             });
     }
 
-
     draw_node(node) {
         let me = this;
 
@@ -218,6 +217,15 @@ title="jumpweb_' + me.mode + '_' + now + '.svg"> \
                 return (d.color ? d.color : '#CCC');
             })
             .attr("stroke-width", "1pt");
+        let ecu = 40;
+        node.append("path")
+            .attr("class", "second_color")
+            //.attr("d", "M 0,"+me.mark*2+" l -"+me.mark*1.5+",-"+me.mark*3+" h "+me.mark*3+" Z")
+            .attr("d", "M "+0+" -"+ecu/2+" a 2 2 0 0 0 0 "+ecu+" Z")
+            .style("stroke", function(d){return d.color2;})
+            .style("fill", function(d) {
+               return d.color2;
+            });
         node.append("path")
             .attr("class", "frame triangle north")
             .attr("d", "M 0,-"+me.mark*2+" l -"+me.mark*1.5+",-"+me.mark*3+" h "+me.mark*3+" Z")
@@ -391,7 +399,6 @@ title="jumpweb_' + me.mode + '_' + now + '.svg"> \
         return answer;
     }
 
-
     isNoNewRoute(a, b) {
         let me = this;
         if (me.data.mj){
@@ -520,7 +527,7 @@ title="jumpweb_' + me.mode + '_' + now + '.svg"> \
             .on("mouseover", function(e,d) {
                 me.svg.select("#link_" + d.source + "_" + d.target)
                     .style("stroke-width", function(d) {
-
+                        console.log("mouseover");
                         if (d.discovery) {
                             return '8pt';
                         }
@@ -529,6 +536,7 @@ title="jumpweb_' + me.mode + '_' + now + '.svg"> \
             })
             .on("mouseout", function(e,d) {
                 me.svg.select(".link").style('stroke-width', function(d) {
+                    console.log("mouseout");
                     let res = (d.out ? "1pt" : (d.off ? "1pt" : (d.unknown ? "2pt" : "1pt")));
                     if (d.discovery) {
                         res = '4pt';
@@ -596,14 +604,16 @@ title="jumpweb_' + me.mode + '_' + now + '.svg"> \
                 let y = (d.y + me.oy) * me.step_y;
                 return "translate(" + x + "," + y + ")";
             })
-            .on("click", function(d) {
+            .on("click", function(e,d) {
                 if (d.orbital_map) {
                     // console.log("Launch orbital map for " + d.name);
-                    window.location = "/orbital_map/show/"+d.id+"/";
+                    $('#customize').val(d.name);
+                    $('#orbital_map').click();
+                    // window.location = "/ajax/orbital/"+d.name+"/";
                 }
             })
 
-            .on("mouseover", function(d) {
+            .on("mouseover", function(e,d) {
                 // d3.event.preventDefault();
                 // d3.event.stopPropagation();
                 me.svg.select("#aura_" + d.id)

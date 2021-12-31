@@ -9,6 +9,7 @@ from django.contrib import admin
 from django.db.models.signals import pre_save, post_save
 from django.dispatch import receiver
 from colorfield.fields import ColorField
+from collector.models.alliance_ref import AllianceRef
 # from django.urls import reverse
 # import hashlib
 # from scenarist.models.epics import Epic
@@ -40,6 +41,7 @@ class System(models.Model):
 
     name = models.CharField(max_length=200, unique=True)
     alliance = models.CharField(max_length=200)
+    allianceref = models.ForeignKey(AllianceRef, on_delete=models.SET_NULL, blank=True, null=True)
     sector = models.CharField(max_length=200, default="Empire")
     jumproads = models.ManyToManyField('self', blank=True)
     x = models.IntegerField(default=0)
@@ -141,10 +143,11 @@ class OrbitalItemInline(admin.TabularInline):
 
 class SystemAdmin(admin.ModelAdmin):
     ordering = ['name', 'alliance']
-    list_display = ['name', 'alliance', 'discovery', 'sector', 'orbital_map', 'dtj', 'routes', 'routes_list', 'group',
+    list_display = ['name', 'alliance', 'allianceref', 'discovery', 'sector', 'orbital_map', 'dtj', 'routes', 'routes_list', 'group',
                     'color', 'x', 'y']
     inlines = [OrbitalItemInline]
-    list_filter = ['group', 'alliance', 'sector']
+    list_filter = ['group', 'alliance','allianceref', 'sector']
+    search_fields = ['name', 'alliance', 'sector']
 
 
 class OrbitalItemAdmin(admin.ModelAdmin):

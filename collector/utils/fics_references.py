@@ -273,3 +273,9 @@ DRAMA_SEATS_COLORS = {
     '01-friend': "#3080D0",
     '00-players': "#D080D0"
 }
+
+BLOKES = {
+    'allies': ['05-partisan', '04-protagonist', '03-servant', '02-ally', '01-friend'],
+    'foes': ['11-foe', '10-enemy', '09-lackey', '08-antagonist', '07-opponent'],
+    'others': ['06-neutral']
+}

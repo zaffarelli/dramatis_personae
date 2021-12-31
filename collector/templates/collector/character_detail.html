@@ -21,14 +21,14 @@
     <div class='coreblock'>
         <ul>
             {% if c.alliance_ref %}
-            <li><b>Alliance</b><u>{{ c.alliance_ref|safe }}</u></li>
+            <li><b>Alliance</b><u>{{ c.alliance_ref.reference|safe }}</u></li>
             {% endif %}
             <li><b>Faction</b><u>{{ c.faction|safe }}</u></li>
             {% if not c.nameless %}
             <li><b>Birthdate</b><u>{{ c.birthdate }} ({{ c.age }} years old)</u></li>
             {% endif %}
-            <li><b>Fief/Species</b><u>{{ c.native_fief }} / {{ c.race }}</u></li>
-            <li><b>Base Fief/ Current Species</b><u>{{ c.fief }} / {{ c.current_fief }}</u></li>
+            <li><b>Species</b><u>{{ c.specie.species }}</u></li>
+            <li><b>Base/Current Fief</b><u>{{ c.fief }} / {{ c.current_fief }}</u></li>
             <li><b>Caste/Rank</b><u>{{ c.caste }} / {{ c.rank }}</u></li>
             <li><b>Height/Weight</b><u>{{ c.height|as_height }} / {{ c.weight|as_weight }}</u></li>
             {% if not c.nameless %}
@@ -41,12 +41,12 @@
             <li><b>Path</b><u>{{c.path}}</u></li>
             <li><b>Occult Fire power</b><u>{{c.occult_fire_power}}</u></li>
             {% endif %}
-        <li>Dead {{ c.is_dead|prettybool|safe }} |
-            Vis {{c.is_visible|prettybool|safe}} |
-            LP {{c.use_history_creation|prettybool|safe}} |
-            HF {{c.historical_figure|prettybool|safe}} |
-            Ns {{c.nameless|prettybool|safe}} |
-            Pu {{c.is_public|prettybool|safe}}</li>
+            <li><b>Dead</b><u>{{c.is_dead|prettybool|safe}}</u></li>
+            <li><b>Historical Figure</b><u>{{c.historical_figure|prettybool|safe}}</u></li>
+            <li><b>Visible</b><u>{{c.is_visible|prettybool|safe}}</u></li>
+            <li><b>Lifepath</b><u>{{c.use_history_creation|prettybool|safe}}</u></li>
+
+
 
         </ul>
         <ul>

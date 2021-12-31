@@ -100,7 +100,7 @@ def make_epic_corpus(campaign):
     merger = PdfFileMerger()
     # merger.append(open('%sresources/__es_header.pdf'%(mystaticpath), 'rb'))
     template = get_template('collector/conf_pdf.html')
-    context = {'epic':campaign.parse_details()}
+    context = {'epic': campaign.parse_details()}
     html = template.render(context)
     uri = 'c_%s.pdf'%(campaign.epic.shortcut)
     filename = os.path.join(settings.MEDIA_ROOT, 'pdf/results/' + uri)
@@ -125,15 +125,15 @@ def export_epic(request, campaign):
     res['comment'] = '<div class="classyview"><p>'+com+'</p></div>'
     media_results = os.path.join(settings.MEDIA_ROOT, 'pdf/results/')
     merger = PdfFileMerger()
-    merger.append(open('%scorpus_%s.pdf'%(media_results,campaign.epic.shortcut), 'rb'))
-    try:
-        merger.append(open('%sappendix_%s.pdf'%(media_results,campaign.epic.shortcut), 'rb'))
-    except FileNotFoundError:
-        messages.info(request, "No characters appendix found yet...")
-    des = '%s%s.pdf'%(media_results,campaign.epic.shortcut)
+    merger.append(open('%scorpus_%s.pdf' % (media_results, campaign.epic.shortcut), 'rb'))
+    # try:
+    #     merger.append(open('%sappendix_%s.pdf'%(media_results,campaign.epic.shortcut), 'rb'))
+    # except FileNotFoundError:
+    #     messages.info(request, "No characters appendix found yet...")
+    des = '%s%s.pdf'%(media_results, campaign.epic.shortcut)
     with open(des, 'wb') as fout:
         merger.write(fout)
-    messages.info(request,'Epic [%s] exported to PDF: [%s]'%(campaign.epic.title,des))
+    messages.info(request, 'Epic [%s] exported to PDF: [%s]'%(campaign.epic.title, des))
     return res
 
 

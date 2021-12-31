@@ -35,7 +35,7 @@ class RitualRef(models.Model):
     def __str__(self):
         return f'{self.reference} ({self.path}, {self.level})'
 
-    def toJSON(self):
+    def to_json(self):
         from collector.utils.basic import json_default
         import json
         jstr = json.loads(json.dumps(self, default=json_default, sort_keys=True, indent=4))

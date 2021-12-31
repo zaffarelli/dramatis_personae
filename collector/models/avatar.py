@@ -37,15 +37,17 @@ class Avatar(models.Model):
     is_visible = models.BooleanField(default=True)
     is_dead = models.BooleanField(default=False)
     is_locked = models.BooleanField(default=False)
-    is_public = models.BooleanField(default=False)
-    is_partial = models.BooleanField(default=True)
+    # is_public = models.BooleanField(default=False)
+    # is_partial = models.BooleanField(default=True)
     spotlight = models.BooleanField(default=False)
     priority = models.BooleanField(default=False)
     need_pdf = models.BooleanField(default=False)
     need_fix = models.BooleanField(default=False)
+    # image = models.ImageField(upload_to='images/', null=True, blank=True)
     archive_level = models.CharField(max_length=5, choices=ARCHIVE_LEVEL, default='NON', blank=True)
     # epic = models.ForeignKey(Epic, null=True, blank=True, on_delete=models.SET_NULL)
     pub_date = models.DateTimeField('Date published', default=datetime.now)
+    audit = models.TextField(max_length=2048, default='', blank=True)
 
     def fix(self, conf=None):
         if conf is None:
@@ -76,3 +78,9 @@ class Avatar(models.Model):
 
     def roll_attributes(self):
         pass
+
+    def audit_log(self, txt=None):
+        if txt:
+            self.audit += f'{txt}<br/>'
+        else:
+            self.audit = ""

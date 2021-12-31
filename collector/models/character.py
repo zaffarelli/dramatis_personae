@@ -11,7 +11,7 @@ from collector.models.combattant import Combattant
 from collector.models.alliance_ref import AllianceRef
 from cartograph.models.system import System
 from collector.utils import fs_fics7
-# from collector.utils.basic import json_default
+from collector.utils.fics_references import BLOKES, DRAMA_SEATS
 from django.utils.timezone import get_current_timezone
 import itertools
 import logging
@@ -21,26 +21,26 @@ from operator import itemgetter
 
 logger = logging.getLogger(__name__)
 
-DRAMA_SEATS = (
-    ('11-foe', 'Foe'),
-    ('10-enemy', 'Enemy'),
-    ('09-lackey', 'Lackey'),
-    ('08-antagonist', 'Antagonist'),
-    ('07-opponent', 'Opponent'),
-    ('06-neutral', 'Neutral'),
-    ('05-partisan', 'Partisan'),
-    ('04-protagonist', 'Protagonist'),
-    ('03-servant', 'Servant'),
-    ('02-ally', 'Ally'),
-    ('01-friend', 'Friend'),
-    ('00-players', 'Players'),
-)
-
-BLOKES = {
-    'allies': ['05-partisan', '04-protagonist', '03-servant', '02-ally', '01-friend'],
-    'foes': ['11-foe', '10-enemy', '09-lackey', '08-antagonist', '07-opponent'],
-    'others': ['06-neutral']
-}
+# DRAMA_SEATS = (
+#     ('11-foe', 'Foe'),
+#     ('10-enemy', 'Enemy'),
+#     ('09-lackey', 'Lackey'),
+#     ('08-antagonist', 'Antagonist'),
+#     ('07-opponent', 'Opponent'),
+#     ('06-neutral', 'Neutral'),
+#     ('05-partisan', 'Partisan'),
+#     ('04-protagonist', 'Protagonist'),
+#     ('03-servant', 'Servant'),
+#     ('02-ally', 'Ally'),
+#     ('01-friend', 'Friend'),
+#     ('00-players', 'Players'),
+# )
+#
+# BLOKES = {
+#     'allies': ['05-partisan', '04-protagonist', '03-servant', '02-ally', '01-friend'],
+#     'foes': ['11-foe', '10-enemy', '09-lackey', '08-antagonist', '07-opponent'],
+#     'others': ['06-neutral']
+# }
 
 
 # def json_default(value):
@@ -114,7 +114,7 @@ class Character(Combattant):
     gm_shortcuts = models.TextField(default='', blank=True)
     gm_shortcuts_pdf = models.TextField(default='', blank=True)
 
-    team = models.CharField(max_length=128, choices=DRAMA_SEATS, default='06-neutral', blank=True)
+
 
     OCC_LVL = models.PositiveIntegerField(default=0)
     OCC_DRK = models.PositiveIntegerField(default=0)
@@ -127,12 +127,12 @@ class Character(Combattant):
     path = models.CharField(max_length=256, default='', blank=True)
     stigma = models.CharField(max_length=256, default='', blank=True)
     use_history_creation = models.BooleanField(default=False)
-    use_only_entrance = models.BooleanField(default=False)
+    # use_only_entrance = models.BooleanField(default=False)
     picture = models.CharField(max_length=1024,
                                default='https://drive.google.com/open?id=15hdubdMt1t_deSXkbg9dsAjWi5tZwMU0', blank=True)
     alliance_picture = models.CharField(max_length=256, default='', blank=True)
-    on_save_re_roll_attributes = models.BooleanField(default=False)
-    on_save_re_roll_skills = models.BooleanField(default=False)
+    # on_save_re_roll_attributes = models.BooleanField(default=False)
+    # on_save_re_roll_skills = models.BooleanField(default=False)
     life_path_total = models.IntegerField(default=0)
     overhead = models.IntegerField(default=0)
     stories_count = models.PositiveIntegerField(default=0)
@@ -144,8 +144,9 @@ class Character(Combattant):
     ranking = models.IntegerField(default=0, blank=True)
     group_color = ColorField(default='#888888', blank=True)
     color = ColorField(default='#CCCCCC', blank=True)
+    team = models.CharField(max_length=128, choices=DRAMA_SEATS, default='06-neutral', blank=True)
     storytelling_note = models.TextField(default='', blank=True)
-    audit = models.TextField(max_length=2048, default='', blank=True)
+    wealth = models.IntegerField(default=0, blank=True)
     skills_options = []
     ba_options = []
     bc_options = []
@@ -272,7 +273,7 @@ class Character(Combattant):
         context = {"attribute": str, "value": getattr(self, str), "id": self.id}
         return context
 
-    # def toJSON(self):
+    # def to_json(self):
     #     """ Returns JSON of object """
     #     return json.dumps(self, default=json_default,sort_keys=True, indent=4)
 
@@ -330,7 +331,7 @@ class Character(Combattant):
                 tod_rep['WB'] += tod.tour_of_duty_ref.value
         if self.life_path_total < 200:
             self.archive_level = 'WKS'
-            self.audit += "Archive level is WKS\n"
+            self.audit_log("Archive level is WKS: Lifepath total is less than 200.")
         # Flatten
         doubles_all_wp_roots = list(itertools.chain(*all_tod_wp_roots))
         # Remove multi
@@ -351,13 +352,8 @@ class Character(Combattant):
         for bc in self.blessingcurse_set.all():
             bc_total += bc.blessing_curse_ref.value
         bl.append("")
-        if not self.balanced:
-            self.audit += "Tour Summary:\n"
-            self.audit += "- APx3+OP+BA+BC... " + str(pa_total * 3 + po_total + ba_total + bc_total) + "\n"
-            self.audit += "- WP.............. " + str(self.WP_tod_pool)+ "\n"
-            self.audit += "- Value........... " + str(self.charactercusto.value)+ "\n"
-            self.audit += "- Lifepath ....... " + str(self.life_path_total)+ "\n"
-            self.audit += "- Repartition .... " + str(tod_rep)+ "\n"
+
+
         fs_fics7.check_secondary_attributes(self)
         self.handle_wildcards(all_wp_roots)
         self.charactercusto.save()
@@ -367,6 +363,22 @@ class Character(Combattant):
         self.reset_total()
         self.checkOverhead()
         self.balanced = (self.life_path_total == self.OP) and (self.OP > 0)
+        if not self.balanced:
+            self.audit_log("- APx3+OP+BA+BC... " + str(pa_total * 3 + po_total + ba_total + bc_total))
+            self.audit_log("- WP.............. " + str(self.WP_tod_pool))
+            self.audit_log("- Custo Value..... " + str(self.charactercusto.value))
+            self.audit_log("- Lifepath ....... " + str(self.life_path_total))
+            # self.audit_log("- Repartition .... " + str(tod_rep))
+            if tod_rep["RA"] == 0:
+                self.audit_log(f'- ToD Error: Missing birthright ToD ({tod_rep["RA"]})')
+            elif tod_rep["UP"] != 20:
+                self.audit_log(f'- ToD Error: Wrong upbringing total ({tod_rep["UP"]})')
+            elif tod_rep["AP"] != 25:
+                self.audit_log(f'- ToD Error: Wrong apprenticeship total ({tod_rep["AP"]})')
+            elif tod_rep["EC"] != 48:
+                self.audit_log(f'- ToD Error: Wrong Early Career total ({tod_rep["EC"]})')
+            elif tod_rep["WB"] != 7:
+                self.audit_log(f'- ToD Error: Wrong Worldly Benefits total ({tod_rep["WB"]})')
         self.priority = (abs(self.life_path_total - self.OP) < 8) and (self.OP > 0) and (
                 abs(self.life_path_total - self.OP) > 0)
         self.build_log = "\n".join(bl)
@@ -378,7 +390,7 @@ class Character(Combattant):
             logger.info(f'Current option Points: {self.OP}')
         else:
             logger.error(f'{self.full_name} is not properly balanced: {self.OP} vs {self.life_path_total}!')
-            self.audit += f'{self.full_name} is not properly balanced: {self.OP} vs {self.life_path_total}!\n'
+            self.audit_log(f'- {self.full_name} is not properly balanced: {self.OP} vs {self.life_path_total}!')
         if self.color == '#CCCCCC':
             d = lambda x: fs_fics7.roll(x) - 1
             self.color = '#%01X%01X%01X%01X%01X%01X' % (d(8) + 4, d(16), d(8) + 4, d(16), d(8) + 4, d(16))
@@ -469,6 +481,8 @@ class Character(Combattant):
         self.update_game_parameters()
         self.fencing_league_special()
         self.occult_special()
+        if self.full_name == self.rid:
+            self.audit_log("Name is a RID. Everything has to be done on this character.")
         # NPC fix
         if self.use_history_creation:
             self.rebuild_from_lifepath()
@@ -494,7 +508,10 @@ class Character(Combattant):
         self.update_challenge()
         self.update_stories_count()
         self.race = self.specie.species
-
+        if self.historical_figure:
+            self.audit_log()
+        if self.nameless:
+            self.audit_log()
         self.need_fix = False
         logger.info(f'    => Done fixing ...: {self.full_name} NeedFIX:{self.need_fix}')
         # logger.info(self.audit)
@@ -881,7 +898,7 @@ class Character(Combattant):
         self.stories_count += self.count_cast(dramas)
         self.stories_count += self.count_cast(epics)
         if self.stories_count == 0:
-            self.audit += 'Warning: character appears in no cast...\n'
+            self.audit_log('Warning: character appears in no cast...')
         return self.stories_count
 
     def update_game_parameters(self):
@@ -929,10 +946,10 @@ class Character(Combattant):
             SP_grid["enc"] += a.armor_ref.encumbrance
         logger.info(SP_grid)
 
-        if len(self.armor_set.all()):
-            self.audit += "Warning: character has no armor\n"
-        if len(self.weapon_set.all()):
-            self.audit += "Warning: character has no weapon\n"
+        if len(self.armor_set.all())==0:
+            self.audit_log("Warning: character has no armor")
+        if len(self.weapon_set.all())==0:
+            self.audit_log("Warning: character has no weapon")
 
     def fencing_league_special(self):
         if self.fencing_league:
@@ -998,16 +1015,16 @@ class Character(Combattant):
     def get_shortcuts(self):
         return []
 
-    def toJSON(self):
+    def to_json(self):
         from collector.utils.basic import json_default
         # self.guideline = self.stats_template
         jstr = json.dumps(self, default=json_default, sort_keys=True, indent=4)
         return jstr
 
-    def toJSONFICS(self):
+    def to_jsonFICS(self):
         from collector.models.skill import SkillRef
         import datetime
-        j = self.toJSON()
+        j = self.to_json()
         idx1 = 0
         idx2 = 0
         skills_list = []
@@ -1030,25 +1047,25 @@ class Character(Combattant):
                 idx1 += 1
         weapons = []
         for weapon in self.weapon_set.all():
-            weapons.append(weapon.weapon_ref.toJSON())
+            weapons.append(weapon.weapon_ref.to_json())
         armors = []
         for armor in self.armor_set.all():
-            armors.append(armor.armor_ref.toJSON())
+            armors.append(armor.armor_ref.to_json())
         shields = []
         for shield in self.shield_set.all():
-            shields.append(shield.shield_ref.toJSON())
+            shields.append(shield.shield_ref.to_json())
         tods = []
         for tod in self.tourofduty_set.all():
-            tods.append(tod.tour_of_duty_ref.toJSON())
+            tods.append(tod.tour_of_duty_ref.to_json())
         bcs = []
         for bc in self.blessingcurse_set.all():
-            bcs.append(bc.blessing_curse_ref.toJSON())
+            bcs.append(bc.blessing_curse_ref.to_json())
         bas = []
         for ba in self.beneficeaffliction_set.all():
-            bas.append(ba.toJSON())
+            bas.append(ba.to_json())
         rituals = []
         for ritual in self.ritual_set.all().order_by('ritual_ref__path', 'ritual_ref__level'):
-            rituals.append(ritual.ritual_ref.toJSON())
+            rituals.append(ritual.ritual_ref.to_json())
         k = json.loads(j)
         k["creature"] = "mortal"
         k["date"] = datetime.datetime.now().strftime('%Y%m%d')

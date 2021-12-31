@@ -76,7 +76,7 @@ class TourOfDutyRef(models.Model):
     pub_date = models.DateTimeField('Date published', default=datetime.now)
 
     def __str__(self):
-        return f'[{self.get_category_display()}][{self.value}]  {self.reference} ({self.get_caste_display()})'
+        return f'[{self.get_category_display()}][{self.value}] ({self.get_caste_display()}|{self.topic}) {self.reference} '
 
     def fix(self):
         self.WP = 0
@@ -166,7 +166,7 @@ class TourOfDutyRef(models.Model):
         else:
             self.valid = False
 
-    def toJSON(self):
+    def to_json(self):
         from collector.utils.basic import json_default
         import json
         jstr = json.loads(json.dumps(self, default=json_default, sort_keys=True, indent=4))

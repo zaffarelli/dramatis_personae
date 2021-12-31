@@ -5,6 +5,7 @@ from django.shortcuts import get_object_or_404
 from django.http import HttpResponse, Http404, JsonResponse
 from django.template.loader import get_template
 import json
+from django.contrib import messages
 
 
 def show_jumpweb(request):
@@ -12,7 +13,7 @@ def show_jumpweb(request):
         campaign = get_current_config(request)
         context = {}
         context['data'] = {}
-        # context['campaign'] = campaign.toJSON()
+        # context['campaign'] = campaign.to_json()
         context['data']['mj'] = 1 if request.user.profile.is_gamemaster else 0
         context['data']['new_routes'] = ""#"|".join(NEW_ROUTES)
         context['data']['new_systems'] = ""#"|".join(NEW_SYSTEMS)
@@ -35,6 +36,12 @@ def show_jumpweb(request):
             system['jump'] = s.jump
             system['group'] = s.group
             system['color'] = s.color
+            system['color2'] = s.color
+            if s.allianceref:
+                print(s.allianceref)
+                system['color'] = s.allianceref.color_front
+                system['color2'] = s.allianceref.color_back
+                system['alliance'] = s.allianceref.reference
             system['orbital_map'] = 1 if s.orbital_map != '' else 0
 
             system['dtj'] = s.dtj
@@ -66,27 +73,31 @@ def show_orbital_map(request, slug=None):
         slug = slug_decode(slug)
         if slug is None:
             slug = 'Delphi'
-        system = System.objects.get(name=slug)
         context = {'data': {}}
-        context['campaign'] = campaign.toJSON()
-        context['data']['mj'] = 1 if request.user.profile.is_gamemaster else 0
-        context['data']['title'] = f'{system.name}'
-        context['data']['alliance'] = f'{system.alliance}'
-        context['data']['symbol'] = f'{system.symbol}'
-        context['data']['planets'] = []
-        context['data']['belts'] = []
+        try:
+            system = System.objects.get(name=slug)
+            context['campaign'] = campaign.to_json()
+            context['data']['mj'] = 1 if request.user.profile.is_gamemaster else 0
+            context['data']['title'] = f'{system.name}'
+            context['data']['alliance'] = f'{system.alliance}'
+            context['data']['symbol'] = f'{system.symbol}'
+            context['data']['planets'] = []
+            context['data']['belts'] = []
 
-        context['data']['zoom_val'] = system.zoom_val if system.zoom_val else 0
-        context['data']['zoom_factor'] = system.zoom_factor if system.zoom_factor else 0
-        for oi in system.orbitalitem_set.all():
-            orbital_item = {'name': oi.name, 'AU': oi.distance, 'tilt': oi.tilt, 'tone': oi.color,
-                            'type': oi.get_category_display(), 'azimut': oi.azimut, 'size': oi.size, 'moon': oi.moon,
-                            'description': oi.description, 'rings': oi.rings}
-            if oi.category == "3":
-                orbital_item['roids'] = []
-                context['data']['belts'].append(orbital_item)
-            else:
-                context['data']['planets'].append(orbital_item)
+            context['data']['zoom_val'] = system.zoom_val if system.zoom_val else 0
+            context['data']['zoom_factor'] = system.zoom_factor if system.zoom_factor else 0
+            for oi in system.orbitalitem_set.all():
+                orbital_item = {'name': oi.name, 'AU': oi.distance, 'tilt': oi.tilt, 'tone': oi.color,
+                                'type': oi.get_category_display(), 'azimut': oi.azimut, 'size': oi.size, 'moon': oi.moon,
+                                'description': oi.description, 'rings': oi.rings}
+                if oi.category == "3":
+                    orbital_item['roids'] = []
+                    context['data']['belts'].append(orbital_item)
+                else:
+                    context['data']['planets'].append(orbital_item)
+        except System.DoesNotExist:
+            messages.error(request, f'System not found!')
+            return HttpResponse(status=204)
         # c = json.dumps(context, sort_keys=True, indent=4)
         # print(c)
         return JsonResponse(context)

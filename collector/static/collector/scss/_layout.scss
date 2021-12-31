@@ -2,71 +2,72 @@
 @import 'fonts';
 
 /* Invalid display */
-
-@media screen and (max-width: 640px) {
-  body {
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-    overflow-y: scroll;
-    background: $fics_back url($back);
-
-    & .logo {
-      display: none;
-    }
-
-    & .menu {
-      display: none;
-    }
-
-    & .wrapper {
-      display: none;
-    }
-  }
-}
+//
+//@media screen and (max-width: 640px) {
+//  body {
+//    margin: 0;
+//    padding: 0;
+//    overflow-x: hidden;
+//    overflow-y: scroll;
+//    background: $fics_back url($back);
+//
+//    & .logo {
+//      display: none;
+//    }
+//
+//    & .menu {
+//      display: none;
+//    }
+//
+//    & .wrapper {
+//      display: none;
+//    }
+//  }
+//}
 
 /* Small - 14 inches Elitebook display */
 
-@media screen and (min-width: 641px) and (max-width: 1024px) {
-  body {
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-    overflow-y: scroll;
-    background: $fics_back url($back);
-
-    & .logo {
-      height: 105px;
-      width: 100%;
-    }
-
-    & .menu {
-      width: 100%;
-      height: 40px;
-    }
-
-    & .wrapper {
-      z-index: 1;
-      margin-left: 0;
-      width: 99%;
-      min-height: 1000px;
-      //background: transparent url("simple_logo_invert.png") center center no-repeat;
-      display: grid;
-      grid-template-columns: .5% 275px 1fr 200px .5%;
-      grid-column-gap: 5px;
-      justify-content: center;
-      align-content: stretch;
-
-      & .details {
-        grid-column: 3 / 6;
-      }
-
-      & .menuright {
-        display: none;
-      }
-    }
-  }
-}
+//@media screen and (min-width: 641px) and (max-width: 1024px) {
+//  body {
+//    margin: 0;
+//    padding: 0;
+//    overflow-x: hidden;
+//    overflow-y: scroll;
+//    background: $fics_back url($back);
+//
+//    & .logo {
+//      height: 105px;
+//      width: 100%;
+//    }
+//
+//    & .menu {
+//      width: 100%;
+//      height: 40px;
+//      background:red;
+//    }
+//
+//    & .wrapper {
+//      z-index: 1;
+//      margin-left: 0;
+//      width: 99%;
+//      min-height: 1000px;
+//      //background: transparent url("simple_logo_invert.png") center center no-repeat;
+//      display: grid;
+//      grid-template-columns: .5% 275px 1fr 200px .5%;
+//      grid-column-gap: 5px;
+//      justify-content: center;
+//      align-content: stretch;
+//
+//      & .details {
+//        grid-column: 3 / 6;
+//      }
+//
+//      & .menuright {
+//        display: none;
+//      }
+//    }
+//  }
+//}
 
 /* Normal - 21/22 inches screen */
 
@@ -102,14 +103,14 @@
         display: none;
       }
 
-      & .details {
-        display: none;
-      }
+      //& .details {
+      //  display: none;
+      //}
 
       & .mosaic {
         flex-grow: 1;
         order: 2;
-        padding:0;
+        padding: 0;
       }
 
       & .starport {
@@ -310,9 +311,11 @@
     }
 
     &.storyview {
-
       flex-grow: 5;
       flex-shrink: 0;
+      justify-content: flex-start;
+      align-content: flex-start;
+      align-items: stretch;
       width: 500px;
       height: auto;
 
@@ -322,9 +325,14 @@
 
       & .storydetails {
         display: flex;
-        flex-flow: row nowrap;
+        flex-flow: row wrap;
+        justify-content: flex-start;
+        align-content: flex-start;
+        align-items: flex-start;
         padding: 6px;
+        background: #203060;
         text-align: justify;
+        gap: 10px 10px;
 
         &.epic {
           border-left: 5px solid #848;
@@ -350,45 +358,63 @@
         }
 
 
-        & .brick {
-          display: inline-block;
-          flex-order: 1;
-          flex-grow: 1;
-          padding: 5px;
-          width: auto;
-          height: auto;
-          min-height: 1.3em;
-          min-width: 16ex;
-          max-width: 48ex;
-          font-family: Texte;
-          background: $fics_dark;
-          color: $fics_front;
-          margin: 3px;
-          border-radius: 5px;
-          border: 1px solid $fics_lighter;
-          box-shadow: 5px 5px 5px $fics_darkest;
-
-          & em {
-            display: inline-block;
-            width: 24ex;
-            background: $fics_darkest;
-            text-align: left;
-            font-variant: small-caps;
-            font-style: normal;
-            margin-right: 5px;
-            padding: 0.2ex;
-          }
-        }
-
         & .wall {
-          order: 2;
-          width: 400px;
           display: flex;
-          flex-flow: row wrap;
-          justify-items: flex-start;
-          align-items: flex-start;
-          align-content: flex-start;
+          order: 2;
+          flex-grow: 1;
+          flex-shrink: 1;
+          flex-flow: column wrap;
+          justify-content: flex-start;
+          align-content: stretch;
+          align-items: stretch;
+
+          width: 220px;
+          gap: 10px 10px;
           padding: 5px;
+          border-radius: 5px;
+
+          height:auto;
+
+          & .brick {
+            display: inline-block;
+            flex-grow: 1;
+            padding: 2px;
+            height: auto;
+
+            font-family: Texte;
+            background: $fics_dark;
+            color: $fics_front;
+            border-radius: 5px;
+            border: 1px solid $fics_lighter;
+            box-shadow: 5px 5px 5px $fics_darkest;
+
+            & em {
+              display: inline-block;
+              width: 12ex;
+              background: $fics_darkest;
+              text-align: left;
+              font-variant: small-caps;
+              font-style: normal;
+              padding: 2px;
+              border-radius: 3px;
+              margin-right: 3ex;
+            }
+            & strong {
+              display: inline-block;
+              width: 24ex;
+              margin-left:12ex;
+              background: $fics_darker;
+              text-align: center;
+              font-variant: small-caps;
+              font-style: normal;
+              padding: 2px;
+              border-radius: 3px;
+              margin-right: 3ex;
+            }
+
+          }
+
+
         }
 
 
@@ -399,8 +425,10 @@
           columns: 2;
           column-gap: 40px;
           column-rule: 1px solid $fics_darker;
-          width: 500px;
+          width: 600px;
           padding: 5px;
+          border: 1px solid $fics_light;
+          border-radius: 5px;
         }
       }
     }
@@ -449,7 +477,7 @@
 
     &.top {
       order: 1;
-      height:30px;
+      height: 30px;
     }
 
     &.middle {
@@ -557,13 +585,13 @@
       &.wide {
         flex-grow: 0;
         flex-shrink: 0;
-        width: 150px;
+        width: 120px;
       }
 
       &.wider {
         flex-grow: 0;
         flex-shrink: 0;
-        width: 200px;
+        width: 150px;
 
 
       }
@@ -577,8 +605,8 @@
 
       }
 
-      &.last{
-        order:10;
+      &.last {
+        order: 10;
       }
 
       &.small {

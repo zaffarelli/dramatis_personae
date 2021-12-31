@@ -41,7 +41,7 @@ def get_list(request, id, slug='none'):
     decs = str(base64.b64decode(slug), "utf-8")
     if decs == 'none':
         character_items = campaign.dramatis_personae\
-            .order_by('historical_figure','-team','full_name')\
+            .order_by('-team','keyword','balanced', 'historical_figure', 'nameless', 'full_name')\
             .filter(is_dead=False, keyword__startswith=campaign.epic.shortcut)
     elif decs.startswith('c-'):
         elements = decs.split('-')
@@ -288,7 +288,7 @@ def display_sheet(request, pk=None):
         post_title = ""
         spe = c.get_specialities()
         shc = c.get_shortcuts()
-        j = c.toJSONFICS()
+        j = c.to_jsonFICS()
         settings = {'version': 1.0, 'labels': {}, 'pre_title': pre_title, 'scenario': scenario,
                     'post_title': post_title, 'fontset': FONTSET, 'specialities': spe, 'shortcuts': shc}
         fics_sheet_context = {'settings': json.dumps(settings, sort_keys=True, indent=4), 'data': j}

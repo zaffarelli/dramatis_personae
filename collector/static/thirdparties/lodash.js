@@ -1614,7 +1614,7 @@
      * `snakeCase`, `some`, `sortedIndex`, `sortedIndexBy`, `sortedLastIndex`,
      * `sortedLastIndexBy`, `startCase`, `startsWith`, `stubArray`, `stubFalse`,
      * `stubObject`, `stubString`, `stubTrue`, `subtract`, `sum`, `sumBy`,
-     * `template`, `times`, `toFinite`, `toInteger`, `toJSON`, `toLength`,
+     * `template`, `times`, `toFinite`, `toInteger`, `to_json`, `toLength`,
      * `toLower`, `toNumber`, `toSafeInteger`, `toString`, `toUpper`, `trim`,
      * `trimEnd`, `trimStart`, `truncate`, `unescape`, `uniqueId`, `upperCase`,
      * `upperFirst`, `value`, and `words`
@@ -9038,7 +9038,7 @@
      * @name value
      * @memberOf _
      * @since 0.1.0
-     * @alias toJSON, valueOf
+     * @alias to_json, valueOf
      * @category Seq
      * @returns {*} Returns the resolved unwrapped value.
      * @example
@@ -17068,7 +17068,7 @@
     lodash.prototype.next = wrapperNext;
     lodash.prototype.plant = wrapperPlant;
     lodash.prototype.reverse = wrapperReverse;
-    lodash.prototype.toJSON = lodash.prototype.valueOf = lodash.prototype.value = wrapperValue;
+    lodash.prototype.to_json = lodash.prototype.valueOf = lodash.prototype.value = wrapperValue;
 
     // Add lazy aliases.
     lodash.prototype.first = lodash.prototype.head;

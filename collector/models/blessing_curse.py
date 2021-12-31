@@ -24,7 +24,7 @@ class BlessingCurseRef(models.Model):
     def __str__(self):
         return '%s (%+d)' % (self.reference, self.value)
 
-    def toJSON(self):
+    def to_json(self):
         from collector.utils.basic import json_default
         import json
         jstr = json.loads(json.dumps(self, default=json_default, sort_keys=True, indent=4))

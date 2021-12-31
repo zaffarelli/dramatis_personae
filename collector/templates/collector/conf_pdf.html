@@ -33,13 +33,14 @@
                 {% include 'collector/pdf/article_info.html' with c=event%}
                 {{ event.data.description|linebreaks|parse_avatars_pdf|safe }}<br/>
                 {{ event.data.resolution|linebreaks|parse_avatars_pdf|safe }}
+                {% for ch in event.data.minis %}
+                    {% include 'collector/pdf/mini_roster.html' with c=ch %}
+                {% endfor %}
             {% endfor %}
             {% endif %}
         {% endfor %}
-        {% for ch in drama.data.minis %}
-            {% include 'collector/pdf/mini_roster.html' with c=ch %}
-        {% endfor %}
         {% endif %}
+        <pdf:nextpage />
     {% endfor %}
     <p>{{ epic.data.gamemaster }}</p>
 {% endblock article %}

@@ -556,7 +556,7 @@ Color.prototype = {
 			.alpha(color1.alpha() * p + color2.alpha() * (1 - p));
 	},
 
-	toJSON: function () {
+	to_json: function () {
 		return this.rgb();
 	},
 
@@ -5167,8 +5167,8 @@ function toObject () {
     };
 }
 
-function toJSON () {
-    // new Date(NaN).toJSON() === null
+function to_json () {
+    // new Date(NaN).to_json() === null
     return this.isValid() ? this.toISOString() : null;
 }
 
@@ -5530,7 +5530,7 @@ proto.toObject          = toObject;
 proto.toDate            = toDate;
 proto.toISOString       = toISOString;
 proto.inspect           = inspect;
-proto.toJSON            = toJSON;
+proto.to_json            = to_json;
 proto.toString          = toString;
 proto.unix              = unix;
 proto.valueOf           = valueOf;
@@ -6123,7 +6123,7 @@ proto$2.years          = years;
 proto$2.humanize       = humanize;
 proto$2.toISOString    = toISOString$1;
 proto$2.toString       = toISOString$1;
-proto$2.toJSON         = toISOString$1;
+proto$2.to_json         = toISOString$1;
 proto$2.locale         = locale;
 proto$2.localeData     = localeData;
 

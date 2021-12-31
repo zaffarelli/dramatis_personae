@@ -32,9 +32,9 @@ class ArmorRef(models.Model):
     description = models.TextField(max_length=1024, default='', blank=True)
 
     def __str__(self):
-        return '%s (%s, SP:%s)' % (self.reference, self.category, self.stopping_power)
+        return '%s - %s, SP:%s' % (self.category, self.reference, self.stopping_power)
 
-    def toJSON(self):
+    def to_json(self):
         from collector.utils.basic import json_default
         jstr = json.loads(json.dumps(self, default=json_default, sort_keys=True, indent=4))
         return jstr
@@ -58,11 +58,11 @@ class ArmorCusto(models.Model):
 
 
 class ArmorRefAdmin(admin.ModelAdmin):
-    ordering = ['-category','-stopping_power', 'encumbrance', 'reference']
-    list_display = ['reference', 'category', 'stopping_power', 'encumbrance', 'head', 'torso', 'right_arm', 'left_arm',
-                    'right_leg', 'left_leg', 'cost', 'description', 'tech_level']
+    ordering = ['-category', '-stopping_power', 'encumbrance', 'reference']
+    list_display = ['reference', 'meta_type', 'category', 'stopping_power', 'encumbrance', 'head', 'torso', 'right_arm',
+                    'left_arm', 'right_leg', 'left_leg', 'cost', 'description', 'tech_level']
     list_filter = ['category', 'meta_type']
-    search_fields = ['reference','meta_type','category',]
+    search_fields = ['reference', 'meta_type', 'category']
 
 
 class ArmorInline(admin.TabularInline):

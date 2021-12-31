@@ -31,7 +31,7 @@ class OrbitalMap {
         me.flatten_factor = 3;
         me.zoom_val = 5;
         me.zoom_factor = 10;
-        me.zoom_color = "#888"
+        me.zoom_color = "#A08060"
         me.design = {
             "size": {
                 "Sun": 5,
@@ -96,6 +96,7 @@ class OrbitalMap {
 
     init(data) {
         let me = this;
+        d3.select(me.parent).selectAll("svg").remove();
         me.data = data;
         me.setConstants();
         me.radiused = d3.scaleLinear()
@@ -117,17 +118,18 @@ class OrbitalMap {
 
         _.forEach(me.data.belts, function (e, i) {
             e.id = i;
-            let angle, size = [1, 30], data, dispersion = 3;
-            data = d3.range(500).map(function () {
+            let angle, size = [1, 10], data = [];
+            data[i] = undefined;
+            let c = e.AU + me.rand(-e.size, e.size)/10;
+            data[i] = d3.range(500).map(function () {
                 angle = Math.random() * Math.PI * 2;
-                let c = e.AU + me.rand(-e.size, e.size) / 50;
                 return {
                     cx: Math.cos(angle) * me.radiused((me.zoom_check(c) ? me.apply_zoom(c) : c)),
                     cy: Math.sin(angle) * me.radiused((me.zoom_check(c) ? me.apply_zoom(c) : c)) / me.flatten_factor,
-                    r: me.rand(size[0], size[1]) / 10
+                    r: me.rand(size[0], size[1])/5
                 };
             });
-            e.roids = data
+            e.roids = data[i]
         });
     }
 
@@ -145,7 +147,7 @@ class OrbitalMap {
 
         me.gasGiantGradient.append("svg:stop")
             .attr("offset", "0%")
-            .attr("stop-color", "#80E020")
+            .attr("stop-color", "#E08020")
             .attr("stop-opacity", 1);
         me.gasGiantGradient.append("svg:stop")
             .attr("offset", "40%")
@@ -172,7 +174,7 @@ class OrbitalMap {
 
         me.telluricGradient.append("svg:stop")
             .attr("offset", "0%")
-            .attr("stop-color", "#101030")
+            .attr("stop-color", "#103060")
             .attr("stop-opacity", 1);
 
         me.telluricGradient.append("svg:stop")
@@ -258,7 +260,7 @@ class OrbitalMap {
                 if (d == 5) {
                     return "";
                 }
-                return "2 5";
+                return "1 4";
             })
             .style("stroke", me.zoom_color)
             .style("opacity", me.layout_opacity);
@@ -312,7 +314,7 @@ class OrbitalMap {
             })
             .style("fill", "none")
             .style("stroke-dasharray", function (d) {
-                return d == 50 ? '' : "3 6";
+                return d == 50 ? '' : "1 4";
             })
             .style("stroke", me.zoom_color)
             .style("opacity", me.layout_opacity)
@@ -381,14 +383,15 @@ class OrbitalMap {
 
     drawAsteroidBelt() {
         let me = this;
-        let roids;
+        let roids = [];
+        let i=0;
         let asteroids = me.asteroids_belts.append('g')
             .attr('class',function(d){
-                roids = d.roids;
+                roids[i++] = d.roids;
                 return 'ab_'+d.id;
             });
 
-        let particles = asteroids.selectAll('circle')
+        let j=0, particles = asteroids.selectAll('circle')
             .data(roids)
             .enter();
         particles.append("circle")
@@ -397,8 +400,8 @@ class OrbitalMap {
             })
             .attr('cx', function (k) {return k.cx})
             .attr('cy', function (k) {return k.cy})
-            .attr('fill', function (k, i) {return "#EEE"})
-            .attr('stroke', function (k, i) {return "#888"})
+            .attr('fill', function (k, i) {return "#999";})
+            .attr('stroke', function (k, i) {return "#888";})
             .attr('opacity', 0.75)
         ;
 
@@ -577,7 +580,7 @@ class OrbitalMap {
             .style("fill", function (d) {
                 let tone = d.tone;
                 if (d.type == 'Jumpgate') {
-                    tone = '#331133';
+                    tone = me.design.fill[d.type];
                 }
                 if (d.type == 'Gas Giant') {
                     tone = 'url(#gas_giant_gradient)';
@@ -599,9 +602,9 @@ class OrbitalMap {
                 return sw;
             })
             .style("stroke", function (d) {
-                let stroke = d.tone;
+                let stroke = me.design.stroke[d.type];
                 if (d.type == 'Jumpgate') {
-                    stroke = '#626';
+                    stroke = '#605760';
                 }
                 return stroke;
             })
@@ -717,10 +720,10 @@ class OrbitalMap {
     transition() {
         let me = this
         me.item.transition()
-            .duration(2000)
+            .duration(30000)
             .ease(d3.easePolyOut)
             .attrTween("transform", me.translateAlong())
-        // .each("end", this.transition)
+            // .each("end", me.transition)
         ;
     }
 
@@ -814,12 +817,15 @@ class OrbitalMap {
                 return "planet_panel_" + d.id;
             })
             .attr("d", function (d) {
-                let str = "M -5 -10 l -20 -15 h -180 v -80 h 180 v 55 v 15  Z"
+                let str = "M 0 -5 L 70 -315 h -50 " //v -80 h 180 v 70   "
+                if (me.zoom_check(d.AU)==true){
+                    str = "M 0 5 L 70 265 h -50 " //v -80 h 180 v 70   "
+                }
                 return str;
             })
-            .style("fill", "#111")
+            .style("fill", "transparent")
             .style("stroke-width", "0.5pt")
-            .style("stroke", "#CCC")
+            .style("stroke", "#888")
             .attr("opacity", 0);
 
         me.labels = me.item.append('g')
@@ -831,12 +837,18 @@ class OrbitalMap {
             .attr('class', function (d) {
                 return "planet_text_" + d.id
             })
-            .attr("dx", -30)
-            .attr("dy", -90)
+            .attr("dx", 70)
+            .attr("dy", function(d){
+                let res = -335;
+                if (me.zoom_check(d.AU)==true){
+                    res = 280;
+                }
+                return res;
+            })
             .style("opacity", 0)
             .style("fill", "#FFF")
             .style("stroke", "#777")
-            .style("font-size", "10pt")
+            .style("font-size", "8pt")
             .style("font-family", "Mono")
             .style("text-anchor", "end")
             .text(function (d) {
@@ -846,50 +858,57 @@ class OrbitalMap {
             .attr('class', function (d) {
                 return "planet_text_" + d.id
             })
-            .attr("dx", -30)
-            .attr("dy", -70)
+            .attr("dx", 70)
+            .attr("dy", function(d){
+                let res = -320;
+                if (me.zoom_check(d.AU)==true){
+                    res = 295;
+                }
+                return res;
+            })
             .style("opacity", 0)
             .style("fill", "#FFF")
             .style("stroke", "#333")
-            .style("font-size", "10pt")
+            .style("font-size", "8pt")
             .style("font-family", "Mono")
             .style("text-anchor", "end")
             .text(function (d) {
                 return d.AU + " AU (" + d.type + ")";
             })
-        me.labels.append('text')
-            .attr('class', function (d) {
-                return "planet_text_" + d.id
-            })
-            .attr("dx", -30)
-            .attr("dy", -50)
-            .style("opacity", 0)
-            .style("fill", "#FFF")
-            .style("stroke", "#777")
-            .style("font-size", "10pt")
-            .style("font-family", "Mono")
-            .style("text-anchor", "end")
-            .text(function (d) {
-                if (d.type == "Sun") {
-                    return "Zoom (Factor:" + me.data.zoom_factor + " Value:" + me.data.zoom_val + ")";
-                }
-                return d.moon;
-            })
-        me.labels.append('text')
-            .attr('class', function (d) {
-                return "planet_text_" + d.id
-            })
-            .attr("dx", -30)
-            .attr("dy", -30)
-            .style("opacity", 0)
-            .style("fill", "#FFF")
-            .style("stroke", "#333")
-            .style("font-size", "10pt")
-            .style("font-family", "Mono")
-            .style("text-anchor", "end")
-            .text(function (d) {
-                return d.description;
-            })
+        // me.labels.append('text')
+        //     .attr('class', function (d) {
+        //         return "planet_text_" + d.id
+        //     })
+        //     .attr("dx", -30)
+        //     .attr("dy", -50)
+        //
+        //     .style("fill", "#FFF")
+        //     .style("stroke", "#777")
+        //     .style("font-size", "10pt")
+        //     .style("font-family", "Mono")
+        //     .style("text-anchor", "end")
+        //     .text(function (d) {
+        //         if (d.type == "Sun") {
+        //             return "Zoom (Factor:" + me.data.zoom_factor + " Value:" + me.data.zoom_val + ")";
+        //         }
+        //         return d.moon;
+        //     })
+        //     .style("opacity", 0)
+        // me.labels.append('text')
+        //     .attr('class', function (d) {
+        //         return "planet_text_" + d.id
+        //     })
+        //     .attr("dx", -30)
+        //     .attr("dy", -30)
+        //     .style("opacity", 0)
+        //     .style("fill", "#FFF")
+        //     .style("stroke", "#333")
+        //     .style("font-size", "10pt")
+        //     .style("font-family", "Mono")
+        //     .style("text-anchor", "end")
+        //     .text(function (d) {
+        //         return d.description;
+        //     })
 
     }
 

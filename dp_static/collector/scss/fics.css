@@ -3311,7 +3311,7 @@ span.info {
   border: 1px solid transparent;
   border-radius: 0;
   display: none;
-  width: calc(67.5%);
+  width: calc(60%);
   height: calc(100%);
   opacity: 1;
   text-align: center;
@@ -6227,49 +6227,7 @@ th.skill_dot {
   src: url("../fonts/FadingSunsIcons.ttf"); }
 
 /* Invalid display */
-@media screen and (max-width: 640px) {
-  body {
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-    overflow-y: scroll;
-    background: #303230 url("../campaigns/FICS/back.jpg"); }
-    body .logo {
-      display: none; }
-    body .menu {
-      display: none; }
-    body .wrapper {
-      display: none; } }
-
 /* Small - 14 inches Elitebook display */
-@media screen and (min-width: 641px) and (max-width: 1024px) {
-  body {
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-    overflow-y: scroll;
-    background: #303230 url("../campaigns/FICS/back.jpg"); }
-    body .logo {
-      height: 105px;
-      width: 100%; }
-    body .menu {
-      width: 100%;
-      height: 40px; }
-    body .wrapper {
-      z-index: 1;
-      margin-left: 0;
-      width: 99%;
-      min-height: 1000px;
-      display: grid;
-      grid-template-columns: .5% 275px 1fr 200px .5%;
-      grid-column-gap: 5px;
-      justify-content: center;
-      align-content: stretch; }
-      body .wrapper .details {
-        grid-column: 3 / 6; }
-      body .wrapper .menuright {
-        display: none; } }
-
 /* Normal - 21/22 inches screen */
 @media screen and (min-width: 1025px) {
   body {
@@ -6291,8 +6249,6 @@ th.skill_dot {
       align-items: flex-start;
       align-content: flex-start; }
       body .wrapper .port {
-        display: none; }
-      body .wrapper .details {
         display: none; }
       body .wrapper .mosaic {
         flex-grow: 1;
@@ -6431,15 +6387,23 @@ th.skill_dot {
     .mosaic .tile.storyview {
       flex-grow: 5;
       flex-shrink: 0;
+      justify-content: flex-start;
+      align-content: flex-start;
+      align-items: stretch;
       width: 500px;
       height: auto; }
       .mosaic .tile.storyview .epic_wrap {
         width: 100%; }
       .mosaic .tile.storyview .storydetails {
         display: flex;
-        flex-flow: row nowrap;
+        flex-flow: row wrap;
+        justify-content: flex-start;
+        align-content: flex-start;
+        align-items: flex-start;
         padding: 6px;
-        text-align: justify; }
+        background: #203060;
+        text-align: justify;
+        gap: 10px 10px; }
         .mosaic .tile.storyview .storydetails.epic {
           border-left: 5px solid #848;
           background: #111; }
@@ -6455,41 +6419,52 @@ th.skill_dot {
           border-left: 5px solid #515;
           background: transparent;
           background: #444; }
-        .mosaic .tile.storyview .storydetails .brick {
-          display: inline-block;
-          flex-order: 1;
-          flex-grow: 1;
-          padding: 5px;
-          width: auto;
-          height: auto;
-          min-height: 1.3em;
-          min-width: 16ex;
-          max-width: 48ex;
-          font-family: Texte;
-          background: #242524;
-          color: #cfcdcf;
-          margin: 3px;
-          border-radius: 5px;
-          border: 1px solid #494c49;
-          box-shadow: 5px 5px 5px black; }
-          .mosaic .tile.storyview .storydetails .brick em {
-            display: inline-block;
-            width: 24ex;
-            background: black;
-            text-align: left;
-            font-variant: small-caps;
-            font-style: normal;
-            margin-right: 5px;
-            padding: 0.2ex; }
         .mosaic .tile.storyview .storydetails .wall {
-          order: 2;
-          width: 400px;
           display: flex;
-          flex-flow: row wrap;
-          justify-items: flex-start;
-          align-items: flex-start;
-          align-content: flex-start;
-          padding: 5px; }
+          order: 2;
+          flex-grow: 1;
+          flex-shrink: 1;
+          flex-flow: column wrap;
+          justify-content: flex-start;
+          align-content: stretch;
+          align-items: stretch;
+          width: 220px;
+          gap: 10px 10px;
+          padding: 5px;
+          border-radius: 5px;
+          height: auto; }
+          .mosaic .tile.storyview .storydetails .wall .brick {
+            display: inline-block;
+            flex-grow: 1;
+            padding: 2px;
+            height: auto;
+            font-family: Texte;
+            background: #242524;
+            color: #cfcdcf;
+            border-radius: 5px;
+            border: 1px solid #494c49;
+            box-shadow: 5px 5px 5px black; }
+            .mosaic .tile.storyview .storydetails .wall .brick em {
+              display: inline-block;
+              width: 12ex;
+              background: black;
+              text-align: left;
+              font-variant: small-caps;
+              font-style: normal;
+              padding: 2px;
+              border-radius: 3px;
+              margin-right: 3ex; }
+            .mosaic .tile.storyview .storydetails .wall .brick strong {
+              display: inline-block;
+              width: 24ex;
+              margin-left: 12ex;
+              background: #171817;
+              text-align: center;
+              font-variant: small-caps;
+              font-style: normal;
+              padding: 2px;
+              border-radius: 3px;
+              margin-right: 3ex; }
         .mosaic .tile.storyview .storydetails .pitch {
           display: block;
           order: 1;
@@ -6497,8 +6472,10 @@ th.skill_dot {
           columns: 2;
           column-gap: 40px;
           column-rule: 1px solid #171817;
-          width: 500px;
-          padding: 5px; }
+          width: 600px;
+          padding: 5px;
+          border: 1px solid #3c3f3c;
+          border-radius: 5px; }
     .mosaic .tile.mini {
       order: 1;
       flex-grow: 1;
@@ -6607,11 +6584,11 @@ th.skill_dot {
       .mosaic .character_row .cell.wide {
         flex-grow: 0;
         flex-shrink: 0;
-        width: 150px; }
+        width: 120px; }
       .mosaic .character_row .cell.wider {
         flex-grow: 0;
         flex-shrink: 0;
-        width: 200px; }
+        width: 150px; }
       .mosaic .character_row .cell.mini {
         order: 0;
         flex-grow: 0;

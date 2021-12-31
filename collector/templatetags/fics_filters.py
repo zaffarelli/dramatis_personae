@@ -149,8 +149,11 @@ def parse_avatars(value):
         except Character.DoesNotExist:
             ch = None
         if ch is not None:
+            str_name = ch.full_name
+            if ch.alias:
+                str_name = f'{ch.alias} ({ch.full_name})'
             replacement_string = '<span id="%d" class="character_link embedded_link" title="%s:\n%s">%s %s</span>' % (
-                ch.id, ch.full_name, ch.entrance, ch.full_name,
+                ch.id, ch.full_name, ch.entrance, str_name,
                 "<i class='fa fa-angle-double-up'></i>" if ch.balanced == True else "<i class='fa fa-angle-double-down'></i>")
         else:
             replacement_string = '<span class="embedded_link broken">[%s&dagger;]</span>' % (rid)
@@ -357,15 +360,15 @@ def wound(value):
 
 @register.filter(name='parse_stories')
 def parse_stories(value):
-    txt = "<ul><li>"
+    txt = ""
     arr = value.split('#')
     lst = list(filter(None, arr))
     new_lst = []
     for item in lst:
         x = item.split('_')
-        new_lst.append(f'{x[0]} <em>{x[1]}</em>')
-    txt += "</li><li>".join(new_lst)
-    txt += "</li></ul>"
+        new_lst.append(f'{x[0]}={x[1]}')
+    txt += ", ".join(new_lst)
+    txt += "."
     return txt
 
 

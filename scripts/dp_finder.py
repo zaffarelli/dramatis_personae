@@ -8,6 +8,7 @@ class DPFinder:
         print("    1 - Search for a skill among the avatars")
         print("    2 - Search for a benefice/affliction among the avatars")
         print("    3 - Search for a blessing/curse among the avatars")
+        print("    4 - Search for a skill among the ToDs")
         print("    0 - Quit")
         topic = ''
         while topic != '0':
@@ -18,6 +19,8 @@ class DPFinder:
                 self.ba_search()
             elif topic == '3':
                 self.bc_search()
+            elif topic == '4':
+                self.tod_search()
 
     def bash_format(self,txt):
         new_txt = "\033[1;39m".join(txt.split('µ'))
@@ -38,6 +41,21 @@ class DPFinder:
                         found.append(self.bash_format("µ%s§ (%+d)"%(c.rid,s.value)))
             print(self.bash_format("The µ%s§ skill was found amongst µ%d§ of the %d avatars in dP. Here are the details:"%(skill_name,len(found),len(all))))
             print("%s"%(", ".join(found)))
+
+    def tod_search(self):
+        from collector.models.tourofduty import TourOfDutyRef
+        from collector.models.skill import SkillRef
+        skill_name = input('  Type the skill you want to search: ')
+        x = SkillRef.objects.filter(reference=skill_name).first()
+        if x:
+            found = []
+            all = TourOfDutyRef.objects.all()
+            for c in all:
+                for s in c.skillmodificator_set.all():
+                    if s.skill_ref == x:
+                        found.append(self.bash_format("µ%s§ (%+d)"%(c.reference,s.value)))
+            print(self.bash_format("The µ%s§ skill was found amongst µ%d§ of the %d tour of duties in dP. Here are the details: "%(skill_name,len(found),len(all))))
+            print("%s" % (", ".join(found)))
 
     def ba_search(self):
         pass

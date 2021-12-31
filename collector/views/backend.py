@@ -40,7 +40,6 @@ def pdf_character(request, id=None):
 
 def run_audit(request):
     campaign = get_current_config(request)
-    make_audit_report(campaign)
     character_items = campaign.dramatis_personae.all()
     # print(campaign.epic.shortcut, len(character_items))
     x = 1

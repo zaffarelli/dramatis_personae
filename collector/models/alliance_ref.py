@@ -47,7 +47,7 @@ class AllianceRef(models.Model):
     def __str__(self):
         return f'{self.reference} ({self.get_category_display()})'
 
-    # def toJSON(self):
+    # def to_json(self):
     #     """ Returns JSON of object """
     #     return json.dumps(self, default=json_default,sort_keys=True, indent=4)
 

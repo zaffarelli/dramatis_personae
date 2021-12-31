@@ -13,7 +13,7 @@
         </div>
         {% if object.anchor %}
         <div class="brick">
-            <em>Anchor</em><strong>{{object.anchor|linebreaks|parse_avatars|safe}}</strong>
+            <em>Anchor</em> {{object.anchor|linebreaks|parse_avatars|safe}}
         </div>
         {% endif %}
         <div class="brick">
@@ -31,7 +31,7 @@
         {% endif %}
         {% if object.challenge %}
         <div class="brick">
-            <em>Challenge</em> <strong>{{object.challenge}}</strong>
+            <em>Challenge</em> {{object.challenge}}
         </div>
         {% endif %}
     </div>

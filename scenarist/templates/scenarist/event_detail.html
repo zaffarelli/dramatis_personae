@@ -6,12 +6,48 @@
         </div>
         {% if object.anchor %}
         <div class="brick">
-            <em>Anchor</em><strong>{{object.anchor|linebreaks|parse_avatars|safe}}</strong>
+            <em>Anchor</em>{{object.anchor|linebreaks|parse_avatars|safe}}
         </div>
         {% endif %}
         <div class="brick">
             <em>PDF</em>{{object.to_PDF | prettybool | safe }}
         </div>
+
+    {% if object.battle_scene %}
+        <div class="brick">
+            <strong>Battle Scene</strong>
+        </div>
+    {% endif %}
+    {% if object.chase_scene %}
+        <div class="brick">
+            <strong>Chase Scene</strong>
+        </div>
+    {% endif %}
+    {% if object.action_scene %}
+        <div class="brick">
+            <strong>Action Scene</strong>
+        </div>
+    {% endif %}
+    {% if object.technical_scene %}
+        <div class="brick">
+            <strong>Technical Scene</strong>
+        </div>
+    {% endif %}
+    {% if object.spiritual_scene %}
+        <div class="brick">
+            <strong>Spiritual Scene</strong>
+        </div>
+    {% endif %}
+    {% if object.political_scene %}
+        <div class="brick">
+            <strong>Political Scene</strong>
+        </div>
+    {% endif %}
+    {% if object.downtime_scene %}
+        <div class="brick">
+            <strong>Downtime Scene</strong>
+        </div>
+    {% endif %}
         {% if object.date %}
         <div class="brick">
             <em>Date</em>{{object.date}}
@@ -24,7 +60,7 @@
         {% endif %}
         {% if object.challenge %}
         <div class="brick">
-            <em>Challenge</em> <strong>{{object.challenge}}</strong>
+            <em>Challenge</em> {{object.challenge}}
         </div>
         {% endif %}
     </div>

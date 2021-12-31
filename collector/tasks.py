@@ -8,6 +8,8 @@ from django.contrib import messages
 # from celery import Celery
 # from celery.schedules import crontab
 
+from collector.utils.basic import make_audit_report
+
 from optimizer.models.policy import Policy
 import logging
 from datetime import datetime, timedelta
@@ -83,6 +85,7 @@ def tod_check():
 def fix_check():
     campaign = get_current_config()
     answer = '/!\\ Fix_check task is idle.'
+    need_audit = False
     from collector.models.character import Character
     campaign = get_current_config()
     logger.info("FIX CHECK")
@@ -92,6 +95,8 @@ def fix_check():
         answer = f'Task: Fixing avatar {c.rid}. {len(all)} remaining.'
         c.fix()
         c.save()
+        if len(all) == 1:
+            need_audit = True
     else:
         oldest = campaign.dramatis_personae.filter(pub_date__lte = timezone.now() - timedelta(days=14))
         for c in oldest:
@@ -101,6 +106,8 @@ def fix_check():
         if len(oldest):
             answer = f'Fix_check: Putting older avatars on the fix list...'
     logger.info(answer)
+    if need_audit:
+        make_audit_report(campaign)
     return answer
 
 @shared_task

@@ -193,9 +193,9 @@ class Campaign(models.Model):
         from cartograph.models.system import System
         # from django.db.models import Count
         if pattern == '':
-            all = Character.objects.order_by(order_by + bar_property)  # .filter(epic=self.epic)
+            all = self.dramatis_personae.order_by(order_by + bar_property)  # .filter(epic=self.epic)
         else:
-            all = Character.objects.filter(**{filter: pattern}).order_by(order_by + bar_property)[:20]
+            all = self.dramatis_personae.filter(**{filter: pattern}).order_by(order_by + bar_property)[:20]
         # if limit:
         #     all = all[:limit]
         # .values('epic').annotate(dcount=Count('epic'))
@@ -513,7 +513,7 @@ class Campaign(models.Model):
         }
         return full_data
 
-    def toJSON(self):
+    def to_json(self):
         from collector.utils.basic import json_default
         import json
         jstr = json.dumps(self, default=json_default, sort_keys=True, indent=4)

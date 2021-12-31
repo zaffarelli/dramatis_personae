@@ -3,21 +3,35 @@
 {%load static%}
 
 <code>
-    <b>{{ c.title }}{{ c.full_name|upper|safe }}</b> {% if c.player != "" %}({{c.player|safe}}){%endif%} {% if not c.balanced %}(&dagger;){%endif%} </br>
+    <b>{{ c.title }}{{ c.full_name|upper|safe }}</b> {% if c.player != "" %}({{c.player|safe}}){%endif%} {% if not c.balanced %}(&dagger;){%endif%}
     {% if c.balanced %}
-    {% if c.entrance %}<i>{{ c.entrance|safe }}</i></br>{%endif%}
-    {{c.gender|capfirst}} {{ c.specie|capfirst|safe }} {{ c.rank|safe }} of {{ c.alliance|safe }} from {{ c.native_fief|safe }} {{ c.caste|safe }}.</br>
-    Born in {{ c.birthdate }} ({{ c.age }} years old) Height: {{c.height}}cm / Weight:{{c.weight}}kg
+    {% if c.entrance %}<br/><i>{{ c.entrance|safe }}</i>{%endif%}
     {% if c.nameless %}
-    <br/>PHY:{{c.na_phy}} MEN:{{c.na_men}} COM:{{c.na_com}}
+        - <i>NAMELESS NPCs</i>
+        <br/><b>{{ c.specie.race|capfirst|safe }} {{ c.rank|safe }} of {{ c.alliance_ref.reference|safe }} from {{ c.fief.name|safe }} {{ c.caste|safe }}.</b>
+        <br/><i>PHY:{{c.na_phy}} MEN:{{c.na_men}} COM:{{c.na_com}}</i>
     {% else %}
-        <br/><i>STR:{{c.PA_STR}} CON:{{c.PA_CON}} BOD:{{c.PA_BOD}} MOV:{{c.PA_MOV}} INT:{{c.PA_INT}} WIL:{{c.PA_WIL}} TEM:{{c.PA_TEM}} PRE:{{c.PA_PRE}} TEC:{{c.PA_TEC}} REF:{{c.PA_REF}} AGI:{{c.PA_AGI}} AWA:{{c.PA_AWA}}</i><br/>
+        <br/><b>{{c.gender|capfirst}} {{ c.specie.race|capfirst|safe }} {{ c.rank|safe }} of {{ c.alliance_ref.reference|safe }} from {{ c.fief.name|safe }} {{ c.caste|safe }}.</b>
+        <br/>Born in {{ c.birthdate }} ({{ c.age }} years old) Height: {{c.height}}cm / Weight:{{c.weight}}kg
+        <br/><i>STR:{{c.PA_STR}} CON:{{c.PA_CON}} BOD:{{c.PA_BOD}} MOV:{{c.PA_MOV}}<br/>INT:{{c.PA_INT}} WIL:{{c.PA_WIL}} TEM:{{c.PA_TEM}} PRE:{{c.PA_PRE}}<br/>TEC:{{c.PA_TEC}} REF:{{c.PA_REF}} AGI:{{c.PA_AGI}} AWA:{{c.PA_AWA}}</i>
     {% endif %}
-    REC:{{c.SA_REC}} STA:{{c.SA_STA}} END:{{c.SA_END}} STU:{{c.SA_STU}} RES:{{c.SA_RES}} DMG:{{c.SA_DMG}}<br/>TOL:{{c.SA_TOL}} HUM:{{c.SA_HUM}} PAS:{{c.SA_PAS}} WYR:{{c.SA_WYR}} SPD:{{c.SA_SPD}} RUN:{{c.SA_RUN}}
+    <br/>REC:{{c.SA_REC}} STA:{{c.SA_STA}} END:{{c.SA_END}} STU:{{c.SA_STU}} RES:{{c.SA_RES}} DMG:{{c.SA_DMG}}<br/>TOL:{{c.SA_TOL}} HUM:{{c.SA_HUM}} PAS:{{c.SA_PAS}} WYR:{{c.SA_WYR}} SPD:{{c.SA_SPD}} RUN:{{c.SA_RUN}}
+    {% if c.nameless %}
+    {% else %}
     <br/><b>Skills: </b>
     {% for s in c.skill_set.all %}
     {{s.skill_ref.reference}}[{{s.value|high_skill_check_pdf|safe}}]{% if forloop.last %}.{%else%}, {%endif%}
     {% endfor %}
+    {% endif %}
+    {%  if c.OCC_LVL %}
+    <br/><b>Occult powers: </b>
+    <br/><b>Type:</b> {{ c.occult }}, <b>Path:</b> {{ c.path }}, <b>Level/Darkside:</b> {{ c.OCC_LVL }} / {{ c.OCC_DRK }}
+    <br/><b>Stigma:</b> {{ c.stigma}}
+    <br/><b>Rituals: </b>
+    {% for r in c.ritual_set.all %}
+        {{r.ritual_ref.reference}} ({{r.ritual_ref.level|safe}}) [{{r.ritual_ref.attribute|as_pa_short}}+{{r.ritual_ref.skill.reference}}={{ r.value }}]{% if forloop.last %}.{%else%}, {%endif%}
+    {% endfor %}
+    {% endif %}
     <br/><b>Shortcuts: </b>{{c.gm_shortcuts_pdf|safe}}
         <br/><i>[{{c.id|six_digit}} / {{c.rid}}]</i>
     {% endif %}
