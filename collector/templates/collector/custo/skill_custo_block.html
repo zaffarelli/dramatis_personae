@@ -5,7 +5,7 @@
 		<td colspan=3>
 			<select id='skill_select'>
 			{% for s in c.skills_options %}
-				<option value='{{s.id}}' style='width:15ex;'>{{s.reference}}</option>
+				<option value='{{s.id}}' style='width:15ex;'>{% if s.grouping %}[{{ s.grouping }}] {% endif %}{{s.reference}}</option>
 			{% endfor %}
 			</select>
 		</td>

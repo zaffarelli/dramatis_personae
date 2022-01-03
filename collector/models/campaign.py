@@ -8,6 +8,7 @@ from django.contrib import admin
 import random
 import math
 import logging
+from colour import Color
 
 logger = logging.getLogger(__name__)
 
@@ -127,52 +128,14 @@ class Campaign(models.Model):
     def prepare_colorset(self, size=16, color_scale=False):
         colorset = []
         hcolorset = []
-        # colval = '1234567894ABCDE'
-        colval = '0123456677888999AAABBCCDEF'
-        idx = 0
-        if color_scale:
-            while idx < size:
-                if idx == 0:
-                    com = '%s%s%s%sFF' % (
-                        random.sample(colval, 1)[0],
-                        random.sample(colval, 1)[0],
-                        random.sample(colval, 1)[0],
-                        random.sample(colval, 1)[0]
-                    )
-                    prev_com = com
-                else:
-                    com = str(hex(int(prev_com, 16) - 0x00003c))[2:]
-                    print(com)
-                    prev_com = com
-                hh = str(hex(int(com, 16) + 0x00000C))[2:]
-                col = f'#{com:0>6}'
-
-                hcol = f'#{hh:0>6}'
-                colorset.append(col)
-                hcolorset.append(hcol)
-                idx += 1
-            print(colorset,hcolorset)
-        else:
-            while idx < size:
-                com = '0xE%s%s%s%s%s' % (
-                    random.sample(colval, 1)[0],
-                    random.sample(colval, 1)[0],
-                    random.sample(colval, 1)[0],
-                    random.sample(colval, 1)[0],
-                    random.sample(colval, 1)[0]
-                )
-
-                # com = hex(int(start, 16) ^ idx)
-                hh = str(hex(int(com, 16) | 0x030303))[2:]
-                # start = com
-                col = f'#{com[2:]:0>6}'
-                hcol = f'#{hh:0>6}'
-                # print(f'{idx:0>2}) ', col, hcol)
-                colorset.append(col)
-                hcolorset.append(hcol)
-                idx += 1
-        colorset.sort()
-        hcolorset.sort()
+        start = Color("#F0C040")
+        stop = Color("#901090")
+        c_colorset = list(start.range_to(stop, size))
+        # c_hcolorset = list(start.range_to(Color('white'), size))
+        for c in c_colorset:
+            colorset.append(Color(c.hex,luminance=c.luminance*0.75).hex)
+        for c in c_colorset:
+            hcolorset.append(Color(c.hex,luminance=c.luminance*1.25).hex)
         return colorset, hcolorset
 
     def get_chart(self, field='', filter='', pattern='', type='bar', bar_property='full_name', order_by='',
@@ -247,7 +210,7 @@ class Campaign(models.Model):
                         },
                         'legend': {
                             'display': True,
-                            'position': 'bottom',
+                            'position': 'top',
                             'labels': {
                                 'fontColor': '#fff',
                             }
@@ -256,7 +219,7 @@ class Campaign(models.Model):
                             'yAxes': [
                                 {
                                     'ticks': {'mirror': ticks},
-                                    'afterFit': 'function(scaleInstance){scaleInstance.width = 400;}',
+                                    'afterFit': 'function(scaleInstance){scaleInstance.width = 300;}',
                                     'fontStyle': 'bold'
                                 }
                             ]
@@ -277,42 +240,53 @@ class Campaign(models.Model):
         skip_zero = False
         per_item = False
         if name == 'population_per_current_system':
-            title = 'Population per current fief'
             bar_property = 'current_fief'
             ref = 'name'
             type = 'doughnut'
-            title = "Population per current System"
-            legend_display = False
+            title = "Population per current system"
+            legend_display = True
             skip_zero = False
         elif name == 'population_per_native_system':
-            title = 'Population per native fief'
             bar_property = 'fief'
             ref = 'name'
             type = 'doughnut'
-            legend_display = False
+            legend_display = True
             skip_zero = False
             title = "Population per native System"
+        elif name == 'population_per_keyword':
+            title = 'Population per Keyword'
+            bar_property = 'keyword'
+            ref = ''
+            type = 'doughnut'
+            legend_display = True
+            skip_zero = True
+        elif name == 'population_per_OP':
+            bar_property = 'OP'
+            ref = ''
+            type = 'doughnut'
+            legend_display = True
+            skip_zero = False
+            title = "Population per Freebies"
         elif name == 'population_per_alliance':
             title = 'Population per Alliance'
             bar_property = 'alliance_ref'
             ref = 'reference'
             type = 'doughnut'
-            legend_display = False
+            legend_display = True
             skip_zero = True
         elif name == 'population_per_team':
             title = 'Population per Team'
             bar_property = 'team'
             ref = ''
             type = 'doughnut'
-            legend_display = False
+            legend_display = True
             skip_zero = False
-            color_scale = True
         elif name == 'population_per_ranking':
             title = 'Population per Rank'
             bar_property = 'ranking'
             ref = ''
             type = 'doughnut'
-            legend_display = False
+            legend_display = True
             # color_scale = True
             skip_zero = True
         elif name == 'population_per_species':
@@ -324,9 +298,9 @@ class Campaign(models.Model):
             # color_scale = True
         ticks = False
         if not per_item:
-            all = self.dramatis_personae.order_by(bar_property)
+            all = self.dramatis_personae.order_by(bar_property).exclude(historical_figure=True)
         else:
-            all = self.dramatis_personae.filter(occult_fire_power__gt=0)
+            all = self.dramatis_personae.filter(occult_fire_power__gt=0).exclude(historical_figure=True)
         inside_labels = []
         final_data = []
         border = []
@@ -371,6 +345,7 @@ class Campaign(models.Model):
                 'type': type,
                 'data': data,
                 'options': {
+                    'indexAxis': 'y',
                     'responsive': True,
                     'plugins': {
                         'title': {
@@ -427,39 +402,38 @@ class Campaign(models.Model):
             'data': levels,
             'borderWidth': 2,
             'fill': False,
-            'backgroundColor': '#60F0F0',
-            'borderColor': '#60F0F0',
+            'backgroundColor': 'transparent',
+            'borderColor': '#1070C0',
             'tension': 0.15,
 
             'pointRadius': 4,
-            'pointHoverRadius': 16,
-            'spanGaps': False,
+            'pointHoverRadius': 12,
+            'spanGaps': True,
         }, {
             'label': 'Darkside Level',
             'data': darksides,
             'borderWidth': 2,
             'fill': False,
-            'backgroundColor': '#F01010',
-            'borderColor': '#F01010',
+            'backgroundColor': 'transparent',
+            'borderColor': '#C01010',
             'tension': 0.10,
             'pointStyle': 'Cross',
             'pointRadius': 6,
-            'pointHoverRadius': 15,
-            'spanGaps': False,
+            'pointHoverRadius': 12,
+            'spanGaps': True,
+        }, {
+            'label': 'Occult firepower',
+            'data': firepowers,
+            'borderWidth': 2,
+            'fill': False,
+            'backgroundColor': 'transparent',
+            'borderColor': '#10C010',
+            'tension': 0.25,
+            'pointRadius': 3,
+            'pointHoverRadius': 12,
+            'spanGaps': True,
+            'clip': -5
         }
-            , {
-                'label': 'Occult firepower',
-                'data': firepowers,
-                'borderWidth': 2,
-                'fill': False,
-                'backgroundColor': '#8060F060',
-                'borderColor': '#8060F060',
-                'tension': 0.25,
-                'pointRadius': 3,
-                'pointHoverRadius': 12,
-                'spanGaps': False,
-                'clip': -5
-            }
         ]
         data = {
             'labels': inside_labels,
@@ -488,19 +462,24 @@ class Campaign(models.Model):
                             'r': {
                                 'angleLines': {
                                     'display': True,
-                                    'color': '#888'
+                                    'color': '#11F',
+                                    'backgroundColor': 'transparent',
                                 },
                                 'grid': {
                                     'display': True,
-                                    'color': '#EEE'
+                                    'color': '#E0E',
+
                                 },
                                 'ticks': {
-                                    'display': True
+                                    'display': True,
+                                    'color': '#F00',
+                                    'backgroundColor': 'transparent',
 
                                 },
                                 'pointLabels': {
                                     'display': True,
-                                    'color': '#FFF',
+                                    'color': '#F00',
+                                    'backgroundColor': 'transparent',
 
                                 },
                                 'suggestedMin': 0,

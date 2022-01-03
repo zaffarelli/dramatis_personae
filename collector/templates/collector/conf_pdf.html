@@ -6,41 +6,46 @@
         <img src='collector/static/collector/glyph.png' width='1.0cm'>
     </div>
     <div id="footer_content">
-        [{{epic.data.printtime}}] <pdf:pagenumber/> / <pdf:pagecount/>
+        [{{ epic.data.printtime }}]
+        <pdf:pagenumber/>
+        /
+        <pdf:pagecount/>
     </div>
-    {%if epic.data.image %}
-    <img src='collector/static/collector/{{epic.data.image}}.png' width='12cm'>
-    {%else%}
-    <h1>{{ epic.title|upper }}</h1>
-    {%endif%}
-    {% include 'collector/pdf/article_info.html' with c=epic%}
+    {% if epic.data.image %}
+        <img src='collector/static/collector/{{ epic.data.image }}.png' width='12cm'>
+    {% else %}
+        <h1>{{ epic.title|upper }}</h1>
+    {% endif %}
+    {% include 'collector/pdf/article_info.html' with c=epic %}
     {{ epic.data.description|linebreaks|parse_avatars_pdf|safe }}
-    <pdf:nextpage />
+    <pdf:nextpage/>
     {% for drama in epic.dramas %}
         {% if drama.data.to_PDF %}
-        <h2>{{drama.data.chapter|as_roman}} - {{ drama.title|upper }}</h2>
-        {% include 'collector/pdf/article_info.html' with c=drama %}
-        {{ drama.data.description|linebreaks|parse_avatars_pdf|safe }}<br/>
-        {{ drama.data.resolution|linebreaks|parse_avatars_pdf|safe }}
-        {% for act in drama.acts %}
-            {% if act.data.to_PDF %}
-            <h3><span>{{act.data.full_chapter}}&nbsp;</span> {{ act.title|upper }}</h3>
-            {% include 'collector/pdf/article_info.html' with c=act%}
-            {{ act.data.description|linebreaks|parse_avatars_pdf|safe }}<br/>
-            {{ act.data.resolution|linebreaks|parse_avatars_pdf|safe }}
-            {% for event in act.events %}
-                <h4><span>{{event.data.full_chapter}}&nbsp;</span> {{ event.title }}</h4>
-                {% include 'collector/pdf/article_info.html' with c=event%}
-                {{ event.data.description|linebreaks|parse_avatars_pdf|safe }}<br/>
-                {{ event.data.resolution|linebreaks|parse_avatars_pdf|safe }}
-                {% for ch in event.data.minis %}
-                    {% include 'collector/pdf/mini_roster.html' with c=ch %}
-                {% endfor %}
+            <h2>{{ drama.data.chapter|as_roman }} - {{ drama.title|upper }}</h2>
+            {% include 'collector/pdf/article_info.html' with c=drama %}
+            {{ drama.data.description|linebreaks|parse_avatars_pdf|safe }}<br/>
+            {{ drama.data.resolution|linebreaks|parse_avatars_pdf|safe }}
+            {% for act in drama.acts %}
+                {% if act.data.to_PDF %}
+                    <h3><span>{{ act.data.full_chapter }}&nbsp;</span> {{ act.title|upper }}</h3>
+                    {% include 'collector/pdf/article_info.html' with c=act %}
+                    {{ act.data.description|linebreaks|parse_avatars_pdf|safe }}<br/>
+                    {{ act.data.resolution|linebreaks|parse_avatars_pdf|safe }}
+                    {% for event in act.events %}
+                        <h4><span>{{ event.data.full_chapter }}&nbsp;</span> {{ event.title }}</h4>
+                        {% include 'collector/pdf/article_info.html' with c=event %}
+                        {{ event.data.description|linebreaks|parse_avatars_pdf|safe }}<br/>
+                        {{ event.data.resolution|linebreaks|parse_avatars_pdf|safe }}
+                    {% endfor %}
+                {% endif %}
             {% endfor %}
-            {% endif %}
-        {% endfor %}
+            <pdf:nextpage/>
+            <h3>Dramatis Personae</h3>
+            {% for ch in drama.data.minis %}
+                {% include 'collector/pdf/mini_roster.html' with c=ch %}
+            {% endfor %}
+            <pdf:nextpage/>
         {% endif %}
-        <pdf:nextpage />
     {% endfor %}
     <p>{{ epic.data.gamemaster }}</p>
 {% endblock article %}

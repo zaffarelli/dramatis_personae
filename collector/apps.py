@@ -1,8 +1,8 @@
-'''
+"""
  ╔╦╗╔═╗  ╔═╗┌─┐┬  ┬  ┌─┐┌─┐┌┬┐┌─┐┬─┐
   ║║╠═╝  ║  │ ││  │  ├┤ │   │ │ │├┬┘
  ═╩╝╩    ╚═╝└─┘┴─┘┴─┘└─┘└─┘ ┴ └─┘┴└─
-'''
+"""
 from django.apps import AppConfig
 
 class CollectorConfig(AppConfig):
@@ -16,3 +16,4 @@ class CollectorConfig(AppConfig):
         import collector.signals.character
         import collector.signals.cyber
         import collector.signals.tod
+        import collector.signals.armor

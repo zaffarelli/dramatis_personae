@@ -60,6 +60,7 @@ django-colorfield = "==0.4.1"
 certifi = "^2021.10.8"
 cffi = "1.14.6"
 psycopg2 = "2.8.6"
+colour = "^0.1.5"
 
 [tool.poetry.dev-dependencies]
 

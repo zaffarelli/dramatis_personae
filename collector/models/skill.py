@@ -73,9 +73,6 @@ class Skill(models.Model):
         pass
 
 
-
-
-# Inlines
 class SkillInline(admin.TabularInline):
     model = Skill
     extras = 10
@@ -97,16 +94,14 @@ class SkillModificator(models.Model):
         pass
 
 
-
-
-
 class SkillCusto(models.Model):
     class Meta:
-        ordering = ['character_custo', 'skill_ref']
+        ordering = ['character_custo', 'skill_ref__linked_to']
 
     character_custo = models.ForeignKey(CharacterCusto, on_delete=models.CASCADE)
     skill_ref = models.ForeignKey(SkillRef, on_delete=models.CASCADE)
     value = models.IntegerField(default=0)
+
 
 
 # Inlines

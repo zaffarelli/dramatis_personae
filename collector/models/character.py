@@ -113,17 +113,11 @@ class Character(Combattant):
     score = models.IntegerField(default=0)
     gm_shortcuts = models.TextField(default='', blank=True)
     gm_shortcuts_pdf = models.TextField(default='', blank=True)
-
-
-
     OCC_LVL = models.PositiveIntegerField(default=0)
     OCC_DRK = models.PositiveIntegerField(default=0)
     occult_fire_power = models.PositiveIntegerField(default=0, blank=True)
     occult = models.CharField(max_length=50, default='', blank=True)
-    challenge = models.TextField(default='', blank=True)
-    custo_descs = models.TextField(default='', blank=True)
     challenge_value = models.IntegerField(default=0)
-    todo_list = models.TextField(default='', blank=True)
     path = models.CharField(max_length=256, default='', blank=True)
     stigma = models.CharField(max_length=256, default='', blank=True)
     use_history_creation = models.BooleanField(default=False)
@@ -136,7 +130,6 @@ class Character(Combattant):
     life_path_total = models.IntegerField(default=0)
     overhead = models.IntegerField(default=0)
     stories_count = models.PositiveIntegerField(default=0)
-    stories = models.TextField(max_length=1024, default='', blank=True)
     balanced = models.BooleanField(default=False)
     historical_figure = models.BooleanField(default=False)
     nameless = models.BooleanField(default=False)
@@ -145,8 +138,13 @@ class Character(Combattant):
     group_color = ColorField(default='#888888', blank=True)
     color = ColorField(default='#CCCCCC', blank=True)
     team = models.CharField(max_length=128, choices=DRAMA_SEATS, default='06-neutral', blank=True)
-    storytelling_note = models.TextField(default='', blank=True)
     wealth = models.IntegerField(default=0, blank=True)
+    challenge = models.TextField(default='', blank=True)
+    custo_descs = models.TextField(default='', blank=True)
+    storytelling_note = models.TextField(default='', blank=True)
+    stories = models.TextField(max_length=1024, default='', blank=True)
+    todo_list = models.TextField(default='', blank=True)
+
     skills_options = []
     ba_options = []
     bc_options = []
@@ -329,7 +327,7 @@ class Character(Combattant):
                 tod_rep['TO'] += tod.tour_of_duty_ref.value
             elif tod.tour_of_duty_ref.category == '50':
                 tod_rep['WB'] += tod.tour_of_duty_ref.value
-        if self.life_path_total < 200:
+        if self.life_path_total < 200 and not self.nameless:
             self.archive_level = 'WKS'
             self.audit_log("Archive level is WKS: Lifepath total is less than 200.")
         # Flatten
@@ -363,11 +361,13 @@ class Character(Combattant):
         self.reset_total()
         self.checkOverhead()
         self.balanced = (self.life_path_total == self.OP) and (self.OP > 0)
-        if not self.balanced:
-            self.audit_log("- APx3+OP+BA+BC... " + str(pa_total * 3 + po_total + ba_total + bc_total))
+        if int(pa_total * 3 + po_total + ba_total + bc_total) % 10:
+            self.audit_log("APx3+OP+BA+BC... " + str(pa_total * 3 + po_total + ba_total + bc_total)+" ("+str(self.OP)+")")
+            self.audit_log("Lifepath ....... " + str(self.life_path_total))
+            self.audit_log("=> Freebies vs Lifepath = "+str(self.life_path_total - (pa_total * 3 + po_total + ba_total + bc_total)))
             self.audit_log("- WP.............. " + str(self.WP_tod_pool))
             self.audit_log("- Custo Value..... " + str(self.charactercusto.value))
-            self.audit_log("- Lifepath ....... " + str(self.life_path_total))
+
             # self.audit_log("- Repartition .... " + str(tod_rep))
             if tod_rep["RA"] == 0:
                 self.audit_log(f'- ToD Error: Missing birthright ToD ({tod_rep["RA"]})')
@@ -510,8 +510,6 @@ class Character(Combattant):
         self.race = self.specie.species
         if self.historical_figure:
             self.audit_log()
-        if self.nameless:
-            self.audit_log()
         self.need_fix = False
         logger.info(f'    => Done fixing ...: {self.full_name} NeedFIX:{self.need_fix}')
         # logger.info(self.audit)
@@ -586,7 +584,7 @@ class Character(Combattant):
         sr = []
         for x in ss:
             sr.append(x.skill_ref)
-        all = SkillRef.objects.all().exclude(is_root=True).order_by('is_speciality', 'is_wildcard', 'reference')
+        all = SkillRef.objects.exclude(is_root=True).exclude(is_wildcard=True).order_by('is_speciality', 'linked_to', 'grouping', 'reference')
         for s in all:
             if s in sr:
                 self.skills_options_not.append(s)

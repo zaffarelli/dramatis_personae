@@ -41,7 +41,7 @@ def get_list(request, id, slug='none'):
     decs = str(base64.b64decode(slug), "utf-8")
     if decs == 'none':
         character_items = campaign.dramatis_personae\
-            .order_by('-team','keyword','balanced', 'historical_figure', 'nameless', 'full_name')\
+            .order_by('balanced','-team','keyword', 'historical_figure', 'nameless', 'full_name')\
             .filter(is_dead=False, keyword__startswith=campaign.epic.shortcut)
     elif decs.startswith('c-'):
         elements = decs.split('-')

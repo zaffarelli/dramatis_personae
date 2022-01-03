@@ -15,6 +15,7 @@ from django.template.loader import get_template
 from django.shortcuts import redirect,reverse
 from collector.models.bloke import Bloke
 
+
 class CharacterDetailView(DetailView):
     model = Character
     context_object_name = 'c'
