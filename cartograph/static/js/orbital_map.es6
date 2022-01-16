@@ -14,7 +14,6 @@ class OrbitalMap {
     }
 
     apply_zoom(x) {
-
         return x == 0 ? 0 : (x + 0.5) * this.zoom_factor;
     }
 
@@ -116,21 +115,29 @@ class OrbitalMap {
             e.id = i;
         });
 
+        me.system_belts = []
+
         _.forEach(me.data.belts, function (e, i) {
             e.id = i;
-            let angle, size = [1, 10], data = [];
-            data[i] = undefined;
-            let c = e.AU + me.rand(-e.size, e.size)/10;
-            data[i] = d3.range(500).map(function () {
+            let angle, size = [1, 10], c=0;
+            let stuff = d3.range(500).map(function () {
                 angle = Math.random() * Math.PI * 2;
+                c = e.AU + (me.rand(-e.size, e.size)*0.01);
                 return {
-                    cx: Math.cos(angle) * me.radiused((me.zoom_check(c) ? me.apply_zoom(c) : c)),
-                    cy: Math.sin(angle) * me.radiused((me.zoom_check(c) ? me.apply_zoom(c) : c)) / me.flatten_factor,
-                    r: me.rand(size[0], size[1])/5
+                    cx: Math.cos(angle) * me.radiused((me.zoom_check(e.AU) ? me.apply_zoom(c) : c)),
+                    cy: Math.sin(angle) * me.radiused((me.zoom_check(e.AU) ? me.apply_zoom(c) : c)) / me.flatten_factor,
+                    r: me.rand(size[0], size[1])/5,
+                    d: i,
+                    AU: e.AU,
+                    tilt: e.tilt,
+                    color: e.tone,
+                    dataset: e.name
                 };
             });
-            e.roids = data[i]
+            // e.roids = data[i]
+            me.system_belts.push.apply(me.system_belts,stuff)
         });
+        // console.log(me.system_belts);
     }
 
     buildGradients() {
@@ -385,14 +392,15 @@ class OrbitalMap {
         let me = this;
         let roids = [];
         let i=0;
-        let asteroids = me.asteroids_belts.append('g')
-            .attr('class',function(d){
-                roids[i++] = d.roids;
-                return 'ab_'+d.id;
-            });
-
-        let j=0, particles = asteroids.selectAll('circle')
-            .data(roids)
+        let asteroids = me.svg.append('g')
+            // .attr('class',function(d){
+            //     roids[i++] = d.roids;
+            //     return 'ab_'+d.id;
+            // })
+        ;
+        // console.log("belts !!!");
+        let particles = asteroids.selectAll('circle')
+            .data(me.system_belts)
             .enter();
         particles.append("circle")
             .attr('r', function (k) {
@@ -400,14 +408,17 @@ class OrbitalMap {
             })
             .attr('cx', function (k) {return k.cx})
             .attr('cy', function (k) {return k.cy})
-            .attr('fill', function (k, i) {return "#999";})
+            .attr('fill', function (k, i) {return k.color;})
             .attr('stroke', function (k, i) {return "#888";})
-            .attr('opacity', 0.75)
+            .attr('opacity', 0.5)
+            .attr("transform", function (k) {
+                let t = "";
+                t += "translate(0," + (me.zoom_check(k.AU) ? me.y_offset + me.offset : me.offset) + ") "
+                t += "rotate(" + -k.tilt + ")"
+                return t;
+            })
         ;
-
-
     }
-
 
     drawPlanets() {
         let me = this;
@@ -968,7 +979,7 @@ class OrbitalMap {
                 return t;
             });
 
-        console.log(me.data)
+        // console.log(me.data)
         me.belts = me.svg.append('g')
             .attr("class", "belts")
             .selectAll("belts")

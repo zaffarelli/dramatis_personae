@@ -1,0 +1,10 @@
+{% load fics_filters %}
+<table>
+    <tr>
+        <td width="1cm">{{ x }}</td>
+        <td width="5cm">{{ c.reference }}</td>
+        <td width="2cm">{{ c.group }}</td>
+        <td width="1cm">{% if c.is_root %}x{% else %}.{% endif %}</td>
+    </tr>
+</table>
+

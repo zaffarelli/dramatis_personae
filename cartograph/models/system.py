@@ -126,9 +126,7 @@ class OrbitalItem(models.Model):
             logger.info("[%s] Unable to fix system due to missing system and/or orbital items." % (self.system))
 
 
-@receiver(pre_save, sender=OrbitalItem, dispatch_uid='prepare_orbital_data')
-def prepare_orbital_data(sender, instance, **kwargs):
-    instance.prepare()
+
 
 
 @receiver(post_save, sender=OrbitalItem, dispatch_uid='propagate_orbital_data')
@@ -152,6 +150,6 @@ class SystemAdmin(admin.ModelAdmin):
 
 class OrbitalItemAdmin(admin.ModelAdmin):
     ordering = ['system', 'distance', 'name']
-    list_display = ['nameid', 'name', 'category', 'color', 'azimut', 'distance', 'tilt', 'size', 'qualifier', 'rings']
+    list_display = ['nameid', 'name', 'category', 'color', 'system', 'azimut', 'distance', 'tilt', 'size', 'qualifier', 'rings']
     list_filter = ['category', 'system', 'distance', 'tilt']
     search_fields = ['name', 'qualifier', 'system']

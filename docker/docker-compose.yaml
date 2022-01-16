@@ -1,0 +1,128 @@
+version: "3.6"
+
+services:
+
+  dramatis_personae_db:
+    image: postgres:11
+    container_name: dramatis_personae_db
+    restart: always
+    expose:
+      - "5432"
+    networks:
+      - dramatis_personae_db_net
+    environment:
+      POSTGRES_DB: dramatis_personae
+      POSTGRES_USER: dramatis_personae
+      POSTGRES_PASSWORD_FILE: /run/secrets/dramatis_personae_db_passwd
+    volumes:
+      - db:/var/lib/postgresql/data
+    secrets:
+      - dramatis_personae_db_passwd
+    user: postgres:postgres
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U dramatis_personae"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges
+
+  dramatis_personae_web:
+    build:
+      context: ../
+      dockerfile: Dockerfile.dp
+    image: dramatis_personae:web
+    container_name: dramatis_personae_web
+    restart: always
+    expose:
+      - "8000"
+    networks:
+      - dramatis_personae_db_net
+      - dramatis_personae_web_net
+    environment:
+      DEBUG: 0
+      REGISTRATION_OPEN: 1
+      DB_HOST: dramatis_personae_db
+      DB_PORT: "5432"
+      DB_NAME: dramatis_personae
+      DB_USER: dramatis_personae
+      ALLOWED_HOSTS: "localhost,127.0.0.1,0.0.0.0"
+      CORS_ALLOW_ALL_ORIGINS: 0
+      CORS_ALLOWED_ORIGINS: "https://localhost,https://127.0.0.1,https://0.0.0.0"
+    volumes:
+      - static_files:/usr/src/app/static/
+    secrets:
+      - dramatis_personae_db_passwd
+    healthcheck:
+      test: ["CMD-SHELL", "curl --fail http://localhost:8000/web/ || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges
+    depends_on:
+      dramatis_personae_db:
+      condition: service_healthy
+
+  dramatis_personae_nginx:
+    build:
+      context: ../
+      dockerfile: docker/Dockerfile.nginx
+    image: dramatis_personae:nginx
+    container_name: dramatis_personae_nginx
+    restart: always
+    ports:
+      - "80:8080"
+      - "443:44380"
+    networks:
+      - dramatis_personae_web_net
+    volumes:
+      - static_files:/srv/static/
+    healthcheck:
+      test: ["CMD-SHELL", "service nginx status"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges
+
+volumes:
+
+  db:
+    name: dramatis_personae_db
+
+  static_files:
+    name: dramatis_personae_static_files
+    driver_opts:
+      type: tmpfs
+      device: tmpfs
+
+secrets:
+  dramatis_personae_db_passwd:
+    file: ./secrets/dp_db_pass.txt
+
+networks:
+
+  dramatis_personae_db_net:
+    name: dramatis_personae_db_net
+    ipam:
+      driver: default
+      config:
+        - subnet: "172.26.0.72/29"
+    driver_opts:
+      com.docker.network.bridge.name: dbr-dramatis_personae_db
+
+  dramatis_personae_web_net:
+    name: dramatis_personae_web_net
+    ipam:
+      driver: default
+      config:
+        - subnet: "172.26.0.80/29"
+    driver_opts:
+      com.docker.network.bridge.name: dbr-dramatis_personae_web

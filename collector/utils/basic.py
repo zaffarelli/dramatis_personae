@@ -48,7 +48,7 @@ def get_current_config(request=None):
     else:
         if request.user.is_authenticated:
             if request.user.profile.is_gamemaster:
-                item = Campaign.objects.get(smart_code='bin')
+                item = Campaign.objects.get(smart_code='HDI')
                 items = Campaign.objects.filter(is_active=True)
                 if len(items) == 1:
                     item = items.first()

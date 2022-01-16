@@ -1,0 +1,13 @@
+hooks/
+.coverage
+sonar*
+docker/
+backup/
+scripts/
+README.md
+.idea/
+.pytest_cache/
+.sass_cache/
+.scannerwork/
+.venv/
+.git/

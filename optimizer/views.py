@@ -33,11 +33,11 @@ def run_duel(request, slug=None):
         attackers = Character.objects.filter(fencing_league=True)
         a = roll(attackers.count()) - 1
         attacker = attackers[a].id
-        print(f'Attacker: {attacker}')
+        # print(f'Attacker: {attacker}')
         defenders = Character.objects.filter(fencing_league=True).exclude(id=attacker)
         d = roll(defenders.count()) - 1
         defender = defenders[d].id
-        print(f'Defender: {defender}')
+        # print(f'Defender: {defender}')
 
     tori = Character.objects.get(pk=attacker)
     uke = Character.objects.get(pk=defender)
@@ -186,7 +186,7 @@ def run_imperial_tournament(request):
         losers = []
         num_duel = 0
 
-        print(f'- Handling tier {int(num_tier)}')
+        # print(f'- Handling tier {int(num_tier)}')
         tier_results = {'tier': int(num_tier), 'duels': []}
         for i, v in enumerate(fencers):
             if i % 2 == 0:
@@ -213,7 +213,7 @@ def run_imperial_tournament(request):
                     losers.append(tori)
                     uke_color = uke.color
                     winner = uke
-                print(f'  - Duel #{num_duel}: {tori.full_name} vs {uke.full_name} => {winner.full_name}')
+                # print(f'  - Duel #{num_duel}: {tori.full_name} vs {uke.full_name} => {winner.full_name}')
                 tier_results['duels'].append({'duel_id': f'ITDxT{int(num_tier)}xD{num_duel}x', 'tori': tori, 'uke': uke,
                                               'tori_color': tori_color, 'uke_color': uke_color, 'winner': winner,
                                               'scores': stats})
@@ -221,8 +221,8 @@ def run_imperial_tournament(request):
         tournament_data.append(tier_results)
         for v in losers:
             fencers.remove(v)
-        print(f'Last fencers: {len(fencers)}')
-        print(f'{fencers}')
+        # print(f'Last fencers: {len(fencers)}')
+        # print(f'{fencers}')
         num_tier -= 1
     context = {'tournament_data': tournament_data, 'character_items': contestants, "base_mark": 'contestant'}
     template = get_template('optimizer/imperial_tournament.html')

@@ -36,7 +36,7 @@ def do_login(request):
 
 def do_profile(request):
     if request.method == "GET":
-        print('profile')
+        # print('profile')
         main_characters = Character.objects.filter(player=request.user.username.capitalize())
         blokes = Bloke.objects.filter(character__in=main_characters)
         active_blokes = []
@@ -64,19 +64,19 @@ def user_blokes(request, team_type='others'):
         blokes = Bloke.objects.filter(character__in=main_characters)
         blokes_characters = []
         for b in blokes:
-            print(b.npc.team)
+            # print(b.npc.team)
             if b.npc.team in BLOKES[team_type]:
                 b.npc.intimacy = b.level
                 blokes_characters.append(b.npc)
         full_lists = {}
-        print(f'Blokes: {blokes_characters}')
+        # print(f'Blokes: {blokes_characters}')
         for team in BLOKES[team_type]:
             full_lists[team] = []
-        print(f'Full List: {full_lists}')
+        # print(f'Full List: {full_lists}')
         for b in blokes_characters:
-            print(b.team)
+            # print(b.team)
             full_lists[b.team].append(b)
-        print(f'Filled Full List: {full_lists}')
+        # print(f'Filled Full List: {full_lists}')
         for team in BLOKES[team_type]:
             if len(full_lists[team]) == 0:
                 full_lists.pop(team)

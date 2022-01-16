@@ -27,8 +27,14 @@
     {% endfor %}
 {% endif %}
 
-
-
+<pdf:nextframe/>
+<h3>Skills Summary</h3>
+{% if skills.count  %}
+    {% for s in skills %}
+    {% include "collector/pdf/skill_summary_pdf.html" with c=s x=forloop.counter %}
+    {% endfor %}
+{% endif %}
+<pdf:nextframe/>
 
 <h3>Skills</h3>
 {% if skills.count  %}

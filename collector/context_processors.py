@@ -26,5 +26,5 @@ def commons(request):
     except:
         configs = []
     campaign = get_current_config(request)
-    return dict(dp_version=fics_references.RELEASE, instance_name=settings.INSTANCE_NAME,
+    return dict(dp_version=settings.RELEASE, instance_name=settings.INSTANCE_NAME,
             python_version=sys.version, hostname=socket.gethostname().upper(), campaign=campaign, configs=configs, ghostmark='ghostmark')

@@ -14,7 +14,8 @@ from collector.models.campaign import Campaign
 from django.template.loader import get_template
 import datetime
 from collector.utils.basic import get_current_config, export_epic, slug_decode
-from collector.utils.fics_references import MAX_CHAR, FONTSET
+from collector.utils.fics_references import FONTSET
+from django.conf import settings
 from collector.views.characters import respawn_avatar_link
 import os
 from django.conf import settings
@@ -86,7 +87,7 @@ def get_list(request, id, slug='none'):
     if request.user.is_authenticated:
         paginator = Paginator(character_items, request.user.profile.option_display_count)
     else:
-        paginator = Paginator(character_items, MAX_CHAR)
+        paginator = Paginator(character_items, settings.MAX_CHAR)
     page = id
     character_items = paginator.get_page(page)
     messages.info(request, f'{paginator.count} characters found.')
@@ -106,7 +107,7 @@ def show_todo(request):
         if request.user.is_authenticated:
             paginator = Paginator(character_items, request.user.profile.option_display_count)
         else:
-            paginator = Paginator(character_items, MAX_CHAR)
+            paginator = Paginator(character_items, settings.MAX_CHAR)
         page = id
         character_items = paginator.get_page(page)
         context = {'character_items': character_items}

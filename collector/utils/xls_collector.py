@@ -17,7 +17,8 @@ from openpyxl.styles import PatternFill
 from openpyxl.styles import colors
 from openpyxl.styles import Font, Color
 from openpyxl import load_workbook
-from collector.utils.fics_references import RELEASE
+# from collector.utils.fics_references import RELEASE
+from django.conf import settings
 
 
 def colrow(c, r):
@@ -71,7 +72,7 @@ def export_to_xls(filename='dramatis_personae.xlsx'):
     ws.cell(column=1, row=2, value='Source')
     ws.cell(column=2, row=2, value='Dramatis Personae Collector')
     ws.cell(column=1, row=3, value='Version')
-    ws.cell(column=2, row=3, value=str(RELEASE))
+    ws.cell(column=2, row=3, value=str(settings.RELEASE))
     ws.cell(column=1, row=4, value='Release date')
     ws.cell(column=2, row=4, value='%s' % (datetime.now()))
     # Characters

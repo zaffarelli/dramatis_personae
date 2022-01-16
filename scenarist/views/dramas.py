@@ -35,7 +35,7 @@ def add_drama(request):
     if request.is_ajax():
         if request.method == 'POST':
             full_id = request.POST.get('id')
-            print(full_id)
+            # print(full_id)
             id = int(full_id.split("_")[1])
             item = Drama()
             item.title = datetime.datetime.now()

@@ -34,7 +34,7 @@ class Campaign(models.Model):
     from collector.models.rpg_system import RpgSystem
     title = models.CharField(default='aaa', max_length=128, )
     epic = models.ForeignKey(Epic, null=True, blank=True, on_delete=models.SET_NULL)
-    description = models.TextField(max_length=128, default='')
+    description = models.TextField(max_length=128, default='', blank=True)
     gm = models.ForeignKey(User, null=True, blank=True, on_delete=models.SET_NULL)
     rpgsystem = models.ForeignKey(RpgSystem, null=True, blank=True, on_delete=models.SET_NULL)
     is_active = models.BooleanField(default=False)
@@ -47,7 +47,7 @@ class Campaign(models.Model):
     color_counterback = models.CharField(max_length=9, default='#00404040')
     black_text = models.BooleanField(default=True)
     hidden = models.BooleanField(default=False)
-    known_systems = models.TextField(max_length=1024, default='')
+    known_systems = models.TextField(max_length=1024, default='', blank=True)
 
     def __str__(self):
         return f'{self.title} [{self.rpgsystem}]'

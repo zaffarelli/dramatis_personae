@@ -18,6 +18,7 @@ def show_jumpweb(request):
         context['data']['new_routes'] = ""#"|".join(NEW_ROUTES)
         context['data']['new_systems'] = ""#"|".join(NEW_SYSTEMS)
         context['data']['epic_systems'] = campaign.known_systems
+        context['data']['era'] = campaign.epic.era
         context['data']['nodes'] = []
         context['data']['links'] = []
         known_worlds = context['data']['epic_systems'].split('|')
@@ -38,13 +39,13 @@ def show_jumpweb(request):
             system['color'] = s.color
             system['color2'] = s.color
             if s.allianceref:
-                print(s.allianceref)
+                # print(s.allianceref)
                 system['color'] = s.allianceref.color_front
                 system['color2'] = s.allianceref.color_back
                 system['alliance'] = s.allianceref.reference
             system['orbital_map'] = 1 if s.orbital_map != '' else 0
 
-            system['dtj'] = s.dtj
+            system['dtj'] = f'{s.dtj:.2f}'
             system['garrison'] = s.garrison
             system['tech'] = s.tech
             system['symbol'] = s.symbol

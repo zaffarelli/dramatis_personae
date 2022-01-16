@@ -5,4 +5,4 @@ class CartographConfig(AppConfig):
     name = 'cartograph'
 
     def ready(self):
-        pass
+        import cartograph.signals.system

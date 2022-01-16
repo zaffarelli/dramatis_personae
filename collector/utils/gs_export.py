@@ -15,9 +15,9 @@ from collector.utils import fs_fics7
 from collector.utils.basic import logger
 import gspread
 from datetime import datetime
-from collector.utils.fics_references import RELEASE
+# from collector.utils.fics_references import RELEASE
 from oauth2client.service_account import ServiceAccountCredentials
-
+from django.conf import settings
 from cryptography.fernet import Fernet
 import requests  # to get image from the web
 import shutil  # to save it locally
@@ -84,7 +84,7 @@ def update_abstract(options, target):
     matrix[0].value = "Source"
     matrix[1].value = "Dramatis Personae (Collector)"
     matrix[2].value = "Version"
-    matrix[3].value = RELEASE
+    matrix[3].value = settings.RELEASE
     matrix[4].value = "Exportation Date"
     matrix[5].value = datetime.now().strftime("%Y-%m-%d %H:%M")
     matrix[6].value = "Sourced from storyboard of"
