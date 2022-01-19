@@ -273,6 +273,7 @@ def prettybool(value):
         res = '<i class="fas fa-times" style="color:red;"></i>'
     return res
 
+
 @register.filter(name='prettyhistory')
 def prettyhistory(value):
     if value == True:
@@ -280,7 +281,6 @@ def prettyhistory(value):
     else:
         res = '<i class="fas fa-times" style="color:red;"></i>'
     return res
-
 
 
 @register.filter(name='as_height')
@@ -376,7 +376,6 @@ def parse_stories(value):
 def extract_id(value):
     import json
     x = json.load(value)
-
     return x[id]
 
 
@@ -391,9 +390,21 @@ def as_media_image(value):
     return str
 
 
+@register.filter(name='media_check')
+def media_check(value):
+    str = f'images/f_{value}.jpg'
+    from django.core.files.storage import default_storage
+    if default_storage.exists(str):
+        str = '<span class="golden"><i class="fas fa-portrait"></i></span>'
+    else:
+        str = '<span><i class="fas fa-times" style="color:red;"></i></span>'
+    return str
+
+
 @register.filter(name='is_not_blank')
 def is_not_blank(value):
     return (value != '')
+
 
 @register.filter(name='colorteam')
 def colorteam(value):
@@ -402,9 +413,7 @@ def colorteam(value):
     return "<span style='color:%s;'>%s</span>" % (color, value)
 
 
-
 @register.filter(name='parseclean')
 def parseclean(value):
     res = value.replace("\n", "<br/>")
     return res
-
