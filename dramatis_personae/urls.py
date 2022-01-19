@@ -1,8 +1,8 @@
-'''
+"""
  ╔╦╗┬─┐┌─┐┌┬┐┌─┐┌┬┐┬┌─┐  ╔═╗┌─┐┬─┐┌─┐┌─┐┌┐┌┌─┐┌─┐
   ║║├┬┘├─┤│││├─┤ │ │└─┐  ╠═╝├┤ ├┬┘└─┐│ ││││├─┤├┤
  ═╩╝┴└─┴ ┴┴ ┴┴ ┴ ┴ ┴└─┘  ╩  └─┘┴└─└─┘└─┘┘└┘┴ ┴└─┘
-'''
+"""
 from django.conf.urls import url, include
 from django.urls import re_path,  path
 from django.contrib import admin
@@ -19,6 +19,5 @@ urlpatterns = [
     path('', include('cartograph.urls')),
     path('', include('scenarist.urls')),
     path('', include('optimizer.urls')),
-    path('accounts/', include('django.contrib.auth.urls')), # new
-  #re_path('__debug__', include(debug_toolbar.urls)),
+    path('accounts/', include('django.contrib.auth.urls')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

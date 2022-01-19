@@ -3375,6 +3375,9 @@ span.info {
   top: 5px;
   font-size: 12pt; }
 
+#figurebox {
+  display: none; }
+
 input[type=text], input[type=password], input[type=number], input[type=checkbox], select, textarea {
   background-color: #242524;
   color: #cfcdcf;

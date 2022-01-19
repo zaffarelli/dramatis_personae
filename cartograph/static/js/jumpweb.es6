@@ -46,7 +46,7 @@ class Jumpweb {
         me.spot_refs = []
         _.forEach([...Array(81).keys()], function (i) {
             _.forEach([...Array(61).keys()], function (j) {
-                me.spot_refs.push({'x': i-41, 'y': j-31});
+                me.spot_refs.push({'x': i - 41, 'y': j - 31});
             });
         });
         _.forEach(me.data.nodes, function (item, index) {
@@ -173,17 +173,48 @@ class Jumpweb {
             });
         spots.append('circle')
             .attr('class', 'spots')
-            .attr('r', '1pt')
+            .attr('id', function (d) {
+                return 'spot_' + d.x + '_' + d.y;
+            })
+            .attr('r', '5pt')
             .attr('cx', function (d) {
                 return d.x * me.step_x;
             })
             .attr('cy', function (d) {
                 return d.y * me.step_x;
             })
-            .attr('stroke-width', '1pt')
-            .attr('stroke', '#333')
-            .attr('fill', '#000')
+            .attr('stroke-width', '2pt')
+            .attr('stroke', '#222')
+            .attr('fill', '#111')
             .attr('opacity', 1)
+            .on('mouseover', function (e, d) {
+
+                    // me.svg.selectAll('.spots').attr('r', '5pt').attr('fill', '#111');
+                    // me.svg.select("#spot_" + d.x + "_" + d.y).attr('r', '15pt').attr('fill', '#fc4');
+                    // console.log(d)
+
+            })
+            .on('mouseout', function (e, d) {
+
+                    // me.svg.selectAll('.spots').attr('r', '5pt');
+                    // me.svg.select("#spot_" + d.x + "_" + d.y).attr('r', '5pt').attr('fill', '#111');
+
+            })
+            .on('click', function (e, d) {
+                if (me.data.mj) {
+                    if (me.selectedNode) {
+                        console.log('Spot ' + d.x + " " + d.y + " and selected node is [" + me.selectedNode.name + "]!");
+                        let tgt = _.find(me.data.nodes, {id: me.selectedNode.id})
+                        tgt.x = d.x
+                        tgt.y = d.y
+                        // me.update();
+                        me.selectedNode = undefined;
+                    }
+                    me.svg.selectAll('.spots').attr('r', '5pt').attr('fill', '#111');
+                    me.svg.select("#spot_" + d.x + "_" + d.y).attr('r', '20pt').attr('fill', '#fc4');
+
+                }
+            })
         ;
 
     }
@@ -329,8 +360,8 @@ class Jumpweb {
             .style("font-family", "Lato")
             .style("font-size", me.mark * 2.5 + "pt")
             .style("text-anchor", "middle")
-            .style("fill", function(d){
-                return me.selectedNode == d ? '#A22': "#DDD";
+            .style("fill", function (d) {
+                return me.selectedNode == d ? '#A22' : "#DDD";
             })
             .style("stroke", "#111")
             .style("stroke-width", "0.25pt")
@@ -379,60 +410,6 @@ class Jumpweb {
         me.lefttext(node, -6, 1, 'OM:', 'orbital_map')
         return node;
     }
-
-    // isDiscovery(a, b) {
-    //     let me = this;
-    //
-    //     return  (a.secret & b.secret);
-    //
-    //     if (me.data.mj){
-    //         return '';
-    //     }
-    //     let answer = '';
-    //     let arr = me.data.new_routes.split("|");
-    //     _.forEach(arr, function(item) {
-    //         let systems = item.split("_");
-    //         if (((systems[0] == a) & (systems[1] == b)) | ((systems[0] == b) & (systems[1] == a))) {
-    //             if (systems.length == 3) {
-    //                answer = systems[2];
-    //             }
-    //         }
-    //     })
-    //     return answer;
-    // }
-
-    // isNoNewRoute(a, b) {
-    //     let me = this;
-    //     if (me.data.mj) {
-    //         return false;
-    //     }
-    //     let answer = true;
-    //     let arr = me.data.new_routes.split("|");
-    //
-    //     _.forEach(arr, function (item) {
-    //         let systems = item.split("_");
-    //         if (((systems[0] == a) & (systems[1] == b)) | ((systems[0] == b) & (systems[1] == a))) {
-    //             answer = false;
-    //         }
-    //     })
-    //     return answer;
-    // }
-    //
-    // isNoNewWorld(a) {
-    //     let me = this;
-    //     if (me.data.mj) {
-    //         return false;
-    //     }
-    //     let answer = true;
-    //     let arr = me.data.new_systems.split("|");
-    //
-    //     _.forEach(arr, function (item) {
-    //         if (item == a) {
-    //             answer = false;
-    //         }
-    //     })
-    //     return answer;
-    // }
 
     draw_known_worlds() {
         let me = this;
@@ -514,7 +491,7 @@ class Jumpweb {
                     return res;
                 })
             })
-            ;
+        ;
         link.append("text")
             .attr("x", function (l) {
                 let source = _.find(me.data.nodes, {
@@ -554,15 +531,11 @@ class Jumpweb {
             .attr("class", function (d) {
                 let k = 'node'
                 d.unknown = (d.group > 10);
-                // if (d.unknown) {
-                //     d.unknown = me.isNoNewWorld(d.name);
-                // }
-
-                // if (d.discovery <= me.era) {
-                //     d.unknown = false
-                // }
                 k += " g" + d.group
                 return k;
+            })
+            .attr('id', function(d){
+                return "node_"+d.id
             })
             .attr("transform", function (d) {
                 let x = (d.x + me.ox) * me.step_x;
@@ -570,10 +543,10 @@ class Jumpweb {
                 return "translate(" + x + "," + y + ")";
             })
             .on("click", function (e, d) {
-                if (e.ctrlKey){
+                if (e.ctrlKey) {
                     me.selectedNode = d;
-                    console.log(me.selectedNode.name)
-                }else if (e.altKey) {
+                    console.log(me.selectedNode.name + " has been selected")
+                } else if (e.altKey) {
                     if (d.orbital_map) {
                         // console.log("Launch orbital map for " + d.name);
                         $('#customize').val(d.name);
@@ -582,7 +555,6 @@ class Jumpweb {
                     }
                 }
             })
-
             .on("mouseover", function (e, d) {
                 // d3.event.preventDefault();
                 // d3.event.stopPropagation();
@@ -639,7 +611,9 @@ class Jumpweb {
                 // return (d.unknown ? 0.0 : 1.0);
                 return (d.secret ? (me.data.mj ? 1.0 : 0.0) : 1.0);
 
-            });
+            })
+
+        ;
         node = me.draw_node(node);
         let panel = node.append("g")
             .attr("class", "aura")
@@ -670,11 +644,17 @@ class Jumpweb {
         me.vis.call(me.zoom);
     }
 
+    update(){
+        let me = this;
+        me.draw_known_worlds();
+    }
+
+
     perform() {
         let me = this;
         $(me.parent).css("padding", 0);
         me.draw_layout();
-        me.draw_known_worlds();
+        me.update();
         me.zoomActivate();
     }
 }

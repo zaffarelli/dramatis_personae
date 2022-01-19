@@ -1,6 +1,18 @@
 """
     Dramatis Personae: Cartograph
 """
+ORBITAL_ITEMS = (
+    ('0', 'Sun'),
+    ('1', 'Gas Giant'),
+    ('2', 'Telluric'),
+    ('3', 'Asteroids Belt'),
+    ('4', 'Space Station'),
+    ('5', 'Jumpgate'),
+    ('6', 'Allied Forces'),
+    ('7', 'Hostiles'),
+)
+
+
 NEW_ROUTES = [
     "Manitou_Icon",
     "Manitou_Cadiz",

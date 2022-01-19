@@ -49,5 +49,5 @@ def add_event(request):
         item.title = str(timezone.now())
         item.act = get_object_or_404(Act, pk=id)
         item.save()
-        return JsonResponse(item.to_json())
+        # return JsonResponse(item.to_json())
     return HttpResponse(status=204)

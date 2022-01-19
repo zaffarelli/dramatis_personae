@@ -1,7 +1,7 @@
 hooks/
 .coverage
 sonar*
-docker/
+docker/secrets/
 backup/
 scripts/
 README.md

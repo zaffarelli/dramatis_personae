@@ -2,10 +2,10 @@
 name = "dramatis_personae"
 version = "0.2.0"
 description = "DP config"
-authors = ["zaffarelli@gmail.com"]
+authors = ["Zaffarelli <zaffarelli@gmail.com>"]
 
 [tool.poetry.dependencies]
-python = "==3.6"
+python = "^3.6.0"
 chardet = "==3.0.4"
 decorator = "==4.2.1"
 django-appconf = "==1.0.3"
@@ -49,7 +49,7 @@ et_xmlfile = "==1.0.1"
 Faker = "==2.0.3"
 Pillow = "==6.2.2"
 PyYAML = "==5.1"
-uWSGI = "==2.0.18"
+# uWSGI = "==2.0.18"
 PyPDF2 = "==1.26.0"
 cryptography = "*"
 psycopg2-binary = "==2.8.6"

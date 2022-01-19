@@ -2,7 +2,7 @@
 {% load fics_filters %}
 
     <div class="cell mini">{{ c.id|safe}}</div>
-    <div class="cell wider"  title="{{ c.rid|safe }}">
+    <div class="cell wider figureshow" medimg="{{c.rid|as_media_image}}"  title="{{ c.rid|safe }} {{c.picture}}">
         <em> {{ c.full_name }}</em>
     </div>
     <div class="cell small">{{ c.player|safe }}</div>

@@ -97,11 +97,11 @@ class Collector {
             e.stopPropagation();
             let action_tag = $(this).attr("action");
             let mode_tag = $(this).attr("mode");
-            let new_tag = action_tag.replaceAll("_","/").replaceAll("-PDF",".pdf")
+            let new_tag = action_tag.replaceAll("_", "/").replaceAll("-PDF", ".pdf")
             let url = 'ajax/' + action_tag + '/';
-            if (mode_tag == 'direct'){
+            if (mode_tag == 'direct') {
                 url = new_tag;
-                let w = window.open(url,'_blank');
+                let w = window.open(url, '_blank');
                 w.focus();
             }
             console.debug("menu-item " + action_tag + " has been clicked...");
@@ -122,7 +122,7 @@ class Collector {
                         let pre = "<div class='fresque'><div class='tile chart_panel'>";
                         let post = "</div></div>";
                         console.log(answer.mosaic);
-                        $('.mosaic').html(pre+answer.mosaic+post);
+                        $('.mosaic').html(pre + answer.mosaic + post);
                     } else {
                         $('.mosaic').html(answer.mosaic);
                     }
@@ -189,7 +189,7 @@ class Collector {
         return (safe);
     }
 
-    registerPullDowns(){
+    registerPullDowns() {
         $(".pull-down").off().on("click", function (e) {
             e.preventDefault();
             e.stopPropagation();
@@ -199,6 +199,21 @@ class Collector {
             $(sub).toggleClass("off");
         });
     }
+
+    registerFigures() {
+        $(".figureshow").off().on("click", function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            $("#figure").attr("src",$(this).attr("medimg"));
+            $("#figurebox").css("display","block");
+        });
+        $("#figure").off().on("click", function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            $("#figurebox").css("display","none");
+        });
+    }
+
 
     registerSlugPageItems() {
         let me = this;
@@ -254,6 +269,7 @@ class Collector {
         me.registerSlugItems();
         me.registerSlugPageItems();
         me.registerPullDowns();
+        me.registerFigures();
         /* Togglers */
         me.setToggler('.mobile_form_toggler', 'collapsed', "#customizer");
         me.setToggler('.menu_right_toggler', 'collapsed', ".menuright");
