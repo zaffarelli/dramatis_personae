@@ -1,11 +1,11 @@
 [tool.poetry]
-name = "dramatis_personae"
-version = "0.2.0"
-description = "DP config"
+name = "dp"
+version = "0.8.0"
+description = "The DP package"
 authors = ["Zaffarelli <zaffarelli@gmail.com>"]
 
 [tool.poetry.dependencies]
-python = "^3.6.0"
+python = "^3.8.0"
 chardet = "==3.0.4"
 decorator = "==4.2.1"
 django-appconf = "==1.0.3"
@@ -33,7 +33,7 @@ pyasn1-modules = "==0.2.7"
 python-dateutil = "==2.8.0"
 pytz = "==2019.3"
 rcssmin = "==1.0.6"
-reportlab = "==3.4.0"
+reportlab = "^3.6.6"
 requests = "==2.22.0"
 rjsmin = "==1.1.0"
 rsa = "==4.0"
@@ -49,7 +49,7 @@ et_xmlfile = "==1.0.1"
 Faker = "==2.0.3"
 Pillow = "==6.2.2"
 PyYAML = "==5.1"
-# uWSGI = "==2.0.18"
+uWSGI = "==2.0.18"
 PyPDF2 = "==1.26.0"
 cryptography = "*"
 psycopg2-binary = "==2.8.6"
@@ -62,9 +62,11 @@ cffi = "1.14.6"
 psycopg2 = "2.8.6"
 colour = "^0.1.5"
 gunicorn = "^20.1.0"
+svglib = "^1.2.1"
+CairoSVG = "^2.5.2"
 
 [tool.poetry.dev-dependencies]
 
 [build-system]
-requires = ["poetry>=0.12"]
-build-backend = "poetry.masonry.api"
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

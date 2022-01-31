@@ -1,15 +1,14 @@
 version: "3.9"
+
 services:
-  dp_db:
-    build:
-      context: ../
-      dockerfile: ./docker/postgres/Dockerfile
-    restart: always
+  db:
+    image: postgres:11-stretch
     container_name: dp_db
     environment:
-      POSTGRES_DB: dramatis_personae
+      POSTGRES_NAME: dramatis_personae
       POSTGRES_USER: dramatis_personae
-      POSTGRES_PASSWORD_FILE: /run/secrets/dramatis_personae_db_passwd
+      POSTGRES_PASSWORD: dramatis_personae
+    restart: always
     expose:
       - "5432"
     networks:
@@ -26,41 +25,39 @@ services:
     container_name: dp_nginx
     restart: always
     ports:
-      - "82:8087"
-      - "443:44380"
+      - "85:8080"
     networks:
       - dp_web_net
     volumes:
+      - .:/vol/web/app
       - static_files:/vol/web/static/
       - media_files:/vol/web/media/
 
-  dp_web:
+  dp_app:
     build:
       context: ../
       dockerfile: ./docker/dramatis_personae/Dockerfile
-    container_name: dp_web
+    container_name: dp_app
     restart: always
     expose:
-      - "8087"
+      - "8000"
     networks:
       - dp_db_net
       - dp_web_net
     environment:
       DEBUG: 0
-      REGISTRATION_OPEN: 1
-      DB_HOST: dp_db
-      DB_PORT: "5432"
+      WEB_PATH: /vol/web/app
       DB_NAME: dramatis_personae
-      DB_USER: dp
-      DB_PASSWORD_FILE: /run/secrets/dramatis_personae_db_passwd
-      ALLOWED_HOSTS: "localhost,127.0.0.1,0.0.0.0"
-      CORS_ALLOW_ALL_ORIGINS: 0
-      CORS_ALLOWED_ORIGINS: "https://localhost,https://127.0.0.1,https://0.0.0.0"
+      DB_USER: dramatis_personae
+      DB_PASSWORD: dramatis_personae
+      ALLOWED_HOSTS: "*"
     volumes:
       - static_files:/vol/web/static/
       - media_files:/vol/web/media/
     secrets:
       - dramatis_personae_db_passwd
+    depends_on:
+      - db
 
 
 volumes:
@@ -86,12 +83,12 @@ networks:
     name: dp_db_net
     ipam:
       driver: default
-    driver_opts:
-      com.docker.network.bridge.name: dbr-dp_db
+#    driver_opts:
+#      com.docker.network.bridge.name: dbr-dp_db
 
   dp_web_net:
     name: dp_web_net
     ipam:
       driver: default
-    driver_opts:
-      com.docker.network.bridge.name: dbr-dp_web
+#    driver_opts:
+#      com.docker.network.bridge.name: dbr-dp_app

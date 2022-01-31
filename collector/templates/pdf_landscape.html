@@ -1,0 +1,189 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="utf-8"/>
+    <title>{{ c.full_name|safe }}</title>
+    <style>
+        @font-face {
+            font-family: 'Text';
+            font-weight: bold;
+            font-style: italic;
+            src: url('collector/static/collector/fonts/RobotoCondensed-BoldItalic.ttf');
+        }
+
+        @font-face {
+            font-family: 'Text';
+            src: url('collector/static/collector/fonts/RobotoCondensed-Regular.ttf');
+        }
+
+        @font-face {
+            font-family: 'Text';
+            font-style: italic;
+            src: url('collector/static/collector/fonts/RobotoCondensed-Italic.ttf');
+        }
+
+
+        @font-face {
+            font-family: 'Text';
+            font-weight: bold;
+            src: url('collector/static/collector/fonts/RobotoCondensed-Bold.ttf');
+        }
+
+        @font-face {
+            font-family: 'Title';
+            src: url('collector/static/collector/fonts/Eczar-SemiBold.ttf');
+        }
+
+        @page {
+            size: a4 portrait;
+            @frame col_left {
+            left: 0.4cm;
+            width: 10cm;
+            top: 1.5cm;
+            height: 27cm;
+            padding: 0.125cm;
+
+        }
+        @frame col_right {
+        right: 0.4cm;
+        width: 10cm;
+        top: 1.5cm;
+        height: 27cm;
+        padding:0.125cm;
+
+        }
+        @frame header_frame {
+        -pdf-frame-content:header_content;
+        right: 0.4cm;
+        width: 1cm;
+        top: 0.5cm;
+        height: 1cm;
+        text-align:right;
+
+        }
+        @frame footer_frame {
+        -pdf-frame-content:footer_content;
+        left:0.4cm;
+        width:20cm;
+        right:0.4cm;
+        bottom:0.6cm;
+        height: 0.5cm;
+        }
+
+
+        }
+
+        p, blockquote, .default, ul, li {
+            font-family: Text;
+            font-size: 9pt;
+            line-height: 0.9em;
+            margin:0;
+            padding:0;
+        }
+
+        .default{
+            padding: 0;
+            margin: 0;
+            font-height: 9pt;
+            line-height: 1.1em;
+            font-family: Text;
+        }
+
+
+        #footer_content {
+            font-size: 9pt;
+            text-align: center;
+            font-weight: bold;
+            font-family: Text;
+        }
+
+        .info {
+            padding: 0;
+            margin: 0;
+            font-size: 9pt;
+            margin-bottom: 0.8em;
+            font-family: Text;
+        }
+
+        em {
+            font-style: italic;
+        }
+
+        strong {
+            font-weight: bold;
+        }
+
+        .info th {
+            text-align: left;
+            margin-right: 1ex;
+            font-family: Text;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: Title;
+        }
+
+        h1 {
+            font-size: 28pt;
+            margin: 0;
+            padding: 0;
+            text-align:center;
+            line-height:0.5cm;
+        }
+
+        h2 {
+            font-size: 18pt;
+            line-height: 1em;
+            margin: 0;
+            padding: 0;
+            text-align:center;
+
+        }
+
+        h3 {
+            font-size: 14pt;
+            line-height: 1em;
+            margin: 0;
+            padding: 0;
+
+
+        }
+
+        h4 {
+            font-size: 12pt;
+            line-height: 1em;
+            margin: 0;
+            padding: 0;
+            text-decoration:underline;
+        }
+
+        h5 {
+            font-size: 11pt;
+            line-height: 1em;
+            margin: 0;
+            padding: 0;
+
+        }
+
+        h6 {
+            font-size: 10pt;
+            line-height: 0.9em;
+            margin:0;
+            padding:0;
+            text-indent:0;
+            margin-top:0.3em;
+            -pdf-keep-with-next: true;
+        }
+        blockquote{
+            padding-left:1cm;
+        }
+
+
+    </style>
+</head>
+<body>
+{% block article %}
+{% endblock article %}
+</body>
+</html>

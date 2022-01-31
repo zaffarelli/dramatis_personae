@@ -104,14 +104,21 @@ class Collector {
                 let w = window.open(url, '_blank');
                 w.focus();
             }
-            console.debug("menu-item " + action_tag + " has been clicked...");
+            console.debug("menu-item " + action_tag + " has been clicked..."+url+' '+mode_tag);
             $.ajax({
                 url: url,
                 success: function (answer) {
                     if (mode_tag == 'overlay') {
                         $("#d3area").css('display', 'block');
-                        let starmap = new Jumpweb(answer.data, '#d3area');
-                        starmap.perform();
+                        console.log(action_tag)
+                        if (action_tag == 'deck'){
+                            console.log("Epic Deck !!");
+                            let epicdeck = new EpicDeck(answer.data, '#d3area');
+                            epicdeck.perform();
+                        }else {
+                            let starmap = new Jumpweb(answer.data, '#d3area');
+                            starmap.perform();
+                        }
                         me.rebootLinks();
                     } else if (mode_tag == 'index') {
                         let w = window.location.href = "/";
@@ -204,13 +211,36 @@ class Collector {
         $(".figureshow").off().on("click", function (e) {
             e.preventDefault();
             e.stopPropagation();
-            $("#figure").attr("src",$(this).attr("medimg"));
-            $("#figurebox").css("display","block");
+            $("#figure").attr("src", $(this).attr("medimg"));
+            $("#figurebox").css("display", "block");
         });
         $("#figure").off().on("click", function (e) {
             e.preventDefault();
             e.stopPropagation();
-            $("#figurebox").css("display","none");
+            $("#figurebox").css("display", "none");
+        });
+    }
+
+    registerCharsels() {
+        let me = this;
+        $(".charsel").off().on("click", function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('Charsel click');
+            let key = $(this).attr('ref');
+            console.log('key:'+key);
+            $.ajax({
+                url: 'ajax/deep_toggle/selected/' + key  +'/',
+                success: function (answer) {
+                    console.log(answer);
+                    me.prepareAjax();
+                    me.rebootLinks();
+                },
+                error: function (answer) {
+                    console.error(answer);
+                    me.rebootLinks();
+                }
+            });
         });
     }
 
@@ -270,6 +300,7 @@ class Collector {
         me.registerSlugPageItems();
         me.registerPullDowns();
         me.registerFigures();
+        me.registerCharsels();
         /* Togglers */
         me.setToggler('.mobile_form_toggler', 'collapsed', "#customizer");
         me.setToggler('.menu_right_toggler', 'collapsed', ".menuright");

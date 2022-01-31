@@ -1,8 +1,8 @@
 {% load static %}
 {% load fics_filters %}
 
-    <div class="cell mini">{{ c.id|safe}}</div>
-    <div class="cell mini  figureshow" medimg="{{c.rid|as_media_image}}">{{ c.rid|media_check|safe}}</div>
+    <div class="cell mini charsel" ref="{{c.id}}">{{ c.id|safe}}</div>
+    <div class="cell mini figureshow" medimg="{{c.rid|as_media_image}}">{{ c.rid|media_check|safe}}</div>
     <div class="cell wider" title="{{ c.rid|safe }}">
         <em> {{ c.full_name }}</em>
     </div>
@@ -10,6 +10,7 @@
     <div class="cell wide" title="{{ c.narrative|safe }}">
         {{ c.entrance|safe }}
     </div>
+    <div class="cell mini" title="Selected">{{ c.selected|prettybool|safe}}</div>
     <div class="cell mini" title="Balanced">{{ c.balanced|prettybool|safe}}</div>
     <div class="cell wider">{{ c.challenge|safe }}</div>
     <div class="cell small">{{ c.team|colorteam|safe }}</div>

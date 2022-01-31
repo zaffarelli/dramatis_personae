@@ -1,8 +1,8 @@
-'''
+"""
  ╔╦╗┬─┐┌─┐┌┬┐┌─┐┌┬┐┬┌─┐  ╔═╗┌─┐┬─┐┌─┐┌─┐┌┐┌┌─┐┌─┐
   ║║├┬┘├─┤│││├─┤ │ │└─┐  ╠═╝├┤ ├┬┘└─┐│ ││││├─┤├┤
  ═╩╝┴└─┴ ┴┴ ┴┴ ┴ ┴ ┴└─┘  ╩  └─┘┴└─└─┘└─┘┘└┘┴ ┴└─┘
-'''
+"""
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(os.path.join(__file__,os.pardir))))
@@ -151,4 +151,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'dp_media/')
 LOGIN_REDIRECT_URL = '/'
 
 MAX_CHAR = 20
-RELEASE = '0.7.1'
+RELEASE = '0.8.1'

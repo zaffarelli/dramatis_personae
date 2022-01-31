@@ -41,8 +41,8 @@ def get_list(request, id, slug='none'):
     slug = slug.replace('_', '=')
     decs = str(base64.b64decode(slug), "utf-8")
     if decs == 'none':
-        character_items = campaign.dramatis_personae\
-            .order_by('balanced','-team','keyword', 'historical_figure', 'nameless', 'full_name')\
+        character_items = campaign.dramatis_personae \
+            .order_by('balanced', '-team', 'keyword', 'historical_figure', 'nameless', 'full_name') \
             .filter(is_dead=False, keyword__startswith=campaign.epic.shortcut)
     elif decs.startswith('c-'):
         elements = decs.split('-')
@@ -126,6 +126,21 @@ def tile_avatar(request, pk=None):
     template = get_template('collector/character_tile.html')
     html = template.render(context, request)
     return HttpResponse(html, content_type='text/html')
+
+
+def deep_toggle(request, slug=None, id=None):
+    response = {'status': 0}
+    if request.is_ajax:
+        matches = Character.objects.filter(id=id)
+        if slug is not None:
+            if len(matches) == 1:
+                c = matches.first()
+                x = getattr(c, slug)
+                setattr(c, slug, not (x))
+                c.save()
+                response['status'] = 1
+                response[slug] = getattr(c, slug)
+    return JsonResponse(response)
 
 
 def get_storyline(request, slug='none'):

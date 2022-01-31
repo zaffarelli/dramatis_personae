@@ -8,6 +8,7 @@ from django.contrib import admin
 from collector.models.skill import SkillRef
 from collector.utils import fics_references
 import logging
+
 logger = logging.getLogger(__name__)
 
 
@@ -41,6 +42,7 @@ class RitualRef(models.Model):
         jstr = json.loads(json.dumps(self, default=json_default, sort_keys=True, indent=4))
         return jstr
 
+
 class RitualCusto(models.Model):
     from collector.models.character_custo import CharacterCusto
     character_custo = models.ForeignKey(CharacterCusto, on_delete=models.CASCADE)
@@ -56,18 +58,27 @@ class Ritual(models.Model):
     ritual_ref = models.ForeignKey(RitualRef, on_delete=models.CASCADE)
     attribute_value = models.PositiveIntegerField(default=0)
     skill_value = models.IntegerField(default=0)
+    attribute_name = models.CharField(max_length=64, default="", blank=True)
+    skill_name = models.CharField(max_length=64, default="", blank=True)
     value = models.IntegerField(default=0)
 
     def fix(self):
-        self.attribute_value = getattr(self.character,self.ritual_ref.attribute)
+        self.attribute_value = getattr(self.character, self.ritual_ref.attribute)
+        self.attribute_name = self.ritual_ref.attribute[3:]
         found_skills = self.character.skill_set.filter(skill_ref=self.ritual_ref.skill)
         if not len(found_skills):
             self.skill_value = -2
         else:
             self.skill_value = found_skills.first().value
+            self.skill_name = self.ritual_ref.skill.reference
+            self.value = self.attribute_value + self.skill_value
 
-        self.value = self.attribute_value + self.skill_value
-
+    def to_json(self):
+        from collector.utils.basic import json_default
+        import json
+        x = json.loads(json.dumps(self, default=json_default, sort_keys=True, indent=4))
+        x["ref"] = self.ritual_ref.to_json()
+        return x
 
     def __str__(self):
         return f'{self.character.rid} > {self.ritual_ref.reference} ({self.ritual_ref.path} {self.ritual_ref.level})'

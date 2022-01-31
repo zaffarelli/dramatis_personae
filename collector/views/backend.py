@@ -5,26 +5,16 @@
 """
 from django.http import HttpResponse, Http404, JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect, render_to_response
-from django.core.paginator import Paginator
-
+from django.conf import settings
 from collector.models.character import Character
-from collector.models.skill import Skill
-from collector.forms.basic import CharacterForm, SkillFormSet, BlessingCurseFormSet, \
-    BeneficeAfflictionFormSet, WeaponFormSet, ArmorFormSet, ShieldFormSet
-from collector.utils.basic import render_to_pdf
 from django.template.loader import get_template, render_to_string
-from django.template import RequestContext
-import json
-import ast
-from urllib.parse import unquote
-from urllib.parse import parse_qs
 from collector.utils import fs_fics7
-from django.views.decorators.csrf import csrf_exempt
-import datetime
 from django.contrib import messages
 from collector.utils.xls_collector import export_to_xls, update_from_xls
-from collector.utils.basic import get_current_config, extract_rules, make_audit_report
+from collector.utils.basic import get_current_config, extract_rules, make_audit_report, make_deck
 from collector.utils.gs_export import update_gss, summary_gss
+import os
+import json
 
 
 def pdf_character(request, id=None):
@@ -41,7 +31,6 @@ def pdf_character(request, id=None):
 def run_audit(request):
     campaign = get_current_config(request)
     character_items = campaign.dramatis_personae.all()
-    # print(campaign.epic.shortcut, len(character_items))
     x = 1
     for c in character_items:
         c.need_fix = True
@@ -53,14 +42,12 @@ def run_audit(request):
 
 
 def export(request):
-    """ XLS export of the characters """
     export_to_xls()
     messages.info(request, 'Exported to XLS spreadsheet...')
     return HttpResponse(status=204)
 
 
 def xls_update(request):
-    """ XLS import of data """
     update_from_xls()
     return HttpResponse(status=204)
 
@@ -70,6 +57,7 @@ def gss_update(request):
     messages.info(request, 'Exported to Google spreadsheet...')
     return HttpResponse(status=204)
 
+
 def gss_summary(request):
     summary_gss()
     messages.info(request, 'Extracting PCs to Google spreadsheet...')
@@ -77,7 +65,6 @@ def gss_summary(request):
 
 
 def pdf_rules(request):
-    """ Create and show a character as PDF """
     messages.info(request, 'Rebuilding Rules reference...')
     extract_rules()
     messages.info(request, 'Done!')
@@ -139,3 +126,32 @@ def bloke_selector(request):
         return JsonResponse(response)
 
 
+def epic_deck(request):
+    if request.is_ajax:
+        campaign = get_current_config(request)
+        characters = []
+        all = campaign.dramatis_personae.filter(selected=True)
+        for c in all:
+            characters.append(json.loads(c.to_jsonFICS()))
+        context = {'data': characters}
+        return JsonResponse(context)
+    else:
+        return Http404
+
+
+def svg_to_pdf(request, slug):
+    import cairosvg
+    response = {'status': 'error'}
+    if request.is_ajax():
+        pdf_name = os.path.join(settings.MEDIA_ROOT, 'pdf/results/' + request.POST["pdf_name"])
+        svg_name = os.path.join(settings.MEDIA_ROOT, 'pdf/results/' + request.POST["svg_name"])
+
+        # pdf_name = "./"+
+        # svg_name = "./"+request.POST["svg_name"]
+        svgtxt = request.POST["svg"]
+        with open(svg_name, "w") as f:
+            f.write(svgtxt)
+            f.close()
+        cairosvg.svg2pdf(url=svg_name, write_to=pdf_name, scale=1.0)
+        response['status'] = 'ok'
+    return JsonResponse(response)

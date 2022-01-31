@@ -156,3 +156,13 @@ def dotted_pdf(value):
     if value > 5:
         answer = f"<b>{value}</b>"
     return answer
+
+@register.filter(name='as_media_image')
+def as_media_image(value):
+    str = f'media/images/f_{value}.jpg'
+    from django.core.files.storage import default_storage
+    if default_storage.exists(str):
+        str = f'media/images/f_{value}.jpg'
+    else:
+        str = 'media/images/f_blank.jpg'
+    return str

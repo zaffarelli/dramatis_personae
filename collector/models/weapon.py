@@ -19,7 +19,7 @@ CALIBERS = (
     ('0.40', '0.40/10mm'),
     ('0.44', '0.44/11mm'),
     ('0.47', '0.47/12mm'),
-    ('0.51', '0.51/13    mm'),
+    ('0.51', '0.51/13mm'),
     ('0.21', '0.21/5.56mm'),
     ('0.30', '0.30/7.62mm'),
     ('0.78', '0.78/20mm'),
@@ -178,7 +178,7 @@ def refix(modeladmin, request, queryset):
 class WeaponRefAdmin(admin.ModelAdmin):
     list_display = (
         'reference', 'meta_type', 'origins', 'category', 'fusion_cell', 'caliber', 'clip', 'rng', 'weapon_accuracy',
-        'damage_class',
+        'damage_class','rof',
         'availability', 'cost', 'description')
     ordering = ('-category', 'meta_type', 'reference', 'origins', 'damage_class',)
     actions = [refix]

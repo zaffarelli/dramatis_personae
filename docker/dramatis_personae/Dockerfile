@@ -27,8 +27,8 @@ RUN mkdir -p /var/log/dramatis_personae && \
 RUN mkdir -p $WEB_PATH/dp_media
 RUN mkdir -p $WEB_PATH/dp_static
 
-RUN groupadd --system -g 1000 $USER && \
-    useradd --system -u 1000 -g 1000 --no-create-home $USER
+RUN groupadd -g 1000 $USER && \
+    useradd -u 1000 -g 1000 $USER
 
 RUN chown -R $USER: /vol
 RUN chmod -R 755 /vol/web

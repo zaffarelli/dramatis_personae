@@ -10,8 +10,8 @@ from collector.views.characters import CharacterUpdateView, customize_ba, custom
 from collector.views.investigators import InvestigatorUpdateView
 from collector.views.frontend import index, toggle_public, toggle_spotlight, get_list, add_avatar, \
     get_storyline, conf_details, recalc_avatar, heartbeat, \
-    show_todo, pdf_show, wa_export_character, tile_avatar, ghostmark_test, display_sheet, switch_epic
-from collector.views.backend import export, xls_update, pdf_character, gss_update, gss_summary, pdf_rules, roll_dice, bloke_selector, run_audit
+    show_todo, pdf_show, wa_export_character, tile_avatar, ghostmark_test, display_sheet, switch_epic, deep_toggle
+from collector.views.backend import export, xls_update, pdf_character, gss_update, gss_summary, pdf_rules, roll_dice, bloke_selector, run_audit, epic_deck, svg_to_pdf
 from collector.views.misc_chart import get_population_statistics, get_keywords
 from django.contrib.auth.views import LogoutView
 from collector.views.user import do_login, do_profile, user_friends, user_foes, user_others, user_persystem
@@ -30,8 +30,10 @@ urlpatterns = [
     re_path('^ajax/tile/avatar/(?P<pk>\d+)/$', tile_avatar, name='tile_avatar'),
     re_path('^ajax/recalc/avatar/(?P<id>\d+)/$', recalc_avatar, name='recalc_avatar'),
     re_path('^ajax/add_avatar/(?P<slug>[\w+]+)/$', add_avatar, name='add_avatar'),
+    re_path('^ajax/deep_toggle/(?P<slug>[\w+]+)/(?P<id>\d+)/$', deep_toggle, name='deep_toggle'),
 
     re_path('^ajax/epic/(?P<slug>[\w+]+)/$', switch_epic, name='switch_epic'),
+
 
     re_path('^ajax/roll_dice/(?P<slug>[\w-]+)/$', roll_dice, name='roll_dice'),
     re_path('^ajax/wa_export/character/(?P<id>\d+)/$', wa_export_character, name='wa_export_character'),
@@ -41,7 +43,7 @@ urlpatterns = [
     re_path('^ajax/conf_details/$', conf_details, name='conf_details'),
     re_path('^ajax/todo/$', show_todo, name='show_todo'),
     re_path('^ajax/build_pdf_rules/$', pdf_rules, name='pdf_rules'),
-
+    re_path('^ajax/deck/$', epic_deck, name='epic_deck'),
     re_path('^api/heartbeat/$', heartbeat, name='heartbeat'),
     re_path('^ajax/statistics/$', get_population_statistics, name='get_popstats'),
     re_path('^api/keywords/$', get_keywords, name='get_keywords'),
@@ -63,6 +65,7 @@ urlpatterns = [
     re_path('^ajax/character/del/armor/(?P<avatar>[\d]+)/(?P<item>\d+)/$', customize_armor_del,name='customize_armor_del'),
     re_path('^ajax/character/del/shield/(?P<avatar>[\d]+)/(?P<item>\d+)/$', customize_shield_del, name='customize_shield_del'),
     re_path('^ajax/character/del/ritual/(?P<avatar>[\d]+)/(?P<item>\d+)/$', customize_ritual_del, name='customize_ritual_del'),
+    re_path('^ajax/character/svg2pdf/(?P<slug>[\w-]+)/$', svg_to_pdf, name='svg_to_pdf'),
     re_path('^ajax/login/$', do_login, name="login"),
     re_path('^ajax/profile/$', do_profile, name="profile"),
     re_path('^ajax/logout/$', LogoutView.as_view(), name="logout"),

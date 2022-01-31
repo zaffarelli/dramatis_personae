@@ -263,11 +263,13 @@ def extract_equipment():
 
 
 def json_default(value):
-    import datetime
+    import datetime, uuid
     if isinstance(value, datetime.datetime):
         return dict(year=value.year, month=value.month, day=value.day, hour=value.hour, minute=value.minute)
     elif isinstance(value, datetime.date):
         return dict(year=value.year, month=value.month, day=value.day)
+    elif isinstance(value, uuid.UUID):
+        return dict(hex=value.hex)
     else:
         return value.__dict__
 
@@ -301,3 +303,27 @@ def make_audit_report(campaign):
     else:
         print(pdf.err)
 
+def make_deck(all):
+    from django.utils import timezone
+    context = {}
+    context['date'] = timezone.datetime.now()
+    context['characters'] = []
+    for c in all:
+        context['characters'].append(c)
+    template = get_template('collector/deck.html')
+    html = template.render(context)
+    fname = 'deck.pdf'
+    filename = os.path.join(settings.MEDIA_ROOT, 'pdf/results/' + fname)
+    es_pdf = open(filename, 'wb')
+    pdf = pisa.pisaDocument(BytesIO(html.encode('utf-8')), es_pdf)
+    if not pdf.err:
+        es_pdf.close()
+    else:
+        print(pdf.err)
+
+def save_sheet():
+    from svglib.svglib import svg2rlg
+    from reportlab.graphics import renderPDF, renderPM
+
+    drawing = svg2rlg("file.svg")
+    renderPDF.drawToFile(drawing, "file.pdf")

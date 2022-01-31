@@ -110,6 +110,10 @@ class Character(Combattant):
     shield_cost = models.IntegerField(default=0)
     AP = models.IntegerField(default=0)
     OP = models.IntegerField(default=0)
+    experience_balance = models.IntegerField(default=0)
+    xp_pool = models.IntegerField(default=0)
+    xp_spent = models.IntegerField(default=0)
+    xp_earned = models.IntegerField(default=0)
     score = models.IntegerField(default=0)
     gm_shortcuts = models.TextField(default='', blank=True)
     gm_shortcuts_pdf = models.TextField(default='', blank=True)
@@ -118,6 +122,7 @@ class Character(Combattant):
     occult_fire_power = models.PositiveIntegerField(default=0, blank=True)
     occult = models.CharField(max_length=50, default='', blank=True)
     challenge_value = models.IntegerField(default=0)
+    cast_figure = models.CharField(max_length=256, default='', blank=True)
     path = models.CharField(max_length=256, default='', blank=True)
     stigma = models.CharField(max_length=256, default='', blank=True)
     use_history_creation = models.BooleanField(default=False)
@@ -131,6 +136,7 @@ class Character(Combattant):
     overhead = models.IntegerField(default=0)
     stories_count = models.PositiveIntegerField(default=0)
     balanced = models.BooleanField(default=False)
+    selected = models.BooleanField(default=False, blank=True)
     historical_figure = models.BooleanField(default=False)
     nameless = models.BooleanField(default=False)
     error = models.BooleanField(default=False)
@@ -360,13 +366,14 @@ class Character(Combattant):
         self.add_missing_root_skills()
         self.reset_total()
         self.checkOverhead()
-        self.balanced = (self.life_path_total == self.OP) and (self.OP > 0)
+        self.balanced = (self.life_path_total == self.OP - self.experience_balance) and (self.OP > 0)
         if int(pa_total * 3 + po_total + ba_total + bc_total) % 10:
             self.audit_log("APx3+OP+BA+BC... " + str(pa_total * 3 + po_total + ba_total + bc_total)+" ("+str(self.OP)+")")
             self.audit_log("Lifepath ....... " + str(self.life_path_total))
             self.audit_log("=> Freebies vs Lifepath = "+str(self.life_path_total - (pa_total * 3 + po_total + ba_total + bc_total)))
             self.audit_log("- WP.............. " + str(self.WP_tod_pool))
             self.audit_log("- Custo Value..... " + str(self.charactercusto.value))
+            self.audit_log("- Experience Balance..... " + str(self.experience_balance))
 
             # self.audit_log("- Repartition .... " + str(tod_rep))
             if tod_rep["RA"] == 0:
@@ -1063,7 +1070,7 @@ class Character(Combattant):
             bas.append(ba.to_json())
         rituals = []
         for ritual in self.ritual_set.all().order_by('ritual_ref__path', 'ritual_ref__level'):
-            rituals.append(ritual.ritual_ref.to_json())
+            rituals.append(ritual.to_json())
         k = json.loads(j)
         k["creature"] = "mortal"
         k["date"] = datetime.datetime.now().strftime('%Y%m%d')

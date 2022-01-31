@@ -16,6 +16,11 @@
                 {{form.alias}}
             </div>
             <div class="field_wrapper">
+                {{ form.cast_figure.errors}}
+                <label for="cast_figure">Cast Figure</label>
+                {{form.cast_figure}}
+            </div>
+            <div class="field_wrapper">
                 {{ form.entrance.errors}}
                 <label for="entrance">Entrance</label>
                 {{form.entrance}}
@@ -46,6 +51,31 @@
                 <label for="birthdate">Birthyear</label>
                 {{form.birthdate}}
             </div>
+
+            <div class="field_wrapper">
+                {{ form.experience_balance.errors}}
+                <label for="experience_balance">Experience Balance</label>
+                {{form.experience_balance}}
+            </div>
+            <div class="field_wrapper">
+                {{ form.xp_pool.errors}}
+                <label for="xp_pool">XP Pool</label>
+                {{form.xp_pool}}
+            </div>
+            <div class="field_wrapper">
+                {{ form.xp_spent.errors}}
+                <label for="xp_spent">XP Spent</label>
+                {{form.xp_spent}}
+            </div>
+            <div class="field_wrapper">
+                {{ form.xp_earned.errors}}
+                <label for="xp_earned">XP Earnedr</label>
+                {{form.xp_earned}}
+            </div>
+
+
+
+
             <div class="field_wrapper">
                 {{ form.gender.errors}}
                 <label for="gender">Gender</label>

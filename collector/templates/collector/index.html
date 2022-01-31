@@ -59,9 +59,10 @@
         {% if user.profile.is_gamemaster %}
         <li><span class="pull-down">Adventures</span>
             <ul class="level-2 Epic">
+                {% if campaign.is_fics %}
                 <li><span class="menu-button menu-item" action="conf_details"><i class="action_icon fas fa-globe"></i> Current Epic</span></li>
                 <li><span class="menu-button slug-item" mode="standard" action="epic"><i class="action_icon fas fa-dice"></i> Switch Epic</span>
-                {% if campaign.is_fics %}
+                <li><span class="menu-button menu-item" mode="overlay" action="deck"><i class="action_icon fas fa-images"></i> Epic Deck</span>
                 <li><span class="menu-button menu-item" action="statistics"><i class="fas fa-chart-pie"></i> Statistics</span></li>
 {#                <li><span class="menu-button menu-item" action="gss_update"><i class="fas fa-table"></i> GS Export</span></li>#}
                 <li><span class="menu-button menu-item" action="gss_summary"><i class="fas fa-table"></i> GS PC Summary</span></li>
@@ -107,6 +108,7 @@
                 <li><span class="menu-button menu-item" mode="direct" action="media_pdf_results_equipment-PDF"><i class="action_icon fas fa-file-pdf"></i> FICS Equipment</span></li>
                 <li><span class="menu-button menu-item" mode="direct" action="media_pdf_results_audit-PDF"><i class="action_icon fas fa-file-pdf"></i> Audit Report</span></li>
                 <li><span class="menu-button menu-item" mode="direct" action="media_pdf_results_{{ campaign.epic.shortcut }}-PDF"><i class="action_icon fas fa-file-pdf"></i> Epic export</span></li>
+                <li><span class="menu-button menu-item" mode="direct" action="media_pdf_results_deck-PDF"><i class="action_icon fas fa-file-pdf"></i> Epic Deck</span></li>
                 {% endif %}
             </ul>
         </li>
