@@ -179,6 +179,11 @@
                 {{form.is_locked}}
             </div>
             <div class="field_wrapper">
+                {{ form.incognito.errors}}
+                <label for="incognito">Incognito</label>
+                {{form.incognito}}
+            </div>
+            <div class="field_wrapper">
                 {{ form.historical_figure.errors}}
                 <label for="historical_figure">Historical Figure</label>
                 {{form.historical_figure}}

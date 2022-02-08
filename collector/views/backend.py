@@ -13,6 +13,7 @@ from django.contrib import messages
 from collector.utils.xls_collector import export_to_xls, update_from_xls
 from collector.utils.basic import get_current_config, extract_rules, make_audit_report, make_deck
 from collector.utils.gs_export import update_gss, summary_gss
+from collector.models.sequence import Sequence
 import os
 import json
 
@@ -126,13 +127,48 @@ def bloke_selector(request):
         return JsonResponse(response)
 
 
+def load_sequence(request):
+    context = {'status': 'not ajax'}
+    if request.is_ajax:
+        reference = request.POST["reference"]
+        order = request.POST["order"]
+        sequences = Sequence.objects.filter(reference=reference, order=order)
+        if len(sequences) == 0:
+            context = {'status': 'not found'}
+        else:
+            sequence = sequences.first()
+            data = json.loads(sequence.data)
+            context['status'] = 'data found'
+            context['data'] = data
+    return JsonResponse(context)
+
+
+def save_sequence(request):
+    context = {'status': 'not ajax'}
+    if request.is_ajax:
+        reference = request.POST["reference"]
+        order = request.POST["order"]
+        data = request.POST["data"]
+        sequences = Sequence.objects.filter(reference=reference, order=order)
+        if len(sequences) == 0:
+            sequence = Sequence()
+        else:
+            sequence = sequences.first()
+        sequence.reference = reference
+        sequence.order = 0
+        sequence.data = json.dumps(data, indent=4, sort_keys=True)
+        sequence.save()
+        context['status']='saved'
+    return JsonResponse(context)
+
+
 def epic_deck(request):
     if request.is_ajax:
         campaign = get_current_config(request)
         characters = []
         all = campaign.dramatis_personae.filter(selected=True)
         for c in all:
-            characters.append(json.loads(c.to_jsonFICS()))
+            characters.append(json.loads(c.to_jsonDECK()))
         context = {'data': characters}
         return JsonResponse(context)
     else:

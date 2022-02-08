@@ -11,7 +11,8 @@ from collector.views.investigators import InvestigatorUpdateView
 from collector.views.frontend import index, toggle_public, toggle_spotlight, get_list, add_avatar, \
     get_storyline, conf_details, recalc_avatar, heartbeat, \
     show_todo, pdf_show, wa_export_character, tile_avatar, ghostmark_test, display_sheet, switch_epic, deep_toggle
-from collector.views.backend import export, xls_update, pdf_character, gss_update, gss_summary, pdf_rules, roll_dice, bloke_selector, run_audit, epic_deck, svg_to_pdf
+from collector.views.backend import export, xls_update, pdf_character, gss_update, gss_summary, pdf_rules, roll_dice, \
+    bloke_selector, run_audit, epic_deck, svg_to_pdf, save_sequence, load_sequence
 from collector.views.misc_chart import get_population_statistics, get_keywords
 from django.contrib.auth.views import LogoutView
 from collector.views.user import do_login, do_profile, user_friends, user_foes, user_others, user_persystem
@@ -34,7 +35,6 @@ urlpatterns = [
 
     re_path('^ajax/epic/(?P<slug>[\w+]+)/$', switch_epic, name='switch_epic'),
 
-
     re_path('^ajax/roll_dice/(?P<slug>[\w-]+)/$', roll_dice, name='roll_dice'),
     re_path('^ajax/wa_export/character/(?P<id>\d+)/$', wa_export_character, name='wa_export_character'),
     re_path('^ajax/pdf/character/(?P<id>\d+)/$', pdf_character, name='pdf_character'),
@@ -43,7 +43,7 @@ urlpatterns = [
     re_path('^ajax/conf_details/$', conf_details, name='conf_details'),
     re_path('^ajax/todo/$', show_todo, name='show_todo'),
     re_path('^ajax/build_pdf_rules/$', pdf_rules, name='pdf_rules'),
-    re_path('^ajax/deck/$', epic_deck, name='epic_deck'),
+
     re_path('^api/heartbeat/$', heartbeat, name='heartbeat'),
     re_path('^ajax/statistics/$', get_population_statistics, name='get_popstats'),
     re_path('^api/keywords/$', get_keywords, name='get_keywords'),
@@ -55,16 +55,21 @@ urlpatterns = [
     re_path('^ajax/character/add/bc/(?P<avatar>\d+)/(?P<item>\d+)/$', customize_bc, name='customize_bc'),
     re_path('^ajax/character/del/ba/(?P<avatar>[\d]+)/(?P<item>\d+)/$', customize_ba_del, name='customize_ba_del'),
     re_path('^ajax/character/del/bc/(?P<avatar>\d+)/(?P<item>\d+)/$', customize_bc_del, name='customize_bc_del'),
-    re_path('^ajax/character/pick/skill/(?P<avatar>\d+)/(?P<item>\d+)/(?P<offset>\d+)/$', skill_pick, name='skill_pick'),
+    re_path('^ajax/character/pick/skill/(?P<avatar>\d+)/(?P<item>\d+)/(?P<offset>\d+)/$', skill_pick,
+            name='skill_pick'),
     re_path('^ajax/character/pick/attr/(?P<avatar>\d+)/(?P<item>\w+)/(?P<offset>\d+)/$', attr_pick, name='attr_pick'),
     re_path('^ajax/character/add/weapon/(?P<avatar>[\d]+)/(?P<item>\d+)/$', customize_weapon, name='customize_weapon'),
     re_path('^ajax/character/add/armor/(?P<avatar>[\d]+)/(?P<item>\d+)/$', customize_armor, name='customize_armor'),
-    re_path('^ajax/character/add/shield/(?P<avatar>[\d]+)/(?P<item>\d+)/$', customize_shield,name='customize_shield'),
-    re_path('^ajax/character/add/ritual/(?P<avatar>[\d]+)/(?P<item>\d+)/$', customize_ritual,name='customize_ritual'),
-    re_path('^ajax/character/del/weapon/(?P<avatar>[\d]+)/(?P<item>\d+)/$', customize_weapon_del,name='customize_weapon_del'),
-    re_path('^ajax/character/del/armor/(?P<avatar>[\d]+)/(?P<item>\d+)/$', customize_armor_del,name='customize_armor_del'),
-    re_path('^ajax/character/del/shield/(?P<avatar>[\d]+)/(?P<item>\d+)/$', customize_shield_del, name='customize_shield_del'),
-    re_path('^ajax/character/del/ritual/(?P<avatar>[\d]+)/(?P<item>\d+)/$', customize_ritual_del, name='customize_ritual_del'),
+    re_path('^ajax/character/add/shield/(?P<avatar>[\d]+)/(?P<item>\d+)/$', customize_shield, name='customize_shield'),
+    re_path('^ajax/character/add/ritual/(?P<avatar>[\d]+)/(?P<item>\d+)/$', customize_ritual, name='customize_ritual'),
+    re_path('^ajax/character/del/weapon/(?P<avatar>[\d]+)/(?P<item>\d+)/$', customize_weapon_del,
+            name='customize_weapon_del'),
+    re_path('^ajax/character/del/armor/(?P<avatar>[\d]+)/(?P<item>\d+)/$', customize_armor_del,
+            name='customize_armor_del'),
+    re_path('^ajax/character/del/shield/(?P<avatar>[\d]+)/(?P<item>\d+)/$', customize_shield_del,
+            name='customize_shield_del'),
+    re_path('^ajax/character/del/ritual/(?P<avatar>[\d]+)/(?P<item>\d+)/$', customize_ritual_del,
+            name='customize_ritual_del'),
     re_path('^ajax/character/svg2pdf/(?P<slug>[\w-]+)/$', svg_to_pdf, name='svg_to_pdf'),
     re_path('^ajax/login/$', do_login, name="login"),
     re_path('^ajax/profile/$', do_profile, name="profile"),
@@ -76,5 +81,7 @@ urlpatterns = [
     re_path('^ajax/persystem/$', user_persystem, name="user_persystem"),
     re_path('^ajax/blokes/$', bloke_selector, name="bloke_selector"),
     re_path('^ajax/audit/$', run_audit, name="run_audit"),
-
+    re_path('^ajax/deck/$', epic_deck, name='epic_deck'),
+    re_path('^ajax/deck/save/$', save_sequence, name='save_sequence'),
+    re_path('^ajax/deck/load/$', load_sequence, name='load_sequence'),
 ]

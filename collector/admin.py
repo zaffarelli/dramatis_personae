@@ -96,3 +96,6 @@ admin.site.register(Coc7SkillRef, Coc7SkillRefAdmin)
 from collector.models.coc7_occupation import Coc7Occupation
 from collector.models.coc7_occupation_admin import Coc7OccupationAdmin
 admin.site.register(Coc7Occupation, Coc7OccupationAdmin)
+
+from collector.models.sequence import Sequence, SequenceAdmin
+admin.site.register(Sequence, SequenceAdmin)

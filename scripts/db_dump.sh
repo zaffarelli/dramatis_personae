@@ -60,6 +60,7 @@ python manage.py dumpdata collector.ArmorCusto --format xml --output backup/cust
 python manage.py dumpdata collector.BlessingCurseCusto --format xml --output backup/custom/$1/blessing_curse_custo.xml
 python manage.py dumpdata collector.BeneficeAfflictionCusto --format xml --output backup/custom/$1/benefice_affliction_custo.xml
 python manage.py dumpdata collector.SkillCusto --format xml --output backup/custom/$1/skill_custo.xml
+python manage.py dumpdata collector.Sequence --format xml --output backup/custom/$1/sequence.xml
 
 echo -e "\e[0;35m- Dumping Main Data... (Resulting from miscellaneous pushes)\e[0;m"
 python manage.py dumpdata collector.Campaign --format xml --output backup/custom/$1/campaign.xml

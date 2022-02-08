@@ -1,18 +1,15 @@
 class EpicDeck {
     constructor(data, parent) {
         this.parent = parent;
-        // this.co = collector;
         this.data = data;
         this.init();
-        console.log(data)
     }
 
     init() {
         let me = this;
         me.debug = true;
         me.blank = false;
-        me.initial = true;
-        me.version = "0.9.3";
+        me.version = "1.0.0";
         me.width = parseInt($(me.parent).css("width"), 10) * 0.75;
         me.height = me.width * 1.4;
         me.w = parseInt($(me.parent).css('width'));
@@ -48,48 +45,19 @@ class EpicDeck {
         me.strokedebris_short = "125 5 35 2 3 4 85 9";
         me.x = d3.scaleLinear().domain([0, me.width]).range([0, me.width]);
         me.y = d3.scaleLinear().domain([0, me.height]).range([0, me.height]);
-        me.basex = 1.5;
-        me.basey = 1.5;
+        me.basex = 2;
+        me.basey = 2;
         me.row_max = 18;
         me.delta = 0.15;
         me.cardw = 4;
         me.cardh = 6;
-    }
-
-    // TOOLS ===========================================================================================================
-    formatXml(xml) {
-        let formatted = '';
-        xml = xml.replace(/[\u00A0-\u2666]/g, function (c) {
-            return '&#' + c.charCodeAt(0) + ';';
+        me.initial = true;
+        me.group_colors = ["transparent", "#a22", "#284", "#812", "#435", "#69a", "#aa2", "#a3a", "#8c6", "#6cc"]
+        me.groupdefs = []
+        _.forEach(me.group_colors, function (e, i) {
+            me.groupdefs.push({'num': i, 'stroke': e, 'ox': 100000, 'oy': 100000, 'width': 0, 'height': 0});
         })
-        let reg = /(>)(<)(\/*)/g;
-        /**/
-        xml = xml.replace(reg, '$1\r\n$2$3');
-        let pad = 0;
-        jQuery.each(xml.split('\r\n'), function (index, node) {
-            let indent = 0;
-            if (node.match(/.+<\/\w[^>]*>$/)) {
-                indent = 0;
-            } else if (node.match(/^<\/\w/)) {
-                if (pad != 0) {
-                    pad -= 1;
-                }
-            } else if (node.match(/^<\w[^>]*[^\/]>.*$/)) {
-                indent = 1;
-            } else {
-                indent = 0;
-            }
-
-            let padding = '';
-            for (let i = 0; i < pad; i++) {
-                padding += '  ';
-            }
-
-            formatted += padding + node + '\r\n';
-            pad += indent;
-        });
-
-        return formatted;
+        me.links = []
     }
 
     addButton(num, txt) {
@@ -98,6 +66,24 @@ class EpicDeck {
         let oy = 0.5 * me.stepy;
         let button = me.back.append('g')
             .attr('class', 'buttons do_not_print')
+            .on('mouseover', function (d) {
+                me.svg.select('#button' + num).style("fill", "#fcc");
+            })
+            .on('mouseout', function (d) {
+                me.svg.select('#button' + num).style("fill", "#ccc");
+            })
+            .on('click', function (d) {
+                if (num == 0) {
+                    me.save();
+                } else if (num == 1) {
+                    me.load();
+                } else if (num == 2) {
+                    me.reset();
+                } else if (num == 3) {
+                    $("#d3area").css("display", "none");
+                }
+            })
+        ;
         button.append('rect')
             .attr('id', "button" + num)
             .attr('x', ox + me.stepx * (-0.8))
@@ -109,23 +95,6 @@ class EpicDeck {
             .style('stroke-width', '1pt')
             .attr('opacity', 1.0)
             .style('cursor', 'pointer')
-            .on('mouseover', function (d) {
-                me.svg.select('#button' + num).style("stroke", "#A22");
-            })
-            .on('mouseout', function (d) {
-                me.svg.select('#button' + num).style("stroke", "#111");
-            })
-            .on('click', function (d) {
-                if (num == 0) {
-                    me.saveSVG();
-                } else if (num == 1) {
-                    me.perform(null, 0);
-                } else if (num == 2) {
-                    me.perform(null, 1);
-                } else if (num == 3) {
-                    $("#d3area").css("display", "none");
-                }
-            })
         ;
         button.append('text')
             .attr('x', ox)
@@ -140,65 +109,86 @@ class EpicDeck {
             .style('stroke-width', '0.05pt')
             .attr('opacity', 1.0)
             .text(txt)
-            .on('mouseover', function (d) {
-                me.svg.select('#button' + num).style("stroke", "#A22");
-            })
-            .on('mouseout', function (d) {
-                me.svg.select('#button' + num).style("stroke", "#111");
-            })
-            .on('click', function (d) {
-                if (num == 0) {
-                    me.saveSVG();
-                    // me.createPDF();
-                } else if (num == 1) {
-
-                    me.perform(null, 0);
-                } else if (num == 2) {
-                    me.perform(null, 1);
-
-                } else if (num == 3) {
-                    $("#d3area").css("display", "none");
-                }
-            })
         ;
     }
 
     drawButtons() {
         let me = this;
-        me.addButton(0, 'Save SVG');
-        me.addButton(1, 'Recto');
-        me.addButton(2, 'Verso');
-        // me.addButton(3, 'Close');
+        me.addButton(0, 'Save');
+        me.addButton(1, 'Load');
+        me.addButton(2, 'Reset');
     }
 
-    saveSVG() {
+    save() {
         let me = this;
-        me.svg.selectAll('.do_not_print').attr('opacity', 0);
-        let base_svg = d3.select("#d3area svg").html();
-        let flist = '<style>';
-        for (let f of ['Voltaire']) {
-            flist += '@import url("https://fonts.googleapis.com/css2?family=' + f + '");';
-        }
-        flist += '</style>';
-        let lpage = "";
-        let exportable_svg = '<?xml version="1.0" encoding="ISO-8859-1" ?> \
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"> \
-<svg class="fics_sheet" \
-xmlns="http://www.w3.org/2000/svg" version="1.1" \
-xmlns:xlink="http://www.w3.org/1999/xlink"> \
-' + flist + base_svg + '</svg>';
+        $.ajax({
+            url: 'ajax/deck/save/',
+            type: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            data: {'reference': 'deck_lineup', 'order': 0, 'data': JSON.stringify(me.data)},
+            dataType: 'json',
+            success: function (answer) {
 
-        if (me.page == 0) {
-            lpage = "_recto";
-        } else {
-            lpage = "_verso"
-        }
-        let fname = "epic_deck_" + lpage + ".svg"
-        let nuke = document.createElement("a");
-        nuke.href = 'data:application/octet-stream;base64,' + btoa(me.formatXml(exportable_svg));
-        nuke.setAttribute("download", fname);
-        nuke.click();
-        me.svg.selectAll('.do_not_print').attr('opacity', 1);
+            },
+            error: function (answer) {
+                console.error(me.data);
+            }
+        });
+    }
+
+    load() {
+        let me = this;
+        $.ajax({
+            url: 'ajax/deck/load/',
+            type: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            data: {'reference': 'deck_lineup', 'order': 0},
+            dataType: 'json',
+            success: function (answer) {
+                let data = JSON.parse(answer['data'])
+                _.forEach(me.data, function (e, i) {
+                    _.forEach(data, function (f, j) {
+                        if (e.rid == f.rid) {
+                            e.full_name = f.full_name;
+                            e.idx = f.idx;
+                            e.entrance = f.entrance;
+                            e.alliance = f.alliance;
+                            e.alliance_color1 = f.alliance_color1;
+                            e.alliance_color2 = f.alliance_color2;
+                            e.ox = f.ox;
+                            e.oy = f.oy;
+                            e.selected = f.selected;
+                            e.group = f.group;
+                            e.links = f.links;
+                        }
+                    });
+                });
+                console.log(me.data)
+                me.updateGroup();
+                me.updateCard();
+            },
+            error: function (answer) {
+                console.error(me.data);
+            }
+        });
+    }
+
+    reset() {
+        let me = this;
+        _.forEach(me.data, function (e, i) {
+            e.ox = (e.idx % me.row_max) * (me.cardw + 1) + me.basex;
+            e.oy = Math.floor(e.idx / me.row_max) * (me.cardh + 1) + me.basey;
+            e.selected = false;
+            e.group = 0;
+        });
+        me.updateGroup();
+        me.updateCard();
     }
 
     // LOW LEVEL DRAW METHODS ==========================================================================================
@@ -238,7 +228,12 @@ xmlns:xlink="http://www.w3.org/1999/xlink"> \
                         return me.stepy * (d.oy + y2);
                     }
                 )
-                .style('stroke', stroke)
+                .style('stroke', function (d) {
+                    if (d.selected) {
+                        return "#A22";
+                    }
+                    return stroke;
+                })
                 .style('stroke-width', size + 'pt')
                 .style('stroke-dasharray', dasharray)
                 .style('stroke-linecap', 'round');
@@ -304,12 +299,32 @@ xmlns:xlink="http://www.w3.org/1999/xlink"> \
         }
     }
 
-    drawCircle(radius, dash, x = 0, y = 0, width = 1) {
+    drawCircle(radius, dash, x = 0, y = 0, width = 1, name = undefined, field = undefined) {
         let me = this;
         if (!me.daddy) {
             console.error('Daddy is undefined for drawCircle !')
         } else {
-            me.daddy.append('circle')
+            let group = me.daddy.append('g')
+                .attr("id", function (d) {
+                    if (name != undefined) {
+                        return d["rid"] + "__" + name;
+                    } else {
+                        return ""
+                    }
+
+                })
+                .on("click", function (e, d) {
+                    e.preventDefault()
+                    if (e.ctrlKey) {
+                        if (field != undefined) {
+                            d.group += 1;
+                            d.group = d.group % 10;
+                        }
+                        me.updateCard();
+                    }
+                })
+            ;
+            group.append('circle')
                 .attr('cx', function (d) {
                     return me.stepx * (d.ox + x);
                 })
@@ -318,12 +333,74 @@ xmlns:xlink="http://www.w3.org/1999/xlink"> \
                     }
                 )
                 .attr('r', radius * me.stepx)
-                .style('fill', '#fff')
-                .style('stroke', me.draw_fill)
+                .style('fill', function (d) {
+                    if (field != undefined) {
+                        if (field.startsWith('alliance_color')) {
+                            return d[field];
+                        }
+                    }
+                    return '#fff';
+                })
+                .style('stroke', function (d) {
+                    if (field != undefined) {
+                        if (field == 'group') {
+                            if (d[field] != 0) {
+                                return me.group_colors[d[field]]
+                            }
+                        }
+                    }
+
+                    return me.draw_fill
+                })
                 .style('stroke-dasharray', dash)
                 .style('stroke-width', width + 'pt')
             ;
+            group.append(
+                'text'
+            )
+                .attr('x', function (d) {
+                        return me.stepx * (d.ox + x);
+                    }
+                )
+                .attr('y', function (d) {
+                        return me.stepy * (d.oy + y);
+                    }
+                )
+                .attr('dx', 0)
+                .attr('dy', '4pt')
+                .style('fill', me.draw_fill)
+                .style('stroke', me.draw_stroke)
+                .style('stroke-width', '0.05pt')
+                .style("text-anchor", 'middle')
+                .style("font-size", '10pt')
+                .style("font-family"
+                    ,
+                    me
+                        .base_font
+                )
+
+                .text(function (d) {
+                        if (field != undefined) {
+                            if (field.startsWith('alliance_color') == false) {
+                                return d[field];
+                            }
+                        }
+                    }
+                )
         }
+    }
+
+    buildLinks() {
+        let me = this;
+        me.links = []
+        _.forEach(me.data, function (e, i) {
+            _.forEach(e.links, function (l, j) {
+                me.links.push({
+                    "start": e.rid,
+                    "stop": l
+                });
+            });
+        });
     }
 
     fillList(basex = 0, basey = 0, datasource = "ba", styles = {}) {
@@ -459,7 +536,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink"> \
             .attr('xoverflow', 'visible')
 
             .append('svg:path')
-            .attr('d', 'M 1,-1 l 3,1 -3,1 -1,-1 1,-1 M 5,-1 l  3,1 -3,1 -1,-1 1,-1   Z')
+            .attr('d', 'M -1,-3 L9,0 L-1,3 z ')
             .style('fill', me.draw_fill)
             .style('stroke', me.draw_stroke)
             .style('stroke-width', '0pt')
@@ -496,7 +573,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink"> \
                 })
                 .attr('y2', me.cols * me.stepy)
                 .style('fill', 'transparent')
-                .style('stroke', '#CCC')
+                .style('stroke', '#000')
                 .style('stroke-width', '0.25pt');
             let horizontals = me.back.append('g')
                 .attr('class', 'horizontals')
@@ -513,9 +590,11 @@ xmlns:xlink="http://www.w3.org/1999/xlink"> \
                     return d * me.stepy
                 })
                 .style('fill', 'transparent')
-                .style('stroke', '#CCC')
+                .style('stroke', '#000')
                 .style('stroke-width', '0.25pt');
         }
+        me.groups = me.back.append('g')
+            .attr('class', 'groups');
         me.deck = me.back.append('g')
             .attr('class', 'deck');
     }
@@ -610,8 +689,15 @@ xmlns:xlink="http://www.w3.org/1999/xlink"> \
                 e.idx = idx;
                 e.ox = (idx % me.row_max) * (me.cardw + 1) + me.basex;
                 e.oy = Math.floor(idx / me.row_max) * (me.cardh + 1) + me.basey;
+                e.selected = false;
+                e.group = 0;
+                e.tapped = false;
+                e.links = [];
                 idx++;
             });
+            // me.data[26].links = ["sanjuk_oj_kaval", "neiad_shafeer_almalik"];
+            // me.data[14].links = ["drunn_paarlkretzzer"];
+            me.buildLinks();
             me.initial = false;
         }
         me.card = me.deck.selectAll('.card')
@@ -621,53 +707,252 @@ xmlns:xlink="http://www.w3.org/1999/xlink"> \
         me.card_enter = me.card.append('g')
             .attr('class', 'card draggable')
             .attr('id', function (d) {
-                me.daddy_ox = d.ox;
-                me.daddy_oy = d.oy;
                 return d['rid'];
             });
-        me.daddy = me.card_enter;
-        me.fillCard();
-        me.card_exit = me.card.exit().remove;
+        me.card_exit = me.card.exit().remove();
+        me.updateCard();
 
     }
 
-    fillCard() {
+    drawLinks(){
         let me = this;
+        me.link = me.back.selectAll('.link')
+            .data(me.links)
+            .enter()
+        ;
+        me.link_enter = me.link.append('g')
+            .attr('class', 'link')
+        ;
+        me.link_exit = me.link.exit().remove();
+        me.updateLink();
+    }
+
+    drawGroups() {
+        let me = this;
+        me.group = me.groups.selectAll('.group')
+            .data(me.groupdefs)
+            .enter()
+        ;
+        me.group_enter = me.group.append('g')
+            .attr('class', 'group')
+            .attr('id', function (d) {
+                return "group_" + d['num'];
+            });
+        me.group_exit = me.group.exit().remove();
+        me.updateGroup();
+    }
+
+    updateGroup() {
+        let me = this;
+        me.group_enter.select('g.group_back').remove()
+        me.group_back = me.group_enter.append('g')
+            .attr("class", "group_back");
+        me.group_back.append('rect')
+            .attr("x", function (d) {
+                let olddox = d.ox
+                d.ox = undefined;
+                _.forEach(me.data, function (e, i) {
+                    if (e.group == d["num"]) {
+                        if (d.ox == undefined) {
+                            d.ox = e.ox;
+                        } else if (e.ox < d.ox) {
+                            d.ox = e.ox;
+                        }
+
+                    }
+                })
+                if (d.ox == undefined) {
+                    d.ox = olddox
+                }
+                return (d.ox - 1) * me.stepx;
+            })
+            .attr("y", function (d) {
+                let olddoy = d.oy;
+                d.oy = undefined;
+                _.forEach(me.data, function (e, i) {
+                    if (e.group == d.num) {
+                        if (d.oy == undefined) {
+                            d.oy = e.oy
+                        } else if (e.oy < d.oy) {
+                            d.oy = e.oy;
+                        }
+                    }
+
+                })
+                if (d.oy == undefined) {
+                    d.oy = olddoy
+                }
+                return (d.oy - 1) * me.stepy;
+            })
+            .attr("width", function (d) {
+                let xmax = d.ox;
+                _.forEach(me.data, function (e, i) {
+                    if (e.group == d.num) {
+                        if (e.ox >= xmax) {
+                            xmax = e.ox;
+                        }
+                    }
+                })
+                return (xmax - d.ox + me.cardw + 2) * me.stepx;
+            })
+            .attr("height", function (d) {
+                let ymax = d.oy;
+                _.forEach(me.data, function (e, i) {
+                    if (e.group == d.num) {
+                        if (e.oy >= ymax) {
+                            ymax = e.oy;
+                        }
+                    }
+                })
+                return (ymax - d.oy + me.cardh + 2) * me.stepy;
+            })
+            .attr("rx", "15pt")
+            .style("stroke", function (d) {
+                return d.stroke;
+            })
+            .style("stroke-width", "10pt")
+            .style("fill", function (d) {
+                return d.stroke;
+            })
+            .style("stroke-dasharray", "3 3")
+            .attr("fill-opacity", 0.5)
+        ;
+    }
+
+    updateCard() {
+        let me = this;
+        me.daddy = me.card_enter;
+        me.daddy.attr("tapped", function (d) {
+            return d.tapped;
+        })
         me.daddy.select('g.card_back').remove()
         me.daddy.select('g.card_top').remove()
         me.card_back = me.daddy.append('g')
-            .attr("class", "card_back");
+            .attr("class", "card_back")
+            .attr("tapped", function (d) {
+                return d.tapped;
+            })
+        ;
         me.card_top = me.daddy.append('g')
-            .attr("class", "card_top");
+            .attr("class", "card_top")
+            .attr("tapped", function (d) {
+                return d.tapped;
+            })
+        ;
         me.daddy = me.card_back;
         me.fillCardBack();
         me.daddy = me.card_top;
         me.fillCardTop();
     }
 
+    updateLink(){
+        let me = this;
+        let c1=undefined;
+        let c2=undefined;
+        let offset = 0;
+        me.daddy = me.link_enter;
+        me.daddy.select('g.link_back').remove()
+        me.link_back = me.daddy.append('g')
+            .attr("class", "link_back")
+        ;
+        me.link_back.append('line')
+            .attr('x1',function(d){
+                c1 = _.find(me.data, {rid: d.start});
+                c2 = _.find(me.data, {rid: d.stop});
+                if (Math.abs(c1.ox - c2.ox) < me.cardw ) {
+                    offset = 0
+                }else if (c1.ox - c2.ox - me.cardw < 0){
+                    offset = me.cardw /2 + me.delta;
+                }else{
+                    offset = -(me.cardw /2 + me.delta);
+                }
+                return (offset+ c1.ox + me.cardw/2)*me.stepx;
+            })
+            .attr('y1',function(d){
+                c1 = _.find(me.data, {rid: d.start});
+                c2 = _.find(me.data, {rid: d.stop});
+                if (Math.abs(c1.oy - c2.oy) < me.cardh ) {
+                    offset = 0
+                }else if (c1.oy - c2.oy - me.cardh < 0){
+                    offset = me.cardh /2 + me.delta;
+                }else{
+                    offset = -(me.cardh /2 + me.delta);
+                }
+                return (offset + c1.oy+ me.cardh/2)*me.stepy;
+            })
+            .attr('x2',function(d){
+                c1 = _.find(me.data, {rid: d.start});
+                c2 = _.find(me.data, {rid: d.stop});
+                if (Math.abs(c2.ox - c1.ox ) < me.cardw ) {
+                    offset = 0
+                }else if (c2.ox - c1.ox - me.cardw < 0){
+                    offset = me.cardw /2 + me.delta;
+                } else {
+                    offset = - (me.cardw / 2 + me.delta);
+                }
+                return (offset + c2.ox+ me.cardw/2)*me.stepx;
+            })
+            .attr('y2',function(d){
+                c1 = _.find(me.data, {rid: d.start});
+                c2 = _.find(me.data, {rid: d.stop});
+                if (Math.abs(c1.oy - c2.oy) < me.cardh ) {
+                    offset = 0
+                }else if (c2.oy - c1.oy - me.cardh < 0){
+                    offset = me.cardh /2 + me.delta;
+                }else{
+                    offset = -(me.cardh /2 + me.delta);
+                }
+                return (offset + c2.oy + me.cardh/2)*me.stepy;
+            })
+            .style("stroke","#123")
+
+            .style("stroke-width","3pt")
+            .style("stroke-linecap","round")
+            .attr('marker-end','url(#arrowhead)')
+            .attr("opacity",0.8)
+        ;
+    }
+
+
     fillCardBack() {
         let me = this;
-        me.drawRect(0 - me.delta * 2, 0 - me.delta * 2, me.cardw + 4 * me.delta, me.cardh + 4 * me.delta, "#fff", "#111", 1, "2 1", 1, 10)
-        me.drawLine(0 - me.delta, 0 + me.cardw + me.delta, 0, 0, me.draw_fill, 3);
-        me.drawLine(0 - me.delta, 0 + me.cardw + me.delta, 0 + me.cardh, 0 + 6, me.draw_fill, 3);
-        me.drawLine(0, 0, 0 - me.delta, 0 + 6 + me.delta, me.draw_fill, 3);
-        me.drawLine(0 + me.cardw, 0 + me.cardw, 0 - me.delta, 0 + me.cardh + me.delta, me.draw_fill, 3);
-        me.drawCircle(0.1, "", 0 + me.cardw * 0, 0 + 0 * me.cardh / 5)
-        me.drawCircle(0.1, "", 0 + me.cardw, 0 + me.cardh)
-        me.drawCircle(0.1, "", 0 + me.cardw * 0, 0 + me.cardh)
-        me.drawCircle(0.1, "", 0 + me.cardw, 0 + me.cardh * 0)
-        me.drawText(0 + me.cardw / 2, 0 - 0.07, me.draw_fill, me.shadow_stroke, me.small_font_size * 0.5, "middle", "DE AUTOMATUM LEGIS");
-        me.drawCircle(0.25, "", 0 + me.cardw * 0, 0 + 6 * me.cardh / 10, 2)
-        me.drawCircle(0.25, "", 0 + me.cardw * 0, 0 + 7 * me.cardh / 10, 2)
-        me.drawCircle(0.25, "", 0 + me.cardw * 0, 0 + 8 * me.cardh / 10, 2)
+        console.log("Card is actually " + me.daddy.attr("tapped"))
+        if (me.daddy.attr("tapped") == 'true') {
+            console.log("tapped card")
+            me.drawRect(0 - me.delta * 2, 0 - me.delta * 2, me.cardw + 4 * me.delta, me.cardh + 4 * me.delta, "#fff", "#111", 1, "2 1", 1, 10)
+            me.drawRect(0, 0, me.cardw, me.cardh, "#828", "#111", 1, "", 1, 5)
+        } else {
+            console.log("visible card")
+            me.drawRect(0 - me.delta * 2, 0 - me.delta * 2, me.cardw + 4 * me.delta, me.cardh + 4 * me.delta, "#fff", "#111", 1, "2 1", 1, 10)
+            me.drawLine(0 - me.delta, 0 + me.cardw + me.delta, 0, 0, me.draw_fill, 3);
+            me.drawLine(0 - me.delta, 0 + me.cardw + me.delta, 0 + me.cardh, 0 + 6, me.draw_fill, 3);
+            me.drawLine(0, 0, 0 - me.delta, 0 + 6 + me.delta, me.draw_fill, 3);
+            me.drawLine(0 + me.cardw, 0 + me.cardw, 0 - me.delta, 0 + me.cardh + me.delta, me.draw_fill, 3);
+
+            me.drawCircle(0.1, "", 0 + me.cardw * 0, 0 + 0 * me.cardh / 5)
+            me.drawCircle(0.1, "", 0 + me.cardw, 0 + me.cardh)
+            me.drawCircle(0.1, "", 0 + me.cardw * 0, 0 + me.cardh)
+            me.drawCircle(0.1, "", 0 + me.cardw, 0 + me.cardh * 0)
+            me.drawCircle(0.1, "", 0 + me.cardw, 17 * me.cardh / 20, 1, '', 'alliance_color1')
+            me.drawCircle(0.1, "", 0 + me.cardw, 18 * me.cardh / 20, 1, '', 'alliance_color2')
+
+            me.drawText(0 + me.cardw / 2, 0 - 0.07, me.draw_fill, me.shadow_stroke, me.small_font_size * 0.5, "middle", "DE AUTOMATUM LEGIS");
+            me.drawCircle(0.25, "", 0 + me.cardw * 0, 0 + 1 * me.cardh / 10, 2, 'idx', 'idx')
+            me.drawCircle(0.25, "", 0 + me.cardw * 0, 0 + 7 * me.cardh / 10, 2,)
+            me.drawCircle(0.25, "", 0 + me.cardw * 0, 0 + 8 * me.cardh / 10, 2, 'group', 'group')
+        }
     }
 
     fillCardTop() {
         let me = this;
-        me.drawText(0 + me.cardw / 2, 0 + 0.5, me.draw_fill, me.shadow_stroke, me.medium_font_size * 0.8, "middle", "__full_name");
-        me.drawText(0 + me.cardw / 2, 0 + 1.0, me.draw_fill, me.shadow_stroke, me.medium_font_size * 0.8, "middle", "__alliance");
-        me.drawText(0 + me.cardw / 2, 0 + 5.8, me.draw_fill, me.shadow_stroke, me.small_font_size, "middle", "__entrance");
-        me.fillPicture(0, 0, "rid");
+        if (me.daddy.attr("tapped") == 'true') {
+
+        } else {
+            me.drawText(0 + me.cardw / 2, 0 + 0.5, me.draw_fill, me.shadow_stroke, me.medium_font_size * 0.8, "middle", "__full_name");
+            me.drawText(0 + me.cardw / 2, 0 + 1.0, me.draw_fill, me.shadow_stroke, me.medium_font_size * 0.8, "middle", "__alliance");
+            me.drawText(0 + me.cardw / 2, 0 + 5.8, me.draw_fill, me.shadow_stroke, me.small_font_size, "middle", "__entrance");
+            me.fillPicture(0, 0, "rid");
+        }
     }
 
     zoomActivate() {
@@ -675,35 +960,38 @@ xmlns:xlink="http://www.w3.org/1999/xlink"> \
         me.zoom = d3.zoom()
             .scaleExtent([0.25, 4])
             .on('zoom', function (event) {
+                // if (event.sourceEvent.altKey) {
                 me.svg.attr('transform', event.transform)
+                // }
             });
         me.vis.call(me.zoom);
     }
 
     dragActivate() {
         let me = this;
-        console.log("drag activate")
         me.drag = d3.drag();
         me.drag
             .on("start", function (e, d) {
-                // d.ox += e.dx;
-                // d.oy += e.dy;
-                // d.ox = Math.floor(d.ox / me.stepx)
-                // d.oy = Math.floor(d.oy / me.stepy)
-
-                console.log("Start")
+                d.selected = true
+                me.updateCard();
             })
             .on("drag", function (e, d) {
-                d.ox = d.ox + Math.floor(e.dx/ me.stepx);
-                d.oy = d.oy + Math.floor(e.dy/ me.stepy);
-                me.fillCard();
-                console.log("Dragging")
+                d.ox = d.ox + e.dx / me.stepx;
+                d.oy = d.oy + e.dy / me.stepy;
+                me.updateCard();
             })
             .on("end", function (e, d) {
-                console.log("Stop")
-                d.ox = d.ox + Math.floor(e.dx/ me.stepx);
-                d.oy = d.oy + Math.floor(e.dy/ me.stepy);
-                me.fillCard();
+                d.ox = Math.round(d.ox);
+                d.oy = Math.round(d.oy);
+                if (d.selected == true) {
+                    d.tapped = false;
+                    console.log("yo")
+                }
+                d.selected = false;
+                console.log("untap")
+                me.updateGroup();
+                me.updateCard();
+                me.updateLink();
             })
         ;
         me.svg.selectAll(".draggable").call(me.drag);
@@ -712,13 +1000,11 @@ xmlns:xlink="http://www.w3.org/1999/xlink"> \
 
     perform() {
         let me = this;
-        me.drawWatermark();
-        // if (me.data['condition'] == "DEAD") {
-        //     me.decorationText(12, 16, 0, 'middle', me.logo_font, me.fat_font_size * 3, me.shadow_fill, me.shadow_stroke, 0.5, "DEAD", me.back, 0.25);
-        // }
-        me.initial = true;
 
+        me.drawWatermark();
+        me.drawGroups();
         me.drawCards();
+        me.drawLinks();
 
         me.drawButtons();
         me.zoomActivate();

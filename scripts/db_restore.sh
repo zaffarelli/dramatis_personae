@@ -65,6 +65,7 @@ python manage.py loaddata backup/custom/cyberware.xml
 python manage.py loaddata backup/custom/spaceship.xml
 python manage.py loaddata backup/custom/bloke.xml
 python manage.py loaddata backup/custom/loot.xml
+python manage.py loaddata backup/custom/sequence.xml
 
 echo -e "\e[0;35m- Restoring Systems & Orbital Items\e[0;m"
 python manage.py loaddata backup/custom/system.xml

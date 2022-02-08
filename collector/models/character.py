@@ -21,6 +21,7 @@ from operator import itemgetter
 
 logger = logging.getLogger(__name__)
 
+
 # DRAMA_SEATS = (
 #     ('11-foe', 'Foe'),
 #     ('10-enemy', 'Enemy'),
@@ -139,6 +140,7 @@ class Character(Combattant):
     selected = models.BooleanField(default=False, blank=True)
     historical_figure = models.BooleanField(default=False)
     nameless = models.BooleanField(default=False)
+    incognito = models.BooleanField(default=False, blank=True)
     error = models.BooleanField(default=False)
     ranking = models.IntegerField(default=0, blank=True)
     group_color = ColorField(default='#888888', blank=True)
@@ -357,7 +359,6 @@ class Character(Combattant):
             bc_total += bc.blessing_curse_ref.value
         bl.append("")
 
-
         fs_fics7.check_secondary_attributes(self)
         self.handle_wildcards(all_wp_roots)
         self.charactercusto.save()
@@ -368,9 +369,11 @@ class Character(Combattant):
         self.checkOverhead()
         self.balanced = (self.life_path_total == self.OP - self.experience_balance) and (self.OP > 0)
         if int(pa_total * 3 + po_total + ba_total + bc_total) % 10:
-            self.audit_log("APx3+OP+BA+BC... " + str(pa_total * 3 + po_total + ba_total + bc_total)+" ("+str(self.OP)+")")
+            self.audit_log(
+                "APx3+OP+BA+BC... " + str(pa_total * 3 + po_total + ba_total + bc_total) + " (" + str(self.OP) + ")")
             self.audit_log("Lifepath ....... " + str(self.life_path_total))
-            self.audit_log("=> Freebies vs Lifepath = "+str(self.life_path_total - (pa_total * 3 + po_total + ba_total + bc_total)))
+            self.audit_log("=> Freebies vs Lifepath = " + str(
+                self.life_path_total - (pa_total * 3 + po_total + ba_total + bc_total)))
             self.audit_log("- WP.............. " + str(self.WP_tod_pool))
             self.audit_log("- Custo Value..... " + str(self.charactercusto.value))
             self.audit_log("- Experience Balance..... " + str(self.experience_balance))
@@ -591,7 +594,8 @@ class Character(Combattant):
         sr = []
         for x in ss:
             sr.append(x.skill_ref)
-        all = SkillRef.objects.exclude(is_root=True).exclude(is_wildcard=True).order_by('is_speciality', 'linked_to', 'grouping', 'reference')
+        all = SkillRef.objects.exclude(is_root=True).exclude(is_wildcard=True).order_by('is_speciality', 'linked_to',
+                                                                                        'grouping', 'reference')
         for s in all:
             if s in sr:
                 self.skills_options_not.append(s)
@@ -951,9 +955,9 @@ class Character(Combattant):
             SP_grid["enc"] += a.armor_ref.encumbrance
         logger.info(SP_grid)
 
-        if len(self.armor_set.all())==0:
+        if len(self.armor_set.all()) == 0:
             self.audit_log("Warning: character has no armor")
-        if len(self.weapon_set.all())==0:
+        if len(self.weapon_set.all()) == 0:
             self.audit_log("Warning: character has no weapon")
 
     def fencing_league_special(self):
@@ -1084,6 +1088,19 @@ class Character(Combattant):
         k["BC"] = bcs
         k["BA"] = bas
         k["shortcuts"] = self.calculate_shortcuts()
+        j = json.dumps(k)
+        return j
+
+    def to_jsonDECK(self):
+        if self.incognito:
+            k = {'full_name': self.alias, 'alliance': '?',
+                 'alliance_color1': '#ccc', 'alliance_color2': '#ccc',
+                 'entrance': self.entrance,
+                 'rid': self.rid}
+        else:
+            k = {'full_name': self.full_name, 'alliance': self.alliance_ref.reference,
+                 'alliance_color1': self.alliance_ref.color_front, 'alliance_color2': self.alliance_ref.color_back,
+                 'entrance': self.entrance, 'rid': self.rid}
         j = json.dumps(k)
         return j
 
