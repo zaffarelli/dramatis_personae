@@ -181,9 +181,6 @@ def svg_to_pdf(request, slug):
     if request.is_ajax():
         pdf_name = os.path.join(settings.MEDIA_ROOT, 'pdf/results/' + request.POST["pdf_name"])
         svg_name = os.path.join(settings.MEDIA_ROOT, 'pdf/results/' + request.POST["svg_name"])
-
-        # pdf_name = "./"+
-        # svg_name = "./"+request.POST["svg_name"]
         svgtxt = request.POST["svg"]
         with open(svg_name, "w") as f:
             f.write(svgtxt)

@@ -9,6 +9,7 @@ from django.contrib import admin
 from collector.models.character import Character
 from datetime import datetime
 
+
 # LIFEPATH_CATEGORY = (
 #     ('0', "Birthright"),
 #     ('10', "Upbringing"),
@@ -83,6 +84,7 @@ class TourOfDutyRef(models.Model):
         if self.is_custom:
             self.value = self.AP * 3 + self.OP
         else:
+            self.fix75()
             self.AP = self.PA_STR + self.PA_CON + self.PA_BOD + self.PA_MOV + self.PA_INT + self.PA_WIL + self.PA_TEM + self.PA_PRE + self.PA_REF + self.PA_TEC + self.PA_AGI + self.PA_AWA + self.OCC_LVL - self.OCC_DRK
             self.OP = 0
             texts = []
@@ -128,7 +130,45 @@ class TourOfDutyRef(models.Model):
             self.description = " ".join(texts)
             self.value = (self.AP + self.balance_AP) * 3 + (self.OP + self.balance_OP)
             self.check_value()
+
         self.need_fix = False
+
+    def fix75(self):
+        """ Fixing skills for the 7.5 version of the rules
+        """
+        changes = [
+            {'skill': 'Surveillance', 'mixes_with': 'Security'},
+            {'skill': 'Oratory', 'mixes_with': 'Persuasion'},
+            {'skill': 'Cryptography', 'mixes_with': 'Security'},
+            {'skill': 'Bribery', 'mixes_with': 'Knavery'},
+            {'skill': 'Local Expert (undefined)', 'mixes_with': 'Lore (undefined)'}
+        ]
+        for s in self.skillmodificator_set.all():
+            for c in changes:
+                if c['skill'] == s.skill_ref.reference:
+                    print("found skill", s.skill_ref)
+                    found = False
+                    for m in self.skillmodificator_set.all():
+                        if c['mixes_with'] == m.skill_ref.reference:
+                            print("found mixes_with:", s.skill_ref)
+                            print(" --- skill value is ........ ", s.value)
+                            print(" --- mixes_with value is ... ", m.value)
+                            m.value += s.value
+                            s.value = 0
+                            m.save()
+                            s.save()
+                            s.delete()
+                            found = True
+                    if not found:
+                        from collector.models.skill import SkillModificator, SkillRef
+                        m = SkillModificator()
+                        m.tour_of_duty_ref = self
+                        m.value = s.value
+                        m.skill_ref = SkillRef.objects.get(reference=c['mixes_with'])
+                        m.save()
+                        s.delete()
+
+        print("done")
 
     def check_value(self):
         self.valid = False

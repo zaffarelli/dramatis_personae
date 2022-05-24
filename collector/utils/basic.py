@@ -303,6 +303,7 @@ def make_audit_report(campaign):
     else:
         print(pdf.err)
 
+
 def make_deck(all):
     from django.utils import timezone
     context = {}
@@ -320,6 +321,8 @@ def make_deck(all):
         es_pdf.close()
     else:
         print(pdf.err)
+
+
 
 def save_sheet():
     from svglib.svglib import svg2rlg

@@ -127,12 +127,10 @@ class Character(Combattant):
     path = models.CharField(max_length=256, default='', blank=True)
     stigma = models.CharField(max_length=256, default='', blank=True)
     use_history_creation = models.BooleanField(default=False)
-    # use_only_entrance = models.BooleanField(default=False)
     picture = models.CharField(max_length=1024,
                                default='https://drive.google.com/open?id=15hdubdMt1t_deSXkbg9dsAjWi5tZwMU0', blank=True)
     alliance_picture = models.CharField(max_length=256, default='', blank=True)
-    # on_save_re_roll_attributes = models.BooleanField(default=False)
-    # on_save_re_roll_skills = models.BooleanField(default=False)
+
     life_path_total = models.IntegerField(default=0)
     overhead = models.IntegerField(default=0)
     stories_count = models.PositiveIntegerField(default=0)
@@ -153,6 +151,10 @@ class Character(Combattant):
     stories = models.TextField(max_length=1024, default='', blank=True)
     todo_list = models.TextField(default='', blank=True)
 
+    azurites = models.PositiveIntegerField(default=0, blank=True)
+    diamonds = models.PositiveIntegerField(default=0, blank=True)
+    rubies = models.PositiveIntegerField(default=0, blank=True)
+
     skills_options = []
     ba_options = []
     bc_options = []
@@ -168,6 +170,9 @@ class Character(Combattant):
     armor_options_not = []
     shield_options = []
     shield_options_not = []
+
+
+
 
     @property
     def ghostmark_data(self):
@@ -488,13 +493,19 @@ class Character(Combattant):
             if self.birthdate < 1000:
                 self.birthdate = conf.epic.era - self.birthdate
                 self.age = conf.epic.era - self.birthdate
+        logger.info('Update game parameters')
         self.update_game_parameters()
+        logger.info('Fencing league Special')
         self.fencing_league_special()
+        logger.info('Occult Special')
         self.occult_special()
+        logger.info('Fix 7.5')
+        self.fix75()
         if self.full_name == self.rid:
             self.audit_log("Name is a RID. Everything has to be done on this character.")
         # NPC fix
         if self.use_history_creation:
+            logger.info('rebuild from lifepath')
             self.rebuild_from_lifepath()
         else:
             self.rebuild_free_form()
@@ -523,6 +534,47 @@ class Character(Combattant):
         self.need_fix = False
         logger.info(f'    => Done fixing ...: {self.full_name} NeedFIX:{self.need_fix}')
         # logger.info(self.audit)
+
+    def fix75(self):
+        """ Fixing skills for the 7.5 version of the rules
+        """
+        changes = [
+            {'skill': 'Surveillance', 'mixes_with': 'Security'},
+            {'skill': 'Oratory', 'mixes_with': 'Persuasion'},
+            {'skill': 'Cryptography', 'mixes_with': 'Security'},
+            {'skill': 'Bribery', 'mixes_with': 'Knavery'},
+            {'skill': 'Local Expert (undefined)', 'mixes_with': 'Lore (undefined)'}
+        ]
+        logger.debug(f"Starting Fix 7.5")
+        for s in self.charactercusto.skillcusto_set.all():
+            logger.debug(f"SkillCustos: {len(self.charactercusto.skillcusto_set.all())}")
+            for c in changes:
+                if c['skill'] == s.skill_ref.reference:
+                    logger.debug(f"Found skill: {s.skill_ref}")
+                    found = False
+                    for m in self.charactercusto.skillcusto_set.all():
+                        if c['mixes_with'] == m.skill_ref.reference:
+                            logger.debug(f"found mixes_with: {m.skill_ref}")
+                            logger.debug(f" --- skill value is ........ {s.value}" )
+                            logger.debug(f" --- mixes_with value is ... {m.value}")
+                            m.value += s.value
+                            s.value = 0
+                            m.save()
+                            s.save()
+                            s.delete()
+                            found = True
+                    if not found:
+                        from collector.models.skill import SkillCusto, SkillRef
+                        m = SkillCusto()
+                        m.character_custo = self.charactercusto
+                        m.value = s.value
+                        m.skill_ref = SkillRef.objects.get(reference=c['mixes_with'])
+                        m.save()
+                        s.delete()
+
+        logger.info("done")
+
+
 
     def update_challenge(self):
         res = ''
@@ -556,6 +608,7 @@ class Character(Combattant):
         self.gm_shortcuts_pdf = ', '.join(shortcuts_pdf_clean)
         logger.warning(self.gm_shortcuts_pdf)
         result = sorted(shortcuts_json, key=itemgetter('score'), reverse=True)
+        # print(result)
         return result
 
     def refresh_options(self, options, options_not, custo_set, ref_type, ref_class):
@@ -953,7 +1006,7 @@ class Character(Combattant):
             if a.armor_ref.right_arm:
                 SP_grid["RA"] += a.armor_ref.stopping_power
             SP_grid["enc"] += a.armor_ref.encumbrance
-        logger.info(SP_grid)
+        # logger.info(SP_grid)
 
         if len(self.armor_set.all()) == 0:
             self.audit_log("Warning: character has no armor")
@@ -1038,10 +1091,11 @@ class Character(Combattant):
         idx2 = 0
         skills_list = []
         for skill in self.skill_set.order_by('skill_ref'):
-            skills_list.append(
-                {'skill': skill.skill_ref.reference, 'value': skill.value, 'is_root': skill.skill_ref.is_root,
-                 'is_speciality': skill.skill_ref.is_speciality, 'idx1': 0, 'idx2': 0})
-        for skill in SkillRef.objects.all().order_by('reference'):
+            if skill.skill_ref.deprecated == False:
+                skills_list.append(
+                    {'skill': skill.skill_ref.reference, 'value': skill.value, 'is_root': skill.skill_ref.is_root,
+                        'is_speciality': skill.skill_ref.is_speciality, 'idx1': 0, 'idx2': 0})
+        for skill in SkillRef.objects.exclude(deprecated=True).order_by('reference'):
             if skill.reference not in [value for elem in skills_list for value in elem.values()]:
                 if not skill.is_speciality:
                     skills_list.append({'skill': skill.reference, 'value': '-', 'is_root': skill.is_root,

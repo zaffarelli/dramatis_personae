@@ -1,8 +1,3 @@
-/*
-     ╔╦╗╔═╗  ╔═╗┌─┐┬  ┬  ┌─┐┌─┐┌┬┐┌─┐┬─┐
-      ║║╠═╝  ║  │ ││  │  ├┤ │   │ │ │├┬┘
-     ═╩╝╩    ╚═╝└─┘┴─┘┴─┘└─┘└─┘ ┴ └─┘┴└─
-*/
 class Collector {
     constructor(ac, op, sc) {
         let me = this;
@@ -104,18 +99,18 @@ class Collector {
                 let w = window.open(url, '_blank');
                 w.focus();
             }
-            console.debug("menu-item " + action_tag + " has been clicked..."+url+' '+mode_tag);
+            console.debug("menu-item " + action_tag + " has been clicked..." + url + ' ' + mode_tag);
             $.ajax({
                 url: url,
                 success: function (answer) {
                     if (mode_tag == 'overlay') {
                         $("#d3area").css('display', 'block');
                         console.log(action_tag)
-                        if (action_tag == 'deck'){
+                        if (action_tag == 'deck') {
                             console.log("Epic Deck !!");
                             let epicdeck = new EpicDeck(answer.data, '#d3area');
                             epicdeck.perform();
-                        }else {
+                        } else {
                             let starmap = new Jumpweb(answer.data, '#d3area');
                             starmap.perform();
                         }
@@ -164,10 +159,19 @@ class Collector {
                 url: 'ajax/' + action_tag + '/' + x + '/',
                 success: function (answer) {
                     if (mode_tag == 'overlay') {
-                        $("#d3area").css('display', 'block');
-                        let starmap = new OrbitalMap(answer.data, '#d3area');
-                        starmap.perform();
-                        me.rebootLinks();
+                        if (action_tag == 'sessionsheet') {
+                            $("#d3area").css('display', 'block');
+                            let s = JSON.parse(answer.settings);
+                            let d = JSON.parse(answer.data);
+                            let session_sheet = new SessionSheets(s, '#d3area', me);
+                            session_sheet.perform(d);
+                            me.rebootLinks();
+                        } else {
+                            $("#d3area").css('display', 'block');
+                            let starmap = new OrbitalMap(answer.data, '#d3area');
+                            starmap.perform();
+                            me.rebootLinks();
+                        }
                     } else {
                         $('.mosaic').html(answer.mosaic);
                     }
@@ -228,9 +232,9 @@ class Collector {
             e.stopPropagation();
             console.log('Charsel click');
             let key = $(this).attr('ref');
-            console.log('key:'+key);
+            console.log('key:' + key);
             $.ajax({
-                url: 'ajax/deep_toggle/selected/' + key  +'/',
+                url: 'ajax/deep_toggle/selected/' + key + '/',
                 success: function (answer) {
                     console.log(answer);
                     me.prepareAjax();
@@ -374,6 +378,7 @@ class Collector {
                 url: 'ajax/sheet/avatar/' + x + '/',
                 success: function (answer) {
                     $("#d3area").css('display', 'block');
+
                     let s = JSON.parse(answer.settings);
                     let d = JSON.parse(answer.data);
                     me.d3 = new FICSSheet(s, "#d3area", me);

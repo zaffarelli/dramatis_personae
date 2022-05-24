@@ -125,7 +125,7 @@ def update_gear(sender, instance, conf=None, **kwargs):
 
 class GearAdmin(admin.ModelAdmin):
     ordering = ('category', 'name', 'variant', 'price')
-    list_display = ['name', 'variant', 'category', 'power_storage','power_consumption','quality', 'availability', 'tech_level', 'price',
+    list_display = ['name', 'variant', 'category', 'power_storage','power_consumption','quality', 'quantity', 'unit', 'availability', 'tech_level', 'price',
                     'magna_carta_entry', 'reference']
     search_fields = ('name', 'variant', 'description')
     list_filter = ('tech_level', 'category', 'magna_carta_entry', 'origin', 'quality', 'reference')

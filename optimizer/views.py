@@ -18,8 +18,6 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-
-
 def run_duel(request, slug=None):
     slug = slug_decode(slug)
     try:
@@ -33,12 +31,9 @@ def run_duel(request, slug=None):
         attackers = Character.objects.filter(fencing_league=True)
         a = roll(attackers.count()) - 1
         attacker = attackers[a].id
-        # print(f'Attacker: {attacker}')
         defenders = Character.objects.filter(fencing_league=True).exclude(id=attacker)
         d = roll(defenders.count()) - 1
         defender = defenders[d].id
-        # print(f'Defender: {defender}')
-
     tori = Character.objects.get(pk=attacker)
     uke = Character.objects.get(pk=defender)
     duel = Duel(tori, uke)

@@ -1,23 +1,57 @@
-<center>
+
 {%load fics_filters%}
-<table class='wounds'>
+<center>
+<table class="healthbar">
     <tr>
-        <td>{{c.status}}</td>
-        <td class='stats'>EP</td>
-        <td class='stats'>EX</td>
-        <td class='stats'>EB</td>
-        <td class='armor'>{{c.HEAD.SP}}</td>
-        <th>&nbsp;</th>
-        <th>&nbsp;</th>
+        <th>{{c.status}}</th>
+        <th class='stats'>EP</th>
+        <th class='stats'>EX</th>
+        <th class='stats'>EB</th>
+        <th class='stats'>E1</th>
+        <th class='stats'>E2</th>
+        <th class='stats'>E3</th>
         <th>&nbsp;</th>
         <td style='background-color:{{c.color}}; color:black;'>{{c.who}}</td>
     </tr>
     <tr>
-        <td class='stats neg' title='Penalties'>-{{c.circumstance_modifiers}}</td>
+        <td class='stats neg' title='Penalties'>{{c.circumstance_modifiers}}</td>
         <td class='stats'>{{c.expertise_pool}}</td>
         <td class='stats'>{{c.expertise}}</td>
         <td class='stats'>{{c.expertise_bonus}}</td>
-        <td class="wnd">{{c.HEAD.wounds.medium|wound|safe}}</td>
+        <td class='stats'>{{c.expertise_1}}</td>
+        <td class='stats'>{{c.expertise_2}}</td>
+        <td class='stats'>{{c.expertise_3}}</td>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+    </tr>
+    <tr>
+        <th> </th>
+        <th> </th>
+        <th> </th>
+        <th> </th>
+        <th> </th>
+        <th> </th>
+        <th> </th>
+        <th> </th>
+        <th> </th>
+    </tr>
+    <tr>
+        <th> </th>
+        <th> </th>
+        <th> </th>
+        <th> </th>
+        <td class='armor'>{{c.HEAD.SP}}</td>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+        <th> </th>
+    </tr>
+    <tr>
+        <th> </th>
+        <th> </th>
+        <th> </th>
+        <th> </th>
+        <td class="wnd medium">{{c.HEAD.wounds.medium|wound|safe}}</td>
         <th>&nbsp;</th>
         <th>&nbsp;</th>
         <th>&nbsp;</th>
@@ -25,61 +59,49 @@
     </tr>
 
     <tr>
-        <td class='armor disabled'>&nbsp;</td>
+        <th class='armor disabled'>&nbsp;</th>
         <th>&nbsp;</th>
         <td class='armor'>{{c.LEFT_ARM.SP}}</td>
         <th>&nbsp;</th>
-        <td class="wnd">{{c.HEAD.wounds.severe|wound|safe}}</td>
+        <td class="wnd severe">{{c.HEAD.wounds.severe|wound|safe}}</td>
         <th>&nbsp;</th>
         <td class='armor'>{{c.RIGHT_ARM.SP}}</td>
         <th>&nbsp;</th>
-        <td class='armor disabled'>&nbsp;</td>
+        <th class='armor disabled'>&nbsp;</th>
     </tr>
 
     <tr>
-        <td class='wnd disabled'>&nbsp;</td>
+        <th class='wnd disabled'>&nbsp;</th>
         <th>&nbsp;</th>
-        <td class='wnd'>{{c.LEFT_ARM.wounds.medium|wound|safe}}</td>
+        <td class='wnd medium'>{{c.LEFT_ARM.wounds.medium|wound|safe}}</td>
         <th>&nbsp;</th>
         <th>&nbsp;</th>
         <th>&nbsp;</th>
-        <td class='wnd'>{{c.RIGHT_ARM.wounds.medium|wound|safe}}</td>
+        <td class='wnd medium'>{{c.RIGHT_ARM.wounds.medium|wound|safe}}</td>
         <th>&nbsp;</th>
-        <td class='wnd disabled'>&nbsp;</td>
+        <th class='wnd disabled'>&nbsp;</th>
     </tr>
 
     <tr>
-        <td class='wnd disabled'>&nbsp;</td>
+        <th class='wnd disabled'>&nbsp;</th>
         <th>&nbsp;</th>
-        <td class='wnd'>{{c.LEFT_ARM.wounds.severe|wound|safe}}</td>
+        <td class='wnd severe'>{{c.LEFT_ARM.wounds.severe|wound|safe}}</td>
         <th>&nbsp;</th>
         <td class='armor'>{{c.TORSO.SP}}</td>
         <th>&nbsp;</th>
-        <td class='wnd'>{{c.RIGHT_ARM.wounds.severe|wound|safe}}</td>
+        <td class='wnd severe'>{{c.RIGHT_ARM.wounds.severe|wound|safe}}</td>
         <th>&nbsp;</th>
-        <td class='wnd disabled'>&nbsp;</td>
+        <th class='wnd disabled'>&nbsp;</th>
     </tr>
 
     <tr>
+        <th>SH</th>
         <th>&nbsp;</th>
         <th>&nbsp;</th>
         <th>&nbsp;</th>
-        <th>&nbsp;</th>
-        <td class='wnd'>{{c.TORSO.wounds.medium|wound|safe}}</td>
-        <th>&nbsp;</th>
+        <td class='wnd medium'>{{c.TORSO.wounds.medium|wound|safe}}</td>
         <th>&nbsp;</th>
         <th>&nbsp;</th>
-        <th>&nbsp;</th>
-    </tr>
-
-    <tr>
-        <td class='shield' title="Shield Maximum Threshold">{{c.shield.max}}</td>
-        <th>&nbsp;</th>
-        <td class='armor'>{{c.LEFT_LEG.SP}}</td>
-        <th>&nbsp;</th>
-        <td class='wnd'>{{c.TORSO.wounds.severe|wound|safe}}</td>
-        <th>&nbsp;</th>
-        <td class='armor'>{{c.RIGHT_LEG.SP}}</td>
         <th>&nbsp;</th>
         <th>&nbsp;</th>
     </tr>
@@ -87,11 +109,23 @@
     <tr>
         <td class='shield' title="Shield Remaining Charges">{{c.shield.charges}}</td>
         <th>&nbsp;</th>
-        <td class='wnd'>{{c.LEFT_LEG.wounds.medium|wound|safe}}</td>
+        <td class='armor'>{{c.LEFT_LEG.SP}}</td>
+        <th>&nbsp;</th>
+        <td class='wnd severe'>{{c.TORSO.wounds.severe|wound|safe}}</td>
+        <th>&nbsp;</th>
+        <td class='armor'>{{c.RIGHT_LEG.SP}}</td>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+    </tr>
+
+    <tr>
+        <td class='shield' title="Shield Maximum Threshold">{{c.shield.max}}</td>
+        <th>&nbsp;</th>
+        <td class='wnd medium'>{{c.LEFT_LEG.wounds.medium|wound|safe}}</td>
         <th>&nbsp;</th>
         <th>&nbsp;</th>
         <th>&nbsp;</th>
-        <td class='wnd'>{{c.RIGHT_LEG.wounds.medium|wound|safe}}</td>
+        <td class='wnd' medium>{{c.RIGHT_LEG.wounds.medium|wound|safe}}</td>
         <td colspan=2 rowspan=2 class='hp'><span class='large'>{{c.hit_points}}</span> /{{c.hp_max}} hp</td>
 
     </tr>
@@ -99,11 +133,11 @@
     <tr>
         <td class='shield' title="Shield Minimum Threshold">{{c.shield.min}}</td>
         <th>&nbsp;</th>
-        <td class='wnd'>{{c.LEFT_LEG.wounds.severe|wound|safe}}</td>
+        <td class='wnd severe'>{{c.LEFT_LEG.wounds.severe|wound|safe}}</td>
         <th>&nbsp;</th>
         <th>&nbsp;</th>
         <th>&nbsp;</th>
-        <td class='wnd'>{{c.RIGHT_LEG.wounds.severe|wound|safe}}</td>
+        <td class='wnd severe'>{{c.RIGHT_LEG.wounds.severe|wound|safe}}</td>
     </tr>
 
 

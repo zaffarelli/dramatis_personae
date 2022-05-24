@@ -230,11 +230,14 @@ span.info {
 
 
   & .mark {
+    order:1;
     flex-grow: 1;
-    width: 100px;
+    width: auto;
     text-align: center;
 
     & svg {
+      width:auto;
+      fill:lightslategray;
     }
   }
 
@@ -290,4 +293,5 @@ span.info {
 #figurebox{
   display: none;
 }
+
 

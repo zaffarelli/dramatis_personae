@@ -190,7 +190,7 @@ ATTACK_ROLLS = {
 FONTSET = ['Cinzel', 'Trade+Winds', 'Imprima', 'Roboto', 'Philosopher', 'Ruda', 'Khand', 'Allura', 'Gochi+Hand',
            'Reggae+One', 'Syne+Mono', 'Zilla+Slab', 'Spartan', 'News+Cycle', 'Archivo', 'Francois+One', 'Caveat',
            'Gruppo', 'Voltaire', "Fredericka+the+Great", 'Esteban', 'Pompiere', 'Niconne', 'Delius',
-           'Nanum+Brush+Street', 'Schoolbell', 'Jim+Nightshade', 'Julee', 'Estonia']
+           'Nanum+Pen+Script', 'Schoolbell', 'Jim+Nightshade', 'Julee', 'Estonia', 'East+Sea+Dokdo', 'Julee']
 
 LIFEPATH_CATEGORY = (
     ('0', "Birthright"),

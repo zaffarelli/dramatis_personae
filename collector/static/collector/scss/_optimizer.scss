@@ -1,6 +1,11 @@
 @import 'basics';
 @import 'fonts';
 
+
+$block_hsize: 2em;
+$block_wsize: 5ex;
+
+
 .fresque.duel {
   height: auto;
 
@@ -11,32 +16,33 @@
     text-align: center;
     height: auto;
 
-    &.imperial{
-        display:flex;
-        height:auto;
-        width:auto;
-        flex-flow:column nowrap;
-        justify-content: space-evenly;
-        align-items:center;
-        & .match{
-            display:flex;
-            flex-flow: row nowrap;
-            justify-content: space-between;
-            align-items:center;
-            flex-grow:1;
-            flex-shrink:1;
-            height:100px;
-            width:auto;
-            border:1px solid $fics_darker;
-            background: $fics_darker;
-            border-radius: 5px;
-            padding:5px;
+    &.imperial {
+      display: flex;
+      height: auto;
+      width: auto;
+      flex-flow: column nowrap;
+      justify-content: space-evenly;
+      align-items: center;
 
-            & .ghostmark{
-                flex-grow:1;
-                flex-shrink:1;
-            }
+      & .match {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        align-items: center;
+        flex-grow: 1;
+        flex-shrink: 1;
+        height: 100px;
+        width: auto;
+        border: 1px solid $fics_darker;
+        background: $fics_darker;
+        border-radius: 5px;
+        padding: 5px;
+
+        & .ghostmark {
+          flex-grow: 1;
+          flex-shrink: 1;
         }
+      }
     }
 
 
@@ -44,9 +50,9 @@
       display: flex;
       flex-flow: column nowrap;
       justify-content: flex-start;
-      font-variant:none;
+      font-variant: none;
       flex-grow: 2;
-      width: 500px;
+      width: 800px;
       height: auto;
       border: 1px solid $fics_dark;
 
@@ -58,6 +64,7 @@
         flex-shrink: 1;
         justify-content: flex-start;
         border: 1px solid $fics_back;
+
         &.even {
           background: #232;
         }
@@ -71,9 +78,9 @@
           padding: 5px;
           flex-grow: 2;
           flex-shrink: 1;
-          font-family:Text;
-          font-variant:normal;
-          font-weight:normal;
+          font-family: Text;
+          font-variant: normal;
+          font-weight: normal;
           background: transparent;
 
           &.r {
@@ -117,16 +124,16 @@
 
 
     &.round_data {
-       & h3{
-            text-align:center;
-            font-variant:small-caps;
-            font-family: NomFat ;
-       }
+      & h3 {
+        text-align: center;
+        font-variant: small-caps;
+        font-family: NomFat;
+      }
 
       font-family: NomPersoListe;
       font-weight: normal;
       text-align: justify;
-      font-variant:none;
+      font-variant: none;
       font-size: 8pt;
       height: auto;
 
@@ -134,7 +141,7 @@
       margin: auto;
       margin-top: 0;
       vertical-align: top;
-      width: 220px;
+      width: 400px;
       height: auto;
       border: 1px solid black;
       padding: 3px;
@@ -157,70 +164,6 @@
       }
     }
 
-    & table.wounds {
-      border-collapse: separate;
-
-      & td {
-        background: $fics_dark;
-        border: 2px solid #222;
-        width: $block_wsize;
-        height: $block_hsize;
-        text-align: center;
-
-        & .large {
-          font-size: 1.5em;
-          font-weight: bold;
-        }
-
-        &.shield {
-          border-color: #223;
-        }
-
-        &.stats {
-          border-color: #332;
-
-          &.neg {
-            border-color: #223;
-          }
-        }
-
-        &.armor {
-          border-color: #343;
-          font-weight: bold;
-          font-size: 1em;
-        }
-
-        &.hp {
-          border-color: #322;
-        }
-
-        &.wnd {
-
-          color: #A22;
-          font-weight:bold;
-        }
-
-        &.disabled {
-          opacity: .1;
-        }
-
-        & .wounded {
-          border-color: #B11;
-          background-color: #A22;
-          color: #FFF;
-          padding:5px;
-          border-radius:5px;
-          display:inline-block;
-        }
-      }
-
-      & th {
-        background: transparent;
-        border: 2px dotted #222;
-        width: $block_wsize;
-        height: $block_hsize;
-      }
-    }
 
     &ol {
       margin: 0;
@@ -342,3 +285,161 @@ table.match_score_flat {
 //     border: 1px solid $fics_dark;
 //     overflow: hidden;
 // }
+
+
+table.action_table {
+  & tr {
+    & th {
+      background: #ccc;
+      color: black;
+      text-align: center;
+      width: 6ex;
+      font-family: TextDesc;
+    }
+
+    & td {
+      background: #666;
+      color: white;
+      text-align: center;
+      font-family: Texte;
+
+      &.big {
+        font-size: 3em;
+      }
+    }
+  }
+}
+
+.dice {
+  width: 30px;
+  height: 32px;
+  top: 0;
+  background-image: url("../d12.png");
+  background-repeat: no-repeat;
+  border: 1px solid transparent;
+
+  &.clip_1 {
+    background-position: 0 0;
+  }
+
+  &.clip_2 {
+    background-position: -33px 0;
+  }
+
+  &.clip_3 {
+    background-position: -66px 0;
+  }
+
+  &.clip_4 {
+    background-position: -99px 0;
+  }
+
+  &.clip_5 {
+    background-position: -132px 0;
+  }
+
+  &.clip_6 {
+    background-position: -165px 0;
+  }
+
+  &.clip_7 {
+    background-position: -198px 0;
+  }
+
+  &.clip_8 {
+    background-position: -231px 0;
+  }
+
+  &.clip_9 {
+    background-position: -264px 0;
+  }
+
+  &.clip_10 {
+    background-position: -297px 0;
+  }
+
+  &.clip_11 {
+    background-position: -330px 0;
+  }
+
+  &.clip_12 {
+    background-position: -363px 0;
+  }
+}
+
+table.healthbar {
+  border-collapse: separate;
+  font-size:10pt;
+  width:auto;
+  & tr {
+    width:auto;
+    & td {
+      background: $fics_dark;
+      border: 2px solid transparent;
+      width: $block_wsize;
+      height: $block_hsize;
+      text-align: center;
+
+
+      & .large {
+        font-size: 1.5em;
+        font-weight: bold;
+      }
+
+      &.shield {
+        border-color: #223;
+      }
+
+      &.stats {
+        border-color: #DDD;
+
+        &.neg {
+          border-color: #223;
+        }
+      }
+
+      &.armor {
+        border-color: #CCC;
+        font-weight: bold;
+        font-size: 1em;
+      }
+
+      &.hp {
+        border-color: #322;
+      }
+
+      &.wnd {
+        &.medium {
+          border-color: #AAA;
+        }
+
+        &.severe{
+          border-color: #DDD;
+        }
+        color: #A22;
+
+        font-weight: bold;
+      }
+
+      &.disabled {
+        opacity: .1;
+      }
+
+      & .wounded {
+        border-color: #B11;
+        background-color: #A22;
+        color: #FFF;
+        padding: 5px;
+        border-radius: 5px;
+        display: inline-block;
+      }
+    }
+
+    & th {
+      background: transparent;
+      border: 2px solid transparent;
+      width: $block_wsize;
+      height: $block_hsize;
+    }
+  }
+}

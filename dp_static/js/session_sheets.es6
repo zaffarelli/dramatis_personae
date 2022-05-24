@@ -1,0 +1,1 @@
+/home/zaffarelli/Perso/github/dramatis_personae/collector/static/js/session_sheets.es6

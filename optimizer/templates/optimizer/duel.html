@@ -20,6 +20,9 @@
         </div>
         {% endfor %}
     </div>
+</div>
+<div class='fresque duel'>
+    <div class="tile">Status at end of round #{{r.number}}</div>
     <div class='tile round_data attacker'>{% include "optimizer/character_round_data.html" with c=r.attacker %}</div>
     <div class='tile round_data defender'>{% include "optimizer/character_round_data.html" with c=r.defender %}</div>
 </div>

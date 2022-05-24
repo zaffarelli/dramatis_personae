@@ -12,7 +12,7 @@ from scenarist.mixins.ajaxfromresponse import AjaxFromResponseMixin
 from django.http import JsonResponse
 from django.forms.models import model_to_dict
 from django.template.loader import get_template
-from django.shortcuts import redirect,reverse
+from django.shortcuts import redirect, reverse
 from collector.models.bloke import Bloke
 
 
@@ -123,7 +123,6 @@ def attr_pick(request, avatar, item, offset):
     return JsonResponse(context)
 
 
-
 def customize_skill(request, avatar, item):
     from collector.models.skill import SkillRef, SkillCusto
     from collector.models.character_custo import CharacterCusto
@@ -152,7 +151,6 @@ def customize_skill(request, avatar, item):
     return JsonResponse(context)
 
 
-
 def customize_bc(request, avatar, item):
     from collector.models.blessing_curse import BlessingCurseRef, BlessingCurseCusto
     from collector.models.character_custo import CharacterCusto
@@ -178,7 +176,6 @@ def customize_bc(request, avatar, item):
     context = respawn_avatar_link(ch, context, request)
     messages.info(request, 'Avatar %s customized with B/C %s.' % (ch.full_name, bcc.blessing_curse_ref.reference))
     return JsonResponse(context)
-
 
 
 def customize_bc_del(request, avatar, item):
@@ -209,12 +206,10 @@ def customize_bc_del(request, avatar, item):
         context = respawn_summary(ch, context, request)
         context = respawn_avatar_link(ch, context, request)
         messages.info(request, 'Avatar %s customized with B/C %s.' % (ch.full_name, txt))
-
     else:
         context["c"] = model_to_dict(ch)
         messages.info(request, 'B/C not found for %s.' % (ch.full_name))
     return JsonResponse(context)
-
 
 
 def customize_ba(request, avatar, item):
@@ -244,7 +239,6 @@ def customize_ba(request, avatar, item):
     context = respawn_avatar_link(ch, context, request)
     messages.info(request, 'Avatar %s customized with B/A %s.' % (ch.full_name, bac.benefice_affliction_ref.reference))
     return JsonResponse(context)
-
 
 
 def customize_ba_del(request, avatar, item):
@@ -282,7 +276,6 @@ def customize_ba_del(request, avatar, item):
     return JsonResponse(context)
 
 
-
 def customize_weapon(request, avatar, item):
     from collector.models.weapon import WeaponRef, WeaponCusto
     from collector.models.character_custo import CharacterCusto
@@ -308,7 +301,6 @@ def customize_weapon(request, avatar, item):
     context = respawn_avatar_link(ch, context, request)
     messages.info(request, 'Avatar %s customized with weapon %s.' % (ch.full_name, item_custo.weapon_ref.reference))
     return JsonResponse(context)
-
 
 
 def customize_weapon_del(request, avatar, item):
@@ -374,7 +366,6 @@ def customize_armor(request, avatar, item):
     return JsonResponse(context)
 
 
-
 def customize_armor_del(request, avatar, item):
     from collector.models.armor import ArmorRef
     from collector.models.character_custo import CharacterCusto
@@ -409,7 +400,6 @@ def customize_armor_del(request, avatar, item):
         context["c"] = model_to_dict(ch)
         messages.info(request, 'Armor not found for %s.' % (ch.full_name))
     return JsonResponse(context)
-
 
 
 def customize_shield(request, avatar, item):
@@ -476,7 +466,6 @@ def customize_shield_del(request, avatar, item):
     return JsonResponse(context)
 
 
-
 def customize_ritual(request, avatar, item):
     from collector.models.ritual import RitualRef, RitualCusto
     from collector.models.character_custo import CharacterCusto
@@ -502,7 +491,6 @@ def customize_ritual(request, avatar, item):
     context = respawn_avatar_link(ch, context, request)
     messages.info(request, 'Avatar %s customized with weapon %s.' % (ch.full_name, item_custo.ritual_ref.reference))
     return JsonResponse(context)
-
 
 
 def customize_ritual_del(request, avatar, item):

@@ -30,9 +30,9 @@ class Duel:
         elif (uke_dead and not tori_dead):
             winner = self.tori
         else:
-            if self.tori.peek('initiative')>self.uke.peek('initiative'):
+            if self.tori.peek('initiative') > self.uke.peek('initiative'):
                 winner = self.tori
-            elif self.tori.peek('initiative')<self.uke.peek('initiative'):
+            elif self.tori.peek('initiative') < self.uke.peek('initiative'):
                 winner = self.uke
             else:
                 winner = None
@@ -53,12 +53,13 @@ class Duel:
             sequences.append(round.round_summary)
             round.flush()
             del round
-        res = {'pub_date':self.pub_date,'winner':self.winner,'rounds':sequences, 'amount':len(sequences), 'tori':self.initial_tori, 'uke':self.initial_uke}
+        res = {'pub_date': self.pub_date, 'winner': self.winner, 'rounds': sequences, 'amount': len(sequences),
+               'tori': self.initial_tori, 'uke': self.initial_uke}
         return res
 
 
 class CombatRound:
-    def __init__(self,duel):
+    def __init__(self, duel):
         self.duel = duel
         self.number = self.duel.rnd
 
@@ -76,7 +77,7 @@ class CombatRound:
             data['joined_narrative'] = []
             i = 0
             for i in range(len(self.duel.tori.round_data['narrative'])):
-                h = {'id':i}
+                h = {'id': i}
                 h['attacker'] = data['attacker']['narrative'][i]
                 h['defender'] = data['defender']['narrative'][i]
                 data['joined_narrative'].append(h)
@@ -85,7 +86,7 @@ class CombatRound:
             data['defender'] = copy.deepcopy(self.duel.uke.round_data)
             data['joined_narrative'] = []
             for i in range(len(self.duel.tori.peek('narrative'))):
-                h = {'id':i}
+                h = {'id': i}
                 h['attacker'] = data['attacker']['narrative'][i]
                 h['defender'] = data['defender']['narrative'][i]
                 data['joined_narrative'].append(h)
@@ -105,9 +106,9 @@ class CombatRound:
         self.duel.uke.initiative_roll(self.number)
 
     def resolution_phase(self):
-        max_attacks = max([self.duel.tori.peek('number_of_attacks'),self.duel.uke.peek('number_of_attacks')])
+        max_attacks = max([self.duel.tori.peek('number_of_attacks'), self.duel.uke.peek('number_of_attacks')])
         if self.duel.tori.peek('initiative') > self.duel.uke.peek('initiative'):
-            while max_attacks>0:
+            while max_attacks > 0:
                 if not self.duel.not_finished:
                     break
                 self.duel.tori.roll_attack(self.duel.uke)
@@ -115,9 +116,9 @@ class CombatRound:
                 if self.duel.not_finished:
                     self.duel.uke.roll_attack(self.duel.tori)
                     self.duel.tori.absorb_punishment(self.duel.uke)
-                max_attacks = max([self.duel.tori.peek('number_of_attacks'),self.duel.uke.peek('number_of_attacks')])
+                max_attacks = max([self.duel.tori.peek('number_of_attacks'), self.duel.uke.peek('number_of_attacks')])
         else:
-            while max_attacks>0:
+            while max_attacks > 0:
                 if not self.duel.not_finished:
                     break
                 self.duel.uke.roll_attack(self.duel.tori)
@@ -125,4 +126,4 @@ class CombatRound:
                 if self.duel.not_finished:
                     self.duel.tori.roll_attack(self.duel.uke)
                     self.duel.uke.absorb_punishment(self.duel.tori)
-                max_attacks = max([self.duel.tori.peek('number_of_attacks'),self.duel.uke.peek('number_of_attacks')])
+                max_attacks = max([self.duel.tori.peek('number_of_attacks'), self.duel.uke.peek('number_of_attacks')])

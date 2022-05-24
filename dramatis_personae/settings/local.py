@@ -25,5 +25,7 @@ DATABASES = {
         },
 }
 
-
-
+if DEBUG:
+    import mimetypes
+    mimetypes.add_type("application/javascript", ".es6", True)
+    mimetypes.add_type("application/javascript", ".js", True)

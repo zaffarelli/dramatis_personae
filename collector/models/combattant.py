@@ -60,6 +60,9 @@ class Combattant(Avatar):
                     'expertise': 0,
                     'expertise_pool': 0,
                     'expertise_bonus': 0,
+                    'expertise_0': 0,
+                    'expertise_1': 0,
+                    'expertise_2': 0,
                 },
                 'armor': {
                     'id': a.id,
@@ -121,8 +124,9 @@ class Combattant(Avatar):
 
         self.check_expertise()
         self.tell(
-            '<u>%s</u> uses his/her <b>%s</b>, granting himself/herself an accuracy bonus of <b>%d</b>, for a damage class of <b>%s</b>.' % (
-                self.full_name, self.peek('weapon.name'), self.peek('weapon.WA'), self.peek('weapon.DC')))
+            '<u>%s</u> uses his/her <b>%s</b>, granting himself/herself an accuracy bonus of <b>%d</b>, for a damage class of <b>%s</b>. His/her armor encumberance is <b>%d</b>.' % (
+                self.full_name, self.peek('weapon.name'), self.peek('weapon.WA'), self.peek('weapon.DC'),
+                self.peek('armor.ENC')))
         return self.round_data
 
     def check_stunrecover(self, target):
@@ -131,6 +135,11 @@ class Combattant(Avatar):
             self.poke('round_data.health_template.status', 'OK')
             self.tell('%s recovers from stunned status.' % (self.full_name))
             target.tell('...')
+            res = True
+        else:
+            self.tell('%s is still stunned!' % (self.full_name))
+            res = False
+        return res
 
     def get_skill(self, name):
         sk = self.skill_set.all().filter(skill_ref__reference=name).first()
@@ -156,35 +165,62 @@ class Combattant(Avatar):
             return ar.first()
         return None
 
-    def check_highest_bonus(self):
+    def check_highest_bonus(self, atk_idx):
         b = 0
-        x = self.peek('health_template.expertise_pool')
-        s = math.floor(math.sqrt(x * 2))
-        if s * (s + 1) / 2 == x:
-            b = s
-        elif (s + 1) * (s + 2) / 2 == x:
-            b = s + 1
-        # print(f"Expertise of {self.full_name} is {x}, so bonus is {b} ({s})")
-        self.poke_inc('health_template.expertise_bonus', b)
+        maxatk = self.peek('max_attacks')
+        if atk_idx > 0:
+            pool = self.peek_('expertise_pool')
+            if pool > 0:
+                b = self.peek_('expertise_%d' % (atk_idx))
+                self.poke_('expertise_pool', pool - b)
+            self.poke_('expertise_bonus', b)
+            # self.poke('number_of_attacks', natk - 1)
         return b
 
     def choose_attack(self, target):
-        bon = self.check_highest_bonus()
-        if bon > 0:
-            self.tell("<u>%s</u> has an expertise bonus of <i>+%d</i>." % (self.full_name, bon))
+        exp = self.peek_('expertise')
+        # self.poke_('expertise_pool', exp)
+        if exp > 0:
+            self.tell("<u>%s</u> has an expertise of <i>+%d</i>." % (self.full_name, exp))
             target.tell("")
-        self.poke('health_template.expertise_bonus', bon)
-        natk = 1
-        if bon >= 4:
-            natk = 3
-        elif bon >= 2:
-            natk = 2
-        status = self.peek('health_template.status')
+        status = self.peek_('status')
+        stunned = False
         if status == 'S':
-            self.check_stunrecover(target)
+            stunned = self.check_stunrecover(target)
+        if stunned:
+            natk = 0
+            multmal = 0
+        else:
+            natk = 1
+            multmal = 0
+            if exp >= 6:
+                natk = 3
+                multmal = -6
+            elif exp >= 3:
+                natk = 2
+                multmal = -4
+        # Round Expertises
+        exp_1 = 0
+        exp_2 = 0
+        exp_3 = 0
+        if exp > 0:
+            if natk == 1:
+                exp_1 = exp
+            elif natk == 2:
+                exp_1 = math.ceil((exp + 1) / 2)
+                exp_2 = exp - exp_1
+            elif natk == 3:
+                exp_1 = math.ceil((exp + 1) / 3)
+                exp_2 = math.ceil((exp - exp_1) / 2)
+                exp_3 = exp - exp_1 - exp_2
+        self.poke_('expertise_1', exp_1)
+        self.poke_('expertise_2', exp_2)
+        self.poke_('expertise_3', exp_3)
 
+        self.poke('multiattack_malus', multmal);
         self.poke('number_of_attacks', natk)
         self.poke('max_attacks', natk)
+        self.check_highest_bonus(natk)
 
     def check_expertise(self):
         expertise = 0
@@ -192,8 +228,8 @@ class Combattant(Avatar):
             benefice_affliction_ref__watermark__contains='melee_manoeuvres')
         for manoeuvres_set in manoeuvres_sets:
             expertise += manoeuvres_set.benefice_affliction_ref.value
-        self.poke('health_template.expertise_pool', expertise)
-        self.poke('health_template.expertise', expertise)
+        self.poke_('expertise_pool', expertise)
+        self.poke_('expertise', expertise)
         self.tell("<u>%s</u> has an expertise of %d on melee manoeuvres." % (self.full_name, expertise))
 
     def initiative_roll(self, rnd):
@@ -215,36 +251,45 @@ class Combattant(Avatar):
 
     def roll_attack(self, target):
         if self.peek('number_of_attacks') > 0:
-            bon = self.check_highest_bonus()
+            atk_idx = self.peek('max_attacks') - self.peek('number_of_attacks')
+            attk_order = ['first', 'second', 'third'][atk_idx]
+            bon = self.check_highest_bonus(atk_idx)
             if bon > 0:
-                self.tell("<u>%s</u> has a bonus of <b>+%d</b>." % (self.full_name, bon))
-                target.tell("")
-            self.poke('health_template.expertise_bonus', bon)
+                self.tell("<u>%s</u> has an expertise bonus for this phase of <b>%d</b>." % (self.full_name, bon))
+                target.tell("...")
+            # self.poke_('expertise_bonus', bon)
             overrun_bonus = 0
-            self.poke('multiattack_malus', -(3 - self.peek('max_attacks')) * 3)
+            # self.poke('multiattack_malus', -(3 - self.peek('max_attacks')) * 3)
             die, detdie = self.open_d12
-            self.poke('attack_roll', self.peek('REF') + self.peek('melee') + self.peek('weapon.WA') - self.peek(
-                'health_template.circumstance_modifiers') - self.peek('multiattack_malus') + self.peek(
-                'health_template.expertise_bonus') + die)
-            sum = self.peek('REF') + self.peek('melee') + self.peek('weapon.WA') - self.peek(
-                'health_template.circumstance_modifiers') - self.peek('multiattack_malus') + self.peek(
-                'health_template.expertise_bonus')
+            self.poke('attack_roll', self.peek('REF') + self.peek('melee') + self.peek('weapon.WA') + self.peek_(
+                'circumstance_modifiers') + self.peek('multiattack_malus') + self.peek_(
+                'expertise_bonus') + die)
+            at = self.peek('REF')
+            sk = self.peek('melee')
+            wa = self.peek('weapon.WA')
+            cm = self.peek_('circumstance_modifiers')
+            ma = self.peek('multiattack_malus')
+            ex = self.peek_('expertise_bonus')
+            sum = at + sk + wa + cm + ma + ex
 
-            attk_order = ['first', 'second', 'third'][self.peek('max_attacks') - self.peek('number_of_attacks')]
-            x = f"{self.peek('REF')} + {self.peek('melee')} + {self.peek('weapon.WA')} - {self.peek('health_template.circumstance_modifiers')} - {self.peek('multiattack_malus')} + {self.peek('health_template.expertise_bonus')} = "
-            self.poke('attack_sequence',
-                      "<u>" + self.full_name + "</u> <b>" + attk_order + " attack !<br/></b> REF + Melee + WA - CM - MA + EX -> " + x + str(
-                          sum) + "+" + detdie + "=<b>" + str(self.peek('attack_roll')) + "</b>")
+            asstr = f"<u>{self.full_name}</u> <b>{attk_order}</b> attack!<br/>"
+            asstr += "<center><table class='action_table'>"
+            asstr += "<tr><th>REF</th><th>Melee</th><th>WA</th><th>CM</th><th>MA</th><th>EX</th><th>DICE</th><th>TOTAL</th></tr>"
+            asstr += f"<tr><td>{at}</td><td>{sk}</td><td>{wa}</td><td>{cm}</td><td>{ma}</td><td>{ex}</td><td>{detdie}={die}</td><td class='big'>{sum + die}</td></tr>"
+            asstr += "</table></center>"
+            self.poke('attack_sequence', asstr)
             self.tell(self.peek('attack_sequence'))
             tgt_parry = target.choose_parry()
             if tgt_parry:
-                target.poke('defender_dodge_roll', target.roll_parry())
-                target.tell('Parrying %d' % (target.peek('defender_dodge_roll')))
+                pr, txt = target.roll_parry()
+                target.poke('defender_dodge_roll', pr)
+                target.tell('Parrying %d' % (target.peek('defender_dodge_roll')) + txt)
                 overrun = self.peek('attack_roll') - target.peek('defender_dodge_roll')
                 target.poke_inc('number_of_attacks', -1)
             else:
-                target.poke('defender_dodge_roll', target.roll_dodge())
-                target.tell('Dodging %d' % (target.peek('defender_dodge_roll')))
+                do, dot = target.roll_dodge()
+                target.poke('defender_dodge_roll', do)
+                target.tell(dot)
                 overrun = self.peek('attack_roll') - target.peek('defender_dodge_roll')
             if overrun > 0:
                 overrun_bonus = int(overrun / 3)
@@ -264,7 +309,7 @@ class Combattant(Avatar):
                     self.tell('<u>%s</u> misses...' % (self.full_name))
                     target.tell('...')
             self.poke_inc('number_of_attacks', -1)
-            self.poke('health_template.expertise_bonus', 0)
+            self.poke_('expertise_bonus', 0)
             self.tell(f"Remaining actions: {self.peek('number_of_attacks')}")
             target.tell("")
         else:
@@ -366,7 +411,7 @@ class Combattant(Avatar):
         die, detdie = self.open_d12
         score = die + self.SA_STU  # -self.round_data['health_template']['circumstance_modifiers']
         if score < 10:
-            self.poke('health_template.status', 'D')
+            self.poke_('status', 'D')
             effect_self = 'Death check at DV 10 : %d!' % (score)
             effect_source = 'Victory!!!'
         else:
@@ -383,7 +428,7 @@ class Combattant(Avatar):
         die, detdie = self.open_d12
         score = die + self.SA_STU  # -self.round_data['health_template']['circumstance_modifiers']
         if score < 10:
-            self.poke('health_template.status', 'S')
+            self.poke_('status', 'S')
             self.penalize(10)
             effect_self = 'Stun check at DV 10 : %d  !' % (score)
             effect_source = 'Enemy is stunned!'
@@ -418,26 +463,35 @@ class Combattant(Avatar):
                 source.tell('...')
 
     def penalize(self, x):
-        self.round_data['health_template']['circumstance_modifiers'] += x
+        self.round_data['health_template']['circumstance_modifiers'] -= x
         # print("%s has a new penalty of %d"%(self.full_name,x))
 
     def roll_dodge(self):
         die, detdie = self.open_d12
-        die -= self.peek('health_template.circumstance_modifiers')
-        dodge = self.peek('AGI') + self.peek('dodge') + die
-        return dodge
+        cm = self.peek('health_template.circumstance_modifiers')
+        sk = self.peek('dodge')
+        dodge = sk + die + cm
+        s = f"<u>{self.full_name}</u> dodges..."
+        s += "<center><table class=action_table>"
+        s += f"<tr><th>Dodge</th><th>CM</th><th>DICE</th><th>TOTAL</th></tr>"
+        s += f"<tr><td>{sk}</td><td>{cm}</td><td>{detdie}={die}</td><td class='big'>{dodge}</td></tr>"
+        s += "</table></center>"
+        return dodge, s
 
     def roll_parry(self):
-        # if self.peek('max_attacks') == 1:
-        #     self.poke('multiattack_malus', 0)
-        # else:
-        self.poke('multiattack_malus', -(3 - self.peek('max_attacks')) * 3)
         die, detdie = self.open_d12
-        die += 3
-        die -= self.peek('multiattack_malus')
-        die -= self.peek('health_template.circumstance_modifiers')
-        parry = self.peek('REF') + self.peek('melee') + die
-        return parry
+        at = self.peek('REF')
+        sk = self.peek('melee')
+        pm = 3
+        ma = self.peek('multiattack_malus')
+        cm = self.peek('health_template.circumstance_modifiers')
+        parry = at + sk + pm + ma + cm + die
+        s = f"<br/><u>{self.full_name}</u> parries..."
+        s += "<center><table class=action_table>"
+        s += f"<tr><th>REF</th><th>Melee</th><th>MA</th><th>PM</th><th>CM</th><th>DICE</th><th>TOTAL</th></tr>"
+        s += f"<tr><td>{at}</td><td>{sk}</td><td>{ma}</td><td>{pm}</td><td>{cm}</td><td>{detdie}={die}</td><td class='big'>{parry}</td></tr>"
+        s += "</table></center>"
+        return parry, s
 
     def check_death(self, source):
         check = self.peek('health_template.hit_points') <= 0 or self.peek('health_template.status') == 'D'
@@ -449,6 +503,31 @@ class Combattant(Avatar):
     # --- Utilities functions -------------------------------------------------
     def tell(self, txt):
         self.round_data['narrative'].append(txt)
+
+    def peek_(self, txt):
+        map = txt.split('.')
+        tab = self.round_data['health_template']
+        for k in map:
+            tab = tab[k]
+        return tab
+
+    # def short_peek(self, txt):
+    #     map1 = txt.split('.')
+    #     map = ['health_template', map1]
+    #     tab = self.round_data
+    #     for k in map:
+    #         tab = tab[k]
+    #     return tab
+    #
+
+
+    def poke_(self, txt, val):
+        map = txt.split('.')
+        tab = self.round_data['health_template']
+        for k in map[:-1]:
+            tab = tab.setdefault(k, {})
+        tab[map[-1]] = val
+        return tab
 
     def peek(self, txt):
         map = txt.split('.')
@@ -480,25 +559,25 @@ class Combattant(Avatar):
         x = fs_fics7.roll(12)
         total = x
         if (x == 1):
-            details = "[1!]"
+            details = "<div class='dice clip_1'></div>"
             y = fs_fics7.roll(12)
             total -= y
-            details += " + (%d!) " % (y)
+            details += "<div class='dice clip_%d'></div>" % (y)
             while y == 12:
                 y = fs_fics7.roll(12)
                 total -= y
-                details += " + (%d!) " % (y)
+                details += "<div class='dice clip_%d'></div>" % (y)
         elif (x == 12):
-            details = "[12!]"
+            details = "<div class='dice clip_%d'></div>" % (12)
             y = fs_fics7.roll(12)
             total += y
-            details += " + (%d!) " % (y)
+            details += "<div class='dice clip_%d'></div>" % (y)
             while y == 12:
                 y = fs_fics7.roll(12)
                 total += y
-                details += " + (%d!) " % (y)
+                details += "<div class='dice clip_%d'></div>" % (y)
         else:
-            details = "[" + str(x) + "!]"
+            details = "<div class='dice clip_%d'></div>" % (x)
         return total, details
 
     def localize_melee_attack(self, x):

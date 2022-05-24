@@ -1,18 +1,11 @@
+{% load static %}
+{% load fics_filters %}
 
 <div class='avatar_link{% if c.is_locked %} locked{%endif%}'>
-    <div class='character_name'>
-        {% if c.is_dead %}
-        <strike>
-        {% endif %}
-        <em> {{ c.full_name }}</em>
-        <br/>{{ c.entrance|safe }}
-        {% if c.is_dead %}
-        <i class='fas fa-square' style="color:{{c.group_color}};"></i>
-        </strike>
-        {% endif %}
-    </div>
-
     <div class='character_actions' id="link_{{c.id}}">
+{#        <span class="cell mini charsel" ref="{{c.id}}">{{ c.id|safe}}</span>#}
+        <span class="action_icon  figureshow" medimg="{{c.rid|as_media_image}}">{{ c.rid|media_check|safe}}</span>
+
         <span class="action_icon edit_character" id="edit_{{c.id}}"><i class="fas fa-user-tag"></i></span>&nbsp
         <span class="action_icon recalc_avatar" id="recalc_{{c.id}}"><i class="fas fa-cog"></i></span>&nbsp;
         <span class="action_icon sheet" id="sheet_{{c.id}}"><i class="fas fa-file"></i></span>&nbsp;

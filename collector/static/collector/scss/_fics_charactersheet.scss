@@ -39,11 +39,11 @@ div.character_sheet {
             text-align:center;
             flex-basis:120px;
         }
-        & .mark{
-            order:1;
-            display:inline-block;
-            flex-basis:120px;
-        }
+        //& .mark{
+        //    order:1;
+        //    //display:block;
+        //    //flex-basis:140px;
+        //}
 
         & .data{
             order:2;

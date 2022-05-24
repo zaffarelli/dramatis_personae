@@ -9,6 +9,7 @@ class EpicDeck {
         let me = this;
         me.debug = true;
         me.blank = false;
+        me.source = undefined;
         me.version = "1.0.0";
         me.width = parseInt($(me.parent).css("width"), 10) * 0.75;
         me.height = me.width * 1.4;
@@ -131,7 +132,7 @@ class EpicDeck {
             data: {'reference': 'deck_lineup', 'order': 0, 'data': JSON.stringify(me.data)},
             dataType: 'json',
             success: function (answer) {
-
+                me.source = undefined;
             },
             error: function (answer) {
                 console.error(me.data);
@@ -152,6 +153,7 @@ class EpicDeck {
             dataType: 'json',
             success: function (answer) {
                 let data = JSON.parse(answer['data'])
+                me.source = undefined;
                 _.forEach(me.data, function (e, i) {
                     _.forEach(data, function (f, j) {
                         if (e.rid == f.rid) {
@@ -169,9 +171,10 @@ class EpicDeck {
                         }
                     });
                 });
-                console.log(me.data)
+                // console.log(me.data)
                 me.updateGroup();
                 me.updateCard();
+                me.updateLink();
             },
             error: function (answer) {
                 console.error(me.data);
@@ -181,14 +184,17 @@ class EpicDeck {
 
     reset() {
         let me = this;
+        me.source = undefined;
         _.forEach(me.data, function (e, i) {
             e.ox = (e.idx % me.row_max) * (me.cardw + 1) + me.basex;
             e.oy = Math.floor(e.idx / me.row_max) * (me.cardh + 1) + me.basey;
             e.selected = false;
             e.group = 0;
+            e.links = []
         });
         me.updateGroup();
         me.updateCard();
+        me.updateLink();
     }
 
     // LOW LEVEL DRAW METHODS ==========================================================================================
@@ -311,7 +317,6 @@ class EpicDeck {
                     } else {
                         return ""
                     }
-
                 })
                 .on("click", function (e, d) {
                     e.preventDefault()
@@ -349,15 +354,12 @@ class EpicDeck {
                             }
                         }
                     }
-
                     return me.draw_fill
                 })
                 .style('stroke-dasharray', dash)
                 .style('stroke-width', width + 'pt')
             ;
-            group.append(
-                'text'
-            )
+            group.append('text')
                 .attr('x', function (d) {
                         return me.stepx * (d.ox + x);
                     }
@@ -373,12 +375,7 @@ class EpicDeck {
                 .style('stroke-width', '0.05pt')
                 .style("text-anchor", 'middle')
                 .style("font-size", '10pt')
-                .style("font-family"
-                    ,
-                    me
-                        .base_font
-                )
-
+                .style("font-family", me.base_font)
                 .text(function (d) {
                         if (field != undefined) {
                             if (field.startsWith('alliance_color') == false) {
@@ -392,15 +389,31 @@ class EpicDeck {
 
     buildLinks() {
         let me = this;
-        me.links = []
+        _.forEach(me.links, function (e, i) {
+            e.removable = true;
+        })
         _.forEach(me.data, function (e, i) {
             _.forEach(e.links, function (l, j) {
-                me.links.push({
-                    "start": e.rid,
-                    "stop": l
-                });
+                let existing = _.find(me.links, {start:e.rid, stop:l})
+                if (existing) {
+                    e.removable = false;
+                }else{
+                    me.links.push({
+                        "start": e.rid,
+                        "stop": l,
+                        "removable":false
+                    });
+                }
             });
         });
+        _.forEach(me.links, function (e, i) {
+            if (e.removable){
+                me.links.splice(i,1);
+            }
+        })
+        console.log("Build links")
+        console.log(me.links)
+        me.drawLinks();
     }
 
     fillList(basex = 0, basey = 0, datasource = "ba", styles = {}) {
@@ -597,6 +610,8 @@ class EpicDeck {
             .attr('class', 'groups');
         me.deck = me.back.append('g')
             .attr('class', 'deck');
+        me.relations = me.back.append('g')
+            .attr('class', 'relations');
     }
 
     wrap(par, bx, by, width, font = 'default') {
@@ -697,7 +712,6 @@ class EpicDeck {
             });
             // me.data[26].links = ["sanjuk_oj_kaval", "neiad_shafeer_almalik"];
             // me.data[14].links = ["drunn_paarlkretzzer"];
-            me.buildLinks();
             me.initial = false;
         }
         me.card = me.deck.selectAll('.card')
@@ -714,14 +728,17 @@ class EpicDeck {
 
     }
 
-    drawLinks(){
+    drawLinks() {
         let me = this;
-        me.link = me.back.selectAll('.link')
+        me.link = me.relations.selectAll('.link')
             .data(me.links)
             .enter()
         ;
         me.link_enter = me.link.append('g')
             .attr('class', 'link')
+            .attr("id",function(d){
+                return d.start+"__"+d.stop;
+            })
         ;
         me.link_exit = me.link.exit().remove();
         me.updateLink();
@@ -845,84 +862,99 @@ class EpicDeck {
         me.fillCardTop();
     }
 
-    updateLink(){
+    updateLink() {
         let me = this;
-        let c1=undefined;
-        let c2=undefined;
+        let c1 = undefined;
+        let c2 = undefined;
         let offset = 0;
+        console.log("updateLink")
+        console.log(me.links)
         me.daddy = me.link_enter;
         me.daddy.select('g.link_back').remove()
         me.link_back = me.daddy.append('g')
             .attr("class", "link_back")
         ;
         me.link_back.append('line')
-            .attr('x1',function(d){
+            .attr('x1', function (d) {
                 c1 = _.find(me.data, {rid: d.start});
                 c2 = _.find(me.data, {rid: d.stop});
-                if (Math.abs(c1.ox - c2.ox) < me.cardw ) {
-                    offset = 0
-                }else if (c1.ox - c2.ox - me.cardw < 0){
-                    offset = me.cardw /2 + me.delta;
-                }else{
-                    offset = -(me.cardw /2 + me.delta);
+                if (c1 && c2) {
+                    if (Math.abs(c1.ox - c2.ox) < me.cardw) {
+                        offset = 0
+                    } else if (c1.ox - c2.ox - me.cardw < 0) {
+                        offset = me.cardw / 2 + me.delta;
+                    } else {
+                        offset = -(me.cardw / 2 + me.delta);
+                    }
+                    return (offset + c1.ox + me.cardw / 2) * me.stepx;
                 }
-                return (offset+ c1.ox + me.cardw/2)*me.stepx;
-            })
-            .attr('y1',function(d){
-                c1 = _.find(me.data, {rid: d.start});
-                c2 = _.find(me.data, {rid: d.stop});
-                if (Math.abs(c1.oy - c2.oy) < me.cardh ) {
-                    offset = 0
-                }else if (c1.oy - c2.oy - me.cardh < 0){
-                    offset = me.cardh /2 + me.delta;
-                }else{
-                    offset = -(me.cardh /2 + me.delta);
-                }
-                return (offset + c1.oy+ me.cardh/2)*me.stepy;
-            })
-            .attr('x2',function(d){
-                c1 = _.find(me.data, {rid: d.start});
-                c2 = _.find(me.data, {rid: d.stop});
-                if (Math.abs(c2.ox - c1.ox ) < me.cardw ) {
-                    offset = 0
-                }else if (c2.ox - c1.ox - me.cardw < 0){
-                    offset = me.cardw /2 + me.delta;
-                } else {
-                    offset = - (me.cardw / 2 + me.delta);
-                }
-                return (offset + c2.ox+ me.cardw/2)*me.stepx;
-            })
-            .attr('y2',function(d){
-                c1 = _.find(me.data, {rid: d.start});
-                c2 = _.find(me.data, {rid: d.stop});
-                if (Math.abs(c1.oy - c2.oy) < me.cardh ) {
-                    offset = 0
-                }else if (c2.oy - c1.oy - me.cardh < 0){
-                    offset = me.cardh /2 + me.delta;
-                }else{
-                    offset = -(me.cardh /2 + me.delta);
-                }
-                return (offset + c2.oy + me.cardh/2)*me.stepy;
-            })
-            .style("stroke","#123")
+                return 0;
 
-            .style("stroke-width","3pt")
-            .style("stroke-linecap","round")
-            .attr('marker-end','url(#arrowhead)')
-            .attr("opacity",0.8)
+            })
+            .attr('y1', function (d) {
+                c1 = _.find(me.data, {rid: d.start});
+                c2 = _.find(me.data, {rid: d.stop});
+                if (c1 && c2) {
+                    if (Math.abs(c1.oy - c2.oy) < me.cardh) {
+                        offset = 0
+                    } else if (c1.oy - c2.oy - me.cardh < 0) {
+                        offset = me.cardh / 2 + me.delta;
+                    } else {
+                        offset = -(me.cardh / 2 + me.delta);
+                    }
+                    return (offset + c1.oy + me.cardh / 2) * me.stepy;
+                }
+                return 0;
+            })
+            .attr('x2', function (d) {
+                c1 = _.find(me.data, {rid: d.start});
+                c2 = _.find(me.data, {rid: d.stop});
+                if (c1 && c2) {
+                    if (Math.abs(c2.ox - c1.ox) < me.cardw) {
+                        offset = 0
+                    } else if (c2.ox - c1.ox - me.cardw < 0) {
+                        offset = me.cardw / 2 + me.delta;
+                    } else {
+                        offset = -(me.cardw / 2 + me.delta);
+                    }
+                    return (offset + c2.ox + me.cardw / 2) * me.stepx;
+                }
+                return 0
+            })
+            .attr('y2', function (d) {
+                c1 = _.find(me.data, {rid: d.start});
+                c2 = _.find(me.data, {rid: d.stop});
+                if (c1 && c2) {
+                    if (Math.abs(c1.oy - c2.oy) < me.cardh) {
+                        offset = 0
+                    } else if (c2.oy - c1.oy - me.cardh < 0) {
+                        offset = me.cardh / 2 + me.delta;
+                    } else {
+                        offset = -(me.cardh / 2 + me.delta);
+                    }
+                    return (offset + c2.oy + me.cardh / 2) * me.stepy;
+                }
+                return 0;
+            })
+            .style("stroke", "#111")
+
+            .style("stroke-width", "3pt")
+            .style("stroke-linecap", "round")
+            .attr('marker-end', 'url(#arrowhead)')
+            .attr("opacity", 0.8)
         ;
     }
 
 
     fillCardBack() {
         let me = this;
-        console.log("Card is actually " + me.daddy.attr("tapped"))
+        // console.log("Card is actually " + me.daddy.attr("tapped"))
         if (me.daddy.attr("tapped") == 'true') {
-            console.log("tapped card")
+            // console.log("tapped card")
             me.drawRect(0 - me.delta * 2, 0 - me.delta * 2, me.cardw + 4 * me.delta, me.cardh + 4 * me.delta, "#fff", "#111", 1, "2 1", 1, 10)
             me.drawRect(0, 0, me.cardw, me.cardh, "#828", "#111", 1, "", 1, 5)
         } else {
-            console.log("visible card")
+            // console.log("visible card")
             me.drawRect(0 - me.delta * 2, 0 - me.delta * 2, me.cardw + 4 * me.delta, me.cardh + 4 * me.delta, "#fff", "#111", 1, "2 1", 1, 10)
             me.drawLine(0 - me.delta, 0 + me.cardw + me.delta, 0, 0, me.draw_fill, 3);
             me.drawLine(0 - me.delta, 0 + me.cardw + me.delta, 0 + me.cardh, 0 + 6, me.draw_fill, 3);
@@ -952,6 +984,49 @@ class EpicDeck {
             me.drawText(0 + me.cardw / 2, 0 + 1.0, me.draw_fill, me.shadow_stroke, me.medium_font_size * 0.8, "middle", "__alliance");
             me.drawText(0 + me.cardw / 2, 0 + 5.8, me.draw_fill, me.shadow_stroke, me.small_font_size, "middle", "__entrance");
             me.fillPicture(0, 0, "rid");
+
+            me.daddy.append('rect')
+                .attr('x', function (d) {
+                    return (d.ox - 0.125 + 10 * me.cardw / 10) * me.stepx;
+                })
+                .attr('y', function (d) {
+                    return (d.oy + 7 * me.cardh / 10) * me.stepy;
+                })
+                .attr('width', 0.25 * me.stepx)
+                .attr('height', 0.25 * me.stepy)
+                .style("stroke", me.draw_fill)
+                .style("fill", function (d) {
+                    if (me.source == d) {
+                        return "#A22";
+                    }
+                    return "#EEE";
+                })
+                .style("stroke-width", "1pt")
+                .style("cursor", "pointer")
+                .on("click", function (e, d) {
+                    if (e.ctrlKey == true) {
+                        if (me.source == undefined) {
+                            me.source = d;
+                        } else if (me.source == d) {
+                            me.source = undefined;
+                        } else if (me.source.links.indexOf(d.rid) != -1) {
+                            let x = me.source.links.indexOf(d.rid);
+                            me.source.links.splice(x, 1);
+                        } else {
+                            me.source.links.push(d.rid);
+                            me.source.links.sort();
+                            me.source = undefined;
+                        }
+                        me.buildLinks()
+                        console.log("link click")
+                        console.log(me.links)
+                        me.updateGroup();
+                        me.updateCard();
+                        me.updateLink();
+                    }
+                })
+            ;
+
         }
     }
 
@@ -985,10 +1060,10 @@ class EpicDeck {
                 d.oy = Math.round(d.oy);
                 if (d.selected == true) {
                     d.tapped = false;
-                    console.log("yo")
+                    // console.log("yo")
                 }
                 d.selected = false;
-                console.log("untap")
+                // console.log("untap")
                 me.updateGroup();
                 me.updateCard();
                 me.updateLink();

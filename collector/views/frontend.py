@@ -300,8 +300,8 @@ def display_sheet(request, pk=None):
             pk = 22
         c = Character.objects.get(id=pk)
         scenario = campaign.epic.title.upper()
-        pre_title = campaign.epic.place + ' - ' + campaign.epic.date;
-        post_title = ""
+        pre_title = campaign.epic.place + ' - ' + campaign.epic.date
+        post_title = "FuZion Interlock Custom System v7.5"
         spe = c.get_specialities()
         shc = c.get_shortcuts()
         j = c.to_jsonFICS()
@@ -338,3 +338,32 @@ def switch_epic(request, slug="none"):
             return HttpResponseRedirect('/')
         messages.warning(request, f'Current campaign not changed.')
     return HttpResponse(status=204)
+
+
+def display_sessionsheet(request, slug=None):
+    if request.is_ajax:
+        from collector.models.campaign import Campaign
+        campaign = get_current_config(request)
+
+        pks = [454, 460, 450, 447]
+
+        players = Character.objects.filter(id__in=pks)
+        players_list = []
+        i = 0
+        for c in players:
+            # spe = c.get_specialities()
+            # shc = c.get_shortcuts()
+            ch = c.to_jsonFICS()
+            k = json.loads(ch)
+            k['idx'] = i
+            k['shortcuts'] = c.get_shortcuts()
+            i += 1
+            ch = json.dumps(k)
+            players_list.append(ch)
+        scenario = campaign.epic.title.upper()
+        pre_title = campaign.epic.place + ' - ' + campaign.epic.date
+        post_title = ""
+        settings = {'version': 1.0, 'labels': {}, 'pre_title': pre_title, 'scenario': scenario,
+                    'post_title': post_title, 'fontset': FONTSET } #, 'specialities': spe, 'shortcuts': shc}
+        response = {'settings': json.dumps(settings, sort_keys=True, indent=4), 'data': json.dumps(players_list, indent=4, sort_keys=True)}
+        return JsonResponse(response)

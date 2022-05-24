@@ -29,6 +29,7 @@ class SkillRef(UUIDClass):
     description = models.TextField(max_length=1024, default='', blank=True)
     attributes = models.TextField(max_length=64, default='', blank=True)
     grouping = models.CharField(max_length=64, default='', blank=True)
+    deprecated = models.BooleanField(default=False, blank=True)
 
     @property
     def common_specialities(self):
@@ -50,8 +51,8 @@ class SkillRef(UUIDClass):
 
     def __str__(self):
         return '%s %s %s %s [%s]' % (
-        self.reference, self.group, "(R)" if self.is_root else "", "(S)" if self.is_speciality else "",
-        self.linked_to.reference if self.linked_to else "-")
+            self.reference, self.group, "(R)" if self.is_root else "", "(S)" if self.is_speciality else "",
+            self.linked_to.reference if self.linked_to else "-")
 
     def fix(self):
         super().fix()
@@ -101,7 +102,6 @@ class SkillCusto(models.Model):
     character_custo = models.ForeignKey(CharacterCusto, on_delete=models.CASCADE)
     skill_ref = models.ForeignKey(SkillRef, on_delete=models.CASCADE)
     value = models.IntegerField(default=0)
-
 
 
 # Inlines
@@ -184,31 +184,39 @@ def set_uncommon(modeladmin, request, queryset):
     queryset.update(is_common=False)
     short_description = "Change skills to uncommon"
 
+
 def refix(modeladmin, request, queryset):
     for skill_ref in queryset:
         skill_ref.save()
     short_description = "Do fix"
 
+
 def grouping_as_house(modeladmin, request, queryset):
     queryset.update(grouping='House')
     short_description = "Change skills grouping as House"
+
 
 def grouping_as_guild(modeladmin, request, queryset):
     queryset.update(grouping='Guild')
     short_description = "Change skills grouping as Guild"
 
+
 def grouping_as_system(modeladmin, request, queryset):
     queryset.update(grouping='System')
     short_description = "Change skills grouping as System"
+
 
 def grouping_as_sect(modeladmin, request, queryset):
     queryset.update(grouping='Sect')
     short_description = "Change skills grouping as Sect"
 
+
 class SkillRefAdmin(admin.ModelAdmin):
-    ordering = ['is_speciality', 'is_wildcard', 'reference','grouping']
-    list_display = ['reference','uuid', 'grouping','is_root', 'is_speciality', 'is_wildcard', 'is_common', 'group', 'linked_to']
-    actions = [refix,grouping_as_house,grouping_as_guild,grouping_as_system,grouping_as_sect,change_to_awa, change_to_soc, change_to_edu, change_to_fig, change_to_con, change_to_tin, change_to_per,
+    ordering = ['is_speciality', 'is_wildcard', 'reference', 'grouping']
+    list_display = ['reference', 'uuid', 'grouping', 'is_root', 'is_speciality', 'is_wildcard', 'is_common', 'group',
+                    'linked_to']
+    actions = [refix, grouping_as_house, grouping_as_guild, grouping_as_system, grouping_as_sect, change_to_awa,
+               change_to_soc, change_to_edu, change_to_fig, change_to_con, change_to_tin, change_to_per,
                change_to_bod, set_common, set_uncommon]
-    list_filter = ['is_root', 'is_speciality', 'is_wildcard', 'is_common', 'grouping', 'linked_to']
-    search_fields = ['reference','grouping']
+    list_filter = ['is_root', 'is_speciality', 'is_wildcard', 'is_common', 'deprecated', 'linked_to']
+    search_fields = ['reference', 'grouping']

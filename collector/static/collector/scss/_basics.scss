@@ -18,8 +18,6 @@ $fics_hl: darken($fics_link, 40%);
 $fics_ghost: darken($fics_front, 15%);
 $fics_subborder_color: darken($fics_back, 30%);
 $fics_lock: darken($fics_golden, 50%);
-$block_hsize: 1.3em;
-$block_wsize: 4ex;
 
 @mixin section_block {
     font-family: Titre;

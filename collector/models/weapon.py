@@ -183,7 +183,7 @@ class WeaponRefAdmin(admin.ModelAdmin):
     ordering = ('-category', 'meta_type', 'reference', 'origins', 'damage_class',)
     actions = [refix]
     list_filter = ['category', 'hidden', 'origins', 'caliber', 'meta_type', 'availability']
-    search_fields = ['reference', 'origins', 'meta_type']
+    search_fields = ['reference', 'origins', 'meta_type', 'damage_class']
 
 
 class WeaponCusto(models.Model):
