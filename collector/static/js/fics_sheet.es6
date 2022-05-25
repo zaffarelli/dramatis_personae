@@ -131,15 +131,17 @@ class FICSSheet extends Sheet {
             me.fillName(page);
             me.fillArmors(1.25, 3);
             me.fillWeapons(1.25, 5.5);
-            me.fillToDs(17.25, 3);
+
 
             me.fillShield(12.25, 10.5)
             me.fillPicture(1.25, 29.5)
         } else if (page == 2) {
             me.fillName(page);
-            me.fillBC(1.25, 10.5);
-            me.fillBA(1.25, 13.5);
-            me.fillOccult(12.25, 13.5)
+            me.fillToDs(1.25, 3);
+            me.fillBC(1.25, 11.5);
+            me.fillBA(1.25, 14.5);
+            me.fillOccult(1.25, 24.5)
+
         } else if (page == 3) {
             me.fillName(page);
             me.fillWallet(17.25, 8.5)

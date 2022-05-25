@@ -123,14 +123,15 @@ def exit_fencing_league(modeladmin, request, queryset):
     queryset.update(fencing_league=False)
     short_description = "Exit fencing league"
 
+
 def needs_fix(modeladmin, request, queryset):
     queryset.update(need_fix=True)
     short_description = "Need fix"
 
+
 def needs_pdf(modeladmin, request, queryset):
     queryset.update(need_pdf=True)
     short_description = "Need PDF"
-
 
 
 class CharacterAdmin(admin.ModelAdmin):
@@ -150,10 +151,10 @@ class CharacterAdmin(admin.ModelAdmin):
         RitualInline,
     ]
     ordering = ['full_name', ]
-    actions = [needs_fix, needs_pdf,no_importance, importance_up, importance_down, make_invisible,
+    actions = [needs_fix, needs_pdf, no_importance, importance_up, importance_down, make_invisible,
                make_visible, make_teutonic, make_kaanic, make_castillan, make_enquist, make_public, make_private,
                make_partial, make_complete, enter_fencing_league, exit_fencing_league, recalc_height]
     exclude = ['SA_REC', 'SA_STA', 'SA_END', 'SA_STU', 'SA_RES', 'SA_DMG', 'SA_TOL', 'SA_HUM', 'SA_PAS', 'SA_WYR',
                'SA_SPD', 'SA_RUN', 'PA_TOTAL', 'SK_TOTAL', 'TA_TOTAL', 'BC_TOTAL', 'BA_TOTAL']
-    list_filter = ['fencing_league', 'team', 'occult', 'alliance', 'keyword', 'specie']
-    search_fields = ['full_name', 'alias', 'alliance', 'keyword', 'rid', 'player']
+    list_filter = ['fencing_league', 'team', 'occult', 'alliance_ref', 'keyword', 'specie']
+    search_fields = ['full_name', 'alias', 'keyword', 'rid', 'player']

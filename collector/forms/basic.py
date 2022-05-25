@@ -12,11 +12,9 @@ from collector.models.weapon import Weapon
 from collector.models.shield import Shield
 from collector.models.blessing_curse import BlessingCurse, BlessingCurseModificator
 from collector.models.benefice_affliction import BeneficeAffliction, BeneficeAfflictionModificator
-#from cartograph.models.talent import Talent
 from collector.models.spacecraft import ShipRef, ShipSection, ShipSystemSlot
 from cartograph.models.system import System, OrbitalItem
 from collector.models.bloke import Bloke
-
 
 
 class CharacterForm(ModelForm):
@@ -26,12 +24,12 @@ class CharacterForm(ModelForm):
         exclude = ['pub_date', 'PA_TOTAL', 'rid', 'SA_REC', 'SA_STA', 'SA_END', 'SA_STU',
                    'SA_RES', 'SA_DMG', 'SA_TOL', 'SA_HUM', 'SA_PAS', 'SA_WYR', 'SA_SPD',
                    'SA_RUN', 'age', 'SK_TOTAL', 'TA_TOTAL', 'BC_TOTAL', 'BA_TOTAL', 'challenge',
-                   'gm_shortcuts', 'alliance_hash', 'OP', 'AP', 'stars', 'weapon_cost',
+                   'gm_shortcuts', 'OP', 'AP', 'stars', 'weapon_cost',
                    'armor_cost', 'shield_cost', 'score', 'life_path_total', 'OCC_LVL',
                    'OCC_DRK', 'PA_STR', 'PA_BOD', 'PA_CON', 'PA_MOV', 'PA_INT',
                    'PA_WIL', 'PA_TEM', 'PA_PRE', 'PA_TEC', 'PA_REF', 'PA_AGI',
                    'PA_AWA', 'OCC_LVL', 'OCC_DRK', 'spotlight', 'challenge_value', 'stories_count',
-                   'on_save_reroll_attributes', 'on_save_reroll_skills', 'importance', 'fights', 'victories',
+                   'importance', 'fights', 'victories', 'alliance',
                    'victory_rating', 'need_pdf', 'overhead', 'priority']
 
 
@@ -48,15 +46,10 @@ class ShipRefForm(ModelForm):
         fields = '__all__'
         exclude = ['dim_length', 'dim_width', 'dim_height', 'size_rating']
 
-# class SystemForm(ModelForm):
-#     class Meta:
-#         model = System
-#         fields = '__all__'
-#         exclude = ['orbital_items']
 
 # Character
 SkillFormSet = inlineformset_factory(Character, Skill, fields='__all__', extra=10, can_delete=True)
-#TalentFormSet = inlineformset_factory(Character, Talent, fields='__all__', extra=3, can_delete=True)
+
 BlessingCurseFormSet = inlineformset_factory(Character, BlessingCurse, fields='__all__', extra=3, can_delete=True)
 BeneficeAfflictionFormSet = inlineformset_factory(Character, BeneficeAffliction, fields='__all__', extra=3,
                                                   can_delete=True)

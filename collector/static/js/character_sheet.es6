@@ -446,7 +446,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
             .text(par)
             .style("text-anchor", 'left')
             .style("font-family", font)
-            .style("font-size", me.medium_font_size + 'pt')
+            .style("font-size", me.small_font_size + 'pt')
             .style("fill", me.user_fill)
             .style("stroke", me.user_stroke)
             .style("stroke-width", '0.05pt');
@@ -454,7 +454,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
             word,
             line = [],
             lineNumber = 0,
-            lineHeight = me.small_font_size,
+            lineHeight = me.small_font_size+2,
             x = text.attr("x"),
             y = text.attr("y"),
             tspan = text.text(null).append("tspan")
@@ -471,7 +471,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
                     .attr("x", x)
                     .attr("y", y)
                     .attr("dy", ++lineNumber * lineHeight)
-                    .style("font-size", me.medium_font_size + 'pt')
+                    .style("font-size", me.small_font_size + 'pt')
                     .style("stroke-width", '0.05pt')
                     .text(word);
             }
@@ -650,11 +650,12 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
     fillToDs(basex = 0, basey = 0) {
         let me = this;
         let styles = {}
-        styles["labels"] = ["Cat", "Tour of Duty", "Pts"]
-        styles["properties"] = ["category", "reference", "value"]
-        styles["aligns"] = ["start", "multiline", "start"]
-        styles["widths"] = [0, 5, 0]
-        styles["lefts"] = [0, 0.5, 5]
+        console.log(me.data["tods"])
+        styles["labels"] = ["Cat", "Tour of Duty", "Pts","Details"]
+        styles["properties"] = ["category", "reference", "value","description"]
+        styles["aligns"] = ["start", "start", "start","multiline"]
+        styles["widths"] = [0, 5, 0,16]
+        styles["lefts"] = [0, 0.5, 5,6]
         me.fillList(basex, basey, "tods", styles);
     }
 
@@ -768,12 +769,13 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
             let stroke = me.user_stroke,
                 fill = me.user_fill,
                 font = me.user_font,
-                size = me.medium_font_size,
-                opac = 1.0, biggest = 0;
+                size = me.small_font_size,
+                opac = 1.0, biggest = 0,
+                small_inter = me.small_inter * 0.75;
             if (!me.blank) {
                 l = 0;
-                offset = (i + biggest) * me.small_inter;
-                oy = basey + me.small_inter + offset;
+                offset = i + (biggest) * small_inter;
+                oy = basey + small_inter + offset;
                 biggest = 0;
                 _.forEach(styles["properties"], function (y, j) {
                     if (styles["aligns"][j] == "multiline") {

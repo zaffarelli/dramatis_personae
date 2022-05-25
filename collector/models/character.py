@@ -61,11 +61,11 @@ class Character(Combattant):
 
     page_num = 0
     alias = models.CharField(max_length=200, default='', blank=True)
-    alliance = models.CharField(max_length=200, default='', blank=True)
+    # alliance = models.CharField(max_length=200, default='', blank=True)
     faction = models.CharField(max_length=200, default='', blank=True)
     alliance_ref = models.ForeignKey(AllianceRef, blank=True, null=True, on_delete=models.SET_NULL)
     specie = models.ForeignKey(Specie, default=31, blank=True, null=True, on_delete=models.SET_NULL)
-    race = models.TextField(max_length=256, default='', blank=True)
+    race = models.CharField(max_length=256, default='', blank=True)
     native_fief = models.CharField(max_length=200, default='none')
     fief = models.ForeignKey(System, blank=True, null=True, on_delete=models.SET_NULL, related_name='fief')
     current_fief = models.ForeignKey(System, blank=True, null=True, on_delete=models.SET_NULL,
@@ -150,7 +150,7 @@ class Character(Combattant):
     storytelling_note = models.TextField(default='', blank=True)
     stories = models.TextField(max_length=1024, default='', blank=True)
     todo_list = models.TextField(default='', blank=True)
-
+    experience_details = models.TextField(max_length=1024, default='', blank=True)
     azurites = models.PositiveIntegerField(default=0, blank=True)
     diamonds = models.PositiveIntegerField(default=0, blank=True)
     rubies = models.PositiveIntegerField(default=0, blank=True)
@@ -170,9 +170,6 @@ class Character(Combattant):
     armor_options_not = []
     shield_options = []
     shield_options_not = []
-
-
-
 
     @property
     def ghostmark_data(self):
@@ -397,8 +394,8 @@ class Character(Combattant):
         self.priority = (abs(self.life_path_total - self.OP) < 8) and (self.OP > 0) and (
                 abs(self.life_path_total - self.OP) > 0)
         self.build_log = "\n".join(bl)
-        if self.player != '':
-            self.balanced = True
+        # if self.player != '':
+        #     self.balanced = True
         if self.historical_figure:
             self.balanced = True
         if self.balanced:
@@ -509,6 +506,10 @@ class Character(Combattant):
             self.rebuild_from_lifepath()
         else:
             self.rebuild_free_form()
+        self.xp_spent, self.experience_balance = self.check_experience_details()
+        if self.xp_earned < self.xp_spent:
+            self.xp_earned = self.xp_spent
+        self.xp_pool = self.xp_earned - self.xp_spent
         self.calculate_shortcuts()
         self.update_ranking()
         self.race = self.specie.species
@@ -529,6 +530,7 @@ class Character(Combattant):
         self.update_challenge()
         self.update_stories_count()
         self.race = self.specie.species
+
         if self.historical_figure:
             self.audit_log()
         self.need_fix = False
@@ -555,7 +557,7 @@ class Character(Combattant):
                     for m in self.charactercusto.skillcusto_set.all():
                         if c['mixes_with'] == m.skill_ref.reference:
                             logger.debug(f"found mixes_with: {m.skill_ref}")
-                            logger.debug(f" --- skill value is ........ {s.value}" )
+                            logger.debug(f" --- skill value is ........ {s.value}")
                             logger.debug(f" --- mixes_with value is ... {m.value}")
                             m.value += s.value
                             s.value = 0
@@ -574,16 +576,16 @@ class Character(Combattant):
 
         logger.info("done")
 
-
-
     def update_challenge(self):
         res = ''
         res += '<i class="fas fa-th-large" title="primary attributes"></i>%d ' % (self.AP)
         res += '<i class="fas fa-th-list" title="skills"></i> %d ' % (self.SK_TOTAL)
-        res += '<i class="fas fa-th" title="talents"></i> %d ' % (self.TA_TOTAL + self.BC_TOTAL + self.BA_TOTAL)
+        res += '<i class="fas fa-th" title="BC/BA"></i> %d ' % (self.BC_TOTAL + self.BA_TOTAL)
         res += '<i class="fas fa-star" title="wildcards"></i> %d ' % (self.WP_tod_pool)
-        res += '<i class="fas fa-newspaper" title="OP challenge"></i> %d/%d' % (self.OP, self.life_path_total)
-        self.challenge_value = self.AP * 3 + self.SK_TOTAL + self.BC_TOTAL + self.BA_TOTAL
+        res += '<i class="fas fa-newspaper" title="OP -vs- LifePath"></i> %d/%d ' % (self.OP, self.life_path_total)
+        res += '<i class="fas fa-square" title="exp_bal/xp_spent"></i> %d/%d ' % (self.experience_balance, self.xp_spent)
+        res += '<i class="fas fa-circle" title="Adjusted"></i> %d ' % (self.OP - self.experience_balance)
+        self.challenge_value = self.AP * 3 + self.SK_TOTAL + self.BC_TOTAL + self.BA_TOTAL - self.experience_balance
         self.challenge = res
 
     def calculate_shortcuts(self):
@@ -1094,7 +1096,7 @@ class Character(Combattant):
             if skill.skill_ref.deprecated == False:
                 skills_list.append(
                     {'skill': skill.skill_ref.reference, 'value': skill.value, 'is_root': skill.skill_ref.is_root,
-                        'is_speciality': skill.skill_ref.is_speciality, 'idx1': 0, 'idx2': 0})
+                     'is_speciality': skill.skill_ref.is_speciality, 'idx1': 0, 'idx2': 0})
         for skill in SkillRef.objects.exclude(deprecated=True).order_by('reference'):
             if skill.reference not in [value for elem in skills_list for value in elem.values()]:
                 if not skill.is_speciality:
@@ -1164,3 +1166,28 @@ class Character(Combattant):
         for tod in self.tourofduty_set.all().order_by('tour_of_duty_ref__category'):
             list.append(tod.tour_of_duty_ref.reference)
         return ", ".join(list)
+
+    def check_experience_details(self):
+        experience = 0
+        op = 0
+        if self.experience_details:
+            list = self.experience_details.split(";")
+            for entry in list:
+                exp = 0
+                items = entry.split("=")
+                coeff = 1
+                coeff_o = 1
+                if items[0] == 'PA':
+                    coeff = 5
+                    coeff_o = 3
+                steps = items[2].split(">")
+                start = int(steps[0])
+                stop = int(steps[1])
+                diff = stop - start
+                op += diff * coeff_o
+                for x in range(start, stop, 1):
+                    exp += (x + 1) * coeff
+                print(f'{items[1]:20} {items[2]:6} OP:{diff * coeff:4} Exp:{exp:4}')
+                experience += exp
+            print(f'         Totals checked are OP:{op:4} Exp:{experience:4}')
+        return experience, op
