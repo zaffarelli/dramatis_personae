@@ -364,6 +364,26 @@ def display_sessionsheet(request, slug=None):
         pre_title = campaign.epic.place + ' - ' + campaign.epic.date
         post_title = ""
         settings = {'version': 1.0, 'labels': {}, 'pre_title': pre_title, 'scenario': scenario,
-                    'post_title': post_title, 'fontset': FONTSET } #, 'specialities': spe, 'shortcuts': shc}
-        response = {'settings': json.dumps(settings, sort_keys=True, indent=4), 'data': json.dumps(players_list, indent=4, sort_keys=True)}
+                    'post_title': post_title, 'fontset': FONTSET}  # , 'specialities': spe, 'shortcuts': shc}
+        response = {'settings': json.dumps(settings, sort_keys=True, indent=4),
+                    'data': json.dumps(players_list, indent=4, sort_keys=True)}
         return JsonResponse(response)
+
+
+def all_epics(request):
+    if request.is_ajax:
+        from collector.models.campaign import Campaign
+        campaigns = Campaign.objects.all().order_by('epic__era')
+        epics = []
+        for x in campaigns:
+            e = json.loads(x.to_json())
+            e['population'] = x.population
+            e['epic_title'] = x.epic.title
+            epics.append(e)
+        context = {'epics': epics}
+        template = get_template('collector/epics.html')
+        html = template.render(context, request)
+        response = {'mosaic': html}
+        return JsonResponse(response)
+    else:
+        return HttpResponse(status=204)

@@ -518,5 +518,5 @@ class Campaign(models.Model):
 
 
 class CampaignAdmin(admin.ModelAdmin):
-    ordering = ['title']
+    ordering = ['epic__era','title']
     list_display = ['__str__', 'title', 'epic', 'is_active', 'smart_code', 'rpgsystem', 'hidden', 'gm', 'population']

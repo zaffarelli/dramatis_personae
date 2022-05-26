@@ -7,10 +7,10 @@ from django.urls import re_path
 from collector.views.characters import CharacterUpdateView, customize_ba, customize_bc, \
     customize_skill, customize_ba_del, customize_bc_del, skill_pick, attr_pick, customize_weapon, customize_weapon_del, \
     customize_armor, customize_armor_del, customize_shield, customize_shield_del, customize_ritual, customize_ritual_del
-# from collector.views.investigators import InvestigatorUpdateView
+
 from collector.views.frontend import index, toggle_public, toggle_spotlight, get_list, add_avatar, \
     get_storyline, conf_details, recalc_avatar, heartbeat, \
-    show_todo, pdf_show, wa_export_character, tile_avatar, ghostmark_test, display_sheet, display_sessionsheet, switch_epic, deep_toggle
+    show_todo, pdf_show, wa_export_character, tile_avatar, ghostmark_test, display_sheet, display_sessionsheet, switch_epic, deep_toggle, all_epics
 from collector.views.backend import export, xls_update, pdf_character, gss_update, gss_summary, pdf_rules, roll_dice, \
     bloke_selector, run_audit, epic_deck, svg_to_pdf, save_sequence, load_sequence
 from collector.views.misc_chart import get_population_statistics, get_keywords
@@ -83,6 +83,7 @@ urlpatterns = [
     re_path('^ajax/blokes/$', bloke_selector, name="bloke_selector"),
     re_path('^ajax/audit/$', run_audit, name="run_audit"),
     re_path('^ajax/deck/$', epic_deck, name='epic_deck'),
+    re_path('^ajax/epics/$', all_epics, name='all_epics'),
     re_path('^ajax/deck/save/$', save_sequence, name='save_sequence'),
     re_path('^ajax/deck/load/$', load_sequence, name='load_sequence'),
 ]
