@@ -70,9 +70,10 @@ admin.site.register(ShipSection, ShipSectionAdmin)
 from collector.models.ritual import RitualRef, RitualRefAdmin
 admin.site.register(RitualRef, RitualRefAdmin)
 
-from collector.models.cyberware import CyberwareRef, CyberwareRefAdmin, Cyberfeature, CyberfeatureAdmin
+from collector.models.cyberware import CyberwareRef, CyberwareRefAdmin, Cyberfeature, CyberfeatureAdmin, Cyberware, CyberwareAdmin
 admin.site.register(Cyberfeature, CyberfeatureAdmin)
 admin.site.register(CyberwareRef, CyberwareRefAdmin)
+admin.site.register(Cyberware, CyberwareAdmin)
 
 from collector.models.profile import Profile, ProfileAdmin
 admin.site.register(Profile, ProfileAdmin)
@@ -84,18 +85,11 @@ from collector.models.alliance_ref import AllianceRef, AllianceRefAdmin
 admin.site.register(AllianceRef, AllianceRefAdmin)
 
 
-from collector.models.investigator import Investigator, InvestigatorAdmin
-admin.site.register(Investigator, InvestigatorAdmin)
 
 from collector.models.rpg_system import RpgSystem, RpgSystemAdmin
 admin.site.register(RpgSystem, RpgSystemAdmin)
 
-from collector.models.coc7_skill import Coc7SkillRef, Coc7SkillRefAdmin
-admin.site.register(Coc7SkillRef, Coc7SkillRefAdmin)
 
-from collector.models.coc7_occupation import Coc7Occupation
-from collector.models.coc7_occupation_admin import Coc7OccupationAdmin
-admin.site.register(Coc7Occupation, Coc7OccupationAdmin)
 
 from collector.models.sequence import Sequence, SequenceAdmin
 admin.site.register(Sequence, SequenceAdmin)

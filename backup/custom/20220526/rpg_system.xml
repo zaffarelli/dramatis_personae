@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<django-objects version="1.0"><object model="collector.rpgsystem" pk="1"><field name="name" type="CharField">Fading Suns</field><field name="game_mechanics" type="CharField">Fuzion Interlock Custom System</field><field name="smart_code" type="CharField">FICS</field><field name="description" type="TextField"></field></object></django-objects>

@@ -8,7 +8,7 @@ from django.shortcuts import render, redirect
 from django.core.paginator import Paginator
 
 from collector.models.character import Character
-from collector.models.investigator import Investigator
+# from collector.models.investigator import Investigator
 from collector.models.specie import Specie
 from collector.models.campaign import Campaign
 from django.template.loader import get_template

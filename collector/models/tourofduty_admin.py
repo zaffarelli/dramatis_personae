@@ -13,20 +13,35 @@ def refix(modeladmin, request, queryset):
     short_description = "Do fix"
 
 
+def unset_core(modeladmin, request, queryset):
+    for tour_of_duty_ref in queryset:
+        tour_of_duty_ref.core = False
+        tour_of_duty_ref.save()
+    short_description = "Unset core"
+
+
+def set_core(modeladmin, request, queryset):
+    for tour_of_duty_ref in queryset:
+        tour_of_duty_ref.core = True
+        tour_of_duty_ref.save()
+    short_description = "Set core"
+
+
 class TourOfDutyRefAdmin(admin.ModelAdmin):
     from collector.models.skill import SkillModificatorInline
     from collector.models.benefice_affliction import BeneficeAfflictionModificatorInline
     from collector.models.blessing_curse import BlessingCurseModificatorInline
-    ordering = ['category', 'topic', 'reference', 'caste', 'value']
-    list_display = ['reference', 'category', 'caste', 'valid', 'balance', 'topic', 'is_custom', 'source', 'AP', 'OP','balance_AP', 'balance_OP',
+    ordering = ['-core', 'category', 'topic', 'reference', 'caste', 'value']
+    list_display = ['reference', 'category', 'caste', 'valid', 'core', 'balance', 'topic', 'is_custom', 'source', 'AP',
+                    'OP', 'balance_AP', 'balance_OP',
                     'value',
                     'description']
     exclude = ['value']
-    actions = [refix]
+    actions = [refix, unset_core, set_core]
     inlines = [
         SkillModificatorInline,
         BeneficeAfflictionModificatorInline,
         BlessingCurseModificatorInline
     ]
-    list_filter = ['category', 'valid', 'caste', 'topic']
+    list_filter = ['core', 'category', 'valid', 'caste', 'topic']
     search_fields = ['reference']

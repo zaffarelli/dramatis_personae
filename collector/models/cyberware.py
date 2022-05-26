@@ -23,9 +23,11 @@ CYBERFEATURE_CATEGORIES = (
     ('6', "Technology"),
 )
 
+
 class Cyberfeature(models.Model):
     class Meta:
         verbose_name = "FICS: Cyberfeature"
+
     reference = models.CharField(max_length=64)
     value = models.IntegerField(default=1)
     complexity = models.IntegerField(default=1)
@@ -42,7 +44,8 @@ class Cyberfeature(models.Model):
 
 class CyberwareRef(models.Model):
     class Meta:
-        verbose_name = "FICS: Cyberware"
+        verbose_name = "FICS: Cyberware Ref"
+
     reference = models.CharField(max_length=64)
     cyberfeatures = models.ManyToManyField(Cyberfeature, blank=True)
     complexity = models.IntegerField(default=0)
@@ -89,9 +92,9 @@ class CyberwareRef(models.Model):
             logger.info("Device [%s] not yet fixable... Next save will do." % (self.reference))
 
 
-
-
 class Cyberware(models.Model):
+    class Meta:
+        verbose_name = "FICS: Cyberware"
     character = models.ForeignKey(Character, on_delete=models.CASCADE)
     cyberware_ref = models.ForeignKey(CyberwareRef, on_delete=models.CASCADE)
     replacement_for = models.CharField(max_length=64, default='Add on')
@@ -112,6 +115,7 @@ class CyberwareRefAdmin(admin.ModelAdmin):
     ordering = ('reference',)
     list_display = ['reference', 'tech_level', 'value', 'incompatibility', 'features', 'description']
 
-# class CyberwareAdmin(admin.ModelAdmin):
-#     ordering = ('character','replacement_for','cyberware_ref')
-#     list_display = ['character','replacement_for','cyberware_ref']
+
+class CyberwareAdmin(admin.ModelAdmin):
+    ordering = ('character', 'replacement_for', 'cyberware_ref')
+    list_display = ['character', 'replacement_for', 'cyberware_ref']

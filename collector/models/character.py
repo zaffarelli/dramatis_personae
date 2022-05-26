@@ -496,8 +496,7 @@ class Character(Combattant):
         self.fencing_league_special()
         logger.info('Occult Special')
         self.occult_special()
-        logger.info('Fix 7.5')
-        self.fix75()
+
         if self.full_name == self.rid:
             self.audit_log("Name is a RID. Everything has to be done on this character.")
         # NPC fix
@@ -506,6 +505,8 @@ class Character(Combattant):
             self.rebuild_from_lifepath()
         else:
             self.rebuild_free_form()
+        logger.info('Fix 7.5')
+        self.fix75()
         self.xp_spent, self.experience_balance = self.check_experience_details()
         if self.xp_earned < self.xp_spent:
             self.xp_earned = self.xp_spent

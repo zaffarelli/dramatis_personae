@@ -75,6 +75,7 @@ class TourOfDutyRef(models.Model):
     description = models.TextField(max_length=1024, default='', blank=True)
     valid = models.BooleanField(default=False)
     pub_date = models.DateTimeField('Date published', default=datetime.now)
+    core = models.BooleanField(default=True)
 
     def __str__(self):
         return f'[{self.get_category_display()}][{self.value}] ({self.get_caste_display()}|{self.topic}) {self.reference} '
@@ -120,7 +121,8 @@ class TourOfDutyRef(models.Model):
                 texts.append("{%s %+d}" % (s.skill_ref.reference, s.value))
                 if s.skill_ref.is_wildcard:
                     self.WP += s.value
-                self.OP += s.value
+                if not s.skill_ref.is_root:
+                    self.OP += s.value
             for bc in self.blessingcursemodificator_set.all():
                 texts.append("(%s %+d)" % (bc.blessing_curse_ref.reference, bc.blessing_curse_ref.value))
                 self.OP += bc.blessing_curse_ref.value

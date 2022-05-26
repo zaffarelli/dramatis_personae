@@ -15,6 +15,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+
 class RpgSystem(models.Model):
     class Meta:
         ordering = ['name', 'game_mechanics']
@@ -27,6 +28,7 @@ class RpgSystem(models.Model):
 
     def __str__(self):
         return self.smart_code
+
 
 class RpgSystemAdmin(admin.ModelAdmin):
     list_display = ['name', 'game_mechanics', 'smart_code', 'description']
