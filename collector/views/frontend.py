@@ -344,8 +344,14 @@ def display_sessionsheet(request, slug=None):
     if request.is_ajax:
         from collector.models.campaign import Campaign
         campaign = get_current_config(request)
+        pks = []
+        teams = campaign.team_set.filter(active=True)
+        if len(teams) >= 1:
+            team = teams.first()
+            for tm in team.teammate_set.all():
+                pks.append(tm.character_id)
 
-        pks = [454, 460, 450, 447]
+        # pks = [454, 460, 450, 447]
 
         players = Character.objects.filter(id__in=pks)
         players_list = []

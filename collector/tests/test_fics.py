@@ -1,8 +1,8 @@
-'''
+"""
  ╔╦╗╔═╗  ╔═╗┌─┐┬  ┬  ┌─┐┌─┐┌┬┐┌─┐┬─┐
   ║║╠═╝  ║  │ ││  │  ├┤ │   │ │ │├┬┘
  ═╩╝╩    ╚═╝└─┘┴─┘┴─┘└─┘└─┘ ┴ └─┘┴└─
-'''
+"""
 from django.test import TestCase
 #from cartograph.models.character import Character
 #from cartograph.utils.fs_fics7 import check_primary_attributes

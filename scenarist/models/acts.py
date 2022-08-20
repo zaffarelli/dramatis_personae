@@ -14,7 +14,7 @@ class Act(StoryModel):
         ordering = ['chapter','title']
     from scenarist.models.dramas import Drama
     drama = models.ForeignKey(Drama, null=True, on_delete=models.CASCADE)
-    resolution = models.TextField(default='', max_length=2560,blank=True)
+    # resolution = models.TextField(default='', max_length=2560,blank=True)
 
     @property
     def challenge(self):

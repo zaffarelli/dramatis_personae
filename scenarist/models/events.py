@@ -14,7 +14,7 @@ class Event(StoryModel):
         ordering = ['chapter','title']
     from scenarist.models.acts import Act
     act = models.ForeignKey(Act, null=True, on_delete=models.CASCADE)
-    resolution = models.TextField(default='', max_length=2560,blank=True)
+    # resolution = models.TextField(default='', max_length=2560,blank=True)
     challenge = models.PositiveIntegerField(default=1)
     anchor = models.CharField(default='', max_length=256, blank=True)
 

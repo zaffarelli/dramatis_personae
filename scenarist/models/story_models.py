@@ -7,13 +7,24 @@ from django.db import models
 import re
 import string
 import json
+from django.utils import timezone
+
+CARD_TYPES = (
+    ('UN', 'Uncategorized'),
+    ('SC', 'Scene'),
+    ('EV', 'Event'),
+    ('BK', 'Background'),
+)
+
 
 class StoryModel(models.Model):
     class Meta:
         abstract = True
+
     title = models.CharField(default='', max_length=256, blank=True, unique=True)
     chapter = models.CharField(default='0', blank=True, max_length=64)
     date = models.CharField(max_length=128, default='', blank=True)
+    dt = models.DateTimeField(default=timezone.now, blank=True, null=True)
     place = models.CharField(max_length=128, default='', blank=True)
     gamemaster = models.CharField(default='zaffarelli@gmail.com', max_length=128, blank=True)
     visible = models.BooleanField(default=True)
@@ -26,8 +37,11 @@ class StoryModel(models.Model):
     downtime_scene = models.BooleanField(default=False)
     to_PDF = models.BooleanField(default=True)
     full_id = models.CharField(max_length=64, blank=True, default='')
-    description = models.TextField(max_length=6000,default='',blank=True)
+    description = models.TextField(max_length=6000, default='', blank=True)
+    resolution = models.TextField(default='', max_length=2560,blank=True)
     rewards = models.TextField(max_length=1024, default='', blank=True)
+    card_type = models.CharField(max_length=2, default='UN', choices=CARD_TYPES)
+    archived = models.BooleanField(default=False)
 
     def __str__(self):
         """ Standard display """
@@ -47,13 +61,13 @@ class StoryModel(models.Model):
 
     def to_json(self):
         """ Returns JSON of object """
-        return json.dumps(self, default=lambda o: o.__dict__,sort_keys=True, indent=4)
+        return json.dumps(self, default=lambda o: o.__dict__, sort_keys=True, indent=4)
 
     @property
     def children(self):
         arr = []
         for episode in self.get_episodes():
-            arr.append("%s_%d"%(type(episode).__name__.lower(),episode.id))
+            arr.append("%s_%d" % (type(episode).__name__.lower(), episode.id))
         return ";".join(arr)
 
     def fetch_avatars(self, value):

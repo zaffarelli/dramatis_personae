@@ -15,7 +15,7 @@ class Team(models.Model):
     class Meta:
         ordering = ['name']
     name = models.CharField(max_length=256, unique=True)
-    public = models.BooleanField(default=True)
+    active = models.BooleanField(default=True)
     campaign = models.ForeignKey(Campaign, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
@@ -51,5 +51,5 @@ class TeamMateInline(admin.TabularInline):
 class TeamAdmin(admin.ModelAdmin):
     model = Team
     inlines = [ TeamMateInline ]
-    list_display = ['name', 'public', 'population', 'members', 'campaign']
-    list_filter = ['public']
+    list_display = ['name', 'active', 'population', 'members', 'campaign']
+    list_filter = ['active']
