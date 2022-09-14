@@ -171,7 +171,8 @@ def parse_avatars(value):
             ch = None
         if ch is not None:
             replacement_string = '<span id="%d" class="character_link embedded_link" title="%s">%s %s</span>' % (
-                ch.id, ch.ship_ref, ch.full_name, "ok" if ch.ship_ref.ship_status == "combat_ready" else "&dagger;")
+                ch.id, ch.ship_ref, ch.full_name,
+                "(<i class='fa fa-anchor'></i>)" if ch.ship_ref.ship_status == "combat_ready" else "&dagger;")
         else:
             replacement_string = '<span class="embedded_link broken">[%s&dagger;]</span>' % (rid)
         changes.append({'src': item.group(), 'dst': replacement_string})
@@ -416,4 +417,17 @@ def colorteam(value):
 @register.filter(name='parseclean')
 def parseclean(value):
     res = value.replace("\n", "<br/>")
+    return res
+
+
+@register.filter(name='as_place')
+def as_place(value):
+    res = 'n/a'
+    if isinstance(value, str):
+        val = value.replace('|', '/')
+        words = val.split('/')
+        list = []
+        for word in words:
+            list.append(word.strip())
+        res = " <i class='fa fa-arrow-right'></i> ".join(list)
     return res

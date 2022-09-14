@@ -161,6 +161,10 @@ class Scenarist{
         this.registerStory('drama');
         this.registerStory('act');
         this.registerStory('event');
+        this.registerStory('adventure');
+        this.registerStory('scheme');
+        this.registerStory('scene');
+        this.registerStory('backlog');
         this.registerQuizz()
     }
 

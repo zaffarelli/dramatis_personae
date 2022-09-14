@@ -1,0 +1,41 @@
+{% load fics_filters %}
+<div class="storydetails scheme">
+    <div class="wall">
+        <div class="brick">
+            {{object.adventure.name}}&nbsp;<i class="fa fa-arrow-right"></i>&nbsp;{{object.name}}
+        </div>
+        {% if object.anchor %}
+        <div class="brick">
+            <em>Anchor</em> {{object.anchor|linebreaks|parse_avatars|safe}}
+        </div>
+        {% endif %}
+        <div class="brick">
+            <em>PDF</em>{{object.to_PDF | prettybool | safe }}
+        </div>
+        {% if object.date %}
+        <div class="brick">
+            <em>Date</em>{{object.date}}
+        </div>
+        {% endif %}
+        {% if object.place %}
+        <div class="brick">
+            <em>Place</em>{{object.place}}
+        </div>
+        {% endif %}
+        {% if object.challenge %}
+        <div class="brick">
+            <em>Challenge</em> {{object.challenge}}
+        </div>
+        {% endif %}
+        {% if object.backlogs %}
+        <div class="brick">
+            <em>Backlogs</em> {{object.linked_backlogs_str|safe}}
+        </div>
+        {% endif %}
+    </div>
+    <div class="pitch">
+        {{object.description|parse_avatars|safe}}
+        <hr/>
+        {{object.resolution|parse_avatars|safe}}
+    </div>
+</div>

@@ -12,10 +12,10 @@ from scenarist.models.story_models import StoryModel
 
 class Drama(StoryModel):
     class Meta:
-        ordering = ['epic', 'chapter','date','title']
+        ordering = ['epic', 'chapter', 'date', 'name']
+
     from scenarist.models.epics import Epic
     epic = models.ForeignKey(Epic, null=True, on_delete=models.CASCADE)
-
 
     @property
     def full_chapter(self):
@@ -45,7 +45,7 @@ class Drama(StoryModel):
                 ok.append(it)
             else:
                 nok.append(it)
-        return ", ".join(ok)+"<hr/>"+", ".join(nok)
+        return ", ".join(ok) + "<hr/>" + ", ".join(nok)
 
     def get_absolute_url(self):
         return reverse('drama-detail', kwargs={'pk': self.pk})
@@ -78,8 +78,9 @@ class Drama(StoryModel):
             a.save()
         self.save()
 
+
 class DramaAdmin(admin.ModelAdmin):
-    ordering = ('epic', 'chapter', 'date', 'title',)
-    list_display = ('title', 'full_id', 'epic', 'chapter', 'date', 'place', 'is_visible', 'description')
-    list_filter = ('epic',)
-    search_fields = ('title', 'description')
+    ordering = ['epic', 'chapter', 'date', 'name']
+    list_display = ['name', 'full_id', 'epic', 'chapter', 'date', 'place', 'is_visible', 'description']
+    list_filter = ['epic']
+    search_fields = ['name', 'description']

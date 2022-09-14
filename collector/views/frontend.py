@@ -257,11 +257,18 @@ def conf_details(request):
     if request.is_ajax:
         from collector.models.campaign import Campaign
         campaign = get_current_config(request)
-        _ = export_epic(request, campaign)
-        context = {'epic': campaign.parse_details()}
-        template = get_template('collector/conf_details.html')
-        html = template.render(context, request)
-        response = {'mosaic': html}
+        if campaign.new_narrative:
+            epic_data = campaign.epic.to_json()
+            context = {'data': epic_data}
+            template = get_template('collector/conf_details2.html')
+            html = template.render(context, request)
+            response = {'mosaic': html}
+        else:
+            _ = export_epic(request, campaign)
+            context = {'epic': campaign.parse_details()}
+            template = get_template('collector/conf_details.html')
+            html = template.render(context, request)
+            response = {'mosaic': html}
         return JsonResponse(response)
     else:
         return Http404
@@ -330,7 +337,7 @@ def switch_epic(request, slug="none"):
             new_campaign.save()
             campaign.is_active = False
             campaign.save()
-            messages.info(request, f'Current epic switched to {new_campaign.epic.title}.')
+            messages.info(request, f'Current epic switched to {new_campaign.epic.name}.')
             # if not request.user.is_authenticated:
             #     return redirect('accounts/login/')
             # context = {'fontset': FONTSET}
@@ -366,7 +373,7 @@ def display_sessionsheet(request, slug=None):
             i += 1
             ch = json.dumps(k)
             players_list.append(ch)
-        scenario = campaign.epic.title.upper()
+        scenario = campaign.epic.name.upper()
         pre_title = campaign.epic.place + ' - ' + campaign.epic.date
         post_title = ""
         settings = {'version': 1.0, 'labels': {}, 'pre_title': pre_title, 'scenario': scenario,
@@ -384,7 +391,8 @@ def all_epics(request):
         for x in campaigns:
             e = json.loads(x.to_json())
             e['population'] = x.population
-            e['epic_title'] = x.epic.title
+            e['epic_title'] = x.epic.name
+            e['epic'] = x.epic.to_json()
             epics.append(e)
         context = {'epics': epics}
         template = get_template('collector/epics.html')

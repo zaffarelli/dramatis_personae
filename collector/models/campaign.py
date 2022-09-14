@@ -37,6 +37,7 @@ class Campaign(models.Model):
     description = models.TextField(max_length=128, default='', blank=True)
     gm = models.ForeignKey(User, null=True, blank=True, on_delete=models.SET_NULL)
     rpgsystem = models.ForeignKey(RpgSystem, null=True, blank=True, on_delete=models.SET_NULL)
+    irl_year_start = models.PositiveIntegerField(default=1990, blank=True)
     is_active = models.BooleanField(default=False)
     smart_code = models.CharField(default='xxxxxx', max_length=6)
     current_drama = models.ForeignKey(Drama, null=True, blank=True, on_delete=models.SET_NULL)
@@ -48,6 +49,7 @@ class Campaign(models.Model):
     black_text = models.BooleanField(default=True)
     hidden = models.BooleanField(default=False)
     known_systems = models.TextField(max_length=1024, default='', blank=True)
+    new_narrative = models.BooleanField(default=False)
 
     def __str__(self):
         return f'{self.title} [{self.rpgsystem}]'
@@ -106,6 +108,7 @@ class Campaign(models.Model):
         from collector.utils.fs_fics7 import get_keywords
 
         epic = Epic.objects.get(title=self.epic.title)
+        # epic_json = self.epic.to_json()
         dramas = Drama.objects.filter(epic=epic).order_by('chapter', 'date')
         context_dramas = []
         for drama in dramas:
@@ -121,8 +124,12 @@ class Campaign(models.Model):
                 context_acts.append(context_act)
             context_drama = {'title': drama.title, 'data': drama, 'acts': context_acts}
             context_dramas.append(context_drama)
-        context = {'title': epic.title, 'data': epic, 'dramas': context_dramas}
-        context['keywords'] = get_keywords()
+        context_adventures = []
+        for adventure in self.epic.adventure_set.all():
+            context_adventures.append({'title': adventure.title, 'data': adventure})
+            context_adventures.append(context_adventures)
+            context = {'title': epic.title, 'data': epic, 'dramas': context_dramas}
+            context['keywords'] = get_keywords()
         return context
 
     def prepare_colorset(self, size=16, color_scale=False):
@@ -133,9 +140,9 @@ class Campaign(models.Model):
         c_colorset = list(start.range_to(stop, size))
         # c_hcolorset = list(start.range_to(Color('white'), size))
         for c in c_colorset:
-            colorset.append(Color(c.hex,luminance=c.luminance*0.75).hex)
+            colorset.append(Color(c.hex, luminance=c.luminance * 0.75).hex)
         for c in c_colorset:
-            hcolorset.append(Color(c.hex,luminance=c.luminance*1.25).hex)
+            hcolorset.append(Color(c.hex, luminance=c.luminance * 1.25).hex)
         return colorset, hcolorset
 
     def get_chart(self, field='', filter='', pattern='', type='bar', bar_property='full_name', order_by='',
@@ -516,7 +523,13 @@ class Campaign(models.Model):
             result = len(rids)
         return result
 
+    def get_adventures(self):
+        list = []
+        for a in self.epic.adventure_set.all():
+            list.append({'title': a.title})
+        return list
+
 
 class CampaignAdmin(admin.ModelAdmin):
-    ordering = ['epic__era','title']
-    list_display = ['__str__', 'title', 'epic', 'is_active', 'smart_code', 'rpgsystem', 'hidden', 'gm', 'population']
+    ordering = ['irl_year_start','epic__era', 'title']
+    list_display = ['title','irl_year_start', 'epic', 'is_active', 'new_narrative', 'smart_code', 'rpgsystem', 'hidden', 'gm', 'population']

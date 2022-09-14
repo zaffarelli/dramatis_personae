@@ -8,11 +8,12 @@ from django.contrib import admin
 from django.urls import reverse
 import datetime as dt
 from scenarist.models.story_models import StoryModel
+import json
 
 
 class Epic(StoryModel):
     class Meta:
-        ordering = ['era', 'title']
+        ordering = ['era', 'name']
     era = models.IntegerField(default=5017, blank=True)
     shortcut = models.CharField(default='xx', max_length=32, blank=True)
     image = models.CharField(default='', max_length=64, blank=True)
@@ -63,12 +64,19 @@ class Epic(StoryModel):
         return reverse('epic-detail', kwargs={'pk': self.pk})
 
     def __str__(self):
-        return '%s (%s)' % (self.title, self.era)
+        return '%s (%s)' % (self.name, self.era)
 
     def get_episodes(self):
         from scenarist.models.dramas import Drama
         episodes = Drama.objects.filter(epic=self)
         return episodes
+
+    def get_adventures(self):
+        list = []
+        adventures = self.adventure_set.all().order_by('chapter')
+        for adventure in adventures:
+            list.append(adventure.to_json())
+        return list
 
     @property
     def get_full_id(self):
@@ -84,7 +92,15 @@ class Epic(StoryModel):
             d.save()
         self.save()
 
+    def to_json(self):
+        """ Returns JSON of object """
+        from scenarist.utils.tools import json_default
+        jstr = super().to_json()
+        k = json.loads(jstr)
+        k['adventures'] = self.get_adventures()
+        return k
+
 
 class EpicAdmin(admin.ModelAdmin):
-    ordering = ('era', 'title',)
-    list_display = ['shortcut', 'era', 'full_id', 'chapter', 'title']
+    ordering = ['era', 'name']
+    list_display = ['shortcut', 'era', 'full_id', 'chapter', 'name']

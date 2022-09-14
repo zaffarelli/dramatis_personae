@@ -1,15 +1,8 @@
 {% load fics_filters %}
-
-<div class="storydetails act">
-    {% if act.showquizz %}
-        {% if act.quizz_set %}
-            {{act.quizz_set.first.verbose | safe }}
-        {% endif %}
-    {% endif %}
-
+<div class="storydetails adventure">
     <div class="wall">
         <div class="brick">
-            {{object.drama.title}}&nbsp;<i class="fa fa-arrow-right"></i>&nbsp;{{object.title}}
+            {{object.epic.name}}&nbsp;<i class="fa fa-arrow-right"></i>&nbsp;{{object.name}}
         </div>
         {% if object.anchor %}
         <div class="brick">
@@ -24,6 +17,11 @@
             <em>Date</em>{{object.date}}
         </div>
         {% endif %}
+        {% if object.dt %}
+        <div class="brick">
+            <em>Real Date</em>{{object.dt}}
+        </div>
+        {% endif %}
         {% if object.place %}
         <div class="brick">
             <em>Place</em>{{object.place}}
@@ -34,11 +32,15 @@
             <em>Challenge</em> {{object.challenge}}
         </div>
         {% endif %}
+        {% if object.backlogs %}
+        <div class="brick">
+            <em>Backlogs</em> {{object.linked_backlogs_str|safe}}
+        </div>
+        {% endif %}
     </div>
     <div class="pitch">
         {{object.description|parse_avatars|safe}}
         <hr/>
         {{object.resolution|parse_avatars|safe}}
     </div>
-
 </div>

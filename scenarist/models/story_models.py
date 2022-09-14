@@ -21,7 +21,7 @@ class StoryModel(models.Model):
     class Meta:
         abstract = True
 
-    title = models.CharField(default='', max_length=256, blank=True, unique=True)
+    name = models.CharField(default='', max_length=256, blank=True, unique=True)
     chapter = models.CharField(default='0', blank=True, max_length=64)
     date = models.CharField(max_length=128, default='', blank=True)
     dt = models.DateTimeField(default=timezone.now, blank=True, null=True)
@@ -45,7 +45,7 @@ class StoryModel(models.Model):
 
     def __str__(self):
         """ Standard display """
-        return '%s. %s' % (self.chapter, self.title)
+        return '%s. %s' % (self.chapter, self.name)
 
     @property
     def minis(self):
@@ -61,7 +61,8 @@ class StoryModel(models.Model):
 
     def to_json(self):
         """ Returns JSON of object """
-        return json.dumps(self, default=lambda o: o.__dict__, sort_keys=True, indent=4)
+        from scenarist.utils.tools import json_default
+        return json.dumps(self, default=json_default, sort_keys=True, indent=4)
 
     @property
     def children(self):

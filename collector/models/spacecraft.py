@@ -137,6 +137,7 @@ SHIP_CLASSES = (
     ('14', "Luxury Liner"),
     ('15', "Dreadnough"),
     ('16', "Carrier"),
+    ('17', "Corvette"),
 )
 
 SHIP_DATA = (
@@ -159,6 +160,7 @@ SHIP_DATA = (
     (15, 140, 50, 38, 2, 2, 0, 0, 0, 6),  # Luxury Liner
     (25, 250, 80, 62, 2, 2, 12, 12, 30, 105),  # Dreadnough
     (10, 100, 33, 25, 4, 2, 2, 4, 10, 20),  # Carrier
+    (5, 40, 20, 12, 8, 4, 0, 1, 2, 15),  # Escort
 )
 
 
@@ -224,6 +226,32 @@ class ShipRef(models.Model):
     firebirds = models.IntegerField(default=0)
     ship_status = models.CharField(max_length=30, choices=SHIP_STATUS, default='wip')
 
+    cs_cargo = models.IntegerField(default=0)
+    cs_engine = models.IntegerField(default=0)
+    cs_thrust = models.IntegerField(default=0)
+    cs_bulk = models.IntegerField(default=0)
+    cs_fusion_core = models.IntegerField(default=0)
+    cs_sensors = models.IntegerField(default=0)
+    cs_crew = models.IntegerField(default=0)
+    cs_guns = models.IntegerField(default=0)
+    cs_think_machine = models.IntegerField(default=0)
+    cs_battle_shields = models.IntegerField(default=0)
+
+    cs_maneuver  = models.IntegerField(default=0)
+    cs_scan  = models.IntegerField(default=0)
+    cs_soak  = models.IntegerField(default=0)
+    cs_attack  = models.IntegerField(default=0)
+    cs_autonomy  = models.IntegerField(default=0)
+
+    def compute_cinematic_system(self):
+        self.cs_maneuver = (self.cs_thrust + self.cs_engine - self.cs_bulk + self.cs_battle_shields + self.cs_fusion_core) / 3
+        self.cs_scan = (self.cs_sensors + self.cs_fusion_core + self.cs_think_machine) / 3
+        self.cs_soak = (self.cs_bulk + self.cs_crew - self.cs_engine)
+        self.cs_attack = (self.cs_guns + self.cs_engine) / 2
+        self.cs_autonomy = (self.cs_fusion_core + self.cs_bulk - self.cs_engine)
+
+
+
     @property
     def shipsize(self):
         return "%03d" % (self.size_rating)
@@ -238,6 +266,11 @@ class ShipRef(models.Model):
     @property
     def dimensions(self):
         return "%dx%dx%d" % (self.dim_length, self.dim_width, self.dim_height)
+
+    @property
+    def hard_points(self):
+        return int((self.dim_length * self.dim_width * self.dim_height) /2)
+
 
     def __str__(self):
         return "%s" % (self.reference)
@@ -260,7 +293,7 @@ class ShipRef(models.Model):
             logger.info("Spaceship [%s]: Error creating automatic sections." % (self.reference))
             self.ship_status = "invalid_sections"
         # Shield
-        self.firebirds += 3000 * int(self.ship_shields)
+        self.firebirds += 3000 #* int(self.ship_shields)
         if self.ship_status == "combat_ready":
             try:
                 # Sensors
@@ -283,6 +316,7 @@ class ShipRef(models.Model):
         self.firebirds += 10000 * self.size_rating
         # Vitality
         self.vitality = self.size_rating * 10
+        self.compute_cinematic_system()
 
 
 @receiver(pre_save, sender=ShipRef, dispatch_uid='update_ship_ref')
@@ -397,8 +431,8 @@ class ShipSystemAdmin(admin.ModelAdmin):
 class ShipRefAdmin(admin.ModelAdmin):
     ordering = ['builder', 'size_rating']
     list_display = (
-    'reference', 'ship_class', 'builder', 'size_rating', 'ship_grade', 'ship_engines', 'ship_shields', 'cargo_internal',
-    'dimensions', 'installed_sections', 'cost', 'vitality', 'firebirds', 'ship_status')
+    'reference', 'ship_class', 'builder', 'size_rating', 'ship_grade', 'ship_engines', 'ship_shields', 'cargo_internal','thrust_speed',
+    'dimensions', 'hard_points', 'cost', 'vitality', 'firebirds', 'ship_status')
     list_filter = ('builder', 'ship_class')
     inlines = [ShipSectionInline, ]
 

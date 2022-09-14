@@ -1,0 +1,18 @@
+{% load fics_filters %}
+<div class="{{tag}}_wrap">
+    <div class='title {% if not s.to_PDF %}noPDF{% endif %}'>
+        <div class='chapter'>{{s.fullchapter}}</div>
+        <h4 class='{{tag}}'>{{ s.name }}</h4>
+         [{{ s.place | as_place | safe}} - {{ s.dt|date }}]
+        <div class='storybar {{tag}}'>
+            <p class='{{tag}}_{{c.id}}'>
+                <button class='compact episode_cast' id='c-{{tag}}-{{s.id}}' page='1'>{{tag|title}}</button>
+                <button class='compact view_{{tag}}' id='view_{{tag}}_{{s.id}}'>View</button>
+                <button class='compact edit_{{tag}}' id='edit_{{tag}}_{{s.id}}'>Edit</button>
+                <button class='compact hide_{{tag}}' id='hide_{{tag}}_{{s.id}}'>Close</button>
+                <button class='compact delete_{{tag}}' id='delete_{{tag}}_{{s.id}}'>Delete</button>
+            </p>
+        </div>
+    </div>
+    <div class='storyarticle {{tag}}' id='{{tag}}_{{s.id}}'></div>
+</div>

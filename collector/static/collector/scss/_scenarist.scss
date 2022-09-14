@@ -32,9 +32,9 @@
             border: 1px solid transparent;
             color: $fics_frontest;
             text-align: center;
-            font-family: NomPerso;
+            //font-family: NomPerso;
             font-size: 1.25em;
-            width:5ex;
+            width:18ex;
             flex: 0 0 150px;
 
             &.big {
@@ -91,14 +91,14 @@
 
             & button.compact {
                 background: $fics_hl;
-                border: 1px solid $fics_front;
+                border: 2px solid $fics_front;
                 border-radius: 3px;
                 box-shadow: 0 0 3px $fics_darkest;
                 color: $fics_front;
                 flex-basis: 10ex;
                 margin: 2px;
                 font-family: Texte;
-                font-size: 8pt;
+                font-size: 9pt;
                 cursor: pointer;
 
                 &:hover {

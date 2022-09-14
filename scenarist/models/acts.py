@@ -11,7 +11,7 @@ from scenarist.models.story_models import StoryModel
 
 class Act(StoryModel):
     class Meta:
-        ordering = ['chapter','title']
+        ordering = ['chapter','name']
     from scenarist.models.dramas import Drama
     drama = models.ForeignKey(Drama, null=True, on_delete=models.CASCADE)
     # resolution = models.TextField(default='', max_length=2560,blank=True)
@@ -59,7 +59,7 @@ class Act(StoryModel):
 
 
 class ActAdmin(admin.ModelAdmin):
-    ordering = ['drama', 'chapter', 'title']
-    list_display = ('title', 'full_id', 'drama', 'chapter', 'visible', 'to_PDF', 'date', 'place', 'description')
+    ordering = ['drama', 'chapter', 'name']
+    list_display = ['name', 'full_id', 'drama', 'chapter', 'visible', 'to_PDF', 'date', 'place', 'description']
     list_filter = ['drama', 'visible', 'to_PDF']
-    search_fields = ('title', 'description')
+    search_fields = ['name', 'description']

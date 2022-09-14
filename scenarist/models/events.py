@@ -11,7 +11,8 @@ from scenarist.models.story_models import StoryModel
 
 class Event(StoryModel):
     class Meta:
-        ordering = ['chapter','title']
+        ordering = ['chapter', 'name']
+
     from scenarist.models.acts import Act
     act = models.ForeignKey(Act, null=True, on_delete=models.CASCADE)
     # resolution = models.TextField(default='', max_length=2560,blank=True)
@@ -20,7 +21,7 @@ class Event(StoryModel):
 
     @property
     def full_chapter(self):
-        return self.act.full_chapter+"."+self.chapter
+        return self.act.full_chapter + "." + self.chapter
 
     def get_casting(self):
         """ Bring all avatars rids from all relevant text fields"""
@@ -40,7 +41,7 @@ class Event(StoryModel):
 
 
 class EventAdmin(admin.ModelAdmin):
-    ordering = ('act', 'chapter', 'title',)
-    list_display = ('title','full_id','act', 'chapter', 'date', 'place', 'description')
-    list_filter = ('act',)
-    search_fields = ('description', 'title', 'resolution')
+    ordering = ['act', 'chapter', 'name']
+    list_display = ['name', 'full_id', 'act', 'chapter', 'date', 'place', 'description']
+    list_filter = ['act']
+    search_fields = ['description', 'name', 'resolution']

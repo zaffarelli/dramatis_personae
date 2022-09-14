@@ -1,0 +1,25 @@
+{% load fics_filters %}
+<div class="{{tag}}_wrap">
+    <div class='title {% if not c.to_PDF %}noPDF{% endif %}'>
+        <div class='chapter'>{{c.chapter|as_roman}}</div>
+        <h4>{{ c.name }}</h4>
+        <div class='storybar {{tag}}'>
+            <p class='{{tag}}_{{c.id}}'>
+                <button class='compact episode_cast' id='c-{{tag}}-{{c.id}}' page='1'>{{tag|title}}</button>
+                <button class='compact view_{{tag}}' id='view_{{tag}}_{{c.id}}'>View</button>
+                <button class='compact edit_{{tag}}' id='edit_{{tag}}_{{c.id}}'>Edit</button>
+                <button class='compact hide_{{tag}}' id='hide_{{tag}}_{{c.id}}'>Close</button>
+                <button class='compact delete_{{tag}}' id='delete_{{tag}}_{{c.id}}'>Delete</button>
+                <button class='compact add_scene' id='{{data.id}}'>Add Scene</button>
+                <button class='compact add_scheme' id='{{data.id}}'>Add Scheme</button>
+            </p>
+        </div>
+    </div>
+    <div class='storyarticle {{tag}}' id='{{tag}}_{{c.id}}'></div>
+    {% for scheme in c.schemes %}
+        {% include "collector/config/scheme_detail.html" with s=scheme tag='scheme' %}
+    {% endfor %}
+    {% for scene in c.scenes %}
+        {% include "collector/config/scene_detail.html" with s=scene tag='scene' %}
+    {% endfor %}
+</div>

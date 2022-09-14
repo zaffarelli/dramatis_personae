@@ -1,1 +1,1 @@
-/home/zaffarelli/.cache/pypoetry/virtualenvs/dp-KY6BlU1b-py3.8/lib/python3.8/site-packages/django/contrib/admin/static/admin/js/vendor/select2/i18n/ru.js
+/home/zaffarelli/.virtualenvs/dramatis_personae/lib/python3.10/site-packages/django/contrib/admin/static/admin/js/vendor/select2/i18n/ru.js

@@ -24,7 +24,7 @@
       <excludeFolder url="file://$MODULE_DIR$/.scannerwork" />
       <excludeFolder url="file://$MODULE_DIR$/collector/static/collector/Closet" />
     </content>
-    <orderEntry type="jdk" jdkName="Poetry (dramatis_personae)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.10 (dramatis_personae)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="TemplatesService">

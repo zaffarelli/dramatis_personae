@@ -20,6 +20,7 @@ INSTALLED_APPS = [
     'extra_views',
     'sass_processor',
     'colorfield',
+    'bootstrap_datepicker_plus',
 ]
 
 MIDDLEWARE = [

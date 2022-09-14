@@ -24,9 +24,10 @@ class Backlog(StoryModel):
     a piece of setting. It can be included in multiple adventures as it is a pure reference
     """
     class Meta:
-        ordering = ['chapter', 'title']
+        ordering = ['chapter', 'name']
     category = models.CharField(max_length=2, default='NC', choices=BACKLOG_CATEGORIES)
     reference = models.CharField(max_length=128, default='', blank=True)
+    keywords = models.TextField(max_length=2048, default='', blank=True)
 
     @property
     def full_chapter(self):
@@ -50,7 +51,7 @@ class Backlog(StoryModel):
 
 
 class BacklogAdmin(admin.ModelAdmin):
-    ordering = ['chapter', 'title']
-    list_display = ['title', 'full_id', 'chapter', 'date', 'place', 'description']
+    ordering = ['chapter', 'name']
+    list_display = ['name', 'full_id', 'chapter', 'date', 'dt', 'keywords', 'place', 'description']
     list_filter = ['category']
-    search_fields = ['description', 'title']
+    search_fields = ['description', 'name', 'keywords']
