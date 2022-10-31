@@ -342,15 +342,14 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
         if (!me.daddy) {
             console.error('Daddy is undefined for drawLine !')
         } else {
-            let f;
+            let f = font;
             if (font == 'default') {
                 f = me.base_font;
-            } else {
-                f = font;
             }
             me.daddy.append('text')
                 .attr('x', me.stepx * x)
                 .attr('y', me.stepy * y)
+                .attr('dy', -0.5*size)
                 .style('fill', fill)
                 .style('stroke', stroke)
                 .style('stroke-width', '0.05pt')
@@ -454,7 +453,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
             word,
             line = [],
             lineNumber = 0,
-            lineHeight = me.small_font_size+2,
+            lineHeight = me.small_font_size*1.1,
             x = text.attr("x"),
             y = text.attr("y"),
             tspan = text.text(null).append("tspan")
@@ -723,7 +722,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
         styles["aligns"] = ["start", "start", "start"]
         styles["widths"] = [0, 0, 0, 0]
         styles["lefts"] = [0, 2.25, 2.85, 3.5]
-        me.fillList(basex, basey + me.small_inter, "shields", styles);
+        me.fillList(basex, basey, "shields", styles);
     }
 
 
@@ -771,11 +770,11 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
                 font = me.user_font,
                 size = me.small_font_size,
                 opac = 1.0, biggest = 0,
-                small_inter = me.small_inter * 0.75;
+                small_inter = me.small_inter*0.05;
             if (!me.blank) {
                 l = 0;
                 offset = i + (biggest) * small_inter;
-                oy = basey + small_inter + offset;
+                oy = basey + offset - small_inter;
                 biggest = 0;
                 _.forEach(styles["properties"], function (y, j) {
                     if (styles["aligns"][j] == "multiline") {
@@ -810,6 +809,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
                     }
                     if (lines > biggest) {
                         biggest = lines;
+                        console.log(biggest)
                     }
                 });
                 _.forEach(styles["properties"], function (y, j) {
@@ -844,7 +844,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
             }
         });
         if (me.debug) {
-            me.drawRect(basex, basey + 0.25, w + 0.5 + styles["widths"][styles["widths"].length - 1], oy - basey, "transparent", '#A22')
+            me.drawRect(basex, basey, w + styles["widths"][styles["widths"].length - 1], oy - basey, "transparent", '#A22')
         }
     }
 
@@ -1729,8 +1729,8 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
 
     fillListTgt(basex = 0, basey = 0, datasource = "ba", styles = {}, target) {
         let me = this;
-        let ox = basex, oy = basey, lines = 1, offset = 0;
-        let w = 0, l = 1;
+        let ox = basex, oy = basey , lines = 1, offset = 0;
+        let w = 0, l = 1, small_inter=0.05;
         _.forEach(styles['lefts'], function (e, i) {
             if (e > w) {
                 w = e;
@@ -1752,8 +1752,8 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
                 opac = 1.0, biggest = 0;
             if (!me.blank) {
                 l = 0;
-                offset = (i + biggest) * me.small_inter;
-                oy = basey + me.small_inter + offset;
+                offset = (i + biggest-1) * small_inter;
+                oy = basey + small_inter + offset - me.medium_font_size;
                 biggest = 0;
                 _.forEach(styles["properties"], function (y, j) {
                     if (styles["aligns"][j] == "multiline") {

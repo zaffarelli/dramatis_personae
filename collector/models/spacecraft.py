@@ -1,8 +1,8 @@
-'''
+"""
  ╔╦╗╔═╗  ╔═╗┌─┐┬  ┬  ┌─┐┌─┐┌┬┐┌─┐┬─┐
   ║║╠═╝  ║  │ ││  │  ├┤ │   │ │ │├┬┘
  ═╩╝╩    ╚═╝└─┘┴─┘┴─┘└─┘└─┘ ┴ └─┘┴└─
-'''
+"""
 from django.db import models
 from collector.models.character import Character
 from django.dispatch import receiver

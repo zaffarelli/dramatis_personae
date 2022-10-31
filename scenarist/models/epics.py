@@ -69,6 +69,9 @@ class Epic(StoryModel):
     def get_episodes(self):
         from scenarist.models.dramas import Drama
         episodes = Drama.objects.filter(epic=self)
+        if len(episodes) == 0:
+            from scenarist.models.adventures import Adventure
+            episodes = Adventure.objects.filter(epic=self)
         return episodes
 
     def get_adventures(self):

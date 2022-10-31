@@ -944,7 +944,7 @@ class Character(Combattant):
         for story in all:
             if story.got(self.rid):
                 result += 1
-                self.stories += f'{story.get_full_id}_{story.title}#'
+                self.stories += f'{story.get_full_id}_{story.name}#'
         return result
 
     def update_stories_count(self):

@@ -71,6 +71,11 @@ class Adventure(StoryModel):
         job['schemes'] = schemes
         return job
 
+    def get_episodes(self):
+        from scenarist.models.scenes import Scene
+        episodes = Scene.objects.filter(adventure=self)
+        return episodes
+
 
 class AdventureAdmin(admin.ModelAdmin):
     ordering = ['epic', 'chapter', 'name']

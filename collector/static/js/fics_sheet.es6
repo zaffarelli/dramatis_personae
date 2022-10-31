@@ -8,7 +8,8 @@ class FICSSheet extends Sheet {
     init() {
         let me = this;
         super.init();
-        me.version = '0.9.4'
+        me.version = '0.9.4';
+        me.fics_release = "FuZion Interlock Custom System v7.5";
     }
 
     drawButtons() {
@@ -74,7 +75,7 @@ class FICSSheet extends Sheet {
             me.drawLine(1, 23, 13, 13, me.draw_fill, me.draw_fill, 3, me.strokedebris);
             me.drawLine(1, 23, 20, 20, me.draw_fill, me.draw_fill, 3, me.strokedebris);
 
-            me.decorationText(4.0, 2.25, 0, 'middle', me.base_font, me.medium_font_size, me.draw_fill, me.draw_stroke, 0.5, "FuZion Interlock Custom System v7.3", me.back);
+            me.decorationText(4.0, 2.25, 0, 'middle', me.base_font, me.medium_font_size, me.draw_fill, me.draw_stroke, 0.5, me.fics_release, me.back);
             me.decorationText(22.5, 35.8, -16, 'end', me.base_font, me.small_font_size, me.draw_fill, me.draw_stroke, 0.5, "fics_Sheet v" + me.version + ", 2021, Zaffarelli, generated with DP", me.back);
 
         } else if (page === 2) {
@@ -86,7 +87,7 @@ class FICSSheet extends Sheet {
             me.drawLine(0.8, 23.2, 2.5, 2.5, me.draw_fill, me.draw_fill, 6, me.strokedebris);
             me.drawLine(0.8, 23.2, 35, 35, me.draw_fill, me.draw_fill, 6, me.strokedebris);
 
-            me.decorationText(4.0, 2.25, 0, 'middle', me.base_font, me.medium_font_size, me.draw_fill, me.draw_stroke, 0.5, "FuZion Interlock Custom System v7.3", me.back);
+            me.decorationText(4.0, 2.25, 0, 'middle', me.base_font, me.medium_font_size, me.draw_fill, me.draw_stroke, 0.5, me.fics_release, me.back);
             me.decorationText(22.5, 35.8, -16, 'end', me.base_font, me.small_font_size, me.draw_fill, me.draw_stroke, 0.5, "fics_Sheet | v" + me.version + " | 2022 | Zaffarelli | generated with DP", me.back);
 
         } else if (page === 3) {
@@ -98,7 +99,7 @@ class FICSSheet extends Sheet {
             me.drawLine(0.8, 23.2, 2.5, 2.5, me.draw_fill, me.draw_fill, 6, me.strokedebris);
             me.drawLine(0.8, 23.2, 35, 35, me.draw_fill, me.draw_fill, 6, me.strokedebris);
 
-            me.decorationText(4.0, 2.25, 0, 'middle', me.base_font, me.medium_font_size, me.draw_fill, me.draw_stroke, 0.5, "FuZion Interlock Custom System v7.3", me.back);
+            me.decorationText(4.0, 2.25, 0, 'middle', me.base_font, me.medium_font_size, me.draw_fill, me.draw_stroke, 0.5, me.fics_release, me.back);
             me.decorationText(22.5, 35.8, -16, 'end', me.base_font, me.small_font_size, me.draw_fill, me.draw_stroke, 0.5, "fics_Sheet | v" + me.version + " | 2022 | Zaffarelli | generated with DP", me.back);
 
         }

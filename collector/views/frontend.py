@@ -306,7 +306,7 @@ def display_sheet(request, pk=None):
         if pk is None:
             pk = 22
         c = Character.objects.get(id=pk)
-        scenario = campaign.epic.title.upper()
+        scenario = campaign.epic.name.upper()
         pre_title = campaign.epic.place + ' - ' + campaign.epic.date
         post_title = "FuZion Interlock Custom System v7.5"
         spe = c.get_specialities()
