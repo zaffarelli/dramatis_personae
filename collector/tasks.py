@@ -34,6 +34,8 @@ def todo():
         logger.info(f' - Characters ready for PDF ... {len(to_be_pdfed)}')
         logger.info(f' - Characters balanced ........ {len(balanced)}  / {len(all)}')
         logger.info(f' - ToDs to be fixed ........... {len(tod_to_be_fixed)}')
+        oldest = Character.objects.filter(pub_date__lte=timezone.now() - timedelta(days=14))
+        logger.info(f' - Oldest to be fixed ......... {len(oldest)}')
         answer = 'Todo'
     return answer
 
@@ -89,7 +91,7 @@ def fix_check():
     from collector.models.character import Character
     campaign = get_current_config()
     logger.info("FIX CHECK")
-    all = campaign.dramatis_personae.filter(need_fix=True)
+    all = Character.objects.filter(need_fix=True)
     if len(all):
         c = all.first()
         answer = f'Task: Fixing avatar {c.rid}. {len(all)} remaining.'
@@ -98,7 +100,7 @@ def fix_check():
         if len(all) == 1:
             need_audit = True
     else:
-        oldest = campaign.dramatis_personae.filter(pub_date__lte = timezone.now() - timedelta(days=14))
+        oldest = Character.objects.filter(pub_date__lte=timezone.now() - timedelta(days=14))
         for c in oldest:
             c.need_fix = True
             logger.debug(f"To be fixed : [{c.full_name}]")

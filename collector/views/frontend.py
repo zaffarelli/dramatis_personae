@@ -44,6 +44,16 @@ def get_list(request, id, slug='none'):
         character_items = campaign.dramatis_personae \
             .order_by('balanced', '-team', 'keyword', 'historical_figure', 'nameless', 'full_name') \
             .filter(is_dead=False, keyword__startswith=campaign.epic.shortcut)
+    elif decs.startswith('x-'):
+        elements = decs.split('-')
+        command = elements[1].lower()
+        if command == 'all':
+            character_items = Character.objects \
+                .order_by('historical_figure', 'nameless', 'full_name')
+        else:
+            character_items = Character.objects.filter(rid__contains=command) | Character.objects.filter(full_name__icontains=command) | Character.objects.filter(alias__icontains=command)
+
+        messages.info(request, f"Searching {command} characters, cross epics. Yeah, that's everybody.")
     elif decs.startswith('c-'):
         elements = decs.split('-')
         ep_class = elements[1].capitalize()
@@ -74,10 +84,10 @@ def get_list(request, id, slug='none'):
                 # print(rid)
                 character_item = campaign.open_avatars.get(rid=rid)
                 character_items.append(character_item)
-        messages.info(request, f'New list filter applied: {decs}')
+        messages.info(request, f'New list filter applied specific character with rid {decs}')
     else:
         character_items = campaign.avatars.filter(keyword=decs).order_by('full_name')
-        messages.info(request, f'New list filter applied: {decs}')
+        messages.info(request, f'New list filter applied fro keyword {decs}')
         if len(character_items) == 0:
             character_items = campaign.open_avatars.filter(rid__contains=decs.lower()).order_by('full_name')
             messages.info(request, f'Searching {decs} among rids')

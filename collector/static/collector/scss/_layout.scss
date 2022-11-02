@@ -575,6 +575,7 @@
       border-radius: 5px;
       padding: 3px;
       vertical-align: middle;
+      background: $fics_darkest;
 
       & em {
         font-family: NomPersoListe;
@@ -597,7 +598,7 @@
       &.wider {
         flex-grow: 0;
         flex-shrink: 0;
-        width: 150px;
+        width: 200px;
 
 
       }

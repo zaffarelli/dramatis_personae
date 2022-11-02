@@ -44,7 +44,7 @@ python manage.py dumpdata collector.ShipRef --format xml --output backup/referen
 python manage.py dumpdata collector.Specie --format xml --output backup/reference/$1/specie.xml
 python manage.py dumpdata collector.TourOfDutyRef --format xml --output backup/reference/$1/tour_of_duty_ref.xml
 python manage.py dumpdata collector.WeaponRef --format xml --output backup/reference/$1/weapon_ref.xml
-python manage.py dumpdata collector.Coc7Occupation --format xml --output backup/reference/$1/coc7_occupation.xml
+#python manage.py dumpdata collector.Coc7Occupation --format xml --output backup/reference/$1/coc7_occupation.xml
 python manage.py dumpdata collector.AllianceRef --format xml --output backup/reference/$1/alliance_ref.xml
 
 echo -e "\e[0;35m- Dumping modificator data (pushed from history creation)...\e[0;m"
@@ -74,7 +74,7 @@ python manage.py dumpdata collector.TourOfDuty --format xml --output backup/cust
 python manage.py dumpdata collector.Character --format xml --output backup/custom/$1/character.xml
 python manage.py dumpdata collector.Bloke --format xml --output backup/custom/$1/bloke.xml
 python manage.py dumpdata collector.Loot --format xml --output backup/custom/$1/loot.xml
-python manage.py dumpdata collector.Investigator --format xml --output backup/custom/$1/investigator.xml
+#python manage.py dumpdata collector.Investigator --format xml --output backup/custom/$1/investigator.xml
 python manage.py dumpdata collector.Spaceship --format xml --output backup/custom/$1/spaceship.xml
 python manage.py dumpdata collector.Cyberware --format xml --output backup/custom/$1/cyberware.xml
 

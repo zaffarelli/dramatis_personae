@@ -21,6 +21,7 @@ INSTALLED_APPS = [
     'sass_processor',
     'colorfield',
     'bootstrap_datepicker_plus',
+    'channels'
 ]
 
 MIDDLEWARE = [
@@ -153,3 +154,5 @@ LOGIN_REDIRECT_URL = '/'
 
 MAX_CHAR = 20
 RELEASE = '1.0.0'
+
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'

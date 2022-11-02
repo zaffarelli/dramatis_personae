@@ -4,7 +4,7 @@
  ═╩╝╩    ╚═╝└─┘┴─┘┴─┘└─┘└─┘ ┴ └─┘┴└─
 """
 from django.http import HttpResponse, Http404, JsonResponse
-from django.shortcuts import render, get_object_or_404, redirect, render_to_response
+from django.shortcuts import render, get_object_or_404 #, redirect, render_to_response
 from django.conf import settings
 from collector.models.character import Character
 from django.template.loader import get_template, render_to_string

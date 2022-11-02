@@ -16,43 +16,11 @@ from django.utils.timezone import get_current_timezone
 import itertools
 import logging
 import json
+import random
 from colorfield.fields import ColorField
 from operator import itemgetter
 
 logger = logging.getLogger(__name__)
-
-
-# DRAMA_SEATS = (
-#     ('11-foe', 'Foe'),
-#     ('10-enemy', 'Enemy'),
-#     ('09-lackey', 'Lackey'),
-#     ('08-antagonist', 'Antagonist'),
-#     ('07-opponent', 'Opponent'),
-#     ('06-neutral', 'Neutral'),
-#     ('05-partisan', 'Partisan'),
-#     ('04-protagonist', 'Protagonist'),
-#     ('03-servant', 'Servant'),
-#     ('02-ally', 'Ally'),
-#     ('01-friend', 'Friend'),
-#     ('00-players', 'Players'),
-# )
-#
-# BLOKES = {
-#     'allies': ['05-partisan', '04-protagonist', '03-servant', '02-ally', '01-friend'],
-#     'foes': ['11-foe', '10-enemy', '09-lackey', '08-antagonist', '07-opponent'],
-#     'others': ['06-neutral']
-# }
-
-
-# def json_default(value):
-#     import datetime
-#     if isinstance(value, datetime.datetime):
-#         return dict(year=value.year, month=value.month, day=value.day, hour=value.hour, minute=value.minute)
-#     elif isinstance(value, datetime.date):
-#         return dict(year=value.year, month=value.month, day=value.day)
-#     else:
-#         return value.__dict__
-
 
 class Character(Combattant):
     class Meta:
@@ -285,14 +253,25 @@ class Character(Combattant):
     #     """ Returns JSON of object """
     #     return json.dumps(self, default=json_default,sort_keys=True, indent=4)
 
+    @property
+    def cc(self):
+        from collector.models.character_custo import CharacterCusto
+        fcc = CharacterCusto.objects.filter(character=self)
+        if len(fcc) == 0:
+            cc = CharacterCusto.objects.create(character=self)
+            cc.save()
+        else:
+            cc = fcc.first()
+        return cc
+
     def rebuild_from_lifepath(self):
         """ Historical Creation """
         old_op = self.OP
         self.build_log = ''
-        from collector.models.character_custo import CharacterCusto
-        found_custo = CharacterCusto.objects.filter(character=self).first()
-        if found_custo is None:
-            self.charactercusto = CharacterCusto.objects.create(character=self)
+        # from collector.models.character_custo import CharacterCusto
+        # found_custo = CharacterCusto.objects.filter(character=self).first()
+        # if found_custo is None:
+        #     self.charactercusto = CharacterCusto.objects.create(character=self)
         self.resetPA()
         self.purge_skills()
         self.purge_bc()
@@ -490,13 +469,12 @@ class Character(Combattant):
             if self.birthdate < 1000:
                 self.birthdate = conf.epic.era - self.birthdate
                 self.age = conf.epic.era - self.birthdate
-        logger.info('Update game parameters')
-        self.update_game_parameters()
-        logger.info('Fencing league Special')
-        self.fencing_league_special()
-        logger.info('Occult Special')
-        self.occult_special()
 
+        logger.info(f"Checking character customization: {self.cc}")
+
+        self.update_game_parameters()
+        self.fencing_league_special()
+        self.occult_special()
         if self.full_name == self.rid:
             self.audit_log("Name is a RID. Everything has to be done on this character.")
         # NPC fix
@@ -505,7 +483,6 @@ class Character(Combattant):
             self.rebuild_from_lifepath()
         else:
             self.rebuild_free_form()
-        logger.info('Fix 7.5')
         self.fix75()
         self.xp_spent, self.experience_balance = self.check_experience_details()
         if self.xp_earned < self.xp_spent:
@@ -535,7 +512,7 @@ class Character(Combattant):
         if self.historical_figure:
             self.audit_log()
         self.need_fix = False
-        logger.info(f'    => Done fixing ...: {self.full_name} NeedFIX:{self.need_fix}')
+        logger.info(f'    => Done fixing ...: {self.full_name}')
         # logger.info(self.audit)
 
     def fix75(self):
@@ -548,7 +525,7 @@ class Character(Combattant):
             {'skill': 'Bribery', 'mixes_with': 'Knavery'},
             {'skill': 'Local Expert (undefined)', 'mixes_with': 'Lore (undefined)'}
         ]
-        logger.debug(f"Starting Fix 7.5")
+        logger.info(f"--> FICS 7.5")
         for s in self.charactercusto.skillcusto_set.all():
             logger.debug(f"SkillCustos: {len(self.charactercusto.skillcusto_set.all())}")
             for c in changes:
@@ -574,18 +551,18 @@ class Character(Combattant):
                         m.skill_ref = SkillRef.objects.get(reference=c['mixes_with'])
                         m.save()
                         s.delete()
-
-        logger.info("done")
+        logger.debug(f"<-- FICS 7.5")
 
     def update_challenge(self):
         res = ''
-        res += '<i class="fas fa-th-large" title="primary attributes"></i>%d ' % (self.AP)
-        res += '<i class="fas fa-th-list" title="skills"></i> %d ' % (self.SK_TOTAL)
-        res += '<i class="fas fa-th" title="BC/BA"></i> %d ' % (self.BC_TOTAL + self.BA_TOTAL)
-        res += '<i class="fas fa-star" title="wildcards"></i> %d ' % (self.WP_tod_pool)
-        res += '<i class="fas fa-newspaper" title="OP -vs- LifePath"></i> %d/%d ' % (self.OP, self.life_path_total)
-        res += '<i class="fas fa-square" title="exp_bal/xp_spent"></i> %d/%d ' % (self.experience_balance, self.xp_spent)
-        res += '<i class="fas fa-circle" title="Adjusted"></i> %d ' % (self.OP - self.experience_balance)
+        res += '<i class="fas fa-th-large" title="primary attributes"></i>&nbsp;%d ' % (self.AP)
+        res += '<i class="fas fa-th-list" title="skills"></i>&nbsp;%d ' % (self.SK_TOTAL)
+        res += '<i class="fas fa-th" title="BC/BA"></i>&nbsp;%d ' % (self.BC_TOTAL + self.BA_TOTAL)
+        res += '<i class="fas fa-star" title="wildcards"></i>&nbsp;%d ' % (self.WP_tod_pool)
+        res += '<i class="fas fa-newspaper" title="OP -vs- LifePath"></i>&nbsp;%d/%d ' % (self.OP, self.life_path_total)
+        res += '<i class="fas fa-square" title="exp_bal/xp_spent"></i>&nbsp;%d/%d ' % (
+            self.experience_balance, self.xp_spent)
+        res += '<i class="fas fa-circle" title="Adjusted"></i>&nbsp;%d ' % (self.OP - self.experience_balance)
         self.challenge_value = self.AP * 3 + self.SK_TOTAL + self.BC_TOTAL + self.BA_TOTAL - self.experience_balance
         self.challenge = res
 
@@ -968,6 +945,7 @@ class Character(Combattant):
 
     def update_game_parameters(self):
         # Nameless attributes
+        logger.info('--> Updating game parameters')
         self.physical = self.na_phy
         self.mental = self.na_men
         self.combat = self.na_com
@@ -1015,8 +993,10 @@ class Character(Combattant):
             self.audit_log("Warning: character has no armor")
         if len(self.weapon_set.all()) == 0:
             self.audit_log("Warning: character has no weapon")
+        logger.debug('<-- Updating game parameters')
 
     def fencing_league_special(self):
+        logger.info('--> Fencing League Special')
         if self.fencing_league:
             found_rapier = None
             from collector.models.character_custo import CharacterCusto
@@ -1042,37 +1022,46 @@ class Character(Combattant):
                 found_armor.character_custo = found_custo
                 found_armor.armor_ref = ArmorRef.objects.get(reference='Leather Jerkin')
                 found_armor.save()
+        logger.debug('<-- Fencing League Special')
 
     def occult_special(self):
+        logger.info('--> Occult Special')
         if self.OCC_LVL > 0:
+            logger.debug(f'Current occult level is {self.OCC_LVL} + {self.caste} + {self.occult} + {self.alliance_ref}')
             from collector.models.ritual import RitualCusto, RitualRef
             from collector.models.character_custo import CharacterCusto
             pathes = []
             total_ritual_levels = 0
             rituals_per_path = self.ritual_set.all().order_by('ritual_ref__path')
-
-            if not len(rituals_per_path):
+            logger.debug(f'Rituals per Path {len(rituals_per_path)}')
+            if len(rituals_per_path) == 0:
                 if self.caste == 'Church':
                     self.occult = "Theurgy"
-                    main_path = self.alliance_ref.common_occult_pathes.split(', ').first()
+                    path_list = self.alliance_ref.common_occult_pathes.split(', ')
+                    main_path = path_list[0]
+                    logger.debug(f'This character should be a theurge...')
                 else:
                     self.occult = "Psi"
                     common_psi_pathes = ['FarHand', 'Psyche', 'Soma', 'Sixth Sense', 'Vis Craft']
-                import random
-                main_path = random.choice(common_psi_pathes)
+                    main_path = random.choice(common_psi_pathes)
+                    logger.debug(f'This character should be a psychic...')
+                logger.debug(f'Main path : {main_path}')
                 found_custo = CharacterCusto.objects.get(character=self)
                 for x in range(self.OCC_LVL):
                     new_power = RitualCusto()
                     new_power.character_custo = found_custo
                     new_power.ritual_ref = RitualRef.objects.filter(path=main_path, level=x + 1).first()
                     new_power.save()
-
+                    logger.debug(f'Adding new power... {new_power}')
             for r in rituals_per_path:
                 if not r.ritual_ref.path in pathes:
                     pathes.append(r.ritual_ref.path)
                 total_ritual_levels += r.ritual_ref.level
+            logger.debug(f'Path {self.path}')
+
             self.path = ", ".join(pathes)
             self.occult_fire_power = total_ritual_levels
+        logger.debug('<-- Occult Special')
 
     def get_specialities(self):
         return []
