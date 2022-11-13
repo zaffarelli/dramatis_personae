@@ -13,21 +13,24 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-    <script src='{% static "js/ghostmark.es6" %}'></script>
+    <script src='{% static "js/dp_tools.es6" %}'></script>
 
     <link rel="stylesheet" type="text/css"
           href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" media="all">
     <link rel='stylesheet' type='text/css' href='{% sass_src "collector/scss/fics.scss" %}'/>
 </head>
 <body>
+<em>ttoto</em>
 <div class="wrapper" style="color:white;">
     {% load fics_filters %}
-    <center>
-    <div id='logo' style="width:auto; height:auto; border:1px solid #303; margin:10px;"></div>
-    </center>
+
+    <div id='tgt_{{ c.id }}' style="width:auto; height:auto; border:1px solid #303; margin:10px;">
+
+    </div>
+
     <script>
         let oversize=8;
-        (new Ghostmark({{c.ghostmark_data|safe}},oversize)).perform();
+        (new Ghostmark({{c.ghostmark_data|safe}},oversize,1,"tgt")).perform();
     </script>
 </div>
 </body>

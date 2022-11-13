@@ -8,6 +8,7 @@ from collector.utils import fics_references
 from django.contrib import admin
 from collector.models.character import Character
 from datetime import datetime
+from django.utils import timezone
 
 
 # LIFEPATH_CATEGORY = (
@@ -74,7 +75,7 @@ class TourOfDutyRef(models.Model):
     value = models.IntegerField(default=0)
     description = models.TextField(max_length=1024, default='', blank=True)
     valid = models.BooleanField(default=False)
-    pub_date = models.DateTimeField('Date published', default=datetime.now)
+    # pub_date = models.DateTimeField('Date published', default=timezone.now)
     core = models.BooleanField(default=True)
 
     def __str__(self):
@@ -256,8 +257,8 @@ class TourOfDuty(models.Model):
                 else:
                     WP += sm.value
                     wp_roots.append(sm.skill_ref.linked_to.reference)
-            for bc in tod.blessingcursemodificator_set.all():
-                ch.add_bc(bc.blessing_curse_ref)
+            # for bc in tod.blessingcursemodificator_set.all():
+            #     ch.add_bc(bc.blessing_curse_ref)
             # print(tod)
             for ba in tod.beneficeafflictionmodificator_set.all():
                 ch.add_ba(ba.benefice_affliction_ref)

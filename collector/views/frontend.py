@@ -50,8 +50,15 @@ def get_list(request, id, slug='none'):
         if command == 'all':
             character_items = Character.objects \
                 .order_by('historical_figure', 'nameless', 'full_name')
+        elif command == 'todo':
+            character_items = Character.objects.filter(balanced=False).order_by('historical_figure', 'nameless',
+                                                                                'full_name')
+        elif command == 'orphans':
+            character_items = Character.objects.filter(is_cast=False).order_by('historical_figure', 'nameless',
+                                                                               'full_name')
         else:
-            character_items = Character.objects.filter(rid__contains=command) | Character.objects.filter(full_name__icontains=command) | Character.objects.filter(alias__icontains=command)
+            character_items = Character.objects.filter(rid__contains=command) | Character.objects.filter(
+                full_name__icontains=command) | Character.objects.filter(alias__icontains=command)
 
         messages.info(request, f"Searching {command} characters, cross epics. Yeah, that's everybody.")
     elif decs.startswith('c-'):
@@ -101,7 +108,7 @@ def get_list(request, id, slug='none'):
     page = id
     character_items = paginator.get_page(page)
     messages.info(request, f'{paginator.count} characters found.')
-    context = {'character_items': character_items, 'default_ghost_tgt': "list_ghostmark"}
+    context = {'character_items': character_items, 'default_ghost_tgt': "list_ghostmark", "count": paginator.count}
     template = get_template('collector/list.html')
     html = template.render(context, request)
     response = {
@@ -200,6 +207,14 @@ def recalc_avatar(request, id=None):
         return JsonResponse(context)
     else:
         raise Http404
+
+
+def grab_avatar(request, id=None):
+    campaign = get_current_config(request)
+    if request.is_ajax():
+        messages.info(request, 'Grabbing avatar...')
+        campaign.grab(id)
+    return HttpResponse(status=204)
 
 
 def wa_export_character(request, id=None):
@@ -304,7 +319,7 @@ def ghostmark_test(request, id=None):
     from collector.models.character import Character
     character_item = Character.objects.get(id=id)
     context = {'c': character_item}
-    template = get_template('collector/dp_logo_test.html')
+    template = get_template('collector/ghostmark_test.html')
     html = template.render(context, request)
     return HttpResponse(html, content_type='text/html')
 
@@ -329,18 +344,18 @@ def display_sheet(request, pk=None):
         return JsonResponse(fics_sheet_context)
 
 
-def switch_epic(request, slug="none"):
+def switch_epic(request, id=None):
     campaign = get_current_config(request)
     # print(slug)
-    if slug_decode(slug) == "none":
+    if id is None:
         campaigns = Campaign.objects.all()
         list = []
         for c in campaigns:
             list.append(c.epic.shortcut)
         messages.error(request, f'No campaign code selected. Try one of those: {", ".join(list)}')
     else:
-        shortcut = slug_decode(slug)
-        new_campaigns = Campaign.objects.filter(epic__shortcut=shortcut)
+        # shortcut = slug_decode(slug)
+        new_campaigns = Campaign.objects.filter(id=id)
         if len(new_campaigns) == 1:
             new_campaign = new_campaigns.first()
             new_campaign.is_active = True
@@ -396,16 +411,35 @@ def display_sessionsheet(request, slug=None):
 def all_epics(request):
     if request.is_ajax:
         from collector.models.campaign import Campaign
-        campaigns = Campaign.objects.all().order_by('epic__era')
+        campaigns = Campaign.objects.filter(is_available=True).order_by('epic__era')
         epics = []
         for x in campaigns:
             e = json.loads(x.to_json())
             e['population'] = x.population
             e['epic_title'] = x.epic.name
+            e['epic_era'] = x.epic.era
             e['epic'] = x.epic.to_json()
+            e['full_cast'] = x.epic.dramatis_personae_simple()
             epics.append(e)
-        context = {'epics': epics}
+        context = {'epics': epics, 'title': "Epics", "comment": f"{len(epics)} epic(s)."}
         template = get_template('collector/epics.html')
+        html = template.render(context, request)
+        response = {'mosaic': html}
+        return JsonResponse(response)
+    else:
+        return HttpResponse(status=204)
+
+
+def all_spaceships(request):
+    if request.is_ajax:
+        from collector.models.spacecraft import Spaceship
+        ships = Spaceship.objects.filter(is_available=True)
+        ships_data = []
+        for ship in ships:
+            e = ship.ship_data
+            ships_data.append(e)
+        context = {'ships': ships_data}
+        template = get_template('collector/spaceships.html')
         html = template.render(context, request)
         response = {'mosaic': html}
         return JsonResponse(response)

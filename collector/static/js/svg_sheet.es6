@@ -13,7 +13,7 @@ class Sheet {
 
     init() {
         let me = this;
-        me.debug = true;
+        me.debug = false;
         me.blank = false;
         me.button_ox = 28;
         me.button_oy = 2;
@@ -44,6 +44,7 @@ class Sheet {
         me.fat_font_size = 8 * me.stepy / 5;
 
         me.small_inter = 0.5;
+        me.line_inter = 0.4;
 
         me.margin = [0, 0, 0, 0];
         me.dot_radius = me.stepx / 8;
@@ -346,10 +347,20 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
             if (font == 'default') {
                 f = me.base_font;
             }
+            if (me.debug) {
+                me.daddy.append('rect')
+                    .attr('x', me.stepx * x)
+                    .attr('y', me.stepy * y)
+                    .attr('width', me.stepx)
+                    .attr('height', me.stepy*0.9)
+                    .style('fill', me.debug_fill)
+                    .style('stroke', me.debug_stroke)
+                    .style('stroke-width', '1pt')
+                ;
+            }
             me.daddy.append('text')
                 .attr('x', me.stepx * x)
                 .attr('y', me.stepy * y)
-                .attr('dy', -0.5*size)
                 .style('fill', fill)
                 .style('stroke', stroke)
                 .style('stroke-width', '0.05pt')
@@ -357,6 +368,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
                 .style("font-size", size + 'pt')
                 .style("font-family", f)
                 .text(text);
+
         }
     }
 
@@ -391,7 +403,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
         }
     }
 
-    //==================================================================================================================
+//==================================================================================================================
     drawJumpgateLogo(x, y) {
         let me = this;
         let dad = me.daddy;
@@ -430,53 +442,6 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
         me.daddy = dad;
     }
 
-    wrap(par, bx, by, width, font = 'default') {
-        let me = this;
-        let xo = bx,
-            yo = by;
-        if (font == 'default') {
-            font = me.user_font;
-        }
-        let text = me.daddy.append('text')
-            .attr('x', xo * me.stepx)
-            .attr('y', yo * me.stepy)
-            .attr('dx', 0)
-            .attr('dy', 0)
-            .text(par)
-            .style("text-anchor", 'left')
-            .style("font-family", font)
-            .style("font-size", me.small_font_size + 'pt')
-            .style("fill", me.user_fill)
-            .style("stroke", me.user_stroke)
-            .style("stroke-width", '0.05pt');
-        let words = text.text().split(/\s+/).reverse(),
-            word,
-            line = [],
-            lineNumber = 0,
-            lineHeight = me.small_font_size*1.1,
-            x = text.attr("x"),
-            y = text.attr("y"),
-            tspan = text.text(null).append("tspan")
-                .attr("x", x)
-                .attr("y", y);
-        while (word = words.pop()) {
-            line.push(word);
-            tspan.text(line.join(" "));
-            if (tspan.node().getComputedTextLength() > width * me.stepy) {
-                line.pop();
-                tspan.text(line.join(" "));
-                line = [word];
-                tspan = text.append("tspan")
-                    .attr("x", x)
-                    .attr("y", y)
-                    .attr("dy", ++lineNumber * lineHeight)
-                    .style("font-size", me.small_font_size + 'pt')
-                    .style("stroke-width", '0.05pt')
-                    .text(word);
-            }
-        }
-        return (lineNumber);
-    }
 
     drawWatermark(page = 0) {
         let me = this;
@@ -650,11 +615,11 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
         let me = this;
         let styles = {}
         console.log(me.data["tods"])
-        styles["labels"] = ["Cat", "Tour of Duty", "Pts","Details"]
-        styles["properties"] = ["category", "reference", "value","description"]
-        styles["aligns"] = ["start", "start", "start","multiline"]
-        styles["widths"] = [0, 5, 0,16]
-        styles["lefts"] = [0, 0.5, 5,6]
+        styles["labels"] = ["Cat", "Tour of Duty", "Pts", "Details"]
+        styles["properties"] = ["category", "reference", "value", "description"]
+        styles["aligns"] = ["start", "start", "start", "multiline"]
+        styles["widths"] = [0, 5, 0, 16]
+        styles["lefts"] = [0, 0.5, 5, 6]
         me.fillList(basex, basey, "tods", styles);
     }
 
@@ -716,7 +681,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
     fillShield(basex = 0, basey = 0) {
         let me = this;
         let styles = {}
-        me.drawText(basex, basey, me.draw_fill, me.draw_stroke, me.medium_font_size, "start", "Energy Shields", 1.0, me.base_font);
+        // me.drawText(basex, basey, me.draw_fill, me.draw_stroke, me.medium_font_size, "start", "Energy Shields", 1.0, me.base_font);
         styles["labels"] = ["Shield", "min", "MAX", "Hits"]
         styles["properties"] = ["reference", "protection_min", "protection_max", "hits"]
         styles["aligns"] = ["start", "start", "start"]
@@ -746,8 +711,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
         }
     }
 
-
-    fillList(basex = 0, basey = 0, datasource = "ba", styles = {}) {
+    storedfillList(basex = 0, basey = 0, datasource = "ba", styles = {}) {
         let me = this;
         let ox = basex, oy = basey, lines = 1, offset = 0;
         let w = 0, l = 1;
@@ -770,11 +734,11 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
                 font = me.user_font,
                 size = me.small_font_size,
                 opac = 1.0, biggest = 0,
-                small_inter = me.small_inter*0.05;
+                small_inter = me.small_inter * 0.05;
             if (!me.blank) {
                 l = 0;
                 offset = i + (biggest) * small_inter;
-                oy = basey + offset - small_inter;
+                oy = basey + offset + small_inter;
                 biggest = 0;
                 _.forEach(styles["properties"], function (y, j) {
                     if (styles["aligns"][j] == "multiline") {
@@ -844,9 +808,11 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
             }
         });
         if (me.debug) {
-            me.drawRect(basex, basey, w + styles["widths"][styles["widths"].length - 1], oy - basey, "transparent", '#A22')
+            me.drawRect(basex, basey, w + styles["widths"][styles["widths"].length - 1], oy - basey, "transparent", me.debug_stroke)
         }
+
     }
+
 
     limbColumn(basex, basey, limb = "x") {
         let me = this;
@@ -1482,10 +1448,10 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
 
     fillSkills(basey) {
         let me = this;
-        me.spe_col_max = 3;
+        me.spe_col_max = 6;
         let oy = basey;
         me.column_amount = 12;
-        let oy_spe = basey + 7.5 * me.stepy;
+        let oy_spe = basey + 6.2 * me.stepy; // Specialisation origin
         let ox = 1.5 * me.stepx;
         let skills = me.character.append('g').selectAll('g')
             .data(me.data["skills_list"]);
@@ -1727,10 +1693,11 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
 
     }
 
+
     fillListTgt(basex = 0, basey = 0, datasource = "ba", styles = {}, target) {
         let me = this;
-        let ox = basex, oy = basey , lines = 1, offset = 0;
-        let w = 0, l = 1, small_inter=0.05;
+        let ox = basex, oy = basey, lines = 1, offset = 0;
+        let w = 0, l = 1, small_inter = 0.05;
         _.forEach(styles['lefts'], function (e, i) {
             if (e > w) {
                 w = e;
@@ -1745,14 +1712,14 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
         _.forEach(me.data[datasource], function (e, i) {
             // let o = JSON.parse(e);
             let meta = "";
-            let stroke = me.user_stroke,
+            let stroke = me.debug_stroke,
                 fill = me.user_fill,
                 font = me.user_font,
                 size = me.medium_font_size,
                 opac = 1.0, biggest = 0;
             if (!me.blank) {
                 l = 0;
-                offset = (i + biggest-1) * small_inter;
+                offset = (i + biggest - 1) * small_inter;
                 oy = basey + small_inter + offset - me.medium_font_size;
                 biggest = 0;
                 _.forEach(styles["properties"], function (y, j) {
@@ -1822,8 +1789,166 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
             }
         });
         if (me.debug) {
-            me.drawRect(basex, basey + 0.25, w + 0.5 + styles["widths"][styles["widths"].length - 1], oy - basey, "transparent", '#A22')
+            me.drawRect(basex, basey + 0.25, w + 0.5 + styles["widths"][styles["widths"].length - 1], oy - basey, "transparent", me.debug_stroke)
         }
+    }
+
+
+    fillList(basex = 0, basey = 0, datasource = "ba", styles = {}) {
+        let me = this;
+        let ox = basex, oy = basey, lines = 0 /*, offset = 0*/;
+        let w = 0, l = 1;
+        _.forEach(styles['lefts'], function (e, i) {
+            if (e > w) {
+                w = e;
+            }
+        });
+        me.daddy = me.character.append("g").attr('class', datasource + 's');
+
+        // Labels
+        _.forEach(styles['labels'], function (e, i) {
+            me.drawText(ox + styles["lefts"][i], oy-me.line_inter*0.1, me.draw_fill, me.draw_stroke, me.small_font_size, "start", e);
+        });
+        _.forEach(me.data[datasource], function (e, i) {
+            // let o = JSON.parse(e);
+            let meta = "";
+            let stroke = me.user_stroke,
+                fill = me.user_fill,
+                font = me.user_font,
+                size = me.small_font_size,
+                opac = 1.0, biggest = 0,
+                small_inter = me.line_inter * 0.05
+            ;
+            if (!me.blank) {
+                l = 0;
+                // offset = i + (biggest) * me.line_inter;
+                oy += me.line_inter;
+                biggest = 1;
+                // First Count lines
+                _.forEach(styles["properties"], function (y, j) {
+                    if (styles["aligns"][j] == "multiline") {
+                        let data = undefined;
+                        let a = y.split('|');
+                        let x = a[0];
+                        let z = undefined;
+                        if (a.length == 2) {
+                            z = a[1];
+                        }
+
+                        let property_components = x.split('__');
+                        if (property_components.length < 2) {
+                            data = e[x]
+                        } else {
+                            data = e[property_components[0]][property_components[1]]
+                        }
+                        if (z == undefined) {
+
+                        } else if (z == "bool") {
+                            if (data == false) {
+                                data = "."
+                            } else {
+                                data = "x";
+                            }
+                        } else if (z == "lower") {
+                            data = data.toLowerCase();
+                        }
+
+                        lines = me.wrap(data, ox + styles["lefts"][j], oy, styles["widths"][j], font) ;
+                        oy += me.line_inter;
+                    } else {
+                        lines = 0;
+                    }
+                    // if (lines > biggest) {
+                    //     biggest = lines;
+                    // }
+
+                });
+
+                console.log(biggest + " line ")
+                _.forEach(styles["properties"], function (y, j) {
+                    if (styles["aligns"][j] != "multiline") {
+                        let data = undefined;
+                        let a = y.split('|');
+                        let x = a[0];
+                        let z = undefined;
+                        if (a.length == 2) {
+                            z = a[1];
+                        }
+                        let property_components = x.split('__');
+                        if (property_components.length < 2) {
+                            data = e[x]
+                        } else {
+                            data = e[property_components[0]][property_components[1]]
+                        }
+                        if (z == undefined) {
+
+                        } else if (z == "bool") {
+                            if (data == false) {
+                                data = "."
+                            } else {
+                                data = "x";
+                            }
+                        } else if (z == "lower") {
+                            data = data.toLowerCase();
+                        }
+                        me.drawText(ox + styles["lefts"][j], oy-me.line_inter  , fill, stroke, size, styles["aligns"][j], data, opac, font);
+                    }
+                });
+            }
+        });
+        if (me.debug) {
+            me.drawRect(basex, basey, w + styles["widths"][styles["widths"].length - 1], oy - basey, "transparent", me.debug_stroke)
+        }
+
+    }
+
+    wrap(par, bx, by, width, font = 'default') {
+        let me = this;
+        let fontsize = 30;
+        let xo = bx*me.stepx,
+            yo = (by + me.small_inter*0.0) * me.stepy;
+
+        if (font == 'default') {
+            font = me.user_font;
+        }
+        let text = me.daddy.append('text')
+            .attr('x', xo)
+            .attr('y', yo)
+            .text(par)
+            .style("text-anchor", 'left')
+            .style("font-family", font)
+            .style("font-size", me.small_font_size + 'pt')
+            .style("fill", me.user_fill)
+            .style("stroke", me.user_stroke)
+            .style("stroke-width", '0.05pt');
+        let words = text.text().split(/\s+/).reverse(),
+            word,
+            lines_count = 1,
+            line = [],
+            lineHeight = me.small_font_size * 1.1,
+            x = text.attr("x"),
+            y = text.attr("y"),
+            tspan = text.text(null).append("tspan")
+                .attr("x", x)
+                .attr("y", y);
+        while (word = words.pop()) {
+            line.push(word);
+            tspan.text(line.join(" "));
+            if (tspan.node().getComputedTextLength() > width * me.stepy) {
+                line.pop();
+                tspan.text(line.join(" "));
+                line = [word];
+                tspan = text.append("tspan")
+                    .attr("x", x)
+                    .attr("y", y)
+                    .attr("dy", ++lines_count * me.small_font_size )
+                    .style("font-size", me.small_font_size + 'pt')
+                    .style("stroke-width", '0.05pt')
+                    .text(word);
+            }
+        }
+        console.debug(lines_count)
+        return (lines_count);
     }
 
 }

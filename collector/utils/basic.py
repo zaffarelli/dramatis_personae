@@ -117,7 +117,7 @@ def make_epic_corpus(campaign):
 
 
 def export_epic(request, campaign):
-    res = {'epic':campaign.epic.title}
+    res = {'epic':campaign.epic.name}
     comments = []
     comments += make_avatar_appendix(campaign)
     comments += make_epic_corpus(campaign)

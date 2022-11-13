@@ -16,3 +16,4 @@ class CollectorConfig(AppConfig):
         import collector.signals.cyber
         import collector.signals.tod
         import collector.signals.armor
+        import collector.signals.spacecraft

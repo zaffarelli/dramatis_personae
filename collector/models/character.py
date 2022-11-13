@@ -107,6 +107,7 @@ class Character(Combattant):
     historical_figure = models.BooleanField(default=False)
     nameless = models.BooleanField(default=False)
     incognito = models.BooleanField(default=False, blank=True)
+    is_cast = models.BooleanField(default=False, blank=True)
     error = models.BooleanField(default=False)
     ranking = models.IntegerField(default=0, blank=True)
     group_color = ColorField(default='#888888', blank=True)
@@ -880,15 +881,15 @@ class Character(Combattant):
         proceed = False
         if self.need_pdf:
             from collector.utils.basic import write_pdf
-            try:
-                context = dict(c=self, filename=f'{self.rid}', now=datetime.now(tz=get_current_timezone()))
-                write_pdf('collector/character_roster.html', context)
-                logger.info(f'=> PDF created ...: {self.rid}')
-                proceed = True
-                self.need_pdf = False
-                self.save()
-            except:
-                logger.error(f'    => PDF creation error !!! {self.rid}')
+            # try:
+            context = dict(c=self, filename=f'{self.rid}', now=datetime.now(tz=get_current_timezone()))
+            write_pdf('collector/character_roster.html', context)
+            logger.info(f'=> PDF created ...: {self.rid}')
+            proceed = True
+            self.need_pdf = False
+            self.save()
+            # except:
+            #     logger.error(f'    => PDF creation error !!! {self.rid}')
         return proceed
 
     def __str__(self):

@@ -9,7 +9,7 @@ class FICSSheet extends Sheet {
         let me = this;
         super.init();
         me.version = '0.9.4';
-        me.fics_release = "FuZion Interlock Custom System v7.5";
+        me.fics_release = "FuZion Interlock Custom System v8.0";
     }
 
     drawButtons() {
@@ -33,8 +33,11 @@ class FICSSheet extends Sheet {
             me.drawLine(23, 23, 2.3, 35.2, me.draw_fill, me.draw_fill, 6, me.strokedebris);
             me.drawLine(0.8, 23.2, 2.5, 2.5, me.draw_fill, me.draw_fill, 6, me.strokedebris);
             me.drawLine(0.8, 23.2, 35, 35, me.draw_fill, me.draw_fill, 6, me.strokedebris);
+
+            // Skills
             me.drawLine(1, 23, 12.25, 12.25, me.draw_fill, me.draw_fill, 6, me.strokedebris);
-            me.drawLine(1, 23, 20, 20, me.draw_fill, me.draw_fill, 3, me.strokedebris);
+            // Specialities
+            me.drawLine(1, 23, 18.75, 18.75, me.draw_fill, me.draw_fill, 3, me.strokedebris);
 
             me.drawLine(1, 23, 22, 22, me.draw_fill, me.draw_fill, 3, me.strokedebris);
 
@@ -126,7 +129,7 @@ class FICSSheet extends Sheet {
         if (page == 0) {
             me.fillBasics(3 * me.stepy);
             me.fillAttributes(5 * me.stepy);
-            me.fillSkills(13.25 * me.stepy);
+            me.fillSkills(13.0 * me.stepy);
             me.fillExtras(25);
         } else if (page == 1) {
             me.fillName(page);

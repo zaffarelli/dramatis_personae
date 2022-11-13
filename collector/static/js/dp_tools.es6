@@ -15,7 +15,6 @@ class Ghostmark {
         me.opacity = 1;
         me.data = data;
     }
-
     init() {
         let me = this;
         me.size = 6;
@@ -40,7 +39,6 @@ class Ghostmark {
         me.oy = me.size*3;
         me.mark = me.size;
     }
-
     createLayout(){
         let me = this;
         me.layout = me.svg.append('g')
@@ -90,7 +88,6 @@ class Ghostmark {
         ;
 
     }
-
     createGhostMark(){
         let me = this;
         me.ghostmark = me.svg.append('g')
@@ -446,7 +443,6 @@ class Ghostmark {
 
         }
     }
-
     polarToCartesian(centerX, centerY, radius, angleInDegrees) {
         let angleInRadians = (angleInDegrees-90) * Math.PI / 180.0;
         return {
@@ -454,7 +450,6 @@ class Ghostmark {
             y: centerY + (radius * Math.sin(angleInRadians))
         };
     }
-
     describeArc(x, y, radius, startAngle, endAngle){
         let me = this;
         let start = me.polarToCartesian(x, y, radius, endAngle);
@@ -466,7 +461,6 @@ class Ghostmark {
         ].join(" ");
         return d;
     }
-
     createName(){
         let me = this;
         let pi = Math.PI;
@@ -500,7 +494,6 @@ class Ghostmark {
 
 
     }
-
     drawSticks(ox,oy,str,size){
         let me = this;
         let pts = str.split(' ');
@@ -522,7 +515,6 @@ class Ghostmark {
         p += '  ';
         return(p);
     }
-
     addText(t,x,y){
         let me = this;
         let n = me.ghostmark.append('text')
@@ -539,15 +531,14 @@ class Ghostmark {
             .style("stroke-width", "0.1pt")
         return(n);
     }
-
     perform(){
         let me = this;
+        console.log("Here we are")
         me.init();
         me.createLayout();
         me.createGhostMark();
         me.createName();
     }
-
     performShadow(){
         let me = this;
         me.opacity = 0.3;
@@ -557,7 +548,6 @@ class Ghostmark {
         me.createName();
 
     }
-
 }
 
 
@@ -573,8 +563,8 @@ class Logo {
         me.height = me.size * 4;
         me.dot_stroke = "#333";
         me.dot_fill = "#FC4";
-        me.line_stroke = "#999";
-        me.line_fill = "#333";
+        me.line_stroke = "#878";
+        me.line_fill = "#646";
         me.ox = me.size/4;
         me.oy = 3*me.size/4;
         me.init(tgt);
@@ -587,10 +577,17 @@ class Logo {
             {id:8,x:0,y:me.size*1.5},{id:9,x:me.size,y:me.size*1.5},{id:10,x:me.size*1.5,y:me.size*1.5},{id:11,x:me.size*2.5,y:me.size*1.5},
             {id:12,x:0,y:me.size*2.5},{id:13,x:me.size,y:me.size*2.5},{id:14,x:me.size*1.5,y:me.size*2.5},{id:15,x:me.size*2.5,y:me.size*2.5}
             ];
-        me.links = [
+        me.links_data_dp = [
             {a:5,b:13},{a:12,b:8},{a:3,b:11},{a:14,b:2},  // verticals
             {a:13,b:12},{a:8,b:11},{a:2,b:3},  // horizontals
             {a:0,b:0},{a:1,b:1},{a:4,b:4},{a:15,b:15}     // dots
+            ];
+
+
+        me.links_data_fs = [
+             {a:0,b:1},{a:0,b:4},{a:8,b:9},{a:8,b:12} // F
+             ,{a:2,b:3},{a:2,b:6},{a:10,b:11}, {a:11,b:15},{a:14,b:15}  // S
+            ,{a:5,b:5},{a:7,b:7},{a:10,b:10},{a:13,b:13}     // dots
             ];
         me.svg = d3.select(tgt)
             .append('svg')
@@ -600,15 +597,43 @@ class Logo {
             //.style("background", "red")
             .append('g');
     }
-
     drawBack(){
         let me = this;
         me.links = me.svg.append('g')
             .selectAll('link')
-            .data(me.links)
+            .data(me.links_data_dp)
             .enter()
                 .append('line')
-                .attr('class','link')
+                .attr('class','link fs')
+                .attr('x1',function(d){
+                    let c = me.data.find(x => x.id === d.a)
+                    return c.x+me.ox;
+                })
+                .attr('y1',function(d){
+                    let c = me.data.find(x => x.id === d.a)
+                    return c.y+me.oy;
+                })
+                .attr('x2',function(d){
+                    let c = me.data.find(x => x.id === d.b)
+                    return c.x+me.ox;
+                })
+                .attr('y2',function(d){
+                    let c = me.data.find(x => x.id === d.b)
+                    return c.y+me.oy;
+                })
+                .style('fill',me.line_fill)
+                .style('stroke',me.line_stroke)
+                .style('stroke-linecap','round')
+                .style('stroke-width',(me.size/3.5)+'pt')
+                .style('opacity','0.1')
+            ;
+
+        me.links_overlay = me.svg.append('g')
+            .selectAll('link')
+            .data(me.links_data_fs)
+            .enter()
+                .append('line')
+                .attr('class','link dp')
                 .attr('x1',function(d){
                     let c = me.data.find(x => x.id === d.a)
                     return c.x+me.ox;
@@ -626,18 +651,15 @@ class Logo {
                     return c.y+me.oy;
                 })
                 .attr('r',me.size/10)
-                .style('fill',me.line_fill)
+                .style('fill',me.line_fill2)
                 .style('stroke',me.line_stroke)
                 .style('stroke-linecap','round')
-                .style('stroke-width',(me.size/4)+'pt')
+                .style('stroke-width',(me.size/3.5)+'pt')
                 .style('opacity','0.9')
-                .on('mouseover', function(d){
-                    d3.select(this).style("stroke", "#777");
-                })
-                .on('mouseout', function(d){
-                    d3.select(this).style("stroke", me.line_stroke);
-                })
+
             ;
+
+
         me.dots = me.svg.append('g')
             .selectAll('dot')
             .data(me.data)
@@ -655,12 +677,14 @@ class Logo {
                 .style('stroke',me.dot_stroke)
                 .style('stroke-width','1pt')
                 .style('opacity','0.9')
-//                 .on('mouseover', function(d){
-//                     d3.select(this).style("fill", "#333");
-//                 })
-//                 .on('mouseout', function(d){
-//                     d3.select(this).style("fill", me.dot_fill);
-//                 })
+                .on('mouseover', function(d){
+                    d3.selectAll(".dp").style("opacity", 0.1);
+                    d3.selectAll(".fs").style("opacity", 0.9);
+                })
+                .on('mouseout', function(d){
+                    d3.selectAll(".dp").style("opacity", 0.9);
+                    d3.selectAll(".fs").style("opacity", 0.1);
+                })
             ;
     }
     drawText(){

@@ -5,7 +5,8 @@
 """
 import os
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(os.path.join(__file__,os.pardir))))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(os.path.join(__file__, os.pardir))))
+
 INSTALLED_APPS = [
     'optimizer.apps.OptimizerConfig',
     'scenarist.apps.ScenaristConfig',
@@ -20,7 +21,7 @@ INSTALLED_APPS = [
     'extra_views',
     'sass_processor',
     'colorfield',
-    'bootstrap_datepicker_plus',
+    # 'bootstrap_datepicker_plus',
     'channels'
 ]
 
@@ -54,10 +55,11 @@ TEMPLATES = [{
     },
 }]
 
-WSGI_APPLICATION = 'dramatis_personae.wsgi.application'
+ASGI_APPLICATION = 'dramatis_personae.asgi.application'
+
 
 CHANNEL_LAYERS = {
-    'default':{
+    'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
             'hosts': ['127.0.0.1', '6379']
@@ -71,22 +73,22 @@ STATICFILES_FINDERS = [
     'sass_processor.finders.CssFinder',
 ]
 
-#LOGPATH = os.path.join(BASE_DIR,'logs/')
+# LOGPATH = os.path.join(BASE_DIR,'logs/')
 LOGPATH = '/var/log/dramatis_personae/'
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': True,
     'formatters': {
         'standard': {
-            'format' : "[%(asctime)s|%(levelname)8s] %(message)s",  # [%(name)s:%(lineno)s
-            'datefmt' : "%Y%m%d%H%M%S"
+            'format': "[%(asctime)s|%(levelname)8s] %(message)s",  # [%(name)s:%(lineno)s
+            'datefmt': "%Y%m%d%H%M%S"
         },
     },
     'handlers': {
         'logfile': {
             'level': 'INFO',
             'class': 'logging.handlers.RotatingFileHandler',
-            'filename': LOGPATH+"dramatis_personae.log",
+            'filename': LOGPATH + "dramatis_personae.log",
             'maxBytes': 1000000,
             'backupCount': 9,
             'formatter': 'standard',
@@ -99,9 +101,9 @@ LOGGING = {
     },
     'loggers': {
         'django': {
-            'handlers':['console'],
+            'handlers': ['console'],
             'propagate': True,
-            'level':'WARN',
+            'level': 'WARN',
         },
         'django.db.backends': {
             'handlers': ['console'],
@@ -130,13 +132,13 @@ LOGGING = {
 
 AUTH_PASSWORD_VALIDATORS = [{
     'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-  },{
+}, {
     'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-  },{
+}, {
     'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-  },{
+}, {
     'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-  },
+},
 ]
 
 LANGUAGE_CODE = 'en-us'
@@ -150,9 +152,14 @@ MEDIA_URL = '/media/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'dp_static/')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'dp_media/')
 
+# STATICFILES_DIRS = [os.path.join(BASE_DIR,"dp_static")]
+
 LOGIN_REDIRECT_URL = '/'
 
 MAX_CHAR = 20
-RELEASE = '1.0.0'
+RELEASE = '1.1.0'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'dramatis_personae.settings')
+

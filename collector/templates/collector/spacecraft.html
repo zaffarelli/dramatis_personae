@@ -1,0 +1,29 @@
+{% load static %}
+{% load fics_filters %}
+<div class="fresque">
+    <div class="tile ship ">
+        <h1>"{{ c.full_name }}"</h1>
+        <strong>{{ c.ref.model }} class {{ c.ref.class|lower }}<br/>{{c.ref.builder}}</strong>
+        <table>
+            <tr><th>Owner</th><td>{{ c.owner }}</td></tr>
+            <tr><th>Grade</th><td>{{ c.ref.grade }}</td></tr>
+        </table>
+
+        <h2>Cruising</h2>
+
+
+        <h2>Tactical Data</h2>
+        <table>
+            <tr><th>Maneuver</th><td>{{ c.ref.cs_maneuver }}</td></tr>
+            <tr><th>Scanners</th><td>{{ c.ref.cs_scanners }}</td></tr>
+        </table>
+
+    </div>
+    <div class="tile chart_panel">
+        {% if c.video %}
+        <video controls muted loop autoplay>
+            <source src="media/videos/{{ c.video }}.mp4" type="video/mp4">
+        </video>
+        {% endif %}
+    </div>
+</div>

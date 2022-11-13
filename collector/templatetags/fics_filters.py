@@ -390,6 +390,14 @@ def as_media_image(value):
         str = 'media/images/f_blank.jpg'
     return str
 
+@register.filter(name='as_media_video')
+def as_media_video(value):
+    str = f'images/{value}.jpg'
+    from django.core.files.storage import default_storage
+    if default_storage.exists(str):
+        str = f'media/images/{value}.mp4'
+    return str
+
 
 @register.filter(name='media_check')
 def media_check(value):

@@ -1,14 +1,23 @@
 {% load fics_filters %}
 {% csrf_token %}
+<div class="fresque top">
+    <h1>{{ title }}</h1>
+</div>
 <div class="fresque">
     {% for x in epics %}
-    <div class="character_row">
-        <div class="cell mini"> {{ x.id }}</div>
-        <div class="cell wide"> {{ x.epic_title }}</div>
-        <div class="cell wide"> {{ x.smart_code }}</div>
-        <div class="cell wide"> {{ x.population }}</div>
-        <div class="cell mini"> {{ x.is_active|prettybool|safe }}</div>
-        <div class="cell wide"> {{ x.adventures }}</div>
-    </div>
+        <div class="character_row">
+            <div class="cell wider"> <em>{{ x.epic_title }}</em></div>
+            <div class="cell mini"> {{ x.id }}</div>
+            <div class="cell mini"> {{ x.epic_era }}</div>
+            <div class="cell mini"> {{ x.smart_code }}</div>
+            <div class="cell mini"> {{ x.population }}</div>
+            <div class="cell mini"><span class="menu-item" mode="standard" action="epic"
+                                         params="{{ x.id }}"> {{ x.is_active|prettybool|safe }}</span></div>
+
+            <div class="cell text last"> {{ x.full_cast|safe }}</div>
+        </div>
     {% endfor %}
+</div>
+<div class="fresque bottom">
+    {{ comment }}
 </div>

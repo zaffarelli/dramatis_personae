@@ -15,17 +15,16 @@ class CharacterFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Character
 
-    full_name = 'Tastus Fabulus'
-    pub_date = timezone.now()
+    full_name = 'John Doe'
+
 
 
 class CharacterHistoryFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Character
-
     full_name = 'Tastus Fabulus'
     use_history_creation = True
-    pub_date = timezone.now()
+
 
 
 class VeteranGuilderFactory(factory.django.DjangoModelFactory):

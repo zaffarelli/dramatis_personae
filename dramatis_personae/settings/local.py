@@ -22,10 +22,22 @@ DATABASES = {
         'HOST': '',
         'PORT': '',
         'CONN_MAX_AGE': None,
+        'TEST': {
+            'NAME': 'test_dramatis_personae',
         },
+    },
 }
+
+# import sys
+# if 'test' in sys.argv or 'test_coverage' in sys.argv: #Covers regular testing and django-coverage
+#     DATABASES['default']['ENGINE'] = 'django.db.backends.sqlite3'
+
 
 if DEBUG:
     import mimetypes
-    mimetypes.add_type("application/javascript", ".es6", True)
+    mimetypes.add_type("application/javascript;charset=utf-8", ".es6", True)
     mimetypes.add_type("application/javascript", ".js", True)
+
+
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "dramatis_personae.settings")
+

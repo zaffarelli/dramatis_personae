@@ -12,112 +12,19 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-SHIPSYSTEM_CATEGORIES = (
-    ('0', "Engine"),
-    ('1', "Jumpdrive"),
-    ('2', "Shield"),
-    ('3', "Sensor"),
-    ('4', "Turret"),
-    ('5', "Direct Fire Weapon"),
-    ('6', "Indirect Fire Weapon"),
-    ('7', "Miscellaneous"),
-    ('8', "Transmissions"),
-    ('9', "Crew"),
-)
+LIGHTSPEED_RATIO = 0.05
 
 SHIP_GRADES = (
     ('0', "Lander"),
-    ('1', "Atmosphere"),
+    ('1', "Atmospheric"),
     ('2', "Void"),
 )
 
 SHIP_STATUS = (
     ('wip', "Work In Progress"),
     ('combat_ready', "Combat Ready"),
-    ('invalid_sections', "Invalid Sections"),
+    ('req_not_met', "Minimum Ship Requirements not Met"),
 )
-
-SHIP_ENGINES = (
-    ('1', "Slow"),
-    ('2', "Standard"),
-    ('3', "Fast"),
-)
-
-SHIP_SHIELDS = (
-    ('2', "2/2"),
-    ('4', "4/4"),
-    ('6', "6/6"),
-    ('8', "8/8"),
-    ('9', "9/9"),
-    ('12', "12/12"),
-)
-
-SHIELD_EFFECT = (
-    ('0', "shield negates"),
-    ('1', "ignores shield"),
-    ('2', "burn out"),
-    ('3', "overpower"),
-    ('4', "auto burn out"),
-)
-
-SYSTEM_SIZE = (
-    ('0', "h"),
-    ('1', "S"),
-    ('2', "M"),
-    ('3', "L"),
-)
-
-SHIP_SLOTS = (
-    ("0", "Fore"),
-    ("1", "Fore Port"),
-    ("2", "Port"),
-    ("3", "Aft Port"),
-    ("4", "Aft"),
-    ("5", "Aft Starboard"),
-    ("6", "Starboard"),
-    ("7", "Fore Starboard"),
-)
-
-SHIP_SECTIONS = (
-    ("0", "Bridge"),
-    ("1", "Maneuver"),
-    ("2", "Gundeck"),
-    ("3", "Engine Room"),
-    ("4", "Marines Deck"),
-    ("5", "Turret A"),
-    ("6", "Turret B"),
-    ("7", "Turret Z"),
-    ("8", "Spinal Mount"),
-    ("9", "Shieldbank"),
-    ("10", "Troop Quarters"),
-    ("11", "Battleshield"),
-)
-
-SLOT_NAMES = (
-    "Fore",
-    "Fore Port",
-    "Port",
-    "Aft Port",
-    "Aft",
-    "Aft Starboard",
-    "Starboard",
-    "Fore Starboard",
-)
-
-SECTION_NAMES = [
-    "Bridge",
-    "Maneuver",
-    "Gundeck",
-    "Engine Room",
-    "Marines Deck",
-    "Turret A",
-    "Turret B",
-    "Turret Z",
-    "Spinal Mount",
-    "Shieldbank",
-    "Troop Quarters",
-    "Battle Shield",
-]
 
 SHIP_CLASSES = (
     ('0', "Fighter"),
@@ -126,21 +33,34 @@ SHIP_CLASSES = (
     ('3', "Explorer"),
     ('4', "Raider"),
     ('5', "Escort"),
-    ('6', "Frigate"),
-    ('7', "Galliot"),
-    ('8', "Fast Freighter"),
-    ('9', "Small Freighter"),
-    ('10', "Assault Lander"),
-    ('11', "Destroyer"),
-    ('12', "Cruiser"),
-    ('13', "Large Freighter"),
-    ('14', "Luxury Liner"),
-    ('15', "Dreadnough"),
-    ('16', "Carrier"),
-    ('17', "Corvette"),
+    ('6', "Corvette"),
+    ('7', "Frigate"),
+    ('8', "Galliot"),
+    ('9', "Fast Freighter"),
+    ('10', "Small Freighter"),
+    ('11', "Assault Lander"),
+    ('12', "Destroyer"),
+    ('13', "Cruiser"),
+    ('14', "Large Freighter"),
+    ('15', "Luxury Liner"),
+    ('16', "Dreadnough"),
+    ('17', "Carrier"),
+    ('18', "Space Station"),
 )
 
-SHIP_DATA = (
+MINIMUM_SYSTEMS = [
+    {'reference': 'Fusion Core', 'per_ship_size': 10},
+    {'reference': 'Maneuver Jets', 'per_ship_size': 2},
+    {'reference': 'Piloting Console', 'per_ship_size': 1},
+    {'reference': 'Propulsion Engine', 'per_ship_size': 5},
+]
+
+SD_SIZE = 0
+SD_DIM_LENGTH = 1
+SD_DIM_WIDTH = 2
+SD_DIM_HEIGHT = 3
+
+SHIPS_DATA = (
     # Size        Thrust Maneuver mini max turrer Marines Gundecks
     # S   Dims      T  M  mT  MT  Ma G
     (1, 10, 5, 7, 16, 8, 0, 0, 0, 2),  # Fighter
@@ -149,6 +69,7 @@ SHIP_DATA = (
     (3, 30, 10, 7, 12, 6, 0, 1, 0, 3),  # Explorer
     (4, 35, 12, 10, 10, 6, 0, 1, 1, 10),  # Raider
     (4, 40, 13, 10, 8, 4, 0, 1, 2, 15),  # Escort
+    (5, 50, 20, 15, 8, 4, 0, 1, 2, 15),  # Corvette
     (6, 60, 20, 15, 6, 4, 0, 2, 8, 30),  # Frigate
     (7, 70, 23, 17, 8, 4, 0, 2, 16, 20),  # Galliot
     (8, 65, 33, 25, 8, 4, 0, 0, 16, 3),  # Fast Freighter
@@ -160,61 +81,59 @@ SHIP_DATA = (
     (15, 140, 50, 38, 2, 2, 0, 0, 0, 6),  # Luxury Liner
     (25, 250, 80, 62, 2, 2, 12, 12, 30, 105),  # Dreadnough
     (10, 100, 33, 25, 4, 2, 2, 4, 10, 20),  # Carrier
-    (5, 40, 20, 12, 8, 4, 0, 1, 2, 15),  # Escort
+
 )
 
 
 class ShipSystem(models.Model):
     class Meta:
-        verbose_name = "FICS: Ship System"
+        verbose_name = "Spacecraft: Ship System"
 
     reference = models.CharField(max_length=64)
-    category = models.CharField(max_length=20, choices=SHIPSYSTEM_CATEGORIES, default='Miscellaneous', blank=True)
-    tech_level = models.IntegerField(default=0)
-    structure_points = models.PositiveIntegerField(default=0)
-    firebirds = models.IntegerField(default=0)
-    # hard_points = models.IntegerField(default=0)
-    damage = models.IntegerField(default=0)
-    size = models.CharField(max_length=1, choices=SYSTEM_SIZE, default='h', blank=True)
-    pts = models.FloatField(default=0.0)
-    pts_per_rating = models.FloatField(default=0.0)
+    type = models.CharField(max_length=64, default='standard')
+    free_category = models.CharField(max_length=64, default='n/a', blank=True)
+    # category = models.CharField(max_length=20, choices=SHIPSYSTEM_CATEGORIES, default='Miscellaneous', blank=True)
+    tech_level = models.IntegerField(default=6)
+    performance = models.IntegerField(default=1)
     range = models.IntegerField(default=0)
-    rating = models.IntegerField(default=0)
-    firebirds_per_rating = models.IntegerField(default=0)
-    shield_effects = models.CharField(max_length=20, choices=SHIELD_EFFECT, default='shield negates', blank=True)
+    rating = models.IntegerField(default=1)
+    structure_points = models.PositiveIntegerField(default=1)
+    power_consumption = models.IntegerField(default=10)
+    power_stack = models.IntegerField(default=0)
+    is_continuous_usage = models.BooleanField(default=True)
+    is_symetrical = models.BooleanField(default=False)
+    pancreator_irae = models.PositiveIntegerField(default=0)
+    tactical_effects = models.CharField(max_length=64, default='n/a', blank=True)
+    strategical_effects = models.CharField(max_length=64, default='n/a', blank=True)
     description = models.TextField(max_length=1024, blank=True, null=True)
-    effect = models.TextField(max_length=1024, blank=True, null=True)
 
     def __str__(self):
-        return "%s" % (self.reference)
+        return f"{self.reference} [ {self.type} ]"
+
+    def fix(self):
+        if self.type == "n/a":
+            self.type = "standard"
+        self.type = self.type.title()
+        if self.structure_points == 0:
+            self.structure_points = 1
+        if self.rating == 0:
+            self.rating = 1
 
 
 class ShipRef(models.Model):
     class Meta:
         verbose_name = "Spacecraft: Ship Reference"
-        ordering = ('builder', 'size_rating',)
+        ordering = ['builder']
 
     reference = models.CharField(max_length=64, unique=True)
     builder = models.CharField(max_length=64, default='')
     ship_class = models.CharField(max_length=30, choices=SHIP_CLASSES, default='Shuttle', blank=True)
     ship_grade = models.CharField(max_length=30, choices=SHIP_GRADES, default='Void', blank=True)
-    ship_engines = models.CharField(max_length=30, choices=SHIP_ENGINES, default='Standard', blank=True)
-    ship_shields = models.CharField(max_length=30, choices=SHIP_SHIELDS, default='2/2', blank=True)
-    battle_shields = models.PositiveIntegerField(default=0)
-    jump_capability = models.PositiveIntegerField(default=0)
-    crew = models.PositiveIntegerField(default=0)
-    crew_marines = models.PositiveIntegerField(default=0)
-    crew_marauders = models.PositiveIntegerField(default=0)
-    crew_pilots = models.PositiveIntegerField(default=0)
-    crew_engineers = models.PositiveIntegerField(default=0)
-    crew_gunners = models.PositiveIntegerField(default=0)
-    crew_jetjockeys = models.PositiveIntegerField(default=0)
-    bridge_min = models.PositiveIntegerField(default=0)
-    thrust_speed = models.PositiveIntegerField(default=0)
-    size_rating = models.PositiveIntegerField(default=0)
+
     dim_length = models.PositiveIntegerField(default=0)
     dim_width = models.PositiveIntegerField(default=0)
     dim_height = models.PositiveIntegerField(default=0)
+
     cargo_internal = models.IntegerField(default=0)
     cargo_external = models.IntegerField(default=0)
     manoeuver_speed = models.IntegerField(default=0)
@@ -222,6 +141,8 @@ class ShipRef(models.Model):
     armor = models.IntegerField(default=0)
     vitality = models.IntegerField(default=0)
     cost = models.IntegerField(default=0)
+    structure_points = models.PositiveIntegerField(default=0)
+    structure_points_used = models.PositiveIntegerField(default=0)
     pts = models.FloatField(default=0.0)
     firebirds = models.IntegerField(default=0)
     ship_status = models.CharField(max_length=30, choices=SHIP_STATUS, default='wip')
@@ -237,221 +158,168 @@ class ShipRef(models.Model):
     cs_think_machine = models.IntegerField(default=0)
     cs_battle_shields = models.IntegerField(default=0)
 
-    cs_maneuver  = models.IntegerField(default=0)
-    cs_scan  = models.IntegerField(default=0)
-    cs_soak  = models.IntegerField(default=0)
-    cs_attack  = models.IntegerField(default=0)
-    cs_autonomy  = models.IntegerField(default=0)
+    cs_maneuver = models.IntegerField(default=0)
+    cs_scan = models.IntegerField(default=0)
+    cs_soak = models.IntegerField(default=0)
+    cs_attack = models.IntegerField(default=0)
+    cs_autonomy = models.IntegerField(default=0)
+
+    def __str__(self):
+        return "%s" % (self.reference)
+
+
+    def ship_data(self):
+        data = {}
+        data['model'] = self.reference
+        data['class'] = self.get_ship_class_display()
+        data['grade'] = self.get_ship_grade_display()
+        data['builder'] = self.builder
+        return data
 
     def compute_cinematic_system(self):
-        self.cs_maneuver = (self.cs_thrust + self.cs_engine - self.cs_bulk + self.cs_battle_shields + self.cs_fusion_core) / 3
+        self.cs_maneuver = (
+                                   self.cs_thrust + self.cs_engine - self.cs_bulk + self.cs_battle_shields + self.cs_fusion_core) / 3
         self.cs_scan = (self.cs_sensors + self.cs_fusion_core + self.cs_think_machine) / 3
         self.cs_soak = (self.cs_bulk + self.cs_crew - self.cs_engine)
         self.cs_attack = (self.cs_guns + self.cs_engine) / 2
         self.cs_autonomy = (self.cs_fusion_core + self.cs_bulk - self.cs_engine)
 
 
-
-    @property
-    def shipsize(self):
-        return "%03d" % (self.size_rating)
-
-    @property
-    def installed_sections(self):
-        lst = []
-        for f in self.shipsection_set.all():
-            lst.append("%s %s" % (SLOT_NAMES[int(f.slot)], SECTION_NAMES[int(f.section)]))
-        return ", ".join(lst)
-
     @property
     def dimensions(self):
         return "%dx%dx%d" % (self.dim_length, self.dim_width, self.dim_height)
 
-    @property
-    def hard_points(self):
-        return int((self.dim_length * self.dim_width * self.dim_height) /2)
 
-
-    def __str__(self):
-        return "%s" % (self.reference)
 
     def fix(self):
+        print(f'-> Fixing {self.reference}')
         self.ship_status = "combat_ready"
         self.firebirds = 0;
         self.cost = 0
         klass = int(self.ship_class)
-        self.size_rating = SHIP_DATA[klass][0]
-        self.dim_length = SHIP_DATA[klass][1]
-        self.dim_width = SHIP_DATA[klass][2]
-        self.dim_height = SHIP_DATA[klass][3]
-        try:
-            for i in [1, 3, 5, 7]:
-                CheckOrCreateSection("1", str(i), self)
-            for i in [0, 1, 3, 4, 5, 7]:
-                CheckOrCreateSection("9", str(i), self)
-        except:
-            logger.info("Spaceship [%s]: Error creating automatic sections." % (self.reference))
-            self.ship_status = "invalid_sections"
-        # Shield
-        self.firebirds += 3000 #* int(self.ship_shields)
-        if self.ship_status == "combat_ready":
-            try:
-                # Sensors
-                for section in self.shipsection_set.all():
-                    for slot in section.shipsystemslot_set.all():
-                        sy = slot.shipsystem
-                        # if sy.category == "3" or sy.category == "9":
-                        self.firebirds += sy.firebirds + sy.rating * sy.firebirds_per_rating
-                for section in self.shipsection_set.all():
-                    if section.section != "9":
-                        self.cost += section.structure_points
-            except Exception as e:
-                logger.info("Spaceship [%s] not yet fixable... Next save will do." % (self.reference))
-                import sys
-                print(sys.exc_info()[0])
-                self.ship_status = "wip"
-        # Cargo
-        self.cargo_internal = 10 * self.size_rating
-        # Hull
-        self.firebirds += 10000 * self.size_rating
-        # Vitality
-        self.vitality = self.size_rating * 10
-        self.compute_cinematic_system()
+        self.size_rating = SHIPS_DATA[klass][SD_SIZE]
+        self.dim_length = SHIPS_DATA[klass][SD_DIM_LENGTH]
+        self.dim_width = SHIPS_DATA[klass][SD_DIM_WIDTH]
+        self.dim_height = SHIPS_DATA[klass][SD_DIM_HEIGHT]
 
+        self.structure_points = self.dim_length * self.dim_width * self.dim_height / 100
 
-@receiver(pre_save, sender=ShipRef, dispatch_uid='update_ship_ref')
-def update_ship_ref(sender, instance, **kwargs):
-    instance.fix()
+        is_ok = self.check_minimum_systems()
+        if is_ok != 'ok':
+            self.ship_status = is_ok
+        else:
+            self.check_system_slots()
 
+        # self.compute_cinematic_system()
 
-class ShipSection(models.Model):
-    class Meta:
-        verbose_name = "Spacecraft: Ship Section"
+    def check_system_slots(self):
+        slots = self.shipsystemslot_set.all()
+        self.structure_points_used = 0
+        for slot in slots:
+            if slot.shipsystem:
+                self.structure_points_used += slot.amount * slot.shipsystem.structure_points
 
-    section = models.CharField(max_length=30, choices=SHIP_SECTIONS, blank=True, default='0', null=True)
-    ship_ref = models.ForeignKey(ShipRef, on_delete=models.CASCADE)
-    slot = models.CharField(max_length=30, choices=SHIP_SLOTS, blank=True, default='1', null=True)
-    structure_points = models.PositiveIntegerField(default=1)
-    boarding_party_limit = models.PositiveIntegerField(default=1)
-    links = models.ManyToManyField("self", blank=True)
-
-    def __str__(self):
-        return "%s %s [#%03d]" % (SLOT_NAMES[int(self.slot)], SECTION_NAMES[int(self.section)], self.ship_ref.id)
-
-    @property
-    def systems_installed(self):
-        lst = {}
-        str_lst = []
-        for s in self.shipsystemslot_set.all():
-            if not str(s) in lst.keys():
-                lst[str(s)] = 1
-            else:
-                lst[str(s)] += 1
-        for k in lst:
-            str_lst.append("%dx%s" % (lst[k], k))
-        return ", ".join(str_lst)
-
-    @property
-    def boarding_access(self):
-        lst = []
-        for s in self.links.all():
-            lst.append(str(s))
-        return ", ".join(lst)
-
-
-class ShipSectionInline(admin.TabularInline):
-    model = ShipSection
+    def check_minimum_systems(self):
+        answer = 'ok'
+        for req in MINIMUM_SYSTEMS:
+            total = 0
+            needed = req["per_ship_size"] * self.size_rating
+            for slot in self.shipsystemslot_set.filter(shipsystem__reference=req["reference"]):
+                total += slot.amount * slot.shipsystem.performance
+            if total < needed:
+                logger.warning(f'While checking {self.reference}, system {req["reference"]} is {total} on {needed} ')
+                answer = "req_not_met"
+                print(f' -->While checking {self.reference}, system {req["reference"]} is {total} on {needed} ')
+        return answer
 
 
 class ShipSystemSlot(models.Model):
     class Meta:
         verbose_name = "Spacecraft: System Slot"
 
-    shipsection = models.ForeignKey(ShipSection, on_delete=models.CASCADE, blank=True, null=True)
+    shipref = models.ForeignKey(ShipRef, on_delete=models.CASCADE, blank=True, null=True)
     shipsystem = models.ForeignKey(ShipSystem, on_delete=models.CASCADE, blank=True)
+    amount = models.PositiveIntegerField(default=1, blank=True)
 
     def __str__(self):
-        return "%s in %s" % (self.shipsystem, self.shipsection)
+        return f"{self.shipsystem} x{self.amount} in {self.shipref}"
 
 
 class ShipSystemSlotInline(admin.TabularInline):
     model = ShipSystemSlot
-    ordering = ('shipsection',)
 
 
 class Spaceship(models.Model):
     class Meta:
         verbose_name = "Spacecraft: Ship"
 
+    from cartograph.models.system import System
     full_name = models.CharField(max_length=200)
     ship_ref = models.ForeignKey(ShipRef, on_delete=models.CASCADE, blank=True, null=True)
     owner = models.ForeignKey(Character, on_delete=models.SET_NULL, blank=True, null=True)
     flag = models.CharField(max_length=128, default='', null=True, blank=True)
+    registration_system = models.ForeignKey(System, on_delete=models.SET_NULL, blank=True, null=True)
+    is_available = models.BooleanField(default=False)
+    notes = models.TextField(max_length=512, default='', null=True, blank=True)
+    video = models.CharField(max_length=128, default='', null=True, blank=True)
+
+    def ship_data(self):
+        data = {}
+        data['full_name'] = self.full_name
+        data['owner'] = self.owner.full_name
+        data['flag'] = self.flag
+        data['video'] = self.video
+        data['registration_system'] = self.registration_system
+        data['ref'] = self.ship_ref.ship_data()
+        return data
 
     def __str__(self):
         return "%s (%s)" % (self.full_name, self.flag)
 
-    def d3_model(self):
-        d3_model = {}
-        d3_model['info'] = {}
-        d3_model['sections'] = []
-        d3_model['links'] = []
-        for s in self.shipsections_set.all():
-            s_data = {}
-            s_data['id'] = s.id
-            s_data['structure_points'] = s.structure_points
-            s_data['boarding_access'] = s.boarding_access
-            s_data['name'] = SECTION_NAMES[int(s.shipsection)]
-            s_data['slot'] = SLOT_NAMES[int(s.slot)]
-            d3_model['sections'].append(s_data)
-        return d3_model
 
 
-def CheckOrCreateSection(section_name, slot_index, ship_ref):
-    found = ShipSection.objects.filter(section=section_name, slot=slot_index, ship_ref=ship_ref)
-    if len(found) == 0:
-        new_section = ShipSection()
-        new_section.ship_ref = ship_ref
-        new_section.section = section_name
-        new_section.slot = str(slot_index)
-        if new_section.section == '9':
-            new_section.boarding_party_limit = 0
-        new_section.save()
+
 
 
 # ADMIN ------------------------------------------------------------------------
+def mass_save(modeladmin, request, queryset):
+    for ss in queryset:
+        ss.save()
+    short_description = "Save All"
+
+
+def mass_duplicate(modeladmin, request, queryset):
+    for ss in queryset:
+        ss.pk = None
+        ss.save()
+    short_description = "Duplicate All"
+
 
 class ShipSystemAdmin(admin.ModelAdmin):
-    ordering = ['category', 'reference']
-    list_display = ('reference', 'category', 'tech_level', 'size', 'structure_points', 'damage', 'rating', 'firebirds',
-                    'firebirds_per_rating', 'range', 'shield_effects', 'pts', 'pts_per_rating')
-    list_filter = ('category', 'size', 'shield_effects')
+    ordering = ['free_category', '-performance', 'reference']
+    list_display = ['reference', 'type', 'free_category', 'structure_points',
+                    'performance', 'rating', 'is_symetrical', 'is_continuous_usage',
+                    'power_consumption', 'power_stack', 'description']
+    list_filter = ['free_category']
+    actions = [mass_save, mass_duplicate]
+    list_editable = ['performance', 'structure_points', 'is_symetrical','is_continuous_usage', 'rating', 'power_consumption', 'power_stack']#, 'type', 'free_category']
 
 
 class ShipRefAdmin(admin.ModelAdmin):
-    ordering = ['builder', 'size_rating']
-    list_display = (
-    'reference', 'ship_class', 'builder', 'size_rating', 'ship_grade', 'ship_engines', 'ship_shields', 'cargo_internal','thrust_speed',
-    'dimensions', 'hard_points', 'cost', 'vitality', 'firebirds', 'ship_status')
-    list_filter = ('builder', 'ship_class')
-    inlines = [ShipSectionInline, ]
-
-
-class ShipSectionAdmin(admin.ModelAdmin):
-    ordering = ['ship_ref', 'slot', 'section']
-    list_display = (
-    'section', 'slot', 'ship_ref', 'structure_points', 'systems_installed', 'boarding_access', 'boarding_party_limit')
-    list_filter = ('ship_ref', 'section', 'slot', 'structure_points')
-    search_fields = ('systems_installed',)
+    ordering = ['builder']
+    list_display = ['reference', 'ship_class', 'builder', 'ship_grade', 'dimensions', 'structure_points', 'structure_points_used','firebirds', 'ship_status']
+    list_filter = ['builder', 'ship_class']
+    actions = [mass_save, mass_duplicate]
     inlines = [ShipSystemSlotInline, ]
 
 
 class ShipSystemSlotAdmin(admin.ModelAdmin):
-    ordering = ['shipsection', 'shipsystem']
-    list_display = ('shipsystem', 'shipsection')
-    list_filter = ('shipsection', 'shipsystem')
+    ordering = ['shipref', 'shipsystem']
+    list_display = ('shipsystem',)
+    list_filter = ('shipref', 'shipsystem')
 
 
 class SpaceshipAdmin(admin.ModelAdmin):
     ordering = ['full_name']
-    list_display = ('full_name', 'ship_ref', 'owner', 'flag')
+    list_display = ('full_name', 'ship_ref', 'owner', 'flag', 'registration_system', 'notes', 'is_available')
+    list_editable = ['is_available']

@@ -20,18 +20,7 @@
         <link rel='stylesheet' href="https://fonts.googleapis.com/css2?family={{font}}">
         {% endfor %}
         <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" media="all">
-        {% if campaign.is_fics %}
         <link rel='stylesheet' type='text/css' href='{% sass_src "collector/scss/fics.scss" %}' />
-        {% endif %}
-        {% if campaign.is_coc7 %}
-        <link rel='stylesheet' type='text/css' href='{% sass_src "collector/scss/coc7.scss" %}' />
-        {% endif %}
-        {% if campaign.is_wawwod %}
-        <link rel='stylesheet' type='text/css' href='{% sass_src "collector/scss/wawwod.scss" %}' />
-        {% endif %}
-        {% if campaign.is_prpg %}
-        <link rel='stylesheet' type='text/css' href='{% sass_src "collector/scss/prpg.scss" %}' />
-        {% endif %}
     </head>
     <body>
         <header></header>
@@ -64,6 +53,17 @@
                 {% endblock mosaic %}
             </div>
             <div class="starport">
+              <div class='collapsed freetext' id="freetext">
+                  <span class='freetext_toggler action_icon fa fa-window-restore toggler'><u>Gorgonna</u></span>
+                  <table class='expanded'>
+                      <tr><td>
+                  <textfield  cols="24" rows="30" placeholder="freetext">
+
+                  </textfield>
+                      </td></tr>
+
+                  </table>
+              </div>
               <div class='collapsed dicer'>
                 {% block dicer %}
                 {% endblock dicer %}
@@ -81,6 +81,7 @@
               <div class='collapsed figure' id="figurebox">
                   <img id='figure' src="" width="300" height="400"/>
               </div>
+
             </div>
         </div>
 
@@ -97,17 +98,17 @@
                 {% endblock page_footer %}
             </div>
         </footer>
-
+        <script src='{% static "js/collector.es6" %}'></script>
         <script src='{% static "js/svg_sheet.es6" %}'></script>
         <script src='{% static "js/avatar_customizer.es6" %}'></script>
         <script src='{% static "js/scenarist.es6" %}'></script>
         <script src='{% static "js/optimizer.es6" %}'></script>
-        <script src='{% static "js/collector.es6" %}'></script>
         <script src='{% static "js/jumpweb.es6" %}'></script>
         <script src='{% static "js/orbital_map.es6" %}'></script>
         <script src='{% static "js/fics_sheet.es6" %}'></script>
         <script src='{% static "js/session_sheets.es6" %}'></script>
         <script src='{% static "js/epic_deck.es6" %}'></script>
+        <script src='{% static "js/messages.es6" %}'></script>
         {% block javascript %}
         {% endblock %}
     </body>

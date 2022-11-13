@@ -12,7 +12,7 @@ from collector.models.weapon import Weapon
 from collector.models.shield import Shield
 from collector.models.blessing_curse import BlessingCurse, BlessingCurseModificator
 from collector.models.benefice_affliction import BeneficeAffliction, BeneficeAfflictionModificator
-from collector.models.spacecraft import ShipRef, ShipSection, ShipSystemSlot
+from collector.models.spacecraft import ShipRef, ShipSystemSlot
 from cartograph.models.system import System, OrbitalItem
 from collector.models.bloke import Bloke
 
@@ -67,11 +67,9 @@ BlessingCurseModificatorFormSet = inlineformset_factory(TourOfDutyRef, BlessingC
 BeneficeAfflictionModificatorFormSet = inlineformset_factory(TourOfDutyRef, BeneficeAfflictionModificator,
                                                              fields='__all__', extra=3, can_delete=True)
 
-# ShipRef
-ShipSectionFormSet = inlineformset_factory(ShipRef, ShipSection, fields='__all__', extra=1, can_delete=True)
 
-# ShipSection
-ShipSystemSlotFormSet = inlineformset_factory(ShipSection, ShipSystemSlot, fields='__all__', extra=1, can_delete=True)
+# ShipRef
+ShipSystemSlotFormSet = inlineformset_factory(ShipRef, ShipSystemSlot, fields='__all__', extra=1, can_delete=True)
 
 # System
 OrbitalItemFormSet = inlineformset_factory(System, OrbitalItem, fields='__all__', extra=1, can_delete=True)

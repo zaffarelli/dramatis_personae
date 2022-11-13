@@ -10,3 +10,4 @@ venv/
 collector/static/collector/creds.json
 __init__.pyc
 oldies/
+/collector/static/collector/.sass-cache/

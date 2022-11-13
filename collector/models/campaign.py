@@ -39,6 +39,7 @@ class Campaign(models.Model):
     rpgsystem = models.ForeignKey(RpgSystem, null=True, blank=True, on_delete=models.SET_NULL)
     irl_year_start = models.PositiveIntegerField(default=1990, blank=True)
     is_active = models.BooleanField(default=False)
+    is_available = models.BooleanField(default=False)
     smart_code = models.CharField(default='xxxxxx', max_length=6)
     current_drama = models.ForeignKey(Drama, null=True, blank=True, on_delete=models.SET_NULL)
     color_front = models.CharField(max_length=9, default='#00F0F0F0')
@@ -62,24 +63,14 @@ class Campaign(models.Model):
 
     @property
     def avatars(self):
-        avatars = []
-        if self.is_coc7:
-            from collector.models.investigator import Investigator
-            avatars = Investigator.objects
-        else:
-            from collector.models.character import Character
-            avatars = Character.objects
+        from collector.models.character import Character
+        avatars = Character.objects
         return avatars
 
     @property
     def open_avatars(self):
-        avatars = []
-        if self.is_coc7:
-            from collector.models.investigator import Investigator
-            avatars = Investigator.objects
-        else:
-            from collector.models.character import Character
-            avatars = Character.objects
+        from collector.models.character import Character
+        avatars = Character.objects
         return avatars
 
     @property
@@ -529,7 +520,23 @@ class Campaign(models.Model):
             list.append({'title': a.title})
         return list
 
+    def grab(self, id):
+        if self.epic:
+            characters = self.avatars.filter(pk=id)
+            if len(characters) == 1:
+                character = characters.first()
+                if character.rid in self.epic.get_full_cast():
+                    logger.warning(f"Character {character.full_name} already casted in {self.epic.name}")
+                else:
+                    logger.info(f"Character {character.full_name} added to cast in {self.epic.name}")
+                    self.epic.description += f" ¤{character.rid}¤ "
+                    self.epic.save()
+            else:
+                logger.error(f"Character id {id} gets multiple instances!!!")
+        else:
+            logger.error(f"Campaign has no epic !!!")
 
 class CampaignAdmin(admin.ModelAdmin):
-    ordering = ['irl_year_start','epic__era', 'title']
-    list_display = ['title','irl_year_start', 'epic', 'is_active', 'new_narrative', 'smart_code', 'rpgsystem', 'hidden', 'gm', 'population']
+    ordering = ['irl_year_start', 'epic__era', 'title']
+    list_display = ['title', 'irl_year_start', 'epic', 'is_active', 'is_available', 'new_narrative', 'smart_code',
+                    'rpgsystem', 'hidden', 'gm', 'population']

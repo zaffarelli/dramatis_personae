@@ -1,5 +1,23 @@
 {% load fics_filters %}
 <div class="fresque top">
+    <h1>Characters</h1>
+</div>
+
+<div class="fresque middle">
+    {% for k in character_items %}
+
+        {% if user_profile.option_display_as_list %}
+            {% include "collector/character_row.html" with c=k %}
+        {% else %}
+            <div class='tile team_{{ k.team }}' id='tile_{{ k.id }}'>
+                {% include "collector/character_tile.html" with c=k %}
+            </div>
+        {% endif %}
+
+    {% endfor %}
+</div>
+
+<div class="fresque bottom">
     <div class='tile' id='pag'>
         {% if character_items %}
             <div class='pagination'>
@@ -29,6 +47,7 @@
                 <span class='nav slug-page-item' action='search' page="{{ character_items.paginator.num_pages }}">
       <i class="fas fa-angle-double-right"></i>
     </span>
+            <br/>Found: {{ count  }} character(s)
             {% else %}
                 <strong>&nbsp;</strong>
                 <strong>&nbsp;</strong>
@@ -40,20 +59,6 @@
         </div>
     </div>
 </div>
-<div class="fresque middle">
-    {% for k in character_items %}
-
-        {% if user_profile.option_display_as_list %}
-            {% include "collector/character_row.html" with c=k %}
-        {% else %}
-            <div class='tile team_{{ k.team }}' id='tile_{{ k.id }}'>
-                {% include "collector/character_tile.html" with c=k %}
-            </div>
-        {% endif %}
-
-    {% endfor %}
-</div>
-
 
 
 

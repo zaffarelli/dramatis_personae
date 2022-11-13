@@ -62,8 +62,7 @@ admin.site.register(Spaceship, SpaceshipAdmin)
 from collector.models.spacecraft import ShipSystemSlot, ShipSystemSlotAdmin
 admin.site.register(ShipSystemSlot, ShipSystemSlotAdmin)
 
-from collector.models.spacecraft import ShipSection, ShipSectionAdmin
-admin.site.register(ShipSection, ShipSectionAdmin)
+
 
 
 

@@ -12,6 +12,7 @@ class Collector {
     init() {
         let me = this;
         me.loadKeywords();
+
     }
 
     perform() {
@@ -92,12 +93,16 @@ class Collector {
             e.stopPropagation();
             let action_tag = $(this).attr("action");
             let mode_tag = $(this).attr("mode");
+            let params_tag = $(this).attr("params") | undefined;
             let new_tag = action_tag.replaceAll("_", "/").replaceAll("-PDF", ".pdf")
             let url = 'ajax/' + action_tag + '/';
             if (mode_tag == 'direct') {
                 url = new_tag;
                 let w = window.open(url, '_blank');
                 w.focus();
+            }
+            if (params_tag) {
+                url += params_tag + '/';
             }
             console.debug("menu-item " + action_tag + " has been clicked..." + url + ' ' + mode_tag);
             $.ajax({
@@ -132,7 +137,7 @@ class Collector {
                     //ac.reset(x, "sheet_" + answer.id, "customizer");
                 },
                 error: function (answer) {
-                    console.error('Error on menu-item [' + action_tag + ']');
+                    console.error('Error on menu-item [' + action_tag + ',' + mode_tag + ',' + params_tag + ']');
                     console.debug(answer)
                     me.rebootLinks();
                 }
@@ -172,9 +177,10 @@ class Collector {
                             starmap.perform();
                             me.rebootLinks();
                         }
-                    } else {
-                        $('.mosaic').html(answer.mosaic);
                     }
+                    // } else {
+                    //     $('.mosaic').html(answer.mosaic);
+                    // }
                     me.rebootLinks();
                 },
                 error: function (answer) {
@@ -450,6 +456,32 @@ class Collector {
                         me.rebootLinks();
                         ac.reset(x, "sheet_" + x, "customizer");
                         $("li#" + dad_id + " .character_name").click();
+                    },
+                    error: function (answer) {
+                        console.log('Error on editing ' + x);
+                        me.rebootLinks();
+                    }
+                });
+            });
+
+        $('.grab_character').off()
+            .on('click', function (event) {
+                event.preventDefault();
+                event.stopPropagation();
+                let dad = $(this).parents('li');
+                let dad_id = $(dad).attr("id");
+                let x = $(this).parents('div').attr("id").split("_")[1];
+                $("li#" + dad_id + " .character_info").removeClass('hidden');
+                $.ajax({
+                    url: 'ajax/grab/avatar/' + x + '/',
+                    success: function (answer) {
+                        // $('#board').html('<div id="the_tile"></div><div id="board_area_close"><i class="golden fa fa-times-circle"></i></div><div id="board_area_valid"><i id="menu_go" class="golden fa fa-play-circle"></i></div>');
+                        // $('#the_tile').addClass("sheet_tile");
+                        // $('#the_tile').html(answer);
+                        // $('#board').css('display', 'block');
+                        me.rebootLinks();
+                        ac.reset(x, "sheet_" + x, "customizer");
+                        // $("li#" + dad_id + " .character_name").click();
                     },
                     error: function (answer) {
                         console.log('Error on editing ' + x);

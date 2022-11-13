@@ -1,9 +1,0 @@
-# This file describes the network interfaces available on your system
-# and how to activate them. For more information, see interfaces(5).
-
-DEVICE=eth0
-ONBOOT=yes
-BOOTPROTO=static
-IPADDR={{ ansible_host }}
-NETMASK=255.255.255.0
-DNS1=44.191.28.200

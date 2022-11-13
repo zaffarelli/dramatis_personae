@@ -56,7 +56,7 @@ urlpatterns = [
 
     re_path('^ajax/build_config_pdf/$', build_config_pdf, name='build_config_pdf'),
 
-    re_path('^ajax/quizz/(?P<quizz_id>\d+)/question/(?P<question_num>\d+)/tag/(?P<tag>\w+)/reroll/$', quizz_reroll,
-            name='quizz_reroll'),
+    # re_path('^ajax/quizz/(?P<quizz_id>\d+)/question/(?P<question_num>\d+)/tag/(?P<tag>\w+)/reroll/$', quizz_reroll,
+    #         name='quizz_reroll'),
 
 ]

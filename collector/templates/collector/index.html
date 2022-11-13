@@ -43,7 +43,7 @@
 {#                    <li><span class="menu-button menu-item" mode="standard" action="blokes"><i class="action_icon fas fa-users"></i> Blokes</span>#}
                     <li><span class="menu-button menu-item" mode="standard" action="audit"><i class="action_icon fas fa-star"></i> Audit</span>
                     <li><span class="menu-button slug-item" mode="overlay" action="sessionsheet"><i class="action_icon fas fa-sim-card"></i> Session sheets</span></li>
-
+                    <li><span class="menu-button menu-item" mode="standard" action="spaceships"><i class="action_icon fas fa-rocket"></i> Spaceships</span></li>
                 {% else %}
                     {% if user.profile.main_character %}
                     <li><span class="menu-button menu-item sheet" id="sheet_{{user.profile.main_character.id}}"><i class="action_icon fas fa-user"></i> {{user.profile.main_character.full_name}}</span></li>
@@ -60,13 +60,14 @@
         <li><span class="pull-down">Adventures</span>
             <ul class="level-2 Epic">
                 {% if campaign.is_fics %}
-                <li><span class="menu-button menu-item" mode="standard" action="epics"><i class="action_icon fas fa-rocket"></i> Epics</span></li>
-                <li><span class="menu-button menu-item" action="conf_details"><i class="action_icon fas fa-globe"></i> Current Epic</span></li>
-                <li><span class="menu-button slug-item" mode="standard" action="epic"><i class="action_icon fas fa-dice"></i> Switch Epic</span>
+                <li><span class="menu-button menu-item" mode="standard" action="epics"><i class="action_icon fas fa-globe"></i> Epics</span></li>
+                <li><span class="menu-button menu-item" action="conf_details"><i class="action_icon fas fa-hourglass"></i> Current Epic</span></li>
+{#                <li><span class="menu-button slug-item" mode="standard" action="epic"><i class="action_icon fas fa-dice"></i> Switch Epic</span>#}
                 <li><span class="menu-button menu-item" mode="overlay" action="deck"><i class="action_icon fas fa-images"></i> Epic Deck</span>
                 <li><span class="menu-button menu-item" action="statistics"><i class="fas fa-chart-pie"></i> Statistics</span></li>
 {#                <li><span class="menu-button menu-item" action="gss_update"><i class="fas fa-table"></i> GS Export</span></li>#}
                 <li><span class="menu-button menu-item" action="gss_summary"><i class="fas fa-table"></i> GS PC Summary</span></li>
+
                 {% endif %}
 
             </ul>

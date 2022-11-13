@@ -110,6 +110,7 @@ h1, h2, h3, h4, h5, h6 {
 body {
     font-family: Texte;
     background: $fics_darkest url("greynoise.jpg") fixed 50% 50%;
+    color:$fics_front;
 }
 
 .logo {
@@ -876,6 +877,15 @@ th.skill_dot {
 }
 
 
-
+.officetag{
+    display:inline-block;
+    padding:6px 3px;
+    border:1px solid $fics_light;
+    background: $fics_darkest;
+    color:$fics_golden;
+    border-radius:5px;
+    box-shadow: 0 0 black 3px;
+    cursor: pointer;
+}
 
 

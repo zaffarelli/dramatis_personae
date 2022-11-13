@@ -1,0 +1,7 @@
+{% load static %}
+
+{% for s in ships %}
+    {% include "collector/spacecraft.html" with c=s %}
+{% endfor %}
+
+

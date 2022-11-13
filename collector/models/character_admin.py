@@ -135,7 +135,7 @@ def needs_pdf(modeladmin, request, queryset):
 
 
 class CharacterAdmin(admin.ModelAdmin):
-    list_display = ['full_name', 'player', "ranking", "id", 'importance', 'entrance', 'specie', 'alliance_ref',
+    list_display = ['full_name', 'need_fix','player', "ranking", "id", 'importance', 'entrance', 'specie', 'alliance_ref',
                     'is_dead', 'life_path_total', 'OP',
                     'audit', 'is_visible']
     inlines = [
@@ -158,3 +158,4 @@ class CharacterAdmin(admin.ModelAdmin):
                'SA_SPD', 'SA_RUN', 'PA_TOTAL', 'SK_TOTAL', 'TA_TOTAL', 'BC_TOTAL', 'BA_TOTAL']
     list_filter = ['fencing_league', 'team', 'occult', 'alliance_ref', 'keyword', 'specie']
     search_fields = ['full_name', 'alias', 'keyword', 'rid', 'player']
+    list_editable = ['need_fix']

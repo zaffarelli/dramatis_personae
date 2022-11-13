@@ -83,6 +83,8 @@ class StoryModel(models.Model):
             rid = ''.join(item.group().split('¤'))
             ch = Character.objects.filter(rid=rid).first()
             if ch is not None:
+                ch.is_cast = True
+                ch.save()
                 avar.append(ch.rid)
         return avar
 
@@ -102,8 +104,7 @@ class StoryModel(models.Model):
     def get_casting(self):
         """ Bring all avatars rids from all relevant text fields"""
         casting = []
-        if (self.to_PDF):
-            casting.append(self.fetch_avatars(self.description))
+        casting.append(self.fetch_avatars(self.description))
         return casting
 
     def get_episodes(self):

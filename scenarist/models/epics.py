@@ -45,11 +45,7 @@ class Epic(StoryModel):
         nok = []
         ok = []
         from collector.models.character import Character
-        from collector.models.investigator import Investigator
         for rid in list:
-            # if self.campaign.is_coc7:
-            #     ch = Investigator.objects.filter(rid=rid).first()
-            # else:
             ch = Character.objects.filter(rid=rid).first()
             it = ch.full_name
             if ch.is_dead:
@@ -59,6 +55,26 @@ class Epic(StoryModel):
             else:
                 nok.append(it)
         return ", ".join(ok)+"<hr/>"+", ".join(nok)
+
+
+    def dramatis_personae_simple(self):
+        list = self.get_full_cast()
+        nok = []
+        ok = []
+        from collector.models.character import Character
+        for rid in list:
+            ch = Character.objects.filter(rid=rid).first()
+            if ch.is_dead:
+                option = "(&dagger;)"
+            else:
+                option = ''
+            it = f"<span class='officetag chlink' id='chlink__{ch.rid}'>{ch.full_name} {option}</span>"
+
+            if ch.balanced:
+                ok.append(it)
+            else:
+                nok.append(it)
+        return " ".join(ok)+"<br/>"+" ".join(nok)+"<br/>"
 
     def get_absolute_url(self):
         return reverse('epic-detail', kwargs={'pk': self.pk})

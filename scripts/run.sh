@@ -6,18 +6,16 @@
     export DJANGO_SETTINGS_MODULE=dramatis_personae.settings.local
 
 echo "Make migrations..."
-    python3 manage.py makemigrations
+    python manage.py makemigrations
 echo "Migrate..."
-    python3 manage.py migrate
+    python manage.py migrate
 echo "Collecting statics"
-    python3 manage.py collectstatic --noinput --clear --link -v 0
+    python manage.py collectstatic --noinput --clear --link -v 0
 
-#python manage.py shell < scripts/update_lores.py
+    python --version
 
-#echo "Starting Celery..."
-#kill -9 $(cat celeryd.pid)
-#rm -f celeryd.pid
-#celery worker -A dramatis_personae -l WARNING -B -E --detach --pidfile='celeryd.pid'
+#echo "Launching server..."
+   python manage.py runserver -v 3 0.0.0.0:8088
 
-echo "Launching server..."
-    python3 manage.py runserver 0.0.0.0:8088
+#echo "Launching Daphne server..."
+#    daphne -v 3 -b 0.0.0.0 -p 8088 dramatis_personae.asgi:application

@@ -12,11 +12,11 @@ channels @ file:///home/zaffarelli/.cache/pypoetry/artifacts/36/8c/8a/595aa5db13
 chardet @ file:///home/zaffarelli/.cache/pypoetry/artifacts/d3/31/e0/7c4bd458d5483d167ac65ce5d09dc9fec415e920b91f934b44a2e1279e/chardet-3.0.4-py2.py3-none-any.whl
 colour @ file:///home/zaffarelli/.cache/pypoetry/artifacts/d3/3d/29/3dfc840f9b81704281772e97bf1abc79119b75b6dea6caf3f3cb3727ba/colour-0.1.5-py2.py3-none-any.whl
 coverage @ file:///home/zaffarelli/.cache/pypoetry/artifacts/7d/5e/67/e1e830f920db07ee638a25a55732a383ffc6e7d94ebb289b39fab6f67c/coverage-6.5.0-cp310-cp310-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl
-cryptography @ file:///home/zaffarelli/.cache/pypoetry/artifacts/20/28/47/499b8114e0d4958648b17e6e99e6e6456194b719481db27eb26142868a/cryptography-38.0.2-cp36-abi3-manylinux_2_28_x86_64.whl
+cryptography @ file:///home/zaffarelli/.cache/pypoetry/artifacts/55/04/4a/bd66763e5b452e4f854533bceb9c9985f88dd06350c9a0e43398d28406/cryptography-38.0.3-cp36-abi3-manylinux_2_28_x86_64.whl
 cssselect2 @ file:///home/zaffarelli/.cache/pypoetry/artifacts/73/5b/7c/2e1bfe9a074b55975525c2aa0e4d4b6425e28a22053427cb5536ae98c6/cssselect2-0.7.0-py3-none-any.whl
 decorator @ file:///home/zaffarelli/.cache/pypoetry/artifacts/83/d6/68/4a73dedd10b5fa789d3db73a089e7e7591590b8894c4d95c5993c1905a/decorator-4.2.1-py2.py3-none-any.whl
 defusedxml @ file:///home/zaffarelli/.cache/pypoetry/artifacts/63/7f/1e/b8b316188f0f0704ef8f0eaaad0d3c82dff4aa2495e4e3467479e4ce66/defusedxml-0.7.1-py2.py3-none-any.whl
-Django @ file:///home/zaffarelli/.cache/pypoetry/artifacts/4e/c7/90/f47e47b51cf9fc0c3dbd2a53515e2ea01b91ca214fcf670d3dbcd5d9d7/Django-3.2-py3-none-any.whl
+django @ file:///home/zaffarelli/.cache/pypoetry/artifacts/4e/c7/90/f47e47b51cf9fc0c3dbd2a53515e2ea01b91ca214fcf670d3dbcd5d9d7/Django-3.2-py3-none-any.whl
 django-appconf @ file:///home/zaffarelli/.cache/pypoetry/artifacts/ab/ce/c1/2fcda06f7de7b1ba92a24caacc847da112223aaf721af2349dcf77fef8/django_appconf-1.0.3-py2.py3-none-any.whl
 django-bootstrap-datepicker-plus @ file:///home/zaffarelli/.cache/pypoetry/artifacts/ab/27/1d/b9bb3c2a8f331f26dff6a3bbc8addd57588a05b084ce84dfffe6c7dcee/django_bootstrap_datepicker_plus-4.0.0-py3-none-any.whl
 django-colorfield @ file:///home/zaffarelli/.cache/pypoetry/artifacts/83/40/1a/43fa18878de04850a97ba3d1139fc6f1f40b3cceaf6515f8252abbfbf1/django_colorfield-0.4.1-py3-none-any.whl
@@ -29,11 +29,11 @@ django-sass-processor @ file:///home/zaffarelli/.cache/pypoetry/artifacts/cb/9e/
 django-split-settings @ file:///home/zaffarelli/.cache/pypoetry/artifacts/e0/88/4b/4edc44442c267a9e3754d9bb9f0f2a1920b10e461218b7ddd390d0bf39/django_split_settings-0.3.0-py2.py3-none-any.whl
 django-test @ file:///home/zaffarelli/.cache/pypoetry/artifacts/23/74/39/3ef274cf90e0d897daeb708df4f5295140604d3ec0a9dbf9b11a7ac3cf/django-test-0.4030.tar.gz
 et-xmlfile @ file:///home/zaffarelli/.cache/pypoetry/artifacts/f9/92/99/610bc8c435f00f6595316183e180f320b744643fcd862d021a89d74bea/et_xmlfile-1.0.1.tar.gz
-exceptiongroup @ file:///home/zaffarelli/.cache/pypoetry/artifacts/bb/3a/53/6812bb7c51006455a96c65acf130ab3319fbc502be132a3b494a23d45f/exceptiongroup-1.0.0-py3-none-any.whl
+exceptiongroup @ file:///home/zaffarelli/.cache/pypoetry/artifacts/2b/03/f3/03da714e405c07d04da18908b1d314172ee086abb509a7f679767ae2a4/exceptiongroup-1.0.1-py3-none-any.whl
 factory-boy @ file:///home/zaffarelli/.cache/pypoetry/artifacts/19/b2/40/bedc43e352748e0d0932704e03d0e714830ff9c95c351bd217c29d20b2/factory_boy-2.12.0-py2.py3-none-any.whl
 Faker @ file:///home/zaffarelli/.cache/pypoetry/artifacts/18/6b/09/f00dc854ea56ed6fc5184dca36d03d7c065bdafbe1c7d4ece7eb77e20f/Faker-2.0.3-py2.py3-none-any.whl
-google-auth @ file:///home/zaffarelli/.cache/pypoetry/artifacts/de/57/1d/e9541ca5539be34e169c0e8dc25c55886d3262b7c5b28434861e2cbecf/google_auth-2.13.0-py2.py3-none-any.whl
-google-auth-oauthlib @ file:///home/zaffarelli/.cache/pypoetry/artifacts/6d/fb/5d/892c441028d421324df233f5d40fb55ed34e9ce9d51bede50cb2d38cf4/google_auth_oauthlib-0.7.0-py2.py3-none-any.whl
+google-auth @ file:///home/zaffarelli/.cache/pypoetry/artifacts/68/2d/96/c46a4f059838c9f5cb9832d0858431511af8ff386d0f2fdcdc3f4ee089/google_auth-2.14.1-py2.py3-none-any.whl
+google-auth-oauthlib @ file:///home/zaffarelli/.cache/pypoetry/artifacts/05/77/21/39981ed87b7325a173d24d769a8ebbcfa9df0194dd174006077a9ffcef/google_auth_oauthlib-0.7.1-py2.py3-none-any.whl
 gspread @ file:///home/zaffarelli/.cache/pypoetry/artifacts/6b/92/23/dd5a58b0051a37a110bba59ab45ac233cbfe1a07bc54b1a66be44e2b16/gspread-3.6.0-py3-none-any.whl
 gunicorn @ file:///home/zaffarelli/.cache/pypoetry/artifacts/9f/68/9f/f1166be9473b4fe2cc59c98fac616db1f94b18662b9055d1ac940374e3/gunicorn-20.1.0-py3-none-any.whl
 html5lib @ file:///home/zaffarelli/.cache/pypoetry/artifacts/0f/c0/b8/0e8d4b7bdc1e1c596808961ea90d705cb97a96695b50c829b2cfc163c7/html5lib-1.0.1-py2.py3-none-any.whl
@@ -49,7 +49,7 @@ oauth2client @ file:///home/zaffarelli/.cache/pypoetry/artifacts/17/37/ab/79402d
 oauthlib @ file:///home/zaffarelli/.cache/pypoetry/artifacts/4e/06/b8/8c787bf6dca03bfa59fb367f30ef0c2f8d8a63e926eb0d436ab5fac891/oauthlib-3.2.2-py3-none-any.whl
 openpyxl @ file:///home/zaffarelli/.cache/pypoetry/artifacts/4a/c7/09/2f71a87bf9bfd2096b3d11118b853129f17fcac10409d4b4ad2144b611/openpyxl-2.5.5.tar.gz
 packaging @ file:///home/zaffarelli/.cache/pypoetry/artifacts/d3/1f/90/3f2473250ebd055fe7f0856810677783949fc0d2e5f25bbb4dc00ad0a9/packaging-21.3-py3-none-any.whl
-Pillow @ file:///home/zaffarelli/.cache/pypoetry/artifacts/3e/00/54/ca25a66510950fc5ec5b1420a0dda2d91813e043e44c477f6742e26d92/Pillow-6.2.2.tar.gz
+Pillow @ file:///home/zaffarelli/.cache/pypoetry/artifacts/e2/68/a0/2263a53a329744a2cbee2c8a852428a2aab566ad1a935aec9bcee0eb77/Pillow-7.2.0.tar.gz
 pluggy @ file:///home/zaffarelli/.cache/pypoetry/artifacts/49/3e/55/309ec3705ba3309d817d531002c0a02f643d06c5d5a889ce43236130d5/pluggy-1.0.0-py2.py3-none-any.whl
 psycopg2 @ file:///home/zaffarelli/.cache/pypoetry/artifacts/9c/9e/97/de9ddc504390fc0c48173ed92b5c617a72bdad98be0fa001a515e60daf/psycopg2-2.8.6.tar.gz
 psycopg2-binary @ file:///home/zaffarelli/.cache/pypoetry/artifacts/3b/c2/db/b2803088b8f1c9e517ec4b163c4d49032a6d3bb428921040baa301f506/psycopg2-binary-2.8.6.tar.gz
@@ -80,3 +80,17 @@ uWSGI @ file:///home/zaffarelli/.cache/pypoetry/artifacts/36/8d/68/d3123ad876c93
 vine @ file:///home/zaffarelli/.cache/pypoetry/artifacts/86/4b/4e/21b29d28ccc8ebbc2041fe9c899cf0dd8e479878d3906edf499d03c95a/vine-1.3.0-py2.py3-none-any.whl
 webencodings @ file:///home/zaffarelli/.cache/pypoetry/artifacts/2c/71/d6/0bb3633964388ed16be6b71327528e3acf005b646a54e65547041575ab/webencodings-0.5.1-py2.py3-none-any.whl
 xhtml2pdf @ file:///home/zaffarelli/.cache/pypoetry/artifacts/31/45/d6/22a1f09fbccb4897db43c774b8cd10dba17da2357b7e015b372cd9ad1f/xhtml2pdf-0.2.4.tar.gz
+
+celery~=4.4.7
+Pillow~=7.2.0
+Django~=3.2
+xhtml2pdf~=0.2.4
+PyPDF2~=1.26.0
+PyYAML~=5.1
+gspread~=3.6.0
+requests~=2.22.0
+oauth2client~=4.1.3
+cryptography~=38.0.3
+openpyxl~=2.5.5
+colour~=0.1.5
+channels~=4.0.0

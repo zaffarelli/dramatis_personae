@@ -10,6 +10,7 @@ from django.db.models.signals import pre_save
 from django.contrib import admin
 from datetime import datetime
 import logging
+from django.utils import timezone
 
 logger = logging.getLogger(__name__)
 
@@ -54,7 +55,7 @@ class CyberwareRef(models.Model):
     incompatibility = models.IntegerField(default=0)
     tech_level = models.IntegerField(default=0)
     description = models.TextField(default='', blank=True, max_length=1024)
-    pub_date = models.DateTimeField('Date published', default=datetime.now)
+    # pub_date = models.DateTimeField('Date published', default=timezone.now)
     need_fix = models.BooleanField(default=False, blank=True)
 
     @property
