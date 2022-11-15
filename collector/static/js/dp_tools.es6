@@ -559,12 +559,12 @@ class Logo {
         if (oversize !== 0){
             me.size = me.size*oversize;
         }
-        me.width = me.size * 3;
+        me.width = me.size * 3
         me.height = me.size * 4;
-        me.dot_stroke = "#333";
+        me.dot_stroke = "#424";
         me.dot_fill = "#FC4";
-        me.line_stroke = "#878";
-        me.line_fill = "#646";
+        me.line_stroke = "#888";
+        me.line_fill = "#aaaa";
         me.ox = me.size/4;
         me.oy = 3*me.size/4;
         me.init(tgt);
@@ -601,7 +601,7 @@ class Logo {
         let me = this;
         me.links = me.svg.append('g')
             .selectAll('link')
-            .data(me.links_data_dp)
+            .data(me.links_data_fs)
             .enter()
                 .append('line')
                 .attr('class','link fs')
@@ -625,12 +625,12 @@ class Logo {
                 .style('stroke',me.line_stroke)
                 .style('stroke-linecap','round')
                 .style('stroke-width',(me.size/3.5)+'pt')
-                .style('opacity','0.1')
+                .style('opacity',.1)
             ;
 
         me.links_overlay = me.svg.append('g')
             .selectAll('link')
-            .data(me.links_data_fs)
+            .data(me.links_data_dp)
             .enter()
                 .append('line')
                 .attr('class','link dp')
@@ -651,7 +651,7 @@ class Logo {
                     return c.y+me.oy;
                 })
                 .attr('r',me.size/10)
-                .style('fill',me.line_fill2)
+                .style('fill',me.line_fill)
                 .style('stroke',me.line_stroke)
                 .style('stroke-linecap','round')
                 .style('stroke-width',(me.size/3.5)+'pt')
@@ -672,7 +672,7 @@ class Logo {
                 .attr('cy',function(d){
                     return d.y+me.oy;
                 })
-                .attr('r',me.size/7.5)
+                .attr('r',me.size/10)
                 .style('fill',me.dot_fill)
                 .style('stroke',me.dot_stroke)
                 .style('stroke-width','1pt')
@@ -696,9 +696,9 @@ class Logo {
                 .attr('font-family','FatName')
                 .attr('text-anchor','middle')
                 .style('font-size',(me.size/2.5)+'pt')
-                .style('fill',me.line_stroke)
-                .style('stroke',me.line_fill)
-                .style('stroke-width','1pt')
+                .style('fill',me.line_fill)
+                .style('stroke',me.dot_stroke)
+                .style('stroke-width','0.5pt')
                 .text("Fading Suns")
                 ;
             me.svg.append('text')
@@ -707,9 +707,9 @@ class Logo {
                 .attr('font-family','FatName')
                 .attr('text-anchor','middle')
                 .style('font-size',(me.size/4)+'pt')
-                .style('fill',me.line_stroke)
-                .style('stroke',me.line_fill)
-                .style('stroke-width','1pt')
+                .style('fill',me.line_fill)
+                .style('stroke',me.dot_stroke)
+                .style('stroke-width','0.5pt')
                 .text("Dramatis Personae")
                 ;
             }

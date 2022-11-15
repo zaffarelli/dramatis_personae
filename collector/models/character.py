@@ -22,6 +22,7 @@ from operator import itemgetter
 
 logger = logging.getLogger(__name__)
 
+
 class Character(Combattant):
     class Meta:
         ordering = ['full_name']

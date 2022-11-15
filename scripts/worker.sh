@@ -1,3 +1,3 @@
-#!/bin/sh
+#!/bin/bash
 
-celery worker -A dramatis_personae -l WARNING -B -E
+celery -A dramatis_personae worker  -l WARNING --beat -E

@@ -8,7 +8,7 @@ from scenarist.models.adventures import Adventure
 from scenarist.models.scenes import Scene
 from scenarist.models.schemes import Scheme
 from scenarist.models.backlogs import Backlog
-from bootstrap_datepicker_plus.widgets import DateTimePickerInput
+
 
 
 class EpicForm(ModelForm):
@@ -39,14 +39,15 @@ class AdventureForm(ModelForm):
     class Meta:
         model = Adventure
         fields = '__all__'
-        widgets = {
-            'dt': DateTimePickerInput(options={
-                "format": "YYYY-MM-DD HH:mm:ss",
-                "showClose": True,
-                "showClear": True,
-                "showTodayButton": True,
-            })
-        }
+        # widgets = {
+        #     'dt': DateTimePickerInput(options={
+        #         "format": "YYYY-MM-DD HH:mm:ss",
+        #         "showClose": True,
+        #         "showClear": True,
+        #         "showTodayButton": True,
+        #     })
+        # }
+
 class BacklogForm(ModelForm):
     class Meta:
         model = Backlog
@@ -57,24 +58,24 @@ class SchemeForm(ModelForm):
     class Meta:
         model = Scheme
         fields = '__all__'
-        widgets = {
-            'dt': DateTimePickerInput(options={
-                "format": "YYYY-MM-DD HH:mm:ss",
-                "showClose": True,
-                "showClear": True,
-                "showTodayButton": True,
-            })
-        }
+        # widgets = {
+        #     'dt': DateTimePickerInput(options={
+        #         "format": "YYYY-MM-DD HH:mm:ss",
+        #         "showClose": True,
+        #         "showClear": True,
+        #         "showTodayButton": True,
+        #     })
+        # }
 
 class SceneForm(ModelForm):
     class Meta:
         model = Scene
         fields = '__all__'
-        widgets = {
-            'dt': DateTimePickerInput(options={
-                "format": "YYYY-MM-DD HH:mm:ss",
-                "showClose": True,
-                "showClear": True,
-                "showTodayButton": True,
-            })
-        }
+        # widgets = {
+        #     'dt': DateTimePickerInput(options={
+        #         "format": "YYYY-MM-DD HH:mm:ss",
+        #         "showClose": True,
+        #         "showClear": True,
+        #         "showTodayButton": True,
+        #     })
+        # }

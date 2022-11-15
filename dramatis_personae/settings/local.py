@@ -11,7 +11,7 @@ ALLOWED_HOSTS = ['*']
 CELERY_BROKER_URL = 'amqp://guest@zotzgi//'
 SECRET_KEY = 'yhx#rfagghedua&l_5d+@&f!kf)%s%2^*ztun25n+xuokjkfw!'
 
-INSTANCE_NAME = 'ZOTZGI DEV'
+INSTANCE_NAME = 'ZOTZGI_DEV'
 
 DATABASES = {
     'default': {
@@ -36,7 +36,7 @@ DATABASES = {
 if DEBUG:
     import mimetypes
     mimetypes.add_type("application/javascript;charset=utf-8", ".es6", True)
-    mimetypes.add_type("application/javascript", ".js", True)
+    mimetypes.add_type("application/javascript;charset=utf-8", ".js", True)
 
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "dramatis_personae.settings")

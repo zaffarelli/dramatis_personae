@@ -15,7 +15,7 @@ from django.template.loader import get_template
 import datetime
 from collector.utils.basic import get_current_config, export_epic, slug_decode
 from collector.utils.fics_references import FONTSET
-from django.conf import settings
+# from django.conf import settings
 from collector.views.characters import respawn_avatar_link
 import os
 from django.conf import settings
@@ -24,6 +24,7 @@ from django.contrib import messages
 import json
 import base64
 
+# from collector.utils.log_wrapper import logwrap
 
 def index(request):
     if not request.user.is_authenticated:
@@ -107,7 +108,7 @@ def get_list(request, id, slug='none'):
         paginator = Paginator(character_items, settings.MAX_CHAR)
     page = id
     character_items = paginator.get_page(page)
-    messages.info(request, f'{paginator.count} characters found.')
+    messages.info(request,f'{paginator.count} characters found.')
     context = {'character_items': character_items, 'default_ghost_tgt': "list_ghostmark", "count": paginator.count}
     template = get_template('collector/list.html')
     html = template.render(context, request)

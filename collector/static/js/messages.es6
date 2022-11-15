@@ -1,7 +1,9 @@
-
-console.log('Enabling messaging websocket...')
-socket = new WebSocket('ws://localhost:8088/websocket/collector/')
+let socket = new WebSocket(`ws://${window.location.host}/websocket/collector/`)
 socket.onmessage = function (e) {
-    let djangoData = JSON.parse(e.data);
-    console.log(djangoData);
+    console.log(e);
+    let payload = JSON.parse(e.data);
+    console.log(payload);
+    console.log(payload['data']);
+    $('#messenger_block').html(payload['data']);
+    // $('.mosaic').innerHTML = payload;
 }

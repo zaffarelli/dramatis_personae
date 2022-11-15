@@ -8,6 +8,7 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(os.path.join(__file__, os.pardir))))
 
 INSTALLED_APPS = [
+    'channels',
     'optimizer.apps.OptimizerConfig',
     'scenarist.apps.ScenaristConfig',
     'cartograph.apps.CartographConfig',
@@ -20,9 +21,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'extra_views',
     'sass_processor',
-    'colorfield',
+    'colorfield'
     # 'bootstrap_datepicker_plus',
-    'channels'
+
 ]
 
 MIDDLEWARE = [
@@ -56,7 +57,6 @@ TEMPLATES = [{
 }]
 
 ASGI_APPLICATION = 'dramatis_personae.asgi.application'
-
 
 CHANNEL_LAYERS = {
     'default': {
@@ -152,14 +152,15 @@ MEDIA_URL = '/media/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'dp_static/')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'dp_media/')
 
-# STATICFILES_DIRS = [os.path.join(BASE_DIR,"dp_static")]
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "collector/static")
+]
 
 LOGIN_REDIRECT_URL = '/'
 
 MAX_CHAR = 20
-RELEASE = '1.1.0'
+RELEASE = '1.2.0'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'dramatis_personae.settings')
-

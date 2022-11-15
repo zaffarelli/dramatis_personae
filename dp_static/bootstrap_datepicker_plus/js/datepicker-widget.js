@@ -1,1 +1,0 @@
-/home/zaffarelli/.virtualenvs/dramatis_personae/lib/python3.10/site-packages/bootstrap_datepicker_plus/static/bootstrap_datepicker_plus/js/datepicker-widget.js

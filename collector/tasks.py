@@ -14,8 +14,16 @@ from optimizer.models.policy import Policy
 import logging
 from datetime import datetime, timedelta
 from collector.utils.basic import get_current_config
+from collector.consumers import CollectorConsumer
 
 logger = logging.getLogger(__name__)
+
+@shared_task
+def handle_messages():
+    answer = "Messages handling... (WiP)"
+    # print(answer)
+    # CollectorConsumer.as_asgi().connect()
+    return answer
 
 
 @shared_task

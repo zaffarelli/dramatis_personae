@@ -21,6 +21,11 @@ CELERY_BEAT_SCHEDULE = {
         'schedule': 50,
         'args': (),
     },
+    'handle_messages': {
+        'task': 'collector.tasks.handle_messages',
+        'schedule': 10,
+        'args': (),
+    },
     'skills_schedule': {
         'task': 'collector.tasks.skills_check',
         'schedule': crontab(minute='*/30'),

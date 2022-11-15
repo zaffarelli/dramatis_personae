@@ -53,17 +53,6 @@
                 {% endblock mosaic %}
             </div>
             <div class="starport">
-              <div class='collapsed freetext' id="freetext">
-                  <span class='freetext_toggler action_icon fa fa-window-restore toggler'><u>Gorgonna</u></span>
-                  <table class='expanded'>
-                      <tr><td>
-                  <textfield  cols="24" rows="30" placeholder="freetext">
-
-                  </textfield>
-                      </td></tr>
-
-                  </table>
-              </div>
               <div class='collapsed dicer'>
                 {% block dicer %}
                 {% endblock dicer %}
@@ -92,6 +81,7 @@
         <div id="messenger_block"></div>
 
 
+
         <footer>
             <div class='footer'>
                 {% block page_footer %}
@@ -108,7 +98,7 @@
         <script src='{% static "js/fics_sheet.es6" %}'></script>
         <script src='{% static "js/session_sheets.es6" %}'></script>
         <script src='{% static "js/epic_deck.es6" %}'></script>
-        <script src='{% static "js/messages.es6" %}'></script>
+{#        <script src='{% static "js/messages.es6" %}'></script>#}
         {% block javascript %}
         {% endblock %}
     </body>

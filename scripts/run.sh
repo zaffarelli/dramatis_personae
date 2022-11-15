@@ -14,8 +14,11 @@ echo "Collecting statics"
 
     python --version
 
-#echo "Launching server..."
-   python manage.py runserver -v 3 0.0.0.0:8088
+#echo "Launching standard dev server..."
+#   python manage.py runserver -v 3 0.0.0.0:8088
 
-#echo "Launching Daphne server..."
-#    daphne -v 3 -b 0.0.0.0 -p 8088 dramatis_personae.asgi:application
+echo "Launching Daphne server..."
+    daphne -b 0.0.0.0 -p 8088 dramatis_personae.asgi:application
+
+#echo "Launching Hypercorn server..."
+#    hypercorn 0.0.0.0:8088 dramatis_personae.asgi:application

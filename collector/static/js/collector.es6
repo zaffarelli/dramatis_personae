@@ -36,6 +36,18 @@ class Collector {
         });
     }
 
+    // openSocket(){
+    //     let me = this
+    //     me.socket = new WebSocket(`ws://${window.location.host}/websocket/collector/`)
+    //     me.socket.onmessage = function (e) {
+    //         console.log(e);
+    //         let payload = JSON.parse(e.data);
+    //         console.log(payload);
+    //         $('#messenger_block').innerHTML = payload;
+    //         $('.mosaic').innerHTML = payload;
+    //     }
+    // }
+
     runHeartbeat(x = 2500) {
         let me = this;
         clearTimeout(me.heartbeat);
@@ -43,6 +55,7 @@ class Collector {
             url: 'api/heartbeat/',
             success: function (answer) {
                 $('#messenger_block').html(answer)
+                console.log(answer)
                 me.heartbeat = setTimeout("co.runHeartbeat()", x);
             },
         });
@@ -763,5 +776,6 @@ class Collector {
                 $t.raise_event($t.id('throw'), 'mouseup');
                 me.rebootLinks();
             });
+        // me.openSocket();
     }
 }
