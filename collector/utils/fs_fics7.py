@@ -1,10 +1,6 @@
 """
- ╔╦╗╔═╗  ╔═╗┌─┐┬  ┬  ┌─┐┌─┐┌┬┐┌─┐┬─┐
-  ║║╠═╝  ║  │ ││  │  ├┤ │   │ │ │├┬┘
- ═╩╝╩    ╚═╝└─┘┴─┘┴─┘└─┘└─┘ ┴ └─┘┴└─
- Fading Suns
- Fusion Interlock Custom System v7
- This file contains the core business function of the app
+ Fading Suns (Fusion Interlock Custom System v7)
+ This file contains the core business function of the app.
 """
 import math
 import os
@@ -19,6 +15,7 @@ logger = logging.getLogger(__name__)
 
 def check_secondary_attributes(ch):
     """ Compute all secondary attributes (we check nothing in fact)
+    ch: a Character instance
     """
     ch.SA_REC = ch.PA_STR + ch.PA_CON
     ch.SA_STA = math.ceil(ch.PA_BOD / 2) - 1
@@ -290,6 +287,11 @@ def choose_sk(alist, maxweight):
 
 
 def find_rid(s):
+    """
+    Returns the RID transformation for a character's name.
+    :param s: the name string
+    :return: the RID as a string
+    """
     x = s.replace(' ', '_').replace("'", '').replace('é', 'e') \
         .replace('è', 'e').replace('ë', 'e').replace('â', 'a') \
         .replace('ô', 'o').replace('"', '').replace('ï', 'i') \
@@ -386,3 +388,9 @@ def get_keywords():
         if someone.keyword != '':
             keywords.append(someone.keyword)
     return sorted(list(set(keywords)))
+
+def grab_faction_colors_from_svg(keyword=""):
+    ''' TBD: '''
+    reference_document = "fadingsuns_heraldry.svg"
+
+    return colors

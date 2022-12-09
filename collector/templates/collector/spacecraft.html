@@ -2,20 +2,38 @@
 {% load fics_filters %}
 <div class="fresque">
     <div class="tile ship ">
-        <h1>"{{ c.full_name }}"</h1>
-        <strong>{{ c.ref.model }} class {{ c.ref.class|lower }}<br/>{{c.ref.builder}}</strong>
+        <h1>{{ c.full_name }}</h1>
         <table>
+            <tr><th>Model</th><td>{{ c.ref.reference }} class {{ c.ref.class|lower }}</td></tr>
+            <tr><th>Builder</th><td>{{c.ref.builder}}</td></tr>
             <tr><th>Owner</th><td>{{ c.owner }}</td></tr>
             <tr><th>Grade</th><td>{{ c.ref.grade }}</td></tr>
+            <tr><th>Dimensions</th><td>{{ c.ref.dimensions }}</td></tr>
+            <tr><th>Price</th><td>£{{ c.ref.firebirds }}</td></tr>
+            <tr><th>Crew Size</th><td>{{ c.ref.cs_crew }}</td></tr>
         </table>
 
         <h2>Cruising</h2>
-
+        <table>
+            <tr><th>Autonomy</th><td>{{ c.ref.cs_autonomy }}</td></tr>
+            <tr><th>Storage Units</th><td>{{ c.ref.cs_scanners }}</td></tr>
+            <tr><th>Life Support</th><td>{{ c.ref.cs_scanners }}</td></tr>
+            <tr><th>Cargo</th><td>{{ c.ref.cs_cargo }}</td></tr>
+        </table>
 
         <h2>Tactical Data</h2>
         <table>
             <tr><th>Maneuver</th><td>{{ c.ref.cs_maneuver }}</td></tr>
             <tr><th>Scanners</th><td>{{ c.ref.cs_scanners }}</td></tr>
+        </table><br/><table>
+            <tr><th>Battleshield</th><td>{{ c.ref.cs_scanners }}</td></tr>
+            <tr><th>Shield</th><td>{{ c.ref.cs_scanners }}</td></tr>
+            <tr><th>Hull</th><td>{{ c.ref.cs_scanners }}</td></tr>
+            <tr><th>Structure</th><td>{{ c.ref.cs_scanners }}</td></tr>
+        </table><br/><table>
+            <tr><th>Power Storage</th><td>{{ c.ref.cs_power_stack }}</td></tr>
+            <tr><th>Power Consumption</th><td>{{ c.ref.cs_power_consumption }}</td></tr>
+            <tr><th>Energy Core</th><td>{{ c.ref.cs_scanners }}</td></tr>
         </table>
 
     </div>

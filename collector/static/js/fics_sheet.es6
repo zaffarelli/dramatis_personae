@@ -8,7 +8,7 @@ class FICSSheet extends Sheet {
     init() {
         let me = this;
         super.init();
-        me.version = '0.9.4';
+        me.version = '0.9.5';
         me.fics_release = "FuZion Interlock Custom System v8.0";
     }
 
@@ -47,7 +47,7 @@ class FICSSheet extends Sheet {
             me.drawJumpgateLogo(12 * me.stepx, 2.6 * me.stepy)
             me.decorationText(12, 3.82, 0, 'middle', me.title_font, me.fat_font_size * 1.35, me.draw_fill, me.draw_stroke, 1, title_text, me.back, 1);
             me.decorationText(12, 4.8, 0, 'middle', me.title_font, 3 * me.fat_font_size / 5, me.draw_fill, me.draw_stroke, 0.5, me.scenario, me.back, 0.8);
-            me.decorationText(4.0, 2.25, 0, 'middle', me.base_font, me.medium_font_size, me.draw_fill, me.draw_stroke, 0.5, me.post_title, me.back);
+            // me.decorationText(4.0, 2.25, 0, 'middle', me.base_font, me.medium_font_size, me.draw_fill, me.draw_stroke, 0.5, me.post_title, me.back);
             me.decorationText(20, 2.25, 0, 'middle', me.base_font, me.small_font_size, me.draw_fill, me.draw_stroke, 0.5, me.pre_title, me.back);
             me.decorationText(22.5, 35.65, -16, 'end', me.base_font, me.small_font_size, me.draw_fill, me.draw_stroke, 0.5, "Fading Suns FICS character sheet version " + me.version + " - 2021 - Zaffarelli - generated with dP", me.back);
 
@@ -56,6 +56,7 @@ class FICSSheet extends Sheet {
 
             me.drawLine(8.5, 13.5, 28.5, 28.5, me.draw_fill, me.draw_fill, 3, me.strokedebris);
             me.drawLine(8.5, 13.5, 33, 33, me.draw_fill, me.draw_fill, 3, me.strokedebris);
+            me.decorationText(4.0, 2.25, 0, 'middle', me.base_font, me.medium_font_size, me.draw_fill, me.draw_stroke, 0.5, me.fics_release, me.back);
 
 
         } else if (page === 1) {
@@ -93,6 +94,10 @@ class FICSSheet extends Sheet {
             me.decorationText(4.0, 2.25, 0, 'middle', me.base_font, me.medium_font_size, me.draw_fill, me.draw_stroke, 0.5, me.fics_release, me.back);
             me.decorationText(22.5, 35.8, -16, 'end', me.base_font, me.small_font_size, me.draw_fill, me.draw_stroke, 0.5, "fics_Sheet | v" + me.version + " | 2022 | Zaffarelli | generated with DP", me.back);
 
+            me.drawLine(1, 23, 11, 11, me.draw_fill, me.draw_fill, 3, me.strokedebris);
+            me.drawLine(1, 23, 14, 14, me.draw_fill, me.draw_fill, 3, me.strokedebris);
+            me.drawLine(1, 23, 26, 26, me.draw_fill, me.draw_fill, 3, me.strokedebris);
+
         } else if (page === 3) {
             me.lines = me.back.append('g');
             me.daddy = me.lines;
@@ -105,6 +110,8 @@ class FICSSheet extends Sheet {
             me.decorationText(4.0, 2.25, 0, 'middle', me.base_font, me.medium_font_size, me.draw_fill, me.draw_stroke, 0.5, me.fics_release, me.back);
             me.decorationText(22.5, 35.8, -16, 'end', me.base_font, me.small_font_size, me.draw_fill, me.draw_stroke, 0.5, "fics_Sheet | v" + me.version + " | 2022 | Zaffarelli | generated with DP", me.back);
 
+            me.drawLine(12, 12, 2.5, 35, me.draw_fill, me.draw_fill, 3, me.strokedebris);
+            me.drawLine(12, 23, 10, 10, me.draw_fill, me.draw_fill, 3, me.strokedebris);
         }
 
         if (!me.blank) {
@@ -144,13 +151,13 @@ class FICSSheet extends Sheet {
             me.fillToDs(1.25, 3);
             me.fillBC(1.25, 11.5);
             me.fillBA(1.25, 14.5);
-            me.fillOccult(1.25, 24.5)
+            me.fillOccult(1.25, 26.5)
 
         } else if (page == 3) {
             me.fillName(page);
-            me.fillWallet(17.25, 8.5)
-            me.fillGear(12.25, 20.5)
-            me.fillShortcuts(1.25, 20.5)
+            me.fillWallet(12.25, 3)
+            me.fillGear(12.25, 10.5)
+            me.fillShortcuts(1.25, 3)
         }
     }
 

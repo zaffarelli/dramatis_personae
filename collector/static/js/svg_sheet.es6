@@ -17,7 +17,7 @@ class Sheet {
         me.blank = false;
         me.button_ox = 28;
         me.button_oy = 2;
-        me.version = "0.9.5";
+        me.version = "0.9.6";
         if (me.disposition == 'portrait') {
             me.xunits = 24;
             me.yunits = 36;
@@ -224,11 +224,7 @@ xmlns="http://www.w3.org/2000/svg" version="1.1" \
 xmlns:xlink="http://www.w3.org/1999/xlink"> \
 ' + flist + base_svg + '</svg>';
 
-        if (me.page == 0) {
-            lpage = "_recto";
-        } else {
-            lpage = "_verso"
-        }
+        lpage = "_"+me.page;
         let fname = me.data['rid'] + lpage + ".svg"
         let nuke = document.createElement("a");
         nuke.href = 'data:application/octet-stream;base64,' + btoa(me.formatXml(exportable_svg));
@@ -942,7 +938,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
 
 
         if (me.blank === false) {
-            me.wrap(me.data['narrative'], 14, 25.5, 9, me.user_font);
+            me.wrap(me.data['narrative'], 14, 25.5, 9.5, me.user_font);
         }
     }
 
@@ -1259,6 +1255,21 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
         me.drawAttribute("AGI", "agility", me.data["PA_AGI"], bx, oy + 5 * me.stepy, me.character, 1)
         me.drawAttribute("AWA", "awareness", me.data["PA_AWA"], bx, oy + 5 * me.stepy, me.character, 2)
 
+
+        me.character.append('text')
+            .attr('x', bx + 0.25 * me.stepx)
+            .attr('y', oy + 6.60 * me.stepy)
+            .attr('dx', 0)
+            .attr('dy', 0)
+            .text("Primary Attributes")
+            .style("text-anchor", 'left')
+            .style("font-family", me.base_font)
+            .style("font-size", me.medium_font_size +'pt')
+            .style("fill", me.draw_fill)
+            .style("stroke", me.draw_stroke)
+            .style("stroke-width", '0.05pt')
+        ;
+
         bx = 6.5 * me.stepx;
         me.character.append('rect')
             .attr('x', bx + 0.5 * me.stepx)
@@ -1287,6 +1298,19 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
         me.drawAttribute("RUN", "MOVx2", me.data["SA_RUN"], bx, oy + 5 * me.stepy, me.character, 2, 20)
 
 
+        me.character.append('text')
+            .attr('x', bx + 0.25 * me.stepx)
+            .attr('y', oy + 6.60 * me.stepy)
+            .attr('dx', 0)
+            .attr('dy', 0)
+            .text("Secondary Attributes")
+            .style("text-anchor", 'left')
+            .style("font-family", me.base_font)
+            .style("font-size", me.medium_font_size +'pt')
+            .style("fill", me.draw_fill)
+            .style("stroke", me.draw_stroke)
+            .style("stroke-width", '0.05pt')
+        ;
     }
 
     fillBasics(oy) {
@@ -1338,7 +1362,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
             .text("Azurites")
             .style("text-anchor", 'left')
             .style("font-family", me.base_font)
-            .style("font-size", me.medium_font_size * 0.8 + 'px')
+            .style("font-size", me.medium_font_size + 'pt')
             .style("fill", me.draw_fill)
             .style("stroke", me.draw_stroke)
             .style("stroke-width", '0.05pt')
@@ -1352,7 +1376,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
             .text("Diamonds")
             .style("text-anchor", 'left')
             .style("font-family", me.base_font)
-            .style("font-size", me.medium_font_size * 0.8 + 'px')
+            .style("font-size", me.medium_font_size + 'pt')
             .style("fill", me.draw_fill)
             .style("stroke", me.draw_stroke)
             .style("stroke-width", '0.05pt')
@@ -1366,7 +1390,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
             .text("Rubies")
             .style("text-anchor", 'left')
             .style("font-family", me.base_font)
-            .style("font-size", me.medium_font_size * 0.8 + 'px')
+            .style("font-size", me.medium_font_size + 'pt')
             .style("fill", me.draw_fill)
             .style("stroke", me.draw_stroke)
             .style("stroke-width", '0.05pt')
@@ -1608,6 +1632,36 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
             );
         skills.exit().remove();
 
+
+        me.character.append('text')
+            .attr('x', ox + 21.25 * me.stepx)
+            .attr('y', oy - 0.30 * me.stepy)
+            .attr('dx', 0)
+            .attr('dy', 0)
+            .text("Skills + Roots")
+            .style("text-anchor", 'end')
+            .style("font-family", me.base_font)
+            .style("font-size", me.big_font_size +'pt')
+            .style("fill", me.draw_fill)
+            .style("stroke", me.draw_stroke)
+            .style("stroke-width", '0.05pt')
+        ;
+
+        me.character.append('text')
+            .attr('x', ox + 21.25 * me.stepx)
+            .attr('y', oy +6.20 * me.stepy)
+            .attr('dx', 0)
+            .attr('dy', 0)
+            .text("Skill Specialties")
+            .style("text-anchor", 'end')
+            .style("font-family", me.base_font)
+            .style("font-size", me.big_font_size +'pt')
+            .style("fill", me.draw_fill)
+            .style("stroke", me.draw_stroke)
+            .style("stroke-width", '0.05pt')
+        ;
+
+
         if (me.blank) {
             let lines = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19];
             skill_in.append('line')
@@ -1796,7 +1850,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
 
     fillList(basex = 0, basey = 0, datasource = "ba", styles = {}) {
         let me = this;
-        let ox = basex, oy = basey, lines = 0 /*, offset = 0*/;
+        let ox = basex, oy = basey+0.3, lines = 0 /*, offset = 0*/;
         let w = 0, l = 1;
         _.forEach(styles['lefts'], function (e, i) {
             if (e > w) {
@@ -1807,7 +1861,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
 
         // Labels
         _.forEach(styles['labels'], function (e, i) {
-            me.drawText(ox + styles["lefts"][i], oy-me.line_inter*0.1, me.draw_fill, me.draw_stroke, me.small_font_size, "start", e);
+            me.drawText(ox + styles["lefts"][i], oy-me.line_inter*0.75, me.draw_fill, me.draw_stroke, me.small_font_size, "start", e);
         });
         _.forEach(me.data[datasource], function (e, i) {
             // let o = JSON.parse(e);
@@ -1923,14 +1977,16 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
             .style("stroke-width", '0.05pt');
         let words = text.text().split(/\s+/).reverse(),
             word,
-            lines_count = 1,
+            lines_count = -1,
             line = [],
-            lineHeight = me.small_font_size * 1.1,
+            lineHeight = me.medium_font_size * 1.4,
             x = text.attr("x"),
             y = text.attr("y"),
             tspan = text.text(null).append("tspan")
                 .attr("x", x)
-                .attr("y", y);
+                .attr("y", y)
+                .attr("dy", ++lines_count * lineHeight)
+            ;
         while (word = words.pop()) {
             line.push(word);
             tspan.text(line.join(" "));
@@ -1941,7 +1997,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
                 tspan = text.append("tspan")
                     .attr("x", x)
                     .attr("y", y)
-                    .attr("dy", ++lines_count * me.small_font_size )
+                    .attr("dy", ++lines_count * lineHeight)
                     .style("font-size", me.small_font_size + 'pt')
                     .style("stroke-width", '0.05pt')
                     .text(word);

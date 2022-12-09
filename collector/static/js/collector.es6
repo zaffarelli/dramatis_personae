@@ -55,7 +55,7 @@ class Collector {
             url: 'api/heartbeat/',
             success: function (answer) {
                 $('#messenger_block').html(answer)
-                console.log(answer)
+                // console.log(answer)
                 me.heartbeat = setTimeout("co.runHeartbeat()", x);
             },
         });
@@ -615,7 +615,7 @@ class Collector {
                 $.ajax({
                     url: 'toggle/' + x + '/spotlight',
                     success: function (answer) {
-                        console.log(answer)
+                        // console.log(answer)
                         $('li#' + dad_id).html(answer.avatar_link);
                         me.rebootLinks();
                     },
@@ -638,7 +638,7 @@ class Collector {
                     },
                     error: function (answer) {
                         console.error("Ooops");
-                        console.log(answer);
+                        // console.log(answer);
                         me.runHeartbeat();
                         me.rebootLinks();
                     }
@@ -722,7 +722,7 @@ class Collector {
                 let dad = $(this).parents('li');
                 let dad_id = $(dad).attr("id");
                 let x = $(this).parents('div').attr("id").split("_")[1];
-                console.log(x);
+                // console.log(x);
                 //let that_id = $(this).attr('id').split("_")[0];
                 $("li#" + dad_id + " .character_info").removeClass('hidden');
                 $.ajax({
@@ -748,7 +748,7 @@ class Collector {
                     event.stopPropagation();
                     console.log("enter key pressed")
                     let formula = $(this).val().toLowerCase().replace(" ", "_").replace("+", "x").replace("!", "i")
-                    console.log(formula)
+                    // console.log(formula)
                     $.ajax({
                         url: 'ajax/roll_dice/' + formula + '/',
                         success: function (answer) {
@@ -770,7 +770,7 @@ class Collector {
                 event.preventDefault();
                 event.stopPropagation();
                 let arr = $(this).attr("id").split("-")
-                console.log(arr)
+                // console.log(arr)
                 $("#set").val("1d12+" + arr[1]);
                 //$("#throw").fireEvent('mouseup');
                 $t.raise_event($t.id('throw'), 'mouseup');

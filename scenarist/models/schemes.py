@@ -19,13 +19,13 @@ class Scheme(StoryModel):
         ordering = ['chapter', 'name']
 
     from scenarist.models.adventures import Adventure
-    adventure = models.ForeignKey(Adventure, null=True, on_delete=models.CASCADE)
+    # adventure = models.ForeignKey(Adventure, null=True, on_delete=models.CASCADE)
     from scenarist.models.backlogs import Backlog
     backlogs = models.ManyToManyField(Backlog, blank=True)
 
     @property
     def full_chapter(self):
-        return "SCH." + self.adventure.full_chapter + "." + self.chapter
+        return f"NOTE:{self.id}.{self.name}"
 
     def get_casting(self):
         """ Bring all avatars rids from all relevant text fields"""
@@ -50,7 +50,7 @@ class Scheme(StoryModel):
 
     @property
     def get_full_id(self):
-        return f'{self.adventure.get_full_id}:{int(self.chapter):02}'
+        return f':{int(self.chapter):02}'
 
     def set_pdf(self, value=True):
         self.to_PDF = value
@@ -60,12 +60,12 @@ class Scheme(StoryModel):
         from scenarist.utils.tools import json_default
         jst = super().to_json()
         job = json.loads(jst)
-        job['fullchapter'] = self.full_chapter
+        # job['fullchapter'] = self.full_chapter
         return job
 
 
 class SchemeAdmin(admin.ModelAdmin):
-    ordering = ['adventure', 'chapter', 'name']
-    list_display = ['name', 'full_id', 'adventure', 'chapter', 'date', 'dt', 'place', 'linked_backlogs', 'description']
-    list_filter = ['adventure']
+    ordering = ['chapter', 'name']
+    list_display = ['name', 'full_id',  'chapter', 'date', 'dt', 'place', 'linked_backlogs', 'description']
+    list_filter = []
     search_fields = ['description', 'name', 'resolution']

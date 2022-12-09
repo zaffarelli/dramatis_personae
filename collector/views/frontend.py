@@ -24,6 +24,7 @@ from django.contrib import messages
 import json
 import base64
 
+
 # from collector.utils.log_wrapper import logwrap
 
 def index(request):
@@ -108,7 +109,7 @@ def get_list(request, id, slug='none'):
         paginator = Paginator(character_items, settings.MAX_CHAR)
     page = id
     character_items = paginator.get_page(page)
-    messages.info(request,f'{paginator.count} characters found.')
+    messages.info(request, f'{paginator.count} characters found.')
     context = {'character_items': character_items, 'default_ghost_tgt': "list_ghostmark", "count": paginator.count}
     template = get_template('collector/list.html')
     html = template.render(context, request)
@@ -434,13 +435,30 @@ def all_epics(request):
 def all_spaceships(request):
     if request.is_ajax:
         from collector.models.spacecraft import Spaceship
-        ships = Spaceship.objects.filter(is_available=True)
+        ships = Spaceship.objects.filter(is_available=True).order_by('ship_ref__ship_status')
         ships_data = []
         for ship in ships:
             e = ship.ship_data
             ships_data.append(e)
         context = {'ships': ships_data}
         template = get_template('collector/spaceships.html')
+        html = template.render(context, request)
+        response = {'mosaic': html}
+        return JsonResponse(response)
+    else:
+        return HttpResponse(status=204)
+
+
+def handle_notes(request):
+    if request.is_ajax:
+        from scenarist.models.schemes import Scheme
+        schemes = Scheme.objects.all().order_by('name')
+        notes = []
+        for x in schemes:
+            n = x.to_json()
+            notes.append(n)
+        context = {'epics': notes, 'title': "Notes", "comment": f"{len(notes)} note(s)."}
+        template = get_template('collector/notes.html')
         html = template.render(context, request)
         response = {'mosaic': html}
         return JsonResponse(response)

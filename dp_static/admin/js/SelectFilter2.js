@@ -1,1 +1,1 @@
-/home/zaffarelli/.virtualenvs/dramatis_personae/lib/python3.10/site-packages/django/contrib/admin/static/admin/js/SelectFilter2.js
+/home/zaffarelli/.virtualenvs/dramatis_personae/lib/python3.11/site-packages/django/contrib/admin/static/admin/js/SelectFilter2.js
