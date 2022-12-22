@@ -536,6 +536,7 @@ class Campaign(models.Model):
         else:
             logger.error(f"Campaign has no epic !!!")
 
+
 class CampaignAdmin(admin.ModelAdmin):
     ordering = ['irl_year_start', 'epic__era', 'title']
     list_display = ['title', 'irl_year_start', 'epic', 'is_active', 'is_available', 'new_narrative', 'smart_code',

@@ -10,7 +10,7 @@ from collector.views.characters import CharacterUpdateView, customize_ba, custom
 
 from collector.views.frontend import index, toggle_public, toggle_spotlight, get_list, add_avatar, \
     get_storyline, conf_details, recalc_avatar, heartbeat, \
-    show_todo, pdf_show, wa_export_character, tile_avatar, ghostmark_test, display_sheet, display_sessionsheet, switch_epic, deep_toggle, all_epics,  all_spaceships, grab_avatar, handle_notes
+    show_todo, pdf_show, wa_export_character, tile_avatar, ghostmark_test, display_sheet, display_sessionsheet, switch_epic, deep_toggle, all_epics,  all_spaceships, grab_avatar, handle_cards
 from collector.views.backend import export, xls_update, pdf_character, gss_update, gss_summary, pdf_rules, roll_dice, \
     bloke_selector, run_audit, epic_deck, svg_to_pdf, save_sequence, load_sequence
 from collector.views.misc_chart import get_population_statistics, get_keywords
@@ -85,7 +85,7 @@ urlpatterns = [
     re_path('^ajax/audit/$', run_audit, name="run_audit"),
     re_path('^ajax/deck/$', epic_deck, name='epic_deck'),
     re_path('^ajax/epics/$', all_epics, name='all_epics'),
-    re_path('^ajax/notes/$', handle_notes, name='handle_notes'),
+    re_path('^ajax/cards/$', handle_cards, name='handle_cards'),
     re_path('^ajax/spaceships/$', all_spaceships, name='all_spaceships'),
     re_path('^ajax/deck/save/$', save_sequence, name='save_sequence'),
     re_path('^ajax/deck/load/$', load_sequence, name='load_sequence'),

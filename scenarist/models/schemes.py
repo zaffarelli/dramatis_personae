@@ -19,13 +19,13 @@ class Scheme(StoryModel):
         ordering = ['chapter', 'name']
 
     from scenarist.models.adventures import Adventure
-    # adventure = models.ForeignKey(Adventure, null=True, on_delete=models.CASCADE)
+    adventure = models.ForeignKey(Adventure, null=True, on_delete=models.CASCADE)
     from scenarist.models.backlogs import Backlog
     backlogs = models.ManyToManyField(Backlog, blank=True)
 
     @property
     def full_chapter(self):
-        return f"NOTE:{self.id}.{self.name}"
+        return f"{self.full_id}.{self.name}"
 
     def get_casting(self):
         """ Bring all avatars rids from all relevant text fields"""

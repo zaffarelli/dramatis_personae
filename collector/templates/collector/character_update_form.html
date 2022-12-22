@@ -1,10 +1,15 @@
-<div class="character_update_view">
+<div class="character_update_view tabbed">
+    <div class='tabs'>
+        <button class='tablinks' id='button_1' > Main </button>
+        <button class='tablinks' id='button_2' > More </button>
+        <button class='tablinks' id='button_3' > ToD </button>
+    </div>
     <form class='character_form' form-target='character'>
         {{ form.non_field_errors}}
         {{ form.management_form }}
         <input name='id' type='hidden' value='{{c.id}}'>
         <input name='rid' type='hidden' value='{{c.rid}}'>
-        <div class="formset">
+        <div class="tabcontent" id="tab1">
             <div class="field_wrapper">
                 {{ form.full_name.errors}}
                 <label for="full_name">Name</label>
@@ -26,9 +31,14 @@
                 {{form.entrance}}
             </div>
             <div class="field_wrapper">
-                {{ form.storytelling_note.errors}}
-                <label for="storytelling_note">Storytelling Note</label>
-                {{form.storytelling_note}}
+                {{ form.rank.errors}}
+                <label for="rank">Rank</label>
+                {{form.rank}}
+            </div>
+            <div class="field_wrapper">
+                {{ form.gender.errors}}
+                <label for="gender">Gender</label>
+                {{form.gender}}
             </div>
 
             <div class="field_wrapper">
@@ -53,37 +63,19 @@
             </div>
 
             <div class="field_wrapper">
-                {{ form.experience_balance.errors}}
-                <label for="experience_balance">Experience Balance</label>
-                {{form.experience_balance}}
+                {{ form.age_offset.errors}}
+                <label for="age_offset">Age Offset</label>
+                {{form.age_offset}}
             </div>
             <div class="field_wrapper">
-                {{ form.xp_pool.errors}}
-                <label for="xp_pool">XP Pool</label>
-                {{form.xp_pool}}
+                {{ form.group.errors}}
+                <label for="group">group</label>
+                {{form.group}}
             </div>
             <div class="field_wrapper">
-                {{ form.xp_spent.errors}}
-                <label for="xp_spent">XP Spent</label>
-                {{form.xp_spent}}
-            </div>
-            <div class="field_wrapper">
-                {{ form.xp_earned.errors}}
-                <label for="xp_earned">XP Earned</label>
-                {{form.xp_earned}}
-            </div>
-            <div class="field_wrapper">
-                {{ form.experience_details.errors}}
-                <label for="experience_details">Experience Details </label>
-                {{form.experience_details}}
-            </div>
-
-
-
-            <div class="field_wrapper">
-                {{ form.gender.errors}}
-                <label for="gender">Gender</label>
-                {{form.gender}}
+                {{ form.narrative.errors}}
+                <label for="narrative">Narrative</label>
+                {{form.narrative}}
             </div>
             <div class="field_wrapper">
                 {{ form.height.errors}}
@@ -95,16 +87,7 @@
                 <label for="weight">Weight</label>
                 {{form.weight}}
             </div>
-            <div class="field_wrapper">
-                {{ form.rank.errors}}
-                <label for="rank">Rank</label>
-                {{form.rank}}
-            </div>
-            <div class="field_wrapper">
-                {{ form.team.errors}}
-                <label for="team">Team</label>
-                {{form.team}}
-            </div>
+
             <div class="field_wrapper">
                 {{ form.native_fief.errors}}
                 <label for="native_fief">Origins</label>
@@ -146,22 +129,6 @@
                 <label for="path">Stigma</label>
                 {{form.stigma}}
             </div>
-            <div class="field_wrapper">
-                {{ form.keyword.errors}}
-                <label for="keyword">Keyword</label>
-                {{form.keyword}}
-            </div>
-            <div class="field_wrapper">
-                {{ form.custo_descs.errors}}
-                <label for="custo_descs">Custom Descriptions</label>
-                {{form.custo_descs}}
-            </div>
-            <div class="field_wrapper">
-                {{ form.fencing_league.errors}}
-                <label for="fencing_league">Fencing League</label>
-                {{form.fencing_league}}
-            </div>
-
             <div class="field_wrapper">
                 {{ form.is_dead.errors}}
                 <label for="is_dead">Dead</label>
@@ -208,14 +175,74 @@
                 {{form.nameless}}
             </div>
             <div class="field_wrapper">
-                {{ form.narrative.errors}}
-                <label for="narrative">Narrative</label>
-                {{form.narrative}}
+                {{ form.is_public.errors}}
+                <label for="is_public">is_public</label>
+                {{form.is_public}}
+            </div>
+        </div>
+
+
+
+
+        <div class="tabcontent hiddentab" id="tab2">
+            <div class="field_wrapper">
+                {{ form.storytelling_note.errors}}
+                <label for="storytelling_note">Storytelling Note</label>
+                {{form.storytelling_note}}
+            </div>
+            <div class="field_wrapper">
+                {{ form.experience_balance.errors}}
+                <label for="experience_balance">Experience Balance</label>
+                {{form.experience_balance}}
+            </div>
+            <div class="field_wrapper">
+                {{ form.xp_pool.errors}}
+                <label for="xp_pool">XP Pool</label>
+                {{form.xp_pool}}
+            </div>
+            <div class="field_wrapper">
+                {{ form.xp_spent.errors}}
+                <label for="xp_spent">XP Spent</label>
+                {{form.xp_spent}}
+            </div>
+            <div class="field_wrapper">
+                {{ form.xp_earned.errors}}
+                <label for="xp_earned">XP Earned</label>
+                {{form.xp_earned}}
+            </div>
+            <div class="field_wrapper">
+                {{ form.experience_details.errors}}
+                <label for="experience_details">Experience Details </label>
+                {{form.experience_details}}
             </div>
 
+
+            <div class="field_wrapper">
+                {{ form.team.errors}}
+                <label for="team">Team</label>
+                {{form.team}}
+            </div>
+
+            <div class="field_wrapper">
+                {{ form.keyword.errors}}
+                <label for="keyword">Keyword</label>
+                {{form.keyword}}
+            </div>
+            <div class="field_wrapper">
+                {{ form.custo_descs.errors}}
+                <label for="custo_descs">Custom Descriptions</label>
+                {{form.custo_descs}}
+            </div>
+            <div class="field_wrapper">
+                {{ form.fencing_league.errors}}
+                <label for="fencing_league">Fencing League</label>
+                {{form.fencing_league}}
+            </div>
+
+
+        </div>
+        <div class="tabcontent hiddentab" id="tab3">
             {{ tourofdutys.management_form }}
-
-
                 {% for form in tourofdutys.forms %}
                     <div class="field_wrapper">
                         {{ form.as_p }}

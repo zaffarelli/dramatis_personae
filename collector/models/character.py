@@ -78,6 +78,7 @@ class Character(Combattant):
     weapon_cost = models.IntegerField(default=0)
     armor_cost = models.IntegerField(default=0)
     shield_cost = models.IntegerField(default=0)
+    age_offset = models.IntegerField(default=0)
     AP = models.IntegerField(default=0)
     OP = models.IntegerField(default=0)
     experience_balance = models.IntegerField(default=0)
@@ -99,6 +100,7 @@ class Character(Combattant):
     picture = models.CharField(max_length=1024,
                                default='https://drive.google.com/open?id=15hdubdMt1t_deSXkbg9dsAjWi5tZwMU0', blank=True)
     alliance_picture = models.CharField(max_length=256, default='', blank=True)
+    group = models.CharField(max_length=256, default='', blank=True)
 
     life_path_total = models.IntegerField(default=0)
     overhead = models.IntegerField(default=0)
@@ -109,6 +111,8 @@ class Character(Combattant):
     nameless = models.BooleanField(default=False)
     incognito = models.BooleanField(default=False, blank=True)
     is_cast = models.BooleanField(default=False, blank=True)
+    is_public = models.BooleanField(default=True, blank=True)
+    use_only_entrance = models.BooleanField(default=False, blank=True)
     error = models.BooleanField(default=False)
     ranking = models.IntegerField(default=0, blank=True)
     group_color = ColorField(default='#888888', blank=True)
@@ -254,6 +258,36 @@ class Character(Combattant):
     # def to_json(self):
     #     """ Returns JSON of object """
     #     return json.dumps(self, default=json_default,sort_keys=True, indent=4)
+
+    @property
+    def ranked_line(self):
+        if self.alliance_ref:
+            str = f'{self.rank} of the {self.alliance_ref.reference}'
+        else:
+            str = f'{self.rank} of unknown acquaintance.'
+        return str
+
+    @property
+    def species_line(self):
+        if self.incognito:
+            str = f'{self.specie.species} {self.gender}.'
+        else:
+            str = f'{self.specie.species} ({self.specie.race}) {self.gender}, {self.apparent_age} years old.'
+        return str
+
+    @property
+    def aka(self):
+        str = self.full_name
+        if self.incognito:
+            str = self.alias
+        else:
+            if self.alias:
+                str = f"{self.full_name} aka {self.alias}"
+        return str
+
+    @property
+    def apparent_age(self):
+        return self.age + self.age_offset
 
     @property
     def cc(self):
@@ -435,6 +469,8 @@ class Character(Combattant):
                              "armor_ref", "ArmorRef")
         self.refresh_options("ritual_options", "ritual_options_not", self.charactercusto.ritualcusto_set.all(),
                              "ritual_ref", "RitualRef")
+
+
 
     def handle_wildcards(self, root_list):
         """ Calculate wildcard amount from the ToDs (ToD_WC), and check if the amount is satisfied with skills

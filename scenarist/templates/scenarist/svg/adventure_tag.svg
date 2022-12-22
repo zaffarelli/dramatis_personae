@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+{% load static %}
+<svg
+   width="48pt"
+   height="16pt"
+   viewBox="0 0 48 16"
+   version="1.2"
+   id="adv_tag"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs11" />
+  <g
+     id="g6">
+    <rect
+       width="36pt"
+       height="12pt"
+       x="0"
+       y="0"
+       rx="2"
+       ry="2"
+       fill="{{c.back}}"
+       stroke="{{c.front}}"
+       stroke-width="0.5pt"
+       id="rect2" />
+    <text
+       id="label"
+       style="font-size:6pt"
+       fill="{{c.back}}"
+       stroke="{{c.front}}"
+       stroke-width="0.25pt"
+       text-anchor="start"
+       x="3"
+       y="11">{{c.label}}</text>
+  </g>
+</svg>

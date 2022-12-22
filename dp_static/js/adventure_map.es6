@@ -1,0 +1,1 @@
+/home/zaffarelli/Perso/github/dramatis_personae/scenarist/static/js/adventure_map.es6

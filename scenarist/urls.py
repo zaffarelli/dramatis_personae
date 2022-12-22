@@ -11,6 +11,7 @@ from scenarist.views.events import EventDetailView, EventUpdateView, add_event, 
 from scenarist.views.adventures import AdventureDetailView, AdventureUpdateView, AdventureDeleteView, add_adventure
 from scenarist.views.scenes import SceneDetailView, SceneUpdateView, SceneDeleteView, add_scene
 from scenarist.views.schemes import SchemeDeleteView, SchemeDetailView, SchemeUpdateView, add_scheme
+from scenarist.views.cards import CardDeleteView, CardDetailView, CardUpdateView, add_card
 from scenarist.views.backlogs import BacklogDeleteView, BacklogDetailView, add_backlog, BacklogUpdateView
 from scenarist.views.pdfs import build_config_pdf
 from scenarist.views.quizz import quizz_reroll
@@ -53,6 +54,11 @@ urlpatterns = [
     re_path('^schemes/(?P<pk>\d+)/edit/$', SchemeUpdateView.as_view(), name='scheme-update'),
     re_path('^schemes/(?P<pk>\d+)/delete/$', SchemeDeleteView.as_view(), name='scheme-delete'),
     re_path('^schemes/add/$', add_scheme, name='scheme-add'),
+
+    re_path('^cards/(?P<pk>\d+)/view/$', CardDetailView.as_view(), name='card-detail'),
+    re_path('^cards/(?P<pk>\d+)/edit/$', CardUpdateView.as_view(), name='card-update'),
+    re_path('^cards/(?P<pk>\d+)/delete/$', CardDeleteView.as_view(), name='card-delete'),
+    re_path('^cards/add/$', add_card, name='card-add'),
 
     re_path('^ajax/build_config_pdf/$', build_config_pdf, name='build_config_pdf'),
 

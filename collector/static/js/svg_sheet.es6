@@ -583,6 +583,12 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
         styles["widths"] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         styles["lefts"] = [0, 4, 5, 6, 7, 9, 10, 11, 12, 13]
         me.fillList(basex, basey, "weapons", styles);
+
+
+       if (me.blank === false) {
+            console.log(me.data['experience_details'])
+            me.wrap(me.data['experience_details'], 14, 25.5, 9.5, me.user_font);
+        }
     }
 
     fillBC(basex = 0, basey = 0) {
@@ -939,6 +945,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
 
         if (me.blank === false) {
             me.wrap(me.data['narrative'], 14, 25.5, 9.5, me.user_font);
+
         }
     }
 

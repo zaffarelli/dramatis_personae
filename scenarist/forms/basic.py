@@ -1,5 +1,4 @@
-from django import forms
-from django.forms import ModelForm
+from django.forms import ModelForm, inlineformset_factory
 from scenarist.models.epics import Epic
 from scenarist.models.dramas import Drama
 from scenarist.models.acts import Act
@@ -8,6 +7,7 @@ from scenarist.models.adventures import Adventure
 from scenarist.models.scenes import Scene
 from scenarist.models.schemes import Scheme
 from scenarist.models.backlogs import Backlog
+from scenarist.models.cards import Card, CardLink
 
 
 
@@ -39,14 +39,7 @@ class AdventureForm(ModelForm):
     class Meta:
         model = Adventure
         fields = '__all__'
-        # widgets = {
-        #     'dt': DateTimePickerInput(options={
-        #         "format": "YYYY-MM-DD HH:mm:ss",
-        #         "showClose": True,
-        #         "showClear": True,
-        #         "showTodayButton": True,
-        #     })
-        # }
+
 
 class BacklogForm(ModelForm):
     class Meta:
@@ -58,24 +51,24 @@ class SchemeForm(ModelForm):
     class Meta:
         model = Scheme
         fields = '__all__'
-        # widgets = {
-        #     'dt': DateTimePickerInput(options={
-        #         "format": "YYYY-MM-DD HH:mm:ss",
-        #         "showClose": True,
-        #         "showClear": True,
-        #         "showTodayButton": True,
-        #     })
-        # }
+
+
+class CardForm(ModelForm):
+    class Meta:
+        model = Card
+        fields = '__all__'
+
+
+class CardLinkForm(ModelForm):
+    class Meta:
+        model = CardLink
+        fields = '__all__'
+
 
 class SceneForm(ModelForm):
     class Meta:
         model = Scene
         fields = '__all__'
-        # widgets = {
-        #     'dt': DateTimePickerInput(options={
-        #         "format": "YYYY-MM-DD HH:mm:ss",
-        #         "showClose": True,
-        #         "showClear": True,
-        #         "showTodayButton": True,
-        #     })
-        # }
+
+
+CardFormSet = inlineformset_factory(Card, CardLink, fk_name='cardin', fields='__all__', extra=3, can_delete=True)

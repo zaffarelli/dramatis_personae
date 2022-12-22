@@ -4,8 +4,8 @@
 collector:
   export:
     google_spread_sheet:
-      source_name:  "Fading Suns"
-      target_name:  "Fading Suns Crashtest"
+      source_name:  "DAL_crashtest"
+      target_name:  "DAL_crashtest"
       #target_name: "Fading Suns"
       credentials:  "collector/creds.json"
       tab:          "Characters"

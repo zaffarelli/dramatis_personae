@@ -449,16 +449,18 @@ def all_spaceships(request):
         return HttpResponse(status=204)
 
 
-def handle_notes(request):
+def handle_cards(request):
     if request.is_ajax:
-        from scenarist.models.schemes import Scheme
-        schemes = Scheme.objects.all().order_by('name')
-        notes = []
-        for x in schemes:
+        from scenarist.models.cards import Card
+        from collector.models.campaign import Campaign
+        campaign = get_current_config(request)
+        notes_items = Card.objects.filter(epic=campaign.epic).order_by('full_id','name')
+        cards = []
+        for x in notes_items:
             n = x.to_json()
-            notes.append(n)
-        context = {'epics': notes, 'title': "Notes", "comment": f"{len(notes)} note(s)."}
-        template = get_template('collector/notes.html')
+            cards.append(n)
+        context = {'cards': cards, 'title': "Adventure Cards", "comment": f"{len(cards)} item(s)."}
+        template = get_template('collector/cards.html')
         html = template.render(context, request)
         response = {'mosaic': html}
         return JsonResponse(response)

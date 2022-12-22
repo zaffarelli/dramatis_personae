@@ -158,6 +158,16 @@ class Collector {
         });
     }
 
+    registerTabs(){
+        $('.tablinks').off().on('click', function(){
+            let tabname = "#tab"+$(this).attr('id').split('_')[1];
+            $('.tabcontent').addClass('hiddentab');
+            console.log(tabname)
+            $(tabname).removeClass('hiddentab');
+        });
+
+    }
+
     registerSlugItems() {
         let me = this;
         /* Change all menu-items to ajax/<id> */
@@ -777,5 +787,7 @@ class Collector {
                 me.rebootLinks();
             });
         // me.openSocket();
+
+        me.registerTabs();
     }
 }

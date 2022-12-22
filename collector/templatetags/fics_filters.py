@@ -439,3 +439,18 @@ def as_place(value):
             list.append(word.strip())
         res = " <i class='fa fa-arrow-right'></i> ".join(list)
     return res
+
+
+@register.filter(name='zfill')
+def zfill(value):
+    res = str(value).rjust(5, '0')
+    return res
+
+
+@register.filter(name='as_date')
+def as_date(value):
+    import json
+    from datetime import datetime
+    j = json.loads(str(value))
+    res = datetime.Date(j)
+    return res

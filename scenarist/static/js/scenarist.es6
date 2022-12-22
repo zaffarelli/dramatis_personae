@@ -8,6 +8,7 @@ class Scenarist{
     }
 
     registerStory(x){
+        console.info(">>> Register Story")
         let me = this;
         /* Register all the actions for the scenarist items */
         $('.view_'+x).off().on('click', function(event){
@@ -57,12 +58,21 @@ class Scenarist{
             event.preventDefault();
             event.stopPropagation();
             let t_id = $(this).attr('id')
-            let id = t_id.split("_")[t_id.split("_").length-1]
+            let id = t_id.split("_")[t_id.split("_").length-1];
             let children = $(this).parent("p").attr('children');
+            let mode_tag = $(this).attr('mode');
+
             $.ajax({
                 url: x+'s/'+id+'/edit/',
                 success: function(answer) {
-                    $('#'+x+'_'+id).html(answer);
+                    console.log(mode_tag);
+                    if (mode_tag == 'overlay') {
+                        $('#board').html('<div class="a"></div><div class="b" id="card_form_box"></div><div class="c"></div>');
+                        $('#card_form_box').html(answer);
+                        $("#board").css('display','flex');
+                    }else {
+                        $('#' + x + '_' + id).html(answer);
+                    }
                     me.co.prepareAjax();
                     me.co.rebootLinks();
                 },
@@ -164,6 +174,7 @@ class Scenarist{
         this.registerStory('adventure');
         this.registerStory('scheme');
         this.registerStory('scene');
+        this.registerStory('card')
         this.registerStory('backlog');
         this.registerQuizz()
     }

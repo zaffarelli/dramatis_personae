@@ -1,7 +1,7 @@
 {% load fics_filters %}
 {% block details %}
 <div class="character_sheet" id='sheet_{{c.id}}'>
-    <div class="infoblock">
+    <div class="infoblock shrinkable">
         <div class="data">
             <h1>{{ c.full_name }}</h1>
             {% if c.entrance %}<b>Entrance:</b> {{ c.entrance|safe }}<br/>{% endif %}
@@ -18,7 +18,7 @@
         </div>
 {#        <div class="tile_back" id="tile_back_{{c.id}}"><i class="action_icon golden fa fa-times-circle"></i></div>#}
     </div>
-    <div class='coreblock'>
+    <div class='coreblock shrinkable shrinked'>
         <ul>
             {% if c.alliance_ref %}
             <li><b>Alliance</b><u>{{ c.alliance_ref.reference|safe }}</u></li>
@@ -65,7 +65,7 @@
     </div>
 
     <h2>Attributes ({{c.PA_TOTAL}}x3)</h2>
-    <div class='attributes'>
+    <div class='attributes shrinkable shrinked'>
         {% include "collector/character/character_primaries.html" %}
 
             <table id="OCC_LVL_{{c.id}}" class='attrpick occult'>
@@ -77,17 +77,17 @@
 
 
     </div>
-    <div class='attributes'>
+    <div class='attributes shrinkable shrinked'>
         {% include "collector/character/character_secondaries.html" %}
     </div>
 
 
 
-    <span id="skill_block_{{c.id}}">
+    <span id="skill_block_{{c.id}} shrinkable shrinked">
         {% include "collector/character/character_skills.html" %}
     </span>
 
-    <div class='options'>
+    <div class='options shrinkable shrinked'>
         <span id="bc_block_{{c.id}}">
         {% include "collector/character/character_bc.html" %}
         </span>

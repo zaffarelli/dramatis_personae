@@ -1,0 +1,138 @@
+<form class='character_form' form-target='character'>
+    {% csrf_token %}
+        {{ form.non_field_errors}}
+        {{ form.management_form }}
+    <div class="dialog">
+        <div class="dialog_header">
+            <h1>Card Edit </h1>
+        </div>
+        <div class="dialog_body">
+
+            <ul>
+                {# form.as_ul #}
+                <li>
+                    {{ form.name.errors}}
+                    <label for="name">Name</label>
+                    {{form.name}}
+                </li>
+                <li>
+                    {{ form.chapter.errors}}
+                    <label for="chapter">Chapter</label>
+                    {{form.chapter}}
+                </li>
+                <li>
+                    {{ form.date.errors}}
+                    <label for="date">Date</label>
+                    {{form.date}}
+                </li>
+                <li>
+                    {{ form.dt.errors}}
+                    <label for="dt">DT</label>
+                    {{form.dt}}
+                </li>
+                <li>
+                    {{ form.gamemaster.errors}}
+                    <label for="gamemaster">Gamemaster</label>
+                    {{form.gamemaster}}
+                </li>
+                <li>
+                    {{ form.full_id.errors}}
+                    <label for="full_id">Full ID</label>
+                    {{form.full_id}}
+                </li>
+                <li>
+                    {{ form.card_type.errors}}
+                    <label for="card_type">Card Type</label>
+                    {{form.card_type}}
+                </li>
+                <li>
+                    {{ form.epic.errors}}
+                    <label for="epic">Epic</label>
+                    {{form.epic}}
+                </li>
+                <li>
+                    {{ form.backlogs.errors}}
+                    <label for="backlogs">Backlogs</label>
+                    {{form.backlogs}}
+                </li>
+                <li>
+                    {{ form.battle_scene.errors}}
+                    <label for="battle_scene">Battle Scene</label>
+                    {{form.battle_scene}}
+                </li>
+                <li>
+                    {{ form.chase_scene.errors}}
+                    <label for="chase_scene">Chase Scene</label>
+                    {{form.chase_scene}}
+                </li>
+                <li>
+                    {{ form.action_scene.errors}}
+                    <label for="action_scene">Action Scene</label>
+                    {{form.action_scene}}
+                </li>
+                <li>
+                    {{ form.technical_scene.errors}}
+                    <label for="technical_scene">Technical Scene</label>
+                    {{form.technical_scene}}
+                </li>
+                <li>
+                    {{ form.spiritual_scene.errors}}
+                    <label for="spiritual_scene">Spiritual Scene</label>
+                    {{form.spiritual_scene}}
+                </li>
+                <li>
+                    {{ form.political_scene.errors}}
+                    <label for="political_scene">Political Scene</label>
+                    {{form.political_scene}}
+                </li>
+                <li>
+                    {{ form.downtime_scene.errors}}
+                    <label for="downtime_scene">Downtime Scene</label>
+                    {{form.downtime_scene}}
+                </li>
+                <li>
+                    {{ form.description.errors}}
+                    <label for="description">Description</label>
+                    {{form.description}}
+                </li>
+                <li>
+                    {{ form.resolution.errors}}
+                    <label for="resolution">Resolution</label>
+                    {{form.resolution}}
+                </li>
+                <li>
+                    {{ form.rewards.errors}}
+                    <label for="rewards">Rewards</label>
+                    {{form.rewards}}
+                </li>
+                <li>
+                    {{ form.archived.errors}}
+                    <label for="archived">Archived</label>
+                    {{form.archived}}
+                </li>
+                <li>
+                    {{ form.to_PDF.errors}}
+                    <label for="to_pdf">To PDF</label>
+                    {{form.to_PDF}}
+                </li>
+                <li>
+                    {{ form.temporary.errors}}
+                    <label for="temporary">Temporary</label>
+                    {{form.temporary}}
+                </li>
+                <li>
+                    {{ form.visible.errors}}
+                    <label for="visible">Visible</label>
+                    {{form.visible}}
+                </li>
+            </ul>
+        </div>
+
+        <div class="dialog_footer">
+            <button class="card_next"><i class="fa fa-arrow-circle-right"></i> Next</button>
+            <button class="card_close"><i class="fa fa-times-circle"></i> Close</button>
+            <button class="card_update"><i class="fa fa-play-circle"></i> Update</button>
+            <button class="card_previous"><i class="fa fa-arrow-circle-left"></i> Previous</button>
+        </div>
+    </div>
+</form>

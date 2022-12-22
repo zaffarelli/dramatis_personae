@@ -30,7 +30,7 @@ class Avatar(models.Model):
     height = models.IntegerField(default=150)
     weight = models.IntegerField(default=50)
     narrative = models.TextField(default='', blank=True)
-    entrance = models.CharField(max_length=100, default='', blank=True)
+    entrance = models.TextField(default='', blank=True)
     keyword = models.CharField(max_length=32, blank=True, default='new')
     stars = models.CharField(max_length=256, blank=True, default='')
     importance = models.PositiveIntegerField(default=1)

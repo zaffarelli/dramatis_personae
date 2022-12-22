@@ -14,6 +14,12 @@ CARD_TYPES = (
     ('SC', 'Scene'),
     ('EV', 'Event'),
     ('BK', 'Background'),
+    ('AC', 'Act'),
+    ('EP', 'Epic'),
+    ('SH', 'Scheme'),
+    ('AD', 'Adventure'),
+    ('NO', 'Note'),
+    ('DR', 'Drama'),
 )
 
 
@@ -36,9 +42,10 @@ class StoryModel(models.Model):
     political_scene = models.BooleanField(default=False)
     downtime_scene = models.BooleanField(default=False)
     to_PDF = models.BooleanField(default=True)
+    temporary = models.BooleanField(default=True)
     full_id = models.CharField(max_length=64, blank=True, default='')
     description = models.TextField(max_length=6000, default='', blank=True)
-    resolution = models.TextField(default='', max_length=2560,blank=True)
+    resolution = models.TextField(default='', max_length=2560, blank=True)
     rewards = models.TextField(max_length=1024, default='', blank=True)
     card_type = models.CharField(max_length=2, default='UN', choices=CARD_TYPES)
     archived = models.BooleanField(default=False)
@@ -117,9 +124,19 @@ class StoryModel(models.Model):
         for episode in self.get_episodes():
             casting.append(episode.get_full_cast())
         flat_cast = [c for subcast in casting for c in subcast]
-        return sorted(list(set(flat_cast)))
+        new_list = sorted(list(set(flat_cast)))
+        # print(new_list)
+        return new_list
 
     @property
     def get_full_id(self):
         """ Return subchapters """
         return f'{self.id}'
+
+    def turn_into_note(self):
+        if self.card_type == 'UN':
+            self.card_type = 'NO'
+            self.save()
+
+
+

@@ -5,9 +5,10 @@
  Fading Suns
  Fusion Interlock Custom System v7
  This file contains the export to Google SpreadSheet functions
-
- Share with: dp-98-126@dramatis-personae-236522.iam.gserviceaccount.com
 """
+
+# Share with: dp-98-126@dramatis-personae-236522.iam.gserviceaccount.com
+
 
 from django.conf import settings
 from collector.models.character import Character
@@ -23,14 +24,13 @@ import requests  # to get image from the web
 import shutil  # to save it locally
 import os
 
-COLS_AMOUNT = 13
-SCOLS_AMOUNT = 11
-
-
+# Total column number on the character tab
+COLS_AMOUNT = 14
+RID_ROW_IDX = 13
+#SCOLS_AMOUNT = COLS_AMOUNT-2
 
 # key = Fernet.generate_key() #this is your "password"
 KEY = b'WAXSue9RLeTPqgdvbfrj2e60Xk6PrRgx6jo-KV8JOIw='
-
 
 def encrypt(str):
     cipher_suite = Fernet(KEY)
@@ -74,23 +74,25 @@ def connect_as_target(options, target):
     return sheet
 
 
+
+
 def update_abstract(options, target):
+    from collector.utils.basic import get_current_config
     logger.info('> Writting Abstract')
     target_name = options['collector']['export'][target]['target_name']
     tab = options['collector']['export'][target]['tab_abstract']
     client = connect(options, target)
     sheet = client.open(target_name).worksheet(tab)
-    matrix = sheet.range('A1:B5')
-    matrix[0].value = "Source"
-    matrix[1].value = "Dramatis Personae (Collector)"
-    matrix[2].value = "Version"
-    matrix[3].value = settings.RELEASE
-    matrix[4].value = "Exportation Date"
-    matrix[5].value = datetime.now().strftime("%Y-%m-%d %H:%M")
-    matrix[6].value = "Sourced from storyboard of"
-    from collector.utils.basic import get_current_config
+    matrix = sheet.range('A1:D2')
 
-    matrix[7].value = f'{get_current_config().epic.title}'
+    matrix[0].value = "Source"
+    matrix[1].value = "Version"
+    matrix[2].value = "Last Update"
+    matrix[3].value = "Epic"
+    matrix[4].value = "Dramatis Personae (Collector)"
+    matrix[5].value = settings.RELEASE
+    matrix[6].value = datetime.now().strftime("%Y-%m-%d %H:%M")
+    matrix[7].value = f'{get_current_config().epic.name}'
     sheet.clear()
     sheet.update_cells(matrix)
 
@@ -106,13 +108,13 @@ def update_gss():
 
 def gss_review(options):
     header_line = []
-    sheet = connect_as_source(options)
+    sheet = connect_as_source(options,"google_spread_sheet")
     matrix = sheet.get_all_values()
     for idx, row in enumerate(matrix):
         if idx > 0:
             logger.info('> %s ' % (row[0]))
             try:
-                rid = decrypt(row[12]).decode('UTF-8')
+                rid = decrypt(row[RID_ROW_IDX]).decode('UTF-8')
             except:
                 logger.warning('> NO RID FOUND FOR:  %s ' % (row[0]))
                 rid = fs_fics7.find_rid(row[0])
@@ -197,17 +199,17 @@ def download_image(link, rid):
 
 
 def gss_push(options, header_line):
+    from collector.utils.basic import get_current_config
     update_abstract(options, "google_spread_sheet")
     sheet = connect_as_target(options, "google_spread_sheet")
 
-
+    campaign = get_current_config()
     cast = campaign.epic.get_full_cast()
-    # print(cast)
+    print(cast)
     # character_items = Character.objects.all().filter(epic__shortcut=conf.epic.shortcut,is_public=True).order_by('alliance','full_name')
-    character_items = Character.objects.all().filter(rid__in=cast, is_public=True).order_by('alias', '-player',
-                                                                                            'alliance', 'full_name')
+    character_items = Character.objects.all().filter(rid__in=cast).order_by('full_name','alias','alliance_ref__reference')
     logger.info("There will be %d characters" % (len(character_items)))
-    matrix = sheet.range('A1:M%d' % (len(character_items) + 1))
+    matrix = sheet.range('A1:N%d' % (len(character_items) + 1))
     # logger.info(header_line)
     for i in range(COLS_AMOUNT):
         matrix[i].value = header_line[i]
@@ -215,14 +217,7 @@ def gss_push(options, header_line):
     idx = 1
     for c in character_items:
         if c.use_only_entrance:
-            if c.use_only_entrance:
-                if c.alias:
-                    matrix[idx * COLS_AMOUNT + 0].value = c.alias
-                else:
-                    matrix[idx * COLS_AMOUNT + 0].value = "Unknown #%d" % (u)
-                    u += 1
-            else:
-                matrix[idx * COLS_AMOUNT + 0].value = c.full_name
+            matrix[idx * COLS_AMOUNT + 0].value = c.aka
             matrix[idx * COLS_AMOUNT + 1].value = '?'
             matrix[idx * COLS_AMOUNT + 2].value = c.spotlight
             matrix[idx * COLS_AMOUNT + 3].value = c.is_dead
@@ -232,26 +227,29 @@ def gss_push(options, header_line):
             matrix[idx * COLS_AMOUNT + 7].value = ''
             matrix[idx * COLS_AMOUNT + 8].value = ''
             matrix[idx * COLS_AMOUNT + 9].value = c.entrance
-            matrix[idx * COLS_AMOUNT + 10].value = c.picture
+            matrix[idx * COLS_AMOUNT + 10].value = "https://senestre.eu/dpp/f_"+c.rid+".jpg"
             matrix[idx * COLS_AMOUNT + 11].value = ''
-            matrix[idx * COLS_AMOUNT + 12].value = encrypt(c.rid).decode('UTF-8')
+            matrix[idx * COLS_AMOUNT + 12].value = ''
+            matrix[idx * COLS_AMOUNT + 13].value = encrypt(c.rid).decode('UTF-8')
         else:
-            if c.alias:
-                matrix[idx * COLS_AMOUNT + 0].value = c.alias
+            matrix[idx * COLS_AMOUNT + 0].value = c.aka
+            if c.alliance_ref:
+                alliance = c.alliance_ref.reference
             else:
-                matrix[idx * COLS_AMOUNT + 0].value = c.full_name
-            matrix[idx * COLS_AMOUNT + 1].value = c.alliance
+                alliance = '?'
+            matrix[idx * COLS_AMOUNT + 1].value = alliance
             matrix[idx * COLS_AMOUNT + 2].value = c.spotlight
             matrix[idx * COLS_AMOUNT + 3].value = c.is_dead
             matrix[idx * COLS_AMOUNT + 4].value = c.player
-            matrix[idx * COLS_AMOUNT + 5].value = c.rank
-            matrix[idx * COLS_AMOUNT + 6].value = c.gender
-            matrix[idx * COLS_AMOUNT + 7].value = c.specie.species
+            matrix[idx * COLS_AMOUNT + 5].value = c.ranked_line
+            matrix[idx * COLS_AMOUNT + 6].value = c.group
+            matrix[idx * COLS_AMOUNT + 7].value = c.species_line
             matrix[idx * COLS_AMOUNT + 8].value = c.age
             matrix[idx * COLS_AMOUNT + 9].value = c.entrance
-            matrix[idx * COLS_AMOUNT + 10].value = c.picture
+            matrix[idx * COLS_AMOUNT + 10].value = "https://senestre.eu/dpp/f_"+c.rid+".jpg"
             matrix[idx * COLS_AMOUNT + 11].value = c.faction
-            matrix[idx * COLS_AMOUNT + 12].value = encrypt(c.rid).decode('UTF-8')
+            matrix[idx * COLS_AMOUNT + 12].value = c.narrative
+            matrix[idx * COLS_AMOUNT + 13].value = encrypt(c.rid).decode('UTF-8')
         idx += 1
     sheet.clear()
     sheet.update_cells(matrix)
@@ -307,7 +305,7 @@ def gss_review_summary(options):
                 logger.error('> %s does not exists (%s)' % (row[0], rid))
 
         else:
-            for i in range(SCOLS_AMOUNT):
+            for i in range(COLS_AMOUNT):
                 header_line.append(row[i])
     logger.info('> Review done')
     return header_line

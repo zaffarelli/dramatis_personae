@@ -1,7 +1,8 @@
 
 $fics_front: invert($fics_back, 100%);
 
-
+$tabwidth: 920px;
+$tabwidthhalf: 450px;
 
 $fics_light: lighten($fics_back, 5%);
 $fics_lighter: lighten($fics_back, 10%);
@@ -889,3 +890,6 @@ th.skill_dot {
 }
 
 
+.hiddentab{
+    display:none;
+}
