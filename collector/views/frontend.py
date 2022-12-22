@@ -21,6 +21,7 @@ import os
 from django.conf import settings
 from django.http import FileResponse
 from django.contrib import messages
+from collector.utils.d4_changes import is_ajax
 import json
 import base64
 
@@ -121,7 +122,7 @@ def get_list(request, id, slug='none'):
 
 def show_todo(request):
     campaign = get_current_config(request)
-    if request.is_ajax:
+    if is_ajax(request):
         character_items = campaign.avatars.filter(priority=True).order_by('full_name')
         if request.user.is_authenticated:
             paginator = Paginator(character_items, request.user.profile.option_display_count)
@@ -139,7 +140,7 @@ def show_todo(request):
 
 
 def tile_avatar(request, pk=None):
-    if request.is_ajax:
+    if is_ajax(request):
         character_item = Character.objects.get(pk=pk)
     context = {'c': character_item}
     template = get_template('collector/character_tile.html')
@@ -149,7 +150,7 @@ def tile_avatar(request, pk=None):
 
 def deep_toggle(request, slug=None, id=None):
     response = {'status': 0}
-    if request.is_ajax:
+    if is_ajax(request):
         matches = Character.objects.filter(id=id)
         if slug is not None:
             if len(matches) == 1:
@@ -163,7 +164,7 @@ def deep_toggle(request, slug=None, id=None):
 
 
 def get_storyline(request, slug='none'):
-    if request.is_ajax:
+    if is_ajax(request):
         config_items = Campaign.objects.filter(hidden=False)
         if slug != 'none':
             for c in config_items:
@@ -179,7 +180,7 @@ def get_storyline(request, slug='none'):
 
 def recalc_avatar(request, id=None):
     campaign = get_current_config(request)
-    if request.is_ajax():
+    if is_ajax(request):
         messages.warning(request, 'Recalculating...')
         item = campaign.avatars.get(pk=id)
         item.need_fix = True
@@ -213,7 +214,7 @@ def recalc_avatar(request, id=None):
 
 def grab_avatar(request, id=None):
     campaign = get_current_config(request)
-    if request.is_ajax():
+    if is_ajax(request):
         messages.info(request, 'Grabbing avatar...')
         campaign.grab(id)
     return HttpResponse(status=204)
@@ -221,7 +222,7 @@ def grab_avatar(request, id=None):
 
 def wa_export_character(request, id=None):
     campaign = get_current_config(request)
-    if request.is_ajax():
+    if is_ajax(request):
         item = campaign.avatars.get(pk=id)
         template = get_template('collector/character_wa_statblock.html')
         character = template.render({'c': item}, request)
@@ -281,7 +282,7 @@ def toggle_spotlight(request, id=None):
 
 
 def conf_details(request):
-    if request.is_ajax:
+    if is_ajax(request):
         from collector.models.campaign import Campaign
         campaign = get_current_config(request)
         if campaign.new_narrative:
@@ -327,7 +328,7 @@ def ghostmark_test(request, id=None):
 
 
 def display_sheet(request, pk=None):
-    if request.is_ajax:
+    if is_ajax(request):
         from collector.models.campaign import Campaign
         campaign = get_current_config(request)
         if pk is None:
@@ -375,7 +376,7 @@ def switch_epic(request, id=None):
 
 
 def display_sessionsheet(request, slug=None):
-    if request.is_ajax:
+    if is_ajax(request):
         from collector.models.campaign import Campaign
         campaign = get_current_config(request)
         pks = []
@@ -411,7 +412,7 @@ def display_sessionsheet(request, slug=None):
 
 
 def all_epics(request):
-    if request.is_ajax:
+    if is_ajax(request):
         from collector.models.campaign import Campaign
         campaigns = Campaign.objects.filter(is_available=True).order_by('epic__era')
         epics = []
@@ -433,7 +434,7 @@ def all_epics(request):
 
 
 def all_spaceships(request):
-    if request.is_ajax:
+    if is_ajax(request):
         from collector.models.spacecraft import Spaceship
         ships = Spaceship.objects.filter(is_available=True).order_by('ship_ref__ship_status')
         ships_data = []
@@ -450,11 +451,11 @@ def all_spaceships(request):
 
 
 def handle_cards(request):
-    if request.is_ajax:
+    if is_ajax(request):
         from scenarist.models.cards import Card
         from collector.models.campaign import Campaign
         campaign = get_current_config(request)
-        notes_items = Card.objects.filter(epic=campaign.epic).order_by('full_id','name')
+        notes_items = Card.objects.filter(epic=campaign.epic).order_by('full_id', 'name')
         cards = []
         for x in notes_items:
             n = x.to_json()

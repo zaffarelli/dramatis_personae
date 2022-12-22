@@ -1,10 +1,12 @@
-<form class='character_form' form-target='character'>
+<form class='card_form' form-target='card'>
     {% csrf_token %}
         {{ form.non_field_errors}}
         {{ form.management_form }}
+        <input name='id' type='hidden' value='{{form.id}}'>
     <div class="dialog">
         <div class="dialog_header">
-            <h1>Card Edit </h1>
+            <h1>Edit Card [{{ form.id }} {{ form.id.value }}]</h1>
+
         </div>
         <div class="dialog_body">
 
@@ -54,6 +56,11 @@
                     {{ form.backlogs.errors}}
                     <label for="backlogs">Backlogs</label>
                     {{form.backlogs}}
+                </li>
+                <li>
+                    {{ form.card_links.errors}}
+                    <label for="card_links">Card Links</label>
+                    {{form.card_links}}
                 </li>
                 <li>
                     {{ form.battle_scene.errors}}

@@ -6930,7 +6930,7 @@ th.skill_dot {
     background: #171817;
     color: #3c3f3c;
     order: 2;
-    height: 900px;
+    height: 780px;
     width: auto;
     overflow-x: hidden;
     overflow-y: scroll;
@@ -6943,19 +6943,20 @@ th.skill_dot {
       display: flex;
       flex-flow: column wrap;
       gap: 5px;
-      justify-content: flex-start;
+      justify-content: space-between;
       align-items: flex-start;
       align-content: flex-start; }
       .dialog .dialog_body ul li {
+        display: flex;
         text-indent: 0;
         padding: 0;
         margin: 0;
         flex-flow: row nowrap;
         color: white;
-        width: 430px;
+        width: 360px;
         height: auto;
-        justify-content: stretch;
-        align-items: flex-start;
+        justify-content: flex-start;
+        align-items: space-between;
         align-content: center;
         border: 1px dotted transparent;
         background: #242524; }
@@ -6964,17 +6965,18 @@ th.skill_dot {
           order: 1;
           text-align: left;
           font-size: 10pt;
-          width: 150px;
           border: 1px dotted transparent;
           flex-grow: 1;
           flex-shrink: 1;
           border: 2px solid transparent;
-          background: #303030; }
+          background: #171817;
+          width: 25%; }
         .dialog .dialog_body ul li input, .dialog .dialog_body ul li textarea, .dialog .dialog_body ul li select {
           order: 2;
           flex-grow: 3;
           flex-shrink: 0;
-          display: inline-block; }
+          display: inline-block;
+          width: 70%; }
   .dialog .dialog_footer {
     border: 3px solid transparent;
     border-radius: 3px;

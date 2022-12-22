@@ -3,7 +3,7 @@
  ║║╠═╝  ║ ║├─┘ │ │││││┌─┘├┤ ├┬┘
 ═╩╝╩    ╚═╝┴   ┴ ┴┴ ┴┴└─┘└─┘┴└─
 '''
-from django.conf.urls import url
+# from django.conf.urls import url
 from django.urls import path, re_path
 from optimizer.views import run_duel, run_100_duels, run_fencing_tournament, run_imperial_tournament
 

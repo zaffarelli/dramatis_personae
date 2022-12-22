@@ -1,7 +1,7 @@
 {% load static %}
 {% load fics_filters %}
 
-<div class="character_row">
+<div class="character_row"  id="card_row_{{ c.id }}">
     <div class="cell mini" title="ID"> {{ x.id|zfill }}</div>
     <div class="cell mini" title="Card Type"> {{ x.card_type }}</div>
     <div class="cell mini" title="Temporary:{{ x.temporary }}"><span class="menu-item" mode="standard" action="epic"
@@ -11,10 +11,10 @@
     <div class="cell small" title="Date"> {{ x.date }}</div>
     <div class="cell wide" title="Tags"> {{ x.tags|safe }}</div>
     <div class="cell text"> {{ x.description|parse_avatars|safe }}</div>
-    <div class="cell mini last" id="card_row_{{ c.id }}">
+    <div class="cell mini last">
         <span class="compact edit_card" id="edit_card_{{ c.id }}" mode="overlay" title="Edit"><i class="fas fa-cog"></i></span>
     </div>
-    <div class="cell mini last" id="card_row_{{ c.id }}">
+    <div class="cell mini last">
         <span class="compact view_card" id="view_card_{{ c.id }}" mode="overlay" title="View"><i class="fas fa-eye"></i></span>
     </div>
 </div>

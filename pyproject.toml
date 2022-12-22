@@ -67,6 +67,7 @@ channels = "^4.0.0"
 channels-redis = "^4.0.0"
 daphne = "^4.0.0"
 pdoc3 = "^0.10.0"
+django = "^4.0"
 
 [tool.poetry.dev-dependencies]
 
