@@ -41,7 +41,7 @@ class BacklogDeleteView(DeleteView):
 @csrf_exempt
 def add_backlog(request):
     from django.utils import timezone
-    if request.is_ajax():
+    if is_ajax(request):
       if request.method == 'POST':
         id_ = request.POST.get('id')
         id = id_.split('_')[1]

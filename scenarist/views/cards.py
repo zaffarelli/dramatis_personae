@@ -30,6 +30,32 @@ class CardUpdateView(AjaxFromResponseMixin, UpdateView):
     context_object_name = 'object'
     template_name_suffix = '_update_form'
 
+    def form_valid(self, form):
+        context = self.get_context_data(form=form)
+        cardlinks_formset = context['cardlinks']
+        if cardlinks_formset.is_valid():
+            response = super().form_valid(form)
+            cardlinks_formset.instance = self.object
+            cardlinks_formset.save()
+            return response
+        else:
+            messages.error(self.request, 'Card %s has errors. Unable to save.' % (context['c'].name))
+            return super().form_invalid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super(CardUpdateView, self).get_context_data(**kwargs)
+        context["object"] = self.object
+        if self.request.POST:
+            context['form'] = CardForm(self.request.POST, instance=self.object)
+            context['cardlinks'] = CardLinkFormSet(self.request.POST, instance=self.object)
+            context['cardlinks'].full_clean()
+            messages.success(self.request, 'Card updated: %s' % (context['form']['name'].value()))
+        else:
+            context['form'] = CardForm(instance=self.object)
+            context['cardlinks'] = CardLinkFormSet(instance=self.object)
+            messages.info(self.request, 'Card displayed: %s' % (context['form']['name'].value()))
+        return context
+
 
 class CardDeleteView(DeleteView):
     model = Card
@@ -37,7 +63,7 @@ class CardDeleteView(DeleteView):
 
 @csrf_exempt
 def add_card(request):
-    if request.is_ajax():
+    if is_ajax(request):
         if request.method == 'POST':
             id_ = request.POST.get('id')
             id = id_.split('_')[1]

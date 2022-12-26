@@ -71,6 +71,11 @@ class Card(StoryModel):
     def set_pdf(self, value=True):
         self.to_PDF = value
 
+    @property
+    def action_model(self):
+        str = self.__class__.__name__
+        return str.lower()
+
     def to_json(self):
         """ Returns JSON of object """
         from scenarist.utils.tools import json_default
@@ -78,6 +83,7 @@ class Card(StoryModel):
         job = json.loads(jst)
         # job['fullchapter'] = self.full_chapter
         job['tags'] = self.get_tags
+        job['action_model'] = self.action_model
         return job
 
 

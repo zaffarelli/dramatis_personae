@@ -7,9 +7,11 @@ from django.template.loader import get_template
 import json
 from django.contrib import messages
 
+from collector.utils.d4_changes import is_ajax
+
 
 def show_jumpweb(request):
-    if request.is_ajax:
+    if is_ajax(request):
         campaign = get_current_config(request)
         context = {}
         context['data'] = {}

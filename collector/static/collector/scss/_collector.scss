@@ -272,20 +272,24 @@ span.info {
     border: 1px solid transparent;
     border-radius: 5px;
     background: transparent;
-    min-width:15%;
+    min-width:10%;
   }
 
   & .a {
     order: 1;
+    flex-shrink: 1;
   }
 
   & .b {
     order: 2;
-    max-width:80%;
+    //  max-width:150%;
+    //background:lightskyblue;
+    flex-grow:8;
   }
 
   & .c {
     order: 3;
+    flex-shrink: 1;
   }
 
 }

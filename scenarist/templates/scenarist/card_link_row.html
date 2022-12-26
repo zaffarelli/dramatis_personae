@@ -3,9 +3,8 @@
 
 <div class="character_row"  id="card_row_{{ c.id }}">
     <div class="cell mini" title="ID"> {{ x.id|zfill }}</div>
-    <div class="cell mini" title="Card Type"> {{ x.card_type }}</div>
-    <div class="cell mini" title="Temporary:{{ x.temporary }}"><span class="menu-item" mode="standard" action="epic"
-                                 params="{{ x.id }}"> {{ x.temporary|prettybool|safe }}</span></div>
+    <div class="cell mini" title="Card Type: {{ x.card_type }}"> {{ x.card_type }}</div>
+    <div class="cell mini" title="Temporary:{{ x.temporary }}"  params="{{ x.id }}"> {{ x.temporary|prettybool|safe }}</div>
     <div class="cell wider" title="Name:{{ x.name }}"><em>{{ x.name }}</em></div>
     <div class="cell wide brief" title="Place:{{ x.place }}"> {{ x.place }}</div>
     <div class="cell small" title="Date"> {{ x.date }}</div>

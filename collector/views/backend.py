@@ -129,7 +129,7 @@ def bloke_selector(request):
 
 def load_sequence(request):
     context = {'status': 'not ajax'}
-    if request.is_ajax:
+    if is_ajax(request):
         reference = request.POST["reference"]
         order = request.POST["order"]
         sequences = Sequence.objects.filter(reference=reference, order=order)
@@ -145,7 +145,7 @@ def load_sequence(request):
 
 def save_sequence(request):
     context = {'status': 'not ajax'}
-    if request.is_ajax:
+    if is_ajax(request):
         reference = request.POST["reference"]
         order = request.POST["order"]
         data = request.POST["data"]
@@ -163,7 +163,7 @@ def save_sequence(request):
 
 
 def epic_deck(request):
-    if request.is_ajax:
+    if is_ajax(request):
         campaign = get_current_config(request)
         characters = []
         all = campaign.dramatis_personae.filter(selected=True)
@@ -178,7 +178,7 @@ def epic_deck(request):
 def svg_to_pdf(request, slug):
     import cairosvg
     response = {'status': 'error'}
-    if request.is_ajax():
+    if is_ajax(request):
         pdf_name = os.path.join(settings.MEDIA_ROOT, 'pdf/results/' + request.POST["pdf_name"])
         svg_name = os.path.join(settings.MEDIA_ROOT, 'pdf/results/' + request.POST["svg_name"])
         svgtxt = request.POST["svg"]

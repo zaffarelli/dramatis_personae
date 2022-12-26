@@ -41,7 +41,7 @@ class SceneDeleteView(DeleteView):
 @csrf_exempt
 def add_scene(request):
     from django.utils import timezone
-    if request.is_ajax():
+    if is_ajax(request):
       if request.method == 'POST':
         from scenarist.models.adventures import Adventure
         id_ = request.POST.get('id')

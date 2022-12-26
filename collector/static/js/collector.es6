@@ -313,6 +313,49 @@ class Collector {
         });
     }
 
+    registerDialogs() {
+        /* Register button behavior and display in the board/dialog
+        */
+        let me = this;
+        /* Change all menu-items to ajax/<id> */
+        $(".dialog_action").off().on("click", function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            let id = $(this).attr("id");
+            let action_tag = $(this).attr("action");
+            let param = $(this).attr("param");
+
+            if (id == 'close') {
+                /* just close the dialog */
+                $("#board").css("display", "none");
+            }else {
+                if (id=="update"){
+
+                }else if (id=="view"){
+
+                }else if (id=="edit"){
+
+                }
+
+                let aurl = 'ajax/' + action_tag + '/' + param + '/' + page + '/';
+                console.debug(action_tag + " has been clicked... (" + aurl + ")");
+                $.ajax({
+                    url: 'ajax/' + action_tag + '/close',
+                    success: function (answer) {
+                        $('.mosaic').html(answer.mosaic);
+                        me.rebootLinks();
+                    },
+                    error: function (answer) {
+                        console.error('Error on slug-page-item [' + action_tag + ']');
+                        console.debug(answer)
+                        me.rebootLinks();
+                    }
+                });
+            }
+        });
+    }
+
+
     markButtons() {
         $('.menu-item').addClass('highlighted');
         $('.slug-item').addClass('highlighted');
@@ -334,6 +377,7 @@ class Collector {
         me.registerPullDowns();
         me.registerFigures();
         me.registerCharsels();
+        me.registerDialogs();
         /* Togglers */
         me.setToggler('.mobile_form_toggler', 'collapsed', "#customizer");
         me.setToggler('.menu_right_toggler', 'collapsed', ".menuright");

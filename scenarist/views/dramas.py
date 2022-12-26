@@ -32,7 +32,7 @@ class DramaUpdateView(AjaxFromResponseMixin,UpdateView):
 
 def add_drama(request):
     import datetime
-    if request.is_ajax():
+    if is_ajax(request):
         if request.method == 'POST':
             full_id = request.POST.get('id')
             # print(full_id)

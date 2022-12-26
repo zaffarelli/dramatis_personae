@@ -40,7 +40,7 @@ class EventDeleteView(DeleteView):
 
 @csrf_exempt
 def add_event(request):
-    if request.is_ajax():
+    if is_ajax(request):
       if request.method == 'POST':
         id_ = request.POST.get('id')
         id = id_.split('_')[1]

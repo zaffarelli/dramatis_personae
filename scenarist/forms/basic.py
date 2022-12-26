@@ -71,4 +71,4 @@ class SceneForm(ModelForm):
         fields = '__all__'
 
 
-CardFormSet = inlineformset_factory(Card, CardLink, fk_name='cardin', fields='__all__', extra=3, can_delete=True)
+CardLinkFormSet = inlineformset_factory(Card, CardLink, fk_name='cardin', fields='__all__', extra=3, can_delete=True)
