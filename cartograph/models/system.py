@@ -39,6 +39,8 @@ class System(models.Model):
     zoom_factor = models.IntegerField(null=True, blank=True, default=0)
     description = models.TextField(max_length=1024, blank=True, null=True, default='')
 
+
+
     def __str__(self):
         return "%s" % (self.name)
 

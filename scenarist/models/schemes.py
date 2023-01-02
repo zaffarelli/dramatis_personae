@@ -50,7 +50,7 @@ class Scheme(StoryModel):
 
     @property
     def get_full_id(self):
-        return f':{int(self.chapter):02}'
+        return f':{self.chapter:02}'
 
     def set_pdf(self, value=True):
         self.to_PDF = value
@@ -66,6 +66,6 @@ class Scheme(StoryModel):
 
 class SchemeAdmin(admin.ModelAdmin):
     ordering = ['chapter', 'name']
-    list_display = ['name', 'full_id',  'chapter', 'date', 'dt', 'place', 'linked_backlogs', 'description']
+    list_display = ['name', 'full_id',  'chapter', 'date_offset', 'dt', 'place', 'linked_backlogs', 'description']
     list_filter = []
     search_fields = ['description', 'name', 'resolution']

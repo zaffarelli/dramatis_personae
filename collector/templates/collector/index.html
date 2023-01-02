@@ -152,8 +152,9 @@
 <script>
     let ac = new AvatarCustomizer();
     let sc = new Scenarist();
+    let za = new Zapp();
     let op = new Optimizer();
-    let co = new Collector(ac,op,sc);
+    let co = new Collector(ac,op,sc,za);
     let lg = (new Logo('.img_block',6, 0));
     lg.perform();
     co.perform();

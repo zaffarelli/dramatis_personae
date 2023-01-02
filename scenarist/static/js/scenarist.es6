@@ -17,16 +17,31 @@ class Scenarist{
             let t_id = $(this).attr('id')
             let id = t_id.split("_")[t_id.split("_").length-1]
             let children = $(this).parent("p").attr('children');
+            let mode_tag = $(this).attr('mode');
             //$(this).css('border-color','red');
+            console.log("here we go");
+            console.log(x+'s/'+id+'/view/');
             $.ajax({
                 url: x+'s/'+id+'/view/',
                 success: function(answer) {
-                    $('#'+x+'_'+id).html(answer);
-                    if (children != undefined){
-                      let ch = children.split(";")
-                      _.forEach(ch,function(d){
-                          $("#view_"+d).click();
-                      })
+                    console.log(mode_tag);
+                    if (mode_tag == 'overlay') {
+                        $('#board').html('<div class="a"></div><div class="b" id="card_form_box"></div><div class="c"></div>');
+                        $('#card_form_box').html(answer);
+                        $("#board").css('display','flex');
+                        me.co.rebootLinks();
+                    }else {
+                        $('#' + x + '_' + id).html(answer);
+
+                        me.co.prepareAjax();
+                        me.co.rebootLinks();
+                        $('#' + x + '_' + id).html(answer);
+                        if (children != undefined) {
+                            let ch = children.split(";")
+                            _.forEach(ch, function (d) {
+                                $("#view_" + d).click();
+                            })
+                        }
                     }
                     me.co.prepareAjax();
                     me.co.rebootLinks();
@@ -37,23 +52,39 @@ class Scenarist{
                 }
             });
         });
-        $('.hide_'+x).off().on('click', function(event){
+        $('.update_'+x).off().on('click',function(event){
             event.preventDefault();
             event.stopPropagation();
-            let t_id = $(this).attr('id')
-            let id = t_id.split("_")[t_id.split("_").length-1]
-            let children = $(this).parent("p").attr('children');
-            $('#'+x+'_'+id).html('');
-            if (children != undefined){
-              let ch = children.split(";")
-              _.forEach(ch,function(d){
-                $("#hide_"+d).click();
-              })
-            }
-            me.co.prepareAjax();
-            me.co.rebootLinks();
-            me.registerQuizz();
+            let owner = $(this).closest('div.storyarticle').attr('id');
+            let id = owner.split('_')[1];
+            let form = $(this).closest('form');
+            let formdata = form.serialize();
+            let mode_tag = $(this).attr('mode');
+            let urlupdate = x+'s/'+id+'/edit/';
+            console.log("HELLO !!!");
+            $.ajax({
+                url: urlupdate,
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                data: formdata,
+                dataType: 'json',
+                success: function(answer) {
+                    console.log('Success... ');
+                    $('#'+owner).html(answer);
+                    me.co.rebootLinks();
+                    $('button#'+id+'.view_'+x).click();
+                    me.registerQuizz();
+                },
+                error: function(answer) {
+                    console.log('Error... ');
+                    console.log(answer);
+                },
+            });
         });
+
         $('.edit_'+x).off().on('click', function(event){
             event.preventDefault();
             event.stopPropagation();
@@ -80,6 +111,23 @@ class Scenarist{
                     console.log('ooops... on edit '+x+':(');
                 }
             });
+        });
+        $('.hide_'+x).off().on('click', function(event){
+            event.preventDefault();
+            event.stopPropagation();
+            let t_id = $(this).attr('id')
+            let id = t_id.split("_")[t_id.split("_").length-1]
+            let children = $(this).parent("p").attr('children');
+            $('#'+x+'_'+id).html('');
+            if (children != undefined){
+              let ch = children.split(";")
+              _.forEach(ch,function(d){
+                $("#hide_"+d).click();
+              })
+            }
+            me.co.prepareAjax();
+            me.co.rebootLinks();
+            me.registerQuizz();
         });
         $('.'+x+'_update').off().on('click',function(event){
             event.preventDefault();

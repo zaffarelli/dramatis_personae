@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<svg
+   width="12mm"
+   height="8mm"
+   viewBox="-12 -8 24 16"
+   version="1.2"
+   class="card_tag"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <g id="card_group">
+    <rect
+       width="20"
+       height="12"
+       x="-10"
+       y="-8"
+       rx="2"
+       ry="2"
+       fill="{{color}}"
+       stroke="#808080"
+       stroke-width="0.5pt"
+       id="card_rect" />
+    <text
+       id="card_label"
+       style="font-size:6px"
+       fill="#101010"
+       stroke="#404040"
+       stroke-width="0.25pt"
+       text-anchor="middle"
+       x="0"
+       y="0">{{label}}</text>
+  </g>
+</svg>

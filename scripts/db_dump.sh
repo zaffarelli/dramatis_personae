@@ -22,6 +22,11 @@ python manage.py dumpdata scenarist.Epic --format xml --output backup/custom/$1/
 python manage.py dumpdata scenarist.Drama --format xml --output backup/custom/$1/drama.xml
 python manage.py dumpdata scenarist.Act --format xml --output backup/custom/$1/act.xml
 python manage.py dumpdata scenarist.Event --format xml --output backup/custom/$1/event.xml
+python manage.py dumpdata scenarist.Card --format xml --output backup/custom/$1/card.xml
+python manage.py dumpdata scenarist.Backlog --format xml --output backup/custom/$1/backlog.xml
+python manage.py dumpdata scenarist.Adventure --format xml --output backup/custom/$1/adventure.xml
+python manage.py dumpdata scenarist.Scene --format xml --output backup/custom/$1/scene.xml
+python manage.py dumpdata scenarist.Scheme --format xml --output backup/custom/$1/scheme.xml
 
 
 python manage.py dumpdata collector.RpgSystem --format xml --output backup/custom/$1/rpg_system.xml
@@ -38,13 +43,11 @@ python manage.py dumpdata collector.Gear --format xml --output backup/reference/
 python manage.py dumpdata collector.RitualRef --format xml --output backup/reference/$1/ritualref.xml
 python manage.py dumpdata collector.SkillRef --format xml --output backup/reference/$1/skill_ref.xml
 python manage.py dumpdata collector.ShieldRef --format xml --output backup/reference/$1/shield_ref.xml
-python manage.py dumpdata collector.ShipSection --format xml --output backup/reference/$1/ship_section.xml
 python manage.py dumpdata collector.ShipSystem --format xml --output backup/reference/$1/ship_system.xml
 python manage.py dumpdata collector.ShipRef --format xml --output backup/reference/$1/ship_ref.xml
 python manage.py dumpdata collector.Specie --format xml --output backup/reference/$1/specie.xml
 python manage.py dumpdata collector.TourOfDutyRef --format xml --output backup/reference/$1/tour_of_duty_ref.xml
 python manage.py dumpdata collector.WeaponRef --format xml --output backup/reference/$1/weapon_ref.xml
-#python manage.py dumpdata collector.Coc7Occupation --format xml --output backup/reference/$1/coc7_occupation.xml
 python manage.py dumpdata collector.AllianceRef --format xml --output backup/reference/$1/alliance_ref.xml
 
 echo -e "\e[0;35m- Dumping modificator data (pushed from history creation)...\e[0;m"

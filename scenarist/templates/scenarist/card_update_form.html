@@ -1,4 +1,4 @@
-{% extends "scenarist/dialog.html" %}
+{% extends "zapp/dialog.html" %}
 
 
 {% block dialog_header %}
@@ -8,57 +8,46 @@
 
 
 {% block dialog_body %}
-    <form class='card_form' form-target='card'>
+    <form id="card_form">
         {% csrf_token %}
         {{ form.non_field_errors }}
         {{ form.management_form }}
-        <input name='id' type='hidden' value='{{ form.id }}'>
+        <input id='id_id' name='id' type='hidden' value='{{ object.id }}'>
         <ul>
-            {# form.as_ul #}
-            <li>
+            <li class="o1">
                 {{ form.name.errors }}
                 <label for="name">Name</label>
                 {{ form.name }}
             </li>
-            <li>
-                {{ form.chapter.errors }}
-                <label for="chapter">Chapter</label>
-                {{ form.chapter }}
-            </li>
-            <li>
-                {{ form.date.errors }}
-                <label for="date">Date</label>
-                {{ form.date }}
-            </li>
-            <li>
-                {{ form.dt.errors }}
-                <label for="dt">DT</label>
-                {{ form.dt }}
-            </li>
-            <li>
-                {{ form.gamemaster.errors }}
-                <label for="gamemaster">Gamemaster</label>
-                {{ form.gamemaster }}
-            </li>
-            <li>
-                {{ form.full_id.errors }}
-                <label for="full_id">Full ID</label>
-                {{ form.full_id }}
-            </li>
-            <li>
-                {{ form.card_type.errors }}
-                <label for="card_type">Card Type</label>
-                {{ form.card_type }}
-            </li>
-            <li>
+            <li class="o5">
                 {{ form.epic.errors }}
                 <label for="epic">Epic</label>
                 {{ form.epic }}
             </li>
-            <li>
-                {{ form.card_links.errors }}
-                <label for="card_links">Card Links</label>
-                {{ form.card_links }}
+            <li class="o1">
+                {{ form.chapter.errors }}
+                <label for="chapter">Chapter</label>
+                {{ form.chapter }}
+            </li>
+            <li class="o1">
+                {{ form.date_offset.errors }}
+                <label for="date_offset">Days Offset</label>
+                {{ form.date_offset }}
+            </li>
+            <li class="o1">
+                {{ form.dt.errors }}
+                <label for="dt">DT</label>
+                {{ form.dt }}
+            </li>
+            <li class="o5">
+                {{ form.gamemaster.errors }}
+                <label for="gamemaster">Gamemaster</label>
+                {{ form.gamemaster }}
+            </li>
+            <li  class="o1">
+                {{ form.card_type.errors }}
+                <label for="card_type">Card Type</label>
+                {{ form.card_type }}
             </li>
             <li>
                 {{ form.battle_scene.errors }}
@@ -95,64 +84,72 @@
                 <label for="downtime_scene">Downtime</label>
                 {{ form.downtime_scene }}
             </li>
-            <li>
+            <li class="o2 ta">
                 {{ form.description.errors }}
                 <label for="description">Description</label>
                 {{ form.description }}
             </li>
-            <li>
+            <li class="o2 ta">
                 {{ form.resolution.errors }}
                 <label for="resolution">Resolution</label>
                 {{ form.resolution }}
             </li>
-            <li>
+            <li class="o4 ta">
                 {{ form.rewards.errors }}
                 <label for="rewards">Rewards</label>
                 {{ form.rewards }}
             </li>
-            <li>
+            <li class="o5">
                 {{ form.archived.errors }}
                 <label for="archived">Archived</label>
                 {{ form.archived }}
             </li>
-            <li>
+            <li class="o5">
                 {{ form.to_PDF.errors }}
                 <label for="to_pdf">To PDF</label>
                 {{ form.to_PDF }}
             </li>
-            <li>
+            <li class="o5">
                 {{ form.temporary.errors }}
                 <label for="temporary">Temporary</label>
                 {{ form.temporary }}
             </li>
-            <li>
+            <li class="o5">
                 {{ form.visible.errors }}
                 <label for="visible">Visible</label>
                 {{ form.visible }}
             </li>
+            <li class="o1">
+                {{ form.parent.errors }}
+                <label for="parent">Parent</label>
+                {{ form.parent }}
+            </li>
+                 <li class="o2">
+                {{ form.abstract.errors }}
+                <label for="abstract">Abstract</label>
+                {{ form.abstract }}
+            </li>
 
-            {{ cardlinks.management_form }}
-            {% for form in cardlinks.forms %}
-                {{ form.as_ul }}
-            {% endfor %}
+            <li class="o5">
+
+                    {{ inlines.management_form }}
+                    {% for formset in inlines %}
+                        <ul class="packed">
+                        {{ formset.as_ul }}
+                        </ul>
+                    {% endfor %}
+
+            </li>
         </ul>
     </form>
 {% endblock dialog_body %}
 
 {% block dialog_footer %}
-    <button class="dialog_action" action="{{ object.action_model }}" state="view" id="next"><i
-            class="fa fa-arrow-circle-right"></i> Next
-    </button>
-    <button class="dialog_action" action="{{ object.action_model }}" state="edit" id="update"><i
+
+    <button class="dialog_action" action="{{ object.action_model }}" option="{{ object.id }}" id="update"><i
             class="fa fa-stop-circle"></i> Update
     </button>
-    <button class="dialog_action" action="{{ object.action_model }}" state="edit" id="edit"><i
-            class="fa fa-pause-circle"></i> Edit
-    </button>
-    <button class="dialog_action" action="{{ object.action_model }}" state="view" id="view"><i
-            class="fa fa-play-circle"></i> View
-    </button>
-    <button class="dialog_action" action="{{ object.action_model }}" state="view" id="previous"><i
-            class="fa fa-arrow-circle-left"></i> Previous
-    </button>
+
+
+
 {% endblock dialog_footer %}

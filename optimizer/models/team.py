@@ -18,6 +18,7 @@ class Team(models.Model):
     active = models.BooleanField(default=True)
     campaign = models.ForeignKey(Campaign, on_delete=models.SET_NULL, null=True, blank=True)
 
+
     def __str__(self):
         return "%s (%d)"%(self.name,self.population)
 

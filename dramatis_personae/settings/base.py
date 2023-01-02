@@ -13,6 +13,7 @@ INSTALLED_APPS = [
     'scenarist.apps.ScenaristConfig',
     'cartograph.apps.CartographConfig',
     'collector.apps.CollectorConfig',
+    'zapp.apps.ZappConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -144,8 +145,12 @@ AUTH_PASSWORD_VALIDATORS = [{
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
-USE_L10N = True
+USE_L10N = False
 USE_TZ = True
+DATE_FORMAT = 'Y-m-d'
+TIME_FORMAT = 'H:i:s'
+DATETIME_FORMAT = 'Y-m-d H:i:s'
+
 
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
@@ -159,7 +164,7 @@ STATICFILES_DIRS = [
 LOGIN_REDIRECT_URL = '/'
 
 MAX_CHAR = 20
-RELEASE = '1.2.1'
+RELEASE = '1.3.0'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 

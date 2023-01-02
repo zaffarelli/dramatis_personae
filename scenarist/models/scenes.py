@@ -49,7 +49,7 @@ class Scene(StoryModel):
 
     @property
     def get_full_id(self):
-        return f'{self.adventure.get_full_id}:{int(self.chapter):02}'
+        return f'{self.adventure.get_full_id}:{self.chapter:02}'
 
     def set_pdf(self, value=True):
         self.to_PDF = value
@@ -70,6 +70,6 @@ class Scene(StoryModel):
 
 class SceneAdmin(admin.ModelAdmin):
     ordering = ['adventure', 'chapter', 'name']
-    list_display = ['name', 'full_id', 'adventure', 'chapter', 'date', 'place', 'description']
+    list_display = ['name', 'full_id', 'adventure', 'chapter', 'date_offset', 'place', 'description']
     list_filter = ['adventure']
     search_fields = ['description', 'name', 'resolution']

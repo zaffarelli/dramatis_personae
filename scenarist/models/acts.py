@@ -45,7 +45,7 @@ class Act(StoryModel):
 
     @property
     def get_full_id(self):
-        return f'{self.drama.get_full_id}:{int(self.chapter):02}'
+        return f'{self.drama.get_full_id}:{self.chapter:02}'
 
 
     def set_pdf(self, value=True):
@@ -60,6 +60,6 @@ class Act(StoryModel):
 
 class ActAdmin(admin.ModelAdmin):
     ordering = ['drama', 'chapter', 'name']
-    list_display = ['name', 'full_id', 'drama', 'chapter', 'visible', 'to_PDF', 'date', 'place', 'description']
+    list_display = ['name', 'full_id', 'drama', 'chapter', 'visible', 'to_PDF', 'date_offset', 'place', 'description']
     list_filter = ['drama', 'visible', 'to_PDF']
     search_fields = ['name', 'description']

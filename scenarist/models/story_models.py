@@ -28,8 +28,9 @@ class StoryModel(models.Model):
         abstract = True
 
     name = models.CharField(default='', max_length=256, blank=True, unique=True)
-    chapter = models.CharField(default='0', blank=True, max_length=64)
-    date = models.CharField(max_length=128, default='', blank=True)
+    #chapter = models.CharField(default='0', max_length=12, blank=True)
+    chapter = models.PositiveIntegerField(default=0, blank=True)
+    date_offset = models.IntegerField(default=0, blank=True)
     dt = models.DateTimeField(default=timezone.now, blank=True, null=True)
     place = models.CharField(max_length=128, default='', blank=True)
     gamemaster = models.CharField(default='zaffarelli@gmail.com', max_length=128, blank=True)
@@ -47,12 +48,13 @@ class StoryModel(models.Model):
     description = models.TextField(max_length=6000, default='', blank=True)
     resolution = models.TextField(default='', max_length=2560, blank=True)
     rewards = models.TextField(max_length=1024, default='', blank=True)
-    card_type = models.CharField(max_length=2, default='UN', choices=CARD_TYPES)
+    card_type = models.CharField(max_length=2, default='UN', choices=CARD_TYPES, blank=True)
     archived = models.BooleanField(default=False)
+
 
     def __str__(self):
         """ Standard display """
-        return '%s. %s' % (self.chapter, self.name)
+        return '%d. %s' % (self.chapter, self.name)
 
     @property
     def minis(self):

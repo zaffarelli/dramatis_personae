@@ -57,6 +57,7 @@ class CardForm(ModelForm):
     class Meta:
         model = Card
         fields = '__all__'
+        exclude = ['full_id']
 
 
 class CardLinkForm(ModelForm):
@@ -65,10 +66,11 @@ class CardLinkForm(ModelForm):
         fields = '__all__'
 
 
+
 class SceneForm(ModelForm):
     class Meta:
         model = Scene
         fields = '__all__'
 
 
-CardLinkFormSet = inlineformset_factory(Card, CardLink, fk_name='cardin', fields='__all__', extra=3, can_delete=True)
+CardLinkFormSet = inlineformset_factory(Card, CardLink, fk_name='cardin', fields='__all__', extra=2, can_delete=True)

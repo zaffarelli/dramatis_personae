@@ -455,10 +455,10 @@ def handle_cards(request):
         from scenarist.models.cards import Card
         from collector.models.campaign import Campaign
         campaign = get_current_config(request)
-        notes_items = Card.objects.filter(epic=campaign.epic).order_by('full_id', 'name')
+        notes_items = Card.objects.filter(epic=campaign.epic).order_by('full_id')
         cards = []
         for x in notes_items:
-            n = x.to_json()
+            n = x.to_json
             cards.append(n)
         context = {'cards': cards, 'title': "Adventure Cards", "comment": f"{len(cards)} item(s)."}
         template = get_template('collector/cards.html')

@@ -390,6 +390,7 @@ def as_media_image(value):
         str = 'media/images/f_blank.jpg'
     return str
 
+
 @register.filter(name='as_media_video')
 def as_media_video(value):
     str = f'images/{value}.jpg'
@@ -449,8 +450,17 @@ def zfill(value):
 
 @register.filter(name='as_date')
 def as_date(value):
-    import json
+    res = 0
     from datetime import datetime
-    j = json.loads(str(value))
-    res = datetime.Date(j)
+    year = value['year']
+    month = value['month']
+    day = value['day']
+    # print(year, month, day)
+    res = f"{year:04}-{month:02}-{day:02}"
     return res
+
+
+@register.filter(name='format_date')
+def format_date(date_string):
+    import datetime
+    return datetime.datetime.strptime(date_string, '%Y-%m-%d %H:%M:%S %Z')

@@ -12,7 +12,7 @@ from scenarist.models.story_models import StoryModel
 
 class Drama(StoryModel):
     class Meta:
-        ordering = ['epic', 'chapter', 'date', 'name']
+        ordering = ['epic', 'chapter', 'date_offset', 'name']
 
     from scenarist.models.epics import Epic
     epic = models.ForeignKey(Epic, null=True, on_delete=models.CASCADE)
@@ -67,7 +67,7 @@ class Drama(StoryModel):
 
     @property
     def get_full_id(self):
-        return f'{self.epic.get_full_id}:{int(self.chapter):02}'
+        return f'{self.epic.get_full_id}:{self.chapter:02}'
 
     def set_pdf(self, value=True):
         self.to_PDF = value
@@ -80,7 +80,7 @@ class Drama(StoryModel):
 
 
 class DramaAdmin(admin.ModelAdmin):
-    ordering = ['epic', 'chapter', 'date', 'name']
-    list_display = ['name', 'full_id', 'epic', 'chapter', 'date', 'place', 'is_visible', 'description']
+    ordering = ['epic', 'chapter', 'date_offset', 'name']
+    list_display = ['name', 'full_id', 'epic', 'chapter', 'date_offset', 'place', 'is_visible', 'description']
     list_filter = ['epic']
     search_fields = ['name', 'description']

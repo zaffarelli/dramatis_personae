@@ -34,7 +34,7 @@ class Event(StoryModel):
 
     @property
     def get_full_id(self):
-        return f'{self.act.get_full_id}:{int(self.chapter):02}'
+        return f'{self.act.get_full_id}:{self.chapter:02}'
 
     def set_pdf(self, value=True):
         self.to_PDF = value
@@ -42,6 +42,6 @@ class Event(StoryModel):
 
 class EventAdmin(admin.ModelAdmin):
     ordering = ['act', 'chapter', 'name']
-    list_display = ['name', 'full_id', 'act', 'chapter', 'date', 'place', 'description']
+    list_display = ['name', 'full_id', 'act', 'chapter', 'date_offset', 'place', 'description']
     list_filter = ['act']
     search_fields = ['description', 'name', 'resolution']

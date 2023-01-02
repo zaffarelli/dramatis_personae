@@ -44,7 +44,7 @@ class Backlog(StoryModel):
 
     @property
     def get_full_id(self):
-        return f'{int(self.chapter):02}'
+        return f'{self.chapter:02}'
 
     def set_pdf(self, value=True):
         self.to_PDF = value
@@ -52,6 +52,6 @@ class Backlog(StoryModel):
 
 class BacklogAdmin(admin.ModelAdmin):
     ordering = ['chapter', 'name']
-    list_display = ['name', 'full_id', 'chapter', 'date', 'dt', 'keywords', 'place', 'description']
+    list_display = ['name', 'full_id', 'chapter', 'date_offset', 'dt', 'keywords', 'place', 'description']
     list_filter = ['category']
     search_fields = ['description', 'name', 'keywords']

@@ -1,3 +1,11 @@
+{% extends "zapp/dialog.html" %}
+
+
+{% block dialog_header %}
+    <h1>Edit {{ object.action_model }} [{{ object.name }}]</h1>
+{% endblock dialog_header %}
+
+{% block dialog_body %}
 <div class="character_update_view tabbed">
     <div class='tabs'>
         <button class='tablinks' id='button_1' > Main </button>
@@ -253,3 +261,5 @@
         {% csrf_token %}
     </form>
 </div>
+
+{% endblock dialog_body %}

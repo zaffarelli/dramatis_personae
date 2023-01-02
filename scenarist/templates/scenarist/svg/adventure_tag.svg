@@ -15,18 +15,18 @@
        y="-8"
        rx="2"
        ry="2"
-       fill="{{back}}"
+       fill="{{front}}"
        stroke="{{front}}"
        stroke-width="0.5pt"
        id="rect2" />
     <text
        id="label"
-       style="font-size:4px"
-       fill="{{front}}"
-       stroke="{{front}}"
+       style="font-size:6px"
+       fill="#F0F0F0"
+       stroke="#C0C0C0"
        stroke-width="0.25pt"
        text-anchor="middle"
        x="0"
-       y="-1">{{label}}</text>
+       y="0">{{label}}</text>
   </g>
 </svg>

@@ -1,11 +1,13 @@
 class Collector {
-    constructor(ac, op, sc) {
+    constructor(ac, op, sc, za) {
         let me = this;
         me.d3 = undefined;
         me.heartbeat = 0;
-        me.ac = ac
-        me.op = op
-        me.sc = sc
+        me.ac = ac;
+        me.op = op;
+        me.sc = sc;
+        me.za = za;
+        me.debug = true;
         me.init();
     }
 
@@ -158,9 +160,9 @@ class Collector {
         });
     }
 
-    registerTabs(){
-        $('.tablinks').off().on('click', function(){
-            let tabname = "#tab"+$(this).attr('id').split('_')[1];
+    registerTabs() {
+        $('.tablinks').off().on('click', function () {
+            let tabname = "#tab" + $(this).attr('id').split('_')[1];
             $('.tabcontent').addClass('hiddentab');
             console.log(tabname)
             $(tabname).removeClass('hiddentab');
@@ -313,47 +315,6 @@ class Collector {
         });
     }
 
-    registerDialogs() {
-        /* Register button behavior and display in the board/dialog
-        */
-        let me = this;
-        /* Change all menu-items to ajax/<id> */
-        $(".dialog_action").off().on("click", function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-            let id = $(this).attr("id");
-            let action_tag = $(this).attr("action");
-            let param = $(this).attr("param");
-
-            if (id == 'close') {
-                /* just close the dialog */
-                $("#board").css("display", "none");
-            }else {
-                if (id=="update"){
-
-                }else if (id=="view"){
-
-                }else if (id=="edit"){
-
-                }
-
-                let aurl = 'ajax/' + action_tag + '/' + param + '/' + page + '/';
-                console.debug(action_tag + " has been clicked... (" + aurl + ")");
-                $.ajax({
-                    url: 'ajax/' + action_tag + '/close',
-                    success: function (answer) {
-                        $('.mosaic').html(answer.mosaic);
-                        me.rebootLinks();
-                    },
-                    error: function (answer) {
-                        console.error('Error on slug-page-item [' + action_tag + ']');
-                        console.debug(answer)
-                        me.rebootLinks();
-                    }
-                });
-            }
-        });
-    }
 
 
     markButtons() {
@@ -365,11 +326,12 @@ class Collector {
     rebootLinks() {
         let me = this;
         me.sc.doConnect(me);
+        me.za.doConnect(me);
         me.op.doConnect(me);
         me.ac.prepareEvents(me);
         /* Starting Heartbeat */
         me.heartbeat = setTimeout("co.runHeartbeat()", 2500);
-
+        console.log("reboot links");
         /* Automatic ajax pipelining */
         me.registerMenuItems();
         me.registerSlugItems();
@@ -377,7 +339,7 @@ class Collector {
         me.registerPullDowns();
         me.registerFigures();
         me.registerCharsels();
-        me.registerDialogs();
+
         /* Togglers */
         me.setToggler('.mobile_form_toggler', 'collapsed', "#customizer");
         me.setToggler('.menu_right_toggler', 'collapsed', ".menuright");

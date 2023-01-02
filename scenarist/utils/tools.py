@@ -19,5 +19,12 @@ def adventure_tag(label, value, front="#F0C040", back="transparent"):
         context = {'label': label, 'front': front, "back": back}
         template = get_template('scenarist/svg/adventure_tag.svg')
         svg = template.render(context)
-        #print(svg)
+        # print(svg)
+    return svg
+
+
+def card_tag(label, color="#F0C040"):
+    context = {'label': label, 'color': color}
+    template = get_template('scenarist/svg/card_tag.svg')
+    svg = template.render(context)
     return svg

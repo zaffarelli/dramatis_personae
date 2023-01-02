@@ -1,0 +1,1 @@
+/home/zaffarelli/Perso/github/dramatis_personae/zapp/static/js/zapp.es6

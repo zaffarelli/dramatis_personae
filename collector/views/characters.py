@@ -34,6 +34,7 @@ class CharacterUpdateView(AjaxFromResponseMixin, UpdateView):
     form_class = CharacterForm
     context_object_name = 'c'
     template_name_suffix = '_update_form'
+
     success_url = 'recalc_avatar'
 
     def form_valid(self, form):
