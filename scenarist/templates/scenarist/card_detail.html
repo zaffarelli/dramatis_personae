@@ -43,6 +43,11 @@
                     <em>Challenge</em> {{ object.challenge }}
                 </div>
             {% endif %}
+            {% if object.is_ongoing %}
+                <div class="brick">
+                    <em>OnGoing</em> {{ object.is_ongoing }}
+                </div>
+            {% endif %}
             {% for link in object.cardin.all %}
                 <div class="brick">
                     <em>Relationships</em> {{ link.short }}

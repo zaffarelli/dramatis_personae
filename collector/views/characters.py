@@ -22,10 +22,19 @@ class CharacterDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['no_skill_edit'] = True
-        # blokes = Bloke.objects.filter(character__full_name=context['c'].full_name)
-        context['blokes'] = BlokesFormSet(instance=self.object)
-        messages.success(self.request, 'Display character %s' % (context['c'].full_name))
+        context['no_skill_edit'] = False
+        # self.object.fix()
+        # context['blokes'] = BlokesFormSet(instance=self.object)
+        context['data'] = self.object.to_json()
+        x =self.object.to_json_customizer()
+        mobile_form = get_template('collector/mobile_form.html')
+        mf = mobile_form.render({'c': x}, self.request)
+
+
+        context['mobile_form'] = mf
+        # print(x)
+
+        messages.success(self.request, 'Displaying character [%s].' % (context['object'].full_name))
         return context
 
 
@@ -35,7 +44,7 @@ class CharacterUpdateView(AjaxFromResponseMixin, UpdateView):
     context_object_name = 'c'
     template_name_suffix = '_update_form'
 
-    success_url = 'recalc_avatar'
+    success_url = 'view_character'
 
     def form_valid(self, form):
         context = self.get_context_data(form=form)

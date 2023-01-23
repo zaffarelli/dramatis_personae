@@ -32,6 +32,7 @@ class StoryModel(models.Model):
     chapter = models.PositiveIntegerField(default=0, blank=True)
     date_offset = models.IntegerField(default=0, blank=True)
     dt = models.DateTimeField(default=timezone.now, blank=True, null=True)
+    sdt = models.DateTimeField(default=timezone.now, blank=True, null=True)
     place = models.CharField(max_length=128, default='', blank=True)
     gamemaster = models.CharField(default='zaffarelli@gmail.com', max_length=128, blank=True)
     visible = models.BooleanField(default=True)
@@ -41,6 +42,9 @@ class StoryModel(models.Model):
     technical_scene = models.BooleanField(default=False)
     spiritual_scene = models.BooleanField(default=False)
     political_scene = models.BooleanField(default=False)
+    roleplay_scene = models.BooleanField(default=False)
+    business_scene = models.BooleanField(default=False)
+    mystery_scene = models.BooleanField(default=False)
     downtime_scene = models.BooleanField(default=False)
     to_PDF = models.BooleanField(default=True)
     temporary = models.BooleanField(default=True)
@@ -50,6 +54,7 @@ class StoryModel(models.Model):
     rewards = models.TextField(max_length=1024, default='', blank=True)
     card_type = models.CharField(max_length=2, default='UN', choices=CARD_TYPES, blank=True)
     archived = models.BooleanField(default=False)
+    is_ongoing = models.BooleanField(default=False)
 
 
     def __str__(self):

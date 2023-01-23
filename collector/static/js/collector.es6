@@ -160,15 +160,7 @@ class Collector {
         });
     }
 
-    registerTabs() {
-        $('.tablinks').off().on('click', function () {
-            let tabname = "#tab" + $(this).attr('id').split('_')[1];
-            $('.tabcontent').addClass('hiddentab');
-            console.log(tabname)
-            $(tabname).removeClass('hiddentab');
-        });
 
-    }
 
     registerSlugItems() {
         let me = this;
@@ -467,7 +459,7 @@ class Collector {
         });
 
 
-        $('.edit_character').off()
+        $('.edit_characterold').off()
             .on('click', function (event) {
                 event.preventDefault();
                 event.stopPropagation();
@@ -794,6 +786,6 @@ class Collector {
             });
         // me.openSocket();
 
-        me.registerTabs();
+        // me.registerTabs();
     }
 }

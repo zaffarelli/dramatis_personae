@@ -18,9 +18,11 @@ class Card(StoryModel):
         ordering = ['full_id', 'name']
 
     epic = models.ForeignKey(Epic, null=True, on_delete=models.CASCADE, blank=True)
-    parent = models.ForeignKey('self', unique=False, related_name='ChildrenCards', on_delete=models.SET_NULL, null=True,
+    parent = models.ForeignKey('self', unique=False, related_name='children', on_delete=models.SET_NULL, null=True,
                                blank=True)
     abstract = models.CharField(default='', max_length=256, blank=True)
+    sublevels = models.CharField(default='', max_length=16, blank=True)
+    experience = models.PositiveIntegerField(default=0, blank=True)
 
     def __str__(self):
         str = f'{self.get_card_type_display().upper()}: {self.name}'
@@ -28,7 +30,7 @@ class Card(StoryModel):
 
     @property
     def full_chapter(self):
-        return f"CARD:{self.id}.{self.name}"
+        return f"CARD:{self.id:04}.{self.name}"
 
     def get_casting(self):
         """ Bring all avatars rids from all relevant text fields"""
@@ -46,20 +48,24 @@ class Card(StoryModel):
         list.append(adventure_tag("TECHNICAL", self.technical_scene, "#520b76"))
         list.append(adventure_tag("SPIRITUAL", self.spiritual_scene, "#6f3ad7"))
         list.append(adventure_tag("POLITICAL", self.political_scene, "#1a3cb9"))
+        list.append(adventure_tag("ROLEPLAY", self.roleplay_scene, "#b930d5"))
+        list.append(adventure_tag("BUSINESS", self.business_scene, "#575948"))
+        list.append(adventure_tag("MYSTERY", self.mystery_scene, "#184c3a"))
         list.append(adventure_tag("DOWNTIME", self.downtime_scene, "#585858"))
+        list.append(adventure_tag("ONGOING", self.is_ongoing, "#A02020"))
         return " ".join(list)
 
     @property
     def card_type_color(self):
         prefix = {
             'EP': '#cc5f29',
-            'DR': '#cc6d3d',
-            'AC': '#cc7b52',
-            'AD': '#85cc3d',
-            'SC': '#8fcc52',
-            'EV': '#3dcc6d',
-            'SH': '#b8b8e6',
-            'BK': '#3d3dcc',
+            'DR': '#cc5f29',
+            'AC': '#cc5f29',
+            'AD': '#aee74d',
+            'SC': '#8b9140',
+            'EV': '#40918e',
+            'SH': '#ffa5e8',
+            'BK': '#ffa5e8',
             'UN': '#C0C0C0',
         }
         return prefix[self.card_type]
@@ -97,11 +103,16 @@ class Card(StoryModel):
     @property
     def to_json(self):
         """ Returns JSON of object """
+        from datetime import datetime
         jst = super().to_json()
         job = json.loads(jst)
         job['tags'] = self.get_tags
         job['card_tag'] = self.card_tag
+        job['date_str'] = self.dt.strftime("%Y%m%d %H%M")
+        job['session_date_str'] = self.sdt.strftime("%Y%m%d %H%M")
         job['action_model'] = self.action_model
+        job['experience'] = self.experience
+        job['epic_name'] = self.epic.name
         return job
 
     @property
@@ -116,7 +127,7 @@ class Card(StoryModel):
             'AC': 'ACT',
             'SH': 'SCH',
             'BK': 'BKL',
-            'AD': 'INT',
+            'AD': 'SES',
             'EV': 'EVE',
             'SC': 'SCE',
             'UN': '',
@@ -133,14 +144,21 @@ class Card(StoryModel):
         return mark_safe("<ul>" + " ".join(lst) + '</ul>')
 
     def fix(self):
+        # Default Epic to current
         if not self.epic:
             from collector.utils.basic import get_current_config
             self.epic = get_current_config().epic
+        # Handle full id
         if self.parent:
             self.full_id = f"{self.parent.full_id}:{self.card_type_prefix}.{int(self.chapter):03}"
         else:
             if self.card_type == 'EP':
                 self.full_id = f"{self.card_type_prefix}.{int(self.chapter):03}"
+        # display Tabs
+        self.sublevels = ""
+        print(self.full_id.count(':'))
+        for x in range(self.full_id.count(':')):
+            self.sublevels += str(x)
         adventure = None
         # if self.saved:
         #     cardlinks = self.cardin.all()
@@ -149,15 +167,26 @@ class Card(StoryModel):
         #         if link.label == 'CH':
         #             self.full_id = f'{link.cardout.full_id}:{self.card_type_prefix}{self.chapter:03}'
         #             adventure = link.cardout
-        # if adventure:
-        #     from datetime import timedelta
-        #     if self.card_type in ["EV", "SC", "AD", "DR", "SH"]:
-        #         self.dt = adventure.dt + timedelta(days=self.date_offset)
+        # Date
+        from datetime import timedelta
+        if self.parent:
+            if self.card_type in ['DR', 'AC', 'SH', 'EV', 'BK', 'SC']:
+                self.dt = self.parent.dt + timedelta(days=self.date_offset)
         if self.card_type in ['EP', 'DR', 'AC', 'SH', 'EV', 'BK']:
             self.battle_scene = False
             self.action_scene = False
             self.downtime_scene = False
             self.chase_scene = False
+
+    def post_fix(self):
+        if self.card_type in ['AD']:
+            chapter = 1;
+            children = self.children.all().values('id')
+            sorted_children = Card.objects.filter(id__in=children).order_by('date_offset')
+            for c in sorted_children:
+                c.chapter = chapter
+                c.save()
+                chapter += 1
 
 
 CARDS_RELATIONSHIPS = (
@@ -181,6 +210,52 @@ class CardLink(models.Model):
     @property
     def short(self):
         return f"{self.get_label_display()} --> {self.cardout.full_id}"
+
+
+class Challenge(models.Model):
+    class Meta:
+        ordering = ['line', 'completion']
+
+    line = models.CharField(default='', max_length=256, blank=True)
+    completion = models.PositiveIntegerField(default=1, blank=True)
+    global_achievement = models.IntegerField(default=0, blank=True)
+    plot_card = models.ForeignKey(Card, on_delete=models.CASCADE, related_name='challenges',null=True)
+    code = models.CharField(default='', max_length=36, blank=True)
+
+    def __str__(self):
+        return f"CHALLENGE:{self.line} [{self.completion} : {self.plot_card}]"
+
+    @property
+    def is_dormant(self):
+        return self.global_achievement < 0
+
+    def fix(self):
+        if self.code == '':
+            import uuid
+            self.code = uuid.uuid4()
+
+
+class ChallengeAdmin(admin.ModelAdmin):
+    ordering = ['global_achievement']
+    list_display = ['line', 'code', 'completion', 'global_achievement', 'plot_card']
+
+
+class Achievement(models.Model):
+    class Meta:
+        ordering = ['line', 'completion']
+
+    line = models.CharField(default='', max_length=256, blank=True)
+    completion = models.PositiveIntegerField(default=1, blank=True)
+    completed = models.BooleanField(default=False, blank=True)
+    challenge = models.ForeignKey(Challenge, on_delete=models.CASCADE, null=True)
+
+    def __str__(self):
+        return f"ACHIEVEMENT:{self.line} [{self.completion} : {self.challenge}]"
+
+
+class AchievementAdmin(admin.ModelAdmin):
+    ordering = ['completed', 'completion']
+    list_display = ['line', 'completion', 'completed', 'challenge']
 
 
 class CardLinkInline(admin.TabularInline):

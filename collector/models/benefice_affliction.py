@@ -27,12 +27,12 @@ class BeneficeAfflictionRef(UUIDClass):
         ('oc', 'Occult'),
         ('ta', 'Talent'),
         ('ot', 'Other')))
-    description = models.TextField(max_length=256, default='',blank=True)
+    description = models.TextField(max_length=256, default='', blank=True)
     source = models.CharField(max_length=32, default='FS2CRB')
-    emphasis = models.CharField(max_length=64, default='',blank=True)
+    emphasis = models.CharField(max_length=64, default='', blank=True)
     ranking = models.BooleanField(default=False)
     cash_value = models.BooleanField(default=False)
-    watermark = models.CharField(max_length=64, default='',blank=True)
+    watermark = models.CharField(max_length=64, default='', blank=True)
 
     def __str__(self):
         return '%s %s(%d)' % (self.reference, self.emphasis, self.value)
@@ -54,16 +54,17 @@ class BeneficeAffliction(models.Model):
     character = models.ForeignKey(Character, on_delete=models.CASCADE)
     benefice_affliction_ref = models.ForeignKey(BeneficeAfflictionRef, on_delete=models.CASCADE)
     # value = models.IntegerField(default=0)
-    description = models.TextField(max_length=256, default='',blank=True)
+    description = models.TextField(max_length=256, default='', blank=True)
 
     def __str__(self):
         return '%s=%s' % (self.character.full_name, self.benefice_affliction_ref.reference)
 
     def to_json(self):
-        from collector.utils.basic import json_default
-        import json
-        jstr = json.loads(json.dumps(self, default=json_default, sort_keys=True, indent=4))
-        jstr['benefice_affliction_ref'] = self.benefice_affliction_ref.to_json()
+        jstr = ""
+        # from collector.utils.basic import json_default_simple
+        # import json
+        # jstr = json.loads(json.dumps(self, default=json_default_simple, sort_keys=True, indent=4))
+        # jstr['benefice_affliction_ref'] = self.benefice_affliction_ref.to_json()
         return jstr
 
 
@@ -91,6 +92,7 @@ def make_riches(modeladmin, request, queryset):
     queryset.update(category="ri")
     short_description = "Make riches"
 
+
 def refix(modeladmin, request, queryset):
     for benefixe_affliction_ref in queryset:
         benefixe_affliction_ref.save()
@@ -99,10 +101,11 @@ def refix(modeladmin, request, queryset):
 
 class BeneficeAfflictionRefAdmin(admin.ModelAdmin):
     ordering = ('category', 'reference', 'watermark', '-value', 'ranking')
-    list_display = ('reference', 'uuid', 'emphasis', 'value', 'watermark', 'category','ranking', 'cash_value', 'description', 'source')
+    list_display = (
+    'reference', 'uuid', 'emphasis', 'value', 'watermark', 'category', 'ranking', 'cash_value', 'description', 'source')
     search_fields = ('reference', 'description', 'emphasis', 'watermark')
     list_filter = ('ranking', 'source', 'watermark', 'category', 'emphasis')
-    actions = [refix,make_occult, make_combat, make_talent, make_riches, make_possession]
+    actions = [refix, make_occult, make_combat, make_talent, make_riches, make_possession]
 
 
 class BeneficeAfflictionModificator(models.Model):

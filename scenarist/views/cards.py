@@ -90,8 +90,10 @@ def add_card(request):
     if is_ajax(request):
         if request.method == 'POST':
             id_ = request.POST.get('id')
-            id = id_.split('_')[1]
+            id = id_.split('_')[2]
             item = Card()
+            item.parent = Card.objects.get(pk=id)
+            item.card_type = "SH"
             item.name = str(timezone.now())
             item.save()
     return HttpResponse(status=204)

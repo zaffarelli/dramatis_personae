@@ -1,10 +1,13 @@
+{% load static %}
 <table class='expanded'>
+
+{#    {{ c.skills_options }}#}
 	<tr>
 		<th colspan=1><span id='skill_add' class='edit_icon fa fa-arrow-alt-circle-left'></span></th>
 		<th colspan=2>Add Skill at 1</th>
 		<td colspan=3>
 			<select id='skill_select'>
-			{% for s in c.skills_options %}
+			{% for s in  c.skills_options %}
 				<option value='{{s.id}}' style='width:15ex;'>{% if s.grouping %}[{{ s.grouping }}] {% endif %}{{s.reference}}</option>
 			{% endfor %}
 			</select>

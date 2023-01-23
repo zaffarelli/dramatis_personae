@@ -163,10 +163,10 @@ class Scenarist{
         $('.add_'+x).off().on('click',function(event){
             event.preventDefault();
             event.stopPropagation();
-            var id = $(this).parent('p').prop('className');
+            let id = $(this).attr("id");
             console.log(id);
             //var form = $(this).closest('form');
-            var urlupdate = x+'s/add/';
+            let urlupdate = x+'s/add/';
             $.ajax({
                 url: urlupdate,
                 method: 'POST',
@@ -181,7 +181,7 @@ class Scenarist{
                     console.log(id);
                     //$('#'+id).html(answer);
                     me.co.rebootLinks();
-                    //$('button#'+id+'.view_'+x).click();
+                    $('#cards_list').click();
                 },
                 error: function(answer) {
                     console.log('Error... ');

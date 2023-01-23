@@ -3,22 +3,27 @@ class SessionSheets extends Sheet {
         super(data, parent, collector)
         this.disposition = "paysage"
         this.init();
+        console.log(data.adventure)
         this.adventure_data = [
-            {'label': 'Title', 'text': 'The Tiger of Istakhr'},
+            {'label': '', 'text': data.adventure.epic_name},
             {'label': '', 'text': ''},
-            {'label': 'Session Part', 'text': '#7'},
-            {'label': 'Memorandum', 'text': 'The Grand Finale'},
-            {'label': 'Ingame date', 'text': '5022-01-28'},
-            {'label': 'Session Date', 'text': '2022-05-20'},
-            {'label': 'Gamemaster', 'text': 'Zaffarelli'},
+            {'label': 'Title', 'text': data.adventure.name.toUpperCase()},
             {'label': '', 'text': ''},
-            {'label': 'Experience', 'text': '5+21 per PC'}
+            {'label': 'Session Part', 'text': data.adventure.full_id},
+            {'label': 'Memorandum', 'text': data.adventure.abstract},
+            {'label': 'Ingame date', 'text': data.adventure.date_str},
+            {'label': '', 'text': ''},
+            {'label': 'Session Date', 'text': data.adventure.session_date_str},
+            {'label': 'Gamemaster', 'text': data.adventure.gamemaster},
+            {'label': '', 'text': ''},
+            {'label': 'Max XP Award', 'text': data.adventure.experience}
         ]
     }
 
     init() {
         super.init();
         let me = this;
+        me.figure_width = 5;
         me.setButtonsOrigin(36, 2)
     }
 
@@ -43,7 +48,7 @@ class SessionSheets extends Sheet {
         me.drawLine(0.5, me.xunits - 0.5, me.yunits - 1, me.yunits - 1, me.draw_fill, me.draw_fill, 6, me.strokedebris);
 
 
-        me.decorationText(1.5, 0.8, 0, 'start', me.base_font, me.medium_font_size, me.draw_fill, me.draw_stroke, 0.5, "Players Session Sheet - FuZion Interlock Custom System v7.5", me.back);
+        me.decorationText(1.5, 0.8, 0, 'start', me.base_font, me.medium_font_size, me.draw_fill, me.draw_stroke, 0.5, "Players Session Sheet - FuZion Interlock Custom System v8.0", me.back);
         me.decorationText(me.xunits - 1.2, me.yunits - 0.2, -16, 'end', me.base_font, me.small_font_size, me.draw_fill, me.draw_stroke, 0.5, "doc:session_sheets | v" + me.version + " | 2022 | Zaffarelli | generated with DP", me.back);
 
 
@@ -119,13 +124,13 @@ class SessionSheets extends Sheet {
             .attr('class', 'players')
             .append('rect')
             .attr('x', function (d) {
-                return d['idx'] * me.stepx * 5 + ox * me.stepx;
+                return d['idx'] * me.stepx * me.figure_width + ox * me.stepx;
             })
             .attr("y", function (d) {
                 return me.stepy * (oy);
             })
             .attr('width', function (d) {
-                return me.stepx * 5
+                return me.stepx * me.figure_width
             })
             .attr('height', function (d) {
                 return me.stepy * 21;
@@ -137,7 +142,7 @@ class SessionSheets extends Sheet {
         me.daddy = me.player;
 
         let xfunc = function (x) {
-            return x * me.stepx * 5 + (ox + 0.25) * me.stepx;
+            return x * me.stepx * me.figure_width + (ox + 0.25) * me.stepx;
         }
         me.sheetEntry(xfunc, 0.5, ox, oy, "Name", "full_name", me.big_font_size,)
         me.sheetEntry(xfunc, 1.0, ox, oy, "Player", "player")
@@ -167,28 +172,39 @@ class SessionSheets extends Sheet {
         me.sheetEntryLeft(xfunc, 8.0, ox, oy, "AGI", "PA_AGI")
         me.sheetEntryRight(xfunc, 8.0, ox, oy, "AWA", "PA_AWA")
 
-        me.sheetEntry(xfunc, 9.0, ox, oy, "Dodge", "skills_list", 0, "skill", "Dodge")
-        me.sheetEntry(xfunc, 9.5, ox, oy, "Empathy", "skills_list", 0, "skill", "Empathy")
-        me.sheetEntry(xfunc, 10.0, ox, oy, "Etiquette", "skills_list", 0, "skill", "Etiquette")
-        me.sheetEntry(xfunc, 10.5, ox, oy, "Focus", "skills_list", 0, "skill", "Focus")
-        me.sheetEntry(xfunc, 11.0, ox, oy, "Observe", "skills_list", 0, "skill", "Observe")
-        me.sheetEntry(xfunc, 11.5, ox, oy, "Knavery", "skills_list", 0, "skill", "Knavery")
-        me.sheetEntry(xfunc, 12.0, ox, oy, "Stoic Body", "skills_list", 0, "skill", "Stoic Body")
-        me.sheetEntry(xfunc, 12.5, ox, oy, "Stoic Mind", "skills_list", 0, "skill", "Stoic Mind")
+        let any = 9.0;
+        me.sheetEntry(xfunc, any, ox, oy, "Academia", "skills_list", 0, "skill", "Academia"); any += 0.5;
+        me.sheetEntry(xfunc, any, ox, oy, "Dodge", "skills_list", 0, "skill", "Dodge"); any += 0.5;
+        me.sheetEntry(xfunc, any, ox, oy, "Empathy", "skills_list", 0, "skill", "Empathy"); any += 0.5;
+        me.sheetEntry(xfunc, any, ox, oy, "Etiquette", "skills_list", 0, "skill", "Etiquette"); any += 0.5;
+        me.sheetEntry(xfunc, any, ox, oy, "Focus", "skills_list", 0, "skill", "Focus"); any += 0.5;
+        me.sheetEntry(xfunc, any, ox, oy, "Observe", "skills_list", 0, "skill", "Observe"); any += 0.5;
+        me.sheetEntry(xfunc, any, ox, oy, "Knavery", "skills_list", 0, "skill", "Knavery"); any += 0.5;
+        me.sheetEntry(xfunc, any, ox, oy, "Seduction", "skills_list", 0, "skill", "Seduction"); any += 0.5;
+        me.sheetEntry(xfunc, any, ox, oy, "Streetwise", "skills_list", 0, "skill", "Streetwise"); any += 0.5;
+        me.sheetEntry(xfunc, any, ox, oy, "Stoic Body", "skills_list", 0, "skill", "Stoic Body"); any += 0.5;
+        me.sheetEntry(xfunc, any, ox, oy, "Stoic Mind", "skills_list", 0, "skill", "Stoic Mind"); any += 0.5;
+        me.sheetEntry(xfunc, any, ox, oy, "Warfare", "skills_list", 0, "skill", "Warfare"); any += 0.5;
 
-        me.sheetEntry(xfunc, 13.5, ox, oy, "Azurites", "azurites")
-        me.sheetEntry(xfunc, 14.0, ox, oy, "Diamonds", "diamonds")
-        me.sheetEntry(xfunc, 14.5, ox, oy, "Rubies", "rubies")
+
+        me.drawLine(ox, me.figure_width, oy + any, oy + any, me.draw_fill, me.draw_fill, 1, me.strokedebris); any += 0.5;
 
 
-        me.daddy = me.lines
-        me.drawLine(ox, me.xunits - 2, oy + 1.5, oy + 1.5, me.draw_fill, me.draw_fill, 1, me.strokedebris);
-        me.drawLine(ox, me.xunits - 2, oy + 4.0, oy + 4.0, me.draw_fill, me.draw_fill, 1, me.strokedebris);
-        me.drawLine(ox, me.xunits - 2, oy + 5.5, oy + 5.5, me.draw_fill, me.draw_fill, 1, me.strokedebris);
-        me.drawLine(ox, me.xunits - 2, oy + 7.0, oy + 7.0, me.draw_fill, me.draw_fill, 1, me.strokedebris);
-        me.drawLine(ox, me.xunits - 2, oy + 8.5, oy + 8.5, me.draw_fill, me.draw_fill, 1, me.strokedebris);
-        me.drawLine(ox, me.xunits - 2, oy + 13, oy + 13, me.draw_fill, me.draw_fill, 1, me.strokedebris);
-        me.drawLine(ox, me.xunits - 2, oy + 15, oy + 15, me.draw_fill, me.draw_fill, 1, me.strokedebris);
+        me.sheetEntry(xfunc, any, ox, oy, "Azurites", "azurites"); any += 0.5;
+        me.sheetEntry(xfunc, any, ox, oy, "Diamonds", "diamonds"); any += 0.5;
+        me.sheetEntry(xfunc, any, ox, oy, "Rubies", "rubies"); any += 0.5;
+
+
+        me.drawLine(ox, ox+ me.figure_width, oy + any, oy + any, me.draw_fill, me.draw_fill, 1, me.strokedebris); any += 0.5;
+
+
+        me.drawLine(ox, ox+ me.figure_width, oy + 1.5, oy + 1.5, me.draw_fill, me.draw_fill, 1, me.strokedebris);any += 0.5;
+        me.drawLine(ox, ox+ me.figure_width, oy + 4.0, oy + 4.0, me.draw_fill, me.draw_fill, 1, me.strokedebris);any += 0.5;any += 0.5;
+        me.drawLine(ox, ox+ me.figure_width, oy + 5.5, oy + 5.5, me.draw_fill, me.draw_fill, 1, me.strokedebris);any += 0.5;
+        me.drawLine(ox, ox+ me.figure_width, oy + 7.0, oy + 7.0, me.draw_fill, me.draw_fill, 1, me.strokedebris);any += 0.5;
+        me.drawLine(ox, ox+ me.figure_width, oy + 8.5, oy + 8.5, me.draw_fill, me.draw_fill, 1, me.strokedebris);any += 0.5;
+
+
     }
 
     baseSheetEntry(xfunc, y, ox = 0, oy = 0, proplabel, prop = '', font_size = 0, direct_prop = '', direct_value = '', offsetx = 0, offsetx2 = 0) {

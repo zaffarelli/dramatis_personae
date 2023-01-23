@@ -286,15 +286,19 @@ def prettyhistory(value):
 
 @register.filter(name='as_height')
 def as_height(value):
+    res = value
     """ Display height in meters """
-    res = "%2.2f m" % (value / 100)
+    if isinstance(value,int):
+        res = "%2.2f m" % (value / 100)
     return res
 
 
 @register.filter(name='as_weight')
 def as_weight(value):
+    res = value
     """ Display weight in kilograms """
-    res = "%3d kg" % (value)
+    if isinstance(value, int):
+        res = "%3d kg" % (value)
     return res
 
 

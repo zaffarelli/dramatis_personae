@@ -22,7 +22,9 @@ class Zapp {
             }
             if (id == 'close') {
                 /* just close the dialog */
+                $("#board_b").html("");
                 $("#board").css("display", "none");
+                $('#'+action_tag+'s_list').click();
             } else {
                 if (id == 'update') {
                     let form = '#' + action_tag + '_form';
@@ -47,7 +49,7 @@ class Zapp {
                         error: function (answer) {
                             console.log('Error... ');
                             console.log(answer);
-                            $('.b').html(answer.responseText);
+                            $('#board_b').html(answer.responseText);
                             me.co.rebootLinks();
                         }
                     });
@@ -55,10 +57,17 @@ class Zapp {
                     $.ajax({
                         url: action_tag + 's/' + option + '/view/',
                         success: function (answer) {
-                            $('#board').html('<div class="a"></div><div class="b" id="card_form_box"></div><div class="c"></div>');
-                            $('#card_form_box').html(answer);
+                            $('#board').html(answer);
+                            console.log(answer);
+                            // if (answer.mobile_form) {
+                                // console.log(answer.mobile_form);
+                                // $('#customizer').html(answer.mobile_form);
                             $("#board").css('display', 'flex');
                             me.co.rebootLinks();
+                            if (action_tag=="character"){
+                                console.log("AC reset: I'm doing it!");
+                                me.co.ac.reset(option, "sheet_" + option, "customizer");
+                            }
 
                         },
                         error: function (answer) {
@@ -74,15 +83,14 @@ class Zapp {
                         url: urlupdate,
                         success: function (answer) {
                             console.log('Success... ');
-                            $('#board').html('<div class="a"></div><div class="b" id="card_form_box"></div><div class="c"></div>');
-                            $('#card_form_box').html(answer);
+                            $('#board').html(answer);
                             $("#board").css('display', 'flex');
                             me.co.rebootLinks();
                         },
                         error: function (answer) {
                             console.log('Error... ');
                             console.log(answer);
-                            $('.b').html(answer);
+                            $('#board').html(answer);
                             me.co.rebootLinks();
                         }
                     });
@@ -91,10 +99,28 @@ class Zapp {
         });
     }
 
+    registerTabs() {
+        $('.diagtabs').off().on('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            let tabname = "#tab_1";
+            $('.tabcontent').addClass('hiddentab');
+            if ($(this).attr('id').split('_').length > 0) {
+                tabname = "#tab_" + $(this).attr('id').split('_')[1];
+                console.log(tabname);
+            }
+            $(".diagtabs").addClass('off');
+            $(this).removeClass('off');
+            $(tabname).removeClass('hiddentab');
+        });
+
+    }
+
     doConnect(co) {
         let me = this
         me.co = co;
         me.registerDialogs();
+        me.registerTabs();
 
     }
 

@@ -1,22 +1,33 @@
 {% load static %}
+<div id="board_a">
 
-<div class="dialog">
-    <div class="dialog_header">
-        {% block dialog_header %}
-        {% endblock dialog_header %}
-    </div>
-    <div class="dialog_body">
-        {% block dialog_body %}
-        {% endblock dialog_body %}
-    </div>
-    <div class="dialog_footer">
-        <button class="dialog_action"
-                action="{{ object.action_model }}"
-                state="view"
-                id="close">
+</div>
+<div id="board_b">
+    <div class="dialog">
+        <div class="dialog_header">
+            {% block dialog_header %}
+            {% endblock dialog_header %}
+        </div>
+        <div class="dialog_body">
+            {% block dialog_body %}
+            {% endblock dialog_body %}
+        </div>
+        <div class="dialog_footer">
+            <button class="dialog_action"
+                    action="{{ object.action_model }}"
+                    state="view"
+                    id="close">
                 <i class="fa fa-times-circle"></i> Close
-        </button>
-        {% block dialog_footer %}
-        {% endblock dialog_footer %}
+            </button>
+            {% block dialog_footer %}
+            {% endblock dialog_footer %}
+        </div>
     </div>
+</div>
+
+<div id="board_c">
+    <div class="buffer top"></div>
+    {% block mobile_form %}
+    {% endblock mobile_form %}
+    <div class="buffer bottom"></div>
 </div>

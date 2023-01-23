@@ -8,140 +8,188 @@
 
 
 {% block dialog_body %}
-    <form id="card_form">
-        {% csrf_token %}
-        {{ form.non_field_errors }}
-        {{ form.management_form }}
-        <input id='id_id' name='id' type='hidden' value='{{ object.id }}'>
-        <ul>
-            <li class="o1">
-                {{ form.name.errors }}
-                <label for="name">Name</label>
-                {{ form.name }}
-            </li>
-            <li class="o5">
-                {{ form.epic.errors }}
-                <label for="epic">Epic</label>
-                {{ form.epic }}
-            </li>
-            <li class="o1">
-                {{ form.chapter.errors }}
-                <label for="chapter">Chapter</label>
-                {{ form.chapter }}
-            </li>
-            <li class="o1">
-                {{ form.date_offset.errors }}
-                <label for="date_offset">Days Offset</label>
-                {{ form.date_offset }}
-            </li>
-            <li class="o1">
-                {{ form.dt.errors }}
-                <label for="dt">DT</label>
-                {{ form.dt }}
-            </li>
-            <li class="o5">
-                {{ form.gamemaster.errors }}
-                <label for="gamemaster">Gamemaster</label>
-                {{ form.gamemaster }}
-            </li>
-            <li  class="o1">
-                {{ form.card_type.errors }}
-                <label for="card_type">Card Type</label>
-                {{ form.card_type }}
-            </li>
-            <li>
-                {{ form.battle_scene.errors }}
-                <label for="battle_scene">Battle</label>
-                {{ form.battle_scene }}
-            </li>
-            <li>
-                {{ form.chase_scene.errors }}
-                <label for="chase_scene">Chase</label>
-                {{ form.chase_scene }}
-            </li>
-            <li>
-                {{ form.action_scene.errors }}
-                <label for="action_scene">Action</label>
-                {{ form.action_scene }}
-            </li>
-            <li>
-                {{ form.technical_scene.errors }}
-                <label for="technical_scene">Technical</label>
-                {{ form.technical_scene }}
-            </li>
-            <li>
-                {{ form.spiritual_scene.errors }}
-                <label for="spiritual_scene">Spiritual</label>
-                {{ form.spiritual_scene }}
-            </li>
-            <li>
-                {{ form.political_scene.errors }}
-                <label for="political_scene">Political</label>
-                {{ form.political_scene }}
-            </li>
-            <li>
-                {{ form.downtime_scene.errors }}
-                <label for="downtime_scene">Downtime</label>
-                {{ form.downtime_scene }}
-            </li>
-            <li class="o2 ta">
-                {{ form.description.errors }}
-                <label for="description">Description</label>
-                {{ form.description }}
-            </li>
-            <li class="o2 ta">
-                {{ form.resolution.errors }}
-                <label for="resolution">Resolution</label>
-                {{ form.resolution }}
-            </li>
-            <li class="o4 ta">
-                {{ form.rewards.errors }}
-                <label for="rewards">Rewards</label>
-                {{ form.rewards }}
-            </li>
-            <li class="o5">
-                {{ form.archived.errors }}
-                <label for="archived">Archived</label>
-                {{ form.archived }}
-            </li>
-            <li class="o5">
-                {{ form.to_PDF.errors }}
-                <label for="to_pdf">To PDF</label>
-                {{ form.to_PDF }}
-            </li>
-            <li class="o5">
-                {{ form.temporary.errors }}
-                <label for="temporary">Temporary</label>
-                {{ form.temporary }}
-            </li>
-            <li class="o5">
-                {{ form.visible.errors }}
-                <label for="visible">Visible</label>
-                {{ form.visible }}
-            </li>
-            <li class="o1">
-                {{ form.parent.errors }}
-                <label for="parent">Parent</label>
-                {{ form.parent }}
-            </li>
-                 <li class="o2">
-                {{ form.abstract.errors }}
-                <label for="abstract">Abstract</label>
-                {{ form.abstract }}
-            </li>
+    <div class='tabbed'>
+        <form id="card_form">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+            {{ form.management_form }}
+            <input id='id_id' name='id' type='hidden' value='{{ object.id }}'>
+            <div class='tabs'>
+                <button class='diagtabs' id='button_1'> Main</button>
+                <button class='diagtabs' id='button_2'> Basics</button>
+                <button class='diagtabs' id='button_3'> Tags</button>
+                <button class='diagtabs' id='button_4'> Links</button>
+            </div>
 
-            <li class="o5">
+
+            <ul class="tabcontent" id="tab_1">
+                <li class="o1">
+                    {{ form.name.errors }}
+                    <label for="name">Name</label>
+                    {{ form.name }}
+                </li>
+                <li class="o1">
+                    {{ form.abstract.errors }}
+                    <label for="abstract">Abstract</label>
+                    {{ form.abstract }}
+                </li>
+                <li class="o2 ta">
+                    {{ form.description.errors }}
+                    <label for="description">Description</label>
+                    {{ form.description }}
+                </li>
+                <li class="o2 ta">
+                    {{ form.resolution.errors }}
+                    <label for="resolution">Resolution</label>
+                    {{ form.resolution }}
+                </li>
+                <li class="o4 ta">
+                    {{ form.rewards.errors }}
+                    <label for="rewards">Rewards</label>
+                    {{ form.rewards }}
+                </li>
+                <li>
+                    {{ form.is_ongoing.errors }}
+                    <label for="is_ongoing">On Going</label>
+                    {{ form.is_ongoing }}
+                </li>
+            </ul>
+
+            <ul class="tabcontent hiddentab" id="tab_2">
+
+                <li class="o5">
+                    {{ form.epic.errors }}
+                    <label for="epic">Epic</label>
+                    {{ form.epic }}
+                </li>
+                <li class="o1">
+                    {{ form.chapter.errors }}
+                    <label for="chapter">Chapter</label>
+                    {{ form.chapter }}
+                </li>
+                <li class="o1">
+                    {{ form.date_offset.errors }}
+                    <label for="date_offset">Days Offset</label>
+                    {{ form.date_offset }}
+                </li>
+                <li class="o1">
+                    {{ form.dt.errors }}
+                    <label for="dt">DT</label>
+                    {{ form.dt }}
+                </li>
+                <li class="o5">
+                    {{ form.gamemaster.errors }}
+                    <label for="gamemaster">Gamemaster</label>
+                    {{ form.gamemaster }}
+                </li>
+                <li class="o1">
+                    {{ form.card_type.errors }}
+                    <label for="card_type">Card Type</label>
+                    {{ form.card_type }}
+                </li>
+            </ul>
+
+
+            <ul class="tabcontent hiddentab" id="tab_3">
+                <li>
+                    {{ form.battle_scene.errors }}
+                    <label for="battle_scene">Battle</label>
+                    {{ form.battle_scene }}
+                </li>
+                <li>
+                    {{ form.chase_scene.errors }}
+                    <label for="chase_scene">Chase</label>
+                    {{ form.chase_scene }}
+                </li>
+                <li>
+                    {{ form.action_scene.errors }}
+                    <label for="action_scene">Action</label>
+                    {{ form.action_scene }}
+                </li>
+                <li>
+                    {{ form.technical_scene.errors }}
+                    <label for="technical_scene">Technical</label>
+                    {{ form.technical_scene }}
+                </li>
+                <li>
+                    {{ form.spiritual_scene.errors }}
+                    <label for="spiritual_scene">Spiritual</label>
+                    {{ form.spiritual_scene }}
+                </li>
+
+                <li>
+                    {{ form.roleplay_scene.errors }}
+                    <label for="roleplay_scene">Roleplay</label>
+                    {{ form.roleplay_scene }}
+                </li>
+
+                <li>
+                    {{ form.mystery_scene.errors }}
+                    <label for="mystery_scene">Mystery</label>
+                    {{ form.mystery_scene }}
+                </li>
+
+                <li>
+                    {{ form.business_scene.errors }}
+                    <label for="business_scene">Business</label>
+                    {{ form.business_scene }}
+                </li>
+
+                <li>
+                    {{ form.political_scene.errors }}
+                    <label for="political_scene">Political</label>
+                    {{ form.political_scene }}
+                </li>
+                <li>
+                    {{ form.downtime_scene.errors }}
+                    <label for="downtime_scene">Downtime</label>
+                    {{ form.downtime_scene }}
+                </li>
+
+                <li class="o5">
+                    {{ form.archived.errors }}
+                    <label for="archived">Archived</label>
+                    {{ form.archived }}
+                </li>
+                <li class="o5">
+                    {{ form.to_PDF.errors }}
+                    <label for="to_pdf">To PDF</label>
+                    {{ form.to_PDF }}
+                </li>
+                <li class="o5">
+                    {{ form.temporary.errors }}
+                    <label for="temporary">Temporary</label>
+                    {{ form.temporary }}
+                </li>
+                <li class="o5">
+                    {{ form.visible.errors }}
+                    <label for="visible">Visible</label>
+                    {{ form.visible }}
+                </li>
+                <li class="o1">
+                    {{ form.parent.errors }}
+                    <label for="parent">Parent</label>
+                    {{ form.parent }}
+                </li>
+            </ul>
+
+
+            <ul class="tabcontent hiddentab" id="tab_4">
+                <li class="o5">
 
                     {{ inlines.management_form }}
                     {% for formset in inlines %}
-                        <ul class="packed">
+
                         {{ formset.as_ul }}
-                        </ul>
+
                     {% endfor %}
 
-            </li>
-        </ul>
-    </form>
+                </li>
+            </ul>
+
+        </form>
+    </div>
+
 {% endblock dialog_body %}
 
 {% block dialog_footer %}

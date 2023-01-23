@@ -1,142 +1,200 @@
+{% extends "zapp/dialog.html" %}
 {% load fics_filters %}
-{% block details %}
-<div class="character_sheet" id='sheet_{{c.id}}'>
-    <div class="infoblock shrinkable">
-        <div class="data">
-            <h1>{{ c.full_name }}</h1>
-            {% if c.entrance %}<b>Entrance:</b> {{ c.entrance|safe }}<br/>{% endif %}
-            {% if c.epic %}{{ c.epic|safe }}<br/>{% endif %}
 
-            {% if c.narrative %}<b>Narrative:</b> {{ c.narrative|parse_avatars|safe }}{% endif %}
-            {% if c.nameless %}<CENTER><strong>NAMELESS NPCS</strong></CENTER>{% endif %}
+{% block dialog_header %}
+    <h1>Adjust {{ c.action_model }} [{{ c.full_name }}]</h1>
+{% endblock dialog_header %}
+{% block dialog_body %}
+    <div class="tabbed" id='sheet_{{ c.id }}'>
+        <div class='tabs'>
+            <div class='diagtabs' id='button_1'> Generic</div>
+            <div class='diagtabs off' id='button_2'> Attributes Skills</div>
+            <div class='diagtabs off' id='button_4'> Benefices Afflictions</div>
+            <div class='diagtabs off' id='button_5'> Health</div>
+            <div class='diagtabs off' id='button_6'> Gear</div>
+            <div class='diagtabs off' id='button_7'> Story</div>
+            <div class='diagtabs off' id='button_8'> Inspirations</div>
+            <div class='diagtabs off' id='button_3'> Debug</div>
         </div>
-        <div class="portrait">
-            <img src="{{c.rid|as_media_image}}">
+
+
+        <div class="tabcontent character_sheet" id="tab_1">
+            <div class="infoblock shrinkable">
+                <div class="data">
+                    <h1>{{ c.full_name }}</h1>
+
+                    {% if c.epic %}{{ c.epic|safe }}<br/>{% endif %}
+
+
+                    {% if c.nameless %}
+                        <CENTER><strong>NAMELESS NPCS</strong></CENTER>{% endif %}
+                </div>
+
+                {% if c.entrance %}
+                    <div class="text">
+                        <span class="title">Entrance</span><span class="content">{{ c.entrance|safe }}</span>
+                    </div>
+                {% endif %}
+
+
+                {% if c.narrative %}
+                    <div class="text">
+                    <span class="title">Narrative</span><span class="content">{{ c.narrative|parse_avatars|safe }}</span>
+                    </div>
+                {% endif %}
+
+                <div class="mark">
+                    {% include 'collector/ghostmark.html' with data=c.ghostmark_data %}
+                </div>
+                {#        <div class="tile_back" id="tile_back_{{c.id}}"><i class="action_icon golden fa fa-times-circle"></i></div>#}
+            </div>
+            <div class='coreblock shrinkable shrinked'>
+                <ul>
+                    {% if c.alliance_ref %}
+                        <li><b>Alliance</b><u>{{ c.alliance_ref.reference|safe }}</u></li>
+                    {% endif %}
+                    <li><b>Faction</b><u>{{ c.faction|safe }}</u></li>
+                    {% if not c.nameless %}
+                        <li><b>Birthdate</b><u>{{ c.birthdate }} ({{ c.age }} years old)</u></li>
+                    {% endif %}
+                    <li><b>Species</b><u>{{ c.specie.species }}</u></li>
+                    <li><b>Base/Current Fief</b><u>{{ c.fief }} / {{ c.current_fief }}</u></li>
+                    <li><b>Caste/Rank</b><u>{{ c.caste }} / {{ c.rank }}</u></li>
+                    <li><b>Height/Weight</b><u>{{ c.height|as_height }} / {{ c.weight|as_weight }}</u></li>
+                    {% if not c.nameless %}
+                        <li><b>Player</b><u>{{ c.player }}</u></li>
+                    {% endif %}
+                    <li><b>Keyword</b><u>{{ c.keyword }}</u></li>
+                    <li><b>ID</b><u>{{ c.id }}</u></li>
+                    {% if not c.nameless %}
+                        <li><b>Occult</b><u>{{ c.occult }}</u></li>
+                        <li><b>Path</b><u>{{ c.path }}</u></li>
+                        <li><b>Occult Fire power</b><u>{{ c.occult_fire_power }}</u></li>
+                    {% endif %}
+                    <li><b>Dead</b><u>{{ c.is_dead|prettybool|safe }}</u></li>
+                    <li><b>Historical Figure</b><u>{{ c.historical_figure|prettybool|safe }}</u></li>
+                    <li><b>Visible</b><u>{{ c.is_visible|prettybool|safe }}</u></li>
+                    <li><b>Lifepath</b><u>{{ c.use_history_creation|prettybool|safe }}</u></li>
+
+
+                </ul>
+                <ul>
+                    {% if c.tourofduty_set.count != 0 %}
+                        {% for tod in c.tourofduty_set.all|dictsort:"tour_of_duty_ref.category" %}
+                            <li><b>{{ tod.tour_of_duty_ref.category|as_lifepath }}
+                                ({{ tod.tour_of_duty_ref.value }})</b><u>
+                                <span title="{{ tod.tour_of_duty_ref.description }}">{{ tod.tour_of_duty_ref.reference }}</span>
+                                {% if tod.tour_of_duty_ref.WP %}[{{ tod.tour_of_duty_ref.WP }}]{% endif %}</u>
+                            </li>
+                        {% endfor %}
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                    {% endif %}
+                </ul>
+            </div>
         </div>
-        <div class="mark">
-            {% include 'collector/ghostmark.html' with data=c.ghostmark_data %}
-        </div>
-{#        <div class="tile_back" id="tile_back_{{c.id}}"><i class="action_icon golden fa fa-times-circle"></i></div>#}
-    </div>
-    <div class='coreblock shrinkable shrinked'>
-        <ul>
-            {% if c.alliance_ref %}
-            <li><b>Alliance</b><u>{{ c.alliance_ref.reference|safe }}</u></li>
-            {% endif %}
-            <li><b>Faction</b><u>{{ c.faction|safe }}</u></li>
-            {% if not c.nameless %}
-            <li><b>Birthdate</b><u>{{ c.birthdate }} ({{ c.age }} years old)</u></li>
-            {% endif %}
-            <li><b>Species</b><u>{{ c.specie.species }}</u></li>
-            <li><b>Base/Current Fief</b><u>{{ c.fief }} / {{ c.current_fief }}</u></li>
-            <li><b>Caste/Rank</b><u>{{ c.caste }} / {{ c.rank }}</u></li>
-            <li><b>Height/Weight</b><u>{{ c.height|as_height }} / {{ c.weight|as_weight }}</u></li>
-            {% if not c.nameless %}
-            <li><b>Player</b><u>{{ c.player }}</u></li>
-            {% endif %}
-            <li><b>Keyword</b><u>{{ c.keyword }}</u></li>
-            <li><b>ID</b><u>{{c.id}}</u></li>
-            {% if not c.nameless %}
-            <li><b>Occult</b><u>{{c.occult}}</u></li>
-            <li><b>Path</b><u>{{c.path}}</u></li>
-            <li><b>Occult Fire power</b><u>{{c.occult_fire_power}}</u></li>
-            {% endif %}
-            <li><b>Dead</b><u>{{c.is_dead|prettybool|safe}}</u></li>
-            <li><b>Historical Figure</b><u>{{c.historical_figure|prettybool|safe}}</u></li>
-            <li><b>Visible</b><u>{{c.is_visible|prettybool|safe}}</u></li>
-            <li><b>Lifepath</b><u>{{c.use_history_creation|prettybool|safe}}</u></li>
+        <div class="tabcontent hiddentab character_sheet" id="tab_2">
+            <h2>Attributes ({{ c.PA_TOTAL }}x3)</h2>
+            <div class='attributes shrinkable shrinked'>
+                {% include "collector/character/character_primaries.html" %}
+
+                <table id="OCC_LVL_{{ c.id }}" class='attrpick occult'>
+                    {% include "collector/character/character_pa.html" with c=c.info_lvl %}
+                </table>
+                <table id="OCC_DRK_{{ c.id }}" class='attrpick occult'>
+                    {% include "collector/character/character_pa.html" with c=c.info_drk %}
+                </table>
 
 
-
-        </ul>
-        <ul>
-        {% if c.tourofduty_set.count != 0 %}
-            {% for tod in c.tourofduty_set.all|dictsort:"tour_of_duty_ref.category" %}
-                <li><b>{{ tod.tour_of_duty_ref.category|as_lifepath }} ({{tod.tour_of_duty_ref.value}})</b><u>
-                <span title="{{tod.tour_of_duty_ref.description}}">{{tod.tour_of_duty_ref.reference}}</span>
-                {%if tod.tour_of_duty_ref.WP%}[{{tod.tour_of_duty_ref.WP}}]{%endif%}</u>
-                </li>
-            {% endfor %}
-            <li></li>
-            <li></li>
-            <li></li>
-        {% endif %}
-        </ul>
-    </div>
-
-    <h2>Attributes ({{c.PA_TOTAL}}x3)</h2>
-    <div class='attributes shrinkable shrinked'>
-        {% include "collector/character/character_primaries.html" %}
-
-            <table id="OCC_LVL_{{c.id}}" class='attrpick occult'>
-                {% include "collector/character/character_pa.html" with c=c.info_lvl %}
-            </table>
-            <table id="OCC_DRK_{{c.id}}" class='attrpick occult'>
-                {% include "collector/character/character_pa.html" with c=c.info_drk %}
-            </table>
+            </div>
+            <div class='attributes shrinkable shrinked'>
+                {% include "collector/character/character_secondaries.html" %}
+            </div>
 
 
-    </div>
-    <div class='attributes shrinkable shrinked'>
-        {% include "collector/character/character_secondaries.html" %}
-    </div>
-
-
-
-    <span id="skill_block_{{c.id}} shrinkable shrinked">
+            <span id="skill_block_{{ c.id }} shrinkable shrinked">
         {% include "collector/character/character_skills.html" %}
     </span>
-
-    <div class='options shrinkable shrinked'>
-        <span id="bc_block_{{c.id}}">
+        </div>
+        <div class="tabcontent hiddentab" id="tab_4">
+            <div class='options shrinkable shrinked'>
+        <span id="bc_block_{{ c.id }}">
         {% include "collector/character/character_bc.html" %}
         </span>
-        <span id="ba_block_{{c.id}}">
+                <span id="ba_block_{{ c.id }}">
         {% include "collector/character/character_ba.html" %}
         </span>
-        <span id="ritual_block_{{c.id}}">
+                <span id="ritual_block_{{ c.id }}">
         {% include "collector/character/character_ritual.html" %}
         </span>
-        <span id="shortcuts_block_{{c.id}}">
+            </div>
+            <div class="tabcontent hiddentab" id="tab_5">
+                <span id="shortcuts_block_{{ c.id }}">
         {% include "collector/character/character_shortcuts.html" %}
         </span>
-    </div>
-
-    <div class='gear'>
-        <span id="weapon_block_{{c.id}}">
+            </div>
+        </div>
+        <div class="tabcontent hiddentab" id="tab_6">
+            <div class='gear'>
+        <span id="weapon_block_{{ c.id }}">
         {% include "collector/character/character_weapon.html" %}
         </span>
-        <span id="armor_block_{{c.id}}">
+                <span id="armor_block_{{ c.id }}">
         {% include "collector/character/character_armor.html" %}
         </span>
-        <span id="shield_block_{{c.id}}">
+                <span id="shield_block_{{ c.id }}">
         {% include "collector/character/character_shield.html" %}
         </span>
+            </div>
+        </div>
+        <div class="tabcontent hiddentab" id="tab_7">
+            <div class='healthbar'>
+                {#% include "collector/character/character_healthbar.html" %#}
+            </div>
+
+            {% if c.player|is_not_blank %}
+                <hr/>
+                [{{ c.player }}]
+                Blokes:
+
+                <ul>
+                    {% for x in blokes.all %}
+                        <li/>{% include "collector/character_xs.html" with c=x.npc %}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            {% if c.stories_count %}
+                <hr/>
+                Stories Involvements:
+                {{ c.stories | parse_stories | safe }}
+            {% endif %}
+            <hr/>
+            <span class='golden custom_show' id='{{ c.rid }}'><a href='pdf/{{ c.rid }}/' target='avatar_pdf'
+                                                                 class="golden"><i
+                    class="fas fa-file-pdf"></i> {{ c.rid }}</a></span>
+            <div class="challenge" id="challenge_{{ c.id }}">{{ c.challenge|safe }}</div>
+        </div>
+        <div class="tabcontent hiddentab" id="tab_8">
+            <div class="portrait">
+                <img src="{{ c.rid|as_media_image }}" height="800px">
+            </div>
+        </div>
     </div>
+{% endblock dialog_body %}
+{% block dialog_footer %}
+    <button class="dialog_action" action="{{ object.action_model }}" option="{{ object.id }}" param="edit" id="edit"><i
+            class="fa fa-pause-circle"></i> Edit
+    </button>
+    <button class="dialog_action" action="{{ object.action_model }}" option="{{ object.id }}" param="recalc"
+            id="recalc"><i
+            class="fa fa-stop-circle"></i> Recalc
+    </button>
+{% endblock dialog_footer %}
 
-    <div class='healthbar'>
-        {#% include "collector/character/character_healthbar.html" %#}
-    </div>
 
-    {% if c.player|is_not_blank %}
-    <hr/>
-    [{{ c.player }}]
-    Blokes:
+{% block mobile_form %}
+    {{ mobile_form }}
+{% endblock mobile_form %}
 
-    <ul>
-        {% for x in blokes.all %}
-            <li/>{% include "collector/character_xs.html" with c=x.npc %}</li>
-        {% endfor %}
-    </ul>
-    {% endif %}
-
-    {% if c.stories_count %}
-    <hr/>
-    Stories Involvements:
-    {{c.stories | parse_stories | safe}}
-    {% endif%}
-    <hr/>
-    <span class='golden custom_show' id='{{c.rid}}' ><a href='pdf/{{c.rid}}/' target='avatar_pdf' class="golden"><i class="fas fa-file-pdf"></i> {{c.rid}}</a></span>
-    <div class="challenge" id="challenge_{{c.id}}">{{c.challenge|safe}}</div>
-</div>
-{% endblock details %}

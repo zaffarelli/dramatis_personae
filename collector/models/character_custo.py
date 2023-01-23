@@ -196,5 +196,10 @@ class CharacterCusto(models.Model):
                 skill_custo.character_custo = self
                 skill_custo.save()
 
-
+    def to_json(self):
+        jstr = {}
+        jstr['AP'] = self.AP
+        jstr['OP'] = self.OP
+        jstr['summary'] = self.summary
+        return jstr
 

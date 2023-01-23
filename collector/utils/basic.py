@@ -25,7 +25,7 @@ def render_to_pdf(template_src, context_dict={}):
     if not pdf.err:
         response = HttpResponse(result.getvalue(), content_type='application/pdf')
         filename = 'avatar_%s.pdf' % context_dict['filename']
-        content = "inline; filename='%s'"% filename
+        content = "inline; filename='%s'" % filename
         response['content-disposition'] = content
         return response
     return HttpResponse(pdf.err, content_type='text/plain')
@@ -34,7 +34,7 @@ def render_to_pdf(template_src, context_dict={}):
 def write_pdf(template_src, context_dict={}):
     template = get_template(template_src)
     html = template.render(context_dict)
-    uri = '%s.pdf'%(context_dict['filename'])
+    uri = '%s.pdf' % (context_dict['filename'])
     filename = os.path.join(settings.MEDIA_ROOT, 'pdf/results/avatars/' + uri)
     result = open(filename, 'wb')
     pdf = pisa.pisaDocument(BytesIO(html.encode('utf-8')), dest=result, encoding='utf-8')
@@ -83,9 +83,9 @@ def make_avatar_appendix(campaign):
         #     if arid[1].split('.')[0] in cast:
         if pdf.split('.')[0] in cast:
             i += 1
-            merger.append(open(media_avatars+pdf, 'rb'))
-    if i>0:
-        des = '%sappendix_%s.pdf'%(media_results, campaign.epic.shortcut)
+            merger.append(open(media_avatars + pdf, 'rb'))
+    if i > 0:
+        des = '%sappendix_%s.pdf' % (media_results, campaign.epic.shortcut)
         with open(des, 'wb') as fout:
             merger.write(fout)
     return res
@@ -102,7 +102,7 @@ def make_epic_corpus(campaign):
     template = get_template('collector/conf_pdf.html')
     context = {'epic': campaign.parse_details()}
     html = template.render(context)
-    uri = 'c_%s.pdf'%(campaign.epic.shortcut)
+    uri = 'c_%s.pdf' % (campaign.epic.shortcut)
     filename = os.path.join(settings.MEDIA_ROOT, 'pdf/results/' + uri)
     es_pdf = open(filename, 'wb')
     # import pdb; pdb.set_trace()
@@ -110,19 +110,19 @@ def make_epic_corpus(campaign):
     # print(pdf)
     es_pdf.close()
     merger.append(open(filename, 'rb'))
-    des = '%scorpus_%s.pdf'%(media_results,campaign.epic.shortcut)
+    des = '%scorpus_%s.pdf' % (media_results, campaign.epic.shortcut)
     with open(des, 'wb') as fout:
-      merger.write(fout)
+        merger.write(fout)
     return res
 
 
 def export_epic(request, campaign):
-    res = {'epic':campaign.epic.name}
+    res = {'epic': campaign.epic.name}
     comments = []
     comments += make_avatar_appendix(campaign)
     comments += make_epic_corpus(campaign)
     com = '<br/>'.join(comments)
-    res['comment'] = '<div class="classyview"><p>'+com+'</p></div>'
+    res['comment'] = '<div class="classyview"><p>' + com + '</p></div>'
     media_results = os.path.join(settings.MEDIA_ROOT, 'pdf/results/')
     merger = PdfFileMerger()
     merger.append(open('%scorpus_%s.pdf' % (media_results, campaign.epic.shortcut), 'rb'))
@@ -130,10 +130,10 @@ def export_epic(request, campaign):
     #     merger.append(open('%sappendix_%s.pdf'%(media_results,campaign.epic.shortcut), 'rb'))
     # except FileNotFoundError:
     #     messages.info(request, "No characters appendix found yet...")
-    des = '%s%s.pdf'%(media_results, campaign.epic.shortcut)
+    des = '%s%s.pdf' % (media_results, campaign.epic.shortcut)
     with open(des, 'wb') as fout:
         merger.write(fout)
-    messages.info(request, 'Epic [%s] exported to PDF: [%s]'%(campaign.epic.title, des))
+    messages.info(request, 'Epic [%s] exported to PDF: [%s]' % (campaign.epic.title, des))
     return res
 
 
@@ -171,11 +171,11 @@ def extract_rules():
     for caste in castes:
         caste_context = {}
         caste_context['name'] = caste
-        upbringing = TourOfDutyRef.objects.filter(category='10',caste=caste).order_by('-source')
+        upbringing = TourOfDutyRef.objects.filter(category='10', caste=caste).order_by('-source')
         caste_context['upbringing'] = upbringing
-        apprenticeship = TourOfDutyRef.objects.filter(category='20',caste=caste).order_by('-source')
+        apprenticeship = TourOfDutyRef.objects.filter(category='20', caste=caste).order_by('-source')
         caste_context['apprenticeship'] = apprenticeship
-        early_career = TourOfDutyRef.objects.filter(category='30',caste=caste).order_by('-source')
+        early_career = TourOfDutyRef.objects.filter(category='30', caste=caste).order_by('-source')
         caste_context['early_career'] = early_career
         castes_context.append(caste_context)
     context['castes'] = castes_context
@@ -218,15 +218,15 @@ def extract_equipment():
     if cat:
         context['gears'].append(current)
     # Weapons
-    weapons = WeaponRef.objects.filter(hidden=False).order_by('meta_type','cost')
+    weapons = WeaponRef.objects.filter(hidden=False).order_by('meta_type', 'cost')
     cat = ''
     context['weapons'] = []
-    current = { 'name':'', 'data':[] }
+    current = {'name': '', 'data': []}
     for w in weapons:
         if w.meta_type != cat:
             if cat:
                 context['weapons'].append(current)
-            current = { 'name':'', 'data':[] }
+            current = {'name': '', 'data': []}
             current['name'] = w.meta_type
             current['data'] = []
             cat = w.meta_type
@@ -234,15 +234,15 @@ def extract_equipment():
     if cat:
         context['weapons'].append(current)
     # Armors
-    armors = ArmorRef.objects.order_by('category','cost')
+    armors = ArmorRef.objects.order_by('category', 'cost')
     cat = ''
     context['armors'] = []
-    current = { 'name':'', 'data':[] }
+    current = {'name': '', 'data': []}
     for a in armors:
         if a.get_category_display() != cat:
             if cat:
                 context['armors'].append(current)
-            current = { 'name':'', 'data':[] }
+            current = {'name': '', 'data': []}
             current['name'] = a.get_category_display()
             current['data'] = []
             cat = a.get_category_display()
@@ -272,6 +272,10 @@ def json_default(value):
         return dict(hex=value.hex)
     else:
         return value.__dict__
+
+
+def json_default_simple(value):
+    return value.__dict__
 
 
 def slug_decode(slug):
@@ -321,7 +325,6 @@ def make_deck(all):
         es_pdf.close()
     else:
         print(pdf.err)
-
 
 
 def save_sheet():

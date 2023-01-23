@@ -192,9 +192,9 @@ def recalc_avatar(request, id=None):
         if campaign.is_fics:
             template = get_template('collector/character_detail.html')
             template_link = get_template('collector/character_link.html')
-        if campaign.is_coc7:
-            template = get_template('collector/investigator_detail.html')
-            template_link = get_template('collector/investigator_link.html')
+        # if campaign.is_coc7:
+        #     template = get_template('collector/investigator_detail.html')
+        #     template_link = get_template('collector/investigator_link.html')
         character = template.render({'c': item, 'no_skill_edit': False})
         link = template_link.render({'c': item}, request)
         mobile_form = get_template('collector/mobile_form.html')
@@ -335,8 +335,8 @@ def display_sheet(request, pk=None):
             pk = 22
         c = Character.objects.get(id=pk)
         scenario = campaign.epic.name.upper()
-        pre_title = campaign.epic.place + ' - ' + campaign.epic.date
-        post_title = "FuZion Interlock Custom System v7.5"
+        pre_title = ""#campaign.epic.place + ' - ' + campaign.epic.date
+        post_title = "FuZion Interlock Custom System v8.0"
         spe = c.get_specialities()
         shc = c.get_shortcuts()
         j = c.to_jsonFICS()
@@ -386,7 +386,7 @@ def display_sessionsheet(request, slug=None):
             for tm in team.teammate_set.all():
                 pks.append(tm.character_id)
 
-        # pks = [454, 460, 450, 447]
+
 
         players = Character.objects.filter(id__in=pks)
         players_list = []
@@ -401,11 +401,14 @@ def display_sessionsheet(request, slug=None):
             i += 1
             ch = json.dumps(k)
             players_list.append(ch)
-        scenario = campaign.epic.name.upper()
-        pre_title = campaign.epic.place + ' - ' + campaign.epic.date
+
+        from scenarist.models.cards import Card
+        adventure = Card.objects.filter(is_ongoing=True).first()
+        scenario = adventure.name.upper()
+        pre_title = adventure.place
         post_title = ""
         settings = {'version': 1.0, 'labels': {}, 'pre_title': pre_title, 'scenario': scenario,
-                    'post_title': post_title, 'fontset': FONTSET}  # , 'specialities': spe, 'shortcuts': shc}
+                    'post_title': post_title, 'fontset': FONTSET, 'adventure': adventure.to_json}  # , 'specialities': spe, 'shortcuts': shc}
         response = {'settings': json.dumps(settings, sort_keys=True, indent=4),
                     'data': json.dumps(players_list, indent=4, sort_keys=True)}
         return JsonResponse(response)

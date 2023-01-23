@@ -1,6 +1,6 @@
 {% load static %}
 {% load fics_filters %}
-
+<div class="character_row" id="character_row_{{ x.id }}">
     <div class="cell mini charsel" ref="{{c.id}}">{{ c.id|safe}}</div>
     <div class="cell mini figureshow" medimg="{{c.rid|as_media_image}}">{{ c.rid|media_check|safe}}</div>
     <div class="cell widest" title="{{ c.rid|safe }}">
@@ -25,9 +25,13 @@
 {#    <div class="cell mini last" title="Historical Figure">{{ c.historical_figure|prettyhistory|safe }}</div>#}
 {#    <div class="cell mini last" title="Nameless">{{ c.nameless|prettybool|safe }}</div>#}
     <div class="cell mini" id="link_{{c.id}}">
-        <span class="action_icon edit_character" id="edit_{{ c.id }}" title="Edit this character"><i class="fas fa-user-tag"></i></span>
+{#        <span class="action_icon edit_character" id="edit_{{ c.id }}" title="Edit this character"><i class="fas fa-user-tag"></i></span>#}
+
+        <span class="compact dialog_action" id="edit" action="{{ c.action_model }}" option="{{ c.id }}" mode="overlay" title="Edit this character"><i class="fas fa-user-tag"></i></span>
+
     </div>
     <div class="cell mini" id="link_{{c.id}}">
+        <span class="compact dialog_action" id="view" action="{{ c.action_model }}" option="{{ c.id }}" mode="overlay" title="View this character"><i class="fas fa-eye"></i></span>
         <span class="action_icon recalc_avatar" id="recalc_{{ c.id }}" title="Adjust this character"><i class="fas fa-cog"></i></span>&nbsp;
     </div>
     <div class="cell mini" id="grab_{{c.id}}">
@@ -38,4 +42,4 @@
         <span class="action_icon sheet" id="sheet_{{ c.id }}"><i class="fas fa-file"></i></span>&nbsp;
     </div>
 {#<div class="cell" title="{{ c.keyword }}"><tt>{{ c.rid|safe }} / {{ c.keyword|safe }}</tt></div>#}
-
+</div>

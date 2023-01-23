@@ -35,11 +35,11 @@ class Character(Combattant):
     alliance_ref = models.ForeignKey(AllianceRef, blank=True, null=True, on_delete=models.SET_NULL)
     specie = models.ForeignKey(Specie, default=31, blank=True, null=True, on_delete=models.SET_NULL)
     race = models.CharField(max_length=256, default='', blank=True)
-    native_fief = models.CharField(max_length=200, default='none')
+    native_fief = models.CharField(max_length=200, default='none', blank=True)
     fief = models.ForeignKey(System, blank=True, null=True, on_delete=models.SET_NULL, related_name='fief')
     current_fief = models.ForeignKey(System, blank=True, null=True, on_delete=models.SET_NULL,
                                      related_name='current_fief')
-    caste = models.CharField(max_length=100, default='Freefolk')
+    caste = models.CharField(max_length=100, default='Freefolk', blank=True)
     rank = models.CharField(max_length=100, default='', blank=True)
     build_log = models.TextField(default='', blank=True)
     PA_STR = models.PositiveIntegerField(default=1)
@@ -75,24 +75,24 @@ class Character(Combattant):
     mental = models.IntegerField(default=0, blank=True)
     combat = models.IntegerField(default=0, blank=True)
     tod_count = models.IntegerField(default=0, blank=True)
-    weapon_cost = models.IntegerField(default=0)
-    armor_cost = models.IntegerField(default=0)
-    shield_cost = models.IntegerField(default=0)
-    age_offset = models.IntegerField(default=0)
-    AP = models.IntegerField(default=0)
-    OP = models.IntegerField(default=0)
-    experience_balance = models.IntegerField(default=0)
-    xp_pool = models.IntegerField(default=0)
-    xp_spent = models.IntegerField(default=0)
-    xp_earned = models.IntegerField(default=0)
-    score = models.IntegerField(default=0)
+    weapon_cost = models.IntegerField(default=0, blank=True)
+    armor_cost = models.IntegerField(default=0, blank=True)
+    shield_cost = models.IntegerField(default=0, blank=True)
+    age_offset = models.IntegerField(default=0, blank=True)
+    AP = models.IntegerField(default=0, blank=True)
+    OP = models.IntegerField(default=0, blank=True)
+    experience_balance = models.IntegerField(default=0, blank=True)
+    xp_pool = models.IntegerField(default=0, blank=True)
+    xp_spent = models.IntegerField(default=0, blank=True)
+    xp_earned = models.IntegerField(default=0, blank=True)
+    score = models.IntegerField(default=0, blank=True)
     gm_shortcuts = models.TextField(default='', blank=True)
     gm_shortcuts_pdf = models.TextField(default='', blank=True)
-    OCC_LVL = models.PositiveIntegerField(default=0)
-    OCC_DRK = models.PositiveIntegerField(default=0)
+    OCC_LVL = models.PositiveIntegerField(default=0, blank=True)
+    OCC_DRK = models.PositiveIntegerField(default=0, blank=True)
     occult_fire_power = models.PositiveIntegerField(default=0, blank=True)
     occult = models.CharField(max_length=50, default='', blank=True)
-    challenge_value = models.IntegerField(default=0)
+    challenge_value = models.IntegerField(default=0, blank=True)
     cast_figure = models.CharField(max_length=256, default='', blank=True)
     path = models.CharField(max_length=256, default='', blank=True)
     stigma = models.CharField(max_length=256, default='', blank=True)
@@ -144,6 +144,11 @@ class Character(Combattant):
     armor_options_not = []
     shield_options = []
     shield_options_not = []
+
+    @property
+    def action_model(self):
+        str = self.__class__.__name__
+        return str.lower()
 
     @property
     def ghostmark_data(self):
@@ -303,6 +308,7 @@ class Character(Combattant):
     def rebuild_from_lifepath(self):
         """ Historical Creation """
         old_op = self.OP
+        print('rebuild_from_lifepath()')
         self.build_log = ''
         # from collector.models.character_custo import CharacterCusto
         # found_custo = CharacterCusto.objects.filter(character=self).first()
@@ -456,6 +462,7 @@ class Character(Combattant):
             logger.info(f'>>> No Overhead.')
 
     def prepare_display(self):
+        print("prepare_display()")
         self.refresh_skills_options()
         self.refresh_options("ba_options", "ba_options_not", self.charactercusto.beneficeafflictioncusto_set.all(),
                              "benefice_affliction_ref", "BeneficeAfflictionRef")
@@ -492,8 +499,10 @@ class Character(Combattant):
         self.reset_total()
 
     def fix(self, conf=None):
+        print("super.fix()")
         super().fix(conf)
         # self.audit = ""
+        print("fix()")
         from collector.models.profile import Profile
         profiles = Profile.objects.all()
         for p in profiles:
@@ -516,6 +525,7 @@ class Character(Combattant):
         if self.full_name == self.rid:
             self.audit_log("Name is a RID. Everything has to be done on this character.")
         # NPC fix
+        print("fix()")
         if self.use_history_creation:
             logger.info('rebuild from lifepath')
             self.rebuild_from_lifepath()
@@ -649,16 +659,17 @@ class Character(Combattant):
         all_items = eval(ref_class).objects.all()
         for item in all_items:
             if item in custo_ref_items:
-                o_n.append(item)
+                o_n.append(item.to_json())
                 # print(item)
             else:
-                o.append(item)
+                o.append(item.to_json())
         setattr(self, options, o)
         setattr(self, options_not, o_n)
 
     def refresh_skills_options(self):
         """ This one is special: it only reflects skills that are not in the character """
         from collector.models.skill import SkillRef
+        print("refresh_skills_options")
         self.skills_options = []
         self.skills_options_not = []
         ss = self.skill_set.all()
@@ -669,9 +680,9 @@ class Character(Combattant):
                                                                                         'grouping', 'reference')
         for s in all:
             if s in sr:
-                self.skills_options_not.append(s)
+                self.skills_options_not.append(s.to_json())
             else:
-                self.skills_options.append(s)
+                self.skills_options.append(s.to_json())
 
     def add_or_update_skill(self, askill, modifier=0, stack=False):
         from collector.models.skill import Skill
@@ -1116,12 +1127,15 @@ class Character(Combattant):
     def to_jsonFICS(self):
         from collector.models.skill import SkillRef
         import datetime
+        print("to_json_fics()")
         j = self.to_json()
+
+        self.fix()
         idx1 = 0
         idx2 = 0
         skills_list = []
         for skill in self.skill_set.order_by('skill_ref'):
-            if skill.skill_ref.deprecated == False:
+            if not skill.skill_ref.deprecated:
                 skills_list.append(
                     {'skill': skill.skill_ref.reference, 'value': skill.value, 'is_root': skill.skill_ref.is_root,
                      'is_speciality': skill.skill_ref.is_speciality, 'idx1': 0, 'idx2': 0})
@@ -1155,7 +1169,7 @@ class Character(Combattant):
             bcs.append(bc.blessing_curse_ref.to_json())
         bas = []
         for ba in self.beneficeaffliction_set.all():
-            bas.append(ba.to_json())
+            bas.append(ba.benefice_affliction_ref.to_json())
         rituals = []
         for ritual in self.ritual_set.all().order_by('ritual_ref__path', 'ritual_ref__level'):
             rituals.append(ritual.to_json())
@@ -1172,8 +1186,28 @@ class Character(Combattant):
         k["BC"] = bcs
         k["BA"] = bas
         k["shortcuts"] = self.calculate_shortcuts()
+
+        # print(self.skills_options)
+
         j = json.dumps(k)
         return j
+
+    def to_json_customizer(self):
+        j = self.to_json()
+        self.prepare_display()
+        k = json.loads(j)
+        k["skills_options"] = self.skills_options
+        k["ba_options"] = self.ba_options
+        k["bc_options"] = self.bc_options
+        k["ritual_options"] = self.ritual_options
+        k["shield_options"] = self.shield_options
+        k["armor_options"] = self.armor_options
+        k["weapon_options"] = self.weapon_options
+        k["AP_tod_pool"] = self.AP_tod_pool
+        k["OP_tod_pool"] = self.OP_tod_pool
+        k["charactercusto"] = self.charactercusto.to_json()
+
+        return k
 
     def to_jsonDECK(self):
         if self.incognito:

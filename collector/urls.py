@@ -4,7 +4,7 @@
  ═╩╝╩    ╚═╝└─┘┴─┘┴─┘└─┘└─┘ ┴ └─┘┴└─
 """
 from django.urls import re_path
-from collector.views.characters import CharacterUpdateView, customize_ba, customize_bc, \
+from collector.views.characters import CharacterUpdateView, CharacterDetailView, customize_ba, customize_bc, \
     customize_skill, customize_ba_del, customize_bc_del, skill_pick, attr_pick, customize_weapon, customize_weapon_del, \
     customize_armor, customize_armor_del, customize_shield, customize_shield_del, customize_ritual, customize_ritual_del
 
@@ -27,10 +27,12 @@ urlpatterns = [
 
     # re_path('^investigators/(?P<pk>\d+)/edit/$', InvestigatorUpdateView.as_view(), name='edit_investigator'),
     re_path('^ajax/edit/avatar/(?P<pk>\d+)/$', CharacterUpdateView.as_view(), name='edit_character'),
+    # re_path('^characters/(?P<pk>\d+)/update/$', CharacterUpdateView.as_view(), name='edit_character'),
     re_path('^ajax/sheet/avatar/(?P<pk>\d+)/$', display_sheet, name='display_sheet'),
     re_path('^ajax/sessionsheet/(?P<slug>\w+)/$', display_sessionsheet, name='display_sessionsheet'),
     re_path('^ajax/tile/avatar/(?P<pk>\d+)/$', tile_avatar, name='tile_avatar'),
     re_path('^ajax/recalc/avatar/(?P<id>\d+)/$', recalc_avatar, name='recalc_avatar'),
+
     re_path('^ajax/grab/avatar/(?P<id>\d+)/$', grab_avatar, name='grab_avatar'),
     re_path('^ajax/add_avatar/(?P<slug>[\w+]+)/$', add_avatar, name='add_avatar'),
     re_path('^ajax/deep_toggle/(?P<slug>[\w+]+)/(?P<id>\d+)/$', deep_toggle, name='deep_toggle'),
@@ -89,4 +91,8 @@ urlpatterns = [
     re_path('^ajax/spaceships/$', all_spaceships, name='all_spaceships'),
     re_path('^ajax/deck/save/$', save_sequence, name='save_sequence'),
     re_path('^ajax/deck/load/$', load_sequence, name='load_sequence'),
+
+    re_path('^characters/(?P<pk>\d+)/edit/$', CharacterUpdateView.as_view(), name='edit_character'),
+    re_path('^characters/(?P<pk>\d+)/view/$', CharacterDetailView.as_view(), name='view_character'),
+
 ]

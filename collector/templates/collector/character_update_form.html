@@ -2,264 +2,261 @@
 
 
 {% block dialog_header %}
-    <h1>Edit {{ object.action_model }} [{{ object.name }}]</h1>
+    <h1>Edit {{ object.action_model }} [{{ object.full_name }}]</h1>
 {% endblock dialog_header %}
 
 {% block dialog_body %}
-<div class="character_update_view tabbed">
-    <div class='tabs'>
-        <button class='tablinks' id='button_1' > Main </button>
-        <button class='tablinks' id='button_2' > More </button>
-        <button class='tablinks' id='button_3' > ToD </button>
-    </div>
-    <form class='character_form' form-target='character'>
-        {{ form.non_field_errors}}
-        {{ form.management_form }}
-        <input name='id' type='hidden' value='{{c.id}}'>
-        <input name='rid' type='hidden' value='{{c.rid}}'>
-        <div class="tabcontent" id="tab1">
-            <div class="field_wrapper">
-                {{ form.full_name.errors}}
-                <label for="full_name">Name</label>
-                {{form.full_name }}
-            </div>
-            <div class="field_wrapper">
-                {{ form.alias.errors}}
-                <label for="alias">Alias</label>
-                {{form.alias}}
-            </div>
-            <div class="field_wrapper">
-                {{ form.cast_figure.errors}}
-                <label for="cast_figure">Cast Figure</label>
-                {{form.cast_figure}}
-            </div>
-            <div class="field_wrapper">
-                {{ form.entrance.errors}}
-                <label for="entrance">Entrance</label>
-                {{form.entrance}}
-            </div>
-            <div class="field_wrapper">
-                {{ form.rank.errors}}
-                <label for="rank">Rank</label>
-                {{form.rank}}
-            </div>
-            <div class="field_wrapper">
-                {{ form.gender.errors}}
-                <label for="gender">Gender</label>
-                {{form.gender}}
+    <div class="tabbed">
+        <form id='character_form'>
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+            {{ form.management_form }}
+            <input name='id' type='hidden' value='{{ object.id }}'>
+            <input name='rid' type='hidden' value='{{ object.rid }}'>
+            <div class='tabs'>
+                <button class='diagtabs' id='button_1'> Main</button>
+                <button class='diagtabs' id='button_2'> More</button>
+                <button class='diagtabs' id='button_3'> Tours of Duty</button>
             </div>
 
-            <div class="field_wrapper">
-                {{ form.alliance_ref.errors}}
-                <label for="alliance_ref">AllianceRef</label>
-                {{form.alliance_ref}}
-            </div>
-            <div class="field_wrapper">
-                {{ form.faction.errors}}
-                <label for="faction">Faction</label>
-                {{form.faction}}
-            </div>
-            <div class="field_wrapper">
-                {{ form.specie.errors}}
-                <label for="species">Species/Race</label>
-                {{form.specie}}
-            </div>
-            <div class="field_wrapper">
-                {{ form.birthdate.errors}}
-                <label for="birthdate">Birthyear</label>
-                {{form.birthdate}}
-            </div>
+            <ul class="tabcontent" id="tab_1">
+                <li class="field_wrapper">
+                    {{ form.full_name.errors }}
+                    <label for="full_name">Name</label>
+                    {{ form.full_name }}
+                </li>
+                <li class="field_wrapper">
+                    {{ form.alias.errors }}
+                    <label for="alias">Alias</label>
+                    {{ form.alias }}
+                </li>
+                <li class="field_wrapper">
+                    {{ form.cast_figure.errors }}
+                    <label for="cast_figure">Cast Figure</label>
+                    {{ form.cast_figure }}
+                </li>
+                <li class="field_wrapper">
+                    {{ form.entrance.errors }}
+                    <label for="entrance">Entrance</label>
+                    {{ form.entrance }}
+                </li>
+                <li class="field_wrapper">
+                    {{ form.rank.errors }}
+                    <label for="rank">Rank</label>
+                    {{ form.rank }}
+                </li>
+                <li class="field_wrapper">
+                    {{ form.gender.errors }}
+                    <label for="gender">Gender</label>
+                    {{ form.gender }}
+                </li>
 
-            <div class="field_wrapper">
-                {{ form.age_offset.errors}}
-                <label for="age_offset">Age Offset</label>
-                {{form.age_offset}}
-            </div>
-            <div class="field_wrapper">
-                {{ form.group.errors}}
-                <label for="group">group</label>
-                {{form.group}}
-            </div>
-            <div class="field_wrapper">
-                {{ form.narrative.errors}}
-                <label for="narrative">Narrative</label>
-                {{form.narrative}}
-            </div>
-            <div class="field_wrapper">
-                {{ form.height.errors}}
-                <label for="height">Height</label>
-                {{form.height}}
-            </div>
-            <div class="field_wrapper">
-                {{ form.weight.errors}}
-                <label for="weight">Weight</label>
-                {{form.weight}}
-            </div>
+                <li class="field_wrapper">
+                    {{ form.alliance_ref.errors }}
+                    <label for="alliance_ref">AllianceRef</label>
+                    {{ form.alliance_ref }}
+                </li>
+                <li class="field_wrapper">
+                    {{ form.faction.errors }}
+                    <label for="faction">Faction</label>
+                    {{ form.faction }}
+                </li>
+                <li class="field_wrapper">
+                    {{ form.specie.errors }}
+                    <label for="species">Species/Race</label>
+                    {{ form.specie }}
+                </li>
+                <li class="field_wrapper">
+                    {{ form.birthdate.errors }}
+                    <label for="birthdate">Birthyear</label>
+                    {{ form.birthdate }}
+                </li>
 
-            <div class="field_wrapper">
-                {{ form.native_fief.errors}}
-                <label for="native_fief">Origins</label>
-                {{form.native_fief}}
-            </div>
-            <div class="field_wrapper">
-                {{ form.fief.errors}}
-                <label for="fief">Native Fief</label>
-                {{form.fief}}
-            </div>
-            <div class="field_wrapper">
-                {{ form.current_fief.errors}}
-                <label for="current_fief">Current Fief</label>
-                {{form.current_fief}}
-            </div>
+                <li class="field_wrapper">
+                    {{ form.age_offset.errors }}
+                    <label for="age_offset">Age Offset</label>
+                    {{ form.age_offset }}
+                </li>
+                <li class="field_wrapper">
+                    {{ form.group.errors }}
+                    <label for="group">group</label>
+                    {{ form.group }}
+                </li>
+                <li class="field_wrapper">
+                    {{ form.narrative.errors }}
+                    <label for="narrative">Narrative</label>
+                    {{ form.narrative }}
+                </li>
+                <li class="field_wrapper">
+                    {{ form.height.errors }}
+                    <label for="height">Height</label>
+                    {{ form.height }}
+                </li>
+                <li class="field_wrapper">
+                    {{ form.weight.errors }}
+                    <label for="weight">Weight</label>
+                    {{ form.weight }}
+                </li>
 
-            <div class="field_wrapper">
-                {{ form.caste.errors}}
-                <label for="caste">Caste</label>
-                {{form.caste}}
-            </div>
-            <div class="field_wrapper">
-                {{ form.player.errors}}
-                <label for="player">Player</label>
-                {{form.player}}
-            </div>
-            <div class="field_wrapper">
-                {{ form.occult.errors}}
-                <label for="occult">Occult</label>
-                {{form.occult}}
-            </div>
-            <div class="field_wrapper">
-                {{ form.path.errors}}
-                <label for="path">Path</label>
-                {{form.path}}
-            </div>
-            <div class="field_wrapper">
-                {{ form.stigma.errors}}
-                <label for="path">Stigma</label>
-                {{form.stigma}}
-            </div>
-            <div class="field_wrapper">
-                {{ form.is_dead.errors}}
-                <label for="is_dead">Dead</label>
-                {{form.is_dead}}
-            </div>
-            <div class="field_wrapper">
-                {{ form.need_fix.errors}}
-                <label for="need_fix">Need Fix</label>
-                {{form.need_fix}}
-            </div>
-            <div class="field_wrapper">
-                {{ form.use_history_creation_errors}}
-                <label for="use_history_creation">Use History Creation</label>
-                {{form.use_history_creation}}
-            </div>
-            <div class="field_wrapper">
-                {{ form.is_locked.errors}}
-                <label for="is_locked">Locked</label>
-                {{form.is_locked}}
-            </div>
-            <div class="field_wrapper">
-                {{ form.incognito.errors}}
-                <label for="incognito">Incognito</label>
-                {{form.incognito}}
-            </div>
-            <div class="field_wrapper">
-                {{ form.historical_figure.errors}}
-                <label for="historical_figure">Historical Figure</label>
-                {{form.historical_figure}}
-            </div>
-            <div class="field_wrapper">
-                {{ form.is_visible.errors}}
-                <label for="is_visible">Visible</label>
-                {{form.is_visible}}
-            </div>
-            <div class="field_wrapper">
-                {{ form.selected.errors}}
-                <label for="selected">Selected</label>
-                {{form.selected}}
-            </div>
-            <div class="field_wrapper">
-                {{ form.nameless.errors}}
-                <label for="nameless">Nameless</label>
-                {{form.nameless}}
-            </div>
-            <div class="field_wrapper">
-                {{ form.is_public.errors}}
-                <label for="is_public">is_public</label>
-                {{form.is_public}}
-            </div>
-        </div>
+                <li class="field_wrapper">
+                    {{ form.native_fief.errors }}
+                    <label for="native_fief">Origins</label>
+                    {{ form.native_fief }}
+                </li>
+                <li class="field_wrapper">
+                    {{ form.fief.errors }}
+                    <label for="fief">Native Fief</label>
+                    {{ form.fief }}
+                </li>
+                <li class="field_wrapper">
+                    {{ form.current_fief.errors }}
+                    <label for="current_fief">Current Fief</label>
+                    {{ form.current_fief }}
+                </li>
 
+                <li class="field_wrapper">
+                    {{ form.caste.errors }}
+                    <label for="caste">Caste</label>
+                    {{ form.caste }}
+                </li>
+                <li class="field_wrapper">
+                    {{ form.player.errors }}
+                    <label for="player">Player</label>
+                    {{ form.player }}
+                </li>
+                <li class="field_wrapper">
+                    {{ form.occult.errors }}
+                    <label for="occult">Occult</label>
+                    {{ form.occult }}
+                </li>
+                <li class="field_wrapper">
+                    {{ form.path.errors }}
+                    <label for="path">Path</label>
+                    {{ form.path }}
+                </li>
+                <li class="field_wrapper">
+                    {{ form.stigma.errors }}
+                    <label for="path">Stigma</label>
+                    {{ form.stigma }}
+                </li>
+                <li class="field_wrapper">
+                    {{ form.is_dead.errors }}
+                    <label for="is_dead">Dead</label>
+                    {{ form.is_dead }}
+                </li>
+                <li class="field_wrapper">
+                    {{ form.need_fix.errors }}
+                    <label for="need_fix">Need Fix</label>
+                    {{ form.need_fix }}
+                </li>
+                <li class="field_wrapper">
+                    {{ form.use_history_creation_errors }}
+                    <label for="use_history_creation">Use History Creation</label>
+                    {{ form.use_history_creation }}
+                </li>
+                <li class="field_wrapper">
+                    {{ form.is_locked.errors }}
+                    <label for="is_locked">Locked</label>
+                    {{ form.is_locked }}
+                </li>
+                <li class="field_wrapper">
+                    {{ form.incognito.errors }}
+                    <label for="incognito">Incognito</label>
+                    {{ form.incognito }}
+                </li>
+                <li class="field_wrapper">
+                    {{ form.historical_figure.errors }}
+                    <label for="historical_figure">Historical Figure</label>
+                    {{ form.historical_figure }}
+                </li>
+                <li class="field_wrapper">
+                    {{ form.is_visible.errors }}
+                    <label for="is_visible">Visible</label>
+                    {{ form.is_visible }}
+                </li>
+                <li class="field_wrapper">
+                    {{ form.selected.errors }}
+                    <label for="selected">Selected</label>
+                    {{ form.selected }}
+                </li>
+                <li class="field_wrapper">
+                    {{ form.nameless.errors }}
+                    <label for="nameless">Nameless</label>
+                    {{ form.nameless }}
+                </li>
+                <li class="field_wrapper">
+                    {{ form.is_public.errors }}
+                    <label for="is_public">is_public</label>
+                    {{ form.is_public }}
+                </li>
+            </ul>
+            <ul class="tabcontent hiddentab" id="tab_2">
 
+                <li class="field_wrapper">
+                    {{ form.storytelling_note.errors }}
+                    <label for="storytelling_note">Storytelling Note</label>
+                    {{ form.storytelling_note }}
+                </li>
+                <li class="field_wrapper">
+                    {{ form.experience_balance.errors }}
+                    <label for="experience_balance">Experience Balance</label>
+                    {{ form.experience_balance }}
+                </li>
+                <li class="field_wrapper">
+                    {{ form.xp_pool.errors }}
+                    <label for="xp_pool">XP Pool</label>
+                    {{ form.xp_pool }}
+                </li>
+                <li class="field_wrapper">
+                    {{ form.xp_spent.errors }}
+                    <label for="xp_spent">XP Spent</label>
+                    {{ form.xp_spent }}
+                </li>
+                <li class="field_wrapper">
+                    {{ form.xp_earned.errors }}
+                    <label for="xp_earned">XP Earned</label>
+                    {{ form.xp_earned }}
+                </li>
+                <li class="field_wrapper">
+                    {{ form.experience_details.errors }}
+                    <label for="experience_details">Experience Details </label>
+                    {{ form.experience_details }}
+                </li>
+                <li class="field_wrapper">
+                    {{ form.team.errors }}
+                    <label for="team">Team</label>
+                    {{ form.team }}
+                </li>
 
-
-        <div class="tabcontent hiddentab" id="tab2">
-            <div class="field_wrapper">
-                {{ form.storytelling_note.errors}}
-                <label for="storytelling_note">Storytelling Note</label>
-                {{form.storytelling_note}}
-            </div>
-            <div class="field_wrapper">
-                {{ form.experience_balance.errors}}
-                <label for="experience_balance">Experience Balance</label>
-                {{form.experience_balance}}
-            </div>
-            <div class="field_wrapper">
-                {{ form.xp_pool.errors}}
-                <label for="xp_pool">XP Pool</label>
-                {{form.xp_pool}}
-            </div>
-            <div class="field_wrapper">
-                {{ form.xp_spent.errors}}
-                <label for="xp_spent">XP Spent</label>
-                {{form.xp_spent}}
-            </div>
-            <div class="field_wrapper">
-                {{ form.xp_earned.errors}}
-                <label for="xp_earned">XP Earned</label>
-                {{form.xp_earned}}
-            </div>
-            <div class="field_wrapper">
-                {{ form.experience_details.errors}}
-                <label for="experience_details">Experience Details </label>
-                {{form.experience_details}}
-            </div>
-
-
-            <div class="field_wrapper">
-                {{ form.team.errors}}
-                <label for="team">Team</label>
-                {{form.team}}
-            </div>
-
-            <div class="field_wrapper">
-                {{ form.keyword.errors}}
-                <label for="keyword">Keyword</label>
-                {{form.keyword}}
-            </div>
-            <div class="field_wrapper">
-                {{ form.custo_descs.errors}}
-                <label for="custo_descs">Custom Descriptions</label>
-                {{form.custo_descs}}
-            </div>
-            <div class="field_wrapper">
-                {{ form.fencing_league.errors}}
-                <label for="fencing_league">Fencing League</label>
-                {{form.fencing_league}}
-            </div>
-
-
-        </div>
-        <div class="tabcontent hiddentab" id="tab3">
-            {{ tourofdutys.management_form }}
+                <li class="field_wrapper">
+                    {{ form.keyword.errors }}
+                    <label for="keyword">Keyword</label>
+                    {{ form.keyword }}
+                </li>
+                <li class="field_wrapper">
+                    {{ form.custo_descs.errors }}
+                    <label for="custo_descs">Custom Descriptions</label>
+                    {{ form.custo_descs }}
+                </li>
+                <li class="field_wrapper">
+                    {{ form.fencing_league.errors }}
+                    <label for="fencing_league">Fencing League</label>
+                    {{ form.fencing_league }}
+                </li>
+            </ul>
+            <ul class="tabcontent hiddentab" id="tab_3">
+                {{ tourofdutys.management_form }}
                 {% for form in tourofdutys.forms %}
-                    <div class="field_wrapper">
-                        {{ form.as_p }}
-                    </div>
+                    {{ form.as_ul }}
                 {% endfor %}
-
-        </div>
-        {% csrf_token %}
-    </form>
-</div>
+            </ul>
+        </form>
+    </div>
 
 {% endblock dialog_body %}
+
+{% block dialog_footer %}
+    <button class="dialog_action" action="{{ object.action_model }}" option="{{ object.id }}" id="update"><i
+            class="fa fa-stop-circle"></i> Update
+    </button>
+{% endblock dialog_footer %}

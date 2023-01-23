@@ -164,7 +164,7 @@ STATICFILES_DIRS = [
 LOGIN_REDIRECT_URL = '/'
 
 MAX_CHAR = 20
-RELEASE = '1.3.0'
+RELEASE = '1.3.1'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
