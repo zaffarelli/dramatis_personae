@@ -8,7 +8,7 @@
     <div class="tabbed" id='sheet_{{ c.id }}'>
         <div class='tabs'>
             <div class='diagtabs' id='button_1'> Generic</div>
-            <div class='diagtabs off' id='button_2'> Attributes Skills</div>
+            <div class='diagtabs off' id='button_2'> Attributes & Skills</div>
             <div class='diagtabs off' id='button_4'> Benefices Afflictions</div>
             <div class='diagtabs off' id='button_5'> Health</div>
             <div class='diagtabs off' id='button_6'> Gear</div>
@@ -20,14 +20,14 @@
 
         <div class="tabcontent character_sheet" id="tab_1">
             <div class="infoblock shrinkable">
-                <div class="data">
-                    <h1>{{ c.full_name }}</h1>
-
-                    {% if c.epic %}{{ c.epic|safe }}<br/>{% endif %}
-
-
-                    {% if c.nameless %}
-                        <CENTER><strong>NAMELESS NPCS</strong></CENTER>{% endif %}
+                <div class="text">
+                    <span class="title">Name</span>
+                    <span class="content">
+                    {{ c.full_name }}
+                        {% if c.nameless %}
+                            <br/><strong>NAMELESS NPCS</strong>
+                        {% endif %}
+                    </span>
                 </div>
 
                 {% if c.entrance %}
@@ -39,12 +39,16 @@
 
                 {% if c.narrative %}
                     <div class="text">
-                    <span class="title">Narrative</span><span class="content">{{ c.narrative|parse_avatars|safe }}</span>
+                        <span class="title">Narrative</span><span
+                            class="content">{{ c.narrative|parse_avatars|safe }}</span>
                     </div>
                 {% endif %}
 
-                <div class="mark">
+                <div class="text mark">
+                    <span class="title">Ghostmark</span>
+                    <span class="content">
                     {% include 'collector/ghostmark.html' with data=c.ghostmark_data %}
+                    </span>
                 </div>
                 {#        <div class="tile_back" id="tile_back_{{c.id}}"><i class="action_icon golden fa fa-times-circle"></i></div>#}
             </div>
@@ -115,37 +119,41 @@
 
             <span id="skill_block_{{ c.id }} shrinkable shrinked">
         {% include "collector/character/character_skills.html" %}
-    </span>
-        </div>
-        <div class="tabcontent hiddentab" id="tab_4">
-            <div class='options shrinkable shrinked'>
-        <span id="bc_block_{{ c.id }}">
-        {% include "collector/character/character_bc.html" %}
         </span>
-                <span id="ba_block_{{ c.id }}">
-        {% include "collector/character/character_ba.html" %}
-        </span>
-                <span id="ritual_block_{{ c.id }}">
-        {% include "collector/character/character_ritual.html" %}
-        </span>
-            </div>
-            <div class="tabcontent hiddentab" id="tab_5">
-                <span id="shortcuts_block_{{ c.id }}">
-        {% include "collector/character/character_shortcuts.html" %}
-        </span>
+            <div class="data" id="challenge_{{ c.id }}">
+                <span class="content">{{ c.challenge|safe }}</span>
             </div>
         </div>
-        <div class="tabcontent hiddentab" id="tab_6">
-            <div class='gear'>
-        <span id="weapon_block_{{ c.id }}">
-        {% include "collector/character/character_weapon.html" %}
-        </span>
-                <span id="armor_block_{{ c.id }}">
-        {% include "collector/character/character_armor.html" %}
-        </span>
-                <span id="shield_block_{{ c.id }}">
-        {% include "collector/character/character_shield.html" %}
-        </span>
+
+
+        {# Blessings/Curses, Benefice/Afflictions, Rituals #}
+        <div class="tabcontent hiddentab character_sheet" id="tab_4">
+            <div class='tabloid' id="bc_block_{{ c.id }}">
+                {% include "collector/character/character_bc.html" %}
+            </div>
+            <div class='tabloid' id="ba_block_{{ c.id }}">
+                {% include "collector/character/character_ba.html" %}
+            </div>
+            <div class='tabloid' id="ritual_block_{{ c.id }}">
+                {% include "collector/character/character_ritual.html" %}
+            </div>
+        </div>
+
+        <div class="tabcontent hiddentab" id="tab_5">
+            <span id="shortcuts_block_{{ c.id }}">
+                {% include "collector/character/character_shortcuts.html" %}
+            </span>
+        </div>
+
+        <div class="tabcontent hiddentab character_sheet" id="tab_6">
+            <div class='tabloid' id="weapon_block_{{ c.id }}">
+                {% include "collector/character/character_weapon.html" %}
+            </div>
+            <div class='tabloid' id="armor_block_{{ c.id }}">
+                {% include "collector/character/character_armor.html" %}
+            </div>
+            <div class='tabloid' id="shield_block_{{ c.id }}">
+                {% include "collector/character/character_shield.html" %}
             </div>
         </div>
         <div class="tabcontent hiddentab" id="tab_7">
@@ -176,6 +184,8 @@
                     class="fas fa-file-pdf"></i> {{ c.rid }}</a></span>
             <div class="challenge" id="challenge_{{ c.id }}">{{ c.challenge|safe }}</div>
         </div>
+
+
         <div class="tabcontent hiddentab" id="tab_8">
             <div class="portrait">
                 <img src="{{ c.rid|as_media_image }}" height="800px">

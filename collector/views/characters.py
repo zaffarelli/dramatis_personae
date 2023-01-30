@@ -44,7 +44,7 @@ class CharacterUpdateView(AjaxFromResponseMixin, UpdateView):
     context_object_name = 'c'
     template_name_suffix = '_update_form'
 
-    success_url = 'view_character'
+    # success_url = 'view_character'
 
     def form_valid(self, form):
         context = self.get_context_data(form=form)
@@ -146,7 +146,7 @@ def customize_skill(request, avatar, item):
     new_item.skill_ref = ref
     new_item.value = 1
     new_item.save()
-    ch.fix(campaign)
+    ch.fix(conf=campaign)
     ch.save()
     context["c"] = model_to_dict(ch)
     template = get_template('collector/character/character_skills.html')
@@ -204,7 +204,7 @@ def customize_bc_del(request, avatar, item):
     if bcc:
         txt = bcc.blessing_curse_ref.reference
         bcc.delete()
-        ch.fix(campaign)
+        ch.fix(conf=campaign)
         ch.save()
         context["c"] = model_to_dict(ch)
         template = get_template('collector/character/character_bc.html')

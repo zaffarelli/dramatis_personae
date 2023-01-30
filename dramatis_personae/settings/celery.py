@@ -8,7 +8,7 @@ from celery.schedules import crontab
 CELERY_BEAT_SCHEDULE = {
     'pdf_schedule': {
         'task': 'collector.tasks.pdf_check',
-        'schedule': crontab(minute='*/3'),
+        'schedule': 6,
         'args': (),
     },
     'fix_schedule': {

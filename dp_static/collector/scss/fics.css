@@ -1335,294 +1335,297 @@ th.skill_dot {
   font-family: 'FadingSunsIcons';
   src: url("../fonts/FadingSunsIcons.ttf"); }
 
-div.character_sheet div.infoblock {
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-between;
-  align-items: stretch;
-  align-content: stretch;
-  gap: 3px; }
-  div.character_sheet div.infoblock .portrait {
-    order: 3;
-    display: inline-block;
-    width: 120px;
-    text-align: center;
-    flex-basis: 120px; }
-    div.character_sheet div.infoblock .portrait img {
-      border: 2px solid #3c3f3c;
-      border-radius: 5px;
-      box-shadow: 0px 0px 5px #171817;
-      width: 90px;
-      height: 120px; }
-  div.character_sheet div.infoblock .mark {
+div.character_sheet {
+  font-size: 10pt; }
+  div.character_sheet .tabloid {
     order: 1;
-    flex: 1 0 250px;
-    background: #171817;
-    color: #e8e7e8; }
-  div.character_sheet div.infoblock .text {
-    order: 3;
-    display: flex;
-    flex: 1 0 250px;
-    flex-flow: column wrap;
-    justify-content: flex-start;
-    align-items: stretch;
-    align-content: flex-start; }
-    div.character_sheet div.infoblock .text .title {
-      flex: 1 1 20px;
-      background: black;
-      color: #e8e7e8;
-      padding: 5px; }
-    div.character_sheet div.infoblock .text .content {
-      flex: 1 8 auto;
+    flex: 1 1 auto;
+    align-self: stretch; }
+    div.character_sheet .tabloid table {
+      padding: 5px;
+      border: 1px solid #ffc080;
+      border-radius: 5px;
       background: #171817;
-      color: #e8e7e8;
-      text-align: left;
-      padding: 5px; }
-  div.character_sheet div.infoblock .data {
-    order: 2;
-    flex-basis: 100%; }
-    div.character_sheet div.infoblock .data h1 {
-      font-family: FatName;
-      font-size: 20pt;
-      text-align: center; }
-    div.character_sheet div.infoblock .data strong {
-      font-family: NomPerso;
-      font-weight: bold;
-      color: #FC4; }
-
-div.character_sheet h2 {
-  font-family: Titre;
-  font-weight: normal;
-  background: #171817;
-  color: #cfcdcf;
-  font-size: 1.25em;
-  text-align: center; }
-
-div.character_sheet .attributes {
-  column-count: 4;
-  column-gap: 2px;
-  column-rule: 0 solid #3c3f3c; }
-  div.character_sheet .attributes table {
-    padding: 0; }
-    div.character_sheet .attributes table th.name {
-      padding-left: 1px;
-      background: #303230;
-      width: 5ex; }
-    div.character_sheet .attributes table td {
+      color: #e8e7e8; }
+      div.character_sheet .tabloid table th {
+        background: black;
+        border-radius: 5px;
+        padding: 5px; }
+      div.character_sheet .tabloid table td {
+        padding: 5px; }
+  div.character_sheet div.infoblock {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: stretch;
+    align-content: stretch;
+    gap: 3px; }
+    div.character_sheet div.infoblock .portrait {
+      order: 3;
+      display: inline-block;
+      width: 120px;
       text-align: center;
-      font-weight: normal;
-      width: auto; }
-      div.character_sheet .attributes table td.edit {
-        width: 5ex; }
-      div.character_sheet .attributes table td.value {
-        box-shadow: 0 0 3px black; }
-    div.character_sheet .attributes table.primary {
-      border: 1px solid #171817; }
-    div.character_sheet .attributes table.occult th.name {
-      width: 12ex; }
-    div.character_sheet .attributes table.occult td.edit {
-      width: 5ex; }
-
-div.character_sheet .gear {
-  column-count: 2;
-  column-gap: 5px;
-  column-rule: 1px dotted #3c3f3c;
-  margin-top: 3px;
-  border: 1px solid black;
-  border-radius: 2px;
-  margin-top: 3px;
-  width: 100%; }
-  div.character_sheet .gear table.unbreakable {
-    width: 100%;
-    overflow: hidden;
-    page-break-after: always;
-    page-break-inside: avoid;
-    font-size: 1em; }
-    div.character_sheet .gear table.unbreakable th {
-      background: #171817; }
-      div.character_sheet .gear table.unbreakable th[colspan="3"], div.character_sheet .gear table.unbreakable th[colspan="4"], div.character_sheet .gear table.unbreakable th[colspan="12"] {
-        font-family: Titre;
-        font-weight: normal;
-        background: #171817;
-        color: #cfcdcf;
-        font-size: 1.25em;
-        text-align: center; }
-  div.character_sheet .gear ul.unbreakable {
-    page-break-after: always;
-    page-break-before: always;
-    page-break-inside: avoid;
-    display: block;
-    border: 1px solid purple; }
-
-div.character_sheet .options {
-  column-count: 2;
-  column-gap: 5px;
-  column-rule: 1px dotted #3c3f3c;
-  margin-top: 3px;
-  border: 1px solid black;
-  border-radius: 2px;
-  margin-top: 3px;
-  width: 100%;
-  border: 1px solid black;
-  border-radius: 2px; }
-  div.character_sheet .options table.unbreakable {
-    width: 100%;
-    overflow: hidden;
-    page-break-after: always;
-    page-break-inside: avoid;
-    font-size: 1em; }
-    div.character_sheet .options table.unbreakable th {
-      background: #171817; }
-      div.character_sheet .options table.unbreakable th[colspan="3"], div.character_sheet .options table.unbreakable th[colspan="4"], div.character_sheet .options table.unbreakable th[colspan="12"] {
-        font-family: Titre;
-        font-weight: normal;
-        background: #171817;
-        color: #cfcdcf;
-        font-size: 1.25em;
-        text-align: center; }
-  div.character_sheet .options ul.unbreakable {
-    page-break-after: always;
-    page-break-before: always;
-    page-break-inside: avoid;
-    display: block;
-    border: 1px solid purple; }
-
-div.character_sheet .coreblock {
-  column-count: 3;
-  column-gap: 1ex;
-  column-rule: 1px dotted #3c3f3c;
-  margin-top: 3px;
-  border: 1px solid black;
-  border-radius: 3px;
-  width: 100%;
-  border: 1px solid black;
-  border-radius: 3px; }
-  div.character_sheet .coreblock ul {
-    page-break-after: always;
-    page-break-inside: avoid;
-    padding: 0;
-    margin: 0;
-    list-style: none;
-    min-height: 16em; }
-    div.character_sheet .coreblock ul li {
+      flex-basis: 120px; }
+      div.character_sheet div.infoblock .portrait img {
+        border: 2px solid #3c3f3c;
+        border-radius: 5px;
+        box-shadow: 0px 0px 5px #171817;
+        width: 90px;
+        height: 120px; }
+    div.character_sheet div.infoblock .text {
+      order: 3;
       display: flex;
-      padding: 0.5ex;
-      margin: 0;
-      width: 100%;
-      flex-flow: row nowrap;
+      flex: 1 0 250px;
+      flex-flow: column wrap;
       justify-content: flex-start;
-      align-items: flex-start; }
-      div.character_sheet .coreblock ul li b {
-        display: inline-block;
-        order: 1;
-        flex-grow: 0;
-        flex-basis: 20ex;
-        background: #171817; }
-      div.character_sheet .coreblock ul li u {
-        display: inline-block;
-        order: 2;
-        flex-grow: 2;
-        flex-basis: auto;
-        text-decoration: none;
-        width: 24ex;
-        height: auto;
-        border: 1px dotted black;
-        margin-left: 0.5ex; }
-  div.character_sheet .coreblock .pagebreaker {
-    page-break-after: always; }
-
-div.character_sheet .healthbar table {
-  font-size: 8pt; }
-  div.character_sheet .healthbar table tr {
-    height: 20px; }
-  div.character_sheet .healthbar table th {
-    background: transparent;
-    border: 1px dotted #303230;
-    border-radius: 3px;
-    width: 20px; }
-  div.character_sheet .healthbar table td {
-    background: #303230;
-    border: 1px solid #cfcdcf;
-    border-radius: 3px;
-    width: 20px; }
-    div.character_sheet .healthbar table td.label {
-      color: #FFCC44;
-      text-align: center; }
-
-div.character_sheet .skillsview {
-  column-count: 3;
-  column-gap: 5px;
-  column-rule: 1px dotted #3c3f3c;
-  margin-top: 3px;
-  border: 1px solid black;
-  border-radius: 2px; }
-  div.character_sheet .skillsview table {
+      align-items: stretch;
+      align-content: flex-start; }
+      div.character_sheet div.infoblock .text .title {
+        flex: 1 1 20px;
+        background: black;
+        color: #e8e7e8;
+        padding: 5px; }
+      div.character_sheet div.infoblock .text .content {
+        flex: 1 8 auto;
+        background: #171817;
+        color: #e8e7e8;
+        text-align: left;
+        padding: 5px; }
+    div.character_sheet div.infoblock .mark {
+      order: 8; }
+    div.character_sheet div.infoblock .data {
+      order: 2;
+      flex-basis: 100%; }
+      div.character_sheet div.infoblock .data h1 {
+        font-family: FatName;
+        font-size: 20pt;
+        text-align: center; }
+      div.character_sheet div.infoblock .data strong {
+        font-family: NomPerso;
+        font-weight: bold;
+        color: #FC4; }
+  div.character_sheet h2 {
+    font-family: Titre;
+    font-weight: normal;
+    background: #171817;
+    color: #cfcdcf;
+    font-size: 1.25em;
+    text-align: center; }
+  div.character_sheet .attributes {
+    column-count: 4;
+    column-gap: 2px;
+    column-rule: 0 solid #3c3f3c; }
+    div.character_sheet .attributes table {
+      padding: 0; }
+      div.character_sheet .attributes table th.name {
+        padding-left: 1px;
+        background: #303230;
+        width: 5ex; }
+      div.character_sheet .attributes table td {
+        text-align: center;
+        font-weight: normal;
+        width: auto; }
+        div.character_sheet .attributes table td.edit {
+          width: 5ex; }
+        div.character_sheet .attributes table td.value {
+          box-shadow: 0 0 3px black; }
+      div.character_sheet .attributes table.primary {
+        border: 1px solid #171817; }
+      div.character_sheet .attributes table.occult th.name {
+        width: 12ex; }
+      div.character_sheet .attributes table.occult td.edit {
+        width: 5ex; }
+  div.character_sheet .gear {
+    column-count: 2;
+    column-gap: 5px;
+    column-rule: 1px dotted #3c3f3c;
+    margin-top: 3px;
+    border: 1px solid black;
+    border-radius: 2px;
+    margin-top: 3px;
     width: 100%; }
-    div.character_sheet .skillsview table tr {
-      height: 5px;
-      overflow: hidden; }
-      div.character_sheet .skillsview table tr td {
-        width: auto;
-        height: 5px;
+    div.character_sheet .gear table.unbreakable {
+      width: 100%;
+      overflow: hidden;
+      page-break-after: always;
+      page-break-inside: avoid;
+      font-size: 1em; }
+      div.character_sheet .gear table.unbreakable th {
+        background: #171817; }
+        div.character_sheet .gear table.unbreakable th[colspan="3"], div.character_sheet .gear table.unbreakable th[colspan="4"], div.character_sheet .gear table.unbreakable th[colspan="12"] {
+          font-family: Titre;
+          font-weight: normal;
+          background: #171817;
+          color: #cfcdcf;
+          font-size: 1.25em;
+          text-align: center; }
+    div.character_sheet .gear ul.unbreakable {
+      page-break-after: always;
+      page-break-before: always;
+      page-break-inside: avoid;
+      display: block;
+      border: 1px solid purple; }
+  div.character_sheet .options {
+    column-count: 2;
+    column-gap: 5px;
+    column-rule: 1px dotted #3c3f3c;
+    margin-top: 3px;
+    border: 1px solid black;
+    border-radius: 2px;
+    margin-top: 3px;
+    width: 100%;
+    border: 1px solid black;
+    border-radius: 2px; }
+    div.character_sheet .options table.unbreakable {
+      width: 100%;
+      overflow: hidden;
+      page-break-after: always;
+      page-break-inside: avoid;
+      font-size: 1em; }
+      div.character_sheet .options table.unbreakable th {
+        background: #171817; }
+        div.character_sheet .options table.unbreakable th[colspan="3"], div.character_sheet .options table.unbreakable th[colspan="4"], div.character_sheet .options table.unbreakable th[colspan="12"] {
+          font-family: Titre;
+          font-weight: normal;
+          background: #171817;
+          color: #cfcdcf;
+          font-size: 1.25em;
+          text-align: center; }
+    div.character_sheet .options ul.unbreakable {
+      page-break-after: always;
+      page-break-before: always;
+      page-break-inside: avoid;
+      display: block;
+      border: 1px solid purple; }
+  div.character_sheet .coreblock {
+    column-count: 3;
+    column-gap: 1ex;
+    column-rule: 1px dotted #3c3f3c;
+    margin-top: 3px;
+    border: 1px solid black;
+    border-radius: 3px;
+    width: 100%;
+    border: 1px solid black;
+    border-radius: 3px; }
+    div.character_sheet .coreblock ul {
+      page-break-after: always;
+      page-break-inside: avoid;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      min-height: 16em; }
+      div.character_sheet .coreblock ul li {
+        display: flex;
+        padding: 0.5ex;
         margin: 0;
-        padding: 0;
-        padding-left: 1ex;
-        background: transparent;
-        text-align: left; }
-      div.character_sheet .skillsview table tr td[colspan="2"] {
-        width: auto;
-        height: 8px;
-        margin: 2px;
-        padding: 1px;
-        background: #3c3f3c;
+        width: 100%;
+        flex-flow: row nowrap;
+        justify-content: flex-start;
+        align-items: flex-start; }
+        div.character_sheet .coreblock ul li b {
+          display: inline-block;
+          order: 1;
+          flex-grow: 0;
+          flex-basis: 20ex;
+          background: #171817; }
+        div.character_sheet .coreblock ul li u {
+          display: inline-block;
+          order: 2;
+          flex-grow: 2;
+          flex-basis: auto;
+          text-decoration: none;
+          width: 24ex;
+          height: auto;
+          border: 1px dotted black;
+          margin-left: 0.5ex; }
+    div.character_sheet .coreblock .pagebreaker {
+      page-break-after: always; }
+  div.character_sheet .healthbar table {
+    font-size: 8pt; }
+    div.character_sheet .healthbar table tr {
+      height: 20px; }
+    div.character_sheet .healthbar table th {
+      background: transparent;
+      border: 1px dotted #303230;
+      border-radius: 3px;
+      width: 20px; }
+    div.character_sheet .healthbar table td {
+      background: #303230;
+      border: 1px solid #cfcdcf;
+      border-radius: 3px;
+      width: 20px; }
+      div.character_sheet .healthbar table td.label {
+        color: #FFCC44;
         text-align: center; }
-      div.character_sheet .skillsview table tr th {
+  div.character_sheet .skillsview {
+    column-count: 3;
+    column-gap: 5px;
+    column-rule: 1px dotted #3c3f3c;
+    margin-top: 3px;
+    border: 1px solid black;
+    border-radius: 2px; }
+    div.character_sheet .skillsview table {
+      width: 100%; }
+      div.character_sheet .skillsview table tr {
         height: 5px;
-        text-align: right;
-        background: transparent;
-        width: 14ex;
-        font-size: 1em;
-        line-height: 0.8em;
-        margin: 0;
-        padding: 0; }
-      div.character_sheet .skillsview table tr th.edit {
-        width: 4ex;
-        font-size: 1em;
-        text-align: center; }
-      div.character_sheet .skillsview table tr th[colspan="2"] {
-        width: 14ex; }
-      div.character_sheet .skillsview table tr th.skill_score_bar {
-        width: 16ex; }
-
-div.character_sheet .edit {
-  color: #fc2; }
-
-div.character_sheet table.stats.other tr {
-  width: 100%;
-  background: black; }
-
-div.character_sheet table.stats.other th {
-  width: 20%;
-  background: #303230;
-  border: 1px solid black; }
-
-div.character_sheet table.stats.other td {
-  width: 30%;
-  background: #303230;
-  padding: 2px;
-  text-align: left;
-  border: 1px solid black; }
-
-div.character_sheet .narrative {
-  margin: 5px;
-  vertical-align: top;
-  display: block;
-  border: 1px solid black;
-  border-radius: 5px;
-  padding: 5px;
-  width: auto;
-  page-break-after: always;
-  page-break-inside: avoid; }
+        overflow: hidden; }
+        div.character_sheet .skillsview table tr td {
+          width: auto;
+          height: 5px;
+          margin: 0;
+          padding: 0;
+          padding-left: 1ex;
+          background: transparent;
+          text-align: left; }
+        div.character_sheet .skillsview table tr td[colspan="2"] {
+          width: auto;
+          height: 8px;
+          margin: 2px;
+          padding: 1px;
+          background: #3c3f3c;
+          text-align: center; }
+        div.character_sheet .skillsview table tr th {
+          height: 5px;
+          text-align: right;
+          background: transparent;
+          width: 14ex;
+          font-size: 1em;
+          line-height: 0.8em;
+          margin: 0;
+          padding: 0; }
+        div.character_sheet .skillsview table tr th.edit {
+          width: 4ex;
+          font-size: 1em;
+          text-align: center; }
+        div.character_sheet .skillsview table tr th[colspan="2"] {
+          width: 14ex; }
+        div.character_sheet .skillsview table tr th.skill_score_bar {
+          width: 16ex; }
+  div.character_sheet .edit {
+    color: #fc2; }
+  div.character_sheet table.stats.other tr {
+    width: 100%;
+    background: black; }
+  div.character_sheet table.stats.other th {
+    width: 20%;
+    background: #303230;
+    border: 1px solid black; }
+  div.character_sheet table.stats.other td {
+    width: 30%;
+    background: #303230;
+    padding: 2px;
+    text-align: left;
+    border: 1px solid black; }
+  div.character_sheet .narrative {
+    margin: 5px;
+    vertical-align: top;
+    display: block;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 5px;
+    width: auto;
+    page-break-after: always;
+    page-break-inside: avoid; }
 
 div.character_update_view {
   width: 100%;

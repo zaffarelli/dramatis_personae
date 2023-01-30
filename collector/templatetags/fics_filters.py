@@ -388,10 +388,12 @@ def extract_id(value):
 def as_media_image(value):
     str = f'images/f_{value}.jpg'
     from django.core.files.storage import default_storage
+    print(str)
     if default_storage.exists(str):
         str = f'media/images/f_{value}.jpg'
     else:
         str = 'media/images/f_blank.jpg'
+    print(str)
     return str
 
 
@@ -468,3 +470,26 @@ def as_date(value):
 def format_date(date_string):
     import datetime
     return datetime.datetime.strptime(date_string, '%Y-%m-%d %H:%M:%S %Z')
+
+
+
+@register.filter(name='dictsort_2cols')
+def dictsort_2cols(value, ref):
+    mylist = dictsort(value, ref)
+    count = len(mylist)
+    rowcount = int(count / 2)
+    if count % 2 != 0:
+        rowcount += 1
+    idx = 0
+    cols = [[], [], []]
+    for x in dictsort(value, ref):
+        c = int(idx / rowcount)
+        cols[c].append(x)
+        idx += 1
+    flat_cols = []
+    for idx in range(rowcount):
+        if len(cols[0]) > idx:
+            flat_cols.append(cols[0][idx])
+        if len(cols[1]) > idx:
+            flat_cols.append(cols[1][idx])
+    return flat_cols

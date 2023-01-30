@@ -1,22 +1,27 @@
-{%load fics_filters%}
-{%load static%}
+{% load fics_filters %}
+{% load static %}
 
-{% if c.armor_set.count != 0 %}
-<table class='unbreakable'>
+<table>
     <tr>
-        <th colspan=4>Armor ({{c.armor_cost}})</th>
+        <th colspan=4>Armor ({{ c.armor_cost }})</th>
     </tr>
-    {% for a in c.armor_set.all|dictsort:"armor_ref.stopping_power" %}
-    <tr>
-        <td>{{ a.armor_ref.reference|safe }}</td><td>{{a.armor_ref.category}}</td><td>SP:{{ a.armor_ref.stopping_power }}</td>
-        <td><tt>{% if a.armor_ref.head %}HE{%else%}..{%endif%}
-            {% if a.armor_ref.torso %}TO{%else%}..{%endif%}
-            {% if a.armor_ref.left_arm %}LA{%else%}..{%endif%}
-            {% if a.armor_ref.right_arm %}RA{%else%}..{%endif%}
-            {% if a.armor_ref.left_leg %}LL{%else%}..{%endif%}
-            {% if a.armor_ref.right_leg %}RL{%else%}..{%endif%}</tt>
-        </td>
-    </tr>
-{% endfor %}
+    {% if c.armor_set.count != 0 %}
+        {% for a in c.armor_set.all|dictsort:"armor_ref.stopping_power" %}
+            <tr>
+                <td>{{ a.armor_ref.reference|safe }}</td>
+                <td>{{ a.armor_ref.category }}</td>
+                <td>SP:{{ a.armor_ref.stopping_power }}</td>
+                <td><tt>{% if a.armor_ref.head %}HE{% else %}..{% endif %}
+                    {% if a.armor_ref.torso %}TO{% else %}..{% endif %}
+                    {% if a.armor_ref.left_arm %}LA{% else %}..{% endif %}
+                    {% if a.armor_ref.right_arm %}RA{% else %}..{% endif %}
+                    {% if a.armor_ref.left_leg %}LL{% else %}..{% endif %}
+                    {% if a.armor_ref.right_leg %}RL{% else %}..{% endif %}</tt>
+                </td>
+            </tr>
+        {% endfor %}
+    {% else %}
+        <td colspan="4">N/A</td>
+    {% endif %}
 </table>
-{%endif%}
+

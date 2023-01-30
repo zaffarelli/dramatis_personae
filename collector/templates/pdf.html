@@ -1,212 +1,227 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
 <html lang="en">
-  <head>
-		{% load static %}
-    <meta charset="utf-8" />
-    <title>{{c.full_name|safe}}</title>
+<head>
+    {% load static %}
+    <meta charset="utf-8"/>
+    <title>{{ c.full_name|safe }}</title>
 
     <style>
 
 
+        @font-face {
+            font-family: 'Texte';
+            src: url('collector/static/collector/fonts/Alegreya/Alegreya-Regular.ttf');
+        }
 
-@font-face {
-  font-family: 'Texte';
-  src: url('collector/static/collector/fonts/Alegreya/Alegreya-Regular.ttf');
-}
+        @font-face {
+            font-family: 'Texte';
+            font-style: italic;
+            src: url('collector/static/collector/fonts/Alegreya/Alegreya-Italic.ttf');
+        }
 
-@font-face {
-  font-family: 'Texte';
-  font-style:italic;
-  src: url('collector/static/collector/fonts/Alegreya/Alegreya-Italic.ttf');
-}
+        @font-face {
+            font-family: 'Texte';
+            font-weight: bold;
+            src: url('collector/static/collector/fonts/Alegreya/Alegreya-Bold.ttf');
+        }
 
-@font-face {
-  font-family: 'Texte';
-  font-weight:bold;
-  src: url('collector/static/collector/fonts/Alegreya/Alegreya-Bold.ttf');
-}
-
-@font-face {
-  font-family: 'Texte';
-  font-style:italic;
-  font-weight:bold;
-  src: url('collector/static/collector/fonts/Alegreya/Alegreya-BoldItalic.ttf');
-}
-
+        @font-face {
+            font-family: 'Texte';
+            font-style: italic;
+            font-weight: bold;
+            src: url('collector/static/collector/fonts/Alegreya/Alegreya-BoldItalic.ttf');
+        }
 
 
-@font-face {
-  font-family: 'Emphase';
-  src: url('collector/static/collector/fonts/Cousine-Regular.ttf');
-}
+        @font-face {
+            font-family: 'Emphase';
+            src: url('collector/static/collector/fonts/Cousine-Regular.ttf');
+        }
 
-@font-face {
-  font-family: 'NomPerso';
-  src: url('collector/static/collector/fonts/Alegreya/Alegreya-Black.ttf');
-}
+        @font-face {
+            font-family: 'NomPerso';
+            src: url('collector/static/collector/fonts/Alegreya/Alegreya-Black.ttf');
+        }
 
-@font-face {
-  font-family: 'Section';
-  src: url('collector/static/collector/fonts/Oswald-SemiBold.ttf');
-}
+        @font-face {
+            font-family: 'Section';
+            src: url('collector/static/collector/fonts/Oswald-SemiBold.ttf');
+        }
 
-@page {
-  size: a4 portrait;
-  @frame col_left {
-    left: 0.2cm;
-    width: 10cm;
-    top: 1.5cm;
-    height:28cm;
-    padding:0.125cm;
-    border-bottom:1px solid #202020;
-  }
-  @frame col_right {
-    left: 10.8cm;
-    width: 10cm;
-    top: 2cm;
-    height: 27.5cm;
-    padding:0.125cm;
-    border-bottom:1px solid #202020;
-  }
+        @page {
+            size: a4 portrait;
+            @frame col_left {
+            left: 0.2cm;
+            width: 10cm;
+            top: 1.5cm;
+            height: 28cm;
+            padding: 0.125cm;
+            border-bottom: 1px solid #202020;
+        }
+        @frame col_right {
+        left: 10.8cm;
+        width: 10cm;
+        top: 2cm;
+        height: 27.5cm;
+        padding:0.125cm;
+        border-bottom:1px solid #202020;
+        }
 
-  @frame header_frame {
-    -pdf-frame-content: header_content;
+        @frame header_frame {
+        -pdf-frame-content:header_content;
 
-    right: 0.5cm;
-    width: 0.5cm;
-    top: 0.5cm;
-    height: 1cm;
-    text-align:right;
-  }
+        right: 0.5cm;
+        width: 0.5cm;
+        top: 0.5cm;
+        height: 1cm;
+        text-align:right;
+        }
 
-}
+        }
 
-h1,h2,h3,h4,h5,h6{
-    margin:0;
-    padding:0;
-}
+        h1, h2, h3, h4, h5, h6 {
+            margin: 0;
+            padding: 0;
+            font-family: 'NomPerso';
+        }
 
-h1{
-  font-family:'NomPerso';
-  font-size:32pt;
-  font-weight:800;
-  color:#646;
-}
+        h1 {
 
-h2{
-  font-family:'NomPerso';
-  font-size:16pt;
-  color:#404040;
-  border-bottom:3px double #202020;
-}
+            font-size: 32pt;
+            font-weight: 800;
+            color: #646;
+        }
 
-h3{
-  font-family:'NomPerso';
-  font-size:14pt;
-}
+        h2 {
 
-h4{
-  font-family:'NomPerso';
-  font-size:12pt;
-  font-variant: small-caps;
-}
+            font-size: 16pt;
+            color: #404040;
+            border-bottom: 3px double #202020;
+        }
 
-h5{
-  font-family:'Section';
-  font-size:9pt;
-  padding:0;
-  margin:0;
-  color:#868;
-  line-height:1em;
-  -pdf-keep-with-next: true;
-}
+        h3 {
 
-h6{
-  font-family:'Section';
-  font-size:8pt;
-  margin:0;
-  padding:0;
-  line-height:0.93em;
+            font-size: 14pt;
+        }
 
+        h4 {
+            font-family: "Section";
+            font-size: 12pt;
+            font-variant: small-caps;
+        }
 
-  color:blue;
-  -pdf-keep-with-next: true;
-}
+        h5 {
 
-table.stats {
-  padding:0;
-  margin:0;
-  font-family:Texte;
-  font-size:8pt;
-}
+            font-size: 9pt;
+            padding: 0;
+            margin: 0;
+            color: #666;
+            line-height: 1em;
+            border-top: 0.3mm dotted silver;
+            margin-top:1mm;
+            -pdf-keep-with-next: true;
+        }
 
-p{
-  font-family:Texte;
-  font-size:8pt;
-  text-align:left;
-  padding:0;
-  margin:0;
-  line-height:0.97em;
-}
+        h6 {
 
-blockquote{
-  font-family:Texte;
-  font-size:8pt;
-  line-height:0.97em;
-}
+            font-size: 8pt;
+            margin: 0;
+            padding: 0;
+            line-height: 0.93em;
+            color: blue;
+            -pdf-keep-with-next: true;
+        }
 
-.spacer{
-  font-size:2px;
-  border-top: 1px solid #C0C0C0;
-}
+        table.stats {
+            padding: 0;
+            margin: 0;
+            font-family: Texte;
+            font-size: 8pt;
+        }
 
-.narrative{
-  font-size:1.0em;
-}
+        td, th, p {
+            font-family: Texte;
+            font-size: 8pt;
+            text-align: left;
+            padding: 0;
+            margin: 0;
+            line-height: 0.97em;
+        }
 
-.gm_shortcuts{
-  font-size:1.0em;
-}
+        td {
+            vertical-align: top;
+            margin: auto;
+            margin-left: 1mm;
+            margin-right: 1mm;
 
-.subsection{
-  color:#202030;
-  text-decoration:underline;
-}
+        }
 
-.embedded_link{
-  text-decoration:underscore;
-  color:#802080;
-  font-family:Texte;
-  font-weight:bold;
-}
+        td.mid {
+            border-left: 1px solid silver;
+            border-right: 1px solid silver;
+            text-align: center;
+        }
 
 
-.highskill{
-  font-weight:600;
-  color:#808;
-}
+        blockquote {
+            font-family: Texte;
+            font-size: 8pt;
+            line-height: 0.97em;
+        }
 
-.tableskills{
-  text-align:left;
-  font-family:Texte;
-  font-size:8pt;
-}
+        .spacer {
+            font-size: 2px;
+            border-top: 1px solid #C0C0C0;
+        }
 
-.skilltext{
-  vertical-align:top;
-}
+        .narrative {
+            font-size: 1.0em;
+        }
 
-.skillval{
-  font-family:Texte;
-  width:4ex;
-  text-align:center;
-  vertical-align:top;
-}
+        .gm_shortcuts {
+            font-size: 1.0em;
+        }
 
-  </style>
-  </head>
-  <body>
-    {% block article %}
-    {% endblock article %}
-  </body>
+        .subsection {
+            color: #202020;
+            text-decoration: underline;
+        }
+
+        .embedded_link {
+            text-decoration: underscore;
+            color: #202020;
+            font-family: Texte;
+            font-weight: bold;
+        }
+
+
+        .highskill {
+            font-weight: 600;
+            color: #666;
+        }
+
+        .tableskills {
+            text-align: left;
+            font-family: Texte;
+            font-size: 8pt;
+        }
+
+        .skilltext {
+            vertical-align: top;
+            width: 40%;
+        }
+
+        .skillval {
+            font-family: Texte;
+            width: 10%;
+            text-align: center;
+            vertical-align: top;
+        }
+
+    </style>
+</head>
+<body>
+{% block article %}
+{% endblock article %}
+</body>
 </html>

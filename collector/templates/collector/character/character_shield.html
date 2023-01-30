@@ -1,29 +1,35 @@
-{%load fics_filters%}
-{%load static%}
+{% load fics_filters %}
+{% load static %}
 
-
-{% if c.shield_set.count != 0 %}
-<table class='unbreakable'>
-    <tr><th colspan=4>Energy Shield ({{c.shield_cost}})</th></tr>
-{% for s in c.shield_set.all|dictsort:"shield_ref.reference" %}
+<table>
     <tr>
-        <td>
-            {{ s.shield_ref.reference|safe }}
-        </td><td>
-            {{s.shield_ref.protection_min}}/{{ s.shield_ref.protection_max }}
-        </td><td>
-            {{s.shield_ref.hits}}
-        </td>
-        <td><tt>
-        {% if s.shield_ref.is_compatible_with_medium_armor %}
-            (+M)
-        {%endif%}
-        {% if s.shield_ref.is_compatible_with_hard_armor %}
-            (+H)
-        {%endif%}
-        </tt>&nbsp;
-        </td>
+        <th colspan=4>Energy Shield (£{{ c.shield_cost }})</th>
     </tr>
-{% endfor %}
+    {% if c.shield_set.count != 0 %}
+        {% for s in c.shield_set.all|dictsort:"shield_ref.reference" %}
+            <tr>
+                <td>
+                    {{ s.shield_ref.reference|safe }}
+                </td>
+                <td>
+                    {{ s.shield_ref.protection_min }}/{{ s.shield_ref.protection_max }}
+                </td>
+                <td>
+                    {{ s.shield_ref.hits }}
+                </td>
+                <td><tt>
+                    {% if s.shield_ref.is_compatible_with_medium_armor %}
+                        (+M)
+                    {% endif %}
+                    {% if s.shield_ref.is_compatible_with_hard_armor %}
+                        (+H)
+                    {% endif %}
+                </tt>&nbsp;
+                </td>
+            </tr>
+        {% endfor %}
+    {% else %}
+        <td colspan="4">N/A</td>
+    {% endif %}
 </table>
-{%endif%}
+

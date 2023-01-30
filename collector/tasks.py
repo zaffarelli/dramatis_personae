@@ -51,6 +51,7 @@ def todo():
 @shared_task
 def pdf_check():
     answer = '/!\\ Pdf_check task is idle'
+    answer = ''
     from collector.models.character import Character
     campaign = get_current_config()
     all = campaign.dramatis_personae.filter(need_pdf=True)
@@ -59,7 +60,8 @@ def pdf_check():
         answer = f'Task: Building PDF for {c.rid}'
         c.backup()
         c.save()
-    logger.info(answer)
+    if len(answer) > 0:
+        logger.info(answer)
     return answer
 
 
@@ -95,10 +97,11 @@ def tod_check():
 def fix_check():
     campaign = get_current_config()
     answer = '/!\\ Fix_check task is idle.'
+    answer = ""
     need_audit = False
     from collector.models.character import Character
     campaign = get_current_config()
-    logger.info("FIX CHECK")
+    # logger.info("FIX CHECK")
     all = Character.objects.filter(need_fix=True)
     if len(all):
         c = all.first()
@@ -115,7 +118,8 @@ def fix_check():
             c.save()
         if len(oldest):
             answer = f'Fix_check: Putting older avatars on the fix list...'
-    logger.info(answer)
+    if len(answer)>0:
+        logger.info(answer)
     if need_audit:
         make_audit_report(campaign)
     return answer

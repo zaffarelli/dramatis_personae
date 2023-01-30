@@ -1,18 +1,22 @@
-{%load fics_filters%}
-{%load static%}
+{% load fics_filters %}
+{% load static %}
 
-{% if c.ritual_set.count != 0 %}
-<table  class='unbreakable' id='ritual_{{c.id}}' width='100%'>
-<tr><th colspan=4>{{c.occult}} Powers (ofp:{{c.occult_fire_power}})</th></tr>
-<tr>
-{% for r in c.ritual_set.all %}
-<td title="{{r.ritual_ref.attribute|as_pa_short}} ({{r.attribute_value}})+{{r.ritual_ref.skill.reference}}({{r.skill_value}})">({{ r.ritual_ref.path }}) {{ r.ritual_ref.reference|safe }}</td>
-<td>{{ r.ritual_ref.level }}</td>
-<td></td>
-<td>{{ r.value }}</td>
-</tr>
-{% endfor %}
+<table id='ritual_{{ c.id }}'>
+    <tr>
+        <th colspan=4>{{ c.occult }} Powers (ofp:{{ c.occult_fire_power }})</th>
+    </tr>
+    {% if c.ritual_set.count != 0 %}
+        {% for r in c.ritual_set.all %}
+            <tr>
+                <td title="{{ r.ritual_ref.attribute|as_pa_short }} ({{ r.attribute_value }})+{{ r.ritual_ref.skill.reference }}({{ r.skill_value }})">
+                    ({{ r.ritual_ref.path }}) {{ r.ritual_ref.reference|safe }}</td>
+                <td>{{ r.ritual_ref.level }}</td>
+                <td></td>
+                <td>{{ r.value }}</td>
+            </tr>
+        {% endfor %}
+    {% else %}&nbsp;
+        <td colspan="4">N/A</td>
+    {% endif %}
 </table>
-{%else%}
-&nbsp;
-{%endif%}
+

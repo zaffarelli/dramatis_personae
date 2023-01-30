@@ -305,10 +305,10 @@ class Character(Combattant):
             cc = fcc.first()
         return cc
 
-    def rebuild_from_lifepath(self):
+    def rebuild_from_lifepath(self, partial=False):
         """ Historical Creation """
         old_op = self.OP
-        print('rebuild_from_lifepath()')
+        # print('rebuild_from_lifepath()')
         self.build_log = ''
         # from collector.models.character_custo import CharacterCusto
         # found_custo = CharacterCusto.objects.filter(character=self).first()
@@ -337,30 +337,31 @@ class Character(Combattant):
             'TO': 0,
             'WB': 0,
         }
-        all_tod_wp_roots = []
-        for tod in self.tourofduty_set.all():
-            AP, OP, WP, tod_wp_roots = tod.push(self)
-            all_tod_wp_roots.append(tod_wp_roots)
-            self.AP_tod_pool += AP
-            self.OP_tod_pool += OP
-            self.OP_tod_pool += WP
-            self.WP_tod_pool += WP
-            self.life_path_total += tod.tour_of_duty_ref.value
-            if tod.tour_of_duty_ref.category == '0' or tod.tour_of_duty_ref.category == '5':
-                tod_rep['RA'] += tod.tour_of_duty_ref.value
-            elif tod.tour_of_duty_ref.category == '10':
-                tod_rep['UP'] += tod.tour_of_duty_ref.value
-            elif tod.tour_of_duty_ref.category == '20':
-                tod_rep['AP'] += tod.tour_of_duty_ref.value
-            elif tod.tour_of_duty_ref.category == '30':
-                tod_rep['EC'] += tod.tour_of_duty_ref.value
-            elif tod.tour_of_duty_ref.category == '40':
-                tod_rep['TO'] += tod.tour_of_duty_ref.value
-            elif tod.tour_of_duty_ref.category == '50':
-                tod_rep['WB'] += tod.tour_of_duty_ref.value
-        if self.life_path_total < 200 and not self.nameless:
-            self.archive_level = 'WKS'
-            self.audit_log("Archive level is WKS: Lifepath total is less than 200.")
+        if not partial:
+            all_tod_wp_roots = []
+            for tod in self.tourofduty_set.all():
+                AP, OP, WP, tod_wp_roots = tod.push(self)
+                all_tod_wp_roots.append(tod_wp_roots)
+                self.AP_tod_pool += AP
+                self.OP_tod_pool += OP
+                self.OP_tod_pool += WP
+                self.WP_tod_pool += WP
+                self.life_path_total += tod.tour_of_duty_ref.value
+                if tod.tour_of_duty_ref.category == '0' or tod.tour_of_duty_ref.category == '5':
+                    tod_rep['RA'] += tod.tour_of_duty_ref.value
+                elif tod.tour_of_duty_ref.category == '10':
+                    tod_rep['UP'] += tod.tour_of_duty_ref.value
+                elif tod.tour_of_duty_ref.category == '20':
+                    tod_rep['AP'] += tod.tour_of_duty_ref.value
+                elif tod.tour_of_duty_ref.category == '30':
+                    tod_rep['EC'] += tod.tour_of_duty_ref.value
+                elif tod.tour_of_duty_ref.category == '40':
+                    tod_rep['TO'] += tod.tour_of_duty_ref.value
+                elif tod.tour_of_duty_ref.category == '50':
+                    tod_rep['WB'] += tod.tour_of_duty_ref.value
+            if self.life_path_total < 200 and not self.nameless:
+                self.archive_level = 'WKS'
+                self.audit_log("Archive level is WKS: Lifepath total is less than 200.")
         # Flatten
         doubles_all_wp_roots = list(itertools.chain(*all_tod_wp_roots))
         # Remove multi
@@ -421,13 +422,15 @@ class Character(Combattant):
             self.balanced = True
         if self.balanced:
             logger.info(f'Current option Points: {self.OP}')
+
         else:
             logger.error(f'{self.full_name} is not properly balanced: {self.OP} vs {self.life_path_total}!')
             self.audit_log(f'- {self.full_name} is not properly balanced: {self.OP} vs {self.life_path_total}!')
         if self.color == '#CCCCCC':
             d = lambda x: fs_fics7.roll(x) - 1
             self.color = '#%01X%01X%01X%01X%01X%01X' % (d(8) + 4, d(16), d(8) + 4, d(16), d(8) + 4, d(16))
-        self.need_pdf = old_op != self.OP
+        self.need_pdf = (old_op != self.OP) and self.balanced
+        self.backup()
 
     def checkOverhead(self):
         overhead = 0
@@ -462,7 +465,7 @@ class Character(Combattant):
             logger.info(f'>>> No Overhead.')
 
     def prepare_display(self):
-        print("prepare_display()")
+        # print("prepare_display()")
         self.refresh_skills_options()
         self.refresh_options("ba_options", "ba_options_not", self.charactercusto.beneficeafflictioncusto_set.all(),
                              "benefice_affliction_ref", "BeneficeAfflictionRef")
@@ -498,11 +501,11 @@ class Character(Combattant):
         self.add_missing_root_skills()
         self.reset_total()
 
-    def fix(self, conf=None):
-        print("super.fix()")
+    def fix(self, conf=None, partial=False):
+        # print("super.fix()")
         super().fix(conf)
         # self.audit = ""
-        print("fix()")
+        # print("fix()")
         from collector.models.profile import Profile
         profiles = Profile.objects.all()
         for p in profiles:
@@ -525,10 +528,10 @@ class Character(Combattant):
         if self.full_name == self.rid:
             self.audit_log("Name is a RID. Everything has to be done on this character.")
         # NPC fix
-        print("fix()")
+        # print("fix()")
         if self.use_history_creation:
             logger.info('rebuild from lifepath')
-            self.rebuild_from_lifepath()
+            self.rebuild_from_lifepath(partial)
         else:
             self.rebuild_free_form()
         self.fix75()
@@ -537,8 +540,9 @@ class Character(Combattant):
             self.xp_earned = self.xp_spent
         self.xp_pool = self.xp_earned - self.xp_spent
         self.calculate_shortcuts()
-        self.update_ranking()
-        self.race = self.specie.species
+        if not partial:
+            self.update_ranking()
+            self.race = self.specie.species
 
         if self.PA_BOD != 0:
             if self.height == 0:
@@ -554,8 +558,9 @@ class Character(Combattant):
                         self.full_name, self.height, self.weight, self.PA_BOD, self.PA_CON))
         # self.is_exportable = True #self.check_exportable()
         self.update_challenge()
-        self.update_stories_count()
-        self.race = self.specie.species
+        if not partial:
+            self.update_stories_count()
+            self.race = self.specie.species
 
         if self.historical_figure:
             self.audit_log()
@@ -626,14 +631,14 @@ class Character(Combattant):
             if sc != '':
                 shortcuts.append(sc)
                 shortcuts_pdf.append(
-                    "{:03d}|{:s} ({:s} = {:d})".format(pdf['score'], pdf['rationale'], pdf['label'], pdf['score']))
+                    "- {:03d}|{:s} ({:s} = {:d})".format(pdf['score'], pdf['rationale'], pdf['label'], pdf['score']))
                 shortcuts_json.append({'score': pdf['score'], 'rationale': pdf['rationale'], 'label': pdf['label']})
-        self.gm_shortcuts = ''.join(shortcuts)
+        self.gm_shortcuts = ' '.join(shortcuts)
         shortcuts_pdf.sort(reverse=True)
         shortcuts_pdf_clean = []
         for s in shortcuts_pdf:
             shortcuts_pdf_clean.append(s.split("|")[1])
-        self.gm_shortcuts_pdf = ', '.join(shortcuts_pdf_clean)
+        self.gm_shortcuts_pdf = '<br/>'.join(shortcuts_pdf_clean)
         logger.warning(self.gm_shortcuts_pdf)
         result = sorted(shortcuts_json, key=itemgetter('score'), reverse=True)
         # print(result)
@@ -669,7 +674,7 @@ class Character(Combattant):
     def refresh_skills_options(self):
         """ This one is special: it only reflects skills that are not in the character """
         from collector.models.skill import SkillRef
-        print("refresh_skills_options")
+        # print("refresh_skills_options")
         self.skills_options = []
         self.skills_options_not = []
         ss = self.skill_set.all()
@@ -931,6 +936,8 @@ class Character(Combattant):
             from collector.utils.basic import write_pdf
             # try:
             context = dict(c=self, filename=f'{self.rid}', now=datetime.now(tz=get_current_timezone()))
+            # print(context['c'])
+            # context['c']['alliance_ref'] = self.alliance_ref.reference
             write_pdf('collector/character_roster.html', context)
             logger.info(f'=> PDF created ...: {self.rid}')
             proceed = True
@@ -1127,7 +1134,7 @@ class Character(Combattant):
     def to_jsonFICS(self):
         from collector.models.skill import SkillRef
         import datetime
-        print("to_json_fics()")
+        # print("to_json_fics()")
         j = self.to_json()
 
         self.fix()
@@ -1203,6 +1210,12 @@ class Character(Combattant):
         k["shield_options"] = self.shield_options
         k["armor_options"] = self.armor_options
         k["weapon_options"] = self.weapon_options
+        k["ba_options_not"] = self.ba_options_not
+        k["bc_options_not"] = self.bc_options_not
+        k["ritual_options_not"] = self.ritual_options_not
+        k["shield_options_not"] = self.shield_options_not
+        k["armor_options_not"] = self.armor_options_not
+        k["weapon_options_not"] = self.weapon_options_not
         k["AP_tod_pool"] = self.AP_tod_pool
         k["OP_tod_pool"] = self.OP_tod_pool
         k["charactercusto"] = self.charactercusto.to_json()

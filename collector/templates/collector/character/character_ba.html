@@ -1,24 +1,29 @@
-{%load fics_filters%}
-{%load static%}
+{% load fics_filters %}
+{% load static %}
 
-{% if c.beneficeaffliction_set.count != 0 %}
-<table class='unbreakable' width='100%'>
-<tr><th colspan=3>Benefice/Afflictions ({{c.BA_TOTAL}})</th></tr>
-<tr>
-{% for ba in c.beneficeaffliction_set.all %}
-<td>{{ ba.benefice_affliction_ref.reference|safe }}</td>
-<td>{{ ba.benefice_affliction_ref.description|safe }}
-{% if ba.description and ba.benefice_affliction_ref.description %}
-    <br/>
-{% endif %}
-{% if ba.description  %}
-&rarr; {{ ba.description|safe }}
-{% endif %}
-</td>
-<td>{{ ba.benefice_affliction_ref.value }}</td>
-</tr>
-{% endfor %}
+<table>
+    <tr>
+        <th colspan=3>Benefice/Afflictions ({{ c.BA_TOTAL }})</th>
+    </tr>
+    {% if c.beneficeaffliction_set.count != 0 %}
+        {% for ba in c.beneficeaffliction_set.all %}
+            <tr>
+                <td>{{ ba.benefice_affliction_ref.reference|safe }}</td>
+                <td>{{ ba.benefice_affliction_ref.description|safe }}
+                    {% if ba.description and ba.benefice_affliction_ref.description %}
+                        <br/>
+                    {% endif %}
+                    {% if ba.description %}
+                        &barr; {{ ba.description|safe }}
+                    {% endif %}
+                </td>
+                <td>{{ ba.benefice_affliction_ref.value }}</td>
+            </tr>
+        {% endfor %}
+    {% else %}
+        <tr>
+            <td colspan="4">N/A</td>
+        </tr>
+    {% endif %}
 </table>
-{%else%}
-&nbsp;
-{%endif%}
+
