@@ -67,6 +67,7 @@ def get_list(request, id, slug='none'):
     elif decs.startswith('c-'):
         elements = decs.split('-')
         ep_class = elements[1].capitalize()
+        print(elements)
         ep_id = 1
         if len(elements) > 2:
             ep_id = elements[2]
@@ -86,6 +87,11 @@ def get_list(request, id, slug='none'):
             from scenarist.models.events import Event
             event = Event.objects.get(pk=ep_id)
             cast = event.get_full_cast()
+        elif ep_class == 'Card':
+            print(ep_id)
+            from scenarist.models.cards import Card
+            card = Card.objects.get(pk=ep_id)
+            cast = card.get_full_cast()
         else:
             cast = []
         character_items = []
@@ -340,7 +346,7 @@ def display_sheet(request, pk=None):
         spe = c.get_specialities()
         shc = c.get_shortcuts()
         j = c.to_jsonFICS()
-        settings = {'version': 1.0, 'labels': {}, 'pre_title': pre_title, 'scenario': scenario,
+        settings = {'version': 1.0, 'labels': {}, 'pre_title': pre_title, 'scenario': campaign.short_name.upper(),
                     'post_title': post_title, 'fontset': FONTSET, 'specialities': spe, 'shortcuts': shc}
         fics_sheet_context = {'settings': json.dumps(settings, sort_keys=True, indent=4), 'data': j}
 

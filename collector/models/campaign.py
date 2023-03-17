@@ -51,6 +51,7 @@ class Campaign(models.Model):
     hidden = models.BooleanField(default=False)
     known_systems = models.TextField(max_length=1024, default='', blank=True)
     new_narrative = models.BooleanField(default=False)
+    short_name = models.CharField(max_length=64, default='', blank=True)
 
     def __str__(self):
         return f'{self.title} [{self.rpgsystem}]'

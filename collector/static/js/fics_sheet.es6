@@ -20,6 +20,7 @@ class FICSSheet extends Sheet {
         me.addButton(2, 'Page 2', 'browse');
         me.addButton(3, 'Page 3', 'browse');
         me.addButton(4, 'Page 4', 'browse');
+        me.addButton(5, 'Create PDF', '');
     }
 
 
@@ -178,6 +179,7 @@ class FICSSheet extends Sheet {
         me.fillCharacter(page);
         me.drawButtons();
         me.zoomActivate();
+        me.createPDF();
     }
 }
 

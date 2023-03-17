@@ -35,8 +35,15 @@ class Card(StoryModel):
     def get_casting(self):
         """ Bring all avatars rids from all relevant text fields"""
         casting = super().get_casting()
+        casting.append(self.fetch_avatars(self.description))
         casting.append(self.fetch_avatars(self.resolution))
+        casting.append(self.fetch_avatars(self.rewards))
         return casting
+
+    def get_episodes(self):
+        from scenarist.models.cards import Card
+        episodes = Card.objects.filter(parent=self)
+        return episodes
 
     @property
     def get_tags(self):
@@ -122,14 +129,14 @@ class Card(StoryModel):
     @property
     def card_type_prefix(self):
         prefix = {
-            'EP': 'EPI',
-            'DR': 'DRA',
-            'AC': 'ACT',
-            'SH': 'SCH',
-            'BK': 'BKL',
-            'AD': 'SES',
-            'EV': 'EVE',
-            'SC': 'SCE',
+            'EP': 'E',
+            'DR': 'D',
+            'AC': 'A',
+            'SH': 'H',
+            'BK': 'B',
+            'AD': 'S',
+            'EV': 'E',
+            'SC': 'C',
             'UN': '',
         }
         return prefix[self.card_type]
@@ -150,10 +157,10 @@ class Card(StoryModel):
             self.epic = get_current_config().epic
         # Handle full id
         if self.parent:
-            self.full_id = f"{self.parent.full_id}:{self.card_type_prefix}.{int(self.chapter):03}"
+            self.full_id = f"{self.parent.full_id}:{self.card_type_prefix}.{int(self.chapter):02}"
         else:
             if self.card_type == 'EP':
-                self.full_id = f"{self.card_type_prefix}.{int(self.chapter):03}"
+                self.full_id = f"{self.card_type_prefix}.{int(self.chapter):02}"
         # display Tabs
         self.sublevels = ""
         print(self.full_id.count(':'))
@@ -219,7 +226,7 @@ class Challenge(models.Model):
     line = models.CharField(default='', max_length=256, blank=True)
     completion = models.PositiveIntegerField(default=1, blank=True)
     global_achievement = models.IntegerField(default=0, blank=True)
-    plot_card = models.ForeignKey(Card, on_delete=models.CASCADE, related_name='challenges',null=True)
+    plot_card = models.ForeignKey(Card, on_delete=models.CASCADE, related_name='challenges', null=True)
     code = models.CharField(default='', max_length=36, blank=True)
 
     def __str__(self):

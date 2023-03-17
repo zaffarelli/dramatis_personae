@@ -10,7 +10,7 @@ CacheControl==0.12.11
 cachetools==5.2.0
 cachy==0.3.0
 cairocffi==1.4.0
-CairoSVG==2.5.2
+CairoSVG==2.6.0
 celery==5.2.7
 certifi==2021.10.8
 cffi==1.14.6
@@ -34,7 +34,7 @@ decorator==4.2.1
 defusedxml==0.7.1
 Deprecated==1.2.13
 distlib==0.3.6
-Django==3.2
+Django==4.1.4
 django-appconf==1.0.3
 django-colorfield==0.8.0
 django-compressor==2.3

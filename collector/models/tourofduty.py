@@ -80,7 +80,7 @@ class TourOfDutyRef(models.Model):
 
     def __str__(self):
         # str = f'[{self.get_category_display()}][{self.value}] ({self.get_caste_display()}|{self.topic}) {self.reference} '
-        str = f'[{self.value}] {self.reference}'
+        str = f'[{self.get_category_display()}: {self.value}] {self.reference}'
         return str
 
     def fix(self):

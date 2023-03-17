@@ -150,7 +150,11 @@ class Sheet {
                     me.perform(null, num - 1);
                 } else {
                     if (num == 0) {
+                        console.log("Save SVG!");
                         me.saveSVG();
+                    } else if (num == 5) {
+                        console.log('Create PDF');
+                        me.createPDF();
                     } else {
                         $("#d3area").css("display", "none");
                     }
@@ -190,20 +194,7 @@ class Sheet {
             .on('mouseout', function (d) {
                 me.svg.select('#button' + num).style("stroke", "#111");
             })
-            .on('click', function (d) {
-                if (num == 0) {
-                    // me.saveSVG();
-                    me.createPDF();
-                } else if (num == 1) {
-                    console.log('Recto');
-                    me.perform(null, 0);
-                } else if (num == 2) {
-                    me.perform(null, 1);
-                    console.log('Verso');
-                } else if (num == 3) {
-                    $("#d3area").css("display", "none");
-                }
-            })
+
         ;
     }
 
@@ -224,7 +215,7 @@ xmlns="http://www.w3.org/2000/svg" version="1.1" \
 xmlns:xlink="http://www.w3.org/1999/xlink"> \
 ' + flist + base_svg + '</svg>';
 
-        lpage = "_"+me.page;
+        lpage = "_" + me.page;
         let fname = me.data['rid'] + lpage + ".svg"
         let nuke = document.createElement("a");
         nuke.href = 'data:application/octet-stream;base64,' + btoa(me.formatXml(exportable_svg));
@@ -253,16 +244,18 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
 ' + flist + base_svg + '</svg>';
 
         lpage = "_p" + me.page;
-        let svg_name = me.data['rid'] + lpage + ".svg"
-        let pdf_name = me.data['rid'] + lpage + ".pdf"
+        let svg_name = me.data['rid'] + lpage + ".svg";
+        let pdf_name = me.data['rid'] + lpage + ".pdf";
+        let rid = me.data['rid'];
         let sheet_data = {
             'pdf_name': pdf_name,
             'svg_name': svg_name,
+            'rid': rid,
             'svg': exportable_svg
         }
         me.svg.selectAll('.do_not_print').attr('opacity', 1);
         $.ajax({
-            url: 'ajax/character/svg2pdf/' + me.data['rid'] + '/',
+            url: 'ajax/character/svg2pdf/' + rid + '/',
             type: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -271,7 +264,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
             data: sheet_data,
             dataType: 'json',
             success: function (answer) {
-                console.log("PDF generated for [" + me.data['rid'] + "]...")
+                console.log("PDF generated for [" + rid + "]...")
             },
             error: function (answer) {
                 console.error('Error generating the PDF...: ' + pdf_name);
@@ -348,7 +341,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
                     .attr('x', me.stepx * x)
                     .attr('y', me.stepy * y)
                     .attr('width', me.stepx)
-                    .attr('height', me.stepy*0.9)
+                    .attr('height', me.stepy * 0.9)
                     .style('fill', me.debug_fill)
                     .style('stroke', me.debug_stroke)
                     .style('stroke-width', '1pt')
@@ -585,7 +578,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
         me.fillList(basex, basey, "weapons", styles);
 
 
-       if (me.blank === false) {
+        if (me.blank === false) {
             console.log(me.data['experience_details'])
             me.wrap(me.data['experience_details'], 14, 25.5, 9.5, me.user_font);
         }
@@ -1271,7 +1264,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
             .text("Primary Attributes")
             .style("text-anchor", 'left')
             .style("font-family", me.base_font)
-            .style("font-size", me.medium_font_size +'pt')
+            .style("font-size", me.medium_font_size + 'pt')
             .style("fill", me.draw_fill)
             .style("stroke", me.draw_stroke)
             .style("stroke-width", '0.05pt')
@@ -1313,7 +1306,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
             .text("Secondary Attributes")
             .style("text-anchor", 'left')
             .style("font-family", me.base_font)
-            .style("font-size", me.medium_font_size +'pt')
+            .style("font-size", me.medium_font_size + 'pt')
             .style("fill", me.draw_fill)
             .style("stroke", me.draw_stroke)
             .style("stroke-width", '0.05pt')
@@ -1648,7 +1641,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
             .text("Skills + Roots")
             .style("text-anchor", 'end')
             .style("font-family", me.base_font)
-            .style("font-size", me.big_font_size +'pt')
+            .style("font-size", me.big_font_size + 'pt')
             .style("fill", me.draw_fill)
             .style("stroke", me.draw_stroke)
             .style("stroke-width", '0.05pt')
@@ -1656,13 +1649,13 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
 
         me.character.append('text')
             .attr('x', ox + 21.25 * me.stepx)
-            .attr('y', oy +6.20 * me.stepy)
+            .attr('y', oy + 6.20 * me.stepy)
             .attr('dx', 0)
             .attr('dy', 0)
             .text("Skill Specialties")
             .style("text-anchor", 'end')
             .style("font-family", me.base_font)
-            .style("font-size", me.big_font_size +'pt')
+            .style("font-size", me.big_font_size + 'pt')
             .style("fill", me.draw_fill)
             .style("stroke", me.draw_stroke)
             .style("stroke-width", '0.05pt')
@@ -1857,7 +1850,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
 
     fillList(basex = 0, basey = 0, datasource = "ba", styles = {}) {
         let me = this;
-        let ox = basex, oy = basey+0.3, lines = 0 /*, offset = 0*/;
+        let ox = basex, oy = basey + 0.3, lines = 0 /*, offset = 0*/;
         let w = 0, l = 1;
         _.forEach(styles['lefts'], function (e, i) {
             if (e > w) {
@@ -1868,7 +1861,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
 
         // Labels
         _.forEach(styles['labels'], function (e, i) {
-            me.drawText(ox + styles["lefts"][i], oy-me.line_inter*0.75, me.draw_fill, me.draw_stroke, me.small_font_size, "start", e);
+            me.drawText(ox + styles["lefts"][i], oy - me.line_inter * 0.75, me.draw_fill, me.draw_stroke, me.small_font_size, "start", e);
         });
         _.forEach(me.data[datasource], function (e, i) {
             // let o = JSON.parse(e);
@@ -1887,20 +1880,31 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
                 biggest = 1;
                 // First Count lines
                 _.forEach(styles["properties"], function (y, j) {
+
                     if (styles["aligns"][j] == "multiline") {
                         let data = undefined;
                         let a = y.split('|');
-                        let x = a[0];
+                        console.log("a=");
+                        console.log(a);
+                        let x = a;
+                        console.log("x=");
+                        console.log(x);
                         let z = undefined;
                         if (a.length == 2) {
+                            x = a[0];
                             z = a[1];
                         }
+                        let property_components = undefined;
+                        if ('__' in x) {
+                            property_components = x.split('__');
 
-                        let property_components = x.split('__');
-                        if (property_components.length < 2) {
-                            data = e[x]
+                            if (property_components.length < 2) {
+                                data = e[x]
+                            } else {
+                                data = e[property_components[0]][property_components[1]]
+                            }
                         } else {
-                            data = e[property_components[0]][property_components[1]]
+                            data = e[x];
                         }
                         if (z == undefined) {
 
@@ -1914,11 +1918,12 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
                             data = data.toLowerCase();
                         }
 
-                        lines = me.wrap(data, ox + styles["lefts"][j], oy, styles["widths"][j], font) ;
+                        lines = me.wrap(data, ox + styles["lefts"][j], oy, styles["widths"][j], font);
                         oy += me.line_inter;
                     } else {
                         lines = 0;
                     }
+
                     // if (lines > biggest) {
                     //     biggest = lines;
                     // }
@@ -1930,16 +1935,27 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
                     if (styles["aligns"][j] != "multiline") {
                         let data = undefined;
                         let a = y.split('|');
-                        let x = a[0];
+                        console.log("a=");
+                        console.log(a);
+                        let x = a;
+                        console.log("x=");
+                        console.log(x);
                         let z = undefined;
                         if (a.length == 2) {
+                            x = a[0];
                             z = a[1];
                         }
-                        let property_components = x.split('__');
-                        if (property_components.length < 2) {
-                            data = e[x]
+                        let property_components = undefined;
+                        if ('__' in x) {
+                            property_components = x.split('__');
+
+                            if (property_components.length < 2) {
+                                data = e[x]
+                            } else {
+                                data = e[property_components[0]][property_components[1]]
+                            }
                         } else {
-                            data = e[property_components[0]][property_components[1]]
+                            data = e[x];
                         }
                         if (z == undefined) {
 
@@ -1952,7 +1968,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
                         } else if (z == "lower") {
                             data = data.toLowerCase();
                         }
-                        me.drawText(ox + styles["lefts"][j], oy-me.line_inter  , fill, stroke, size, styles["aligns"][j], data, opac, font);
+                        me.drawText(ox + styles["lefts"][j], oy - me.line_inter, fill, stroke, size, styles["aligns"][j], data, opac, font);
                     }
                 });
             }
@@ -1966,8 +1982,8 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
     wrap(par, bx, by, width, font = 'default') {
         let me = this;
         let fontsize = 30;
-        let xo = bx*me.stepx,
-            yo = (by + me.small_inter*0.0) * me.stepy;
+        let xo = bx * me.stepx,
+            yo = (by + me.small_inter * 0.0) * me.stepy;
 
         if (font == 'default') {
             font = me.user_font;
@@ -1993,7 +2009,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
                 .attr("x", x)
                 .attr("y", y)
                 .attr("dy", ++lines_count * lineHeight)
-            ;
+        ;
         while (word = words.pop()) {
             line.push(word);
             tspan.text(line.join(" "));

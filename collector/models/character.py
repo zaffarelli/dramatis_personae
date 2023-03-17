@@ -504,6 +504,7 @@ class Character(Combattant):
     def fix(self, conf=None, partial=False):
         # print("super.fix()")
         super().fix(conf)
+        logger.info(f"Checking character customization: {self.cc}")
         # self.audit = ""
         # print("fix()")
         from collector.models.profile import Profile
@@ -520,7 +521,8 @@ class Character(Combattant):
                 self.birthdate = conf.epic.era - self.birthdate
                 self.age = conf.epic.era - self.birthdate
 
-        logger.info(f"Checking character customization: {self.cc}")
+
+
 
         self.update_game_parameters()
         self.fencing_league_special()

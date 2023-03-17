@@ -14,6 +14,7 @@ from collector.utils.xls_collector import export_to_xls, update_from_xls
 from collector.utils.basic import get_current_config, extract_rules, make_audit_report, make_deck
 from collector.utils.gs_export import update_gss, summary_gss
 from collector.models.sequence import Sequence
+from collector.utils.d4_changes import is_ajax
 import os
 import json
 
@@ -179,12 +180,37 @@ def svg_to_pdf(request, slug):
     import cairosvg
     response = {'status': 'error'}
     if is_ajax(request):
-        pdf_name = os.path.join(settings.MEDIA_ROOT, 'pdf/results/' + request.POST["pdf_name"])
-        svg_name = os.path.join(settings.MEDIA_ROOT, 'pdf/results/' + request.POST["svg_name"])
+        pdf_name = os.path.join(settings.MEDIA_ROOT, 'pdf/results/pdf/' + request.POST["pdf_name"])
+        svg_name = os.path.join(settings.MEDIA_ROOT, 'pdf/results/svg/' + request.POST["svg_name"])
         svgtxt = request.POST["svg"]
+        rid = request.POST["rid"]
         with open(svg_name, "w") as f:
             f.write(svgtxt)
             f.close()
         cairosvg.svg2pdf(url=svg_name, write_to=pdf_name, scale=1.0)
         response['status'] = 'ok'
+        all_in_one_pdf(rid)
     return JsonResponse(response)
+
+
+def all_in_one_pdf(rid):
+    print("Starting all in one.")
+    res = []
+    from PyPDF2 import PdfFileMerger
+    media_results = os.path.join(settings.MEDIA_ROOT, 'pdf/results/pdf/')
+    csheet_results = os.path.join(settings.MEDIA_ROOT, 'pdf/results/csheet/')
+    onlyfiles = [f for f in os.listdir(media_results) if os.path.isfile(os.path.join(media_results, f))]
+    pdfs = onlyfiles
+    merger = PdfFileMerger()
+    pdfs.sort()
+    i = 0
+    for pdf in pdfs:
+        if pdf.startswith(rid):
+            print(pdf)
+            merger.append(open(media_results + pdf, 'rb'))
+            i += 1
+    if i == 4:
+        des = f'{csheet_results}{rid}.pdf'
+        with open(des, 'wb') as fout:
+            merger.write(fout)
+    return res

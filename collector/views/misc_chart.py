@@ -65,8 +65,9 @@ def get_keywords(request, *args, **kwargs):
             # print(keyword)
             keyword = x.keyword
         count += 1
-    for d in campaign.epic.drama_set.all():
-        edata['dramas'].append({'drama': d.name, 'code': f'c-drama-{d.id}', 'chapter': d.get_full_id})
+    for item in campaign.epic.card_set.all():
+        if item.card_type in ['AD', 'DR']:
+            edata['dramas'].append({'name': item.name, 'code': f'c-card-{item.id}', 'chapter': item.full_id})
 
     template = get_template('collector/keywords.html')
     chart = template.render({'cdata': data, 'edata': edata})

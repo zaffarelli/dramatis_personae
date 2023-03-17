@@ -156,6 +156,6 @@ class CharacterAdmin(admin.ModelAdmin):
                make_partial, make_complete, enter_fencing_league, exit_fencing_league, recalc_height]
     exclude = ['SA_REC', 'SA_STA', 'SA_END', 'SA_STU', 'SA_RES', 'SA_DMG', 'SA_TOL', 'SA_HUM', 'SA_PAS', 'SA_WYR',
                'SA_SPD', 'SA_RUN', 'PA_TOTAL', 'SK_TOTAL', 'TA_TOTAL', 'BC_TOTAL', 'BA_TOTAL']
-    list_filter = ['fencing_league', 'team', 'occult', 'alliance_ref', 'keyword', 'specie']
+    list_filter = ['fencing_league', 'nameless', 'team', 'occult', 'alliance_ref', 'keyword', 'specie']
     search_fields = ['full_name', 'alias', 'keyword', 'rid', 'player']
     list_editable = ['need_fix']
