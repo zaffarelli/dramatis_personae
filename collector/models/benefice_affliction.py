@@ -60,11 +60,11 @@ class BeneficeAffliction(models.Model):
         return '%s=%s' % (self.character.full_name, self.benefice_affliction_ref.reference)
 
     def to_json(self):
-        jstr = ""
-        # from collector.utils.basic import json_default_simple
-        # import json
-        # jstr = json.loads(json.dumps(self, default=json_default_simple, sort_keys=True, indent=4))
-        # jstr['benefice_affliction_ref'] = self.benefice_affliction_ref.to_json()
+        jstr = {}
+        from collector.utils.basic import json_default_simple
+        import json
+        jstr = {"id": self.pk, "description": self.description }
+        jstr['benefice_affliction_ref'] = self.benefice_affliction_ref.to_json()
         return jstr
 
 
@@ -102,7 +102,8 @@ def refix(modeladmin, request, queryset):
 class BeneficeAfflictionRefAdmin(admin.ModelAdmin):
     ordering = ('category', 'reference', 'watermark', '-value', 'ranking')
     list_display = (
-    'reference', 'uuid', 'emphasis', 'value', 'watermark', 'category', 'ranking', 'cash_value', 'description', 'source')
+        'reference', 'uuid', 'emphasis', 'value', 'watermark', 'category', 'ranking', 'cash_value', 'description',
+        'source')
     search_fields = ('reference', 'description', 'emphasis', 'watermark')
     list_filter = ('ranking', 'source', 'watermark', 'category', 'emphasis')
     actions = [refix, make_occult, make_combat, make_talent, make_riches, make_possession]

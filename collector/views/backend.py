@@ -206,7 +206,7 @@ def all_in_one_pdf(rid):
     i = 0
     for pdf in pdfs:
         if pdf.startswith(rid):
-            print(pdf)
+            # print(pdf)
             merger.append(open(media_results + pdf, 'rb'))
             i += 1
     if i == 4:

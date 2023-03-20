@@ -87,14 +87,16 @@ def respawn_summary(avatar, context, request):
 def skill_pick(request, avatar, item, offset):
     """ Touching skills to edit them in the view """
     from collector.models.skill import SkillRef
-    from collector.utils.basic import get_current_config
-    campaign = get_current_config(request)
+    # from collector.utils.basic import get_current_config
+    import time
+    st = time.time()
+    # campaign = get_current_config(request)
     context = {}
     offset = int(offset) - 50;
     ch = Character.objects.get(pk=avatar)
     skillref = SkillRef.objects.get(pk=item)
     ch.charactercusto.add_or_update_skill(skillref.id, offset)
-    ch.fix(campaign)
+    ch.fix(conf=None, focus_on="SKILLS")
     ch.save()
     skill = ch.skill_set.all().filter(skill_ref__id=item).first()
     context["c"] = model_to_dict(ch)
@@ -104,13 +106,18 @@ def skill_pick(request, avatar, item, offset):
     context["challenge"] = template_challenge.render({'c': ch})
     context = respawn_summary(ch, context, request)
     context = respawn_avatar_link(ch, context, request)
+    et = time.time()
+    elapsed_time = et-st
+    print(f"TRACE SKILLS> Execution time: {elapsed_time:.2f} seconds.")
     return JsonResponse(context)
 
 
 def attr_pick(request, avatar, item, offset):
     """ Touching skills to edit them in the view """
-    from collector.utils.basic import get_current_config
-    campaign = get_current_config(request)
+    # from collector.utils.basic import get_current_config
+    # campaign = get_current_config(request)
+    import time
+    st = time.time()
     context = {}
     offset = int(offset) - 50;
     ch = Character.objects.get(pk=avatar)
@@ -121,7 +128,8 @@ def attr_pick(request, avatar, item, offset):
         setattr(ch.charactercusto, item, x + offset)
     # print(item)
     info = ("info_" + item.split("_")[1]).lower()
-    ch.fix(campaign)
+    #ch.fix(conf=campaign)
+    ch.fix(conf=None, focus_on="ATTR")
     ch.save()
     context["c"] = model_to_dict(ch)
     template = get_template('collector/character/character_pa.html')
@@ -130,14 +138,19 @@ def attr_pick(request, avatar, item, offset):
     context["challenge"] = template_challenge.render({'c': ch})
     context = respawn_summary(ch, context, request)
     context = respawn_avatar_link(ch, context, request)
+    et = time.time()
+    elapsed_time = et-st
+    print(f"TRACE ATTRIBUTES> Execution time: {elapsed_time:.2f} seconds.")
     return JsonResponse(context)
 
 
 def customize_skill(request, avatar, item):
     from collector.models.skill import SkillRef, SkillCusto
     from collector.models.character_custo import CharacterCusto
-    from collector.utils.basic import get_current_config
-    campaign = get_current_config(request)
+    import time
+    st = time.time()
+    # from collector.utils.basic import get_current_config
+    # campaign = get_current_config(request)
     context = {}
     ch = Character.objects.get(pk=avatar)
     ref = SkillRef.objects.get(pk=item)
@@ -146,8 +159,10 @@ def customize_skill(request, avatar, item):
     new_item.skill_ref = ref
     new_item.value = 1
     new_item.save()
-    ch.fix(conf=campaign)
+    #ch.fix(conf=campaign)
+    ch.fix(conf=None, focus_on="SKILL")
     ch.save()
+    print("Fixed")
     context["c"] = model_to_dict(ch)
     template = get_template('collector/character/character_skills.html')
     context["block"] = template.render({'c': ch})
@@ -157,7 +172,10 @@ def customize_skill(request, avatar, item):
     context["challenge"] = template_challenge.render({'c': ch})
     context = respawn_summary(ch, context, request)
     context = respawn_avatar_link(ch, context, request)
-    messages.info(request, 'Avatar %s customized with skill %s at +1.' % (ch.full_name, new_item.skill_ref.reference))
+    # messages.info(request, 'Avatar %s customized with skill %s at +1.' % (ch.full_name, new_item.skill_ref.reference))
+    et = time.time()
+    elapsed_time = et-st
+    print(f"TRACE SKILLS> Execution time: {elapsed_time:.2f} seconds.")
     return JsonResponse(context)
 
 

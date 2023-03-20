@@ -67,7 +67,7 @@ def get_list(request, id, slug='none'):
     elif decs.startswith('c-'):
         elements = decs.split('-')
         ep_class = elements[1].capitalize()
-        print(elements)
+        # print(elements)
         ep_id = 1
         if len(elements) > 2:
             ep_id = elements[2]
@@ -88,7 +88,7 @@ def get_list(request, id, slug='none'):
             event = Event.objects.get(pk=ep_id)
             cast = event.get_full_cast()
         elif ep_class == 'Card':
-            print(ep_id)
+            # print(ep_id)
             from scenarist.models.cards import Card
             card = Card.objects.get(pk=ep_id)
             cast = card.get_full_cast()

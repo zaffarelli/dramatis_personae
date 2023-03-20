@@ -322,7 +322,6 @@ class Character(Combattant):
         self.purge_armors()
         self.purge_shields()
         self.purge_rituals()
-        # self.purge_talents()
         self.AP_tod_pool = 0
         self.OP_tod_pool = 0
         self.WP_tod_pool = 0
@@ -501,47 +500,64 @@ class Character(Combattant):
         self.add_missing_root_skills()
         self.reset_total()
 
-    def fix(self, conf=None, partial=False):
-        # print("super.fix()")
+    def fix(self, conf=None, partial=False, focus_on=""):
         super().fix(conf)
         logger.info(f"Checking character customization: {self.cc}")
-        # self.audit = ""
-        # print("fix()")
-        from collector.models.profile import Profile
-        profiles = Profile.objects.all()
-        for p in profiles:
-            if p.main_character == self:
-                self.player = p.user.username
-        if conf is None:
-            if self.birthdate < 1000:
-                self.birthdate = 5017 - self.birthdate
-                self.age = 5017 - self.birthdate
+        self.focus_attributes = False
+        self.focus_skills = False
+        self.focus_weapons = False
+        self.focus_benefices = False
+        self.focus_blessings = False
+        self.focus_gear = False
+        self.focus_rituals = False
+        self.focus_generic = False
+        if len(focus_on)>0:
+            if "ATTR" in focus_on:
+                self.focus_attributes = True
+            if "SKILL" in focus_on:
+                self.focus_skills = True
         else:
-            if self.birthdate < 1000:
-                self.birthdate = conf.epic.era - self.birthdate
-                self.age = conf.epic.era - self.birthdate
+            self.focus_generic = True
+            self.focus_attributes = True
+            self.focus_skills = True
+            self.focus_weapons = True
+            self.focus_benefices = True
+            self.focus_blessings = True
+            self.focus_gear = True
+            self.focus_rituals = True
+        if self.focus_generic:
+            from collector.models.profile import Profile
+            profiles = Profile.objects.all()
+            for p in profiles:
+                if p.main_character == self:
+                    self.player = p.user.username
+            if conf is None:
+                if self.birthdate < 1000:
+                    self.birthdate = 5017 - self.birthdate
+                    self.age = 5017 - self.birthdate
+            else:
+                if self.birthdate < 1000:
+                    self.birthdate = conf.epic.era - self.birthdate
+                    self.age = conf.epic.era - self.birthdate
 
-
-
-
-        self.update_game_parameters()
-        self.fencing_league_special()
-        self.occult_special()
-        if self.full_name == self.rid:
-            self.audit_log("Name is a RID. Everything has to be done on this character.")
-        # NPC fix
-        # print("fix()")
+            self.update_game_parameters()
+            self.fencing_league_special()
+            self.occult_special()
+            if self.full_name == self.rid:
+                self.audit_log("Name is a RID. Everything has to be done on this character.")
         if self.use_history_creation:
             logger.info('rebuild from lifepath')
             self.rebuild_from_lifepath(partial)
         else:
             self.rebuild_free_form()
-        self.fix75()
+        if self.focus_skills:
+            self.fix75()
         self.xp_spent, self.experience_balance = self.check_experience_details()
         if self.xp_earned < self.xp_spent:
             self.xp_earned = self.xp_spent
         self.xp_pool = self.xp_earned - self.xp_spent
-        self.calculate_shortcuts()
+        if self.focus_skills or self.focus_attributes:
+            self.calculate_shortcuts()
         if not partial:
             self.update_ranking()
             self.race = self.specie.species
@@ -558,17 +574,15 @@ class Character(Combattant):
                         self.weight *= 1 + (self.PA_CON - self.PA_MOV) * 0.1
                     logger.info("Height/Weight Experiment 1: %s --> %0.2f %0.2f BODY:%d CONSTITUTION:%d" % (
                         self.full_name, self.height, self.weight, self.PA_BOD, self.PA_CON))
-        # self.is_exportable = True #self.check_exportable()
         self.update_challenge()
-        if not partial:
+        if self.focus_generic:
             self.update_stories_count()
             self.race = self.specie.species
 
-        if self.historical_figure:
-            self.audit_log()
+            if self.historical_figure:
+                self.audit_log()
         self.need_fix = False
         logger.info(f'    => Done fixing ...: {self.full_name}')
-        # logger.info(self.audit)
 
     def fix75(self):
         """ Fixing skills for the 7.5 version of the rules
@@ -1178,7 +1192,7 @@ class Character(Combattant):
             bcs.append(bc.blessing_curse_ref.to_json())
         bas = []
         for ba in self.beneficeaffliction_set.all():
-            bas.append(ba.benefice_affliction_ref.to_json())
+            bas.append(ba.to_json())
         rituals = []
         for ritual in self.ritual_set.all().order_by('ritual_ref__path', 'ritual_ref__level'):
             rituals.append(ritual.to_json())
@@ -1196,7 +1210,7 @@ class Character(Combattant):
         k["BA"] = bas
         k["shortcuts"] = self.calculate_shortcuts()
 
-        # print(self.skills_options)
+        # print(k["BA"])
 
         j = json.dumps(k)
         return j

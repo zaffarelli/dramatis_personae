@@ -132,7 +132,7 @@ class StoryModel(models.Model):
             casting.append(episode.get_full_cast())
         flat_cast = [c for subcast in casting for c in subcast]
         new_list = sorted(list(set(flat_cast)))
-        print(new_list)
+        # print(new_list)
         return new_list
 
     @property
