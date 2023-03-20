@@ -63,7 +63,7 @@ psycopg2 = "2.8.6"
 colour = "^0.1.5"
 gunicorn = "^20.1.0"
 svglib = "^1.2.1"
-CairoSVG = "^2.5.2"
+CairoSVG = "^2.7.0"
 django-bootstrap-datepicker-plus = "^4.0.0"
 uWSGI = "^2.0.20"
 
