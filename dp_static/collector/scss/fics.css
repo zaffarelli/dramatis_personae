@@ -6712,6 +6712,8 @@ th.skill_dot {
       flex-shrink: 1;
       color: #e8e7e8;
       min-height: 1.1em; }
+      .mosaic .character_row .cell.highlighted {
+        background: #F0C040; }
       .mosaic .character_row .cell.text {
         text-align: justify;
         overflow-y: scroll;
@@ -6857,46 +6859,53 @@ ul.level-2.off {
   justify-content: space-around;
   align-items: stretch;
   align-content: stretch; }
-  .dialog button {
-    background: #fc2;
-    color: black;
-    font-weight: bold;
-    font-family: Titre;
-    border: 1px solid black;
-    border-radius: 5px;
-    padding: 3px;
-    cursor: pointer;
-    width: 20ex;
-    float: right; }
-    .dialog button:hover {
-      background: orchid;
-      color: black; }
   .dialog .dialog_header {
     border: 3px solid transparent;
     border-radius: 3px;
     background: transparent;
     color: #3c3f3c;
     order: 1;
+    height: 15vh;
     width: auto;
-    padding: 5px;
-    flex-grow: 1;
+    padding: 3px;
+    flex-grow: 0;
     flex-shrink: 0;
-    flex-basis: 30px; }
+    flex-basis: 6vh; }
     .dialog .dialog_header H1 {
       color: #e8e7e8;
       text-align: left;
       font-family: NomPersoListe; }
   .dialog .dialog_footer {
+    display: flex;
+    flex-flow: row-reverse wrap;
+    justify-content: flex-end;
+    align-content: flex-start;
+    align-items: baseline;
     border: 3px solid transparent;
     border-radius: 3px;
     background: transparent;
     color: #3c3f3c;
     order: 3;
-    flex-basis: 50px;
-    width: 100%;
-    padding: 5px 0;
+    width: auto;
+    padding: 3px;
     flex-grow: 1;
-    flex-shrink: 0; }
+    flex-shrink: 0;
+    flex-basis: 15vh;
+    gap: 3px 0; }
+    .dialog .dialog_footer button {
+      order: 1;
+      flex: 1 0 6vw;
+      background: #fc2;
+      color: black;
+      font-weight: bold;
+      font-family: Titre;
+      border: 1px solid black;
+      border-radius: 5px;
+      padding: 3px;
+      cursor: pointer; }
+      .dialog .dialog_footer button:hover {
+        background: orchid;
+        color: black; }
   .dialog .dialog_body {
     border: 3px solid #3c3f3c;
     border-radius: 3px;
@@ -6904,44 +6913,45 @@ ul.level-2.off {
     color: #3c3f3c;
     order: 2;
     margin: 0;
-    height: auto;
-    padding: 5px;
+    width: 70vw;
     flex-grow: 3;
     flex-shrink: 1;
-    flex-basis: 700px; }
+    flex-basis: 78vh; }
     .dialog .dialog_body .view {
-      width: 100%;
       display: flex;
       flex-flow: row nowrap;
       justify-content: flex-start;
       align-items: stretch;
-      align-content: stretch; }
+      align-content: stretch;
+      width: 100%;
+      height: 100%; }
       .dialog .dialog_body .view .wall {
         display: flex;
-        order: 2;
-        flex-grow: 1;
+        order: 1;
+        flex-grow: 2;
         flex-shrink: 1;
         flex-flow: column wrap;
         justify-content: flex-start;
-        align-content: flex-start;
+        align-content: stretch;
         align-items: stretch;
-        gap: 10px 10px;
-        padding: 5px;
-        border-radius: 5px;
-        height: auto; }
+        gap: 3px 3px;
+        padding: 3px;
+        border-radius: 3px; }
         .dialog .dialog_body .view .wall .brick {
-          display: inline-block;
+          display: flex;
           flex-grow: 1;
+          flex-shrink: 1;
+          flex-basis: 1.5em;
           padding: 2px;
           font-family: Texte;
+          flex-flow: row nowrap;
           background: #242524;
           color: #cfcdcf;
           border-radius: 5px;
           border: 1px solid #494c49;
           box-shadow: 5px 5px 5px black; }
           .dialog .dialog_body .view .wall .brick em {
-            display: inline-block;
-            width: 12ex;
+            flex-basis: 10ex;
             background: black;
             text-align: left;
             font-variant: small-caps;
@@ -6949,6 +6959,10 @@ ul.level-2.off {
             padding: 2px;
             border-radius: 3px;
             margin-right: 3ex; }
+            .dialog .dialog_body .view .wall .brick em.parent {
+              background: #5A340C; }
+            .dialog .dialog_body .view .wall .brick em.child {
+              background: #003366; }
           .dialog .dialog_body .view .wall .brick strong {
             display: inline-block;
             width: 24ex;
@@ -6962,16 +6976,17 @@ ul.level-2.off {
             margin-right: 3ex; }
       .dialog .dialog_body .view .pitch {
         display: block;
-        order: 1;
+        order: 2;
         flex-grow: 5;
+        flex-shrink: 0;
         columns: 2;
-        column-gap: 20px;
+        column-gap: 10px;
         column-rule: 1px solid #cfcdcf;
         color: #e8e7e8;
-        font-size: 1.3em;
+        line-height: 1.2em;
         text-align: justify;
+        flex-basis: 50vw;
         padding: 5px;
-        border: 1px solid #242524;
         border-radius: 5px; }
         .dialog .dialog_body .view .pitch H4, .dialog .dialog_body .view .pitch H5, .dialog .dialog_body .view .pitch H6 {
           padding: 0;
@@ -6984,7 +6999,8 @@ ul.level-2.off {
       justify-content: stretch;
       align-items: stretch;
       align-content: stretch;
-      flex-flow: column wrap; }
+      flex-flow: column wrap;
+      width: 100%; }
       .dialog .dialog_body .tabbed .tabs {
         order: 1;
         flex-grow: 1;
@@ -7018,14 +7034,22 @@ ul.level-2.off {
         margin: 0;
         padding: 0;
         order: 2;
-        flex: 1 0 10%;
+        flex: 5 0 auto;
         list-style-type: none;
         display: flex;
         flex-flow: column wrap;
         justify-content: flex-start;
         align-items: stretch;
         align-content: stretch;
-        width: calc(100% - 6px); }
+        width: auto; }
+        .dialog .dialog_body .tabbed .tabcontent .skillsview {
+          border: 2px solid green;
+          order: 4;
+          flex: 10 0 auto; }
+        .dialog .dialog_body .tabbed .tabcontent .data {
+          border: 2px solid green;
+          order: 5;
+          flex: 1 0 2em; }
         .dialog .dialog_body .tabbed .tabcontent li {
           display: flex;
           flex: 5 1 auto;

@@ -255,16 +255,21 @@ class Collector {
             e.stopPropagation();
             console.log('Charsel click');
             let key = $(this).attr('ref');
+            let param = $(this).attr('param');
+            $('#character_row_'+key+" .cell").addClass('highlighted');
             console.log('key:' + key);
             $.ajax({
-                url: 'ajax/deep_toggle/selected/' + key + '/',
+                url: 'ajax/deep_toggle/'+param+'/' + key + '/',
                 success: function (answer) {
                     console.log(answer);
+                    $('#character_row_'+key+" .cell").removeClass('highlighted');
+                    $('#item_'+key).html(answer.row);
                     me.prepareAjax();
                     me.rebootLinks();
                 },
                 error: function (answer) {
                     console.error(answer);
+                    $('#character_row_'+key+" .cell").removeClass('highlighted');
                     me.rebootLinks();
                 }
             });

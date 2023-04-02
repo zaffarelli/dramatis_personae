@@ -38,10 +38,10 @@ def fix_epic(sender, instance, **kwargs):
 def fix_card(sender, instance, **kwargs):
     instance.fix()
 
+
 @receiver(post_save, sender=Card, dispatch_uid='post_fix_card')
 def post_fix_card(sender, instance, **kwargs):
     instance.post_fix()
-
 
 
 @receiver(pre_save, sender=Challenge, dispatch_uid='fix_challenge')

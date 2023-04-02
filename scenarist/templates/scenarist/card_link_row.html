@@ -5,7 +5,7 @@
     <div class="cell mini first">
         <span class="compact view_card" id="view_card_{{ x.id }}" mode="overlay" title="Card Type: {{ x.card_type }}: click to view">{{ x.card_tag|safe }}</span>
     </div>
-    <div class="cell wide20 first" title="Name:{{ x.name }}"><em>{{ x.name }}</em></div>
+    <div class="cell wide20 first" title="Name:{{ x.name }} ({{ x.id|zfill }})"><em>{{ x.name }}</em><br>{{ x.full_id }}</div>
     <div class="cell mini first" title="Chapter:{{ x.chapter }}"><em>{{ x.chapter }}</em></div>
     <div class="cell wide6 second">
         {% for subs in x.sublevels %}
@@ -16,15 +16,16 @@
         <span class="compact add_card" id="add_card_{{ x.id }}" mode="overlay"
               title="Add a new card with this one as its parent"><i class="fas fa-plus"></i></span>
     </div>
-    <div class="cell wider second" title="{{ x.id|zfill }}"> {{ x.full_id }}</div>
+    <div class="cell text" title="Links">
+        {{x.children_links|safe}}
+    </div>
 
 
 {#    <div class="cell wide brief" title="Place:{{ x.place }}"> {{ x.place }}</div>#}
-    <div class="cell small" title="Date"> {{ x.date_offset }}<br/>[ {{ x.dt|as_date }} ]</div>
+    <div class="cell small" title="Date"> {{ x.date_offset }}<br/>[ {{ x.dt|as_date }} ]<br/>[ {{ x.sdt|as_date }} ]</div>
     <div class="cell wide" title="Tags"> {{ x.tags|safe }}</div>
     <div class="cell text"> {{ x.abstract|safe }}</div>
-    {#    <div class="cell mini last">#}
-    {#        <span class="compact edit_card" id="edit_card_{{ c.id }}" mode="overlay" title="Edit"><i class="fas fa-cog"></i></span>#}
-    {#    </div>#}
-
+    <div class="cell" title="Card's Balance Ratio">{{ x.collection_balance|ppie|safe }}</div>
+    <div class="cell text">{{ x.get_casting_avatars|parse_avatars|safe }}</div>
+    <div class="cell mini last" title="Experience"> XP<BR/>{{ x.experience }}</div>
 </div>

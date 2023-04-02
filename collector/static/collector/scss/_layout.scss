@@ -603,6 +603,7 @@
       }
     }
 
+
     color: $fics_frontest;
     width: 95%;
     font-family: Texte;
@@ -618,6 +619,9 @@
       background: $fics_darker;
       overflow: hidden;
       width:auto;
+      &.highlighted{
+        background:$fics_highlight;
+      }
 
       &.text {
         text-align: justify;

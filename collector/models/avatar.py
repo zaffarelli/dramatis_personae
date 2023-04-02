@@ -43,6 +43,7 @@ class Avatar(models.Model):
     priority = models.BooleanField(default=False)
     need_pdf = models.BooleanField(default=False)
     need_fix = models.BooleanField(default=False)
+    archived = models.BooleanField(default=False)
     # image = models.ImageField(upload_to='images/', null=True, blank=True)
     archive_level = models.CharField(max_length=5, choices=ARCHIVE_LEVEL, default='NON', blank=True)
     # epic = models.ForeignKey(Epic, null=True, blank=True, on_delete=models.SET_NULL)

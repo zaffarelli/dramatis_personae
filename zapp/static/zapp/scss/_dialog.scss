@@ -1,5 +1,5 @@
+// Dialog dimensions
 $dbh: 700px;
-
 
 .dialog {
   background: transparent;
@@ -13,24 +13,6 @@ $dbh: 700px;
   align-items: stretch;
   align-content: stretch;
 
-  & button {
-    background: $fics_golden;
-    color: $fics_darkest;
-    font-weight: bold;
-    font-family: Titre;
-    border: 1px solid $fics_darkest;
-    border-radius: 5px;
-    padding: 3px;
-    cursor: pointer;
-    width: 20ex;
-    float: right;
-
-    &:hover {
-      background: orchid;
-      color: $fics_darkest;
-    }
-
-  }
 
   & .dialog_header {
     border: 3px solid transparent;
@@ -38,14 +20,13 @@ $dbh: 700px;
     background: transparent;
     color: $fics_light;
     order: 1;
-    //height: 30px;
+    height: 15vh;
     width: auto;
-    padding: 5px;
-    flex-grow: 1;
+    padding: 3px;
+    flex-grow: 0;
     flex-shrink: 0;
-    flex-basis: 30px;
-
-
+    flex-basis: 6vh;
+    //border: 2px dotted red;
     & H1 {
       color: $fics_frontest;
       text-align: left;
@@ -55,18 +36,41 @@ $dbh: 700px;
 
 
   & .dialog_footer {
+    display: flex;
+    flex-flow: row-reverse wrap;
+    justify-content: flex-end;
+    align-content: flex-start;
+    align-items: baseline;
     border: 3px solid transparent;
     border-radius: 3px;
     background: transparent;
     color: $fics_light;
     order: 3;
-    flex-basis: 50px;
-    width: 100%;
-    padding: 5px 0;
+    width: auto;
+    padding: 3px;
     flex-grow: 1;
     flex-shrink: 0;
+    flex-basis: 15vh;
+    gap: 3px 0;
+    //border: 2px dotted red;
 
+    & button {
+      order: 1;
+      flex: 1 0 6vw;
+      background: $fics_golden;
+      color: $fics_darkest;
+      font-weight: bold;
+      font-family: Titre;
+      border: 1px solid $fics_darkest;
+      border-radius: 5px;
+      padding: 3px;
+      cursor: pointer;
 
+      &:hover {
+        background: orchid;
+        color: $fics_darkest;
+      }
+    }
   }
 
 
@@ -78,48 +82,53 @@ $dbh: 700px;
     order: 2;
     //max-height: $dialog_body_height !important;
     margin: 0;
-    //width: auto;
-    height: auto;
-    padding: 5px;
+    width: 70vw;
+    //height: 80vh;
+    //padding: 5px;
 
     flex-grow: 3;
     flex-shrink: 1;
-    flex-basis: $dialog_body_height;
-
+    flex-basis: 78vh;
+    //border: 2px dotted red;
     //background:cyan;
 
     & .view {
-      width: 100%;
       display: flex;
       flex-flow: row nowrap;
       justify-content: flex-start;
       align-items: stretch;
       align-content: stretch;
 
+      width: 100%;
+      height: 100%;
+      //border: 2px dotted orange;
+
       & .wall {
         display: flex;
-        order: 2;
-        flex-grow: 1;
+        order: 1;
+        flex-grow: 2;
         flex-shrink: 1;
         flex-flow: column wrap;
         justify-content: flex-start;
-        align-content: flex-start;
+        align-content: stretch;
         align-items: stretch;
 
         //width: 220px;
-        gap: 10px 10px;
-        padding: 5px;
-        border-radius: 5px;
+        gap: 3px 3px;
+        padding: 3px;
+        border-radius: 3px;
 
-        height: auto;
+
+        //border:2px dotted pink;
 
         & .brick {
-          display: inline-block;
+          display: flex;
           flex-grow: 1;
+          flex-shrink: 1;
+          flex-basis: 1.5em;
           padding: 2px;
-
-
           font-family: Texte;
+          flex-flow: row nowrap;
           background: $fics_dark;
           color: $fics_front;
           border-radius: 5px;
@@ -127,8 +136,7 @@ $dbh: 700px;
           box-shadow: 5px 5px 5px $fics_darkest;
 
           & em {
-            display: inline-block;
-            width: 12ex;
+            flex-basis: 10ex;
             background: $fics_darkest;
             text-align: left;
             font-variant: small-caps;
@@ -136,6 +144,20 @@ $dbh: 700px;
             padding: 2px;
             border-radius: 3px;
             margin-right: 3ex;
+
+            &.parent {
+              background: #5A340C;
+            }
+
+            &.child {
+              background: #003366;
+            }
+          }
+
+
+          & .card_link {
+
+
           }
 
           & strong {
@@ -158,18 +180,22 @@ $dbh: 700px;
 
       & .pitch {
         display: block;
-        order: 1;
+        order: 2;
         flex-grow: 5;
+        flex-shrink: 0;
         columns: 2;
-        column-gap: 20px;
+        column-gap: 10px;
         column-rule: 1px solid $fics_front;
         color: $fics_frontest;
-        font-size: 1.3em;
+        //font-size: 1.1em;
+        line-height: 1.2em;
         text-align: justify;
-        //width: 600px;
+        flex-basis: 50vw;
+        //height:65vh;
         padding: 5px;
-        border: 1px solid $fics_dark;
+        //border: 2px solid darkblue;
         border-radius: 5px;
+
 
         & H4, & H5, & H6 {
           padding: 0;
@@ -192,7 +218,8 @@ $dbh: 700px;
       align-items: stretch;
       align-content: stretch;
       flex-flow: column wrap;
-
+      width: 100%;
+      //height:100%;
 
       & .tabs {
         order: 1;
@@ -243,17 +270,30 @@ $dbh: 700px;
         margin: 0;
         padding: 0;
         order: 2;
-        flex: 1 0 10%;
+        flex: 5 0 auto;
         list-style-type: none;
         display: flex;
         flex-flow: column wrap;
         justify-content: flex-start;
         align-items: stretch;
         align-content: stretch;
-        width: calc(100% - 6px);
+        //width: calc(100% - 6px);
         //height:auto;
         ////max-height: calc($dbh - 30px) !important;
         //background: orange;
+        width:auto;
+
+        & .skillsview{
+          border:2px solid green;
+          order:4;
+          flex: 10 0 auto;
+        }
+
+        & .data{
+          border:2px solid green;
+          order:5;
+          flex: 1 0 2em;
+        }
 
         & li {
           display: flex;

@@ -8,6 +8,8 @@ import re
 import string
 import json
 from django.utils import timezone
+from django.contrib.postgres.fields import ArrayField
+
 
 CARD_TYPES = (
     ('UN', 'Uncategorized'),
@@ -51,11 +53,11 @@ class StoryModel(models.Model):
     full_id = models.CharField(max_length=64, blank=True, default='')
     description = models.TextField(max_length=6000, default='', blank=True)
     resolution = models.TextField(default='', max_length=2560, blank=True)
-    rewards = models.TextField(max_length=1024, default='', blank=True)
+    rewards = models.TextField(max_length=2048, default='', blank=True)
     card_type = models.CharField(max_length=2, default='UN', choices=CARD_TYPES, blank=True)
     archived = models.BooleanField(default=False)
     is_ongoing = models.BooleanField(default=False)
-
+    dramatis_personae = ArrayField(models.CharField(max_length=128), blank=True, null=True)
 
     def __str__(self):
         """ Standard display """
@@ -79,7 +81,7 @@ class StoryModel(models.Model):
         return json.dumps(self, default=json_default, sort_keys=True, indent=4)
 
     @property
-    def children(self):
+    def children_str(self):
         arr = []
         for episode in self.get_episodes():
             arr.append("%s_%d" % (type(episode).__name__.lower(), episode.id))
@@ -119,7 +121,15 @@ class StoryModel(models.Model):
         """ Bring all avatars rids from all relevant text fields"""
         casting = []
         casting.append(self.fetch_avatars(self.description))
-        return casting
+        casting.append(self.fetch_avatars(self.resolution))
+        casting.append(self.fetch_avatars(self.rewards))
+        flat_cast = [c for subcast in casting for c in subcast]
+        new_list = sorted(list(set(flat_cast)))
+        print("---> Story Model Get Casting "+self.name)
+        print(casting)
+        print(new_list)
+
+        return new_list
 
     def get_episodes(self):
         """ Return subchapters """
@@ -132,7 +142,6 @@ class StoryModel(models.Model):
             casting.append(episode.get_full_cast())
         flat_cast = [c for subcast in casting for c in subcast]
         new_list = sorted(list(set(flat_cast)))
-        # print(new_list)
         return new_list
 
     @property
@@ -145,5 +154,17 @@ class StoryModel(models.Model):
             self.card_type = 'NO'
             self.save()
 
+    @property
+    def get_casting_string(self):
+        if self.dramatis_personae:
+            return ", ".join(self.dramatis_personae)
+        else:
+            return ""
 
-
+    @property
+    def get_casting_avatars(self):
+        casting = []
+        if self.dramatis_personae:
+            for a in self.dramatis_personae:
+                casting.append(f"¤{a}¤")
+        return "<BR/>".join(casting)

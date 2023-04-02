@@ -99,29 +99,30 @@ class Campaign(models.Model):
         from scenarist.models.events import Event
         from collector.utils.fs_fics7 import get_keywords
 
-        epic = Epic.objects.get(title=self.epic.title)
+        epic = Epic.objects.get(name=self.epic.name)
         # epic_json = self.epic.to_json()
-        dramas = Drama.objects.filter(epic=epic).order_by('chapter', 'date')
+        dramas = Drama.objects.filter(epic=epic).order_by('chapter', 'dt')
         context_dramas = []
         for drama in dramas:
             context_acts = []
-            acts = Act.objects.filter(drama=drama).order_by('chapter', 'date')
+            acts = Act.objects.filter(drama=drama).order_by('chapter', 'dt')
             for act in acts:
                 context_events = []
-                events = Event.objects.filter(act=act).order_by('chapter', 'date')
+                events = Event.objects.filter(act=act).order_by('chapter', 'dt')
                 for event in events:
-                    context_event = {'title': event.title, 'data': event}
+                    context_event = {'title': event.name, 'data': event}
                     context_events.append(context_event)
-                context_act = {'title': act.title, 'data': act, 'events': context_events}
+                context_act = {'title': act.name, 'data': act, 'events': context_events}
                 context_acts.append(context_act)
-            context_drama = {'title': drama.title, 'data': drama, 'acts': context_acts}
+            context_drama = {'title': drama.name, 'data': drama, 'acts': context_acts}
             context_dramas.append(context_drama)
+
         context_adventures = []
         for adventure in self.epic.adventure_set.all():
-            context_adventures.append({'title': adventure.title, 'data': adventure})
+            context_adventures.append({'title': adventure.name, 'data': adventure})
             context_adventures.append(context_adventures)
-            context = {'title': epic.title, 'data': epic, 'dramas': context_dramas}
-            context['keywords'] = get_keywords()
+        context = {'title': epic.name, 'data': epic, 'dramas': context_dramas}
+        context['keywords'] = get_keywords()
         return context
 
     def prepare_colorset(self, size=16, color_scale=False):

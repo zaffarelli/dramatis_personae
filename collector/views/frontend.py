@@ -51,13 +51,16 @@ def get_list(request, id, slug='none'):
         elements = decs.split('-')
         command = elements[1].lower()
         if command == 'all':
-            character_items = Character.objects \
-                .order_by('historical_figure', 'nameless', 'full_name')
+            character_items = Character.objects.filter(archived=False).order_by('historical_figure', 'nameless',
+                                                                                'full_name')
         elif command == 'todo':
             character_items = Character.objects.filter(balanced=False).order_by('historical_figure', 'nameless',
                                                                                 'full_name')
         elif command == 'orphans':
             character_items = Character.objects.filter(is_cast=False).order_by('historical_figure', 'nameless',
+                                                                               'full_name')
+        elif command == 'archived':
+            character_items = Character.objects.filter(archived=True).order_by('historical_figure', 'nameless',
                                                                                'full_name')
         else:
             character_items = Character.objects.filter(rid__contains=command) | Character.objects.filter(
@@ -166,6 +169,9 @@ def deep_toggle(request, slug=None, id=None):
                 c.save()
                 response['status'] = 1
                 response[slug] = getattr(c, slug)
+                template = get_template('collector/character_link_row.html')
+                html = template.render({'c': c})
+                response['row'] = html
     return JsonResponse(response)
 
 
@@ -341,7 +347,7 @@ def display_sheet(request, pk=None):
             pk = 22
         c = Character.objects.get(id=pk)
         scenario = campaign.epic.name.upper()
-        pre_title = ""#campaign.epic.place + ' - ' + campaign.epic.date
+        pre_title = ""  # campaign.epic.place + ' - ' + campaign.epic.date
         post_title = "FuZion Interlock Custom System v8.0"
         spe = c.get_specialities()
         shc = c.get_shortcuts()
@@ -392,8 +398,6 @@ def display_sessionsheet(request, slug=None):
             for tm in team.teammate_set.all():
                 pks.append(tm.character_id)
 
-
-
         players = Character.objects.filter(id__in=pks)
         players_list = []
         i = 0
@@ -414,7 +418,8 @@ def display_sessionsheet(request, slug=None):
         pre_title = adventure.place
         post_title = ""
         settings = {'version': 1.0, 'labels': {}, 'pre_title': pre_title, 'scenario': scenario,
-                    'post_title': post_title, 'fontset': FONTSET, 'adventure': adventure.to_json}  # , 'specialities': spe, 'shortcuts': shc}
+                    'post_title': post_title, 'fontset': FONTSET,
+                    'adventure': adventure.to_json}  # , 'specialities': spe, 'shortcuts': shc}
         response = {'settings': json.dumps(settings, sort_keys=True, indent=4),
                     'data': json.dumps(players_list, indent=4, sort_keys=True)}
         return JsonResponse(response)
@@ -464,7 +469,8 @@ def handle_cards(request):
         from scenarist.models.cards import Card
         from collector.models.campaign import Campaign
         campaign = get_current_config(request)
-        notes_items = Card.objects.filter(epic=campaign.epic).order_by('full_id')
+        notes_items = Card.objects.filter(epic=campaign.epic, card_type__in=["EP", "DR", "AD", "UN"]).order_by(
+            'full_id')
         cards = []
         for x in notes_items:
             n = x.to_json

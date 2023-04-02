@@ -133,7 +133,7 @@ def export_epic(request, campaign):
     des = '%s%s.pdf' % (media_results, campaign.epic.shortcut)
     with open(des, 'wb') as fout:
         merger.write(fout)
-    messages.info(request, 'Epic [%s] exported to PDF: [%s]' % (campaign.epic.title, des))
+    messages.info(request, 'Epic [%s] exported to PDF: [%s]' % (campaign.epic.name, des))
     return res
 
 

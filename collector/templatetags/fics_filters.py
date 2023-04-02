@@ -288,7 +288,7 @@ def prettyhistory(value):
 def as_height(value):
     res = value
     """ Display height in meters """
-    if isinstance(value,int):
+    if isinstance(value, int):
         res = "%2.2f m" % (value / 100)
     return res
 
@@ -472,7 +472,6 @@ def format_date(date_string):
     return datetime.datetime.strptime(date_string, '%Y-%m-%d %H:%M:%S %Z')
 
 
-
 @register.filter(name='dictsort_2cols')
 def dictsort_2cols(value, ref):
     mylist = dictsort(value, ref)
@@ -493,3 +492,26 @@ def dictsort_2cols(value, ref):
         if len(cols[1]) > idx:
             flat_cols.append(cols[1][idx])
     return flat_cols
+
+
+@register.filter(name='ppie')
+def ppie(value):
+    svg = ""
+    if isinstance(value, int):
+        import math
+        x = value / 100
+        circum = 2 * math.pi * 24
+        cols = ['#441111', '#774411', '#885511', '#557711', '#226622']
+        col = cols[int(x * (len(cols)-1))]
+        svg += '<!--?xml version="1.2" encoding="UTF-8" standalone="no" ?-->'
+        svg += '<svg xmlns = "http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="1cm" height="1cm" viewBox="-50 -50 100 100">'
+        svg += '<circle r="48" fill="#303030"/>'
+        svg += f'<circle r="24" fill="#303030" stroke="{col}" stroke-width="48"'
+        svg += f'stroke-dasharray="{circum * x} {circum}"'
+        svg += 'transform = "rotate(-90)"'
+        svg += '/>'
+        svg += f'<text fill="white" stroke="white" text-anchor="middle" dy="5" font-size="20pt">{value}%</text>'
+        svg += '</svg>'
+    else:
+        svg = f'{value}%'
+    return svg

@@ -68,6 +68,11 @@
                     {{ form.chapter }}
                 </li>
                 <li class="o1">
+                    {{ form.place.errors }}
+                    <label for="place">Place</label>
+                    {{ form.place }}
+                </li>
+                <li class="o1">
                     {{ form.date_offset.errors }}
                     <label for="date_offset">Days Offset</label>
                     {{ form.date_offset }}
@@ -76,6 +81,11 @@
                     {{ form.dt.errors }}
                     <label for="dt">DT</label>
                     {{ form.dt }}
+                </li>
+                <li class="o1">
+                    {{ form.sdt.errors }}
+                    <label for="sdt">IRL datetime</label>
+                    {{ form.sdt }}
                 </li>
                 <li class="o5">
                     {{ form.gamemaster.errors }}

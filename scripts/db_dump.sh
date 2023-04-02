@@ -29,6 +29,7 @@ python manage.py dumpdata scenarist.Scene --format xml --output backup/custom/$1
 python manage.py dumpdata scenarist.Scheme --format xml --output backup/custom/$1/scheme.xml
 
 
+
 python manage.py dumpdata collector.RpgSystem --format xml --output backup/custom/$1/rpg_system.xml
 
 
@@ -49,6 +50,8 @@ python manage.py dumpdata collector.Specie --format xml --output backup/referenc
 python manage.py dumpdata collector.TourOfDutyRef --format xml --output backup/reference/$1/tour_of_duty_ref.xml
 python manage.py dumpdata collector.WeaponRef --format xml --output backup/reference/$1/weapon_ref.xml
 python manage.py dumpdata collector.AllianceRef --format xml --output backup/reference/$1/alliance_ref.xml
+
+
 
 echo -e "\e[0;35m- Dumping modificator data (pushed from history creation)...\e[0;m"
 python manage.py dumpdata collector.BlessingCurseModificator --format xml --output backup/reference/$1/blessing_curse_modificator.xml
@@ -83,6 +86,8 @@ python manage.py dumpdata collector.Cyberware --format xml --output backup/custo
 
 python manage.py dumpdata cartograph.System --format xml --output backup/custom/$1/system.xml
 python manage.py dumpdata cartograph.OrbitalItem --format xml --output backup/custom/$1/orbital_item.xml
+
+python manage.py dumpdata collector.Collection --format xml --output backup/custom/$1/collection.xml
 
 python manage.py dumpdata auth.User --format xml --output backup/custom/$1/user.xml
 python manage.py dumpdata auth.Group --format xml --output backup/custom/$1/group.xml

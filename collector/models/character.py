@@ -81,6 +81,7 @@ class Character(Combattant):
     age_offset = models.IntegerField(default=0, blank=True)
     AP = models.IntegerField(default=0, blank=True)
     OP = models.IntegerField(default=0, blank=True)
+    incompatibility = models.IntegerField(default=0, blank=True)
     experience_balance = models.IntegerField(default=0, blank=True)
     xp_pool = models.IntegerField(default=0, blank=True)
     xp_spent = models.IntegerField(default=0, blank=True)
@@ -105,6 +106,7 @@ class Character(Combattant):
     life_path_total = models.IntegerField(default=0)
     overhead = models.IntegerField(default=0)
     stories_count = models.PositiveIntegerField(default=0)
+    is_draft = models.BooleanField(default=True)
     balanced = models.BooleanField(default=False)
     selected = models.BooleanField(default=False, blank=True)
     historical_figure = models.BooleanField(default=False)
@@ -284,10 +286,10 @@ class Character(Combattant):
     def aka(self):
         str = self.full_name
         if self.incognito:
-            str = self.alias
+            str = f"[{self.alias}]"
         else:
             if self.alias:
-                str = f"{self.full_name} aka {self.alias}"
+                str = f"{self.full_name} [{self.alias}]"
         return str
 
     @property
@@ -479,8 +481,6 @@ class Character(Combattant):
         self.refresh_options("ritual_options", "ritual_options_not", self.charactercusto.ritualcusto_set.all(),
                              "ritual_ref", "RitualRef")
 
-
-
     def handle_wildcards(self, root_list):
         """ Calculate wildcard amount from the ToDs (ToD_WC), and check if the amount is satisfied with skills
             matching the wildcards roots in the custo (C_WC).
@@ -511,7 +511,7 @@ class Character(Combattant):
         self.focus_gear = False
         self.focus_rituals = False
         self.focus_generic = False
-        if len(focus_on)>0:
+        if len(focus_on) > 0:
             if "ATTR" in focus_on:
                 self.focus_attributes = True
             if "SKILL" in focus_on:
@@ -552,7 +552,7 @@ class Character(Combattant):
             self.rebuild_free_form()
         if self.focus_skills:
             self.fix75()
-        self.xp_spent, self.experience_balance = self.check_experience_details()
+        self.xp_spent, self.experience_balance, _ = self.check_experience_details
         if self.xp_earned < self.xp_spent:
             self.xp_earned = self.xp_spent
         self.xp_pool = self.xp_earned - self.xp_spent
@@ -582,6 +582,12 @@ class Character(Combattant):
             if self.historical_figure:
                 self.audit_log()
         self.need_fix = False
+        if self.is_draft:
+            self.is_draft = self.balanced
+        self.incompatibility = 0
+        for cyber in self.cyberware_set.all():
+            self.incompatibility += cyber.cyberware_ref.incompatibility
+
         logger.info(f'    => Done fixing ...: {self.full_name}')
 
     def fix75(self):
@@ -1193,6 +1199,9 @@ class Character(Combattant):
         bas = []
         for ba in self.beneficeaffliction_set.all():
             bas.append(ba.to_json())
+        cyberware = []
+        for cyb in self.cyberware_set.all():
+            cyberware.append(cyb.to_json())
         rituals = []
         for ritual in self.ritual_set.all().order_by('ritual_ref__path', 'ritual_ref__level'):
             rituals.append(ritual.to_json())
@@ -1209,8 +1218,11 @@ class Character(Combattant):
         k["BC"] = bcs
         k["BA"] = bas
         k["shortcuts"] = self.calculate_shortcuts()
+        k["cyber"] = cyberware
+        _, _, k["xp_details"] = self.check_experience_details
 
-        # print(k["BA"])
+        print(k["shortcuts"])
+        print(k["xp_details"])
 
         j = json.dumps(k)
         return j
@@ -1258,7 +1270,9 @@ class Character(Combattant):
             list.append(tod.tour_of_duty_ref.reference)
         return ", ".join(list)
 
+    @property
     def check_experience_details(self):
+        lst = []
         experience = 0
         op = 0
         if self.experience_details:
@@ -1275,10 +1289,15 @@ class Character(Combattant):
                 start = int(steps[0])
                 stop = int(steps[1])
                 diff = stop - start
-                op += diff * coeff_o
-                for x in range(start, stop, 1):
-                    exp += (x + 1) * coeff
-                print(f'{items[1]:20} {items[2]:6} OP:{diff * coeff:4} Exp:{exp:4}')
+                if items[0] == 'BA':
+                    op += diff
+                    exp = diff
+                else:
+                    op += diff * coeff_o
+                    for x in range(start, stop, 1):
+                        exp += (x + 1) * coeff
+                lst.append({'ability': f'{items[1]:20}', 'change': f'{items[2]:6}', 'op': f'{diff * coeff:4}',
+                            'xp': f'{exp:4}'})
                 experience += exp
-            print(f'         Totals checked are OP:{op:4} Exp:{experience:4}')
-        return experience, op
+            lst.append({'ability': f'Total expenditure is', 'change': '...', 'op': f'{op:4}', 'xp': f'{experience:4}'})
+        return experience, op, lst

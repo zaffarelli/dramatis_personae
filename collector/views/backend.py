@@ -167,7 +167,7 @@ def epic_deck(request):
     if is_ajax(request):
         campaign = get_current_config(request)
         characters = []
-        all = campaign.dramatis_personae.filter(selected=True)
+        all = Character.objects.filter(selected=True)
         for c in all:
             characters.append(json.loads(c.to_jsonDECK()))
         context = {'data': characters}

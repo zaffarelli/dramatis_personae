@@ -7,7 +7,9 @@
     {% for k in character_items %}
 
         {% if user_profile.option_display_as_list %}
+            <div id="item_{{ k.id }}">
             {% include "collector/character_link_row.html" with c=k %}
+            </div>
         {% else %}
             <div class='tile team_{{ k.team }}' id='tile_{{ k.id }}'>
                 {% include "collector/character_tile.html" with c=k %}

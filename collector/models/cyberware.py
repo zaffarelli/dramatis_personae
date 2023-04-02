@@ -62,11 +62,18 @@ class CyberwareRef(models.Model):
     def features(self):
         lst = []
         for f in self.cyberfeatures.all():
-            lst.append(f.reference)
+            lst.append(f"{f.reference} [{f.get_category_display()}:{f.complexity}]")
         return ", ".join(lst)
 
     def __str__(self):
         return "%s" % self.reference
+
+    def to_json(self):
+        from collector.utils.basic import json_default
+        import json
+        jstr = json.loads(json.dumps(self, default=json_default, sort_keys=True, indent=4))
+        return jstr
+
 
     def fix(self):
         try:
@@ -103,6 +110,9 @@ class Cyberware(models.Model):
     def __str__(self):
         return '%s (%s: %s)' % (self.character.full_name, self.replacement_for, self.cyberware_ref.reference)
 
+    def to_json(self):
+        jstr = {"replacement_for": self.replacement_for, "cyberware_ref": self.cyberware_ref.to_json(), "cyberfeatures":self.cyberware_ref.features}
+        return jstr
 
 # ADMIN
 

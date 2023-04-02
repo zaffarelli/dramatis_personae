@@ -1,0 +1,34 @@
+{% load fics_filters %}
+{% load static %}
+
+<table>
+    <tr>
+        <th colspan=5>Cyberware</th>
+    </tr>
+    {% if c.armor_set.count != 0 %}
+        <tr>
+            <th>Replacement for</th>
+            <th>Reference</th>
+            <th>Complexity</th>
+            <th>Incompatibility</th>
+            <th>Tech Level</th>
+        </tr>
+        {% for y in c.cyberware_set.all %}
+            <tr>
+                <td>{{ y.replacement_for|safe }}</td>
+                <td>{{ y.cyberware_ref.reference|safe }}</td>
+                <td>{{ y.cyberware_ref.complexity }}</td>
+                <td>{{ y.cyberware_ref.incompatibility }}</td>
+                <td>{{ y.cyberware_ref.tech_level }}</td>
+                <tr>
+                <td colspan=5>{{ y.cyberware_ref.description|safe }}</td>
+                    </tr>        <tr>
+                <td colspan=5>{{ y.cyberware_ref.features|safe }}</td>
+            </tr>
+            </tr>
+        {% endfor %}
+    {% else %}
+        <td colspan="4">N/A</td>
+    {% endif %}
+</table>
+

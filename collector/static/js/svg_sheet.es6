@@ -567,6 +567,19 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
         me.fillList(basex, basey, "armors", styles);
     }
 
+    fillCyber(basex = 0, basey = 0) {
+        let me = this;
+        me.drawText(basex, basey, me.draw_fill, me.draw_stroke, me.medium_font_size, "start", "Cyber Devices", 1.0);
+        let styles = {}
+        styles["labels"] = ["Replacement", "Reference", "TL", "Inc.", "Comp.", "Description", "Cyberfeatures"]
+        styles["properties"] = ["replacement_for", "cyberware_ref__reference", "cyberware_ref__tech_level", "cyberware_ref__incompatibility", "cyberware_ref__complexity", "cyberware_ref__description", "cyberfeatures"]
+        styles["aligns"] = ["start", "start", "start", "start", "start", "multiline", "multiline"]
+        styles["widths"] = [2, 5, 1, 1, 1, 6, 5]
+        styles["lefts"] = [0, 2, 7, 8, 9, 10, 16]
+        me.fillList(basex, basey + 0.5, "cyber", styles);
+    }
+
+
     fillWeapons(basex = 0, basey = 0) {
         let me = this;
         let styles = {}
@@ -579,8 +592,8 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
 
 
         if (me.blank === false) {
-            console.log(me.data['experience_details'])
-            me.wrap(me.data['experience_details'], 14, 25.5, 9.5, me.user_font);
+            // console.log(me.data['experience_details'])
+            // me.wrap(me.data['experience_details'], 14, 25.5, 9.5, me.user_font);
         }
     }
 
@@ -598,23 +611,22 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
     fillBA(basex = 0, basey = 0) {
         let me = this;
         let styles = {}
-        styles["labels"] = ["Benefice/Affliction", "Value", "Description", "Note"]
+        styles["labels"] = ["Benefice/Affliction", "Value", "Description", "Notes"]
         styles["properties"] = ["benefice_affliction_ref__reference", "benefice_affliction_ref__value", "benefice_affliction_ref__description", "description"]
         styles["aligns"] = ["multiline", "start", "multiline", "multiline"]
-        styles["widths"] = [2, 0, 4.5, 3]
-        styles["lefts"] = [0, 2.5, 3.5, 8]
+        styles["widths"] = [2, 1, 4.5, 10]
+        styles["lefts"] = [0, 2, 3, 7.5]
         me.fillList(basex, basey, "BA", styles);
     }
 
     fillToDs(basex = 0, basey = 0) {
         let me = this;
         let styles = {}
-        console.log(me.data["tods"])
         styles["labels"] = ["Cat", "Tour of Duty", "Pts", "Details"]
         styles["properties"] = ["category", "reference", "value", "description"]
         styles["aligns"] = ["start", "start", "start", "multiline"]
-        styles["widths"] = [0, 5, 0, 16]
-        styles["lefts"] = [0, 0.5, 5, 6]
+        styles["lefts"] = [0, 1, 6, 7]
+        styles["widths"] = [1, 5, 1, 15]
         me.fillList(basex, basey, "tods", styles);
     }
 
@@ -661,6 +673,19 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
         let me = this;
         me.drawText(basex, basey, me.draw_fill, me.draw_stroke, me.medium_font_size, "start", "Possessions, Gear & Equipment", 1.0, me.base_font);
     }
+
+    fillExperience(basex = 0, basey = 0) {
+        let me = this;
+        me.drawText(basex, basey, me.draw_fill, me.draw_stroke, me.medium_font_size, "start", "Experience Details", 1.0, me.base_font);
+        let styles = {}
+        styles["labels"] = ["Ability", "Cuml. changes", "OP Equiv", "XP spent"]
+        styles["properties"] = ["ability", "change", "op", "xp"]
+        styles["aligns"] = ["start", "start", "start", "start"]
+        styles["widths"] = [5, 2, 2, 2]
+        styles["lefts"] = [0, 5, 7, 9]
+        me.fillList(basex, basey + 0.5, "xp_details", styles);
+    }
+
 
     fillShortcuts(basex = 0, basey = 0) {
         let me = this;
@@ -952,6 +977,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
         me.drawText(ox + 4.0, oy + 0.5, me.draw_fill, me.draw_stroke, me.small_font_size - 3, "middle", "Incompatibility", 1.0);
         if (me.blank === false) {
             me.drawText(ox + 1, oy + 1.37, me.user_fill, me.user_stroke, me.medium_font_size, "middle", me.data["SA_HUM"], 1.0, me.user_font);
+            me.drawText(ox + 4, oy + 1.37, me.user_fill, me.user_stroke, me.medium_font_size, "middle", me.data["incompatibility"], 1.0, me.user_font);
         }
         let lines = [0, 0.5];
         _.forEach(lines, function (e, i) {
@@ -1768,7 +1794,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
             let meta = "";
             let stroke = me.debug_stroke,
                 fill = me.user_fill,
-                font = me.user_font,
+                font = me.mono_font,
                 size = me.medium_font_size,
                 opac = 1.0, biggest = 0;
             if (!me.blank) {
@@ -1787,6 +1813,8 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
                         }
 
                         let property_components = x.split('__');
+                        console.log("property_components 1 >>> ");
+                        console.log(property_components);
                         if (property_components.length < 2) {
                             data = e[x]
                         } else {
@@ -1821,6 +1849,8 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
                             z = a[1];
                         }
                         let property_components = x.split('__');
+                        console.log("property_components >>> ");
+                        console.log(property_components);
                         if (property_components.length < 2) {
                             data = e[x]
                         } else {
@@ -1850,8 +1880,8 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
 
     fillList(basex = 0, basey = 0, datasource = "ba", styles = {}) {
         let me = this;
-        let ox = basex, oy = basey + 0.3, lines = 0 /*, offset = 0*/;
-        let w = 0, l = 1;
+        let ox = basex, oy = basey + 0.3, lines = 1 /*, offset = 0*/;
+        let w = 0;
         _.forEach(styles['lefts'], function (e, i) {
             if (e > w) {
                 w = e;
@@ -1864,119 +1894,64 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
             me.drawText(ox + styles["lefts"][i], oy - me.line_inter * 0.75, me.draw_fill, me.draw_stroke, me.small_font_size, "start", e);
         });
         _.forEach(me.data[datasource], function (e, i) {
-            // let o = JSON.parse(e);
+            let consumed_lines = 1;
             let meta = "";
             let stroke = me.user_stroke,
                 fill = me.user_fill,
                 font = me.user_font,
                 size = me.small_font_size,
-                opac = 1.0, biggest = 0,
-                small_inter = me.line_inter * 0.05
+                opac = 1.0;
             ;
             if (!me.blank) {
-                l = 0;
-                // offset = i + (biggest) * me.line_inter;
-                oy += me.line_inter;
-                biggest = 1;
-                // First Count lines
+
                 _.forEach(styles["properties"], function (y, j) {
-
-                    if (styles["aligns"][j] == "multiline") {
-                        let data = undefined;
-                        let a = y.split('|');
-                        console.log("a=");
-                        console.log(a);
-                        let x = a;
-                        console.log("x=");
-                        console.log(x);
-                        let z = undefined;
-                        if (a.length == 2) {
-                            x = a[0];
-                            z = a[1];
-                        }
-                        let property_components = undefined;
-                        if ('__' in x) {
-                            property_components = x.split('__');
-
-                            if (property_components.length < 2) {
-                                data = e[x]
-                            } else {
-                                data = e[property_components[0]][property_components[1]]
-                            }
+                    let data = undefined;
+                    let a = y.split('|');
+                    let x = a;
+                    let z = undefined;
+                    if (a.length == 2) {
+                        x = a[0];
+                        z = a[1];
+                    }
+                    let property_components = undefined;
+                    if (x[0].includes('__') === true) {
+                        property_components = x[0].split('__');
+                        if (property_components.length < 2) {
+                            data = e[x[0]]
                         } else {
-                            data = e[x];
+                            data = e[property_components[0]][property_components[1]]
                         }
-                        if (z == undefined) {
-
-                        } else if (z == "bool") {
-                            if (data == false) {
-                                data = "."
-                            } else {
-                                data = "x";
-                            }
-                        } else if (z == "lower") {
-                            data = data.toLowerCase();
-                        }
-
-                        lines = me.wrap(data, ox + styles["lefts"][j], oy, styles["widths"][j], font);
-                        oy += me.line_inter;
                     } else {
-                        lines = 0;
+                        data = e[x];
                     }
+                    if (z == undefined) {
 
-                    // if (lines > biggest) {
-                    //     biggest = lines;
-                    // }
-
-                });
-
-                console.log(biggest + " line ")
-                _.forEach(styles["properties"], function (y, j) {
-                    if (styles["aligns"][j] != "multiline") {
-                        let data = undefined;
-                        let a = y.split('|');
-                        console.log("a=");
-                        console.log(a);
-                        let x = a;
-                        console.log("x=");
-                        console.log(x);
-                        let z = undefined;
-                        if (a.length == 2) {
-                            x = a[0];
-                            z = a[1];
-                        }
-                        let property_components = undefined;
-                        if ('__' in x) {
-                            property_components = x.split('__');
-
-                            if (property_components.length < 2) {
-                                data = e[x]
-                            } else {
-                                data = e[property_components[0]][property_components[1]]
-                            }
+                    } else if (z == "bool") {
+                        if (data == false) {
+                            data = "."
                         } else {
-                            data = e[x];
+                            data = "x";
                         }
-                        if (z == undefined) {
-
-                        } else if (z == "bool") {
-                            if (data == false) {
-                                data = "."
-                            } else {
-                                data = "x";
-                            }
-                        } else if (z == "lower") {
-                            data = data.toLowerCase();
-                        }
-                        me.drawText(ox + styles["lefts"][j], oy - me.line_inter, fill, stroke, size, styles["aligns"][j], data, opac, font);
+                    } else if (z == "lower") {
+                        data = data.toLowerCase();
+                    }
+                    if (styles["aligns"][j] == "multiline") {
+                        lines = me.wrap(data, ox + styles["lefts"][j], oy, styles["widths"][j], font);
+                    } else {
+                        me.drawText(ox + styles["lefts"][j], oy, fill, stroke, size, styles["aligns"][j], data, opac, font);
+                        lines = 1;
+                    }
+                    if (lines > consumed_lines) {
+                        consumed_lines = lines;
+                    }
+                    if (me.debug) {
+                        me.drawRect(ox + styles["lefts"][j], oy-me.line_inter/2, styles["widths"][j], consumed_lines * (me.line_inter) + 0.25, "transparent", "#008800")
                     }
                 });
+                oy += consumed_lines * (me.line_inter) + 0.25;
+                consumed_lines = 0;
             }
         });
-        if (me.debug) {
-            me.drawRect(basex, basey, w + styles["widths"][styles["widths"].length - 1], oy - basey, "transparent", me.debug_stroke)
-        }
-
     }
 
     wrap(par, bx, by, width, font = 'default') {

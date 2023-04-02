@@ -142,37 +142,42 @@ class TourOfDutyRef(models.Model):
         """ Fixing skills for the 7.5 version of the rules
         """
         changes = [
-            {'skill': 'Surveillance', 'mixes_with': 'Security'},
-            {'skill': 'Oratory', 'mixes_with': 'Persuasion'},
-            {'skill': 'Cryptography', 'mixes_with': 'Security'},
-            {'skill': 'Bribery', 'mixes_with': 'Knavery'},
-            {'skill': 'Local Expert (undefined)', 'mixes_with': 'Lore (undefined)'}
+            {'skill': 'Surveillance', 'mixes_with': 'Security', 'exclude': []},
+            {'skill': 'Oratory', 'mixes_with': 'Persuasion', 'exclude': []},
+            {'skill': 'Cryptography', 'mixes_with': 'Security', 'exclude': []},
+            {'skill': 'Bribery', 'mixes_with': 'Knavery', 'exclude': []},
+            {'skill': 'Local Expert (undefined)', 'mixes_with': 'Lore (undefined)', 'exclude': []},
+            {'skill': 'Linguistics (Urthish)', 'mixes_with': 'Linguistics (undefined)', 'exclude': ['0']}
         ]
         for s in self.skillmodificator_set.all():
+            print(f"Category: {self.category}")
             for c in changes:
-                if c['skill'] == s.skill_ref.reference:
-                    print("found skill", s.skill_ref)
-                    found = False
-                    for m in self.skillmodificator_set.all():
-                        if c['mixes_with'] == m.skill_ref.reference:
-                            print("found mixes_with:", s.skill_ref)
-                            print(" --- skill value is ........ ", s.value)
-                            print(" --- mixes_with value is ... ", m.value)
-                            m.value += s.value
-                            s.value = 0
-                            m.save()
-                            s.save()
-                            s.delete()
-                            found = True
-                    if not found:
-                        from collector.models.skill import SkillModificator, SkillRef
-                        m = SkillModificator()
-                        m.tour_of_duty_ref = self
-                        m.value = s.value
-                        m.skill_ref = SkillRef.objects.get(reference=c['mixes_with'])
-                        m.save()
-                        s.delete()
+                print(f"Found change {c['skill']}")
+                if self.category not in c['exclude']:
+                    if c['skill'] == s.skill_ref.reference:
 
+                        found = False
+                        for m in self.skillmodificator_set.all():
+                            if c['mixes_with'] == m.skill_ref.reference:
+                                print("found mixes_with:", s.skill_ref)
+                                print(" --- skill value is ........ ", s.value)
+                                print(" --- mixes_with value is ... ", m.value)
+                                m.value += s.value
+                                s.value = 0
+                                m.save()
+                                s.save()
+                                s.delete()
+                                found = True
+                        if not found:
+                            from collector.models.skill import SkillModificator, SkillRef
+                            m = SkillModificator()
+                            m.tour_of_duty_ref = self
+                            m.value = s.value
+                            m.skill_ref = SkillRef.objects.get(reference=c['mixes_with'])
+                            m.save()
+                            s.delete()
+                else:
+                    print(f"--> Change NOT Applicable")
         print("done")
 
     def check_value(self):

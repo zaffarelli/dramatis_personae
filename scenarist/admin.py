@@ -27,6 +27,8 @@ admin.site.register(CardLink, CardLinkAdmin)
 admin.site.register(Card, CardAdmin)
 admin.site.register(Challenge, ChallengeAdmin)
 admin.site.register(Achievement, AchievementAdmin)
+
+
 # admin.site.register(QuizzQuestion, QuizzQuestionAdmin)
 # admin.site.register(QuizzAnswer, QuizzAnswerAdmin)
 # admin.site.register(Quizz, QuizzAdmin)

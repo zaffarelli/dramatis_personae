@@ -32,18 +32,26 @@ class Card(StoryModel):
     def full_chapter(self):
         return f"CARD:{self.id:04}.{self.name}"
 
-    def get_casting(self):
-        """ Bring all avatars rids from all relevant text fields"""
-        casting = super().get_casting()
-        casting.append(self.fetch_avatars(self.description))
-        casting.append(self.fetch_avatars(self.resolution))
-        casting.append(self.fetch_avatars(self.rewards))
-        return casting
+    # def get_casting(self):
+    #     """ Bring all avatars rids from all relevant text fields"""
+    #     casting = super().get_casting()
+    #     # casting.append(self.fetch_avatars(self.description))
+    #     # casting.append(self.fetch_avatars(self.resolution))
+    #     # casting.append(self.fetch_avatars(self.rewards))
+    #     return casting
 
     def get_episodes(self):
         from scenarist.models.cards import Card
-        episodes = Card.objects.filter(parent=self)
+        episodes = Card.objects.filter(parent=self).order_by('card_type')
         return episodes
+
+    def get_episodes_links(self):
+        lst = []
+        episodes = self.children_list()
+        for ep in episodes:
+            str = f'<span class="view_card" id="view_card_{ep.id}" mode="overlay" title="Click to view {ep.card_type}" style="display: inline-block;color:black; background:{ep.card_type_color};border-radius:3px;">{ep.card_type}:{ep.name}</span>'
+            lst.append(str)
+        return "<BR/>".join(lst)
 
     @property
     def get_tags(self):
@@ -120,6 +128,10 @@ class Card(StoryModel):
         job['action_model'] = self.action_model
         job['experience'] = self.experience
         job['epic_name'] = self.epic.name
+        job['get_casting_string'] = self.get_casting_string
+        job['get_casting_avatars'] = self.get_casting_avatars
+        job['children_links'] = self.get_episodes_links()
+        job['collection_balance'] = self.collection_balance()
         return job
 
     @property
@@ -129,15 +141,15 @@ class Card(StoryModel):
     @property
     def card_type_prefix(self):
         prefix = {
-            'EP': 'E',
-            'DR': 'D',
-            'AC': 'A',
-            'SH': 'H',
-            'BK': 'B',
-            'AD': 'S',
-            'EV': 'E',
-            'SC': 'C',
-            'UN': '',
+            'EP': 'EPI',
+            'DR': 'DRA',
+            'AC': 'ACT',
+            'SH': 'SCH',
+            'BK': 'BAC',
+            'AD': 'ADV',
+            'EV': 'EVE',
+            'SC': 'SCE',
+            'UN': 'UND',
         }
         return prefix[self.card_type]
 
@@ -163,17 +175,9 @@ class Card(StoryModel):
                 self.full_id = f"{self.card_type_prefix}.{int(self.chapter):02}"
         # display Tabs
         self.sublevels = ""
-        print(self.full_id.count(':'))
         for x in range(self.full_id.count(':')):
             self.sublevels += str(x)
         adventure = None
-        # if self.saved:
-        #     cardlinks = self.cardin.all()
-        #     for link in cardlinks:
-        #         print(link)
-        #         if link.label == 'CH':
-        #             self.full_id = f'{link.cardout.full_id}:{self.card_type_prefix}{self.chapter:03}'
-        #             adventure = link.cardout
         # Date
         from datetime import timedelta
         if self.parent:
@@ -185,11 +189,79 @@ class Card(StoryModel):
             self.downtime_scene = False
             self.chase_scene = False
 
+        if self.dramatis_personae:
+            self.dramatis_personae.clear()
+        else:
+            self.dramatis_personae = []
+        for a in self.get_casting():
+            self.dramatis_personae.append(a)
+        if self.card_type in ['AD', 'SC', 'SH']:
+            this_card = "CARD" + str(self.id).zfill(5)
+            from collector.models.collection import Collection
+            from collector.models.character import Character
+            found = Collection.objects.filter(reference=this_card)
+            if len(found):
+                collection = found.first()
+            else:
+                collection = Collection()
+                collection.reference = this_card
+                collection.save()
+            collection.category = 6
+            collection.description = f"List of the characters from the card [{self.full_id} {self.name}]."
+            collection.members.clear()
+            if self.dramatis_personae:
+                rids = []
+                for rid in self.dramatis_personae:
+                    rids.append(rid)
+                members = Character.objects.filter(rid__in=self.dramatis_personae)
+                for member in members:
+                    collection.members.add(member)
+            collection.save()
+
+    def collection_balance(self):
+        res = 0
+        from collector.models.collection import Collection
+        me = 'CARD' + str(self.id).zfill(5)
+        c = Collection.objects.filter(category=6, reference=me)
+        if len(c) == 1:
+            my = c.first()
+            res = my.balanced_ratio
+        return res
+
+    def children_list(self):
+        arr = []
+        for child in self.children.all():
+            arr.append(child)
+        return arr
+
+    @property
+    def children_str(self):
+        arr = []
+        for episode in self.get_episodes():
+            arr.append("%s_%d" % (type(episode).__name__.lower(), episode.id))
+        return ";".join(arr)
+
+    def get_full_cast(self):
+        """ Return the depth cast for this episode """
+        casting = self.dramatis_personae
+        for child in self.children_list():
+            sub = child.get_full_cast()
+            if len(sub):
+                casting.append(sub)
+
+        flat_cast = [c for subcast in casting for c in subcast]
+        new_list = sorted(list(set(flat_cast)))
+        print("----> " + self.name)
+        print(casting)
+        print(new_list)
+        print()
+        return new_list
+
     def post_fix(self):
         if self.card_type in ['AD']:
             chapter = 1;
             children = self.children.all().values('id')
-            sorted_children = Card.objects.filter(id__in=children).order_by('date_offset')
+            sorted_children = Card.objects.filter(id__in=children).order_by('sdt')
             for c in sorted_children:
                 c.chapter = chapter
                 c.save()
@@ -285,8 +357,8 @@ def fix_all(modeladmin, request, queryset):
 
 class CardAdmin(admin.ModelAdmin):
     ordering = ['full_id']
-    list_display = ['name', 'card_type', 'temporary', 'full_id', 'chapter', 'date_offset', 'dt', 'place',
-                    'links']
+    list_display = ['name', 'card_type', 'temporary', 'full_id', 'chapter', 'date_offset', 'sdt', 'dt', 'place',
+                    'get_casting_string']
     list_filter = ['epic', 'card_type', 'temporary', 'place']
     search_fields = ['description', 'name', 'resolution']
     list_editable = ['temporary', 'card_type', 'date_offset', 'chapter']

@@ -92,3 +92,7 @@ admin.site.register(RpgSystem, RpgSystemAdmin)
 
 from collector.models.sequence import Sequence, SequenceAdmin
 admin.site.register(Sequence, SequenceAdmin)
+
+
+from collector.models.collection import Collection, CollectionAdmin
+admin.site.register(Collection, CollectionAdmin)

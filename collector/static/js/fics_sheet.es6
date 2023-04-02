@@ -8,7 +8,7 @@ class FICSSheet extends Sheet {
     init() {
         let me = this;
         super.init();
-        me.version = '0.9.5';
+        me.version = '0.9.6';
         me.fics_release = "FuZion Interlock Custom System v8.0";
     }
 
@@ -73,7 +73,7 @@ class FICSSheet extends Sheet {
             me.drawLine(1, 17, 5, 5, me.draw_fill, me.draw_fill, 3, me.strokedebris); // Weapons/Armors separator
             me.drawLine(1, 17, 10, 10, me.draw_fill, me.draw_fill, 3, me.strokedebris); // Below weapons
             me.drawLine(17, 23, 8, 8, me.draw_fill, me.draw_fill, 3, me.strokedebris); // Below tods
-            me.drawLine(12, 12, 10, 35, me.draw_fill, me.draw_fill, 3); // East BA/BC
+            // me.drawLine(12, 12, 10, 35, me.draw_fill, me.draw_fill, 3); // East BA/BC
             me.drawLine(1, 12, 29, 29, me.draw_fill, me.draw_fill, 3); // Below shortcuts
             me.drawLine(17, 17, 2.5, 13, me.draw_fill, me.draw_fill, 3, me.strokedebris); // Right Armor/weapons
 
@@ -113,6 +113,7 @@ class FICSSheet extends Sheet {
 
             me.drawLine(12, 12, 2.5, 35, me.draw_fill, me.draw_fill, 3, me.strokedebris);
             me.drawLine(12, 23, 10, 10, me.draw_fill, me.draw_fill, 3, me.strokedebris);
+            me.drawLine(12, 23, 24, 24, me.draw_fill, me.draw_fill, 3, me.strokedebris);
         }
 
         if (!me.blank) {
@@ -143,10 +144,9 @@ class FICSSheet extends Sheet {
             me.fillName(page);
             me.fillArmors(1.25, 3);
             me.fillWeapons(1.25, 5.5);
-
-
-            me.fillShield(12.25, 10.5)
-            me.fillPicture(1.25, 29.5)
+            me.fillShield(1.25, 10.5);
+            me.fillCyber(1.25, 13.5);
+            me.fillPicture(1.25, 29.5);
         } else if (page == 2) {
             me.fillName(page);
             me.fillToDs(1.25, 3);
@@ -159,6 +159,7 @@ class FICSSheet extends Sheet {
             me.fillWallet(12.25, 3)
             me.fillGear(12.25, 10.5)
             me.fillShortcuts(1.25, 3)
+            me.fillExperience(12.25, 24.5)
         }
     }
 

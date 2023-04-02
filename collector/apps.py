@@ -5,6 +5,7 @@
 """
 from django.apps import AppConfig
 
+
 class CollectorConfig(AppConfig):
     name = 'collector'
 
@@ -17,3 +18,4 @@ class CollectorConfig(AppConfig):
         import collector.signals.tod
         import collector.signals.armor
         import collector.signals.spacecraft
+        import collector.signals.collection

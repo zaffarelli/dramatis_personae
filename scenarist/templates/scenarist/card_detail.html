@@ -33,6 +33,11 @@
                     <em>Date</em>{{ object.date }}
                 </div>
             {% endif %}
+            {% if object.sdt %}
+                <div class="brick">
+                    <em>IRL Datetime</em>{{ object.sdt }}
+                </div>
+            {% endif %}
             {% if object.place %}
                 <div class="brick">
                     <em>Place</em>{{ object.place }}
@@ -51,6 +56,21 @@
             {% for link in object.cardin.all %}
                 <div class="brick">
                     <em>Relationships</em> {{ link.short }}
+                </div>
+            {% endfor %}
+
+                <div class="brick">
+                    <em class="parent">Parent</em>
+
+                    <span class="card_link compact view_card" id="view_card_{{ object.parent.id }}" mode="overlay" title="Card Type: {{ object.parent.card_type }}: click to view">{{ object.parent }}</span>
+
+
+                </div>
+
+            {% for child in object.children.all %}
+                <div class="brick">
+                    <em class="Child">Child</em>
+                    <span class="card_link compact view_card" id="view_card_{{ child.id }}" mode="overlay" title="Card Type: {{ child.card_type }}: click to view">{{ child }}</span>
                 </div>
             {% endfor %}
         </div>
