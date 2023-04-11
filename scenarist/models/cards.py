@@ -49,7 +49,7 @@ class Card(StoryModel):
         lst = []
         episodes = self.children_list()
         for ep in episodes:
-            str = f'<span class="view_card" id="view_card_{ep.id}" mode="overlay" title="Click to view {ep.card_type}" style="display: inline-block;color:black; background:{ep.card_type_color};border-radius:3px;">{ep.card_type}:{ep.name}</span>'
+            str = f'<span class="view_card" id="view_card_{ep.id}" mode="overlay" title="Click to view {ep.card_type}" style="cursor:pointer;display: inline-block; min-width:35ex; color:black; margin:2px; background:{ep.card_type_color};border-radius:3px;">{ep.card_type}:{ep.name}</span>'
             lst.append(str)
         return "<BR/>".join(lst)
 
@@ -123,8 +123,8 @@ class Card(StoryModel):
         job = json.loads(jst)
         job['tags'] = self.get_tags
         job['card_tag'] = self.card_tag
-        job['date_str'] = self.dt.strftime("%Y%m%d %H%M")
-        job['session_date_str'] = self.sdt.strftime("%Y%m%d %H%M")
+        job['date_str'] = self.dt.strftime("%Y-%m-%d %H%M")
+        job['session_date_str'] = self.sdt.strftime("%Y-%m-%d %H%M")
         job['action_model'] = self.action_model
         job['experience'] = self.experience
         job['epic_name'] = self.epic.name
@@ -189,13 +189,13 @@ class Card(StoryModel):
             self.downtime_scene = False
             self.chase_scene = False
 
-        if self.dramatis_personae:
-            self.dramatis_personae.clear()
-        else:
-            self.dramatis_personae = []
-        for a in self.get_casting():
-            self.dramatis_personae.append(a)
-        if self.card_type in ['AD', 'SC', 'SH']:
+        # if self.dramatis_personae:
+        #     self.dramatis_personae.clear()
+        # else:
+        #     self.dramatis_personae = []
+        # print(self.get_casting())
+        self.dramatis_personae = self.get_full_cast()
+        if self.card_type: #in ['AD', 'SC', 'EV', "SH"]:
             this_card = "CARD" + str(self.id).zfill(5)
             from collector.models.collection import Collection
             from collector.models.character import Character
@@ -207,13 +207,15 @@ class Card(StoryModel):
                 collection.reference = this_card
                 collection.save()
             collection.category = 6
+            collection.published = self.published
             collection.description = f"List of the characters from the card [{self.full_id} {self.name}]."
             collection.members.clear()
-            if self.dramatis_personae:
+            if len(self.dramatis_personae)>0:
                 rids = []
-                for rid in self.dramatis_personae:
-                    rids.append(rid)
-                members = Character.objects.filter(rid__in=self.dramatis_personae)
+                for x in self.dramatis_personae:
+                    d = x.split('__')
+                    rids.append(d[0])
+                members = Character.objects.filter(rid__in=rids)
                 for member in members:
                     collection.members.add(member)
             collection.save()
@@ -241,21 +243,21 @@ class Card(StoryModel):
             arr.append("%s_%d" % (type(episode).__name__.lower(), episode.id))
         return ";".join(arr)
 
-    def get_full_cast(self):
-        """ Return the depth cast for this episode """
-        casting = self.dramatis_personae
-        for child in self.children_list():
-            sub = child.get_full_cast()
-            if len(sub):
-                casting.append(sub)
-
-        flat_cast = [c for subcast in casting for c in subcast]
-        new_list = sorted(list(set(flat_cast)))
-        print("----> " + self.name)
-        print(casting)
-        print(new_list)
-        print()
-        return new_list
+    # def get_full_cast(self):
+    #     """ Return the depth cast for this episode """
+    #     casting = self.dramatis_personae
+    #     for child in self.children_list():
+    #         sub = child.get_full_cast()
+    #         if len(sub):
+    #             casting.append(sub)
+    #
+    #     flat_cast = [c for subcast in casting for c in subcast]
+    #     new_list = sorted(list(set(flat_cast)))
+    #     print("----> " + self.name)
+    #     print(casting)
+    #     print(new_list)
+    #     print()
+    #     return new_list
 
     def post_fix(self):
         if self.card_type in ['AD']:

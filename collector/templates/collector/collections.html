@@ -1,0 +1,13 @@
+{% load fics_filters %}
+{% csrf_token %}
+<div class="fresque top">
+    <h1>{{ title }}</h1>
+</div>
+<div class="fresque middle">
+    {% for x in collections %}
+        {% include "collector/collection_link_row.html" with c=x%}
+    {% endfor %}
+</div>
+<div class="fresque bottom">
+    {{ comment }}
+</div>

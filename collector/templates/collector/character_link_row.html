@@ -1,18 +1,19 @@
 {% load static %}
 {% load fics_filters %}
-<div class="character_row" id="character_row_{{ c.id }}">
+<div class="item_row character_row" id="character_row_{{ c.id }}">
     <div class="cell mini charsel" ref="{{c.id}}">{{ c.id|safe}}</div>
     <div class="cell mini figureshow" medimg="{{c.rid|as_media_image}}">{{ c.rid|media_check|safe}}</div>
 
     <div class="cell mini" id="link_{{c.id}}">
         <span class="action_icon sheet" id="sheet_{{ c.id }}"><i class="fas fa-file"></i></span>&nbsp;
     </div>
-    <div class="cell mini charsel" id="selected_{{c.id}}" ref="{{c.id}}" param="selected" title="Toggle Selected">{{ c.selected|prettybool|safe}}</div>
-    <div class="cell mini charsel" id="is_public_{{c.id}}" ref="{{c.id}}" param="is_public" title="Toggle Public">{{ c.is_public|prettybool|safe}}</div>
-    <div class="cell mini charsel" id="archived_{{c.id}}" ref="{{c.id}}" param="archived" title="Toggle Archived">{{ c.archived|prettybool|safe}}</div>
-    <div class="cell mini charsel" id="incognito_{{c.id}}" ref="{{c.id}}" param="incognito" title="Toggle Incognito">{{ c.incognito|prettybool|safe}}</div>
-    <div class="cell mini charsel" id="is_draft_{{c.id}}" ref="{{c.id}}" param="is_draft" title="Toggle is_draft">{{ c.is_draft|prettybool|safe}}</div>
-    <div class="cell mini charsel" id="spotlight_{{c.id}}" ref="{{c.id}}" param="spotlight" title="Toggle spotlight">{{ c.spotlight|prettybool|safe}}</div>
+    <div class="cell mini switcher" option="character" id="selected_{{c.id}}" ref="{{c.id}}" param="selected" title="Toggle Selected">{{ c.selected|prettybool|safe}}</div>
+    <div class="cell mini switcher" option="character" id="is_public_{{c.id}}" ref="{{c.id}}" param="is_public" title="Toggle Public">{{ c.is_public|prettybool|safe}}</div>
+    <div class="cell mini switcher" option="character" id="is_core_{{c.id}}" ref="{{c.id}}" param="is_core" title="Toggle Core">{{ c.is_core|prettybool|safe}}</div>
+    <div class="cell mini switcher" option="character" id="archived_{{c.id}}" ref="{{c.id}}" param="archived" title="Toggle Archived">{{ c.archived|prettybool|safe}}</div>
+    <div class="cell mini switcher" option="character" id="incognito_{{c.id}}" ref="{{c.id}}" param="incognito" title="Toggle Incognito">{{ c.incognito|prettybool|safe}}</div>
+    <div class="cell mini switcher" option="character" id="is_draft_{{c.id}}" ref="{{c.id}}" param="is_draft" title="Toggle is_draft">{{ c.is_draft|prettybool|safe}}</div>
+    <div class="cell mini switcher" option="character" id="spotlight_{{c.id}}" ref="{{c.id}}" param="spotlight" title="Toggle spotlight">{{ c.spotlight|prettybool|safe}}</div>
     <div class="cell mini" title="Balanced">{{ c.balanced|prettybool|safe}}</div>
 
     <div class="cell widest" title="{{ c.rid|safe }}">

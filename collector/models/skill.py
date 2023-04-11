@@ -50,8 +50,9 @@ class SkillRef(UUIDClass):
         return res
 
     def __str__(self):
-        return '%s %s %s %s [%s]' % (
+        return '%s %s %s %s %s [%s]' % (
             self.reference, self.group, "(R)" if self.is_root else "", "(S)" if self.is_speciality else "",
+            "(D)" if self.deprecated else "",
             self.linked_to.reference if self.linked_to else "-")
 
     def fix(self):

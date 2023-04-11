@@ -28,50 +28,59 @@
                     <label for="name">Name</label>
                     {{ form.name }}
                 </li>
-                <li class="o1">
+                <li class="o2">
                     {{ form.abstract.errors }}
                     <label for="abstract">Abstract</label>
                     {{ form.abstract }}
                 </li>
-                <li class="o2 ta">
+                <li class="o5 ta">
                     {{ form.description.errors }}
                     <label for="description">Description</label>
                     {{ form.description }}
                 </li>
+
+                <li class="o2">
+                    {{ form.card_type.errors }}
+                    <label for="card_type">Card Type</label>
+                    {{ form.card_type }}
+                </li>
+                <li  class="o3">
+                    {{ form.is_ongoing.errors }}
+                    <label for="is_ongoing">On Going</label>
+                    {{ form.is_ongoing }}
+                </li>
+                <li class="o2">
+                    {{ form.parent.errors }}
+                    <label for="parent">Parent</label>
+                    {{ form.parent }}
+                </li>
+
+                <li class="o3">
+                    {{ form.chapter.errors }}
+                    <label for="chapter">Chapter</label>
+                    {{ form.chapter }}
+                </li>
+                <li class="o3">
+                    {{ form.place.errors }}
+                    <label for="place">Place</label>
+                    {{ form.place }}
+                </li>
+
+            </ul>
+
+            <ul class="tabcontent hiddentab" id="tab_2">
                 <li class="o2 ta">
                     {{ form.resolution.errors }}
                     <label for="resolution">Resolution</label>
                     {{ form.resolution }}
                 </li>
-                <li class="o4 ta">
-                    {{ form.rewards.errors }}
-                    <label for="rewards">Rewards</label>
-                    {{ form.rewards }}
-                </li>
-                <li>
-                    {{ form.is_ongoing.errors }}
-                    <label for="is_ongoing">On Going</label>
-                    {{ form.is_ongoing }}
-                </li>
-            </ul>
-
-            <ul class="tabcontent hiddentab" id="tab_2">
 
                 <li class="o5">
                     {{ form.epic.errors }}
                     <label for="epic">Epic</label>
                     {{ form.epic }}
                 </li>
-                <li class="o1">
-                    {{ form.chapter.errors }}
-                    <label for="chapter">Chapter</label>
-                    {{ form.chapter }}
-                </li>
-                <li class="o1">
-                    {{ form.place.errors }}
-                    <label for="place">Place</label>
-                    {{ form.place }}
-                </li>
+
                 <li class="o1">
                     {{ form.date_offset.errors }}
                     <label for="date_offset">Days Offset</label>
@@ -92,10 +101,10 @@
                     <label for="gamemaster">Gamemaster</label>
                     {{ form.gamemaster }}
                 </li>
-                <li class="o1">
-                    {{ form.card_type.errors }}
-                    <label for="card_type">Card Type</label>
-                    {{ form.card_type }}
+                <li class="o4 ta">
+                    {{ form.rewards.errors }}
+                    <label for="rewards">Rewards</label>
+                    {{ form.rewards }}
                 </li>
             </ul>
 
@@ -176,11 +185,7 @@
                     <label for="visible">Visible</label>
                     {{ form.visible }}
                 </li>
-                <li class="o1">
-                    {{ form.parent.errors }}
-                    <label for="parent">Parent</label>
-                    {{ form.parent }}
-                </li>
+
             </ul>
 
 

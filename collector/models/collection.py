@@ -7,6 +7,7 @@ from django.db import models
 from collector.models.character import Character
 from django.contrib import admin
 import math
+import json
 
 ORPHANS_COLLECTION = "Orphans"
 
@@ -22,6 +23,7 @@ class Collection(models.Model):
     census = models.PositiveIntegerField(default=0, blank=True)
     category = models.PositiveIntegerField(default=1, blank=True)
     balanced_ratio = models.PositiveIntegerField(default=0, blank=True)
+    published = models.BooleanField(default=False, blank=True)
 
     def __str__(self):
         return f'{self.reference:20s}'
@@ -48,14 +50,14 @@ class Collection(models.Model):
                 if len(c.collection_set.exclude(reference=ORPHANS_COLLECTION, archived=True)) == 0:
                     self.members.add(c)
         self.census = self.members.all().count()
-        print('balanced ratio computation')
+        # print('balanced ratio computation')
         if self.census > 0:
             cnt = self.members.filter(balanced=True).count()
-            print(cnt)
-            print(self.census)
+            # print(cnt)
+            # print(self.census)
             self.balanced_ratio = int(math.floor(float(cnt) / float(self.census) * 100))
         else:
-            self.balanced_ratio = 100
+            self.balanced_ratio = 0
 
     def fill_from_casting(self, rid_list=[]):
         mine = self.members.all()
@@ -80,6 +82,19 @@ class Collection(models.Model):
         orphans.category = 0
         orphans.description = 'List of characters not included in any collection.'
         orphans.save()
+
+    @property
+    def to_json(self):
+        """ Returns JSON of object """
+        from datetime import datetime
+        from scenarist.utils.tools import json_default
+        jst = json.dumps(self, default=json_default, sort_keys=True, indent=4)
+        job = json.loads(jst)
+        members = ""
+        for m in self.all_members:
+            members += f"¤{m.rid}¤ "
+        job['members'] = members
+        return job
 
 
 class CollectionAdmin(admin.ModelAdmin):

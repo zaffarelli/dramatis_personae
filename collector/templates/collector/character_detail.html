@@ -16,8 +16,6 @@
             <div class='diagtabs off' id='button_8'> Inspirations</div>
             <div class='diagtabs off' id='button_3'> Debug</div>
         </div>
-
-
         <div class="tabcontent character_sheet" id="tab_1">
             <div class="infoblock shrinkable">
                 <div class="text">
@@ -52,7 +50,7 @@
                 </div>
                 {#        <div class="tile_back" id="tile_back_{{c.id}}"><i class="action_icon golden fa fa-times-circle"></i></div>#}
             </div>
-            <div class='coreblock shrinkable shrinked'>
+            <div class='coreblock'>
                 <ul>
                     {% if c.alliance_ref %}
                         <li><b>Alliance</b><u>{{ c.alliance_ref.reference|safe }}</u></li>
@@ -75,10 +73,19 @@
                         <li><b>Path</b><u>{{ c.path }}</u></li>
                         <li><b>Occult Fire power</b><u>{{ c.occult_fire_power }}</u></li>
                     {% endif %}
+                </ul>
+                <ul>
                     <li><b>Dead</b><u>{{ c.is_dead|prettybool|safe }}</u></li>
                     <li><b>Historical Figure</b><u>{{ c.historical_figure|prettybool|safe }}</u></li>
                     <li><b>Visible</b><u>{{ c.is_visible|prettybool|safe }}</u></li>
                     <li><b>Lifepath</b><u>{{ c.use_history_creation|prettybool|safe }}</u></li>
+                    <li><b>Core</b><u>{{ c.is_core|prettybool|safe }}</u></li>
+                    <li><b>Spotlight</b><u>{{ c.spotlight|prettybool|safe }}</u></li>
+                    <li><b>Public</b><u>{{ c.is_public|prettybool|safe }}</u></li>
+                    <li><b>Incognito</b><u>{{ c.incognito|prettybool|safe }}</u></li>
+                    <li><b>Classification</b><u>{{ c.get_classification_display|safe }}</u></li>
+                    <li><b>Incognito Name</b><u>{{ c.incognito_name|safe }}</u></li>
+                    <li><b>Incognito Alliance</b><u>{{ c.incognito_alliance|safe }}</u></li>
 
 
                 </ul>

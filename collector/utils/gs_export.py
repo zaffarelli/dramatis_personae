@@ -27,10 +27,11 @@ import os
 # Total column number on the character tab
 COLS_AMOUNT = 14
 RID_ROW_IDX = 13
-#SCOLS_AMOUNT = COLS_AMOUNT-2
+# SCOLS_AMOUNT = COLS_AMOUNT-2
 
 # key = Fernet.generate_key() #this is your "password"
 KEY = b'WAXSue9RLeTPqgdvbfrj2e60Xk6PrRgx6jo-KV8JOIw='
+
 
 def encrypt(str):
     cipher_suite = Fernet(KEY)
@@ -74,8 +75,6 @@ def connect_as_target(options, target):
     return sheet
 
 
-
-
 def update_abstract(options, target):
     from collector.utils.basic import get_current_config
     logger.info('> Writting Abstract')
@@ -108,7 +107,7 @@ def update_gss():
 
 def gss_review(options):
     header_line = []
-    sheet = connect_as_source(options,"google_spread_sheet")
+    sheet = connect_as_source(options, "google_spread_sheet")
     matrix = sheet.get_all_values()
     for idx, row in enumerate(matrix):
         if idx > 0:
@@ -207,7 +206,8 @@ def gss_push(options, header_line):
     cast = campaign.epic.get_full_cast()
     print(cast)
     # character_items = Character.objects.all().filter(epic__shortcut=conf.epic.shortcut,is_public=True).order_by('alliance','full_name')
-    character_items = Character.objects.all().filter(rid__in=cast).order_by('full_name','alias','alliance_ref__reference')
+    character_items = Character.objects.all().filter(rid__in=cast).order_by('full_name', 'alias',
+                                                                            'alliance_ref__reference')
     logger.info("There will be %d characters" % (len(character_items)))
     matrix = sheet.range('A1:N%d' % (len(character_items) + 1))
     # logger.info(header_line)
@@ -227,7 +227,7 @@ def gss_push(options, header_line):
             matrix[idx * COLS_AMOUNT + 7].value = ''
             matrix[idx * COLS_AMOUNT + 8].value = ''
             matrix[idx * COLS_AMOUNT + 9].value = c.entrance
-            matrix[idx * COLS_AMOUNT + 10].value = "https://senestre.eu/dpp/f_"+c.rid+".jpg"
+            matrix[idx * COLS_AMOUNT + 10].value = "https://senestre.eu/dpp/f_" + c.rid + ".jpg"
             matrix[idx * COLS_AMOUNT + 11].value = ''
             matrix[idx * COLS_AMOUNT + 12].value = ''
             matrix[idx * COLS_AMOUNT + 13].value = encrypt(c.rid).decode('UTF-8')
@@ -246,7 +246,7 @@ def gss_push(options, header_line):
             matrix[idx * COLS_AMOUNT + 7].value = c.species_line
             matrix[idx * COLS_AMOUNT + 8].value = c.age
             matrix[idx * COLS_AMOUNT + 9].value = c.entrance
-            matrix[idx * COLS_AMOUNT + 10].value = "https://senestre.eu/dpp/f_"+c.rid+".jpg"
+            matrix[idx * COLS_AMOUNT + 10].value = "https://senestre.eu/dpp/f_" + c.rid + ".jpg"
             matrix[idx * COLS_AMOUNT + 11].value = c.faction
             matrix[idx * COLS_AMOUNT + 12].value = c.narrative
             matrix[idx * COLS_AMOUNT + 13].value = encrypt(c.rid).decode('UTF-8')
@@ -318,7 +318,8 @@ def rc(row, col):
 
 
 SUMMARY_SHEET_MODEL = {
-    'column_headers': [ "ID","Character", "Tours of Duty", "Best Rolls", "P:M:C","Height/Weight", "Sex", "Caste", "Alliance", "Faction", "Species", "Age", "Narrative", "Pts", "Total", "Native System"],
+    'column_headers': ["ID", "Character", "Tours of Duty", "Best Rolls", "P:M:C", "Height/Weight", "Sex", "Caste",
+                       "Alliance", "Faction", "Species", "Age", "Narrative", "Pts", "Total", "Native System"],
 }
 
 
@@ -327,13 +328,13 @@ def gss_push_summary(options):
     update_abstract(options, "pc_summary")
     campaign = get_current_config()
     header_line = SUMMARY_SHEET_MODEL['column_headers']
-    character_items = campaign.dramatis_personae.filter(player="TBD").order_by("caste","full_name")
+    character_items = campaign.dramatis_personae.filter(player="TBD").order_by("caste", "full_name")
     sheet = connect_as_target(options, "pc_summary")
     logger.info(f'There will be {len(character_items)} characters')
-    last_col = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"[len(header_line)-1]
-    matrix = sheet.range('A1:%s%d' % (last_col,len(character_items) + 1))
+    last_col = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"[len(header_line) - 1]
+    matrix = sheet.range('A1:%s%d' % (last_col, len(character_items) + 1))
     for i in range(len(header_line)):
-         matrix[i].value = header_line[i]
+        matrix[i].value = header_line[i]
     u = 1
     idx = 1
     for c in character_items:
@@ -343,9 +344,9 @@ def gss_push_summary(options):
             matrix[rc(idx, 2)].value = "\n".join(c.tod_list_str.split(", "))
         if c.gm_shortcuts_pdf:
             matrix[rc(idx, 3)].value = "\n".join(c.gm_shortcuts_pdf.split(', ')[:5])
-        p = round((c.PA_STR + c.PA_BOD + c.PA_MOV + c.PA_CON)/4)
-        m = round((c.PA_INT + c.PA_WIL + c.PA_PRE + c.PA_TEM)/4)
-        k = round((c.PA_TEC + c.PA_REF + c.PA_AGI + c.PA_AWA)/4)
+        p = round((c.PA_STR + c.PA_BOD + c.PA_MOV + c.PA_CON) / 4)
+        m = round((c.PA_INT + c.PA_WIL + c.PA_PRE + c.PA_TEM) / 4)
+        k = round((c.PA_TEC + c.PA_REF + c.PA_AGI + c.PA_AWA) / 4)
         matrix[rc(idx, 4)].value = f"{p}:{m}:{k}"
         matrix[rc(idx, 5)].value = f'{c.height}cm/{c.weight}kg'
         matrix[rc(idx, 6)].value = c.gender[0].upper()

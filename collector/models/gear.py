@@ -16,6 +16,7 @@ REFERENCES = (
     ("FS2CRB", "Fading Suns 2ed Core Rulebook"),
     ("DEM", "Introduced in epic Deus Ex Machina"),
     ("ANTU", "Introduced in epic Abusus Non Tollit Usum"),
+    ("DAL", "Introduced in epic De Automatum Legis"),
     ("MotJ", "Merchants of the Jumpweb"),
     ("FL:T", "Forbidden Lore: Technology"),
     ("AT", "Arcane Tech"),

@@ -152,9 +152,12 @@ def parse_avatars(value):
             str_name = ch.full_name
             if ch.alias:
                 str_name = f'{ch.alias} ({ch.full_name})'
-            replacement_string = '<span id="%d" class="character_link embedded_link" title="%s:\n%s">%s %s</span>' % (
+            replacement_string = '<span id="%d" class="character_link embedded_link" title="%s:\n%s">%s %s %s</span>' % (
                 ch.id, ch.full_name, ch.entrance, str_name,
-                "<i class='fa fa-angle-double-up'></i>" if ch.balanced == True else "<i class='fa fa-angle-double-down'></i>")
+                "<i class='fa fa-angle-double-up'></i>" if ch.balanced == True else "<i class='fa fa-angle-double-down'></i>",
+                "<i class='fa fa-mask'></i>" if ch.classification == "ves" else "<i class='fa fa-user-secret'></i>" if ch.classification == "sec" else ""
+
+            )
         else:
             replacement_string = '<span class="embedded_link broken">[%s&dagger;]</span>' % (rid)
         changes.append({'src': item.group(), 'dst': replacement_string})
@@ -457,12 +460,13 @@ def zfill(value):
 @register.filter(name='as_date')
 def as_date(value):
     res = 0
-    from datetime import datetime
-    year = value['year']
-    month = value['month']
-    day = value['day']
-    # print(year, month, day)
-    res = f"{year:04}-{month:02}-{day:02}"
+    import datetime
+    if isinstance(value, datetime.datetime):
+        year = value['year']
+        month = value['month']
+        day = value['day']
+        # print(year, month, day)
+        res = f"{year:04}-{month:02}-{day:02}"
     return res
 
 
@@ -502,7 +506,7 @@ def ppie(value):
         x = value / 100
         circum = 2 * math.pi * 24
         cols = ['#441111', '#774411', '#885511', '#557711', '#226622']
-        col = cols[int(x * (len(cols)-1))]
+        col = cols[int(x * (len(cols) - 1))]
         svg += '<!--?xml version="1.2" encoding="UTF-8" standalone="no" ?-->'
         svg += '<svg xmlns = "http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="1cm" height="1cm" viewBox="-50 -50 100 100">'
         svg += '<circle r="48" fill="#303030"/>'
@@ -515,3 +519,10 @@ def ppie(value):
     else:
         svg = f'{value}%'
     return svg
+
+@register.filter(name='main_place')
+def main_place(value):
+    res = ""
+    if isinstance(value, str):
+        res = value.split('|')[0]
+    return res

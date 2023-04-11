@@ -9,50 +9,52 @@
 
         <div class="wall">
             <div class="brick">
-                {{ object.epic.name }}&nbsp;<i class="fa fa-arrow-right"></i>&nbsp;{{ object.name }}
+                <span>{{ object.epic.name }}&nbsp<i class="fa fa-arrow-right"></i>&nbsp;{{ object.name }}</span>
             </div>
             {% if object.anchor %}
                 <div class="brick">
-                    <em>Anchor</em> {{ object.anchor|linebreaks|parse_avatars|safe }}
+                    <em>Anchor</em> <span>{{ object.anchor|linebreaks|parse_avatars|safe }}</span>
                 </div>
             {% endif %}
             {% if object.card_type %}
             <div class="brick">
-                <em>Card Type</em>{{ object.card_type }}
+                <em>Card Type</em><span>{{ object.get_card_type_display }}</span>
             </div>
             {% endif %}
+            {% if data.tags %}
             <div class="brick">
-                {{ data.tags|safe }}
+                <span>{{ data.tags|safe }}</span>
             </div>
+            {% endif %}
 
-            <div class="brick">
-                <em>PDF</em>{{ object.to_PDF | prettybool | safe }}
-            </div>
+{#            <div class="brick">#}
+{#                <em>PDF</em>{{ object.to_PDF | prettybool | safe }}#}
+{#            </div>#}
             {% if object.date %}
                 <div class="brick">
-                    <em>Date</em>{{ object.date }}
+                    <em>Date</em><span>{{ object.date }}</span>
                 </div>
             {% endif %}
             {% if object.sdt %}
                 <div class="brick">
-                    <em>IRL Datetime</em>{{ object.sdt }}
+                    <em>IRL Datetime</em><span>{{ object.sdt }}</span>
                 </div>
             {% endif %}
             {% if object.place %}
                 <div class="brick">
-                    <em>Place</em>{{ object.place }}
+                    <em>Place</em><span>{{ object.place }}</span>
                 </div>
             {% endif %}
             {% if object.challenge %}
                 <div class="brick">
-                    <em>Challenge</em> {{ object.challenge }}
+                    <em>Challenge</em><span> {{ object.challenge }}</span>
                 </div>
             {% endif %}
-            {% if object.is_ongoing %}
-                <div class="brick">
-                    <em>OnGoing</em> {{ object.is_ongoing }}
-                </div>
-            {% endif %}
+{#            {% if object.is_ongoing %}#}
+{#                <div class="brick">#}
+{#                    <em>OnGoing</em> {{ object.is_ongoing }}#}
+{#                </div>#}
+{#            {% endif %}#}
             {% for link in object.cardin.all %}
                 <div class="brick">
                     <em>Relationships</em> {{ link.short }}

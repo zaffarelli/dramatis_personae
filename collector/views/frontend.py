@@ -157,21 +157,39 @@ def tile_avatar(request, pk=None):
     return HttpResponse(html, content_type='text/html')
 
 
-def deep_toggle(request, slug=None, id=None):
+def deep_toggle(request, option=None, slug=None, id=None):
     response = {'status': 0}
+
     if is_ajax(request):
-        matches = Character.objects.filter(id=id)
-        if slug is not None:
-            if len(matches) == 1:
-                c = matches.first()
-                x = getattr(c, slug)
-                setattr(c, slug, not (x))
-                c.save()
-                response['status'] = 1
-                response[slug] = getattr(c, slug)
-                template = get_template('collector/character_link_row.html')
-                html = template.render({'c': c})
-                response['row'] = html
+        app = 'collector'
+        if option is not None:
+            tgt = "c"
+            if option == "character":
+                app = 'collector'
+                matches = Character.objects.filter(id=id)
+            elif option == "card":
+                from scenarist.models.cards import Card
+                app = 'scenarist'
+                matches = Card.objects.filter(id=id)
+                tgt = "x"
+            elif option == "collection":
+                from collector.models.collection import Collection
+                app = 'collector'
+                matches = Collection.objects.filter(id=id)
+            else:
+                app = ''
+                slug = None
+            if slug is not None:
+                if len(matches) == 1:
+                    c = matches.first()
+                    x = getattr(c, slug)
+                    setattr(c, slug, not (x))
+                    c.save()
+                    response['status'] = 1
+                    response[slug] = getattr(c, slug)
+                    template = get_template(app + '/' + option + '_link_row.html')
+                    html = template.render({'c': c})
+                    response['row'] = html
     return JsonResponse(response)
 
 
@@ -464,19 +482,42 @@ def all_spaceships(request):
         return HttpResponse(status=204)
 
 
-def handle_cards(request):
+def handle_cards(request, ref="0"):
     if is_ajax(request):
         from scenarist.models.cards import Card
         from collector.models.campaign import Campaign
         campaign = get_current_config(request)
-        notes_items = Card.objects.filter(epic=campaign.epic, card_type__in=["EP", "DR", "AD", "UN"]).order_by(
-            'full_id')
+        if int(ref) == 0:
+            notes_items = Card.objects.filter(epic=campaign.epic, card_type__in=["EP", "DR", "AD", "UN"]).order_by(
+                'full_id')
+            title = "Adventure Cards"
+        else:
+            parent = Card.objects.get(pk=int(ref))
+            notes_items = Card.objects.filter(parent__id=int(ref)).order_by('full_id')
+            title = f"Children of card {parent.full_id}: “{parent.name}”"
         cards = []
         for x in notes_items:
             n = x.to_json
             cards.append(n)
-        context = {'cards': cards, 'title': "Adventure Cards", "comment": f"{len(cards)} item(s)."}
+        context = {'cards': cards, 'title': title, "comment": f"{len(cards)} item(s)."}
         template = get_template('collector/cards.html')
+        html = template.render(context, request)
+        response = {'mosaic': html}
+        return JsonResponse(response)
+    else:
+        return HttpResponse(status=204)
+
+
+def handle_collections(request):
+    if is_ajax(request):
+        from collector.models.collection import Collection
+        all_collections = Collection.objects.all().order_by('reference')
+        collections = []
+        for x in all_collections:
+            n = x.to_json
+            collections.append(n)
+        context = {'collections': collections, 'title': "Collections", "comment": f"{len(collections)} item(s)."}
+        template = get_template('collector/collections.html')
         html = template.render(context, request)
         response = {'mosaic': html}
         return JsonResponse(response)

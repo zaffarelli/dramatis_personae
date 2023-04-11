@@ -36,6 +36,9 @@ def fix_epic(sender, instance, **kwargs):
 
 @receiver(pre_save, sender=Card, dispatch_uid='fix_card')
 def fix_card(sender, instance, **kwargs):
+    if instance.saved:
+        for c in instance.children.all():
+            c.save()
     instance.fix()
 
 

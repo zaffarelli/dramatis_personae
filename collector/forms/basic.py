@@ -10,6 +10,7 @@ from collector.models.skill import Skill, SkillModificator
 from collector.models.armor import Armor
 from collector.models.weapon import Weapon
 from collector.models.shield import Shield
+from collector.models.cyberware import Cyberware
 from collector.models.blessing_curse import BlessingCurse, BlessingCurseModificator
 from collector.models.benefice_affliction import BeneficeAffliction, BeneficeAfflictionModificator
 from collector.models.spacecraft import ShipRef, ShipSystemSlot
@@ -33,18 +34,18 @@ class CharacterForm(ModelForm):
                    'victory_rating', 'need_pdf', 'overhead', 'priority']
 
 
-class TourOfDutyRefForm(ModelForm):
-    class Meta:
-        model = TourOfDutyRef
-        fields = '__all__'
-        exclude = ['OP', 'AP', 'value', 'description']
+# class TourOfDutyRefForm(ModelForm):
+#     class Meta:
+#         model = TourOfDutyRef
+#         fields = '__all__'
+#         exclude = ['OP', 'AP', 'value', 'description']
 
 
-class ShipRefForm(ModelForm):
-    class Meta:
-        model = ShipRef
-        fields = '__all__'
-        exclude = ['dim_length', 'dim_width', 'dim_height', 'size_rating']
+# class ShipRefForm(ModelForm):
+#     class Meta:
+#         model = ShipRef
+#         fields = '__all__'
+#         exclude = ['dim_length', 'dim_width', 'dim_height', 'size_rating']
 
 
 # Character
@@ -56,7 +57,12 @@ BeneficeAfflictionFormSet = inlineformset_factory(Character, BeneficeAffliction,
 ArmorFormSet = inlineformset_factory(Character, Armor, fields='__all__', extra=3, can_delete=True)
 WeaponFormSet = inlineformset_factory(Character, Weapon, fields='__all__', extra=3, can_delete=True)
 ShieldFormSet = inlineformset_factory(Character, Shield, fields='__all__', extra=3, can_delete=True)
+CyberwareFormSet = inlineformset_factory(Character, Cyberware, fields='__all__', extra=1, can_delete=True)
+
 TourOfDutyFormSet = inlineformset_factory(Character, TourOfDuty, fields='__all__', extra=9, can_delete=True)
+CoreTourOfDutyFormSet = inlineformset_factory(Character, TourOfDuty, fields='__all__', extra=9, can_delete=True,
+                                              exclude=('tour_of_duty_ref__core',))
+
 BlokeFormSet = inlineformset_factory(Character, Bloke, fk_name='character', fields='__all__', extra=3, can_delete=True)
 
 # Tour of duty
@@ -66,7 +72,6 @@ BlessingCurseModificatorFormSet = inlineformset_factory(TourOfDutyRef, BlessingC
                                                         extra=3, can_delete=True)
 BeneficeAfflictionModificatorFormSet = inlineformset_factory(TourOfDutyRef, BeneficeAfflictionModificator,
                                                              fields='__all__', extra=3, can_delete=True)
-
 
 # ShipRef
 ShipSystemSlotFormSet = inlineformset_factory(ShipRef, ShipSystemSlot, fields='__all__', extra=1, can_delete=True)

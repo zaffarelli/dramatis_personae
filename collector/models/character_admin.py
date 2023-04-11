@@ -5,6 +5,7 @@
 """
 from django.contrib import admin
 from collector.models.skill import SkillInline
+from collector.models.cyberware import CyberwareInline
 from collector.models.tourofduty import TourOfDutyInline
 from collector.models.blessing_curse import BlessingCurseInline
 from collector.models.benefice_affliction import BeneficeAfflictionInline
@@ -149,6 +150,7 @@ class CharacterAdmin(admin.ModelAdmin):
         TourOfDutyInline,
         BlokeInline,
         RitualInline,
+        CyberwareInline,
     ]
     ordering = ['full_name', ]
     actions = [needs_fix, needs_pdf, no_importance, importance_up, importance_down, make_invisible,

@@ -6,7 +6,7 @@
 from django.views.generic.edit import UpdateView
 from django.views.generic.detail import DetailView
 from django.contrib import messages
-from collector.forms.basic import CharacterForm, TourOfDutyFormSet
+from collector.forms.basic import CharacterForm, TourOfDutyFormSet, CoreTourOfDutyFormSet
 from collector.models.character import Character
 from scenarist.mixins.ajaxfromresponse import AjaxFromResponseMixin
 from django.http import JsonResponse
@@ -67,7 +67,11 @@ class CharacterUpdateView(AjaxFromResponseMixin, UpdateView):
             messages.success(self.request, 'Avatar updated: %s' % (context['form']['full_name'].value()))
         else:
             context['form'] = CharacterForm(instance=self.object)
-            context['tourofdutys'] = TourOfDutyFormSet(instance=self.object)
+            print(context['form']['is_core'].value())
+            if context['form']['is_core'].value():
+                context['tourofdutys'] = CoreTourOfDutyFormSet(instance=self.object)
+            else:
+                context['tourofdutys'] = TourOfDutyFormSet(instance=self.object)
             messages.info(self.request, 'Avatar displayed: %s' % (context['form']['full_name'].value()))
         return context
 

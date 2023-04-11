@@ -114,6 +114,7 @@ class Character(Combattant):
     incognito = models.BooleanField(default=False, blank=True)
     is_cast = models.BooleanField(default=False, blank=True)
     is_public = models.BooleanField(default=True, blank=True)
+    is_core = models.BooleanField(default=True, blank=True)
     use_only_entrance = models.BooleanField(default=False, blank=True)
     error = models.BooleanField(default=False)
     ranking = models.IntegerField(default=0, blank=True)
@@ -131,6 +132,13 @@ class Character(Combattant):
     diamonds = models.PositiveIntegerField(default=0, blank=True)
     rubies = models.PositiveIntegerField(default=0, blank=True)
 
+    classification = models.CharField(default='std',
+                                      max_length=3,
+                                      choices=(('int', 'Intimate'), ('std', 'Standard'), ('sec', 'Secret'),
+                                               ('ves', 'Very Secret')),
+                                      blank=True)
+    incognito_name = models.CharField(default='Unkown Agent', max_length=128, blank=True)
+    incognito_alliance = models.CharField(default='Unknown Faction', max_length=128, blank=True)
     skills_options = []
     ba_options = []
     bc_options = []

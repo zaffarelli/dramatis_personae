@@ -38,6 +38,7 @@ class Cyberfeature(models.Model):
     value_ratio = models.FloatField(default=0.0)
     category = models.CharField(max_length=20, choices=CYBERFEATURE_CATEGORIES, default='Trait', blank=True)
     description = models.TextField(default='', blank=True, max_length=1024)
+    mods = models.TextField(default='', blank=True, max_length=1024)
 
     def __str__(self):
         return "%s (%s)" % (self.reference, CYBERFEATURE_CATEGORIES[int(self.category)][1])
@@ -74,7 +75,6 @@ class CyberwareRef(models.Model):
         jstr = json.loads(json.dumps(self, default=json_default, sort_keys=True, indent=4))
         return jstr
 
-
     def fix(self):
         try:
             self.value = 0
@@ -103,6 +103,7 @@ class CyberwareRef(models.Model):
 class Cyberware(models.Model):
     class Meta:
         verbose_name = "FICS: Cyberware"
+
     character = models.ForeignKey(Character, on_delete=models.CASCADE)
     cyberware_ref = models.ForeignKey(CyberwareRef, on_delete=models.CASCADE)
     replacement_for = models.CharField(max_length=64, default='Add on')
@@ -111,8 +112,10 @@ class Cyberware(models.Model):
         return '%s (%s: %s)' % (self.character.full_name, self.replacement_for, self.cyberware_ref.reference)
 
     def to_json(self):
-        jstr = {"replacement_for": self.replacement_for, "cyberware_ref": self.cyberware_ref.to_json(), "cyberfeatures":self.cyberware_ref.features}
+        jstr = {"replacement_for": self.replacement_for, "cyberware_ref": self.cyberware_ref.to_json(),
+                "cyberfeatures": self.cyberware_ref.features}
         return jstr
+
 
 # ADMIN
 
@@ -124,7 +127,14 @@ class CyberfeatureAdmin(admin.ModelAdmin):
 
 class CyberwareRefAdmin(admin.ModelAdmin):
     ordering = ('reference',)
-    list_display = ['reference', 'tech_level', 'value', 'incompatibility', 'features', 'description']
+    list_display = ['reference', 'complexity', 'need_fix', 'tech_level', 'value', 'incompatibility', 'features',
+                    'description']
+
+
+class CyberwareInline(admin.TabularInline):
+    model = Cyberware
+    extras = 1
+    ordering = ['cyberware_ref']
 
 
 class CyberwareAdmin(admin.ModelAdmin):

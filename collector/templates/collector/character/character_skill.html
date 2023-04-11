@@ -3,6 +3,9 @@
         <table >
             <tr>
                 <td>
+                    {% if skill.skill_ref.deptrecated %}
+                        <strike>
+                    {% endif %}
                     {% if skill.skill_ref.is_root %}
                     <strong>
                     {% endif %}
@@ -12,6 +15,9 @@
                     {{ skill.skill_ref.reference|safe }}
                     {% if skill.skill_ref.is_root %}
                     </strong>
+                    {% endif %}
+                    {% if skill.skill_ref.deptrecated %}
+                    </strike>
                     {% endif %}
                 </td>
                 {% if skill.skill_ref.is_root %}

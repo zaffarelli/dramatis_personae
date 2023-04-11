@@ -18,6 +18,15 @@
 
 
     <h5>Primary Attributes</h5>
+    {% if c.nameless %}
+        <table class='stats' width='100%'>
+        <tr>
+            <td>Physical</td><td style='width:1.5cm;'>{{ c.na_phy| dotted_pdf | safe }}</td>
+            <td>Mental</td><td style='width:1.5cm;'>{{ c.na_men| dotted_pdf | safe }}</td>
+            <td>Combat</td><td style='width:1.5cm;'>{{ c.na_com| dotted_pdf | safe }}</td>
+        </tr>
+        </table>
+    {% else %}
     <table class='stats' width='100%'>
         <tr>
             <td>Strength</td>
@@ -52,6 +61,7 @@
             <td style='width:1.5cm;'>{{ c.PA_AWA| dotted_pdf | safe }}</td>
         </tr>
     </table>
+    {% endif %}
     <h5>Secondary Attributes</h5>
     <table class='stats' width='100%'>
         <tr>

@@ -1,0 +1,15 @@
+{% load static %}
+{% load fics_filters %}
+<div class="item_row character_row" id="character_row_{{ c.id }}">
+    <div class="cell mini switcher" option="collection" id="published_{{c.id}}" ref="{{c.id}}" param="published" title="Toggle spotlight">{{ c.published|prettybool|safe}}</div>
+    <div class="cell mini" ref="{{c.id}}">{{ c.id|safe}}</div>
+    <div class="cell wide">{{c.reference|safe}}</div>
+    <div class="cell wide">{{c.census|safe}} ch.</div>
+    <div class="cell wide">{{c.balanced_ratio|ppie|safe}}</div>
+    <div class="cell wider" title="Description">
+        {{ c.description|safe }}
+    </div>
+    <div class="cell widest" title="Members">
+        {{ c.members|parse_avatars|safe }}
+    </div>
+</div>

@@ -189,6 +189,11 @@
                     <label for="is_public">is_public</label>
                     {{ form.is_public }}
                 </li>
+                <li class="field_wrapper">
+                    {{ form.classification.errors }}
+                    <label for="classification">Classification</label>
+                    {{ form.classification }}
+                </li>
             </ul>
             <ul class="tabcontent hiddentab" id="tab_2">
 
@@ -242,6 +247,11 @@
                     {{ form.fencing_league.errors }}
                     <label for="fencing_league">Fencing League</label>
                     {{ form.fencing_league }}
+                </li>
+                <li class="field_wrapper">
+                    {{ form.is_core.errors }}
+                    <label for="is_core">Core</label>
+                    {{ form.is_core }}
                 </li>
             </ul>
             <ul class="tabcontent hiddentab" id="tab_3">

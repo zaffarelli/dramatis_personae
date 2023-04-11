@@ -583,7 +583,7 @@
     }
   }
 
-  & .character_row {
+  & .item_row {
     /* Flex as item */
     flex-grow: 1;
     flex-shrink: 1;
@@ -667,8 +667,32 @@
         color:#855E0A;
       }
 
-      &.wide20 {
+      &.wide10 {
         width: 10ex;
+        text-align:left;
+        word-wrap: normal;
+      }
+
+      &.wide20 {
+        width: 20ex;
+        text-align:left;
+        word-wrap: normal;
+      }
+
+      &.wide30 {
+        width: 30ex;
+        text-align:left;
+        word-wrap: normal;
+      }
+
+      &.wide40 {
+        width: 40ex;
+        text-align:left;
+        word-wrap: normal;
+      }
+
+      &.wide60 {
+        width: 60ex;
         text-align:left;
         word-wrap: normal;
       }

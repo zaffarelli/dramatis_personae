@@ -42,7 +42,7 @@ from django.utils import timezone
 
 class TourOfDutyRef(models.Model):
     class Meta:
-        ordering = ['category', 'caste', 'reference']
+        ordering = ['-core','category', 'caste', 'reference']
         verbose_name = "FICS: ToD"
 
     reference = models.CharField(max_length=64, default='')
@@ -80,7 +80,7 @@ class TourOfDutyRef(models.Model):
 
     def __str__(self):
         # str = f'[{self.get_category_display()}][{self.value}] ({self.get_caste_display()}|{self.topic}) {self.reference} '
-        str = f'[{self.get_category_display()}: {self.value}] {self.reference}'
+        str = f'[{self.get_category_display()}: {self.value}] {self.reference} {"(C)" if self.core else ""}'
         return str
 
     def fix(self):

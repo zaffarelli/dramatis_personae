@@ -108,6 +108,7 @@ class Collector {
             e.stopPropagation();
             let action_tag = $(this).attr("action");
             let mode_tag = $(this).attr("mode");
+            let ref_tag = $(this).attr("ref") | undefined;
             let params_tag = $(this).attr("params") | undefined;
             let new_tag = action_tag.replaceAll("_", "/").replaceAll("-PDF", ".pdf")
             let url = 'ajax/' + action_tag + '/';
@@ -116,10 +117,15 @@ class Collector {
                 let w = window.open(url, '_blank');
                 w.focus();
             }
+            console.log(params_tag)
+            console.log(ref_tag)
             if (params_tag) {
                 url += params_tag + '/';
             }
-            console.debug("menu-item " + action_tag + " has been clicked..." + url + ' ' + mode_tag);
+            if (ref_tag != undefined) {
+                url += ref_tag + '/';
+            }
+            // console.debug("menu-item " + action_tag + " has been clicked..." + url + ' ' + mode_tag+ " "+ref_tag);
             $.ajax({
                 url: url,
                 success: function (answer) {
@@ -159,7 +165,6 @@ class Collector {
             });
         });
     }
-
 
 
     registerSlugItems() {
@@ -248,28 +253,30 @@ class Collector {
         });
     }
 
-    registerCharsels() {
+    registerSwitchers() {
         let me = this;
-        $(".charsel").off().on("click", function (e) {
+        $(".switcher").off().on("click", function (e) {
             e.preventDefault();
             e.stopPropagation();
-            console.log('Charsel click');
             let key = $(this).attr('ref');
+            let option = $(this).attr('option');
             let param = $(this).attr('param');
-            $('#character_row_'+key+" .cell").addClass('highlighted');
-            console.log('key:' + key);
+            $('#' + option + '_row_' + key + " .cell").addClass('highlighted');
+            console.log('key.......:' + key);
+            console.log('option....:' + option);
+            console.log('param.....:' + param);
             $.ajax({
-                url: 'ajax/deep_toggle/'+param+'/' + key + '/',
+                url: 'ajax/switcher/' + option + '/' + param + '/' + key + '/',
                 success: function (answer) {
                     console.log(answer);
-                    $('#character_row_'+key+" .cell").removeClass('highlighted');
-                    $('#item_'+key).html(answer.row);
+                  //  $('#' + option + '_row_' + key + " .cell").removeClass('highlighted');
+                    $("#" + option + "_row_" + key).html(answer.row);
                     me.prepareAjax();
                     me.rebootLinks();
                 },
                 error: function (answer) {
                     console.error(answer);
-                    $('#character_row_'+key+" .cell").removeClass('highlighted');
+                    $('#' + option + '_row_' + key + " .cell").removeClass('highlighted');
                     me.rebootLinks();
                 }
             });
@@ -313,7 +320,6 @@ class Collector {
     }
 
 
-
     markButtons() {
         $('.menu-item').addClass('highlighted');
         $('.slug-item').addClass('highlighted');
@@ -335,7 +341,7 @@ class Collector {
         me.registerSlugPageItems();
         me.registerPullDowns();
         me.registerFigures();
-        me.registerCharsels();
+        me.registerSwitchers();
 
         /* Togglers */
         me.setToggler('.mobile_form_toggler', 'collapsed', "#customizer");
