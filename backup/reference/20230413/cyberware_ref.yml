@@ -1,0 +1,227 @@
+- model: collector.cyberwareref
+  pk: 2
+  fields:
+    reference: Baranof Arm (Van Dyke upgrade)
+    complexity: 9
+    value: 960
+    surgery_cost: 0
+    incompatibility: 3
+    tech_level: 6
+    description: The right arm of Baron Josef Baranof and how it was replaced in december
+      5017 AD by Floyd Carnau in Miret. Contains a data interface linked to the central
+      nervous system.
+    need_fix: false
+    cyberfeatures:
+    - 2
+    - 13
+    - 18
+    - 55
+    - 61
+    - 7
+- model: collector.cyberwareref
+  pk: 3
+  fields:
+    reference: Baranof Eye with Van Dyke Enhancement
+    complexity: 13
+    value: 4382
+    surgery_cost: 0
+    incompatibility: 11
+    tech_level: 6
+    description: The right eye of Josef Baranof. Added video recorder bus to allow
+      recordings to arm dataslot. Standard usage of cybertraits is ok for 1 minute.
+      REC roll DV 10 required for each continuous minute. REC Roll DV 15 if recording
+      is on.
+    need_fix: false
+    cyberfeatures:
+    - 2
+    - 13
+    - 17
+    - 31
+    - 33
+    - 35
+    - 36
+    - 59
+    - 7
+- model: collector.cyberwareref
+  pk: 4
+  fields:
+    reference: Exoskel Prothesis Mark IV w6
+    complexity: 16
+    value: 2358
+    surgery_cost: 0
+    incompatibility: 11
+    tech_level: 8
+    description: ''
+    need_fix: false
+    cyberfeatures:
+    - 2
+    - 9
+    - 13
+    - 19
+    - 48
+    - 52
+    - 71
+    - 72
+- model: collector.cyberwareref
+  pk: 5
+  fields:
+    reference: Mimetic Interface
+    complexity: 4
+    value: 1539
+    surgery_cost: 0
+    incompatibility: 4
+    tech_level: 6
+    description: The Mimetic Interface is a tiny cybernetic implant, usally inserted
+      into the base of the skull or close to the spinal column where it can be easily
+      access the central nervous system. Once in place, any of the Mimetic garments
+      described below can be worn and used.
+    need_fix: false
+    cyberfeatures:
+    - 2
+    - 8
+    - 58
+    - 59
+- model: collector.cyberwareref
+  pk: 6
+  fields:
+    reference: Mimetics Holoflage
+    complexity: 1
+    value: 2010
+    surgery_cost: 0
+    incompatibility: 0
+    tech_level: 7
+    description: ''
+    need_fix: false
+    cyberfeatures:
+    - 60
+- model: collector.cyberwareref
+  pk: 7
+  fields:
+    reference: Leona Sterling Right Arm
+    complexity: 11
+    value: 2986
+    surgery_cost: 0
+    incompatibility: 11
+    tech_level: 6
+    description: ''
+    need_fix: false
+    cyberfeatures:
+    - 2
+    - 4
+    - 11
+    - 19
+    - 23
+    - 26
+    - 52
+    - 59
+    - 61
+    - 72
+- model: collector.cyberwareref
+  pk: 8
+  fields:
+    reference: Brainbooster Arcturus 2557
+    complexity: 16
+    value: 5325
+    surgery_cost: 0
+    incompatibility: 17
+    tech_level: 7
+    description: ''
+    need_fix: false
+    cyberfeatures:
+    - 2
+    - 67
+    - 68
+    - 6
+    - 39
+    - 42
+    - 10
+    - 44
+    - 48
+    - 16
+    - 56
+    - 57
+    - 59
+- model: collector.cyberwareref
+  pk: 9
+  fields:
+    reference: Sahutras Arm Replacement
+    complexity: 4
+    value: 1737
+    surgery_cost: 0
+    incompatibility: 4
+    tech_level: 6
+    description: ''
+    need_fix: false
+    cyberfeatures:
+    - 2
+    - 4
+    - 10
+    - 16
+    - 59
+    - 61
+- model: collector.cyberwareref
+  pk: 10
+  fields:
+    reference: Arcturus Right Arm
+    complexity: 17
+    value: 2204
+    surgery_cost: 0
+    incompatibility: 8
+    tech_level: 6
+    description: ''
+    need_fix: false
+    cyberfeatures:
+    - 2
+    - 4
+    - 11
+    - 17
+    - 26
+    - 61
+    - 76
+- model: collector.cyberwareref
+  pk: 11
+  fields:
+    reference: Duke Antonovicz Right Arm
+    complexity: 26
+    value: 6032
+    surgery_cost: 0
+    incompatibility: 20
+    tech_level: 6
+    description: ''
+    need_fix: false
+    cyberfeatures:
+    - 2
+    - 4
+    - 72
+    - 10
+    - 43
+    - 16
+    - 50
+    - 18
+    - 54
+    - 57
+    - 26
+    - 59
+    - 61
+- model: collector.cyberwareref
+  pk: 12
+  fields:
+    reference: Duke Antonovicz Cortex Implant
+    complexity: 14
+    value: 4045
+    surgery_cost: 0
+    incompatibility: 15
+    tech_level: 6
+    description: ''
+    need_fix: false
+    cyberfeatures:
+    - 2
+    - 6
+    - 18
+    - 40
+    - 52
+    - 56
+    - 57
+    - 58
+    - 67
+    - 76

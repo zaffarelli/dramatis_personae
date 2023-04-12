@@ -1,0 +1,395 @@
+- model: scenarist.scene
+  pk: 1
+  fields:
+    name: Starship Delivery
+    chapter: '02'
+    date_offset: 0
+    dt: 5022-03-13 00:00:00+00:00
+    sdt: 2023-01-16 03:13:33.430925+00:00
+    place: Istakhr/Pharao
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: true
+    full_id: ''
+    description: "=Going to Pharao=\r\nAfter sorting out the current affairs, the\
+      \ PCs might like to go to Pharao where a contact there is supposed to meet them\
+      \ for they to collect a new ship.\r\nThe problem is that in the special delivery\
+      \ room, the think machine handling security, Gorgonna can no longer be reached.\r\
+      \n\r\nµWhat Happendµ\r\nThere's a cyberattack upon Gorgonna at the same moment"
+    resolution: ''
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    adventure: 2
+    challenge: 1
+    anchor: ''
+    duration: 60
+    backlogs: []
+- model: scenarist.scene
+  pk: 2
+  fields:
+    name: Nest of the Phoenix
+    chapter: '30'
+    date_offset: 0
+    dt: 2022-08-22 16:40:41+00:00
+    sdt: 2023-01-16 03:13:33.430925+00:00
+    place: Byzantium Secundus
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: true
+    full_id: ''
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    adventure: 2
+    challenge: 1
+    anchor: ''
+    duration: 60
+    backlogs: []
+- model: scenarist.scene
+  pk: 3
+  fields:
+    name: Pharao by Night
+    chapter: '03'
+    date_offset: 0
+    dt: 2022-08-22 16:45:27+00:00
+    sdt: 2023-01-16 03:13:33.430925+00:00
+    place: Istakhr/Pharao
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: true
+    full_id: ''
+    description: "=Here to collect=\r\nThe PCs have to go to Pharao Spaceyards to\
+      \ collect their reward for their help against the Tallamud. This is something\
+      \ both ¤christian_longsdale_hawkwood¤ and ¤abdul_mofat_almalik¤ have agreed\
+      \ upon. \r\nµContactµ\r\nTheir contact to do so is some Gregorius Pachenard,\
+      \ some kind of starship expert eager to show them the selection he has prepared\
+      \ for them. Pachenard, as a former imperial cohort (he still wears the brooch)\
+      \ is a man than can be trusted... by whoever is loyal liege of His Imperial\
+      \ Majesty.\r\nHe has at his disposal a team of 20 Saharansafar Troopers that\
+      \ he usually never call for."
+    resolution: "=The Spaceships=\r\nThe difficult part will probably be the choice.\
+      \ The ships prepared for the PCs are all corvette class vessels, a size 5 between\
+      \ the escort and the frigate.\r\n^Morgana^"
+    rewards: "=Special=\r\nOne brand new starship, as a reward from ¤christian_longsdale_hawkwood¤\r\
+      \n\r\nThis is supposed to be an official thenk you from the Emperor."
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    adventure: 2
+    challenge: 1
+    anchor: ''
+    duration: 60
+    backlogs: []
+- model: scenarist.scene
+  pk: 4
+  fields:
+    name: Aegon Station
+    chapter: '41'
+    date_offset: 0
+    dt: 2022-08-22 19:15:31+00:00
+    sdt: 2023-01-16 03:13:33.430925+00:00
+    place: Madoc
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: true
+    full_id: ''
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    adventure: 2
+    challenge: 1
+    anchor: ''
+    duration: 60
+    backlogs:
+    - 3
+- model: scenarist.scene
+  pk: 5
+  fields:
+    name: The Brain of The Eye
+    chapter: '35'
+    date_offset: 0
+    dt: 2022-08-22 19:19:07+00:00
+    sdt: 2023-01-16 03:13:33.430925+00:00
+    place: Byzantium Secundus
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: true
+    full_id: ''
+    description: ¤chamon_mazarin¤
+    resolution: ''
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    adventure: 2
+    challenge: 1
+    anchor: ''
+    duration: 60
+    backlogs:
+    - 3
+- model: scenarist.scene
+  pk: 6
+  fields:
+    name: Jumpgate Shutdown
+    chapter: '11'
+    date_offset: 0
+    dt: 2022-08-22 19:20:10+00:00
+    sdt: 2023-01-16 03:13:33.430925+00:00
+    place: Aylon
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: true
+    full_id: ''
+    description: "=Delayed=\r\nWhile rotating at the Aylon jumpgate, en route to Criticorum,\
+      \ an unusual event happens at the jumpgate: a full shutdown delaying every jump\
+      \ for 36 hours.\r\nµSituationµ\r\nThe players where supposed to jump 5 hours\
+      \ after their arrival."
+    resolution: ''
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    adventure: 2
+    challenge: 1
+    anchor: ''
+    duration: 60
+    backlogs: []
+- model: scenarist.scene
+  pk: 7
+  fields:
+    name: The Slums
+    chapter: '31'
+    date_offset: 0
+    dt: 2022-08-22 19:31:19+00:00
+    sdt: 2023-01-16 03:13:33.430925+00:00
+    place: Byzantium Secundus
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: true
+    full_id: ''
+    description: ¤elise_tokigawa¤
+    resolution: ''
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    adventure: 2
+    challenge: 1
+    anchor: ''
+    duration: 60
+    backlogs: []
+- model: scenarist.scene
+  pk: 8
+  fields:
+    name: Tax Collectors
+    chapter: '20'
+    date_offset: 0
+    dt: 2022-09-13 21:07:59+00:00
+    sdt: 2023-01-16 03:13:33.430925+00:00
+    place: Criticorum
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: true
+    full_id: ''
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    adventure: 2
+    challenge: 1
+    anchor: ''
+    duration: 60
+    backlogs: []
+- model: scenarist.scene
+  pk: 10
+  fields:
+    name: Family Business
+    chapter: '15'
+    date_offset: 0
+    dt: 2022-09-13 21:09:50+00:00
+    sdt: 2023-01-16 03:13:33.430925+00:00
+    place: Aylon
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: true
+    full_id: ''
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    adventure: 2
+    challenge: 1
+    anchor: ''
+    duration: 60
+    backlogs: []
+- model: scenarist.scene
+  pk: 11
+  fields:
+    name: Samarkand in Turmoil
+    chapter: '01'
+    date_offset: 0
+    dt: 2022-09-13 21:10:14+00:00
+    sdt: 2023-01-16 03:13:33.430925+00:00
+    place: Istakhr/Samarkand
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: true
+    full_id: ''
+    description: "=Debriefing=\r\nHere are the topics on which the PCs might need\
+      \ an update.\r\nµThe Rubyµ\r\nHer father is dead and she now is the Countess\
+      \ of Istakhr. On March 21st there will be her public coronation.\r\nµThe Deliveryµ\r\
+      \nThe commercial transactions where on hold for one month, as a mourning period\
+      \ for the Count passing and for the investigation to be held. Commercial vessels\
+      \ will be authorized to leave Istakhr system on the 15th of March.\r\nµThe Grand\
+      \ Motherµ\r\nThere is someone to check with in Byzantium Secundus, Fritz Faroe\
+      \ Grand Mother.\r\nµThe Talamundµ\r\nThey are still hunted by imperial forces.\
+      \ An imperial edit declare them as enemy of the Phoenix. This will only be enforced\
+      \ on Al-Malik systems.\r\nµThe Covensµ\r\nµThe Ukariµ\r\nµThe Clockworkµ\r\n\
+      Five more people joined the Clockwork in Samarkand, so the work will continue\
+      \ without the help of the PCs."
+    resolution: ''
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    adventure: 2
+    challenge: 1
+    anchor: ''
+    duration: 60
+    backlogs: []
+- model: scenarist.scene
+  pk: 12
+  fields:
+    name: The Nightingdale
+    chapter: '38'
+    date_offset: 0
+    dt: 2022-09-14 08:36:40+00:00
+    sdt: 2023-01-16 03:13:33.430925+00:00
+    place: Byzantium Secundus|Lower City
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: true
+    full_id: ''
+    description: ¤annietta_morgane_de_sotto_masseri¤
+    resolution: ''
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    adventure: 2
+    challenge: 1
+    anchor: ''
+    duration: 60
+    backlogs: []
+- model: scenarist.scene
+  pk: 13
+  fields:
+    name: Gorgonna
+    chapter: '04'
+    date_offset: 0
+    dt: 2022-09-14 08:43:32+00:00
+    sdt: 2023-01-16 03:13:33.430925+00:00
+    place: Istakhr/Pharao
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: true
+    full_id: ''
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    adventure: 2
+    challenge: 1
+    anchor: ''
+    duration: 60
+    backlogs: []
+- model: scenarist.scene
+  pk: 14
+  fields:
+    name: What are the odds
+    chapter: '21'
+    date_offset: 0
+    dt: 2022-09-14 08:43:48+00:00
+    sdt: 2023-01-16 03:13:33.430925+00:00
+    place: Criticorum
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: true
+    full_id: ''
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    adventure: 2
+    challenge: 1
+    anchor: ''
+    duration: 60
+    backlogs: []
+- model: scenarist.scene
+  pk: 15
+  fields:
+    name: To the stars
+    chapter: '05'
+    date_offset: 0
+    dt: 2022-09-14 08:44:06+00:00
+    sdt: 2023-01-16 03:13:33.430925+00:00
+    place: Istakhr/Jumpgate
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: true
+    full_id: ''
+    description: "¤anton_liebov¤\r\n¤daniela_surkova¤\r\n¤zina_drakov¤"
+    resolution: ''
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    adventure: 2
+    challenge: 1
+    anchor: ''
+    duration: 60
+    backlogs: []

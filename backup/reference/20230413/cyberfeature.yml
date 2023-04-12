@@ -1,0 +1,914 @@
+- model: collector.cyberfeature
+  pk: 1
+  fields:
+    reference: Battery-powered
+    complexity: 0
+    tech_level: 5
+    incompatibility: 0
+    value: 10
+    value_ratio: 0.0
+    category: '2'
+    description: Device is powered by a replaceable battery.
+    mods: ''
+- model: collector.cyberfeature
+  pk: 2
+  fields:
+    reference: Self-powered
+    complexity: 1
+    tech_level: 6
+    incompatibility: 0
+    value: 0
+    value_ratio: 0.25
+    category: '2'
+    description: The device doesn't need another energy source.
+    mods: ''
+- model: collector.cyberfeature
+  pk: 3
+  fields:
+    reference: Power Generator
+    complexity: 2
+    tech_level: 7
+    incompatibility: 0
+    value: 3000
+    value_ratio: 0.0
+    category: '2'
+    description: The device generates energy on its own.
+    mods: ''
+- model: collector.cyberfeature
+  pk: 4
+  fields:
+    reference: Obvious
+    complexity: 0
+    tech_level: 5
+    incompatibility: 1
+    value: 0
+    value_ratio: 0.0
+    category: '3'
+    description: ''
+    mods: ''
+- model: collector.cyberfeature
+  pk: 5
+  fields:
+    reference: Unsightly
+    complexity: -1
+    tech_level: 5
+    incompatibility: 1
+    value: 0
+    value_ratio: 0.0
+    category: '3'
+    description: ''
+    mods: ''
+- model: collector.cyberfeature
+  pk: 6
+  fields:
+    reference: Messy
+    complexity: -1
+    tech_level: 5
+    incompatibility: 1
+    value: 0
+    value_ratio: 0.0
+    category: '3'
+    description: ''
+    mods: ''
+- model: collector.cyberfeature
+  pk: 7
+  fields:
+    reference: Incognito
+    complexity: 1
+    tech_level: 5
+    incompatibility: 1
+    value: 0
+    value_ratio: 0.0
+    category: '3'
+    description: If you're not actively looking for the device, there's no chance
+      to find it.
+    mods: ''
+- model: collector.cyberfeature
+  pk: 8
+  fields:
+    reference: Hidden
+    complexity: 2
+    tech_level: 6
+    incompatibility: 1
+    value: 0
+    value_ratio: 0.1
+    category: '3'
+    description: ''
+    mods: ''
+- model: collector.cyberfeature
+  pk: 9
+  fields:
+    reference: Simulacra
+    complexity: 3
+    tech_level: 8
+    incompatibility: 1
+    value: 0
+    value_ratio: 0.2
+    category: '3'
+    description: ''
+    mods: ''
+- model: collector.cyberfeature
+  pk: 10
+  fields:
+    reference: Metal
+    complexity: 0
+    tech_level: 5
+    incompatibility: 0
+    value: 0
+    value_ratio: 0.0
+    category: '4'
+    description: ''
+    mods: ''
+- model: collector.cyberfeature
+  pk: 11
+  fields:
+    reference: Plastic
+    complexity: 0
+    tech_level: 6
+    incompatibility: 0
+    value: 0
+    value_ratio: 0.1
+    category: '4'
+    description: ''
+    mods: ''
+- model: collector.cyberfeature
+  pk: 12
+  fields:
+    reference: Ceramsteel
+    complexity: 1
+    tech_level: 6
+    incompatibility: 1
+    value: 0
+    value_ratio: 0.5
+    category: '4'
+    description: ''
+    mods: ''
+- model: collector.cyberfeature
+  pk: 13
+  fields:
+    reference: Synthflesh
+    complexity: 2
+    tech_level: 6
+    incompatibility: 0
+    value: 0
+    value_ratio: 0.05
+    category: '4'
+    description: ''
+    mods: ''
+- model: collector.cyberfeature
+  pk: 14
+  fields:
+    reference: Synthlife
+    complexity: 4
+    tech_level: 8
+    incompatibility: 2
+    value: 0
+    value_ratio: 0.3
+    category: '4'
+    description: ''
+    mods: ''
+- model: collector.cyberfeature
+  pk: 15
+  fields:
+    reference: Nanotech
+    complexity: 3
+    tech_level: 8
+    incompatibility: 2
+    value: 0
+    value_ratio: 1.0
+    category: '4'
+    description: ''
+    mods: ''
+- model: collector.cyberfeature
+  pk: 16
+  fields:
+    reference: Automaintenance
+    complexity: 3
+    tech_level: 6
+    incompatibility: 2
+    value: 500
+    value_ratio: 0.0
+    category: '5'
+    description: ''
+    mods: ''
+- model: collector.cyberfeature
+  pk: 17
+  fields:
+    reference: Superior
+    complexity: 1
+    tech_level: 5
+    incompatibility: 0
+    value: 0
+    value_ratio: 0.1
+    category: '5'
+    description: ''
+    mods: ''
+- model: collector.cyberfeature
+  pk: 18
+  fields:
+    reference: Master Guildwork
+    complexity: 2
+    tech_level: 5
+    incompatibility: 0
+    value: 0
+    value_ratio: 0.2
+    category: '5'
+    description: ''
+    mods: ''
+- model: collector.cyberfeature
+  pk: 19
+  fields:
+    reference: Premium
+    complexity: 3
+    tech_level: 6
+    incompatibility: 0
+    value: 0
+    value_ratio: 0.3
+    category: '5'
+    description: ''
+    mods: ''
+- model: collector.cyberfeature
+  pk: 20
+  fields:
+    reference: Poor
+    complexity: -1
+    tech_level: 5
+    incompatibility: 0
+    value: 0
+    value_ratio: -0.1
+    category: '5'
+    description: ''
+    mods: ''
+- model: collector.cyberfeature
+  pk: 21
+  fields:
+    reference: Shoddy
+    complexity: -2
+    tech_level: 5
+    incompatibility: 0
+    value: 0
+    value_ratio: -0.2
+    category: '5'
+    description: ''
+    mods: ''
+- model: collector.cyberfeature
+  pk: 22
+  fields:
+    reference: Primitive
+    complexity: -3
+    tech_level: 5
+    incompatibility: 0
+    value: 0
+    value_ratio: -0.3
+    category: '5'
+    description: ''
+    mods: ''
+- model: collector.cyberfeature
+  pk: 23
+  fields:
+    reference: Expert Tech
+    complexity: -2
+    tech_level: 6
+    incompatibility: 0
+    value: 0
+    value_ratio: 0.0
+    category: '5'
+    description: ''
+    mods: ''
+- model: collector.cyberfeature
+  pk: 24
+  fields:
+    reference: Armor (1 SP)
+    complexity: 2
+    tech_level: 5
+    incompatibility: 1
+    value: 100
+    value_ratio: 0.0
+    category: '0'
+    description: ''
+    mods: ''
+- model: collector.cyberfeature
+  pk: 25
+  fields:
+    reference: Armor (2 SP)
+    complexity: 4
+    tech_level: 5
+    incompatibility: 2
+    value: 200
+    value_ratio: 0.0
+    category: '0'
+    description: ''
+    mods: ''
+- model: collector.cyberfeature
+  pk: 26
+  fields:
+    reference: Armor (3 SP)
+    complexity: 6
+    tech_level: 5
+    incompatibility: 3
+    value: 300
+    value_ratio: 0.0
+    category: '0'
+    description: ''
+    mods: ''
+- model: collector.cyberfeature
+  pk: 27
+  fields:
+    reference: Chemical Pump
+    complexity: 1
+    tech_level: 5
+    incompatibility: 2
+    value: 300
+    value_ratio: 0.0
+    category: '0'
+    description: ''
+    mods: ''
+- model: collector.cyberfeature
+  pk: 28
+  fields:
+    reference: Cyberlung (Water)
+    complexity: 4
+    tech_level: 5
+    incompatibility: 2
+    value: 700
+    value_ratio: 0.0
+    category: '0'
+    description: ''
+    mods: ''
+- model: collector.cyberfeature
+  pk: 29
+  fields:
+    reference: Cyberlung (Gazeous)
+    complexity: 7
+    tech_level: 6
+    incompatibility: 3
+    value: 1500
+    value_ratio: 0.0
+    category: '0'
+    description: ''
+    mods: ''
+- model: collector.cyberfeature
+  pk: 30
+  fields:
+    reference: Cyberlung (Vacuum)
+    complexity: 10
+    tech_level: 7
+    incompatibility: 5
+    value: 3000
+    value_ratio: 0.0
+    category: '0'
+    description: ''
+    mods: ''
+- model: collector.cyberfeature
+  pk: 31
+  fields:
+    reference: Cybersense (Magnifier/Telescope)
+    complexity: 1
+    tech_level: 5
+    incompatibility: 1
+    value: 300
+    value_ratio: 0.0
+    category: '0'
+    description: ''
+    mods: ''
+- model: collector.cyberfeature
+  pk: 32
+  fields:
+    reference: Cybersense (Ultraviolet)
+    complexity: 2
+    tech_level: 5
+    incompatibility: 2
+    value: 500
+    value_ratio: 0.0
+    category: '0'
+    description: ''
+    mods: ''
+- model: collector.cyberfeature
+  pk: 33
+  fields:
+    reference: Cybersense (Infrared)
+    complexity: 3
+    tech_level: 5
+    incompatibility: 3
+    value: 700
+    value_ratio: 0.0
+    category: '0'
+    description: ''
+    mods: ''
+- model: collector.cyberfeature
+  pk: 34
+  fields:
+    reference: Cybersense (X-ray)
+    complexity: 6
+    tech_level: 6
+    incompatibility: 5
+    value: 1000
+    value_ratio: 0.0
+    category: '0'
+    description: ''
+    mods: ''
+- model: collector.cyberfeature
+  pk: 35
+  fields:
+    reference: Cybersense (Camera)
+    complexity: 3
+    tech_level: 5
+    incompatibility: 3
+    value: 700
+    value_ratio: 0.0
+    category: '0'
+    description: ''
+    mods: ''
+- model: collector.cyberfeature
+  pk: 36
+  fields:
+    reference: Cybersense (Video)
+    complexity: 3
+    tech_level: 5
+    incompatibility: 3
+    value: 700
+    value_ratio: 0.0
+    category: '0'
+    description: ''
+    mods: ''
+- model: collector.cyberfeature
+  pk: 37
+  fields:
+    reference: Cybersense (Higher pitch)
+    complexity: 3
+    tech_level: 5
+    incompatibility: 3
+    value: 700
+    value_ratio: 0.0
+    category: '0'
+    description: ''
+    mods: ''
+- model: collector.cyberfeature
+  pk: 38
+  fields:
+    reference: Cybersense (Lower Pitch)
+    complexity: 3
+    tech_level: 5
+    incompatibility: 3
+    value: 700
+    value_ratio: 0.0
+    category: '0'
+    description: ''
+    mods: ''
+- model: collector.cyberfeature
+  pk: 39
+  fields:
+    reference: Cybersense (Radio)
+    complexity: 3
+    tech_level: 5
+    incompatibility: 3
+    value: 700
+    value_ratio: 0.0
+    category: '0'
+    description: ''
+    mods: ''
+- model: collector.cyberfeature
+  pk: 40
+  fields:
+    reference: Cybersense (Spy radio)
+    complexity: 3
+    tech_level: 5
+    incompatibility: 3
+    value: 700
+    value_ratio: 0.0
+    category: '0'
+    description: ''
+    mods: ''
+- model: collector.cyberfeature
+  pk: 41
+  fields:
+    reference: Cybersense (Tape recorder)
+    complexity: 3
+    tech_level: 5
+    incompatibility: 3
+    value: 700
+    value_ratio: 0.0
+    category: '0'
+    description: ''
+    mods: ''
+- model: collector.cyberfeature
+  pk: 42
+  fields:
+    reference: Hypersmell
+    complexity: 1
+    tech_level: 5
+    incompatibility: 1
+    value: 300
+    value_ratio: 0.0
+    category: '0'
+    description: ''
+    mods: ''
+- model: collector.cyberfeature
+  pk: 43
+  fields:
+    reference: Hypertouch
+    complexity: 1
+    tech_level: 5
+    incompatibility: 1
+    value: 300
+    value_ratio: 0.0
+    category: '0'
+    description: ''
+    mods: ''
+- model: collector.cyberfeature
+  pk: 44
+  fields:
+    reference: Hypertaste
+    complexity: 1
+    tech_level: 5
+    incompatibility: 1
+    value: 300
+    value_ratio: 0.0
+    category: '0'
+    description: ''
+    mods: ''
+- model: collector.cyberfeature
+  pk: 45
+  fields:
+    reference: Efficient kidney
+    complexity: 1
+    tech_level: 5
+    incompatibility: 0
+    value: 500
+    value_ratio: 0.0
+    category: '0'
+    description: ''
+    mods: ''
+- model: collector.cyberfeature
+  pk: 46
+  fields:
+    reference: Energy shield (standard)
+    complexity: 7
+    tech_level: 7
+    incompatibility: 3
+    value: 750
+    value_ratio: 0.0
+    category: '0'
+    description: ''
+    mods: ''
+- model: collector.cyberfeature
+  pk: 47
+  fields:
+    reference: Enhanced Attribute (+1)
+    complexity: 2
+    tech_level: 5
+    incompatibility: 1
+    value: 300
+    value_ratio: 0.0
+    category: '0'
+    description: ''
+    mods: ''
+- model: collector.cyberfeature
+  pk: 48
+  fields:
+    reference: Enhanced Attribute (+2)
+    complexity: 4
+    tech_level: 5
+    incompatibility: 2
+    value: 600
+    value_ratio: 0.0
+    category: '0'
+    description: ''
+    mods: ''
+- model: collector.cyberfeature
+  pk: 49
+  fields:
+    reference: Enhanced Attribute (+3)
+    complexity: 6
+    tech_level: 5
+    incompatibility: 3
+    value: 900
+    value_ratio: 0.0
+    category: '0'
+    description: ''
+    mods: ''
+- model: collector.cyberfeature
+  pk: 50
+  fields:
+    reference: Enhanced Attribute (+4)
+    complexity: 8
+    tech_level: 5
+    incompatibility: 4
+    value: 1200
+    value_ratio: 0.0
+    category: '0'
+    description: ''
+    mods: ''
+- model: collector.cyberfeature
+  pk: 51
+  fields:
+    reference: Enhanced Reflexes (+1)
+    complexity: 1
+    tech_level: 5
+    incompatibility: 1
+    value: 200
+    value_ratio: 0.0
+    category: '0'
+    description: ''
+    mods: ''
+- model: collector.cyberfeature
+  pk: 52
+  fields:
+    reference: Enhanced Reflexes (+2)
+    complexity: 2
+    tech_level: 5
+    incompatibility: 2
+    value: 400
+    value_ratio: 0.0
+    category: '0'
+    description: ''
+    mods: ''
+- model: collector.cyberfeature
+  pk: 53
+  fields:
+    reference: Enhanced Reflexes (+3)
+    complexity: 3
+    tech_level: 5
+    incompatibility: 3
+    value: 600
+    value_ratio: 0.0
+    category: '0'
+    description: ''
+    mods: ''
+- model: collector.cyberfeature
+  pk: 54
+  fields:
+    reference: Pain Desensitivity
+    complexity: 3
+    tech_level: 5
+    incompatibility: 2
+    value: 500
+    value_ratio: 0.0
+    category: '0'
+    description: ''
+    mods: ''
+- model: collector.cyberfeature
+  pk: 55
+  fields:
+    reference: Think Machine (Data Interface 1)
+    complexity: 1
+    tech_level: 5
+    incompatibility: 1
+    value: 300
+    value_ratio: 0.0
+    category: '0'
+    description: ''
+    mods: ''
+- model: collector.cyberfeature
+  pk: 56
+  fields:
+    reference: Think Machine (Data Interface 2)
+    complexity: 2
+    tech_level: 5
+    incompatibility: 1
+    value: 300
+    value_ratio: 0.0
+    category: '0'
+    description: ''
+    mods: ''
+- model: collector.cyberfeature
+  pk: 57
+  fields:
+    reference: Think Machine (Skill Program +2)
+    complexity: 1
+    tech_level: 5
+    incompatibility: 2
+    value: 100
+    value_ratio: 0.0
+    category: '0'
+    description: ''
+    mods: ''
+- model: collector.cyberfeature
+  pk: 58
+  fields:
+    reference: Think Machine (Neural Interface)
+    complexity: 3
+    tech_level: 6
+    incompatibility: 3
+    value: 500
+    value_ratio: 0.0
+    category: '0'
+    description: ''
+    mods: ''
+- model: collector.cyberfeature
+  pk: 59
+  fields:
+    reference: Organic
+    complexity: -2
+    tech_level: 6
+    incompatibility: 0
+    value: 600
+    value_ratio: 0.0
+    category: '1'
+    description: ''
+    mods: ''
+- model: collector.cyberfeature
+  pk: 60
+  fields:
+    reference: Holoflage Basic Module
+    complexity: 1
+    tech_level: 7
+    incompatibility: 0
+    value: 2000
+    value_ratio: 0.0
+    category: '0'
+    description: 'Calibrate on arrival on a new enviroment: TEC+Redemption (Forbidden
+      Lore) DV 10.'
+    mods: ''
+- model: collector.cyberfeature
+  pk: 61
+  fields:
+    reference: Replacement Limb
+    complexity: 2
+    tech_level: 5
+    incompatibility: 1
+    value: 250
+    value_ratio: 0.0
+    category: '0'
+    description: ''
+    mods: ''
+- model: collector.cyberfeature
+  pk: 62
+  fields:
+    reference: Extra Limb
+    complexity: 3
+    tech_level: 5
+    incompatibility: 2
+    value: 500
+    value_ratio: 0.0
+    category: '0'
+    description: ''
+    mods: ''
+- model: collector.cyberfeature
+  pk: 63
+  fields:
+    reference: Flesh Cavity
+    complexity: 1
+    tech_level: 5
+    incompatibility: 1
+    value: 300
+    value_ratio: 0.0
+    category: '0'
+    description: ''
+    mods: ''
+- model: collector.cyberfeature
+  pk: 64
+  fields:
+    reference: Flight
+    complexity: 5
+    tech_level: 7
+    incompatibility: 3
+    value: 3000
+    value_ratio: 0.0
+    category: '0'
+    description: ''
+    mods: ''
+- model: collector.cyberfeature
+  pk: 65
+  fields:
+    reference: Lights
+    complexity: 1
+    tech_level: 5
+    incompatibility: 1
+    value: 200
+    value_ratio: 0.0
+    category: '0'
+    description: ''
+    mods: ''
+- model: collector.cyberfeature
+  pk: 66
+  fields:
+    reference: Flash
+    complexity: 5
+    tech_level: 7
+    incompatibility: 3
+    value: 300
+    value_ratio: 0.0
+    category: '0'
+    description: ''
+    mods: ''
+- model: collector.cyberfeature
+  pk: 67
+  fields:
+    reference: Think Machine (Multitasking 1)
+    complexity: 1
+    tech_level: 6
+    incompatibility: 1
+    value: 500
+    value_ratio: 0.0
+    category: '0'
+    description: ''
+    mods: ''
+- model: collector.cyberfeature
+  pk: 68
+  fields:
+    reference: Think Machine (Advisor 1)
+    complexity: 2
+    tech_level: 7
+    incompatibility: 3
+    value: 200
+    value_ratio: 0.0
+    category: '0'
+    description: ''
+    mods: ''
+- model: collector.cyberfeature
+  pk: 69
+  fields:
+    reference: Tool Implant
+    complexity: 1
+    tech_level: 5
+    incompatibility: 1
+    value: 0
+    value_ratio: 1.5
+    category: '0'
+    description: ''
+    mods: ''
+- model: collector.cyberfeature
+  pk: 70
+  fields:
+    reference: Toxic Immunity
+    complexity: 2
+    tech_level: 5
+    incompatibility: 1
+    value: 1500
+    value_ratio: 0.0
+    category: '0'
+    description: ''
+    mods: ''
+- model: collector.cyberfeature
+  pk: 71
+  fields:
+    reference: Weaponry
+    complexity: 0
+    tech_level: 5
+    incompatibility: 2
+    value: 0
+    value_ratio: 0.0
+    category: '0'
+    description: ''
+    mods: ''
+- model: collector.cyberfeature
+  pk: 72
+  fields:
+    reference: Weaponry (Retractible Wolfers)
+    complexity: 1
+    tech_level: 5
+    incompatibility: 4
+    value: 150
+    value_ratio: 0.0
+    category: '0'
+    description: ''
+    mods: ''
+- model: collector.cyberfeature
+  pk: 73
+  fields:
+    reference: Removable
+    complexity: 3
+    tech_level: 5
+    incompatibility: 0
+    value: 500
+    value_ratio: 0.0
+    category: '1'
+    description: ''
+    mods: ''
+- model: collector.cyberfeature
+  pk: 74
+  fields:
+    reference: Omnisocket
+    complexity: 4
+    tech_level: 5
+    incompatibility: 1
+    value: 300
+    value_ratio: 0.0
+    category: '1'
+    description: ''
+    mods: ''
+- model: collector.cyberfeature
+  pk: 75
+  fields:
+    reference: Burns Flesh
+    complexity: -5
+    tech_level: 5
+    incompatibility: 0
+    value: 0
+    value_ratio: 0.0
+    category: '1'
+    description: ''
+    mods: ''
+- model: collector.cyberfeature
+  pk: 76
+  fields:
+    reference: Carved
+    complexity: 0
+    tech_level: 6
+    incompatibility: 2
+    value: 150
+    value_ratio: 0.0
+    category: '1'
+    description: Standard permanent attachment
+    mods: ''

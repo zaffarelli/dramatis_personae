@@ -1,0 +1,4648 @@
+- model: scenarist.card
+  pk: 1
+  fields:
+    name: Barfight
+    chapter: '1'
+    date_offset: 3
+    dt: 5022-04-23 09:00:00+00:00
+    sdt: 2023-01-16 03:13:33+00:00
+    place: Aylon
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: false
+    published: false
+    full_id: EPI.02:ADV.07:SCE.01
+    description: This encounter is a saloon scene like the one with Denzel Washington
+      and Chris Prat.
+    resolution: Featuring Decados
+    rewards: ''
+    card_type: SC
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 292
+    abstract: An action scene !
+    battle_scene: true
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: true
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '[]'
+- model: scenarist.card
+  pk: 141
+  fields:
+    name: Home Sweet Home
+    chapter: '6'
+    date_offset: 8
+    dt: 5022-04-20 09:00:00+00:00
+    sdt: 2023-02-27 18:00:00+00:00
+    place: Aylon System
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: false
+    published: true
+    full_id: EPI.02:ADV.06
+    description: "=The Argonix=\r\nThat's the Tallahud ship, an escort vessel that\
+      \ landed two weeks ago."
+    resolution: ''
+    rewards: 'Introducing: ¤anniettamorgane_de_sotomasseri¤ ¤felicio_mcgroff¤'
+    card_type: AD
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 152
+    abstract: An opportunity to meet the Zemeckis family
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: true
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '["anniettamorgane_de_sotomasseri__520", "falco_frazzetti_masseri__528",
+      "felicio_mcgroff__518", "gojasarik_mandreldar__557", "helion_liu_phan_li_halan__531",
+      "jezebel_anhzuram_almalik__525", "laera_dortmag__530", "leyria_lefanu_drougeglace__532",
+      "nuno_rolas_de_hazat__529", "otis_glover_juandaastas__527", "rilmac_ashtor__549"]'
+- model: scenarist.card
+  pk: 147
+  fields:
+    name: The Scorpion
+    chapter: '2'
+    date_offset: 15
+    dt: 5022-01-16 03:00:00+00:00
+    sdt: 2023-01-16 03:13:33.383723+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: false
+    to_PDF: false
+    temporary: false
+    published: false
+    full_id: EPI.02:DRA.04:ACT.02
+    description: "=A gift to future generations=\r\nTo himself, the petty crimelord\
+      \ called the Scorpion is the next warlord of the House Al-Malik.\r\n\r\nµA sad\
+      \ pastµ"
+    resolution: bbbbb
+    rewards: ''
+    card_type: AC
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 251
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: true
+    spiritual_scene: false
+    political_scene: true
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '[]'
+- model: scenarist.card
+  pk: 148
+  fields:
+    name: 'Proof of forbidden tech: Morgane'
+    chapter: '2'
+    date_offset: 1
+    dt: 5022-01-02 03:00:00+00:00
+    sdt: 2023-01-16 03:13:33.383723+00:00
+    place: Aylon
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: false
+    published: false
+    full_id: EPI.02:DRA.02:ACT.02
+    description: "¤gareth_suskin¤\r\n¤felicio_mcgroff¤\r\n¤fritz_faroe¤"
+    resolution: ''
+    rewards: ''
+    card_type: AC
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 252
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '["anniettamorgane_de_sotomasseri__520", "felicio_mcgroff__518",
+      "fritz_faroe__488", "gareth_suskin__489", "kyrill_zhukov_decados__546"]'
+- model: scenarist.card
+  pk: 149
+  fields:
+    name: Nemesis
+    chapter: '2'
+    date_offset: 0
+    dt: 5022-01-01 03:00:00+00:00
+    sdt: 2023-01-16 03:13:33.383723+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: false
+    published: false
+    full_id: EPI.02:DRA.02:SCH.02
+    description: ¤hadjim_dreyfus_almalik¤ is the nemesis of ¤saskia_varnovicz¤. He
+      has an ukari bodyguard as well, ¤alib_oj_saqar¤
+    resolution: ''
+    rewards: ''
+    card_type: SH
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 252
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: true
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '["saskia_varnovicz__189"]'
+- model: scenarist.card
+  pk: 150
+  fields:
+    name: 'IQK: Morgane''s mission'
+    chapter: '1'
+    date_offset: 0
+    dt: 5022-01-02 03:00:00+00:00
+    sdt: 2023-01-16 03:13:33.383723+00:00
+    place: Aylon/Kordeth/Criticorum/Byzantium Secundus
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: false
+    published: false
+    full_id: EPI.02:DRA.02:ACT.02:SCH.01
+    description: "=Problem=\r\nµOrder of the dayµ\r\nA technological discovery: the\
+      \ Tallamud might be working with league dissidents, as they seem to possess\
+      \ very efficient Nanotech.\r\nµObjectivesµ\r\nAcquire a sample of this Nanotech\
+      \ and bring it back to the Eye for analysis.\r\nµProtagonistsµ\r\nµVolunteersµ\r\
+      \n*¤anniettamorgane_de_sotomasseri¤ [On Active Duty]\r\n*¤chebrol_mcallister¤\
+      \ [Killed In Action]\r\nµContactsµ\r\n*¤chamon_mazarin¤ (contact for the Eye)\r\
+      \n*¤antweeb_keller¤ (contact for the League)\r\n*¤guy_minster¤ (contact for\
+      \ the Inquisition)"
+    resolution: 'The problem is quite simple: bringing the nanotech sample to the
+      Emperor. This can be achieved with Morgane and her team dead or alive. As she
+      his the last member of the team, losing her will let no other choice to succeed
+      the mission than extracting the nanotech sample from her body.'
+    rewards: ¤kyrill_zhukov_decados¤
+    card_type: SH
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 148
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: true
+    spiritual_scene: false
+    political_scene: true
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '["anniettamorgane_de_sotomasseri__520", "kyrill_zhukov_decados__546"]'
+- model: scenarist.card
+  pk: 152
+  fields:
+    name: Beyond Darkness
+    chapter: '2'
+    date_offset: 0
+    dt: 5022-01-01 03:00:00+00:00
+    sdt: 2023-01-16 03:13:33+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: false
+    published: true
+    full_id: EPI.02
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do\
+      \ eiusmod tempor incididunt ut labore et dolore magna aliqua. Erat pellentesque\
+      \ adipiscing commodo elit at imperdiet. Blandit cursus risus at ultrices mi\
+      \ tempus. Tellus in hac habitasse platea dictumst vestibulum. Sed libero enim\
+      \ sed faucibus turpis in eu. Tempus quam pellentesque nec nam aliquam sem. Tortor\
+      \ aliquam nulla facilisi cras fermentum odio eu. Etiam erat velit scelerisque\
+      \ in dictum. Ornare arcu dui vivamus arcu felis bibendum. In fermentum et sollicitudin\
+      \ ac orci. Elementum pulvinar etiam non quam lacus suspendisse. Proin sagittis\
+      \ nisl rhoncus mattis rhoncus urna.\r\n\r\nVelit dignissim sodales ut eu sem\
+      \ integer vitae justo. Nascetur ridiculus mus mauris vitae ultricies leo integer\
+      \ malesuada nunc. Egestas diam in arcu cursus euismod quis viverra nibh. Gravida\
+      \ cum sociis natoque penatibus. Nec sagittis aliquam malesuada bibendum arcu\
+      \ vitae elementum curabitur vitae. Integer eget aliquet nibh praesent tristique\
+      \ magna sit amet. Dui id ornare arcu odio ut sem nulla pharetra. Egestas sed\
+      \ sed risus pretium quam vulputate. Dignissim suspendisse in est ante in. Viverra\
+      \ nam libero justo laoreet sit amet cursus. Suscipit tellus mauris a diam maecenas\
+      \ sed enim ut sem. Ac felis donec et odio pellentesque.\r\n\r\n\r\n¤andrej_maczanpof¤\
+      \  ¤bremov_gundri¤  ¤anniettamorgane_de_sotomasseri¤  ¤eikno_mofat_almalik¤\
+      \  ¤sheisinselli_mofat_almalik¤ ¤balthazar_zemeckis¤  ¤clio_longsdale¤  ¤clinton_austruy¤\
+      \  ¤edwig_peyrigmann¤  ¤emmett_van_gelder¤  ¤erian_li_halan¤  ¤felicio_mcgroff¤\
+      \  ¤fritz_faroe¤  ¤gareth_suskin¤  ¤ionia_zemeckis¤  ¤katarina_szdreiov¤  ¤neiad_shafeer_almalik¤\
+      \  ¤quaid_oj_sallak¤  ¤sanjuk_oj_kaval¤  ¤saskia_varnovicz¤  ¤sebastian_lowery¤\
+      \  ¤solomon_cuirias¤  ¤tessa_mcfinley¤  ¤vedel_klugzman¤  ¤tugtanok_oj_malak¤\
+      \ ¤portia_justinian¤  ¤raifa_mofat_almalik¤  ¤zahuras_mofat_almalik¤  ¤wilson_nolland¤\
+      \  ¤milos_straban¤  ¤krozen¤  ¤laura_klugzman¤  ¤kleria_van_dyke¤  ¤tamun_naralian¤"
+    resolution: "¤gareth_suskin¤\r\n¤felicio_mcgroff¤\r\n¤fritz_faroe¤\r\n\r\nLorem\
+      \ ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt\
+      \ ut labore et dolore magna aliqua. Erat pellentesque adipiscing commodo elit\
+      \ at imperdiet. Blandit cursus risus at ultrices mi tempus. Tellus in hac habitasse\
+      \ platea dictumst vestibulum. Sed libero enim sed faucibus turpis in eu. Tempus\
+      \ quam pellentesque nec nam aliquam sem. Tortor aliquam nulla facilisi cras\
+      \ fermentum odio eu. Etiam erat velit scelerisque in dictum. Ornare arcu dui\
+      \ vivamus arcu felis bibendum. In fermentum et sollicitudin ac orci. Elementum\
+      \ pulvinar etiam non quam lacus suspendisse. Proin sagittis nisl rhoncus mattis\
+      \ rhoncus urna."
+    rewards: ''
+    card_type: EP
+    archived: false
+    is_ongoing: true
+    epic: 17
+    parent: null
+    abstract: Season Two of De Automatum Legis
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '["andrej_maczanpof__99", "anniettamorgane_de_sotomasseri__520",
+      "anton_liebov__524", "arcturus_fendren_justinian__519", "argus_valerias__537",
+      "artmil_van_dyke__543", "balthazar_zemeckis__436", "basil_questro__544", "bremov_gundri__11",
+      "christian_longsdale_hawkwood__509", "clinton_austruy__495", "clio_longsdale__501",
+      "corti_van_dyke__548", "donovan_van_gelder__551", "edwig_peyrigmann__480", "eikno_mofat_almalik__507",
+      "eleanore_ivanovicz__561", "emmett_van_gelder__502", "erian_li_halan__496",
+      "falco_frazzetti_masseri__528", "felicio_mcgroff__518", "fritz_faroe__488",
+      "gareth_suskin__489", "gojasarik_mandreldar__557", "gorem_ratosh__542", "gunthar_mandelsson__552",
+      "helion_liu_phan_li_halan__531", "ingmar_taloren__539", "ionia_zemeckis__455",
+      "ivan_knoplicz__556", "jezebel_anhzuram_almalik__525", "jordan_aerix__536",
+      "josef_baranof__18", "josefa_aerin__538", "julius_krozen__513", "kasmir_razzula__458",
+      "katarina_szdreiov__465", "kissy_moongoose__515", "kleria_van_dyke__476", "kyrill_zhukov_decados__546",
+      "laera_dortmag__530", "laura_klugzman__475", "lej_wan_mandreldar__558", "leyria_lefanu_drougeglace__532",
+      "lin_bartowski__510", "maria_zebril__540", "marvin_striekemann__533", "milos_straban__514",
+      "moira_van_der_gart__545", "neiad_shafeer_almalik__504", "nuno_rolas_de_hazat__529",
+      "olaf_grumaer__541", "otis_glover_juandaastas__527", "penelope_heighe__564",
+      "portia_justinian__503", "quaid_oj_sallak__444", "raifa_mofat_almalik__482",
+      "rilmac_ashtor__549", "ruffic_aljasum_almalik__562", "salim_mbassa__563", "sanjuk_oj_kaval__511",
+      "saskia_varnovicz__189", "sebastian_lowery__522", "sheisinselli_mofat_almalik__485",
+      "sofia_zalievicz__526", "solomon_cuirias__505", "syndicate_tech_ninja__554",
+      "tamun_naralian__499", "tessa_mcfinley__516", "tugtanok_oj_malak__5", "vaclav_trevil__24",
+      "vedel_klugzman__471", "wilson_nolland__486", "zahuras_mofat_almalik__446"]'
+- model: scenarist.card
+  pk: 215
+  fields:
+    name: De Automatum Legis (The Tiger of Istakhr)
+    chapter: '1'
+    date_offset: 0
+    dt: 2022-12-22 01:47:34.277821+00:00
+    sdt: 2023-01-16 03:13:33.383723+00:00
+    place: Al-Malik Fiefs / Istakhr / Samarkand
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: false
+    published: false
+    full_id: EPI.01
+    description: "=Introduction=\r\nThis epic is supposed to be a short one, built\
+      \ around five large dramas. It's about serving an innovative Master Engineer,\
+      \ helping him in his daily problems, etc...\r\nAt first, the players are hired\
+      \ by the engineer, and the only reason they have to do the job is that they\
+      \ are payed five time the standard amount. Of course, the man has recruited\
+      \ specialists in their domains, and sizing the talent of a person is something\
+      \ he is really good at.\r\n\r\nDuring one of the early missions, they will get\
+      \ involved with major schemes at the scale of the Empire, with the §Benefactus§,\
+      \ the §Assydian§ and §Madoc Preserve§.\r\n\r\n=Prerolled=\r\nTo be sure the\
+      \ guys are provided the good people to be hired, multiple avatars are pre-rolled\
+      \ to fit different roles. Either players can switch between characters in a\
+      \ fixed set from a session to one other with, or keep the dormant avatars in\
+      \ a big pool where everybody is welcome to tap if he doesn't want to play its\
+      \ main character, this is not an issue. Just a decision to be made with the\
+      \ agreement of the players.\r\nIn any case, it might be important that the main\
+      \ cast of characters might be present in the epic at least as NPCs, as they\
+      \ may be linked to the main intrigue.\r\n\r\nµPlayersµ\r\n- ¤marcus_zemeckis¤,\
+      \ nephew of Master Zemeckis\r\n- ¤shamij_al_jabra¤, specialities provider  \r\
+      \n- ¤marx_whenger¤, security et recovery ops\r\n- ¤lorem_zenski¤, manifest light\
+      \ envoy\r\n\r\nµGuest NPCµ\r\n- ¤neve_sledad¤\r\n\r\nµPC Storageµ\r\nEven if\
+      \ there are no guest NPC joining the campaign, every month a new character will\
+      \ be recruited to become a guest NPC.\r\n- ¤arsen_floxman¤\r\n- ¤ashur_templa¤\r\
+      \n- ¤augustus_zeneter¤\r\n- ¤caius_branna¤\r\n- ¤dina_ashamid¤\r\n- ¤ernst_szinkevicz¤\r\
+      \n- ¤farad_dragonscale¤\r\n- ¤horace_lamibi¤\r\n- ¤jeb_solustran¤\r\n- ¤luther_van_crow¤\r\
+      \n- ¤meihan_li_halan¤\r\n- ¤quaid_oj_sallak¤\r\n- ¤quintus_hoffman¤\r\n- ¤siliestro_venga¤\r\
+      \n- ¤zatromos_radul_almalik¤"
+    resolution: ''
+    rewards: ''
+    card_type: EP
+    archived: false
+    is_ongoing: false
+    epic: 16
+    parent: null
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '["arsen_floxman__459", "ashur_templa__462", "augustus_zeneter__448",
+      "caius_branna__441", "dina_ashamid__440", "ernst_szinkevicz__464", "farad_dragonscale__442",
+      "horace_lamibi__453", "jeb_solustran__449", "lorem_zenski__454", "luther_van_crow__445",
+      "marcus_zemeckis__460", "marx_whenger__450", "meihan_li_halan__463", "neve_sledad__452",
+      "quaid_oj_sallak__444", "quintus_hoffman__439", "shamij_al_jabra__447", "siliestro_venga__451",
+      "zatromos_radul_almalik__461"]'
+- model: scenarist.card
+  pk: 216
+  fields:
+    name: The Serpent of Syracuse
+    chapter: '1'
+    date_offset: 0
+    dt: 2022-12-22 01:47:34.309563+00:00
+    sdt: 2023-01-16 03:13:33.383723+00:00
+    place: Al-Malik Fiefs / Istakhr
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: false
+    full_id: DAL:01
+    description: "=Master Balthazar Theodore Zemeckis=\r\nThe whole epic is built\
+      \ around one character, Master ¤balthazar_zemeckis¤ of the POE. He is a highly\
+      \ qualified engineer whose speciality is clockworking, the art of building automats.\r\
+      \nOne could easily assume that such a carrier domain might be totally inapropriate\
+      \ in the empire for many reasons, but, like his master £Olem Ratugas£ before\
+      \ him, he worked his path through power groups and the Church to ensure that\
+      \ none might easily harm his business.\r\nIn 4982 AD, Radugas founded the High\
+      \ College of the Clockwork, based at first on Istakhr. At first, it was an undercover\
+      \ activity, the goal of the clockmaker being to reproduce golem having the shape\
+      \ of humans, but bearing no real sentiance. What Ratugas achieved at this time\
+      \ with his apprentice was to make dolls having at best the temper of a domesticated\
+      \ dog. This was the first generation. They needed to be tamed, or educated,\
+      \ as they have no natural feral state, to be able to do simple tasks, like carrying\
+      \ water in the desert. The first batch of automats that made the Brotherhood\
+      \ famous in the Empire was a special unit, the white faces, used on Stigmata,\
+      \ deployed with equipment and weapons and going through enemy lines without\
+      \ being detected, passing for dead if they attracted the attention of the symbiots.\
+      \ This was a great success and the emperor saw a great interest in a technology\
+      \ that would allow to resist the symbiots. The Church did not officially sanctioned\
+      \ the brotherhood, but an Act from the Patriarch, £Lex Automata£ was dispatched\
+      \ in the high instances of the Church when the white faces helped the rescue\
+      \ of the first Manifest Light platoon.\r\n\r\n=Clockworking Inner Council=\r\
+      \n- ¤balthazar_zemeckis¤, Samarkand, Istakhr, Al-Malik fiefs.\r\n- ¤mae_lin_breguet¤,\
+      \ Avaneir, Rampart, Li Halan fiefs.\r\n- ¤ivan_ipsevicz¤, Lyonesse, Delphi,\
+      \ Hawkwood fiefs\r\n- ¤harvenor_russel¤, Corinth, Tethys, Imperial fiefs\r\n\
+      - ¤kiera_zeneter¤, Deleb, Pentateuch, Church fiefs\r\n\r\n=Relatives=\r\n- ¤ionia_zemeckis¤,\
+      \ daughter\r\n- ¤ellen_zemeckis¤, wife\r\n\r\n=Servants=\r\n- ¤massic_antillies¤,\
+      \ butler\r\n- ¤zolondra_kreshia¤, personal physician"
+    resolution: ''
+    rewards: ''
+    card_type: DR
+    archived: false
+    is_ongoing: false
+    epic: 16
+    parent: null
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '["balthazar_zemeckis__436", "ellen_zemeckis__456", "harvenor_russel__432",
+      "ionia_zemeckis__455", "ivan_ipsevicz__435", "kiera_zeneter__438", "mae_lin_breguet__437",
+      "massic_antillies__457", "zolondra_kreshia__484"]'
+- model: scenarist.card
+  pk: 217
+  fields:
+    name: Master Clockmaker
+    chapter: '1'
+    date_offset: 0
+    dt: 2022-12-22 01:47:34.328178+00:00
+    sdt: 2023-01-16 03:13:33.383723+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: false
+    full_id: DAL:01:01
+    description: "=The man=\r\nTo these days, the clockwork is supposed to be closely\
+      \ watched by the Church, but as its usage is highly restricted by financial\
+      \ matters and the specifications clearly written and shared to whoever needs\
+      \ them, the business is flourishing.\r\nZemeckis is the heir of the High College\
+      \ of the Clockwork. \r\nThe numbers of Clockmakers is really scarce, around\
+      \ 300 members at best in the empire, and 150 of them are only maintaining existing\
+      \ automats. \r\n100 more are barely reproducing existing automats from Radugas\
+      \ initial works, replacing the ones that cannot be repaired. \r\n25 of the last\
+      \ 50 members have only achieved, once or twice, to create a generation II automat.\
+      \ \r\nThe last 25 are the true clockmakers, dispatched in the whole empire.\
+      \ Only five of them, Zemeckis included, are able to compare their work to the\
+      \ work of Radugas, expending even the innovation to create generation III and\
+      \ IV prototypes.\r\n\r\n=Friends=\r\n- Cardinal ¤aldron_moxlaw¤\r\n- Master\
+      \ ¤edwig_peyrigmann¤"
+    resolution: ''
+    rewards: ''
+    card_type: AC
+    archived: false
+    is_ongoing: false
+    epic: 16
+    parent: null
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '["aldron_moxlaw__467", "edwig_peyrigmann__480"]'
+- model: scenarist.card
+  pk: 218
+  fields:
+    name: Shadows from the past
+    chapter: '1'
+    date_offset: 0
+    dt: 2022-12-22 01:47:34.334594+00:00
+    sdt: 2023-01-16 03:13:33.383723+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: false
+    full_id: DAL:01:01:01
+    description: "=Ratugas Legacy=\r\nThere are some things that are better left unsaid,\
+      \ and only a few people know them. One of the most important is the origin of\
+      \ the Clockworking. Only the inner Council is aware about that."
+    resolution: ''
+    rewards: ''
+    card_type: EV
+    archived: false
+    is_ongoing: false
+    epic: 16
+    parent: null
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '[]'
+- model: scenarist.card
+  pk: 219
+  fields:
+    name: The Desert
+    chapter: '2'
+    date_offset: 0
+    dt: 2022-12-22 01:47:34.337814+00:00
+    sdt: 2023-01-16 03:13:33.383723+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: false
+    full_id: DAL:01:01:02
+    description: "The Afid desert close to Syracuse is a place of mystery. Among the\
+      \ Sihid tribes of this hostile area, there is a legend that says the Afid talks\
+      \ to some of the wisest men. One of those is named ¤abru_alshadiraz¤ and has\
+      \ a very famous suq in the Bazaar.\r\n\r\nWith one sparkle or through barter\
+      \ (the sihid do not accept outworld currency has he says it corrupts the reading)."
+    resolution: ''
+    rewards: ''
+    card_type: EV
+    archived: false
+    is_ongoing: false
+    epic: 16
+    parent: null
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '["abru_alshadiraz__469"]'
+- model: scenarist.card
+  pk: 220
+  fields:
+    name: Samarkand and the Bazaar
+    chapter: '2'
+    date_offset: 0
+    dt: 2022-12-22 01:47:34.341471+00:00
+    sdt: 2023-01-16 03:13:33.383723+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: false
+    full_id: DAL:01:02
+    description: "Samarkand, as a planetary capital, is a huge city.\r\n\r\n\r\n¤garwin_lyondras¤"
+    resolution: ''
+    rewards: ''
+    card_type: AC
+    archived: false
+    is_ongoing: false
+    epic: 16
+    parent: null
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '["garwin_lyondras__468"]'
+- model: scenarist.card
+  pk: 221
+  fields:
+    name: Syracuse & around
+    chapter: '1'
+    date_offset: 0
+    dt: 2022-12-22 01:47:34.347840+00:00
+    sdt: 2023-01-16 03:13:33.383723+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: false
+    full_id: DAL:01:02:01
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: EV
+    archived: false
+    is_ongoing: false
+    epic: 16
+    parent: null
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '[]'
+- model: scenarist.card
+  pk: 222
+  fields:
+    name: Daily Duties
+    chapter: '2'
+    date_offset: 0
+    dt: 2022-12-22 01:47:34.350900+00:00
+    sdt: 2023-01-16 03:13:33.383723+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: false
+    full_id: DAL:02:03:02
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: EV
+    archived: false
+    is_ongoing: false
+    epic: 16
+    parent: null
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '[]'
+- model: scenarist.card
+  pk: 223
+  fields:
+    name: Supports
+    chapter: '2'
+    date_offset: 0
+    dt: 2022-12-22 01:47:34.354389+00:00
+    sdt: 2023-01-16 03:13:33.383723+00:00
+    place: None
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: false
+    full_id: DAL:01:02:02
+    description: "=Benefices=\r\nThose are the roles connected to the benefices of\
+      \ the players characters.\r\n\r\nµMarcusµ\r\nZemeckis newphew was once in the\
+      \ merchant navy when he was a student. It is at that time that he served under\
+      \ command of captain ¤wilson_nolland¤. (Ally 2)\r\n\r\nµShamijµ\r\n- ¤kleria_van_dyke¤\
+      \ (Ally 1)\r\n- Other Van dyke scravers, like ¤telia_asharid¤ (Contact 1)\r\n\
+      \r\nµLoremµ\r\n¤vedel_klugzman¤ and his daughter ¤laura_klugzman¤"
+    resolution: ''
+    rewards: ''
+    card_type: EV
+    archived: false
+    is_ongoing: false
+    epic: 16
+    parent: null
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '["kleria_van_dyke__476", "laura_klugzman__475", "telia_asharid__479",
+      "vedel_klugzman__471", "wilson_nolland__486"]'
+- model: scenarist.card
+  pk: 224
+  fields:
+    name: Guilders Afterworks
+    chapter: '3'
+    date_offset: 0
+    dt: 2022-12-22 01:47:34.359967+00:00
+    sdt: 2023-01-16 03:13:33.383723+00:00
+    place: Istakhr / Samarkand / The Bazaar / South Quadrant / Medusa
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: false
+    full_id: DAL:01:02:03
+    description: "=Night Activities=\r\nHere is the place to keep in touch with keys\
+      \ representative of the guild in Istakhr, especially younger ones.\r\n\r\nµThe\
+      \ Holo Dance Up Contestµ\r\nOne of the activities en vogue in the guilder circles\
+      \ of Samarkand is this mirroring dance contests. You go on a sensor platform\
+      \ that is taking a live holosequence, back to bakc with another contestant on\
+      \ another platform. Superprinted indications show the move you have to do, and\
+      \ both contestants must synchronize.\r\nThe roll to handle this is a contested\
+      \ ~AWA+Performance (Dancing)~ between the participants. Current champion of\
+      \ the discipline is Crafter ¤alicia_bregen¤, who will enjoy wearing her §cloaking\
+      \ suit§(*) when contesting against a man (+4 to her). \r\n\r\n(*) §This special\
+      \ suit is invisible to the sensors. It is setup to remove just the suit, not\
+      \ the wearer of the suit (one can easily guess this might be the first purpose\
+      \ of such a vestment).§\r\n\r\nµStone to Flesh shotsµ\r\nA specialty of the\
+      \ house, this special cocktail, also called §Medusa's Gaze§ is based on lemon\
+      \ and a special desert snake venom, the §White Arshic§. Not lethal once distilled\
+      \ like this, it has the property to freeze the muscular and nervous system of\
+      \ the drinker for one second ~CON+Athletics/DV 15~, with a fresh burst sensation.\
+      \ \r\n\r\nThe §White Arshic Extract§, when not used with lemon has the same\
+      \ effects for a duration from one to ten minutes, then putting the subject to\
+      \ sleep for as many hours. It can be lethal on a botched resistance roll (negative\
+      \ score). This extract can be acquired at §Apothecary Ramladan Suq§ in the Bazaar\
+      \ for 3 dinars for 1 liter bottle (10 doses poison or 100 cocktails)\r\n\r\n\
+      µRegularsµ\r\n- ¤demetra_darof¤, the best volt enginer of the city\r\n- ¤jeirak_crastel¤,\
+      \ leader of the south quadrant mutasih\r\n- ¤ellion_makka¤, sihid performer\r\
+      \n\r\nµSecurity Managerµ\r\n\r\nEx-Lieutenant ¤charlie_groff¤ (musters) is in\
+      \ charge for the security here. A kind man, he will not hesistate to handle\
+      \ problems with a strong arm. He is strongly backed up by the Mutasih that often\
+      \ come to Darof for maintenance of their appliances. \r\nTheir commander Crastel\
+      \ can be found here on saturday nights having drink and diner as well."
+    resolution: ''
+    rewards: ''
+    card_type: EV
+    archived: false
+    is_ongoing: false
+    epic: 16
+    parent: null
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '["alicia_bregen__473", "charlie_groff__490", "demetra_darof__472",
+      "ellion_makka__477", "jeirak_crastel__478"]'
+- model: scenarist.card
+  pk: 225
+  fields:
+    name: Future missions
+    chapter: '3'
+    date_offset: 0
+    dt: 2022-12-22 01:47:34.366633+00:00
+    sdt: 2023-01-16 03:13:33.383723+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: false
+    full_id: DAL:01:03
+    description: "=Ideas for adventures=\r\nThis act is a summary of potential adventures\
+      \ that could be made in the context. \r\nµNever mess with Stigmata vetsµ\r\n\
+      A special client, a Brother Battle veteran looking for cyber improvements comes\
+      \ to pay a visit to the right person, his old freidn Zemeckis. He helps when\
+      \ desert Sihid marauders comes around Syracuse and try to raid the town and\
+      \ start to siege the Haçienda. \r\nµThe Missing Cogµ\r\nClockworker ¤djihab_carcero¤\
+      \ has sent a message to Master Zemeckis: There's might be a rogue automat on\
+      \ the system Malignatus. He has witnessed the machine violent behaviors and\
+      \ was hurt in his attempt to fix it. He managed to isolate the automat in a\
+      \ drainning room of the city sewers and is looking for solution with all other\
+      \ guildmembers he was able to gather around, but as the rain season is approaching,\
+      \ he asked for expertize to handle the problem before the Decados find out who,\
+      \ or more exactly what has caused ten murders in the city.\r\nµRussel Legacyµ\r\
+      \nAs Harvenor Russel is getting holder, he has seriously considered leaving\
+      \ his position. In 5021 AD he already left the chair of Intendant of the Lodge\
+      \ to Zemeckis, but he feels that he might better fit in the background. Leaving\
+      \ his position of one of the Grand Masters could be done to one of his two apprentices,\
+      \ or he might ask the Inner Council to handle that themselves. Such a position\
+      \ is a really interesting one to many...\r\nµClockmaker Apprenticeµ\r\nZemeckis\
+      \ wants to formalize things by choosing an official apprentice. He decides to\
+      \ create an event for that, a small tournament for which he will call the inner\
+      \ council and a few key customers that will decide the best creation.\r\nµThievesµ\r\
+      \nµNew player in townµ\r\nµInquisitors visitµ\r\nµHappy Birthday Ioniaµ\r\n\
+      µDelivery on hostile environementµ\r\nA simple first mission: deliver three\
+      \ automats in Stigmata.\r\nµEllen and the Golden Appleµ\r\nµSecret Sandsµ\r\n\
+      Where we discover interesting things about one of the main ingredient in automat\
+      \ construction."
+    resolution: ''
+    rewards: ''
+    card_type: AC
+    archived: false
+    is_ongoing: false
+    epic: 16
+    parent: null
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '["djihab_carcero__483"]'
+- model: scenarist.card
+  pk: 226
+  fields:
+    name: The Tiger of Istakhr
+    chapter: '2'
+    date_offset: 0
+    dt: 2022-12-22 01:47:34.377018+00:00
+    sdt: 2023-01-16 03:13:33.383723+00:00
+    place: Istakhr / Samarkand / The Bazaar / Mofat Suq
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: false
+    full_id: DAL:02
+    description: "=Synopsis=\r\nThe men of Zemeckis are on a mission, where they are\
+      \ supposed to deliver an automat to an Al-Malik Noble, ¤abdul_mofat_almalik¤.\
+      \ The automat is to be used by Mofat granddaughter, ¤sheisinselli_mofat_almalik¤,\
+      \ a thriteen years old girl, and only granddaughter of the Mofat branch. She\
+      \ had, a few months ago an accident that caused her to lose sight. As performing\
+      \ surgery to implant cyberoptic was thought upon, the specialist consulted,\
+      \ Master Zemeckis, discouraged the cyberimplantation at such a young age, before\
+      \ the end of body full growth. \r\n\r\n\r\n\r\n\r\n\r\nµMissionµ\r\nDeliver\
+      \ an automat to a client. The rendez-vous is in Samarkand Agora (the Istakhr\
+      \ Market). The buyer is Abdul Mofat al-Malik. The end user is the daughter of\
+      \ ¤raifa_mofat_almalik¤.\r\n\r\nµBombµ\r\nAfter the transaction, a bomb explodes\
+      \ in the suq, killing a dozen Al-Malik men, injuring around one hundred people.\
+      \ The granddaughter of Abdul Mofat Al-Malik critically injured, in a coma, saved\
+      \ in extremis by the newly acquired automat."
+    resolution: ''
+    rewards: "Introducing ¤katarina_szdreiov¤\r\n¤arikaltassoar_thugs¤\r\n¤garwin_lyondras¤"
+    card_type: DR
+    archived: false
+    is_ongoing: false
+    epic: 16
+    parent: null
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '["abdul_mofat_almalik__443", "arikaltassoar_thugs__466", "garwin_lyondras__468",
+      "katarina_szdreiov__465", "raifa_mofat_almalik__482", "sheisinselli_mofat_almalik__485"]'
+- model: scenarist.card
+  pk: 227
+  fields:
+    name: Nova Stressos Soirée du Seize
+    chapter: '1'
+    date_offset: 0
+    dt: 2022-12-22 01:47:34.392820+00:00
+    sdt: 2023-01-16 03:13:33.383723+00:00
+    place: Al-Malik Fiefs / Istakhr / Samarkand / Spaceport
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: false
+    full_id: DAL:02:01
+    description: "=The 16th special=\r\nEvery 16th of the month, the Decados noble\
+      \ Nova Stresso hold a special soirée in her mansion where the Elite in invited\
+      \ to exchange about political matters, object or people of note.\r\nµThe Hostessµ\r\
+      \n- ¤karlinova_stresshaus¤ is the host, having a solid reputation being a real\
+      \ hedonist. She is gallant and vain, as most might expect. She seems to bear\
+      \ interest to every single guest who's attending to the Soirée, but she really\
+      \ has her targets according to what she has in mind. She seems that vain, she\
+      \ is not.\r\n- ¤alfonso_gradinier¤ is an Haute Couture famous weirdo. Really\
+      \ talented, he is totally unbearable among people. In rare occasion he might\
+      \ seem more pleasant person when he is taken alone on a conversation with someone\
+      \ who really shows interest on him or his work. He might even show some interest\
+      \ to his interlocutor.\r\n- ¤paulie_goodmark¤ is the mysterious assistant of\
+      \ Nova Stressos, recently in her service. Quite silent, she seems only to be\
+      \ there because of her looks, her stunning teutonic woman. This agent of the\
+      \ Hawkwoods has of course her own agendas against the Assydian circle.\r\n-\
+      \ ¤orlem_gradski¤ is Nova Stressos aide de camp. Silent. Efficient.\r\n\r\n\
+      =Cleaning Party=\r\nIf some problems might appear during the party, Nova Stressos\
+      \ had aggreed with a special contract with the Arik Al Tassoar scraver cartel:\
+      \ they will clean up everything to avoid issues with the Mutasih. About 12 ¤arikaltassoar_thugs¤\
+      \ of the Cartel are roaming in the neighborhood, waiting for any need for intervention."
+    resolution: ''
+    rewards: ''
+    card_type: AC
+    archived: false
+    is_ongoing: false
+    epic: 16
+    parent: null
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '["alfonso_gradinier__487", "arikaltassoar_thugs__466", "karlinova_stresshaus__470",
+      "orlem_gradski__508", "paulie_goodmark__512"]'
+- model: scenarist.card
+  pk: 228
+  fields:
+    name: Bizarre Bazaar Nights
+    chapter: '1'
+    date_offset: 0
+    dt: 2022-12-22 01:47:34.399582+00:00
+    sdt: 2023-01-16 03:13:33.383723+00:00
+    place: Istakhr / Samarkand / Guilds District / Pharao Mockup Center
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: false
+    full_id: DAL:02:02:01
+    description: "=Avant-Garde=\r\nThe soirée, that is supposed to be a recurring\
+      \ event held every 16th of the month is a meeting for the elite to discuss luxury\
+      \ goods, special items and about all the wonders of the Empire that can be found\
+      \ in the Bazaar. Of course, none of most of the people here never set foot in\
+      \ a suq, but they are reach enough to have servants to do their shopping for\
+      \ them.\r\nHere, when transactions are done, it's usually on a £10K basis, whether\
+      \ it is about rare whyskies, Haute Couture Fashion, Automats, Starships or Cyber\
+      \ implants.\r\n=Major Attendants=\r\n- ¤sheisinselli_mofat_almalik¤ and her\
+      \ handmain ¤kahia_sahurun¤\r\n- Lord ¤clinton_austruy¤: Hawkwood aging playboy,\
+      \ and his entourage of bodyguards and models (3+5 escorts).\r\n- ¤erian_li_halan¤:\
+      \ A Li Halan lady a bit lost in the soirée. She came here to satisfy a family\
+      \ needs to dive into the elite and get some support on a system on which they\
+      \ are not that much present, no escort except for a friend, the ukar ¤sanjuk_oj_kaval¤.\r\
+      \n- Don ¤antonio_ragos¤: An outcast from House Hazat, heavily cybernetized +\
+      \ 3 escorts\r\n- Bishop ¤tamun_naralian¤: A church representative that apparently\
+      \ came has a watch to how the things are held. After a few drinks, it becomes\
+      \ obvious his watching is more on the almost naked ladies. Might be caught with\
+      \ one or two girls late at night. He's here with two escorts, Sergeant ¤emma_vanderen¤\
+      \ and private ¤clio_longsdale¤ (hardened muster women under Church contract\
+      \ that have no other choice than let him do his things). They tend to keep some\
+      \ distance.\r\n- Sir ¤edwig_torenson¤: Rare brand whyskies specialist, +2 escorts.\r\
+      \n- ¤neiad_shafeer_almalik¤: Called the Princess of the desert, this low rank\
+      \ al-Malik maid is a master in the Sihid desert belly dances. + 4 escorts\r\n\
+      - ¤emmett_van_gelder¤ & ¤portia_justinian¤: An odd couple, clearly paramours\r\
+      \n\r\n=Lesser Attendants=\r\n- A few charioteers are here, selling or buying\
+      \ deverse things.\r\n- Major ¤solomon_cuirias¤, a renowned master at arms."
+    resolution: "=Events of the Night=\r\nµAssysian transactionsµ\r\n\r\nµMadoc Preserve\
+      \ issuesµ\r\n\r\nµBully bulliedµ\r\nWhere Sir Ragos de Hazat meets his match\
+      \ in the person of Emmett Van Gelder."
+    rewards: ''
+    card_type: EV
+    archived: false
+    is_ongoing: false
+    epic: 16
+    parent: null
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: true
+    spiritual_scene: false
+    political_scene: true
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '["antonio_ragos__498", "clinton_austruy__495", "clio_longsdale__501",
+      "edwig_torenson__497", "emma_vanderen__500", "emmett_van_gelder__502", "erian_li_halan__496",
+      "kahia_sahurun__481", "neiad_shafeer_almalik__504", "portia_justinian__503",
+      "sanjuk_oj_kaval__511", "sheisinselli_mofat_almalik__485", "solomon_cuirias__505",
+      "tamun_naralian__499"]'
+- model: scenarist.card
+  pk: 229
+  fields:
+    name: Assydian transactions
+    chapter: '2'
+    date_offset: 0
+    dt: 2022-12-22 01:47:34.402965+00:00
+    sdt: 2023-01-16 03:13:33.383723+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: false
+    published: false
+    full_id: DAL:02:02:02
+    description: "=Special Contact=\r\nAmong the VIP of the soirée stands the real\
+      \ contact of Karlinova, the Charioteer ¤drunn_paarlkretzzer¤, jumpkeys smugler\
+      \ extraordinaire. This man works with Bannockburn contact and has access to\
+      \ the League Duplication Facility that the Charioteer have on this system."
+    resolution: ''
+    rewards: ''
+    card_type: SH
+    archived: false
+    is_ongoing: false
+    epic: 16
+    parent: null
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '["drunn_paarlkretzzer__491"]'
+- model: scenarist.card
+  pk: 230
+  fields:
+    name: Madoc Customers
+    chapter: '3'
+    date_offset: 0
+    dt: 2022-12-22 01:47:34.406311+00:00
+    sdt: 2023-01-16 03:13:33.383723+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: false
+    full_id: DAL:02:02:03
+    description: "=Madoc Customers=\r\nThere are two strangers from House Juandastaas\
+      \ attending to Nova Stressos soirée. They came here knowing there might be Zemeckis\
+      \ agent, so they would be able to talk business with them: They need to know\
+      \ if automats would be able to reach the dephts of the seas to help Oro'yms\
+      \ recover valuables. \r\n¤fritz_faroe¤ is a Knight, and ¤gareth_suskin¤ is his\
+      \ advisor."
+    resolution: ''
+    rewards: ''
+    card_type: EV
+    archived: false
+    is_ongoing: false
+    epic: 16
+    parent: null
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '["fritz_faroe__488", "gareth_suskin__489"]'
+- model: scenarist.card
+  pk: 231
+  fields:
+    name: Visit from the Ruby
+    chapter: '4'
+    date_offset: 0
+    dt: 2022-12-22 01:47:34.409452+00:00
+    sdt: 2023-01-16 03:13:33.383723+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: false
+    full_id: DAL:02:01:04
+    description: "This is the grand moment of the soirée, the young daughtre of Raifa\
+      \ Mofat Al-Malik will join her first mundane soirée for a 15th birthday.\r\n\
+      \r\n=The Ukari Mark="
+    resolution: ''
+    rewards: ''
+    card_type: EV
+    archived: false
+    is_ongoing: false
+    epic: 16
+    parent: null
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '[]'
+- model: scenarist.card
+  pk: 232
+  fields:
+    name: Afterdark
+    chapter: '2'
+    date_offset: 6
+    dt: 5022-01-07 03:00:00+00:00
+    sdt: 2023-01-16 03:13:33.383723+00:00
+    place: aa
+    gamemaster: zaffarelli@gmail.com
+    visible: false
+    to_PDF: false
+    temporary: false
+    published: false
+    full_id: EPI.02:DRA.02:SCH.02
+    description: "=Terrible news=\r\nWord has reached Aylon: ¤tugtanok_oj_malak¤ is\
+      \ hunted by other ukari fighters for his betrayal. He refused the challenged\
+      \ of Alijak.\r\n\r\nOkidoki"
+    resolution: 'There are two solutions to this: help Tug to attend to the challenge
+      (hoping he will succeed), or proove that this problem is a scam.'
+    rewards: ''
+    card_type: SH
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 252
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: true
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '["tugtanok_oj_malak__5"]'
+- model: scenarist.card
+  pk: 233
+  fields:
+    name: Schemes Evolution
+    chapter: '2'
+    date_offset: 0
+    dt: 2022-12-22 01:47:34.415869+00:00
+    sdt: 2023-01-16 03:13:33.383723+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: false
+    full_id: DAL:02:02
+    description: "=Many Enemies=\r\nIf someone woud \r\n\r\nµThe Tallamudµ\r\n\r\n\
+      µThe Desert Efritµ"
+    resolution: ''
+    rewards: ''
+    card_type: AC
+    archived: false
+    is_ongoing: false
+    epic: 16
+    parent: null
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '[]'
+- model: scenarist.card
+  pk: 234
+  fields:
+    name: Interstellar Schemes
+    chapter: '3'
+    date_offset: 0
+    dt: 2022-12-22 01:47:34.421930+00:00
+    sdt: 2023-01-16 03:13:33.383723+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: false
+    full_id: DAL:02:03
+    description: "=The Political Situation=\r\nThe Emperor does not seem to be ready\
+      \ to make a step to solve the issue with House Gesar. The current status quo\
+      \ might endanger the Empire if the Kurgan manage to recover and act with no\
+      \ further support of the Kaiser.\r\nIn the Landstradt, factions spawning...\r\
+      \n\r\nµThe Benefactiiµ\r\nThis goup wants to act against Alexius to bring a\
+      \ new leadership to the Empire.\r\n\r\n¤valterez_vauxhall¤\r\n¤tallahud_members¤"
+    resolution: ''
+    rewards: ''
+    card_type: AC
+    archived: false
+    is_ongoing: false
+    epic: 16
+    parent: null
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '["tallahud_members__494", "valterez_vauxhall__492"]'
+- model: scenarist.card
+  pk: 235
+  fields:
+    name: Benefactus
+    chapter: '1'
+    date_offset: 0
+    dt: 2022-12-22 01:47:34.429119+00:00
+    sdt: 2023-01-16 03:13:33.383723+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: false
+    published: false
+    full_id: DAL:02:01:01
+    description: "The £Benefactus£ is a party of the §Terradom§, that report a few\
+      \ but really important figures. It was created recently during an important\
+      \ imperial consultation involving the status of House Gesar.\r\n\r\nGoal: Destabilize\
+      \ the Tiger of Istakhr, Abdul Mofat, who's the only one that can handle the\
+      \ negotiation with the Gesar.\r\n\r\nHow: Hit where it hurts, by provoking his\
+      \ anger with a mortal terrorist attack on his beloved grandaughter.\r\n\r\n\
+      Who: ¤valterez_vauxhall¤ will organize the way the attacks will be conducted,\
+      \ and organize the Tallahud to do it."
+    resolution: ''
+    rewards: ''
+    card_type: SH
+    archived: false
+    is_ongoing: false
+    epic: 16
+    parent: null
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '["valterez_vauxhall__492"]'
+- model: scenarist.card
+  pk: 236
+  fields:
+    name: The Assydian Circle
+    chapter: '3'
+    date_offset: 0
+    dt: 5022-01-01 03:00:00+00:00
+    sdt: 2023-01-16 03:13:33.383723+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: false
+    published: false
+    full_id: EPI.02:DRA.02:ACT.01:SCH.03
+    description: "=The Circle=\r\nThey are opponents of the §Benefacus§. They are\
+      \ led by ¤kasmir_razzula¤. Their goal is to leave the Empire and join House\
+      \ Gesar. Most of the members are technophiles, and they want to ensure being\
+      \ welcomed by the Gesar by offering a long list of jumpkey to the Empire Systems.\r\
+      \n\r\nAs they have no real representation at the §Terradom§, they tend to be\
+      \ only a circle. No one on the Terradom would openly support them. They are\
+      \ based on the Bannockburn system.\r\n\r\nµPopulationµ\r\nThe group is currently\
+      \ an undercover movement, with many partisans on the Bannockburn system and\
+      \ on the Systems of the league.\r\n\r\nµOperationsµ\r\nTheir current main objective\
+      \ is to acquire jumpkeys to House Gesar systems. Some of those new keys already\
+      \ exist, ten of them being under Charioteers juridiction with surveillance by\
+      \ both Church and Imperial operatives. They might be very hard to acquire. However,\
+      \ three other keys have been release undercover: \r\n- One to the Tallahud fleet\
+      \ in case of special missions, currently held by Vauxhall second in command,\
+      \ commander ¤lin_bartowski¤.\r\n- One to the Imperial Amber Legion of Bannockburn\r\
+      \n- One to the diplomatic corp led by Abdul Mofat al-Malik and ¤christian_longsdale_hawkwood¤\
+      \ (the last one has the key)."
+    resolution: ''
+    rewards: ''
+    card_type: SH
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 261
+    abstract: Political group agenda
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: true
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '["christian_longsdale_hawkwood__509", "kasmir_razzula__458",
+      "lin_bartowski__510"]'
+- model: scenarist.card
+  pk: 237
+  fields:
+    name: Madoc Preserve
+    chapter: '3'
+    date_offset: 0
+    dt: 2022-12-22 01:47:34.435821+00:00
+    sdt: 2023-01-16 03:13:33.383723+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: false
+    full_id: DAL:02:01:03
+    description: "=The Urth Elite=\r\nThe Invisible Path plan to make his new High\
+      \ Quarters on the planet Madoc. The project is handled by one of the most trusted\
+      \ agent of the Coven, ¤gareth_suskin¤.\r\nThe objectives are quite simple: reach\
+      \ the depth of Madoc where there still are ur gargoyles, install a settlement\
+      \ here, which is possible according to the technical readings of a base at this\
+      \ depth, and close the place officially as as a nature preserve zone, has asked\
+      \ by the Oro'ym.\r\nTo do so, inspecting such a depth where even oro'ym can\
+      \ go, the only solution seems to be with automats. And about clockworking, Master\
+      \ Zemeckis seems to be the best."
+    resolution: ''
+    rewards: ''
+    card_type: EV
+    archived: false
+    is_ongoing: false
+    epic: 16
+    parent: null
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '["gareth_suskin__489"]'
+- model: scenarist.card
+  pk: 238
+  fields:
+    name: The Ruby of Istakhr
+    chapter: '3'
+    date_offset: 0
+    dt: 2022-12-22 01:47:34.438902+00:00
+    sdt: 2023-01-16 03:13:33.383723+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: false
+    full_id: DAL:02:03
+    description: "=The Product=\r\nIt's a Gen II automat that is supposed to be delivered,\
+      \ a special issue innuendo designed for £Sheirinselli£ in three months, specially\
+      \ handcrafted by master Zemeckis.\r\n\r\nµTamingµ\r\nThe taming requires a Science\
+      \ (Clockworking) at DV 15. A roll is done every 5 minutes. The success margins\
+      \ are summed up, and once 20 is reached the taming is done. The tamer and the\
+      \ owner must be there for the whole duration of the session.\r\n\r\nµTransportationµ\r\
+      \nThe transportation will be done by four agents: a clockworker, a security\
+      \ agent, a spiritual agent and a driver. A McGerren 44 has been prepared for\
+      \ this delivery, already loaded with the deliverable."
+    resolution: "=Discoveries=\r\nIt's in fact a Gen III machine, a thing that the\
+      \ tamer can realize during the taming, which is much more easy than expected.\
+      \ \r\nThe taming requires of course the presence of the person for which the\
+      \ automat is supposed to be, and all attending to the taming, the tamer included\
+      \ must wear a special fabric mask.\r\n\r\n=Sheisinselli=\r\nShe is a really\
+      \ special young woman, on many aspects the opoosite of her grandfather Duke\
+      \ Abdul. Feeling the place she has in the heart of the Tiger since her youngest\
+      \ age, she has made steps no others would even have thought about in the family.\
+      \ Letting the servants freely speak of their wereabouts, the life they have\
+      \ and their diffculties, worrying openly about the soldiers of the House dying\
+      \ on far away systems, she's supposed, according to expert of the house, to\
+      \ be among the next leaders of her generation.\r\nFor the sake of the story,\
+      \ here are a few examples of what she has accomplished, and on the repercussion\
+      \ it will have on the adventure.\r\n\r\nµThe Ukariµ\r\nThey have served Royale\
+      \ House al-Malik for a long time, and their strange behavior has always caught\
+      \ the attention of the young lady. During recent events during the Icon wars\
+      \ (5019), she was brought with her father Count Raifa to a reservation on Aylon,\
+      \ where she witnessed the living conditions of the ukari community. She talked\
+      \ about this to her father, but nothing can decide him to address this subject\
+      \ to the leader of the Ukari horde. She then wrote a letter to her father that\
+      \ she gave to Cardinal Adron Moxlaw, leader of the Temple Avesti. In the letter,\
+      \ she explained that in front of the Pancreator it was an indecent way to treat\
+      \ with the populations fighting for you, and that she decided that she would\
+      \ start an hunger strike hidden and protected by her ukari friends, until the\
+      \ leader make things change or that she becomes a tribute to the Pancreator\
+      \ for the sins of her fathers. She hide for six weeks in the ukari reservation,\
+      \ helped (and watched over) by a handful of loyal followers"
+    rewards: ''
+    card_type: AC
+    archived: false
+    is_ongoing: false
+    epic: 16
+    parent: null
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: true
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '[]'
+- model: scenarist.card
+  pk: 239
+  fields:
+    name: The Automat
+    chapter: '1'
+    date_offset: 0
+    dt: 2022-12-22 01:47:34.445777+00:00
+    sdt: 2023-01-16 03:13:33.383723+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: false
+    full_id: DAL:02:03:01
+    description: The machine created by Balthazar Zemeckis for the specific usage
+      of the Ruby is a marvel of technology. It can decide by itself what is to be
+      done to protect its owner.
+    resolution: ''
+    rewards: ''
+    card_type: EV
+    archived: false
+    is_ongoing: false
+    epic: 16
+    parent: null
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '[]'
+- model: scenarist.card
+  pk: 240
+  fields:
+    name: When things go wrong
+    chapter: '2'
+    date_offset: 0
+    dt: 2022-12-22 01:47:34.449474+00:00
+    sdt: 2023-01-16 03:13:33.383723+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: false
+    full_id: DAL:02:03:02
+    description: "=Security Measures=\r\nThe arrival of the coffin containing the\
+      \ product is supposed to be done from the back door of the suq. It is handled\
+      \ on the Mofat side by the chief of security, ¤zahuras_mofat_almalik¤. He has\
+      \ about twenty ¤saharansafar_troopers¤ to be sure everything goes well.\r\n\r\
+      \n=The best customer ever=\r\nFor the sake of the Ruby, Zemeckis has prepared\
+      \ a masterpiece, the automat Tris. This is mostly a secret, even the players\
+      \ might not be aware of this at first, but the Tiger and the leader of the local\
+      \ Inquisition,¤aldron_moxlaw¤, are well aware of this and specifically agreed.\r\
+      \n\r\n=Noble down=\r\nThe bomb is actually in the a gift chest sent by ¤fritz_faroe¤.\
+      \ Of course, the Justinian Noble cannot be blamed has its because of his ties\
+      \ with ¤gareth_suskin¤ that his name came down to ¤zoon_saphis¤.\r\n\r\n=Pale\
+      \ faces outworlders=\r\nThe track of the Tallahud."
+    resolution: ''
+    rewards: ''
+    card_type: EV
+    archived: false
+    is_ongoing: false
+    epic: 16
+    parent: null
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '["aldron_moxlaw__467", "fritz_faroe__488", "gareth_suskin__489",
+      "saharansafar_troopers__493", "zahuras_mofat_almalik__446"]'
+- model: scenarist.card
+  pk: 241
+  fields:
+    name: The Pursuit
+    chapter: '3'
+    date_offset: 0
+    dt: 2022-12-22 01:47:34.455761+00:00
+    sdt: 2023-01-16 03:13:33.383723+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: false
+    full_id: DAL:02:03:03
+    description: "=Tallahud=\r\nAs outworlders, the mercenaries serving W are ready\
+      \ to make what it takes to reach their rendez-vous point in Pharao. But they\
+      \ must reach their transport through the city of Samarkand.\r\n\r\n¤dark_legionaire¤"
+    resolution: ''
+    rewards: ''
+    card_type: EV
+    archived: false
+    is_ongoing: false
+    epic: 16
+    parent: null
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '["dark_legionaire__506"]'
+- model: scenarist.card
+  pk: 242
+  fields:
+    name: Off World
+    chapter: '4'
+    date_offset: 0
+    dt: 2022-12-22 01:47:34.461316+00:00
+    sdt: 2023-01-16 03:13:33.383723+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: false
+    full_id: DAL:02:03:04
+    description: "=The Argonix=\r\nThat's the Tallahud ship, an escort vessel that\
+      \ landed two weeks ago."
+    resolution: ''
+    rewards: ''
+    card_type: EV
+    archived: false
+    is_ongoing: false
+    epic: 16
+    parent: null
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '[]'
+- model: scenarist.card
+  pk: 243
+  fields:
+    name: Medusa
+    chapter: '3'
+    date_offset: 0
+    dt: 2022-12-22 01:47:34.467994+00:00
+    sdt: 2023-01-16 03:13:33.383723+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: false
+    full_id: DAL:03
+    description: ''
+    resolution: Of course. How
+    rewards: ''
+    card_type: DR
+    archived: false
+    is_ongoing: false
+    epic: 16
+    parent: null
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '[]'
+- model: scenarist.card
+  pk: 244
+  fields:
+    name: Recycle
+    chapter: '2'
+    date_offset: 0
+    dt: 2022-12-22 01:47:34.482951+00:00
+    sdt: 2023-01-16 03:13:33.383723+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: false
+    full_id: DAL:03:02
+    description: ''
+    resolution: Really clear inspiration from Cowboy Bebop sands reading given to
+      Spyke in Asteroid Blues.
+    rewards: ''
+    card_type: AC
+    archived: false
+    is_ongoing: false
+    epic: 16
+    parent: null
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '[]'
+- model: scenarist.card
+  pk: 245
+  fields:
+    name: The Grand Tour
+    chapter: '3'
+    date_offset: 0
+    dt: 2022-12-22 01:47:34.489302+00:00
+    sdt: 2023-01-16 03:13:33.383723+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: false
+    full_id: DAL:03:03
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: AC
+    archived: false
+    is_ongoing: false
+    epic: 16
+    parent: null
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '[]'
+- model: scenarist.card
+  pk: 246
+  fields:
+    name: Security Guys
+    chapter: '1'
+    date_offset: 0
+    dt: 2022-12-22 01:47:34.495802+00:00
+    sdt: 2023-01-16 03:13:33.383723+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: false
+    full_id: DAL:02:02:01
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: EV
+    archived: false
+    is_ongoing: false
+    epic: 16
+    parent: null
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '[]'
+- model: scenarist.card
+  pk: 247
+  fields:
+    name: Technical Staff
+    chapter: '2'
+    date_offset: 0
+    dt: 2022-12-22 01:47:34.499238+00:00
+    sdt: 2023-01-16 03:13:33.383723+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: false
+    full_id: DAL:02:02:02
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: EV
+    archived: false
+    is_ongoing: false
+    epic: 16
+    parent: null
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '[]'
+- model: scenarist.card
+  pk: 249
+  fields:
+    name: Aylon Clans
+    chapter: '1'
+    date_offset: -4
+    dt: 5022-04-08 09:00:00+00:00
+    sdt: 2023-01-16 03:13:33.383723+00:00
+    place: Aylon/Sitol
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: false
+    published: false
+    full_id: EPI.02:ADV.02:EVE.01
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: EV
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 253
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '[]'
+- model: scenarist.card
+  pk: 250
+  fields:
+    name: False Hope
+    chapter: '8'
+    date_offset: 0
+    dt: 5022-04-10 10:00:00+00:00
+    sdt: 2023-03-27 18:00:00+00:00
+    place: Kordeth System | Jumpgate border lanes
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: false
+    published: true
+    full_id: EPI.02:ADV.08
+    description: At the passive jump to the Kordeth System, Antonietta seems bad again.
+      Her vitals are dropping with time, and the Moon Stones seem unable to work on
+      her.
+    resolution: ''
+    rewards: 'Introducing: ¤josef_baranof¤ ¤rilmac_ashtor¤'
+    card_type: AD
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 152
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '["josef_baranof__18", "rilmac_ashtor__549"]'
+- model: scenarist.card
+  pk: 251
+  fields:
+    name: The Ruby Clans
+    chapter: '4'
+    date_offset: 0
+    dt: 5022-01-01 03:00:00+00:00
+    sdt: 2023-01-16 03:13:33.383723+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: false
+    published: false
+    full_id: EPI.02:DRA.04
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: DR
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 152
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '[]'
+- model: scenarist.card
+  pk: 252
+  fields:
+    name: The Emperor and the Kaiser
+    chapter: '2'
+    date_offset: 0
+    dt: 5022-01-01 03:00:00+00:00
+    sdt: 2023-01-16 03:13:33.383723+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: false
+    published: false
+    full_id: EPI.02:DRA.02
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: DR
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 152
+    abstract: Everything related to the geopolitical schism with Gesar / Tallamud
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: true
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '["anniettamorgane_de_sotomasseri__520", "christian_longsdale_hawkwood__509",
+      "felicio_mcgroff__518", "fritz_faroe__488", "gareth_suskin__489", "kasmir_razzula__458",
+      "kyrill_zhukov_decados__546", "lin_bartowski__510", "saskia_varnovicz__189",
+      "tugtanok_oj_malak__5"]'
+- model: scenarist.card
+  pk: 253
+  fields:
+    name: Special Delivery
+    chapter: '2'
+    date_offset: 0
+    dt: 5022-04-12 09:00:00+00:00
+    sdt: 2022-10-07 18:00:00+00:00
+    place: Istakhr System | Istakhr | Samarkand
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: false
+    published: true
+    full_id: EPI.02:ADV.02
+    description: The first step in the gang journey will bring opportunities for the
+      future schemes they will met on the road to Madoc.
+    resolution: ''
+    rewards: ¤eleanore_ivanovicz¤ ¤milos_straban¤ ¤julius_krozen¤ ¤emmett_van_gelder¤
+      ¤portia_justinian¤
+    card_type: AD
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 152
+    abstract: 'Aylon: First milestone'
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '["argus_valerias__537", "balthazar_zemeckis__436", "eleanore_ivanovicz__561",
+      "emmett_van_gelder__502", "gorem_ratosh__542", "ingmar_taloren__539", "jordan_aerix__536",
+      "josefa_aerin__538", "julius_krozen__513", "maria_zebril__540", "milos_straban__514",
+      "olaf_grumaer__541", "portia_justinian__503"]'
+- model: scenarist.card
+  pk: 254
+  fields:
+    name: Fritz
+    chapter: '2'
+    date_offset: 0
+    dt: 5022-01-01 03:00:00+00:00
+    sdt: 2023-01-16 03:13:33.383723+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: false
+    published: false
+    full_id: EPI.02:DRA.03:ACT.02
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: AC
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 260
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '[]'
+- model: scenarist.card
+  pk: 255
+  fields:
+    name: Gareth
+    chapter: '3'
+    date_offset: 0
+    dt: 5022-01-01 03:00:00+00:00
+    sdt: 2023-01-16 03:13:33.383723+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: false
+    published: false
+    full_id: EPI.02:DRA.02:ACT.03
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: AC
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 252
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '[]'
+- model: scenarist.card
+  pk: 256
+  fields:
+    name: Alliances
+    chapter: '9'
+    date_offset: 0
+    dt: 5022-01-01 03:00:00+00:00
+    sdt: 2023-04-03 18:00:00+00:00
+    place: Criticorum System | Criticorum | Acheon City
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: false
+    published: true
+    full_id: EPI.02:ADV.09
+    description: "The things are not that easy. Establishing contact with ¤gunthar_mandelsson¤\
+      \ only led to learn that he works with a dangerous man of Acheon, ¤donovan_van_gelder¤.\r\
+      \n\r\nOn the other hand, the status of ¤anniettamorgane_de_sotomasseri¤ is going\
+      \ worse hour by hour.\r\n\r\nAn assault from ¤syndicate_tech_ninja¤ can be expected\
+      \ as well. They are led by the Syndicate in Acheon by ¤ivan_knoplicz¤."
+    resolution: ¤kissy_moongoose¤ could be convinced to help if she is sure her parent
+      won't get hurt in the process.
+    rewards: ''
+    card_type: AD
+    archived: false
+    is_ongoing: true
+    epic: 17
+    parent: 152
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '["anniettamorgane_de_sotomasseri__520", "christian_longsdale_hawkwood__509",
+      "donovan_van_gelder__551", "eloah_kruegger__114", "gunthar_mandelsson__552",
+      "ivan_knoplicz__556", "jacob_antonovicz_decados__565", "kissy_moongoose__515",
+      "ruffic_aljasum_almalik__562", "sheisinselli_mofat_almalik__485", "syndicate_tech_ninja__554"]'
+- model: scenarist.card
+  pk: 257
+  fields:
+    name: Path of Respect
+    chapter: '16'
+    date_offset: 0
+    dt: 5022-01-01 03:00:00+00:00
+    sdt: 2023-01-16 03:13:33+00:00
+    place: Byzantium Secundus System | Imperial Space Station Argos
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: false
+    published: false
+    full_id: EPI.02:ADV.16
+    description: There is an old ukari mythos that is the origin of an old tale, the
+      one foretold during times of turmoil between the clans. This legend describes
+      a place in the ukari lands, Ajundra Valley, where Anikrunta once gathered the
+      whole ukari and created the First clans. It's a place of purity to which he
+      gave the honor to guard to his sister Ankja, the Saint Patron of Life and Motherhood.
+      The trek that runs accross Ajundra Valley is now sacred and can only be followed
+      people in position of Authority. The legend tells that a lot of challenges await
+      on the trail to free the ones following it from the spoils of the Material World.
+      Those might be mysterious dangers that can in no way be solved by violence as
+      Ankja forbid.
+    resolution: ''
+    rewards: ¤saskia_varnovicz¤ ¤sheisinselli_mofat_almalik¤ ¤tugtanok_oj_malak¤
+    card_type: AD
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 152
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '["saskia_varnovicz__189", "sheisinselli_mofat_almalik__485",
+      "tugtanok_oj_malak__5"]'
+- model: scenarist.card
+  pk: 258
+  fields:
+    name: Under High Pressure
+    chapter: '20'
+    date_offset: 0
+    dt: 5022-01-01 03:00:00+00:00
+    sdt: 2023-01-16 03:13:33+00:00
+    place: Madoc System
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: false
+    published: false
+    full_id: EPI.02:ADV.20
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: AD
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 152
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '[]'
+- model: scenarist.card
+  pk: 259
+  fields:
+    name: Clockworking Business
+    chapter: '1'
+    date_offset: 0
+    dt: 5022-01-01 03:00:00+00:00
+    sdt: 2023-01-16 03:13:33.383723+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: false
+    published: false
+    full_id: EPI.02:DRA.01
+    description: "A few problems here:\r\n- See ¤ingmar_taloren¤ first... :)"
+    resolution: ''
+    rewards: ''
+    card_type: DR
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 152
+    abstract: Everything related to the Lodge of Clockworking activities.
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: true
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '["ingmar_taloren__539"]'
+- model: scenarist.card
+  pk: 260
+  fields:
+    name: Better Worlds
+    chapter: '3'
+    date_offset: 0
+    dt: 5022-01-01 03:00:00+00:00
+    sdt: 2023-01-16 03:13:33.383723+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: false
+    published: false
+    full_id: EPI.02:DRA.03
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: DR
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 152
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '[]'
+- model: scenarist.card
+  pk: 261
+  fields:
+    name: Tallamud
+    chapter: '1'
+    date_offset: 0
+    dt: 5022-01-01 03:00:00+00:00
+    sdt: 2023-01-16 03:13:33.383723+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: false
+    published: false
+    full_id: EPI.02:DRA.02:ACT.01
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: AC
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 252
+    abstract: The current situation about the mexican standoff with Empire/Gesar/Kurgan
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '["christian_longsdale_hawkwood__509", "kasmir_razzula__458",
+      "lin_bartowski__510"]'
+- model: scenarist.card
+  pk: 262
+  fields:
+    name: Madoc's Oro'yms
+    chapter: '1'
+    date_offset: 0
+    dt: 5022-01-01 03:00:00+00:00
+    sdt: 2023-01-16 03:13:33.383723+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: false
+    published: false
+    full_id: EPI.02:DRA.03:ACT.02:SCH.01
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: SH
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 254
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '[]'
+- model: scenarist.card
+  pk: 263
+  fields:
+    name: Funky Juandaastas
+    chapter: '2'
+    date_offset: 0
+    dt: 5022-01-01 03:00:00+00:00
+    sdt: 2023-01-16 03:13:33.383723+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: false
+    published: false
+    full_id: EPI.02:DRA.03:ACT.02:SCH.02
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: SH
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 254
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '[]'
+- model: scenarist.card
+  pk: 264
+  fields:
+    name: Ukari's dope
+    chapter: '1'
+    date_offset: 0
+    dt: 5022-01-01 03:00:00+00:00
+    sdt: 2023-01-16 03:13:33.383723+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: false
+    published: false
+    full_id: EPI.02:DRA.04:SCH.01
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: SH
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 251
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '[]'
+- model: scenarist.card
+  pk: 265
+  fields:
+    name: Demon Terrorist
+    chapter: '1'
+    date_offset: 0
+    dt: 5022-01-01 03:00:00+00:00
+    sdt: 2023-01-16 03:13:33.383723+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: false
+    published: false
+    full_id: EPI.02:DRA.04:ACT.01
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: AC
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 251
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '[]'
+- model: scenarist.card
+  pk: 266
+  fields:
+    name: WTF
+    chapter: '1'
+    date_offset: 0
+    dt: 5022-01-01 03:00:00+00:00
+    sdt: 2023-01-16 03:13:33.383723+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: false
+    published: false
+    full_id: EPI.02:DRA.04:ACT.01:SCH.01
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: SH
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 265
+    abstract: Yes, I know !!
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '[]'
+- model: scenarist.card
+  pk: 267
+  fields:
+    name: Delivery for Balthazar
+    chapter: '2'
+    date_offset: 0
+    dt: 5022-01-01 03:00:00+00:00
+    sdt: 2023-01-16 03:13:33.383723+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: false
+    published: false
+    full_id: EPI.02:DRA.01:ACT.02
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: AC
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 259
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '[]'
+- model: scenarist.card
+  pk: 268
+  fields:
+    name: The Lodge of Clockworking
+    chapter: '1'
+    date_offset: 0
+    dt: 5022-01-01 03:00:00+00:00
+    sdt: 2023-01-16 03:13:33.383723+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: false
+    published: false
+    full_id: EPI.02:DRA.01:ACT.01
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: AC
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 259
+    abstract: A new type of technology
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '[]'
+- model: scenarist.card
+  pk: 269
+  fields:
+    name: Acceptance
+    chapter: '1'
+    date_offset: 0
+    dt: 5022-01-01 03:00:00+00:00
+    sdt: 2023-01-16 03:13:33.383723+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: false
+    published: false
+    full_id: EPI.02:DRA.01:ACT.01:SCH.01
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: SH
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 268
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '[]'
+- model: scenarist.card
+  pk: 270
+  fields:
+    name: Business Through the Empire
+    chapter: '1'
+    date_offset: 0
+    dt: 5022-01-01 03:00:00+00:00
+    sdt: 2023-01-16 03:13:33.383723+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: false
+    published: false
+    full_id: EPI.02:DRA.01:ACT.02:SCH.01
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: SH
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 267
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '[]'
+- model: scenarist.card
+  pk: 271
+  fields:
+    name: Nazi Punks
+    chapter: '1'
+    date_offset: 0
+    dt: 5022-01-01 03:00:00+00:00
+    sdt: 2023-01-16 03:13:33.383723+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: false
+    published: false
+    full_id: EPI.02:DRA.03:BAC.01
+    description: ¤aylon_populists¤
+    resolution: ''
+    rewards: ''
+    card_type: BK
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 260
+    abstract: 'Nameless: Loyalist and populists'
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '[]'
+- model: scenarist.card
+  pk: 272
+  fields:
+    name: Vutar Snake
+    chapter: '1'
+    date_offset: 0
+    dt: 5022-01-01 03:00:00+00:00
+    sdt: 2023-01-16 03:13:33.383723+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: false
+    published: false
+    full_id: EPI.02:DRA.04:BAC.01
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: BK
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 251
+    abstract: Ukari lamprey with opiated saliva
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '[]'
+- model: scenarist.card
+  pk: 273
+  fields:
+    name: Automat Construction
+    chapter: '0'
+    date_offset: 0
+    dt: 5022-01-01 03:00:00+00:00
+    sdt: 2023-01-16 03:13:33.383723+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: false
+    published: false
+    full_id: EPI.02:DRA.01:ACT.01:BAC.00
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: BK
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 268
+    abstract: Generic info
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '[]'
+- model: scenarist.card
+  pk: 274
+  fields:
+    name: Nanotech
+    chapter: '2'
+    date_offset: 0
+    dt: 5022-01-02 03:00:00+00:00
+    sdt: 2023-01-16 03:13:33.383723+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: false
+    published: false
+    full_id: EPI.02:DRA.02:ACT.02:BAC.02
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: BK
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 148
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '[]'
+- model: scenarist.card
+  pk: 275
+  fields:
+    name: Scravers Delivery in Sunvale
+    chapter: '1'
+    date_offset: 5
+    dt: 5022-04-25 09:00:00+00:00
+    sdt: 2023-01-16 03:13:33+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: false
+    published: false
+    full_id: EPI.02:ADV.06:SCE.01
+    description: This is supposed to be delivered in Combat Zone 45 to ¤rilmac_ashtor¤
+    resolution: ''
+    rewards: ''
+    card_type: SC
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 141
+    abstract: The first address is in Aylon's Capital
+    battle_scene: false
+    chase_scene: false
+    action_scene: true
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: true
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '["rilmac_ashtor__549"]'
+- model: scenarist.card
+  pk: 276
+  fields:
+    name: Van Dyke Business
+    chapter: '5'
+    date_offset: 120
+    dt: 5022-05-01 03:00:00+00:00
+    sdt: 2023-01-16 03:13:33.383723+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: false
+    published: false
+    full_id: EPI.02:DRA.05
+    description: "Special Deliveries\r\n\r\nOn Aylon, the players will be spied by\
+      \ ¤moira_van_der_gart¤ from Fat Esteban if they can't maintain a low profile."
+    resolution: 'Van der Gart will use a populist, Bertho Sandoval to get more information
+      on the team and to measure their survival abilities. Her mission his to challenge
+      the PC for the Syndicate, and she will not hesitate for a second to spend every
+      means she has at her disposal. Including Bertho''s life. There''s one track
+      that the team can use to track Bertho and Moira''s activity: his neighbour/part
+      time lover Corti that works with the physicians in Riva. She saw Moira, the
+      last girlfriend of Bertho, and she was aware that that woman was out of the
+      league of the poor drifter.'
+    rewards: It's possible to recruit ¤corti_van_dyke¤ to avoid her to have a sad
+      fate among the populists that will accuse her of the murder of Bertho.
+    card_type: DR
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 152
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '["artmil_van_dyke__543", "basil_questro__544", "corti_van_dyke__548",
+      "moira_van_der_gart__545"]'
+- model: scenarist.card
+  pk: 277
+  fields:
+    name: Van Dyke Express
+    chapter: '1'
+    date_offset: 10
+    dt: 5022-05-11 03:00:00+00:00
+    sdt: 2023-01-16 03:13:33.383723+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: false
+    published: false
+    full_id: EPI.02:DRA.05:ACT.01
+    description: First delivery is to ¤artmil_van_dyke¤ and ¤basil_questro¤
+    resolution: ''
+    rewards: ''
+    card_type: AC
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 276
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '["artmil_van_dyke__543", "basil_questro__544"]'
+- model: scenarist.card
+  pk: 278
+  fields:
+    name: Delivery to Criticorum
+    chapter: '2'
+    date_offset: 0
+    dt: 5022-05-11 03:00:00+00:00
+    sdt: 2023-01-16 03:13:33.383723+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: false
+    published: false
+    full_id: EPI.02:DRA.05:ACT.01:SCH.02
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: SH
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 277
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '[]'
+- model: scenarist.card
+  pk: 279
+  fields:
+    name: Delivery to Madoc
+    chapter: '4'
+    date_offset: 0
+    dt: 5022-05-11 03:00:00+00:00
+    sdt: 2023-01-16 03:13:33.383723+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: false
+    published: false
+    full_id: EPI.02:DRA.05:ACT.01:SCH.04
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: SH
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 277
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '[]'
+- model: scenarist.card
+  pk: 280
+  fields:
+    name: Delivery to Byzantium Secundus
+    chapter: '3'
+    date_offset: 0
+    dt: 5022-05-11 03:00:00+00:00
+    sdt: 2023-01-16 03:13:33.383723+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: false
+    published: false
+    full_id: EPI.02:DRA.05:ACT.01:SCH.03
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: SH
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 277
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '[]'
+- model: scenarist.card
+  pk: 281
+  fields:
+    name: Delivery to Aylon
+    chapter: '1'
+    date_offset: 10
+    dt: 5022-05-21 03:00:00+00:00
+    sdt: 2023-01-16 03:13:33.383723+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: false
+    published: false
+    full_id: EPI.02:DRA.05:ACT.01:SCH.01
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: SH
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 277
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '[]'
+- model: scenarist.card
+  pk: 282
+  fields:
+    name: My friend's enemies
+    chapter: '4'
+    date_offset: 0
+    dt: 5022-04-12 09:00:00+00:00
+    sdt: 2023-01-16 03:13:33.383723+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: false
+    published: false
+    full_id: EPI.02:ADV.02:SCE.04
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: SC
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 253
+    abstract: So, do you know that Varnovicz Countess?
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: true
+    roleplay_scene: true
+    business_scene: false
+    mystery_scene: true
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '[]'
+- model: scenarist.card
+  pk: 283
+  fields:
+    name: Tax Collectors
+    chapter: '3'
+    date_offset: 2
+    dt: 5022-04-14 09:00:00+00:00
+    sdt: 2023-01-16 03:13:33.383723+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: false
+    published: false
+    full_id: EPI.02:ADV.02:SCE.03
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: SC
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 253
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: true
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '[]'
+- model: scenarist.card
+  pk: 284
+  fields:
+    name: Aylon Overview
+    chapter: '2'
+    date_offset: 0
+    dt: 5022-04-12 09:00:00+00:00
+    sdt: 2023-01-16 03:13:33.383723+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: false
+    published: false
+    full_id: EPI.02:ADV.02:BAC.02
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: BK
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 253
+    abstract: Quick reminder of the system
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '[]'
+- model: scenarist.card
+  pk: 285
+  fields:
+    name: 'Aylon: Transportation and Vehicles'
+    chapter: '5'
+    date_offset: 0
+    dt: 5022-04-12 09:00:00+00:00
+    sdt: 2023-01-16 03:13:33.383723+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: false
+    published: false
+    full_id: EPI.02:ADV.02:BAC.05
+    description: The home of Jonas McGerren, McGerren Industries is installed on Aylon
+      since 4320 AD. They have complete monopoly on the vehicles sold here, and propose
+      a large panel of solutions, from the classic 4X AC transportation series to
+      the brand new "Skydweller" quadcopter "LRSD 8X" series.
+    resolution: "McGerren's rental per week:\r\n- McG LRSD 83: the basic one, £150.\r\
+      \n- McG LRSD 88KR: Killing Raptor, £250, special licence needed.\r\n- McG 48:\
+      \ £30"
+    rewards: ''
+    card_type: BK
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 253
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '[]'
+- model: scenarist.card
+  pk: 286
+  fields:
+    name: Col. Morpheus
+    chapter: '2'
+    date_offset: 1
+    dt: 5022-04-21 09:00:00+00:00
+    sdt: 2023-01-16 03:13:33+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: false
+    published: false
+    full_id: EPI.02:ADV.06:SCE.02
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: SC
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 141
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: true
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: true
+    roleplay_scene: true
+    business_scene: true
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '["falco_frazzetti_masseri__528", "helion_liu_phan_li_halan__531",
+      "jezebel_anhzuram_almalik__525", "laera_dortmag__530", "leyria_lefanu_drougeglace__532",
+      "nuno_rolas_de_hazat__529", "otis_glover_juandaastas__527"]'
+- model: scenarist.card
+  pk: 287
+  fields:
+    name: A new player in the game
+    chapter: '3'
+    date_offset: 4
+    dt: 5022-04-24 09:00:00+00:00
+    sdt: 2023-01-16 03:13:33+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: false
+    published: false
+    full_id: EPI.02:ADV.06:SCE.03
+    description: ¤gojasarik_mandreldar¤
+    resolution: Mandrelvort, nickname for an experienced obun spy working for House
+      Juandaastas.
+    rewards: ''
+    card_type: SC
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 141
+    abstract: A strange individual called Mandrelvort tries to get informations about
+      the gang.
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '["gojasarik_mandreldar__557"]'
+- model: scenarist.card
+  pk: 288
+  fields:
+    name: The Noble & The Soldier
+    chapter: '6'
+    date_offset: 0
+    dt: 5022-04-12 09:00:00+00:00
+    sdt: 2023-01-16 03:27:26.977236+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: false
+    published: false
+    full_id: EPI.02:ADV.02:SCH.06
+    description: The story beyond Clinton Austruy (Pandora) and Colonel Mervin Gibraltar
+      (Morpheus)
+    resolution: ''
+    rewards: ''
+    card_type: SH
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 253
+    abstract: Pandora and Morpheus
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '[]'
+- model: scenarist.card
+  pk: 289
+  fields:
+    name: Socialism
+    chapter: '0'
+    date_offset: 0
+    dt: 5022-04-21 09:00:00+00:00
+    sdt: 2023-01-19 21:04:29.862637+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: false
+    published: false
+    full_id: EPI.02:ADV.06:SCE.03:SCH.00
+    description: 'He is a member of a very famous faction of House al-Malik: The Third-Republicans.
+      More precisely, he belongs to the more philosophical part of this huge faction,
+      the Socialists, eager to bring equality between people and species.'
+    resolution: ''
+    rewards: "Members of note of this institution (can easily become allies):\r\n\
+      - ¤jezebel_anhzuram_almalik¤\r\n- ¤otis_glover_juandaastas¤\r\n- ¤falco_frazzetti_masseri¤\r\
+      \n- ¤nuno_rolas_de_hazat¤\r\n- ¤laera_dortmag¤\r\n- ¤helion_liu_phan_li_halan¤\r\
+      \n- ¤leyria_lefanu_drougeglace¤"
+    card_type: SH
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 286
+    abstract: What about Morpheus ?
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '["falco_frazzetti_masseri__528", "helion_liu_phan_li_halan__531",
+      "jezebel_anhzuram_almalik__525", "laera_dortmag__530", "leyria_lefanu_drougeglace__532",
+      "nuno_rolas_de_hazat__529", "otis_glover_juandaastas__527"]'
+- model: scenarist.card
+  pk: 290
+  fields:
+    name: Chapter House
+    chapter: '7'
+    date_offset: 0
+    dt: 5022-04-12 09:00:00+00:00
+    sdt: 2023-02-04 21:36:01.867512+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: false
+    published: false
+    full_id: EPI.02:ADV.02:SCH.07
+    description: ¤josefa_aerin¤ ¤argus_valerias¤ ¤jordan_aerix¤
+    resolution: ''
+    rewards: ''
+    card_type: SH
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 253
+    abstract: First meeting with Chapter House Disciples
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '["argus_valerias__537", "jordan_aerix__536", "josefa_aerin__538"]'
+- model: scenarist.card
+  pk: 291
+  fields:
+    name: Taloren
+    chapter: '8'
+    date_offset: 0
+    dt: 5022-04-12 09:00:00+00:00
+    sdt: 2023-03-05 22:16:08.888920+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: false
+    published: false
+    full_id: EPI.02:ADV.02:SCH.08
+    description: "Where ¤balthazar_zemeckis¤ was not really cool with a fellow apprentice...\r\
+      \n\r\nHe wants revenge, and has asked help to the Zebril Cartel\r\n\r\n¤gorem_ratosh¤\r\
+      \n¤maria_zebril¤\r\n¤olaf_grumaer¤"
+    resolution: ¤ingmar_taloren¤
+    rewards: ''
+    card_type: SH
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 253
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '["balthazar_zemeckis__436", "gorem_ratosh__542", "ingmar_taloren__539",
+      "maria_zebril__540", "olaf_grumaer__541"]'
+- model: scenarist.card
+  pk: 292
+  fields:
+    name: Shotgun
+    chapter: '7'
+    date_offset: 0
+    dt: 5022-04-20 09:00:00+00:00
+    sdt: 2023-03-06 18:00:00+00:00
+    place: Aylon System | Aylon | Sunvale
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: false
+    published: true
+    full_id: EPI.02:ADV.07
+    description: ''
+    resolution: ''
+    rewards: 'Introducing: ¤corti_van_dyke¤'
+    card_type: AD
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 152
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '["corti_van_dyke__548", "moira_van_der_gart__545"]'
+- model: scenarist.card
+  pk: 293
+  fields:
+    name: The Tarentula
+    chapter: '4'
+    date_offset: 0
+    dt: 5022-01-01 03:00:00+00:00
+    sdt: 2022-11-11 18:00:00+00:00
+    place: Istakhr System
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: false
+    published: true
+    full_id: EPI.02:ADV.04
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: AD
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 152
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '["sofia_zalievicz__526"]'
+- model: scenarist.card
+  pk: 294
+  fields:
+    name: Aylon System
+    chapter: '5'
+    date_offset: 0
+    dt: 5022-01-01 03:00:00+00:00
+    sdt: 2022-12-09 18:00:00+00:00
+    place: Aylon System
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: false
+    published: true
+    full_id: EPI.02:ADV.05
+    description: Here the character will meet ¤marvin_striekemann¤ on Yelandra Station
+      (Al-Malik Casino Station), according to the deal contracted with ¤clinton_austruy¤
+    resolution: ¤arcturus_fendren_justinian¤ is here with his entourage.
+    rewards: ¤anton_liebov¤
+    card_type: AD
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 152
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '["anton_liebov__524", "arcturus_fendren_justinian__519", "clinton_austruy__495",
+      "marvin_striekemann__533"]'
+- model: scenarist.card
+  pk: 295
+  fields:
+    name: A Scent of Darkness
+    chapter: '3'
+    date_offset: 0
+    dt: 5022-01-01 03:00:00+00:00
+    sdt: 2022-10-21 18:00:00+00:00
+    place: Istakhr System
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: false
+    published: true
+    full_id: EPI.02:ADV.03
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: AD
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 152
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '[]'
+- model: scenarist.card
+  pk: 296
+  fields:
+    name: Aftermath
+    chapter: '1'
+    date_offset: 0
+    dt: 5022-01-01 03:00:00+00:00
+    sdt: 2022-09-15 18:00:00+00:00
+    place: Istakhr System | Istakhr | Samarkand
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: false
+    published: true
+    full_id: EPI.02:ADV.01
+    description: ¤saskia_varnovicz¤
+    resolution: ''
+    rewards: ''
+    card_type: AD
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 152
+    abstract: Preparation for the campaign after the events on Istakhr
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '["eleanore_ivanovicz__561", "julius_krozen__513", "milos_straban__514",
+      "penelope_heighe__564", "salim_mbassa__563", "saskia_varnovicz__189", "sebastian_lowery__522",
+      "sofia_zalievicz__526"]'
+- model: scenarist.card
+  pk: 297
+  fields:
+    name: Rocket !!!
+    chapter: '2'
+    date_offset: 0
+    dt: 5022-04-20 09:00:00+00:00
+    sdt: 2023-04-01 14:38:32+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: false
+    full_id: EPI.02:ADV.07:SCE.02
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: SC
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 292
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: true
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '[]'
+- model: scenarist.card
+  pk: 298
+  fields:
+    name: Cards on a desk
+    chapter: '3'
+    date_offset: 0
+    dt: 5022-04-20 09:00:00+00:00
+    sdt: 2023-04-01 14:38:36+00:00
+    place: Aylson System | Aylon | Sunvale | RiVA border
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: false
+    full_id: EPI.02:ADV.07:SCH.03
+    description: ¤moira_van_der_gart¤
+    resolution: ''
+    rewards: ''
+    card_type: SH
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 292
+    abstract: Where the syndicate enters in action for the first time
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '["moira_van_der_gart__545"]'
+- model: scenarist.card
+  pk: 299
+  fields:
+    name: The City of Shelves
+    chapter: '13'
+    date_offset: 0
+    dt: 5022-01-01 03:00:00+00:00
+    sdt: 2023-04-08 11:37:14+00:00
+    place: Byzantium Secundus
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: false
+    full_id: EPI.02:ADV.13
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: AD
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 152
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '[]'
+- model: scenarist.card
+  pk: 300
+  fields:
+    name: Mandelsson Escapes!
+    chapter: '1'
+    date_offset: 0
+    dt: 5022-01-01 03:00:00+00:00
+    sdt: 2023-04-08 11:42:22+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: false
+    full_id: EPI.02:ADV.09:EVE.01
+    description: With imperial agents looking for him, ¤gunthar_mandelsson¤ will panick
+      and go straigth to ¤donovan_van_gelder¤. His patron will take the things lightly
+      by telling him not to care too much about this. Fearing for his life or worse,
+      behing sent back to Gesar Fiefs, the bookmaker will try to go off world to the
+      Delphi System where he has one contact. He will use is acquaintances in House
+      Al-Malik, espcially with ¤ruffic_aljasum_almalik¤. The noble has one special
+      spaceshift for this kind of opperation, the £Wondercliff£, an Al-Malik escort
+      already manned.
+    resolution: ''
+    rewards: ''
+    card_type: EV
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 256
+    abstract: The guy will try to go off world
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '["donovan_van_gelder__551", "gunthar_mandelsson__552", "ruffic_aljasum_almalik__562"]'
+- model: scenarist.card
+  pk: 301
+  fields:
+    name: The Syndicate Powerbase
+    chapter: '2'
+    date_offset: 0
+    dt: 5022-01-01 03:00:00+00:00
+    sdt: 2023-04-08 11:42:27+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: false
+    full_id: EPI.02:ADV.09:SCE.02
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: SC
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 256
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '[]'
+- model: scenarist.card
+  pk: 302
+  fields:
+    name: Physician in the Acheon
+    chapter: '3'
+    date_offset: 0
+    dt: 5022-01-01 03:00:00+00:00
+    sdt: 2023-04-08 11:45:50+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: false
+    full_id: EPI.02:ADV.09:SCE.03
+    description: 'There is one excellent physician in the Acheon Arenas: ¤ebnis_telinto¤.
+      A former member of the Lodge, he was blackmailed because of his fondness for
+      technology. He is now of great use to ¤krudal_ibn_fasser¤, the Lord of the Games.'
+    resolution: ''
+    rewards: ''
+    card_type: SC
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 256
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '[]'
+- model: scenarist.card
+  pk: 303
+  fields:
+    name: Trial by Combat
+    chapter: '12'
+    date_offset: 0
+    dt: 5022-01-01 03:00:00+00:00
+    sdt: 2023-04-08 15:49:23+00:00
+    place: Criticorum System
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: false
+    full_id: EPI.02:ADV.12
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: AD
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 152
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '[]'
+- model: scenarist.card
+  pk: 304
+  fields:
+    name: Watchmen
+    chapter: '18'
+    date_offset: 0
+    dt: 5022-01-01 03:00:00+00:00
+    sdt: 2023-04-09 08:45:13+00:00
+    place: Madoc System
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: false
+    full_id: EPI.02:ADV.18
+    description: ¤andrej_maczanpof¤
+    resolution: ¤vaclav_trevil¤
+    rewards: ''
+    card_type: AD
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 152
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '["andrej_maczanpof__99", "vaclav_trevil__24"]'
+- model: scenarist.card
+  pk: 305
+  fields:
+    name: Yelandra Station
+    chapter: '1'
+    date_offset: 0
+    dt: 5022-01-01 03:00:00+00:00
+    sdt: 2023-04-09 11:43:14+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: false
+    full_id: EPI.02:ADV.05:SCE.01
+    description: "¤leopold_justinian¤\r\n¤angmar_fritz¤\r\n¤mei_lao¤\r\n¤margaux_fliek¤\r\
+      \n¤drahimat_shafeer_almalik¤"
+    resolution: ''
+    rewards: ''
+    card_type: SC
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 294
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '[]'
+- model: scenarist.card
+  pk: 306
+  fields:
+    name: Decados Backup
+    chapter: '2'
+    date_offset: 0
+    dt: 5022-01-01 03:00:00+00:00
+    sdt: 2023-04-09 11:44:02+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: false
+    full_id: EPI.02:ADV.05:SCE.02
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: SC
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 294
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '[]'
+- model: scenarist.card
+  pk: 307
+  fields:
+    name: The Recruit
+    chapter: '1'
+    date_offset: 0
+    dt: 5022-01-01 03:00:00+00:00
+    sdt: 2023-04-09 11:45:20+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: true
+    full_id: EPI.02:ADV.04:SCE.01
+    description: sofia_zalievicz
+    resolution: ''
+    rewards: ¤sofia_zalievicz¤
+    card_type: SC
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 293
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '["sofia_zalievicz__526"]'
+- model: scenarist.card
+  pk: 308
+  fields:
+    name: Varnovicz Bombing [News 1]
+    chapter: '3'
+    date_offset: 0
+    dt: 5022-01-01 03:00:00+00:00
+    sdt: 2023-04-09 11:48:02+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: false
+    full_id: EPI.02:ADV.05:EVE.03
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: EV
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 294
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '[]'
+- model: scenarist.card
+  pk: 309
+  fields:
+    name: Varnovicz Bombing [News 2]
+    chapter: '1'
+    date_offset: 0
+    dt: 5022-04-10 10:00:00+00:00
+    sdt: 2023-04-09 11:49:10+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: false
+    full_id: EPI.02:ADV.08:EVE.01
+    description: "¤saskia_varnovicz¤\r\n¤bremov_gundri¤"
+    resolution: ''
+    rewards: ''
+    card_type: EV
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 250
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '["bremov_gundri__11", "saskia_varnovicz__189"]'
+- model: scenarist.card
+  pk: 310
+  fields:
+    name: Nobility Drop
+    chapter: '2'
+    date_offset: 0
+    dt: 5022-04-10 10:00:00+00:00
+    sdt: 2023-04-09 11:49:45+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: false
+    full_id: EPI.02:ADV.08:SCE.02
+    description: ''
+    resolution: ''
+    rewards: ¤josef_baranof¤
+    card_type: SC
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 250
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '["josef_baranof__18"]'
+- model: scenarist.card
+  pk: 311
+  fields:
+    name: The Gaze of the Eye
+    chapter: '14'
+    date_offset: 0
+    dt: 5022-01-01 03:00:00+00:00
+    sdt: 2023-04-09 11:51:30+00:00
+    place: Byzantium Secundus
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: false
+    full_id: EPI.02:ADV.14
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: AD
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 152
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '[]'
+- model: scenarist.card
+  pk: 312
+  fields:
+    name: Providencial Man
+    chapter: '10'
+    date_offset: 0
+    dt: 5022-01-01 03:00:00+00:00
+    sdt: 2023-04-09 11:51:31+00:00
+    place: Criticorum System
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: false
+    full_id: EPI.02:ADV.10
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: AD
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 152
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '[]'
+- model: scenarist.card
+  pk: 313
+  fields:
+    name: The Butcher
+    chapter: '11'
+    date_offset: 0
+    dt: 5022-01-01 03:00:00+00:00
+    sdt: 2023-04-09 11:54:59+00:00
+    place: Criticorum System
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: false
+    full_id: EPI.02:ADV.11
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: AD
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 152
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '[]'
+- model: scenarist.card
+  pk: 314
+  fields:
+    name: '2023-04-09 11:55:00.912731+00:00'
+    chapter: '0'
+    date_offset: 0
+    dt: 5022-01-01 03:00:00+00:00
+    sdt: 2023-04-09 11:55:00.910745+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: false
+    full_id: EPI.02:SCH.00
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: SH
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 152
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '[]'
+- model: scenarist.card
+  pk: 315
+  fields:
+    name: Border Authorities
+    chapter: '4'
+    date_offset: 0
+    dt: 5022-04-10 10:00:00+00:00
+    sdt: 2023-04-10 18:34:47+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: false
+    full_id: EPI.02:ADV.08:SCE.04
+    description: '¤lej_wan_mandreldar¤: You cannot by or sell for more than 1000£b
+      on the system.'
+    resolution: ''
+    rewards: ''
+    card_type: SC
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 250
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '["lej_wan_mandreldar__558"]'
+- model: scenarist.card
+  pk: 316
+  fields:
+    name: Pharao Ship Collection
+    chapter: '2'
+    date_offset: 0
+    dt: 5022-01-01 03:00:00+00:00
+    sdt: 2023-04-10 19:43:35+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: false
+    full_id: EPI.02:ADV.04:SCE.02
+    description: "¤tramel_pahenard¤\r\n¤lindas_kramer¤: Assidian Pilot Agent\r\n¤casper_neiruk¤:\
+      \ The Invisible Path"
+    resolution: ''
+    rewards: ''
+    card_type: SC
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 293
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '[]'
+- model: scenarist.card
+  pk: 317
+  fields:
+    name: Kraken & Krozen Out of Order
+    chapter: '1'
+    date_offset: 0
+    dt: 5022-01-01 03:00:00+00:00
+    sdt: 2023-04-10 19:54:43+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: false
+    full_id: EPI.02:ADV.03:EVE.01
+    description: ¤zahid_zlaber_tramla¤ Detective of the Inquisition
+    resolution: ''
+    rewards: ''
+    card_type: EV
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 295
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '[]'
+- model: scenarist.card
+  pk: 318
+  fields:
+    name: The Last 16
+    chapter: '1'
+    date_offset: 0
+    dt: 5022-01-01 03:00:00+00:00
+    sdt: 2023-04-10 19:57:37+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: false
+    full_id: EPI.02:ADV.01:SCE.01
+    description: "¤obo_kaktakena¤\r\n¤ricardo_cuervas¤\r\n¤sofia_zalievicz¤"
+    resolution: ''
+    rewards: ''
+    card_type: SC
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 296
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '["sofia_zalievicz__526"]'
+- model: scenarist.card
+  pk: 319
+  fields:
+    name: Jumpgate Maintenance
+    chapter: '2'
+    date_offset: 0
+    dt: 5022-01-01 03:00:00+00:00
+    sdt: 2023-04-10 20:00:16+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: false
+    full_id: EPI.02:ADV.01:SCE.02
+    description: "¤penelope_heighe¤\r\n¤salim_mbassa¤"
+    resolution: ''
+    rewards: ''
+    card_type: SC
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 296
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '["penelope_heighe__564", "salim_mbassa__563"]'
+- model: scenarist.card
+  pk: 320
+  fields:
+    name: The Syndicate
+    chapter: '3'
+    date_offset: 0
+    dt: 5022-01-01 03:00:00+00:00
+    sdt: 2023-04-10 20:43:33+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: false
+    full_id: EPI.02:ADV.01:SCH.03
+    description: "=The Begining=\r\nNine years ago, ¤eleanore_ivanovicz¤ turned her\
+      \ back to House Decados to enter the ranks of a rising scraver cartel known\
+      \ as the £Syndicate£. Here, she backed a young member known as ¤sebastian_lowery¤.\
+      \ Thanks to her financial and contacts back up, the young man became one of\
+      \ the proeminents members of the Cartel.\r\nHowever, two years ago, Sebastian\
+      \ rose up as Fat Esteban and took control. Following her guts, EL.I left with\
+      \ a few friends, among them ¤milos_straban¤ and ¤julius_krozen¤.\r\n=Former\
+      \ Syndicate=\r\n=Fat Esteban=\r\n=The Syndicate Now="
+    resolution: ''
+    rewards: ''
+    card_type: SH
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 296
+    abstract: The whole story about EL.I and the Syndicate
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '["eleanore_ivanovicz__561", "julius_krozen__513", "milos_straban__514",
+      "sebastian_lowery__522"]'
+- model: scenarist.card
+  pk: 321
+  fields:
+    name: Escort Service
+    chapter: '0'
+    date_offset: 0
+    dt: 5022-04-10 10:00:00+00:00
+    sdt: 2023-04-10 21:38:26+00:00
+    place: Criticorum System | Criticorum | Acheon | Perfume District
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: false
+    full_id: EPI.02:ADV.08:SCE.00
+    description: ¤evan_auckly¤ ¤helma_moran¤
+    resolution: ''
+    rewards: ''
+    card_type: SC
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 250
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '["evan_auckly__553", "helma_moran__550"]'
+- model: scenarist.card
+  pk: 322
+  fields:
+    name: Varnovicz Bombing [News 3]
+    chapter: '4'
+    date_offset: 0
+    dt: 5022-01-01 03:00:00+00:00
+    sdt: 2023-04-10 21:48:35+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: false
+    full_id: EPI.02:ADV.09:EVE.04
+    description: "=The News=\r\nA declaration has at least been made by ¤sheisinselli_mofat_almalik¤.\
+      \ The noticeable point about the declaration is that she points out the fact\
+      \ that the graffina has been outraged on Al-Malik soil. A picture of the Grafina\
+      \ is even shown at her funerals, once again perfectly acted by ¤eloah_kruegger¤\r\
+      \n=Consequences=\r\nµGlobal Reactionµ\r\nµDecados Reactionµ\r\nFor most of them,\
+      \ the Graffina is dead. Even to the ones close to her entourage or belonging\
+      \ to her direct family do not know. The whole script of her disappearance is\
+      \ between ¤christian_longsdale_hawkwood¤, ¤jacob_antonovicz_decados¤ and ¤corinthis_torenson¤\r\
+      \n=Other intel carried="
+    resolution: ''
+    rewards: ''
+    card_type: EV
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 256
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '["christian_longsdale_hawkwood__509", "eloah_kruegger__114",
+      "jacob_antonovicz_decados__565", "sheisinselli_mofat_almalik__485"]'
+- model: scenarist.card
+  pk: 323
+  fields:
+    name: Varnovicz Bombing [News 4]
+    chapter: '0'
+    date_offset: 0
+    dt: 5022-01-01 03:00:00+00:00
+    sdt: 2023-04-10 21:50:32+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: false
+    full_id: EPI.02:ADV.13:EVE.00
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: EV
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 299
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '[]'
+- model: scenarist.card
+  pk: 324
+  fields:
+    name: Varnovicz Bombing [News 5]
+    chapter: '0'
+    date_offset: 0
+    dt: 5022-01-01 03:00:00+00:00
+    sdt: 2023-04-10 21:52:04+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: false
+    full_id: EPI.02:ADV.18:EVE.00
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: EV
+    archived: false
+    is_ongoing: false
+    epic: 17
+    parent: 304
+    abstract: ''
+    battle_scene: false
+    chase_scene: false
+    action_scene: false
+    technical_scene: false
+    spiritual_scene: false
+    political_scene: false
+    roleplay_scene: false
+    business_scene: false
+    mystery_scene: false
+    downtime_scene: false
+    experience: 0
+    dramatis_personae: '[]'

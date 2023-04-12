@@ -1,0 +1,595 @@
+- model: collector.shieldcusto
+  pk: 3
+  fields:
+    character_custo: 20
+    shield_ref: 2
+- model: collector.shieldcusto
+  pk: 4
+  fields:
+    character_custo: 164
+    shield_ref: 1
+- model: collector.shieldcusto
+  pk: 5
+  fields:
+    character_custo: 16
+    shield_ref: 2
+- model: collector.shieldcusto
+  pk: 6
+  fields:
+    character_custo: 98
+    shield_ref: 1
+- model: collector.shieldcusto
+  pk: 7
+  fields:
+    character_custo: 181
+    shield_ref: 1
+- model: collector.shieldcusto
+  pk: 8
+  fields:
+    character_custo: 189
+    shield_ref: 2
+- model: collector.shieldcusto
+  pk: 9
+  fields:
+    character_custo: 135
+    shield_ref: 1
+- model: collector.shieldcusto
+  pk: 11
+  fields:
+    character_custo: 91
+    shield_ref: 2
+- model: collector.shieldcusto
+  pk: 12
+  fields:
+    character_custo: 35
+    shield_ref: 1
+- model: collector.shieldcusto
+  pk: 13
+  fields:
+    character_custo: 58
+    shield_ref: 3
+- model: collector.shieldcusto
+  pk: 14
+  fields:
+    character_custo: 61
+    shield_ref: 1
+- model: collector.shieldcusto
+  pk: 15
+  fields:
+    character_custo: 38
+    shield_ref: 1
+- model: collector.shieldcusto
+  pk: 17
+  fields:
+    character_custo: 22
+    shield_ref: 1
+- model: collector.shieldcusto
+  pk: 18
+  fields:
+    character_custo: 191
+    shield_ref: 2
+- model: collector.shieldcusto
+  pk: 19
+  fields:
+    character_custo: 192
+    shield_ref: 1
+- model: collector.shieldcusto
+  pk: 20
+  fields:
+    character_custo: 194
+    shield_ref: 1
+- model: collector.shieldcusto
+  pk: 21
+  fields:
+    character_custo: 151
+    shield_ref: 2
+- model: collector.shieldcusto
+  pk: 22
+  fields:
+    character_custo: 2
+    shield_ref: 1
+- model: collector.shieldcusto
+  pk: 23
+  fields:
+    character_custo: 17
+    shield_ref: 3
+- model: collector.shieldcusto
+  pk: 24
+  fields:
+    character_custo: 59
+    shield_ref: 4
+- model: collector.shieldcusto
+  pk: 25
+  fields:
+    character_custo: 178
+    shield_ref: 1
+- model: collector.shieldcusto
+  pk: 26
+  fields:
+    character_custo: 203
+    shield_ref: 1
+- model: collector.shieldcusto
+  pk: 27
+  fields:
+    character_custo: 198
+    shield_ref: 1
+- model: collector.shieldcusto
+  pk: 28
+  fields:
+    character_custo: 130
+    shield_ref: 1
+- model: collector.shieldcusto
+  pk: 29
+  fields:
+    character_custo: 65
+    shield_ref: 1
+- model: collector.shieldcusto
+  pk: 30
+  fields:
+    character_custo: 200
+    shield_ref: 4
+- model: collector.shieldcusto
+  pk: 31
+  fields:
+    character_custo: 210
+    shield_ref: 1
+- model: collector.shieldcusto
+  pk: 32
+  fields:
+    character_custo: 28
+    shield_ref: 1
+- model: collector.shieldcusto
+  pk: 33
+  fields:
+    character_custo: 183
+    shield_ref: 1
+- model: collector.shieldcusto
+  pk: 34
+  fields:
+    character_custo: 93
+    shield_ref: 2
+- model: collector.shieldcusto
+  pk: 35
+  fields:
+    character_custo: 150
+    shield_ref: 2
+- model: collector.shieldcusto
+  pk: 36
+  fields:
+    character_custo: 13
+    shield_ref: 1
+- model: collector.shieldcusto
+  pk: 37
+  fields:
+    character_custo: 99
+    shield_ref: 1
+- model: collector.shieldcusto
+  pk: 38
+  fields:
+    character_custo: 146
+    shield_ref: 5
+- model: collector.shieldcusto
+  pk: 39
+  fields:
+    character_custo: 202
+    shield_ref: 2
+- model: collector.shieldcusto
+  pk: 40
+  fields:
+    character_custo: 77
+    shield_ref: 5
+- model: collector.shieldcusto
+  pk: 41
+  fields:
+    character_custo: 126
+    shield_ref: 5
+- model: collector.shieldcusto
+  pk: 42
+  fields:
+    character_custo: 5
+    shield_ref: 6
+- model: collector.shieldcusto
+  pk: 43
+  fields:
+    character_custo: 243
+    shield_ref: 5
+- model: collector.shieldcusto
+  pk: 44
+  fields:
+    character_custo: 257
+    shield_ref: 1
+- model: collector.shieldcusto
+  pk: 45
+  fields:
+    character_custo: 261
+    shield_ref: 6
+- model: collector.shieldcusto
+  pk: 46
+  fields:
+    character_custo: 97
+    shield_ref: 6
+- model: collector.shieldcusto
+  pk: 47
+  fields:
+    character_custo: 260
+    shield_ref: 5
+- model: collector.shieldcusto
+  pk: 48
+  fields:
+    character_custo: 236
+    shield_ref: 5
+- model: collector.shieldcusto
+  pk: 49
+  fields:
+    character_custo: 223
+    shield_ref: 2
+- model: collector.shieldcusto
+  pk: 50
+  fields:
+    character_custo: 253
+    shield_ref: 4
+- model: collector.shieldcusto
+  pk: 51
+  fields:
+    character_custo: 68
+    shield_ref: 6
+- model: collector.shieldcusto
+  pk: 52
+  fields:
+    character_custo: 19
+    shield_ref: 1
+- model: collector.shieldcusto
+  pk: 53
+  fields:
+    character_custo: 216
+    shield_ref: 2
+- model: collector.shieldcusto
+  pk: 54
+  fields:
+    character_custo: 258
+    shield_ref: 1
+- model: collector.shieldcusto
+  pk: 55
+  fields:
+    character_custo: 263
+    shield_ref: 3
+- model: collector.shieldcusto
+  pk: 56
+  fields:
+    character_custo: 232
+    shield_ref: 5
+- model: collector.shieldcusto
+  pk: 57
+  fields:
+    character_custo: 278
+    shield_ref: 3
+- model: collector.shieldcusto
+  pk: 58
+  fields:
+    character_custo: 296
+    shield_ref: 1
+- model: collector.shieldcusto
+  pk: 59
+  fields:
+    character_custo: 71
+    shield_ref: 1
+- model: collector.shieldcusto
+  pk: 60
+  fields:
+    character_custo: 84
+    shield_ref: 1
+- model: collector.shieldcusto
+  pk: 61
+  fields:
+    character_custo: 304
+    shield_ref: 2
+- model: collector.shieldcusto
+  pk: 62
+  fields:
+    character_custo: 140
+    shield_ref: 1
+- model: collector.shieldcusto
+  pk: 63
+  fields:
+    character_custo: 23
+    shield_ref: 1
+- model: collector.shieldcusto
+  pk: 64
+  fields:
+    character_custo: 328
+    shield_ref: 5
+- model: collector.shieldcusto
+  pk: 65
+  fields:
+    character_custo: 307
+    shield_ref: 1
+- model: collector.shieldcusto
+  pk: 66
+  fields:
+    character_custo: 310
+    shield_ref: 1
+- model: collector.shieldcusto
+  pk: 67
+  fields:
+    character_custo: 199
+    shield_ref: 2
+- model: collector.shieldcusto
+  pk: 68
+  fields:
+    character_custo: 331
+    shield_ref: 1
+- model: collector.shieldcusto
+  pk: 69
+  fields:
+    character_custo: 247
+    shield_ref: 3
+- model: collector.shieldcusto
+  pk: 70
+  fields:
+    character_custo: 338
+    shield_ref: 1
+- model: collector.shieldcusto
+  pk: 71
+  fields:
+    character_custo: 392
+    shield_ref: 6
+- model: collector.shieldcusto
+  pk: 72
+  fields:
+    character_custo: 323
+    shield_ref: 2
+- model: collector.shieldcusto
+  pk: 73
+  fields:
+    character_custo: 18
+    shield_ref: 1
+- model: collector.shieldcusto
+  pk: 74
+  fields:
+    character_custo: 143
+    shield_ref: 2
+- model: collector.shieldcusto
+  pk: 75
+  fields:
+    character_custo: 308
+    shield_ref: 2
+- model: collector.shieldcusto
+  pk: 76
+  fields:
+    character_custo: 267
+    shield_ref: 6
+- model: collector.shieldcusto
+  pk: 77
+  fields:
+    character_custo: 265
+    shield_ref: 2
+- model: collector.shieldcusto
+  pk: 78
+  fields:
+    character_custo: 318
+    shield_ref: 2
+- model: collector.shieldcusto
+  pk: 79
+  fields:
+    character_custo: 144
+    shield_ref: 3
+- model: collector.shieldcusto
+  pk: 81
+  fields:
+    character_custo: 425
+    shield_ref: 1
+- model: collector.shieldcusto
+  pk: 82
+  fields:
+    character_custo: 436
+    shield_ref: 2
+- model: collector.shieldcusto
+  pk: 83
+  fields:
+    character_custo: 450
+    shield_ref: 7
+- model: collector.shieldcusto
+  pk: 84
+  fields:
+    character_custo: 454
+    shield_ref: 7
+- model: collector.shieldcusto
+  pk: 85
+  fields:
+    character_custo: 460
+    shield_ref: 7
+- model: collector.shieldcusto
+  pk: 86
+  fields:
+    character_custo: 447
+    shield_ref: 7
+- model: collector.shieldcusto
+  pk: 87
+  fields:
+    character_custo: 465
+    shield_ref: 1
+- model: collector.shieldcusto
+  pk: 88
+  fields:
+    character_custo: 452
+    shield_ref: 7
+- model: collector.shieldcusto
+  pk: 89
+  fields:
+    character_custo: 492
+    shield_ref: 2
+- model: collector.shieldcusto
+  pk: 90
+  fields:
+    character_custo: 489
+    shield_ref: 1
+- model: collector.shieldcusto
+  pk: 91
+  fields:
+    character_custo: 443
+    shield_ref: 3
+- model: collector.shieldcusto
+  pk: 92
+  fields:
+    character_custo: 498
+    shield_ref: 2
+- model: collector.shieldcusto
+  pk: 93
+  fields:
+    character_custo: 463
+    shield_ref: 7
+- model: collector.shieldcusto
+  pk: 94
+  fields:
+    character_custo: 439
+    shield_ref: 7
+- model: collector.shieldcusto
+  pk: 95
+  fields:
+    character_custo: 470
+    shield_ref: 1
+- model: collector.shieldcusto
+  pk: 96
+  fields:
+    character_custo: 464
+    shield_ref: 7
+- model: collector.shieldcusto
+  pk: 97
+  fields:
+    character_custo: 453
+    shield_ref: 7
+- model: collector.shieldcusto
+  pk: 98
+  fields:
+    character_custo: 445
+    shield_ref: 7
+- model: collector.shieldcusto
+  pk: 99
+  fields:
+    character_custo: 444
+    shield_ref: 7
+- model: collector.shieldcusto
+  pk: 100
+  fields:
+    character_custo: 459
+    shield_ref: 7
+- model: collector.shieldcusto
+  pk: 101
+  fields:
+    character_custo: 462
+    shield_ref: 7
+- model: collector.shieldcusto
+  pk: 102
+  fields:
+    character_custo: 448
+    shield_ref: 7
+- model: collector.shieldcusto
+  pk: 103
+  fields:
+    character_custo: 441
+    shield_ref: 7
+- model: collector.shieldcusto
+  pk: 104
+  fields:
+    character_custo: 440
+    shield_ref: 7
+- model: collector.shieldcusto
+  pk: 105
+  fields:
+    character_custo: 442
+    shield_ref: 7
+- model: collector.shieldcusto
+  pk: 106
+  fields:
+    character_custo: 449
+    shield_ref: 7
+- model: collector.shieldcusto
+  pk: 107
+  fields:
+    character_custo: 461
+    shield_ref: 7
+- model: collector.shieldcusto
+  pk: 108
+  fields:
+    character_custo: 451
+    shield_ref: 7
+- model: collector.shieldcusto
+  pk: 109
+  fields:
+    character_custo: 446
+    shield_ref: 7
+- model: collector.shieldcusto
+  pk: 110
+  fields:
+    character_custo: 486
+    shield_ref: 1
+- model: collector.shieldcusto
+  pk: 111
+  fields:
+    character_custo: 502
+    shield_ref: 1
+- model: collector.shieldcusto
+  pk: 112
+  fields:
+    character_custo: 475
+    shield_ref: 1
+- model: collector.shieldcusto
+  pk: 113
+  fields:
+    character_custo: 507
+    shield_ref: 4
+- model: collector.shieldcusto
+  pk: 114
+  fields:
+    character_custo: 482
+    shield_ref: 1
+- model: collector.shieldcusto
+  pk: 115
+  fields:
+    character_custo: 496
+    shield_ref: 1
+- model: collector.shieldcusto
+  pk: 116
+  fields:
+    character_custo: 472
+    shield_ref: 3
+- model: collector.shieldcusto
+  pk: 117
+  fields:
+    character_custo: 503
+    shield_ref: 1
+- model: collector.shieldcusto
+  pk: 118
+  fields:
+    character_custo: 508
+    shield_ref: 1
+- model: collector.shieldcusto
+  pk: 119
+  fields:
+    character_custo: 495
+    shield_ref: 1
+- model: collector.shieldcusto
+  pk: 120
+  fields:
+    character_custo: 491
+    shield_ref: 1
+- model: collector.shieldcusto
+  pk: 121
+  fields:
+    character_custo: 485
+    shield_ref: 1
+- model: collector.shieldcusto
+  pk: 122
+  fields:
+    character_custo: 519
+    shield_ref: 6
+- model: collector.shieldcusto
+  pk: 123
+  fields:
+    character_custo: 533
+    shield_ref: 3
+- model: collector.shieldcusto
+  pk: 124
+  fields:
+    character_custo: 529
+    shield_ref: 1

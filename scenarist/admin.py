@@ -13,7 +13,7 @@ from scenarist.models.cards import Card, CardAdmin, CardLink, CardLinkAdmin, Cha
 from scenarist.models.adventures import Adventure, AdventureAdmin
 from scenarist.models.backlogs import Backlog, BacklogAdmin
 from scenarist.models.scenes import Scene, SceneAdmin
-from scenarist.models.quizz import QuizzQuestion, QuizzQuestionAdmin, QuizzAnswer, QuizzAnswerAdmin, Quizz, QuizzAdmin
+
 
 admin.site.register(Epic, EpicAdmin)
 admin.site.register(Drama, DramaAdmin)
@@ -29,6 +29,3 @@ admin.site.register(Challenge, ChallengeAdmin)
 admin.site.register(Achievement, AchievementAdmin)
 
 
-# admin.site.register(QuizzQuestion, QuizzQuestionAdmin)
-# admin.site.register(QuizzAnswer, QuizzAnswerAdmin)
-# admin.site.register(Quizz, QuizzAdmin)

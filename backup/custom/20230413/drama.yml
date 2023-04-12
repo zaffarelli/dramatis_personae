@@ -1,0 +1,685 @@
+- model: scenarist.drama
+  pk: 1
+  fields:
+    name: Dead Man Saddle
+    chapter: '1'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.621740+00:00
+    sdt: 2023-01-16 03:13:33.400338+00:00
+    place: Miret
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: false
+    temporary: true
+    published: true
+    full_id: DEM:01
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    epic: 7
+- model: scenarist.drama
+  pk: 2
+  fields:
+    name: Honor's Sake
+    chapter: '2'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.621740+00:00
+    sdt: 2023-01-16 03:13:33.400338+00:00
+    place: Rampart / Veneto / Salt Province / Miret
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: false
+    temporary: true
+    published: true
+    full_id: DEM:02
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    epic: 7
+- model: scenarist.drama
+  pk: 3
+  fields:
+    name: The Council
+    chapter: '3'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.621740+00:00
+    sdt: 2023-01-16 03:13:33.400338+00:00
+    place: Rampart / Veneto / Salt Province / Miret
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: false
+    temporary: true
+    published: true
+    full_id: DEM:03
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    epic: 7
+- model: scenarist.drama
+  pk: 4
+  fields:
+    name: Valentius' Last Stand
+    chapter: '4'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.621740+00:00
+    sdt: 2023-01-16 03:13:33.400338+00:00
+    place: Rampart / Veneto / Gold Province / Far In the South
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: false
+    temporary: true
+    published: true
+    full_id: DEM:04
+    description: 'µConundrumµDespite the authenticity of the coordinates given to
+      the adventurers by the vau scout the exact location of the pre-republican priest
+      body doesn''t seem to be easily figured out. The poor accessibility to the polar
+      region and the inappropriate mapping devices are the two obstacles preventing
+      an easy let''s go and see trip.
+
+      They would finally land to the good point if they can figure out that what they
+      are actually looking for is a massive pre-republican vessel wreckage mostly
+      submerged by water and ice. The vessel barely stands afloat thanks to the amount
+      of ice that grew until the days it crash landed.
+
+      µThe wreckageµThe starship is a massive vessel approximately the size of an
+      actual luxury liner. It’s ID is the Deidalbada, and the last registered owner
+      is some Magister Dorian Poe of unknown faction of the diasporan era. It is easely
+      accessed from one of the docking stations, but as it is necessary to dig through
+      the ice and to force the omni dock to get inside, it seems that the remaining
+      crew and passengers never left the ship after the crash.
+
+      However, exploring its empty decks will only show that no hints of the people
+      cruising with this ship has been left behind. A few missing escape pods can
+      indicate that part of them left before the crash. However, according to the
+      current state of the ship, the crash was in fact a controlled landing, as there
+      is not that much damage.
+
+      µExplorationµExploring the whole ship could take a lot of time and might involve
+      a lot of people. A complete check would be made by at least 10 people for 48
+      hours, with appropriate exploration gear (mostly light as the ship is in deep
+      darkness, and mining material to force most of the doors that are artificially
+      locked by ice and cold).Only a few stand by lights are still functionning, and
+      they will activate is some portions of the ship as moving people would visit
+      the decks.
+
+      On the main deck there is only one very strange thing that seems to be disturbing
+      in such a picture: an old and well preserved mirror, made of precious would
+      and covered with a piece of ancient fabric that seem top have been preserved
+      through the ages.'
+    resolution: ''
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    epic: 7
+- model: scenarist.drama
+  pk: 5
+  fields:
+    name: Dervishes Society
+    chapter: '5'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.621740+00:00
+    sdt: 2023-01-16 03:13:33.400338+00:00
+    place: Salt Province
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: false
+    temporary: true
+    published: true
+    full_id: DEM:05
+    description: 'In this drama, the party will face new forces, Hazat Dervishes.
+
+      An alliance is possible if they properly understand the motives of these peculiar
+      soldiers.'
+    resolution: ''
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    epic: 7
+- model: scenarist.drama
+  pk: 6
+  fields:
+    name: The Black Kiss
+    chapter: '8'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.621740+00:00
+    sdt: 2023-01-16 03:13:33.400338+00:00
+    place: Salt Province
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: false
+    temporary: true
+    published: true
+    full_id: DEM:08
+    description: A terrible pestilence rises among the refugees in Miret
+    resolution: ''
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    epic: 7
+- model: scenarist.drama
+  pk: 7
+  fields:
+    name: Virtual Insanity
+    chapter: '7'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.621740+00:00
+    sdt: 2023-01-16 03:13:33.400338+00:00
+    place: Avaneir
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: false
+    temporary: true
+    published: true
+    full_id: DEM:07
+    description: 'µThe auction in AvaneirµThe player are going to an auction in Avaneir
+      on behalf of Lady Varnovicz to acquire a sculpture name the Trapped Nymph.
+
+
+
+
+
+
+
+      ...
+
+
+
+
+
+      ...'
+    resolution: ''
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    epic: 7
+- model: scenarist.drama
+  pk: 8
+  fields:
+    name: Blood Ice
+    chapter: '9'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.621740+00:00
+    sdt: 2023-01-16 03:13:33.400338+00:00
+    place: Rampart
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: false
+    temporary: true
+    published: true
+    full_id: DEM:09
+    description: Kurgan at the gates of the Empire !!
+    resolution: ''
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    epic: 7
+- model: scenarist.drama
+  pk: 9
+  fields:
+    name: Land of the Fathers
+    chapter: '6'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.621740+00:00
+    sdt: 2023-01-16 03:13:33.400338+00:00
+    place: Rampart / Veneto / Miret & Rampart / Royale Province / Avaneir
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: false
+    temporary: true
+    published: true
+    full_id: DEM:06
+    description: This adventure starts in Miret, in the Veneto Province, on Rampart
+      (Garden Worlds). The date is LiRA 5017, close to Lux Splendor festival, and
+      the adventurers are recovering after the last events that have changed the policical
+      scene of the city.
+    resolution: ''
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    epic: 7
+- model: scenarist.drama
+  pk: 10
+  fields:
+    name: Grail
+    chapter: '1'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.621740+00:00
+    sdt: 2023-01-16 03:13:33.400338+00:00
+    place: Grail / Sangreal
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: false
+    temporary: true
+    published: true
+    full_id: ANTU:01
+    description: "µGathering of the Masseriµ\r\nThe first objective is to find ¤arno_sforza¤.\
+      \ ¤nina_masseri¤ is actually on his tracks, but has difficulties approaching\
+      \ her wild parent.\r\nµPirate Activitiesµ\r\nAt the entrance of the system squat\
+      \ an imperial squadron lead by the ^Vanguard^ galliot. It guards the jumpgate\
+      \ of pirate incursions, going in and out, knowing that a few ships (2 li halan\
+      \ escorters and a hawkwood frigate have made it in a few days ago)."
+    resolution: "µAntagonistsµ\r\n- ¤kristof_ivanovicz¤ the angry Decados\r\n- ¤kiera_kursovna¤\
+      \ the passive/agressive lover\r\n- ¤markam_vornicz¤ the challenger\r\nµThe Imperial\
+      \ Forces at the gateµ\r\n - ^Vanguard^\r\n- ^Emerald^\r\n- ^Ruby^\r\nAnd searching\
+      \ in the system: \r\n- ^Mercy^"
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    epic: 3
+- model: scenarist.drama
+  pk: 11
+  fields:
+    name: 'Lost World: Verona'
+    chapter: '3'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.621740+00:00
+    sdt: 2023-01-16 03:13:33.400338+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: true
+    full_id: ANTU:03
+    description: "=History of Verona=\r\nµIn The Hands of House Masseriµ\r\nThe Masseri\
+      \ arrived on Verona from Grail in 2715 AD\r\nµThe Ukar Fraud (3305 AD)µ\r\n\
+      The ukar comunity present with the Masseri starts the £Shaduqai£, a mystic event\
+      \ supposed to append after the rebond of the ur ukar people with the annunaki.\r\
+      \nµClockwork: Third World (3834 AD)µ\r\nNamed §Clockwork§ at first, Verona was\
+      \ the third World of House Masseri.\r\nµShelter from the Storm (3917 AD)µ\r\n\
+      µPerpetual Lock Down (4133 AD)µ\r\nIn 4133 AD, House Masseri decided to solve\
+      \ the Kurgan invasion menace with the more extreme decision, shutting down the\
+      \ gate forever.\r\nµLast fief of the House (4974 AD)µ\r\nA group of imperial\
+      \ Masseri open the gate and reached Verona, the first newcomers since 4133 AD.\r\
+      \nµEnnemy at the Gate (4998 AD)µ\r\nµAssault (5000 AD)µ\r\nKurgans manage to\
+      \ go through the gate once more thanks to the treason of ¤giaccomo_kellerman¤.\
+      \ They are led by the mighty ¤taashik_al_kalibann¤.\r\nµBreaking the cog (5004\
+      \ AD)µ \r\nIn 5004 AD, an incident happened on Verona terraforming engine. The\
+      \ failure caused all water to be removed from the low atmosphere, creating in\
+      \ the same move the deep thick steam cloak  that now surrounds §Verona§ and\
+      \ make it look like a tiny gas giant from a distance.\r\n=The current situation=\r\
+      \nFor six monthes, since the arrival of the last message from ¤arno_sforza¤,\
+      \ the §Sons of Sathra§ and more generally the whole house Masseri have been\
+      \ waiting for the coming of the £imperiali£."
+    resolution: "=Tricks in the Adventure=\r\n- The opportunity to gain knowledge\
+      \ of some of the secrets of the Sons of Sathra (Void Sensitivity)."
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    epic: 3
+- model: scenarist.drama
+  pk: 12
+  fields:
+    name: 'Lost World: Rimpoche'
+    chapter: '2'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.621740+00:00
+    sdt: 2023-01-16 03:13:33.400338+00:00
+    place: Rimpoche System
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: false
+    temporary: true
+    published: true
+    full_id: ANTU:02
+    description: 'The discovery of Rimpoche is something unespected as only six keys
+      exist in the Empire (and beyond probably). Only a few people actually live on
+      the system.
+
+
+
+
+
+
+
+
+
+
+      ---'
+    resolution: ''
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    epic: 3
+- model: scenarist.drama
+  pk: 13
+  fields:
+    name: Enemy at the Gates
+    chapter: '4'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.621740+00:00
+    sdt: 2023-01-16 03:13:33.400338+00:00
+    place: Grail System
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: false
+    temporary: true
+    published: true
+    full_id: ANTU:04
+    description: 'The party is back to the Grail system. They just met a Gesar ship
+      that took care of a kurgan raiders team.
+
+      They come back to the main fief of house Keddah to realise that war in the Garden
+      Worlds has reached Rampart: a full army is awaiting at the jumpgate when they
+      pass through it.'
+    resolution: "µAdventure themesµ\nGoal:\nVillain: \nAlly:\nPatron:\nFraming Event:\n\
+      Twist:\nComplication:\nSide Quest:\nintroduction\nClimax"
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    epic: 3
+- model: scenarist.drama
+  pk: 14
+  fields:
+    name: The Wolf of Ferenghis Falls
+    chapter: '1'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.621740+00:00
+    sdt: 2023-01-16 03:13:33.400338+00:00
+    place: Rampart / Carmoren
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: false
+    temporary: true
+    published: true
+    full_id: WETA:01
+    description: '§Synopsis§
+
+      A team is supposed to go to Ferenghis to catch a noble that has been required
+      to join his family on a starship.
+
+
+      §Team§
+
+      - ¤flink_redmoor¤
+
+      - ¤sebastiano_orfinde¤
+
+      - ¤tik_reynart¤'
+    resolution: '§Folk lore§
+
+      The Wolf of Ferenghis Falls is a legend about a ghost or supernatural creature
+      dwelling near Ferenghis Falls, a place close to the City of Carmoren on Rampart.
+      The wolf would be looking for his mate.
+
+
+
+      §The Event§
+
+      ¤antonietta_lefu_drougeglace¤ is the noble to be served. Her uncle ¤cosmo_lefu_drougeglace¤
+      has asked her to join the forces of ¤yves_digneden¤ to fight against the Caliphate.'
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    epic: 10
+- model: scenarist.drama
+  pk: 15
+  fields:
+    name: Braminski
+    chapter: '2'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.621740+00:00
+    sdt: 2023-01-16 03:13:33.400338+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: false
+    temporary: true
+    published: true
+    full_id: WETA:02
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    epic: 10
+- model: scenarist.drama
+  pk: 16
+  fields:
+    name: Alone
+    chapter: '3'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.621740+00:00
+    sdt: 2023-01-16 03:13:33.400338+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: false
+    temporary: true
+    published: true
+    full_id: WETA:03
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    epic: 10
+- model: scenarist.drama
+  pk: 18
+  fields:
+    name: Dead Man Walking
+    chapter: '1'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.621740+00:00
+    sdt: 2023-01-16 03:13:33.400338+00:00
+    place: Kompo Moon Station 5
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: true
+    full_id: GUNS:01
+    description: "Everything starts with ¤durman_gropf¤ hiring guys for a special\
+      \ mission. It's 5025 now, and the War against the Kurgans as turned to some\
+      \ kind of status quo.\r\n\r\nThe business is simple: recover a young Hawkwood\
+      \ noble that fled from the Black Lion fiefs to the Outer Rings. The reward is\
+      \ astonishing: 50000£, but the bounty must be taken alive."
+    resolution: The noble is Aisha Hawkwood, not a boy but a girl, and daughter of
+      Emperor Alexius Primus and Salandra Hawkwood.
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    epic: 14
+- model: scenarist.drama
+  pk: 19
+  fields:
+    name: Stella Incognita
+    chapter: '1'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.621740+00:00
+    sdt: 2023-01-16 03:13:33.400338+00:00
+    place: Pandora System, crashed on one of the 7 moons
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: true
+    full_id: PVS:01
+    description: This adventure is an introduction to §Fading Suns§. it's supposed
+      to be played by 3-4 people, and absolutely no knowledge of the universe is needed.
+    resolution: "The last member of the crew is ¤ron_gorlig¤.\r\n\r\nThe players are\
+      \ supposed to get their complete character sheets when they access the £Preceptor£\
+      \ think machine in the cockpit, or when their pod lands on the moon.\r\n\r\n\
+      µDramatis Personaeµ\r\n§Crew members (Main Deck)§\r\n- ¤ron_gorlig¤\r\n- ¤regie_copram¤\r\
+      \n- ¤kit_solonia¤\r\n- ¤gart¤\r\n\r\n§Male Prisoners (Deck 3)§\r\n- ¤clayton_briggs¤\
+      \ \r\n- ¤ellis_mcmoran¤ \r\n- ¤gustavo_salamenca_de_acero¤\r\n- ¤derek_paracelsus¤\r\
+      \n- ¤konrad_grimler¤\r\n\r\n§Female Prisoners (Deck 4)§\r\n- ¤logun_bran_tazin¤\r\
+      \n\r\n§ViP Prisonner (Deck 5)§\r\n- ¤cassandra_varnovicz¤"
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    epic: 15
+- model: scenarist.drama
+  pk: 20
+  fields:
+    name: The Serpent of Syracuse
+    chapter: '1'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.621740+00:00
+    sdt: 2023-01-16 03:13:33.400338+00:00
+    place: Al-Malik Fiefs / Istakhr
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: true
+    full_id: DAL:01
+    description: "=Master Balthazar Theodore Zemeckis=\r\nThe whole epic is built\
+      \ around one character, Master ¤balthazar_zemeckis¤ of the POE. He is a highly\
+      \ qualified engineer whose speciality is clockworking, the art of building automats.\r\
+      \nOne could easily assume that such a carrier domain might be totally inapropriate\
+      \ in the empire for many reasons, but, like his master £Olem Ratugas£ before\
+      \ him, he worked his path through power groups and the Church to ensure that\
+      \ none might easily harm his business.\r\nIn 4982 AD, Radugas founded the High\
+      \ College of the Clockwork, based at first on Istakhr. At first, it was an undercover\
+      \ activity, the goal of the clockmaker being to reproduce golem having the shape\
+      \ of humans, but bearing no real sentiance. What Ratugas achieved at this time\
+      \ with his apprentice was to make dolls having at best the temper of a domesticated\
+      \ dog. This was the first generation. They needed to be tamed, or educated,\
+      \ as they have no natural feral state, to be able to do simple tasks, like carrying\
+      \ water in the desert. The first batch of automats that made the Brotherhood\
+      \ famous in the Empire was a special unit, the white faces, used on Stigmata,\
+      \ deployed with equipment and weapons and going through enemy lines without\
+      \ being detected, passing for dead if they attracted the attention of the symbiots.\
+      \ This was a great success and the emperor saw a great interest in a technology\
+      \ that would allow to resist the symbiots. The Church did not officially sanctioned\
+      \ the brotherhood, but an Act from the Patriarch, £Lex Automata£ was dispatched\
+      \ in the high instances of the Church when the white faces helped the rescue\
+      \ of the first Manifest Light platoon.\r\n\r\n=Clockworking Inner Council=\r\
+      \n- ¤balthazar_zemeckis¤, Samarkand, Istakhr, Al-Malik fiefs.\r\n- ¤mae_lin_breguet¤,\
+      \ Avaneir, Rampart, Li Halan fiefs.\r\n- ¤ivan_ipsevicz¤, Lyonesse, Delphi,\
+      \ Hawkwood fiefs\r\n- ¤harvenor_russel¤, Corinth, Tethys, Imperial fiefs\r\n\
+      - ¤kiera_zeneter¤, Deleb, Pentateuch, Church fiefs\r\n\r\n=Relatives=\r\n- ¤ionia_zemeckis¤,\
+      \ daughter\r\n- ¤ellen_zemeckis¤, wife\r\n\r\n=Servants=\r\n- ¤massic_antillies¤,\
+      \ butler\r\n- ¤zolondra_kreshia¤, personal physician"
+    resolution: ''
+    rewards: ''
+    card_type: BK
+    archived: false
+    is_ongoing: false
+    epic: 16
+- model: scenarist.drama
+  pk: 21
+  fields:
+    name: The Tiger of Istakhr
+    chapter: '2'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.621740+00:00
+    sdt: 2023-01-16 03:13:33.400338+00:00
+    place: Istakhr / Samarkand / The Bazaar / Mofat Suq
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: true
+    full_id: DAL:02
+    description: "=Synopsis=\r\nThe men of Zemeckis are on a mission, where they are\
+      \ supposed to deliver an automat to an Al-Malik Noble, ¤abdul_mofat_almalik¤.\
+      \ The automat is to be used by Mofat granddaughter, ¤sheisinselli_mofat_almalik¤,\
+      \ a thriteen years old girl, and only granddaughter of the Mofat branch. She\
+      \ had, a few months ago an accident that caused her to lose sight. As performing\
+      \ surgery to implant cyberoptic was thought upon, the specialist consulted,\
+      \ Master Zemeckis, discouraged the cyberimplantation at such a young age, before\
+      \ the end of body full growth. \r\n\r\n\r\n\r\n\r\n\r\nµMissionµ\r\nDeliver\
+      \ an automat to a client. The rendez-vous is in Samarkand Agora (the Istakhr\
+      \ Market). The buyer is Abdul Mofat al-Malik. The end user is the daughter of\
+      \ ¤raifa_mofat_almalik¤.\r\n\r\nµBombµ\r\nAfter the transaction, a bomb explodes\
+      \ in the suq, killing a dozen Al-Malik men, injuring around one hundred people.\
+      \ The granddaughter of Abdul Mofat Al-Malik critically injured, in a coma, saved\
+      \ in extremis by the newly acquired automat."
+    resolution: ''
+    rewards: "Introducing ¤katarina_szdreiov¤\r\n¤arikaltassoar_thugs¤\r\n¤garwin_lyondras¤"
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    epic: 16
+- model: scenarist.drama
+  pk: 22
+  fields:
+    name: Medusa
+    chapter: '3'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.621740+00:00
+    sdt: 2023-01-16 03:13:33.400338+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: false
+    temporary: true
+    published: true
+    full_id: DAL:03
+    description: ''
+    resolution: Of course. How
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    epic: 16
+- model: scenarist.drama
+  pk: 23
+  fields:
+    name: The Scorpion
+    chapter: '4'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.621740+00:00
+    sdt: 2023-01-16 03:13:33.400338+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: false
+    temporary: true
+    published: true
+    full_id: DAL:04
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    epic: 16
+- model: scenarist.drama
+  pk: 24
+  fields:
+    name: Beyond Darkness
+    chapter: '6'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.621740+00:00
+    sdt: 2023-01-16 03:13:33.400338+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: true
+    full_id: DAL:06
+    description: "¤gareth_suskin¤\r\n¤felicio_mcgroff¤\r\n¤fritz_faroe¤"
+    resolution: ''
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    epic: 16

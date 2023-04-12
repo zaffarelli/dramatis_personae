@@ -1,0 +1,726 @@
+- model: collector.shield
+  pk: 16
+  fields:
+    character: 119
+    shield_ref: 2
+    charges: 10
+- model: collector.shield
+  pk: 15285
+  fields:
+    character: 443
+    shield_ref: 3
+    charges: 10
+- model: collector.shield
+  pk: 15287
+  fields:
+    character: 16
+    shield_ref: 2
+    charges: 10
+- model: collector.shield
+  pk: 15289
+  fields:
+    character: 192
+    shield_ref: 1
+    charges: 10
+- model: collector.shield
+  pk: 15291
+  fields:
+    character: 261
+    shield_ref: 6
+    charges: 10
+- model: collector.shield
+  pk: 15293
+  fields:
+    character: 58
+    shield_ref: 3
+    charges: 10
+- model: collector.shield
+  pk: 15295
+  fields:
+    character: 164
+    shield_ref: 1
+    charges: 10
+- model: collector.shield
+  pk: 15297
+  fields:
+    character: 328
+    shield_ref: 5
+    charges: 10
+- model: collector.shield
+  pk: 15299
+  fields:
+    character: 308
+    shield_ref: 2
+    charges: 10
+- model: collector.shield
+  pk: 15301
+  fields:
+    character: 99
+    shield_ref: 1
+    charges: 10
+- model: collector.shield
+  pk: 15303
+  fields:
+    character: 28
+    shield_ref: 1
+    charges: 10
+- model: collector.shield
+  pk: 15305
+  fields:
+    character: 307
+    shield_ref: 1
+    charges: 10
+- model: collector.shield
+  pk: 15307
+  fields:
+    character: 2
+    shield_ref: 1
+    charges: 10
+- model: collector.shield
+  pk: 15309
+  fields:
+    character: 243
+    shield_ref: 5
+    charges: 10
+- model: collector.shield
+  pk: 15311
+  fields:
+    character: 498
+    shield_ref: 2
+    charges: 10
+- model: collector.shield
+  pk: 15312
+  fields:
+    character: 519
+    shield_ref: 6
+    charges: 10
+- model: collector.shield
+  pk: 15314
+  fields:
+    character: 247
+    shield_ref: 3
+    charges: 10
+- model: collector.shield
+  pk: 15321
+  fields:
+    character: 310
+    shield_ref: 1
+    charges: 10
+- model: collector.shield
+  pk: 15322
+  fields:
+    character: 310
+    shield_ref: 1
+    charges: 10
+- model: collector.shield
+  pk: 15329
+  fields:
+    character: 459
+    shield_ref: 7
+    charges: 10
+- model: collector.shield
+  pk: 15330
+  fields:
+    character: 257
+    shield_ref: 1
+    charges: 10
+- model: collector.shield
+  pk: 15332
+  fields:
+    character: 23
+    shield_ref: 1
+    charges: 10
+- model: collector.shield
+  pk: 15334
+  fields:
+    character: 462
+    shield_ref: 7
+    charges: 10
+- model: collector.shield
+  pk: 15336
+  fields:
+    character: 97
+    shield_ref: 6
+    charges: 10
+- model: collector.shield
+  pk: 15338
+  fields:
+    character: 448
+    shield_ref: 7
+    charges: 10
+- model: collector.shield
+  pk: 15340
+  fields:
+    character: 436
+    shield_ref: 2
+    charges: 10
+- model: collector.shield
+  pk: 15342
+  fields:
+    character: 84
+    shield_ref: 1
+    charges: 10
+- model: collector.shield
+  pk: 15344
+  fields:
+    character: 150
+    shield_ref: 2
+    charges: 10
+- model: collector.shield
+  pk: 15346
+  fields:
+    character: 178
+    shield_ref: 1
+    charges: 10
+- model: collector.shield
+  pk: 15348
+  fields:
+    character: 223
+    shield_ref: 2
+    charges: 10
+- model: collector.shield
+  pk: 15350
+  fields:
+    character: 236
+    shield_ref: 5
+    charges: 10
+- model: collector.shield
+  pk: 15352
+  fields:
+    character: 278
+    shield_ref: 3
+    charges: 10
+- model: collector.shield
+  pk: 15354
+  fields:
+    character: 13
+    shield_ref: 1
+    charges: 10
+- model: collector.shield
+  pk: 15356
+  fields:
+    character: 441
+    shield_ref: 7
+    charges: 10
+- model: collector.shield
+  pk: 15358
+  fields:
+    character: 22
+    shield_ref: 1
+    charges: 10
+- model: collector.shield
+  pk: 15360
+  fields:
+    character: 253
+    shield_ref: 4
+    charges: 10
+- model: collector.shield
+  pk: 15362
+  fields:
+    character: 17
+    shield_ref: 3
+    charges: 10
+- model: collector.shield
+  pk: 15364
+  fields:
+    character: 260
+    shield_ref: 5
+    charges: 10
+- model: collector.shield
+  pk: 15366
+  fields:
+    character: 71
+    shield_ref: 1
+    charges: 10
+- model: collector.shield
+  pk: 15370
+  fields:
+    character: 202
+    shield_ref: 2
+    charges: 10
+- model: collector.shield
+  pk: 15374
+  fields:
+    character: 296
+    shield_ref: 1
+    charges: 10
+- model: collector.shield
+  pk: 15378
+  fields:
+    character: 472
+    shield_ref: 3
+    charges: 10
+- model: collector.shield
+  pk: 15380
+  fields:
+    character: 203
+    shield_ref: 1
+    charges: 10
+- model: collector.shield
+  pk: 15382
+  fields:
+    character: 440
+    shield_ref: 7
+    charges: 10
+- model: collector.shield
+  pk: 15384
+  fields:
+    character: 491
+    shield_ref: 1
+    charges: 10
+- model: collector.shield
+  pk: 15386
+  fields:
+    character: 98
+    shield_ref: 1
+    charges: 10
+- model: collector.shield
+  pk: 15388
+  fields:
+    character: 199
+    shield_ref: 2
+    charges: 10
+- model: collector.shield
+  pk: 15390
+  fields:
+    character: 507
+    shield_ref: 4
+    charges: 10
+- model: collector.shield
+  pk: 15392
+  fields:
+    character: 198
+    shield_ref: 1
+    charges: 10
+- model: collector.shield
+  pk: 15396
+  fields:
+    character: 496
+    shield_ref: 1
+    charges: 10
+- model: collector.shield
+  pk: 15398
+  fields:
+    character: 464
+    shield_ref: 7
+    charges: 10
+- model: collector.shield
+  pk: 15400
+  fields:
+    character: 194
+    shield_ref: 1
+    charges: 10
+- model: collector.shield
+  pk: 15402
+  fields:
+    character: 442
+    shield_ref: 7
+    charges: 10
+- model: collector.shield
+  pk: 15404
+  fields:
+    character: 68
+    shield_ref: 6
+    charges: 10
+- model: collector.shield
+  pk: 15406
+  fields:
+    character: 130
+    shield_ref: 1
+    charges: 10
+- model: collector.shield
+  pk: 15408
+  fields:
+    character: 19
+    shield_ref: 1
+    charges: 10
+- model: collector.shield
+  pk: 15410
+  fields:
+    character: 258
+    shield_ref: 1
+    charges: 10
+- model: collector.shield
+  pk: 15418
+  fields:
+    character: 323
+    shield_ref: 2
+    charges: 10
+- model: collector.shield
+  pk: 15420
+  fields:
+    character: 453
+    shield_ref: 7
+    charges: 10
+- model: collector.shield
+  pk: 15422
+  fields:
+    character: 263
+    shield_ref: 3
+    charges: 10
+- model: collector.shield
+  pk: 15425
+  fields:
+    character: 183
+    shield_ref: 1
+    charges: 10
+- model: collector.shield
+  pk: 15427
+  fields:
+    character: 65
+    shield_ref: 1
+    charges: 10
+- model: collector.shield
+  pk: 15431
+  fields:
+    character: 181
+    shield_ref: 1
+    charges: 10
+- model: collector.shield
+  pk: 15433
+  fields:
+    character: 449
+    shield_ref: 7
+    charges: 10
+- model: collector.shield
+  pk: 15435
+  fields:
+    character: 135
+    shield_ref: 1
+    charges: 10
+- model: collector.shield
+  pk: 15437
+  fields:
+    character: 38
+    shield_ref: 1
+    charges: 10
+- model: collector.shield
+  pk: 15441
+  fields:
+    character: 470
+    shield_ref: 1
+    charges: 10
+- model: collector.shield
+  pk: 15450
+  fields:
+    character: 318
+    shield_ref: 2
+    charges: 10
+- model: collector.shield
+  pk: 15453
+  fields:
+    character: 35
+    shield_ref: 1
+    charges: 10
+- model: collector.shield
+  pk: 15455
+  fields:
+    character: 91
+    shield_ref: 2
+    charges: 10
+- model: collector.shield
+  pk: 15457
+  fields:
+    character: 475
+    shield_ref: 1
+    charges: 10
+- model: collector.shield
+  pk: 15459
+  fields:
+    character: 216
+    shield_ref: 2
+    charges: 10
+- model: collector.shield
+  pk: 15461
+  fields:
+    character: 140
+    shield_ref: 1
+    charges: 10
+- model: collector.shield
+  pk: 15467
+  fields:
+    character: 445
+    shield_ref: 7
+    charges: 10
+- model: collector.shield
+  pk: 15469
+  fields:
+    character: 210
+    shield_ref: 1
+    charges: 10
+- model: collector.shield
+  pk: 15479
+  fields:
+    character: 200
+    shield_ref: 4
+    charges: 10
+- model: collector.shield
+  pk: 15481
+  fields:
+    character: 463
+    shield_ref: 7
+    charges: 10
+- model: collector.shield
+  pk: 15483
+  fields:
+    character: 452
+    shield_ref: 7
+    charges: 10
+- model: collector.shield
+  pk: 15485
+  fields:
+    character: 331
+    shield_ref: 1
+    charges: 10
+- model: collector.shield
+  pk: 15487
+  fields:
+    character: 508
+    shield_ref: 1
+    charges: 10
+- model: collector.shield
+  pk: 15491
+  fields:
+    character: 444
+    shield_ref: 7
+    charges: 10
+- model: collector.shield
+  pk: 15493
+  fields:
+    character: 439
+    shield_ref: 7
+    charges: 10
+- model: collector.shield
+  pk: 15495
+  fields:
+    character: 482
+    shield_ref: 1
+    charges: 10
+- model: collector.shield
+  pk: 15499
+  fields:
+    character: 265
+    shield_ref: 2
+    charges: 10
+- model: collector.shield
+  pk: 15503
+  fields:
+    character: 485
+    shield_ref: 1
+    charges: 10
+- model: collector.shield
+  pk: 15505
+  fields:
+    character: 61
+    shield_ref: 1
+    charges: 10
+- model: collector.shield
+  pk: 15507
+  fields:
+    character: 451
+    shield_ref: 7
+    charges: 10
+- model: collector.shield
+  pk: 15509
+  fields:
+    character: 20
+    shield_ref: 2
+    charges: 10
+- model: collector.shield
+  pk: 15515
+  fields:
+    character: 151
+    shield_ref: 2
+    charges: 10
+- model: collector.shield
+  pk: 15517
+  fields:
+    character: 492
+    shield_ref: 2
+    charges: 10
+- model: collector.shield
+  pk: 15524
+  fields:
+    character: 486
+    shield_ref: 1
+    charges: 10
+- model: collector.shield
+  pk: 15526
+  fields:
+    character: 59
+    shield_ref: 4
+    charges: 10
+- model: collector.shield
+  pk: 15528
+  fields:
+    character: 446
+    shield_ref: 7
+    charges: 10
+- model: collector.shield
+  pk: 15530
+  fields:
+    character: 461
+    shield_ref: 7
+    charges: 10
+- model: collector.shield
+  pk: 15536
+  fields:
+    character: 425
+    shield_ref: 1
+    charges: 10
+- model: collector.shield
+  pk: 15540
+  fields:
+    character: 465
+    shield_ref: 1
+    charges: 10
+- model: collector.shield
+  pk: 15554
+  fields:
+    character: 392
+    shield_ref: 6
+    charges: 10
+- model: collector.shield
+  pk: 15568
+  fields:
+    character: 489
+    shield_ref: 1
+    charges: 10
+- model: collector.shield
+  pk: 15993
+  fields:
+    character: 454
+    shield_ref: 7
+    charges: 10
+- model: collector.shield
+  pk: 16049
+  fields:
+    character: 529
+    shield_ref: 1
+    charges: 10
+- model: collector.shield
+  pk: 16097
+  fields:
+    character: 191
+    shield_ref: 2
+    charges: 10
+- model: collector.shield
+  pk: 16206
+  fields:
+    character: 18
+    shield_ref: 1
+    charges: 10
+- model: collector.shield
+  pk: 16223
+  fields:
+    character: 338
+    shield_ref: 1
+    charges: 10
+- model: collector.shield
+  pk: 16227
+  fields:
+    character: 304
+    shield_ref: 2
+    charges: 10
+- model: collector.shield
+  pk: 16232
+  fields:
+    character: 126
+    shield_ref: 5
+    charges: 10
+- model: collector.shield
+  pk: 16236
+  fields:
+    character: 146
+    shield_ref: 5
+    charges: 10
+- model: collector.shield
+  pk: 16240
+  fields:
+    character: 143
+    shield_ref: 2
+    charges: 10
+- model: collector.shield
+  pk: 16244
+  fields:
+    character: 93
+    shield_ref: 2
+    charges: 10
+- model: collector.shield
+  pk: 16249
+  fields:
+    character: 77
+    shield_ref: 5
+    charges: 10
+- model: collector.shield
+  pk: 16255
+  fields:
+    character: 232
+    shield_ref: 5
+    charges: 10
+- model: collector.shield
+  pk: 16260
+  fields:
+    character: 533
+    shield_ref: 3
+    charges: 10
+- model: collector.shield
+  pk: 16266
+  fields:
+    character: 144
+    shield_ref: 3
+    charges: 10
+- model: collector.shield
+  pk: 16270
+  fields:
+    character: 267
+    shield_ref: 6
+    charges: 10
+- model: collector.shield
+  pk: 16273
+  fields:
+    character: 447
+    shield_ref: 7
+    charges: 10
+- model: collector.shield
+  pk: 16279
+  fields:
+    character: 450
+    shield_ref: 7
+    charges: 10
+- model: collector.shield
+  pk: 16280
+  fields:
+    character: 460
+    shield_ref: 7
+    charges: 10
+- model: collector.shield
+  pk: 16281
+  fields:
+    character: 189
+    shield_ref: 2
+    charges: 10
+- model: collector.shield
+  pk: 16282
+  fields:
+    character: 503
+    shield_ref: 1
+    charges: 10
+- model: collector.shield
+  pk: 16283
+  fields:
+    character: 502
+    shield_ref: 1
+    charges: 10
+- model: collector.shield
+  pk: 16285
+  fields:
+    character: 5
+    shield_ref: 6
+    charges: 10
+- model: collector.shield
+  pk: 16289
+  fields:
+    character: 495
+    shield_ref: 1
+    charges: 10

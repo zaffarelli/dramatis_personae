@@ -1,0 +1,1582 @@
+- model: scenarist.act
+  pk: 1
+  fields:
+    name: Strange Fellows With A Purpose
+    chapter: '2'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.602360+00:00
+    sdt: 2023-01-16 03:13:33.233805+00:00
+    place: Miret Cathedral
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: false
+    temporary: true
+    published: true
+    full_id: DEM:05:02
+    description: 'The dervishes present in Miret are not authorized to be there, but
+      they did not come without a purpose. ¤saskia_varnovicz¤ knows secrets, and one
+      of them came to the ears of ¤irene_de_glacemer¤ and ¤annizze_rolas_de_hazat¤.
+      Usually Decados secret deserves them, but this time both ladies agreed that
+      supporting the grafina was a necessicity.
+
+      While Irène would lead the operations to unveil the spies for the Kurgan Caliphate
+      in the Empire, or at last in Miret and Veneto, Annizze would provide a strike
+      force to fight the Kurgan invaders.'
+    resolution: µUnveiling the secretµ From allies she has in the Pandemonium system,
+      veterans of the Kurgan War, Saskia learned that there is in Veneto a jumpkey
+      that could link the Rampart and Sargasso systems. The key was taken twenty years
+      ago by the Decados, and copied with the help of a Charioteer Loge and House
+      D'Rouge-Glace. Three copies were made before the Avestites lead a raid to the
+      facility, destroying the master key and the shelter as well. Strangely, an important
+      number of avestites died during the raid when the building collapsed. A copy
+      of the key was taken by a kurgan spy, ¤yussuf_meknes¤, one other by ¤fergus_rouge¤
+      for the sake of his master ¤sigmeon_drougeglace¤.
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    drama: 5
+    dramatis_personae: null
+- model: scenarist.act
+  pk: 2
+  fields:
+    name: Love's Labour's Lost
+    chapter: '1'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.602360+00:00
+    sdt: 2023-01-16 03:13:33.233805+00:00
+    place: Miret Cathedral
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: false
+    temporary: true
+    published: true
+    full_id: DEM:05:01
+    description: 'During  ¤bruce_talwinn_ohara¤ wedding to Lady ¤rebecca_di_merlio¤,
+      unformal meetings are held by some guests.
+
+      Those conventionists are people trying to reunite the major factions to the
+      Li Halan cause.'
+    resolution: If all objectives are reached here, it's a 50xp reward for each player.
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    drama: 5
+    dramatis_personae: null
+- model: scenarist.act
+  pk: 3
+  fields:
+    name: Smugglers!
+    chapter: '3'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.602360+00:00
+    sdt: 2023-01-16 03:13:33.233805+00:00
+    place: Miret suburbs
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: false
+    temporary: true
+    published: true
+    full_id: DEM:05:03
+    description: "This side trek mini adventures consists in helping ¤rica_van_dyke¤\
+      \ to recover second republic material from a local cult, the Mozïm Velcar brotherhood.\n\
+      \nThe cultists are convinced they have found a set of Elixir. As they are not\
+      \ allowed to use it, they want to sell it for a good price. \n\nThere are 20\
+      \ bottles of elixir in a locked hyper glass chest, among 30 unidentified bottles.\
+      \ They want 30£ per elixir bottle, and don't care about the other bottles, for\
+      \ a total of 600£. \nThey never opened the chest and don't know how it can be\
+      \ opened (Tech+Security DV 20 Roll with Volt Tools, multiple attempts can be\
+      \ chained, each attempt is 15 min long in a lab, 1 hour in the country)."
+    resolution: The real price for the content of the chest are the 30 bottles of
+      EDYE (Elixir of Longevity), worth 800£ apiece. All the Elixir bottles are okay,
+      but one of the EDYE bottles is spoiled (AWA + Alchemy DV 25 from outside to
+      see that, has the content of the bottle seems to bear a lower viscosity).
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    drama: 5
+    dramatis_personae: null
+- model: scenarist.act
+  pk: 4
+  fields:
+    name: Severan Ambassy
+    chapter: '4'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.602360+00:00
+    sdt: 2023-01-16 03:13:33.233805+00:00
+    place: Miret
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: false
+    temporary: true
+    published: true
+    full_id: DEM:05:04
+    description: The time is coming for Lord Baranof to join his new troops at the
+      Black Dragon Den.
+    resolution: ''
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    drama: 5
+    dramatis_personae: null
+- model: scenarist.act
+  pk: 5
+  fields:
+    name: With Fur And Claws
+    chapter: '5'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.602360+00:00
+    sdt: 2023-01-16 03:13:33.233805+00:00
+    place: Hai-Tang
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: false
+    temporary: true
+    published: true
+    full_id: DEM:05:05
+    description: ¤gramalash¤
+    resolution: There is a group of 3 vorox that roam around miret since the governor
+      advisor has been eliminated.
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    drama: 5
+    dramatis_personae: null
+- model: scenarist.act
+  pk: 6
+  fields:
+    name: To the Depth
+    chapter: '1'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.602360+00:00
+    sdt: 2023-01-16 03:13:33.233805+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: false
+    temporary: true
+    published: true
+    full_id: DEM:04:01
+    description: zdz
+    resolution: ''
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    drama: 4
+    dramatis_personae: null
+- model: scenarist.act
+  pk: 7
+  fields:
+    name: Li Halan Schemes
+    chapter: '2'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.602360+00:00
+    sdt: 2023-01-16 03:13:33.233805+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: false
+    temporary: true
+    published: true
+    full_id: DEM:04:02
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    drama: 4
+    dramatis_personae: null
+- model: scenarist.act
+  pk: 8
+  fields:
+    name: The fate of Deldrina
+    chapter: '1'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.602360+00:00
+    sdt: 2023-01-16 03:13:33.233805+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: false
+    temporary: true
+    published: true
+    full_id: DEM:08:01
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    drama: 6
+    dramatis_personae: null
+- model: scenarist.act
+  pk: 9
+  fields:
+    name: Dealing with anger
+    chapter: '2'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.602360+00:00
+    sdt: 2023-01-16 03:13:33.233805+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: false
+    temporary: true
+    published: true
+    full_id: DEM:08:02
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    drama: 6
+    dramatis_personae: null
+- model: scenarist.act
+  pk: 10
+  fields:
+    name: Remove the Guilt(y)
+    chapter: '3'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.602360+00:00
+    sdt: 2023-01-16 03:13:33.233805+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: false
+    temporary: true
+    published: true
+    full_id: DEM:08:03
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    drama: 6
+    dramatis_personae: null
+- model: scenarist.act
+  pk: 11
+  fields:
+    name: Icon's Intrusions
+    chapter: '1'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.602360+00:00
+    sdt: 2023-01-16 03:13:33.233805+00:00
+    place: Rampart
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: false
+    temporary: true
+    published: true
+    full_id: DEM:09:01
+    description: ''
+    resolution: 'µSpecialµ
+
+      - ¤yves_digneden¤ has sealed an alliance with ¤saskia_varnovicz¤ via ¤josef_baranof¤.
+      He will thus show his good will to his son ¤calistre_digneden¤.
+
+      - ¤roman_van_dyke¤ is aware of the accomplishment of the Cartel on Rampart.
+      He will come to visit ¤floyd_carnau¤ during june.
+
+      - ¤hassan_van_dyke¤ has found a new avant-post at §35 Magdalena street in VII
+      bourough§. The cost is 1150£ and really few arrangement to be done to exploit
+      the place.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ---'
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    drama: 8
+    dramatis_personae: null
+- model: scenarist.act
+  pk: 12
+  fields:
+    name: Where the streets have no name
+    chapter: '2'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.602360+00:00
+    sdt: 2023-01-16 03:13:33.233805+00:00
+    place: Rampart / Avaneir
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: false
+    temporary: true
+    published: true
+    full_id: DEM:09:02
+    description: '- New house for the Van Dyke Cartel.
+
+      - New recruits sent by ¤roman_van_dyke¤'
+    resolution: ''
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    drama: 8
+    dramatis_personae: null
+- model: scenarist.act
+  pk: 13
+  fields:
+    name: New worlds
+    chapter: '3'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.602360+00:00
+    sdt: 2023-01-16 03:13:33.233805+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: false
+    temporary: true
+    published: true
+    full_id: DEM:09:03
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    drama: 8
+    dramatis_personae: null
+- model: scenarist.act
+  pk: 14
+  fields:
+    name: Avaneir Sleeves Auction House
+    chapter: '1'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.602360+00:00
+    sdt: 2023-01-16 03:13:33.233805+00:00
+    place: Rampart | Avaneir
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: false
+    temporary: true
+    published: true
+    full_id: DEM:07:01
+    description: "µPermanent Auctioneersµ\n¤lucien_davignonet_de_rougeglace¤\n¤valerian_juandaastas¤\n\
+      ¤algenor_keddah¤ \n¤charlize_alecto¤\n¤fenton_hardin¤\n¤lantirel_baranof¤\n\
+      ¤horatio_challensson¤\nµOther Auctioneersµ\n¤deborah_sterling_hawkwood¤ on behalf\
+      \ of ¤casper_sterling_hawkwood¤\n¤artus_de_glam¤ \n¤armande_clarand¤ on behalf\
+      \ of ¤edgar_trudaurivecin_de_la_mottevaniez¤\n¤cleopatra_avernes¤ for the §Temple\
+      \ Avesti§\n¤bernardt_voessel¤ for §Le Métier§'s loge 24.\n¤bjorn_vanderen¤ on\
+      \ behalf of ¤achilleus_vanderen¤\n¤astride_drougeglace¤\n¤eva_lise_decados¤\n\
+      ¤galvizzio_andretti_li_halan¤\n\nµPotential Auctioneersµ\n¤giorgio_masseri¤\n\
+      ¤ignacio_rolas_de_hazat¤\n¤kudoshi_sakuya¤ an allied of the §Hakura Sakomi§\
+      \ \n¤lauretta_xanthippe¤\n¤antonietta_lefu_drougeglace¤\n\n\n\n\n\n\n\n\n\n\n\
+      \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n..."
+    resolution: ''
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    drama: 7
+    dramatis_personae: null
+- model: scenarist.act
+  pk: 15
+  fields:
+    name: The Last Stand of the Prima Rosa
+    chapter: '3'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.602360+00:00
+    sdt: 2023-01-16 03:13:33.233805+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: false
+    temporary: true
+    published: true
+    full_id: DEM:09:03
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    drama: 8
+    dramatis_personae: null
+- model: scenarist.act
+  pk: 16
+  fields:
+    name: The Aftermath
+    chapter: '4'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.602360+00:00
+    sdt: 2023-01-16 03:13:33.233805+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: false
+    temporary: true
+    published: true
+    full_id: DEM:07:04
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    drama: 7
+    dramatis_personae: null
+- model: scenarist.act
+  pk: 17
+  fields:
+    name: Blessed with Fire
+    chapter: '3'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.602360+00:00
+    sdt: 2023-01-16 03:13:33.233805+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: false
+    temporary: true
+    published: true
+    full_id: DEM:06:03
+    description: ¤basqiat_oj_miharshun_aka_basque¤
+    resolution: ''
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    drama: 9
+    dramatis_personae: null
+- model: scenarist.act
+  pk: 18
+  fields:
+    name: Early Retirement
+    chapter: '1'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.602360+00:00
+    sdt: 2023-01-16 03:13:33.233805+00:00
+    place: Rampart / Veneto / Salt Province / Miret
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: false
+    temporary: true
+    published: true
+    full_id: DEM:06:01
+    description: 'The adventurers learn that Baron §Josef Baranof§ as decided to enjoy
+      an early retirement on his lands of the Black Dragon Den. He took some time
+      to take that decision, a few months, but was lead to the conclusion that adventuring
+      was no more something he wanted to do since his encounter with Lady ¤hailen_de_soto¤,
+      his new lover.
+
+      He considers that his business here has come to far, and wants to enjoy an earl
+      retirement on his newly acquired lands with his future bride.'
+    resolution: By the end of the adventure, the players should be off world going
+      to the jumpgate.
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    drama: 9
+    dramatis_personae: null
+- model: scenarist.act
+  pk: 20
+  fields:
+    name: Auction House
+    chapter: '2'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.602360+00:00
+    sdt: 2023-01-16 03:13:33.233805+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: false
+    temporary: true
+    published: true
+    full_id: DEM:06:02
+    description: The players are welcome to Avaneir magestic Skyport by Associate
+      ¤derik_bradshow¤
+    resolution: ''
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    drama: 9
+    dramatis_personae: null
+- model: scenarist.act
+  pk: 21
+  fields:
+    name: 'Sleeves: First Auctions Day'
+    chapter: '2'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.602360+00:00
+    sdt: 2023-01-16 03:13:33.233805+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: false
+    temporary: true
+    published: true
+    full_id: DEM:07:02
+    description: 'µBasic Rules:µ
+
+      Place an auction: PRE+Oratory against the response DV to get the voice.
+
+
+      µOwner of Sleeves Auction Houseµ
+
+      ¤sushiro_li_halan¤
+
+
+      µExecutive Directorµ
+
+      ¤sensu_kaneda_li_halan¤
+
+
+      µAuction Directorsµ
+
+      ¤rene_bravel¤
+
+      ¤karl_sablon_delamarre¤
+
+      ¤mieville_lecagnau¤'
+    resolution: ''
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    drama: 7
+    dramatis_personae: null
+- model: scenarist.act
+  pk: 22
+  fields:
+    name: 'Sleeves: Second Auctions Day'
+    chapter: '3'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.602360+00:00
+    sdt: 2023-01-16 03:13:33.233805+00:00
+    place: Rampart / Avaneir / Toison d'Or / Sleeves Auction House
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: false
+    temporary: true
+    published: true
+    full_id: DEM:07:03
+    description: 'Yet another day of splendor and delicate acquisitions at the heart
+      of la Toison d''Or where Sleeves makes your day a day in Heaven...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ---'
+    resolution: ''
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    drama: 7
+    dramatis_personae: null
+- model: scenarist.act
+  pk: 23
+  fields:
+    name: Alra'ad yiildiz
+    chapter: '3'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.602360+00:00
+    sdt: 2023-01-16 03:13:33.233805+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: true
+    full_id: ANTU:03:03
+    description: "µBad Guysµ The Kurgan al raa'ad yiildiz are the elite troops based\
+      \ on Verona.\r\nCommander ¤taashik_al_kalibann¤ is an honorable officer. Highly\
+      \ respected by his men and ennemies alike.\r\nProphetess ¤zarosinia_al_shazaar¤\r\
+      \n\r\nµHeroes from the Resistanceµ- Capitano ¤lorenzo_carucci¤\r\n- Capitano\
+      \ ¤juliana_zino¤\r\n- Capitano ¤tonino_vanini¤\r\n\r\n---"
+    resolution: ''
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    drama: 11
+    dramatis_personae: null
+- model: scenarist.act
+  pk: 24
+  fields:
+    name: Lurk on Rimpoche
+    chapter: '3'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.602360+00:00
+    sdt: 2023-01-16 03:13:33.233805+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: false
+    temporary: true
+    published: true
+    full_id: ANTU:01:03
+    description: "µThe Last Masseriµ\r\n- ¤arno_sforza¤\r\n- ¤kristof_ivanovicz¤\r\
+      \n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n----"
+    resolution: ¤romeric_juandaastas¤
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    drama: 10
+    dramatis_personae: null
+- model: scenarist.act
+  pk: 25
+  fields:
+    name: Imperial Mandat
+    chapter: '2'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.602360+00:00
+    sdt: 2023-01-16 03:13:33.233805+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: false
+    temporary: true
+    published: true
+    full_id: ANTU:01:02
+    description: 'µOther Protagonistsµ- ¤leona_sterling_hawkwood¤ (IQK)
+
+      - ¤leester_stenton¤ (Imperial Cohort)
+
+      - ¤gail_hardin¤ (Imperial Cohort)
+
+
+
+      - ¤magnus_isaac¤'
+    resolution: ''
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    drama: 10
+    dramatis_personae: null
+- model: scenarist.act
+  pk: 26
+  fields:
+    name: Night Road
+    chapter: '4'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.602360+00:00
+    sdt: 2023-01-16 03:13:33.233805+00:00
+    place: Around Grail Jumpgate
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: false
+    temporary: true
+    published: true
+    full_id: ANTU:01:04
+    description: "µNew horizonsµ Now it's time to test the §jumpkey§ the players have\
+      \ acquired.\r\n¤saskia_varnovicz¤"
+    resolution: ''
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    drama: 10
+    dramatis_personae: null
+- model: scenarist.act
+  pk: 27
+  fields:
+    name: Remini Space Station
+    chapter: '1'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.602360+00:00
+    sdt: 2023-01-16 03:13:33.233805+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: true
+    full_id: ANTU:03:01
+    description: "=Command Center & Control of the Gate=\r\nMeeting with the leaders\
+      \ of the offworld refugees:\r\n\r\n\r\nAnd the expedition:\r\n- ¤clara_masseri¤\r\
+      \n- ¤fenton_hardin_masseri¤ \r\n- ¤arno_sforza¤\r\n- ¤gail_hardin¤\r\n- ¤francesco_masseri¤\r\
+      \n- ¤annabella_masseri¤\r\n- ¤lucia_masseri¤\r\n- ¤alina_lecci¤\r\n\r\nOthers\
+      \ non Masseri\r\n- ¤jacob_tramel¤\r\n- ¤syark_sir_sic¤\r\n- ¤ravi_lobahura¤"
+    resolution: "=Population=\r\nµReminiµ\r\n- crew 56\r\n- marines 24\r\n- marauders\
+      \ 9\r\n- starfighter pilots 16\r\n- Sons of Sathra 16\r\n\r\nThe station can\
+      \ support 150 persons."
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    drama: 11
+    dramatis_personae: null
+- model: scenarist.act
+  pk: 28
+  fields:
+    name: Emptiness & Loneliness
+    chapter: '4'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.602360+00:00
+    sdt: 2023-01-16 03:13:33.233805+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: true
+    full_id: ANTU:03:04
+    description: 'µWorld without WaterµThis episode is the discovery of Verona in
+      its current state, with the dysfunctioning terraforming engine.
+
+      µJoin the Resistanceµ
+
+      µThe Kurgan Armyµ
+
+
+
+
+
+      ----
+
+
+
+
+
+
+
+
+
+
+
+
+      ---'
+    resolution: ''
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    drama: 11
+    dramatis_personae: null
+- model: scenarist.act
+  pk: 29
+  fields:
+    name: Not a drill
+    chapter: '2'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.602360+00:00
+    sdt: 2023-01-16 03:13:33.233805+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: true
+    full_id: ANTU:03:02
+    description: 'The conclusions from the flight test should be obvious: it takes
+      an ace to bring a lander down the ground. More than this, it can be really hazardous
+      to find a place to land properly due to the global ground condition.'
+    resolution: "=Numbers=\r\n<tt>TEC+Driving(Celestial Ship) DV 30</tt>"
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    drama: 11
+    dramatis_personae: null
+- model: scenarist.act
+  pk: 30
+  fields:
+    name: Expanding the Colony
+    chapter: '2'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.602360+00:00
+    sdt: 2023-01-16 03:13:33.233805+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: false
+    temporary: true
+    published: true
+    full_id: ANTU:02:02
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    drama: 12
+    dramatis_personae: null
+- model: scenarist.act
+  pk: 31
+  fields:
+    name: Another Keddah Fief
+    chapter: '1'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.602360+00:00
+    sdt: 2023-01-16 03:13:33.233805+00:00
+    place: Rimpoche
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: false
+    temporary: true
+    published: true
+    full_id: ANTU:02:01
+    description: '§Keddah Men§
+
+      - ¤jasmina_keddah¤: The sheik cousin is in charge for everything Rimpoche.
+
+      - ¤ezil_solomniac¤: This eskatonic priest is responsible for the well being
+      and behavior of the outpost.
+
+      - ¤mohammad_kuhnar¤: This serf has made a mission to track all changes concerning
+      the position of the Beast of Rimpoche.
+
+      - ¤egon_storken¤: Captain of the Keddah troops, he has about 40 men under his
+      command.
+
+      - ¤rimpoche_keddah_soldiers¤: Those are better soldier than the ones found usually
+      on Grail.
+
+
+
+      §Imperial Forces§
+
+      - ¤timon_skaard¤: Lord-commander of the outpost
+
+      - ¤lucius_gazarel¤: Representative of the Charioteers
+
+      - ¤moira_mckean¤: Assistant of lucius, she''s an excellent pilot.
+
+      - ¤imperial_troopers¤: The standard forces for colonial settlements. About 30
+      soldiers control the imperial outpost.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ---'
+    resolution: "The trick here is to avoid getting to close to the charioteers, because\
+      \ of the key the players have. Gazarel is an intelligent and open-minded man\
+      \ most of the time. \n\nBut his second, the treacherous McKean will do everything\
+      \ in her power to satisfy the vengeful and power hungry Killroy leaders of Grail.\n\
+      \n\n\n\n\n\n\n\n---"
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    drama: 12
+    dramatis_personae: null
+- model: scenarist.act
+  pk: 32
+  fields:
+    name: Uncharted
+    chapter: '1'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.602360+00:00
+    sdt: 2023-01-16 03:13:33.233805+00:00
+    place: Grail
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: false
+    temporary: true
+    published: true
+    full_id: ANTU:01:01
+    description: "=Expanded domains=\r\nTwo uncharted worlds are actually reachable\
+      \ through the Grail gate. Those worlds are Rimpoche, a dead world owned by ¤jasmina_keddah¤\
+      \ on behalf of House Keddah and Verona, the mythic Masseri world lost a thousand\
+      \ years ago. \r\n\r\nµRimpocheµ\r\nThe death of the world is link to lockdown\
+      \ of an annunaki leaving on the planet.\r\n\r\nµVeronaµ\r\nSome contacts have\
+      \ actually been made with Verona since about ten years, has a few Masseri still\
+      \ have the key to the system. However, this is not through common processes\
+      \ that they go through the gate. Some of them, among the Sathraist have special\
+      \ means to reach the §Sons of Sathra§ dwelling on the the other side."
+    resolution: ''
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    drama: 10
+    dramatis_personae: null
+- model: scenarist.act
+  pk: 35
+  fields:
+    name: Stellar Romance
+    chapter: '2'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.602360+00:00
+    sdt: 2023-01-16 03:13:33.233805+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: false
+    temporary: true
+    published: true
+    full_id: ANTU:04:02
+    description: "Commander ¤helena_nordwick_hawkwood¤ and Captain \n¤markus_van_delph¤\n\
+      \n\n\n¤lisbeth_mcwinter¤\n\n¤eduardo_casombras_de_sutek_de_hazat¤"
+    resolution: ''
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    drama: 13
+    dramatis_personae: null
+- model: scenarist.act
+  pk: 36
+  fields:
+    name: Sacred Tone
+    chapter: '4'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.602360+00:00
+    sdt: 2023-01-16 03:13:33.233805+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: false
+    temporary: true
+    published: true
+    full_id: ANTU:04:04
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    drama: 13
+    dramatis_personae: null
+- model: scenarist.act
+  pk: 37
+  fields:
+    name: Out of duty
+    chapter: '3'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.602360+00:00
+    sdt: 2023-01-16 03:13:33.233805+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: false
+    temporary: true
+    published: true
+    full_id: ANTU:04:03
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    drama: 13
+    dramatis_personae: null
+- model: scenarist.act
+  pk: 38
+  fields:
+    name: Esmeralda Space Station
+    chapter: '1'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.602360+00:00
+    sdt: 2023-01-16 03:13:33.233805+00:00
+    place: Grail
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: false
+    temporary: true
+    published: true
+    full_id: ANTU:04:01
+    description: This brand new imperial military hub is the new Headquarter for the
+      Garden Worlds. Ironically it has been placed on the gas giant of the Grail System
+      has the space conflict was raising in Rampart when the multiple parts of this
+      technical prowess where brought in to be set up.
+    resolution: aaa
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    drama: 13
+    dramatis_personae: null
+- model: scenarist.act
+  pk: 39
+  fields:
+    name: The trip
+    chapter: '1'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.602360+00:00
+    sdt: 2023-01-16 03:13:33.233805+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: false
+    temporary: true
+    published: true
+    full_id: WETA:01:01
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    drama: 14
+    dramatis_personae: null
+- model: scenarist.act
+  pk: 40
+  fields:
+    name: Brace yourselves !
+    chapter: '2'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.602360+00:00
+    sdt: 2023-01-16 03:13:33.233805+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: false
+    temporary: true
+    published: true
+    full_id: WETA:01:02
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    drama: 14
+    dramatis_personae: null
+- model: scenarist.act
+  pk: 41
+  fields:
+    name: Let them come
+    chapter: '3'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.602360+00:00
+    sdt: 2023-01-16 03:13:33.233805+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: false
+    temporary: true
+    published: true
+    full_id: WETA:01:03
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    drama: 14
+    dramatis_personae: null
+- model: scenarist.act
+  pk: 45
+  fields:
+    name: Station Business
+    chapter: '1'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.602360+00:00
+    sdt: 2023-01-16 03:13:33.233805+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: true
+    full_id: GUNS:01:01
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    drama: 18
+    dramatis_personae: null
+- model: scenarist.act
+  pk: 46
+  fields:
+    name: Let's get even
+    chapter: '2'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.602360+00:00
+    sdt: 2023-01-16 03:13:33.233805+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: true
+    full_id: GUNS:01:02
+    description: ¤jonas_karr¤
+    resolution: ''
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    drama: 18
+    dramatis_personae: null
+- model: scenarist.act
+  pk: 47
+  fields:
+    name: Black Out
+    chapter: '1'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.602360+00:00
+    sdt: 2023-01-16 03:13:33.233805+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: true
+    full_id: PVS:01:01
+    description: "=Introduction=\r\nµSituationµ\r\nThe PC wake up from a terrible\
+      \ crash of the penitenciary cruiser, the §Queen Victoria§, that was carrying\
+      \ them. They seem to be part of a prisoners convoy that has been heavily damaged.\
+      \ Only a few decks of the ship, starting from the main deck to the airlock beyond\
+      \ the detention block are still bringing breathable air, and the remaining crew\
+      \ need to cross the messy detention block where the PC are to reach the last\
+      \ escape pods.\r\n\r\nµEscape podsµ\r\nEach of them can host three people. Only\
+      \ three pods are remaining, one of them clearly damage (the B-Pod). The A-Pod\
+      \ will have malfunctions, but it is impossible to say so without a technical\
+      \ check. The C-Pod will do the job."
+    resolution: "µWhat really happenedµ\r\nThere was an attack of Pirates on the ship.\
+      \ Those pirates, the Kashim brotherhood, is a remnant of Li halan deserters\
+      \ that where butchered by the Kurgan during the Icon Battle."
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    drama: 19
+    dramatis_personae: null
+- model: scenarist.act
+  pk: 48
+  fields:
+    name: Under Attack
+    chapter: '2'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.602360+00:00
+    sdt: 2023-01-16 03:13:33.233805+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: true
+    full_id: PVS:01:02
+    description: "As they are preparing their escape route, they see that there's\
+      \ a beacon indicating a mining facility is near, on a moon orbiting a moon planet\
+      \ of a gas giant. \r\n\r\nAs they discover that, noises can be heard around\
+      \ the storage deck, as pirates are coming to raid the ship. They are apparently\
+      \ forcing the hull, that will take two hours to do so. They went to the Queen\
+      \ Victoria with a league escort that is actually magnetically locked to the\
+      \ cruiser."
+    resolution: "Reaching the moon should take 4 hours, with 4 manoeuver checks.\r\
+      \nIf the moon is missed, the pod will fall on the planet it orbits around. It\
+      \ is possible to hack the pods to have them follow themselves.\r\n\r\nWhen the\
+      \ pirates manage to force the hull, the leaking fusion propeller at port will\
+      \ ignite instantly, creating a deflagration that will heavily damage the league\
+      \ escort and kill 4 of the 5 pirates."
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    drama: 19
+    dramatis_personae: null
+- model: scenarist.act
+  pk: 49
+  fields:
+    name: Nameless
+    chapter: '3'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.602360+00:00
+    sdt: 2023-01-16 03:13:33.233805+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: true
+    full_id: PVS:01:03
+    description: "There are only a few ways for the players to get back their memory:\
+      \ have no actions for twelve hours and keep the inhalator mask on continuously\
+      \ (no more than a 10 minutes break per hour).\r\n\r\nThe other solution is to\
+      \ be administrated with Santrak VI doses, which can be easily found in the medical\
+      \ deck.\r\n\r\nNote that ¤logun_bran_tazin¤ is suffering the vac syndrome as\
+      \ well.\r\n\r\nIf she can make it to the penitentiary think machine, ¤cassandra_varnovicz¤\
+      \ will be able to hack into the system and get the official reason why the characters\
+      \ are here."
+    resolution: "Why the characters are here:\r\n- ¤ellis_mcmoran¤: Treason, Mutiny,\
+      \ Desertion\r\n- ¤clayton_briggs¤: Outrage to the PoM, Excomunication\r\n- ¤gustavo_salamenca_de_acero¤:\
+      \ Treason, Assassination attempt on imperial official\r\n- ¤derek_paracelsus¤:\
+      \ association with third republican terrorists, murder\r\n- ¤konrad_grimler¤:\
+      \ blackmail, personal usage of imperial mandat and assets\r\n- ¤logun_bran_tazin¤:\
+      \ murder, antinomy\r\n- ¤cassandra_varnovicz¤: association with anti-alexius\
+      \ groups, disclosure of confidential imperial data."
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    drama: 19
+    dramatis_personae: null
+- model: scenarist.act
+  pk: 50
+  fields:
+    name: Master Clockmaker
+    chapter: '1'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.602360+00:00
+    sdt: 2023-01-16 03:13:33.233805+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: true
+    full_id: DAL:01:01
+    description: "=The man=\r\nTo these days, the clockwork is supposed to be closely\
+      \ watched by the Church, but as its usage is highly restricted by financial\
+      \ matters and the specifications clearly written and shared to whoever needs\
+      \ them, the business is flourishing.\r\nZemeckis is the heir of the High College\
+      \ of the Clockwork. \r\nThe numbers of Clockmakers is really scarce, around\
+      \ 300 members at best in the empire, and 150 of them are only maintaining existing\
+      \ automats. \r\n100 more are barely reproducing existing automats from Radugas\
+      \ initial works, replacing the ones that cannot be repaired. \r\n25 of the last\
+      \ 50 members have only achieved, once or twice, to create a generation II automat.\
+      \ \r\nThe last 25 are the true clockmakers, dispatched in the whole empire.\
+      \ Only five of them, Zemeckis included, are able to compare their work to the\
+      \ work of Radugas, expending even the innovation to create generation III and\
+      \ IV prototypes.\r\n\r\n=Friends=\r\n- Cardinal ¤aldron_moxlaw¤\r\n- Master\
+      \ ¤edwig_peyrigmann¤"
+    resolution: ''
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    drama: 20
+    dramatis_personae: null
+- model: scenarist.act
+  pk: 51
+  fields:
+    name: Future missions
+    chapter: '3'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.602360+00:00
+    sdt: 2023-01-16 03:13:33.233805+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: true
+    full_id: DAL:01:03
+    description: "=Ideas for adventures=\r\nThis act is a summary of potential adventures\
+      \ that could be made in the context. \r\nµNever mess with Stigmata vetsµ\r\n\
+      A special client, a Brother Battle veteran looking for cyber improvements comes\
+      \ to pay a visit to the right person, his old freidn Zemeckis. He helps when\
+      \ desert Sihid marauders comes around Syracuse and try to raid the town and\
+      \ start to siege the Haçienda. \r\nµThe Missing Cogµ\r\nClockworker ¤djihab_carcero¤\
+      \ has sent a message to Master Zemeckis: There's might be a rogue automat on\
+      \ the system Malignatus. He has witnessed the machine violent behaviors and\
+      \ was hurt in his attempt to fix it. He managed to isolate the automat in a\
+      \ drainning room of the city sewers and is looking for solution with all other\
+      \ guildmembers he was able to gather around, but as the rain season is approaching,\
+      \ he asked for expertize to handle the problem before the Decados find out who,\
+      \ or more exactly what has caused ten murders in the city.\r\nµRussel Legacyµ\r\
+      \nAs Harvenor Russel is getting holder, he has seriously considered leaving\
+      \ his position. In 5021 AD he already left the chair of Intendant of the Lodge\
+      \ to Zemeckis, but he feels that he might better fit in the background. Leaving\
+      \ his position of one of the Grand Masters could be done to one of his two apprentices,\
+      \ or he might ask the Inner Council to handle that themselves. Such a position\
+      \ is a really interesting one to many...\r\nµClockmaker Apprenticeµ\r\nZemeckis\
+      \ wants to formalize things by choosing an official apprentice. He decides to\
+      \ create an event for that, a small tournament for which he will call the inner\
+      \ council and a few key customers that will decide the best creation.\r\nµThievesµ\r\
+      \nµNew player in townµ\r\nµInquisitors visitµ\r\nµHappy Birthday Ioniaµ\r\n\
+      µDelivery on hostile environementµ\r\nA simple first mission: deliver three\
+      \ automats in Stigmata.\r\nµEllen and the Golden Appleµ\r\nµSecret Sandsµ\r\n\
+      Where we discover interesting things about one of the main ingredient in automat\
+      \ construction."
+    resolution: ''
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    drama: 20
+    dramatis_personae: null
+- model: scenarist.act
+  pk: 52
+  fields:
+    name: Nova Stressos Soirée du Seize
+    chapter: '1'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.602360+00:00
+    sdt: 2023-01-16 03:13:33.233805+00:00
+    place: Al-Malik Fiefs / Istakhr / Samarkand / Spaceport
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: true
+    full_id: DAL:02:01
+    description: "=The 16th special=\r\nEvery 16th of the month, the Decados noble\
+      \ Nova Stresso hold a special soirée in her mansion where the Elite in invited\
+      \ to exchange about political matters, object or people of note.\r\nµThe Hostessµ\r\
+      \n- ¤karlinova_stresshaus¤ is the host, having a solid reputation being a real\
+      \ hedonist. She is gallant and vain, as most might expect. She seems to bear\
+      \ interest to every single guest who's attending to the Soirée, but she really\
+      \ has her targets according to what she has in mind. She seems that vain, she\
+      \ is not.\r\n- ¤alfonso_gradinier¤ is an Haute Couture famous weirdo. Really\
+      \ talented, he is totally unbearable among people. In rare occasion he might\
+      \ seem more pleasant person when he is taken alone on a conversation with someone\
+      \ who really shows interest on him or his work. He might even show some interest\
+      \ to his interlocutor.\r\n- ¤paulie_goodmark¤ is the mysterious assistant of\
+      \ Nova Stressos, recently in her service. Quite silent, she seems only to be\
+      \ there because of her looks, her stunning teutonic woman. This agent of the\
+      \ Hawkwoods has of course her own agendas against the Assydian circle.\r\n-\
+      \ ¤orlem_gradski¤ is Nova Stressos aide de camp. Silent. Efficient.\r\n\r\n\
+      =Cleaning Party=\r\nIf some problems might appear during the party, Nova Stressos\
+      \ had aggreed with a special contract with the Arik Al Tassoar scraver cartel:\
+      \ they will clean up everything to avoid issues with the Mutasih. About 12 ¤arikaltassoar_thugs¤\
+      \ of the Cartel are roaming in the neighborhood, waiting for any need for intervention."
+    resolution: ''
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    drama: 21
+    dramatis_personae: null
+- model: scenarist.act
+  pk: 53
+  fields:
+    name: The Grand Tour
+    chapter: '3'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.602360+00:00
+    sdt: 2023-01-16 03:13:33.233805+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: true
+    full_id: DAL:03:03
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    drama: 22
+    dramatis_personae: null
+- model: scenarist.act
+  pk: 54
+  fields:
+    name: Samarkand and the Bazaar
+    chapter: '2'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.602360+00:00
+    sdt: 2023-01-16 03:13:33.233805+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: true
+    full_id: DAL:01:02
+    description: "Samarkand, as a planetary capital, is a huge city.\r\n\r\n\r\n¤garwin_lyondras¤"
+    resolution: ''
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    drama: 20
+    dramatis_personae: null
+- model: scenarist.act
+  pk: 55
+  fields:
+    name: Recycle
+    chapter: '2'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.602360+00:00
+    sdt: 2023-01-16 03:13:33.233805+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: true
+    full_id: DAL:03:02
+    description: ''
+    resolution: Really clear inspiration from Cowboy Bebop sands reading given to
+      Spyke in Asteroid Blues.
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    drama: 22
+    dramatis_personae: null
+- model: scenarist.act
+  pk: 56
+  fields:
+    name: The Ruby of Istakhr
+    chapter: '3'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.602360+00:00
+    sdt: 2023-01-16 03:13:33.233805+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: true
+    full_id: DAL:02:03
+    description: "=The Product=\r\nIt's a Gen II automat that is supposed to be delivered,\
+      \ a special issue innuendo designed for £Sheirinselli£ in three months, specially\
+      \ handcrafted by master Zemeckis.\r\n\r\nµTamingµ\r\nThe taming requires a Science\
+      \ (Clockworking) at DV 15. A roll is done every 5 minutes. The success margins\
+      \ are summed up, and once 20 is reached the taming is done. The tamer and the\
+      \ owner must be there for the whole duration of the session.\r\n\r\nµTransportationµ\r\
+      \nThe transportation will be done by four agents: a clockworker, a security\
+      \ agent, a spiritual agent and a driver. A McGerren 44 has been prepared for\
+      \ this delivery, already loaded with the deliverable."
+    resolution: "=Discoveries=\r\nIt's in fact a Gen III machine, a thing that the\
+      \ tamer can realize during the taming, which is much more easy than expected.\
+      \ \r\nThe taming requires of course the presence of the person for which the\
+      \ automat is supposed to be, and all attending to the taming, the tamer included\
+      \ must wear a special fabric mask.\r\n\r\n=Sheisinselli=\r\nShe is a really\
+      \ special young woman, on many aspects the opoosite of her grandfather Duke\
+      \ Abdul. Feeling the place she has in the heart of the Tiger since her youngest\
+      \ age, she has made steps no others would even have thought about in the family.\
+      \ Letting the servants freely speak of their wereabouts, the life they have\
+      \ and their diffculties, worrying openly about the soldiers of the House dying\
+      \ on far away systems, she's supposed, according to expert of the house, to\
+      \ be among the next leaders of her generation.\r\nFor the sake of the story,\
+      \ here are a few examples of what she has accomplished, and on the repercussion\
+      \ it will have on the adventure.\r\n\r\nµThe Ukariµ\r\nThey have served Royale\
+      \ House al-Malik for a long time, and their strange behavior has always caught\
+      \ the attention of the young lady. During recent events during the Icon wars\
+      \ (5019), she was brought with her father Count Raifa to a reservation on Aylon,\
+      \ where she witnessed the living conditions of the ukari community. She talked\
+      \ about this to her father, but nothing can decide him to address this subject\
+      \ to the leader of the Ukari horde. She then wrote a letter to her father that\
+      \ she gave to Cardinal Adron Moxlaw, leader of the Temple Avesti. In the letter,\
+      \ she explained that in front of the Pancreator it was an indecent way to treat\
+      \ with the populations fighting for you, and that she decided that she would\
+      \ start an hunger strike hidden and protected by her ukari friends, until the\
+      \ leader make things change or that she becomes a tribute to the Pancreator\
+      \ for the sins of her fathers. She hide for six weeks in the ukari reservation,\
+      \ helped (and watched over) by a handful of loyal followers"
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    drama: 21
+    dramatis_personae: null
+- model: scenarist.act
+  pk: 57
+  fields:
+    name: Interstellar Schemes
+    chapter: '3'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.602360+00:00
+    sdt: 2023-01-16 03:13:33.233805+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: true
+    full_id: DAL:02:03
+    description: "=The Political Situation=\r\nThe Emperor does not seem to be ready\
+      \ to make a step to solve the issue with House Gesar. The current status quo\
+      \ might endanger the Empire if the Kurgan manage to recover and act with no\
+      \ further support of the Kaiser.\r\nIn the Landstradt, factions spawning...\r\
+      \n\r\nµThe Benefactiiµ\r\nThis goup wants to act against Alexius to bring a\
+      \ new leadership to the Empire.\r\n\r\n¤valterez_vauxhall¤\r\n¤tallahud_members¤"
+    resolution: ''
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    drama: 21
+    dramatis_personae: null
+- model: scenarist.act
+  pk: 58
+  fields:
+    name: Schemes Evolution
+    chapter: '2'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33.602360+00:00
+    sdt: 2023-01-16 03:13:33.233805+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: true
+    full_id: DAL:02:02
+    description: "=Many Enemies=\r\nIf someone woud \r\n\r\nµThe Tallamudµ\r\n\r\n\
+      µThe Desert Efritµ"
+    resolution: ''
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    drama: 21
+    dramatis_personae: null

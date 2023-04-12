@@ -1,0 +1,56 @@
+- model: scenarist.adventure
+  pk: 1
+  fields:
+    name: The Tiger of Istakhhr
+    chapter: '1'
+    date_offset: 0
+    dt: 2021-11-30 17:00:00+00:00
+    sdt: 2023-01-16 03:13:33.306110+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: true
+    full_id: ''
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    epic: 17
+    total_rewards: ''
+    total_challenge: 0
+    backlogs:
+    - 1
+- model: scenarist.adventure
+  pk: 2
+  fields:
+    name: Beyond Darkness
+    chapter: '2'
+    date_offset: 0
+    dt: 5022-03-05 00:00:00+00:00
+    sdt: 2023-01-16 03:13:33.306110+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: true
+    full_id: ''
+    description: "=Presentation=\r\nµForewordµ\r\nThis is the first adventure using\
+      \ the new narrative system.\r\n\r\nµSecond Part of De Automatum Legisµ\r\nAt\
+      \ this point, the players are supposed to be done with the situation in Istakhr\
+      \ and to have witnessed the terrorist attack on the Ruby.\r\n\r\n=Players=\r\
+      \n- ¤lorem_zenski¤\r\n- ¤marcus_zemeckis¤\r\n- ¤marx_whenger¤\r\n- ¤shamij_al_jabra¤"
+    resolution: ¤talahud_members¤
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    epic: 17
+    total_rewards: ''
+    total_challenge: 0
+    backlogs:
+    - 1

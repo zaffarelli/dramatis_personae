@@ -1,0 +1,231 @@
+- model: collector.campaign
+  pk: 1
+  fields:
+    title: Default Fading Suns 1994
+    epic: 6
+    description: Nothing in that, just the default config.
+    gm: 1
+    rpgsystem: 1
+    irl_year_start: 1994
+    is_active: false
+    is_available: false
+    smart_code: HDI
+    current_drama: null
+    color_front: '#f0eff4'
+    color_back: '#000000'
+    color_linkup: '#da4167'
+    color_linkdown: '#832161'
+    color_counterback: '#3d2645'
+    black_text: true
+    hidden: false
+    known_systems: ''
+    new_narrative: false
+    short_name: ''
+- model: collector.campaign
+  pk: 2
+  fields:
+    title: La Croix-Falgarde 2019
+    epic: 3
+    description: zz
+    gm: 1
+    rpgsystem: 1
+    irl_year_start: 2019
+    is_active: false
+    is_available: true
+    smart_code: ANTU
+    current_drama: null
+    color_front: '#f0eff4'
+    color_back: '#000000'
+    color_linkup: '#da4167'
+    color_linkdown: '#832161'
+    color_counterback: '#3d2645'
+    black_text: false
+    hidden: false
+    known_systems: ''
+    new_narrative: false
+    short_name: ''
+- model: collector.campaign
+  pk: 4
+  fields:
+    title: Croix-Daurade 2017
+    epic: 7
+    description: ''
+    gm: 1
+    rpgsystem: 1
+    irl_year_start: 2017
+    is_active: false
+    is_available: true
+    smart_code: DEM
+    current_drama: null
+    color_front: '#f0eff4'
+    color_back: '#000000'
+    color_linkup: '#da4167'
+    color_linkdown: '#832161'
+    color_counterback: '#3d2645'
+    black_text: false
+    hidden: false
+    known_systems: ''
+    new_narrative: false
+    short_name: ''
+- model: collector.campaign
+  pk: 7
+  fields:
+    title: Discord Campaign 2023/2024
+    epic: 14
+    description: ssdfsdf
+    gm: 1
+    rpgsystem: 1
+    irl_year_start: 2023
+    is_active: false
+    is_available: false
+    smart_code: DC_GUN
+    current_drama: 18
+    color_front: '#00F0F0F0'
+    color_back: '#00101010'
+    color_linkup: '#00801080'
+    color_linkdown: '#00401040'
+    color_counterback: '#00404040'
+    black_text: true
+    hidden: false
+    known_systems: ''
+    new_narrative: false
+    short_name: ''
+- model: collector.campaign
+  pk: 8
+  fields:
+    title: Discord Drama - Initiation
+    epic: 15
+    description: The epic for the JDR31 teams.
+    gm: 1
+    rpgsystem: 1
+    irl_year_start: 2020
+    is_active: false
+    is_available: false
+    smart_code: DD_INI
+    current_drama: null
+    color_front: '#00F0F0F0'
+    color_back: '#00101010'
+    color_linkup: '#00801080'
+    color_linkdown: '#00401040'
+    color_counterback: '#00404040'
+    black_text: true
+    hidden: false
+    known_systems: ''
+    new_narrative: false
+    short_name: ''
+- model: collector.campaign
+  pk: 9
+  fields:
+    title: Discord Campaign 2021/2022
+    epic: 16
+    description: The first epic for the discord team.
+    gm: 1
+    rpgsystem: 1
+    irl_year_start: 2021
+    is_active: false
+    is_available: true
+    smart_code: DC_TOI
+    current_drama: null
+    color_front: '#00F0F0F0'
+    color_back: '#00101010'
+    color_linkup: '#00801080'
+    color_linkdown: '#00401040'
+    color_counterback: '#00404040'
+    black_text: true
+    hidden: false
+    known_systems: Rampart|Grail|Istakhr|Gwynneth|Criticorum|Aylon|Malignatus|Cadavus|Byzantium
+      Secundus|Holy Terra|Pentateuch|Lemminkainen|Aragon|Nowhere|Cadiz|Leagueheim|Madoc|Pyre|Kordeth|Stigmata|Shaprut
+    new_narrative: false
+    short_name: ''
+- model: collector.campaign
+  pk: 10
+  fields:
+    title: Croix-Daurade 2013
+    epic: 5
+    description: The first CRJR campaign
+    gm: 1
+    rpgsystem: 1
+    irl_year_start: 2013
+    is_active: false
+    is_available: true
+    smart_code: EUL
+    current_drama: null
+    color_front: '#00F0F0F0'
+    color_back: '#00101010'
+    color_linkup: '#00801080'
+    color_linkdown: '#00401040'
+    color_counterback: '#00404040'
+    black_text: true
+    hidden: false
+    known_systems: ''
+    new_narrative: false
+    short_name: ''
+- model: collector.campaign
+  pk: 11
+  fields:
+    title: Commissaire Phillipe 1997
+    epic: 4
+    description: The first CRJR campaign
+    gm: 1
+    rpgsystem: 1
+    irl_year_start: 2001
+    is_active: false
+    is_available: true
+    smart_code: QNL
+    current_drama: null
+    color_front: '#00F0F0F0'
+    color_back: '#00101010'
+    color_linkup: '#00801080'
+    color_linkdown: '#00401040'
+    color_counterback: '#00404040'
+    black_text: true
+    hidden: false
+    known_systems: ''
+    new_narrative: false
+    short_name: ''
+- model: collector.campaign
+  pk: 12
+  fields:
+    title: Croix-Daurade 2005
+    epic: 2
+    description: ''
+    gm: 1
+    rpgsystem: 1
+    irl_year_start: 2005
+    is_active: false
+    is_available: true
+    smart_code: DAI
+    current_drama: null
+    color_front: '#00F0F0F0'
+    color_back: '#00101010'
+    color_linkup: '#00801080'
+    color_linkdown: '#00401040'
+    color_counterback: '#00404040'
+    black_text: true
+    hidden: false
+    known_systems: ''
+    new_narrative: false
+    short_name: ''
+- model: collector.campaign
+  pk: 13
+  fields:
+    title: Discord Campaign 2022/2023
+    epic: 17
+    description: ''
+    gm: 1
+    rpgsystem: 1
+    irl_year_start: 2022
+    is_active: true
+    is_available: true
+    smart_code: DC_BD
+    current_drama: null
+    color_front: '#00F0F0F0'
+    color_back: '#00101010'
+    color_linkup: '#00801080'
+    color_linkdown: '#00401040'
+    color_counterback: '#00404040'
+    black_text: true
+    hidden: false
+    known_systems: ''
+    new_narrative: true
+    short_name: Beyond Darkness - DAL II

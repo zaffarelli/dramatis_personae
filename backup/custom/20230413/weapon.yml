@@ -1,0 +1,1645 @@
+- model: collector.weapon
+  pk: 72
+  fields:
+    character: 118
+    weapon_ref: 25
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 76
+  fields:
+    character: 119
+    weapon_ref: 5
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 77
+  fields:
+    character: 119
+    weapon_ref: 21
+    ammoes: 10
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 78
+  fields:
+    character: 119
+    weapon_ref: 25
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 79
+  fields:
+    character: 118
+    weapon_ref: 16
+    ammoes: 12
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 80
+  fields:
+    character: 118
+    weapon_ref: 23
+    ammoes: 6
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30074
+  fields:
+    character: 443
+    weapon_ref: 25
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30075
+  fields:
+    character: 443
+    weapon_ref: 73
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30076
+  fields:
+    character: 443
+    weapon_ref: 14
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30078
+  fields:
+    character: 469
+    weapon_ref: 29
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30080
+  fields:
+    character: 192
+    weapon_ref: 37
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30082
+  fields:
+    character: 187
+    weapon_ref: 36
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30084
+  fields:
+    character: 467
+    weapon_ref: 51
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30086
+  fields:
+    character: 487
+    weapon_ref: 25
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30088
+  fields:
+    character: 261
+    weapon_ref: 37
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30090
+  fields:
+    character: 473
+    weapon_ref: 20
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30092
+  fields:
+    character: 272
+    weapon_ref: 31
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30096
+  fields:
+    character: 328
+    weapon_ref: 25
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30097
+  fields:
+    character: 328
+    weapon_ref: 24
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30098
+  fields:
+    character: 328
+    weapon_ref: 37
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30100
+  fields:
+    character: 125
+    weapon_ref: 37
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30102
+  fields:
+    character: 308
+    weapon_ref: 79
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30104
+  fields:
+    character: 99
+    weapon_ref: 45
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30106
+  fields:
+    character: 28
+    weapon_ref: 5
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30108
+  fields:
+    character: 307
+    weapon_ref: 12
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30110
+  fields:
+    character: 243
+    weapon_ref: 37
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30113
+  fields:
+    character: 498
+    weapon_ref: 24
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30114
+  fields:
+    character: 498
+    weapon_ref: 5
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30115
+  fields:
+    character: 519
+    weapon_ref: 57
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30116
+  fields:
+    character: 519
+    weapon_ref: 81
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30118
+  fields:
+    character: 247
+    weapon_ref: 9
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30127
+  fields:
+    character: 466
+    weapon_ref: 25
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30128
+  fields:
+    character: 466
+    weapon_ref: 49
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30131
+  fields:
+    character: 310
+    weapon_ref: 32
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30132
+  fields:
+    character: 310
+    weapon_ref: 32
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30137
+  fields:
+    character: 459
+    weapon_ref: 25
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30142
+  fields:
+    character: 23
+    weapon_ref: 13
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30143
+  fields:
+    character: 23
+    weapon_ref: 25
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30144
+  fields:
+    character: 23
+    weapon_ref: 4
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30145
+  fields:
+    character: 23
+    weapon_ref: 48
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30147
+  fields:
+    character: 462
+    weapon_ref: 25
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30150
+  fields:
+    character: 97
+    weapon_ref: 25
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30151
+  fields:
+    character: 97
+    weapon_ref: 11
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30153
+  fields:
+    character: 448
+    weapon_ref: 25
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30156
+  fields:
+    character: 107
+    weapon_ref: 24
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30157
+  fields:
+    character: 107
+    weapon_ref: 37
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30159
+  fields:
+    character: 436
+    weapon_ref: 73
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30161
+  fields:
+    character: 84
+    weapon_ref: 33
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30163
+  fields:
+    character: 150
+    weapon_ref: 37
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30166
+  fields:
+    character: 11
+    weapon_ref: 15
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30167
+  fields:
+    character: 11
+    weapon_ref: 50
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30169
+  fields:
+    character: 13
+    weapon_ref: 12
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30171
+  fields:
+    character: 441
+    weapon_ref: 25
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30173
+  fields:
+    character: 22
+    weapon_ref: 12
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30175
+  fields:
+    character: 253
+    weapon_ref: 35
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30177
+  fields:
+    character: 490
+    weapon_ref: 64
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30179
+  fields:
+    character: 260
+    weapon_ref: 37
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30182
+  fields:
+    character: 71
+    weapon_ref: 24
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30183
+  fields:
+    character: 71
+    weapon_ref: 12
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30185
+  fields:
+    character: 255
+    weapon_ref: 37
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30191
+  fields:
+    character: 501
+    weapon_ref: 60
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30193
+  fields:
+    character: 149
+    weapon_ref: 12
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30199
+  fields:
+    character: 296
+    weapon_ref: 37
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30201
+  fields:
+    character: 506
+    weapon_ref: 7
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30205
+  fields:
+    character: 472
+    weapon_ref: 65
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30211
+  fields:
+    character: 440
+    weapon_ref: 25
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30214
+  fields:
+    character: 483
+    weapon_ref: 13
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30215
+  fields:
+    character: 483
+    weapon_ref: 68
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30218
+  fields:
+    character: 491
+    weapon_ref: 25
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30219
+  fields:
+    character: 491
+    weapon_ref: 60
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30222
+  fields:
+    character: 199
+    weapon_ref: 51
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30223
+  fields:
+    character: 199
+    weapon_ref: 12
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30225
+  fields:
+    character: 480
+    weapon_ref: 25
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30227
+  fields:
+    character: 497
+    weapon_ref: 1
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30229
+  fields:
+    character: 507
+    weapon_ref: 84
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30232
+  fields:
+    character: 456
+    weapon_ref: 54
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30233
+  fields:
+    character: 456
+    weapon_ref: 60
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30236
+  fields:
+    character: 477
+    weapon_ref: 54
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30237
+  fields:
+    character: 477
+    weapon_ref: 31
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30246
+  fields:
+    character: 500
+    weapon_ref: 25
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30247
+  fields:
+    character: 500
+    weapon_ref: 60
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30253
+  fields:
+    character: 317
+    weapon_ref: 25
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30254
+  fields:
+    character: 317
+    weapon_ref: 50
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30255
+  fields:
+    character: 317
+    weapon_ref: 47
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30258
+  fields:
+    character: 496
+    weapon_ref: 21
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30259
+  fields:
+    character: 496
+    weapon_ref: 38
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30261
+  fields:
+    character: 464
+    weapon_ref: 25
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30263
+  fields:
+    character: 442
+    weapon_ref: 25
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30265
+  fields:
+    character: 68
+    weapon_ref: 37
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30269
+  fields:
+    character: 67
+    weapon_ref: 37
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30270
+  fields:
+    character: 67
+    weapon_ref: 3
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30271
+  fields:
+    character: 67
+    weapon_ref: 26
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30273
+  fields:
+    character: 130
+    weapon_ref: 21
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30279
+  fields:
+    character: 309
+    weapon_ref: 29
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30281
+  fields:
+    character: 488
+    weapon_ref: 1
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30283
+  fields:
+    character: 313
+    weapon_ref: 24
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30289
+  fields:
+    character: 468
+    weapon_ref: 54
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30293
+  fields:
+    character: 314
+    weapon_ref: 21
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30295
+  fields:
+    character: 323
+    weapon_ref: 37
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30297
+  fields:
+    character: 453
+    weapon_ref: 25
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30302
+  fields:
+    character: 183
+    weapon_ref: 30
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30303
+  fields:
+    character: 183
+    weapon_ref: 5
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30306
+  fields:
+    character: 363
+    weapon_ref: 25
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30307
+  fields:
+    character: 363
+    weapon_ref: 3
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30309
+  fields:
+    character: 455
+    weapon_ref: 60
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30313
+  fields:
+    character: 449
+    weapon_ref: 25
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30315
+  fields:
+    character: 478
+    weapon_ref: 60
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30317
+  fields:
+    character: 135
+    weapon_ref: 6
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30322
+  fields:
+    character: 481
+    weapon_ref: 54
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30323
+  fields:
+    character: 481
+    weapon_ref: 60
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30326
+  fields:
+    character: 470
+    weapon_ref: 13
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30327
+  fields:
+    character: 470
+    weapon_ref: 27
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30329
+  fields:
+    character: 458
+    weapon_ref: 21
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30352
+  fields:
+    character: 318
+    weapon_ref: 45
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30353
+  fields:
+    character: 318
+    weapon_ref: 10
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30355
+  fields:
+    character: 262
+    weapon_ref: 37
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30357
+  fields:
+    character: 475
+    weapon_ref: 37
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30359
+  fields:
+    character: 216
+    weapon_ref: 37
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30361
+  fields:
+    character: 140
+    weapon_ref: 35
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30373
+  fields:
+    character: 445
+    weapon_ref: 25
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30383
+  fields:
+    character: 457
+    weapon_ref: 54
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30385
+  fields:
+    character: 200
+    weapon_ref: 15
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30387
+  fields:
+    character: 463
+    weapon_ref: 48
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30389
+  fields:
+    character: 504
+    weapon_ref: 27
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30392
+  fields:
+    character: 452
+    weapon_ref: 54
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30393
+  fields:
+    character: 452
+    weapon_ref: 61
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30398
+  fields:
+    character: 331
+    weapon_ref: 25
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30399
+  fields:
+    character: 331
+    weapon_ref: 51
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30405
+  fields:
+    character: 508
+    weapon_ref: 13
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30406
+  fields:
+    character: 508
+    weapon_ref: 45
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30407
+  fields:
+    character: 508
+    weapon_ref: 76
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30410
+  fields:
+    character: 512
+    weapon_ref: 27
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30416
+  fields:
+    character: 444
+    weapon_ref: 7
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30418
+  fields:
+    character: 439
+    weapon_ref: 60
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30420
+  fields:
+    character: 482
+    weapon_ref: 79
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30423
+  fields:
+    character: 87
+    weapon_ref: 25
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30424
+  fields:
+    character: 87
+    weapon_ref: 30
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30435
+  fields:
+    character: 493
+    weapon_ref: 54
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30436
+  fields:
+    character: 493
+    weapon_ref: 84
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30438
+  fields:
+    character: 511
+    weapon_ref: 25
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30442
+  fields:
+    character: 265
+    weapon_ref: 37
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30448
+  fields:
+    character: 485
+    weapon_ref: 54
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30450
+  fields:
+    character: 451
+    weapon_ref: 25
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30453
+  fields:
+    character: 505
+    weapon_ref: 25
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30454
+  fields:
+    character: 505
+    weapon_ref: 33
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30457
+  fields:
+    character: 494
+    weapon_ref: 8
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30458
+  fields:
+    character: 494
+    weapon_ref: 33
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30460
+  fields:
+    character: 499
+    weapon_ref: 54
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30462
+  fields:
+    character: 479
+    weapon_ref: 25
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30473
+  fields:
+    character: 360
+    weapon_ref: 15
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30474
+  fields:
+    character: 360
+    weapon_ref: 61
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30478
+  fields:
+    character: 151
+    weapon_ref: 35
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30480
+  fields:
+    character: 259
+    weapon_ref: 37
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30482
+  fields:
+    character: 256
+    weapon_ref: 12
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30485
+  fields:
+    character: 492
+    weapon_ref: 25
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30486
+  fields:
+    character: 492
+    weapon_ref: 62
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30493
+  fields:
+    character: 471
+    weapon_ref: 61
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30494
+  fields:
+    character: 471
+    weapon_ref: 37
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30499
+  fields:
+    character: 486
+    weapon_ref: 61
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30503
+  fields:
+    character: 59
+    weapon_ref: 37
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30507
+  fields:
+    character: 446
+    weapon_ref: 54
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30508
+  fields:
+    character: 446
+    weapon_ref: 60
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30509
+  fields:
+    character: 446
+    weapon_ref: 79
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30511
+  fields:
+    character: 461
+    weapon_ref: 79
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30513
+  fields:
+    character: 484
+    weapon_ref: 54
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30515
+  fields:
+    character: 426
+    weapon_ref: 74
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30524
+  fields:
+    character: 430
+    weapon_ref: 25
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30525
+  fields:
+    character: 430
+    weapon_ref: 31
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30529
+  fields:
+    character: 424
+    weapon_ref: 25
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30530
+  fields:
+    character: 424
+    weapon_ref: 57
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30531
+  fields:
+    character: 424
+    weapon_ref: 58
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30534
+  fields:
+    character: 390
+    weapon_ref: 47
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30535
+  fields:
+    character: 390
+    weapon_ref: 6
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30537
+  fields:
+    character: 427
+    weapon_ref: 1
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30539
+  fields:
+    character: 425
+    weapon_ref: 5
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30543
+  fields:
+    character: 465
+    weapon_ref: 61
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30548
+  fields:
+    character: 429
+    weapon_ref: 25
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30549
+  fields:
+    character: 429
+    weapon_ref: 21
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30552
+  fields:
+    character: 431
+    weapon_ref: 25
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30553
+  fields:
+    character: 431
+    weapon_ref: 27
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30574
+  fields:
+    character: 423
+    weapon_ref: 25
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30575
+  fields:
+    character: 423
+    weapon_ref: 21
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30586
+  fields:
+    character: 392
+    weapon_ref: 25
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30587
+  fields:
+    character: 392
+    weapon_ref: 51
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 30687
+  fields:
+    character: 489
+    weapon_ref: 31
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 31369
+  fields:
+    character: 516
+    weapon_ref: 25
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 31370
+  fields:
+    character: 516
+    weapon_ref: 61
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 31372
+  fields:
+    character: 476
+    weapon_ref: 50
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 31595
+  fields:
+    character: 454
+    weapon_ref: 29
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 31596
+  fields:
+    character: 454
+    weapon_ref: 49
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 31761
+  fields:
+    character: 529
+    weapon_ref: 5
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 31772
+  fields:
+    character: 547
+    weapon_ref: 25
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 31773
+  fields:
+    character: 547
+    weapon_ref: 49
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 31937
+  fields:
+    character: 18
+    weapon_ref: 87
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 31938
+  fields:
+    character: 18
+    weapon_ref: 45
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 31964
+  fields:
+    character: 524
+    weapon_ref: 15
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 31965
+  fields:
+    character: 524
+    weapon_ref: 13
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 31966
+  fields:
+    character: 524
+    weapon_ref: 68
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 31983
+  fields:
+    character: 338
+    weapon_ref: 20
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 31984
+  fields:
+    character: 338
+    weapon_ref: 12
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 31988
+  fields:
+    character: 304
+    weapon_ref: 22
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 31993
+  fields:
+    character: 126
+    weapon_ref: 37
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 31997
+  fields:
+    character: 146
+    weapon_ref: 37
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 32001
+  fields:
+    character: 143
+    weapon_ref: 45
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 32005
+  fields:
+    character: 7
+    weapon_ref: 20
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 32009
+  fields:
+    character: 420
+    weapon_ref: 6
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 32013
+  fields:
+    character: 93
+    weapon_ref: 45
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 32018
+  fields:
+    character: 77
+    weapon_ref: 37
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 32027
+  fields:
+    character: 533
+    weapon_ref: 15
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 32028
+  fields:
+    character: 533
+    weapon_ref: 65
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 32033
+  fields:
+    character: 102
+    weapon_ref: 37
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 32039
+  fields:
+    character: 145
+    weapon_ref: 37
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 32050
+  fields:
+    character: 136
+    weapon_ref: 31
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 32051
+  fields:
+    character: 136
+    weapon_ref: 18
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 32062
+  fields:
+    character: 144
+    weapon_ref: 68
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 32063
+  fields:
+    character: 144
+    weapon_ref: 10
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 32067
+  fields:
+    character: 267
+    weapon_ref: 37
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 32071
+  fields:
+    character: 303
+    weapon_ref: 31
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 32083
+  fields:
+    character: 556
+    weapon_ref: 54
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 32085
+  fields:
+    character: 515
+    weapon_ref: 24
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 32090
+  fields:
+    character: 447
+    weapon_ref: 25
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 32091
+  fields:
+    character: 447
+    weapon_ref: 31
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 32102
+  fields:
+    character: 450
+    weapon_ref: 4
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 32103
+  fields:
+    character: 450
+    weapon_ref: 47
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 32104
+  fields:
+    character: 460
+    weapon_ref: 25
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 32105
+  fields:
+    character: 460
+    weapon_ref: 30
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 32106
+  fields:
+    character: 189
+    weapon_ref: 13
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 32107
+  fields:
+    character: 189
+    weapon_ref: 27
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 32108
+  fields:
+    character: 503
+    weapon_ref: 62
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 32109
+  fields:
+    character: 503
+    weapon_ref: 46
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 32110
+  fields:
+    character: 502
+    weapon_ref: 42
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 32112
+  fields:
+    character: 5
+    weapon_ref: 7
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 32118
+  fields:
+    character: 495
+    weapon_ref: 35
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 32125
+  fields:
+    character: 554
+    weapon_ref: 48
+    ammoes: 0
+    weapon_of_choice: false
+- model: collector.weapon
+  pk: 32132
+  fields:
+    character: 565
+    weapon_ref: 13
+    ammoes: 0
+    weapon_of_choice: false

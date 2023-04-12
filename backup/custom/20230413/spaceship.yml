@@ -1,0 +1,44 @@
+- model: collector.spaceship
+  pk: 12
+  fields:
+    full_name: Tarentula
+    ship_ref: 45
+    owner: 447
+    flag: Pneumatic Order of Engineers (Merchants League)
+    registration_system: 18
+    is_available: true
+    notes: ''
+    video: '7'
+- model: collector.spaceship
+  pk: 13
+  fields:
+    full_name: Hatoi Satori
+    ship_ref: 46
+    owner: 454
+    flag: Pneumatic Order of Engineers (Merchants League)
+    registration_system: 18
+    is_available: false
+    notes: ''
+    video: null
+- model: collector.spaceship
+  pk: 14
+  fields:
+    full_name: Morgana
+    ship_ref: 47
+    owner: 460
+    flag: Pneumatic Order of Engineers (Merchants League)
+    registration_system: 18
+    is_available: false
+    notes: ''
+    video: ''
+- model: collector.spaceship
+  pk: 15
+  fields:
+    full_name: Vigilante
+    ship_ref: 48
+    owner: 450
+    flag: Pneumatic Order of Engineers (Merchants League)
+    registration_system: 18
+    is_available: false
+    notes: ''
+    video: vigilante

@@ -1,0 +1,9420 @@
+- model: collector.skillmodificator
+  pk: 1
+  fields:
+    tour_of_duty_ref: 1
+    skill_ref: 40
+    value: 1
+- model: collector.skillmodificator
+  pk: 2
+  fields:
+    tour_of_duty_ref: 1
+    skill_ref: 23
+    value: 1
+- model: collector.skillmodificator
+  pk: 3
+  fields:
+    tour_of_duty_ref: 1
+    skill_ref: 157
+    value: 1
+- model: collector.skillmodificator
+  pk: 5
+  fields:
+    tour_of_duty_ref: 10
+    skill_ref: 14
+    value: 2
+- model: collector.skillmodificator
+  pk: 6
+  fields:
+    tour_of_duty_ref: 10
+    skill_ref: 40
+    value: 3
+- model: collector.skillmodificator
+  pk: 7
+  fields:
+    tour_of_duty_ref: 10
+    skill_ref: 48
+    value: 1
+- model: collector.skillmodificator
+  pk: 8
+  fields:
+    tour_of_duty_ref: 7
+    skill_ref: 18
+    value: 1
+- model: collector.skillmodificator
+  pk: 9
+  fields:
+    tour_of_duty_ref: 7
+    skill_ref: 19
+    value: 2
+- model: collector.skillmodificator
+  pk: 10
+  fields:
+    tour_of_duty_ref: 7
+    skill_ref: 6
+    value: 1
+- model: collector.skillmodificator
+  pk: 11
+  fields:
+    tour_of_duty_ref: 11
+    skill_ref: 16
+    value: 1
+- model: collector.skillmodificator
+  pk: 12
+  fields:
+    tour_of_duty_ref: 11
+    skill_ref: 53
+    value: 1
+- model: collector.skillmodificator
+  pk: 13
+  fields:
+    tour_of_duty_ref: 11
+    skill_ref: 19
+    value: 1
+- model: collector.skillmodificator
+  pk: 14
+  fields:
+    tour_of_duty_ref: 11
+    skill_ref: 156
+    value: 1
+- model: collector.skillmodificator
+  pk: 15
+  fields:
+    tour_of_duty_ref: 11
+    skill_ref: 154
+    value: 1
+- model: collector.skillmodificator
+  pk: 16
+  fields:
+    tour_of_duty_ref: 11
+    skill_ref: 22
+    value: 1
+- model: collector.skillmodificator
+  pk: 17
+  fields:
+    tour_of_duty_ref: 11
+    skill_ref: 27
+    value: 1
+- model: collector.skillmodificator
+  pk: 18
+  fields:
+    tour_of_duty_ref: 11
+    skill_ref: 50
+    value: 1
+- model: collector.skillmodificator
+  pk: 19
+  fields:
+    tour_of_duty_ref: 11
+    skill_ref: 1
+    value: 1
+- model: collector.skillmodificator
+  pk: 20
+  fields:
+    tour_of_duty_ref: 11
+    skill_ref: 23
+    value: 1
+- model: collector.skillmodificator
+  pk: 21
+  fields:
+    tour_of_duty_ref: 10
+    skill_ref: 6
+    value: 1
+- model: collector.skillmodificator
+  pk: 22
+  fields:
+    tour_of_duty_ref: 10
+    skill_ref: 22
+    value: 1
+- model: collector.skillmodificator
+  pk: 23
+  fields:
+    tour_of_duty_ref: 10
+    skill_ref: 17
+    value: 1
+- model: collector.skillmodificator
+  pk: 24
+  fields:
+    tour_of_duty_ref: 10
+    skill_ref: 30
+    value: 1
+- model: collector.skillmodificator
+  pk: 25
+  fields:
+    tour_of_duty_ref: 13
+    skill_ref: 14
+    value: 1
+- model: collector.skillmodificator
+  pk: 26
+  fields:
+    tour_of_duty_ref: 13
+    skill_ref: 18
+    value: 1
+- model: collector.skillmodificator
+  pk: 27
+  fields:
+    tour_of_duty_ref: 13
+    skill_ref: 30
+    value: 2
+- model: collector.skillmodificator
+  pk: 28
+  fields:
+    tour_of_duty_ref: 13
+    skill_ref: 16
+    value: 1
+- model: collector.skillmodificator
+  pk: 29
+  fields:
+    tour_of_duty_ref: 13
+    skill_ref: 40
+    value: 1
+- model: collector.skillmodificator
+  pk: 30
+  fields:
+    tour_of_duty_ref: 13
+    skill_ref: 19
+    value: 2
+- model: collector.skillmodificator
+  pk: 31
+  fields:
+    tour_of_duty_ref: 13
+    skill_ref: 6
+    value: 1
+- model: collector.skillmodificator
+  pk: 32
+  fields:
+    tour_of_duty_ref: 13
+    skill_ref: 48
+    value: 1
+- model: collector.skillmodificator
+  pk: 33
+  fields:
+    tour_of_duty_ref: 13
+    skill_ref: 34
+    value: 2
+- model: collector.skillmodificator
+  pk: 34
+  fields:
+    tour_of_duty_ref: 13
+    skill_ref: 66
+    value: 1
+- model: collector.skillmodificator
+  pk: 35
+  fields:
+    tour_of_duty_ref: 13
+    skill_ref: 72
+    value: 2
+- model: collector.skillmodificator
+  pk: 36
+  fields:
+    tour_of_duty_ref: 8
+    skill_ref: 30
+    value: 1
+- model: collector.skillmodificator
+  pk: 37
+  fields:
+    tour_of_duty_ref: 8
+    skill_ref: 40
+    value: 1
+- model: collector.skillmodificator
+  pk: 38
+  fields:
+    tour_of_duty_ref: 8
+    skill_ref: 19
+    value: 2
+- model: collector.skillmodificator
+  pk: 39
+  fields:
+    tour_of_duty_ref: 8
+    skill_ref: 10
+    value: 2
+- model: collector.skillmodificator
+  pk: 41
+  fields:
+    tour_of_duty_ref: 8
+    skill_ref: 48
+    value: 1
+- model: collector.skillmodificator
+  pk: 42
+  fields:
+    tour_of_duty_ref: 8
+    skill_ref: 34
+    value: 2
+- model: collector.skillmodificator
+  pk: 43
+  fields:
+    tour_of_duty_ref: 8
+    skill_ref: 158
+    value: 2
+- model: collector.skillmodificator
+  pk: 44
+  fields:
+    tour_of_duty_ref: 8
+    skill_ref: 68
+    value: 1
+- model: collector.skillmodificator
+  pk: 45
+  fields:
+    tour_of_duty_ref: 8
+    skill_ref: 28
+    value: 1
+- model: collector.skillmodificator
+  pk: 46
+  fields:
+    tour_of_duty_ref: 8
+    skill_ref: 72
+    value: 1
+- model: collector.skillmodificator
+  pk: 47
+  fields:
+    tour_of_duty_ref: 15
+    skill_ref: 14
+    value: 1
+- model: collector.skillmodificator
+  pk: 48
+  fields:
+    tour_of_duty_ref: 15
+    skill_ref: 40
+    value: 2
+- model: collector.skillmodificator
+  pk: 49
+  fields:
+    tour_of_duty_ref: 15
+    skill_ref: 23
+    value: 1
+- model: collector.skillmodificator
+  pk: 50
+  fields:
+    tour_of_duty_ref: 15
+    skill_ref: 48
+    value: 1
+- model: collector.skillmodificator
+  pk: 51
+  fields:
+    tour_of_duty_ref: 9
+    skill_ref: 53
+    value: 2
+- model: collector.skillmodificator
+  pk: 52
+  fields:
+    tour_of_duty_ref: 9
+    skill_ref: 16
+    value: 1
+- model: collector.skillmodificator
+  pk: 53
+  fields:
+    tour_of_duty_ref: 9
+    skill_ref: 60
+    value: 1
+- model: collector.skillmodificator
+  pk: 54
+  fields:
+    tour_of_duty_ref: 9
+    skill_ref: 154
+    value: 1
+- model: collector.skillmodificator
+  pk: 55
+  fields:
+    tour_of_duty_ref: 9
+    skill_ref: 23
+    value: 2
+- model: collector.skillmodificator
+  pk: 56
+  fields:
+    tour_of_duty_ref: 9
+    skill_ref: 32
+    value: 1
+- model: collector.skillmodificator
+  pk: 57
+  fields:
+    tour_of_duty_ref: 9
+    skill_ref: 33
+    value: 1
+- model: collector.skillmodificator
+  pk: 59
+  fields:
+    tour_of_duty_ref: 7
+    skill_ref: 48
+    value: 1
+- model: collector.skillmodificator
+  pk: 61
+  fields:
+    tour_of_duty_ref: 7
+    skill_ref: 66
+    value: 1
+- model: collector.skillmodificator
+  pk: 62
+  fields:
+    tour_of_duty_ref: 7
+    skill_ref: 72
+    value: 1
+- model: collector.skillmodificator
+  pk: 63
+  fields:
+    tour_of_duty_ref: 2
+    skill_ref: 23
+    value: 1
+- model: collector.skillmodificator
+  pk: 64
+  fields:
+    tour_of_duty_ref: 2
+    skill_ref: 157
+    value: 1
+- model: collector.skillmodificator
+  pk: 65
+  fields:
+    tour_of_duty_ref: 2
+    skill_ref: 32
+    value: 1
+- model: collector.skillmodificator
+  pk: 67
+  fields:
+    tour_of_duty_ref: 3
+    skill_ref: 23
+    value: 1
+- model: collector.skillmodificator
+  pk: 68
+  fields:
+    tour_of_duty_ref: 3
+    skill_ref: 157
+    value: 1
+- model: collector.skillmodificator
+  pk: 70
+  fields:
+    tour_of_duty_ref: 3
+    skill_ref: 50
+    value: 1
+- model: collector.skillmodificator
+  pk: 71
+  fields:
+    tour_of_duty_ref: 28
+    skill_ref: 30
+    value: 1
+- model: collector.skillmodificator
+  pk: 72
+  fields:
+    tour_of_duty_ref: 28
+    skill_ref: 6
+    value: 1
+- model: collector.skillmodificator
+  pk: 73
+  fields:
+    tour_of_duty_ref: 28
+    skill_ref: 40
+    value: 2
+- model: collector.skillmodificator
+  pk: 74
+  fields:
+    tour_of_duty_ref: 28
+    skill_ref: 50
+    value: 1
+- model: collector.skillmodificator
+  pk: 75
+  fields:
+    tour_of_duty_ref: 14
+    skill_ref: 30
+    value: 1
+- model: collector.skillmodificator
+  pk: 76
+  fields:
+    tour_of_duty_ref: 14
+    skill_ref: 40
+    value: 1
+- model: collector.skillmodificator
+  pk: 77
+  fields:
+    tour_of_duty_ref: 14
+    skill_ref: 19
+    value: 2
+- model: collector.skillmodificator
+  pk: 78
+  fields:
+    tour_of_duty_ref: 14
+    skill_ref: 48
+    value: 1
+- model: collector.skillmodificator
+  pk: 79
+  fields:
+    tour_of_duty_ref: 14
+    skill_ref: 34
+    value: 2
+- model: collector.skillmodificator
+  pk: 80
+  fields:
+    tour_of_duty_ref: 14
+    skill_ref: 158
+    value: 1
+- model: collector.skillmodificator
+  pk: 81
+  fields:
+    tour_of_duty_ref: 14
+    skill_ref: 68
+    value: 1
+- model: collector.skillmodificator
+  pk: 82
+  fields:
+    tour_of_duty_ref: 14
+    skill_ref: 28
+    value: 1
+- model: collector.skillmodificator
+  pk: 83
+  fields:
+    tour_of_duty_ref: 12
+    skill_ref: 1
+    value: 2
+- model: collector.skillmodificator
+  pk: 84
+  fields:
+    tour_of_duty_ref: 12
+    skill_ref: 24
+    value: 3
+- model: collector.skillmodificator
+  pk: 85
+  fields:
+    tour_of_duty_ref: 12
+    skill_ref: 32
+    value: 1
+- model: collector.skillmodificator
+  pk: 86
+  fields:
+    tour_of_duty_ref: 12
+    skill_ref: 157
+    value: 3
+- model: collector.skillmodificator
+  pk: 88
+  fields:
+    tour_of_duty_ref: 16
+    skill_ref: 53
+    value: 2
+- model: collector.skillmodificator
+  pk: 89
+  fields:
+    tour_of_duty_ref: 16
+    skill_ref: 16
+    value: 1
+- model: collector.skillmodificator
+  pk: 90
+  fields:
+    tour_of_duty_ref: 16
+    skill_ref: 60
+    value: 1
+- model: collector.skillmodificator
+  pk: 92
+  fields:
+    tour_of_duty_ref: 16
+    skill_ref: 23
+    value: 2
+- model: collector.skillmodificator
+  pk: 93
+  fields:
+    tour_of_duty_ref: 16
+    skill_ref: 33
+    value: 2
+- model: collector.skillmodificator
+  pk: 94
+  fields:
+    tour_of_duty_ref: 16
+    skill_ref: 157
+    value: 1
+- model: collector.skillmodificator
+  pk: 95
+  fields:
+    tour_of_duty_ref: 16
+    skill_ref: 154
+    value: 1
+- model: collector.skillmodificator
+  pk: 97
+  fields:
+    tour_of_duty_ref: 17
+    skill_ref: 53
+    value: 1
+- model: collector.skillmodificator
+  pk: 98
+  fields:
+    tour_of_duty_ref: 17
+    skill_ref: 30
+    value: 1
+- model: collector.skillmodificator
+  pk: 99
+  fields:
+    tour_of_duty_ref: 17
+    skill_ref: 14
+    value: 1
+- model: collector.skillmodificator
+  pk: 100
+  fields:
+    tour_of_duty_ref: 17
+    skill_ref: 18
+    value: 1
+- model: collector.skillmodificator
+  pk: 101
+  fields:
+    tour_of_duty_ref: 17
+    skill_ref: 40
+    value: 1
+- model: collector.skillmodificator
+  pk: 102
+  fields:
+    tour_of_duty_ref: 17
+    skill_ref: 19
+    value: 1
+- model: collector.skillmodificator
+  pk: 103
+  fields:
+    tour_of_duty_ref: 17
+    skill_ref: 16
+    value: 1
+- model: collector.skillmodificator
+  pk: 104
+  fields:
+    tour_of_duty_ref: 17
+    skill_ref: 60
+    value: 1
+- model: collector.skillmodificator
+  pk: 105
+  fields:
+    tour_of_duty_ref: 17
+    skill_ref: 6
+    value: 1
+- model: collector.skillmodificator
+  pk: 106
+  fields:
+    tour_of_duty_ref: 17
+    skill_ref: 153
+    value: 2
+- model: collector.skillmodificator
+  pk: 107
+  fields:
+    tour_of_duty_ref: 17
+    skill_ref: 23
+    value: 1
+- model: collector.skillmodificator
+  pk: 108
+  fields:
+    tour_of_duty_ref: 17
+    skill_ref: 157
+    value: 1
+- model: collector.skillmodificator
+  pk: 109
+  fields:
+    tour_of_duty_ref: 17
+    skill_ref: 123
+    value: 1
+- model: collector.skillmodificator
+  pk: 110
+  fields:
+    tour_of_duty_ref: 38
+    skill_ref: 1
+    value: 1
+- model: collector.skillmodificator
+  pk: 111
+  fields:
+    tour_of_duty_ref: 38
+    skill_ref: 23
+    value: 1
+- model: collector.skillmodificator
+  pk: 112
+  fields:
+    tour_of_duty_ref: 38
+    skill_ref: 82
+    value: 1
+- model: collector.skillmodificator
+  pk: 113
+  fields:
+    tour_of_duty_ref: 38
+    skill_ref: 40
+    value: 1
+- model: collector.skillmodificator
+  pk: 114
+  fields:
+    tour_of_duty_ref: 38
+    skill_ref: 14
+    value: 1
+- model: collector.skillmodificator
+  pk: 115
+  fields:
+    tour_of_duty_ref: 38
+    skill_ref: 83
+    value: 1
+- model: collector.skillmodificator
+  pk: 116
+  fields:
+    tour_of_duty_ref: 38
+    skill_ref: 43
+    value: 1
+- model: collector.skillmodificator
+  pk: 117
+  fields:
+    tour_of_duty_ref: 38
+    skill_ref: 158
+    value: 1
+- model: collector.skillmodificator
+  pk: 118
+  fields:
+    tour_of_duty_ref: 39
+    skill_ref: 13
+    value: 1
+- model: collector.skillmodificator
+  pk: 119
+  fields:
+    tour_of_duty_ref: 39
+    skill_ref: 6
+    value: 1
+- model: collector.skillmodificator
+  pk: 120
+  fields:
+    tour_of_duty_ref: 39
+    skill_ref: 40
+    value: 3
+- model: collector.skillmodificator
+  pk: 121
+  fields:
+    tour_of_duty_ref: 39
+    skill_ref: 14
+    value: 2
+- model: collector.skillmodificator
+  pk: 122
+  fields:
+    tour_of_duty_ref: 39
+    skill_ref: 62
+    value: 1
+- model: collector.skillmodificator
+  pk: 123
+  fields:
+    tour_of_duty_ref: 40
+    skill_ref: 14
+    value: 1
+- model: collector.skillmodificator
+  pk: 125
+  fields:
+    tour_of_duty_ref: 40
+    skill_ref: 12
+    value: 1
+- model: collector.skillmodificator
+  pk: 126
+  fields:
+    tour_of_duty_ref: 40
+    skill_ref: 27
+    value: 1
+- model: collector.skillmodificator
+  pk: 127
+  fields:
+    tour_of_duty_ref: 40
+    skill_ref: 15
+    value: 1
+- model: collector.skillmodificator
+  pk: 128
+  fields:
+    tour_of_duty_ref: 40
+    skill_ref: 48
+    value: 1
+- model: collector.skillmodificator
+  pk: 129
+  fields:
+    tour_of_duty_ref: 40
+    skill_ref: 61
+    value: 1
+- model: collector.skillmodificator
+  pk: 130
+  fields:
+    tour_of_duty_ref: 40
+    skill_ref: 39
+    value: 1
+- model: collector.skillmodificator
+  pk: 131
+  fields:
+    tour_of_duty_ref: 40
+    skill_ref: 19
+    value: 1
+- model: collector.skillmodificator
+  pk: 132
+  fields:
+    tour_of_duty_ref: 40
+    skill_ref: 60
+    value: 1
+- model: collector.skillmodificator
+  pk: 133
+  fields:
+    tour_of_duty_ref: 23
+    skill_ref: 14
+    value: 1
+- model: collector.skillmodificator
+  pk: 134
+  fields:
+    tour_of_duty_ref: 23
+    skill_ref: 30
+    value: 2
+- model: collector.skillmodificator
+  pk: 135
+  fields:
+    tour_of_duty_ref: 23
+    skill_ref: 53
+    value: 1
+- model: collector.skillmodificator
+  pk: 136
+  fields:
+    tour_of_duty_ref: 23
+    skill_ref: 23
+    value: 2
+- model: collector.skillmodificator
+  pk: 137
+  fields:
+    tour_of_duty_ref: 23
+    skill_ref: 18
+    value: 1
+- model: collector.skillmodificator
+  pk: 138
+  fields:
+    tour_of_duty_ref: 23
+    skill_ref: 32
+    value: 2
+- model: collector.skillmodificator
+  pk: 139
+  fields:
+    tour_of_duty_ref: 23
+    skill_ref: 46
+    value: 1
+- model: collector.skillmodificator
+  pk: 140
+  fields:
+    tour_of_duty_ref: 23
+    skill_ref: 49
+    value: 1
+- model: collector.skillmodificator
+  pk: 141
+  fields:
+    tour_of_duty_ref: 23
+    skill_ref: 38
+    value: 2
+- model: collector.skillmodificator
+  pk: 142
+  fields:
+    tour_of_duty_ref: 29
+    skill_ref: 30
+    value: 1
+- model: collector.skillmodificator
+  pk: 143
+  fields:
+    tour_of_duty_ref: 29
+    skill_ref: 40
+    value: 1
+- model: collector.skillmodificator
+  pk: 144
+  fields:
+    tour_of_duty_ref: 29
+    skill_ref: 23
+    value: 1
+- model: collector.skillmodificator
+  pk: 146
+  fields:
+    tour_of_duty_ref: 41
+    skill_ref: 1
+    value: 2
+- model: collector.skillmodificator
+  pk: 147
+  fields:
+    tour_of_duty_ref: 41
+    skill_ref: 6
+    value: 2
+- model: collector.skillmodificator
+  pk: 148
+  fields:
+    tour_of_duty_ref: 41
+    skill_ref: 18
+    value: 2
+- model: collector.skillmodificator
+  pk: 149
+  fields:
+    tour_of_duty_ref: 41
+    skill_ref: 24
+    value: 2
+- model: collector.skillmodificator
+  pk: 152
+  fields:
+    tour_of_duty_ref: 41
+    skill_ref: 74
+    value: 1
+- model: collector.skillmodificator
+  pk: 153
+  fields:
+    tour_of_duty_ref: 41
+    skill_ref: 16
+    value: 2
+- model: collector.skillmodificator
+  pk: 154
+  fields:
+    tour_of_duty_ref: 41
+    skill_ref: 46
+    value: 2
+- model: collector.skillmodificator
+  pk: 155
+  fields:
+    tour_of_duty_ref: 41
+    skill_ref: 67
+    value: 2
+- model: collector.skillmodificator
+  pk: 156
+  fields:
+    tour_of_duty_ref: 30
+    skill_ref: 23
+    value: 1
+- model: collector.skillmodificator
+  pk: 157
+  fields:
+    tour_of_duty_ref: 30
+    skill_ref: 24
+    value: 1
+- model: collector.skillmodificator
+  pk: 158
+  fields:
+    tour_of_duty_ref: 30
+    skill_ref: 89
+    value: 1
+- model: collector.skillmodificator
+  pk: 159
+  fields:
+    tour_of_duty_ref: 30
+    skill_ref: 85
+    value: 2
+- model: collector.skillmodificator
+  pk: 160
+  fields:
+    tour_of_duty_ref: 31
+    skill_ref: 23
+    value: 1
+- model: collector.skillmodificator
+  pk: 161
+  fields:
+    tour_of_duty_ref: 31
+    skill_ref: 169
+    value: 2
+- model: collector.skillmodificator
+  pk: 163
+  fields:
+    tour_of_duty_ref: 4
+    skill_ref: 23
+    value: 1
+- model: collector.skillmodificator
+  pk: 164
+  fields:
+    tour_of_duty_ref: 4
+    skill_ref: 157
+    value: 1
+- model: collector.skillmodificator
+  pk: 165
+  fields:
+    tour_of_duty_ref: 4
+    skill_ref: 33
+    value: 2
+- model: collector.skillmodificator
+  pk: 167
+  fields:
+    tour_of_duty_ref: 32
+    skill_ref: 30
+    value: 1
+- model: collector.skillmodificator
+  pk: 168
+  fields:
+    tour_of_duty_ref: 32
+    skill_ref: 40
+    value: 2
+- model: collector.skillmodificator
+  pk: 169
+  fields:
+    tour_of_duty_ref: 32
+    skill_ref: 23
+    value: 1
+- model: collector.skillmodificator
+  pk: 171
+  fields:
+    tour_of_duty_ref: 33
+    skill_ref: 23
+    value: 1
+- model: collector.skillmodificator
+  pk: 172
+  fields:
+    tour_of_duty_ref: 33
+    skill_ref: 24
+    value: 1
+- model: collector.skillmodificator
+  pk: 173
+  fields:
+    tour_of_duty_ref: 33
+    skill_ref: 89
+    value: 1
+- model: collector.skillmodificator
+  pk: 174
+  fields:
+    tour_of_duty_ref: 33
+    skill_ref: 85
+    value: 2
+- model: collector.skillmodificator
+  pk: 175
+  fields:
+    tour_of_duty_ref: 3
+    skill_ref: 6
+    value: 1
+- model: collector.skillmodificator
+  pk: 176
+  fields:
+    tour_of_duty_ref: 16
+    skill_ref: 46
+    value: 4
+- model: collector.skillmodificator
+  pk: 177
+  fields:
+    tour_of_duty_ref: 2
+    skill_ref: 33
+    value: 1
+- model: collector.skillmodificator
+  pk: 178
+  fields:
+    tour_of_duty_ref: 1
+    skill_ref: 34
+    value: 1
+- model: collector.skillmodificator
+  pk: 179
+  fields:
+    tour_of_duty_ref: 29
+    skill_ref: 72
+    value: 1
+- model: collector.skillmodificator
+  pk: 180
+  fields:
+    tour_of_duty_ref: 31
+    skill_ref: 68
+    value: 1
+- model: collector.skillmodificator
+  pk: 181
+  fields:
+    tour_of_duty_ref: 34
+    skill_ref: 23
+    value: 1
+- model: collector.skillmodificator
+  pk: 182
+  fields:
+    tour_of_duty_ref: 34
+    skill_ref: 169
+    value: 2
+- model: collector.skillmodificator
+  pk: 184
+  fields:
+    tour_of_duty_ref: 6
+    skill_ref: 16
+    value: 1
+- model: collector.skillmodificator
+  pk: 185
+  fields:
+    tour_of_duty_ref: 6
+    skill_ref: 40
+    value: 1
+- model: collector.skillmodificator
+  pk: 186
+  fields:
+    tour_of_duty_ref: 6
+    skill_ref: 17
+    value: 1
+- model: collector.skillmodificator
+  pk: 187
+  fields:
+    tour_of_duty_ref: 6
+    skill_ref: 33
+    value: 1
+- model: collector.skillmodificator
+  pk: 188
+  fields:
+    tour_of_duty_ref: 6
+    skill_ref: 60
+    value: 1
+- model: collector.skillmodificator
+  pk: 189
+  fields:
+    tour_of_duty_ref: 35
+    skill_ref: 30
+    value: 1
+- model: collector.skillmodificator
+  pk: 190
+  fields:
+    tour_of_duty_ref: 35
+    skill_ref: 40
+    value: 1
+- model: collector.skillmodificator
+  pk: 191
+  fields:
+    tour_of_duty_ref: 35
+    skill_ref: 19
+    value: 1
+- model: collector.skillmodificator
+  pk: 192
+  fields:
+    tour_of_duty_ref: 35
+    skill_ref: 6
+    value: 1
+- model: collector.skillmodificator
+  pk: 193
+  fields:
+    tour_of_duty_ref: 35
+    skill_ref: 48
+    value: 1
+- model: collector.skillmodificator
+  pk: 194
+  fields:
+    tour_of_duty_ref: 36
+    skill_ref: 40
+    value: 1
+- model: collector.skillmodificator
+  pk: 195
+  fields:
+    tour_of_duty_ref: 36
+    skill_ref: 16
+    value: 1
+- model: collector.skillmodificator
+  pk: 196
+  fields:
+    tour_of_duty_ref: 36
+    skill_ref: 24
+    value: 1
+- model: collector.skillmodificator
+  pk: 197
+  fields:
+    tour_of_duty_ref: 36
+    skill_ref: 89
+    value: 1
+- model: collector.skillmodificator
+  pk: 198
+  fields:
+    tour_of_duty_ref: 36
+    skill_ref: 48
+    value: 1
+- model: collector.skillmodificator
+  pk: 199
+  fields:
+    tour_of_duty_ref: 37
+    skill_ref: 40
+    value: 1
+- model: collector.skillmodificator
+  pk: 200
+  fields:
+    tour_of_duty_ref: 37
+    skill_ref: 32
+    value: 1
+- model: collector.skillmodificator
+  pk: 201
+  fields:
+    tour_of_duty_ref: 37
+    skill_ref: 70
+    value: 1
+- model: collector.skillmodificator
+  pk: 202
+  fields:
+    tour_of_duty_ref: 37
+    skill_ref: 169
+    value: 2
+- model: collector.skillmodificator
+  pk: 203
+  fields:
+    tour_of_duty_ref: 34
+    skill_ref: 70
+    value: 1
+- model: collector.skillmodificator
+  pk: 204
+  fields:
+    tour_of_duty_ref: 5
+    skill_ref: 1
+    value: 1
+- model: collector.skillmodificator
+  pk: 206
+  fields:
+    tour_of_duty_ref: 5
+    skill_ref: 89
+    value: 1
+- model: collector.skillmodificator
+  pk: 207
+  fields:
+    tour_of_duty_ref: 5
+    skill_ref: 16
+    value: 1
+- model: collector.skillmodificator
+  pk: 208
+  fields:
+    tour_of_duty_ref: 5
+    skill_ref: 34
+    value: 1
+- model: collector.skillmodificator
+  pk: 209
+  fields:
+    tour_of_duty_ref: 5
+    skill_ref: 23
+    value: 2
+- model: collector.skillmodificator
+  pk: 210
+  fields:
+    tour_of_duty_ref: 5
+    skill_ref: 22
+    value: 1
+- model: collector.skillmodificator
+  pk: 211
+  fields:
+    tour_of_duty_ref: 24
+    skill_ref: 23
+    value: 1
+- model: collector.skillmodificator
+  pk: 212
+  fields:
+    tour_of_duty_ref: 24
+    skill_ref: 9
+    value: 1
+- model: collector.skillmodificator
+  pk: 213
+  fields:
+    tour_of_duty_ref: 24
+    skill_ref: 32
+    value: 1
+- model: collector.skillmodificator
+  pk: 214
+  fields:
+    tour_of_duty_ref: 24
+    skill_ref: 156
+    value: 1
+- model: collector.skillmodificator
+  pk: 215
+  fields:
+    tour_of_duty_ref: 24
+    skill_ref: 13
+    value: 1
+- model: collector.skillmodificator
+  pk: 216
+  fields:
+    tour_of_duty_ref: 24
+    skill_ref: 38
+    value: 1
+- model: collector.skillmodificator
+  pk: 217
+  fields:
+    tour_of_duty_ref: 24
+    skill_ref: 53
+    value: 1
+- model: collector.skillmodificator
+  pk: 218
+  fields:
+    tour_of_duty_ref: 24
+    skill_ref: 30
+    value: 1
+- model: collector.skillmodificator
+  pk: 219
+  fields:
+    tour_of_duty_ref: 24
+    skill_ref: 49
+    value: 1
+- model: collector.skillmodificator
+  pk: 220
+  fields:
+    tour_of_duty_ref: 24
+    skill_ref: 17
+    value: 1
+- model: collector.skillmodificator
+  pk: 221
+  fields:
+    tour_of_duty_ref: 24
+    skill_ref: 60
+    value: 1
+- model: collector.skillmodificator
+  pk: 222
+  fields:
+    tour_of_duty_ref: 42
+    skill_ref: 29
+    value: 1
+- model: collector.skillmodificator
+  pk: 223
+  fields:
+    tour_of_duty_ref: 42
+    skill_ref: 118
+    value: 2
+- model: collector.skillmodificator
+  pk: 224
+  fields:
+    tour_of_duty_ref: 42
+    skill_ref: 86
+    value: 1
+- model: collector.skillmodificator
+  pk: 225
+  fields:
+    tour_of_duty_ref: 42
+    skill_ref: 34
+    value: 1
+- model: collector.skillmodificator
+  pk: 226
+  fields:
+    tour_of_duty_ref: 42
+    skill_ref: 48
+    value: 1
+- model: collector.skillmodificator
+  pk: 227
+  fields:
+    tour_of_duty_ref: 42
+    skill_ref: 62
+    value: 1
+- model: collector.skillmodificator
+  pk: 228
+  fields:
+    tour_of_duty_ref: 42
+    skill_ref: 60
+    value: 1
+- model: collector.skillmodificator
+  pk: 229
+  fields:
+    tour_of_duty_ref: 42
+    skill_ref: 72
+    value: 1
+- model: collector.skillmodificator
+  pk: 230
+  fields:
+    tour_of_duty_ref: 42
+    skill_ref: 340
+    value: 2
+- model: collector.skillmodificator
+  pk: 231
+  fields:
+    tour_of_duty_ref: 40
+    skill_ref: 141
+    value: 2
+- model: collector.skillmodificator
+  pk: 232
+  fields:
+    tour_of_duty_ref: 43
+    skill_ref: 142
+    value: 1
+- model: collector.skillmodificator
+  pk: 233
+  fields:
+    tour_of_duty_ref: 43
+    skill_ref: 68
+    value: 1
+- model: collector.skillmodificator
+  pk: 234
+  fields:
+    tour_of_duty_ref: 43
+    skill_ref: 16
+    value: 1
+- model: collector.skillmodificator
+  pk: 235
+  fields:
+    tour_of_duty_ref: 43
+    skill_ref: 140
+    value: 1
+- model: collector.skillmodificator
+  pk: 236
+  fields:
+    tour_of_duty_ref: 43
+    skill_ref: 41
+    value: 1
+- model: collector.skillmodificator
+  pk: 237
+  fields:
+    tour_of_duty_ref: 43
+    skill_ref: 308
+    value: 2
+- model: collector.skillmodificator
+  pk: 238
+  fields:
+    tour_of_duty_ref: 43
+    skill_ref: 54
+    value: 1
+- model: collector.skillmodificator
+  pk: 239
+  fields:
+    tour_of_duty_ref: 25
+    skill_ref: 43
+    value: 2
+- model: collector.skillmodificator
+  pk: 240
+  fields:
+    tour_of_duty_ref: 44
+    skill_ref: 89
+    value: 2
+- model: collector.skillmodificator
+  pk: 241
+  fields:
+    tour_of_duty_ref: 45
+    skill_ref: 18
+    value: 2
+- model: collector.skillmodificator
+  pk: 242
+  fields:
+    tour_of_duty_ref: 45
+    skill_ref: 60
+    value: 2
+- model: collector.skillmodificator
+  pk: 243
+  fields:
+    tour_of_duty_ref: 45
+    skill_ref: 24
+    value: 2
+- model: collector.skillmodificator
+  pk: 244
+  fields:
+    tour_of_duty_ref: 45
+    skill_ref: 115
+    value: 1
+- model: collector.skillmodificator
+  pk: 245
+  fields:
+    tour_of_duty_ref: 45
+    skill_ref: 117
+    value: 1
+- model: collector.skillmodificator
+  pk: 246
+  fields:
+    tour_of_duty_ref: 45
+    skill_ref: 16
+    value: 2
+- model: collector.skillmodificator
+  pk: 247
+  fields:
+    tour_of_duty_ref: 45
+    skill_ref: 67
+    value: 2
+- model: collector.skillmodificator
+  pk: 248
+  fields:
+    tour_of_duty_ref: 45
+    skill_ref: 22
+    value: 2
+- model: collector.skillmodificator
+  pk: 249
+  fields:
+    tour_of_duty_ref: 45
+    skill_ref: 6
+    value: 2
+- model: collector.skillmodificator
+  pk: 250
+  fields:
+    tour_of_duty_ref: 46
+    skill_ref: 1
+    value: 2
+- model: collector.skillmodificator
+  pk: 251
+  fields:
+    tour_of_duty_ref: 46
+    skill_ref: 18
+    value: 2
+- model: collector.skillmodificator
+  pk: 252
+  fields:
+    tour_of_duty_ref: 46
+    skill_ref: 24
+    value: 2
+- model: collector.skillmodificator
+  pk: 253
+  fields:
+    tour_of_duty_ref: 46
+    skill_ref: 16
+    value: 2
+- model: collector.skillmodificator
+  pk: 254
+  fields:
+    tour_of_duty_ref: 46
+    skill_ref: 46
+    value: 2
+- model: collector.skillmodificator
+  pk: 255
+  fields:
+    tour_of_duty_ref: 46
+    skill_ref: 67
+    value: 2
+- model: collector.skillmodificator
+  pk: 256
+  fields:
+    tour_of_duty_ref: 46
+    skill_ref: 154
+    value: 2
+- model: collector.skillmodificator
+  pk: 257
+  fields:
+    tour_of_duty_ref: 46
+    skill_ref: 109
+    value: 1
+- model: collector.skillmodificator
+  pk: 258
+  fields:
+    tour_of_duty_ref: 46
+    skill_ref: 116
+    value: 1
+- model: collector.skillmodificator
+  pk: 259
+  fields:
+    tour_of_duty_ref: 53
+    skill_ref: 53
+    value: 1
+- model: collector.skillmodificator
+  pk: 260
+  fields:
+    tour_of_duty_ref: 53
+    skill_ref: 157
+    value: 1
+- model: collector.skillmodificator
+  pk: 261
+  fields:
+    tour_of_duty_ref: 52
+    skill_ref: 85
+    value: 1
+- model: collector.skillmodificator
+  pk: 263
+  fields:
+    tour_of_duty_ref: 54
+    skill_ref: 33
+    value: 1
+- model: collector.skillmodificator
+  pk: 264
+  fields:
+    tour_of_duty_ref: 54
+    skill_ref: 63
+    value: 1
+- model: collector.skillmodificator
+  pk: 265
+  fields:
+    tour_of_duty_ref: 50
+    skill_ref: 53
+    value: 1
+- model: collector.skillmodificator
+  pk: 266
+  fields:
+    tour_of_duty_ref: 50
+    skill_ref: 6
+    value: 1
+- model: collector.skillmodificator
+  pk: 267
+  fields:
+    tour_of_duty_ref: 50
+    skill_ref: 32
+    value: 1
+- model: collector.skillmodificator
+  pk: 268
+  fields:
+    tour_of_duty_ref: 51
+    skill_ref: 6
+    value: 1
+- model: collector.skillmodificator
+  pk: 269
+  fields:
+    tour_of_duty_ref: 51
+    skill_ref: 7
+    value: 1
+- model: collector.skillmodificator
+  pk: 271
+  fields:
+    tour_of_duty_ref: 49
+    skill_ref: 16
+    value: 1
+- model: collector.skillmodificator
+  pk: 272
+  fields:
+    tour_of_duty_ref: 49
+    skill_ref: 32
+    value: 1
+- model: collector.skillmodificator
+  pk: 273
+  fields:
+    tour_of_duty_ref: 49
+    skill_ref: 63
+    value: 1
+- model: collector.skillmodificator
+  pk: 274
+  fields:
+    tour_of_duty_ref: 55
+    skill_ref: 14
+    value: 1
+- model: collector.skillmodificator
+  pk: 275
+  fields:
+    tour_of_duty_ref: 55
+    skill_ref: 18
+    value: 1
+- model: collector.skillmodificator
+  pk: 276
+  fields:
+    tour_of_duty_ref: 55
+    skill_ref: 40
+    value: 1
+- model: collector.skillmodificator
+  pk: 277
+  fields:
+    tour_of_duty_ref: 55
+    skill_ref: 19
+    value: 1
+- model: collector.skillmodificator
+  pk: 278
+  fields:
+    tour_of_duty_ref: 55
+    skill_ref: 6
+    value: 1
+- model: collector.skillmodificator
+  pk: 279
+  fields:
+    tour_of_duty_ref: 55
+    skill_ref: 24
+    value: 1
+- model: collector.skillmodificator
+  pk: 280
+  fields:
+    tour_of_duty_ref: 55
+    skill_ref: 48
+    value: 1
+- model: collector.skillmodificator
+  pk: 281
+  fields:
+    tour_of_duty_ref: 55
+    skill_ref: 61
+    value: 1
+- model: collector.skillmodificator
+  pk: 282
+  fields:
+    tour_of_duty_ref: 68
+    skill_ref: 18
+    value: 1
+- model: collector.skillmodificator
+  pk: 283
+  fields:
+    tour_of_duty_ref: 68
+    skill_ref: 48
+    value: 1
+- model: collector.skillmodificator
+  pk: 284
+  fields:
+    tour_of_duty_ref: 68
+    skill_ref: 19
+    value: 1
+- model: collector.skillmodificator
+  pk: 285
+  fields:
+    tour_of_duty_ref: 68
+    skill_ref: 61
+    value: 1
+- model: collector.skillmodificator
+  pk: 286
+  fields:
+    tour_of_duty_ref: 74
+    skill_ref: 14
+    value: 1
+- model: collector.skillmodificator
+  pk: 287
+  fields:
+    tour_of_duty_ref: 74
+    skill_ref: 18
+    value: 2
+- model: collector.skillmodificator
+  pk: 288
+  fields:
+    tour_of_duty_ref: 74
+    skill_ref: 40
+    value: 1
+- model: collector.skillmodificator
+  pk: 289
+  fields:
+    tour_of_duty_ref: 74
+    skill_ref: 19
+    value: 2
+- model: collector.skillmodificator
+  pk: 290
+  fields:
+    tour_of_duty_ref: 74
+    skill_ref: 64
+    value: 1
+- model: collector.skillmodificator
+  pk: 291
+  fields:
+    tour_of_duty_ref: 74
+    skill_ref: 61
+    value: 2
+- model: collector.skillmodificator
+  pk: 292
+  fields:
+    tour_of_duty_ref: 74
+    skill_ref: 66
+    value: 1
+- model: collector.skillmodificator
+  pk: 293
+  fields:
+    tour_of_duty_ref: 74
+    skill_ref: 72
+    value: 1
+- model: collector.skillmodificator
+  pk: 294
+  fields:
+    tour_of_duty_ref: 108
+    skill_ref: 18
+    value: 1
+- model: collector.skillmodificator
+  pk: 295
+  fields:
+    tour_of_duty_ref: 108
+    skill_ref: 60
+    value: 1
+- model: collector.skillmodificator
+  pk: 296
+  fields:
+    tour_of_duty_ref: 108
+    skill_ref: 33
+    value: 1
+- model: collector.skillmodificator
+  pk: 298
+  fields:
+    tour_of_duty_ref: 108
+    skill_ref: 66
+    value: 1
+- model: collector.skillmodificator
+  pk: 299
+  fields:
+    tour_of_duty_ref: 108
+    skill_ref: 172
+    value: 1
+- model: collector.skillmodificator
+  pk: 300
+  fields:
+    tour_of_duty_ref: 111
+    skill_ref: 15
+    value: 2
+- model: collector.skillmodificator
+  pk: 301
+  fields:
+    tour_of_duty_ref: 111
+    skill_ref: 13
+    value: 2
+- model: collector.skillmodificator
+  pk: 302
+  fields:
+    tour_of_duty_ref: 111
+    skill_ref: 14
+    value: 1
+- model: collector.skillmodificator
+  pk: 304
+  fields:
+    tour_of_duty_ref: 111
+    skill_ref: 47
+    value: 2
+- model: collector.skillmodificator
+  pk: 305
+  fields:
+    tour_of_duty_ref: 109
+    skill_ref: 14
+    value: 1
+- model: collector.skillmodificator
+  pk: 306
+  fields:
+    tour_of_duty_ref: 109
+    skill_ref: 40
+    value: 1
+- model: collector.skillmodificator
+  pk: 307
+  fields:
+    tour_of_duty_ref: 109
+    skill_ref: 30
+    value: 1
+- model: collector.skillmodificator
+  pk: 308
+  fields:
+    tour_of_duty_ref: 109
+    skill_ref: 19
+    value: 1
+- model: collector.skillmodificator
+  pk: 309
+  fields:
+    tour_of_duty_ref: 109
+    skill_ref: 33
+    value: 1
+- model: collector.skillmodificator
+  pk: 310
+  fields:
+    tour_of_duty_ref: 109
+    skill_ref: 4
+    value: 1
+- model: collector.skillmodificator
+  pk: 311
+  fields:
+    tour_of_duty_ref: 109
+    skill_ref: 62
+    value: 1
+- model: collector.skillmodificator
+  pk: 312
+  fields:
+    tour_of_duty_ref: 109
+    skill_ref: 66
+    value: 1
+- model: collector.skillmodificator
+  pk: 313
+  fields:
+    tour_of_duty_ref: 110
+    skill_ref: 14
+    value: 2
+- model: collector.skillmodificator
+  pk: 314
+  fields:
+    tour_of_duty_ref: 110
+    skill_ref: 18
+    value: 2
+- model: collector.skillmodificator
+  pk: 315
+  fields:
+    tour_of_duty_ref: 110
+    skill_ref: 30
+    value: 1
+- model: collector.skillmodificator
+  pk: 316
+  fields:
+    tour_of_duty_ref: 110
+    skill_ref: 19
+    value: 1
+- model: collector.skillmodificator
+  pk: 317
+  fields:
+    tour_of_duty_ref: 110
+    skill_ref: 4
+    value: 1
+- model: collector.skillmodificator
+  pk: 318
+  fields:
+    tour_of_duty_ref: 110
+    skill_ref: 40
+    value: 2
+- model: collector.skillmodificator
+  pk: 319
+  fields:
+    tour_of_duty_ref: 110
+    skill_ref: 16
+    value: 1
+- model: collector.skillmodificator
+  pk: 320
+  fields:
+    tour_of_duty_ref: 109
+    skill_ref: 34
+    value: 1
+- model: collector.skillmodificator
+  pk: 321
+  fields:
+    tour_of_duty_ref: 109
+    skill_ref: 117
+    value: 1
+- model: collector.skillmodificator
+  pk: 322
+  fields:
+    tour_of_duty_ref: 114
+    skill_ref: 6
+    value: 1
+- model: collector.skillmodificator
+  pk: 323
+  fields:
+    tour_of_duty_ref: 114
+    skill_ref: 13
+    value: 1
+- model: collector.skillmodificator
+  pk: 324
+  fields:
+    tour_of_duty_ref: 114
+    skill_ref: 22
+    value: 1
+- model: collector.skillmodificator
+  pk: 325
+  fields:
+    tour_of_duty_ref: 114
+    skill_ref: 114
+    value: 1
+- model: collector.skillmodificator
+  pk: 326
+  fields:
+    tour_of_duty_ref: 114
+    skill_ref: 54
+    value: 1
+- model: collector.skillmodificator
+  pk: 327
+  fields:
+    tour_of_duty_ref: 114
+    skill_ref: 16
+    value: 1
+- model: collector.skillmodificator
+  pk: 328
+  fields:
+    tour_of_duty_ref: 114
+    skill_ref: 26
+    value: 1
+- model: collector.skillmodificator
+  pk: 329
+  fields:
+    tour_of_duty_ref: 114
+    skill_ref: 15
+    value: 1
+- model: collector.skillmodificator
+  pk: 332
+  fields:
+    tour_of_duty_ref: 114
+    skill_ref: 30
+    value: 1
+- model: collector.skillmodificator
+  pk: 333
+  fields:
+    tour_of_duty_ref: 114
+    skill_ref: 52
+    value: 3
+- model: collector.skillmodificator
+  pk: 334
+  fields:
+    tour_of_duty_ref: 114
+    skill_ref: 55
+    value: 2
+- model: collector.skillmodificator
+  pk: 336
+  fields:
+    tour_of_duty_ref: 114
+    skill_ref: 68
+    value: 1
+- model: collector.skillmodificator
+  pk: 338
+  fields:
+    tour_of_duty_ref: 114
+    skill_ref: 63
+    value: 1
+- model: collector.skillmodificator
+  pk: 339
+  fields:
+    tour_of_duty_ref: 115
+    skill_ref: 173
+    value: 2
+- model: collector.skillmodificator
+  pk: 340
+  fields:
+    tour_of_duty_ref: 117
+    skill_ref: 114
+    value: 1
+- model: collector.skillmodificator
+  pk: 341
+  fields:
+    tour_of_duty_ref: 117
+    skill_ref: 24
+    value: 1
+- model: collector.skillmodificator
+  pk: 342
+  fields:
+    tour_of_duty_ref: 117
+    skill_ref: 23
+    value: 1
+- model: collector.skillmodificator
+  pk: 343
+  fields:
+    tour_of_duty_ref: 117
+    skill_ref: 30
+    value: 1
+- model: collector.skillmodificator
+  pk: 344
+  fields:
+    tour_of_duty_ref: 117
+    skill_ref: 34
+    value: 1
+- model: collector.skillmodificator
+  pk: 346
+  fields:
+    tour_of_duty_ref: 117
+    skill_ref: 43
+    value: 2
+- model: collector.skillmodificator
+  pk: 347
+  fields:
+    tour_of_duty_ref: 117
+    skill_ref: 130
+    value: 1
+- model: collector.skillmodificator
+  pk: 348
+  fields:
+    tour_of_duty_ref: 117
+    skill_ref: 31
+    value: 1
+- model: collector.skillmodificator
+  pk: 349
+  fields:
+    tour_of_duty_ref: 117
+    skill_ref: 47
+    value: 1
+- model: collector.skillmodificator
+  pk: 350
+  fields:
+    tour_of_duty_ref: 116
+    skill_ref: 43
+    value: 2
+- model: collector.skillmodificator
+  pk: 351
+  fields:
+    tour_of_duty_ref: 116
+    skill_ref: 114
+    value: 2
+- model: collector.skillmodificator
+  pk: 353
+  fields:
+    tour_of_duty_ref: 116
+    skill_ref: 117
+    value: 1
+- model: collector.skillmodificator
+  pk: 354
+  fields:
+    tour_of_duty_ref: 116
+    skill_ref: 62
+    value: 1
+- model: collector.skillmodificator
+  pk: 355
+  fields:
+    tour_of_duty_ref: 118
+    skill_ref: 18
+    value: 3
+- model: collector.skillmodificator
+  pk: 356
+  fields:
+    tour_of_duty_ref: 118
+    skill_ref: 6
+    value: 2
+- model: collector.skillmodificator
+  pk: 357
+  fields:
+    tour_of_duty_ref: 118
+    skill_ref: 2
+    value: 3
+- model: collector.skillmodificator
+  pk: 358
+  fields:
+    tour_of_duty_ref: 118
+    skill_ref: 4
+    value: 2
+- model: collector.skillmodificator
+  pk: 359
+  fields:
+    tour_of_duty_ref: 118
+    skill_ref: 75
+    value: 1
+- model: collector.skillmodificator
+  pk: 360
+  fields:
+    tour_of_duty_ref: 118
+    skill_ref: 30
+    value: 3
+- model: collector.skillmodificator
+  pk: 362
+  fields:
+    tour_of_duty_ref: 118
+    skill_ref: 66
+    value: 3
+- model: collector.skillmodificator
+  pk: 364
+  fields:
+    tour_of_duty_ref: 123
+    skill_ref: 7
+    value: 1
+- model: collector.skillmodificator
+  pk: 365
+  fields:
+    tour_of_duty_ref: 123
+    skill_ref: 48
+    value: 1
+- model: collector.skillmodificator
+  pk: 367
+  fields:
+    tour_of_duty_ref: 57
+    skill_ref: 16
+    value: 1
+- model: collector.skillmodificator
+  pk: 368
+  fields:
+    tour_of_duty_ref: 57
+    skill_ref: 1
+    value: 1
+- model: collector.skillmodificator
+  pk: 369
+  fields:
+    tour_of_duty_ref: 57
+    skill_ref: 4
+    value: 1
+- model: collector.skillmodificator
+  pk: 370
+  fields:
+    tour_of_duty_ref: 57
+    skill_ref: 24
+    value: 3
+- model: collector.skillmodificator
+  pk: 371
+  fields:
+    tour_of_duty_ref: 57
+    skill_ref: 43
+    value: 1
+- model: collector.skillmodificator
+  pk: 372
+  fields:
+    tour_of_duty_ref: 57
+    skill_ref: 62
+    value: 1
+- model: collector.skillmodificator
+  pk: 373
+  fields:
+    tour_of_duty_ref: 57
+    skill_ref: 85
+    value: 2
+- model: collector.skillmodificator
+  pk: 374
+  fields:
+    tour_of_duty_ref: 65
+    skill_ref: 1
+    value: 1
+- model: collector.skillmodificator
+  pk: 375
+  fields:
+    tour_of_duty_ref: 65
+    skill_ref: 4
+    value: 2
+- model: collector.skillmodificator
+  pk: 376
+  fields:
+    tour_of_duty_ref: 65
+    skill_ref: 43
+    value: 1
+- model: collector.skillmodificator
+  pk: 377
+  fields:
+    tour_of_duty_ref: 65
+    skill_ref: 24
+    value: 2
+- model: collector.skillmodificator
+  pk: 378
+  fields:
+    tour_of_duty_ref: 65
+    skill_ref: 62
+    value: 1
+- model: collector.skillmodificator
+  pk: 379
+  fields:
+    tour_of_duty_ref: 65
+    skill_ref: 85
+    value: 2
+- model: collector.skillmodificator
+  pk: 381
+  fields:
+    tour_of_duty_ref: 61
+    skill_ref: 16
+    value: 1
+- model: collector.skillmodificator
+  pk: 382
+  fields:
+    tour_of_duty_ref: 61
+    skill_ref: 4
+    value: 1
+- model: collector.skillmodificator
+  pk: 383
+  fields:
+    tour_of_duty_ref: 61
+    skill_ref: 22
+    value: 1
+- model: collector.skillmodificator
+  pk: 384
+  fields:
+    tour_of_duty_ref: 61
+    skill_ref: 24
+    value: 3
+- model: collector.skillmodificator
+  pk: 385
+  fields:
+    tour_of_duty_ref: 61
+    skill_ref: 43
+    value: 1
+- model: collector.skillmodificator
+  pk: 386
+  fields:
+    tour_of_duty_ref: 61
+    skill_ref: 48
+    value: 1
+- model: collector.skillmodificator
+  pk: 387
+  fields:
+    tour_of_duty_ref: 61
+    skill_ref: 62
+    value: 2
+- model: collector.skillmodificator
+  pk: 388
+  fields:
+    tour_of_duty_ref: 56
+    skill_ref: 53
+    value: 1
+- model: collector.skillmodificator
+  pk: 389
+  fields:
+    tour_of_duty_ref: 56
+    skill_ref: 24
+    value: 1
+- model: collector.skillmodificator
+  pk: 390
+  fields:
+    tour_of_duty_ref: 56
+    skill_ref: 89
+    value: 1
+- model: collector.skillmodificator
+  pk: 391
+  fields:
+    tour_of_duty_ref: 56
+    skill_ref: 64
+    value: 1
+- model: collector.skillmodificator
+  pk: 393
+  fields:
+    tour_of_duty_ref: 56
+    skill_ref: 85
+    value: 1
+- model: collector.skillmodificator
+  pk: 395
+  fields:
+    tour_of_duty_ref: 56
+    skill_ref: 1
+    value: 1
+- model: collector.skillmodificator
+  pk: 396
+  fields:
+    tour_of_duty_ref: 56
+    skill_ref: 23
+    value: 1
+- model: collector.skillmodificator
+  pk: 397
+  fields:
+    tour_of_duty_ref: 64
+    skill_ref: 1
+    value: 2
+- model: collector.skillmodificator
+  pk: 398
+  fields:
+    tour_of_duty_ref: 64
+    skill_ref: 24
+    value: 1
+- model: collector.skillmodificator
+  pk: 399
+  fields:
+    tour_of_duty_ref: 64
+    skill_ref: 89
+    value: 2
+- model: collector.skillmodificator
+  pk: 400
+  fields:
+    tour_of_duty_ref: 64
+    skill_ref: 64
+    value: 1
+- model: collector.skillmodificator
+  pk: 401
+  fields:
+    tour_of_duty_ref: 64
+    skill_ref: 62
+    value: 1
+- model: collector.skillmodificator
+  pk: 402
+  fields:
+    tour_of_duty_ref: 64
+    skill_ref: 85
+    value: 2
+- model: collector.skillmodificator
+  pk: 404
+  fields:
+    tour_of_duty_ref: 60
+    skill_ref: 53
+    value: 1
+- model: collector.skillmodificator
+  pk: 405
+  fields:
+    tour_of_duty_ref: 60
+    skill_ref: 22
+    value: 1
+- model: collector.skillmodificator
+  pk: 406
+  fields:
+    tour_of_duty_ref: 60
+    skill_ref: 24
+    value: 1
+- model: collector.skillmodificator
+  pk: 407
+  fields:
+    tour_of_duty_ref: 60
+    skill_ref: 64
+    value: 1
+- model: collector.skillmodificator
+  pk: 408
+  fields:
+    tour_of_duty_ref: 60
+    skill_ref: 48
+    value: 1
+- model: collector.skillmodificator
+  pk: 410
+  fields:
+    tour_of_duty_ref: 60
+    skill_ref: 89
+    value: 2
+- model: collector.skillmodificator
+  pk: 412
+  fields:
+    tour_of_duty_ref: 60
+    skill_ref: 67
+    value: 1
+- model: collector.skillmodificator
+  pk: 413
+  fields:
+    tour_of_duty_ref: 59
+    skill_ref: 53
+    value: 1
+- model: collector.skillmodificator
+  pk: 414
+  fields:
+    tour_of_duty_ref: 59
+    skill_ref: 136
+    value: 1
+- model: collector.skillmodificator
+  pk: 415
+  fields:
+    tour_of_duty_ref: 59
+    skill_ref: 22
+    value: 1
+- model: collector.skillmodificator
+  pk: 416
+  fields:
+    tour_of_duty_ref: 59
+    skill_ref: 89
+    value: 1
+- model: collector.skillmodificator
+  pk: 417
+  fields:
+    tour_of_duty_ref: 59
+    skill_ref: 64
+    value: 3
+- model: collector.skillmodificator
+  pk: 418
+  fields:
+    tour_of_duty_ref: 59
+    skill_ref: 48
+    value: 2
+- model: collector.skillmodificator
+  pk: 419
+  fields:
+    tour_of_duty_ref: 59
+    skill_ref: 62
+    value: 1
+- model: collector.skillmodificator
+  pk: 420
+  fields:
+    tour_of_duty_ref: 63
+    skill_ref: 53
+    value: 1
+- model: collector.skillmodificator
+  pk: 421
+  fields:
+    tour_of_duty_ref: 63
+    skill_ref: 136
+    value: 1
+- model: collector.skillmodificator
+  pk: 422
+  fields:
+    tour_of_duty_ref: 63
+    skill_ref: 22
+    value: 1
+- model: collector.skillmodificator
+  pk: 424
+  fields:
+    tour_of_duty_ref: 63
+    skill_ref: 64
+    value: 3
+- model: collector.skillmodificator
+  pk: 425
+  fields:
+    tour_of_duty_ref: 63
+    skill_ref: 48
+    value: 2
+- model: collector.skillmodificator
+  pk: 426
+  fields:
+    tour_of_duty_ref: 63
+    skill_ref: 62
+    value: 1
+- model: collector.skillmodificator
+  pk: 427
+  fields:
+    tour_of_duty_ref: 67
+    skill_ref: 22
+    value: 1
+- model: collector.skillmodificator
+  pk: 428
+  fields:
+    tour_of_duty_ref: 67
+    skill_ref: 89
+    value: 1
+- model: collector.skillmodificator
+  pk: 429
+  fields:
+    tour_of_duty_ref: 67
+    skill_ref: 64
+    value: 3
+- model: collector.skillmodificator
+  pk: 430
+  fields:
+    tour_of_duty_ref: 67
+    skill_ref: 48
+    value: 2
+- model: collector.skillmodificator
+  pk: 431
+  fields:
+    tour_of_duty_ref: 67
+    skill_ref: 62
+    value: 1
+- model: collector.skillmodificator
+  pk: 433
+  fields:
+    tour_of_duty_ref: 67
+    skill_ref: 4
+    value: 1
+- model: collector.skillmodificator
+  pk: 434
+  fields:
+    tour_of_duty_ref: 58
+    skill_ref: 30
+    value: 1
+- model: collector.skillmodificator
+  pk: 435
+  fields:
+    tour_of_duty_ref: 58
+    skill_ref: 40
+    value: 1
+- model: collector.skillmodificator
+  pk: 436
+  fields:
+    tour_of_duty_ref: 58
+    skill_ref: 16
+    value: 1
+- model: collector.skillmodificator
+  pk: 437
+  fields:
+    tour_of_duty_ref: 58
+    skill_ref: 19
+    value: 1
+- model: collector.skillmodificator
+  pk: 438
+  fields:
+    tour_of_duty_ref: 58
+    skill_ref: 32
+    value: 1
+- model: collector.skillmodificator
+  pk: 439
+  fields:
+    tour_of_duty_ref: 58
+    skill_ref: 49
+    value: 1
+- model: collector.skillmodificator
+  pk: 440
+  fields:
+    tour_of_duty_ref: 58
+    skill_ref: 31
+    value: 2
+- model: collector.skillmodificator
+  pk: 441
+  fields:
+    tour_of_duty_ref: 58
+    skill_ref: 89
+    value: 1
+- model: collector.skillmodificator
+  pk: 442
+  fields:
+    tour_of_duty_ref: 58
+    skill_ref: 63
+    value: 1
+- model: collector.skillmodificator
+  pk: 443
+  fields:
+    tour_of_duty_ref: 125
+    skill_ref: 30
+    value: 1
+- model: collector.skillmodificator
+  pk: 444
+  fields:
+    tour_of_duty_ref: 125
+    skill_ref: 32
+    value: 1
+- model: collector.skillmodificator
+  pk: 445
+  fields:
+    tour_of_duty_ref: 125
+    skill_ref: 31
+    value: 1
+- model: collector.skillmodificator
+  pk: 446
+  fields:
+    tour_of_duty_ref: 125
+    skill_ref: 40
+    value: 1
+- model: collector.skillmodificator
+  pk: 447
+  fields:
+    tour_of_duty_ref: 125
+    skill_ref: 16
+    value: 1
+- model: collector.skillmodificator
+  pk: 448
+  fields:
+    tour_of_duty_ref: 125
+    skill_ref: 7
+    value: 1
+- model: collector.skillmodificator
+  pk: 449
+  fields:
+    tour_of_duty_ref: 125
+    skill_ref: 50
+    value: 1
+- model: collector.skillmodificator
+  pk: 450
+  fields:
+    tour_of_duty_ref: 125
+    skill_ref: 66
+    value: 1
+- model: collector.skillmodificator
+  pk: 451
+  fields:
+    tour_of_duty_ref: 125
+    skill_ref: 55
+    value: 2
+- model: collector.skillmodificator
+  pk: 452
+  fields:
+    tour_of_duty_ref: 124
+    skill_ref: 32
+    value: 2
+- model: collector.skillmodificator
+  pk: 453
+  fields:
+    tour_of_duty_ref: 124
+    skill_ref: 30
+    value: 2
+- model: collector.skillmodificator
+  pk: 454
+  fields:
+    tour_of_duty_ref: 124
+    skill_ref: 31
+    value: 1
+- model: collector.skillmodificator
+  pk: 455
+  fields:
+    tour_of_duty_ref: 124
+    skill_ref: 89
+    value: 1
+- model: collector.skillmodificator
+  pk: 456
+  fields:
+    tour_of_duty_ref: 124
+    skill_ref: 19
+    value: 2
+- model: collector.skillmodificator
+  pk: 457
+  fields:
+    tour_of_duty_ref: 124
+    skill_ref: 49
+    value: 1
+- model: collector.skillmodificator
+  pk: 458
+  fields:
+    tour_of_duty_ref: 124
+    skill_ref: 16
+    value: 1
+- model: collector.skillmodificator
+  pk: 459
+  fields:
+    tour_of_duty_ref: 72
+    skill_ref: 53
+    value: 2
+- model: collector.skillmodificator
+  pk: 460
+  fields:
+    tour_of_duty_ref: 72
+    skill_ref: 16
+    value: 1
+- model: collector.skillmodificator
+  pk: 461
+  fields:
+    tour_of_duty_ref: 72
+    skill_ref: 22
+    value: 2
+- model: collector.skillmodificator
+  pk: 462
+  fields:
+    tour_of_duty_ref: 72
+    skill_ref: 24
+    value: 1
+- model: collector.skillmodificator
+  pk: 464
+  fields:
+    tour_of_duty_ref: 72
+    skill_ref: 64
+    value: 3
+- model: collector.skillmodificator
+  pk: 465
+  fields:
+    tour_of_duty_ref: 72
+    skill_ref: 48
+    value: 3
+- model: collector.skillmodificator
+  pk: 467
+  fields:
+    tour_of_duty_ref: 72
+    skill_ref: 69
+    value: 1
+- model: collector.skillmodificator
+  pk: 468
+  fields:
+    tour_of_duty_ref: 71
+    skill_ref: 53
+    value: 3
+- model: collector.skillmodificator
+  pk: 469
+  fields:
+    tour_of_duty_ref: 71
+    skill_ref: 16
+    value: 1
+- model: collector.skillmodificator
+  pk: 470
+  fields:
+    tour_of_duty_ref: 71
+    skill_ref: 50
+    value: 1
+- model: collector.skillmodificator
+  pk: 471
+  fields:
+    tour_of_duty_ref: 71
+    skill_ref: 7
+    value: 1
+- model: collector.skillmodificator
+  pk: 472
+  fields:
+    tour_of_duty_ref: 71
+    skill_ref: 22
+    value: 1
+- model: collector.skillmodificator
+  pk: 473
+  fields:
+    tour_of_duty_ref: 71
+    skill_ref: 24
+    value: 1
+- model: collector.skillmodificator
+  pk: 474
+  fields:
+    tour_of_duty_ref: 71
+    skill_ref: 32
+    value: 1
+- model: collector.skillmodificator
+  pk: 475
+  fields:
+    tour_of_duty_ref: 71
+    skill_ref: 89
+    value: 1
+- model: collector.skillmodificator
+  pk: 476
+  fields:
+    tour_of_duty_ref: 71
+    skill_ref: 64
+    value: 1
+- model: collector.skillmodificator
+  pk: 477
+  fields:
+    tour_of_duty_ref: 71
+    skill_ref: 48
+    value: 1
+- model: collector.skillmodificator
+  pk: 479
+  fields:
+    tour_of_duty_ref: 71
+    skill_ref: 63
+    value: 1
+- model: collector.skillmodificator
+  pk: 480
+  fields:
+    tour_of_duty_ref: 73
+    skill_ref: 30
+    value: 2
+- model: collector.skillmodificator
+  pk: 481
+  fields:
+    tour_of_duty_ref: 73
+    skill_ref: 16
+    value: 2
+- model: collector.skillmodificator
+  pk: 482
+  fields:
+    tour_of_duty_ref: 73
+    skill_ref: 19
+    value: 2
+- model: collector.skillmodificator
+  pk: 483
+  fields:
+    tour_of_duty_ref: 73
+    skill_ref: 60
+    value: 1
+- model: collector.skillmodificator
+  pk: 484
+  fields:
+    tour_of_duty_ref: 73
+    skill_ref: 6
+    value: 1
+- model: collector.skillmodificator
+  pk: 485
+  fields:
+    tour_of_duty_ref: 73
+    skill_ref: 32
+    value: 1
+- model: collector.skillmodificator
+  pk: 486
+  fields:
+    tour_of_duty_ref: 73
+    skill_ref: 174
+    value: 1
+- model: collector.skillmodificator
+  pk: 487
+  fields:
+    tour_of_duty_ref: 73
+    skill_ref: 49
+    value: 1
+- model: collector.skillmodificator
+  pk: 488
+  fields:
+    tour_of_duty_ref: 73
+    skill_ref: 61
+    value: 1
+- model: collector.skillmodificator
+  pk: 489
+  fields:
+    tour_of_duty_ref: 73
+    skill_ref: 63
+    value: 1
+- model: collector.skillmodificator
+  pk: 490
+  fields:
+    tour_of_duty_ref: 73
+    skill_ref: 55
+    value: 1
+- model: collector.skillmodificator
+  pk: 491
+  fields:
+    tour_of_duty_ref: 73
+    skill_ref: 31
+    value: 1
+- model: collector.skillmodificator
+  pk: 492
+  fields:
+    tour_of_duty_ref: 70
+    skill_ref: 1
+    value: 1
+- model: collector.skillmodificator
+  pk: 493
+  fields:
+    tour_of_duty_ref: 70
+    skill_ref: 16
+    value: 1
+- model: collector.skillmodificator
+  pk: 494
+  fields:
+    tour_of_duty_ref: 70
+    skill_ref: 22
+    value: 1
+- model: collector.skillmodificator
+  pk: 495
+  fields:
+    tour_of_duty_ref: 70
+    skill_ref: 24
+    value: 3
+- model: collector.skillmodificator
+  pk: 496
+  fields:
+    tour_of_duty_ref: 70
+    skill_ref: 32
+    value: 1
+- model: collector.skillmodificator
+  pk: 497
+  fields:
+    tour_of_duty_ref: 70
+    skill_ref: 89
+    value: 1
+- model: collector.skillmodificator
+  pk: 498
+  fields:
+    tour_of_duty_ref: 70
+    skill_ref: 157
+    value: 1
+- model: collector.skillmodificator
+  pk: 499
+  fields:
+    tour_of_duty_ref: 70
+    skill_ref: 64
+    value: 1
+- model: collector.skillmodificator
+  pk: 500
+  fields:
+    tour_of_duty_ref: 70
+    skill_ref: 85
+    value: 2
+- model: collector.skillmodificator
+  pk: 501
+  fields:
+    tour_of_duty_ref: 70
+    skill_ref: 62
+    value: 1
+- model: collector.skillmodificator
+  pk: 502
+  fields:
+    tour_of_duty_ref: 70
+    skill_ref: 48
+    value: 1
+- model: collector.skillmodificator
+  pk: 503
+  fields:
+    tour_of_duty_ref: 70
+    skill_ref: 61
+    value: 1
+- model: collector.skillmodificator
+  pk: 504
+  fields:
+    tour_of_duty_ref: 69
+    skill_ref: 53
+    value: 1
+- model: collector.skillmodificator
+  pk: 505
+  fields:
+    tour_of_duty_ref: 69
+    skill_ref: 30
+    value: 2
+- model: collector.skillmodificator
+  pk: 506
+  fields:
+    tour_of_duty_ref: 69
+    skill_ref: 16
+    value: 1
+- model: collector.skillmodificator
+  pk: 507
+  fields:
+    tour_of_duty_ref: 69
+    skill_ref: 22
+    value: 2
+- model: collector.skillmodificator
+  pk: 508
+  fields:
+    tour_of_duty_ref: 69
+    skill_ref: 24
+    value: 1
+- model: collector.skillmodificator
+  pk: 509
+  fields:
+    tour_of_duty_ref: 69
+    skill_ref: 32
+    value: 1
+- model: collector.skillmodificator
+  pk: 510
+  fields:
+    tour_of_duty_ref: 69
+    skill_ref: 89
+    value: 1
+- model: collector.skillmodificator
+  pk: 511
+  fields:
+    tour_of_duty_ref: 69
+    skill_ref: 64
+    value: 1
+- model: collector.skillmodificator
+  pk: 512
+  fields:
+    tour_of_duty_ref: 69
+    skill_ref: 85
+    value: 2
+- model: collector.skillmodificator
+  pk: 514
+  fields:
+    tour_of_duty_ref: 75
+    skill_ref: 30
+    value: 1
+- model: collector.skillmodificator
+  pk: 515
+  fields:
+    tour_of_duty_ref: 75
+    skill_ref: 94
+    value: 3
+- model: collector.skillmodificator
+  pk: 516
+  fields:
+    tour_of_duty_ref: 75
+    skill_ref: 148
+    value: 2
+- model: collector.skillmodificator
+  pk: 517
+  fields:
+    tour_of_duty_ref: 75
+    skill_ref: 69
+    value: 1
+- model: collector.skillmodificator
+  pk: 518
+  fields:
+    tour_of_duty_ref: 75
+    skill_ref: 48
+    value: 1
+- model: collector.skillmodificator
+  pk: 519
+  fields:
+    tour_of_duty_ref: 75
+    skill_ref: 175
+    value: 2
+- model: collector.skillmodificator
+  pk: 520
+  fields:
+    tour_of_duty_ref: 129
+    skill_ref: 30
+    value: 1
+- model: collector.skillmodificator
+  pk: 521
+  fields:
+    tour_of_duty_ref: 129
+    skill_ref: 148
+    value: 2
+- model: collector.skillmodificator
+  pk: 522
+  fields:
+    tour_of_duty_ref: 129
+    skill_ref: 147
+    value: 1
+- model: collector.skillmodificator
+  pk: 523
+  fields:
+    tour_of_duty_ref: 129
+    skill_ref: 69
+    value: 2
+- model: collector.skillmodificator
+  pk: 524
+  fields:
+    tour_of_duty_ref: 129
+    skill_ref: 22
+    value: 1
+- model: collector.skillmodificator
+  pk: 525
+  fields:
+    tour_of_duty_ref: 129
+    skill_ref: 157
+    value: 1
+- model: collector.skillmodificator
+  pk: 526
+  fields:
+    tour_of_duty_ref: 129
+    skill_ref: 48
+    value: 1
+- model: collector.skillmodificator
+  pk: 527
+  fields:
+    tour_of_duty_ref: 129
+    skill_ref: 153
+    value: 1
+- model: collector.skillmodificator
+  pk: 528
+  fields:
+    tour_of_duty_ref: 128
+    skill_ref: 30
+    value: 1
+- model: collector.skillmodificator
+  pk: 529
+  fields:
+    tour_of_duty_ref: 128
+    skill_ref: 157
+    value: 1
+- model: collector.skillmodificator
+  pk: 530
+  fields:
+    tour_of_duty_ref: 128
+    skill_ref: 33
+    value: 1
+- model: collector.skillmodificator
+  pk: 531
+  fields:
+    tour_of_duty_ref: 128
+    skill_ref: 94
+    value: 1
+- model: collector.skillmodificator
+  pk: 532
+  fields:
+    tour_of_duty_ref: 128
+    skill_ref: 69
+    value: 1
+- model: collector.skillmodificator
+  pk: 533
+  fields:
+    tour_of_duty_ref: 128
+    skill_ref: 48
+    value: 1
+- model: collector.skillmodificator
+  pk: 534
+  fields:
+    tour_of_duty_ref: 128
+    skill_ref: 153
+    value: 1
+- model: collector.skillmodificator
+  pk: 535
+  fields:
+    tour_of_duty_ref: 128
+    skill_ref: 63
+    value: 2
+- model: collector.skillmodificator
+  pk: 536
+  fields:
+    tour_of_duty_ref: 99
+    skill_ref: 19
+    value: 1
+- model: collector.skillmodificator
+  pk: 537
+  fields:
+    tour_of_duty_ref: 99
+    skill_ref: 14
+    value: 1
+- model: collector.skillmodificator
+  pk: 538
+  fields:
+    tour_of_duty_ref: 99
+    skill_ref: 27
+    value: 1
+- model: collector.skillmodificator
+  pk: 539
+  fields:
+    tour_of_duty_ref: 99
+    skill_ref: 32
+    value: 1
+- model: collector.skillmodificator
+  pk: 540
+  fields:
+    tour_of_duty_ref: 99
+    skill_ref: 26
+    value: 1
+- model: collector.skillmodificator
+  pk: 541
+  fields:
+    tour_of_duty_ref: 99
+    skill_ref: 2
+    value: 1
+- model: collector.skillmodificator
+  pk: 542
+  fields:
+    tour_of_duty_ref: 99
+    skill_ref: 9
+    value: 1
+- model: collector.skillmodificator
+  pk: 543
+  fields:
+    tour_of_duty_ref: 99
+    skill_ref: 6
+    value: 1
+- model: collector.skillmodificator
+  pk: 544
+  fields:
+    tour_of_duty_ref: 99
+    skill_ref: 17
+    value: 1
+- model: collector.skillmodificator
+  pk: 545
+  fields:
+    tour_of_duty_ref: 99
+    skill_ref: 60
+    value: 2
+- model: collector.skillmodificator
+  pk: 546
+  fields:
+    tour_of_duty_ref: 99
+    skill_ref: 69
+    value: 1
+- model: collector.skillmodificator
+  pk: 547
+  fields:
+    tour_of_duty_ref: 99
+    skill_ref: 30
+    value: 1
+- model: collector.skillmodificator
+  pk: 548
+  fields:
+    tour_of_duty_ref: 99
+    skill_ref: 16
+    value: 1
+- model: collector.skillmodificator
+  pk: 549
+  fields:
+    tour_of_duty_ref: 99
+    skill_ref: 52
+    value: 1
+- model: collector.skillmodificator
+  pk: 550
+  fields:
+    tour_of_duty_ref: 92
+    skill_ref: 10
+    value: 4
+- model: collector.skillmodificator
+  pk: 551
+  fields:
+    tour_of_duty_ref: 92
+    skill_ref: 38
+    value: 1
+- model: collector.skillmodificator
+  pk: 552
+  fields:
+    tour_of_duty_ref: 92
+    skill_ref: 54
+    value: 1
+- model: collector.skillmodificator
+  pk: 553
+  fields:
+    tour_of_duty_ref: 92
+    skill_ref: 41
+    value: 1
+- model: collector.skillmodificator
+  pk: 554
+  fields:
+    tour_of_duty_ref: 92
+    skill_ref: 68
+    value: 1
+- model: collector.skillmodificator
+  pk: 555
+  fields:
+    tour_of_duty_ref: 92
+    skill_ref: 123
+    value: 1
+- model: collector.skillmodificator
+  pk: 556
+  fields:
+    tour_of_duty_ref: 92
+    skill_ref: 28
+    value: 1
+- model: collector.skillmodificator
+  pk: 557
+  fields:
+    tour_of_duty_ref: 92
+    skill_ref: 40
+    value: 1
+- model: collector.skillmodificator
+  pk: 558
+  fields:
+    tour_of_duty_ref: 92
+    skill_ref: 16
+    value: 1
+- model: collector.skillmodificator
+  pk: 559
+  fields:
+    tour_of_duty_ref: 92
+    skill_ref: 48
+    value: 1
+- model: collector.skillmodificator
+  pk: 560
+  fields:
+    tour_of_duty_ref: 92
+    skill_ref: 19
+    value: 1
+- model: collector.skillmodificator
+  pk: 561
+  fields:
+    tour_of_duty_ref: 92
+    skill_ref: 56
+    value: 1
+- model: collector.skillmodificator
+  pk: 562
+  fields:
+    tour_of_duty_ref: 94
+    skill_ref: 28
+    value: 3
+- model: collector.skillmodificator
+  pk: 563
+  fields:
+    tour_of_duty_ref: 94
+    skill_ref: 14
+    value: 1
+- model: collector.skillmodificator
+  pk: 564
+  fields:
+    tour_of_duty_ref: 94
+    skill_ref: 40
+    value: 1
+- model: collector.skillmodificator
+  pk: 565
+  fields:
+    tour_of_duty_ref: 94
+    skill_ref: 48
+    value: 1
+- model: collector.skillmodificator
+  pk: 566
+  fields:
+    tour_of_duty_ref: 94
+    skill_ref: 52
+    value: 1
+- model: collector.skillmodificator
+  pk: 567
+  fields:
+    tour_of_duty_ref: 94
+    skill_ref: 68
+    value: 1
+- model: collector.skillmodificator
+  pk: 568
+  fields:
+    tour_of_duty_ref: 94
+    skill_ref: 19
+    value: 2
+- model: collector.skillmodificator
+  pk: 569
+  fields:
+    tour_of_duty_ref: 94
+    skill_ref: 6
+    value: 1
+- model: collector.skillmodificator
+  pk: 570
+  fields:
+    tour_of_duty_ref: 94
+    skill_ref: 2
+    value: 2
+- model: collector.skillmodificator
+  pk: 571
+  fields:
+    tour_of_duty_ref: 94
+    skill_ref: 54
+    value: 1
+- model: collector.skillmodificator
+  pk: 572
+  fields:
+    tour_of_duty_ref: 94
+    skill_ref: 123
+    value: 1
+- model: collector.skillmodificator
+  pk: 573
+  fields:
+    tour_of_duty_ref: 93
+    skill_ref: 39
+    value: 1
+- model: collector.skillmodificator
+  pk: 574
+  fields:
+    tour_of_duty_ref: 93
+    skill_ref: 71
+    value: 1
+- model: collector.skillmodificator
+  pk: 575
+  fields:
+    tour_of_duty_ref: 93
+    skill_ref: 25
+    value: 2
+- model: collector.skillmodificator
+  pk: 576
+  fields:
+    tour_of_duty_ref: 93
+    skill_ref: 68
+    value: 1
+- model: collector.skillmodificator
+  pk: 577
+  fields:
+    tour_of_duty_ref: 93
+    skill_ref: 10
+    value: 1
+- model: collector.skillmodificator
+  pk: 578
+  fields:
+    tour_of_duty_ref: 93
+    skill_ref: 100
+    value: 1
+- model: collector.skillmodificator
+  pk: 579
+  fields:
+    tour_of_duty_ref: 93
+    skill_ref: 1
+    value: 1
+- model: collector.skillmodificator
+  pk: 580
+  fields:
+    tour_of_duty_ref: 93
+    skill_ref: 54
+    value: 1
+- model: collector.skillmodificator
+  pk: 581
+  fields:
+    tour_of_duty_ref: 93
+    skill_ref: 16
+    value: 2
+- model: collector.skillmodificator
+  pk: 582
+  fields:
+    tour_of_duty_ref: 93
+    skill_ref: 12
+    value: 1
+- model: collector.skillmodificator
+  pk: 583
+  fields:
+    tour_of_duty_ref: 93
+    skill_ref: 24
+    value: 2
+- model: collector.skillmodificator
+  pk: 584
+  fields:
+    tour_of_duty_ref: 93
+    skill_ref: 40
+    value: 1
+- model: collector.skillmodificator
+  pk: 585
+  fields:
+    tour_of_duty_ref: 130
+    skill_ref: 9
+    value: 2
+- model: collector.skillmodificator
+  pk: 586
+  fields:
+    tour_of_duty_ref: 130
+    skill_ref: 38
+    value: 2
+- model: collector.skillmodificator
+  pk: 587
+  fields:
+    tour_of_duty_ref: 130
+    skill_ref: 33
+    value: 1
+- model: collector.skillmodificator
+  pk: 588
+  fields:
+    tour_of_duty_ref: 130
+    skill_ref: 47
+    value: 2
+- model: collector.skillmodificator
+  pk: 589
+  fields:
+    tour_of_duty_ref: 130
+    skill_ref: 46
+    value: 2
+- model: collector.skillmodificator
+  pk: 590
+  fields:
+    tour_of_duty_ref: 130
+    skill_ref: 34
+    value: 1
+- model: collector.skillmodificator
+  pk: 591
+  fields:
+    tour_of_duty_ref: 130
+    skill_ref: 70
+    value: 2
+- model: collector.skillmodificator
+  pk: 592
+  fields:
+    tour_of_duty_ref: 131
+    skill_ref: 14
+    value: 1
+- model: collector.skillmodificator
+  pk: 593
+  fields:
+    tour_of_duty_ref: 131
+    skill_ref: 16
+    value: 1
+- model: collector.skillmodificator
+  pk: 594
+  fields:
+    tour_of_duty_ref: 131
+    skill_ref: 40
+    value: 2
+- model: collector.skillmodificator
+  pk: 596
+  fields:
+    tour_of_duty_ref: 131
+    skill_ref: 89
+    value: 1
+- model: collector.skillmodificator
+  pk: 597
+  fields:
+    tour_of_duty_ref: 131
+    skill_ref: 23
+    value: 1
+- model: collector.skillmodificator
+  pk: 598
+  fields:
+    tour_of_duty_ref: 131
+    skill_ref: 67
+    value: 1
+- model: collector.skillmodificator
+  pk: 599
+  fields:
+    tour_of_duty_ref: 131
+    skill_ref: 22
+    value: 2
+- model: collector.skillmodificator
+  pk: 600
+  fields:
+    tour_of_duty_ref: 131
+    skill_ref: 155
+    value: 1
+- model: collector.skillmodificator
+  pk: 601
+  fields:
+    tour_of_duty_ref: 131
+    skill_ref: 9
+    value: 1
+- model: collector.skillmodificator
+  pk: 602
+  fields:
+    tour_of_duty_ref: 131
+    skill_ref: 6
+    value: 1
+- model: collector.skillmodificator
+  pk: 604
+  fields:
+    tour_of_duty_ref: 132
+    skill_ref: 23
+    value: 1
+- model: collector.skillmodificator
+  pk: 605
+  fields:
+    tour_of_duty_ref: 132
+    skill_ref: 22
+    value: 1
+- model: collector.skillmodificator
+  pk: 606
+  fields:
+    tour_of_duty_ref: 132
+    skill_ref: 34
+    value: 3
+- model: collector.skillmodificator
+  pk: 607
+  fields:
+    tour_of_duty_ref: 132
+    skill_ref: 53
+    value: 1
+- model: collector.skillmodificator
+  pk: 608
+  fields:
+    tour_of_duty_ref: 132
+    skill_ref: 30
+    value: 1
+- model: collector.skillmodificator
+  pk: 609
+  fields:
+    tour_of_duty_ref: 132
+    skill_ref: 27
+    value: 1
+- model: collector.skillmodificator
+  pk: 611
+  fields:
+    tour_of_duty_ref: 132
+    skill_ref: 52
+    value: 1
+- model: collector.skillmodificator
+  pk: 612
+  fields:
+    tour_of_duty_ref: 132
+    skill_ref: 157
+    value: 2
+- model: collector.skillmodificator
+  pk: 613
+  fields:
+    tour_of_duty_ref: 133
+    skill_ref: 1
+    value: 1
+- model: collector.skillmodificator
+  pk: 614
+  fields:
+    tour_of_duty_ref: 133
+    skill_ref: 6
+    value: 2
+- model: collector.skillmodificator
+  pk: 615
+  fields:
+    tour_of_duty_ref: 133
+    skill_ref: 49
+    value: 2
+- model: collector.skillmodificator
+  pk: 616
+  fields:
+    tour_of_duty_ref: 133
+    skill_ref: 50
+    value: 1
+- model: collector.skillmodificator
+  pk: 617
+  fields:
+    tour_of_duty_ref: 133
+    skill_ref: 6
+    value: 1
+- model: collector.skillmodificator
+  pk: 618
+  fields:
+    tour_of_duty_ref: 133
+    skill_ref: 23
+    value: 2
+- model: collector.skillmodificator
+  pk: 619
+  fields:
+    tour_of_duty_ref: 133
+    skill_ref: 16
+    value: 1
+- model: collector.skillmodificator
+  pk: 620
+  fields:
+    tour_of_duty_ref: 133
+    skill_ref: 40
+    value: 2
+- model: collector.skillmodificator
+  pk: 621
+  fields:
+    tour_of_duty_ref: 133
+    skill_ref: 14
+    value: 2
+- model: collector.skillmodificator
+  pk: 622
+  fields:
+    tour_of_duty_ref: 128
+    skill_ref: 70
+    value: 1
+- model: collector.skillmodificator
+  pk: 623
+  fields:
+    tour_of_duty_ref: 134
+    skill_ref: 14
+    value: 1
+- model: collector.skillmodificator
+  pk: 624
+  fields:
+    tour_of_duty_ref: 134
+    skill_ref: 18
+    value: 1
+- model: collector.skillmodificator
+  pk: 625
+  fields:
+    tour_of_duty_ref: 134
+    skill_ref: 19
+    value: 1
+- model: collector.skillmodificator
+  pk: 626
+  fields:
+    tour_of_duty_ref: 134
+    skill_ref: 2
+    value: 1
+- model: collector.skillmodificator
+  pk: 627
+  fields:
+    tour_of_duty_ref: 134
+    skill_ref: 72
+    value: 2
+- model: collector.skillmodificator
+  pk: 628
+  fields:
+    tour_of_duty_ref: 134
+    skill_ref: 55
+    value: 2
+- model: collector.skillmodificator
+  pk: 629
+  fields:
+    tour_of_duty_ref: 135
+    skill_ref: 14
+    value: 2
+- model: collector.skillmodificator
+  pk: 630
+  fields:
+    tour_of_duty_ref: 135
+    skill_ref: 19
+    value: 2
+- model: collector.skillmodificator
+  pk: 631
+  fields:
+    tour_of_duty_ref: 135
+    skill_ref: 6
+    value: 2
+- model: collector.skillmodificator
+  pk: 632
+  fields:
+    tour_of_duty_ref: 135
+    skill_ref: 24
+    value: 2
+- model: collector.skillmodificator
+  pk: 633
+  fields:
+    tour_of_duty_ref: 135
+    skill_ref: 40
+    value: 2
+- model: collector.skillmodificator
+  pk: 634
+  fields:
+    tour_of_duty_ref: 135
+    skill_ref: 22
+    value: 1
+- model: collector.skillmodificator
+  pk: 635
+  fields:
+    tour_of_duty_ref: 136
+    skill_ref: 14
+    value: 1
+- model: collector.skillmodificator
+  pk: 636
+  fields:
+    tour_of_duty_ref: 136
+    skill_ref: 4
+    value: 1
+- model: collector.skillmodificator
+  pk: 637
+  fields:
+    tour_of_duty_ref: 136
+    skill_ref: 28
+    value: 1
+- model: collector.skillmodificator
+  pk: 638
+  fields:
+    tour_of_duty_ref: 136
+    skill_ref: 29
+    value: 2
+- model: collector.skillmodificator
+  pk: 639
+  fields:
+    tour_of_duty_ref: 136
+    skill_ref: 138
+    value: 2
+- model: collector.skillmodificator
+  pk: 640
+  fields:
+    tour_of_duty_ref: 135
+    skill_ref: 2
+    value: 2
+- model: collector.skillmodificator
+  pk: 641
+  fields:
+    tour_of_duty_ref: 135
+    skill_ref: 86
+    value: 2
+- model: collector.skillmodificator
+  pk: 642
+  fields:
+    tour_of_duty_ref: 135
+    skill_ref: 16
+    value: 2
+- model: collector.skillmodificator
+  pk: 643
+  fields:
+    tour_of_duty_ref: 122
+    skill_ref: 70
+    value: 1
+- model: collector.skillmodificator
+  pk: 644
+  fields:
+    tour_of_duty_ref: 122
+    skill_ref: 63
+    value: 1
+- model: collector.skillmodificator
+  pk: 645
+  fields:
+    tour_of_duty_ref: 122
+    skill_ref: 13
+    value: 1
+- model: collector.skillmodificator
+  pk: 646
+  fields:
+    tour_of_duty_ref: 122
+    skill_ref: 23
+    value: 1
+- model: collector.skillmodificator
+  pk: 647
+  fields:
+    tour_of_duty_ref: 122
+    skill_ref: 47
+    value: 1
+- model: collector.skillmodificator
+  pk: 648
+  fields:
+    tour_of_duty_ref: 76
+    skill_ref: 32
+    value: 1
+- model: collector.skillmodificator
+  pk: 649
+  fields:
+    tour_of_duty_ref: 76
+    skill_ref: 90
+    value: 1
+- model: collector.skillmodificator
+  pk: 650
+  fields:
+    tour_of_duty_ref: 76
+    skill_ref: 71
+    value: 1
+- model: collector.skillmodificator
+  pk: 651
+  fields:
+    tour_of_duty_ref: 76
+    skill_ref: 39
+    value: 2
+- model: collector.skillmodificator
+  pk: 652
+  fields:
+    tour_of_duty_ref: 76
+    skill_ref: 176
+    value: 3
+- model: collector.skillmodificator
+  pk: 653
+  fields:
+    tour_of_duty_ref: 76
+    skill_ref: 177
+    value: 1
+- model: collector.skillmodificator
+  pk: 654
+  fields:
+    tour_of_duty_ref: 76
+    skill_ref: 68
+    value: 1
+- model: collector.skillmodificator
+  pk: 655
+  fields:
+    tour_of_duty_ref: 78
+    skill_ref: 18
+    value: 1
+- model: collector.skillmodificator
+  pk: 656
+  fields:
+    tour_of_duty_ref: 78
+    skill_ref: 30
+    value: 1
+- model: collector.skillmodificator
+  pk: 657
+  fields:
+    tour_of_duty_ref: 78
+    skill_ref: 19
+    value: 2
+- model: collector.skillmodificator
+  pk: 658
+  fields:
+    tour_of_duty_ref: 78
+    skill_ref: 156
+    value: 2
+- model: collector.skillmodificator
+  pk: 659
+  fields:
+    tour_of_duty_ref: 78
+    skill_ref: 157
+    value: 1
+- model: collector.skillmodificator
+  pk: 660
+  fields:
+    tour_of_duty_ref: 78
+    skill_ref: 39
+    value: 1
+- model: collector.skillmodificator
+  pk: 661
+  fields:
+    tour_of_duty_ref: 78
+    skill_ref: 48
+    value: 1
+- model: collector.skillmodificator
+  pk: 662
+  fields:
+    tour_of_duty_ref: 78
+    skill_ref: 63
+    value: 1
+- model: collector.skillmodificator
+  pk: 663
+  fields:
+    tour_of_duty_ref: 79
+    skill_ref: 30
+    value: 1
+- model: collector.skillmodificator
+  pk: 664
+  fields:
+    tour_of_duty_ref: 79
+    skill_ref: 1
+    value: 1
+- model: collector.skillmodificator
+  pk: 665
+  fields:
+    tour_of_duty_ref: 79
+    skill_ref: 178
+    value: 1
+- model: collector.skillmodificator
+  pk: 666
+  fields:
+    tour_of_duty_ref: 79
+    skill_ref: 9
+    value: 1
+- model: collector.skillmodificator
+  pk: 667
+  fields:
+    tour_of_duty_ref: 79
+    skill_ref: 23
+    value: 1
+- model: collector.skillmodificator
+  pk: 668
+  fields:
+    tour_of_duty_ref: 79
+    skill_ref: 32
+    value: 1
+- model: collector.skillmodificator
+  pk: 669
+  fields:
+    tour_of_duty_ref: 79
+    skill_ref: 38
+    value: 1
+- model: collector.skillmodificator
+  pk: 670
+  fields:
+    tour_of_duty_ref: 79
+    skill_ref: 85
+    value: 1
+- model: collector.skillmodificator
+  pk: 672
+  fields:
+    tour_of_duty_ref: 77
+    skill_ref: 30
+    value: 1
+- model: collector.skillmodificator
+  pk: 673
+  fields:
+    tour_of_duty_ref: 77
+    skill_ref: 18
+    value: 1
+- model: collector.skillmodificator
+  pk: 674
+  fields:
+    tour_of_duty_ref: 77
+    skill_ref: 17
+    value: 1
+- model: collector.skillmodificator
+  pk: 675
+  fields:
+    tour_of_duty_ref: 77
+    skill_ref: 27
+    value: 1
+- model: collector.skillmodificator
+  pk: 676
+  fields:
+    tour_of_duty_ref: 77
+    skill_ref: 32
+    value: 1
+- model: collector.skillmodificator
+  pk: 677
+  fields:
+    tour_of_duty_ref: 77
+    skill_ref: 33
+    value: 1
+- model: collector.skillmodificator
+  pk: 678
+  fields:
+    tour_of_duty_ref: 77
+    skill_ref: 91
+    value: 2
+- model: collector.skillmodificator
+  pk: 679
+  fields:
+    tour_of_duty_ref: 77
+    skill_ref: 63
+    value: 2
+- model: collector.skillmodificator
+  pk: 680
+  fields:
+    tour_of_duty_ref: 82
+    skill_ref: 30
+    value: 1
+- model: collector.skillmodificator
+  pk: 681
+  fields:
+    tour_of_duty_ref: 82
+    skill_ref: 14
+    value: 1
+- model: collector.skillmodificator
+  pk: 682
+  fields:
+    tour_of_duty_ref: 82
+    skill_ref: 19
+    value: 1
+- model: collector.skillmodificator
+  pk: 683
+  fields:
+    tour_of_duty_ref: 82
+    skill_ref: 17
+    value: 1
+- model: collector.skillmodificator
+  pk: 684
+  fields:
+    tour_of_duty_ref: 82
+    skill_ref: 27
+    value: 1
+- model: collector.skillmodificator
+  pk: 685
+  fields:
+    tour_of_duty_ref: 82
+    skill_ref: 32
+    value: 1
+- model: collector.skillmodificator
+  pk: 686
+  fields:
+    tour_of_duty_ref: 82
+    skill_ref: 33
+    value: 1
+- model: collector.skillmodificator
+  pk: 687
+  fields:
+    tour_of_duty_ref: 82
+    skill_ref: 63
+    value: 1
+- model: collector.skillmodificator
+  pk: 688
+  fields:
+    tour_of_duty_ref: 82
+    skill_ref: 91
+    value: 2
+- model: collector.skillmodificator
+  pk: 689
+  fields:
+    tour_of_duty_ref: 48
+    skill_ref: 30
+    value: 2
+- model: collector.skillmodificator
+  pk: 690
+  fields:
+    tour_of_duty_ref: 48
+    skill_ref: 63
+    value: 2
+- model: collector.skillmodificator
+  pk: 691
+  fields:
+    tour_of_duty_ref: 48
+    skill_ref: 18
+    value: 2
+- model: collector.skillmodificator
+  pk: 692
+  fields:
+    tour_of_duty_ref: 48
+    skill_ref: 33
+    value: 1
+- model: collector.skillmodificator
+  pk: 693
+  fields:
+    tour_of_duty_ref: 48
+    skill_ref: 55
+    value: 1
+- model: collector.skillmodificator
+  pk: 694
+  fields:
+    tour_of_duty_ref: 48
+    skill_ref: 14
+    value: 1
+- model: collector.skillmodificator
+  pk: 695
+  fields:
+    tour_of_duty_ref: 48
+    skill_ref: 4
+    value: 1
+- model: collector.skillmodificator
+  pk: 696
+  fields:
+    tour_of_duty_ref: 48
+    skill_ref: 31
+    value: 1
+- model: collector.skillmodificator
+  pk: 697
+  fields:
+    tour_of_duty_ref: 47
+    skill_ref: 23
+    value: 2
+- model: collector.skillmodificator
+  pk: 698
+  fields:
+    tour_of_duty_ref: 81
+    skill_ref: 19
+    value: 1
+- model: collector.skillmodificator
+  pk: 699
+  fields:
+    tour_of_duty_ref: 81
+    skill_ref: 32
+    value: 1
+- model: collector.skillmodificator
+  pk: 700
+  fields:
+    tour_of_duty_ref: 81
+    skill_ref: 90
+    value: 1
+- model: collector.skillmodificator
+  pk: 701
+  fields:
+    tour_of_duty_ref: 81
+    skill_ref: 71
+    value: 2
+- model: collector.skillmodificator
+  pk: 702
+  fields:
+    tour_of_duty_ref: 81
+    skill_ref: 39
+    value: 1
+- model: collector.skillmodificator
+  pk: 703
+  fields:
+    tour_of_duty_ref: 81
+    skill_ref: 176
+    value: 2
+- model: collector.skillmodificator
+  pk: 704
+  fields:
+    tour_of_duty_ref: 81
+    skill_ref: 177
+    value: 1
+- model: collector.skillmodificator
+  pk: 705
+  fields:
+    tour_of_duty_ref: 81
+    skill_ref: 68
+    value: 1
+- model: collector.skillmodificator
+  pk: 706
+  fields:
+    tour_of_duty_ref: 83
+    skill_ref: 18
+    value: 1
+- model: collector.skillmodificator
+  pk: 708
+  fields:
+    tour_of_duty_ref: 83
+    skill_ref: 30
+    value: 1
+- model: collector.skillmodificator
+  pk: 709
+  fields:
+    tour_of_duty_ref: 83
+    skill_ref: 19
+    value: 1
+- model: collector.skillmodificator
+  pk: 710
+  fields:
+    tour_of_duty_ref: 83
+    skill_ref: 156
+    value: 1
+- model: collector.skillmodificator
+  pk: 711
+  fields:
+    tour_of_duty_ref: 83
+    skill_ref: 157
+    value: 1
+- model: collector.skillmodificator
+  pk: 712
+  fields:
+    tour_of_duty_ref: 83
+    skill_ref: 39
+    value: 1
+- model: collector.skillmodificator
+  pk: 713
+  fields:
+    tour_of_duty_ref: 83
+    skill_ref: 48
+    value: 1
+- model: collector.skillmodificator
+  pk: 714
+  fields:
+    tour_of_duty_ref: 83
+    skill_ref: 49
+    value: 1
+- model: collector.skillmodificator
+  pk: 715
+  fields:
+    tour_of_duty_ref: 83
+    skill_ref: 63
+    value: 2
+- model: collector.skillmodificator
+  pk: 716
+  fields:
+    tour_of_duty_ref: 84
+    skill_ref: 30
+    value: 1
+- model: collector.skillmodificator
+  pk: 717
+  fields:
+    tour_of_duty_ref: 84
+    skill_ref: 16
+    value: 1
+- model: collector.skillmodificator
+  pk: 718
+  fields:
+    tour_of_duty_ref: 84
+    skill_ref: 1
+    value: 1
+- model: collector.skillmodificator
+  pk: 719
+  fields:
+    tour_of_duty_ref: 84
+    skill_ref: 9
+    value: 1
+- model: collector.skillmodificator
+  pk: 720
+  fields:
+    tour_of_duty_ref: 84
+    skill_ref: 23
+    value: 1
+- model: collector.skillmodificator
+  pk: 721
+  fields:
+    tour_of_duty_ref: 84
+    skill_ref: 32
+    value: 1
+- model: collector.skillmodificator
+  pk: 722
+  fields:
+    tour_of_duty_ref: 84
+    skill_ref: 38
+    value: 1
+- model: collector.skillmodificator
+  pk: 723
+  fields:
+    tour_of_duty_ref: 84
+    skill_ref: 85
+    value: 2
+- model: collector.skillmodificator
+  pk: 725
+  fields:
+    tour_of_duty_ref: 86
+    skill_ref: 19
+    value: 1
+- model: collector.skillmodificator
+  pk: 726
+  fields:
+    tour_of_duty_ref: 86
+    skill_ref: 32
+    value: 1
+- model: collector.skillmodificator
+  pk: 727
+  fields:
+    tour_of_duty_ref: 86
+    skill_ref: 90
+    value: 2
+- model: collector.skillmodificator
+  pk: 728
+  fields:
+    tour_of_duty_ref: 86
+    skill_ref: 39
+    value: 2
+- model: collector.skillmodificator
+  pk: 729
+  fields:
+    tour_of_duty_ref: 86
+    skill_ref: 176
+    value: 2
+- model: collector.skillmodificator
+  pk: 730
+  fields:
+    tour_of_duty_ref: 86
+    skill_ref: 63
+    value: 1
+- model: collector.skillmodificator
+  pk: 731
+  fields:
+    tour_of_duty_ref: 86
+    skill_ref: 68
+    value: 1
+- model: collector.skillmodificator
+  pk: 732
+  fields:
+    tour_of_duty_ref: 88
+    skill_ref: 40
+    value: 1
+- model: collector.skillmodificator
+  pk: 733
+  fields:
+    tour_of_duty_ref: 88
+    skill_ref: 30
+    value: 1
+- model: collector.skillmodificator
+  pk: 734
+  fields:
+    tour_of_duty_ref: 88
+    skill_ref: 19
+    value: 1
+- model: collector.skillmodificator
+  pk: 735
+  fields:
+    tour_of_duty_ref: 88
+    skill_ref: 156
+    value: 1
+- model: collector.skillmodificator
+  pk: 736
+  fields:
+    tour_of_duty_ref: 88
+    skill_ref: 48
+    value: 1
+- model: collector.skillmodificator
+  pk: 737
+  fields:
+    tour_of_duty_ref: 88
+    skill_ref: 49
+    value: 1
+- model: collector.skillmodificator
+  pk: 738
+  fields:
+    tour_of_duty_ref: 88
+    skill_ref: 63
+    value: 2
+- model: collector.skillmodificator
+  pk: 739
+  fields:
+    tour_of_duty_ref: 88
+    skill_ref: 55
+    value: 1
+- model: collector.skillmodificator
+  pk: 740
+  fields:
+    tour_of_duty_ref: 88
+    skill_ref: 33
+    value: 1
+- model: collector.skillmodificator
+  pk: 741
+  fields:
+    tour_of_duty_ref: 89
+    skill_ref: 30
+    value: 1
+- model: collector.skillmodificator
+  pk: 742
+  fields:
+    tour_of_duty_ref: 89
+    skill_ref: 16
+    value: 1
+- model: collector.skillmodificator
+  pk: 743
+  fields:
+    tour_of_duty_ref: 89
+    skill_ref: 19
+    value: 1
+- model: collector.skillmodificator
+  pk: 744
+  fields:
+    tour_of_duty_ref: 89
+    skill_ref: 60
+    value: 1
+- model: collector.skillmodificator
+  pk: 745
+  fields:
+    tour_of_duty_ref: 89
+    skill_ref: 1
+    value: 1
+- model: collector.skillmodificator
+  pk: 746
+  fields:
+    tour_of_duty_ref: 89
+    skill_ref: 23
+    value: 1
+- model: collector.skillmodificator
+  pk: 747
+  fields:
+    tour_of_duty_ref: 89
+    skill_ref: 32
+    value: 1
+- model: collector.skillmodificator
+  pk: 748
+  fields:
+    tour_of_duty_ref: 89
+    skill_ref: 38
+    value: 1
+- model: collector.skillmodificator
+  pk: 750
+  fields:
+    tour_of_duty_ref: 89
+    skill_ref: 63
+    value: 1
+- model: collector.skillmodificator
+  pk: 751
+  fields:
+    tour_of_duty_ref: 87
+    skill_ref: 60
+    value: 1
+- model: collector.skillmodificator
+  pk: 752
+  fields:
+    tour_of_duty_ref: 87
+    skill_ref: 14
+    value: 1
+- model: collector.skillmodificator
+  pk: 753
+  fields:
+    tour_of_duty_ref: 87
+    skill_ref: 19
+    value: 2
+- model: collector.skillmodificator
+  pk: 754
+  fields:
+    tour_of_duty_ref: 87
+    skill_ref: 27
+    value: 1
+- model: collector.skillmodificator
+  pk: 755
+  fields:
+    tour_of_duty_ref: 87
+    skill_ref: 33
+    value: 1
+- model: collector.skillmodificator
+  pk: 756
+  fields:
+    tour_of_duty_ref: 87
+    skill_ref: 91
+    value: 2
+- model: collector.skillmodificator
+  pk: 757
+  fields:
+    tour_of_duty_ref: 87
+    skill_ref: 63
+    value: 2
+- model: collector.skillmodificator
+  pk: 758
+  fields:
+    tour_of_duty_ref: 90
+    skill_ref: 53
+    value: 2
+- model: collector.skillmodificator
+  pk: 759
+  fields:
+    tour_of_duty_ref: 90
+    skill_ref: 18
+    value: 1
+- model: collector.skillmodificator
+  pk: 760
+  fields:
+    tour_of_duty_ref: 90
+    skill_ref: 16
+    value: 1
+- model: collector.skillmodificator
+  pk: 761
+  fields:
+    tour_of_duty_ref: 90
+    skill_ref: 27
+    value: 1
+- model: collector.skillmodificator
+  pk: 762
+  fields:
+    tour_of_duty_ref: 90
+    skill_ref: 32
+    value: 2
+- model: collector.skillmodificator
+  pk: 763
+  fields:
+    tour_of_duty_ref: 90
+    skill_ref: 157
+    value: 1
+- model: collector.skillmodificator
+  pk: 764
+  fields:
+    tour_of_duty_ref: 90
+    skill_ref: 153
+    value: 1
+- model: collector.skillmodificator
+  pk: 765
+  fields:
+    tour_of_duty_ref: 90
+    skill_ref: 63
+    value: 2
+- model: collector.skillmodificator
+  pk: 766
+  fields:
+    tour_of_duty_ref: 90
+    skill_ref: 33
+    value: 1
+- model: collector.skillmodificator
+  pk: 767
+  fields:
+    tour_of_duty_ref: 90
+    skill_ref: 17
+    value: 1
+- model: collector.skillmodificator
+  pk: 768
+  fields:
+    tour_of_duty_ref: 90
+    skill_ref: 70
+    value: 2
+- model: collector.skillmodificator
+  pk: 769
+  fields:
+    tour_of_duty_ref: 91
+    skill_ref: 38
+    value: 2
+- model: collector.skillmodificator
+  pk: 770
+  fields:
+    tour_of_duty_ref: 91
+    skill_ref: 1
+    value: 1
+- model: collector.skillmodificator
+  pk: 771
+  fields:
+    tour_of_duty_ref: 91
+    skill_ref: 31
+    value: 1
+- model: collector.skillmodificator
+  pk: 772
+  fields:
+    tour_of_duty_ref: 91
+    skill_ref: 33
+    value: 1
+- model: collector.skillmodificator
+  pk: 773
+  fields:
+    tour_of_duty_ref: 91
+    skill_ref: 46
+    value: 1
+- model: collector.skillmodificator
+  pk: 774
+  fields:
+    tour_of_duty_ref: 91
+    skill_ref: 27
+    value: 1
+- model: collector.skillmodificator
+  pk: 775
+  fields:
+    tour_of_duty_ref: 91
+    skill_ref: 26
+    value: 2
+- model: collector.skillmodificator
+  pk: 776
+  fields:
+    tour_of_duty_ref: 91
+    skill_ref: 23
+    value: 2
+- model: collector.skillmodificator
+  pk: 777
+  fields:
+    tour_of_duty_ref: 138
+    skill_ref: 22
+    value: 2
+- model: collector.skillmodificator
+  pk: 778
+  fields:
+    tour_of_duty_ref: 138
+    skill_ref: 106
+    value: 1
+- model: collector.skillmodificator
+  pk: 779
+  fields:
+    tour_of_duty_ref: 138
+    skill_ref: 24
+    value: 1
+- model: collector.skillmodificator
+  pk: 780
+  fields:
+    tour_of_duty_ref: 138
+    skill_ref: 62
+    value: 1
+- model: collector.skillmodificator
+  pk: 781
+  fields:
+    tour_of_duty_ref: 138
+    skill_ref: 46
+    value: 1
+- model: collector.skillmodificator
+  pk: 782
+  fields:
+    tour_of_duty_ref: 138
+    skill_ref: 14
+    value: 2
+- model: collector.skillmodificator
+  pk: 783
+  fields:
+    tour_of_duty_ref: 138
+    skill_ref: 40
+    value: 2
+- model: collector.skillmodificator
+  pk: 784
+  fields:
+    tour_of_duty_ref: 139
+    skill_ref: 7
+    value: 1
+- model: collector.skillmodificator
+  pk: 786
+  fields:
+    tour_of_duty_ref: 139
+    skill_ref: 9
+    value: 1
+- model: collector.skillmodificator
+  pk: 787
+  fields:
+    tour_of_duty_ref: 139
+    skill_ref: 14
+    value: 1
+- model: collector.skillmodificator
+  pk: 788
+  fields:
+    tour_of_duty_ref: 139
+    skill_ref: 22
+    value: 1
+- model: collector.skillmodificator
+  pk: 789
+  fields:
+    tour_of_duty_ref: 139
+    skill_ref: 23
+    value: 1
+- model: collector.skillmodificator
+  pk: 790
+  fields:
+    tour_of_duty_ref: 139
+    skill_ref: 26
+    value: 1
+- model: collector.skillmodificator
+  pk: 791
+  fields:
+    tour_of_duty_ref: 139
+    skill_ref: 27
+    value: 1
+- model: collector.skillmodificator
+  pk: 792
+  fields:
+    tour_of_duty_ref: 139
+    skill_ref: 33
+    value: 2
+- model: collector.skillmodificator
+  pk: 793
+  fields:
+    tour_of_duty_ref: 139
+    skill_ref: 53
+    value: 1
+- model: collector.skillmodificator
+  pk: 794
+  fields:
+    tour_of_duty_ref: 140
+    skill_ref: 157
+    value: 2
+- model: collector.skillmodificator
+  pk: 795
+  fields:
+    tour_of_duty_ref: 140
+    skill_ref: 24
+    value: 1
+- model: collector.skillmodificator
+  pk: 796
+  fields:
+    tour_of_duty_ref: 140
+    skill_ref: 23
+    value: 2
+- model: collector.skillmodificator
+  pk: 797
+  fields:
+    tour_of_duty_ref: 140
+    skill_ref: 13
+    value: 1
+- model: collector.skillmodificator
+  pk: 798
+  fields:
+    tour_of_duty_ref: 140
+    skill_ref: 26
+    value: 2
+- model: collector.skillmodificator
+  pk: 799
+  fields:
+    tour_of_duty_ref: 140
+    skill_ref: 27
+    value: 2
+- model: collector.skillmodificator
+  pk: 800
+  fields:
+    tour_of_duty_ref: 140
+    skill_ref: 30
+    value: 1
+- model: collector.skillmodificator
+  pk: 801
+  fields:
+    tour_of_duty_ref: 140
+    skill_ref: 39
+    value: 1
+- model: collector.skillmodificator
+  pk: 803
+  fields:
+    tour_of_duty_ref: 140
+    skill_ref: 63
+    value: 2
+- model: collector.skillmodificator
+  pk: 804
+  fields:
+    tour_of_duty_ref: 140
+    skill_ref: 159
+    value: 2
+- model: collector.skillmodificator
+  pk: 805
+  fields:
+    tour_of_duty_ref: 96
+    skill_ref: 18
+    value: 1
+- model: collector.skillmodificator
+  pk: 806
+  fields:
+    tour_of_duty_ref: 96
+    skill_ref: 16
+    value: 1
+- model: collector.skillmodificator
+  pk: 807
+  fields:
+    tour_of_duty_ref: 96
+    skill_ref: 19
+    value: 2
+- model: collector.skillmodificator
+  pk: 808
+  fields:
+    tour_of_duty_ref: 96
+    skill_ref: 156
+    value: 2
+- model: collector.skillmodificator
+  pk: 809
+  fields:
+    tour_of_duty_ref: 96
+    skill_ref: 48
+    value: 1
+- model: collector.skillmodificator
+  pk: 810
+  fields:
+    tour_of_duty_ref: 96
+    skill_ref: 39
+    value: 3
+- model: collector.skillmodificator
+  pk: 811
+  fields:
+    tour_of_duty_ref: 96
+    skill_ref: 71
+    value: 2
+- model: collector.skillmodificator
+  pk: 812
+  fields:
+    tour_of_duty_ref: 96
+    skill_ref: 100
+    value: 1
+- model: collector.skillmodificator
+  pk: 813
+  fields:
+    tour_of_duty_ref: 96
+    skill_ref: 15
+    value: 1
+- model: collector.skillmodificator
+  pk: 814
+  fields:
+    tour_of_duty_ref: 96
+    skill_ref: 29
+    value: 1
+- model: collector.skillmodificator
+  pk: 815
+  fields:
+    tour_of_duty_ref: 95
+    skill_ref: 14
+    value: 1
+- model: collector.skillmodificator
+  pk: 816
+  fields:
+    tour_of_duty_ref: 95
+    skill_ref: 18
+    value: 2
+- model: collector.skillmodificator
+  pk: 817
+  fields:
+    tour_of_duty_ref: 95
+    skill_ref: 30
+    value: 1
+- model: collector.skillmodificator
+  pk: 818
+  fields:
+    tour_of_duty_ref: 95
+    skill_ref: 40
+    value: 2
+- model: collector.skillmodificator
+  pk: 819
+  fields:
+    tour_of_duty_ref: 95
+    skill_ref: 19
+    value: 3
+- model: collector.skillmodificator
+  pk: 820
+  fields:
+    tour_of_duty_ref: 95
+    skill_ref: 6
+    value: 1
+- model: collector.skillmodificator
+  pk: 821
+  fields:
+    tour_of_duty_ref: 95
+    skill_ref: 156
+    value: 1
+- model: collector.skillmodificator
+  pk: 822
+  fields:
+    tour_of_duty_ref: 95
+    skill_ref: 39
+    value: 1
+- model: collector.skillmodificator
+  pk: 823
+  fields:
+    tour_of_duty_ref: 95
+    skill_ref: 48
+    value: 1
+- model: collector.skillmodificator
+  pk: 824
+  fields:
+    tour_of_duty_ref: 95
+    skill_ref: 66
+    value: 1
+- model: collector.skillmodificator
+  pk: 825
+  fields:
+    tour_of_duty_ref: 95
+    skill_ref: 55
+    value: 1
+- model: collector.skillmodificator
+  pk: 826
+  fields:
+    tour_of_duty_ref: 97
+    skill_ref: 53
+    value: 1
+- model: collector.skillmodificator
+  pk: 827
+  fields:
+    tour_of_duty_ref: 97
+    skill_ref: 16
+    value: 1
+- model: collector.skillmodificator
+  pk: 828
+  fields:
+    tour_of_duty_ref: 97
+    skill_ref: 1
+    value: 1
+- model: collector.skillmodificator
+  pk: 829
+  fields:
+    tour_of_duty_ref: 97
+    skill_ref: 23
+    value: 1
+- model: collector.skillmodificator
+  pk: 830
+  fields:
+    tour_of_duty_ref: 97
+    skill_ref: 24
+    value: 1
+- model: collector.skillmodificator
+  pk: 831
+  fields:
+    tour_of_duty_ref: 97
+    skill_ref: 32
+    value: 1
+- model: collector.skillmodificator
+  pk: 832
+  fields:
+    tour_of_duty_ref: 97
+    skill_ref: 158
+    value: 3
+- model: collector.skillmodificator
+  pk: 833
+  fields:
+    tour_of_duty_ref: 97
+    skill_ref: 157
+    value: 2
+- model: collector.skillmodificator
+  pk: 836
+  fields:
+    tour_of_duty_ref: 97
+    skill_ref: 68
+    value: 1
+- model: collector.skillmodificator
+  pk: 837
+  fields:
+    tour_of_duty_ref: 97
+    skill_ref: 12
+    value: 1
+- model: collector.skillmodificator
+  pk: 838
+  fields:
+    tour_of_duty_ref: 98
+    skill_ref: 1
+    value: 1
+- model: collector.skillmodificator
+  pk: 839
+  fields:
+    tour_of_duty_ref: 98
+    skill_ref: 24
+    value: 1
+- model: collector.skillmodificator
+  pk: 840
+  fields:
+    tour_of_duty_ref: 98
+    skill_ref: 32
+    value: 1
+- model: collector.skillmodificator
+  pk: 841
+  fields:
+    tour_of_duty_ref: 98
+    skill_ref: 176
+    value: 3
+- model: collector.skillmodificator
+  pk: 842
+  fields:
+    tour_of_duty_ref: 98
+    skill_ref: 177
+    value: 2
+- model: collector.skillmodificator
+  pk: 843
+  fields:
+    tour_of_duty_ref: 98
+    skill_ref: 90
+    value: 2
+- model: collector.skillmodificator
+  pk: 844
+  fields:
+    tour_of_duty_ref: 98
+    skill_ref: 25
+    value: 1
+- model: collector.skillmodificator
+  pk: 845
+  fields:
+    tour_of_duty_ref: 98
+    skill_ref: 71
+    value: 2
+- model: collector.skillmodificator
+  pk: 846
+  fields:
+    tour_of_duty_ref: 98
+    skill_ref: 39
+    value: 1
+- model: collector.skillmodificator
+  pk: 847
+  fields:
+    tour_of_duty_ref: 98
+    skill_ref: 68
+    value: 1
+- model: collector.skillmodificator
+  pk: 848
+  fields:
+    tour_of_duty_ref: 100
+    skill_ref: 40
+    value: 1
+- model: collector.skillmodificator
+  pk: 849
+  fields:
+    tour_of_duty_ref: 100
+    skill_ref: 14
+    value: 1
+- model: collector.skillmodificator
+  pk: 851
+  fields:
+    tour_of_duty_ref: 100
+    skill_ref: 32
+    value: 2
+- model: collector.skillmodificator
+  pk: 852
+  fields:
+    tour_of_duty_ref: 100
+    skill_ref: 26
+    value: 1
+- model: collector.skillmodificator
+  pk: 853
+  fields:
+    tour_of_duty_ref: 100
+    skill_ref: 157
+    value: 1
+- model: collector.skillmodificator
+  pk: 854
+  fields:
+    tour_of_duty_ref: 100
+    skill_ref: 63
+    value: 1
+- model: collector.skillmodificator
+  pk: 855
+  fields:
+    tour_of_duty_ref: 100
+    skill_ref: 59
+    value: 3
+- model: collector.skillmodificator
+  pk: 856
+  fields:
+    tour_of_duty_ref: 100
+    skill_ref: 68
+    value: 2
+- model: collector.skillmodificator
+  pk: 857
+  fields:
+    tour_of_duty_ref: 142
+    skill_ref: 14
+    value: 1
+- model: collector.skillmodificator
+  pk: 858
+  fields:
+    tour_of_duty_ref: 142
+    skill_ref: 3
+    value: 3
+- model: collector.skillmodificator
+  pk: 859
+  fields:
+    tour_of_duty_ref: 142
+    skill_ref: 13
+    value: 1
+- model: collector.skillmodificator
+  pk: 860
+  fields:
+    tour_of_duty_ref: 142
+    skill_ref: 4
+    value: 2
+- model: collector.skillmodificator
+  pk: 861
+  fields:
+    tour_of_duty_ref: 142
+    skill_ref: 2
+    value: 1
+- model: collector.skillmodificator
+  pk: 862
+  fields:
+    tour_of_duty_ref: 142
+    skill_ref: 24
+    value: 1
+- model: collector.skillmodificator
+  pk: 863
+  fields:
+    tour_of_duty_ref: 142
+    skill_ref: 22
+    value: 1
+- model: collector.skillmodificator
+  pk: 864
+  fields:
+    tour_of_duty_ref: 142
+    skill_ref: 32
+    value: 2
+- model: collector.skillmodificator
+  pk: 865
+  fields:
+    tour_of_duty_ref: 142
+    skill_ref: 49
+    value: 1
+- model: collector.skillmodificator
+  pk: 867
+  fields:
+    tour_of_duty_ref: 142
+    skill_ref: 52
+    value: 4
+- model: collector.skillmodificator
+  pk: 868
+  fields:
+    tour_of_duty_ref: 142
+    skill_ref: 55
+    value: 1
+- model: collector.skillmodificator
+  pk: 869
+  fields:
+    tour_of_duty_ref: 100
+    skill_ref: 13
+    value: 1
+- model: collector.skillmodificator
+  pk: 870
+  fields:
+    tour_of_duty_ref: 143
+    skill_ref: 9
+    value: 1
+- model: collector.skillmodificator
+  pk: 871
+  fields:
+    tour_of_duty_ref: 143
+    skill_ref: 52
+    value: 1
+- model: collector.skillmodificator
+  pk: 872
+  fields:
+    tour_of_duty_ref: 143
+    skill_ref: 16
+    value: 1
+- model: collector.skillmodificator
+  pk: 873
+  fields:
+    tour_of_duty_ref: 143
+    skill_ref: 31
+    value: 1
+- model: collector.skillmodificator
+  pk: 874
+  fields:
+    tour_of_duty_ref: 143
+    skill_ref: 34
+    value: 1
+- model: collector.skillmodificator
+  pk: 875
+  fields:
+    tour_of_duty_ref: 143
+    skill_ref: 38
+    value: 1
+- model: collector.skillmodificator
+  pk: 876
+  fields:
+    tour_of_duty_ref: 143
+    skill_ref: 68
+    value: 1
+- model: collector.skillmodificator
+  pk: 877
+  fields:
+    tour_of_duty_ref: 143
+    skill_ref: 19
+    value: 2
+- model: collector.skillmodificator
+  pk: 878
+  fields:
+    tour_of_duty_ref: 143
+    skill_ref: 157
+    value: 2
+- model: collector.skillmodificator
+  pk: 879
+  fields:
+    tour_of_duty_ref: 144
+    skill_ref: 52
+    value: 2
+- model: collector.skillmodificator
+  pk: 881
+  fields:
+    tour_of_duty_ref: 144
+    skill_ref: 14
+    value: 2
+- model: collector.skillmodificator
+  pk: 882
+  fields:
+    tour_of_duty_ref: 144
+    skill_ref: 19
+    value: 2
+- model: collector.skillmodificator
+  pk: 883
+  fields:
+    tour_of_duty_ref: 144
+    skill_ref: 54
+    value: 1
+- model: collector.skillmodificator
+  pk: 884
+  fields:
+    tour_of_duty_ref: 144
+    skill_ref: 22
+    value: 1
+- model: collector.skillmodificator
+  pk: 885
+  fields:
+    tour_of_duty_ref: 144
+    skill_ref: 23
+    value: 2
+- model: collector.skillmodificator
+  pk: 886
+  fields:
+    tour_of_duty_ref: 144
+    skill_ref: 1
+    value: 1
+- model: collector.skillmodificator
+  pk: 887
+  fields:
+    tour_of_duty_ref: 144
+    skill_ref: 157
+    value: 2
+- model: collector.skillmodificator
+  pk: 888
+  fields:
+    tour_of_duty_ref: 144
+    skill_ref: 156
+    value: 1
+- model: collector.skillmodificator
+  pk: 889
+  fields:
+    tour_of_duty_ref: 144
+    skill_ref: 9
+    value: 1
+- model: collector.skillmodificator
+  pk: 890
+  fields:
+    tour_of_duty_ref: 146
+    skill_ref: 41
+    value: 1
+- model: collector.skillmodificator
+  pk: 891
+  fields:
+    tour_of_duty_ref: 146
+    skill_ref: 15
+    value: 1
+- model: collector.skillmodificator
+  pk: 892
+  fields:
+    tour_of_duty_ref: 146
+    skill_ref: 24
+    value: 1
+- model: collector.skillmodificator
+  pk: 893
+  fields:
+    tour_of_duty_ref: 146
+    skill_ref: 14
+    value: 1
+- model: collector.skillmodificator
+  pk: 894
+  fields:
+    tour_of_duty_ref: 146
+    skill_ref: 52
+    value: 2
+- model: collector.skillmodificator
+  pk: 895
+  fields:
+    tour_of_duty_ref: 146
+    skill_ref: 60
+    value: 2
+- model: collector.skillmodificator
+  pk: 897
+  fields:
+    tour_of_duty_ref: 146
+    skill_ref: 55
+    value: 2
+- model: collector.skillmodificator
+  pk: 898
+  fields:
+    tour_of_duty_ref: 147
+    skill_ref: 6
+    value: 1
+- model: collector.skillmodificator
+  pk: 899
+  fields:
+    tour_of_duty_ref: 147
+    skill_ref: 2
+    value: 1
+- model: collector.skillmodificator
+  pk: 900
+  fields:
+    tour_of_duty_ref: 147
+    skill_ref: 23
+    value: 1
+- model: collector.skillmodificator
+  pk: 901
+  fields:
+    tour_of_duty_ref: 147
+    skill_ref: 14
+    value: 1
+- model: collector.skillmodificator
+  pk: 902
+  fields:
+    tour_of_duty_ref: 147
+    skill_ref: 18
+    value: 2
+- model: collector.skillmodificator
+  pk: 903
+  fields:
+    tour_of_duty_ref: 147
+    skill_ref: 22
+    value: 1
+- model: collector.skillmodificator
+  pk: 904
+  fields:
+    tour_of_duty_ref: 147
+    skill_ref: 30
+    value: 1
+- model: collector.skillmodificator
+  pk: 905
+  fields:
+    tour_of_duty_ref: 147
+    skill_ref: 29
+    value: 2
+- model: collector.skillmodificator
+  pk: 906
+  fields:
+    tour_of_duty_ref: 149
+    skill_ref: 23
+    value: 2
+- model: collector.skillmodificator
+  pk: 907
+  fields:
+    tour_of_duty_ref: 149
+    skill_ref: 43
+    value: 2
+- model: collector.skillmodificator
+  pk: 908
+  fields:
+    tour_of_duty_ref: 149
+    skill_ref: 209
+    value: 1
+- model: collector.skillmodificator
+  pk: 909
+  fields:
+    tour_of_duty_ref: 149
+    skill_ref: 24
+    value: 2
+- model: collector.skillmodificator
+  pk: 910
+  fields:
+    tour_of_duty_ref: 149
+    skill_ref: 200
+    value: 1
+- model: collector.skillmodificator
+  pk: 911
+  fields:
+    tour_of_duty_ref: 149
+    skill_ref: 174
+    value: 1
+- model: collector.skillmodificator
+  pk: 912
+  fields:
+    tour_of_duty_ref: 149
+    skill_ref: 203
+    value: 2
+- model: collector.skillmodificator
+  pk: 913
+  fields:
+    tour_of_duty_ref: 149
+    skill_ref: 201
+    value: 1
+- model: collector.skillmodificator
+  pk: 914
+  fields:
+    tour_of_duty_ref: 149
+    skill_ref: 62
+    value: 2
+- model: collector.skillmodificator
+  pk: 915
+  fields:
+    tour_of_duty_ref: 151
+    skill_ref: 14
+    value: 5
+- model: collector.skillmodificator
+  pk: 916
+  fields:
+    tour_of_duty_ref: 151
+    skill_ref: 18
+    value: 5
+- model: collector.skillmodificator
+  pk: 917
+  fields:
+    tour_of_duty_ref: 151
+    skill_ref: 24
+    value: 3
+- model: collector.skillmodificator
+  pk: 918
+  fields:
+    tour_of_duty_ref: 152
+    skill_ref: 14
+    value: 4
+- model: collector.skillmodificator
+  pk: 919
+  fields:
+    tour_of_duty_ref: 152
+    skill_ref: 6
+    value: 4
+- model: collector.skillmodificator
+  pk: 920
+  fields:
+    tour_of_duty_ref: 152
+    skill_ref: 18
+    value: 4
+- model: collector.skillmodificator
+  pk: 921
+  fields:
+    tour_of_duty_ref: 152
+    skill_ref: 2
+    value: 3
+- model: collector.skillmodificator
+  pk: 922
+  fields:
+    tour_of_duty_ref: 152
+    skill_ref: 40
+    value: 4
+- model: collector.skillmodificator
+  pk: 923
+  fields:
+    tour_of_duty_ref: 153
+    skill_ref: 153
+    value: 2
+- model: collector.skillmodificator
+  pk: 924
+  fields:
+    tour_of_duty_ref: 153
+    skill_ref: 23
+    value: 2
+- model: collector.skillmodificator
+  pk: 925
+  fields:
+    tour_of_duty_ref: 153
+    skill_ref: 160
+    value: 1
+- model: collector.skillmodificator
+  pk: 926
+  fields:
+    tour_of_duty_ref: 153
+    skill_ref: 154
+    value: 1
+- model: collector.skillmodificator
+  pk: 927
+  fields:
+    tour_of_duty_ref: 153
+    skill_ref: 157
+    value: 1
+- model: collector.skillmodificator
+  pk: 928
+  fields:
+    tour_of_duty_ref: 153
+    skill_ref: 22
+    value: 1
+- model: collector.skillmodificator
+  pk: 929
+  fields:
+    tour_of_duty_ref: 154
+    skill_ref: 1
+    value: 1
+- model: collector.skillmodificator
+  pk: 930
+  fields:
+    tour_of_duty_ref: 154
+    skill_ref: 23
+    value: 1
+- model: collector.skillmodificator
+  pk: 931
+  fields:
+    tour_of_duty_ref: 154
+    skill_ref: 38
+    value: 1
+- model: collector.skillmodificator
+  pk: 933
+  fields:
+    tour_of_duty_ref: 154
+    skill_ref: 157
+    value: 1
+- model: collector.skillmodificator
+  pk: 934
+  fields:
+    tour_of_duty_ref: 154
+    skill_ref: 14
+    value: 1
+- model: collector.skillmodificator
+  pk: 935
+  fields:
+    tour_of_duty_ref: 154
+    skill_ref: 34
+    value: 2
+- model: collector.skillmodificator
+  pk: 936
+  fields:
+    tour_of_duty_ref: 155
+    skill_ref: 1
+    value: 1
+- model: collector.skillmodificator
+  pk: 937
+  fields:
+    tour_of_duty_ref: 155
+    skill_ref: 4
+    value: 1
+- model: collector.skillmodificator
+  pk: 938
+  fields:
+    tour_of_duty_ref: 155
+    skill_ref: 23
+    value: 1
+- model: collector.skillmodificator
+  pk: 939
+  fields:
+    tour_of_duty_ref: 155
+    skill_ref: 27
+    value: 1
+- model: collector.skillmodificator
+  pk: 940
+  fields:
+    tour_of_duty_ref: 155
+    skill_ref: 32
+    value: 1
+- model: collector.skillmodificator
+  pk: 941
+  fields:
+    tour_of_duty_ref: 155
+    skill_ref: 31
+    value: 1
+- model: collector.skillmodificator
+  pk: 942
+  fields:
+    tour_of_duty_ref: 155
+    skill_ref: 33
+    value: 1
+- model: collector.skillmodificator
+  pk: 943
+  fields:
+    tour_of_duty_ref: 155
+    skill_ref: 59
+    value: 1
+- model: collector.skillmodificator
+  pk: 944
+  fields:
+    tour_of_duty_ref: 156
+    skill_ref: 10
+    value: 2
+- model: collector.skillmodificator
+  pk: 945
+  fields:
+    tour_of_duty_ref: 156
+    skill_ref: 111
+    value: 1
+- model: collector.skillmodificator
+  pk: 946
+  fields:
+    tour_of_duty_ref: 156
+    skill_ref: 13
+    value: 1
+- model: collector.skillmodificator
+  pk: 947
+  fields:
+    tour_of_duty_ref: 156
+    skill_ref: 23
+    value: 1
+- model: collector.skillmodificator
+  pk: 948
+  fields:
+    tour_of_duty_ref: 156
+    skill_ref: 22
+    value: 1
+- model: collector.skillmodificator
+  pk: 949
+  fields:
+    tour_of_duty_ref: 156
+    skill_ref: 33
+    value: 1
+- model: collector.skillmodificator
+  pk: 950
+  fields:
+    tour_of_duty_ref: 156
+    skill_ref: 46
+    value: 1
+- model: collector.skillmodificator
+  pk: 951
+  fields:
+    tour_of_duty_ref: 157
+    skill_ref: 9
+    value: 1
+- model: collector.skillmodificator
+  pk: 952
+  fields:
+    tour_of_duty_ref: 157
+    skill_ref: 26
+    value: 1
+- model: collector.skillmodificator
+  pk: 953
+  fields:
+    tour_of_duty_ref: 157
+    skill_ref: 26
+    value: 1
+- model: collector.skillmodificator
+  pk: 954
+  fields:
+    tour_of_duty_ref: 157
+    skill_ref: 33
+    value: 1
+- model: collector.skillmodificator
+  pk: 955
+  fields:
+    tour_of_duty_ref: 157
+    skill_ref: 70
+    value: 2
+- model: collector.skillmodificator
+  pk: 956
+  fields:
+    tour_of_duty_ref: 157
+    skill_ref: 153
+    value: 2
+- model: collector.skillmodificator
+  pk: 957
+  fields:
+    tour_of_duty_ref: 101
+    skill_ref: 22
+    value: 2
+- model: collector.skillmodificator
+  pk: 958
+  fields:
+    tour_of_duty_ref: 101
+    skill_ref: 23
+    value: 1
+- model: collector.skillmodificator
+  pk: 959
+  fields:
+    tour_of_duty_ref: 101
+    skill_ref: 24
+    value: 1
+- model: collector.skillmodificator
+  pk: 960
+  fields:
+    tour_of_duty_ref: 101
+    skill_ref: 62
+    value: 1
+- model: collector.skillmodificator
+  pk: 961
+  fields:
+    tour_of_duty_ref: 101
+    skill_ref: 61
+    value: 1
+- model: collector.skillmodificator
+  pk: 963
+  fields:
+    tour_of_duty_ref: 102
+    skill_ref: 53
+    value: 2
+- model: collector.skillmodificator
+  pk: 964
+  fields:
+    tour_of_duty_ref: 102
+    skill_ref: 16
+    value: 1
+- model: collector.skillmodificator
+  pk: 965
+  fields:
+    tour_of_duty_ref: 102
+    skill_ref: 22
+    value: 1
+- model: collector.skillmodificator
+  pk: 966
+  fields:
+    tour_of_duty_ref: 102
+    skill_ref: 23
+    value: 2
+- model: collector.skillmodificator
+  pk: 967
+  fields:
+    tour_of_duty_ref: 102
+    skill_ref: 62
+    value: 2
+- model: collector.skillmodificator
+  pk: 968
+  fields:
+    tour_of_duty_ref: 102
+    skill_ref: 32
+    value: 2
+- model: collector.skillmodificator
+  pk: 969
+  fields:
+    tour_of_duty_ref: 102
+    skill_ref: 157
+    value: 2
+- model: collector.skillmodificator
+  pk: 971
+  fields:
+    tour_of_duty_ref: 102
+    skill_ref: 47
+    value: 2
+- model: collector.skillmodificator
+  pk: 980
+  fields:
+    tour_of_duty_ref: 158
+    skill_ref: 23
+    value: 1
+- model: collector.skillmodificator
+  pk: 981
+  fields:
+    tour_of_duty_ref: 158
+    skill_ref: 2
+    value: 1
+- model: collector.skillmodificator
+  pk: 982
+  fields:
+    tour_of_duty_ref: 158
+    skill_ref: 40
+    value: 1
+- model: collector.skillmodificator
+  pk: 983
+  fields:
+    tour_of_duty_ref: 158
+    skill_ref: 22
+    value: 1
+- model: collector.skillmodificator
+  pk: 984
+  fields:
+    tour_of_duty_ref: 158
+    skill_ref: 124
+    value: 1
+- model: collector.skillmodificator
+  pk: 985
+  fields:
+    tour_of_duty_ref: 158
+    skill_ref: 14
+    value: 1
+- model: collector.skillmodificator
+  pk: 987
+  fields:
+    tour_of_duty_ref: 158
+    skill_ref: 134
+    value: 1
+- model: collector.skillmodificator
+  pk: 988
+  fields:
+    tour_of_duty_ref: 159
+    skill_ref: 1
+    value: 2
+- model: collector.skillmodificator
+  pk: 989
+  fields:
+    tour_of_duty_ref: 159
+    skill_ref: 7
+    value: 2
+- model: collector.skillmodificator
+  pk: 990
+  fields:
+    tour_of_duty_ref: 159
+    skill_ref: 22
+    value: 2
+- model: collector.skillmodificator
+  pk: 991
+  fields:
+    tour_of_duty_ref: 159
+    skill_ref: 18
+    value: 2
+- model: collector.skillmodificator
+  pk: 992
+  fields:
+    tour_of_duty_ref: 159
+    skill_ref: 34
+    value: 1
+- model: collector.skillmodificator
+  pk: 993
+  fields:
+    tour_of_duty_ref: 159
+    skill_ref: 141
+    value: 1
+- model: collector.skillmodificator
+  pk: 994
+  fields:
+    tour_of_duty_ref: 159
+    skill_ref: 108
+    value: 1
+- model: collector.skillmodificator
+  pk: 995
+  fields:
+    tour_of_duty_ref: 159
+    skill_ref: 68
+    value: 1
+- model: collector.skillmodificator
+  pk: 996
+  fields:
+    tour_of_duty_ref: 160
+    skill_ref: 140
+    value: 1
+- model: collector.skillmodificator
+  pk: 997
+  fields:
+    tour_of_duty_ref: 160
+    skill_ref: 142
+    value: 1
+- model: collector.skillmodificator
+  pk: 998
+  fields:
+    tour_of_duty_ref: 160
+    skill_ref: 6
+    value: 1
+- model: collector.skillmodificator
+  pk: 999
+  fields:
+    tour_of_duty_ref: 160
+    skill_ref: 2
+    value: 1
+- model: collector.skillmodificator
+  pk: 1000
+  fields:
+    tour_of_duty_ref: 160
+    skill_ref: 14
+    value: 2
+- model: collector.skillmodificator
+  pk: 1001
+  fields:
+    tour_of_duty_ref: 160
+    skill_ref: 18
+    value: 2
+- model: collector.skillmodificator
+  pk: 1002
+  fields:
+    tour_of_duty_ref: 160
+    skill_ref: 69
+    value: 2
+- model: collector.skillmodificator
+  pk: 1003
+  fields:
+    tour_of_duty_ref: 194
+    skill_ref: 33
+    value: 1
+- model: collector.skillmodificator
+  pk: 1004
+  fields:
+    tour_of_duty_ref: 194
+    skill_ref: 4
+    value: 1
+- model: collector.skillmodificator
+  pk: 1005
+  fields:
+    tour_of_duty_ref: 194
+    skill_ref: 17
+    value: 1
+- model: collector.skillmodificator
+  pk: 1006
+  fields:
+    tour_of_duty_ref: 194
+    skill_ref: 30
+    value: 1
+- model: collector.skillmodificator
+  pk: 1012
+  fields:
+    tour_of_duty_ref: 7
+    skill_ref: 34
+    value: 1
+- model: collector.skillmodificator
+  pk: 1013
+  fields:
+    tour_of_duty_ref: 7
+    skill_ref: 62
+    value: 1
+- model: collector.skillmodificator
+  pk: 1014
+  fields:
+    tour_of_duty_ref: 7
+    skill_ref: 61
+    value: 1
+- model: collector.skillmodificator
+  pk: 1015
+  fields:
+    tour_of_duty_ref: 200
+    skill_ref: 156
+    value: 2
+- model: collector.skillmodificator
+  pk: 1016
+  fields:
+    tour_of_duty_ref: 200
+    skill_ref: 63
+    value: 2
+- model: collector.skillmodificator
+  pk: 1017
+  fields:
+    tour_of_duty_ref: 200
+    skill_ref: 14
+    value: 2
+- model: collector.skillmodificator
+  pk: 1018
+  fields:
+    tour_of_duty_ref: 200
+    skill_ref: 23
+    value: 1
+- model: collector.skillmodificator
+  pk: 1019
+  fields:
+    tour_of_duty_ref: 200
+    skill_ref: 67
+    value: 1
+- model: collector.skillmodificator
+  pk: 1020
+  fields:
+    tour_of_duty_ref: 197
+    skill_ref: 155
+    value: 2
+- model: collector.skillmodificator
+  pk: 1021
+  fields:
+    tour_of_duty_ref: 197
+    skill_ref: 24
+    value: 1
+- model: collector.skillmodificator
+  pk: 1022
+  fields:
+    tour_of_duty_ref: 197
+    skill_ref: 22
+    value: 2
+- model: collector.skillmodificator
+  pk: 1023
+  fields:
+    tour_of_duty_ref: 197
+    skill_ref: 23
+    value: 1
+- model: collector.skillmodificator
+  pk: 1024
+  fields:
+    tour_of_duty_ref: 197
+    skill_ref: 1
+    value: 1
+- model: collector.skillmodificator
+  pk: 1025
+  fields:
+    tour_of_duty_ref: 197
+    skill_ref: 47
+    value: 1
+- model: collector.skillmodificator
+  pk: 1026
+  fields:
+    tour_of_duty_ref: 197
+    skill_ref: 46
+    value: 4
+- model: collector.skillmodificator
+  pk: 1027
+  fields:
+    tour_of_duty_ref: 197
+    skill_ref: 157
+    value: 2
+- model: collector.skillmodificator
+  pk: 1030
+  fields:
+    tour_of_duty_ref: 201
+    skill_ref: 9
+    value: 2
+- model: collector.skillmodificator
+  pk: 1032
+  fields:
+    tour_of_duty_ref: 201
+    skill_ref: 52
+    value: 4
+- model: collector.skillmodificator
+  pk: 1033
+  fields:
+    tour_of_duty_ref: 201
+    skill_ref: 34
+    value: 2
+- model: collector.skillmodificator
+  pk: 1035
+  fields:
+    tour_of_duty_ref: 201
+    skill_ref: 157
+    value: 4
+- model: collector.skillmodificator
+  pk: 1036
+  fields:
+    tour_of_duty_ref: 113
+    skill_ref: 6
+    value: 2
+- model: collector.skillmodificator
+  pk: 1037
+  fields:
+    tour_of_duty_ref: 113
+    skill_ref: 2
+    value: 2
+- model: collector.skillmodificator
+  pk: 1038
+  fields:
+    tour_of_duty_ref: 113
+    skill_ref: 24
+    value: 2
+- model: collector.skillmodificator
+  pk: 1039
+  fields:
+    tour_of_duty_ref: 113
+    skill_ref: 14
+    value: 3
+- model: collector.skillmodificator
+  pk: 1040
+  fields:
+    tour_of_duty_ref: 113
+    skill_ref: 40
+    value: 3
+- model: collector.skillmodificator
+  pk: 1041
+  fields:
+    tour_of_duty_ref: 113
+    skill_ref: 16
+    value: 2
+- model: collector.skillmodificator
+  pk: 1042
+  fields:
+    tour_of_duty_ref: 113
+    skill_ref: 33
+    value: 1
+- model: collector.skillmodificator
+  pk: 1043
+  fields:
+    tour_of_duty_ref: 113
+    skill_ref: 60
+    value: 1
+- model: collector.skillmodificator
+  pk: 1044
+  fields:
+    tour_of_duty_ref: 113
+    skill_ref: 72
+    value: 2
+- model: collector.skillmodificator
+  pk: 1045
+  fields:
+    tour_of_duty_ref: 112
+    skill_ref: 22
+    value: 1
+- model: collector.skillmodificator
+  pk: 1046
+  fields:
+    tour_of_duty_ref: 112
+    skill_ref: 23
+    value: 2
+- model: collector.skillmodificator
+  pk: 1047
+  fields:
+    tour_of_duty_ref: 112
+    skill_ref: 1
+    value: 2
+- model: collector.skillmodificator
+  pk: 1048
+  fields:
+    tour_of_duty_ref: 112
+    skill_ref: 34
+    value: 3
+- model: collector.skillmodificator
+  pk: 1049
+  fields:
+    tour_of_duty_ref: 112
+    skill_ref: 59
+    value: 1
+- model: collector.skillmodificator
+  pk: 1050
+  fields:
+    tour_of_duty_ref: 112
+    skill_ref: 30
+    value: 2
+- model: collector.skillmodificator
+  pk: 1051
+  fields:
+    tour_of_duty_ref: 112
+    skill_ref: 52
+    value: 2
+- model: collector.skillmodificator
+  pk: 1052
+  fields:
+    tour_of_duty_ref: 112
+    skill_ref: 157
+    value: 3
+- model: collector.skillmodificator
+  pk: 1053
+  fields:
+    tour_of_duty_ref: 112
+    skill_ref: 153
+    value: 2
+- model: collector.skillmodificator
+  pk: 1054
+  fields:
+    tour_of_duty_ref: 151
+    skill_ref: 2
+    value: 5
+- model: collector.skillmodificator
+  pk: 1055
+  fields:
+    tour_of_duty_ref: 104
+    skill_ref: 18
+    value: 2
+- model: collector.skillmodificator
+  pk: 1056
+  fields:
+    tour_of_duty_ref: 104
+    skill_ref: 40
+    value: 2
+- model: collector.skillmodificator
+  pk: 1057
+  fields:
+    tour_of_duty_ref: 104
+    skill_ref: 19
+    value: 2
+- model: collector.skillmodificator
+  pk: 1058
+  fields:
+    tour_of_duty_ref: 104
+    skill_ref: 6
+    value: 1
+- model: collector.skillmodificator
+  pk: 1059
+  fields:
+    tour_of_duty_ref: 104
+    skill_ref: 14
+    value: 2
+- model: collector.skillmodificator
+  pk: 1060
+  fields:
+    tour_of_duty_ref: 104
+    skill_ref: 24
+    value: 1
+- model: collector.skillmodificator
+  pk: 1061
+  fields:
+    tour_of_duty_ref: 106
+    skill_ref: 53
+    value: 1
+- model: collector.skillmodificator
+  pk: 1062
+  fields:
+    tour_of_duty_ref: 106
+    skill_ref: 16
+    value: 1
+- model: collector.skillmodificator
+  pk: 1063
+  fields:
+    tour_of_duty_ref: 106
+    skill_ref: 1
+    value: 1
+- model: collector.skillmodificator
+  pk: 1064
+  fields:
+    tour_of_duty_ref: 106
+    skill_ref: 4
+    value: 1
+- model: collector.skillmodificator
+  pk: 1065
+  fields:
+    tour_of_duty_ref: 106
+    skill_ref: 24
+    value: 2
+- model: collector.skillmodificator
+  pk: 1066
+  fields:
+    tour_of_duty_ref: 106
+    skill_ref: 157
+    value: 1
+- model: collector.skillmodificator
+  pk: 1067
+  fields:
+    tour_of_duty_ref: 106
+    skill_ref: 48
+    value: 1
+- model: collector.skillmodificator
+  pk: 1068
+  fields:
+    tour_of_duty_ref: 106
+    skill_ref: 62
+    value: 2
+- model: collector.skillmodificator
+  pk: 1069
+  fields:
+    tour_of_duty_ref: 103
+    skill_ref: 53
+    value: 2
+- model: collector.skillmodificator
+  pk: 1070
+  fields:
+    tour_of_duty_ref: 103
+    skill_ref: 16
+    value: 1
+- model: collector.skillmodificator
+  pk: 1071
+  fields:
+    tour_of_duty_ref: 103
+    skill_ref: 22
+    value: 1
+- model: collector.skillmodificator
+  pk: 1072
+  fields:
+    tour_of_duty_ref: 103
+    skill_ref: 23
+    value: 1
+- model: collector.skillmodificator
+  pk: 1073
+  fields:
+    tour_of_duty_ref: 103
+    skill_ref: 24
+    value: 1
+- model: collector.skillmodificator
+  pk: 1074
+  fields:
+    tour_of_duty_ref: 103
+    skill_ref: 62
+    value: 1
+- model: collector.skillmodificator
+  pk: 1075
+  fields:
+    tour_of_duty_ref: 103
+    skill_ref: 32
+    value: 1
+- model: collector.skillmodificator
+  pk: 1076
+  fields:
+    tour_of_duty_ref: 103
+    skill_ref: 157
+    value: 1
+- model: collector.skillmodificator
+  pk: 1078
+  fields:
+    tour_of_duty_ref: 107
+    skill_ref: 40
+    value: 2
+- model: collector.skillmodificator
+  pk: 1079
+  fields:
+    tour_of_duty_ref: 107
+    skill_ref: 19
+    value: 2
+- model: collector.skillmodificator
+  pk: 1080
+  fields:
+    tour_of_duty_ref: 107
+    skill_ref: 6
+    value: 1
+- model: collector.skillmodificator
+  pk: 1081
+  fields:
+    tour_of_duty_ref: 107
+    skill_ref: 62
+    value: 2
+- model: collector.skillmodificator
+  pk: 1082
+  fields:
+    tour_of_duty_ref: 107
+    skill_ref: 48
+    value: 2
+- model: collector.skillmodificator
+  pk: 1083
+  fields:
+    tour_of_duty_ref: 107
+    skill_ref: 14
+    value: 2
+- model: collector.skillmodificator
+  pk: 1084
+  fields:
+    tour_of_duty_ref: 107
+    skill_ref: 2
+    value: 1
+- model: collector.skillmodificator
+  pk: 1085
+  fields:
+    tour_of_duty_ref: 202
+    skill_ref: 1
+    value: 1
+- model: collector.skillmodificator
+  pk: 1086
+  fields:
+    tour_of_duty_ref: 202
+    skill_ref: 4
+    value: 1
+- model: collector.skillmodificator
+  pk: 1087
+  fields:
+    tour_of_duty_ref: 202
+    skill_ref: 22
+    value: 1
+- model: collector.skillmodificator
+  pk: 1088
+  fields:
+    tour_of_duty_ref: 202
+    skill_ref: 24
+    value: 3
+- model: collector.skillmodificator
+  pk: 1089
+  fields:
+    tour_of_duty_ref: 202
+    skill_ref: 155
+    value: 1
+- model: collector.skillmodificator
+  pk: 1090
+  fields:
+    tour_of_duty_ref: 202
+    skill_ref: 157
+    value: 1
+- model: collector.skillmodificator
+  pk: 1091
+  fields:
+    tour_of_duty_ref: 202
+    skill_ref: 48
+    value: 1
+- model: collector.skillmodificator
+  pk: 1092
+  fields:
+    tour_of_duty_ref: 202
+    skill_ref: 64
+    value: 1
+- model: collector.skillmodificator
+  pk: 1093
+  fields:
+    tour_of_duty_ref: 202
+    skill_ref: 43
+    value: 1
+- model: collector.skillmodificator
+  pk: 1094
+  fields:
+    tour_of_duty_ref: 202
+    skill_ref: 14
+    value: 1
+- model: collector.skillmodificator
+  pk: 1095
+  fields:
+    tour_of_duty_ref: 203
+    skill_ref: 9
+    value: 1
+- model: collector.skillmodificator
+  pk: 1096
+  fields:
+    tour_of_duty_ref: 203
+    skill_ref: 23
+    value: 2
+- model: collector.skillmodificator
+  pk: 1097
+  fields:
+    tour_of_duty_ref: 203
+    skill_ref: 26
+    value: 1
+- model: collector.skillmodificator
+  pk: 1098
+  fields:
+    tour_of_duty_ref: 203
+    skill_ref: 33
+    value: 3
+- model: collector.skillmodificator
+  pk: 1100
+  fields:
+    tour_of_duty_ref: 203
+    skill_ref: 157
+    value: 2
+- model: collector.skillmodificator
+  pk: 1101
+  fields:
+    tour_of_duty_ref: 203
+    skill_ref: 38
+    value: 2
+- model: collector.skillmodificator
+  pk: 1103
+  fields:
+    tour_of_duty_ref: 203
+    skill_ref: 85
+    value: 1
+- model: collector.skillmodificator
+  pk: 1104
+  fields:
+    tour_of_duty_ref: 204
+    skill_ref: 156
+    value: 2
+- model: collector.skillmodificator
+  pk: 1105
+  fields:
+    tour_of_duty_ref: 204
+    skill_ref: 157
+    value: 2
+- model: collector.skillmodificator
+  pk: 1106
+  fields:
+    tour_of_duty_ref: 204
+    skill_ref: 186
+    value: 1
+- model: collector.skillmodificator
+  pk: 1107
+  fields:
+    tour_of_duty_ref: 204
+    skill_ref: 158
+    value: 2
+- model: collector.skillmodificator
+  pk: 1108
+  fields:
+    tour_of_duty_ref: 204
+    skill_ref: 7
+    value: 1
+- model: collector.skillmodificator
+  pk: 1109
+  fields:
+    tour_of_duty_ref: 204
+    skill_ref: 23
+    value: 2
+- model: collector.skillmodificator
+  pk: 1110
+  fields:
+    tour_of_duty_ref: 204
+    skill_ref: 9
+    value: 2
+- model: collector.skillmodificator
+  pk: 1111
+  fields:
+    tour_of_duty_ref: 204
+    skill_ref: 32
+    value: 1
+- model: collector.skillmodificator
+  pk: 1112
+  fields:
+    tour_of_duty_ref: 204
+    skill_ref: 67
+    value: 1
+- model: collector.skillmodificator
+  pk: 1113
+  fields:
+    tour_of_duty_ref: 205
+    skill_ref: 3
+    value: 3
+- model: collector.skillmodificator
+  pk: 1114
+  fields:
+    tour_of_duty_ref: 205
+    skill_ref: 22
+    value: 2
+- model: collector.skillmodificator
+  pk: 1115
+  fields:
+    tour_of_duty_ref: 205
+    skill_ref: 23
+    value: 1
+- model: collector.skillmodificator
+  pk: 1116
+  fields:
+    tour_of_duty_ref: 205
+    skill_ref: 1
+    value: 1
+- model: collector.skillmodificator
+  pk: 1117
+  fields:
+    tour_of_duty_ref: 205
+    skill_ref: 47
+    value: 1
+- model: collector.skillmodificator
+  pk: 1118
+  fields:
+    tour_of_duty_ref: 205
+    skill_ref: 154
+    value: 2
+- model: collector.skillmodificator
+  pk: 1119
+  fields:
+    tour_of_duty_ref: 205
+    skill_ref: 159
+    value: 3
+- model: collector.skillmodificator
+  pk: 1120
+  fields:
+    tour_of_duty_ref: 205
+    skill_ref: 2
+    value: 1
+- model: collector.skillmodificator
+  pk: 1121
+  fields:
+    tour_of_duty_ref: 206
+    skill_ref: 1
+    value: 1
+- model: collector.skillmodificator
+  pk: 1122
+  fields:
+    tour_of_duty_ref: 206
+    skill_ref: 24
+    value: 1
+- model: collector.skillmodificator
+  pk: 1123
+  fields:
+    tour_of_duty_ref: 206
+    skill_ref: 34
+    value: 2
+- model: collector.skillmodificator
+  pk: 1124
+  fields:
+    tour_of_duty_ref: 206
+    skill_ref: 157
+    value: 2
+- model: collector.skillmodificator
+  pk: 1126
+  fields:
+    tour_of_duty_ref: 206
+    skill_ref: 47
+    value: 1
+- model: collector.skillmodificator
+  pk: 1127
+  fields:
+    tour_of_duty_ref: 206
+    skill_ref: 68
+    value: 1
+- model: collector.skillmodificator
+  pk: 1128
+  fields:
+    tour_of_duty_ref: 206
+    skill_ref: 70
+    value: 1
+- model: collector.skillmodificator
+  pk: 1130
+  fields:
+    tour_of_duty_ref: 206
+    skill_ref: 9
+    value: 2
+- model: collector.skillmodificator
+  pk: 1131
+  fields:
+    tour_of_duty_ref: 207
+    skill_ref: 2
+    value: 1
+- model: collector.skillmodificator
+  pk: 1132
+  fields:
+    tour_of_duty_ref: 207
+    skill_ref: 9
+    value: 1
+- model: collector.skillmodificator
+  pk: 1133
+  fields:
+    tour_of_duty_ref: 207
+    skill_ref: 52
+    value: 3
+- model: collector.skillmodificator
+  pk: 1135
+  fields:
+    tour_of_duty_ref: 207
+    skill_ref: 12
+    value: 1
+- model: collector.skillmodificator
+  pk: 1136
+  fields:
+    tour_of_duty_ref: 207
+    skill_ref: 156
+    value: 1
+- model: collector.skillmodificator
+  pk: 1137
+  fields:
+    tour_of_duty_ref: 207
+    skill_ref: 14
+    value: 1
+- model: collector.skillmodificator
+  pk: 1138
+  fields:
+    tour_of_duty_ref: 207
+    skill_ref: 16
+    value: 2
+- model: collector.skillmodificator
+  pk: 1139
+  fields:
+    tour_of_duty_ref: 207
+    skill_ref: 26
+    value: 2
+- model: collector.skillmodificator
+  pk: 1140
+  fields:
+    tour_of_duty_ref: 207
+    skill_ref: 68
+    value: 2
+- model: collector.skillmodificator
+  pk: 1141
+  fields:
+    tour_of_duty_ref: 208
+    skill_ref: 22
+    value: 2
+- model: collector.skillmodificator
+  pk: 1142
+  fields:
+    tour_of_duty_ref: 208
+    skill_ref: 23
+    value: 3
+- model: collector.skillmodificator
+  pk: 1143
+  fields:
+    tour_of_duty_ref: 208
+    skill_ref: 33
+    value: 1
+- model: collector.skillmodificator
+  pk: 1144
+  fields:
+    tour_of_duty_ref: 208
+    skill_ref: 153
+    value: 2
+- model: collector.skillmodificator
+  pk: 1145
+  fields:
+    tour_of_duty_ref: 208
+    skill_ref: 157
+    value: 2
+- model: collector.skillmodificator
+  pk: 1146
+  fields:
+    tour_of_duty_ref: 208
+    skill_ref: 53
+    value: 2
+- model: collector.skillmodificator
+  pk: 1148
+  fields:
+    tour_of_duty_ref: 208
+    skill_ref: 16
+    value: 1
+- model: collector.skillmodificator
+  pk: 1149
+  fields:
+    tour_of_duty_ref: 209
+    skill_ref: 72
+    value: 2
+- model: collector.skillmodificator
+  pk: 1150
+  fields:
+    tour_of_duty_ref: 209
+    skill_ref: 6
+    value: 2
+- model: collector.skillmodificator
+  pk: 1151
+  fields:
+    tour_of_duty_ref: 209
+    skill_ref: 9
+    value: 2
+- model: collector.skillmodificator
+  pk: 1152
+  fields:
+    tour_of_duty_ref: 209
+    skill_ref: 34
+    value: 2
+- model: collector.skillmodificator
+  pk: 1153
+  fields:
+    tour_of_duty_ref: 209
+    skill_ref: 157
+    value: 2
+- model: collector.skillmodificator
+  pk: 1154
+  fields:
+    tour_of_duty_ref: 209
+    skill_ref: 14
+    value: 1
+- model: collector.skillmodificator
+  pk: 1155
+  fields:
+    tour_of_duty_ref: 209
+    skill_ref: 18
+    value: 1
+- model: collector.skillmodificator
+  pk: 1156
+  fields:
+    tour_of_duty_ref: 209
+    skill_ref: 40
+    value: 1
+- model: collector.skillmodificator
+  pk: 1157
+  fields:
+    tour_of_duty_ref: 209
+    skill_ref: 19
+    value: 1
+- model: collector.skillmodificator
+  pk: 1158
+  fields:
+    tour_of_duty_ref: 210
+    skill_ref: 1
+    value: 1
+- model: collector.skillmodificator
+  pk: 1159
+  fields:
+    tour_of_duty_ref: 210
+    skill_ref: 3
+    value: 1
+- model: collector.skillmodificator
+  pk: 1160
+  fields:
+    tour_of_duty_ref: 210
+    skill_ref: 24
+    value: 1
+- model: collector.skillmodificator
+  pk: 1161
+  fields:
+    tour_of_duty_ref: 210
+    skill_ref: 154
+    value: 2
+- model: collector.skillmodificator
+  pk: 1162
+  fields:
+    tour_of_duty_ref: 210
+    skill_ref: 157
+    value: 2
+- model: collector.skillmodificator
+  pk: 1163
+  fields:
+    tour_of_duty_ref: 210
+    skill_ref: 23
+    value: 1
+- model: collector.skillmodificator
+  pk: 1164
+  fields:
+    tour_of_duty_ref: 210
+    skill_ref: 27
+    value: 1
+- model: collector.skillmodificator
+  pk: 1165
+  fields:
+    tour_of_duty_ref: 210
+    skill_ref: 16
+    value: 1
+- model: collector.skillmodificator
+  pk: 1166
+  fields:
+    tour_of_duty_ref: 210
+    skill_ref: 159
+    value: 2
+- model: collector.skillmodificator
+  pk: 1167
+  fields:
+    tour_of_duty_ref: 210
+    skill_ref: 70
+    value: 1
+- model: collector.skillmodificator
+  pk: 1168
+  fields:
+    tour_of_duty_ref: 210
+    skill_ref: 68
+    value: 1
+- model: collector.skillmodificator
+  pk: 1169
+  fields:
+    tour_of_duty_ref: 211
+    skill_ref: 1
+    value: 2
+- model: collector.skillmodificator
+  pk: 1170
+  fields:
+    tour_of_duty_ref: 211
+    skill_ref: 22
+    value: 1
+- model: collector.skillmodificator
+  pk: 1172
+  fields:
+    tour_of_duty_ref: 211
+    skill_ref: 157
+    value: 2
+- model: collector.skillmodificator
+  pk: 1173
+  fields:
+    tour_of_duty_ref: 211
+    skill_ref: 156
+    value: 2
+- model: collector.skillmodificator
+  pk: 1174
+  fields:
+    tour_of_duty_ref: 211
+    skill_ref: 160
+    value: 1
+- model: collector.skillmodificator
+  pk: 1175
+  fields:
+    tour_of_duty_ref: 211
+    skill_ref: 26
+    value: 1
+- model: collector.skillmodificator
+  pk: 1176
+  fields:
+    tour_of_duty_ref: 211
+    skill_ref: 32
+    value: 1
+- model: collector.skillmodificator
+  pk: 1177
+  fields:
+    tour_of_duty_ref: 211
+    skill_ref: 49
+    value: 1
+- model: collector.skillmodificator
+  pk: 1178
+  fields:
+    tour_of_duty_ref: 211
+    skill_ref: 66
+    value: 1
+- model: collector.skillmodificator
+  pk: 1179
+  fields:
+    tour_of_duty_ref: 211
+    skill_ref: 41
+    value: 1
+- model: collector.skillmodificator
+  pk: 1180
+  fields:
+    tour_of_duty_ref: 212
+    skill_ref: 2
+    value: 1
+- model: collector.skillmodificator
+  pk: 1181
+  fields:
+    tour_of_duty_ref: 212
+    skill_ref: 6
+    value: 1
+- model: collector.skillmodificator
+  pk: 1182
+  fields:
+    tour_of_duty_ref: 212
+    skill_ref: 14
+    value: 2
+- model: collector.skillmodificator
+  pk: 1183
+  fields:
+    tour_of_duty_ref: 212
+    skill_ref: 22
+    value: 2
+- model: collector.skillmodificator
+  pk: 1184
+  fields:
+    tour_of_duty_ref: 212
+    skill_ref: 40
+    value: 2
+- model: collector.skillmodificator
+  pk: 1185
+  fields:
+    tour_of_duty_ref: 212
+    skill_ref: 30
+    value: 2
+- model: collector.skillmodificator
+  pk: 1186
+  fields:
+    tour_of_duty_ref: 212
+    skill_ref: 16
+    value: 2
+- model: collector.skillmodificator
+  pk: 1187
+  fields:
+    tour_of_duty_ref: 212
+    skill_ref: 62
+    value: 2
+- model: collector.skillmodificator
+  pk: 1188
+  fields:
+    tour_of_duty_ref: 213
+    skill_ref: 4
+    value: 2
+- model: collector.skillmodificator
+  pk: 1189
+  fields:
+    tour_of_duty_ref: 213
+    skill_ref: 17
+    value: 2
+- model: collector.skillmodificator
+  pk: 1190
+  fields:
+    tour_of_duty_ref: 213
+    skill_ref: 52
+    value: 1
+- model: collector.skillmodificator
+  pk: 1191
+  fields:
+    tour_of_duty_ref: 213
+    skill_ref: 46
+    value: 1
+- model: collector.skillmodificator
+  pk: 1193
+  fields:
+    tour_of_duty_ref: 213
+    skill_ref: 26
+    value: 2
+- model: collector.skillmodificator
+  pk: 1194
+  fields:
+    tour_of_duty_ref: 213
+    skill_ref: 33
+    value: 3
+- model: collector.skillmodificator
+  pk: 1195
+  fields:
+    tour_of_duty_ref: 213
+    skill_ref: 157
+    value: 2
+- model: collector.skillmodificator
+  pk: 1196
+  fields:
+    tour_of_duty_ref: 213
+    skill_ref: 55
+    value: 1
+- model: collector.skillmodificator
+  pk: 1197
+  fields:
+    tour_of_duty_ref: 213
+    skill_ref: 63
+    value: 1
+- model: collector.skillmodificator
+  pk: 1198
+  fields:
+    tour_of_duty_ref: 214
+    skill_ref: 34
+    value: 1
+- model: collector.skillmodificator
+  pk: 1199
+  fields:
+    tour_of_duty_ref: 214
+    skill_ref: 9
+    value: 2
+- model: collector.skillmodificator
+  pk: 1201
+  fields:
+    tour_of_duty_ref: 214
+    skill_ref: 23
+    value: 1
+- model: collector.skillmodificator
+  pk: 1202
+  fields:
+    tour_of_duty_ref: 214
+    skill_ref: 38
+    value: 2
+- model: collector.skillmodificator
+  pk: 1203
+  fields:
+    tour_of_duty_ref: 214
+    skill_ref: 158
+    value: 1
+- model: collector.skillmodificator
+  pk: 1204
+  fields:
+    tour_of_duty_ref: 214
+    skill_ref: 157
+    value: 2
+- model: collector.skillmodificator
+  pk: 1205
+  fields:
+    tour_of_duty_ref: 214
+    skill_ref: 186
+    value: 2
+- model: collector.skillmodificator
+  pk: 1206
+  fields:
+    tour_of_duty_ref: 214
+    skill_ref: 156
+    value: 1
+- model: collector.skillmodificator
+  pk: 1208
+  fields:
+    tour_of_duty_ref: 216
+    skill_ref: 16
+    value: 1
+- model: collector.skillmodificator
+  pk: 1209
+  fields:
+    tour_of_duty_ref: 216
+    skill_ref: 6
+    value: 1
+- model: collector.skillmodificator
+  pk: 1210
+  fields:
+    tour_of_duty_ref: 216
+    skill_ref: 61
+    value: 2
+- model: collector.skillmodificator
+  pk: 1211
+  fields:
+    tour_of_duty_ref: 216
+    skill_ref: 18
+    value: 1
+- model: collector.skillmodificator
+  pk: 1212
+  fields:
+    tour_of_duty_ref: 216
+    skill_ref: 24
+    value: 1
+- model: collector.skillmodificator
+  pk: 1213
+  fields:
+    tour_of_duty_ref: 216
+    skill_ref: 72
+    value: 1
+- model: collector.skillmodificator
+  pk: 1214
+  fields:
+    tour_of_duty_ref: 216
+    skill_ref: 60
+    value: 2
+- model: collector.skillmodificator
+  pk: 1215
+  fields:
+    tour_of_duty_ref: 216
+    skill_ref: 17
+    value: 2
+- model: collector.skillmodificator
+  pk: 1216
+  fields:
+    tour_of_duty_ref: 216
+    skill_ref: 66
+    value: 2
+- model: collector.skillmodificator
+  pk: 1217
+  fields:
+    tour_of_duty_ref: 216
+    skill_ref: 54
+    value: 1
+- model: collector.skillmodificator
+  pk: 1218
+  fields:
+    tour_of_duty_ref: 176
+    skill_ref: 153
+    value: 2
+- model: collector.skillmodificator
+  pk: 1220
+  fields:
+    tour_of_duty_ref: 179
+    skill_ref: 40
+    value: 1
+- model: collector.skillmodificator
+  pk: 1221
+  fields:
+    tour_of_duty_ref: 179
+    skill_ref: 19
+    value: 1
+- model: collector.skillmodificator
+  pk: 1222
+  fields:
+    tour_of_duty_ref: 217
+    skill_ref: 18
+    value: 2
+- model: collector.skillmodificator
+  pk: 1223
+  fields:
+    tour_of_duty_ref: 217
+    skill_ref: 19
+    value: 2
+- model: collector.skillmodificator
+  pk: 1224
+  fields:
+    tour_of_duty_ref: 217
+    skill_ref: 40
+    value: 2
+- model: collector.skillmodificator
+  pk: 1225
+  fields:
+    tour_of_duty_ref: 217
+    skill_ref: 14
+    value: 1
+- model: collector.skillmodificator
+  pk: 1226
+  fields:
+    tour_of_duty_ref: 217
+    skill_ref: 72
+    value: 1
+- model: collector.skillmodificator
+  pk: 1227
+  fields:
+    tour_of_duty_ref: 179
+    skill_ref: 14
+    value: 1
+- model: collector.skillmodificator
+  pk: 1228
+  fields:
+    tour_of_duty_ref: 217
+    skill_ref: 16
+    value: 2
+- model: collector.skillmodificator
+  pk: 1229
+  fields:
+    tour_of_duty_ref: 218
+    skill_ref: 22
+    value: 2
+- model: collector.skillmodificator
+  pk: 1230
+  fields:
+    tour_of_duty_ref: 218
+    skill_ref: 23
+    value: 2
+- model: collector.skillmodificator
+  pk: 1231
+  fields:
+    tour_of_duty_ref: 218
+    skill_ref: 7
+    value: 1
+- model: collector.skillmodificator
+  pk: 1232
+  fields:
+    tour_of_duty_ref: 218
+    skill_ref: 52
+    value: 2
+- model: collector.skillmodificator
+  pk: 1233
+  fields:
+    tour_of_duty_ref: 218
+    skill_ref: 32
+    value: 1
+- model: collector.skillmodificator
+  pk: 1234
+  fields:
+    tour_of_duty_ref: 218
+    skill_ref: 9
+    value: 2
+- model: collector.skillmodificator
+  pk: 1240
+  fields:
+    tour_of_duty_ref: 221
+    skill_ref: 68
+    value: 4
+- model: collector.skillmodificator
+  pk: 1241
+  fields:
+    tour_of_duty_ref: 221
+    skill_ref: 10
+    value: 4
+- model: collector.skillmodificator
+  pk: 1242
+  fields:
+    tour_of_duty_ref: 221
+    skill_ref: 54
+    value: 4
+- model: collector.skillmodificator
+  pk: 1243
+  fields:
+    tour_of_duty_ref: 221
+    skill_ref: 41
+    value: 4
+- model: collector.skillmodificator
+  pk: 1244
+  fields:
+    tour_of_duty_ref: 238
+    skill_ref: 22
+    value: 4
+- model: collector.skillmodificator
+  pk: 1245
+  fields:
+    tour_of_duty_ref: 238
+    skill_ref: 33
+    value: 4
+- model: collector.skillmodificator
+  pk: 1246
+  fields:
+    tour_of_duty_ref: 238
+    skill_ref: 23
+    value: 4
+- model: collector.skillmodificator
+  pk: 1247
+  fields:
+    tour_of_duty_ref: 238
+    skill_ref: 13
+    value: 4
+- model: collector.skillmodificator
+  pk: 1248
+  fields:
+    tour_of_duty_ref: 238
+    skill_ref: 53
+    value: 4
+- model: collector.skillmodificator
+  pk: 1249
+  fields:
+    tour_of_duty_ref: 238
+    skill_ref: 46
+    value: 4
+- model: collector.skillmodificator
+  pk: 1250
+  fields:
+    tour_of_duty_ref: 230
+    skill_ref: 2
+    value: 4
+- model: collector.skillmodificator
+  pk: 1251
+  fields:
+    tour_of_duty_ref: 230
+    skill_ref: 6
+    value: 4
+- model: collector.skillmodificator
+  pk: 1252
+  fields:
+    tour_of_duty_ref: 230
+    skill_ref: 14
+    value: 4
+- model: collector.skillmodificator
+  pk: 1253
+  fields:
+    tour_of_duty_ref: 230
+    skill_ref: 48
+    value: 4
+- model: collector.skillmodificator
+  pk: 1254
+  fields:
+    tour_of_duty_ref: 230
+    skill_ref: 64
+    value: 4
+- model: collector.skillmodificator
+  pk: 1255
+  fields:
+    tour_of_duty_ref: 230
+    skill_ref: 18
+    value: 4
+- model: collector.skillmodificator
+  pk: 1256
+  fields:
+    tour_of_duty_ref: 221
+    skill_ref: 123
+    value: 4
+- model: collector.skillmodificator
+  pk: 1257
+  fields:
+    tour_of_duty_ref: 221
+    skill_ref: 103
+    value: 4
+- model: collector.skillmodificator
+  pk: 1258
+  fields:
+    tour_of_duty_ref: 239
+    skill_ref: 93
+    value: 4
+- model: collector.skillmodificator
+  pk: 1259
+  fields:
+    tour_of_duty_ref: 239
+    skill_ref: 100
+    value: 4
+- model: collector.skillmodificator
+  pk: 1260
+  fields:
+    tour_of_duty_ref: 239
+    skill_ref: 67
+    value: 4
+- model: collector.skillmodificator
+  pk: 1261
+  fields:
+    tour_of_duty_ref: 239
+    skill_ref: 1
+    value: 4
+- model: collector.skillmodificator
+  pk: 1263
+  fields:
+    tour_of_duty_ref: 239
+    skill_ref: 244
+    value: 4
+- model: collector.skillmodificator
+  pk: 1264
+  fields:
+    tour_of_duty_ref: 237
+    skill_ref: 18
+    value: 4
+- model: collector.skillmodificator
+  pk: 1265
+  fields:
+    tour_of_duty_ref: 237
+    skill_ref: 15
+    value: 4
+- model: collector.skillmodificator
+  pk: 1266
+  fields:
+    tour_of_duty_ref: 237
+    skill_ref: 29
+    value: 4
+- model: collector.skillmodificator
+  pk: 1267
+  fields:
+    tour_of_duty_ref: 237
+    skill_ref: 19
+    value: 4
+- model: collector.skillmodificator
+  pk: 1268
+  fields:
+    tour_of_duty_ref: 237
+    skill_ref: 40
+    value: 4
+- model: collector.skillmodificator
+  pk: 1269
+  fields:
+    tour_of_duty_ref: 225
+    skill_ref: 53
+    value: 2
+- model: collector.skillmodificator
+  pk: 1270
+  fields:
+    tour_of_duty_ref: 225
+    skill_ref: 2
+    value: 4
+- model: collector.skillmodificator
+  pk: 1271
+  fields:
+    tour_of_duty_ref: 225
+    skill_ref: 6
+    value: 2
+- model: collector.skillmodificator
+  pk: 1272
+  fields:
+    tour_of_duty_ref: 225
+    skill_ref: 69
+    value: 2
+- model: collector.skillmodificator
+  pk: 1273
+  fields:
+    tour_of_duty_ref: 225
+    skill_ref: 361
+    value: 2
+- model: collector.skillmodificator
+  pk: 1274
+  fields:
+    tour_of_duty_ref: 223
+    skill_ref: 16
+    value: 2
+- model: collector.skillmodificator
+  pk: 1275
+  fields:
+    tour_of_duty_ref: 223
+    skill_ref: 2
+    value: 4
+- model: collector.skillmodificator
+  pk: 1276
+  fields:
+    tour_of_duty_ref: 223
+    skill_ref: 362
+    value: 2
+- model: collector.skillmodificator
+  pk: 1277
+  fields:
+    tour_of_duty_ref: 223
+    skill_ref: 74
+    value: 1
+- model: collector.skillmodificator
+  pk: 1278
+  fields:
+    tour_of_duty_ref: 198
+    skill_ref: 9
+    value: 1
+- model: collector.skillmodificator
+  pk: 1279
+  fields:
+    tour_of_duty_ref: 198
+    skill_ref: 23
+    value: 1
+- model: collector.skillmodificator
+  pk: 1281
+  fields:
+    tour_of_duty_ref: 198
+    skill_ref: 276
+    value: 1
+- model: collector.skillmodificator
+  pk: 1283
+  fields:
+    tour_of_duty_ref: 198
+    skill_ref: 68
+    value: 1
+- model: collector.skillmodificator
+  pk: 1284
+  fields:
+    tour_of_duty_ref: 198
+    skill_ref: 154
+    value: 1
+- model: collector.skillmodificator
+  pk: 1285
+  fields:
+    tour_of_duty_ref: 196
+    skill_ref: 7
+    value: 1
+- model: collector.skillmodificator
+  pk: 1286
+  fields:
+    tour_of_duty_ref: 196
+    skill_ref: 22
+    value: 1
+- model: collector.skillmodificator
+  pk: 1287
+  fields:
+    tour_of_duty_ref: 196
+    skill_ref: 4
+    value: 1
+- model: collector.skillmodificator
+  pk: 1288
+  fields:
+    tour_of_duty_ref: 196
+    skill_ref: 23
+    value: 1
+- model: collector.skillmodificator
+  pk: 1289
+  fields:
+    tour_of_duty_ref: 196
+    skill_ref: 276
+    value: 1
+- model: collector.skillmodificator
+  pk: 1290
+  fields:
+    tour_of_duty_ref: 199
+    skill_ref: 115
+    value: 1
+- model: collector.skillmodificator
+  pk: 1291
+  fields:
+    tour_of_duty_ref: 199
+    skill_ref: 276
+    value: 1
+- model: collector.skillmodificator
+  pk: 1292
+  fields:
+    tour_of_duty_ref: 199
+    skill_ref: 43
+    value: 1
+- model: collector.skillmodificator
+  pk: 1293
+  fields:
+    tour_of_duty_ref: 199
+    skill_ref: 40
+    value: 1
+- model: collector.skillmodificator
+  pk: 1294
+  fields:
+    tour_of_duty_ref: 199
+    skill_ref: 30
+    value: 1
+- model: collector.skillmodificator
+  pk: 1295
+  fields:
+    tour_of_duty_ref: 171
+    skill_ref: 68
+    value: 1
+- model: collector.skillmodificator
+  pk: 1296
+  fields:
+    tour_of_duty_ref: 171
+    skill_ref: 9
+    value: 1
+- model: collector.skillmodificator
+  pk: 1297
+  fields:
+    tour_of_duty_ref: 172
+    skill_ref: 40
+    value: 1
+- model: collector.skillmodificator
+  pk: 1298
+  fields:
+    tour_of_duty_ref: 172
+    skill_ref: 7
+    value: 1
+- model: collector.skillmodificator
+  pk: 1299
+  fields:
+    tour_of_duty_ref: 178
+    skill_ref: 14
+    value: 1
+- model: collector.skillmodificator
+  pk: 1300
+  fields:
+    tour_of_duty_ref: 178
+    skill_ref: 17
+    value: 1
+- model: collector.skillmodificator
+  pk: 1301
+  fields:
+    tour_of_duty_ref: 177
+    skill_ref: 23
+    value: 1
+- model: collector.skillmodificator
+  pk: 1302
+  fields:
+    tour_of_duty_ref: 177
+    skill_ref: 34
+    value: 1
+- model: collector.skillmodificator
+  pk: 1303
+  fields:
+    tour_of_duty_ref: 174
+    skill_ref: 156
+    value: 1
+- model: collector.skillmodificator
+  pk: 1304
+  fields:
+    tour_of_duty_ref: 174
+    skill_ref: 186
+    value: 1
+- model: collector.skillmodificator
+  pk: 1305
+  fields:
+    tour_of_duty_ref: 175
+    skill_ref: 108
+    value: 1
+- model: collector.skillmodificator
+  pk: 1306
+  fields:
+    tour_of_duty_ref: 175
+    skill_ref: 157
+    value: 1
+- model: collector.skillmodificator
+  pk: 1307
+  fields:
+    tour_of_duty_ref: 173
+    skill_ref: 19
+    value: 1
+- model: collector.skillmodificator
+  pk: 1308
+  fields:
+    tour_of_duty_ref: 173
+    skill_ref: 66
+    value: 1
+- model: collector.skillmodificator
+  pk: 1309
+  fields:
+    tour_of_duty_ref: 180
+    skill_ref: 30
+    value: 1
+- model: collector.skillmodificator
+  pk: 1310
+  fields:
+    tour_of_duty_ref: 180
+    skill_ref: 27
+    value: 1
+- model: collector.skillmodificator
+  pk: 1311
+  fields:
+    tour_of_duty_ref: 180
+    skill_ref: 68
+    value: 1
+- model: collector.skillmodificator
+  pk: 1312
+  fields:
+    tour_of_duty_ref: 242
+    skill_ref: 14
+    value: 1
+- model: collector.skillmodificator
+  pk: 1313
+  fields:
+    tour_of_duty_ref: 242
+    skill_ref: 18
+    value: 1
+- model: collector.skillmodificator
+  pk: 1314
+  fields:
+    tour_of_duty_ref: 242
+    skill_ref: 40
+    value: 1
+- model: collector.skillmodificator
+  pk: 1315
+  fields:
+    tour_of_duty_ref: 242
+    skill_ref: 19
+    value: 2
+- model: collector.skillmodificator
+  pk: 1316
+  fields:
+    tour_of_duty_ref: 242
+    skill_ref: 6
+    value: 2
+- model: collector.skillmodificator
+  pk: 1317
+  fields:
+    tour_of_duty_ref: 242
+    skill_ref: 72
+    value: 1
+- model: collector.skillmodificator
+  pk: 1318
+  fields:
+    tour_of_duty_ref: 191
+    skill_ref: 24
+    value: 1
+- model: collector.skillmodificator
+  pk: 1319
+  fields:
+    tour_of_duty_ref: 191
+    skill_ref: 141
+    value: 2
+- model: collector.skillmodificator
+  pk: 1320
+  fields:
+    tour_of_duty_ref: 192
+    skill_ref: 60
+    value: 1
+- model: collector.skillmodificator
+  pk: 1321
+  fields:
+    tour_of_duty_ref: 192
+    skill_ref: 141
+    value: 2
+- model: collector.skillmodificator
+  pk: 1322
+  fields:
+    tour_of_duty_ref: 188
+    skill_ref: 1
+    value: 1
+- model: collector.skillmodificator
+  pk: 1323
+  fields:
+    tour_of_duty_ref: 188
+    skill_ref: 141
+    value: 2
+- model: collector.skillmodificator
+  pk: 1324
+  fields:
+    tour_of_duty_ref: 181
+    skill_ref: 159
+    value: 1
+- model: collector.skillmodificator
+  pk: 1325
+  fields:
+    tour_of_duty_ref: 181
+    skill_ref: 154
+    value: 1
+- model: collector.skillmodificator
+  pk: 1326
+  fields:
+    tour_of_duty_ref: 181
+    skill_ref: 53
+    value: 1
+- model: collector.skillmodificator
+  pk: 1327
+  fields:
+    tour_of_duty_ref: 190
+    skill_ref: 186
+    value: 1
+- model: collector.skillmodificator
+  pk: 1328
+  fields:
+    tour_of_duty_ref: 190
+    skill_ref: 141
+    value: 2
+- model: collector.skillmodificator
+  pk: 1329
+  fields:
+    tour_of_duty_ref: 184
+    skill_ref: 7
+    value: 1
+- model: collector.skillmodificator
+  pk: 1330
+  fields:
+    tour_of_duty_ref: 184
+    skill_ref: 22
+    value: 1
+- model: collector.skillmodificator
+  pk: 1331
+  fields:
+    tour_of_duty_ref: 184
+    skill_ref: 23
+    value: 1
+- model: collector.skillmodificator
+  pk: 1332
+  fields:
+    tour_of_duty_ref: 182
+    skill_ref: 16
+    value: 1
+- model: collector.skillmodificator
+  pk: 1333
+  fields:
+    tour_of_duty_ref: 182
+    skill_ref: 157
+    value: 1
+- model: collector.skillmodificator
+  pk: 1334
+  fields:
+    tour_of_duty_ref: 182
+    skill_ref: 69
+    value: 1
+- model: collector.skillmodificator
+  pk: 1335
+  fields:
+    tour_of_duty_ref: 187
+    skill_ref: 22
+    value: 1
+- model: collector.skillmodificator
+  pk: 1336
+  fields:
+    tour_of_duty_ref: 187
+    skill_ref: 141
+    value: 2
+- model: collector.skillmodificator
+  pk: 1338
+  fields:
+    tour_of_duty_ref: 189
+    skill_ref: 141
+    value: 2
+- model: collector.skillmodificator
+  pk: 1339
+  fields:
+    tour_of_duty_ref: 183
+    skill_ref: 6
+    value: 1
+- model: collector.skillmodificator
+  pk: 1340
+  fields:
+    tour_of_duty_ref: 183
+    skill_ref: 69
+    value: 1
+- model: collector.skillmodificator
+  pk: 1341
+  fields:
+    tour_of_duty_ref: 183
+    skill_ref: 63
+    value: 1
+- model: collector.skillmodificator
+  pk: 1342
+  fields:
+    tour_of_duty_ref: 185
+    skill_ref: 14
+    value: 1
+- model: collector.skillmodificator
+  pk: 1343
+  fields:
+    tour_of_duty_ref: 185
+    skill_ref: 63
+    value: 1
+- model: collector.skillmodificator
+  pk: 1344
+  fields:
+    tour_of_duty_ref: 185
+    skill_ref: 159
+    value: 1
+- model: collector.skillmodificator
+  pk: 1345
+  fields:
+    tour_of_duty_ref: 186
+    skill_ref: 14
+    value: 1
+- model: collector.skillmodificator
+  pk: 1346
+  fields:
+    tour_of_duty_ref: 186
+    skill_ref: 33
+    value: 1
+- model: collector.skillmodificator
+  pk: 1347
+  fields:
+    tour_of_duty_ref: 186
+    skill_ref: 27
+    value: 1
+- model: collector.skillmodificator
+  pk: 1348
+  fields:
+    tour_of_duty_ref: 152
+    skill_ref: 72
+    value: 1
+- model: collector.skillmodificator
+  pk: 1349
+  fields:
+    tour_of_duty_ref: 247
+    skill_ref: 28
+    value: 2
+- model: collector.skillmodificator
+  pk: 1350
+  fields:
+    tour_of_duty_ref: 247
+    skill_ref: 16
+    value: 2
+- model: collector.skillmodificator
+  pk: 1351
+  fields:
+    tour_of_duty_ref: 247
+    skill_ref: 15
+    value: 2
+- model: collector.skillmodificator
+  pk: 1352
+  fields:
+    tour_of_duty_ref: 247
+    skill_ref: 10
+    value: 2
+- model: collector.skillmodificator
+  pk: 1353
+  fields:
+    tour_of_duty_ref: 247
+    skill_ref: 66
+    value: 2
+- model: collector.skillmodificator
+  pk: 1355
+  fields:
+    tour_of_duty_ref: 247
+    skill_ref: 59
+    value: 2
+- model: collector.skillmodificator
+  pk: 1356
+  fields:
+    tour_of_duty_ref: 248
+    skill_ref: 370
+    value: 2
+- model: collector.skillmodificator
+  pk: 1357
+  fields:
+    tour_of_duty_ref: 248
+    skill_ref: 371
+    value: 2
+- model: collector.skillmodificator
+  pk: 1358
+  fields:
+    tour_of_duty_ref: 248
+    skill_ref: 12
+    value: 2
+- model: collector.skillmodificator
+  pk: 1359
+  fields:
+    tour_of_duty_ref: 248
+    skill_ref: 134
+    value: 4
+- model: collector.skillmodificator
+  pk: 1360
+  fields:
+    tour_of_duty_ref: 248
+    skill_ref: 93
+    value: 2
+- model: collector.skillmodificator
+  pk: 1361
+  fields:
+    tour_of_duty_ref: 248
+    skill_ref: 16
+    value: 2
+- model: collector.skillmodificator
+  pk: 1362
+  fields:
+    tour_of_duty_ref: 249
+    skill_ref: 1
+    value: 2
+- model: collector.skillmodificator
+  pk: 1363
+  fields:
+    tour_of_duty_ref: 249
+    skill_ref: 157
+    value: 2
+- model: collector.skillmodificator
+  pk: 1364
+  fields:
+    tour_of_duty_ref: 249
+    skill_ref: 16
+    value: 2
+- model: collector.skillmodificator
+  pk: 1365
+  fields:
+    tour_of_duty_ref: 249
+    skill_ref: 154
+    value: 3
+- model: collector.skillmodificator
+  pk: 1366
+  fields:
+    tour_of_duty_ref: 249
+    skill_ref: 70
+    value: 1
+- model: collector.skillmodificator
+  pk: 1367
+  fields:
+    tour_of_duty_ref: 249
+    skill_ref: 22
+    value: 3
+- model: collector.skillmodificator
+  pk: 1368
+  fields:
+    tour_of_duty_ref: 249
+    skill_ref: 46
+    value: 1
+- model: collector.skillmodificator
+  pk: 1369
+  fields:
+    tour_of_duty_ref: 249
+    skill_ref: 53
+    value: 2
+- model: collector.skillmodificator
+  pk: 1370
+  fields:
+    tour_of_duty_ref: 249
+    skill_ref: 159
+    value: 2
+- model: collector.skillmodificator
+  pk: 1371
+  fields:
+    tour_of_duty_ref: 250
+    skill_ref: 9
+    value: 1
+- model: collector.skillmodificator
+  pk: 1372
+  fields:
+    tour_of_duty_ref: 250
+    skill_ref: 1
+    value: 1
+- model: collector.skillmodificator
+  pk: 1373
+  fields:
+    tour_of_duty_ref: 250
+    skill_ref: 23
+    value: 1
+- model: collector.skillmodificator
+  pk: 1375
+  fields:
+    tour_of_duty_ref: 250
+    skill_ref: 153
+    value: 1
+- model: collector.skillmodificator
+  pk: 1376
+  fields:
+    tour_of_duty_ref: 250
+    skill_ref: 7
+    value: 1
+- model: collector.skillmodificator
+  pk: 1377
+  fields:
+    tour_of_duty_ref: 250
+    skill_ref: 53
+    value: 1
+- model: collector.skillmodificator
+  pk: 1378
+  fields:
+    tour_of_duty_ref: 250
+    skill_ref: 61
+    value: 1
+- model: collector.skillmodificator
+  pk: 1379
+  fields:
+    tour_of_duty_ref: 251
+    skill_ref: 18
+    value: 2
+- model: collector.skillmodificator
+  pk: 1380
+  fields:
+    tour_of_duty_ref: 251
+    skill_ref: 40
+    value: 1
+- model: collector.skillmodificator
+  pk: 1381
+  fields:
+    tour_of_duty_ref: 251
+    skill_ref: 16
+    value: 1
+- model: collector.skillmodificator
+  pk: 1382
+  fields:
+    tour_of_duty_ref: 251
+    skill_ref: 23
+    value: 1
+- model: collector.skillmodificator
+  pk: 1383
+  fields:
+    tour_of_duty_ref: 251
+    skill_ref: 52
+    value: 2
+- model: collector.skillmodificator
+  pk: 1384
+  fields:
+    tour_of_duty_ref: 251
+    skill_ref: 48
+    value: 1
+- model: collector.skillmodificator
+  pk: 1385
+  fields:
+    tour_of_duty_ref: 252
+    skill_ref: 4
+    value: 1
+- model: collector.skillmodificator
+  pk: 1386
+  fields:
+    tour_of_duty_ref: 252
+    skill_ref: 22
+    value: 1
+- model: collector.skillmodificator
+  pk: 1387
+  fields:
+    tour_of_duty_ref: 252
+    skill_ref: 12
+    value: 2
+- model: collector.skillmodificator
+  pk: 1388
+  fields:
+    tour_of_duty_ref: 252
+    skill_ref: 48
+    value: 2
+- model: collector.skillmodificator
+  pk: 1389
+  fields:
+    tour_of_duty_ref: 252
+    skill_ref: 64
+    value: 2
+- model: collector.skillmodificator
+  pk: 1390
+  fields:
+    tour_of_duty_ref: 252
+    skill_ref: 375
+    value: 2
+- model: collector.skillmodificator
+  pk: 1391
+  fields:
+    tour_of_duty_ref: 252
+    skill_ref: 92
+    value: 2
+- model: collector.skillmodificator
+  pk: 1392
+  fields:
+    tour_of_duty_ref: 252
+    skill_ref: 93
+    value: 2
+- model: collector.skillmodificator
+  pk: 1393
+  fields:
+    tour_of_duty_ref: 253
+    skill_ref: 54
+    value: 2
+- model: collector.skillmodificator
+  pk: 1394
+  fields:
+    tour_of_duty_ref: 253
+    skill_ref: 41
+    value: 3
+- model: collector.skillmodificator
+  pk: 1395
+  fields:
+    tour_of_duty_ref: 253
+    skill_ref: 157
+    value: 1
+- model: collector.skillmodificator
+  pk: 1396
+  fields:
+    tour_of_duty_ref: 253
+    skill_ref: 90
+    value: 1
+- model: collector.skillmodificator
+  pk: 1397
+  fields:
+    tour_of_duty_ref: 253
+    skill_ref: 123
+    value: 2
+- model: collector.skillmodificator
+  pk: 1398
+  fields:
+    tour_of_duty_ref: 253
+    skill_ref: 68
+    value: 1
+- model: collector.skillmodificator
+  pk: 1399
+  fields:
+    tour_of_duty_ref: 253
+    skill_ref: 176
+    value: 2
+- model: collector.skillmodificator
+  pk: 1400
+  fields:
+    tour_of_duty_ref: 253
+    skill_ref: 156
+    value: 1
+- model: collector.skillmodificator
+  pk: 1401
+  fields:
+    tour_of_duty_ref: 253
+    skill_ref: 186
+    value: 1
+- model: collector.skillmodificator
+  pk: 1402
+  fields:
+    tour_of_duty_ref: 253
+    skill_ref: 177
+    value: 0
+- model: collector.skillmodificator
+  pk: 1403
+  fields:
+    tour_of_duty_ref: 254
+    skill_ref: 9
+    value: 1
+- model: collector.skillmodificator
+  pk: 1406
+  fields:
+    tour_of_duty_ref: 254
+    skill_ref: 63
+    value: 1
+- model: collector.skillmodificator
+  pk: 1408
+  fields:
+    tour_of_duty_ref: 254
+    skill_ref: 33
+    value: 2
+- model: collector.skillmodificator
+  pk: 1413
+  fields:
+    tour_of_duty_ref: 255
+    skill_ref: 7
+    value: 1
+- model: collector.skillmodificator
+  pk: 1414
+  fields:
+    tour_of_duty_ref: 255
+    skill_ref: 66
+    value: 1
+- model: collector.skillmodificator
+  pk: 1415
+  fields:
+    tour_of_duty_ref: 255
+    skill_ref: 55
+    value: 1
+- model: collector.skillmodificator
+  pk: 1416
+  fields:
+    tour_of_duty_ref: 255
+    skill_ref: 16
+    value: 1
+- model: collector.skillmodificator
+  pk: 1417
+  fields:
+    tour_of_duty_ref: 255
+    skill_ref: 41
+    value: 1
+- model: collector.skillmodificator
+  pk: 1418
+  fields:
+    tour_of_duty_ref: 255
+    skill_ref: 157
+    value: 2
+- model: collector.skillmodificator
+  pk: 1419
+  fields:
+    tour_of_duty_ref: 255
+    skill_ref: 155
+    value: 1
+- model: collector.skillmodificator
+  pk: 1420
+  fields:
+    tour_of_duty_ref: 256
+    skill_ref: 14
+    value: 1
+- model: collector.skillmodificator
+  pk: 1421
+  fields:
+    tour_of_duty_ref: 256
+    skill_ref: 40
+    value: 1
+- model: collector.skillmodificator
+  pk: 1422
+  fields:
+    tour_of_duty_ref: 256
+    skill_ref: 72
+    value: 1
+- model: collector.skillmodificator
+  pk: 1423
+  fields:
+    tour_of_duty_ref: 256
+    skill_ref: 19
+    value: 1
+- model: collector.skillmodificator
+  pk: 1424
+  fields:
+    tour_of_duty_ref: 256
+    skill_ref: 19
+    value: 1
+- model: collector.skillmodificator
+  pk: 1426
+  fields:
+    tour_of_duty_ref: 256
+    skill_ref: 6
+    value: 1
+- model: collector.skillmodificator
+  pk: 1427
+  fields:
+    tour_of_duty_ref: 256
+    skill_ref: 23
+    value: 1
+- model: collector.skillmodificator
+  pk: 1428
+  fields:
+    tour_of_duty_ref: 257
+    skill_ref: 6
+    value: 1
+- model: collector.skillmodificator
+  pk: 1429
+  fields:
+    tour_of_duty_ref: 257
+    skill_ref: 14
+    value: 1
+- model: collector.skillmodificator
+  pk: 1430
+  fields:
+    tour_of_duty_ref: 257
+    skill_ref: 28
+    value: 1
+- model: collector.skillmodificator
+  pk: 1431
+  fields:
+    tour_of_duty_ref: 257
+    skill_ref: 32
+    value: 1
+- model: collector.skillmodificator
+  pk: 1432
+  fields:
+    tour_of_duty_ref: 257
+    skill_ref: 40
+    value: 1
+- model: collector.skillmodificator
+  pk: 1433
+  fields:
+    tour_of_duty_ref: 257
+    skill_ref: 29
+    value: 1
+- model: collector.skillmodificator
+  pk: 1434
+  fields:
+    tour_of_duty_ref: 257
+    skill_ref: 16
+    value: 1
+- model: collector.skillmodificator
+  pk: 1435
+  fields:
+    tour_of_duty_ref: 257
+    skill_ref: 34
+    value: 1
+- model: collector.skillmodificator
+  pk: 1436
+  fields:
+    tour_of_duty_ref: 258
+    skill_ref: 47
+    value: 1
+- model: collector.skillmodificator
+  pk: 1437
+  fields:
+    tour_of_duty_ref: 258
+    skill_ref: 22
+    value: 1
+- model: collector.skillmodificator
+  pk: 1438
+  fields:
+    tour_of_duty_ref: 258
+    skill_ref: 49
+    value: 1
+- model: collector.skillmodificator
+  pk: 1439
+  fields:
+    tour_of_duty_ref: 258
+    skill_ref: 68
+    value: 1
+- model: collector.skillmodificator
+  pk: 1440
+  fields:
+    tour_of_duty_ref: 259
+    skill_ref: 9
+    value: 1
+- model: collector.skillmodificator
+  pk: 1441
+  fields:
+    tour_of_duty_ref: 259
+    skill_ref: 23
+    value: 1
+- model: collector.skillmodificator
+  pk: 1442
+  fields:
+    tour_of_duty_ref: 259
+    skill_ref: 31
+    value: 1
+- model: collector.skillmodificator
+  pk: 1443
+  fields:
+    tour_of_duty_ref: 259
+    skill_ref: 16
+    value: 1
+- model: collector.skillmodificator
+  pk: 1444
+  fields:
+    tour_of_duty_ref: 259
+    skill_ref: 46
+    value: 2
+- model: collector.skillmodificator
+  pk: 1446
+  fields:
+    tour_of_duty_ref: 259
+    skill_ref: 47
+    value: 1
+- model: collector.skillmodificator
+  pk: 1447
+  fields:
+    tour_of_duty_ref: 259
+    skill_ref: 53
+    value: 1
+- model: collector.skillmodificator
+  pk: 1448
+  fields:
+    tour_of_duty_ref: 260
+    skill_ref: 1
+    value: 1
+- model: collector.skillmodificator
+  pk: 1449
+  fields:
+    tour_of_duty_ref: 260
+    skill_ref: 22
+    value: 1
+- model: collector.skillmodificator
+  pk: 1450
+  fields:
+    tour_of_duty_ref: 260
+    skill_ref: 23
+    value: 1
+- model: collector.skillmodificator
+  pk: 1451
+  fields:
+    tour_of_duty_ref: 260
+    skill_ref: 34
+    value: 1
+- model: collector.skillmodificator
+  pk: 1452
+  fields:
+    tour_of_duty_ref: 260
+    skill_ref: 53
+    value: 1
+- model: collector.skillmodificator
+  pk: 1453
+  fields:
+    tour_of_duty_ref: 260
+    skill_ref: 50
+    value: 1
+- model: collector.skillmodificator
+  pk: 1454
+  fields:
+    tour_of_duty_ref: 260
+    skill_ref: 6
+    value: 1
+- model: collector.skillmodificator
+  pk: 1455
+  fields:
+    tour_of_duty_ref: 260
+    skill_ref: 27
+    value: 1
+- model: collector.skillmodificator
+  pk: 1456
+  fields:
+    tour_of_duty_ref: 261
+    skill_ref: 175
+    value: 1
+- model: collector.skillmodificator
+  pk: 1457
+  fields:
+    tour_of_duty_ref: 261
+    skill_ref: 123
+    value: 1
+- model: collector.skillmodificator
+  pk: 1458
+  fields:
+    tour_of_duty_ref: 261
+    skill_ref: 68
+    value: 1
+- model: collector.skillmodificator
+  pk: 1459
+  fields:
+    tour_of_duty_ref: 244
+    skill_ref: 89
+    value: 1
+- model: collector.skillmodificator
+  pk: 1460
+  fields:
+    tour_of_duty_ref: 244
+    skill_ref: 23
+    value: 1
+- model: collector.skillmodificator
+  pk: 1461
+  fields:
+    tour_of_duty_ref: 244
+    skill_ref: 24
+    value: 1
+- model: collector.skillmodificator
+  pk: 1463
+  fields:
+    tour_of_duty_ref: 262
+    skill_ref: 23
+    value: 2
+- model: collector.skillmodificator
+  pk: 1464
+  fields:
+    tour_of_duty_ref: 262
+    skill_ref: 18
+    value: 1
+- model: collector.skillmodificator
+  pk: 1465
+  fields:
+    tour_of_duty_ref: 262
+    skill_ref: 16
+    value: 1
+- model: collector.skillmodificator
+  pk: 1466
+  fields:
+    tour_of_duty_ref: 263
+    skill_ref: 6
+    value: 1
+- model: collector.skillmodificator
+  pk: 1467
+  fields:
+    tour_of_duty_ref: 263
+    skill_ref: 15
+    value: 1
+- model: collector.skillmodificator
+  pk: 1468
+  fields:
+    tour_of_duty_ref: 263
+    skill_ref: 26
+    value: 1
+- model: collector.skillmodificator
+  pk: 1470
+  fields:
+    tour_of_duty_ref: 243
+    skill_ref: 108
+    value: 1
+- model: collector.skillmodificator
+  pk: 1471
+  fields:
+    tour_of_duty_ref: 243
+    skill_ref: 24
+    value: 1
+- model: collector.skillmodificator
+  pk: 1472
+  fields:
+    tour_of_duty_ref: 243
+    skill_ref: 141
+    value: 1
+- model: collector.skillmodificator
+  pk: 1473
+  fields:
+    tour_of_duty_ref: 243
+    skill_ref: 70
+    value: 1
+- model: collector.skillmodificator
+  pk: 1474
+  fields:
+    tour_of_duty_ref: 264
+    skill_ref: 7
+    value: 1
+- model: collector.skillmodificator
+  pk: 1475
+  fields:
+    tour_of_duty_ref: 264
+    skill_ref: 41
+    value: 1
+- model: collector.skillmodificator
+  pk: 1476
+  fields:
+    tour_of_duty_ref: 264
+    skill_ref: 22
+    value: 1
+- model: collector.skillmodificator
+  pk: 1477
+  fields:
+    tour_of_duty_ref: 264
+    skill_ref: 381
+    value: 1
+- model: collector.skillmodificator
+  pk: 1478
+  fields:
+    tour_of_duty_ref: 265
+    skill_ref: 30
+    value: 1
+- model: collector.skillmodificator
+  pk: 1479
+  fields:
+    tour_of_duty_ref: 265
+    skill_ref: 4
+    value: 1
+- model: collector.skillmodificator
+  pk: 1480
+  fields:
+    tour_of_duty_ref: 265
+    skill_ref: 31
+    value: 1
+- model: collector.skillmodificator
+  pk: 1481
+  fields:
+    tour_of_duty_ref: 265
+    skill_ref: 59
+    value: 1
+- model: collector.skillmodificator
+  pk: 1482
+  fields:
+    tour_of_duty_ref: 266
+    skill_ref: 9
+    value: 1
+- model: collector.skillmodificator
+  pk: 1484
+  fields:
+    tour_of_duty_ref: 266
+    skill_ref: 46
+    value: 1
+- model: collector.skillmodificator
+  pk: 1485
+  fields:
+    tour_of_duty_ref: 266
+    skill_ref: 63
+    value: 1
+- model: collector.skillmodificator
+  pk: 1486
+  fields:
+    tour_of_duty_ref: 267
+    skill_ref: 6
+    value: 1
+- model: collector.skillmodificator
+  pk: 1487
+  fields:
+    tour_of_duty_ref: 267
+    skill_ref: 2
+    value: 1
+- model: collector.skillmodificator
+  pk: 1488
+  fields:
+    tour_of_duty_ref: 267
+    skill_ref: 14
+    value: 1
+- model: collector.skillmodificator
+  pk: 1489
+  fields:
+    tour_of_duty_ref: 267
+    skill_ref: 18
+    value: 1
+- model: collector.skillmodificator
+  pk: 1490
+  fields:
+    tour_of_duty_ref: 267
+    skill_ref: 24
+    value: 1
+- model: collector.skillmodificator
+  pk: 1491
+  fields:
+    tour_of_duty_ref: 267
+    skill_ref: 66
+    value: 1
+- model: collector.skillmodificator
+  pk: 1492
+  fields:
+    tour_of_duty_ref: 267
+    skill_ref: 40
+    value: 1
+- model: collector.skillmodificator
+  pk: 1493
+  fields:
+    tour_of_duty_ref: 267
+    skill_ref: 60
+    value: 1
+- model: collector.skillmodificator
+  pk: 1494
+  fields:
+    tour_of_duty_ref: 268
+    skill_ref: 7
+    value: 1
+- model: collector.skillmodificator
+  pk: 1495
+  fields:
+    tour_of_duty_ref: 268
+    skill_ref: 1
+    value: 1
+- model: collector.skillmodificator
+  pk: 1496
+  fields:
+    tour_of_duty_ref: 268
+    skill_ref: 9
+    value: 2
+- model: collector.skillmodificator
+  pk: 1497
+  fields:
+    tour_of_duty_ref: 268
+    skill_ref: 34
+    value: 2
+- model: collector.skillmodificator
+  pk: 1498
+  fields:
+    tour_of_duty_ref: 268
+    skill_ref: 23
+    value: 2
+- model: collector.skillmodificator
+  pk: 1499
+  fields:
+    tour_of_duty_ref: 268
+    skill_ref: 30
+    value: 1
+- model: collector.skillmodificator
+  pk: 1500
+  fields:
+    tour_of_duty_ref: 268
+    skill_ref: 32
+    value: 1
+- model: collector.skillmodificator
+  pk: 1501
+  fields:
+    tour_of_duty_ref: 268
+    skill_ref: 31
+    value: 1
+- model: collector.skillmodificator
+  pk: 1502
+  fields:
+    tour_of_duty_ref: 268
+    skill_ref: 47
+    value: 2
+- model: collector.skillmodificator
+  pk: 1504
+  fields:
+    tour_of_duty_ref: 268
+    skill_ref: 38
+    value: 1
+- model: collector.skillmodificator
+  pk: 1505
+  fields:
+    tour_of_duty_ref: 268
+    skill_ref: 157
+    value: 1
+- model: collector.skillmodificator
+  pk: 1506
+  fields:
+    tour_of_duty_ref: 268
+    skill_ref: 156
+    value: 2
+- model: collector.skillmodificator
+  pk: 1507
+  fields:
+    tour_of_duty_ref: 269
+    skill_ref: 9
+    value: 2
+- model: collector.skillmodificator
+  pk: 1508
+  fields:
+    tour_of_duty_ref: 269
+    skill_ref: 16
+    value: 2
+- model: collector.skillmodificator
+  pk: 1509
+  fields:
+    tour_of_duty_ref: 269
+    skill_ref: 176
+    value: 3
+- model: collector.skillmodificator
+  pk: 1510
+  fields:
+    tour_of_duty_ref: 269
+    skill_ref: 177
+    value: 2
+- model: collector.skillmodificator
+  pk: 1511
+  fields:
+    tour_of_duty_ref: 269
+    skill_ref: 157
+    value: 3
+- model: collector.skillmodificator
+  pk: 1512
+  fields:
+    tour_of_duty_ref: 269
+    skill_ref: 157
+    value: 2
+- model: collector.skillmodificator
+  pk: 1513
+  fields:
+    tour_of_duty_ref: 266
+    skill_ref: 23
+    value: 1
+- model: collector.skillmodificator
+  pk: 1514
+  fields:
+    tour_of_duty_ref: 266
+    skill_ref: 402
+    value: 1
+- model: collector.skillmodificator
+  pk: 1515
+  fields:
+    tour_of_duty_ref: 266
+    skill_ref: 7
+    value: 1
+- model: collector.skillmodificator
+  pk: 1516
+  fields:
+    tour_of_duty_ref: 266
+    skill_ref: 89
+    value: 1
+- model: collector.skillmodificator
+  pk: 1517
+  fields:
+    tour_of_duty_ref: 264
+    skill_ref: 66
+    value: 1
+- model: collector.skillmodificator
+  pk: 1519
+  fields:
+    tour_of_duty_ref: 264
+    skill_ref: 32
+    value: 1
+- model: collector.skillmodificator
+  pk: 1520
+  fields:
+    tour_of_duty_ref: 264
+    skill_ref: 401
+    value: 1
+- model: collector.skillmodificator
+  pk: 1521
+  fields:
+    tour_of_duty_ref: 258
+    skill_ref: 169
+    value: 1
+- model: collector.skillmodificator
+  pk: 1522
+  fields:
+    tour_of_duty_ref: 258
+    skill_ref: 372
+    value: 1
+- model: collector.skillmodificator
+  pk: 1523
+  fields:
+    tour_of_duty_ref: 258
+    skill_ref: 23
+    value: 1
+- model: collector.skillmodificator
+  pk: 1524
+  fields:
+    tour_of_duty_ref: 258
+    skill_ref: 24
+    value: 1
+- model: collector.skillmodificator
+  pk: 1525
+  fields:
+    tour_of_duty_ref: 263
+    skill_ref: 18
+    value: 1
+- model: collector.skillmodificator
+  pk: 1526
+  fields:
+    tour_of_duty_ref: 263
+    skill_ref: 33
+    value: 2
+- model: collector.skillmodificator
+  pk: 1527
+  fields:
+    tour_of_duty_ref: 263
+    skill_ref: 66
+    value: 1
+- model: collector.skillmodificator
+  pk: 1528
+  fields:
+    tour_of_duty_ref: 263
+    skill_ref: 30
+    value: 1
+- model: collector.skillmodificator
+  pk: 1529
+  fields:
+    tour_of_duty_ref: 261
+    skill_ref: 270
+    value: 1
+- model: collector.skillmodificator
+  pk: 1530
+  fields:
+    tour_of_duty_ref: 261
+    skill_ref: 69
+    value: 1
+- model: collector.skillmodificator
+  pk: 1531
+  fields:
+    tour_of_duty_ref: 261
+    skill_ref: 6
+    value: 2
+- model: collector.skillmodificator
+  pk: 1532
+  fields:
+    tour_of_duty_ref: 261
+    skill_ref: 32
+    value: 1
+- model: collector.skillmodificator
+  pk: 1533
+  fields:
+    tour_of_duty_ref: 274
+    skill_ref: 9
+    value: 1
+- model: collector.skillmodificator
+  pk: 1534
+  fields:
+    tour_of_duty_ref: 274
+    skill_ref: 23
+    value: 1
+- model: collector.skillmodificator
+  pk: 1535
+  fields:
+    tour_of_duty_ref: 274
+    skill_ref: 53
+    value: 1
+- model: collector.skillmodificator
+  pk: 1536
+  fields:
+    tour_of_duty_ref: 274
+    skill_ref: 30
+    value: 1
+- model: collector.skillmodificator
+  pk: 1537
+  fields:
+    tour_of_duty_ref: 274
+    skill_ref: 402
+    value: 2
+- model: collector.skillmodificator
+  pk: 1538
+  fields:
+    tour_of_duty_ref: 274
+    skill_ref: 22
+    value: 2
+- model: collector.skillmodificator
+  pk: 1539
+  fields:
+    tour_of_duty_ref: 244
+    skill_ref: 38
+    value: 1
+- model: collector.skillmodificator
+  pk: 1540
+  fields:
+    tour_of_duty_ref: 244
+    skill_ref: 7
+    value: 1
+- model: collector.skillmodificator
+  pk: 1541
+  fields:
+    tour_of_duty_ref: 244
+    skill_ref: 50
+    value: 1
+- model: collector.skillmodificator
+  pk: 1542
+  fields:
+    tour_of_duty_ref: 244
+    skill_ref: 70
+    value: 1
+- model: collector.skillmodificator
+  pk: 1543
+  fields:
+    tour_of_duty_ref: 262
+    skill_ref: 1
+    value: 1
+- model: collector.skillmodificator
+  pk: 1544
+  fields:
+    tour_of_duty_ref: 262
+    skill_ref: 89
+    value: 1
+- model: collector.skillmodificator
+  pk: 1545
+  fields:
+    tour_of_duty_ref: 262
+    skill_ref: 34
+    value: 1
+- model: collector.skillmodificator
+  pk: 1546
+  fields:
+    tour_of_duty_ref: 262
+    skill_ref: 72
+    value: 1
+- model: collector.skillmodificator
+  pk: 1548
+  fields:
+    tour_of_duty_ref: 265
+    skill_ref: 26
+    value: 1
+- model: collector.skillmodificator
+  pk: 1549
+  fields:
+    tour_of_duty_ref: 265
+    skill_ref: 33
+    value: 2
+- model: collector.skillmodificator
+  pk: 1550
+  fields:
+    tour_of_duty_ref: 265
+    skill_ref: 382
+    value: 1
+- model: collector.skillmodificator
+  pk: 1551
+  fields:
+    tour_of_duty_ref: 254
+    skill_ref: 14
+    value: 1
+- model: collector.skillmodificator
+  pk: 1552
+  fields:
+    tour_of_duty_ref: 254
+    skill_ref: 26
+    value: 1
+- model: collector.skillmodificator
+  pk: 1553
+  fields:
+    tour_of_duty_ref: 254
+    skill_ref: 40
+    value: 1
+- model: collector.skillmodificator
+  pk: 1554
+  fields:
+    tour_of_duty_ref: 254
+    skill_ref: 91
+    value: 1
+- model: collector.skillmodificator
+  pk: 1555
+  fields:
+    tour_of_duty_ref: 194
+    skill_ref: 61
+    value: 1
+- model: collector.skillmodificator
+  pk: 1556
+  fields:
+    tour_of_duty_ref: 194
+    skill_ref: 59
+    value: 1
+- model: collector.skillmodificator
+  pk: 1557
+  fields:
+    tour_of_duty_ref: 194
+    skill_ref: 15
+    value: 1
+- model: collector.skillmodificator
+  pk: 1558
+  fields:
+    tour_of_duty_ref: 194
+    skill_ref: 34
+    value: 1
+- model: collector.skillmodificator
+  pk: 1559
+  fields:
+    tour_of_duty_ref: 243
+    skill_ref: 41
+    value: 1
+- model: collector.skillmodificator
+  pk: 1560
+  fields:
+    tour_of_duty_ref: 243
+    skill_ref: 16
+    value: 1
+- model: collector.skillmodificator
+  pk: 1561
+  fields:
+    tour_of_duty_ref: 243
+    skill_ref: 147
+    value: 1
+- model: collector.skillmodificator
+  pk: 1562
+  fields:
+    tour_of_duty_ref: 243
+    skill_ref: 9
+    value: 1
+- model: collector.skillmodificator
+  pk: 1563
+  fields:
+    tour_of_duty_ref: 275
+    skill_ref: 47
+    value: 1
+- model: collector.skillmodificator
+  pk: 1564
+  fields:
+    tour_of_duty_ref: 275
+    skill_ref: 15
+    value: 1
+- model: collector.skillmodificator
+  pk: 1565
+  fields:
+    tour_of_duty_ref: 275
+    skill_ref: 60
+    value: 1
+- model: collector.skillmodificator
+  pk: 1566
+  fields:
+    tour_of_duty_ref: 275
+    skill_ref: 26
+    value: 1
+- model: collector.skillmodificator
+  pk: 1567
+  fields:
+    tour_of_duty_ref: 275
+    skill_ref: 31
+    value: 1
+- model: collector.skillmodificator
+  pk: 1568
+  fields:
+    tour_of_duty_ref: 275
+    skill_ref: 55
+    value: 1
+- model: collector.skillmodificator
+  pk: 1569
+  fields:
+    tour_of_duty_ref: 275
+    skill_ref: 49
+    value: 1
+- model: collector.skillmodificator
+  pk: 1570
+  fields:
+    tour_of_duty_ref: 275
+    skill_ref: 59
+    value: 1
+- model: collector.skillmodificator
+  pk: 1571
+  fields:
+    tour_of_duty_ref: 276
+    skill_ref: 4
+    value: 1
+- model: collector.skillmodificator
+  pk: 1572
+  fields:
+    tour_of_duty_ref: 276
+    skill_ref: 13
+    value: 1
+- model: collector.skillmodificator
+  pk: 1573
+  fields:
+    tour_of_duty_ref: 276
+    skill_ref: 27
+    value: 1
+- model: collector.skillmodificator
+  pk: 1574
+  fields:
+    tour_of_duty_ref: 276
+    skill_ref: 26
+    value: 1
+- model: collector.skillmodificator
+  pk: 1575
+  fields:
+    tour_of_duty_ref: 276
+    skill_ref: 12
+    value: 1
+- model: collector.skillmodificator
+  pk: 1576
+  fields:
+    tour_of_duty_ref: 276
+    skill_ref: 23
+    value: 1
+- model: collector.skillmodificator
+  pk: 1577
+  fields:
+    tour_of_duty_ref: 276
+    skill_ref: 47
+    value: 1
+- model: collector.skillmodificator
+  pk: 1578
+  fields:
+    tour_of_duty_ref: 276
+    skill_ref: 17
+    value: 1
+- model: collector.skillmodificator
+  pk: 1579
+  fields:
+    tour_of_duty_ref: 277
+    skill_ref: 22
+    value: 1
+- model: collector.skillmodificator
+  pk: 1580
+  fields:
+    tour_of_duty_ref: 277
+    skill_ref: 6
+    value: 1
+- model: collector.skillmodificator
+  pk: 1581
+  fields:
+    tour_of_duty_ref: 277
+    skill_ref: 2
+    value: 1
+- model: collector.skillmodificator
+  pk: 1582
+  fields:
+    tour_of_duty_ref: 277
+    skill_ref: 14
+    value: 1
+- model: collector.skillmodificator
+  pk: 1583
+  fields:
+    tour_of_duty_ref: 277
+    skill_ref: 40
+    value: 1
+- model: collector.skillmodificator
+  pk: 1584
+  fields:
+    tour_of_duty_ref: 277
+    skill_ref: 49
+    value: 1
+- model: collector.skillmodificator
+  pk: 1585
+  fields:
+    tour_of_duty_ref: 277
+    skill_ref: 117
+    value: 1
+- model: collector.skillmodificator
+  pk: 1586
+  fields:
+    tour_of_duty_ref: 277
+    skill_ref: 115
+    value: 1
+- model: collector.skillmodificator
+  pk: 1588
+  fields:
+    tour_of_duty_ref: 278
+    skill_ref: 22
+    value: 1
+- model: collector.skillmodificator
+  pk: 1589
+  fields:
+    tour_of_duty_ref: 278
+    skill_ref: 24
+    value: 1
+- model: collector.skillmodificator
+  pk: 1590
+  fields:
+    tour_of_duty_ref: 278
+    skill_ref: 32
+    value: 1
+- model: collector.skillmodificator
+  pk: 1591
+  fields:
+    tour_of_duty_ref: 278
+    skill_ref: 16
+    value: 1
+- model: collector.skillmodificator
+  pk: 1592
+  fields:
+    tour_of_duty_ref: 278
+    skill_ref: 48
+    value: 1
+- model: collector.skillmodificator
+  pk: 1593
+  fields:
+    tour_of_duty_ref: 278
+    skill_ref: 61
+    value: 1
+- model: collector.skillmodificator
+  pk: 1594
+  fields:
+    tour_of_duty_ref: 278
+    skill_ref: 62
+    value: 1
+- model: collector.skillmodificator
+  pk: 1595
+  fields:
+    tour_of_duty_ref: 278
+    skill_ref: 64
+    value: 1
+- model: collector.skillmodificator
+  pk: 1596
+  fields:
+    tour_of_duty_ref: 278
+    skill_ref: 157
+    value: 1
+- model: collector.skillmodificator
+  pk: 1597
+  fields:
+    tour_of_duty_ref: 278
+    skill_ref: 19
+    value: 1
+- model: collector.skillmodificator
+  pk: 1598
+  fields:
+    tour_of_duty_ref: 278
+    skill_ref: 14
+    value: 2
+- model: collector.skillmodificator
+  pk: 1599
+  fields:
+    tour_of_duty_ref: 278
+    skill_ref: 40
+    value: 3
+- model: collector.skillmodificator
+  pk: 1600
+  fields:
+    tour_of_duty_ref: 118
+    skill_ref: 52
+    value: 2
+- model: collector.skillmodificator
+  pk: 1601
+  fields:
+    tour_of_duty_ref: 41
+    skill_ref: 157
+    value: 1
+- model: collector.skillmodificator
+  pk: 1602
+  fields:
+    tour_of_duty_ref: 189
+    skill_ref: 46
+    value: 1
+- model: collector.skillmodificator
+  pk: 1603
+  fields:
+    tour_of_duty_ref: 51
+    skill_ref: 157
+    value: 1
+- model: collector.skillmodificator
+  pk: 1604
+  fields:
+    tour_of_duty_ref: 123
+    skill_ref: 157
+    value: 1
+- model: collector.skillmodificator
+  pk: 1605
+  fields:
+    tour_of_duty_ref: 250
+    skill_ref: 33
+    value: 1
+- model: collector.skillmodificator
+  pk: 1606
+  fields:
+    tour_of_duty_ref: 154
+    skill_ref: 46
+    value: 1
+- model: collector.skillmodificator
+  pk: 1607
+  fields:
+    tour_of_duty_ref: 158
+    skill_ref: 46
+    value: 1
+- model: collector.skillmodificator
+  pk: 1608
+  fields:
+    tour_of_duty_ref: 218
+    skill_ref: 157
+    value: 4
+- model: collector.skillmodificator
+  pk: 1609
+  fields:
+    tour_of_duty_ref: 63
+    skill_ref: 157
+    value: 1
+- model: collector.skillmodificator
+  pk: 1610
+  fields:
+    tour_of_duty_ref: 9
+    skill_ref: 46
+    value: 1
+- model: collector.skillmodificator
+  pk: 1611
+  fields:
+    tour_of_duty_ref: 103
+    skill_ref: 46
+    value: 1
+- model: collector.skillmodificator
+  pk: 1612
+  fields:
+    tour_of_duty_ref: 56
+    skill_ref: 46
+    value: 2
+- model: collector.skillmodificator
+  pk: 1613
+  fields:
+    tour_of_duty_ref: 60
+    skill_ref: 46
+    value: 1
+- model: collector.skillmodificator
+  pk: 1614
+  fields:
+    tour_of_duty_ref: 60
+    skill_ref: 157
+    value: 1
+- model: collector.skillmodificator
+  pk: 1615
+  fields:
+    tour_of_duty_ref: 79
+    skill_ref: 46
+    value: 2
+- model: collector.skillmodificator
+  pk: 1616
+  fields:
+    tour_of_duty_ref: 84
+    skill_ref: 46
+    value: 1
+- model: collector.skillmodificator
+  pk: 1617
+  fields:
+    tour_of_duty_ref: 89
+    skill_ref: 46
+    value: 1
+- model: collector.skillmodificator
+  pk: 1618
+  fields:
+    tour_of_duty_ref: 111
+    skill_ref: 52
+    value: 2
+- model: collector.skillmodificator
+  pk: 1619
+  fields:
+    tour_of_duty_ref: 268
+    skill_ref: 46
+    value: 1
+- model: collector.skillmodificator
+  pk: 1620
+  fields:
+    tour_of_duty_ref: 72
+    skill_ref: 46
+    value: 1
+- model: collector.skillmodificator
+  pk: 1621
+  fields:
+    tour_of_duty_ref: 72
+    skill_ref: 157
+    value: 1
+- model: collector.skillmodificator
+  pk: 1622
+  fields:
+    tour_of_duty_ref: 71
+    skill_ref: 46
+    value: 2
+- model: collector.skillmodificator
+  pk: 1623
+  fields:
+    tour_of_duty_ref: 69
+    skill_ref: 46
+    value: 3
+- model: collector.skillmodificator
+  pk: 1624
+  fields:
+    tour_of_duty_ref: 97
+    skill_ref: 46
+    value: 1
+- model: collector.skillmodificator
+  pk: 1625
+  fields:
+    tour_of_duty_ref: 100
+    skill_ref: 52
+    value: 2
+- model: collector.skillmodificator
+  pk: 1626
+  fields:
+    tour_of_duty_ref: 140
+    skill_ref: 46
+    value: 1
+- model: collector.skillmodificator
+  pk: 1627
+  fields:
+    tour_of_duty_ref: 102
+    skill_ref: 46
+    value: 1
+- model: collector.skillmodificator
+  pk: 1628
+  fields:
+    tour_of_duty_ref: 114
+    skill_ref: 33
+    value: 1
+- model: collector.skillmodificator
+  pk: 1629
+  fields:
+    tour_of_duty_ref: 114
+    skill_ref: 46
+    value: 1
+- model: collector.skillmodificator
+  pk: 1630
+  fields:
+    tour_of_duty_ref: 40
+    skill_ref: 33
+    value: 2
+- model: collector.skillmodificator
+  pk: 1631
+  fields:
+    tour_of_duty_ref: 201
+    skill_ref: 33
+    value: 2
+- model: collector.skillmodificator
+  pk: 1632
+  fields:
+    tour_of_duty_ref: 208
+    skill_ref: 46
+    value: 1
+- model: collector.skillmodificator
+  pk: 1633
+  fields:
+    tour_of_duty_ref: 247
+    skill_ref: 52
+    value: 2
+- model: collector.skillmodificator
+  pk: 1634
+  fields:
+    tour_of_duty_ref: 214
+    skill_ref: 33
+    value: 1
+- model: collector.skillmodificator
+  pk: 1635
+  fields:
+    tour_of_duty_ref: 214
+    skill_ref: 46
+    value: 1
+- model: collector.skillmodificator
+  pk: 1636
+  fields:
+    tour_of_duty_ref: 211
+    skill_ref: 46
+    value: 1
+- model: collector.skillmodificator
+  pk: 1637
+  fields:
+    tour_of_duty_ref: 131
+    skill_ref: 33
+    value: 1
+- model: collector.skillmodificator
+  pk: 1638
+  fields:
+    tour_of_duty_ref: 131
+    skill_ref: 46
+    value: 1
+- model: collector.skillmodificator
+  pk: 1639
+  fields:
+    tour_of_duty_ref: 203
+    skill_ref: 46
+    value: 2
+- model: collector.skillmodificator
+  pk: 1640
+  fields:
+    tour_of_duty_ref: 117
+    skill_ref: 46
+    value: 1
+- model: collector.skillmodificator
+  pk: 1641
+  fields:
+    tour_of_duty_ref: 116
+    skill_ref: 46
+    value: 2
+- model: collector.skillmodificator
+  pk: 1642
+  fields:
+    tour_of_duty_ref: 206
+    skill_ref: 33
+    value: 2
+- model: collector.skillmodificator
+  pk: 1643
+  fields:
+    tour_of_duty_ref: 206
+    skill_ref: 52
+    value: 1
+- model: collector.skillmodificator
+  pk: 1644
+  fields:
+    tour_of_duty_ref: 256
+    skill_ref: 52
+    value: 1
+- model: collector.skillmodificator
+  pk: 1645
+  fields:
+    tour_of_duty_ref: 264
+    skill_ref: 33
+    value: 1
+- model: collector.skillmodificator
+  pk: 1646
+  fields:
+    tour_of_duty_ref: 244
+    skill_ref: 46
+    value: 1
+- model: collector.skillmodificator
+  pk: 1647
+  fields:
+    tour_of_duty_ref: 239
+    skill_ref: 52
+    value: 4
+- model: collector.skillmodificator
+  pk: 1648
+  fields:
+    tour_of_duty_ref: 52
+    skill_ref: 153
+    value: 1
+- model: collector.skillmodificator
+  pk: 1649
+  fields:
+    tour_of_duty_ref: 4
+    skill_ref: 153
+    value: 1
+- model: collector.skillmodificator
+  pk: 1650
+  fields:
+    tour_of_duty_ref: 31
+    skill_ref: 153
+    value: 1
+- model: collector.skillmodificator
+  pk: 1651
+  fields:
+    tour_of_duty_ref: 34
+    skill_ref: 153
+    value: 1
+- model: collector.skillmodificator
+  pk: 1652
+  fields:
+    tour_of_duty_ref: 2
+    skill_ref: 153
+    value: 1
+- model: collector.skillmodificator
+  pk: 1653
+  fields:
+    tour_of_duty_ref: 1
+    skill_ref: 153
+    value: 1
+- model: collector.skillmodificator
+  pk: 1654
+  fields:
+    tour_of_duty_ref: 3
+    skill_ref: 153
+    value: 1
+- model: collector.skillmodificator
+  pk: 1655
+  fields:
+    tour_of_duty_ref: 29
+    skill_ref: 153
+    value: 1
+- model: collector.skillmodificator
+  pk: 1656
+  fields:
+    tour_of_duty_ref: 32
+    skill_ref: 153
+    value: 1
+- model: collector.skillmodificator
+  pk: 1657
+  fields:
+    tour_of_duty_ref: 5
+    skill_ref: 153
+    value: 1
+- model: collector.skillmodificator
+  pk: 1658
+  fields:
+    tour_of_duty_ref: 101
+    skill_ref: 153
+    value: 2
+- model: collector.skillmodificator
+  pk: 1659
+  fields:
+    tour_of_duty_ref: 67
+    skill_ref: 153
+    value: 1
+- model: collector.skillmodificator
+  pk: 1660
+  fields:
+    tour_of_duty_ref: 65
+    skill_ref: 153
+    value: 1
+- model: collector.skillmodificator
+  pk: 1661
+  fields:
+    tour_of_duty_ref: 12
+    skill_ref: 153
+    value: 1
+- model: collector.skillmodificator
+  pk: 1662
+  fields:
+    tour_of_duty_ref: 56
+    skill_ref: 153
+    value: 1
+- model: collector.skillmodificator
+  pk: 1663
+  fields:
+    tour_of_duty_ref: 64
+    skill_ref: 153
+    value: 1
+- model: collector.skillmodificator
+  pk: 1664
+  fields:
+    tour_of_duty_ref: 97
+    skill_ref: 153
+    value: 1
+- model: collector.skillmodificator
+  pk: 1665
+  fields:
+    tour_of_duty_ref: 16
+    skill_ref: 153
+    value: 1
+- model: collector.skillmodificator
+  pk: 1666
+  fields:
+    tour_of_duty_ref: 8
+    skill_ref: 153
+    value: 1
+- model: collector.skillmodificator
+  pk: 1667
+  fields:
+    tour_of_duty_ref: 266
+    skill_ref: 153
+    value: 1
+- model: collector.skillmodificator
+  pk: 1668
+  fields:
+    tour_of_duty_ref: 279
+    skill_ref: 12
+    value: 2
+- model: collector.skillmodificator
+  pk: 1669
+  fields:
+    tour_of_duty_ref: 279
+    skill_ref: 68
+    value: 1
+- model: collector.skillmodificator
+  pk: 1670
+  fields:
+    tour_of_duty_ref: 279
+    skill_ref: 52
+    value: 2
+- model: collector.skillmodificator
+  pk: 1671
+  fields:
+    tour_of_duty_ref: 279
+    skill_ref: 93
+    value: 1
+- model: collector.skillmodificator
+  pk: 1672
+  fields:
+    tour_of_duty_ref: 279
+    skill_ref: 90
+    value: 1
+- model: collector.skillmodificator
+  pk: 1673
+  fields:
+    tour_of_duty_ref: 279
+    skill_ref: 32
+    value: 1
+- model: collector.skillmodificator
+  pk: 1674
+  fields:
+    tour_of_duty_ref: 279
+    skill_ref: 252
+    value: 2
+- model: collector.skillmodificator
+  pk: 1675
+  fields:
+    tour_of_duty_ref: 279
+    skill_ref: 62
+    value: 1
+- model: collector.skillmodificator
+  pk: 1676
+  fields:
+    tour_of_duty_ref: 279
+    skill_ref: 54
+    value: 2
+- model: collector.skillmodificator
+  pk: 1677
+  fields:
+    tour_of_duty_ref: 279
+    skill_ref: 158
+    value: 1
+- model: collector.skillmodificator
+  pk: 1678
+  fields:
+    tour_of_duty_ref: 279
+    skill_ref: 71
+    value: 2
+- model: collector.skillmodificator
+  pk: 1679
+  fields:
+    tour_of_duty_ref: 279
+    skill_ref: 157
+    value: 2
+- model: collector.skillmodificator
+  pk: 1680
+  fields:
+    tour_of_duty_ref: 280
+    skill_ref: 68
+    value: 2
+- model: collector.skillmodificator
+  pk: 1681
+  fields:
+    tour_of_duty_ref: 280
+    skill_ref: 158
+    value: 1
+- model: collector.skillmodificator
+  pk: 1682
+  fields:
+    tour_of_duty_ref: 280
+    skill_ref: 186
+    value: 2
+- model: collector.skillmodificator
+  pk: 1683
+  fields:
+    tour_of_duty_ref: 280
+    skill_ref: 153
+    value: 1
+- model: collector.skillmodificator
+  pk: 1684
+  fields:
+    tour_of_duty_ref: 280
+    skill_ref: 12
+    value: 1
+- model: collector.skillmodificator
+  pk: 1685
+  fields:
+    tour_of_duty_ref: 280
+    skill_ref: 47
+    value: 1
+- model: collector.skillmodificator
+  pk: 1686
+  fields:
+    tour_of_duty_ref: 280
+    skill_ref: 157
+    value: 2
+- model: collector.skillmodificator
+  pk: 1687
+  fields:
+    tour_of_duty_ref: 280
+    skill_ref: 244
+    value: 1
+- model: collector.skillmodificator
+  pk: 1688
+  fields:
+    tour_of_duty_ref: 280
+    skill_ref: 32
+    value: 1

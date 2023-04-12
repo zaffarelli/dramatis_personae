@@ -1,0 +1,174 @@
+- model: scenarist.backlog
+  pk: 1
+  fields:
+    name: Byzantium Secundus Nobility
+    chapter: '1'
+    date_offset: 0
+    dt: 2022-08-19 22:48:33+00:00
+    sdt: 2023-01-16 03:13:33.318018+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: true
+    full_id: ''
+    description: Black fingers
+    resolution: ''
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    category: NC
+    reference: ''
+    keywords: ''
+- model: scenarist.backlog
+  pk: 2
+  fields:
+    name: The Merchants of Hope
+    chapter: '0'
+    date_offset: 0
+    dt: 2022-08-22 18:02:55+00:00
+    sdt: 2023-01-16 03:13:33.318018+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: true
+    full_id: ''
+    description: "=The Merchants of Hope=\r\nAs soon as you get to the inner belt\
+      \ of the Byzantium Secundus system, you can easily become a prey of the Merchants\
+      \ of Hope. Those guilders, usually working out of the League juridiction, add\
+      \ a substantial amount of money by selling to travellers (preferabilly outworlders)\
+      \ exactly what they need with a 10 percent *special newcomer discount*. \r\n\
+      \r\nMost of the time, they will try to do repairs in space to avoid authority,\
+      \ asking to the victims to send their technical log and to meet at a rendez-vous\
+      \ point on the *Novgorod Shipyards*. A few minutes after, they cancel the rendez-vous,\
+      \ arguing that the problem is more critical than expected and not fixing it\
+      \ now could lead to important failures.\r\n\r\nThey try \"not to smoke twice\
+      \ the same cigar\", and never try to hit a second time on a victim, successful\
+      \ or not.\r\n\r\nµFamous Membersµ\r\n* ¤jetty_colona¤. Scraver boss. The 50\
+      \ something scraver captain is a pro. She usually uses holovid hacking to appear\
+      \ as a young officer. Her actor studio approach to the job makes her successful\
+      \ 80 percent of the time. Her hacks can be detected with two successfull rolls:\
+      \ AWA|sensors|20 and TECH|think machine|25.\r\n\r\nµModus Operandiµ\r\nThe typical\
+      \ MO for their team is to hack through communications from starships asking\
+      \ for help on the planetary support channel. From there, they do a quick search\
+      \ on the owner of the ship and who might be leading it. Once done, if the ship\
+      \ has no link to local authority or mob, they check their database to quickly\
+      \ provide the perfect device to fix the problem. \r\n\r\nµDogoodersµ\r\nCapturing\
+      \ Merchants of Hope members is more valuable to league than imperial authority.\
+      \ The typical reward for a MoH member captured alive is 250 £birds. The amount\
+      \ can be x2 to x5 according to the member captured, and will be x2 when delivered\
+      \ to guild officials.\r\n\r\nµIf the PC buy hardware to them...µ\r\n* The hardware\
+      \ they sell may be stolen from guild storage (6 of 12)\r\n* It may have serious\
+      \ defects (3 of 12)\r\n* In rare occasion, due to some lack of knowledge, a\
+      \ very reliable device is acquired (1 of 12)"
+    resolution: ''
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    category: NC
+    reference: ''
+    keywords: ''
+- model: scenarist.backlog
+  pk: 3
+  fields:
+    name: Madoc Invisible Path
+    chapter: '0'
+    date_offset: 0
+    dt: 2022-08-22 18:26:13+00:00
+    sdt: 2023-01-16 03:13:33.318018+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: true
+    full_id: ''
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    category: NC
+    reference: ''
+    keywords: ''
+- model: scenarist.backlog
+  pk: 4
+  fields:
+    name: 'Species Special: Oro''ym'
+    chapter: '0'
+    date_offset: 0
+    dt: 2022-08-22 18:26:47+00:00
+    sdt: 2023-01-16 03:13:33.318018+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: true
+    full_id: ''
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    category: NC
+    reference: ''
+    keywords: ''
+- model: scenarist.backlog
+  pk: 5
+  fields:
+    name: The Serpent of Syracuse
+    chapter: '0'
+    date_offset: 0
+    dt: 2022-08-22 21:45:40+00:00
+    sdt: 2023-01-16 03:13:33.318018+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: true
+    full_id: ''
+    description: "=Master Balthazar Theodore Zemeckis=\r\nThe whole epic is built\
+      \ around one character, Master ¤balthazar_zemeckis¤ of the POE. He is a highly\
+      \ qualified engineer whose speciality is clockworking, the art of building automats.\r\
+      \nOne could easily assume that such a carrier domain might be totally inapropriate\
+      \ in the empire for many reasons, but, like his master £Olem Ratugas£ before\
+      \ him, he worked his path through power groups and the Church to ensure that\
+      \ none might easily harm his business.\r\nIn 4982 AD, Radugas founded the High\
+      \ College of the Clockwork, based at first on Istakhr. At first, it was an undercover\
+      \ activity, the goal of the clockmaker being to reproduce golem having the shape\
+      \ of humans, but bearing no real sentiance. What Ratugas achieved at this time\
+      \ with his apprentice was to make dolls having at best the temper of a domesticated\
+      \ dog. This was the first generation. They needed to be tamed, or educated,\
+      \ as they have no natural feral state, to be able to do simple tasks, like carrying\
+      \ water in the desert. The first batch of automats that made the Brotherhood\
+      \ famous in the Empire was a special unit, the white faces, used on Stigmata,\
+      \ deployed with equipment and weapons and going through enemy lines without\
+      \ being detected, passing for dead if they attracted the attention of the symbiots.\
+      \ This was a great success and the emperor saw a great interest in a technology\
+      \ that would allow to resist the symbiots. The Church did not officially sanctioned\
+      \ the brotherhood, but an Act from the Patriarch, £Lex Automata£ was dispatched\
+      \ in the high instances of the Church when the white faces helped the rescue\
+      \ of the first Manifest Light platoon.\r\n\r\n=Clockworking Inner Council=\r\
+      \n- ¤balthazar_zemeckis¤, Samarkand, Istakhr, Al-Malik fiefs.\r\n- ¤mae_lin_breguet¤,\
+      \ Avaneir, Rampart, Li Halan fiefs.\r\n- ¤ivan_ipsevicz¤, Lyonesse, Delphi,\
+      \ Hawkwood fiefs\r\n- ¤harvenor_russel¤, Corinth, Tethys, Imperial fiefs\r\n\
+      - ¤kiera_zeneter¤, Deleb, Pentateuch, Church fiefs\r\n\r\n=Relatives=\r\n- ¤ionia_zemeckis¤,\
+      \ daughter\r\n- ¤ellen_zemeckis¤, wife\r\n\r\n=Servants=\r\n- ¤massic_antillies¤,\
+      \ butler\r\n- ¤zolondra_kreshia¤, personal physician"
+    resolution: ''
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    category: NC
+    reference: ''
+    keywords: ''

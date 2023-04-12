@@ -1,0 +1,25 @@
+- model: auth.group
+  pk: 1
+  fields:
+    name: Fading Suns Player
+    permissions: []
+- model: auth.group
+  pk: 2
+  fields:
+    name: Cthulhu Player
+    permissions: []
+- model: auth.group
+  pk: 3
+  fields:
+    name: D&D Player
+    permissions: []
+- model: auth.group
+  pk: 4
+  fields:
+    name: DEM Team
+    permissions: []
+- model: auth.group
+  pk: 5
+  fields:
+    name: DAL Team
+    permissions: []

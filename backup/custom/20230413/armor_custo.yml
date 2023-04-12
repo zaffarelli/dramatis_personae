@@ -1,0 +1,1170 @@
+- model: collector.armorcusto
+  pk: 2
+  fields:
+    character_custo: 185
+    armor_ref: 2
+- model: collector.armorcusto
+  pk: 3
+  fields:
+    character_custo: 183
+    armor_ref: 2
+- model: collector.armorcusto
+  pk: 4
+  fields:
+    character_custo: 20
+    armor_ref: 1
+- model: collector.armorcusto
+  pk: 5
+  fields:
+    character_custo: 16
+    armor_ref: 1
+- model: collector.armorcusto
+  pk: 6
+  fields:
+    character_custo: 98
+    armor_ref: 1
+- model: collector.armorcusto
+  pk: 7
+  fields:
+    character_custo: 181
+    armor_ref: 1
+- model: collector.armorcusto
+  pk: 8
+  fields:
+    character_custo: 115
+    armor_ref: 2
+- model: collector.armorcusto
+  pk: 9
+  fields:
+    character_custo: 187
+    armor_ref: 26
+- model: collector.armorcusto
+  pk: 10
+  fields:
+    character_custo: 125
+    armor_ref: 4
+- model: collector.armorcusto
+  pk: 11
+  fields:
+    character_custo: 189
+    armor_ref: 1
+- model: collector.armorcusto
+  pk: 12
+  fields:
+    character_custo: 136
+    armor_ref: 22
+- model: collector.armorcusto
+  pk: 13
+  fields:
+    character_custo: 87
+    armor_ref: 8
+- model: collector.armorcusto
+  pk: 14
+  fields:
+    character_custo: 135
+    armor_ref: 8
+- model: collector.armorcusto
+  pk: 15
+  fields:
+    character_custo: 8
+    armor_ref: 2
+- model: collector.armorcusto
+  pk: 16
+  fields:
+    character_custo: 7
+    armor_ref: 4
+- model: collector.armorcusto
+  pk: 17
+  fields:
+    character_custo: 91
+    armor_ref: 8
+- model: collector.armorcusto
+  pk: 18
+  fields:
+    character_custo: 35
+    armor_ref: 1
+- model: collector.armorcusto
+  pk: 19
+  fields:
+    character_custo: 29
+    armor_ref: 5
+- model: collector.armorcusto
+  pk: 20
+  fields:
+    character_custo: 58
+    armor_ref: 21
+- model: collector.armorcusto
+  pk: 21
+  fields:
+    character_custo: 61
+    armor_ref: 13
+- model: collector.armorcusto
+  pk: 22
+  fields:
+    character_custo: 190
+    armor_ref: 12
+- model: collector.armorcusto
+  pk: 23
+  fields:
+    character_custo: 38
+    armor_ref: 4
+- model: collector.armorcusto
+  pk: 24
+  fields:
+    character_custo: 39
+    armor_ref: 2
+- model: collector.armorcusto
+  pk: 26
+  fields:
+    character_custo: 22
+    armor_ref: 2
+- model: collector.armorcusto
+  pk: 27
+  fields:
+    character_custo: 191
+    armor_ref: 10
+- model: collector.armorcusto
+  pk: 28
+  fields:
+    character_custo: 217
+    armor_ref: 28
+- model: collector.armorcusto
+  pk: 29
+  fields:
+    character_custo: 192
+    armor_ref: 15
+- model: collector.armorcusto
+  pk: 30
+  fields:
+    character_custo: 194
+    armor_ref: 6
+- model: collector.armorcusto
+  pk: 31
+  fields:
+    character_custo: 215
+    armor_ref: 13
+- model: collector.armorcusto
+  pk: 32
+  fields:
+    character_custo: 151
+    armor_ref: 12
+- model: collector.armorcusto
+  pk: 33
+  fields:
+    character_custo: 76
+    armor_ref: 2
+- model: collector.armorcusto
+  pk: 34
+  fields:
+    character_custo: 2
+    armor_ref: 4
+- model: collector.armorcusto
+  pk: 35
+  fields:
+    character_custo: 17
+    armor_ref: 16
+- model: collector.armorcusto
+  pk: 36
+  fields:
+    character_custo: 3
+    armor_ref: 1
+- model: collector.armorcusto
+  pk: 37
+  fields:
+    character_custo: 218
+    armor_ref: 7
+- model: collector.armorcusto
+  pk: 38
+  fields:
+    character_custo: 59
+    armor_ref: 10
+- model: collector.armorcusto
+  pk: 39
+  fields:
+    character_custo: 178
+    armor_ref: 25
+- model: collector.armorcusto
+  pk: 40
+  fields:
+    character_custo: 203
+    armor_ref: 1
+- model: collector.armorcusto
+  pk: 41
+  fields:
+    character_custo: 198
+    armor_ref: 3
+- model: collector.armorcusto
+  pk: 42
+  fields:
+    character_custo: 212
+    armor_ref: 13
+- model: collector.armorcusto
+  pk: 43
+  fields:
+    character_custo: 197
+    armor_ref: 2
+- model: collector.armorcusto
+  pk: 44
+  fields:
+    character_custo: 130
+    armor_ref: 1
+- model: collector.armorcusto
+  pk: 45
+  fields:
+    character_custo: 201
+    armor_ref: 3
+- model: collector.armorcusto
+  pk: 46
+  fields:
+    character_custo: 65
+    armor_ref: 3
+- model: collector.armorcusto
+  pk: 47
+  fields:
+    character_custo: 195
+    armor_ref: 7
+- model: collector.armorcusto
+  pk: 48
+  fields:
+    character_custo: 207
+    armor_ref: 3
+- model: collector.armorcusto
+  pk: 49
+  fields:
+    character_custo: 209
+    armor_ref: 4
+- model: collector.armorcusto
+  pk: 50
+  fields:
+    character_custo: 206
+    armor_ref: 4
+- model: collector.armorcusto
+  pk: 51
+  fields:
+    character_custo: 154
+    armor_ref: 12
+- model: collector.armorcusto
+  pk: 52
+  fields:
+    character_custo: 200
+    armor_ref: 20
+- model: collector.armorcusto
+  pk: 53
+  fields:
+    character_custo: 210
+    armor_ref: 5
+- model: collector.armorcusto
+  pk: 54
+  fields:
+    character_custo: 221
+    armor_ref: 7
+- model: collector.armorcusto
+  pk: 55
+  fields:
+    character_custo: 222
+    armor_ref: 4
+- model: collector.armorcusto
+  pk: 56
+  fields:
+    character_custo: 6
+    armor_ref: 29
+- model: collector.armorcusto
+  pk: 57
+  fields:
+    character_custo: 67
+    armor_ref: 18
+- model: collector.armorcusto
+  pk: 58
+  fields:
+    character_custo: 28
+    armor_ref: 2
+- model: collector.armorcusto
+  pk: 59
+  fields:
+    character_custo: 28
+    armor_ref: 2
+- model: collector.armorcusto
+  pk: 61
+  fields:
+    character_custo: 156
+    armor_ref: 2
+- model: collector.armorcusto
+  pk: 62
+  fields:
+    character_custo: 150
+    armor_ref: 15
+- model: collector.armorcusto
+  pk: 63
+  fields:
+    character_custo: 13
+    armor_ref: 8
+- model: collector.armorcusto
+  pk: 64
+  fields:
+    character_custo: 11
+    armor_ref: 18
+- model: collector.armorcusto
+  pk: 65
+  fields:
+    character_custo: 99
+    armor_ref: 1
+- model: collector.armorcusto
+  pk: 66
+  fields:
+    character_custo: 146
+    armor_ref: 22
+- model: collector.armorcusto
+  pk: 67
+  fields:
+    character_custo: 149
+    armor_ref: 4
+- model: collector.armorcusto
+  pk: 68
+  fields:
+    character_custo: 202
+    armor_ref: 23
+- model: collector.armorcusto
+  pk: 69
+  fields:
+    character_custo: 77
+    armor_ref: 1
+- model: collector.armorcusto
+  pk: 70
+  fields:
+    character_custo: 169
+    armor_ref: 22
+- model: collector.armorcusto
+  pk: 71
+  fields:
+    character_custo: 126
+    armor_ref: 7
+- model: collector.armorcusto
+  pk: 72
+  fields:
+    character_custo: 5
+    armor_ref: 1
+- model: collector.armorcusto
+  pk: 73
+  fields:
+    character_custo: 243
+    armor_ref: 23
+- model: collector.armorcusto
+  pk: 74
+  fields:
+    character_custo: 257
+    armor_ref: 1
+- model: collector.armorcusto
+  pk: 75
+  fields:
+    character_custo: 242
+    armor_ref: 4
+- model: collector.armorcusto
+  pk: 76
+  fields:
+    character_custo: 261
+    armor_ref: 22
+- model: collector.armorcusto
+  pk: 77
+  fields:
+    character_custo: 97
+    armor_ref: 23
+- model: collector.armorcusto
+  pk: 78
+  fields:
+    character_custo: 231
+    armor_ref: 13
+- model: collector.armorcusto
+  pk: 79
+  fields:
+    character_custo: 260
+    armor_ref: 7
+- model: collector.armorcusto
+  pk: 80
+  fields:
+    character_custo: 236
+    armor_ref: 2
+- model: collector.armorcusto
+  pk: 81
+  fields:
+    character_custo: 223
+    armor_ref: 1
+- model: collector.armorcusto
+  pk: 82
+  fields:
+    character_custo: 254
+    armor_ref: 1
+- model: collector.armorcusto
+  pk: 83
+  fields:
+    character_custo: 253
+    armor_ref: 21
+- model: collector.armorcusto
+  pk: 84
+  fields:
+    character_custo: 253
+    armor_ref: 1
+- model: collector.armorcusto
+  pk: 85
+  fields:
+    character_custo: 255
+    armor_ref: 13
+- model: collector.armorcusto
+  pk: 86
+  fields:
+    character_custo: 246
+    armor_ref: 15
+- model: collector.armorcusto
+  pk: 87
+  fields:
+    character_custo: 266
+    armor_ref: 4
+- model: collector.armorcusto
+  pk: 88
+  fields:
+    character_custo: 68
+    armor_ref: 8
+- model: collector.armorcusto
+  pk: 89
+  fields:
+    character_custo: 19
+    armor_ref: 5
+- model: collector.armorcusto
+  pk: 90
+  fields:
+    character_custo: 227
+    armor_ref: 1
+- model: collector.armorcusto
+  pk: 91
+  fields:
+    character_custo: 216
+    armor_ref: 15
+- model: collector.armorcusto
+  pk: 92
+  fields:
+    character_custo: 234
+    armor_ref: 7
+- model: collector.armorcusto
+  pk: 93
+  fields:
+    character_custo: 270
+    armor_ref: 16
+- model: collector.armorcusto
+  pk: 94
+  fields:
+    character_custo: 269
+    armor_ref: 16
+- model: collector.armorcusto
+  pk: 95
+  fields:
+    character_custo: 238
+    armor_ref: 4
+- model: collector.armorcusto
+  pk: 96
+  fields:
+    character_custo: 258
+    armor_ref: 1
+- model: collector.armorcusto
+  pk: 97
+  fields:
+    character_custo: 241
+    armor_ref: 1
+- model: collector.armorcusto
+  pk: 98
+  fields:
+    character_custo: 271
+    armor_ref: 4
+- model: collector.armorcusto
+  pk: 99
+  fields:
+    character_custo: 259
+    armor_ref: 7
+- model: collector.armorcusto
+  pk: 100
+  fields:
+    character_custo: 268
+    armor_ref: 1
+- model: collector.armorcusto
+  pk: 101
+  fields:
+    character_custo: 263
+    armor_ref: 8
+- model: collector.armorcusto
+  pk: 102
+  fields:
+    character_custo: 232
+    armor_ref: 4
+- model: collector.armorcusto
+  pk: 103
+  fields:
+    character_custo: 1
+    armor_ref: 4
+- model: collector.armorcusto
+  pk: 104
+  fields:
+    character_custo: 278
+    armor_ref: 23
+- model: collector.armorcusto
+  pk: 105
+  fields:
+    character_custo: 188
+    armor_ref: 26
+- model: collector.armorcusto
+  pk: 106
+  fields:
+    character_custo: 303
+    armor_ref: 2
+- model: collector.armorcusto
+  pk: 107
+  fields:
+    character_custo: 296
+    armor_ref: 23
+- model: collector.armorcusto
+  pk: 108
+  fields:
+    character_custo: 71
+    armor_ref: 1
+- model: collector.armorcusto
+  pk: 109
+  fields:
+    character_custo: 107
+    armor_ref: 4
+- model: collector.armorcusto
+  pk: 110
+  fields:
+    character_custo: 84
+    armor_ref: 4
+- model: collector.armorcusto
+  pk: 111
+  fields:
+    character_custo: 304
+    armor_ref: 16
+- model: collector.armorcusto
+  pk: 112
+  fields:
+    character_custo: 140
+    armor_ref: 16
+- model: collector.armorcusto
+  pk: 113
+  fields:
+    character_custo: 23
+    armor_ref: 1
+- model: collector.armorcusto
+  pk: 114
+  fields:
+    character_custo: 328
+    armor_ref: 2
+- model: collector.armorcusto
+  pk: 115
+  fields:
+    character_custo: 307
+    armor_ref: 2
+- model: collector.armorcusto
+  pk: 116
+  fields:
+    character_custo: 310
+    armor_ref: 16
+- model: collector.armorcusto
+  pk: 117
+  fields:
+    character_custo: 317
+    armor_ref: 15
+- model: collector.armorcusto
+  pk: 118
+  fields:
+    character_custo: 317
+    armor_ref: 1
+- model: collector.armorcusto
+  pk: 119
+  fields:
+    character_custo: 314
+    armor_ref: 6
+- model: collector.armorcusto
+  pk: 120
+  fields:
+    character_custo: 318
+    armor_ref: 15
+- model: collector.armorcusto
+  pk: 121
+  fields:
+    character_custo: 309
+    armor_ref: 1
+- model: collector.armorcusto
+  pk: 122
+  fields:
+    character_custo: 309
+    armor_ref: 30
+- model: collector.armorcusto
+  pk: 123
+  fields:
+    character_custo: 313
+    armor_ref: 16
+- model: collector.armorcusto
+  pk: 124
+  fields:
+    character_custo: 363
+    armor_ref: 15
+- model: collector.armorcusto
+  pk: 125
+  fields:
+    character_custo: 199
+    armor_ref: 1
+- model: collector.armorcusto
+  pk: 126
+  fields:
+    character_custo: 199
+    armor_ref: 1
+- model: collector.armorcusto
+  pk: 130
+  fields:
+    character_custo: 333
+    armor_ref: 3
+- model: collector.armorcusto
+  pk: 131
+  fields:
+    character_custo: 331
+    armor_ref: 1
+- model: collector.armorcusto
+  pk: 132
+  fields:
+    character_custo: 247
+    armor_ref: 18
+- model: collector.armorcusto
+  pk: 133
+  fields:
+    character_custo: 338
+    armor_ref: 4
+- model: collector.armorcusto
+  pk: 134
+  fields:
+    character_custo: 390
+    armor_ref: 12
+- model: collector.armorcusto
+  pk: 135
+  fields:
+    character_custo: 392
+    armor_ref: 1
+- model: collector.armorcusto
+  pk: 136
+  fields:
+    character_custo: 323
+    armor_ref: 1
+- model: collector.armorcusto
+  pk: 137
+  fields:
+    character_custo: 272
+    armor_ref: 6
+- model: collector.armorcusto
+  pk: 138
+  fields:
+    character_custo: 420
+    armor_ref: 13
+- model: collector.armorcusto
+  pk: 140
+  fields:
+    character_custo: 93
+    armor_ref: 23
+- model: collector.armorcusto
+  pk: 141
+  fields:
+    character_custo: 18
+    armor_ref: 1
+- model: collector.armorcusto
+  pk: 142
+  fields:
+    character_custo: 143
+    armor_ref: 15
+- model: collector.armorcusto
+  pk: 143
+  fields:
+    character_custo: 308
+    armor_ref: 1
+- model: collector.armorcusto
+  pk: 144
+  fields:
+    character_custo: 102
+    armor_ref: 1
+- model: collector.armorcusto
+  pk: 145
+  fields:
+    character_custo: 267
+    armor_ref: 7
+- model: collector.armorcusto
+  pk: 146
+  fields:
+    character_custo: 265
+    armor_ref: 12
+- model: collector.armorcusto
+  pk: 147
+  fields:
+    character_custo: 145
+    armor_ref: 7
+- model: collector.armorcusto
+  pk: 148
+  fields:
+    character_custo: 262
+    armor_ref: 7
+- model: collector.armorcusto
+  pk: 150
+  fields:
+    character_custo: 318
+    armor_ref: 1
+- model: collector.armorcusto
+  pk: 151
+  fields:
+    character_custo: 144
+    armor_ref: 16
+- model: collector.armorcusto
+  pk: 154
+  fields:
+    character_custo: 256
+    armor_ref: 1
+- model: collector.armorcusto
+  pk: 155
+  fields:
+    character_custo: 360
+    armor_ref: 12
+- model: collector.armorcusto
+  pk: 157
+  fields:
+    character_custo: 424
+    armor_ref: 16
+- model: collector.armorcusto
+  pk: 158
+  fields:
+    character_custo: 426
+    armor_ref: 16
+- model: collector.armorcusto
+  pk: 160
+  fields:
+    character_custo: 430
+    armor_ref: 16
+- model: collector.armorcusto
+  pk: 161
+  fields:
+    character_custo: 425
+    armor_ref: 37
+- model: collector.armorcusto
+  pk: 162
+  fields:
+    character_custo: 431
+    armor_ref: 1
+- model: collector.armorcusto
+  pk: 163
+  fields:
+    character_custo: 423
+    armor_ref: 16
+- model: collector.armorcusto
+  pk: 164
+  fields:
+    character_custo: 429
+    armor_ref: 16
+- model: collector.armorcusto
+  pk: 165
+  fields:
+    character_custo: 427
+    armor_ref: 6
+- model: collector.armorcusto
+  pk: 166
+  fields:
+    character_custo: 436
+    armor_ref: 30
+- model: collector.armorcusto
+  pk: 167
+  fields:
+    character_custo: 450
+    armor_ref: 39
+- model: collector.armorcusto
+  pk: 168
+  fields:
+    character_custo: 454
+    armor_ref: 39
+- model: collector.armorcusto
+  pk: 169
+  fields:
+    character_custo: 460
+    armor_ref: 39
+- model: collector.armorcusto
+  pk: 170
+  fields:
+    character_custo: 447
+    armor_ref: 39
+- model: collector.armorcusto
+  pk: 171
+  fields:
+    character_custo: 466
+    armor_ref: 7
+- model: collector.armorcusto
+  pk: 172
+  fields:
+    character_custo: 465
+    armor_ref: 38
+- model: collector.armorcusto
+  pk: 173
+  fields:
+    character_custo: 493
+    armor_ref: 15
+- model: collector.armorcusto
+  pk: 174
+  fields:
+    character_custo: 452
+    armor_ref: 39
+- model: collector.armorcusto
+  pk: 175
+  fields:
+    character_custo: 492
+    armor_ref: 16
+- model: collector.armorcusto
+  pk: 176
+  fields:
+    character_custo: 489
+    armor_ref: 1
+- model: collector.armorcusto
+  pk: 177
+  fields:
+    character_custo: 443
+    armor_ref: 21
+- model: collector.armorcusto
+  pk: 178
+  fields:
+    character_custo: 498
+    armor_ref: 1
+- model: collector.armorcusto
+  pk: 179
+  fields:
+    character_custo: 463
+    armor_ref: 39
+- model: collector.armorcusto
+  pk: 180
+  fields:
+    character_custo: 439
+    armor_ref: 39
+- model: collector.armorcusto
+  pk: 181
+  fields:
+    character_custo: 470
+    armor_ref: 36
+- model: collector.armorcusto
+  pk: 182
+  fields:
+    character_custo: 464
+    armor_ref: 39
+- model: collector.armorcusto
+  pk: 183
+  fields:
+    character_custo: 453
+    armor_ref: 39
+- model: collector.armorcusto
+  pk: 184
+  fields:
+    character_custo: 445
+    armor_ref: 39
+- model: collector.armorcusto
+  pk: 185
+  fields:
+    character_custo: 444
+    armor_ref: 39
+- model: collector.armorcusto
+  pk: 186
+  fields:
+    character_custo: 459
+    armor_ref: 39
+- model: collector.armorcusto
+  pk: 187
+  fields:
+    character_custo: 462
+    armor_ref: 39
+- model: collector.armorcusto
+  pk: 188
+  fields:
+    character_custo: 448
+    armor_ref: 39
+- model: collector.armorcusto
+  pk: 189
+  fields:
+    character_custo: 441
+    armor_ref: 39
+- model: collector.armorcusto
+  pk: 190
+  fields:
+    character_custo: 440
+    armor_ref: 39
+- model: collector.armorcusto
+  pk: 191
+  fields:
+    character_custo: 442
+    armor_ref: 39
+- model: collector.armorcusto
+  pk: 192
+  fields:
+    character_custo: 449
+    armor_ref: 39
+- model: collector.armorcusto
+  pk: 193
+  fields:
+    character_custo: 461
+    armor_ref: 39
+- model: collector.armorcusto
+  pk: 194
+  fields:
+    character_custo: 451
+    armor_ref: 39
+- model: collector.armorcusto
+  pk: 195
+  fields:
+    character_custo: 497
+    armor_ref: 32
+- model: collector.armorcusto
+  pk: 196
+  fields:
+    character_custo: 505
+    armor_ref: 39
+- model: collector.armorcusto
+  pk: 197
+  fields:
+    character_custo: 467
+    armor_ref: 29
+- model: collector.armorcusto
+  pk: 198
+  fields:
+    character_custo: 487
+    armor_ref: 35
+- model: collector.armorcusto
+  pk: 199
+  fields:
+    character_custo: 446
+    armor_ref: 39
+- model: collector.armorcusto
+  pk: 200
+  fields:
+    character_custo: 506
+    armor_ref: 25
+- model: collector.armorcusto
+  pk: 201
+  fields:
+    character_custo: 456
+    armor_ref: 41
+- model: collector.armorcusto
+  pk: 202
+  fields:
+    character_custo: 476
+    armor_ref: 16
+- model: collector.armorcusto
+  pk: 203
+  fields:
+    character_custo: 471
+    armor_ref: 10
+- model: collector.armorcusto
+  pk: 204
+  fields:
+    character_custo: 486
+    armor_ref: 16
+- model: collector.armorcusto
+  pk: 205
+  fields:
+    character_custo: 480
+    armor_ref: 32
+- model: collector.armorcusto
+  pk: 206
+  fields:
+    character_custo: 504
+    armor_ref: 35
+- model: collector.armorcusto
+  pk: 207
+  fields:
+    character_custo: 502
+    armor_ref: 38
+- model: collector.armorcusto
+  pk: 208
+  fields:
+    character_custo: 473
+    armor_ref: 40
+- model: collector.armorcusto
+  pk: 209
+  fields:
+    character_custo: 479
+    armor_ref: 7
+- model: collector.armorcusto
+  pk: 210
+  fields:
+    character_custo: 475
+    armor_ref: 34
+- model: collector.armorcusto
+  pk: 211
+  fields:
+    character_custo: 484
+    armor_ref: 40
+- model: collector.armorcusto
+  pk: 212
+  fields:
+    character_custo: 507
+    armor_ref: 21
+- model: collector.armorcusto
+  pk: 213
+  fields:
+    character_custo: 482
+    armor_ref: 34
+- model: collector.armorcusto
+  pk: 214
+  fields:
+    character_custo: 455
+    armor_ref: 34
+- model: collector.armorcusto
+  pk: 215
+  fields:
+    character_custo: 490
+    armor_ref: 15
+- model: collector.armorcusto
+  pk: 216
+  fields:
+    character_custo: 496
+    armor_ref: 28
+- model: collector.armorcusto
+  pk: 217
+  fields:
+    character_custo: 472
+    armor_ref: 32
+- model: collector.armorcusto
+  pk: 218
+  fields:
+    character_custo: 478
+    armor_ref: 15
+- model: collector.armorcusto
+  pk: 219
+  fields:
+    character_custo: 503
+    armor_ref: 1
+- model: collector.armorcusto
+  pk: 220
+  fields:
+    character_custo: 508
+    armor_ref: 38
+- model: collector.armorcusto
+  pk: 221
+  fields:
+    character_custo: 495
+    armor_ref: 35
+- model: collector.armorcusto
+  pk: 222
+  fields:
+    character_custo: 511
+    armor_ref: 6
+- model: collector.armorcusto
+  pk: 223
+  fields:
+    character_custo: 499
+    armor_ref: 30
+- model: collector.armorcusto
+  pk: 224
+  fields:
+    character_custo: 500
+    armor_ref: 15
+- model: collector.armorcusto
+  pk: 225
+  fields:
+    character_custo: 501
+    armor_ref: 15
+- model: collector.armorcusto
+  pk: 226
+  fields:
+    character_custo: 458
+    armor_ref: 16
+- model: collector.armorcusto
+  pk: 227
+  fields:
+    character_custo: 488
+    armor_ref: 45
+- model: collector.armorcusto
+  pk: 228
+  fields:
+    character_custo: 468
+    armor_ref: 41
+- model: collector.armorcusto
+  pk: 229
+  fields:
+    character_custo: 491
+    armor_ref: 40
+- model: collector.armorcusto
+  pk: 230
+  fields:
+    character_custo: 469
+    armor_ref: 45
+- model: collector.armorcusto
+  pk: 231
+  fields:
+    character_custo: 477
+    armor_ref: 45
+- model: collector.armorcusto
+  pk: 232
+  fields:
+    character_custo: 457
+    armor_ref: 33
+- model: collector.armorcusto
+  pk: 233
+  fields:
+    character_custo: 483
+    armor_ref: 32
+- model: collector.armorcusto
+  pk: 234
+  fields:
+    character_custo: 485
+    armor_ref: 35
+- model: collector.armorcusto
+  pk: 235
+  fields:
+    character_custo: 481
+    armor_ref: 1
+- model: collector.armorcusto
+  pk: 236
+  fields:
+    character_custo: 512
+    armor_ref: 37
+- model: collector.armorcusto
+  pk: 237
+  fields:
+    character_custo: 516
+    armor_ref: 16
+- model: collector.armorcusto
+  pk: 238
+  fields:
+    character_custo: 519
+    armor_ref: 1
+- model: collector.armorcusto
+  pk: 239
+  fields:
+    character_custo: 494
+    armor_ref: 48
+- model: collector.armorcusto
+  pk: 240
+  fields:
+    character_custo: 524
+    armor_ref: 16
+- model: collector.armorcusto
+  pk: 241
+  fields:
+    character_custo: 533
+    armor_ref: 16
+- model: collector.armorcusto
+  pk: 242
+  fields:
+    character_custo: 529
+    armor_ref: 1
+- model: collector.armorcusto
+  pk: 243
+  fields:
+    character_custo: 546
+    armor_ref: 21
+- model: collector.armorcusto
+  pk: 244
+  fields:
+    character_custo: 547
+    armor_ref: 2
+- model: collector.armorcusto
+  pk: 245
+  fields:
+    character_custo: 547
+    armor_ref: 3
+- model: collector.armorcusto
+  pk: 246
+  fields:
+    character_custo: 18
+    armor_ref: 28

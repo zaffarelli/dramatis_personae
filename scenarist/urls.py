@@ -14,7 +14,7 @@ from scenarist.views.schemes import SchemeDeleteView, SchemeDetailView, SchemeUp
 from scenarist.views.cards import CardDeleteView, CardDetailView, CardUpdateView, add_card
 from scenarist.views.backlogs import BacklogDeleteView, BacklogDetailView, add_backlog, BacklogUpdateView
 from scenarist.views.pdfs import build_config_pdf
-from scenarist.views.quizz import quizz_reroll
+
 
 urlpatterns = [
     re_path('^epics/(?P<pk>\d+)/view/$', EpicDetailView.as_view(), name='epic-detail'),
@@ -62,7 +62,6 @@ urlpatterns = [
 
     re_path('^ajax/build_config_pdf/$', build_config_pdf, name='build_config_pdf'),
 
-    # re_path('^ajax/quizz/(?P<quizz_id>\d+)/question/(?P<question_num>\d+)/tag/(?P<tag>\w+)/reroll/$', quizz_reroll,
-    #         name='quizz_reroll'),
+
 
 ]

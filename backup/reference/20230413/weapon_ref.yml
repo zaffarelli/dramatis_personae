@@ -1,0 +1,2096 @@
+- model: collector.weaponref
+  pk: 1
+  fields:
+    reference: Knife
+    meta_type: Dirk
+    category: MELEE
+    weapon_accuracy: 0
+    conceilable: P
+    availability: E
+    damage_class: 1D6+1
+    caliber: n/a
+    fusion_cell: n/a
+    str_min: 1
+    rof: 0
+    clip: 0
+    tech_level: 4
+    rng: 0
+    rel: ST
+    cost: 2
+    description: ''
+    stats: Knife . MELEE . WA:0 . P . E . DC:1D6+1 . STR:1 . RNG:0 . ST . £2
+    origins: Empire
+    hidden: false
+- model: collector.weaponref
+  pk: 2
+  fields:
+    reference: Mitchau "Penumbra" Shotgun
+    meta_type: Slugger Shotgun
+    category: SHG
+    weapon_accuracy: -1
+    conceilable: L
+    availability: P
+    damage_class: 5D6
+    caliber: ''
+    fusion_cell: ''
+    str_min: 0
+    rof: 1
+    clip: 6
+    tech_level: 5
+    rng: 15
+    rel: ST
+    cost: 300
+    description: ''
+    stats: 'Mitchau "Penumbra" Shotgun . SHG . WA:-1 . L . P . DC:5D6 . Cal: . ROF:1
+      . Clip:6 . RNG:15 . ST . £300'
+    origins: House Hazat
+    hidden: false
+- model: collector.weaponref
+  pk: 3
+  fields:
+    reference: Imperial Rifle
+    meta_type: Slugger Rifle
+    category: RIF
+    weapon_accuracy: 0
+    conceilable: N
+    availability: E
+    damage_class: 6D6+2
+    caliber: 7.62mm
+    fusion_cell: ''
+    str_min: 0
+    rof: 20
+    clip: 21
+    tech_level: 5
+    rng: 400
+    rel: VR
+    cost: 250
+    description: About 200£
+    stats: Imperial Rifle . RIF . WA:0 . N . E . DC:6D6+2 . Cal:7.62mm . ROF:20 .
+      Clip:21 . RNG:400 . VR . £250
+    origins: Empire
+    hidden: false
+- model: collector.weaponref
+  pk: 4
+  fields:
+    reference: Avaneir Medium Blaster
+    meta_type: Medium Blaster
+    category: P
+    weapon_accuracy: 0
+    conceilable: J
+    availability: P
+    damage_class: 6D6
+    caliber: n/a
+    fusion_cell: 1296 trigs (FSC:6^6x36)
+    str_min: 0
+    rof: 1
+    clip: 6
+    tech_level: 7
+    rng: 37
+    rel: VR
+    cost: 960
+    description: ''
+    stats: Avaneir Medium Blaster . P . WA:0 . J . P . DC:6D6 . Cal:n/a . ROF:1 .
+      Clip:6 . RNG:37.5 . VR . £960
+    origins: House Li Halan
+    hidden: false
+- model: collector.weaponref
+  pk: 5
+  fields:
+    reference: De Aragonesque Rapier
+    meta_type: Rapier
+    category: MELEE
+    weapon_accuracy: 1
+    conceilable: L
+    availability: P
+    damage_class: 4D6
+    caliber: n/a
+    fusion_cell: n/a
+    str_min: 3
+    rof: 0
+    clip: 0
+    tech_level: 4
+    rng: 1
+    rel: VR
+    cost: 120
+    description: The high quality Rolas rapier. Forged on demand, with exclusive decoration
+      designed for the customer.
+    stats: De Aragonesque Rapier . MELEE . WA:1 . L . P . DC:4D6 . STR:3 . RNG:1 .
+      VR . £120
+    origins: House Hazat
+    hidden: false
+- model: collector.weaponref
+  pk: 6
+  fields:
+    reference: House Hawkwood 1638 UltraHeavy SMG
+    meta_type: Warfare Device
+    category: HVY
+    weapon_accuracy: -2
+    conceilable: N
+    availability: P
+    damage_class: 8D6
+    caliber: 16mm
+    fusion_cell: ''
+    str_min: 4
+    rof: 30
+    clip: 240
+    tech_level: 5
+    rng: 150
+    rel: VR
+    cost: 1190
+    description: ''
+    stats: House Hawkwood 1638 UltraHeavy SMG . HVY . WA:-2 . N . P . DC:8D6 . Cal:16mm
+      . ROF:30 . Clip:240 . RNG:150 . VR . £1190
+    origins: House Hawkwood
+    hidden: false
+- model: collector.weaponref
+  pk: 7
+  fields:
+    reference: Ukari Krax
+    meta_type: Dirk
+    category: MELEE
+    weapon_accuracy: 2
+    conceilable: J
+    availability: R
+    damage_class: 3D6+2
+    caliber: n/a
+    fusion_cell: n/a
+    str_min: 3
+    rof: 0
+    clip: 0
+    tech_level: 4
+    rng: 2
+    rel: VR
+    cost: 5000
+    description: WA is ignored for an ukari intiate to the Kraxi Quadanqar (The Kraxi
+      Dance). Price given is Black Market price. Do not deal or buy ukari gear on
+      black market.
+    stats: Ukari Krax . MELEE . WA:2 . J . R . DC:3D6+2 . STR:3 . RNG:2 . VR . £5000
+    origins: Kordeth
+    hidden: false
+- model: collector.weaponref
+  pk: 8
+  fields:
+    reference: Blue Moon Rifle (Seishen Rifle)
+    meta_type: Slugger Rifle
+    category: RIF
+    weapon_accuracy: 0
+    conceilable: N
+    availability: C
+    damage_class: 4D6+1
+    caliber: 12mm
+    fusion_cell: ''
+    str_min: 0
+    rof: 2
+    clip: 10
+    tech_level: 5
+    rng: 400
+    rel: UR
+    cost: 80
+    description: The typical rifle used by regular Blue Moon disciples.
+    stats: Blue Moon Rifle (Seishen Rifle) . RIF . WA:0 . N . C . DC:4D6+1 . Cal:12mm
+      . ROF:2 . Clip:10 . RNG:400 . UR . £80
+    origins: House Li Halan
+    hidden: false
+- model: collector.weaponref
+  pk: 9
+  fields:
+    reference: Mitchau "Conquest" Assault Rifle
+    meta_type: Slugger Rifle
+    category: RIF
+    weapon_accuracy: 1
+    conceilable: N
+    availability: P
+    damage_class: 6D6+2
+    caliber: 7.62mm
+    fusion_cell: ''
+    str_min: 0
+    rof: 20
+    clip: 41
+    tech_level: 5
+    rng: 400
+    rel: VR
+    cost: 1630
+    description: ''
+    stats: Mitchau "Conquest" Assault Rifle . RIF . WA:1 . N . P . DC:6D6+2 . Cal:7.62mm
+      . ROF:20 . Clip:41 . RNG:400 . VR . £1630
+    origins: House Hazat
+    hidden: false
+- model: collector.weaponref
+  pk: 10
+  fields:
+    reference: House Decados "Stanislas" SMG
+    meta_type: Warfare Device
+    category: SMG
+    weapon_accuracy: 0
+    conceilable: J
+    availability: P
+    damage_class: 4D6+1
+    caliber: '0.47'
+    fusion_cell: ''
+    str_min: 0
+    rof: 20
+    clip: 60
+    tech_level: 5
+    rng: 150
+    rel: VR
+    cost: 560
+    description: 'Builder: House Decados. Price: 400£.'
+    stats: House Decados "Stanislas" SMG . SMG . WA:0 . J . P . DC:4D6+1 . Cal:0.47
+      . ROF:20 . Clip:60 . RNG:150 . VR . £560
+    origins: House Decados
+    hidden: false
+- model: collector.weaponref
+  pk: 11
+  fields:
+    reference: House al-Malik "Diplomat" Palm Laser
+    meta_type: Light Laser
+    category: P
+    weapon_accuracy: 0
+    conceilable: P
+    availability: P
+    damage_class: 2D6
+    caliber: n/a
+    fusion_cell: 196 trigs (FSC:7^2x14)
+    str_min: 0
+    rof: 1
+    clip: 7
+    tech_level: 6
+    rng: 30
+    rel: ST
+    cost: 230
+    description: Laser pistol built by House al-Malik. A weapon designed mainly for
+      self-defense.
+    stats: House al-Malik "Diplomat" Palm Laser . P . WA:0 . P . P . DC:2D6 . Cal:n/a
+      . ROF:1 . Clip:7 . RNG:30 . ST . £230
+    origins: House Al-Malik
+    hidden: false
+- model: collector.weaponref
+  pk: 12
+  fields:
+    reference: Bachelor Rapier
+    meta_type: Rapier
+    category: MELEE
+    weapon_accuracy: 1
+    conceilable: L
+    availability: E
+    damage_class: 3D6
+    caliber: n/a
+    fusion_cell: n/a
+    str_min: 3
+    rof: 0
+    clip: 0
+    tech_level: 4
+    rng: 1
+    rel: ST
+    cost: 16
+    description: ''
+    stats: Bachelor Rapier . MELEE . WA:1 . L . E . DC:3D6 . STR:3 . RNG:1 . ST .
+      £16
+    origins: Empire
+    hidden: false
+- model: collector.weaponref
+  pk: 13
+  fields:
+    reference: Decados Crescent Dirk
+    meta_type: Dirk
+    category: MELEE
+    weapon_accuracy: 1
+    conceilable: J
+    availability: P
+    damage_class: 2D6+2
+    caliber: n/a
+    fusion_cell: n/a
+    str_min: 2
+    rof: 0
+    clip: 0
+    tech_level: 4
+    rng: 0
+    rel: ST
+    cost: 10
+    description: A really sharp blade easily conceilable.
+    stats: Decados Crescent Dirk . MELEE . WA:1 . J . P . DC:2D6+2 . STR:2 . RNG:0
+      . ST . £10
+    origins: House Decados
+    hidden: false
+- model: collector.weaponref
+  pk: 14
+  fields:
+    reference: Zaalen Stinger (Obun Stunner)
+    meta_type: Stunner
+    category: EX
+    weapon_accuracy: 2
+    conceilable: J
+    availability: R
+    damage_class: 3D6
+    caliber: FSC
+    fusion_cell: ''
+    str_min: 0
+    rof: 1
+    clip: 15
+    tech_level: 5
+    rng: 20
+    rel: ST
+    cost: 4200
+    description: Stun damage only
+    stats: Zaalen Stinger (Obun Stunner) . EX . WA:2 . J . R . DC:3D6 . Cal:FSC .
+      ROF:1 . Clip:15 . RNG:20 . ST . £4200
+    origins: Ur-Obun
+    hidden: false
+- model: collector.weaponref
+  pk: 15
+  fields:
+    reference: Battle Axe
+    meta_type: Axe
+    category: MELEE
+    weapon_accuracy: 0
+    conceilable: N
+    availability: C
+    damage_class: 5D6
+    caliber: n/a
+    fusion_cell: n/a
+    str_min: 4
+    rof: 0
+    clip: 0
+    tech_level: 4
+    rng: 0
+    rel: ST
+    cost: 5
+    description: ''
+    stats: Battle Axe . MELEE . WA:0 . N . C . DC:5D6 . STR:4 . RNG:0 . ST . £5
+    origins: Empire
+    hidden: false
+- model: collector.weaponref
+  pk: 16
+  fields:
+    reference: Avaneir "Guardian Angel" Light Revolver
+    meta_type: Light Slugger
+    category: P
+    weapon_accuracy: 0
+    conceilable: P
+    availability: C
+    damage_class: 1D6+2
+    caliber: '0.32'
+    fusion_cell: ''
+    str_min: 0
+    rof: 3
+    clip: 6
+    tech_level: 5
+    rng: 50
+    rel: ST
+    cost: 90
+    description: ''
+    stats: Avaneir "Guardian Angel" Light Revolver . P . WA:0 . P . C . DC:1D6+2 .
+      Cal:0.32 . ROF:3 . Clip:6 . RNG:50 . ST . £90
+    origins: House Li Halan
+    hidden: false
+- model: collector.weaponref
+  pk: 17
+  fields:
+    reference: Maüer "Hankerschief" C-13
+    meta_type: Light Slugger
+    category: P
+    weapon_accuracy: 1
+    conceilable: P
+    availability: R
+    damage_class: 1D6
+    caliber: 5mm
+    fusion_cell: ''
+    str_min: 0
+    rof: 2
+    clip: 8
+    tech_level: 5
+    rng: 50
+    rel: ST
+    cost: 210
+    description: ''
+    stats: Maüer "Hankerschief" C-13 . P . WA:1 . P . R . DC:1D6 . Cal:5mm . ROF:2
+      . Clip:8 . RNG:50 . ST . £210
+    origins: House Gesar
+    hidden: false
+- model: collector.weaponref
+  pk: 18
+  fields:
+    reference: Avaneir B209 "Dragonbreath"
+    meta_type: Warfare Device
+    category: SMG
+    weapon_accuracy: 0
+    conceilable: J
+    availability: E
+    damage_class: 3D6
+    caliber: 10mm
+    fusion_cell: ''
+    str_min: 0
+    rof: 20
+    clip: 40
+    tech_level: 5
+    rng: 150
+    rel: VR
+    cost: 410
+    description: 'Builder: Royale House Li Halan. Price: 350£'
+    stats: Avaneir B209 "Dragonbreath" . SMG . WA:0 . J . E . DC:3D6 . Cal:10mm .
+      ROF:20 . Clip:40 . RNG:150 . VR . £410
+    origins: House Li Halan
+    hidden: false
+- model: collector.weaponref
+  pk: 19
+  fields:
+    reference: Li Halan RK38
+    meta_type: Slugger Rifle
+    category: RIF
+    weapon_accuracy: -1
+    conceilable: N
+    availability: E
+    damage_class: 3D6
+    caliber: 10mm
+    fusion_cell: ''
+    str_min: 0
+    rof: 1
+    clip: 4
+    tech_level: 5
+    rng: 400
+    rel: UR
+    cost: 10
+    description: 'Builder: Royale House Li Halan. Price: 80£.'
+    stats: Li Halan RK38 . RIF . WA:-1 . N . E . DC:3D6 . Cal:10mm . ROF:1 . Clip:4
+      . RNG:400 . UR . £10
+    origins: House Li Halan
+    hidden: false
+- model: collector.weaponref
+  pk: 20
+  fields:
+    reference: Derringer
+    meta_type: Light Slugger
+    category: P
+    weapon_accuracy: -1
+    conceilable: P
+    availability: E
+    damage_class: 1D6
+    caliber: '0.2'
+    fusion_cell: ''
+    str_min: 0
+    rof: 2
+    clip: 4
+    tech_level: 5
+    rng: 50
+    rel: ST
+    cost: 40
+    description: ''
+    stats: Derringer . P . WA:-1 . P . E . DC:1D6 . Cal:0.2 . ROF:2 . Clip:4 . RNG:50
+      . ST . £40
+    origins: Empire
+    hidden: false
+- model: collector.weaponref
+  pk: 21
+  fields:
+    reference: Avaneir Blaster Pistol
+    meta_type: Light Blaster
+    category: P
+    weapon_accuracy: 0
+    conceilable: J
+    availability: P
+    damage_class: 3D6+1
+    caliber: n/a
+    fusion_cell: 760 trigs (FSC:10^4x19)
+    str_min: 0
+    rof: 1
+    clip: 10
+    tech_level: 7
+    rng: 30
+    rel: VR
+    cost: 730
+    description: 'Ammoes: 10/cell'
+    stats: Avaneir Blaster Pistol . P . WA:0 . J . P . DC:3D6+1 . Cal:n/a . ROF:1
+      . Clip:10 . RNG:30 . VR . £730
+    origins: House Li Halan
+    hidden: false
+- model: collector.weaponref
+  pk: 22
+  fields:
+    reference: Blaster Rifle
+    meta_type: Rifle Blaster
+    category: RIF
+    weapon_accuracy: 0
+    conceilable: N
+    availability: P
+    damage_class: 8D6
+    caliber: n/a
+    fusion_cell: 3072 trigs (FSC:8^8x48)
+    str_min: 0
+    rof: 1
+    clip: 8
+    tech_level: 7
+    rng: 90
+    rel: ST
+    cost: 1460
+    description: ''
+    stats: Blaster Rifle . RIF . WA:0 . N . P . DC:8D6 . Cal:n/a . ROF:1 . Clip:8
+      . RNG:90 . ST . £1460
+    origins: Empire
+    hidden: false
+- model: collector.weaponref
+  pk: 23
+  fields:
+    reference: Avaneir Blaster Shotgun
+    meta_type: Shotgun Blaster
+    category: SHG
+    weapon_accuracy: 2
+    conceilable: L
+    availability: R
+    damage_class: 8D6
+    caliber: n/a
+    fusion_cell: 3072 trigs (FSC:8^8x48)
+    str_min: 0
+    rof: 1
+    clip: 8
+    tech_level: 7
+    rng: 15
+    rel: VR
+    cost: 2240
+    description: ''
+    stats: Avaneir Blaster Shotgun . SHG . WA:2 . L . R . DC:8D6 . Cal:n/a . ROF:1
+      . Clip:8 . RNG:15.0 . VR . £2240
+    origins: House Li Halan
+    hidden: false
+- model: collector.weaponref
+  pk: 24
+  fields:
+    reference: Dreksel Laser Pistol
+    meta_type: Light Laser
+    category: P
+    weapon_accuracy: 1
+    conceilable: P
+    availability: P
+    damage_class: 3D6
+    caliber: n/a
+    fusion_cell: 900 trigs (FSC:15^3x20)
+    str_min: 0
+    rof: 1
+    clip: 15
+    tech_level: 6
+    rng: 30
+    rel: ST
+    cost: 420
+    description: ''
+    stats: Dreksel Laser Pistol . P . WA:1 . P . P . DC:3D6 . Cal:n/a . ROF:1 . Clip:15
+      . RNG:30 . ST . £420
+    origins: House Hazat
+    hidden: false
+- model: collector.weaponref
+  pk: 25
+  fields:
+    reference: Dirk
+    meta_type: Dirk
+    category: MELEE
+    weapon_accuracy: 0
+    conceilable: J
+    availability: E
+    damage_class: 2D6+1
+    caliber: n/a
+    fusion_cell: n/a
+    str_min: 2
+    rof: 0
+    clip: 0
+    tech_level: 4
+    rng: 0
+    rel: ST
+    cost: 4
+    description: ''
+    stats: Dirk . MELEE . WA:0 . J . E . DC:2D6+1 . STR:2 . RNG:0 . ST . £4
+    origins: Empire
+    hidden: false
+- model: collector.weaponref
+  pk: 26
+  fields:
+    reference: Two-Handed Sword
+    meta_type: Sword
+    category: MELEE
+    weapon_accuracy: 1
+    conceilable: N
+    availability: R
+    damage_class: 6D6
+    caliber: n/a
+    fusion_cell: n/a
+    str_min: 6
+    rof: 0
+    clip: 0
+    tech_level: 4
+    rng: 2
+    rel: ST
+    cost: 30
+    description: ''
+    stats: Two-Handed Sword . MELEE . WA:1 . N . R . DC:6D6 . STR:6 . RNG:2 . ST .
+      £30
+    origins: Empire
+    hidden: false
+- model: collector.weaponref
+  pk: 27
+  fields:
+    reference: Decados "Maiden Escort" Palm Blaster
+    meta_type: Light Blaster
+    category: P
+    weapon_accuracy: 2
+    conceilable: P
+    availability: R
+    damage_class: 3D6
+    caliber: n/a
+    fusion_cell: 270 trigs (FSC:5^3x18)
+    str_min: 0
+    rof: 1
+    clip: 5
+    tech_level: 7
+    rng: 30
+    rel: VR
+    cost: 630
+    description: A very small blaster pistol, true wonder of miniaturization. Developped
+      by House Decados for its under cover agents.
+    stats: Decados "Maiden Escort" Palm Blaster . P . WA:2 . P . R . DC:3D6 . Cal:n/a
+      . ROF:1 . Clip:5 . RNG:30 . VR . £630
+    origins: House Decados
+    hidden: false
+- model: collector.weaponref
+  pk: 28
+  fields:
+    reference: Harmonic Assault Rifle Mark IV
+    meta_type: Stunner
+    category: EX
+    weapon_accuracy: -1
+    conceilable: L
+    availability: R
+    damage_class: 10D6
+    caliber: FSC:8x30
+    fusion_cell: ''
+    str_min: 0
+    rof: 1
+    clip: 12
+    tech_level: 5
+    rng: 20
+    rel: VR
+    cost: 16000
+    description: Special Weapon
+    stats: Harmonic Assault Rifle Mark IV . EX . WA:-1 . L . R . DC:10D6 . Cal:FSC:8x30
+      . ROF:1 . Clip:12 . RNG:20 . VR . £16000
+    origins: Engineers
+    hidden: true
+- model: collector.weaponref
+  pk: 29
+  fields:
+    reference: Staff / Bo Stick
+    meta_type: Blunt weapon
+    category: MELEE
+    weapon_accuracy: 1
+    conceilable: N
+    availability: E
+    damage_class: 2D6+1
+    caliber: n/a
+    fusion_cell: n/a
+    str_min: 3
+    rof: 0
+    clip: 0
+    tech_level: 4
+    rng: 1
+    rel: ST
+    cost: 4
+    description: ''
+    stats: Staff / Bo Stick . MELEE . WA:1 . N . E . DC:2D6+1 . STR:3 . RNG:1 . ST
+      . £4
+    origins: Empire
+    hidden: false
+- model: collector.weaponref
+  pk: 30
+  fields:
+    reference: Scravers Medium Revolver
+    meta_type: Medium Slugger
+    category: P
+    weapon_accuracy: 0
+    conceilable: L
+    availability: C
+    damage_class: 3D6
+    caliber: '.40'
+    fusion_cell: ''
+    str_min: 0
+    rof: 3
+    clip: 6
+    tech_level: 5
+    rng: 77
+    rel: VR
+    cost: 320
+    description: ''
+    stats: Scravers Medium Revolver . P . WA:0 . L . C . DC:3D6 . Cal:.40 . ROF:3
+      . Clip:6 . RNG:77.5 . VR . £320
+    origins: Scravers
+    hidden: false
+- model: collector.weaponref
+  pk: 31
+  fields:
+    reference: Scravers Light Revolver
+    meta_type: Light Slugger
+    category: P
+    weapon_accuracy: 0
+    conceilable: J
+    availability: C
+    damage_class: 1D6+2
+    caliber: '.32'
+    fusion_cell: ''
+    str_min: 0
+    rof: 3
+    clip: 6
+    tech_level: 5
+    rng: 50
+    rel: ST
+    cost: 110
+    description: ''
+    stats: Scravers Light Revolver . P . WA:0 . J . C . DC:1D6+2 . Cal:.32 . ROF:3
+      . Clip:6 . RNG:50 . ST . £110
+    origins: Scravers
+    hidden: false
+- model: collector.weaponref
+  pk: 32
+  fields:
+    reference: '"Firecracker"Heavy Pistol'
+    meta_type: Heavy Slugger
+    category: P
+    weapon_accuracy: -1
+    conceilable: L
+    availability: C
+    damage_class: 4D6+1
+    caliber: '.47'
+    fusion_cell: ''
+    str_min: 4
+    rof: 6
+    clip: 16
+    tech_level: 5
+    rng: 90
+    rel: VR
+    cost: 420
+    description: Must be handed two handed if less than 4 BOD
+    stats: '"Firecracker"Heavy Pistol . P . WA:-1 . L . C . DC:4D6+1 . Cal:.47 . ROF:6
+      . Clip:16 . RNG:90.0 . VR . £420'
+    origins: Musters
+    hidden: false
+- model: collector.weaponref
+  pk: 33
+  fields:
+    reference: Scimitar
+    meta_type: Sword
+    category: MELEE
+    weapon_accuracy: 0
+    conceilable: N
+    availability: P
+    damage_class: 4D6+1
+    caliber: n/a
+    fusion_cell: n/a
+    str_min: 3
+    rof: 0
+    clip: 0
+    tech_level: 4
+    rng: 1
+    rel: ST
+    cost: 20
+    description: ''
+    stats: Scimitar . MELEE . WA:0 . N . P . DC:4D6+1 . STR:3 . RNG:1 . ST . £20
+    origins: Empire
+    hidden: false
+- model: collector.weaponref
+  pk: 34
+  fields:
+    reference: Banshee SMG
+    meta_type: Warfare Device
+    category: SMG
+    weapon_accuracy: 1
+    conceilable: L
+    availability: P
+    damage_class: 3D6
+    caliber: '.40'
+    fusion_cell: ''
+    str_min: 0
+    rof: 3
+    clip: 20
+    tech_level: 5
+    rng: 150
+    rel: ST
+    cost: 420
+    description: ''
+    stats: Banshee SMG . SMG . WA:1 . L . P . DC:3D6 . Cal:.40 . ROF:3 . Clip:20 .
+      RNG:150 . ST . £420
+    origins: House Hazat
+    hidden: false
+- model: collector.weaponref
+  pk: 35
+  fields:
+    reference: Westham Blade
+    meta_type: Rapier
+    category: MELEE
+    weapon_accuracy: 1
+    conceilable: L
+    availability: P
+    damage_class: 3D6+2
+    caliber: n/a
+    fusion_cell: n/a
+    str_min: 3
+    rof: 0
+    clip: 0
+    tech_level: 4
+    rng: 1
+    rel: VR
+    cost: 260
+    description: House Hawkwood signature rapier
+    stats: Westham Blade . MELEE . WA:1 . L . P . DC:3D6+2 . STR:3 . RNG:1 . VR .
+      £260
+    origins: House Hawkwood
+    hidden: false
+- model: collector.weaponref
+  pk: 36
+  fields:
+    reference: Segments of Andrealphus
+    meta_type: Blunt weapon
+    category: EX
+    weapon_accuracy: 3
+    conceilable: J
+    availability: R
+    damage_class: 4D6
+    caliber: ''
+    fusion_cell: ''
+    str_min: 4
+    rof: 0
+    clip: 0
+    tech_level: 5
+    rng: 3
+    rel: VR
+    cost: 160
+    description: This weird seven parts nunchaku is the signature weapon of the Aeon
+      Chapter. Each rod is magnetically linked to the other, and one needs to atone
+      with the full set to be able to use it. If not, it's only a rod of seven parts.
+      The black market value is low due to the lack of people able to use it as a
+      weapon.
+    stats: 'Segments of Andrealphus . EX . WA:3 . J . R . DC:4D6 . Cal: . ROF:0 .
+      Clip:0 . RNG:3 . VR . £160'
+    origins: Aeon Chapter of Artemis
+    hidden: false
+- model: collector.weaponref
+  pk: 37
+  fields:
+    reference: Rapier
+    meta_type: Rapier
+    category: MELEE
+    weapon_accuracy: 0
+    conceilable: L
+    availability: C
+    damage_class: 3D6
+    caliber: n/a
+    fusion_cell: n/a
+    str_min: 3
+    rof: 0
+    clip: 0
+    tech_level: 4
+    rng: 1
+    rel: UR
+    cost: 8
+    description: ''
+    stats: Rapier . MELEE . WA:0 . L . C . DC:3D6 . STR:3 . RNG:1 . UR . £8
+    origins: Empire Countryside
+    hidden: false
+- model: collector.weaponref
+  pk: 38
+  fields:
+    reference: Avaneir Rapier
+    meta_type: Rapier
+    category: MELEE
+    weapon_accuracy: -1
+    conceilable: L
+    availability: E
+    damage_class: 3D6
+    caliber: n/a
+    fusion_cell: n/a
+    str_min: 3
+    rof: 0
+    clip: 0
+    tech_level: 4
+    rng: 1
+    rel: ST
+    cost: 6
+    description: ''
+    stats: Avaneir Rapier . MELEE . WA:-1 . L . E . DC:3D6 . STR:3 . RNG:1 . ST .
+      £6
+    origins: House Li Halan
+    hidden: false
+- model: collector.weaponref
+  pk: 39
+  fields:
+    reference: Cold Forged Imperial Blade
+    meta_type: Rapier
+    category: MELEE
+    weapon_accuracy: 2
+    conceilable: L
+    availability: R
+    damage_class: 3D6+2
+    caliber: n/a
+    fusion_cell: n/a
+    str_min: 3
+    rof: 0
+    clip: 0
+    tech_level: 4
+    rng: 1
+    rel: VR
+    cost: 350
+    description: ''
+    stats: Cold Forged Imperial Blade . MELEE . WA:2 . L . R . DC:3D6+2 . STR:3 .
+      RNG:1 . VR . £350
+    origins: Byzantium Secundus
+    hidden: false
+- model: collector.weaponref
+  pk: 40
+  fields:
+    reference: Metier Patrol Ordinance
+    meta_type: Medium Slugger
+    category: P
+    weapon_accuracy: 0
+    conceilable: J
+    availability: C
+    damage_class: 3D6
+    caliber: '.40'
+    fusion_cell: ''
+    str_min: 0
+    rof: 0
+    clip: 0
+    tech_level: 5
+    rng: 0
+    rel: ST
+    cost: 190
+    description: ''
+    stats: Metier Patrol Ordinance . P . WA:0 . J . C . DC:3D6 . Cal:.40 . ROF:0 .
+      Clip:0 . RNG:0.0 . ST . £190
+    origins: Guild
+    hidden: false
+- model: collector.weaponref
+  pk: 41
+  fields:
+    reference: Al-Malik "Ambassador" Laser
+    meta_type: Medium Laser
+    category: P
+    weapon_accuracy: -1
+    conceilable: J
+    availability: R
+    damage_class: 3D6
+    caliber: n/a
+    fusion_cell: 240 trigs (FSC:4^3x20)
+    str_min: 0
+    rof: 1
+    clip: 4
+    tech_level: 6
+    rng: 37
+    rel: ST
+    cost: 280
+    description: ''
+    stats: Al-Malik "Ambassador" Laser . P . WA:-1 . J . R . DC:3D6 . Cal:n/a . ROF:1
+      . Clip:4 . RNG:37.5 . ST . £280
+    origins: House Al-Malik
+    hidden: false
+- model: collector.weaponref
+  pk: 42
+  fields:
+    reference: Van Gelder Cutlass
+    meta_type: Rapier
+    category: MELEE
+    weapon_accuracy: 2
+    conceilable: L
+    availability: R
+    damage_class: 3D6+1
+    caliber: n/a
+    fusion_cell: n/a
+    str_min: 3
+    rof: 0
+    clip: 0
+    tech_level: 4
+    rng: 1
+    rel: VR
+    cost: 300
+    description: ''
+    stats: Van Gelder Cutlass . MELEE . WA:2 . L . R . DC:3D6+1 . STR:3 . RNG:1 .
+      VR . £300
+    origins: House Van Gelder
+    hidden: false
+- model: collector.weaponref
+  pk: 43
+  fields:
+    reference: Tetrabladed Cutlass
+    meta_type: Vorox
+    category: MELEE
+    weapon_accuracy: 1
+    conceilable: N
+    availability: R
+    damage_class: 3D6
+    caliber: n/a
+    fusion_cell: n/a
+    str_min: 4
+    rof: 0
+    clip: 0
+    tech_level: 4
+    rng: 2
+    rel: VR
+    cost: 250
+    description: 4 parts weapon
+    stats: Tetrabladed Cutlass . MELEE . WA:1 . N . R . DC:3D6 . STR:4 . RNG:2 . VR
+      . £250
+    origins: Ungavorox
+    hidden: false
+- model: collector.weaponref
+  pk: 44
+  fields:
+    reference: Howling
+    meta_type: Supernatural
+    category: SP
+    weapon_accuracy: 4
+    conceilable: P
+    availability: E
+    damage_class: 5D6
+    caliber: ''
+    fusion_cell: ''
+    str_min: 0
+    rof: 1
+    clip: 0
+    tech_level: 5
+    rng: 50
+    rel: VR
+    cost: 0
+    description: ''
+    stats: 'Howling . SP . WA:4 . P . E . DC:5D6 . Cal: . ROF:1 . Clip:0 . RNG:50
+      . VR . £0'
+    origins: Sitra Ahra - The Red Screamer
+    hidden: true
+- model: collector.weaponref
+  pk: 45
+  fields:
+    reference: Severus Sting
+    meta_type: Rapier
+    category: MELEE
+    weapon_accuracy: 1
+    conceilable: L
+    availability: P
+    damage_class: 3D6+1
+    caliber: n/a
+    fusion_cell: n/a
+    str_min: 2
+    rof: 0
+    clip: 0
+    tech_level: 4
+    rng: 1
+    rel: ST
+    cost: 30
+    description: House Decados signature rapier
+    stats: Severus Sting . MELEE . WA:1 . L . P . DC:3D6+1 . STR:2 . RNG:1 . ST .
+      £30
+    origins: House Decados
+    hidden: false
+- model: collector.weaponref
+  pk: 46
+  fields:
+    reference: Paradize Rapier
+    meta_type: Rapier
+    category: MELEE
+    weapon_accuracy: 1
+    conceilable: L
+    availability: R
+    damage_class: 3D6+2
+    caliber: n/a
+    fusion_cell: n/a
+    str_min: 0
+    rof: 0
+    clip: 0
+    tech_level: 4
+    rng: 1
+    rel: ST
+    cost: 150
+    description: ''
+    stats: Paradize Rapier . MELEE . WA:1 . L . R . DC:3D6+2 . STR:0 . RNG:1 . ST
+      . £150
+    origins: House Justinian
+    hidden: false
+- model: collector.weaponref
+  pk: 47
+  fields:
+    reference: Mitchau Medium Revolver
+    meta_type: Medium Slugger
+    category: P
+    weapon_accuracy: 1
+    conceilable: L
+    availability: P
+    damage_class: 3D6
+    caliber: '.40'
+    fusion_cell: ''
+    str_min: 0
+    rof: 3
+    clip: 6
+    tech_level: 5
+    rng: 77
+    rel: ST
+    cost: 300
+    description: ''
+    stats: Mitchau Medium Revolver . P . WA:1 . L . P . DC:3D6 . Cal:.40 . ROF:3 .
+      Clip:6 . RNG:77.5 . ST . £300
+    origins: House Hazat
+    hidden: false
+- model: collector.weaponref
+  pk: 48
+  fields:
+    reference: Katana
+    meta_type: Sword
+    category: MELEE
+    weapon_accuracy: 1
+    conceilable: N
+    availability: P
+    damage_class: 5D6
+    caliber: n/a
+    fusion_cell: n/a
+    str_min: 4
+    rof: 0
+    clip: 0
+    tech_level: 4
+    rng: 1
+    rel: UR
+    cost: 50
+    description: ''
+    stats: Katana . MELEE . WA:1 . N . P . DC:5D6 . STR:4 . RNG:1 . UR . £50
+    origins: House Li Halan
+    hidden: false
+- model: collector.weaponref
+  pk: 49
+  fields:
+    reference: Ceramique 136
+    meta_type: Light Slugger
+    category: P
+    weapon_accuracy: 1
+    conceilable: J
+    availability: C
+    damage_class: 2D6
+    caliber: ''
+    fusion_cell: ''
+    str_min: 2
+    rof: 2
+    clip: 10
+    tech_level: 5
+    rng: 50
+    rel: VR
+    cost: 100
+    description: The light revolver from Rampart Ceramique mountains region.
+    stats: 'Ceramique 136 . P . WA:1 . J . C . DC:2D6 . Cal: . ROF:2 . Clip:10 . RNG:50
+      . VR . £100'
+    origins: House Li Halan / Rampart
+    hidden: false
+- model: collector.weaponref
+  pk: 50
+  fields:
+    reference: Jahnisak .454 UHP
+    meta_type: Heavy Slugger
+    category: P
+    weapon_accuracy: 4
+    conceilable: L
+    availability: C
+    damage_class: 4D6+2
+    caliber: '.454'
+    fusion_cell: ''
+    str_min: 3
+    rof: 3
+    clip: 15
+    tech_level: 5
+    rng: 75
+    rel: VR
+    cost: 1200
+    description: 'Only available with full options: LAA (Laser Assisted Aiming) or
+      WA -1, ABCS (Anti Backfire Counterweight System) (or Str Min goes to 5)'
+    stats: Jahnisak .454 UHP . P . WA:4 . L . C . DC:4D6+2 . Cal:.454 . ROF:3 . Clip:15
+      . RNG:75.0 . VR . £1200
+    origins: House Decados
+    hidden: false
+- model: collector.weaponref
+  pk: 51
+  fields:
+    reference: Escoral medium pistol
+    meta_type: Medium Slugger
+    category: P
+    weapon_accuracy: 1
+    conceilable: J
+    availability: R
+    damage_class: 3D6+1
+    caliber: '.40'
+    fusion_cell: ''
+    str_min: 3
+    rof: 0
+    clip: 9
+    tech_level: 5
+    rng: 38
+    rel: VR
+    cost: 1020
+    description: ''
+    stats: Escoral medium pistol . P . WA:1 . J . R . DC:3D6+1 . Cal:.40 . ROF:0 .
+      Clip:9 . RNG:38.75 . VR . £1020
+    origins: House Hazat
+    hidden: false
+- model: collector.weaponref
+  pk: 52
+  fields:
+    reference: Fimbella Sniper Rifle
+    meta_type: Slugger Rifle
+    category: RIF
+    weapon_accuracy: 4
+    conceilable: N
+    availability: R
+    damage_class: 6D6+2
+    caliber: 7.62mm
+    fusion_cell: ''
+    str_min: 0
+    rof: 3
+    clip: 10
+    tech_level: 6
+    rng: 800
+    rel: VR
+    cost: 1450
+    description: Sniper Rifle of the Verona Resistance.
+    stats: Fimbella Sniper Rifle . RIF . WA:4 . N . R . DC:6D6+2 . Cal:7.62mm . ROF:3
+      . Clip:10 . RNG:800 . VR . £1450
+    origins: House Masseri
+    hidden: false
+- model: collector.weaponref
+  pk: 53
+  fields:
+    reference: Fist
+    meta_type: Natural Weapon
+    category: SP
+    weapon_accuracy: 0
+    conceilable: P
+    availability: E
+    damage_class: 1D6
+    caliber: ''
+    fusion_cell: ''
+    str_min: 0
+    rof: 0
+    clip: 0
+    tech_level: 3
+    rng: 1
+    rel: ST
+    cost: 0
+    description: ''
+    stats: 'Fist . SP . WA:0 . P . E . DC:1D6 . Cal: . ROF:0 . Clip:0 . RNG:1 . ST
+      . £0'
+    origins: ''
+    hidden: false
+- model: collector.weaponref
+  pk: 54
+  fields:
+    reference: Al-Malik Stiletto
+    meta_type: Dirk
+    category: MELEE
+    weapon_accuracy: 1
+    conceilable: P
+    availability: P
+    damage_class: 2D6
+    caliber: n/a
+    fusion_cell: n/a
+    str_min: 1
+    rof: 0
+    clip: 0
+    tech_level: 4
+    rng: 1
+    rel: ST
+    cost: 10
+    description: A fine dagger of ceramsteel. It's said that a powerful blow with
+      this weapon can break bones.
+    stats: Al-Malik Stiletto . MELEE . WA:1 . P . P . DC:2D6 . STR:1 . RNG:1 . ST
+      . £10
+    origins: House Al-Malik
+    hidden: false
+- model: collector.weaponref
+  pk: 55
+  fields:
+    reference: Kick
+    meta_type: Natural Weapon
+    category: SP
+    weapon_accuracy: -1
+    conceilable: J
+    availability: C
+    damage_class: 1D6+1
+    caliber: ''
+    fusion_cell: ''
+    str_min: 0
+    rof: 0
+    clip: 0
+    tech_level: 5
+    rng: 0
+    rel: ST
+    cost: 0
+    description: ''
+    stats: 'Kick . SP . WA:-1 . J . C . DC:1D6+1 . Cal: . ROF:0 . Clip:0 . RNG:0 .
+      ST . £0'
+    origins: ''
+    hidden: false
+- model: collector.weaponref
+  pk: 56
+  fields:
+    reference: Energy Lance
+    meta_type: Energy weapon
+    category: EX
+    weapon_accuracy: 0
+    conceilable: J
+    availability: C
+    damage_class: 4D6
+    caliber: ''
+    fusion_cell: ''
+    str_min: 0
+    rof: 0
+    clip: 0
+    tech_level: 5
+    rng: 0
+    rel: ST
+    cost: 0
+    description: ''
+    stats: 'Energy Lance . EX . WA:0 . J . C . DC:4D6 . Cal: . ROF:0 . Clip:0 . RNG:0
+      . ST . £0'
+    origins: ''
+    hidden: false
+- model: collector.weaponref
+  pk: 57
+  fields:
+    reference: Musters XZ128
+    meta_type: Medium Blaster
+    category: P
+    weapon_accuracy: 0
+    conceilable: J
+    availability: C
+    damage_class: 6D6
+    caliber: n/a
+    fusion_cell: 1296 trigs (FSC:6^6x36)
+    str_min: 0
+    rof: 1
+    clip: 6
+    tech_level: 7
+    rng: 37
+    rel: ST
+    cost: 680
+    description: ''
+    stats: Musters XZ128 . P . WA:0 . J . C . DC:6D6 . Cal:n/a . ROF:1 . Clip:6 .
+      RNG:37.5 . ST . £680
+    origins: League
+    hidden: false
+- model: collector.weaponref
+  pk: 58
+  fields:
+    reference: ACP15 Assault Rifle
+    meta_type: Slugger Rifle
+    category: RIF
+    weapon_accuracy: 0
+    conceilable: J
+    availability: C
+    damage_class: 6D6+2
+    caliber: 7.62mm
+    fusion_cell: ''
+    str_min: 6
+    rof: 10
+    clip: 40
+    tech_level: 5
+    rng: 400
+    rel: ST
+    cost: 220
+    description: ''
+    stats: ACP15 Assault Rifle . RIF . WA:0 . J . C . DC:6D6+2 . Cal:7.62mm . ROF:10
+      . Clip:40 . RNG:400 . ST . £220
+    origins: Musters
+    hidden: false
+- model: collector.weaponref
+  pk: 59
+  fields:
+    reference: Dragonnar
+    meta_type: Rocket Launcher
+    category: HVY
+    weapon_accuracy: 0
+    conceilable: J
+    availability: C
+    damage_class: 8D6
+    caliber: ''
+    fusion_cell: ''
+    str_min: 0
+    rof: 0
+    clip: 0
+    tech_level: 5
+    rng: 0
+    rel: ST
+    cost: 0
+    description: ''
+    stats: 'Dragonnar . HVY . WA:0 . J . C . DC:8D6 . Cal: . ROF:0 . Clip:0 . RNG:0
+      . ST . £0'
+    origins: Musters
+    hidden: false
+- model: collector.weaponref
+  pk: 60
+  fields:
+    reference: Al-malik Light Blaster
+    meta_type: Light Blaster
+    category: P
+    weapon_accuracy: 3
+    conceilable: J
+    availability: C
+    damage_class: 3D6
+    caliber: n/a
+    fusion_cell: 432 trigs (FSC:8^3x18)
+    str_min: 0
+    rof: 1
+    clip: 8
+    tech_level: 7
+    rng: 30
+    rel: ST
+    cost: 460
+    description: ''
+    stats: Al-malik Light Blaster . P . WA:3 . J . C . DC:3D6 . Cal:n/a . ROF:1 .
+      Clip:8 . RNG:30 . ST . £460
+    origins: House Al-Malik
+    hidden: false
+- model: collector.weaponref
+  pk: 61
+  fields:
+    reference: Hawkwood Light Blaster
+    meta_type: Light Blaster
+    category: P
+    weapon_accuracy: 1
+    conceilable: J
+    availability: C
+    damage_class: 3D6
+    caliber: n/a
+    fusion_cell: 432 trigs (FSC:8^3x18)
+    str_min: 0
+    rof: 1
+    clip: 8
+    tech_level: 7
+    rng: 30
+    rel: ST
+    cost: 440
+    description: ''
+    stats: Hawkwood Light Blaster . P . WA:1 . J . C . DC:3D6 . Cal:n/a . ROF:1 .
+      Clip:8 . RNG:30 . ST . £440
+    origins: House Hawkwood
+    hidden: false
+- model: collector.weaponref
+  pk: 62
+  fields:
+    reference: Dreskel Light Blaster
+    meta_type: Light Blaster
+    category: P
+    weapon_accuracy: -1
+    conceilable: J
+    availability: C
+    damage_class: 3D6+2
+    caliber: n/a
+    fusion_cell: 1000 trigs (FSC:10^5x20)
+    str_min: 0
+    rof: 1
+    clip: 10
+    tech_level: 7
+    rng: 30
+    rel: ST
+    cost: 570
+    description: ''
+    stats: Dreskel Light Blaster . P . WA:-1 . J . C . DC:3D6+2 . Cal:n/a . ROF:1
+      . Clip:10 . RNG:30 . ST . £570
+    origins: House Hazat
+    hidden: false
+- model: collector.weaponref
+  pk: 63
+  fields:
+    reference: Tarskin B28
+    meta_type: Medium Blaster
+    category: P
+    weapon_accuracy: 1
+    conceilable: J
+    availability: R
+    damage_class: 4D6
+    caliber: n/a
+    fusion_cell: 960 trigs (FSC:10^4x24)
+    str_min: 0
+    rof: 1
+    clip: 10
+    tech_level: 7
+    rng: 37
+    rel: VR
+    cost: 980
+    description: ''
+    stats: Tarskin B28 . P . WA:1 . J . R . DC:4D6 . Cal:n/a . ROF:1 . Clip:10 . RNG:37.5
+      . VR . £980
+    origins: League
+    hidden: false
+- model: collector.weaponref
+  pk: 64
+  fields:
+    reference: Tarskin B30
+    meta_type: Heavy Blaster
+    category: P
+    weapon_accuracy: 0
+    conceilable: J
+    availability: C
+    damage_class: 5D6+2
+    caliber: n/a
+    fusion_cell: 2240 trigs (FSC:10^7x32)
+    str_min: 0
+    rof: 1
+    clip: 10
+    tech_level: 7
+    rng: 45
+    rel: ST
+    cost: 970
+    description: ''
+    stats: Tarskin B30 . P . WA:0 . J . C . DC:5D6+2 . Cal:n/a . ROF:1 . Clip:10 .
+      RNG:45.0 . ST . £970
+    origins: League
+    hidden: false
+- model: collector.weaponref
+  pk: 65
+  fields:
+    reference: Tarskin C34
+    meta_type: Heavy Blaster
+    category: P
+    weapon_accuracy: 2
+    conceilable: J
+    availability: R
+    damage_class: 7D6
+    caliber: n/a
+    fusion_cell: 2940 trigs (FSC:10^7x42)
+    str_min: 3
+    rof: 1
+    clip: 10
+    tech_level: 7
+    rng: 45
+    rel: VR
+    cost: 2170
+    description: ''
+    stats: Tarskin C34 . P . WA:2 . J . R . DC:7D6 . Cal:n/a . ROF:1 . Clip:10 . RNG:45.0
+      . VR . £2170
+    origins: League
+    hidden: false
+- model: collector.weaponref
+  pk: 66
+  fields:
+    reference: Goruzen B27
+    meta_type: Medium Blaster
+    category: P
+    weapon_accuracy: -1
+    conceilable: J
+    availability: P
+    damage_class: 3D6
+    caliber: n/a
+    fusion_cell: 432 trigs (FSC:8^3x18)
+    str_min: 0
+    rof: 1
+    clip: 8
+    tech_level: 7
+    rng: 37
+    rel: ST
+    cost: 490
+    description: ''
+    stats: Goruzen B27 . P . WA:-1 . J . P . DC:3D6 . Cal:n/a . ROF:1 . Clip:8 . RNG:37.5
+      . ST . £490
+    origins: House Li Halan
+    hidden: false
+- model: collector.weaponref
+  pk: 67
+  fields:
+    reference: Hawkwood Defender
+    meta_type: Light Laser
+    category: P
+    weapon_accuracy: 2
+    conceilable: P
+    availability: C
+    damage_class: 2D6+2
+    caliber: n/a
+    fusion_cell: 384 trigs (FSC:6^4x16)
+    str_min: 1
+    rof: 1
+    clip: 6
+    tech_level: 6
+    rng: 30
+    rel: VR
+    cost: 300
+    description: ''
+    stats: Hawkwood Defender . P . WA:2 . P . C . DC:2D6+2 . Cal:n/a . ROF:1 . Clip:6
+      . RNG:30 . VR . £300
+    origins: House Hawkwood
+    hidden: false
+- model: collector.weaponref
+  pk: 68
+  fields:
+    reference: Petrof D15 "Cadiz Coat"
+    meta_type: Light Blaster
+    category: P
+    weapon_accuracy: -2
+    conceilable: P
+    availability: R
+    damage_class: 3D6
+    caliber: n/a
+    fusion_cell: 216 trigs (FSC:4^3x18)
+    str_min: 2
+    rof: 1
+    clip: 4
+    tech_level: 7
+    rng: 30
+    rel: UR
+    cost: 420
+    description: ''
+    stats: Petrof D15 "Cadiz Coat" . P . WA:-2 . P . R . DC:3D6 . Cal:n/a . ROF:1
+      . Clip:4 . RNG:30 . UR . £420
+    origins: House Decados
+    hidden: false
+- model: collector.weaponref
+  pk: 69
+  fields:
+    reference: Dreskel "Salude" DSK10
+    meta_type: Rifle Blaster
+    category: RIF
+    weapon_accuracy: -1
+    conceilable: L
+    availability: C
+    damage_class: 7D6+2
+    caliber: n/a
+    fusion_cell: 4752 trigs (FSC:12^9x44)
+    str_min: 3
+    rof: 1
+    clip: 12
+    tech_level: 7
+    rng: 90
+    rel: ST
+    cost: 1580
+    description: ''
+    stats: Dreskel "Salude" DSK10 . RIF . WA:-1 . L . C . DC:7D6+2 . Cal:n/a . ROF:1
+      . Clip:12 . RNG:90 . ST . £1580
+    origins: House Hazat
+    hidden: false
+- model: collector.weaponref
+  pk: 70
+  fields:
+    reference: Antonius LR5 "Light of Palamedes"
+    meta_type: Rifle Laser
+    category: RIF
+    weapon_accuracy: -2
+    conceilable: L
+    availability: C
+    damage_class: 4D6
+    caliber: n/a
+    fusion_cell: 1248 trigs (FSC:12^4x26)
+    str_min: 3
+    rof: 1
+    clip: 12
+    tech_level: 6
+    rng: 90
+    rel: VR
+    cost: 430
+    description: ''
+    stats: Antonius LR5 "Light of Palamedes" . RIF . WA:-2 . L . C . DC:4D6 . Cal:n/a
+      . ROF:1 . Clip:12 . RNG:90 . VR . £430
+    origins: Church
+    hidden: false
+- model: collector.weaponref
+  pk: 71
+  fields:
+    reference: Goric 7
+    meta_type: Light Laser
+    category: P
+    weapon_accuracy: 0
+    conceilable: P
+    availability: E
+    damage_class: 2D6
+    caliber: n/a
+    fusion_cell: 168 trigs (FSC:6^2x14)
+    str_min: 0
+    rof: 1
+    clip: 6
+    tech_level: 6
+    rng: 30
+    rel: ST
+    cost: 170
+    description: ''
+    stats: Goric 7 . P . WA:0 . P . E . DC:2D6 . Cal:n/a . ROF:1 . Clip:6 . RNG:30
+      . ST . £170
+    origins: League
+    hidden: false
+- model: collector.weaponref
+  pk: 72
+  fields:
+    reference: Goric 8
+    meta_type: Light Laser
+    category: P
+    weapon_accuracy: -1
+    conceilable: P
+    availability: C
+    damage_class: 2D6
+    caliber: n/a
+    fusion_cell: 224 trigs (FSC:8^2x14)
+    str_min: 0
+    rof: 1
+    clip: 8
+    tech_level: 6
+    rng: 30
+    rel: ST
+    cost: 200
+    description: ''
+    stats: Goric 8 . P . WA:-1 . P . C . DC:2D6 . Cal:n/a . ROF:1 . Clip:8 . RNG:30
+      . ST . £200
+    origins: League
+    hidden: false
+- model: collector.weaponref
+  pk: 73
+  fields:
+    reference: Al-Malik 958 "Space Ops"
+    meta_type: Light Laser
+    category: P
+    weapon_accuracy: 2
+    conceilable: J
+    availability: C
+    damage_class: 2D6+1
+    caliber: n/a
+    fusion_cell: 360 trigs (FSC:8^3x15)
+    str_min: 0
+    rof: 1
+    clip: 8
+    tech_level: 6
+    rng: 30
+    rel: ST
+    cost: 240
+    description: ''
+    stats: Al-Malik 958 "Space Ops" . P . WA:2 . J . C . DC:2D6+1 . Cal:n/a . ROF:1
+      . Clip:8 . RNG:30 . ST . £240
+    origins: House Al-Malik
+    hidden: false
+- model: collector.weaponref
+  pk: 74
+  fields:
+    reference: 'POE #4'
+    meta_type: Light Laser
+    category: P
+    weapon_accuracy: 2
+    conceilable: P
+    availability: P
+    damage_class: 2D6+1
+    caliber: n/a
+    fusion_cell: 450 trigs (FSC:10^3x15)
+    str_min: 1
+    rof: 1
+    clip: 10
+    tech_level: 6
+    rng: 30
+    rel: ST
+    cost: 320
+    description: ''
+    stats: 'POE #4 . P . WA:2 . P . P . DC:2D6+1 . Cal:n/a . ROF:1 . Clip:10 . RNG:30
+      . ST . £320'
+    origins: League
+    hidden: false
+- model: collector.weaponref
+  pk: 75
+  fields:
+    reference: Desert Dry Arquebuse
+    meta_type: Rifle Laser
+    category: RIF
+    weapon_accuracy: -2
+    conceilable: N
+    availability: R
+    damage_class: 5D6+2
+    caliber: n/a
+    fusion_cell: 3808 trigs (FSC:16^7x34)
+    str_min: 0
+    rof: 1
+    clip: 16
+    tech_level: 6
+    rng: 90
+    rel: UR
+    cost: 920
+    description: ''
+    stats: Desert Dry Arquebuse . RIF . WA:-2 . N . R . DC:5D6+2 . Cal:n/a . ROF:1
+      . Clip:16 . RNG:90 . UR . £920
+    origins: Musters
+    hidden: false
+- model: collector.weaponref
+  pk: 76
+  fields:
+    reference: Dreskel Sniper Blaster
+    meta_type: Rifle Blaster
+    category: RIF
+    weapon_accuracy: 2
+    conceilable: N
+    availability: R
+    damage_class: 9D6
+    caliber: n/a
+    fusion_cell: 7776 trigs (FSC:16^9x54)
+    str_min: 3
+    rof: 1
+    clip: 16
+    tech_level: 7
+    rng: 90
+    rel: VR
+    cost: 4950
+    description: ''
+    stats: Dreskel Sniper Blaster . RIF . WA:2 . N . R . DC:9D6 . Cal:n/a . ROF:1
+      . Clip:16 . RNG:90 . VR . £4950
+    origins: House Hazat
+    hidden: false
+- model: collector.weaponref
+  pk: 77
+  fields:
+    reference: Dreskel Grenade Launcher
+    meta_type: Warfare Device
+    category: HVY
+    weapon_accuracy: -2
+    conceilable: N
+    availability: C
+    damage_class: 6D6
+    caliber: n/a
+    fusion_cell: ''
+    str_min: 3
+    rof: 1
+    clip: 6
+    tech_level: 5
+    rng: 20
+    rel: ST
+    cost: 850
+    description: 6D6 is the basic grenade
+    stats: Dreskel Grenade Launcher . HVY . WA:-2 . N . C . DC:6D6 . Cal:n/a . ROF:1
+      . Clip:6 . RNG:20 . ST . £850
+    origins: House Hazat
+    hidden: false
+- model: collector.weaponref
+  pk: 78
+  fields:
+    reference: Dies Irae Gatlling Gun
+    meta_type: Warfare Device
+    category: HVY
+    weapon_accuracy: -4
+    conceilable: N
+    availability: R
+    damage_class: 10D6+2
+    caliber: 20mm
+    fusion_cell: ''
+    str_min: 5
+    rof: 25
+    clip: 250
+    tech_level: 5
+    rng: 300
+    rel: VR
+    cost: 26110
+    description: Mounted/tripod 20mm gatlling gun. If veterans remember one thing
+      from the Stigmata campaigns, it sure is the thundering sound of Alexius forces
+      Dies Irae guns firing on Symbiots' hordes.
+    stats: Dies Irae Gatlling Gun . HVY . WA:-4 . N . R . DC:10D6+2 . Cal:20mm . ROF:25
+      . Clip:250 . RNG:300 . VR . £26110
+    origins: House Hawkwood
+    hidden: false
+- model: collector.weaponref
+  pk: 79
+  fields:
+    reference: Azureas Blade
+    meta_type: Rapier
+    category: MELEE
+    weapon_accuracy: 1
+    conceilable: L
+    availability: R
+    damage_class: 3D6+2
+    caliber: n/a
+    fusion_cell: n/a
+    str_min: 2
+    rof: 0
+    clip: 0
+    tech_level: 4
+    rng: 1
+    rel: VR
+    cost: 300
+    description: ''
+    stats: Azureas Blade . MELEE . WA:1 . L . R . DC:3D6+2 . STR:2 . RNG:1 . VR .
+      £300
+    origins: House Hazat
+    hidden: false
+- model: collector.weaponref
+  pk: 80
+  fields:
+    reference: Cadavus Rapier
+    meta_type: Rapier
+    category: MELEE
+    weapon_accuracy: -1
+    conceilable: L
+    availability: P
+    damage_class: 3D6+2
+    caliber: n/a
+    fusion_cell: n/a
+    str_min: 0
+    rof: 0
+    clip: 0
+    tech_level: 4
+    rng: 0
+    rel: ST
+    cost: 40
+    description: ''
+    stats: Cadavus Rapier . MELEE . WA:-1 . L . P . DC:3D6+2 . STR:0 . RNG:0 . ST
+      . £40
+    origins: House Decados
+    hidden: false
+- model: collector.weaponref
+  pk: 81
+  fields:
+    reference: Bourgeoise
+    meta_type: Rapier
+    category: MELEE
+    weapon_accuracy: -1
+    conceilable: L
+    availability: E
+    damage_class: 2D6+2
+    caliber: n/a
+    fusion_cell: n/a
+    str_min: 3
+    rof: 0
+    clip: 0
+    tech_level: 4
+    rng: 0
+    rel: ST
+    cost: 4
+    description: A common rapier on Rampart, la Bourgeoise is an broad bladed weapon,
+      poorly balanced, heavy decorated but affordable that most freemen can buy.
+    stats: Bourgeoise . MELEE . WA:-1 . L . E . DC:2D6+2 . STR:3 . RNG:0 . ST . £4
+    origins: House Li Halan
+    hidden: false
+- model: collector.weaponref
+  pk: 82
+  fields:
+    reference: Istakhr Acoustic Shotgun
+    meta_type: Shotgun Blaster
+    category: SHG
+    weapon_accuracy: -2
+    conceilable: N
+    availability: R
+    damage_class: 10D6
+    caliber: n/a
+    fusion_cell: 4800 trigs (FSC:8^10x60)
+    str_min: 4
+    rof: 1
+    clip: 8
+    tech_level: 7
+    rng: 15
+    rel: ST
+    cost: 2030
+    description: "The weapon fire arc is 90°. \r\nIn the front 30° arc, damage is\
+      \ full. \r\n1/4 of the damage is applied on the rest of the fire arc.\r\nProscribed\
+      \ by the Church outside Al-Malik Fiefs."
+    stats: Istakhr Acoustic Shotgun . SHG . WA:-2 . N . R . DC:10D6 . Cal:n/a . ROF:1
+      . Clip:8 . RNG:15.0 . ST . £2030
+    origins: House Al-Malik
+    hidden: false
+- model: collector.weaponref
+  pk: 83
+  fields:
+    reference: Marid Regular
+    meta_type: Medium Blaster
+    category: P
+    weapon_accuracy: 2
+    conceilable: L
+    availability: C
+    damage_class: 5D6
+    caliber: n/a
+    fusion_cell: 1950 trigs (FSC:13^5x30)
+    str_min: 0
+    rof: 1
+    clip: 13
+    tech_level: 7
+    rng: 37
+    rel: ST
+    cost: 1000
+    description: ''
+    stats: Marid Regular . P . WA:2 . L . C . DC:5D6 . Cal:n/a . ROF:1 . Clip:13 .
+      RNG:37.5 . ST . £1000
+    origins: House Al-Malik
+    hidden: false
+- model: collector.weaponref
+  pk: 84
+  fields:
+    reference: Saharansafar Assault Rifle
+    meta_type: Rifle Blaster
+    category: RIF
+    weapon_accuracy: 2
+    conceilable: N
+    availability: C
+    damage_class: 7D6
+    caliber: n/a
+    fusion_cell: 3528 trigs (FSC:12^7x42)
+    str_min: 2
+    rof: 1
+    clip: 12
+    tech_level: 7
+    rng: 90
+    rel: ST
+    cost: 1570
+    description: +2 weapon accuracy when laser aim tracker is on.
+    stats: Saharansafar Assault Rifle . RIF . WA:2 . N . C . DC:7D6 . Cal:n/a . ROF:1
+      . Clip:12 . RNG:90 . ST . £1570
+    origins: House Al-Malik
+    hidden: false
+- model: collector.weaponref
+  pk: 85
+  fields:
+    reference: Latak Pulse Gun
+    meta_type: Slugger Rifle
+    category: RIF
+    weapon_accuracy: 2
+    conceilable: N
+    availability: R
+    damage_class: 5D6
+    caliber: 5.56mm
+    fusion_cell: ''
+    str_min: 2
+    rof: 3
+    clip: 15
+    tech_level: 6
+    rng: 400
+    rel: VR
+    cost: 0
+    description: ''
+    stats: Latak Pulse Gun . RIF . WA:2 . N . R . DC:5D6 . Cal:5.56mm . ROF:3 . Clip:15
+      . RNG:400 . VR . £0
+    origins: Empire
+    hidden: false
+- model: collector.weaponref
+  pk: 86
+  fields:
+    reference: Mutasih Anti-Riot Rifle
+    meta_type: Slugger Rifle
+    category: RIF
+    weapon_accuracy: 0
+    conceilable: N
+    availability: C
+    damage_class: 5D6
+    caliber: 5.56mm
+    fusion_cell: ''
+    str_min: 1
+    rof: 3
+    clip: 24
+    tech_level: 5
+    rng: 400
+    rel: UR
+    cost: 160
+    description: ''
+    stats: Mutasih Anti-Riot Rifle . RIF . WA:0 . N . C . DC:5D6 . Cal:5.56mm . ROF:3
+      . Clip:24 . RNG:400 . UR . £160
+    origins: House Al-Malik
+    hidden: false
+- model: collector.weaponref
+  pk: 87
+  fields:
+    reference: Rasputin X12
+    meta_type: Medium Blaster
+    category: P
+    weapon_accuracy: 4
+    conceilable: J
+    availability: R
+    damage_class: 4D6
+    caliber: n/a
+    fusion_cell: 1152 trigs (FSC:12^4x24)
+    str_min: 2
+    rof: 1
+    clip: 12
+    tech_level: 7
+    rng: 37
+    rel: VR
+    cost: 1250
+    description: The medium blaster of the Decados upper class. Precise. Reliable.
+    stats: Rasputin X12 . P . WA:4 . J . R . DC:4D6 . Cal:n/a . ROF:1 . Clip:12 .
+      RNG:37.5 . VR . £1250
+    origins: House Decados
+    hidden: false

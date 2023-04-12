@@ -8,7 +8,7 @@ import re
 import string
 import json
 from django.utils import timezone
-from django.contrib.postgres.fields import ArrayField, JSONField
+from django.contrib.postgres.fields import ArrayField
 
 CARD_TYPES = (
     ('UN', 'Uncategorized'),
@@ -37,16 +37,7 @@ class StoryModel(models.Model):
     place = models.CharField(max_length=128, default='', blank=True)
     gamemaster = models.CharField(default='zaffarelli@gmail.com', max_length=128, blank=True)
     visible = models.BooleanField(default=True)
-    battle_scene = models.BooleanField(default=False)
-    chase_scene = models.BooleanField(default=False)
-    action_scene = models.BooleanField(default=False)
-    technical_scene = models.BooleanField(default=False)
-    spiritual_scene = models.BooleanField(default=False)
-    political_scene = models.BooleanField(default=False)
-    roleplay_scene = models.BooleanField(default=False)
-    business_scene = models.BooleanField(default=False)
-    mystery_scene = models.BooleanField(default=False)
-    downtime_scene = models.BooleanField(default=False)
+
     to_PDF = models.BooleanField(default=True)
     temporary = models.BooleanField(default=True)
     published = models.BooleanField(default=False)
@@ -57,7 +48,7 @@ class StoryModel(models.Model):
     card_type = models.CharField(max_length=2, default='UN', choices=CARD_TYPES, blank=True)
     archived = models.BooleanField(default=False)
     is_ongoing = models.BooleanField(default=False)
-    dramatis_personae = ArrayField(models.CharField(max_length=128), blank=True, null=True)
+
     # dp = models.JSONField(blank=True, null=True)
 
     def __str__(self):

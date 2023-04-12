@@ -7,14 +7,15 @@ from django.db import models
 from django.contrib import admin
 from django.urls import reverse
 from scenarist.models.story_models import StoryModel
-
+from django.contrib.postgres.fields import ArrayField
 
 class Act(StoryModel):
     class Meta:
-        ordering = ['chapter','name']
+        ordering = ['chapter', 'name']
+
     from scenarist.models.dramas import Drama
     drama = models.ForeignKey(Drama, null=True, on_delete=models.CASCADE)
-    # resolution = models.TextField(default='', max_length=2560,blank=True)
+    dramatis_personae = ArrayField(models.CharField(max_length=128), blank=True, null=True)
 
     @property
     def challenge(self):
@@ -27,7 +28,7 @@ class Act(StoryModel):
 
     @property
     def full_chapter(self):
-        return self.drama.full_chapter+"."+self.chapter
+        return self.drama.full_chapter + "." + self.chapter
 
     def get_casting(self):
         """ Bring all avatars rids from all relevant text fields"""
@@ -46,7 +47,6 @@ class Act(StoryModel):
     @property
     def get_full_id(self):
         return f'{self.drama.get_full_id}:{self.chapter:02}'
-
 
     def set_pdf(self, value=True):
         self.to_PDF = value

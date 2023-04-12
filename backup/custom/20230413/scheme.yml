@@ -1,0 +1,52 @@
+- model: scenarist.scheme
+  pk: 1
+  fields:
+    name: Merchants of Hope
+    chapter: '3'
+    date_offset: 0
+    dt: 2022-08-22 09:51:50+00:00
+    sdt: 2023-01-16 03:13:33.441177+00:00
+    place: Byzantium Secundus
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: true
+    full_id: ''
+    description: "=Welcome to the Capital=\r\nWhen arriving to the Byzantium Secundus\
+      \ system, the PCs will have to deal with the Merchants of Hope. That will bring\
+      \ some taste of the mega system that the capital has become, with a great deal\
+      \ of parallel economy.\r\n\r\nµThe Teamµ\r\nIf they are cool, go on with a team\
+      \ of amateurs easily spotted by a PC team. If they feel overconfident, do not\
+      \ hesitate to let Jetty Colonna Step in..."
+    resolution: ''
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    adventure: null
+    backlogs:
+    - 2
+- model: scenarist.scheme
+  pk: 2
+  fields:
+    name: ''
+    chapter: '0'
+    date_offset: 0
+    dt: 2022-08-22 19:15:24.495961+00:00
+    sdt: 2023-01-16 03:13:33.441177+00:00
+    place: ''
+    gamemaster: zaffarelli@gmail.com
+    visible: true
+    to_PDF: true
+    temporary: true
+    published: true
+    full_id: ''
+    description: ''
+    resolution: ''
+    rewards: ''
+    card_type: UN
+    archived: false
+    is_ongoing: false
+    adventure: null
+    backlogs: []

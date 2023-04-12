@@ -1,0 +1,54 @@
+- model: collector.cyberware
+  pk: 1
+  fields:
+    character: 244
+    cyberware_ref: 4
+    replacement_for: Right Arm
+- model: collector.cyberware
+  pk: 2
+  fields:
+    character: 244
+    cyberware_ref: 4
+    replacement_for: Left Arm
+- model: collector.cyberware
+  pk: 3
+  fields:
+    character: 18
+    cyberware_ref: 3
+    replacement_for: Right Eye
+- model: collector.cyberware
+  pk: 4
+  fields:
+    character: 18
+    cyberware_ref: 2
+    replacement_for: Right Arm
+- model: collector.cyberware
+  pk: 5
+  fields:
+    character: 19
+    cyberware_ref: 5
+    replacement_for: Add on
+- model: collector.cyberware
+  pk: 6
+  fields:
+    character: 19
+    cyberware_ref: 6
+    replacement_for: Add on
+- model: collector.cyberware
+  pk: 7
+  fields:
+    character: 519
+    cyberware_ref: 10
+    replacement_for: Right Arm
+- model: collector.cyberware
+  pk: 8
+  fields:
+    character: 565
+    cyberware_ref: 11
+    replacement_for: Right Arm
+- model: collector.cyberware
+  pk: 9
+  fields:
+    character: 565
+    cyberware_ref: 12
+    replacement_for: Add on

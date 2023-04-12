@@ -1,0 +1,229 @@
+- model: auth.user
+  pk: 1
+  fields:
+    password: pbkdf2_sha256$390000$9X3kiAYx39a8nFrI2m1PGL$vtOxT64vibuBdPUUFAfY0pvCR9GWROI8F2+rXGV5Klg=
+    last_login: 2023-04-12 22:31:14.321097+00:00
+    is_superuser: true
+    username: zaffarelli
+    first_name: ''
+    last_name: ''
+    email: zaffarelli@gmail.com
+    is_staff: true
+    is_active: true
+    date_joined: 2020-04-15 12:24:36.524512+00:00
+    groups: []
+    user_permissions: []
+- model: auth.user
+  pk: 2
+  fields:
+    password: pbkdf2_sha256$150000$J4fiPdDQdEnR$uApA8nhh8xSgU8stS7dTNmu9th5S+sbiRU6ygw9pKUo=
+    last_login: 2021-12-26 22:49:20.153091+00:00
+    is_superuser: false
+    username: chninkel
+    first_name: Stéphane
+    last_name: HENNINGER
+    email: ''
+    is_staff: true
+    is_active: true
+    date_joined: 2020-10-17 00:05:56+00:00
+    groups:
+    - 1
+    user_permissions: []
+- model: auth.user
+  pk: 3
+  fields:
+    password: pbkdf2_sha256$150000$JiXn46hJCu7K$H6joUoZTECP4cWFdkYOBQHwU975zeUDXySIOz2iQM3A=
+    last_login: 2021-03-10 01:54:20.493802+00:00
+    is_superuser: false
+    username: marie
+    first_name: Marie
+    last_name: HENNINGER
+    email: ''
+    is_staff: true
+    is_active: true
+    date_joined: 2020-10-17 00:06:27+00:00
+    groups:
+    - 1
+    user_permissions: []
+- model: auth.user
+  pk: 4
+  fields:
+    password: pbkdf2_sha256$150000$DXylh2hDOypA$dNkGRUL2pXWHaSgsYdeAZO8c9HZR1FfJBH5i2SgSBLg=
+    last_login: 2021-11-13 01:20:19.622799+00:00
+    is_superuser: false
+    username: lustus
+    first_name: Olivier
+    last_name: LOUSTONAUD
+    email: ''
+    is_staff: true
+    is_active: true
+    date_joined: 2020-10-17 00:06:52+00:00
+    groups: []
+    user_permissions: []
+- model: auth.user
+  pk: 5
+  fields:
+    password: pbkdf2_sha256$150000$JYsMgEjuFoho$wn3sVe833XWqw7mqdUzTfSEr0lbJAZ8inDN5CP3mIZg=
+    last_login: 2021-11-12 01:06:52.654275+00:00
+    is_superuser: false
+    username: taz
+    first_name: Alex
+    last_name: CAMACHO
+    email: ''
+    is_staff: true
+    is_active: true
+    date_joined: 2020-10-17 00:07:13+00:00
+    groups:
+    - 1
+    user_permissions: []
+- model: auth.user
+  pk: 6
+  fields:
+    password: pbkdf2_sha256$150000$KHSdXeWtjLVQ$g5mD0UJ57bfnrw4F32/H/Zk4CNqMzZghbUSxFAP5zE0=
+    last_login: 2021-11-13 03:39:16.915859+00:00
+    is_superuser: false
+    username: fish
+    first_name: Vincent
+    last_name: CHAVANEL
+    email: ''
+    is_staff: true
+    is_active: true
+    date_joined: 2020-10-17 00:07:46+00:00
+    groups:
+    - 1
+    user_permissions: []
+- model: auth.user
+  pk: 7
+  fields:
+    password: pbkdf2_sha256$150000$WjwiYLqxAc28$NWVO7FoqIGnpdWzSx731x5W/2NNZNjQiG1lfLDvvyVw=
+    last_login: 2021-11-12 01:05:21.941581+00:00
+    is_superuser: false
+    username: delphine
+    first_name: Delphine
+    last_name: GARCIA
+    email: ''
+    is_staff: true
+    is_active: true
+    date_joined: 2020-10-17 00:08:16+00:00
+    groups:
+    - 1
+    user_permissions: []
+- model: auth.user
+  pk: 12
+  fields:
+    password: pbkdf2_sha256$150000$I37Dyj1l3n1z$4pD9P7+G4A8Y9mgsQsh306EOi7VwQDVWfG0BtUyfsVY=
+    last_login: 2021-11-13 03:56:11.156707+00:00
+    is_superuser: false
+    username: huitzy_kawek
+    first_name: Aymeric
+    last_name: ''
+    email: ''
+    is_staff: false
+    is_active: true
+    date_joined: 2021-11-13 00:25:07+00:00
+    groups:
+    - 1
+    - 5
+    user_permissions: []
+- model: auth.user
+  pk: 13
+  fields:
+    password: pbkdf2_sha256$150000$siewWnpgOjtU$h6aFxCRIp6gc9qAYCG+iKo/gAyV0zbMjSJGulCfjjks=
+    last_login: null
+    is_superuser: false
+    username: skornett
+    first_name: Dorian
+    last_name: ''
+    email: ''
+    is_staff: false
+    is_active: true
+    date_joined: 2021-11-13 00:25:58+00:00
+    groups:
+    - 1
+    - 5
+    user_permissions: []
+- model: auth.user
+  pk: 14
+  fields:
+    password: pbkdf2_sha256$150000$pe4dcaovoBjD$GiQiteYzeJqPdbBm2XjEsCZQjLa2wNA+2dAPhx22Kng=
+    last_login: 2021-11-13 03:41:25.799044+00:00
+    is_superuser: false
+    username: guilee
+    first_name: Guillaume
+    last_name: ''
+    email: ''
+    is_staff: false
+    is_active: true
+    date_joined: 2021-11-13 00:26:55+00:00
+    groups:
+    - 1
+    - 5
+    user_permissions: []
+- model: auth.user
+  pk: 15
+  fields:
+    password: pbkdf2_sha256$150000$rMtD5jWDAIAf$r1xB0aZbqguKoEz+Zc9bX8SMDEpMFLEQ4WID8cHQPOs=
+    last_login: 2022-01-16 13:44:31.110258+00:00
+    is_superuser: false
+    username: zaharielle
+    first_name: Fabien
+    last_name: ''
+    email: ''
+    is_staff: false
+    is_active: true
+    date_joined: 2021-11-13 00:27:20+00:00
+    groups:
+    - 1
+    - 5
+    user_permissions: []
+- model: auth.user
+  pk: 16
+  fields:
+    password: pbkdf2_sha256$150000$GprsZzjnOA0a$pPPCwIUjJ9yPRzW+cP19gCtk5X0F4SrVRIuDYHnFVvY=
+    last_login: null
+    is_superuser: false
+    username: vinhly
+    first_name: Vinh
+    last_name: LI
+    email: ''
+    is_staff: false
+    is_active: true
+    date_joined: 2021-11-13 00:27:49+00:00
+    groups:
+    - 1
+    - 5
+    user_permissions: []
+- model: auth.user
+  pk: 17
+  fields:
+    password: pbkdf2_sha256$150000$zN74y6xGhZJY$MoqP0brpp4VETEL2uUEe5sr9H1xVeDA3Flga45ciqXE=
+    last_login: null
+    is_superuser: false
+    username: dogan
+    first_name: Timothée
+    last_name: ''
+    email: ''
+    is_staff: false
+    is_active: true
+    date_joined: 2021-11-21 00:25:50+00:00
+    groups:
+    - 1
+    - 5
+    user_permissions: []
+- model: auth.user
+  pk: 18
+  fields:
+    password: pbkdf2_sha256$390000$iFKqps5zdmC5IC1Mnag1w2$7EL155HtEytQVT1YvZQnQuo81BDldTfmefidelbnqfk=
+    last_login: null
+    is_superuser: false
+    username: quall210
+    first_name: Jake
+    last_name: BRETT
+    email: jake.brett2605@gmail.com
+    is_staff: false
+    is_active: true
+    date_joined: 2023-01-16 02:24:36+00:00
+    groups:
+    - 1
+    - 5
+    user_permissions: []

@@ -1,0 +1,834 @@
+- model: collector.beneficeafflictioncusto
+  pk: 6
+  fields:
+    character_custo: 20
+    benefice_affliction_ref: 1636
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 8
+  fields:
+    character_custo: 189
+    benefice_affliction_ref: 1640
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 9
+  fields:
+    character_custo: 189
+    benefice_affliction_ref: 1505
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 10
+  fields:
+    character_custo: 189
+    benefice_affliction_ref: 1506
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 11
+  fields:
+    character_custo: 189
+    benefice_affliction_ref: 1507
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 16
+  fields:
+    character_custo: 189
+    benefice_affliction_ref: 1471
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 17
+  fields:
+    character_custo: 135
+    benefice_affliction_ref: 1446
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 18
+  fields:
+    character_custo: 35
+    benefice_affliction_ref: 1644
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 19
+  fields:
+    character_custo: 35
+    benefice_affliction_ref: 1645
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 20
+  fields:
+    character_custo: 35
+    benefice_affliction_ref: 1506
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 21
+  fields:
+    character_custo: 99
+    benefice_affliction_ref: 1636
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 22
+  fields:
+    character_custo: 23
+    benefice_affliction_ref: 1646
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 23
+  fields:
+    character_custo: 22
+    benefice_affliction_ref: 1625
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 24
+  fields:
+    character_custo: 61
+    benefice_affliction_ref: 1482
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 25
+  fields:
+    character_custo: 61
+    benefice_affliction_ref: 1513
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 26
+  fields:
+    character_custo: 17
+    benefice_affliction_ref: 1636
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 27
+  fields:
+    character_custo: 17
+    benefice_affliction_ref: 1505
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 28
+  fields:
+    character_custo: 59
+    benefice_affliction_ref: 1474
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 30
+  fields:
+    character_custo: 198
+    benefice_affliction_ref: 1644
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 31
+  fields:
+    character_custo: 198
+    benefice_affliction_ref: 1645
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 32
+  fields:
+    character_custo: 198
+    benefice_affliction_ref: 1564
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 33
+  fields:
+    character_custo: 198
+    benefice_affliction_ref: 1507
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 34
+  fields:
+    character_custo: 198
+    benefice_affliction_ref: 1514
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 35
+  fields:
+    character_custo: 130
+    benefice_affliction_ref: 1644
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 37
+  fields:
+    character_custo: 221
+    benefice_affliction_ref: 1644
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 38
+  fields:
+    character_custo: 221
+    benefice_affliction_ref: 1645
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 39
+  fields:
+    character_custo: 222
+    benefice_affliction_ref: 1644
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 40
+  fields:
+    character_custo: 222
+    benefice_affliction_ref: 1506
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 41
+  fields:
+    character_custo: 6
+    benefice_affliction_ref: 1644
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 42
+  fields:
+    character_custo: 93
+    benefice_affliction_ref: 1602
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 43
+  fields:
+    character_custo: 146
+    benefice_affliction_ref: 1636
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 44
+  fields:
+    character_custo: 146
+    benefice_affliction_ref: 1527
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 45
+  fields:
+    character_custo: 151
+    benefice_affliction_ref: 1659
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 46
+  fields:
+    character_custo: 151
+    benefice_affliction_ref: 1660
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 47
+  fields:
+    character_custo: 151
+    benefice_affliction_ref: 1526
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 48
+  fields:
+    character_custo: 151
+    benefice_affliction_ref: 1553
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 49
+  fields:
+    character_custo: 151
+    benefice_affliction_ref: 1507
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 50
+  fields:
+    character_custo: 5
+    benefice_affliction_ref: 1511
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 51
+  fields:
+    character_custo: 5
+    benefice_affliction_ref: 1625
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 53
+  fields:
+    character_custo: 242
+    benefice_affliction_ref: 1527
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 54
+  fields:
+    character_custo: 266
+    benefice_affliction_ref: 1644
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 55
+  fields:
+    character_custo: 19
+    benefice_affliction_ref: 1501
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 56
+  fields:
+    character_custo: 19
+    benefice_affliction_ref: 1477
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 57
+  fields:
+    character_custo: 19
+    benefice_affliction_ref: 1459
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 58
+  fields:
+    character_custo: 19
+    benefice_affliction_ref: 1513
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 59
+  fields:
+    character_custo: 19
+    benefice_affliction_ref: 1560
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 60
+  fields:
+    character_custo: 234
+    benefice_affliction_ref: 1621
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 61
+  fields:
+    character_custo: 234
+    benefice_affliction_ref: 1506
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 62
+  fields:
+    character_custo: 270
+    benefice_affliction_ref: 1483
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 63
+  fields:
+    character_custo: 238
+    benefice_affliction_ref: 1482
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 64
+  fields:
+    character_custo: 241
+    benefice_affliction_ref: 1527
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 65
+  fields:
+    character_custo: 259
+    benefice_affliction_ref: 1507
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 66
+  fields:
+    character_custo: 263
+    benefice_affliction_ref: 1477
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 67
+  fields:
+    character_custo: 1
+    benefice_affliction_ref: 1458
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 73
+  fields:
+    character_custo: 125
+    benefice_affliction_ref: 1661
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 74
+  fields:
+    character_custo: 278
+    benefice_affliction_ref: 1564
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 76
+  fields:
+    character_custo: 23
+    benefice_affliction_ref: 1522
+    description: Royale House Decados
+- model: collector.beneficeafflictioncusto
+  pk: 84
+  fields:
+    character_custo: 23
+    benefice_affliction_ref: 1458
+    description: Saskia Varnovicz
+- model: collector.beneficeafflictioncusto
+  pk: 85
+  fields:
+    character_custo: 23
+    benefice_affliction_ref: 1461
+    description: Valerian Juandaastas
+- model: collector.beneficeafflictioncusto
+  pk: 87
+  fields:
+    character_custo: 23
+    benefice_affliction_ref: 1462
+    description: Fedor Sensuki
+- model: collector.beneficeafflictioncusto
+  pk: 88
+  fields:
+    character_custo: 23
+    benefice_affliction_ref: 1479
+    description: Due payment for service
+- model: collector.beneficeafflictioncusto
+  pk: 89
+  fields:
+    character_custo: 23
+    benefice_affliction_ref: 1662
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 90
+  fields:
+    character_custo: 327
+    benefice_affliction_ref: 1666
+    description: Occult Power LVL 4
+- model: collector.beneficeafflictioncusto
+  pk: 91
+  fields:
+    character_custo: 322
+    benefice_affliction_ref: 1497
+    description: Leona Sterling Hawkwood
+- model: collector.beneficeafflictioncusto
+  pk: 92
+  fields:
+    character_custo: 22
+    benefice_affliction_ref: 1545
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 93
+  fields:
+    character_custo: 308
+    benefice_affliction_ref: 1670
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 95
+  fields:
+    character_custo: 310
+    benefice_affliction_ref: 1448
+    description: Selshaka
+- model: collector.beneficeafflictioncusto
+  pk: 96
+  fields:
+    character_custo: 319
+    benefice_affliction_ref: 1644
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 97
+  fields:
+    character_custo: 319
+    benefice_affliction_ref: 1645
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 98
+  fields:
+    character_custo: 277
+    benefice_affliction_ref: 1523
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 99
+  fields:
+    character_custo: 277
+    benefice_affliction_ref: 1505
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 100
+  fields:
+    character_custo: 318
+    benefice_affliction_ref: 1448
+    description: Shelsaka
+- model: collector.beneficeafflictioncusto
+  pk: 102
+  fields:
+    character_custo: 318
+    benefice_affliction_ref: 1514
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 103
+  fields:
+    character_custo: 318
+    benefice_affliction_ref: 1525
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 104
+  fields:
+    character_custo: 331
+    benefice_affliction_ref: 1507
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 105
+  fields:
+    character_custo: 5
+    benefice_affliction_ref: 1550
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 106
+  fields:
+    character_custo: 5
+    benefice_affliction_ref: 1506
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 107
+  fields:
+    character_custo: 333
+    benefice_affliction_ref: 1644
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 108
+  fields:
+    character_custo: 333
+    benefice_affliction_ref: 1645
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 109
+  fields:
+    character_custo: 333
+    benefice_affliction_ref: 1653
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 110
+  fields:
+    character_custo: 333
+    benefice_affliction_ref: 1654
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 111
+  fields:
+    character_custo: 333
+    benefice_affliction_ref: 1670
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 112
+  fields:
+    character_custo: 17
+    benefice_affliction_ref: 1678
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 113
+  fields:
+    character_custo: 244
+    benefice_affliction_ref: 1677
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 114
+  fields:
+    character_custo: 257
+    benefice_affliction_ref: 1676
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 115
+  fields:
+    character_custo: 189
+    benefice_affliction_ref: 1679
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 116
+  fields:
+    character_custo: 308
+    benefice_affliction_ref: 1678
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 117
+  fields:
+    character_custo: 99
+    benefice_affliction_ref: 1621
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 119
+  fields:
+    character_custo: 323
+    benefice_affliction_ref: 1679
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 120
+  fields:
+    character_custo: 18
+    benefice_affliction_ref: 1603
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 121
+  fields:
+    character_custo: 143
+    benefice_affliction_ref: 1620
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 122
+  fields:
+    character_custo: 308
+    benefice_affliction_ref: 1636
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 123
+  fields:
+    character_custo: 102
+    benefice_affliction_ref: 1655
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 124
+  fields:
+    character_custo: 140
+    benefice_affliction_ref: 1636
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 125
+  fields:
+    character_custo: 256
+    benefice_affliction_ref: 1636
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 126
+  fields:
+    character_custo: 130
+    benefice_affliction_ref: 1645
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 127
+  fields:
+    character_custo: 130
+    benefice_affliction_ref: 1507
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 128
+  fields:
+    character_custo: 130
+    benefice_affliction_ref: 1514
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 129
+  fields:
+    character_custo: 130
+    benefice_affliction_ref: 1523
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 130
+  fields:
+    character_custo: 425
+    benefice_affliction_ref: 1636
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 131
+  fields:
+    character_custo: 433
+    benefice_affliction_ref: 1625
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 132
+  fields:
+    character_custo: 360
+    benefice_affliction_ref: 1462
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 133
+  fields:
+    character_custo: 379
+    benefice_affliction_ref: 1672
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 134
+  fields:
+    character_custo: 436
+    benefice_affliction_ref: 1458
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 136
+  fields:
+    character_custo: 436
+    benefice_affliction_ref: 1671
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 137
+  fields:
+    character_custo: 436
+    benefice_affliction_ref: 1507
+    description: Origins of clockworking
+- model: collector.beneficeafflictioncusto
+  pk: 138
+  fields:
+    character_custo: 436
+    benefice_affliction_ref: 1506
+    description: Inglorious alliance
+- model: collector.beneficeafflictioncusto
+  pk: 139
+  fields:
+    character_custo: 436
+    benefice_affliction_ref: 1622
+    description: Inglorious alliance
+- model: collector.beneficeafflictioncusto
+  pk: 140
+  fields:
+    character_custo: 436
+    benefice_affliction_ref: 1551
+    description: Enforce Lex Automata
+- model: collector.beneficeafflictioncusto
+  pk: 141
+  fields:
+    character_custo: 460
+    benefice_affliction_ref: 1459
+    description: Balthazar Zemeckis
+- model: collector.beneficeafflictioncusto
+  pk: 142
+  fields:
+    character_custo: 461
+    benefice_affliction_ref: 1636
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 143
+  fields:
+    character_custo: 463
+    benefice_affliction_ref: 1636
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 144
+  fields:
+    character_custo: 487
+    benefice_affliction_ref: 1514
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 145
+  fields:
+    character_custo: 487
+    benefice_affliction_ref: 1446
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 146
+  fields:
+    character_custo: 443
+    benefice_affliction_ref: 1678
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 147
+  fields:
+    character_custo: 443
+    benefice_affliction_ref: 1671
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 148
+  fields:
+    character_custo: 443
+    benefice_affliction_ref: 1507
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 149
+  fields:
+    character_custo: 443
+    benefice_affliction_ref: 1482
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 150
+  fields:
+    character_custo: 505
+    benefice_affliction_ref: 1636
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 151
+  fields:
+    character_custo: 505
+    benefice_affliction_ref: 1682
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 152
+  fields:
+    character_custo: 496
+    benefice_affliction_ref: 1506
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 153
+  fields:
+    character_custo: 469
+    benefice_affliction_ref: 1644
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 154
+  fields:
+    character_custo: 469
+    benefice_affliction_ref: 1645
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 155
+  fields:
+    character_custo: 469
+    benefice_affliction_ref: 1653
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 156
+  fields:
+    character_custo: 469
+    benefice_affliction_ref: 1654
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 157
+  fields:
+    character_custo: 477
+    benefice_affliction_ref: 1502
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 158
+  fields:
+    character_custo: 477
+    benefice_affliction_ref: 1495
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 159
+  fields:
+    character_custo: 477
+    benefice_affliction_ref: 1519
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 160
+  fields:
+    character_custo: 477
+    benefice_affliction_ref: 1595
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 161
+  fields:
+    character_custo: 477
+    benefice_affliction_ref: 1459
+    description: Voice of the Desert
+- model: collector.beneficeafflictioncusto
+  pk: 162
+  fields:
+    character_custo: 457
+    benefice_affliction_ref: 1552
+    description: Master Zemeckis
+- model: collector.beneficeafflictioncusto
+  pk: 163
+  fields:
+    character_custo: 512
+    benefice_affliction_ref: 1644
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 164
+  fields:
+    character_custo: 512
+    benefice_affliction_ref: 1645
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 165
+  fields:
+    character_custo: 512
+    benefice_affliction_ref: 1507
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 166
+  fields:
+    character_custo: 524
+    benefice_affliction_ref: 1548
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 167
+  fields:
+    character_custo: 524
+    benefice_affliction_ref: 1574
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 168
+  fields:
+    character_custo: 524
+    benefice_affliction_ref: 1568
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 170
+  fields:
+    character_custo: 518
+    benefice_affliction_ref: 1505
+    description: ''
+- model: collector.beneficeafflictioncusto
+  pk: 171
+  fields:
+    character_custo: 495
+    benefice_affliction_ref: 1461
+    description: Musters

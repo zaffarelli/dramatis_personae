@@ -29,9 +29,9 @@ echo -e "\e[0;35m- Restoring Campaigns...\e[0;m"
 python manage.py loaddata backup/custom/$1/campaign.xml
 
 echo -e "\e[0;35m- Restoring Quizz...\e[0;m"
-python manage.py loaddata backup/custom/$1/quizzquestion.xml
-python manage.py loaddata backup/custom/$1/quizzanswer.xml
-python manage.py loaddata backup/custom/$1/quizz.xml
+#python manage.py loaddata backup/custom/$1/quizzquestion.xml
+#python manage.py loaddata backup/custom/$1/quizzanswer.xml
+#python manage.py loaddata backup/custom/$1/quizz.xml
 
 echo -e "\e[1;35mCOLLECTOR...\e[0;m"
 echo -e "\e[0;35m- Restoring references data\e[0;m"
@@ -94,5 +94,6 @@ python manage.py loaddata backup/custom/$1/blessing_curse_custo.xml
 python manage.py loaddata backup/custom/$1/benefice_affliction_custo.xml
 python manage.py loaddata backup/custom/$1/skill_custo.xml
 python manage.py loaddata backup/custom/$1/sequence.xml
+python manage.py loaddata backup/custom/$1/collection.xml
 
 echo -e "\e[1;35m...done\e[0;m"

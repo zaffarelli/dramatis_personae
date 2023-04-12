@@ -1,0 +1,285 @@
+- model: collector.blessingcursecusto
+  pk: 1
+  fields:
+    character_custo: 20
+    blessing_curse_ref: 2
+- model: collector.blessingcursecusto
+  pk: 23
+  fields:
+    character_custo: 186
+    blessing_curse_ref: 53
+- model: collector.blessingcursecusto
+  pk: 26
+  fields:
+    character_custo: 125
+    blessing_curse_ref: 14
+- model: collector.blessingcursecusto
+  pk: 27
+  fields:
+    character_custo: 136
+    blessing_curse_ref: 3
+- model: collector.blessingcursecusto
+  pk: 28
+  fields:
+    character_custo: 12
+    blessing_curse_ref: 11
+- model: collector.blessingcursecusto
+  pk: 29
+  fields:
+    character_custo: 99
+    blessing_curse_ref: 45
+- model: collector.blessingcursecusto
+  pk: 30
+  fields:
+    character_custo: 23
+    blessing_curse_ref: 14
+- model: collector.blessingcursecusto
+  pk: 31
+  fields:
+    character_custo: 23
+    blessing_curse_ref: 47
+- model: collector.blessingcursecusto
+  pk: 33
+  fields:
+    character_custo: 22
+    blessing_curse_ref: 13
+- model: collector.blessingcursecusto
+  pk: 34
+  fields:
+    character_custo: 22
+    blessing_curse_ref: 32
+- model: collector.blessingcursecusto
+  pk: 36
+  fields:
+    character_custo: 189
+    blessing_curse_ref: 2
+- model: collector.blessingcursecusto
+  pk: 37
+  fields:
+    character_custo: 189
+    blessing_curse_ref: 48
+- model: collector.blessingcursecusto
+  pk: 38
+  fields:
+    character_custo: 59
+    blessing_curse_ref: 56
+- model: collector.blessingcursecusto
+  pk: 39
+  fields:
+    character_custo: 59
+    blessing_curse_ref: 24
+- model: collector.blessingcursecusto
+  pk: 40
+  fields:
+    character_custo: 59
+    blessing_curse_ref: 10
+- model: collector.blessingcursecusto
+  pk: 41
+  fields:
+    character_custo: 178
+    blessing_curse_ref: 52
+- model: collector.blessingcursecusto
+  pk: 42
+  fields:
+    character_custo: 178
+    blessing_curse_ref: 37
+- model: collector.blessingcursecusto
+  pk: 43
+  fields:
+    character_custo: 93
+    blessing_curse_ref: 2
+- model: collector.blessingcursecusto
+  pk: 44
+  fields:
+    character_custo: 19
+    blessing_curse_ref: 12
+- model: collector.blessingcursecusto
+  pk: 45
+  fields:
+    character_custo: 19
+    blessing_curse_ref: 57
+- model: collector.blessingcursecusto
+  pk: 46
+  fields:
+    character_custo: 241
+    blessing_curse_ref: 1
+- model: collector.blessingcursecusto
+  pk: 47
+  fields:
+    character_custo: 1
+    blessing_curse_ref: 23
+- model: collector.blessingcursecusto
+  pk: 48
+  fields:
+    character_custo: 1
+    blessing_curse_ref: 9
+- model: collector.blessingcursecusto
+  pk: 49
+  fields:
+    character_custo: 1
+    blessing_curse_ref: 10
+- model: collector.blessingcursecusto
+  pk: 50
+  fields:
+    character_custo: 1
+    blessing_curse_ref: 8
+- model: collector.blessingcursecusto
+  pk: 51
+  fields:
+    character_custo: 1
+    blessing_curse_ref: 12
+- model: collector.blessingcursecusto
+  pk: 54
+  fields:
+    character_custo: 290
+    blessing_curse_ref: 62
+- model: collector.blessingcursecusto
+  pk: 55
+  fields:
+    character_custo: 322
+    blessing_curse_ref: 14
+- model: collector.blessingcursecusto
+  pk: 56
+  fields:
+    character_custo: 322
+    blessing_curse_ref: 31
+- model: collector.blessingcursecusto
+  pk: 57
+  fields:
+    character_custo: 307
+    blessing_curse_ref: 2
+- model: collector.blessingcursecusto
+  pk: 59
+  fields:
+    character_custo: 277
+    blessing_curse_ref: 2
+- model: collector.blessingcursecusto
+  pk: 60
+  fields:
+    character_custo: 314
+    blessing_curse_ref: 60
+- model: collector.blessingcursecusto
+  pk: 61
+  fields:
+    character_custo: 314
+    blessing_curse_ref: 14
+- model: collector.blessingcursecusto
+  pk: 62
+  fields:
+    character_custo: 318
+    blessing_curse_ref: 2
+- model: collector.blessingcursecusto
+  pk: 63
+  fields:
+    character_custo: 318
+    blessing_curse_ref: 52
+- model: collector.blessingcursecusto
+  pk: 64
+  fields:
+    character_custo: 313
+    blessing_curse_ref: 43
+- model: collector.blessingcursecusto
+  pk: 65
+  fields:
+    character_custo: 331
+    blessing_curse_ref: 50
+- model: collector.blessingcursecusto
+  pk: 66
+  fields:
+    character_custo: 323
+    blessing_curse_ref: 2
+- model: collector.blessingcursecusto
+  pk: 67
+  fields:
+    character_custo: 323
+    blessing_curse_ref: 48
+- model: collector.blessingcursecusto
+  pk: 68
+  fields:
+    character_custo: 323
+    blessing_curse_ref: 64
+- model: collector.blessingcursecusto
+  pk: 69
+  fields:
+    character_custo: 334
+    blessing_curse_ref: 32
+- model: collector.blessingcursecusto
+  pk: 70
+  fields:
+    character_custo: 334
+    blessing_curse_ref: 8
+- model: collector.blessingcursecusto
+  pk: 71
+  fields:
+    character_custo: 216
+    blessing_curse_ref: 1
+- model: collector.blessingcursecusto
+  pk: 72
+  fields:
+    character_custo: 436
+    blessing_curse_ref: 39
+- model: collector.blessingcursecusto
+  pk: 73
+  fields:
+    character_custo: 436
+    blessing_curse_ref: 11
+- model: collector.blessingcursecusto
+  pk: 74
+  fields:
+    character_custo: 487
+    blessing_curse_ref: 37
+- model: collector.blessingcursecusto
+  pk: 75
+  fields:
+    character_custo: 452
+    blessing_curse_ref: 1
+- model: collector.blessingcursecusto
+  pk: 76
+  fields:
+    character_custo: 477
+    blessing_curse_ref: 11
+- model: collector.blessingcursecusto
+  pk: 77
+  fields:
+    character_custo: 485
+    blessing_curse_ref: 32
+- model: collector.blessingcursecusto
+  pk: 78
+  fields:
+    character_custo: 485
+    blessing_curse_ref: 9
+- model: collector.blessingcursecusto
+  pk: 80
+  fields:
+    character_custo: 533
+    blessing_curse_ref: 64
+- model: collector.blessingcursecusto
+  pk: 81
+  fields:
+    character_custo: 533
+    blessing_curse_ref: 27
+- model: collector.blessingcursecusto
+  pk: 82
+  fields:
+    character_custo: 529
+    blessing_curse_ref: 1
+- model: collector.blessingcursecusto
+  pk: 83
+  fields:
+    character_custo: 547
+    blessing_curse_ref: 60
+- model: collector.blessingcursecusto
+  pk: 84
+  fields:
+    character_custo: 556
+    blessing_curse_ref: 52
+- model: collector.blessingcursecusto
+  pk: 85
+  fields:
+    character_custo: 556
+    blessing_curse_ref: 52
+- model: collector.blessingcursecusto
+  pk: 86
+  fields:
+    character_custo: 526
+    blessing_curse_ref: 70

@@ -11,6 +11,7 @@ from django.utils.safestring import mark_safe
 from scenarist.models.story_models import StoryModel
 from scenarist.models.epics import Epic
 import json
+from django.contrib.postgres.fields import ArrayField
 
 
 class Card(StoryModel):
@@ -21,8 +22,19 @@ class Card(StoryModel):
     parent = models.ForeignKey('self', unique=False, related_name='children', on_delete=models.SET_NULL, null=True,
                                blank=True)
     abstract = models.CharField(default='', max_length=256, blank=True)
-    sublevels = models.CharField(default='', max_length=16, blank=True)
+    # sublevels = models.CharField(default='', max_length=16, blank=True)
+    battle_scene = models.BooleanField(default=False)
+    chase_scene = models.BooleanField(default=False)
+    action_scene = models.BooleanField(default=False)
+    technical_scene = models.BooleanField(default=False)
+    spiritual_scene = models.BooleanField(default=False)
+    political_scene = models.BooleanField(default=False)
+    roleplay_scene = models.BooleanField(default=False)
+    business_scene = models.BooleanField(default=False)
+    mystery_scene = models.BooleanField(default=False)
+    downtime_scene = models.BooleanField(default=False)
     experience = models.PositiveIntegerField(default=0, blank=True)
+    dramatis_personae = ArrayField(models.CharField(max_length=128), blank=True, null=True)
 
     def __str__(self):
         str = f'{self.get_card_type_display().upper()}: {self.name}'

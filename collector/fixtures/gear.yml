@@ -1,0 +1,1266 @@
+- model: collector.gear
+  pk: 1
+  fields:
+    name: Belt
+    variant: Soft leather
+    category: '7'
+    magna_carta_entry: '0'
+    quality: '1'
+    availability: '4'
+    quantity: 1
+    unit: '1'
+    origin: null
+    tech_level: 4
+    price: 1.25
+    firebird_price: 0
+    wing_price: 0
+    crest_price: 0
+    talon_price: 10
+    description: ''
+    reference: MotJ
+    power_storage: 0
+    power_consumption: 0
+- model: collector.gear
+  pk: 2
+  fields:
+    name: Boots
+    variant: Soft leather
+    category: '7'
+    magna_carta_entry: '0'
+    quality: '1'
+    availability: '4'
+    quantity: 1
+    unit: '2'
+    origin: null
+    tech_level: 4
+    price: 2.0
+    firebird_price: 0
+    wing_price: 0
+    crest_price: 0
+    talon_price: 16
+    description: ''
+    reference: MotJ
+    power_storage: 0
+    power_consumption: 0
+- model: collector.gear
+  pk: 3
+  fields:
+    name: Magic Lantern Projector
+    variant: Palm
+    category: '10'
+    magna_carta_entry: '0'
+    quality: '1'
+    availability: '1'
+    quantity: 1
+    unit: '1'
+    origin: null
+    tech_level: 6
+    price: 200.0
+    firebird_price: 200
+    wing_price: 0
+    crest_price: 0
+    talon_price: 0
+    description: ''
+    reference: MotJ
+    power_storage: 0
+    power_consumption: 0
+- model: collector.gear
+  pk: 4
+  fields:
+    name: Magic Lantern Projector
+    variant: Auditorium
+    category: '10'
+    magna_carta_entry: '0'
+    quality: '1'
+    availability: '1'
+    quantity: 1
+    unit: '1'
+    origin: null
+    tech_level: 6
+    price: 300.0
+    firebird_price: 300
+    wing_price: 0
+    crest_price: 0
+    talon_price: 0
+    description: ''
+    reference: MotJ
+    power_storage: 0
+    power_consumption: 0
+- model: collector.gear
+  pk: 5
+  fields:
+    name: Selchakah
+    variant: Inkmud
+    category: '6'
+    magna_carta_entry: '1'
+    quality: '0'
+    availability: '1'
+    quantity: 1
+    unit: g
+    origin: null
+    tech_level: 4
+    price: 60.0
+    firebird_price: 60
+    wing_price: 0
+    crest_price: 0
+    talon_price: 0
+    description: Inkmud is the name of the Selchaka produced out of the Royale House
+      Decados fiefs. Even if effective, this drug often gives headaches when reaching
+      the downside.
+    reference: MotJ
+    power_storage: 0
+    power_consumption: 0
+- model: collector.gear
+  pk: 6
+  fields:
+    name: Selchakah
+    variant: Severus Brand
+    category: '6'
+    magna_carta_entry: '1'
+    quality: '3'
+    availability: '0'
+    quantity: 1
+    unit: g
+    origin: Severus (Decados Fiefs)
+    tech_level: 5
+    price: 100.0
+    firebird_price: 100
+    wing_price: 0
+    crest_price: 0
+    talon_price: 0
+    description: The Red Clay is the real Decados brand of the Selchaka. With twice
+      the effects, it leaves the junky just a little bit dizzy on the downside. Consuming
+      1g in one week leads to the level 4 addiction...
+    reference: DEM
+    power_storage: 0
+    power_consumption: 0
+- model: collector.gear
+  pk: 7
+  fields:
+    name: Fusion Cell
+    variant: 4x10x6 capacity
+    category: '16'
+    magna_carta_entry: '0'
+    quality: '1'
+    availability: '3'
+    quantity: 1
+    unit: '1'
+    origin: null
+    tech_level: 6
+    price: 24.0
+    firebird_price: 24
+    wing_price: 0
+    crest_price: 0
+    talon_price: 0
+    description: ''
+    reference: DEM
+    power_storage: 240
+    power_consumption: 0
+- model: collector.gear
+  pk: 8
+  fields:
+    name: Magic Lantern Projector
+    variant: Tabletop
+    category: '10'
+    magna_carta_entry: '0'
+    quality: '1'
+    availability: '1'
+    quantity: 1
+    unit: '1'
+    origin: null
+    tech_level: 6
+    price: 100.0
+    firebird_price: 100
+    wing_price: 0
+    crest_price: 0
+    talon_price: 0
+    description: ''
+    reference: MotJ
+    power_storage: 0
+    power_consumption: 0
+- model: collector.gear
+  pk: 9
+  fields:
+    name: Skimmer Bike
+    variant: Tedeschi Rx538
+    category: '8'
+    magna_carta_entry: '0'
+    quality: '2'
+    availability: '1'
+    quantity: 1
+    unit: '1'
+    origin: Aragon / Royale House Hazat
+    tech_level: 6
+    price: 2750.0
+    firebird_price: 2750
+    wing_price: 0
+    crest_price: 0
+    talon_price: 0
+    description: 'The 538 is the top bike for the nobility younglings in the inner
+      belt of the Empire (up to 2 jumps from Byzantium Secundus). The Fading Suns
+      equivalent of Ducati Monstro 1000.
+
+      Variants exist, like the Rk538 (150% autonomy) and the Rv538 (up to 130% max
+      speed, a lot of security options).
+
+      Those vehicles are powered with a 50^350x60 capacity fusion cell. Even if the
+      pilot is not protected, those bikes have a lot of fail safe measures implemented
+      (auto stabilize, defect landing)'
+    reference: DEM
+    power_storage: 0
+    power_consumption: 0
+- model: collector.gear
+  pk: 10
+  fields:
+    name: Magic Lantern Show
+    variant: Popular
+    category: '10'
+    magna_carta_entry: '0'
+    quality: '1'
+    availability: '3'
+    quantity: 1
+    unit: '1'
+    origin: null
+    tech_level: 6
+    price: 5.0
+    firebird_price: 5
+    wing_price: 0
+    crest_price: 0
+    talon_price: 0
+    description: ''
+    reference: MotJ
+    power_storage: 0
+    power_consumption: 0
+- model: collector.gear
+  pk: 11
+  fields:
+    name: Stage Performance
+    variant: Folk
+    category: '10'
+    magna_carta_entry: '0'
+    quality: '1'
+    availability: '3'
+    quantity: 1
+    unit: night
+    origin: null
+    tech_level: 4
+    price: 1.25
+    firebird_price: 0
+    wing_price: 0
+    crest_price: 0
+    talon_price: 10
+    description: Price is per performer.
+    reference: MotJ
+    power_storage: 0
+    power_consumption: 0
+- model: collector.gear
+  pk: 12
+  fields:
+    name: Musical Instrument
+    variant: Flute
+    category: '10'
+    magna_carta_entry: '0'
+    quality: '1'
+    availability: '3'
+    quantity: 1
+    unit: '1'
+    origin: null
+    tech_level: 4
+    price: 1.0
+    firebird_price: 1
+    wing_price: 0
+    crest_price: 0
+    talon_price: 0
+    description: ''
+    reference: MotJ
+    power_storage: 0
+    power_consumption: 0
+- model: collector.gear
+  pk: 13
+  fields:
+    name: Squawker
+    variant: Handheld
+    category: '3'
+    magna_carta_entry: '0'
+    quality: '1'
+    availability: '3'
+    quantity: 1
+    unit: '1'
+    origin: null
+    tech_level: 4
+    price: 50.0
+    firebird_price: 50
+    wing_price: 0
+    crest_price: 0
+    talon_price: 0
+    description: con
+    reference: MotJ
+    power_storage: 0
+    power_consumption: 0
+- model: collector.gear
+  pk: 14
+  fields:
+    name: Squawker
+    variant: Wrist
+    category: '3'
+    magna_carta_entry: '0'
+    quality: '1'
+    availability: '2'
+    quantity: 1
+    unit: '1'
+    origin: null
+    tech_level: 5
+    price: 80.0
+    firebird_price: 80
+    wing_price: 0
+    crest_price: 0
+    talon_price: 0
+    description: ''
+    reference: MotJ
+    power_storage: 0
+    power_consumption: 0
+- model: collector.gear
+  pk: 15
+  fields:
+    name: Squawker
+    variant: Whisper Pin
+    category: '3'
+    magna_carta_entry: '0'
+    quality: '1'
+    availability: '1'
+    quantity: 1
+    unit: '1'
+    origin: null
+    tech_level: 5
+    price: 100.0
+    firebird_price: 100
+    wing_price: 0
+    crest_price: 0
+    talon_price: 0
+    description: ''
+    reference: MotJ
+    power_storage: 0
+    power_consumption: 0
+- model: collector.gear
+  pk: 16
+  fields:
+    name: Ground/Space Communications Relay
+    variant: BroadCom 100
+    category: '3'
+    magna_carta_entry: '1'
+    quality: '1'
+    availability: '1'
+    quantity: 1
+    unit: '1'
+    origin: Leagueheim BroadCom Labs
+    tech_level: 5
+    price: 1200.0
+    firebird_price: 1200
+    wing_price: 0
+    crest_price: 0
+    talon_price: 0
+    description: A device planted on a specific spot that relays communication from
+      squawkers within 15 km range to allow long range communication (planetary or
+      space) with other similar systems.
+    reference: DEM
+    power_storage: 0
+    power_consumption: 0
+- model: collector.gear
+  pk: 17
+  fields:
+    name: Ground/Space Communications Relay
+    variant: BroadCom 235
+    category: '3'
+    magna_carta_entry: '1'
+    quality: '2'
+    availability: '0'
+    quantity: 1
+    unit: '1'
+    origin: Leagueheim BroadCom Labs
+    tech_level: 5
+    price: 7500.0
+    firebird_price: 7500
+    wing_price: 0
+    crest_price: 0
+    talon_price: 0
+    description: 'An enhancement of the BroadCom 100, can relay from squawkers withing
+      100km range.
+
+      Can dock up to 10 coins of software to add various features.'
+    reference: DEM
+    power_storage: 0
+    power_consumption: 0
+- model: collector.gear
+  pk: 18
+  fields:
+    name: Encryption Module
+    variant: Speak In Tongues
+    category: '5'
+    magna_carta_entry: '2'
+    quality: '3'
+    availability: '0'
+    quantity: 1
+    unit: '1'
+    origin: Criticorum Ishur Ben Moktar
+    tech_level: 6
+    price: 5000.0
+    firebird_price: 5000
+    wing_price: 0
+    crest_price: 0
+    talon_price: 0
+    description: An encryption module shadowing all data. Needs 6 coins capacity in
+      the host device. Compatible with devices like BroadCom 235. Breaking the encryption
+      is DV 35.
+    reference: MotJ
+    power_storage: 0
+    power_consumption: 0
+- model: collector.gear
+  pk: 19
+  fields:
+    name: Boots
+    variant: Hard Leather
+    category: '7'
+    magna_carta_entry: '0'
+    quality: '2'
+    availability: '3'
+    quantity: 1
+    unit: '2'
+    origin: null
+    tech_level: 4
+    price: 3.0
+    firebird_price: 0
+    wing_price: 0
+    crest_price: 0
+    talon_price: 24
+    description: ''
+    reference: MotJ
+    power_storage: 0
+    power_consumption: 0
+- model: collector.gear
+  pk: 20
+  fields:
+    name: Hashish
+    variant: Cannabis Resin
+    category: '6'
+    magna_carta_entry: '1'
+    quality: '1'
+    availability: '2'
+    quantity: 1
+    unit: g
+    origin: null
+    tech_level: 4
+    price: 1.0
+    firebird_price: 0
+    wing_price: 0
+    crest_price: 0
+    talon_price: 8
+    description: ''
+    reference: MotJ
+    power_storage: 0
+    power_consumption: 0
+- model: collector.gear
+  pk: 21
+  fields:
+    name: Elixir Injector
+    variant: Standard
+    category: '2'
+    magna_carta_entry: '1'
+    quality: '1'
+    availability: '1'
+    quantity: 1
+    unit: '1'
+    origin: null
+    tech_level: 4
+    price: 25.0
+    firebird_price: 25
+    wing_price: 0
+    crest_price: 0
+    talon_price: 0
+    description: ''
+    reference: MotJ
+    power_storage: 0
+    power_consumption: 0
+- model: collector.gear
+  pk: 22
+  fields:
+    name: Elixir Dose
+    variant: Standard
+    category: '2'
+    magna_carta_entry: '1'
+    quality: '1'
+    availability: '1'
+    quantity: 1
+    unit: x10
+    origin: null
+    tech_level: 6
+    price: 50.0
+    firebird_price: 50
+    wing_price: 0
+    crest_price: 0
+    talon_price: 0
+    description: ''
+    reference: MotJ
+    power_storage: 0
+    power_consumption: 0
+- model: collector.gear
+  pk: 23
+  fields:
+    name: Tobacco
+    variant: Blond
+    category: '6'
+    magna_carta_entry: '0'
+    quality: '1'
+    availability: '4'
+    quantity: 50
+    unit: g
+    origin: null
+    tech_level: 4
+    price: 1.25
+    firebird_price: 0
+    wing_price: 0
+    crest_price: 0
+    talon_price: 10
+    description: ''
+    reference: MotJ
+    power_storage: 0
+    power_consumption: 0
+- model: collector.gear
+  pk: 24
+  fields:
+    name: Tobacco
+    variant: Dark
+    category: '6'
+    magna_carta_entry: '0'
+    quality: '0'
+    availability: '4'
+    quantity: 50
+    unit: g
+    origin: null
+    tech_level: 4
+    price: 0.5
+    firebird_price: 0
+    wing_price: 0
+    crest_price: 0
+    talon_price: 4
+    description: ''
+    reference: MotJ
+    power_storage: 0
+    power_consumption: 0
+- model: collector.gear
+  pk: 25
+  fields:
+    name: Long Range Communication Device
+    variant: Starlight
+    category: '3'
+    magna_carta_entry: '0'
+    quality: '2'
+    availability: '1'
+    quantity: 1
+    unit: '1'
+    origin: null
+    tech_level: 6
+    price: 300.0
+    firebird_price: 300
+    wing_price: 0
+    crest_price: 0
+    talon_price: 0
+    description: 1000 km communication device.
+    reference: MotJ
+    power_storage: 0
+    power_consumption: 0
+- model: collector.gear
+  pk: 26
+  fields:
+    name: Inquisition Frigate
+    variant: Hearth
+    category: '8'
+    magna_carta_entry: '1'
+    quality: '2'
+    availability: '1'
+    quantity: 1
+    unit: '1'
+    origin: Midian / Lextius Shipyards
+    tech_level: 6
+    price: 500000.0
+    firebird_price: 500000
+    wing_price: 0
+    crest_price: 0
+    talon_price: 0
+    description: ''
+    reference: FL:T
+    power_storage: 0
+    power_consumption: 0
+- model: collector.gear
+  pk: 27
+  fields:
+    name: Emergency Tools
+    variant: Charcot Pneumatic Tourniquet
+    category: '2'
+    magna_carta_entry: '0'
+    quality: '3'
+    availability: '1'
+    quantity: 1
+    unit: '1'
+    origin: null
+    tech_level: 6
+    price: 85.0
+    firebird_price: 85
+    wing_price: 0
+    crest_price: 0
+    talon_price: 0
+    description: A tourniquet that can automatically regulate its tension. 4 hours
+      function guaranted. Can be recharged and reused.
+    reference: DEM
+    power_storage: 0
+    power_consumption: 0
+- model: collector.gear
+  pk: 28
+  fields:
+    name: Medicine
+    variant: Morph IV injector
+    category: '2'
+    magna_carta_entry: '1'
+    quality: '1'
+    availability: '2'
+    quantity: 1
+    unit: x10
+    origin: null
+    tech_level: 5
+    price: 50.0
+    firebird_price: 50
+    wing_price: 0
+    crest_price: 0
+    talon_price: 0
+    description: One dose of strong painkiller serum. Works like a charm for a 70kg
+      mammal for 4 hours. The subject cannot feel the tip of his/her toes and fingers
+      and nose when using this medicine.
+    reference: DEM
+    power_storage: 0
+    power_consumption: 0
+- model: collector.gear
+  pk: 29
+  fields:
+    name: Redemption Tools
+    variant: Volt
+    category: '4'
+    magna_carta_entry: '0'
+    quality: '1'
+    availability: '2'
+    quantity: 1
+    unit: '1'
+    origin: null
+    tech_level: 5
+    price: 15.0
+    firebird_price: 15
+    wing_price: 0
+    crest_price: 0
+    talon_price: 0
+    description: The complete 6kg electric toolbox for simple electrical works
+    reference: DEM
+    power_storage: 0
+    power_consumption: 0
+- model: collector.gear
+  pk: 30
+  fields:
+    name: Redemption Tools
+    variant: Advanced Volt
+    category: '4'
+    magna_carta_entry: '0'
+    quality: '0'
+    availability: null
+    quantity: 1
+    unit: null
+    origin: null
+    tech_level: 4
+    price: 0.0
+    firebird_price: 0
+    wing_price: 0
+    crest_price: 0
+    talon_price: 0
+    description: ''
+    reference: MotJ
+    power_storage: 0
+    power_consumption: 0
+- model: collector.gear
+  pk: 31
+  fields:
+    name: Redemption Tools
+    variant: Mech (Metal)
+    category: '4'
+    magna_carta_entry: '0'
+    quality: '1'
+    availability: '3'
+    quantity: 1
+    unit: '1'
+    origin: null
+    tech_level: 4
+    price: 20.0
+    firebird_price: 20
+    wing_price: 0
+    crest_price: 0
+    talon_price: 0
+    description: Evrything to fix a metal object
+    reference: MotJ
+    power_storage: 0
+    power_consumption: 0
+- model: collector.gear
+  pk: 32
+  fields:
+    name: Redemption Appartus
+    variant: Volt Signal Analysis
+    category: '4'
+    magna_carta_entry: '0'
+    quality: '0'
+    availability: null
+    quantity: 1
+    unit: null
+    origin: null
+    tech_level: 4
+    price: 0.0
+    firebird_price: 0
+    wing_price: 0
+    crest_price: 0
+    talon_price: 0
+    description: ''
+    reference: MotJ
+    power_storage: 0
+    power_consumption: 0
+- model: collector.gear
+  pk: 33
+  fields:
+    name: Redemption Appartus
+    variant: Volt Signal Analysis (Handheld)
+    category: '4'
+    magna_carta_entry: '0'
+    quality: '3'
+    availability: '1'
+    quantity: 1
+    unit: '1'
+    origin: null
+    tech_level: 6
+    price: 900.0
+    firebird_price: 900
+    wing_price: 0
+    crest_price: 0
+    talon_price: 0
+    description: Multimeter + oscilloscope + ems scanner in the size of  A5 harrap's
+      dictionnary.
+    reference: DEM
+    power_storage: 0
+    power_consumption: 0
+- model: collector.gear
+  pk: 34
+  fields:
+    name: Redemption Tools
+    variant: Precision Soldering Kit
+    category: '4'
+    magna_carta_entry: '0'
+    quality: '0'
+    availability: null
+    quantity: 1
+    unit: null
+    origin: null
+    tech_level: 5
+    price: 50.0
+    firebird_price: 50
+    wing_price: 0
+    crest_price: 0
+    talon_price: 0
+    description: ''
+    reference: MotJ
+    power_storage: 0
+    power_consumption: 0
+- model: collector.gear
+  pk: 35
+  fields:
+    name: Redemption Tools
+    variant: Heavy Duty Soldering kit
+    category: '4'
+    magna_carta_entry: '0'
+    quality: '1'
+    availability: '2'
+    quantity: 1
+    unit: null
+    origin: null
+    tech_level: 4
+    price: 50.0
+    firebird_price: 50
+    wing_price: 0
+    crest_price: 0
+    talon_price: 0
+    description: ''
+    reference: MotJ
+    power_storage: 0
+    power_consumption: 0
+- model: collector.gear
+  pk: 36
+  fields:
+    name: Redemption Appartus
+    variant: Ceramsteel Lacquer Pistol
+    category: '4'
+    magna_carta_entry: '1'
+    quality: '2'
+    availability: '1'
+    quantity: 1
+    unit: '1'
+    origin: null
+    tech_level: 5
+    price: 40.0
+    firebird_price: 40
+    wing_price: 0
+    crest_price: 0
+    talon_price: 0
+    description: ''
+    reference: MotJ
+    power_storage: 0
+    power_consumption: 0
+- model: collector.gear
+  pk: 37
+  fields:
+    name: Redemption Tools
+    variant: Ceramsteel Lacquer Tones
+    category: '4'
+    magna_carta_entry: '0'
+    quality: '1'
+    availability: '3'
+    quantity: 1
+    unit: litre
+    origin: null
+    tech_level: 6
+    price: 0.25
+    firebird_price: 0
+    wing_price: 1
+    crest_price: 0
+    talon_price: 0
+    description: One color, can paint 10 square meters with one litre and a lacquer
+      pistol. Colors availability can vary from system to system.
+    reference: DEM
+    power_storage: 0
+    power_consumption: 0
+- model: collector.gear
+  pk: 38
+  fields:
+    name: Fusion Rig
+    variant: Country Rig
+    category: '16'
+    magna_carta_entry: '0'
+    quality: '0'
+    availability: null
+    quantity: 1
+    unit: null
+    origin: null
+    tech_level: 6
+    price: 150.0
+    firebird_price: 150
+    wing_price: 0
+    crest_price: 0
+    talon_price: 0
+    description: ''
+    reference: DEM
+    power_storage: 2000
+    power_consumption: -20
+- model: collector.gear
+  pk: 39
+  fields:
+    name: Fusion Rig
+    variant: Exploration Rig
+    category: '16'
+    magna_carta_entry: '0'
+    quality: '2'
+    availability: '0'
+    quantity: 1
+    unit: '1'
+    origin: null
+    tech_level: 6
+    price: 550.0
+    firebird_price: 550
+    wing_price: 0
+    crest_price: 0
+    talon_price: 0
+    description: ''
+    reference: MotJ
+    power_storage: 8000
+    power_consumption: -50
+- model: collector.gear
+  pk: 40
+  fields:
+    name: Fusion Rig
+    variant: Musters Rig
+    category: '16'
+    magna_carta_entry: '1'
+    quality: '3'
+    availability: '0'
+    quantity: 1
+    unit: '1'
+    origin: Bannockburn
+    tech_level: 6
+    price: 1400.0
+    firebird_price: 1400
+    wing_price: 0
+    crest_price: 0
+    talon_price: 0
+    description: Can charge all kind of fusion cells.
+    reference: DEM
+    power_storage: 20000
+    power_consumption: -150
+- model: collector.gear
+  pk: 41
+  fields:
+    name: Security Drone
+    variant: Multi Purpose Static Sentinel Drone
+    category: '15'
+    magna_carta_entry: '2'
+    quality: '2'
+    availability: '0'
+    quantity: 1
+    unit: '1'
+    origin: Bannockburn / Zarkel Company
+    tech_level: 6
+    price: 1200.0
+    firebird_price: 1200
+    wing_price: 0
+    crest_price: 0
+    talon_price: 0
+    description: A small surveillance drone covering a 20m radius volume. Armed with
+      a weapon close to the imperial rifle. Contains a basic software to recognize
+      authorization gestures. Can load 3 coins of additional software. Consumption
+      is 50 trigs per hour, capacity is 700 trigs.
+    reference: ANTU
+    power_storage: 0
+    power_consumption: 0
+- model: collector.gear
+  pk: 42
+  fields:
+    name: Kerberos Module
+    variant: MPSSD edition 1.0
+    category: '5'
+    magna_carta_entry: '2'
+    quality: '3'
+    availability: '0'
+    quantity: 4
+    unit: '1'
+    origin: Bannockburn / Zarkel Company
+    tech_level: 6
+    price: 1600.0
+    firebird_price: 1600
+    wing_price: 0
+    crest_price: 0
+    talon_price: 0
+    description: A 2 coins software adding advanced recognition and decisions capabilities
+      to a MPSSD unit. Sold per 4 units to allow 4 MPSSD a standard encampment coverage.
+    reference: ANTU
+    power_storage: 0
+    power_consumption: 0
+- model: collector.gear
+  pk: 43
+  fields:
+    name: Electronic Component Set
+    variant: 'Set #1'
+    category: '4'
+    magna_carta_entry: '1'
+    quality: '2'
+    availability: '1'
+    quantity: 1
+    unit: '1'
+    origin: null
+    tech_level: 5
+    price: 40.0
+    firebird_price: 40
+    wing_price: 0
+    crest_price: 0
+    talon_price: 0
+    description: Enough material in a 8kb toolbox to fix most TL 5 objects.
+    reference: MotJ
+    power_storage: 0
+    power_consumption: 0
+- model: collector.gear
+  pk: 44
+  fields:
+    name: Electronic Component Set
+    variant: 'Set #2'
+    category: '4'
+    magna_carta_entry: '1'
+    quality: '3'
+    availability: '1'
+    quantity: 1
+    unit: '1'
+    origin: null
+    tech_level: 6
+    price: 110.0
+    firebird_price: 110
+    wing_price: 0
+    crest_price: 0
+    talon_price: 0
+    description: A 6kg toolbox containing TL 6 component.
+    reference: ANTU
+    power_storage: 0
+    power_consumption: 0
+- model: collector.gear
+  pk: 45
+  fields:
+    name: Electronic Component Set
+    variant: 'Set #3'
+    category: '4'
+    magna_carta_entry: '4'
+    quality: '3'
+    availability: '0'
+    quantity: 1
+    unit: '1'
+    origin: null
+    tech_level: 7
+    price: 1100.0
+    firebird_price: 1100
+    wing_price: 0
+    crest_price: 0
+    talon_price: 0
+    description: The toolbox containing TL 7 component (Fiscion synchronizer, set
+      of supra conductors, energy shield propagation regulator, CPU microships, cristal
+      transcoders and other subquantic encryptor trusted password module). Don't go
+      to mass with such a box.
+    reference: ANTU
+    power_storage: 0
+    power_consumption: 0
+- model: collector.gear
+  pk: 46
+  fields:
+    name: Redemption Tools
+    variant: Mech (Wood)
+    category: '4'
+    magna_carta_entry: '0'
+    quality: '1'
+    availability: '3'
+    quantity: 1
+    unit: '1'
+    origin: null
+    tech_level: 4
+    price: 50.0
+    firebird_price: 50
+    wing_price: 0
+    crest_price: 0
+    talon_price: 0
+    description: 20 kg of package with electric saws, hammer, etc...
+    reference: ANTU
+    power_storage: 0
+    power_consumption: 0
+- model: collector.gear
+  pk: 47
+  fields:
+    name: Campaign Drones Rig
+    variant: Military Ordinance
+    category: '15'
+    magna_carta_entry: '1'
+    quality: '2'
+    availability: '1'
+    quantity: 5
+    unit: '1'
+    origin: Bannockburn
+    tech_level: 6
+    price: 1250.0
+    firebird_price: 1250
+    wing_price: 0
+    crest_price: 0
+    talon_price: 0
+    description: This rig is a pentagon of 10m side structure. At each corner stands
+      a spot for a surveillance drone. Each drone can watch a radius of 15m in total
+      darkness, under heavy hail or snow. The rig can be programmed to recognize specific
+      people (up to 15) with a facial recognition system. The energy consumption per
+      night of the rig is 500 trigs in passive (nothing happened), and up to 5000
+      trigs under continuous enemy presence.
+    reference: ANTU
+    power_storage: 0
+    power_consumption: 0
+- model: collector.gear
+  pk: 48
+  fields:
+    name: Solar Rig
+    variant: Standard
+    category: '16'
+    magna_carta_entry: '0'
+    quality: '1'
+    availability: '3'
+    quantity: 1
+    unit: '1'
+    origin: null
+    tech_level: 6
+    price: 500.0
+    firebird_price: 500
+    wing_price: 0
+    crest_price: 0
+    talon_price: 0
+    description: The power generator can refill 50 trigs per hour under typical lighting.
+      In direct sunlight out of atmosphere, it can go up to 150 trigs per hour. It
+      can store up to 3000 trigs in its own fusion cells.
+    reference: ANTU
+    power_storage: 3000
+    power_consumption: -50
+- model: collector.gear
+  pk: 49
+  fields:
+    name: Starship Bay Generator
+    variant: Heavy Duty
+    category: '16'
+    magna_carta_entry: '1'
+    quality: '4'
+    availability: '0'
+    quantity: 1
+    unit: '1'
+    origin: Tethys
+    tech_level: 6
+    price: 15000.0
+    firebird_price: 15000
+    wing_price: 0
+    crest_price: 0
+    talon_price: 0
+    description: "This is a generator that can be found in any shipbuilding facility.\
+      \ It is able to generate enough power to operate heavy duties on a starship\
+      \ assembly line. The starship tuning afficionado must have. The system is a\
+      \ 3x3x3m block in itself, and contains many tools related to melting, piercing,\
+      \ cutting... etc. It weight 12 metric tons.\r\n\r\nThe Merchant League, and\
+      \ Charioteers and Engineers in particular ask for an authorization to possess\
+      \ this kind of device (a 1000£ per year or a 5000£ ad vitam patent right)."
+    reference: ANTU
+    power_storage: 75000
+    power_consumption: -1500
+- model: collector.gear
+  pk: 50
+  fields:
+    name: Ammoes
+    variant: 5.56mm
+    category: '11'
+    magna_carta_entry: '0'
+    quality: '1'
+    availability: '3'
+    quantity: 1
+    unit: x10
+    origin: Empire
+    tech_level: 5
+    price: 2.5
+    firebird_price: 0
+    wing_price: 2
+    crest_price: 3
+    talon_price: 4
+    description: ''
+    reference: MotJ
+    power_storage: 0
+    power_consumption: 0
+- model: collector.gear
+  pk: 51
+  fields:
+    name: Ammoes
+    variant: 7.62mm
+    category: '11'
+    magna_carta_entry: '0'
+    quality: '1'
+    availability: '2'
+    quantity: 1
+    unit: x10
+    origin: Empire
+    tech_level: 5
+    price: 3.625
+    firebird_price: 1
+    wing_price: 1
+    crest_price: 3
+    talon_price: 7
+    description: ''
+    reference: MotJ
+    power_storage: 0
+    power_consumption: 0
+- model: collector.gear
+  pk: 52
+  fields:
+    name: Ammoes
+    variant: 12mm
+    category: '11'
+    magna_carta_entry: '0'
+    quality: '1'
+    availability: '3'
+    quantity: 1
+    unit: x10
+    origin: Empire
+    tech_level: 5
+    price: 2.375
+    firebird_price: 0
+    wing_price: 0
+    crest_price: 3
+    talon_price: 7
+    description: ''
+    reference: MotJ
+    power_storage: 0
+    power_consumption: 0
+- model: collector.gear
+  pk: 53
+  fields:
+    name: Ammoes
+    variant: 11mm
+    category: '11'
+    magna_carta_entry: '0'
+    quality: '1'
+    availability: '4'
+    quantity: 1
+    unit: x10
+    origin: Empire
+    tech_level: 5
+    price: 1.375
+    firebird_price: 0
+    wing_price: 0
+    crest_price: 2
+    talon_price: 3
+    description: ''
+    reference: MotJ
+    power_storage: 0
+    power_consumption: 0
+- model: collector.gear
+  pk: 54
+  fields:
+    name: Ammoes
+    variant: 20mm
+    category: '11'
+    magna_carta_entry: '1'
+    quality: '1'
+    availability: '1'
+    quantity: 1
+    unit: x10
+    origin: null
+    tech_level: 5
+    price: 4.625
+    firebird_price: 4
+    wing_price: 1
+    crest_price: 0
+    talon_price: 3
+    description: ''
+    reference: MotJ
+    power_storage: 0
+    power_consumption: 0
+- model: collector.gear
+  pk: 55
+  fields:
+    name: Obunskin
+    variant: Abner Workshop Replica
+    category: '7'
+    magna_carta_entry: '2'
+    quality: '2'
+    availability: '0'
+    quantity: 1
+    unit: '1'
+    origin: Merchant League | Musters
+    tech_level: 7
+    price: 1000.0
+    firebird_price: 1000
+    wing_price: 0
+    crest_price: 0
+    talon_price: 0
+    description: "A complete outfit similar to XVIII america's cow-boy underwear.\
+      \ It is made of sewed silicate wires. The device is powered with movement of\
+      \ the one wearing it. It gives special bonuses to the wearer in combat situations.\r\
+      \n\r\nContinuous usage can cause debilitating issues to the wearer. Check must\
+      \ be made every 6 hours (BOD+CON), the DV is the number of hours. Removing the\
+      \ device for 6 hours cleanse the negative effects. When worn, the device cannot\
+      \ be deactivated.\r\n\r\nModificators: Dodge +4, Shoot +4, Gunnery +4\r\nContinuous\
+      \ usage failed check: \r\n- 6H -> -2 CON (Temporary + REC check DV 10+CON loss\
+      \ every day for recovery)\r\n- 12H -> -4 CON\r\n- 18H -> -6 CON\r\nA character\
+      \ with temporary negative CON must check DV 10 + CON loss every 15 min with\
+      \ STUN check)\r\n\r\nSevere piercing/slashing wounds have 1/6 chances to damage\
+      \ the device."
+    reference: DAL
+    power_storage: 0
+    power_consumption: 0

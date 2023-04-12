@@ -1,0 +1,182 @@
+- model: collector.bloke
+  pk: 41
+  fields:
+    character: 218
+    npc: 222
+    level: 0
+    description: ''
+- model: collector.bloke
+  pk: 42
+  fields:
+    character: 218
+    npc: 260
+    level: 1
+    description: ''
+- model: collector.bloke
+  pk: 43
+  fields:
+    character: 218
+    npc: 238
+    level: 1
+    description: ''
+- model: collector.bloke
+  pk: 44
+  fields:
+    character: 22
+    npc: 93
+    level: 0
+    description: Casual Lover
+- model: collector.bloke
+  pk: 45
+  fields:
+    character: 22
+    npc: 328
+    level: 1
+    description: Faithful servant
+- model: collector.bloke
+  pk: 46
+  fields:
+    character: 22
+    npc: 350
+    level: 0
+    description: Servant
+- model: collector.bloke
+  pk: 47
+  fields:
+    character: 22
+    npc: 59
+    level: -1
+    description: Father
+- model: collector.bloke
+  pk: 48
+  fields:
+    character: 22
+    npc: 97
+    level: 1
+    description: Cousin
+- model: collector.bloke
+  pk: 49
+  fields:
+    character: 22
+    npc: 351
+    level: 0
+    description: Servant
+- model: collector.bloke
+  pk: 50
+  fields:
+    character: 19
+    npc: 87
+    level: 1
+    description: ''
+- model: collector.bloke
+  pk: 51
+  fields:
+    character: 19
+    npc: 135
+    level: 0
+    description: ''
+- model: collector.bloke
+  pk: 52
+  fields:
+    character: 19
+    npc: 8
+    level: 2
+    description: ''
+- model: collector.bloke
+  pk: 53
+  fields:
+    character: 19
+    npc: 314
+    level: 1
+    description: ''
+- model: collector.bloke
+  pk: 54
+  fields:
+    character: 19
+    npc: 7
+    level: 1
+    description: ''
+- model: collector.bloke
+  pk: 55
+  fields:
+    character: 19
+    npc: 97
+    level: 1
+    description: ''
+- model: collector.bloke
+  pk: 56
+  fields:
+    character: 19
+    npc: 99
+    level: -1
+    description: ''
+- model: collector.bloke
+  pk: 57
+  fields:
+    character: 19
+    npc: 189
+    level: 0
+    description: ''
+- model: collector.bloke
+  pk: 58
+  fields:
+    character: 19
+    npc: 68
+    level: 0
+    description: ''
+- model: collector.bloke
+  pk: 59
+  fields:
+    character: 19
+    npc: 12
+    level: 1
+    description: ''
+- model: collector.bloke
+  pk: 60
+  fields:
+    character: 23
+    npc: 259
+    level: 0
+    description: ''
+- model: collector.bloke
+  pk: 61
+  fields:
+    character: 19
+    npc: 16
+    level: -2
+    description: ''
+- model: collector.bloke
+  pk: 62
+  fields:
+    character: 19
+    npc: 98
+    level: -1
+    description: ''
+- model: collector.bloke
+  pk: 63
+  fields:
+    character: 19
+    npc: 61
+    level: -1
+    description: ''
+- model: collector.bloke
+  pk: 64
+  fields:
+    character: 19
+    npc: 231
+    level: 0
+    description: ''
+- model: collector.bloke
+  pk: 65
+  fields:
+    character: 19
+    npc: 136
+    level: 0
+    description: ''
+- model: collector.bloke
+  pk: 66
+  fields:
+    character: 218
+    npc: 367
+    level: 0
+    description: ''

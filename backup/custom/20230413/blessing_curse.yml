@@ -1,0 +1,285 @@
+- model: collector.blessingcurse
+  pk: 93948
+  fields:
+    character: 487
+    blessing_curse_ref: 37
+- model: collector.blessingcurse
+  pk: 93950
+  fields:
+    character: 125
+    blessing_curse_ref: 14
+- model: collector.blessingcurse
+  pk: 93952
+  fields:
+    character: 99
+    blessing_curse_ref: 45
+- model: collector.blessingcurse
+  pk: 93954
+  fields:
+    character: 307
+    blessing_curse_ref: 2
+- model: collector.blessingcurse
+  pk: 93958
+  fields:
+    character: 241
+    blessing_curse_ref: 1
+- model: collector.blessingcurse
+  pk: 93959
+  fields:
+    character: 241
+    blessing_curse_ref: 1
+- model: collector.blessingcurse
+  pk: 93962
+  fields:
+    character: 23
+    blessing_curse_ref: 47
+- model: collector.blessingcurse
+  pk: 93963
+  fields:
+    character: 23
+    blessing_curse_ref: 14
+- model: collector.blessingcurse
+  pk: 93966
+  fields:
+    character: 436
+    blessing_curse_ref: 11
+- model: collector.blessingcurse
+  pk: 93967
+  fields:
+    character: 436
+    blessing_curse_ref: 39
+- model: collector.blessingcurse
+  pk: 93970
+  fields:
+    character: 178
+    blessing_curse_ref: 52
+- model: collector.blessingcurse
+  pk: 93971
+  fields:
+    character: 178
+    blessing_curse_ref: 37
+- model: collector.blessingcurse
+  pk: 93974
+  fields:
+    character: 22
+    blessing_curse_ref: 13
+- model: collector.blessingcurse
+  pk: 93975
+  fields:
+    character: 22
+    blessing_curse_ref: 32
+- model: collector.blessingcurse
+  pk: 93977
+  fields:
+    character: 277
+    blessing_curse_ref: 2
+- model: collector.blessingcurse
+  pk: 93979
+  fields:
+    character: 477
+    blessing_curse_ref: 11
+- model: collector.blessingcurse
+  pk: 93982
+  fields:
+    character: 19
+    blessing_curse_ref: 12
+- model: collector.blessingcurse
+  pk: 93983
+  fields:
+    character: 19
+    blessing_curse_ref: 57
+- model: collector.blessingcurse
+  pk: 93985
+  fields:
+    character: 313
+    blessing_curse_ref: 43
+- model: collector.blessingcurse
+  pk: 93988
+  fields:
+    character: 314
+    blessing_curse_ref: 60
+- model: collector.blessingcurse
+  pk: 93989
+  fields:
+    character: 314
+    blessing_curse_ref: 14
+- model: collector.blessingcurse
+  pk: 93993
+  fields:
+    character: 323
+    blessing_curse_ref: 2
+- model: collector.blessingcurse
+  pk: 93994
+  fields:
+    character: 323
+    blessing_curse_ref: 48
+- model: collector.blessingcurse
+  pk: 93995
+  fields:
+    character: 323
+    blessing_curse_ref: 64
+- model: collector.blessingcurse
+  pk: 93997
+  fields:
+    character: 12
+    blessing_curse_ref: 11
+- model: collector.blessingcurse
+  pk: 94004
+  fields:
+    character: 318
+    blessing_curse_ref: 2
+- model: collector.blessingcurse
+  pk: 94005
+  fields:
+    character: 318
+    blessing_curse_ref: 52
+- model: collector.blessingcurse
+  pk: 94007
+  fields:
+    character: 216
+    blessing_curse_ref: 1
+- model: collector.blessingcurse
+  pk: 94010
+  fields:
+    character: 322
+    blessing_curse_ref: 31
+- model: collector.blessingcurse
+  pk: 94011
+  fields:
+    character: 322
+    blessing_curse_ref: 14
+- model: collector.blessingcurse
+  pk: 94015
+  fields:
+    character: 452
+    blessing_curse_ref: 1
+- model: collector.blessingcurse
+  pk: 94017
+  fields:
+    character: 331
+    blessing_curse_ref: 50
+- model: collector.blessingcurse
+  pk: 94019
+  fields:
+    character: 290
+    blessing_curse_ref: 62
+- model: collector.blessingcurse
+  pk: 94022
+  fields:
+    character: 334
+    blessing_curse_ref: 8
+- model: collector.blessingcurse
+  pk: 94023
+  fields:
+    character: 334
+    blessing_curse_ref: 32
+- model: collector.blessingcurse
+  pk: 94032
+  fields:
+    character: 485
+    blessing_curse_ref: 9
+- model: collector.blessingcurse
+  pk: 94033
+  fields:
+    character: 485
+    blessing_curse_ref: 32
+- model: collector.blessingcurse
+  pk: 94035
+  fields:
+    character: 20
+    blessing_curse_ref: 2
+- model: collector.blessingcurse
+  pk: 94041
+  fields:
+    character: 1
+    blessing_curse_ref: 23
+- model: collector.blessingcurse
+  pk: 94042
+  fields:
+    character: 1
+    blessing_curse_ref: 8
+- model: collector.blessingcurse
+  pk: 94043
+  fields:
+    character: 1
+    blessing_curse_ref: 9
+- model: collector.blessingcurse
+  pk: 94044
+  fields:
+    character: 1
+    blessing_curse_ref: 10
+- model: collector.blessingcurse
+  pk: 94045
+  fields:
+    character: 1
+    blessing_curse_ref: 12
+- model: collector.blessingcurse
+  pk: 94049
+  fields:
+    character: 59
+    blessing_curse_ref: 56
+- model: collector.blessingcurse
+  pk: 94050
+  fields:
+    character: 59
+    blessing_curse_ref: 24
+- model: collector.blessingcurse
+  pk: 94051
+  fields:
+    character: 59
+    blessing_curse_ref: 10
+- model: collector.blessingcurse
+  pk: 94697
+  fields:
+    character: 529
+    blessing_curse_ref: 1
+- model: collector.blessingcurse
+  pk: 94703
+  fields:
+    character: 547
+    blessing_curse_ref: 60
+- model: collector.blessingcurse
+  pk: 94707
+  fields:
+    character: 186
+    blessing_curse_ref: 53
+- model: collector.blessingcurse
+  pk: 94711
+  fields:
+    character: 93
+    blessing_curse_ref: 2
+- model: collector.blessingcurse
+  pk: 94720
+  fields:
+    character: 533
+    blessing_curse_ref: 27
+- model: collector.blessingcurse
+  pk: 94721
+  fields:
+    character: 533
+    blessing_curse_ref: 64
+- model: collector.blessingcurse
+  pk: 94727
+  fields:
+    character: 136
+    blessing_curse_ref: 3
+- model: collector.blessingcurse
+  pk: 94735
+  fields:
+    character: 556
+    blessing_curse_ref: 52
+- model: collector.blessingcurse
+  pk: 94779
+  fields:
+    character: 526
+    blessing_curse_ref: 70
+- model: collector.blessingcurse
+  pk: 94780
+  fields:
+    character: 189
+    blessing_curse_ref: 2
+- model: collector.blessingcurse
+  pk: 94781
+  fields:
+    character: 189
+    blessing_curse_ref: 48
