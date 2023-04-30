@@ -47,7 +47,7 @@ xhtml2pdf = "==0.2.4"
 Django = "2.2"
 et_xmlfile = "==1.0.1"
 Faker = "==2.0.3"
-Pillow = "==6.2.2"
+Pillow = "==9.3.0"
 PyYAML = "==5.1"
 
 PyPDF2 = "==1.26.0"
