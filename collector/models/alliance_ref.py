@@ -7,6 +7,7 @@ from colorfield.fields import ColorField
 from django.db import models
 from django.contrib import admin
 import json
+from collector.mixins.uuid_class import UUIDClass
 
 ALLIANCE_CATEGORIES = (
     ('nobility', "Royale Nobility"),
@@ -20,7 +21,8 @@ ALLIANCE_CATEGORIES = (
     ('other', "Other"),
 )
 
-class AllianceRef(models.Model):
+
+class AllianceRef(UUIDClass):
     class Meta:
         verbose_name = "FICS: Alliance"
         ordering = ['reference', 'category', ]
@@ -43,7 +45,7 @@ class AllianceRef(models.Model):
 
 class AllianceRefAdmin(admin.ModelAdmin):
     ordering = ['category', 'reference']
-    list_display = ['reference', 'faction', 'category', 'common_occult_pathes', 'color_front', 'color_back',
+    list_display = ['reference', 'faction', 'uuid', 'category', 'common_occult_pathes', 'color_front', 'color_back',
                     'color_highlight']
     list_filter = ['category']
     search_fields = ['category']

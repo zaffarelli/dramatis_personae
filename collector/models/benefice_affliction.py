@@ -102,7 +102,7 @@ def refix(modeladmin, request, queryset):
 class BeneficeAfflictionRefAdmin(admin.ModelAdmin):
     ordering = ('category', 'reference', 'watermark', '-value', 'ranking')
     list_display = (
-        'reference', 'uuid', 'emphasis', 'value', 'watermark', 'category', 'ranking', 'cash_value', 'description',
+        'reference', 'emphasis', 'value', 'watermark', 'category', 'ranking', 'cash_value', 'description',
         'source')
     search_fields = ('reference', 'description', 'emphasis', 'watermark')
     list_filter = ('ranking', 'source', 'watermark', 'category', 'emphasis')

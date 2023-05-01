@@ -15,7 +15,7 @@ from collector.models.armor import ArmorInline
 from collector.models.shield import ShieldInline
 from collector.models.bloke import BlokeInline
 from collector.models.ritual import RitualInline
-from scenarist.models.epics import Epic
+
 
 
 # def cast_to_dem(modeladmin, request, queryset):

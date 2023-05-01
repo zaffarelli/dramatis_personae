@@ -8,20 +8,6 @@ import re
 import string
 import json
 from django.utils import timezone
-from django.contrib.postgres.fields import ArrayField
-
-CARD_TYPES = (
-    ('UN', 'Uncategorized'),
-    ('SC', 'Scene'),
-    ('EV', 'Event'),
-    ('BK', 'Background'),
-    ('AC', 'Act'),
-    ('EP', 'Epic'),
-    ('SH', 'Scheme'),
-    ('AD', 'Adventure'),
-    ('NO', 'Note'),
-    ('DR', 'Drama'),
-)
 
 
 class StoryModel(models.Model):
@@ -34,7 +20,7 @@ class StoryModel(models.Model):
     date_offset = models.IntegerField(default=0, blank=True)
     dt = models.DateTimeField(default=timezone.now, blank=True, null=True)
     sdt = models.DateTimeField(default=timezone.now, blank=True, null=True)
-    place = models.CharField(max_length=128, default='', blank=True)
+    place = models.CharField(max_length=256, default='', blank=True)
     gamemaster = models.CharField(default='zaffarelli@gmail.com', max_length=128, blank=True)
     visible = models.BooleanField(default=True)
 
@@ -45,7 +31,7 @@ class StoryModel(models.Model):
     description = models.TextField(max_length=6000, default='', blank=True)
     resolution = models.TextField(default='', max_length=2560, blank=True)
     rewards = models.TextField(max_length=2048, default='', blank=True)
-    card_type = models.CharField(max_length=2, default='UN', choices=CARD_TYPES, blank=True)
+
     archived = models.BooleanField(default=False)
     is_ongoing = models.BooleanField(default=False)
 

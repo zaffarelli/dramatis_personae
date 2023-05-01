@@ -330,7 +330,7 @@ def as_pa_short(value):
 
 @register.filter(name='as_roman')
 def as_roman(value):
-    if isinstance(int(value), int):
+    if isinstance(value, int):
         value = int(value)
         ROMAN = [
             (1000, "M"),

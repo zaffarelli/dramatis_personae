@@ -51,8 +51,8 @@ def get_population_statistics(request, *args, **kwargs):
 def get_keywords(request, *args, **kwargs):
     user_profile = request.user.profile
     # print(user_profile)
-    campaign = get_current_config(request)
-    all = campaign.dramatis_personae.order_by('keyword')
+    # campaign = get_current_config(request)
+    all = Character.objects.order_by('keyword')
     data = {'keywords': []}
     edata = {'dramas': []}
     keyword = ''
@@ -65,9 +65,9 @@ def get_keywords(request, *args, **kwargs):
             # print(keyword)
             keyword = x.keyword
         count += 1
-    for item in campaign.epic.card_set.all():
-        if item.card_type in ['AD', 'DR']:
-            edata['dramas'].append({'name': item.name, 'code': f'c-card-{item.id}', 'chapter': item.full_id})
+    # for item in campaign.epic.card_set.all():
+    #     if item.card_type in ['AD', 'DR']:
+    #         edata['dramas'].append({'name': item.name, 'code': f'c-card-{item.id}', 'chapter': item.full_id})
 
     template = get_template('collector/keywords.html')
     chart = template.render({'cdata': data, 'edata': edata})

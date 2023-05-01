@@ -15,6 +15,11 @@ class Jumpweb {
         me.h = parseInt($(me.parent).css('height'));
         me.data = data;
         me.era = me.data.era;
+        if (me.data.epic_systems) {
+            me.known_worlds = me.data.epic_systems.split('|')
+        }else{
+            me.known_worlds = []
+        }
         //me.new_routes = me.data.new_routes
         me.ox = 40;
         me.oy = 30;
@@ -189,15 +194,15 @@ class Jumpweb {
             .attr('opacity', 1)
             .on('mouseover', function (e, d) {
 
-                    // me.svg.selectAll('.spots').attr('r', '5pt').attr('fill', '#111');
-                    // me.svg.select("#spot_" + d.x + "_" + d.y).attr('r', '15pt').attr('fill', '#fc4');
-                    // console.log(d)
+                // me.svg.selectAll('.spots').attr('r', '5pt').attr('fill', '#111');
+                // me.svg.select("#spot_" + d.x + "_" + d.y).attr('r', '15pt').attr('fill', '#fc4');
+                // console.log(d)
 
             })
             .on('mouseout', function (e, d) {
 
-                    // me.svg.selectAll('.spots').attr('r', '5pt');
-                    // me.svg.select("#spot_" + d.x + "_" + d.y).attr('r', '5pt').attr('fill', '#111');
+                // me.svg.selectAll('.spots').attr('r', '5pt');
+                // me.svg.select("#spot_" + d.x + "_" + d.y).attr('r', '5pt').attr('fill', '#111');
 
             })
             .on('click', function (e, d) {
@@ -386,24 +391,24 @@ class Jumpweb {
                 return d.symbol;
             });
 
-        // if (me.data.mj) {
-        node.append("text")
-            .attr("class", function (d) {
-                return "nodetext_" + d.id;
-            })
-            .attr("dx", 0)
-            .attr("dy", -me.mark * 6)
-            .style("font-family", "Lato")
-            .style("font-size", "9pt")
-            .style("font-weight", "bold")
-            .style("fill", "#DDD")
-            .style("stroke", "#111")
-            .style("stroke-width", "0.25pt")
-            .style("text-anchor", "middle")
-            .text(function (d) {
-                return d.discovery + " AD";
-            });
-        // }
+        if (me.data.mj) {
+            node.append("text")
+                .attr("class", function (d) {
+                    return "nodetext_" + d.id;
+                })
+                .attr("dx", 0)
+                .attr("dy", -me.mark * 6)
+                .style("font-family", "Lato")
+                .style("font-size", "9pt")
+                .style("font-weight", "bold")
+                .style("fill", "#DDD")
+                .style("stroke", "#111")
+                .style("stroke-width", "0.25pt")
+                .style("text-anchor", "middle")
+                .text(function (d) {
+                    return d.discovery + " AD";
+                });
+        }
 
         me.lefttext(node, -6, -2, 'J:', 'jump')
         me.lefttext(node, -6, -0.5, 'DtJ:', 'dtj')
@@ -475,7 +480,12 @@ class Jumpweb {
             })
 
             .style("opacity", function (d) {
-                return (d.secret ? (me.data.mj ? 1.0 : 0.0) : 1.0);
+                // return (d.secret ? (me.data.mj ? 1.0 : 0.0) : 1.0);
+                if (me.known_worlds > 0) {
+                    return (me.known_worlds.includes(d.source_node.name) && me.known_worlds.includes(d.target_node.name) ? 1.0 : 0.0)
+                } else {
+                    return 1.0
+                }
             })
             .on("mouseover", function (e, d) {
                 console.log(e)
@@ -534,8 +544,8 @@ class Jumpweb {
                 k += " g" + d.group
                 return k;
             })
-            .attr('id', function(d){
-                return "node_"+d.id
+            .attr('id', function (d) {
+                return "node_" + d.id
             })
             .attr("transform", function (d) {
                 let x = (d.x + me.ox) * me.step_x;
@@ -632,6 +642,16 @@ class Jumpweb {
             .style("stroke", function (d) {
                 return (d.orbital_map == 1 ? "#FFF" : "#888");
             });
+
+        node.style("opacity", function (d) {
+            // console.log(d.name);
+            // console.log(me.known_worlds.includes(d.name));
+            if (me.known_worlds.length > 0) {
+                return (me.known_worlds.includes(d.name) ? 1.0 : 0.0)
+            } else {
+                return 1.0
+            }
+        })
     }
 
     zoomActivate() {
@@ -644,7 +664,7 @@ class Jumpweb {
         me.vis.call(me.zoom);
     }
 
-    update(){
+    update() {
         let me = this;
         me.draw_known_worlds();
     }

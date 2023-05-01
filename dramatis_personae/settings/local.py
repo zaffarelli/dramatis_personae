@@ -16,7 +16,7 @@ INSTANCE_NAME = 'ZOTZGI_DEV'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'dramatis_personae',
+        'NAME': 'dp5022',
         'USER': 'dp',
         'PASSWORD': 'dp',
         'HOST': '',

@@ -12,6 +12,7 @@ from collector.utils import fics_references
 from collector.models.character_custo import CharacterCusto
 from collector.models.tourofduty import TourOfDutyRef
 from collector.mixins.uuid_class import UUIDClass
+import uuid
 
 
 class SkillRef(UUIDClass):
@@ -30,6 +31,7 @@ class SkillRef(UUIDClass):
     attributes = models.TextField(max_length=64, default='', blank=True)
     grouping = models.CharField(max_length=64, default='', blank=True)
     deprecated = models.BooleanField(default=False, blank=True)
+    linked_to_uuid = models.UUIDField(null=True, blank=True, editable=False)
 
     @property
     def common_specialities(self):
@@ -50,13 +52,12 @@ class SkillRef(UUIDClass):
         return res
 
     def __str__(self):
-        return '%s %s %s %s %s [%s]' % (
-            self.reference, self.group, "(R)" if self.is_root else "", "(S)" if self.is_speciality else "",
-            "(D)" if self.deprecated else "",
-            self.linked_to.reference if self.linked_to else "-")
+        return f'{self.reference} {self.group} {"(R)" if self.is_root else ""} {"(S)" if self.is_speciality else ""} {"(D)" if self.deprecated else ""} [{self.linked_to_uuid}]'
 
     def fix(self):
         super().fix()
+        if self.linked_to:
+            self.linked_to_uuid = self.linked_to.uuid
 
     def to_json(self):
         from collector.utils.basic import json_default
@@ -220,8 +221,8 @@ def grouping_as_sect(modeladmin, request, queryset):
 
 class SkillRefAdmin(admin.ModelAdmin):
     ordering = ['is_speciality', 'is_wildcard', 'reference', 'grouping']
-    list_display = ['reference', 'uuid', 'grouping', 'is_root', 'is_speciality', 'is_wildcard', 'is_common', 'group',
-                    'linked_to']
+    list_display = ['reference', 'grouping', 'uuid', 'is_root', 'is_speciality', 'is_wildcard', 'is_common', 'group',
+                    'linked_to_uuid']
     actions = [refix, grouping_as_house, grouping_as_guild, grouping_as_system, grouping_as_sect, change_to_awa,
                change_to_soc, change_to_edu, change_to_fig, change_to_con, change_to_tin, change_to_per,
                change_to_bod, set_common, set_uncommon]

@@ -10,7 +10,7 @@ from django.core.paginator import Paginator
 from collector.models.character import Character
 # from collector.models.investigator import Investigator
 from collector.models.specie import Specie
-from collector.models.campaign import Campaign
+# from collector.models.campaign import Campaign
 from django.template.loader import get_template
 import datetime
 from collector.utils.basic import get_current_config, export_epic, slug_decode
@@ -36,17 +36,17 @@ def index(request):
 
 
 def get_list(request, id, slug='none'):
-    from collector.utils.basic import get_current_config
-    campaign = get_current_config(request)
+    # from collector.utils.basic import get_current_config
+    # campaign = get_current_config(request)
     if slug == 'none':
         slug = base64.b64encode(slug.encode("utf-8"))
     # print(f'[{slug}]')
     slug = slug.replace('_', '=')
     decs = str(base64.b64decode(slug), "utf-8")
     if decs == 'none':
-        character_items = campaign.dramatis_personae \
+        character_items = Character.objects \
             .order_by('balanced', '-team', 'keyword', 'historical_figure', 'nameless', 'full_name') \
-            .filter(is_dead=False, keyword__startswith=campaign.epic.shortcut)
+            .filter(is_dead=False)
     elif decs.startswith('x-'):
         elements = decs.split('-')
         command = elements[1].lower()
@@ -74,22 +74,6 @@ def get_list(request, id, slug='none'):
         ep_id = 1
         if len(elements) > 2:
             ep_id = elements[2]
-        if ep_class == 'Epic':
-            from scenarist.models.epics import Epic
-            epic = Epic.objects.get(pk=ep_id)
-            cast = epic.get_full_cast()
-        elif ep_class == 'Drama':
-            from scenarist.models.dramas import Drama
-            drama = Drama.objects.get(pk=ep_id)
-            cast = drama.get_full_cast()
-        elif ep_class == 'Act':
-            from scenarist.models.acts import Act
-            act = Act.objects.get(pk=ep_id)
-            cast = act.get_full_cast()
-        elif ep_class == 'Event':
-            from scenarist.models.events import Event
-            event = Event.objects.get(pk=ep_id)
-            cast = event.get_full_cast()
         elif ep_class == 'Card':
             # print(ep_id)
             from scenarist.models.cards import Card
@@ -101,14 +85,14 @@ def get_list(request, id, slug='none'):
         if len(cast) > 0:
             for rid in cast:
                 # print(rid)
-                character_item = campaign.open_avatars.get(rid=rid)
+                character_item = Character.objects.get(rid=rid)
                 character_items.append(character_item)
         messages.info(request, f'New list filter applied specific character with rid {decs}')
     else:
-        character_items = campaign.avatars.filter(keyword=decs).order_by('full_name')
+        character_items = Character.objects.filter(keyword=decs).order_by('full_name')
         messages.info(request, f'New list filter applied fro keyword {decs}')
         if len(character_items) == 0:
-            character_items = campaign.open_avatars.filter(rid__contains=decs.lower()).order_by('full_name')
+            character_items = Character.objects.filter(rid__contains=decs.lower()).order_by('full_name')
             messages.info(request, f'Searching {decs} among rids')
     # for c in character_items:
     #     c.need_fix = True
@@ -130,9 +114,8 @@ def get_list(request, id, slug='none'):
 
 
 def show_todo(request):
-    campaign = get_current_config(request)
     if is_ajax(request):
-        character_items = campaign.avatars.filter(priority=True).order_by('full_name')
+        character_items = Character.objects.filter(priority=True).order_by('full_name')
         if request.user.is_authenticated:
             paginator = Paginator(character_items, request.user.profile.option_display_count)
         else:
@@ -195,7 +178,7 @@ def deep_toggle(request, option=None, slug=None, id=None):
 
 def get_storyline(request, slug='none'):
     if is_ajax(request):
-        config_items = Campaign.objects.filter(hidden=False)
+        config_items = Character.objects.filter(hidden=False)
         if slug != 'none':
             for c in config_items:
                 c.is_active = (c.smart_code == slug)
@@ -209,19 +192,17 @@ def get_storyline(request, slug='none'):
 
 
 def recalc_avatar(request, id=None):
-    campaign = get_current_config(request)
     if is_ajax(request):
         messages.warning(request, 'Recalculating...')
-        item = campaign.avatars.get(pk=id)
+        item = Character.objects.get(pk=id)
         item.need_fix = True
-        item.fix(campaign)
         item.save()
         item.need_pdf = True
         item.backup()
         crid = item.rid
-        if campaign.is_fics:
-            template = get_template('collector/character_detail.html')
-            template_link = get_template('collector/character_link.html')
+        # if campaign.is_fics:
+        template = get_template('collector/character_detail.html')
+        template_link = get_template('collector/character_link.html')
         # if campaign.is_coc7:
         #     template = get_template('collector/investigator_detail.html')
         #     template_link = get_template('collector/investigator_link.html')
@@ -243,17 +224,17 @@ def recalc_avatar(request, id=None):
 
 
 def grab_avatar(request, id=None):
-    campaign = get_current_config(request)
-    if is_ajax(request):
-        messages.info(request, 'Grabbing avatar...')
-        campaign.grab(id)
+    # # campaign = get_current_config(request)
+    # if is_ajax(request):
+    #     messages.info(request, 'Grabbing avatar...')
+    #     # campaign.grab(id)
     return HttpResponse(status=204)
 
 
 def wa_export_character(request, id=None):
-    campaign = get_current_config(request)
+    # campaign = get_current_config(request)
     if is_ajax(request):
-        item = campaign.avatars.get(pk=id)
+        item = Character.objects.get(pk=id)
         template = get_template('collector/character_wa_statblock.html')
         character = template.render({'c': item}, request)
         context = {
@@ -266,28 +247,21 @@ def wa_export_character(request, id=None):
 
 
 def add_avatar(request, slug=None):
-    campaign = get_current_config(request)
-    if campaign.is_coc7:
-        item = Investigator()
-    elif campaign.is_fics:
-        item = Character()
+    # campaign = get_current_config(request)
+    item = Character()
     if slug:
         slug = slug_decode(slug)
         item.full_name = slug
     else:
         item.full_name = '_noname_ %s' % (datetime.datetime.now())
-    item.epic = campaign.epic
-    if campaign.is_fics:
-        item.use_history_creation = True
-        item.save()
-        item.specie = Specie.objects.filter(species='Urthish').first()
-        item.keyword = campaign.epic.full_id
+    item.use_history_creation = True
+    item.save()
+    item.specie = Specie.objects.filter(species='Urthish').first()
     item.get_rid(item.full_name)
     item.save()
-    character_item = campaign.avatars.get(pk=item.id)
+    character_item = Character.objects.get(pk=item.id)
     context = {'mosaic': {'rid': character_item.rid}}
-    messages.info(request, f'...{character_item.full_name} added ({campaign.rpgsystem})')
-    # return JsonResponse(context)
+    messages.info(request, f'...{character_item.full_name} added)')
     return HttpResponse(status=204)
 
 
@@ -313,20 +287,22 @@ def toggle_spotlight(request, id=None):
 
 def conf_details(request):
     if is_ajax(request):
-        from collector.models.campaign import Campaign
-        campaign = get_current_config(request)
-        if campaign.new_narrative:
-            epic_data = campaign.epic.to_json()
-            context = {'data': epic_data}
-            template = get_template('collector/conf_details2.html')
-            html = template.render(context, request)
-            response = {'mosaic': html}
-        else:
-            _ = export_epic(request, campaign)
-            context = {'epic': campaign.parse_details()}
-            template = get_template('collector/conf_details.html')
-            html = template.render(context, request)
-            response = {'mosaic': html}
+        # from collector.models.campaign import Campaign
+        # campaign = get_current_config(request)
+        # if campaign.new_narrative:
+        #     epic_data = campaign.epic.to_json()
+        # epic_data = {}
+        epic_data = request.user.profile.current_epic.as_json_epic
+        context = {'data': epic_data}
+        template = get_template('collector/conf_details2.html')
+        html = template.render(context, request)
+        response = {'mosaic': html}
+        # else:
+        #     _ = export_epic(request, campaign)
+        #     context = {'epic': campaign.parse_details()}
+        #     template = get_template('collector/conf_details.html')
+        #     html = template.render(context, request)
+        #     response = {'mosaic': html}
         return JsonResponse(response)
     else:
         return Http404
@@ -360,17 +336,17 @@ def ghostmark_test(request, id=None):
 def display_sheet(request, pk=None):
     if is_ajax(request):
         from collector.models.campaign import Campaign
-        campaign = get_current_config(request)
+        # campaign = get_current_config(request)
         if pk is None:
             pk = 22
         c = Character.objects.get(id=pk)
-        scenario = campaign.epic.name.upper()
+        scenario = "Beyond Darkness"  # campaign.epic.name.upper()
         pre_title = ""  # campaign.epic.place + ' - ' + campaign.epic.date
         post_title = "FuZion Interlock Custom System v8.0"
         spe = c.get_specialities()
         shc = c.get_shortcuts()
         j = c.to_jsonFICS()
-        settings = {'version': 1.0, 'labels': {}, 'pre_title': pre_title, 'scenario': campaign.short_name.upper(),
+        settings = {'version': 1.0, 'labels': {}, 'pre_title': pre_title, 'scenario': scenario,
                     'post_title': post_title, 'fontset': FONTSET, 'specialities': spe, 'shortcuts': shc}
         fics_sheet_context = {'settings': json.dumps(settings, sort_keys=True, indent=4), 'data': j}
 
@@ -378,30 +354,8 @@ def display_sheet(request, pk=None):
 
 
 def switch_epic(request, id=None):
-    campaign = get_current_config(request)
+    # campaign = get_current_config(request)
     # print(slug)
-    if id is None:
-        campaigns = Campaign.objects.all()
-        list = []
-        for c in campaigns:
-            list.append(c.epic.shortcut)
-        messages.error(request, f'No campaign code selected. Try one of those: {", ".join(list)}')
-    else:
-        # shortcut = slug_decode(slug)
-        new_campaigns = Campaign.objects.filter(id=id)
-        if len(new_campaigns) == 1:
-            new_campaign = new_campaigns.first()
-            new_campaign.is_active = True
-            new_campaign.save()
-            campaign.is_active = False
-            campaign.save()
-            messages.info(request, f'Current epic switched to {new_campaign.epic.name}.')
-            # if not request.user.is_authenticated:
-            #     return redirect('accounts/login/')
-            # context = {'fontset': FONTSET}
-            # return render(request, 'collector/index.html', context=context)
-            return HttpResponseRedirect('/')
-        messages.warning(request, f'Current campaign not changed.')
     return HttpResponse(status=204)
 
 
@@ -443,7 +397,7 @@ def display_sessionsheet(request, slug=None):
         return JsonResponse(response)
 
 
-def all_epics(request):
+def old_all_epics(request):
     if is_ajax(request):
         from collector.models.campaign import Campaign
         campaigns = Campaign.objects.filter(is_available=True).order_by('epic__era')
@@ -458,6 +412,24 @@ def all_epics(request):
             epics.append(e)
         context = {'epics': epics, 'title': "Epics", "comment": f"{len(epics)} epic(s)."}
         template = get_template('collector/epics.html')
+        html = template.render(context, request)
+        response = {'mosaic': html}
+        return JsonResponse(response)
+    else:
+        return HttpResponse(status=204)
+
+
+def all_epics(request):
+    if is_ajax(request):
+        from scenarist.models.cards import Card
+        notes_items = Card.objects.filter(card_type__in=["EP"]).order_by('era')
+        title = "Epics Cards"
+        cards = []
+        for x in notes_items:
+            n = x.to_json
+            cards.append(n)
+        context = {'cards': cards, 'title': title, "comment": f"{len(cards)} item(s)."}
+        template = get_template('collector/cards.html')
         html = template.render(context, request)
         response = {'mosaic': html}
         return JsonResponse(response)
@@ -485,12 +457,10 @@ def all_spaceships(request):
 def handle_cards(request, ref="0"):
     if is_ajax(request):
         from scenarist.models.cards import Card
-        from collector.models.campaign import Campaign
-        campaign = get_current_config(request)
         if int(ref) == 0:
-            notes_items = Card.objects.filter(epic=campaign.epic, card_type__in=["EP", "DR", "AD", "UN"]).order_by(
-                'full_id')
-            title = "Adventure Cards"
+            epic = Card.objects.filter(card_type__in=["EP"], is_ongoing=True).order_by('era').first()
+            notes_items = Card.objects.filter(card_type__in=["DR","AD"], parent=epic.id).order_by('full_id')
+            title = "Current Epic Cards"
         else:
             parent = Card.objects.get(pk=int(ref))
             notes_items = Card.objects.filter(parent__id=int(ref)).order_by('full_id')

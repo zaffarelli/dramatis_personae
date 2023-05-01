@@ -59,7 +59,7 @@ class ArmorRef(models.Model):
         self.price = (self.he_sp + self.to_sp + self.wa_sp + self.sa_sp + self.wl_sp + self.sl_sp) * 1
         self.price -= self.encumbrance
         self.price -= self.obstruction
-        print(self.price)
+        # print(self.price)
         coeffs = 0;
         if self.material_fabric:
             self.price *= 2

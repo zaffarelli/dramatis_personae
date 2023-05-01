@@ -12,15 +12,21 @@ from collector.utils.d4_changes import is_ajax
 
 def show_jumpweb(request):
     if is_ajax(request):
-        campaign = get_current_config(request)
+        # campaign = get_current_config(request)
         context = {}
         context['data'] = {}
         # context['campaign'] = campaign.to_json()
-        context['data']['mj'] = 1 if request.user.profile.is_gamemaster else 0
+        if request.user.profile.is_gamemaster:
+            context['data']['mj'] = 1
+            context['data']['epic_systems'] = ''
+        else:
+            context['data']['mj'] = 0
+            context['data']['epic_systems'] = request.user.profile.current_epic.place
         context['data']['new_routes'] = ""#"|".join(NEW_ROUTES)
         context['data']['new_systems'] = ""#"|".join(NEW_SYSTEMS)
-        context['data']['epic_systems'] = campaign.known_systems
-        context['data']['era'] = campaign.epic.era
+        #context['data']['epic_systems'] = campaign.known_systems
+
+        context['data']['era'] = request.user.profile.current_epic.era
         context['data']['nodes'] = []
         context['data']['links'] = []
         known_worlds = context['data']['epic_systems'].split('|')

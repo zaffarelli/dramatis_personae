@@ -1,29 +1,9 @@
 {% load fics_filters %}
-{% csrf_token %}
-<div class="fresque">
-    <div class="tile storyview">
-        <div class="epic_wrap" style="border:red;">
-            <div class='title'>
-                <div class='chapter'>{{data.chapter|as_roman}}&nbsp;</div>
-                <h1>{{ data.name }}</h1>
-                <div class='storybar epic'>
-                    <p class='epic_{{id}}'  children='{{data.children}}'>
-                        <button class='compact rebuild_pdf' id='{{data.id}}'>PDF</button>
-                        <button class='compact episode_cast' id='c-epic-{{data.id}}' page='1'>Epic</button>
-                        {{c.data.id}}
-                        <button class='compact view_epic' id='{{data.id}}'>View</button>
-                        <button class='compact edit_epic' id='{{data.id}}'>Edit</button>
-                        <button class='compact hide_epic' id='{{data.id}}'>Close</button>
-                        <button class='compact add_adventure' id='{{data.id}}'>Add</button>
-                        <button class='compact add_backlog' id='{{data.id}}'>Add</button>
-                    </p>
-                </div>
-            </div>
-            <div class='storyarticle epic' id='epic_{{data.id}}'>
-            </div>
-            {% for adventure in data.adventures %}
-                {% include "collector/config/adventure_detail.html" with c=adventure tag='adventure' %}
-            {% endfor %}
-        </div>
-    </div>
+<div class="fresky top">
+    <h1>{{ data.name }}</h1>
+</div>
+<div class="fresky middle doc">
+    {% include "collector/conf_card.html" with data=data %}
+</div>
+<div class="fresky bottom">
 </div>

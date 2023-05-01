@@ -60,8 +60,8 @@
         {% if user.profile.is_gamemaster %}
         <li><span class="pull-down">Adventures</span>
             <ul class="level-2 Epic">
-                {% if campaign.is_fics %}
-                <li><span class="menu-button menu-item" mode="standard" action="epics"><i class="action_icon fas fa-globe"></i> Epics</span></li>
+
+                <li><span class="menu-button menu-item" ref="-1" mode="standard" action="epics" id="epics_list"><i class="action_icon fas fa-globe"></i> Epics</span></li>
                 <li><span class="menu-button menu-item" action="conf_details"><i class="action_icon fas fa-hourglass"></i> Current Epic</span></li>
                 <li><span class="menu-button menu-item" ref="0" mode="standard" action="cards" id="cards_list"><i class="action_icon fas fa-film"></i> Cards</span></li>
                 <li><span class="menu-button menu-item" mode="overlay" action="deck"><i class="action_icon fas fa-images"></i> Epic Deck</span></li>
@@ -69,7 +69,7 @@
                 <li><span class="menu-button menu-item" action="gss_update"><i class="fas fa-mobile"></i> Refresh GlideApp</span></li>
                 <li><span class="menu-button menu-item" action="gss_summary"><i class="fas fa-table"></i> GS PC Summary</span></li>
 
-                {% endif %}
+
 
             </ul>
         </li>
@@ -84,35 +84,35 @@
         <li><span class="pull-down">Optimizer</span>
             <ul class="level-2 Rules off">
                 <li><span class="menu-button menu-item" mode="standard" action="build_pdf_rules"><i class="action_icon fas fa-book"></i> Rebuild PDFs</span></li>
-                {% if campaign.is_fics %}
+
                 <li><span class="menu-button slug-item" action='run_duel' mode="standard" title='You can tag two IDs (sperataed with an underscore) to see two specific avatars fight, i.e. 22_93 for Calistre -vs- Lucrecia.'><i
                         class="action_icon fas fa-chess-pawn"></i> Run Duel</span></li>
                 <li><span class="menu-button slug-item" action='run_100_duels' mode="standard" title='RUN x100 DUELS'><i class="action_icon fas fa-chess-knight"></i> Run same duel x100</span></li>
                 <li><span class="menu-button menu-item" action='fencing_tournament' mode='standard' title='RUN FENCING TOURNAMENT'><i class="action_icon fas fa-chess-rook"></i> Fencing Tournament</span></li>
                 <li><span class="menu-button menu-item" action='imperial_tournament' mode='standard' title='Run Imperial Tournament'><i class="action_icon fas fa-chess-king"></i> Imperial Tournament</span></li>
-                {% endif %}
+
             </ul>
         </li>
         {% endif %}
         <li><span class="pull-down" title="Everything about systems, jumpweb and jumpkeys...">Imperial Cartograph</span>
             <ul class="level-2 Cartograph off">
-                {% if campaign.is_fics %}
-                <li><span class="menu-button menu-item" action="jumpweb" mode='overlay' title="Display the Jumpweb"><i class="action_icon fas fa-globe"></i> Map of the Empire</span></li>
+
+                <li><span class="menu-button menu-item" ref="-1" action="jumpweb" mode='overlay' title="Display the Jumpweb"><i class="action_icon fas fa-globe"></i> Map of the Empire</span></li>
                 <li><span class="menu-button slug-item" id="orbital_map" action="orbital" mode='overlay' title="Display the Orbital map of the given system if available."><i class="action_icon fas fa-globe"></i> Orbital Map</span></li>
-                {% endif %}
+
             </ul>
         </li>
         {% endif %}
 
         <li><span class="pull-down" title="PDF Resources...">PDF Goodies</span>
             <ul class="level-2 Documents off">
-                {% if campaign.is_fics %}
+
                 <li><span class="menu-button menu-item" mode="direct" action="media_pdf_results_rules-PDF"><i class="action_icon fas fa-file-pdf"></i> FICS Rules</span></li>
                 <li><span class="menu-button menu-item" mode="direct" action="media_pdf_results_equipment-PDF"><i class="action_icon fas fa-file-pdf"></i> FICS Equipment</span></li>
                 <li><span class="menu-button menu-item" mode="direct" action="media_pdf_results_audit-PDF"><i class="action_icon fas fa-file-pdf"></i> Audit Report</span></li>
                 <li><span class="menu-button menu-item" mode="direct" action="media_pdf_results_{{ campaign.epic.shortcut }}-PDF"><i class="action_icon fas fa-file-pdf"></i> Epic export</span></li>
                 <li><span class="menu-button menu-item" mode="direct" action="media_pdf_results_deck-PDF"><i class="action_icon fas fa-file-pdf"></i> Epic Deck</span></li>
-                {% endif %}
+
             </ul>
         </li>
 

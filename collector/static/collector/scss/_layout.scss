@@ -492,7 +492,7 @@
 
     & .tile {
       display: flex;
-      flex-flow: column nowrap;
+      flex-flow: column wrap;
       justify-content: flex-start;
       align-items: flex-start;
       align-content: flex-start;
@@ -548,7 +548,7 @@
       font-family: FatName;
       font-variant: small-caps;
       order: 0;
-      height: 6em;
+      height: 5vh;
 
 
       & .tile {
@@ -559,7 +559,7 @@
 
     &.middle {
       order: 2;
-      max-height:930px;
+      height:90vh;
       overflow-y:auto;
     }
 
@@ -567,7 +567,7 @@
       color: $fics_front;
       font-family: FatName;
       order: 100;
-      height: 6em;
+      height: 5vh;
       padding: 5px;
 
       & .tile {
@@ -873,3 +873,107 @@ ul.level-2.off {
 
 }
 
+
+
+.mosaic {
+
+  & .fresky {
+    &.top{
+      height:5vh;
+    }
+    &.middle{
+      height:90vh;
+      overflow-y:auto;
+      display:flex;
+      flex-flow:column nowrap;
+      justify-item: flex-start;
+      align-items: stretch;
+      align-content: stretch;
+    }
+    &.bottom{
+      height:5vh;
+    }
+
+    &.doc {
+      //border:3px dotted red;
+      & .tile {
+        order:1;
+        flex: 1 1 auto;
+        display:flex;
+        flex-flow:column nowrap;
+        justify-item: flex-start;
+        align-items: stretch;
+        align-content: stretch;
+        width: 96%;
+        &.storyview {
+          & .title{
+            order:1;
+            & .chapter{
+              width:150px;
+              background:#264b5d;
+              color:black;
+              border-radius:8px;
+            }
+            & h1{
+              width:auto;
+              padding-left:30px;
+              padding-right:1vm;
+            }
+          }
+
+          & .body{
+            order:2;
+            background:$fics_darker;
+            padding:8px;
+            border-radius:8px;
+            columns:3;
+            column-gap: 2vw;
+            min-height:5vh;
+          }
+
+          &.sublevel_1, &.sublevel_2, &.sublevel_3, &.sublevel_4, &.sublevel_5, &.sublevel_6 {
+            border: 1px solid black;
+          }
+
+
+          &.sublevel_1 {
+            width:auto;
+            padding-right:1vw;
+            padding-left:1vw;
+          }
+
+          &.sublevel_2 {
+            width:auto;
+            padding-right:1vw;
+            padding-left:3vw;
+          }
+
+          &.sublevel_3 {
+            width:auto;
+            padding-right:1vw;
+            padding-left:6vw;
+          }
+
+          &.sublevel_4 {
+            width:auto;
+            padding-right:1vw;
+            padding-left:9vw;
+          }
+
+          &.sublevel_5 {
+            width:auto;
+            padding-right:1vw;
+            padding-left:12vw;
+          }
+
+          &.sublevel_6 {
+            width:auto;
+            padding-right:1vw;
+            padding-left:15vw;
+          }
+        }
+      }
+    }
+  }
+
+}

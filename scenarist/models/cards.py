@@ -9,18 +9,33 @@ from django.urls import reverse
 from django.utils.safestring import mark_safe
 
 from scenarist.models.story_models import StoryModel
-from scenarist.models.epics import Epic
 import json
 from django.contrib.postgres.fields import ArrayField
+
+CARD_TYPES = (
+    ('UN', 'Uncategorized'),
+    ('SC', 'Scene'),
+    ('EV', 'Event'),
+    ('BK', 'Background'),
+    ('AC', 'Act'),
+    ('EP', 'Epic'),
+    ('SH', 'Scheme'),
+    ('AD', 'Adventure'),
+    ('NO', 'Note'),
+    ('DR', 'Drama'),
+)
 
 
 class Card(StoryModel):
     class Meta:
-        ordering = ['full_id', 'name']
+        ordering = ['card_type', 'name']
+        # db_table = "story_cards"
 
-    epic = models.ForeignKey(Epic, null=True, on_delete=models.CASCADE, blank=True)
+    # epic = models.ForeignKey(Epic, null=True, on_delete=models.CASCADE, blank=True)
     parent = models.ForeignKey('self', unique=False, related_name='children', on_delete=models.SET_NULL, null=True,
                                blank=True)
+    era = models.IntegerField(default=4997, blank=True)
+    card_type = models.CharField(max_length=2, default='UN', choices=CARD_TYPES, blank=True)
     abstract = models.CharField(default='', max_length=256, blank=True)
     # sublevels = models.CharField(default='', max_length=16, blank=True)
     battle_scene = models.BooleanField(default=False)
@@ -34,6 +49,7 @@ class Card(StoryModel):
     mystery_scene = models.BooleanField(default=False)
     downtime_scene = models.BooleanField(default=False)
     experience = models.PositiveIntegerField(default=0, blank=True)
+
     dramatis_personae = ArrayField(models.CharField(max_length=128), blank=True, null=True)
 
     def __str__(self):
@@ -85,15 +101,16 @@ class Card(StoryModel):
     @property
     def card_type_color(self):
         prefix = {
-            'EP': '#cc5f29',
-            'DR': '#cc5f29',
+            'EP': '#A02020',
+            'DR': '#c37b1b',
             'AC': '#cc5f29',
             'AD': '#aee74d',
             'SC': '#8b9140',
             'EV': '#40918e',
-            'SH': '#ffa5e8',
-            'BK': '#ffa5e8',
-            'UN': '#C0C0C0',
+            'SH': '#806052',
+            'BK': '#84a8ea',
+            'UN': '#808080',
+            'NO': '#C0C0C0',
         }
         return prefix[self.card_type]
 
@@ -139,11 +156,42 @@ class Card(StoryModel):
         job['session_date_str'] = self.sdt.strftime("%Y-%m-%d %H%M")
         job['action_model'] = self.action_model
         job['experience'] = self.experience
-        job['epic_name'] = self.epic.name
+        # job['epic_name'] = self.epic.name
         job['get_casting_string'] = self.get_casting_string
         job['get_casting_avatars'] = self.get_casting_avatars
         job['children_links'] = self.get_episodes_links()
         job['collection_balance'] = self.collection_balance()
+        return job
+
+    @property
+    def tabs(self):
+        return len(self.full_id.split(':'))
+
+    @property
+    def as_json_epic(self):
+        jst = super().to_json()
+        job = json.loads(jst)
+        job['tags'] = self.get_tags
+        job['card_tag'] = self.card_tag
+        job['date_str'] = self.dt.strftime("%Y-%m-%d %H%M")
+        job['session_date_str'] = self.sdt.strftime("%Y-%m-%d %H%M")
+        job['action_model'] = self.action_model
+        job['experience'] = self.experience
+        job['sublevel'] = self.tabs
+        job['background'] = self.card_type_color
+        job['type'] = self.get_card_type_display()
+        job['is_epic'] = self.card_type in ['EP']
+        # job['epic_name'] = self.epic.name
+        # job['get_casting_string'] = self.get_casting_string
+        # job['get_casting_avatars'] = self.get_casting_avatars
+        # job['children_links'] = self.get_episodes_links()
+        # job['collection_balance'] = self.collection_balance()
+        children = []
+        for child in self.children.all().order_by('chapter','card_type'):
+            child_j = child.as_json_epic
+            print(f"{child_j['full_id']}:{child_j['name']}")
+            children.append(child_j)
+        job['children'] = children
         return job
 
     @property
@@ -162,6 +210,7 @@ class Card(StoryModel):
             'EV': 'EVE',
             'SC': 'SCE',
             'UN': 'UND',
+            'NO': 'NOT',
         }
         return prefix[self.card_type]
 
@@ -176,12 +225,14 @@ class Card(StoryModel):
 
     def fix(self):
         # Default Epic to current
-        if not self.epic:
-            from collector.utils.basic import get_current_config
-            self.epic = get_current_config().epic
+        # if not self.epic:
+        #     from collector.utils.basic import get_current_config
+        #     self.epic = get_current_config().epic
         # Handle full id
         if self.parent:
             self.full_id = f"{self.parent.full_id}:{self.card_type_prefix}.{int(self.chapter):02}"
+            if self.card_type not in ['EP']:
+                self.era = self.parent.era
         else:
             if self.card_type == 'EP':
                 self.full_id = f"{self.card_type_prefix}.{int(self.chapter):02}"
@@ -207,7 +258,7 @@ class Card(StoryModel):
         #     self.dramatis_personae = []
         # print(self.get_casting())
         self.dramatis_personae = self.get_full_cast()
-        if self.card_type: #in ['AD', 'SC', 'EV', "SH"]:
+        if self.card_type:  # in ['AD', 'SC', 'EV', "SH"]:
             this_card = "CARD" + str(self.id).zfill(5)
             from collector.models.collection import Collection
             from collector.models.character import Character
@@ -222,7 +273,7 @@ class Card(StoryModel):
             collection.published = self.published
             collection.description = f"List of the characters from the card [{self.full_id} {self.name}]."
             collection.members.clear()
-            if len(self.dramatis_personae)>0:
+            if len(self.dramatis_personae) > 0:
                 rids = []
                 for x in self.dramatis_personae:
                     d = x.split('__')
@@ -373,7 +424,7 @@ class CardAdmin(admin.ModelAdmin):
     ordering = ['full_id']
     list_display = ['name', 'card_type', 'temporary', 'full_id', 'chapter', 'date_offset', 'sdt', 'dt', 'place',
                     'get_casting_string']
-    list_filter = ['epic', 'card_type', 'temporary', 'place']
+    list_filter = ['card_type', 'temporary', 'place']
     search_fields = ['description', 'name', 'resolution']
     list_editable = ['temporary', 'card_type', 'date_offset', 'chapter']
     inlines = [CardLinkInline]

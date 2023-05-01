@@ -108,7 +108,9 @@ class Collector {
             e.stopPropagation();
             let action_tag = $(this).attr("action");
             let mode_tag = $(this).attr("mode");
-            let ref_tag = $(this).attr("ref") | undefined;
+            let ref_tag = $(this).attr("ref");
+            // console.log($(this).attr("ref"))
+            // console.log(ref_tag)
             let params_tag = $(this).attr("params") | undefined;
             let new_tag = action_tag.replaceAll("_", "/").replaceAll("-PDF", ".pdf")
             let url = 'ajax/' + action_tag + '/';
@@ -117,23 +119,27 @@ class Collector {
                 let w = window.open(url, '_blank');
                 w.focus();
             }
-            console.log(params_tag)
-            console.log(ref_tag)
+            // console.log(action_tag)
+            // console.log(params_tag)
+            // console.log(ref_tag)
             if (params_tag) {
                 url += params_tag + '/';
             }
             if (ref_tag != undefined) {
-                url += ref_tag + '/';
+                if (parseInt(ref_tag) >= 0) {
+                    url += ref_tag + '/';
+                }
             }
+            // console.log(url)
             // console.debug("menu-item " + action_tag + " has been clicked..." + url + ' ' + mode_tag+ " "+ref_tag);
             $.ajax({
                 url: url,
                 success: function (answer) {
                     if (mode_tag == 'overlay') {
                         $("#d3area").css('display', 'block');
-                        console.log(action_tag)
+                        // console.log(action_tag)
                         if (action_tag == 'deck') {
-                            console.log("Epic Deck !!");
+                            // console.log("Epic Deck !!");
                             let epicdeck = new EpicDeck(answer.data, '#d3area');
                             epicdeck.perform();
                         } else {
@@ -149,7 +155,7 @@ class Collector {
                     } else if (action_tag == 'statistics') {
                         let pre = "<div class='fresque'><div class='tile chart_panel'>";
                         let post = "</div></div>";
-                        console.log(answer.mosaic);
+                        // console.log(answer.mosaic);
                         $('.mosaic').html(pre + answer.mosaic + post);
                     } else {
                         $('.mosaic').html(answer.mosaic);
@@ -158,8 +164,8 @@ class Collector {
                     //ac.reset(x, "sheet_" + answer.id, "customizer");
                 },
                 error: function (answer) {
-                    console.error('Error on menu-item [' + action_tag + ',' + mode_tag + ',' + params_tag + ']');
-                    console.debug(answer)
+                    console.error('Error on menu-item [' + action_tag + ',' + mode_tag + ',' + params_tag + ']: ('+url+').');
+                    // console.debug(answer)
                     me.rebootLinks();
                 }
             });
@@ -269,7 +275,7 @@ class Collector {
                 url: 'ajax/switcher/' + option + '/' + param + '/' + key + '/',
                 success: function (answer) {
                     console.log(answer);
-                  //  $('#' + option + '_row_' + key + " .cell").removeClass('highlighted');
+                    //  $('#' + option + '_row_' + key + " .cell").removeClass('highlighted');
                     $("#" + option + "_row_" + key).html(answer.row);
                     me.prepareAjax();
                     me.rebootLinks();

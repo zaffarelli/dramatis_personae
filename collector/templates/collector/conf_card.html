@@ -1,0 +1,27 @@
+{% load fics_filters %}
+
+<div class="tile storyview sublevel_{{ data.sublevel }}">
+    <div class='title'>
+        <div class='chapter' style="background:{{ data.background }}">{{ data.type }}
+            {% if data.is_epic %}
+                {{ data.chapter|as_roman }}&nbsp;
+            {% else %}
+                {{ data.chapter }}&nbsp;
+            {% endif %}
+        </div>
+        <h1>{{ data.name }}</h1>
+        <br/><cite>{{ data.abstract }}</cite>
+        <br/><tt>{{ data.full_id }}</tt>
+        <div style="float:right;"><span class="compact view_card" id="view_card_{{ data.id }}" mode="overlay" title="Card Type: {{ data.card_type }}: click to view"><i class="fas fa-view"></i></span></div>
+    </div>
+    <div class='body'>
+        {{ data.description | parse_avatars | safe }}
+        <hr/>
+        {{ data.resolution | parse_avatars | safe }}
+        <hr/>
+        {{ data.rewards | parse_avatars | safe }}
+    </div>
+</div>
+{% for child in data.children %}
+    {% include "collector/conf_card.html" with data=child %}
+{% endfor %}

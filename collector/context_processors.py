@@ -12,19 +12,22 @@ import socket
 
 
 def users(request):
+    epic = None
     if request.user.is_authenticated:
         user_profile = request.user.profile
+        epic = user_profile.current_epic
     else:
         user_profile = None
     return dict(current_user=request.user, user_profile=user_profile)
 
 
 def commons(request):
-    try:
-        from collector.models.campaign import Campaign
-        configs = Campaign.objects.all()
-    except:
-        configs = []
-    campaign = get_current_config(request)
+    # try:
+    #     from collector.models.campaign import Campaign
+    #     configs = Campaign.objects.all()
+    # except:
+    #     configs = []
+    # campaign = get_current_config(request)
+
     return dict(dp_version=settings.RELEASE, instance_name=settings.INSTANCE_NAME,
-            python_version=sys.version, hostname=socket.gethostname().upper(), campaign=campaign, configs=configs, ghostmark='ghostmark')
+            python_version=sys.version, hostname=socket.gethostname().upper(), ghostmark='ghostmark')

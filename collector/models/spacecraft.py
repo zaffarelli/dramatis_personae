@@ -469,7 +469,7 @@ class Spaceship(models.Model):
     ship_ref = models.ForeignKey(ShipRef, on_delete=models.CASCADE, blank=True, null=True)
     owner = models.ForeignKey(Character, on_delete=models.SET_NULL, blank=True, null=True)
     flag = models.CharField(max_length=128, default='', null=True, blank=True)
-    registration_system = models.ForeignKey(System, on_delete=models.SET_NULL, blank=True, null=True)
+    # registration_system = models.ForeignKey(System, on_delete=models.SET_NULL, blank=True, null=True)
     is_available = models.BooleanField(default=False)
     notes = models.TextField(max_length=512, default='', null=True, blank=True)
     video = models.CharField(max_length=128, default='', null=True, blank=True)
@@ -533,5 +533,5 @@ class ShipSystemSlotAdmin(admin.ModelAdmin):
 
 class SpaceshipAdmin(admin.ModelAdmin):
     ordering = ['full_name']
-    list_display = ('full_name', 'ship_ref', 'owner', 'flag', 'registration_system', 'notes', 'is_available')
+    list_display = ('full_name', 'ship_ref', 'owner', 'flag', 'notes', 'is_available')
     list_editable = ['is_available']

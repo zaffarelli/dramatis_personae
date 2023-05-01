@@ -5,7 +5,7 @@
 """
 from django.db import models
 from datetime import datetime
-from scenarist.models.epics import Epic
+
 import logging
 
 logger = logging.getLogger(__name__)
@@ -60,8 +60,8 @@ class Avatar(models.Model):
         if self.player == 'none':
             self.player = ''
         if self.birthdate < 1000:
-            self.birthdate = conf.epic.era - self.birthdate
-            self.age = conf.epic.era - self.birthdate
+            self.birthdate = 5022 - self.birthdate
+            self.age = 5022 - self.birthdate
         self.audit = ""
 
     def get_rid(self, s):

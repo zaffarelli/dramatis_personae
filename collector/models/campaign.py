@@ -25,15 +25,15 @@ RPG_SYSTEMS = (
 
 class Campaign(models.Model):
     class Meta:
-        ordering = ['title', 'epic']
+        ordering = ['title']
         verbose_name = "References: Campaign Config"
 
-    from scenarist.models.epics import Epic
-    from scenarist.models.dramas import Drama
+
     from django.contrib.auth.models import User
+    from scenarist.models.cards import Card
     from collector.models.rpg_system import RpgSystem
     title = models.CharField(default='aaa', max_length=128, )
-    epic = models.ForeignKey(Epic, null=True, blank=True, on_delete=models.SET_NULL)
+
     description = models.TextField(max_length=128, default='', blank=True)
     gm = models.ForeignKey(User, null=True, blank=True, on_delete=models.SET_NULL)
     rpgsystem = models.ForeignKey(RpgSystem, null=True, blank=True, on_delete=models.SET_NULL)
@@ -41,7 +41,7 @@ class Campaign(models.Model):
     is_active = models.BooleanField(default=False)
     is_available = models.BooleanField(default=False)
     smart_code = models.CharField(default='xxxxxx', max_length=6)
-    current_drama = models.ForeignKey(Drama, null=True, blank=True, on_delete=models.SET_NULL)
+    current_drama = models.ForeignKey(Card, null=True, blank=True, on_delete=models.SET_NULL)
     color_front = models.CharField(max_length=9, default='#00F0F0F0')
     color_back = models.CharField(max_length=9, default='#00101010')
     color_linkup = models.CharField(max_length=9, default='#00801080')
@@ -93,36 +93,7 @@ class Campaign(models.Model):
     def parse_details(self):
         """ Return details from the config epic, dramas and acts
         """
-        from scenarist.models.epics import Epic
-        from scenarist.models.dramas import Drama
-        from scenarist.models.acts import Act
-        from scenarist.models.events import Event
-        from collector.utils.fs_fics7 import get_keywords
-
-        epic = Epic.objects.get(name=self.epic.name)
-        # epic_json = self.epic.to_json()
-        dramas = Drama.objects.filter(epic=epic).order_by('chapter', 'dt')
-        context_dramas = []
-        for drama in dramas:
-            context_acts = []
-            acts = Act.objects.filter(drama=drama).order_by('chapter', 'dt')
-            for act in acts:
-                context_events = []
-                events = Event.objects.filter(act=act).order_by('chapter', 'dt')
-                for event in events:
-                    context_event = {'title': event.name, 'data': event}
-                    context_events.append(context_event)
-                context_act = {'title': act.name, 'data': act, 'events': context_events}
-                context_acts.append(context_act)
-            context_drama = {'title': drama.name, 'data': drama, 'acts': context_acts}
-            context_dramas.append(context_drama)
-
-        context_adventures = []
-        for adventure in self.epic.adventure_set.all():
-            context_adventures.append({'title': adventure.name, 'data': adventure})
-            context_adventures.append(context_adventures)
-        context = {'title': epic.name, 'data': epic, 'dramas': context_dramas}
-        context['keywords'] = get_keywords()
+        context = {}
         return context
 
     def prepare_colorset(self, size=16, color_scale=False):
@@ -540,6 +511,6 @@ class Campaign(models.Model):
 
 
 class CampaignAdmin(admin.ModelAdmin):
-    ordering = ['irl_year_start', 'epic__era', 'title']
-    list_display = ['title', 'irl_year_start', 'epic', 'is_active', 'is_available', 'new_narrative', 'smart_code',
+    ordering = ['irl_year_start', 'title']
+    list_display = ['title', 'irl_year_start', 'current_drama', 'is_active', 'is_available', 'new_narrative', 'smart_code',
                     'rpgsystem', 'hidden', 'gm', 'population']

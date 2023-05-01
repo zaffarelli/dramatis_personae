@@ -35,7 +35,7 @@
 
 
     {#    <div class="cell wide brief" title="Place:{{ c.place }}"> {{ c.place }}</div>#}
-    <div class="cell wide20" title="Date"> {{ c.date_offset }}<br/>[ {{ c.date_str }} ]<br/>[ {{ c.session_date_str }} ]
+    <div class="cell wide20" title="Date"> {{ c.era }}<br/>{{ c.date_offset }}<br/>[ {{ c.date_str }} ]<br/>[ {{ c.session_date_str }} ]
     </div>
     <div class="cell wide20" title="Tags"> {{ c.tags|safe }}</div>
     <div class="cell" title="Card's Balance Ratio">{{ c.collection_balance|ppie|safe }}</div>

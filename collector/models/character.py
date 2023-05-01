@@ -35,10 +35,10 @@ class Character(Combattant):
     alliance_ref = models.ForeignKey(AllianceRef, blank=True, null=True, on_delete=models.SET_NULL)
     specie = models.ForeignKey(Specie, default=31, blank=True, null=True, on_delete=models.SET_NULL)
     race = models.CharField(max_length=256, default='', blank=True)
-    native_fief = models.CharField(max_length=200, default='none', blank=True)
-    fief = models.ForeignKey(System, blank=True, null=True, on_delete=models.SET_NULL, related_name='fief')
-    current_fief = models.ForeignKey(System, blank=True, null=True, on_delete=models.SET_NULL,
-                                     related_name='current_fief')
+    # native_fief = models.CharField(max_length=200, default='none', blank=True)
+    # fief = models.ForeignKey(System, blank=True, null=True, on_delete=models.SET_NULL, related_name='fief')
+    # current_fief = models.ForeignKey(System, blank=True, null=True, on_delete=models.SET_NULL,
+    #                                  related_name='current_fief')
     caste = models.CharField(max_length=100, default='Freefolk', blank=True)
     rank = models.CharField(max_length=100, default='', blank=True)
     build_log = models.TextField(default='', blank=True)
@@ -1013,20 +1013,7 @@ class Character(Combattant):
     def update_stories_count(self):
         self.stories_count = 0
         self.stories = ''
-        from scenarist.models.events import Event
-        from scenarist.models.acts import Act
-        from scenarist.models.dramas import Drama
-        from scenarist.models.epics import Epic
-        events = Event.objects.all()
-        acts = Act.objects.all()
-        dramas = Drama.objects.all()
-        epics = Epic.objects.all()
-        self.stories_count += self.count_cast(events)
-        self.stories_count += self.count_cast(acts)
-        self.stories_count += self.count_cast(dramas)
-        self.stories_count += self.count_cast(epics)
-        if self.stories_count == 0:
-            self.audit_log('Warning: character appears in no cast...')
+
         return self.stories_count
 
     def update_game_parameters(self):
