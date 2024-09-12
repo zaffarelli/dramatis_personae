@@ -151,7 +151,7 @@ def parse_avatars(value):
         if ch is not None:
             str_name = ch.full_name
             if ch.alias:
-                str_name = f'{ch.alias} ({ch.full_name})'
+                str_name = f'{ch.aka})'
             replacement_string = '<span id="%d" class="character_link embedded_link" title="%s:\n%s">%s %s %s</span>' % (
                 ch.id, ch.full_name, ch.entrance, str_name,
                 "<i class='fa fa-angle-double-up'></i>" if ch.balanced == True else "<i class='fa fa-angle-double-down'></i>",

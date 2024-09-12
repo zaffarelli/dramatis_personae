@@ -293,7 +293,7 @@ def conf_details(request):
         #     epic_data = campaign.epic.to_json()
         # epic_data = {}
         epic_data = request.user.profile.current_epic.as_json_epic
-        context = {'data': epic_data}
+        context = {'title':epic_data['title'],'data': epic_data, 'comment':epic_data['comment']}
         template = get_template('collector/conf_details2.html')
         html = template.render(context, request)
         response = {'mosaic': html}

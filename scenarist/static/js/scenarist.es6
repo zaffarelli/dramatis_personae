@@ -26,8 +26,8 @@ class Scenarist{
                 success: function(answer) {
                     console.log(mode_tag);
                     if (mode_tag == 'overlay') {
-                        $('#board').html('<div class="a"></div><div class="b" id="card_form_box"></div><div class="c"></div>');
-                        $('#card_form_box').html(answer);
+                        // $('#board').html('<div class="a"></div><div class="b" id="card_form_box"></div><div class="c"></div>');
+                        $('#board').html(answer);
                         $("#board").css('display','flex');
                         me.co.rebootLinks();
                     }else {
@@ -98,8 +98,8 @@ class Scenarist{
                 success: function(answer) {
                     console.log(mode_tag);
                     if (mode_tag == 'overlay') {
-                        $('#board').html('<div class="a"></div><div class="b" id="card_form_box"></div><div class="c"></div>');
-                        $('#card_form_box').html(answer);
+                        // $('#board').html('<div class="a"></div><div class="b" id="card_form_box"></div><div class="c"></div>');
+                        $('#board').html(answer);
                         $("#board").css('display','flex');
                     }else {
                         $('#' + x + '_' + id).html(answer);
@@ -215,16 +215,16 @@ class Scenarist{
 
     doConnect(co){
         this.co = co;
-        this.registerStory('epic');
-        this.registerStory('drama');
-        this.registerStory('act');
-        this.registerStory('event');
-        this.registerStory('adventure');
-        this.registerStory('scheme');
-        this.registerStory('scene');
+        // this.registerStory('epic');
+        // this.registerStory('drama');
+        // this.registerStory('act');
+        // this.registerStory('event');
+        // this.registerStory('adventure');
+        // this.registerStory('scheme');
+        // this.registerStory('scene');
         this.registerStory('card')
-        this.registerStory('backlog');
-        this.registerQuizz()
+        // this.registerStory('backlog');
+        //this.registerQuizz()
     }
 
 }

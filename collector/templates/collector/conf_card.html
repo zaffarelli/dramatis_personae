@@ -1,7 +1,8 @@
 {% load fics_filters %}
 
 <div class="tile storyview sublevel_{{ data.sublevel }}">
-    <div class='title'>
+    <span class="summary {% if data.published %}hidden{% else %}{% endif %}" id="summary__{{ data.id }}">
+        <div class='title' id='title1__{{ data.id }}'>
         <div class='chapter' style="background:{{ data.background }}">{{ data.type }}
             {% if data.is_epic %}
                 {{ data.chapter|as_roman }}&nbsp;
@@ -9,18 +10,40 @@
                 {{ data.chapter }}&nbsp;
             {% endif %}
         </div>
-        <h1>{{ data.name }}</h1>
-        <br/><cite>{{ data.abstract }}</cite>
-        <br/><tt>{{ data.full_id }}</tt>
-        <div style="float:right;"><span class="compact view_card" id="view_card_{{ data.id }}" mode="overlay" title="Card Type: {{ data.card_type }}: click to view"><i class="fas fa-view"></i></span></div>
+        <div class="name">{{ data.name }}</div>
+        <div class="abstract">{{ data.abstract }} </div>
+        <div class="full_id">{{ data.full_id }} </div>
+        <div class="shortcuts">
+            <span class="compact toggle toggle_corpus" title="Toggle" option="{{ data.id }}"><i class="fas fa-arrow-down"></i></span>&nbsp;
+        </div>
+        </div>
+    </span>
+    <span class='corpus {% if data.published %}{% else %}hidden{% endif %}' id="corpus__{{ data.id }}">
+    <div class='title' id='title__{{ data.id }}'>
+        <div class='chapter' style="background:{{ data.background }}">{{ data.type }}
+            {% if data.is_epic %}
+                {{ data.chapter|as_roman }}&nbsp;
+            {% else %}
+                {{ data.chapter }}&nbsp;
+            {% endif %}
+        </div>
+        <div class="name">{{ data.name }}</div>
+        <div class="abstract">{{ data.abstract }} </div>
+        <div class="full_id">{{ data.full_id }} </div>
+        <div class="shortcuts">
+            <span class="compact toggle toggle_summary" title="Toggle"  option="{{ data.id }}"><i class="fas fa-arrow-up"></i></span>&nbsp;
+            <span class="compact view_card" id="view_card_{{ data.id }}" mode="overlay"
+                  title="Card Type: {{ data.card_type }}: click to view"><i class="fas fa-eye"></i></span>
+        </div>
     </div>
-    <div class='body'>
+    <div class='body' id='children__{{ data.id }}'>
         {{ data.description | parse_avatars | safe }}
         <hr/>
         {{ data.resolution | parse_avatars | safe }}
         <hr/>
         {{ data.rewards | parse_avatars | safe }}
     </div>
+    </span>
 </div>
 {% for child in data.children %}
     {% include "collector/conf_card.html" with data=child %}

@@ -475,6 +475,13 @@ class Collector {
             });
         });
 
+        $('.toggle').off().on('click', function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+            let option=$(this).attr("option");
+            $("#summary__"+option).toggleClass('hidden');
+            $("#corpus__"+option).toggleClass('hidden');
+        });
 
         $('.edit_characterold').off()
             .on('click', function (event) {

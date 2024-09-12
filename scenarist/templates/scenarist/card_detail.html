@@ -4,6 +4,7 @@
 {% block dialog_header %}
     <h1>View {{ object.action_model }} [{{ object.name }}]</h1>
 {% endblock dialog_header %}
+
 {% block dialog_body %}
     <div class="view">
 
@@ -85,14 +86,9 @@
         </div>
     </div>
 {% endblock dialog_body %}
+
 {% block dialog_footer %}
-    <button class="dialog_action" action="{{ object.action_model }}" option="{{ object.id }}" param="view" id="next"><i
-            class="fa fa-arrow-circle-right"></i> Next
-    </button>
     <button class="dialog_action" action="{{ object.action_model }}" option="{{ object.id }}" param="edit" id="edit"><i
             class="fa fa-pause-circle"></i> Edit
-    </button>
-    <button class="dialog_action" action="{{ object.action_model }}" option="{{ object.id }}" param="view" id="previous"><i
-            class="fa fa-arrow-circle-left"></i> Previous
     </button>
 {% endblock dialog_footer %}

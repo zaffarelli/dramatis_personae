@@ -1,5 +1,5 @@
 {% extends "zapp/dialog.html" %}
-
+{% load fics_filters %}
 
 {% block dialog_header %}
     <h1>Edit {{ object.action_model }} [{{ object.name }}]</h1>
@@ -55,6 +55,12 @@
                     <label for="is_ongoing">On Going</label>
                     {{ form.is_ongoing }}
                 </li>
+                <li  class="o3">
+                    {{ form.published.errors }}
+                    <label for="published">Published</label>
+                    {{ form.published }}
+                </li>
+
                 <li class="o2">
                     {{ form.parent.errors }}
                     <label for="parent">Parent</label>
@@ -214,11 +220,7 @@
 {% endblock dialog_body %}
 
 {% block dialog_footer %}
-
     <button class="dialog_action" action="{{ object.action_model }}" option="{{ object.id }}" id="update"><i
             class="fa fa-stop-circle"></i> Update
     </button>
-
-
-
 {% endblock dialog_footer %}

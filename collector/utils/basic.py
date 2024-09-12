@@ -29,6 +29,7 @@ def render_to_pdf(template_src, context_dict={}):
         response['content-disposition'] = content
         return response
     return HttpResponse(pdf.err, content_type='text/plain')
+    return HttpResponse(pdf.err, content_type='text/plain')
 
 
 def write_pdf(template_src, context_dict={}):

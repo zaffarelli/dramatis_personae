@@ -22,7 +22,7 @@ class Zapp {
             }
             if (id == 'close') {
                 /* just close the dialog */
-                $("#board_b").html("");
+                $("#board").html("");
                 $("#board").css("display", "none");
                 $('#'+action_tag+'s_list').click();
             } else {
@@ -43,13 +43,13 @@ class Zapp {
                         dataType: 'json',
                         success: function (answer) {
                             console.log('Success... ');
+                            $('#board').html(answer)
                             me.co.rebootLinks();
 
                         },
                         error: function (answer) {
-                            console.log('Error... ');
-                            console.log(answer);
-                            $('#board_b').html(answer.responseText);
+                            console.error(answer);
+                            $('#board').html(answer.responseText);
                             me.co.rebootLinks();
                         }
                     });
@@ -58,7 +58,6 @@ class Zapp {
                         url: action_tag + 's/' + option + '/view/',
                         success: function (answer) {
                             $('#board').html(answer);
-                            console.log(answer);
                             // if (answer.mobile_form) {
                                 // console.log(answer.mobile_form);
                                 // $('#customizer').html(answer.mobile_form);
@@ -77,18 +76,16 @@ class Zapp {
                     });
 
                 } else if (id == "edit") {
-                    console.log('Edit... ');
                     let urlupdate = action_tag + 's/' + option + '/edit/';
                     $.ajax({
                         url: urlupdate,
                         success: function (answer) {
-                            console.log('Success... ');
                             $('#board').html(answer);
                             $("#board").css('display', 'flex');
                             me.co.rebootLinks();
                         },
                         error: function (answer) {
-                            console.log('Error... ');
+                            console.error('Error... ');
                             console.log(answer);
                             $('#board').html(answer);
                             me.co.rebootLinks();

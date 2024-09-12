@@ -108,7 +108,7 @@ class Card(StoryModel):
             'SC': '#8b9140',
             'EV': '#40918e',
             'SH': '#806052',
-            'BK': '#84a8ea',
+            'BK': '#a88484',
             'UN': '#808080',
             'NO': '#C0C0C0',
         }
@@ -181,13 +181,20 @@ class Card(StoryModel):
         job['background'] = self.card_type_color
         job['type'] = self.get_card_type_display()
         job['is_epic'] = self.card_type in ['EP']
+        job['title'] = self.name
+        job['comment'] = self.abstract
+        job['published'] = self.published
         # job['epic_name'] = self.epic.name
         # job['get_casting_string'] = self.get_casting_string
         # job['get_casting_avatars'] = self.get_casting_avatars
         # job['children_links'] = self.get_episodes_links()
         # job['collection_balance'] = self.collection_balance()
         children = []
-        for child in self.children.all().order_by('chapter','card_type'):
+        if self.card_type in ['EP']:
+            all = self.children.all().order_by('card_type','chapter')
+        else:
+            all = self.children.all().order_by('chapter','card_type')
+        for child in all:
             child_j = child.as_json_epic
             print(f"{child_j['full_id']}:{child_j['name']}")
             children.append(child_j)

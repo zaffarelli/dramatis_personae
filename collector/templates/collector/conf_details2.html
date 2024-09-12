@@ -1,9 +1,10 @@
 {% load fics_filters %}
-<div class="fresky top">
-    <h1>{{ data.name }}</h1>
+<div class="fresque top">
+    <h1>{{ title }}</h1>
 </div>
-<div class="fresky middle doc">
+<div class="fresque middle doc">
     {% include "collector/conf_card.html" with data=data %}
 </div>
-<div class="fresky bottom">
+<div class="fresque bottom">
+    {{ comment }}
 </div>
