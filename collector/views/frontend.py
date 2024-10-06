@@ -13,6 +13,7 @@ from collector.models.specie import Specie
 from collector.models.campaign import Campaign
 from django.template.loader import get_template
 import datetime
+from collector.utils.helper import is_ajax
 from collector.utils.basic import get_current_config, export_epic, slug_decode
 from collector.utils.fics_references import FONTSET
 from django.conf import settings
@@ -102,7 +103,7 @@ def get_list(request, id, slug='none'):
 
 def show_todo(request):
     campaign = get_current_config(request)
-    if request.is_ajax:
+    if is_ajax(request):
         character_items = campaign.avatars.filter(priority=True).order_by('full_name')
         if request.user.is_authenticated:
             paginator = Paginator(character_items, request.user.profile.option_display_count)
@@ -120,7 +121,7 @@ def show_todo(request):
 
 
 def tile_avatar(request, pk=None):
-    if request.is_ajax:
+    if is_ajax(request):
         character_item = Character.objects.get(pk=pk)
     context = {'c': character_item}
     template = get_template('collector/character_tile.html')
@@ -130,7 +131,7 @@ def tile_avatar(request, pk=None):
 
 def deep_toggle(request, slug=None, id=None):
     response = {'status': 0}
-    if request.is_ajax:
+    if is_ajax(request):
         matches = Character.objects.filter(id=id)
         if slug is not None:
             if len(matches) == 1:
@@ -144,7 +145,7 @@ def deep_toggle(request, slug=None, id=None):
 
 
 def get_storyline(request, slug='none'):
-    if request.is_ajax:
+    if is_ajax(request):
         config_items = Campaign.objects.filter(hidden=False)
         if slug != 'none':
             for c in config_items:
@@ -254,7 +255,7 @@ def toggle_spotlight(request, id=None):
 
 
 def conf_details(request):
-    if request.is_ajax:
+    if is_ajax(request):
         from collector.models.campaign import Campaign
         campaign = get_current_config(request)
         if campaign.new_narrative:
@@ -300,7 +301,7 @@ def ghostmark_test(request, id=None):
 
 
 def display_sheet(request, pk=None):
-    if request.is_ajax:
+    if is_ajax(request):
         from collector.models.campaign import Campaign
         campaign = get_current_config(request)
         if pk is None:
@@ -348,7 +349,7 @@ def switch_epic(request, slug="none"):
 
 
 def display_sessionsheet(request, slug=None):
-    if request.is_ajax:
+    if is_ajax(request):
         from collector.models.campaign import Campaign
         campaign = get_current_config(request)
         pks = []
@@ -384,7 +385,7 @@ def display_sessionsheet(request, slug=None):
 
 
 def all_epics(request):
-    if request.is_ajax:
+    if is_ajax(request):
         from collector.models.campaign import Campaign
         campaigns = Campaign.objects.all().order_by('epic__era')
         epics = []

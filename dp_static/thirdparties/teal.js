@@ -1,1 +1,1 @@
-/home/zaffarelli/Perso/github/dramatis_personae/collector/static/thirdparties/teal.js
+/home/zaffarelli/Projects/github/dramatis_personae/collector/static/thirdparties/teal.js

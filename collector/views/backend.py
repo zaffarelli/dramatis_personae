@@ -4,7 +4,7 @@
  ═╩╝╩    ╚═╝└─┘┴─┘┴─┘└─┘└─┘ ┴ └─┘┴└─
 """
 from django.http import HttpResponse, Http404, JsonResponse
-from django.shortcuts import render, get_object_or_404, redirect, render_to_response
+from django.shortcuts import render, get_object_or_404, redirect
 from django.conf import settings
 from collector.models.character import Character
 from django.template.loader import get_template, render_to_string
@@ -14,6 +14,7 @@ from collector.utils.xls_collector import export_to_xls, update_from_xls
 from collector.utils.basic import get_current_config, extract_rules, make_audit_report, make_deck
 from collector.utils.gs_export import update_gss, summary_gss
 from collector.models.sequence import Sequence
+from collector.utils.helper import is_ajax
 import os
 import json
 
@@ -129,7 +130,7 @@ def bloke_selector(request):
 
 def load_sequence(request):
     context = {'status': 'not ajax'}
-    if request.is_ajax:
+    if is_ajax(request):
         reference = request.POST["reference"]
         order = request.POST["order"]
         sequences = Sequence.objects.filter(reference=reference, order=order)
@@ -145,7 +146,7 @@ def load_sequence(request):
 
 def save_sequence(request):
     context = {'status': 'not ajax'}
-    if request.is_ajax:
+    if is_ajax(request):
         reference = request.POST["reference"]
         order = request.POST["order"]
         data = request.POST["data"]
@@ -163,7 +164,7 @@ def save_sequence(request):
 
 
 def epic_deck(request):
-    if request.is_ajax:
+    if is_ajax(request):
         campaign = get_current_config(request)
         characters = []
         all = campaign.dramatis_personae.filter(selected=True)

@@ -1,1 +1,1 @@
-/home/zaffarelli/Perso/github/dramatis_personae/collector/static/font-awesome/js/fontawesome.js
+/home/zaffarelli/Projects/github/dramatis_personae/collector/static/font-awesome/js/fontawesome.js

@@ -1,1 +1,1 @@
-/home/zaffarelli/.virtualenvs/dramatis_personae/lib/python3.10/site-packages/colorfield/static/colorfield/jscolor/jscolor.js
+/home/zaffarelli/.virtualenvs/dramatis_personae/lib/python3.12/site-packages/colorfield/static/colorfield/jscolor/jscolor.js

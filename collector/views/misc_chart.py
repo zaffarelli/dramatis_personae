@@ -49,10 +49,15 @@ def get_population_statistics(request, *args, **kwargs):
 
 
 def get_keywords(request, *args, **kwargs):
+    context = {}
+    return JsonResponse(context)
+
+    pass
     user_profile = request.user.profile
     # print(user_profile)
     campaign = get_current_config(request)
     all = campaign.dramatis_personae.order_by('keyword')
+    all = []
     data = {'keywords': []}
     edata = {'dramas': []}
     keyword = ''

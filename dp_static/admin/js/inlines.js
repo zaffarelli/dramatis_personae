@@ -1,1 +1,1 @@
-/home/zaffarelli/.virtualenvs/dramatis_personae/lib/python3.10/site-packages/django/contrib/admin/static/admin/js/inlines.js
+/home/zaffarelli/.virtualenvs/dramatis_personae/lib/python3.12/site-packages/django/contrib/admin/static/admin/js/inlines.js

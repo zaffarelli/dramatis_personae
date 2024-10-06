@@ -6,10 +6,10 @@ from django.http import HttpResponse, Http404, JsonResponse
 from django.template.loader import get_template
 import json
 from django.contrib import messages
-
+from collector.utils.helper import is_ajax
 
 def show_jumpweb(request):
-    if request.is_ajax:
+    if is_ajax(request):
         campaign = get_current_config(request)
         context = {}
         context['data'] = {}
@@ -68,7 +68,7 @@ def show_jumpweb(request):
 
 
 def show_orbital_map(request, slug=None):
-    if request.is_ajax:
+    if is_ajax(request):
 
         campaign = get_current_config(request)
         slug = slug_decode(slug)

@@ -4,7 +4,7 @@
  ═╩╝╩    ╚═╝└─┘┴─┘┴─┘└─┘└─┘ ┴ └─┘┴└─
 '''
 from openpyxl import Workbook
-from openpyxl.compat import range
+#from openpyxl.compat import range
 from openpyxl.utils import get_column_letter
 from collector.models.character import Character
 from collector.models.weapon import WeaponRef

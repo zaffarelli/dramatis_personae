@@ -6,6 +6,7 @@
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(os.path.join(__file__,os.pardir))))
+#BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 INSTALLED_APPS = [
     'optimizer.apps.OptimizerConfig',
     'scenarist.apps.ScenaristConfig',
@@ -17,8 +18,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'extra_views',
-    'sass_processor',
+    # 'extra_views',
+    #'sass_processor',
+    'compressor',
     'colorfield',
     'bootstrap_datepicker_plus',
 ]
@@ -34,6 +36,17 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'scenarist.exceptions.middleware.ExceptionMiddleware',
 ]
+
+COMPRESS_PRECOMPILERS = (
+    ('text/x-scss', 'django_libsass.SassCompiler'),
+)
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
+)
+
 
 ROOT_URLCONF = 'dramatis_personae.urls'
 
@@ -64,14 +77,10 @@ CHANNEL_LAYERS = {
     },
 }
 
-STATICFILES_FINDERS = [
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'sass_processor.finders.CssFinder',
-]
 
-#LOGPATH = os.path.join(BASE_DIR,'logs/')
-LOGPATH = '/var/log/dramatis_personae/'
+LOGPATH = os.path.join(BASE_DIR,'logs/')
+
+#LOGPATH = '/var/log/dramatis_personae/'
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': True,
@@ -151,5 +160,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'dp_media/')
 
 LOGIN_REDIRECT_URL = '/'
 
+DEFAULT_AUTO_FIELD='django.db.models.BigAutoField'
+
 MAX_CHAR = 20
-RELEASE = '0.8.1'
+RELEASE = '0.9.0'
