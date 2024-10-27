@@ -161,7 +161,7 @@ def get_storyline(request, slug='none'):
 
 def recalc_avatar(request, id=None):
     campaign = get_current_config(request)
-    if request.is_ajax():
+    if is_ajax(request):
         messages.warning(request, 'Recalculating...')
         item = campaign.avatars.get(pk=id)
         item.need_fix = True
@@ -195,7 +195,7 @@ def recalc_avatar(request, id=None):
 
 def wa_export_character(request, id=None):
     campaign = get_current_config(request)
-    if request.is_ajax():
+    if is_ajax(request):
         item = campaign.avatars.get(pk=id)
         template = get_template('collector/character_wa_statblock.html')
         character = template.render({'c': item}, request)
@@ -225,7 +225,7 @@ def add_avatar(request, slug=None):
         item.save()
         item.specie = Specie.objects.filter(species='Urthish').first()
         item.keyword = campaign.epic.full_id
-    item.get_rid(item.full_name)
+    item.toRID(item.full_name)
     item.save()
     character_item = campaign.avatars.get(pk=item.id)
     context = {'mosaic': {'rid': character_item.rid}}
@@ -307,7 +307,8 @@ def display_sheet(request, pk=None):
         if pk is None:
             pk = 22
         c = Character.objects.get(id=pk)
-        scenario = campaign.epic.title.upper()
+        print(campaign)
+        scenario = campaign.epic.name.upper()
         pre_title = campaign.epic.place + ' - ' + campaign.epic.date
         post_title = "FuZion Interlock Custom System v7.5"
         spe = c.get_specialities()

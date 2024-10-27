@@ -32,7 +32,7 @@ class Campaign(models.Model):
     from scenarist.models.dramas import Drama
     from django.contrib.auth.models import User
     from collector.models.rpg_system import RpgSystem
-    title = models.CharField(default='aaa', max_length=128, )
+    title = models.CharField(default='aaa', max_length=128)
     epic = models.ForeignKey(Epic, null=True, blank=True, on_delete=models.SET_NULL)
     description = models.TextField(max_length=128, default='', blank=True)
     gm = models.ForeignKey(User, null=True, blank=True, on_delete=models.SET_NULL)

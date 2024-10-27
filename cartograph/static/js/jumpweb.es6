@@ -7,33 +7,43 @@ class Jumpweb {
 
     init(data) {
         let me = this;
-        me.size = 110;
-        me.width = me.size * 80;
-        me.height = me.size * 60;
-        me.selectedNode = undefined;
-        me.w = parseInt($(me.parent).css('width'));
-        me.h = parseInt($(me.parent).css('height'));
-        me.data = data;
-        me.era = me.data.era;
+        me.size = 150;
+        me.width = me.size * 80
+        me.height = me.size * 60
+        me.base_font = "Khand"
+        me.selectedNode = undefined
+        me.w = parseInt($(me.parent).css('width'))
+        me.h = parseInt($(me.parent).css('height'))
+        me.data = data
+        me.era = 5002
+        me.GLOBAL_HEIGHT = 60
+        me.GLOBAL_WIDTH = 90
         //me.new_routes = me.data.new_routes
-        me.ox = 40;
-        me.oy = 30;
+        me.ox = me.GLOBAL_WIDTH / 2 ;
+        me.oy = me.GLOBAL_HEIGHT / 2 ;
         me.step_x = me.size;
         me.step_y = me.size;
-        d3.select(me.parent).selectAll("svg").remove();
+
+        me.infotxt = []
+
+        d3.select(me.parent).select("#jumpweb").remove();
         // console.log(parseInt(me.w)+"/"+parseInt(me.h));
         me.vis = d3.select(me.parent).append("svg")
-            .attr("viewBox", "0 0 " + me.w + " " + me.h)
+            .attr("viewBox", (-me.ox)+" "+(-me.oy)+" " + me.w + " " + me.h)
             .attr("width", me.w)
             .attr("height", me.h)
             .attr("id", "jumpweb");
-        me.svg = me.vis.append("g")
+        me.layout = me.vis.append("g")
+            .attr("class", "layout")
+             .attr('transform', function (d) {
+                 return "translate(" + (-me.ox * me.step_x) + "," + (-me.oy * me.step_y) + ")";
+             })
+        me.back = me.layout.append("g")
+            .attr("class", "back")
+        me.svg = me.layout.append("g")
             .attr("class", "all")
-            .style("fill", "#331133")
-            .attr('transform', function (d) {
-                return "translate(" + (-4 * me.ox * me.size / 5) + "," + (-6 * me.oy * me.size / 7) + ")";
-            })
-            .append('g');
+        me.ui = me.vis.append("g")
+            .attr("class", "ui")
         me.gate_stroke = "#333"
         me.gate_fill = "#999"
         me.panel_stroke = "#111"
@@ -43,25 +53,34 @@ class Jumpweb {
         me.gate_off = "#747"
         me.mark = 8;
 
+        // Spots
         me.spot_refs = []
-        _.forEach([...Array(81).keys()], function (i) {
-            _.forEach([...Array(61).keys()], function (j) {
-                me.spot_refs.push({'x': i - 41, 'y': j - 31});
+        _.forEach([...Array(me.GLOBAL_WIDTH-1).keys()], function (i) {
+            _.forEach([...Array(me.GLOBAL_HEIGHT-1).keys()], function (j) {
+                me.spot_refs.push({'x': i - (me.ox), 'y': j - (me.oy)});
             });
         });
+        // Nodes
         _.forEach(me.data.nodes, function (item, index) {
-            if (item.discovery > me.data.era) {
+            if (item.discovery > me.era) {
                 item.secret = true;
             }
-        });
+        })
+        console.log(me.data.nodes);
+        // Links
+        me.selected_routes = {}
         _.forEach(me.data.links, function (item, index) {
-            item.source_node = _.find(me.data.nodes, {id: item.source});
-            item.target_node = _.find(me.data.nodes, {id: item.target});
-            if (item.source_node.secret | item.target_node.secret) {
+            let a = _.find(me.data.nodes, {id: item.source})
+            let b = _.find(me.data.nodes, {id: item.target})
+            item.name = a.name + "_" + b.name
+            item.code = a.id + "_" + b.id
+            item.source_node = a.id
+            item.target_node = b.id
+            if (a.secret | b.secret) {
                 item.secret = true;
             }
         });
-        // console.log(me.data.links);
+        console.log(me.data.links);
     }
 
     formatXml(xml) {
@@ -96,83 +115,33 @@ class Jumpweb {
         return formatted;
     }
 
-    draw_layout() {
-        let me = this;
-        let layout = me.svg.selectAll(".rings")
-            .data([2, 6, 12, 18, 24, 30, 36, 42, 48, 54, 60])
-            .enter()
-            .append("g")
-            .attr("transform", function (d) {
-                let x = me.ox * me.step_x;
-                let y = me.oy * me.step_y;
-                return "translate(" + x + "," + y + ")";
-            });
-        layout.append('ellipse')
-            .attr('class', "rings")
-            .attr("cx", 0)
-            .attr("cy", 0)
-            .attr("rx", function (d) {
-                return d * me.step_x;
-            })
-            .attr("ry", function (d) {
-                return d * me.step_y / 2;
-            })
-            .style("fill", "none")
-            .style("stroke", "#FC4")
-            .style("stroke-dasharray", "4 16")
-            .style("stroke-width", function (d) {
-                return (70 - d) / 4;
-            })
-            .style("opacity", function (d) {
-                return 0.6 - d / 100;
-            });
+    drawLayout() {
+        let me = this
+//         me.layout.append('rect')
+//             .attr("x",0)
+//             .attr("y",0)
+//             .attr("width",me.step_x*me.GLOBAL_WIDTH)
+//             .attr("height",me.step_y*me.GLOBAL_HEIGHT)
+//             .style("fill","none")
+//             .style("stroke","#A02020")
+//             .style("stroke-width","3pt")
+        me.drawSpots()
+        me.drawRings()
+    }
 
-        layout.append('text')
-            .style("font-family", "Lato")
-            .style("font-size", "20pt")
-            .style("text-anchor", "middle")
-            .style("fill", "#888")
-            .style("strike", "#111")
-            .style("strike-width", "0.1pt")
-            .attr('y', me.step_y * 20)
-            .text("The Known Worlds - circa " + me.era + " AD")
-//             .on('click', function(d) {
-//                 // console.log("exporting")
-//                 let now = new Date()
-//                     .toISOString()
-//                     .replace(/[^0-9]/g, "");
-//                 $('svg .not_printable').css("opacity", 0);
-//                 $('svg .only_printable').css("opacity", 1);
-//                 let base_svg = d3.select("svg#jumpweb").html();
-//                 $('svg .not_printable').css("opacity", 1);
-//                 $('svg .only_printable').css("opacity", 0);
-//
-//                 let exportable_svg = '<?xml version="1.0" encoding="ISO-8859-1" ?> \
-// <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"> \
-// <svg class="fence_svg_export" \
-// xmlns="http://www.w3.org/2000/svg" version="1.1" \
-// xmlns:xlink="http://www.w3.org/1999/xlink" \
-// title="jumpweb_' + me.mode + '_' + now + '.svg"> \
-// ' + base_svg + ' \
-// </svg>';
-//                 let fname = "jumpweb_" + me.era + "_" + now + ".svg"
-//                 let nuke = document.createElement("a");
-//                 nuke.href = 'data:application/octet-stream;base64,' + btoa(me.formatXml(exportable_svg));
-//                 nuke.setAttribute("download", fname);
-//                 nuke.click();
-//             })
-        ;
-        let spots = me.svg.selectAll(".spots")
+    drawSpots(){
+        let me = this
+        let spots = me.back.selectAll(".spots")
             .data(me.spot_refs)
             .enter()
             .append("g")
             .attr("transform", function (d) {
-                let x = me.ox * me.step_x;
-                let y = me.oy * me.step_y;
+                let x = (me.ox+1) * me.step_x;
+                let y = (me.oy+1) * me.step_y;
                 return "translate(" + x + "," + y + ")";
             });
         spots.append('circle')
-            .attr('class', 'spots')
+            .attr('class', 'spots not_printable')
             .attr('id', function (d) {
                 return 'spot_' + d.x + '_' + d.y;
             })
@@ -183,9 +152,9 @@ class Jumpweb {
             .attr('cy', function (d) {
                 return d.y * me.step_x;
             })
-            .attr('stroke-width', '2pt')
-            .attr('stroke', '#222')
-            .attr('fill', '#111')
+            .attr('stroke-width', '1pt')
+            .attr('stroke', '#111')
+            .attr('fill', '#222')
             .attr('opacity', 1)
             .on('mouseover', function (e, d) {
 
@@ -201,7 +170,7 @@ class Jumpweb {
 
             })
             .on('click', function (e, d) {
-                if (me.data.mj) {
+                if (e.ctrlKey) {
                     if (me.selectedNode) {
                         console.log('Spot ' + d.x + " " + d.y + " and selected node is [" + me.selectedNode.name + "]!");
                         let tgt = _.find(me.data.nodes, {id: me.selectedNode.id})
@@ -216,7 +185,127 @@ class Jumpweb {
                 }
             })
         ;
+    }
 
+    drawRings(){
+        let me = this
+        let rings = me.back.selectAll(".rings")
+            .data([2, 6, 12, 18, 24, 30, 36, 42, 48, 54, 60])
+            .enter()
+            .append("g")
+            .attr("transform", function (d) {
+                let x = me.ox * me.step_x;
+                let y = me.oy * me.step_y;
+                return "translate(" + x + "," + y + ")";
+            });
+        rings.append('ellipse')
+            .attr('class', "rings")
+            .attr("cx", 0)
+            .attr("cy", 0)
+            .attr("rx", function (d) {
+                return d * me.step_x;
+            })
+            .attr("ry", function (d) {
+                return d * me.step_y / 2;
+            })
+            .style("fill", "none")
+            .style("stroke", "#FC4")
+            .style("stroke-dasharray", "4 1")
+            .style("stroke-width", function (d) {
+                return (70 - d) / 40;
+            })
+            .style("opacity", function (d) {
+                return 0.6 - d / 100;
+            });
+
+        }
+
+
+    drawUI(){
+        let me = this
+        me.ui.append('text')
+            .style("font-family", me.base_font)
+            .style("font-size", "30pt")
+            .style("text-anchor", "middle")
+            .style("fill", "#888")
+            .style("stroke", "#111")
+            .style("stroke-width", "0.5pt")
+            .attr('x', me.w / 2)
+            .attr('y', me.h * 0.96)
+            .text("The Known Worlds - circa " + me.era + " AD")
+            .on('click', function(d) {
+                console.log("exporting")
+                let now = new Date()
+                    .toISOString()
+                    .replace(/[^0-9]/g, "");
+                $('svg .not_printable').css("opacity", 0);
+                $('svg .only_printable').css("opacity", 1);
+                let base_svg = d3.select("#jumpweb").html();
+                let flist = '<style>';
+                for (let f of me.data['fontset']) {
+                    flist += '@import url("https://fonts.googleapis.com/css2?family=' + f + '");';
+                }
+                flist += '</style>';
+
+                $('svg .not_printable').css("opacity", 1);
+                $('svg .only_printable').css("opacity", 0);
+
+                let exportable_svg = '<?xml version="1.0" encoding="ISO-8859-1" ?> \
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"> \
+<svg class="fence_svg_export" \
+xmlns="http://www.w3.org/2000/svg" version="1.1" \
+xmlns:xlink="http://www.w3.org/1999/xlink" \
+title="jumpweb_' + me.mode + '_' + now + '.svg"> \
+'+ flist + base_svg + '</svg>';
+
+                let fname = "jumpweb_" + me.era + "_" + now + ".svg"
+                let nuke = document.createElement("a");
+                nuke.href = 'data:application/octet-stream;base64,' + btoa(me.formatXml(exportable_svg));
+                nuke.setAttribute("download", fname);
+                nuke.click();
+            })
+
+        me.infoBlock = me.ui.append("g")
+            .attr('id', "infoblock")
+            .style('opacity', 0)
+
+        me.refreshInfoBlock()
+    }
+
+    refreshInfoBlock(){
+        let me = this
+        me.ui.select("#inforect").remove()
+        me.infoBlock.append("rect")
+            .attr("id","inforect")
+            .attr('width', me.step_x*3)
+            .attr('height', (me.infotxt.length+1)*me.step_y/5)
+            .attr('rx', me.step_x/20)
+            .attr('ry', me.step_y/20)
+            .style("fill", "#111")
+            .style("stroke", "#FC4")
+            .style("stroke-width", "1pt")
+            .on("click", (e,d) => {
+                me.ui.select("#infoblock")
+                    .transition()
+                    .delay(50)
+                    .duration(500)
+                    .ease(d3.easeSin)
+                    .style("opacity", 0)
+            })
+        _.forEach(me.infotxt, (v,k) => {
+            me.ui.select("#infotxt"+k).remove()
+            me.infoBlock.append('text')
+                .attr("id","infotxt"+k)
+                .attr('x', me.step_x/10)
+                .attr('y', (k+1)*(me.step_y/5))
+                .style("font-family", me.base_font)
+                .style("font-size", "16pt")
+                .style("text-anchor", "start")
+                .style("fill", "#FFF")
+                .style("stroke", "#999")
+                .style("stroke-width", "0.5pt")
+                .text(v)
+        })
     }
 
 
@@ -228,7 +317,7 @@ class Jumpweb {
             })
             .attr("dx", me.mark * x)
             .attr("dy", me.mark * y)
-            .style("font-family", "Lato")
+            .style("font-family", me.base_font)
             .style("font-size", "9pt")
             .style("font-weight", "bold")
             .style("fill", "#DDD")
@@ -246,8 +335,7 @@ class Jumpweb {
     }
 
     draw_node(node) {
-        let me = this;
-
+        let me = this
         node.append("circle")
             .attr("class", "bullet")
             .attr("r", me.mark * 10)
@@ -257,8 +345,7 @@ class Jumpweb {
                 return "none";
             })
             .attr("stroke-width", "1pt")
-            .attr("opacity", "0.3");
-
+            .attr("opacity", "0.3")
         node.append("circle")
             .attr("class", "frame circle")
             .attr("r", me.mark * 4)
@@ -272,28 +359,28 @@ class Jumpweb {
                 return "#666";
             })
             .style("fill", "none")
-            .style("stroke-width", "8pt");
+            .style("stroke-width", "8pt")
 
         node.append("circle")
             .attr("r", me.mark * 4)
             .style("stroke", me.gate_stroke)
             .style("fill", "none")
-            .style("stroke-width", "2pt");
+            .style("stroke-width", "2pt")
 
         node.append("circle")
             .attr("r", me.mark * 3)
             .style("stroke", me.gate_stroke)
             .style("fill", "none")
-            .style("stroke-width", "4pt");
+            .style("stroke-width", "4pt")
 
         node.append("circle")
             .attr("r", me.mark * 4)
             .style("stroke", "none")
             .style("fill", function (d) {
-                return "#333";
+                return "#333"
             })
             .style("stroke-width", me.mark + "pt")
-            .style("opacity", 0.5);
+            .style("opacity", 0.5)
         node.append("circle")
             .attr("r", me.mark * 3)
             .style("stroke", "#111")
@@ -301,7 +388,7 @@ class Jumpweb {
                 return (d.color ? d.color : '#CCC');
             })
             .attr("stroke-width", "1pt");
-        let ecu = 40;
+        let ecu = 40
         node.append("path")
             .attr("class", "second_color")
             .attr("d", "M " + 0 + " -" + ecu / 2 + " a 2 2 0 0 0 0 " + ecu + " Z")
@@ -357,7 +444,7 @@ class Jumpweb {
             })
             .attr("dx", 0)
             .attr("dy", me.mark * 9 + "px")
-            .style("font-family", "Lato")
+            .style("font-family", me.base_font)
             .style("font-size", me.mark * 2.5 + "pt")
             .style("text-anchor", "middle")
             .style("fill", function (d) {
@@ -387,27 +474,27 @@ class Jumpweb {
             });
 
         // if (me.data.mj) {
-        node.append("text")
-            .attr("class", function (d) {
-                return "nodetext_" + d.id;
-            })
-            .attr("dx", 0)
-            .attr("dy", -me.mark * 6)
-            .style("font-family", "Lato")
-            .style("font-size", "9pt")
-            .style("font-weight", "bold")
-            .style("fill", "#DDD")
-            .style("stroke", "#111")
-            .style("stroke-width", "0.25pt")
-            .style("text-anchor", "middle")
-            .text(function (d) {
-                return d.discovery + " AD";
-            });
-        // }
+//         node.append("text")
+//             .attr("class", function (d) {
+//                 return "nodetext_" + d.id;
+//             })
+//             .attr("dx", 0)
+//             .attr("dy", -me.mark * 6)
+//             .style("font-family", me.base_font)
+//             .style("font-size", "9pt")
+//             .style("font-weight", "bold")
+//             .style("fill", "#DDD")
+//             .style("stroke", "#111")
+//             .style("stroke-width", "0.25pt")
+//             .style("text-anchor", "middle")
+//             .text(function (d) {
+//                 return d.discovery + " AD";
+//             });
+//         // }
 
-        me.lefttext(node, -6, -2, 'J:', 'jump')
-        me.lefttext(node, -6, -0.5, 'DtJ:', 'dtj')
-        me.lefttext(node, -6, 1, 'OM:', 'orbital_map')
+//         me.lefttext(node, -6, -2, 'Jumps:', 'jump')
+//         me.lefttext(node, -6, -0.5, 'Distance to Jumpgate:', 'dtj')
+//         me.lefttext(node, -6, 1, 'OM:', 'orbital_map')
         return node;
     }
 
@@ -460,14 +547,13 @@ class Jumpweb {
                 if (d.secret) {
                     res = "#A22";
                 }
+                if (me.selected_routes.hasOwnProperty(d.code)){
+                    res = "#FC4"
+                }
                 return res;
             })
             .style('stroke-width', function (d) {
-                let res = (d.out ? "1pt" : (d.off ? "2pt" : (d.unknown ? "1pt" : "4pt")));
-                if (d.discovery) {
-                    res = "4pt";
-                }
-                return res;
+                return me.widthForLink(d);
             })
             .style('stroke-dasharray', function (d) {
                 let res = (d.out ? "7 5" : (d.off ? "3 5" : (d.unknown ? "1 5 " : "")));
@@ -475,7 +561,7 @@ class Jumpweb {
             })
 
             .style("opacity", function (d) {
-                return (d.secret ? (me.data.mj ? 1.0 : 0.0) : 1.0);
+                return (d.secret ? 0.0 : 1.0);
             })
             .on("mouseover", function (e, d) {
                 console.log(e)
@@ -487,11 +573,24 @@ class Jumpweb {
             .on("mouseout", function (e, d) {
                 me.svg.select(".link").style('stroke-width', function (d) {
                     // console.log("mouseout");
-                    let res = (d.out ? "1pt" : (d.off ? "1pt" : (d.unknown ? "2pt" : "1pt")));
+                    let res = (d.out ? "2pt" : (d.off ? "4pt" : (d.unknown ? "2pt" : "6pt")))
+                    //let res = (d.out ? "2pt" : (d.off ? "4pt" : (d.unknown ? "2pt" : "6pt")))
                     return res;
                 })
             })
+            .on("click", function (e, d) {
+                    e.preventDefault()
+                    e.stopPropagation()
+                    if (me.selected_routes.hasOwnProperty(d.code)){
+                        me.selected_routes.remove(d.code)
+                    }
+                    else{
+                        me.selected_routes[d.code] = d
+                    }
+                    me.updateSelectedLinks()
+                })
         ;
+
         link.append("text")
             .attr("x", function (l) {
                 let source = _.find(me.data.nodes, {
@@ -545,7 +644,23 @@ class Jumpweb {
             .on("click", function (e, d) {
                 if (e.ctrlKey) {
                     me.selectedNode = d;
-                    console.log(me.selectedNode.name + " has been selected")
+                    //console.log(me.selectedNode.name + " has been selected")
+                    me.infotxt = []
+                    me.infotxt.push(d.name.toUpperCase())
+                    if (d.notes.length > 0){
+                        me.infotxt.push(d.notes)
+                    }
+                    me.infotxt.push("Alliance: "+d.alliance)
+                    me.infotxt.push("Sector: "+d.sector)
+                    me.infotxt.push("Discovery: "+d.discovery+" AD")
+                    me.refreshInfoBlock()
+                    me.ui.select("#infoblock")
+                        .transition()
+                        .delay(50)
+                        .duration(500)
+                        .ease(d3.easeSin)
+                        .style("opacity", 1)
+
                 } else if (e.altKey) {
                     if (d.orbital_map) {
                         // console.log("Launch orbital map for " + d.name);
@@ -607,13 +722,10 @@ class Jumpweb {
                     .style("opacity", 1.0);
             })
             .style("opacity", function (d) {
-
-                // return (d.unknown ? 0.0 : 1.0);
-                return (d.secret ? (me.data.mj ? 1.0 : 0.0) : 1.0);
+                return (d.secret ? 0.0 : 1.0)
 
             })
 
-        ;
         node = me.draw_node(node);
         let panel = node.append("g")
             .attr("class", "aura")
@@ -632,14 +744,31 @@ class Jumpweb {
             .style("stroke", function (d) {
                 return (d.orbital_map == 1 ? "#FFF" : "#888");
             });
+
     }
+
+    widthForLink(d){
+        let me = this
+        let res = (d.out ? "2pt" : (d.off ? "4pt" : (d.unknown ? "2pt" : "6pt")))
+        if (d.discovery) {
+            res = "6pt";
+        }
+        if (me.selected_routes.hasOwnProperty(d.code)){
+            res = "10pt"
+        }
+        return res
+    }
+
+    colorForLink(){
+        }
+
 
     zoomActivate() {
         let me = this;
         me.zoom = d3.zoom()
-            .scaleExtent([0.25, 4])
+            .scaleExtent([0.125, 16])
             .on('zoom', function (event) {
-                me.svg.attr('transform', event.transform)
+                me.layout.attr('transform', event.transform)
             });
         me.vis.call(me.zoom);
     }
@@ -653,7 +782,8 @@ class Jumpweb {
     perform() {
         let me = this;
         $(me.parent).css("padding", 0);
-        me.draw_layout();
+        me.drawLayout();
+        me.drawUI();
         me.update();
         me.zoomActivate();
     }

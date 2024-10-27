@@ -62,6 +62,12 @@ class Character(Combattant):
     page_num = 0
     alias = models.CharField(max_length=200, default='', blank=True)
     # alliance = models.CharField(max_length=200, default='', blank=True)
+
+    fief_rid = models.CharField(max_length=200, default="", blank=True)
+    alliance_rid = models.CharField(max_length=200, default="", blank=True)
+    specie_rid = models.CharField(max_length=200, default="", blank=True)
+    current_fielf_rid = models.CharField(max_length=200, default="", blank=True)
+
     faction = models.CharField(max_length=200, default='', blank=True)
     alliance_ref = models.ForeignKey(AllianceRef, blank=True, null=True, on_delete=models.SET_NULL)
     specie = models.ForeignKey(Specie, default=31, blank=True, null=True, on_delete=models.SET_NULL)
@@ -1135,7 +1141,13 @@ class Character(Combattant):
         k = json.loads(j)
         k["creature"] = "mortal"
         k["date"] = datetime.datetime.now().strftime('%Y%m%d')
-        k["alliance"] = self.alliance_ref.reference
+        #from collector.models.alliance_ref import AllianceRef
+        a = AllianceRef.fromRID(self.alliance_rid)
+        if a:
+            alliance = a.reference
+        else:
+            alliance = "n/a"
+        k["alliance"] = alliance
         k["skills_list"] = skills_list
         k["armors"] = armors
         k["shields"] = shields

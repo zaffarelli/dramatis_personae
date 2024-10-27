@@ -7,6 +7,7 @@ from django.template.loader import get_template
 import json
 from django.contrib import messages
 from collector.utils.helper import is_ajax
+from collector.utils.fics_references import FONTSET
 
 def show_jumpweb(request):
     if is_ajax(request):
@@ -14,11 +15,12 @@ def show_jumpweb(request):
         context = {}
         context['data'] = {}
         # context['campaign'] = campaign.to_json()
-        context['data']['mj'] = 1 if request.user.profile.is_gamemaster else 0
+        context['data']['mj'] = 1 #if request.user.profile.is_gamemaster else 0
         context['data']['new_routes'] = ""#"|".join(NEW_ROUTES)
         context['data']['new_systems'] = ""#"|".join(NEW_SYSTEMS)
         context['data']['epic_systems'] = campaign.known_systems
         context['data']['era'] = campaign.epic.era
+        context['data']['fontset'] = FONTSET
         context['data']['nodes'] = []
         context['data']['links'] = []
         known_worlds = context['data']['epic_systems'].split('|')
@@ -32,6 +34,7 @@ def show_jumpweb(request):
             system['name'] = s.name
             system['alliance'] = s.alliance
             system['sector'] = s.sector
+            system['notes'] = s.notes
             system['x'] = s.x
             system['y'] = s.y
             system['jump'] = s.jump

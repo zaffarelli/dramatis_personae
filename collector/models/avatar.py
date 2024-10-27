@@ -7,6 +7,7 @@ from django.db import models
 from datetime import datetime
 from scenarist.models.epics import Epic
 import logging
+from collector.mixins.ridded_mixin import RiddedMixin
 
 logger = logging.getLogger(__name__)
 
@@ -17,12 +18,12 @@ ARCHIVE_LEVEL = (
 )
 
 
-class Avatar(models.Model):
+class Avatar(RiddedMixin):
     class Meta:
         abstract = True
 
     full_name = models.CharField(max_length=200)
-    rid = models.CharField(max_length=200, default='none')
+    #rid = models.CharField(max_length=200, default='none')
     birthdate = models.IntegerField(default=0)
     gender = models.CharField(max_length=30, default='female')
     age = models.IntegerField(default=0)
@@ -54,8 +55,8 @@ class Avatar(models.Model):
             from collector.utils.basic import get_current_config
             conf = get_current_config()
         logger.warning(f'Fixing ........: {self.full_name}')
-        if self.rid == 'none':
-            self.get_rid(self.full_name)
+        self.toRID(f"{self.full_name}")
+
         if self.player == 'none':
             self.player = ''
         if self.birthdate < 1000:
@@ -63,18 +64,18 @@ class Avatar(models.Model):
             self.age = conf.epic.era - self.birthdate
         self.audit = ""
 
-    def get_rid(self, s):
-        self.rid = Avatar.find_rid(s)
+    # def get_rid(self, s):
+    #     self.rid = Avatar.find_rid(s)
 
-    @classmethod
-    def find_rid(self, s):
-        x = s.replace(' ', '_').replace("'", '').replace('é', 'e') \
-            .replace('è', 'e').replace('ë', 'e').replace('â', 'a') \
-            .replace('ô', 'o').replace('"', '').replace('ï', 'i') \
-            .replace('à', 'a').replace('-', '').replace('ü', 'u') \
-            .replace('û', 'u').replace('ô', 'o').replace('ß', 'ss')
-        rid = x.lower()
-        return rid
+    # @classmethod
+    # def find_rid(self, s):
+    #     x = s.replace(' ', '_').replace("'", '').replace('é', 'e') \
+    #         .replace('è', 'e').replace('ë', 'e').replace('â', 'a') \
+    #         .replace('ô', 'o').replace('"', '').replace('ï', 'i') \
+    #         .replace('à', 'a').replace('-', '').replace('ü', 'u') \
+    #         .replace('û', 'u').replace('ô', 'o').replace('ß', 'ss')
+    #     rid = x.lower()
+    #     return rid
 
     def roll_attributes(self):
         pass

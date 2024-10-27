@@ -14,5 +14,5 @@ def update_character_custo(sender, instance, conf=None, **kwargs):
 @receiver(pre_save, sender=Character, dispatch_uid='update_character')
 def update_character(sender, instance, conf=None, **kwargs):
     """ Before saving, fix() and  get_RID() for the character """
-    instance.get_rid(instance.full_name)
+    #instance.get_rid(instance.full_name)
     instance.pub_date = datetime.now(tz=get_current_timezone())

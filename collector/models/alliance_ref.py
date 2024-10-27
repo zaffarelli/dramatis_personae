@@ -7,6 +7,8 @@ from colorfield.fields import ColorField
 from django.db import models
 from django.contrib import admin
 import json
+from collector.mixins.ridded_mixin import RiddedMixin
+from collector.utils.helper import refix
 
 ALLIANCE_CATEGORIES = (
     ('nobility', "Royale Nobility"),
@@ -20,7 +22,7 @@ ALLIANCE_CATEGORIES = (
     ('other', "Other"),
 )
 
-class AllianceRef(models.Model):
+class AllianceRef(RiddedMixin):
     class Meta:
         verbose_name = "FICS: Alliance"
         ordering = ['reference', 'category', ]
@@ -40,10 +42,14 @@ class AllianceRef(models.Model):
     def __str__(self):
         return f'{self.reference} ({self.get_category_display()})'
 
+    def fix(self):
+        self.toRID(f"{self.reference}")
+
 
 class AllianceRefAdmin(admin.ModelAdmin):
     ordering = ['category', 'reference']
-    list_display = ['reference', 'faction', 'category', 'common_occult_pathes', 'color_front', 'color_back',
+    list_display = ['reference','rid', 'faction', 'category', 'common_occult_pathes', 'color_front', 'color_back',
                     'color_highlight']
     list_filter = ['category']
     search_fields = ['category']
+    actions = [refix]

@@ -9,22 +9,23 @@ from collector.models.character import Character
 from django.dispatch import receiver
 from django.db.models.signals import pre_save, post_save
 from collector.utils import fics_references
+from collector.utils.helper import refix
 from collector.models.character_custo import CharacterCusto
 from collector.models.tourofduty import TourOfDutyRef
-from collector.mixins.uuid_class import UUIDClass
+from collector.mixins.ridded_mixin import RiddedMixin
 
 
-class SkillRef(UUIDClass):
+class SkillRef(RiddedMixin):
     class Meta:
         ordering = ['is_speciality', 'is_wildcard', 'reference']
         verbose_name = "FICS: Skill"
 
-    reference = models.CharField(max_length=200, unique=True)
-    is_root = models.BooleanField(default=False)
-    is_speciality = models.BooleanField(default=False)
-    is_common = models.BooleanField(default=True)
-    is_wildcard = models.BooleanField(default=False)
-    group = models.CharField(default="EDU", max_length=3, choices=fics_references.GROUPCHOICES)
+    reference = models.CharField(default="", max_length=200, blank=True)
+    is_root = models.BooleanField(default=False, blank=True)
+    is_speciality = models.BooleanField(default=False, blank=True)
+    is_common = models.BooleanField(default=True, blank=True)
+    is_wildcard = models.BooleanField(default=False, blank=True)
+    group = models.CharField(default="EDU", max_length=3, choices=fics_references.GROUPCHOICES, blank=True)
     linked_to = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE)
     description = models.TextField(max_length=1024, default='', blank=True)
     attributes = models.TextField(max_length=64, default='', blank=True)
@@ -55,23 +56,35 @@ class SkillRef(UUIDClass):
             self.linked_to.reference if self.linked_to else "-")
 
     def fix(self):
-        super().fix()
+        self.toRID(self.reference[:3])
 
 
-class Skill(models.Model):
+class Skill(RiddedMixin):
     class Meta:
         ordering = ['skill_ref', ]
         verbose_name = "Skill"
 
     character = models.ForeignKey(Character, on_delete=models.CASCADE)
     skill_ref = models.ForeignKey(SkillRef, on_delete=models.CASCADE)
+    skill_ref_rid = models.CharField(default="", max_length=256, blank=True)
+    character_rid = models.CharField(default="", max_length=256, blank=True)
     value = models.PositiveIntegerField(default=0)
+
+    def get_skill_ref(self):
+        candidates = SkillRef.objects.filter(rid=self.skill_ref_rid)
+        if len(candidates) == 1:
+            return candidates.first()
+
+    def get_character(self):
+        candidates = Character.objects.filter(rid=self.character_rid)
+        if len(candidates) == 1:
+            return candidates.first()
 
     def __str__(self):
         return '%s=%s' % (self.character.full_name, self.skill_ref.reference)
 
     def fix(self):
-        pass
+        self.toRID(self.reference)
 
 
 class SkillInline(admin.TabularInline):
@@ -81,6 +94,7 @@ class SkillInline(admin.TabularInline):
 
 
 class SkillModificator(models.Model):
+    # SkillModificator is something that comes from an "history" template
     class Meta:
         ordering = ['skill_ref']
 
@@ -96,6 +110,7 @@ class SkillModificator(models.Model):
 
 
 class SkillCusto(models.Model):
+    # SkillCusto is something that comes from the user through the customizer.
     class Meta:
         ordering = ['character_custo', 'skill_ref__linked_to']
 
@@ -213,10 +228,11 @@ def grouping_as_sect(modeladmin, request, queryset):
 
 class SkillRefAdmin(admin.ModelAdmin):
     ordering = ['is_speciality', 'is_wildcard', 'reference', 'grouping']
-    list_display = ['reference', 'uuid', 'grouping', 'is_root', 'is_speciality', 'is_wildcard', 'is_common', 'group',
+    list_display = ['reference', 'rid', 'grouping', 'is_root', 'is_speciality', 'is_wildcard', 'is_common', 'group',
                     'linked_to']
     actions = [refix, grouping_as_house, grouping_as_guild, grouping_as_system, grouping_as_sect, change_to_awa,
                change_to_soc, change_to_edu, change_to_fig, change_to_con, change_to_tin, change_to_per,
                change_to_bod, set_common, set_uncommon]
     list_filter = ['is_root', 'is_speciality', 'is_wildcard', 'is_common', 'deprecated', 'linked_to']
     search_fields = ['reference', 'grouping']
+    actions = [refix]

@@ -74,4 +74,4 @@ ShipSectionFormSet = inlineformset_factory(ShipRef, ShipSection, fields='__all__
 ShipSystemSlotFormSet = inlineformset_factory(ShipSection, ShipSystemSlot, fields='__all__', extra=1, can_delete=True)
 
 # System
-OrbitalItemFormSet = inlineformset_factory(System, OrbitalItem, fields='__all__', extra=1, can_delete=True)
+#OrbitalItemFormSet = inlineformset_factory(System, OrbitalItem, fields='__all__', extra=1, can_delete=True)
