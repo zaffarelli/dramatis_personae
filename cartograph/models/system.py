@@ -55,8 +55,8 @@ class System(RiddedMixin):
     @property
     def orbital_map(self):
         all = []
-        for o in self.orbitalitem_set.all():
-            all.append("%s (%.2f AU)" % (o.name, o.distance))
+        # for o in self.orbitalitem_set.all():
+        #     all.append("%s (%.2f AU)" % (o.name, o.distance))
         return ", ".join(all)
 
     @property

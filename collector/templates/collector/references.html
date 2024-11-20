@@ -43,6 +43,12 @@
     {% endfor %}
 {% endif %}
 
+<h3>Degrees</h3>
+{% if degrees.count  %}
+    {% for d in degrees %}
+    {% include "collector/pdf/degree_pdf.html" with c=d %}
+    {% endfor %}
+{% endif %}
 
 <h3>Benefices/Afflictions</h3>
 {% if benefice_afflictions.count  %}

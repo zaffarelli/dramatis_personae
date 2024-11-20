@@ -8,3 +8,5 @@ from datetime import datetime
 def update_tour_of_duty_ref(sender, instance, **kwargs):
     from django.utils.timezone import get_current_timezone
     instance.pub_date = datetime.now(tz=get_current_timezone())
+    #if instance.need_fix:
+    instance.fix()

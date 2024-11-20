@@ -1,8 +1,3 @@
-"""
- ╔╦╗╔═╗  ╔═╗┌─┐┬  ┬  ┌─┐┌─┐┌┬┐┌─┐┬─┐
-  ║║╠═╝  ║  │ ││  │  ├┤ │   │ │ │├┬┘
- ═╩╝╩    ╚═╝└─┘┴─┘┴─┘└─┘└─┘ ┴ └─┘┴└─
-"""
 from django.db import models
 from django.contrib import admin
 from collector.models.character import Character
@@ -12,51 +7,49 @@ from collector.utils import fics_references
 from collector.utils.helper import refix
 from collector.models.character_custo import CharacterCusto
 from collector.models.tourofduty import TourOfDutyRef
-from collector.mixins.ridded_mixin import RiddedMixin
+from collector.mixins.ridded_mixin import RiddedMixin, RidField
 
 
 class SkillRef(RiddedMixin):
     class Meta:
-        ordering = ['is_speciality', 'is_wildcard', 'reference']
+        ordering = ['group', 'reference']
         verbose_name = "FICS: Skill"
 
     reference = models.CharField(default="", max_length=200, blank=True)
-    is_root = models.BooleanField(default=False, blank=True)
-    is_speciality = models.BooleanField(default=False, blank=True)
+    # is_root = models.BooleanField(default=False, blank=True)
+    # is_speciality = models.BooleanField(default=False, blank=True)
     is_common = models.BooleanField(default=True, blank=True)
     is_wildcard = models.BooleanField(default=False, blank=True)
     group = models.CharField(default="EDU", max_length=3, choices=fics_references.GROUPCHOICES, blank=True)
-    linked_to = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE)
+    # linked_to = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE)
     description = models.TextField(max_length=1024, default='', blank=True)
-    attributes = models.TextField(max_length=64, default='', blank=True)
-    grouping = models.CharField(max_length=64, default='', blank=True)
+    # attributes = models.TextField(max_length=64, default='', blank=True)
+    # grouping = models.CharField(max_length=64, default='', blank=True)
     deprecated = models.BooleanField(default=False, blank=True)
+    acro = models.CharField(default="", max_length=7, blank=True)
+
+    as_wildcard_of = models.CharField(default="", max_length=512, blank=True)
 
     @property
     def common_specialities(self):
         list = []
-        specialities = SkillRef.objects.filter(is_speciality=True, linked_to=self, is_wildcard=False)
+        specialities = SkillRef.objects.all()
         for s in specialities:
-            words = s.reference.split('(')
-            words2 = words[1].split(')')
-            name = words2[0]
-            name_parts = name.split(' ')
-            if name_parts[-1] != 'System':
-                if s.description:
-                    str = f'<em>{name}</em>: {s.description}'
-                else:
-                    str = f'<em>{name}</em>'
-                list.append(f'<li>{str}</li>')
+            name = s.reference
+            if s.description:
+                str = f'<em>{name}</em>: {s.description}'
+            else:
+                str = f'<em>{name}</em>'
+            list.append(f'<li>{str}</li>')
         res = "\n".join(list)
         return res
 
     def __str__(self):
-        return '%s %s %s %s [%s]' % (
-            self.reference, self.group, "(R)" if self.is_root else "", "(S)" if self.is_speciality else "",
-            self.linked_to.reference if self.linked_to else "-")
+        return f"{self.reference} [{self.group}]"
 
     def fix(self):
-        self.toRID(self.reference[:3])
+        self.toRID(self.reference, True, "sk")
+        self.acro = ("SK_" + self.reference[:3]).upper()
 
 
 class Skill(RiddedMixin):
@@ -66,25 +59,22 @@ class Skill(RiddedMixin):
 
     character = models.ForeignKey(Character, on_delete=models.CASCADE)
     skill_ref = models.ForeignKey(SkillRef, on_delete=models.CASCADE)
-    skill_ref_rid = models.CharField(default="", max_length=256, blank=True)
-    character_rid = models.CharField(default="", max_length=256, blank=True)
+    skill_ref_rid = RidField()
+    character_rid = RidField()
     value = models.PositiveIntegerField(default=0)
-
-    def get_skill_ref(self):
-        candidates = SkillRef.objects.filter(rid=self.skill_ref_rid)
-        if len(candidates) == 1:
-            return candidates.first()
-
-    def get_character(self):
-        candidates = Character.objects.filter(rid=self.character_rid)
-        if len(candidates) == 1:
-            return candidates.first()
 
     def __str__(self):
         return '%s=%s' % (self.character.full_name, self.skill_ref.reference)
 
     def fix(self):
-        self.toRID(self.reference)
+        character_rid = ""
+        skill_ref_rid = ""
+        ch = Character.fromRID(self.character_rid)
+        sr = SkillRef.fromRID(self.skill_ref_rid)
+        if (ch and sr):
+            character_rid = ch.rid
+            skill_ref_rid = sr.rid
+        self.toRID(f"{self.reference}_{character_rid}_{skill_ref_rid}")
 
 
 class SkillInline(admin.TabularInline):
@@ -110,9 +100,8 @@ class SkillModificator(models.Model):
 
 
 class SkillCusto(models.Model):
-    # SkillCusto is something that comes from the user through the customizer.
     class Meta:
-        ordering = ['character_custo', 'skill_ref__linked_to']
+        ordering = ['character_custo']
 
     character_custo = models.ForeignKey(CharacterCusto, on_delete=models.CASCADE)
     skill_ref = models.ForeignKey(SkillRef, on_delete=models.CASCADE)
@@ -133,106 +122,11 @@ class SkillCustoInline(admin.TabularInline):
     ordering = ('skill_ref', 'character_custo')
 
 
-# Admins
-
-def change_to_awa(modeladmin, request, queryset):
-    queryset.update(group='AWA')
-    short_description = "Change skills to the AWA group"
-
-
-def change_to_bod(modeladmin, request, queryset):
-    queryset.update(group='BOD')
-    short_description = "Change skills to the BOD group"
-
-
-def change_to_edu(modeladmin, request, queryset):
-    queryset.update(group='EDU')
-    short_description = "Change skills to the EDU group"
-
-
-def change_to_per(modeladmin, request, queryset):
-    queryset.update(group='PER')
-    short_description = "Change skills to the PER group"
-
-
-def change_to_fig(modeladmin, request, queryset):
-    queryset.update(group='FIG')
-    short_description = "Change skills to the FIG group"
-
-
-def change_to_con(modeladmin, request, queryset):
-    queryset.update(group='CON')
-    short_description = "Change skills to the CON group"
-
-
-def change_to_soc(modeladmin, request, queryset):
-    queryset.update(group='SOC')
-    short_description = "Change skills to the SOC group"
-
-
-def change_to_tin(modeladmin, request, queryset):
-    queryset.update(group='TIN')
-    short_description = "Change skills to the TIN group"
-
-
-def change_to_spi(modeladmin, request, queryset):
-    queryset.update(group='SPI')
-    short_description = "Change skills to the SPI group"
-
-
-def change_to_und(modeladmin, request, queryset):
-    queryset.update(group='UND')
-    short_description = "Change skills to the UND group"
-
-
-def change_to_dip(modeladmin, request, queryset):
-    queryset.update(group='DIP')
-    short_description = "Change skills to the DIP group"
-
-
-def set_common(modeladmin, request, queryset):
-    queryset.update(is_common=True)
-    short_description = "Change skills to common"
-
-
-def set_uncommon(modeladmin, request, queryset):
-    queryset.update(is_common=False)
-    short_description = "Change skills to uncommon"
-
-
-def refix(modeladmin, request, queryset):
-    for skill_ref in queryset:
-        skill_ref.save()
-    short_description = "Do fix"
-
-
-def grouping_as_house(modeladmin, request, queryset):
-    queryset.update(grouping='House')
-    short_description = "Change skills grouping as House"
-
-
-def grouping_as_guild(modeladmin, request, queryset):
-    queryset.update(grouping='Guild')
-    short_description = "Change skills grouping as Guild"
-
-
-def grouping_as_system(modeladmin, request, queryset):
-    queryset.update(grouping='System')
-    short_description = "Change skills grouping as System"
-
-
-def grouping_as_sect(modeladmin, request, queryset):
-    queryset.update(grouping='Sect')
-    short_description = "Change skills grouping as Sect"
-
-
 class SkillRefAdmin(admin.ModelAdmin):
-    ordering = ['is_speciality', 'is_wildcard', 'reference', 'grouping']
-    list_display = ['reference', 'rid', 'grouping', 'is_root', 'is_speciality', 'is_wildcard', 'is_common', 'group',
-                    'linked_to']
-    actions = [refix, grouping_as_house, grouping_as_guild, grouping_as_system, grouping_as_sect, change_to_awa,
-               change_to_soc, change_to_edu, change_to_fig, change_to_con, change_to_tin, change_to_per,
-               change_to_bod, set_common, set_uncommon]
-    list_filter = ['is_root', 'is_speciality', 'is_wildcard', 'is_common', 'deprecated', 'linked_to']
-    search_fields = ['reference', 'grouping']
+    ordering = ['reference']
+    list_display = ['reference', 'acro', 'rid', 'is_common', 'group']
+    actions = [refix]
+    list_filter = ['is_common', 'deprecated']
+    search_fields = ['reference', 'group']
+    list_editable = ['group']
     actions = [refix]

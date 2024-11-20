@@ -25,7 +25,7 @@ class CharacterCusto(models.Model):
     PA_WIL = models.PositiveIntegerField(default=0)
     PA_TEM = models.PositiveIntegerField(default=0)
     PA_PRE = models.PositiveIntegerField(default=0)
-    PA_REF = models.PositiveIntegerField(default=0)
+    PA_DEX = models.PositiveIntegerField(default=0)
     PA_TEC = models.PositiveIntegerField(default=0)
     PA_AGI = models.PositiveIntegerField(default=0)
     PA_AWA = models.PositiveIntegerField(default=0)
@@ -43,7 +43,7 @@ class CharacterCusto(models.Model):
         wp_roots = self.watch_roots.split("_")
         self.AP += (self.PA_STR + self.PA_CON + self.PA_BOD + self.PA_MOV
                     + self.PA_INT + self.PA_WIL + self.PA_TEM + self.PA_PRE
-                    + self.PA_REF + self.PA_TEC + self.PA_AGI + self.PA_AWA
+                    + self.PA_DEX + self.PA_TEC + self.PA_AGI + self.PA_AWA
                     )
         self.AP += (self.OCC_LVL - self.OCC_DRK)
         for s in self.skillcusto_set.all():
@@ -83,8 +83,8 @@ class CharacterCusto(models.Model):
             self.summary += "<li>TEM %d</li>" % (self.PA_TEM)
         if self.PA_PRE != 0:
             self.summary += "<li>PRE %d</li>" % (self.PA_PRE)
-        if self.PA_REF != 0:
-            self.summary += "<li>REF %d</li>" % (self.PA_REF)
+        if self.PA_DEX != 0:
+            self.summary += "<li>REF %d</li>" % (self.PA_DEX)
         if self.PA_TEC != 0:
             self.summary += "<li>TEC %d</li>" % (self.PA_TEC)
         if self.PA_AGI != 0:
@@ -151,7 +151,7 @@ class CharacterCusto(models.Model):
         ch.PA_WIL += self.PA_WIL
         ch.PA_TEM += self.PA_TEM
         ch.PA_PRE += self.PA_PRE
-        ch.PA_REF += self.PA_REF
+        ch.PA_DEX += self.PA_DEX
         ch.PA_TEC += self.PA_TEC
         ch.PA_AGI += self.PA_AGI
         ch.PA_AWA += self.PA_AWA

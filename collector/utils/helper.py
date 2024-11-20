@@ -44,3 +44,10 @@ def refix(modeladmin, request, queryset):
         item.save()
     short_description = 'Refix'
 
+def extract(modeladmin, request, queryset):
+    filename = type(queryset.first())
+    print(f"{filename}")
+    for item in queryset:
+        item.fix()
+        item.save()
+    short_description = 'Refix'

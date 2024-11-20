@@ -87,7 +87,7 @@ class Character(Combattant):
     PA_WIL = models.PositiveIntegerField(default=1)
     PA_TEM = models.PositiveIntegerField(default=1)
     PA_PRE = models.PositiveIntegerField(default=1)
-    PA_REF = models.PositiveIntegerField(default=1)
+    PA_DEX = models.PositiveIntegerField(default=1)
     PA_TEC = models.PositiveIntegerField(default=1)
     PA_AGI = models.PositiveIntegerField(default=1)
     PA_AWA = models.PositiveIntegerField(default=1)
@@ -262,7 +262,7 @@ class Character(Combattant):
 
     @property
     def info_ref(self):
-        return self.get_pa("PA_REF")
+        return self.get_pa("PA_DEX")
 
     @property
     def info_agi(self):
@@ -432,8 +432,8 @@ class Character(Combattant):
             overhead += 10 - self.PA_TEM
         if self.PA_PRE > 10:
             overhead += 10 - self.PA_PRE
-        if self.PA_REF > 10:
-            overhead += 10 - self.PA_REF
+        if self.PA_DEX > 10:
+            overhead += 10 - self.PA_DEX
         if self.PA_AGI > 10:
             overhead += 10 - self.PA_AGI
         if self.PA_AWA > 10:
@@ -836,11 +836,11 @@ class Character(Combattant):
                 self.add_or_update_skill(skill_ref, roots_list.count(skill_ref))
 
     def resetPA(self):
-        self.PA_STR = self.PA_CON = self.PA_BOD = self.PA_MOV = self.PA_INT = self.PA_WIL = self.PA_TEM = self.PA_PRE = self.PA_TEC = self.PA_REF = self.PA_AGI = self.PA_AWA = self.OCC_LVL = self.OCC_DRK = 0
+        self.PA_STR = self.PA_CON = self.PA_BOD = self.PA_MOV = self.PA_INT = self.PA_WIL = self.PA_TEM = self.PA_PRE = self.PA_TEC = self.PA_DEX = self.PA_AGI = self.PA_AWA = self.OCC_LVL = self.OCC_DRK = 0
 
     @property
     def sumPA(self):
-        return self.PA_STR + self.PA_CON + self.PA_BOD + self.PA_MOV + self.PA_INT + self.PA_WIL + self.PA_TEM + self.PA_PRE + self.PA_TEC + self.PA_REF + self.PA_AGI + self.PA_AWA + self.OCC_LVL - self.OCC_DRK
+        return self.PA_STR + self.PA_CON + self.PA_BOD + self.PA_MOV + self.PA_INT + self.PA_WIL + self.PA_TEM + self.PA_PRE + self.PA_TEC + self.PA_DEX + self.PA_AGI + self.PA_AWA + self.OCC_LVL - self.OCC_DRK
 
     def purge_skills(self):
         for skill in self.skill_set.all():
@@ -880,7 +880,7 @@ class Character(Combattant):
         self.PA_TOTAL = \
             self.PA_STR + self.PA_CON + self.PA_BOD + self.PA_MOV + \
             self.PA_INT + self.PA_WIL + self.PA_TEM + self.PA_PRE + \
-            self.PA_TEC + self.PA_REF + self.PA_AGI + self.PA_AWA + self.OCC_LVL - self.OCC_DRK
+            self.PA_TEC + self.PA_DEX + self.PA_AGI + self.PA_AWA + self.OCC_LVL - self.OCC_DRK
         skills = self.skill_set.all()
         for s in skills:
             if not s.skill_ref.is_root:
@@ -936,7 +936,7 @@ class Character(Combattant):
 
     @property
     def na_com(self):
-        return round((self.PA_TEC + self.PA_AGI + self.PA_REF + self.PA_AWA) / 4)
+        return round((self.PA_TEC + self.PA_AGI + self.PA_DEX + self.PA_AWA) / 4)
 
     # Auto build character
     def autobuild(self):
@@ -1102,21 +1102,14 @@ class Character(Combattant):
         for skill in self.skill_set.order_by('skill_ref'):
             if skill.skill_ref.deprecated == False:
                 skills_list.append(
-                    {'skill': skill.skill_ref.reference, 'value': skill.value, 'is_root': skill.skill_ref.is_root,
-                     'is_speciality': skill.skill_ref.is_speciality, 'idx1': 0, 'idx2': 0})
+                    {'skill': skill.skill_ref.reference, 'value': skill.value,  'idx1': 0, 'idx2': 0})
         for skill in SkillRef.objects.exclude(deprecated=True).order_by('reference'):
             if skill.reference not in [value for elem in skills_list for value in elem.values()]:
-                if not skill.is_speciality:
-                    skills_list.append({'skill': skill.reference, 'value': '-', 'is_root': skill.is_root,
-                                        'is_speciality': skill.is_speciality, 'idx1': 0, 'idx2': 0})
+                    skills_list.append({'skill': skill.reference, 'value': '-', 'idx1': 0, 'idx2': 0})
         skills_list = sorted(skills_list, key=itemgetter('skill'))
         for d in skills_list:
-            if d['is_speciality']:
-                d['idx2'] = idx2
-                idx2 += 1
-            else:
-                d['idx1'] = idx1
-                idx1 += 1
+            d['idx1'] = idx1
+            idx1 += 1
         weapons = []
         for weapon in self.weapon_set.all():
             weapons.append(weapon.weapon_ref.to_json())

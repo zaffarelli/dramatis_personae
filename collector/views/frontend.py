@@ -15,7 +15,7 @@ from django.template.loader import get_template
 import datetime
 from collector.utils.helper import is_ajax
 from collector.utils.basic import get_current_config, export_epic, slug_decode
-from collector.utils.fics_references import FONTSET
+from collector.utils.fics_references import FONTSET, FICS_VERSION
 from django.conf import settings
 from collector.views.characters import respawn_avatar_link
 import os
@@ -309,13 +309,15 @@ def display_sheet(request, pk=None):
         c = Character.objects.get(id=pk)
         print(campaign)
         scenario = campaign.epic.name.upper()
-        pre_title = campaign.epic.place + ' - ' + campaign.epic.date
-        post_title = "FuZion Interlock Custom System v7.5"
+        #pre_title = campaign.epic.place + ' - ' + campaign.epic.date
+        pre_title = f"Rari Nantes In Gurgite Vasto"
+        post_title = f"FuZion Interlock Custom System v{FICS_VERSION}"
+        post_title = f"F u z i o n . I n t e r l o c k . C u s t o m . S y s t e m . X"
         spe = c.get_specialities()
         shc = c.get_shortcuts()
         j = c.to_jsonFICS()
         settings = {'version': 1.0, 'labels': {}, 'pre_title': pre_title, 'scenario': scenario,
-                    'post_title': post_title, 'fontset': FONTSET, 'specialities': spe, 'shortcuts': shc}
+                    'post_title': post_title, "FICS_VERSION":FICS_VERSION, 'fontset': FONTSET, 'specialities': spe, 'shortcuts': shc}
         fics_sheet_context = {'settings': json.dumps(settings, sort_keys=True, indent=4), 'data': j}
 
         return JsonResponse(fics_sheet_context)

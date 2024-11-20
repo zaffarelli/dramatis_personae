@@ -30,6 +30,16 @@
   {% endfor %}
   {% endif %}
 </p><p>
+<strong>Degrees</strong>&nbsp;&mdash;
+  {% if not c.degreemodificator_set.count %}
+  <i>none</i>.
+
+  {% else %}
+  {% for d in c.degreemodificator_set.all %}
+  {{ d.degree_ref.reference}} {{d.value|signed}}{% if forloop.last %}.{%else%}, {%endif%}
+  {% endfor %}
+  {% endif %}
+</p><p>
 <strong>Benefices/Afflictions</strong>&nbsp;&mdash;
   {% if not c.beneficeafflictionmodificator_set.count %}
   <i>none</i>.

@@ -11,6 +11,7 @@ class CollectorConfig(AppConfig):
     def ready(self):
         import collector.signals.user
         import collector.signals.skill
+        import collector.signals.degree
         import collector.signals.benefice_affliction
         import collector.signals.character
         import collector.signals.cyber

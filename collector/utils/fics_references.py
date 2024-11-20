@@ -10,6 +10,18 @@
   Blessing/Curses..........: 10 OP
   Extra OP.................: 40 OP
   TOTAL ...................: 280 OP
+
+  (review for FICS10: lifepath)
+                                     AP SP DP BA BC OP
+  Birthright........................ 12  0  0  0  0 36+
+  Upbringing........................  5  5  0  0  0 20
+  Apprenticeship....................  5  8  2  0  0 25
+  Early Career...................... 10 10  5  3  0 48
+  Tour of Duty (x2).................  2 10  4  0  0 20
+  Worldly Benefits..................  0  0  0  7  0  7
+
+
+
 """
 
 SOURCE_REFERENCES = (
@@ -29,7 +41,26 @@ GROUPCHOICES = (
     ('SPI', "Spirituality"),
     ('TIN', "Tinkering"),
     ('UND', "Underworld"),
+    ('ITO', "Introspection"),
+    ('ITE', "Interaction"),
 )
+
+DEGREE_GROUPS = (
+    ('GENE', "Generic"),
+    ('SECT', "Sects"),
+    ('FOLO', "Forbidden Lore"),
+    ('HOUS', "Houses"),
+    ('GUIL', "Guilds"),
+    ('POTM', "Privilege Of The Martyrs"),
+    ('DOGM', "Dogma"),
+    ('SYST', "Systems"),
+    ('SPEC', "Species"),
+    ('HOLD', "Householding"),
+    ('UNDR', "Underworld"),
+    ('MACA', "Magna Carta"),
+)
+
+
 
 SHORTCUTS = {
     "Observe": {
@@ -190,7 +221,7 @@ ATTACK_ROLLS = {
 FONTSET = ['Cinzel', 'Trade+Winds', 'Imprima', 'Roboto', 'Philosopher', 'Ruda', 'Khand', 'Allura', 'Gochi+Hand',
            'Reggae+One', 'Syne+Mono', 'Zilla+Slab', 'Spartan', 'News+Cycle', 'Archivo', 'Francois+One', 'Caveat',
            'Gruppo', 'Voltaire', "Fredericka+the+Great", 'Esteban', 'Pompiere', 'Niconne', 'Delius',
-           'Nanum+Pen+Script', 'Schoolbell', 'Jim+Nightshade', 'Julee', 'Estonia', 'East+Sea+Dokdo', 'Julee']
+           'Nanum+Pen+Script', 'Schoolbell', 'Jim+Nightshade', 'Julee', 'Estonia', 'East+Sea+Dokdo', 'Julee','Anton']
 
 LIFEPATH_CATEGORY = (
     ('0', "Birthright"),
@@ -277,3 +308,5 @@ BLOKES = {
     'foes': ['11-foe', '10-enemy', '09-lackey', '08-antagonist', '07-opponent'],
     'others': ['06-neutral']
 }
+
+FICS_VERSION = 10.2

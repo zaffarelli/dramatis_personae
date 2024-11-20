@@ -20,3 +20,4 @@ def update_skill(sender, instance, **kwargs):
 @receiver(pre_save, sender=SkillModificator, dispatch_uid='update_skill_modificator')
 def update_skill_modificator(sender, instance, **kwargs):
     instance.fix()
+

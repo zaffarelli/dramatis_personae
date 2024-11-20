@@ -1,47 +1,23 @@
-"""
- ╔╦╗╔═╗  ╔═╗┌─┐┬  ┬  ┌─┐┌─┐┌┬┐┌─┐┬─┐
-  ║║╠═╝  ║  │ ││  │  ├┤ │   │ │ │├┬┘
- ═╩╝╩    ╚═╝└─┘┴─┘┴─┘└─┘└─┘ ┴ └─┘┴└─
-"""
 from django.contrib import admin
-
-
-def refix(modeladmin, request, queryset):
-    for tour_of_duty_ref in queryset:
-        tour_of_duty_ref.fix()
-        tour_of_duty_ref.save()
-    short_description = "Do fix"
-
-
-def unset_core(modeladmin, request, queryset):
-    for tour_of_duty_ref in queryset:
-        tour_of_duty_ref.core = False
-        tour_of_duty_ref.save()
-    short_description = "Unset core"
-
-
-def set_core(modeladmin, request, queryset):
-    for tour_of_duty_ref in queryset:
-        tour_of_duty_ref.core = True
-        tour_of_duty_ref.save()
-    short_description = "Set core"
+from collector.utils.helper import refix, extract
 
 
 class TourOfDutyRefAdmin(admin.ModelAdmin):
     from collector.models.skill import SkillModificatorInline
+    from collector.models.degree import DegreeModificatorInline
     from collector.models.benefice_affliction import BeneficeAfflictionModificatorInline
     from collector.models.blessing_curse import BlessingCurseModificatorInline
-    ordering = ['-core', 'category', 'topic', 'reference', 'caste', 'value']
-    list_display = ['reference', 'category', 'caste', 'valid', 'core', 'balance', 'topic', 'is_custom', 'source', 'AP',
-                    'OP', 'balance_AP', 'balance_OP',
-                    'value',
-                    'description']
+    ordering = ['is_public','is_kit', '-valid','category', '-core', 'caste',  'topic', 'value', 'reference', ]
+    list_display = ['reference', 'caste', 'category', 'is_public', 'is_kit', 'is_custom', 'core', 'valid', 'balance', 'topic',
+                    'source', 'AP', 'SP', 'DP', 'BCP', 'BAP', 'WP', 'OP', 'value', 'description', 'rid']
     exclude = ['value']
-    actions = [refix, unset_core, set_core]
+    actions = [refix, extract]
     inlines = [
         SkillModificatorInline,
+        DegreeModificatorInline,
         BeneficeAfflictionModificatorInline,
         BlessingCurseModificatorInline
     ]
-    list_filter = ['core', 'category', 'valid', 'caste', 'topic']
-    search_fields = ['reference']
+    list_filter = ['is_public','core', 'category', 'valid', 'caste', 'topic', 'is_kit', 'is_custom']
+    list_editable = ['is_public','is_kit']
+    search_fields = ['reference', 'description']

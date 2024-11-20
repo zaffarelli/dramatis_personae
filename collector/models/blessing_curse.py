@@ -1,17 +1,14 @@
-'''
- ╔╦╗╔═╗  ╔═╗┌─┐┬  ┬  ┌─┐┌─┐┌┬┐┌─┐┬─┐
-  ║║╠═╝  ║  │ ││  │  ├┤ │   │ │ │├┬┘
- ═╩╝╩    ╚═╝└─┘┴─┘┴─┘└─┘└─┘ ┴ └─┘┴└─
-'''
 from django.db import models
 from django.contrib import admin
 from django.dispatch import receiver
 from django.db.models.signals import pre_save, post_save
 from collector.models.character import Character
 from collector.models.character_custo import CharacterCusto
+from collector.mixins.ridded_mixin import RiddedMixin, RidField
+from collector.utils.helper import refix
 
 
-class BlessingCurseRef(models.Model):
+class BlessingCurseRef(RiddedMixin):
     class Meta:
         ordering = ['reference']
         verbose_name = "FICS: Blessing/Curse"
@@ -24,11 +21,14 @@ class BlessingCurseRef(models.Model):
     def __str__(self):
         return '%s (%+d)' % (self.reference, self.value)
 
-    def to_json(self):
-        from collector.utils.basic import json_default
-        import json
-        jstr = json.loads(json.dumps(self, default=json_default, sort_keys=True, indent=4))
-        return jstr
+    def fix(self):
+        self.toRID(f"{self.reference}_{self.value}")
+
+    # def to_json(self):
+    #     from collector.utils.basic import json_default
+    #     import json
+    #     jstr = json.loads(json.dumps(self, default=json_default, sort_keys=True, indent=4))
+    #     return jstr
 
 
 class BlessingCurse(models.Model):
@@ -77,9 +77,9 @@ class BlessingCurseCustoInline(admin.TabularInline):
 
 # Admin
 class BlessingCurseRefAdmin(admin.ModelAdmin):
-    ordering = ('reference',)
-    search_fields = ('reference', 'description')
-
+    ordering = ['reference']
+    list_display = ('rid', 'reference', 'value', 'description')
+    actions = [refix]
 
 class BlessingCurseModificatorAdmin(admin.ModelAdmin):
-    ordering = ('blessing_curse_ref',)
+    ordering = ['blessing_curse_ref']

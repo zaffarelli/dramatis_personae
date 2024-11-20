@@ -140,6 +140,7 @@ def export_epic(request, campaign):
 def extract_rules():
     from collector.models.weapon import WeaponRef
     from collector.models.skill import SkillRef
+    from collector.models.degree import DegreeRef
     from collector.models.benefice_affliction import BeneficeAfflictionRef
     from collector.models.blessing_curse import BlessingCurseRef
     from collector.models.ritual import RitualRef
@@ -152,8 +153,10 @@ def extract_rules():
     species = Specie.objects.all().filter(hidden=False).order_by('species')
     context['species'] = species
 
-    skills = SkillRef.objects.all().filter(is_speciality=False).order_by('reference', 'is_root')
+    skills = SkillRef.objects.all().filter().order_by('reference')
     context['skills'] = skills
+    degrees = DegreeRef.objects.all().filter().order_by('reference')
+    context['degrees'] = degrees
     benefice_afflictions = BeneficeAfflictionRef.objects.order_by('-source')
     context['benefice_afflictions'] = benefice_afflictions
     blessing_curses = BlessingCurseRef.objects.order_by('-source')

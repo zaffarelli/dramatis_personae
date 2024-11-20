@@ -8,6 +8,9 @@ from django.contrib import admin
 from collector.models.skill import SkillRef, SkillRefAdmin
 admin.site.register(SkillRef, SkillRefAdmin)
 
+from collector.models.degree import DegreeRef, DegreeRefAdmin
+admin.site.register(DegreeRef, DegreeRefAdmin)
+
 from collector.models.blessing_curse import BlessingCurseRef, BlessingCurseRefAdmin
 admin.site.register(BlessingCurseRef, BlessingCurseRefAdmin)
 

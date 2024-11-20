@@ -1,13 +1,9 @@
-"""
- ╔╦╗╔═╗  ╔═╗┌─┐┬  ┬  ┌─┐┌─┐┌┬┐┌─┐┬─┐
-  ║║╠═╝  ║  │ ││  │  ├┤ │   │ │ │├┬┘
- ═╩╝╩    ╚═╝└─┘┴─┘┴─┘└─┘└─┘ ┴ └─┘┴└─
-"""
 from django.db import models
 from collector.utils import fics_references
 from django.contrib import admin
 from collector.models.character import Character
 from datetime import datetime
+from collector.mixins.ridded_mixin import RiddedMixin, RidField
 
 
 # LIFEPATH_CATEGORY = (
@@ -39,7 +35,7 @@ from datetime import datetime
 # )
 
 
-class TourOfDutyRef(models.Model):
+class TourOfDutyRef(RiddedMixin):
     class Meta:
         ordering = ['category', 'caste', 'reference']
         verbose_name = "FICS: ToD"
@@ -52,6 +48,10 @@ class TourOfDutyRef(models.Model):
     is_custom = models.BooleanField(default=False)
     need_fix = models.BooleanField(default=False, blank=True)
     AP = models.IntegerField(default=0)
+    SP = models.IntegerField(default=0)
+    DP = models.IntegerField(default=0)
+    BCP = models.IntegerField(default=0)
+    BAP = models.IntegerField(default=0)
     OP = models.IntegerField(default=0)
     balance_AP = models.IntegerField(default=0)
     balance_OP = models.IntegerField(default=0)
@@ -64,75 +64,137 @@ class TourOfDutyRef(models.Model):
     PA_WIL = models.IntegerField(default=0)
     PA_TEM = models.IntegerField(default=0)
     PA_PRE = models.IntegerField(default=0)
-    PA_REF = models.IntegerField(default=0)
+    PA_DEX = models.IntegerField(default=0)
     PA_TEC = models.IntegerField(default=0)
     PA_AGI = models.IntegerField(default=0)
     PA_AWA = models.IntegerField(default=0)
-    OCC_LVL = models.IntegerField(default=0)
-    OCC_DRK = models.IntegerField(default=0)
+    PA_OCC = models.IntegerField(default=0,blank=True)
+    PA_DRK = models.IntegerField(default=0,blank=True)
     WP = models.IntegerField(default=0)
     value = models.IntegerField(default=0)
     description = models.TextField(max_length=1024, default='', blank=True)
-    valid = models.BooleanField(default=False)
+    notes = models.TextField(max_length=1024, default='', blank=True)
+    valid = models.BooleanField(default=False,blank=True)
     pub_date = models.DateTimeField('Date published', default=datetime.now)
     core = models.BooleanField(default=True)
+    is_kit = models.BooleanField(default=False, blank=True)
+    is_public = models.BooleanField(default=True, blank=True)
+    skill_modificators_summary = models.TextField(max_length=1024, default="", blank=True)
+    degree_modificators_summary = models.TextField(max_length=1024, default="", blank=True)
+    beneficeaffliction_modificators_summary = models.TextField(max_length=1024, default="", blank=True)
+    blessingcurse_modificators_summary = models.TextField(max_length=1024, default="", blank=True)
+
+    @classmethod
+    def validity(cls):
+        import math
+        all = cls.objects.all()
+        valid_ones = cls.objects.filter(valid=True)
+        return  f'INFO: Valid ToDs = {len(valid_ones)} of {len(all)} [{math.floor(len(valid_ones)/len(all)*1000)/10}%]'
 
     def __str__(self):
-        return f'[{self.get_category_display()}][{self.value}] ({self.get_caste_display()}|{self.topic}) {self.reference} '
+        return f'[{self.get_category_display()}]{self.get_caste_display()} {self.reference} '
 
     def fix(self):
-        self.WP = 0
+        def getAttribute(suffix, report_list):
+            val = getattr(self, "PA_" + suffix.upper())
+            if val != 0:
+                report_list.append(f'{suffix}{val:+}'.upper())
+            return val
+
+
+        def getFromList(items, report_list, ref):
+            total = 0
+            wp_total = 0
+            for item in items:
+                r = getattr(item, ref)
+                if r:
+                    if hasattr(item,"value"):
+                        report_list.append(f'{r.reference}{item.value:+}')
+                        if hasattr(r, "is_wildcard"):
+                            total += item.value
+                        else:
+                            wp_total += item.value
+                    else:
+                        if hasattr(r, "value"):
+                            report_list.append(f'{r.reference}{r.value:+}')
+                            total += r.value
+                        else:
+                            report_list.append(f'{r.reference}')
+            return total,wp_total
+
+        self.toRID(f"{self.caste}_{self.category}_{self.reference}",prefix="TOD_",cypher=True)
         if self.is_custom:
             self.value = self.AP * 3 + self.OP
         else:
-            self.fix75()
-            self.AP = self.PA_STR + self.PA_CON + self.PA_BOD + self.PA_MOV + self.PA_INT + self.PA_WIL + self.PA_TEM + self.PA_PRE + self.PA_REF + self.PA_TEC + self.PA_AGI + self.PA_AWA + self.OCC_LVL - self.OCC_DRK
+            self.AP = 0
             self.OP = 0
+            self.SP = 0
+            self.DP = 0
+            self.BAP = 0
+            self.BCP = 0
+            self.WP = 0
             texts = []
-            if self.PA_STR != 0:
-                texts.append("STR %+d" % (self.PA_STR))
-            if self.PA_CON != 0:
-                texts.append("CON %+d" % (self.PA_CON))
-            if self.PA_BOD != 0:
-                texts.append("BOD %+d" % (self.PA_BOD))
-            if self.PA_MOV != 0:
-                texts.append("MOV %+d" % (self.PA_MOV))
-            if self.PA_INT != 0:
-                texts.append("INT %+d" % (self.PA_INT))
-            if self.PA_WIL != 0:
-                texts.append("WIL %+d" % (self.PA_WIL))
-            if self.PA_TEM != 0:
-                texts.append("TEM %+d" % (self.PA_TEM))
-            if self.PA_PRE != 0:
-                texts.append("PRE %+d" % (self.PA_PRE))
-            if self.PA_REF != 0:
-                texts.append("REF %+d" % (self.PA_REF))
-            if self.PA_TEC != 0:
-                texts.append("TEC %+d" % (self.PA_TEC))
-            if self.PA_AGI != 0:
-                texts.append("AGI %+d" % (self.PA_AGI))
-            if self.PA_AWA != 0:
-                texts.append("AWA %+d" % (self.PA_AWA))
-            if self.OCC_LVL != 0:
-                texts.append("OCC %+d" % (self.OCC_LVL))
-            if self.OCC_DRK != 0:
-                texts.append("DRK %+d" % (self.OCC_DRK))
-            for s in self.skillmodificator_set.all():
-                texts.append("{%s %+d}" % (s.skill_ref.reference, s.value))
-                if s.skill_ref.is_wildcard:
-                    self.WP += s.value
-                if not s.skill_ref.is_root:
-                    self.OP += s.value
-            for bc in self.blessingcursemodificator_set.all():
-                texts.append("(%s %+d)" % (bc.blessing_curse_ref.reference, bc.blessing_curse_ref.value))
-                self.OP += bc.blessing_curse_ref.value
-            for ba in self.beneficeafflictionmodificator_set.all():
-                texts.append("(%s %+d)" % (ba.benefice_affliction_ref.reference, ba.benefice_affliction_ref.value))
-                self.OP += ba.benefice_affliction_ref.value
-            self.description = " ".join(texts)
+            # Attributes
+            attributes = ["str", "con", "bod", "mov", "int", "wil", "tem", "pre", "dex", "tec", "agi", "awa", "occ",
+                          "drk"]
+            hrlist_attributes = []
+            for attribute in attributes:
+                self.AP += getAttribute(attribute, hrlist_attributes)
+            # if len(hrlist_attributes) == 0:
+            #     hrlist_attributes = ["Attributes: None"]
+            if len(hrlist_attributes)>0:
+                texts.append("Attributes: "+", ".join(hrlist_attributes))
+            # SKILLS
+            hrlist_skills = []
+            items = self.skillmodificator_set.all()
+            self.SP, self.WP = getFromList(items, hrlist_skills, "skill_ref")
+            print(hrlist_skills, self.SP)
+            self.skill_modificators_summary = "Skills: "
+            if len(hrlist_skills) > 0:
+                self.skill_modificators_summary += ", ".join(hrlist_skills)
+            else:
+                self.skill_modificators_summary = ""
+            # DEGREES
+            hrlist_degrees = []
+            items = self.degreemodificator_set.all()
+            self.DP, self.WP = getFromList(items, hrlist_degrees, "degree_ref")
+            self.degree_modificators_summary = "Degrees: "
+            if len(hrlist_degrees) > 0:
+                self.degree_modificators_summary += ", ".join(hrlist_degrees)
+            else:
+                self.degree_modificators_summary = ""
+            # BLESSINGS/CURSES
+            hrlist_bc = []
+            items = self.blessingcursemodificator_set.all()
+            self.BCP, _ = getFromList(items, hrlist_bc, "blessing_curse_ref")
+            self.blessingcurse_modificators_summary = "Blessing/Curses: "
+            if len(hrlist_bc) > 0:
+                self.blessingcurse_modificators_summary += ", ".join(hrlist_bc)
+            else:
+                self.blessingcurse_modificators_summary = ""
+            # BENEFICES/AFFLICTIONS
+            hrlist_ba = []
+            items = self.beneficeafflictionmodificator_set.all()
+            self.BAP, _ = getFromList(items, hrlist_ba, "benefice_affliction_ref")
+            self.beneficeaffliction_modificators_summary = "Benefices/Afflictions: "
+            if len(hrlist_ba) > 0:
+                self.beneficeaffliction_modificators_summary += ", ".join(hrlist_ba)
+            else:
+                self.beneficeaffliction_modificators_summary = ""
+            # BUILD DESCRIPTION
+            if len(self.skill_modificators_summary)>0:
+                texts.append(self.skill_modificators_summary)
+            if len(self.degree_modificators_summary) > 0:
+                texts.append(self.degree_modificators_summary)
+            if len(self.beneficeaffliction_modificators_summary) > 0:
+                texts.append(self.beneficeaffliction_modificators_summary)
+            if len(self.blessingcurse_modificators_summary) > 0:
+                texts.append(self.blessingcurse_modificators_summary)
+            self.description = "; ".join(texts)
+            self.OP = self.SP + self.DP + self.BCP + self.BAP + self.WP
             self.value = (self.AP + self.balance_AP) * 3 + (self.OP + self.balance_OP)
             self.check_value()
-
+            print(self.__class__.validity())
         self.need_fix = False
 
     def fix75(self):
@@ -190,7 +252,7 @@ class TourOfDutyRef(models.Model):
                 self.valid = self.value == 9
                 self.topic = ''
             else:
-                self.valid = self.value in [5, 15, 20]
+                self.valid = self.value in [15, 5, 20] # 5 total: 4AP/3SP (environment) 1AP/2SP (class)
         elif self.category == '20':  # Apprenticeship
             self.valid = self.value == 25
         elif self.category == '30':  # Early Career
@@ -244,7 +306,7 @@ class TourOfDuty(models.Model):
             ch.PA_WIL += tod.PA_WIL
             ch.PA_TEM += tod.PA_TEM
             ch.PA_PRE += tod.PA_PRE
-            ch.PA_REF += tod.PA_REF
+            ch.PA_DEX += tod.PA_DEX
             ch.PA_TEC += tod.PA_TEC
             ch.PA_AGI += tod.PA_AGI
             ch.PA_AWA += tod.PA_AWA
