@@ -507,6 +507,11 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
             .attr("class", "page")
             .attr("transform", "translate(" + 0 * me.stepx + "," + 0 * me.stepy + ")")
         ;
+        me.front = me.svg
+            .append("g")
+            .attr("class", "page")
+            .attr("transform", "translate(" + 0 * me.stepx + "," + 0 * me.stepy + ")")
+        ;
         me.defs = me.svg.append('defs');
         me.defs.append('marker')
             .attr('id', 'arrowhead')
@@ -573,7 +578,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
                 .style('stroke-width', '0.25pt');
 
         }
-        me.drawPages(page);
+
     }
 
     drawPages(page = 0) {

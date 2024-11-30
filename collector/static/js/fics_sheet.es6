@@ -57,7 +57,7 @@ class FICSSheet extends Sheet {
 
             let a = 9.35*me.stepx
             let b = 0.25*me.stepy
-            me.svg.append("path")
+            me.back.append("path")
                 //.style("fill-opacity",0.25)
 //                 .attr("x",a)
 //                 .attr("y",b)
@@ -135,7 +135,7 @@ class FICSSheet extends Sheet {
         }
 
         // Sheet content
-        me.character = me.back.append('g')
+        me.character = me.front.append('g')
             .attr('class', 'fics_sheet');
     }
 
@@ -187,11 +187,13 @@ class FICSSheet extends Sheet {
         }
         me.guideline = me.data['guideline'];
         $(me.parent).css('display', 'block');
-        me.drawWatermark(page);
+        me.drawWatermark(page)
+        me.drawPages(page)
         if (me.data['condition'] == "DEAD") {
             me.decorationText(12, 16, 0, 'middle', me.logo_font, me.fat_font_size * 3, me.shadow_fill, me.shadow_stroke, 0.5, "DEAD", me.back, 0.25);
         }
-        me.fillCharacter(page);
+
+        //me.fillCharacter(page);
         me.drawButtons();
         me.zoomActivate();
     }
