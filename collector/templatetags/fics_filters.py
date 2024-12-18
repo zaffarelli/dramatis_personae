@@ -269,9 +269,9 @@ def as_lifepath(value):
 @register.filter(name='prettybool')
 def prettybool(value):
     if value == True:
-        res = '<i class="fas fa-check" style="color:green;"></i>'
+        res = '<i class="fas fa-check" style="color:#10c010;"></i>'
     else:
-        res = '<i class="fas fa-times" style="color:red;"></i>'
+        res = '<i class="fas fa-times" style="color:#c01010;"></i>'
     return res
 
 
@@ -311,11 +311,11 @@ def as_pa_short(value):
         "PA_TEM": "TEM",
         "PA_PRE": "PRE",
         "PA_TEC": "TEC",
-        "PA_REF": "REF",
+        "PA_DEX": "DEX",
         "PA_AGI": "AGI",
         "PA_AWA": "AWA",
-        "OCC_LVL": "Occult",
-        "OCC_DRK": "Darkside",
+        "PA_OCC": "Occult",
+        "PA_DRK": "Darkside",
         "": "Error!",
     }
     return PA[value]
@@ -430,4 +430,23 @@ def as_place(value):
         for word in words:
             list.append(word.strip())
         res = " <i class='fa fa-arrow-right'></i> ".join(list)
+    return res
+
+
+@register.filter(name='as_tod_description')
+def as_tod_description(value):
+    new_sentences = []
+    sentences = value.split("; ")
+    for sentence in sentences:
+        words = sentence.split(": ")
+        if (len(words)>1):
+            new_words = []
+            new_words.append(f"<b>{words[0]}</b>")
+            new_words.append(words[1])
+            new_sentences.append(": ".join(new_words))
+        else:
+            if len(sentence)>0:
+                new_sentences.append(sentence)
+                print("Problem splitting that:"+sentence)
+    res = "<br/>".join(new_sentences)
     return res

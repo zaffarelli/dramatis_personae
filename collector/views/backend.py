@@ -32,7 +32,8 @@ def pdf_character(request, id=None):
 
 def run_audit(request):
     campaign = get_current_config(request)
-    character_items = campaign.dramatis_personae.all()
+    #character_items = campaign.dramatis_personae.all()
+    character_items = Character.objects.all()
     x = 1
     for c in character_items:
         c.need_fix = True
@@ -40,6 +41,7 @@ def run_audit(request):
         messages.info(request, f'Recalculating {c.full_name}')
         c.save()
     messages.info(request, f'Launched {x} actions...')
+    make_audit_report(campaign)
     return HttpResponse(status=204)
 
 
@@ -179,7 +181,7 @@ def epic_deck(request):
 def svg_to_pdf(request, slug):
     import cairosvg
     response = {'status': 'error'}
-    if request.is_ajax():
+    if is_ajax(request):
         pdf_name = os.path.join(settings.MEDIA_ROOT, 'pdf/results/' + request.POST["pdf_name"])
         svg_name = os.path.join(settings.MEDIA_ROOT, 'pdf/results/' + request.POST["svg_name"])
         svgtxt = request.POST["svg"]

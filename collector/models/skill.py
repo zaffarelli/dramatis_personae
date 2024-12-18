@@ -20,12 +20,14 @@ class SkillRef(RiddedMixin):
     # is_speciality = models.BooleanField(default=False, blank=True)
     is_common = models.BooleanField(default=True, blank=True)
     is_wildcard = models.BooleanField(default=False, blank=True)
+    group_wildcard = models.BooleanField(default=False, blank=True)
+#as_wildcard_of = models.CharField(default="", max_length=256, blank=True)
     group = models.CharField(default="EDU", max_length=3, choices=fics_references.GROUPCHOICES, blank=True)
-    # linked_to = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE)
+    linked_to = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE)
     description = models.TextField(max_length=1024, default='', blank=True)
     # attributes = models.TextField(max_length=64, default='', blank=True)
     # grouping = models.CharField(max_length=64, default='', blank=True)
-    deprecated = models.BooleanField(default=False, blank=True)
+    # deprecated = models.BooleanField(default=False, blank=True)
     acro = models.CharField(default="", max_length=7, blank=True)
 
     as_wildcard_of = models.CharField(default="", max_length=512, blank=True)
@@ -61,7 +63,7 @@ class Skill(RiddedMixin):
     skill_ref = models.ForeignKey(SkillRef, on_delete=models.CASCADE)
     skill_ref_rid = RidField()
     character_rid = RidField()
-    value = models.PositiveIntegerField(default=0)
+    value = models.PositiveIntegerField(default=1)
 
     def __str__(self):
         return '%s=%s' % (self.character.full_name, self.skill_ref.reference)
@@ -74,7 +76,7 @@ class Skill(RiddedMixin):
         if (ch and sr):
             character_rid = ch.rid
             skill_ref_rid = sr.rid
-        self.toRID(f"{self.reference}_{character_rid}_{skill_ref_rid}")
+        self.toRID(f"{self.skill_ref.reference}_{character_rid}_{skill_ref_rid}")
 
 
 class SkillInline(admin.TabularInline):
@@ -90,13 +92,16 @@ class SkillModificator(models.Model):
 
     tour_of_duty_ref = models.ForeignKey(TourOfDutyRef, on_delete=models.CASCADE)
     skill_ref = models.ForeignKey(SkillRef, on_delete=models.CASCADE)
-    value = models.IntegerField(default=0)
+    value = models.IntegerField(default=1)
 
     def __str__(self):
         return '%s %s' % (self.tour_of_duty_ref.reference, self.skill_ref.reference)
 
     def fix(self):
-        pass
+        if self.tour_of_duty_ref:
+            if self.tour_of_duty_ref.category in ["10","20"]:
+                if self.value > 1:
+                    self.value = 1
 
 
 class SkillCusto(models.Model):
@@ -105,7 +110,7 @@ class SkillCusto(models.Model):
 
     character_custo = models.ForeignKey(CharacterCusto, on_delete=models.CASCADE)
     skill_ref = models.ForeignKey(SkillRef, on_delete=models.CASCADE)
-    value = models.IntegerField(default=0)
+    value = models.IntegerField(default=1)
 
 
 # Inlines
@@ -123,10 +128,10 @@ class SkillCustoInline(admin.TabularInline):
 
 
 class SkillRefAdmin(admin.ModelAdmin):
-    ordering = ['reference']
-    list_display = ['reference', 'acro', 'rid', 'is_common', 'group']
+    ordering = ['-is_wildcard','reference']
+    list_display = ['reference', 'acro', 'is_common', 'group', 'is_wildcard','group_wildcard',"as_wildcard_of",'rid']
     actions = [refix]
-    list_filter = ['is_common', 'deprecated']
+    list_filter = ['is_common', 'is_wildcard']
     search_fields = ['reference', 'group']
     list_editable = ['group']
     actions = [refix]

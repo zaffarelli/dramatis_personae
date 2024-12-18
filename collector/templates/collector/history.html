@@ -1,0 +1,26 @@
+{% load fics_filters %}
+{% csrf_token %}
+
+    <div class="character_row valid_{{x.valid|lower}}" id="{{x.rid}}">
+        <div class="cell mini first" title="{{x.rid}}"> {{ forloop.counter }}</div>
+        <div class="cell wide first tod_cat_{{x.category}} centered"> {{ x.category_name }}</div>
+        <div class="cell widest first padded"> {{ x.reference }}</div>
+        <div class="cell wide"> {{ x.caste }}</div>
+        <div class="cell wide"> {{ x.topic|title }}</div>
+        <div class="cell wide"> {{ x.subtopic }}</div>
+        {#<div class="cell mini centered before" title="core"> {{ x.core|prettybool|safe }}</div>#}
+        {#<div class="cell mini centered before" title="is_custom"> {{ x.is_custom|prettybool|safe }}</div>#}
+        <div class="cell mini centered before" title="valid"> {{ x.valid|prettybool|safe }}</div>
+        {#<div class="cell mini centered before" title="is_public"> {{ x.is_public|prettybool|safe }}</div> #}
+        <div class="cell mid largetext text" > {{ x.description|as_tod_description|safe }}</div>
+        <div class="cell mini centered first" title="Attribute Points (x3)">{{ x.AP }}</div>
+        <div class="cell mini centered first" title="Option Points (x1)">{{ x.OP }}</div>
+        <div class="cell mini centered last" title="Skills Points (x1)">{{ x.SP }}</div>
+        <div class="cell mini centered last" title="Degrees Points (x1)">{{ x.DP }}</div>
+        <div class="cell mini centered last" title="Blessing/Curse Points (x1)">{{ x.BCP }}</div>
+        <div class="cell mini centered last" title="Benefice/Affliction Points (x1)">{{ x.BAP }}</div>
+        <div class="cell mini centered last" title="Wildcard Points (x1)">{{ x.WP }}</div>
+        <div class="cell small mono centered last" title="Creation Points Value">{{ x.value }}
+            {% if x.balance %}<br/>(B:{{x.balance}}){%endif%}
+        </div>
+    </div>

@@ -1,76 +1,8 @@
 @import 'basics';
 @import 'fonts';
 
-/* Invalid display */
-//
-//@media screen and (max-width: 640px) {
-//  body {
-//    margin: 0;
-//    padding: 0;
-//    overflow-x: hidden;
-//    overflow-y: scroll;
-//    background: $fics_back url($back);
-//
-//    & .logo {
-//      display: none;
-//    }
-//
-//    & .menu {
-//      display: none;
-//    }
-//
-//    & .wrapper {
-//      display: none;
-//    }
-//  }
-//}
-
-/* Small - 14 inches Elitebook display */
-
-//@media screen and (min-width: 641px) and (max-width: 1024px) {
-//  body {
-//    margin: 0;
-//    padding: 0;
-//    overflow-x: hidden;
-//    overflow-y: scroll;
-//    background: $fics_back url($back);
-//
-//    & .logo {
-//      height: 105px;
-//      width: 100%;
-//    }
-//
-//    & .menu {
-//      width: 100%;
-//      height: 40px;
-//      background:red;
-//    }
-//
-//    & .wrapper {
-//      z-index: 1;
-//      margin-left: 0;
-//      width: 99%;
-//      min-height: 1000px;
-//      //background: transparent url("simple_logo_invert.png") center center no-repeat;
-//      display: grid;
-//      grid-template-columns: .5% 275px 1fr 200px .5%;
-//      grid-column-gap: 5px;
-//      justify-content: center;
-//      align-content: stretch;
-//
-//      & .details {
-//        grid-column: 3 / 6;
-//      }
-//
-//      & .menuright {
-//        display: none;
-//      }
-//    }
-//  }
-//}
 
 /* Normal - 21/22 inches screen */
-
 @media screen and (min-width: 1025px) {
   body {
     margin: 0;
@@ -79,9 +11,6 @@
     overflow-y: scroll;
     background: $fics_back url($back);
     background-attachment: fixed;
-
-    //background: linear-gradient(45deg,#0D324D,#7F5A83);
-
 
     & .wrapper {
       z-index: 5;
@@ -94,18 +23,16 @@
       justify-content: flex-start;
       align-items: flex-start;
       align-content: flex-start;
-      //background: transparent url($logo) 100% 100% no-repeat;
-      & .menu_block {
 
+      & .menu_block {
       }
 
       & .port {
         display: none;
       }
 
-      //& .details {
-      //  display: none;
-      //}
+      & .details {
+      }
 
       & .mosaic {
         flex-grow: 1;
@@ -121,6 +48,7 @@
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
+
       }
     }
   }
@@ -134,7 +62,6 @@
   justify-content: flex-start;
   align-items: flex-start;
   align-content: flex-start;
-
 
   & .tile {
     padding: 5px;
@@ -467,9 +394,8 @@
     display: flex;
     flex-flow: row wrap;
     justify-content: flex-start;
-    background: $fics_darker;
+    align-content: flex-start;
     background: transparent;
-    //margin: 5px;
     border-radius: 8px;
     flex-grow: 1;
     flex-shrink: 1;
@@ -544,95 +470,112 @@
     }
   }
 
+  & .title_row {
+    order:1;
+    flex:5 5 auto;
+    color:$fics_front;
+    font-size:2em;
+  }
+
   & .character_row {
     /* Flex as item */
     flex-grow: 1;
     flex-shrink: 1;
+    order:15;
     /* Flex as container */
-    justify-content: flex-start;
-    align-items: flex-start;
-    align-content: space-around;
-    align-items: stretch;
-
     display: flex;
     flex-flow: row nowrap;
-    //gap: 5px 10px;
-    background: transparent;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: stretch;
+    border:2px solid transparent;
 
-    &:hover {
-      background: $fics_dark;
+    background: $fics_dark;
+    &.valid_true{
+        background: $fics_darker;
     }
+
+    &:hover { background: #404040;}
 
     color: $fics_frontest;
     width: 95%;
     font-family: Texte;
 
+
     & .cell {
       order: 3;
       flex-grow: 1;
       flex-shrink: 1;
-      border: 1px solid $fics_lighter;
-      border-radius: 5px;
+      border: 1px solid transparent; //$fics_lighter;
+      border-radius: 3px;
       padding: 3px;
       vertical-align: middle;
+      font-size: 10pt;
+      background:transparent;
+      color:#D0D0D0;
+      min-height: 1.1em;
+      &:hover { color: $fics_golden; cursor:none;}
 
       & em {
         font-family: NomPersoListe;
         font-style: normal;
-        font-size: 9pt;
-      }
-
-      font-family: Texte;
-      flex-grow: 1;
-      flex-shrink: 1;
-      color: $fics_frontest;
-      min-height: 1.1em;
-
-      &.wide {
-        flex-grow: 0;
-        flex-shrink: 0;
-        width: 120px;
-      }
-
-      &.wider {
-        flex-grow: 0;
-        flex-shrink: 0;
-        width: 150px;
-
-
-      }
-
-      &.mini {
-        order: 0;
-        flex-grow: 0;
-        flex-shrink: 0;
-        min-width: 5ex;
-        text-align: center;
-
-      }
-
-      &.last {
-        order: 10;
-      }
-
-      &.small {
-        flex-grow: 0;
-        flex-shrink: 0;
-        width: 100px;
+        font-size: 1.1em;
       }
 
       & span {
         padding: 3px;
         font-family: Texte;
-
-        & i {
-          color: $fics_golden;
-        }
+        & i { color: $fics_golden; }
       }
+
+      /* Sizing */
+      &.wide { flex: 0 0 120px; }
+      &.wider { flex: 0 0 150px; }
+      &.widest { flex: 0 0 180px; }
+      &.mini { flex: 0 0 4ex; }
+      &.text { flex: 1 5 auto; }
+      &.small { flex: 0 0 50px; }
+
+      /* Ordering */
+      &.first{  order:0; }
+      &.last { order: 10; }
+      &.before { order: 2; }
+      &.mid { order: 5; }
+
+      /* Others */
+      &.padded{ padding:5px 8px; }
+      &.centered{ text-align:center; }
+      &.mono{
+          font-family:"Syne Mono";
+          font-size:1.2em;
+          font-weight:bold;
+          color:#2060A0;
+      }
+      &.largetext{
+          font-size:1.2em;
+          font-family:"Ubuntu Mono";
+          color:#c0c0c0;
+          & b{
+              color:#c0c0f0;
+              }
+          &:hover{
+              font-size:2em;
+          }
+      }
+
+
+      /* special */
+      &.tod_cat_0{background:#352a36;}  /* Birthright */
+      &.tod_cat_10{background:#644d52;} /* Upbringing */
+      &.tod_cat_20{background:#703433;} /* Apprenticeship */
+      &.tod_cat_30{background:#043333;} /* Early Career */
+      &.tod_cat_40{background:#275477;} /* Tour of Duty */
+      &.tod_cat_50{background:#7f807c;} /* Worldly Benefits */
+      &.tod_cat_60{background:#2c312d;} /* Build */
+      &.tod_cat_70{background:#585651;} /* Special */
+      &.tod_cat_80{background:#2a3449;} /* Nameless Kit */
     }
   }
-
-
 }
 
 // .tile:nth-child(3n+1) { order: 2; }
@@ -655,3 +598,13 @@
 .hidden {
   display: none;
 }
+
+// .blockright{
+//
+//     width:120ex;
+//     border:2px solid purple;
+//     background: $fics_dark;
+//     color:$fics_frontest;
+//     padding:3pt;
+//
+// }

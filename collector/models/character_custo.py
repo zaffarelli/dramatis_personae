@@ -30,10 +30,10 @@ class CharacterCusto(models.Model):
     PA_AGI = models.PositiveIntegerField(default=0)
     PA_AWA = models.PositiveIntegerField(default=0)
     summary = models.TextField(default='')
-    OCC_LVL = models.PositiveIntegerField(default=0)
-    OCC_DRK = models.PositiveIntegerField(default=0)
+    PA_OCC = models.PositiveIntegerField(default=0)
+    PA_DRK = models.PositiveIntegerField(default=0)
     comment = models.TextField(default="")
-    watch_roots = models.TextField(default="")
+    watch_roots = models.TextField(default="", blank=True)
     wp_used = models.PositiveIntegerField(default=0)
 
     def recalculate(self):
@@ -45,17 +45,17 @@ class CharacterCusto(models.Model):
                     + self.PA_INT + self.PA_WIL + self.PA_TEM + self.PA_PRE
                     + self.PA_DEX + self.PA_TEC + self.PA_AGI + self.PA_AWA
                     )
-        self.AP += (self.OCC_LVL - self.OCC_DRK)
+        self.AP += (self.PA_OCC - self.PA_DRK)
         for s in self.skillcusto_set.all():
             if s.value == 0:
                 s.delete()
         for s in self.skillcusto_set.all():
-            if not s.skill_ref.is_root:
-                self.OP += s.value
-                if s.skill_ref.is_speciality:
-                    if s.skill_ref.linked_to.reference in wp_roots:
-                        self.wp_used += s.value
-                        #print(s.skill_ref.reference)
+            self.OP += s.value
+        for d in self.degreecusto_set.all():
+            if d.value == 0:
+                d.delete()
+        for d in self.degreecusto_set.all():
+            self.OP += d.value
         for bc in self.blessingcursecusto_set.all():
             self.OP += bc.blessing_curse_ref.value
         for ba in self.beneficeafflictioncusto_set.all():
@@ -94,10 +94,10 @@ class CharacterCusto(models.Model):
         self.summary += "</ul>"
         self.summary += "Occult"
         self.summary += "<ul>"
-        if self.OCC_LVL != 0:
-            self.summary += "<li>Lightside %d</li>" % (self.OCC_LVL)
-        if self.OCC_DRK != 0:
-            self.summary += "<li>Darkside  %d</li>" % (self.OCC_DRK)
+        if self.PA_OCC != 0:
+            self.summary += "<li>Lightside %d</li>" % (self.PA_OCC)
+        if self.PA_DRK != 0:
+            self.summary += "<li>Darkside  %d</li>" % (self.PA_DRK)
         self.summary += "</ul>"
         self.summary += "Wildcards"
         self.summary += "<ul>"
@@ -108,8 +108,8 @@ class CharacterCusto(models.Model):
         self.summary += "Skills"
         self.summary += "<ul>"
         for s in self.skillcusto_set.all():
-            if s.skill_ref.is_root == False:
-                self.summary += "<li>%s +%d</li>" % (s.skill_ref.reference, s.value)
+            #if s.skill_ref.is_root == False:
+            self.summary += "<li>%s +%d</li>" % (s.skill_ref.reference, s.value)
         self.summary += "</ul>"
         self.summary += "Blessings/Curses"
         self.summary += "<ul>"
@@ -155,10 +155,12 @@ class CharacterCusto(models.Model):
         ch.PA_TEC += self.PA_TEC
         ch.PA_AGI += self.PA_AGI
         ch.PA_AWA += self.PA_AWA
-        ch.OCC_LVL += self.OCC_LVL
-        ch.OCC_DRK += self.OCC_DRK
+        ch.PA_OCC += self.PA_OCC
+        ch.PA_DRK += self.PA_DRK
         for sm in self.skillcusto_set.all():
             ch.add_or_update_skill(sm.skill_ref, sm.value, True)
+        for dm in self.degreecusto_set.all():
+            ch.add_or_update_degree(dm.degree_ref, dm.value, True)
         for bc in self.blessingcursecusto_set.all():
             ch.add_bc(bc.blessing_curse_ref)
         for ba in self.beneficeafflictioncusto_set.all():
@@ -196,5 +198,23 @@ class CharacterCusto(models.Model):
                 skill_custo.character_custo = self
                 skill_custo.save()
 
+    def add_or_update_degree(self, degree_ref_id, value):
+        from collector.models.degree import DegreeCusto, DegreeRef
+        found_in_custo = False
+        found_cu = None
+        for found_cu in self.degreecusto_set.all():
+            if found_cu.degree_ref.id == degree_ref_id:
+                found_in_custo = True
+                break
+        if found_in_custo:
+            found_cu.value += int(value)
+            found_cu.save()
+        else:
+            degree_custo = DegreeCusto()
+            degree_custo.skill_ref = DegreeRef.objects.get(pk=degree_ref_id)
+            if (int(value) > 0):
+                degree_custo.value = int(value)
+                degree_custo.character_custo = self
+                degree_custo.save()
 
 

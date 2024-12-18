@@ -29,8 +29,8 @@ def check_secondary_attributes(ch):
     ch.SA_TOL = ch.PA_TEM + ch.PA_WIL
     ch.SA_HUM = (ch.PA_TEM + ch.PA_WIL) * 5
     ch.SA_PAS = ch.PA_TEM + ch.PA_AWA
-    ch.SA_WYR = ch.PA_INT + ch.PA_REF
-    ch.SA_SPD = math.ceil(ch.PA_REF / 2)
+    ch.SA_WYR = ch.PA_INT + ch.PA_DEX + ch.PA_TEC
+    ch.SA_SPD = math.ceil(ch.PA_MOV / 2)
     ch.SA_RUN = ch.PA_MOV * 2
 
 
@@ -258,12 +258,13 @@ def get_skills_list(ch, groups):
         weight = 1
         for g in groups:
             if s.group == g:
-                weight = 3 if s.is_root else 2
+                #weight = 3 if s.is_root else 2
+                weight = 2
         master_skills.append({'skill': s.reference, 'data': s, 'weight': weight})
 
     logger.debug('MASTER LIST')
     for ms in sorted(master_skills, key=lambda ms: ms['skill']):
-        logger.debug('%s%s: %d' % ('  ' if ms['data'].is_root else '', ms['skill'], ms['weight']))
+        logger.debug('%s: %d' % ( ms['skill'], ms['weight']))
     return master_skills
 
 
@@ -281,10 +282,10 @@ def choose_sk(alist, maxweight):
     while idx < len(alist):
         cum += alist[idx]['weight']
         if x <= cum:
-            if alist[idx]['data'].is_root:
-                return pick_a_speciality_for(alist[idx]['data'])
-            else:
-                return alist[idx]['data']
+            # if alist[idx]['data'].is_root:
+            #     return pick_a_speciality_for(alist[idx]['data'])
+            # else:
+            return alist[idx]['data']
         idx += 1
     return None
 
@@ -321,12 +322,13 @@ def list_skills(ch):
     for skill in ch.skill_set.all().order_by('skill_ref__reference'):
         print("%35s %2d %4s %4s %4s" % (
             skill.skill_ref.reference, skill.value, '--' if skill.skill_ref.is_common else 'UNCO',
-            'SPEC' if skill.skill_ref.is_speciality else '--', 'ROOT' if skill.skill_ref.is_root else '--'))
+            'SPEC' if skill.skill_ref.is_speciality else '--', '--'))
         if skill.skill_ref.is_speciality == True:
             pool_r -= skill.value
         elif skill.skill_ref.is_common == False:
             pool_u -= skill.value
-        elif skill.skill_ref.is_root == False:
+        # elif skill.skill_ref.is_root == False:
+        else:
             pool_c -= skill.value
     print("> Pools (%d): c=%4d u=%4d r=%4d" % (pool, pool_c, pool_u, pool_r))
 
@@ -334,7 +336,7 @@ def list_skills(ch):
 def get_skills_list(ch, root, com):
     """ Prepare the list of skills without specialities """
     from collector.models.skill import SkillRef
-    skills = SkillRef.objects.all().filter(is_speciality=False, is_root=root, is_common=com)
+    skills = SkillRef.objects.all().filter(is_speciality=False, is_common=com)
     groups = ch.profile.get_groups()
     result_skills = []
     for s in skills:
@@ -350,15 +352,15 @@ def get_roots_list(ch):
     """ Prepare the list of skills without specialities """
     from collector.models.skill import SkillRef
     groups = ch.profile.get_groups()
-    skills = SkillRef.objects.all().filter(is_root=True)
+    #skills = SkillRef.objects.all().filter(is_root=True)
     result_skills = []
-    for s in skills:
-        weight = 1
-        for g in groups:
-            if s.group == g:
-                weight = 7
-        if weight > 0:
-            result_skills.append({'skill': s.reference, 'data': s, 'weight': weight})
+    # for s in skills:
+    #     weight = 1
+    #     for g in groups:
+    #         if s.group == g:
+    #             weight = 7
+    #     if weight > 0:
+    #         result_skills.append({'skill': s.reference, 'data': s, 'weight': weight})
     return result_skills
 
 

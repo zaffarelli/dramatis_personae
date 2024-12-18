@@ -10,7 +10,9 @@ from collector.views.characters import CharacterUpdateView, customize_ba, custom
 
 from collector.views.frontend import index, toggle_public, toggle_spotlight, get_list, add_avatar, \
     get_storyline, conf_details, recalc_avatar, heartbeat, \
-    show_todo, pdf_show, wa_export_character, tile_avatar, ghostmark_test, display_sheet, display_sessionsheet, switch_epic, deep_toggle, all_epics
+    show_todo, pdf_show, wa_export_character, tile_avatar, ghostmark_test, display_blank_sheet, display_sheet, \
+    display_sessionsheet, switch_epic, deep_toggle, all_epics, history
+
 from collector.views.backend import export, xls_update, pdf_character, gss_update, gss_summary, pdf_rules, roll_dice, \
     bloke_selector, run_audit, epic_deck, svg_to_pdf, save_sequence, load_sequence
 from collector.views.misc_chart import get_population_statistics, get_keywords
@@ -28,9 +30,11 @@ urlpatterns = [
     # re_path('^investigators/(?P<pk>\d+)/edit/$', InvestigatorUpdateView.as_view(), name='edit_investigator'),
     re_path('^ajax/edit/avatar/(?P<pk>\d+)/$', CharacterUpdateView.as_view(), name='edit_character'),
     re_path('^ajax/sheet/avatar/(?P<pk>\d+)/$', display_sheet, name='display_sheet'),
+    re_path('^ajax/display_blank_sheet/$', display_blank_sheet, name='display_blank_sheet'),
     re_path('^ajax/sessionsheet/(?P<slug>\w+)/$', display_sessionsheet, name='display_sessionsheet'),
     re_path('^ajax/tile/avatar/(?P<pk>\d+)/$', tile_avatar, name='tile_avatar'),
     re_path('^ajax/recalc/avatar/(?P<id>\d+)/$', recalc_avatar, name='recalc_avatar'),
+
     re_path('^ajax/add_avatar/(?P<slug>[\w+]+)/$', add_avatar, name='add_avatar'),
     re_path('^ajax/deep_toggle/(?P<slug>[\w+]+)/(?P<id>\d+)/$', deep_toggle, name='deep_toggle'),
 
@@ -86,4 +90,6 @@ urlpatterns = [
     re_path('^ajax/epics/$', all_epics, name='all_epics'),
     re_path('^ajax/deck/save/$', save_sequence, name='save_sequence'),
     re_path('^ajax/deck/load/$', load_sequence, name='load_sequence'),
+    re_path('^ajax/history/(?P<filter>\w+)/$', history, name="history"),
+
 ]

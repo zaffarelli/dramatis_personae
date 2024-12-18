@@ -1,8 +1,8 @@
-<table class='expanded'>
+<table class='custo'>
 	<tr>
-		<th colspan=1><span id='skill_add' class='edit_icon fa fa-arrow-alt-circle-left'></span></th>
-		<th colspan=2>Add Skill at 1</th>
-		<td colspan=3>
+		<th num=1><span id='skill_add' class='edit_icon fa fa-arrow-alt-circle-left'></span></th>
+		<th num=2>Add Skill at 1</th>
+		<td num=3>
 			<select id='skill_select'>
 			{% for s in c.skills_options %}
 				<option value='{{s.id}}' style='width:15ex;'>{% if s.grouping %}[{{ s.grouping }}] {% endif %}{{s.reference}}</option>

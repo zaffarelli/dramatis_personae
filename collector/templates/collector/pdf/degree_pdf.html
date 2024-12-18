@@ -1,12 +1,8 @@
 {% load fics_filters %}
 <h6>{{ c.reference }} {% if c.is_root %}*{% endif %}</h6>
 <p>
-{% if c.is_common %}<em>Common Skill</em><br/>{% endif %}
-{% if c.is_root %}<em>Root Skill</em><br/>{% endif %}
-{% if c.attributes %}<strong>Standard attribute:</strong> {{ c.attributes }}<br/>{% endif %}
-<strong>Group:</strong> {{c.get_group_display}}<br/>
-{% if c.grouping %}Type: {{ c.grouping }}<br/>{% endif %}
-{% if c.description %}{{ c.description|safe }}<br/>{% endif %}
-{% if c.common_specialities %}<strong>Specialities:</strong> <ul>{{ c.common_specialities|safe }}</ul>{% endif %}
-<strong>UUID:</strong> {{ c.uuid }}
+    <strong>Level:</strong>: {{c.get_level_display}}<br/>
+    <strong>Group:</strong> {{c.get_group_display}}<br/>
+    {%if c.subgroup%}<strong>SubGroup:</strong> {{c.subgroup}}<br/>{%endif%}
+    {% if c.description %}{{ c.description|safe }}<br/>{% endif %}
 </p>

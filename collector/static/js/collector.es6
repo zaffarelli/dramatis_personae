@@ -110,6 +110,14 @@ class Collector {
                             console.log("Epic Deck !!");
                             let epicdeck = new EpicDeck(answer.data, '#d3area');
                             epicdeck.perform();
+                        } else if (action_tag == 'display_blank_sheet') {
+                            console.log("Blank Sheet !!");
+                            $("#d3area").css('display', 'block');
+                            let s = JSON.parse(answer.settings);
+                            let d = JSON.parse(answer.data);
+                            me.d3 = new FICSSheet(s, "#d3area", me);
+                            me.d3.perform(d);
+                            me.rebootLinks();
                         } else {
                             let starmap = new Jumpweb(answer.data, '#d3area');
                             starmap.perform();
@@ -126,7 +134,9 @@ class Collector {
                         console.log(answer.mosaic);
                         $('.mosaic').html(pre + answer.mosaic + post);
                     } else {
-                        $('.mosaic').html(answer.mosaic);
+                        if (answer){
+                            $('.mosaic').html(answer.mosaic);
+                        }
                     }
                     me.rebootLinks();
                     //ac.reset(x, "sheet_" + answer.id, "customizer");

@@ -7,6 +7,7 @@ from django.forms import ModelForm, inlineformset_factory
 from collector.models.character import Character
 from collector.models.tourofduty import TourOfDutyRef, TourOfDuty
 from collector.models.skill import Skill, SkillModificator
+from collector.models.degree import Degree, DegreeModificator
 from collector.models.armor import Armor
 from collector.models.weapon import Weapon
 from collector.models.shield import Shield
@@ -27,8 +28,8 @@ class CharacterForm(ModelForm):
                    'gm_shortcuts', 'OP', 'AP', 'stars', 'weapon_cost',
                    'armor_cost', 'shield_cost', 'score', 'life_path_total', 'OCC_LVL',
                    'OCC_DRK', 'PA_STR', 'PA_BOD', 'PA_CON', 'PA_MOV', 'PA_INT',
-                   'PA_WIL', 'PA_TEM', 'PA_PRE', 'PA_TEC', 'PA_REF', 'PA_AGI',
-                   'PA_AWA', 'OCC_LVL', 'OCC_DRK', 'spotlight', 'challenge_value', 'stories_count',
+                   'PA_WIL', 'PA_TEM', 'PA_PRE', 'PA_TEC', 'PA_DEX', 'PA_AGI',
+                   'PA_AWA', 'PA_OCC', 'PA_DRK', 'spotlight', 'challenge_value', 'stories_count',
                    'importance', 'fights', 'victories', 'alliance',
                    'victory_rating', 'need_pdf', 'overhead', 'priority']
 
@@ -61,6 +62,8 @@ BlokeFormSet = inlineformset_factory(Character, Bloke, fk_name='character', fiel
 
 # Tour of duty
 SkillModificatorFormSet = inlineformset_factory(TourOfDutyRef, SkillModificator, fields='__all__', extra=5,
+                                                can_delete=True)
+DegreeModificatorFormSet = inlineformset_factory(TourOfDutyRef, DegreeModificator, fields='__all__', extra=5,
                                                 can_delete=True)
 BlessingCurseModificatorFormSet = inlineformset_factory(TourOfDutyRef, BlessingCurseModificator, fields='__all__',
                                                         extra=3, can_delete=True)

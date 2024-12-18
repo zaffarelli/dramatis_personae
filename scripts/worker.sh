@@ -1,3 +1,3 @@
 #!/bin/sh
 
-celery worker -A dramatis_personae -l WARNING -B -E
+celery -A dramatis_personae worker -l WARNING -B -E

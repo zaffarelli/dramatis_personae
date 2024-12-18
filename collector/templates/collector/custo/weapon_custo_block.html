@@ -1,8 +1,8 @@
-<table class='expanded'>
+<table class='custo'>
 	<tr>
-		<th colspan=1><span id='weapon_add' class='edit_icon fa fa-arrow-alt-circle-left'></span></th>
-		<th colspan=2>Add Weapon</th>
-        <td colspan=3>
+		<th num=1><span id='weapon_add' class='edit_icon fa fa-arrow-alt-circle-left'></span></th>
+		<th num=2>Add Weapon</th>
+        <td num=3>
 			<select id='weapon_select'>
 			{% for s in c.weapon_options %}
 				<option value='{{s.id}}' style='width:15ex;'>{{s.reference}} [{{s.meta_type}} ({{s.get_category_display}})]</option>
@@ -11,9 +11,9 @@
         </td>
 	</tr>
 	<tr>
-		<th colspan=1><span id='weapon_del' class='edit_icon fa fa-arrow-alt-circle-right'></span></th>
-		<th colspan=2>Remove Weapon</th>
-        <td colspan=3>
+		<th num=1><span id='weapon_del' class='edit_icon fa fa-arrow-alt-circle-right'></span></th>
+		<th num=2>Remove Weapon</th>
+        <td num=3>
             {% if c.weapon_options_not %}
 			<select id='weapon_unselect'>
 			{% for s in c.weapon_options_not %}

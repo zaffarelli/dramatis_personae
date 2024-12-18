@@ -105,6 +105,7 @@ class Character(Combattant):
     SA_RUN = models.IntegerField(default=0)
     PA_TOTAL = models.IntegerField(default=0)
     SK_TOTAL = models.IntegerField(default=0)
+    DE_TOTAL = models.IntegerField(default=0)
     TA_TOTAL = models.IntegerField(default=0)
     BC_TOTAL = models.IntegerField(default=0)
     BA_TOTAL = models.IntegerField(default=0)
@@ -124,8 +125,8 @@ class Character(Combattant):
     score = models.IntegerField(default=0)
     gm_shortcuts = models.TextField(default='', blank=True)
     gm_shortcuts_pdf = models.TextField(default='', blank=True)
-    OCC_LVL = models.PositiveIntegerField(default=0)
-    OCC_DRK = models.PositiveIntegerField(default=0)
+    PA_OCC = models.PositiveIntegerField(default=0)
+    PA_DRK = models.PositiveIntegerField(default=0)
     occult_fire_power = models.PositiveIntegerField(default=0, blank=True)
     occult = models.CharField(max_length=50, default='', blank=True)
     challenge_value = models.IntegerField(default=0)
@@ -197,8 +198,8 @@ class Character(Combattant):
                 'full_name': self.full_name,
                 'gender': self.gender,
                 'race': self.specie.species,
-                'OCC_LVL': self.OCC_LVL,
-                'OCC_DRK': self.OCC_DRK,
+                'PA_OCC': self.PA_OCC,
+                'PA_DRK': self.PA_DRK,
                 'occult': self.occult,
                 'ranking': self.ranking,
                 'physical': self.physical,
@@ -261,7 +262,7 @@ class Character(Combattant):
         return self.get_pa("PA_TEC")
 
     @property
-    def info_ref(self):
+    def info_dex(self):
         return self.get_pa("PA_DEX")
 
     @property
@@ -273,12 +274,12 @@ class Character(Combattant):
         return self.get_pa("PA_AWA")
 
     @property
-    def info_lvl(self):
-        return self.get_pa("OCC_LVL")
+    def info_occ(self):
+        return self.get_pa("PA_OCC")
 
     @property
     def info_drk(self):
-        return self.get_pa("OCC_DRK")
+        return self.get_pa("PA_DRK")
 
     def get_absolute_url(self):
         return reverse('recalc_avatar', kwargs={'id': self.id})
@@ -295,10 +296,14 @@ class Character(Combattant):
         """ Historical Creation """
         old_op = self.OP
         self.build_log = ''
+        logger.info(f"Rebuilding from lifepath: {self.rid}")
+        self.audit_log(f"Rebuilding from lifepath: {self.rid}")
         from collector.models.character_custo import CharacterCusto
         found_custo = CharacterCusto.objects.filter(character=self).first()
         if found_custo is None:
             self.charactercusto = CharacterCusto.objects.create(character=self)
+        else:
+            self.audit_log(f"Character custo found: {found_custo}")
         self.resetPA()
         self.purge_skills()
         self.purge_bc()
@@ -357,8 +362,8 @@ class Character(Combattant):
         pa_total = self.sumPA
         po_total = 0
         for s in self.skill_set.all():
-            if not s.skill_ref.is_root:
-                po_total += s.value
+            #if not s.skill_ref.is_root:
+            po_total += s.value
         ba_total = 0
         for ba in self.beneficeaffliction_set.all():
             ba_total += ba.benefice_affliction_ref.value
@@ -482,7 +487,7 @@ class Character(Combattant):
 
     def fix(self, conf=None):
         super().fix(conf)
-        # self.audit = ""
+        self.audit = ""
         from collector.models.profile import Profile
         profiles = Profile.objects.all()
         for p in profiles:
@@ -496,52 +501,59 @@ class Character(Combattant):
             if self.birthdate < 1000:
                 self.birthdate = conf.epic.era - self.birthdate
                 self.age = conf.epic.era - self.birthdate
-        logger.info('Update game parameters')
-        self.update_game_parameters()
-        logger.info('Fencing league Special')
-        self.fencing_league_special()
-        logger.info('Occult Special')
-        self.occult_special()
+        try:
+            logger.info('Update game parameters')
+            self.update_game_parameters()
+            logger.info('Fencing league Special')
+            self.fencing_league_special()
+            logger.info('Occult Special')
+            self.occult_special()
 
-        if self.full_name == self.rid:
-            self.audit_log("Name is a RID. Everything has to be done on this character.")
-        # NPC fix
-        if self.use_history_creation:
-            logger.info('rebuild from lifepath')
-            self.rebuild_from_lifepath()
-        else:
-            self.rebuild_free_form()
+            if self.full_name == self.rid:
+                self.audit_log("Name is a RID. Everything has to be done on this character.")
+            # NPC fix
+            print("HERE WE GO!")
+            if self.use_history_creation:
+                logger.info('rebuild from lifepath')
+                self.rebuild_from_lifepath()
+            else:
+                self.rebuild_free_form()
+        except ValueError as e:
+            logger.error(e)
         logger.info('Fix 7.5')
-        self.fix75()
+        #self.fix75()
         self.xp_spent, self.experience_balance = self.check_experience_details()
         if self.xp_earned < self.xp_spent:
             self.xp_earned = self.xp_spent
         self.xp_pool = self.xp_earned - self.xp_spent
-        self.calculate_shortcuts()
-        self.update_ranking()
-        self.race = self.specie.species
+        try:
+            self.calculate_shortcuts()
+            self.update_ranking()
+            self.race = self.specie.species
 
-        if self.PA_BOD != 0:
-            if self.height == 0:
-                if "urthish" in self.specie.species.lower():
-                    self.height = 150 + 2.39473 * (self.PA_BOD / 2 + self.PA_STR / 2 + self.PA_CON + 2)  # 145
-                    if self.gender == 'male':
-                        self.weight = self.height / (2.98 - 0.0336 * (self.PA_BOD + self.PA_CON))
-                    else:
-                        self.weight = self.height / (3.09 - 0.02975 * (self.PA_BOD + self.PA_CON))
-                    if self.PA_MOV != self.PA_CON:
-                        self.weight *= 1 + (self.PA_CON - self.PA_MOV) * 0.1
-                    logger.info("Height/Weight Experiment 1: %s --> %0.2f %0.2f BODY:%d CONSTITUTION:%d" % (
-                        self.full_name, self.height, self.weight, self.PA_BOD, self.PA_CON))
-        # self.is_exportable = True #self.check_exportable()
-        self.update_challenge()
-        self.update_stories_count()
-        self.race = self.specie.species
+            if self.PA_BOD != 0:
+                if self.height == 0:
+                    if "urthish" in self.specie.species.lower():
+                        self.height = 150 + 2.39473 * (self.PA_BOD / 2 + self.PA_STR / 2 + self.PA_CON + 2)  # 145
+                        if self.gender == 'male':
+                            self.weight = self.height / (2.98 - 0.0336 * (self.PA_BOD + self.PA_CON))
+                        else:
+                            self.weight = self.height / (3.09 - 0.02975 * (self.PA_BOD + self.PA_CON))
+                        if self.PA_MOV != self.PA_CON:
+                            self.weight *= 1 + (self.PA_CON - self.PA_MOV) * 0.1
+                        logger.info("Height/Weight Experiment 1: %s --> %0.2f %0.2f BODY:%d CONSTITUTION:%d" % (
+                            self.full_name, self.height, self.weight, self.PA_BOD, self.PA_CON))
+            # self.is_exportable = True #self.check_exportable()
+            self.update_challenge()
+            self.update_stories_count()
+            self.race = self.specie.species
 
-        if self.historical_figure:
-            self.audit_log()
-        self.need_fix = False
-        logger.info(f'    => Done fixing ...: {self.full_name} NeedFIX:{self.need_fix}')
+            if self.historical_figure:
+                self.audit_log()
+            self.need_fix = False
+            logger.info(f'    => Done fixing ...: {self.full_name} NeedFIX:{self.need_fix}')
+        except ValueError as e:
+            print(e)
         # logger.info(self.audit)
 
     def fix75(self):
@@ -656,8 +668,7 @@ class Character(Combattant):
         sr = []
         for x in ss:
             sr.append(x.skill_ref)
-        all = SkillRef.objects.exclude(is_root=True).exclude(is_wildcard=True).order_by('is_speciality', 'linked_to',
-                                                                                        'grouping', 'reference')
+        all = SkillRef.objects.exclude(is_wildcard=True).order_by('linked_to', 'reference')
         for s in all:
             if s in sr:
                 self.skills_options_not.append(s)
@@ -688,6 +699,32 @@ class Character(Combattant):
             skill.save()
         return skill
 
+    def add_or_update_degree(self, adregree, modifier=0, stack=False):
+        from collector.models.degree import Degree
+        found_degree = self.degree_set.all().filter(degree_ref=adregree).first()
+        if found_degree:
+            if modifier == 0:
+                found_degree.value += 1
+            else:
+                found_degree.value += modifier
+            found_degree.save()
+            return found_degree
+        else:
+            degree = Degree()
+            degree.character = self
+            degree.degree_ref = adregree
+            if modifier == 0:
+                degree.value = 1
+            else:
+                if stack:
+                    degree.value += modifier
+                else:
+                    degree.value = modifier
+            degree.save()
+        return degree
+
+
+
     def remove_or_update_skill(self, askill, modifier=0, stack=False):
         found_skill = self.skill_set.all().filter(skill_ref=askill).first()
         if found_skill:  # There is no reason not to find the skill...
@@ -695,6 +732,15 @@ class Character(Combattant):
             found_skill.save()
             if found_skill.value == 0:
                 found_skill.delete()
+
+    def remove_or_update_degree(self, adegree, modifier=0, stack=False):
+        found_degree = self.degree_set.all().filter(degree_ref=adegree).first()
+        if found_degree:  # There is no reason not to find the skill...
+            found_degree.value -= modifier
+            found_degree.save()
+            if found_degree.value == 0:
+                found_degree.delete()
+
 
     def add_bc(self, aref):
         from collector.models.blessing_curse import BlessingCurse
@@ -824,23 +870,23 @@ class Character(Combattant):
     def add_missing_root_skills(self):
         from collector.models.skill import SkillRef
         roots_list = []
-        for skill in self.skill_set.all():
-            if skill.skill_ref.is_speciality:
-                if not skill.skill_ref.is_wildcard:
-                    roots_list.append(skill.skill_ref.linked_to)
-        for skill in self.skill_set.all():
-            if skill.skill_ref.is_root:
-                skill.delete()
+        # for skill in self.skill_set.all():
+        #     # if skill.skill_ref.is_speciality:
+        #         if not skill.skill_ref.is_wildcard:
+        #             roots_list.append(skill.skill_ref.linked_to)
+        # for skill in self.skill_set.all():
+        #     if skill.skill_ref.is_root:
+        #         skill.delete()
         for skill_ref in SkillRef.objects.all():
             if skill_ref in roots_list:
                 self.add_or_update_skill(skill_ref, roots_list.count(skill_ref))
 
     def resetPA(self):
-        self.PA_STR = self.PA_CON = self.PA_BOD = self.PA_MOV = self.PA_INT = self.PA_WIL = self.PA_TEM = self.PA_PRE = self.PA_TEC = self.PA_DEX = self.PA_AGI = self.PA_AWA = self.OCC_LVL = self.OCC_DRK = 0
+        self.PA_STR = self.PA_CON = self.PA_BOD = self.PA_MOV = self.PA_INT = self.PA_WIL = self.PA_TEM = self.PA_PRE = self.PA_TEC = self.PA_DEX = self.PA_AGI = self.PA_AWA = self.PA_OCC = self.PA_DRK = 0
 
     @property
     def sumPA(self):
-        return self.PA_STR + self.PA_CON + self.PA_BOD + self.PA_MOV + self.PA_INT + self.PA_WIL + self.PA_TEM + self.PA_PRE + self.PA_TEC + self.PA_DEX + self.PA_AGI + self.PA_AWA + self.OCC_LVL - self.OCC_DRK
+        return self.PA_STR + self.PA_CON + self.PA_BOD + self.PA_MOV + self.PA_INT + self.PA_WIL + self.PA_TEM + self.PA_PRE + self.PA_TEC + self.PA_DEX + self.PA_AGI + self.PA_AWA + self.PA_OCC - self.PA_DRK
 
     def purge_skills(self):
         for skill in self.skill_set.all():
@@ -872,6 +918,7 @@ class Character(Combattant):
 
     def reset_total(self):
         self.SK_TOTAL = 0
+        self.DE_TOTAL = 0
         self.BC_TOTAL = 0
         self.BA_TOTAL = 0
         self.weapon_cost = 0
@@ -880,12 +927,15 @@ class Character(Combattant):
         self.PA_TOTAL = \
             self.PA_STR + self.PA_CON + self.PA_BOD + self.PA_MOV + \
             self.PA_INT + self.PA_WIL + self.PA_TEM + self.PA_PRE + \
-            self.PA_TEC + self.PA_DEX + self.PA_AGI + self.PA_AWA + self.OCC_LVL - self.OCC_DRK
+            self.PA_TEC + self.PA_DEX + self.PA_AGI + self.PA_AWA + self.PA_OCC - self.PA_DRK
         skills = self.skill_set.all()
         for s in skills:
-            if not s.skill_ref.is_root:
-                if not s.skill_ref.is_wildcard:
-                    self.SK_TOTAL += s.value
+            if not s.skill_ref.is_wildcard:
+                self.SK_TOTAL += s.value
+        degrees = self.degree_set.all()
+        for d in degrees:
+            if not d.degree_ref.is_wildcard:
+                self.DE_TOTAL += d.value
         blessingcurses = self.blessingcurse_set.all()
         for bc in blessingcurses:
             self.BC_TOTAL += bc.blessing_curse_ref.value
@@ -1016,11 +1066,11 @@ class Character(Combattant):
                 SP_grid["RA"] += a.armor_ref.stopping_power
             SP_grid["enc"] += a.armor_ref.encumbrance
         # logger.info(SP_grid)
-
         if len(self.armor_set.all()) == 0:
             self.audit_log("Warning: character has no armor")
         if len(self.weapon_set.all()) == 0:
             self.audit_log("Warning: character has no weapon")
+
 
     def fencing_league_special(self):
         if self.fencing_league:
@@ -1050,7 +1100,7 @@ class Character(Combattant):
                 found_armor.save()
 
     def occult_special(self):
-        if self.OCC_LVL > 0:
+        if self.PA_OCC > 0:
             from collector.models.ritual import RitualCusto, RitualRef
             from collector.models.character_custo import CharacterCusto
             pathes = []
@@ -1066,12 +1116,13 @@ class Character(Combattant):
                     common_psi_pathes = ['FarHand', 'Psyche', 'Soma', 'Sixth Sense', 'Vis Craft']
                 import random
                 main_path = random.choice(common_psi_pathes)
-                found_custo = CharacterCusto.objects.get(character=self)
-                for x in range(self.OCC_LVL):
-                    new_power = RitualCusto()
-                    new_power.character_custo = found_custo
-                    new_power.ritual_ref = RitualRef.objects.filter(path=main_path, level=x + 1).first()
-                    new_power.save()
+                # found_custo = CharacterCusto.objects.get(character=self)
+                # for x in range(self.PA_OCC):
+                #     new_power = RitualCusto()
+                #     new_power.character_custo = found_custo
+                #     new_power.ritual_ref = RitualRef.objects.filter(path=main_path, level=x + 1).first()
+                #     new_power.save()
+                # @todo
 
             for r in rituals_per_path:
                 if not r.ritual_ref.path in pathes:
@@ -1096,39 +1147,63 @@ class Character(Combattant):
         from collector.models.skill import SkillRef
         import datetime
         j = self.to_json()
+        # skills
+
         idx1 = 0
         idx2 = 0
         skills_list = []
+        # 1) Add the one you have
         for skill in self.skill_set.order_by('skill_ref'):
-            if skill.skill_ref.deprecated == False:
-                skills_list.append(
-                    {'skill': skill.skill_ref.reference, 'value': skill.value,  'idx1': 0, 'idx2': 0})
-        for skill in SkillRef.objects.exclude(deprecated=True).order_by('reference'):
-            if skill.reference not in [value for elem in skills_list for value in elem.values()]:
+            if (skill.skill_ref.is_wildcard == False):
+                skills_list.append({'skill': skill.skill_ref.reference, 'value': skill.value,  'idx1': 0, 'idx2': 0})
+        # 2) Add the missing one
+        for skill in SkillRef.objects.order_by('reference'):
+            if (skill.is_wildcard == False):
+                if skill.reference not in [value for elem in skills_list for value in elem.values()]:
                     skills_list.append({'skill': skill.reference, 'value': '-', 'idx1': 0, 'idx2': 0})
         skills_list = sorted(skills_list, key=itemgetter('skill'))
         for d in skills_list:
             d['idx1'] = idx1
             idx1 += 1
+
+        # Degrees
+        # Add Only the ones you have
+        degrees_list = []
+        idx1 = 0
+        for degree in self.degree_set.order_by('degree_ref__group',"degree_ref__reference"):
+            if not degree.degree_ref.is_wildcard:
+                degrees_list.append({'degree': degree.degree_ref.reference,'group':degree.degree_ref.get_group_display(), 'value': degree.value, 'idx1': 0})
+        degrees_list = sorted(degrees_list, key=itemgetter('group','degree'))
+        for d in degrees_list:
+            d['idx1'] = idx1
+            idx1 += 1
+
+        # Weapons
         weapons = []
         for weapon in self.weapon_set.all():
             weapons.append(weapon.weapon_ref.to_json())
+        # Armors
         armors = []
         for armor in self.armor_set.all():
             armors.append(armor.armor_ref.to_json())
+        # Shields
         shields = []
         for shield in self.shield_set.all():
             shields.append(shield.shield_ref.to_json())
+        # TODS
         tods = []
         for tod in self.tourofduty_set.all():
-            tods.append(tod.tour_of_duty_ref.to_json())
+            tods.append(tod.tour_of_duty_ref.to_json_data())
         bcs = []
+        # Blessing Curses
         for bc in self.blessingcurse_set.all():
             bcs.append(bc.blessing_curse_ref.to_json())
         bas = []
+        # Benefice Affliction
         for ba in self.beneficeaffliction_set.all():
             bas.append(ba.to_json())
         rituals = []
+        # Rituals
         for ritual in self.ritual_set.all().order_by('ritual_ref__path', 'ritual_ref__level'):
             rituals.append(ritual.to_json())
         k = json.loads(j)
@@ -1142,10 +1217,12 @@ class Character(Combattant):
             alliance = "n/a"
         k["alliance"] = alliance
         k["skills_list"] = skills_list
+        k["degrees_list"] = degrees_list
         k["armors"] = armors
         k["shields"] = shields
         k["weapons"] = weapons
         k["rituals"] = rituals
+        print(tods)
         k["tods"] = sorted(tods, key=itemgetter('category'))
         k["BC"] = bcs
         k["BA"] = bas

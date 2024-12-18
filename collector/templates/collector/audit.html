@@ -12,9 +12,9 @@
     </div>
 
 
-<h1>DP Audit</h1>
+<h1>Characters Audit</h1>
 <p>Release Date: <em>{{ date }}</em></p>
-<p>This the Audit Report</p>
+<p>This the Audit Report showing issues in characters.</p>
 
 <h2>Characters</h2>
 
@@ -22,7 +22,8 @@
 {% if characters  %}
     {% for x in characters %}
         {% if x.audit %}
-        <h3>{{ x.rid|safe }}</h3>
+        <h3>{{ x.full_name|safe }}</h3>
+        <tt>{{ x.rid|safe }}</tt>
         <P>{{ x.audit|parseclean|safe }}</P>
         {% endif %}
     {% endfor %}

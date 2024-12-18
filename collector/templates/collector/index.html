@@ -43,6 +43,7 @@
 {#                    <li><span class="menu-button menu-item" mode="standard" action="blokes"><i class="action_icon fas fa-users"></i> Blokes</span>#}
                     <li><span class="menu-button menu-item" mode="standard" action="audit"><i class="action_icon fas fa-star"></i> Audit</span>
                     <li><span class="menu-button slug-item" mode="overlay" action="sessionsheet"><i class="action_icon fas fa-sim-card"></i> Session sheets</span></li>
+                    <li><span class="menu-button menu-item" mode="overlay" action="display_blank_sheet"><i class="action_icon fas fa-sim-card"></i> Blank Sheet</span></li>
 
                 {% else %}
                     {% if user.profile.main_character %}
@@ -127,6 +128,25 @@
                 {% endif %}
             </ul>
         </li>
+        <li><span class="pull-down">Histories</span>
+            <ul class="level-2 histories off" id="histories_block">
+                {% csrf_token %}
+                {% if user.is_superuser %}
+                <li><span class="menu-button menu-item" mode="standard" action="history/public"><i class="action_icon fas fa-table"></i> Public Histories</span></li>
+                <li><span class="menu-button menu-item" mode="standard" action="history/private"><i class="action_icon fas fa-table"></i> Private Histories</span></li>
+                <li><span class="menu-button menu-item" mode="standard" action="history/0"><i class="action_icon fas fa-table"></i> Birthrights</span></li>
+                <li><span class="menu-button menu-item" mode="standard" action="history/10"><i class="action_icon fas fa-table"></i> Upbringings</span></li>
+                <li><span class="menu-button menu-item" mode="standard" action="history/20"><i class="action_icon fas fa-table"></i> Apprenticeships</span></li>
+                <li><span class="menu-button menu-item" mode="standard" action="history/30"><i class="action_icon fas fa-table"></i> Early Carreers</span></li>
+                <li><span class="menu-button menu-item" mode="standard" action="history/40"><i class="action_icon fas fa-table"></i> Tours of Duty</span></li>
+                <li><span class="menu-button menu-item" mode="standard" action="history/50"><i class="action_icon fas fa-table"></i> Worldly Benefits</span></li>
+                <li><span class="menu-button menu-item" mode="standard" action="history/60"><i class="action_icon fas fa-table"></i> Nameless Kits</span></li>
+                <li><span class="menu-button menu-item" mode="standard" action="history/70"><i class="action_icon fas fa-table"></i> Builds</span></li>
+                <li><span class="menu-button menu-item" mode="standard" action="history/80"><i class="action_icon fas fa-table"></i> Specials</span></li>
+                {% endif %}
+            </ul>
+        </li>
+
         {% else %}
         <li><span class="pull-down">Anonymous User</span>
             <ul class="level-2 user off" id="login_block">

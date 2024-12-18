@@ -155,7 +155,7 @@ def extract_rules():
 
     skills = SkillRef.objects.all().filter().order_by('reference')
     context['skills'] = skills
-    degrees = DegreeRef.objects.all().filter().order_by('reference')
+    degrees = DegreeRef.objects.all().filter().order_by('group','subgroup')
     context['degrees'] = degrees
     benefice_afflictions = BeneficeAfflictionRef.objects.order_by('-source')
     context['benefice_afflictions'] = benefice_afflictions
@@ -291,8 +291,8 @@ def make_audit_report(campaign):
     context['characters'] = []
     # print(campaign.epic.shortcut)
     for c in campaign.dramatis_personae.all():
-        # print(c.rid)
-        current = {'rid': c.rid, 'audit': c.audit}
+        print(c.rid)
+        current = {'rid': c.rid, 'audit': c.audit, 'full_name':c.full_name}
         context['characters'].append(current)
     # print(context)
     template = get_template('collector/audit.html')

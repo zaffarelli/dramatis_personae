@@ -44,8 +44,9 @@ class TourOfDutyRef(RiddedMixin):
     category = models.CharField(max_length=20, choices=fics_references.LIFEPATH_CATEGORY, default='Tour of Duty')
     caste = models.CharField(max_length=20, choices=fics_references.LIFEPATH_CASTE, default='Other')
     topic = models.CharField(max_length=64, default='', blank=True)
+    subtopic = models.CharField(max_length=64, default='', blank=True)
     source = models.CharField(max_length=32, default='FS2CRB', choices=fics_references.SOURCE_REFERENCES)
-    is_custom = models.BooleanField(default=False)
+    is_custom = models.BooleanField(default=True)
     need_fix = models.BooleanField(default=False, blank=True)
     AP = models.IntegerField(default=0)
     SP = models.IntegerField(default=0)
@@ -68,13 +69,13 @@ class TourOfDutyRef(RiddedMixin):
     PA_TEC = models.IntegerField(default=0)
     PA_AGI = models.IntegerField(default=0)
     PA_AWA = models.IntegerField(default=0)
-    PA_OCC = models.IntegerField(default=0,blank=True)
-    PA_DRK = models.IntegerField(default=0,blank=True)
+    PA_OCC = models.IntegerField(default=0, blank=True)
+    PA_DRK = models.IntegerField(default=0, blank=True)
     WP = models.IntegerField(default=0)
     value = models.IntegerField(default=0)
     description = models.TextField(max_length=1024, default='', blank=True)
     notes = models.TextField(max_length=1024, default='', blank=True)
-    valid = models.BooleanField(default=False,blank=True)
+    valid = models.BooleanField(default=False, blank=True)
     pub_date = models.DateTimeField('Date published', default=datetime.now)
     core = models.BooleanField(default=True)
     is_kit = models.BooleanField(default=False, blank=True)
@@ -89,7 +90,7 @@ class TourOfDutyRef(RiddedMixin):
         import math
         all = cls.objects.all()
         valid_ones = cls.objects.filter(valid=True)
-        return  f'INFO: Valid ToDs = {len(valid_ones)} of {len(all)} [{math.floor(len(valid_ones)/len(all)*1000)/10}%]'
+        return f'INFO: Valid ToDs = {len(valid_ones)} of {len(all)} [{math.floor(len(valid_ones) / len(all) * 1000) / 10}%]'
 
     def __str__(self):
         return f'[{self.get_category_display()}]{self.get_caste_display()} {self.reference} '
@@ -97,10 +98,13 @@ class TourOfDutyRef(RiddedMixin):
     def fix(self):
         def getAttribute(suffix, report_list):
             val = getattr(self, "PA_" + suffix.upper())
+            if self.category in ["10", "20"]:
+                if val > 1:
+                    val = 1
+                    setattr(self, "PA_" + suffix.upper(), val)
             if val != 0:
                 report_list.append(f'{suffix}{val:+}'.upper())
             return val
-
 
         def getFromList(items, report_list, ref):
             total = 0
@@ -108,7 +112,7 @@ class TourOfDutyRef(RiddedMixin):
             for item in items:
                 r = getattr(item, ref)
                 if r:
-                    if hasattr(item,"value"):
+                    if hasattr(item, "value"):
                         report_list.append(f'{r.reference}{item.value:+}')
                         if hasattr(r, "is_wildcard"):
                             total += item.value
@@ -120,9 +124,10 @@ class TourOfDutyRef(RiddedMixin):
                             total += r.value
                         else:
                             report_list.append(f'{r.reference}')
-            return total,wp_total
+            return total, wp_total
 
-        self.toRID(f"{self.caste}_{self.category}_{self.reference}",prefix="TOD_",cypher=True)
+        self.toRID(f"{self.caste}_{self.category}_{self.reference}", prefix="TOD_", cypher=True)
+
         if self.is_custom:
             self.value = self.AP * 3 + self.OP
         else:
@@ -142,8 +147,8 @@ class TourOfDutyRef(RiddedMixin):
                 self.AP += getAttribute(attribute, hrlist_attributes)
             # if len(hrlist_attributes) == 0:
             #     hrlist_attributes = ["Attributes: None"]
-            if len(hrlist_attributes)>0:
-                texts.append("Attributes: "+", ".join(hrlist_attributes))
+            if len(hrlist_attributes) > 0:
+                texts.append("Attributes: " + ", ".join(hrlist_attributes))
             # SKILLS
             hrlist_skills = []
             items = self.skillmodificator_set.all()
@@ -151,6 +156,7 @@ class TourOfDutyRef(RiddedMixin):
             print(hrlist_skills, self.SP)
             self.skill_modificators_summary = "Skills: "
             if len(hrlist_skills) > 0:
+                hrlist_skills.sort()
                 self.skill_modificators_summary += ", ".join(hrlist_skills)
             else:
                 self.skill_modificators_summary = ""
@@ -160,6 +166,7 @@ class TourOfDutyRef(RiddedMixin):
             self.DP, self.WP = getFromList(items, hrlist_degrees, "degree_ref")
             self.degree_modificators_summary = "Degrees: "
             if len(hrlist_degrees) > 0:
+                hrlist_degrees.sort()
                 self.degree_modificators_summary += ", ".join(hrlist_degrees)
             else:
                 self.degree_modificators_summary = ""
@@ -169,6 +176,7 @@ class TourOfDutyRef(RiddedMixin):
             self.BCP, _ = getFromList(items, hrlist_bc, "blessing_curse_ref")
             self.blessingcurse_modificators_summary = "Blessing/Curses: "
             if len(hrlist_bc) > 0:
+                hrlist_bc.sort()
                 self.blessingcurse_modificators_summary += ", ".join(hrlist_bc)
             else:
                 self.blessingcurse_modificators_summary = ""
@@ -178,11 +186,12 @@ class TourOfDutyRef(RiddedMixin):
             self.BAP, _ = getFromList(items, hrlist_ba, "benefice_affliction_ref")
             self.beneficeaffliction_modificators_summary = "Benefices/Afflictions: "
             if len(hrlist_ba) > 0:
+                hrlist_ba.sort()
                 self.beneficeaffliction_modificators_summary += ", ".join(hrlist_ba)
             else:
                 self.beneficeaffliction_modificators_summary = ""
             # BUILD DESCRIPTION
-            if len(self.skill_modificators_summary)>0:
+            if len(self.skill_modificators_summary) > 0:
                 texts.append(self.skill_modificators_summary)
             if len(self.degree_modificators_summary) > 0:
                 texts.append(self.degree_modificators_summary)
@@ -251,8 +260,10 @@ class TourOfDutyRef(RiddedMixin):
             elif self.caste == 'Caliphate (U)':
                 self.valid = self.value == 9
                 self.topic = ''
+            elif self.caste == 'Nobility':
+                self.valid = self.value == 20
             else:
-                self.valid = self.value in [15, 5, 20] # 5 total: 4AP/3SP (environment) 1AP/2SP (class)
+                self.valid = self.value in [15, 5]
         elif self.category == '20':  # Apprenticeship
             self.valid = self.value == 25
         elif self.category == '30':  # Early Career
@@ -273,8 +284,23 @@ class TourOfDutyRef(RiddedMixin):
     def to_json(self):
         from collector.utils.basic import json_default
         import json
-        jstr = json.loads(json.dumps(self, default=json_default, sort_keys=True, indent=4))
-        return jstr
+        json_string = json.dumps(self, default=json_default, sort_keys=True, indent=4)
+        json_data = json.loads(json_string)
+        return json_data, json_string
+
+    def to_json_data(self):
+        from collector.utils.basic import json_default
+        import json
+        json_string = json.dumps(self, default=json_default, sort_keys=True, indent=4)
+        json_data = json.loads(json_string)
+        return json_data
+
+    def to_json_str(self):
+        from collector.utils.basic import json_default
+        import json
+        json_string = json.dumps(self, default=json_default, sort_keys=True, indent=4)
+        # json_data = json.loads(json_string)
+        return json_string
 
 
 class TourOfDuty(models.Model):
@@ -310,14 +336,20 @@ class TourOfDuty(models.Model):
             ch.PA_TEC += tod.PA_TEC
             ch.PA_AGI += tod.PA_AGI
             ch.PA_AWA += tod.PA_AWA
-            ch.OCC_LVL += tod.OCC_LVL
-            ch.OCC_DRK += tod.OCC_DRK
+            ch.PA_OCC += tod.PA_OCC
+            ch.PA_DRK += tod.PA_DRK
             for sm in tod.skillmodificator_set.all():
                 if not sm.skill_ref.is_wildcard:
                     ch.add_or_update_skill(sm.skill_ref, sm.value, True)
                 else:
                     WP += sm.value
-                    wp_roots.append(sm.skill_ref.linked_to.reference)
+                    # wp_roots.append(sm.skill_ref.is_wildcard_of.reference)
+            for dm in tod.degreemodificator_set.all():
+                if not dm.degree_ref.is_wildcard:
+                    ch.add_or_update_degree(dm.degree_ref, dm.value, True)
+                else:
+                    WP += dm.value
+                    # wp_roots.append(dm.degree_ref.is_wildcard_of.reference)
             for bc in tod.blessingcursemodificator_set.all():
                 ch.add_bc(bc.blessing_curse_ref)
             # print(tod)

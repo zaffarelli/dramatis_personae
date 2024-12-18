@@ -15,7 +15,7 @@ from django.template.loader import get_template
 import datetime
 from collector.utils.helper import is_ajax
 from collector.utils.basic import get_current_config, export_epic, slug_decode
-from collector.utils.fics_references import FONTSET, FICS_VERSION
+from collector.utils.fics_references import FONTSET, FICS_VERSION, LIFEPATH_CATEGORY
 from django.conf import settings
 from collector.views.characters import respawn_avatar_link
 import os
@@ -307,17 +307,43 @@ def display_sheet(request, pk=None):
         if pk is None:
             pk = 22
         c = Character.objects.get(id=pk)
-        print(campaign)
+        # print(campaign)
         scenario = campaign.epic.name.upper()
-        #pre_title = campaign.epic.place + ' - ' + campaign.epic.date
+        # pre_title = campaign.epic.place + ' - ' + campaign.epic.date
         pre_title = f"Rari Nantes In Gurgite Vasto"
         post_title = f"FuZion Interlock Custom System v{FICS_VERSION}"
         post_title = f"F u z i o n . I n t e r l o c k . C u s t o m . S y s t e m . X"
         spe = c.get_specialities()
         shc = c.get_shortcuts()
         j = c.to_jsonFICS()
-        settings = {'version': 1.0, 'labels': {}, 'pre_title': pre_title, 'scenario': scenario,
-                    'post_title': post_title, "FICS_VERSION":FICS_VERSION, 'fontset': FONTSET, 'specialities': spe, 'shortcuts': shc}
+        settings = {'version': 1.0, 'debug': False, "blank": False, 'labels': {}, 'pre_title': pre_title,
+                    'scenario': scenario,
+                    'post_title': post_title, "FICS_VERSION": FICS_VERSION, 'fontset': FONTSET, 'specialities': spe,
+                    'shortcuts': shc}
+        fics_sheet_context = {'settings': json.dumps(settings, sort_keys=True, indent=4), 'data': j}
+
+        return JsonResponse(fics_sheet_context)
+
+
+def display_blank_sheet(request):
+    if is_ajax(request):
+        from collector.models.campaign import Campaign
+        campaign = get_current_config(request)
+        pk = 1
+        c = Character.objects.get(id=pk)
+        print(campaign)
+        scenario = campaign.epic.name.upper()
+        # pre_title = campaign.epic.place + ' - ' + campaign.epic.date
+        pre_title = f"Rari Nantes In Gurgite Vasto"
+        post_title = f"FuZion Interlock Custom System v{FICS_VERSION}"
+        post_title = f"F u z i o n . I n t e r l o c k . C u s t o m . S y s t e m . X"
+        spe = c.get_specialities()
+        shc = c.get_shortcuts()
+        j = c.to_jsonFICS()
+        settings = {'version': 1.0, 'debug': False, "blank": True, 'labels': {}, 'pre_title': pre_title,
+                    'scenario': scenario,
+                    'post_title': post_title, "FICS_VERSION": FICS_VERSION, 'fontset': FONTSET, 'specialities': spe,
+                    'shortcuts': shc}
         fics_sheet_context = {'settings': json.dumps(settings, sort_keys=True, indent=4), 'data': j}
 
         return JsonResponse(fics_sheet_context)
@@ -400,6 +426,73 @@ def all_epics(request):
             epics.append(e)
         context = {'epics': epics}
         template = get_template('collector/epics.html')
+        html = template.render(context, request)
+        response = {'mosaic': html}
+        return JsonResponse(response)
+    else:
+        return HttpResponse(status=204)
+
+
+def history_all(request):
+    return history(request, "")
+
+
+def history_public(request):
+    return history(request, "public")
+
+
+def history_private(request):
+    return history(request, "private")
+
+
+def history_10(request):
+    return history(request, "10")
+
+
+def history_20(request):
+    return history(request, "20")
+
+
+def history_30(request):
+    return history(request, "30")
+
+
+def history_40(request):
+    return history(request, "40")
+
+
+def history(request, filter=""):
+    if is_ajax(request):
+        title = "Histories"
+        from collector.models.tourofduty import TourOfDutyRef
+        if filter == "all":
+            title = "Histories (All)"
+            tods = TourOfDutyRef.objects.all().order_by('category', 'valid', '-is_custom', 'topic', 'subtopic',
+                                                        'reference')
+        elif filter == "public":
+            title = "Histories (Published)"
+            tods = TourOfDutyRef.objects.filter(is_public=True).order_by('category', 'valid', '-is_custom', 'topic',
+                                                                         'subtopic', 'reference')
+        elif filter == "private":
+            title = "Histories (Gamemaster Only)"
+            tods = TourOfDutyRef.objects.filter(is_public=False).order_by('category', 'valid', '-is_custom', 'topic',
+                                                                          'subtopic', 'reference')
+        elif filter in ["0","10","20","30","40","50","60","70","80"]:
+            title_comp = ""
+            for lp in LIFEPATH_CATEGORY:
+                if lp[0] == filter:
+                    title_comp = lp[1]
+            title = f"Histories ({title_comp})"
+            tods = TourOfDutyRef.objects.filter(valid=True).filter(is_public=True).filter(category=int(filter)).order_by('category', 'valid', '-is_custom', 'topic',
+                                                                      'subtopic', 'reference')
+        histories = []
+        for x in tods:
+            e, d = x.to_json()
+            e["category_name"] = x.get_category_display
+            # e["description"] = "<br/>".join(x.description.split(";"))
+            histories.append(e)
+        context = {'histories': histories, 'title':title}
+        template = get_template('collector/histories.html')
         html = template.render(context, request)
         response = {'mosaic': html}
         return JsonResponse(response)

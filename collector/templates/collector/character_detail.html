@@ -1,5 +1,7 @@
 {% load fics_filters %}
 {% block details %}
+<div class="mobile_form" id="customizer">
+</div>
 <div class="character_sheet" id='sheet_{{c.id}}'>
     <div class="infoblock">
         <div class="data">
@@ -68,10 +70,10 @@
     <div class='attributes'>
         {% include "collector/character/character_primaries.html" %}
 
-            <table id="OCC_LVL_{{c.id}}" class='attrpick occult'>
-                {% include "collector/character/character_pa.html" with c=c.info_lvl %}
+            <table id="PA_OCC_{{c.id}}" class='attrpick occult'>
+                {% include "collector/character/character_pa.html" with c=c.info_occ %}
             </table>
-            <table id="OCC_DRK_{{c.id}}" class='attrpick occult'>
+            <table id="PA_DRK_{{c.id}}" class='attrpick occult'>
                 {% include "collector/character/character_pa.html" with c=c.info_drk %}
             </table>
 

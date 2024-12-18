@@ -58,6 +58,7 @@ DEGREE_GROUPS = (
     ('HOLD', "Householding"),
     ('UNDR', "Underworld"),
     ('MACA', "Magna Carta"),
+    ('HUMA', "Humanities"),
 )
 
 
@@ -89,18 +90,18 @@ SHORTCUTS = {
         'rationale': "Avoid being hit",
     },
     "Shoot": {
-        'attribute': "PA_REF",
-        'label': "REF + Shoot",
+        'attribute': "PA_DEX",
+        'label': "DEX + Shoot",
         'rationale': "Fire a ranged weapon",
     },
     "Melee": {
-        'attribute': "PA_REF",
-        'label': "REF + Melee",
+        'attribute': "PA_DEX",
+        'label': "DEX + Melee",
         'rationale': "Melee",
     },
     "Driving (Skycraft Piloting)": {
-        'attribute': "PA_REF",
-        'label': "REF + Driving (Skycraft Piloting)",
+        'attribute': "PA_DEX",
+        'label': "DEX + Driving (Skycraft Piloting)",
         'rationale': "Fly an aircraft",
     },
     "Driving (Celestial Sailing)": {
@@ -109,8 +110,8 @@ SHORTCUTS = {
         'rationale': "Sailing a spaceship",
     },
     "Fight": {
-        'attribute': "PA_REF",
-        'label': "REF + Fight",
+        'attribute': "PA_DEX",
+        'label': "DEX + Fight",
         'rationale': "Fight/Martial Arts",
     },
     "Persuasion": {
@@ -169,8 +170,8 @@ SHORTCUTS = {
         'rationale': "Stabilize wounds",
     },
     "Heavy Weapons": {
-        'attribute': "PA_REF",
-        'label': "REF + Heavy Weapons",
+        'attribute': "PA_DEX",
+        'label': "DEX + Heavy Weapons",
         'rationale': "Heavy weapon fire",
     },
     "Knavery": {
@@ -197,31 +198,32 @@ SHORTCUTS = {
 
 ATTACK_ROLLS = {
     'MELEE': {
-        'attribute': 'PA_REF',
+        'attribute': 'PA_DEX',
         'skill': 'Melee',
     },
     'P': {
-        'attribute': 'PA_REF',
+        'attribute': 'PA_DEX',
         'skill': 'Shoot',
     },
     'RIF': {
-        'attribute': 'PA_REF',
+        'attribute': 'PA_DEX',
         'skill': 'Shoot',
     },
     'SMG': {
-        'attribute': 'PA_REF',
+        'attribute': 'PA_DEX',
         'skill': 'Shoot',
     },
     'HVY': {
-        'attribute': 'PA_REF',
+        'attribute': 'PA_DEX',
         'skill': 'Heavy Weapons',
     },
 }
 
 FONTSET = ['Cinzel', 'Trade+Winds', 'Imprima', 'Roboto', 'Philosopher', 'Ruda', 'Khand', 'Allura', 'Gochi+Hand',
-           'Reggae+One', 'Syne+Mono', 'Zilla+Slab', 'Spartan', 'News+Cycle', 'Archivo', 'Francois+One', 'Caveat',
-           'Gruppo', 'Voltaire', "Fredericka+the+Great", 'Esteban', 'Pompiere', 'Niconne', 'Delius',
-           'Nanum+Pen+Script', 'Schoolbell', 'Jim+Nightshade', 'Julee', 'Estonia', 'East+Sea+Dokdo', 'Julee','Anton']
+           'Reggae+One', 'Syne+Mono', 'Zilla+Slab',"Ubuntu+Mono",  'Spartan', 'News+Cycle', 'Archivo', 'Francois+One', 'Caveat',
+           'Gruppo', 'Voltaire', 'Kanit', "Fredericka+the+Great", 'Esteban', 'Pompiere', 'Niconne', 'Delius','Rationale',
+           'Nanum+Pen+Script', 'Schoolbell', 'Jim+Nightshade', 'Julee', 'Estonia', 'East+Sea+Dokdo', 'Julee', 'Economica',
+           'Anton', 'Long+Cang', 'Birthstone', 'Condiment',"Metal+Mania",'Passero+One',"Mountains+of+Christmas","Shadows+Into+Light"]
 
 LIFEPATH_CATEGORY = (
     ('0', "Birthright"),

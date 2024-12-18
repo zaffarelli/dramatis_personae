@@ -1,10 +1,14 @@
+{% load static %}
+{% load fics_filters %}
+
+
 <div class="character_update_view">
     <form class='character_form' form-target='character'>
         {{ form.non_field_errors}}
         {{ form.management_form }}
         <input name='id' type='hidden' value='{{c.id}}'>
         <input name='rid' type='hidden' value='{{c.rid}}'>
-        <div class="formset">
+<!--        <div class="formset">-->
             <div class="field_wrapper">
                 {{ form.full_name.errors}}
                 <label for="full_name">Name</label>
@@ -222,7 +226,7 @@
                     </div>
                 {% endfor %}
 
-        </div>
+<!--        </div>-->
         {% csrf_token %}
     </form>
 </div>

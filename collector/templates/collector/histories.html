@@ -1,0 +1,9 @@
+{% load fics_filters %}
+{% csrf_token %}
+
+<div class="fresque">
+    <div class='title_row'>{{title}}</div>
+    {% for x in histories %}
+        {% include "collector/history.html"%}
+    {% endfor %}
+</div>
