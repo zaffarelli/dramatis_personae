@@ -6,7 +6,7 @@
 from django.urls import re_path
 from collector.views.characters import CharacterUpdateView, customize_ba, customize_bc, \
     customize_skill, customize_ba_del, customize_bc_del, skill_pick, attr_pick, customize_weapon, customize_weapon_del, \
-    customize_armor, customize_armor_del, customize_shield, customize_shield_del, customize_ritual, customize_ritual_del
+    customize_armor, customize_armor_del, customize_shield, customize_shield_del, customize_ritual, customize_ritual_del, degree_pick
 
 from collector.views.frontend import index, toggle_public, toggle_spotlight, get_list, add_avatar, \
     get_storyline, conf_details, recalc_avatar, heartbeat, \
@@ -62,6 +62,8 @@ urlpatterns = [
     re_path('^ajax/character/del/bc/(?P<avatar>\d+)/(?P<item>\d+)/$', customize_bc_del, name='customize_bc_del'),
     re_path('^ajax/character/pick/skill/(?P<avatar>\d+)/(?P<item>\d+)/(?P<offset>\d+)/$', skill_pick,
             name='skill_pick'),
+    re_path('^ajax/character/pick/degree/(?P<avatar>\d+)/(?P<item>\d+)/(?P<offset>\d+)/$', degree_pick,
+            name='degree_pick'),
     re_path('^ajax/character/pick/attr/(?P<avatar>\d+)/(?P<item>\w+)/(?P<offset>\d+)/$', attr_pick, name='attr_pick'),
     re_path('^ajax/character/add/weapon/(?P<avatar>[\d]+)/(?P<item>\d+)/$', customize_weapon, name='customize_weapon'),
     re_path('^ajax/character/add/armor/(?P<avatar>[\d]+)/(?P<item>\d+)/$', customize_armor, name='customize_armor'),

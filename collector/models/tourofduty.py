@@ -293,6 +293,9 @@ class TourOfDutyRef(RiddedMixin):
         import json
         json_string = json.dumps(self, default=json_default, sort_keys=True, indent=4)
         json_data = json.loads(json_string)
+        shortcut_words = self.get_category_display().split(" ")
+        shortcut = "".join([z[0] for z in shortcut_words]).upper()
+        json_data["category_text"] = shortcut
         return json_data
 
     def to_json_str(self):

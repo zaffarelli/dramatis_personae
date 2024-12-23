@@ -147,11 +147,11 @@ class FICSSheet extends Sheet {
         let me = this;
         if (page == 0) {
             me.fillTitle()
-            me.fillBasics(1.5);
-            me.fillAttributes(4.5);
-            me.fillSkills(11.5);
-            me.fillDegrees(18.5);
-            me.fillExtras(23);
+            me.fillBasics(1.5)
+            me.fillAttributes(4.5)
+            me.fillSkills(11.5)
+            me.fillDegrees(18.5)
+            me.fillExtras(23)
         } else if (page == 1) {
             me.fillName(page);
             me.fillArmors(1.25, 3);
@@ -159,14 +159,14 @@ class FICSSheet extends Sheet {
             me.fillShield(12.25, 10.5)
             me.fillPicture(1.25, 29.5)
         } else if (page == 2) {
-            me.fillName(page);
-            me.fillToDs(1.5, 3);
-            me.fillBC(1.25, 11.5);
-            me.fillBA(1.25, 14.5);
+            me.fillName(page)
+            me.fillToDs(1.5, 1.5)
+            me.fillBC(1.25, 11.5)
+            me.fillBA(1.25, 14.5)
             me.fillOccult(1.25, 24.5)
 
         } else if (page == 3) {
-            me.fillName(page);
+            me.fillName(page)
             me.fillWallet(17.25, 8.5)
             me.fillGear(12.25, 20.5)
             me.fillShortcuts(1.25, 20.5)

@@ -22,7 +22,7 @@ $fics_lock: darken($fics_golden, 50%);
 @mixin section_block {
     font-family: Titre;
     font-weight: normal;
-    background: $fics_darker;
+    background: $fics_darkest;
     color: $fics_front;
     font-size: 1.25em;
     text-align: center;

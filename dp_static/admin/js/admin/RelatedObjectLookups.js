@@ -1,1 +1,1 @@
-/home/zaffarelli/.virtualenvs/dramatis_personae/lib/python3.12/site-packages/django/contrib/admin/static/admin/js/admin/RelatedObjectLookups.js
+/home/zaffarelli/.virtualenvs/dp/lib/python3.13/site-packages/django/contrib/admin/static/admin/js/admin/RelatedObjectLookups.js

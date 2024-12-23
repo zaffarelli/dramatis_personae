@@ -377,7 +377,7 @@ button.toast-close-button {
 
 #toast-container {
     position: fixed;
-    z-index: 999999;
+    z-index: 9999999;
     pointer-events: none;
 }
 
@@ -697,3 +697,5 @@ div#area_close{
     text-align:center;
     border-radius:3px;
 }
+
+

@@ -1,26 +1,23 @@
 {% load fics_filters %}
 {% block details %}
-<div class="mobile_form" id="customizer">
-</div>
+<div class="mobile_form" id="customizer"></div>
 <div class="character_sheet" id='sheet_{{c.id}}'>
-    <div class="infoblock">
+    <div class="details_wrapper">
+    <div class="infoblock details_section" style="order:1;">
         <div class="data">
             <h1>{{ c.full_name }}</h1>
             {% if c.entrance %}<b>Entrance:</b> {{ c.entrance|safe }}<br/>{% endif %}
             {% if c.epic %}{{ c.epic|safe }}<br/>{% endif %}
-
             {% if c.narrative %}<b>Narrative:</b> {{ c.narrative|parse_avatars|safe }}{% endif %}
             {% if c.nameless %}<CENTER><strong>NAMELESS NPCS</strong></CENTER>{% endif %}
-        </div>
-        <div class="portrait">
-            <img src="{{c.rid|as_media_image}}">
         </div>
         <div class="mark">
             {% include 'collector/ghostmark.html' with data=c.ghostmark_data %}
         </div>
 {#        <div class="tile_back" id="tile_back_{{c.id}}"><i class="action_icon golden fa fa-times-circle"></i></div>#}
     </div>
-    <div class='coreblock'>
+    <div class='coreblock details_section'  style="order:2;">
+        <div class='details_block two_columns' style="order:1;">
         <ul>
             {% if c.alliance_ref %}
             <li><b>Alliance</b><u>{{ c.alliance_ref.reference|safe }}</u></li>
@@ -64,47 +61,65 @@
             <li></li>
         {% endif %}
         </ul>
+            </div>
     </div>
 
-    <h2>Attributes ({{c.PA_TOTAL}}x3)</h2>
-    <div class='attributes'>
-        {% include "collector/character/character_primaries.html" %}
 
+    <div class='details_section' style="order:3;">
+        <div class="details_title">Attributes ({{c.PA_TOTAL}}x3)</div>
+        <div class='details_block attributes four_columns' style="order:2;">
+            {% include "collector/character/character_primaries.html" %}
+        </div>
+        <div class='details_block attributes two_columns' style="order:3;">
             <table id="PA_OCC_{{c.id}}" class='attrpick occult'>
                 {% include "collector/character/character_pa.html" with c=c.info_occ %}
             </table>
             <table id="PA_DRK_{{c.id}}" class='attrpick occult'>
                 {% include "collector/character/character_pa.html" with c=c.info_drk %}
             </table>
-
-
+        </div>
     </div>
-    <div class='attributes'>
+
+    <div class='details_section' style="order:4;">
+        <div class="details_title" style="order:1;">Secondaries</div>
+        <div class='details_block six_columns' style="order:2;">
         {% include "collector/character/character_secondaries.html" %}
+            </div>
     </div>
 
 
 
-    <span id="skill_block_{{c.id}}">
+    <div class='details_section' id="skill_block_{{c.id}}" style="order:4;">
+        <div class="details_title" style="order:1;">Skills ({{c.SK_TOTAL}})</div>
+        <div class='details_block' style="order:2;">
         {% include "collector/character/character_skills.html" %}
-    </span>
-
-    <div class='options'>
-        <span id="bc_block_{{c.id}}">
-        {% include "collector/character/character_bc.html" %}
-        </span>
-        <span id="ba_block_{{c.id}}">
-        {% include "collector/character/character_ba.html" %}
-        </span>
-        <span id="ritual_block_{{c.id}}">
-        {% include "collector/character/character_ritual.html" %}
-        </span>
-        <span id="shortcuts_block_{{c.id}}">
-        {% include "collector/character/character_shortcuts.html" %}
-        </span>
+            </div>
     </div>
 
-    <div class='gear'>
+    <div class='details_section' id="degree_block_{{c.id}}" style="order:5;">
+        <div class='details_title' style="order:1;">Degrees ({{c.DE_TOTAL}})</div>
+        <div class='details_block' style="order:2;">
+            {% include "collector/character/character_degrees.html" %}
+        </div>
+    </div>
+
+
+    <div class='details_section options' style="order:6;">
+        <div class="details_block two_columns" id="bc_block_{{c.id}}">
+        {% include "collector/character/character_bc.html" %}
+        </div>
+        <div class="details_block two_columns" id="ba_block_{{c.id}}">
+        {% include "collector/character/character_ba.html" %}
+        </div>
+        <<div class="details_block two_columns" id="ritual_block_{{c.id}}">
+        {% include "collector/character/character_ritual.html" %}
+        </div>
+        <div class="details_block two_columns" id="shortcuts_block_{{c.id}}">
+        {% include "collector/character/character_shortcuts.html" %}
+        </div>
+    </div>
+
+    <div class='details_section gear' style="order:7;">
         <span id="weapon_block_{{c.id}}">
         {% include "collector/character/character_weapon.html" %}
         </span>
@@ -116,29 +131,36 @@
         </span>
     </div>
 
-    <div class='healthbar'>
+    <div class='healthbar details_section' style="order:8;">
         {#% include "collector/character/character_healthbar.html" %#}
     </div>
 
-    {% if c.player|is_not_blank %}
-    <hr/>
-    [{{ c.player }}]
-    Blokes:
 
-    <ul>
-        {% for x in blokes.all %}
-            <li/>{% include "collector/character_xs.html" with c=x.npc %}</li>
-        {% endfor %}
-    </ul>
-    {% endif %}
+    <div class='summary details_section' style="order:9;">
+        {% if c.player|is_not_blank %}
+        <hr/>
+        [{{ c.player }}]
+        Blokes:
 
-    {% if c.stories_count %}
-    <hr/>
-    Stories Involvements:
-    {{c.stories | parse_stories | safe}}
-    {% endif%}
-    <hr/>
-    <span class='golden custom_show' id='{{c.rid}}' ><a href='pdf/{{c.rid}}/' target='avatar_pdf' class="golden"><i class="fas fa-file-pdf"></i> {{c.rid}}</a></span>
-    <div class="challenge" id="challenge_{{c.id}}">{{c.challenge|safe}}</div>
+        <ul>
+            {% for x in blokes.all %}
+                <li/>{% include "collector/character_xs.html" with c=x.npc %}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        {% if c.stories_count %}
+        <hr/>
+        Stories Involvements:
+        {{c.stories | parse_stories | safe}}
+        {% endif%}
+        <hr/>
+        <span class='golden custom_show' id='{{c.rid}}' ><a href='pdf/{{c.rid}}/' target='avatar_pdf' class="golden"><i class="fas fa-file-pdf"></i> {{c.rid}}</a></span>
+            <div class="challenge" id="challenge_{{c.id}}">{{c.challenge|safe}}</div>
+        </div>
+    </div>
+<!--    <div class="details_section portrait" style="order:10;">-->
+<!--            <img src="{{c.rid|as_media_image}}">-->
+<!--    </div>-->
 </div>
 {% endblock details %}

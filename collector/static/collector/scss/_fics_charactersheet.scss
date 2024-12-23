@@ -2,396 +2,450 @@
 @import "fonts";
 
 div.character_sheet {
-    width: 100%;
-    max-width: 900px;
-    margin-left: 0;
-    margin-right: auto;
-    display: block;
-    column-count: 1;
-    column-gap: 10px;
-    column-rule: 1px dotted $fics_light;
-    padding: 5px;
-    background: $fics_dark;
-    color: $fics_front;
-    border: 1px solid $fics_light;
-    box-shadow: 3px 3px 5px $fics_darkest;
-    border-radius: 5px;
-    opacity: 0.9;
-    font-size:10pt;
-    //border:1px solid yellow;
+  //     width: 100%;
+  //     max-width: 900px;
+  margin-left: 0;
+  margin-right: auto;
+  display: block;
+  column-count: 1;
+  column-gap: 10px;
+  column-rule: 1px dotted $fics_light;
+  padding: 5px;
+  background: $fics_dark;
+  color: $fics_front;
+  border: 1px solid $fics_light;
+  box-shadow: 3px 3px 5px $fics_darkest;
+  border-radius: 5px;
+  opacity: 0.9;
+  font-size: 10pt;
+  //border:1px solid yellow;
 
-    & div.infoblock{
-        display:flex;
-        flex-flow:row nowrap;
-        justify-content:space-between;
-        align-items:stretch;
-        align-content:stretch;
-        & .portrait{
-            order:3;
-            display:inline-block;
-            width:120px;
-            & img{
-                border:2px solid $fics_light;
-                border-radius:5px;
-                box-shadow: 0px 0px 5px $fics_darker;
-                width:90px;
-                height:120px;
-            }
-            text-align:center;
-            flex-basis:120px;
-        }
-        //& .mark{
-        //    order:1;
-        //    //display:block;
-        //    //flex-basis:140px;
-        //}
-
-        & .data{
-            order:2;
-            display:inline-block;
-            & h1{
-                font-family: FatName;
-                font-size:20pt;
-                text-align:center;
-            }
-            flex-basis:100%;
-            & strong{
-                font-family: NomPerso;
-                font-weight: bold;
-                color: #FC4;
-            }
-        }
-    }
-    
+  & .details_wrapper {
+    width: 50%;
+    height: 98vh;
+    //background:#802020;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: flex-start;
+    align-content: flex-start;
+    align-items: stretch;
+//     border:3px dotted lime;
+    gap : 2px;
     & h2 {
+        order:100;
+//         border:3px dotted yellow;
         @include section_block;
     }
-    
-    //& .pic {
-    //    display: block;
-    //    float: right;
-    //    border: 1px solid black;
-    //    width: 200px;
-    //    height: auto;
-    //}
-    
+
+    & .details_section {
+        order:101;
+//         border:3px dotted orange;
+        display:flex;
+        flex-flow:column nowrap;
+        justify-content: flex-start;
+        align-content: stretch;
+        gap-vertical:5px;
+        & .details_block{
+//             border:3px dotted cyan;
+            order:2;
+            background:$fics_darker;
+//             background:darkcyan;
+            &.two_columns{
+
+                column-count: 2;
+                column-gap: 2px;
+                column-rule: 0 solid $fics_light;
+            }
+            &.three_columns{
+
+                column-count: 3;
+                column-gap: 2px;
+                column-rule: 0 solid $fics_light;
+            }
+            &.four_columns{
+                column-count: 4;
+                column-gap: 2px;
+                column-rule: 0 solid $fics_light;
+            }
+            &.six_columns{
+                column-count: 6;
+                column-gap: 1px;
+                column-rule: 0 solid $fics_light;
+            }
+        }
+        & .details_title {
+            order:1;
+//         border:3px dotted yellow;
+            @include section_block;
+            background:darkpurple;
+
+        }
+    }
+
+    & div.infoblock {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      align-items: stretch;
+      align-content: stretch;
+      & .portrait {
+        order: 3;
+        display: inline-block;
+        width: 120px;
+        & img {
+          border: 2px solid $fics_light;
+          border-radius: 5px;
+          box-shadow: 0px 0px 5px $fics_darker;
+          width: 90px;
+          height: 120px;
+        }
+        text-align: center;
+        flex-basis: 120px;
+      }
+      //& .mark{
+      //    order:1;
+      //    //display:block;
+      //    //flex-basis:140px;
+      //}
+
+      & .data {
+        order: 2;
+        display: inline-block;
+        & h1 {
+          font-family: FatName;
+          font-size: 20pt;
+          text-align: center;
+        }
+        flex-basis: 100%;
+        & strong {
+          font-family: NomPerso;
+          font-weight: bold;
+          color: #fc4;
+        }
+      }
+    }
+
+
     & .attributes {
-        column-count: 4;
-        column-gap: 2px;
-        column-rule: 0 solid $fics_light;
-        //border: 1px solid lime;
-        
-        table {
-            & th.name {
-                padding-left: 1px;
-                background: $fics_back;
-                width: 5ex;
-            }
-            
-            & td {
-                text-align: center;
-                font-weight: normal;
-                width: auto;
-                
-                &.edit {
-                    width: 5ex;
-                }
-                &.value{
-                    box-shadow: 0 0 3px $fics_darkest;
-                }
-            }
-            
-            &.primary {
-                border: 1px solid $fics_darker;
-            }
-            
-            padding: 0;
-            
-            &.occult {
-                & th.name {
-                    width: 12ex;
-                }
-                
-                & td {
-                    &.edit {
-                        width: 5ex;
-                    }
-                }
-            }
+//       column-count: 4;
+//       column-gap: 2px;
+//       column-rule: 0 solid $fics_light;
+      //border: 3px solid red;
+
+      table {
+        & th.name {
+          padding-left: 1px;
+          background: $fics_back;
+          width: 5ex;
         }
+
+        & td {
+          text-align: center;
+          font-weight: normal;
+          width: auto;
+
+          &.edit {
+            width: 5ex;
+          }
+          &.value {
+            box-shadow: 0 0 3px $fics_darkest;
+          }
+        }
+
+        &.primary {
+          border: 1px solid $fics_darker;
+        }
+
+        padding: 0;
+
+        &.occult {
+          & th.name {
+            width: 12ex;
+          }
+
+          & td {
+            &.edit {
+              width: 5ex;
+            }
+          }
+        }
+      }
     }
-    
+
     & .gear {
-        column-count: 2;
-        column-gap: 5px;
-        column-rule: 1px dotted $fics_light;
-        margin-top: 3px;
-        border: 1px solid $fics_subborder_color;
-        border-radius: 2px;
-        margin-top: 3px;
-        width: 100%;
-        
-        @include unbreakable;
+      column-count: 2;
+      column-gap: 5px;
+      column-rule: 1px dotted $fics_light;
+      margin-top: 3px;
+      border: 1px solid $fics_subborder_color;
+      border-radius: 2px;
+      margin-top: 3px;
+      width: 100%;
+
+      @include unbreakable;
     }
-    
+
     & .options {
-        column-count: 2;
-        column-gap: 5px;
-        column-rule: 1px dotted $fics_light;
-        margin-top: 3px;
-        border: 1px solid $fics_subborder_color;
-        border-radius: 2px;
-        margin-top: 3px;
-        width: 100%;
-        
-        @include unbreakable;
-        
-        border: 1px solid $fics_subborder_color;
-        border-radius: 2px;
+      column-count: 2;
+      column-gap: 5px;
+      column-rule: 1px dotted $fics_light;
+      margin-top: 3px;
+      border: 1px solid $fics_subborder_color;
+      border-radius: 2px;
+      margin-top: 3px;
+      width: 100%;
+
+      @include unbreakable;
+
+      border: 1px solid $fics_subborder_color;
+      border-radius: 2px;
     }
-    
+
     & .coreblock {
-        column-count: 3;
-        column-gap: 1ex;
-        column-rule: 1px dotted $fics_light;
-        margin-top: 3px;
-        border: 1px solid $fics_subborder_color;
-        border-radius: 3px;
-        width: 100%;
-        border: 1px solid $fics_subborder_color;
-        border-radius: 3px;
-        //border-color:red;
-        
-        & ul {
-            page-break-after: always;
-            page-break-inside: avoid;
-            padding: 0;
-            margin: 0;
-            list-style: none;
-            min-height: 16em;
-            
-            & li {
-                display: flex;
-                padding: 0.5ex;
-                margin: 0;
-                width: 100%;
-                flex-flow: row nowrap;
-                justify-content: flex-start;
-                align-items: flex-start;
-                
-                & b {
-                    display: inline-block;
-                    order: 1;
-                    flex-grow: 0;
-                    flex-basis: 20ex;
-                    background: $fics_darker;
-                }
-                
-                & u {
-                    display: inline-block;
-                    order: 2;
-                    flex-grow: 2;
-                    flex-basis: auto;
-                    text-decoration: none;
-                    width: 24ex;
-                    height: auto;
-                    border: 1px dotted $fics_darkest;
-                    margin-left: 0.5ex;
-                }
-            }
-        }
-        
-        & .pagebreaker {
-            page-break-after: always;
-        }
-    }
+      column-count: 3;
+      column-gap: 1ex;
+      column-rule: 1px dotted $fics_light;
+      margin-top: 3px;
+      border: 1px solid $fics_subborder_color;
+      border-radius: 3px;
+      width: 100%;
+      border: 1px solid $fics_subborder_color;
+      border-radius: 3px;
+      //border-color:red;
 
-    & .healthbar{
-
-        & table{
-            font-size:8pt;
-            & tr{
-                height:20px;
-            }
-            & th{
-                background:transparent;
-                border:1px dotted $fics_back;
-                border-radius:3px;
-                width:20px;
-            }
-            & td{
-                background:$fics_back;
-                border:1px solid $fics_front;
-                border-radius:3px;
-                width:20px;
-                &.label{
-                    color:#FFCC44;
-                    text-align:center;
-                }
-            }
-
-        }
-    }
-
-
-    & .skillsview {
-        column-count: 3;
-        column-gap: 5px;
-        column-rule: 1px dotted $fics_light;
-        margin-top: 3px;
-        border: 1px solid $fics_subborder_color;
-        border-radius: 2px;
-        //border-color: purple;
-        & table {
-            width: 100%;
-            
-            & tr {
-                height: 5px;
-                overflow: hidden;
-                
-                & td {
-                    width: auto;
-                    height: 5px;
-                    margin: 0;
-                    padding: 0;
-                    padding-left:1ex;
-                    background: transparent;//$fics_dark;
-                    //border:1px solid orange;
-                    text-align: left;
-                }
-                
-                & td[colspan="2"] {
-                    width: auto;
-                    height: 8px;
-                    margin: 2px;
-                    padding: 1px;
-                    background: $fics_light;
-                    text-align: center;
-                }
-                
-                & th {
-                    height: 5px;
-                    text-align: right;
-                    background: transparent;
-                    width: 14ex;
-                    font-size: 1em;
-                    line-height: 0.8em;
-                    margin: 0;
-                    padding: 0;
-                }
-                
-                & th.edit {
-                    width: 4ex;
-                    font-size: 1em;
-                    text-align: center;
-                }
-                
-                & th[colspan="2"] {
-                    width: 14ex;
-                }
-                
-                & th.skill_score_bar {
-                    width: 16ex;
-                }
-            }
-        }
-    }
-    
-    & .edit {
-        color: $fics_golden;
-    }
-
-    & table.stats{
-        &.other{
-            & tr{
-                width:100%;
-                background:$fics_darkest;
-            }
-            & th{
-                width:20%;
-                background:$fics_back;
-                border:1px solid $fics_darkest;
-            }
-            & td{
-                width:30%;
-                background:$fics_back;
-                padding:2px;
-                text-align:left;
-                border:1px solid $fics_darkest;
-            }
-        }
-    }
-    
-
-    
-    & .narrative {
-        margin: 5px;
-        vertical-align: top;
-        display: block;
-        border: 1px solid $fics_subborder_color;
-        border-radius: 5px;
-        padding: 5px;
-        width: auto;
+      & ul {
         page-break-after: always;
         page-break-inside: avoid;
-    }
-}
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        min-height: 16em;
 
+        & li {
+          display: flex;
+          padding: 0.5ex;
+          margin: 0;
+          width: 100%;
+          flex-flow: row nowrap;
+          justify-content: flex-start;
+          align-items: flex-start;
 
+          & b {
+            display: inline-block;
+            order: 1;
+            flex-grow: 0;
+            flex-basis: 20ex;
+            background: $fics_darker;
+          }
 
-div.character_update_view {
-    display:block;
-    width: 80vw;
-    margin-top:10vh;
-    height:80vh;
-    margin-left: 0;
-    margin-right: auto;
-    padding: 5px;
-    background: $fics_dark;
-    color: $fics_front;
-    border: 1px solid $fics_light;
-    box-shadow: 3px 3px 5px $fics_darkest;
-    border-radius: 5px;
-    opacity: 1.0;
-    font-size:10pt;
-
-     & .character_form{
-        position:absolute;
-        height:80vh;
-        width:78vw;
-        display:flex;
-        flex-flow: column wrap;
-        justify-content: flex-start;
-        align-content: flex-start;
-        align-items: stretch;
-        & div.field_wrapper{
-            //border: 2px dashed red;
-            flex:1 1 auto;
-            display:flex;
-            flex-flow:row wrap;
-            justify-content:flex-start;
-            align-content:stretch;
-            align-items:stretch;
-            gap:1px;
-
-            & label{
-                order:1;
-                flex-basis:20ex;
-                background:$fics_light;
-                border: 1px solid blue;
-                vertical-align:middle;
-            }
-            & input,select,textarea{
-                order:2;
-                flex-basis:1 1 auto;
-                border: 1px dotted green;
-                background:red;
-            }
-            &textarea{
-                cols:auto;
-                }
+          & u {
+            display: inline-block;
+            order: 2;
+            flex-grow: 2;
+            flex-basis: auto;
+            text-decoration: none;
+            width: 24ex;
+            height: auto;
+            border: 1px dotted $fics_darkest;
+            margin-left: 0.5ex;
+          }
         }
+      }
+
+      & .pagebreaker {
+        page-break-after: always;
+      }
+    }
+
+    & .healthbar {
+      & table {
+        font-size: 8pt;
+        & tr {
+          height: 20px;
+        }
+        & th {
+          background: transparent;
+          border: 1px dotted $fics_back;
+          border-radius: 3px;
+          width: 20px;
+        }
+        & td {
+          background: $fics_back;
+          border: 1px solid $fics_front;
+          border-radius: 3px;
+          width: 20px;
+          &.label {
+            color: #ffcc44;
+            text-align: center;
+          }
+        }
+      }
+    }
+
+    & .skillsview,
+    & .degreesview {
+      column-count: 3;
+      column-gap: 2px;
+      column-rule: 1px dotted $fics_light;
+      margin-top: 3px;
+      border: 1px solid $fics_subborder_color;
+      border-radius: 2px;
+      //background: purple;
+      //border-color: purple;
+      & table {
+        width: 100%;
+
+        & tr {
+          height: 5px;
+          overflow: hidden;
+
+          & td {
+            width: auto;
+            height: auto;
+            margin: 0;
+            padding: 0;
+            //padding-left:1ex;
+            background: transparent; //$fics_dark;
+            //border:1px solid orange;
+            text-align: left;
+            width: 13ex;
+            //                     background:orangered;
+          }
+
+          & td[colspan="2"] {
+            width: auto;
+            height: 8px;
+            margin: 2px;
+            padding: 1px;
+            background: $fics_light;
+            text-align: center;
+          }
+
+          & th {
+            height: 5px;
+            text-align: right;
+            background: transparent;
+            width: 14ex;
+            font-size: 1em;
+            line-height: 0.8em;
+            margin: 0;
+            padding: 0;
+          }
+
+          & th.edit {
+            width: 4ex;
+            padding: 0;
+            font-size: 1em;
+            text-align: center;
+            //                     background:blue;
+          }
+
+          & th[colspan="2"] {
+            width: 14ex;
+          }
+
+          & th.skill_score_bar,
+          th.degree_score_bar {
+            width: 12ex;
+            //                     background:maroon;
+            text-align: center;
+          }
+        }
+      }
+    }
+
+    & .edit {
+      color: $fics_golden;
+    }
+
+    & table.stats {
+      &.other {
+        & tr {
+          width: 100%;
+          background: $fics_darkest;
+        }
+        & th {
+          width: 20%;
+          background: $fics_back;
+          border: 1px solid $fics_darkest;
+        }
+        & td {
+          width: 30%;
+          background: $fics_back;
+          padding: 2px;
+          text-align: left;
+          border: 1px solid $fics_darkest;
+        }
+      }
+    }
+
+    & .narrative {
+      margin: 5px;
+      vertical-align: top;
+      display: block;
+      border: 1px solid $fics_subborder_color;
+      border-radius: 5px;
+      padding: 5px;
+      width: auto;
+      page-break-after: always;
+      page-break-inside: avoid;
     }
   }
+}
 
+div.character_update_view {
+  display: block;
+  width: 80vw;
+  margin-top: 10vh;
+  height: 80vh;
+  margin-left: 0;
+  margin-right: auto;
+  padding: 5px;
+  background: $fics_dark;
+  color: $fics_front;
+  border: 1px solid $fics_light;
+  box-shadow: 3px 3px 5px $fics_darkest;
+  border-radius: 5px;
+  opacity: 1;
+  font-size: 10pt;
 
+  & .character_form {
+    position: absolute;
+    height: 80vh;
+    width: 78vw;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: flex-start;
+    align-content: flex-start;
+    align-items: stretch;
+    & div.field_wrapper {
+      //border: 2px dashed red;
+      flex: 1 1 auto;
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: flex-start;
+      align-content: stretch;
+      align-items: stretch;
+      gap: 1px;
+
+      & label {
+        order: 1;
+        flex-basis: 20ex;
+        background: $fics_light;
+        //border: 1px solid blue;
+        vertical-align: middle;
+      }
+      & input,
+      select,
+      textarea {
+        order: 2;
+        flex-basis: 1 1 auto;
+        border: 1px dotted green;
+        //background:red;
+      }
+      &textarea {
+        cols: auto;
+      }
+    }
+  }
+}

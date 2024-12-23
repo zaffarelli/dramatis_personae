@@ -1,0 +1,13 @@
+<table class='custo'>
+	<tr>
+		<th num=1><span id='degree_add' class='edit_icon fa fa-arrow-alt-circle-left'></span></th>
+		<th num=2>Add Degree at 1</th>
+		<td num=3>
+			<select id='degree_select'>
+			{% for d in c.degrees_options %}
+				<option value='{{d.id}}' style='width:15ex;'>{% if d.category %}[{{ d.category }}] {% endif %}{{d.reference}}</option>
+			{% endfor %}
+			</select>
+		</td>
+	</tr>
+</table>

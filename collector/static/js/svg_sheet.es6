@@ -778,13 +778,13 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
         let me = this;
         let styles = {}
         console.log(me.data["tods"])
-        styles["labels"] = ["Cat", "History", "Valid", "Pts","Details"]
-        styles["properties"] = ["category", "reference","valid", "value","description"]
+        styles["labels"] = ["Type", "History", "Valid", "Pts","Details"]
+        styles["properties"] = ["category_text", "reference","valid", "value","description"]
         styles["aligns"] = ["start", "start", "start","start","start"]
         styles["widths"] = [0, 5, 0,0,16]
-        styles["lefts"] = [0, 0.5, 4.25,5.25,6]
+        styles["lefts"] = [0, 1, 1.75,4.5,5.5]
         me.daddy = me.front
-        me.standardBlock({"x":basex-0.25,"y":basey-0.35,"width":21.5,"height":8.25,"title":"Life Path Overview"})
+        me.standardBlock({"x":basex-0.25,"y":basey-0.35,"width":21.5,"height":9.5,"title":"Life Path Overview"})
         me.fillList(basex, basey, "tods", styles);
     }
 

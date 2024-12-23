@@ -1,5 +1,4 @@
 {% if c.skill_set.count != 0 %}
-<h2>Skills ({{c.SK_TOTAL}})</h2>
 <div class='skillsview'>
     {% for skill in c.skill_set.all|dictsort:"skill_ref.reference" %}
         <span class='character_skill' id='sk_{{skill.skill_ref.id}}'>

@@ -1,0 +1,29 @@
+{%load fics_filters%}
+{% if not degree.degree_ref.is_wildcard %}
+<table >
+    <tr>
+        <td>
+            {% if degree.degree_ref.is_root %}
+            <strong>
+            {% endif %}
+            {% if degree.degree_ref.is_speciality %}
+            &nbsp;&nbsp;&nbsp;
+            {% endif %}
+            {{ degree.degree_ref.reference|safe }}
+            {% if degree.degree_ref.is_root %}
+            </strong>
+            {% endif %}
+        </td>
+        <th class='edit'>
+            <span id="degreeplus_{{c.id}}_{{degree.degree_ref.id}}" class='edit_icon degreepick fa fa-plus-circle'></span><span id="degreeminus_{{c.id}}_{{degree.degree_ref.id}}" class='edit_icon degreepick fa fa-minus-circle'></span>
+        </th>
+        <th class='degree_score_bar' id='val_{{degree.id}}'>
+            {% if degree.degree_ref.is_wildcard %}
+            {{ degree.value|as_bullets_short_wildcard|safe }}
+            {% else %}
+            {{ degree.value|as_bullets_short|safe }}
+            {%endif%}
+        </th>
+    </tr>
+</table>
+{% endif %}

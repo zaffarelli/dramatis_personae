@@ -97,6 +97,29 @@ def skill_pick(request, avatar, item, offset):
     return JsonResponse(context)
 
 
+def degree_pick(request, avatar, item, offset):
+    """ Touching degrees to edit them in the view """
+    from collector.models.degree import DegreeRef
+    from collector.utils.basic import get_current_config
+    campaign = get_current_config(request)
+    context = {}
+    offset = int(offset) - 50;
+    ch = Character.objects.get(pk=avatar)
+    degreeref = DegreeRef.objects.get(pk=item)
+    ch.charactercusto.add_or_update_degree(degreeref.id, offset)
+    ch.fix(campaign)
+    ch.save()
+    degree = ch.degree_set.all().filter(degree_ref__id=item).first()
+    context["c"] = model_to_dict(ch)
+    template = get_template('collector/character/character_degree.html')
+    context["block"] = template.render({'c': ch, 'degree': degree})
+    template_challenge = get_template('collector/character/character_challenge.html')
+    context["challenge"] = template_challenge.render({'c': ch})
+    context = respawn_summary(ch, context, request)
+    context = respawn_avatar_link(ch, context, request)
+    return JsonResponse(context)
+
+
 def attr_pick(request, avatar, item, offset):
     """ Touching skills to edit them in the view """
     from collector.utils.basic import get_current_config

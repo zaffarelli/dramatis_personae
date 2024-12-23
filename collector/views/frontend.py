@@ -33,18 +33,19 @@ def index(request):
     return render(request, 'collector/index.html', context=context)
 
 
-def get_list(request, id, slug='none'):
+def get_list(request, id, slug=None):
     from collector.utils.basic import get_current_config
     campaign = get_current_config(request)
-    if slug == 'none':
+    if len(slug) == 0:
         slug = base64.b64encode(slug.encode("utf-8"))
     # print(f'[{slug}]')
     slug = slug.replace('_', '=')
     decs = str(base64.b64decode(slug), "utf-8")
-    if decs == 'none':
-        character_items = campaign.dramatis_personae \
-            .order_by('balanced', '-team', 'keyword', 'historical_figure', 'nameless', 'full_name') \
-            .filter(is_dead=False, keyword__startswith=campaign.epic.shortcut)
+    print(slug,decs)
+    if decs=="none":
+        character_items = Character.objects \
+            .order_by('balanced', '-team', 'historical_figure', 'nameless', 'full_name') \
+            .filter(is_dead=False)
     elif decs.startswith('c-'):
         elements = decs.split('-')
         ep_class = elements[1].capitalize()
@@ -77,7 +78,7 @@ def get_list(request, id, slug='none'):
                 character_items.append(character_item)
         messages.info(request, f'New list filter applied: {decs}')
     else:
-        character_items = campaign.avatars.filter(keyword=decs).order_by('full_name')
+        character_items = campaign.avatars.filter(keyword__contains=decs).order_by('full_name')
         messages.info(request, f'New list filter applied: {decs}')
         if len(character_items) == 0:
             character_items = campaign.open_avatars.filter(rid__contains=decs.lower()).order_by('full_name')

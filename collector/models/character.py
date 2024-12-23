@@ -79,57 +79,57 @@ class Character(Combattant):
     caste = models.CharField(max_length=100, default='Freefolk')
     rank = models.CharField(max_length=100, default='', blank=True)
     build_log = models.TextField(default='', blank=True)
-    PA_STR = models.PositiveIntegerField(default=1)
-    PA_CON = models.PositiveIntegerField(default=1)
-    PA_BOD = models.PositiveIntegerField(default=1)
-    PA_MOV = models.PositiveIntegerField(default=1)
-    PA_INT = models.PositiveIntegerField(default=1)
-    PA_WIL = models.PositiveIntegerField(default=1)
-    PA_TEM = models.PositiveIntegerField(default=1)
-    PA_PRE = models.PositiveIntegerField(default=1)
-    PA_DEX = models.PositiveIntegerField(default=1)
-    PA_TEC = models.PositiveIntegerField(default=1)
-    PA_AGI = models.PositiveIntegerField(default=1)
-    PA_AWA = models.PositiveIntegerField(default=1)
-    SA_REC = models.IntegerField(default=0)
-    SA_STA = models.IntegerField(default=0)
-    SA_END = models.IntegerField(default=0)
-    SA_STU = models.IntegerField(default=0)
-    SA_RES = models.IntegerField(default=0)
-    SA_DMG = models.IntegerField(default=0)
-    SA_TOL = models.IntegerField(default=0)
-    SA_HUM = models.IntegerField(default=0)
-    SA_PAS = models.IntegerField(default=0)
-    SA_WYR = models.IntegerField(default=0)
-    SA_SPD = models.IntegerField(default=0)
-    SA_RUN = models.IntegerField(default=0)
-    PA_TOTAL = models.IntegerField(default=0)
-    SK_TOTAL = models.IntegerField(default=0)
-    DE_TOTAL = models.IntegerField(default=0)
-    TA_TOTAL = models.IntegerField(default=0)
-    BC_TOTAL = models.IntegerField(default=0)
-    BA_TOTAL = models.IntegerField(default=0)
+    PA_STR = models.PositiveIntegerField(default=1, blank=True)
+    PA_CON = models.PositiveIntegerField(default=1, blank=True)
+    PA_BOD = models.PositiveIntegerField(default=1, blank=True)
+    PA_MOV = models.PositiveIntegerField(default=1, blank=True)
+    PA_INT = models.PositiveIntegerField(default=1, blank=True)
+    PA_WIL = models.PositiveIntegerField(default=1, blank=True)
+    PA_TEM = models.PositiveIntegerField(default=1, blank=True)
+    PA_PRE = models.PositiveIntegerField(default=1, blank=True)
+    PA_DEX = models.PositiveIntegerField(default=1, blank=True)
+    PA_TEC = models.PositiveIntegerField(default=1, blank=True)
+    PA_AGI = models.PositiveIntegerField(default=1, blank=True)
+    PA_AWA = models.PositiveIntegerField(default=1, blank=True)
+    SA_REC = models.IntegerField(default=0, blank=True)
+    SA_STA = models.IntegerField(default=0, blank=True)
+    SA_END = models.IntegerField(default=0, blank=True)
+    SA_STU = models.IntegerField(default=0, blank=True)
+    SA_RES = models.IntegerField(default=0, blank=True)
+    SA_DMG = models.IntegerField(default=0, blank=True)
+    SA_TOL = models.IntegerField(default=0, blank=True)
+    SA_HUM = models.IntegerField(default=0, blank=True)
+    SA_PAS = models.IntegerField(default=0, blank=True)
+    SA_WYR = models.IntegerField(default=0, blank=True)
+    SA_SPD = models.IntegerField(default=0, blank=True)
+    SA_RUN = models.IntegerField(default=0, blank=True)
+    PA_TOTAL = models.IntegerField(default=0, blank=True)
+    SK_TOTAL = models.IntegerField(default=0, blank=True)
+    DE_TOTAL = models.IntegerField(default=0, blank=True)
+    TA_TOTAL = models.IntegerField(default=0, blank=True)
+    BC_TOTAL = models.IntegerField(default=0, blank=True)
+    BA_TOTAL = models.IntegerField(default=0, blank=True)
     physical = models.IntegerField(default=0, blank=True)
     mental = models.IntegerField(default=0, blank=True)
     combat = models.IntegerField(default=0, blank=True)
     tod_count = models.IntegerField(default=0, blank=True)
-    weapon_cost = models.IntegerField(default=0)
-    armor_cost = models.IntegerField(default=0)
-    shield_cost = models.IntegerField(default=0)
-    AP = models.IntegerField(default=0)
-    OP = models.IntegerField(default=0)
-    experience_balance = models.IntegerField(default=0)
-    xp_pool = models.IntegerField(default=0)
-    xp_spent = models.IntegerField(default=0)
-    xp_earned = models.IntegerField(default=0)
-    score = models.IntegerField(default=0)
+    weapon_cost = models.IntegerField(default=0, blank=True)
+    armor_cost = models.IntegerField(default=0, blank=True)
+    shield_cost = models.IntegerField(default=0, blank=True)
+    AP = models.IntegerField(default=0, blank=True)
+    OP = models.IntegerField(default=0, blank=True)
+    experience_balance = models.IntegerField(default=0, blank=True)
+    xp_pool = models.IntegerField(default=0, blank=True)
+    xp_spent = models.IntegerField(default=0, blank=True)
+    xp_earned = models.IntegerField(default=0, blank=True)
+    score = models.IntegerField(default=0, blank=True)
     gm_shortcuts = models.TextField(default='', blank=True)
     gm_shortcuts_pdf = models.TextField(default='', blank=True)
-    PA_OCC = models.PositiveIntegerField(default=0)
-    PA_DRK = models.PositiveIntegerField(default=0)
+    PA_OCC = models.PositiveIntegerField(default=0, blank=True)
+    PA_DRK = models.PositiveIntegerField(default=0, blank=True)
     occult_fire_power = models.PositiveIntegerField(default=0, blank=True)
     occult = models.CharField(max_length=50, default='', blank=True)
-    challenge_value = models.IntegerField(default=0)
+    challenge_value = models.IntegerField(default=0, blank=True)
     cast_figure = models.CharField(max_length=256, default='', blank=True)
     path = models.CharField(max_length=256, default='', blank=True)
     stigma = models.CharField(max_length=256, default='', blank=True)
@@ -138,15 +138,15 @@ class Character(Combattant):
                                default='https://drive.google.com/open?id=15hdubdMt1t_deSXkbg9dsAjWi5tZwMU0', blank=True)
     alliance_picture = models.CharField(max_length=256, default='', blank=True)
 
-    life_path_total = models.IntegerField(default=0)
-    overhead = models.IntegerField(default=0)
-    stories_count = models.PositiveIntegerField(default=0)
-    balanced = models.BooleanField(default=False)
+    life_path_total = models.IntegerField(default=0, blank=True)
+    overhead = models.IntegerField(default=0, blank=True)
+    stories_count = models.PositiveIntegerField(default=0, blank=True)
+    balanced = models.BooleanField(default=False, blank=True)
     selected = models.BooleanField(default=False, blank=True)
-    historical_figure = models.BooleanField(default=False)
-    nameless = models.BooleanField(default=False)
+    historical_figure = models.BooleanField(default=False, blank=True)
+    nameless = models.BooleanField(default=False, blank=True)
     incognito = models.BooleanField(default=False, blank=True)
-    error = models.BooleanField(default=False)
+    error = models.BooleanField(default=False, blank=True)
     ranking = models.IntegerField(default=0, blank=True)
     group_color = ColorField(default='#888888', blank=True)
     color = ColorField(default='#CCCCCC', blank=True)
@@ -163,9 +163,11 @@ class Character(Combattant):
     rubies = models.PositiveIntegerField(default=0, blank=True)
 
     skills_options = []
+    degrees_options = []
     ba_options = []
     bc_options = []
     skills_options_not = []
+    degrees_options_not = []
     ba_options_not = []
     bc_options_not = []
     AP_tod_pool = 0
@@ -306,6 +308,7 @@ class Character(Combattant):
             self.audit_log(f"Character custo found: {found_custo}")
         self.resetPA()
         self.purge_skills()
+        self.purge_degrees()
         self.purge_bc()
         self.purge_ba()
         self.purge_weapons()
@@ -453,6 +456,7 @@ class Character(Combattant):
 
     def prepare_display(self):
         self.refresh_skills_options()
+        self.refresh_degrees_options()
         self.refresh_options("ba_options", "ba_options_not", self.charactercusto.beneficeafflictioncusto_set.all(),
                              "benefice_affliction_ref", "BeneficeAfflictionRef")
         self.refresh_options("bc_options", "bc_options_not", self.charactercusto.blessingcursecusto_set.all(),
@@ -675,6 +679,22 @@ class Character(Combattant):
             else:
                 self.skills_options.append(s)
 
+    def refresh_degrees_options(self):
+        """ This one is special: it only reflects degrees that are not in the character """
+        from collector.models.degree import DegreeRef
+        self.degrees_options = []
+        self.degrees_options_not = []
+        ss = self.degree_set.all()
+        sr = []
+        for x in ss:
+            sr.append(x.degree_ref)
+        all = DegreeRef.objects.exclude(is_wildcard=True).order_by('group', 'reference')
+        for s in all:
+            if s in sr:
+                self.degrees_options_not.append(s)
+            else:
+                self.degrees_options.append(s)
+
     def add_or_update_skill(self, askill, modifier=0, stack=False):
         from collector.models.skill import Skill
         found_skill = self.skill_set.all().filter(skill_ref=askill).first()
@@ -891,6 +911,10 @@ class Character(Combattant):
     def purge_skills(self):
         for skill in self.skill_set.all():
             skill.delete()
+
+    def purge_degrees(self):
+        for degree in self.degree_set.all():
+            degree.delete()
 
     def purge_bc(self):
         for bc in self.blessingcurse_set.all():
