@@ -28,6 +28,7 @@ class AvatarCustomizer{
 		me.doConnect("ba",true);
 		me.doConnect("bc",true);
 		me.doConnect("skill");
+		me.doConnect("degree");
         me.doConnect("weapon",true);
         me.doConnect("armor",true,true);
         me.doConnect("shield",true);
@@ -63,7 +64,7 @@ class AvatarCustomizer{
                     me.co.rebootLinks();
 		 	    },
                 error: function(answer){
-                    console.error(answer.responseText);
+                    console.error(answer);
                     me.co.rebootLinks();
 		 	    }
 	 	    });
@@ -140,6 +141,48 @@ class AvatarCustomizer{
                 },
             });
         });
+
+        $('span.degreepick').off().on('click',function(event){
+            let idarr = $(this).attr('id').split('_');
+            let avatar_id = idarr[1]
+            let degree_id = idarr[2]
+            let fingerval = 0;
+            if ($(this).hasClass('fa-plus-circle')){
+                fingerval = 51;
+            }
+            if ($(this).hasClass('fa-minus-circle')){
+                fingerval = 49;
+            }
+            console.log("de_"+degree_id)
+            $("#de_"+degree_id).addClass("working");
+            $.ajax({
+                url: 'ajax/character/pick/degree/'+avatar_id+'/'+degree_id+'/'+fingerval+'/',
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                dataType:'json',
+                success: function(answer) {
+                    //console.log(answer);
+                    $("#de_"+degree_id).removeClass("working");
+                    $("#de_"+degree_id).html(answer.block);
+                    $("#summary_block").html(answer.summary);
+                    $("li#"+answer.c["id"]).html(answer.avatar_link);
+                    $("#challenge_"+answer.c["id"]).html(answer.challenge);
+                    me.prepareEvents();
+                    me.co.rebootLinks();
+                },
+                error: function(answer){
+                    console.error(answer);
+                    $("#de_"+degree_id).html(answer.block);
+                    me.prepareEvents();
+                    me.co.rebootLinks();
+                },
+            });
+        });
+
+
 
         $('span.attrpick').off().on('click',function(event){
             let idarr = $(this).attr('id').split('_');

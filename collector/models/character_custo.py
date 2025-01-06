@@ -6,6 +6,7 @@
 from django.db import models
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
+import json
 
 
 class CharacterCusto(models.Model):
@@ -35,12 +36,21 @@ class CharacterCusto(models.Model):
     comment = models.TextField(default="")
     watch_roots = models.TextField(default="", blank=True)
     wp_used = models.PositiveIntegerField(default=0)
+    degree_wp_watch = {}
+    degrees_wp_choices_str = models.TextField(default='{}', max_length=2048, blank=True)
+
+    def get_degrees_wp_choices(self):
+        return json.loads(self.degrees_wp_choices_str)
+
+    def set_degrees_wp_choices(self, x):
+        self.degrees_wp_choices_str = json.dumps(x, indent=4, sort_keys=True)
 
     def recalculate(self):
+
         self.AP = 0
         self.OP = 0
-        self.wp_used = 0
-        wp_roots = self.watch_roots.split("_")
+        #self.wp_used = 0
+        #wp_roots = self.watch_roots.split("_")
         self.AP += (self.PA_STR + self.PA_CON + self.PA_BOD + self.PA_MOV
                     + self.PA_INT + self.PA_WIL + self.PA_TEM + self.PA_PRE
                     + self.PA_DEX + self.PA_TEC + self.PA_AGI + self.PA_AWA
@@ -84,7 +94,7 @@ class CharacterCusto(models.Model):
         if self.PA_PRE != 0:
             self.summary += "<li>PRE %d</li>" % (self.PA_PRE)
         if self.PA_DEX != 0:
-            self.summary += "<li>REF %d</li>" % (self.PA_DEX)
+            self.summary += "<li>DEX %d</li>" % (self.PA_DEX)
         if self.PA_TEC != 0:
             self.summary += "<li>TEC %d</li>" % (self.PA_TEC)
         if self.PA_AGI != 0:
@@ -102,14 +112,28 @@ class CharacterCusto(models.Model):
         self.summary += "Wildcards"
         self.summary += "<ul>"
         self.summary += f'<li>WP used: {self.wp_used}</li>'
-        self.summary += f'<li>ToD WP: {self.character.WP_tod_pool}</li>'
-        self.summary += f'<li>WP roots: {self.watch_roots}</li>'
+        self.summary += f'<li>ToD Skills WP: {self.character.SWP_tod_pool}</li>'
+        self.summary += f'<li>ToD Degrees WP: {self.character.DWP_tod_pool}</li>'
+
+        data = self.get_degrees_wp_choices()
+        if data != {}:
+            self.summary += "<ul>"
+            for k, v in data.items():
+                self.summary += f"<li>{k} => {v["fulfilled"]}/{v["value"]} pts</li>"
+            self.summary += "</ul>"
+
+        # self.summary += f'<li>WP roots: {self.watch_roots}</li>'
         self.summary += "</ul>"
         self.summary += "Skills"
         self.summary += "<ul>"
         for s in self.skillcusto_set.all():
-            #if s.skill_ref.is_root == False:
+            # if s.skill_ref.is_root == False:
             self.summary += "<li>%s +%d</li>" % (s.skill_ref.reference, s.value)
+        self.summary += "</ul>"
+        self.summary += "Degrees"
+        self.summary += "<ul>"
+        for d in self.degreecusto_set.all():
+            self.summary += f"<li>{d.degree_ref.reference} {d.value:+}</li>"
         self.summary += "</ul>"
         self.summary += "Blessings/Curses"
         self.summary += "<ul>"
@@ -157,25 +181,46 @@ class CharacterCusto(models.Model):
         ch.PA_AWA += self.PA_AWA
         ch.PA_OCC += self.PA_OCC
         ch.PA_DRK += self.PA_DRK
-        for sm in self.skillcusto_set.all():
-            ch.add_or_update_skill(sm.skill_ref, sm.value, True)
-        for dm in self.degreecusto_set.all():
-            ch.add_or_update_degree(dm.degree_ref, dm.value, True)
+
+
+        # Skills Custo
+        for sc in self.skillcusto_set.all():
+            ch.add_or_update_skill(sc.skill_ref, sc.value)
+        # Degrees Custo
+        # self.degree_wp_watch = {}
+        degrees_wp_choices = self.get_degrees_wp_choices()
+        for dc in self.degreecusto_set.all():
+            for k, v in degrees_wp_choices.items():
+                if dc.degree_ref.reference in v['list']:
+                    v['fulfilled'] += dc.value
+                if v['value'] < v['fulfilled']:
+                    v['fulfilled'] = v['value']
+            ch.add_or_update_degree(dc.degree_ref, dc.value)
+        self.set_degrees_wp_choices(degrees_wp_choices)
+
+
+        # Blessings/Curses
         for bc in self.blessingcursecusto_set.all():
             ch.add_bc(bc.blessing_curse_ref)
+        # Benefices/Afflictions
         for ba in self.beneficeafflictioncusto_set.all():
             ch.add_ba(ba.benefice_affliction_ref, ba.description)
+        # Weapons
         for weapon in self.weaponcusto_set.all():
             ch.add_weapon(weapon.weapon_ref)
+        # Add a dirk to all Fencing League Participants
         if ch.fencing_league:
-            if len(self.weaponcusto_set.all())==0:
+            if len(self.weaponcusto_set.all()) == 0:
                 from collector.models.weapon import WeaponRef
                 dirk = WeaponRef.objects.get(reference='Dirk')
                 ch.add_weapon(dirk)
+        # Armors
         for armor in self.armorcusto_set.all():
             ch.add_armor(armor.armor_ref)
+        # Shields
         for shield in self.shieldcusto_set.all():
             ch.add_shield(shield.shield_ref)
+        # Rituals
         for ritual in self.ritualcusto_set.all():
             ch.add_ritual(ritual.ritual_ref)
 
@@ -198,23 +243,39 @@ class CharacterCusto(models.Model):
                 skill_custo.character_custo = self
                 skill_custo.save()
 
-    def add_or_update_degree(self, degree_ref_id, value):
+    def add_or_update_degree(self, degree_ref_id, value=1):
+        """
+        Used when interracting through the mobile form to add new degree custo to the custo
+        :param degree_ref_id:
+        :param value:
+        :return:
+        """
         from collector.models.degree import DegreeCusto, DegreeRef
         found_in_custo = False
+        v = int(value)
         found_cu = None
         for found_cu in self.degreecusto_set.all():
             if found_cu.degree_ref.id == degree_ref_id:
                 found_in_custo = True
                 break
         if found_in_custo:
-            found_cu.value += int(value)
+            found_cu.value += v
             found_cu.save()
         else:
             degree_custo = DegreeCusto()
-            degree_custo.skill_ref = DegreeRef.objects.get(pk=degree_ref_id)
-            if (int(value) > 0):
-                degree_custo.value = int(value)
-                degree_custo.character_custo = self
-                degree_custo.save()
+            degree_custo.degree_ref = DegreeRef.objects.get(pk=degree_ref_id)
+            degree_custo.value = v
+            degree_custo.character_custo = self
+            degree_custo.save()
 
-
+    def register_tod_wp(self, str):
+        import json
+        degrees_wp_choices = self.get_degrees_wp_choices()
+        tod_dwpc = json.loads(str)
+        for k, v in tod_dwpc.items():
+            if k in degrees_wp_choices:
+                degrees_wp_choices[k]['value'] += v["value"]
+                degrees_wp_choices[k]['fulfilled'] = 0
+            else:
+                degrees_wp_choices[k] = {"value": v["value"], "list": v["list"], "fulfilled": 0}
+        self.set_degrees_wp_choices(degrees_wp_choices)

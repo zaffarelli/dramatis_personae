@@ -21,22 +21,29 @@
 
 .mobile_form {
     float:right;
-    font-size:10pt;
-    width: 120ex;
+    font-size:1.2em;
+    //width: 100ex;
     height: auto;
-    margin-right:9ex;
-    overflow: hidden;
-    padding: 5px;
+    //margin-right:1ex;
+    //overflow: hidden;
+    padding: 1ex;
     background: $fics_dark;
     color: $fics_front;
     border: 1px solid $fics_light;
     box-shadow: 3px 3px 5px $fics_darker;
     border-radius: 5px;
     //@include collapsible;
+
+    width:25vw;
+    margin-right:5vw;
+    margin-top:2vh;
+
+    border:1px solid red;
     & table.custo {
-        //border:2px solid orange;
+//         border:1px solid orange;
+        width:100%;
         & tr {
-            border:2px solid yellow;
+//             border:2px solid yellow;
             & td, &th{
                 text-align:left;
                 }
@@ -45,24 +52,32 @@
             }
             
             & td[num="2"], & th[num="2"] {
-                width: 27ex;
+                width: 30ex;
                 //border:2px solid blue;
             }
             
             & td[num="3"], & th[colspan="3"] {
-                width: 50ex;
-                border:2px solid green;
+                margin:auto;
+                margin-left:1px;
+                margin-right:1px;
+                width: auto;
+//                 background:#201020;
             }
             
             & #summary {
-                height: 20em;
+                height: 50em;
                 overflow-y: scroll;
                 border: 1px solid $fics_darkest;
                 //width: 100%;
             }
             
             & select, &option {
-                width: 20ex;
+                //width: 20ex;
+//                 margin:auto;
+//                 margin-left:1px;
+//                 margin-right:1px;
+                width: 100%;
+//                 background:#303010;
             }
         }
         

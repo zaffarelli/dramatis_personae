@@ -6,7 +6,7 @@
 from django.urls import re_path
 from collector.views.characters import CharacterUpdateView, customize_ba, customize_bc, \
     customize_skill, customize_ba_del, customize_bc_del, skill_pick, attr_pick, customize_weapon, customize_weapon_del, \
-    customize_armor, customize_armor_del, customize_shield, customize_shield_del, customize_ritual, customize_ritual_del, degree_pick
+    customize_armor, customize_armor_del, customize_shield, customize_shield_del, customize_ritual, customize_ritual_del, degree_pick, customize_degree
 
 from collector.views.frontend import index, toggle_public, toggle_spotlight, get_list, add_avatar, \
     get_storyline, conf_details, recalc_avatar, heartbeat, \
@@ -56,6 +56,7 @@ urlpatterns = [
     re_path('^toggle/(?P<id>\d+)/public$', toggle_public, name='toggle_public'),
     re_path('^toggle/(?P<id>\d+)/spotlight$', toggle_spotlight, name='toggle_spotlight'),
     re_path('^ajax/character/add/skill/(?P<avatar>[\d]+)/(?P<item>\d+)/$', customize_skill, name='customize_skill'),
+    re_path('^ajax/character/add/degree/(?P<avatar>[\d]+)/(?P<item>\d+)/$', customize_degree, name='customize_degree'),
     re_path('^ajax/character/add/ba/(?P<avatar>[\d]+)/(?P<item>\d+)/$', customize_ba, name='customize_ba'),
     re_path('^ajax/character/add/bc/(?P<avatar>\d+)/(?P<item>\d+)/$', customize_bc, name='customize_bc'),
     re_path('^ajax/character/del/ba/(?P<avatar>[\d]+)/(?P<item>\d+)/$', customize_ba_del, name='customize_ba_del'),

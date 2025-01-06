@@ -5,7 +5,9 @@
     <div class="details_wrapper">
     <div class="infoblock details_section" style="order:1;">
         <div class="data">
-            <h1>{{ c.full_name }}</h1>
+            <h1>{{ c.full_name }}
+            {% if c.alias %}<span class="nickname"><br/>&laquo;&nbsp;{{c.alias}}&nbsp;&raquo;</span>{%endif%}
+            </h1>
             {% if c.entrance %}<b>Entrance:</b> {{ c.entrance|safe }}<br/>{% endif %}
             {% if c.epic %}{{ c.epic|safe }}<br/>{% endif %}
             {% if c.narrative %}<b>Narrative:</b> {{ c.narrative|parse_avatars|safe }}{% endif %}
@@ -67,10 +69,10 @@
 
     <div class='details_section' style="order:3;">
         <div class="details_title">Attributes ({{c.PA_TOTAL}}x3)</div>
-        <div class='details_block attributes four_columns' style="order:2;">
+        <div class='details_block attributes three_columns' style="order:2;">
             {% include "collector/character/character_primaries.html" %}
         </div>
-        <div class='details_block attributes two_columns' style="order:3;">
+        <div class='details_block attributes three_columns' style="order:3;">
             <table id="PA_OCC_{{c.id}}" class='attrpick occult'>
                 {% include "collector/character/character_pa.html" with c=c.info_occ %}
             </table>

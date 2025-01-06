@@ -1,10 +1,13 @@
 @import "basics";
 @import "fonts";
 
-div.character_sheet {
+.character_sheet {
   //     width: 100%;
   //     max-width: 900px;
-  margin-left: 0;
+
+  margin-top: 2vh;
+  margin-bottom: auto;
+  height:96vh;
   margin-right: auto;
   display: block;
   column-count: 1;
@@ -17,12 +20,14 @@ div.character_sheet {
   box-shadow: 3px 3px 5px $fics_darkest;
   border-radius: 5px;
   opacity: 0.9;
-  font-size: 10pt;
+  font-size: 1.2em;
+  width:60vw;
+  margin-left:5vw;
   //border:1px solid yellow;
 
   & .details_wrapper {
     width: 50%;
-    height: 98vh;
+    height: 100%;
     //background:#802020;
     display: flex;
     flex-flow: column wrap;
@@ -31,11 +36,11 @@ div.character_sheet {
     align-items: stretch;
 //     border:3px dotted lime;
     gap : 2px;
-    & h2 {
-        order:100;
-//         border:3px dotted yellow;
-        @include section_block;
-    }
+//     & h2 {
+//         order:100;
+// //         border:3px dotted yellow;
+//         @include section_block;
+//     }
 
     & .details_section {
         order:101;
@@ -43,13 +48,14 @@ div.character_sheet {
         display:flex;
         flex-flow:column nowrap;
         justify-content: flex-start;
-        align-content: stretch;
+        align-content: flex-start;
         gap-vertical:5px;
         & .details_block{
 //             border:3px dotted cyan;
             order:2;
             background:$fics_darker;
 //             background:darkcyan;
+            font-size:1em;
             &.two_columns{
 
                 column-count: 2;
@@ -112,9 +118,15 @@ div.character_sheet {
         order: 2;
         display: inline-block;
         & h1 {
-          font-family: FatName;
-          font-size: 20pt;
+          font-family: 'Metal Mania';
+          font-size: 4em;
           text-align: center;
+              padding:0;
+              margin:0;
+          line-height:1em;
+          & .nickname{
+            font-size:0.8em;
+            }
         }
         flex-basis: 100%;
         & strong {
@@ -259,7 +271,7 @@ div.character_sheet {
 
     & .healthbar {
       & table {
-        font-size: 8pt;
+        font-size: 0.8em;
         & tr {
           height: 20px;
         }
@@ -267,13 +279,12 @@ div.character_sheet {
           background: transparent;
           border: 1px dotted $fics_back;
           border-radius: 3px;
-          width: 20px;
         }
         & td {
           background: $fics_back;
           border: 1px solid $fics_front;
           border-radius: 3px;
-          width: 20px;
+
           &.label {
             color: #ffcc44;
             text-align: center;
@@ -407,7 +418,7 @@ div.character_update_view {
   box-shadow: 3px 3px 5px $fics_darkest;
   border-radius: 5px;
   opacity: 1;
-  font-size: 10pt;
+  font-size: 1em;
 
   & .character_form {
     position: absolute;

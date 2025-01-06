@@ -5,7 +5,7 @@
 		<td num=3>
 			<select id='degree_select'>
 			{% for d in c.degrees_options %}
-				<option value='{{d.id}}' style='width:15ex;'>{% if d.category %}[{{ d.category }}] {% endif %}{{d.reference}}</option>
+				<option value='{{d.id}}' style='width:15ex;'>[{{ d.group }}] {{d.reference}}</option>
 			{% endfor %}
 			</select>
 		</td>

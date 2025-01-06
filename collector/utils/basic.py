@@ -171,20 +171,21 @@ def extract_rules():
     context['racial'] = racial
     castes = ['Nobility', 'Freefolk', 'Church', 'Guild', 'Alien']
     castes_context = []
+    sort_str = 'topic', 'subtopic', 'reference'
     for caste in castes:
         caste_context = {}
         caste_context['name'] = caste
-        upbringing = TourOfDutyRef.objects.filter(category='10',caste=caste).order_by('-source')
+        upbringing = TourOfDutyRef.objects.filter(category='10',caste=caste).order_by('topic', 'subtopic', 'reference')
         caste_context['upbringing'] = upbringing
-        apprenticeship = TourOfDutyRef.objects.filter(category='20',caste=caste).order_by('-source')
+        apprenticeship = TourOfDutyRef.objects.filter(category='20',caste=caste).order_by('topic', 'subtopic', 'reference')
         caste_context['apprenticeship'] = apprenticeship
-        early_career = TourOfDutyRef.objects.filter(category='30',caste=caste).order_by('-source')
+        early_career = TourOfDutyRef.objects.filter(category='30',caste=caste).order_by('topic', 'subtopic', 'reference')
         caste_context['early_career'] = early_career
         castes_context.append(caste_context)
     context['castes'] = castes_context
-    tour_of_duty = TourOfDutyRef.objects.filter(category='40').order_by('-source')
+    tour_of_duty = TourOfDutyRef.objects.filter(category='40').order_by('topic', 'subtopic', 'reference')
     context['tour_of_duty'] = tour_of_duty
-    worldly_benefits = TourOfDutyRef.objects.filter(category='50').order_by('-source')
+    worldly_benefits = TourOfDutyRef.objects.filter(category='50').order_by('topic', 'subtopic', 'reference')
     context['worldly_benefits'] = worldly_benefits
     template = get_template('collector/references.html')
     html = template.render(context)

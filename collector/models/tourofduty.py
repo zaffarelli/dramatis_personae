@@ -4,6 +4,7 @@ from django.contrib import admin
 from collector.models.character import Character
 from datetime import datetime
 from collector.mixins.ridded_mixin import RiddedMixin, RidField
+import json
 
 
 # LIFEPATH_CATEGORY = (
@@ -72,6 +73,8 @@ class TourOfDutyRef(RiddedMixin):
     PA_OCC = models.IntegerField(default=0, blank=True)
     PA_DRK = models.IntegerField(default=0, blank=True)
     WP = models.IntegerField(default=0)
+    SWP = models.IntegerField(default=0, blank=True) # Skill Wilcard Points
+    DWP = models.IntegerField(default=0, blank=True) # Skill Degree Points
     value = models.IntegerField(default=0)
     description = models.TextField(max_length=1024, default='', blank=True)
     notes = models.TextField(max_length=1024, default='', blank=True)
@@ -84,6 +87,7 @@ class TourOfDutyRef(RiddedMixin):
     degree_modificators_summary = models.TextField(max_length=1024, default="", blank=True)
     beneficeaffliction_modificators_summary = models.TextField(max_length=1024, default="", blank=True)
     blessingcurse_modificators_summary = models.TextField(max_length=1024, default="", blank=True)
+    degrees_wp_choices = models.TextField(max_length=2048, default="{}", blank=True)
 
     @classmethod
     def validity(cls):
@@ -93,7 +97,7 @@ class TourOfDutyRef(RiddedMixin):
         return f'INFO: Valid ToDs = {len(valid_ones)} of {len(all)} [{math.floor(len(valid_ones) / len(all) * 1000) / 10}%]'
 
     def __str__(self):
-        return f'[{self.get_category_display()}]{self.get_caste_display()} {self.reference} '
+        return f'[{self.get_category_display()} / {self.get_caste_display()}] {self.reference} '
 
     def fix(self):
         def getAttribute(suffix, report_list):
@@ -115,9 +119,12 @@ class TourOfDutyRef(RiddedMixin):
                     if hasattr(item, "value"):
                         report_list.append(f'{r.reference}{item.value:+}')
                         if hasattr(r, "is_wildcard"):
-                            total += item.value
+                            if getattr(r, "is_wildcard"):
+                                wp_total += item.value
+                            else:
+                                total += item.value
                         else:
-                            wp_total += item.value
+                            total += item.value
                     else:
                         if hasattr(r, "value"):
                             report_list.append(f'{r.reference}{r.value:+}')
@@ -138,6 +145,8 @@ class TourOfDutyRef(RiddedMixin):
             self.BAP = 0
             self.BCP = 0
             self.WP = 0
+            self.SWP = 0
+            self.DWP = 0
             texts = []
             # Attributes
             attributes = ["str", "con", "bod", "mov", "int", "wil", "tem", "pre", "dex", "tec", "agi", "awa", "occ",
@@ -149,27 +158,47 @@ class TourOfDutyRef(RiddedMixin):
             #     hrlist_attributes = ["Attributes: None"]
             if len(hrlist_attributes) > 0:
                 texts.append("Attributes: " + ", ".join(hrlist_attributes))
+
             # SKILLS
             hrlist_skills = []
             items = self.skillmodificator_set.all()
-            self.SP, self.WP = getFromList(items, hrlist_skills, "skill_ref")
-            print(hrlist_skills, self.SP)
+            self.SP, self.SWP = getFromList(items, hrlist_skills, "skill_ref")
+            #print(hrlist_skills, self.SP)
             self.skill_modificators_summary = "Skills: "
             if len(hrlist_skills) > 0:
                 hrlist_skills.sort()
                 self.skill_modificators_summary += ", ".join(hrlist_skills)
             else:
                 self.skill_modificators_summary = ""
+
             # DEGREES
             hrlist_degrees = []
             items = self.degreemodificator_set.all()
-            self.DP, self.WP = getFromList(items, hrlist_degrees, "degree_ref")
+            self.DP, self.DWP = getFromList(items, hrlist_degrees, "degree_ref")
             self.degree_modificators_summary = "Degrees: "
             if len(hrlist_degrees) > 0:
                 hrlist_degrees.sort()
                 self.degree_modificators_summary += ", ".join(hrlist_degrees)
             else:
                 self.degree_modificators_summary = ""
+            degrees_wp_choices = {}
+            for dm in items:
+                if dm.degree_ref.is_wildcard:
+                    if dm.degree_ref.reference not in degrees_wp_choices:
+                        degrees_wp_choices[dm.degree_ref.reference] = {'value':0,'list':[],"fulfilled":0}
+
+                    wclist = dm.degree_ref.as_wildcard_of.split(", ")
+                    for x in wclist:
+                        if x not in degrees_wp_choices[dm.degree_ref.reference]['list']:
+                            degrees_wp_choices[dm.degree_ref.reference]['list'].append(x)
+                    degrees_wp_choices[dm.degree_ref.reference]['value'] += dm.value
+                else:
+                    print(f"Forget about {dm.degree_ref}, this is no wildcard.")
+            print(f"WILDCARDS: [ToD={self.reference}]: {degrees_wp_choices}")
+            self.degrees_wp_choices = json.dumps(degrees_wp_choices)
+
+            self.WP = self.SWP + self.DWP
+
             # BLESSINGS/CURSES
             hrlist_bc = []
             items = self.blessingcursemodificator_set.all()
@@ -246,7 +275,7 @@ class TourOfDutyRef(RiddedMixin):
     def check_value(self):
         self.valid = False
         if self.category == '0':  # Birthright
-            self.balance = 200 - self.value
+            self.balance = 130 - self.value
             self.valid = True
         elif self.category == '5':  # Balance
             self.valid = True
@@ -260,7 +289,7 @@ class TourOfDutyRef(RiddedMixin):
             elif self.caste == 'Caliphate (U)':
                 self.valid = self.value == 9
                 self.topic = ''
-            elif self.caste == 'Nobility':
+            elif self.caste in ['Nobility','Alien']:
                 self.valid = self.value == 20
             else:
                 self.valid = self.value in [15, 5]
@@ -321,7 +350,8 @@ class TourOfDuty(models.Model):
         tod = self.tour_of_duty_ref
         AP = 0
         OP = 0
-        WP = 0
+        SWP = 0
+        DWP = 0
         wp_roots = []
         if tod.is_custom:
             AP = tod.AP
@@ -341,26 +371,27 @@ class TourOfDuty(models.Model):
             ch.PA_AWA += tod.PA_AWA
             ch.PA_OCC += tod.PA_OCC
             ch.PA_DRK += tod.PA_DRK
+            # Skills Modificators
             for sm in tod.skillmodificator_set.all():
                 if not sm.skill_ref.is_wildcard:
-                    ch.add_or_update_skill(sm.skill_ref, sm.value, True)
+                    ch.add_or_update_skill(sm.skill_ref, sm.value)
                 else:
-                    WP += sm.value
-                    # wp_roots.append(sm.skill_ref.is_wildcard_of.reference)
+                    SWP += sm.value
+            # Degrees Modificators
             for dm in tod.degreemodificator_set.all():
                 if not dm.degree_ref.is_wildcard:
-                    ch.add_or_update_degree(dm.degree_ref, dm.value, True)
+                    ch.add_or_update_degree(dm.degree_ref, dm.value)
                 else:
-                    WP += dm.value
-                    # wp_roots.append(dm.degree_ref.is_wildcard_of.reference)
+                    DWP += dm.value
+            # Blessings/Curses
             for bc in tod.blessingcursemodificator_set.all():
                 ch.add_bc(bc.blessing_curse_ref)
-            # print(tod)
+            # Benefices/Afflictions
             for ba in tod.beneficeafflictionmodificator_set.all():
                 ch.add_ba(ba.benefice_affliction_ref)
         AP += tod.balance_AP
         OP += tod.balance_OP
-        return AP, OP, WP, wp_roots
+        return AP, OP, SWP, DWP
 
 
 class TourOfDutyInline(admin.TabularInline):

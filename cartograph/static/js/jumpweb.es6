@@ -15,7 +15,7 @@ class Jumpweb {
         me.w = parseInt($(me.parent).css('width'))
         me.h = parseInt($(me.parent).css('height'))
         me.data = data
-        me.era = 5002
+        me.era = 10000
         me.GLOBAL_HEIGHT = 60
         me.GLOBAL_WIDTH = 90
         //me.new_routes = me.data.new_routes

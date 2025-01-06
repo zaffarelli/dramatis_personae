@@ -1,7 +1,7 @@
 class FICSSheet extends Sheet {
     constructor(data, parent, collector) {
         super(data, parent, collector)
-        console.debug("FICS Sheet");
+//         console.debug("FICS Sheet");
         this.init()
     }
 
@@ -99,7 +99,7 @@ class FICSSheet extends Sheet {
         }
 
         // Texts
-        me.decorationText(4.0, 2.25, 0, 'middle', me.base_font, me.medium_font_size, me.draw_fill, me.draw_stroke, 0.5, me.post_title, me.front);
+        me.decorationText(1.85, 0.85, 0, 'start', me.base_font, me.medium_font_size, me.draw_fill, me.draw_stroke, 0.5, me.post_title, me.front);
         me.decorationText(22.85, 33.5, -16, 'end', me.base_font, me.small_font_size, me.draw_fill, me.draw_stroke, 0.5, me.bottom_disclaimer, me.front);
 
         if (!me.blank) {
@@ -123,7 +123,11 @@ class FICSSheet extends Sheet {
         me.decorationText(7.5, 3.25, 0, 'start', me.title_font, me.fat_font_size * 1.35, me.shadow_fill+"7f", me.shadow_stroke, 1, title_text1, me.front, 1);
         me.decorationText(16.5, 3.25, 0, 'end', me.title_font, me.fat_font_size * 1.35, "#2020207f", "#202020", 1, title_text2, me.front, 1);
         me.decorationText(12, 3.5, 0, 'middle', "Syne Mono", me.medium_font_size, me.draw_fill, me.draw_stroke, 0.5, me.post_title, me.front, 0.8);
-        me.decorationText(12.0, 4.0, 0, 'middle', "Rationale", me.large_font_size, me.draw_fill, me.draw_stroke, 0.5, me.pre_title, me.front);
+        if (me.data.keyword.includes("SANFRANCIS")){
+            me.decorationText(12.0, 4.0, 0, 'middle', "Rationale", me.large_font_size, me.draw_fill, me.draw_stroke, 0.5, "G . U . N . S . L . I . N . G . E . R . S", me.front);
+            }else{
+            me.decorationText(12.0, 4.0, 0, 'middle', "Rationale", me.large_font_size, me.draw_fill, me.draw_stroke, 0.5, me.pre_title, me.front);
+        }
         //me.decorationText(4.2, 2.25, 0, 'middle', me.base_font, me.medium_font_size, me.draw_fill, me.draw_stroke, 0.5, me.scenario, me.back);
 
 
@@ -154,15 +158,15 @@ class FICSSheet extends Sheet {
             me.fillExtras(23)
         } else if (page == 1) {
             me.fillName(page);
-            me.fillArmors(1.25, 3);
+            me.fillArmors(1.25, 1.5);
             me.fillWeapons(1.25, 5.5);
             me.fillShield(12.25, 10.5)
             me.fillPicture(1.25, 29.5)
         } else if (page == 2) {
             me.fillName(page)
             me.fillToDs(1.5, 1.5)
-            me.fillBC(1.25, 11.5)
-            me.fillBA(1.25, 14.5)
+            me.fillBC(1.25, 14.5)
+            me.fillBA(11.25, 14.5)
             me.fillOccult(1.25, 24.5)
 
         } else if (page == 3) {
@@ -187,7 +191,7 @@ class FICSSheet extends Sheet {
             }
             new_path += new_sentence+" "
         })
-        console.log(new_path)
+//         console.log(new_path)
         return new_path
     }
 
@@ -196,7 +200,7 @@ class FICSSheet extends Sheet {
     perform(character_data = null, page = 0) {
         super.perform(character_data, page);
         let me = this;
-        console.log('FICS_SHEET: Performing...');
+//         console.log('FICS_SHEET: Performing...');
         if (character_data) {
             me.data = character_data;
             // console.debug(me.data);

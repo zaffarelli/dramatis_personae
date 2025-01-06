@@ -9,6 +9,7 @@ from collector.models.character_custo import CharacterCusto
 
 class CharacterCustoAdmin(admin.ModelAdmin):
     from collector.models.skill import SkillCustoInline
+    from collector.models.degree import DegreeCustoInline
     from collector.models.blessing_curse import BlessingCurseCustoInline
     from collector.models.benefice_affliction import BeneficeAfflictionCustoInline
     from collector.models.weapon import WeaponCustoInline
@@ -19,6 +20,7 @@ class CharacterCustoAdmin(admin.ModelAdmin):
     exclude = ('value', 'AP', 'OP')
     inlines = [
         SkillCustoInline,
+        DegreeCustoInline,
         BlessingCurseCustoInline,
         BeneficeAfflictionCustoInline,
         WeaponCustoInline,

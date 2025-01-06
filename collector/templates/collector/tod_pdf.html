@@ -1,10 +1,12 @@
 
 {% load fics_filters %}
 
-<h6>{{ c.reference }} ({{c.category}}#{{c.id}}) {%if c.topic%}[{{c.topic}}]{%endif%}</h6>
-{% if c.value %}
-<p>Source: {{ c.source}}, Attributes Points: {{c.AP}}, Options Points: {{c.OP}} Value: <strong>{{c.value|signed}}</strong>.</p>
+<div class="h6" {% if c.valid %}{%else%}style="color:red;"{%endif%}>{{ c.reference }} ({{c.category}}#{{c.id}})</div>
+{%if c.topic%}<cite>[{{c.topic}} {{c.subtopic}}]</cite><br/>{%endif%}
+<cite>Source: {{ c.source}}, Attributes Points: {{c.AP}}, Options Points: {{c.OP}} Value: <strong>{{c.value|signed}}</strong>.</cite>
 <p>
+
+{% if c.valid %}
 <strong>Attributes</strong>&nbsp;&mdash;
  {% if c.PA_STR %} STR{{c.PA_STR|signed}}{% endif %}
  {% if c.PA_CON %} CON{{c.PA_CON|signed}}{% endif %}
@@ -61,5 +63,5 @@
   {% endif %}
 </p>
 {%else%}
-<p>Uncomplete Lifepath</p>
-{%endif%}
+<p><i>To be validated...</i></p>
+{% endif %}

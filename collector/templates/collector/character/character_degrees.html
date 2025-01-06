@@ -1,6 +1,6 @@
 {% if c.degree_set.count != 0 %}
 <div class='skillsview'>
-    {% for degree in c.degree_set.all|dictsort:"degree_ref.reference" %}
+    {% for degree in c.degree_set.all|dictsort:"degree_ref.group" %}
         <span class='character_degree' id='de_{{degree.degree_ref.id}}'>
             {% include "collector/character/character_degree.html"%}
         </span>

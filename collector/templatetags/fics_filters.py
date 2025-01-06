@@ -76,6 +76,44 @@ def as_bullets_short(value):
         return "ERROR!"
 
 
+@register.filter(name='as_bullets_veryshort')
+def as_bullets_veryshort(value):
+    """
+        Change int value to list of bullet (in the "Mark Rein*Hagen" style).
+        Do it with a width limit of 10
+    """
+    if isinstance(value, int):
+        one_very_high = '<i class="fas fa-circle fa-xs veryhigh" title="%d bullet_short"></i>' % (int(value))
+        one_high = '<i class="fas fa-circle fa-xs high" title="%d bullet_short"></i>' % (int(value))
+        one_medium = '<i class="fas fa-circle fa-xs medium" title="%d bullet_short"></i>' % (int(value))
+        one_low = '<i class="fas fa-circle fa-xs low" title="%d bullet_short"></i>' % (int(value))
+        blank = '<i class="fas fa-circle fa-xs blank" title="%d bullet_short"></i>' % (int(value))
+        special_blank = '<i class="fas fa-circle fa-xs special_blank" title="%d bullet_short"></i>' % (int(value))
+        x = 0
+        res = ''
+        while x < 3:
+            if x < int(value):
+                if x > 6:
+                    res += one_very_high
+                elif x > 4:
+                    res += one_high
+                elif x > 2:
+                    res += one_medium
+                else:
+                    res += one_low
+            else:
+                if (x + 1) % 5 == 0:
+                    res += special_blank
+                else:
+                    res += blank
+            if (x + 1) % 10 == 0:
+                res += '<br/>'
+            x += 1
+        return res
+    else:
+        return "ERROR!"
+
+
 @register.filter(name='as_bullets_short_wildcard')
 def as_bullets_short_wildcard(value):
     """ Change int value to list of bullet (Mark Rein*Hagen like)

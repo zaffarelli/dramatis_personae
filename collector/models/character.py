@@ -21,39 +21,6 @@ from operator import itemgetter
 
 logger = logging.getLogger(__name__)
 
-
-# DRAMA_SEATS = (
-#     ('11-foe', 'Foe'),
-#     ('10-enemy', 'Enemy'),
-#     ('09-lackey', 'Lackey'),
-#     ('08-antagonist', 'Antagonist'),
-#     ('07-opponent', 'Opponent'),
-#     ('06-neutral', 'Neutral'),
-#     ('05-partisan', 'Partisan'),
-#     ('04-protagonist', 'Protagonist'),
-#     ('03-servant', 'Servant'),
-#     ('02-ally', 'Ally'),
-#     ('01-friend', 'Friend'),
-#     ('00-players', 'Players'),
-# )
-#
-# BLOKES = {
-#     'allies': ['05-partisan', '04-protagonist', '03-servant', '02-ally', '01-friend'],
-#     'foes': ['11-foe', '10-enemy', '09-lackey', '08-antagonist', '07-opponent'],
-#     'others': ['06-neutral']
-# }
-
-
-# def json_default(value):
-#     import datetime
-#     if isinstance(value, datetime.datetime):
-#         return dict(year=value.year, month=value.month, day=value.day, hour=value.hour, minute=value.minute)
-#     elif isinstance(value, datetime.date):
-#         return dict(year=value.year, month=value.month, day=value.day)
-#     else:
-#         return value.__dict__
-
-
 class Character(Combattant):
     class Meta:
         ordering = ['full_name']
@@ -172,13 +139,15 @@ class Character(Combattant):
     bc_options_not = []
     AP_tod_pool = 0
     OP_tod_pool = 0
-    WP_tod_pool = 0
+    SWP_tod_pool = 0
+    DWP_tod_pool = 0
     weapon_options = []
     weapon_options_not = []
     armor_options = []
     armor_options_not = []
     shield_options = []
     shield_options_not = []
+    #degrees_wp_choices = {}
 
     @property
     def ghostmark_data(self):
@@ -294,11 +263,13 @@ class Character(Combattant):
     #     """ Returns JSON of object """
     #     return json.dumps(self, default=json_default,sort_keys=True, indent=4)
 
+
+
     def rebuild_from_lifepath(self):
         """ Historical Creation """
         old_op = self.OP
         self.build_log = ''
-        logger.info(f"Rebuilding from lifepath: {self.rid}")
+        print(f"RFL: {self.rid}")
         self.audit_log(f"Rebuilding from lifepath: {self.rid}")
         from collector.models.character_custo import CharacterCusto
         found_custo = CharacterCusto.objects.filter(character=self).first()
@@ -306,6 +277,7 @@ class Character(Combattant):
             self.charactercusto = CharacterCusto.objects.create(character=self)
         else:
             self.audit_log(f"Character custo found: {found_custo}")
+        print("RFL: Complete character clean up")
         self.resetPA()
         self.purge_skills()
         self.purge_degrees()
@@ -318,7 +290,8 @@ class Character(Combattant):
         # self.purge_talents()
         self.AP_tod_pool = 0
         self.OP_tod_pool = 0
-        self.WP_tod_pool = 0
+        self.SWP_tod_pool = 0
+        self.DWP_tod_pool = 0
         self.life_path_total = 0
         self.race = self.specie.species
         bl = []
@@ -331,13 +304,18 @@ class Character(Combattant):
             'WB': 0,
         }
         all_tod_wp_roots = []
+        print("RFL: Applying ToDS")
         for tod in self.tourofduty_set.all():
-            AP, OP, WP, tod_wp_roots = tod.push(self)
-            all_tod_wp_roots.append(tod_wp_roots)
+            print(f"RFL: Applying [{tod.tour_of_duty_ref.reference}]")
+            AP, OP, SWP, DWP = tod.push(self)
+            #self.mix_degree_wp_choices(tod.tour_of_duty_ref.degrees_wp_choices)
+            self.charactercusto.register_tod_wp(tod.tour_of_duty_ref.degrees_wp_choices)
             self.AP_tod_pool += AP
             self.OP_tod_pool += OP
-            self.OP_tod_pool += WP
-            self.WP_tod_pool += WP
+            self.OP_tod_pool += SWP
+            self.OP_tod_pool += DWP
+            self.SWP_tod_pool += SWP
+            self.DWP_tod_pool += DWP
             self.life_path_total += tod.tour_of_duty_ref.value
             if tod.tour_of_duty_ref.category == '0' or tod.tour_of_duty_ref.category == '5':
                 tod_rep['RA'] += tod.tour_of_duty_ref.value
@@ -354,19 +332,23 @@ class Character(Combattant):
         if self.life_path_total < 200 and not self.nameless:
             self.archive_level = 'WKS'
             self.audit_log("Archive level is WKS: Lifepath total is less than 200.")
+
+        #print("MIX Results",self.degrees_wp_choices)
+
         # Flatten
-        doubles_all_wp_roots = list(itertools.chain(*all_tod_wp_roots))
+        #doubles_all_wp_roots = list(itertools.chain(*all_tod_wp_roots))
         # Remove multi
-        all_wp_roots = list(dict.fromkeys(doubles_all_wp_roots))
-        if self.charactercusto:
-            self.charactercusto.comment = self.full_name
-            self.charactercusto.push(self)
-            self.charactercusto.save()
+        #all_wp_roots = list(dict.fromkeys(doubles_all_wp_roots))
+        #if self.charactercusto:
+        self.charactercusto.comment = self.full_name
+        self.charactercusto.push(self)
+        self.charactercusto.save()
         pa_total = self.sumPA
         po_total = 0
         for s in self.skill_set.all():
-            #if not s.skill_ref.is_root:
             po_total += s.value
+        for d in self.degree_set.all():
+            po_total += d.value
         ba_total = 0
         for ba in self.beneficeaffliction_set.all():
             ba_total += ba.benefice_affliction_ref.value
@@ -376,7 +358,7 @@ class Character(Combattant):
         bl.append("")
 
         fs_fics7.check_secondary_attributes(self)
-        self.handle_wildcards(all_wp_roots)
+        #self.handle_wildcards(all_wp_roots)
         self.charactercusto.save()
         self.prepare_display()
 
@@ -390,7 +372,8 @@ class Character(Combattant):
             self.audit_log("Lifepath ....... " + str(self.life_path_total))
             self.audit_log("=> Freebies vs Lifepath = " + str(
                 self.life_path_total - (pa_total * 3 + po_total + ba_total + bc_total)))
-            self.audit_log("- WP.............. " + str(self.WP_tod_pool))
+            self.audit_log("- WP.skills....... " + str(self.SWP_tod_pool))
+            self.audit_log("- WP.degrees...... " + str(self.DWP_tod_pool))
             self.audit_log("- Custo Value..... " + str(self.charactercusto.value))
             self.audit_log("- Experience Balance..... " + str(self.experience_balance))
 
@@ -491,6 +474,7 @@ class Character(Combattant):
 
     def fix(self, conf=None):
         super().fix(conf)
+        # self.degrees_wp_choices = {}
         self.audit = ""
         from collector.models.profile import Profile
         profiles = Profile.objects.all()
@@ -505,6 +489,8 @@ class Character(Combattant):
             if self.birthdate < 1000:
                 self.birthdate = conf.epic.era - self.birthdate
                 self.age = conf.epic.era - self.birthdate
+            print("Conf:",conf.epic.era)
+            print("Age:", self.age)
         try:
             logger.info('Update game parameters')
             self.update_game_parameters()
@@ -516,9 +502,9 @@ class Character(Combattant):
             if self.full_name == self.rid:
                 self.audit_log("Name is a RID. Everything has to be done on this character.")
             # NPC fix
-            print("HERE WE GO!")
+            #print("HERE WE GO!")
             if self.use_history_creation:
-                logger.info('rebuild from lifepath')
+                #logger.info('rebuild from lifepath')
                 self.rebuild_from_lifepath()
             else:
                 self.rebuild_free_form()
@@ -538,14 +524,14 @@ class Character(Combattant):
             if self.PA_BOD != 0:
                 if self.height == 0:
                     if "urthish" in self.specie.species.lower():
-                        self.height = 150 + 2.39473 * (self.PA_BOD / 2 + self.PA_STR / 2 + self.PA_CON + 2)  # 145
+                        self.height = 150 + 2.39473 * (self.PA_BOD / 2 + self.PA_STR + self.PA_CON + 2)  # 145
                         if self.gender == 'male':
-                            self.weight = self.height / (2.98 - 0.0336 * (self.PA_BOD + self.PA_CON))
+                            self.weight = self.height / (2.8 - 0.06 * (self.PA_BOD + self.PA_CON))
                         else:
-                            self.weight = self.height / (3.09 - 0.02975 * (self.PA_BOD + self.PA_CON))
+                            self.weight = self.height / (3.0 - 0.04 * (self.PA_BOD + self.PA_CON))
                         if self.PA_MOV != self.PA_CON:
                             self.weight *= 1 + (self.PA_CON - self.PA_MOV) * 0.1
-                        logger.info("Height/Weight Experiment 1: %s --> %0.2f %0.2f BODY:%d CONSTITUTION:%d" % (
+                        print("Height/Weight Experiment 1: %s --> %0.2f %0.2f BODY:%d CONSTITUTION:%d" % (
                             self.full_name, self.height, self.weight, self.PA_BOD, self.PA_CON))
             # self.is_exportable = True #self.check_exportable()
             self.update_challenge()
@@ -557,7 +543,7 @@ class Character(Combattant):
             self.need_fix = False
             logger.info(f'    => Done fixing ...: {self.full_name} NeedFIX:{self.need_fix}')
         except ValueError as e:
-            print(e)
+            print("FIX EXCEPTION!",e)
         # logger.info(self.audit)
 
     def fix75(self):
@@ -604,7 +590,8 @@ class Character(Combattant):
         res += '<i class="fas fa-th-large" title="primary attributes"></i>%d ' % (self.AP)
         res += '<i class="fas fa-th-list" title="skills"></i> %d ' % (self.SK_TOTAL)
         res += '<i class="fas fa-th" title="BC/BA"></i> %d ' % (self.BC_TOTAL + self.BA_TOTAL)
-        res += '<i class="fas fa-star" title="wildcards"></i> %d ' % (self.WP_tod_pool)
+        res += '<i class="fas fa-star" title="wildcards skills"></i> %d ' % (self.SWP_tod_pool)
+        res += '<i class="fas fa-star" title="wildcards degrees"></i> %d ' % (self.DWP_tod_pool)
         res += '<i class="fas fa-newspaper" title="OP -vs- LifePath"></i> %d/%d ' % (self.OP, self.life_path_total)
         res += '<i class="fas fa-square" title="exp_bal/xp_spent"></i> %d/%d ' % (self.experience_balance, self.xp_spent)
         res += '<i class="fas fa-circle" title="Adjusted"></i> %d ' % (self.OP - self.experience_balance)
@@ -695,52 +682,34 @@ class Character(Combattant):
             else:
                 self.degrees_options.append(s)
 
-    def add_or_update_skill(self, askill, modifier=0, stack=False):
+    def add_or_update_skill(self, sref, modifier=1):
         from collector.models.skill import Skill
-        found_skill = self.skill_set.all().filter(skill_ref=askill).first()
-        if found_skill:
-            if modifier == 0:
-                found_skill.value += 1
-            else:
-                found_skill.value += modifier
-            found_skill.save()
-            return found_skill
+        found_skills = self.skill_set.all().filter(skill_ref=sref)
+        if len(found_skills)==1:
+            found_skill = found_skills.first()
+            found_skill.value += modifier
+            skill = found_skill
         else:
             skill = Skill()
             skill.character = self
-            skill.skill_ref = askill
-            if modifier == 0:
-                skill.value = 1
-            else:
-                if stack:
-                    skill.value += modifier
-                else:
-                    skill.value = modifier
-            skill.save()
+            skill.skill_ref = sref
+            skill.value = modifier
+        skill.save()
         return skill
 
-    def add_or_update_degree(self, adregree, modifier=0, stack=False):
+    def add_or_update_degree(self, dref, modifier=1):
         from collector.models.degree import Degree
-        found_degree = self.degree_set.all().filter(degree_ref=adregree).first()
-        if found_degree:
-            if modifier == 0:
-                found_degree.value += 1
-            else:
-                found_degree.value += modifier
-            found_degree.save()
-            return found_degree
+        found_degrees = self.degree_set.all().filter(degree_ref=dref)
+        if len(found_degrees)==1:
+            found_degree = found_degrees.first()
+            found_degree.value += modifier
+            degree = found_degree
         else:
             degree = Degree()
             degree.character = self
-            degree.degree_ref = adregree
-            if modifier == 0:
-                degree.value = 1
-            else:
-                if stack:
-                    degree.value += modifier
-                else:
-                    degree.value = modifier
-            degree.save()
+            degree.degree_ref = dref
+            degree.value = modifier
+        degree.save()
         return degree
 
 
@@ -913,6 +882,7 @@ class Character(Combattant):
             skill.delete()
 
     def purge_degrees(self):
+        self.charactercusto.set_degrees_wp_choices({})
         for degree in self.degree_set.all():
             degree.delete()
 

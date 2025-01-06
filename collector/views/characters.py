@@ -9,7 +9,7 @@ from django.contrib import messages
 from collector.forms.basic import CharacterForm, TourOfDutyFormSet
 from collector.models.character import Character
 from scenarist.mixins.ajaxfromresponse import AjaxFromResponseMixin
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.forms.models import model_to_dict
 from django.template.loader import get_template
 from django.shortcuts import redirect, reverse
@@ -172,6 +172,52 @@ def customize_skill(request, avatar, item):
     context = respawn_avatar_link(ch, context, request)
     messages.info(request, 'Avatar %s customized with skill %s at +1.' % (ch.full_name, new_item.skill_ref.reference))
     return JsonResponse(context)
+
+
+def customize_degree(request, avatar, item):
+    from collector.models.degree import DegreeRef, DegreeCusto
+    from collector.models.character_custo import CharacterCusto
+    from collector.utils.basic import get_current_config
+    go = True
+    campaign = get_current_config(request)
+    context = {}
+    ch = Character.objects.get(pk=avatar)
+    ref = DegreeRef.objects.get(pk=item)
+    print(ch,ref)
+    dc_matches = DegreeCusto.objects.filter(character_custo=ch.charactercusto,degree_ref=ref)
+
+    if len(dc_matches)==0:
+        new_item = DegreeCusto()
+        new_item.character_custo = ch.charactercusto
+        new_item.degree_ref = ref
+        new_item.value = 1
+        new_item.save()
+    elif len(dc_matches)==1:
+        new_item = dc_matches.first()
+        new_item.value += 1
+        new_item.save()
+    else:
+        print("Multiple Degree Custo...")
+        print(dc_matches)
+        go = False
+
+    if go:
+        ch.fix(campaign)
+        ch.save()
+        context["c"] = model_to_dict(ch)
+        template = get_template('collector/character/character_degrees.html')
+        context["block"] = template.render({'c': ch})
+        template = get_template('collector/custo/degree_custo_block.html')
+        context["custo_block"] = template.render({'c': ch})
+        template_challenge = get_template('collector/character/character_challenge.html')
+        context["challenge"] = template_challenge.render({'c': ch})
+        context = respawn_summary(ch, context, request)
+        context = respawn_avatar_link(ch, context, request)
+        messages.info(request, 'Avatar %s customized with degree %s at +1.' % (ch.full_name, new_item.degree_ref.reference))
+        return JsonResponse(context)
+    else:
+        return HttpResponse(status=204)
+
 
 
 def customize_bc(request, avatar, item):

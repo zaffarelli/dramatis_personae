@@ -358,7 +358,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
             } else {
                 f = font;
             }
-            console.log(text)
+            //console.log(text)
             let sentences = (""+text).split("; ")
             let lineCnt=0
             let t = me.daddy.append('text')
@@ -372,7 +372,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
                 .style("font-family", f)
                 .text("")
             _.forEach(sentences,(sentence) => {
-                console.log(" ---> "+sentence)
+                //console.log(" ---> "+sentence)
                 t.append("tspan")
                     .attr('x', me.step * x)
                     .attr('y', me.step * y)
@@ -571,7 +571,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
                 .attr("y", y);
         while (word = words.pop()) {
             let nl = false
-            console.log("["+word+"]")
+            //console.log("["+word+"]")
             if (word=="§"){
                 nl = true
                 word = ""
@@ -777,14 +777,14 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
     fillToDs(basex = 0, basey = 0) {
         let me = this;
         let styles = {}
-        console.log(me.data["tods"])
+        //console.log(me.data["tods"])
         styles["labels"] = ["Type", "History", "Valid", "Pts","Details"]
         styles["properties"] = ["category_text", "reference","valid", "value","description"]
         styles["aligns"] = ["start", "start", "start","start","start"]
         styles["widths"] = [0, 5, 0,0,16]
-        styles["lefts"] = [0, 1, 1.75,4.5,5.5]
+        styles["lefts"] = [0, 1, 3.75,4.5,5.5]
         me.daddy = me.front
-        me.standardBlock({"x":basex-0.25,"y":basey-0.35,"width":21.5,"height":9.5,"title":"Life Path Overview"})
+        me.standardBlock({"x":basex-0.25,"y":basey-0.35,"width":21.5,"height":12.5,"title":"Life Path Overview"})
         me.fillList(basex, basey, "tods", styles);
     }
 
@@ -1015,9 +1015,9 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
         me.drawRect(ox + 3.5, oy + 6.25, 1, 1, "transparent", me.draw_fill, 2);
 
         if (me.blank === false) {
-            me.drawText(ox + 2.5, oy + 1.5, me.user_fill, me.user_stroke, me.medium_font_size, "middle", me.data["SA_END"], 1.0, me.user_font);
-            me.drawText(ox + 2.5, oy + 3.25, me.user_fill, me.user_stroke, me.medium_font_size, "middle", me.data["SA_STA"], 1.0, me.user_font);
-            me.drawText(ox + 2.5, oy + 5, me.user_fill, me.user_stroke, me.medium_font_size, "middle", me.data["SA_STU"], 1.0, me.user_font);
+            me.drawText(ox + 2.5, oy + 1.5, me.user_fill, me.user_stroke, me.big_font_size, "middle", me.data["SA_END"], 1.0, me.user_font);
+            me.drawText(ox + 2.5, oy + 3.25, me.user_fill, me.user_stroke, me.big_font_size, "middle", me.data["SA_STA"], 1.0, me.user_font);
+            me.drawText(ox + 2.5, oy + 5, me.user_fill, me.user_stroke, me.big_font_size, "middle", me.data["SA_STU"], 1.0, me.user_font);
 
             if (me.data['shields'].length > 0) {
                 let shield = me.data['shields'][0]
@@ -1050,22 +1050,22 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
             if (me.data["armors"].length > 0) {
                 let armor = me.data["armors"][0]
                 if (armor.left_arm) {
-                    me.drawText(ox + 0.4, oy + 2.50, me.user_fill, me.user_stroke, me.medium_font_size, "middle", armor.stopping_power, 1.0, me.user_font);
+                    me.drawText(ox + 0.4, oy + 2.50, me.user_fill, me.user_stroke, me.big_font_size, "middle", armor.stopping_power, 1.0, me.user_font);
                 }
                 if (armor.head) {
-                    me.drawText(ox + 1.4, oy + 1.50, me.user_fill, me.user_stroke, me.medium_font_size, "middle", armor.stopping_power, 1.0, me.user_font);
+                    me.drawText(ox + 1.4, oy + 1.50, me.user_fill, me.user_stroke, me.big_font_size, "middle", armor.stopping_power, 1.0, me.user_font);
                 }
                 if (armor.right_arm) {
-                    me.drawText(ox + 2.4, oy + 2.50, me.user_fill, me.user_stroke, me.medium_font_size, "middle", armor.stopping_power, 1.0, me.user_font);
+                    me.drawText(ox + 2.4, oy + 2.50, me.user_fill, me.user_stroke, me.big_font_size, "middle", armor.stopping_power, 1.0, me.user_font);
                 }
                 if (armor.left_leg) {
-                    me.drawText(ox + 0.4, oy + 6.50, me.user_fill, me.user_stroke, me.medium_font_size, "middle", armor.stopping_power, 1.0, me.user_font);
+                    me.drawText(ox + 0.4, oy + 6.50, me.user_fill, me.user_stroke, me.big_font_size, "middle", armor.stopping_power, 1.0, me.user_font);
                 }
                 if (armor.torso) {
-                    me.drawText(ox + 1.4, oy + 5.50, me.user_fill, me.user_stroke, me.medium_font_size, "middle", armor.stopping_power, 1.0, me.user_font);
+                    me.drawText(ox + 1.4, oy + 5.50, me.user_fill, me.user_stroke, me.big_font_size, "middle", armor.stopping_power, 1.0, me.user_font);
                 }
                 if (armor.right_leg) {
-                    me.drawText(ox + 2.4, oy + 6.50, me.user_fill, me.user_stroke, me.medium_font_size, "middle", armor.stopping_power, 1.0, me.user_font);
+                    me.drawText(ox + 2.4, oy + 6.50, me.user_fill, me.user_stroke, me.big_font_size, "middle", armor.stopping_power, 1.0, me.user_font);
                 }
             }
         }
@@ -1398,14 +1398,14 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
         me.baseStat("Player", me.data["player"], bx, oy , 0)
         me.baseStat("Caste", me.data["caste"], bx, oy + 1, )
         me.baseStat("Species", me.data["race"], bx, oy + 2, )
-        me.baseStat("Rank", me.data["rank"], bx, oy + 3, )
+        me.baseStat("Rank", me.data["ranking"], bx, oy + 3, )
         me.baseStat("Gender", me.data["gender"], bx, oy +  4,  1)
         me.baseStat("Age", me.data["age"], bx, oy +  4, 2)
         me.baseStat("Height (cm)", me.data["height"], bx, oy + 5,  1)
         me.baseStat("Weight (kg)", me.data["weight"], bx, oy + 5,  2)
         bx = 1.25 ;
         me.baseStat("", me.data["full_name"], bx, oy  , 0, true);
-        me.baseStat("Alliance", me.data["alliance"], bx, oy + 2);
+        me.baseStat("Alliance", me.data["faction"], bx, oy + 2);
         bx = 9.25 ;
 
         bx = 1.25
@@ -1728,122 +1728,109 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
         let me = this;
         me.spe_col_max = 3;
         let oy = basey;
-        me.column_amount = 10;
+        me.column_amount = 11;
         let ox = 1.5;
         let boxWidth = 5
-        let boxHeight = 0.5
+        let boxHeight = 0.35
 
-        if (me.debug)
-            console.log(me.data.degrees_list)
+        //console.log("DEGREES LIST", me.data.degrees_list)
+
+
+        let reworked_data_set = []
+        let current_group = ""
+        _.forEach(me.data.degrees_list, (v,k) => {
+            if (v.group != current_group){
+                current_group = v.group
+                reworked_data_set.push({'grp':v.group})
+            }
+            reworked_data_set.push(v)
+        })
+        let idx = 0
+        _.forEach(reworked_data_set, (v,k) => {
+            v.idx = idx++
+        })
+
+        //console.log("DEGREES LIST", reworked_data_set)
+
 
 
         me.standardBlock({"x":ox-0.25,"y":basey-0.25,"width":21.5,"height":4.5,"title":"Degrees"})
         let degrees = me.front.append('g').selectAll('g')
-            .data(me.data["degrees_list"]);
+            .data(reworked_data_set);
+        let group = ""
+        let dy = 0
         let degree_in = degrees.enter()
             .append('g')
             .attr('class','fics_degree')
             .attr('transform',(d) => {
-                let x = (ox + Math.floor(d.idx1 / me.column_amount) * (boxWidth))
-                let y = (oy + (d.idx1 % me.column_amount) * boxHeight)
+                let x = (ox + Math.floor(d.idx / me.column_amount) * (boxWidth))
+                let y = (oy + (d.idx % me.column_amount) * boxHeight)
                 return `translate(${x*me.step},${y*me.step})`
             })
 
-        if (me.debug) {
-            degree_in.append('rect')
-                .attr('width', boxWidth*me.step)
-                .attr('height', boxHeight*me.step)
-                .style('fill', 'none')
-                .style('stroke', 'lime')
-                .style('stroke-width', '1pt')
-                .style('stroke-dasharray', '3 2')
-                .attr('opacity', 0.75)
-            _.forEach(new Array(11),(v,k) => {
-                degree_in.append('line')
-                    .attr("x1",boxWidth*me.step*(k/12))
-                    .attr("x2",boxWidth*me.step*(k/12))
-                    .attr("y1",0*me.step)
-                    .attr("y2",boxHeight*me.step)
-                    .style('stroke', 'lime')
-                    .style('stroke-width', '1pt')
-                    .style('stroke-dasharray', '1 2')
-                    .attr('opacity', 0.75)
-            })
-        }
+        degree_in.append('rect')
+            .attr('width', boxWidth*me.step*0.9)
+            .attr('height', boxHeight*me.step*0.9)
+            .style('x', me.step*0.05)
+            .style('y', me.step*0.05)
+            .style('fill', 'none')
+            .style('stroke', 'silver')
+            .style('stroke-width', '0.5pt')
+            .attr("opacity",(d) => d.hasOwnProperty("grp") ? 0 : 1)
 
-
-        degree_in.append('line')
-            .attr('x1', boxWidth*me.step*1/24)
-            .attr('x2', boxWidth*me.step*23/24)
-            .attr('y1', boxHeight*me.step*4/5)
-            .attr('y2', boxHeight*me.step*4/5)
-            .style("fill", function (d) {
-                if ((!d['is_speciality'])) {
-                    return me.shadow_fill;
-                }
-                return "transparent";
-            })
-            .style("stroke", function (d) {
-                if ((!d['is_speciality'])) {
-                    return me.shadow_fill;
-                }
-                return me.shadow_fill;
-                // return "transparent";
-            })
-            .style("stroke-dasharray", "4 3")
-            .style("stroke-width", '2pt')
-            .attr("opacity", 0.3)
-        ;
         degree_in.append('text')
-            .attr('x', (boxWidth*1/24)*me.step)
-            .attr('y', boxHeight * me.step*12/24)
-            .style("fill", me.user_fill)
-            .style("stroke", me.user_stroke)
+            .attr('x', 0)
+            .attr('y', boxHeight * me.step*4/5)
             .style("stroke-width", '0.5pt')
             .style("text-anchor", 'left')
-            .style("font-family", me.user_font)
-            .style("font-size", function (d) {
-                if (d['is_speciality']) {
-                    return me.small_font_size + 'pt';
-                } else {
-                    return me.small_font_size + 'pt';
-                }
-            })
-            .text((d) => d.group)
-            .append('tspan')
-                .attr('x', (boxWidth*1/24)*me.step)
-                .attr('dy',me.small_font_size*0.75+"pt")
-                .text((d) => d.degree)
-
-        degree_in.append('rect')
-            .attr('x', (boxWidth*19/24)*me.step)
-            .attr('y', 1*me.step/12)
-            .attr('width', 10*me.step/12)
-            .attr('height', 5*me.step/12)
-            .style('fill', me.white)
-            .style('stroke', me.draw_stroke)
-            .style('stroke-width', '1pt')
+            .style("font-size", me.small_font_size + 'pt')
+            .style("fill", me.draw_fill)
+            .style("stroke", me.draw_stroke)
+            .style("font-family", me.base_font)
+            .text((d) => d.grp)
 
         degree_in.append('text')
-            .attr('x', boxWidth * me.step*21/24)
-            .attr('y', boxHeight * me.step *5/5)
-            .attr('dy', me.big_font_size*0+"pt")
+            .attr('x', (boxWidth*1/48)*me.step)
+            .attr('y', boxHeight * me.step*3/5)
+            .style("stroke-width", '0.5pt')
+            .style("text-anchor", 'left')
+            .style("font-size", me.small_font_size + 'pt')
             .style("fill", me.user_fill)
             .style("stroke", me.user_stroke)
-            .style("stroke-width", '0.5pt')
-            .style("text-anchor", 'middle')
+
             .style("font-family", me.user_font)
-            .style("font-size", function (d) {
-                    let size = me.big_font_size;
-                    return size + 'pt';
-                }
-            )
-            .text(function (d) {
-                    if (me.blank) {
-                        return "";
-                    }
-                    return d.value;
-                })
+            .text((d) => d.degree)
+
+        degree_in.append('circle')
+            .attr('cx', boxWidth * me.step*19/24)
+            .attr('cy', boxHeight * me.step *2/5)
+            .attr('r', 0.08*me.step)
+            .style("fill", (d) => d.value > 0 ? me.user_fill : "white")
+            .style("stroke", me.draw_stroke)
+            .style("stroke-width", '1pt')
+            .style("text-anchor", 'middle')
+            .attr("opacity",(d) => d.hasOwnProperty("grp") ? 0 : 1)
+
+        degree_in.append('circle')
+            .attr('cx', boxWidth * me.step*20/24)
+            .attr('cy', boxHeight * me.step *2/5)
+            .attr('r', 0.08*me.step)
+            .style("fill", (d) => d.value > 1 ? me.user_fill : "white")
+            .style("stroke", me.draw_stroke)
+            .style("stroke-width", '1pt')
+            .style("text-anchor", 'middle')
+            .attr("opacity",(d) => d.hasOwnProperty("grp") ? 0 : 1)
+
+        degree_in.append('circle')
+            .attr('cx', boxWidth * me.step*21/24)
+            .attr('cy', boxHeight * me.step *2/5)
+            .attr('r', 0.08*me.step)
+            .style("fill", (d) => d.value > 2 ? me.user_fill : "white")
+            .style("stroke", me.draw_stroke)
+            .style("stroke-width", '1pt')
+            .style("text-anchor", 'middle')
+            .attr("opacity",(d) => d.hasOwnProperty("grp") ? 0 : 1)
+
 
         degrees.exit().remove();
 

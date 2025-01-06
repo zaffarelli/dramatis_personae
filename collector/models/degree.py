@@ -33,7 +33,7 @@ class DegreeRef(RiddedMixin):
     as_wildcard_of = models.CharField(default="", max_length=512, blank=True)
 
     def __str__(self):
-        return f"{self.get_group_display()}: {self.reference}"
+        return f"[{self.get_group_display()}] {self.reference}"
 
     def fix(self):
         # self.toRID(f"{self.reference}_{self.group}")
@@ -49,6 +49,9 @@ class DegreeRef(RiddedMixin):
 
 
 class DegreeModificator(models.Model):
+    """
+    A degree-modificator is linked to a ToD and can be a wildcard
+    """
     class Meta:
         ordering = ['-degree_ref__is_wildcard','degree_ref__group','degree_ref__reference']
 
@@ -64,8 +67,12 @@ class DegreeModificator(models.Model):
 
 
 class DegreeCusto(models.Model):
+    """
+    A degree-custo is linked to the customizer, cannot be a wild card and all the d-custo should fullfill the
+    d-modificators of the ToDs
+    """
     class Meta:
-        ordering = ['character_custo']
+        ordering = ['degree_ref__group','degree_ref']
 
     character_custo = models.ForeignKey(CharacterCusto, on_delete=models.CASCADE)
     degree_ref = models.ForeignKey(DegreeRef, on_delete=models.CASCADE)
@@ -106,7 +113,7 @@ class DegreeCustoInline(admin.TabularInline):
 
 class DegreeRefAdmin(admin.ModelAdmin):
     ordering = ['-is_wildcard', 'group', 'reference']
-    list_display = ['reference', 'level', 'is_wildcard','group_wildcard', 'group','subgroup', 'rid', 'as_wildcard_of']
+    list_display = ['rid','reference', 'level', 'is_wildcard','group_wildcard', 'group','subgroup', 'as_wildcard_of']
     list_filter = ['group','subgroup','is_wildcard', 'level']
     list_editable = ['group','subgroup', 'level']
     search_fields = ['reference']
