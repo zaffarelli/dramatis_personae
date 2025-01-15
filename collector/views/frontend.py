@@ -310,14 +310,17 @@ def display_sheet(request, pk=None):
         c = Character.objects.get(id=pk)
         # print(campaign)
         scenario = campaign.epic.name.upper()
-        # pre_title = campaign.epic.place + ' - ' + campaign.epic.date
-        pre_title = f"Rari Nantes In Gurgite Vasto"
-        post_title = f"FuZion Interlock Custom System v{FICS_VERSION}"
+        if "SANFRANCIS" in c.keyword:
+            pre_title = f"G U N S L I N G E R S"
+        elif "RNIGV" in c.keyword:
+            pre_title = f"Rari Nantes In Gurgite Vasto"
+        else:
+            pre_title = campaign.epic.place + ' - ' + campaign.epic.date
         post_title = f"F u z i o n . I n t e r l o c k . C u s t o m . S y s t e m . X"
         spe = c.get_specialities()
         shc = c.get_shortcuts()
         j = c.to_jsonFICS()
-        settings = {'version': 1.0, 'debug': False, "blank": False, 'labels': {}, 'pre_title': pre_title,
+        settings = {'version': FICS_VERSION, 'debug': False, "blank": False, 'labels': {}, 'pre_title': pre_title,
                     'scenario': scenario,
                     'post_title': post_title, "FICS_VERSION": FICS_VERSION, 'fontset': FONTSET, 'specialities': spe,
                     'shortcuts': shc}

@@ -24,10 +24,12 @@ def check_secondary_attributes(ch):
     ch.SA_STA = math.ceil(ch.PA_BOD / 2) - 1
     ch.SA_END = (ch.PA_BOD + ch.PA_CON) * 5
     ch.SA_STU = ch.PA_CON + ch.PA_BOD
+
     ch.SA_RES = ch.PA_WIL + ch.PA_PRE
     ch.SA_DMG = math.ceil(ch.PA_STR / 2) - 2
     ch.SA_TOL = ch.PA_TEM + ch.PA_WIL
     ch.SA_HUM = (ch.PA_TEM + ch.PA_WIL) * 5
+
     ch.SA_PAS = ch.PA_TEM + ch.PA_AWA
     ch.SA_WYR = ch.PA_INT + ch.PA_DEX + ch.PA_TEC
     ch.SA_SPD = math.ceil(ch.PA_MOV / 2)

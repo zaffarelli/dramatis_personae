@@ -15,6 +15,7 @@ class Sheet {
             "settings": {}
         }
         console.debug("Character Sheet");
+        this.showGrid = true
     }
 
     init() {
@@ -24,7 +25,7 @@ class Sheet {
         me.translation = true
         me.button_ox = 28;
         me.button_oy = 2;
-        me.version = "10.2";
+        me.version = me.config.version;
         me.white = me.debug ? "#FFF0FF" : "#FFFFFF"
         if (me.disposition == 'portrait') {
             me.xunits = 24;
@@ -46,11 +47,11 @@ class Sheet {
             
         }
 
-        me.small_font_size = me.step * 0.2
-        me.medium_font_size = me.small_font_size * 1.2
-        me.big_font_size = me.medium_font_size*1.5
-        me.large_font_size = me.big_font_size*1.5
-        me.fat_font_size = me.large_font_size*2.75
+        me.small_font_size = me.step * 0.2 * 1.25
+        me.medium_font_size = me.small_font_size * 1.25
+        me.big_font_size = me.medium_font_size*2
+        me.large_font_size = me.medium_font_size*3
+        me.fat_font_size = me.small_font_size*6
 
         me.small_inter = 0.5;
 
@@ -390,8 +391,8 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
             "y" : 1,
             "dx" : 1,
             "dy" : 1,
-            "fill" : '#101060',
-            "stroke" : '#8080F0',
+            "fill" : '#101010',
+            "stroke" : '#808080',
             "stroke-width" : "0.5pt",
             "size" : 0.2,
             "position" : 'start',
@@ -403,7 +404,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
         return def
     }
 
-    writeText(opt = {}) {
+    writeText(opt = {}) { /// MOUHAHAHAHAHA
         let me = this
         let settings = me.defaultWriteText()
         _.forEach(opt,(v,k)=>{
@@ -416,17 +417,17 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
         if (!me.daddy) {
             console.error('Daddy is undefined for writeText!')
         } else {
-            let sentences = (""+settings["text"]).split("; ")
+            let sentences = String(settings.text).split("; ")
             let lineCnt=0
             let t = me.daddy.append('text')
-                .attr('x', me.step * settings["x"])
-                .attr('y', me.step * settings["y"])
-                .style('fill', settings["fill"])
-                 .style('stroke', settings["stroke"])
+                .attr('x', me.step * settings.x)
+                .attr('y', me.step * settings.y)
+                .style('fill', settings.fill)
+                 .style('stroke', settings.stroke)
                 .style('stroke-width', settings["stroke-width"])
-                .style("text-anchor", settings["position"])
-                .style("font-size", me.step*settings["size"] + 'pt')
-                .style("font-family", settings["font"])
+                .style("text-anchor", settings.position)
+                .style("font-size", me.step*settings.size + 'pt')
+                .style("font-family", settings.font)
                 .text("")
             let breaknext = false
             _.forEach(sentences,(sentence) => {
@@ -436,6 +437,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
                 }else if (realword == "true"){
                     realword = ""
                 }
+                console.log("sentence",sentence)
                 if (settings.width==0){
                     let tspan = t.append("tspan")
                         .attr('x', me.step * settings["x"])
@@ -444,21 +446,27 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
                         .text(realword)
                 }else{
                     let words = realword.split(" ")
+                    let tspan = t.append("tspan")
+                        .attr('x', me.step * settings["x"])
+                        .attr('y', me.step * settings.y)
+                        .attr('dy', ((me.step*settings.size)*lineCnt++) + "pt")
+                        .text("")
+                    let max_width = settings.width * me.step
                     _.forEach(words,(word) => {
-                        let tspan = t.append("tspan")
-                            .attr('x', me.step * settings["x"])
-                            .attr('y', me.step * settings["y"])
-                            .attr('dy', (me.step*settings["size"]*lineCnt++) + "pt")
-                            .text(word)
-                        /* @todo */
-//                         if ((tspan.node().getComputedTextLength() > settings.width * me.step) ) {
-//
-//                         }else{
-//
-//                         }
+                         let text_width  = tspan.node().getComputedTextLength()
+                         if (text_width > max_width)  {
+                            console.log("** New line")
+                            tspan = t.append("tspan")
+                                .attr('x', me.step * settings.x)
+                                .attr('y', me.step * settings.y)
+                                .attr('dy', ((me.step*settings.size)*lineCnt++) + "pt")
+                                .text(word)
+                         }else{
+                            console.log("** New line")
+                            let txt = tspan.text()+" "+word
+                            tspan.text(txt)
+                        }
                     })
-
-
                 }
             })
             me.report["lines"] = lineCnt
@@ -488,7 +496,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
     }
 
     drawPath(d, x, y, fill, stroke) {
-        let me = this;
+        let me = this
         if (!me.daddy) {
             console.error('Daddy is undefined for drawPath !')
         } else {
@@ -625,6 +633,11 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
             .attr("class", "page")
             .attr("transform", "translate(" + 0 * me.step + "," + 0 * me.step + ")")
 
+        me.audit = me.svg.append("g")
+            .attr("class", "page")
+            .attr("transform", "translate(" + 0 * me.step + "," + 0 * me.step + ")")
+
+
         me.ui = me.vis.append('g')
 
 
@@ -658,7 +671,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
         ;
         // Grid
         if (me.debug) {
-            let verticals = me.back.append('g')
+            let verticals = me.audit.append('g')
                 .attr('class', 'verticals')
                 .selectAll("g")
                 .data(d3.range(0, me.xunits, 1));
@@ -672,10 +685,12 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
                     return d * me.step
                 })
                 .attr('y2', me.yunits * me.step)
-                .style('fill', 'transparent')
-                .style('stroke', '#888')
-                .style('stroke-width', '0.5pt');
-            let horizontals = me.back.append('g')
+                .style('fill', 'none')
+                .style('stroke', '#C11')
+                .style('stroke-width', '1pt')
+                .style('stroke-dasharray', '3 3')
+                .attr('opacity', 0.75)
+            let horizontals = me.audit.append('g')
                 .attr('class', 'horizontals')
                 .selectAll("g")
                 .data(d3.range(0, me.yunits, 1));
@@ -689,9 +704,11 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
                 .attr('y2', function (d) {
                     return d * me.step
                 })
-                .style('fill', 'transparent')
-                .style('stroke', '#888')
-                .style('stroke-width', '0.5pt');
+                .style('fill', 'none')
+                .style('stroke', '#C11')
+                .style('stroke-width', '1pt')
+                .style('stroke-dasharray', '3 3')
+                .attr('opacity', 0.75)
         }
 
     }
@@ -737,8 +754,9 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
         styles["properties"] = ["reference", "category", "he_sp", 'to_sp', 'sa_sp', 'wa_sp', 'sl_sp', 'wl_sp', 'encumbrance', 'tech_level']
         styles["aligns"] = ["start", "start", "start", "start", "start", "start", "start", "start", "start"]
         styles["widths"] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        styles["lefts"] = [0, 4, 6, 6.5, 7, 7.5, 8, 8.5, 9, 10]
-        me.fillList(basex, basey, "armors", styles);
+        styles["lefts"] = [0, 5, 7, 8, 9, 10, 11, 12, 13, 14]
+        me.standardBlock({"x":basex,"y":basey-0.25,"width":15.5,"height":3.5,"title":"Armors"})
+        me.fillList(basex+0.25, basey+0.25, "armors", styles);
     }
 
     fillWeapons(basex = 0, basey = 0) {
@@ -748,8 +766,9 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
         styles["properties"] = ["reference", "category", "caliber", 'weapon_accuracy', 'damage_class', 'rel', 'conceilable', 'clip', 'rof', 'rng']
         styles["aligns"] = ["start", "start", "start", "start", "start", "start", "start", "start", "start", "start"]
         styles["widths"] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        styles["lefts"] = [0, 4, 5, 6, 7, 9, 10, 11, 12, 13]
-        me.fillList(basex, basey, "weapons", styles);
+        styles["lefts"] = [0, 5, 6, 7, 8, 10, 11, 12, 13, 14]
+        me.standardBlock({"x":basex,"y":basey-0.25,"width":15.5,"height":4.5,"title":"Weapons"})
+        me.fillList(basex+0.25, basey+0.25, "weapons", styles);
     }
 
     fillBC(basex = 0, basey = 0) {
@@ -760,7 +779,8 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
         styles["aligns"] = ["multiline", "start", "multiline"]
         styles["widths"] = [2, 0, 6.5]
         styles["lefts"] = [0, 2.5, 3.5]
-        me.fillList(basex, basey, "BC", styles);
+        me.standardBlock({"x":basex-0.25,"y":basey-0.5,"width":9.75,"height":9,"title":"Blessings/Curses"})
+        me.fillList(basex, basey, "BC", styles)
     }
 
     fillBA(basex = 0, basey = 0) {
@@ -769,9 +789,10 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
         styles["labels"] = ["Benefice/Affliction", "Value", "Description", "Note"]
         styles["properties"] = ["benefice_affliction_ref__reference", "benefice_affliction_ref__value", "benefice_affliction_ref__description", "description"]
         styles["aligns"] = ["multiline", "start", "multiline", "multiline"]
-        styles["widths"] = [2, 0, 4.5, 3]
+        styles["widths"] = [1.5, 0, 4, 3]
         styles["lefts"] = [0, 2.5, 3.5, 8]
-        me.fillList(basex, basey, "BA", styles);
+        me.standardBlock({"x":basex-0.25,"y":basey-0.5,"width":11.5,"height":9,"title":"Benefices/Afflictions"})
+        me.fillList(basex, basey, "BA", styles)
     }
 
     fillToDs(basex = 0, basey = 0) {
@@ -781,7 +802,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
         styles["labels"] = ["Type", "History", "Valid", "Pts","Details"]
         styles["properties"] = ["category_text", "reference","valid", "value","description"]
         styles["aligns"] = ["start", "start", "start","start","start"]
-        styles["widths"] = [0, 5, 0,0,16]
+        styles["widths"] = [0, 0, 0,0, 14]
         styles["lefts"] = [0, 1, 3.75,4.5,5.5]
         me.daddy = me.front
         me.standardBlock({"x":basex-0.25,"y":basey-0.35,"width":21.5,"height":12.5,"title":"Life Path Overview"})
@@ -790,6 +811,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
 
     fillOccult(basex = 0, basey = 0) {
         let me = this;
+        me.standardBlock({"x":basex-0.25,"y":basey-0.5,"width":21.5,"height":9.5,"title":"Occult Arts"})
         me.drawRect(basex + 9.75, basey - 0.25, 0.75, 0.75, "transparent", me.draw_stroke, 2, "", 1, 5);
         me.drawRect(basex + 9.75, basey + 0.75, 0.75, 0.75, "transparent", me.draw_stroke, 2, "", 1, 5);
         me.drawText(basex, basey, me.draw_fill, me.draw_stroke, me.medium_font_size, "start", "Occult Arts", 1.0, me.base_font);
@@ -846,13 +868,14 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
     fillShield(basex = 0, basey = 0) {
         let me = this;
         let styles = {}
-        me.drawText(basex, basey, me.draw_fill, me.draw_stroke, me.medium_font_size, "start", "Energy Shields", 1.0, me.base_font);
+        //me.drawText(basex, basey, me.draw_fill, me.draw_stroke, me.medium_font_size, "start", "Energy Shields", 1.0, me.base_font);
         styles["labels"] = ["Shield", "min", "MAX", "Hits"]
         styles["properties"] = ["reference", "protection_min", "protection_max", "hits"]
         styles["aligns"] = ["start", "start", "start"]
         styles["widths"] = [0, 0, 0, 0]
-        styles["lefts"] = [0, 2.25, 2.85, 3.5]
-        me.fillList(basex, basey + me.small_inter, "shields", styles);
+        styles["lefts"] = [0, 3, 3.75, 4.5]
+        me.standardBlock({"x":basex-0.25,"y":basey-0.25,"width":5.5,"height":6.5,"title":"Energy Shield"})
+        me.fillList(basex, basey+0.25, "shields", styles);
     }
 
 
@@ -967,7 +990,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
                         } else if (z == "lower") {
                             data = data.toLowerCase();
                         }
-                        me.writeText({"x":ox + styles["lefts"][j], "y":oy, "stroke":stroke,"fill": stroke, "size":size, "position":styles["aligns"][j], "text":data, "font":font});
+                        me.writeText({"x":ox + styles["lefts"][j], "y":oy, "stroke":stroke,"fill": stroke, "size":size, "position":styles["aligns"][j], "text":data, "font":font,"width":styles["widths"][j]});
 
 //                     }
                 });
@@ -982,7 +1005,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
         let me = this;
         let oy = basey;
         let ox = basex;
-        me.daddy = me.character;
+        me.daddy = me.front;
         me.drawRect(ox + 1, oy + 1, 0.8, 0.8, "transparent", me.draw_fill, 2);
         me.drawRect(ox + 1, oy + 2, 0.8, 0.8, "transparent", me.draw_fill, 2, "5 3");
         me.drawRect(ox + 1, oy + 3, 0.8, 0.8, "transparent", me.draw_fill, 4);
@@ -993,36 +1016,38 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
 
     }
 
-    fillExtras(basey) {
+    fillExtras(basex,basey) {
         let me = this;
         let oy = basey - 0.25;
-        let ox = -0.5;
-        me.daddy = me.character;
-        me.drawText(ox + 3.25, oy + 0.75, me.draw_fill, me.draw_stroke, me.small_font_size, "middle", "HIT POINTS", 1.0);
-        me.drawRect(ox + 2, oy + 1.0, 2.5, 1, "transparent", me.draw_fill, 4);
-        me.drawText(ox + 2.5, oy + 2.50, me.draw_fill, me.draw_stroke, me.small_font_size, "middle", "Stamina", 1.0);
-        me.drawText(ox + 4.0, oy + 2.50, me.draw_fill, me.draw_stroke, me.small_font_size, "middle", "Penality", 1.0);
-        me.drawRect(ox + 2, oy + 2.75, 1, 1, "transparent", me.draw_fill, 2);
-        me.drawRect(ox + 3.5, oy + 2.75, 1, 1, "transparent", me.draw_fill, 2);
-        me.drawText(ox + 2.5, oy + 4.25, me.draw_fill, me.draw_stroke, me.small_font_size, "middle", "Save", 1.0);
-        me.drawText(ox + 4.0, oy + 4.25, me.draw_fill, me.draw_stroke, me.small_font_size - 2, "middle", "Shield Hits", 1.0);
-        me.drawRect(ox + 2, oy + 4.5, 1, 1, "transparent", me.draw_fill, 2);
-        me.drawRect(ox + 3.5, oy + 4.5, 1, 1, "transparent", me.draw_fill, 2);
+        let ox = basex;
 
-        me.drawText(ox + 2.5, oy + 6.00, me.draw_fill, me.draw_stroke, me.small_font_size - 2, "middle", "Shield Power", 1.0);
-        me.drawText(ox + 4.0, oy + 6.00, me.draw_fill, me.draw_stroke, me.small_font_size - 2, "middle", "Trigger Range", 1.0);
-        me.drawRect(ox + 2, oy + 6.25, 1, 1, "transparent", me.draw_fill, 2);
-        me.drawRect(ox + 3.5, oy + 6.25, 1, 1, "transparent", me.draw_fill, 2);
+        me.standardBlock({"x":basex-0.25,"y":basey,"width":15.5,"height":11,"title":"Health"})
+        me.daddy = me.front;
+        me.drawText(ox + 1.25, oy + 0.75, me.draw_fill, me.draw_stroke, me.small_font_size, "middle", "HIT POINTS", 1.0);
+        me.drawRect(ox + 0, oy + 1.0, 2.5, 1, "transparent", me.draw_fill, 4);
+        me.drawText(ox + 0.5, oy + 2.50, me.draw_fill, me.draw_stroke, me.small_font_size, "middle", "Stamina", 1.0);
+        me.drawText(ox + 2.0, oy + 2.50, me.draw_fill, me.draw_stroke, me.small_font_size, "middle", "Penality", 1.0);
+        me.drawRect(ox + 0, oy + 2.75, 1, 1, "transparent", me.draw_fill, 2);
+        me.drawRect(ox + 1.5, oy + 2.75, 1, 1, "transparent", me.draw_fill, 2);
+        me.drawText(ox + 0.5, oy + 4.25, me.draw_fill, me.draw_stroke, me.small_font_size, "middle", "Save", 1.0);
+        me.drawText(ox + 2.0, oy + 4.25, me.draw_fill, me.draw_stroke, me.small_font_size - 2, "middle", "Shield Hits", 1.0);
+        me.drawRect(ox + 0, oy + 4.5, 1, 1, "transparent", me.draw_fill, 2);
+        me.drawRect(ox + 1.5, oy + 4.5, 1, 1, "transparent", me.draw_fill, 2);
+
+        me.drawText(ox + 0.5, oy + 6.00, me.draw_fill, me.draw_stroke, me.small_font_size - 2, "middle", "Shield Power", 1.0);
+        me.drawText(ox + 2.0, oy + 6.00, me.draw_fill, me.draw_stroke, me.small_font_size - 2, "middle", "Trigger Range", 1.0);
+        me.drawRect(ox + 0, oy + 6.25, 1, 1, "transparent", me.draw_fill, 2);
+        me.drawRect(ox + 1.5, oy + 6.25, 1, 1, "transparent", me.draw_fill, 2);
 
         if (me.blank === false) {
-            me.drawText(ox + 2.5, oy + 1.5, me.user_fill, me.user_stroke, me.big_font_size, "middle", me.data["SA_END"], 1.0, me.user_font);
-            me.drawText(ox + 2.5, oy + 3.25, me.user_fill, me.user_stroke, me.big_font_size, "middle", me.data["SA_STA"], 1.0, me.user_font);
-            me.drawText(ox + 2.5, oy + 5, me.user_fill, me.user_stroke, me.big_font_size, "middle", me.data["SA_STU"], 1.0, me.user_font);
+            me.drawText(ox + 0.5, oy + 1.75, me.user_fill, me.user_stroke, me.big_font_size, "middle", me.data["SA_END"], 1.0, me.user_font);
+            me.drawText(ox + 0.5, oy + 3.5, me.user_fill, me.user_stroke, me.big_font_size, "middle", me.data["SA_STA"], 1.0, me.user_font);
+            me.drawText(ox + 0.5, oy + 5.25, me.user_fill, me.user_stroke, me.big_font_size, "middle", me.data["SA_STU"], 1.0, me.user_font);
 
             if (me.data['shields'].length > 0) {
                 let shield = me.data['shields'][0]
-                me.drawText(ox + 2.5, oy + 6.75, me.user_fill, me.user_stroke, me.medium_font_size, "middle", shield.hits, 1.0, me.user_font);
-                me.drawText(ox + 4.0, oy + 6.75, me.user_fill, me.user_stroke, me.medium_font_size, "middle", shield.protection_min + "/" + shield.protection_max, 1.0, me.user_font);
+                me.drawText(ox + 0.5, oy + 6.75, me.user_fill, me.user_stroke, me.medium_font_size, "middle", shield.hits, 1.0, me.user_font);
+                me.drawText(ox + 2.0, oy + 6.75, me.user_fill, me.user_stroke, me.medium_font_size, "middle", shield.protection_min + "/" + shield.protection_max, 1.0, me.user_font);
             }
 
         }
@@ -1034,11 +1059,11 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
             "Strong Leg .... 3-4 ",
             "Weak Leg ...... 1-2 "];
         _.forEach(locstring, function (v, k) {
-            me.drawText(ox + 2.0, oy + 8.0 + 0.35 * k, me.draw_fill, me.shadow_stroke, me.small_font_size - 4, "left", v, 1.0, me.mono_font);
+            me.drawText(ox + 0.0, oy + 8.0 + 0.35 * k, me.draw_fill, me.shadow_stroke, me.small_font_size - 4, "left", v, 1.0, me.mono_font);
         });
 
 
-        ox = 5;
+        ox = basex+9;
         me.drawText(ox + 0.4, oy + 1.75, me.draw_fill, me.draw_stroke, me.small_font_size, "middle", "WA", 1.0);
         me.drawText(ox + 1.4, oy + 0.75, me.draw_fill, me.draw_stroke, me.small_font_size, "middle", "Head", 1.0);
         me.drawText(ox + 2.4, oy + 1.75, me.draw_fill, me.draw_stroke, me.small_font_size, "middle", "SA", 1.0);
@@ -1050,37 +1075,35 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
             if (me.data["armors"].length > 0) {
                 let armor = me.data["armors"][0]
                 if (armor.left_arm) {
-                    me.drawText(ox + 0.4, oy + 2.50, me.user_fill, me.user_stroke, me.big_font_size, "middle", armor.stopping_power, 1.0, me.user_font);
+                    me.drawText(ox + 0.4, oy + 2.75, me.user_fill, me.user_stroke, me.big_font_size, "middle", armor.stopping_power, 1.0, me.user_font);
                 }
                 if (armor.head) {
-                    me.drawText(ox + 1.4, oy + 1.50, me.user_fill, me.user_stroke, me.big_font_size, "middle", armor.stopping_power, 1.0, me.user_font);
+                    me.drawText(ox + 1.4, oy + 1.75, me.user_fill, me.user_stroke, me.big_font_size, "middle", armor.stopping_power, 1.0, me.user_font);
                 }
                 if (armor.right_arm) {
-                    me.drawText(ox + 2.4, oy + 2.50, me.user_fill, me.user_stroke, me.big_font_size, "middle", armor.stopping_power, 1.0, me.user_font);
+                    me.drawText(ox + 2.4, oy + 2.75, me.user_fill, me.user_stroke, me.big_font_size, "middle", armor.stopping_power, 1.0, me.user_font);
                 }
                 if (armor.left_leg) {
-                    me.drawText(ox + 0.4, oy + 6.50, me.user_fill, me.user_stroke, me.big_font_size, "middle", armor.stopping_power, 1.0, me.user_font);
+                    me.drawText(ox + 0.4, oy + 6.75, me.user_fill, me.user_stroke, me.big_font_size, "middle", armor.stopping_power, 1.0, me.user_font);
                 }
                 if (armor.torso) {
-                    me.drawText(ox + 1.4, oy + 5.50, me.user_fill, me.user_stroke, me.big_font_size, "middle", armor.stopping_power, 1.0, me.user_font);
+                    me.drawText(ox + 1.4, oy + 5.75, me.user_fill, me.user_stroke, me.big_font_size, "middle", armor.stopping_power, 1.0, me.user_font);
                 }
                 if (armor.right_leg) {
-                    me.drawText(ox + 2.4, oy + 6.50, me.user_fill, me.user_stroke, me.big_font_size, "middle", armor.stopping_power, 1.0, me.user_font);
+                    me.drawText(ox + 2.4, oy + 6.75, me.user_fill, me.user_stroke, me.big_font_size, "middle", armor.stopping_power, 1.0, me.user_font);
                 }
             }
         }
 
 
         oy += 4;
+        //ox = basex+9
         me.drawText(ox + 0.4, oy + 1.75, me.draw_fill, me.draw_stroke, me.small_font_size, "middle", "WL", 1.0);
         me.drawText(ox + 1.4, oy + 0.75, me.draw_fill, me.draw_stroke, me.small_font_size, "middle", "Torso", 1.0);
         me.drawText(ox + 2.4, oy + 1.75, me.draw_fill, me.draw_stroke, me.small_font_size, "middle", "SL", 1.0);
         me.limbColumn(ox - 1, oy + 1);
         me.limbColumn(ox, oy);
         me.limbColumn(ox + 1, oy + 1);
-        me.fillSanity(8.5, 23);
-        me.fillGlamour(8.5, 26.5);
-        me.fillKarma(8.5, 31);
 
 
         let constitution = 5;
@@ -1092,17 +1115,17 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
             body = me.data['PA_BOD'];
         }
 
-        me.drawRect(5.0, oy + 5.5, wstep * body, 0.15, me.shadow_fill, me.shadow_stroke, 1);
-        me.drawRect(5.0 + wstep * body, oy + 5.5, wstep * (constitution), 0.15, me.shadow_fill, me.draw_stroke, 1, "5 3");
-        me.drawRect(5.0 + wstep * (body + constitution), oy + 5.5, wstep * (20 - constitution - body), 0.15, me.shadow_fill, me.draw_stroke, 2);
+        me.drawRect(ox, oy + 5.5, wstep * body, 0.15, me.shadow_fill, me.shadow_stroke, 1);
+        me.drawRect(ox + wstep * body, oy + 5.5, wstep * (constitution), 0.15, me.shadow_fill, me.draw_stroke, 1, "5 3");
+        me.drawRect(ox + wstep * (body + constitution), oy + 5.5, wstep * (20 - constitution - body), 0.15, me.shadow_fill, me.draw_stroke, 2);
 
-        me.drawText(5.0 + wstep * body, oy + 5.35, me.draw_fill, me.draw_stroke, me.small_font_size - 4, "middle", body, 1.0);
-        me.drawText(5.0 + wstep * (body + constitution), oy + 5.35, me.draw_fill, me.draw_stroke, me.small_font_size - 4, "middle", (body + constitution), 1.0);
+        me.drawText(ox + wstep * body, oy + 5.35, me.draw_fill, me.draw_stroke, me.small_font_size - 4, "middle", body, 1.0);
+        me.drawText(ox + wstep * (body + constitution), oy + 5.35, me.draw_fill, me.draw_stroke, me.small_font_size - 4, "middle", (body + constitution), 1.0);
 
 
-        me.drawText(5.0 + wstep * (body / 2), oy + 5.95, me.draw_fill, me.draw_stroke, me.small_font_size - 4, "middle", "ok", 1.0);
-        me.drawText(5.0 + wstep * (body + constitution / 2), oy + 5.95, me.draw_fill, me.draw_stroke, me.small_font_size - 4, "middle", "MW", 1.0);
-        me.drawText(5.0 + wstep * ((body + constitution) + (20 - constitution - body) / 2), oy + 5.95, me.draw_fill, me.draw_stroke, me.small_font_size - 4, "middle", "SW", 1.0);
+        me.drawText(ox + wstep * (body / 2), oy + 5.95, me.draw_fill, me.draw_stroke, me.small_font_size - 4, "middle", "ok", 1.0);
+        me.drawText(ox + wstep * (body + constitution / 2), oy + 5.95, me.draw_fill, me.draw_stroke, me.small_font_size - 4, "middle", "MW", 1.0);
+        me.drawText(ox + wstep * ((body + constitution) + (20 - constitution - body) / 2), oy + 5.95, me.draw_fill, me.draw_stroke, me.small_font_size - 4, "middle", "SW", 1.0);
 
 
         if (me.blank === false) {
@@ -1147,7 +1170,10 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
     }
 
 
-    baseStat(name, value, ox, oy, pos = 0, fat = false) {
+    baseStat(name, value, ox, oy, pos = 0, fat = false, transp=false) {
+        // pos = 0 : full width
+        // pos = 1 : left
+        // pos = 2 : right
         let me = this
         let boxWidth = (pos==0 ? 6 : 2.9)
         let boxHeight = (fat ? 1.75 : 0.8)
@@ -1158,30 +1184,25 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
                 let y = oy
                 return `translate(${x*me.step},${y*me.step})`
                 })
-        if (me.debug) {
-            item.append('rect')
-                .attr('width', boxWidth*me.step)
-                .attr('height', boxHeight*me.step)
-                .style('fill', 'lime')
-                .style('stroke', 'white')
-                .style('stroke-width', '1pt')
-                .attr('opacity', 0.5)
-        }
-
+//         if (me.debug) {
+//             item.append('rect')
+//                 .attr('width', boxWidth*me.step)
+//                 .attr('height', boxHeight*me.step)
+//                 .style('fill', 'lime')
+//                 .style('stroke', 'white')
+//                 .style('stroke-width', '1pt')
+//                 .attr('opacity', 0.5)
+//         }
+        if (transp == false){
         item.append('rect')
-            .attr('x', 0)
-            .attr('y', 0)
             .attr('rx', 8)
             .attr('width', boxWidth*me.step)
             .attr('height', me.step * boxHeight)
             .style('fill', me.white)
             .style('stroke', me.draw_stroke)
             .style('stroke-width', '2pt')
-            //.style('stroke-dasharray', me.strokedebris_short)
         ;
         item.append('text')
-            .attr('x', 0)
-            .attr('y', 0)
             .attr("dx", 5+"pt")
             .attr("dy", me.step * 0.65)
             .style("text-anchor", 'start')
@@ -1193,18 +1214,40 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
             .text(function () {
                 return name.charAt(0).toUpperCase() + name.slice(1);
             });
+        }
         item.append('text')
-            .attr('x', (boxWidth / 2)*me.step)
+            .attr('x', () => {
+                let val = (boxWidth / 2)*me.step
+                if (!fat){
+                    if (pos==1){
+                       val = (boxWidth-0.25)*me.step
+                    }else if (pos==2){
+                       val = (boxWidth-0.25)*me.step
+                    }else{
+                        val = (boxWidth-0.25)*me.step
+                    }
+                }
+                return val
+            })
             .attr('y', (boxHeight / 2)*me.step)
             .attr("dy", fat ? 0 : me.big_font_size*0+"pt")
-            .style("text-anchor", (fat ? "middle" :'start'))
+            .style("text-anchor", (fat ? "middle" :
+                                    (pos == 0 ? "end":(pos==1?"end":"end"
+                                    )
+                                  ))
+            )
+            //.style("font-family", function (d) {
             .style("font-family", function (d) {
                 return me.user_font;
             })
             .style("font-size", function (d) {
                 let res = me.medium_font_size + 'pt'
                 if (fat) {
-                    res = me.big_font_size*1.2 + 'pt';
+                    if (transp) {
+                        res = me.medium_font_size + 'pt';
+                    }else{
+                        res = me.medium_font_size*1.2 + 'pt';
+                    }
                 }
                 return res;
             })
@@ -1231,7 +1274,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
 
     drawAttribute(name, desc, value, ox, oy, pos = 1, scale = 10, translation="") {
         let me = this
-        let attwidth = 2
+        let attwidth = 3.5
         let item = me.daddy.append('g')
             .attr('class', 'attribute')
             .attr('transform',(d) => {
@@ -1255,7 +1298,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
                 .attr('opacity',0.75)
         }
         item.append('circle')
-            .attr('cx', pos == 2 ? me.step*0.5 : me.step*1.5)
+            .attr('cx', pos == 2 ? me.step*0.5 : me.step*(attwidth-0.5))
             .attr('cy', me.step * 0.5)
             .attr('r', 0.4 * me.step)
             .style('fill', 'white')
@@ -1284,9 +1327,9 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
             })
         ;
         item.append('text')
-            .attr('x', 1 * me.step)
+            .attr('x', pos == 2 ? me.step*(attwidth-0.5) : me.step*(0.5))
             .attr("y", me.step * 0.4)
-            .style("text-anchor", pos == 2 ? "start" : "end")
+            .style("text-anchor", pos == 2 ? "middle" : "middle")
             .style("font-family", me.base_font)
             .style("font-size", me.small_font_size + 'pt')
             .style("fill", me.draw_fill)
@@ -1296,10 +1339,10 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
                 return name.charAt(0).toUpperCase() + name.slice(1);
             });
         item.append('text')
-            .attr('x', 1 * me.step)
+            .attr('x', pos == 2 ? me.step*(attwidth-0.5) : me.step*(0.5))
             .attr("y", me.step * 0.4)
-            .attr("dy", me.step * 0.2)
-            .style("text-anchor", pos == 2 ? "start" : "end")
+            .attr("dy", me.step * 0.25)
+            .style("text-anchor", pos == 2 ? "end" : "start")
             .style("font-family", me.base_font)
             .style("font-size", me.small_font_size + 'px')
             .style("fill", me.draw_fill)
@@ -1311,10 +1354,10 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
 
         if (me.translation){
             item.append('text')
-                .attr('x', 1 * me.step)
+                .attr('x', pos == 2 ? me.step*(attwidth-0.5) : me.step*(0.5))
                 .attr("y", me.step * 0.4)
-                .attr("dy", me.step * 0.4)
-                .style("text-anchor", pos == 2 ? "start" : "end")
+                .attr("dy", me.step * 0.5)
+                .style("text-anchor", pos == 2 ? "end" : "start")
                 .style("font-family", me.base_font)
                 .style("font-size", me.small_font_size + 'px')
                 .style("fill", me.draw_fill)
@@ -1327,7 +1370,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
 
 
         item.append('text')
-            .attr('x', pos==2 ? 0.5*me.step : 1.5*me.step)
+            .attr('x', pos==2 ? 0.5*me.step : (attwidth-0.5)*me.step)
             .attr("y", 0.5*me.step)
             .attr("dy", me.big_font_size*.3+'pt')
             .style("text-anchor", 'middle')
@@ -1353,10 +1396,16 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
 
     fillAttributes(ot) {
         let me = this;
-        let bx = 1.25;
+        me.fillPrimaries(ot)
+        me.fillSecondaries(ot)
+    }
+
+    fillPrimaries(ot) {
+        let me = this
         let oy = ot+7;
+        let bx = 1.25;
         me.daddy = me.character
-        me.standardBlock({"x":bx,"y":oy,"width":4,"height":6.5,"title":"Primary Attributes"})
+        me.standardBlock({"x":bx,"y":oy,"width":7,"height":7,"title":"Primary Attributes"})
         me.drawAttribute("STR", "strength", me.data["PA_STR"], bx, oy, 1,10,"force")
         me.drawAttribute("CON", "constitution", me.data["PA_CON"], bx, oy, 2,10,"constitution")
         me.drawAttribute("BOD", "body", me.data["PA_BOD"], bx, oy + 1 ,  1,10,"carrure")
@@ -1372,8 +1421,14 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
         me.drawAttribute("AGI", "agility", me.data["PA_AGI"], bx, oy + 5 ,  1, 10,"agilité")
         me.drawAttribute("AWA", "awareness", me.data["PA_AWA"], bx, oy + 5 ,  2,10, "vigilance")
 
-        bx = 5.5
-        me.standardBlock({"x":bx,"y":oy,"width":4,"height":6.5,"title":"Secondary Attributes"})
+        }
+
+    fillSecondaries(ot) {
+        let me = this
+        let oy = ot+7;
+        let bx = 8.5
+        me.daddy = me.character
+        me.standardBlock({"x":bx,"y":oy,"width":7,"height":7,"title":"Secondary Attributes"})
         me.drawAttribute("REC", "STR+CON", me.data["SA_REC"], bx, oy,  1, 20)
         me.drawAttribute("STA", "BOD/2-1", me.data["SA_STA"], bx, oy,  2, 5)
         me.drawAttribute("END", "(BOD+CON)x5", me.data["SA_END"], bx, oy + 1 ,  1, 100)
@@ -1385,38 +1440,45 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
         me.drawAttribute("HUM", "(TEM+WIL)x5", me.data["SA_HUM"], bx, oy + 3 ,  2, 100)
 
         me.drawAttribute("PAS", "TEM+AWA", me.data["SA_PAS"], bx, oy + 4 ,  1, 20)
-        me.drawAttribute("WYR", "INT+DEX", me.data["SA_WYR"], bx, oy + 4 ,  2, 20)
+        me.drawAttribute("WYR", "INT+DEX+TEC", me.data["SA_WYR"], bx, oy + 4 ,  2, 20)
         me.drawAttribute("SPD", "MOV/2", me.data["SA_SPD"], bx, oy + 5 ,  1, 100)
         me.drawAttribute("RUN", "MOVx2", me.data["SA_RUN"], bx, oy + 5 ,  2, 20)
-    }
+        }
+
 
     fillBasics(oy) {
-        let me = this;
+        let me = this
         let bx = 16.75 ;
         let basex = 12;
         let basey = 9;
-        me.baseStat("Player", me.data["player"], bx, oy , 0)
-        me.baseStat("Caste", me.data["caste"], bx, oy + 1, )
-        me.baseStat("Species", me.data["race"], bx, oy + 2, )
-        me.baseStat("Rank", me.data["ranking"], bx, oy + 3, )
-        me.baseStat("Gender", me.data["gender"], bx, oy +  4,  1)
+        me.baseStat("Player", me.data["player"], bx, oy)
+        me.baseStat("Caste", me.data["caste"], bx, oy + 1)
+        me.baseStat("Species", me.data["race"], bx, oy + 2)
+        me.baseStat("Rank", me.data["rank"]+" ("+me.data["ranking"]+")", bx, oy + 3)
+        me.baseStat("Gender", me.data["gender"], bx, oy + 4,1)
         me.baseStat("Age", me.data["age"], bx, oy +  4, 2)
         me.baseStat("Height (cm)", me.data["height"], bx, oy + 5,  1)
         me.baseStat("Weight (kg)", me.data["weight"], bx, oy + 5,  2)
         bx = 1.25 ;
         me.baseStat("", me.data["full_name"], bx, oy  , 0, true);
-        me.baseStat("Alliance", me.data["faction"], bx, oy + 2);
+        if (me.data.alias){
+            me.baseStat("", `"${me.data.alias}"`, bx, oy+0.5  , 0, true,true);
+        }
+        me.baseStat("Alliance", me.data["faction"], bx, oy + 2,0);
         bx = 9.25 ;
+    }
 
-        bx = 1.25
-        me.standardBlock({"x":bx,"y":4.5,"width":6,"height":6.5,"title":"Life Path"})
+    fillLifePaths(oy) {
+        let me = this
+        let bx = 1.25
+        me.standardBlock({"x":bx,"y":oy,"width":10,"height":6.5,"title":"Life Path"})
         let ty = 5
         bx += 0.25
         let yof1 = 0.45
 //        let yof2 = 0.3
-        let dots = ". . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ."
+        let dots = ". . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ."
         let pts_dots = ""
-        let bxw = 5.5
+        let bxw = 9.5
         let bxg = 0.25
         let f = me.user_font
         me.drawText(bx, ty, me.draw_fill, me.shadow_stroke, me.small_font_size, "start", "Birthright")
@@ -1496,7 +1558,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
                 }
             })
         }
-        me.standardBlock({"x":7.5,"y":4.50,"width":9,"height":6.5,"title":"Story Details"})
+        me.standardBlock({"x":bx+10,"y":oy,"width":5,"height":6.5,"title":""})
 //         if (me.blank == false) {
 //             let dad = me.daddy
 //             let tods_description = []
@@ -1511,8 +1573,8 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
 //             me.daddy = dad
 //         }
 
-        basex = 10
-        basey = 9
+        let basex = 10
+        let basey = 9
         if (0){
             me.standardBlock({"x":9.75,"y":9.25,"width":6.75,"height":1.75,"title":"Experience"})
             me.drawCircle(0.4, "5 2", (basex + 1) * me.step, (basey + 1.0) * me.step, 2);
@@ -1538,12 +1600,12 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
         let me = this;
         me.spe_col_max = 3;
         let oy = basey;
-        me.column_amount = 10;
-        let ox = 10.25;
-        let boxWidth = 4.15
-        let boxHeight = 0.6
-        me.standardBlock({"x":10,"y":basey,"width":12.75,"height":6.5,"title":"Skills"})
-        let skills = me.character.append('g').selectAll('g')
+        me.column_amount = 32;
+        let ox = 16.25;
+        let boxWidth = 7.0
+        let boxHeight = 0.675
+        me.standardBlock({"x":16,"y":basey,"width":6.75,"height":21.25,"title":"Skills"})
+        let skills = me.front.append('g').selectAll('g')
             .data(me.data["skills_list"]);
         let skill_in = skills.enter()
             .append('g')
@@ -1633,21 +1695,23 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
         skill_in.append('rect')
             .attr('x', (boxWidth*5/6)*me.step)
             .attr('y', 1*me.step/12)
-            .attr('width', 5*me.step/12)
-            .attr('height', 5*me.step/12)
+            .attr('rx', 1*me.step/12)
+            .attr('ry', 1*me.step/12)
+            .attr('width', 7*me.step/12)
+            .attr('height', 7*me.step/12)
             .style('fill', me.white)
             .style('stroke', me.draw_stroke)
             .style('stroke-width', '1pt')
             .attr('opacity', 1)
 
         skill_in.append('text')
-            .attr('x', boxWidth * me.step*9/10)
-            .attr('y', boxHeight * me.step *4/5)
+            .attr('x', boxWidth * me.step*21/24)
+            .attr('y', boxHeight * me.step *5/5)
             .attr('dy', me.big_font_size*0+"pt")
             .style("fill", me.user_fill)
             .style("stroke", me.user_stroke)
             .style("stroke-width", '0.5pt')
-            .style("text-anchor", 'end')
+            .style("text-anchor", 'middle')
             .style("font-family", me.user_font)
             .style("font-size", function (d) {
                     let size = me.big_font_size;
@@ -1727,11 +1791,11 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
     fillDegrees(basey) {
         let me = this;
         me.spe_col_max = 3;
-        let oy = basey;
-        me.column_amount = 11;
+        let oy = basey+0.25;
+        me.column_amount = 32;
         let ox = 1.5;
-        let boxWidth = 5
-        let boxHeight = 0.35
+        let boxWidth = 7.5
+        let boxHeight = 0.45
 
         //console.log("DEGREES LIST", me.data.degrees_list)
 
@@ -1754,7 +1818,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
 
 
 
-        me.standardBlock({"x":ox-0.25,"y":basey-0.25,"width":21.5,"height":4.5,"title":"Degrees"})
+        me.standardBlock({"x":ox-0.25,"y":basey,"width":14.25,"height":14.00,"title":"Degrees"})
         let degrees = me.front.append('g').selectAll('g')
             .data(reworked_data_set);
         let group = ""
@@ -1767,6 +1831,17 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
                 let y = (oy + (d.idx % me.column_amount) * boxHeight)
                 return `translate(${x*me.step},${y*me.step})`
             })
+        if (me.debug){
+            degree_in.append('rect')
+                .attr('width', boxWidth*me.step*0.9)
+                .attr('height', boxHeight*me.step*0.9)
+                .style('x', 0)
+                .style('y', 0)
+                .style('fill', 'none')
+                .style('stroke', 'lime')
+                .style('stroke-width', '1pt')
+        }
+
 
         degree_in.append('rect')
             .attr('width', boxWidth*me.step*0.9)
@@ -1834,22 +1909,22 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
 
         degrees.exit().remove();
 
-        if (me.blank) {
-            let lines = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19];
-            degree_in.append('line')
-                .data(lines)
-                .attr('x1', 0)
-                .attr('x2', boxWidth*me.step)
-                .attr('y1', boxHeight*me.step)
-                .attr('y2', boxHeight*me.step)
-                .style("fill", me.shadow_fill)
-                .style("stroke", me.shadow_stroke)
-                .style("stroke-dasharray", "4 3")
-                .style("stroke-width", '2pt')
-                .attr("opacity", 0.3)
-            ;
-
-        }
+//         if (me.blank) {
+//             let lines = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19];
+//             degree_in.append('line')
+//                 .data(lines)
+//                 .attr('x1', 0)
+//                 .attr('x2', boxWidth*me.step)
+//                 .attr('y1', boxHeight*me.step)
+//                 .attr('y2', boxHeight*me.step)
+//                 .style("fill", me.shadow_fill)
+//                 .style("stroke", me.shadow_stroke)
+//                 .style("stroke-dasharray", "4 3")
+//                 .style("stroke-width", '2pt')
+//                 .attr("opacity", 0.3)
+//             ;
+//
+//         }
 
 
 //         me.daddy = me.character;
@@ -1997,7 +2072,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
 
     standardBlock(params={}){
         let me = this
-        let layer = me.daddy
+        let layer = me.daddy = me.front.append("g")
         layer.append("rect")
             .attr("class","standardBlock")
             .attr("x",params.x*me.step)

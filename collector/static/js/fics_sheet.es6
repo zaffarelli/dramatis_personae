@@ -9,7 +9,7 @@ class FICSSheet extends Sheet {
         let me = this;
         super.init();
         //me.version = '0.9.4'
-        me.bottom_disclaimer = "Fading Suns FICS character sheet version " + me.version + " - 2024 - Zaffarelli - generated with dP"
+        me.bottom_disclaimer = "Fading Suns FICS " + me.version + " character sheet - 2025 - Zaffarelli - generated with dP "
     }
 
     drawButtons() {
@@ -41,16 +41,16 @@ class FICSSheet extends Sheet {
             //me.drawLine(9.75, 9.75, 11.25, 18, me.draw_fill, me.draw_fill, 6, me.strokedebris) // West of Skills
             //me.drawLine(10, 23, 17, 17, me.draw_fill, me.draw_fill, 3, me.strokedebris) // Below Skills
             //me.drawLine(1, 23, 18.25, 18.25, me.draw_fill, me.draw_fill, 6, me.strokedebris) // Below Attributes / Skills
-            me.drawLine(1, 23, 23, 23, me.draw_fill, me.draw_fill, 6, me.strokedebris) // Below Degrees
+            //me.drawLine(1, 23, 23, 23, me.draw_fill, me.draw_fill, 6, me.strokedebris) // Below Degrees
 
 //             let a = 9.35*me.step
 //             let b = 0.25*me.step
 
-            me.drawLine(8.5, 8.5, 23, 33, me.draw_fill, me.draw_fill, 3, me.strokedebris);
-            me.drawLine(13.5, 13.5, 23, 33, me.draw_fill, me.draw_fill, 3, me.strokedebris);
+            //me.drawLine(8.5, 8.5, 23, 33, me.draw_fill, me.draw_fill, 3, me.strokedebris);
+            //me.drawLine(13.5, 13.5, 23, 33, me.draw_fill, me.draw_fill, 3, me.strokedebris);
 
-            me.drawLine(8.5, 13.5, 26.5, 26.5, me.draw_fill, me.draw_fill, 3, me.strokedebris) // Between Sanity and Glamour
-            me.drawLine(8.5, 13.5, 31, 31, me.draw_fill, me.draw_fill, 3, me.strokedebris) // Between Glamour and Wyrd
+            //me.drawLine(8.5, 13.5, 26.5, 26.5, me.draw_fill, me.draw_fill, 3, me.strokedebris) // Between Sanity and Glamour
+            //me.drawLine(8.5, 13.5, 31, 31, me.draw_fill, me.draw_fill, 3, me.strokedebris) // Between Glamour and Wyrd
 
 
         } else if (page === 1) {
@@ -63,15 +63,15 @@ class FICSSheet extends Sheet {
             me.drawLine(0.8, 23.2, 33, 33, me.draw_fill, me.draw_fill, 6)
 
 
-            me.drawLine(1, 17, 5, 5, me.draw_fill, me.draw_fill, 3, me.strokedebris); // Weapons/Armors separator
-            me.drawLine(1, 17, 10, 10, me.draw_fill, me.draw_fill, 3, me.strokedebris); // Below weapons
-            me.drawLine(17, 23, 8, 8, me.draw_fill, me.draw_fill, 3, me.strokedebris); // Below tods
-            me.drawLine(12, 12, 10, 33, me.draw_fill, me.draw_fill, 3); // East BA/BC
-            me.drawLine(1, 12, 29, 29, me.draw_fill, me.draw_fill, 3); // Below shortcuts
-            me.drawLine(17, 17, 2.5, 13, me.draw_fill, me.draw_fill, 3, me.strokedebris); // Right Armor/weapons
+            me.drawLine(1, 17, 5, 5, me.draw_fill, me.draw_fill, 3) // Weapons/Armors separator
+            me.drawLine(1, 17, 10, 10, me.draw_fill, me.draw_fill, 3) // Below weapons
+            me.drawLine(17, 23, 8, 8, me.draw_fill, me.draw_fill, 3)
+//            me.drawLine(12, 12, 10, 33, me.draw_fill, me.draw_fill, 3); // East BA/BC
+  //          me.drawLine(1, 12, 29, 29, me.draw_fill, me.draw_fill, 3); // Below shortcuts
+            me.drawLine(17, 17, 1, 10, me.draw_fill, me.draw_fill, 3, me.strokedebris); // Right Armor/weapons
 
-            me.drawLine(1, 23, 13, 13, me.draw_fill, me.draw_fill, 3, me.strokedebris);
-            me.drawLine(1, 23, 20, 20, me.draw_fill, me.draw_fill, 3, me.strokedebris);
+            //me.drawLine(1, 23, 13, 13, me.draw_fill, me.draw_fill, 3, me.strokedebris);
+            //me.drawLine(1, 23, 20, 20, me.draw_fill, me.draw_fill, 3, me.strokedebris);
 
 
         } else if (page === 2) {
@@ -95,11 +95,27 @@ class FICSSheet extends Sheet {
             me.drawLine(0.8, 23.2, 33, 33, me.draw_fill, me.draw_fill, 6)
 
 
+            me.daddy = me.front;
+            me.drawRect( 1.5, 1.5, 21, 21,"white", me.draw_fill, 1)
+            me.writeText({"x":2,"y": 3, "size": me.small_font_size/me.step, "text":"Small font size"})
+            me.writeText({"x":2,"y": 4, "size": me.medium_font_size/me.step, "text":"Medium font size"})
+            me.writeText({"x":2,"y": 5, "size": me.big_font_size/me.step, "text":"Big font size"})
+            me.writeText({"x":2,"y": 6, "size": me.large_font_size/me.step, "text":"Large font size"})
+            me.writeText({"x":2,"y": 8, "size": me.fat_font_size/me.step, "text":"FADING SUNS fat font size", "font":me.title_font})
+
+            me.writeText({"x":12,"y": 3, "size": me.small_font_size/me.step, "text":"Small font size", "font":me.user_font})
+            me.writeText({"x":12,"y": 4, "size": me.medium_font_size/me.step, "text":"Medium font size", "font":me.user_font})
+            me.writeText({"x":12,"y": 5, "size": me.big_font_size/me.step, "text":"Big font size", "font":me.user_font})
+            me.writeText({"x":12,"y": 6, "size": me.large_font_size/me.step, "text":"Large font size", "font":me.user_font})
+
+
 
         }
 
         // Texts
-        me.decorationText(1.85, 0.85, 0, 'start', me.base_font, me.medium_font_size, me.draw_fill, me.draw_stroke, 0.5, me.post_title, me.front);
+        if (me.page != 0){
+            me.decorationText(2.0, 0.85, 0, 'start', me.base_font, me.medium_font_size, me.draw_fill, me.draw_stroke, 0.5, me.post_title, me.front);
+        }
         me.decorationText(22.85, 33.5, -16, 'end', me.base_font, me.small_font_size, me.draw_fill, me.draw_stroke, 0.5, me.bottom_disclaimer, me.front);
 
         if (!me.blank) {
@@ -122,12 +138,12 @@ class FICSSheet extends Sheet {
         //me.drawJumpgateLogo(12 * me.step, 2.6 * me.step)
         me.decorationText(7.5, 3.25, 0, 'start', me.title_font, me.fat_font_size * 1.35, me.shadow_fill+"7f", me.shadow_stroke, 1, title_text1, me.front, 1);
         me.decorationText(16.5, 3.25, 0, 'end', me.title_font, me.fat_font_size * 1.35, "#2020207f", "#202020", 1, title_text2, me.front, 1);
-        me.decorationText(12, 3.5, 0, 'middle', "Syne Mono", me.medium_font_size, me.draw_fill, me.draw_stroke, 0.5, me.post_title, me.front, 0.8);
-        if (me.data.keyword.includes("SANFRANCIS")){
-            me.decorationText(12.0, 4.0, 0, 'middle', "Rationale", me.large_font_size, me.draw_fill, me.draw_stroke, 0.5, "G . U . N . S . L . I . N . G . E . R . S", me.front);
-            }else{
-            me.decorationText(12.0, 4.0, 0, 'middle', "Rationale", me.large_font_size, me.draw_fill, me.draw_stroke, 0.5, me.pre_title, me.front);
-        }
+        me.decorationText(12, 3.5, 0, 'middle', "Syne Mono", me.small_font_size, me.draw_fill, me.draw_stroke, 0.5, me.post_title, me.front, 0.8);
+        //if (me.data.keyword.includes("SANFRANCIS")){
+            me.decorationText(12.0, 4.0, 0, 'middle', "Rationale", me.big_font_size, me.draw_fill, me.draw_stroke, 0.5, me.pre_title, me.front);
+        //    }else{
+        //    me.decorationText(12.0, 4.0, 0, 'middle', "Rationale", me.big_font_size, me.draw_fill, me.draw_stroke, 0.5, me.pre_title, me.front);
+        //}
         //me.decorationText(4.2, 2.25, 0, 'middle', me.base_font, me.medium_font_size, me.draw_fill, me.draw_stroke, 0.5, me.scenario, me.back);
 
 
@@ -152,22 +168,26 @@ class FICSSheet extends Sheet {
         if (page == 0) {
             me.fillTitle()
             me.fillBasics(1.5)
+            me.fillLifePaths(4.5)
             me.fillAttributes(4.5)
             me.fillSkills(11.5)
-            me.fillDegrees(18.5)
-            me.fillExtras(23)
+            me.fillDegrees(18.75)
         } else if (page == 1) {
             me.fillName(page);
             me.fillArmors(1.25, 1.5);
             me.fillWeapons(1.25, 5.5);
-            me.fillShield(12.25, 10.5)
-            me.fillPicture(1.25, 29.5)
+            me.fillShield(17.5, 1.5)
+            //me.fillPicture(1.25, 29.5)
+            me.fillSanity(17, 8);
+            me.fillGlamour(17, 12);
+            me.fillKarma(17, 16);
+            me.fillExtras(1.5,10.25)
         } else if (page == 2) {
             me.fillName(page)
             me.fillToDs(1.5, 1.5)
-            me.fillBC(1.25, 14.5)
-            me.fillBA(11.25, 14.5)
-            me.fillOccult(1.25, 24.5)
+            me.fillBC(1.5, 14.5)
+            me.fillBA(11.5, 14.5)
+            me.fillOccult(1.5, 23.75)
 
         } else if (page == 3) {
             me.fillName(page)

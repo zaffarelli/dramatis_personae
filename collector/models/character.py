@@ -518,7 +518,7 @@ class Character(Combattant):
         self.xp_pool = self.xp_earned - self.xp_spent
         try:
             self.calculate_shortcuts()
-            self.update_ranking()
+            self.rank = self.update_ranking()
             self.race = self.specie.species
 
             if self.PA_BOD != 0:
@@ -830,6 +830,151 @@ class Character(Combattant):
                         if ba.benefice_affliction_ref.value > rankraise:
                             rankraise = ba.benefice_affliction_ref.value
         self.ranking += rankraise
+        return self.rank_name()
+
+    def rank_name(self):
+        rank = "Subject of the Empire"
+        if self.caste.lower() == "nobility":
+            if self.ranking <= 1:
+                rank = "Squire" if not self.gender else "Damsel"
+            elif self.ranking <= 3:
+                rank = "Knight" if not self.gender else "Maiden"
+            elif self.ranking <= 5:
+                rank = "Baronnet" if not self.gender else "Baronnet"
+            elif self.ranking <= 7:
+                rank = "Baron" if not self.gender else "Baronness"
+            elif self.ranking <= 9:
+                rank = "Marquis" if not self.gender else "Marquise"
+            elif self.ranking <= 11:
+                rank = "Count" if not self.gender else "Countess"
+            elif self.ranking <= 13:
+                rank = "Duke" if not self.gender else "Duchess"
+            elif self.ranking <= 14:
+                rank = "Archduke" if not self.gender else "Archduchess"
+            elif self.ranking <= 15:
+                rank = "Prince" if not self.gender else "Princess"
+        elif self.caste.lower() == "freefolk":
+            occurences = {}
+            for tod in self.tourofduty_set.all():
+                for x in ["Eskatonic Order", "Temple Avesti", "Orthodox", "Sanctuary Aeon", "Brother Battle",
+                          "Charioteer", "Scraver", "Reeve", "Engineer", "Muster"
+                          ]:
+                    if x in tod.tour_of_duty_ref.reference:
+                        if x in occurences:
+                            occurences[x] += 1
+                        else:
+                            occurences[x] = 1
+            max = -1
+            choice = ""
+            for k,v in occurences.items():
+              if v > max:
+                  choice = k
+            if choice.lower() == "charioteer":
+                if self.ranking <= 3:
+                    rank = "Ensign"
+                elif self.ranking <= 5:
+                    rank = "Lieutenant"
+                elif self.ranking <= 7:
+                    rank = "Commander"
+                elif self.ranking <= 9:
+                    rank = "Captain"
+                elif self.ranking <= 11:
+                    rank = "Consul"
+                elif self.ranking <= 13:
+                    rank = "Dean"
+            elif choice.lower() == "engineer":
+                if self.ranking <= 3:
+                    rank = "Apprentice"
+                elif self.ranking <= 5:
+                    rank = "Entered"
+                elif self.ranking <= 7:
+                    rank = "Fellow"
+                elif self.ranking <= 9:
+                    rank = "Crafter"
+                elif self.ranking <= 11:
+                    rank = "Engineer"
+                elif self.ranking <= 13:
+                    rank = "Master"
+            elif choice.lower() == "scraver":
+                if self.ranking <= 3:
+                    rank = "Associate"
+                elif self.ranking <= 5:
+                    rank = "Genin"
+                elif self.ranking <= 7:
+                    rank = "Boss"
+                elif self.ranking <= 9:
+                    rank = "Jonin"
+                elif self.ranking <= 11:
+                    rank = "Consul"
+                elif self.ranking <= 13:
+                    rank = "Dean"
+            elif choice.lower() == "muster":
+                if self.ranking <= 3:
+                    rank = "Private"
+                elif self.ranking <= 5:
+                    rank = "Sergeant"
+                elif self.ranking <= 7:
+                    rank = "Lieutenant"
+                elif self.ranking <= 9:
+                    rank = "Captain"
+                elif self.ranking <= 11:
+                    rank = "Major"
+                elif self.ranking <= 13:
+                    rank = "Colonel"
+            elif choice.lower() == "reeves":
+                if self.ranking <= 3:
+                    rank = "Associate"
+                elif self.ranking <= 5:
+                    rank = "Chief"
+                elif self.ranking <= 7:
+                    rank = "Manager"
+                elif self.ranking <= 9:
+                    rank = "Director"
+                elif self.ranking <= 11:
+                    rank = "Consul"
+                elif self.ranking <= 13:
+                    rank = "Dean"
+            elif choice.lower() == "eskatonic order":
+                if self.ranking <= 3:
+                    rank = "Novitiate"
+                elif self.ranking <= 5:
+                    rank = "Provost"
+                elif self.ranking <= 7:
+                    rank = "Illuminatus"
+                elif self.ranking <= 9:
+                    rank = "Philosophus"
+                elif self.ranking <= 11:
+                    rank = "Magister"
+                elif self.ranking <= 13:
+                    rank = "Presbuteros"
+            elif choice.lower() == "brother battle":
+                if self.ranking <= 3:
+                    rank = "Apprentice"
+                elif self.ranking <= 5:
+                    rank = "Oblate"
+                elif self.ranking <= 7:
+                    rank = "Acolyte"
+                elif self.ranking <= 9:
+                    rank = "Adept"
+                elif self.ranking <= 11:
+                    rank = "Master"
+                elif self.ranking <= 13:
+                    rank = "Grand Master"
+            elif choice.lower() in ["orthodox","temple avesti","sanctuary aeon"]:
+                if self.ranking <= 3:
+                    rank = "Novitiate"
+                elif self.ranking <= 5:
+                    rank = "Canon"
+                elif self.ranking <= 7:
+                    rank = "Deacon"
+                elif self.ranking <= 9:
+                    rank = "Priest"
+                elif self.ranking <= 11:
+                    rank = "Bishop"
+                elif self.ranking <= 13:
+                    rank = "Archbishop"
+        return choice+" "+rank
+
 
     def add_ba(self, aref, adesc=''):
         from collector.models.benefice_affliction import BeneficeAffliction

@@ -311,4 +311,4 @@ BLOKES = {
     'others': ['06-neutral']
 }
 
-FICS_VERSION = 10.2
+FICS_VERSION = 10.3
