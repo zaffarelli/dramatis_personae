@@ -65,13 +65,11 @@ class FICSSheet extends Sheet {
 
             me.drawLine(1, 17, 5, 5, me.draw_fill, me.draw_fill, 3) // Weapons/Armors separator
             me.drawLine(1, 17, 10, 10, me.draw_fill, me.draw_fill, 3) // Below weapons
-            me.drawLine(17, 23, 8, 8, me.draw_fill, me.draw_fill, 3)
-//            me.drawLine(12, 12, 10, 33, me.draw_fill, me.draw_fill, 3); // East BA/BC
-  //          me.drawLine(1, 12, 29, 29, me.draw_fill, me.draw_fill, 3); // Below shortcuts
-            me.drawLine(17, 17, 1, 10, me.draw_fill, me.draw_fill, 3, me.strokedebris); // Right Armor/weapons
+            me.drawLine(17, 23, 8, 8, me.draw_fill, me.draw_fill, 3) // Shields / Sanity
+            me.drawLine(17, 17, 1, 33, me.draw_fill, me.draw_fill, 3); // Right Armor/weapons
+            me.drawLine(17, 23, 18, 18, me.draw_fill, me.draw_fill, 3) // Wyrd / Money
+            me.drawLine(1, 17, 21.5, 21.5, me.draw_fill, me.draw_fill, 3) // Health / Cyberware
 
-            //me.drawLine(1, 23, 13, 13, me.draw_fill, me.draw_fill, 3, me.strokedebris);
-            //me.drawLine(1, 23, 20, 20, me.draw_fill, me.draw_fill, 3, me.strokedebris);
 
 
         } else if (page === 2) {
@@ -182,16 +180,17 @@ class FICSSheet extends Sheet {
             me.fillGlamour(17, 12);
             me.fillKarma(17, 16);
             me.fillExtras(1.5,10.25)
+            me.fillCyberware(1.25,22)
+            me.fillWallet(17, 18)
         } else if (page == 2) {
             me.fillName(page)
             me.fillToDs(1.5, 1.5)
-            me.fillBC(1.5, 14.5)
-            me.fillBA(11.5, 14.5)
+            me.fillBC(1.5, 16.5)
+            me.fillBA(11.5, 16.5)
             me.fillOccult(1.5, 23.75)
 
         } else if (page == 3) {
             me.fillName(page)
-            me.fillWallet(17.25, 8.5)
             me.fillGear(12.25, 20.5)
             me.fillShortcuts(1.25, 20.5)
         }

@@ -423,7 +423,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
                 .attr('x', me.step * settings.x)
                 .attr('y', me.step * settings.y)
                 .style('fill', settings.fill)
-                 .style('stroke', settings.stroke)
+                .style('stroke', settings.stroke)
                 .style('stroke-width', settings["stroke-width"])
                 .style("text-anchor", settings.position)
                 .style("font-size", me.step*settings.size + 'pt')
@@ -433,9 +433,9 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
             _.forEach(sentences,(sentence) => {
                 let realword = sentence
                 if (realword == "false"){
-                    realword = "/!\\"
+                     realword = "(*)"
                 }else if (realword == "true"){
-                    realword = ""
+                     realword = ""
                 }
                 console.log("sentence",sentence)
                 if (settings.width==0){
@@ -443,33 +443,42 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
                         .attr('x', me.step * settings["x"])
                         .attr('y', me.step * settings["y"])
                         .attr('dy', (me.step*settings["size"]*lineCnt++) + "pt")
+//                         .style('fill', "green")
                         .text(realword)
                 }else{
-                    let words = realword.split(" ")
+                    let words = realword.replaceAll("  "," ").split(" ")
                     let tspan = t.append("tspan")
                         .attr('x', me.step * settings["x"])
                         .attr('y', me.step * settings.y)
                         .attr('dy', ((me.step*settings.size)*lineCnt++) + "pt")
-                        .text("")
+//                         .style('fill', "blue")
+                        .text(" ")
                     let max_width = settings.width * me.step
                     _.forEach(words,(word) => {
                          let text_width  = tspan.node().getComputedTextLength()
                          if (text_width > max_width)  {
-                            console.log("** New line")
+//                             console.log("** New line")
                             tspan = t.append("tspan")
                                 .attr('x', me.step * settings.x)
                                 .attr('y', me.step * settings.y)
                                 .attr('dy', ((me.step*settings.size)*lineCnt++) + "pt")
+//                                 .style('fill', "orange")
                                 .text(word)
                          }else{
-                            console.log("** New line")
-                            let txt = tspan.text()+" "+word
+//                             console.log("** New line")
+                            let txt = tspan.text()
+                            if (txt != " ") {
+                                txt += " "+word
+                            }else{
+                                txt = word
+                            }
                             tspan.text(txt)
+//                             .style('fill', "red")
                         }
                     })
                 }
             })
-            me.report["lines"] = lineCnt
+            me.report["lines"] = lineCnt+0.5
             if (me.report.lines > me.report.maxlines){
                 me.report.maxlines = me.report.lines
             }
@@ -771,15 +780,28 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
         me.fillList(basex+0.25, basey+0.25, "weapons", styles);
     }
 
+    fillCyberware(basex = 0, basey = 0) {
+        let me = this;
+        let styles = {}
+        styles["labels"] = ["Weapon", "Cat", "Caliber", 'WA', 'DC', 'RE', 'CO', 'Clip', 'ROF', 'RNG']
+        styles["properties"] = ["reference", "category", "caliber", 'weapon_accuracy', 'damage_class', 'rel', 'conceilable', 'clip', 'rof', 'rng']
+        styles["aligns"] = ["start", "start", "start", "start", "start", "start", "start", "start", "start", "start"]
+        styles["widths"] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        styles["lefts"] = [0, 5, 6, 7, 8, 10, 11, 12, 13, 14]
+        me.standardBlock({"x":basex,"y":basey-0.25,"width":15.5,"height":11,"title":"Cyberware"})
+        //me.fillList(basex+0.25, basey+0.25, "weapons", styles);
+    }
+
+
     fillBC(basex = 0, basey = 0) {
         let me = this;
         let styles = {}
         styles["labels"] = ["Blessing/Curse", "Value", "Description"]
         styles["properties"] = ["reference", "value", "description"]
-        styles["aligns"] = ["multiline", "start", "multiline"]
-        styles["widths"] = [2, 0, 6.5]
+        styles["aligns"] = ["start", "start", "start"]
+        styles["widths"] = [2, 0, 4]
         styles["lefts"] = [0, 2.5, 3.5]
-        me.standardBlock({"x":basex-0.25,"y":basey-0.5,"width":9.75,"height":9,"title":"Blessings/Curses"})
+        me.standardBlock({"x":basex-0.25,"y":basey-0.5,"width":9.75,"height":7,"title":"Blessings/Curses"})
         me.fillList(basex, basey, "BC", styles)
     }
 
@@ -788,10 +810,10 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
         let styles = {}
         styles["labels"] = ["Benefice/Affliction", "Value", "Description", "Note"]
         styles["properties"] = ["benefice_affliction_ref__reference", "benefice_affliction_ref__value", "benefice_affliction_ref__description", "description"]
-        styles["aligns"] = ["multiline", "start", "multiline", "multiline"]
-        styles["widths"] = [1.5, 0, 4, 3]
-        styles["lefts"] = [0, 2.5, 3.5, 8]
-        me.standardBlock({"x":basex-0.25,"y":basey-0.5,"width":11.5,"height":9,"title":"Benefices/Afflictions"})
+        styles["aligns"] = ["start", "start", "start", "start"]
+        styles["widths"] = [2, 0, 4, 1]
+        styles["lefts"] = [0, 2.5, 3.5, 10]
+        me.standardBlock({"x":basex-0.25,"y":basey-0.5,"width":11.5,"height":7,"title":"Benefices/Afflictions"})
         me.fillList(basex, basey, "BA", styles)
     }
 
@@ -799,13 +821,13 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
         let me = this;
         let styles = {}
         //console.log(me.data["tods"])
-        styles["labels"] = ["Type", "History", "Valid", "Pts","Details"]
-        styles["properties"] = ["category_text", "reference","valid", "value","description"]
+        styles["labels"] = ["Type", "History", "Ok?", "Pts","Details"]
+        styles["properties"] = ["category_text", "reference","valid|bool", "value","description"]
         styles["aligns"] = ["start", "start", "start","start","start"]
-        styles["widths"] = [0, 0, 0,0, 14]
-        styles["lefts"] = [0, 1, 3.75,4.5,5.5]
+        styles["widths"] = [0, 1.75, 0,0, 12]
+        styles["lefts"] = [0, 1, 5,5.5,6.25]
         me.daddy = me.front
-        me.standardBlock({"x":basex-0.25,"y":basey-0.35,"width":21.5,"height":12.5,"title":"Life Path Overview"})
+        me.standardBlock({"x":basex-0.25,"y":basey-0.35,"width":21.5,"height":14.5,"title":"Life Path Overview"})
         me.fillList(basex, basey, "tods", styles);
     }
 
@@ -814,31 +836,67 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
         me.standardBlock({"x":basex-0.25,"y":basey-0.5,"width":21.5,"height":9.5,"title":"Occult Arts"})
         me.drawRect(basex + 9.75, basey - 0.25, 0.75, 0.75, "transparent", me.draw_stroke, 2, "", 1, 5);
         me.drawRect(basex + 9.75, basey + 0.75, 0.75, 0.75, "transparent", me.draw_stroke, 2, "", 1, 5);
-        me.drawText(basex, basey, me.draw_fill, me.draw_stroke, me.medium_font_size, "start", "Occult Arts", 1.0, me.base_font);
+        me.drawText(basex, basey, me.draw_fill, me.draw_stroke, me.small_font_size, "start", "Discipline:", 1.0, me.base_font);
         me.drawText(basex, basey + 0.60, me.draw_fill, me.draw_stroke, me.small_font_size, "start", "Stigma:", 1.0, me.base_font);
         me.drawText(basex, basey + 1.10, me.draw_fill, me.draw_stroke, me.small_font_size, "start", "Pathes:", 1.0, me.base_font);
         me.drawText(basex + 9.00, basey + 0.25, me.draw_fill, me.draw_stroke, me.medium_font_size, "start", "LVL", 1.0, me.base_font);
         me.drawText(basex + 9.00, basey + 1.25, me.draw_fill, me.draw_stroke, me.medium_font_size, "start", "DRK", 1.0, me.base_font);
         if (!me.blank) {
+            me.drawText(basex + 2.0, basey, me.user_fill, me.user_stroke, me.medium_font_size, "start", me.data['occult'], 1.0, me.user_font);
             me.drawText(basex + 2.0, basey + 0.60, me.user_fill, me.user_stroke, me.medium_font_size, "start", me.data['stigma'], 1.0, me.user_font);
             me.drawText(basex + 2.0, basey + 1.10, me.user_fill, me.user_stroke, me.medium_font_size, "start", me.data['path'], 1.0, me.user_font);
-            me.drawText(basex + 10.125, basey + 0.25, me.user_fill, me.user_stroke, me.medium_font_size, "start", me.data['OCC_LVL'], 1.0, me.user_font);
-            me.drawText(basex + 10.125, basey + 1.25, me.user_fill, me.user_stroke, me.medium_font_size, "start", me.data['OCC_DRK'], 1.0, me.user_font);
+            me.drawText(basex + 10.125, basey + 0.25, me.user_fill, me.user_stroke, me.medium_font_size, "middle", me.data['PA_OCC'], 1.0, me.user_font);
+            me.drawText(basex + 10.125, basey + 1.25, me.user_fill, me.user_stroke, me.medium_font_size, "middle", me.data['PA_DRK'], 1.0, me.user_font);
         }
         let styles = {}
-        styles["labels"] = ["Lvl", "Path", "Ritual", "G", "L", "P", "W", "Att", "Skill", "Value"]
-        styles["properties"] = ["ref__level", "ref__path", "ref__reference", "ref__gesture|bool", "ref__liturgy|bool", "ref__prayer|bool", "ref__wyrd_cost", "attribute_name", "skill_name", "value"]
-        styles["aligns"] = ["start", "start", "multiline", "start", "start", "start", "start", "start", "start", "start"]
-        styles["widths"] = [0, 0, 3.5, 0, 0, 0, 0, 0, 0, 0]
-        styles["lefts"] = [0, 0.5, 2.5, 6.0, 6.25, 6.5, 7.0, 7.5, 8.5, 9.5]
-        me.fillList(basex, basey + 2.0, "rituals", styles);
+        styles["labels"] = ["Path","Level", "Power/Ritual", "Gest.", "Litu.", "Prayer", "Wyrd", "ATTR.", "Skill", "Total"]
+        styles["properties"] = ["ref__path","ref__level",  "ref__reference", "ref__gesture|bool", "ref__liturgy|bool", "ref__prayer|bool", "ref__wyrd_cost", "attribute_name", "skill_name", "value"]
+        styles["aligns"] = ["start", "start", "start", "start", "start", "start", "start", "start", "start", "start"]
+        styles["widths"] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        styles["lefts"] = [0, 3, 4, 8.0, 9, 10, 11, 12, 14, 17]
+        me.fillList(basex, basey+2, "rituals", styles);
     }
 
     fillWallet(basex = 0, basey = 0) {
         let me = this;
-        me.drawText(basex, basey, me.draw_fill, me.draw_stroke, me.medium_font_size, "start", "Assets & Money", 1.0, me.base_font);
-        me.drawText(basex, basey + 0.60, me.draw_fill, me.draw_stroke, me.small_font_size, "start", "Wallet Money:", 1.0, me.base_font);
-        me.drawText(basex, basey + 1.10, me.draw_fill, me.draw_stroke, me.small_font_size, "start", "Bank Accounts:", 1.0, me.base_font);
+        let ox = basex + 0.25
+        let oy = basey + 0.5
+        me.drawText(ox, oy, me.draw_fill, me.draw_stroke, me.medium_font_size, "start", "Assets & Money", 1.0, me.base_font);
+        me.drawText(ox, oy + 0.60, me.draw_fill, me.draw_stroke, me.small_font_size, "start", "Wallet Money (£b)", 1.0, me.base_font);
+        me.drawRect(ox + 4 , oy + 0.2, 1.5, 0.6, me.white, me.draw_stroke, 2, "", 1, 5);
+
+        me.drawRect(ox +0 , oy + 0.9, 1.5, 0.6, me.white, me.draw_stroke, 2, "", 1, 5);
+        me.drawRect(ox + 2 , oy + 0.9, 1.5, 0.6, me.white, me.draw_stroke, 2, "", 1, 5);
+        me.drawRect(ox + 4 , oy + 0.9, 1.5, 0.6, me.white, me.draw_stroke, 2, "", 1, 5);
+
+        me.drawRect(ox +0 , oy + 1.5, 1.5, 0.6, me.white, me.draw_stroke, 2, "", 1, 5);
+        me.drawRect(ox + 2 , oy + 1.5, 1.5, 0.6, me.white, me.draw_stroke, 2, "", 1, 5);
+        me.drawRect(ox + 4 , oy + 1.5, 1.5, 0.6, me.white, me.draw_stroke, 2, "", 1, 5);
+
+        me.drawRect(ox +0 , oy + 2.1, 1.5, 0.6, me.white, me.draw_stroke, 2, "", 1, 5);
+        me.drawRect(ox + 2 , oy + 2.1, 1.5, 0.6, me.white, me.draw_stroke, 2, "", 1, 5);
+        me.drawRect(ox + 4 , oy + 2.1, 1.5, 0.6, me.white, me.draw_stroke, 2, "", 1, 5);
+
+        me.drawText(ox, oy + 3.3, me.draw_fill, me.draw_stroke, me.small_font_size, "start", "Bank Accounts:", 1.0, me.base_font);
+        me.drawRect(ox  , oy + 3.5, 5.5, 0.6, me.white, me.draw_stroke, 2, "", 1, 5);
+        me.drawRect(ox  , oy + 4.2, 5.5, 0.6, me.white, me.draw_stroke, 2, "", 1, 5);
+        me.drawRect(ox  , oy + 4.9, 5.5, 0.6, me.white, me.draw_stroke, 2, "", 1, 5);
+        me.drawRect(ox  , oy + 5.6, 5.5, 0.6, me.white, me.draw_stroke, 2, "", 1, 5);
+        me.drawRect(ox  , oy + 6.3, 5.5, 0.6, me.white, me.draw_stroke, 2, "", 1, 5);
+        me.drawRect(ox  , oy + 7.0, 5.5, 0.6, me.white, me.draw_stroke, 2, "", 1, 5);
+        me.drawRect(ox  , oy + 7.7, 5.5, 0.6, me.white, me.draw_stroke, 2, "", 1, 5);
+
+        oy = basey + 6.2
+        me.drawText(ox, oy + 3.3, me.draw_fill, me.draw_stroke, me.small_font_size, "start", "Monthly Assets:", 1.0, me.base_font);
+        me.drawRect(ox  , oy + 3.5, 5.5, 0.6, me.white, me.draw_stroke, 2, "", 1, 5);
+        me.drawRect(ox  , oy + 4.2, 5.5, 0.6, me.white, me.draw_stroke, 2, "", 1, 5);
+        me.drawRect(ox  , oy + 4.9, 5.5, 0.6, me.white, me.draw_stroke, 2, "", 1, 5);
+        me.drawRect(ox  , oy + 5.6, 5.5, 0.6, me.white, me.draw_stroke, 2, "", 1, 5);
+        me.drawRect(ox  , oy + 6.3, 5.5, 0.6, me.white, me.draw_stroke, 2, "", 1, 5);
+        me.drawRect(ox  , oy + 7.0, 5.5, 0.6, me.white, me.draw_stroke, 2, "", 1, 5);
+        me.drawRect(ox  , oy + 7.7, 5.5, 0.6, me.white, me.draw_stroke, 2, "", 1, 5);
+
+
 
         if (!me.blank) {
             // me.drawText(basex + 2.0, basey + 0.60, me.user_fill, me.user_stroke, me.small_font_size, "start", me.data['stigma'], 1.0, me.user_font);
@@ -990,7 +1048,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
                         } else if (z == "lower") {
                             data = data.toLowerCase();
                         }
-                        me.writeText({"x":ox + styles["lefts"][j], "y":oy, "stroke":stroke,"fill": stroke, "size":size, "position":styles["aligns"][j], "text":data, "font":font,"width":styles["widths"][j]});
+                        me.writeText({"x":ox + styles["lefts"][j], "y":oy, "stroke":stroke,"fill": stroke, "size":size, "position":styles["aligns"][j], "text":data, "font":font,"width":styles["widths"][j],"size":me.medium_font_size/me.step});
 
 //                     }
                 });
