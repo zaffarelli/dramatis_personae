@@ -51,25 +51,27 @@ def get_population_statistics(request, *args, **kwargs):
 def get_keywords(request, *args, **kwargs):
     context = {}
     return JsonResponse(context)
-
-    pass
-    user_profile = request.user.profile
-    # print(user_profile)
+    #
+    # pass
+    # user_profile = request.user.profile
+    # # print(user_profile)
     campaign = get_current_config(request)
     all = campaign.dramatis_personae.order_by('keyword')
     all = []
-    data = {'keywords': []}
+    data = {'keywords': {}}
     edata = {'dramas': []}
     keyword = ''
     count = 0
     for x in all:
-        if x.keyword != keyword:
-            if keyword != '':
-                data['keywords'].append({'name': keyword, 'count': count})
-            count = 0
-            # print(keyword)
-            keyword = x.keyword
-        count += 1
+        kws = x.keyword.split(" ")
+        for kw in kws:
+            if kw != keyword:
+                if keyword != '':
+                    data['keywords'].append({'name': kw, 'count': count})
+                count = 0
+                # print(keyword)
+                keyword = kw
+            count += 1
     for d in campaign.epic.drama_set.all():
         edata['dramas'].append({'drama': d.name, 'code': f'c-drama-{d.id}', 'chapter': d.get_full_id})
 

@@ -33,13 +33,13 @@ class Cyberfeature(models.Model):
     complexity = models.IntegerField(default=1)
     tech_level = models.IntegerField(default=5)
     incompatibility = models.IntegerField(default=0)
-    value = models.IntegerField(default=1)
     value_ratio = models.FloatField(default=0.0)
     category = models.CharField(max_length=20, choices=CYBERFEATURE_CATEGORIES, default='Trait', blank=True)
     description = models.TextField(default='', blank=True, max_length=1024)
 
     def __str__(self):
         return "%s (%s)" % (self.reference, CYBERFEATURE_CATEGORIES[int(self.category)][1])
+
 
 
 class CyberwareRef(models.Model):
@@ -50,12 +50,14 @@ class CyberwareRef(models.Model):
     cyberfeatures = models.ManyToManyField(Cyberfeature, blank=True)
     complexity = models.IntegerField(default=0)
     value = models.IntegerField(default=0)
+    cost = models.IntegerField(default=0,blank=True)
     surgery_cost = models.IntegerField(default=0)
     incompatibility = models.IntegerField(default=0)
     tech_level = models.IntegerField(default=0)
     description = models.TextField(default='', blank=True, max_length=1024)
     pub_date = models.DateTimeField('Date published', default=datetime.now)
     need_fix = models.BooleanField(default=False, blank=True)
+    notes = models.TextField(default='', blank=True, max_length=1024)
 
     @property
     def features(self):
@@ -66,6 +68,46 @@ class CyberwareRef(models.Model):
 
     def __str__(self):
         return "%s" % self.reference
+
+    def to_json_data(self):
+        from collector.utils.basic import json_default
+        import json
+        json_string = json.dumps(self, default=json_default, sort_keys=True, indent=4)
+        json_data = json.loads(json_string)
+        # shortcut_words = self.get_category_display()
+        # shortcut = "".join([z[0] for z in shortcut_words]).upper()
+        # json_data["category_text"] = shortcut
+        features = []
+        for f in self.cyberfeatures.all():
+            x = {}
+            x['reference'] = f.reference
+            x['complexity'] = f.complexity
+            x['category'] = f.get_category_display()
+            x['value'] = f.value
+            x['value_ratio'] = f.value_ratio
+            x['tech_level'] = f.tech_level
+            x['incompatibility'] = f.incompatibility
+            features.append(x)
+        json_data["cyberfeatures"] = features
+        return json_data
+
+
+    def data(self):
+        d = {}
+        features = []
+        for f in self.cyberfeatures.all():
+            x = {}
+            x['reference'] = f.reference
+            x['complexity'] = f.complexity
+            x['category'] = f.get_category_display()
+            x['value'] = f.value
+            x['value_ratio'] = f.value_ratio
+            x['tech_level'] = f.tech_level
+            x['incompatibility'] = f.incompatibility
+            features.append(x)
+        d["cyberfeatures"] = features
+        return d
+
 
     def fix(self):
         try:
@@ -98,9 +140,11 @@ class Cyberware(models.Model):
     character = models.ForeignKey(Character, on_delete=models.CASCADE)
     cyberware_ref = models.ForeignKey(CyberwareRef, on_delete=models.CASCADE)
     replacement_for = models.CharField(max_length=64, default='Add on')
+    notes = models.TextField(default='', blank=True, max_length=1024)
 
     def __str__(self):
         return '%s (%s: %s)' % (self.character.full_name, self.replacement_for, self.cyberware_ref.reference)
+
 
 
 # ADMIN
@@ -113,9 +157,10 @@ class CyberfeatureAdmin(admin.ModelAdmin):
 
 class CyberwareRefAdmin(admin.ModelAdmin):
     ordering = ('reference',)
-    list_display = ['reference', 'tech_level', 'value', 'incompatibility', 'features', 'description']
-
+    list_display = ['reference', 'tech_level', 'value', 'incompatibility', 'features', 'description','notes']
+    list_editable = ["notes"]
 
 class CyberwareAdmin(admin.ModelAdmin):
     ordering = ('character', 'replacement_for', 'cyberware_ref')
-    list_display = ['character', 'replacement_for', 'cyberware_ref']
+    list_display = ['character', 'replacement_for', 'cyberware_ref','notes']
+    list_editable = ["notes"]

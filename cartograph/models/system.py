@@ -85,6 +85,7 @@ class OrbitalItem(RiddedMixin):
 
     name = models.CharField(max_length=200, default="", blank=True)
     system_rid = models.CharField(max_length=128,default="", blank=True)
+    system = models.CharField(max_length=200, blank=True)
     category = models.CharField(max_length=20, choices=ORBITAL_ITEMS, default="Telluric")
     color = ColorField(default="#FFF", blank=True)
     azimut = models.FloatField(default=0, blank=True)
@@ -123,18 +124,19 @@ class OrbitalItem(RiddedMixin):
 class SystemAdmin(admin.ModelAdmin):
     ordering = ['name', 'alliance']
     list_display = ['name','rid' ,'alliance', 'discovery', 'sector', 'dtj', 'notes',
-                    'group', 'color', 'x', 'y']
+                    'group', 'color', 'x', 'y','symbol']
     #inlines = [OrbitalItemInline]
     list_filter = ['group', 'alliance', 'sector']
     search_fields = ['name', 'alliance', 'sector']
-    list_editable = ["x","y", "discovery","notes"]
+    list_editable = ["x","y", "discovery","notes",'symbol']
     actions = [refix]
 
 
 class OrbitalItemAdmin(admin.ModelAdmin):
-    ordering = ['system_rid', 'distance', 'name']
-    list_display = ['name', 'rid', 'color', 'azimut', 'distance', 'tilt', 'size', 'qualifier',
+    ordering = ['system','system_rid', 'distance', 'name']
+    list_display = ['name', 'system', 'system_rid',  'color', 'azimut', 'distance', 'tilt', 'size', 'qualifier',
                     'rings', 'moon', 'description']
     list_filter = ['category', 'system_rid', 'distance', 'tilt']
     search_fields = ['name', 'qualifier', 'system']
+    list_editable = ['system']
     actions = [refix]

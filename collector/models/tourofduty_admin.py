@@ -9,7 +9,7 @@ class TourOfDutyRefAdmin(admin.ModelAdmin):
     from collector.models.blessing_curse import BlessingCurseModificatorInline
     ordering = ['is_public', '-valid', 'is_kit', 'category', '-core', 'caste', 'topic', 'value', 'reference', ]
     list_display = ['reference', 'caste', 'degrees_wp_choices','category', 'is_custom', 'valid', 'balance', 'topic','subtopic',
-                    'source', 'AP', 'SP', 'DP', 'BCP', 'BAP', 'WP', 'OP', 'value']
+                    'source', 'AP', 'SK', 'DE', 'BC', 'BA', 'SWP',"DWP", 'OP', 'value']
     exclude = ['value']
     actions = [refix, extract]
     inlines = [

@@ -4,6 +4,8 @@
  ═╩╝╩    ╚═╝└─┘┴─┘┴─┘└─┘└─┘ ┴ └─┘┴└─
 '''
 from django.db import models
+
+from collector.mixins.ridded_mixin import RiddedMixin
 from collector.models.character import Character
 from django.dispatch import receiver
 from django.db.models.signals import pre_save
@@ -196,6 +198,7 @@ class ShipRef(models.Model):
 
     reference = models.CharField(max_length=64, unique=True)
     builder = models.CharField(max_length=64, default='')
+    model_name = models.CharField(max_length=128, blank=True, null=True)
     ship_class = models.CharField(max_length=30, choices=SHIP_CLASSES, default='Shuttle', blank=True)
     ship_grade = models.CharField(max_length=30, choices=SHIP_GRADES, default='Void', blank=True)
     ship_engines = models.CharField(max_length=30, choices=SHIP_ENGINES, default='Standard', blank=True)
@@ -237,20 +240,19 @@ class ShipRef(models.Model):
     cs_think_machine = models.IntegerField(default=0)
     cs_battle_shields = models.IntegerField(default=0)
 
-    cs_maneuver  = models.IntegerField(default=0)
-    cs_scan  = models.IntegerField(default=0)
-    cs_soak  = models.IntegerField(default=0)
-    cs_attack  = models.IntegerField(default=0)
-    cs_autonomy  = models.IntegerField(default=0)
+    cs_maneuver = models.IntegerField(default=0)
+    cs_scan = models.IntegerField(default=0)
+    cs_soak = models.IntegerField(default=0)
+    cs_attack = models.IntegerField(default=0)
+    cs_autonomy = models.IntegerField(default=0)
 
     def compute_cinematic_system(self):
-        self.cs_maneuver = (self.cs_thrust + self.cs_engine - self.cs_bulk + self.cs_battle_shields + self.cs_fusion_core) / 3
+        self.cs_maneuver = (
+                                       self.cs_thrust + self.cs_engine - self.cs_bulk + self.cs_battle_shields + self.cs_fusion_core) / 3
         self.cs_scan = (self.cs_sensors + self.cs_fusion_core + self.cs_think_machine) / 3
         self.cs_soak = (self.cs_bulk + self.cs_crew - self.cs_engine)
         self.cs_attack = (self.cs_guns + self.cs_engine) / 2
         self.cs_autonomy = (self.cs_fusion_core + self.cs_bulk - self.cs_engine)
-
-
 
     @property
     def shipsize(self):
@@ -269,15 +271,15 @@ class ShipRef(models.Model):
 
     @property
     def hard_points(self):
-        return int((self.dim_length * self.dim_width * self.dim_height) /2)
-
+        return int((self.dim_length * self.dim_width * self.dim_height) / 2)
 
     def __str__(self):
         return "%s" % (self.reference)
 
     def fix(self):
+        print(f"Fixing [{self.model_name} {self.get_ship_class_display()}]")
         self.ship_status = "combat_ready"
-        self.firebirds = 0;
+        self.firebirds = 0
         self.cost = 0
         klass = int(self.ship_class)
         self.size_rating = SHIP_DATA[klass][0]
@@ -293,7 +295,7 @@ class ShipRef(models.Model):
             logger.info("Spaceship [%s]: Error creating automatic sections." % (self.reference))
             self.ship_status = "invalid_sections"
         # Shield
-        self.firebirds += 3000 #* int(self.ship_shields)
+        self.firebirds += 3000  # * int(self.ship_shields)
         if self.ship_status == "combat_ready":
             try:
                 # Sensors
@@ -317,6 +319,9 @@ class ShipRef(models.Model):
         # Vitality
         self.vitality = self.size_rating * 10
         self.compute_cinematic_system()
+        # Follow up
+        for section in self.shipsection_set.all():
+            print(f"- {section}")
 
 
 @receiver(pre_save, sender=ShipRef, dispatch_uid='update_ship_ref')
@@ -333,7 +338,7 @@ class ShipSection(models.Model):
     slot = models.CharField(max_length=30, choices=SHIP_SLOTS, blank=True, default='1', null=True)
     structure_points = models.PositiveIntegerField(default=1)
     boarding_party_limit = models.PositiveIntegerField(default=1)
-    links = models.ManyToManyField("self", blank=True)
+    links = models.ManyToManyField("self", blank=True)  # Link between sections of the same ship
 
     def __str__(self):
         return "%s %s [#%03d]" % (SLOT_NAMES[int(self.slot)], SECTION_NAMES[int(self.section)], self.ship_ref.id)
@@ -361,6 +366,11 @@ class ShipSection(models.Model):
 
 class ShipSectionInline(admin.TabularInline):
     model = ShipSection
+    def formfield_for_manytomany(self, db_field, request, **kwargs):
+        if db_field.name == "links":
+            id = request.path.split("/")[4]
+            kwargs["queryset"] = ShipSection.objects.filter(ship_ref__id=id)
+        return super(ShipSectionInline, self).formfield_for_manytomany(db_field, request, **kwargs)
 
 
 class ShipSystemSlot(models.Model):
@@ -379,7 +389,7 @@ class ShipSystemSlotInline(admin.TabularInline):
     ordering = ('shipsection',)
 
 
-class Spaceship(models.Model):
+class Spaceship(RiddedMixin):
     class Meta:
         verbose_name = "Spacecraft: Ship"
 
@@ -429,15 +439,23 @@ class ShipSystemAdmin(admin.ModelAdmin):
 
 
 class ShipRefAdmin(admin.ModelAdmin):
-    ordering = ['builder', 'size_rating']
+    ordering = ['ship_class', 'size_rating']
     list_display = (
-    'reference', 'ship_class', 'builder', 'size_rating', 'ship_grade', 'ship_engines', 'ship_shields', 'cargo_internal','thrust_speed',
-    'dimensions', 'hard_points', 'cost', 'vitality', 'firebirds', 'ship_status')
+        'reference', 'ship_class', 'builder', "model_name", 'size_rating', 'ship_grade', 'ship_engines', 'ship_shields',
+        'cargo_internal', 'thrust_speed',
+        'dimensions', 'hard_points', 'cost', 'vitality', 'firebirds', 'ship_status')
     list_filter = ('builder', 'ship_class')
     inlines = [ShipSectionInline, ]
 
 
 class ShipSectionAdmin(admin.ModelAdmin):
+    def formfield_for_manytomany(self, db_field, request, **kwargs):
+        if db_field.name == "links":
+            id = request.path.split("/")[4]
+            kwargs["queryset"] = ShipSection.objects.filter(ship_ref__id=id)
+        return super(ShipSectionAdmin, self).formfield_for_manytomany(db_field, request, **kwargs)
+
+
     ordering = ['ship_ref', 'slot', 'section']
     list_display = (
     'section', 'slot', 'ship_ref', 'structure_points', 'systems_installed', 'boarding_access', 'boarding_party_limit')

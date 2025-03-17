@@ -10,12 +10,14 @@ from django.urls import reverse
 from scenarist.models.story_models import StoryModel
 
 
+
 class Drama(StoryModel):
     class Meta:
         ordering = ['epic', 'chapter', 'date', 'name']
 
     from scenarist.models.epics import Epic
     epic = models.ForeignKey(Epic, null=True, on_delete=models.CASCADE)
+
 
     @property
     def full_chapter(self):

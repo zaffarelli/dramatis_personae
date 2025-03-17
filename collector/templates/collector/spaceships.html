@@ -1,0 +1,14 @@
+{% load fics_filters %}
+{% csrf_token %}
+<div class="fresque">
+    {% for x in spaceships %}
+    <div class="character_row">
+        <div class="cell wide"> <span class="placeholder">Name</span><br/>{{ x.full_name }}</div>
+        <div class="cell wider"> <span class="placeholder">Model</span><br/>{{ x.ship_ref.model_name }} ({{ x.ship_ref.reference }})</div>
+        <div class="cell wider"> <span class="placeholder">Owner</span><br/>{{ x.owner }}</div>
+        <div class="cell wider"> <span class="placeholder">Flag</span><br/>{{ x.flag }}</div>
+        <div class="cell"> <span class="placeholder">Notes</span><br/>{{ x.notes }}</div>
+        <div class="cell mini"> <i class="fa fa-eye"></i></div>
+    </div>
+    {% endfor %}
+</div>

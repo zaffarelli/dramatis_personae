@@ -11,7 +11,7 @@ from collector.views.characters import CharacterUpdateView, customize_ba, custom
 from collector.views.frontend import index, toggle_public, toggle_spotlight, get_list, add_avatar, \
     get_storyline, conf_details, recalc_avatar, heartbeat, \
     show_todo, pdf_show, wa_export_character, tile_avatar, ghostmark_test, display_blank_sheet, display_sheet, \
-    display_sessionsheet, switch_epic, deep_toggle, all_epics, history
+    display_sessionsheet, switch_epic, deep_toggle, all_epics, history, show_spaceships
 
 from collector.views.backend import export, xls_update, pdf_character, gss_update, gss_summary, pdf_rules, roll_dice, \
     bloke_selector, run_audit, epic_deck, svg_to_pdf, save_sequence, load_sequence
@@ -44,6 +44,7 @@ urlpatterns = [
     re_path('^ajax/wa_export/character/(?P<id>\d+)/$', wa_export_character, name='wa_export_character'),
     re_path('^ajax/pdf/character/(?P<id>\d+)/$', pdf_character, name='pdf_character'),
     re_path('^ajax/search/(?P<slug>[\w-]+)/(?P<id>\d+)/$', get_list, name='get_list'),
+    re_path('^ajax/spacehips/$', show_spaceships, name='show_spaceships'),
     re_path('^ajax/storyline/(?P<slug>[\w-]+)/$', get_storyline, name='get_storyline'),
     re_path('^ajax/conf_details/$', conf_details, name='conf_details'),
     re_path('^ajax/todo/$', show_todo, name='show_todo'),

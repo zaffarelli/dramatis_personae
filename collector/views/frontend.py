@@ -378,6 +378,7 @@ def switch_epic(request, slug="none"):
             # return render(request, 'collector/index.html', context=context)
             return HttpResponseRedirect('/')
         messages.warning(request, f'Current campaign not changed.')
+        messages.warning(request, f'Current campaign not changed.')
     return HttpResponse(status=204)
 
 
@@ -407,10 +408,11 @@ def display_sessionsheet(request, slug=None):
             i += 1
             ch = json.dumps(k)
             players_list.append(ch)
+        print(players_list)
         scenario = campaign.epic.name.upper()
         pre_title = campaign.epic.place + ' - ' + campaign.epic.date
         post_title = ""
-        settings = {'version': 1.0, 'labels': {}, 'pre_title': pre_title, 'scenario': scenario,
+        settings = {'version': 1.1, 'labels': {}, 'pre_title': pre_title, 'scenario': scenario,
                     'post_title': post_title, 'fontset': FONTSET}  # , 'specialities': spe, 'shortcuts': shc}
         response = {'settings': json.dumps(settings, sort_keys=True, indent=4),
                     'data': json.dumps(players_list, indent=4, sort_keys=True)}
@@ -499,6 +501,23 @@ def history(request, filter=""):
         template = get_template('collector/histories.html')
         html = template.render(context, request)
         response = {'mosaic': html}
+        return JsonResponse(response)
+    else:
+        return HttpResponse(status=204)
+
+
+def show_spaceships(request):
+    if is_ajax(request):
+        from collector.models.spacecraft import Spaceship
+        spaceships = []
+        for x in Spaceship.objects.all():
+            e = x.to_json()
+            spaceships.append(x)
+        context = {'spaceships': spaceships}
+        template = get_template('collector/spaceships.html')
+        html = template.render(context, request)
+        response = {'mosaic': html}
+        print(response)
         return JsonResponse(response)
     else:
         return HttpResponse(status=204)

@@ -44,6 +44,7 @@
                     <li><span class="menu-button menu-item" mode="standard" action="audit"><i class="action_icon fas fa-star"></i> Audit</span>
                     <li><span class="menu-button slug-item" mode="overlay" action="sessionsheet"><i class="action_icon fas fa-sim-card"></i> Session sheets</span></li>
                     <li><span class="menu-button menu-item" mode="overlay" action="display_blank_sheet"><i class="action_icon fas fa-sim-card"></i> Blank Sheet</span></li>
+                    <li><span class="menu-button menu-item" mode="standard" action="spacehips" page="1"><i class="action_icon fas fa-space-shuttle"></i> Celestial Ships</span></li>
 
                 {% else %}
                     {% if user.profile.main_character %}
@@ -120,7 +121,7 @@
                 class="action_icon fas fa-crown"></i>{% endif %}</span>
             <ul class="level-2 user off" id="login_block">
                 {% csrf_token %}
-                <li><span class="menu-button menu-item" action='logout' mode="index"><i class="action_icon fas fa-key"></i> Log out</span></li>
+                <li><span class="menu-button " action='logout' mode="index" id="menu_logout"><i class="action_icon fas fa-key"></i> Log out</span></li>
                 <li><span class="menu-button menu-item" action='profile' mode="main"><i class="action_icon fas fa-user"></i> Profile</span>
                 </li>
                 {% if user.is_superuser %}

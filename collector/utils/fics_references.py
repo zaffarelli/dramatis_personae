@@ -124,9 +124,14 @@ SHORTCUTS = {
         'label': "PRE + Seduction",
         'rationale': "Charm others",
     },
+    "Diplomatic Conversation": {
+        'attribute': "PA_TEM",
+        'label': "TEM + Empathy",
+        'rationale': "Mundane court conversation",
+    },
     "Leadership": {
-        'attribute': "PA_PRE",
-        'label': "PRE + Leadership",
+        'attribute': "PA_TEM",
+        'label': "TEM + Leadership",
         'rationale': "Give orders to subsidiaries",
     },
     "Athletics": {
@@ -223,7 +228,7 @@ FONTSET = ['Cinzel', 'Trade+Winds', 'Imprima', 'Roboto', 'Philosopher', 'Ruda', 
            'Reggae+One', 'Syne+Mono', 'Zilla+Slab',"Ubuntu+Mono",  'Spartan', 'News+Cycle', 'Archivo', 'Francois+One', 'Caveat',
            'Gruppo', 'Voltaire', 'Kanit', "Fredericka+the+Great", 'Esteban', 'Pompiere', 'Niconne', 'Delius','Rationale',
            'Nanum+Pen+Script', 'Schoolbell', 'Jim+Nightshade', 'Julee', 'Estonia', 'East+Sea+Dokdo', 'Julee', 'Economica',
-           'Anton', 'Long+Cang', 'Birthstone', 'Condiment',"Metal+Mania",'Passero+One',"Mountains+of+Christmas","Shadows+Into+Light"]
+           'Anton', 'Long+Cang','Rationale',  'Birthstone', 'Condiment',"Metal+Mania",'Passero+One',"Mountains+of+Christmas","Shadows+Into+Light",'Anton+SC']
 
 LIFEPATH_CATEGORY = (
     ('0', "Birthright"),

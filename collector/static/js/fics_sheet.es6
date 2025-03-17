@@ -92,20 +92,20 @@ class FICSSheet extends Sheet {
             me.drawLine(0.8, 23.2, 1, 1, me.draw_fill, me.draw_fill, 6)
             me.drawLine(0.8, 23.2, 33, 33, me.draw_fill, me.draw_fill, 6)
 
+            if (me.debug){
+                me.daddy = me.front;
+                me.drawRect( 1.5, 1.5, 21, 21,"white", me.draw_fill, 1)
+                me.writeText({"x":2,"y": 3, "size": me.small_font_size/me.step, "text":"Small font size"})
+                me.writeText({"x":2,"y": 4, "size": me.medium_font_size/me.step, "text":"Medium font size"})
+                me.writeText({"x":2,"y": 5, "size": me.big_font_size/me.step, "text":"Big font size"})
+                me.writeText({"x":2,"y": 6, "size": me.large_font_size/me.step, "text":"Large font size"})
+                me.writeText({"x":2,"y": 8, "size": me.fat_font_size/me.step, "text":"FADING SUNS fat font size", "font":me.title_font})
 
-            me.daddy = me.front;
-            me.drawRect( 1.5, 1.5, 21, 21,"white", me.draw_fill, 1)
-            me.writeText({"x":2,"y": 3, "size": me.small_font_size/me.step, "text":"Small font size"})
-            me.writeText({"x":2,"y": 4, "size": me.medium_font_size/me.step, "text":"Medium font size"})
-            me.writeText({"x":2,"y": 5, "size": me.big_font_size/me.step, "text":"Big font size"})
-            me.writeText({"x":2,"y": 6, "size": me.large_font_size/me.step, "text":"Large font size"})
-            me.writeText({"x":2,"y": 8, "size": me.fat_font_size/me.step, "text":"FADING SUNS fat font size", "font":me.title_font})
-
-            me.writeText({"x":12,"y": 3, "size": me.small_font_size/me.step, "text":"Small font size", "font":me.user_font})
-            me.writeText({"x":12,"y": 4, "size": me.medium_font_size/me.step, "text":"Medium font size", "font":me.user_font})
-            me.writeText({"x":12,"y": 5, "size": me.big_font_size/me.step, "text":"Big font size", "font":me.user_font})
-            me.writeText({"x":12,"y": 6, "size": me.large_font_size/me.step, "text":"Large font size", "font":me.user_font})
-
+                me.writeText({"x":12,"y": 3, "size": me.small_font_size/me.step, "text":"Small font size", "font":me.user_font})
+                me.writeText({"x":12,"y": 4, "size": me.medium_font_size/me.step, "text":"Medium font size", "font":me.user_font})
+                me.writeText({"x":12,"y": 5, "size": me.big_font_size/me.step, "text":"Big font size", "font":me.user_font})
+                me.writeText({"x":12,"y": 6, "size": me.large_font_size/me.step, "text":"Large font size", "font":me.user_font})
+            }
 
 
         }
@@ -134,7 +134,7 @@ class FICSSheet extends Sheet {
         me.decorationText(7.5, 3.25, 0, 'start', me.title_font, me.fat_font_size * 1.35, "FFFFFFCF", "FFFFFFCF", 20, title_text1, me.front, 1.0);
         me.decorationText(16.5, 3.25, 0, 'end', me.title_font, me.fat_font_size * 1.35, "FFFFFFCF", "FFFFFFCF", 20, title_text2, me.front, 1.0);
         //me.drawJumpgateLogo(12 * me.step, 2.6 * me.step)
-        me.decorationText(7.5, 3.25, 0, 'start', me.title_font, me.fat_font_size * 1.35, me.shadow_fill+"7f", me.shadow_stroke, 1, title_text1, me.front, 1);
+        me.decorationText(7.5, 3.25, 0, 'start', me.title_font, me.fat_font_size * 1.35, me.shadow_fill, me.shadow_stroke, 1, title_text1, me.front, 1);
         me.decorationText(16.5, 3.25, 0, 'end', me.title_font, me.fat_font_size * 1.35, "#2020207f", "#202020", 1, title_text2, me.front, 1);
         me.decorationText(12, 3.5, 0, 'middle', "Syne Mono", me.small_font_size, me.draw_fill, me.draw_stroke, 0.5, me.post_title, me.front, 0.8);
         //if (me.data.keyword.includes("SANFRANCIS")){
@@ -185,14 +185,15 @@ class FICSSheet extends Sheet {
         } else if (page == 2) {
             me.fillName(page)
             me.fillToDs(1.5, 1.5)
-            me.fillBC(1.5, 16.5)
-            me.fillBA(11.5, 16.5)
+            me.fillBC(1.5, 17.5)
+            me.fillBA(11.5, 17.5)
             me.fillOccult(1.5, 23.75)
 
         } else if (page == 3) {
             me.fillName(page)
-            me.fillGear(12.25, 20.5)
-            me.fillShortcuts(1.25, 20.5)
+            me.fillGear(12.25, 13)
+            me.fillShortcuts(1.5, 13)
+            me.fillSummary(1.5, 1.5)
         }
     }
 

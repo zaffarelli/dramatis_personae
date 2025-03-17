@@ -128,6 +128,8 @@ class Character(Combattant):
     azurites = models.PositiveIntegerField(default=0, blank=True)
     diamonds = models.PositiveIntegerField(default=0, blank=True)
     rubies = models.PositiveIntegerField(default=0, blank=True)
+    incomp = models.PositiveIntegerField(default=0, blank=True)
+    sanity = models.PositiveIntegerField(default=0, blank=True)
 
     skills_options = []
     degrees_options = []
@@ -139,6 +141,10 @@ class Character(Combattant):
     bc_options_not = []
     AP_tod_pool = 0
     OP_tod_pool = 0
+    SK_tod_pool = 0
+    DE_tod_pool = 0
+    BC_tod_pool = 0
+    BA_tod_pool = 0
     SWP_tod_pool = 0
     DWP_tod_pool = 0
     weapon_options = []
@@ -290,6 +296,10 @@ class Character(Combattant):
         # self.purge_talents()
         self.AP_tod_pool = 0
         self.OP_tod_pool = 0
+        self.SK_tod_pool = 0
+        self.DE_tod_pool = 0
+        self.BC_tod_pool = 0
+        self.BA_tod_pool = 0
         self.SWP_tod_pool = 0
         self.DWP_tod_pool = 0
         self.life_path_total = 0
@@ -307,13 +317,15 @@ class Character(Combattant):
         print("RFL: Applying ToDS")
         for tod in self.tourofduty_set.all():
             print(f"RFL: Applying [{tod.tour_of_duty_ref.reference}]")
-            AP, OP, SWP, DWP = tod.push(self)
+            AP, OP, SWP, DWP, SK, DE, BC, BA = tod.push(self)
             #self.mix_degree_wp_choices(tod.tour_of_duty_ref.degrees_wp_choices)
             self.charactercusto.register_tod_wp(tod.tour_of_duty_ref.degrees_wp_choices)
             self.AP_tod_pool += AP
             self.OP_tod_pool += OP
-            self.OP_tod_pool += SWP
-            self.OP_tod_pool += DWP
+            self.SK_tod_pool += SK
+            self.DE_tod_pool += DE
+            self.BC_tod_pool += BC
+            self.BA_tod_pool += BA
             self.SWP_tod_pool += SWP
             self.DWP_tod_pool += DWP
             self.life_path_total += tod.tour_of_duty_ref.value
@@ -522,22 +534,27 @@ class Character(Combattant):
             self.race = self.specie.species
 
             if self.PA_BOD != 0:
-                if self.height == 0:
+                if self.height != 0:
                     if "urthish" in self.specie.species.lower():
-                        self.height = 150 + 2.39473 * (self.PA_BOD / 2 + self.PA_STR + self.PA_CON + 2)  # 145
+                        self.height = 2.39473 * (self.PA_BOD / 2 + self.PA_STR*2 + self.PA_CON + 2)  # 145
                         if self.gender == 'male':
-                            self.weight = self.height / (2.8 - 0.06 * (self.PA_BOD + self.PA_CON))
+                            self.height = self.height + 140
+                            self.weight = self.height / (2.8 - 0.07 * (self.PA_BOD + self.PA_STR + self.PA_CON - self.PA_AGI - self.PA_MOV))
                         else:
-                            self.weight = self.height / (3.0 - 0.04 * (self.PA_BOD + self.PA_CON))
-                        if self.PA_MOV != self.PA_CON:
-                            self.weight *= 1 + (self.PA_CON - self.PA_MOV) * 0.1
+                            self.height = self.height + 138
+                            self.weight = self.height / (2.8 - 0.04 * (self.PA_BOD*2 - self.PA_STR + 2*self.PA_CON - self.PA_AGI  - 2*self.PA_MOV))
+                        # if self.PA_MOV != self.PA_CON:
+                        #     self.weight *= 1 + (self.PA_CON - self.PA_MOV) * 0.1
                         print("Height/Weight Experiment 1: %s --> %0.2f %0.2f BODY:%d CONSTITUTION:%d" % (
                             self.full_name, self.height, self.weight, self.PA_BOD, self.PA_CON))
             # self.is_exportable = True #self.check_exportable()
             self.update_challenge()
             self.update_stories_count()
             self.race = self.specie.species
-
+            self.incomp = 0
+            for cyb in self.cyberware_set.all():
+                self.incomp += cyb.cyberware_ref.incompatibility
+            self.sanity = self.SA_HUM - self.incomp
             if self.historical_figure:
                 self.audit_log()
             self.need_fix = False
@@ -589,14 +606,26 @@ class Character(Combattant):
         res = ''
         res += '<i class="fas fa-th-large" title="primary attributes"></i>%d ' % (self.AP)
         res += '<i class="fas fa-th-list" title="skills"></i> %d ' % (self.SK_TOTAL)
+        res += '<i class="fas fa-th-list" title="degrees"></i> %d ' % (self.DE_TOTAL)
         res += '<i class="fas fa-th" title="BC/BA"></i> %d ' % (self.BC_TOTAL + self.BA_TOTAL)
         res += '<i class="fas fa-star" title="wildcards skills"></i> %d ' % (self.SWP_tod_pool)
         res += '<i class="fas fa-star" title="wildcards degrees"></i> %d ' % (self.DWP_tod_pool)
         res += '<i class="fas fa-newspaper" title="OP -vs- LifePath"></i> %d/%d ' % (self.OP, self.life_path_total)
         res += '<i class="fas fa-square" title="exp_bal/xp_spent"></i> %d/%d ' % (self.experience_balance, self.xp_spent)
         res += '<i class="fas fa-circle" title="Adjusted"></i> %d ' % (self.OP - self.experience_balance)
-        self.challenge_value = self.AP * 3 + self.SK_TOTAL + self.BC_TOTAL + self.BA_TOTAL - self.experience_balance
+        self.challenge_value = self.AP * 3 + self.SK_TOTAL + self.DE_TOTAL + self.BC_TOTAL + self.BA_TOTAL - self.experience_balance
         self.challenge = res
+
+    def update_challenge_pdf(self):
+        res = ''
+        res += f"ATTRIBUTES {self.AP} (={self.AP*3}OP); "
+        res += f"SKILLS {self.SK_TOTAL}; "
+        res += f"DEGREES {self.DE_TOTAL}; "
+        res += f"BLESSINGS/CURSES {self.BC_TOTAL}; "
+        res += f"BENEFICES/AFFLICTIONS {self.BA_TOTAL}; "
+        res += f"OP/LIFEPATH {self.OP}/{self.life_path_total}"
+        return res
+
 
     def calculate_shortcuts(self):
         """ Calculate shortcuts for the avatar skills. A shortcut appears if skill.value>0  """
@@ -835,10 +864,26 @@ class Character(Combattant):
     def rank_name(self):
         rank = "Subject of the Empire"
         if self.caste.lower() == "nobility":
+            occurences = {}
+            for tod in self.tourofduty_set.all():
+                for x in ["Li Halan", "Al-Malik", "Decados", "D'Rouge-Glace", "Masseri",
+                          "Justinian", "Juandaastas", "Hazat", "Hawkwood", "Torenson",
+                          "Van Gelder","Trusnikron","Keddah","Shelit","Thana","Xanthippe"
+                          ]:
+                    if x in tod.tour_of_duty_ref.reference:
+                        if x in occurences:
+                            occurences[x] += 1
+                        else:
+                            occurences[x] = 1
+            max = -1
+            choice = ""
+            for k,v in occurences.items():
+              if v > max:
+                  choice = k
             if self.ranking <= 1:
                 rank = "Squire" if not self.gender else "Damsel"
             elif self.ranking <= 3:
-                rank = "Knight" if not self.gender else "Maiden"
+                rank = "Knight" if not self.gender else "Consoror"
             elif self.ranking <= 5:
                 rank = "Baronnet" if not self.gender else "Baronnet"
             elif self.ranking <= 7:
@@ -1082,13 +1127,13 @@ class Character(Combattant):
         for ba in beneficeafflictions:
             self.BA_TOTAL += ba.benefice_affliction_ref.value
         self.AP = self.PA_TOTAL
-        self.OP = self.PA_TOTAL * 3 + self.SK_TOTAL + self.BC_TOTAL + self.BA_TOTAL
+        self.OP = self.PA_TOTAL * 3 + self.DE_TOTAL + self.SK_TOTAL + self.BC_TOTAL + self.BA_TOTAL
         weapons = self.weapon_set.all()
         for w in weapons:
             self.weapon_cost += w.weapon_ref.cost
         armors = self.armor_set.all()
         for a in armors:
-            self.armor_cost += a.armor_ref.cost
+            self.armor_cost += a.armor_ref.price
         shields = self.shield_set.all()
         for s in shields:
             self.shield_cost += s.shield_ref.cost
@@ -1189,20 +1234,20 @@ class Character(Combattant):
             self.tod_count = 0
 
         # Armor stopping power
-        SP_grid = {"HE": 0, "TO": 0, "LA": 0, "RA": 0, "LL": 0, "RL": 0, "LW": 0, "RW": 0, "enc": 0}
+        SP_grid = {"HE": 0, "TO": 0, "WA": 0, "SA": 0, "WL": 0, "SL": 0, "LW": 0, "RW": 0, "enc": 0}
         for a in self.armor_set.all():
             if a.armor_ref.head:
                 SP_grid["HE"] += a.armor_ref.stopping_power
             if a.armor_ref.torso:
                 SP_grid["TO"] += a.armor_ref.stopping_power
-            if a.armor_ref.left_leg:
-                SP_grid["LL"] += a.armor_ref.stopping_power
-            if a.armor_ref.right_leg:
-                SP_grid["RL"] += a.armor_ref.stopping_power
-            if a.armor_ref.left_arm:
-                SP_grid["LA"] += a.armor_ref.stopping_power
-            if a.armor_ref.right_arm:
-                SP_grid["RA"] += a.armor_ref.stopping_power
+            if a.armor_ref.weak_leg:
+                SP_grid["WL"] += a.armor_ref.stopping_power
+            if a.armor_ref.strong_leg:
+                SP_grid["WL"] += a.armor_ref.stopping_power
+            if a.armor_ref.weak_arm:
+                SP_grid["WA"] += a.armor_ref.stopping_power
+            if a.armor_ref.strong_arm:
+                SP_grid["SA"] += a.armor_ref.stopping_power
             SP_grid["enc"] += a.armor_ref.encumbrance
         # logger.info(SP_grid)
         if len(self.armor_set.all()) == 0:
@@ -1333,6 +1378,11 @@ class Character(Combattant):
         tods = []
         for tod in self.tourofduty_set.all():
             tods.append(tod.tour_of_duty_ref.to_json_data())
+        # Cyberware
+        cyberwares = []
+        for cyberware in self.cyberware_set.all():
+            cyberwares.append(cyberware.cyberware_ref.to_json_data())
+
         bcs = []
         # Blessing Curses
         for bc in self.blessingcurse_set.all():
@@ -1345,6 +1395,7 @@ class Character(Combattant):
         # Rituals
         for ritual in self.ritual_set.all().order_by('ritual_ref__path', 'ritual_ref__level'):
             rituals.append(ritual.to_json())
+
         k = json.loads(j)
         k["creature"] = "mortal"
         k["date"] = datetime.datetime.now().strftime('%Y%m%d')
@@ -1357,11 +1408,12 @@ class Character(Combattant):
         k["alliance"] = alliance
         k["skills_list"] = skills_list
         k["degrees_list"] = degrees_list
+        k["pdf_challenge"] = self.update_challenge_pdf()
         k["armors"] = armors
         k["shields"] = shields
         k["weapons"] = weapons
         k["rituals"] = rituals
-        print(tods)
+        k["cyberwares"] = cyberwares
         k["tods"] = sorted(tods, key=itemgetter('category'))
         k["BC"] = bcs
         k["BA"] = bas

@@ -43,18 +43,18 @@ class SessionSheets extends Sheet {
         me.drawLine(0.5, me.xunits - 0.5, me.yunits - 1, me.yunits - 1, me.draw_fill, me.draw_fill, 6, me.strokedebris);
 
 
-        me.decorationText(1.5, 0.8, 0, 'start', me.base_font, me.medium_font_size, me.draw_fill, me.draw_stroke, 0.5, "Players Session Sheet - FuZion Interlock Custom System v7.5", me.back);
-        me.decorationText(me.xunits - 1.2, me.yunits - 0.2, -16, 'end', me.base_font, me.small_font_size, me.draw_fill, me.draw_stroke, 0.5, "doc:session_sheets | v" + me.version + " | 2022 | Zaffarelli | generated with DP", me.back);
+        me.decorationText(1.5, 0.8, 0, 'start', me.base_font, me.medium_font_size, me.draw_fill, me.draw_stroke, 0.5, "Players Session Sheet - FuZion Interlock Custom System v10", me.back);
+        me.decorationText(me.xunits - 1.2, me.yunits - 0.2, -16, 'end', me.base_font, me.small_font_size, me.draw_fill, me.draw_stroke, 0.5, "doc:session_sheets | v" + me.version + " | 2025 | Zaffarelli | generated with DP", me.back);
 
 
         let title_text = 'Fading Suns'.toUpperCase();
-        me.decorationText(5, 22.32, 0, 'middle', me.title_font, me.fat_font_size * 0.8, '#FFF', '#FFF', 5, title_text, me.back, 1.0);
-        me.drawJumpgateLogo(5 * me.stepx, 22 * me.stepy)
-        me.decorationText(5, 22.32, 0, 'middle', me.title_font, me.fat_font_size * 0.8, me.draw_fill, me.draw_stroke, 1, title_text, me.back, 1);
-
+        me.decorationText(4.5, 22.32, 0, 'middle', me.title_font, me.fat_font_size * 0.8, '#FFF', '#FFF', 5, title_text, me.back, 1.0);
+//         me.drawJumpgateLogo(5 * me.step, 22 * me.step)
+        me.decorationText(4.5, 22.32, 0, 'middle', me.title_font, me.fat_font_size * 0.8, me.draw_fill, me.draw_stroke, 1, title_text, me.back, 1);
 
         me.characters = me.back.append('g')
-            .attr('class', 'session_sheets');
+            .attr('class', 'players');
+
 
     }
 
@@ -63,20 +63,20 @@ class SessionSheets extends Sheet {
         me.generic = me.back.append('g')
             .attr('class', "generic");
         me.daddy = me.generic;
-        me.drawRect(ox, oy, 7, 21, "transparent", me.shadow_stroke);
+        me.drawRect(ox, oy, 6, 21, "transparent", me.shadow_stroke);
         me.adventure_entry = me.generic.selectAll('.adventure_entry')
             .append('g')
-            .attr('transform', "translate(" + (ox * me.stepx) + "," + (6 * me.stepy) + ")")
+            .attr('transform', "translate(" + (ox * me.step) + "," + (6 * me.step) + ")")
             .data(me.adventure_data)
             .enter();
         let aei = me.adventure_entry.append('g')
             .attr('class', 'adventure_entry')
         aei.append('text')
             .attr('x', function (d, i) {
-                return (ox+0.25) * me.stepx;
+                return (ox+0.25) * me.step;
             })
             .attr('y', function (d, i) {
-                return (oy + (i+1) / 2) * me.stepy;
+                return (oy + (i+1) / 2) * me.step;
             })
             .style('fill', me.draw_fill)
             .style('stroke', me.draw_stroke)
@@ -88,10 +88,10 @@ class SessionSheets extends Sheet {
             });
         aei.append('text')
             .attr('x', function (d, i) {
-                return (ox+7-0.25) * me.stepx;
+                return (ox+6-0.25) * me.step;
             })
             .attr('y', function (d, i) {
-                return (oy + (i+1)/2) * me.stepy;
+                return (oy + (i+1)/2) * me.step;
             })
             .style('fill', me.user_fill)
             .style('stroke', me.user_stroke)
@@ -110,25 +110,24 @@ class SessionSheets extends Sheet {
 
     drawFigures(ox = 0, oy = 0) {
         let me = this;
-        me.player = me.characters.selectAll('.players')
+        me.players = me.characters.selectAll('.players')
             .append('g')
-            .attr('transform', "translate(" + (ox * me.stepx) + "," + (6 * me.stepy) + ")")
             .data(me.data)
-            .enter()
-        me.player.append('g')
-            .attr('class', 'players')
-            .append('rect')
+        me.player = me.players.enter()
+        me.player_item = me.player.append('g')
+            .attr('class', 'player')
+        me.player_item.append('rect')
             .attr('x', function (d) {
-                return d['idx'] * me.stepx * 5 + ox * me.stepx;
+                return d['idx'] * me.step * 5 + ox * me.step;
             })
             .attr("y", function (d) {
-                return me.stepy * (oy);
+                return me.step * (oy);
             })
             .attr('width', function (d) {
-                return me.stepx * 5
+                return me.step * 5
             })
             .attr('height', function (d) {
-                return me.stepy * 21;
+                return me.step * 21;
             })
             .style('fill', "none")
             .style('stroke', me.shadow_stroke)
@@ -137,9 +136,15 @@ class SessionSheets extends Sheet {
         me.daddy = me.player;
 
         let xfunc = function (x) {
-            return x * me.stepx * 5 + (ox + 0.25) * me.stepx;
+            return x * me.step * 5 + (ox + 0.25) * me.step;
         }
-        me.sheetEntry(xfunc, 0.5, ox, oy, "Name", "full_name", me.big_font_size,)
+
+        let xfunc2 = function (x) {
+            return x * (me.step * 5)+ (me.step*5)%3 + (ox + 0.25) * me.step;
+        }
+
+
+        me.sheetEntry(xfunc, 0.5, ox, oy, "Name", "full_name", me.medium_font_size,)
         me.sheetEntry(xfunc, 1.0, ox, oy, "Player", "player")
 
         me.sheetEntryLeft(xfunc, 2.0, ox, oy, "Hit Points", "SA_END")
@@ -152,57 +157,81 @@ class SessionSheets extends Sheet {
         me.sheetEntryLeft(xfunc, 3.5, ox, oy, "Passion", "SA_PAS")
         me.sheetEntryRight(xfunc, 3.5, ox, oy, "Wyrd", "SA_WYR")
 
-        me.sheetEntryLeft(xfunc, 4.5, ox, oy, "STR", "PA_STR")
-        me.sheetEntryRight(xfunc, 4.5, ox, oy, "BOD", "PA_BOD")
-        me.sheetEntryLeft(xfunc, 5.0, ox, oy, "CON", "PA_CON")
-        me.sheetEntryRight(xfunc, 5.0, ox, oy, "MOV", "PA_MOV")
+        me.sheetEntryTriA(xfunc2, 4.5, ox, oy, "STR", "PA_STR")
+        me.sheetEntryTriA(xfunc2, 5.0, ox, oy, "BOD", "PA_BOD")
+        me.sheetEntryTriA(xfunc2, 5.5, ox, oy, "CON", "PA_CON")
+        me.sheetEntryTriA(xfunc2, 6.0, ox, oy, "MOV", "PA_MOV")
 
-        me.sheetEntryLeft(xfunc, 6.0, ox, oy, "INT", "PA_INT")
-        me.sheetEntryRight(xfunc, 6.0, ox, oy, "WIL", "PA_WIL")
-        me.sheetEntryLeft(xfunc, 6.5, ox, oy, "TEM", "PA_TEM")
-        me.sheetEntryRight(xfunc, 6.5, ox, oy, "PRE", "PA_PRE")
+        me.sheetEntryTriB(xfunc2, 4.5, ox, oy, "INT", "PA_INT")
+        me.sheetEntryTriB(xfunc2, 5.0, ox, oy, "WIL", "PA_WIL")
+        me.sheetEntryTriB(xfunc2, 5.5, ox, oy, "TEM", "PA_TEM")
+        me.sheetEntryTriB(xfunc2, 6.0, ox, oy, "PRE", "PA_PRE")
 
-        me.sheetEntryLeft(xfunc, 7.5, ox, oy, "TEC", "PA_TEC")
-        me.sheetEntryRight(xfunc, 7.5, ox, oy, "REF", "PA_REF")
-        me.sheetEntryLeft(xfunc, 8.0, ox, oy, "AGI", "PA_AGI")
-        me.sheetEntryRight(xfunc, 8.0, ox, oy, "AWA", "PA_AWA")
+        me.sheetEntryTriC(xfunc2, 4.5, ox, oy, "TEC", "PA_TEC")
+        me.sheetEntryTriC(xfunc2, 5.0, ox, oy, "DEX", "PA_DEX")
+        me.sheetEntryTriC(xfunc2, 5.5, ox, oy, "AGI", "PA_AGI")
+        me.sheetEntryTriC(xfunc2, 6.0, ox, oy, "AWA", "PA_AWA")
 
-        me.sheetEntry(xfunc, 9.0, ox, oy, "Dodge", "skills_list", 0, "skill", "Dodge")
-        me.sheetEntry(xfunc, 9.5, ox, oy, "Empathy", "skills_list", 0, "skill", "Empathy")
-        me.sheetEntry(xfunc, 10.0, ox, oy, "Etiquette", "skills_list", 0, "skill", "Etiquette")
-        me.sheetEntry(xfunc, 10.5, ox, oy, "Focus", "skills_list", 0, "skill", "Focus")
-        me.sheetEntry(xfunc, 11.0, ox, oy, "Observe", "skills_list", 0, "skill", "Observe")
-        me.sheetEntry(xfunc, 11.5, ox, oy, "Knavery", "skills_list", 0, "skill", "Knavery")
-        me.sheetEntry(xfunc, 12.0, ox, oy, "Stoic Body", "skills_list", 0, "skill", "Stoic Body")
-        me.sheetEntry(xfunc, 12.5, ox, oy, "Stoic Mind", "skills_list", 0, "skill", "Stoic Mind")
+        let sy = 6.75
+        let fs = 1
+        me.sheetEntryLeft(xfunc, sy, ox, oy, "Academia", "skills_list", fs, "skill", "Academia"); sy += 0.5
+        me.sheetEntryLeft(xfunc, sy, ox, oy, "Adaptation", "skills_list", fs, "skill", "Adaptation"); sy += 0.5
+        me.sheetEntryLeft(xfunc, sy, ox, oy, "Alchemy", "skills_list", fs, "skill", "Alchemy"); sy += 0.5
+        me.sheetEntryLeft(xfunc, sy, ox, oy, "Athletics", "skills_list", fs, "skill", "Athletics"); sy += 0.5
+        me.sheetEntryLeft(xfunc, sy, ox, oy, "Beastcraft", "skills_list", fs, "skill", "Beastcraft"); sy += 0.5
+        me.sheetEntryLeft(xfunc, sy, ox, oy, "Bureaucracy", "skills_list", fs, "skill", "Bureaucracy"); sy += 0.5
+        me.sheetEntryLeft(xfunc, sy, ox, oy, "Demolition", "skills_list", fs, "skill", "Demolition"); sy += 0.5
+        me.sheetEntryLeft(xfunc, sy, ox, oy, "Disguise", "skills_list", fs, "skill", "Disguise"); sy += 0.5
+        me.sheetEntryLeft(xfunc, sy, ox, oy, "Empathy", "skills_list", fs, "skill", "Empathy"); sy += 0.5
+        me.sheetEntryLeft(xfunc, sy, ox, oy, "Etiquette", "skills_list", fs, "skill", "Etiquette"); sy += 0.5
+        me.sheetEntryLeft(xfunc, sy, ox, oy, "Fight", "skills_list", fs, "skill", "Fight"); sy += 0.5
+        me.sheetEntryLeft(xfunc, sy, ox, oy, "Focus", "skills_list", fs, "skill", "Focus"); sy += 0.5
+        me.sheetEntryLeft(xfunc, sy, ox, oy, "Gunnery", "skills_list", fs, "skill", "Gunnery"); sy += 0.5
+        me.sheetEntryLeft(xfunc, sy, ox, oy, "Impress", "skills_list", fs, "skill", "Impress"); sy += 0.5
+        me.sheetEntryLeft(xfunc, sy, ox, oy, "Inquiry", "skills_list", fs, "skill", "Inquiry"); sy += 0.5
+        sy = 6.75
+        me.sheetEntryRight(xfunc, sy, ox, oy, "Knavery", "skills_list", fs, "skill", "Knavery"); sy += 0.5
+        me.sheetEntryRight(xfunc, sy, ox, oy, "Leadership", "skills_list", fs, "skill", "Leadership"); sy += 0.5
+        me.sheetEntryRight(xfunc, sy, ox, oy, "Maneuver", "skills_list", fs, "skill", "Maneuver"); sy += 0.5
+        me.sheetEntryRight(xfunc, sy, ox, oy, "Melee", "skills_list", fs, "skill", "Melee"); sy += 0.5
+        me.sheetEntryRight(xfunc, sy, ox, oy, "Observe", "skills_list", fs, "skill", "Observe"); sy += 0.5
+        me.sheetEntryRight(xfunc, sy, ox, oy, "Performance", "skills_list", fs, "skill", "Performance"); sy += 0.5
+        me.sheetEntryRight(xfunc, sy, ox, oy, "Redemption", "skills_list", fs, "skill", "Redemption"); sy += 0.5
+        me.sheetEntryRight(xfunc, sy, ox, oy, "Remedy", "skills_list", fs, "skill", "Remedy"); sy += 0.5
+        me.sheetEntryRight(xfunc, sy, ox, oy, "Riddles", "skills_list", fs, "skill", "Riddles"); sy += 0.5
+        me.sheetEntryRight(xfunc, sy, ox, oy, "Search", "skills_list", fs, "skill", "Search"); sy += 0.5
+        me.sheetEntryRight(xfunc, sy, ox, oy, "Seduction", "skills_list", fs, "skill", "Seduction"); sy += 0.5
+        me.sheetEntryRight(xfunc, sy, ox, oy, "Shoot", "skills_list", fs, "skill", "Shoot"); sy += 0.5
+        me.sheetEntryRight(xfunc, sy, ox, oy, "Sneak", "skills_list", fs, "skill", "Sneak"); sy += 0.5
+        me.sheetEntryRight(xfunc, sy, ox, oy, "Surveillance", "skills_list", fs, "skill", "Surveillance"); sy += 0.5
+        me.sheetEntryRight(xfunc, sy, ox, oy, "Teaching", "skills_list", fs, "skill", "Teaching"); sy += 0.5
 
-        me.sheetEntry(xfunc, 13.5, ox, oy, "Azurites", "azurites")
-        me.sheetEntry(xfunc, 14.0, ox, oy, "Diamonds", "diamonds")
-        me.sheetEntry(xfunc, 14.5, ox, oy, "Rubies", "rubies")
+
 
 
         me.daddy = me.lines
-        me.drawLine(ox, me.xunits - 2, oy + 1.5, oy + 1.5, me.draw_fill, me.draw_fill, 1, me.strokedebris);
-        me.drawLine(ox, me.xunits - 2, oy + 4.0, oy + 4.0, me.draw_fill, me.draw_fill, 1, me.strokedebris);
-        me.drawLine(ox, me.xunits - 2, oy + 5.5, oy + 5.5, me.draw_fill, me.draw_fill, 1, me.strokedebris);
-        me.drawLine(ox, me.xunits - 2, oy + 7.0, oy + 7.0, me.draw_fill, me.draw_fill, 1, me.strokedebris);
-        me.drawLine(ox, me.xunits - 2, oy + 8.5, oy + 8.5, me.draw_fill, me.draw_fill, 1, me.strokedebris);
-        me.drawLine(ox, me.xunits - 2, oy + 13, oy + 13, me.draw_fill, me.draw_fill, 1, me.strokedebris);
-        me.drawLine(ox, me.xunits - 2, oy + 15, oy + 15, me.draw_fill, me.draw_fill, 1, me.strokedebris);
+        me.drawLine(ox, me.xunits - 1.25, oy + 1.25, oy + 1.25, me.draw_fill, me.draw_fill, 1, me.strokedebris);
+        me.drawLine(ox, me.xunits - 1.25, oy + 4.0, oy + 4.0, me.draw_fill, me.draw_fill, 1, me.strokedebris);
+        me.drawLine(ox, me.xunits - 1.25, oy + 6.25, oy + 6.25, me.draw_fill, me.draw_fill, 1, me.strokedebris);
+        me.drawLine(ox, me.xunits - 1.25, oy + 14.0, oy + 14.0, me.draw_fill, me.draw_fill, 1, me.strokedebris);
+
     }
 
-    baseSheetEntry(xfunc, y, ox = 0, oy = 0, proplabel, prop = '', font_size = 0, direct_prop = '', direct_value = '', offsetx = 0, offsetx2 = 0) {
+    baseSheetEntry(func, y, ox = 0, oy = 0, proplabel, prop = '', font = 0, direct_prop = '', direct_value = '', offsetx = 0, offsetx2 = 0) {
         let me = this;
-        if (font_size == 0) {
+        let font_size = font
+        if (font == 0) {
             font_size = me.small_font_size;
+        }else
+        if (font == 1) {
+            font_size = me.small_font_size*1.5
         }
-        console.log(font_size);
         me.daddy.append('text')
             .attr('x', function (d) {
-                return xfunc(d['idx']) + offsetx * me.stepx;
+                return func(d['idx']) + offsetx * me.step;
             })
             .attr('y', function (d) {
-                return (oy + y) * me.stepy;
+                return (oy + y) * me.step;
             })
             .style('fill', me.draw_fill)
             .style('stroke', me.draw_stroke)
@@ -215,10 +244,10 @@ class SessionSheets extends Sheet {
         ;
         me.daddy.append('text')
             .attr('x', function (d) {
-                return xfunc(d['idx']) + offsetx2 * me.stepx;
+                return func(d['idx']) + offsetx2 * me.step;
             })
             .attr('y', function (d) {
-                return (oy + y) * me.stepy;
+                return (oy + y) * me.step;
             })
             .style('fill', me.user_fill)
             .style('stroke', me.user_stroke)
@@ -226,8 +255,9 @@ class SessionSheets extends Sheet {
             .style('text-anchor', 'end')
             .style('font-family', me.user_font)
             .style('font-size', (font_size) + "pt")
-            .text(function (d) {
+            .text((d) => {
                 let result = d[prop]
+                let tmp = ""
                 if (direct_value != '') {
                     _.forEach(d[prop], function (e) {
                         if (e[direct_prop] == direct_value) {
@@ -236,25 +266,65 @@ class SessionSheets extends Sheet {
                         }
                     });
                 }
+
+                if (false){
+                if (!isNaN(parseInt(result)) && (font==1)) {
+                    let v = parseInt(result)
+                    if (v<5){
+                        for(let r=0;r<4;r++){
+                            if (r<v){
+                                tmp = "●"+tmp
+                            }else{
+                                tmp = "○"+tmp
+                                }
+                        }
+                    }else{
+                        tmp = "◈"
+                        for(let r=6;r<10;r++){
+                            if (r<v){
+                                tmp = "◆"+tmp
+                            }else{
+                                tmp = "◇"+tmp
+                                }
+                        }
+                    }
+                    result = tmp
+                }else{
+                    }
+                }
                 return result
             })
-        ;
 
     }
 
-    sheetEntryLeft(xfunc, y, ox = 0, oy = 0, proplabel, prop = '', font_size = 0, direct_prop = '', direct_value = '') {
+    sheetEntryLeft(func, y, ox = 0, oy = 0, proplabel, prop = '', font_size = 0, direct_prop = '', direct_value = '') {
         let me = this
-        me.baseSheetEntry(xfunc, y, ox, oy, proplabel, prop, font_size, direct_prop, direct_value, -0.125, 2.25)
+        me.baseSheetEntry(func, y, ox, oy, proplabel, prop, font_size, direct_prop, direct_value, -0.125, 2.25)
     }
 
-    sheetEntryRight(xfunc, y, ox = 0, oy = 0, proplabel, prop = '', font_size = 0, direct_prop = '', direct_value = '') {
+    sheetEntryRight(func, y, ox = 0, oy = 0, proplabel, prop = '', font_size = 0, direct_prop = '', direct_value = '') {
         let me = this
-        me.baseSheetEntry(xfunc, y, ox, oy, proplabel, prop, font_size, direct_prop, direct_value, 2.75 - 0.125, 4.5)
+        me.baseSheetEntry(func, y, ox, oy, proplabel, prop, font_size, direct_prop, direct_value, 2.75 - 0.125, 4.5)
     }
 
-    sheetEntry(xfunc, y, ox = 0, oy = 0, proplabel, prop = '', font_size = 0, direct_prop = '', direct_value = '') {
+    sheetEntry(func, y, ox = 0, oy = 0, proplabel, prop = '', font_size = 0, direct_prop = '', direct_value = '') {
         let me = this
-        me.baseSheetEntry(xfunc, y, ox, oy, proplabel, prop, font_size, direct_prop, direct_value, -0.125, 4.5)
+        me.baseSheetEntry(func, y, ox, oy, proplabel, prop, font_size, direct_prop, direct_value, -0.125, 4.5)
+    }
+
+    sheetEntryTriA(func, y, ox = 0, oy = 0, proplabel, prop = '', font_size = 0, direct_prop = '', direct_value = '') {
+        let me = this
+        me.baseSheetEntry(func, y, ox, oy, proplabel, prop, font_size, direct_prop, direct_value, -0.125, 1.5-0.25)
+    }
+
+    sheetEntryTriB(func, y, ox = 0, oy = 0, proplabel, prop = '', font_size = 0, direct_prop = '', direct_value = '') {
+        let me = this
+        me.baseSheetEntry(func, y, ox, oy, proplabel, prop, font_size, direct_prop, direct_value, -0.125+1.5+0.25, 3-0.25)
+    }
+
+    sheetEntryTriC(func, y, ox = 0, oy = 0, proplabel, prop = '', font_size = 0, direct_prop = '', direct_value = '') {
+        let me = this
+        me.baseSheetEntry(func, y, ox, oy, proplabel, prop, font_size, direct_prop, direct_value, -0.125+3+0.25, 4.5-0.25)
     }
 
 
@@ -272,10 +342,9 @@ class SessionSheets extends Sheet {
 
         $(me.parent).css('display', 'block');
         me.drawWatermark(page);
-
-        // me.fillCharacter(page);
         me.drawGeneric(1.5, 1.5);
-        me.drawFigures(9, 1.5);
+        me.drawPages(9, 1.5);
+        me.drawFigures(7.8, 1.5);
         me.drawButtons();
         me.zoomActivate();
     }

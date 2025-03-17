@@ -50,11 +50,14 @@ class TourOfDutyRef(RiddedMixin):
     is_custom = models.BooleanField(default=True)
     need_fix = models.BooleanField(default=False, blank=True)
     AP = models.IntegerField(default=0)
-    SP = models.IntegerField(default=0)
-    DP = models.IntegerField(default=0)
-    BCP = models.IntegerField(default=0)
-    BAP = models.IntegerField(default=0)
+    SK = models.IntegerField(default=0)
+    DE = models.IntegerField(default=0)
+    BC = models.IntegerField(default=0)
+    BA = models.IntegerField(default=0)
     OP = models.IntegerField(default=0)
+    WP = models.IntegerField(default=0)
+    SWP = models.IntegerField(default=0, blank=True) # Skill Wilcard Points
+    DWP = models.IntegerField(default=0, blank=True) # Skill Degree Points
     balance_AP = models.IntegerField(default=0)
     balance_OP = models.IntegerField(default=0)
     balance = models.IntegerField(default=0)
@@ -72,9 +75,7 @@ class TourOfDutyRef(RiddedMixin):
     PA_AWA = models.IntegerField(default=0)
     PA_OCC = models.IntegerField(default=0, blank=True)
     PA_DRK = models.IntegerField(default=0, blank=True)
-    WP = models.IntegerField(default=0)
-    SWP = models.IntegerField(default=0, blank=True) # Skill Wilcard Points
-    DWP = models.IntegerField(default=0, blank=True) # Skill Degree Points
+
     value = models.IntegerField(default=0)
     description = models.TextField(max_length=1024, default='', blank=True)
     notes = models.TextField(max_length=1024, default='', blank=True)
@@ -140,11 +141,11 @@ class TourOfDutyRef(RiddedMixin):
         else:
             self.AP = 0
             self.OP = 0
-            self.SP = 0
-            self.DP = 0
-            self.BAP = 0
-            self.BCP = 0
             self.WP = 0
+            self.SK = 0
+            self.DE = 0
+            self.BA = 0
+            self.BC = 0
             self.SWP = 0
             self.DWP = 0
             texts = []
@@ -162,7 +163,7 @@ class TourOfDutyRef(RiddedMixin):
             # SKILLS
             hrlist_skills = []
             items = self.skillmodificator_set.all()
-            self.SP, self.SWP = getFromList(items, hrlist_skills, "skill_ref")
+            self.SK, self.SWP = getFromList(items, hrlist_skills, "skill_ref")
             #print(hrlist_skills, self.SP)
             self.skill_modificators_summary = "Skills: "
             if len(hrlist_skills) > 0:
@@ -174,7 +175,7 @@ class TourOfDutyRef(RiddedMixin):
             # DEGREES
             hrlist_degrees = []
             items = self.degreemodificator_set.all()
-            self.DP, self.DWP = getFromList(items, hrlist_degrees, "degree_ref")
+            self.DE, self.DWP = getFromList(items, hrlist_degrees, "degree_ref")
             self.degree_modificators_summary = "Degrees: "
             if len(hrlist_degrees) > 0:
                 hrlist_degrees.sort()
@@ -202,7 +203,7 @@ class TourOfDutyRef(RiddedMixin):
             # BLESSINGS/CURSES
             hrlist_bc = []
             items = self.blessingcursemodificator_set.all()
-            self.BCP, _ = getFromList(items, hrlist_bc, "blessing_curse_ref")
+            self.BC, _ = getFromList(items, hrlist_bc, "blessing_curse_ref")
             self.blessingcurse_modificators_summary = "Blessing/Curses: "
             if len(hrlist_bc) > 0:
                 hrlist_bc.sort()
@@ -212,7 +213,7 @@ class TourOfDutyRef(RiddedMixin):
             # BENEFICES/AFFLICTIONS
             hrlist_ba = []
             items = self.beneficeafflictionmodificator_set.all()
-            self.BAP, _ = getFromList(items, hrlist_ba, "benefice_affliction_ref")
+            self.BA, _ = getFromList(items, hrlist_ba, "benefice_affliction_ref")
             self.beneficeaffliction_modificators_summary = "Benefices/Afflictions: "
             if len(hrlist_ba) > 0:
                 hrlist_ba.sort()
@@ -228,54 +229,55 @@ class TourOfDutyRef(RiddedMixin):
                 texts.append(self.beneficeaffliction_modificators_summary)
             if len(self.blessingcurse_modificators_summary) > 0:
                 texts.append(self.blessingcurse_modificators_summary)
-            self.description = "; ".join(texts)
-            self.OP = self.SP + self.DP + self.BCP + self.BAP + self.WP
+            self.OP = self.SK + self.DE + self.BC + self.BA + self.WP
             self.value = (self.AP + self.balance_AP) * 3 + (self.OP + self.balance_OP)
+            #texts.append(f"AP:{self.AP}({self.AP*3}) OP:{self.OP} WP:{self.WP}  SK:{self.SK} DE:{self.DE}  BC:{self.BC} BA:{self.BA} SWP:{self.SWP} DWP:{self.DWP} = {self.value}")
+            self.description = "; ".join(texts)
             self.check_value()
             print(self.__class__.validity())
         self.need_fix = False
 
-    def fix75(self):
-        """ Fixing skills for the 7.5 version of the rules
-        """
-        changes = [
-            {'skill': 'Surveillance', 'mixes_with': 'Security'},
-            {'skill': 'Oratory', 'mixes_with': 'Persuasion'},
-            {'skill': 'Cryptography', 'mixes_with': 'Security'},
-            {'skill': 'Bribery', 'mixes_with': 'Knavery'},
-            {'skill': 'Local Expert (undefined)', 'mixes_with': 'Lore (undefined)'}
-        ]
-        for s in self.skillmodificator_set.all():
-            for c in changes:
-                if c['skill'] == s.skill_ref.reference:
-                    print("found skill", s.skill_ref)
-                    found = False
-                    for m in self.skillmodificator_set.all():
-                        if c['mixes_with'] == m.skill_ref.reference:
-                            print("found mixes_with:", s.skill_ref)
-                            print(" --- skill value is ........ ", s.value)
-                            print(" --- mixes_with value is ... ", m.value)
-                            m.value += s.value
-                            s.value = 0
-                            m.save()
-                            s.save()
-                            s.delete()
-                            found = True
-                    if not found:
-                        from collector.models.skill import SkillModificator, SkillRef
-                        m = SkillModificator()
-                        m.tour_of_duty_ref = self
-                        m.value = s.value
-                        m.skill_ref = SkillRef.objects.get(reference=c['mixes_with'])
-                        m.save()
-                        s.delete()
-
-        print("done")
+    # def fix75(self):
+    #     """ Fixing skills for the 7.5 version of the rules
+    #     """
+    #     changes = [
+    #         {'skill': 'Surveillance', 'mixes_with': 'Security'},
+    #         {'skill': 'Oratory', 'mixes_with': 'Persuasion'},
+    #         {'skill': 'Cryptography', 'mixes_with': 'Security'},
+    #         {'skill': 'Bribery', 'mixes_with': 'Knavery'},
+    #         {'skill': 'Local Expert (undefined)', 'mixes_with': 'Lore (undefined)'}
+    #     ]
+    #     for s in self.skillmodificator_set.all():
+    #         for c in changes:
+    #             if c['skill'] == s.skill_ref.reference:
+    #                 print("found skill", s.skill_ref)
+    #                 found = False
+    #                 for m in self.skillmodificator_set.all():
+    #                     if c['mixes_with'] == m.skill_ref.reference:
+    #                         print("found mixes_with:", s.skill_ref)
+    #                         print(" --- skill value is ........ ", s.value)
+    #                         print(" --- mixes_with value is ... ", m.value)
+    #                         m.value += s.value
+    #                         s.value = 0
+    #                         m.save()
+    #                         s.save()
+    #                         s.delete()
+    #                         found = True
+    #                 if not found:
+    #                     from collector.models.skill import SkillModificator, SkillRef
+    #                     m = SkillModificator()
+    #                     m.tour_of_duty_ref = self
+    #                     m.value = s.value
+    #                     m.skill_ref = SkillRef.objects.get(reference=c['mixes_with'])
+    #                     m.save()
+    #                     s.delete()
+    #
+    #     print("done")
 
     def check_value(self):
         self.valid = False
         if self.category == '0':  # Birthright
-            self.balance = 130 - self.value
+            self.balance = 120 - self.value
             self.valid = True
         elif self.category == '5':  # Balance
             self.valid = True
@@ -350,6 +352,10 @@ class TourOfDuty(models.Model):
         tod = self.tour_of_duty_ref
         AP = 0
         OP = 0
+        SK = 0
+        DE = 0
+        BC = 0
+        BA = 0
         SWP = 0
         DWP = 0
         wp_roots = []
@@ -371,27 +377,38 @@ class TourOfDuty(models.Model):
             ch.PA_AWA += tod.PA_AWA
             ch.PA_OCC += tod.PA_OCC
             ch.PA_DRK += tod.PA_DRK
+            # All AP
+            AP = tod.PA_STR + tod.PA_CON + tod.PA_BOD + tod.PA_MOV
+            AP += tod.PA_INT + tod.PA_WIL + tod.PA_TEM + tod.PA_PRE
+            AP += tod.PA_DEX + tod.PA_TEC + tod.PA_AGI + tod.PA_AWA
+            AP += tod.PA_OCC - tod.PA_DRK
             # Skills Modificators
             for sm in tod.skillmodificator_set.all():
                 if not sm.skill_ref.is_wildcard:
                     ch.add_or_update_skill(sm.skill_ref, sm.value)
+                    SK += sm.value
                 else:
                     SWP += sm.value
             # Degrees Modificators
             for dm in tod.degreemodificator_set.all():
                 if not dm.degree_ref.is_wildcard:
                     ch.add_or_update_degree(dm.degree_ref, dm.value)
+                    DE += dm.value
                 else:
                     DWP += dm.value
             # Blessings/Curses
             for bc in tod.blessingcursemodificator_set.all():
                 ch.add_bc(bc.blessing_curse_ref)
+                BC += bc.blessing_curse_ref.value
             # Benefices/Afflictions
             for ba in tod.beneficeafflictionmodificator_set.all():
                 ch.add_ba(ba.benefice_affliction_ref)
-        AP += tod.balance_AP
-        OP += tod.balance_OP
-        return AP, OP, SWP, DWP
+                BA += ba.benefice_affliction_ref.value
+        #AP += tod.balance_AP
+        #OP += tod.balance_OP
+            OP = SK + DE + BC + BA
+
+        return AP, OP, SWP, DWP, SK, DE, BC, BA
 
 
 class TourOfDutyInline(admin.TabularInline):
