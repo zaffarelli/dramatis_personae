@@ -33,12 +33,16 @@ class BeneficeAfflictionRef(UUIDClass):
     ranking = models.BooleanField(default=False)
     cash_value = models.BooleanField(default=False)
     watermark = models.CharField(max_length=64, default='',blank=True)
+    shortcut = models.TextField(max_length=128, default='', blank=True)
+    indexed = models.BooleanField(default=False, blank=True)
+
 
     def __str__(self):
         return '%s %s(%d)' % (self.reference, self.emphasis, self.value)
 
     def fix(self):
         super().fix()
+        self.shortcut = f"{self.reference} ({self.description})"
 
     def to_json(self):
         from collector.utils.basic import json_default
@@ -55,9 +59,14 @@ class BeneficeAffliction(models.Model):
     benefice_affliction_ref = models.ForeignKey(BeneficeAfflictionRef, on_delete=models.CASCADE)
     # value = models.IntegerField(default=0)
     description = models.TextField(max_length=256, default='',blank=True)
+    shortcut = models.TextField(max_length=128, default='', blank=True)
+
 
     def __str__(self):
         return '%s=%s' % (self.character.full_name, self.benefice_affliction_ref.reference)
+
+    def fix(self):
+        self.shortcut = f"{self.benefice_affliction_ref.reference} ({self.description[:6]})"
 
     def to_json(self):
         from collector.utils.basic import json_default
@@ -99,9 +108,10 @@ def refix(modeladmin, request, queryset):
 
 class BeneficeAfflictionRefAdmin(admin.ModelAdmin):
     ordering = ('category', 'reference', 'watermark', '-value', 'ranking')
-    list_display = ('reference', 'uuid', 'emphasis', 'value', 'watermark', 'category','ranking', 'cash_value', 'description', 'source')
+    list_display = ['reference', 'indexed', 'emphasis', 'value', 'watermark', 'category','ranking', 'cash_value', 'description', 'source']
     search_fields = ('reference', 'description', 'emphasis', 'watermark')
     list_filter = ('ranking', 'source', 'watermark', 'category', 'emphasis')
+    list_editable = ['indexed']
     actions = [refix,make_occult, make_combat, make_talent, make_riches, make_possession]
 
 

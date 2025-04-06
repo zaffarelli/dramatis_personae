@@ -133,9 +133,20 @@ def needs_pdf(modeladmin, request, queryset):
     queryset.update(need_pdf=True)
     short_description = "Need PDF"
 
+def needs_fix(modeladmin, request, queryset):
+    queryset.update(need_fix=True)
+    short_description = "Need fix"
+
+def resave(modeladmin, request, queryset):
+    for character in queryset:
+        character.need_fix = True
+        character.save()
+    short_description = "Resave"
+
+
 
 class CharacterAdmin(admin.ModelAdmin):
-    list_display = ['full_name', 'player', "ranking", "id", 'importance', 'entrance', 'specie', 'alliance_ref',
+    list_display = ['full_name', 'player',"r_i_d", "cypher_rid", "ranking", "id", 'importance', 'entrance', 'specie', 'alliance_ref',
                     'is_dead', 'life_path_total', 'OP',
                     'audit', 'is_visible']
     inlines = [
@@ -151,7 +162,7 @@ class CharacterAdmin(admin.ModelAdmin):
         RitualInline,
     ]
     ordering = ['full_name', ]
-    actions = [needs_fix, needs_pdf, no_importance, importance_up, importance_down, make_invisible,
+    actions = [needs_fix, resave, needs_pdf, no_importance, importance_up, importance_down, make_invisible,
                make_visible, make_teutonic, make_kaanic, make_castillan, make_enquist, make_public, make_private,
                make_partial, make_complete, enter_fencing_league, exit_fencing_league, recalc_height]
     exclude = ['SA_REC', 'SA_STA', 'SA_END', 'SA_STU', 'SA_RES', 'SA_DMG', 'SA_TOL', 'SA_HUM', 'SA_PAS', 'SA_WYR',

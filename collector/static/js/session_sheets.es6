@@ -14,6 +14,7 @@ class SessionSheets extends Sheet {
             {'label': '', 'text': ''},
             {'label': 'Experience', 'text': '5+21 per PC'}
         ]
+        this.part = 4.5/4
     }
 
     init() {
@@ -37,10 +38,10 @@ class SessionSheets extends Sheet {
         me.lines = me.back.append('g');
         me.daddy = me.lines;
         // External lines
-        me.drawLine(1, 1, 0.5, me.yunits - 0.5, me.draw_fill, me.draw_fill, 6, me.strokedebris);
-        me.drawLine(me.xunits - 1, me.xunits - 1, 0.5, me.yunits - 0.5, me.draw_fill, me.draw_fill, 6, me.strokedebris);
-        me.drawLine(0.5, me.xunits - 0.5, 1, 1, me.draw_fill, me.draw_fill, 6, me.strokedebris);
-        me.drawLine(0.5, me.xunits - 0.5, me.yunits - 1, me.yunits - 1, me.draw_fill, me.draw_fill, 6, me.strokedebris);
+        me.drawLine(1, 1, 0.5, me.yunits - 0.5, me.draw_fill, me.draw_fill, 1, me.strokedebris);
+        me.drawLine(me.xunits - 1, me.xunits - 1, 0.5, me.yunits - 0.5, me.draw_fill, me.draw_fill, 1, me.strokedebris);
+        me.drawLine(0.5, me.xunits - 0.5, 1, 1, me.draw_fill, me.draw_fill, 1, me.strokedebris);
+        me.drawLine(0.5, me.xunits - 0.5, me.yunits - 1, me.yunits - 1, me.draw_fill, me.draw_fill, 1, me.strokedebris);
 
 
         me.decorationText(1.5, 0.8, 0, 'start', me.base_font, me.medium_font_size, me.draw_fill, me.draw_stroke, 0.5, "Players Session Sheet - FuZion Interlock Custom System v10", me.back);
@@ -174,37 +175,60 @@ class SessionSheets extends Sheet {
 
         let sy = 6.75
         let fs = 1
-        me.sheetEntryLeft(xfunc, sy, ox, oy, "Academia", "skills_list", fs, "skill", "Academia"); sy += 0.5
-        me.sheetEntryLeft(xfunc, sy, ox, oy, "Adaptation", "skills_list", fs, "skill", "Adaptation"); sy += 0.5
-        me.sheetEntryLeft(xfunc, sy, ox, oy, "Alchemy", "skills_list", fs, "skill", "Alchemy"); sy += 0.5
-        me.sheetEntryLeft(xfunc, sy, ox, oy, "Athletics", "skills_list", fs, "skill", "Athletics"); sy += 0.5
-        me.sheetEntryLeft(xfunc, sy, ox, oy, "Beastcraft", "skills_list", fs, "skill", "Beastcraft"); sy += 0.5
-        me.sheetEntryLeft(xfunc, sy, ox, oy, "Bureaucracy", "skills_list", fs, "skill", "Bureaucracy"); sy += 0.5
-        me.sheetEntryLeft(xfunc, sy, ox, oy, "Demolition", "skills_list", fs, "skill", "Demolition"); sy += 0.5
-        me.sheetEntryLeft(xfunc, sy, ox, oy, "Disguise", "skills_list", fs, "skill", "Disguise"); sy += 0.5
-        me.sheetEntryLeft(xfunc, sy, ox, oy, "Empathy", "skills_list", fs, "skill", "Empathy"); sy += 0.5
-        me.sheetEntryLeft(xfunc, sy, ox, oy, "Etiquette", "skills_list", fs, "skill", "Etiquette"); sy += 0.5
-        me.sheetEntryLeft(xfunc, sy, ox, oy, "Fight", "skills_list", fs, "skill", "Fight"); sy += 0.5
-        me.sheetEntryLeft(xfunc, sy, ox, oy, "Focus", "skills_list", fs, "skill", "Focus"); sy += 0.5
-        me.sheetEntryLeft(xfunc, sy, ox, oy, "Gunnery", "skills_list", fs, "skill", "Gunnery"); sy += 0.5
-        me.sheetEntryLeft(xfunc, sy, ox, oy, "Impress", "skills_list", fs, "skill", "Impress"); sy += 0.5
-        me.sheetEntryLeft(xfunc, sy, ox, oy, "Inquiry", "skills_list", fs, "skill", "Inquiry"); sy += 0.5
+        me.sheetEntryQuadA(xfunc, sy, ox, oy, "ACA", "skills_list", fs, "skill", "Academia"); sy += 0.5
+        me.sheetEntryQuadA(xfunc, sy, ox, oy, "ADA", "skills_list", fs, "skill", "Adaptation"); sy += 0.5
+        me.sheetEntryQuadA(xfunc, sy, ox, oy, "ALC", "skills_list", fs, "skill", "Alchemy"); sy += 0.5
+        me.sheetEntryQuadA(xfunc, sy, ox, oy, "ATH", "skills_list", fs, "skill", "Athletics"); sy += 0.5
+        me.sheetEntryQuadA(xfunc, sy, ox, oy, "BEA", "skills_list", fs, "skill", "Beastcraft"); sy += 0.5
+        me.sheetEntryQuadA(xfunc, sy, ox, oy, "BUR", "skills_list", fs, "skill", "Bureaucracy"); sy += 0.5
+        me.sheetEntryQuadA(xfunc, sy, ox, oy, "DEM", "skills_list", fs, "skill", "Demolition"); sy += 0.5
+        me.sheetEntryQuadA(xfunc, sy, ox, oy, "DIS", "skills_list", fs, "skill", "Disguise"); sy += 0.5
+
         sy = 6.75
-        me.sheetEntryRight(xfunc, sy, ox, oy, "Knavery", "skills_list", fs, "skill", "Knavery"); sy += 0.5
-        me.sheetEntryRight(xfunc, sy, ox, oy, "Leadership", "skills_list", fs, "skill", "Leadership"); sy += 0.5
-        me.sheetEntryRight(xfunc, sy, ox, oy, "Maneuver", "skills_list", fs, "skill", "Maneuver"); sy += 0.5
-        me.sheetEntryRight(xfunc, sy, ox, oy, "Melee", "skills_list", fs, "skill", "Melee"); sy += 0.5
-        me.sheetEntryRight(xfunc, sy, ox, oy, "Observe", "skills_list", fs, "skill", "Observe"); sy += 0.5
-        me.sheetEntryRight(xfunc, sy, ox, oy, "Performance", "skills_list", fs, "skill", "Performance"); sy += 0.5
-        me.sheetEntryRight(xfunc, sy, ox, oy, "Redemption", "skills_list", fs, "skill", "Redemption"); sy += 0.5
-        me.sheetEntryRight(xfunc, sy, ox, oy, "Remedy", "skills_list", fs, "skill", "Remedy"); sy += 0.5
-        me.sheetEntryRight(xfunc, sy, ox, oy, "Riddles", "skills_list", fs, "skill", "Riddles"); sy += 0.5
-        me.sheetEntryRight(xfunc, sy, ox, oy, "Search", "skills_list", fs, "skill", "Search"); sy += 0.5
-        me.sheetEntryRight(xfunc, sy, ox, oy, "Seduction", "skills_list", fs, "skill", "Seduction"); sy += 0.5
-        me.sheetEntryRight(xfunc, sy, ox, oy, "Shoot", "skills_list", fs, "skill", "Shoot"); sy += 0.5
-        me.sheetEntryRight(xfunc, sy, ox, oy, "Sneak", "skills_list", fs, "skill", "Sneak"); sy += 0.5
-        me.sheetEntryRight(xfunc, sy, ox, oy, "Surveillance", "skills_list", fs, "skill", "Surveillance"); sy += 0.5
-        me.sheetEntryRight(xfunc, sy, ox, oy, "Teaching", "skills_list", fs, "skill", "Teaching"); sy += 0.5
+        me.sheetEntryQuadB(xfunc, sy, ox, oy, "EMP", "skills_list", fs, "skill", "Empathy"); sy += 0.5
+        me.sheetEntryQuadB(xfunc, sy, ox, oy, "ETI", "skills_list", fs, "skill", "Etiquette"); sy += 0.5
+        me.sheetEntryQuadB(xfunc, sy, ox, oy, "FIG", "skills_list", fs, "skill", "Fight"); sy += 0.5
+        me.sheetEntryQuadB(xfunc, sy, ox, oy, "FOC", "skills_list", fs, "skill", "Focus"); sy += 0.5
+        me.sheetEntryQuadB(xfunc, sy, ox, oy, "GUN", "skills_list", fs, "skill", "Gunnery"); sy += 0.5
+        me.sheetEntryQuadB(xfunc, sy, ox, oy, "IMP", "skills_list", fs, "skill", "Impress"); sy += 0.5
+        me.sheetEntryQuadB(xfunc, sy, ox, oy, "INQ", "skills_list", fs, "skill", "Inquiry"); sy += 0.5
+        me.sheetEntryQuadB(xfunc, sy, ox, oy, "KNA", "skills_list", fs, "skill", "Knavery"); sy += 0.5
+
+        sy = 6.75
+        me.sheetEntryQuadC(xfunc, sy, ox, oy, "LEA", "skills_list", fs, "skill", "Leadership"); sy += 0.5
+        me.sheetEntryQuadC(xfunc, sy, ox, oy, "MAN", "skills_list", fs, "skill", "Maneuver"); sy += 0.5
+        me.sheetEntryQuadC(xfunc, sy, ox, oy, "MEL", "skills_list", fs, "skill", "Melee"); sy += 0.5
+        me.sheetEntryQuadC(xfunc, sy, ox, oy, "OBS", "skills_list", fs, "skill", "Observe"); sy += 0.5
+        me.sheetEntryQuadC(xfunc, sy, ox, oy, "PER", "skills_list", fs, "skill", "Performance"); sy += 0.5
+        me.sheetEntryQuadC(xfunc, sy, ox, oy, "RED", "skills_list", fs, "skill", "Redemption"); sy += 0.5
+        me.sheetEntryQuadC(xfunc, sy, ox, oy, "REM", "skills_list", fs, "skill", "Remedy"); sy += 0.5
+
+        sy = 6.75
+        me.sheetEntryQuadD(xfunc, sy, ox, oy, "RID", "skills_list", fs, "skill", "Riddles"); sy += 0.5
+        me.sheetEntryQuadD(xfunc, sy, ox, oy, "SEA", "skills_list", fs, "skill", "Search"); sy += 0.5
+        me.sheetEntryQuadD(xfunc, sy, ox, oy, "SED", "skills_list", fs, "skill", "Seduction"); sy += 0.5
+        me.sheetEntryQuadD(xfunc, sy, ox, oy, "SHO", "skills_list", fs, "skill", "Shoot"); sy += 0.5
+        me.sheetEntryQuadD(xfunc, sy, ox, oy, "SNE", "skills_list", fs, "skill", "Sneak"); sy += 0.5
+        me.sheetEntryQuadD(xfunc, sy, ox, oy, "SUR", "skills_list", fs, "skill", "Surveillance"); sy += 0.5
+        me.sheetEntryQuadD(xfunc, sy, ox, oy, "TEA", "skills_list", fs, "skill", "Teaching"); sy += 0.5
+
+        sy = 14.5
+        me.baseSheetEntry(xfunc, sy, ox, oy, "Blessings/Curses"); sy += 0.5
+        if (me.baseSheetEntry(xfunc, sy, ox, oy, "", "BC",0,":0:shortcut","",0,4.5)) sy += 0.5
+        if (me.baseSheetEntry(xfunc, sy, ox, oy, "", "BC",0,":1:shortcut","",0,4.5)) sy += 0.5
+        if (me.baseSheetEntry(xfunc, sy, ox, oy, "", "BC",0,":2:shortcut","",0,4.5)) sy += 0.5
+        if (me.baseSheetEntry(xfunc, sy, ox, oy, "", "BC",0,":3:shortcut","",0,4.5)) sy += 0.5
+        if (me.baseSheetEntry(xfunc, sy, ox, oy, "", "BC",0,":4:shortcut","",0,4.5)) sy += 0.5
+
+        console.log("BA",me.data[0].BA)
+
+        //sy += 0.5
+        me.baseSheetEntry(xfunc, sy, ox, oy, "Benefices/Afflictions"); sy += 0.5
+        if (me.baseSheetEntry(xfunc, sy, ox, oy, "", "BA",0,":0:benefice_affliction_ref:shortcut","",0,4.5)) sy += 0.5
+        if (me.baseSheetEntry(xfunc, sy, ox, oy, "", "BA",0,":1:benefice_affliction_ref:shortcut","",0,4.5)) sy += 0.5
+        if (me.baseSheetEntry(xfunc, sy, ox, oy, "", "BA",0,":2:benefice_affliction_ref:shortcut","",0,4.5)) sy += 0.5
+        if (me.baseSheetEntry(xfunc, sy, ox, oy, "", "BA",0,":3:benefice_affliction_ref:shortcut","",0,4.5)) sy += 0.5
+        if (me.baseSheetEntry(xfunc, sy, ox, oy, "", "BA",0,":4:benefice_affliction_ref:shortcut","",0,4.5)) sy += 0.5
 
 
 
@@ -217,8 +241,11 @@ class SessionSheets extends Sheet {
 
     }
 
+
+
     baseSheetEntry(func, y, ox = 0, oy = 0, proplabel, prop = '', font = 0, direct_prop = '', direct_value = '', offsetx = 0, offsetx2 = 0) {
-        let me = this;
+        let me = this
+        let global_result = 1
         let font_size = font
         if (font == 0) {
             font_size = me.small_font_size;
@@ -258,15 +285,43 @@ class SessionSheets extends Sheet {
             .text((d) => {
                 let result = d[prop]
                 let tmp = ""
-                if (direct_value != '') {
+                if (direct_prop.startsWith(":")) {
+                    let mapping = direct_prop.split(":")
+                    let depth = mapping.length
+                    global_result = 0
+                    console.log("Mapping",mapping)
+                    let i = 0
+                    _.forEach(d[prop], function (e) {
+                        console.log("e",e)
+                        console.log("i",mapping[1],i)
+                        // If we have the good object index match (i.e. BC #i)
+                        if (`${i}` == mapping[1]){
+                            let de = 1
+                            let f = e
+                            while (de < depth-1){
+                                if (f.hasOwnProperty(mapping[de])){
+                                    console.log(">>>",mapping[de])
+                                    f = f[mapping[de]]
+                                }
+                                de += 1
+                            }
+                            console.log("f",f)
+                            if (f.hasOwnProperty(mapping[de])){
+                                result = f[mapping[de]]
+                                global_result = 1
+                                return false
+                            }
+                        }
+                        i += 1
+                    })
+                } else if (direct_value != '') {
                     _.forEach(d[prop], function (e) {
                         if (e[direct_prop] == direct_value) {
-                            result = e['value'];
-                            return false;
+                            result = e['value']
+                            return false
                         }
-                    });
-                }
-
+                    })
+                }else
                 if (false){
                 if (!isNaN(parseInt(result)) && (font==1)) {
                     let v = parseInt(result)
@@ -292,10 +347,36 @@ class SessionSheets extends Sheet {
                 }else{
                     }
                 }
+                if (global_result == 0){
+                    result = ""
+                    }
                 return result
             })
-
+        return global_result
     }
+
+
+
+    sheetEntryQuadA(func, y, ox = 0, oy = 0, proplabel, prop = '', font_size = 0, direct_prop = '', direct_value = '') {
+        let me = this
+        me.baseSheetEntry(func, y, ox, oy, proplabel, prop, font_size, direct_prop, direct_value, 0+0.125, me.part-0.125)
+    }
+
+    sheetEntryQuadB(func, y, ox = 0, oy = 0, proplabel, prop = '', font_size = 0, direct_prop = '', direct_value = '') {
+        let me = this
+        me.baseSheetEntry(func, y, ox, oy, proplabel, prop, font_size, direct_prop, direct_value, me.part+0.125, me.part*2-0.125)
+    }
+
+    sheetEntryQuadC(func, y, ox = 0, oy = 0, proplabel, prop = '', font_size = 0, direct_prop = '', direct_value = '') {
+        let me = this
+        me.baseSheetEntry(func, y, ox, oy, proplabel, prop, font_size, direct_prop, direct_value, me.part*2+0.125, me.part*3-0.125)
+    }
+
+    sheetEntryQuadD(func, y, ox = 0, oy = 0, proplabel, prop = '', font_size = 0, direct_prop = '', direct_value = '') {
+        let me = this
+        me.baseSheetEntry(func, y, ox, oy, proplabel, prop, font_size, direct_prop, direct_value, me.part*3+0.125, me.part*4-0.125)
+    }
+
 
     sheetEntryLeft(func, y, ox = 0, oy = 0, proplabel, prop = '', font_size = 0, direct_prop = '', direct_value = '') {
         let me = this

@@ -15,14 +15,16 @@ class BlessingCurseRef(RiddedMixin):
 
     reference = models.CharField(max_length=64, default='', blank=True)
     value = models.IntegerField(default=0)
-    description = models.TextField(max_length=256, default='')
+    description = models.TextField(max_length=256, default='',blank=True)
     source = models.CharField(max_length=32, default='FS2CRB')
+    shortcut = models.TextField(max_length=64, default='', blank=True)
 
     def __str__(self):
         return '%s (%+d)' % (self.reference, self.value)
 
     def fix(self):
         self.toRID(f"{self.reference}_{self.value}")
+        #self.shortcut = f"{self.reference} ({self.description[:6]})"
 
     # def to_json(self):
     #     from collector.utils.basic import json_default
@@ -78,7 +80,8 @@ class BlessingCurseCustoInline(admin.TabularInline):
 # Admin
 class BlessingCurseRefAdmin(admin.ModelAdmin):
     ordering = ['reference']
-    list_display = ('rid', 'reference', 'value', 'description')
+    list_display = ('rid', 'reference','shortcut', 'value', 'description')
+    list_editable = ['shortcut', 'value', 'description']
     actions = [refix]
 
 class BlessingCurseModificatorAdmin(admin.ModelAdmin):

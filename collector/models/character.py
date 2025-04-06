@@ -1328,6 +1328,10 @@ class Character(Combattant):
         return jstr
 
     def to_jsonFICS(self):
+        """
+        That's what we use to send characters to the front for session_sheet and fics_sheet
+        :return: the json structure for the character
+        """
         from collector.models.skill import SkillRef
         import datetime
         j = self.to_json()
@@ -1465,3 +1469,17 @@ class Character(Combattant):
                 experience += exp
             print(f'         Totals checked are OP:{op:4} Exp:{experience:4}')
         return experience, op
+
+    @classmethod
+    def collect_keywords(cls):
+        all = cls.objects.all().values_list("keyword")
+        keywords = {}
+        for c in all:
+            words = c[0].split(",")
+            for word in words:
+                sanitized_word = word.lstrip().rstrip()
+                if sanitized_word not in keywords:
+                    keywords[sanitized_word] = 1
+                else:
+                    keywords[sanitized_word] += 1
+        return keywords

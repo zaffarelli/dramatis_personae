@@ -4,9 +4,9 @@
         <em>{{k.chapter}}</em><strong>{{k.drama}}</strong>
     </div>
     {% endfor %}
-    {% for k in cdata.keywords %}
-    <div class="slug-page-item keyword_tag" action='search' code="{{k.name}}" page="1">
-        <strong>{{k.name}}</strong><em>{{k.count}}</em>
+    {% for k,v in cdata.items %}
+    <div class="slug-page-item keyword_tag" action='search' code="{{k}}" page="1">
+        <strong>{{k}}</strong><em>{{v}}</em>
     </div>
     {% endfor %}
 </div>

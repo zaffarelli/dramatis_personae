@@ -11,6 +11,8 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import get_object_or_404
 import datetime
+
+from collector.utils.helper import is_ajax
 from scenarist.forms.basic import *
 from scenarist.models.events import Event
 from scenarist.mixins.ajaxfromresponse import AjaxFromResponseMixin
@@ -40,7 +42,7 @@ class EventDeleteView(DeleteView):
 
 @csrf_exempt
 def add_event(request):
-    if request.is_ajax():
+    if is_ajax(request):
       if request.method == 'POST':
         id_ = request.POST.get('id')
         id = id_.split('_')[1]

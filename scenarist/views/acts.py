@@ -32,7 +32,7 @@ class ActUpdateView(AjaxFromResponseMixin,UpdateView):
 
 
 def add_act(request):
-    if request.is_ajax():
+    if is_ajax(request):
         if request.method == 'POST':
             full_id = request.POST.get('id')
             id = full_id.split('_')[1]

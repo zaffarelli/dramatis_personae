@@ -1,1 +1,1 @@
-/home/zaffarelli/.virtualenvs/dp/lib/python3.13/site-packages/django/contrib/admin/static/admin/js/vendor/select2/i18n/cs.js
+/home/zaffarelli/.virtualenvs/dramatis_personae/lib/python3.13/site-packages/django/contrib/admin/static/admin/js/vendor/select2/i18n/cs.js

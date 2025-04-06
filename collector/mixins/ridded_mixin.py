@@ -1,9 +1,16 @@
+import html
+
 from django.db import models
 import json
+
+from django.utils.safestring import SafeString
 
 
 def RidField():
     return models.CharField(default="", max_length=200, blank=True)
+
+def CypherRidField():
+    return models.CharField(default="", max_length=50, blank=True)
 
 class RiddedMixin(models.Model):
     """
@@ -15,6 +22,15 @@ class RiddedMixin(models.Model):
 
 
     rid = RidField()
+    cypher_rid = CypherRidField()
+
+
+    # 6CC1AAD28CBBF16BEB0B45
+
+    @property
+    def r_i_d(self):
+        return SafeString(f"<tt style='color:cyan;'>{self.cypher_rid}</tt>")
+
     def toRID(self, txt, short=False, prefix="", cypher=False):
         """
         :param txt: the string from which the rid will be built
@@ -42,10 +58,12 @@ class RiddedMixin(models.Model):
             tmp = f'_{x[:3].lower()}'
         else:
             tmp = f'_{x.lower()}'
+        gfg = hashlib.blake2s(digest_size=5)
+        gfg.update(bytes(tmp,encoding='utf-8'))
+        #print(gfg.digest_size)
+        self.cypher_rid = gfg.hexdigest().upper()
         if cypher:
-            gfg = hashlib.blake2b(digest_size=10)
-            gfg.update(bytes(tmp,encoding='utf-8'))
-            k = gfg.hexdigest()
+            k = self.cypher_rid
         else:
             k = tmp
         if len(prefix)>0:
@@ -53,7 +71,7 @@ class RiddedMixin(models.Model):
         else:
             self.rid = f"{type(self).__name__}"+k
         self.rid = self.rid.upper()
-        #print("Ridding:", txt, self.rid)
+        print("Ridding:", self.rid, self.cypher_rid)
         return self.rid
 
 
@@ -66,7 +84,7 @@ class RiddedMixin(models.Model):
         elif cnt == 0:
             return None
         else:
-            raise ReferenceError(f"Many instances of the rid found in the class.",cnt,txt,klass)
+            raise ReferenceError(f"Many instances of the rid found in the class.",cnt,txt,cls)
         return None
 
     def to_json(self):

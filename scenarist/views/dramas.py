@@ -6,6 +6,8 @@
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView
 from django.views.generic.edit import DeleteView
+
+from collector.utils.helper import is_ajax
 from scenarist.forms.basic import *
 from scenarist.models.dramas import Drama
 from django.shortcuts import get_object_or_404
@@ -32,7 +34,7 @@ class DramaUpdateView(AjaxFromResponseMixin,UpdateView):
 
 def add_drama(request):
     import datetime
-    if request.is_ajax():
+    if is_ajax(request):
         if request.method == 'POST':
             full_id = request.POST.get('id')
             # print(full_id)
