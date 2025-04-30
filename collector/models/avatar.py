@@ -51,7 +51,7 @@ class Avatar(RiddedMixin):
     audit = models.TextField(max_length=2048, default='', blank=True)
 
     def fix(self, conf=None):
-        super().fix(conf)
+        # super().fix(conf)
         if conf is None:
             from collector.utils.basic import get_current_config
             conf = get_current_config()

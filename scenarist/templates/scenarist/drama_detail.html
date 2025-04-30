@@ -1,10 +1,5 @@
 {% load fics_filters %}
 <div class='storydetails drama'>
-    {% if drama.showquizz %}
-            {% if drama.quizz_set %}
-                {{drama.quizz_set.first.verbose | safe }}
-            {% endif %}
-    {% endif %}
     <div class="wall">
         <div class="brick">
             {{object.epic.name}}&nbsp;<i class="fa fa-arrow-right"></i>&nbsp;{{object.name}}
@@ -37,6 +32,8 @@
         {{object.description|parse_avatars|safe}}
         <hr/>
         {{object.resolution|parse_avatars|safe}}
+        <hr/>
+        {{object.rewards|parse_avatars|safe}}
     </div>
 
 </div>

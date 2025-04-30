@@ -52,6 +52,6 @@ class AllianceRefAdmin(admin.ModelAdmin):
     list_display = ['reference','r_i_d','internal_index', 'faction', 'category', 'common_occult_pathes', 'color_front', 'color_back',
                     'color_highlight']
     list_filter = ['category']
-    list_editable = ['internal_index']
+    list_editable = ['internal_index','color_front', 'color_back', 'color_highlight']
     search_fields = ['category']
     actions = [refix]

@@ -13,7 +13,7 @@ import json
 
 class Epic(StoryModel):
     class Meta:
-        ordering = ['era', 'name']
+        ordering = ['era', 'title']
     era = models.IntegerField(default=5017, blank=True)
     shortcut = models.CharField(default='xx', max_length=32, blank=True)
     image = models.CharField(default='', max_length=64, blank=True)
@@ -29,6 +29,8 @@ class Epic(StoryModel):
         from collector.models.campaign import Campaign
         campaign = Campaign.objects.filter(epic=self)
         return campaign
+
+
 
     @property
     def challenge(self):
@@ -102,5 +104,5 @@ class Epic(StoryModel):
 
 
 class EpicAdmin(admin.ModelAdmin):
-    ordering = ['era', 'name']
-    list_display = ['shortcut', 'era', 'full_id', 'chapter', 'name']
+    ordering = ['era', 'title']
+    list_display = ['shortcut', 'era', 'full_id', 'chapter', 'title']

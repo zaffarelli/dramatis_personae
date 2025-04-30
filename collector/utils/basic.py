@@ -8,7 +8,7 @@ from django.http import HttpResponse
 from django.template.loader import get_template
 from xhtml2pdf import pisa
 from django.conf import settings
-from PyPDF2 import PdfFileMerger
+from PyPDF2 import PdfMerger
 import os
 import logging
 from collector.models.tourofduty import TourOfDutyRef
@@ -71,7 +71,7 @@ def make_avatar_appendix(campaign):
     media_avatars = os.path.join(settings.MEDIA_ROOT, 'pdf/results/avatars/')
     onlyfiles = [f for f in os.listdir(media_avatars) if os.path.isfile(os.path.join(media_avatars, f))]
     pdfs = onlyfiles
-    merger = PdfFileMerger()
+    merger = PdfMerger()
     # merger.append(open('%s__aa_header.pdf'%(media_resources), 'rb'))
     pdfs.sort()
     ep = campaign.epic
@@ -97,7 +97,7 @@ def make_epic_corpus(campaign):
     media_resources = os.path.join(settings.MEDIA_ROOT, 'pdf/resources/')
     media_results = os.path.join(settings.MEDIA_ROOT, 'pdf/results/')
     mystaticpath = os.path.join(settings.STATIC_ROOT, 'pdf/')
-    merger = PdfFileMerger()
+    merger = PdfMerger()
     # merger.append(open('%sresources/__es_header.pdf'%(mystaticpath), 'rb'))
     template = get_template('collector/conf_pdf.html')
     context = {'epic': campaign.parse_details()}
@@ -124,7 +124,7 @@ def export_epic(request, campaign):
     com = '<br/>'.join(comments)
     res['comment'] = '<div class="classyview"><p>'+com+'</p></div>'
     media_results = os.path.join(settings.MEDIA_ROOT, 'pdf/results/')
-    merger = PdfFileMerger()
+    merger = PdfMerger()
     merger.append(open('%scorpus_%s.pdf' % (media_results, campaign.epic.shortcut), 'rb'))
     # try:
     #     merger.append(open('%sappendix_%s.pdf'%(media_results,campaign.epic.shortcut), 'rb'))

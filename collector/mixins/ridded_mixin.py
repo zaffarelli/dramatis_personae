@@ -79,12 +79,13 @@ class RiddedMixin(models.Model):
     def fromRID(cls,txt):
         candidates = cls.objects.filter(rid=txt)
         cnt = len(candidates)
+        # print(f"ERROR: {cnt} items found for [{txt}]")
         if cnt == 1:
             return candidates.first()
         elif cnt == 0:
             return None
         else:
-            raise ReferenceError(f"Many instances of the rid found in the class.",cnt,txt,cls)
+            raise ReferenceError(f"Error: {cnt} instances of the rid {txt} found in for {cls}.")
         return None
 
     def to_json(self):

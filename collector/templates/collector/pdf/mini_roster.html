@@ -20,7 +20,12 @@
     {% else %}
     <br/><b>Skills: </b>
     {% for s in c.skill_set.all %}
-    {{s.skill_ref.reference}}[{{s.value|high_skill_check_pdf|safe}}]{% if forloop.last %}.{%else%}, {%endif%}
+    {{s.skill_ref.reference}}&nbsp;[{{s.value|high_skill_check_pdf|safe}}]{% if forloop.last %}.{%else%}, {%endif%}
+    {% endfor %}
+
+    <br/><b>Degrees: </b>
+    {% for s in c.degree_set.all %}
+    {{s.degree_ref.reference}}&nbsp;[{{s.value|high_skill_check_pdf|safe}}]{% if forloop.last %}.{%else%}, {%endif%}
     {% endfor %}
     {% endif %}
     {%  if c.OCC_LVL %}

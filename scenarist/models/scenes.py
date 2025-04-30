@@ -16,7 +16,7 @@ class Scene(StoryModel):
     """
 
     class Meta:
-        ordering = ['chapter', 'name']
+        ordering = ['chapter', 'title']
 
     from scenarist.models.adventures import Adventure
     adventure = models.ForeignKey(Adventure, null=True, on_delete=models.CASCADE)
@@ -69,7 +69,7 @@ class Scene(StoryModel):
 
 
 class SceneAdmin(admin.ModelAdmin):
-    ordering = ['adventure', 'chapter', 'name']
-    list_display = ['name', 'full_id', 'adventure', 'chapter', 'date', 'place', 'description']
+    ordering = ['adventure', 'chapter', 'title']
+    list_display = ['title', 'full_id', 'adventure', 'chapter', 'date', 'place', 'description']
     list_filter = ['adventure']
     search_fields = ['description', 'name', 'resolution']

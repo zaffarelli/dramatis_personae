@@ -6,6 +6,8 @@
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView
 from django.views.generic.edit import DeleteView
+
+from collector.utils.helper import is_ajax
 from scenarist.forms.basic import *
 from scenarist.models.acts import Act
 from django.shortcuts import get_object_or_404

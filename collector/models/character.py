@@ -534,7 +534,7 @@ class Character(Combattant):
             self.race = self.specie.species
 
             if self.PA_BOD != 0:
-                if self.height != 0:
+                if self.height == 0:
                     if "urthish" in self.specie.species.lower():
                         self.height = 2.39473 * (self.PA_BOD / 2 + self.PA_STR*2 + self.PA_CON + 2)  # 145
                         if self.gender == 'male':

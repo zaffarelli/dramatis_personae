@@ -15,7 +15,7 @@ class Adventure(StoryModel):
     An adventure is part of a campaign, like a big chapter. It is primarily a collection of scenes and schemes.
     """
     class Meta:
-        ordering = ['chapter', 'name']
+        ordering = ['chapter', 'title']
     from scenarist.models.epics import Epic
     epic = models.ForeignKey(Epic, null=True, on_delete=models.CASCADE)
     total_rewards = models.TextField(default='', max_length=2560, blank=True)
@@ -73,7 +73,7 @@ class Adventure(StoryModel):
 
 
 class AdventureAdmin(admin.ModelAdmin):
-    ordering = ['epic', 'chapter', 'name']
-    list_display = ['name', 'full_id', 'epic', 'chapter', 'date', 'place', 'description']
+    ordering = ['epic', 'chapter', 'title']
+    list_display = ['title', 'full_id', 'epic', 'chapter', 'date', 'place', 'description']
     list_filter = ['epic']
     search_fields = ['description', 'name', 'resolution']

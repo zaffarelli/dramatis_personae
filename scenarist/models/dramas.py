@@ -13,7 +13,7 @@ from scenarist.models.story_models import StoryModel
 
 class Drama(StoryModel):
     class Meta:
-        ordering = ['epic', 'chapter', 'date', 'name']
+        ordering = ['epic', 'chapter', 'date', 'title']
 
     from scenarist.models.epics import Epic
     epic = models.ForeignKey(Epic, null=True, on_delete=models.CASCADE)
@@ -82,7 +82,7 @@ class Drama(StoryModel):
 
 
 class DramaAdmin(admin.ModelAdmin):
-    ordering = ['epic', 'chapter', 'date', 'name']
-    list_display = ['name', 'full_id', 'epic', 'chapter', 'date', 'place', 'is_visible', 'description']
+    ordering = ['epic', 'chapter', 'date', 'title']
+    list_display = ['title', 'full_id', 'epic', 'chapter', 'date', 'place', 'is_visible', 'description']
     list_filter = ['epic']
     search_fields = ['name', 'description']

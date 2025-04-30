@@ -66,17 +66,18 @@ class Skill(RiddedMixin):
     value = models.PositiveIntegerField(default=1)
 
     def __str__(self):
-        return '%s=%s' % (self.character.full_name, self.skill_ref.reference)
+        return f"{self.character.full_name}={self.skill_ref.reference}"
 
     def fix(self):
-        character_rid = ""
-        skill_ref_rid = ""
-        ch = Character.fromRID(self.character_rid)
-        sr = SkillRef.fromRID(self.skill_ref_rid)
-        if (ch and sr):
-            character_rid = ch.rid
-            skill_ref_rid = sr.rid
-        self.toRID(f"{self.skill_ref.reference}_{character_rid}_{skill_ref_rid}")
+        # character_rid = ""
+        # skill_ref_rid = ""
+        # ch = Character.fromRID(self.character_rid)
+        # sr = SkillRef.fromRID(self.skill_ref_rid)
+        # if (ch and sr):
+        #     character_rid = ch.rid
+        #     skill_ref_rid = sr.rid
+        #self.toRID(f"{self.skill_ref.reference}_{character_rid}_{skill_ref_rid}")
+        self.toRID(f"{self.character.full_name}={self.skill_ref.reference}")
 
 
 class SkillInline(admin.TabularInline):

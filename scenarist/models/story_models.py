@@ -21,7 +21,7 @@ class StoryModel(models.Model):
     class Meta:
         abstract = True
 
-    name = models.CharField(default='', max_length=256, blank=True, unique=True)
+    title = models.CharField(default='', max_length=256, blank=True, unique=True)
     chapter = models.CharField(default='0', blank=True, max_length=64)
     date = models.CharField(max_length=128, default='', blank=True)
     dt = models.DateTimeField(default=timezone.now, blank=True, null=True)
@@ -46,7 +46,11 @@ class StoryModel(models.Model):
 
     def __str__(self):
         """ Standard display """
-        return '%s. %s' % (self.chapter, self.name)
+        return '%s. %s' % (self.chapter, self.title)
+
+    @property
+    def name(self):
+        return self.title
 
     @property
     def minis(self):

@@ -11,7 +11,7 @@ from scenarist.models.story_models import StoryModel
 
 class Event(StoryModel):
     class Meta:
-        ordering = ['chapter', 'name']
+        ordering = ['chapter', 'title']
 
     from scenarist.models.acts import Act
     act = models.ForeignKey(Act, null=True, on_delete=models.CASCADE)
@@ -41,7 +41,7 @@ class Event(StoryModel):
 
 
 class EventAdmin(admin.ModelAdmin):
-    ordering = ['act', 'chapter', 'name']
-    list_display = ['name', 'full_id', 'act', 'chapter', 'date', 'place', 'description']
+    ordering = ['act', 'chapter', 'title']
+    list_display = ['title', 'full_id', 'act', 'chapter', 'date', 'place', 'description']
     list_filter = ['act']
     search_fields = ['description', 'name', 'resolution']

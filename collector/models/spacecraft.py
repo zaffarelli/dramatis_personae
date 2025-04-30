@@ -196,8 +196,8 @@ class ShipRef(models.Model):
         verbose_name = "Spacecraft: Ship Reference"
         ordering = ('builder', 'size_rating',)
 
-    reference = models.CharField(max_length=64, unique=True)
-    builder = models.CharField(max_length=64, default='')
+    reference = models.CharField(max_length=64)
+    builder = models.CharField(max_length=64, default='', blank=True)
     model_name = models.CharField(max_length=128, blank=True, null=True)
     ship_class = models.CharField(max_length=30, choices=SHIP_CLASSES, default='Shuttle', blank=True)
     ship_grade = models.CharField(max_length=30, choices=SHIP_GRADES, default='Void', blank=True)
@@ -248,7 +248,7 @@ class ShipRef(models.Model):
 
     def compute_cinematic_system(self):
         self.cs_maneuver = (
-                                       self.cs_thrust + self.cs_engine - self.cs_bulk + self.cs_battle_shields + self.cs_fusion_core) / 3
+                                   self.cs_thrust + self.cs_engine - self.cs_bulk + self.cs_battle_shields + self.cs_fusion_core) / 3
         self.cs_scan = (self.cs_sensors + self.cs_fusion_core + self.cs_think_machine) / 3
         self.cs_soak = (self.cs_bulk + self.cs_crew - self.cs_engine)
         self.cs_attack = (self.cs_guns + self.cs_engine) / 2
@@ -366,11 +366,12 @@ class ShipSection(models.Model):
 
 class ShipSectionInline(admin.TabularInline):
     model = ShipSection
-    def formfield_for_manytomany(self, db_field, request, **kwargs):
-        if db_field.name == "links":
-            id = request.path.split("/")[4]
-            kwargs["queryset"] = ShipSection.objects.filter(ship_ref__id=id)
-        return super(ShipSectionInline, self).formfield_for_manytomany(db_field, request, **kwargs)
+
+    # def formfield_for_manytomany(self, db_field, request, **kwargs):
+    #     if db_field.name == "links":
+    #         id = request.path.split("/")[4]
+    #         kwargs["queryset"] = ShipSection.objects.filter(ship_ref__id=id)
+    #     return super(ShipSectionInline, self).formfield_for_manytomany(db_field, request, **kwargs)
 
 
 class ShipSystemSlot(models.Model):
@@ -401,6 +402,9 @@ class Spaceship(RiddedMixin):
     def __str__(self):
         return "%s (%s)" % (self.full_name, self.flag)
 
+    def fix(self):
+        self.toRID(f"{self.full_name}")
+
     def d3_model(self):
         d3_model = {}
         d3_model['info'] = {}
@@ -415,6 +419,11 @@ class Spaceship(RiddedMixin):
             s_data['slot'] = SLOT_NAMES[int(s.slot)]
             d3_model['sections'].append(s_data)
         return d3_model
+
+
+@receiver(pre_save, sender=Spaceship, dispatch_uid='update_spaceship')
+def update_spaceship(sender, instance, **kwargs):
+    instance.fix()
 
 
 def CheckOrCreateSection(section_name, slot_index, ship_ref):
@@ -455,10 +464,10 @@ class ShipSectionAdmin(admin.ModelAdmin):
             kwargs["queryset"] = ShipSection.objects.filter(ship_ref__id=id)
         return super(ShipSectionAdmin, self).formfield_for_manytomany(db_field, request, **kwargs)
 
-
     ordering = ['ship_ref', 'slot', 'section']
     list_display = (
-    'section', 'slot', 'ship_ref', 'structure_points', 'systems_installed', 'boarding_access', 'boarding_party_limit')
+        'section', 'slot', 'ship_ref', 'structure_points', 'systems_installed', 'boarding_access',
+        'boarding_party_limit')
     list_filter = ('ship_ref', 'section', 'slot', 'structure_points')
     search_fields = ('systems_installed',)
     inlines = [ShipSystemSlotInline, ]
@@ -472,4 +481,4 @@ class ShipSystemSlotAdmin(admin.ModelAdmin):
 
 class SpaceshipAdmin(admin.ModelAdmin):
     ordering = ['full_name']
-    list_display = ('full_name', 'ship_ref', 'owner', 'flag')
+    list_display = ('full_name', "r_i_d", "rid", 'ship_ref', 'owner', 'flag')

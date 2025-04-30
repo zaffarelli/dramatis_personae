@@ -174,7 +174,7 @@ def parse_avatars(value):
         from optimizer.utils.gaming import rollcheck
         txt, title = rollcheck(occ)
         replacement_string = f'<div class="embedded_link" title="{title}">{txt}</div>'
-        print(replacement_string)
+        # print(replacement_string)
         changes.append({'src': item.group(), 'dst': replacement_string})
 
     # Characters
@@ -204,7 +204,7 @@ def parse_avatars(value):
     for item in iter:
         rid = ''.join(item.group().split('^'))
         try:
-            ch = Spaceship.objects.get(full_name=rid)
+            ch = Spaceship.objects.get(rid=rid)
         except Spaceship.DoesNotExist:
             ch = None
         if ch is not None:
