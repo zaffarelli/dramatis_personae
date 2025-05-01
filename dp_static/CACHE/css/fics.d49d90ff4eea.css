@@ -27,7 +27,7 @@ body {
 
 /* line 116, collector/static/collector/scss/_basics.scss */
 .logo {
-  background: transparent url("/static/collector/campaigns/FICS/logo.png?1d127de9d0bd") center center no-repeat;
+  background: transparent url("/static/collector/campaigns/FICS/logo.png?8ac23d09693a") center center no-repeat;
   /*background: url("/static/collector/scss/details.png");*/ }
 
 /* line 122, collector/static/collector/scss/_basics.scss */
@@ -790,7 +790,7 @@ body {
 
 /* line 116, collector/static/collector/scss/_basics.scss */
 .logo {
-  background: transparent url("/static/collector/campaigns/FICS/logo.png?1d127de9d0bd") center center no-repeat;
+  background: transparent url("/static/collector/campaigns/FICS/logo.png?8ac23d09693a") center center no-repeat;
   /*background: url("/static/collector/scss/details.png");*/ }
 
 /* line 122, collector/static/collector/scss/_basics.scss */
@@ -1526,36 +1526,36 @@ th.skill_dot {
 
 @font-face {
   font-family: 'NomPerso';
-  src: url("/static/collector/fonts/Cinzel-Black.ttf?94bad74e23c2"); }
+  src: url("/static/collector/fonts/Cinzel-Black.ttf?d6fa77d4d9ac"); }
 
 @font-face {
   font-family: 'TextDesc';
-  src: url("/static/collector/fonts/WorkSans-Light.ttf?94bad74e23c2"); }
+  src: url("/static/collector/fonts/WorkSans-Light.ttf?d6fa77d4d9ac"); }
 
 @font-face {
   font-family: 'NomPersoListe';
-  src: url("/static/collector/fonts/Cinzel-Regular.ttf?94bad74e23c2"); }
+  src: url("/static/collector/fonts/Cinzel-Regular.ttf?d6fa77d4d9ac"); }
 
 @font-face {
   font-family: 'Titre';
   /*src: url('/static/collector/scss/Eczar-ExtraBold.ttf');*/
-  src: url("/static/collector/fonts/Balthazar-Regular.ttf?94bad74e23c2"); }
+  src: url("/static/collector/fonts/Balthazar-Regular.ttf?d6fa77d4d9ac"); }
 
 @font-face {
   font-family: 'Texte';
-  src: url("/static/collector/fonts/Lato-Regular.ttf?94bad74e23c2"); }
+  src: url("/static/collector/fonts/Lato-Regular.ttf?d6fa77d4d9ac"); }
 
 @font-face {
   font-family: 'Emphase';
-  src: url("/static/collector/fonts/Eczar-Regular.ttf?94bad74e23c2"); }
+  src: url("/static/collector/fonts/Eczar-Regular.ttf?d6fa77d4d9ac"); }
 
 @font-face {
   font-family: 'FatName';
-  src: url("/static/collector/fonts/AlegreyaSansSC-Black.ttf?252b6f395765"); }
+  src: url("/static/collector/fonts/AlegreyaSansSC-Black.ttf?d6fa77d4d9ac"); }
 
 @font-face {
   font-family: 'FadingSunsIcons';
-  src: url("/static/collector/fonts/FadingSunsIcons.ttf?252b6f395765"); }
+  src: url("/static/collector/fonts/FadingSunsIcons.ttf?d6fa77d4d9ac"); }
 
 /* line 4, collector/static/collector/scss/_fics_charactersheet.scss */
 .character_sheet {
@@ -1983,36 +1983,36 @@ div.character_update_view {
 
 @font-face {
   font-family: 'NomPerso';
-  src: url("/static/collector/fonts/Cinzel-Black.ttf?94bad74e23c2"); }
+  src: url("/static/collector/fonts/Cinzel-Black.ttf?d6fa77d4d9ac"); }
 
 @font-face {
   font-family: 'TextDesc';
-  src: url("/static/collector/fonts/WorkSans-Light.ttf?94bad74e23c2"); }
+  src: url("/static/collector/fonts/WorkSans-Light.ttf?d6fa77d4d9ac"); }
 
 @font-face {
   font-family: 'NomPersoListe';
-  src: url("/static/collector/fonts/Cinzel-Regular.ttf?94bad74e23c2"); }
+  src: url("/static/collector/fonts/Cinzel-Regular.ttf?d6fa77d4d9ac"); }
 
 @font-face {
   font-family: 'Titre';
   /*src: url('/static/collector/scss/Eczar-ExtraBold.ttf');*/
-  src: url("/static/collector/fonts/Balthazar-Regular.ttf?94bad74e23c2"); }
+  src: url("/static/collector/fonts/Balthazar-Regular.ttf?d6fa77d4d9ac"); }
 
 @font-face {
   font-family: 'Texte';
-  src: url("/static/collector/fonts/Lato-Regular.ttf?94bad74e23c2"); }
+  src: url("/static/collector/fonts/Lato-Regular.ttf?d6fa77d4d9ac"); }
 
 @font-face {
   font-family: 'Emphase';
-  src: url("/static/collector/fonts/Eczar-Regular.ttf?94bad74e23c2"); }
+  src: url("/static/collector/fonts/Eczar-Regular.ttf?d6fa77d4d9ac"); }
 
 @font-face {
   font-family: 'FatName';
-  src: url("/static/collector/fonts/AlegreyaSansSC-Black.ttf?252b6f395765"); }
+  src: url("/static/collector/fonts/AlegreyaSansSC-Black.ttf?d6fa77d4d9ac"); }
 
 @font-face {
   font-family: 'FadingSunsIcons';
-  src: url("/static/collector/fonts/FadingSunsIcons.ttf?252b6f395765"); }
+  src: url("/static/collector/fonts/FadingSunsIcons.ttf?d6fa77d4d9ac"); }
 
 /* line 86, collector/static/collector/scss/_basics.scss */
 input[type=text], input[type=password], input[type=number], input[type=checkbox], select, textarea {
@@ -2043,7 +2043,7 @@ body {
 
 /* line 116, collector/static/collector/scss/_basics.scss */
 .logo {
-  background: transparent url("/static/collector/campaigns/FICS/logo.png?1d127de9d0bd") center center no-repeat;
+  background: transparent url("/static/collector/campaigns/FICS/logo.png?8ac23d09693a") center center no-repeat;
   /*background: url("/static/collector/scss/details.png");*/ }
 
 /* line 122, collector/static/collector/scss/_basics.scss */
@@ -2779,36 +2779,36 @@ th.skill_dot {
 
 @font-face {
   font-family: 'NomPerso';
-  src: url("/static/collector/fonts/Cinzel-Black.ttf?94bad74e23c2"); }
+  src: url("/static/collector/fonts/Cinzel-Black.ttf?d6fa77d4d9ac"); }
 
 @font-face {
   font-family: 'TextDesc';
-  src: url("/static/collector/fonts/WorkSans-Light.ttf?94bad74e23c2"); }
+  src: url("/static/collector/fonts/WorkSans-Light.ttf?d6fa77d4d9ac"); }
 
 @font-face {
   font-family: 'NomPersoListe';
-  src: url("/static/collector/fonts/Cinzel-Regular.ttf?94bad74e23c2"); }
+  src: url("/static/collector/fonts/Cinzel-Regular.ttf?d6fa77d4d9ac"); }
 
 @font-face {
   font-family: 'Titre';
   /*src: url('/static/collector/scss/Eczar-ExtraBold.ttf');*/
-  src: url("/static/collector/fonts/Balthazar-Regular.ttf?94bad74e23c2"); }
+  src: url("/static/collector/fonts/Balthazar-Regular.ttf?d6fa77d4d9ac"); }
 
 @font-face {
   font-family: 'Texte';
-  src: url("/static/collector/fonts/Lato-Regular.ttf?94bad74e23c2"); }
+  src: url("/static/collector/fonts/Lato-Regular.ttf?d6fa77d4d9ac"); }
 
 @font-face {
   font-family: 'Emphase';
-  src: url("/static/collector/fonts/Eczar-Regular.ttf?94bad74e23c2"); }
+  src: url("/static/collector/fonts/Eczar-Regular.ttf?d6fa77d4d9ac"); }
 
 @font-face {
   font-family: 'FatName';
-  src: url("/static/collector/fonts/AlegreyaSansSC-Black.ttf?252b6f395765"); }
+  src: url("/static/collector/fonts/AlegreyaSansSC-Black.ttf?d6fa77d4d9ac"); }
 
 @font-face {
   font-family: 'FadingSunsIcons';
-  src: url("/static/collector/fonts/FadingSunsIcons.ttf?252b6f395765"); }
+  src: url("/static/collector/fonts/FadingSunsIcons.ttf?d6fa77d4d9ac"); }
 
 /* line 9, collector/static/collector/scss/_optimizer.scss */
 .fresque.duel {
@@ -3015,7 +3015,7 @@ table.action_table tr td {
   width: 30px;
   height: 32px;
   top: 0;
-  background-image: url("/static/collector/d12.png?252b6f395765");
+  background-image: url("/static/collector/d12.png?8ac23d09693a");
   background-repeat: no-repeat;
   border: 1px solid transparent; }
   /* line 321, collector/static/collector/scss/_optimizer.scss */
@@ -3148,7 +3148,7 @@ body {
 
 /* line 116, collector/static/collector/scss/_basics.scss */
 .logo {
-  background: transparent url("/static/collector/campaigns/FICS/logo.png?1d127de9d0bd") center center no-repeat;
+  background: transparent url("/static/collector/campaigns/FICS/logo.png?8ac23d09693a") center center no-repeat;
   /*background: url("/static/collector/scss/details.png");*/ }
 
 /* line 122, collector/static/collector/scss/_basics.scss */
@@ -3884,36 +3884,36 @@ th.skill_dot {
 
 @font-face {
   font-family: 'NomPerso';
-  src: url("/static/collector/fonts/Cinzel-Black.ttf?94bad74e23c2"); }
+  src: url("/static/collector/fonts/Cinzel-Black.ttf?d6fa77d4d9ac"); }
 
 @font-face {
   font-family: 'TextDesc';
-  src: url("/static/collector/fonts/WorkSans-Light.ttf?94bad74e23c2"); }
+  src: url("/static/collector/fonts/WorkSans-Light.ttf?d6fa77d4d9ac"); }
 
 @font-face {
   font-family: 'NomPersoListe';
-  src: url("/static/collector/fonts/Cinzel-Regular.ttf?94bad74e23c2"); }
+  src: url("/static/collector/fonts/Cinzel-Regular.ttf?d6fa77d4d9ac"); }
 
 @font-face {
   font-family: 'Titre';
   /*src: url('/static/collector/scss/Eczar-ExtraBold.ttf');*/
-  src: url("/static/collector/fonts/Balthazar-Regular.ttf?94bad74e23c2"); }
+  src: url("/static/collector/fonts/Balthazar-Regular.ttf?d6fa77d4d9ac"); }
 
 @font-face {
   font-family: 'Texte';
-  src: url("/static/collector/fonts/Lato-Regular.ttf?94bad74e23c2"); }
+  src: url("/static/collector/fonts/Lato-Regular.ttf?d6fa77d4d9ac"); }
 
 @font-face {
   font-family: 'Emphase';
-  src: url("/static/collector/fonts/Eczar-Regular.ttf?94bad74e23c2"); }
+  src: url("/static/collector/fonts/Eczar-Regular.ttf?d6fa77d4d9ac"); }
 
 @font-face {
   font-family: 'FatName';
-  src: url("/static/collector/fonts/AlegreyaSansSC-Black.ttf?252b6f395765"); }
+  src: url("/static/collector/fonts/AlegreyaSansSC-Black.ttf?d6fa77d4d9ac"); }
 
 @font-face {
   font-family: 'FadingSunsIcons';
-  src: url("/static/collector/fonts/FadingSunsIcons.ttf?252b6f395765"); }
+  src: url("/static/collector/fonts/FadingSunsIcons.ttf?d6fa77d4d9ac"); }
 
 /* line 4, collector/static/collector/scss/_collector.scss */
 span.toggler {
@@ -4075,7 +4075,7 @@ span.info {
   text-align: center;
   vertical-align: middle;
   overflow-y: scroll;
-  background: transparent url("/static/collector/mid.png?252b6f395765");
+  background: transparent url("/static/collector/mid.png?d6fa77d4d9ac");
   font-size: 8pt;
   padding-left: 30px;
   padding-right: 30px; }
@@ -4153,7 +4153,7 @@ body {
 
 /* line 116, collector/static/collector/scss/_basics.scss */
 .logo {
-  background: transparent url("/static/collector/campaigns/FICS/logo.png?1d127de9d0bd") center center no-repeat;
+  background: transparent url("/static/collector/campaigns/FICS/logo.png?8ac23d09693a") center center no-repeat;
   /*background: url("/static/collector/scss/details.png");*/ }
 
 /* line 122, collector/static/collector/scss/_basics.scss */
@@ -5534,6 +5534,14 @@ div#area_close {
   text-align: center;
   border-radius: 3px; }
 
+/* line 717, collector/static/collector/scss/_placement.scss */
+.info {
+  display: inline-block;
+  width: 10ex;
+  height: auto;
+  overflow-wrap: break-word;
+  border: 1px solid red; }
+
 /* line 86, collector/static/collector/scss/_basics.scss */
 input[type=text], input[type=password], input[type=number], input[type=checkbox], select, textarea {
   background-color: #242524;
@@ -5563,7 +5571,7 @@ body {
 
 /* line 116, collector/static/collector/scss/_basics.scss */
 .logo {
-  background: transparent url("/static/collector/campaigns/FICS/logo.png?1d127de9d0bd") center center no-repeat;
+  background: transparent url("/static/collector/campaigns/FICS/logo.png?8ac23d09693a") center center no-repeat;
   /*background: url("/static/collector/scss/details.png");*/ }
 
 /* line 122, collector/static/collector/scss/_basics.scss */
@@ -6299,36 +6307,36 @@ th.skill_dot {
 
 @font-face {
   font-family: 'NomPerso';
-  src: url("/static/collector/fonts/Cinzel-Black.ttf?94bad74e23c2"); }
+  src: url("/static/collector/fonts/Cinzel-Black.ttf?d6fa77d4d9ac"); }
 
 @font-face {
   font-family: 'TextDesc';
-  src: url("/static/collector/fonts/WorkSans-Light.ttf?94bad74e23c2"); }
+  src: url("/static/collector/fonts/WorkSans-Light.ttf?d6fa77d4d9ac"); }
 
 @font-face {
   font-family: 'NomPersoListe';
-  src: url("/static/collector/fonts/Cinzel-Regular.ttf?94bad74e23c2"); }
+  src: url("/static/collector/fonts/Cinzel-Regular.ttf?d6fa77d4d9ac"); }
 
 @font-face {
   font-family: 'Titre';
   /*src: url('/static/collector/scss/Eczar-ExtraBold.ttf');*/
-  src: url("/static/collector/fonts/Balthazar-Regular.ttf?94bad74e23c2"); }
+  src: url("/static/collector/fonts/Balthazar-Regular.ttf?d6fa77d4d9ac"); }
 
 @font-face {
   font-family: 'Texte';
-  src: url("/static/collector/fonts/Lato-Regular.ttf?94bad74e23c2"); }
+  src: url("/static/collector/fonts/Lato-Regular.ttf?d6fa77d4d9ac"); }
 
 @font-face {
   font-family: 'Emphase';
-  src: url("/static/collector/fonts/Eczar-Regular.ttf?94bad74e23c2"); }
+  src: url("/static/collector/fonts/Eczar-Regular.ttf?d6fa77d4d9ac"); }
 
 @font-face {
   font-family: 'FatName';
-  src: url("/static/collector/fonts/AlegreyaSansSC-Black.ttf?252b6f395765"); }
+  src: url("/static/collector/fonts/AlegreyaSansSC-Black.ttf?d6fa77d4d9ac"); }
 
 @font-face {
   font-family: 'FadingSunsIcons';
-  src: url("/static/collector/fonts/FadingSunsIcons.ttf?252b6f395765"); }
+  src: url("/static/collector/fonts/FadingSunsIcons.ttf?d6fa77d4d9ac"); }
 
 /* line 4, collector/static/collector/scss/_scenarist.scss */
 .mosaic .tile.storyview {
@@ -6585,7 +6593,7 @@ body {
 
 /* line 116, collector/static/collector/scss/_basics.scss */
 .logo {
-  background: transparent url("/static/collector/campaigns/FICS/logo.png?1d127de9d0bd") center center no-repeat;
+  background: transparent url("/static/collector/campaigns/FICS/logo.png?8ac23d09693a") center center no-repeat;
   /*background: url("/static/collector/scss/details.png");*/ }
 
 /* line 122, collector/static/collector/scss/_basics.scss */
@@ -7321,36 +7329,36 @@ th.skill_dot {
 
 @font-face {
   font-family: 'NomPerso';
-  src: url("/static/collector/fonts/Cinzel-Black.ttf?94bad74e23c2"); }
+  src: url("/static/collector/fonts/Cinzel-Black.ttf?d6fa77d4d9ac"); }
 
 @font-face {
   font-family: 'TextDesc';
-  src: url("/static/collector/fonts/WorkSans-Light.ttf?94bad74e23c2"); }
+  src: url("/static/collector/fonts/WorkSans-Light.ttf?d6fa77d4d9ac"); }
 
 @font-face {
   font-family: 'NomPersoListe';
-  src: url("/static/collector/fonts/Cinzel-Regular.ttf?94bad74e23c2"); }
+  src: url("/static/collector/fonts/Cinzel-Regular.ttf?d6fa77d4d9ac"); }
 
 @font-face {
   font-family: 'Titre';
   /*src: url('/static/collector/scss/Eczar-ExtraBold.ttf');*/
-  src: url("/static/collector/fonts/Balthazar-Regular.ttf?94bad74e23c2"); }
+  src: url("/static/collector/fonts/Balthazar-Regular.ttf?d6fa77d4d9ac"); }
 
 @font-face {
   font-family: 'Texte';
-  src: url("/static/collector/fonts/Lato-Regular.ttf?94bad74e23c2"); }
+  src: url("/static/collector/fonts/Lato-Regular.ttf?d6fa77d4d9ac"); }
 
 @font-face {
   font-family: 'Emphase';
-  src: url("/static/collector/fonts/Eczar-Regular.ttf?94bad74e23c2"); }
+  src: url("/static/collector/fonts/Eczar-Regular.ttf?d6fa77d4d9ac"); }
 
 @font-face {
   font-family: 'FatName';
-  src: url("/static/collector/fonts/AlegreyaSansSC-Black.ttf?252b6f395765"); }
+  src: url("/static/collector/fonts/AlegreyaSansSC-Black.ttf?d6fa77d4d9ac"); }
 
 @font-face {
   font-family: 'FadingSunsIcons';
-  src: url("/static/collector/fonts/FadingSunsIcons.ttf?252b6f395765"); }
+  src: url("/static/collector/fonts/FadingSunsIcons.ttf?d6fa77d4d9ac"); }
 
 /* Normal - 21/22 inches screen */
 @media screen and (min-width: 1025px) {
@@ -7360,7 +7368,7 @@ th.skill_dot {
     padding: 0;
     overflow-x: none;
     overflow-y: scroll;
-    background: #303230 url("/static/collector/campaigns/FICS/back.jpg?252b6f395765");
+    background: #303230 url("/static/collector/campaigns/FICS/back.jpg?8ac23d09693a");
     background-attachment: fixed; }
     /* line 15, collector/static/collector/scss/_layout.scss */
     body .wrapper {

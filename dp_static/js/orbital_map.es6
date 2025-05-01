@@ -1,1 +1,1 @@
-/home/zaffarelli/Projects/github/dramatis_personae/cartograph/static/js/orbital_map.es6
+/home/zaffarelli/Perso/dramatis_personae/cartograph/static/js/orbital_map.es6

@@ -315,6 +315,7 @@ class Collector {
         me.registerPullDowns();
         me.registerFigures();
         me.registerCharsels();
+        me.registerOthers()
         /* Togglers */
         me.setToggler('.mobile_form_toggler', 'collapsed', "#customizer");
         me.setToggler('.menu_right_toggler', 'collapsed', ".menuright");
@@ -741,5 +742,14 @@ class Collector {
                 $t.raise_event($t.id('throw'), 'mouseup');
                 me.rebootLinks();
             });
+    }
+
+    registerOthers(){
+        let me = this
+        $("input#customize").off().on("dblclick", function(e){
+            // console.log("TEST dblclick")
+            // console.log($(this).val())
+            $(this).val("")
+        })
     }
 }

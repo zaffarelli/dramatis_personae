@@ -714,3 +714,12 @@ div#area_close{
 }
 
 
+.info{
+    //display:block;
+    max-width:20ex !important;
+    height:2.8em !important;
+    margin-left:auto;
+    margin-right:auto;
+    overflow-wrap: break-word;
+    border: 1px solid transparent;
+}
