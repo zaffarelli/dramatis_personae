@@ -723,3 +723,8 @@ div#area_close{
     overflow-wrap: break-word;
     border: 1px solid transparent;
 }
+
+.character_sheet{
+    border:3px solid $fics_darkest;
+    overflow-x: scroll;
+}

@@ -113,7 +113,7 @@ class DegreeCustoInline(admin.TabularInline):
 
 class DegreeRefAdmin(admin.ModelAdmin):
     ordering = ['-is_wildcard', 'group', 'reference']
-    list_display = ['rid','reference', 'level', 'is_wildcard','group_wildcard', 'group','subgroup', 'as_wildcard_of']
+    list_display = ['reference', 'level', 'is_wildcard','group_wildcard', 'group','subgroup', 'as_wildcard_of']
     list_filter = ['group','subgroup','is_wildcard', 'level']
     list_editable = ['group','subgroup', 'level']
     search_fields = ['reference']

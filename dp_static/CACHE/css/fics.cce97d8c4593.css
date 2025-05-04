@@ -5536,11 +5536,17 @@ div#area_close {
 
 /* line 717, collector/static/collector/scss/_placement.scss */
 .info {
-  display: inline-block;
-  width: 10ex;
-  height: auto;
+  max-width: 20ex !important;
+  height: 2.8em !important;
+  margin-left: auto;
+  margin-right: auto;
   overflow-wrap: break-word;
-  border: 1px solid red; }
+  border: 1px solid transparent; }
+
+/* line 727, collector/static/collector/scss/_placement.scss */
+.character_sheet {
+  border: 3px solid black;
+  overflow-x: scroll; }
 
 /* line 86, collector/static/collector/scss/_basics.scss */
 input[type=text], input[type=password], input[type=number], input[type=checkbox], select, textarea {

@@ -278,7 +278,6 @@ class Collector {
             }
             let x = me.btoasafe(slug)
             let aurl = 'ajax/' + action_tag + '/' + x + '/' + page + '/';
-            console.debug(action_tag + " has been clicked... (" + aurl + ")");
             $.ajax({
                 url: aurl,
                 success: function (answer) {
@@ -286,6 +285,7 @@ class Collector {
                     me.rebootLinks();
                 },
                 error: function (answer) {
+                    console.debug(action_tag + " has been clicked... (" + aurl + ")");
                     console.error('Error on slug-page-item [' + action_tag + ']');
                     console.debug(answer)
                     me.rebootLinks();
