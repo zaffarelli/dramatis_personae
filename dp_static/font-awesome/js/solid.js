@@ -1,1 +1,1 @@
-/home/zaffarelli/Perso/dramatis_personae/collector/static/font-awesome/js/solid.js
+/home/zaffarelli/Projects/github/dramatis_personae/collector/static/font-awesome/js/solid.js

@@ -1,1 +1,1 @@
-/home/zaffarelli/Perso/dramatis_personae/collector/static/thirdparties/dice.js
+/home/zaffarelli/Projects/github/dramatis_personae/collector/static/thirdparties/dice.js

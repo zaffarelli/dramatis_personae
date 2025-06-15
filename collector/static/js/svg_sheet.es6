@@ -14,8 +14,9 @@ class Sheet {
             "maxlines": -1,
             "settings": {}
         }
-        console.debug("Character Sheet");
+        console.debug("SVG sheet");
         this.showGrid = true
+        this.pages_number = 1
     }
 
     init() {
@@ -47,6 +48,7 @@ class Sheet {
             
         }
 
+        me.tiny_font_size = me.step * 0.2 * 1
         me.small_font_size = me.step * 0.2 * 1.25
         me.medium_font_size = me.small_font_size * 1.25
         me.big_font_size = me.medium_font_size*2
@@ -159,6 +161,7 @@ class Sheet {
             })
             .on('click', function (d) {
                 if (action == 'browse') {
+                    console.log(">> Browse "+num)
                     me.perform(null, num - 1);
                 } else {
                     if (num == 0) {
@@ -241,7 +244,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink"> \
         } else {
             lpage = "_verso"
         }
-        let fname = me.data['rid'] + lpage + ".svg"
+        let fname = me.rid + lpage + ".svg"
         let nuke = document.createElement("a");
         nuke.href = 'data:application/octet-stream;base64,' + btoa(me.formatXml(exportable_svg));
         nuke.setAttribute("download", fname);
@@ -270,17 +273,17 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
 ' + flist + base_svg + '</svg>';
 
         lpage = "_p" + me.page;
-        let svg_name = me.data['rid'] + lpage + ".svg"
-        let pdf_name = me.data['rid'] + lpage + ".pdf"
+        let svg_name = me.rid + lpage + ".svg"
+        let pdf_name = me.rid + lpage + ".pdf"
         let sheet_data = {
             'pdf_name': pdf_name,
             'svg_name': svg_name,
             'svg': exportable_svg,
-            'rid': me.data['rid']
+            'rid': me.rid
         }
         me.svg.selectAll('.do_not_print').attr('opacity', 1);
         $.ajax({
-            url: 'ajax/character/svg2pdf/' + me.data['rid'] + '/',
+            url: 'ajax/character/svg2pdf/' + me.rid + '/',
             type: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -289,7 +292,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
             data: sheet_data,
             dataType: 'json',
             success: function (answer) {
-                console.log("PDF generated for [" + me.data['rid'] + "]...")
+                console.log("PDF generated for [" + me.rid + "]...")
             },
             error: function (answer) {
                 console.error('Error generating the PDF...: ' + pdf_name);
@@ -1268,8 +1271,8 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
         let basex = ox
         let basey = oy
         me.standardBlock({"x":basex-0.25,"y":basey-0.25,"width":21.5,"height":11,"title":"Summary/TODO list"})
-        me.writeText({"x":ox + 0.25, "y":oy+0.25, "stroke":me.user_stroke,"fill": me.user_fill, "position":"start", "text":me.data.storytelling_note, "font":me.user_font,"width":10,"size":me.medium_font_size/me.step});
-        me.writeText({"x":ox + 10.25, "y":oy+0.25, "stroke":me.user_stroke,"fill": me.user_fill, "position":"start", "text":me.data.pdf_challenge, "font":me.user_font,"width":20,"size":me.medium_font_size/me.step});
+        me.writeText({"x":ox + 0.25, "y":oy+0.25, "stroke":me.draw_stroke,"fill": me.draw_fill, "position":"start", "text":me.data.experience_details, "font":me.mono_font,"width":10,"size":me.small_font_size/120});
+        me.writeText({"x":ox + 10.25, "y":oy+0.25, "stroke":me.draw_stroke,"fill": me.draw_fill, "position":"start", "text":me.data.pdf_challenge, "font":me.mono_font,"width":20,"size":me.small_font_size/120});
 
 //         me.drawRect(ox + 0.5, oy + 0.75, 1, 1, "white", me.draw_fill, 3);
 //         me.drawRect(ox + 2.5, oy + 0.75, 1, 1, "white", me.shadow_stroke, 1);
@@ -1911,12 +1914,10 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
         let me = this;
         me.spe_col_max = 3;
         let oy = basey+0.25;
-        me.column_amount = 32;
+        me.column_amount = 28;
         let ox = 1.5;
-        let boxWidth = 7.5
+        let boxWidth = 7.0
         let boxHeight = 0.45
-
-        //console.log("DEGREES LIST", me.data.degrees_list)
 
 
         let reworked_data_set = []
@@ -1927,15 +1928,12 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
                 reworked_data_set.push({'grp':v.group})
             }
             reworked_data_set.push(v)
+
         })
         let idx = 0
         _.forEach(reworked_data_set, (v,k) => {
             v.idx = idx++
         })
-
-        //console.log("DEGREES LIST", reworked_data_set)
-
-
 
         me.standardBlock({"x":ox-0.25,"y":basey,"width":14.25,"height":14.00,"title":"Degrees"})
         let degrees = me.front.append('g').selectAll('g')
@@ -1964,11 +1962,13 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
 
         degree_in.append('rect')
             .attr('width', boxWidth*me.step*0.9)
-            .attr('height', boxHeight*me.step*0.9)
-            .style('x', me.step*0.05)
-            .style('y', me.step*0.05)
-            .style('fill', 'none')
-            .style('stroke', 'silver')
+            .attr('height', boxHeight*me.step*0.3)
+            .attr('x', me.step*0.05)
+            .attr('y', me.step*0.20)
+            .attr('ry', me.step*0.05)
+            .attr('ry', me.step*0.05)
+            .style('fill', '#E0E0E0')
+            .style('stroke', 'none')
             .style('stroke-width', '0.5pt')
             .attr("opacity",(d) => d.hasOwnProperty("grp") ? 0 : 1)
 
@@ -1985,45 +1985,91 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
 
         degree_in.append('text')
             .attr('x', (boxWidth*1/48)*me.step)
-            .attr('y', boxHeight * me.step*4/5)
+            .attr('y', boxHeight * me.step*2/5)
             .style("stroke-width", '0.5pt')
             .style("text-anchor", 'left')
-            .style("font-size", me.medium_font_size + 'pt')
+            .style("font-size", me.small_font_size + 'pt')
             .style("fill", me.user_fill)
             .style("stroke", me.user_stroke)
 
             .style("font-family", me.user_font)
-            .text((d) => d.degree)
-
-        degree_in.append('circle')
-            .attr('cx', boxWidth * me.step*19/24)
-            .attr('cy', boxHeight * me.step *2/5)
-            .attr('r', 0.12*me.step)
-            .style("fill", (d) => d.value > 0 ? me.user_fill : "white")
-            .style("stroke", me.draw_stroke)
-            .style("stroke-width", '1pt')
-            .style("text-anchor", 'middle')
+            .text((d) => d.degree + " - "+d.level)
             .attr("opacity",(d) => d.hasOwnProperty("grp") ? 0 : 1)
 
-        degree_in.append('circle')
-            .attr('cx', boxWidth * me.step*20/24)
-            .attr('cy', boxHeight * me.step *2/5)
-            .attr('r', 0.12*me.step)
-            .style("fill", (d) => d.value > 1 ? me.user_fill : "white")
-            .style("stroke", me.draw_stroke)
-            .style("stroke-width", '1pt')
-            .style("text-anchor", 'middle')
-            .attr("opacity",(d) => d.hasOwnProperty("grp") ? 0 : 1)
 
-        degree_in.append('circle')
-            .attr('cx', boxWidth * me.step*21/24)
-            .attr('cy', boxHeight * me.step *2/5)
-            .attr('r', 0.12*me.step)
-            .style("fill", (d) => d.value > 2 ? me.user_fill : "white")
-            .style("stroke", me.draw_stroke)
-            .style("stroke-width", '1pt')
-            .style("text-anchor", 'middle')
-            .attr("opacity",(d) => d.hasOwnProperty("grp") ? 0 : 1)
+        _.forEach([0,1,2], (m) =>{
+            degree_in.append('circle')
+                .attr('cx', boxWidth * me.step*(m+19)/24)
+                .attr('cy', boxHeight * me.step *2/5)
+                .attr('r', 0.10*me.step)
+                .style("fill", (d) => d.value > m ? me.user_fill : "white")
+                .style("stroke", me.draw_stroke)
+                .style("stroke-width", '1pt')
+                .style("text-anchor", 'middle')
+                .attr("opacity",(d) => d.hasOwnProperty("grp") ? 0 : 1)
+        });
+
+        _.forEach([0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21], (m) =>{
+            degree_in.append('rect')
+                .attr('x', boxWidth * me.step*(m+1)/36)
+                .attr('y', boxHeight * me.step *5/10)
+                .attr('width', 0.1*me.step)
+                .attr('height', 0.075*me.step)
+                .style("fill", "white")
+                .style("stroke", me.draw_stroke)
+                .style("stroke-width", '1pt')
+                .style("text-anchor", 'middle')
+                .attr("opacity",(d) => {
+                    let o = 0
+                    let nb = 0
+                    let coeff = 0
+                    if (!d.hasOwnProperty("grp")){
+                        switch(d.lvl){
+                            case "CO":
+                                nb = 3
+                                break
+                            case "RE":
+                                nb = 4
+                                break
+                            case "EL":
+                                nb = 5
+                                break
+                            case "OB":
+                                nb = 6
+                                break
+                            case "FO":
+                                nb = 7
+                                break
+                        }
+                        coeff = d.value+1
+                        let total = coeff * nb
+                        if (m<total){
+                            o = 1
+                        }
+                    }
+                    return o
+                })
+        });
+
+//         degree_in.append('circle')
+//             .attr('cx', boxWidth * me.step*20/24)
+//             .attr('cy', boxHeight * me.step *2/5)
+//             .attr('r', 0.12*me.step)
+//             .style("fill", (d) => d.value > 1 ? me.user_fill : "white")
+//             .style("stroke", me.draw_stroke)
+//             .style("stroke-width", '1pt')
+//             .style("text-anchor", 'middle')
+//             .attr("opacity",(d) => d.hasOwnProperty("grp") ? 0 : 1)
+//
+//         degree_in.append('circle')
+//             .attr('cx', boxWidth * me.step*21/24)
+//             .attr('cy', boxHeight * me.step *2/5)
+//             .attr('r', 0.12*me.step)
+//             .style("fill", (d) => d.value > 2 ? me.user_fill : "white")
+//             .style("stroke", me.draw_stroke)
+//             .style("stroke-width", '1pt')
+//             .style("text-anchor", 'middle')
+//             .attr("opacity",(d) => d.hasOwnProperty("grp") ? 0 : 1)
 
 
         degrees.exit().remove();

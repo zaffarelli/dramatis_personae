@@ -12,15 +12,15 @@ from collector.mixins.ridded_mixin import RiddedMixin, RidField
 
 class DegreeRef(RiddedMixin):
     class Meta:
-        ordering = ['-is_wildcard','group','reference']
+        ordering = ['-is_wildcard', 'group', 'reference']
         verbose_name = "FICS: Degree"
 
     class Level(models.TextChoices):
-        COMMON = "CO", "0 - Common"
-        RESTRICTED = "RE", "1 - Restricted"
-        ELITE = "EL", "2 - Elite"
-        OBSCURE = "OB", "3 - Obscure"
-        FORBIDDEN = "FO", "4 - Forbidden"
+        COMMON = "CO", "(1)"
+        RESTRICTED = "RE", "(2)"
+        ELITE = "EL", "(3)"
+        OBSCURE = "OB", "(4)"
+        FORBIDDEN = "FO", "(5)"
 
     reference = models.CharField(default="", max_length=200, blank=True)
     group = models.CharField(default="GENE", max_length=4, choices=fics_references.DEGREE_GROUPS, blank=True)
@@ -28,7 +28,7 @@ class DegreeRef(RiddedMixin):
     level = models.CharField(default=Level.COMMON, max_length=2, choices=Level, blank=True)
     is_wildcard = models.BooleanField(default=False, blank=True)
     group_wildcard = models.BooleanField(default=False, blank=True)
-    #deprecated = models.BooleanField(default=False, blank=True)
+    refval = models.CharField(default="", max_length=200, blank=True)
     description = models.TextField(max_length=1024, default='', blank=True)
     as_wildcard_of = models.CharField(default="", max_length=512, blank=True)
 
@@ -39,21 +39,36 @@ class DegreeRef(RiddedMixin):
         # self.toRID(f"{self.reference}_{self.group}")
         self.toRID(f"{self.level}_{self.is_wildcard}_{self.group}_{self.reference}", False, "DEG_", cypher=True)
         if self.is_wildcard:
+            self.refval = self.reference
             if self.group_wildcard:
                 candidates = DegreeRef.objects.filter(is_wildcard=False).filter(group=self.group)
                 items = []
                 for candidate in candidates:
                     items.append(candidate.reference)
                 self.as_wildcard_of = ", ".join(items)
-
+        else:
+            k = 4
+            self.refval = ""
+            if len(self.reference) > 20:
+                words = self.reference.split(" ")
+                for word in words:
+                    if len(word) < k:
+                        self.refval += word
+                    else:
+                        self.refval += word[:k]
+            else:
+                words = self.reference.split(" ")
+                for word in words:
+                    self.refval += word
 
 
 class DegreeModificator(models.Model):
     """
     A degree-modificator is linked to a ToD and can be a wildcard
     """
+
     class Meta:
-        ordering = ['-degree_ref__is_wildcard','degree_ref__group','degree_ref__reference']
+        ordering = ['-degree_ref__is_wildcard', 'degree_ref__group', 'degree_ref__reference']
 
     tour_of_duty_ref = models.ForeignKey(TourOfDutyRef, on_delete=models.CASCADE)
     degree_ref = models.ForeignKey(DegreeRef, on_delete=models.CASCADE)
@@ -71,12 +86,14 @@ class DegreeCusto(models.Model):
     A degree-custo is linked to the customizer, cannot be a wild card and all the d-custo should fullfill the
     d-modificators of the ToDs
     """
+
     class Meta:
-        ordering = ['degree_ref__group','degree_ref']
+        ordering = ['degree_ref__group', 'degree_ref']
 
     character_custo = models.ForeignKey(CharacterCusto, on_delete=models.CASCADE)
     degree_ref = models.ForeignKey(DegreeRef, on_delete=models.CASCADE)
     value = models.IntegerField(default=1)
+
 
 class Degree(RiddedMixin):
     class Meta:
@@ -93,16 +110,25 @@ class Degree(RiddedMixin):
         return '%s=%s' % (self.character.full_name, self.degree_ref.reference)
 
     def fix(self):
-        ch = Character.rid
-        dr = DegreeRef.rid
-        if (ch and dr):
-            self.toRID(f"{ch}_{dr}")
+        # ch = Character.rid
+        # dr = DegreeRef.rid
+        # if (ch and dr):
+        #     self.toRID(f"{ch}_{dr}")
+        self.toRID(f"{self.character.full_name}={self.degree_ref.reference}")
+
+
+class DegreeInline(admin.TabularInline):
+    model = Degree
+    extras = 10
+    ordering = ('degree_ref',)
+
+
 
 
 class DegreeModificatorInline(admin.TabularInline):
     model = DegreeModificator
     extras = 1
-    ordering = ('-degree_ref__is_wildcard','degree_ref__group','degree_ref__reference')
+    ordering = ('-degree_ref__is_wildcard', 'degree_ref__group', 'degree_ref__reference')
 
 
 class DegreeCustoInline(admin.TabularInline):
@@ -113,8 +139,8 @@ class DegreeCustoInline(admin.TabularInline):
 
 class DegreeRefAdmin(admin.ModelAdmin):
     ordering = ['-is_wildcard', 'group', 'reference']
-    list_display = ['reference', 'level', 'is_wildcard','group_wildcard', 'group','subgroup', 'as_wildcard_of']
-    list_filter = ['group','subgroup','is_wildcard', 'level']
-    list_editable = ['group','subgroup', 'level']
+    list_display = ['reference', 'level', 'refval', 'is_wildcard', 'group_wildcard', 'group', 'subgroup', 'as_wildcard_of']
+    list_filter = ['group', 'subgroup', 'is_wildcard', 'level']
+    list_editable = ['group', 'subgroup', 'level']
     search_fields = ['reference']
     actions = [refix]

@@ -89,6 +89,7 @@ class TourOfDutyRef(RiddedMixin):
     beneficeaffliction_modificators_summary = models.TextField(max_length=1024, default="", blank=True)
     blessingcurse_modificators_summary = models.TextField(max_length=1024, default="", blank=True)
     degrees_wp_choices = models.TextField(max_length=2048, default="{}", blank=True)
+    skills_wp_choices = models.TextField(max_length=2048, default="{}", blank=True)
 
     @classmethod
     def validity(cls):
@@ -137,7 +138,16 @@ class TourOfDutyRef(RiddedMixin):
         self.toRID(f"{self.caste}_{self.category}_{self.reference}", prefix="TOD_", cypher=True)
 
         if self.is_custom:
+            # All skills and degrees are wildcards in a custom ToD...
+            if self.DWP == 0 and self.DE > 0:
+                self.DWP = self.DE
+                self.DE = 0
+            if self.SWP == 0 and self.SK > 0:
+                self.SWP = self.SK
+                self.SK = 0
+            self.OP = self.DWP + self.SWP + self.BC + self.BA
             self.value = self.AP * 3 + self.OP
+            self.WP = self.DWP + self.SWP
         else:
             self.AP = 0
             self.OP = 0

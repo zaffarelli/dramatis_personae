@@ -21,6 +21,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+
 def pdf_character(request, id=None):
     """ Create and show a character as PDF """
     item = get_object_or_404(Character, pk=id)
@@ -34,11 +35,13 @@ def pdf_character(request, id=None):
 
 def run_audit(request):
     campaign = get_current_config(request)
-    #character_items = campaign.dramatis_personae.all()
-    character_items = Character.objects.all()
+    # Let's consider only the current epic characters for the audit
+    character_items = campaign.dramatis_personae.all()
+    # character_items = Character.objects.all()
     x = 1
     for c in character_items:
-        c.need_fix = True
+        if len(c.player) > 0:
+            c.need_fix = True
         x += 1
         messages.info(request, f'Recalculating {c.full_name}')
         c.save()
@@ -163,7 +166,7 @@ def save_sequence(request):
         sequence.order = 0
         sequence.data = json.dumps(data, indent=4, sort_keys=True)
         sequence.save()
-        context['status']='saved'
+        context['status'] = 'saved'
     return JsonResponse(context)
 
 
@@ -193,9 +196,10 @@ def svg_to_pdf(request, slug):
             f.write(svgtxt)
             f.close()
         cairosvg.svg2pdf(url=svg_name, write_to=pdf_name, scale=1.0)
-        # all_in_one_pdf(rid)
+        all_in_one_pdf(rid)
         response['status'] = 'ok'
     return JsonResponse(response)
+
 
 def all_in_one_pdf(rid):
     # def reset_eof_of_pdf_return_stream(pdf_stream_in: list):
@@ -239,7 +243,7 @@ def all_in_one_pdf(rid):
         des = f'{csheet_results}character_sheet{rid}.pdf'
         with open(des, 'wb') as fout:
             merger.write(fout)
-        #logger.info(f'Successfully merged {i} page(s) as [{des}].')
+        # logger.info(f'Successfully merged {i} page(s) as [{des}].')
         print(f'Successfully merged {i} page(s) as [{des}].')
     return res
 
@@ -256,7 +260,6 @@ def osave_to_svg(request, slug):
     return JsonResponse(response)
 
 
-
 def xsvg_to_pdf(request, slug):
     response = {'status': 'error'}
     logger.info(f'Saving to PDF.')
@@ -264,7 +267,7 @@ def xsvg_to_pdf(request, slug):
         import cairosvg
         svg_name = os.path.join(settings.MEDIA_ROOT, 'pdf/results/' + request.POST["svg_name"])
         svgtxt = request.POST["svg"]
-        #creature = request.POST["creature"]
+        # creature = request.POST["creature"]
         with open(svg_name, "w") as f:
             f.write(svgtxt)
             f.close()
@@ -282,6 +285,3 @@ def xsvg_to_pdf(request, slug):
         # all_in_one_pdf(rid)
         print(response)
     return JsonResponse(response)
-
-
-

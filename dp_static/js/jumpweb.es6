@@ -1,1 +1,1 @@
-/home/zaffarelli/Perso/dramatis_personae/cartograph/static/js/jumpweb.es6
+/home/zaffarelli/Projects/github/dramatis_personae/cartograph/static/js/jumpweb.es6

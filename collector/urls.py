@@ -4,7 +4,7 @@
  ═╩╝╩    ╚═╝└─┘┴─┘┴─┘└─┘└─┘ ┴ └─┘┴└─
 """
 from django.urls import re_path
-from collector.views.characters import CharacterUpdateView, customize_ba, customize_bc, \
+from collector.views.characters import CharacterUpdateView,CharacterUpdateTodView, customize_ba, customize_bc, \
     customize_skill, customize_ba_del, customize_bc_del, skill_pick, attr_pick, customize_weapon, customize_weapon_del, \
     customize_armor, customize_armor_del, customize_shield, customize_shield_del, customize_ritual, customize_ritual_del, degree_pick, customize_degree
 
@@ -29,6 +29,7 @@ urlpatterns = [
 
     # re_path('^investigators/(?P<pk>\d+)/edit/$', InvestigatorUpdateView.as_view(), name='edit_investigator'),
     re_path('^ajax/edit/avatar/(?P<pk>\d+)/$', CharacterUpdateView.as_view(), name='edit_character'),
+    re_path('^ajax/edit/tod/avatar/(?P<pk>\d+)/$', CharacterUpdateTodView.as_view(), name='edit_character_tod'),
     re_path('^ajax/sheet/avatar/(?P<pk>\d+)/$', display_sheet, name='display_sheet'),
     re_path('^ajax/display_blank_sheet/$', display_blank_sheet, name='display_blank_sheet'),
     re_path('^ajax/sessionsheet/(?P<slug>\w+)/$', display_sessionsheet, name='display_sessionsheet'),

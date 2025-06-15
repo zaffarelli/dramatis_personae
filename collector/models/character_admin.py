@@ -5,6 +5,7 @@
 """
 from django.contrib import admin
 from collector.models.skill import SkillInline
+from collector.models.degree import DegreeInline
 from collector.models.tourofduty import TourOfDutyInline
 from collector.models.blessing_curse import BlessingCurseInline
 from collector.models.benefice_affliction import BeneficeAfflictionInline
@@ -143,14 +144,25 @@ def resave(modeladmin, request, queryset):
         character.save()
     short_description = "Resave"
 
+def epic_fix(modeladmin, request, queryset):
+    for character in queryset:
+        vals = character.keyword.split(', ')
+        if "DALR" in vals:
+            vals.remove("DALR")
+            vals.append("EXNI")
+        character.keyword = ", ".join(vals)
+        character.need_fix = True
+        character.save()
+
 
 
 class CharacterAdmin(admin.ModelAdmin):
-    list_display = ['full_name', 'player',"r_i_d", "cypher_rid", "ranking", "id", 'importance', 'entrance', 'specie', 'alliance_ref',
+    list_display = ['full_name', 'player','lifepath_status',"bookmark_tag","r_i_d", "cypher_rid", "ranking", "id", 'importance', 'entrance', 'specie', 'alliance_ref',
                     'is_dead', 'life_path_total', 'OP',
                     'audit', 'is_visible']
     inlines = [
         SkillInline,
+        DegreeInline,
         BlessingCurseInline,
         BeneficeAfflictionInline,
         # TalentInline,
@@ -164,7 +176,7 @@ class CharacterAdmin(admin.ModelAdmin):
     ordering = ['full_name', ]
     actions = [needs_fix, resave, needs_pdf, no_importance, importance_up, importance_down, make_invisible,
                make_visible, make_teutonic, make_kaanic, make_castillan, make_enquist, make_public, make_private,
-               make_partial, make_complete, enter_fencing_league, exit_fencing_league, recalc_height]
+               make_partial, make_complete, enter_fencing_league, exit_fencing_league, recalc_height, epic_fix]
     exclude = ['SA_REC', 'SA_STA', 'SA_END', 'SA_STU', 'SA_RES', 'SA_DMG', 'SA_TOL', 'SA_HUM', 'SA_PAS', 'SA_WYR',
                'SA_SPD', 'SA_RUN', 'PA_TOTAL', 'SK_TOTAL', 'TA_TOTAL', 'BC_TOTAL', 'BA_TOTAL']
     list_filter = ['fencing_league', 'team', 'occult', 'alliance_ref', 'keyword', 'specie']

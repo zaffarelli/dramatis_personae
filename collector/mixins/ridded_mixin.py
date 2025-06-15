@@ -71,7 +71,7 @@ class RiddedMixin(models.Model):
         else:
             self.rid = f"{type(self).__name__}"+k
         self.rid = self.rid.upper()
-        print("Ridding:", self.rid, self.cypher_rid)
+        # print("Ridding:", self.rid, self.cypher_rid)
         return self.rid
 
 

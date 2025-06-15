@@ -21,6 +21,7 @@ from operator import itemgetter
 
 logger = logging.getLogger(__name__)
 
+
 class Character(Combattant):
     class Meta:
         ordering = ['full_name']
@@ -34,18 +35,20 @@ class Character(Combattant):
     alliance_rid = models.CharField(max_length=200, default="", blank=True)
     specie_rid = models.CharField(max_length=200, default="", blank=True)
     current_fielf_rid = models.CharField(max_length=200, default="", blank=True)
+    bookmark_tag = models.CharField(max_length=200, default="", blank=True)
 
     faction = models.CharField(max_length=200, default='', blank=True)
     alliance_ref = models.ForeignKey(AllianceRef, blank=True, null=True, on_delete=models.SET_NULL)
     specie = models.ForeignKey(Specie, default=31, blank=True, null=True, on_delete=models.SET_NULL)
     race = models.CharField(max_length=256, default='', blank=True)
-    native_fief = models.CharField(max_length=200, default='none')
+    native_fief = models.CharField(max_length=200, default='none', blank=True)
     fief = models.ForeignKey(System, blank=True, null=True, on_delete=models.SET_NULL, related_name='fief')
     current_fief = models.ForeignKey(System, blank=True, null=True, on_delete=models.SET_NULL,
                                      related_name='current_fief')
-    caste = models.CharField(max_length=100, default='Freefolk')
+    caste = models.CharField(max_length=100, default='Freefolk', blank=True)
     rank = models.CharField(max_length=100, default='', blank=True)
     build_log = models.TextField(default='', blank=True)
+    lifepath_status = models.CharField(max_length=100, default='', blank=True)
     PA_STR = models.PositiveIntegerField(default=1, blank=True)
     PA_CON = models.PositiveIntegerField(default=1, blank=True)
     PA_BOD = models.PositiveIntegerField(default=1, blank=True)
@@ -85,6 +88,9 @@ class Character(Combattant):
     shield_cost = models.IntegerField(default=0, blank=True)
     AP = models.IntegerField(default=0, blank=True)
     OP = models.IntegerField(default=0, blank=True)
+
+    development_points = models.IntegerField(default=0, blank=True)
+
     experience_balance = models.IntegerField(default=0, blank=True)
     xp_pool = models.IntegerField(default=0, blank=True)
     xp_spent = models.IntegerField(default=0, blank=True)
@@ -153,7 +159,8 @@ class Character(Combattant):
     armor_options_not = []
     shield_options = []
     shield_options_not = []
-    #degrees_wp_choices = {}
+
+    # degrees_wp_choices = {}
 
     @property
     def ghostmark_data(self):
@@ -269,21 +276,50 @@ class Character(Combattant):
     #     """ Returns JSON of object """
     #     return json.dumps(self, default=json_default,sort_keys=True, indent=4)
 
+    def tod_done(self):
+        ready = True
+        tods_cnt = 0
+        if self.use_history_creation:
+            tod_rep = {
+                'RA': 0,
+                'UP': 0,
+                'AP': 0,
+                'EC': 0,
+                'TO': 0,
+                'WB': 0,
+            }
+            for tod in self.tourofduty_set.all():
+                if tod.tour_of_duty_ref.category == '0' or tod.tour_of_duty_ref.category == '5':
+                    tod_rep['RA'] += tod.tour_of_duty_ref.value
+                elif tod.tour_of_duty_ref.category == '10':
+                    tod_rep['UP'] += tod.tour_of_duty_ref.value
+                elif tod.tour_of_duty_ref.category == '20':
+                    tod_rep['AP'] += tod.tour_of_duty_ref.value
+                elif tod.tour_of_duty_ref.category == '30':
+                    tod_rep['EC'] += tod.tour_of_duty_ref.value
+                elif tod.tour_of_duty_ref.category == '40':
+                    tod_rep['TO'] += tod.tour_of_duty_ref.value
+                    tods_cnt += 1
+                elif tod.tour_of_duty_ref.category == '50':
+                    tod_rep['WB'] += tod.tour_of_duty_ref.value
+            ready = tod_rep['RA'] > 0 and tod_rep['UP'] == 20 and tod_rep['AP'] == 25 and tod_rep['EC'] == 48 and \
+                    tod_rep['WB'] == 7
+        return ready, tods_cnt
 
+    def custocheck(self):
+        from collector.models.character_custo import CharacterCusto
+        found_custo = CharacterCusto.objects.filter(character=self).first()
+        if found_custo is None:
+            self.charactercusto = CharacterCusto.objects.create(character=self)
+        # else:
+        #     self.audit_log(f"Character custo found: {found_custo}")
+        print("RFL: Complete character clean up")
 
     def rebuild_from_lifepath(self):
         """ Historical Creation """
         old_op = self.OP
         self.build_log = ''
-        print(f"RFL: {self.rid}")
-        self.audit_log(f"Rebuilding from lifepath: {self.rid}")
-        from collector.models.character_custo import CharacterCusto
-        found_custo = CharacterCusto.objects.filter(character=self).first()
-        if found_custo is None:
-            self.charactercusto = CharacterCusto.objects.create(character=self)
-        else:
-            self.audit_log(f"Character custo found: {found_custo}")
-        print("RFL: Complete character clean up")
+        self.custocheck()
         self.resetPA()
         self.purge_skills()
         self.purge_degrees()
@@ -293,7 +329,6 @@ class Character(Combattant):
         self.purge_armors()
         self.purge_shields()
         self.purge_rituals()
-        # self.purge_talents()
         self.AP_tod_pool = 0
         self.OP_tod_pool = 0
         self.SK_tod_pool = 0
@@ -314,12 +349,18 @@ class Character(Combattant):
             'WB': 0,
         }
         all_tod_wp_roots = []
-        print("RFL: Applying ToDS")
+        self.audit_log("<strong>Applying Lifepath</strong>")
+        # self.audit_log("<ul>")
         for tod in self.tourofduty_set.all():
-            print(f"RFL: Applying [{tod.tour_of_duty_ref.reference}]")
             AP, OP, SWP, DWP, SK, DE, BC, BA = tod.push(self)
-            #self.mix_degree_wp_choices(tod.tour_of_duty_ref.degrees_wp_choices)
             self.charactercusto.register_tod_wp(tod.tour_of_duty_ref.degrees_wp_choices)
+            todname = f"{tod.tour_of_duty_ref.reference:.<30}"
+            todcat = f"{tod.tour_of_duty_ref.get_category_display()[:2]}"
+            todval = f"{tod.tour_of_duty_ref.value:_>3}"
+            self.audit_log(f"- {todname} [{todcat}] {todval} OP s:{SK:_>2}/{SWP:_>2} d:{DE:_>2}/{DWP:_>2}")
+
+            # self.mix_degree_wp_choices(tod.tour_of_duty_ref.degrees_wp_choices)
+
             self.AP_tod_pool += AP
             self.OP_tod_pool += OP
             self.SK_tod_pool += SK
@@ -344,23 +385,23 @@ class Character(Combattant):
         if self.life_path_total < 200 and not self.nameless:
             self.archive_level = 'WKS'
             self.audit_log("Archive level is WKS: Lifepath total is less than 200.")
-
-        #print("MIX Results",self.degrees_wp_choices)
-
+        # print("MIX Results",self.degrees_wp_choices)
         # Flatten
-        #doubles_all_wp_roots = list(itertools.chain(*all_tod_wp_roots))
+        # doubles_all_wp_roots = list(itertools.chain(*all_tod_wp_roots))
         # Remove multi
-        #all_wp_roots = list(dict.fromkeys(doubles_all_wp_roots))
-        #if self.charactercusto:
+        # all_wp_roots = list(dict.fromkeys(doubles_all_wp_roots))
+        # if self.charactercusto:
         self.charactercusto.comment = self.full_name
         self.charactercusto.push(self)
         self.charactercusto.save()
         pa_total = self.sumPA
         po_total = 0
+        ps_total = 0
+        pd_total = 0
         for s in self.skill_set.all():
-            po_total += s.value
+            ps_total += s.value
         for d in self.degree_set.all():
-            po_total += d.value
+            pd_total += d.value
         ba_total = 0
         for ba in self.beneficeaffliction_set.all():
             ba_total += ba.benefice_affliction_ref.value
@@ -368,50 +409,34 @@ class Character(Combattant):
         for bc in self.blessingcurse_set.all():
             bc_total += bc.blessing_curse_ref.value
         bl.append("")
-
         fs_fics7.check_secondary_attributes(self)
-        #self.handle_wildcards(all_wp_roots)
         self.charactercusto.save()
         self.prepare_display()
-
-        self.add_missing_root_skills()
+        self.audit_log("<b>Option Points Summary</b>")
         self.reset_total()
         self.checkOverhead()
         self.balanced = (self.life_path_total == self.OP - self.experience_balance) and (self.OP > 0)
-        if int(pa_total * 3 + po_total + ba_total + bc_total) % 10:
-            self.audit_log(
-                "APx3+OP+BA+BC... " + str(pa_total * 3 + po_total + ba_total + bc_total) + " (" + str(self.OP) + ")")
-            self.audit_log("Lifepath ....... " + str(self.life_path_total))
-            self.audit_log("=> Freebies vs Lifepath = " + str(
-                self.life_path_total - (pa_total * 3 + po_total + ba_total + bc_total)))
-            self.audit_log("- WP.skills....... " + str(self.SWP_tod_pool))
-            self.audit_log("- WP.degrees...... " + str(self.DWP_tod_pool))
-            self.audit_log("- Custo Value..... " + str(self.charactercusto.value))
-            self.audit_log("- Experience Balance..... " + str(self.experience_balance))
-
-            # self.audit_log("- Repartition .... " + str(tod_rep))
-            if tod_rep["RA"] == 0:
-                self.audit_log(f'- ToD Error: Missing birthright ToD ({tod_rep["RA"]})')
-            elif tod_rep["UP"] != 20:
-                self.audit_log(f'- ToD Error: Wrong upbringing total ({tod_rep["UP"]})')
-            elif tod_rep["AP"] != 25:
-                self.audit_log(f'- ToD Error: Wrong apprenticeship total ({tod_rep["AP"]})')
-            elif tod_rep["EC"] != 48:
-                self.audit_log(f'- ToD Error: Wrong Early Career total ({tod_rep["EC"]})')
-            elif tod_rep["WB"] != 7:
-                self.audit_log(f'- ToD Error: Wrong Worldly Benefits total ({tod_rep["WB"]})')
+        all_op = pa_total * 3 + ps_total + pd_total + ba_total + bc_total
+        self.audit_log(f"OP lifepath (sum of previous)... {self.life_path_total:.>3} OP")
+        self.audit_log(f"OP total ....................... {all_op:.>3} OP")
+        self.audit_log(f"OP experience Balance .......... {self.experience_balance:.>3} OP")
+        equilibrium = all_op - self.life_path_total - self.experience_balance
+        if equilibrium != 0:
+            self.audit_log(f"................................ {equilibrium:.>3} OP")
+        else:
+            self.audit_log(f"................................ <b>{equilibrium:.>3} OP</b>")
+        self.audit_log(f"Skills ......................... {ps_total:.>3} OP (swp:{self.SWP_tod_pool} OP)")
+        self.audit_log(f"Degrees ........................ {pd_total:.>3} OP (dwp:{self.DWP_tod_pool} OP)")
+        self.audit_log(f"CharacterCusto Value ........... {self.charactercusto.value:.>3} OP")
+        self.audit_log(f"XP (earned) .................... {self.xp_earned:.>3} XP")
+        self.audit_log(f"XP (remaining) ................. {self.xp_pool:.>3} XP")
+        self.audit_log(f"XP (spent) ..................... {self.xp_spent:.>3} XP")
         self.priority = (abs(self.life_path_total - self.OP) < 8) and (self.OP > 0) and (
-                abs(self.life_path_total - self.OP) > 0)
+                    abs(self.life_path_total - self.OP) > 0)
         self.build_log = "\n".join(bl)
-        # if self.player != '':
-        #     self.balanced = True
         if self.historical_figure:
             self.balanced = True
-        if self.balanced:
-            logger.info(f'Current option Points: {self.OP}')
-        else:
-            logger.error(f'{self.full_name} is not properly balanced: {self.OP} vs {self.life_path_total}!')
-            self.audit_log(f'- {self.full_name} is not properly balanced: {self.OP} vs {self.life_path_total}!')
+        # Randomize color
         if self.color == '#CCCCCC':
             d = lambda x: fs_fics7.roll(x) - 1
             self.color = '#%01X%01X%01X%01X%01X%01X' % (d(8) + 4, d(16), d(8) + 4, d(16), d(8) + 4, d(16))
@@ -481,13 +506,29 @@ class Character(Combattant):
         # if self.onsave_reroll_skills:
         #     fs_fics7.check_skills(self)
         # else:
-        self.add_missing_root_skills()
+        # self.add_missing_root_skills()
         self.reset_total()
 
     def fix(self, conf=None):
+        if self.need_fix:
+            self.audit = ""
         super().fix(conf)
+        print(f'Fixing {self.full_name}...')
         # self.degrees_wp_choices = {}
-        self.audit = ""
+
+        if len(self.bookmark_tag) == 0:
+            full_name = self.full_name.replace("'", " ")
+            bookmark_tag = ""
+            words = full_name.split(" ")
+            for word in words:
+                if len(word) > 3:
+                    bookmark_tag += word[:3]
+                else:
+                    bookmark_tag += word
+            self.bookmark_tag = bookmark_tag.upper()
+
+        if len(self.player) > 0:
+            self.audit_log(f"<em>Played by {self.player}</em>")
         from collector.models.profile import Profile
         profiles = Profile.objects.all()
         for p in profiles:
@@ -501,67 +542,79 @@ class Character(Combattant):
             if self.birthdate < 1000:
                 self.birthdate = conf.epic.era - self.birthdate
                 self.age = conf.epic.era - self.birthdate
-            print("Conf:",conf.epic.era)
-            print("Age:", self.age)
-        try:
-            logger.info('Update game parameters')
-            self.update_game_parameters()
-            logger.info('Fencing league Special')
-            self.fencing_league_special()
-            logger.info('Occult Special')
-            self.occult_special()
-
-            if self.full_name == self.rid:
-                self.audit_log("Name is a RID. Everything has to be done on this character.")
-            # NPC fix
-            #print("HERE WE GO!")
-            if self.use_history_creation:
-                #logger.info('rebuild from lifepath')
-                self.rebuild_from_lifepath()
-            else:
-                self.rebuild_free_form()
-        except ValueError as e:
-            logger.error(e)
-        logger.info('Fix 7.5')
-        #self.fix75()
+            if self.birthdate > 4800:
+                self.age = conf.epic.era - self.birthdate
+        self.fencing_league_special()
+        self.occult_special()
+        if self.full_name == self.rid:
+            self.audit_log("Name is a RID. Everything has to be done on this character.")
+        if self.use_history_creation:
+            self.audit_log("<strong>History creation</strong>")
+            # logger.info('rebuild from lifepath')
+            self.rebuild_from_lifepath()
+            self.computeDevelopmentPoints()
+        else:
+            self.audit_log("<strong>Free form</strong>")
+            self.rebuild_free_form()
+        if self.nameless:
+            self.audit_log("<strong>Nameless</strong>")
+        a, b = self.tod_done()
+        self.lifepath_status = f"{'READY' if a else 'WIP'} / tours_count={b}"
+        # Experience check
         self.xp_spent, self.experience_balance = self.check_experience_details()
-        if self.xp_earned < self.xp_spent:
-            self.xp_earned = self.xp_spent
         self.xp_pool = self.xp_earned - self.xp_spent
-        try:
-            self.calculate_shortcuts()
-            self.rank = self.update_ranking()
-            self.race = self.specie.species
+        self.calculate_shortcuts()
+        self.rank = self.update_ranking()
+        self.race = self.specie.species
+        if self.PA_BOD != 0:
+            if self.height == 0:
+                if "urthish" in self.specie.species.lower():
+                    self.height = 2.39473 * (self.PA_BOD / 2 + self.PA_STR * 2 + self.PA_CON + 2)  # 145
+                    if self.gender == 'male':
+                        self.height = self.height + 140
+                        self.weight = self.height / (2.8 - 0.07 * (
+                                self.PA_BOD + self.PA_STR + self.PA_CON - self.PA_AGI - self.PA_MOV))
+                    else:
+                        self.height = self.height + 138
+                        self.weight = self.height / (2.8 - 0.04 * (
+                                self.PA_BOD * 2 - self.PA_STR + 2 * self.PA_CON - self.PA_AGI - 2 * self.PA_MOV))
+                    # if self.PA_MOV != self.PA_CON:
+                    #     self.weight *= 1 + (self.PA_CON - self.PA_MOV) * 0.1
+                    print("Height/Weight Experiment 1: %s --> %0.2f %0.2f BODY:%d CONSTITUTION:%d" % (
+                        self.full_name, self.height, self.weight, self.PA_BOD, self.PA_CON))
+        self.update_challenge()
+        self.update_stories_count()
+        self.race = self.specie.species
+        self.incomp = 0
+        for cyb in self.cyberware_set.all():
+            self.incomp += cyb.cyberware_ref.incompatibility
+        self.sanity = self.SA_HUM - self.incomp
+        if self.historical_figure:
+            self.audit_log("Historical figure")
+        self.need_fix = False
+        logger.info(f'    => Done fixing ...: {self.full_name} NeedFIX:{self.need_fix}')
+        self.update_game_parameters()
+        print(f'...{self.full_name} fixed.')
 
-            if self.PA_BOD != 0:
-                if self.height == 0:
-                    if "urthish" in self.specie.species.lower():
-                        self.height = 2.39473 * (self.PA_BOD / 2 + self.PA_STR*2 + self.PA_CON + 2)  # 145
-                        if self.gender == 'male':
-                            self.height = self.height + 140
-                            self.weight = self.height / (2.8 - 0.07 * (self.PA_BOD + self.PA_STR + self.PA_CON - self.PA_AGI - self.PA_MOV))
-                        else:
-                            self.height = self.height + 138
-                            self.weight = self.height / (2.8 - 0.04 * (self.PA_BOD*2 - self.PA_STR + 2*self.PA_CON - self.PA_AGI  - 2*self.PA_MOV))
-                        # if self.PA_MOV != self.PA_CON:
-                        #     self.weight *= 1 + (self.PA_CON - self.PA_MOV) * 0.1
-                        print("Height/Weight Experiment 1: %s --> %0.2f %0.2f BODY:%d CONSTITUTION:%d" % (
-                            self.full_name, self.height, self.weight, self.PA_BOD, self.PA_CON))
-            # self.is_exportable = True #self.check_exportable()
-            self.update_challenge()
-            self.update_stories_count()
-            self.race = self.specie.species
-            self.incomp = 0
-            for cyb in self.cyberware_set.all():
-                self.incomp += cyb.cyberware_ref.incompatibility
-            self.sanity = self.SA_HUM - self.incomp
-            if self.historical_figure:
-                self.audit_log()
-            self.need_fix = False
-            logger.info(f'    => Done fixing ...: {self.full_name} NeedFIX:{self.need_fix}')
-        except ValueError as e:
-            print("FIX EXCEPTION!",e)
-        # logger.info(self.audit)
+    def computeDevelopmentPoints(self):
+        total = 0
+        for d in self.charactercusto.degreecusto_set.all():
+            if d.degree_ref.level == "CO":
+                coef = 3
+            elif d.degree_ref.level == "RE":
+                coef = 4
+            elif d.degree_ref.level == "EL":
+                coef = 5
+            elif d.degree_ref.level == "OB":
+                coef = 6
+            elif d.degree_ref.level == "FO":
+                coef = 7
+            else:
+                coef = 1000
+            total += coef * d.value
+            # self.audit_log(f"{d.degree_ref} = {d.value} [{coef * d.value}]")
+            # self.audit_log(f"Total Development Points: {total} ")
+        self.development_points = total
 
     def fix75(self):
         """ Fixing skills for the 7.5 version of the rules
@@ -611,21 +664,22 @@ class Character(Combattant):
         res += '<i class="fas fa-star" title="wildcards skills"></i> %d ' % (self.SWP_tod_pool)
         res += '<i class="fas fa-star" title="wildcards degrees"></i> %d ' % (self.DWP_tod_pool)
         res += '<i class="fas fa-newspaper" title="OP -vs- LifePath"></i> %d/%d ' % (self.OP, self.life_path_total)
-        res += '<i class="fas fa-square" title="exp_bal/xp_spent"></i> %d/%d ' % (self.experience_balance, self.xp_spent)
+        res += '<i class="fas fa-square" title="exp_bal/xp_spent"></i> %d/%d ' % (
+            self.experience_balance, self.xp_spent)
         res += '<i class="fas fa-circle" title="Adjusted"></i> %d ' % (self.OP - self.experience_balance)
         self.challenge_value = self.AP * 3 + self.SK_TOTAL + self.DE_TOTAL + self.BC_TOTAL + self.BA_TOTAL - self.experience_balance
         self.challenge = res
 
     def update_challenge_pdf(self):
         res = ''
-        res += f"ATTRIBUTES {self.AP} (={self.AP*3}OP); "
-        res += f"SKILLS {self.SK_TOTAL}; "
-        res += f"DEGREES {self.DE_TOTAL}; "
-        res += f"BLESSINGS/CURSES {self.BC_TOTAL}; "
-        res += f"BENEFICES/AFFLICTIONS {self.BA_TOTAL}; "
-        res += f"OP/LIFEPATH {self.OP}/{self.life_path_total}"
+        res += f"Attributes:         {self.AP} (={self.AP * 3} OP); "
+        res += f"Skills:                {self.SK_TOTAL} OP; "
+        res += f"Degrees:               {self.DE_TOTAL} OP; "
+        res += f"Blessings/Curses:      {self.BC_TOTAL} OP; "
+        res += f"Benefices/Afflictions: {self.BA_TOTAL}; "
+        res += f"OP Difference over Lifepath: {self.OP - self.life_path_total}; "
+        res += f"Experience Balance: {self.experience_balance} [{self.xp_earned} | {self.xp_spent} | {self.xp_pool}]"
         return res
-
 
     def calculate_shortcuts(self):
         """ Calculate shortcuts for the avatar skills. A shortcut appears if skill.value>0  """
@@ -714,7 +768,7 @@ class Character(Combattant):
     def add_or_update_skill(self, sref, modifier=1):
         from collector.models.skill import Skill
         found_skills = self.skill_set.all().filter(skill_ref=sref)
-        if len(found_skills)==1:
+        if len(found_skills) == 1:
             found_skill = found_skills.first()
             found_skill.value += modifier
             skill = found_skill
@@ -728,20 +782,21 @@ class Character(Combattant):
 
     def add_or_update_degree(self, dref, modifier=1):
         from collector.models.degree import Degree
-        found_degrees = self.degree_set.all().filter(degree_ref=dref)
-        if len(found_degrees)==1:
-            found_degree = found_degrees.first()
-            found_degree.value += modifier
-            degree = found_degree
+        if modifier > 0:
+            found_degrees = self.degree_set.all().filter(degree_ref=dref)
+            if len(found_degrees) == 1:
+                found_degree = found_degrees.first()
+                found_degree.value += modifier
+                degree = found_degree
+            else:
+                degree = Degree()
+                degree.character = self
+                degree.degree_ref = dref
+                degree.value = modifier
+            degree.save()
+            return degree
         else:
-            degree = Degree()
-            degree.character = self
-            degree.degree_ref = dref
-            degree.value = modifier
-        degree.save()
-        return degree
-
-
+            return None
 
     def remove_or_update_skill(self, askill, modifier=0, stack=False):
         found_skill = self.skill_set.all().filter(skill_ref=askill).first()
@@ -758,7 +813,6 @@ class Character(Combattant):
             found_degree.save()
             if found_degree.value == 0:
                 found_degree.delete()
-
 
     def add_bc(self, aref):
         from collector.models.blessing_curse import BlessingCurse
@@ -868,7 +922,7 @@ class Character(Combattant):
             for tod in self.tourofduty_set.all():
                 for x in ["Li Halan", "Al-Malik", "Decados", "D'Rouge-Glace", "Masseri",
                           "Justinian", "Juandaastas", "Hazat", "Hawkwood", "Torenson",
-                          "Van Gelder","Trusnikron","Keddah","Shelit","Thana","Xanthippe"
+                          "Van Gelder", "Trusnikron", "Keddah", "Shelit", "Thana", "Xanthippe"
                           ]:
                     if x in tod.tour_of_duty_ref.reference:
                         if x in occurences:
@@ -877,9 +931,9 @@ class Character(Combattant):
                             occurences[x] = 1
             max = -1
             choice = ""
-            for k,v in occurences.items():
-              if v > max:
-                  choice = k
+            for k, v in occurences.items():
+                if v > max:
+                    choice = k
             if self.ranking <= 1:
                 rank = "Squire" if not self.gender else "Damsel"
             elif self.ranking <= 3:
@@ -911,9 +965,9 @@ class Character(Combattant):
                             occurences[x] = 1
             max = -1
             choice = ""
-            for k,v in occurences.items():
-              if v > max:
-                  choice = k
+            for k, v in occurences.items():
+                if v > max:
+                    choice = k
             if choice.lower() == "charioteer":
                 if self.ranking <= 3:
                     rank = "Ensign"
@@ -1005,7 +1059,7 @@ class Character(Combattant):
                     rank = "Master"
                 elif self.ranking <= 13:
                     rank = "Grand Master"
-            elif choice.lower() in ["orthodox","temple avesti","sanctuary aeon"]:
+            elif choice.lower() in ["orthodox", "temple avesti", "sanctuary aeon"]:
                 if self.ranking <= 3:
                     rank = "Novitiate"
                 elif self.ranking <= 5:
@@ -1018,8 +1072,7 @@ class Character(Combattant):
                     rank = "Bishop"
                 elif self.ranking <= 13:
                     rank = "Archbishop"
-        return choice+" "+rank
-
+        return choice + " " + rank
 
     def add_ba(self, aref, adesc=''):
         from collector.models.benefice_affliction import BeneficeAffliction
@@ -1155,8 +1208,12 @@ class Character(Combattant):
         return proceed
 
     def __str__(self):
+        return self.aka
+
+    @property
+    def aka(self):
         if self.alias:
-            return f'{self.alias}'
+            return f'{self.full_name} aka "{self.alias}"'
         else:
             return f'{self.full_name}'
 
@@ -1204,13 +1261,19 @@ class Character(Combattant):
         self.stories_count += self.count_cast(epics)
         if self.stories_count == 0:
             self.audit_log('Warning: character appears in no cast...')
+        else:
+            self.audit_log(f'Stories count: {self.stories_count}')
         return self.stories_count
 
     def update_game_parameters(self):
+        self.audit_log("<strong>Others</strong>")
         # Nameless attributes
         self.physical = self.na_phy
         self.mental = self.na_men
         self.combat = self.na_com
+        if self.nameless:
+            self.audit_log(f"Nameless Attributes: PH:{self.physical}/ME:{self.mental}/CO:{self.combat}")
+
         # Check for racial tods
         if (self.player == None) and (self.is_locked == False):
             from collector.models.tourofduty import TourOfDutyRef, TourOfDuty
@@ -1251,13 +1314,13 @@ class Character(Combattant):
             SP_grid["enc"] += a.armor_ref.encumbrance
         # logger.info(SP_grid)
         if len(self.armor_set.all()) == 0:
-            self.audit_log("Warning: character has no armor")
+            self.audit_log("- Warning: character has no armor")
         if len(self.weapon_set.all()) == 0:
-            self.audit_log("Warning: character has no weapon")
-
+            self.audit_log("- Warning: character has no weapon")
 
     def fencing_league_special(self):
         if self.fencing_league:
+            self.audit_log('Fencing league combattant!')
             found_rapier = None
             from collector.models.character_custo import CharacterCusto
             found_custo = CharacterCusto.objects.get(character=self)
@@ -1285,6 +1348,7 @@ class Character(Combattant):
 
     def occult_special(self):
         if self.PA_OCC > 0:
+            self.audit_log('Occultist!')
             from collector.models.ritual import RitualCusto, RitualRef
             from collector.models.character_custo import CharacterCusto
             pathes = []
@@ -1343,7 +1407,7 @@ class Character(Combattant):
         # 1) Add the one you have
         for skill in self.skill_set.order_by('skill_ref'):
             if (skill.skill_ref.is_wildcard == False):
-                skills_list.append({'skill': skill.skill_ref.reference, 'value': skill.value,  'idx1': 0, 'idx2': 0})
+                skills_list.append({'skill': skill.skill_ref.reference, 'value': skill.value, 'idx1': 0, 'idx2': 0})
         # 2) Add the missing one
         for skill in SkillRef.objects.order_by('reference'):
             if (skill.is_wildcard == False):
@@ -1357,14 +1421,20 @@ class Character(Combattant):
         # Degrees
         # Add Only the ones you have
         degrees_list = []
-        idx1 = 0
-        for degree in self.degree_set.order_by('degree_ref__group',"degree_ref__reference"):
+        idx = 0
+        for degree in self.degree_set.order_by('degree_ref__group', "degree_ref__reference"):
             if not degree.degree_ref.is_wildcard:
-                degrees_list.append({'degree': degree.degree_ref.reference,'group':degree.degree_ref.get_group_display(), 'value': degree.value, 'idx1': 0})
-        degrees_list = sorted(degrees_list, key=itemgetter('group','degree'))
+                if degree.value>0:
+                    degrees_list.append(
+                        {'degree': degree.degree_ref.reference, 'group': degree.degree_ref.get_group_display(),'grp': degree.degree_ref.group,
+                         'value': degree.value, 'level': degree.degree_ref.get_level_display(),
+                         'lvl': degree.degree_ref.level, 'idx': 0, 'refval': degree.degree_ref.refval, "owner": self.full_name.split(" ")[0]})
+        degrees_list = sorted(degrees_list, key=itemgetter('group', 'degree'))
         for d in degrees_list:
-            d['idx1'] = idx1
-            idx1 += 1
+            d['idx'] = idx
+            d["owner"] = d["owner"] +" "+ str(idx)
+            idx += 1
+        print(degrees_list)
 
         # Weapons
         weapons = []
@@ -1403,7 +1473,7 @@ class Character(Combattant):
         k = json.loads(j)
         k["creature"] = "mortal"
         k["date"] = datetime.datetime.now().strftime('%Y%m%d')
-        #from collector.models.alliance_ref import AllianceRef
+        # from collector.models.alliance_ref import AllianceRef
         a = AllianceRef.fromRID(self.alliance_rid)
         if a:
             alliance = a.reference
@@ -1446,10 +1516,12 @@ class Character(Combattant):
         return ", ".join(list)
 
     def check_experience_details(self):
+        # self.audit_log((f'Experience Computation for {self.full_name}')
         experience = 0
         op = 0
         if self.experience_details:
-            list = self.experience_details.split(";")
+            self.audit_log(f'<strong>Experience Details</strong>')
+            list = self.experience_details.split("; ")
             for entry in list:
                 exp = 0
                 items = entry.split("=")
@@ -1465,9 +1537,11 @@ class Character(Combattant):
                 op += diff * coeff_o
                 for x in range(start, stop, 1):
                     exp += (x + 1) * coeff
-                print(f'{items[1]:20} {items[2]:6} OP:{diff * coeff:4} Exp:{exp:4}')
+                st = items[2].split(">")
+                self.audit_log(
+                    f'{items[1]:.>10} from {st[0]} to {st[1]} for {exp:.>3} XP matching {diff * coeff_o:.>3} OP ')
                 experience += exp
-            print(f'         Totals checked are OP:{op:4} Exp:{experience:4}')
+            self.audit_log(f'Total of {experience} XP matching {op} OP.')
         return experience, op
 
     @classmethod

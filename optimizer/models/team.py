@@ -37,6 +37,16 @@ class Team(models.Model):
             lst.append(str)
         return ", ".join(lst)
 
+    def showReport(self):
+        lines = []
+        for x in self.teammate_set.all():
+            lines.append(f'-----')
+            lines.append(f'{x.character.full_name}')
+            cp = x.character.update_challenge_pdf()
+            lines.append(f'Challenge: {cp}')
+        for line in lines:
+            print(line)
+
 
 class TeamMate(models.Model):
     team = models.ForeignKey(Team, on_delete=models.CASCADE)

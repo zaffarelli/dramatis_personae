@@ -41,11 +41,15 @@ def get_list(request, id, slug=None):
     # print(f'[{slug}]')
     slug = slug.replace('_', '=')
     decs = str(base64.b64decode(slug), "utf-8")
-    print(slug,decs)
-    if decs=="none":
+    print(slug, decs)
+    if decs == "none":
         character_items = Character.objects \
             .order_by('balanced', '-team', 'historical_figure', 'nameless', 'full_name') \
             .filter(is_dead=False)
+    elif decs == '##':
+        character_items = Character.objects \
+            .order_by('full_name') \
+            .filter(lifepath_status__startswith="WIP", keyword__contains=campaign.epic.shortcut)
     elif decs.startswith('c-'):
         elements = decs.split('-')
         ep_class = elements[1].capitalize()
@@ -211,21 +215,18 @@ def wa_export_character(request, id=None):
 
 def add_avatar(request, slug=None):
     campaign = get_current_config(request)
-    if campaign.is_coc7:
-        item = Investigator()
-    elif campaign.is_fics:
-        item = Character()
+    item = Character()
     if slug:
         slug = slug_decode(slug)
         item.full_name = slug
     else:
         item.full_name = '_noname_ %s' % (datetime.datetime.now())
     item.epic = campaign.epic
-    if campaign.is_fics:
-        item.use_history_creation = True
-        item.save()
-        item.specie = Specie.objects.filter(species='Urthish').first()
-        item.keyword = campaign.epic.full_id
+    # if campaign.is_fics:
+    item.use_history_creation = True
+    #item.save()
+    item.specie = Specie.objects.filter(species='Urthish').first()
+    item.keyword = campaign.epic.full_id
     item.toRID(item.full_name)
     item.save()
     character_item = campaign.avatars.get(pk=item.id)
@@ -310,12 +311,12 @@ def display_sheet(request, pk=None):
         c = Character.objects.get(id=pk)
         # print(campaign)
         scenario = campaign.epic.name.upper()
-        if "SANFRANCIS" in c.keyword:
-            pre_title = f"G U N S L I N G E R S"
-        elif "RNIGV" in c.keyword:
-            pre_title = f"Rari Nantes In Gurgite Vasto"
-        else:
-            pre_title = campaign.epic.place + ' - ' + campaign.epic.date
+        # if "SANFRANCIS" in c.keyword:
+        #     pre_title = f"G U N S L I N G E R S"
+        # elif "RNIGV" in c.keyword:
+        #     pre_title = f"Rari Nantes In Gurgite Vasto" # Veritas numquam perit
+        # else:
+        pre_title = campaign.epic.name
         post_title = f"F u z i o n . I n t e r l o c k . C u s t o m . S y s t e m . X"
         spe = c.get_specialities()
         shc = c.get_shortcuts()
@@ -385,6 +386,7 @@ def switch_epic(request, slug="none"):
 def display_sessionsheet(request, slug=None):
     if is_ajax(request):
         from collector.models.campaign import Campaign
+        from scenarist.models.adventures import Adventure
         campaign = get_current_config(request)
         pks = []
         teams = campaign.team_set.filter(active=True)
@@ -393,10 +395,14 @@ def display_sessionsheet(request, slug=None):
             for tm in team.teammate_set.all():
                 pks.append(tm.character_id)
 
+            team.showReport()
         # pks = [454, 460, 450, 447]
 
-        players = Character.objects.filter(id__in=pks)
+        players = Character.objects.filter(id__in=pks).order_by("player")
         players_list = []
+        adventures = Adventure.objects.filter(active=True)
+        if len(adventures) == 1:
+            adventure = adventures.first()
         i = 0
         for c in players:
             # spe = c.get_specialities()
@@ -408,12 +414,14 @@ def display_sessionsheet(request, slug=None):
             i += 1
             ch = json.dumps(k)
             players_list.append(ch)
-        print(players_list)
+        #print(players_list)
         scenario = campaign.epic.name.upper()
         pre_title = campaign.epic.place + ' - ' + campaign.epic.date
         post_title = ""
+        a = adventure.to_json()
+        a["campaign"] = campaign.epic.name.upper()
         settings = {'version': 1.1, 'labels': {}, 'pre_title': pre_title, 'scenario': scenario,
-                    'post_title': post_title, 'fontset': FONTSET}  # , 'specialities': spe, 'shortcuts': shc}
+                    'post_title': post_title, "adventure":a, 'fontset': FONTSET}  # , 'specialities': spe, 'shortcuts': shc}
         response = {'settings': json.dumps(settings, sort_keys=True, indent=4),
                     'data': json.dumps(players_list, indent=4, sort_keys=True)}
         return JsonResponse(response)
@@ -483,21 +491,22 @@ def history(request, filter=""):
             title = "Histories (Gamemaster Only)"
             tods = TourOfDutyRef.objects.filter(is_public=False).order_by('category', 'valid', '-is_custom', 'topic',
                                                                           'subtopic', 'reference')
-        elif filter in ["0","10","20","30","40","50","60","70","80"]:
+        elif filter in ["0", "10", "20", "30", "40", "50", "60", "70", "80"]:
             title_comp = ""
             for lp in LIFEPATH_CATEGORY:
                 if lp[0] == filter:
                     title_comp = lp[1]
             title = f"Histories ({title_comp})"
-            tods = TourOfDutyRef.objects.filter(valid=True).filter(is_public=True).filter(category=int(filter)).order_by('category', 'valid', '-is_custom', 'topic',
-                                                                      'subtopic', 'reference')
+            tods = TourOfDutyRef.objects.filter(valid=True).filter(is_public=True).filter(
+                category=int(filter)).order_by('category', 'valid', '-is_custom', 'topic',
+                                               'subtopic', 'reference')
         histories = []
         for x in tods:
             e, d = x.to_json()
             e["category_name"] = x.get_category_display
             # e["description"] = "<br/>".join(x.description.split(";"))
             histories.append(e)
-        context = {'histories': histories, 'title':title}
+        context = {'histories': histories, 'title': title}
         template = get_template('collector/histories.html')
         html = template.render(context, request)
         response = {'mosaic': html}

@@ -22,19 +22,19 @@ class Avatar(RiddedMixin):
     class Meta:
         abstract = True
 
-    full_name = models.CharField(max_length=200)
-    #rid = models.CharField(max_length=200, default='none')
-    birthdate = models.IntegerField(default=0)
-    gender = models.CharField(max_length=30, default='female')
-    age = models.IntegerField(default=0)
+    full_name = models.CharField(max_length=200, blank=True)
+    # rid = models.CharField(max_length=200, default='none')
+    birthdate = models.IntegerField(default=0, blank=True)
+    gender = models.CharField(max_length=30, default='female', blank=True)
+    age = models.IntegerField(default=0, blank=True)
     player = models.CharField(max_length=200, default='', blank=True)
-    height = models.IntegerField(default=150)
-    weight = models.IntegerField(default=50)
+    height = models.IntegerField(default=150, blank=True)
+    weight = models.IntegerField(default=50, blank=True)
     narrative = models.TextField(default='', blank=True)
     entrance = models.CharField(max_length=100, default='', blank=True)
     keyword = models.CharField(max_length=32, blank=True, default='new')
     stars = models.CharField(max_length=256, blank=True, default='')
-    importance = models.PositiveIntegerField(default=1)
+    importance = models.PositiveIntegerField(default=1, blank=True)
     is_visible = models.BooleanField(default=True)
     is_dead = models.BooleanField(default=False)
     is_locked = models.BooleanField(default=False)
@@ -47,7 +47,7 @@ class Avatar(RiddedMixin):
     # image = models.ImageField(upload_to='images/', null=True, blank=True)
     archive_level = models.CharField(max_length=5, choices=ARCHIVE_LEVEL, default='NON', blank=True)
     # epic = models.ForeignKey(Epic, null=True, blank=True, on_delete=models.SET_NULL)
-    pub_date = models.DateTimeField('Date published', default=datetime.now)
+    pub_date = models.DateTimeField('Date published', default=datetime.now, blank=True)
     audit = models.TextField(max_length=2048, default='', blank=True)
 
     def fix(self, conf=None):
@@ -81,8 +81,11 @@ class Avatar(RiddedMixin):
     def roll_attributes(self):
         pass
 
+    def audit_raw(self, txt=None):
+        self.audit += f'{txt}'
+
     def audit_log(self, txt=None):
-        if txt:
+        if len(txt) > 0:
             self.audit += f'{txt}<br/>'
         else:
-            self.audit = ""
+            self.audit += "[audit flushed]<br/>"

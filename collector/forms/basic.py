@@ -34,6 +34,12 @@ class CharacterForm(ModelForm):
                    'victory_rating', 'need_pdf', 'overhead', 'priority']
 
 
+class CharacterTodForm(ModelForm):
+    class Meta:
+        model = Character
+        fields = ['id', 'rid', 'storytelling_note','full_name','need_fix']
+
+
 class TourOfDutyRefForm(ModelForm):
     class Meta:
         model = TourOfDutyRef
@@ -49,7 +55,8 @@ class ShipRefForm(ModelForm):
 
 
 # Character
-SkillFormSet = inlineformset_factory(Character, Skill, fields='__all__', extra=10, can_delete=True)
+SkillFormSet = inlineformset_factory(Character, Skill, fields='__all__', extra=5, can_delete=True)
+DegreeFormSet = inlineformset_factory(Character, Degree, fields='__all__', extra=5, can_delete=True)
 
 BlessingCurseFormSet = inlineformset_factory(Character, BlessingCurse, fields='__all__', extra=3, can_delete=True)
 BeneficeAfflictionFormSet = inlineformset_factory(Character, BeneficeAffliction, fields='__all__', extra=3,
@@ -64,7 +71,7 @@ BlokeFormSet = inlineformset_factory(Character, Bloke, fk_name='character', fiel
 SkillModificatorFormSet = inlineformset_factory(TourOfDutyRef, SkillModificator, fields='__all__', extra=5,
                                                 can_delete=True)
 DegreeModificatorFormSet = inlineformset_factory(TourOfDutyRef, DegreeModificator, fields='__all__', extra=5,
-                                                can_delete=True)
+                                                 can_delete=True)
 BlessingCurseModificatorFormSet = inlineformset_factory(TourOfDutyRef, BlessingCurseModificator, fields='__all__',
                                                         extra=3, can_delete=True)
 BeneficeAfflictionModificatorFormSet = inlineformset_factory(TourOfDutyRef, BeneficeAfflictionModificator,
@@ -77,4 +84,4 @@ ShipSectionFormSet = inlineformset_factory(ShipRef, ShipSection, fields='__all__
 ShipSystemSlotFormSet = inlineformset_factory(ShipSection, ShipSystemSlot, fields='__all__', extra=1, can_delete=True)
 
 # System
-#OrbitalItemFormSet = inlineformset_factory(System, OrbitalItem, fields='__all__', extra=1, can_delete=True)
+# OrbitalItemFormSet = inlineformset_factory(System, OrbitalItem, fields='__all__', extra=1, can_delete=True)

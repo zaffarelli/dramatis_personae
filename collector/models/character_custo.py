@@ -62,7 +62,8 @@ class CharacterCusto(models.Model):
         for s in self.skillcusto_set.all():
             self.OP += s.value
         for d in self.degreecusto_set.all():
-            if d.value == 0:
+            if d.value <= 0:
+                print(f"Removing {d.degree_ref.reference}")
                 d.delete()
         for d in self.degreecusto_set.all():
             self.OP += d.value

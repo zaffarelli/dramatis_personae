@@ -1,1 +1,1 @@
-/home/zaffarelli/Perso/dramatis_personae/collector/static/js/epic_deck.es6
+/home/zaffarelli/Projects/github/dramatis_personae/collector/static/js/epic_deck.es6

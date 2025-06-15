@@ -4,30 +4,22 @@
 
 {% block article %}
 <div class="default">
-    <div id="header_content">
-        <img src='collector/static/collector/glyph.png' width='1cm'>
-    </div>
-    <div id="footer_content">
-        <pdf:pagenumber> / <pdf:pagecount>
-    </div>
+    <div id="header_content"><img src='collector/static/collector/glyph.png' width='1cm'></div>
+    <div id="footer_content"><pdf:pagenumber/> / <pdf:pagecount/></div>
 
 
-<h1>FICS Rules</h1>
-
+<h1>FICS 10 Fading Suns Rules</h1>
 <pdf:toc/>
-
 <h2>References</h2>
 <p>Release Date: <em>{{ date }}</em></p>
 <p>This automatically generated document shows the complete content of the database game content, for in game reference.</p>
-
 <h3>Species/Races</h3>
 {% if species.count  %}
     {% for s in species %}
     {% include "collector/pdf/specie_pdf.html" with c=s %}
     {% endfor %}
 {% endif %}
-
-<pdf:nextframe/>
+<pdf:nextpage/>
 <h3>Skills Summary</h3>
 {% if skills.count  %}
     {% for s in skills %}
@@ -43,13 +35,29 @@
     {% endfor %}
 {% endif %}
 
-<h3>Degrees</h3>
 {% if degrees.count  %}
+    <pdf:nextpage/>
+    <h3>Degrees</h3>
+    Levels:
+    <ul>
+        <li>CO: Common</li>
+        <li>RE: Restricted</li>
+        <li>EL: Elite</li>
+        <li>OB: Obscure</li>
+        <li>FO: Forbidden</li>
+    </ul>
+    <h4>Summary</h4>
+    {% for d in degrees %}
+    {% include "collector/pdf/degree_summary_pdf.html" with c=d x=forloop.counter %}
+    {% endfor %}
+    <pdf:nextframe/>
+    <h4>Details</h4>
     {% for d in degrees %}
     {% include "collector/pdf/degree_pdf.html" with c=d %}
     {% endfor %}
 {% endif %}
 
+<pdf:nextframe/>
 <h3>Benefices/Afflictions</h3>
 {% if benefice_afflictions.count  %}
     {% for ba in benefice_afflictions %}
@@ -57,6 +65,7 @@
     {% endfor %}
 {% endif %}
 
+<pdf:nextframe/>
 <h3>Blessings/Curses</h3>
 {% if blessing_curses.count  %}
     {% for bc in blessing_curses %}
@@ -66,6 +75,7 @@
 
 
 {% if xmelee_weapons.count  %}
+<pdf:nextframe/>
 <h3>Weapons</h3>
 <h4>Melee Weapons</h4>
     {% for w in melee_weapons %}
@@ -81,7 +91,7 @@
     {% endfor %}
 {% endif %}
 
-
+<pdf:nextframe/>
 <h3>Lifepaths</h3>
 <p>All characters are build in dP around an historical approach: each step gives the characters a certain number of attributes, skills and other points. A few of them are custom steps that allow customization.</p>
 <p>The standard construction of a character is:</p>

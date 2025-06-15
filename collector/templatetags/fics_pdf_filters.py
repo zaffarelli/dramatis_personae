@@ -35,24 +35,27 @@ def parse_avatars_pdf(value):
             repstr = '<span class="embedded_link broken">[%s was not found]</span>' % (rid)
         changes.append({'src': item.group(), 'dst': repstr})
 
-    # """ Ships """
-    # sym = '^'
-    # seeker = re.compile('\^(\w+)\^')
-    # iter = seeker.finditer(txt)
-    # for item in iter:
-    #     rid = ''.join(item.group().split(sym))
-    #     try:
-    #         ch = Spaceship.objects.get(full_name=rid)
-    #     except Spaceship.DoesNotExist:
-    #         ch = None
-    #     if ch is not None:
-    #         replacement_string = '<span id="%d" class="character_link embedded_link" title="%s">%s [%s | %s] %s</span>' % (
-    #             ch.id, ch.ship_ref, ch.full_name, ch.flag, ch.ship_ref.ship_class,
-    #             "" if ch.ship_ref.ship_status == "combat_ready" else "&dagger;")
-    #     else:
-    #         replacement_string = '<span class="embedded_link broken">[%s was not found]</span>' % (rid)
-    #     changes.append({'src': item.group(), 'dst': replacement_string})
-    #
+    """ Ships """
+    sym = '^'
+    seeker = re.compile('\^(\w+)\^')
+    iter = seeker.finditer(txt)
+    for item in iter:
+        rid = ''.join(item.group().split(sym))
+        try:
+            ch = Spaceship.objects.get(rid=rid)
+        except Spaceship.DoesNotExist:
+            ch = None
+        if ch is not None:
+            replacement_string = '<span id="%d" class="character_link embedded_link">%s%s (%s %s, %s)</span>' % (
+                ch.id, ch.full_name,
+                "" if ch.ship_ref.ship_status == "combat_ready" else "&dagger;",
+                ch.ship_ref.model_name,
+                ch.ship_ref.reference,
+                ch.flag)
+        else:
+            replacement_string = '<span class="embedded_link broken">[%s was not found]</span>' % (rid)
+        changes.append({'src': item.group(), 'dst': replacement_string})
+
     # """ Replace ° by custom data"""
     # sym = '°'
     # search = "[A-Za-z0-9\é\è\ô\ö\à\s\.\'\;\-\(\)\&\:\,\_]+"

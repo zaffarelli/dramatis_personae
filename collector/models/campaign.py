@@ -511,7 +511,7 @@ class Campaign(models.Model):
         if self.epic:
             rids = self.epic.get_full_cast()
             all_cast = self.avatars.filter(rid__in=rids)
-            all_sup = self.avatars.filter(keyword=self.epic.shortcut)
+            all_sup = self.avatars.filter(keyword__contains=self.epic.shortcut)
             result = all_cast | all_sup
         return result
 

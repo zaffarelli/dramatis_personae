@@ -8,7 +8,7 @@ from django.contrib import admin
 from django.urls import reverse
 from scenarist.models.story_models import StoryModel
 import json
-
+from collector.utils.helper import refix
 
 class Adventure(StoryModel):
     """
@@ -22,6 +22,9 @@ class Adventure(StoryModel):
     total_challenge = models.PositiveIntegerField(default=0)
     from scenarist.models.backlogs import Backlog
     backlogs = models.ManyToManyField(Backlog, blank=True)
+    memorandum = models.CharField(default='', max_length=256, blank=True)
+    session_part = models.CharField(default='', max_length=64, blank=True)
+
 
     @property
     def full_chapter(self):
@@ -60,6 +63,7 @@ class Adventure(StoryModel):
         from scenarist.utils.tools import json_default
         jst = super().to_json()
         job = json.loads(jst)
+
         job['fullchapter'] = self.full_chapter
         scenes = []
         for scene in self.scene_set.all().order_by('chapter','place','-dt'):
@@ -69,7 +73,13 @@ class Adventure(StoryModel):
         for scheme in self.scheme_set.all().order_by('chapter','place','-dt'):
             schemes.append(scheme.to_json())
         job['schemes'] = schemes
+        job['sessiondate'] = self.dt.strftime("%Y-%m-%d")
         return job
+
+    def fix(self):
+        self.full_id = "".join(self.title.split(" ")).upper()
+
+
 
 
 class AdventureAdmin(admin.ModelAdmin):
@@ -77,3 +87,4 @@ class AdventureAdmin(admin.ModelAdmin):
     list_display = ['title', 'full_id', 'epic', 'chapter', 'date', 'place', 'description']
     list_filter = ['epic']
     search_fields = ['description', 'name', 'resolution']
+    actions = [refix]

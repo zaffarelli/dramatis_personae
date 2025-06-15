@@ -1,8 +1,6 @@
 {% load fics_filters %}
 <h6>{{ c.reference }} {% if c.is_root %}*{% endif %}</h6>
-<p>
-    <strong>Level:</strong>: {{c.get_level_display}}<br/>
-    <strong>Group:</strong> {{c.get_group_display}}<br/>
-    {%if c.subgroup%}<strong>SubGroup:</strong> {{c.subgroup}}<br/>{%endif%}
-    {% if c.description %}{{ c.description|safe }}<br/>{% endif %}
-</p>
+<strong>Level:</strong>: {{c.get_level_display}}<br/>
+<strong>Group:</strong> {{c.get_group_display}}<br/>
+{%if c.subgroup%}<strong>SubGroup:</strong> {{c.subgroup}}<br/>{%endif%}
+{% if c.description %}<p>{{ c.description|safe }}</p>{% endif %}

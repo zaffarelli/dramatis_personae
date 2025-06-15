@@ -131,21 +131,19 @@ class FICSSheet extends Sheet {
         me.daddy = me.front
         let title_text1 = 'Fading'.toUpperCase();
         let title_text2 = 'Suns'.toUpperCase();
-        me.decorationText(7.5, 3.25, 0, 'start', me.title_font, me.fat_font_size * 1.35, "FFFFFFCF", "FFFFFFCF", 20, title_text1, me.front, 1.0);
-        me.decorationText(16.5, 3.25, 0, 'end', me.title_font, me.fat_font_size * 1.35, "FFFFFFCF", "FFFFFFCF", 20, title_text2, me.front, 1.0);
+        // Fading Suns
+        me.title_font = "Gugi"
+        let coe = 0.95
+        let by = 3.0
+        me.decorationText(7.5, by+0, 0, 'start', me.title_font, me.fat_font_size * coe, "FFFFFFCF", "FFFFFFCF", 20, title_text1, me.front, 1.0);
+        me.decorationText(16.5, by+0, 0, 'end', me.title_font, me.fat_font_size * coe, "FFFFFFCF", "FFFFFFCF", 20, title_text2, me.front, 1.0);
         //me.drawJumpgateLogo(12 * me.step, 2.6 * me.step)
-        me.decorationText(7.5, 3.25, 0, 'start', me.title_font, me.fat_font_size * 1.35, me.shadow_fill, me.shadow_stroke, 1, title_text1, me.front, 1);
-        me.decorationText(16.5, 3.25, 0, 'end', me.title_font, me.fat_font_size * 1.35, "#2020207f", "#202020", 1, title_text2, me.front, 1);
-        me.decorationText(12, 3.5, 0, 'middle', "Syne Mono", me.small_font_size, me.draw_fill, me.draw_stroke, 0.5, me.post_title, me.front, 0.8);
-        //if (me.data.keyword.includes("SANFRANCIS")){
-            me.decorationText(12.0, 4.0, 0, 'middle', "Rationale", me.big_font_size, me.draw_fill, me.draw_stroke, 0.5, me.pre_title, me.front);
-        //    }else{
-        //    me.decorationText(12.0, 4.0, 0, 'middle', "Rationale", me.big_font_size, me.draw_fill, me.draw_stroke, 0.5, me.pre_title, me.front);
-        //}
-        //me.decorationText(4.2, 2.25, 0, 'middle', me.base_font, me.medium_font_size, me.draw_fill, me.draw_stroke, 0.5, me.scenario, me.back);
-
-
-
+        me.decorationText(7.5, by+0, 0, 'start', me.title_font, me.fat_font_size * coe, me.shadow_fill, me.shadow_stroke, 1, title_text1, me.front, 1);
+        me.decorationText(16.5, by+0, 0, 'end', me.title_font, me.fat_font_size * coe, "#2020207f", "#202020", 1, title_text2, me.front, 1);
+        // Système (fuzion...)
+        me.decorationText(12, by+0.25, 0, 'middle', me.mono_font, me.small_font_size, me.draw_fill, me.draw_stroke, 0.5, me.post_title, me.front, 0.8);
+        // Campaign title (Ex Nihilo Nihil Fit, etc...)
+        me.decorationText(12.0, by+1, 0, 'middle', me.mono_font, me.big_font_size, me.draw_fill, me.draw_stroke, 0.5, me.pre_title, me.front);
     }
 
     fillName(page){
@@ -225,6 +223,7 @@ class FICSSheet extends Sheet {
             me.data = character_data;
             // console.debug(me.data);
         }
+        me.rid = me.data.rid
         me.guideline = me.data['guideline'];
         $(me.parent).css('display', 'block');
 
@@ -236,7 +235,7 @@ class FICSSheet extends Sheet {
         }
 
         me.fillCharacter(page);
-        me.drawJumpgateLogo(12*me.step,5*me.step)
+        //me.drawJumpgateLogo(12*me.step,5*me.step)
         me.drawButtons();
         me.zoomActivate();
     }

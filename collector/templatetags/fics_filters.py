@@ -190,9 +190,19 @@ def parse_avatars(value):
             str_name = ch.full_name
             if ch.alias:
                 str_name = f'{ch.alias} ({ch.full_name})'
-            replacement_string = '<span id="%d" class="character_link embedded_link" title="%s:\n%s">%s %s</span>' % (
-                ch.id, ch.full_name, ch.entrance, str_name,
-                "<i class='fa fa-angle-double-up'></i>" if ch.balanced == True else "<i class='fa fa-angle-double-down'></i>")
+            if ch.balanced:
+                tag = f"<div id='li_{ch.id}' style='display:inline;'><span class='action_icon sheet' id='sheet_{ ch.id }'><i class='fa fas-angle-double-up'></i></span></div>"
+            else:
+                #tag = "<i class='fa fa-angle-double-down'></i>"
+                tag = f"<div id='re_{ch.id}' style='display:inline;'><span class='action_icon edit_character' id='edit_{ch.id}'><i class='fas fa-user-tag'></i><span class='action_icon recalc_avatar' id='recalc_{ch.id}'><i class='fas fa-cog'></i></span></div>"
+            replacement_string = f'<span id="{ch.id}" class="character_link embedded_link" title="{ch.full_name}:\n{ch.entrance}">{str_name} {tag}</span>'
+
+
+
+
+
+            #class ="action_icon sheet" id="sheet_{{ c.id }}" > < i class ="fas fa-file" > < / i > < / span > & nbsp;
+
         else:
             replacement_string = '<span class="embedded_link broken">[%s&dagger;]</span>' % (rid)
         changes.append({'src': item.group(), 'dst': replacement_string})

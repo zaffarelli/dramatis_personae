@@ -1,18 +1,20 @@
+
 class SessionSheets extends Sheet {
     constructor(data, parent, collector) {
         super(data, parent, collector)
+
         this.disposition = "paysage"
         this.init();
+        this.adventure = data.adventure
         this.adventure_data = [
-            {'label': 'Title', 'text': 'The Tiger of Istakhr'},
-            {'label': '', 'text': ''},
-            {'label': 'Session Part', 'text': '#7'},
-            {'label': 'Memorandum', 'text': 'The Grand Finale'},
-            {'label': 'Ingame date', 'text': '5022-01-28'},
-            {'label': 'Session Date', 'text': '2022-05-20'},
-            {'label': 'Gamemaster', 'text': 'Zaffarelli'},
-            {'label': '', 'text': ''},
-            {'label': 'Experience', 'text': '5+21 per PC'}
+            {'label': 'Title', 'text': this.adventure.title.toUpperCase()},
+            {'label': 'Campaign', 'text': this.adventure.campaign},
+            {'label': 'Session Part', 'text': this.adventure.session_part},
+            {'label': 'Memorandum', 'text': this.adventure.memorandum},
+            {'label': 'Ingame date', 'text': this.adventure.date},
+            {'label': 'Session Date', 'text': this.adventure.sessiondate},
+            {'label': 'Gamemaster', 'text': this.adventure.gamemaster},
+            {'label': 'Experience', 'text': this.adventure.total_challenge}
         ]
         this.part = 4.5/4
     }
@@ -21,14 +23,17 @@ class SessionSheets extends Sheet {
         super.init();
         let me = this;
         me.setButtonsOrigin(36, 2)
+        me.nope = "-"
+        me.user_font = 'Julee'
+        me.user_font = 'Economica'
     }
 
     drawButtons() {
         let me = this;
         me.addButton(0, 'Save SVG');
-        me.addButton(1, 'Recto');
-        me.addButton(2, 'Verso');
-        // me.addButton(3, 'Close');
+        for(let x=1;x<=me.pages_number;x++){
+            me.addButton(x, `Page ${x}`, "browse")
+        }
     }
 
     drawPages(page = 0) {
@@ -42,8 +47,6 @@ class SessionSheets extends Sheet {
         me.drawLine(me.xunits - 1, me.xunits - 1, 0.5, me.yunits - 0.5, me.draw_fill, me.draw_fill, 1, me.strokedebris);
         me.drawLine(0.5, me.xunits - 0.5, 1, 1, me.draw_fill, me.draw_fill, 1, me.strokedebris);
         me.drawLine(0.5, me.xunits - 0.5, me.yunits - 1, me.yunits - 1, me.draw_fill, me.draw_fill, 1, me.strokedebris);
-
-
         me.decorationText(1.5, 0.8, 0, 'start', me.base_font, me.medium_font_size, me.draw_fill, me.draw_stroke, 0.5, "Players Session Sheet - FuZion Interlock Custom System v10", me.back);
         me.decorationText(me.xunits - 1.2, me.yunits - 0.2, -16, 'end', me.base_font, me.small_font_size, me.draw_fill, me.draw_stroke, 0.5, "doc:session_sheets | v" + me.version + " | 2025 | Zaffarelli | generated with DP", me.back);
 
@@ -64,7 +67,7 @@ class SessionSheets extends Sheet {
         me.generic = me.back.append('g')
             .attr('class', "generic");
         me.daddy = me.generic;
-        me.drawRect(ox, oy, 6, 21, "transparent", me.shadow_stroke);
+        me.drawRect(ox, oy, 6, 21, "none", me.shadow_stroke);
         me.adventure_entry = me.generic.selectAll('.adventure_entry')
             .append('g')
             .attr('transform', "translate(" + (ox * me.step) + "," + (6 * me.step) + ")")
@@ -97,7 +100,7 @@ class SessionSheets extends Sheet {
             .style('fill', me.user_fill)
             .style('stroke', me.user_stroke)
             .style('stroke-width', "0.5pt")
-            .style('font-family', me.user_font)
+            .style('font-family', me.base_font)
             .style('font-size', me.medium_font_size)
             .style('text-anchor', 'end')
             .text(function (d) {
@@ -117,8 +120,10 @@ class SessionSheets extends Sheet {
         me.player = me.players.enter()
         me.player_item = me.player.append('g')
             .attr('class', 'player')
+            .attr('id', (d) => d.rid)
         me.player_item.append('rect')
             .attr('x', function (d) {
+                console.log("d.idx >>",d.idx)
                 return d['idx'] * me.step * 5 + ox * me.step;
             })
             .attr("y", function (d) {
@@ -134,47 +139,49 @@ class SessionSheets extends Sheet {
             .style('stroke', me.shadow_stroke)
             .style('stroke-width', "0.5mm")
         ;
-        me.daddy = me.player;
-
+        me.daddy = me.lines
+        me.drawLine(ox, me.xunits - 1.25, oy + 1.25, oy + 1.25, me.draw_fill, me.draw_fill, 1, me.strokedebris)
+        me.drawLine(ox, me.xunits - 1.25, oy + 3.5, oy + 3.5, me.draw_fill, me.draw_fill, 1, me.strokedebris)
+        me.drawLine(ox, me.xunits - 1.25, oy + 5.25, oy + 5.25, me.draw_fill, me.draw_fill, 1, me.strokedebris)
+        me.drawLine(ox, me.xunits - 1.25, oy + 9.5, oy + 9.5, me.draw_fill, me.draw_fill, 1, me.strokedebris)
+        me.daddy = me.player_item;
         let xfunc = function (x) {
             return x * me.step * 5 + (ox + 0.25) * me.step;
         }
-
         let xfunc2 = function (x) {
             return x * (me.step * 5)+ (me.step*5)%3 + (ox + 0.25) * me.step;
         }
-
-
         me.sheetEntry(xfunc, 0.5, ox, oy, "Name", "full_name", me.medium_font_size,)
         me.sheetEntry(xfunc, 1.0, ox, oy, "Player", "player")
-
-        me.sheetEntryLeft(xfunc, 2.0, ox, oy, "Hit Points", "SA_END")
-        me.sheetEntryRight(xfunc, 2.0, ox, oy, "Recovery", "SA_REC")
-        me.sheetEntryLeft(xfunc, 2.5, ox, oy, "Stun", "SA_STU")
-        me.sheetEntryRight(xfunc, 2.5, ox, oy, "STA mod", "SA_STA")
-
-        me.sheetEntryLeft(xfunc, 3.0, ox, oy, "DMG mod", "SA_DMG")
-
-        me.sheetEntryLeft(xfunc, 3.5, ox, oy, "Passion", "SA_PAS")
-        me.sheetEntryRight(xfunc, 3.5, ox, oy, "Wyrd", "SA_WYR")
-
-        me.sheetEntryTriA(xfunc2, 4.5, ox, oy, "STR", "PA_STR")
-        me.sheetEntryTriA(xfunc2, 5.0, ox, oy, "BOD", "PA_BOD")
-        me.sheetEntryTriA(xfunc2, 5.5, ox, oy, "CON", "PA_CON")
-        me.sheetEntryTriA(xfunc2, 6.0, ox, oy, "MOV", "PA_MOV")
-
-        me.sheetEntryTriB(xfunc2, 4.5, ox, oy, "INT", "PA_INT")
-        me.sheetEntryTriB(xfunc2, 5.0, ox, oy, "WIL", "PA_WIL")
-        me.sheetEntryTriB(xfunc2, 5.5, ox, oy, "TEM", "PA_TEM")
-        me.sheetEntryTriB(xfunc2, 6.0, ox, oy, "PRE", "PA_PRE")
-
-        me.sheetEntryTriC(xfunc2, 4.5, ox, oy, "TEC", "PA_TEC")
-        me.sheetEntryTriC(xfunc2, 5.0, ox, oy, "DEX", "PA_DEX")
-        me.sheetEntryTriC(xfunc2, 5.5, ox, oy, "AGI", "PA_AGI")
-        me.sheetEntryTriC(xfunc2, 6.0, ox, oy, "AWA", "PA_AWA")
-
-        let sy = 6.75
-        let fs = 1
+        let sy = 1.75
+        me.sheetEntryLeft(xfunc, sy, ox, oy, "Hit Points", "SA_END")
+        me.sheetEntryRight(xfunc, sy, ox, oy, "Recovery", "SA_REC")
+        sy += 0.5
+        me.sheetEntryLeft(xfunc, sy, ox, oy, "Stun", "SA_STU")
+        me.sheetEntryRight(xfunc, sy, ox, oy, "STA mod", "SA_STA")
+        sy += 0.5
+        me.sheetEntryLeft(xfunc, sy, ox, oy, "DMG mod", "SA_DMG")
+        me.sheetEntryRight(xfunc, sy, ox, oy, "Wyrd", "SA_WYR")
+        sy += 0.5
+        me.sheetEntryLeft(xfunc, sy, ox, oy, "Passion", "SA_PAS")
+        // Attributes
+        sy = 4.0
+        me.sheetEntryQuadA(xfunc, sy, ox, oy, "STR", "PA_STR")
+        me.sheetEntryQuadB(xfunc, sy, ox, oy, "BOD", "PA_BOD")
+        me.sheetEntryQuadC(xfunc, sy, ox, oy, "CON", "PA_CON")
+        me.sheetEntryQuadD(xfunc, sy, ox, oy, "MOV", "PA_MOV")
+        sy += 0.5
+        me.sheetEntryQuadA(xfunc, sy, ox, oy, "INT", "PA_INT")
+        me.sheetEntryQuadB(xfunc, sy, ox, oy, "WIL", "PA_WIL")
+        me.sheetEntryQuadC(xfunc, sy, ox, oy, "TEM", "PA_TEM")
+        me.sheetEntryQuadD(xfunc, sy, ox, oy, "PRE", "PA_PRE")
+        sy += 0.5
+        me.sheetEntryQuadA(xfunc, sy, ox, oy, "TEC", "PA_TEC")
+        me.sheetEntryQuadB(xfunc, sy, ox, oy, "DEX", "PA_DEX")
+        me.sheetEntryQuadC(xfunc, sy, ox, oy, "AGI", "PA_AGI")
+        me.sheetEntryQuadD(xfunc, sy, ox, oy, "AWA", "PA_AWA")
+        sy = 5.75
+        let fs = 0
         me.sheetEntryQuadA(xfunc, sy, ox, oy, "ACA", "skills_list", fs, "skill", "Academia"); sy += 0.5
         me.sheetEntryQuadA(xfunc, sy, ox, oy, "ADA", "skills_list", fs, "skill", "Adaptation"); sy += 0.5
         me.sheetEntryQuadA(xfunc, sy, ox, oy, "ALC", "skills_list", fs, "skill", "Alchemy"); sy += 0.5
@@ -183,8 +190,7 @@ class SessionSheets extends Sheet {
         me.sheetEntryQuadA(xfunc, sy, ox, oy, "BUR", "skills_list", fs, "skill", "Bureaucracy"); sy += 0.5
         me.sheetEntryQuadA(xfunc, sy, ox, oy, "DEM", "skills_list", fs, "skill", "Demolition"); sy += 0.5
         me.sheetEntryQuadA(xfunc, sy, ox, oy, "DIS", "skills_list", fs, "skill", "Disguise"); sy += 0.5
-
-        sy = 6.75
+        sy = 5.75
         me.sheetEntryQuadB(xfunc, sy, ox, oy, "EMP", "skills_list", fs, "skill", "Empathy"); sy += 0.5
         me.sheetEntryQuadB(xfunc, sy, ox, oy, "ETI", "skills_list", fs, "skill", "Etiquette"); sy += 0.5
         me.sheetEntryQuadB(xfunc, sy, ox, oy, "FIG", "skills_list", fs, "skill", "Fight"); sy += 0.5
@@ -193,8 +199,7 @@ class SessionSheets extends Sheet {
         me.sheetEntryQuadB(xfunc, sy, ox, oy, "IMP", "skills_list", fs, "skill", "Impress"); sy += 0.5
         me.sheetEntryQuadB(xfunc, sy, ox, oy, "INQ", "skills_list", fs, "skill", "Inquiry"); sy += 0.5
         me.sheetEntryQuadB(xfunc, sy, ox, oy, "KNA", "skills_list", fs, "skill", "Knavery"); sy += 0.5
-
-        sy = 6.75
+        sy = 5.75
         me.sheetEntryQuadC(xfunc, sy, ox, oy, "LEA", "skills_list", fs, "skill", "Leadership"); sy += 0.5
         me.sheetEntryQuadC(xfunc, sy, ox, oy, "MAN", "skills_list", fs, "skill", "Maneuver"); sy += 0.5
         me.sheetEntryQuadC(xfunc, sy, ox, oy, "MEL", "skills_list", fs, "skill", "Melee"); sy += 0.5
@@ -202,8 +207,7 @@ class SessionSheets extends Sheet {
         me.sheetEntryQuadC(xfunc, sy, ox, oy, "PER", "skills_list", fs, "skill", "Performance"); sy += 0.5
         me.sheetEntryQuadC(xfunc, sy, ox, oy, "RED", "skills_list", fs, "skill", "Redemption"); sy += 0.5
         me.sheetEntryQuadC(xfunc, sy, ox, oy, "REM", "skills_list", fs, "skill", "Remedy"); sy += 0.5
-
-        sy = 6.75
+        sy = 5.75
         me.sheetEntryQuadD(xfunc, sy, ox, oy, "RID", "skills_list", fs, "skill", "Riddles"); sy += 0.5
         me.sheetEntryQuadD(xfunc, sy, ox, oy, "SEA", "skills_list", fs, "skill", "Search"); sy += 0.5
         me.sheetEntryQuadD(xfunc, sy, ox, oy, "SED", "skills_list", fs, "skill", "Seduction"); sy += 0.5
@@ -211,51 +215,56 @@ class SessionSheets extends Sheet {
         me.sheetEntryQuadD(xfunc, sy, ox, oy, "SNE", "skills_list", fs, "skill", "Sneak"); sy += 0.5
         me.sheetEntryQuadD(xfunc, sy, ox, oy, "SUR", "skills_list", fs, "skill", "Surveillance"); sy += 0.5
         me.sheetEntryQuadD(xfunc, sy, ox, oy, "TEA", "skills_list", fs, "skill", "Teaching"); sy += 0.5
-
-        sy = 14.5
-        me.baseSheetEntry(xfunc, sy, ox, oy, "Blessings/Curses"); sy += 0.5
-        if (me.baseSheetEntry(xfunc, sy, ox, oy, "", "BC",0,":0:shortcut","",0,4.5)) sy += 0.5
-        if (me.baseSheetEntry(xfunc, sy, ox, oy, "", "BC",0,":1:shortcut","",0,4.5)) sy += 0.5
-        if (me.baseSheetEntry(xfunc, sy, ox, oy, "", "BC",0,":2:shortcut","",0,4.5)) sy += 0.5
-        if (me.baseSheetEntry(xfunc, sy, ox, oy, "", "BC",0,":3:shortcut","",0,4.5)) sy += 0.5
-        if (me.baseSheetEntry(xfunc, sy, ox, oy, "", "BC",0,":4:shortcut","",0,4.5)) sy += 0.5
-
-        console.log("BA",me.data[0].BA)
-
-        //sy += 0.5
-        me.baseSheetEntry(xfunc, sy, ox, oy, "Benefices/Afflictions"); sy += 0.5
-        if (me.baseSheetEntry(xfunc, sy, ox, oy, "", "BA",0,":0:benefice_affliction_ref:shortcut","",0,4.5)) sy += 0.5
-        if (me.baseSheetEntry(xfunc, sy, ox, oy, "", "BA",0,":1:benefice_affliction_ref:shortcut","",0,4.5)) sy += 0.5
-        if (me.baseSheetEntry(xfunc, sy, ox, oy, "", "BA",0,":2:benefice_affliction_ref:shortcut","",0,4.5)) sy += 0.5
-        if (me.baseSheetEntry(xfunc, sy, ox, oy, "", "BA",0,":3:benefice_affliction_ref:shortcut","",0,4.5)) sy += 0.5
-        if (me.baseSheetEntry(xfunc, sy, ox, oy, "", "BA",0,":4:benefice_affliction_ref:shortcut","",0,4.5)) sy += 0.5
-
-
-
-
-        me.daddy = me.lines
-        me.drawLine(ox, me.xunits - 1.25, oy + 1.25, oy + 1.25, me.draw_fill, me.draw_fill, 1, me.strokedebris);
-        me.drawLine(ox, me.xunits - 1.25, oy + 4.0, oy + 4.0, me.draw_fill, me.draw_fill, 1, me.strokedebris);
-        me.drawLine(ox, me.xunits - 1.25, oy + 6.25, oy + 6.25, me.draw_fill, me.draw_fill, 1, me.strokedebris);
-        me.drawLine(ox, me.xunits - 1.25, oy + 14.0, oy + 14.0, me.draw_fill, me.draw_fill, 1, me.strokedebris);
-
+        sy = 10.0
+        let tinyjump = .275
+        me.baseSheetEntry(xfunc, sy, ox, oy, "Degrees"); sy += 0.35
+        for(let dloop=0;dloop<50;dloop++){
+            if ((me.baseSheetEntry(xfunc, sy, ox, oy, "", "degrees_list",0,":"+dloop+"::grp","",0,0.75) != me.nope)
+            && (me.baseSheetEntry(xfunc, sy, ox, oy, "", "degrees_list",0,":"+dloop+"::refval","",0,3.75) != me.nope)
+            && (me.baseSheetEntry(xfunc, sy, ox, oy, "", "degrees_list",0,":"+dloop+"::level","",0,4.25) != me.nope)
+            && (me.baseSheetEntry(xfunc, sy, ox, oy, "", "degrees_list",0,":"+dloop+"::value","",0,4.5) != me.nope)){
+                sy += tinyjump
+            }
+        }
+        sy += tinyjump
+        me.baseSheetEntry(xfunc, sy, ox, oy, "Blessings/Curses"); sy += 0.35
+        for(let bcloop=0;bcloop<10;bcloop++){
+            if (me.baseSheetEntry(xfunc, sy, ox, oy, "", "BC",0,":"+bcloop+":shortcut","",0,4.5)!= me.nope) {
+                sy += tinyjump
+            }
+        }
+        sy += tinyjump
+        me.baseSheetEntry(xfunc, sy, ox, oy, "Benefices/Afflictions"); sy += 0.35
+        for(let baloop=0;baloop<10;baloop++){
+            if (me.baseSheetEntry(xfunc, sy, ox, oy, "", "BA",0,":"+baloop+":benefice_affliction_ref:refval","",0,4.5)!= me.nope){
+                sy += tinyjump
+            }
+        }
     }
 
 
 
-    baseSheetEntry(func, y, ox = 0, oy = 0, proplabel, prop = '', font = 0, direct_prop = '', direct_value = '', offsetx = 0, offsetx2 = 0) {
+    baseSheetEntry(func, y, ox = 0, oy = 0, proplabel, prop = '', font = 0, direct_prop = '', direct_value = '', offsetx_lab = 0, offsetx_dat = 0) {
         let me = this
         let global_result = 1
-        let font_size = font
-        if (font == 0) {
-            font_size = me.small_font_size;
-        }else
-        if (font == 1) {
-            font_size = me.small_font_size*1.5
-        }
+        let font_size = 0
+        let local_opacity = 1
+        // Font selection
+        switch (font){
+            case 0:
+                font_size = me.tiny_font_size
+                break;
+            case 1:
+                font_size = me.small_font_size
+                break;
+            default:
+                font_size = font
+                break;
+            }
+        // Label (proplabel can be "")
         me.daddy.append('text')
             .attr('x', function (d) {
-                return func(d['idx']) + offsetx * me.step;
+                return func(d['idx']) + offsetx_lab * me.step;
             })
             .attr('y', function (d) {
                 return (oy + y) * me.step;
@@ -269,16 +278,13 @@ class SessionSheets extends Sheet {
                 return proplabel;
             })
         ;
+        // Text data
+        let stroke_width = "0.5pt"
         me.daddy.append('text')
-            .attr('x', function (d) {
-                return func(d['idx']) + offsetx2 * me.step;
-            })
-            .attr('y', function (d) {
-                return (oy + y) * me.step;
-            })
-            .style('fill', me.user_fill)
+            .attr('x', (d) => func(d['idx']) + offsetx_dat * me.step )
+            .attr('y', (d) => (oy + y) * me.step )
             .style('stroke', me.user_stroke)
-            .style('stroke-width', "0.5pt")
+            .style('fill', me.user_fill)
             .style('text-anchor', 'end')
             .style('font-family', me.user_font)
             .style('font-size', (font_size) + "pt")
@@ -286,72 +292,71 @@ class SessionSheets extends Sheet {
                 let result = d[prop]
                 let tmp = ""
                 if (direct_prop.startsWith(":")) {
+                    //console.log(direct_prop)
                     let mapping = direct_prop.split(":")
                     let depth = mapping.length
                     global_result = 0
-                    console.log("Mapping",mapping)
+                    local_opacity = 1
                     let i = 0
                     _.forEach(d[prop], function (e) {
-                        console.log("e",e)
-                        console.log("i",mapping[1],i)
                         // If we have the good object index match (i.e. BC #i)
+                        //console.log("mapping => ",direct_prop,mapping)
                         if (`${i}` == mapping[1]){
                             let de = 1
                             let f = e
                             while (de < depth-1){
                                 if (f.hasOwnProperty(mapping[de])){
-                                    console.log(">>>",mapping[de])
                                     f = f[mapping[de]]
                                 }
                                 de += 1
                             }
-                            console.log("f",f)
                             if (f.hasOwnProperty(mapping[de])){
                                 result = f[mapping[de]]
                                 global_result = 1
-                                return false
+                                //return false
                             }
                         }
                         i += 1
                     })
+                    if (global_result == 0){
+                        result = ""
+                        global_result = me.nope
+                        local_opacity = 0
+                    }
                 } else if (direct_value != '') {
                     _.forEach(d[prop], function (e) {
                         if (e[direct_prop] == direct_value) {
-                            result = e['value']
-                            return false
+                            result = `${e['value']}`
+                            if (""+parseInt(result) == result){
+                                result = `${e['value']}`
+                                stroke_width = "0.125pt"
+                                if (parseInt(result) >= 5){
+                                    result = "("+result+")"
+                                }else if (parseInt(result) >= 3){
+                                    //stroke_width = "0.5pt"
+                                    result += "*"
+                                }
+                            }
+//                             if (`${parseInt(result)}` == result){
+//                                 let l = result
+//                                 result = ""
+//                                 for (let i=0;i<l;i++){
+//                                     result += "*"
+//                                     }
+//                             }
+                            //return me.nope
                         }
                     })
-                }else
-                if (false){
-                if (!isNaN(parseInt(result)) && (font==1)) {
-                    let v = parseInt(result)
-                    if (v<5){
-                        for(let r=0;r<4;r++){
-                            if (r<v){
-                                tmp = "●"+tmp
-                            }else{
-                                tmp = "○"+tmp
-                                }
-                        }
-                    }else{
-                        tmp = "◈"
-                        for(let r=6;r<10;r++){
-                            if (r<v){
-                                tmp = "◆"+tmp
-                            }else{
-                                tmp = "◇"+tmp
-                                }
-                        }
-                    }
-                    result = tmp
-                }else{
-                    }
                 }
-                if (global_result == 0){
-                    result = ""
-                    }
                 return result
             })
+            .attr("opacity",local_opacity)
+            .style('stroke-width', stroke_width)
+//         if (global_result == 0){
+//             global_result = me.nope
+//         }else{
+//             global_result = result
+//         }
         return global_result
     }
 
@@ -413,21 +418,37 @@ class SessionSheets extends Sheet {
         let me = this;
         console.log('FICS_SHEET: Performing...');
         if (character_data) {
-            // me.data = character_data;
+            //me.data = character_data;
+            me.sets = Array()
             me.data = Array()
+            let nb_chars = 0
             _.forEach(character_data, function (e, k) {
-                me.data.push(JSON.parse(e));
+                let x = JSON.parse(e)
+                x['idx'] = x['idx'] % 5
+                me.data.push(x);
+                nb_chars += 1
+                if (nb_chars % 5 == 0){
+                    console.warn(me.data)
+                    me.sets.push(me.data)
+                    me.data = Array()
+                }
             })
-            console.log(me.data)
+            me.sets.push(me.data)
+            me.pages_number = Math.ceil(nb_chars/5)
+            console.log("Pages Number:",me.pages_number," (",nb_chars," characters)")
         }
 
         $(me.parent).css('display', 'block');
-        me.drawWatermark(page);
-        me.drawGeneric(1.5, 1.5);
-        me.drawPages(9, 1.5);
-        me.drawFigures(7.8, 1.5);
-        me.drawButtons();
-        me.zoomActivate();
+        me.rid = me.adventure.full_id
+        me.page = page
+        me.data = me.sets[me.page]
+        console.log(me.page,"/",me.pages_number)
+        me.drawWatermark(me.page)
+        me.drawGeneric(1.5, 1.5)
+        me.drawPages(9, 1.5)
+        me.drawFigures(7.8, 1.5)
+        me.drawButtons()
+        me.zoomActivate()
     }
 }
 

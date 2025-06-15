@@ -217,12 +217,16 @@
                 {{form.narrative}}
             </div>
 
+            <div class="field_wrapper breaker">
+
+            </div>
+
             {{ tourofdutys.management_form }}
 
 
                 {% for form in tourofdutys.forms %}
                     <div class="field_wrapper">
-                        {{ form.as_p }}
+                        {{ form.as_div }}
                     </div>
                 {% endfor %}
 

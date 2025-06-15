@@ -19,10 +19,14 @@
   Early Career...................... 10 10  5  3  0 48
   Tour of Duty (x2).................  2 10  4  0  0 20
   Worldly Benefits..................  0  0  0  7  0  7
-
-
-
 """
+
+FONTSET = ['Cinzel', 'Trade+Winds', 'Imprima', 'Roboto', 'Philosopher', 'Ruda', 'Khand', 'Allura', 'Gochi+Hand',
+           'Reggae+One', 'Syne+Mono', 'Zilla+Slab',"Ubuntu+Mono",  'Spartan', 'News+Cycle', 'Archivo', 'Francois+One', 'Caveat',
+           'Gruppo', 'Voltaire', 'Kanit', "Fredericka+the+Great", 'Esteban', 'Pompiere', 'Niconne', 'Delius','Rationale',
+           'Nanum+Pen+Script', 'Schoolbell', 'Jim+Nightshade', 'Estonia', 'East+Sea+Dokdo', 'Julee', 'Economica',
+           'Anton', 'Long+Cang','Rationale',  'Birthstone', 'Condiment',"Metal+Mania",'Passero+One',"Mountains+of+Christmas","Shadows+Into+Light",'Anton+SC',"Gugi"]
+
 
 SOURCE_REFERENCES = (
     ('FS2CRB', "HDi Fading Suns Official"),
@@ -224,11 +228,6 @@ ATTACK_ROLLS = {
     },
 }
 
-FONTSET = ['Cinzel', 'Trade+Winds', 'Imprima', 'Roboto', 'Philosopher', 'Ruda', 'Khand', 'Allura', 'Gochi+Hand',
-           'Reggae+One', 'Syne+Mono', 'Zilla+Slab',"Ubuntu+Mono",  'Spartan', 'News+Cycle', 'Archivo', 'Francois+One', 'Caveat',
-           'Gruppo', 'Voltaire', 'Kanit', "Fredericka+the+Great", 'Esteban', 'Pompiere', 'Niconne', 'Delius','Rationale',
-           'Nanum+Pen+Script', 'Schoolbell', 'Jim+Nightshade', 'Julee', 'Estonia', 'East+Sea+Dokdo', 'Julee', 'Economica',
-           'Anton', 'Long+Cang','Rationale',  'Birthstone', 'Condiment',"Metal+Mania",'Passero+One',"Mountains+of+Christmas","Shadows+Into+Light",'Anton+SC']
 
 LIFEPATH_CATEGORY = (
     ('0', "Birthright"),

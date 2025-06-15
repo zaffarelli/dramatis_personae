@@ -34,6 +34,7 @@ class BeneficeAfflictionRef(UUIDClass):
     cash_value = models.BooleanField(default=False)
     watermark = models.CharField(max_length=64, default='',blank=True)
     shortcut = models.TextField(max_length=128, default='', blank=True)
+    refval = models.TextField(max_length=128, default='', blank=True)
     indexed = models.BooleanField(default=False, blank=True)
 
 
@@ -43,6 +44,7 @@ class BeneficeAfflictionRef(UUIDClass):
     def fix(self):
         super().fix()
         self.shortcut = f"{self.reference} ({self.description})"
+        self.refval = f"{self.reference} ({self.value:+})"
 
     def to_json(self):
         from collector.utils.basic import json_default
@@ -108,7 +110,7 @@ def refix(modeladmin, request, queryset):
 
 class BeneficeAfflictionRefAdmin(admin.ModelAdmin):
     ordering = ('category', 'reference', 'watermark', '-value', 'ranking')
-    list_display = ['reference', 'indexed', 'emphasis', 'value', 'watermark', 'category','ranking', 'cash_value', 'description', 'source']
+    list_display = ['reference', 'indexed', 'emphasis', 'refval','value', 'watermark', 'category','ranking', 'cash_value', 'description', 'source']
     search_fields = ('reference', 'description', 'emphasis', 'watermark')
     list_filter = ('ranking', 'source', 'watermark', 'category', 'emphasis')
     list_editable = ['indexed']

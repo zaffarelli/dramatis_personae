@@ -115,6 +115,7 @@ class StoryModel(models.Model):
         """ Return subchapters """
         return []
 
+
     def get_full_cast(self):
         """ Return the depth cast for this episode """
         casting = self.get_casting()

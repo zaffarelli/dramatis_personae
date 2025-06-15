@@ -13,7 +13,7 @@
     <div class="cell mini" title="Selected">{{ c.selected|prettybool|safe}}</div>
     <div class="cell mini" title="Balanced">{{ c.balanced|prettybool|safe}}</div>
     <div class="cell wider">{{ c.challenge|safe }}</div>
-    <div class="cell small">{{ c.team|colorteam|safe }}</div>
+    <div class="cell small">{{ c.lifepath_status }}</div>
 
     <div class="cell wide">{{c.stories | parse_stories | safe}}</div>
 
@@ -21,6 +21,9 @@
     <div class="cell mini last" title="Nameless">{{ c.nameless|prettybool|safe }}</div>
     <div class="cell mini" id="link_{{c.id}}">
         <span class="action_icon edit_character" id="edit_{{ c.id }}"><i class="fas fa-user-tag"></i></span>
+    </div>
+    <div class="cell mini" id="link_{{c.id}}">
+        <span class="action_icon edit_character_tod" id="edit_{{ c.id }}"><i class="fas fa-history"></i></span>
     </div>
     <div class="cell mini" id="link_{{c.id}}">
         <span class="action_icon recalc_avatar" id="recalc_{{ c.id }}"><i class="fas fa-cog"></i></span>&nbsp;

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<svg
+   width="200mm"
+   height="40mm"
+   viewBox="0 0 200 40"
+   version="1.2"
+   id="shortcut_span_template"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <g>
+    <rect x="160" y="0" width="40" height="40" style="fill:#F08000;stroke:white;stroke-width:1pt;"></rect>
+    <rect x="120" y="0" width="40" height="40" style="fill:#C08040;stroke:white;stroke-width:1pt;"></rect>
+    <rect x="80" y="0" width="40" height="40" style="fill:#808080;stroke:white;stroke-width:1pt;"></rect>
+    <rect x="40" y="0" width="40" height="40" style="fill:#4080C0;stroke:white;stroke-width:1pt;"></rect>
+    <rect x="0" y="0" width="40" height="40" style="fill:#0080F0;stroke:white;stroke-width:1pt;"></rect>
+    <text x="20mm" y="20mm" dy="8mm" style="text-anchor:middle;font-size:8pt;font-family:Kanit;fill:white;stroke:gray;stroke-width:0.25pt;">10</text>
+
+  </g>
+</svg>

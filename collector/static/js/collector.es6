@@ -469,6 +469,32 @@ class Collector {
                 });
             });
 
+        $('.edit_character_tod').off()
+            .on('click', function (event) {
+                event.preventDefault();
+                event.stopPropagation();
+                let dad = $(this).parents('li');
+                let dad_id = $(dad).attr("id");
+                let x = $(this).parents('div').attr("id").split("_")[1];
+                $("li#" + dad_id + " .character_info").removeClass('hidden');
+                $.ajax({
+                    url: 'ajax/edit/tod/avatar/' + x + '/',
+                    success: function (answer) {
+                        $('#board').html('<div id="the_tile"></div><div id="board_area_close"><i class="golden fa fa-times-circle"></i></div><div id="board_area_valid"><i id="menu_go" class="golden fa fa-play-circle"></i></div>');
+                        $('#the_tile').addClass("sheet_tile");
+                        $('#the_tile').html(answer);
+                        $('#board').css('display', 'block');
+                        me.rebootLinks();
+                        ac.reset(x, "sheet_" + x, "customizer");
+                        $("li#" + dad_id + " .character_name").click();
+                    },
+                    error: function (answer) {
+                        console.log('Error on editing ' + x);
+                        me.rebootLinks();
+                    }
+                });
+            });
+
         $("#menu_login").off().on('click',
             function (event) {
                 event.preventDefault();

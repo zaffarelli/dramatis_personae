@@ -1,0 +1,30 @@
+{% load static %}
+{% load fics_filters %}
+
+
+<div class="character_update_view">
+    <form class='character_form' form-target='character'>
+        {{ form.non_field_errors}}
+        {{ form.management_form }}
+        <input name='id' type='hidden' value='{{c.id}}'>
+        <input name='rid' type='hidden' value='{{c.rid}}'>
+        <input type="checkbox" name='need_fix' type='hidden' checked>
+        <div class="field_wrapper">
+            {{ form.storytelling_note.errors}}
+            <label for="full_name">Full Name</label>
+            {{form.full_name}}
+        </div>
+        <div class="field_wrapper">
+            {{ form.storytelling_note.errors}}
+            <label for="storytelling_note">Storytelling Note</label>
+            {{form.storytelling_note}}
+        </div>
+        {{ tourofdutys.management_form }}
+        {% for form in tourofdutys.forms %}
+            <div class="field_wrapper">
+                {{ form.as_div }}
+                    </div>
+            {% endfor %}
+        {% csrf_token %}
+    </form>
+</div>

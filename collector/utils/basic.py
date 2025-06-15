@@ -1,8 +1,3 @@
-"""
- ╔╦╗╔═╗  ╔═╗┌─┐┬  ┬  ┌─┐┌─┐┌┬┐┌─┐┬─┐
-  ║║╠═╝  ║  │ ││  │  ├┤ │   │ │ │├┬┘
- ═╩╝╩    ╚═╝└─┘┴─┘┴─┘└─┘└─┘ ┴ └─┘┴└─
-"""
 from io import BytesIO
 from django.http import HttpResponse
 from django.template.loader import get_template
@@ -153,9 +148,9 @@ def extract_rules():
     species = Specie.objects.all().filter(hidden=False).order_by('species')
     context['species'] = species
 
-    skills = SkillRef.objects.all().filter().order_by('reference')
+    skills = SkillRef.objects.all().exclude(is_wildcard=True).order_by('reference')
     context['skills'] = skills
-    degrees = DegreeRef.objects.all().filter().order_by('group','subgroup')
+    degrees = DegreeRef.objects.all().exclude(is_wildcard=True).order_by('group','reference')
     context['degrees'] = degrees
     benefice_afflictions = BeneficeAfflictionRef.objects.order_by('-source')
     context['benefice_afflictions'] = benefice_afflictions
@@ -290,14 +285,17 @@ def make_audit_report(campaign):
     context = {}
     context['date'] = timezone.datetime.now()
     context['characters'] = []
-    # print(campaign.epic.shortcut)
-    for c in campaign.dramatis_personae.all():
-        print(c.rid)
-        current = {'rid': c.rid, 'audit': c.audit, 'full_name':c.full_name}
-        context['characters'].append(current)
+    print(campaign.epic.shortcut)
+    for c in campaign.dramatis_personae.filter(historical_figure=False):
+        if len(c.player) > 0:
+            print(c.rid)
+            #print(c.audit)
+            current = {'rid': c.rid, 'audit': c.audit, 'alias': c.player, 'full_name':c.full_name}
+            context['characters'].append(current)
     # print(context)
     template = get_template('collector/audit.html')
     html = template.render(context)
+    print(html)
     fname = 'audit.pdf'
     filename = os.path.join(settings.MEDIA_ROOT, 'pdf/results/' + fname)
     es_pdf = open(filename, 'wb')

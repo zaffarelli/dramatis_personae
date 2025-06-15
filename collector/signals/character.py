@@ -15,5 +15,6 @@ def update_character_custo(sender, instance, conf=None, **kwargs):
 def update_character(sender, instance, conf=None, **kwargs):
     """ Before saving, fix() and  get_RID() for the character """
     #instance.get_rid(instance.full_name)
-    # instance.fix()
+    if instance.need_fix:
+        instance.fix()
     instance.pub_date = datetime.now(tz=get_current_timezone())
