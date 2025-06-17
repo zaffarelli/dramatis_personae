@@ -154,23 +154,22 @@ class Sheet {
             .attr('class', 'buttons do_not_print')
             .attr('transform', `translate(${me.w-me.step*3},${me.step*(1+num)})`)
             .on('mouseover', function (d) {
-                me.ui.select('#button' + num).style("stroke", "#882");
+                me.svg.select('#button' + num).style("stroke", "#FC4");
             })
             .on('mouseout', function (d) {
-                me.ui.select('#button' + num).style("stroke", "#111");
+                me.svg.select('#button' + num).style("stroke", "#111");
             })
             .on('click', function (d) {
-                if (action == 'browse') {
-                    console.log(">> Browse "+num)
-                    me.perform(null, num - 1);
+                if (num == 0) {
+                    me.createPDF();
                 } else {
-                    if (num == 0) {
-                        me.saveSVG();
-                    } else {
-                        $("#d3area").css("display", "none");
-                    }
-                }
+                    me.perform(null, num-1);
+                 }
             })
+
+
+
+
         button.append('rect')
             .attr('id', "button" + num)
             .attr('x', 0)
@@ -198,59 +197,36 @@ class Sheet {
             .style('stroke-width', '0.05pt')
             .attr('opacity', 1.0)
             .text(txt)
-            .on('mouseover', function (d) {
-                me.svg.select('#button' + num).style("stroke", "#FC4");
-            })
-            .on('mouseout', function (d) {
-                me.svg.select('#button' + num).style("stroke", "#111");
-            })
-            .on('click', function (d) {
-                if (num == 0) {
-                    // me.saveSVG();
-                    me.createPDF();
-                } else if (num == 1) {
-                    console.log('Recto');
-                    me.perform(null, 0);
-                } else if (num == 2) {
-                    me.perform(null, 1);
-                    console.log('Verso');
-                } else if (num == 3) {
-                    $("#d3area").css("display", "none");
-                }
-            })
+
         ;
     }
 
-    saveSVG() {
-        let me = this;
-        console.log("Save SVG")
-        me.svg.selectAll('.do_not_print').attr('opacity', 0);
-        let base_svg = d3.select("#d3area svg").html();
-        let flist = '<style>';
-        for (let f of me.config['fontset']) {
-            flist += '@import url("https://fonts.googleapis.com/css2?family=' + f + '");';
-        }
-        flist += '</style>';
-        let lpage = "";
-        let exportable_svg = '<?xml version="1.0" encoding="ISO-8859-1" ?> \
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"> \
-<svg class="fics_sheet" \
-xmlns="http://www.w3.org/2000/svg" version="1.1" \
-xmlns:xlink="http://www.w3.org/1999/xlink"> \
-' + flist + base_svg + '</svg>';
-
-        if (me.page == 0) {
-            lpage = "_recto";
-        } else {
-            lpage = "_verso"
-        }
-        let fname = me.rid + lpage + ".svg"
-        let nuke = document.createElement("a");
-        nuke.href = 'data:application/octet-stream;base64,' + btoa(me.formatXml(exportable_svg));
-        nuke.setAttribute("download", fname);
-        nuke.click();
-        me.svg.selectAll('.do_not_print').attr('opacity', 1);
-    }
+//     saveSVG() {
+//         let me = this;
+//         console.log("Save SVG")
+//         me.svg.selectAll('.do_not_print').attr('opacity', 0);
+//         let base_svg = d3.select("#d3area svg").html();
+//         let flist = '<style>';
+//         for (let f of me.config['fontset']) {
+//             flist += '@import url("https://fonts.googleapis.com/css2?family=' + f + '");';
+//         }
+//         flist += '</style>';
+//         let lpage = "";
+//         let exportable_svg = '<?xml version="1.0" encoding="ISO-8859-1" ?> \
+// <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"> \
+// <svg class="fics_sheet" \
+// xmlns="http://www.w3.org/2000/svg" version="1.1" \
+// xmlns:xlink="http://www.w3.org/1999/xlink"> \
+// ' + flist + base_svg + '</svg>';
+//
+//         lpage = `_p${me.page}`
+//         let fname = me.rid + lpage + ".svg"
+//         let nuke = document.createElement("a");
+//         nuke.href = 'data:application/octet-stream;base64,' + btoa(me.formatXml(exportable_svg));
+//         nuke.setAttribute("download", fname);
+//         nuke.click();
+//         me.svg.selectAll('.do_not_print').attr('opacity', 1);
+//     }
 
     createPDF() {
         console.log("Create PDF")
@@ -262,7 +238,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink"> \
 
             flist += '@import url("https://fonts.googleapis.com/css2?family=' + f + '");';
         }
-        console.log(flist)
+//         console.log(flist)
         flist += '</style>';
         let lpage = "";
         let exportable_svg = '<?xml version="1.0" encoding="ISO-8859-1" ?> \
@@ -279,7 +255,8 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
             'pdf_name': pdf_name,
             'svg_name': svg_name,
             'svg': exportable_svg,
-            'rid': me.rid
+            'rid': me.rid,
+            'pagecount': me.pages_number
         }
         me.svg.selectAll('.do_not_print').attr('opacity', 1);
         $.ajax({
@@ -1925,7 +1902,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
         _.forEach(me.data.degrees_list, (v,k) => {
             if (v.group != current_group){
                 current_group = v.group
-                reworked_data_set.push({'grp':v.group})
+                reworked_data_set.push({'agrp':v.group})
             }
             reworked_data_set.push(v)
 
@@ -1970,7 +1947,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
             .style('fill', '#E0E0E0')
             .style('stroke', 'none')
             .style('stroke-width', '0.5pt')
-            .attr("opacity",(d) => d.hasOwnProperty("grp") ? 0 : 1)
+            .attr("opacity",(d) => d.hasOwnProperty("agrp") ? 0 : 1)
 
         degree_in.append('text')
             .attr('x', 0)
@@ -1981,7 +1958,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
             .style("fill", me.draw_fill)
             .style("stroke", me.draw_stroke)
             .style("font-family", me.base_font)
-            .text((d) => d.grp)
+            .text((d) => d.agrp)
 
         degree_in.append('text')
             .attr('x', (boxWidth*1/48)*me.step)
@@ -1994,7 +1971,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
 
             .style("font-family", me.user_font)
             .text((d) => d.degree + " - "+d.level)
-            .attr("opacity",(d) => d.hasOwnProperty("grp") ? 0 : 1)
+            .attr("opacity",(d) => d.hasOwnProperty("agrp") ? 0 : 1)
 
 
         _.forEach([0,1,2], (m) =>{
@@ -2006,7 +1983,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
                 .style("stroke", me.draw_stroke)
                 .style("stroke-width", '1pt')
                 .style("text-anchor", 'middle')
-                .attr("opacity",(d) => d.hasOwnProperty("grp") ? 0 : 1)
+                .attr("opacity",(d) => d.hasOwnProperty("agrp") ? 0 : 1)
         });
 
         _.forEach([0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21], (m) =>{
@@ -2023,7 +2000,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink" width="' + me.width + '" height="' + 
                     let o = 0
                     let nb = 0
                     let coeff = 0
-                    if (!d.hasOwnProperty("grp")){
+                    if (!d.hasOwnProperty("agrp")){
                         switch(d.lvl){
                             case "CO":
                                 nb = 3

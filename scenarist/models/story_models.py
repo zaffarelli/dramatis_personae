@@ -109,6 +109,8 @@ class StoryModel(models.Model):
         casting = []
         if (self.to_PDF):
             casting.append(self.fetch_avatars(self.description))
+            casting.append(self.fetch_avatars(self.resolution))
+            casting.append(self.fetch_avatars(self.rewards))
         return casting
 
     def get_episodes(self):

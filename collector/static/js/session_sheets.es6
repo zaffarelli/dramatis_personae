@@ -30,7 +30,7 @@ class SessionSheets extends Sheet {
 
     drawButtons() {
         let me = this;
-        me.addButton(0, 'Save SVG');
+        me.addButton(0, 'PDF Export');
         for(let x=1;x<=me.pages_number;x++){
             me.addButton(x, `Page ${x}`, "browse")
         }
@@ -53,7 +53,6 @@ class SessionSheets extends Sheet {
 
         let title_text = 'Fading Suns'.toUpperCase();
         me.decorationText(4.5, 22.32, 0, 'middle', me.title_font, me.fat_font_size * 0.8, '#FFF', '#FFF', 5, title_text, me.back, 1.0);
-//         me.drawJumpgateLogo(5 * me.step, 22 * me.step)
         me.decorationText(4.5, 22.32, 0, 'middle', me.title_font, me.fat_font_size * 0.8, me.draw_fill, me.draw_stroke, 1, title_text, me.back, 1);
 
         me.characters = me.back.append('g')
@@ -123,7 +122,7 @@ class SessionSheets extends Sheet {
             .attr('id', (d) => d.rid)
         me.player_item.append('rect')
             .attr('x', function (d) {
-                console.log("d.idx >>",d.idx)
+//                 console.log("d.idx >>",d.idx)
                 return d['idx'] * me.step * 5 + ox * me.step;
             })
             .attr("y", function (d) {
@@ -292,7 +291,6 @@ class SessionSheets extends Sheet {
                 let result = d[prop]
                 let tmp = ""
                 if (direct_prop.startsWith(":")) {
-                    //console.log(direct_prop)
                     let mapping = direct_prop.split(":")
                     let depth = mapping.length
                     global_result = 0
@@ -300,7 +298,6 @@ class SessionSheets extends Sheet {
                     let i = 0
                     _.forEach(d[prop], function (e) {
                         // If we have the good object index match (i.e. BC #i)
-                        //console.log("mapping => ",direct_prop,mapping)
                         if (`${i}` == mapping[1]){
                             let de = 1
                             let f = e
@@ -313,7 +310,6 @@ class SessionSheets extends Sheet {
                             if (f.hasOwnProperty(mapping[de])){
                                 result = f[mapping[de]]
                                 global_result = 1
-                                //return false
                             }
                         }
                         i += 1
@@ -333,18 +329,9 @@ class SessionSheets extends Sheet {
                                 if (parseInt(result) >= 5){
                                     result = "("+result+")"
                                 }else if (parseInt(result) >= 3){
-                                    //stroke_width = "0.5pt"
                                     result += "*"
                                 }
                             }
-//                             if (`${parseInt(result)}` == result){
-//                                 let l = result
-//                                 result = ""
-//                                 for (let i=0;i<l;i++){
-//                                     result += "*"
-//                                     }
-//                             }
-                            //return me.nope
                         }
                     })
                 }
@@ -352,11 +339,6 @@ class SessionSheets extends Sheet {
             })
             .attr("opacity",local_opacity)
             .style('stroke-width', stroke_width)
-//         if (global_result == 0){
-//             global_result = me.nope
-//         }else{
-//             global_result = result
-//         }
         return global_result
     }
 
@@ -416,7 +398,7 @@ class SessionSheets extends Sheet {
 
     perform(character_data = null, page = 0) {
         let me = this;
-        console.log('FICS_SHEET: Performing...');
+//         console.log('FICS_SHEET: Performing...');
         if (character_data) {
             //me.data = character_data;
             me.sets = Array()
@@ -428,21 +410,21 @@ class SessionSheets extends Sheet {
                 me.data.push(x);
                 nb_chars += 1
                 if (nb_chars % 5 == 0){
-                    console.warn(me.data)
+//                     console.warn(me.data)
                     me.sets.push(me.data)
                     me.data = Array()
                 }
             })
             me.sets.push(me.data)
             me.pages_number = Math.ceil(nb_chars/5)
-            console.log("Pages Number:",me.pages_number," (",nb_chars," characters)")
+//             console.log("Pages Number:",me.pages_number," (",nb_chars," characters)")
         }
 
         $(me.parent).css('display', 'block');
         me.rid = me.adventure.full_id
         me.page = page
         me.data = me.sets[me.page]
-        console.log(me.page,"/",me.pages_number)
+//         console.log(me.page,"/",me.pages_number)
         me.drawWatermark(me.page)
         me.drawGeneric(1.5, 1.5)
         me.drawPages(9, 1.5)

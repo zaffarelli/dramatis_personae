@@ -3,6 +3,7 @@ class FICSSheet extends Sheet {
         super(data, parent, collector)
 //         console.debug("FICS Sheet");
         this.init()
+        this.pages_number = 4
     }
 
     init() {
@@ -16,10 +17,9 @@ class FICSSheet extends Sheet {
         let me = this;
         me.setButtonsOrigin(27, 1);
         me.addButton(0, 'Save SVG', '');
-        me.addButton(1, 'Page 1', 'browse');
-        me.addButton(2, 'Page 2', 'browse');
-        me.addButton(3, 'Page 3', 'browse');
-        me.addButton(4, 'Page 4', 'browse');
+        for (let x=0;x<4;x++){
+            me.addButton(x+1, `Page ${x+1}`, 'browse');
+        }
     }
 
 
@@ -132,8 +132,8 @@ class FICSSheet extends Sheet {
         let title_text1 = 'Fading'.toUpperCase();
         let title_text2 = 'Suns'.toUpperCase();
         // Fading Suns
-        me.title_font = "Gugi"
-        let coe = 0.95
+        //me.title_font = "Gugi"
+        let coe = 1.35
         let by = 3.0
         me.decorationText(7.5, by+0, 0, 'start', me.title_font, me.fat_font_size * coe, "FFFFFFCF", "FFFFFFCF", 20, title_text1, me.front, 1.0);
         me.decorationText(16.5, by+0, 0, 'end', me.title_font, me.fat_font_size * coe, "FFFFFFCF", "FFFFFFCF", 20, title_text2, me.front, 1.0);
@@ -143,7 +143,7 @@ class FICSSheet extends Sheet {
         // Système (fuzion...)
         me.decorationText(12, by+0.25, 0, 'middle', me.mono_font, me.small_font_size, me.draw_fill, me.draw_stroke, 0.5, me.post_title, me.front, 0.8);
         // Campaign title (Ex Nihilo Nihil Fit, etc...)
-        me.decorationText(12.0, by+1, 0, 'middle', me.mono_font, me.big_font_size, me.draw_fill, me.draw_stroke, 0.5, me.pre_title, me.front);
+        me.decorationText(12.0, by+1, 0, 'middle', "Meddon", me.medium_font_size*2, me.draw_fill, me.draw_stroke, 0.5, me.pre_title, me.front);
     }
 
     fillName(page){

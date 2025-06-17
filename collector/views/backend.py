@@ -185,103 +185,98 @@ def epic_deck(request):
 
 def svg_to_pdf(request, slug):
     import cairosvg
-    print("svg to pdf")
+    print(">> SVG to PDF")
     response = {'status': 'error'}
     if is_ajax(request):
         pdf_name = os.path.join(settings.MEDIA_ROOT, 'pdf/results/' + request.POST["pdf_name"])
         svg_name = os.path.join(settings.MEDIA_ROOT, 'pdf/results/' + request.POST["svg_name"])
         svgtxt = request.POST["svg"]
         rid = request.POST["rid"]
+        pagecount = int(request.POST["pagecount"])
         with open(svg_name, "w") as f:
             f.write(svgtxt)
             f.close()
         cairosvg.svg2pdf(url=svg_name, write_to=pdf_name, scale=1.0)
-        all_in_one_pdf(rid)
+        message = all_in_one_pdf(rid,pagecount)
+        if len(message)>0:
+            messages.info(request,message)
         response['status'] = 'ok'
     return JsonResponse(response)
 
 
-def all_in_one_pdf(rid):
-    # def reset_eof_of_pdf_return_stream(pdf_stream_in: list):
-    #     actual_line = len(pdf_stream_in)-1
-    #     # find the line position of the EOF
-    #     for i, x in enumerate(txt[::-1]):
-    #         if b'%%EOF' in x:
-    #             actual_line = len(pdf_stream_in) - i
-    #             print(f'EOF found at line position {-i} = actual {actual_line}, with value {x}')
-    #             break
-    #
-    #     # return the list up to that point
-    #     return pdf_stream_in[:actual_line]
-    # print(f'Starting PDFing for [{rid}].')
-    print(f'Starting All in One PDFing for [{rid}].')
-    res = []
+def all_in_one_pdf(rid,pagecount=4):
+    print(f'>> All in One PDFing for [{rid}].')
+    res = ""
     from PyPDF2 import PdfMerger
     media_results = os.path.join(settings.MEDIA_ROOT, 'pdf/results/')
     csheet_results = os.path.join(settings.MEDIA_ROOT, 'pdf/results/')
     onlyfiles = [f for f in os.listdir(media_results) if os.path.isfile(os.path.join(media_results, f))]
+    previousfiles = [f for f in os.listdir(media_results) if os.path.isfile(os.path.join(media_results, f))]
     pdfs = onlyfiles
     merger = PdfMerger()
     pdfs.sort()
     i = 0
+    perfect_set = []
+    for x in range(0, pagecount):
+        perfect_set.append(f'{rid}_p{x}.pdf')
+    print(perfect_set)
+    got_them_all = True
     for pdf in pdfs:
-        print(f"Checking PDF... {pdf}")
         if pdf.startswith(rid + "_p") and pdf.endswith(".pdf"):
-            # # print(pdf)
-            # with open(media_results + pdf, 'rb') as p:
-            #     txt = (p.readlines())
-            # # get the new list terminating correctly
-            # txtx = reset_eof_of_pdf_return_stream(txt)
-            # # write to new pdf
-            # with open(media_results + pdf, 'wb') as f:
-            #     f.writelines(txtx)
+            print(f"Checking PDF... {pdf}")
             with open(media_results + pdf, 'rb') as p:
                 merger.append(p)
             i += 1
             print(f"Page {i} merged")
-    if i >= 3:
-        des = f'{csheet_results}character_sheet{rid}.pdf'
+    for ps in perfect_set:
+        if ps not in pdfs:
+            got_them_all = False
+    if got_them_all:
+        des = f'{csheet_results}{rid}.pdf'
         with open(des, 'wb') as fout:
             merger.write(fout)
-        # logger.info(f'Successfully merged {i} page(s) as [{des}].')
-        print(f'Successfully merged {i} page(s) as [{des}].')
+        cleanlist = previousfiles
+        for f in cleanlist:
+            if f.startswith(rid + "_p") and (f.endswith(".svg") or f.endswith(".pdf")):
+                os.unlink(media_results + f)
+        res = f'Successfully merged {i} page(s) as [{des}].'
     return res
 
 
-def osave_to_svg(request, slug):
-    response = {'status': 'error'}
-    if is_ajax(request):
-        svg_name = os.path.join(settings.MEDIA_ROOT, 'pdf/results/svg/' + request.POST["svg_name"])
-        svgtxt = request.POST["svg"]
-        with open(svg_name, "w") as f:
-            f.write(svgtxt)
-            f.close()
-        response['status'] = 'ok'
-    return JsonResponse(response)
-
-
-def xsvg_to_pdf(request, slug):
-    response = {'status': 'error'}
-    logger.info(f'Saving to PDF.')
-    if is_ajax(request):
-        import cairosvg
-        svg_name = os.path.join(settings.MEDIA_ROOT, 'pdf/results/' + request.POST["svg_name"])
-        svgtxt = request.POST["svg"]
-        # creature = request.POST["creature"]
-        with open(svg_name, "w") as f:
-            f.write(svgtxt)
-            f.close()
-        logger.info(f'--> Created --> {svg_name}.')
-
-        pdf_name = os.path.join(settings.MEDIA_ROOT, 'pdf/results/pdf/' + request.POST["pdf_name"])
-        if "rid" in request.POST:
-            rid = request.POST["rid"]
-        else:
-            rid = "adventure_sheet"
-        cairosvg.svg2pdf(url=svg_name, write_to=pdf_name, scale=1.0)
-        logger.info(f'--> Created --> {pdf_name}.')
-        print(f'--> Created --> {pdf_name}.')
-        response['status'] = 'ok'
-        # all_in_one_pdf(rid)
-        print(response)
-    return JsonResponse(response)
+# def osave_to_svg(request, slug):
+#     response = {'status': 'error'}
+#     if is_ajax(request):
+#         svg_name = os.path.join(settings.MEDIA_ROOT, 'pdf/results/svg/' + request.POST["svg_name"])
+#         svgtxt = request.POST["svg"]
+#         with open(svg_name, "w") as f:
+#             f.write(svgtxt)
+#             f.close()
+#         response['status'] = 'ok'
+#     return JsonResponse(response)
+#
+#
+# def xsvg_to_pdf(request, slug):
+#     response = {'status': 'error'}
+#     logger.info(f'Saving to PDF.')
+#     if is_ajax(request):
+#         import cairosvg
+#         svg_name = os.path.join(settings.MEDIA_ROOT, 'pdf/results/' + request.POST["svg_name"])
+#         svgtxt = request.POST["svg"]
+#         # creature = request.POST["creature"]
+#         with open(svg_name, "w") as f:
+#             f.write(svgtxt)
+#             f.close()
+#         logger.info(f'--> Created --> {svg_name}.')
+#
+#         pdf_name = os.path.join(settings.MEDIA_ROOT, 'pdf/results/pdf/' + request.POST["pdf_name"])
+#         if "rid" in request.POST:
+#             rid = request.POST["rid"]
+#         else:
+#             rid = "adventure_sheet"
+#         cairosvg.svg2pdf(url=svg_name, write_to=pdf_name, scale=1.0)
+#         logger.info(f'--> Created --> {pdf_name}.')
+#         print(f'--> Created --> {pdf_name}.')
+#         response['status'] = 'ok'
+#         # all_in_one_pdf(rid)
+#         print(response)
+#     return JsonResponse(response)

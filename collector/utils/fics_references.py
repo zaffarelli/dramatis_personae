@@ -25,7 +25,7 @@ FONTSET = ['Cinzel', 'Trade+Winds', 'Imprima', 'Roboto', 'Philosopher', 'Ruda', 
            'Reggae+One', 'Syne+Mono', 'Zilla+Slab',"Ubuntu+Mono",  'Spartan', 'News+Cycle', 'Archivo', 'Francois+One', 'Caveat',
            'Gruppo', 'Voltaire', 'Kanit', "Fredericka+the+Great", 'Esteban', 'Pompiere', 'Niconne', 'Delius','Rationale',
            'Nanum+Pen+Script', 'Schoolbell', 'Jim+Nightshade', 'Estonia', 'East+Sea+Dokdo', 'Julee', 'Economica',
-           'Anton', 'Long+Cang','Rationale',  'Birthstone', 'Condiment',"Metal+Mania",'Passero+One',"Mountains+of+Christmas","Shadows+Into+Light",'Anton+SC',"Gugi"]
+           'Anton', 'Long+Cang','Rationale',  'Birthstone', 'Condiment',"Metal+Mania",'Passero+One',"Mountains+of+Christmas","Shadows+Into+Light",'Anton+SC',"Gugi","Meddon"]
 
 
 SOURCE_REFERENCES = (
