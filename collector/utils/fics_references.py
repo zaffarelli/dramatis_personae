@@ -68,30 +68,35 @@ DEGREE_GROUPS = (
 
 
 SHORTCUTS = {
+    "Academia": {
+        'attribute': "PA_INT",
+        'label': "INT + Academia",
+        'rationale': "Show how knowledgeable you are",
+    },
     "Observe": {
         'attribute': "PA_AWA",
         'label': "AWA + Observe",
-        'rationale': "Notice something",
+        'rationale': "Remark a voice in a crowded soirée",
     },
     "Search": {
         'attribute': "PA_AWA",
         'label': "AWA + Search",
-        'rationale': "Search a place",
+        'rationale': "Search an object dropped in a spacecraft",
     },
     "Inquiry": {
         'attribute': "PA_INT",
         'label': "INT + Inquiry",
-        'rationale': "Deduce from data",
+        'rationale': "Deduce the windows of opportunity for a murder in a planning",
     },
     "Empathy": {
         'attribute': "PA_TEM",
-        'label': "AWA + Empathy",
-        'rationale': "Discern emotions",
+        'label': "TEM + Empathy",
+        'rationale': "Catch a strange behavior from someone",
     },
-    "Dodge": {
-        'attribute': "PA_AGI",
-        'label': "AGI + Dodge",
-        'rationale': "Avoid being hit",
+    "Riddles": {
+        'attribute': "PA_INT",
+        'label': "INT + Riddles",
+        'rationale': "Fix a mathematical problem",
     },
     "Shoot": {
         'attribute': "PA_DEX",
@@ -101,86 +106,57 @@ SHORTCUTS = {
     "Melee": {
         'attribute': "PA_DEX",
         'label': "DEX + Melee",
-        'rationale': "Melee",
+        'rationale': "Block a thrust attack with your blade",
     },
-    "Driving (Skycraft Piloting)": {
+    "Maneuver": {
         'attribute': "PA_DEX",
-        'label': "DEX + Driving (Skycraft Piloting)",
-        'rationale': "Fly an aircraft",
-    },
-    "Driving (Celestial Sailing)": {
-        'attribute': "PA_TEC",
-        'label': "TEC + Driving (Celestial Sailing)",
-        'rationale': "Sailing a spaceship",
+        'label': "DEX + Maneuver",
+        'rationale': "Drive a mundane vehicle",
     },
     "Fight": {
-        'attribute': "PA_DEX",
-        'label': "DEX + Fight",
-        'rationale': "Fight/Martial Arts",
+        'attribute': "PA_AGI",
+        'label': "AGI + Fight",
+        'rationale': "Trip someone to the ground",
     },
-    "Persuasion": {
-        'attribute': "PA_PRE",
-        'label': "PRE + Persuasion",
-        'rationale': "Convince someone with arguments",
-    },
-    "Seduction": {
+    "Seduction/Persuasion": {
         'attribute': "PA_PRE",
         'label': "PRE + Seduction",
         'rationale': "Charm others",
     },
-    "Diplomatic Conversation": {
+    "Etiquette": {
         'attribute': "PA_TEM",
-        'label': "TEM + Empathy",
+        'label': "TEM + Etiquette",
         'rationale': "Mundane court conversation",
     },
     "Leadership": {
-        'attribute': "PA_TEM",
-        'label': "TEM + Leadership",
+        'attribute': "PA_PRE",
+        'label': "PRE + Leadership",
         'rationale': "Give orders to subsidiaries",
     },
     "Athletics": {
-        'attribute': "PA_BOD",
-        'label': "BOD + Athletics",
-        'rationale': "Swimming",
-    },
-    "Acrobatics": {
         'attribute': "PA_MOV",
-        'label': "MOV + Acrobatics",
-        'rationale': "Roll to cover",
+        'label': "MOV + Athletics",
+        'rationale': "Dodging",
     },
+
     "Bureaucracy": {
         'attribute': "PA_INT",
         'label': "INT + Bureaucracy",
         'rationale': "Fill shipment border transit documents",
-    },
-    "Stoic Mind": {
-        'attribute': 'PA_WIL',
-        'label': 'WIL + Stoic Mind',
-        'rationale': "Iron will",
     },
     "Focus": {
         'attribute': 'PA_WIL',
         'label': 'WIL + Focus',
         'rationale': "Keep focused on a task",
     },
-    "Surgery": {
-        'attribute': "PA_INT",
-        'label': "INT + Surgery",
-        'rationale': "Apply surgery on wounded",
-    },
-    "Science (Cybernetics)": {
-        'attribute': "PA_TEC",
-        'label': "TEC + Cybernetics",
-        'rationale': "Surgically implant cyber",
-    },
     "Remedy": {
         'attribute': "PA_INT",
         'label': "INT + Remedy",
         'rationale': "Stabilize wounds",
     },
-    "Heavy Weapons": {
+    "Gunnery": {
         'attribute': "PA_DEX",
-        'label': "DEX + Heavy Weapons",
+        'label': "DEX + Gunnery",
         'rationale': "Heavy weapon fire",
     },
     "Knavery": {
@@ -188,20 +164,35 @@ SHORTCUTS = {
         'label': "PRE + Knavery",
         'rationale': "Convince someone with bullshit",
     },
-    "Magna Carta": {
+    "Beastcraft": {
         'attribute': "PA_INT",
-        'label': "INT + Magna Carta",
-        'rationale': "Prepare a legal case",
+        'label': "PRE + Beastcraft",
+        'rationale': "Calm a mount during storm",
     },
-    "Redemption (Forbidden Lore)": {
+    "Redemption": {
         'attribute': "PA_TEC",
-        'label': "TEC + Redemption (Forbidden Lore)",
-        'rationale': "Fix Proscribed Technology",
+        'label': "TEC + Redemption",
+        'rationale': "Fix something",
     },
-    "Science (Engineering)": {
-        'attribute': "PA_TEC",
-        'label': "TEC + Science (Engineering)",
-        'rationale': "Maintain celestial ship propelers thrust",
+    "Teaching": {
+        'attribute': "PA_TEM",
+        'label': "TEM + Teaching",
+        'rationale': "Teach students",
+    },
+    "Impress": {
+        'attribute': "PA_STR",
+        'label': "STR + Impresse",
+        'rationale': "Convince those punks who is in charge here",
+    },
+    "Alchemy": {
+        'attribute': "PA_AWA",
+        'label': "AWA + Alchemy",
+        'rationale': "Notice poison type by smell",
+    },
+    "Adaptation": {
+        'attribute': "PA_AWA",
+        'label': "TEC + Adaptation",
+        'rationale': "Interpret strange data on ship sensors",
     },
 }
 

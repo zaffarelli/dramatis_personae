@@ -700,7 +700,7 @@ class Character(Combattant):
         shortcuts_pdf_clean = []
         for s in shortcuts_pdf:
             shortcuts_pdf_clean.append(s.split("|")[1])
-        self.gm_shortcuts_pdf = ', '.join(shortcuts_pdf_clean)
+        self.gm_shortcuts_pdf = "<ul><li>"+'</li><li>'.join(shortcuts_pdf_clean)+"</li></ul>"
         logger.warning(self.gm_shortcuts_pdf)
         result = sorted(shortcuts_json, key=itemgetter('score'), reverse=True)
         # print(result)
@@ -1196,15 +1196,15 @@ class Character(Combattant):
         proceed = False
         if self.need_pdf:
             from collector.utils.basic import write_pdf
-            try:
-                context = dict(c=self, filename=f'{self.rid}', now=datetime.now(tz=get_current_timezone()))
-                write_pdf('collector/character_roster.html', context)
-                logger.info(f'=> PDF created ...: {self.rid}')
-                proceed = True
-                self.need_pdf = False
-                self.save()
-            except:
-                logger.error(f'    => PDF creation error !!! {self.rid}')
+            # try:
+            context = dict(c=self, filename=f'{self.rid}', now=datetime.now(tz=get_current_timezone()))
+            write_pdf('collector/character_roster.html', context)
+            logger.info(f'=> PDF ROSTER created ...: {self.rid}')
+            proceed = True
+            self.need_pdf = False
+            self.save()
+            # except:
+            #     logger.error(f'    => PDF ROSTER creation error !!! {self.rid}')
         return proceed
 
     def __str__(self):

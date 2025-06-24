@@ -156,8 +156,9 @@ def six_digit(value):
 @register.filter(name='dotted_pdf')
 def dotted_pdf(value):
     answer = f"{value}"
-    if value > 5:
-        answer = f"<b>{value}</b>"
+    if type(value) is int:
+        if value > 5:
+            answer = f"<b>{value}</b>"
     return answer
 
 @register.filter(name='as_media_image')

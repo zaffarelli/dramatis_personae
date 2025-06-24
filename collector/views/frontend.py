@@ -41,7 +41,7 @@ def get_list(request, id, slug=None):
     # print(f'[{slug}]')
     slug = slug.replace('_', '=')
     decs = str(base64.b64decode(slug), "utf-8")
-    print(slug, decs)
+    # print(slug, decs)
     if decs == "none":
         character_items = Character.objects \
             .order_by('balanced', '-team', 'historical_figure', 'nameless', 'full_name') \

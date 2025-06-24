@@ -72,7 +72,7 @@ def get_keywords(request, *args, **kwargs):
         edata['dramas'].append({'drama': d.name, 'code': f'c-drama-{d.id}', 'chapter': d.get_full_id})
 
     template = get_template('collector/keywords.html')
-    print(data)
+    # print(data)
     chart = template.render({'cdata': data, 'edata': edata})
     context = {
         'chart': chart,

@@ -27,7 +27,7 @@ Born in {{ c.birthdate }} ({{ c.age }} years old)
 <tr>
   <td>Constitution</td><td style='width:1.5cm;'>{{c.PA_CON| dotted_pdf | safe}}</td>
   <td>Willpower</td><td style='width:1.5cm;'>{{c.PA_WIL| dotted_pdf | safe}}</td>
-  <td>Reflexes</td><td style='width:1.5cm;'>{{c.PA_REF| dotted_pdf | safe}}</td>
+  <td>Reflexes</td><td style='width:1.5cm;'>{{c.PA_DEX| dotted_pdf | safe}}</td>
 </tr>
 <tr>
   <td>Body</td><td style='width:1.5cm;'>{{c.PA_BOD| dotted_pdf | safe}}</td>
@@ -64,36 +64,35 @@ Born in {{ c.birthdate }} ({{ c.age }} years old)
 
 {% if c.skill_set.count != 0 %}
 <h5>Skills</h5>
-<table class='tableskills' width='100%'>
-  <tr>
-    <td class='skilltext' style='width:23%'>
+<table class='tableskills'>
     {% for skill in c.skill_set.all|dictsort_3cols:"skill_ref.reference" %}
-      {% if skill.skill_ref.is_root %}
-      {{ skill.skill_ref.reference|as_root|safe }}
-      {% else %}
-        {%if skill.skill_ref.is_speciality %}
-        {{ skill.skill_ref.reference|as_specialty|safe }}
-        {% else %}
-        {{ skill.skill_ref.reference|safe }}
-        {% endif %}
+      {% if forloop.counter0|modulo:3 == 0 %}<tr>{% endif %}
+      <td class='skilltext' style='width:23%'>{{ skill.skill_ref.reference|safe }}</td>
+      <td class='skillval' style='width:10%'>{{ skill.value }}</td>
+      {% if forloop.counter0|modulo:3 == 2 %}
+      </tr>
       {% endif %}
-    </td>
-    <td class='skillval' style='width:10%'>
-    {% if skill.value > 4 %}<span class='highskill'><b>{% endif %}{{ skill.value }}{% if skill.value > 4 %}</b></span>{% endif %}
-  {% if forloop.counter0|modulo:3 == 2 %}
-    </td>
-  </tr>
-  <tr>
-    <td class='skilltext'style='width:23%'>
-  {% else %}
-    </td>
-    <td  class='skilltext' style='width:23%'>
-  {% endif %}
-  {% endfor %}
-    </td>
-  </tr>
+    {% endfor %}
 </table>
 {% endif %}
+
+{% if c.degree_set.count != 0 %}
+  <h5>Degrees</h5>
+  <table class='tabledegrees'>
+    {% for degree in c.degree_set.all|dictsort_3cols:"degree_ref.reference" %}
+      {% if forloop.counter0|modulo:3 == 0 %}<tr>{% endif %}
+      <td class='degreetext' style='width:23%'>
+        <small>{{ degree.degree_ref.group|safe }}</small><br/> {{ degree.degree_ref.refval|safe }}
+      </td>
+      <td class='degreeval'>{{ degree.value }}</td>
+      {% if forloop.counter0|modulo:3 == 2 %}
+      </tr>
+      {% endif %}
+    {% endfor %}
+</table>
+{% endif %}
+
+
 
 {% if c.blessingcurse_set.count != 0 %}
 <h5>Blessings/Curses</h5>
@@ -116,12 +115,7 @@ Born in {{ c.birthdate }} ({{ c.age }} years old)
 
 {%endif%}
 
-{% if c.talent_set.count != 0 %}
-<h5>Talents</h5>
-<p>{% for t in c.talent_set.all|dictsortreversed:"value" %}
-<p><u>{{ t.name|safe }}</u> ({{t.AP}}x3+{{t.OP}}={{ t.value }}): {{t.attributes_list}} {{t.skills_list}}{{ t.description|safe }}{% if forloop.last %}{% else %}{% endif %}</p>
-{% endfor %}
-{%endif%}
+
 {% if c.weapon_set.count != 0 %}
 <h5>Weapons</h5>
 <p>{% for w in c.weapon_set.all|dictsort:"weapon_ref.reference" %}
@@ -149,12 +143,9 @@ Born in {{ c.birthdate }} ({{ c.age }} years old)
 </table>
 {%endif%}
 
-
+{% include "collector/character/character_tod.html" %}
 <h5>Shortcuts</h5>
 <p>{{ c.gm_shortcuts_pdf|safe }}</p>
-
-{% include "collector/character/character_tod.html" %}
-
 <h5>Narrative</h5>
 <p>{{ c.narrative|parse_avatars_pdf|safe }}</p>
 <hr>

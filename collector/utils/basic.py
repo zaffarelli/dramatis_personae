@@ -30,7 +30,7 @@ def write_pdf(template_src, context_dict={}):
     template = get_template(template_src)
     html = template.render(context_dict)
     uri = '%s.pdf'%(context_dict['filename'])
-    filename = os.path.join(settings.MEDIA_ROOT, 'pdf/results/avatars/' + uri)
+    filename = os.path.join(settings.MEDIA_ROOT, 'pdf/results/rosters/' + uri)
     result = open(filename, 'wb')
     pdf = pisa.pisaDocument(BytesIO(html.encode('utf-8')), dest=result, encoding='utf-8')
     result.close()
