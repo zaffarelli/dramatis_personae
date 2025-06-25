@@ -126,23 +126,23 @@ SHORTCUTS = {
     "Etiquette": {
         'attribute': "PA_TEM",
         'label': "TEM + Etiquette",
-        'rationale': "Mundane court conversation",
+        'rationale': "Mundane soirée conversation",
     },
     "Leadership": {
         'attribute': "PA_PRE",
         'label': "PRE + Leadership",
-        'rationale': "Give orders to subsidiaries",
+        'rationale': "Motivate your men",
     },
     "Athletics": {
         'attribute': "PA_MOV",
         'label': "MOV + Athletics",
-        'rationale': "Dodging",
+        'rationale': "Dodge an attack",
     },
 
     "Bureaucracy": {
         'attribute': "PA_INT",
         'label': "INT + Bureaucracy",
-        'rationale': "Fill shipment border transit documents",
+        'rationale': "Handle imperial paperwork",
     },
     "Focus": {
         'attribute': 'PA_WIL',
@@ -167,7 +167,7 @@ SHORTCUTS = {
     "Beastcraft": {
         'attribute': "PA_INT",
         'label': "PRE + Beastcraft",
-        'rationale': "Calm a mount during storm",
+        'rationale': "Calm your mount during storm",
     },
     "Redemption": {
         'attribute': "PA_TEC",

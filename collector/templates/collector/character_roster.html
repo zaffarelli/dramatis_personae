@@ -62,24 +62,28 @@ Born in {{ c.birthdate }} ({{ c.age }} years old)
 </tr>
 </table>
 
-{% if c.skill_set.count != 0 %}
+
+
 <h5>Skills</h5>
 <table class='tableskills'>
-    {% for skill in c.skill_set.all|dictsort_3cols:"skill_ref.reference" %}
-      {% if forloop.counter0|modulo:3 == 0 %}<tr>{% endif %}
-      <td class='skilltext' style='width:23%'>{{ skill.skill_ref.reference|safe }}</td>
+    {% for skill in c.extended_skills|dictsort_4cols:"reference" %}
+      {% if forloop.counter0|modulo:4 == 0 %}<tr>{% endif %}
+      <td class='skilltext' style='width:23%'>{{ skill.reference|safe }}</td>
+      {% if skill.value %}
       <td class='skillval' style='width:10%'>{{ skill.value }}</td>
-      {% if forloop.counter0|modulo:3 == 2 %}
+      {% else %}
+      <td class='skillval' style='width:10%'>-</td>
+      {% endif %}
+      {% if forloop.counter0|modulo:4 == 3 %}
       </tr>
       {% endif %}
     {% endfor %}
 </table>
-{% endif %}
 
 {% if c.degree_set.count != 0 %}
   <h5>Degrees</h5>
   <table class='tabledegrees'>
-    {% for degree in c.degree_set.all|dictsort_3cols:"degree_ref.reference" %}
+    {% for degree in c.degree_set.all|dictsort_3cols:"degree_ref.group" %}
       {% if forloop.counter0|modulo:3 == 0 %}<tr>{% endif %}
       <td class='degreetext' style='width:23%'>
         <small>{{ degree.degree_ref.group|safe }}</small><br/> {{ degree.degree_ref.refval|safe }}

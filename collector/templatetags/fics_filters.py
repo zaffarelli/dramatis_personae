@@ -289,6 +289,32 @@ def dictsort_3cols(value, ref):
             flat_cols.append(cols[2][idx])
     return flat_cols
 
+@register.filter(name='dictsort_4cols')
+def dictsort_4cols(value, ref):
+    mylist = dictsort(value, ref)
+    count = len(mylist)
+    rowcount = int(count / 4)
+    if count % 4 != 0:
+        rowcount += 1
+    idx = 0
+    cols = [[], [], [], []]
+    for x in dictsort(value, ref):
+        c = int(idx / rowcount)
+        cols[c].append(x)
+        idx += 1
+    flat_cols = []
+    for idx in range(rowcount):
+        if len(cols[0]) > idx:
+            flat_cols.append(cols[0][idx])
+        if len(cols[1]) > idx:
+            flat_cols.append(cols[1][idx])
+        if len(cols[2]) > idx:
+            flat_cols.append(cols[2][idx])
+        if len(cols[3]) > idx:
+            flat_cols.append(cols[3][idx])
+    return flat_cols
+
+
 
 @register.filter(name='signed')
 def signed(value):

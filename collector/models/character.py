@@ -432,7 +432,7 @@ class Character(Combattant):
         self.audit_log(f"XP (remaining) ................. {self.xp_pool:.>3} XP")
         self.audit_log(f"XP (spent) ..................... {self.xp_spent:.>3} XP")
         self.priority = (abs(self.life_path_total - self.OP) < 8) and (self.OP > 0) and (
-                    abs(self.life_path_total - self.OP) > 0)
+                abs(self.life_path_total - self.OP) > 0)
         self.build_log = "\n".join(bl)
         if self.historical_figure:
             self.balanced = True
@@ -700,7 +700,7 @@ class Character(Combattant):
         shortcuts_pdf_clean = []
         for s in shortcuts_pdf:
             shortcuts_pdf_clean.append(s.split("|")[1])
-        self.gm_shortcuts_pdf = "<ul><li>"+'</li><li>'.join(shortcuts_pdf_clean)+"</li></ul>"
+        self.gm_shortcuts_pdf = "<ul><li>" + '</li><li>'.join(shortcuts_pdf_clean) + "</li></ul>"
         logger.warning(self.gm_shortcuts_pdf)
         result = sorted(shortcuts_json, key=itemgetter('score'), reverse=True)
         # print(result)
@@ -1192,12 +1192,28 @@ class Character(Combattant):
             self.shield_cost += s.shield_ref.cost
         return "ok"
 
+    @property
+    def extended_skills(self):
+        from collector.models.skill import SkillRef
+        extended_list = []
+        all_skills = SkillRef.objects.filter(is_wildcard=False).values('reference')
+        for skill in all_skills:
+            extended_list.append({"reference": skill['reference'], "value": 0})
+        for s in self.skill_set.all():
+            if not s.skill_ref.is_wildcard:
+                for extended_skill in extended_list:
+                    if extended_skill["reference"] == s.skill_ref.reference:
+                        extended_skill["value"] = f"{s.value}"
+        print(extended_list)
+        return extended_list
+
     def backup(self):
         proceed = False
         if self.need_pdf:
             from collector.utils.basic import write_pdf
             # try:
             context = dict(c=self, filename=f'{self.rid}', now=datetime.now(tz=get_current_timezone()))
+            print(context)
             write_pdf('collector/character_roster.html', context)
             logger.info(f'=> PDF ROSTER created ...: {self.rid}')
             proceed = True
@@ -1424,15 +1440,17 @@ class Character(Combattant):
         idx = 0
         for degree in self.degree_set.order_by('degree_ref__group', "degree_ref__reference"):
             if not degree.degree_ref.is_wildcard:
-                if degree.value>0:
+                if degree.value > 0:
                     degrees_list.append(
-                        {'degree': degree.degree_ref.reference, 'group': degree.degree_ref.get_group_display(),'grp': degree.degree_ref.group,
+                        {'degree': degree.degree_ref.reference, 'group': degree.degree_ref.get_group_display(),
+                         'grp': degree.degree_ref.group,
                          'value': degree.value, 'level': degree.degree_ref.get_level_display(),
-                         'lvl': degree.degree_ref.level, 'idx': 0, 'refval': degree.degree_ref.refval, "owner": self.full_name.split(" ")[0]})
+                         'lvl': degree.degree_ref.level, 'idx': 0, 'refval': degree.degree_ref.refval,
+                         "owner": self.full_name.split(" ")[0]})
         degrees_list = sorted(degrees_list, key=itemgetter('group', 'degree'))
         for d in degrees_list:
             d['idx'] = idx
-            d["owner"] = d["owner"] +" "+ str(idx)
+            d["owner"] = d["owner"] + " " + str(idx)
             idx += 1
         print(degrees_list)
 

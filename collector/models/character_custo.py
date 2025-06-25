@@ -39,6 +39,15 @@ class CharacterCusto(models.Model):
     degree_wp_watch = {}
     degrees_wp_choices_str = models.TextField(default='{}', max_length=2048, blank=True)
 
+    attributes_to_allocate = models.PositiveIntegerField(default=0)
+    skills_to_allocate = models.PositiveIntegerField(default=0)
+    degrees_to_allocate = models.PositiveIntegerField(default=0)
+
+    allocated_attributes = models.PositiveIntegerField(default=0)
+    allocated_skills = models.PositiveIntegerField(default=0)
+    allocated_degrees = models.PositiveIntegerField(default=0)
+
+
     def get_degrees_wp_choices(self):
         return json.loads(self.degrees_wp_choices_str)
 
@@ -76,6 +85,12 @@ class CharacterCusto(models.Model):
 
     def rebuild_summary(self):
         self.summary = ""
+        self.summary += "<b>Allocation</b>"
+        self.summary += "<ul>"
+        self.summary += f"<li><tt>Attributes..... {self.allocated_attributes:3} / {self.attributes_to_allocate:3}</tt></li>"
+        self.summary += f"<li><tt>Skills......... {self.allocated_skills:3} / {self.skills_to_allocate:3}</tt></li>"
+        self.summary += f"<li><tt>Degrees........ {self.allocated_degrees:3} / {self.degrees_to_allocate:3}</tt></li>"
+        self.summary += "</ul>"
         self.summary += "Attributes"
         self.summary += "<ul>"
         if self.PA_STR != 0:
