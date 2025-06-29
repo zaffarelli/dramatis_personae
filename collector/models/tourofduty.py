@@ -4,6 +4,7 @@ from django.contrib import admin
 from collector.models.character import Character
 from datetime import datetime
 from collector.mixins.ridded_mixin import RiddedMixin, RidField
+from collector.utils.allocator import Allocator
 import json
 
 
@@ -37,6 +38,20 @@ import json
 
 
 class TourOfDutyRef(RiddedMixin):
+    """
+        In each tour of duty ref, there are allocated points for Attributes, Skills, Degrees, etc...
+        Some are fixed: Etiquette +1
+        Some are wildcards: Choose one [UNDERWORLD] +1
+        For a total allocations
+
+        fixed_allocations
+        wildcard_to_allocate
+        wildcard_allocations
+
+
+        A todref is fullfilled
+    """
+
     class Meta:
         ordering = ['category', 'caste', 'reference']
         verbose_name = "FICS: ToD"
@@ -56,8 +71,11 @@ class TourOfDutyRef(RiddedMixin):
     BA = models.IntegerField(default=0)
     OP = models.IntegerField(default=0)
     WP = models.IntegerField(default=0)
-    SWP = models.IntegerField(default=0, blank=True) # Skill Wilcard Points
-    DWP = models.IntegerField(default=0, blank=True) # Skill Degree Points
+    AWP = models.IntegerField(default=0, blank=True)  # Attribute wildcard point C1P, etc...
+    SWP = models.IntegerField(default=0, blank=True)  # Skill Wilcard Points
+    DWP = models.IntegerField(default=0, blank=True)  # Degree Wildcard Points
+    BCW = models.IntegerField(default=0, blank=True)
+    BAW = models.IntegerField(default=0, blank=True)
     balance_AP = models.IntegerField(default=0)
     balance_OP = models.IntegerField(default=0)
     balance = models.IntegerField(default=0)
@@ -76,6 +94,12 @@ class TourOfDutyRef(RiddedMixin):
     PA_OCC = models.IntegerField(default=0, blank=True)
     PA_DRK = models.IntegerField(default=0, blank=True)
 
+    # Meeaning: Choose 1 from Physical, Mental, Combat and Full
+    PA_C1P = models.IntegerField(default=0, blank=True)
+    PA_C1M = models.IntegerField(default=0, blank=True)
+    PA_C1C = models.IntegerField(default=0, blank=True)
+    PA_C1F = models.IntegerField(default=0, blank=True)
+
     value = models.IntegerField(default=0)
     description = models.TextField(max_length=1024, default='', blank=True)
     notes = models.TextField(max_length=1024, default='', blank=True)
@@ -88,8 +112,15 @@ class TourOfDutyRef(RiddedMixin):
     degree_modificators_summary = models.TextField(max_length=1024, default="", blank=True)
     beneficeaffliction_modificators_summary = models.TextField(max_length=1024, default="", blank=True)
     blessingcurse_modificators_summary = models.TextField(max_length=1024, default="", blank=True)
-    degrees_wp_choices = models.TextField(max_length=2048, default="{}", blank=True)
-    skills_wp_choices = models.TextField(max_length=2048, default="{}", blank=True)
+    degrees_wp_choices = models.TextField(max_length=4096, default="{}", blank=True)
+    skills_wp_choices = models.TextField(max_length=4096, default="{}", blank=True)
+
+
+    # attributes_to_allocate = models.PositiveIntegerField(default=0)
+    # skills_to_allocate = models.PositiveIntegerField(default=0)
+    # degrees_to_allocate = models.PositiveIntegerField(default=0)
+
+    stored_allocator = models.TextField(max_length=1024, default='', blank=True)
 
     @classmethod
     def validity(cls):
@@ -136,6 +167,15 @@ class TourOfDutyRef(RiddedMixin):
             return total, wp_total
 
         self.toRID(f"{self.caste}_{self.category}_{self.reference}", prefix="TOD_", cypher=True)
+        self.AP = 0
+        self.OP = 0
+        self.WP = 0
+        self.SK = 0
+        self.DE = 0
+        self.BA = 0
+        self.BC = 0
+        self.SWP = 0
+        self.DWP = 0
 
         if self.is_custom:
             # All skills and degrees are wildcards in a custom ToD...
@@ -146,27 +186,20 @@ class TourOfDutyRef(RiddedMixin):
                 self.SWP = self.SK
                 self.SK = 0
             self.OP = self.DWP + self.SWP + self.BC + self.BA
-            self.value = self.AP * 3 + self.OP
             self.WP = self.DWP + self.SWP
+
+
+
         else:
-            self.AP = 0
-            self.OP = 0
-            self.WP = 0
-            self.SK = 0
-            self.DE = 0
-            self.BA = 0
-            self.BC = 0
-            self.SWP = 0
-            self.DWP = 0
             texts = []
-            # Attributes
+            # ATTRIBUTES
             attributes = ["str", "con", "bod", "mov", "int", "wil", "tem", "pre", "dex", "tec", "agi", "awa", "occ",
                           "drk"]
             hrlist_attributes = []
             for attribute in attributes:
                 self.AP += getAttribute(attribute, hrlist_attributes)
-            # if len(hrlist_attributes) == 0:
-            #     hrlist_attributes = ["Attributes: None"]
+            if self.PA_DRK > 0:
+                self.AP -= 2*self.PA_DRK
             if len(hrlist_attributes) > 0:
                 texts.append("Attributes: " + ", ".join(hrlist_attributes))
 
@@ -174,13 +207,29 @@ class TourOfDutyRef(RiddedMixin):
             hrlist_skills = []
             items = self.skillmodificator_set.all()
             self.SK, self.SWP = getFromList(items, hrlist_skills, "skill_ref")
-            #print(hrlist_skills, self.SP)
+            # print(hrlist_skills, self.SP)
             self.skill_modificators_summary = "Skills: "
             if len(hrlist_skills) > 0:
                 hrlist_skills.sort()
                 self.skill_modificators_summary += ", ".join(hrlist_skills)
             else:
                 self.skill_modificators_summary = ""
+
+            # SKILL CHOICES
+            skills_wp_choices = {}
+            for sm in items:
+                if sm.skill_ref.is_wildcard:
+                    if sm.skill_ref.reference not in skills_wp_choices:
+                        skills_wp_choices[sm.skill_ref.reference] = {'value': 0, 'list': [], "fulfilled": 0}
+                    wclist = sm.skill_ref.as_wildcard_of.split(", ")
+                    for x in wclist:
+                        if x not in skills_wp_choices[sm.skill_ref.reference]['list']:
+                            skills_wp_choices[sm.skill_ref.reference]['list'].append(x)
+                    skills_wp_choices[sm.skill_ref.reference]['value'] += sm.value
+                else:
+                    print(f"Forget about {sm.skill_ref}, this is no wildcard.")
+            print(f"WILDCARDS (Skills): [ToD={self.reference}]: {skills_wp_choices}")
+            self.skills_wp_choices = json.dumps(skills_wp_choices)
 
             # DEGREES
             hrlist_degrees = []
@@ -192,12 +241,13 @@ class TourOfDutyRef(RiddedMixin):
                 self.degree_modificators_summary += ", ".join(hrlist_degrees)
             else:
                 self.degree_modificators_summary = ""
+
+            # DEGREE CHOICES
             degrees_wp_choices = {}
             for dm in items:
                 if dm.degree_ref.is_wildcard:
                     if dm.degree_ref.reference not in degrees_wp_choices:
-                        degrees_wp_choices[dm.degree_ref.reference] = {'value':0,'list':[],"fulfilled":0}
-
+                        degrees_wp_choices[dm.degree_ref.reference] = {'value': 0, 'list': [], "fulfilled": 0}
                     wclist = dm.degree_ref.as_wildcard_of.split(", ")
                     for x in wclist:
                         if x not in degrees_wp_choices[dm.degree_ref.reference]['list']:
@@ -205,12 +255,12 @@ class TourOfDutyRef(RiddedMixin):
                     degrees_wp_choices[dm.degree_ref.reference]['value'] += dm.value
                 else:
                     print(f"Forget about {dm.degree_ref}, this is no wildcard.")
-            print(f"WILDCARDS: [ToD={self.reference}]: {degrees_wp_choices}")
+            print(f"WILDCARDS (Degrees): [ToD={self.reference}]: {degrees_wp_choices}")
             self.degrees_wp_choices = json.dumps(degrees_wp_choices)
 
             self.WP = self.SWP + self.DWP
 
-            # BLESSINGS/CURSES
+            # BLESSINGS/CURSES (BCW should not be affected by lists)
             hrlist_bc = []
             items = self.blessingcursemodificator_set.all()
             self.BC, _ = getFromList(items, hrlist_bc, "blessing_curse_ref")
@@ -220,7 +270,7 @@ class TourOfDutyRef(RiddedMixin):
                 self.blessingcurse_modificators_summary += ", ".join(hrlist_bc)
             else:
                 self.blessingcurse_modificators_summary = ""
-            # BENEFICES/AFFLICTIONS
+            # BENEFICES/AFFLICTIONS (BAW should not be affected by lists)
             hrlist_ba = []
             items = self.beneficeafflictionmodificator_set.all()
             self.BA, _ = getFromList(items, hrlist_ba, "benefice_affliction_ref")
@@ -241,10 +291,34 @@ class TourOfDutyRef(RiddedMixin):
                 texts.append(self.blessingcurse_modificators_summary)
             self.OP = self.SK + self.DE + self.BC + self.BA + self.WP
             self.value = (self.AP + self.balance_AP) * 3 + (self.OP + self.balance_OP)
-            #texts.append(f"AP:{self.AP}({self.AP*3}) OP:{self.OP} WP:{self.WP}  SK:{self.SK} DE:{self.DE}  BC:{self.BC} BA:{self.BA} SWP:{self.SWP} DWP:{self.DWP} = {self.value}")
+            # texts.append(f"AP:{self.AP}({self.AP*3}) OP:{self.OP} WP:{self.WP}  SK:{self.SK} DE:{self.DE}  BC:{self.BC} BA:{self.BA} SWP:{self.SWP} DWP:{self.DWP} = {self.value}")
             self.description = "; ".join(texts)
+
             self.check_value()
             print(self.__class__.validity())
+
+        # Common ground custom or not
+        self.AWP = self.PA_C1P + self.PA_C1M + self.PA_C1C + self.PA_C1F
+        self.value = (self.AP + self.AWP) * 3 \
+                     + self.DWP + self.DE \
+                     + self.SWP + self.SK \
+                     + self.BC + self.BCW \
+                     + self.BA + self.BAW
+
+        a = Allocator()
+        a.restore(self.stored_allocator)
+        a.set(self.AP, "fixed", "AP")
+        a.set(self.AWP, "wildcard", "AP")
+        a.set(self.DWP, "wildcard", "DP")
+        a.set(self.DE, "fixed", "DP")
+        a.set(self.SWP, "wildcard", "SP")
+        a.set(self.SK, "fixed", "SP")
+        a.set(self.BC, "fixed", "BC")
+        a.set(self.BCW, "wildcard", "BC")
+        a.set(self.BA, "fixed", "BA")
+        a.set(self.BAW, "wildcard", "BA")
+        self.stored_allocator = a.as_string
+
         self.need_fix = False
 
     # def fix75(self):
@@ -301,7 +375,7 @@ class TourOfDutyRef(RiddedMixin):
             elif self.caste == 'Caliphate (U)':
                 self.valid = self.value == 9
                 self.topic = ''
-            elif self.caste in ['Nobility','Alien']:
+            elif self.caste in ['Nobility', 'Alien']:
                 self.valid = self.value == 20
             else:
                 self.valid = self.value in [15, 5]
@@ -414,8 +488,8 @@ class TourOfDuty(models.Model):
             for ba in tod.beneficeafflictionmodificator_set.all():
                 ch.add_ba(ba.benefice_affliction_ref)
                 BA += ba.benefice_affliction_ref.value
-        #AP += tod.balance_AP
-        #OP += tod.balance_OP
+            # AP += tod.balance_AP
+            # OP += tod.balance_OP
             OP = SK + DE + BC + BA
 
         return AP, OP, SWP, DWP, SK, DE, BC, BA

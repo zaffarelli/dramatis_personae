@@ -354,6 +354,7 @@ class Character(Combattant):
         for tod in self.tourofduty_set.all():
             AP, OP, SWP, DWP, SK, DE, BC, BA = tod.push(self)
             self.charactercusto.register_tod_wp(tod.tour_of_duty_ref.degrees_wp_choices)
+            self.charactercusto.register_tod(tod)
             todname = f"{tod.tour_of_duty_ref.reference:.<30}"
             todcat = f"{tod.tour_of_duty_ref.get_category_display()[:2]}"
             todval = f"{tod.tour_of_duty_ref.value:_>3}"

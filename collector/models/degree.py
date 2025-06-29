@@ -46,6 +46,9 @@ class DegreeRef(RiddedMixin):
                 for candidate in candidates:
                     items.append(candidate.reference)
                 self.as_wildcard_of = ", ".join(items)
+            else:
+                self.as_wildcard_of = "*"
+
         else:
             k = 4
             self.refval = ""

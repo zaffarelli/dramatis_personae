@@ -50,6 +50,19 @@ class SkillRef(RiddedMixin):
         return f"{self.reference} [{self.group}]"
 
     def fix(self):
+        if self.is_wildcard:
+            #self.refval = self.reference
+            if self.group_wildcard:
+                candidates = SkillRef.objects.filter(is_wildcard=False).filter(group=self.group)
+                items = []
+                for candidate in candidates:
+                    items.append(candidate.reference)
+                self.as_wildcard_of = ", ".join(items)
+            else:
+                self.as_wildcard_of = "*"
+            print(self.as_wildcard_of)
+        else:
+            self.as_wildcard_of = ""
         self.toRID(self.reference, True, "sk")
         self.acro = ("SK_" + self.reference[:3]).upper()
 
@@ -77,6 +90,9 @@ class Skill(RiddedMixin):
         #     character_rid = ch.rid
         #     skill_ref_rid = sr.rid
         #self.toRID(f"{self.skill_ref.reference}_{character_rid}_{skill_ref_rid}")
+
+
+
         self.toRID(f"{self.character.full_name}={self.skill_ref.reference}")
 
 

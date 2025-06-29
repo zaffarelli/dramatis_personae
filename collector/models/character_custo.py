@@ -54,10 +54,21 @@ class CharacterCusto(models.Model):
     def set_degrees_wp_choices(self, x):
         self.degrees_wp_choices_str = json.dumps(x, indent=4, sort_keys=True)
 
-    def recalculate(self):
+    def reset_allocated(self):
+        self.allocated_attributes = 0
+        self.allocated_degrees = 0
+        self.allocated_skills = 0
 
+    def recalculate(self):
+        """
+        All manually added changes are recalculated here.
+        :return:
+        """
         self.AP = 0
         self.OP = 0
+
+
+
         #self.wp_used = 0
         #wp_roots = self.watch_roots.split("_")
         self.AP += (self.PA_STR + self.PA_CON + self.PA_BOD + self.PA_MOV
@@ -65,17 +76,22 @@ class CharacterCusto(models.Model):
                     + self.PA_DEX + self.PA_TEC + self.PA_AGI + self.PA_AWA
                     )
         self.AP += (self.PA_OCC - self.PA_DRK)
+
+        self.allocated_attributes = self.AP
+
         for s in self.skillcusto_set.all():
             if s.value == 0:
                 s.delete()
         for s in self.skillcusto_set.all():
             self.OP += s.value
+            self.allocated_skills += s.value
         for d in self.degreecusto_set.all():
             if d.value <= 0:
                 print(f"Removing {d.degree_ref.reference}")
                 d.delete()
         for d in self.degreecusto_set.all():
             self.OP += d.value
+            self.allocated_degrees += d.value
         for bc in self.blessingcursecusto_set.all():
             self.OP += bc.blessing_curse_ref.value
         for ba in self.beneficeafflictioncusto_set.all():
@@ -295,3 +311,16 @@ class CharacterCusto(models.Model):
             else:
                 degrees_wp_choices[k] = {"value": v["value"], "list": v["list"], "fulfilled": 0}
         self.set_degrees_wp_choices(degrees_wp_choices)
+
+    def register_tod(self, tod):
+        # from collector.models.tourofduty import TourOfDuty
+        from collector.utils.allocator import Allocator
+        # self.attributes_to_allocate = tod.tour_of_duty_ref.attributes_to_allocate
+        # self.skills_to_allocate = tod.tour_of_duty_ref.skills_to_allocate
+        # self.degrees_to_allocate = tod.tour_of_duty_ref.degrees_to_allocate
+
+
+        a = Allocator()
+        a.restore(tod.tour_of_duty_ref.stored_allocator)
+        print(f"{tod.tour_of_duty_ref.reference} fulfillness: {"YES" if a.fulfilled else "NO"}")
+
