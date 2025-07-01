@@ -65,10 +65,7 @@ class CharacterCusto(models.Model):
         :return:
         """
         self.AP = 0
-        self.OP = 0
-
-
-
+        self.OP = 0a
         #self.wp_used = 0
         #wp_roots = self.watch_roots.split("_")
         self.AP += (self.PA_STR + self.PA_CON + self.PA_BOD + self.PA_MOV

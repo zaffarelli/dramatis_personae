@@ -16,18 +16,12 @@ class SkillRef(RiddedMixin):
         verbose_name = "FICS: Skill"
 
     reference = models.CharField(default="", max_length=200, blank=True)
-    # is_root = models.BooleanField(default=False, blank=True)
-    # is_speciality = models.BooleanField(default=False, blank=True)
     is_common = models.BooleanField(default=True, blank=True)
     is_wildcard = models.BooleanField(default=False, blank=True)
     group_wildcard = models.BooleanField(default=False, blank=True)
-#as_wildcard_of = models.CharField(default="", max_length=256, blank=True)
     group = models.CharField(default="EDU", max_length=3, choices=fics_references.GROUPCHOICES, blank=True)
     linked_to = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE)
     description = models.TextField(max_length=1024, default='', blank=True)
-    # attributes = models.TextField(max_length=64, default='', blank=True)
-    # grouping = models.CharField(max_length=64, default='', blank=True)
-    # deprecated = models.BooleanField(default=False, blank=True)
     acro = models.CharField(default="", max_length=7, blank=True)
 
     as_wildcard_of = models.CharField(default="", max_length=512, blank=True)
@@ -64,8 +58,10 @@ class SkillRef(RiddedMixin):
         else:
             self.as_wildcard_of = ""
         self.toRID(self.reference, True, "sk")
-        self.acro = ("SK_" + self.reference[:3]).upper()
-
+        if self.is_wildcard:
+            self.acro = ("WC_" + self.reference[:3]).upper()
+        else:
+            self.acro = ("SK_" + self.reference[:3]).upper()
 
 class Skill(RiddedMixin):
     class Meta:
