@@ -18,6 +18,10 @@ class CharacterCusto(models.Model):
     value = models.IntegerField(default=0)
     AP = models.IntegerField(default=0)
     OP = models.IntegerField(default=0)
+    SP = models.IntegerField(default=0, blank=True)
+    DP = models.IntegerField(default=0, blank=True)
+    BA = models.IntegerField(default=0, blank=True)
+    BC = models.IntegerField(default=0, blank=True)
     PA_STR = models.PositiveIntegerField(default=0)
     PA_CON = models.PositiveIntegerField(default=0)
     PA_BOD = models.PositiveIntegerField(default=0)
@@ -38,14 +42,15 @@ class CharacterCusto(models.Model):
     wp_used = models.PositiveIntegerField(default=0)
     degree_wp_watch = {}
     degrees_wp_choices_str = models.TextField(default='{}', max_length=2048, blank=True)
+    stored_allocator = models.TextField(max_length=1024, default='', blank=True)
 
-    attributes_to_allocate = models.PositiveIntegerField(default=0)
-    skills_to_allocate = models.PositiveIntegerField(default=0)
-    degrees_to_allocate = models.PositiveIntegerField(default=0)
-
-    allocated_attributes = models.PositiveIntegerField(default=0)
-    allocated_skills = models.PositiveIntegerField(default=0)
-    allocated_degrees = models.PositiveIntegerField(default=0)
+    # attributes_to_allocate = models.PositiveIntegerField(default=0)
+    # skills_to_allocate = models.PositiveIntegerField(default=0)
+    # degrees_to_allocate = models.PositiveIntegerField(default=0)
+    #
+    # allocated_attributes = models.PositiveIntegerField(default=0)
+    # allocated_skills = models.PositiveIntegerField(default=0)
+    # allocated_degrees = models.PositiveIntegerField(default=0)
 
 
     def get_degrees_wp_choices(self):
@@ -54,55 +59,67 @@ class CharacterCusto(models.Model):
     def set_degrees_wp_choices(self, x):
         self.degrees_wp_choices_str = json.dumps(x, indent=4, sort_keys=True)
 
-    def reset_allocated(self):
-        self.allocated_attributes = 0
-        self.allocated_degrees = 0
-        self.allocated_skills = 0
+    # def reset_allocated(self):
+    #     self.allocated_attributes = 0
+    #     self.allocated_degrees = 0
+    #     self.allocated_skills = 0
 
     def recalculate(self):
         """
         All manually added changes are recalculated here.
         :return:
         """
+        from collector.utils.allocator import Allocator
+        # Clean ups
+        for s in self.skillcusto_set.all():
+            if s.value <= 0:
+                s.delete()
+        for d in self.degreecusto_set.all():
+            if d.value <= 0:
+                d.delete()
+        a = Allocator()
+        a.restore(self.stored_allocator)
         self.AP = 0
-        self.OP = 0a
-        #self.wp_used = 0
-        #wp_roots = self.watch_roots.split("_")
+        self.OP = 0
+        self.SP = 0
+        self.DP = 0
+        self.BA = 0
+        self.BC = 0
         self.AP += (self.PA_STR + self.PA_CON + self.PA_BOD + self.PA_MOV
                     + self.PA_INT + self.PA_WIL + self.PA_TEM + self.PA_PRE
                     + self.PA_DEX + self.PA_TEC + self.PA_AGI + self.PA_AWA
                     )
-        self.AP += (self.PA_OCC - self.PA_DRK)
-
-        self.allocated_attributes = self.AP
-
-        for s in self.skillcusto_set.all():
-            if s.value == 0:
-                s.delete()
+        self.AP += (self.PA_OCC + self.PA_DRK)
+        a.set(self.AP,"allocated","AP")
         for s in self.skillcusto_set.all():
             self.OP += s.value
-            self.allocated_skills += s.value
-        for d in self.degreecusto_set.all():
-            if d.value <= 0:
-                print(f"Removing {d.degree_ref.reference}")
-                d.delete()
+            self.SP += s.value
+        a.set(self.SP, "allocated", "SP")
         for d in self.degreecusto_set.all():
             self.OP += d.value
-            self.allocated_degrees += d.value
+            self.DP += d.value
+        a.set(self.DP, "allocated", "DP")
         for bc in self.blessingcursecusto_set.all():
             self.OP += bc.blessing_curse_ref.value
+            self.BC += bc.blessing_curse_ref.value
+        a.set(self.BC, "allocated", "BC")
         for ba in self.beneficeafflictioncusto_set.all():
             self.OP += ba.benefice_affliction_ref.value
+            self.BA += bc.benefice_affliction_ref.value
+        a.set(self.BA, "allocated", "BA")
         self.value = self.AP * 3 + self.OP
+        self.stored_allocator = a.as_string
         self.rebuild_summary()
 
     def rebuild_summary(self):
+        from collector.utils.allocator import Allocator
+        a = Allocator()
+        a.restore(self.stored_allocator)
+
         self.summary = ""
         self.summary += "<b>Allocation</b>"
         self.summary += "<ul>"
-        self.summary += f"<li><tt>Attributes..... {self.allocated_attributes:3} / {self.attributes_to_allocate:3}</tt></li>"
-        self.summary += f"<li><tt>Skills......... {self.allocated_skills:3} / {self.skills_to_allocate:3}</tt></li>"
-        self.summary += f"<li><tt>Degrees........ {self.allocated_degrees:3} / {self.degrees_to_allocate:3}</tt></li>"
+        self.summary += a.toSummary()
         self.summary += "</ul>"
         self.summary += "Attributes"
         self.summary += "<ul>"
@@ -310,13 +327,7 @@ class CharacterCusto(models.Model):
         self.set_degrees_wp_choices(degrees_wp_choices)
 
     def register_tod(self, tod):
-        # from collector.models.tourofduty import TourOfDuty
         from collector.utils.allocator import Allocator
-        # self.attributes_to_allocate = tod.tour_of_duty_ref.attributes_to_allocate
-        # self.skills_to_allocate = tod.tour_of_duty_ref.skills_to_allocate
-        # self.degrees_to_allocate = tod.tour_of_duty_ref.degrees_to_allocate
-
-
         a = Allocator()
         a.restore(tod.tour_of_duty_ref.stored_allocator)
         print(f"{tod.tour_of_duty_ref.reference} fulfillness: {"YES" if a.fulfilled else "NO"}")

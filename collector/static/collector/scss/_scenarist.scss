@@ -194,6 +194,50 @@
     }
 }
 
+
+.storyarticle{
+    & .update {
+        font-size:1.15em;
+                background: $fics_dark;
+                width: 100%;
+                border: none;
+
+                & input, & textarea {
+                    width: 90%;
+                    background: silver;
+                }
+
+                & tr {
+                    & th {
+                        width: 15%;
+                        color: $fics_darkest;
+                        background: $fics_front;
+                        border: none;
+                        border-radius: 5px;
+                    }
+
+                    & td {
+                        width: auto;
+                        background: $fics_darker;
+                        color: $fics_front;
+                        border: none;
+                        border-radius: 5px;
+                    }
+                }
+
+                & input[type=text], & input[type=number], & input[type=checkbox],
+                & select, & textarea {
+                    background-color: $fics_dark;
+                    color: $fics_front;
+                    border-radius: 2px;
+                    padding: 2px;
+                    border: 2px ridge $fics_hl;
+                    box-shadow: -2px -2px 5px $fics_darker;
+                    font-size:1.15em;
+                }
+            }
+}
+
 //
 // .mosaic{
 //     &.tile.storyview {

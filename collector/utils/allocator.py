@@ -44,12 +44,9 @@ class Allocator:
     def __init__(self):
         self.as_string
 
-    def restore(self,str=''):
+    def restore(self, str=''):
         self.defstring = str
         self.as_matrix
-
-
-
 
     def check(self):
         for row, values in self.matrix.items():
@@ -86,7 +83,7 @@ class Allocator:
 
     @property
     def as_matrix(self):
-        for row,values in self.matrix.items():
+        for row, values in self.matrix.items():
             for item in values.keys():
                 self.matrix[row][item] = 0
         if self.defstring != "":
@@ -111,3 +108,12 @@ class Allocator:
 
     def get(self, a, b):
         return int(self.matrix[a][b])
+
+    def toSummary(self):
+        str = ""
+        str += f"<li><tt>Attributes..... {self.get("fixed", "AP"):3d} | {self.get("wildcard", "AP"):3d} | {self.get("allocated", "AP"):3d} | {self.get("fulfilled", "AP"):3d}</tt></li>"
+        str += f"<li><tt>Skills......... {self.get("fixed", "SP"):3d} | {self.get("wildcard", "SP"):3d} | {self.get("allocated", "SP"):3d} | {self.get("fulfilled", "SP"):3d}</tt></li>"
+        str += f"<li><tt>Degrees........ {self.get("fixed", "DP"):3d} | {self.get("wildcard", "DP"):3d} | {self.get("allocated", "DP"):3d} | {self.get("fulfilled", "DP"):3d}</tt></li>"
+        str += f"<li><tt>B/C............ {self.get("fixed", "BC"):3d} | {self.get("wildcard", "BC"):3d} | {self.get("allocated", "BC"):3d} | {self.get("fulfilled", "BC"):3d}</tt></li>"
+        str += f"<li><tt>B/A............ {self.get("fixed", "BA"):3d} | {self.get("wildcard", "BA"):3d} | {self.get("allocated", "BA"):3d} | {self.get("fulfilled", "BA"):3d}</tt></li>"
+        return str

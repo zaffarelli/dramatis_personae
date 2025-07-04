@@ -114,12 +114,6 @@ class TourOfDutyRef(RiddedMixin):
     blessingcurse_modificators_summary = models.TextField(max_length=1024, default="", blank=True)
     degrees_wp_choices = models.TextField(max_length=4096, default="{}", blank=True)
     skills_wp_choices = models.TextField(max_length=4096, default="{}", blank=True)
-
-
-    # attributes_to_allocate = models.PositiveIntegerField(default=0)
-    # skills_to_allocate = models.PositiveIntegerField(default=0)
-    # degrees_to_allocate = models.PositiveIntegerField(default=0)
-
     stored_allocator = models.TextField(max_length=1024, default='', blank=True)
 
     @classmethod
