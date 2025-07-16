@@ -3,16 +3,18 @@
 
 
 {% if c.blessingcurse_set.count != 0 %}
-<table  class='unbreakable' id='bc_{{c.id}}' width='100%'>
-<tr><th colspan=3>Blessings/Curses ({{c.BC_TOTAL}})</th></tr>
+<table class='unbreakable list' id='bc_{{c.id}}'>
 <tr>
-{% for bc in c.blessingcurse_set.all %}
-<td>{{ bc.blessing_curse_ref.reference|safe }}</td>
-<td>{{ bc.blessing_curse_ref.value }}</td>
-<td>{{ bc.description }}</td>
+    <th colspan=3>Blessings/Curses ({{c.BC_TOTAL}})</th>
 </tr>
-{% endfor %}
+    {% for bc in c.blessingcurse_set.all %}
+    <tr>
+        <td class="title">{{ bc.blessing_curse_ref.reference|safe }}</td>
+        <td class="text">{{ bc.description }}</td>
+        <td class="value">{{ bc.blessing_curse_ref.value }}</td>
+    </tr>
+    {% endfor %}
 </table>
 {%else%}
-&nbsp;
+    No blessing/curses&nbsp;
 {%endif%}

@@ -41,8 +41,8 @@ def check_gm_shortcuts(ch, sk):
     if sk.skill_ref.reference in SHORTCUTS:
         score = sk.value + getattr(ch, SHORTCUTS[sk.skill_ref.reference]['attribute'])
         id = ch.rid + "-" + str(score)
-        newshortcut = '<tr><td>%s</td><td colspan=4>%s</td><td>%d</td><td><i id="%s" class="action_icon dice_roll fa fa-dice"></i></td></tr>' % (
-            SHORTCUTS[sk.skill_ref.reference]['rationale'], SHORTCUTS[sk.skill_ref.reference]['label'], score, id)
+        newshortcut = '<tr><td class="title">%s</td><td class="description">%s</td><td class="value">%d</td><td><i id="%s" class="action_icon dice_roll fa fa-dice"></i></td></tr>' % (
+            SHORTCUTS[sk.skill_ref.reference]['label'],SHORTCUTS[sk.skill_ref.reference]['rationale'], score, id)
         pdf_short = {'rationale': SHORTCUTS[sk.skill_ref.reference]['rationale'],
                      'label': SHORTCUTS[sk.skill_ref.reference]['label'], 'score': score}
         return newshortcut, pdf_short

@@ -18,6 +18,20 @@
         </div>
 {#        <div class="tile_back" id="tile_back_{{c.id}}"><i class="action_icon golden fa fa-times-circle"></i></div>#}
     </div>
+
+    <div class="pager" style="order:2;">
+        <div class="nav" style="order:1">
+            <div class="tab active" id="tab1" style="order:1;" param="1">Summary</div>
+            <div class="tab" id="tab2" style="order:2;" param="2">Attributes & Skills</div>
+            <div class="tab" id="tab3" style="order:3;" param="3">Degrees</div>
+            <div class="tab" id="tab4" style="order:4;" param="4">Blessings/Curses &<br/>Benefices/Afflictions</div>
+            <div class="tab" id="tab5" style="order:5;" param="5">Occult</div>
+            <div class="tab" id="tab6" style="order:6;" param="6">Equipment</div>
+            <div class="tab" id="tab7" style="order:7;" param="7">Shortcuts</div>
+        </div>
+
+    <div class="page active" id="page1" param="1">
+
     <div class='coreblock details_section'  style="order:2;">
         <div class='details_block two_columns' style="order:1;">
         <ul>
@@ -32,12 +46,10 @@
             <li><b>Base/Current Fief</b><u>{{ c.fief }} / {{ c.current_fief }}</u></li>
             <li><b>Caste/Rank</b><u>{{ c.caste }} / {{ c.rank }}</u></li>
             <li><b>Height/Weight</b><u>{{ c.height|as_height }} / {{ c.weight|as_weight }}</u></li>
-            {% if not c.nameless %}
-            <li><b>Player</b><u>{{ c.player }}</u></li>
-            {% endif %}
-            <li><b>Keyword</b><u>{{ c.keyword }}</u></li>
+            <li><b>Keywords</b><u>{{ c.keyword }}</u></li>
             <li><b>ID</b><u>{{c.id}}</u></li>
             {% if not c.nameless %}
+            <li><b>Player</b><u>{{ c.player }}</u></li>
             <li><b>Occult</b><u>{{c.occult}}</u></li>
             <li><b>Path</b><u>{{c.path}}</u></li>
             <li><b>Occult Fire power</b><u>{{c.occult_fire_power}}</u></li>
@@ -46,16 +58,27 @@
             <li><b>Historical Figure</b><u>{{c.historical_figure|prettybool|safe}}</u></li>
             <li><b>Visible</b><u>{{c.is_visible|prettybool|safe}}</u></li>
             <li><b>Lifepath</b><u>{{c.use_history_creation|prettybool|safe}}</u></li>
-
-
-
         </ul>
         <ul>
         {% if c.tourofduty_set.count != 0 %}
             {% for tod in c.tourofduty_set.all|dictsort:"tour_of_duty_ref.category" %}
-                <li><b>{{ tod.tour_of_duty_ref.category|as_lifepath }} ({{tod.tour_of_duty_ref.value}})</b><u>
+                <li><b>{{ tod.tour_of_duty_ref.category|as_lifepath }} ({{tod.tour_of_duty_ref.value}})</b>
+                    <u>
                 <span title="{{tod.tour_of_duty_ref.description}}">{{tod.tour_of_duty_ref.reference}}</span>
-                {%if tod.tour_of_duty_ref.WP%}[{{tod.tour_of_duty_ref.WP}}]{%endif%}</u>
+                {%if tod.tour_of_duty_ref.AWP or tod.tour_of_duty_ref.SWP or tod.tour_of_duty_ref.DWP%}
+                &nbsp;[
+                {%if tod.tour_of_duty_ref.AWP%}
+                    A:{{tod.tour_of_duty_ref.AWP}}
+                {%endif%}
+                {%if tod.tour_of_duty_ref.SWP%}
+                    S:{{tod.tour_of_duty_ref.SWP}}
+                {%endif%}
+                {%if tod.tour_of_duty_ref.DWP%}
+                    D:{{tod.tour_of_duty_ref.DWP}}
+                {%endif%}
+                ]
+                {%endif%}
+                    </u>
                 </li>
             {% endfor %}
             <li></li>
@@ -67,78 +90,7 @@
     </div>
 
 
-    <div class='details_section' style="order:3;">
-        <div class="details_title">Attributes ({{c.PA_TOTAL}}x3)</div>
-        <div class='details_block attributes three_columns' style="order:2;">
-            {% include "collector/character/character_primaries.html" %}
-        </div>
-        <div class='details_block attributes three_columns' style="order:3;">
-            <table id="PA_OCC_{{c.id}}" class='attrpick occult'>
-                {% include "collector/character/character_pa.html" with c=c.info_occ %}
-            </table>
-            <table id="PA_DRK_{{c.id}}" class='attrpick occult'>
-                {% include "collector/character/character_pa.html" with c=c.info_drk %}
-            </table>
-        </div>
-    </div>
-
-    <div class='details_section' style="order:4;">
-        <div class="details_title" style="order:1;">Secondaries</div>
-        <div class='details_block six_columns' style="order:2;">
-        {% include "collector/character/character_secondaries.html" %}
-            </div>
-    </div>
-
-
-
-    <div class='details_section' id="skill_block_{{c.id}}" style="order:4;">
-        <div class="details_title" style="order:1;">Skills ({{c.SK_TOTAL}})</div>
-        <div class='details_block' style="order:2;">
-        {% include "collector/character/character_skills.html" %}
-            </div>
-    </div>
-
-    <div class='details_section' id="degree_block_{{c.id}}" style="order:5;">
-        <div class='details_title' style="order:1;">Degrees ({{c.DE_TOTAL}})</div>
-        <div class='details_block' style="order:2;">
-            {% include "collector/character/character_degrees.html" %}
-        </div>
-    </div>
-
-
-    <div class='details_section options' style="order:6;">
-        <div class="details_block two_columns" id="bc_block_{{c.id}}">
-        {% include "collector/character/character_bc.html" %}
-        </div>
-        <div class="details_block two_columns" id="ba_block_{{c.id}}">
-        {% include "collector/character/character_ba.html" %}
-        </div>
-        <<div class="details_block two_columns" id="ritual_block_{{c.id}}">
-        {% include "collector/character/character_ritual.html" %}
-        </div>
-        <div class="details_block two_columns" id="shortcuts_block_{{c.id}}">
-        {% include "collector/character/character_shortcuts.html" %}
-        </div>
-    </div>
-
-    <div class='details_section gear' style="order:7;">
-        <span id="weapon_block_{{c.id}}">
-        {% include "collector/character/character_weapon.html" %}
-        </span>
-        <span id="armor_block_{{c.id}}">
-        {% include "collector/character/character_armor.html" %}
-        </span>
-        <span id="shield_block_{{c.id}}">
-        {% include "collector/character/character_shield.html" %}
-        </span>
-    </div>
-
-    <div class='healthbar details_section' style="order:8;">
-        {#% include "collector/character/character_healthbar.html" %#}
-    </div>
-
-
-    <div class='summary details_section' style="order:9;">
+    <div class='summary details_section' style="order:2;">
         {% if c.player|is_not_blank %}
         <hr/>
         [{{ c.player }}]
@@ -158,11 +110,100 @@
         {% endif%}
         <hr/>
         <span class='golden custom_show' id='{{c.rid}}' ><a href='pdf/{{c.rid}}/' target='avatar_pdf' class="golden"><i class="fas fa-file-pdf"></i> {{c.rid}}</a></span>
-            <div class="challenge" id="challenge_{{c.id}}">{{c.challenge|safe}}</div>
+        <div class="challenge" id="challenge_{{c.id}}"><code>{{c.challenge|safe}}</code></div>
+    </div>
+
+    </div>
+    <div class="page" id="page2" param="2">
+
+    <div class='details_section' style="order:3;">
+        <div class="details_title">Attributes ({{c.PA_TOTAL}}x3)</div>
+        <div class='details_block attributes three_columns' style="order:2;">
+            {% include "collector/character/character_primaries.html" %}
         </div>
+        <div class='details_block attributes three_columns' style="order:3;">
+            <table id="PA_OCC_{{c.id}}" class='attrpick occult'>
+                {% include "collector/character/character_pa.html" with c=c.info_occ %}
+            </table>
+            <table id="PA_DRK_{{c.id}}" class='attrpick occult'>
+                {% include "collector/character/character_pa.html" with c=c.info_drk %}
+            </table>
+        </div>
+
+    </div>
+
+    <div class='details_section' style="order:4;">
+        <div class="details_title" style="order:1;">Secondaries</div>
+        <div class='details_block six_columns' style="order:2;">
+        {% include "collector/character/character_secondaries.html" %}
+            </div>
+    </div>
+
+    <div class='details_section' id="skill_block_{{c.id}}" style="order:4;">
+        <div class="details_title" style="order:1;">Skills ({{c.SK_TOTAL}})</div>
+        <div class='details_block' style="order:2;">
+        {% include "collector/character/character_skills.html" %}
+            </div>
+    </div>
+
+
+    </div>
+    <div class="page" id="page3" param="3">
+<div class='details_section' id="degree_block_{{c.id}}" style="order:5;">
+        <div class='details_title' style="order:1;">Degrees ({{c.DE_TOTAL}})</div>
+        <div class='details_block' style="order:2;">
+            {% include "collector/character/character_degrees.html" %}
+        </div>
+    </div>
+
+    </div>
+    <div class="page" id="page4" param="4">
+        <div class="details_block two_columns" id="bc_block_{{c.id}}">
+        {% include "collector/character/character_bc.html" %}
+        </div>
+        <div class="details_block two_columns" id="ba_block_{{c.id}}">
+        {% include "collector/character/character_ba.html" %}
+        </div>
+
+
+    </div>
+    <div class="page" id="page5" param="5">
+        <div class='details_section options' style="order:6;">
+            <div class="details_block two_columns" id="ritual_block_{{c.id}}">
+                {% include "collector/character/character_ritual.html" %}
+            </div>
+        </div>
+
+    </div>
+    <div class="page" id="page6" param="6">
+
+    <div class='details_section gear' style="order:7;">
+        <span id="weapon_block_{{c.id}}">
+        {% include "collector/character/character_weapon.html" %}
+        </span>
+        <span id="armor_block_{{c.id}}">
+        {% include "collector/character/character_armor.html" %}
+        </span>
+        <span id="shield_block_{{c.id}}">
+        {% include "collector/character/character_shield.html" %}
+        </span>
+    </div>
+
+    </div>
+    <div class="page" id="page7" param="7">
+    <div class='healthbar details_section' style="order:8;">
+        {#% include "collector/character/character_healthbar.html" %#}
+    </div>
+        <div class="details_block two_columns" id="shortcuts_block_{{c.id}}">
+        {% include "collector/character/character_shortcuts.html" %}
+        </div>
+
+
     </div>
 <!--    <div class="details_section portrait" style="order:10;">-->
 <!--            <img src="{{c.rid|as_media_image}}">-->
 <!--    </div>-->
+        </div>
+        </div>
 </div>
 {% endblock details %}

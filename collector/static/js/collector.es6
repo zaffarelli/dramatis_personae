@@ -221,6 +221,18 @@ class Collector {
         });
     }
 
+    registerTabs() {
+        $(".tab").off().on("click", function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            $(".tab").removeClass("active")
+            $(".page").removeClass("active")
+            let p = $(this).attr("param")
+            $("#tab"+p).addClass("active")
+            $("#page"+p).addClass("active")
+        });
+    }
+
     registerFigures() {
         $(".figureshow").off().on("click", function (e) {
             e.preventDefault();
@@ -313,6 +325,7 @@ class Collector {
         me.registerSlugItems();
         me.registerSlugPageItems();
         me.registerPullDowns();
+        me.registerTabs();
         me.registerFigures();
         me.registerCharsels();
         me.registerOthers()

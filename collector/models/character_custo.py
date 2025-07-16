@@ -15,9 +15,9 @@ class CharacterCusto(models.Model):
 
     from collector.models.character import Character
     character = models.OneToOneField(Character, on_delete=models.CASCADE, primary_key=True)
-    value = models.IntegerField(default=0)
-    AP = models.IntegerField(default=0)
-    OP = models.IntegerField(default=0)
+    value = models.IntegerField(default=0, blank=True)
+    AP = models.IntegerField(default=0, blank=True)
+    OP = models.IntegerField(default=0, blank=True)
     SP = models.IntegerField(default=0, blank=True)
     DP = models.IntegerField(default=0, blank=True)
     BA = models.IntegerField(default=0, blank=True)
@@ -41,8 +41,9 @@ class CharacterCusto(models.Model):
     watch_roots = models.TextField(default="", blank=True)
     wp_used = models.PositiveIntegerField(default=0)
     degree_wp_watch = {}
-    degrees_wp_choices_str = models.TextField(default='{}', max_length=2048, blank=True)
-    stored_allocator = models.TextField(max_length=1024, default='', blank=True)
+    degrees_wp_choices_str = models.TextField(default='{}', max_length=4096, blank=True)
+    skills_wp_choices_str = models.TextField(default='{}', max_length=4096, blank=True)
+    stored_allocator = models.TextField(max_length=4096, default='', blank=True)
 
     # attributes_to_allocate = models.PositiveIntegerField(default=0)
     # skills_to_allocate = models.PositiveIntegerField(default=0)
@@ -52,62 +53,69 @@ class CharacterCusto(models.Model):
     # allocated_skills = models.PositiveIntegerField(default=0)
     # allocated_degrees = models.PositiveIntegerField(default=0)
 
-
     def get_degrees_wp_choices(self):
         return json.loads(self.degrees_wp_choices_str)
 
     def set_degrees_wp_choices(self, x):
         self.degrees_wp_choices_str = json.dumps(x, indent=4, sort_keys=True)
 
-    # def reset_allocated(self):
-    #     self.allocated_attributes = 0
-    #     self.allocated_degrees = 0
-    #     self.allocated_skills = 0
+    def get_skills_wp_choices(self):
+        return json.loads(self.skills_wp_choices_str)
 
-    def recalculate(self):
-        """
-        All manually added changes are recalculated here.
-        :return:
-        """
+    def set_skills_wp_choices(self, x):
+        self.skills_wp_choices_str = json.dumps(x, indent=4, sort_keys=True)
+
+    def fix(self):
         from collector.utils.allocator import Allocator
-        # Clean ups
-        for s in self.skillcusto_set.all():
-            if s.value <= 0:
-                s.delete()
-        for d in self.degreecusto_set.all():
-            if d.value <= 0:
-                d.delete()
         a = Allocator()
         a.restore(self.stored_allocator)
+        # Attributes
         self.AP = 0
-        self.OP = 0
         self.SP = 0
         self.DP = 0
         self.BA = 0
         self.BC = 0
-        self.AP += (self.PA_STR + self.PA_CON + self.PA_BOD + self.PA_MOV
-                    + self.PA_INT + self.PA_WIL + self.PA_TEM + self.PA_PRE
-                    + self.PA_DEX + self.PA_TEC + self.PA_AGI + self.PA_AWA
-                    )
-        self.AP += (self.PA_OCC + self.PA_DRK)
-        a.set(self.AP,"allocated","AP")
+        self.value = 0
+        ## Basic Attributes
+        self.AP += self.PA_STR + self.PA_CON + self.PA_BOD + self.PA_MOV
+        self.AP += self.PA_INT + self.PA_WIL + self.PA_TEM + self.PA_PRE
+        self.AP += self.PA_DEX + self.PA_TEC + self.PA_AGI + self.PA_AWA
+        ## Occult Attributes
+        self.AP += self.PA_OCC + self.PA_DRK
+        a.stack(self.AP, "allocated", "AP")
+        self.value += self.AP * 3
+        # Skills
+        ## Clean up
+        for s in self.skillcusto_set.all():
+            if s.value <= 0:
+                s.delete()
         for s in self.skillcusto_set.all():
             self.OP += s.value
             self.SP += s.value
-        a.set(self.SP, "allocated", "SP")
+        a.stack(self.SP, "allocated", "SP")
+        self.value += self.SP
+        # Degrees
+        ## Clean up
+        for d in self.degreecusto_set.all():
+            if d.value <= 0:
+                d.delete()
         for d in self.degreecusto_set.all():
             self.OP += d.value
             self.DP += d.value
-        a.set(self.DP, "allocated", "DP")
+        a.stack(self.DP, "allocated", "DP")
+        self.value += self.DP
+        # Benefices/Afflictions
+        for ba in self.beneficeafflictioncusto_set.all():
+            self.OP += ba.benefice_affliction_ref.value
+            self.BA += ba.benefice_affliction_ref.value
+        a.stack(self.BA, "allocated", "BA")
+        self.value += self.BA
+        # Blessings/Curses
         for bc in self.blessingcursecusto_set.all():
             self.OP += bc.blessing_curse_ref.value
             self.BC += bc.blessing_curse_ref.value
-        a.set(self.BC, "allocated", "BC")
-        for ba in self.beneficeafflictioncusto_set.all():
-            self.OP += ba.benefice_affliction_ref.value
-            self.BA += bc.benefice_affliction_ref.value
-        a.set(self.BA, "allocated", "BA")
-        self.value = self.AP * 3 + self.OP
+        a.stack(self.BC, "allocated", "BC")
+        self.value += self.BC
         self.stored_allocator = a.as_string
         self.rebuild_summary()
 
@@ -115,12 +123,10 @@ class CharacterCusto(models.Model):
         from collector.utils.allocator import Allocator
         a = Allocator()
         a.restore(self.stored_allocator)
-
+        print("REBUILD SUMMARY",a.matrix)
         self.summary = ""
-        self.summary += "<b>Allocation</b>"
-        self.summary += "<ul>"
+        self.summary += "<b>Allocation</b><br/>"
         self.summary += a.toSummary()
-        self.summary += "</ul>"
         self.summary += "Attributes"
         self.summary += "<ul>"
         if self.PA_STR != 0:
@@ -155,11 +161,10 @@ class CharacterCusto(models.Model):
         if self.PA_DRK != 0:
             self.summary += "<li>Darkside  %d</li>" % (self.PA_DRK)
         self.summary += "</ul>"
-        self.summary += "Wildcards"
+        self.summary += "Wildcards Completion"
         self.summary += "<ul>"
-        self.summary += f'<li>WP used: {self.wp_used}</li>'
-        self.summary += f'<li>ToD Skills WP: {self.character.SWP_tod_pool}</li>'
-        self.summary += f'<li>ToD Degrees WP: {self.character.DWP_tod_pool}</li>'
+        self.summary += f'<li>Skills Wildcards: {self.character.SWP_tod_pool}</li>'
+        self.summary += f'<li>Degrees Wildcards: {self.character.DWP_tod_pool}</li>'
 
         data = self.get_degrees_wp_choices()
         if data != {}:
@@ -173,7 +178,6 @@ class CharacterCusto(models.Model):
         self.summary += "Skills"
         self.summary += "<ul>"
         for s in self.skillcusto_set.all():
-            # if s.skill_ref.is_root == False:
             self.summary += "<li>%s +%d</li>" % (s.skill_ref.reference, s.value)
         self.summary += "</ul>"
         self.summary += "Degrees"
@@ -228,9 +232,16 @@ class CharacterCusto(models.Model):
         ch.PA_OCC += self.PA_OCC
         ch.PA_DRK += self.PA_DRK
 
+        ch.AP = self.PA_STR + self.PA_CON + self.PA_BOD + self.PA_MOV + self.PA_INT + self.PA_WIL + self.PA_TEM + self.PA_PRE + self.PA_DEX + self.PA_TEC + self.PA_AGI + self.PA_AWA + self.PA_OCC + self.PA_DRK
 
         # Skills Custo
+        skills_wp_choices = self.get_skills_wp_choices()
         for sc in self.skillcusto_set.all():
+            for k, v in skills_wp_choices.items():
+                if sc.skill_ref.reference in v['list']:
+                    v['fulfilled'] += sc.value
+                if v['value'] < v['fulfilled']:
+                    v['fulfilled'] = v['value']
             ch.add_or_update_skill(sc.skill_ref, sc.value)
         # Degrees Custo
         # self.degree_wp_watch = {}
@@ -243,7 +254,6 @@ class CharacterCusto(models.Model):
                     v['fulfilled'] = v['value']
             ch.add_or_update_degree(dc.degree_ref, dc.value)
         self.set_degrees_wp_choices(degrees_wp_choices)
-
 
         # Blessings/Curses
         for bc in self.blessingcursecusto_set.all():
@@ -314,9 +324,34 @@ class CharacterCusto(models.Model):
             degree_custo.character_custo = self
             degree_custo.save()
 
-    def register_tod_wp(self, str):
-        import json
+    # def register_tod_wp(self, str):
+    #     import json
+    #     degrees_wp_choices = self.get_degrees_wp_choices()
+    #     tod_dwpc = json.loads(str)
+    #     for k, v in tod_dwpc.items():
+    #         if k in degrees_wp_choices:
+    #             degrees_wp_choices[k]['value'] += v["value"]
+    #             degrees_wp_choices[k]['fulfilled'] = 0
+    #         else:
+    #             degrees_wp_choices[k] = {"value": v["value"], "list": v["list"], "fulfilled": 0}
+    #     self.set_degrees_wp_choices(degrees_wp_choices)
+
+    def prune(self,x):
+        from collector.utils.allocator import Allocator
+        a = Allocator()
+        a.restore(self.stored_allocator)
+        a.prune_row(x)
+        self.stored_allocator = a.as_string
+
+    def register_tod(self, tod):
+        from collector.utils.allocator import Allocator
+        tod.pushcc(self)
+        a = Allocator()
+        a.restore(tod.tour_of_duty_ref.stored_allocator)
+        print(f"{tod.tour_of_duty_ref.reference} fulfillness: {"YES" if a.fulfilled else "NO"}")
+        # Degrees
         degrees_wp_choices = self.get_degrees_wp_choices()
+        str = tod.tour_of_duty_ref.degrees_wp_choices
         tod_dwpc = json.loads(str)
         for k, v in tod_dwpc.items():
             if k in degrees_wp_choices:
@@ -325,10 +360,14 @@ class CharacterCusto(models.Model):
             else:
                 degrees_wp_choices[k] = {"value": v["value"], "list": v["list"], "fulfilled": 0}
         self.set_degrees_wp_choices(degrees_wp_choices)
-
-    def register_tod(self, tod):
-        from collector.utils.allocator import Allocator
-        a = Allocator()
-        a.restore(tod.tour_of_duty_ref.stored_allocator)
-        print(f"{tod.tour_of_duty_ref.reference} fulfillness: {"YES" if a.fulfilled else "NO"}")
-
+        # Skills
+        skills_wp_choices = self.get_skills_wp_choices()
+        str = tod.tour_of_duty_ref.skills_wp_choices
+        tod_swpc = json.loads(str)
+        for k, v in tod_swpc.items():
+            if k in skills_wp_choices:
+                skills_wp_choices[k]['value'] += v["value"]
+                skills_wp_choices[k]['fulfilled'] = 0
+            else:
+                skills_wp_choices[k] = {"value": v["value"], "list": v["list"], "fulfilled": 0}
+        self.set_skills_wp_choices(skills_wp_choices)

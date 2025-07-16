@@ -20,17 +20,17 @@
   box-shadow: 3px 3px 5px $fics_darkest;
   border-radius: 5px;
   opacity: 0.9;
-  font-size: 1.2em;
+  font-size: 12pt;
   width:60vw;
   margin-left:5vw;
   //border:1px solid yellow;
 
   & .details_wrapper {
-    width: 50%;
+    width: 100%;
     height: 100%;
     //background:#802020;
     display: flex;
-    flex-flow: column wrap;
+    flex-flow: column nowrap;
     justify-content: flex-start;
     align-content: flex-start;
     align-items: stretch;
@@ -42,9 +42,72 @@
 //         @include section_block;
 //     }
 
+    & .pager{
+        order:2;
+        //border:5px dotted orange;
+        & .nav{
+            display:flex;
+            flex-flow: row wrap;
+            justify-content: flex-start;
+            align-content: flex-start;
+            align-items: flex-start;
+            & .tab{
+                border:5px solid transparent;
+                border-radius:10px 10px 0 0;
+                background:$fics_light;
+                color:$fics_front;
+                margin-right:2px;
+                width:24ex;
+                height:2.75em;
+                cursor:pointer;
+                &.active{
+                    background: $fics_page;
+                    color:$fics_front;
+                }
+            }
+        }
+
+        & .page{
+            //border:3px dashed cyan;
+            background: $fics_page;
+            display:none;
+            padding:10px;
+            border-radius:0 0 10px 10px;
+            &.active{
+                display:block;
+            }
+            & table.list{
+                width:100%;
+                & tr{
+                    & th{
+                        background: $fics_darkest;
+                        &.group{
+                            color:$fics_golden;
+                            text-align:left;
+                            }
+                        }
+                    & td{
+                        background: $fics_light;
+                        &.text{
+                            width:auto;
+                            text-align:left;
+                            }
+                        &.title{
+                            width:30ex;
+                            }
+
+                        &.value{
+                            width:10ex;
+                            }
+                        }
+
+                    }
+                }
+
+            }
+
     & .details_section {
         order:101;
-//         border:3px dotted orange;
         display:flex;
         flex-flow:column nowrap;
         justify-content: flex-start;
@@ -86,8 +149,9 @@
             background:darkpurple;
 
         }
-    }
 
+    }
+}
     & div.infoblock {
       display: flex;
       flex-flow: row nowrap;
@@ -471,4 +535,7 @@ div.character_update_view {
       }
     }
   }
+
+
+
 }

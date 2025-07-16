@@ -80,7 +80,8 @@ def skill_pick(request, avatar, item, offset):
     from collector.utils.basic import get_current_config
     campaign = get_current_config(request)
     context = {}
-    offset = int(offset) - 50;
+    offset = int(offset) - 50
+    print(offset)
     ch = Character.objects.get(pk=avatar)
     skillref = SkillRef.objects.get(pk=item)
     ch.charactercusto.add_or_update_skill(skillref.id, offset)

@@ -339,6 +339,10 @@ class Character(Combattant):
         self.DWP_tod_pool = 0
         self.life_path_total = 0
         self.race = self.specie.species
+        self.charactercusto.prune("allocated")
+        self.charactercusto.prune("fixed")
+        self.charactercusto.prune("wildcard")
+        self.charactercusto.prune("fulfilled")
         bl = []
         tod_rep = {
             'RA': 0,
@@ -352,8 +356,8 @@ class Character(Combattant):
         self.audit_log("<strong>Applying Lifepath</strong>")
         # self.audit_log("<ul>")
         for tod in self.tourofduty_set.all():
-            AP, OP, SWP, DWP, SK, DE, BC, BA = tod.push(self)
-            self.charactercusto.register_tod_wp(tod.tour_of_duty_ref.degrees_wp_choices)
+            AP, SK, DE, BC, BA,AWP, SWP, DWP, BCW, BAW, OP = tod.push(self)
+            #self.charactercusto.register_tod_wp(tod.tour_of_duty_ref.degrees_wp_choices)
             self.charactercusto.register_tod(tod)
             todname = f"{tod.tour_of_duty_ref.reference:.<30}"
             todcat = f"{tod.tour_of_duty_ref.get_category_display()[:2]}"
@@ -394,7 +398,7 @@ class Character(Combattant):
         # if self.charactercusto:
         self.charactercusto.comment = self.full_name
         self.charactercusto.push(self)
-        self.charactercusto.save()
+        #self.charactercusto.save()
         pa_total = self.sumPA
         po_total = 0
         ps_total = 0
@@ -411,7 +415,6 @@ class Character(Combattant):
             bc_total += bc.blessing_curse_ref.value
         bl.append("")
         fs_fics7.check_secondary_attributes(self)
-        self.charactercusto.save()
         self.prepare_display()
         self.audit_log("<b>Option Points Summary</b>")
         self.reset_total()
@@ -435,6 +438,7 @@ class Character(Combattant):
         self.priority = (abs(self.life_path_total - self.OP) < 8) and (self.OP > 0) and (
                 abs(self.life_path_total - self.OP) > 0)
         self.build_log = "\n".join(bl)
+        self.charactercusto.save()
         if self.historical_figure:
             self.balanced = True
         # Randomize color
@@ -658,9 +662,9 @@ class Character(Combattant):
 
     def update_challenge(self):
         res = ''
-        res += '<i class="fas fa-th-large" title="primary attributes"></i>%d ' % (self.AP)
-        res += '<i class="fas fa-th-list" title="skills"></i> %d ' % (self.SK_TOTAL)
-        res += '<i class="fas fa-th-list" title="degrees"></i> %d ' % (self.DE_TOTAL)
+        res += '<i class="fas fa-th-large" title="primary attributes"></i> %d ' % (self.AP)
+        res += f'<i class="fas fa-th-list" title="skills"></i> {self.SK_TOTAL}/{self.SWP_tod_pool} '
+        res += f'<i class="fas fa-th-list" title="degrees"></i> {self.DE_TOTAL}/{self.DWP_tod_pool} '
         res += '<i class="fas fa-th" title="BC/BA"></i> %d ' % (self.BC_TOTAL + self.BA_TOTAL)
         res += '<i class="fas fa-star" title="wildcards skills"></i> %d ' % (self.SWP_tod_pool)
         res += '<i class="fas fa-star" title="wildcards degrees"></i> %d ' % (self.DWP_tod_pool)

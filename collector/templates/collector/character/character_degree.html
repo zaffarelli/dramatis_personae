@@ -1,8 +1,8 @@
 {%load fics_filters%}
 {% if not degree.degree_ref.is_wildcard %}
-<table style="border:1px dotted silver;">
+<table class="unbreakable list">
     <tr>
-        <th colspan="3" style="text-align:left;background:black; color:yellow;">{{degree.degree_ref.get_group_display}}</th>
+        <th colspan="3" class="group">{{degree.degree_ref.get_group_display}}</th>
     </tr>
     <tr>
         <td>
