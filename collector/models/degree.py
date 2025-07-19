@@ -28,9 +28,10 @@ class DegreeRef(RiddedMixin):
     level = models.CharField(default=Level.COMMON, max_length=2, choices=Level, blank=True)
     is_wildcard = models.BooleanField(default=False, blank=True)
     group_wildcard = models.BooleanField(default=False, blank=True)
+    as_wildcard_of = models.CharField(default="", max_length=512, blank=True)
     refval = models.CharField(default="", max_length=200, blank=True)
     description = models.TextField(max_length=1024, default='', blank=True)
-    as_wildcard_of = models.CharField(default="", max_length=512, blank=True)
+
 
     def __str__(self):
         return f"[{self.get_group_display()}] {self.reference}"

@@ -13,7 +13,8 @@ from collector.mixins.uuid_class import UUIDClass
 class BeneficeAfflictionRef(UUIDClass):
     class Meta:
         verbose_name = "FICS: Benefice/Affliction"
-        ordering = ['reference', 'value', ]
+        verbose_name_plural = "FICS: Benefices/Afflictions"
+        ordering = ['-is_wildcard','-group_wildcard','reference', 'value']
 
     reference = models.CharField(max_length=64)
     value = models.IntegerField(default=0)
@@ -36,7 +37,10 @@ class BeneficeAfflictionRef(UUIDClass):
     shortcut = models.TextField(max_length=128, default='', blank=True)
     refval = models.TextField(max_length=128, default='', blank=True)
     indexed = models.BooleanField(default=False, blank=True)
-
+    is_wildcard = models.BooleanField(default=False, blank=True)
+    group_wildcard = models.BooleanField(default=False, blank=True)
+    as_wildcard_of = models.CharField(default="", max_length=512, blank=True)
+    is_affliction = models.BooleanField(default=False, blank=True)
 
     def __str__(self):
         return '%s %s(%d)' % (self.reference, self.emphasis, self.value)
@@ -45,6 +49,8 @@ class BeneficeAfflictionRef(UUIDClass):
         super().fix()
         self.shortcut = f"{self.reference} ({self.description})"
         self.refval = f"{self.reference} ({self.value:+})"
+        self.is_affliction = self.value < 0
+
 
     def to_json(self):
         from collector.utils.basic import json_default
@@ -109,8 +115,8 @@ def refix(modeladmin, request, queryset):
 
 
 class BeneficeAfflictionRefAdmin(admin.ModelAdmin):
-    ordering = ('category', 'reference', 'watermark', '-value', 'ranking')
-    list_display = ['reference', 'indexed', 'emphasis', 'refval','value', 'watermark', 'category','ranking', 'cash_value', 'description', 'source']
+    ordering = ('-is_wildcard','-group_wildcard','is_affliction','category', 'reference', 'watermark', '-value', 'ranking')
+    list_display = ['reference', 'is_wildcard','group_wildcard','as_wildcard_of','is_affliction','indexed', 'emphasis', 'refval','value', 'watermark', 'category','ranking', 'cash_value', 'description', 'source']
     search_fields = ('reference', 'description', 'emphasis', 'watermark')
     list_filter = ('ranking', 'source', 'watermark', 'category', 'emphasis')
     list_editable = ['indexed']

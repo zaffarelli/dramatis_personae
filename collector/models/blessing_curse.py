@@ -12,6 +12,7 @@ class BlessingCurseRef(RiddedMixin):
     class Meta:
         ordering = ['reference']
         verbose_name = "FICS: Blessing/Curse"
+        verbose_name_plural = "FICS: Blessings/Curses"
 
     reference = models.CharField(max_length=64, default='', blank=True)
     value = models.IntegerField(default=0)

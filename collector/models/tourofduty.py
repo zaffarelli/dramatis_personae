@@ -273,9 +273,7 @@ class TourOfDutyRef(RiddedMixin):
                 texts.append(self.blessingcurse_modificators_summary)
             self.OP = self.SK + self.DE + self.BC + self.BA + self.WP
             self.value = (self.AP + self.balance_AP) * 3 + (self.OP + self.balance_OP)
-            # texts.append(f"AP:{self.AP}({self.AP*3}) OP:{self.OP} WP:{self.WP}  SK:{self.SK} DE:{self.DE}  BC:{self.BC} BA:{self.BA} SWP:{self.SWP} DWP:{self.DWP} = {self.value}")
             self.description = "; ".join(texts)
-
             self.check_value()
             print(self.__class__.validity())
 
@@ -283,32 +281,13 @@ class TourOfDutyRef(RiddedMixin):
         hrlist_skills = []
         items = self.skillmodificator_set.all()
         self.SK, self.SWP = getFromList(items, hrlist_skills, "skill_ref")
-        # print(hrlist_skills, self.SP)
         self.skill_modificators_summary = "Skills: "
         if len(hrlist_skills) > 0:
             hrlist_skills.sort()
             self.skill_modificators_summary += ", ".join(hrlist_skills)
         else:
             self.skill_modificators_summary = ""
-        # SKILL CHOICES
         create_choices_list(self,"skills_wp_choices",items,"skill_ref")
-        # skills_wp_choices = {}
-        # for sm in items:
-        #     if sm.skill_ref.is_wildcard:
-        #         if sm.skill_ref.group_wildcard:
-        #             if sm.skill_ref.reference not in skills_wp_choices:
-        #                 skills_wp_choices[sm.skill_ref.reference] = {'value': 0, 'list': [], "fulfilled": 0}
-        #             wclist = sm.skill_ref.as_wildcard_of.split(", ")
-        #             for x in wclist:
-        #                 if x not in skills_wp_choices[sm.skill_ref.reference]['list']:
-        #                     skills_wp_choices[sm.skill_ref.reference]['list'].append(x)
-        #             skills_wp_choices[sm.skill_ref.reference]['value'] += sm.value
-        #         else:
-        #             if GLOBAL_WILDCARDS in skills_wp_choices:
-        #                 skills_wp_choices[GLOBAL_WILDCARDS]['value'] += sm.value
-        #             else:
-        #                 skills_wp_choices[GLOBAL_WILDCARDS] = {'value': sm.value, "list": [], "fulfilled": 0}
-        # self.skills_wp_choices = json.dumps(skills_wp_choices)
         # DEGREES
         hrlist_degrees = []
         items = self.degreemodificator_set.all()
@@ -319,25 +298,7 @@ class TourOfDutyRef(RiddedMixin):
             self.degree_modificators_summary += ", ".join(hrlist_degrees)
         else:
             self.degree_modificators_summary = ""
-        # DEGREE CHOICES
         create_choices_list(self, "degrees_wp_choices", items, "degree_ref")
-        # degrees_wp_choices = {}
-        # for dm in items:
-        #     if dm.degree_ref.is_wildcard:
-        #         if dm.degree_ref.group_wildcard:
-        #             if dm.degree_ref.reference not in degrees_wp_choices:
-        #                 degrees_wp_choices[dm.degree_ref.reference] = {'value': 0, 'list': [], "fulfilled": 0}
-        #             wclist = dm.degree_ref.as_wildcard_of.split(", ")
-        #             for x in wclist:
-        #                 if x not in degrees_wp_choices[dm.degree_ref.reference]['list']:
-        #                     degrees_wp_choices[dm.degree_ref.reference]['list'].append(x)
-        #             degrees_wp_choices[dm.degree_ref.reference]['value'] += dm.value
-        #         else:
-        #             if GLOBAL_WILDCARDS in degrees_wp_choices:
-        #                 degrees_wp_choices[GLOBAL_WILDCARDS]['value'] += dm.value
-        #             else:
-        #                 degrees_wp_choices[GLOBAL_WILDCARDS] = {'value': dm.value, "list": [], "fulfilled": 0}
-        # self.degrees_wp_choices = json.dumps(degrees_wp_choices)
         # Common ground custom or not
         self.AWP = self.PA_C1P + self.PA_C1M + self.PA_C1C + self.PA_C1F
         self.value = (self.AP + self.AWP) * 3 \

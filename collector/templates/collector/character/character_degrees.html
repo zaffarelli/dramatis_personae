@@ -1,9 +1,20 @@
+{% load fics_filters %}
 {% if c.degree_set.count != 0 %}
 <div class='skillsview'>
-    {% for degree in c.degree_set.all|dictsort:"degree_ref.group" %}
-        <span class='character_degree' id='de_{{degree.degree_ref.id}}'>
+    {% for group in c.degree_set.all|as_degrees_groups_only %}
+        <table class="unbreakable list" style="margin-bottom:1em;">
+            <tr style="height:1.5em; ">
+                <th colspan="3" class="group" style="padding:5px;">{{group}}</th>
+            </tr>
+        {% for degree in c.degree_set.all %}
+            {% if degree.degree_ref.get_group_display == group %}
+            <span class='character_degree' id='de_{{degree.degree_ref.id}}'>
             {% include "collector/character/character_degree.html"%}
-        </span>
+            </span>
+            {%endif %}
+        {% endfor %}
+        </table>
+
     {% endfor %}
 </div>
 {% endif %}

@@ -524,3 +524,21 @@ def as_tod_description(value):
                 print("Problem splitting that:"+sentence)
     res = "<br/>".join(new_sentences)
     return res
+
+@register.filter(name='as_degrees_groups_only')
+def as_degrees_groups_only(degrees):
+    list = []
+    for degree in degrees:
+        group = degree.degree_ref.get_group_display()
+        if group not in list:
+            list.append(group)
+    return list
+
+@register.filter(name='group_match')
+def group_match(degrees,grp):
+    list = []
+    for degree in degrees:
+        group = degree.degree_ref.get_group_display()
+        if group == grp:
+            list.append(group)
+    return list
