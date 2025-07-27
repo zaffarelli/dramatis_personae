@@ -1,35 +1,17 @@
 {%load fics_filters%}
-        {% if not skill.skill_ref.is_wildcard %}
-        <table >
-            <tr>
-                <td>
-                    {% if skill.skill_ref.is_root %}
-                    <strong>
-                    {% endif %}
-                    {% if skill.skill_ref.is_speciality %}
-                    &nbsp;&nbsp;&nbsp;
-                    {% endif %}
-                    {{ skill.skill_ref.reference|safe }}
-                    {% if skill.skill_ref.is_root %}
-                    </strong>
-                    {% endif %}
-                </td>
-                {% if skill.skill_ref.is_root %}
-                    <th></th>
-                {% else %}
-                    {% if not skill.skill_ref.is_wildcard %}
-                    <th class='edit'>
-                        <span id="skillplus_{{c.id}}_{{skill.skill_ref.id}}" class='edit_icon skillpick fa fa-plus-circle'></span><span id="skillminus_{{c.id}}_{{skill.skill_ref.id}}" class='edit_icon skillpick fa fa-minus-circle'></span>
-                    </th>
-                    {% endif %}
-                {% endif %}
-                <th class='skill_score_bar' id='val_{{skill.id}}'>
-                    {% if skill.skill_ref.is_wildcard %}
-                    {{ skill.value|as_bullets_short_wildcard|safe }}
-                    {% else %}
-                    {{ skill.value|as_bullets_short|safe }}
-                    {%endif%}
-                </th>
-            </tr>
-        </table>
-        {% endif %}
+{% if not skill.skill_ref.is_wildcard %}
+<table style="background:#303030;">
+    <tr style="background:#101010;">
+        <td>
+            {{ skill.skill_ref.reference|safe }} ({{skill.value}})
+        </td>
+        <th class='edit'>
+            <span id="skillplus_{{c.id}}_{{skill.skill_ref.id}}" class='edit_icon skillpick fa fa-plus-circle'></span>
+            <span id="skillminus_{{c.id}}_{{skill.skill_ref.id}}" class='edit_icon skillpick fa fa-minus-circle'></span>
+        </th>
+        <th class='skill_score_bar' id='val_{{skill.id}}'>
+            {{ skill.value|as_bullets_short|safe }}
+        </th>
+    </tr>
+</table>
+{% endif %}

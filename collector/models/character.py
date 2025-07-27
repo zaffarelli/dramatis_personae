@@ -346,11 +346,11 @@ class Character(Combattant):
         self.purge_shields()
         self.purge_rituals()
         self.AP = 0
-        self.OP = 0
         self.SP = 0
         self.DP = 0
         self.BC = 0
         self.BA = 0
+        self.OP = 0
         self.life_path_total = 0
         self.race = self.specie.species
         self.cc.initialize_computation()
@@ -376,15 +376,18 @@ class Character(Combattant):
         trace_str += " AWA "
         print(f'=> {"":30} {trace_str}')
         for tod in self.tourofduty_set.all():
-            self.life_path_total += tod.push(self)
+            OP, LP = tod.push(self)
+            self.OP += OP
+            self.life_path_total += LP
             #tod.save()
         self.cc.comment = self.full_name
-        self.cc.push(self)
-        self.cc.save()
+        self.OP += self.cc.push(self)
+        #self.cc.save()
         fs_fics7.check_secondary_attributes(self)
         self.prepare_display()
         self.checkOverhead()
         self.balanced = (self.life_path_total == self.OP - self.experience_balance) and (self.OP > 0)
+        print(f'{self.life_path_total} {self.OP} {self.experience_balance}')
         if self.historical_figure:
             self.balanced = True
         if self.color == '#CCCCCC':
@@ -505,6 +508,7 @@ class Character(Combattant):
         if self.use_history_creation:
             self.reset_character()
             self.rebuild_from_lifepath()
+            #self.OP += self.cc.OP
             self.computeDevelopmentPoints()
         else:
             self.rebuild_free_form()
@@ -523,7 +527,7 @@ class Character(Combattant):
         self.compute_sanity()
         self.update_game_parameters()
         self.build_audit()
-        print(f'=> Done fixing......... {self.full_name}  {self.OP} {self.life_path_total}')
+        print(f'=> Done fixing......... {self.full_name}  {self.OP} {self.life_path_total} Balanced:{self.balanced}')
         self.need_fix = False
 
     def build_audit(self):
@@ -758,7 +762,7 @@ class Character(Combattant):
             skill = Skill()
             skill.character = self
             skill.skill_ref = item
-            skill.value = modifier
+            skill.value = 0
         if 0 < skill.value + modifier < 21:
             skill.value += modifier
             skill.save()

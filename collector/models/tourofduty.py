@@ -470,31 +470,12 @@ class TourOfDuty(models.Model):
                     BC += bc.blessing_curse_ref.value
                 else:
                     BCW += bc.blessing_curse_ref.value
-
-        TOD_VALUE = (AP + AWP) * 3 + SP + DP + BA + BC + SWP + DWP + BCW + BAW
         a = Allocator()
         a.restore(cc.stored_allocator)
-        a.stack(AP, "fixed", "AP")
-        a.stack(SP, "fixed", "SP")
-        a.stack(DP, "fixed", "DP")
-        a.stack(BA, "fixed", "BA")
-        a.stack(BC, "fixed", "BC")
-        a.stack(AWP, "wildcard", "AP")
-        a.stack(SWP, "wildcard", "SP")
-        a.stack(DWP, "wildcard", "DP")
-        a.stack(BAW, "wildcard", "BA")
-        a.stack(BCW, "wildcard", "BC")
-        a.stack(AP, "allocated", "AP")
-        a.stack(SP, "allocated", "SP")
-        a.stack(DP, "allocated", "DP")
-        a.stack(BA, "allocated", "BA")
-        a.stack(BC, "allocated", "BC")
+        a.stacks(vals=[AP, SP, DP, BA, BC], a="fixed")
+        a.stacks(vals=[AP, SP, DP, BA, BC], a="allocated")
+        a.stacks(vals=[AWP, SWP, DWP, BAW, BCW], a="wildcard")
         a.check()
-        cc.AP += AP
-        cc.SP += SP
-        cc.DP += DP
-        cc.BA += BA
-        cc.BC += BC
         cc.stored_allocator = a.as_string
         # Check all wildcard systems
         systems = ["degrees", "skills", "ba", "bc"]
@@ -522,10 +503,8 @@ class TourOfDuty(models.Model):
         trace_str += f"{tod.PA_DEX}>{ch.PA_DEX:02} "
         trace_str += f"{tod.PA_AGI}>{ch.PA_AGI:02} "
         trace_str += f"{tod.PA_AWA}>{ch.PA_AWA:02} "
-
-        print(f"{tod.reference:30} OP={self.OP:3}/{TOD_VALUE}")
-        print(f'=> {tod.reference:30} {trace_str}')
-        return tod.value
+        print(f'=> {tod.reference:30} {trace_str} OP={tod.OP:4} LP={tod.value:4}')
+        return tod.OP,tod.value
 
     def __str__(self):
         return '%s=%s' % (self.character.full_name, self.tour_of_duty_ref.reference)

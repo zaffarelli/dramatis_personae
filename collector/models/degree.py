@@ -96,8 +96,8 @@ class DegreeCusto(models.Model):
 
     character_custo = models.ForeignKey(CharacterCusto, on_delete=models.CASCADE)
     degree_ref = models.ForeignKey(DegreeRef, on_delete=models.CASCADE)
-    value = models.IntegerField(default=1)
-    fromTOD = models.BooleanField(default=False, blank=True)
+    value = models.IntegerField(default=1, blank=True)
+
 
 class Degree(RiddedMixin):
     class Meta:

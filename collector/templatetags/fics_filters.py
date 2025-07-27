@@ -45,16 +45,16 @@ def as_bullets_short(value):
         Do it with a width limit of 10
     """
     if isinstance(value, int):
-        one_very_high = '<i class="fas fa-circle fa-xs veryhigh" title="%d bullet_short"></i>' % (int(value))
-        one_high = '<i class="fas fa-circle fa-xs high" title="%d bullet_short"></i>' % (int(value))
-        one_medium = '<i class="fas fa-circle fa-xs medium" title="%d bullet_short"></i>' % (int(value))
-        one_low = '<i class="fas fa-circle fa-xs low" title="%d bullet_short"></i>' % (int(value))
-        blank = '<i class="fas fa-circle fa-xs blank" title="%d bullet_short"></i>' % (int(value))
+        one_very_high = f'<i class="fas fa-circle fa-xs veryhigh" title="{value}"></i>'
+        one_high = f'<i class="fas fa-circle fa-xs high" title="{value}"></i>'
+        one_medium = f'<i class="fas fa-circle fa-xs medium" title="{value}"></i>'
+        one_low = f'<i class="fas fa-circle fa-xs low" title="{value}"></i>'
+        blank = '<i class="fas fa-circle fa-xs blank" title=""></i>'
         special_blank = '<i class="fas fa-circle fa-xs special_blank" title="%d bullet_short"></i>' % (int(value))
         x = 0
         res = ''
         while x < 20:
-            if x < int(value):
+            if x < value:
                 if x > 6:
                     res += one_very_high
                 elif x > 4:
@@ -73,7 +73,7 @@ def as_bullets_short(value):
             x += 1
         return res
     else:
-        return "ERROR!"
+        return "DELETED"
 
 
 @register.filter(name='as_bullets_veryshort')

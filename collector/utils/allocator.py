@@ -12,6 +12,8 @@ class Allocator:
             "DP": 0,
             "BA": 0,
             "BC": 0,
+            "OP": 0,
+            "LP": 0,
         },
         "wildcard": {
             "AP": 0,
@@ -19,6 +21,8 @@ class Allocator:
             "DP": 0,
             "BA": 0,
             "BC": 0,
+            "OP": 0,
+            "LP": 0,
         },
         "allocated": {
             "AP": 0,
@@ -26,6 +30,8 @@ class Allocator:
             "DP": 0,
             "BA": 0,
             "BC": 0,
+            "OP": 0,
+            "LP": 0,
         },
         "experience": {
             "AP": 0,
@@ -33,6 +39,8 @@ class Allocator:
             "DP": 0,
             "BA": 0,
             "BC": 0,
+            "OP": 0,
+            "LP": 0,
         },
         "total": {
             "AP": 0,
@@ -40,6 +48,8 @@ class Allocator:
             "DP": 0,
             "BA": 0,
             "BC": 0,
+            "OP": 0,
+            "LP": 0,
         },
     }
     defstring = ""
@@ -62,10 +72,10 @@ class Allocator:
         for row, values in self.matrix.items():
             for item, value in values.items():
                 if row != "total":
-                    if row in ["wildcard","fixed"]:
+                    if row in ["wildcard", "fixed"]:
                         self.matrix["total"][item] += self.matrix[row][item]
         self.as_string
-        #print(self.defstring)
+        # print(self.defstring)
 
     @property
     def fulfilled(self):
@@ -126,7 +136,21 @@ class Allocator:
             self.message(f"Sorry, don't know what to do with [a={a}]")
         self.as_string
 
-    def prune_row(self,a):
+    def stacks(self, vals=[], a=""):
+        if len(vals) == 5:
+            if a in self.matrix.keys():
+                self.matrix[a]["AP"] = int(self.matrix[a]["AP"]) + vals[0]
+                self.matrix[a]["SP"] = int(self.matrix[a]["SP"]) + vals[1]
+                self.matrix[a]["DP"] = int(self.matrix[a]["DP"]) + vals[2]
+                self.matrix[a]["BA"] = int(self.matrix[a]["BA"]) + vals[3]
+                self.matrix[a]["BC"] = int(self.matrix[a]["BC"]) + vals[4]
+            else:
+                self.message(f"Sorry, don't know what to do with [a={a}]")
+        else:
+            self.message(f"Not enough values to proceed: {vals}")
+        self.as_string
+
+    def prune_row(self, a):
         if a in self.matrix.keys():
             for b in self.matrix[a].keys():
                 self.matrix[a][b] = 0
@@ -151,5 +175,5 @@ class Allocator:
         str += f"<tt>Degrees........ {self.get("fixed", "DP"): 4d} | {self.get("wildcard", "DP"): 4d} | {self.get("allocated", "DP"): 4d} | {self.get("experience", "DP"): 4d} | {self.get("total", "DP"): 4d}</tt><br/>"
         str += f"<tt>B/A............ {self.get("fixed", "BA"): 4d} | {self.get("wildcard", "BA"): 4d} | {self.get("allocated", "BA"): 4d} | {self.get("experience", "BA"): 4d} | {self.get("total", "BA"): 4d}</tt><br/>"
         str += f"<tt>B/C............ {self.get("fixed", "BC"): 4d} | {self.get("wildcard", "BC"): 4d} | {self.get("allocated", "BC"): 4d} | {self.get("experience", "BC"): 4d} | {self.get("total", "BC"): 4d}</tt><br/>"
-        str = str.replace(" ","&nbsp;")
+        str = str.replace(" ", "&nbsp;")
         return str

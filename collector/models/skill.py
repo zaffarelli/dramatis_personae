@@ -14,6 +14,7 @@ class SkillRef(RiddedMixin):
     class Meta:
         ordering = ['group', 'reference']
         verbose_name = "FICS: Skill"
+        verbose_name_plural = "FICS: Skills"
 
     reference = models.CharField(default="", max_length=200, blank=True)
     is_common = models.BooleanField(default=True, blank=True)
@@ -23,7 +24,6 @@ class SkillRef(RiddedMixin):
     linked_to = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE)
     description = models.TextField(max_length=1024, default='', blank=True)
     acro = models.CharField(default="", max_length=7, blank=True)
-
     as_wildcard_of = models.CharField(default="", max_length=512, blank=True)
 
     @property
@@ -64,9 +64,13 @@ class SkillRef(RiddedMixin):
             self.acro = ("SK_" + self.reference[:3]).upper()
 
 class Skill(RiddedMixin):
+    """
+    From Character
+    """
     class Meta:
-        ordering = ['skill_ref', ]
-        verbose_name = "Skill"
+        ordering = ['skill_ref']
+        verbose_name = "Character Skill"
+        verbose_name_plural = "Character Skills"
     character = models.ForeignKey(Character, on_delete=models.CASCADE)
     skill_ref = models.ForeignKey(SkillRef, on_delete=models.CASCADE)
     skill_ref_rid = RidField()
@@ -98,9 +102,12 @@ class SkillInline(admin.TabularInline):
 
 
 class SkillModificator(models.Model):
-    # SkillModificator is something that comes from an "history" template
+    """
+    From TOD
+    """
     class Meta:
         ordering = ['skill_ref']
+        verbose_name = "TOD Skill"
 
     tour_of_duty_ref = models.ForeignKey(TourOfDutyRef, on_delete=models.CASCADE)
     skill_ref = models.ForeignKey(SkillRef, on_delete=models.CASCADE)
@@ -117,13 +124,17 @@ class SkillModificator(models.Model):
 
 
 class SkillCusto(models.Model):
+    """
+    From CC
+    """
     class Meta:
         ordering = ['character_custo']
+        verbose_name = "CC Skill"
 
     character_custo = models.ForeignKey(CharacterCusto, on_delete=models.CASCADE)
     skill_ref = models.ForeignKey(SkillRef, on_delete=models.CASCADE)
-    value = models.IntegerField(default=1)
-    fromTOD = models.BooleanField(default=False, blank=True)
+    value = models.IntegerField(default=1, blank=True)
+
 
 # Inlines
 

@@ -137,10 +137,6 @@ class CharacterCusto(models.Model):
         self.need_fix = False
 
     def initialize_computation(self):
-        """
-        Set all metrics to 0.
-        :return:
-        """
         from collector.utils.allocator import Allocator
         a = Allocator()
         a.prune_all()
@@ -150,42 +146,19 @@ class CharacterCusto(models.Model):
         self.DP = 0
         self.BA = 0
         self.BC = 0
-
-
         self.OP = 0
         # Check all wildcard systems
         systems = ["degrees", "skills", "ba", "bc"]
         for system in systems:
             self.set_wildcard_choices(system, {})
-        # self.need_fix = False
-        # self.save()
-        # self.need_fix = True
 
     def push(self, ch):
         """
         Push the CC data to the character
         :return:
         """
-        # from collector.models.character import Character
-        # ch = Character.objects.filter(id=self.character.id).first()
-        # STR = ch.PA_STR + self.PA_STR
-        # CON = ch.PA_CON + self.PA_CON
-        # BOD = ch.PA_BOD + self.PA_BOD
-        # MOV = ch.PA_MOV + self.PA_MOV
-        # INT = ch.PA_INT + self.PA_INT
-        # WIL = ch.PA_WIL + self.PA_WIL
-        # TEM = ch.PA_TEM + self.PA_TEM
-        # PRE = ch.PA_PRE + self.PA_PRE
-        # DEX = ch.PA_DEX + self.PA_DEX
-        # TEC = ch.PA_TEC + self.PA_TEC
-        # AGI = ch.PA_AGI + self.PA_AGI
-        # AWA = ch.PA_AWA + self.PA_AWA
-        # OCC = ch.PA_OCC + self.PA_OCC
-        # DRK = ch.PA_DRK + self.PA_DRK
-
         a = Allocator()
         a.restore(self.stored_allocator)
-
         ch.PA_STR += self.PA_STR
         ch.PA_CON += self.PA_CON
         ch.PA_BOD += self.PA_BOD
@@ -252,12 +225,13 @@ class CharacterCusto(models.Model):
         for ritual in self.ritualcusto_set.all():
             ch.add_ritual(ritual.ritual_ref)
 
-        ch.AP += self.AP
-        ch.SP += self.SP
-        ch.DP += self.DP
-        ch.BA += self.BA
-        ch.BC += self.BC
-        ch.OP += self.AP * 3 + self.SP + self.DP + self.BA + self.BC
+        # ch.AP += self.AP
+        # ch.SP += self.SP
+        # ch.DP += self.DP
+        # ch.BA += self.BA
+        # ch.BC += self.BC
+        self.save()
+        #ch.OP += self.AP * 3 + self.SP + self.DP + self.BA + self.BC
         trace_str = ""
         trace_str += f"{self.PA_STR}>{ch.PA_STR:02} "
         trace_str += f"{self.PA_CON}>{ch.PA_CON:02} "
@@ -271,9 +245,8 @@ class CharacterCusto(models.Model):
         trace_str += f"{self.PA_DEX}>{ch.PA_DEX:02} "
         trace_str += f"{self.PA_AGI}>{ch.PA_AGI:02} "
         trace_str += f"{self.PA_AWA}>{ch.PA_AWA:02} "
-        print(f'=> {"CC":30} {trace_str}')
-
-    # return STR,CON,BOD,MOV,INT,WIL,TEM,PRE,TEC,DEX,AGI,AWA, OCC, DRK
+        print(f'=> {"CC":30} {trace_str} OP={self.OP:4} ')
+        return self.OP
 
     def rebuild_summary(self):
         from collector.utils.allocator import Allocator
@@ -371,21 +344,29 @@ class CharacterCusto(models.Model):
             self.summary += "<li>%s</li>" % (item.ritual_ref.reference)
         self.summary += "</ul>"
 
-    def add_or_update_skill(self, item, modifier=1):
+    def add_or_update_skill(self, item, modifier=0):
         from collector.models.skill import SkillCusto
         elements = self.skillcusto_set.filter(skill_ref=item)
         if len(elements) == 1:
             element = elements.first()
+            print("CC:Skill found!")
         else:
             element = SkillCusto()
             element.character_custo = self
             element.skill_ref = item
             element.value = 0
-        if 0 <= element.value + modifier < 21:
-            element.value += modifier
+            print("CC:Skill created!")
             element.save()
+        if 0 < element.value + modifier < 21:
+            element.value += modifier
+            print(f"CC:New skill value: {element.value}")
+            element.save()
+        elif element.value + modifier <= 0:
+            print(f"CC:Skill deleted!")
+            element.delete()
 
-    def add_or_update_degree(self, item, modifier=1):
+
+    def add_or_update_degree(self, item, modifier=0):
         from collector.models.degree import DegreeCusto
         elements = self.degreecusto_set.filter(degree_ref=item)
         if len(elements) == 1:
@@ -395,6 +376,9 @@ class CharacterCusto(models.Model):
             element.character_custo = self
             element.degree_ref = item
             element.value = 0
+            element.save()
         if 0 <= element.value + modifier < 4:
             element.value += modifier
             element.save()
+        elif element.value + modifier <= 0:
+            element.delete()

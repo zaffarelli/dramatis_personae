@@ -160,4 +160,4 @@ LOGIN_REDIRECT_URL = '/'
 DEFAULT_AUTO_FIELD='django.db.models.BigAutoField'
 
 MAX_CHAR = 20
-RELEASE = '1.2.0'
+RELEASE = '1.2.1'

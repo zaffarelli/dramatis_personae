@@ -724,10 +724,10 @@ body {
 }
 
 .action_icon {
-    color: $fics_highlight;
+    color: $fics_golden;
     cursor: pointer;
     &:hover {
-        color: $fics_golden;
+        color: $fics_dark;
     }
 }
 
@@ -777,27 +777,27 @@ body {
 }
 
 .low {
-    color: $fics_front;
+    color: #c79ce8;
     /*opacity: .5;*/
-    text-shadow: 0 0 3px lime;
+    text-shadow: 0 0 3px $fics_front;
 }
 
 .medium {
-    color: yellow;
+    color: #9cb9e8;
     /*opacity: .6;*/
-    text-shadow: 0 0 3px yellow;
+    text-shadow: 0 0 3px $fics_front;
 }
 
 .high {
-    color: orange;
+    color: #9cd3e8;
     /*opacity: .7;*/
-    text-shadow: 0 0 3px orange;
+    text-shadow: 0 0 3px $fics_front;
 }
 
 .veryhigh {
-    color: #aa2020;
+    color: #9ce8e2;
     /*opacity: .8;*/
-    text-shadow: 0 0 3px red;
+    text-shadow: 0 0 3px $fics_front;
 }
 
 th.skill_dot {

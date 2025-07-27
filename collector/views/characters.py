@@ -156,11 +156,11 @@ def customize_skill(request, avatar, item):
     context = {}
     ch = Character.objects.get(pk=avatar)
     ref = SkillRef.objects.get(pk=item)
-    new_item = SkillCusto()
-    new_item.character_custo = ch.cc
-    new_item.skill_ref = ref
-    new_item.value = 1
-    new_item.save()
+    skill = SkillCusto()
+    skill.character_custo = ch.cc
+    skill.skill_ref = ref
+    skill.save()
+    print(f"SKILL >>> {skill.skill_ref.reference} [{skill.value}]")
     ch.fix(campaign)
     ch.save()
     context["c"] = model_to_dict(ch)
@@ -172,7 +172,7 @@ def customize_skill(request, avatar, item):
     context["challenge"] = template_challenge.render({'c': ch})
     context = respawn_summary(ch, context, request)
     context = respawn_avatar_link(ch, context, request)
-    messages.info(request, 'Avatar %s customized with skill %s at +1.' % (ch.full_name, new_item.skill_ref.reference))
+    messages.info(request, f'Avatar {ch.full_name} customized with skill {skill.skill_ref.reference} at +1.')
     return JsonResponse(context)
 
 
