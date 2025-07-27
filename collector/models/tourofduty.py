@@ -462,12 +462,14 @@ class TourOfDuty(models.Model):
             for ba in tod.beneficeafflictionmodificator_set.all():
                 if not ba.benefice_affliction_ref.is_wildcard:
                     BA += ba.benefice_affliction_ref.value
+                    ch.add_ba(ba.benefice_affliction_ref)
                 else:
                     BAW += ba.benefice_affliction_ref.value
             # Blessings/Curses
             for bc in tod.blessingcursemodificator_set.all():
                 if not bc.blessing_curse_ref.is_wildcard:
                     BC += bc.blessing_curse_ref.value
+                    ch.add_bc(bc.blessing_curse_ref)
                 else:
                     BCW += bc.blessing_curse_ref.value
         a = Allocator()
