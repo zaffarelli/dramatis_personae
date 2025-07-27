@@ -16,7 +16,7 @@ class CharacterCustoAdmin(admin.ModelAdmin):
     from collector.models.armor import ArmorCustoInline
     from collector.models.shield import ShieldCustoInline
     from collector.models.ritual import RitualCustoInline
-    list_display = ('character', 'value', 'AP', 'OP','SP','DP','BC',"BA")
+    list_display = ('character', 'OP', 'AP', 'SP','DP','BA',"BC")
 
     inlines = [
         SkillCustoInline,

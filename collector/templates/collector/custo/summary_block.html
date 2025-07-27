@@ -1,28 +1,28 @@
 <table class='custo'>
-    <tr>
-    	<th num=1><span id='ap_tod_pool' class='fa fa-check-circle'></span></th>
-    	<th num=2>Attributes Points</th>
-        <th num=3>{{ c.AP_tod_pool}} / {{ c.charactercusto.AP }}</th>
-    </tr>
-    <tr>
-    	<th num=1><span id='op_tod_pool' class='fa fa-check-circle'></span></th>
-    	<th num=2>Option Points</th>
-        <th num=3 style="text-align:left;">
-            Total: {{ c.OP_tod_pool}} / {{ c.charactercusto.OP }}
-            <br/>Skills: {{ c.SK_tod_pool}} + {{ c.SWP_tod_pool}}
-            <br/>Degrees: {{ c.DE_tod_pool}} + {{ c.DWP_tod_pool}}
-            <br/>Blessings/Curses: {{ c.BC_tod_pool}}
-            <br/>Benefices/Afflictions: {{ c.BA_tod_pool}}
-        </th>
-    </tr>
+<!--    <tr>-->
+<!--    	<th num=1><span id='ap_tod_pool' class='fa fa-check-circle'></span></th>-->
+<!--    	<th num=2>Attributes Points</th>-->
+<!--        <th num=3>{{ c.AP_tod_pool}} / {{ c.charactercusto.AP }}</th>-->
+<!--    </tr>-->
+<!--    <tr>-->
+<!--    	<th num=1><span id='op_tod_pool' class='fa fa-check-circle'></span></th>-->
+<!--    	<th num=2>Option Points</th>-->
+<!--        <th num=3 style="text-align:left;">-->
+<!--            Total: {{ c.OP_tod_pool}} / {{ c.charactercusto.OP }}-->
+<!--            <br/>Skills: {{ c.SK_tod_pool}} + {{ c.SWP_tod_pool}}-->
+<!--            <br/>Degrees: {{ c.DE_tod_pool}} + {{ c.DWP_tod_pool}}-->
+<!--            <br/>Blessings/Curses: {{ c.BC_tod_pool}}-->
+<!--            <br/>Benefices/Afflictions: {{ c.BA_tod_pool}}-->
+<!--        </th>-->
+<!--    </tr>-->
 
 
-    <tr>
+    <tr style="vertical-align:top;">
     	<th num=1><span id='current_custo' class='fa fa-check-circle'></span></th>
     	<th num=2>Current Customization</th>
         <td num=3>
             <div  id='summary'>
-            {{ c.charactercusto.summary|safe }}
+            {{ c.cc.summary|safe }}
             </div>
     	</td>
     </tr>

@@ -8,8 +8,8 @@ class TourOfDutyRefAdmin(admin.ModelAdmin):
     from collector.models.benefice_affliction import BeneficeAfflictionModificatorInline
     from collector.models.blessing_curse import BlessingCurseModificatorInline
     ordering = ['-is_public', '-valid', 'category', 'is_kit', '-core', 'caste', 'topic', 'value', 'reference', ]
-    list_display = ['reference', 'caste', 'category', 'is_custom', 'valid',
-                    "AWP", 'SWP', "DWP", 'BCW', 'BAW', 'AP', 'SK', 'DE', 'BC', 'BA', 'value', 'topic', 'subtopic']
+    list_display = ['reference', 'OP', 'value', 'caste', 'category', 'is_custom', 'valid',
+                    "AWP", 'SWP', "DWP", 'BCW', 'BAW', 'AP', 'SP', 'DP', 'BC', 'BA', 'topic', 'subtopic']
     exclude = ['value']
     actions = [refix, extract]
     inlines = [

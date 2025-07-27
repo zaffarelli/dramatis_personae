@@ -1,4 +1,4 @@
-from django.db.models.signals import pre_save
+from django.db.models.signals import pre_save,post_init
 from collector.models.character_custo import CharacterCusto
 from collector.models.character import Character
 from django.dispatch import receiver
@@ -14,7 +14,11 @@ def update_character_custo(sender, instance, conf=None, **kwargs):
 @receiver(pre_save, sender=Character, dispatch_uid='update_character')
 def update_character(sender, instance, conf=None, **kwargs):
     """ Before saving, fix() and  get_RID() for the character """
-    #instance.get_rid(instance.full_name)
     if instance.need_fix:
         instance.fix()
     instance.pub_date = datetime.now(tz=get_current_timezone())
+
+
+# @receiver(post_init, sender=Character, dispatch_uid='post_init_character')
+# def post_init_character(sender, instance, conf=None, **kwargs):
+#     instance.check_cc()

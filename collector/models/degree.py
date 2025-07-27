@@ -97,7 +97,7 @@ class DegreeCusto(models.Model):
     character_custo = models.ForeignKey(CharacterCusto, on_delete=models.CASCADE)
     degree_ref = models.ForeignKey(DegreeRef, on_delete=models.CASCADE)
     value = models.IntegerField(default=1)
-
+    fromTOD = models.BooleanField(default=False, blank=True)
 
 class Degree(RiddedMixin):
     class Meta:
@@ -108,7 +108,7 @@ class Degree(RiddedMixin):
     degree_ref = models.ForeignKey(DegreeRef, on_delete=models.CASCADE)
     skill_ref_rid = RidField()
     character_rid = RidField()
-    value = models.PositiveIntegerField(default=1)
+    value = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return '%s=%s' % (self.character.full_name, self.degree_ref.reference)

@@ -81,13 +81,13 @@ def skill_pick(request, avatar, item, offset):
     campaign = get_current_config(request)
     context = {}
     offset = int(offset) - 50
-    print(offset)
+    print("offset===>",offset)
     ch = Character.objects.get(pk=avatar)
     skillref = SkillRef.objects.get(pk=item)
-    ch.charactercusto.add_or_update_skill(skillref.id, offset)
+    ch.cc.add_or_update_skill(skillref, offset)
     ch.fix(campaign)
     ch.save()
-    skill = ch.skill_set.all().filter(skill_ref__id=item).first()
+    skill = ch.skill_set.all().filter(skill_ref=skillref).first()
     context["c"] = model_to_dict(ch)
     template = get_template('collector/character/character_skill.html')
     context["block"] = template.render({'c': ch, 'skill': skill})
@@ -107,10 +107,10 @@ def degree_pick(request, avatar, item, offset):
     offset = int(offset) - 50;
     ch = Character.objects.get(pk=avatar)
     degreeref = DegreeRef.objects.get(pk=item)
-    ch.charactercusto.add_or_update_degree(degreeref.id, offset)
+    ch.cc.add_or_update_degree(degreeref, offset)
     ch.fix(campaign)
     ch.save()
-    degree = ch.degree_set.all().filter(degree_ref__id=item).first()
+    degree = ch.degree_set.filter(degree_ref=degreeref).first()
     context["c"] = model_to_dict(ch)
     template = get_template('collector/character/character_degree.html')
     context["block"] = template.render({'c': ch, 'degree': degree})
@@ -128,12 +128,13 @@ def attr_pick(request, avatar, item, offset):
     context = {}
     offset = int(offset) - 50;
     ch = Character.objects.get(pk=avatar)
-    x = getattr(ch.charactercusto, item, -100)
+    x = getattr(ch.cc, item, -100)
     if x == -100:
-        setattr(ch.charactercusto, item, offset)
+        setattr(ch.cc, item, offset)
     else:
-        setattr(ch.charactercusto, item, x + offset)
-    # print(item)
+        # CC modificator cannot go to negative values
+        if x + offset >= 0:
+            setattr(ch.cc, item, x + offset)
     info = ("info_" + item.split("_")[1]).lower()
     ch.fix(campaign)
     ch.save()
@@ -156,7 +157,7 @@ def customize_skill(request, avatar, item):
     ch = Character.objects.get(pk=avatar)
     ref = SkillRef.objects.get(pk=item)
     new_item = SkillCusto()
-    new_item.character_custo = ch.charactercusto
+    new_item.character_custo = ch.cc
     new_item.skill_ref = ref
     new_item.value = 1
     new_item.save()
@@ -184,16 +185,15 @@ def customize_degree(request, avatar, item):
     context = {}
     ch = Character.objects.get(pk=avatar)
     ref = DegreeRef.objects.get(pk=item)
-    print(ch,ref)
-    dc_matches = DegreeCusto.objects.filter(character_custo=ch.charactercusto,degree_ref=ref)
+    dc_matches = DegreeCusto.objects.filter(character_custo=ch.cc, degree_ref=ref)
 
-    if len(dc_matches)==0:
+    if len(dc_matches) == 0:
         new_item = DegreeCusto()
-        new_item.character_custo = ch.charactercusto
+        new_item.character_custo = ch.cc
         new_item.degree_ref = ref
         new_item.value = 1
         new_item.save()
-    elif len(dc_matches)==1:
+    elif len(dc_matches) == 1:
         new_item = dc_matches.first()
         new_item.value += 1
         new_item.save()
@@ -214,11 +214,11 @@ def customize_degree(request, avatar, item):
         context["challenge"] = template_challenge.render({'c': ch})
         context = respawn_summary(ch, context, request)
         context = respawn_avatar_link(ch, context, request)
-        messages.info(request, 'Avatar %s customized with degree %s at +1.' % (ch.full_name, new_item.degree_ref.reference))
+        messages.info(request,
+                      'Avatar %s customized with degree %s at +1.' % (ch.full_name, new_item.degree_ref.reference))
         return JsonResponse(context)
     else:
         return HttpResponse(status=204)
-
 
 
 def customize_bc(request, avatar, item):
@@ -230,7 +230,7 @@ def customize_bc(request, avatar, item):
     ch = Character.objects.get(pk=avatar)
     bcr = BlessingCurseRef.objects.get(pk=item)
     bcc = BlessingCurseCusto()
-    bcc.character_custo = ch.charactercusto
+    bcc.character_custo = ch.cc
     bcc.blessing_curse_ref = bcr
     bcc.save()
     ch.fix(campaign)
@@ -256,7 +256,7 @@ def customize_bc_del(request, avatar, item):
     context = {}
     ch = Character.objects.get(pk=avatar)
     bcr = BlessingCurseRef.objects.get(pk=item)
-    bcca = ch.charactercusto.blessingcursecusto_set.all()
+    bcca = ch.cc.blessingcursecusto_set.all()
     bcc = None
     for x in bcca:
         if x.blessing_curse_ref == bcr:
@@ -292,7 +292,7 @@ def customize_ba(request, avatar, item):
     ch = Character.objects.get(pk=avatar)
     bar = BeneficeAfflictionRef.objects.get(pk=item)
     bac = BeneficeAfflictionCusto()
-    bac.character_custo = ch.charactercusto
+    bac.character_custo = ch.cc
     bac.benefice_affliction_ref = bar
     bac.description = request.POST["freefield"]
     bac.save()
@@ -320,7 +320,7 @@ def customize_ba_del(request, avatar, item):
     context = {}
     ch = Character.objects.get(pk=avatar)
     bcr = BeneficeAfflictionRef.objects.get(pk=item)
-    bcca = ch.charactercusto.beneficeafflictioncusto_set.all()
+    bcca = ch.cc.beneficeafflictioncusto_set.all()
     bcc = None
     for x in bcca:
         if x.benefice_affliction_ref == bcr:
@@ -355,7 +355,7 @@ def customize_weapon(request, avatar, item):
     ch = Character.objects.get(pk=avatar)
     item_ref = WeaponRef.objects.get(pk=item)
     item_custo = WeaponCusto()
-    item_custo.character_custo = ch.charactercusto
+    item_custo.character_custo = ch.cc
     item_custo.weapon_ref = item_ref
     item_custo.save()
     ch.fix(campaign)
@@ -381,7 +381,7 @@ def customize_weapon_del(request, avatar, item):
     context = {}
     ch = Character.objects.get(pk=avatar)
     item_ref = WeaponRef.objects.get(pk=item)
-    custo_items = ch.charactercusto.weaponcusto_set.all()
+    custo_items = ch.cc.weaponcusto_set.all()
     item_found = None
     for item in custo_items:
         if item.weapon_ref == item_ref:
@@ -418,7 +418,7 @@ def customize_armor(request, avatar, item):
     ch = Character.objects.get(pk=avatar)
     item_ref = ArmorRef.objects.get(pk=item)
     item_custo = ArmorCusto()
-    item_custo.character_custo = ch.charactercusto
+    item_custo.character_custo = ch.cc
     item_custo.armor_ref = item_ref
     item_custo.save()
     ch.fix(campaign)
@@ -445,7 +445,7 @@ def customize_armor_del(request, avatar, item):
     context = {}
     ch = Character.objects.get(pk=avatar)
     item_ref = ArmorRef.objects.get(pk=item)
-    custo_items = ch.charactercusto.armorcusto_set.all()
+    custo_items = ch.cc.armorcusto_set.all()
     item_found = None
     for item in custo_items:
         if item.armor_ref == item_ref:
@@ -482,7 +482,7 @@ def customize_shield(request, avatar, item):
     ch = Character.objects.get(pk=avatar)
     item_ref = ShieldRef.objects.get(pk=item)
     item_custo = ShieldCusto()
-    item_custo.character_custo = ch.charactercusto
+    item_custo.character_custo = ch.cc
     item_custo.shield_ref = item_ref
     item_custo.save()
     ch.fix(campaign)
@@ -509,7 +509,7 @@ def customize_shield_del(request, avatar, item):
     context = {}
     ch = Character.objects.get(pk=avatar)
     item_ref = ShieldRef.objects.get(pk=item)
-    custo_items = ch.charactercusto.shieldcusto_set.all()
+    custo_items = ch.cc.shieldcusto_set.all()
     item_found = None
     for item in custo_items:
         if item.shield_ref == item_ref:
@@ -545,7 +545,7 @@ def customize_ritual(request, avatar, item):
     ch = Character.objects.get(pk=avatar)
     item_ref = RitualRef.objects.get(pk=item)
     item_custo = RitualCusto()
-    item_custo.character_custo = ch.charactercusto
+    item_custo.character_custo = ch.cc
     item_custo.ritual_ref = item_ref
     item_custo.save()
     ch.fix(campaign)
@@ -571,7 +571,7 @@ def customize_ritual_del(request, avatar, item):
     context = {}
     ch = Character.objects.get(pk=avatar)
     item_ref = RitualRef.objects.get(pk=item)
-    custo_items = ch.charactercusto.ritualcusto_set.all()
+    custo_items = ch.cc.ritualcusto_set.all()
     item_found = None
     for item in custo_items:
         if item.ritual_ref == item_ref:

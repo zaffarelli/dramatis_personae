@@ -10,11 +10,16 @@
     {% for bc in c.blessingcurse_set.all %}
     <tr>
         <td class="title">{{ bc.blessing_curse_ref.reference|safe }}</td>
-        <td class="text">{{ bc.description }}</td>
+        <td class="text">{{ bc.blessing_curse_ref.description|safe }}</td>
         <td class="value">{{ bc.blessing_curse_ref.value }}</td>
     </tr>
     {% endfor %}
 </table>
 {%else%}
-    No blessing/curses&nbsp;
+    <table class='unbreakable list' id='bc_{{c.id}}'>
+        <tr>
+            <th colspan=3>Blessings/Curses ({{c.BC_TOTAL}})</th>
+        </tr>
+        <tr><td colspan="3">No blessings/curses&nbsp;</td></tr>
+    </table>
 {%endif%}

@@ -19,6 +19,10 @@ class BlessingCurseRef(RiddedMixin):
     description = models.TextField(max_length=256, default='',blank=True)
     source = models.CharField(max_length=32, default='FS2CRB')
     shortcut = models.TextField(max_length=64, default='', blank=True)
+    occurences = models.PositiveIntegerField(default=1, blank=True)
+    is_wildcard = models.BooleanField(default=False, blank=True)
+    group_wildcard = models.BooleanField(default=False, blank=True)
+    as_wildcard_of = models.CharField(default="", max_length=512, blank=True)
 
     def __str__(self):
         return '%s (%+d)' % (self.reference, self.value)
@@ -40,6 +44,7 @@ class BlessingCurse(models.Model):
 
     character = models.ForeignKey(Character, on_delete=models.CASCADE)
     blessing_curse_ref = models.ForeignKey(BlessingCurseRef, on_delete=models.CASCADE)
+    occurences = models.PositiveIntegerField(default=1,blank=True)
 
     def __str__(self):
         return '%s (%s)' % (self.character.full_name, self.blessing_curse_ref.reference)
@@ -51,7 +56,8 @@ class BlessingCurseCusto(models.Model):
 
     character_custo = models.ForeignKey(CharacterCusto, on_delete=models.CASCADE)
     blessing_curse_ref = models.ForeignKey(BlessingCurseRef, on_delete=models.CASCADE)
-
+    occurences = models.PositiveIntegerField(default=1, blank=True)
+    fromTOD = models.BooleanField(default=False, blank=True)
 
 class BlessingCurseModificator(models.Model):
     class Meta:
@@ -60,6 +66,7 @@ class BlessingCurseModificator(models.Model):
     from collector.models.tourofduty import TourOfDutyRef
     tour_of_duty_ref = models.ForeignKey(TourOfDutyRef, on_delete=models.CASCADE)
     blessing_curse_ref = models.ForeignKey(BlessingCurseRef, on_delete=models.CASCADE)
+    occurences = models.PositiveIntegerField(default=1, blank=True)
 
     def __str__(self):
         return '%s (%s)' % (self.tour_of_duty_ref.reference, self.blessing_curse_ref.reference)

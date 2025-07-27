@@ -27,14 +27,20 @@ class Allocator:
             "BA": 0,
             "BC": 0,
         },
-        "fulfilled": {
+        "experience": {
             "AP": 0,
             "SP": 0,
             "DP": 0,
             "BA": 0,
             "BC": 0,
         },
-
+        "total": {
+            "AP": 0,
+            "SP": 0,
+            "DP": 0,
+            "BA": 0,
+            "BC": 0,
+        },
     }
     defstring = ""
     seprow = ";"
@@ -51,11 +57,15 @@ class Allocator:
     def check(self):
         for row, values in self.matrix.items():
             for item, value in values.items():
-                if row == "fixed":
-                    self.matrix["fulfilled"][item] += self.matrix[row][item]
-                elif row == "allocated":
-                    self.matrix["fulfilled"][item] += self.matrix[row][item]
+                if row == "total":
+                    self.matrix[row][item] = 0
+        for row, values in self.matrix.items():
+            for item, value in values.items():
+                if row != "total":
+                    if row in ["wildcard","fixed"]:
+                        self.matrix["total"][item] += self.matrix[row][item]
         self.as_string
+        #print(self.defstring)
 
     @property
     def fulfilled(self):
@@ -121,6 +131,13 @@ class Allocator:
             for b in self.matrix[a].keys():
                 self.matrix[a][b] = 0
 
+    def prune_all(self):
+        self.prune_row("fixed")
+        self.prune_row("wildcards")
+        self.prune_row("allocated")
+        self.prune_row("experience")
+        self.prune_row("total")
+
     def get(self, a, b) -> int:
         return int(self.matrix[a][b])
 
@@ -128,11 +145,11 @@ class Allocator:
         return str(self.get(a, b))
 
     def toSummary(self):
-        str = f"<tt>...............  FIX |  WIL |  ALL |  FUL</tt><br/>"
-        str += f"<tt>Attributes..... {self.get("fixed", "AP"): 4d} | {self.get("wildcard", "AP"): 4d} | {self.get("allocated", "AP"): 4d} | {self.get("fulfilled", "AP"): 4d}</tt><br/>"
-        str += f"<tt>Skills......... {self.get("fixed", "SP"): 4d} | {self.get("wildcard", "SP"): 4d} | {self.get("allocated", "SP"): 4d} | {self.get("fulfilled", "SP"): 4d}</tt><br/>"
-        str += f"<tt>Degrees........ {self.get("fixed", "DP"): 4d} | {self.get("wildcard", "DP"): 4d} | {self.get("allocated", "DP"): 4d} | {self.get("fulfilled", "DP"): 4d}</tt><br/>"
-        str += f"<tt>B/A............ {self.get("fixed", "BA"): 4d} | {self.get("wildcard", "BA"): 4d} | {self.get("allocated", "BA"): 4d} | {self.get("fulfilled", "BA"): 4d}</tt><br/>"
-        str += f"<tt>B/C............ {self.get("fixed", "BC"): 4d} | {self.get("wildcard", "BC"): 4d} | {self.get("allocated", "BC"): 4d} | {self.get("fulfilled", "BC"): 4d}</tt><br/>"
+        str = f"<tt>...............  FIX |  WIL |  ALL |  EXP  | TOT </tt><br/>"
+        str += f"<tt>Attributes..... {self.get("fixed", "AP"): 4d} | {self.get("wildcard", "AP"): 4d} | {self.get("allocated", "AP"): 4d} | {self.get("experience", "AP"): 4d} | {self.get("total", "AP"): 4d}</tt><br/>"
+        str += f"<tt>Skills......... {self.get("fixed", "SP"): 4d} | {self.get("wildcard", "SP"): 4d} | {self.get("allocated", "SP"): 4d} | {self.get("experience", "SP"): 4d} | {self.get("total", "SP"): 4d}</tt><br/>"
+        str += f"<tt>Degrees........ {self.get("fixed", "DP"): 4d} | {self.get("wildcard", "DP"): 4d} | {self.get("allocated", "DP"): 4d} | {self.get("experience", "DP"): 4d} | {self.get("total", "DP"): 4d}</tt><br/>"
+        str += f"<tt>B/A............ {self.get("fixed", "BA"): 4d} | {self.get("wildcard", "BA"): 4d} | {self.get("allocated", "BA"): 4d} | {self.get("experience", "BA"): 4d} | {self.get("total", "BA"): 4d}</tt><br/>"
+        str += f"<tt>B/C............ {self.get("fixed", "BC"): 4d} | {self.get("wildcard", "BC"): 4d} | {self.get("allocated", "BC"): 4d} | {self.get("experience", "BC"): 4d} | {self.get("total", "BC"): 4d}</tt><br/>"
         str = str.replace(" ","&nbsp;")
         return str

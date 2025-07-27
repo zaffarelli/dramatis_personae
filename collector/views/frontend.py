@@ -24,12 +24,14 @@ from django.http import FileResponse
 from django.contrib import messages
 import json
 import base64
+from collector.models.profile import Profile
 
 
 def index(request):
     if not request.user.is_authenticated:
         return redirect('accounts/login/')
     context = {'fontset': FONTSET}
+    # Profile.update()
     return render(request, 'collector/index.html', context=context)
 
 
@@ -297,7 +299,7 @@ def ghostmark_test(request, id=None):
     from collector.models.character import Character
     character_item = Character.objects.get(id=id)
     context = {'c': character_item}
-    template = get_template('collector/dp_logo_test.html')
+    template = get_template('collector/ghostmark_test.html')
     html = template.render(context, request)
     return HttpResponse(html, content_type='text/html')
 

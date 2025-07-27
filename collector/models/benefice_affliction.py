@@ -1,16 +1,13 @@
-"""
- ╔╦╗╔═╗  ╔═╗┌─┐┬  ┬  ┌─┐┌─┐┌┬┐┌─┐┬─┐
-  ║║╠═╝  ║  │ ││  │  ├┤ │   │ │ │├┬┘
- ═╩╝╩    ╚═╝└─┘┴─┘┴─┘└─┘└─┘ ┴ └─┘┴└─
-"""
 from django.db import models
+
+from collector.mixins.ridded_mixin import RiddedMixin
 from collector.models.character import Character
 from collector.models.tourofduty import TourOfDutyRef
 from django.contrib import admin
 from collector.mixins.uuid_class import UUIDClass
 
 
-class BeneficeAfflictionRef(UUIDClass):
+class BeneficeAfflictionRef(RiddedMixin):
     class Meta:
         verbose_name = "FICS: Benefice/Affliction"
         verbose_name_plural = "FICS: Benefices/Afflictions"
@@ -41,6 +38,7 @@ class BeneficeAfflictionRef(UUIDClass):
     group_wildcard = models.BooleanField(default=False, blank=True)
     as_wildcard_of = models.CharField(default="", max_length=512, blank=True)
     is_affliction = models.BooleanField(default=False, blank=True)
+    occurences = models.PositiveIntegerField(default=1, blank=True)
 
     def __str__(self):
         return '%s %s(%d)' % (self.reference, self.emphasis, self.value)
@@ -51,23 +49,21 @@ class BeneficeAfflictionRef(UUIDClass):
         self.refval = f"{self.reference} ({self.value:+})"
         self.is_affliction = self.value < 0
 
-
-    def to_json(self):
-        from collector.utils.basic import json_default
-        import json
-        jstr = json.loads(json.dumps(self, default=json_default, sort_keys=True, indent=4))
-        return jstr
+    # def to_json(self):
+    #     from collector.utils.basic import json_default
+    #     import json
+    #     jstr = json.loads(json.dumps(self, default=json_default, sort_keys=True, indent=4))
+    #     return jstr
 
 
 class BeneficeAffliction(models.Model):
     class Meta:
         ordering = ['benefice_affliction_ref']
-
     character = models.ForeignKey(Character, on_delete=models.CASCADE)
     benefice_affliction_ref = models.ForeignKey(BeneficeAfflictionRef, on_delete=models.CASCADE)
-    # value = models.IntegerField(default=0)
     description = models.TextField(max_length=256, default='',blank=True)
     shortcut = models.TextField(max_length=128, default='', blank=True)
+    occurences = models.PositiveIntegerField(default=1, blank=True)
 
 
     def __str__(self):
@@ -116,10 +112,10 @@ def refix(modeladmin, request, queryset):
 
 class BeneficeAfflictionRefAdmin(admin.ModelAdmin):
     ordering = ('-is_wildcard','-group_wildcard','is_affliction','category', 'reference', 'watermark', '-value', 'ranking')
-    list_display = ['reference', 'is_wildcard','group_wildcard','as_wildcard_of','is_affliction','indexed', 'emphasis', 'refval','value', 'watermark', 'category','ranking', 'cash_value', 'description', 'source']
+    list_display = ['reference','occurences', 'is_wildcard','group_wildcard','as_wildcard_of','is_affliction','indexed', 'emphasis', 'refval','value', 'watermark', 'category','ranking', 'cash_value', 'description', 'source']
     search_fields = ('reference', 'description', 'emphasis', 'watermark')
-    list_filter = ('ranking', 'source', 'watermark', 'category', 'emphasis')
-    list_editable = ['indexed']
+    list_filter = ('ranking', 'source', 'watermark', 'category', 'emphasis','occurences')
+    list_editable = ['indexed','occurences']
     actions = [refix,make_occult, make_combat, make_talent, make_riches, make_possession]
 
 
@@ -130,6 +126,7 @@ class BeneficeAfflictionModificator(models.Model):
     tour_of_duty_ref = models.ForeignKey(TourOfDutyRef, on_delete=models.CASCADE)
     benefice_affliction_ref = models.ForeignKey(BeneficeAfflictionRef, on_delete=models.CASCADE)
     description = models.TextField(max_length=256, default='', blank=True)
+    occurences = models.PositiveIntegerField(default=1, blank=True)
 
     def __str__(self):
         return '%s=%s' % (self.tour_of_duty_ref.reference, self.benefice_affliction_ref.reference)
@@ -143,7 +140,8 @@ class BeneficeAfflictionCusto(models.Model):
     character_custo = models.ForeignKey(CharacterCusto, on_delete=models.CASCADE)
     benefice_affliction_ref = models.ForeignKey(BeneficeAfflictionRef, on_delete=models.CASCADE)
     description = models.TextField(max_length=256, default='', blank=True)
-
+    occurences = models.PositiveIntegerField(default=1,blank=True)
+    fromTOD = models.BooleanField(default=False, blank=True)
 
 # Inlines
 class BeneficeAfflictionCustoInline(admin.TabularInline):

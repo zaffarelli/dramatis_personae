@@ -374,7 +374,6 @@ def as_weight(value):
 
 @register.filter(name='as_pa_short')
 def as_pa_short(value):
-    """ Display weight in kilograms """
     PA = {
         "PA_STR": "STR",
         "PA_CON": "CON",
@@ -390,6 +389,27 @@ def as_pa_short(value):
         "PA_AWA": "AWA",
         "PA_OCC": "Occult",
         "PA_DRK": "Darkside",
+        "": "Error!",
+    }
+    return PA[value]
+
+@register.filter(name='as_pa_long')
+def as_pa_long(value):
+    PA = {
+        "PA_STR": "STR: Strength",
+        "PA_CON": "CON: Constitution",
+        "PA_BOD": "BOD: Body",
+        "PA_MOV": "MOV: Movement",
+        "PA_INT": "INT: Intellect",
+        "PA_WIL": "WIL: Willpower",
+        "PA_TEM": "TEM: Temper",
+        "PA_PRE": "PRE: Presence",
+        "PA_TEC": "TEC: Tech",
+        "PA_DEX": "DEX: Dexterity",
+        "PA_AGI": "AGI: Agility",
+        "PA_AWA": "AWA: Awareness",
+        "PA_OCC": "OCC: Occult Enlightenment",
+        "PA_DRK": "DRK: Occult Darkside",
         "": "Error!",
     }
     return PA[value]

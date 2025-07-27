@@ -61,24 +61,24 @@
         </ul>
         <ul>
         {% if c.tourofduty_set.count != 0 %}
-            {% for tod in c.tourofduty_set.all|dictsort:"tour_of_duty_ref.category" %}
-                <li><b>{{ tod.tour_of_duty_ref.category|as_lifepath }} ({{tod.tour_of_duty_ref.value}})</b>
-                    <u>
-                <span title="{{tod.tour_of_duty_ref.description}}">{{tod.tour_of_duty_ref.reference}}</span>
-                {%if tod.tour_of_duty_ref.AWP or tod.tour_of_duty_ref.SWP or tod.tour_of_duty_ref.DWP%}
+            {% for tod in c.tourofduty_set.all|dictsort:"ref.category" %}
+                <li><b>{{ tod.ref.category|as_lifepath }} ({{tod.ref.value}})</b>
+                <u>
+                <span  title="{{tod.ref.description|safe}}">{{tod.ref.reference}}</span>
+                {%if tod.ref.AWP or tod.ref.SWP or tod.ref.DWP%}
                 &nbsp;[
-                {%if tod.tour_of_duty_ref.AWP%}
-                    A:{{tod.tour_of_duty_ref.AWP}}
+                {%if tod.ref.AWP%}
+                    A:{{tod.ref.AWP}}
                 {%endif%}
-                {%if tod.tour_of_duty_ref.SWP%}
-                    S:{{tod.tour_of_duty_ref.SWP}}
+                {%if tod.ref.SWP%}
+                    S:{{tod.ref.SWP}}
                 {%endif%}
-                {%if tod.tour_of_duty_ref.DWP%}
-                    D:{{tod.tour_of_duty_ref.DWP}}
+                {%if tod.ref.DWP%}
+                    D:{{tod.ref.DWP}}
                 {%endif%}
                 ]
                 {%endif%}
-                    </u>
+                </u>
                 </li>
             {% endfor %}
             <li></li>
@@ -117,7 +117,7 @@
     <div class="page" id="page2" param="2">
 
     <div class='details_section' style="order:3;">
-        <div class="details_title">Attributes ({{c.PA_TOTAL}}x3)</div>
+        <div class="details_title">Attributes ({{c.AP}}x3)</div>
         <div class='details_block attributes three_columns' style="order:2;">
             {% include "collector/character/character_primaries.html" %}
         </div>

@@ -90,7 +90,7 @@ class RiddedMixin(models.Model):
 
     def to_json(self):
         from collector.utils.basic import json_default
-        jstr = json.loads(json.dumps(self, default=json_default, sort_keys=True, indent=4))
-        return jstr
+        j = json.dumps(self, default=json_default, sort_keys=True, indent=4)
+        return j
 
 

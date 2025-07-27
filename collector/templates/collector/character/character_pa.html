@@ -1,7 +1,7 @@
 {%load fics_filters%}
 <tr>
-	<th class='name'>
-        {{ c.attribute|as_pa_short }}
+	<th class='name' style="width:30ex;text-align:left;padding:5px;">
+        {{ c.attribute|as_pa_long }}
     </th>
     <td class='value'>
         {{ c.value|as_bullets_short|safe }}

@@ -1,33 +1,44 @@
 <!DOCTYPE html>
 <html lang='en'>
-<head>
-    <meta charset='utf-8'/>
-    <meta name='viewport' content='width=device-width, initial-scale=1'/>
-    <title>{% block title %}Dramatis Personae{% endblock %}</title>
-    {% load static %}
-    {% load sass_tags %}
-    <link rel='icon' href='{% static "collector/dp.ico" %}'>
-    <link rel='stylesheet' href='{% static "font-awesome/css/all.css"%}'>
-    <script src='{% static "thirdparties/Chart.bundle.js" %}'></script>
-    <script src="https://d3js.org/d3.v4.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-    <script src='{% static "js/ghostmark.es6" %}'></script>
+    <head>
+        <meta charset='utf-8' />
+        <meta name='viewport' content='width=device-width, initial-scale=1' />
+        <title>{% block title %}Dramatis Personae{% endblock %}</title>
+        {% load static %}
 
-    <link rel="stylesheet" type="text/css"
-          href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" media="all">
-    <link rel='stylesheet' type='text/css' href='{% sass_src "collector/scss/fics.scss" %}'/>
-</head>
+        <link rel='stylesheet' type='text/css' href='http://www.x3dom.org/x3dom/release/x3dom.css'></link>
+        <script type='text/javascript' src='http://www.x3dom.org/x3dom/release/x3dom.js'></script>
+        <link rel='icon' href='{% static "collector/dp.ico" %}'>
+        <link rel='stylesheet' href='{% static "font-awesome/css/all.css"%}'>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@3.6.2/dist/chart.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/d3/7.0.0/d3.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+        <script src='{% static "js/dp_tools.es6" %}'></script>
+        {% for font in fontset %}
+        <link rel='stylesheet' href="https://fonts.googleapis.com/css2?family={{font}}">
+        {% endfor %}
+        <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" media="all">
+
+        {% load compress %}
+        {% compress css %}
+        <link rel='stylesheet' type='text/x-scss' href='{% static "collector/scss/fics.scss" %}'/>
+        {% endcompress %}
+
+
+    </head>
+
 <body>
 <div class="wrapper" style="color:white;">
     {% load fics_filters %}
     <center>
-    <div id='logo' style="width:auto; height:auto; border:1px solid #303; margin:10px;"></div>
+    <div id='ch_{{c.id}}' style="width:auto; height:auto; border:1px solid #303; margin:10px;"></div>
     </center>
     <script>
-        let oversize=8;
-        (new Ghostmark({{c.ghostmark_data|safe}},oversize)).perform();
+        let oversize=10;
+        gs = new Ghostmark({{c.ghostmark_data|safe}},oversize,1,"ch")
+        gs.perform()
     </script>
 </div>
 </body>

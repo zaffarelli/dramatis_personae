@@ -67,12 +67,11 @@ class Skill(RiddedMixin):
     class Meta:
         ordering = ['skill_ref', ]
         verbose_name = "Skill"
-
     character = models.ForeignKey(Character, on_delete=models.CASCADE)
     skill_ref = models.ForeignKey(SkillRef, on_delete=models.CASCADE)
     skill_ref_rid = RidField()
     character_rid = RidField()
-    value = models.PositiveIntegerField(default=1)
+    value = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return f"{self.character.full_name}={self.skill_ref.reference}"
@@ -124,7 +123,7 @@ class SkillCusto(models.Model):
     character_custo = models.ForeignKey(CharacterCusto, on_delete=models.CASCADE)
     skill_ref = models.ForeignKey(SkillRef, on_delete=models.CASCADE)
     value = models.IntegerField(default=1)
-
+    fromTOD = models.BooleanField(default=False, blank=True)
 
 # Inlines
 

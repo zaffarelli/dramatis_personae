@@ -9,8 +9,9 @@ class Ghostmark {
         me.intimacy = intimacy;
         me.tgt = tgt;
         me.oversize = 3;
+        me.zoomFactor = 1
         if (oversize !== 3){
-            me.oversize = oversize;
+            me.zoomFactor = oversize;
         }
         me.opacity = 1;
         me.data = data;
@@ -19,7 +20,7 @@ class Ghostmark {
     init() {
         let me = this;
         me.size = 6;
-        me.size = me.size * me.oversize;
+        me.size = me.size * 3;
         me.pen = me.size / 6;
 
         me.width = me.size * 6;
@@ -29,11 +30,12 @@ class Ghostmark {
         me.svg = d3.select('#'+me.tgt+'_'+me.character['id'])
             .append('svg')
             .attr('id','svg_'+me.tgt+'_'+me.character['id'])
-            .attr("width", me.width)
-            .attr("height", me.height)
+            .attr("width", (me.zoomFactor*120)+"px")
+            .attr("height", (me.zoomFactor*120)+"px")
             .style("background", "transparent")
             .style("opacity", me.opacity)
-            .append('g');
+            .append('g')
+            .attr("transform","scale("+me.zoomFactor+")")
         me.panel_stroke = "#888";
         me.panel_fill = "#CCC";
         me.ox = me.size*3;
@@ -393,38 +395,41 @@ class Ghostmark {
             .style('fill',me.panel_stroke)
         ;
 
-        me.ranking = me.ghostmark.append('path')
-            .attr("d", function(){
-                    let x = me.size;
-                    let path_str = '';
-                    let small_stick = '-0.05,0 0,0.5 0.1,0 0,-0.5 -0.05,0';
-                    if (me.character['ranking'] > 3){
-                        path_str += me.drawSticks(0.0,1.75,small_stick);
-                    }
-                    if (me.character['ranking'] > 5){
-                        path_str += me.drawSticks(0.25,1.75,small_stick);
-                    }
-                    if (me.character['ranking'] > 7){
-                        path_str += me.drawSticks(-0.25,1.75,small_stick);
-                    }
-                    if (me.character['ranking'] > 9){
-                        path_str += me.drawSticks(0.5,1.75,small_stick);
-                    }
-                    if (me.character['ranking'] > 11){
-                        path_str += me.drawSticks(-0.5,1.75,small_stick);
-                    }
-                    if (me.character['ranking'] > 13){
-                        path_str += me.drawSticks(0.75,1.75,small_stick);
-                    }
-                    if (me.character['ranking'] > 15){
-                        path_str += me.drawSticks(-0.75,1.75,small_stick);
-                    }
-                    path_str += '  ';
-                    return(path_str);
-                })
+        me.ranking = me.ghostmark.append('text')
+//             .attr("d", function(){
+//                     let x = me.size;
+//                     let path_str = '';
+//                     let small_stick = '-0.05,0 0,0.5 0.1,0 0,-0.5 -0.05,0';
+//                     if (me.character['ranking'] > 3){
+//                         path_str += me.drawSticks(0.0,1.75,small_stick);
+//                     }
+//                     if (me.character['ranking'] > 5){
+//                         path_str += me.drawSticks(0.25,1.75,small_stick);
+//                     }
+//                     if (me.character['ranking'] > 7){
+//                         path_str += me.drawSticks(-0.25,1.75,small_stick);
+//                     }
+//                     if (me.character['ranking'] > 9){
+//                         path_str += me.drawSticks(0.5,1.75,small_stick);
+//                     }
+//                     if (me.character['ranking'] > 11){
+//                         path_str += me.drawSticks(-0.5,1.75,small_stick);
+//                     }
+//                     if (me.character['ranking'] > 13){
+//                         path_str += me.drawSticks(0.75,1.75,small_stick);
+//                     }
+//                     if (me.character['ranking'] > 15){
+//                         path_str += me.drawSticks(-0.75,1.75,small_stick);
+//                     }
+//                     path_str += '  ';
+//                     return(path_str);
+//                 })
+            .style("text-anchor","middle")
+            .attr("dy","40px")
             .style('stroke',me.panel_fill)
             .style('stroke-width',1)
-            .style('fill',me.panel_stroke)
+            .style('fill',me.panel_fill)
+            .text("R"+me.character['ranking'])
         ;
         }else{
             me.erzatz = me.ghostmark.append('circle')

@@ -5,9 +5,9 @@
 <h5>Lifepaths</h5>
 <p>
 {% for tod in c.tourofduty_set.all %}
-<b>{{ tod.tour_of_duty_ref.category|as_lifepath}}</b>
-{{ tod.tour_of_duty_ref.reference|safe }}
-({{ tod.tour_of_duty_ref.value }}){%if forloop.last %}.{%else%}, {%endif%}
+<b>{{ tod.ref.category|as_lifepath}}</b>
+{{ tod.ref.reference|safe }}
+({{ tod.ref.value }}){%if forloop.last %}.{%else%}, {%endif%}
 {% endfor %}
 </p>
 {% endif %}

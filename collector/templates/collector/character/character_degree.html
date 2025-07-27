@@ -8,7 +8,7 @@
         <th class='edit'  style="padding:5px;">
             <span id="degreeplus_{{c.id}}_{{degree.degree_ref.id}}" class='edit_icon degreepick fa fa-plus-circle'></span><span id="degreeminus_{{c.id}}_{{degree.degree_ref.id}}" class='edit_icon degreepick fa fa-minus-circle'></span>
         </th>
-        <th class='degree_score_bar' id='val_{{degree.id}}'  style="padding:5px;">
+        <th class='degree_score_bar' id='val_{{degree.degree_ref.id}}'  style="padding:5px;">
             {{ degree.value|as_bullets_veryshort|safe }}
         </th>
     </tr>

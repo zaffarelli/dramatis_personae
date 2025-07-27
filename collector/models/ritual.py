@@ -5,6 +5,8 @@
 """
 from django.db import models
 from django.contrib import admin
+
+from collector.mixins.ridded_mixin import RiddedMixin
 from collector.models.skill import SkillRef
 from collector.utils import fics_references
 import logging
@@ -12,7 +14,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-class RitualRef(models.Model):
+class RitualRef(RiddedMixin):
     class Meta:
         ordering = ['category', 'path', 'level', 'reference']
         verbose_name = "FICS: Ritual"
@@ -36,11 +38,11 @@ class RitualRef(models.Model):
     def __str__(self):
         return f'{self.reference} ({self.path}, {self.level})'
 
-    def to_json(self):
-        from collector.utils.basic import json_default
-        import json
-        jstr = json.loads(json.dumps(self, default=json_default, sort_keys=True, indent=4))
-        return jstr
+    # def to_json(self):
+    #     from collector.utils.basic import json_default
+    #     import json
+    #     jstr = json.loads(json.dumps(self, default=json_default, sort_keys=True, indent=4))
+    #     return jstr
 
 
 class RitualCusto(models.Model):
