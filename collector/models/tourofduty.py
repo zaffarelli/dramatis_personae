@@ -247,11 +247,12 @@ class TourOfDutyRef(RiddedMixin):
 
             texts = []
             # ATTRIBUTES
-            attributes = ["str", "con", "bod", "mov", "int", "wil", "tem", "pre", "dex", "tec", "agi", "awa", "occ",
-                          "drk"]
+            attributes = ["str", "con", "bod", "mov", "int", "wil", "tem", "pre", "dex", "tec", "agi", "awa", "occ"
+                          ]
             hrlist_attributes = []
             for attribute in attributes:
                 self.AP += getAttribute(attribute, hrlist_attributes)
+                self.AP -= self.PA_DRK
             if len(hrlist_attributes) > 0:
                 texts.append("Attributes: " + ", ".join(hrlist_attributes))
 
@@ -425,7 +426,7 @@ class TourOfDuty(models.Model):
             AP = tod.PA_STR + tod.PA_CON + tod.PA_BOD + tod.PA_MOV
             AP += tod.PA_INT + tod.PA_WIL + tod.PA_TEM + tod.PA_PRE
             AP += tod.PA_DEX + tod.PA_TEC + tod.PA_AGI + tod.PA_AWA
-            AP += tod.PA_OCC + tod.PA_DRK
+            AP += tod.PA_OCC - tod.PA_DRK
 
             ch.PA_STR += tod.PA_STR
             ch.PA_CON += tod.PA_CON
@@ -440,7 +441,7 @@ class TourOfDuty(models.Model):
             ch.PA_AGI += tod.PA_AGI
             ch.PA_AWA += tod.PA_AWA
             ch.PA_OCC += tod.PA_OCC
-            ch.PA_DRK += tod.PA_DRK
+            ch.PA_DRK -= tod.PA_DRK
 
             AWP += tod.PA_C1P + tod.PA_C1M + tod.PA_C1C + tod.PA_C1F
 

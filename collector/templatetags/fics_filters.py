@@ -530,7 +530,7 @@ def as_place(value):
 @register.filter(name='as_tod_description')
 def as_tod_description(value):
     new_sentences = []
-    sentences = value.split("; ")
+    sentences = value.split("&#013;")
     for sentence in sentences:
         words = sentence.split(": ")
         if (len(words)>1):

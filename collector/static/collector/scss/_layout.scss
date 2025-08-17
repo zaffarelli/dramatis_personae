@@ -417,9 +417,9 @@
       }
 
       /* Sizing */
-      &.wide { flex: 0 0 120px; }
-      &.wider { flex: 0 0 150px; }
-      &.widest { flex: 0 0 180px; }
+      &.wide { flex: 0 0 150px; }
+      &.wider { flex: 0 0 200px; }
+      &.widest { flex: 0 0 500px; }
       &.mini { flex: 0 0 4ex; }
       &.text { flex: 1 5 auto; }
       &.small { flex: 0 0 50px; }
